@@ -26,23 +26,27 @@ POA_Bonobo_GenericFactory__vepv bonobo_generic_factory_vepv;
 static BonoboObjectClass *bonobo_generic_factory_parent_class;
 
 static CORBA_boolean
-impl_Bonobo_GenericFactory_supports (PortableServer_Servant servant,
-				    const CORBA_char      *obj_goad_id,
-				    CORBA_Environment     *ev)
+impl_Bonobo_GenericFactory_supports (PortableServer_Servant  servant,
+				     const CORBA_char       *obj_goad_id,
+				     CORBA_Environment      *ev)
 {
-	g_message ("support invoked\n");
-	return TRUE;
+	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
+
+	if (! strcmp (obj_goad_id, factory->goad_id))
+		return CORBA_TRUE;
+
+	return CORBA_FALSE;
 }
 
 static CORBA_Object
-impl_Bonobo_GenericFactory_create_object (PortableServer_Servant  servant,
-					 const CORBA_char       *obj_goad_id,
-					 const Bonobo_stringlist *params,
-					 CORBA_Environment      *ev)
+impl_Bonobo_GenericFactory_create_object (PortableServer_Servant   servant,
+					  const CORBA_char        *obj_goad_id,
+					  const Bonobo_stringlist *params,
+					  CORBA_Environment       *ev)
 {
 	BonoboGenericFactoryClass *class;
-	BonoboGenericFactory *factory;
-	BonoboObject *object;
+	BonoboGenericFactory      *factory;
+	BonoboObject              *object;
 
 	factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
 
@@ -93,12 +97,12 @@ create_bonobo_generic_factory (BonoboObject *object)
  * Returns: The initialized BonoboGenericFactory object.
  */
 BonoboGenericFactory *
-bonobo_generic_factory_construct (const char *goad_id,
-				 BonoboGenericFactory *c_factory,
-				 CORBA_Object         corba_factory,
-				 BonoboGenericFactoryFn factory,
-				 GnomeFactoryCallback factory_cb,
-				 void *data)
+bonobo_generic_factory_construct (const char             *goad_id,
+				  BonoboGenericFactory   *c_factory,
+				  CORBA_Object            corba_factory,
+				  BonoboGenericFactoryFn  factory,
+				  GnomeFactoryCallback    factory_cb,
+				  void                   *data)
 {
 	CORBA_Environment ev;
 	int ret;
@@ -109,10 +113,10 @@ bonobo_generic_factory_construct (const char *goad_id,
 
 	bonobo_object_construct (BONOBO_OBJECT (c_factory), corba_factory);
 
-	c_factory->factory = factory;
-	c_factory->factory_cb = factory_cb;
+	c_factory->factory         = factory;
+	c_factory->factory_cb      = factory_cb;
 	c_factory->factory_closure = data;
-	c_factory->goad_id = g_strdup (goad_id);
+	c_factory->goad_id         = g_strdup (goad_id);
 
 	CORBA_exception_init (&ev);
 
@@ -120,7 +124,7 @@ bonobo_generic_factory_construct (const char *goad_id,
 
 	CORBA_exception_free (&ev);
 
-	if (ret == OD_REG_ERROR){
+	if (ret == OD_REG_ERROR) {
 		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
 	}
@@ -146,7 +150,9 @@ bonobo_generic_factory_construct (const char *goad_id,
  * name server.
  */
 BonoboGenericFactory *
-bonobo_generic_factory_new (const char *goad_id, BonoboGenericFactoryFn factory, void *data)
+bonobo_generic_factory_new (const char             *goad_id,
+			    BonoboGenericFactoryFn  factory,
+			    void                   *data)
 {
 	BonoboGenericFactory *c_factory;
 	Bonobo_GenericFactory corba_factory;
@@ -222,7 +228,8 @@ bonobo_generic_factory_finalize (GtkObject *object)
 }
 
 static BonoboObject *
-bonobo_generic_factory_new_generic (BonoboGenericFactory *factory, const char *goad_id)
+bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
+				    const char           *goad_id)
 {
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
@@ -296,9 +303,9 @@ bonobo_generic_factory_get_type (void)
  * @factory and @data, respectively.
  */
 void
-bonobo_generic_factory_set (BonoboGenericFactory *c_factory,
-			      BonoboGenericFactoryFn factory,
-			      void *data)
+bonobo_generic_factory_set (BonoboGenericFactory     *c_factory,
+			      BonoboGenericFactoryFn  factory,
+			      void                   *data)
 {
 	g_return_if_fail (c_factory != NULL);
 	g_return_if_fail (BONOBO_IS_GENERIC_FACTORY (c_factory));

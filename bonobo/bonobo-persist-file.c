@@ -168,7 +168,7 @@ bonobo_persist_file_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/PersistFile:1.0",
+			"BonoboPersistFile",
 			sizeof (BonoboPersistFile),
 			sizeof (BonoboPersistFileClass),
 			(GtkClassInitFunc) bonobo_persist_file_class_init,

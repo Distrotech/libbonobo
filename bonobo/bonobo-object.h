@@ -45,42 +45,39 @@ typedef struct {
 	void  (*object_gone)     (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 } BonoboObjectClass;
 
-GtkType      bonobo_object_get_type         (void);
-BonoboObject *bonobo_object_construct        (BonoboObject *object,
-					    CORBA_Object corba_object);
-BonoboObject *bonobo_object_new_from_servant (void *servant);
-
-BonoboObject *bonobo_object_from_servant     (PortableServer_Servant servant);
-void         bonobo_object_bind_to_servant  (BonoboObject *object,
-					    void *servant);
-PortableServer_Servant
-             bonobo_object_get_servant      (BonoboObject *object);
-
-CORBA_Object bonobo_object_activate_servant (BonoboObject *object,
-					    void *servant);
-
-void         bonobo_object_add_interface    (BonoboObject *object,
-					    BonoboObject *newobj);
-CORBA_Object bonobo_object_query_interface  (BonoboObject *object,
-					    const char *repo_id);
-CORBA_Object bonobo_object_corba_objref     (BonoboObject *object);
+GtkType                  bonobo_object_get_type               (void);
+BonoboObject            *bonobo_object_construct              (BonoboObject           *object,
+							       CORBA_Object            corba_object);
+BonoboObject            *bonobo_object_new_from_servant       (void                   *servant);
+BonoboObject            *bonobo_object_from_servant           (PortableServer_Servant  servant);
+void                     bonobo_object_bind_to_servant        (BonoboObject           *object,
+							       void                   *servant);
+PortableServer_Servant   bonobo_object_get_servant            (BonoboObject           *object);
+CORBA_Object             bonobo_object_activate_servant       (BonoboObject           *object,
+							       void                   *servant);
+void                     bonobo_object_add_interface          (BonoboObject           *object,
+							       BonoboObject           *newobj);
+BonoboObject            *bonobo_object_query_local_interface  (BonoboObject           *object,
+							       const char             *repo_id);
+CORBA_Object             bonobo_object_query_interface        (BonoboObject           *object,
+							       const char             *repo_id);
+CORBA_Object             bonobo_object_corba_objref           (BonoboObject           *object);
 
 /*
  * Gnome Object Life Cycle
  */
-void         bonobo_object_ref              (BonoboObject *object);
-void         bonobo_object_unref            (BonoboObject *object);
-void         bonobo_object_destroy          (BonoboObject *object);
-
-POA_Bonobo_Unknown__epv *bonobo_object_get_epv (void);
+void                     bonobo_object_ref                    (BonoboObject           *object);
+void                     bonobo_object_unref                  (BonoboObject           *object);
+void                     bonobo_object_destroy                (BonoboObject           *object);
+POA_Bonobo_Unknown__epv *bonobo_object_get_epv                (void);
 
 
 /*
  * Error checking
  */
-void         bonobo_object_check_env        (BonoboObject *object,
-					    CORBA_Object corba_object,
-					    CORBA_Environment *ev);
+void                     bonobo_object_check_env              (BonoboObject           *object,
+							       CORBA_Object            corba_object,
+							       CORBA_Environment      *ev);
 
 #define BONOBO_OBJECT_CHECK(o,c,e) do { \
                                         if ((e)->_major != CORBA_NO_EXCEPTION) { \

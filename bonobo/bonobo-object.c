@@ -198,30 +198,81 @@ impl_Bonobo_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev
 	bonobo_object_unref (object);
 }
 
-static CORBA_Object
-impl_Bonobo_Unknown_query_interface (PortableServer_Servant servant,
-				    const CORBA_char *repoid,
-				    CORBA_Environment *ev)
+static BonoboObject *
+bonobo_object_get_local_interface_from_objref (BonoboObject *object,
+					       CORBA_Object  interface)
 {
-	CORBA_Object retval = CORBA_OBJECT_NIL;
-	BonoboObject *object;
-	GtkType type;
-	GList *l;
+	CORBA_Environment  ev;
+	GList             *l;
 
-	object = bonobo_object_from_servant (servant);
+	if (interface == CORBA_OBJECT_NIL)
+		return NULL;
 
-	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
+	CORBA_exception_init (&ev);
+
+	for (l = object->priv->ao->objs; l; l = l->next) {
+		BonoboObject *tryme = l->data;
+
+		if (CORBA_Object_is_equivalent (interface, tryme->corba_objref, &ev)) {
+			CORBA_exception_free (&ev);
+
+			return tryme;
+		}
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			CORBA_exception_free (&ev);
+			return NULL;
+		}
+
+	}
+
+	CORBA_exception_free (&ev);
+
+	return NULL;
+}
+
+/**
+ * bonobo_object_query_local_interface:
+ * @object: A #BonoboObject which is the aggregate of multiple objects.
+ * @repo_id: The id of the interface being queried.
+ *
+ * Returns: A #BonoboObject for the requested interface.
+ */
+BonoboObject *
+bonobo_object_query_local_interface (BonoboObject *object,
+				     const char   *repo_id)
+{
+	CORBA_Environment  ev;
+	BonoboObject      *retval;
+	CORBA_Object       corba_retval;
+	GtkType            type;
+	GList             *l;
+
+	g_return_val_if_fail (object != NULL,            NULL);
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
+
+	retval       = NULL;
+	corba_retval = CORBA_OBJECT_NIL;
 
 	gtk_signal_emit (
 		GTK_OBJECT (object), bonobo_object_signals [QUERY_INTERFACE],
-		repoid, &retval);
+		repo_id, &corba_retval);
 
-	if (!CORBA_Object_is_nil (retval, ev)){
-		bonobo_object_ref (object);
-		return retval;
+	CORBA_exception_init (&ev);
+
+	if (! CORBA_Object_is_nil (corba_retval, &ev)) {
+		BonoboObject *local_interface;
+
+		local_interface = bonobo_object_get_local_interface_from_objref (
+			object, corba_retval);
+
+		if (local_interface != NULL)
+			bonobo_object_ref (object);
+
+		return local_interface;
 	}
 
-	type = gtk_type_from_name (repoid);
+	type = gtk_type_from_name (repo_id);
 
 	/* Try looking at the gtk types */
 	for (l = object->priv->ao->objs; l; l = l->next){
@@ -229,19 +280,39 @@ impl_Bonobo_Unknown_query_interface (PortableServer_Servant servant,
 
 		if ((type && gtk_type_is_a (GTK_OBJECT (tryme)->klass->type, type)) ||
 #ifdef ORBIT_IMPLEMENTS_IS_A
-		    CORBA_Object_is_a (tryme->corba_objref, (char *) repoid, ev)
+		    CORBA_Object_is_a (tryme->corba_objref, (char *) repo_id, &ev)
 #else
 		    !strcmp (tryme->corba_objref->object_id, repoid)
 #endif
 			){
-			retval = CORBA_Object_duplicate (tryme->corba_objref, ev);
+			retval = tryme;
 			break;
 		}
 	}
-	if (!CORBA_Object_is_nil (retval, ev))
+
+	if (retval != NULL)
 		bonobo_object_ref (object);
 
+	CORBA_exception_free (&ev);
+
 	return retval;
+}
+
+static CORBA_Object
+impl_Bonobo_Unknown_query_interface (PortableServer_Servant  servant,
+				     const CORBA_char       *repoid,
+				     CORBA_Environment      *ev)
+{
+	BonoboObject *object = bonobo_object_from_servant (servant);
+	BonoboObject *local_interface;
+
+	local_interface = bonobo_object_query_local_interface (
+		object, repoid);
+
+	if (local_interface == NULL)
+		return CORBA_OBJECT_NIL;
+
+	return CORBA_Object_duplicate (local_interface->corba_objref, ev);
 }
 
 /**
@@ -255,8 +326,8 @@ bonobo_object_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Unknown__epv, 1);
 
-	epv->ref = impl_Bonobo_Unknown_ref;
-	epv->unref = impl_Bonobo_Unknown_unref;
+	epv->ref             = impl_Bonobo_Unknown_ref;
+	epv->unref           = impl_Bonobo_Unknown_unref;
 	epv->query_interface = impl_Bonobo_Unknown_query_interface;
 
 	return epv;

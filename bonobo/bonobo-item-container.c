@@ -266,7 +266,7 @@ bonobo_container_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/Container:1.0",
+			"BonoboContainer",
 			sizeof (BonoboContainer),
 			sizeof (BonoboContainerClass),
 			(GtkClassInitFunc) bonobo_container_class_init,

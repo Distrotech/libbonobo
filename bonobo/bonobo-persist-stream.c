@@ -162,7 +162,7 @@ bonobo_persist_stream_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/PersistStream:1.0",
+			"BonoboPersistStream",
 			sizeof (BonoboPersistStream),
 			sizeof (BonoboPersistStreamClass),
 			(GtkClassInitFunc) bonobo_persist_stream_class_init,

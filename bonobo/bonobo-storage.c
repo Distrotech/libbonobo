@@ -191,7 +191,7 @@ bonobo_storage_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/Storage:1.0",
+			"BonoboStorage",
 			sizeof (BonoboStorage),
 			sizeof (BonoboStorageClass),
 			(GtkClassInitFunc) bonobo_storage_class_init,

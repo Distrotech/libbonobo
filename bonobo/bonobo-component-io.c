@@ -69,7 +69,7 @@ bonobo_embeddable_save (BonoboEmbeddable *bonobo_object, BonoboStorage *storage,
 	char *class;
 	
 	persist_storage = bonobo_object_query_interface (
-		bonobo_object, "IDL:GNOME/PersistStorage:1.0");
+		bonobo_object, "IDL:Bonobo/PersistStorage:1.0");
 
 	if (persist_storage == NULL)
 		return -1;
@@ -91,7 +91,7 @@ bonobo_embeddable_save_to_stream (BonoboEmbeddable *bonobo_object, BonoboStream 
 	const char *goad_id;
 	
 	persist_stream = bonobo_object_query_interface (
-		bonobo_object, "IDL:GNOME/PersistStream:1.0");
+		bonobo_object, "IDL:Bonobo/PersistStream:1.0");
 
 	if (persist_stream == NULL)
 		return -1;

@@ -129,7 +129,7 @@ gnome_simple_data_source_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/SimpleDataSource:1.0",
+			"BonoboSimpleDataSource",
 			sizeof (GnomeSimpleDataSource),
 			sizeof (GnomeSimpleDataSourceClass),
 			(GtkClassInitFunc) gnome_simple_data_source_class_init,

@@ -252,7 +252,7 @@ bonobo_property_bag_client_persist (BonoboPropertyBagClient *pbc,
 
 	CORBA_exception_init (&ev);
 
-	persist = Bonobo_Unknown_query_interface (pbc->corba_pb, "IDL:GNOME/PersistStream:1.0", &ev);
+	persist = Bonobo_Unknown_query_interface (pbc->corba_pb, "IDL:Bonobo/PersistStream:1.0", &ev);
 
 	if (ev._major != CORBA_NO_EXCEPTION ||
 	    persist   == CORBA_OBJECT_NIL) {
@@ -304,7 +304,7 @@ bonobo_property_bag_client_depersist (BonoboPropertyBagClient *pbc,
 
 	CORBA_exception_init (&ev);
 
-	persist = Bonobo_Unknown_query_interface (pbc->corba_pb, "IDL:GNOME/PersistStream:1.0", &ev);
+	persist = Bonobo_Unknown_query_interface (pbc->corba_pb, "IDL:Bonobo/PersistStream:1.0", &ev);
 
 	if (ev._major != CORBA_NO_EXCEPTION ||
 	    persist   == CORBA_OBJECT_NIL) {

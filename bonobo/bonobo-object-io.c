@@ -103,7 +103,7 @@ bonobo_persist_stream_load_goad_id (Bonobo_Stream source)
  * @stream and then the object in @pstream is saved.
  *
  * Returns: The IO status for the operation.  Might return %GNOME_IOERR_PERSIST_NOT_SUPPORTED
- * if @object does not support the IDL:GNOME/PersistStream:1.0 interface
+ * if @object does not support the IDL:Bonobo/PersistStream:1.0 interface
  */
 GnomeIOStatus
 bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream, Bonobo_Stream target,
@@ -135,7 +135,7 @@ bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream, Bonobo_Stream
  * Saves the BonoboObject @object in the @stream.
  *
  * Returns: The IO status for the operation.  Might return %GNOME_IOERR_PERSIST_NOT_SUPPORTED
- * if @object does not support the IDL:GNOME/PersistStream:1.0 interface
+ * if @object does not support the IDL:Bonobo/PersistStream:1.0 interface
  */
 GnomeIOStatus
 bonobo_object_save_to_stream (BonoboObject *object, Bonobo_Stream stream,
@@ -148,7 +148,7 @@ bonobo_object_save_to_stream (BonoboObject *object, Bonobo_Stream stream,
 	g_return_val_if_fail (stream != CORBA_OBJECT_NIL, GNOME_IOERR_GENERAL);
 
 	pstream = bonobo_object_query_interface (
-		BONOBO_OBJECT (object), "IDL:GNOME/PersistStream:1.0");
+		BONOBO_OBJECT (object), "IDL:Bonobo/PersistStream:1.0");
 	
 	if (pstream != CORBA_OBJECT_NIL)
 		return GNOME_IOERR_PERSIST_NOT_SUPPORTED;

@@ -1,3 +1,124 @@
+2000-02-16  Nat Friedman  <nat@helixcode.com>
+
+	* components/text-plain/bonobo-text-plain.c (embeddable_factory):
+ 	gtk_signal_connect changed to gtk_signal_connect_after for the
+ 	destroy signal on the embeddable.
+
+	* samples/compound-doc/sample-container.c (component_add_view):
+ 	Pass the UIHandler objref to bonobo_client_site_new_view.
+	(component_load_pf_ok_cb): Repo ID domain changed from GNOME to
+ 	Bonobo.
+	(component_load_ps_ok_cb): Likewise.
+	(container_create_component_frame): Likewise.
+	(container_add_embeddable_cmd): Likewise.
+
+	* samples/compound-doc/paint-component-simple.gnorba (repo_id):
+ 	The repo ID domain is now Bonobo instead of GNOME.
+	* components/text-plain/text-plain.gnorba: Likewise.
+	* components/application-x-gnomine/application-x-mines.gnorba: Likewise.
+	* components/audio-ulaw/audio-ulaw.gnorba: Likewise.
+	* components/image-x-png/image-x-png.gnorba: Likewise.
+	* components/text-plain/text-plain.gnorba: Likewise.
+
+	* samples/compound-doc/paint-component-simple.c (view_factory):
+ 	Don't manually create/set the UIHandler.
+
+	* gshell/menu.c (update_buffer_menu): Commented out direct access
+ 	to uihandler menu hash table.  This code needs to be fixed to use
+ 	the bonobo_ui_handler_menu_fetch functions.
+
+	* gshell/inout.c (buffer_save_pf): Repo ID in QI call changed from
+ 	module GNOME to module Bonobo.
+	(buffer_load_pf): Likewise.
+	(buffer_save_ps): Likewise.
+	(buffer_load_ps): Likewise.
+	(file_save_as_cb): Likewise.
+	(file_open_cb): Likewise.
+	(file_menu_save_cb): Likewise.
+	(file_save_as_cb): Direct access to UIHandler data fixed.
+	(file_open_cb): Likewise.
+	(file_menu_save_cb): Likewise.
+	(file_menu_save_as_cb): Likewise.
+
+	* gshell/gshell.c (buffer_add_view): Pass the UIHandler objref to
+ 	bonobo_client_site_new_view_full.  Don't set the UIHandler
+ 	manually.
+	(set_buffer_cb): Direct access to UIHandler structure replaced
+ 	with a call to bonobo_ui_handler_get_app.
+	(view_menu_delete_window_cb): Likewise.
+	(view_menu_new_window_cb): Likewise.
+	(view_menu_split_window_cb): Likewise.
+	(view_menu_one_window_cb): Likewise.
+	(file_menu_kill_cb): Likewise.
+
+	* components/text-plain/bonobo-text-plain.c (view_factory): Don't
+ 	create/set the UIHandler, as this happens automatically now.
+
+	* bonobo/bonobo-view.c (bonobo_view_get_ui_handler): Return a
+ 	BonobUIHandler, not an object reference.
+
+	* bonobo/bonobo-ui-handler.c (bonobo_ui_handler_get_app): New function.
+
+	* bonobo/bonobo-selector.c: Name changed from GnomeBonoboSelector
+ 	to BonoboSelector everywhere.  Why the hell do I need to do this
+ 	again?  I could swear I did it last time.  In fact, this file
+ 	seems totally fucked now.
+	(DEFAULT_INTERFACE): Changed to "IDL:Bonobo/Embeddable:1.0" from
+ 	"IDL:GNOME/Embeddable:1.0".
+
+	* bonobo/bonobo-object.c
+ 	(bonobo_object_get_local_interface_from_objref): New function.
+	(bonobo_object_query_local_interface): New function, largely
+ 	copied from the old QI corba method implementation.
+	(impl_Bonobo_Unknown_query_interface): Use
+ 	bonobo_object_query_local_interface.
+
+	* bonobo/bonobo-object-client.c (bonobo_object_client_get_type):
+ 	Updated the type name to be a bit more true.
+
+	* bonobo/bonobo-file-moniker.c (gnome_file_moniker_bind):
+ 	IDL:GNOME -> IDL:Bonobo
+	(gnome_file_moniker_get_type): Don't use the repo ID for the type
+ 	name.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_get_type):
+ 	Don't use the repo ID for the type name.
+	* bonobo/bonobo-embeddable.c (bonobo_embeddable_get_type): Likewise.
+	* bonobo/bonobo-embeddable-factory.c (bonobo_embeddable_factory_get_type): Likewise.
+	* bonobo/bonobo-desktop-window.c (bonobo_desktop_window_get_type): Likewise.
+	* bonobo/bonobo-control.c (bonobo_control_get_type): Likewise.
+	* bonobo/bonobo-container.c (bonobo_container_get_type): Likewise.
+	* bonobo/bonobo-persist-stream.c (bonobo_persist_stream_get_type): Likewise.
+	* bonobo/bonobo-persist-file.c (bonobo_persist_file_get_type): Likewise.
+	* bonobo/bonobo-persist.c (bonobo_persist_get_type): Likewise.
+	* bonobo/bonobo-progressive.c (bonobo_progressive_data_sink_get_type): Likewise.
+	* bonobo/bonobo-ui-handler.c (bonobo_ui_handler_get_type): Likewise.
+	* bonobo/bonobo-stream.c (bonobo_stream_get_type): Likewise.
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_get_type): Likewise.
+	* bonobo/bonobo-stream-fs.c (bonobo_stream_fs_get_type): Likewise.
+	* bonobo/bonobo-simple-source.c (gnome_simple_data_source_get_type): Likewise.
+
+	* bonobo/bonobo-client-site.c
+ 	(bonobo_client_site_bind_embeddable): Query for the interface in
+ 	the Bonobo module, not the GNOME module.  This is leftover from
+ 	the name change; I just missed it before.
+	* bonobo/bonobo-component-io.c (bonobo_embeddable_save_to_stream):
+ 	Likewise.
+	(bonobo_embeddable_save): Likewise.
+	* bonobo/bonobo-object-client.c (bonobo_object_restore_from_url): Likewise.
+	(bonobo_object_activate): Likewise.
+	* bonobo/bonobo-object-io.c (bonobo_object_save_to_stream): Likewise.
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_depersist): Likewise.
+
+	* bonobo/bonobo-canvas-item.c (gbi_update): Replaced that printf
+ 	with a g_message.
+
+	* bonobo/bonobo-bind-context.c: Changed the name to
+ 	BonoboBindContext from GnomeBindContext.
+
+	* bonobo/bonobo-generic-factory.c
+ 	(impl_Bonobo_GenericFactory_supports): Implemented.
+
 2000-02-16  Jacob Berkman  <jacob@helixcode.com>
 
 	* configure.in: fix uuid and libIDL tests to allow conditional

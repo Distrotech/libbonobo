@@ -218,7 +218,7 @@ bonobo_progressive_data_sink_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/ProgressiveDataSink:1.0",
+			"BonoboProgressiveDataSink",
 			sizeof (BonoboProgressiveDataSink),
 			sizeof (BonoboProgressiveDataSinkClass),
 			(GtkClassInitFunc) bonobo_progressive_data_sink_class_init,

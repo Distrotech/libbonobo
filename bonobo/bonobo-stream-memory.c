@@ -177,7 +177,7 @@ bonobo_stream_mem_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/StreamMem:1.0",
+			"BonoboStreamMem",
 			sizeof (BonoboStreamMem),
 			sizeof (BonoboStreamMemClass),
 			(GtkClassInitFunc) bonobo_stream_mem_class_init,

@@ -159,7 +159,7 @@ bonobo_stream_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/Stream:1.0",
+			"BonoboStream",
 			sizeof (BonoboStream),
 			sizeof (BonoboStreamClass),
 			(GtkClassInitFunc) bonobo_stream_class_init,

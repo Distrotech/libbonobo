@@ -174,7 +174,7 @@ bonobo_object_restore_from_url (const char *iid, const char *url)
 	 * PersistFile, then by PersistStream)
 	 */
 	persist = (Bonobo_PersistFile) Bonobo_Unknown_query_interface (
-		rtn, "IDL:GNOME/PersistFile:1.0", &ev);
+		rtn, "IDL:Bonobo/PersistFile:1.0", &ev);
 
 	if (ev._major != CORBA_NO_EXCEPTION)
 		persist = NULL;
@@ -202,7 +202,7 @@ bonobo_object_restore_from_url (const char *iid, const char *url)
 		BonoboStream *stream;
 		
 		persist = Bonobo_Unknown_query_interface (
-			rtn, "IDL:GNOME/PersistStream:1.0", &ev);
+			rtn, "IDL:Bonobo/PersistStream:1.0", &ev);
 
 		if (ev._major != CORBA_NO_EXCEPTION)
 			persist = NULL;
@@ -289,7 +289,7 @@ bonobo_object_activate (const char *object_desc, gint flags)
 		const char *item_name = item->data;
 
 		container = (Bonobo_Container) Bonobo_Unknown_query_interface (
-			last, "IDL:GNOME/Container:1.0", &ev);
+			last, "IDL:Bonobo/Container:1.0", &ev);
 		if (container == CORBA_OBJECT_NIL){
 			moniker_info_list_destroy (moniker_info);
 			Bonobo_Unknown_unref (obj, &ev);
@@ -493,7 +493,7 @@ bonobo_object_client_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"Handle to remote GNOME::Object",
+			"Handle to remote Bonobo::Unknown",
 			sizeof (BonoboObjectClient),
 			sizeof (BonoboObjectClientClass),
 			(GtkClassInitFunc) bonobo_object_client_class_init,
