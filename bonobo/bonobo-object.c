@@ -454,7 +454,7 @@ CORBA_Object
 bonobo_object_activate_servant (BonoboObject *object, void *servant)
 {
 	CORBA_Environment ev;
-	CORBA_Object o;
+	Bonobo_Unknown o;
 
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), CORBA_OBJECT_NIL);
 	g_return_val_if_fail (servant != NULL, CORBA_OBJECT_NIL);
@@ -469,7 +469,7 @@ bonobo_object_activate_servant (BonoboObject *object, void *servant)
 
 	CORBA_exception_free (&ev);
 
-	if (o){
+	if (o) {
 		object->corba_objref = o;
 		bonobo_object_bind_to_servant (object, servant);
 		return o;

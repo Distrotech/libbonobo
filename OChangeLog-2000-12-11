@@ -1,3 +1,12 @@
+2000-06-21  Michael Meeks  <michael@helixcode.com>
+
+	* idl/bonobo-unknown.idl (query_interface): return an Unknown
+
+	* bonobo/bonobo-object.c (bonobo_object_activate_servant): update to
+	use Bonobo_Unknown.
+
+	* bonobo/bonobo-object.h: ditto.
+
 2000-06-20  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-client-site.c (bonobo_client_site_new_view_full),

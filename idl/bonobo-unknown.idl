@@ -25,7 +25,7 @@ module Bonobo {
 		 * specified by @repoid, or a nil object if the
 		 * interface cannot be queried.
 		 */
-		Object query_interface (in string repoid);
+		Unknown query_interface (in string repoid);
 	};
 };
 

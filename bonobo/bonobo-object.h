@@ -29,7 +29,7 @@ typedef struct _BonoboObjectPrivate BonoboObjectPrivate;
 typedef struct {
 	GtkObject base;
 
-	CORBA_Object          corba_objref;
+	Bonobo_Unknown        corba_objref;
 	gpointer              servant;
 	BonoboObjectPrivate   *priv;
 } BonoboObject;
@@ -53,15 +53,15 @@ BonoboObject            *bonobo_object_from_servant           (PortableServer_Se
 void                     bonobo_object_bind_to_servant        (BonoboObject           *object,
 							       void                   *servant);
 PortableServer_Servant   bonobo_object_get_servant            (BonoboObject           *object);
-CORBA_Object             bonobo_object_activate_servant       (BonoboObject           *object,
+Bonobo_Unknown           bonobo_object_activate_servant       (BonoboObject           *object,
 							       void                   *servant);
 void                     bonobo_object_add_interface          (BonoboObject           *object,
 							       BonoboObject           *newobj);
 BonoboObject            *bonobo_object_query_local_interface  (BonoboObject           *object,
 							       const char             *repo_id);
-CORBA_Object             bonobo_object_query_interface        (BonoboObject           *object,
+Bonobo_Unknown           bonobo_object_query_interface        (BonoboObject           *object,
 							       const char             *repo_id);
-CORBA_Object             bonobo_object_corba_objref           (BonoboObject           *object);
+Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject           *object);
 
 /*
  * Gnome Object Life Cycle
