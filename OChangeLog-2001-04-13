@@ -1,3 +1,23 @@
+2001-01-09  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-sync-toolbar.c (do_config_popup),
+	(config_verb_fn): impl.
+	(create_dockitem): upd.
+
+	* bonobo/bonobo-ui-toolbar.c (bonobo_ui_toolbar_show_tooltips): 
+	impl.
+
+	* bonobo/bonobo-ui-sync-toolbar.c (impl_bonobo_ui_sync_toolbar_update_root): 
+	re-enable "tips"
+
+	* bonobo/bonobo-ui-engine-config.[ch]: Substantialy re-writte.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_remove_watch_by_data): impl.
+
+2001-01-09  Michael Meeks  <michael@helixcode.com>
+
+	* doc/FAQ: finish the OAFIID naming section.
+
 2001-01-09  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* bonobo/bonobo-running-context.c: add more debugging output.
