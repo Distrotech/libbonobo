@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.1.1\n"
-"POT-Creation-Date: 2003-03-14 15:54+0000\n"
+"POT-Creation-Date: 2003-05-19 13:42+0100\n"
 "PO-Revision-Date: 2003-01-13 03:38+0100\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil Libbonobo 2.2.0\n"
-"POT-Creation-Date: 2003-03-31 20:50+0200\n"
+"POT-Creation-Date: 2003-05-19 13:42+0100\n"
 "PO-Revision-Date: 2003-03-31 17:42+0600\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -149,8 +149,7 @@ msgstr "À¢¨ÆÀ¡÷ìÌõ§À¡Ð À¢¨Æ; Å¢¾¢Å¢ÄìÌ ¸¢¨¼Â¡Ð
 msgid "General activation error with no description"
 msgstr "Å¢ÅÃ½õ ­øÄ¡Áø ¦À¡Ðò ¦¾¡¼í¸ø À¢¨Æ"
 
-#: bonobo/bonobo-generic-factory.h:74
-#: bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "¦À¡§É¡§À¡Å¢ý ¦¾¡¼ì¸Á¾¢ôÀÇ¢ì¸ ÓÊÂÅ¢ø¨Ä"
 
@@ -233,4 +232,3 @@ msgstr "Á¡¾¢Ã¢ ±¾¢ÃÇ¢ôÒ ÜÚ ¯ÕÅ¡ì¸ ÓÊÂÅ¢ø¨Ä"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "µ÷ Å¢¾¢Å¢ÄìÌ ¿¨¼¦ÀüÈÐ '%s'"
-
