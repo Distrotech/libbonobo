@@ -1,3 +1,11 @@
+2000-12-05  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-ui-xml.c: (override_node_with): Do an override
+	node even for transparent items. Otherwise the reinstate process
+	won't work if you remove the overriden item. Being transparent
+	still causes the transparent item to inherit properties from the
+	underlying one.
+
 2000-12-06  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-xml.c (node_free): free overridden node's data too.
