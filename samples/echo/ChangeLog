@@ -1,3 +1,7 @@
+2001-10-20  Michael Meeks  <michael@ximian.com>
+
+	* echo.c: simplify using BONOBO_TYPE_FUNC_FULL.
+
 2001-10-18  Mark McLoughlin <mark@skynet.ie>
 
 	* Makefile.am (ECHO_CORBA_GENERATED): depend on $(ORBIT_IDL).

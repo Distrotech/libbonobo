@@ -79,31 +79,8 @@ echo_init (Echo *echo)
 	echo->instance_data = g_strdup_printf ("Hello %d!", i++);
 }
 
-GType
-echo_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		GTypeInfo info = {
-			sizeof (EchoClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) echo_class_init,
-			NULL, /* class_finalize */
-			NULL, /* class_data */
-			sizeof (Echo),
-			0, /* n_preallocs */
-			(GInstanceInitFunc)  echo_init,
-			NULL
-		};
-
-		type = bonobo_type_unique (
-			BONOBO_OBJECT_TYPE,
-			POA_Bonobo_Sample_Echo__init, NULL,
-			G_STRUCT_OFFSET (EchoClass, epv),
-			&info, "Echo");
-	}
-
-	return type;
-}
+BONOBO_TYPE_FUNC_FULL(
+	Echo,                /* Glib class name */
+	Bonobo_Sample_Echo,  /* CORBA interface name */
+	BONOBO_OBJECT_TYPE,  /* parent type */
+	echo);               /* local prefix ie. 'echo'_class_init */

@@ -138,8 +138,7 @@ simple_prop_to_string (BonoboArg *arg)
 			    BONOBO_ARG_GET_DOUBLE (arg));
 		break;
 
-	case CORBA_tk_string:
-	{
+	case CORBA_tk_string: {
 		g_snprintf (s, sizeof (s), "string: '%s'",
 			    BONOBO_ARG_GET_STRING (arg));
 		break;
@@ -152,23 +151,6 @@ simple_prop_to_string (BonoboArg *arg)
 
 	return g_strdup (s);
 }
-
-/*
-static void
-value_changed_cb (BonoboPropertyBag *pb, char *name, char *type,
-		  gpointer old_value, gpointer new_value,
-		  gpointer user_data)
-{
-	char *s1, *s2;
-
-	s1 = simple_prop_to_string (old_value);
-	s2 = simple_prop_to_string (new_value);
-	g_print ("Prop %s [%s]: value changed from %s to %s\n",
-		 name, type, s1, s2);
-	g_free (s1);
-	g_free (s2);
-}
-*/
 
 static void
 create_bag (void)
@@ -190,6 +172,7 @@ create_bag (void)
 	pb = bonobo_property_bag_new (get_prop, set_prop, pd);
 
 	dstr = "Testing 1 2 3";
+
 	/* Add properties */
 	bonobo_property_bag_add (pb, "int-test", PROP_INTEGER_TEST,
 				 BONOBO_ARG_INT, NULL, dstr, 0);
