@@ -1,3 +1,34 @@
+2000-09-23  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-ui-handler.c: Don't #include
+	"bonobo-uih-private.h".
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_get_pixmap): Removed.
+	(bonobo_ui_util_xml_get_icon_pixbuf): New.
+	(gnome_pixmap_new_from_pixbuf): Removed.
+	(bonobo_ui_util_xml_get_icon_pixmap_widget): New.
+
+	* bonobo/bonobo-win.c (update_dockitem): `#if 0' the handling for
+	the "relief" and "homogeneous" properties.
+	(build_toolbar_widget): Updated to the new BonoboUIToolbar.
+	Removed tooltip stuff, as it is not implemented in
+	BonoboUIToolbar.
+	(build_toolbar_placeholder): Likewise.
+	(widget_set_state): Temporarily `#if 0'ed the state setting.
+	(app_item_emit_ui_event): `#if 0'ed out.
+	(menu_toggle_emit_ui_event): Likewise.
+	(menu_item_create): Don't connect them.
+	(build_toolbar_widget): Likewise.
+	(update_dockitem): No "relief", "homogeneous" or "tips"
+	attributes, at least for now.
+
+	* bonobo-ui-toolbar.c, bonobo-ui-toolbar.h:
+	* bonobo-ui-toolbar-item.c, bonobo-ui-toolbar-item.h:
+	* bonobo-ui-toolbar-button-item.c, bonobo-ui-toolbar-item.h:
+	* bonobo-ui-toolbar-toggle-button-item.c, bonobo-ui-toolbar-button-item.h:
+	* bonobo-ui-separator-item.c, bonobo-ui-separator-item.h:
+	Beginning of a new `BonoboUIToolbar' implementation.
+
 2000-09-22  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_set_ui): impl helper fn.
