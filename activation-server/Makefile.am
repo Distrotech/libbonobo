@@ -1,6 +1,17 @@
+NULL=
+
 bin_PROGRAMS=oafd oaf-client
 
-INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\" @ORBIT_CFLAGS@ @XML_CFLAGS@ @GLIB_CFLAGS@
+INCLUDES=				\
+	-I$(top_srcdir) 		\
+	-I$(top_builddir) 		\
+	-I$(top_builddir)/liboaf	\
+	-DOAFINFODIR=\"$(pkgdatadir)\" 	\
+	@ORBIT_CFLAGS@ 			\
+	@XML_CFLAGS@ 			\
+	@GLIB_CFLAGS@			\
+	-DOAF_CONFDIR=\"$(sysconfdir)\"	\
+	$(NULL)
 
 oafd_SOURCES=			\
 	qsort_ex.c              \
@@ -14,6 +25,7 @@ oafd_SOURCES=			\
 	ac-query-expr.c		\
 	od-corba.c		\
 	od-load.c		\
+	od-utils.c		\
 	od-activate.c		\
 	main.c			\
 	oafd.h
