@@ -1,3 +1,7 @@
+2003-04-08  Raphael Finkel <raphael@cs.uky.edu>
+
+	* configure.in: Added "yi" in ALL_LINGUAS
+
 2003-03-21  Guntupalli Karunakar  <karunakar@freedomink.org>
 
 	* configure.in: Added "ml" in ALL_LINGUAS
