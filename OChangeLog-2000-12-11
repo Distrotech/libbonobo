@@ -1,3 +1,9 @@
+2000-07-25  Peter Williams  <peterw@helixcode.com>
+
+	* bonobo/bonobo-uih-dock.c (bonobo_ui_handler_dock_remove_data): 
+	Don't just free the CORBA_Object: remove the data from the hash 
+	table and free the key and value.
+
 2000-07-25  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo.h: add sizeable
