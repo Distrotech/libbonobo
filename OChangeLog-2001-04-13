@@ -1,8 +1,21 @@
+2000-11-28  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-main.c (bonobo_activate): add context_init
+
+	* bonobo/Makefile.am: add files.
+
+	* idl/Bonobo.idl: add bonobo-context.idl
+
+	* idl/bonobo-context.idl: create
+
+	* bonobo/bonobo-context.[ch]: create.
+
+	* bonobo/bonobo-activation-context.[ch]: create.
+
 2000-11-27  Pavel Cisler  <pavel@eazel.com>
 
 	* idl/Makefile.am:
-	Make it build.
-	Mathieu forgot to remove bonobo.idl from Makefile.am.
+	Make it build. Mathieu forgot to remove bonobo.idl from Makefile.am.
 
 2000-11-27  Michael Meeks  <michael@helixcode.com>
 

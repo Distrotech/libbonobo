@@ -114,7 +114,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 	}
 
 	moniker = Bonobo_Moniker_parseDisplayName (toplevel, parent,
-						     name, ev);
+						   name, ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		return CORBA_OBJECT_NIL;
 

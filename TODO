@@ -15,14 +15,11 @@ Bugs to fix
 ===========
 
 * Radio toolbars buttons are unimplemented (Michael)
-* XSync work (Michael)
-* Reference counting issues
 
 General Cleanup
 ===============
 
 * XML DTD for UI handler stuff (Martin)
-* StdlyCaps (Michael)
 
 Controls etc
 ------------
@@ -34,8 +31,9 @@ Bonobo-endemic issues
 ---------------------
 
 * Hunt down and kill all FIXMEs.
-* _full methods for creating perl/python/scheme bindings
-* Simple File IO that takes care of all the repetitive code we add everywhre
+* Full contexts for language bindings
+* Simple File IO that takes care of all the repetitive
+ code we add everywhre
 
 Bonobo Core (files in bonobo/)
 ------------------------------

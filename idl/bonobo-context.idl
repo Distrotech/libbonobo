@@ -1,0 +1,94 @@
+/*
+ * bonobo-context.idl: Exposes global bonobo functionality
+ *
+ * Copyright (C) 1999, 2000  Helix Code, Inc.
+ *
+ * Author:
+ *    Michael Meeks (michael@helixcode.com)
+ *
+ */
+
+#ifndef BONOBO_CONTEXT_IDL
+#define BONOBO_CONTEXT_IDL
+
+#include "bonobo-moniker.idl"
+
+module Bonobo {
+
+	interface ActivationContext : Unknown {
+		/**
+		 * getObject:
+		 * @name:
+		 * @repoId:
+		 *
+		 * Create and resolve a moniker
+		 */
+		Unknown getObject        (in string name,
+					  in string repoId);
+
+		/**
+		 * createFromName:
+		 * @name: parsed name of moniker
+		 *
+		 * creates a moniker from a display name
+		 */
+		Moniker createFromName   (in string name);
+
+		/**
+		 * createWithParent:
+		 * @optParent: Optional parent moniker
+		 * @name: name to create moniker from
+		 *
+		 * Used in moniker construction
+		 */
+		Moniker createWithParent (in Moniker optParent,
+					  in string  name);
+	};
+
+#if 0
+	interface ExceptionContext : Unknown {
+		/**
+		 * getText:
+		 * @ex: an exception
+		 *
+		 *   translates the exception into a human
+		 * readable string translated into the current
+		 * locale.
+		 */
+		string getText (in exception ex);
+	};
+
+	interface StreamContext : Unknown {
+		exception NotSeekable {};
+
+		/**
+		 * getMimeType:
+		 * @stream: a seekable stream
+		 *
+		 *  If the stream is not seekable, we return
+		 * an exception without seeking, otherwise
+		 * we determine the mime type and return the
+		 * stream with offset at the beggining.
+		 */
+		string  getMimeType (in Stream stream)
+			raises (NotSeekable);
+
+		/**
+		 * sniffStream:
+		 * @stream: a seekable stream
+		 *
+		 *  If the stream is not seekable, we return
+		 * an exception without seeking, otherwise
+		 * we sniff the stream, to see if it smells
+		 * approximately like the suggested mime type.
+		 */
+		boolean sniffStream (in Stream stream,
+				     in string mimeType)
+			raises (NotSeekable);
+	};
+#endif
+
+	
+};
+
+#endif /* BONOBO_CONTEXT_IDL */

@@ -10,8 +10,10 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
+
 #include <bonobo/bonobo-main.h>
-#include "bonobo-object.h"
+#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-context.h>
 
 #include <signal.h>
 #include <gnome.h>
@@ -221,6 +223,8 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	CORBA_exception_free (&ev);
 
 	bonobo_object_init ();
+
+	bonobo_context_init ();
 
 	return TRUE;
 }
