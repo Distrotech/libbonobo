@@ -1,5 +1,8 @@
 1999-10-06  Miguel de Icaza  <miguel@gnu.org>
 
+	* bonobo/gnome-generic-factory.c: New file.  Now we use a generic
+	factory rather than an embeddable factory.
+
 	* bonobo/gnome-client-site.c (gnome_client_site_new_item): Updated
 	to the new setup.
 

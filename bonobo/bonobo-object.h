@@ -48,6 +48,7 @@ typedef struct {
 GtkType      gnome_object_get_type         (void);
 GnomeObject *gnome_object_construct        (GnomeObject *object,
 					    CORBA_Object corba_object);
+GnomeObject *gnome_object_new_from_servant (void *servant);
 
 GnomeObject *gnome_object_from_servant     (PortableServer_Servant servant);
 void         gnome_object_bind_to_servant  (GnomeObject *object,

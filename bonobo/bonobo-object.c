@@ -583,3 +583,27 @@ gnome_unknown_ping (GNOME_Unknown object)
 
 	return alive;
 }
+
+/**
+ * gnome_object_from_servant:
+ * @servant: A Servant that implements the GNOME::Unknown interface
+ *
+ * This wraps the servant @servant in a GnomeObject.
+ */
+GnomeObject *
+gnome_object_new_from_servant (void *servant)
+{
+	GnomeObject *object;
+	CORBA_Object corba_object;
+	
+	g_return_val_if_fail (servant != NULL, NULL);
+
+	object = gtk_type_new (gnome_object_get_type ());
+	if (object == NULL)
+		return NULL;
+
+	corba_object = gnome_object_activate_servant (object, servant);
+	gnome_object_construct (object, corba_object);
+
+	return object;
+}
