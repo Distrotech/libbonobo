@@ -202,7 +202,7 @@ bonobo_property_bag_client_get_property_names (BonoboPropertyBagClient *pbc)
  */
 Bonobo_Property
 bonobo_property_bag_client_get_property (BonoboPropertyBagClient *pbc,
-					const char *property_name)
+					 const char *property_name)
 {
 	CORBA_Environment ev;
 	Bonobo_Property    prop;
@@ -241,7 +241,7 @@ bonobo_property_bag_client_get_property (BonoboPropertyBagClient *pbc,
  */
 void
 bonobo_property_bag_client_persist (BonoboPropertyBagClient *pbc,
-				   Bonobo_Stream stream)
+				    Bonobo_Stream stream)
 {
 	Bonobo_PersistStream persist;
 	CORBA_Environment   ev;
@@ -293,7 +293,7 @@ bonobo_property_bag_client_persist (BonoboPropertyBagClient *pbc,
  */
 void
 bonobo_property_bag_client_depersist (BonoboPropertyBagClient *pbc,
-				     Bonobo_Stream stream)
+				      Bonobo_Stream stream)
 {
 	Bonobo_PersistStream persist;
 	CORBA_Environment   ev;
@@ -350,7 +350,7 @@ bonobo_property_bag_client_depersist (BonoboPropertyBagClient *pbc,
  */
 CORBA_TypeCode
 bonobo_property_bag_client_get_property_type (BonoboPropertyBagClient *pbc,
-					     const char *propname)
+					      const char *propname)
 {
 	CORBA_Environment ev;
 	Bonobo_Property prop;
@@ -389,7 +389,7 @@ typedef enum {
 	FIELD_DEFAULT
 } PropUtilFieldType;
 
-static CORBA_any *
+static BonoboArg *
 bonobo_property_bag_client_get_field_any (BonoboPropertyBagClient *pbc,
 					 const char *propname,
 					 PropUtilFieldType field)
@@ -431,192 +431,43 @@ bonobo_property_bag_client_get_field_any (BonoboPropertyBagClient *pbc,
 	return any;
 }
 
-static gboolean
-bonobo_property_bag_client_get_field_boolean (BonoboPropertyBagClient *pbc,
-					     const char *propname,
-					     PropUtilFieldType field)
-{
-	CORBA_any *any;
-	gboolean   b;
-
-	g_return_val_if_fail (pbc != NULL, FALSE);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), FALSE);
-	g_return_val_if_fail (propname != NULL, FALSE);
-
-	any = bonobo_property_bag_client_get_field_any (pbc, propname, field);
-
-	if (any == NULL)
-		return FALSE;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_boolean, 0);
-
-	b = *(gboolean *) any->_value;
-
-	CORBA_any__free (any, NULL, TRUE);
-
-	return b;
+#define MAKE_BONOBO_PROPERTY_BAG_CLIENT_GET_FIELD(type,def,corbatype,tk)	\
+static type									\
+bonobo_property_bag_client_get_field_##type (BonoboPropertyBagClient *pbc,	\
+					     const char *propname,		\
+					     PropUtilFieldType field)		\
+{										\
+	CORBA_any *any;								\
+	type       d;								\
+										\
+	g_return_val_if_fail (pbc != NULL, (def));				\
+	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), (def));	\
+	g_return_val_if_fail (propname != NULL, (def));				\
+										\
+	any = bonobo_property_bag_client_get_field_any (pbc, propname, field);	\
+										\
+	if (any == NULL)							\
+		return 0.0;							\
+										\
+	g_return_val_if_fail (any->_type->kind == tk, (def));			\
+										\
+	d = *(corbatype *) any->_value;						\
+										\
+	CORBA_any__free (any, NULL, TRUE);					\
+										\
+	return d;								\
 }
 
-static gshort
-bonobo_property_bag_client_get_field_short (BonoboPropertyBagClient *pbc,
-					   const char *propname,
-					   PropUtilFieldType field)
-{
-	CORBA_any *any;
-	gshort     s;
-
-	g_return_val_if_fail (pbc != NULL, 0);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), 0);
-	g_return_val_if_fail (propname != NULL, 0);
-
-	any = bonobo_property_bag_client_get_field_any (pbc, propname, field);
-
-	if (any == NULL)
-		return 0;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_short, 0);
-
-	s = *(gshort *) any->_value;
-
-	CORBA_any__free (any, NULL, TRUE);
-
-	return s;
-}
-
-static gushort
-bonobo_property_bag_client_get_field_ushort (BonoboPropertyBagClient *pbc,
-					    const char *propname,
-					    PropUtilFieldType field)
-{
-	CORBA_any *any;
-	gushort    s;
-
-	g_return_val_if_fail (pbc != NULL, 0);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), 0);
-	g_return_val_if_fail (propname != NULL, 0);
-
-	any = bonobo_property_bag_client_get_field_any (pbc, propname, field);
-
-	if (any == NULL)
-		return 0.0;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_ushort, 0);
-
-	s = *(gushort *) any->_value;
-
-	CORBA_any__free (any, NULL, TRUE);
-
-	return s;
-}
-
-static glong
-bonobo_property_bag_client_get_field_long (BonoboPropertyBagClient *pbc,
-					  const char *propname,
-					  PropUtilFieldType field)
-{
-	CORBA_any *any;
-	glong      l;
-
-	g_return_val_if_fail (pbc != NULL, 0);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), 0);
-	g_return_val_if_fail (propname != NULL, 0);
-
-	any = bonobo_property_bag_client_get_field_any (pbc, propname, field);
-
-	if (any == NULL)
-		return 0.0;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_long, 0);
-
-	l = *(glong *) any->_value;
-
-	CORBA_any__free (any, NULL, TRUE);
-
-	return l;
-}
-
-static gulong
-bonobo_property_bag_client_get_field_ulong (BonoboPropertyBagClient *pbc,
-					   const char *propname,
-					   PropUtilFieldType field)
-{
-	CORBA_any *any;
-	gulong     l;
-
-	g_return_val_if_fail (pbc != NULL, 0);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), 0);
-	g_return_val_if_fail (propname != NULL, 0);
-
-	any = bonobo_property_bag_client_get_field_any (pbc, propname, field);
-
-	if (any == NULL)
-		return 0.0;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_ulong, 0);
-
-	l = *(gulong *) any->_value;
-
-	CORBA_any__free (any, NULL, TRUE);
-
-	return l;
-}
-
-static gfloat
-bonobo_property_bag_client_get_field_float (BonoboPropertyBagClient *pbc,
-					   const char *propname,
-					   PropUtilFieldType field)
-{
-	CORBA_any *any;
-	gfloat     f;
-
-	g_return_val_if_fail (pbc != NULL, 0.0);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), 0.0);
-	g_return_val_if_fail (propname != NULL, 0.0);
-
-	any = bonobo_property_bag_client_get_field_any (pbc, propname, field);
-
-	if (any == NULL)
-		return 0.0;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_float, 0.0);
-
-	f = *(gfloat *) any->_value;
-
-	CORBA_any__free (any, NULL, TRUE);
-
-	return f;
-}
-
-static gdouble
-bonobo_property_bag_client_get_field_double (BonoboPropertyBagClient *pbc,
-					    const char *propname,
-					    PropUtilFieldType field)
-{
-	CORBA_any *any;
-	gdouble    d;
-
-	g_return_val_if_fail (pbc != NULL, 0.0);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), 0.0);
-	g_return_val_if_fail (propname != NULL, 0.0);
-
-	any = bonobo_property_bag_client_get_field_any (pbc, propname, field);
-
-	if (any == NULL)
-		return 0.0;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_double, 0.0);
-
-	d = *(gdouble *) any->_value;
-
-	CORBA_any__free (any, NULL, TRUE);
-
-	return d;
-}
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_GET_FIELD (gboolean,  0, CORBA_boolean,        CORBA_tk_boolean);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_GET_FIELD (gint  ,    0, CORBA_long,           CORBA_tk_long);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_GET_FIELD (glong,     0, CORBA_long,           CORBA_tk_long);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_GET_FIELD (gfloat,  0.0, CORBA_float,          CORBA_tk_float);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_GET_FIELD (gdouble, 0.0, CORBA_double,         CORBA_tk_double);
 
 static char *
 bonobo_property_bag_client_get_field_string (BonoboPropertyBagClient *pbc,
-					    const char *propname,
-					    PropUtilFieldType field)
+					     const char *propname,
+					     PropUtilFieldType field)
 {
 	CORBA_any *any;
 	char      *str;
@@ -640,147 +491,43 @@ bonobo_property_bag_client_get_field_string (BonoboPropertyBagClient *pbc,
 }
 
 /*
- * Querying property values.
+ *   This macro generates two functions; that to return the value
+ * of a property and that to get its default; essentialy these
+ * chain on to the shared bonobo_property_bag_client_get_field_gboolean
+ * function.
  */
-gboolean
-bonobo_property_bag_client_get_value_boolean (BonoboPropertyBagClient *pbc,
-					     const char *propname)
-{
-	return bonobo_property_bag_client_get_field_boolean (pbc, propname, FIELD_VALUE);
+#define MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(type,rettype)					\
+rettype												\
+bonobo_property_bag_client_get_value_##type (BonoboPropertyBagClient *pbc,			\
+					     const char *propname)				\
+{												\
+	return bonobo_property_bag_client_get_field_##type (pbc, propname, FIELD_VALUE);	\
+}												\
+												\
+rettype						      						\
+bonobo_property_bag_client_get_default_##type (BonoboPropertyBagClient *pbc,			\
+					       const char *propname)				\
+{												\
+	return bonobo_property_bag_client_get_field_##type (pbc, propname, FIELD_DEFAULT);	\
 }
 
-gshort
-bonobo_property_bag_client_get_value_short (BonoboPropertyBagClient *pbc,
-					   const char *propname)
-{
-	return bonobo_property_bag_client_get_field_short (pbc, propname, FIELD_VALUE);
-}
-
-gushort
-bonobo_property_bag_client_get_value_ushort (BonoboPropertyBagClient *pbc,
-					    const char *propname)
-{
-	return bonobo_property_bag_client_get_field_ushort (pbc, propname, FIELD_VALUE);
-}
-
-glong
-bonobo_property_bag_client_get_value_long (BonoboPropertyBagClient *pbc,
-					  const char *propname)
-{
-	return bonobo_property_bag_client_get_field_long (pbc, propname, FIELD_VALUE);
-}
-
-gulong
-bonobo_property_bag_client_get_value_ulong (BonoboPropertyBagClient *pbc,
-					   const char *propname)
-{
-	return bonobo_property_bag_client_get_field_ulong (pbc, propname, FIELD_VALUE);
-}
-
-gfloat
-bonobo_property_bag_client_get_value_float (BonoboPropertyBagClient *pbc,
-					   const char *propname)
-{
-	return bonobo_property_bag_client_get_field_float (pbc, propname, FIELD_VALUE);
-}
-
-gdouble
-bonobo_property_bag_client_get_value_double (BonoboPropertyBagClient *pbc,
-					    const char *propname)
-{
-	return bonobo_property_bag_client_get_field_double (pbc, propname, FIELD_VALUE);
-}
-
-char *
-bonobo_property_bag_client_get_value_string (BonoboPropertyBagClient *pbc,
-					    const char *propname)
-{
-	return bonobo_property_bag_client_get_field_string (pbc, propname, FIELD_VALUE);
-}
-
-CORBA_any *
-bonobo_property_bag_client_get_value_any (BonoboPropertyBagClient *pbc,
-					 const char *propname)
-{
-	return bonobo_property_bag_client_get_field_any (pbc, propname, FIELD_VALUE);
-}
-
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(gboolean, gboolean);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(gint,     gint);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(glong,    glong);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(gfloat,   gfloat);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(gdouble,  gdouble);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(string,   char *);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(any,      BonoboArg *);
 
 /*
- * Querying property default values.
+ * Setting property values.
  */
-gboolean
-bonobo_property_bag_client_get_default_boolean (BonoboPropertyBagClient *pbc,
-					       const char *propname)
-{
-	return bonobo_property_bag_client_get_field_boolean (pbc, propname, FIELD_DEFAULT);
-}
-
-gshort
-bonobo_property_bag_client_get_default_short (BonoboPropertyBagClient *pbc,
-					     const char *propname)
-{
-	return bonobo_property_bag_client_get_field_short (pbc, propname, FIELD_DEFAULT);
-}
-
-gushort
-bonobo_property_bag_client_get_default_ushort (BonoboPropertyBagClient *pbc,
-					      const char *propname)
-{
-	return bonobo_property_bag_client_get_field_ushort (pbc, propname, FIELD_DEFAULT);
-}
-
-
-glong
-bonobo_property_bag_client_get_default_long (BonoboPropertyBagClient *pbc,
-					    const char *propname)
-{
-	return bonobo_property_bag_client_get_field_long (pbc, propname, FIELD_DEFAULT);
-}
-
-gulong
-bonobo_property_bag_client_get_default_ulong (BonoboPropertyBagClient *pbc,
-					     const char *propname)
-{
-	return bonobo_property_bag_client_get_field_ulong (pbc, propname, FIELD_DEFAULT);
-}
-
-gfloat
-bonobo_property_bag_client_get_default_float (BonoboPropertyBagClient *pbc,
-					     const char *propname)
-{
-	return bonobo_property_bag_client_get_field_float (pbc, propname, FIELD_DEFAULT);
-}
-
-gdouble
-bonobo_property_bag_client_get_default_double (BonoboPropertyBagClient *pbc,
-					      const char *propname)
-{
-	return bonobo_property_bag_client_get_field_double (pbc, propname, FIELD_DEFAULT);
-}
-
-char *
-bonobo_property_bag_client_get_default_string (BonoboPropertyBagClient *pbc,
-					      const char *propname)
-{
-	return bonobo_property_bag_client_get_field_string (pbc, propname, FIELD_DEFAULT);
-}
-
-CORBA_any *
-bonobo_property_bag_client_get_default_any (BonoboPropertyBagClient *pbc,
-					   const char *propname)
-{
-	return bonobo_property_bag_client_get_field_any (pbc, propname, FIELD_DEFAULT);
-}
-
-/* Setting property values. */
-
 void
 bonobo_property_bag_client_set_value_any (BonoboPropertyBagClient *pbc,
-					 const char *propname,
-					 CORBA_any *value)
+					  const char              *propname,
+					  BonoboArg               *value)
 {
-	Bonobo_Property    prop;
+	Bonobo_Property   prop;
 	CORBA_Environment ev;
 
 	g_return_if_fail (pbc != NULL);
@@ -807,156 +554,52 @@ bonobo_property_bag_client_set_value_any (BonoboPropertyBagClient *pbc,
 	return;
 }
 
-void
-bonobo_property_bag_client_set_value_boolean (BonoboPropertyBagClient *pbc,
-					     const char *propname,
-					     gboolean value)
-{
-	CORBA_any      *any;
-
-	g_return_if_fail (pbc != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
-	g_return_if_fail (propname != NULL);
-
-	any = bonobo_property_marshal_boolean ("boolean", (gconstpointer) &value, NULL);
-	g_return_if_fail (any != NULL);
-
-	bonobo_property_bag_client_set_value_any (pbc, propname, any);
-
-	CORBA_any__free (any, NULL, TRUE);
+#define MAKE_BONOBO_PROPERTY_BAG_CLIENT_SET_VALUE(gtype,capstype)		\
+										\
+void										\
+bonobo_property_bag_client_set_value_##gtype (BonoboPropertyBagClient *pbc,	\
+					      const char *propname,		\
+					      gtype value)			\
+{										\
+	BonoboArg *arg;								\
+										\
+	g_return_if_fail (pbc != NULL);						\
+	g_return_if_fail (propname != NULL);					\
+	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));			\
+										\
+	arg = bonobo_arg_new (BONOBO_ARG_##capstype);		      		\
+										\
+	BONOBO_ARG_SET_##capstype (arg, value);					\
+										\
+	bonobo_property_bag_client_set_value_any (pbc, propname, arg);		\
+										\
+	bonobo_arg_release (arg);						\
 }
 
-void
-bonobo_property_bag_client_set_value_short (BonoboPropertyBagClient *pbc,
-					   const char *propname,
-					   gshort value)
-{
-	CORBA_any      *any;
-
-	g_return_if_fail (pbc != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
-	g_return_if_fail (propname != NULL);
-
-	any = bonobo_property_marshal_short ("short", (gconstpointer) &value, NULL);
-	g_return_if_fail (any != NULL);
-
-	bonobo_property_bag_client_set_value_any (pbc, propname, any);
-
-	CORBA_any__free (any, NULL, TRUE);
-}
-
-void
-bonobo_property_bag_client_set_value_ushort (BonoboPropertyBagClient *pbc,
-					    const char *propname,
-					    gushort value)
-{
-	CORBA_any      *any;
-
-	g_return_if_fail (pbc != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
-	g_return_if_fail (propname != NULL);
-
-	any = bonobo_property_marshal_ushort ("ushort", (gconstpointer) &value, NULL);
-	g_return_if_fail (any != NULL);
-
-	bonobo_property_bag_client_set_value_any (pbc, propname, any);
-
-	CORBA_any__free (any, NULL, TRUE);
-}
-
-void
-bonobo_property_bag_client_set_value_long (BonoboPropertyBagClient *pbc,
-					  const char *propname,
-					  glong value)
-{
-	CORBA_any      *any;
-
-	g_return_if_fail (pbc != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
-	g_return_if_fail (propname != NULL);
-
-	any = bonobo_property_marshal_long ("long", (gconstpointer) &value, NULL);
-	g_return_if_fail (any != NULL);
-
-	bonobo_property_bag_client_set_value_any (pbc, propname, any);
-
-	CORBA_any__free (any, NULL, TRUE);
-}
-
-void
-bonobo_property_bag_client_set_value_ulong (BonoboPropertyBagClient *pbc,
-					   const char *propname,
-					   gulong value)
-{
-	CORBA_any      *any;
-
-	g_return_if_fail (pbc != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
-	g_return_if_fail (propname != NULL);
-
-	any = bonobo_property_marshal_ulong ("ulong", (gconstpointer) &value, NULL);
-	g_return_if_fail (any != NULL);
-
-	bonobo_property_bag_client_set_value_any (pbc, propname, any);
-
-	CORBA_any__free (any, NULL, TRUE);
-}
-
-void
-bonobo_property_bag_client_set_value_float (BonoboPropertyBagClient *pbc,
-					   const char *propname,
-					   gfloat value)
-{
-	CORBA_any      *any;
-
-	g_return_if_fail (pbc != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
-	g_return_if_fail (propname != NULL);
-
-	any = bonobo_property_marshal_float ("float", (gconstpointer) &value, NULL);
-	g_return_if_fail (any != NULL);
-
-	bonobo_property_bag_client_set_value_any (pbc, propname, any);
-
-	CORBA_any__free (any, NULL, TRUE);
-}
-
-void
-bonobo_property_bag_client_set_value_double (BonoboPropertyBagClient *pbc,
-					    const char *propname,
-					    gdouble value)
-{
-	CORBA_any      *any;
-
-	g_return_if_fail (pbc != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
-	g_return_if_fail (propname != NULL);
-
-	any = bonobo_property_marshal_double ("double", (gconstpointer) &value, NULL);
-	g_return_if_fail (any != NULL);
-
-	bonobo_property_bag_client_set_value_any (pbc, propname, any);
-
-	CORBA_any__free (any, NULL, TRUE);
-}
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_SET_VALUE(gboolean, BOOLEAN);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_SET_VALUE(gint,     INT);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_SET_VALUE(glong,    LONG);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_SET_VALUE(gfloat,   FLOAT);
+MAKE_BONOBO_PROPERTY_BAG_CLIENT_SET_VALUE(gdouble,  DOUBLE);
 
 void
 bonobo_property_bag_client_set_value_string (BonoboPropertyBagClient *pbc,
-					     const char *propname,
-					     const char *value)
+					      const char  *propname,
+					      const gchar *value)
 {
-	CORBA_any      *any;
+	BonoboArg *arg;
 
 	g_return_if_fail (pbc != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
+	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 
-	any = bonobo_property_marshal_string ("string", value, NULL);
-	g_return_if_fail (any != NULL);
+	arg = bonobo_arg_new (BONOBO_ARG_STRING);
 
-	bonobo_property_bag_client_set_value_any (pbc, propname, any);
+	BONOBO_ARG_SET_STRING (arg, value);
 
-	CORBA_any__free (any, NULL, TRUE);
+	bonobo_property_bag_client_set_value_any (pbc, propname, arg);
+
+	bonobo_arg_release (arg);
 }
 
 /*
@@ -1033,8 +676,6 @@ bonobo_property_bag_client_get_flags (BonoboPropertyBagClient *pbc,
 
 	return 0;
 }
-
-
 
 /*
  * GtkObject crap.
@@ -1080,12 +721,10 @@ bonobo_property_bag_client_get_type (void)
 	return type;
 }
 
-#define SEND_OBTUSE(pbc,name,args,t,odd) \
-	case CORBA_tk##t: \
-		bonobo_property_bag_client_set_value##t (pbc, name, va_arg (args, CORBA##odd)); \
+#define SEND(pbc,name,args,corbat,gt)									\
+	case CORBA_tk##corbat:										\
+		bonobo_property_bag_client_set_value##gt (pbc, name, va_arg (args, CORBA##corbat));	\
 		break;
-
-#define SEND(pbc,name,args,t) SEND_OBTUSE(pbc,name,args,t,t)
 
 char *
 bonobo_property_bag_client_setv (BonoboPropertyBagClient *pbc,
@@ -1107,18 +746,21 @@ bonobo_property_bag_client_setv (BonoboPropertyBagClient *pbc,
 			return g_strdup_printf ("No such arg '%s'", arg_name);
 
 		switch (type->kind) {
+
+			SEND (pbc, arg_name, var_args, _boolean, _gboolean);
+			SEND (pbc, arg_name, var_args, _long,    _glong);
+			SEND (pbc, arg_name, var_args, _float,   _gfloat);
+			SEND (pbc, arg_name, var_args, _double,  _gdouble);
+
 		case CORBA_tk_string:
 			bonobo_property_bag_client_set_value_string (pbc, arg_name,
 								     va_arg (var_args, CORBA_char *));
 			break;
 
-			SEND        (pbc, arg_name, var_args, _boolean);
-			SEND_OBTUSE (pbc, arg_name, var_args, _ushort, _unsigned_short);
-			SEND        (pbc, arg_name, var_args, _short);
-			SEND        (pbc, arg_name, var_args, _float);
-			SEND        (pbc, arg_name, var_args, _double);
-			SEND_OBTUSE (pbc, arg_name, var_args, _ulong, _unsigned_long);
-			SEND        (pbc, arg_name, var_args, _long);
+		case CORBA_tk_any:
+			bonobo_property_bag_client_set_value_any    (pbc, arg_name,
+								     va_arg (var_args, BonoboArg *));
+			break;
 
 		default:
 			return g_strdup_printf ("Unhandled setv arg '%s' type %d",
@@ -1131,16 +773,12 @@ bonobo_property_bag_client_setv (BonoboPropertyBagClient *pbc,
 	return NULL;
 }
 #undef SEND
-#undef SEND_OBTUSE
 
-#define RECIEVE_OBTUSE(pbc,name,args,t,odd) \
-	case CORBA_tk##t: \
-		*((CORBA##odd *)va_arg (args, CORBA##odd *)) = \
-		    bonobo_property_bag_client_get_value##t (pbc, name); \
+#define RECIEVE(pbc,name,args,corbat,gt) \
+	case CORBA_tk##corbat: \
+		*((CORBA##corbat *)va_arg (args, CORBA##corbat *)) = \
+		    bonobo_property_bag_client_get_value##gt (pbc, name); \
 		break;
-
-#define RECIEVE(pbc,name,args,t) RECIEVE_OBTUSE(pbc,name,args,t,t)
-
 
 char *
 bonobo_property_bag_client_getv (BonoboPropertyBagClient *pbc,
@@ -1162,22 +800,21 @@ bonobo_property_bag_client_getv (BonoboPropertyBagClient *pbc,
 			return g_strdup_printf ("No such arg '%s'", arg_name);
 
 		switch (type->kind) {
-		case CORBA_tk_string:
-		{
-			char *txt = bonobo_property_bag_client_get_value_string (pbc, arg_name);
-			*((CORBA_char **)(va_arg (var_args, CORBA_char **))) =
-				CORBA_string_dup (txt);
-			g_free (txt);
-			break;
-		}
 
-			RECIEVE        (pbc, arg_name, var_args, _boolean);
-			RECIEVE_OBTUSE (pbc, arg_name, var_args, _ushort, _unsigned_short);
-			RECIEVE        (pbc, arg_name, var_args, _short);
-			RECIEVE        (pbc, arg_name, var_args, _float);
-			RECIEVE        (pbc, arg_name, var_args, _double);
-			RECIEVE_OBTUSE (pbc, arg_name, var_args, _ulong, _unsigned_long);
-			RECIEVE        (pbc, arg_name, var_args, _long);
+			RECIEVE (pbc, arg_name, var_args, _boolean, _gboolean);
+			RECIEVE (pbc, arg_name, var_args, _long,    _glong);
+			RECIEVE (pbc, arg_name, var_args, _float,   _gfloat);
+			RECIEVE (pbc, arg_name, var_args, _double,  _gdouble);
+
+		case CORBA_tk_string:
+			*((CORBA_char **)(va_arg (var_args, CORBA_char **))) =
+				bonobo_property_bag_client_get_value_string (pbc, arg_name);
+			break;
+
+		case CORBA_tk_any:
+			*((BonoboArg **)(va_arg (var_args, BonoboArg **))) =
+				bonobo_property_bag_client_get_value_any (pbc, arg_name);
+			break;
 
 		default:
 			return g_strdup_printf ("Unhandled getv arg '%s' type %d",
@@ -1190,4 +827,5 @@ bonobo_property_bag_client_getv (BonoboPropertyBagClient *pbc,
 	return NULL;
 }
 #undef RECIEVE
-#undef RECIEVE_OBTUSE
+
+

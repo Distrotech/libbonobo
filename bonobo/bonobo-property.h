@@ -17,11 +17,15 @@ void		       bonobo_property_servant_destroy (PortableServer_Servant servant);
 
 typedef struct {
 	char			*name;
-	char			*type;
-	gpointer		 value;
-	gpointer		 default_value;
+	int                      idx;
+	BonoboArgType            type;
+	BonoboArg               *default_value;
 	char			*docstring;
 	BonoboPropertyFlags	 flags;
+
+	BonoboPropertyGetFn      get_prop;
+	BonoboPropertySetFn      set_prop;
+	gpointer                 user_data;
 } BonoboProperty;
 
 #endif /* ! __BONOBO_PROPERTY_H__ */

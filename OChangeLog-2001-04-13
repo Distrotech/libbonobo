@@ -1,3 +1,42 @@
+2000-04-01  Michael Meeks  <michael@helixcode.com>
+
+	* tests/test-properties-client.c: Small API updates.
+
+	* tests/test-properties-server.c: Re-write; totaly different really.
+
+	* bonobo/bonobo-property-bag.c: Total re-design. Use callbacks to track changes
+	instead of the signal. Kill the signal ( perhaps we need a CORBA one ? ) Remove
+	all the xml hooks, they were unused. Some API fat was removed & the following functions
+	(bonobo_property_bag_new, bonobo_property_bag_add_full, bonobo_property_bag_add),
+	(bonobo_property_bag_set_value, bonobo_property_bag_get_value),
+	(bonobo_property_bag_get_type, bonobo_property_bag_get_default): were hacked.
+	
+
+	* bonobo/bonobo-property.c: Pruned down the the bare esentials.
+
+	* bonobo/bonobo-arg.[ch]: Created.
+
+	* bonobo/bonobo-property-bag-client.c (MAKE_BONOBO_PROPERTY_BAG_CLIENT_SET_VALUE),
+	New macro to generate the umpteen accessor functions; kill all the old copy &
+	paste code. (MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR): ditto.
+	(MAKE_BONOBO_PROPERTY_BAG_CLIENT_GET_FIELD): used by client_pair; code size
+	optimization.
+
+	* samples/controls/sample-control-container.c (populate_property_list): 
+	prune handled types.
+
+	* bonobo/bonobo-property-types.[ch]: Kill, replaced by some macros.
+
+	* samples/controls/bonobo-calculator-control.c (set_prop, get_prop),
+	(bonobo_calculator_factory): update to new property code.
+
+	* samples/controls/bonobo-clock-control.c (set_prop, get_prop),
+	(bonobo_clock_factory): update to new property code.
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_setv):
+	Expand to pass any's, contract to new typeset.
+	(bonobo_property_bag_client_getv): ditto + fix leak with strings.
+
 2000-03-30  Matt Loper  <matt@helixcode.com>
 
 	* tools/bonobrowser/name-browser.c (ProcessBinding): Before

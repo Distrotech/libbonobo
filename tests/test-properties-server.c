@@ -9,37 +9,150 @@ CORBA_ORB	   orb;
 BonoboPropertyBag  *pb;
 CORBA_Environment  ev;
 
-static char *
-simple_prop_to_string (char *type, gpointer v)
+enum {
+	PROP_BOOLEAN_TEST,
+	PROP_INTEGER_TEST,
+	PROP_LONG_TEST,
+	PROP_FLOAT_TEST,
+	PROP_DOUBLE_TEST,
+	PROP_STRING_TEST
+} PropIdx;
+
+typedef struct {
+	gint      i;
+	glong     l;
+	gboolean  b;
+	gfloat    f;
+	gdouble   d;
+	char     *s;
+} PropData;
+
+static void
+set_prop (BonoboPropertyBag *bag,
+	  const BonoboArg   *arg,
+	  guint              arg_id,
+	  gpointer           user_data)
 {
-	static char s[1024];
+	PropData *pd = user_data;
 
-	if (v == NULL) {
-		g_snprintf (s, sizeof (s), "NULL");
-	} else if (! strcmp (type, "boolean")) {
-		g_snprintf (s, sizeof (s), "%s", (*(gboolean *) v) ?
-			"True" : "False");
-	} else if (! strcmp (type, "short")) {
-		g_snprintf (s, sizeof (s), "%d", *(gshort *) v);
-	} else if (! strcmp (type, "ushort")) {
-		g_snprintf (s, sizeof (s), "%d", *(gushort *) v);
-	} else if (! strcmp (type, "long")) {
-		g_snprintf (s, sizeof (s), "%ld", *(glong *) v);
-	} else if (! strcmp (type, "ulong")) {
-		g_snprintf (s, sizeof (s), "%ld", *(gulong *) v);
-	} else if (! strcmp (type, "string")) {
-		g_snprintf (s, sizeof (s), "%s", (char *) v);
-	} else if (! strcmp (type, "float")) {
-		g_snprintf (s, sizeof (s), "%f", *(gfloat *) v);
-	} else if (! strcmp (type, "double")) {
-		g_snprintf (s, sizeof (s), "%f", *(gdouble *) v);
-	} else {
-		g_error ("Unhandled type: %s\n", type);
-	}
+	switch (arg_id) {
+	case PROP_BOOLEAN_TEST:
+		pd->b = BONOBO_ARG_GET_BOOLEAN (arg);
+		break;
 
-	return s;
+	case PROP_INTEGER_TEST:
+		pd->i = BONOBO_ARG_GET_INT (arg);
+		break;
+
+	case PROP_LONG_TEST:
+		pd->l = BONOBO_ARG_GET_LONG (arg);
+		break;
+
+	case PROP_FLOAT_TEST:
+		pd->f = BONOBO_ARG_GET_FLOAT (arg);
+		break;
+
+	case PROP_DOUBLE_TEST:
+		pd->d = BONOBO_ARG_GET_DOUBLE (arg);
+		break;
+
+	case PROP_STRING_TEST:
+		pd->s = BONOBO_ARG_GET_STRING (arg);
+		break;
+
+	default:
+		g_warning ("Unhandled arg. id %d", arg_id);
+	};
 }
 
+static void
+get_prop (BonoboPropertyBag *bag,
+	  BonoboArg         *arg,
+	  guint              arg_id,
+	  gpointer           user_data)
+{
+	PropData *pd = user_data;
+
+	switch (arg_id) {
+	case PROP_BOOLEAN_TEST:
+		BONOBO_ARG_SET_BOOLEAN (arg, pd->b);
+		break;
+
+	case PROP_INTEGER_TEST:
+		BONOBO_ARG_SET_INT (arg, pd->i);
+		break;
+
+	case PROP_LONG_TEST:
+		BONOBO_ARG_SET_LONG (arg, pd->l);
+		break;
+
+	case PROP_FLOAT_TEST:
+		BONOBO_ARG_SET_FLOAT (arg, pd->f);
+		break;
+
+	case PROP_DOUBLE_TEST:
+		BONOBO_ARG_SET_DOUBLE (arg, pd->d);
+		break;
+
+	case PROP_STRING_TEST:
+		BONOBO_ARG_SET_STRING (arg, pd->s);
+		break;
+
+	default:
+		g_warning ("Unhandled arg. id %d", arg_id);
+	};
+}
+
+static char *
+simple_prop_to_string (BonoboArg *arg)
+{
+	static char s [1024];
+
+	if (!arg) {
+		g_snprintf (s, sizeof (s), "NULL");
+		return g_strdup (s);
+	}
+	
+	g_assert (arg->_type != NULL);
+	
+	switch (arg->_type->kind) {
+
+	case CORBA_tk_boolean:
+		g_snprintf (s, sizeof (s), "boolean: %s",
+			    BONOBO_ARG_GET_BOOLEAN (arg) ? "True" : "False");
+		break;
+
+	case CORBA_tk_long:
+		g_snprintf (s, sizeof (s), "integer: %d",
+			    BONOBO_ARG_GET_INT (arg));
+		break;
+
+	case CORBA_tk_float:
+		g_snprintf (s, sizeof (s), "float: %f",
+			    BONOBO_ARG_GET_FLOAT (arg));
+		break;
+
+	case CORBA_tk_double:
+		g_snprintf (s, sizeof (s), "double: %g",
+			    BONOBO_ARG_GET_DOUBLE (arg));
+		break;
+
+	case CORBA_tk_string:
+	{
+		g_snprintf (s, sizeof (s), "string: '%s'",
+			    BONOBO_ARG_GET_STRING (arg));
+		break;
+	}
+
+	default:
+		g_error ("Unhandled type: %d\n", arg->_type->kind);
+		break;
+	}
+
+	return g_strdup (s);
+}
+
+/*
 static void
 value_changed_cb (BonoboPropertyBag *pb, char *name, char *type,
 		  gpointer old_value, gpointer new_value,
@@ -47,70 +160,65 @@ value_changed_cb (BonoboPropertyBag *pb, char *name, char *type,
 {
 	char *s1, *s2;
 
-	s1 = g_strdup (simple_prop_to_string (type, old_value));
-	s2 = g_strdup (simple_prop_to_string (type, new_value));
+	s1 = simple_prop_to_string (old_value);
+	s2 = simple_prop_to_string (new_value);
 	g_print ("Prop %s [%s]: value changed from %s to %s\n",
 		 name, type, s1, s2);
 	g_free (s1);
 	g_free (s2);
-
 }
+*/
 
 static void
 create_bag (void)
 {
-	char		  *str;
-	char		  *dstr;
-	gshort		  *s;
-	gshort		  *ds;
-	gushort		  *u;
-	gushort		  *du;
-	glong		  *l;
-	glong		  *dl;
-	gboolean	  *b;
-	gboolean	  *db;
-	gfloat		  *f;
-	gfloat		  *df;
-	char		  *ior;
+	PropData   *pd = g_new0 (PropData, 1);
+	BonoboArg  *def;
+	char       *dstr;
+	CORBA_char *ior;
+
+	pd->i = 987654321;
+	pd->l = 123456789;
+	pd->b = TRUE;
+	pd->f = 2.71828182845;
+	pd->d = 3.14159265358;
+	pd->s = "Hello world";
 
 	/* Create the property bag. */
-	pb = bonobo_property_bag_new ();
+	pb = bonobo_property_bag_new (get_prop, set_prop, pd);
 
+	dstr = "Testing 1 2 3";
 	/* Add properties */
-	*(s = g_new0 (gshort, 1)) = 5;
-	*(ds = g_new0 (gshort, 1)) = 532;
-	bonobo_property_bag_add (pb, "short-test", "short", s, ds, NULL, 0);
+	bonobo_property_bag_add (pb, "int-test", PROP_INTEGER_TEST,
+				 BONOBO_ARG_INT, NULL, dstr, 0);
 
-	str = g_strdup ("Testing 1 2 3");
-	dstr = g_strdup ("Default string");
-	bonobo_property_bag_add (pb, "string-test", "string", str, dstr, NULL, 0);
-	
-	*(l = g_new0 (glong, 1)) = 43243;
-	*(dl = g_new0 (glong, 1)) = 26;
-	bonobo_property_bag_add (pb, "long-test", "long", l, dl, NULL, 0);
+	def = bonobo_arg_new (BONOBO_ARG_STRING);
+	BONOBO_ARG_SET_STRING (def, "a default string");
 
-	*(b = g_new0 (gboolean, 1)) = TRUE;
-	*(db = g_new0 (gboolean, 1)) = FALSE;
-	bonobo_property_bag_add (pb, "boolean-test", "boolean", b, db, NULL, 0);
+	bonobo_property_bag_add (pb, "string-test", PROP_STRING_TEST,
+				 BONOBO_ARG_STRING, def, dstr, 0);
 
-	*(f = g_new0 (gfloat, 1)) = 3.14159265358979323;
-	*(df = g_new0 (gfloat, 1)) = 2.718281828;
-	bonobo_property_bag_add (pb, "float-test", "float", f, df, NULL, 0);
+	bonobo_property_bag_add (pb, "long-test", PROP_LONG_TEST,
+				 BONOBO_ARG_LONG, NULL, dstr, 0);
 
-	*(u = g_new0 (gushort, 1)) = 234;
-	*(du = g_new0 (gushort, 1)) = 0;
-	bonobo_property_bag_add (pb, "ushort-test", "ushort", u, du, NULL, 0);
+	bonobo_property_bag_add (pb, "boolean-test", PROP_BOOLEAN_TEST,
+				 BONOBO_ARG_BOOLEAN, NULL, dstr, 0);
 
-	/* Connect to the signal */
-	gtk_signal_connect (GTK_OBJECT (pb), "value_changed",
-			    value_changed_cb, NULL);
+	def = bonobo_arg_new (BONOBO_ARG_FLOAT);
+	BONOBO_ARG_SET_FLOAT (def, 0.13579);
+	bonobo_property_bag_add (pb, "float-test", PROP_FLOAT_TEST,
+				 BONOBO_ARG_FLOAT, def, dstr, 0);
+
+	bonobo_property_bag_add (pb, "double-test", PROP_DOUBLE_TEST,
+				 BONOBO_ARG_DOUBLE, NULL, dstr, 0);
 
 	/* Print out the IOR for this object. */
 	ior = CORBA_ORB_object_to_string (
 		orb, bonobo_object_corba_objref (BONOBO_OBJECT (pb)), &ev);
 
-	g_print ("%s\n", ior);
-	fflush (stdout);
+	/* So we can tee the output to compare */
+	fprintf (stderr, "%s\n", ior);
+	fflush (stderr);
 
 	CORBA_free (ior);
 }
@@ -126,17 +234,22 @@ print_props (void)
 
 	for (l = props; l != NULL; l = l->next) {
 		BonoboProperty *prop = l->data;
-		char *s1, *s2;
+		BonoboArg      *arg;
+		char           *s1, *s2;
 
-		s1 = g_strdup (simple_prop_to_string (prop->type, prop->value));
-		s2 = g_strdup (simple_prop_to_string (prop->type, prop->default_value));
+		arg = bonobo_property_bag_get_value (pb, prop->name);
+		s1  = simple_prop_to_string (arg);
+		bonobo_arg_release (arg);
 
-		g_print ("Prop %s [%s] %s %s %s %s %s %s\n",
-			 prop->name, prop->type,
+		s2  = simple_prop_to_string (prop->default_value);
+
+		g_print ("Prop %12s [%2d] %s %s %s %s %s %s %s\n",
+			 prop->name, prop->type->kind,
 			 s1, s2,
 			 prop->docstring,
 			 prop->flags & BONOBO_PROPERTY_UNSTORED        ? "Unstored"         : "Stored",
-			 prop->flags & BONOBO_PROPERTY_READ_ONLY       ? "ReadOnly"         : "ReadWrite",
+			 prop->flags & BONOBO_PROPERTY_READ_ONLY       ? "ReadOnly"         : "Readable",
+			 prop->flags & BONOBO_PROPERTY_WRITE_ONLY      ? "WriteOnly"        : "Writeable",
 			 prop->flags & BONOBO_PROPERTY_USE_DEFAULT_OPT ? "DefaultOptimized" : "NotDefaultOptimized");
 
 		g_free (s1);

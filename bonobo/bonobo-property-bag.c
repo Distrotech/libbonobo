@@ -1,8 +1,11 @@
 /*
- * Author:
- *   Nat Friedman (nat@nat.org)
+ * Bonobo property bag object implementation.
  *
- * Copyright 1999, Helix Code, Inc.
+ * Authors:
+ *   Nat Friedman  (nat@helixcode.com)
+ *   Michael Meeks (michael@helixcode.com)
+ *
+ * Copyright 1999, 2000 Helix Code, Inc.
  */
 #include <config.h>
 #include <bonobo/bonobo-main.h>
@@ -10,16 +13,6 @@
 #include <bonobo/bonobo-property.h>
 #include <bonobo/bonobo-property-types.h>
 #include <bonobo/bonobo-persist-stream.h>
-
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
-
-enum {
-	VALUE_CHANGED,
-	LAST_SIGNAL
-};
-
-static guint bonobo_property_bag_signals [LAST_SIGNAL];
 
 POA_Bonobo_PropertyBag__vepv bonobo_property_bag_vepv;
 
@@ -29,22 +22,13 @@ POA_Bonobo_PropertyBag__vepv bonobo_property_bag_vepv;
  */
 struct _BonoboPropertyBagPrivate {
 	PortableServer_POA	       poa;
+
 	GHashTable		      *props;
-	GHashTable		      *types;
 
-	BonoboPropertyBagPersisterFn   persister;
-	BonoboPropertyBagDepersisterFn depersister;
-	gpointer		       persister_closure;
+	BonoboPropertySetFn            set_prop;
+	BonoboPropertyGetFn            get_prop;
+	gpointer                       user_data;
 };
-
-typedef struct {
-	BonoboPropertyBagValueMarshalerFn   marshaler;
-	BonoboPropertyBagValueDemarshalerFn demarshaler;
-	BonoboPropertyBagValueReleaserFn    releaser;
-	BonoboPropertyBagValueComparerFn    comparer;
-	gpointer                            user_data;
-} BonoboPropertyType;
-
 
 
 /*
@@ -217,7 +201,7 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 	 * for the specified object reference.
 	 *
 	 * This is just on-demand object creation, mired in a bunch of
-	 * fucking CORBA jargon.
+	 * CORBA jargon.
 	 *
 	 * The take home message: Each Bonobo Property CORBA object is
 	 * not created until someone actually invokes one of its
@@ -519,86 +503,18 @@ impl_Bonobo_PropertyBag_get_property_names (PortableServer_Servant servant,
 
 
 /*
- * Property streaming hooks.
- */
-void
-bonobo_property_bag_set_persister (BonoboPropertyBag              *pb,
-				   BonoboPropertyBagPersisterFn    persister,
-				   BonoboPropertyBagDepersisterFn  depersister,
-				   gpointer			   user_data)
-{
-	g_return_if_fail (pb != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
-
-	pb->priv->persister         = persister;
-	pb->priv->depersister       = depersister;
-	pb->priv->persister_closure = user_data;
-}
-
-static int
-bonobo_property_bag_persist_save (BonoboPersistStream *ps,
-				  const Bonobo_Stream stream,
-				  void *closure)
-{
-	BonoboPropertyBag *pb = closure;
-
-	if (pb->priv->persister != NULL) {
-		if (! (pb->priv->persister) (pb, stream,
-					     pb->priv->persister_closure))
-			return FALSE;
-		else
-			return TRUE;
-	}
-
-	return TRUE;
-}
-
-static int
-bonobo_property_bag_persist_load (BonoboPersistStream *ps,
-				  const Bonobo_Stream stream,
-				  void *closure)
-{
-	BonoboPropertyBag *pb = closure;
-
-	if (pb->priv->depersister != NULL) {
-		if (! (pb->priv->depersister) (pb, stream,
-					       pb->priv->persister_closure))
-			return FALSE;
-		else
-			return TRUE;
-	}
-
-	return TRUE;
-}
-
-
-
-/*
  * BonoboPropertyBag construction/deconstruction functions. 
  */
 static BonoboPropertyBag *
 bonobo_property_bag_construct (BonoboPropertyBag *pb,
 			       CORBA_Object corba_pb)
 {
-	BonoboPersistStream *pstream;
-
 	bonobo_object_construct (BONOBO_OBJECT (pb), corba_pb);
 
 	if (! bonobo_property_bag_create_poa (pb)) {
 		g_free (pb);
 		return NULL;
 	}
-
-	/*
-	 * Create the stream which we use to persist/depersist properties.
-	 */
-	pstream = bonobo_persist_stream_new (bonobo_property_bag_persist_load,
-					    bonobo_property_bag_persist_save,
-					    pb);
-
-	bonobo_object_add_interface (BONOBO_OBJECT (pb),
-				    BONOBO_OBJECT (pstream));
-
 
 	return pb;
 }
@@ -632,13 +548,18 @@ bonobo_property_bag_create_corba_object (BonoboObject *object)
  * Returns: A new #BonoboPropertyBag object.
  */
 BonoboPropertyBag *
-bonobo_property_bag_new (void)
+bonobo_property_bag_new (BonoboPropertyGetFn get_prop,
+			 BonoboPropertySetFn set_prop,
+			 gpointer            user_data)
 {
 	BonoboPropertyBag *pb;
 	CORBA_Object      corba_pb;
 
+	pb = gtk_type_new (BONOBO_PROPERTY_BAG_TYPE);
 
-	pb = gtk_type_new (bonobo_property_bag_get_type ());
+	pb->priv->set_prop  = set_prop;
+	pb->priv->get_prop  = get_prop;
+	pb->priv->user_data = user_data;
 
 	corba_pb = bonobo_property_bag_create_corba_object (BONOBO_OBJECT (pb));
 	if (corba_pb == CORBA_OBJECT_NIL) {
@@ -649,41 +570,25 @@ bonobo_property_bag_new (void)
 	return bonobo_property_bag_construct (pb, corba_pb);
 }
 
-static gboolean
-bonobo_property_bag_foreach_remove_type (gpointer key, gpointer value,
-					 gpointer user_data)
+static void
+bonobo_property_destroy (BonoboProperty *prop)
 {
-	BonoboPropertyType *type = value;
-	char              *type_name = key;
+	g_free (prop->name);
+	prop->idx = -1;
+	/*
+	 * If you made up an exotic type code you get to free it.
+	 */
+	bonobo_arg_release (prop->default_value);
+	g_free (prop->docstring);
 
-	g_free (type);
-	g_free (type_name);
-
-	return TRUE;
+	g_free (prop);
 }
 
 static gboolean
 bonobo_property_bag_foreach_remove_prop (gpointer key, gpointer value,
 					 gpointer user_data)
 {
-	BonoboPropertyBag  *pb        = user_data;
-	BonoboProperty     *prop      = value;
-	BonoboPropertyType *type;
-	char              *prop_name = key;
-
-	type = g_hash_table_lookup (pb->priv->types, prop->type);
-	g_return_val_if_fail (type != NULL, TRUE);
-
-	if (type->releaser){
-		(type->releaser) (prop->type, prop->value, type->user_data);
-		(type->releaser) (prop->type, prop->default_value, type->user_data);
-	}
-	
-	g_free (prop_name);
-	g_free (prop->docstring);
-	g_free (prop->type);
-
-	g_free (prop);
+	bonobo_property_destroy (value);
 
 	return TRUE;
 }
@@ -694,13 +599,12 @@ bonobo_property_bag_destroy (GtkObject *object)
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (object);
 	CORBA_Environment ev;
 
-
 	/* Destroy the POA. */
 	CORBA_exception_init (&ev);
 	PortableServer_POA_destroy (pb->priv->poa, TRUE, TRUE, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION) {
+	if (ev._major != CORBA_NO_EXCEPTION)
 		g_warning ("bonobo_property_bag_destroy: Could not destroy POA.\n");
-	}
+
 	CORBA_exception_free (&ev);
 
 	/* Destroy all properties. */
@@ -708,12 +612,6 @@ bonobo_property_bag_destroy (GtkObject *object)
 				     bonobo_property_bag_foreach_remove_prop,
 				     NULL);
 	g_hash_table_destroy (pb->priv->props);
-
-	/* Destroy all the types. */
-	g_hash_table_foreach_remove (pb->priv->types,
-				     bonobo_property_bag_foreach_remove_type,
-				     NULL);
-	g_hash_table_destroy (pb->priv->types);
 
 	g_free (pb->priv);
 	bonobo_object_destroy (BONOBO_OBJECT (pb));
@@ -742,201 +640,162 @@ bonobo_property_bag_get_epv (void)
  * BonoboPropertyBag property manipulation API.
  */
 
-static gboolean
-bonobo_property_bag_set_prop_type (BonoboPropertyBag *pb, BonoboProperty *prop,
-				   const char *type)
-{
-	if (g_hash_table_lookup (pb->priv->types, type) == NULL) {
-		g_warning ("bonobo_property_bag_set_prop_type: Type \"%s\" not found\n", type);
-		return FALSE;
-	}
-
-	prop->type = g_strdup (type);
-
-	return TRUE;
-}
-
-/**
- * bonobo_property_bag_add:
- */
 void
-bonobo_property_bag_add (BonoboPropertyBag *pb, const char *name, const char *type, gpointer value,
-			 gpointer default_value, const char *docstring, BonoboPropertyFlags flags)
+bonobo_property_bag_add_full (BonoboPropertyBag  *pb,
+			      const char         *name,
+			      int                 idx,
+			      BonoboArgType       type,
+			      BonoboArg          *default_value,
+			      const char         *docstring,
+			      BonoboPropertyFlags flags,
+			      BonoboPropertyGetFn get_prop,
+			      BonoboPropertySetFn set_prop,
+			      gpointer            user_data)
 {
 	BonoboProperty *prop;
 
 	g_return_if_fail (pb != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
 	g_return_if_fail (name != NULL);
 	g_return_if_fail (type != NULL);
-
-	/*
-	 * Check to see if there's already a property with this name.
-	 */
+	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
 	g_return_if_fail (g_hash_table_lookup (pb->priv->props, name) == NULL);
-
-	/*
-	 * Create the new property.
-	 */
-	prop = g_new0 (BonoboProperty, 1);
-
-	/* Set the property's type. */
-	if (! bonobo_property_bag_set_prop_type (pb, prop, type)) {
-		g_free (prop);
+			    
+	if ((BONOBO_PROPERTY_READABLE  (prop->flags) && !get_prop) ||
+	    (BONOBO_PROPERTY_WRITEABLE (prop->flags) && !set_prop)) {
+		g_warning ("Serious property error, missing get/set fn.");
 		return;
 	}
 
-	/* Set the other fields. */
-	prop->name = g_strdup (name);
-	prop->value = value;
-	prop->default_value = default_value;
-	prop->flags = flags;
-	
-	if (docstring != NULL)
-		prop->docstring = g_strdup (docstring);
+	prop = g_new0 (BonoboProperty, 1);
 
-	/* Stash the property in the property table. */
+	prop->name          = g_strdup (name);
+	prop->idx           = idx;
+	prop->type          = type;
+	prop->default_value = default_value;
+	prop->docstring     = g_strdup (docstring);
+	prop->flags         = flags;
+
+	prop->get_prop      = get_prop;
+	prop->set_prop      = set_prop;
+	prop->user_data     = user_data;
+
 	g_hash_table_insert (pb->priv->props, prop->name, prop);
 }
 
-/**
- * bonobo_property_bag_set_value:
- */
+void
+bonobo_property_bag_add (BonoboPropertyBag  *pb,
+			 const char         *name,
+			 int                 idx,
+			 BonoboArgType       type,
+			 BonoboArg          *default_value,
+			 const char         *docstring,
+			 BonoboPropertyFlags flags)
+{
+	g_return_if_fail (pb != NULL);
+	g_return_if_fail (pb->priv != NULL);
+
+	return bonobo_property_bag_add_full (pb, name, idx, type,
+					     default_value, docstring, flags,
+					     pb->priv->get_prop,
+					     pb->priv->set_prop,
+					     pb->priv->user_data);
+}
+
 void
 bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
-			       gpointer value)
-{
-	BonoboPropertyType *ptype;
-	BonoboProperty     *prop;
-	gpointer           old_value;
-
-	g_return_if_fail (pb != NULL);
-	g_return_if_fail (name != NULL);
-	g_return_if_fail (g_hash_table_lookup (pb->priv->props, name) != NULL);
-
-	prop = g_hash_table_lookup (pb->priv->props, name);
-
-	/* Set the new value. */
-	old_value = prop->value;
-	prop->value = value;
-
-	/* Notify the user. */
-	gtk_signal_emit (GTK_OBJECT (pb), bonobo_property_bag_signals [VALUE_CHANGED],
-			 prop->name, prop->type, old_value, prop->value);
-
-	/* Release the old value. */
-	ptype = g_hash_table_lookup (pb->priv->types, prop->type);
-	g_return_if_fail (ptype != NULL);
-
-	if (ptype->releaser)
-		(ptype->releaser) (prop->type, old_value, ptype->user_data);
-}
-
-/**
- * bonobo_property_bag_set_default:
- */
-void
-bonobo_property_bag_set_default (BonoboPropertyBag *pb, const char *name,
-				 gpointer default_value)
+			       const BonoboArg *value)
 {
 	BonoboProperty *prop;
 
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (name != NULL);
-	g_return_if_fail (g_hash_table_lookup (pb->priv->props, name) != NULL);
+	g_return_if_fail (pb->priv != NULL);
+	g_return_if_fail (pb->priv->set_prop != NULL);
 
 	prop = g_hash_table_lookup (pb->priv->props, name);
 
-	prop->default_value = default_value;
-}
+	g_return_if_fail (prop != NULL);
+	g_return_if_fail (prop->type != value->_type);
 
-/**
- * bonobo_property_bag_set_docstring:
- */
-void
-bonobo_property_bag_set_docstring (BonoboPropertyBag *pb, const char *name,
-				   char *docstring)
-{
-	BonoboProperty *prop;
+	/* FIXME: Emit some sort of CORBA / Bonobo 'changed' signal */
 
-	g_return_if_fail (pb != NULL);
-	g_return_if_fail (name != NULL);
-	g_return_if_fail (docstring != NULL);
-	g_return_if_fail (g_hash_table_lookup (pb->priv->props, name) != NULL);
-
-	prop = g_hash_table_lookup (pb->priv->props, name);
-
-	g_free (prop->docstring);
-	prop->docstring = g_strdup (docstring);
-}
-
-/**
- * bonobo_property_bag_set_flags:
- */
-void
-bonobo_property_bag_set_flags (BonoboPropertyBag *pb, const char *name,
-			       BonoboPropertyFlags flags)
-{
-	BonoboProperty *prop;
-
-	g_return_if_fail (pb != NULL);
-	g_return_if_fail (name != NULL);
-	g_return_if_fail (g_hash_table_lookup (pb->priv->props, name) != NULL);
-
-	prop = g_hash_table_lookup (pb->priv->props, name);
-
-	prop->flags = flags;
-}
-
-/**
- * bonobo_property_bag_get_prop_type:
- */
-const char *
-bonobo_property_bag_get_prop_type (BonoboPropertyBag *pb, const char *name)
-{
-	BonoboProperty *prop;
-
-	g_return_val_if_fail (pb != NULL, NULL);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), NULL);
-	g_return_val_if_fail (name != NULL, NULL);
-	g_return_val_if_fail (g_hash_table_lookup (pb->priv->props, name) != NULL, NULL);
-
-	prop = g_hash_table_lookup (pb->priv->props, name);
-	return prop->type;
+	pb->priv->set_prop (pb, value, prop->idx, pb->priv->user_data);
 }
 
 /**
  * bonobo_property_bag_get_value:
  */
-gconstpointer
+BonoboArg *
 bonobo_property_bag_get_value (BonoboPropertyBag *pb, const char *name)
+{
+	BonoboProperty *prop;
+	BonoboArg      *arg;
+
+	g_return_val_if_fail (pb != NULL, NULL);
+	g_return_val_if_fail (name != NULL, NULL);
+	g_return_val_if_fail (pb->priv != NULL, NULL);
+
+	prop = g_hash_table_lookup (pb->priv->props, name);
+	g_return_val_if_fail (prop != NULL, NULL);
+	g_return_val_if_fail (prop->get_prop != NULL, NULL);
+
+	arg = bonobo_arg_new (prop->type);
+
+	prop->get_prop (pb, arg, prop->idx, pb->priv->user_data);
+
+	return arg;
+}
+
+BonoboArgType
+bonobo_property_bag_get_type (BonoboPropertyBag *pb, const char *name)
 {
 	BonoboProperty *prop;
 
 	g_return_val_if_fail (pb != NULL, NULL);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), NULL);
-	g_return_val_if_fail (name != NULL, NULL);
-	g_return_val_if_fail (g_hash_table_lookup (pb->priv->props, name) != NULL, NULL);
+	g_return_val_if_fail (pb->priv != NULL, NULL);
 
 	prop = g_hash_table_lookup (pb->priv->props, name);
-	return prop->value;
+	g_return_val_if_fail (prop != NULL, NULL);
+
+	return prop->type;
 }
 
 /**
  * bonobo_property_bag_get_default:
  */
-gconstpointer
+BonoboArg *
 bonobo_property_bag_get_default (BonoboPropertyBag *pb, const char *name)
 {
 	BonoboProperty *prop;
 
 	g_return_val_if_fail (pb != NULL, NULL);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), NULL);
 	g_return_val_if_fail (name != NULL, NULL);
-	g_return_val_if_fail (g_hash_table_lookup (pb->priv->props, name) != NULL, NULL);
+	g_return_val_if_fail (pb->priv != NULL, NULL);
+	g_return_val_if_fail (pb->priv->set_prop != NULL, NULL);
 
 	prop = g_hash_table_lookup (pb->priv->props, name);
-	return prop->default_value;
+	g_return_val_if_fail (prop != NULL, NULL);
+
+	if (prop->default_value)
+		return bonobo_arg_copy (prop->default_value);
+	else
+		return bonobo_arg_new_default (prop->type);
+}
+
+/**
+ * bonobo_property_bag_has_property:
+ */
+gboolean
+bonobo_property_bag_has_property (BonoboPropertyBag *pb, const char *name)
+{
+	g_return_val_if_fail (pb != NULL, FALSE);
+	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), FALSE);
+	g_return_val_if_fail (name != NULL, FALSE);
+
+	if (g_hash_table_lookup (pb->priv->props, name) == NULL)
+		return FALSE;
+
+	return TRUE;
 }
 
 /**
@@ -973,161 +832,10 @@ bonobo_property_bag_get_flags (BonoboPropertyBag *pb, const char *name)
 	return prop->flags;
 }
 
-/**
- * bonobo_property_bag_has_property:
- */
-gboolean
-bonobo_property_bag_has_property (BonoboPropertyBag *pb, const char *name)
-{
-	g_return_val_if_fail (pb != NULL, FALSE);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), FALSE);
-	g_return_val_if_fail (name != NULL, FALSE);
-
-	if (g_hash_table_lookup (pb->priv->props, name) == NULL)
-		return FALSE;
-
-	return TRUE;
-}
-
-/*
- * Property types.
- */
-
-/**
- * bonobo_property_bag_create_type:
- */
-void
-bonobo_property_bag_create_type (BonoboPropertyBag *pb, char *type_name,
-				 BonoboPropertyBagValueMarshalerFn   marshaler,
-				 BonoboPropertyBagValueDemarshalerFn demarshaler,
-				 BonoboPropertyBagValueComparerFn    comparer,
-				 BonoboPropertyBagValueReleaserFn    releaser,
-				 gpointer                            user_data)
-{
-	BonoboPropertyType *ptype;
-
-	g_return_if_fail (pb != NULL);
-	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
-	g_return_if_fail (type_name != NULL);
-	g_return_if_fail (marshaler != NULL);
-	g_return_if_fail (demarshaler != NULL);
-
-	/* Make sure this type doesn't already exist. */
-	g_return_if_fail (g_hash_table_lookup (pb->priv->types, type_name) == NULL);
-
-	ptype = g_new0 (BonoboPropertyType, 1);
-	ptype->marshaler   = marshaler;
-	ptype->demarshaler = demarshaler;
-	ptype->releaser    = releaser;
-	ptype->comparer	   = comparer;
-	ptype->user_data   = user_data;
-
-	g_hash_table_insert (pb->priv->types, type_name, ptype);
-}
-
-/**
- * bonobo_property_bag_get_prop_any:
- */
-CORBA_any *
-bonobo_property_bag_value_to_any (BonoboPropertyBag *pb, const char *type,
-				  gconstpointer value)
-{
-	BonoboPropertyBagValueMarshalerFn  value_marshaler;
-	BonoboPropertyType                *ptype;
-	CORBA_any                        *any;
-
-	g_return_val_if_fail (pb != NULL, NULL);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), NULL);
-	g_return_val_if_fail (type != NULL, NULL);
-
-	ptype = g_hash_table_lookup (pb->priv->types, type);
-	g_return_val_if_fail (ptype != NULL, NULL);
-
-	value_marshaler = ptype->marshaler;
-	g_return_val_if_fail (value_marshaler != NULL, NULL);
-
-	any = (value_marshaler) (type, value, ptype->user_data);
-
-	return any;
-}
-
-/**
- * bonobo_property_bag_any_to_value:
- */
-gpointer
-bonobo_property_bag_any_to_value (BonoboPropertyBag *pb, const char *type,
-				  const CORBA_any *any)
-{
-	BonoboPropertyBagValueDemarshalerFn  value_demarshaler;
-	BonoboPropertyType                  *ptype;
-	gpointer                            value;
-
-	g_return_val_if_fail (pb != NULL, NULL);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), NULL);
-	g_return_val_if_fail (type != NULL, NULL);
-
-	ptype = g_hash_table_lookup (pb->priv->types, type);
-	g_return_val_if_fail (ptype != NULL, NULL);
-
-	value_demarshaler = ptype->demarshaler;
-	g_return_val_if_fail (value_demarshaler != NULL, NULL);
-
-	value = (value_demarshaler) (type, any, ptype->user_data);
-
-	return value;
-}
-
-/**
- * bonobo_property_bag_compare_values:
- */
-gboolean
-bonobo_property_bag_compare_values (BonoboPropertyBag *pb, const char *type,
-				    gpointer value1, gpointer value2)
-{
-	BonoboPropertyBagValueComparerFn  value_comparer;
-	BonoboPropertyType		*ptype;
-
-	g_return_val_if_fail (pb != NULL, FALSE);
-	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), FALSE);
-	g_return_val_if_fail (type != NULL, FALSE);
-
-	ptype = g_hash_table_lookup (pb->priv->types, type);
-	g_return_val_if_fail (ptype != NULL, FALSE);
-
-	value_comparer = ptype->comparer;
-	g_return_val_if_fail (value_comparer != NULL, FALSE);
-
-	return (value_comparer) (type, value1, value2, ptype->user_data);
-}
-
 
 /*
  * Class/object initialization functions.
  */
-
-typedef void (*GtkSignal_NONE__POINTER_POINTER_POINTER_POINTER) (GtkObject * object,
-								 gpointer arg1,
-								 gpointer arg2,
-								 gpointer arg3,
-								 gpointer arg4,
-								 gpointer user_data);
-
-static void
-gtk_marshal_NONE__POINTER_POINTER_POINTER_POINTER (GtkObject *object,
-						   GtkSignalFunc func,
-						   gpointer func_data,
-						   GtkArg *args)
-{
-	GtkSignal_NONE__POINTER_POINTER_POINTER_POINTER rfunc;
-	rfunc = (GtkSignal_NONE__POINTER_POINTER_POINTER_POINTER) func;
-
-	(*rfunc) (object,
-		  GTK_VALUE_POINTER (args[0]),
-		  GTK_VALUE_POINTER (args[1]),
-		  GTK_VALUE_POINTER (args[2]),
-		  GTK_VALUE_POINTER (args[3]),
-		  func_data);
-}
 
 static void
 bonobo_property_bag_init_corba_class (void)
@@ -1143,18 +851,6 @@ bonobo_property_bag_class_init (BonoboPropertyBagClass *class)
 
 	object_class->destroy = bonobo_property_bag_destroy;
 
-	bonobo_property_bag_signals [VALUE_CHANGED] =
-		gtk_signal_new ("value_changed",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (BonoboPropertyBagClass, value_changed),
-				gtk_marshal_NONE__POINTER_POINTER_POINTER_POINTER,
-				GTK_TYPE_NONE, 4,
-				GTK_TYPE_POINTER, GTK_TYPE_POINTER,
-				GTK_TYPE_POINTER, GTK_TYPE_POINTER);
-
-	gtk_object_class_add_signals (object_class, bonobo_property_bag_signals, LAST_SIGNAL);
-
 	bonobo_property_bag_init_corba_class ();
 }
 
@@ -1163,59 +859,7 @@ bonobo_property_bag_init (BonoboPropertyBag *pb)
 {
 	pb->priv = g_new0 (BonoboPropertyBagPrivate, 1);
 
-	/*
-	 * This hash table will hold BonoboProperty structs.
-	 */
 	pb->priv->props = g_hash_table_new (g_str_hash, g_str_equal);
-
-	/*
-	 * This hash table will map type names to type marshaler
-	 * functions.  These functions convert a BonoboProperty
-	 * 'value' pointer to a CORBA_any.
-	 */
-	pb->priv->types = g_hash_table_new (g_str_hash, g_str_equal);
-
-	/* Prime the table with some default types. */
-	bonobo_property_bag_create_type (pb, "boolean",
-					 bonobo_property_marshal_boolean,
-					 bonobo_property_demarshal_boolean,
-					 bonobo_property_compare_boolean,
-					 NULL, NULL);
-	bonobo_property_bag_create_type (pb, "string",
-					 bonobo_property_marshal_string,
-					 bonobo_property_demarshal_string,
-					 bonobo_property_compare_string,
-					 NULL, NULL);
-	bonobo_property_bag_create_type (pb, "short",
-					 bonobo_property_marshal_short,
-					 bonobo_property_demarshal_short,
-					 bonobo_property_compare_short,
-					 NULL, NULL);
-	bonobo_property_bag_create_type (pb, "ushort",
-					 bonobo_property_marshal_ushort,
-					 bonobo_property_demarshal_ushort,
-					 bonobo_property_compare_ushort,
-					 NULL, NULL);
-	bonobo_property_bag_create_type (pb, "long",
-					 bonobo_property_marshal_long,
-					 bonobo_property_demarshal_long,
-					 bonobo_property_compare_long,
-					 NULL, NULL);
-	bonobo_property_bag_create_type (pb, "ulong",
-					 bonobo_property_marshal_ulong,
-					 bonobo_property_demarshal_ulong,
-					 bonobo_property_compare_ulong,
-					 NULL, NULL);
-	bonobo_property_bag_create_type (pb, "float",
-					 bonobo_property_marshal_float,
-					 bonobo_property_demarshal_float,
-					 bonobo_property_compare_float,
-					 NULL, NULL);
-	bonobo_property_bag_create_type (pb, "double",
-					 bonobo_property_marshal_double,
-					 bonobo_property_demarshal_double,
-					 bonobo_property_compare_double,
-					 NULL, NULL);
 }
 
 /**
@@ -1224,7 +868,7 @@ bonobo_property_bag_init (BonoboPropertyBag *pb)
  * Returns: The GtkType corresponding to the BonoboPropertyBag class.
  */
 GtkType
-bonobo_property_bag_get_type (void)
+bonobo_property_bag_get_gtk_type (void)
 {
 	static GtkType type = 0;
 

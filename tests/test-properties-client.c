@@ -56,32 +56,20 @@ simple_print_value (char *name, CORBA_TypeCode tc)
 	switch (tc->kind) {
 	case CORBA_tk_boolean:
 		g_snprintf (s, sizeof (s), "%s",
-		    bonobo_property_bag_client_get_value_boolean (pbc, name) ?
+		    bonobo_property_bag_client_get_value_gboolean (pbc, name) ?
 			"True" : "False");
-		break;
-	case CORBA_tk_short:
-		g_snprintf (s, sizeof (s), "%d",
-		    bonobo_property_bag_client_get_value_short (pbc, name));
-		break;
-	case CORBA_tk_ushort:
-		g_snprintf (s, sizeof (s), "%d",
-		    bonobo_property_bag_client_get_value_ushort (pbc, name));
 		break;
 	case CORBA_tk_long:
 		g_snprintf (s, sizeof (s), "%ld",
-		    bonobo_property_bag_client_get_value_long (pbc, name));
-		break;
-	case CORBA_tk_ulong:
-		g_snprintf (s, sizeof (s), "%ld",
-		    bonobo_property_bag_client_get_value_ulong (pbc, name));
+		    bonobo_property_bag_client_get_value_glong (pbc, name));
 		break;
 	case CORBA_tk_float:
 		g_snprintf (s, sizeof (s), "%f",
-		    bonobo_property_bag_client_get_value_float (pbc, name));
+		    bonobo_property_bag_client_get_value_gfloat (pbc, name));
 		break;
 	case CORBA_tk_double:
 		g_snprintf (s, sizeof (s), "%f",
-		    bonobo_property_bag_client_get_value_double (pbc, name));
+		    bonobo_property_bag_client_get_value_gdouble (pbc, name));
 		break;
 	case CORBA_tk_string:
 		g_snprintf (s, sizeof (s), "%s",
@@ -104,32 +92,20 @@ simple_print_default_value (char *name, CORBA_TypeCode tc)
 	switch (tc->kind) {
 	case CORBA_tk_boolean:
 		g_snprintf (s, sizeof (s), "%s",
-		    bonobo_property_bag_client_get_default_boolean (pbc, name) ?
+		    bonobo_property_bag_client_get_default_gboolean (pbc, name) ?
 			"True" : "False");
-		break;
-	case CORBA_tk_short:
-		g_snprintf (s, sizeof (s), "%d",
-		    bonobo_property_bag_client_get_default_short (pbc, name));
-		break;
-	case CORBA_tk_ushort:
-		g_snprintf (s, sizeof (s), "%d",
-		    bonobo_property_bag_client_get_default_ushort (pbc, name));
 		break;
 	case CORBA_tk_long:
 		g_snprintf (s, sizeof (s), "%ld",
-		    bonobo_property_bag_client_get_default_long (pbc, name));
-		break;
-	case CORBA_tk_ulong:
-		g_snprintf (s, sizeof (s), "%ld",
-		    bonobo_property_bag_client_get_default_ulong (pbc, name));
+		    bonobo_property_bag_client_get_default_glong (pbc, name));
 		break;
 	case CORBA_tk_float:
 		g_snprintf (s, sizeof (s), "%f",
-		    bonobo_property_bag_client_get_default_float (pbc, name));
+		    bonobo_property_bag_client_get_default_gfloat (pbc, name));
 		break;
 	case CORBA_tk_double:
 		g_snprintf (s, sizeof (s), "%f",
-		    bonobo_property_bag_client_get_default_double (pbc, name));
+		    bonobo_property_bag_client_get_default_gdouble (pbc, name));
 		break;
 	case CORBA_tk_string:
 		g_snprintf (s, sizeof (s), "%s",
@@ -191,9 +167,12 @@ create_bag_client (void)
 
 	print_props ();
 
-	bonobo_property_bag_client_set_value_boolean (pbc, "boolean-test", FALSE);
-	bonobo_property_bag_client_set_value_short (pbc, "short-test", (gshort) 3);
-	bonobo_property_bag_client_set_value_string (pbc, "string-test", "life is pain");
+	bonobo_property_bag_client_set_value_gboolean (pbc, "boolean-test", FALSE);
+	bonobo_property_bag_client_set_value_gint     (pbc, "long-test", 3);
+	bonobo_property_bag_client_set_value_gfloat   (pbc, "float-test", 0.00001);
+	bonobo_property_bag_client_set_value_gdouble  (pbc, "double-test", 2.0001);
+	bonobo_property_bag_client_set_value_string   (pbc, "string-test",
+						       "life is a wonderful gift");
 
 	exit (0);
 

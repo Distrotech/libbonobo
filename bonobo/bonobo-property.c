@@ -1,16 +1,15 @@
 /*
- * Welcome to my world.
+ * Bonobo property object implementation.
  *
  * Author:
  *    Nat Friedman (nat@nat.org)
  *
- * Copyright 1999, Helix Code, Inc.
+ * Copyright 1999, 2000 Helix Code, Inc.
  */
 
 #include <config.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-property-bag.h>
-#include <bonobo/bonobo-property.h>
 
 typedef struct {
 	POA_Bonobo_Property		 prop;
@@ -20,7 +19,7 @@ typedef struct {
 
 static CORBA_char *
 impl_Bonobo_Property_get_name (PortableServer_Servant servant,
-			      CORBA_Environment *ev)
+			       CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 
@@ -29,72 +28,48 @@ impl_Bonobo_Property_get_name (PortableServer_Servant servant,
 
 static CORBA_TypeCode
 impl_Bonobo_Property_get_type (PortableServer_Servant servant,
-			      CORBA_Environment *ev)
-{
-	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
-	CORBA_TypeCode tc;
-	const char *type;
-	CORBA_any *any;
-	gconstpointer value;
-
-	value = bonobo_property_bag_get_value (pservant->pb, pservant->property_name);
-	type  = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
-	any = bonobo_property_bag_value_to_any (pservant->pb, type, value);
-
-	tc = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) (any->_type), ev);
-
-	CORBA_free (any);
-
-	return tc;
-}
-
-
-static CORBA_any *
-impl_Bonobo_Property_get_value (PortableServer_Servant servant,
 			       CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
-	const char *type;
-	gconstpointer value;
+	BonoboArgType          type;
 
-	type = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
-	value = bonobo_property_bag_get_value (pservant->pb, pservant->property_name);
+	type = bonobo_property_bag_get_type (pservant->pb, pservant->property_name);
+	/* FIXME: we need to handle obscure cases like non existance of the property */
 
-	return bonobo_property_bag_value_to_any (pservant->pb, type, value);
+	return (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) (type), ev);
+}
+
+static CORBA_any *
+impl_Bonobo_Property_get_value (PortableServer_Servant servant,
+				CORBA_Environment *ev)
+{
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
+
+	return bonobo_property_bag_get_value (pservant->pb, pservant->property_name);
 }
 
 static void
 impl_Bonobo_Property_set_value (PortableServer_Servant servant,
-			       const CORBA_any       *any,
-			       CORBA_Environment     *ev)
+				const CORBA_any       *any,
+				CORBA_Environment     *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
-	gpointer new_value;
-	const char *type;
 
-	type = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
-	new_value = bonobo_property_bag_any_to_value (pservant->pb, type, any);
-
-	bonobo_property_bag_set_value (pservant->pb, pservant->property_name, new_value);
+	bonobo_property_bag_set_value (pservant->pb, pservant->property_name, any);
 }
 
 static CORBA_any *
 impl_Bonobo_Property_get_default (PortableServer_Servant servant,
-				 CORBA_Environment *ev)
+				  CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
-	gconstpointer default_value;
-	const char *type;
 
-	type = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
-	default_value = bonobo_property_bag_get_default (pservant->pb, pservant->property_name);
-
-	return bonobo_property_bag_value_to_any (pservant->pb, type, default_value);
+	return bonobo_property_bag_get_default (pservant->pb, pservant->property_name);
 }
 
 static CORBA_char *
 impl_Bonobo_Property_get_doc_string (PortableServer_Servant servant,
-				    CORBA_Environment *ev)
+				     CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 
@@ -104,7 +79,7 @@ impl_Bonobo_Property_get_doc_string (PortableServer_Servant servant,
 
 static CORBA_boolean
 impl_Bonobo_Property_is_read_only (PortableServer_Servant servant,
-				  CORBA_Environment *ev)
+				   CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 	BonoboPropertyFlags flags;
@@ -125,13 +100,13 @@ bonobo_property_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Property__epv, 1);
 
-	epv->get_name		      = impl_Bonobo_Property_get_name;
-	epv->get_type		      = impl_Bonobo_Property_get_type;
-	epv->get_value		      = impl_Bonobo_Property_get_value;
-	epv->set_value		      = impl_Bonobo_Property_set_value;
-	epv->get_default	      = impl_Bonobo_Property_get_default;
-	epv->get_doc_string	      = impl_Bonobo_Property_get_doc_string;
-	epv->is_read_only	      = impl_Bonobo_Property_is_read_only;
+	epv->get_name       = impl_Bonobo_Property_get_name;
+	epv->get_type       = impl_Bonobo_Property_get_type;
+	epv->get_value      = impl_Bonobo_Property_get_value;
+	epv->set_value      = impl_Bonobo_Property_set_value;
+	epv->get_default    = impl_Bonobo_Property_get_default;
+	epv->get_doc_string = impl_Bonobo_Property_get_doc_string;
+	epv->is_read_only   = impl_Bonobo_Property_is_read_only;
 
 	return epv;
 }
@@ -153,7 +128,7 @@ bonobo_property_get_vepv (void)
 
 PortableServer_Servant
 bonobo_property_servant_new (PortableServer_POA adapter, BonoboPropertyBag *pb,
-			    char *property_name)
+			     char *property_name)
 {
 	BonoboPropertyServant	*servant;
 	CORBA_Environment        ev;
@@ -167,7 +142,6 @@ bonobo_property_servant_new (PortableServer_POA adapter, BonoboPropertyBag *pb,
 	 */
 	if (! bonobo_property_bag_has_property (pb, property_name))
 		return NULL;
-
 
 	CORBA_exception_init (&ev);
 

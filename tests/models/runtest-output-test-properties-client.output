@@ -1,6 +1,6 @@
-string-test [string] Testing 1 2 3 Default string ReadWrite
+float-test [float] 2.718282 0.135790 ReadWrite
+double-test [double] 3.141593 372203301159032830782740174981780439288744435512765301597973768646025100746739828842434739670730546486425577197632168561890592985669003152469407197626938977104755911755110466147887402844632669642129411140815095967618311892500480.000000 ReadWrite
+int-test [long] 987654321 1634231145 ReadWrite
 boolean-test [boolean] True True ReadWrite
-ushort-test [ushort] 234 0 ReadWrite
-long-test [long] 43243 26 ReadWrite
-float-test [float] 3.141593 2.718282 ReadWrite
-short-test [short] 5 532 ReadWrite
+string-test [string] Hello world a default string ReadWrite
+long-test [long] 123456789 134793760 ReadWrite
