@@ -704,7 +704,7 @@ MAKE_SET_SIMPLE (gdouble, double, TC_CORBA_double)
  *
  * Set a boolean value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (gboolean, boolean, TC_CORBA_boolean)
+MAKE_SET_SIMPLE (CORBA_boolean, boolean, TC_CORBA_boolean)
 /**
  * bonobo_pbclient_set_char:
  * @bag: a reference to the PropertyBag
