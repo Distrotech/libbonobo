@@ -98,7 +98,8 @@ moniker_id_from_nickname (const CORBA_char *name)
 	for (i = 0; fast_prefix [i].prefix; i++) {
 		int len = strlen (fast_prefix [i].prefix);
 
-		if (!g_strncasecmp (fast_prefix [i].prefix, name, len)) {
+		if (!g_ascii_strncasecmp (fast_prefix [i].prefix,
+					  name, len)) {
 
 			return fast_prefix [i].oafiid;
 		}

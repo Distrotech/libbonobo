@@ -283,15 +283,15 @@ bonobo_main (void)
 
 	bonobo_main_loop_level++;
   
-	loop = g_main_new (TRUE);
+	loop = g_main_loop_new (NULL, TRUE);
 	bonobo_main_loops = g_slist_prepend (bonobo_main_loops, loop);
 
-	if (g_main_is_running (bonobo_main_loops->data))
-		g_main_run (loop);
+	if (g_main_loop_is_running (bonobo_main_loops->data))
+		g_main_loop_run (loop);
 
 	bonobo_main_loops = g_slist_remove (bonobo_main_loops, loop);
 
-	g_main_destroy (loop);
+	g_main_loop_unref (loop);
 
 	bonobo_main_loop_level--;
 }
@@ -306,5 +306,5 @@ bonobo_main_quit (void)
 {
 	g_return_if_fail (bonobo_main_loops != NULL);
 
-	g_main_quit (bonobo_main_loops->data);
+	g_main_loop_quit (bonobo_main_loops->data);
 }

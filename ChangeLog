@@ -1,3 +1,13 @@
+2002-02-07  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-moniker-util.c
+	(moniker_id_from_nickname): ditto.
+
+	* bonobo/bonobo-main.c (bonobo_main),
+	(bonobo_main_quit): port fully.
+
+	* bonobo/bonobo-moniker.c (impl_equal): ditto.
+
 2002-02-04  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-property-bag.h

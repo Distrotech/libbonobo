@@ -386,7 +386,7 @@ impl_equal (PortableServer_Servant servant,
 	i, name, p, moniker->priv->sensitive?'y':'n');*/
 	
 	if (( moniker->priv->sensitive && !strncmp       (name, p, i)) ||
-	    (!moniker->priv->sensitive && !g_strncasecmp (name, p, i))) {
+	    (!moniker->priv->sensitive && !g_ascii_strncasecmp (name, p, i))) {
 /*		g_warning ("Matching moniker - equal");*/
 		retval = i + offset;
 	} else {
