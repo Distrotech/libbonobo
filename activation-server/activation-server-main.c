@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 
   ml = g_main_new(FALSE);
 
-  orb = oaf_orb_init(&argc, argv);
+  orb = oaf_init(argc, argv);
   root_poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
   {
     char *env_od_source_dir;

@@ -178,7 +178,7 @@ OAF_ObjectDirectory_create(PortableServer_POA poa,
    newservant->active_servers = g_hash_table_new(g_str_hash, g_str_equal);
    newservant->time_list_changed = time(NULL);
 
-#ifdef OAF_DEBUG
+#if defined(OAF_DEBUG) && 0
    od_dump_list(newservant);
 #endif
 

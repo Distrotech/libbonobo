@@ -1,4 +1,9 @@
 /* This is part of the per-app CORBA bootstrapping - we use this to get hold of a running metaserver and such */
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1
+#endif
+#include <string.h>
+
 #include "liboaf-private.h"
 #include <limits.h>
 #include <errno.h>
@@ -503,7 +508,7 @@ oaf_service_get(const OAFRegistrationCategory *regcat)
 
       race_condition = oaf_registration_check(regcat, &myev);
 
-      if(!CORBA_Object_is_nil(race_condition, &myev))
+      if(!CORBA_Object_non_existent(race_condition, &myev))
 	{
 	  CORBA_Object_release(retval, &myev);
 	  retval = race_condition;
@@ -514,7 +519,7 @@ oaf_service_get(const OAFRegistrationCategory *regcat)
 
   oaf_reglocs_unlock(ev);
 
-  if(!CORBA_Object_is_nil(retval, ev))
+  if(!CORBA_Object_non_existent(retval, ev))
     existing_set(regcat, &activatable_servers[i], retval, ev);
 
  out:
