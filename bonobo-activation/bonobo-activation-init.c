@@ -291,6 +291,7 @@ oaf_postinit (gpointer app, gpointer mod_info)
 	is_initialized = TRUE;
 }
 
+#ifdef OAF_DEBUG
 static void
 do_barrier (int signum)
 {
@@ -298,6 +299,7 @@ do_barrier (int signum)
 
 	while (barrier);
 }
+#endif
 
 gboolean
 oaf_is_initialized (void)
