@@ -1,5 +1,6 @@
+idldir = $(datadir)/idl
 
-idl_files =			\
+idl_DATA =			\
 	bonobo.idl		\
 	gnome-advise.idl	\
 	gnome-base.idl		\
@@ -12,4 +13,4 @@ idl_files =			\
 	gnome-persist.idl	\
 	gnome-storage.idl	
 
-EXTRA_DIST = $(idl_files)
+EXTRA_DIST = $(idl_DATA)

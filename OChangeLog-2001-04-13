@@ -1,3 +1,13 @@
+1999-04-28  Jacob Berkman  <jberk+@cmu.edu>
+
+	* idl/Makefile.am (idl_DATA): install the .idl files in
+	$(datadir)/idl
+
+1999-04-28  Jacob Berkman  <jberk+@cmu.edu>
+
+	* idl/Makefile.am (idl_files): install gnome-*.idl files now
+	* idl/: removed old .idl files
+
 1999-04-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-object-client.c
