@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-11-26 13:13+1100\n"
-"PO-Revision-Date: 2001-07-06 20:34+0200\n"
+"POT-Creation-Date: 2001-12-04 01:53+0100\n"
+"PO-Revision-Date: 2001-12-04 01:53+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -93,15 +93,15 @@ msgstr "ogiltig sökväg till XML-användargränssnittselement"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr ""
+msgstr "det begärda användargränssnittsattributet finns inte"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr ""
+msgstr "Okänt kommando eller verb"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr ""
+msgstr "Kommandot är okänsligt"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -116,18 +116,16 @@ msgid "property not found"
 msgstr "egenskapen kunde inte hittas"
 
 #: bonobo/bonobo-exception.c:236
-#, fuzzy
 msgid "property has invalid type"
-msgstr "egenskapen kunde inte hittas"
+msgstr "egenskapen har ogiltig typ"
 
 #: bonobo/bonobo-exception.c:239
-#, fuzzy
 msgid "property is read only"
-msgstr "egenskapen kunde inte hittas"
+msgstr "egenskapen är skrivskyddad"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr ""
+msgstr "konfigurationsdatabasbackenden misslyckades "
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
@@ -150,13 +148,12 @@ msgid "Error checking error; no exception"
 msgstr "Fel vid kontroll av fel; inget undantag"
 
 #: bonobo/bonobo-exception.c:288
-#, fuzzy
 msgid "General activation error with no description"
-msgstr "Syntaxfel i objektbeskrivning"
+msgstr "Allmänt aktiveringsfel utan beskrivning"
 
 #: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
-msgstr ""
+msgstr "Kunde inte initiera Bonobo"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -164,21 +161,19 @@ msgstr "HTTP-moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "ORB-IOR-hanteringsmoniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
 msgstr "Standardmonikerfabrik"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
-#, fuzzy
 msgid "generic Oaf activation moniker"
-msgstr "allmän Server-aktiveringsmoniker"
+msgstr "allmän Oaf-aktiveringsmoniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
-#, fuzzy
 msgid "generic Oaf query moniker"
-msgstr "allmän Server-frågemoniker"
+msgstr "allmän Oaf-frågemoniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
