@@ -1,3 +1,33 @@
+1999-08-20  Nat Friedman  <nat@gnome-support.com>
+
+	* samples/sample-container.c: Sample container.  New file.
+
+	* samples/paint-component-simple.c (view_update): Update the
+ 	correct dimensions.
+	(view_factory): Removed the set_usize.  We do proper size
+ 	negotiation now.
+	(view_factory): Connect to system_exception.
+
+	* bonobo/gnome-view.c (gnome_view_class_init): Use the correct
+ 	marshaler for size_query.
+
+	* bonobo/gnome-view-frame.c: Added the user_context signal.
+	(gnome_view_frame_wrapper_button_press_cb): Emit user_context if
+ 	it was a right click.
+	(gnome_view_frame_popup_verbs): New convenience function to do the
+ 	verb popup for you.
+
+	* bonobo/gnome-embeddable.c (impl_GNOME_Embeddable_get_verb_list):
+ 	Setup the verb list properly.
+	(gnome_embeddable_view_destroy_cb): Temporarily disable ping.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_get_embeddable):
+ 	New function to return the object to which the client site is
+ 	bound.
+	(size_request): New callback function to proxy size request on
+ 	the view frame.
+	(gnome_client_site_new_view): Hookup the size_request callback.
+
 1999-08-19  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-object-client.c (gnome_object_client_from_corba):

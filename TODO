@@ -37,3 +37,8 @@ Nat's list
 * Remove per-object CORBA_Environment
 * Work on debugging.txt
 * Clear up role of GnomeContainer
+* Put system_exception checks into sample-container.
+* Wainwright patch -- update components/containers to match
+* Update my gdk patch.
+* Try Tim Janik's solution.
+* Move all test code out of bonobo/bonobo
