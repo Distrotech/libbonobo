@@ -1,3 +1,8 @@
+2004-05-06  Michael Wilson  <Michael.Wilson@bull.net>
+
+	* bonobo/bonobo-application.c (message_desc_copy) 
+	(_gtype_to_typecode): bin bogus gnuism: __inline__
+
 2004-05-05  Michael Wilson  <Michael.Wilson@bull.net>
 
 	* bonobo/bonobo-application.c: bin bogus trailing

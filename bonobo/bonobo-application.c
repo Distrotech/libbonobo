@@ -221,7 +221,7 @@ impl_Bonobo_Application_newInstance (PortableServer_Servant           servant,
 	return retval;
 }
 
-static __inline__ void
+static inline void
 message_desc_copy (Bonobo_Application_MessageDesc *dest,
 		   Bonobo_Application_MessageDesc *src)
 {
@@ -396,7 +396,7 @@ bonobo_application_new (const char *name)
 	return app;
 }
 
-static __inline__ CORBA_TypeCode
+static inline CORBA_TypeCode
 _gtype_to_typecode (GType gtype)
 {
 	static GHashTable *hash = NULL;
