@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-12-08 23:52+0000\n"
-"PO-Revision-Date: 2003-02-29 09:41+0200\n"
+"POT-Creation-Date: 2003-12-13 13:46+0100\n"
+"PO-Revision-Date: 2003-12-13 13:47+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,13 +65,12 @@ msgid "Name service"
 msgstr "Namntjänst"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Namntjänst"
+msgstr "Notifieringstjänst"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Notifieringstjänst för aktivering"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -203,11 +202,11 @@ msgstr "Shlib \"%s\" innehöll inte \"%s\""
 
 #: bonobo/bonobo-application.c:336
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 #: bonobo/bonobo-application.c:336
 msgid "Application unique name"
-msgstr ""
+msgstr "Unikt namn för program"
 
 # Osäker
 #: bonobo/bonobo-object.c:919
