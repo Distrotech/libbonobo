@@ -9,11 +9,11 @@
 
 BEGIN_GNOME_DECLS
 
-/* This file provides an abstraction of the object directory Bonobo
-   will use (GOAD or OAF). However, the object directory is not
-   dynamically loaded or anything like that; it must be selected
-   at compile time. This is a private, non-installed API.
-*/
+/*
+ * This file used to provide a compatibility abstraction for the
+ * Gnorba -> Oaf transition. This is now complete, hence these
+ * functions are deprecated in favour of the oaf equivalents.
+ */
 
 typedef struct _ODServerInfo ODServerInfo;
 
@@ -35,8 +35,6 @@ const gchar         *od_server_info_get_description (ODServerInfo      *info);
 void                 od_server_info_ref             (ODServerInfo      *info);
 void                 od_server_info_unref           (ODServerInfo      *info);
 
-
-
 /* returns list of ODServerInfo */
 GList               *od_get_server_list             (const gchar      **required_ids);
 void                 od_server_list_free            (GList             *list);
@@ -47,8 +45,6 @@ ODRegistrationResult od_server_register             (CORBA_Object       objref,
                                                      const gchar       *iid);
 ODRegistrationResult od_server_unregister           (CORBA_Object       objref,
 						     const gchar       *iid);
-void                 od_assert_using_goad           (void);
-void                 od_assert_using_oaf            (void);
 
 CORBA_Object         od_name_service_get            (CORBA_Environment *ev);
 

@@ -56,8 +56,9 @@ query_parse_display_name (BonoboMoniker     *moniker,
 	}
 	
 	if (in_string || brackets != 0) {
-		g_warning ("Seemingly broken Oaf query : '%s'", name);
-		i = strlen (name);
+		CORBA_set_exception (ev, CORBA_USER_EXCEPTION,
+				     ex_Bonobo_Moniker_InvalidSyntax, NULL);
+		return CORBA_OBJECT_NIL;
 	}
 	
 	bonobo_moniker_set_name (moniker, name, i);

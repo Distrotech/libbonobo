@@ -6,7 +6,6 @@ idl_DATA =			\
 	bonobo.idl		\
 	Bonobo.idl		\
 	bonobo-unknown.idl	\
-	bonobo-factory.idl	\
 	bonobo-advise.idl	\
 	bonobo-canvas.idl	\
 	bonobo-container.idl	\

@@ -15,7 +15,6 @@
 #pragma inhibit push
 #endif
 
-#include <bonobo-factory.idl>
 #include <bonobo-unknown.idl>
 #include <bonobo-moniker.idl>
 

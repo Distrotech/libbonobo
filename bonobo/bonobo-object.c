@@ -643,7 +643,8 @@ bonobo_object_usage_error (BonoboObject *object)
 }
 
 static void
-bonobo_object_instance_init (GtkObject *gtk_object)
+bonobo_object_instance_init (GtkObject    *gtk_object,
+			     GtkTypeClass *klass)
 {
 	BonoboObject *object = BONOBO_OBJECT (gtk_object);
 	BonoboAggregateObject *ao;
@@ -665,7 +666,7 @@ bonobo_object_instance_init (GtkObject *gtk_object)
 	{
 		char *indent = g_strnfill (++ref_indent, ' ');
 		g_printerr ("%sCreate %s:[%p] to %d\n", indent,
-			    gtk_type_name (GTK_OBJECT (object)->klass->type),
+			    gtk_type_name (klass->type),
 			    ao, ao->ref_count);
 		g_free (indent);
 

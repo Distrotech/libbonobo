@@ -38,283 +38,39 @@ bonobo_object_client_construct (BonoboObjectClient *object_client, CORBA_Object 
 	return object_client;
 }
 
-static BonoboObjectClient *
-bonobo_object_activate_with_either_id(const gchar* iid,
-				     gint flags)
+/**
+ * bonobo_object_activate:
+ * @iid: an OAFIID
+ * @flags: activation flags
+ *
+ *   This activates the object from the IID using oaf; you probably
+ * don't want to do this; instead do capability based activation
+ * using Oaf directly.
+ *
+ * Returns: An activated object client or NULL on failure.
+ */
+BonoboObjectClient *
+bonobo_object_activate (const char *iid, gint oaf_flags)
 {
-	CORBA_Object corba_object;
 	BonoboObjectClient *object;
+	Bonobo_Unknown      corba_object;
 	
-	corba_object = od_server_activate_with_id (iid, flags, NULL);
+	g_return_val_if_fail (iid != NULL, NULL);
+
+	/*
+	 * We don't want this to do moniker activation too, since we'd
+	 * need to break the API to add 'requested_interface' and it's
+	 * a different paradigm.
+	 */
+	corba_object = od_server_activate_with_id (iid, oaf_flags, NULL);
+
 	if (corba_object == CORBA_OBJECT_NIL)
 		return NULL;
 	
 	object = gtk_type_new (bonobo_object_client_get_type ());
+
 	bonobo_object_client_construct (object, corba_object);
 
-	return object;
-}
-
-/**
- * bonobo_object_activate_with_goad_id:
- * @dummy: obsolete, ignored.
- * @goad_id: GOAD service identification.
- * @flags: Goad activation flags.
- * @params: parameters passed to the factory
- *
- * Activates the service represented by goad_id.
- * The service activated should support the Bonobo::Unknown interface.
- *
- * This routine used goad_server_activate_with_repo_id() routine from
- * libgnorba.
- */
-BonoboObjectClient *
-bonobo_object_activate_with_goad_id (gpointer dummy,
-				    const char *goad_id,
-				    gint flags,
-				    const char **params)
-{
-	od_assert_using_goad();
-
-	return bonobo_object_activate_with_either_id(goad_id, flags);
-}
-
-/**
- * bonobo_object_activate_with_oaf_id:
- * @oaf_id: OAF IID 
- * @flags: OAF activation flags
- *
- * Activates the service represented by @oaf_id.
- * The service activated should support the Bonobo::Unknown interface.
- *
- */
-BonoboObjectClient *
-bonobo_object_activate_with_oaf_id (const char *oaf_id,
-				   gint flags)
-{
-	od_assert_using_oaf();
-	
-	return bonobo_object_activate_with_either_id(oaf_id, flags);
-}
-
-static GList *
-parse_moniker_string (const char *desc)
-{
-	GList *res = NULL;
-	GString *s;
-	const char *p;
-	
-	/* Compute number of elements */
-	s = g_string_new ("");
-	for (p = desc; *p; p++){
-		if (*p == '\\'){
-			p++;
-			if (!*p)
-				break;
-			g_string_append_c (s, *p);
-			continue;
-		}
-		if (*p == ','){
-			res = g_list_append (res, g_strdup (s->str));
-			g_string_assign (s, "");
-		} else
-			g_string_append_c (s, *p);
-	}
-	if (*s->str)
-		res = g_list_append (res, g_strdup (s->str));
-	
-	g_string_free (s, TRUE);
-
-	return res;
-}
-
-Bonobo_Unknown
-bonobo_object_restore_from_url (const char *iid, const char *url)
-{
-#warning Commented all this out
-#if 0
-#define bonobo_object_restore_from_url_defined_here
-	CORBA_Object rtn = CORBA_OBJECT_NIL;
-	Bonobo_PersistFile persist;
-	gchar *name;
-	CORBA_Environment ev;
-	
-	name = g_strdup_printf ("url_moniker!%s", url);
-	
-	/* 1. Check the naming service to see if we're already available */
-	rtn = bonobo_moniker_find_in_naming_service (name, iid);
-
-	if (!rtn) {
-		/* 2. fire up that object specified by the iid  */
-		CORBA_exception_init (&ev);
-		
-		rtn = od_server_activate_with_id (
-			iid,	/* server to activate */
-			0,		/* ActivationFlags */
-			&ev);	
-		
-		g_free (name);
-
-
-
-		if (CORBA_Object_is_nil (rtn, &ev)) /* bail */ {
-
-			CORBA_exception_free (&ev);
-			return CORBA_OBJECT_NIL;
-		}
-
-		CORBA_exception_free (&ev);
-	}
-	
-	CORBA_exception_init (&ev);
-	/*
-	 * 4. try to feed it the file (first by
-	 * PersistFile, then by PersistStream)
-	 */
-	persist = (Bonobo_PersistFile) Bonobo_Unknown_query_interface (
-		rtn, "IDL:Bonobo/PersistFile:1.0", &ev);
-
-	if (ev._major != CORBA_NO_EXCEPTION)
-		persist = NULL;
-
-	if (persist) {
-		gboolean success = FALSE;
-		
-		Bonobo_PersistFile_load (persist, url, &ev);
-
-		if (ev._major == CORBA_NO_EXCEPTION)
-			success = TRUE;
-		
-		Bonobo_Unknown_unref (persist, &ev);
-		CORBA_Object_release (persist, &ev);
-
-		if (!success){
-			Bonobo_Unknown_unref (rtn, &ev);
-			CORBA_Object_release (rtn, &ev);
-			rtn = CORBA_OBJECT_NIL;
-		}
-	}
-	else
-	{
-		/* doesn't have PersistFile; try with PersistStream */
-		BonoboStream *stream;
-		
-		persist = Bonobo_Unknown_query_interface (
-			rtn, "IDL:Bonobo/PersistStream:1.0", &ev);
-
-		if (ev._major != CORBA_NO_EXCEPTION)
-			persist = NULL;
-
-		CORBA_exception_free (&ev);
-		
-		if (!persist)
-			rtn = CORBA_OBJECT_NIL;
-		else {
-			stream = bonobo_stream_fs_open (
-				url, Bonobo_Storage_READ);
-			if (!stream)
-				rtn = CORBA_OBJECT_NIL;
-			else {
-				Bonobo_PersistStream_load (
-					(Bonobo_PersistStream) persist,
-					bonobo_object_corba_objref (BONOBO_OBJECT (stream)),
-					"", &ev);
-				
-				if (ev._major != CORBA_NO_EXCEPTION)
-					rtn = CORBA_OBJECT_NIL;
-
-				Bonobo_Unknown_unref (persist, &ev);
-				CORBA_Object_release (persist, &ev);
-
-
-			}
-		}
-	}
-	
-	CORBA_exception_free (&ev);
-	return (Bonobo_Unknown) rtn;
-#endif
-	return NULL;
-}
-
-static void
-moniker_info_list_destroy (GList *moniker_info_list)
-{
-	g_list_foreach (moniker_info_list, (GFunc) g_free, NULL);
-	g_list_free (moniker_info_list);
-}
-
-/**
- * bonobo_object_activate:
- * @object_desc: Either a string representation of an object moniker
- * or an object ID (GOAD ID or OAF ID depending on Bonobo compilation).
- * @flags: activation flags
- *
- * Returns: An object created.
- */
-BonoboObjectClient *
-bonobo_object_activate (const char *object_desc, gint flags)
-{
-	CORBA_Environment ev;
-	Bonobo_Unknown obj, last;
-	BonoboObjectClient *object;
-	GList *moniker_info, *item;
-	
-	g_return_val_if_fail (object_desc != NULL, NULL);
-
-	if (strncmp (object_desc, "moniker_url:", 12) != 0)
-		return bonobo_object_activate_with_either_id (object_desc, flags);
-
-	moniker_info = parse_moniker_string (object_desc + 12);
-	if (g_list_length (moniker_info) < 2) {
-		moniker_info_list_destroy (moniker_info);
-		return NULL;
-	}
-
-	/*
-	 * Bind the file
-	 */
-	obj = bonobo_object_restore_from_url (moniker_info->data, moniker_info->next->data);
-
-	if (obj == CORBA_OBJECT_NIL){
-		moniker_info_list_destroy (moniker_info);
-		return NULL;
-	}
-
-	last = obj;
-	CORBA_exception_init (&ev);
-	for (item = moniker_info->next->next; item; item = item->next){
-		Bonobo_Container container;
-		Bonobo_Unknown new_object;
-		const char *item_name = item->data;
-
-		container = (Bonobo_Container) Bonobo_Unknown_query_interface (
-			last, "IDL:Bonobo/Container:1.0", &ev);
-		if (container == CORBA_OBJECT_NIL){
-			moniker_info_list_destroy (moniker_info);
-			Bonobo_Unknown_unref (obj, &ev);
-			CORBA_exception_free (&ev);
-			return NULL;
-		}
-
-		new_object = Bonobo_Container_get_object (
-			container, item_name, TRUE, &ev);
-
-		Bonobo_Unknown_unref ((Bonobo_Unknown) container, &ev);
-		if (new_object == CORBA_OBJECT_NIL){
-			moniker_info_list_destroy (moniker_info);
-			Bonobo_Unknown_unref (obj, &ev);
-			CORBA_exception_free (&ev);
-			return NULL;
-		}
-		last = new_object;
-	}
-	moniker_info_list_destroy (moniker_info);
-	CORBA_exception_free (&ev);
-
-	object = gtk_type_new (bonobo_object_client_get_type ());
-	bonobo_object_client_construct (object, (CORBA_Object) last);
-	
 	return object;
 }
 
@@ -560,9 +316,3 @@ bonobo_object_client_get_type (void)
 
 	return type;
 }
-
-#if 0
-#ifndef bonobo_object_restore_from_url_defined_here
-#error You might want to remove all the headers included here to get this file here.
-#endif
-#endif

@@ -1,3 +1,23 @@
+2000-08-12  Michael Meeks  <michael@helixcode.com>
+
+	* Every instance of #if USING_OAF removed
+
+	* Every broken reference to 'gnome_bonobo_selector' stuff fixed.
+	
+	* bonobo/bonobo-main.c (bonobo_exception_get_text): update factory.
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_get_epv): 
+	s/POA_GNOME_GenericFactory/POA_GNOME_ObjectFactory/ fully broken backwards
+	compatibility hacking.
+
+	* bonobo/bonobo-control.c (bonobo_control_get_property): ref the propbag,
+	before creating a property_bag_client with it that swallows the ref.
+
+	* bonobo/bonobo-selector.c (bonobo_selector_class_init): major pruning
+	of old goad / oaf compat code.
+
+	* bonobo/Makefile.am (libbonoboinclude_HEADERS): remove moniker-client.h
+
 2000-08-11  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo/bonobo-object-client.c: Removed include of
@@ -9,6 +29,27 @@
 	breaking the build.
 
 2000-08-11  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_instance_init): make it
+	dump the type of the parent class not just that of the BonoboObject,
+	much more helpful.
+
+	* bonobo/bonobo-object-client.c (bonobo_object_restore_from_url):
+	Remove, totally broken; use monikers instead.
+	(bonobo_object_activate_with_goad_id): remove.
+	(bonobo_object_activate_with_oaf_id): remove.
+	(bonobo_object_activate_with_either_id): move this to
+	(bonobo_object_activate): remove totaly broken moniker support.
+	(moniker_info_list_destroy, parse_moniker_string): remove.
+
+	* bonobo/bonobo-main.c (bonobo_exception_get_text): add moniker
+	exceptions.
+
+	* monikers/bonobo-moniker-query.c (query_parse_display_name): fire
+	an exception instead of doing something daft.
+
+	* bonobo/bonobo-generic-factory.[ch] s/POA_Bonobo_/POA_GNOME_/
+	s/Bonobo_stringlist/GNOME_stringlist/
 
 	* bonobo/bonobo-object-client.c (bonobo_object_restore_from_url):
 	comment out totaly; needs killing properly.
