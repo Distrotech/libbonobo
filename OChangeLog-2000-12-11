@@ -1,3 +1,9 @@
+1999-08-23  Elliot Lee  <sopwith@redhat.com>
+	* bonobo/gnome-bonobo-selector.c: Fix this aweful, ugly, totally messed up hack
+	of a bonobo component directory to build with gcc 2.95.
+	* bonobo/gnome-component-directory.h: Point out that we have a workable solution
+	here for a component directory.
+
 1999-08-23  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-ui-handler.c (gnome_ui_handler_toolbar_free_[one, list, tree]):
