@@ -1,5 +1,13 @@
 2004-08-08  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* idl/Bonobo_Control.idl: Prepend 'action' parameter name with
+	underscore to avoid clash with type Action, in
+	PropertyControl::notifyAction(). Fixes #118078.
+	
+	* idl/Bonobo_Property.idl: Escape PropertyBag::ReadOnly
+	ConfigDatabase::DBFlags::DEFAULT with a leading underscore because
+	of clashes with IDL keywords. Fixes #118078.
+
 	* bonobo-activation/Makefile.am (INCLUDES): Define
 	G_LOG_DOMAIN=Bonobo-Activation.
 
