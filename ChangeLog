@@ -1,3 +1,7 @@
+2001-04-17  Martin Baulig  <baulig@suse.de>
+
+	* configure.in: Check for gobject and gthread.
+
 2001-04-15  Martin Baulig  <baulig@suse.de>
 
 	* configure.in: Added check for dladdr() from bonobo/configure.in
