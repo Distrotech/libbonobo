@@ -274,7 +274,7 @@ Sun Nov 21 11:51:37 1999  Dietmar Maurer  <dm@darkstar>
 Fri Nov 19 12:55:35 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* bonobo/gnome-view-frame.c (gnome_view_frame_destroy): destroy
-	the wrapper after destroying the remove view (so that
+	the wrapper after destroying the remote view (so that
 	plug_destroy_cb is not called).
 
 Thu Nov 18 08:40:55 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
