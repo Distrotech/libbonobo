@@ -1,3 +1,13 @@
+2000-08-17  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-uih-menu.c:
+	(menu_toplevel_get_item_prefer_non_head): New private function,
+	returns one of the MenuItemInternal *s for a path, preferring any
+	that isn't the head one
+	(bonobo_ui_handler_menu_toplevel_remove_item_internal): Used
+	new function to fix bug involving removing an item that has more
+	than one MenuItemInternal.
+
 2000-08-13  Michael Meeks  <michael@helixcode.com>
 
 	* Version 0.18
