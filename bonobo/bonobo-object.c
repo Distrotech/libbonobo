@@ -17,19 +17,7 @@ enum {
 static guint gnome_object_signals [LAST_SIGNAL];
 static GtkObjectClass *gnome_object_parent_class;
 
-typedef struct {
-	GnomeObject        *gnome_object;
-	PortableServer_POA  poa;
-
-	/* We return the following address */
-	POA_GNOME_object object;
-} PiggyBack;
-
-void *
-gnome_object_servant_new (int size)
-{
-	return 0;
-}
+static GData *keys;
 
 GnomeObject *
 gnome_object_from_servant (POA_GNOME_object *servant)
@@ -39,7 +27,8 @@ gnome_object_from_servant (POA_GNOME_object *servant)
 static void
 impl_GNOME_object__destroy (POA_GNOME_object *servant, CORBA_Environment *ev)
 {
-	POA_GNOME_object__fini((PortableServer_Servant) servant, ev);
+/*	POA_GNOME_object__fini((PortableServer_Servant) servant, ev); */
+	gnome_object_destroy_servant_binding (servant);
 	g_free (servant);
 }
 
