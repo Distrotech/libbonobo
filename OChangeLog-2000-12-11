@@ -1,3 +1,8 @@
+2000-12-07  Federico Mena Quintero  <federico@helixcode.com>
+
+	* bonobo/bonobo-property-bag.c
+	(bonobo_property_servant_locator_preinvoke): Free the property_name.
+
 2000-12-07  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-selector.c (bonobo_selector_new): clean.

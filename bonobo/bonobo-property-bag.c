@@ -82,10 +82,11 @@ bonobo_property_servant_locator_preinvoke (PortableServer_Servant servant_manage
 	 * Create a temporary servant for this Property.
 	 */
 	servant = bonobo_property_servant_new (adapter, pb, property_name);
+	CORBA_free (property_name);
+
 	if (servant == NULL) {
 		g_warning ("BonoboPropertyBag: Could not create transient Property servant");
 		CORBA_exception_set_system(ev, ex_CORBA_NO_MEMORY, CORBA_COMPLETED_NO);
-		CORBA_free (property_name);
 		return NULL;
 	}
 
