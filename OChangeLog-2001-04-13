@@ -1,3 +1,8 @@
+2001-01-03  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-running-context.c (get_running_info): correctly
+	initialize emitted_last_unref.
+
 2001-01-02  Jacob "Ulysses" Berkman  <jacob@helixcode.com>
 
 	* bonobo/bonobo-win.c (construct_priv): 

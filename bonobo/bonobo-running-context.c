@@ -82,6 +82,7 @@ get_running_info (gboolean create)
 		bonobo_running_info = g_new (BonoboRunningInfo, 1);
 		bonobo_running_info->objects = g_hash_table_new (NULL, NULL);
 		bonobo_running_info->keys    = g_hash_table_new (g_str_hash, g_str_equal);
+		bonobo_running_info->emitted_last_unref = FALSE;
 
 		g_atexit (running_info_destroy);
 	}
