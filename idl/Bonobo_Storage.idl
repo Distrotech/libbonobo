@@ -163,7 +163,7 @@ module Bonobo {
 		 * the name, content_type and size info.
 		 */
 		StorageInfo getInfo (in string path, 
-				      in StorageInfoFields mask)
+				     in StorageInfoFields mask)
 			raises (IOError, NoPermission, NotFound);
 		
 		/**	
@@ -171,7 +171,7 @@ module Bonobo {
 		 *
 		 */
 		void setInfo (in string path, in StorageInfo info, 
-			       in StorageInfoFields mask)
+			      in StorageInfoFields mask)
 			raises (IOError, NoPermission, NotFound);
 
 		/**

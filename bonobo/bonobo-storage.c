@@ -83,7 +83,7 @@ impl_open_storage (PortableServer_Servant  servant,
 
 static void
 impl_copy_to (PortableServer_Servant servant,
-	      Bonobo_Storage          target,
+	      Bonobo_Storage         target,
 	      CORBA_Environment     *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);

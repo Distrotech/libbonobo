@@ -1,6 +1,32 @@
+Bonobo 0.28
+
+	* Fixes to XML translation to fix seperate build dir (Me)
+
+	* Beautified XML translation script (Kenneth)
+
+	* Fixes to allow perl relocation (Dan Winship)
+
+	* Remove Gtk arg <-> property mapping sillyness (Radek Doulik)
+
 Bonobo 0.27
 
 	* New test environment for storage drivers (Dietmar)
+
+	* Lots of internal stream / storage fixes (Dietmar)
+
+	* API rename & documentation clean (Me)
+
+	* Property bag fixes * improved ref debugging (Martin)
+
+	* Lots of moniker (http, gzip) work (Joe Shaw)
+
+	* Library versioning sorted (Ian Peters)
+
+	* UI Leaks fixed (Me)
+
+	* XML Translation scheme re-engineered (Kenneth)
+
+	* Lots of API Documentation mending (Zach Frey)
 
 Bonobo 0.26
 
