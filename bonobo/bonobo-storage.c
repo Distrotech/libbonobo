@@ -272,7 +272,7 @@ load_storage_driver (const char *driver_name)
 BonoboStorage *
 bonobo_storage_open (const char *driver, const char *path, gint flags, gint mode)
 {
-	static driver_open_t fs_driver, efs_driver;
+	static driver_open_t fs_driver, efs_driver, vfs_driver;
 	driver_open_t *driver_ptr = NULL;
 	
 	g_return_val_if_fail (path != NULL, NULL);
@@ -285,6 +285,10 @@ bonobo_storage_open (const char *driver, const char *path, gint flags, gint mode
 		if (efs_driver == NULL)
 			efs_driver = load_storage_driver ("storage_efs");
 		driver_ptr = &efs_driver;
+	} else if (strcmp (driver, "vfs") == 0) {
+		if (vfs_driver == NULL)
+			vfs_driver = load_storage_driver ("storage_vfs");
+		driver_ptr = &vfs_driver;
 	} else {
 		g_warning ("Unknown driver `%s' specified", driver);
 		return NULL;

@@ -1,3 +1,13 @@
+2000-06-23  Michael Meeks  <michael@helixcode.com>
+
+	* storage-modules/gnome-storage-vfs.[ch]: Add.
+
+	* configure.in: add checks for gnome vfs.
+
+	* storage-modules/Makefile.am (libstorage_vfs_la): add.
+
+	* bonobo/bonobo-storage.c (bonobo_storage_open): add vfs option.
+
 2000-06-22  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-object-client.c (bonobo_object_client_destroy):
