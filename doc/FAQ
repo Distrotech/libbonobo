@@ -439,6 +439,9 @@ category grouping eg.
 
 OAFIID:GNOME_Panel_Applet_yetanotherclock:
 
+	and add a UUID generated from the uuidgen application at the
+end to garentee uniqueness.
+
 @Q: What should I call my oafinfo file ?
 
 	The name of your oafinfo file should be based on your portion
