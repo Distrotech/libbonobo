@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.3\n"
-"POT-Creation-Date: 2004-05-29 11:19+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-09-13 15:34+0100\n"
 "PO-Revision-Date: 2004-01-21 00:08+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -88,7 +88,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1148
+#: activation-server/object-directory-corba.c:1149
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "서버 '%s'을(를) 활성화하는 데 경쟁 조건 발생"
@@ -152,18 +152,18 @@ msgstr "자식이 %u (%s) 시그날을 받았습니다"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "알 수 없는 non-exit 오류 (상태는 %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:403
+#: bonobo-activation/bonobo-activation-fork-server.c:404
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "보노보 액티베이션이 %s의 프로세스 그룹을 설정하는 데 실패했습니다: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:415
+#: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s을(를) 실행하는 데 실패했습니다: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:88
+#: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "한 로케일에 대해 alias가 너무 많습니다.  루프일 지도 모릅니다."
 
@@ -212,11 +212,11 @@ msgstr "이름"
 msgid "Application unique name"
 msgstr "응용 프로그램 고유 이름"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "Custom CORBA POA"
 msgstr "사용자 지정 CORBA POA"
 

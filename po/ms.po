@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-05-29 11:19+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-09-13 15:34+0100\n"
 "PO-Revision-Date: 2003-01-01 21:24+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@my-penguin.org>\n"
 "Language-Team: Bahasa Melayu <gabai-penyumbang@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -89,7 +89,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1148
+#: activation-server/object-directory-corba.c:1149
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Keadaan race mengaktifkan pelaran '%s'"
@@ -152,17 +152,17 @@ msgstr "Anak menerima isyarat %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Rakat non-exit tidak diketahu (status  ialah %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:403
+#: bonobo-activation/bonobo-activation-fork-server.c:404
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation gagal menetapkan kumpulan proses bagi %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:415
+#: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Gagal melaksanakan %s: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:88
+#: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 "Terlalu banyak aras alias untuk satu lokaliti, mungkin ia menunjukkan gelung"
@@ -212,11 +212,11 @@ msgstr "Nama"
 msgid "Application unique name"
 msgstr "Nama unik aplikasi"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "Custom CORBA POA"
 msgstr "POA CORBA tersendiri"
 

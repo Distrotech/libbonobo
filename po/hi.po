@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-21 17:31+0530\n"
+"POT-Creation-Date: 2004-09-13 15:34+0100\n"
 "PO-Revision-Date: 2004-07-09 17:40+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@yahoo.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
@@ -94,7 +94,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1148
+#: activation-server/object-directory-corba.c:1149
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "रेस अवस्था सर्वर '%s' को सक्रिय कर रहा है"
@@ -157,17 +157,17 @@ msgstr "शिशु को संकेत मिला %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "अज्ञात नॉन-एक्ज़िट त्रुटि (स्थिति %u है)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:403
+#: bonobo-activation/bonobo-activation-fork-server.c:404
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr " %s का प्रक्रिया समूह: %s को नियत करने में बोनोबो-सक्रियण असफल\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:415
+#: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s को क्रियान्वित करने में असफल %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:88
+#: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "लोकेल मे अत्याधिक उपनाम स्तर, शायद लूप दिखाता है"
 
@@ -216,11 +216,11 @@ msgstr "नाम"
 msgid "Application unique name"
 msgstr "अनुप्रयोग बेजोड़ नाम"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "POA"
 msgstr "पीओए"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "Custom CORBA POA"
 msgstr "अनुकूलित कोरबा पीओए"
 

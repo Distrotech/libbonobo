@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-22 04:25+0200\n"
+"POT-Creation-Date: 2004-09-13 15:34+0100\n"
 "PO-Revision-Date: 2004-07-13 16:38+0530\n"
 "Last-Translator: Amanpreet Singh Alam <amanlinux@netscape.net>\n"
 "Language-Team: Punjabi <punlinux-i18n@lists.sourceforge.>\n"
@@ -89,7 +89,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1148
+#: activation-server/object-directory-corba.c:1149
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "ਰੇਸ ਕੰਡੀਸ਼ਨ ਸਰਵਰ '%s' ਨੂੰ ਸਰਗਰਮ ਕਰ ਰਹੀ ਹੈ"
@@ -151,17 +151,17 @@ msgstr "ਚਲਾਇਡ ਨੇ ਪ੍ਰਾਪਤ ਕੀਤੇ ਸੰਕੇਤ %
 msgid "Unknown non-exit error (status is %u)"
 msgstr "ਅਣਪਛਾਤੀ ਬਾਹਰ ਨਾ ਜਾਣ ਸਕਣ ਵਾਲੀ ਗਲਤੀ (ਸਥਿਤੀ %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:403
+#: bonobo-activation/bonobo-activation-fork-server.c:404
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "ਬੋਨਬੋ-ਸਰਗਰਮੀ ਅਸਫਲ ਹੈ, ਸਮੂਹ %s ਦੇ ਕਾਰਜ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:415
+#: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s ਨੂੰ ਚਲਾਉਣ ਵਿੱਚ ਅਸਫਲ: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:88
+#: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "ਇੱਕ ਲੋਕੇਲ ਦੇ ਕਈ ਆਲਈਸ ਪੱਧਰ ਇੱਕ ਘੁੰਮਾਉ ਪੈਦਾ ਕਰਦੇ ਹਨ"
 
@@ -210,11 +210,11 @@ msgstr "ਨਾਉ"
 msgid "Application unique name"
 msgstr "ਕਾਰਜ ਦਾ ਸ਼ੰਨਾਖਤੀ ਨਾਉ"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "Custom CORBA POA"
 msgstr "ਸੋਧ ਕੋਰਬਾ POA"
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-08 12:08+0200\n"
+"POT-Creation-Date: 2004-09-13 15:34+0100\n"
 "PO-Revision-Date: 2004-09-11 14:03+0200\n"
 "Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -171,7 +171,8 @@ msgstr "Грешка при извршување %s: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr "Премногу нивоа на алијаси за тоа locale, може да дојде до бесконечен процес"
+msgstr ""
+"Премногу нивоа на алијаси за тоа locale, може да дојде до бесконечен процес"
 
 #: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
@@ -500,4 +501,3 @@ msgstr "Прикажи ги директориумите во конфигура
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Прикажи ја патеката до конфигурациската датотека"
-

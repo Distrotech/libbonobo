@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
-"POT-Creation-Date: 2004-05-29 11:19+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-09-13 15:34+0100\n"
 "PO-Revision-Date: 2004-08-19 16:23+0530\n"
 "Last-Translator: Jayaradha N <jaya@pune.redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
@@ -15,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 
 # server/activation-context-corba.c:513
 #: activation-server/activation-context-corba.c:470
@@ -90,7 +92,8 @@ msgstr "தற்போது தொலை செயலகத்தினால�
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr "போனபோ தூண்டு செய்யும் அமைப்பு கோப்பு சரியாக வாசிக்க வில்லை. இதனில் சரிபார்க்கவும்: %s"
+msgstr ""
+"போனபோ தூண்டு செய்யும் அமைப்பு கோப்பு சரியாக வாசிக்க வில்லை. இதனில் சரிபார்க்கவும்: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -99,7 +102,7 @@ msgstr "போனபோ தூண்டு செய்யும் அமைப
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1148
+#: activation-server/object-directory-corba.c:1149
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "'%s' சேவையகம் செயற்படுத்தும் போது பந்தய-நிலை"
@@ -172,18 +175,18 @@ msgid "Unknown non-exit error (status is %u)"
 msgstr "தெரியாத, வெளியேறத் தேவையில்லாத பிழை (நிலை %u)"
 
 # bonobo-activation/bonobo-activation-fork-server.c:291
-#: bonobo-activation/bonobo-activation-fork-server.c:403
+#: bonobo-activation/bonobo-activation-fork-server.c:404
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-தொடக்கம், செயல் தொகுதியை %s அமைக்கவில்லை: %s\n"
 
 # bonobo-activation/bonobo-activation-fork-server.c:302
-#: bonobo-activation/bonobo-activation-fork-server.c:415
+#: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s செயல்படுத்த முடியவில்லை: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:88
+#: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "மொழிக்கு அதிக மறுபெயர் மட்டங்கள் உள்ளதால் மீண்டும் நிகழலாம்"
 
@@ -241,11 +244,11 @@ msgstr "¦ÀÂ÷"
 msgid "Application unique name"
 msgstr "செயல்பாடு தனிப்பட்ட பெயர்"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "Custom CORBA POA"
 msgstr "தனிப்பயன் CORBA POA"
 
@@ -535,4 +538,3 @@ msgstr "அமை வடிவக கோப்பில் உல்ல அட�
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "அமை வடிவக கோப்பின் பாதையைக் காண்பி"
-
