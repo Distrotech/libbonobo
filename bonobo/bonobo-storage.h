@@ -55,8 +55,15 @@ typedef struct {
 GtkType         gnome_storage_get_type     (void);
 GnomeStorage   *gnome_storage_construct    (GnomeStorage *storage,
 					    GNOME_Storage corba_storage);
-GnomeStorage   *gnome_storage_file_open    (const char *path,
+
+GnomeStorage   *gnome_storage_open         (const char *driver,
+					    const char *path,
 					    const char *open_mode);
+
+/*
+ * Functions to open storages and streams from and existing.
+ * Storage
+ */
 GnomeStorage   *gnome_storage_storage_open (GnomeStorage *storage,
 					    const char *path,
 					    const char *open_mode);

@@ -1,3 +1,19 @@
+1999-07-31  Miguel de Icaza  <miguel@gnu.org>
+
+	* components/text-plain/Makefile.am (bonobo_text_plain_LDADD):
+	Kill references to efs.
+
+	* components/image-x-png/Makefile.am (bonobo_image_x_png_LDADD):
+	Kill references to efs.
+
+	* components/audio-ulaw/Makefile.am (bonobo_audio_ulaw_LDADD):
+	Kill references to efs.
+
+	* bonobo/Makefile.am: remove references to moved files and to efs.
+	
+	* storage-modules: New directory that holds the storage modules.
+	Moved bonobo/gnome-{storage,stream}-{fs,efs}.[ch] here. 
+
 1999-07-30  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-item-moniker.c: Implemented bind operation here.
