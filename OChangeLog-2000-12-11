@@ -1,3 +1,20 @@
+2000-03-07  John Sullivan  <sullivan@eazel.com>
+
+        Fixed some widget ownership problems that were manifesting
+        themselves as GTK-CRITICALs on quit in Nautilus.
+
+        * bonobo/bonobo-uih-menu.c:
+        (menu_toplevel_create_widgets): ref menu_widget and menu
+        before storing them in hash tables to avoid double-deletion
+        on quit.
+        * bonobo/bonobo-uih-toolbar.c:
+        (toolbar_toplevel_item_create_widgets): ref widgets before
+        storing them in hash table to avoid double-deletion on quit.
+        * bonobo/bonobo-view-frame.c: (bonobo_view_frame_construct):
+        ref view_frame->priv->wrapper here, since it's destroyed by
+        bonobo_view_frame_destroy.
+        
+
 2000-03-07  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo/bonobo-wrapper.c (bonobo_wrapper_size_request): Correct
@@ -5,7 +22,7 @@
 	cover is off and the squiggle is visible.
 	(bonobo_wrapper_size_allocate): Likewise.
 
-2000-03-05  John Sullivan  <sullivan@eazel.com>
+2000-03-06  John Sullivan  <sullivan@eazel.com>
 
         Fixed two bugs in menu merging.
 
