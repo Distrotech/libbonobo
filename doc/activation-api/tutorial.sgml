@@ -5,9 +5,9 @@
    <title>What is Bonobo Activation ?</title>
 
    <para>
-   Bonobo Activation was designed as a replacement for the limited libgnorba library used
-   in GNOME. libgnorba is responsible on GNOME 1.0.x and 1.2.x systems for
-   the activation of CORBA objects. libgnorba allows you to browse the available
+   Bonobo Activation (originally named OAF) was designed as a replacement for the limited libgnorba library used
+   in older GNOME released. bonobo-activation is responsible on GNOME 2.x systems for
+   the activation of CORBA objects. bonobo-activation allows you to browse the available
    CORBA servers on your system (running or not). It keeps track of the running 
    servers so that if you ask for a server which is already running, you will not
    start it again but will reuse the already running one.
@@ -16,7 +16,7 @@
    <sect2>
    <title>The need for a replacement</title>
    <para>
-      libgnorba works well in a limited number of cases and suffers of a 
+      bonobo-activation works well in a limited number of cases and suffers of a 
       number of design issues. More specifically:
 
       <itemizedlist>
@@ -24,7 +24,7 @@
       <listitem>
       <para>
       It cannot handle the non-local case gracefully. ie: you cannot start 
-      a remote CORBA server with libgnorba.
+      a remote CORBA server with bonobo-activation.
       </para>
       </listitem>
 
@@ -32,13 +32,13 @@
       <para>
       It uses <emphasis>evil</emphasis> hacks to keep track of the system's CosNaming 
       service making it unusable on systems where an X server is not running.
-      (for details, read libgnorba code ;-)
+      (for details, read bonobo-activation code ;-)
       </para>      
       </listitem>
 
       <listitem>
       <para>
-      libgnorba allows you to only request specific servers by their name: you cannot ask
+      bonobo-activation allows you to only request specific servers by their name: you cannot ask
       for a server which provides a specific service. You have to ask for a server which 
       you know provides a specific service.
       </para>      
