@@ -1,3 +1,77 @@
+2000-01-26  Havoc Pennington  <hp@pobox.com>
+
+	* samples/compound-doc/paint-component-simple.c: include gnorba header
+
+	* bonobo/bonobo-generic-factory.c (impl_Bonobo_GenericFactory_create_object): GNOME_stringlist/Bonobo_stringlist
+
+2000-01-25  Havoc Pennington  <hp@pobox.com>
+
+        * bonobo/bonobo-object-directory.h: The object directory
+	abstraction
+	
+	* gshell/Makefile.am (bin_PROGRAMS): no gshell with OAF
+
+	* samples/compound-doc/Makefile.am (bin_PROGRAMS): no documents
+	with OAF
+
+	* samples/controls/Makefile.am (bin_PROGRAMS): don't build the 
+	controls with OAF
+
+	* components/Makefile.am (SUBDIRS): don't build components with OAF
+
+	* bonobo/test-bw.c: include gnorba.h explicitly, since it isn't
+	in gnome-bonobo.h
+
+	* bonobo/bonobo-main.c (bonobo_init): Get ORB from OD abstraction
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_finalize):
+	Use new OD abstraction
+	(bonobo_generic_factory_construct): new OD abstraction
+
+	* bonobo/gnome-bonobo-widget.c
+	(bonobo_widget_launch_component): change a cast to remove
+	GOAD dependency
+
+	* bonobo/bonobo-selector.c (add_gnorba_objects): modify this
+	to use the new object directory abstraction
+	(bonobo_selector_get_selected_goad_id): assert using GOAD
+	(bonobo_selector_get_selected_oaf_id): new, parallel to the
+	GOAD one
+	(gnome_bonobo_select_oaf_id): parallel to the OAF version
+
+	* bonobo/bonobo-object-client.c (bonobo_object_activate): Take "gint
+	flags" instead of "GoadActivationFlags flags" so that we don't
+	need to expose the GOAD headers
+	(bonobo_object_activate_with_goad_id): ditto, and assert that we
+	are using goad
+	(bonobo_object_activate_with_repo_id): Nuke
+	(bonobo_object_activate_with_goad_id): Fix bug unrelated to this
+	whole OAF/GOAD thing, activation flags were not being passed
+	through
+	(bonobo_object_activate_with_oaf_id): new function for use with OAF
+	(bonobo_object_activate_with_goad_id): change first arg from
+	GoadServerList to gpointer; this arg was ignored anyway, and 
+	of course the whole function is deprecated eventually.
+
+	* bonobo/bonobo-embeddable-factory.c: replace gnorba.h with 
+	bonobo-object-directory.h
+	
+	* bonobo/bonobo-object.c: ditto
+
+	* bonobo/bonobo-moniker-client.c: ditto
+
+	* bonobo/bonobo-main.c: ditto
+
+	* bonobo/bonobo-generic-factory.c: ditto
+	
+	* bonobo/bonobo-selector.h: don't include gnorba.h
+
+	* bonobo/bonobo-object-client.h: don't include gnorba.h
+
+	* bonobo/Makefile.am: handle AM_CONDITIONAL to use OAF or GOAD
+
+	* configure.in: Add the --enable-oaf option
+
 2000-01-26  Martijn van Beers  <martijn@earthling.net>
 
 	* bonobo/bonobo/.cvsignore: s/bonobo/Bonobo/;

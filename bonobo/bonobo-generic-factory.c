@@ -16,10 +16,10 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
-#include <libgnorba/gnorba.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-generic-factory.h>
+#include "bonobo-object-directory.h"
 
 POA_Bonobo_GenericFactory__vepv bonobo_generic_factory_vepv;
 
@@ -37,7 +37,7 @@ impl_Bonobo_GenericFactory_supports (PortableServer_Servant servant,
 static CORBA_Object
 impl_Bonobo_GenericFactory_create_object (PortableServer_Servant  servant,
 					 const CORBA_char       *obj_goad_id,
-					 const GNOME_stringlist *params,
+					 const Bonobo_stringlist *params,
 					 CORBA_Environment      *ev)
 {
 	BonoboGenericFactoryClass *class;
@@ -116,13 +116,11 @@ bonobo_generic_factory_construct (const char *goad_id,
 
 	CORBA_exception_init (&ev);
 
-	ret = goad_server_register (
-		NULL, corba_factory, c_factory->goad_id, "server",
-		&ev);
+	ret = od_server_register (corba_factory, c_factory->goad_id);
 
 	CORBA_exception_free (&ev);
 
-	if (ret != 0){
+	if (ret != OD_REG_SUCCESS){
 		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
 	}
@@ -215,7 +213,8 @@ bonobo_generic_factory_finalize (GtkObject *object)
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
-	goad_server_unregister (NULL, c_factory->goad_id, "server", &ev);
+	od_server_unregister (BONOBO_OBJECT(c_factory)->corba_objref,
+			      c_factory->goad_id);
 	CORBA_exception_free (&ev);
 	g_free (c_factory->goad_id);
 	

@@ -11,8 +11,9 @@
  */
 #include <config.h>
 #include <bonobo/bonobo-main.h>
-#include <libgnorba/gnorba.h>
+#include "bonobo-object-directory.h"
 #include <signal.h>
+#include <gnome.h>
 
 #include <X11/Xlib.h>
 
@@ -183,7 +184,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	 * Create the POA.
 	 */
 	if (orb == CORBA_OBJECT_NIL)
-		orb = gnome_CORBA_ORB();
+		orb = od_get_orb();
 	
 	if (CORBA_Object_is_nil ((CORBA_Object)poa, &ev)){
 		poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);

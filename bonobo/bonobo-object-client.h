@@ -5,7 +5,6 @@
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkobject.h>
 #include <bonobo/Bonobo.h>
-#include <libgnorba/gnorba.h>
 #include <bonobo/bonobo-object.h>
 
 #define BONOBO_OBJECT_CLIENT_TYPE        (bonobo_object_client_get_type ())
@@ -28,15 +27,13 @@ BonoboObjectClient *bonobo_object_client_construct       (BonoboObjectClient *ob
 							CORBA_Object corba_object);
 
 BonoboObjectClient *bonobo_object_activate               (const char *object_desc,
-							GoadActivationFlags flags);
-BonoboObjectClient *bonobo_object_activate_with_repo_id  (GoadServerList *list,
-							const char *repo_id,
-							GoadActivationFlags flags,
-							const char **params);
-BonoboObjectClient *bonobo_object_activate_with_goad_id  (GoadServerList *list,
+							gint oaf_or_goad_flags);
+BonoboObjectClient *bonobo_object_activate_with_goad_id  (gpointer dummy,
 							const char *goad_id,
-							GoadActivationFlags flags,
+							gint        goad_flags,
 							const char **params);
+BonoboObjectClient *bonobo_object_activate_with_oaf_id   (const char *oaf_id,
+							gint flags);
 Bonobo_Unknown      bonobo_object_restore_from_url       (const char *goad_id,
 							const char *url);
 BonoboObjectClient *bonobo_object_client_from_corba      (Bonobo_Unknown o);

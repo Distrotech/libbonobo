@@ -11,10 +11,10 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
 #include <gtk/gtktypeutils.h>
-#include <libgnorba/gnorba.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include "Bonobo.h"
+#include "bonobo-object-directory.h"
 
 POA_Bonobo_Unknown__vepv bonobo_object_vepv;
 
