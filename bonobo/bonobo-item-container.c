@@ -129,7 +129,7 @@ impl_get_object (PortableServer_Servant servant,
 	
 	gtk_signal_emit (
 		GTK_OBJECT (gnome_object_from_servant (servant)),
-		GET_OBJECT, item_name, only_if_exists, ev, &ret);
+		signals [GET_OBJECT], item_name, only_if_exists, ev, &ret);
 
 	return ret;
 }

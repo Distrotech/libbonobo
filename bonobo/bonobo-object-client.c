@@ -145,19 +145,21 @@ gnome_object_restore_from_url (const char *goad_id, const char *url)
 	
 	/* 1. Check the naming service to see if we're already available */
 	rtn = gnome_moniker_find_in_naming_service (name, goad_id);
-	
-	/* 2. fire up that object specified by the goad_id  */
-	rtn = goad_server_activate_with_id (
-		NULL,		/* name_server list */
-		goad_id,	/* server to activate */
-		0,		/* GoadActivationFlags */
-		0);		/* params for activation */
 
-	g_free (name);
+	if (!rtn){
+		/* 2. fire up that object specified by the goad_id  */
+		rtn = goad_server_activate_with_id (
+			NULL,		/* name_server list */
+			goad_id,	/* server to activate */
+			0,		/* GoadActivationFlags */
+			0);		/* params for activation */
+		
+		g_free (name);
+		
+		if (!rtn) /* bail */
+			return CORBA_OBJECT_NIL;
+	}
 	
-	if (!rtn) /* bail */
-		return CORBA_OBJECT_NIL;
-
 	CORBA_exception_init (&ev);
 	/*
 	 * 4. try to feed it the file (first by
@@ -171,8 +173,8 @@ gnome_object_restore_from_url (const char *goad_id, const char *url)
 		
 		GNOME_PersistFile_load (persist, url, &ev);
 
-		if (ev._major != CORBA_NO_EXCEPTION)
-			success = FALSE;
+		if (ev._major == CORBA_NO_EXCEPTION)
+			success = TRUE;
 		
 		GNOME_Unknown_unref (persist, &ev);
 		CORBA_Object_release (persist, &ev);

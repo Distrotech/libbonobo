@@ -1,3 +1,9 @@
+1999-08-09  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-object.c (gnome_object_add_interface): Fix
+	preconditions here.
+	(gnome_object_instance_init): refernece count is initially 1.
+
 1999-08-07    <miguel@gnu.org>
 
 	* bonobo/Makefile.am: Kill -Wstrict-prototypes.  

@@ -18,6 +18,7 @@ struct _GnomeMoniker;
 typedef struct _GnomeMoniker GnomeMoniker;
 
 struct _GnomeMoniker {
+	GtkObject parent;
 	char *goadid, *url;
 	GList *items;
 };

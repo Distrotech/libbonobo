@@ -76,7 +76,9 @@ impl_load (PortableServer_Servant servant,
 		result = (*class->load)(pf, filename);
 	}
 	if (result != 0){
-		g_warning ("FIXME: should report an exception\n");
+		CORBA_exception_set (
+			ev, CORBA_USER_EXCEPTION,
+			ex_GNOME_Persist_FileNotFound, NULL);
 	}
 }
 
@@ -99,7 +101,9 @@ impl_save (PortableServer_Servant servant,
 	}
 	
 	if (result != 0){
-		g_warning ("FIXME: should report an exception\n");
+		CORBA_exception_set (
+			ev, CORBA_USER_EXCEPTION,
+			ex_GNOME_Persist_FileNotFound, NULL);
 	}
 	pf->is_dirty = FALSE;
 }

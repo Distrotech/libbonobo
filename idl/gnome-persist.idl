@@ -16,7 +16,8 @@ module GNOME {
 
 		string get_goad_id ();
 		
-		exception WrongDataType {};		
+		exception WrongDataType {};
+		exception FileNotFound {};
 	};
 	
 	/*
@@ -39,7 +40,7 @@ module GNOME {
 		 * Loads the document object from the file
 		 * pointed in by @path
 		 */
-		void load (in string path) raises (WrongDataType);
+		void load (in string path) raises (WrongDataType, FileNotFound);
 
 		/**
 		 * save:
