@@ -18,12 +18,16 @@ oaf_DATA = $(OAF_FILES)
 
 # bonobo-moniker-untar.oafinfo
 
-bin_PROGRAMS = std-moniker bonobo-moniker-gunzip bonobo-moniker-http bonobo-moniker-extender-file
+bin_PROGRAMS = 				\
+	std-moniker 			\
+	bonobo-moniker-gunzip 		\
+	bonobo-moniker-http		\
+	moniker-test			\
+	bonobo-moniker-extender-file
 
 # bonobo-moniker-untar
 
 #noinst_PROGRAMS = moniker-control-test moniker-test
-noinst_PROGRAMS = moniker-test
 
 moniker_ldadd = 				\
 	$(top_builddir)/bonobo/libbonobo.la	\

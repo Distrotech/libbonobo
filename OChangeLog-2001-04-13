@@ -1,3 +1,7 @@
+2000-12-17  Miguel de Icaza  <miguel@helixcode.com>
+
+	* monikers/Makefile.am (bin_PROGRAMS): Install moniker test.
+
 2000-12-16  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* bonobo/bonobo-moniker-util.c (get_full_interface_name): fixed a
