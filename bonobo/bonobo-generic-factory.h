@@ -91,10 +91,8 @@ POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 int main (int argc, char *argv [])                                            \
 {                                                                             \
 	BonoboGenericFactory *factory;                                        \
-	CORBA_Environment ev;                                                 \
 	CORBA_ORB orb;                                                        \
                                                                               \
-	CORBA_exception_init (&ev);                                           \
 	gnome_init_with_popt_table (descr, version, argc, argv,               \
 				    oaf_popt_options, 0, NULL);               \
         orb = oaf_init (argc, argv);                                          \
@@ -103,7 +101,6 @@ int main (int argc, char *argv [])                                            \
 	factory = bonobo_generic_factory_new (oafiid, fn, data);              \
 	bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));     \
 	bonobo_main ();                                                       \
-	CORBA_exception_free (&ev);                                           \
 	return 0;                                                             \
 }                                                                             
 
@@ -111,10 +108,8 @@ int main (int argc, char *argv [])                                            \
 int main (int argc, char *argv [])                                            \
 {                                                                             \
 	BonoboGenericFactory *factory;                                        \
-	CORBA_Environment ev;                                                 \
 	CORBA_ORB orb;                                                        \
                                                                               \
-	CORBA_exception_init (&ev);                                           \
 	gnome_init_with_popt_table (descr, version, argc, argv,               \
 				    oaf_popt_options, 0, NULL);               \
         orb = oaf_init (argc, argv);                                          \
@@ -123,7 +118,6 @@ int main (int argc, char *argv [])                                            \
 	factory = bonobo_generic_factory_new_multi (oafiid, fn, data);        \
 	bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));     \
 	bonobo_main ();                                                       \
-	CORBA_exception_free (&ev);                                           \
 	return 0;                                                             \
 }                                                                             
 
