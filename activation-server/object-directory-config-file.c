@@ -25,6 +25,7 @@
 #include "config.h"
 #include "od-utils.h"
 #include "oaf-i18n.h"
+#include <string.h>
 #include <tree.h> /* gnome-xml */
 #include <parser.h> /* gnome-xml */
 #include <xmlmemory.h> /* guess what ? gnome-xml !! */

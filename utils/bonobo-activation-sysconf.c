@@ -25,6 +25,7 @@
 #include "config.h"
 #include "oaf-i18n.h"
 #include <glib.h>
+#include <string.h>
 #include <tree.h>        /* gnome-xml */
 #include <parser.h>      /* gnome-xml */
 #include <xmlmemory.h>   /* gnome-xml */
