@@ -1,3 +1,7 @@
+2000-09-20  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* configure.in: LINGUAS: added Catalan language
+
 2000-09-19  Jesse Pavel <jpavel@helixcode.com>
 
 	* storage-modules/gnome-stream-efs.c: fixed a few syntax errors
