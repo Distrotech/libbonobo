@@ -38,6 +38,7 @@ typedef void (*BonoboPropertySetFn) (BonoboPropertyBag *bag,
 				     gpointer           user_data);
 
 #include <bonobo/bonobo-property.h>
+#include <bonobo/bonobo-event-source.h>
 
 struct _BonoboPropertyBag {
 	BonoboObject              parent;
@@ -58,9 +59,16 @@ GtkType		          bonobo_property_bag_get_gtk_type    (void);
 BonoboPropertyBag	 *bonobo_property_bag_new	      (BonoboPropertyGetFn get_prop,
 							       BonoboPropertySetFn set_prop,
 							       gpointer            user_data);
+
+BonoboPropertyBag	 *bonobo_property_bag_new_full	      (BonoboPropertyGetFn get_prop,
+							       BonoboPropertySetFn set_prop,
+							       BonoboEventSource  *event_source,
+							       gpointer            user_data);
+
 BonoboPropertyBag        *bonobo_property_bag_construct       (BonoboPropertyBag   *pb,
 							       BonoboPropertyGetFn  get_prop,
 							       BonoboPropertySetFn  set_prop,
+							       BonoboEventSource   *event_source,
 							       gpointer             user_data);
 
 void                      bonobo_property_bag_add              (BonoboPropertyBag  *pb,
@@ -99,21 +107,10 @@ const char	         *bonobo_property_bag_get_docstring    (BonoboPropertyBag *pb
 const BonoboPropertyFlags bonobo_property_bag_get_flags        (BonoboPropertyBag *pb, const char *name);
 
 gboolean		  bonobo_property_bag_has_property     (BonoboPropertyBag *pb, const char *name);
-
-/* Listener interface functions */
-void                      bonobo_property_bag_add_listener     (BonoboPropertyBag      *pb,
-								const gchar            *name,
-								Bonobo_PropertyListener listener,
-								CORBA_Environment      *opt_ev);
-
-void                      bonobo_property_bag_remove_listener  (BonoboPropertyBag      *pb,
-								const gchar            *name, 
-								Bonobo_PropertyListener listener,
-								CORBA_Environment      *opt_ev);
-void                      bonobo_property_bag_notify_listeners (BonoboPropertyBag      *pb,
-								const char             *name,
-								const BonoboArg        *new_value,
-								CORBA_Environment      *opt_ev);
+void                      bonobo_property_bag_notify_listeners (BonoboPropertyBag *pb,
+								const char        *name,
+								const BonoboArg   *new_value,
+								CORBA_Environment *opt_ev);
 
 /* A private function, only to be used by persistence implementations. */
 GList                    *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);

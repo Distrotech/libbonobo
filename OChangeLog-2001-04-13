@@ -1,3 +1,25 @@
+2000-12-22  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* bonobo/bonobo-exception.c (bonobo_exception_get_text): removed
+	NoListening exception.
+
+	* bonobo/bonobo-property-bag.c: removed PropertyListener stuff.
+
+	* idl/bonobo-property.idl: removed the PropertyListener interface,
+	removed add/remove ChangeListener methods from PropertyBag,
+	removed noListening exception.
+	
+	* bonobo/bonobo-property-listener.[ch]: removed. We aggreate the
+	property bag with an event source instead.
+
+	* bonobo/bonobo-moniker-util.c (query_from_name): return the
+	prefix including the colon.
+
+	* samples/controls/sample-control-container.c: make it work with
+	the new PropertyBag code. 
+
+	* bonobo/bonobo-property-types.[ch]: removed
+
 2000-12-22  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo.spec.in: Removed ${prefix}/bin/std-moniker, added

@@ -21,19 +21,6 @@
 
 module Bonobo {
 
-interface PropertyListener : Bonobo::Unknown {
-
-	/**
-	 * event:
-	 * @name: Property name
-	 * @value: Property value
-	 *
-	 * This method implements the action to take when an event 
-	 * occurs on the listened to interface.
-	 */
-	oneway void event (in string name, in any value);
-};
-
 interface Property {
 	exception InvalidValue {};
 	exception ReadOnlyProperty {};
@@ -155,32 +142,6 @@ interface PropertyBag : Bonobo::Unknown {
 	 * incarnated, which is not very resource-conscious.
 	 */
 	PropertyNames getPropertyNames ();
-
-	exception NoListening {};
-	/**
-	 * addChangeListener:
-	 * @name: Property name.  Use empty string ("") to listen to all
-	 * properties in the bag.
-	 * @listener: PropertyListener Interface to notify when changes occur.
-	 *
-	 * This method attaches a listener for changes to any property in 
-	 * the bag. 
-	 */
-	void addChangeListener (in string name,
-				in PropertyListener listener)
-		raises (NotFound, NoListening);
-
-	/**
-	 * removeChangeListener:
-	 * @name: Property name.  Use empty string ("") to remove a general
-	 * bag listener.
-	 * @listener: Listener Interface to be removed.
-	 *
-	 * This method removes a bag listener from the bag. 
-	 */
-	void removeChangeListener (in string name,
-				   in PropertyListener listener)
-		raises (NotFound);
 
 	void setValues (in PropertySet set)
 		raises (Bonobo::Property::InvalidValue, Bonobo::Property::ReadOnlyProperty);

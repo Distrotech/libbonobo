@@ -149,7 +149,7 @@ impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
 void
 bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 				      const char        *event_name,
-				      CORBA_any         *value,
+				      const CORBA_any   *value,
 				      CORBA_Environment *opt_ev)
 {
 	GSList *list;

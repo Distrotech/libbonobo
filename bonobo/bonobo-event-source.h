@@ -37,7 +37,7 @@ BonoboEventSource *bonobo_event_source_construct        (BonoboEventSource *even
 							 Bonobo_EventSource corba_event_source);
 void               bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 							 const char        *event_name,
-							 CORBA_any         *value,
+							 const CORBA_any   *value,
 							 CORBA_Environment *opt_ev);
 
 POA_Bonobo_EventSource__epv *bonobo_event_source_get_epv   (void);
