@@ -1,5 +1,8 @@
 Thu Oct 19 09:50:37 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
+	* storage-modules/bonobo-storage-fs.c (fs_create_storage): small
+	bug fix.
+
 	* bonobo/bonobo-storage-plugin.c (plugin_load): use g_module_error
 	(suggestion from martin)
 
