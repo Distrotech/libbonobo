@@ -92,4 +92,4 @@ dist-hook:
 	cd $(distdir); rm -f $(CLEANFILES)
 
 TESTS_ENVIRONMENT = \
-	BONOBO_ACTIVATION_PATH="$(srcdir):$$BONOBO_ACTIVATION_PATH"
+	BONOBO_ACTIVATION_PATH="$(srcdir):$(top_builddir)/activation-server:$$BONOBO_ACTIVATION_PATH"
