@@ -44,7 +44,7 @@ bonobo_stream_extender_resolve (BonoboMonikerExtender       *extender,
 				CORBA_Environment           *ev)
 {
 	const char    *mime_type;
-	char          *oaf_requirements;
+	char          *requirements;
 	Bonobo_Unknown object;
 	Bonobo_Unknown stream;
 	Bonobo_Persist persist;
@@ -63,15 +63,15 @@ bonobo_stream_extender_resolve (BonoboMonikerExtender       *extender,
 	if (!mime_type)
 		goto unref_stream_exception;
 
-	oaf_requirements = g_strdup_printf (
+	requirements = g_strdup_printf (
 		"bonobo:supported_mime_types.has ('%s') AND repo_ids.has ('%s') AND "
 		"repo_ids.has ('IDL:Bonobo/PersistStream:1.0')",
 		mime_type, requested_interface);
 		
-	object = bonobo_activation_activate (oaf_requirements, NULL, 0, NULL, ev);
+	object = bonobo_activation_activate (requirements, NULL, 0, NULL, ev);
 	g_warning ("Attempt activate object satisfying '%s': %p",
-		   oaf_requirements, object);
-	g_free (oaf_requirements);
+		   requirements, object);
+	g_free (requirements);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto unref_stream_exception;
