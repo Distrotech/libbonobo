@@ -1,5 +1,15 @@
 2000-11-15  Michael Meeks  <michael@helixcode.com>
 
+	* storage-modules/bonobo-stream-vfs.c (fs_copy_to): special
+	case read -1 bytes case == whole file, not just first block.
+	Many thanks to Maciej for the catch and suggested fix.
+
+	* storage-modules/bonobo-stream-efs.c (real_copy_to): ditto.
+
+	* storage-modules/bonobo-stream-fs.c (fs_copy_to): ditto.
+
+2000-11-15  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (find_widgets_for_command): impl.
 	(update_cmd_state): re-impl.
 	(set_cmd_attr): do the bonobo_ui_node_set_attr before the
