@@ -1,3 +1,10 @@
+2000-10-26  Darin Adler  <darin@eazel.com>
+
+	* monikers/bonobo-moniker-http.c:
+	* monikers/moniker-control-test.c:
+	Correct #include <bonobo.h> to say #include <bonobo/bonobo.h>
+	instead. Fixes build.
+
 2000-10-26  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_to_pixbuf),
