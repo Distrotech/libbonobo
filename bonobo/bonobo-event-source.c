@@ -141,6 +141,39 @@ event_match (const char *name, gchar **event_masks)
 } 
 
 /**
+ * bonobo_event_source_has_listener:
+ * @event_source: the Event Source that will emit the event.
+ * @event_name: Name of the event being emitted
+ * 
+ *   This method determines if there are any listeners for
+ * the event to be broadcast. This can be used to detect
+ * whether it is worth constructing a potentialy expensive
+ * state update, before sending it to no-one.
+ * 
+ * Return value: TRUE if it's worth sending, else FALSE
+ **/
+gboolean
+bonobo_event_source_has_listener (BonoboEventSource *event_source,
+				  const char        *event_name)
+{
+	GSList  *l;
+	gboolean notify;
+
+	g_return_val_if_fail (BONOBO_IS_EVENT_SOURCE (event_source), FALSE);
+
+	notify = FALSE;
+	for (l = event_source->priv->listeners; l; l = l->next) {
+		ListenerDesc *desc = (ListenerDesc *) l->data;
+
+		if (desc->event_masks == NULL || 
+		    event_match (event_name, desc->event_masks))
+			notify = TRUE;
+	}
+
+	return notify;
+}
+
+/**
  * bonobo_event_source_notify_listeners:
  * @event_source: the Event Source that will emit the event.
  * @event_name: Name of the event being emitted

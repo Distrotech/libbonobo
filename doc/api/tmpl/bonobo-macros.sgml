@@ -22,9 +22,15 @@ bonobo-macros
 @type: 
 @type_as_function: 
 @corba_type: 
-@parent_type:
+@\
+			   parent_type: 
 @parent_type_macro: 
-@register_type_macro:
+@\
+			   register_type_macro: 
+<!-- # Unused Parameters # -->
+@parent_type: 
+@register_type_macro: 
+
 
 <!-- ##### MACRO BONOBO_CALL_PARENT ##### -->
 <para>
@@ -42,9 +48,12 @@ bonobo-macros
 </para>
 
 @parent_class_cast: 
-@name:
+@\
+					name: 
 @args: 
 @def_return: 
+<!-- # Unused Parameters # -->
+@name: 
 
 
 <!-- ##### MACRO BONOBO_CLASS_BOILERPLATE ##### -->
@@ -54,8 +63,11 @@ bonobo-macros
 
 @type: 
 @type_as_function: 
-@parent_type:
+@\
+				 parent_type: 
 @parent_type_macro: 
+<!-- # Unused Parameters # -->
+@parent_type: 
 
 
 <!-- ##### MACRO BONOBO_REGISTER_TYPE ##### -->
@@ -66,8 +78,11 @@ bonobo-macros
 @type: 
 @type_as_function: 
 @corba_type: 
-@parent_type:
+@\
+			     parent_type: 
 @parent_type_macro: 
+<!-- # Unused Parameters # -->
+@parent_type: 
 
 
 <!-- ##### MACRO BONOBO_CLASS_BOILERPLATE_FULL ##### -->
@@ -77,9 +92,14 @@ bonobo-macros
 
 @type: 
 @type_as_function: 
-@corba_type: 
-@parent_type:
+@\
+				      corba_type: 
+@\
+				      parent_type: 
 @parent_type_macro: 
+<!-- # Unused Parameters # -->
+@corba_type: 
+@parent_type: 
 
 
 <!-- ##### MACRO BONOBO_REGISTER_TYPE_FULL ##### -->
@@ -90,11 +110,10 @@ bonobo-macros
 @type: 
 @type_as_function: 
 @corba_type: 
-@parent_type:
+@\
+				  parent_type: 
 @parent_type_macro: 
-
-
-
-
+<!-- # Unused Parameters # -->
+@parent_type: 
 
 

@@ -37,6 +37,8 @@ typedef struct {
 
 GType              bonobo_event_source_get_type         (void) G_GNUC_CONST;
 BonoboEventSource *bonobo_event_source_new              (void);
+gboolean           bonobo_event_source_has_listener     (BonoboEventSource *event_source,
+							 const char        *event_name);
 void               bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 							 const char        *event_name,
 							 const CORBA_any   *opt_value,

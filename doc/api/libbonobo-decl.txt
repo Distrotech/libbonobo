@@ -2992,54 +2992,6 @@ BonoboArgType      a,BonoboArgType      b,CORBA_Environment *opt_ev
 <NAME>TC_Bonobo_EventSource</NAME>
 #define TC_Bonobo_EventSource ((CORBA_TypeCode)&TC_Bonobo_EventSource_struct)
 </MACRO>
-<TYPEDEF>
-<NAME>Bonobo_EventSource_ListenerId</NAME>
-   typedef CORBA_unsigned_long Bonobo_EventSource_ListenerId;
-</TYPEDEF>
-<MACRO>
-<NAME>Bonobo_EventSource_ListenerId_marshal</NAME>
-#define Bonobo_EventSource_ListenerId_marshal(x,y,z) CORBA_unsigned_long_marshal((x),(y),(z))
-</MACRO>
-<MACRO>
-<NAME>Bonobo_EventSource_ListenerId_demarshal</NAME>
-#define Bonobo_EventSource_ListenerId_demarshal(x,y,z,i) CORBA_unsigned_long_demarshal((x),(y),(z),(i))
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_EventSource_ListenerId_0</NAME>
-#define TC_IMPL_TC_Bonobo_EventSource_ListenerId_0 'B'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_EventSource_ListenerId_1</NAME>
-#define TC_IMPL_TC_Bonobo_EventSource_ListenerId_1 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_EventSource_ListenerId_2</NAME>
-#define TC_IMPL_TC_Bonobo_EventSource_ListenerId_2 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_EventSource_ListenerId_3</NAME>
-#define TC_IMPL_TC_Bonobo_EventSource_ListenerId_3 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_EventSource_ListenerId_4</NAME>
-#define TC_IMPL_TC_Bonobo_EventSource_ListenerId_4 'b'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_EventSource_ListenerId_5</NAME>
-#define TC_IMPL_TC_Bonobo_EventSource_ListenerId_5 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_Bonobo_EventSource_ListenerId</NAME>
-#define TC_Bonobo_EventSource_ListenerId ((CORBA_TypeCode)&TC_Bonobo_EventSource_ListenerId_struct)
-</MACRO>
-<MACRO>
-<NAME>Bonobo_EventSource_ListenerId__alloc</NAME>
-#define Bonobo_EventSource_ListenerId__alloc() ((Bonobo_EventSource_ListenerId *)ORBit_small_alloc (TC_CORBA_unsigned_long))
-</MACRO>
-<MACRO>
-<NAME>Bonobo_EventSource_ListenerId__freekids</NAME>
-#define Bonobo_EventSource_ListenerId__freekids(m,d) ORBit_small_freekids (TC_CORBA_unsigned_long,(m),(d))
-</MACRO>
 <MACRO>
 <NAME>ex_Bonobo_EventSource_UnknownListener</NAME>
 #define ex_Bonobo_EventSource_UnknownListener "IDL:Bonobo/EventSource/UnknownListener:1.0"
