@@ -71,11 +71,12 @@ interface View : GNOME::Unknown {
 	/**
 	 * get_canvas_item:
 	 * @aa: Whether the item should be an AA-item or not
+	 * @proxy: The Proxy used to notify of requested updates.
 	 *
 	 * Returns a GNOME::Canvas::Item interface, or CORBA_OBJECT_NIL
 	 * if this object does not support the Item interface
 	 */
-	Canvas::Item get_canvas_item (in boolean aa);
+	Canvas::Item get_canvas_item (in boolean aa, in Canvas::ItemProxy proxy);
 };
 
 interface ViewFrame : GNOME::Unknown {

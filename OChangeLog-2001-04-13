@@ -1,5 +1,15 @@
 1999-09-09  Miguel de Icaza  <miguel@gnu.org>
 
+	* bonobo/gnome-view.c (make_component): Invoke gdk_rgb_init if we
+	create an _aa canvas.
+
+	* bonobo/gnome-canvas-component.c (gcc_update): Copy the entire
+	affine, not only the first 5 fields.
+
+	* bonobo/gnome-bonobo-item.c (gbi_update): ditto
+
+	* doc/bonobo-faq.sgml: Start a FAQ.
+	
 	* bonobo/gnome-client-site.c: New routine for requesting a
 	GnomeCanvasItem from a View.  I am not sure if I like this setup.
 	Needs discussion with Nat.
