@@ -1,3 +1,7 @@
+2003-05-13  Michael Meeks  <michael@ximian.com>
+
+	* activation-server/Makefile.am: add object-directory.h
+
 2003-05-12  Michael Meeks  <michael@ximian.com>
 
 	* activation-server/client.c (remove_load_path, add_load_path):

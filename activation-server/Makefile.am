@@ -28,6 +28,7 @@ bonobo_activation_server_SOURCES=				\
 	activation-context-query-parser.c			\
 	activation-context-query-parser.h			\
 	activation-context-corba.c				\
+	object-directory.h					\
 	object-directory-corba.c				\
 	object-directory-load.c					\
 	object-directory-activate.c				\
