@@ -524,12 +524,7 @@ bonobo_application_register_message_va (BonoboApplication *app,
  * @first_arg_type: #GType of first argument of message, or %G_TYPE_NONE.
  * @...: %G_TYPE_NONE -terminated list of argument #GType's
  * 
- * Registers a new message type that the application supports. Example:
- * <informalexample><programlisting>
- * bonobo_application_register_message (app, "openURL", "Opens a new URL in the browser."
- *                                      " Parameters: url(string), open-in-new-window(boolean)",
- *                                      NULL, G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_NONE);
- * </programlisting></informalexample>
+ * Registers a new message type that the application supports.
  **/
 void
 bonobo_application_register_message (BonoboApplication *app,
