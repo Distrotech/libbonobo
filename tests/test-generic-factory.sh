@@ -11,6 +11,7 @@ export TMPDIR;
 BONOBO_ACTIVATION_SERVER="../activation-server/bonobo-activation-server";
 PATH=".:$PATH";
 LD_LIBRARY_PATH="./.libs:$LD_LIBRARY_PATH";
+unset BONOBO_ACTIVATION_DEBUG_OUTPUT
 
 export BONOBO_ACTIVATION_SERVER PATH LD_LIBRARY_PATH
 
@@ -18,15 +19,14 @@ export BONOBO_ACTIVATION_SERVER PATH LD_LIBRARY_PATH
 set -m
 
 echo "Starting factory"
-./generic-factory | sed -e '/^iid OAFIID:BrokenNoType.*/{ d; }
-                            /^.*OAFIID:This#!!\%\$iid.*OAFIID_ContainsBadChars.*/{ d; }' > generic-factory.output &
+./generic-factory > generic-factory.output &
 sleep 1
 
 echo "Starting client"
 ./test-generic-factory > test-generic-factory.output
 
 echo "Waiting for factory to terminate; Please hold on a second, otherwise hit Ctrl-C."
-wait
+wait %1 2> /dev/null
 
 echo "Comparing factory output with model..."
 if diff -u $MODELS_DIR/generic-factory.output generic-factory.output; then

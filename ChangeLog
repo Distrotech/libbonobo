@@ -1,3 +1,12 @@
+2004-01-14  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/generic-factory.c (generic_factory_cb): take some
+	additional precautions against possible reentrancy.
+
+	* tests/test-generic-factory.sh: unset
+	BONOBO_ACTIVATION_DEBUG_OUTPUT env var to suppress b-a-s errors,
+	instead of filtering the factory output through grep.
+
 2004-01-14  The Written Word  <bugzilla-gnome@thewrittenword.com>
 
 	* bonobo/bonobo-moniker-util.c (async_activation_cb) 

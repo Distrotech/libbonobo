@@ -15,18 +15,18 @@ generic_factory_cb (BonoboGenericFactory *this,
 		    const char           *object_id,
 		    void                 *data)
 {
-	static int counter = 1;
 	BonoboObject *object = NULL;
 	
 	g_return_val_if_fail (object_id != NULL, NULL);
 
-
 	if (!strcmp (object_id, "OAFIID:Test_Generic_Factory")) {
-		printf("new instance: #%i\n", counter);
+		static int counter  = 1;
+		int        instance = counter++;
+
+		printf("new instance: #%i\n", instance);
 		object = (BonoboObject *) bonobo_event_source_new ();
 		g_signal_connect (object, "destroy", G_CALLBACK (destroy_cb),
-				  GINT_TO_POINTER (counter));
-		++counter;
+				  GINT_TO_POINTER (instance));
 	} else
 		g_warning ("Unknown OAFIID '%s'", object_id);
 
