@@ -1,3 +1,18 @@
+2000-09-14  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (bonobo_ui_toolbar_set_homogeneous):
+	stub.
+
+	* bonobo/bonobo-ui-compat.c: turn off debugging.
+	(bonobo_ui_handler_menu_set_sensitivity): impl.
+
+	* bonobo/app.c: add tests.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_get_parent_path): add.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_container_set_prop): use
+	it & fix leak.
+
 2000-09-13  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_menu_new): Handle
