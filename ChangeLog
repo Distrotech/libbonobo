@@ -1,3 +1,8 @@
+2001-04-18  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-storage.c (stream_copy_tests): prine copyTo
+	test.
+
 2001-04-18  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/*.[ch]: Use <bonobo/bonobo-defs.h> and
