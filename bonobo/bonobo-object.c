@@ -474,8 +474,6 @@ gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
 	*
 	*   This check is not perfect, but might help some people.
 	*/
-       g_return_if_fail (object->priv->ao->ref_count == 1);
-       g_return_if_fail (newobj->priv->ao->ref_count == 1);
        
        oldao = newobj->priv->ao;
 

@@ -1,3 +1,7 @@
+1999-12-12 Elliot Lee <sopwith@redhat.com>
+	* bonobo/gnome-generic-factory.[ch]: Add gnome_generic_factory_new_multi - just
+	  uses a different callback signature which passes the goad ID.
+
 1999-12-13  Nat Friedman  <nat@helixcode.com>
 
 	* components/image-x-png/bonobo-image-x-png.c

@@ -28,6 +28,7 @@ typedef struct _GnomeGenericFactory GnomeGenericFactory;
 typedef struct _GnomeGenericFactoryPrivate GnomeGenericFactoryPrivate;
 
 typedef GnomeObject * (*GnomeGenericFactoryFn)(GnomeGenericFactory *Factory, void *closure);
+typedef GnomeObject * (*GnomeFactoryCallback)(GnomeGenericFactory *factory, const char *goad_id, gpointer closure);
 					
 struct _GnomeGenericFactory {
 	GnomeObject base;
@@ -35,15 +36,14 @@ struct _GnomeGenericFactory {
 	/*
 	 * The function factory
 	 */
-	GnomeGenericFactoryFn factory;
-	void *factory_closure;
+	GnomeGenericFactoryFn factory; /* compat reasons only */
+	GnomeFactoryCallback factory_cb;
+	gpointer factory_closure;
 
 	/*
 	 * The goad_id for this generic factory
 	 */
 	char *goad_id;
-
-	GnomeGenericFactoryPrivate *priv;
 };
 
 typedef struct {
@@ -52,7 +52,7 @@ typedef struct {
 	/*
 	 * Virtual methods
 	 */
-	GnomeObject * (*new_generic)(GnomeGenericFactory *c_factory);
+	GnomeObject * (*new_generic)(GnomeGenericFactory *c_factory, const char *goad_id);
 } GnomeGenericFactoryClass;
 
 GtkType gnome_generic_factory_get_type  (void);
@@ -62,11 +62,17 @@ GnomeGenericFactory *gnome_generic_factory_new (
 	GnomeGenericFactoryFn factory,
 	void *data);
 
+GnomeGenericFactory *gnome_generic_factory_new_multi (
+	const char *goad_id,
+	GnomeFactoryCallback factory_cb,
+	gpointer data);
+
 GnomeGenericFactory *gnome_generic_factory_construct (
 	const char *goad_id,
 	GnomeGenericFactory  *c_factory,
 	CORBA_Object          corba_factory,
 	GnomeGenericFactoryFn factory,
+	GnomeFactoryCallback factory_cb,
 	void *data);
 
 void gnome_generic_factory_set (
