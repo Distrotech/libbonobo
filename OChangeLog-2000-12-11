@@ -1,3 +1,8 @@
+1999-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/Makefile.am (EXTRA_DIST): Include corba_DATA in
+	distirbution. 
+
 1999-05-30  Matt Loper  <matt@gnome-support.com>
 
 	* idl/gnome-component.idl (GNOME): Changed the GNOME::Component
