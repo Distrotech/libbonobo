@@ -435,7 +435,11 @@ bonobo_property_bag_client_get_field_##type (Bonobo_PropertyBag       pb,	\
 	if (any == NULL)							\
 		return 0.0;							\
 										\
-	g_return_val_if_fail (any->_type->kind == tk, (def));			\
+        if (any->_type->kind != tk) {                                           \
+                g_warning ("Assertion `any->_type->kind == tk' failed");        \
+                CORBA_any__free (any, NULL, TRUE);                              \
+                return (def);                                                   \
+        }                                                                       \
 										\
 	d = *(corbatype *) any->_value;						\
 										\
@@ -468,7 +472,11 @@ bonobo_property_bag_client_get_field_string (Bonobo_PropertyBag       pb,
 	if (any == NULL)
 		return NULL;
 
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_string, NULL);
+	if (any->_type->kind != CORBA_tk_string) {
+		g_warning ("assertion failed: `any->_type->kind == CORBA_tk_string'");
+		CORBA_any__free (any, NULL, TRUE);
+		return NULL;
+	}
 
 	str = g_strdup (*(char **) any->_value);
 

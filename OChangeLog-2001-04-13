@@ -1,3 +1,18 @@
+2001-02-17  Iain Holmes  <iain@ximian.com>
+
+	* bonobo/bonobo-ui-config-widget.c (set_values): Set the values in the
+	widget to be the correct ones.
+
+	* bonobo/bonobo-ui-sync-toolbar.[ch] (bonobo_ui_sync_toolbar_get_look): Make
+	this a public function to return the toolbar style.
+
+	* bonobo/bonobo-ui-engine-config.c (bonobo_ui_engine_config_construct): Hydrate
+	the config values.
+
+	* bonobo/bonobo-property-bag-client.c 
+	(bonobo_property_bag_client_get_field_##type): Free the CORBA_any on error.
+	(bonobo_property_bag_client_get_field_string): Ditto.
+
 2001-02-17  Michael Meeks  <michael@ximian.com>
 
 	* doc/api/bonobo-api.sgml: remove bonobo-embeddable-factory &
