@@ -1,3 +1,7 @@
+1999-05-26  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* bonoboConf.sh.in: typo: XML -> Bonobo
+
 1999-05-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* idl/Makefile.am (idl_DATA): Removed gnome-base.idl and
