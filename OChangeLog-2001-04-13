@@ -1,3 +1,15 @@
+2000-10-09  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-control-frame.[ch]: Remove undo signal.
+
+	* bonobo/bonobo-control.[ch]: Remove undo signal.
+
+2000-10-07  Dan Winship  <danw@helixcode.com>
+ 
+	* bonobo/bonobo-main.c (bonobo_x_error_handler): Hand off to
+ 	gdk_x_error if it's not something we're ignoring, so that
+ 	gdk_error_trap_{push,pop} continue to work as expected.
+
 2000-10-08  Martin Baulig  <martin@home-of-linux.org>
 
 	* gshell/gshell.c (zoom_level_changed_cb): New callback function.

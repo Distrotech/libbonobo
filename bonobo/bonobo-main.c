@@ -61,11 +61,11 @@ bonobo_poa_manager (void)
 	return __bonobo_poa_manager;
 }
 
+static int (*gdk_x_error) (Display *, XErrorEvent *);
+
 static int
 bonobo_x_error_handler (Display *display, XErrorEvent *error)
 {
-	char buf [64];
-
 	if (!error->error_code)
 		return 0;
 
@@ -80,16 +80,10 @@ bonobo_x_error_handler (Display *display, XErrorEvent *error)
 		return 0;
 
 	/*
-	 * If it wasn't a BadDrawable error, we abort.
+	 * Otherwise, let gdk deal.
 	 */
 
-	XGetErrorText (display, error->error_code, buf, 63);
-
-	g_error ("%s\n  serial %ld error_code %d request_code %da minor_code %d",
-		 buf, error->serial, error->error_code, error->request_code,
-		 error->minor_code);
-
-	return 0;
+	return gdk_x_error (display, error);
 }
 
 /**
@@ -121,7 +115,7 @@ bonobo_setup_x_error_handler (void)
 
 	error_handler_setup = TRUE;
 
-	XSetErrorHandler (bonobo_x_error_handler);
+	gdk_x_error = XSetErrorHandler (bonobo_x_error_handler);
 }
 
 /**
