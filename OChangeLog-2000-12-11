@@ -1,3 +1,21 @@
+2000-10-11  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (status_sync_state): decode status.
+
+	* bonobo/bonobo-ui-xml.c (override_node_with): prune overrides
+	_after_ transfering the overrides; doh.
+
+	* bonobo/bonobo-win.c (status_sync_state): set the state with the
+	component id.
+	(update_status): remove quick check on dirty bit, we need to look
+	deeper.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_set_status):
+	fix leak and make set status "" work ( thanks to John Sullivan ).
+	Also encode status for translation.
+
+	* doc/ui-faq.txt: explain cmd / widget and accelerators.
+
 Wed Oct 11 18:29:45 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/gnome-*: use prefix bonobo- instead of gnome-,
