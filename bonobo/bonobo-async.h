@@ -1,12 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * bonobo-async.h: Code to make hand written
- * async CORBA wrappers easy to write.
+ * bonobo-async.h: Code to make async invocations
+ * of synchronous methods easier to perform.
  *
  * Author:
- *     Miguel de Icaza (miguel@gnu.org).
+ *     Michael Meeks (michael@ximian.com)
  *
- * Copyright 2000 Helix Code, Inc.
+ * Copyright 2001 Ximian, Inc.
  */
 #ifndef _BONOBO_ASYNC_H_
 #define _BONOBO_ASYNC_H_
@@ -14,46 +14,23 @@
 #include <glib.h>
 #include <orbit/orbit.h>
 
-
 G_BEGIN_DECLS
 
-typedef enum {
-	BONOBO_ASYNC_IN  = 0x1,
-	BONOBO_ASYNC_OUT = 0x2
-} BonoboAsyncArgFlag;
-
-typedef struct {
-	const CORBA_TypeCode  type;
-	BonoboAsyncArgFlag    flag;
-} BonoboAsyncArg;
-
-typedef struct {
-	const char           *name;
-	const CORBA_TypeCode  ret_type;
-	const BonoboAsyncArg *arguments;  /* NULL-terminated */
-	const CORBA_TypeCode *exceptions; /* NULL-terminated */
-} BonoboAsyncMethod;
-
-typedef struct _BonoboAsyncReply BonoboAsyncReply;
-
+#if 0
 typedef void (*BonoboAsyncCallback) (BonoboAsyncReply  *reply,
+				     gpointer           retval,
+				     gpointer          *out_args,
 				     CORBA_Environment *ev,
 				     gpointer           user_data);
 
-void bonobo_async_demarshal (BonoboAsyncReply        *reply,
-			     gpointer                 retval,
-			     gpointer                *out_args);
-
-void bonobo_async_invoke    (const BonoboAsyncMethod *method,
-			     BonoboAsyncCallback      cb,
-			     gpointer                 user_data,
-			     guint                    timeout_msec,
-			     CORBA_Object             object,
-			     gpointer                *args,
-			     CORBA_Environment       *ev);
-
-GIOPRecvBuffer *bonobo_async_handle_get_recv (BonoboAsyncReply *reply);
-
+void bonobo_async_invoke    (const ORBit_IMethod       *method,
+			     BonoboAsyncCallback        cb,
+			     gpointer                   user_data,
+			     guint                      timeout_msec,
+			     CORBA_Object               object,
+			     gpointer                  *args,
+			     CORBA_Environment         *ev);
+#endif
 G_END_DECLS
 
 #endif /* _BONOBO_ASYNC_H_ */

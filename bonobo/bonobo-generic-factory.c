@@ -53,11 +53,7 @@ activate_servant (void *servant, gpointer shlib_id)
 	return o;
 }
 
-static PortableServer_ServantBase__epv base_epv = {
-	NULL,
-	NULL,
-	NULL
-};
+PortableServer_ServantBase__epv bonobo_generic_base_epv = { NULL };
 POA_GNOME_ObjectFactory__vepv bonobo_generic_factory_vepv;
 
 static GObjectClass *bonobo_generic_factory_parent_class = NULL;
@@ -298,13 +294,6 @@ bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
 }
 
 static void
-init_generic_factory_corba_class (void)
-{
-	bonobo_generic_factory_vepv._base_epv = &base_epv;
-	bonobo_generic_factory_vepv.GNOME_ObjectFactory_epv = bonobo_generic_factory_get_epv ();
-}
-
-static void
 bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
@@ -315,7 +304,8 @@ bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 
 	klass->new_generic = bonobo_generic_factory_new_generic;
 
-	init_generic_factory_corba_class ();
+	bonobo_generic_factory_vepv._base_epv = &bonobo_generic_base_epv;
+	bonobo_generic_factory_vepv.GNOME_ObjectFactory_epv = bonobo_generic_factory_get_epv ();
 }
 
 /**

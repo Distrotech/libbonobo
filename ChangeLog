@@ -1,3 +1,10 @@
+2001-07-12  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-generic-factory.c (init_generic_factory_corba_class):
+	remove, unroll into
+	(bonobo_generic_factory_class_init): here, setup the
+	_base_epv.
+
 2001-07-12  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-marshal.list: Added `VOID:POINTER,STRING' and
