@@ -286,6 +286,7 @@ gnome_object_object_destroy (GtkObject *object)
 		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, &ev);
 		PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
 
+		POA_GNOME_Unknown__fini (sevant, &ev);
 		CORBA_exception_free (&ev);
 		CORBA_free(oid);
 	}

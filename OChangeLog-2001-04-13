@@ -1,3 +1,11 @@
+1999-09-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-bonobo-item.c (gbi_finalize): Add call to
+	POA_GNOME_Unknown__fini here too.
+
+	* bonobo/gnome-object.c (gnome_object_object_destroy): Add call to
+	POA_GNOME_Unknown__fini here.
+
 1999-09-09  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-view.c (make_component): Invoke gdk_rgb_init if we
