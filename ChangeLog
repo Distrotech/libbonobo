@@ -1,3 +1,7 @@
+2001-09-21  Havoc Pennington  <hp@redhat.com>
+
+	* configure.in, autogen.sh: remove CERTIFIED_GNOMIE
+
 2001-09-20  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-moniker-util.c
