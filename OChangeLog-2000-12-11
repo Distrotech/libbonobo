@@ -1,3 +1,27 @@
+2000-03-17  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-uih-toolbar.c:
+	(toolbar_toplevel_item_create_widgets): Check for NULL
+	toolbar_item before reffing and adding to hash table.
+	The separator case does not create a widget. Added comments
+	explaining this and why it is bad (can't remove later).
+	(toolbar_toplevel_item_set_sensitivity_internal): Handle
+	the NULL toolbar_widget case, since it's legitimate when
+	the item is a separator. Added explanatory comment.
+	(bonobo_toplevel_set_sensitivity): Changed name to
+	bonobo_toplevel_item_set_sensitivity; made it call
+	toolbar_toplevel_get_item instead of toolbar_toplevel_get_toolbar
+	and bonobo_toplevel_item_set_sensitivity_internal instead of
+	bonobo_toplevel_set_sensitivity_internal. Maybe both functions
+	are needed for a complete implementation, but there was only
+	one caller to this function and it expected the item version.
+	Obviously this code path had never been followed.
+
+	* bonobo/bonobo-ui-handler.h:
+	(bonobo_ui_handler_toolbar_get_orientation),
+	(bonobo_ui_handler_toolbar_set_orientation): Eliminated
+	duplicate prototypes.
+
 2000-03-10  Michael Meeks  <michael@helixcode.com>
 
 	* samples/controls/bonobo-clock-control.gnorba:
