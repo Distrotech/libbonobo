@@ -1,3 +1,19 @@
+2000-09-05  Michael Meeks  <michael@helixcode.com>
+
+	* components/text-plain/bonobo-text-plain.c (create_view_menus): fix
+	acute brokenness; how did this ever work ?
+
+	* bonobo/bonobo-ui-xml.c (path_split, path_freev): implement to allow
+	escaped '/'s in paths; grr. text/plain.
+
+	* samples/compound-doc/paint-component-simple.c (view_color_select_cb):
+	error on impossible case. (view_set_color): print the color we set to.
+
+	* bonobo/bonobo-app.c (menu_item_set_global_accels): implement.
+	(keybindings_free, update_keybindings, bonobo_app_binding_handle): impl.
+	(destroy_priv, construct_priv): hook in.
+	(construct_priv): associate the window with the App.
+
 2000-09-04  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/extract.c: A program for extracting translatable strings from
