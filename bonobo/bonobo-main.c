@@ -157,7 +157,6 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	 *   2. An extra system call per write might be regarded by
 	 *      some as a performance hit.
 	 *
-
 	 * Another possibility is to surround the call to writev() in
 	 * ORBit (giop-msg-buffer.c:197 or so) with something like
 	 * this:

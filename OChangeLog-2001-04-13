@@ -1,3 +1,22 @@
+1999-08-29  Nat Friedman  <nat@gnome-support.com>
+
+	* samples/sample-container.c (component_view_set_size): New
+ 	function to abstract away the container-side size setting.
+	(component_request_resize_cb): New function to handle component
+ 	size change requests.
+	(component_add_view): Connect to the "resize_request" signal.
+
+	* bonobo/gnome-view.c (gnome_view_request_resize): New method.
+
+	* bonobo/gnome-bonobo-widget.c: More work.
+
+	* samples/sample-container.c (container_add_embeddable_cmd):
+ 	Ignore NULL goad ids.
+
+	* bonobo/gnome-ui-handler.c (gnome_ui_handler_set_app): Set the
+ 	UIHandler's global accelgroup to the GnomeApp's accelgroup if it's
+ 	not already set.
+
 1999-08-28  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* bonobo/gnome-view-frame.c: Make `gnome_view_frame_epv' and
