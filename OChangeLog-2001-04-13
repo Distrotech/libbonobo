@@ -1,5 +1,9 @@
 2000-10-03  Zach Frey <zfrey@lanich.com>
 
+	* bonobo.spec: comment out gshell
+
+2000-10-03  Zach Frey <zfrey@lanich.com>
+
 	* doc/api/Makefile.am: Update for new headers.
 
 	* doc/api/*: update.
