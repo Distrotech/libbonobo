@@ -27,9 +27,10 @@ impl_create_stream (PortableServer_Servant servant, const CORBA_char *path, CORB
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStream *stream;
 	
-	stream = CLASS (storage)->create_stream (storage, path, ev);
+	if ((stream = CLASS (storage)->create_stream (storage, path, ev)))
+	  return (GNOME_Stream) GNOME_OBJECT (stream)->object;
 
-	return (GNOME_Stream) GNOME_OBJECT (stream)->object;
+	return NULL;
 }
 
 static GNOME_Stream
@@ -41,9 +42,10 @@ impl_open_stream (PortableServer_Servant servant,
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStream *stream;
 	
-	stream = CLASS (storage)->open_stream (storage, path, mode, ev);
+	if ((stream = CLASS (storage)->open_stream (storage, path, mode, ev)))
+	  return (GNOME_Stream) GNOME_OBJECT (stream)->object;
 
-	return (GNOME_Stream) GNOME_OBJECT (stream)->object;
+	return NULL;
 }
 
 static GNOME_Storage 
@@ -54,9 +56,10 @@ impl_create_storage (PortableServer_Servant servant,
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStorage *new_storage;
 	
-	new_storage = CLASS(storage)->create_storage (storage, path, ev);
+	if ((new_storage = CLASS(storage)->create_storage (storage, path, ev)))
+	  return (GNOME_Storage) GNOME_OBJECT (new_storage)->object;
 
-	return (GNOME_Storage) GNOME_OBJECT (new_storage)->object;
+	return NULL;
 }
 
 static GNOME_Storage
@@ -68,9 +71,10 @@ impl_open_storage (PortableServer_Servant servant,
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStorage *open_storage;
 	
-	open_storage = CLASS(storage)->open_storage (storage, path, ev);
+	if ((open_storage = CLASS(storage)->open_storage (storage, path, ev)))
+	  return (GNOME_Storage) GNOME_OBJECT (open_storage)->object;
 
-	return (GNOME_Storage) GNOME_OBJECT (open_storage)->object;
+	return NULL;
 }
 
 static void
