@@ -78,7 +78,7 @@ oaf_registration_check(const OAFRegistrationCategory *regcat, CORBA_Environment 
 	}
       else if(new_ior)
         {
-          g_free(new_ior)
+          g_free(new_ior);
         }
     }
 
