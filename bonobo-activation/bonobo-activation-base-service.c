@@ -438,7 +438,7 @@ bonobo_activation_internal_service_get_extended (
         
         CORBA_exception_free (&myev);
 
-        BONOBO_ACTIVATION_LOCK ();
+        BONOBO_ACTIVATION_UNLOCK ();
 
 	return retval;
 }
