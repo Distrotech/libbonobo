@@ -1,5 +1,11 @@
 2000-10-02  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-compat.c: s/sloppy_check*/SLOPPY_CHECK*/
+	(bonobo_ui_handler_menu_set_sensitivity): remove embarassing error
+	inhibiting all menu events doh.
+
+2000-10-02  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-toolbar-button-item.c (create_pixmap_widget_from_pixbuf): 
 	don't set the alpha threshold to a daft value.
 
