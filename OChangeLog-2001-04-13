@@ -1,5 +1,9 @@
 2001-02-23  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-ui-component.c: Fully API documented.
+
+2001-02-23  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-ui-xml.c (reinstate_old_node): mark parent dirty
 	on remove.
 
