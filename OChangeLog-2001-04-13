@@ -1,3 +1,18 @@
+2001-01-13  Jason Leach  <jasonleach@usa.net>
+
+	* bonobo/bonobo-exception.c: replaced an #include <gnome.h> with
+	necessary headers to trim dependencies.
+
+	* bonobo/bonobo-object-directory.c: Ditto.
+	* bonobo/bonobo-selector.c: Ditto.
+	* bonobo/bonobo-selector-widget.c: Ditto.
+	* bonobo/bonobo-win.c: Ditto.
+	
+	* bonobo/bonobo-main.h: removed unnecessary #include
+	<libgnome/gnome-defs.h>
+	
+	* bonobo/bonobo-main.c: removed unnecessary #include <gnome.h>
+
 2001-01-12  Miguel de Icaza  <miguel@ximian.com>
 
 	* bonobo/bonobo-item-handler.c (bonobo_item_option_parse): Bug fix.
