@@ -307,9 +307,9 @@ do_barrier (int signum)
 /**
  * bonobo_activation_is_initialized:
  *
- * Tells you whether or not OAF is initialized.
+ * Tells you whether or not bonobo-activation is initialized.
  *
- * Return value: whether OAF is initialized or not.
+ * Return value: whether bonobo-activation is initialized or not.
  */
 gboolean
 bonobo_activation_is_initialized (void)
@@ -319,12 +319,12 @@ bonobo_activation_is_initialized (void)
 
 
 /**
- * bonobo_activation_init:
+ * bonobo_activation_get_popt_table_name:
  *
  * Get the table name to use for the oaf popt options table when
  * registering with libgnome
  * 
- * Return value: A localized copy of the string "OAF options"
+ * Return value: A localized copy of the string "bonobo activation options"
  */
 
 char *
