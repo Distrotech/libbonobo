@@ -1,3 +1,34 @@
+2001-01-05  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-engine-config.[ch]: Half impl.
+
+	* bonobo/bonobo-ui-engine.h: add BonoboUIError
+
+	* bonobo/bonobo.h: remove bonobo-ui-xml.h
+
+	* bonobo/Makefile.am (noinst_HEADERS): move ui-xml.h here.
+
+	* bonobo/bonobo-ui-xml.h: remove BonoboUIXmlError, rename to
+	BonoboUIError
+
+	* Rename all instances.
+
+	* bonobo/bonobo-ui-engine.c (override_fn): upd to new sig.
+
+	* bonobo/bonobo-ui-xml.c (override_node_with): pass both new and old
+	nodes on 'OVERRIDE'
+	(bonobo_ui_xml_class_init): upd decl.
+
+2001-01-04  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-sync-menu.c (impl_bonobo_ui_sync_menu_stamp_root): 
+	tolerate NULL menu.
+
+	* bonobo/bonobo-ui-engine.c (real_exec_verb): remove warning
+	on NIL corba reference to help local re-use.
+	(real_emit_ui_event): ditto.
+
+	* bonobo/bonobo-win.c (bonobo_window_set_config_path): remove.
 2001-01-04  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_add_interface): compute a
