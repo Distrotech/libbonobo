@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-02-09 12:07+0100\n"
+"POT-Creation-Date: 2003-03-14 15:54+0000\n"
 "PO-Revision-Date: 2003-02-10 18:40+0200\n"
 "Last-Translator: Arman Aksoy (Armish) <armish@linux-sevenler.de>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -195,12 +195,12 @@ msgstr "Moniker genel öğesi"
 msgid "stream MonikerExtender"
 msgstr "Moniker Kapsamındaki akım"
 
-#: monikers/bonobo-moniker-oaf.c:51
+#: monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
 msgstr "'%s' etkinleştirmesi kullanılmayacak"
 
-#: monikers/bonobo-moniker-oaf.c:60
+#: monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
 msgstr "'%s' etkinleştirmesi başarısız"
@@ -233,4 +233,3 @@ msgstr "Echo içeriğinin  bir örneği yaratılamıyor"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "'%s' dışlaması gerçekleşti"
-

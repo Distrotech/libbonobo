@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-01-18 12:33+0100\n"
+"POT-Creation-Date: 2003-03-14 15:54+0000\n"
 "PO-Revision-Date: 2002-02-26 00:23+0100\n"
 "Last-Translator: Andraž Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: slovenian <sl@li.org>\n"
@@ -193,11 +193,13 @@ msgstr "generičen vzdevek predmetov"
 msgid "stream MonikerExtender"
 msgstr "tokovni PodaljšekVzdevka"
 
-#: monikers/bonobo-moniker-oaf.c:51
+#: monikers/bonobo-moniker-oaf.c:53
+#, c-format
 msgid "Exception activating '%s'"
 msgstr "Izjema ob aktivaciji '%s'"
 
-#: monikers/bonobo-moniker-oaf.c:60
+#: monikers/bonobo-moniker-oaf.c:62
+#, c-format
 msgid "Failed to activate '%s'"
 msgstr "Nisem uspel aktivirati '%s'"
 

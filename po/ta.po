@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil Libbonobo 1.9.7\n"
-"POT-Creation-Date: 2003-01-20 16:07+0000\n"
+"POT-Creation-Date: 2003-03-14 15:54+0000\n"
 "PO-Revision-Date: 2002-11-09 9:30-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -194,12 +194,12 @@ msgstr "ÅÊÅ¢Âø ¯ÕôÀÊ moniker"
 msgid "stream MonikerExtender"
 msgstr "µ¨¼ MonikerExtender"
 
-#: monikers/bonobo-moniker-oaf.c:51
+#: monikers/bonobo-moniker-oaf.c:53
 #, fuzzy, c-format
 msgid "Exception activating '%s'"
 msgstr "'%s àñÎ ¦ºöÔõ§À¡Ð Å¢¾¢Å¢ÄìÌ (exception)"
 
-#: monikers/bonobo-moniker-oaf.c:60
+#: monikers/bonobo-moniker-oaf.c:62
 #, fuzzy, c-format
 msgid "Failed to activate '%s'"
 msgstr "'%s àñÎ ¦ºöÂ ÓÊÂÅ¢ø¨Ä"

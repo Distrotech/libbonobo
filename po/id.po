@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
-"POT-Creation-Date: 2003-02-05 19:53+0100\n"
+"POT-Creation-Date: 2003-03-14 15:54+0000\n"
 "PO-Revision-Date: 2003-02-06 10:27+0700\n"
 "Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
 "Language-Team: Indonesia <id@li.org>\n"
@@ -195,12 +195,12 @@ msgstr "item moniker generik"
 msgid "stream MonikerExtender"
 msgstr "stream MonikerExtender"
 
-#: monikers/bonobo-moniker-oaf.c:51
+#: monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
 msgstr "Ada exception saat aktifasi '%s'"
 
-#: monikers/bonobo-moniker-oaf.c:60
+#: monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
 msgstr "Gagal saat aktifasi '%s'"

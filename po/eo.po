@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.0\n"
-"POT-Creation-Date: 2003-03-06 13:26-0500\n"
+"POT-Creation-Date: 2003-03-14 15:54+0000\n"
 "PO-Revision-Date: 2003-03-06 13:55+0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -148,8 +148,7 @@ msgstr "Eraro dum la eraro-kontrolo; ne escepto"
 msgid "General activation error with no description"
 msgstr "Ĝenerala aktivigo-eraro kun ne priskribo"
 
-#: bonobo/bonobo-generic-factory.h:74
-#: bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "Ne povis prepari Bonobo-on"
 
@@ -232,4 +231,3 @@ msgstr "Ne povis krei instancon de la ekzempla echo-a komponanto"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Okazis escepto '%s'"
-
