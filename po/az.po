@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 1.96.0\n"
-"POT-Creation-Date: 2001-08-07 15:33-0400\n"
-"PO-Revision-Date: 2000-06-19 20:30GMT +0200\n"
+"Project-Id-Version: libbonobo2 1.101.0\n"
+"POT-Creation-Date: 2001-08-08 18:25+0200\n"
+"PO-Revision-Date: 2001-08-07 20:52GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
 "MIME-Version: 1.0\n"
@@ -124,13 +124,12 @@ msgid "Error checking error; no exception"
 msgstr "Xəta yoxlaması xətası; xüsusi hal yoxdur"
 
 #: bonobo/bonobo-exception.c:269
-#, fuzzy
 msgid "General activation error with no description"
-msgstr "Cism izahında imla xətası var"
+msgstr "İzahsız ümumi fəallaşdırma xətası"
 
 #: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
 msgid "Could not initialize Bonobo"
-msgstr "Bonobonu başlada bilmədim"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
@@ -159,24 +158,3 @@ msgstr "sıravi üzv monikeri"
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "axım MonikerExtender"
-
-#~ msgid "The User canceled the save"
-#~ msgstr "İstifadəçi qeydi dayandırdı"
-
-#~ msgid "No filename"
-#~ msgstr "Fayl adı yoxdur"
-
-#~ msgid "unknown mime type for '%s'"
-#~ msgstr "'%s' üçün namə'lum mime növü"
-
-#~ msgid "no handlers for mime type '%s'"
-#~ msgstr "'%s' mime növü üçün qulp yoxdur"
-
-#~ msgid "file MonikerExtender"
-#~ msgstr "fayl MonikerExtender"
-
-#~ msgid "generic file moniker"
-#~ msgstr "sıravi fayl monikeri"
-
-#~ msgid "Can not bonobo_init"
-#~ msgstr "Bonobo_initi başlada bilmədim"
