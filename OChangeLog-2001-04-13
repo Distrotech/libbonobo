@@ -1,3 +1,14 @@
+2000-10-16  Martin Baulig  <baulig@suse.de>
+
+	* configure.in (XML_LIBS): Separately check for libxml and AC_SUBST
+	this; we link bonobo-ui-extract only against libxml, but none of the
+	other GNOME libraries.
+
+	* bonobo/extract.c: Only use libxml here so we don't need to have
+	a connection to the X server to use this tool.
+	* bonobo/Makefile.am (bonobo_ui_extract_LDADD): Replaced this with
+	$(XML_LIBS).
+
 2000-10-15  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am (SUBDIRS): Put `po' last so the *-ui.xml.h files are
