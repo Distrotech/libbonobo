@@ -1,12 +1,12 @@
-# libbonobo translation in Tamil
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001.
+# libbonobo translation in Tamil.
+# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
+# Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001, 2002, 2003.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Tamil Libbonobo 1.9.7\n"
-"POT-Creation-Date: 2003-03-14 15:54+0000\n"
-"PO-Revision-Date: 2002-11-09 9:30-0500\n"
+"Project-Id-Version: Tamil Libbonobo 2.2.0\n"
+"POT-Creation-Date: 2003-03-31 20:50+0200\n"
+"PO-Revision-Date: 2003-03-31 17:42+0600\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -149,7 +149,8 @@ msgstr "À¢¨ÆÀ¡÷ìÌõ§À¡Ð À¢¨Æ; Å¢¾¢Å¢ÄìÌ ¸¢¨¼Â¡Ð
 msgid "General activation error with no description"
 msgstr "Å¢ÅÃ½õ ­øÄ¡Áø ¦À¡Ðò ¦¾¡¼í¸ø À¢¨Æ"
 
-#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:74
+#: bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "¦À¡§É¡§À¡Å¢ý ¦¾¡¼ì¸Á¾¢ôÀÇ¢ì¸ ÓÊÂÅ¢ø¨Ä"
 
@@ -195,14 +196,14 @@ msgid "stream MonikerExtender"
 msgstr "µ¨¼ MonikerExtender"
 
 #: monikers/bonobo-moniker-oaf.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Exception activating '%s'"
-msgstr "'%s àñÎ ¦ºöÔõ§À¡Ð Å¢¾¢Å¢ÄìÌ (exception)"
+msgstr "'%s' àñÎ ¦ºöÔõ§À¡Ð Å¢¾¢Å¢ÄìÌ (exception)"
 
 #: monikers/bonobo-moniker-oaf.c:62
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to activate '%s'"
-msgstr "'%s àñÎ ¦ºöÂ ÓÊÂÅ¢ø¨Ä"
+msgstr "'%s' àñÎ ¦ºöÂ ÓÊÂÅ¢ø¨Ä"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
@@ -232,3 +233,4 @@ msgstr "Á¡¾¢Ã¢ ±¾¢ÃÇ¢ôÒ ÜÚ ¯ÕÅ¡ì¸ ÓÊÂÅ¢ø¨Ä"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "µ÷ Å¢¾¢Å¢ÄìÌ ¿¨¼¦ÀüÈÐ '%s'"
+
