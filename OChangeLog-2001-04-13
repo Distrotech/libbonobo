@@ -1,3 +1,9 @@
+2001-03-16  Dietmar Maurer  <dietmar@ximian.com>
+
+	* monikers/bonobo-moniker-extender-file.c
+	(bonobo_file_extender_resolve): check if the _buffer is valid (!=
+	NULL) before we access it.
+
 2001-03-16  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-control.c (bonobo_control_construct):
