@@ -1,3 +1,12 @@
+2001-11-19  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am: don't install the bonobo
+	marshallers - new glib policy.
+
+2001-11-14  Michael Meeks  <michael@ximian.com>
+
+	* idl/Bonobo_UI.idl: add 'unimplemented' methods.
+
 2001-11-18  Miles Lane  <miles@megapathdsl.net>
 
 	* bonobo/bonobo-event-source.c

@@ -43,6 +43,14 @@ module Bonobo {
 		oneway void uiEvent       (in string    id,
 					   in EventType type,
 					   in string    state);
+
+		/**
+		 * unImplemented:
+		 *
+		 * placeholders for future expansion.
+		 */
+		void unImplemented  ();
+		void unImplemented2 ();
 	};
 
 	interface UIContainer : Bonobo::Unknown {
@@ -104,6 +112,13 @@ module Bonobo {
 		Bonobo::Unknown getObject   (in string path)
 			raises (InvalidPath);
 
+		/**
+		 * unImplemented:
+		 *
+		 * placeholders for future expansion.
+		 */
+		void unImplemented  ();
+		void unImplemented2 ();
 	};
 };
 

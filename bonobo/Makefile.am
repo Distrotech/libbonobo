@@ -84,13 +84,13 @@ libbonoboinclude_HEADERS =		\
 	bonobo-storage-memory.h		\
 	bonobo-xobject.h		\
 	bonobo-i18n.h			\
-	bonobo-marshal.h		\
 	bonobo-types.h
 
 noinst_HEADERS =			\
 	bonobo-moniker-context.h	\
 	bonobo-running-context.h	\
-	bonobo-shutdown.h
+	bonobo-shutdown.h		\
+	bonobo-marshal.h
 
 libbonobo_src =				\
 	bonobo-moniker-context.c	\
