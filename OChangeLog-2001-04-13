@@ -1,3 +1,13 @@
+2000-10-27  Michael Meeks  <michael@helixcode.com>
+
+	* api-convert.pl: flesh out.
+
+	* api-convert.diff: Add.
+
+2000-10-26  Michael Meeks  <michael@helixcode.com>
+
+	* TODO: prune viciously and bring up to date.
+
 2000-10-27  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-persist-file.c (impl_load, impl_save): Use correct

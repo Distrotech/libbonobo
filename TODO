@@ -4,8 +4,6 @@ made an effort to assign these tasks to the people who would be best
 suited to do them, but feel free to jump on something if it's not
 getting done.
 
-Nat Friedman (nat@nat.org)
-
 Major Unfinished Items
 ======================
 
@@ -13,62 +11,39 @@ Major Unfinished Items
     . Libefs
     . XML-based
 
-
-Things to finish
-================
-
-   Split bonobo in pieces:
-
-	1. bonobo "basic", for the basic component system (bonobo.h, -lbonobo)
-	2. bonobo "GUI", for compound documents, controls (bonoboui.h, -lbonoboui)
-
 Bugs to fix
 ===========
+
+* Radio toolbars buttons are unimplemented (Michael)
+* XSync work (Michael)
+* Reference counting issues
 
 General Cleanup
 ===============
 
+* XML DTD for UI handler stuff (Martin)
+* StdlyCaps (Michael)
+
 Controls etc
 ------------
-* Add Prop CList to Control sample container.
-* Fix g_slist_frees in gnome-ui-handler.c -- added FIXMEs.  Don't
-  understand the problem currently.
 * doc new control/control frame functions
-* From gnome-client-site.c: 	CORBA_free (list);	/* FIXME: This does not make any sense at all to me */
 * system exception should be on gnome object client. sigh.
 * Doc GnomeBonoboWidget functions
-* out-of-place views are broken -- show_window does not make sense in client_site.
-* out-of-place -- add embeddable routine, one per
 
 Bonobo-endemic issues
 ---------------------
 
-* Compile with zero warnings.
-* Base64 encoding for storages streams (provide an XML-based storage)
 * Hunt down and kill all FIXMEs.
 * _full methods for creating perl/python/scheme bindings
 * Simple File IO that takes care of all the repetitive code we add everywhre
 
 Bonobo Core (files in bonobo/)
 ------------------------------
-* Missing embeddable methods implemented.
-* Document signals and undo setup.
 * Fix CORBA robustness issues (SIGSEGV on unfinished corba method invocation)
-* UIHandler toolbar code finished (Nat)
-* UIHandler documented (Nat)
-* Move all test code out of bonobo/bonobo.
+* UIHandler documented
+* Move remaining test code out of bonobo/bonobo.
 
 Interfaces (files in idl/)
 --------------------------
 * Documented.
 * Clean, API-doc'd IDL files.
-
-Components
-----------
-* Updated to use the new semantics.
-* Fully documented.
-
-Sample code (the code in samples/)
-----------------------------------
-* Write moniker sample code.
-* Write up description of paint component. (Nat)
