@@ -1,3 +1,12 @@
+2000-11-30  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-control.c (impl_Bonobo_Control_getDesiredSize):
+	Implement this; this calls gtk_widget_size_request() on the
+	Control's widget.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_size_request):
+	Implement this function.
+
 Thu Nov 30 11:03:10 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* idl/bonobo-storage.idl: add NotSupported exception to getInfo, 
