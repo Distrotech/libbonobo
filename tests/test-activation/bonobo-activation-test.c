@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	oaf_init(argc, argv);
 
 //	putenv("OAF_BARRIER_INIT=1");
-	obj = oaf_activate("repo_ids.has('IDL:Empty:1.0')", NULL, 0, &ev);
+	obj = oaf_activate("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL, &ev);
 
 	if(CORBA_Object_is_nil(obj, &ev)) {
 	  g_warning("Activation failed!");
