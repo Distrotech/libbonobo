@@ -51,6 +51,7 @@ key_free (gpointer name, gpointer dummy1, gpointer user_data)
 	g_free (name);
 }
 
+#ifdef G_ENABLE_DEBUG
 static void
 bonobo_ri_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 {
@@ -59,6 +60,7 @@ bonobo_ri_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 	bonobo_debug_print ("", "[%p]:CORBA_Object still running", o);
 		
 }
+#endif
 
 void
 bonobo_running_context_shutdown (void)
@@ -211,12 +213,13 @@ bonobo_running_context_trace_objects_T (CORBA_Object object,
 					int          mode)
 {
 	BonoboRunningInfo *ri;
+#ifdef G_ENABLE_DEBUG
 	static char *cmode[] = {
 		"add_object",
 		"remove_object",
 		"ignore_object"		
 	};
-
+#endif
 	ri = get_running_info_T (mode == 0);	
 
 	if (ri) {

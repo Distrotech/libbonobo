@@ -1,3 +1,8 @@
+2003-09-19  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo/bonobo-running-context.c:
+	(bonobo_running_context_trace_objects_T): Fix compiler warnings.
+
 2003-09-12  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/Makefile.am (EXTRA_DIST): Removed non-existent file
