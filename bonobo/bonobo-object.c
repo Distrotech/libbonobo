@@ -274,6 +274,7 @@ gnome_object_activate_with_repo_id (GoadServerList *list,
 	object = gtk_type_new (gnome_object_get_type ());
 	object->object = corba_object;
 
+	g_warning ("This should be a derived object that knows how to destory the other end");
 	return object;
 }
 
@@ -293,6 +294,7 @@ gnome_object_activate_with_goad_id (GoadServerList *list,
 	object = gtk_type_new (gnome_object_get_type ());
 	object->object = corba_object;
 
+	g_warning ("This should be a derived object that knows how to destory the other end");
 	return object;
 }
 
