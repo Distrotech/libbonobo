@@ -1,14 +1,15 @@
 # libbonobo Bahasa Melayu.
 # Copyright (C) 2002 Free Software Foundation, Inc., Projek Gabai.
 # 1. Mohamad Afifi Omar (App) <mr_mohd_afifi@yahoo.com>, 2002.
-# 2. Hasbullah Bin Pit <sebol@ikhlas.com>, 2002.
+# 2. Hasbullah Bin Pit <sebol@ikhlas.com>, 2002-2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-02-02 14:30+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-03 18:22+0800\n"
 "PO-Revision-Date: 2003-01-01 21:24+0800\n"
-"Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
+"Last-Translator: Hasbullah Bin Pit <sebol@my-penguin.org>\n"
 "Language-Team: Bahasa Melayu <gabai-penyumbang@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,13 +62,12 @@ msgid "Name service"
 msgstr "Nama servis"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Nama servis"
+msgstr "Servis Pemakluman"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Servis pemakluman bagi pengaktifan"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -121,12 +121,12 @@ msgstr "Ciri-ciri '%s' tidak mempunyai nilai"
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Tak dapat menghantar dokumen XML bentuk teruk %s"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Mencuba dir %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -206,19 +206,19 @@ msgstr "Shlib `%s' tidak mengandungi `%s'"
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr ""
+msgstr "Nama unik aplikasi"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "POA CORBA tersendiri"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -294,7 +294,7 @@ msgstr "keterangan antaramuka XML yang tersalahaturan"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "path yang tidak sah ke unsur antaramuka pengguna XML "
+msgstr "laluan yang tidak sah ke unsur antaramuka pengguna XML "
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -481,7 +481,7 @@ msgstr "Direktori untuk dibuang daripada fail konfigurasi"
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
-msgstr "path direktori"
+msgstr "laluan direktori"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
@@ -493,4 +493,4 @@ msgstr "Papar direktori pada fail konfigurasi"
 
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr "Papar path ke fail konfigurasi"
+msgstr "Papar laluan ke fail konfigurasi"
