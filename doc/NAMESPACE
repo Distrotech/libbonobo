@@ -18,6 +18,7 @@ subdomains:
 	Evolution/		Evolution	ettore@helixcode.com
 	Config/			GConf		hp@redhat.com
 	GDA/			libgda		rodrigo@gnome-db.org
+	GGV/			ggv		jaka@gnu.org
 	Gnumeric/		Gnumeric	jgoldberg@home.com
 	Grapevine/		grapevine	jirka@5z.com
 	GtkHTML/		GtkHTML		rodo@helixcode.com

@@ -12,9 +12,9 @@ OAF_FILES =					\
 	Bonobo_Moniker_gzip.oafinfo		\
 	Bonobo_Moniker_http.oafinfo		
 
-Bonobo_Moniker_std.oafinfo : Bonobo_Moniker_std.oafinfo.in 
+Bonobo_Moniker_std.oafinfo : $(srcdir)/Bonobo_Moniker_std.oafinfo.in 
 	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" \
-	Bonobo_Moniker_std.oafinfo.in > Bonobo_Moniker_std.oafinfo 
+	 $(srcdir)/Bonobo_Moniker_std.oafinfo.in > Bonobo_Moniker_std.oafinfo 
 
 clean-local:
 	-rm -f Bonobo_Moniker_std.oafinfo

@@ -1,3 +1,8 @@
+2000-12-28  Vedat Hallac <mvhallac@crosswinds.net>
+
+	* monikers/Makefile.am (Bonobo_Moniker_std.oafinfo): fix for
+	different src and build dirs.
+
 2000-12-28  Arturo Tena <arturo@directmail.org>
 
 	* bonobo-idl/Makefile.am: Update CFLAGS / bonobo_idl_libs
