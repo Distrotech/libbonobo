@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-03-07 16:54+0300\n"
-"PO-Revision-Date: 2002-03-07 16:59+0300\n"
+"POT-Creation-Date: 2002-03-14 08:09-0500\n"
+"PO-Revision-Date: 2002-03-15 13:48+0300\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -126,11 +126,11 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr ""
+msgstr "Не удалось найти интерфейс моникера"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr ""
+msgstr "Превышение времени ожидания активации моникера"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
@@ -142,7 +142,7 @@ msgstr "Моникер имеет неизвестный префикс"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr ""
+msgstr "Ошибка проверки ошибок; нет исключения"
 
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
@@ -155,7 +155,7 @@ msgstr "Не удалось инициализировать Bonobo"
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "Не удалось разрешить или расширить \"%s\""
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
@@ -167,7 +167,7 @@ msgstr "Моникер HTTP"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "Моникер обработки ORB IOR"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
@@ -196,7 +196,7 @@ msgstr ""
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
 msgid "Exception activating '%s"
-msgstr ""
+msgstr "Вызов исключения \"%s\""
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
