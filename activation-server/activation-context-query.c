@@ -200,10 +200,9 @@ qexp_constant_new(QueryExprConst setme)
 {
   QueryExpr * retval = qexp_new();
 
-  retval->value_known = TRUE;
   retval->type = EXPR_CONSTANT;
-  setme.value_known = TRUE;
   retval->u.constant_value = setme;
+  retval->u.constant_value.value_known = TRUE;
 
   retval->has_fields = FALSE;
 
@@ -457,7 +456,7 @@ qexp_evaluate_function(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 {
   QueryExprConst retval;
   const char *func_name;
-  int i, n;
+  int i, n, max;
   const QueryExprFuncInfo *fi;
 
   func_name = e->u.function_value.func_name;
@@ -477,11 +476,12 @@ qexp_evaluate_function(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 
   n = g_slist_length(e->u.function_value.arguments);
 
-  if ((n < fi->min_args)
-      || ((fi->max_args >= fi->min_args) && n > fi->max_args))
+  max = fi->max_args;
+  if(max < fi->min_args) max = fi->min_args;
+  if ((n < fi->min_args) || (n > max))
     {
       g_warning("Incorrect argument count to function '%s': got %d, need between %d and %d",
-		func_name, n, fi->min_args, fi->max_args);
+		func_name, n, fi->min_args, max);
     }
 
   return fi->efunc(si, e, qctx);
