@@ -1,3 +1,8 @@
+2001-03-07  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo-idl/bonobo-idl.1: Fix typo that made the manpage
+	not render.
+	
 2001-02-24  John Harper  <jsh@eazel.com>
 
 	* bonobo/bonobo-ui-util.c (write_byte, read_byte): rewritten to
