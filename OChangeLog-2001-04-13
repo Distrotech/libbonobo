@@ -1,3 +1,43 @@
+2001-02-14  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: bump to 0.37
+
+2001-02-13  John R. Sheets  <dusk@ravendusk.org>
+
+	* bonobo/bonobo-object-client.c: 
+	* bonobo/bonobo-moniker.c:
+	* bonobo/bonobo-object.c:
+	* bonobo/bonobo-ui-component.h:
+	* gshell/README:
+	* idl/Bonobo_Context.idl:
+	* idl/Bonobo_Control.idl:
+	* idl/Bonobo_Embeddable.idl:
+	* idl/Bonobo_Listener.idl:
+	* idl/Bonobo_Persist.idl:
+	* idl/Bonobo_Progressive.idl:
+	* idl/Bonobo_Property.idl:
+	* idl/Bonobo_Storage.idl:
+	* idl/Bonobo_Zoomable.idl: Minor tweaks in comments, update old
+	function and parameter names.
+
+2001-02-14  John R. Sheets  <dusk@ravendusk.org>
+ 
+	* doc/api/bonobo-decl.txt:
+	* api/tmpl/bonobo-canvas-component.sgml:
+	* api/tmpl/bonobo-canvas-item.sgml:
+	* api/tmpl/bonobo-listener.sgml:
+	* api/tmpl/bonobo-object-client.sgml:
+	* api/tmpl/bonobo-object.sgml:
+	* api/tmpl/bonobo-stream-memory.sgml:
+	* api/tmpl/bonobo-stream.sgml:
+	* api/tmpl/bonobo-transient.sgml:
+	* api/tmpl/bonobo-view.sgml: Update API template docs to remove
+ 	relics of old pre-namespace changes, plus some language tweaks.
+ 
+2001-02-14  Michael Meeks  <michael@ximian.com>
+
+	* doc/FAQ: running oafd faq.
+
 2001-02-14  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-arg.h: include gtk/gtktypeutils.h
@@ -6,8 +46,9 @@
 	load/store of aliases.
 
 2001-02-14  Cody Russell  <bratsche@gnome.org>
+
 	* bonobo/bonobo-zoomable.c: Append the array, not the address of
-	the array.  *duh*  Thanks, Mike Engber.
+	the array.  *duh* Thanks, Mike Engber.
 
 2001-02-13  Dan Winship  <danw@ximian.com>
 
