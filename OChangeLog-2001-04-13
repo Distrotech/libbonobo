@@ -1,3 +1,10 @@
+2000-10-10  Andy Hertzfeld  <andy@eazel.com>
+
+	* bonobo/bonobo-ui-toolbar.c: (size_allocate_horizontally),
+	(size_allocate_vertically):
+	don't use the pop-up window if there's only one item in the
+	toolbar.
+	
 2000-10-10  Martin Baulig  <baulig@suse.de>
 
 	* components/text-plain/bonbo-text-plain.c: Removed all gnorba stuff.
