@@ -1,3 +1,7 @@
+1999-05-12  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* bonobo/gnome-storage.[hc]: added destroy function
+	
 1999-05-11  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* bonobo/gnome-storage.c (impl_*): don't access storage->object
