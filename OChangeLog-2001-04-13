@@ -1,3 +1,9 @@
+2000-03-09  Maciej Stachowiak  <mjs@eazel.com>
+
+	* components/text-plain/bonobo-text-plain.c: Don't merge that
+	ugly toolbar thing (some kind of test component should be
+        the testbed for that); assorted cleanup.
+	
 2000-03-09  Michael Meeks  <michael@helixcode.com>
 
 	* idl/Bonobo.idl: remove gnome-factory.idl.
