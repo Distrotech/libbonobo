@@ -1,3 +1,7 @@
+2000-02-07  Elliot Lee <sopwith@redhat.com>
+	* idl/Bonobo.idl: #include <gnome-factory.idl> to avoid
+	duplication of symbols in the libraries.
+
 2000-02-04  Chris Blizzard  <blizzard@redhat.com>
 
 	* bonobo/bonobo-selector.c (get_filtered_objects): Make sure to
@@ -74,7 +78,7 @@
 	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_set_value_string):
 	constify string.
 
-2000-01-28 Elliot Lee <sopwith@redhat.com>
+2000-01-28 aElliot Lee <sopwith@redhat.com>
 
 	* bonobo/bonobo.h: Add multiple include guard.
 
