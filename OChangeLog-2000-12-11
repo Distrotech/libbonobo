@@ -1,3 +1,16 @@
+2000-10-27  Michael Meeks  <michael@helixcode.com>
+
+	* gshell/gshell.c: clean USING_OAF crud out, clean stylistic problems.
+
+	* gshell/properties.c (populate_property_list): update to deal with
+	controls with no properties.
+	(edit_property): upd. Remove global 'pb' variable disaster area.
+	(show_property_dialog): cope with controls with no properties.
+
+2000-10-27  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: bump version, add ORBIT flags export.
+
 2000-10-27  Ian Peters  <itp@helixcode.com>
 
 	* configure.in: set and AC_SUBST BONOBO_CURRENT, BONOBO_REVISION,
