@@ -63,13 +63,14 @@ gnome-vfs can handle).
 component cannot handle any data at all in a general way and should
 never be generically selected for such purposes.
 
+
 Nautilus - Content Views
 
 * "nautilus:view_as_name" (string) - a suitable name for use as a view
 as name (it will be displayed as "View as <foo>" where <foo> is the
-name). This can (and should!) be implemented by any Bonobo Embeddables
-or Controls that might be used as Nautilus views. The "name" attribute
-will be used if "nautilus:view_as_name" is not provided.
+name). This must be implemented by any Bonobo Embeddables
+or Controls that can be used as Nautilus views (for the content in
+the main window, not in the sidebar).
 
 I am not totally sure if the following two should be in the nautilus:
 or bonobo: namespace; I can see them being useful for other components
@@ -87,7 +88,7 @@ proposal below). If the criteria established by all the other
 attributes are satisfied, an object with that OAFIID should be
 activated and its is_applicable() method should be called on the URI
 to test if it this component _really_, _really_ applies to the given
-URI. This should be used as a last resort.
+URI. This should be used as a last resort. (Not yet implemented.)
 
 The reason for the "required_uri_tester" attribute is as follows. In
 Nautilus, we plan to have custom directory views that express
@@ -108,18 +109,16 @@ If this attribute is not provided, no such testing is assumed
 necessary.
 
 
-Nautilus - Meta Views/ Sidebar Panels:
+Nautilus - Sidebar Views:
 
 * "nautilus:sidebar_panel_name" (string) - a suitable name for use as
-a view a sidebar panel label name. This can (and should!) be
-implemented by anything that can be used as a Nautilus sidebar (meta)
-view.
+a sidebar panel label name. This must be implemented by any Bonobo
+Controls that can be used as a Nautilus sidebar view.
 
 * "nautilus:recommended_uri_schemes" (string) - the URI schemes this
 meta view is most recommended for. If "*" is included, this component
 is recommended for all schemes. If omitted or empty, it is not
-recommended for any. This is only really applicable for components
-that implement Nautilus::MetaView.
+recommended for any. (Not yet implemented.)
 
 
 Vertigo:
@@ -153,15 +152,14 @@ General open questions
 
 Nautilus-specific open questions
 
-* How do we get a nautilus display name for a component that does not
-  specify one?
+* Should there be a way to use a Bonobo Control or Embeddable with
+  Nautilus without requiring the developer to include a definition
+  for "nautilus:sidebar_panel_name" or "nautilus:view_as_name"?
 
 * Should the user level of a component be an attribute? That lets just
   any component author set the user level instead of centralizing it.
 
-
 ==================
-
 
 module Nautilus {
         interface URITester {
