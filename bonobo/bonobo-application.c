@@ -145,6 +145,17 @@ impl_Bonobo_Application_message (PortableServer_Servant            servant,
 	return rv;
 }
 
+/**
+ * bonobo_application_new_instance:
+ * @app: a #BonoboApplication
+ * @argc: number of elements in @argv
+ * @argv: array of strings (command-line arguments)
+ * 
+ * Emit the "new-instance" signal of the #BonoboApplication with the
+ * given arguments.
+ * 
+ * Return value: signal return value
+ **/
 gint bonobo_application_new_instance (BonoboApplication *app,
 				      gint               argc,
 				      gchar             *argv[])
@@ -363,6 +374,14 @@ BONOBO_TYPE_FUNC_FULL (BonoboApplication,
 		       bonobo_application);
 
 
+/**
+ * bonobo_application_new:
+ * @name: application name
+ * 
+ * Creates a new #BonoboApplication object.
+ * 
+ * Return value: a new #BonoboApplication
+ **/
 BonoboApplication *
 bonobo_application_new (const char *name)
 {
@@ -403,13 +422,25 @@ _gtype_to_typecode (GType gtype)
 	return (CORBA_TypeCode) g_hash_table_lookup (hash, GUINT_TO_POINTER (G_TYPE_INT));
 }
 
+/**
+ * bonobo_application_register_message_v:
+ * @app: a #BonoboApplication
+ * @name: message string identifier
+ * @description: a string containing a human readable description of the message
+ * @opt_closure: a #GClosure that will be called for this message, or %NULL;
+ * Function takes ownership of this closure.
+ * @return_type: Message return #GType.
+ * @arg_types: %G_TYPE_NONE -terminated vector of argument #GType's
+ * 
+ * See bonobo_application_register_message().
+ **/
 void
 bonobo_application_register_message_v (BonoboApplication *app,
-					const gchar       *name,
-					const gchar       *description,
-					GClosure          *opt_closure,
-					GType              return_type,
-					GType const        arg_types[])
+				       const gchar       *name,
+				       const gchar       *description,
+				       GClosure          *opt_closure,
+				       GType              return_type,
+				       GType const        arg_types[])
 {
 	Bonobo_Application_MessageDesc *msgdesc;
 	int i, arg_types_len;
@@ -442,6 +473,19 @@ bonobo_application_register_message_v (BonoboApplication *app,
 }
 
 
+/**
+ * bonobo_application_register_message_va:
+ * @app: a #BonoboApplication
+ * @name: message string identifier
+ * @description: a string containing a human readable description of the message
+ * @opt_closure: a #GClosure that will be called for this message, or
+ * %NULL; Function takes ownership of this closure.
+ * @return_type: Message return #GType.
+ * @first_arg_type: #GType of first argument of message, or %G_TYPE_NONE
+ * @var_args: %G_TYPE_NONE -terminated valist of argument #GType's
+ * 
+ * See bonobo_application_register_message().
+ **/
 void
 bonobo_application_register_message_va (BonoboApplication *app,
 					const gchar       *name,
@@ -469,6 +513,24 @@ bonobo_application_register_message_va (BonoboApplication *app,
 	g_array_free (arg_types, TRUE);
 }
 
+/**
+ * bonobo_application_register_message:
+ * @app: a #BonoboApplication
+ * @name: message string identifier
+ * @description: a string containing a human readable description of the message
+ * @opt_closure: a #GClosure that will be called for this message, or
+ * %NULL; Function takes ownership of this closure.
+ * @return_type: Message return #GType.
+ * @first_arg_type: #GType of first argument of message, or %G_TYPE_NONE.
+ * @...: %G_TYPE_NONE -terminated list of argument #GType's
+ * 
+ * Registers a new message type that the application supports. Example:
+ * <informalexample><programlisting>
+ * bonobo_application_register_message (app, "openURL", "Opens a new URL in the browser."
+ *                                      " Parameters: url(string), open-in-new-window(boolean)",
+ *                                      NULL, G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_NONE);
+ * </programlisting></informalexample>
+ **/
 void
 bonobo_application_register_message (BonoboApplication *app,
 				     const gchar       *name,
@@ -488,6 +550,17 @@ bonobo_application_register_message (BonoboApplication *app,
 }
 
 
+/**
+ * bonobo_application_create_serverinfo:
+ * @app: a #BonoboApplication
+ * @envp: %NULL-terminated string vector, containing the enviroment
+ * variables we wish to include in the server description.
+ * 
+ * This utility function provides a simple way to contruct a valid
+ * serverinfo XML string.
+ * 
+ * Return value: a newly allocated string; caller must g_free() it.
+ **/
 gchar *
 bonobo_application_create_serverinfo (BonoboApplication *app,
 				      gchar const       *envp[])
@@ -529,17 +602,17 @@ bonobo_application_create_serverinfo (BonoboApplication *app,
  * bonobo_application_register_unique:
  * @app: a #BonoboApplication instance
  * @serverinfo: the XML server
- * description. bonobo_application_create_server_description() may
- * help here.
- * @client: output parameter that will contain a client object if
- * an application server is already registered.
+ * description. bonobo_application_create_server_description() may be
+ * used to easily create such description.
+ * @client: output parameter that will contain a client object, in
+ * case another instance has already running, or %NULL if we are the
+ * first to register.
  * 
  * Try to register the running application, or check for an existing
  * application already registered and get a reference to it.
- * Applications already running but on different environments (that
- * usually means different displays, or whatever is set with
- * bonobo_activation_registration_env_set) than this one are ignored
- * and do not interfere.
+ * Applications already running but on different environments (as
+ * defined by the bonobo:environenment server property) than this one
+ * are ignored and do not interfere.
  *
  * If the registration attempt indicates that another instance of this
  * application is already running, then the output variable
@@ -548,10 +621,10 @@ bonobo_application_create_serverinfo (BonoboApplication *app,
  * set to %NULL.
  * 
  * Return value: the registration result.
- * Bonobo_ACTIVATION_REG_SUCCESS means the application was registered,
+ * %Bonobo_ACTIVATION_REG_SUCCESS means the application was registered,
  * since no other running instance was detected.  If, however, a
  * running application is detected,
- * Bonobo_ACTIVATION_REG_ALREADY_ACTIVE is returned.
+ * %Bonobo_ACTIVATION_REG_ALREADY_ACTIVE is returned.
  **/
 Bonobo_RegistrationResult
 bonobo_application_register_unique (BonoboApplication  *app,
@@ -603,8 +676,8 @@ bonobo_application_register_unique (BonoboApplication  *app,
  * @func: hook function
  * @data: user data
  * 
- * Add a hook function to be called whenever #BonoboApplication is
- * instantiated.
+ * Add a hook function to be called whenever a new #BonoboApplication
+ * instance is created.
  **/
 void bonobo_application_add_hook (BonoboAppHookFunc func, gpointer data)
 {

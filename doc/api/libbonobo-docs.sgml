@@ -38,6 +38,8 @@
     <!ENTITY libbonobo-debugging SYSTEM "debugging.xml">
     <!ENTITY libbonobo-faq SYSTEM "faq.xml">
     <!ENTITY libbonobo-monikers-overview SYSTEM "monikers-overview.xml">
+    <!ENTITY libbonobo-bonobo-application SYSTEM "xml/bonobo-application.xml">
+    <!ENTITY libbonobo-bonobo-app-client SYSTEM "xml/bonobo-app-client.xml">
     ]>
 
 <book id="index">
@@ -57,6 +59,8 @@
 	&libbonobo-bonobo-types;
 	&libbonobo-bonobo-context;
 	&libbonobo-bonobo-exception;
+        &libbonobo-bonobo-application;
+        &libbonobo-bonobo-app-client;
     </chapter>
 
     <chapter id="factories">

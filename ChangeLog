@@ -1,5 +1,14 @@
 2004-02-01  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* bonobo/bonobo-app-client.c,
+	* bonobo/bonobo-application.c, 
+	* doc/api/libbonobo-docs.sgml, 
+	* doc/api/libbonobo-sections.txt, 
+	* doc/api/tmpl/bonobo-application.sgml, 
+	* doc/api/tmpl/bonobo-app-client.sgml: Initial
+	BonoboApplication/BonoboAppClient documentation.  Only
+	introductory text is missing.
+
 	* configure.in: Explicitly require GLib >= 2.3.2.
 
 	* tests/test-uniqapp.c (message_quit_cb): Quit after a timeout, so

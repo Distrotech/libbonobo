@@ -171,6 +171,18 @@ bonobo_app_client_msg_send_argv (BonoboAppClient   *app_client,
 }
 
 
+/**
+ * bonobo_app_client_msg_send_valist:
+ * @app_client: client
+ * @message: message name
+ * @opt_env: optional corba environment
+ * @first_arg_type: first message parameter
+ * @var_args: remaining parameters
+ * 
+ * See bonobo_app_client_msg_send().
+ * 
+ * Return value: return value
+ **/
 GValue *
 bonobo_app_client_msg_send_valist (BonoboAppClient   *app_client,
 				   const char        *message,
@@ -348,6 +360,18 @@ bonobo_app_client_msg_list (BonoboAppClient *app_client)
 }
 
 
+/**
+ * bonobo_app_client_new_instance:
+ * @app_client: a #BonoboAppClient
+ * @argc: length of @argv
+ * @argv: array of command-line arguments
+ * @opt_env: a #CORBA_Environment, or %NULL.
+ * 
+ * Ask the application server to emit a "new-instance" signal
+ * containing the specified string vector.
+ * 
+ * Return value: the message return value
+ **/
 gint
 bonobo_app_client_new_instance (BonoboAppClient   *app_client,
 				int                argc,

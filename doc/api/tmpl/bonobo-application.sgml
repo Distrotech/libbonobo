@@ -1,0 +1,125 @@
+<!-- ##### SECTION Title ##### -->
+bonobo-application
+
+<!-- ##### SECTION Short_Description ##### -->
+a framework for unique application instance and automation
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### USER_FUNCTION BonoboAppHookFunc ##### -->
+<para>
+
+</para>
+
+@app: 
+@data: 
+
+
+<!-- ##### FUNCTION bonobo_application_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_application_register_message ##### -->
+<para>
+
+</para>
+
+@app: 
+@name: 
+@description: 
+@opt_closure: 
+@return_type: 
+@first_arg_type: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION bonobo_application_register_message_v ##### -->
+<para>
+
+</para>
+
+@app: 
+@name: 
+@description: 
+@opt_closure: 
+@return_type: 
+@arg_types: 
+
+
+<!-- ##### FUNCTION bonobo_application_register_message_va ##### -->
+<para>
+
+</para>
+
+@app: 
+@name: 
+@description: 
+@opt_closure: 
+@return_type: 
+@first_arg_type: 
+@var_args: 
+
+
+<!-- ##### FUNCTION bonobo_application_new_instance ##### -->
+<para>
+
+</para>
+
+@app: 
+@argc: 
+@argv: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_application_create_serverinfo ##### -->
+<para>
+
+</para>
+
+@app: 
+@envp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_application_register_unique ##### -->
+<para>
+
+</para>
+
+@app: 
+@serverinfo: 
+@client: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_application_add_hook ##### -->
+<para>
+
+</para>
+
+@func: 
+@data: 
+
+
+<!-- ##### FUNCTION bonobo_application_remove_hook ##### -->
+<para>
+
+</para>
+
+@func: 
+@data: 
+
+
