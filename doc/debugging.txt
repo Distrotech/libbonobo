@@ -1,6 +1,6 @@
 
 Bonobo component debugging advice, version 0.1
-by Michael Meeks <michael@imaginator.com>
+by Michael Meeks <mmeeks@gnu.org>
 
 
 Since it is not transparently obvious how to debug Bonobo components

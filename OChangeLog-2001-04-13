@@ -1,3 +1,9 @@
+1999-11-09  Michael Meeks  <mmeeks@gnu.org>
+
+	* configure.in: kill image-generic.
+
+	* components/Makefile.am (SUBDIRS): ditto.
+
 1999-10-30  Michael Meeks  <mmeeks@gnu.org>
 
 	* components/bonobo.keys: Add text/html.
