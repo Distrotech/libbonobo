@@ -1,6 +1,6 @@
 module GNOME {
 
-	interface Container : GNOME::obj {
+	interface Container : GNOME::Unknown {
 
 	};
 };

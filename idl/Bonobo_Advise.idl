@@ -1,6 +1,6 @@
 module GNOME {
 
-	interface AdviseSink : GNOME::obj {
+	interface AdviseSink : GNOME::Unknown {
 		void notify (in long notify_type);
 		
 		/**

@@ -7,7 +7,7 @@
 
 module GNOME {
 
-	interface Persist : obj {
+	interface Persist : Unknown {
 		enum Status {
 			SAVE_OK,
 			SAVE_CANCEL,

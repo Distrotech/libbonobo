@@ -14,7 +14,7 @@
 
 module GNOME {
 
-       	interface UIHandler : GNOME::obj {
+       	interface UIHandler : GNOME::Unknown {
        
        		enum {
        		} MenuType;

@@ -8,7 +8,7 @@
 #include <config.h>
 #include <bonobo/gnome-stream.h>
 
-static GnomeObjectClass *gnome_stream_parent_class;
+static GnomeUnknownClass *gnome_stream_parent_class;
 
 POA_GNOME_Stream__epv gnome_stream_epv;
 POA_GNOME_Stream__vepv gnome_stream_vepv;
@@ -18,7 +18,7 @@ POA_GNOME_Stream__vepv gnome_stream_vepv;
 static inline GnomeStream *
 gnome_stream_from_servant (PortableServer_Servant servant)
 {
-	return GNOME_STREAM (gnome_object_from_servant (servant));
+	return GNOME_STREAM (gnome_unknown_from_servant (servant));
 }
 
 static CORBA_long
@@ -124,7 +124,7 @@ init_stream_corba_class (void)
 	gnome_stream_epv.length = impl_length;
 
 	/* The VEPV */
-	gnome_stream_vepv.GNOME_obj_epv = &gnome_obj_epv;
+	gnome_stream_vepv.GNOME_Unknown_epv = &gnome_unknown_epv;
 	gnome_stream_vepv.GNOME_Stream_epv = &gnome_stream_epv;
 }
 
@@ -133,7 +133,7 @@ gnome_stream_class_init (GnomeStreamClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
-	gnome_stream_parent_class = gtk_type_class (gnome_object_get_type ());
+	gnome_stream_parent_class = gtk_type_class (gnome_unknown_get_type ());
 
 	init_stream_corba_class ();
 }
@@ -155,7 +155,7 @@ gnome_stream_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_object_get_type (), &info);
+		type = gtk_type_unique (gnome_unknown_get_type (), &info);
 	}
 
 	return type;

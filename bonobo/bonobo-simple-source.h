@@ -24,7 +24,7 @@ typedef CORBA_long (*GnomeSimpleDataSourceRemainingDataFn)	(GnomeSimpleDataSourc
 
 
 struct _GnomeSimpleDataSource {
-	GnomeObject object;
+	GnomeUnknown object;
 
 	/*
 	 * These are the callbacks the user can set.  If we use the
@@ -37,7 +37,7 @@ struct _GnomeSimpleDataSource {
 };
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	GnomeUnknownClass parent_class;
 
 	/*
 	 * Methods.

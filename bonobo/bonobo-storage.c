@@ -8,7 +8,7 @@
 #include <config.h>
 #include <bonobo/gnome-storage.h>
 
-static GnomeObjectClass *gnome_storage_parent_class;
+static GnomeUnknownClass *gnome_storage_parent_class;
 
 POA_GNOME_Storage__epv gnome_storage_epv;
 POA_GNOME_Storage__vepv gnome_storage_vepv;
@@ -18,7 +18,7 @@ POA_GNOME_Storage__vepv gnome_storage_vepv;
 static inline GnomeStorage *
 gnome_storage_from_servant (PortableServer_Servant servant)
 {
-	return GNOME_STORAGE (gnome_object_from_servant (servant));
+	return GNOME_STORAGE (gnome_unknown_from_servant (servant));
 }
 
 static GNOME_Stream
@@ -28,7 +28,7 @@ impl_create_stream (PortableServer_Servant servant, const CORBA_char *path, CORB
 	GnomeStream *stream;
 	
 	if ((stream = CLASS (storage)->create_stream (storage, path, ev)))
-	  return (GNOME_Stream) GNOME_OBJECT (stream)->object;
+	  return (GNOME_Stream) GNOME_UNKNOWN (stream)->object;
 
 	return NULL;
 }
@@ -43,7 +43,7 @@ impl_open_stream (PortableServer_Servant servant,
 	GnomeStream *stream;
 	
 	if ((stream = CLASS (storage)->open_stream (storage, path, mode, ev)))
-	  return (GNOME_Stream) GNOME_OBJECT (stream)->object;
+	  return (GNOME_Stream) GNOME_UNKNOWN (stream)->object;
 
 	return NULL;
 }
@@ -57,7 +57,7 @@ impl_create_storage (PortableServer_Servant servant,
 	GnomeStorage *new_storage;
 	
 	if ((new_storage = CLASS(storage)->create_storage (storage, path, ev)))
-	  return (GNOME_Storage) GNOME_OBJECT (new_storage)->object;
+	  return (GNOME_Storage) GNOME_UNKNOWN (new_storage)->object;
 
 	return NULL;
 }
@@ -72,7 +72,7 @@ impl_open_storage (PortableServer_Servant servant,
 	GnomeStorage *open_storage;
 	
 	if ((open_storage = CLASS(storage)->open_storage (storage, path, ev)))
-	  return (GNOME_Storage) GNOME_OBJECT (open_storage)->object;
+	  return (GNOME_Storage) GNOME_UNKNOWN (open_storage)->object;
 
 	return NULL;
 }
@@ -128,7 +128,7 @@ impl_erase (PortableServer_Servant servant,
 
 
 #if 0
-gnome_save (GnomeObject *object, GnomeStorage *storage)
+gnome_save (GnomeUnknown *object, GnomeStorage *storage)
 {
 	GnomePersistStorage *persist;
 	
@@ -163,7 +163,7 @@ init_storage_corba_class (void)
 	gnome_storage_epv.erase = impl_erase;
 
 	/* The VEPV */
-	gnome_storage_vepv.GNOME_obj_epv = &gnome_obj_epv;
+	gnome_storage_vepv.GNOME_Unknown_epv = &gnome_unknown_epv;
 	gnome_storage_vepv.GNOME_Storage_epv = &gnome_storage_epv;
 }
 
@@ -172,13 +172,13 @@ gnome_storage_class_init (GnomeStorageClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
-	gnome_storage_parent_class = gtk_type_class (gnome_object_get_type ());
+	gnome_storage_parent_class = gtk_type_class (gnome_unknown_get_type ());
 
 	init_storage_corba_class ();
 }
 
 static void
-gnome_storage_init (GnomeObject *object)
+gnome_storage_init (GnomeUnknown *object)
 {
 }
 
@@ -199,7 +199,7 @@ gnome_storage_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_object_get_type (), &info);
+		type = gtk_type_unique (gnome_unknown_get_type (), &info);
 	}
 
 	return type;
@@ -212,8 +212,8 @@ gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage)
 	g_return_val_if_fail (GNOME_IS_STORAGE (storage), NULL);
 	g_return_val_if_fail (corba_storage != CORBA_OBJECT_NIL, NULL);
 
-	gnome_object_construct (
-		GNOME_OBJECT (storage),
+	gnome_unknown_construct (
+		GNOME_UNKNOWN (storage),
 		(CORBA_Object) corba_storage);
 
 	
@@ -234,7 +234,7 @@ gnome_storage_file_open (const char *path, const char *open_mode)
 	storage->driver = gnome_storage_driver_new ("file", path, open_mode);
 	
 	corba_storage = create_gnome_storage (
-		GNOME_OBJECT (storage));
+		GNOME_UNKNOWN (storage));
 	if (corba_storage == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (storage));
 		return NULL;

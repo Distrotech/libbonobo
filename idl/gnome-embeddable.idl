@@ -9,7 +9,7 @@
 
 module GNOME {
 
-interface View : GNOME::obj {
+interface View : GNOME::Unknown {
 	typedef unsigned long windowid;
 
 	/**
@@ -69,7 +69,7 @@ interface View : GNOME::obj {
 
 };
 
-interface ViewFrame : GNOME::obj {
+interface ViewFrame : GNOME::Unknown {
 	typedef sequence<octet> pixbuf;
 
 	ClientSite get_client_site ();
@@ -83,7 +83,7 @@ interface ViewFrame : GNOME::obj {
 };
 
 /* Equivalent to IOleObject */
-interface BonoboObject : GNOME::obj {
+interface BonoboObject : GNOME::Unknown {
 
 	/**
 	 * set_client_site:

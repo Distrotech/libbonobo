@@ -12,11 +12,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_PERSIST_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_TYPE))
 
 typedef struct {
-	GnomeObject object;
+	GnomeUnknown object;
 } GnomePersist;
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	GnomeUnknownClass parent_class;
 } GnomePersistClass;
 
 GtkType       gnome_persist_get_type  (void);

@@ -13,11 +13,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STORAGE_TYPE))
 
 typedef struct {
-        GnomeObject object;
+        GnomeUnknown object;
 } GnomeStorage;
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	GnomeUnknownClass parent_class;
 
 	/*
 	 * virtual methods

@@ -27,7 +27,7 @@ typedef int (*GnomeProgressiveDataSinkSetSizeFn) (GnomeProgressiveDataSink *psin
 						  const CORBA_long count, void *closure);
 
 struct _GnomeProgressiveDataSink {
-	GnomeObject object;
+	GnomeUnknown object;
 
 	/*
 	 * These are the callbacks the user can set.  If we use the
@@ -42,7 +42,7 @@ struct _GnomeProgressiveDataSink {
 };
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	GnomeUnknownClass parent_class;
 
 	/*
 	 * Methods.

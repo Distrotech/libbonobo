@@ -12,19 +12,19 @@
 #include <bonobo/gnome-object.h>
 #include <bonobo/gnome-container.h>
 
-static GnomeObjectClass *gnome_container_parent_class;
+static GnomeUnknownClass *gnome_container_parent_class;
 
 POA_GNOME_Container__epv gnome_container_epv = { NULL, };
 	
 POA_GNOME_Container__vepv gnome_container_vepv;
 
 static CORBA_Object
-create_gnome_container (GnomeObject *object)
+create_gnome_container (GnomeUnknown *object)
 {
 	POA_GNOME_Container *servant;
 	CORBA_Object o;
 	
-	servant = (POA_GNOME_Container *) g_new0 (GnomeObjectServant, 1);
+	servant = (POA_GNOME_Container *) g_new0 (GnomeUnknownServant, 1);
 	servant->vepv = &gnome_container_vepv;
 
 	POA_GNOME_Container__init ((PortableServer_Servant) servant, &object->ev);
@@ -40,7 +40,7 @@ create_gnome_container (GnomeObject *object)
 		bonobo_poa(), servant, &object->ev);
 
 	if (o){
-		gnome_object_bind_to_servant (object, servant);
+		gnome_unknown_bind_to_servant (object, servant);
 		return o;
 	} else
 		return CORBA_OBJECT_NIL;
@@ -68,8 +68,8 @@ corba_container_class_init (void)
 	    /* nothing just yet */
 	
 	/* Init the vepv */
-	gnome_container_vepv._base_epv     = &gnome_obj_base_epv;
-	gnome_container_vepv.GNOME_obj_epv = &gnome_obj_epv;
+	gnome_container_vepv._base_epv     = &gnome_unknown_base_epv;
+	gnome_container_vepv.GNOME_Unknown_epv = &gnome_unknown_epv;
 	gnome_container_vepv.GNOME_Container_epv = &gnome_container_epv;
 }
 
@@ -78,7 +78,7 @@ gnome_container_class_init (GnomeContainerClass *container_class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) container_class;
 
-	gnome_container_parent_class = gtk_type_class (gnome_object_get_type ());
+	gnome_container_parent_class = gtk_type_class (gnome_unknown_get_type ());
 
 	object_class->destroy = gnome_container_destroy;
 
@@ -90,7 +90,7 @@ gnome_container_init (GnomeContainer *container)
 {
 }
 
-GnomeObject *
+GnomeUnknown *
 gnome_container_construct (GnomeContainer  *container,
 			   GNOME_Container corba_container)
 {
@@ -98,10 +98,10 @@ gnome_container_construct (GnomeContainer  *container,
 	g_return_val_if_fail (GNOME_IS_CONTAINER (container), NULL);
 	g_return_val_if_fail (corba_container != CORBA_OBJECT_NIL, NULL);
 	
-	gnome_object_construct (GNOME_OBJECT (container), (CORBA_Object) corba_container);
-	GNOME_OBJECT (container)->object = corba_container;
+	gnome_unknown_construct (GNOME_UNKNOWN (container), (CORBA_Object) corba_container);
+	GNOME_UNKNOWN (container)->object = corba_container;
 
-	return GNOME_OBJECT (container);
+	return GNOME_UNKNOWN (container);
 }
 
 GtkType
@@ -121,20 +121,20 @@ gnome_container_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_object_get_type (), &info);
+		type = gtk_type_unique (gnome_unknown_get_type (), &info);
 	}
 
 	return type;
 }
 
-GnomeObject *
+GnomeUnknown *
 gnome_container_new (void)
 {
 	GnomeContainer *container;
 	GNOME_Container corba_container;
 
 	container = gtk_type_new (gnome_container_get_type ());
-	corba_container = create_gnome_container (GNOME_OBJECT (container));
+	corba_container = create_gnome_container (GNOME_UNKNOWN (container));
 
 	if (corba_container == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (container));
@@ -145,24 +145,24 @@ gnome_container_new (void)
 }
 
 void
-gnome_container_add (GnomeContainer *container, GnomeObject *client_site)
+gnome_container_add (GnomeContainer *container, GnomeUnknown *client_site)
 {
 	g_return_if_fail (container != NULL);
 	g_return_if_fail (client_site != NULL);
 	g_return_if_fail (GNOME_IS_CONTAINER (container));
-	g_return_if_fail (GNOME_IS_OBJECT (client_site));
+	g_return_if_fail (GNOME_IS_UNKNOWN (client_site));
 
 	gtk_object_ref (GTK_OBJECT (client_site));
 	container->client_sites = g_list_prepend (container->client_sites, client_site);
 }
 
 void
-gnome_container_remove (GnomeContainer *container, GnomeObject *client_site)
+gnome_container_remove (GnomeContainer *container, GnomeUnknown *client_site)
 {
 	g_return_if_fail (container != NULL);
 	g_return_if_fail (client_site != NULL);
 	g_return_if_fail (GNOME_IS_CONTAINER (container));
-	g_return_if_fail (GNOME_IS_OBJECT (client_site));
+	g_return_if_fail (GNOME_IS_UNKNOWN (client_site));
 
 	container->client_sites = g_list_remove (container->client_sites, client_site);
 	gtk_object_unref (GTK_OBJECT (client_site));

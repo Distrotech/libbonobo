@@ -58,7 +58,7 @@ gnome_bonobo_object_save (GnomeBonoboObject *bonobo_object, GnomeStorage *storag
 	GnomePersisStorage *persist_storage;
 	char *class;
 	
-	persist_storage = gnome_object_query_interface (
+	persist_storage = gnome_unknown_query_interface (
 		bonobo_object, "IDL:GNOME/PersistStorage:1.0");
 
 	if (persist_storage == NULL)
@@ -80,7 +80,7 @@ gnome_bonobo_object_save_to_stream (GnomeBonoboObject *bonobo_object, GnomeStrea
 	GnomePersisStream *persist_stream;
 	char *class;
 	
-	persist_stream = gnome_object_query_interface (
+	persist_stream = gnome_unknown_query_interface (
 		bonobo_object, "IDL:GNOME/PersistStream:1.0");
 
 	if (persist_stream == NULL)

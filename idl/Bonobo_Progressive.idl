@@ -15,7 +15,7 @@
 
 module GNOME {
 
-	interface ProgressiveDataSink : obj {
+	interface ProgressiveDataSink : Unknown {
 		typedef sequence<octet> iobuf;
 
 		/**

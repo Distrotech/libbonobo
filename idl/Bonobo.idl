@@ -6,7 +6,7 @@
  *
  */
 #include <gnome-factory.idl>
-#include <GnomeObject.idl>
+#include <gnome-unknown.idl>
 
 #include "gnome-storage.idl"
 #include "gnome-persist.idl"

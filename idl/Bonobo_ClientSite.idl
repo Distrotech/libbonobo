@@ -12,7 +12,7 @@
 
 module GNOME {
 
-interface ClientSite : GNOME::obj {
+interface ClientSite : GNOME::Unknown {
 
 	/**
 	 * get_container:

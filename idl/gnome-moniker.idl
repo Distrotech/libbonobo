@@ -87,7 +87,7 @@ module GNOME {
 					    
 	};
 
-	interface ParseDisplayName : obj {
+	interface ParseDisplayName : Unknown {
 		Moniker parse_display_name (in BindOptions bind_context,
 					    in string display_name,
 					    out short display_name_bytes_parsed);
@@ -95,14 +95,14 @@ module GNOME {
 
 	/* UNUSED: This may be replaced by the
 	 * simpler `BindOptions' struct; we'll see */
-	interface BindContext : obj {
+	interface BindContext : Unknown {
 
 		/**
 		 * register_object:
 		 *
 		 * Keeps track of the object withing the
 		 * context.  The object is ref()ed */
-		void register_object (in obj object);
+		void register_object (in Unknown object);
 		
 		/**
 		 * drop_one_object:
@@ -110,7 +110,7 @@ module GNOME {
 		 *
 		 * Applications usually call drop_objects.
 		 */
-		void drop_one_object (in obj object);
+		void drop_one_object (in Unknown object);
 
 		/**
 		 * drop_objects:

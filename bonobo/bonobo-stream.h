@@ -12,11 +12,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STREAM_TYPE))
 
 typedef struct {
-        GnomeObject object;
+        GnomeUnknown object;
 } GnomeStream;
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	GnomeUnknownClass parent_class;
 
 	/*
 	 * virtual methods

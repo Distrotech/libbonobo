@@ -21,7 +21,7 @@ POA_GNOME_PersistFile__vepv gnome_persist_file_vepv;
 static CORBA_char *
 impl_get_current_file (PortableServer_Servant servant, CORBA_Environment *ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
+	GnomeUnknown *object = gnome_unknown_from_servant (servant);
 	GnomePersistFile *pfile = GNOME_PERSIST_FILE (object);
 
 	/* if our persist_file has a filename with any length, return it */
@@ -59,7 +59,7 @@ impl_get_class_id (PortableServer_Servant servant, CORBA_Environment * ev)
 static CORBA_boolean
 impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
+	GnomeUnknown *object = gnome_unknown_from_servant (servant);
 	GnomePersistFile *pfile = GNOME_PERSIST_FILE (object);
 
 	return pfile->is_dirty;
@@ -70,7 +70,7 @@ impl_load (PortableServer_Servant servant,
 	   const CORBA_char *filename,
 	   CORBA_Environment *ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
+	GnomeUnknown *object = gnome_unknown_from_servant (servant);
 	GnomePersistFile *pf = GNOME_PERSIST_FILE (object);
 	int result;
 	
@@ -92,7 +92,7 @@ impl_save (PortableServer_Servant servant,
 	   const CORBA_char *filename,
 	   CORBA_Environment *ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
+	GnomeUnknown *object = gnome_unknown_from_servant (servant);
 	GnomePersistFile *pf = GNOME_PERSIST_FILE (object);
 	int result;
 	
@@ -123,7 +123,7 @@ init_persist_file_corba_class (void)
 	gnome_persist_file_epv.save = impl_save;
 	gnome_persist_file_epv.get_current_file = impl_get_current_file;
 
-	gnome_persist_file_vepv.GNOME_obj_epv = &gnome_obj_epv;
+	gnome_persist_file_vepv.GNOME_Unknown_epv = &gnome_unknown_epv;
 	gnome_persist_file_vepv.GNOME_PersistFile_epv = &gnome_persist_file_epv;
 }
 
@@ -219,19 +219,19 @@ gnome_persist_file_construct (GnomePersistFile *pf,
 }
 
 static GNOME_PersistFile
-create_gnome_persist_file (GnomeObject *object)
+create_gnome_persist_file (GnomeUnknown *object)
 {
 	POA_GNOME_PersistFile *servant;
 	CORBA_Object o;
 
-	servant = (POA_GNOME_PersistFile *) g_new0 (GnomeObjectServant, 1);
+	servant = (POA_GNOME_PersistFile *) g_new0 (GnomeUnknownServant, 1);
 	servant->vepv = &gnome_persist_file_vepv;
 	POA_GNOME_PersistFile__init ((PortableServer_Servant) servant, &object->ev);
 	if (object->ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
 		return CORBA_OBJECT_NIL;
 	}
-	return (GNOME_PersistFile) gnome_object_activate_servant (object, servant);
+	return (GNOME_PersistFile) gnome_unknown_activate_servant (object, servant);
 }
 
 
@@ -255,7 +255,7 @@ gnome_persist_file_new (GnomePersistFileIOFn load_fn,
 
 	pf = gtk_type_new (gnome_persist_file_get_type ());
 	corba_pf = create_gnome_persist_file (
-		GNOME_OBJECT (pf));
+		GNOME_UNKNOWN (pf));
 	if (corba_pf == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (pf));
 		return NULL;
