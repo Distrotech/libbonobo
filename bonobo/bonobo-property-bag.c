@@ -878,4 +878,4 @@ bonobo_property_bag_init (BonoboPropertyBag *pb)
 BONOBO_TYPE_FUNC_FULL (BonoboPropertyBag, 
 		       Bonobo_PropertyBag,
 		       PARENT_TYPE,
-		       bonobo_property_bag);
+		       bonobo_property_bag)

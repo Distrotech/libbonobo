@@ -1,3 +1,17 @@
+2003-04-11  Padraig O'Briain <padraig.obriain@sun.com>
+
+	* activation-server/activation-contect-corba.c,
+	bonobo/bonobo-event-source.c, bonobo/bonobo-generic-factory.c,
+	bonobo/bonobo-item-factory.c, bonobo/bonobo-item-handler.c, 
+	bonobo/bonobo-listener.c, bonobo/bonobo-moniker-context.c,
+	bonobo/bonobo-moniker-extender.c, bonobo/bonobo-monikeri.c,
+	bonobo/bonobo-persist-file.c, bonobo/bonobo-persist-stream.c,
+	bonobo/bonobo-persist.c, bonobo/bonobo-property-bag.c,
+	bonobo/bonobo-running-context.c, bonobo/bonobo-storage-memory.c,
+	samples/echo/echo.c:
+	Remove semicolon after macro BONOBO_TYPE_FUNC_FULL; this fixes
+	compiler warning when using FORTE compiler.
+
 2003-04-08  Michael Meeks  <michael@ximian.com>
 
 	* tests/test-activation/Makefile.am:

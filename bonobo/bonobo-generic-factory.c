@@ -244,7 +244,7 @@ bonobo_generic_factory_init (GObject *object)
 BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory, 
 		       Bonobo_GenericFactory,
 		       BONOBO_TYPE_OBJECT,
-		       bonobo_generic_factory);
+		       bonobo_generic_factory)
 
 
 /**

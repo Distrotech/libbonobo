@@ -141,7 +141,7 @@ bonobo_persist_file_init (GObject *object)
 BONOBO_TYPE_FUNC_FULL (BonoboPersistFile, 
 		       Bonobo_PersistFile,
 		       PARENT_TYPE,
-		       bonobo_persist_file);
+		       bonobo_persist_file)
 
 /**
  * bonobo_persist_file_construct:

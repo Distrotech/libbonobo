@@ -127,7 +127,7 @@ bonobo_listener_init (GObject *object)
 BONOBO_TYPE_FUNC_FULL (BonoboListener, 
 		       Bonobo_Listener,
 		       PARENT_TYPE,
-		       bonobo_listener);
+		       bonobo_listener)
 
 /**
  * bonobo_listener_new_closure:

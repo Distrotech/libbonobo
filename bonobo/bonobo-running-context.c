@@ -332,7 +332,7 @@ bonobo_running_context_init (GObject *object)
 BONOBO_TYPE_FUNC_FULL (BonoboRunningContext, 
 		       Bonobo_RunningContext,
 		       PARENT_TYPE,
-		       bonobo_running_context);
+		       bonobo_running_context)
 
 BonoboObject *
 bonobo_running_context_new (void)

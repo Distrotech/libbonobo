@@ -450,7 +450,7 @@ bonobo_moniker_init (GObject *object)
 BONOBO_TYPE_FUNC_FULL (BonoboMoniker, 
 		       Bonobo_Moniker,
 		       PARENT_TYPE,
-		       bonobo_moniker);
+		       bonobo_moniker)
 
 /**
  * bonobo_moniker_construct:

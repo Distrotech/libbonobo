@@ -982,4 +982,4 @@ activation_context_init (ActivationContext *actx)
 BONOBO_TYPE_FUNC_FULL (ActivationContext,
                        Bonobo_ActivationContext,
                        BONOBO_TYPE_OBJECT,
-                       activation_context);
+                       activation_context)

@@ -100,7 +100,7 @@ bonobo_persist_init (GObject *object)
 BONOBO_TYPE_FUNC_FULL (BonoboPersist, 
 		       Bonobo_Persist,
 		       PARENT_TYPE,
-		       bonobo_persist);
+		       bonobo_persist)
 
 /**
  * bonobo_persist_generate_content_types:

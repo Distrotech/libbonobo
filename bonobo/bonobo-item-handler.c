@@ -202,7 +202,7 @@ bonobo_item_handler_class_init (BonoboItemHandlerClass *klass)
 BONOBO_TYPE_FUNC_FULL (BonoboItemHandler, 
 		       Bonobo_ItemContainer,
 		       PARENT_TYPE,
-		       bonobo_item_handler);
+		       bonobo_item_handler)
 
 /**
  * bonobo_item_handler_construct:
