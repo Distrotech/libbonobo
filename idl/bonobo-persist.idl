@@ -13,12 +13,10 @@
 
 #include "bonobo-unknown.idl"
 #include "bonobo-storage.idl"
+#include "bonobo-exception.idl"
 
 module Bonobo {
 
-	exception NotSupported {};
-	exception IOError {};
-	
 	interface Persist : Unknown {
 		enum Status {
 			SAVE_OK,

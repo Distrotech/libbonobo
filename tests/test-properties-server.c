@@ -35,6 +35,7 @@ static void
 set_prop (BonoboPropertyBag *bag,
 	  const BonoboArg   *arg,
 	  guint              arg_id,
+	  CORBA_Environment *ev,
 	  gpointer           user_data)
 {
 	PropData *pd = user_data;
@@ -65,7 +66,7 @@ set_prop (BonoboPropertyBag *bag,
 		break;
 
 	default:
-		g_warning ("Unhandled arg. id %d", arg_id);
+		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
 	};
 }
 
@@ -73,6 +74,7 @@ static void
 get_prop (BonoboPropertyBag *bag,
 	  BonoboArg         *arg,
 	  guint              arg_id,
+	  CORBA_Environment *ev,
 	  gpointer           user_data)
 {
 	PropData *pd = user_data;
@@ -103,7 +105,7 @@ get_prop (BonoboPropertyBag *bag,
 		break;
 
 	default:
-		g_warning ("Unhandled arg. id %d", arg_id);
+		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
 	};
 }
 
@@ -241,7 +243,7 @@ print_props (void)
 		BonoboArg      *arg;
 		char           *s1, *s2;
 
-		arg = bonobo_property_bag_get_value (pb, prop->name);
+		arg = bonobo_property_bag_get_value (pb, prop->name, NULL);
 		s1  = simple_prop_to_string (arg);
 		bonobo_arg_release (arg);
 

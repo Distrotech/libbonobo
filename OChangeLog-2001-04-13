@@ -1,3 +1,25 @@
+2001-01-15  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* bonobo/bonobo-exception.c (bonobo_exception_repoid_to_text):
+	impl. added IOError and NotSupported exception
+
+	* idl/bonobo-exception.idl: placed the global exception into a new
+	file.
+
+	* bonobo/bonobo-shlib-factory.h 
+	(BONOBO_OAF_SHLIB_FACTORY_MULTI):
+	(BONOBO_OAF_SHLIB_FACTORY): some new macros
+
+	* monikers/bonobo-moniker-std.c: use the new macro
+
+	* bonobo/bonobo-property.c: see below. 
+
+	* bonobo/bonobo-exception.h (bonobo_exception_set): impl.
+	(bonobo_return_if_fail): impl.
+	(bonobo_return_val_if_fail): impl.
+
+	* bonobo/bonobo-property-bag.[ch]: code cleanup, added exceptions
+
 2001-01-13  Jason Leach  <jasonleach@usa.net>
 
 	* bonobo/bonobo-exception.c: replaced an #include <gnome.h> with

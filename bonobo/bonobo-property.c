@@ -35,7 +35,7 @@ impl_Bonobo_Property_getType (PortableServer_Servant servant,
 	BonoboPropertyServant *ps = (BonoboPropertyServant *) servant;
 	BonoboArgType          type;
 
-	type = bonobo_property_bag_get_type (ps->pb, ps->property_name);
+	type = bonobo_property_bag_get_type (ps->pb, ps->property_name, ev);
 	/* FIXME: we need to handle obscure cases like non existance of the property */
 
 	return (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) (type), ev);
@@ -47,7 +47,7 @@ impl_Bonobo_Property_getValue (PortableServer_Servant servant,
 {
 	BonoboPropertyServant *ps = (BonoboPropertyServant *) servant;
 
-	return bonobo_property_bag_get_value (ps->pb, ps->property_name);
+	return bonobo_property_bag_get_value (ps->pb, ps->property_name, ev);
 }
 
 static void
@@ -66,7 +66,7 @@ impl_Bonobo_Property_getDefault (PortableServer_Servant servant,
 {
 	BonoboPropertyServant *ps = (BonoboPropertyServant *) servant;
 
-	return bonobo_property_bag_get_default (ps->pb, ps->property_name);
+	return bonobo_property_bag_get_default (ps->pb, ps->property_name, ev);
 }
 
 static CORBA_char *
@@ -76,7 +76,7 @@ impl_Bonobo_Property_getDocString (PortableServer_Servant servant,
 	BonoboPropertyServant *ps = (BonoboPropertyServant *) servant;
 
 	return CORBA_string_dup (bonobo_property_bag_get_docstring (ps->pb, 
-		ps->property_name));
+		ps->property_name, ev));
 }
 
 
@@ -86,7 +86,7 @@ impl_Bonobo_Property_getFlags (PortableServer_Servant servant,
 {
 	BonoboPropertyServant *ps = (BonoboPropertyServant *) servant;
 
-	return bonobo_property_bag_get_flags (ps->pb, ps->property_name);
+	return bonobo_property_bag_get_flags (ps->pb, ps->property_name, ev);
 }
 
 static Bonobo_EventSource_ListenerId

@@ -31,10 +31,12 @@ typedef enum {
 typedef void (*BonoboPropertyGetFn) (BonoboPropertyBag *bag,
 				     BonoboArg         *arg,
 				     guint              arg_id,
+				     CORBA_Environment *ev,
 				     gpointer           user_data);
 typedef void (*BonoboPropertySetFn) (BonoboPropertyBag *bag,
 				     const BonoboArg   *arg,
 				     guint              arg_id,
+				     CORBA_Environment *ev,
 				     gpointer           user_data);
 
 #include <bonobo/bonobo-property.h>
@@ -94,7 +96,9 @@ void                      bonobo_property_bag_add_full         (BonoboPropertyBa
 void                      bonobo_property_bag_add_gtk_args     (BonoboPropertyBag  *pb,
 								GtkObject          *object);
 
-BonoboArgType             bonobo_property_bag_get_type         (BonoboPropertyBag *pb, const char *name);
+BonoboArgType             bonobo_property_bag_get_type         (BonoboPropertyBag *pb, 
+								const char *name,
+								CORBA_Environment *opt_ev);
 
 /* Modifying properties. */		   		      
 void		          bonobo_property_bag_set_value        (BonoboPropertyBag *pb,
@@ -102,12 +106,21 @@ void		          bonobo_property_bag_set_value        (BonoboPropertyBag *pb,
 								const BonoboArg   *value,
 								CORBA_Environment *opt_ev);
 
-BonoboArg                *bonobo_property_bag_get_value        (BonoboPropertyBag *pb, const char *name);
-BonoboArg                *bonobo_property_bag_get_default      (BonoboPropertyBag *pb, const char *name);
-const char	         *bonobo_property_bag_get_docstring    (BonoboPropertyBag *pb, const char *name);
-const BonoboPropertyFlags bonobo_property_bag_get_flags        (BonoboPropertyBag *pb, const char *name);
+BonoboArg                *bonobo_property_bag_get_value        (BonoboPropertyBag *pb, 
+								const char *name, 
+								CORBA_Environment *opt_ev);
+BonoboArg                *bonobo_property_bag_get_default      (BonoboPropertyBag *pb, 
+								const char *name, 
+								CORBA_Environment *opt_ev);
+const char	         *bonobo_property_bag_get_docstring    (BonoboPropertyBag *pb, 
+								const char *name, 
+								CORBA_Environment *opt_ev);
+const BonoboPropertyFlags bonobo_property_bag_get_flags        (BonoboPropertyBag *pb,
+								const char *name, 
+								CORBA_Environment *opt_ev);
 
-gboolean		  bonobo_property_bag_has_property     (BonoboPropertyBag *pb, const char *name);
+gboolean		  bonobo_property_bag_has_property     (BonoboPropertyBag *pb, 
+								const char *name);
 void                      bonobo_property_bag_notify_listeners (BonoboPropertyBag *pb,
 								const char        *name,
 								const BonoboArg   *new_value,
