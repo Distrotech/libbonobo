@@ -1,3 +1,12 @@
+2000-06-07  Pavel Cisler  <pavel@eazel.com>
+
+	* bonobo/bonobo-uih-menu.c: (menu_free_temp_item),
+	(bonobo_ui_handler_menu_new):
+	Fixed a memory leak -- members of a temporary 
+	BonoboUIHandlerMenuItem were not being freed properly.
+	Added a free call to match make_menu_item that allocates
+	the temporary item and called it.
+
 2000-06-07  Darin Adler  <darin@eazel.com>
 
 	Added a destroy-notify feature to callbacks for UI handler
