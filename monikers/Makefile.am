@@ -17,7 +17,7 @@ oaf_DATA = $(OAF_FILES)
 
 # bonobo-moniker-untar.oafinfo
 
-bin_PROGRAMS = std-moniker bonobo-moniker-config bonobo-moniker-gunzip bonobo-moniker-http
+bin_PROGRAMS = std-moniker bonobo-moniker-gunzip bonobo-moniker-http
 
 # bonobo-moniker-untar
 
@@ -43,13 +43,6 @@ std_moniker_SOURCES =			\
 	std-moniker.c
 
 std_moniker_LDADD =			\
-	$(moniker_ldadd)
-
-bonobo_moniker_config_SOURCES =		\
-	bonobo-moniker-config.c		\
-	bonobo-moniker-config.h
-
-bonobo_moniker_config_LDADD =		\
 	$(moniker_ldadd)
 
 bonobo_moniker_gunzip_SOURCES =		\

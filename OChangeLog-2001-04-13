@@ -1,3 +1,8 @@
+2000-12-09  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* monikers/Makefile.am: removed the config moniker (the config
+	stuff will move to an external module)
+
 2000-12-08  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-async.[ch]: s/ASync/Async/
@@ -55,7 +60,7 @@
 	BONOBO_TRANSIENT (*((BonoboTransient **)cookie)), instead of 
 	BONOBO_TRANSIENT (cookie)
         
-	(bonobo_transient_new): return NULL if
+ 	(bonobo_transient_new): return NULL if
 	something fails.
 
 2000-12-05  Darin Adler  <darin@eazel.com>
