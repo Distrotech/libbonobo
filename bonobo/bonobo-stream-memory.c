@@ -127,7 +127,35 @@ mem_copy_to  (BonoboStream *stream,
 	      CORBA_long *written,
 	      CORBA_Environment *ev)
 {
-	g_warning ("Implement me");
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
+	gint fd_out;
+	gint w;
+	
+	*read = smem->size - smem->pos;
+	*written = 0;
+	
+	/* create the output file */
+	fd_out = creat(dest, 0666);
+	if(fd_out == -1) {
+		g_warning ("unable to create output file\n");
+		return;
+	}
+	
+	/* write the memory stream buffer to the output file */
+	do {
+		w = write (fd_out, smem->buffer, *read);
+	} while (w == -1 && errno == EINTR);
+	
+	if (w != -1)
+		*written = w;
+	else if (errno != EINTR) {
+		/* should probably do something to signal an error here */
+		g_warning ("ouput file write failed\n");
+	}
+	
+	
+	close(fd_out);
+
 }
 
 static void
