@@ -147,3 +147,5 @@ interface Embeddable : Bonobo::Unknown {
 					    in Canvas::ComponentProxy proxy);
 };
 };
+
+#endif /* BONOBO_EMBEDDABLE_IDL */

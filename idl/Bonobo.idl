@@ -38,7 +38,6 @@
 #include <bonobo-client-site.idl>
 #include <bonobo-canvas.idl>
 #include <bonobo-embeddable.idl>
-#include <bonobo-sizeable.idl>
 
 /* Printing stuff */
 #include <bonobo-print.idl>
