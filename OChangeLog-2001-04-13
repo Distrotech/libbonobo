@@ -1,3 +1,7 @@
+2000-01-05  Yuri Syrota <rasta@renome.rovno.ua>
+
+	* configure.in: Add "uk" into ALL_LINGUAS
+
 1999-12-29  Michael Meeks  <mmeeks@gnu.org>
 
 	* bonobo/gnome-ui-handler.c (impl_toolbar_item_set_data): implement.
