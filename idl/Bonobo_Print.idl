@@ -1,12 +1,27 @@
-/* FIXME FIXME FIXME : Apr/8/2000 JEG
- * temporary HACK suggested by Michael until he can commit the real code.
+/*
+ * Bonobo remote printing support
+ *
+ * Author:
+ *    Michael Meeks (michael@helixcode.com)
+ *
+ * Copyright (C) 2000 Helix Code, Inc.
  */
+
 module Bonobo {
+
+/*
+ * The C API needs a user_data pointer.
+ */
 	typedef sequence<char> PrintData;
-	interface Print : Unknown {
-		void init (in double x, in double y, in double width, in
-			   double height);
-		PrintData render ();
+
+	struct PrintContext {
+		/*
+		 * FIXME: banding / scissoring ? done at client / server end ?
+		 */
+		double x, y, width, height;
+	};
+
+	interface Print : Bonobo::Unknown {
+		PrintData render (in PrintContext pc);
 	};
 };
-

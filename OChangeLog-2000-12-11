@@ -1,3 +1,21 @@
+2000-04-09  Michael Meeks  <michael@helixcode.com>
+
+	* idl/bonobo-print.idl: fix.
+
+	* bonobo/bonobo-print.c (impl_render): new print api. (impl_init): Kill.
+	(bonobo_print_context_new, bonobo_print_context_new_from, bonobo_print_context_free):
+	implement.
+
+	* bonobo/bonobo-print-client.c (bonobo_print_client_print_to): new print api.
+
+2000-04-08  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-print-client.c (bonobo_print_client_print_to): clean
+	debug.
+
+	* bonobo/bonobo-print.c (impl_render): clean, conditionalize debug.
+	(impl_init): ditto + add red bbox render.
+
 2000-04-08  Jody Goldber <jgoldberg@home.com>
 
 	* idl/bonobo-print.idl: Create a dummy version until Michael can
