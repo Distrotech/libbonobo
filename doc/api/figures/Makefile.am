@@ -11,7 +11,7 @@ all-local: $(diagrams_png)
 # NOTE: make sure you have dia >= 0.90 and DISPLAY set
 # NOTE: if you edit the dia files, save them UNcompressed!
 %.png: %.dia
-	dia $< -e $@
+	@dia $< -e $@ 2> /dev/null || true
 
 MAINTAINERCLEANFILES = $(diagrams_png)
 
