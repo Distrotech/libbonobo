@@ -1,0 +1,134 @@
+
+interface Property : GNOME::Unknown {
+	/**
+	 * get_name:
+	 * 
+	 * Returns the name of the property
+	 */
+	string get_name ();
+
+	/**
+	 * is_stored:
+	 * 
+	 * Returns %TRUE if the property has been stored already
+	 */
+	boolean is_stored ();
+
+	/** 
+	 * is_readonly:
+	 * 
+	 * Returns whether this property is read-only
+	 */
+	boolean is_readonly ();
+	
+	/**
+	 * get_kind:
+	 * 
+	 * Returns the kind for this object
+	 */
+	CORBA::TypeKind get_kind ();
+
+	/**
+	 * get_value:
+	 *
+	 * Returns the value for this property
+	 */
+	CORBA::Any get_value ();
+
+	exception {} InvalidValue;
+
+	/**
+	 * set_value:
+	 * 
+	 * Sets the value for this object to @value
+	 */
+	void set_value (CORBA::Any value) raises (InvalidValue);
+
+	/**
+	 * get_default:
+	 *
+	 * Gets the default value for this property
+	 */
+	CORBA::Any get_default ();
+};
+
+typedef sequence<Property> Properties;
+
+interface Persistable : GNOME::Unknown {
+	/**
+	 * get_name:
+	 * 
+	 * Returns the name of this Persistable collection
+	 */
+	string get_name ();
+
+	/**
+	 * get_class_id:
+	 *
+	 * Returns the class ID for this persistable
+	 */
+	string get_class_id ();
+
+	/**
+	 * get_properties:
+	 * 
+	 * returns all the properties for this object
+	 */
+	Properties get_properties ();
+
+	/**
+	 * get_property:
+	 *
+	 * Returns the property named @property_name
+	 */
+	Property get_property (in string property_name);
+
+	/**
+	 * loading:
+	 *
+	 * Used to notify the Persistable that loading of its
+	 * state has begun.
+	 */
+	void loading ();
+
+	/**
+	 * loaded:
+	 * 
+	 * Used to notify the Persistable that loading of its stat
+	 * has finished
+	 */
+	void loaded ();
+};
+
+interface PersistableCollection : GNOME::Unknown {
+	/** 
+	 * get_count:
+	 *
+	 * Returns the number of items in the Persistable
+	 */
+	int get_count ();
+
+	/**
+	 * get_item:
+	 * @index: the nth element to return
+	 *
+	 * Returns the persistable interface for this object
+	 */
+	Peristable get_item (in int index);
+
+	/**
+	 * add:
+	 * @instance: object to add to the PersistableCollection
+	 */
+	void add (in Persistable instance);
+
+	/**
+	 * set_item:
+	 * @index: index to modify
+	 * @instance: the object to replace with.
+	 */
+	void setItem(in int index, in Persistable instance);
+};
+
+
+
