@@ -1,3 +1,10 @@
+Wed Jan 24 21:50:08 2001  George Lebl <jirka@5z.com>
+
+	* bonobo/bonobo-control.c (bonobo_control_plug_destroy_event_cb):
+	  destroy_event signal handler needs to have a return value.  Not
+	  sure what bugs this could cause, and quite likely it's a
+	  sanity fix only.
+
 2001-01-25  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-sync-toolbar.c (config_verb_fn): do a
