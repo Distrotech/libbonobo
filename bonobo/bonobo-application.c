@@ -116,7 +116,7 @@ impl_Bonobo_Application_message (PortableServer_Servant            servant,
 	signal_args = g_value_array_new (args->_length);
 	memset (&value, 0, sizeof (value));
 	for (i = 0; i < args->_length; ++i) {
-		if (bonobo_arg_to_gvalue_copy (&args->_buffer [i], &value)) {
+		if (bonobo_arg_to_gvalue_alloc (&args->_buffer [i], &value)) {
 			g_value_array_append (signal_args, &value);
 			g_value_unset (&value);
 		} else {
@@ -132,7 +132,7 @@ impl_Bonobo_Application_message (PortableServer_Servant            servant,
 	g_value_array_free (signal_args);
 	rv = CORBA_any__alloc ();
 	if (signal_return) {
-		if (!bonobo_arg_from_gvalue_copy (rv, signal_return)) {
+		if (!bonobo_arg_from_gvalue_alloc (rv, signal_return)) {
 			g_warning ("Failed to convert type '%s' to CORBA::any",
 				   g_type_name (G_VALUE_TYPE (signal_return)));
 			rv->_type = TC_void;

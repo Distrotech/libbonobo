@@ -400,7 +400,7 @@ bonobo_arg_is_equal (const BonoboArg *a, const BonoboArg *b, CORBA_Environment *
 
 
 /**
- * bonobo_arg_to_gvalue_copy:
+ * bonobo_arg_to_gvalue_alloc:
  * @arg: source value
  * @value: destination value
  * 
@@ -411,7 +411,7 @@ bonobo_arg_is_equal (const BonoboArg *a, const BonoboArg *b, CORBA_Environment *
  * Return value: Returns %TRUE if conversion succeeds, %FALSE otherwise.
  **/
 gboolean
-bonobo_arg_to_gvalue_copy (BonoboArg const *arg, GValue *value)
+bonobo_arg_to_gvalue_alloc (BonoboArg const *arg, GValue *value)
 {
 	BonoboArgToGValueFn converter;
 
@@ -443,7 +443,7 @@ bonobo_arg_to_gvalue_copy (BonoboArg const *arg, GValue *value)
 
 
 /**
- * bonobo_arg_to_gvalue_copy:
+ * bonobo_arg_to_gvalue_alloc:
  * @arg: destination value
  * @value: source value
  * 
@@ -454,7 +454,7 @@ bonobo_arg_to_gvalue_copy (BonoboArg const *arg, GValue *value)
  * Return value: Returns %TRUE if conversion succeeds, %FALSE otherwise.
  **/
 gboolean
-bonobo_arg_from_gvalue_copy (BonoboArg *arg, GValue const *value)
+bonobo_arg_from_gvalue_alloc (BonoboArg *arg, GValue const *value)
 {
 	BonoboArgFromGValueFn converter;
 

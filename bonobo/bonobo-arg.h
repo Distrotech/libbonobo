@@ -109,9 +109,9 @@ gboolean      bonobo_arg_type_is_equal   (BonoboArgType      a,
 					  BonoboArgType      b,
 					  CORBA_Environment *opt_ev);
 
-gboolean bonobo_arg_to_gvalue_copy                 (BonoboArg const       *arg,
+gboolean bonobo_arg_to_gvalue_alloc                (BonoboArg const       *arg,
 						    GValue                *value);
-gboolean bonobo_arg_from_gvalue_copy               (BonoboArg             *arg,
+gboolean bonobo_arg_from_gvalue_alloc              (BonoboArg             *arg,
 						    GValue const          *value);
 void     bonobo_arg_register_to_gvalue_converter   (BonoboArgType          arg_type,
 						    BonoboArgToGValueFn    converter);

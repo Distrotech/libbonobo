@@ -1,3 +1,14 @@
+2003-11-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-app-client.c, bonobo/bonobo-application.c:
+	s/bonobo_arg_from_gvalue_copy/bonobo_arg_from_gvalue_alloc/
+	s/bonobo_arg_to_gvalue_copy/bonobo_arg_to_gvalue_alloc/
+
+	* bonobo/bonobo-arg.h, bonobo/bonobo-arg.c: Rename
+	bonobo_arg_(to|from)_gvalue_copy to
+	bonobo_arg_(to|from)_gvalue_alloc, in order to confuse less
+	programmers.
+
 2003-11-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-marshal.list: Add a few required marshalers.

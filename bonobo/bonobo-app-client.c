@@ -127,7 +127,7 @@ bonobo_app_client_msg_send_valist (BonoboAppClient *app_client,
 	args->_buffer = Bonobo_Application_ArgList_allocbuf (argv->len);
 	for (i = 0; i < argv->len; ++i) {
 		value = g_ptr_array_index (argv, i);
-		if (!bonobo_arg_from_gvalue_copy (&args->_buffer[i], value)) {
+		if (!bonobo_arg_from_gvalue_alloc (&args->_buffer[i], value)) {
 			g_warning ("Failed to convert type '%s' to CORBA::any",
 				   g_type_name (G_VALUE_TYPE (value)));
 			args->_buffer[i]._type = TC_void;
@@ -151,7 +151,7 @@ bonobo_app_client_msg_send_valist (BonoboAppClient *app_client,
 	
 	if (ret->_type != TC_void) {
 		rv = g_new0 (GValue, 1);
-		bonobo_arg_to_gvalue_copy (ret, rv);
+		bonobo_arg_to_gvalue_alloc (ret, rv);
 	} else
 		rv = NULL;
 	CORBA_free (ret);
