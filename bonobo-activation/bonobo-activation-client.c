@@ -197,6 +197,11 @@ get_lang_list (void)
         return result;
 }
 
+#if defined(__APPLE__) && defined(HAVE_NSGETENVIRON) && defined(HAVE_CRT_EXTERNS_H)
+#include <crt_externs.h>
+#define environ (*_NSGetEnviron())
+#endif
+
 extern char **environ;
 
 void

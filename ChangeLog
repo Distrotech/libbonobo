@@ -1,3 +1,8 @@
+2004-03-17  Tony Arnold  <tonyarnold@users.sourceforge.net>
+
+	* bonobo-activation/bonobo-activation-client.c: ugly hack
+	for Darwin's whacked-out 'environ.
+
 2004-03-16  Gareth Owen  <gowen72@yahoo.com>
 
 	* configure.in: Added en_GB to ALL_LINGUAS
