@@ -1,3 +1,10 @@
+2000-12-05  Michael Meeks  <michael@helixcode.com>
+
+	* tests/selector_test.c (noact_callback, panel_callback): clean.
+
+	* bonobo/bonobo-ui-xml.c (node_free): free_nodedata_tree instead of
+	free_nodedata; fixes leak - thanks to Morten.
+
 2000-12-04  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-control.c (process_events): only work through the event queue
