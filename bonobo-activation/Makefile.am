@@ -5,8 +5,8 @@ lib_LTLIBRARIES=liboaf.la
 INCLUDES=				\
 	-I$(top_srcdir) 		\
 	-I$(top_builddir) 		\
-	-I$(top_builddir)/liboaf 	\
 	-I$(top_srcdir)/liboaf 		\
+	-I$(top_builddir)/liboaf 	\
 	@ORBIT_CFLAGS@ 			\
 	@GLIB_CFLAGS@ 			\
 	-DVERSION=\"$(VERSION)\"	\
@@ -39,6 +39,7 @@ liboaf_la_SOURCES=		\
 	oaf-registration.c 	\
 	oaf-servreg.c 		\
 	oaf-util.c		\
+	oaf-i18n.h		\
 	$(NULL)
 
 BUILT_SOURCES=			\
