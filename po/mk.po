@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mk\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-06-15 20:50+0000\n"
 "Last-Translator: Vladislav Bidikov <bidikovi@mail.com.mk>\n"
 "Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
@@ -192,11 +192,11 @@ msgstr "Фабричкиот `%s' враќа NIL за `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' не содржи `%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "CORBA POA по желба"
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2002-08-24 18:29+0430\n"
 "Last-Translator: Roozbeh Pournader <roozbeh@sharif.edu>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -179,11 +179,11 @@ msgstr "کارخانه‌ی ‎`%s'‎ برای ‎`%s'‎،‏ NIL برگردا
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "‏Shlib ‏‎`%s'‎ شامل ‎`%s'‎ نیست"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr ""
 

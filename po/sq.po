@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-07-01 01:45+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -188,11 +188,11 @@ msgstr "Fabrika `%s' ka kthyer NIL për `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' nuk përmban `%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "CORBA POA e personalizuar"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-05-31 16:24+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
@@ -188,11 +188,11 @@ msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Nid oeddd y shlib `%s' yn cynnwys `%s'"
 
 # EFALLAI
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "POA CORBA Addasiedig"
 

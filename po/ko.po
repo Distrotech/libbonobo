@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.0\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-05-01 21:24+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -185,11 +185,11 @@ msgstr "`%s' 팩토리가 `%s'에 대해 NIL을 리턴했습니다"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "`%s' 공유라이브러리에 `%s'이(가) 들어 있지 않습니다"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "사용자 지정 CORBA POA"
 

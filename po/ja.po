@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo CVS-20030311\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-05-06 22:10+0900\n"
 "Last-Translator: KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -189,11 +189,11 @@ msgstr "ファクトリ '%s' が '%s' に NIL を返しました。"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' は '%s' を含んでいませんでした。"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "カスタム CORBA POA"
 

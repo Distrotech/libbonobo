@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-06-16 21:09+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -191,11 +191,11 @@ msgstr "Tehdas \"%s\" palautti arvon NIL iid:lle \"%s\""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Jaettu kirjasto \"%s\" ei sisältänyt iid:tä \"%s\""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "Mukautettu CORBA POA"
 

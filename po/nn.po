@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.107.0\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2001-09-26 08:36+0200\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: nynorsk <nn@li.org>\n"
@@ -182,11 +182,11 @@ msgstr "Fabrikken «%s» returnerte NIL for «%s»"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib «%s» innheldt ikkje «%s»"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr ""
 

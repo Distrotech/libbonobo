@@ -1,4 +1,14 @@
+libbonobo 2.3.5
+
+	* Bugs fixed
+		+ reference tracking race (Gustavo Carneiro)
+		+ incompatible activation-client fix (Antonio Xu)
+		+ popt fixage (Michael, Damien Carbery)
+	* Featurelets
+		+ factory regression tests (Gustavo)
+
 libbonobo 2.3.4
+
 	* Bugs fixed
 		+ don't use C++ keyword in C code (Frederic Crozat)
 		+ fix activation test linking and script (Michael)

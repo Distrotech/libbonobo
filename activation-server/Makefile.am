@@ -70,6 +70,7 @@ activation-context-query-lexer.c: $(srcdir)/activation-context-query-lexer.l act
 
 stamp-parser: $(srcdir)/activation-context-query-parser.y
 	$(YACC) $(YFLAGS) $(srcdir)/activation-context-query-parser.y
+	rm -f y.output
 	touch $@
 
 activation-context-query-parser.c: stamp-parser
@@ -81,7 +82,7 @@ activation-context-query-parser.h: stamp-parser
 BUILT_SOURCES= activation-context-query-lexer.c activation-context-query-parser.c \
 	activation-context-query-parser.h Bonobo_CosNaming_NamingContext.server
 
-CLEANFILES=stamp-parser  $(server_in_file) $(serverinfo_DATA)
+CLEANFILES=stamp-parser $(server_in_file) $(serverinfo_DATA) $(BUILT_SOURCES)
 
 dist-hook:
 	cd $(distdir) ; rm -f $(CLEANFILES)

@@ -51,7 +51,11 @@ BUILT_SOURCES=				\
 	empty.h				\
 	empty-common.c			\
 	empty-stubs.c			\
-	empty-skels.c
+	empty-skels.c			\
+	plugin.h			\
+	plugin-stubs.c			\
+	plugin-skels.c			\
+	plugin-common.c
 
 empty.h empty-common.c empty-stubs.c empty-skels.c: empty_built
 plugin.h plugin-common.c plugin-stubs.c plugin-skels.c: plugin_built
@@ -64,7 +68,7 @@ plugin_built: plugin.idl $(ORBIT_IDL)
 	$(ORBIT_IDL) $(srcdir)/plugin.idl
 	touch plugin_built
 
-CLEANFILES=empty_built plugin_built
+CLEANFILES=empty_built plugin_built $(BUILT_SOURCES)
 
 INCLUDES= \
 	-I$(top_srcdir)			\
@@ -83,3 +87,6 @@ EXTRA_DIST= test.sh empty.idl plugin.idl $(serverfiles)
 
 # TESTS= test.sh bonobo-activation-test-async
 TESTS= test.sh
+
+dist-hook:
+	cd $(distdir); rm -f $(CLEANFILES)

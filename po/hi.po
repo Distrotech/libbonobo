@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bonobo activation\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-01-10 20:39+0530\n"
 "Last-Translator: Anurag Seetha <anuragseetha@yahoo.com>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -183,11 +183,11 @@ msgstr "%s के लिए फैक्ट्री %s से वापिस �
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' didn't contain '%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr ""
 

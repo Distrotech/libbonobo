@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bonobo-activation\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-01-12 15:28+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -186,11 +186,11 @@ msgstr ""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Li pårteye livreye «%s» n' a nén «%s» å dvins"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr ""
 

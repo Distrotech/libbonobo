@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.he\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-04-29 17:41+0300\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -182,11 +182,11 @@ msgstr "'%s' החזיר NIL עבור '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' לא כללה `%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "CORBA POA מותאם אישית"
 

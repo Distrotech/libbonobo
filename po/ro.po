@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.1.1\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-01-20 20:19+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -187,11 +187,11 @@ msgstr ""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr ""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr ""
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-06-18 20:03+0400\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -194,11 +194,11 @@ msgstr "Фабрика \"%s\" возвратила для \"%s\" значени�
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Разделяемая библиотека \"%s\" не содержит \"%s\""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "Прочий адаптер CORBA POA"
 

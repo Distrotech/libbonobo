@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-05-18 17:05-0300\n"
 "Last-Translator: Evandro Fernandes Giovanini <evandrofg@ig.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-br@listas.cipsga.org.br>\n"
@@ -187,11 +187,11 @@ msgstr "Fábrica `%s' retornou NIL para `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Biblioteca `%s' não continha `%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "CORBA POA personalizada"
 

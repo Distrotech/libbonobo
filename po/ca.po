@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.0\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-04-29 11:26+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -186,11 +186,11 @@ msgstr "La factoria «%s» ha tornat NIL per a «%s»"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "La shlib «%s» no contenia «%s»"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "POA de CORBA personalitzat"
 

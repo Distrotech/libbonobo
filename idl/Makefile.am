@@ -63,9 +63,8 @@ Bonobo_module_la_LDFLAGS = \
 $(IMODULE_SOURCE): $(idl_DATA) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(idl_flags) --imodule $(top_srcdir)/idl/Bonobo.idl
 
-DONT_DIST_SOURCE = $(IMODULE_SOURCE)
+BUILT_SOURCES = $(IMODULE_SOURCE)
+CLEANFILES = $(BUILT_SOURCES)
 
 dist-hook:
-	for file in $(DONT_DIST_SOURCE) ; do \
-	    rm -f $(distdir)/$$file ; \
-	done
+	cd $(distdir); rm -f $(BUILT_SOURCES)

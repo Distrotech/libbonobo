@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-05-06 09:02+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -185,11 +185,11 @@ msgstr "Vytváracie rozhranie `%s' vrátilo pre `%s' hodnotu NIL"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' neobsahovalo `%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "Vlastné CORBA POA"
 

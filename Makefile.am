@@ -25,3 +25,5 @@ install-data-local:
 		$(INSTALL_DATA) $(top_srcdir)/bonobo-activation-config.xml			\
 			$(DESTDIR)$(sysconfdir)/bonobo-activation;					\
 	fi
+
+CLEANFILES=intltool-extract intltool-merge intltool-update

@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.4\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-01 15:54-0400\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-07-01 15:54-0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
@@ -183,11 +183,11 @@ msgstr "Fabrikejo '%s' revenis NULON por '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib-o '%s' ne enhavis '%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "Propra CORBA POA"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2003-02-06 10:27+0700\n"
 "Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
 "Language-Team: Indonesia <id@li.org>\n"
@@ -186,11 +186,11 @@ msgstr "Factory '%s' memberikan NIL untuk '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' tidak berisi '%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "POA CORBA custom"
 

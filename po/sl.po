@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
+"POT-Creation-Date: 2003-07-15 10:45+0100\n"
 "PO-Revision-Date: 2002-02-26 00:23+0100\n"
 "Last-Translator: Andraž Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: slovenian <sl@li.org>\n"
@@ -183,11 +183,11 @@ msgstr "Tovarna `%s' je za `%s' vrnila NIL'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' ni vseboval `%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:913
 msgid "Custom CORBA POA"
 msgstr "Poljuben CORBA POA"
 

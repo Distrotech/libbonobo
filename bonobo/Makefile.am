@@ -146,15 +146,13 @@ bonobo-marshal.c: bonobo-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --body --prefix=bonobo_marshal > $@
 
 EXTRA_DIST = libbonobo-2.0.pc.in bonobo-marshal.list
-CLEANFILES = $(marshal_sources)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libbonobo-2.0.pc
 
-DONT_DIST_SOURCE = $(CORBA_SOURCE) $(marshal_sources)
+BUILT_SOURCES = $(CORBA_SOURCE) $(marshal_sources)
+CLEANFILES = $(BUILT_SOURCES)
 
 dist-hook:
-	for file in $(DONT_DIST_SOURCE) ; do \
-	    rm -f $(distdir)/$$file ; \
-	done
+	cd $(distdir); rm -f $(BUILT_SOURCES)
 
