@@ -43,9 +43,18 @@ bonobo-object.[ch]:
 	bonobo_unknown_ping: add optional ev.
 
 bonobo-generic-factory.[ch]:
+bonobo-shlib-factory.[ch]:
 	A very broken module
 		removed bonobo_generic_factory_corba_object_create
 
+	Unified multi/simple factories -- every factory is a multi
+		factory now. _MULTI macros are provided for
+		compatibility but please consider migrating to
+		_MULTI-less macros. Migrating simple factories is
+		easy: just add a const gchar * argument to your
+		factory callback function.
+	Privatization
+		
 bonobo-property-bag-xml.[ch]:
 	Removed, use bonobo-conf or soap support code instead
 		 removed bonobo_property_bag_xml_encode_any
