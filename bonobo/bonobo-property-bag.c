@@ -84,7 +84,8 @@ bonobo_property_servant_locator_preinvoke (PortableServer_Servant servant_manage
 	servant = bonobo_property_servant_new (adapter, pb, property_name);
 	if (servant == NULL) {
 		g_warning ("BonoboPropertyBag: Could not create transient Property servant");
-		/* FIXME: Set exception */
+		CORBA_exception_set_system(ev, ex_CORBA_NO_MEMORY, CORBA_COMPLETED_NO);
+		CORBA_free (property_name);
 		return NULL;
 	}
 
@@ -308,7 +309,7 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 	sm->property_bag = pb;
 
 	((POA_PortableServer_ServantLocator *) sm)->vepv = bonobo_property_bag_get_servant_locator_vepv ();
-
+		
 	POA_PortableServer_ServantLocator__init (((PortableServer_ServantLocator *) sm), &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboPropertyBag: Could not initialize ServantLocator");
@@ -642,7 +643,6 @@ bonobo_property_bag_destroy (GtkObject *object)
 	PortableServer_POA_destroy (pb->priv->poa, TRUE, TRUE, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION)
 		g_warning ("bonobo_property_bag_destroy: Could not destroy POA.");
-
 	CORBA_exception_free (&ev);
 
 	/* Destroy all properties. */

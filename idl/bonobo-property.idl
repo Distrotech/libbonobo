@@ -30,6 +30,9 @@ interface PropertyListener : Bonobo::Unknown {
 };
 
 interface Property {
+	exception InvalidValue {};
+	exception ReadOnlyProperty {};
+
 	/**
 	 * get_name:
 	 * 
@@ -67,8 +70,6 @@ interface Property {
 	 * 
 	 * Sets the value for this object to @value
 	 */
-	exception InvalidValue {};
-	exception ReadOnlyProperty {};
 	void set_value (in any value) raises (InvalidValue, ReadOnlyProperty);
 
 	/**
@@ -107,8 +108,14 @@ interface Property {
 
 };
 
-typedef sequence<string> PropertyNames;
+typedef sequence<string>   PropertyNames;
 typedef sequence<Property> PropertyList;
+
+struct Pair {
+	string name;
+	any    value;
+};
+typedef sequence<Pair>     PropertySet;
 
 interface PropertyBag : Bonobo::Unknown {
 	/**
@@ -168,7 +175,12 @@ interface PropertyBag : Bonobo::Unknown {
 	void remove_change_listener (in string name,
 				     in PropertyListener listener)
 		raises (NotFound);
+
+	void set_values (in PropertySet set) raises (Bonobo::Property::InvalidValue, Bonobo::Property::ReadOnlyProperty);
+
+	PropertySet get_values ();
 };
 
 };
+
 

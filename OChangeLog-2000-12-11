@@ -1,7 +1,32 @@
-2000-10-10  Darin Adler  <darin@eazel.com>
+2000-10-11  Miguel de Icaza  <miguel@helixcode.com>
 
+	* idl/bonobo-property.idl: Add get_values and set_values methods.
+
+2000-10-10  Miguel de Icaza  <miguel@helixcode.com>
+	
+	* bonobo/bonobo-property-bag.c
+	(bonobo_property_servant_locator_preinvoke): Fix FIXME, set the
+	exception if the the auxiliray servant can not be created.
+
+2000-10-10  Darin Adler  <darin@eazel.com>
+	
 	* bonobo/bonobo-win.c: (radio_group_add): Fix bug where all radio
 	menu items would look active.
+
+2000-10-08  Miguel de Icaza  <miguel@helixcode.com>
+
+	* bonobo/*ui.h: use GNOME_BEGIN_DECLS/GNOME_END_DECLS instead of
+	the ifdef madness.
+
+2000-10-07  Miguel de Icaza  <miguel@helixcode.com>
+
+	* monikers/std-moniker.c (std_destroy_cb): Fix prototype.
+	(main): Remove OAF detect code.  We always use OAF now.
+
+2000-10-09  Mathieu Lacage  <mathieu@eazel.com>
+
+	* bonobo/bonobo-ui-util.c: (bonobo_ui_util_xml_get_icon_pixbuf):
+	fix segfault in certain cases.
 
 	* bonobo/bonobo-view.h: Remove headers for deleted functions.
 	* bonobo/bonobo-view.c: Remove unused private fields.

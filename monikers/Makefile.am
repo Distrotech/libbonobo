@@ -9,7 +9,11 @@ INCLUDES =                                              \
 oafdir = $(datadir)/oaf
 oaf_DATA = std-moniker.oafinfo
 
-bin_PROGRAMS = std-moniker
+bin_PROGRAMS = std-moniker bonobo-moniker-config
+
+moniker_ldadd = 				\
+	$(top_builddir)/bonobo/libbonobo.la	\
+	$(BONOBOX_TEST_LIBS)
 
 std_moniker_SOURCES =			\
 	bonobo-moniker-file.c		\
@@ -24,8 +28,14 @@ std_moniker_SOURCES =			\
 	bonobo-moniker-query.h		\
 	std-moniker.c
 
-std_moniker_LDADD =				\
-	$(top_builddir)/bonobo/libbonobo.la	\
-	$(BONOBOX_TEST_LIBS)
+std_moniker_LDADD =			\
+	$(moniker_ldadd)
+
+bonobo_moniker_config_SOURCES =		\
+	bonobo-moniker-config.c		\
+	bonobo-moniker-config.h
+
+bonobo_moniker_config_LDADD =		\
+	$(moniker_ldadd)
 
 EXTRA_DIST=std-moniker.oafinfo
