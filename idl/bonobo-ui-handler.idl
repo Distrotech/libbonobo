@@ -302,16 +302,21 @@ module Bonobo {
        		 * that a menu or toolbar item has been activated or
        		 * overridden.
        		 */
-       
-       		void menu_activated  (in string path);
-       		void menu_removed    (in string path);
-       		void menu_overridden (in string path);
-       		void menu_reinstated (in string path);
 
-       		void toolbar_activated  (in string path);
-       		void toolbar_removed    (in string path);
-       		void toolbar_overridden (in string path);
-       		void toolbar_reinstated (in string path);
+		/*
+		 * These methods are oneway to avoid blocking when the callback
+		 * does not return quickly.
+		 */
+       
+       		oneway void menu_activated  (in string path);
+       		oneway void menu_removed    (in string path);
+       		oneway void menu_overridden (in string path);
+       		oneway void menu_reinstated (in string path);
+
+       		oneway void toolbar_activated  (in string path);
+       		oneway void toolbar_removed    (in string path);
+       		oneway void toolbar_overridden (in string path);
+       		oneway void toolbar_reinstated (in string path);
 
 		/*
 		 * Contributing to the top-level app's Docks.

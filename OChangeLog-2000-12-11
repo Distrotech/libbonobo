@@ -1,3 +1,10 @@
+2000-08-10  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* idl/bonobo-ui-handler.idl: Changed the {menu,toolbar}_activated,
+	{menu,toolbar}_removed, {menu,toolbar}_overridden,
+	{menu,toolbar}_reinstated methods to oneway, so that the notifier
+	will not block if the callback doesn't return quickly.
+
 2000-08-10  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-plug.c (bonobo_plug_unrealize): Re-order the
