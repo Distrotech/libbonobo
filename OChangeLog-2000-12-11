@@ -1,3 +1,9 @@
+Mon Oct 30 20:41:10 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* storage-modules/bonobo-stream-efs.c: raise more exceptions. 
+
+	* storage-modules/bonobo-storage-efs.c: raise more exceptions.
+
 2000-10-30  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* monikers/bonobo-moniker-item.c (item_resolve):
