@@ -1,3 +1,10 @@
+2000-03-07  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/bonobo-wrapper.c (bonobo_wrapper_size_request): Correct
+	the logic for when to add space for the border: only when the
+	cover is off and the squiggle is visible.
+	(bonobo_wrapper_size_allocate): Likewise.
+
 2000-03-05  John Sullivan  <sullivan@eazel.com>
 
         Fixed two bugs in menu merging.
