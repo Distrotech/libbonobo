@@ -1,3 +1,8 @@
+2000-12-22  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo.spec.in: Removed ${prefix}/bin/std-moniker, added
+	${prefix}/lib/bonobo/moiniker/*
+
 2000-12-22  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* monikers/bonobo-moniker-std.c: merged the file, item, cache and new
