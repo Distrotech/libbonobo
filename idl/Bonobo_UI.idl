@@ -69,8 +69,10 @@ module Bonobo {
 		oneway void     freeze      ();
 		oneway void     thaw        ();
 
-		oneway void     setAttr     (in string path, in string attr,
-					     in string value);
+		oneway void     setAttr     (in string path,
+					     in string attr,
+					     in string value,
+					     in string component_name);
 		string          getAttr     (in string path, in string attr)
 			raises (InvalidPath, NonExistentAttr);
 
