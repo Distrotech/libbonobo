@@ -1,6 +1,8 @@
 2001-09-10  Martin Baulig  <martin@gnome.org>
 
-	* Version 1.101.2.
+	* Version 1.102.0.
+
+	* configure.in: Ooops, bump version number to 1.102.0.
 
 2001-09-10  Martin Baulig  <martin@gnome.org>
 
