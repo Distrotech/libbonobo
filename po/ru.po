@@ -1,0 +1,149 @@
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Valek Filippov <frob@df.ru>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libbonobo\n"
+"POT-Creation-Date: 2001-10-13 20:01+0400\n"
+"PO-Revision-Date: 2001-10-13 20:08+0400\n"
+"Last-Translator: Valek Filippov <frob@df.ru>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bonobo/bonobo-exception.c:153
+msgid "An unsupported action was attempted"
+msgstr "Попытка выполнить неподдерживаемое действие"
+
+#: bonobo/bonobo-exception.c:156
+msgid "IO Error"
+msgstr "Ошибка ввода-вывода"
+
+#: bonobo/bonobo-exception.c:159
+msgid "Invalid argument value"
+msgstr "Недопустимое значение аргумента"
+
+#: bonobo/bonobo-exception.c:163
+msgid "Object not found"
+msgstr "Объект не найден"
+
+#: bonobo/bonobo-exception.c:166
+msgid "Syntax error in object description"
+msgstr "Синтаксическая ошибка в описании объекта"
+
+#: bonobo/bonobo-exception.c:171
+msgid "Cannot activate object from factory"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:176
+msgid "No permission to access stream"
+msgstr "Нет прав на доступ к потоку"
+
+#: bonobo/bonobo-exception.c:179
+msgid "An unsupported stream action was attempted"
+msgstr "Попытка выполнить неподдерживаемое действие потока"
+
+#: bonobo/bonobo-exception.c:182
+msgid "IO Error on stream"
+msgstr "Ошибка ввода-вывода в потоке"
+
+#: bonobo/bonobo-exception.c:186
+msgid "IO Error on storage"
+msgstr "Ошибка ввода-вывода в хранилище"
+
+#: bonobo/bonobo-exception.c:189
+msgid "Name already exists in storage"
+msgstr "Название уже существует в хранилище"
+
+#: bonobo/bonobo-exception.c:192
+msgid "Object not found in storage"
+msgstr "Объект в хранилище не найден"
+
+#: bonobo/bonobo-exception.c:195
+msgid "No permission to do operation on storage"
+msgstr "Нет прав для выполнения действий c хранилищем"
+
+#: bonobo/bonobo-exception.c:197
+msgid "An unsupported storage action was attempted"
+msgstr "Попытка выполнить неподдерживаемое действие с хранилищем"
+
+#: bonobo/bonobo-exception.c:199
+msgid "Object is not a stream"
+msgstr "Объект не является потоком"
+
+#: bonobo/bonobo-exception.c:202
+msgid "Object is not a storage"
+msgstr "Объект не является хранилищем"
+
+#: bonobo/bonobo-exception.c:205
+msgid "Storage is not empty"
+msgstr "Хранилище не пусто"
+
+#: bonobo/bonobo-exception.c:209
+msgid "malformed user interface XML description"
+msgstr "неправильное XML-описание пользовательского интерфейса"
+
+#: bonobo/bonobo-exception.c:212
+msgid "invalid path to XML user interface element"
+msgstr "недопустимый путь к XML-элементу пользовательского интерфейса"
+
+#: bonobo/bonobo-exception.c:215
+msgid "Unknown command or verb"
+msgstr "Неизвестная команда или действие"
+
+#: bonobo/bonobo-exception.c:218
+msgid "Command is insensitive"
+msgstr "Бессмысленная команда"
+
+#: bonobo/bonobo-exception.c:222
+msgid "incorrect data type"
+msgstr "неправильный тип данных"
+
+#: bonobo/bonobo-exception.c:225
+msgid "stream not found"
+msgstr "поток не найден"
+
+#: bonobo/bonobo-exception.c:229
+msgid "property not found"
+msgstr "свойство не найдено"
+
+#: bonobo/bonobo-exception.c:232
+msgid "property has invalid type"
+msgstr "свойство имеет недопустимый тип"
+
+#: bonobo/bonobo-exception.c:235
+msgid "property is read only"
+msgstr "свойство только для чтения"
+
+#: bonobo/bonobo-exception.c:238
+msgid "config database backend failed "
+msgstr ""
+
+#: bonobo/bonobo-exception.c:242
+msgid "Moniker interface cannot be found"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:245
+msgid "Moniker activation timed out"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:248
+msgid "Syntax error within moniker"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:251
+msgid "Moniker has an unknown moniker prefix"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:275
+msgid "Error checking error; no exception"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:284
+msgid "General activation error with no description"
+msgstr "Общая ошибка активирования без описания"
+
+#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+msgid "Could not initialize Bonobo"
+msgstr "Не удалось инициализировать Bonobo"
