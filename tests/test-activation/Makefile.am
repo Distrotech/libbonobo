@@ -81,8 +81,7 @@ LDADD = ../../bonobo-activation/libbonobo-activation.la \
 
 serverfiles=empty.server broken.server plugin.server
 
-emptydatadir=$(libdir)/bonobo/servers
-emptydata_DATA=$(serverfiles)
+noinst_DATA=$(serverfiles)
 
 EXTRA_DIST= test.sh empty.idl plugin.idl $(serverfiles)
 

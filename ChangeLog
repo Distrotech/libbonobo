@@ -1,10 +1,15 @@
+2004-08-09  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/test-activation/Makefile.am: Don't install $(serverfiles).
+	They are not required to be installed for make check. Fixes #145056.
+
 2004-08-08  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* idl/Bonobo_Control.idl: Prepend 'action' parameter name with
 	underscore to avoid clash with type Action, in
 	PropertyControl::notifyAction(). Fixes #118078.
 	
-	* idl/Bonobo_Property.idl: Escape PropertyBag::ReadOnly
+	* idl/Bonobo_Property.idl: Escape PropertyBag::ReadOnly and
 	ConfigDatabase::DBFlags::DEFAULT with a leading underscore because
 	of clashes with IDL keywords. Fixes #118078.
 
