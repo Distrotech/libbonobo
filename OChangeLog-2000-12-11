@@ -1,3 +1,14 @@
+Sun Nov 21 11:51:37 1999  Dietmar Maurer  <dm@darkstar>
+
+	* bonobo/gnome-control.h: added prototype for
+	gnome_control_corba_object_create()
+
+	* bonobo/gnome-bonobo-selector.c (gnome_bonobo_select_goad_id):
+	fixed compile warning.
+
+	* bonobo/gnome-embeddable.c (impl_GNOME_Embeddable_new_view):
+	fixed compile warning.
+
 Fri Nov 19 12:55:35 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* bonobo/gnome-view-frame.c (gnome_view_frame_destroy): destroy
