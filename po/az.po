@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.103.0\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2003-02-05 01:29+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkish <az@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "Vericinin sıralandığı törəmə gedişatı tapa bilmədim"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr "Hökmsüz Aktivləşdirmə ID-i"
 
@@ -80,7 +80,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "'%s' vericisini fəallaşdırırkən yarış vəziyyəti"
@@ -184,6 +184,14 @@ msgstr "`%s' emalatxanası `%s' üçün NIL cavabı verdi"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "`%s' shlib-i `%s' daxil etmir"
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr ""
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -325,7 +333,7 @@ msgstr "İzahsız ümumi fəallaşdırma xətası"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "'%s'-i çözümləmə vəya uzadmada müvəffəqiyyətsizlik"

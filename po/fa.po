@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2002-08-24 18:29+0430\n"
 "Last-Translator: Roozbeh Pournader <roozbeh@sharif.edu>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -13,11 +13,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "نمی‌توان فرزندی را که کارگزار در آن فهرست شده است یافت"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr "پرونده‌ی پیکربندی فعال‌سازی Bonobo با مو�
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
 msgstr "استثنا در فعال‌سازی '%s"
@@ -178,6 +178,14 @@ msgstr "کارخانه‌ی ‎`%s'‎ برای ‎`%s'‎،‏ NIL برگردا
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "‏Shlib ‏‎`%s'‎ شامل ‎`%s'‎ نیست"
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr ""
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -319,7 +327,7 @@ msgstr "خطای عمومی فعال‌سازی بدون توصیف"
 msgid "Could not initialize Bonobo"
 msgstr "نمی‌توان Bonobo را راه‌اندازی کرد"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "نمی‌توان '%s را رفع کرد، یا گسترش داد"

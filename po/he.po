@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.he\n"
-"POT-Creation-Date: 2003-04-29 13:33+0200\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2003-04-29 17:41+0300\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -69,7 +69,8 @@ msgstr "איננו מטפלים בהפעלת אובייקטי shlib בתהליך
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr "קובץ ההגדרות של Bonobo Activation לא נקרא בהצלחה. אנא, בדוק אם הוא תקין ב: %s"
+msgstr ""
+"קובץ ההגדרות של Bonobo Activation לא נקרא בהצלחה. אנא, בדוק אם הוא תקין ב: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -487,4 +488,3 @@ msgstr "הצג נתיב לקובץ ההגדרות"
 
 #~ msgid "DOMAIN"
 #~ msgstr "תחום"
-

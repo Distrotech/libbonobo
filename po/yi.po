@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2003-03-19\n"
 "Last-Translator: Raphael Finkel <raphael@cs.uky.edu>\n"
 "Language-Team: Yiddish <raphael@cs.uky.edu>\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "ניט געקענט געפֿינען אונטער װעלכן קינד געפֿינט דער סערװירער"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr "אומלעקסיקע אַקטיװיר־אידענטיפֿאַציע"
 
@@ -79,7 +79,8 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
+#, c-format
 msgid "Race condition activating server '%s'"
 msgstr "געיעגפֿאַל אין אַקטיריװן סערװירער %s"
 
@@ -103,6 +104,7 @@ msgid "invalid character '%c' in iid '%s'"
 msgstr "אומלעקסיק כאַראַקטער '%c' אין iid '%s'"
 
 #: activation-server/object-directory-load.c:306
+#, c-format
 msgid "Property '%s' has no value"
 msgstr "נאַטור %s האָט ניט קײן באַטרעף"
 
@@ -181,6 +183,14 @@ msgstr "פֿאַבריק %s האָט צוריקגעגעבן NIL פֿאַר %s"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib %s האָט ניט באַהאַלטן %s"
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr ""
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -322,7 +332,7 @@ msgstr "אַלגעמײנער אַקטיװירונג־דורכפֿאַל אָן �
 msgid "Could not initialize Bonobo"
 msgstr "ניט געקענט איניציאַליזירן באָנאָבאָ"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "דורכפֿאַל אין רעזאָלירן אָדער פֿאַרלענגערן '%s'"
@@ -332,10 +342,12 @@ msgid "Failed to activate object"
 msgstr "דורכפֿאַל אין אַקטיװירן אָביעקט"
 
 #: monikers/bonobo-moniker-oaf.c:53
+#, c-format
 msgid "Exception activating '%s'"
 msgstr "אױסנעם אין אַקטיריװן סערװירער %s"
 
 #: monikers/bonobo-moniker-oaf.c:62
+#, c-format
 msgid "Failed to activate '%s'"
 msgstr "דורכגעפֿאַלן אין אַקטיריװן %s"
 

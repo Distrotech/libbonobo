@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil Libbonobo 1.9.7\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2002-11-09 9:30-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 # server/activation-context-corba.c:513
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "±ó¾ §ºö §º¨ÅÂ¸ò¾¢ø ÀðÊÂÄ¢¼ôÀð¼Ð ±É ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
 msgstr "'%s àñÎ ¦ºöÔõ§À¡Ð Å¢¾¢Å¢ÄìÌ (exception)"
@@ -211,6 +211,14 @@ msgstr "'%s' ¦¾¡Æ¢üº¡¨Ä, '%s' ­ìÌ NIL Á£ñ¼Ð"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' ­ø '%s' ¸¢¨¼Â¡Ð"
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr ""
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -352,7 +360,7 @@ msgstr "Å¢ÅÃ½õ ­øÄ¡Áø ¦À¡Ðò ¦¾¡¼í¸ø À¢¨Æ"
 msgid "Could not initialize Bonobo"
 msgstr "¦À¡§É¡§À¡Å¢ý ¦¾¡¼ì¸Á¾¢ôÀÇ¢ì¸ ÓÊÂÅ¢ø¨Ä"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "'%s ºÃ¢ÀÎò¾ «øÄÐ ¿£ðÊì¸ ÓÊÂÅ¢ø¨Ä"

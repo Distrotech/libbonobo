@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.0\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2003-03-06 13:55+0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -12,11 +12,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr ""
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Escepto dum aktivigas '%s'"
@@ -178,6 +178,14 @@ msgstr ""
 #: bonobo-activation/bonobo-activation-shlib.c:220
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
+msgstr ""
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr ""
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
 msgstr ""
 
 #: bonobo/bonobo-exception.c:154
@@ -320,7 +328,7 @@ msgstr "Ĝenerala aktivigo-eraro kun ne priskribo"
 msgid "Could not initialize Bonobo"
 msgstr "Ne povis prepari Bonobo-on"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "Malsukcesis eltrovi aŭ etendi '%s'"

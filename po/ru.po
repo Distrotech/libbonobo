@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2003-01-09 11:00+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 # server/activation-context-corba.c:559
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "Не удалось найти потомок со ссылкой на сервер"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr "Идентификатор активации (Activation ID) недопустим"
 
@@ -96,7 +96,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr ""
@@ -228,6 +228,14 @@ msgstr "Фабрика \"%s\" возвратила для \"%s\" значени�
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Разделяемая библиотека \"%s\" не содержит \"%s\""
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr ""
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr ""
 
 # bonobo/bonobo-exception.c:154
 #: bonobo/bonobo-exception.c:154
@@ -405,7 +413,7 @@ msgid "Could not initialize Bonobo"
 msgstr "Не удалось инициализировать систему Bonobo"
 
 # bonobo/bonobo-moniker.c:353
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "Произошёл сбой при разрешении или расширении \"%s\""

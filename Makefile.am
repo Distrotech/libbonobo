@@ -22,5 +22,6 @@ install-data-local:
 	if test -f $(sysconfdir)/bonobo-activation/bonobo-activation-config.xml; then		\
 		echo "bonobo-activation-config.xml configuration file not changed";		\
 	else											\
-		$(INSTALL_DATA) bonobo-activation-config.xml $(sysconfdir)/bonobo-activation;	\
+		$(INSTALL_DATA) $(top_srcdir)/bonobo-activation-config.xml			\
+			$(sysconfdir)/bonobo-activation;					\
 	fi

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo CVS-20030311\n"
-"POT-Creation-Date: 2003-05-06 22:05+0900\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2003-05-06 22:10+0900\n"
 "Last-Translator: KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -113,7 +113,9 @@ msgstr "プロパティ '%s' には値がありません。"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "子プロセスがエラーメッセージを出力しませんでした。不明なエラーが発生しました。"
+msgstr ""
+"子プロセスがエラーメッセージを出力しませんでした。不明なエラーが発生しまし"
+"た。"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
@@ -146,7 +148,9 @@ msgstr "%s の実行に失敗: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr "ロケールに対するエイリアスレベルが多すぎます。検出でループしている可能性があります。"
+msgstr ""
+"ロケールに対するエイリアスレベルが多すぎます。検出でループしている可能性があ"
+"ります。"
 
 #: bonobo-activation/bonobo-activation-init.c:255
 msgid "File descriptor to print IOR on"

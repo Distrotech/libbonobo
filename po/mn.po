@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mn\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
+"POT-Creation-Date: 2003-05-06 13:19+0100\n"
 "PO-Revision-Date: 2003-01-16 21:05+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: mongolian <mn@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.1\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "Ямар хүү (процесс)сервер дотор жигсаагдсан мэдээлэл алга"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr "Хүчингүй идэвхижүүлэх дугаар (ID)"
 
@@ -81,7 +81,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "»%s« серверийг идэвхижүүлэх »Race condition« "
@@ -186,6 +186,14 @@ msgstr "»%s« үйлдвэр »%s« NIL -г буцаав"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "»%s« Shlib »%s« -г агуулаагүй байна"
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr ""
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -328,7 +336,7 @@ msgstr "Ерөнхий идэвхижүүлэлтийн тодорхойлолт
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo инициалицлагдсангүй"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "»%s« задрах эсвэл өргөтгөгдсөнгүй"
