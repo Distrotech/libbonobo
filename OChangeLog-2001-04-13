@@ -1,3 +1,10 @@
+Sat Sep 23 08:45:02 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* storage-modules/gnome-stream-efs.c (real_read): use the
+	result of efs_file_read, instead of (bytes_read < 0).
+	(real_seek): use EFS_SEEK_SET, and raise an exception if
+	semething failes.
+
 2000-09-22  Havoc Pennington  <hp@pobox.com>
 
 	* bonobo/bonobo-ui-node.h, bonobo/bonobo-ui-node.c: I forgot to
