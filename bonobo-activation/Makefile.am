@@ -93,5 +93,6 @@ CLEANFILES=			\
 	$(BUILT_SOURCES)	\
 	$(NULL)
 
-
+dist-hook:
+	cd $(distdir) ; rm -f $(CLEANFILES)
 
