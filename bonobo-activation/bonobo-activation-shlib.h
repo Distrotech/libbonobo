@@ -45,11 +45,13 @@ typedef struct {
                                                          * to be passed to bonobo_activation_plugin_unuse() in the 
                                                          * implementation's destruction routine. */
 				  CORBA_Environment *ev);
+        gpointer dummy[4];
 } BonoboActivationPluginObject;
 
 typedef struct {
 	const BonoboActivationPluginObject *plugin_object_list;
 	const char *description;
+        gpointer dummy[8];
 } BonoboActivationPlugin;
 
 void  bonobo_activation_plugin_use    (PortableServer_Servant servant, 

@@ -520,6 +520,7 @@ typedef struct {
                                                          * to be passed to bonobo_activation_plugin_unuse() in the 
                                                          * implementation's destruction routine. */
 				  CORBA_Environment *ev);
+        gpointer dummy[4];
 } BonoboActivationPluginObject;
 </TYPEDEF>
 <TYPEDEF>
@@ -527,6 +528,7 @@ typedef struct {
 typedef struct {
 	const BonoboActivationPluginObject *plugin_object_list;
 	const char *description;
+        gpointer dummy[8];
 } BonoboActivationPlugin;
 </TYPEDEF>
 <FUNCTION>
@@ -789,15 +791,15 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MAJOR_VERSION</NAME>
-#define BONOBO_ACTIVATION_MAJOR_VERSION (0)
+#define BONOBO_ACTIVATION_MAJOR_VERSION (1)
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MINOR_VERSION</NAME>
-#define BONOBO_ACTIVATION_MINOR_VERSION (9)
+#define BONOBO_ACTIVATION_MINOR_VERSION (0)
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
-#define BONOBO_ACTIVATION_MICRO_VERSION (9)
+#define BONOBO_ACTIVATION_MICRO_VERSION (0)
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>

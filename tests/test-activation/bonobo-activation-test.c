@@ -180,6 +180,9 @@ main (int argc, char *argv[])
         GTimer *timer = g_timer_new ();
 
 	CORBA_exception_init (&ev);
+
+        bonobo_activation_object_directory_get (NULL, NULL, NULL);
+
 	bonobo_activation_init (argc, argv);
 /*      putenv("Bonobo_BARRIER_INIT=1"); */
 

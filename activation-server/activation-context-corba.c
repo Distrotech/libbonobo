@@ -105,8 +105,11 @@ child_od_info_free (ChildODInfo *child, CORBA_Environment *ev)
 
         if (child->by_iid)
                 g_hash_table_destroy (child->by_iid);
-        CORBA_sequence_set_release (child->list, CORBA_TRUE);
-        CORBA_free (child->list);
+
+        if (child->list) {
+                CORBA_sequence_set_release (child->list, CORBA_TRUE);
+                CORBA_free (child->list);
+        }
 
         if (child->active_servers)
                 g_hash_table_destroy (child->active_servers);

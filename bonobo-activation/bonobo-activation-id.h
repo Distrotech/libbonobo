@@ -24,6 +24,8 @@
 #ifndef BONOBO_ACTIVATION_ID_H
 #define BONOBO_ACTIVATION_ID_H
 
+#ifndef BONOBO_DISABLE_DEPRECATED
+
 #include <bonobo-activation/Bonobo_Activation_types.h>
 
 G_BEGIN_DECLS
@@ -47,5 +49,7 @@ BonoboActivationInfo  *bonobo_activation_info_new            (void);
 void                   bonobo_activation_info_free           (BonoboActivationInfo       *actinfo);
 
 G_END_DECLS
+
+#endif /* BONOBO_DISABLE_DEPRECATED */
 
 #endif /* BONOBO_ACTIVATION_ID_H */
