@@ -119,23 +119,24 @@ const char *
 oaf_hostname_get (void)
 {
 	static char *hostname = NULL;
-	char hn_tmp[65];
-	struct hostent *hent, *hent2;
+	char hn_tmp[65], ha_tmp[4];
+	struct hostent *hent;
 
 	if (!hostname) {
 		gethostname (hn_tmp, sizeof (hn_tmp) - 1);
 
 		hent = gethostbyname (hn_tmp);
 		if (hent) {
-			hent2 = gethostbyaddr (hent->h_addr, 4, AF_INET);
-			if (hent2)
-				hostname = g_strdup (hent2->h_name);
+			memcpy (ha_tmp, hent->h_addr, 4);
+			hent = gethostbyaddr (ha_tmp, 4, AF_INET);
+			if (hent)
+				hostname = g_strdup (hent->h_name);
 			else
 				hostname =
 					g_strdup (inet_ntoa
 						  (*
 						   ((struct in_addr *)
-						    hent->h_addr)));
+						    ha_tmp)));
 		} else
 			hostname = g_strdup (hn_tmp);
 	}
