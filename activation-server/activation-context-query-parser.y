@@ -32,6 +32,7 @@
 
 void yyerror(char *s);
 int yylex ();
+int yyparse (void);
 void initFlex (const char *s);
 
 static QueryExpr *parsed_expression;
