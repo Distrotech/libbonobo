@@ -1,3 +1,9 @@
+2001-01-02  Jacob "Ulysses" Berkman  <jacob@helixcode.com>
+
+	* bonobo/bonobo-win.c (construct_priv): 
+	* bonobo/bonobo-ui-toolbar.c (init): honour GNOME preferences for
+	toolbar button text and menu shadow
+
 2001-01-02  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/Makefile.am: Sort out cockup with distributing
