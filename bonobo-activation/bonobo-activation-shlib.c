@@ -22,7 +22,7 @@
  *  Author: Elliot Lee <sopwith@redhat.com>
  *
  */
-
+#include "config.h"
 #include "liboaf-private.h"
 
 #include <gmodule.h>
@@ -91,13 +91,31 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 
 		gmod = g_module_open (filename, G_MODULE_BIND_LAZY);
 		if (!gmod) {
-			return CORBA_OBJECT_NIL;	/* Couldn't load it */
+                        char *error_string;
+                        OAF_GeneralError *error = OAF_GeneralError__alloc ();
+
+                        error_string = g_strdup_printf ("g_module_open of '%s' failed", filename);
+                        error->description = CORBA_string_dup (error_string);
+                        CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                             ex_OAF_GeneralError, error);
+                        g_free (error_string);
+			return CORBA_OBJECT_NIL; /* Couldn't load it */
 		}
 		
 		success = g_module_symbol (gmod, "OAF_Plugin_info",
 					   (gpointer *) &plugin);
 		if (!success) {
+                        char *error_string;
+                        OAF_GeneralError *error = OAF_GeneralError__alloc ();
+
 			g_module_close (gmod);
+
+                        error_string = g_strdup_printf ("Can't find symbol OAF_Plugin_info "
+                                                        "in '%s'", filename);
+                        error->description = CORBA_string_dup (error_string);
+                        CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                             ex_OAF_GeneralError, error);
+                        g_free (error_string);
 			return CORBA_OBJECT_NIL;
 		}
 
@@ -124,6 +142,15 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 					 "OAF_Plugin_info",
 					 (gpointer *) & plugin);
 		if (!success) {
+                        char *error_string;
+                        OAF_GeneralError *error = OAF_GeneralError__alloc ();
+
+                        error_string = g_strdup_printf ("Can't find symbol OAF_Plugin_info "
+                                                        "in '%s'", filename);
+                        error->description = CORBA_string_dup (error_string);
+                        CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                             ex_OAF_GeneralError, error);
+                        g_free (error_string);
 			return CORBA_OBJECT_NIL;
 		}
 	}
