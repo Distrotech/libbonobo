@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-12-08 23:52+0000\n"
+"POT-Creation-Date: 2004-01-09 15:27+0000\n"
 "PO-Revision-Date: 2003-05-31 16:24+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
 
-#: activation-server/activation-context-corba.c:473
+#: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
 msgstr "Methu canfod pa blentyn rhestrwyd y gweinydd ynddi"
 
-#: activation-server/activation-context-corba.c:751
+#: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
 msgstr "Nid yw'n ID Gweithredu dilys"
 
@@ -91,7 +91,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1128
+#: activation-server/object-directory-corba.c:1167
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Amod râs tran's gweitredu gweinydd '%s'"
@@ -196,11 +196,11 @@ msgstr "Dychwelodd y ffatri `%s' NIL ar gyfer `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Nid oeddd y shlib `%s' yn cynnwys `%s'"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
 msgstr ""
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bonobo-activation\n"
-"POT-Creation-Date: 2003-12-08 23:52+0000\n"
+"POT-Creation-Date: 2004-01-09 15:27+0000\n"
 "PO-Revision-Date: 2003-01-12 15:28+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -13,11 +13,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:473
+#: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
 msgstr ""
 
-#: activation-server/activation-context-corba.c:751
+#: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1128
+#: activation-server/object-directory-corba.c:1167
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
 msgstr "L' enondaedje di %s a fwait berwete: %d (%s)\n"
@@ -195,11 +195,11 @@ msgstr ""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Li pårteye livreye «%s» n' a nén «%s» å dvins"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
 msgstr ""
 

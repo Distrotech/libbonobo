@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2\n"
-"POT-Creation-Date: 2003-12-08 23:52+0000\n"
+"POT-Creation-Date: 2004-01-09 15:27+0000\n"
 "PO-Revision-Date: 2003-07-25 08:09+0200\n"
 "Last-Translator: Alessio Frusciante <algol@firenze.linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
 
-#: activation-server/activation-context-corba.c:473
+#: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
 msgstr "Impossibile trovare in quale processo figlio era elencato il server"
 
-#: activation-server/activation-context-corba.c:751
+#: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
 msgstr "ID di attivazione non valido"
 
@@ -93,7 +93,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1128
+#: activation-server/object-directory-corba.c:1167
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Race condition durante l'attivazione del server '%s'"
@@ -199,11 +199,11 @@ msgstr "La fabbrica '%s' ha restituito NIL per '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "La shlib '%s' non contiene '%s'"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
 msgstr ""
 

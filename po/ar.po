@@ -9,20 +9,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-01 15:26+0100\n"
+"POT-Creation-Date: 2004-01-09 15:27+0000\n"
 "PO-Revision-Date: 2003-12-20 12:34+0100\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
-#: activation-server/activation-context-corba.c:472
+#: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
 msgstr "لم يمكن التعرف في أي الابناء ضمن الخادم"
 
-#: activation-server/activation-context-corba.c:763
+#: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
 msgstr "هوية تنشيط غير سليمة"
 
@@ -63,7 +63,16 @@ msgstr "خدمة CORBA CosNaming."
 msgid "Name service"
 msgstr "خدمة الأسماء"
 
-#: activation-server/object-directory-activate.c:185
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+#, fuzzy
+msgid "Notification service"
+msgstr "خدمة الأسماء"
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+msgid "Notification service for activation"
+msgstr ""
+
+#: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "إننا لا نعالج حاليا تنشيط أجسام shlib في عمليات عن بعد"
 
@@ -82,7 +91,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:946
+#: activation-server/object-directory-corba.c:1167
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "حالة التسابق عند تغعيل النادل '%s'"
@@ -185,11 +194,11 @@ msgstr "أرجع المصنع `%s' NIL لـ `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' لم يحوي `%s'"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
 msgstr "الاسم"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
 msgstr "اسم التطبيق الوحيد"
 

@@ -1,5 +1,9 @@
 2004-01-09  Michael Meeks  <michael@ximian.com>
 
+	* Version 2.5.2
+
+2004-01-09  Michael Meeks  <michael@ximian.com>
+
 	* bonobo-activation/bonobo-activation-activate.c
 	(query_cache_lookup): fix undefined 'active' issue.
 

@@ -1,3 +1,20 @@
+libbonobo 2.5.2
+
+	+ bugs fixed
+		+ _active query cache fix (Michael)
+		+ property bag logic bug fix (Dave Jones)
+		+ backwards compat dameon fix (Michael, Crispin Flowerday)
+		+ object directory fixes (Gustavo)
+		+ l10n docs fix (Martin Kretzschmar)
+		+ BonoboApplication fixes (Gustavo)
+		+ use environ not _environ for Solaris (Michael)
+	+ featurelets (Gustavo)
+		+ b-a-s tracks dead clients
+		+ updated tests
+
+libbonobo 2.5.1
+	+ ...
+
 libbonobo 2.3.6
 
 	+ bugs fixes
