@@ -1,5 +1,21 @@
 1999-08-03  Miguel de Icaza  <miguel@gnu.org>
 
+	* bonobo/gnome-object.c (gnome_object_destroy): Do not release the
+	aggregate information here. 
+	(gnome_object_init): Catch "destroy" signal and abort if a member
+	of an aggregate object is destroyed.
+	(gnome_object_unref): 
+	(gnome_object_ref, gnome_object_unref): New methods to do
+	ref/unref from the Gtk level.  They encapsulate the life-time of a
+	GnomeObject and any aggregates of it.
+
+	* doc/Bonobo.sgml: Layed out the rules for query_interface,
+	documented the fact that you have to fully assemble your object
+	before using as discussed today with Federico.
+
+	* bonobo/gnome-object.c: Added a refcount to the AggregateObject.
+	(gnome_object_construct): GnomeObjects are all sinked at startup.
+
 	* bonobo/gnome-object-client.c (gnome_object_activate): Simplistic
 	file,item moniker implementation.  
 	(gnome_object_restore_from_url): New routine for implementing

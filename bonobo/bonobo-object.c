@@ -13,8 +13,14 @@
 #include <bonobo/gnome-object.h>
 #include "bonobo.h"
 
-struct _GnomeAggregateObject {
+typedef struct {
+	int   ref_count;
 	GList *objs;
+} GnomeAggregateObject;
+
+struct _GnomeObjectPrivate {
+	GnomeAggregateObject *ao;
+	int destroy_id;
 };
 
 enum {
@@ -89,6 +95,53 @@ gnome_object_bind_to_servant (GnomeObject *object, void *servant)
 	((GnomeObjectServant *)servant)->gnome_object = object;
 }
 
+/**
+ * gnome_object_ref:
+ * @object: A GnomeObject you want to ref-count
+ *
+ * increments the reference count for the aggregate GnomeObject.
+ */
+void
+gnome_object_ref (GnomeObject *object)
+{
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (object->priv->ao->ref_count == 0);
+
+	object->priv->ao->ref_count++;
+}
+
+/**
+ * gnome_object_unref:
+ * @object: A GnomeObject you want to unref.
+ *
+ * decrements the reference count for the aggregate GnomeObject.
+ */
+void
+gnome_object_unref (GnomeObject *object)
+{
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (object->priv->ao->ref_count > 0);
+
+	object->priv->ao->ref_count--;
+
+	if (object->priv->ao->ref_count == 0){
+		GnomeAggregateObject *ao = object->priv->ao;
+		GList *l;
+		
+		for (l = ao->objs; l; l = l->next){
+			GnomeObject *o = l->data;
+			
+			gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
+			gtk_object_destroy (l->data);
+		}
+
+		g_list_free (ao->objs);
+		g_free (ao);
+	}
+}
+
 static void
 impl_GNOME_Unknown__destroy (PortableServer_Servant servant, CORBA_Environment *ev)
 {
@@ -102,8 +155,7 @@ impl_GNOME_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 	GnomeObject *object;
 
 	object = gnome_object_from_servant (servant);
-	gtk_object_ref (GTK_OBJECT (object));
-	gtk_object_sink (GTK_OBJECT (object));
+	object->priv->ao->ref_count++;
 }
 
 static void
@@ -112,7 +164,8 @@ impl_GNOME_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 	GnomeObject *object;
 
 	object = gnome_object_from_servant (servant);
-	gtk_object_unref (GTK_OBJECT (object));
+
+	gnome_object_unref (object);
 }
 
 static CORBA_Object
@@ -133,25 +186,31 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 		GTK_OBJECT (object), gnome_object_signals [QUERY_INTERFACE],
 		repoid, &retval);
 
-	if (CORBA_Object_is_nil (retval, ev)){
-		type = gtk_type_from_name (repoid);
-		
-		/* Try looking at the gtk types */
-		for (l = object->ao->objs; l; l = l->next){
-                       GnomeObject *tryme = l->data;
-
-                       if ((type && gtk_type_is_a(GTK_OBJECT(tryme)->klass->type, type)) ||
-#ifdef ORBIT_IMPLEMENTS_IS_A
-			   CORBA_Object_is_a(tryme->corba_objref, repoid, ev)
-#else
-			   !strcmp(tryme->corba_objref->object_id, repoid)
-#endif
-				){
-                               retval = CORBA_Object_duplicate (tryme->corba_objref, ev);
-                               break;
-                       }
-               }
+	if (!CORBA_Object_is_nil (retval, ev)){
+		object->priv->ao->ref_count++;
+		return retval;
 	}
+	
+	type = gtk_type_from_name (repoid);
+	
+	/* Try looking at the gtk types */
+	for (l = object->priv->ao->objs; l; l = l->next){
+		GnomeObject *tryme = l->data;
+		
+		if ((type && gtk_type_is_a(GTK_OBJECT(tryme)->klass->type, type)) ||
+#ifdef ORBIT_IMPLEMENTS_IS_A
+		    CORBA_Object_is_a(tryme->corba_objref, repoid, ev)
+#else
+		    !strcmp(tryme->corba_objref->object_id, repoid)
+#endif
+			){
+			retval = CORBA_Object_duplicate (tryme->corba_objref, ev);
+			break;
+		}
+	}
+	if (!CORBA_Object_is_nil (retval, ev))
+		object->priv->ao->ref_count++;
+	
 	return retval;
 }
 
@@ -182,9 +241,9 @@ gnome_object_destroy (GtkObject *object)
 	void *servant = gnome_object->servant;
 	
 	if (gnome_object->corba_objref != CORBA_OBJECT_NIL){
-	  PortableServer_ObjectId *oid;
+		PortableServer_ObjectId *oid;
 		CORBA_Object_release (gnome_object->corba_objref, &gnome_object->ev);
-
+		
 		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, &gnome_object->ev);
 		PortableServer_POA_deactivate_object (
 			bonobo_poa (), oid, &gnome_object->ev);
@@ -192,10 +251,7 @@ gnome_object_destroy (GtkObject *object)
 	}
 	CORBA_exception_free (&gnome_object->ev);
 
-	gnome_object->ao->objs = g_list_remove (gnome_object->ao->objs, object);
-	if (!gnome_object->ao->objs)
-		g_free (gnome_object->ao);
-	
+	g_free (gnome_object->priv);
 	gnome_object_parent_class->destroy (object);
 }
 
@@ -219,13 +275,24 @@ gnome_object_class_init (GnomeObjectClass *class)
 }
 
 static void
+gnome_object_usage_error (GnomeObject *object)
+{
+	g_error ("Aggregate object member %p has been destroyed\n", object);
+}
+
+static void
 gnome_object_instance_init (GtkObject *gtk_object)
 {
 	GnomeObject *object = GNOME_OBJECT (gtk_object);
 	
 	CORBA_exception_init (&object->ev);
-	object->ao = g_new0 (GnomeAggregateObject, 1);
-	object->ao->objs = g_list_append (object->ao->objs, object);
+	object->priv = g_new (GnomeObjectPrivate, 1);
+	object->priv->destroy_id = gtk_signal_connect (
+		gtk_object, "destroy", GTK_SIGNAL_FUNC (gnome_object_usage_error),
+		NULL);
+	
+	object->priv->ao = g_new0 (GnomeAggregateObject, 1);
+	object->priv->ao->objs = g_list_append (object->priv->ao->objs, object);
 }
 
 /**
@@ -309,13 +376,10 @@ gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
 	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
 	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 
-
-/* * This routine assumes ownership of the corba_object that is passed in. */
-#if 0
-	object->corba_objref = CORBA_Object_duplicate (corba_object, &object->ev);
-#else
 	object->corba_objref = corba_object;
-#endif
+
+	/* GnomeObjects are self-owned */
+	GTK_OBJECT_UNSET_FLAGS (GTK_OBJECT (object), GTK_FLOATING);
 
 	return object;
 }
@@ -335,16 +399,27 @@ gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
        GnomeAggregateObject *oldao;
        GList *l;
 
-        if (object->ao == newobj->ao)
+       if (object->priv->ao == newobj->priv->ao)
                return;
 
-       oldao = newobj->ao;
+       /*
+	* Explanation:
+	*   Bonobo Objects should not be assembled after they have been
+	*   exposed, or we would be breaking the contract we have with
+	*   the other side.
+	*
+	*   This check is not perfect, but might help some people.
+	*/
+       g_return_if_fail (object->priv->ao->ref_count != 1);
+       g_return_if_fail (newobj->priv->ao->ref_count != 1);
+       
+       oldao = newobj->priv->ao;
 
        /* Merge the two AggregateObject lists */
-       for (l = newobj->ao->objs; l; l = l->next){
-               if (!g_list_find (object->ao->objs, l->data)){
-                       object->ao->objs = g_list_prepend (object->ao->objs, l->data);
-                       ((GnomeObject *)l->data)->ao = object->ao;
+       for (l = newobj->priv->ao->objs; l; l = l->next){
+               if (!g_list_find (object->priv->ao->objs, l->data)){
+                       object->priv->ao->objs = g_list_prepend (object->priv->ao->objs, l->data);
+                       ((GnomeObject *)l->data)->priv->ao = object->priv->ao;
                }
        }
 
@@ -387,3 +462,4 @@ gnome_object_corba_objref (GnomeObject *object)
 	
 	return object->corba_objref;
 }
+

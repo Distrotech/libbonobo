@@ -24,7 +24,7 @@ typedef struct {
 	gpointer gnome_object;
 } GnomeObjectServant;
 
-typedef struct _GnomeAggregateObject GnomeAggregateObject;
+typedef struct _GnomeObjectPrivate GnomeObjectPrivate;
 
 typedef struct {
 	GtkObject base;
@@ -32,11 +32,15 @@ typedef struct {
 	CORBA_Object          corba_objref;
 	CORBA_Environment     ev;
 	gpointer              servant;
-	GnomeAggregateObject *ao;
+	GnomeObjectPrivate   *priv;
 } GnomeObject;
 
 typedef struct {
 	GtkObjectClass parent_class;
+
+	/*
+	 * signals.  I am not sure we want to support this signal in the future.
+	 */
 	void  (*query_interface)(GnomeObject *object, const char *repo_id, CORBA_Object *retval);
 } GnomeObjectClass;
 
@@ -57,6 +61,9 @@ void         gnome_object_add_interface    (GnomeObject *object,
 CORBA_Object gnome_object_query_interface  (GnomeObject *object,
 					     const char *repo_id);
 CORBA_Object gnome_object_corba_objref     (GnomeObject *object);
+
+void         gnome_object_ref              (GnomeObject *object);
+void         gnome_object_unref            (GnomeObject *object);
 
 /* CORBA default vector methods we provide */
 extern PortableServer_ServantBase__epv  gnome_object_base_epv;
