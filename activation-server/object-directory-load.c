@@ -121,6 +121,8 @@ OAF_ServerInfo_load(const char *source_directory,
   GSList *entries = NULL, *cur, *new_item;
   int i, n;
   OAF_ServerInfo *retval;
+  char **dirs;
+  int dirnum;
 
   g_return_val_if_fail(source_directory, NULL);
   g_return_val_if_fail(nservers, NULL);
@@ -130,71 +132,80 @@ OAF_ServerInfo_load(const char *source_directory,
     g_hash_table_destroy(*by_iid);
   *by_iid = g_hash_table_new(g_str_hash, g_str_equal);
 
-  dirh = opendir(source_directory);
-  if(!dirh) {
-    *nservers = 0;
-    return NULL;
-  }
+  dirs = g_strsplit(source_directory, ":", -1);
+
+  for(dirnum = 0; dirs[dirnum]; dirnum++)
+    {
+      dirh = opendir(dirs[dirnum]);
+      if(!dirh)
+	{
+	  *nservers = 0;
+	  return NULL;
+	}
   
-  while((dent = readdir(dirh))) {
-    char *ext;
-    xmlDocPtr doc;
-    xmlNodePtr curnode;
+      while((dent = readdir(dirh)))
+	{
+	  char *ext;
+	  xmlDocPtr doc;
+	  xmlNodePtr curnode;
 
-    ext = strrchr(dent->d_name, '.');
-    if(!ext || strcasecmp(ext, ".oafinfo"))
-      continue;
+	  ext = strrchr(dent->d_name, '.');
+	  if(!ext || strcasecmp(ext, ".oafinfo"))
+	    continue;
     
-    g_snprintf(tmpstr, sizeof(tmpstr), "%s/%s", source_directory, dent->d_name);
+	  g_snprintf(tmpstr, sizeof(tmpstr), "%s/%s", source_directory, dent->d_name);
 
-    doc = xmlParseFile(tmpstr);
-    if(!doc)
-      continue;
+	  doc = xmlParseFile(tmpstr);
+	  if(!doc)
+	    continue;
 
-    /* This should go in a separate function, but I'm sticking it in
-       here so alloca can be used. "Eeeek!" is still fine as a
-       response, :) but this has a direct impact on startup time. */
-    for(curnode = doc->root; curnode; curnode = curnode->next) {
-      OAF_ServerInfo *new_ent;
-      char *ctmp;
+	  /* This should go in a separate function, but I'm sticking it in
+	     here so alloca can be used. "Eeeek!" is still fine as a
+	     response, :) but this has a direct impact on startup time. */
+	  for(curnode = doc->root; curnode; curnode = curnode->next)
+	    {
+	      OAF_ServerInfo *new_ent;
+	      char *ctmp;
 
-      if(curnode->type != XML_ELEMENT_NODE)
-	continue;
+	      if(curnode->type != XML_ELEMENT_NODE)
+		continue;
 
-      /* I'd love to use XML namespaces, but unfortunately they appear
-	 to require putting complicated stuff into the .oafinfo file, and even
-	 more complicated stuff to use. */
+	      /* I'd love to use XML namespaces, but unfortunately they appear
+		 to require putting complicated stuff into the .oafinfo file, and even
+		 more complicated stuff to use. */
 
-      if(strcasecmp(curnode->name, "oaf_server"))
-	continue;
+	      if(strcasecmp(curnode->name, "oaf_server"))
+		continue;
 
-      new_ent = oaf_alloca(sizeof(OAF_ServerInfo));
-      memset(new_ent, 0, sizeof(OAF_ServerInfo));
+	      new_ent = oaf_alloca(sizeof(OAF_ServerInfo));
+	      memset(new_ent, 0, sizeof(OAF_ServerInfo));
 
-      ctmp = xmlGetProp(curnode, "iid");
-      new_ent->iid = CORBA_string_dup(ctmp);
-      free(ctmp);
+	      ctmp = xmlGetProp(curnode, "iid");
+	      new_ent->iid = CORBA_string_dup(ctmp);
+	      free(ctmp);
 
-      ctmp = xmlGetProp(curnode, "type");
-      new_ent->server_type = CORBA_string_dup(ctmp);
-      free(ctmp);
+	      ctmp = xmlGetProp(curnode, "type");
+	      new_ent->server_type = CORBA_string_dup(ctmp);
+	      free(ctmp);
 
-      ctmp = xmlGetProp(curnode, "location");
-      new_ent->location_info = CORBA_string_dup(ctmp);
-      new_ent->hostname = CORBA_string_dup(host);
-      new_ent->domain = CORBA_string_dup(domain);
-      new_ent->username = CORBA_string_dup(g_get_user_name());
-      free(ctmp);
+	      ctmp = xmlGetProp(curnode, "location");
+	      new_ent->location_info = CORBA_string_dup(ctmp);
+	      new_ent->hostname = CORBA_string_dup(host);
+	      new_ent->domain = CORBA_string_dup(domain);
+	      new_ent->username = CORBA_string_dup(g_get_user_name());
+	      free(ctmp);
 
-      od_entry_read_attrs(new_ent, curnode);
+	      od_entry_read_attrs(new_ent, curnode);
 
-      my_slist_prepend(entries, new_ent);
+	      my_slist_prepend(entries, new_ent);
 
+	    }
+    
+	  xmlFreeDoc(doc);
+	}
+      closedir(dirh);
     }
-    
-    xmlFreeDoc(doc);
-  }
-  closedir(dirh);
+  g_strfreev(dirs);
 
   /* Now convert 'entries' into something that the server can store and pass back */
   n = g_slist_length(entries);
@@ -203,10 +214,11 @@ OAF_ServerInfo_load(const char *source_directory,
   retval = CORBA_sequence_OAF_ServerInfo_allocbuf(n);
 
   g_hash_table_freeze(*by_iid);
-  for(i = 0, cur = entries; i < n; i++, cur = cur->next) {
-    memcpy(&retval[i], cur->data, sizeof(OAF_ServerInfo));
-    g_hash_table_insert(*by_iid, retval[i].iid, &retval[i]);
-  }
+  for(i = 0, cur = entries; i < n; i++, cur = cur->next)
+    {
+      memcpy(&retval[i], cur->data, sizeof(OAF_ServerInfo));
+      g_hash_table_insert(*by_iid, retval[i].iid, &retval[i]);
+    }
   g_hash_table_thaw(*by_iid);
 
   return retval;

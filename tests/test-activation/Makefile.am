@@ -1,1 +1,17 @@
 noinst_PROGRAMS=oaf-empty-server oaf-test-client
+
+oaf_empty_server_SOURCES=empty-server.c empty.h empty-common.c empty-skels.c
+
+BUILT_SOURCES=empty.h empty-common.c empty-stubs.c empty-skels.c
+
+empty.h empty-common.c empty-stubs.c empty-skels.c: empty_built
+
+empty_built: empty.idl $(ORBIT_IDL)
+	$(ORBIT_IDL) $(srcdir)/empty.idl
+	touch empty_built
+
+CLEANFILES=empty_built
+
+INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\" \
+	@ORBIT_CFLAGS@ @XML_CFLAGS@ @GLIB_CFLAGS@
+LDADD=../liboaf/liboaf.la @ORBIT_LIBS@ @GLIB_LIBS@

@@ -95,9 +95,9 @@ od_server_activate_exe(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Envi
   if(!isspace(*ctmp) && i < 32)
     args[i++] = ctmp;
 
-  extra_arg = oaf_alloca(strlen(si->iid) + sizeof("--activate-oaf-server="));
+  extra_arg = oaf_alloca(strlen(si->iid) + sizeof("--oaf-activate-iid="));
   args[i++] = extra_arg;
-  sprintf(extra_arg, "--activate-oaf-server=%s", si->iid);
+  sprintf(extra_arg, "--oaf-activate-iid=%s", si->iid);
 
   args[i] = NULL;
 

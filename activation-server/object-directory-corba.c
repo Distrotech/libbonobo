@@ -61,6 +61,18 @@ static void
 impl_OAF_ObjectDirectory_unlock(impl_POA_OAF_ObjectDirectory * servant,
 				CORBA_Environment * ev);
 
+static OAF_RegistrationResult
+impl_OAF_ObjectDirectory_register(impl_POA_OAF_ObjectDirectory * servant,
+				  OAF_ImplementationID iid,
+				  CORBA_Object obj,
+				  CORBA_Environment * ev);
+
+static void
+impl_OAF_ObjectDirectory_unregister(impl_POA_OAF_ObjectDirectory * servant,
+				    OAF_ImplementationID iid,
+				    CORBA_Object obj,
+				    CORBA_Environment * ev);
+
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_OAF_ObjectDirectory_base_epv =
@@ -79,7 +91,9 @@ static POA_OAF_ObjectDirectory__epv impl_OAF_ObjectDirectory_epv =
    & impl_OAF_ObjectDirectory__get_domain,
    & impl_OAF_ObjectDirectory_activate,
    & impl_OAF_ObjectDirectory_lock,
-   & impl_OAF_ObjectDirectory_unlock
+   & impl_OAF_ObjectDirectory_unlock,
+   & impl_OAF_ObjectDirectory_register,
+   & impl_OAF_ObjectDirectory_unregister
 };
 
 /*** vepv structures ***/
@@ -131,9 +145,6 @@ od_dump_list(impl_POA_OAF_ObjectDirectory *od)
 }
 #endif
 
-/* Internal liboaf function */
-extern char *liboaf_hostname_get();
-
 OAF_ObjectDirectory
 OAF_ObjectDirectory_create(PortableServer_POA poa,
 			   const char *domain,
@@ -153,7 +164,7 @@ OAF_ObjectDirectory_create(PortableServer_POA poa,
    newservant->self = retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
 
    newservant->attr_domain = g_strdup(domain);
-   newservant->attr_hostID = liboaf_hostname_get();
+   newservant->attr_hostID = oaf_hostname_get();
    newservant->by_iid = NULL;
    newservant->attr_servers._buffer =
      OAF_ServerInfo_load(source_directory,
@@ -290,3 +301,47 @@ impl_OAF_ObjectDirectory_unlock(impl_POA_OAF_ObjectDirectory * servant,
 
   servant->is_locked = FALSE;
 }
+
+static OAF_RegistrationResult
+impl_OAF_ObjectDirectory_register(impl_POA_OAF_ObjectDirectory * servant,
+				  OAF_ImplementationID iid,
+				  CORBA_Object obj,
+				  CORBA_Environment * ev)
+{
+  CORBA_Object oldobj;
+
+  oldobj = g_hash_table_lookup(servant->active_servers, iid);
+
+  if(!CORBA_Object_is_nil(oldobj, ev))
+    return OAF_REG_ALREADY_ACTIVE;
+
+  if(!g_hash_table_lookup(servant->by_iid, iid))
+    return OAF_REG_NOT_LISTED;
+
+  g_hash_table_insert(servant->active_servers, g_strdup(iid), CORBA_Object_duplicate(obj, ev));
+  servant->time_active_changed = time(NULL);
+
+  return OAF_REG_SUCCESS;
+}
+
+static void
+impl_OAF_ObjectDirectory_unregister(impl_POA_OAF_ObjectDirectory * servant,
+				    OAF_ImplementationID iid,
+				    CORBA_Object obj,
+				    CORBA_Environment * ev)
+{
+  char *orig_iid;
+  CORBA_Object orig_obj;
+
+  if(!g_hash_table_lookup_extended(servant->active_servers, iid, &orig_iid, &orig_obj)
+     || !CORBA_Object_is_equivalent(orig_obj, obj, ev))
+    return;
+
+  g_hash_table_remove(servant->active_servers, iid);
+
+  g_free(orig_iid);
+  CORBA_Object_release(orig_obj, ev);
+
+  servant->time_active_changed = time(NULL);
+}
+

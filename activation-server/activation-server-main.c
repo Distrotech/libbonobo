@@ -2,6 +2,7 @@
 
 #include <popt.h>
 #include <signal.h>
+#include <stdlib.h>
 
 #include "liboaf/liboaf.h"
 
@@ -63,7 +64,17 @@ int main(int argc, char *argv[])
 
   orb = oaf_orb_init(&argc, argv);
   root_poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
-  od = OAF_ObjectDirectory_create(root_poa, od_domain, od_source_dir, &ev);
+  {
+    char *real_od_source_dir, *env_od_source_dir;
+
+    env_od_source_dir = getenv("OAF_OD_SOURCE_DIRS");
+
+    real_od_source_dir = oaf_alloca(strlen(od_source_dir) + env_od_source_dir?strlen(env_od_source_dir):0 + 2);
+
+    sprintf(real_od_source_dir, "%s%s%s", od_source_dir, env_od_source_dir?":":"", env_od_source_dir?env_od_source_dir:"");
+
+    od = OAF_ObjectDirectory_create(root_poa, od_domain, od_source_dir, &ev);
+  }
   if(server_ac)
     {
       primary_server = ac = OAF_ActivationContext_create(root_poa, &ev);

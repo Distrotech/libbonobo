@@ -60,6 +60,8 @@ module OAF {
     sequence<ImplementationID> active_servers;
   };
 
+  enum RegistrationResult { REG_SUCCESS, REG_NOT_LISTED, REG_ALREADY_ACTIVE, REG_ERROR };
+
   /* Interfaces */
   interface ObjectDirectory {
     ServerInfoListCache get_servers(in CacheTime only_if_newer);
@@ -73,6 +75,9 @@ module OAF {
     /* Ensures consistency for activations of publicly advertised objects */
     void lock();
     oneway void unlock();
+
+    RegistrationResult register_new(in ImplementationID iid, in Object obj);
+    void unregister(in ImplementationID iid, in Object obj);
   };
 
   typedef sequence<ObjectDirectory> ObjectDirectoryList;

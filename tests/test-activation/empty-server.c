@@ -3,7 +3,9 @@
 #include <string.h>
 #include <signal.h>
 #include <orb/orbit.h>
+#include <popt.h>
 #include "empty.h"
+#include "liboaf/liboaf.h"
 
 Empty empty_client = CORBA_OBJECT_NIL;
 
@@ -20,51 +22,56 @@ POA_Empty poa_empty_servant = { NULL, &poa_empty_vepv };
 
 static void do_exit(int arg)
 {
-	exit(2);
+  exit(2);
 }
 
 int
 main (int argc, char *argv[])
 {
-    PortableServer_ObjectId objid = {0, sizeof("myFoo"), "myFoo"};
-    PortableServer_POA poa;
+  PortableServer_ObjectId objid = {0, sizeof("myFoo"), "myFoo"};
+  PortableServer_POA poa;
+  poptContext ctx;
 
-    CORBA_Environment ev;
-    char *retval;
-    CORBA_ORB orb;
+  CORBA_Environment ev;
+  char *retval;
+  CORBA_ORB orb;
 
-    signal(SIGINT, do_exit);
-    signal(SIGTERM, do_exit);
+  signal(SIGINT, do_exit);
+  signal(SIGTERM, do_exit);
 
-    CORBA_exception_init(&ev);
-    orb = CORBA_ORB_init(&argc, argv, "orbit-local-orb", &ev);
+  CORBA_exception_init(&ev);
+  orb = oaf_orb_init(&argc, argv);
 
-    POA_Empty__init(&poa_empty_servant, &ev);
+  ctx = poptGetContext("oaf-empty-server", argc, argv, oaf_popt_options, 0);
+  while(poptGetNextOpt(ctx) >= 0);
+  poptFreeContext(ctx);
 
-    poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
-    PortableServer_POAManager_activate(PortableServer_POA__get_the_POAManager(poa, &ev), &ev);
-    PortableServer_POA_activate_object_with_id(poa,
-					       &objid, &poa_empty_servant, &ev);
+  POA_Empty__init(&poa_empty_servant, &ev);
 
-    empty_client = PortableServer_POA_servant_to_reference(poa,
-							&poa_empty_servant,
-							  &ev);
-    if (!empty_client) {
-	printf("Cannot get objref\n");
-	return 1;
-    }
+  poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
+  PortableServer_POAManager_activate(PortableServer_POA__get_the_POAManager(poa, &ev), &ev);
+  PortableServer_POA_activate_object_with_id(poa,
+					     &objid, &poa_empty_servant, &ev);
 
-    retval = CORBA_ORB_object_to_string(orb, empty_client, &ev);
+  empty_client = PortableServer_POA_servant_to_reference(poa,
+							 &poa_empty_servant,
+							 &ev);
+  if (!empty_client) {
+    printf("Cannot get objref\n");
+    return 1;
+  }
 
-    g_print("%s\n", retval); fflush(stdout);
+  retval = CORBA_ORB_object_to_string(orb, empty_client, &ev);
 
-    CORBA_free(retval);
+  g_print("%s\n", retval); fflush(stdout);
 
-    CORBA_ORB_run(orb, &ev);
+  CORBA_free(retval);
 
-    PortableServer_POA_deactivate_object(poa, &objid, &ev);
+  while(1) g_main_iteration(TRUE);
 
-    return 0;
+  PortableServer_POA_deactivate_object(poa, &objid, &ev);
+
+  return 0;
 }
 
 static void

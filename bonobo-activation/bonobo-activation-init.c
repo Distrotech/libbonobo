@@ -78,26 +78,29 @@ oaf_orb_get(void)
   return oaf_orb;
 }
 
-char *
-liboaf_hostname_get(void)
+const char *
+oaf_hostname_get(void)
 {
-  char *hostname;
+  static char *hostname = NULL;
   char hn_tmp[65];
   struct hostent *hent, *hent2;
 
-  gethostname(hn_tmp, sizeof(hn_tmp) - 1);
+  if(!hostname)
+    {
+      gethostname(hn_tmp, sizeof(hn_tmp) - 1);
+      
+      hent = gethostbyname(hn_tmp);
+      if(hent) {
+	hent2 = gethostbyaddr(hent->h_addr, 4, AF_INET);
+	if(hent2)
+	  hostname = g_strdup(hent2->h_name);
+	else
+	  hostname = g_strdup(inet_ntoa(*((struct in_addr *)hent->h_addr)));
+      } else
+	hostname = g_strdup(hn_tmp);
+    }
 
-  hent = gethostbyname(hn_tmp);
-  if(hent) {
-    hent2 = gethostbyaddr(hent->h_addr, 4, AF_INET);
-    if(hent2)
-      hostname = hent2->h_name;
-    else
-      hostname = inet_ntoa(*((struct in_addr *)hent->h_addr));
-  } else
-    hostname = hn_tmp;
-
-  return g_strdup(hostname);
+  return hostname;
 }
 
 CORBA_Context
@@ -112,33 +115,128 @@ oaf_session_name_get(void)
   return "local";
 }
 
+const char *
+oaf_domain_get(void)
+{
+  return "user";
+}
+
 CORBA_Object
 oaf_activation_context_get(void)
 {
   OAFRegistrationCategory regcat;
 
+  memset(&regcat, 0, sizeof(regcat));
   regcat.name = "IDL:OAF/ActivationContext:1.0";
   regcat.session_name = oaf_session_name_get();
+  regcat.domain = "session";
 
   return oaf_service_get(&regcat);
 }
 
 static char *oaf_od_ior = NULL;
+static int oaf_ior_fd = 1;
+static char *oaf_activate_iid = NULL;
 
 struct poptOption oaf_popt_options[] = {
   {"oaf-od-ior", '\0', POPT_ARG_STRING, &oaf_od_ior, 0, "Object directory to use when registering servers", "IOR"},
+  {"oaf-ior-fd", '\0', POPT_ARG_INT, &oaf_ior_fd, 0, "File descriptor to print IOR on", "FD"},
+  {"oaf-activate-iid", '\0', POPT_ARG_STRING, &oaf_activate_iid, 0, "IID to activate", "IID"},
   {NULL}
 };
 
+/* If it is specified on the command line, it overrides everything else */
+char *
+cmdline_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCategory *regcat,
+	      int *ret_distance, gpointer user_data)
+{
+  if(!strcmp(regcat->name, "IDL:OAF/ObjectDirectory:1.0"))
+     {
+       *ret_distance = 0;
+       return g_strdup(oaf_od_ior);
+     }
+
+  return NULL;
+}
+
+static OAFRegistrationLocation cmdline_regloc = {
+  NULL,
+  NULL,
+  cmdline_check,
+  NULL,
+  NULL
+};
+
+/* If it is specified on the command line, it overrides everything else */
+char *
+ac_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCategory *regcat,
+	 int *ret_distance, gpointer user_data)
+{
+  if(!strcmp(regcat->name, "IDL:OAF/ObjectDirectory:1.0"))
+     {
+       OAF_ActivationContext ac;
+       OAF_ObjectDirectoryList *od;
+       CORBA_Environment ev;
+       char *retval, *str_ior;
+
+       ac = oaf_activation_context_get();
+
+       CORBA_exception_init(&ev);
+       if(CORBA_Object_is_nil(ac, &ev))
+	 return NULL;
+
+       od = OAF_ActivationContext__get_directories(ac, &ev);
+       if(ev._major != CORBA_NO_EXCEPTION)
+	 {
+	   CORBA_exception_free(&ev);
+	   return NULL;
+	 }
+
+       if(od->_length < 1)
+	 {
+	   CORBA_free(od);
+	   CORBA_exception_free(&ev);
+	   return NULL;
+	 }
+
+       str_ior = CORBA_ORB_object_to_string(oaf_orb_get(), od->_buffer[0], &ev);
+       if(ev._major != CORBA_NO_EXCEPTION)
+	 {
+	   CORBA_free(od);
+	   CORBA_exception_free(&ev);
+	   return NULL;
+	 }
+       retval = g_strdup(str_ior);
+       CORBA_free(str_ior);
+
+       *ret_distance = 1;
+
+       return retval;
+     }
+
+  return NULL;
+}
+
+static OAFRegistrationLocation ac_regloc = {
+  NULL,
+  NULL,
+  ac_check,
+  NULL,
+  NULL
+};
+
 void
-oaf_preinit(void)
+oaf_preinit(gpointer app, gpointer mod_info)
 {
 }
 
 void
 oaf_postinit(gpointer app, gpointer mod_info)
 {
-  
+  oaf_registration_location_add(&ac_regloc, -500, NULL);
+
+  if(oaf_od_ior)
+    oaf_registration_location_add(&cmdline_regloc, -1000, NULL);
 }
 
 static void
@@ -150,10 +248,24 @@ do_barrier(int signum)
 }
 
 CORBA_ORB
+oaf_init(int argc, char **argv)
+{
+  CORBA_ORB retval;
+
+  oaf_preinit(NULL, NULL);
+
+  retval = oaf_orb_init(&argc, argv);
+
+  oaf_postinit(NULL, NULL);
+
+  return retval;
+}
+
+CORBA_ORB
 oaf_orb_init(int *argc, char **argv)
 {
   CORBA_Environment ev;
-  char *hostname;
+  const char *hostname;
 
 #ifndef ORBIT_USES_GLIB_MAIN_LOOP
   IIOPAddConnectionHandler = orb_add_connection;
@@ -169,11 +281,10 @@ oaf_orb_init(int *argc, char **argv)
   CORBA_ORB_get_default_context(oaf_orb, &oaf_context, &ev);
   g_assert(ev._major == CORBA_NO_EXCEPTION);
 
-  hostname = liboaf_hostname_get();
-  CORBA_Context_set_one_value(oaf_context, "hostname", hostname, &ev);
+  hostname = oaf_hostname_get();
+  CORBA_Context_set_one_value(oaf_context, "hostname", (char *)hostname, &ev);
   CORBA_Context_set_one_value(oaf_context, "domain", "user", &ev);
   CORBA_Context_set_one_value(oaf_context, "username", g_get_user_name(), &ev);
-  g_free(hostname);
 
   CORBA_exception_free(&ev);
 

@@ -121,22 +121,38 @@ oaf_registration_iterate(const OAFRegistrationCategory *regcat, CORBA_Object obj
     CORBA_free(ior);
 }
 
+static int lock_count = 0;
 
-#define oaf_reglocs_lock() oaf_registration_iterate(NULL, CORBA_OBJECT_NIL, ev, G_STRUCT_OFFSET(OAFRegistrationLocation, lock), 2)
-#define oaf_reglocs_unlock() oaf_registration_iterate(NULL, CORBA_OBJECT_NIL, ev, G_STRUCT_OFFSET(OAFRegistrationLocation, unlock), 2)
+static void
+oaf_reglocs_lock(CORBA_Environment *ev)
+{
+  if(lock_count == 0)
+    oaf_registration_iterate(NULL, CORBA_OBJECT_NIL, ev, G_STRUCT_OFFSET(OAFRegistrationLocation, lock), 2);
+  lock_count++;
+}
+
+static void
+oaf_reglocs_unlock(CORBA_Environment *ev)
+{
+  lock_count--;
+  if(lock_count == 0)
+    oaf_registration_iterate(NULL, CORBA_OBJECT_NIL, ev, G_STRUCT_OFFSET(OAFRegistrationLocation, unlock), 2);
+}
 
 void
 oaf_registration_unset(const OAFRegistrationCategory *regcat, CORBA_Object obj, CORBA_Environment *ev)
 {
-  oaf_reglocs_lock();
-  oaf_registration_iterate(regcat, obj, ev, G_STRUCT_OFFSET(OAFRegistrationLocation, register_new), 4);
-  oaf_reglocs_unlock();
+  oaf_reglocs_lock(ev);
+  oaf_registration_iterate(regcat, obj, ev, G_STRUCT_OFFSET(OAFRegistrationLocation, unregister), 4);
+  oaf_reglocs_unlock(ev);
 }
 
 void
 oaf_registration_set(const OAFRegistrationCategory *regcat, CORBA_Object obj, CORBA_Environment *ev)
 {
-  oaf_registration_iterate(regcat, obj, ev, G_STRUCT_OFFSET(OAFRegistrationLocation, unregister), 4);
+  oaf_reglocs_lock(ev);
+  oaf_registration_iterate(regcat, obj, ev, G_STRUCT_OFFSET(OAFRegistrationLocation, register_new), 4);
+  oaf_reglocs_unlock(ev);
 }
 
 /* Whacked from gnome-libs/libgnorba/orbitns.c */
@@ -273,17 +289,99 @@ oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev)
   return retval;
 }
 
-char * oaf_ac_cmd[] = {"oafd", "--ac-activate", "--ior-output-fd=123", NULL};
+const char * oaf_ac_cmd[] = {"oafd", "--ac-activate", "--ior-output-fd=123", NULL};
+const char * oaf_od_cmd[] = {"oafd", "--ior-output-fd=123", NULL};
+
+struct SysServerInstance {
+  CORBA_Object already_running;
+  char *username, *hostname, *domain;
+};
 
 struct SysServer {
   const char *name;
   const char **cmd;
   int ior_fd;
-  CORBA_Object already_running;
+  GSList *instances;
 } activatable_servers[] = {
   {"IDL:OAF/ActivationContext:1.0", (const char **)oaf_ac_cmd, 123, CORBA_OBJECT_NIL},
+  {"IDL:OAF/ObjectDirectory:1.0", (const char **)oaf_od_cmd, 123, CORBA_OBJECT_NIL},
   {NULL}
 };
+
+#define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
+static CORBA_Object
+existing_check(const OAFRegistrationCategory *regcat, struct SysServer *ss)
+{
+  GSList *cur;
+
+  for(cur = ss->instances; cur; cur = cur->next)
+    {
+      struct SysServerInstance *ssi;
+
+      ssi = cur->data;
+      if((!ssi->username || STRMATCH(ssi->username, regcat->username))
+	 && (!ssi->hostname || STRMATCH(ssi->hostname, regcat->hostname))
+	 && (!ssi->domain || STRMATCH(ssi->domain, regcat->domain)))
+	return ssi->already_running;
+    }
+
+  return CORBA_OBJECT_NIL;
+}
+
+static void
+existing_set(const OAFRegistrationCategory *regcat, struct SysServer *ss, CORBA_Object obj, CORBA_Environment *ev)
+{
+  GSList *cur;
+  struct SysServerInstance *ssi;
+
+  for(cur = ss->instances; cur; cur = cur->next)
+    {
+      ssi = cur->data;
+      if((!ssi->username || STRMATCH(ssi->username, regcat->username))
+	 && (!ssi->hostname || STRMATCH(ssi->hostname, regcat->hostname))
+	 && (!ssi->domain || STRMATCH(ssi->domain, regcat->domain)))
+	break;
+    }
+
+  if(!cur)
+    {
+      ssi = g_new0(struct SysServerInstance, 1);
+      ssi->already_running = obj;
+      ssi->username = regcat->username?g_strdup(regcat->username):NULL;
+      ssi->hostname = regcat->hostname?g_strdup(regcat->hostname):NULL;
+      ssi->domain = regcat->domain?g_strdup(regcat->domain):NULL;
+    }
+  else
+    {
+      CORBA_Object_release(ssi->already_running, ev);
+      ssi->already_running = obj;
+    }
+}
+
+static GSList *activator_list = NULL;
+
+void oaf_registration_activator_add(OAFServiceActivator act_func)
+{
+  activator_list = g_slist_prepend(activator_list, act_func);
+}
+
+static CORBA_Object
+oaf_activators_use(const OAFRegistrationCategory *regcat, const char **cmd, int ior_fd, CORBA_Environment *ev)
+{
+  CORBA_Object retval = CORBA_OBJECT_NIL;
+  GSList *cur;
+
+  for(cur = activator_list; CORBA_Object_is_nil(retval, ev) && cur; cur = cur->next)
+    {
+      OAFServiceActivator act_func;
+
+      act_func = cur->data;
+
+      retval = act_func(regcat, cmd, ior_fd, ev);
+    }
+
+  return retval;
+}
 
 CORBA_Object
 oaf_service_get(const OAFRegistrationCategory *regcat)
@@ -305,25 +403,35 @@ oaf_service_get(const OAFRegistrationCategory *regcat)
     return retval;
 
   CORBA_exception_init(&myev); ev = &myev;
-  if(!CORBA_Object_non_existent(activatable_servers[i].already_running, &myev))
-    {
-      retval = CORBA_Object_duplicate(activatable_servers[i].already_running, &myev);
-    }
+  retval = existing_check(regcat, &activatable_servers[i]);
+  if(!CORBA_Object_non_existent(retval, ev))
+    goto out;
 
-  oaf_reglocs_lock();
+  oaf_reglocs_lock(ev);
 
   retval = oaf_registration_check(regcat, &myev);
   ne = CORBA_Object_non_existent(retval, &myev);
   if(ne)
     {
       CORBA_Object_release(retval, &myev);
-      retval = oaf_server_by_forking(activatable_servers[i].cmd, activatable_servers[i].ior_fd, &myev);
+      if(STRMATCH(regcat->username, g_get_user_name())
+	 && STRMATCH(regcat->hostname, oaf_hostname_get())
+	 && STRMATCH(regcat->domain, oaf_domain_get()))
+	{
+	  retval = oaf_server_by_forking(activatable_servers[i].cmd, activatable_servers[i].ior_fd, &myev);
+	}
+      else
+	retval = oaf_activators_use(regcat, activatable_servers[i].cmd, activatable_servers[i].ior_fd, ev);
       if(!CORBA_Object_is_nil(retval, &myev))
 	oaf_registration_set(regcat, retval, &myev);
     }
 
-  oaf_reglocs_unlock();
+  oaf_reglocs_unlock(ev);
 
+  if(!CORBA_Object_is_nil(retval, ev))
+    existing_set(regcat, &activatable_servers[i], retval, ev);
+
+ out:
   CORBA_exception_free(&myev);
 
   return retval;

@@ -25,6 +25,11 @@ CORBA_ORB oaf_orb_get(void);
 CORBA_Context oaf_context_get(void); /* Just makes getting hold of the default context a bit easier */
 CORBA_Object oaf_activation_context_get(void); /* Internal use, remove me from header file */
 
+#define oaf_username_get() g_get_user_name()
+const char *oaf_hostname_get(void);
+const char *oaf_session_name_get(void);
+const char *oaf_domain_get(void);
+
 typedef struct {
   const char   *iid;
 
@@ -53,8 +58,8 @@ CORBA_Object oaf_activate(const char *requirements, const char **selection_order
 /* oaf-registration.c - not intended for application use */
 typedef struct {
   const char *name;
-
   const char *session_name;
+  const char *username, *hostname, *domain;
 } OAFRegistrationCategory;
 
 typedef struct _OAFRegistrationLocation OAFRegistrationLocation;
@@ -78,5 +83,25 @@ void oaf_registration_unset(const OAFRegistrationCategory *regcat, CORBA_Object 
 
 /* Do not release() the returned value */
 CORBA_Object oaf_service_get(const OAFRegistrationCategory *regcat);
+
+typedef CORBA_Object (*OAFServiceActivator)(const OAFRegistrationCategory *regcat, const char **cmd,
+					    int ior_fd, CORBA_Environment *ev);
+void oaf_registration_activator_add(OAFServiceActivator act_func);
+
+/* oaf-servreg.c */
+OAF_RegistrationResult oaf_active_server_register(const char *iid, CORBA_Object obj);
+void oaf_active_server_unregister(const char *iid, CORBA_Object obj);
+
+/* Optional stuff for libgnome to use */
+#ifdef HAVE_POPT_H
+#include <popt.h>
+#endif
+
+#ifdef POPT_AUTOHELP
+extern struct poptOptions oaf_popt_options[];
+#endif
+
+void oaf_preinit(gpointer app, gpointer mod_info);
+void oaf_postinit(gpointer app, gpointer mod_info);
 
 #endif
