@@ -651,8 +651,7 @@ bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 	 * FIXME: we should do this on a per class basis perhaps.
 	 */
 
-	pspecs = G_OBJECT_GET_CLASS (object)->property_specs;
-	nargs = G_OBJECT_GET_CLASS (object)->n_property_specs;
+	pspecs = g_object_class_list_properties (G_OBJECT_GET_CLASS (object), &nargs);
 
 	if (!nargs) {
 		g_warning ("Strange, no GRuntime arguments to map to Bonobo");
@@ -689,6 +688,7 @@ bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 		g_free (desc);
 	}
 
+	g_free (pspecs);
 /* FIXME: leaks like a privatised water company */
 /*	g_free (args);*/
 }

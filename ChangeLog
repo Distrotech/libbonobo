@@ -1,3 +1,8 @@
+2001-06-19  Peter Williams  <peterw@ximian.com>
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_gtk_args): 
+	Update to match new GObject property retrieval API.
+
 2001-06-19  Héctor García Álvarez <hector@scouts-es.org>
 
 	* configure.in: added "es" for Spanish to $ALL_LINGUAS
