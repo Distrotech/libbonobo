@@ -1,5 +1,11 @@
 2001-05-02  Michael Meeks  <michael@ximian.com>
 
+	* tests/Makefile.am: add test-object
+
+	* tests/test-object.c: add from HEAD bonobo test-xobject
+
+2001-05-02  Michael Meeks  <michael@ximian.com>
+
 	* Serious cruft cleaning - kill unused things.
 
 	* bonobo/bonobo-persist-stream.c (impl_get_size_max): kill.
