@@ -32,23 +32,32 @@ interface View : GNOME::obj {
 /* Equivalent to IOleObject */
 interface BonoboObject : GNOME::obj {
 
-	typedef long Verb;
-	const Verb PRIMARY = 0; // Action invoked when user double clicks on
-				// this object.  Triggers inplace editing if this
-				// object supports it.
-
-	const Verb SHOW = -1;	// The object should be shown to the user, for 
-				// editing or viewing.  Used during initial editing
-
-	const Verb OPEN = -2;	// Edit the object in a separate window.
-
-	const Verb HIDE = -3;	// Hide any open separate windows.
-
-	const Verb INPLACE_UIA = -4; // Activate in place and negotiate toolbars and menus
-
-	const Verb INPLACE = -5; // Activate in place but do not merge UI elements.
-
-	const Verb DISCARDUNDO=-6; // Discard any pending Undo information in this object.
+	/**
+	 * Some standard verbs in Bonobo:
+	 * "primary":
+	 *     Action invoked when user double clicks on
+	 *     this object.  Triggers inplace editing if this
+	 *     object supports it.
+	 *
+	 * "show":
+	 *     The object should be shown to the user, for 
+	 *     editing or viewing.  Used during initial editing
+	 *
+	 * "open":
+	 *     Edit the object in a separate window.
+	 *
+	 * "hide":
+	 *     Hide any open separate windows.
+	 *
+	 * "inplace_uia":
+	 *     Activate in place and negotiate toolbars and menus
+	 *
+	 * "inplace":	
+	 *     Activate in place but do not merge UI elements.
+	 *
+	 * "discardundo"
+	 *     Discard any pending Undo information in this object.
+	 */
 		
 	/**
 	 * do_verb:
@@ -56,11 +65,9 @@ interface BonoboObject : GNOME::obj {
 	 * @verbname: string that activated the verb
 	 *
 	 *
-	 * Performs the @verb.  Standard verbs include:
-	 * "open": open in a separate editing window.
-	 * "edit": edit inplace (or open, if inplace is not supported).
+	 * Performs the @verb.
 	 */
-	void do_verb (in short verb, in string verb_name);
+	void do_verb (in string verb_name);
 
 	/**
 	 * set_client_site:
@@ -119,12 +126,7 @@ interface BonoboObject : GNOME::obj {
 	 *
 	 */
 
-	struct VerbInfo {
-		short  verb;
-		string verb_desc;
-	};
-
-	typedef sequence<VerbInfo> verb_list;
+	typedef sequence<string> verb_list;
 
 	/**
 	 * get_verbs_list:

@@ -1,5 +1,18 @@
 1999-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* bonobo/gnome-component-client.c (gnome_bonobo_object_get_verbs):
+	Helper routine to fetch the verbs supported by an embedded
+	BonoboObject.
+	(gnome_bonobo_object_free_verbs): Routine to release the return
+	value returned from gnome_bonobo_object_get_verbs.
+
+	* idl/gnome-component.idl (BonoboObject): Verbs are now only
+	strings.  No code is now passed.
+	
+	* bonobo/gnome-component.c (gnome_bonobo_object_remove_verb,
+	gnome_bonobo_object_add_verb, gnome_bonobo_object_add_verbs):
+	Change the API to only use strings.
+
 	* bonobo.spec.in (Obsoletes): Include *Conf.sh files in distribution.
 
 	* bonobo/Makefile.am (EXTRA_DIST): Include corba_DATA in
