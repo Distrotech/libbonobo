@@ -275,6 +275,7 @@ oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev)
       g_io_channel_unref(gioc);
       g_main_run(ai.mloop);
       g_main_destroy(ai.mloop);
+      fclose(iorfh);
 
       g_strstrip(ai.iorbuf);
       if (!strncmp(ai.iorbuf, "IOR:", 4))
@@ -520,6 +521,8 @@ rloc_file_lock(const OAFRegistrationLocation *regloc, gpointer user_data)
       else
 	break;
     }
+
+  fcntl(lock_fd, F_SETFD, FD_CLOEXEC);
 
   if(lock_fd >= 0)
     {

@@ -43,6 +43,8 @@ oaf_active_server_register(const char *iid, CORBA_Object obj)
 
       if(fh != stdout)
 	fclose(fh);
+      else if(iorfd > 2)
+	close(iorfd);
     }
 
   regcat.session_name = oaf_session_name_get();

@@ -269,6 +269,9 @@ oaf_postinit(gpointer app, gpointer mod_info)
 
   oaf_rloc_file_register();
 
+  if(oaf_ior_fd > 2)
+    fcntl(oaf_ior_fd, F_SETFD, FD_CLOEXEC);
+
   if(oaf_od_ior)
     oaf_registration_location_add(&cmdline_regloc, -1000, NULL);
 }

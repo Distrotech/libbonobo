@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
       case OAF_RESULT_OBJECT:
 	g_print("RESULT_OBJECT\n");
 	acior = CORBA_ORB_object_to_string(orb, res->res._u.res_object, &ev);
-	g_print("acior\n");
+	g_print("%s\n", acior);
 	break;
       case OAF_RESULT_SHLIB:
 	g_print("RESULT_SHLIB\n");
