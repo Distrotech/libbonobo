@@ -1046,11 +1046,11 @@ qexp_sort_compare(OAF_ServerInfo **x, OAF_ServerInfo **y, QexpSortData *sort_dat
   int i;
 
   if (*x == NULL) {
-    return TRUE;
+    return 1;
   }
 
   if (*y == NULL) {
-    return FALSE;
+    return -1;
   }
 
   for(i = 0; i < sort_data->nexps; i++) {
