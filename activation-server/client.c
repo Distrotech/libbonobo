@@ -217,6 +217,16 @@ main (int argc, char *argv[])
 						g_print ("Description: %s\n",
 							 exdata->description);
 				}
+				else if (!strcmp (id,"IDL:Bonobo/GeneralError:1.0")) {
+					Bonobo_GeneralError *exdata;
+
+					exdata = CORBA_exception_value (&ev);
+
+					if (exdata)
+						g_print ("Description: %s\n",
+							  exdata->description);
+
+				}
 			}
 			break;
 		case CORBA_SYSTEM_EXCEPTION:
