@@ -1,6 +1,7 @@
 2004-01-27  Åsmund Skjæveland  <aasmunds@fys.uio.no>
 
 	* nn.po: Updated Norwegian Nynorsk translation.
+	         Fixed breakage due to forgotten CVS conflict marker. Sorry.
 
 2004-01-21  Miloslav Trmac  <mitr@volny.cz>
 
