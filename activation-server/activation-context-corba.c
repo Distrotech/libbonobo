@@ -8,19 +8,6 @@
 
 #define OAF_LINK_TIME_TO_LIVE 256
 
-static void
-OAF_ServerInfo__copy (OAF_ServerInfo * new, const OAF_ServerInfo * old)
-{
-	new->iid = CORBA_string_dup (old->iid);
-	new->server_type = CORBA_string_dup (old->server_type);
-	new->location_info = CORBA_string_dup (old->location_info);
-	new->username = CORBA_string_dup ("");
-	new->hostname = CORBA_string_dup ("");
-	new->domain = CORBA_string_dup ("");
-	new->attrs = old->attrs;
-	CORBA_sequence_set_release (&new->attrs, CORBA_FALSE);
-}
-
 typedef struct
 {
 	OAF_ObjectDirectory obj;
@@ -615,9 +602,9 @@ impl_OAF_ActivationContext__get_servers (impl_POA_OAF_ActivationContext *
 			child = cur->data;
 
 			for (j = 0; j < child->list->_length; j++, i++)
-				OAF_ServerInfo__copy (&retval->_buffer[i],
-						      &child->
-						      list->_buffer[j]);
+				OAF_ServerInfo_copy (&retval->_buffer[i],
+						     &child->
+						     list->_buffer[j]);
 		}
 	}
 
@@ -812,7 +799,7 @@ impl_OAF_ActivationContext_query (impl_POA_OAF_ActivationContext * servant,
 			if (!items[i])
 				continue;
 
-			OAF_ServerInfo__copy (&retval->_buffer[j], items[i]);
+			OAF_ServerInfo_copy (&retval->_buffer[j], items[i]);
 
 			j++;
 		}
