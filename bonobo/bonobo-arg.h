@@ -36,7 +36,7 @@ typedef CORBA_TypeCode BonoboArgType;
 					          *((t *)(a->_value)) = (t)(v))
 #else
 #	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (*((t *)(a->_value)))
-#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (*((t *)(a->_value)) = (t)(v))
+#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (*((t *)(a->_value)) = (v))
 #endif
 
 #define BONOBO_ARG_GET_BOOLEAN(a)   (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_boolean, CORBA_boolean, NULL))
