@@ -1,3 +1,37 @@
+1999-05-28  Nat Friedman  <nat@gnome-support.com>
+
+	* components/text-plain/bonobo-text-plain.c
+	(progressive_add_data): Removed the call to
+	GNOME_SimpleDataSource_pop_data.  Now just use the buffer that
+	comes from add_data.
+
+	* bonobo/test-container.c (struct progressive_timeout): Now stores
+	much less information since we don't need to manage a
+	SimpleDataSource.  It now only stores the file we're loading data
+	from and the GNOME_ProgressiveDataSinik.
+	(ssource_pop_data): Removed, since we're no longer using the
+	SimpleDataSource.
+	(ssource_remaining_data): Likewise.
+	(timeout_next_line): Modified to just send a buffer with add_buff.
+	(send_text_cmd): No longer creates a SimpleDataSource interface
+	object.
+
+	* bonobo/gnome-progressive.h (GnomeProgressiveDataSinkAddDataFn):
+	Modified to reflect the change in the interface to add_data.
+	(GnomeProgressiveDataClass): Likewise.
+
+	* bonobo/gnome-progressive.c (impl_add_data): Modified to reflect
+	the change in the interface to add_data, which only takes one
+	argument now.
+	(gnome_progressive_data_sink_add_data_nop): Likewise.
+
+	* bonobo/gnome-bonobo.h: Don't include gnome-simple-source.h
+
+	* idl/gnome-progressive.idl: Removed SimpleDataSource interface.
+
+	* bonobo/Makefile.am: Removed gnome-simple-source.c and
+	gnome-simple-source.h
+
 1999-05-28  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* configure.in (AC_OUTPUT): Remove 'sed .. POTFILES' expression.

@@ -68,8 +68,7 @@ impl_end (PortableServer_Servant servant,
 
 static void
 impl_add_data (PortableServer_Servant servant,
-	       CORBA_long count,
-	       GNOME_SimpleDataSource source,
+	       GNOME_ProgressiveDataSink_iobuf *buffer,
 	       CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -78,8 +77,7 @@ impl_add_data (PortableServer_Servant servant,
 
 	if (psink->add_data_fn != NULL)
 		result = (*psink->add_data_fn) (psink,
-						count,
-						source,
+						buffer,
 						psink->closure);
 	else
 	{
@@ -87,7 +85,7 @@ impl_add_data (PortableServer_Servant servant,
 		GnomeProgressiveDataSinkClass *class =
 			GNOME_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
-		result = (*class->add_data_fn) (psink, count, source);
+		result = (*class->add_data_fn) (psink, buffer);
 	}
 
 	if (result != 0)
@@ -156,8 +154,8 @@ gnome_progressive_data_sink_start_end_nop (GnomeProgressiveDataSink *psink)
 
 static int
 gnome_progressive_data_sink_add_data_nop (GnomeProgressiveDataSink *psink,
-					  const CORBA_long count,
-					  GNOME_SimpleDataSource source)
+					  GNOME_ProgressiveDataSink_iobuf *buffer,
+					  CORBA_Environment *ev)
 {
 	return 0;
 } /* gnome_progressive_data_sink_add_data_nop */
