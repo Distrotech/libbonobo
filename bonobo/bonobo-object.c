@@ -167,8 +167,11 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 
 	for (l = ao->objs; l; l = l->next) {
 		GtkObject *o = l->data;
+		guint id = BONOBO_OBJECT (o)->priv->destroy_id;
 
-		gtk_signal_disconnect (o, BONOBO_OBJECT (o)->priv->destroy_id);
+		if (id)
+			gtk_signal_disconnect (o, id);
+		BONOBO_OBJECT (o)->priv->destroy_id = 0;
 		if (o->ref_count >= 1)
 			gtk_object_destroy (GTK_OBJECT (o));
 		else
