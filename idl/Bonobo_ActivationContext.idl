@@ -62,6 +62,7 @@ module OAF {
 	  ActivationResult activate(in string requirements, in string selection_order) context("hostID", "domain");
 
 	  readonly attribute ServerInfoList servers;
+	  ServerInfoList query(in string requirements);
 
 	  ActivationResult activate_from_id(in ActivationID aid) context("hostID", "domain");
 	};

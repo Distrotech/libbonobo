@@ -200,7 +200,9 @@ qexp_constant_new(QueryExprConst setme)
 {
   QueryExpr * retval = qexp_new();
 
+  retval->value_known = TRUE;
   retval->type = EXPR_CONSTANT;
+  setme.value_known = TRUE;
   retval->u.constant_value = setme;
 
   retval->has_fields = FALSE;

@@ -2,7 +2,15 @@ bin_PROGRAMS=oafd
 
 INCLUDES=@ORBIT_CFLAGS@ -I$(top_builddir) -I$(top_builddir)/liboaf
 
-oafd_SOURCES=ac-query-lex.c ac-query-parse.c ac-query-parse.h ac-query-expr.h main.c ac-query-expr.c oaf-skels.c
+oafd_SOURCES=			\
+	ac-query-lex.c		\
+	ac-query-parse.c	\
+	ac-query-parse.h	\
+	ac-query-expr.h		\
+	main.c			\
+	ac-query-expr.c		\
+	oaf-skels.c		
+
 oafd_LDADD=../liboaf/liboaf.la @ORBIT_LIBS@
 
 EXTRA_DIST=ac-query-lex.l ac-query-parse.y
