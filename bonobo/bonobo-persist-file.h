@@ -47,11 +47,13 @@ GtkType             gnome_persist_file_get_type  (void);
 void                gnome_persist_file_set_dirty (GnomePersistFile *ps,
 						    gboolean dirty);
 
-GnomePersistFile *gnome_persist_file_new       (GnomePersistFileIOFn load_fn,
+GnomePersistFile *gnome_persist_file_new       (const char *goad_id,
+						GnomePersistFileIOFn load_fn,
 						GnomePersistFileIOFn save_fn,
 						void *closure);
 GnomePersistFile *gnome_persist_file_construct (GnomePersistFile *ps,
 						GNOME_PersistFile corba_ps,
+						const char *goad_id,
 						GnomePersistFileIOFn load_fn,
 						GnomePersistFileIOFn save_fn,
 						void *closure);

@@ -14,6 +14,8 @@ BEGIN_GNOME_DECLS
 
 typedef struct {
 	GnomeObject object;
+
+	char  *goad_id;
 } GnomePersist;
 
 typedef struct {
@@ -22,7 +24,8 @@ typedef struct {
 
 GtkType       gnome_persist_get_type  (void);
 GnomePersist *gnome_persist_construct (GnomePersist *persist,
-				       GNOME_Persist corba_persist);
+				       GNOME_Persist corba_persist,
+				       const char *goad_id);
 
 extern POA_GNOME_Persist__epv gnome_persist_epv;
 END_GNOME_DECLS

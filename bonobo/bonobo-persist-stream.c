@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * GNOME PersistStream
+ * GNOME PersistStream implementation.  Can be used as a base class,
+ * or directly for implementing objects that use PersistStream.
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
@@ -15,16 +16,8 @@ static GnomePersistClass *gnome_persist_stream_parent_class;
 
 /* The CORBA entry point vectors */
 static POA_GNOME_Persist__epv gnome_persist_epv;
-POA_GNOME_PersistStream__epv gnome_persist_stream_epv;
+POA_GNOME_PersistStream__epv  gnome_persist_stream_epv;
 POA_GNOME_PersistStream__vepv gnome_persist_stream_vepv;
-
-static CORBA_char *
-impl_get_class_id (PortableServer_Servant servant, CORBA_Environment * ev)
-{
-	g_error ("Implement me");
-	return CORBA_OBJECT_NIL;
-}
-
 
 static CORBA_boolean
 impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
@@ -103,12 +96,12 @@ init_persist_stream_corba_class (void)
 	 * The Entry Point Vectors for GNOME::Persist
 	 * and GNOME::PersistStream
 	 */
-	gnome_persist_epv.get_class_id = impl_get_class_id;
 	gnome_persist_stream_epv.load = impl_load;
 	gnome_persist_stream_epv.save = impl_save;
 	gnome_persist_stream_epv.get_size_max = impl_get_size_max;
 
 	gnome_persist_stream_vepv.GNOME_Unknown_epv = &gnome_object_epv;
+	gnome_persist_stream_vepv.GNOME_Persist_epv = &gnome_persist_epv;
 	gnome_persist_stream_vepv.GNOME_PersistStream_epv = &gnome_persist_stream_epv;
 }
 
@@ -139,7 +132,7 @@ gnome_persist_stream_class_init (GnomePersistStreamClass *class)
 	class->save = gnome_persist_stream_nop;
 	class->load = gnome_persist_stream_nop;
 	class->get_size_max = gnome_persist_stream_zero;
-	
+
 	init_persist_stream_corba_class ();
 }
 
@@ -178,7 +171,8 @@ gnome_persist_stream_get_type (void)
 
 /**
  * gnome_persist_stream_construct:
- * @ps: A GnomerPersistStream
+ * @ps: A GnomerPersistStream object
+ * @goad_id: the GOAD ID that this object will implement.
  * @load_fn: Loading routine
  * @save_fn: Saving routine
  * @closure: Data passed to IO routines.
@@ -195,6 +189,7 @@ gnome_persist_stream_get_type (void)
 GnomePersistStream *
 gnome_persist_stream_construct (GnomePersistStream *ps,
 				GNOME_PersistStream corba_ps,
+				const char *goad_id,
 				GnomePersistStreamIOFn load_fn,
 				GnomePersistStreamIOFn save_fn,
 				void *closure)
@@ -203,12 +198,12 @@ gnome_persist_stream_construct (GnomePersistStream *ps,
 	g_return_val_if_fail (GNOME_IS_PERSIST_STREAM (ps), NULL);
 	g_return_val_if_fail (corba_ps != CORBA_OBJECT_NIL, NULL);
 
-	gnome_persist_construct (GNOME_PERSIST (ps), corba_ps);
+	gnome_persist_construct (GNOME_PERSIST (ps), corba_ps, goad_id);
 	
 	ps->load_fn = load_fn;
 	ps->save_fn = save_fn;
 	ps->closure = closure;
-
+	
 	return ps;
 }
 
@@ -230,6 +225,7 @@ create_gnome_persist_stream (GnomeObject *object)
 
 /**
  * gnome_persist_stream_new:
+ * @goad_id: the GOAD ID that this object will implement.
  * @load_fn: Loading routine
  * @save_fn: Saving routine
  * @closure: Data passed to IO routines.
@@ -244,7 +240,8 @@ create_gnome_persist_stream (GnomeObject *object)
  * Returns: the newly-created GnomePersistStream object.
  */
 GnomePersistStream *
-gnome_persist_stream_new (GnomePersistStreamIOFn load_fn,
+gnome_persist_stream_new (const char *goad_id,
+			  GnomePersistStreamIOFn load_fn,
 			  GnomePersistStreamIOFn save_fn,
 			  void *closure)
 {
@@ -259,8 +256,23 @@ gnome_persist_stream_new (GnomePersistStreamIOFn load_fn,
 		return NULL;
 	}
 
-	gnome_persist_stream_construct (ps, corba_ps, load_fn, save_fn, closure);
+	gnome_persist_stream_construct (ps, corba_ps, goad_id, load_fn, save_fn, closure);
 
 	return ps;
 }
 
+/**
+ * gnome_persist_stream_set_dirty:
+ * @ps: A GnomerPersistStream object
+ * @dirty: A boolean value representing whether the object is dirty or not
+ *
+ * This routine sets the dirty bit for the PersistStream object.
+ */
+void
+gnome_persist_stream_set_dirty (GnomePersistStream *pstream, gboolean dirty)
+{
+	g_return_if_fail (pstream != NULL);
+	g_return_if_fail (GNOME_IS_PERSIST_STREAM (pstream));
+
+	pstream->is_dirty = dirty;
+}

@@ -49,14 +49,6 @@ impl_get_current_file (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 
-static CORBA_char *
-impl_get_class_id (PortableServer_Servant servant, CORBA_Environment * ev)
-{
-	g_error ("Implement me");
-	return CORBA_OBJECT_NIL;
-}
-
-
 static CORBA_boolean
 impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
 {
@@ -68,7 +60,7 @@ impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
 
 static void
 impl_load (PortableServer_Servant servant,
-	   const CORBA_char *filename,
+	   CORBA_char *filename,
 	   CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -90,7 +82,7 @@ impl_load (PortableServer_Servant servant,
 
 static void
 impl_save (PortableServer_Servant servant,
-	   const CORBA_char *filename,
+	   CORBA_char *filename,
 	   CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -119,12 +111,12 @@ init_persist_file_corba_class (void)
 	 * The Entry Point Vectors for GNOME::Persist
 	 * and GNOME::PersistFile
 	 */
-	gnome_persist_epv.get_class_id = impl_get_class_id;
 	gnome_persist_file_epv.load = impl_load;
 	gnome_persist_file_epv.save = impl_save;
 	gnome_persist_file_epv.get_current_file = impl_get_current_file;
 
 	gnome_persist_file_vepv.GNOME_Unknown_epv = &gnome_object_epv;
+	gnome_persist_file_vepv.GNOME_Persist_epv = &gnome_persist_epv;
 	gnome_persist_file_vepv.GNOME_PersistFile_epv = &gnome_persist_file_epv;
 }
 
@@ -202,6 +194,7 @@ gnome_persist_file_get_type (void)
 GnomePersistFile *
 gnome_persist_file_construct (GnomePersistFile *pf,
 			      GNOME_PersistFile corba_pf,
+			      const char *goad_id,
 			      GnomePersistFileIOFn load_fn,
 			      GnomePersistFileIOFn save_fn,
 			      void *closure)
@@ -210,12 +203,12 @@ gnome_persist_file_construct (GnomePersistFile *pf,
 	g_return_val_if_fail (GNOME_IS_PERSIST_FILE (pf), NULL);
 	g_return_val_if_fail (corba_pf != CORBA_OBJECT_NIL, NULL);
 
-	gnome_persist_construct (GNOME_PERSIST (pf), corba_pf);
+	gnome_persist_construct (GNOME_PERSIST (pf), goad_id, corba_pf);
 	
 	pf->load_fn = load_fn;
 	pf->save_fn = save_fn;
 	pf->closure = closure;
-
+		
 	return pf;
 }
 
@@ -237,6 +230,7 @@ create_gnome_persist_file (GnomeObject *object)
 
 /**
  * gnome_persist_file_new:
+ * @goad_id: The GOAD ID.
  * @load_fn: Loading routine
  * @save_fn: Saving routine
  * @closure: Data passed to IO routines.
@@ -246,7 +240,8 @@ create_gnome_persist_file (GnomeObject *object)
  * operations are performed by the class load and save methods
  */
 GnomePersistFile *
-gnome_persist_file_new (GnomePersistFileIOFn load_fn,
+gnome_persist_file_new (const char *goad_id,
+			GnomePersistFileIOFn load_fn,
 			GnomePersistFileIOFn save_fn,
 			void *closure)
 {
@@ -263,7 +258,7 @@ gnome_persist_file_new (GnomePersistFileIOFn load_fn,
 
 	pf->filename = NULL;
 
-	gnome_persist_file_construct (pf, corba_pf, load_fn, save_fn, closure);
+	gnome_persist_file_construct (pf, corba_pf, goad_id, load_fn, save_fn, closure);
 
 	return pf;
 }

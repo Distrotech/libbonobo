@@ -1,3 +1,22 @@
+1999-07-19  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-object-io.c (gnome_persist_stream_load_goad_id,
+	gnome_persist_stream_save_goad_id,
+	gnome_persiststream_save_to_stream, gnome_object_save_to_stream):
+	New file and new functions for Component IO.
+
+	* bonobo/gnome-stream-client.c: New file.
+	* bonobo/gnome-persist-stream.c (gnome_persist_stream_construct,
+	gnome_persist_stream_new): Now we require a GOAD it to initialize
+	the stream.
+	(gnome_persist_stream_set_dirty): New function.
+
+	* bonobo/gnome-moniker.c (gnome_moniker_construct): Pass the
+	monker_goad_id. 
+
+	* bonobo/gnome-component-io.c (gnome_embeddable_save_to_stream):
+	Rename class_id to goad_id.
+
 July 19, 1999, Elliot:
 	bonobo/gnome-embeddable-factory.c:
 		Remove warning about using params - don't need to use

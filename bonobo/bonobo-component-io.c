@@ -79,7 +79,7 @@ int
 gnome_embeddable_save_to_stream (GnomeEmbeddable *bonobo_object, GnomeStream *stream)
 {
 	GnomePersisStream *persist_stream;
-	char *class;
+	const char *goad_id;
 	
 	persist_stream = gnome_object_query_interface (
 		bonobo_object, "IDL:GNOME/PersistStream:1.0");
@@ -87,8 +87,8 @@ gnome_embeddable_save_to_stream (GnomeEmbeddable *bonobo_object, GnomeStream *st
 	if (persist_stream == NULL)
 		return -1;
 
-	class = gnome_persist_stream_get_class_id (persist_stream);
-	gnome_stream_write_class_id (persist_stream, class);
+	goad_id = gnome_persist_stream_get_goad_id (persist_stream);
+	gnome_stream_write_goad_id (persist_stream, goad_id);
 	
 	gnome_persist_stream_save (persist_stream);
 

@@ -207,6 +207,7 @@ create_gnome_moniker (GnomeObject *object)
  */
 GnomeMoniker *
 gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker,
+			 const char *moniker_goad_id,
 			 GnomeMonikerBindFn bind_function,
 			 void *bind_function_closure)
 {
@@ -216,6 +217,7 @@ gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker,
 	g_return_val_if_fail (bind_function != NULL, NULL);
 	
 	gnome_persist_stream_construct (GNOME_PERSIST_STREAM (moniker),
+					moniker_goad_id,
 					(GNOME_Moniker) corba_moniker,
 					NULL, NULL, NULL);
 
@@ -227,6 +229,7 @@ gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker,
 
 /**
  * gnome_moniker_new:
+ * @moniker_goad_id: The GOAD ID registered by this moniker.
  * @bind_function: The routine which is invoked for the bind_to_object() interface method.
  * @bind_function_closure: The closure data passed to @bind_function when it is called.
  *
@@ -236,7 +239,8 @@ gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker,
  * Returns: The newly-constructed GnomeMoniker object.
  */
 GnomeMoniker *
-gnome_moniker_new (GnomeMonikerBindFn bind_function,
+gnome_moniker_new (const char *moniker_goad_id,
+		   GnomeMonikerBindFn bind_function,
 		   void *bind_function_closure)
 {
 	GNOME_Moniker corba_moniker;
@@ -251,7 +255,9 @@ gnome_moniker_new (GnomeMonikerBindFn bind_function,
 		return NULL;
 	}
 
-	return gnome_moniker_construct (moniker, corba_moniker, bind_function, bind_function_closure);
+	return gnome_moniker_construct (
+		moniker, moniker_goad_id,
+		corba_moniker, bind_function, bind_function_closure);
 }
 
 static void

@@ -32,9 +32,12 @@ typedef struct {
 } GnomeMonikerClass;
 
 GtkType           gnome_moniker_get_type   (void);
-GnomeMoniker	 *gnome_moniker_new (GnomeMonikerBindFn bind_function, void *bind_function_closure);
+GnomeMoniker	 *gnome_moniker_new        (const char *moniker_goad_id,
+					    GnomeMonikerBindFn bind_function,
+					    void *bind_function_closure);
 GnomeMoniker     *gnome_moniker_construct  (GnomeMoniker *moniker,
 					    GNOME_Moniker corba_moniker,
+					    const char *moniker_goad_id,
 					    GnomeMonikerBindFn bind_function,
 					    void *bind_function_closure);
 

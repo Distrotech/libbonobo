@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gnome-storage: Storage manipulation
+ * gnome-storage: Storage manipulation.
  *
  * Author:
  *   Miguel de Icaza (miguel@gnu.org).
@@ -130,28 +130,6 @@ impl_erase (PortableServer_Servant servant,
 	
 	CLASS (storage)->erase (storage, path, ev);
 }
-
-
-#if 0
-gnome_save (GnomeObject *object, GnomeStorage *storage)
-{
-	GnomePersistStorage *persist;
-	
-	g_return_val_if_fail (object != NULL, NULL);
-	g_return_val_if_fail (storage != NULL, NULL);
-
-	persist = gtk_object_query_interface (
-		GTK_OBJECT (object), gnome_persist_storage_get_type ());
-	if (!persist)
-		return SOME_ERROR;
-
-	id = gnome_persist_storage_getid (persist);
-	gnome_persist_storage_save (persist, storage);
-	
-	if (gnome_persist_storage_save (persist, storage) == NO_ERROR)
-		gnome_persist_storage_commit (persist);
-}
-#endif
 
 static void
 init_storage_corba_class (void)

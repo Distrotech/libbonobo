@@ -14,7 +14,7 @@ module GNOME {
 			SAVE_FAILED
 		};
 
-		string get_class_id ();
+		string get_goad_id ();
 		
 		exception WrongDataType {};		
 	};

@@ -15,14 +15,27 @@ static GnomeObjectClass *gnome_persist_parent_class;
 
 POA_GNOME_Persist__epv gnome_persist_epv;
 
+static CORBA_char *
+impl_get_goad_id (PortableServer_Servant servant, CORBA_Environment * ev)
+{
+	GnomeObject *object = gnome_object_from_servant (servant);
+	GnomePersist *persist = GNOME_PERSIST (object);
+	
+	return CORBA_string_dup (persist->goad_id);
+}
+
 static void
 init_persist_corba_class (void)
 {
+	gnome_persist_epv.get_goad_id = impl_get_goad_id;
 }
 
 static void
 gnome_persist_destroy (GtkObject *object)
 {
+	g_free (GNOME_PERSIST (object)->goad_id);
+
+	GTK_OBJECT_CLASS (gnome_persist_parent_class)->destroy (object);
 }
 
 static void
@@ -46,12 +59,16 @@ gnome_persist_init (GnomePersist *persist)
 }
 
 GnomePersist *
-gnome_persist_construct (GnomePersist *persist, GNOME_Persist corba_persist)
+gnome_persist_construct (GnomePersist *persist,
+			 GNOME_Persist corba_persist,
+			 const char *goad_id)
 {
 	g_return_val_if_fail (persist != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PERSIST (persist), NULL);
 	g_return_val_if_fail (corba_persist != CORBA_OBJECT_NIL, NULL);
 
+	persist->goad_id = g_strdup (goad_id);
+	
 	gnome_object_construct (GNOME_OBJECT (persist), corba_persist);
 
 	return persist;
