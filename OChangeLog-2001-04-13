@@ -1,3 +1,38 @@
+2000-10-06  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (widget_is_special, widget_get_node),
+	(widget_set_node, node_is_dirty): impl.
+	(node_get_parent_widget): upd.
+	(replace_override_fn): re-stamp the widget.
+	(override_fn, remove_fn): use new fn: (prune_widget_info): impl.
+	(custom_widget_unparent): allow a double unparent.
+	(node_get_parent_widget): make placeholder gubbins more explicit.
+	(widget_is_special): detect widgets to ignore inside containers
+	(widget_get_node, widget_set_node): tie a node to a widget
+	(replace_override_fn): ensure it stays tied.
+	(node_is_dirty): helper fn.
+	(node_is_placeholder): helper.
+	(next_node): tragicaly unused, but funky tree flattening iterator.
+	(placeholder_sync): handler for placeholders.
+	(sync_generic_widgets): split out all the evil bits of syncing
+	a container with a tree; put them here.
+	(do_show_hide): remove rubbish.
+	(prune_widget_info): remove all widgets from NodeInfo records 
+	down the tree as appropriate.
+	(override_fn, remove_fn): simplify to use prune_widget_info
+	(build_toolbar_placeholder): upd.
+	(build_toolbar_widget): Split into:
+	(build_toolbar_control, build_toolbar_widget)
+	(build_toolbar_item, sync_toolbar_state): split state sync from build.
+	(update_dockitem): update.
+	(update_status): split out:
+	(build_status_item, sync_status_item): split state sync from build.
+
+	* bonobo/bonobo-ui-xml.c (set_children_dirty): impl.
+	(bonobo_ui_xml_set_dirty): hook it in.
+
+	* bonobo/bonobo-win.c (seek_dirty): Clean after re-build.
+
 2000-10-06  John Sullivan  <sullivan@eazel.com>
 
 	* bonobo/bonobo-win.c: 
