@@ -389,7 +389,7 @@ bonobo_property_bag_create_objref (BonoboPropertyBag  *pb,
 {
 	PortableServer_ObjectId *oid;
 
-	oid = PortableServer_string_to_ObjectId (name, ev);
+	oid = PortableServer_string_to_ObjectId ((char *) name, ev);
 
 	*obj = (Bonobo_Property) PortableServer_POA_create_reference_with_id (
 		pb->priv->poa, oid, "IDL:Bonobo/Property:1.0", ev);
@@ -908,7 +908,7 @@ bonobo_property_bag_get_prop_type (BonoboPropertyBag *pb, const char *name)
 /**
  * bonobo_property_bag_get_value:
  */
-const gpointer
+gconstpointer
 bonobo_property_bag_get_value (BonoboPropertyBag *pb, const char *name)
 {
 	BonoboProperty *prop;
@@ -925,7 +925,7 @@ bonobo_property_bag_get_value (BonoboPropertyBag *pb, const char *name)
 /**
  * bonobo_property_bag_get_default:
  */
-const gpointer
+gconstpointer
 bonobo_property_bag_get_default (BonoboPropertyBag *pb, const char *name)
 {
 	BonoboProperty *prop;
@@ -1030,7 +1030,7 @@ bonobo_property_bag_create_type (BonoboPropertyBag *pb, char *type_name,
  */
 CORBA_any *
 bonobo_property_bag_value_to_any (BonoboPropertyBag *pb, const char *type,
-				  const gpointer value)
+				  gconstpointer value)
 {
 	BonoboPropertyBagValueMarshalerFn  value_marshaler;
 	BonoboPropertyType                *ptype;

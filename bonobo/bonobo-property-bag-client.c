@@ -817,7 +817,7 @@ bonobo_property_bag_client_set_value_boolean (BonoboPropertyBagClient *pbc,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
 
-	any = bonobo_property_marshal_boolean ("boolean", (const gpointer) &value, NULL);
+	any = bonobo_property_marshal_boolean ("boolean", (gconstpointer) &value, NULL);
 	g_return_if_fail (any != NULL);
 
 	bonobo_property_bag_client_set_value_any (pbc, propname, any);
@@ -836,7 +836,7 @@ bonobo_property_bag_client_set_value_short (BonoboPropertyBagClient *pbc,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
 
-	any = bonobo_property_marshal_short ("short", (const gpointer) &value, NULL);
+	any = bonobo_property_marshal_short ("short", (gconstpointer) &value, NULL);
 	g_return_if_fail (any != NULL);
 
 	bonobo_property_bag_client_set_value_any (pbc, propname, any);
@@ -855,7 +855,7 @@ bonobo_property_bag_client_set_value_ushort (BonoboPropertyBagClient *pbc,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
 
-	any = bonobo_property_marshal_ushort ("ushort", (const gpointer) &value, NULL);
+	any = bonobo_property_marshal_ushort ("ushort", (gconstpointer) &value, NULL);
 	g_return_if_fail (any != NULL);
 
 	bonobo_property_bag_client_set_value_any (pbc, propname, any);
@@ -874,7 +874,7 @@ bonobo_property_bag_client_set_value_long (BonoboPropertyBagClient *pbc,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
 
-	any = bonobo_property_marshal_long ("long", (const gpointer) &value, NULL);
+	any = bonobo_property_marshal_long ("long", (gconstpointer) &value, NULL);
 	g_return_if_fail (any != NULL);
 
 	bonobo_property_bag_client_set_value_any (pbc, propname, any);
@@ -893,7 +893,7 @@ bonobo_property_bag_client_set_value_ulong (BonoboPropertyBagClient *pbc,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
 
-	any = bonobo_property_marshal_ulong ("ulong", (const gpointer) &value, NULL);
+	any = bonobo_property_marshal_ulong ("ulong", (gconstpointer) &value, NULL);
 	g_return_if_fail (any != NULL);
 
 	bonobo_property_bag_client_set_value_any (pbc, propname, any);
@@ -912,7 +912,7 @@ bonobo_property_bag_client_set_value_float (BonoboPropertyBagClient *pbc,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
 
-	any = bonobo_property_marshal_float ("float", (const gpointer) &value, NULL);
+	any = bonobo_property_marshal_float ("float", (gconstpointer) &value, NULL);
 	g_return_if_fail (any != NULL);
 
 	bonobo_property_bag_client_set_value_any (pbc, propname, any);
@@ -931,7 +931,7 @@ bonobo_property_bag_client_set_value_double (BonoboPropertyBagClient *pbc,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
 
-	any = bonobo_property_marshal_double ("double", (const gpointer) &value, NULL);
+	any = bonobo_property_marshal_double ("double", (gconstpointer) &value, NULL);
 	g_return_if_fail (any != NULL);
 
 	bonobo_property_bag_client_set_value_any (pbc, propname, any);

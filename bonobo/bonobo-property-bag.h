@@ -55,8 +55,8 @@ void		          bonobo_property_bag_set_flags        (BonoboPropertyBag *pb, con
 							      
 /* Inspecting properties. */
 const char	         *bonobo_property_bag_get_prop_type    (BonoboPropertyBag *pb, const char *name);
-const gpointer	          bonobo_property_bag_get_value        (BonoboPropertyBag *pb, const char *name);
-const gpointer	          bonobo_property_bag_get_default      (BonoboPropertyBag *pb, const char *name);
+gconstpointer	          bonobo_property_bag_get_value        (BonoboPropertyBag *pb, const char *name);
+gconstpointer	          bonobo_property_bag_get_default      (BonoboPropertyBag *pb, const char *name);
 const char	         *bonobo_property_bag_get_docstring    (BonoboPropertyBag *pb, const char *name);
 const BonoboPropertyFlags  bonobo_property_bag_get_flags        (BonoboPropertyBag *pb, const char *name);
 gboolean		  bonobo_property_bag_has_property     (BonoboPropertyBag *pb, const char *name);
@@ -69,7 +69,7 @@ gboolean		  bonobo_property_bag_has_property     (BonoboPropertyBag *pb, const c
  * Mainly used by BonoboProperty for marshaling and demarshaling
  * property values across CORBA.
  */
-typedef CORBA_any *(*BonoboPropertyBagValueMarshalerFn)	      (const char *type, const gpointer value,
+typedef CORBA_any *(*BonoboPropertyBagValueMarshalerFn)	      (const char *type, gconstpointer value,
 							       gpointer user_data);
 typedef gpointer   (*BonoboPropertyBagValueDemarshalerFn)      (const char *type, const CORBA_any *any,
 							       gpointer user_data);
@@ -85,7 +85,7 @@ void		          bonobo_property_bag_create_type      (BonoboPropertyBag *pb, cha
 							       BonoboPropertyBagValueReleaserFn    releaser,
 							       gpointer user_data);
 CORBA_any		 *bonobo_property_bag_value_to_any     (BonoboPropertyBag *pb, const char *type,
-							       const gpointer value);
+							       gconstpointer value);
 gpointer		  bonobo_property_bag_any_to_value     (BonoboPropertyBag *pb, const char *type,
 							       const CORBA_any *any);
 gboolean		  bonobo_property_bag_compare_values   (BonoboPropertyBag *pb, const char *type,

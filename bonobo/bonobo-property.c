@@ -35,7 +35,7 @@ impl_Bonobo_Property_get_type (PortableServer_Servant servant,
 	CORBA_TypeCode tc;
 	const char *type;
 	CORBA_any *any;
-	gpointer value;
+	gconstpointer value;
 
 	value = bonobo_property_bag_get_value (pservant->pb, pservant->property_name);
 	type  = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
@@ -55,7 +55,7 @@ impl_Bonobo_Property_get_value (PortableServer_Servant servant,
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 	const char *type;
-	gpointer value;
+	gconstpointer value;
 
 	type = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
 	value = bonobo_property_bag_get_value (pservant->pb, pservant->property_name);
@@ -83,7 +83,7 @@ impl_Bonobo_Property_get_default (PortableServer_Servant servant,
 				 CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
-	gpointer default_value;
+	gconstpointer default_value;
 	const char *type;
 
 	type = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);

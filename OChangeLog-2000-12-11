@@ -1,3 +1,20 @@
+2000-02-07  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/bonobo-property-bag.c, bonobo/bonobo-property-bag.h,
+	bonobo/bonobo-property-types.c, bonobo/bonobo-property-types.h,
+	bonobo/bonobo-property.c, bonobo/bonobo-ui-handler.c,
+	bonobo/bonobo-ui-handler.h, bonobo/bonobo-view.c,
+	components/text-plain/bonobo-text-plain.c, libefs/src/efstool.c,
+	libefs/src/simple.c, samples/controls/bonobo-calculator-control.h,
+	samples/controls/sample-control-factory.c: Fix a bunch of
+	warnings. These fall into the following categories: failing to
+	declare a function `static'; inappropriate implicit casts that
+	remove `const'; use of `const gpointer' instead of `gconstpointer'
+	(not all of these led to warnings but I fixed all I found);
+	failure to include needed headers; passing functions with a return
+	value where void functions are expected; and unused functions
+	(which I #if 0'd out).
+	
 2000-02-07  Elliot Lee <sopwith@redhat.com>
 	* idl/Bonobo.idl: #include <gnome-factory.idl> to avoid
 	duplication of symbols in the libraries.
