@@ -138,6 +138,17 @@ OAF_Attribute *oaf_server_info_attr_find (OAF_ServerInfo * server,
 const char *oaf_server_info_attr_lookup (OAF_ServerInfo * server,
 					 const char *attr_name,
 					 GSList * i18n_languages);
+void OAF_AttributeValue_copy (OAF_AttributeValue *copy,
+                              const OAF_AttributeValue *original);
+void OAF_Attribute_copy (OAF_Attribute *copy,
+                         const OAF_Attribute *original);
+void
+CORBA_sequence_OAF_Attribute_copy (CORBA_sequence_OAF_Attribute *copy,
+                                   const CORBA_sequence_OAF_Attribute *original);
+void
+OAF_ServerInfo_copy (OAF_ServerInfo *copy, const OAF_ServerInfo *original);
+OAF_ServerInfo *
+OAF_ServerInfo_duplicate (const OAF_ServerInfo *original);
 
 /* Optional stuff for libgnome to use */
 #ifdef HAVE_POPT_H
