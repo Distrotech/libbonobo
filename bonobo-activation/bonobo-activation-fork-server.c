@@ -61,7 +61,8 @@ typedef struct {
 	FILE *fh;
 
         /* For list compares */
-        const char *display;
+        const Bonobo_ActivationEnvironment *environment;
+
         const char *act_iid;
         const char *exename;
         BonoboForkReCheckFn re_check;
@@ -81,7 +82,7 @@ exe_activate_info_to_retval (EXEActivateInfo *ai, CORBA_Environment *ev)
                         retval = CORBA_OBJECT_NIL;
 #ifdef BONOBO_ACTIVATION_DEBUG
                 if (ai->do_srv_output)
-                        g_message ("Did string_to_object on %s = '%p' (%s)",
+                        g_warning ("Did string_to_object on %s = '%p' (%s)",
                                    ai->iorbuf, retval,
                                    ev->_major == CORBA_NO_EXCEPTION?
                                    "no-exception" : ev->_id);
@@ -91,7 +92,7 @@ exe_activate_info_to_retval (EXEActivateInfo *ai, CORBA_Environment *ev)
 
 #ifdef BONOBO_ACTIVATION_DEBUG
                 if (ai->do_srv_output)
-                        g_message ("string doesn't match IOR:");
+                        g_warning ("string doesn't match IOR:");
 #endif
 
                 errval = Bonobo_GeneralError__alloc ();
@@ -120,11 +121,12 @@ scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
                 if (strcmp (seek_ai->exename, ai->exename))
                         continue;
 
-                if (seek_ai->display && ai->display) {
-                        if (strcmp (seek_ai->display, ai->display))
+                if (seek_ai->environment && ai->environment) {
+                        if (!Bonobo_ActivationEnvironment_match (seek_ai->environment,
+								 ai->environment))
                                 continue;
 
-                } else if (seek_ai->display || ai->display)
+                } else if (seek_ai->environment || ai->environment)
                         continue;
 
                 /* We run the loop too ... */
@@ -144,8 +146,9 @@ scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
                                    seek_ai->act_iid, ai->act_iid);
 #endif
                         retval = seek_ai->re_check (
-                                seek_ai->display, seek_ai->act_iid,
-                                seek_ai->user_data, ev);
+					seek_ai->environment,
+					seek_ai->act_iid,
+					seek_ai->user_data, ev);
                 }
         }
 
@@ -184,7 +187,7 @@ handle_exepipe (GIOChannel * source,
 
 #ifdef BONOBO_ACTIVATION_DEBUG
 	if (data->do_srv_output)
-		g_message ("srv output[%d]: '%s'", retval, data->iorbuf);
+		g_warning ("srv output[%d]: '%s'", retval, data->iorbuf);
 #endif
 
 	if (!retval)
@@ -198,10 +201,10 @@ static void
 print_exit_status (int status)
 {
 	if (WIFEXITED (status))
-		g_message ("Exit status was %d", WEXITSTATUS (status));
+		g_warning ("Exit status was %d", WEXITSTATUS (status));
 
 	if (WIFSIGNALED (status))
-		g_message ("signal was %d", WTERMSIG (status));
+		g_warning ("signal was %d", WTERMSIG (status));
 }
 #endif
 
@@ -219,17 +222,30 @@ bonobo_activation_setenv (const char *name, const char *value)
 #endif
 }
 
+static void
+setenv_activation_environment (const Bonobo_ActivationEnvironment *environment)
+{
+	int i;
+
+	if (!environment)
+		return;
+
+	for (i = 0; i < environment->_length; i++)
+		bonobo_activation_setenv (environment->_buffer [i].name,
+					  environment->_buffer [i].value);
+}
+
 CORBA_Object
 bonobo_activation_server_by_forking (
-        const char       **cmd,
-        gboolean           set_process_group,
-        int                fd_arg, 
-        const char        *display,
-        const char        *od_iorstr,
-        const char        *act_iid,
-        BonoboForkReCheckFn re_check,
-        gpointer            user_data,
-        CORBA_Environment *ev)
+	const char                         **cmd,
+	gboolean                             set_process_group,
+	int                                  fd_arg, 
+	const Bonobo_ActivationEnvironment  *environment,
+	const char                          *od_iorstr,
+	const char                          *act_iid,
+	BonoboForkReCheckFn                  re_check,
+	gpointer                             user_data,
+	CORBA_Environment                   *ev)
 {
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
@@ -247,7 +263,7 @@ bonobo_activation_server_by_forking (
         g_return_val_if_fail (cmd [0] != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (act_iid != NULL, CORBA_OBJECT_NIL);
 
-        ai.display = display;
+        ai.environment = environment;
         ai.act_iid = act_iid;
         ai.exename = cmd [0];
         ai.re_check = re_check;
@@ -266,8 +282,7 @@ bonobo_activation_server_by_forking (
         parent_pid = getpid ();
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        fprintf (stderr, " FORKING: '%s' for '%s' ('%s')\n",
-                 cmd[0], act_iid, display);
+        fprintf (stderr, " FORKING: '%s' for '%s'\n", cmd[0], act_iid);
 #endif
         
 	/* fork & get the IOR from the magic pipe */
@@ -349,9 +364,8 @@ bonobo_activation_server_by_forking (
 	} else if ((childpid = fork ())) {
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
-                if (display != NULL) {
-                        bonobo_activation_setenv ("DISPLAY", display);
-                }
+		setenv_activation_environment (environment);
+
 		if (od_iorstr != NULL) {
                         /* FIXME: remove this - it is actually not used at all...
                          * and it's just wasteful having it here */
