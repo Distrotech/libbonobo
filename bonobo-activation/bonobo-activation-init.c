@@ -345,6 +345,6 @@ oaf_orb_init(int *argc, char **argv)
 #endif
 
 const char liboaf_version[] = VERSION;
-const guint orbit_major_version = OAF_MAJOR_VERSION,
-  orbit_minor_version = OAF_MINOR_VERSION,
-  orbit_micro_version = OAF_MICRO_VERSION;
+const guint liboaf_major_version = OAF_MAJOR_VERSION,
+  liboaf_minor_version = OAF_MINOR_VERSION,
+  liboaf_micro_version = OAF_MICRO_VERSION;
