@@ -1,3 +1,10 @@
+2001-02-23  Michael Meeks  <michael@ximian.com>
+
+	* doc/api: Add bonobo-moniker-extender.
+
+	* monikers/bonobo-moniker-file.c (bonobo_moniker_file_resolve):
+	remove debugging code.
+
 2001-02-22  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-moniker-simple.h: correct SIMPLE_CLASS macro
