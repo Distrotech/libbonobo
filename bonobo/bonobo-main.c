@@ -159,8 +159,7 @@ bonobo_init_full (int *argc, char **argv,
 		bonobo_inited = TRUE;
 
 	/* Init neccessary bits */
-	g_type_init_with_debug_flags (
-		G_TYPE_DEBUG_OBJECTS);
+	g_type_init_with_debug_flags (G_TYPE_DEBUG_OBJECTS);
 
 	if (!bonobo_activation_is_initialized ())
 		bonobo_activation_init (*argc, argv);
@@ -287,9 +286,8 @@ bonobo_main (void)
 	loop = g_main_new (TRUE);
 	bonobo_main_loops = g_slist_prepend (bonobo_main_loops, loop);
 
-	if (g_main_is_running (bonobo_main_loops->data)) {
+	if (g_main_is_running (bonobo_main_loops->data))
 		g_main_run (loop);
-	}
 
 	bonobo_main_loops = g_slist_remove (bonobo_main_loops, loop);
 

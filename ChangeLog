@@ -1,3 +1,8 @@
+2001-11-09  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_finalize_gobject):
+	add debug to stop people getting ref counting mixed up.
+
 2001-11-09  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* bonobo/bonobo-storage-memory.c (smem_rename_impl): 

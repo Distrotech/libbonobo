@@ -178,11 +178,11 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 #endif
 
 			/*
-			 * Disconnect the GTK+ object from the aggregate object
+			 * Disconnect the GObject from the aggregate object
 			 * and unref it so that it is possibly finalized ---
-			 * other parts of GTK+ may still have references to it.
+			 * other parts of glib may still have references to it.
 			 *
-			 * The GTK+ object was already destroy()ed in
+			 * The GObject was already destroy()ed in
 			 * bonobo_object_destroy().
 			 */
 
@@ -589,6 +589,9 @@ bonobo_object_finalize_gobject (GObject *gobject)
 #ifdef BONOBO_LIFECYCLE_DEBUG
 	g_warning ("Bonobo Object finalize GObject %p", gobject);
 #endif
+	if (object->priv->ao != NULL)
+		g_error ("g_object_unreffing a bonobo_object that "
+			 "still has %d refs", object->priv->ao->ref_count);
 
 	g_free (object->priv);
 

@@ -425,6 +425,5 @@ bonobo_running_context_auto_exit_unref (BonoboObject *object)
 				  "last_unref",
 				  G_CALLBACK (last_unref_exit_cb),
 				  object);
-
 }
 
