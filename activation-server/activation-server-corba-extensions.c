@@ -48,7 +48,7 @@ oafd_CORBA_Context_get_value (CORBA_Context         ctx,
 
 	CORBA_Context_get_values (ctx, NULL, 0, (char *) propname, &nvout, &local_ev);
 
-	if (local_ev->_major == CORBA_NO_EXCEPTION) {
+	if (local_ev._major == CORBA_NO_EXCEPTION) {
 		if (nvout->list->len > 0) {
 			CORBA_NamedValue *nv;
 
