@@ -1,3 +1,8 @@
+Wed Oct 11 18:29:45 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* storage-modules/gnome-*: use prefix bonobo- instead of gnome-,
+	renamed all files and made the necessary changes to Makefile.am
+
 2000-10-11  Darin Adler  <darin@eazel.com>
 
 	* bonobo/.cvsignore:
