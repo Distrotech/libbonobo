@@ -1,3 +1,9 @@
+2000-10-24  Mike Kestner  <mkestner@ameritech.net>
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_set_value): Fix
+	for the precondition bug that Troy Gillette discovered.
+	(bonobo_property_bag_notify_listeners): Ditto.
+
 2000-10-23  Zach Frey  <zfrey@bright.net>
 
 	* doc/api/Makefile.am: update.
