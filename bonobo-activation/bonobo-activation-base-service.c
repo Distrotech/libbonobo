@@ -486,8 +486,8 @@ existing_check (const OAFRegistrationCategory * regcat, struct SysServer *ss)
 }
 
 static void
-existing_set (const OAFRegistrationCategory * regcat, struct SysServer *ss,
-	      CORBA_Object obj, CORBA_Environment * ev)
+oaf_existing_set (const OAFRegistrationCategory * regcat, struct SysServer *ss,
+	          CORBA_Object obj, CORBA_Environment * ev)
 {
 	GSList *cur;
 	struct SysServerInstance *ssi;
@@ -617,7 +617,7 @@ oaf_service_get (const OAFRegistrationCategory * regcat)
 	oaf_reglocs_unlock (ev);
 
 	if (!CORBA_Object_non_existent (retval, ev))
-		existing_set (regcat, &activatable_servers[i], retval, ev);
+		oaf_existing_set (regcat, &activatable_servers[i], retval, ev);
 
       out:
 	CORBA_exception_free (&myev);
