@@ -1,5 +1,10 @@
 2000-10-17  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/app.c (main): remove the File label making the node transparent
+	so that John can see tear-offs work.
+
+2000-10-17  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/*: try to cheer Maciej up.
 
 2000-10-17  Michael Meeks  <michael@helixcode.com>
