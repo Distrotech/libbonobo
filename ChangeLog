@@ -1,5 +1,7 @@
 2001-07-14  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/libbonobo-2.0.pc.in (idldir): New variable.
+
 	* configure.in: Require autoconf 2.50b and use PKG_CHECK_MODULES.
 
 2001-07-13  Darin Adler  <darin@bentspoon.com>
