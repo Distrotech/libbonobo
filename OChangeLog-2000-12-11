@@ -1,3 +1,49 @@
+Thu Oct 19 09:50:37 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* monikers/bonobo-moniker-file.c: use bonobo_stream_open instead
+	of bonobo_stream_fs_open 
+
+	* tests/test-container-autoload.c: use bonobo_stream_open instead
+	of bonobo_stream_fs_open 
+
+	* tests/test-container.c: use bonobo_stream_open instead
+	of bonobo_stream_fs_open 
+	
+	* tests/test-container.c: use bonobo_stream_open instead
+	of bonobo_stream_fs_open 
+
+	* storage-modules/bonobo-stream-fs.c (bonobo_stream_fs_open):
+	changed parameter types to be compatible with new plugin code.
+
+	* storage-modules/bonobo-storage-[e]fs.c (init_storage_plugin): add new
+	plugin code
+
+	* storage-modules/Makefile.am: add bonobo-storage-fs.[ch] 
+
+	* bonobo/bonobo-stream.c (bonobo_stream_open): new function which
+	permits us to move bonobo-stream-fs into the storage module.
+
+	* bonobo/bonobo-storage.h: removed BONOBO_SS_* and some
+	unimplemented functions.	
+
+	* bonobo/bonobo-storage.c (bonobo_storage_open): use the new
+	plugin code
+
+	* bonobo/bonobo-storage-plugin.[ch]: new plugin code for storage
+	drivers
+
+	* bonobo/bonobo-storage-private.h: removed
+
+	* bonobo/bonobo-storage-priv.h: removed
+
+	* bonobo/bonobo-storage-driver.h: removed
+
+	* storage-modules/bonobo-stream-fs.[ch]: moved from bonobo/
+ 	to this place
+
+	* idl/bonobo-storage.idl: added more open modes, so that we can
+	remove BONOBO_SS_* 
+
 2000-10-19  Martin Baulig  <baulig@suse.de>
 
 	* idl/bonobo-zoomable.idl (ZoomLevelName, ZoomLevelNameList): New typedefs.
