@@ -14,6 +14,8 @@
 
 G_BEGIN_DECLS
 
+#ifndef BONOBO_DISABLE_DEPRECATED
+
 /* For backwards compatibility */
 #define BonoboStream BonoboObject
 #define BONOBO_STREAM(o)       ((BonoboStream *)(o))
@@ -22,6 +24,8 @@ G_BEGIN_DECLS
 #define BonoboStorage BonoboObject
 #define BONOBO_STORAGE(o)          ((BonoboStorage *)(o))
 #define BONOBO_STORAGE_CLASS(k)    ((BonoboObjectClass *)(k))
+
+#endif /* BONOBO_DISABLE_DEPRECATED */
 
 
 /* The 1 useful impl. in here */

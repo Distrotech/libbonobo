@@ -13,6 +13,8 @@
 
 #include <bonobo/bonobo-persist.h>
 
+#ifndef BONOBO_DISABLE_DEPRECATED
+
 G_BEGIN_DECLS
 
 #define BONOBO_TYPE_PERSIST_FILE (bonobo_persist_file_get_type ())
@@ -79,5 +81,7 @@ BonoboPersistFile *bonobo_persist_file_construct (BonoboPersistFile    *ps,
 						  void                 *closure);
 
 G_END_DECLS
+
+#endif /* BONOBO_DISABLE_DEPRECATED */
 
 #endif /* _BONOBO_PERSIST_FILE_H_ */

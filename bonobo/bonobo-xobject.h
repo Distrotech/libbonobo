@@ -12,6 +12,8 @@
 
 #include <bonobo/bonobo-object.h>
 
+#ifndef BONOBO_DISABLE_DEPRECATED
+
 G_BEGIN_DECLS
 
 /* Compatibility code */
@@ -94,5 +96,7 @@ prefix##_get_type (void)                                                      \
 }
 
 G_END_DECLS
+
+#endif /* BONOBO_DISABLE_DEPRECATED */
 
 #endif

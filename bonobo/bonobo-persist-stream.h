@@ -13,6 +13,8 @@
 
 #include <bonobo/bonobo-persist.h>
 
+#ifndef BONOBO_DISABLE_DEPRECATED
+
 G_BEGIN_DECLS
 
 #define BONOBO_TYPE_PERSIST_STREAM        (bonobo_persist_stream_get_type ())
@@ -89,5 +91,7 @@ BonoboPersistStream *bonobo_persist_stream_construct (BonoboPersistStream       
 						      void                      *closure);
 
 G_END_DECLS
+
+#endif /* BONOBO_DISABLE_DEPRECATED */
 
 #endif /* _BONOBO_PERSIST_STREAM_H_ */
