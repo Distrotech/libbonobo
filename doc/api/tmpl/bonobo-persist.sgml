@@ -6,12 +6,14 @@ Interface for anything that can save / load itself.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+BonoboPersist is an abstract base class that is useless by itself.
+It implements some methods to handle content type querying for
+use by the derived #BonoboPersistStream interface.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
-
+#BonoboPersistStream #BonoboPersistFile
 </para>
 
 <!-- ##### MACRO BONOBO_PERSIST_TYPE ##### -->

@@ -68,13 +68,13 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 <para>
   The CORBA::any value passed to the listener function is defined by
   the contract between the EventSource's event you are using and you.
-  To manipulate the value, you can use the CORBA DynAny interface to
-  introspect the value and extract the information you need. 
+  To manipulate the value, you can use the CORBA DynamicAny interface
+  to introspect the value and extract the information you need. 
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
-   #BonoboEventSource
+   #BonoboEventSource #BonoboArg
 </para>
 
 <!-- ##### MACRO BONOBO_LISTENER_TYPE ##### -->

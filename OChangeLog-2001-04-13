@@ -1,3 +1,9 @@
+2001-02-22  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-storage.c: Full API documentation.
+
+	* doc/api/tmpl/bonobo-event-source.sgml: Add nice examples.
+
 2001-02-21  John R. Sheets  <dusk@ravendusk.org>
 
 	* bonobo/bonobo-stream-client.c, bonobo/bonobo-persist-stream.c,
