@@ -48,11 +48,11 @@ GType bonobo_corba_exception_get_type               (void) G_GNUC_CONST;
 #define BONOBO_VALUE_HOLDS_CORBA_TYPECODE(value)    (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE))
 #define BONOBO_VALUE_HOLDS_CORBA_EXCEPTION(value)   (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION))
 
-Bonobo_Unknown         bonobo_value_get_unknown         (const GValue *value);
-BonoboArg             *bonobo_value_get_corba_any       (const GValue *value);
-CORBA_Object           bonobo_value_get_corba_object    (const GValue *value);
-CORBA_TypeCode         bonobo_value_get_corba_typecode  (const GValue *value);
-CORBA_Environment     *bonobo_value_get_corba_exception (const GValue *value);
+Bonobo_Unknown           bonobo_value_get_unknown         (const GValue *value);
+BonoboArg               *bonobo_value_get_corba_any       (const GValue *value);
+CORBA_Object             bonobo_value_get_corba_object    (const GValue *value);
+CORBA_TypeCode           bonobo_value_get_corba_typecode  (const GValue *value);
+const CORBA_Environment *bonobo_value_get_corba_exception (const GValue *value);
 
 void bonobo_value_set_unknown            (GValue                      *value,
                                           const Bonobo_Unknown         unknown);

@@ -391,8 +391,7 @@ bonobo_event_source_client_add_listener_full (Bonobo_Unknown     object,
 
 	bonobo_object_unref (BONOBO_OBJECT (listener));
 
-	/* FIXME: wtf. is this doing ? */
-	Bonobo_Unknown_unref (es, ev);
+	bonobo_object_release_unref (es, ev);
 
  add_listener_end:
 

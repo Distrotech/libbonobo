@@ -767,7 +767,6 @@ bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 	/*
 	 * FIXME: we should do this on a per class basis perhaps.
 	 */
-
 	pspecs = g_object_class_list_properties (G_OBJECT_GET_CLASS (object), &nargs);
 
 	if (!nargs) {

@@ -273,7 +273,7 @@ bonobo_stream_client_read (const Bonobo_Stream stream,
 	if (length == -1) {
 		length = bonobo_stream_client_get_length (stream, ev);
 		if (BONOBO_EX (ev) || length == -1) {
-			g_warning ("Exception getting length / FIXME: print "
+			g_warning ("Exception getting length / FIXME: the print "
 				   "stream doesn't support length determination");
 			return NULL;
 		}

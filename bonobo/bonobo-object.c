@@ -706,7 +706,7 @@ do_corba_setup (BonoboObject      *object,
 		}
 	}
 
-	/* FIXME: Wierdness I don't understand */
+	/* Activate - but we don't need the ObjectId */
 	CORBA_free (PortableServer_POA_activate_object (
 		bonobo_poa (), &object->servant, &ev));
 

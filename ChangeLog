@@ -1,3 +1,26 @@
+2001-10-17  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-persist-stream.c (impl_save),
+	(impl_load): update sigs to kill warnings.
+
+	* bonobo/bonobo-types.c
+	(bonobo_value_get_corba_exception): return as const,
+	you can't copy CORBA_Environments in a nice way.
+
+	* bonobo/bonobo-moniker-util.c
+	(bonobo_moniker_util_qi_return): fix theoretical
+	uninit retval bug. and don't redundantly duplicate the
+	returned CORBA_Object.
+
+	* bonobo/bonobo-exception.c
+	(bonobo_exception_general_error_set): impl.
+
+	* tests/test-object.c (main): regression test it.
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_client_add_listener_full): release
+	the CORBA ref on the event source not just the bonobo one.
+
 2001-10-13  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-moniker-util.c: kill all the ENABLE_ORBIT2 bits.

@@ -368,16 +368,13 @@ bonobo_value_get_corba_typecode (const GValue *value)
 	return (CORBA_TypeCode) CORBA_Object_duplicate (value->data[0].v_pointer, NULL);
 }
 
-CORBA_Environment *
+const CORBA_Environment *
 bonobo_value_get_corba_exception (const GValue *value)
 {
 	g_return_val_if_fail (
 		BONOBO_VALUE_HOLDS_CORBA_EXCEPTION (value),
 		NULL);
 
-	g_warning ("Broken codepath");
-	/* We need to dup this - and allocate a CORBA_Environment *ev */
-	/* FIXME: this is _UTTERLY_ broken */
 	return value->data[0].v_pointer;
 }
 

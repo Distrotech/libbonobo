@@ -21,21 +21,22 @@ static BonoboPersistClass *bonobo_persist_stream_parent_class;
 
 static void
 impl_load (PortableServer_Servant servant,
-	   Bonobo_Stream stream,
-	   Bonobo_Persist_ContentType type,
-	   CORBA_Environment *ev)
+	   Bonobo_Stream          stream,
+	   const CORBA_char      *type,
+	   CORBA_Environment     *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboPersistStream *ps = BONOBO_PERSIST_STREAM (object);
 	
 	if (ps->load_fn != NULL)
-		(*ps->load_fn)(ps, stream, type, ps->closure, ev);
+		(*ps->load_fn)(ps, stream, (Bonobo_Persist_ContentType) type,
+			       ps->closure, ev);
 	else {
 		GObjectClass *oc = G_OBJECT_GET_CLASS (ps);
 		BonoboPersistStreamClass *class = BONOBO_PERSIST_STREAM_CLASS (oc);
 
 		if (class->load)
-			(*class->load)(ps, stream, type, ev);
+			(*class->load)(ps, stream, (Bonobo_Persist_ContentType) type, ev);
 		else
 			CORBA_exception_set (
 				ev, CORBA_USER_EXCEPTION,
@@ -45,21 +46,21 @@ impl_load (PortableServer_Servant servant,
 
 static void
 impl_save (PortableServer_Servant servant,
-	   Bonobo_Stream stream,
-	   Bonobo_Persist_ContentType type,
-	   CORBA_Environment *ev)
+	   Bonobo_Stream          stream,
+	   const CORBA_char      *type,
+	   CORBA_Environment     *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboPersistStream *ps = BONOBO_PERSIST_STREAM (object);
 	
 	if (ps->save_fn != NULL)
-		(*ps->save_fn)(ps, stream, type, ps->closure, ev);
+		(*ps->save_fn)(ps, stream, (Bonobo_Persist_ContentType) type, ps->closure, ev);
 	else {
 		GObjectClass *oc = G_OBJECT_GET_CLASS (ps);
 		BonoboPersistStreamClass *class = BONOBO_PERSIST_STREAM_CLASS (oc);
 
 		if (class->save)
-			(*class->save)(ps, stream, type, ev);
+			(*class->save)(ps, stream, (Bonobo_Persist_ContentType) type, ev);
 		else
 			CORBA_exception_set (
 				ev, CORBA_USER_EXCEPTION,
@@ -94,8 +95,8 @@ bonobo_persist_stream_class_init (BonoboPersistStreamClass *klass)
 
 	persist_class->get_content_types = get_content_types;
 
-	epv->load       = impl_load;
-	epv->save       = impl_save;
+	epv->load   = impl_load;
+	epv->save   = impl_save;
 }
 
 static void

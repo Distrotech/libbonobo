@@ -1,6 +1,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <libbonobo.h>
 #include <orbit/poa/poa.h>
 
@@ -81,6 +82,15 @@ main (int argc, char *argv [])
 	g_assert (ret_ex_test (ev));
 
 	CORBA_exception_free (ev);
+
+	fprintf (stderr, "General error tests...\n");
+
+	bonobo_exception_general_error_set (
+		ev, NULL, "a%s exception occured", "n exceptional");
+	g_assert (BONOBO_EX (ev));
+	g_assert (!strcmp (BONOBO_EX_REPOID (ev), ex_Bonobo_GeneralError));
+	g_assert (!strcmp (bonobo_exception_get_text (ev),
+			   "an exceptional exception occured"));
 
 	fprintf (stderr, "All tests passed\n");
 

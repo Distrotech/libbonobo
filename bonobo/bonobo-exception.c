@@ -308,11 +308,45 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 
 void
 bonobo_exception_general_error_set (CORBA_Environment *ev,
-				    CORBA_TypeCode    *opt_deriv,
+				    CORBA_TypeCode     opt_deriv,
 				    const char        *format,
 				    ...)
 {
-	/* FIXME: sets an exception - opt_deriv would be the typecode
-	   of an optionaly derived exception type from GeneralError */
-	g_warning ("Stubbed ....");
+	va_list              args;
+	Bonobo_GeneralError *err;
+	char                *str;
+	CORBA_TypeCode       type;
+
+	va_start (args, format);
+
+	str = g_strdup_vprintf (format, args);
+
+	va_end (args);
+
+	if (opt_deriv)
+		type = opt_deriv;
+	else
+		type = TC_Bonobo_GeneralError;
+
+	err = ORBit_small_alloc (type);
+	err->description = CORBA_string_dup (str);
+
+	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+			     ex_Bonobo_GeneralError, err);
+}
+
+const char *
+bonobo_exception_general_error_get (CORBA_Environment *ev)
+{
+	Bonobo_GeneralError *gerr;
+
+	if (!BONOBO_EX (ev))
+		return NULL;
+
+	if (strcmp (BONOBO_EX_REPOID (ev), ex_Bonobo_GeneralError))
+		return NULL;
+
+	gerr = CORBA_exception_value (ev);
+
+	return gerr->description;
 }

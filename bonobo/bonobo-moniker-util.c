@@ -247,8 +247,10 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 	retval = Bonobo_Unknown_queryInterface (
 		object, requested_interface, ev);
 
-	if (BONOBO_EX (ev))
+	if (BONOBO_EX (ev)) {
+		retval = CORBA_OBJECT_NIL;
 		goto release_unref_object;
+	}
 	
 	if (retval == CORBA_OBJECT_NIL) {
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -259,11 +261,7 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
  release_unref_object:	
 	bonobo_object_release_unref (object, ev);
 
-	/* FIXME: this CORBA_Object_duplicate looks broken to me */
-	if (retval != CORBA_OBJECT_NIL)
-		return CORBA_Object_duplicate (retval, ev);
-	else
-		return CORBA_OBJECT_NIL;
+	return retval;
 }
 
 /**
