@@ -1,3 +1,9 @@
+1999-06-03  Richard Hestilow  <hestgray@ionet.net>
+	
+	* bonobo/gnome-bonobo-selector.[ch]: Updated to use the new private
+	fields - didn't bother leaving compat fields in though, as nothing
+	uses this code yet :-)
+
 1999-06-02  Nat Friedman  <nat@gnome-support.com>
 
 	* components/image-x-png/doc/C/image_x_png.sgml: Rewrote the
