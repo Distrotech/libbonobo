@@ -1,3 +1,10 @@
+2005-02-02  Hans Petter Jansson  <hpj@novell.com>
+
+	* configure.in: Add checks for Apple Darwin's way of getting
+	the environment from within a shared library. The results of these
+	tests are already used in the code, but seemingly, the tests themselves
+	were never added.
+
 2005-02-02  Michael Meeks  <michael.meeks@novell.com>
 
 	* README: update a little.
