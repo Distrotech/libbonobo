@@ -53,21 +53,14 @@ module Bonobo {
         typedef sequence<ObjectDirectory> ObjectDirectoryList;
 
         interface ActivationContext : Bonobo::Unknown {
-                exception NotListed {};
-                exception AlreadyListed {};
-                exception IncompleteContext {};
-                exception ParseFailed { 
-                        string description; 
-                };
-
                 readonly attribute ObjectDirectoryList directories;
-                void add_directory (in ObjectDirectory dir) raises (AlreadyListed);
-                void remove_directory (in ObjectDirectory dir) raises (NotListed);
+                void add_directory (in ObjectDirectory dir) raises (Bonobo::Activation::AlreadyListed);
+                void remove_directory (in ObjectDirectory dir) raises (Bonobo::Activation::NotListed);
 
                 ActivationResult activate (in string requirements,
                                            in Bonobo::StringList selection_order,
                                            in ActivationFlags flags)
-                        raises (ParseFailed, IncompleteContext, GeneralError)
+                        raises (Bonobo::Activation::ParseFailed, Bonobo::Activation::IncompleteContext, Bonobo::GeneralError)
                         context ("username", "hostname", "domain", "display");
 
                 oneway void activate_async (in string requirements,
@@ -81,11 +74,11 @@ module Bonobo {
                 readonly attribute ServerInfoList servers;
                 ServerInfoList query (in string requirements,
                                       in Bonobo::StringList selection_order)
-                        raises (ParseFailed, IncompleteContext)
+                        raises (Bonobo::Activation::ParseFailed, Bonobo::Activation::IncompleteContext)
                         context ("username", "hostname", "domain");
 
                 ActivationResult activate_from_id (in ActivationID aid, in ActivationFlags flags)
-                        raises (ParseFailed, IncompleteContext, GeneralError)
+                        raises (Bonobo::Activation::ParseFailed, Bonobo::Activation::IncompleteContext, Bonobo::GeneralError)
                         context ("username", "hostname", "domain", "display");
 
                 oneway void activate_from_id_async (in ActivationID aid, 

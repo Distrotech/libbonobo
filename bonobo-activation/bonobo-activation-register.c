@@ -25,10 +25,10 @@
 
 #include <config.h>
 #include <bonobo-activation/bonobo-activation-register.h>
-
-#include <bonobo-activation/Bonobo_ActivationContext.h>
-#include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/bonobo-activation-private.h>
+#include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/Bonobo_ObjectDirectory.h>
+
 #include <stdio.h>
 #include <unistd.h>
 

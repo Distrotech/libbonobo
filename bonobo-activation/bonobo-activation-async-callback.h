@@ -27,6 +27,7 @@
 #define BONOBO_ACTIVATION_ASYNC_CORBA_H
 
 #include <bonobo-activation/bonobo-activation-async.h>
+#include <bonobo-activation/Bonobo_Activation_types.h>
 
 CORBA_Object 
 bonobo_activation_async_corba_callback_new (BonoboActivationCallback callback,

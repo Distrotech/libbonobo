@@ -21,6 +21,15 @@ module Bonobo {
                 string description; 
         };
 
+        module Activation {
+                exception NotListed {};
+                exception AlreadyListed {};
+                exception IncompleteContext {};
+                exception ParseFailed { 
+                        string description; 
+                };
+        };
+
         typedef string ImplementationID;
         typedef string ActivationID;
 

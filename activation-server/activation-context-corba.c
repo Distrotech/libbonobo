@@ -194,7 +194,7 @@ ac_CORBA_Context_get_value (CORBA_Context         ctx,
 {
         return activation_server_CORBA_Context_get_value (
                 ctx, propname,
-                ex_Bonobo_ActivationContext_IncompleteContext, ev);
+                ex_Bonobo_Activation_IncompleteContext, ev);
 }
 
 
@@ -312,7 +312,7 @@ ac_query_run (impl_POA_Bonobo_ActivationContext * servant,
 	Bonobo_ServerInfo **orig_items;
 	int item_count, orig_item_count;
 	char *errstr;
-	Bonobo_ActivationContext_ParseFailed *ex;
+	Bonobo_Activation_ParseFailed *ex;
 
 	QueryExpr *qexp_requirements;
 	QueryExpr **qexp_sort_items;
@@ -323,10 +323,10 @@ ac_query_run (impl_POA_Bonobo_ActivationContext * servant,
 		puts (errstr);
 
 		g_strstrip (errstr);
-		ex = Bonobo_ActivationContext_ParseFailed__alloc ();
+		ex = Bonobo_Activation_ParseFailed__alloc ();
 		ex->description = CORBA_string_dup (errstr);
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_Bonobo_ActivationContext_ParseFailed,
+				     ex_Bonobo_Activation_ParseFailed,
 				     ex);
 		return;
 	}
@@ -344,11 +344,11 @@ ac_query_run (impl_POA_Bonobo_ActivationContext * servant,
 				qexp_free (qexp_sort_items[i]);
 
 			g_strstrip (errstr);
-			ex = Bonobo_ActivationContext_ParseFailed__alloc ();
+			ex = Bonobo_Activation_ParseFailed__alloc ();
 			ex->description = CORBA_string_dup (errstr);
 
 			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-					     ex_Bonobo_ActivationContext_ParseFailed,
+					     ex_Bonobo_Activation_ParseFailed,
 					     ex);
 			return;
 		}
@@ -446,7 +446,7 @@ impl_Bonobo_ActivationContext_add_directory (PortableServer_Servant _servant,
 		child = cur->data;
 		if (CORBA_Object_is_equivalent (dir, child->obj, ev)) {
 			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-					     ex_Bonobo_ActivationContext_AlreadyListed,
+					     ex_Bonobo_Activation_AlreadyListed,
 					     NULL);
 			return;
 		}
@@ -484,7 +484,7 @@ impl_Bonobo_ActivationContext_remove_directory (PortableServer_Servant _servant,
 
 	if (!cur)
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_Bonobo_ActivationContext_NotListed,
+				     ex_Bonobo_Activation_NotListed,
 				     NULL);
 }
 

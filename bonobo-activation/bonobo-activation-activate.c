@@ -26,12 +26,13 @@
 #include <config.h>
 #include <bonobo-activation/bonobo-activation-activate.h>
 
-#include <bonobo-activation/Bonobo_ActivationContext.h>
 #include <bonobo-activation/bonobo-activation-activate-private.h>
 #include <bonobo-activation/bonobo-activation-id.h>
 #include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/bonobo-activation-private.h>
 #include <bonobo-activation/bonobo-activation-shlib.h>
+#include <bonobo-activation/Bonobo_ActivationContext.h>
+
 #include <string.h>
 
 static gboolean test_components_enabled = FALSE;
