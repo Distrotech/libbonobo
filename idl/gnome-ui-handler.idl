@@ -13,6 +13,9 @@
 
 module GNOME {
 
+	/* Forward declaration. */
+	interface Control;
+
        	interface UIHandler : GNOME::Unknown {
 		typedef sequence<string> StringSeq;
 		typedef sequence<octet> iobuf;
