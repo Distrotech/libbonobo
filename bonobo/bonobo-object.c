@@ -157,13 +157,14 @@ gnome_object_unref (GnomeObject *object)
 void
 gnome_object_destroy (GnomeObject *object)
 {
-	GnomeAggregateObject *ao = object->priv->ao;
+	GnomeAggregateObject *ao;
 	GList *l;
 	
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
+	ao = object->priv->ao;
 		
 	for (l = ao->objs; l; l = l->next){
 		GnomeObject *o = l->data;

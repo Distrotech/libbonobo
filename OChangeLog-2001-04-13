@@ -1,3 +1,8 @@
+1999-08-27  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-object.c (gnome_object_destroy): Move use of pointer
+	to after pre-condition.
+
 1999-08-24  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-bonobo-widget.c: Just a start.  Written during
