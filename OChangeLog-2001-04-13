@@ -1,3 +1,8 @@
+2001-03-21  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/Makefile.am: replace $(gnome_libs) with $(GNOME_LIBS),
+	this is a mistake caught by the newer pickier automake
+
 2001-03-20  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-event-source.c
