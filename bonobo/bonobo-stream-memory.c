@@ -76,10 +76,11 @@ mem_read (GnomeStream *stream, long count,
 		count = smem->size - smem->pos;
 	    
 	*buffer = GNOME_Stream_iobuf__alloc ();
+	CORBA_sequence_set_release (*buffer, TRUE);
 	(*buffer)->_buffer = CORBA_sequence_CORBA_octet_allocbuf (count);
-	(*buffer)->length = count;
+	(*buffer)->_length = count;
 	
-	memcpy (*buffer->_buffer, smem->buffer, count);
+	memcpy ((*buffer)->_buffer, smem->buffer, count);
 
 	smem->pos += count;
 	
