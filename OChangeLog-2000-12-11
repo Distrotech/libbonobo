@@ -1,3 +1,24 @@
+2000-10-12  Andy Hertzfeld <andy@eazel.com>
+
+	more changes to the toolbar to make it handle single items better
+	and to allow items that are right justified.
+	
+	* bonobo/bonobo-ui-toolbar-item.c:
+	(bonobo_ui_toolbar_item_get_pack_end): implemented attribute accessor
+	(bonobo_ui_toolbar_item_set_pack_end): implemented attribute setter
+	* bonobo/bonobo-ui-toolbar-item:h:
+	added new pack_end attribute.
+	* bonobo/bonobo-win.c: (toolbar_sync_state):
+	integrated "pack-end" attribute into xml framework
+	* bonobo/bonobo-ui-toolbar.c: 
+	(create_popup_window): ignore pack_end items,
+	(hide_not_fitting_items): ignore pack_end items,
+	(size_allocate_helper):
+	special case the handling of toolbars with single items, so they are
+	given all the available space if they are expandable and they are
+	never put into the pop-up area.  Also, layout the pack-end items
+	first on the right/bottom of the toolbar.
+	
 2000-10-12  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-zoomable-frame.c: Implemented all missing
