@@ -442,7 +442,7 @@ bonobo_transient_destroy (GtkObject *object)
 
 		/* Destroy the POA. */
 		CORBA_exception_init (&ev);
-		PortableServer_POA_destroy (transient->priv->poa, TRUE, TRUE, &ev);
+		PortableServer_POA_destroy (transient->priv->poa, FALSE, TRUE, &ev);
 
 		if (BONOBO_EX (&ev))
 			g_warning ("bonobo_transient_destroy: Could not destroy POA.");
