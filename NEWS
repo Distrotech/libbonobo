@@ -1,12 +1,54 @@
 Bonobo 0.29
 
-	* X / CORBA synchronisation issues fixed (Me)
+	* Evil bugs
+		* X / CORBA synchronisation issues fixed (Me)
+		* Property bag / transient memory leaks fixed (Federico)
+		* Toolbar widget leak (Darin Alder)
+		* Lots of misc leaks nailed (Morten)
+		* Bonobo plug / socket race condition nailed (Me)
+		* XML transparent node merging bug nailed (Darin)
 
-	* Generic Listener interface re-written (Alex Graveley)
+	* Storage stuff
+		* Local FS Stream / Storage impl. completed (Dietmar)
+		* Efs stream / storage polished up (Dietmar)
+		* VFS storage cleans (Me)
+		* Bonobo IO plugins version fixage (Dietmar)
+		* Storage module cleans, and regression testing (Dietmar)
 
-	* Local FS Stream / Storage impl. completed (Dietmar)
+	* Monikers
+		* Asynchronous moniker resolution (untested) (Me)
+		* Bonobo widget switched to use monikers (Me)
+		* Bonobo contexts - moniker context (Me)
+		* tar moniker (Vladimir Vukicevic)
+		* http, gunzip monikers (Joe Shaw)
+		* moniker test code (Joe Shaw)
 
-	* Efs stream / storage polished up (Dietmar)
+	* New transient CORBA object helper (Miguel)
+
+	* UI stuff
+		* Alpha composited icons (for pixmap themes) (Cody Russell)
+		* Control desired size querying (Martin)
+		* Completed toolbar item 'look' markup (John Sullivan)
+		* pixmap location code flexed (Martin)
+		* placeholder can hide all its contents (Darin)
+		* UI signaling race conditions nailed (Darin, Me)
+		* Helpers for removing dead UI components (Maciej)
+
+	* Misc
+		* CORBA_any * <-> XML serialization (Me)
+		* generic listener / event interface re-written (Alex Graveley)
+		* listener fixes (Iain Holmes)
+		* BonoboPropertyControl implemented & honed (Iain)
+		* Make each IDL file parse individualy (Mathieu Lacage)
+
+	* Embeddable factory bug flattened (Mike Kestner)
+
+	* Docs
+		* API build cleanups (Zach Frey)
+		* Lots of API doc writing / organising (Miguel)
+		* doc/NAMESPACE added to start namespacing IDL (Me)
+
+	* Lots of bugs fixed.
 
 Bonobo 0.28
 

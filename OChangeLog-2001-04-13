@@ -1,3 +1,7 @@
+2000-12-10  Michael Meeks  <michael@helixcode.com>
+
+	* NEWS: marathon update.
+
 2000-12-09  Michael Meeks  <michael@helixcode.com>
 
 	* idl/Makefile.am (idl_DATA): add bonobo-context.idl
