@@ -1,3 +1,10 @@
+2000-09-22  Havoc Pennington  <hp@pobox.com>
+
+	* bonobo/bonobo-ui-node.h, bonobo/bonobo-ui-node.c: I forgot to
+	use -N in the patch to Michael, so here are the new files; unused
+	for now. These are BonoboUINode which is an abstraction for nodes
+	representing UI elements.
+
 2000-09-21  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/Makefile.am (std_moniker_SOURCES): add new.
