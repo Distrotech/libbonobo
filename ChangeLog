@@ -1,5 +1,9 @@
 2001-11-19  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-types.h: include glib-object.h
+
+	* libbonobo.h: include bonobo-types.h
+
 	* bonobo/Makefile.am: don't install the bonobo
 	marshallers - new glib policy.
 
