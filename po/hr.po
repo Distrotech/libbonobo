@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 0\n"
-"POT-Creation-Date: 2004-03-08 11:00+0000\n"
-"PO-Revision-Date: 2004-02-05 23:50+CET\n"
+"POT-Creation-Date: 2004-03-13 13:11+0100\n"
+"PO-Revision-Date: 2004-03-13 13:11+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
@@ -31,8 +31,7 @@ msgstr "DIREKTORIJ"
 
 #: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr ""
-"Poslužuje kao ActivationContext (uobičajeno je samo kako ObjectDirectory)"
+msgstr "Poslužuje kao ActivationContext (uobičajeno je samo kako ObjectDirectory)"
 
 #: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
@@ -69,24 +68,20 @@ msgstr "Servis obavješćivanja za pokretanje"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Još ne upravljamo pokretanjem shlib objektima na udeljanim procesima"
+msgstr "Još ne upravljamo pokretanjem shlib objektima na udaljenim procesima"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr ""
-"Datoteka s postavkama za pokretanje Bonobo-a nije uspješno pročitana. Molim, "
-"provjerite da li je ispravna u: %s"
+msgstr "Datoteka s postavkama za pokretanje Bonobo-a nije uspješno pročitana. Molim, provjerite da li je ispravna u: %s"
 
-#.
 #. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
+#.  * factory, you need to ensure you register the object you were activated
+#.  * for [use const char *bonobo_activation_iid_get (void); ] is registered
+#.  * with bonobo_activation_active_server_register - _after_ any other
+#.  * servers are registered.
 #: activation-server/object-directory-corba.c:1167
 #, c-format
 msgid "Race condition activating server '%s'"
@@ -128,8 +123,7 @@ msgstr "Pokušavam mapu %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr ""
-"Nasljedni proces nije dao poruku s greškom, dogodila se nepoznata greška"
+msgstr "Nasljedni proces nije dao poruku s greškom, dogodila se nepoznata greška"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
@@ -299,7 +293,7 @@ msgstr "ne postoji zahtijevani UI atribut"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "Nepoznara naredba ili djelatnost"
+msgstr "Nepoznata naredba ili djelatnost"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
@@ -307,7 +301,7 @@ msgstr "Naredba ne razlikuje mala i velika slova"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
-msgstr "nesipravna vrsta podataka"
+msgstr "neispravna vrsta podataka"
 
 #: bonobo/bonobo-exception.c:229
 msgid "stream not found"
@@ -491,3 +485,4 @@ msgstr "Prikazuje mape u datoteci s postavkama"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Prikazuje putanje u datoteci s postavkama"
+
