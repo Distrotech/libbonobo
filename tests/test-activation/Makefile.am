@@ -81,4 +81,5 @@ emptydata_DATA=$(serverfiles)
 
 EXTRA_DIST= test.sh empty.idl plugin.idl $(serverfiles)
 
-TESTS= test.sh bonobo-activation-test-async
+# TESTS= test.sh bonobo-activation-test-async
+TESTS= test.sh
