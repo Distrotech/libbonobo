@@ -1,18 +1,22 @@
+# translation of nn.po to Norwegian (nynorsk)
 # Norwegian translation of libbonobo (nynorsk dialect).
-# Copyright (C) 1999-2002 Free Software Foundation, Inc.
+# Copyright (C) 1999-2002, 2003 Free Software Foundation, Inc.
 # Kjartan Maraas <kmaraas@gnome.org>, 2001.
 # Roy-Magne Mo <rmo@sunnmore.net>, 2002.
+# Åsmund Skjæveland <aasmunds@fys.uio.no>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 1.107.0\n"
-"POT-Creation-Date: 2003-08-26 14:07+0100\n"
-"PO-Revision-Date: 2001-09-26 08:36+0200\n"
-"Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
-"Language-Team: nynorsk <nn@li.org>\n"
+"Project-Id-Version: nn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-06 13:56+0200\n"
+"PO-Revision-Date: 2003-10-06 14:06+0200\n"
+"Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
+"Language-Team: Norwegian (nynorsk) <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
@@ -20,7 +24,7 @@ msgstr "Kunne ikkje finne kva barn tenarar var oppført i"
 
 #: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
-msgstr ""
+msgstr "Ikkje eit gyldig aktiviserings-ID"
 
 #: activation-server/activation-server-main.c:66
 msgid "Directory to read .server files from"
@@ -64,13 +68,13 @@ msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Vi handterar ikkje avtivering av shlib-objekt i ein fjernprosess enno"
 
 #: activation-server/object-directory-config-file.c:47
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"Bonobo Activation-konfigurasjonsfila vart ikkje skikkeleg lest. Sjekk at den "
-"er gyldig i: %s"
+"Bonobo Activation-konfigurasjonsfila vart ikkje skikkeleg lest. "
+"Sjå etter at ho er gyldig i: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -80,9 +84,9 @@ msgstr ""
 #. * servers are registered.
 #.
 #: activation-server/object-directory-corba.c:890
-#, fuzzy, c-format
+#, c-format
 msgid "Race condition activating server '%s'"
-msgstr "Unntak ved aktivering «%s»"
+msgstr "«Race condition» under aktivering av tenaren «%s»"
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
@@ -143,7 +147,7 @@ msgstr "Klarte ikkje å køyre %s: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr ""
+msgstr "For mange alias-nivå for eit locale. Dette kan tyda på ei løkke"
 
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
@@ -184,11 +188,11 @@ msgstr "Shlib «%s» innheldt ikkje «%s»"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Eigendefinert CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -340,14 +344,14 @@ msgid "Failed to activate object"
 msgstr "Klarter ikkje å aktivere objekt"
 
 #: monikers/bonobo-moniker-oaf.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Exception activating '%s'"
-msgstr "Unntak ved aktivering «%s»"
+msgstr "Unntak ved aktivering av «%s»"
 
 #: monikers/bonobo-moniker-oaf.c:62
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to activate '%s'"
-msgstr "Klarte ikkje å aktivere «%s»"
+msgstr "Klarte ikkje å aktivera «%s»"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -495,3 +499,4 @@ msgstr "Vis sti til oppsettsfil"
 #, fuzzy
 #~ msgid "OAF options"
 #~ msgstr "Val"
+
