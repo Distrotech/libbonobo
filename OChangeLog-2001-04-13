@@ -1,3 +1,8 @@
+2000-12-20  Richard Hult  <rhult@hem.passagen.se>
+
+	* bonobo/bonobo-running-context.c (bonobo_running_context_get_type): 
+	fix to use the correct structure size.
+
 2000-12-20  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/bonobo-moniker-extender-file.c (extender_destroy_cb): 

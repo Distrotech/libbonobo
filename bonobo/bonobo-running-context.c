@@ -250,7 +250,7 @@ bonobo_running_context_get_type (void)
                 GtkTypeInfo info = {
                         "BonoboRunningContext",
                         sizeof (BonoboRunningContext),
-                        sizeof (BonoboObjectClass),
+                        sizeof (BonoboRunningContextClass),
                         (GtkClassInitFunc) bonobo_running_context_class_init,
                         (GtkObjectInitFunc) NULL,
                         NULL, /* reserved 1 */
