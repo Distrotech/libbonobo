@@ -17,3 +17,6 @@ CLEANFILES=empty_built
 INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\" \
 	@ORBIT_CFLAGS@ @XML_CFLAGS@ @GLIB_CFLAGS@
 LDADD=../liboaf/liboaf.la @ORBIT_LIBS@ @GLIB_LIBS@
+
+emptydatadir=$(datadir)/oaf
+emptydata_DATA=empty.oafinfo
