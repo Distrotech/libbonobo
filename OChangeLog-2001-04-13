@@ -1,6 +1,16 @@
-2001-02-14  Michael Engber  <engber@eazel.com>
+2001-02-15  Michael Meeks  <michael@ximian.com>
 
-	reviewed by: Darin Adler <darin@eazel.com>
+	* Version 0.37
+
+2001-02-15  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-xobject.c (do_corba_hacks): setup the 
+	servant flag.
+	(bonobo_x_object): impl.
+	(setup_type): publicise as
+	(bonobo_x_type_setup): this.
+
+2001-02-14  Michael Engber  <engber@eazel.com>
 
 	* bonobo/bonobo-zoomable.c:
 	(impl_Bonobo_Zoomable__get_preferredLevels),
@@ -19,9 +29,6 @@
 	(bonobo_zoomable_report_zoom_level_changed),
 	(bonobo_zoomable_report_zoom_parameters_changed):
 	Removed redundant NULL tests.
-
-
-
 
 2001-02-14  Michael Meeks  <michael@ximian.com>
 
@@ -103,6 +110,7 @@
 	which match a single underscore (old code would match empty string).
 
 2001-02-09  Cody Russell  <bratsche@gnome.org>
+
 	* bonobo/bonobo-ui-engine-config.c: Remove the Cancel button.
 	Since this dialog makes changes in real time, this button serves
 	no purpose.
