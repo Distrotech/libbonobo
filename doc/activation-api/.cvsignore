@@ -4,7 +4,7 @@ html
 Makefile
 Makefile.in
 liboaf.hml
-liboaf-unused.txt
-liboaf-undocumented.txt
-tmpl/liboaf-unused.sgml
+bonobo-activation-unused.txt
+bonobo-activation-undocumented.txt
+tmpl/bonobo-activation-unused.sgml
 *.stamp

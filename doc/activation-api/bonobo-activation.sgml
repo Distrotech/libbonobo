@@ -8,7 +8,7 @@
 <!entity configuring SYSTEM "configuring.sgml">
 <!entity query-langage SYSTEM "query-langage.sgml">
 <!entity architecture SYSTEM "architecture.sgml">
-<!entity oafinfo-ref SYSTEM "oafinfo-ref.sgml">
+<!entity server-xml-reference SYSTEM "server-xml-reference.sgml">
 <!entity tutorial SYSTEM "tutorial.sgml">
 <!entity migrating SYSTEM "migrating.sgml">
 <!entity FDL SYSTEM "fdl.sgml">
@@ -56,7 +56,7 @@
 
   &architecture;
   &query-langage;
-  &oafinfo-ref;
+  &server-xml-reference;
   &migrating;
 
 

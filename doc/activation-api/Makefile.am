@@ -1,15 +1,15 @@
 NULL=
 
 # The name of the module.
-DOC_MODULE=liboaf
+DOC_MODULE=bonobo-activation
 
 # The top-level SGML file.
-DOC_MAIN_SGML_FILE=liboaf.sgml
+DOC_MAIN_SGML_FILE=bonobo-activation.sgml
 
 # The directory containing the source code (if it contains documentation).
-DOC_SOURCE_DIR=$(top_srcdir)/liboaf
+DOC_SOURCE_DIR=$(top_srcdir)/bonobo-activation
 
-HTML_DIR=$(datadir)/oaf/html
+HTML_DIR=$(datadir)/bonobo-activation/html
 
 TARGET_DIR=$(HTML_DIR)/$(DOC_MODULE)
 
@@ -23,9 +23,9 @@ tmpl_sources =				\
 
 
 if ENABLE_GTK_DOC
-liboaf_docdir = $(HTML_DIR)
-liboaf_doc_DATA =			\
-	liboaf.html			\
+bonobo_activation_docdir = $(HTML_DIR)
+bonobo_activation_doc_DATA =		\
+	bonobo-activation.html		\
 	$(NULL)
 endif
 
@@ -33,23 +33,23 @@ endif
 my_sgml_files = 			\
 	tutorial.sgml			\
 	migrating.sgml			\
-	oafinfo-ref.sgml		\
+	server-xml-reference.sgml	\
 	configuring.sgml		\
 	query-langage.sgml		\
 	architecture.sgml		\
-	liboaf.sgml			\
+	bonobo-activation.sgml		\
 	fdl.sgml			\
 	$(NULL)
 
-EXTRA_DIST = 			\
-	$(my_sgml_files)	\
-	oaf.png			\
-	liboaf-decl.txt		\
-	liboaf-sections.txt	\
+EXTRA_DIST = 				\
+	$(my_sgml_files)		\
+	bonobo-activation.png		\
+	bonobo-activation-decl.txt	\
+	bonobo-activation-sections.txt	\
 	$(NULL)
 
 if ENABLE_GTK_DOC
-liboaf.html:
+bonobo-activation.html:
 	if test ! -d $(top_builddir)/api-docs/tmpl; then			\
 		mkdir $(top_builddir)/api-docs/tmpl; 				\
 		cp $(srcdir)/tmpl/*.sgml $(top_builddir)/api-docs/tmpl/; 	\
@@ -63,11 +63,11 @@ liboaf.html:
 	-cd $(top_builddir)/api-docs/html && \
 	gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MAIN_SGML_FILE)
 	-cd $(top_builddir)/api-docs/ && \
-	cp $(srcdir)/oaf.png $(top_builddir)/api-docs/html
+	cp $(srcdir)/bonobo-activation.png $(top_builddir)/api-docs/html
 
 else
 
-liboaf.html:
+bonobo-activation.html:
 
 endif
 
