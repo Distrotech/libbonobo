@@ -798,7 +798,8 @@ qexp_evaluate_id(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 		       for now. */
 		    /* retval.needs_free = TRUE; */
 
-		    retval.u.v_stringv = g_malloc(av->_u.value_stringv._length + 1);
+		    retval.u.v_stringv = g_malloc(sizeof (char *) *
+						  (av->_u.value_stringv._length + 1));
 		    for (i = 0; i < av->_u.value_stringv._length; i++)
 		      retval.u.v_stringv[i] = g_strdup(av->_u.value_stringv._buffer[i]);
 		    retval.u.v_stringv[i] = NULL;
