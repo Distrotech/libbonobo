@@ -12,7 +12,6 @@
 
 /* These are for the Moniker activation */
 #include <bonobo/bonobo-stream.h>
-#include <bonobo/bonobo-stream-fs.h>
 #include "bonobo-object-directory.h"
 
 static BonoboObjectClass *bonobo_object_client_parent_class;
