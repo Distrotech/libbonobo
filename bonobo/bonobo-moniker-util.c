@@ -9,6 +9,7 @@
  */
 
 #include "bonobo.h"
+#include <liboaf/liboaf.h>
 #include "bonobo-object-directory.h"
 
 struct {
@@ -27,7 +28,7 @@ struct {
 	{ NULL, NULL }
 };
 
-static const char *
+static char *
 moniker_id_from_nickname (const CORBA_char *name)
 {
 	int i;
@@ -40,11 +41,6 @@ moniker_id_from_nickname (const CORBA_char *name)
 			return fast_prefix [i].oafiid;
 		}
 	}
-
-	/*
-	 * Ok; so now we do a sluggish oaf query.
-	 */
-	g_warning ("FIXME: Unknown moniker prefix '%s' do oaf query here", name);
 
 	return NULL;
 }
@@ -61,29 +57,48 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 	g_return_val_if_fail (ev != NULL, NULL);
 	g_return_val_if_fail (name != NULL, NULL);
 
+	if (name [0] == '#')
+		name++;
+
 	iid = moniker_id_from_nickname (name);
 
-	if (!iid) {
-		/* FIXME: we want to check for '!', '#' etc. here */
-	}
+	if (!iid) { /* Do an oaf-query for a handler */
+		char *prefix, *query;
+		int   len;
 
-	if (!iid) {
-		/*
-		 * FIXME: It'd be nice to return a string in the exception
-		 * saying at what point parsing barfed.
-		 */
-		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_Bonobo_Moniker_UnknownPrefix, NULL);
-		return CORBA_OBJECT_NIL;
-	}
+		for (len = 0; name [len]; len++) {
+			if (name [len] == ':')
+				break;
+		}
 
-	object = od_server_activate_with_id (iid, 0, ev);
-	if (ev->_major != CORBA_NO_EXCEPTION)
-		return CORBA_OBJECT_NIL;
+		prefix = g_strndup (name, len);
+		
+		query = g_strdup_printf (
+			"repo_ids.has ('IDL:Bonobo/Moniker:1.0') AND "
+			"bonobo:moniker == '%s'", prefix);
+		g_free (prefix);
+		
+		object = oaf_activate (query, NULL, 0, NULL, ev);
+		g_free (query);
+		
+		if (ev->_major != CORBA_NO_EXCEPTION)
+			return CORBA_OBJECT_NIL;
 
-	if (object == CORBA_OBJECT_NIL) {
-		g_warning ("Activating '%s' returned nothing", iid);
-		return CORBA_OBJECT_NIL;
+		if (object == CORBA_OBJECT_NIL) {
+			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+					     ex_Bonobo_Moniker_UnknownPrefix, NULL);
+			return CORBA_OBJECT_NIL;
+		}
+	} else {
+		object = od_server_activate_with_id (iid, 0, ev);
+
+		if (ev->_major != CORBA_NO_EXCEPTION)
+			return CORBA_OBJECT_NIL;
+		
+		if (object == CORBA_OBJECT_NIL) {
+			g_warning ("Activating '%s' returned nothing", iid);
+			return CORBA_OBJECT_NIL;
+		}
 	}
 
 	toplevel = Bonobo_Unknown_query_interface (
@@ -93,7 +108,8 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 		return CORBA_OBJECT_NIL;
 
 	if (object == CORBA_OBJECT_NIL) {
-		g_warning ("Moniker object '%s' doesn't implement the Moniker interface", iid);
+		g_warning ("Moniker object '%s' doesn't implement "
+			   "the Moniker interface", iid);
 		return CORBA_OBJECT_NIL;
 	}
 

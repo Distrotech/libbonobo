@@ -1,3 +1,13 @@
+2000-08-20  Michael Meeks  <michael@helixcode.com>
+
+	* doc/Monikers: Small changes.
+
+2000-08-13  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_new_from_name_full):
+	Advance the prefix scan if we begin with '#', add an oaf query to allow
+	generic '.*:' prefixes.
+
 2000-08-17  John Sullivan  <sullivan@eazel.com>
 
 	* bonobo/bonobo-uih-menu.c:
