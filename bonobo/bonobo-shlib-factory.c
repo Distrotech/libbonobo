@@ -173,7 +173,9 @@ bonobo_shlib_factory_finalize (GtkObject *object)
 	 *
 	 * This is achieved by an idle unref handler.
 	 */
-	oaf_plugin_unuse (c_factory->oaf_impl_ptr);
+
+	/* we dont unload it because of a problem with the gtk type system */
+	/* oaf_plugin_unuse (c_factory->oaf_impl_ptr); */
 
 	GTK_OBJECT_CLASS (bonobo_shlib_factory_parent_class)->finalize (object);
 }

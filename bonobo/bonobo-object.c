@@ -834,8 +834,7 @@ bonobo_track_shlib_objects (BonoboObject *object, gpointer shlib_id)
 		
 		if (BONOBO_IS_SHLIB_FACTORY (object)) {
 			if (g_hash_table_lookup (factory_hash, dli_fbase)) {
-				g_warning ("detected two factories in the "
-					   "same shared library");
+				/* two factories in the same shared library */
 				g_hash_table_remove (factory_hash, dli_fbase);
 			}
 			g_hash_table_insert (factory_hash, dli_fbase, object);
