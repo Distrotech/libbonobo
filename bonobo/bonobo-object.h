@@ -44,7 +44,7 @@ GnomeObject *gnome_object_from_servant     (PortableServer_Servant servant);
 void         gnome_object_bind_to_servant  (GnomeObject *object,
 					    void *servant);
 
-CORBA_Object gnome_object_activate_servant (GnomeObject *object
+CORBA_Object gnome_object_activate_servant (GnomeObject *object,
 					    void *servant);
 
 /* CORBA default vector methods we provide */
