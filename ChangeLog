@@ -1,5 +1,10 @@
 2001-04-18  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-main.c (bonobo_init): guard against double
+	initialization.
+
+2001-04-18  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-object.c (bonobo_object_destroy): remove
 	destroy_id fiddling.
 	(bonobo_object_usage_error): remove for now.

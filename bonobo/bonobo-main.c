@@ -30,8 +30,8 @@ CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;
 PortableServer_POAManager __bonobo_poa_manager = NULL;
 
-static guint              __bonobo_main_loop_level = 0;
-static GSList *           __bonobo_main_loops = NULL;
+static guint              bonobo_main_loop_level = 0;
+static GSList *           bonobo_main_loops = NULL;
 
 /**
  * bonobo_orb:
@@ -145,6 +145,12 @@ gboolean
 bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager manager)
 {
 	CORBA_Environment ev;
+	static int        inited = FALSE;
+
+	if (inited)
+		return TRUE;
+	else
+		inited = TRUE;
 
 	CORBA_exception_init (&ev);
 
@@ -286,20 +292,20 @@ bonobo_main (void)
 
 	bonobo_activate ();
 
-	__bonobo_main_loop_level++;
+	bonobo_main_loop_level++;
   
 	loop = g_main_new (TRUE);
-	__bonobo_main_loops = g_slist_prepend (__bonobo_main_loops, loop);
+	bonobo_main_loops = g_slist_prepend (bonobo_main_loops, loop);
 
-	if (g_main_is_running (__bonobo_main_loops->data)) {
+	if (g_main_is_running (bonobo_main_loops->data)) {
 		g_main_run (loop);
 	}
 
-	__bonobo_main_loops = g_slist_remove (__bonobo_main_loops, loop);
+	bonobo_main_loops = g_slist_remove (bonobo_main_loops, loop);
 
 	g_main_destroy (loop);
 
-	__bonobo_main_loop_level--;
+	bonobo_main_loop_level--;
 }
 
 /**
@@ -310,7 +316,7 @@ bonobo_main (void)
 void
 bonobo_main_quit (void)
 {
-	g_return_if_fail (__bonobo_main_loops != NULL);
+	g_return_if_fail (bonobo_main_loops != NULL);
 
-	g_main_quit (__bonobo_main_loops->data);
+	g_main_quit (bonobo_main_loops->data);
 }
