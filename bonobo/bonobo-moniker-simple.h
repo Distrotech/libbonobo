@@ -10,6 +10,7 @@
 #ifndef _BONOBO_MONIKER_SIMPLE_SIMPLE_H_
 #define _BONOBO_MONIKER_SIMPLE_SIMPLE_H_
 
+#include <bonobo/bonobo-types.h>
 #include <bonobo/bonobo-moniker.h>
 
 G_BEGIN_DECLS
@@ -28,10 +29,9 @@ typedef Bonobo_Unknown (*BonoboMonikerSimpleResolveFn) (BonoboMoniker           
 							const CORBA_char            *requested_interface,
 							CORBA_Environment           *ev);
 
-
 struct _BonoboMonikerSimple {
         BonoboMoniker                moniker;
-	BonoboMonikerSimpleResolveFn resolve_fn;
+	GClosure                    *resolve_fn;
 	BonoboMonikerSimplePrivate  *priv;
 };
 
@@ -39,15 +39,17 @@ typedef struct {
 	BonoboMonikerClass parent_class;
 } BonoboMonikerSimpleClass;
 
-GType        bonobo_moniker_simple_get_type  (void);
+GType          bonobo_moniker_simple_get_type  (void);
 
 BonoboMoniker *bonobo_moniker_simple_construct (BonoboMonikerSimple         *moniker,
 						const char                  *name,
-						BonoboMonikerSimpleResolveFn resolve_fn);
+						GClosure                    *resolve_fn);
 
 BonoboMoniker *bonobo_moniker_simple_new       (const char                  *name,
 						BonoboMonikerSimpleResolveFn resolve_fn);
 
+BonoboMoniker *bonobo_moniker_simple_new_gc    (const char                  *name,
+						GClosure                    *resolve_fn);
 
 G_END_DECLS
 

@@ -1,3 +1,16 @@
+2001-07-30  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-types.c
+	(bonobo_value_get_corba_exception, bonobo_value_get_corba_object),
+	(bonobo_value_get_corba_any, bonobo_value_get_unknown): impl.
+
+	* bonobo/bonobo-moniker-simple.c (bonobo_moniker_simple_new): upd.
+	(bonobo_moniker_simple_new_gc): impl.
+	(bonobo_moniker_simple_construct): upd.
+	(simple_finalize): impl.
+	(bonobo_moniker_simple_class_init): hook up.
+	(simple_resolve): upd - use invoke.
+
 2001-07-30  Dietmar Maurer  <dietmar@ximian.com>
 
 	* tests/test-moniker.c (check_parse_name): impl.
@@ -84,7 +97,6 @@
 	* bonobo/bonobo-stream-client.c (bonobo_stream_client_get_length):
 	update to make exception environment optional.
 
->>>>>>> 1.105
 2001-07-29  Maciej Stachowiak  <mjs@noisehavoc.org>
 
 	* bonobo/Makefile.am: Remove references to Bonobo_Clipboard.idl

@@ -243,6 +243,46 @@ bonobo_corba_any_get_type (void)
 	return type;
 }
 
+Bonobo_Unknown
+bonobo_value_get_unknown (GValue *value)
+{
+	g_return_val_if_fail (
+		BONOBO_VALUE_HOLDS_UNKNOWN (value),
+		CORBA_OBJECT_NIL);
+
+	return value->data[0].v_pointer;
+}
+
+BonoboArg *
+bonobo_value_get_corba_any (GValue *value)
+{
+	g_return_val_if_fail (
+		BONOBO_VALUE_HOLDS_CORBA_ANY (value),
+		NULL);
+
+	return value->data[0].v_pointer;
+}
+
+CORBA_Object
+bonobo_value_get_corba_object (GValue *value)
+{
+	g_return_val_if_fail (
+		BONOBO_VALUE_HOLDS_CORBA_OBJECT (value),
+		CORBA_OBJECT_NIL);
+
+	return value->data[0].v_pointer;
+}
+
+CORBA_Environment *
+bonobo_value_get_corba_exception (GValue *value)
+{
+	g_return_val_if_fail (
+		BONOBO_VALUE_HOLDS_CORBA_EXCEPTION (value),
+		NULL);
+
+	return value->data[0].v_pointer;
+}
+
 void
 bonobo_closure_invoke_va_list (GClosure *closure,
 			       GValue   *retval,
