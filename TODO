@@ -41,6 +41,11 @@ Controls etc
 
 Bonobo-endemic issues
 ---------------------
+
+* gnome_object_destroy() should not exist.  That is what the local
+  gnome_object_{ref,unref}() are for.  If an object has many
+  references and is destroy()yed, then the next unref() will find that
+  object->priv->ao has been freed and things will be fucked.
 * Check for proper unref/destruction handling/mem leaks.
 * Compile with zero warnings.
 * Base64 encoding for storages streams (provide an XML-based storage)

@@ -52,7 +52,7 @@ static GtkObjectClass *gnome_object_parent_class;
  * object wrapper) from the servant.  This #GnomeObject is the Gtk
  * object wrapper associated with the CORBA object instance whose
  * method is being invoked.
- * 
+ *
  * Returns: the #GnomeObject wrapper associated with @servant.
  */
 GnomeObject *
@@ -113,7 +113,7 @@ gnome_object_ref (GnomeObject *object)
 {
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_OBJECT (object));
-	g_return_if_fail (object->priv->ao->ref_count != 0);
+	g_return_if_fail (object->priv->ao->ref_count > 0);
 
 	object->priv->ao->ref_count++;
 }
@@ -136,12 +136,12 @@ gnome_object_unref (GnomeObject *object)
 	if (object->priv->ao->ref_count == 0){
 		GnomeAggregateObject *ao = object->priv->ao;
 		GList *l;
-		
+
 		for (l = ao->objs; l; l = l->next){
 			GnomeObject *o = l->data;
-			
+
 			gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
-			gtk_object_destroy (l->data);
+			gtk_object_destroy (GTK_OBJECT (o));
 		}
 
 		g_list_free (ao->objs);
@@ -162,20 +162,20 @@ gnome_object_destroy (GnomeObject *object)
 {
 	GnomeAggregateObject *ao;
 	GList *l;
-	
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
 	ao = object->priv->ao;
-		
+
 	for (l = ao->objs; l; l = l->next){
 		GnomeObject *o = l->data;
-		
+
 		gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
-		gtk_object_destroy (l->data);
+		gtk_object_destroy (GTK_OBJECT (o));
 	}
-	
+
 	g_list_free (ao->objs);
 	g_free (ao);
 }
@@ -186,7 +186,7 @@ impl_GNOME_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 	GnomeObject *object;
 
 	object = gnome_object_from_servant (servant);
-	object->priv->ao->ref_count++;
+	gnome_object_ref (object);
 }
 
 static void
@@ -195,7 +195,6 @@ impl_GNOME_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 	GnomeObject *object;
 
 	object = gnome_object_from_servant (servant);
-
 	gnome_object_unref (object);
 }
 
@@ -208,7 +207,7 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 	GnomeObject *object;
 	GtkType type;
 	GList *l;
-	
+
 	object = gnome_object_from_servant (servant);
 
 	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
@@ -218,16 +217,16 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 		repoid, &retval);
 
 	if (!CORBA_Object_is_nil (retval, ev)){
-		object->priv->ao->ref_count++;
+		gnome_object_ref (object);
 		return retval;
 	}
-	
+
 	type = gtk_type_from_name (repoid);
-	
+
 	/* Try looking at the gtk types */
 	for (l = object->priv->ao->objs; l; l = l->next){
 		GnomeObject *tryme = l->data;
-		
+
 		if ((type && gtk_type_is_a (GTK_OBJECT (tryme)->klass->type, type)) ||
 #ifdef ORBIT_IMPLEMENTS_IS_A
 		    CORBA_Object_is_a (tryme->corba_objref, (char *) repoid, ev)
@@ -239,9 +238,9 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 			break;
 		}
 	}
-	if (! CORBA_Object_is_nil (retval, ev))
-		object->priv->ao->ref_count++;
-	
+	if (!CORBA_Object_is_nil (retval, ev))
+		gnome_object_ref (object);
+
 	return retval;
 }
 
@@ -277,13 +276,13 @@ gnome_object_object_destroy (GtkObject *object)
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
-	
+
 	if (gnome_object->corba_objref != CORBA_OBJECT_NIL)
 		CORBA_Object_release (gnome_object->corba_objref, &ev);
 
 	if (servant){
 		PortableServer_ObjectId *oid;
-	
+
 		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, &ev);
 		PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
 
@@ -307,9 +306,9 @@ gnome_object_class_init (GnomeObjectClass *klass)
 		gtk_signal_new ("query_interface",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeObjectClass,query_interface), 
+				GTK_SIGNAL_OFFSET(GnomeObjectClass,query_interface),
 				gtk_marshal_NONE__POINTER_POINTER,
-				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER); 
+				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER);
 	gnome_object_signals [SYSTEM_EXCEPTION] =
 		gtk_signal_new ("system_exception",
 				GTK_RUN_LAST,
@@ -324,7 +323,7 @@ gnome_object_class_init (GnomeObjectClass *klass)
 				GTK_SIGNAL_OFFSET(GnomeObjectClass,object_gone),
 				gtk_marshal_NONE__POINTER,
 				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
-	
+
 
 	gtk_object_class_add_signals (object_class, gnome_object_signals, LAST_SIGNAL);
 
@@ -343,12 +342,12 @@ static void
 gnome_object_instance_init (GtkObject *gtk_object)
 {
 	GnomeObject *object = GNOME_OBJECT (gtk_object);
-	
+
 	object->priv = g_new (GnomeObjectPrivate, 1);
 	object->priv->destroy_id = gtk_signal_connect (
 		gtk_object, "destroy", GTK_SIGNAL_FUNC (gnome_object_usage_error),
 		NULL);
-	
+
 	object->priv->ao = g_new0 (GnomeAggregateObject, 1);
 	object->priv->ao->objs = g_list_append (object->priv->ao->objs, object);
 	object->priv->ao->ref_count = 1;
@@ -382,7 +381,7 @@ gnome_object_get_type (void)
 	return type;
 }
 
-/** 
+/**
  * gnome_object_activate_servant:
  * @object: a GnomeObject
  * @servant: The servant to activate.
@@ -391,7 +390,7 @@ gnome_object_get_type (void)
  * @object on the bonobo_poa (which is the default POA).
  *
  * Returns: The CORBA_Object that is wrapped by @object and whose
- * servant is @servant.  Might return CORBA_OBJECT_NIL on failure. 
+ * servant is @servant.  Might return CORBA_OBJECT_NIL on failure.
  */
 CORBA_Object
 gnome_object_activate_servant (GnomeObject *object, void *servant)
@@ -419,7 +418,7 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 		return o;
 	} else
 		return CORBA_OBJECT_NIL;
-	
+
 }
 
 /**
@@ -474,7 +473,7 @@ gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
 	*
 	*   This check is not perfect, but might help some people.
 	*/
-       
+
        oldao = newobj->priv->ao;
 
        /* Merge the two AggregateObject lists */
@@ -521,7 +520,7 @@ gnome_object_corba_objref (GnomeObject *object)
 {
 	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
-	
+
 	return object->corba_objref;
 }
 
@@ -567,7 +566,7 @@ gnome_unknown_ping (GNOME_Unknown object)
 {
 	CORBA_Environment ev;
 	gboolean alive;
-	
+
 	g_return_val_if_fail (object != NULL, FALSE);
 
 	alive = FALSE;
@@ -594,7 +593,7 @@ gnome_object_new_from_servant (void *servant)
 {
 	GnomeObject *object;
 	CORBA_Object corba_object;
-	
+
 	g_return_val_if_fail (servant != NULL, NULL);
 
 	object = gtk_type_new (gnome_object_get_type ());

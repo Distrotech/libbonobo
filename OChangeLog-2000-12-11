@@ -1,3 +1,20 @@
+2000-01-07  Federico Mena Quintero  <federico@helixcode.com>
+
+	* bonobo/gnome-control.c (gnome_control_destroy): Call the destroy
+	method of the parent class.
+
+	* bonobo/gnome-object.c (gnome_object_ref): Made the refcount
+	assertion more stringent.
+	(impl_GNOME_Unknown_ref): Call gnome_object_ref() instead of
+	increasing the refcount directly.
+	(impl_GNOME_Unknown_query_interface): Likewise.
+
+	As a side comment, gnome_object_destroy() should not exist.  It
+	does not make sense to unconditionally destroy an aggregate object
+	while people still have references to it --- the next time someone
+	calls gnome_object_unref(), the object will already have been
+	freed.
+
 2000-01-05  Sergey Panov <sipan@mit.edu>
 	*  bonobo/gnome-ui-handler.c (menu_toplevel_create_label):
 	Remove translation -- the container should not translate
