@@ -11,7 +11,7 @@
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *
- * Copyright 1999 Ximian, Inc.
+ * Copyright 1999, 2001 Ximian, Inc.
  */
 #include <config.h>
 #include <gobject/gsignal.h>
@@ -25,51 +25,47 @@
 static BonoboObjectClass *bonobo_shlib_factory_parent_class = NULL;
 
 struct _BonoboShlibFactoryPrivate {
-	int                  live_objects;
-	gpointer             oaf_impl_ptr;
+	int      live_objects;
+	gpointer act_impl_ptr;
 };
 
 /**
  * bonobo_shlib_factory_construct:
  * @factory: The object to be initialized.
- * @corba_factory: The CORBA object which supports the
- * @oaf_iid: The GOAD id that the new factory will implement.
- * @oaf_impl_ptr: Oaf shlib handle
- * Bonobo::ShlibFactory interface and which will be used to
- * construct this BonoboShlibFactory Gtk object.
- * @factory_cb: A callback which is used to create new GnomeShlib object instances.
- * @data: The closure data to be passed to the @factory callback routine.
+ * @act_iid: The GOAD id that the new factory will implement.
+ * @act_impl_ptr: Activation shlib handle
+ * @closure: The closure used to create new GnomeShlib object instances.
  *
- * Initializes @c_factory with the command-line arguments and registers
- * the new factory in the name server.
+ * Initializes @c_factory with the supplied data.
  *
  * Returns: The initialized BonoboShlibFactory object.
  */
 BonoboShlibFactory *
 bonobo_shlib_factory_construct (BonoboShlibFactory    *factory,
-				const char            *oaf_iid,
+				const char            *act_iid,
 				PortableServer_POA     poa,
-				gpointer               oaf_impl_ptr,
+				gpointer               act_impl_ptr,
 				GClosure              *closure)
 {
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_SHLIB_FACTORY (factory), NULL);
 
 	factory->priv->live_objects = 0;
-	factory->priv->oaf_impl_ptr = oaf_impl_ptr;
+	factory->priv->act_impl_ptr = act_impl_ptr;
 
-        bonobo_activation_plugin_use (poa, oaf_impl_ptr);
+        bonobo_activation_plugin_use (poa, act_impl_ptr);
 
-	return BONOBO_SHLIB_FACTORY (
-		bonobo_generic_factory_construct (
-			BONOBO_GENERIC_FACTORY (factory), oaf_iid, closure));
+	bonobo_generic_factory_construct_noreg (
+		BONOBO_GENERIC_FACTORY (factory), act_iid, closure);
+
+	return factory;
 }
 
 /**
  * bonobo_shlib_factory_new_closure:
- * @oaf_iid: The GOAD id that this factory implements
+ * @act_iid: The GOAD id that this factory implements
  * @poa: the poa.
- * @oaf_impl_ptr: Oaf shlib handle
+ * @act_impl_ptr: Activation shlib handle
  * @factory_closure: A closure which is used to create new BonoboObject instances.
  *
  * This is a helper routine that simplifies the creation of factory
@@ -84,27 +80,27 @@ bonobo_shlib_factory_construct (BonoboShlibFactory    *factory,
  * name server.
  */
 BonoboShlibFactory *
-bonobo_shlib_factory_new_closure (const char           *oaf_iid,
+bonobo_shlib_factory_new_closure (const char           *act_iid,
 				  PortableServer_POA    poa,
-				  gpointer              oaf_impl_ptr,
+				  gpointer              act_impl_ptr,
 				  GClosure             *factory_closure)
 {
 	BonoboShlibFactory *factory;
 
-	g_return_val_if_fail (oaf_iid != NULL, NULL);
+	g_return_val_if_fail (act_iid != NULL, NULL);
 	g_return_val_if_fail (factory_closure != NULL, NULL);
 	
 	factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
 	
 	return bonobo_shlib_factory_construct (
-		factory, oaf_iid, poa, oaf_impl_ptr, factory_closure);
+		factory, act_iid, poa, act_impl_ptr, factory_closure);
 }
 
 /**
  * bonobo_shlib_factory_new:
- * @oaf_iid: The GOAD id that this factory implements
+ * @act_iid: The GOAD id that this factory implements
  * @poa: the poa.
- * @oaf_impl_ptr: Oaf shlib handle
+ * @act_impl_ptr: Activation shlib handle
  * @factory_cb: A callback which is used to create new BonoboObject instances.
  * @user_data: The closure data to be passed to the @factory callback routine.
  *
@@ -122,12 +118,12 @@ bonobo_shlib_factory_new_closure (const char           *oaf_iid,
 BonoboShlibFactory *
 bonobo_shlib_factory_new (const char           *component_id,
 			  PortableServer_POA    poa,
-			  gpointer              oaf_impl_ptr,
+			  gpointer              act_impl_ptr,
 			  BonoboFactoryCallback factory_cb,
 			  gpointer              user_data)
 {
 	return bonobo_shlib_factory_new_closure (
-		component_id, poa, oaf_impl_ptr,
+		component_id, poa, act_impl_ptr,
 		g_cclosure_new (G_CALLBACK (factory_cb), user_data, NULL));
 }
 
@@ -135,6 +131,10 @@ static void
 bonobo_shlib_factory_finalize (GObject *object)
 {
 	BonoboShlibFactory *factory = BONOBO_SHLIB_FACTORY (object);
+
+	/* FIXME: should we be unloading these modules now ?
+	 * look at how bonobo-activation deals with modules, is
+	 * this efficient and workable ? */
 
 	/*
 	 * We pray this happens only when we have released our
@@ -145,7 +145,7 @@ bonobo_shlib_factory_finalize (GObject *object)
 	 */
 
 	/* we dont unload it because of a problem with the GType system */
-	/* oaf_plugin_unuse (c_factory->oaf_impl_ptr); */
+	/* act_plugin_unuse (c_factory->act_impl_ptr); */
 
 	g_free (factory->priv);
 	
@@ -154,12 +154,12 @@ bonobo_shlib_factory_finalize (GObject *object)
 
 static BonoboObject *
 bonobo_shlib_factory_new_generic (BonoboGenericFactory *factory,
-				  const char           *oaf_iid)
+				  const char           *act_iid)
 {
 	BonoboObject *retval;
 
 	retval = BONOBO_GENERIC_FACTORY_CLASS (
-		bonobo_shlib_factory_parent_class)->new_generic (factory, oaf_iid);
+		bonobo_shlib_factory_parent_class)->new_generic (factory, act_iid);
 
 	return retval;
 }
@@ -269,7 +269,7 @@ bonobo_shlib_factory_track_object (BonoboShlibFactory *factory,
  * bonobo_shlib_factory_std:
  * @component_id:
  * @poa:
- * @oaf_impl_ptr:
+ * @act_impl_ptr:
  * @factory_cb:
  * @user_data:
  * @ev:
@@ -282,7 +282,7 @@ bonobo_shlib_factory_track_object (BonoboShlibFactory *factory,
 Bonobo_Unknown
 bonobo_shlib_factory_std (const char            *component_id,
 			  PortableServer_POA     poa,
-			  gpointer               oaf_impl_ptr,
+			  gpointer               act_impl_ptr,
 			  BonoboFactoryCallback  factory_cb,
 			  gpointer               user_data,
 			  CORBA_Environment     *ev)
@@ -291,7 +291,7 @@ bonobo_shlib_factory_std (const char            *component_id,
 
 	f = bonobo_shlib_factory_new (
 		component_id, poa,
-		oaf_impl_ptr,
+		act_impl_ptr,
 		factory_cb, user_data);
 
         return CORBA_Object_duplicate (BONOBO_OBJREF (f), ev);

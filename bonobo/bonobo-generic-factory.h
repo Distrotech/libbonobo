@@ -6,7 +6,7 @@
  *   Miguel de Icaza (miguel@kernel.org)
  *   ÉRDI Gergõ (cactus@cactus.rulez.org): cleanup
  *
- * Copyright 1999 Helix Code, Inc., 2001 Gergõ Érdi
+ * Copyright 1999, 2001 Ximian, Inc., 2001 Gergõ Érdi
  */
 #ifndef _BONOBO_GENERIC_FACTORY_H_
 #define _BONOBO_GENERIC_FACTORY_H_
@@ -44,26 +44,30 @@ typedef struct {
 	POA_Bonobo_GenericFactory__epv epv;
 
 	BonoboObject *(*new_generic) (BonoboGenericFactory *factory,
-				      const char           *oaf_iid);
+				      const char           *act_iid);
 
 } BonoboGenericFactoryClass;
 
-GType                 bonobo_generic_factory_get_type  (void) G_GNUC_CONST;
+GType                 bonobo_generic_factory_get_type        (void) G_GNUC_CONST;
 
-BonoboGenericFactory *bonobo_generic_factory_new	 (const char            *oaf_iid,
-							  BonoboFactoryCallback  factory_cb,
-							  gpointer               user_data);
+BonoboGenericFactory *bonobo_generic_factory_new	     (const char           *act_iid,
+							      BonoboFactoryCallback factory_cb,
+							      gpointer              user_data);
 
-BonoboGenericFactory *bonobo_generic_factory_new_closure (const char            *oaf_iid,
-							  GClosure              *factory_closure);
+BonoboGenericFactory *bonobo_generic_factory_new_closure     (const char           *act_iid,
+							      GClosure             *factory_closure);
 
-BonoboGenericFactory *bonobo_generic_factory_construct	 (BonoboGenericFactory  *factory,
-							  const char            *oaf_iid,
-							  GClosure              *factory_cb);
+BonoboGenericFactory *bonobo_generic_factory_construct	     (BonoboGenericFactory *factory,
+							      const char           *act_iid,
+							      GClosure             *factory_cb);
 
-int                  bonobo_generic_factory_main	 (const char            *oaf_iid,
-							  BonoboFactoryCallback  factory_cb,
-							  gpointer               user_data);
+void                  bonobo_generic_factory_construct_noreg (BonoboGenericFactory *factory,
+							      const char           *act_iid,
+							      GClosure             *factory_cb);
+
+int                   bonobo_generic_factory_main	     (const char           *act_iid,
+							      BonoboFactoryCallback factory_cb,
+							      gpointer              user_data);
 
 #if defined (__BONOBO_UI_MAIN_H__) || defined (LIBBONOBOUI_H)
 #define BONOBO_FACTORY_INIT(descr, version, argcp, argv)			\

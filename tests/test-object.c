@@ -56,6 +56,7 @@ main (int argc, char *argv [])
 		bonobo_object_release_unref (ref, NULL);
 	}
 
+#ifdef CAN_POKE_ORB_INTERNALS
 	fprintf (stderr, "Out of proc lifecycle\n");
 	{
 		object = BONOBO_OBJECT (g_object_new (
@@ -71,6 +72,7 @@ main (int argc, char *argv [])
 		CORBA_Object_release (ref, ev);
 		g_assert (!BONOBO_EX (ev));
 	}
+#endif
 
 	fprintf (stderr, "Ret-ex tests...\n");
 

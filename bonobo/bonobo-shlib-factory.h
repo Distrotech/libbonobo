@@ -5,7 +5,7 @@
  * Author:
  *    Michael Meeks (michael@helixcode.com)
  *
- * Copyright 2000 Helix Code, Inc.
+ * Copyright 2000, 2001 Ximian, Inc.
  */
 #ifndef _BONOBO_SHLIB_FACTORY_H_
 #define _BONOBO_SHLIB_FACTORY_H_
@@ -42,23 +42,23 @@ GType               bonobo_shlib_factory_get_type     (void) G_GNUC_CONST;
 BonoboShlibFactory *bonobo_shlib_factory_construct    (BonoboShlibFactory    *factory,
 						       const char            *component_id,
 						       PortableServer_POA     poa,
-						       gpointer               oaf_impl_ptr,
+						       gpointer               act_impl_ptr,
 						       GClosure              *closure);
 
 BonoboShlibFactory *bonobo_shlib_factory_new          (const char            *component_id,
 						       PortableServer_POA     poa,
-						       gpointer               oaf_impl_ptr,
+						       gpointer               act_impl_ptr,
 						       BonoboFactoryCallback  factory_cb,
 						       gpointer               user_data);
 
 BonoboShlibFactory *bonobo_shlib_factory_new_closure  (const char            *component_id,
 						       PortableServer_POA     poa,
-						       gpointer               oaf_impl_ptr,
+						       gpointer               act_impl_ptr,
 						       GClosure              *factory_closure);
 
 Bonobo_Unknown      bonobo_shlib_factory_std          (const char            *component_id,
 						       PortableServer_POA     poa,
-						       gpointer               oaf_impl_ptr,
+						       gpointer               act_impl_ptr,
 						       BonoboFactoryCallback  factory_cb,
 						       gpointer               user_data,
 						       CORBA_Environment     *ev);
