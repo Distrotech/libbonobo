@@ -277,7 +277,8 @@ void oaf_setenv (const char *name, const char *value)
 CORBA_Object
 oaf_server_by_forking (const char **cmd, 
                        int fd_arg, 
-                       const char *display, 
+                       const char *display,
+		       const char *od_iorstr,
                        CORBA_Environment * ev)
 {
 	gint iopipes[2];
@@ -389,9 +390,10 @@ oaf_server_by_forking (const char **cmd,
 	} else if ((childpid = fork ())) {
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
-                if (display != NULL) {
-                        oaf_setenv ("DISPLAY", display);
-                }
+                if (display)
+		  oaf_setenv ("DISPLAY", display);
+		if (od_iorstr)
+		  oaf_setenv ("OAF_OD_IOR", od_iorstr);
                 
 
 		close (iopipes[0]);
