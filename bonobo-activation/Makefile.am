@@ -19,7 +19,7 @@ LDFLAGS=					\
 	@LT_VERSION_INFO@			\
 	$(NULL)
 
-liboafincludedir = $(includedir)/liboaf
+liboafincludedir = $(includedir)/oaf-2.0/liboaf
 
 liboafinclude_HEADERS=				\
 	oaf.h					\
