@@ -1,3 +1,17 @@
+2000-11-14  Maciej Stachowiak  <mjs@eazel.com>
+
+	reviewed by: Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.h, bonobo/bonobo-win.c: Reformatted header to
+	line up types and arguments and such.
+	(bonobo_window_deregister_dead_components): New public API call to
+	check the list of UI_Components for dead ones and deregister the
+	ones that are dead.
+	(bonobo_window_deregister_get_component_names): New public call to
+ 	get the list of component names registered with this window.
+	(bonobo_window_component_get): New public call to get the
+	UI_Component object from a component name.
+
 2000-11-14  Michael Meeks  <michael@helixcode.com>
 
 	* tests/Makefile.am (BONOBO_PLUGIN_PATH): remove appended '/'
