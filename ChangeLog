@@ -1,3 +1,8 @@
+2001-08-01  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-moniker.c (test_real_monikers): add a test from Martin
+	(main): use it.
+
 2001-08-01  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_construct):
