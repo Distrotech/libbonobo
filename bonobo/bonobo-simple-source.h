@@ -2,7 +2,7 @@
 #ifndef _GNOME_SIMPLE_DATA_SOURCE_H_
 #define _GNOME_SIMPLE_DATA_SOURCE_H_
 
-#include <bonobo/gnome-object.h>
+#include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
 
@@ -26,7 +26,7 @@ typedef CORBA_long (*GnomeSimpleDataSourceRemainingDataFn)	(GnomeSimpleDataSourc
 
 
 struct _GnomeSimpleDataSource {
-	GnomeObject object;
+	BonoboObject object;
 
 	/*
 	 * These are the callbacks the user can set.  If we use the
@@ -41,7 +41,7 @@ struct _GnomeSimpleDataSource {
 };
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	/*
 	 * Methods.

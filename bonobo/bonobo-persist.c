@@ -10,20 +10,20 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
-#include <bonobo/gnome-persist.h>
+#include <bonobo/bonobo-persist.h>
 
 /* Parent GTK object class */
-static GnomeObjectClass *gnome_persist_parent_class;
+static BonoboObjectClass *bonobo_persist_parent_class;
 
 /**
- * gnome_persist_get_epv:
+ * bonobo_persist_get_epv:
  */
-POA_GNOME_Persist__epv *
-gnome_persist_get_epv (void)
+POA_Bonobo_Persist__epv *
+bonobo_persist_get_epv (void)
 {
-	POA_GNOME_Persist__epv *epv;
+	POA_Bonobo_Persist__epv *epv;
 
-	epv = g_new0 (POA_GNOME_Persist__epv, 1);
+	epv = g_new0 (POA_Bonobo_Persist__epv, 1);
 
 	return epv;
 }
@@ -34,67 +34,67 @@ init_persist_corba_class (void)
 }
 
 static void
-gnome_persist_destroy (GtkObject *object)
+bonobo_persist_destroy (GtkObject *object)
 {
-	GTK_OBJECT_CLASS (gnome_persist_parent_class)->destroy (object);
+	GTK_OBJECT_CLASS (bonobo_persist_parent_class)->destroy (object);
 }
 
 static void
-gnome_persist_class_init (GnomePersistClass *klass)
+bonobo_persist_class_init (BonoboPersistClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
-	gnome_persist_parent_class = gtk_type_class (gnome_object_get_type ());
+	bonobo_persist_parent_class = gtk_type_class (bonobo_object_get_type ());
 
 	/*
 	 * Override and initialize methods
 	 */
-	object_class->destroy = gnome_persist_destroy;
+	object_class->destroy = bonobo_persist_destroy;
 
 	init_persist_corba_class ();
 }
 
 static void
-gnome_persist_init (GnomePersist *persist)
+bonobo_persist_init (BonoboPersist *persist)
 {
 }
 
-GnomePersist *
-gnome_persist_construct (GnomePersist *persist,
-			 GNOME_Persist corba_persist)
+BonoboPersist *
+bonobo_persist_construct (BonoboPersist *persist,
+			 Bonobo_Persist corba_persist)
 {
 	g_return_val_if_fail (persist != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_PERSIST (persist), NULL);
+	g_return_val_if_fail (BONOBO_IS_PERSIST (persist), NULL);
 	g_return_val_if_fail (corba_persist != CORBA_OBJECT_NIL, NULL);
 	
-	gnome_object_construct (GNOME_OBJECT (persist), corba_persist);
+	bonobo_object_construct (BONOBO_OBJECT (persist), corba_persist);
 
 	return persist;
 }
 
 /**
- * gnome_persist_get_type:
+ * bonobo_persist_get_type:
  *
- * Returns: the GtkType for the GnomePersist class.
+ * Returns: the GtkType for the BonoboPersist class.
  */
 GtkType
-gnome_persist_get_type (void)
+bonobo_persist_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
 			"IDL:GNOME/Persist:1.0",
-			sizeof (GnomePersist),
-			sizeof (GnomePersistClass),
-			(GtkClassInitFunc) gnome_persist_class_init,
-			(GtkObjectInitFunc) gnome_persist_init,
+			sizeof (BonoboPersist),
+			sizeof (BonoboPersistClass),
+			(GtkClassInitFunc) bonobo_persist_class_init,
+			(GtkObjectInitFunc) bonobo_persist_init,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_object_get_type (), &info);
+		type = gtk_type_unique (bonobo_object_get_type (), &info);
 	}
 
 	return type;

@@ -2,11 +2,11 @@
 /**
  * GNOME container object.
  *
- * The GnomeContainer object represents a document which may have one
+ * The BonoboContainer object represents a document which may have one
  * or more embedded document objects.  To embed an object in the
- * container, create a GnomeClientSite, add it to the container, and
- * then create an object supporting GNOME::Embeddable and bind it to
- * the client site.  The GnomeContainer maintains a list of the client
+ * container, create a BonoboClientSite, add it to the container, and
+ * then create an object supporting Bonobo::Embeddable and bind it to
+ * the client site.  The BonoboContainer maintains a list of the client
  * sites which correspond to the objects embedded in the container.
  *
  * Author:
@@ -19,10 +19,10 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
 #include <gtk/gtkwidget.h>
-#include <bonobo/gnome-main.h>
-#include <bonobo/gnome-object.h>
-#include <bonobo/gnome-container.h>
-#include <bonobo/gnome-client-site.h>
+#include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-container.h>
+#include <bonobo/bonobo-client-site.h>
 
 enum {
 	GET_OBJECT,
@@ -31,23 +31,23 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
-static GnomeObjectClass *gnome_container_parent_class;
+static BonoboObjectClass *bonobo_container_parent_class;
 
-POA_GNOME_Container__vepv gnome_container_vepv;
+POA_Bonobo_Container__vepv bonobo_container_vepv;
 
 static CORBA_Object
-create_gnome_container (GnomeObject *object)
+create_bonobo_container (BonoboObject *object)
 {
-	POA_GNOME_Container *servant;
+	POA_Bonobo_Container *servant;
 	CORBA_Environment ev;
 	CORBA_Object o;
 
 	CORBA_exception_init (&ev);
 
-	servant = (POA_GNOME_Container *) g_new0 (GnomeObjectServant, 1);
-	servant->vepv = &gnome_container_vepv;
+	servant = (POA_Bonobo_Container *) g_new0 (BonoboObjectServant, 1);
+	servant->vepv = &bonobo_container_vepv;
 
-	POA_GNOME_Container__init ((PortableServer_Servant) servant, &ev);
+	POA_Bonobo_Container__init ((PortableServer_Servant) servant, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
 		CORBA_exception_free (&ev);
@@ -61,7 +61,7 @@ create_gnome_container (GnomeObject *object)
 		bonobo_poa(), servant, &ev);
 
 	if (o){
-		gnome_object_bind_to_servant (object, servant);
+		bonobo_object_bind_to_servant (object, servant);
 		CORBA_exception_free (&ev);
 		return o;
 	} else {
@@ -71,42 +71,42 @@ create_gnome_container (GnomeObject *object)
 }
 
 static void
-gnome_container_destroy (GtkObject *object)
+bonobo_container_destroy (GtkObject *object)
 {
-	GnomeContainer *container = GNOME_CONTAINER (object);
+	BonoboContainer *container = BONOBO_CONTAINER (object);
 
 	/*
 	 * Destroy all the ClientSites.
 	 */
 	while (container->client_sites) {
-		GnomeClientSite *client_site = GNOME_CLIENT_SITE (container->client_sites->data);
+		BonoboClientSite *client_site = BONOBO_CLIENT_SITE (container->client_sites->data);
 
-		gnome_object_destroy (GNOME_OBJECT (client_site));
+		bonobo_object_destroy (BONOBO_OBJECT (client_site));
 	}
 	
-	GTK_OBJECT_CLASS (gnome_container_parent_class)->destroy (object);
+	GTK_OBJECT_CLASS (bonobo_container_parent_class)->destroy (object);
 }
 
 /*
  * Returns a list of the objects in this container
  */
-static GNOME_Container_ObjectList *
+static Bonobo_Container_ObjectList *
 impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
-	GnomeContainer *container = GNOME_CONTAINER (object);
-	GNOME_Container_ObjectList *return_list;
+	BonoboObject *object = bonobo_object_from_servant (servant);
+	BonoboContainer *container = BONOBO_CONTAINER (object);
+	Bonobo_Container_ObjectList *return_list;
 	int items;
 	GList *l;
 	int i;
 	
-	return_list = GNOME_Container_ObjectList__alloc ();
+	return_list = Bonobo_Container_ObjectList__alloc ();
 	if (return_list == NULL)
 		return NULL;
 
 	items = g_list_length (container->client_sites);
 	
-	return_list->_buffer = CORBA_sequence_GNOME_Unknown_allocbuf (items);
+	return_list->_buffer = CORBA_sequence_Bonobo_Unknown_allocbuf (items);
 	if (return_list->_buffer == NULL){
 		CORBA_free (return_list);
 		return NULL;
@@ -119,45 +119,45 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 	 * Assemble the list of objects
 	 */
 	for (i = 0, l = container->client_sites; l; l = l->next, i++){
-		GnomeClientSite *client_site = GNOME_CLIENT_SITE (l->data);
-		GnomeObject *bound_object = GNOME_OBJECT (client_site->bound_object);
+		BonoboClientSite *client_site = BONOBO_CLIENT_SITE (l->data);
+		BonoboObject *bound_object = BONOBO_OBJECT (client_site->bound_object);
 
 		return_list->_buffer [i] = CORBA_Object_duplicate (
-			gnome_object_corba_objref (bound_object), ev);
+			bonobo_object_corba_objref (bound_object), ev);
 	}
 
 	return return_list;
 }
 
-static GNOME_Unknown
+static Bonobo_Unknown
 impl_get_object (PortableServer_Servant servant,
 		 const CORBA_char      *item_name,
 		 CORBA_boolean          only_if_exists,
 		 CORBA_Environment     *ev)
 {
-	GNOME_Unknown ret;
+	Bonobo_Unknown ret;
 	
 	gtk_signal_emit (
-		GTK_OBJECT (gnome_object_from_servant (servant)),
+		GTK_OBJECT (bonobo_object_from_servant (servant)),
 		signals [GET_OBJECT], item_name, only_if_exists, ev, &ret);
 
 	return ret;
 }
 
 /*
- * GnomeContainer CORBA vector-class initialization routine
+ * BonoboContainer CORBA vector-class initialization routine
  */
 
 /**
- * gnome_container_get_epv:
+ * bonobo_container_get_epv:
  *
  */
-POA_GNOME_Container__epv *
-gnome_container_get_epv (void)
+POA_Bonobo_Container__epv *
+bonobo_container_get_epv (void)
 {
-	POA_GNOME_Container__epv *epv;
+	POA_Bonobo_Container__epv *epv;
 
-	epv = g_new0 (POA_GNOME_Container__epv, 1);
+	epv = g_new0 (POA_Bonobo_Container__epv, 1);
 
 	epv->enum_objects = impl_enum_objects;
 	epv->get_object   = impl_get_object;
@@ -169,12 +169,12 @@ static void
 corba_container_class_init (void)
 {
 	/* Init the vepv */
-	gnome_container_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
-	gnome_container_vepv.GNOME_Container_epv = gnome_container_get_epv ();
+	bonobo_container_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
+	bonobo_container_vepv.Bonobo_Container_epv = bonobo_container_get_epv ();
 }
 
-typedef GNOME_Unknown (*GnomeSignal_POINTER__POINTER_BOOL_POINTER) (
-	GnomeContainer *item_container,
+typedef Bonobo_Unknown (*GnomeSignal_POINTER__POINTER_BOOL_POINTER) (
+	BonoboContainer *item_container,
 	CORBA_char *item_name,
 	CORBA_boolean only_if_exists,
 	CORBA_Environment *ev,
@@ -190,23 +190,23 @@ gnome_marshal_POINTER__POINTER_BOOL_POINTER (GtkObject * object,
 	void **return_val;
 	return_val = GTK_RETLOC_POINTER (args[3]);
 	rfunc = (GnomeSignal_POINTER__POINTER_BOOL_POINTER) func;
-	*return_val = (*rfunc) (GNOME_CONTAINER (object),
+	*return_val = (*rfunc) (BONOBO_CONTAINER (object),
 				GTK_VALUE_POINTER (args[0]),
 				GTK_VALUE_BOOL (args[1]),
 				GTK_VALUE_POINTER (args[2]),
 				func_data);
 }
 /*
- * GnomeContainer class initialization routine
+ * BonoboContainer class initialization routine
  */
 static void
-gnome_container_class_init (GnomeContainerClass *container_class)
+bonobo_container_class_init (BonoboContainerClass *container_class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) container_class;
 
-	gnome_container_parent_class = gtk_type_class (gnome_object_get_type ());
+	bonobo_container_parent_class = gtk_type_class (bonobo_object_get_type ());
 
-	object_class->destroy = gnome_container_destroy;
+	object_class->destroy = bonobo_container_destroy;
 
 	signals [GET_OBJECT] =
 		gtk_signal_new  (
@@ -224,106 +224,106 @@ gnome_container_class_init (GnomeContainerClass *container_class)
 }
 
 /*
- * GnomeContainer instance initialization routine
+ * BonoboContainer instance initialization routine
  */
 static void
-gnome_container_init (GnomeContainer *container)
+bonobo_container_init (BonoboContainer *container)
 {
 }
 
 /**
- * gnome_container_construct:
+ * bonobo_container_construct:
  * @container: The container object to construct
- * @corba_container: The CORBA object that implements GNOME::Container
+ * @corba_container: The CORBA object that implements Bonobo::Container
  *
  * Constructs the @container Gtk object using the provided CORBA
  * object.
  *
- * Returns: The constructed GnomeContainer object.
+ * Returns: The constructed BonoboContainer object.
  */
-GnomeContainer *
-gnome_container_construct (GnomeContainer  *container,
-			   GNOME_Container corba_container)
+BonoboContainer *
+bonobo_container_construct (BonoboContainer  *container,
+			   Bonobo_Container corba_container)
 {
 	g_return_val_if_fail (container != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_CONTAINER (container), NULL);
+	g_return_val_if_fail (BONOBO_IS_CONTAINER (container), NULL);
 	g_return_val_if_fail (corba_container != CORBA_OBJECT_NIL, NULL);
 	
-	gnome_object_construct (GNOME_OBJECT (container), (CORBA_Object) corba_container);
+	bonobo_object_construct (BONOBO_OBJECT (container), (CORBA_Object) corba_container);
 
 	return container;
 }
 
 /**
- * gnome_container_get_type:
+ * bonobo_container_get_type:
  *
- * Returns: The GtkType for the GnomeContainer class.
+ * Returns: The GtkType for the BonoboContainer class.
  */
 GtkType
-gnome_container_get_type (void)
+bonobo_container_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
 			"IDL:GNOME/Container:1.0",
-			sizeof (GnomeContainer),
-			sizeof (GnomeContainerClass),
-			(GtkClassInitFunc) gnome_container_class_init,
-			(GtkObjectInitFunc) gnome_container_init,
+			sizeof (BonoboContainer),
+			sizeof (BonoboContainerClass),
+			(GtkClassInitFunc) bonobo_container_class_init,
+			(GtkObjectInitFunc) bonobo_container_init,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_object_get_type (), &info);
+		type = gtk_type_unique (bonobo_object_get_type (), &info);
 	}
 
 	return type;
 }
 
 /**
- * gnome_container_new:
+ * bonobo_container_new:
  *
- * Creates a new GnomeContainer object.  These are used to hold
+ * Creates a new BonoboContainer object.  These are used to hold
  * client sites.
  *
- * Returns: The newly created GnomeContainer object
+ * Returns: The newly created BonoboContainer object
  */
-GnomeContainer *
-gnome_container_new (void)
+BonoboContainer *
+bonobo_container_new (void)
 {
-	GnomeContainer *container;
-	GNOME_Container corba_container;
+	BonoboContainer *container;
+	Bonobo_Container corba_container;
 
-	container = gtk_type_new (gnome_container_get_type ());
-	corba_container = create_gnome_container (GNOME_OBJECT (container));
+	container = gtk_type_new (bonobo_container_get_type ());
+	corba_container = create_bonobo_container (BONOBO_OBJECT (container));
 
 	if (corba_container == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (container));
 		return NULL;
 	}
 	
-	return gnome_container_construct (container, corba_container);
+	return bonobo_container_construct (container, corba_container);
 }
 
 /**
- * gnome_container_get_moniker:
- * @container: A GnomeContainer object.
+ * bonobo_container_get_moniker:
+ * @container: A BonoboContainer object.
  */
-GnomeMoniker *
-gnome_container_get_moniker (GnomeContainer *container)
+BonoboMoniker *
+bonobo_container_get_moniker (BonoboContainer *container)
 {
 	g_return_val_if_fail (container != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_CONTAINER (container), NULL);
+	g_return_val_if_fail (BONOBO_IS_CONTAINER (container), NULL);
 
 	return container->moniker;
 }
 
 static void
-gnome_container_client_site_destroy_cb (GnomeClientSite *client_site, gpointer data)
+bonobo_container_client_site_destroy_cb (BonoboClientSite *client_site, gpointer data)
 {
-	GnomeContainer *container = GNOME_CONTAINER (data);
+	BonoboContainer *container = BONOBO_CONTAINER (data);
 
 	/*
 	 * Remove this client site from our list.
@@ -332,7 +332,7 @@ gnome_container_client_site_destroy_cb (GnomeClientSite *client_site, gpointer d
 }
 
 /**
- * gnome_container_add:
+ * bonobo_container_add:
  * @container: The object to operate on.
  * @client_site: The client site to add to the container
  *
@@ -340,33 +340,33 @@ gnome_container_client_site_destroy_cb (GnomeClientSite *client_site, gpointer d
  * container
  */
 void
-gnome_container_add (GnomeContainer *container, GnomeObject *client_site)
+bonobo_container_add (BonoboContainer *container, BonoboObject *client_site)
 {
 	g_return_if_fail (container != NULL);
 	g_return_if_fail (client_site != NULL);
-	g_return_if_fail (GNOME_IS_CONTAINER (container));
-	g_return_if_fail (GNOME_IS_OBJECT (client_site));
+	g_return_if_fail (BONOBO_IS_CONTAINER (container));
+	g_return_if_fail (BONOBO_IS_OBJECT (client_site));
 
 	container->client_sites = g_list_prepend (container->client_sites, client_site);
 
 	gtk_signal_connect (GTK_OBJECT (client_site), "destroy",
-			    GTK_SIGNAL_FUNC (gnome_container_client_site_destroy_cb), container);
+			    GTK_SIGNAL_FUNC (bonobo_container_client_site_destroy_cb), container);
 }
 
 /**
- * gnome_container_remove:
+ * bonobo_container_remove:
  * @container: The object to operate on.
  * @client_site: The client site to remove from the container
  *
  * Removes the @client_site from the @container
  */
 void
-gnome_container_remove (GnomeContainer *container, GnomeObject *client_site)
+bonobo_container_remove (BonoboContainer *container, BonoboObject *client_site)
 {
 	g_return_if_fail (container != NULL);
 	g_return_if_fail (client_site != NULL);
-	g_return_if_fail (GNOME_IS_CONTAINER (container));
-	g_return_if_fail (GNOME_IS_OBJECT (client_site));
+	g_return_if_fail (BONOBO_IS_CONTAINER (container));
+	g_return_if_fail (BONOBO_IS_OBJECT (client_site));
 
 	container->client_sites = g_list_remove (container->client_sites, client_site);
 	gtk_object_unref (GTK_OBJECT (client_site));

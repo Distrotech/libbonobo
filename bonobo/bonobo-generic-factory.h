@@ -7,36 +7,36 @@
  *
  * Copyright 1999 Helix Code, Inc.
  */
-#ifndef _GNOME_GENERIC_FACTORY_H_
-#define _GNOME_GENERIC_FACTORY_H_
+#ifndef _BONOBO_GENERIC_FACTORY_H_
+#define _BONOBO_GENERIC_FACTORY_H_
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkobject.h>
-#include <bonobo/bonobo.h>
-#include <bonobo/gnome-object.h>
+#include <bonobo/Bonobo.h>
+#include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
  
-#define GNOME_GENERIC_FACTORY_TYPE        (gnome_generic_factory_get_type ())
-#define GNOME_GENERIC_FACTORY(o)          (GTK_CHECK_CAST ((o), GNOME_GENERIC_FACTORY_TYPE, GnomeGenericFactory))
-#define GNOME_GENERIC_FACTORY_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_GENERIC_FACTORY_TYPE, GnomeGenericFactoryClass))
-#define GNOME_IS_GENERIC_FACTORY(o)       (GTK_CHECK_TYPE ((o), GNOME_GENERIC_FACTORY_TYPE))
-#define GNOME_IS_GENERIC_FACTORY_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_GENERIC_FACTORY_TYPE))
+#define BONOBO_GENERIC_FACTORY_TYPE        (bonobo_generic_factory_get_type ())
+#define BONOBO_GENERIC_FACTORY(o)          (GTK_CHECK_CAST ((o), BONOBO_GENERIC_FACTORY_TYPE, BonoboGenericFactory))
+#define BONOBO_GENERIC_FACTORY_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_GENERIC_FACTORY_TYPE, BonoboGenericFactoryClass))
+#define BONOBO_IS_GENERIC_FACTORY(o)       (GTK_CHECK_TYPE ((o), BONOBO_GENERIC_FACTORY_TYPE))
+#define BONOBO_IS_GENERIC_FACTORY_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_GENERIC_FACTORY_TYPE))
 
-struct _GnomeGenericFactory;
-typedef struct _GnomeGenericFactory GnomeGenericFactory;
-typedef struct _GnomeGenericFactoryPrivate GnomeGenericFactoryPrivate;
+struct _BonoboGenericFactory;
+typedef struct _BonoboGenericFactory BonoboGenericFactory;
+typedef struct _BonoboGenericFactoryPrivate BonoboGenericFactoryPrivate;
 
-typedef GnomeObject * (*GnomeGenericFactoryFn)(GnomeGenericFactory *Factory, void *closure);
-typedef GnomeObject * (*GnomeFactoryCallback)(GnomeGenericFactory *factory, const char *goad_id, gpointer closure);
+typedef BonoboObject * (*BonoboGenericFactoryFn)(BonoboGenericFactory *Factory, void *closure);
+typedef BonoboObject * (*GnomeFactoryCallback)(BonoboGenericFactory *factory, const char *goad_id, gpointer closure);
 					
-struct _GnomeGenericFactory {
-	GnomeObject base;
+struct _BonoboGenericFactory {
+	BonoboObject base;
 
 	/*
 	 * The function factory
 	 */
-	GnomeGenericFactoryFn factory; /* compat reasons only */
+	BonoboGenericFactoryFn factory; /* compat reasons only */
 	GnomeFactoryCallback factory_cb;
 	gpointer factory_closure;
 
@@ -47,42 +47,42 @@ struct _GnomeGenericFactory {
 };
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	/*
 	 * Virtual methods
 	 */
-	GnomeObject * (*new_generic)(GnomeGenericFactory *c_factory, const char *goad_id);
-} GnomeGenericFactoryClass;
+	BonoboObject * (*new_generic)(BonoboGenericFactory *c_factory, const char *goad_id);
+} BonoboGenericFactoryClass;
 
-GtkType gnome_generic_factory_get_type  (void);
+GtkType bonobo_generic_factory_get_type  (void);
 
-GnomeGenericFactory *gnome_generic_factory_new (
+BonoboGenericFactory *bonobo_generic_factory_new (
 	const char *goad_id,
-	GnomeGenericFactoryFn factory,
+	BonoboGenericFactoryFn factory,
 	void *data);
 
-GnomeGenericFactory *gnome_generic_factory_new_multi (
+BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	const char *goad_id,
 	GnomeFactoryCallback factory_cb,
 	gpointer data);
 
-GnomeGenericFactory *gnome_generic_factory_construct (
+BonoboGenericFactory *bonobo_generic_factory_construct (
 	const char *goad_id,
-	GnomeGenericFactory  *c_factory,
+	BonoboGenericFactory  *c_factory,
 	CORBA_Object          corba_factory,
-	GnomeGenericFactoryFn factory,
+	BonoboGenericFactoryFn factory,
 	GnomeFactoryCallback factory_cb,
 	void *data);
 
-void gnome_generic_factory_set (
-	GnomeGenericFactory *c_factory,
-	GnomeGenericFactoryFn factory,
+void bonobo_generic_factory_set (
+	BonoboGenericFactory *c_factory,
+	BonoboGenericFactoryFn factory,
 	void *data);
 
-POA_GNOME_GenericFactory__epv *gnome_generic_factory_get_epv (void);
+POA_Bonobo_GenericFactory__epv *bonobo_generic_factory_get_epv (void);
 
-extern POA_GNOME_GenericFactory__vepv gnome_generic_factory_vepv;
+extern POA_Bonobo_GenericFactory__vepv bonobo_generic_factory_vepv;
 
 END_GNOME_DECLS
 

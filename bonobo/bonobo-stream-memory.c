@@ -10,17 +10,17 @@
 #include <sys/stat.h>
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-util.h>
-#include <bonobo/gnome-stream-memory.h>
+#include <bonobo/bonobo-stream-memory.h>
 #include <errno.h>
 
-static GnomeStreamClass *gnome_stream_mem_parent_class;
+static BonoboStreamClass *bonobo_stream_mem_parent_class;
 
 static void
-mem_truncate (GnomeStream *stream,
+mem_truncate (BonoboStream *stream,
 	      const CORBA_long new_size, 
 	      CORBA_Environment *ev)
 {
-	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
 	void *newp;
 	
 	if (smem->read_only)
@@ -40,10 +40,10 @@ mem_truncate (GnomeStream *stream,
 }
 
 static CORBA_long
-mem_write (GnomeStream *stream, const GNOME_Stream_iobuf *buffer,
+mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
 	   CORBA_Environment *ev)
 {
-	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
 	long len = buffer->_length;
 
 	if (smem->read_only){
@@ -66,16 +66,16 @@ mem_write (GnomeStream *stream, const GNOME_Stream_iobuf *buffer,
 }
 
 static CORBA_long
-mem_read (GnomeStream *stream, CORBA_long count,
-	  GNOME_Stream_iobuf ** buffer,
+mem_read (BonoboStream *stream, CORBA_long count,
+	  Bonobo_Stream_iobuf ** buffer,
 	  CORBA_Environment *ev)
 {
-	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
 
 	if (smem->pos + count > smem->size)
 		count = smem->size - smem->pos;
 	    
-	*buffer = GNOME_Stream_iobuf__alloc ();
+	*buffer = Bonobo_Stream_iobuf__alloc ();
 	CORBA_sequence_set_release (*buffer, TRUE);
 	(*buffer)->_buffer = CORBA_sequence_CORBA_octet_allocbuf (count);
 	(*buffer)->_length = count;
@@ -88,23 +88,23 @@ mem_read (GnomeStream *stream, CORBA_long count,
 }
 
 static CORBA_long
-mem_seek (GnomeStream *stream,
-	  CORBA_long offset, GNOME_Stream_SeekType whence,
+mem_seek (BonoboStream *stream,
+	  CORBA_long offset, Bonobo_Stream_SeekType whence,
 	  CORBA_Environment *ev)
 {
-	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
 	int pos = 0;
 	
 	switch (whence){
-	case GNOME_Stream_SEEK_SET:
+	case Bonobo_Stream_SEEK_SET:
 		pos = offset;
 		break;
 
-	case GNOME_Stream_SEEK_CUR:
+	case Bonobo_Stream_SEEK_CUR:
 		pos = smem->pos + offset;
 		break;
 
-	case GNOME_Stream_SEEK_END:
+	case Bonobo_Stream_SEEK_END:
 		pos = smem->size + offset;
 		break;
 
@@ -120,7 +120,7 @@ mem_seek (GnomeStream *stream,
 }
 
 static void
-mem_copy_to  (GnomeStream *stream,
+mem_copy_to  (BonoboStream *stream,
 	      const CORBA_char *dest,
 	      const CORBA_long bytes,
 	      CORBA_long *read,
@@ -131,7 +131,7 @@ mem_copy_to  (GnomeStream *stream,
 }
 
 static void
-mem_commit   (GnomeStream *stream,
+mem_commit   (BonoboStream *stream,
 	      CORBA_Environment *ev)
 {
 }
@@ -139,21 +139,21 @@ mem_commit   (GnomeStream *stream,
 static void
 mem_destroy (GtkObject *object)
 {
-	GnomeStreamMem *smem = GNOME_STREAM_MEM (object);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (object);
 	
 	if (smem->buffer)
 		g_free (smem->buffer);
 	
-	GTK_OBJECT_CLASS (gnome_stream_mem_parent_class)->destroy (object);
+	GTK_OBJECT_CLASS (bonobo_stream_mem_parent_class)->destroy (object);
 }
 
 static void
-gnome_stream_mem_class_init (GnomeStreamMemClass *klass)
+bonobo_stream_mem_class_init (BonoboStreamMemClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
-	GnomeStreamClass *sclass = GNOME_STREAM_CLASS (klass);
+	BonoboStreamClass *sclass = BONOBO_STREAM_CLASS (klass);
 	
-	gnome_stream_mem_parent_class = gtk_type_class (gnome_stream_get_type ());
+	bonobo_stream_mem_parent_class = gtk_type_class (bonobo_stream_get_type ());
 
 	object_class->destroy = mem_destroy;
 	
@@ -166,45 +166,45 @@ gnome_stream_mem_class_init (GnomeStreamMemClass *klass)
 }
 
 /**
- * gnome_stream_mem_get_type:
+ * bonobo_stream_mem_get_type:
  *
- * Returns: the GtkType of the GnomeStreamMem class.
+ * Returns: the GtkType of the BonoboStreamMem class.
  */
 GtkType
-gnome_stream_mem_get_type (void)
+bonobo_stream_mem_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
 			"IDL:GNOME/StreamMem:1.0",
-			sizeof (GnomeStreamMem),
-			sizeof (GnomeStreamMemClass),
-			(GtkClassInitFunc) gnome_stream_mem_class_init,
+			sizeof (BonoboStreamMem),
+			sizeof (BonoboStreamMemClass),
+			(GtkClassInitFunc) bonobo_stream_mem_class_init,
 			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_stream_get_type (), &info);
+		type = gtk_type_unique (bonobo_stream_get_type (), &info);
 	}
 
 	return type;
 }
 
-static GNOME_Stream
-create_gnome_stream_mem (GnomeObject *object)
+static Bonobo_Stream
+create_bonobo_stream_mem (BonoboObject *object)
 {
-	POA_GNOME_Stream *servant;
+	POA_Bonobo_Stream *servant;
 	CORBA_Environment ev;
 
-	servant = (POA_GNOME_Stream *) g_new0 (GnomeObjectServant, 1);
-	servant->vepv = &gnome_stream_vepv;
+	servant = (POA_Bonobo_Stream *) g_new0 (BonoboObjectServant, 1);
+	servant->vepv = &bonobo_stream_vepv;
 
 	CORBA_exception_init (&ev);
 
-	POA_GNOME_Stream__init ((PortableServer_Servant) servant, &ev);
+	POA_Bonobo_Stream__init ((PortableServer_Servant) servant, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
                 g_free (servant);
 		CORBA_exception_free (&ev);
@@ -212,28 +212,28 @@ create_gnome_stream_mem (GnomeObject *object)
         }
 
 	CORBA_exception_free (&ev);
-	return (GNOME_Stream) gnome_object_activate_servant (object, servant);
+	return (Bonobo_Stream) bonobo_object_activate_servant (object, servant);
 }
 
 /**
- * gnome_stream_mem_create:
- * @buffer: The memory buffer for which a GnomeStreamMem object is to be created.
+ * bonobo_stream_mem_create:
+ * @buffer: The memory buffer for which a BonoboStreamMem object is to be created.
  * @size: The size in bytes of @buffer.
- * @read_only: Specifies whether or not the returned GnomeStreamMem
+ * @read_only: Specifies whether or not the returned BonoboStreamMem
  * object should allow write() operations.
  *
- * Creates a new GnomeStreamMem object which is bound to
+ * Creates a new BonoboStreamMem object which is bound to
  * the provided memory buffer @buffer.  When data is read
- * out of or written into the returned GnomeStream object,
+ * out of or written into the returned BonoboStream object,
  * the read() and write() operations operate on @buffer.
  *
- * Returns: the constructed GnomeStream object which operates on the specified memory buffer.
+ * Returns: the constructed BonoboStream object which operates on the specified memory buffer.
  */
-GnomeStream *
-gnome_stream_mem_create (char *buffer, size_t size, gboolean read_only)
+BonoboStream *
+bonobo_stream_mem_create (char *buffer, size_t size, gboolean read_only)
 {
-	GnomeStreamMem *stream_mem;
-	GNOME_Stream corba_stream;
+	BonoboStreamMem *stream_mem;
+	Bonobo_Stream corba_stream;
 	char *copy;
 	
 	g_return_val_if_fail (buffer != NULL, NULL);
@@ -246,7 +246,7 @@ gnome_stream_mem_create (char *buffer, size_t size, gboolean read_only)
 			return NULL;
 	}
 	
-	stream_mem = gtk_type_new (gnome_stream_mem_get_type ());
+	stream_mem = gtk_type_new (bonobo_stream_mem_get_type ());
 	if (stream_mem == NULL){
 		g_free (copy);
 		return NULL;
@@ -257,17 +257,17 @@ gnome_stream_mem_create (char *buffer, size_t size, gboolean read_only)
 	stream_mem->pos = 0;
 	stream_mem->read_only = read_only;
 	
-	corba_stream = create_gnome_stream_mem (
-		GNOME_OBJECT (stream_mem));
+	corba_stream = create_bonobo_stream_mem (
+		BONOBO_OBJECT (stream_mem));
 
 	if (corba_stream == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (stream_mem));
 		return NULL;
 	}
 
-	gnome_object_construct (
-		GNOME_OBJECT (stream_mem), corba_stream);
-	return GNOME_STREAM (stream_mem);
+	bonobo_object_construct (
+		BONOBO_OBJECT (stream_mem), corba_stream);
+	return BONOBO_STREAM (stream_mem);
 }
 
 

@@ -1,36 +1,36 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_PERSIST_H_
-#define _GNOME_PERSIST_H_
+#ifndef _BONOBO_PERSIST_H_
+#define _BONOBO_PERSIST_H_
 
-#include <bonobo/gnome-object.h>
+#include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_PERSIST_TYPE        (gnome_persist_get_type ())
-#define GNOME_PERSIST(o)          (GTK_CHECK_CAST ((o), GNOME_PERSIST_TYPE, GnomePersist))
-#define GNOME_PERSIST_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_PERSIST_TYPE, GnomePersistClass))
-#define GNOME_IS_PERSIST(o)       (GTK_CHECK_TYPE ((o), GNOME_PERSIST_TYPE))
-#define GNOME_IS_PERSIST_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_TYPE))
+#define BONOBO_PERSIST_TYPE        (bonobo_persist_get_type ())
+#define BONOBO_PERSIST(o)          (GTK_CHECK_CAST ((o), BONOBO_PERSIST_TYPE, BonoboPersist))
+#define BONOBO_PERSIST_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PERSIST_TYPE, BonoboPersistClass))
+#define BONOBO_IS_PERSIST(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_TYPE))
+#define BONOBO_IS_PERSIST_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_TYPE))
 
-typedef struct _GnomePersist GnomePersistPrivate;
-
-typedef struct {
-	GnomeObject object;
-
-	GnomePersistPrivate *priv;
-} GnomePersist;
+typedef struct _BonoboPersist BonoboPersistPrivate;
 
 typedef struct {
-	GnomeObjectClass parent_class;
-} GnomePersistClass;
+	BonoboObject object;
 
-GtkType       gnome_persist_get_type  (void);
-GnomePersist *gnome_persist_construct (GnomePersist *persist,
-				       GNOME_Persist corba_persist);
+	BonoboPersistPrivate *priv;
+} BonoboPersist;
 
-POA_GNOME_Persist__epv *gnome_persist_get_epv (void);
+typedef struct {
+	BonoboObjectClass parent_class;
+} BonoboPersistClass;
 
-extern POA_GNOME_Persist__vepv gnome_persist_vepv;
+GtkType       bonobo_persist_get_type  (void);
+BonoboPersist *bonobo_persist_construct (BonoboPersist *persist,
+				       Bonobo_Persist corba_persist);
+
+POA_Bonobo_Persist__epv *bonobo_persist_get_epv (void);
+
+extern POA_Bonobo_Persist__vepv bonobo_persist_vepv;
 END_GNOME_DECLS
 
-#endif /* _GNOME_PERSIST_H_ */
+#endif /* _BONOBO_PERSIST_H_ */

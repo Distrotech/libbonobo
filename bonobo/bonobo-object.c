@@ -12,18 +12,18 @@
 #include <gtk/gtkmarshal.h>
 #include <gtk/gtktypeutils.h>
 #include <libgnorba/gnorba.h>
-#include <bonobo/gnome-main.h>
-#include <bonobo/gnome-object.h>
-#include "bonobo.h"
+#include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-object.h>
+#include "Bonobo.h"
 
-POA_GNOME_Unknown__vepv gnome_object_vepv;
+POA_Bonobo_Unknown__vepv bonobo_object_vepv;
 
 typedef struct {
 	int   ref_count;
 	GList *objs;
 } GnomeAggregateObject;
 
-struct _GnomeObjectPrivate {
+struct _BonoboObjectPrivate {
 	GnomeAggregateObject *ao;
 	int destroy_id;
 };
@@ -35,100 +35,100 @@ enum {
 	LAST_SIGNAL
 };
 
-static guint gnome_object_signals [LAST_SIGNAL];
-static GtkObjectClass *gnome_object_parent_class;
+static guint bonobo_object_signals [LAST_SIGNAL];
+static GtkObjectClass *bonobo_object_parent_class;
 
 /* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
 
 /**
- * gnome_object_from_servant:
+ * bonobo_object_from_servant:
  * @servant: Your servant.
  *
  * CORBA method implementations receive a parameter of type
  * #PortableServer_Servant which is a pointer to the servant that was
  * used to create this specific CORBA object instance.
  *
- * This routine allows the user to get the #GnomeObject (ie, Gtk
- * object wrapper) from the servant.  This #GnomeObject is the Gtk
+ * This routine allows the user to get the #BonoboObject (ie, Gtk
+ * object wrapper) from the servant.  This #BonoboObject is the Gtk
  * object wrapper associated with the CORBA object instance whose
  * method is being invoked.
  *
- * Returns: the #GnomeObject wrapper associated with @servant.
+ * Returns: the #BonoboObject wrapper associated with @servant.
  */
-GnomeObject *
-gnome_object_from_servant (PortableServer_Servant servant)
+BonoboObject *
+bonobo_object_from_servant (PortableServer_Servant servant)
 {
 	g_return_val_if_fail (servant != NULL, NULL);
 
-	return GNOME_OBJECT(((GnomeObjectServant *)servant)->gnome_object);
+	return BONOBO_OBJECT(((BonoboObjectServant *)servant)->bonobo_object);
 }
 
 /**
- * gnome_object_get_servant:
- * @object: A #GnomeObject which is associated with a servant.
+ * bonobo_object_get_servant:
+ * @object: A #BonoboObject which is associated with a servant.
  *
  * Returns: The servant associated with @object, or %NULL if
  * no servant is bound to @object.
  */
 PortableServer_Servant
-gnome_object_get_servant (GnomeObject *object)
+bonobo_object_get_servant (BonoboObject *object)
 {
 	g_return_val_if_fail (object != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
 	return object->servant;
 }
 
 /**
- * gnome_object_bind_to_servant:
- * @object: the GnomeObject to bind to the servant.
- * @servant: A PortableServer_Servant to bind to the GnomeObject.
+ * bonobo_object_bind_to_servant:
+ * @object: the BonoboObject to bind to the servant.
+ * @servant: A PortableServer_Servant to bind to the BonoboObject.
  *
  * This routine binds @object to @servant.  It establishes a one to
  * one mapping between the @object and the @servant.  Utility routines
- * are provided to go back and forth.  See gnome_object_from_servant()
- * and gnome_object_get_servant().
+ * are provided to go back and forth.  See bonobo_object_from_servant()
+ * and bonobo_object_get_servant().
  *
- * This routine is used internally by gnome_object_activate_servant().
+ * This routine is used internally by bonobo_object_activate_servant().
  */
 void
-gnome_object_bind_to_servant (GnomeObject *object, void *servant)
+bonobo_object_bind_to_servant (BonoboObject *object, void *servant)
 {
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (servant != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
 
 	object->servant = servant;
-	((GnomeObjectServant *)servant)->gnome_object = object;
+	((BonoboObjectServant *)servant)->bonobo_object = object;
 }
 
 /**
- * gnome_object_ref:
- * @object: A GnomeObject you want to ref-count
+ * bonobo_object_ref:
+ * @object: A BonoboObject you want to ref-count
  *
- * increments the reference count for the aggregate GnomeObject.
+ * increments the reference count for the aggregate BonoboObject.
  */
 void
-gnome_object_ref (GnomeObject *object)
+bonobo_object_ref (BonoboObject *object)
 {
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
 	object->priv->ao->ref_count++;
 }
 
 /**
- * gnome_object_unref:
- * @object: A GnomeObject you want to unref.
+ * bonobo_object_unref:
+ * @object: A BonoboObject you want to unref.
  *
- * decrements the reference count for the aggregate GnomeObject.
+ * decrements the reference count for the aggregate BonoboObject.
  */
 void
-gnome_object_unref (GnomeObject *object)
+bonobo_object_unref (BonoboObject *object)
 {
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
 	object->priv->ao->ref_count--;
@@ -138,7 +138,7 @@ gnome_object_unref (GnomeObject *object)
 		GList *l;
 
 		for (l = ao->objs; l; l = l->next){
-			GnomeObject *o = l->data;
+			BonoboObject *o = l->data;
 
 			gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
 			gtk_object_destroy (GTK_OBJECT (o));
@@ -150,27 +150,27 @@ gnome_object_unref (GnomeObject *object)
 }
 
 /**
- * gnome_object_destroy
- * @object: A GnomeObject you want to destroy.
+ * bonobo_object_destroy
+ * @object: A BonoboObject you want to destroy.
  *
  * Destroys an object.  Ignores all reference count.  Used when you want
  * to force the destruction of the composite object (use only if you know
  * what you are doing).
  */
 void
-gnome_object_destroy (GnomeObject *object)
+bonobo_object_destroy (BonoboObject *object)
 {
 	GnomeAggregateObject *ao;
 	GList *l;
 
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
 	ao = object->priv->ao;
 
 	for (l = ao->objs; l; l = l->next){
-		GnomeObject *o = l->data;
+		BonoboObject *o = l->data;
 
 		gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
 		gtk_object_destroy (GTK_OBJECT (o));
@@ -181,43 +181,43 @@ gnome_object_destroy (GnomeObject *object)
 }
 
 static void
-impl_GNOME_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
+impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 {
-	GnomeObject *object;
+	BonoboObject *object;
 
-	object = gnome_object_from_servant (servant);
-	gnome_object_ref (object);
+	object = bonobo_object_from_servant (servant);
+	bonobo_object_ref (object);
 }
 
 static void
-impl_GNOME_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev)
+impl_Bonobo_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 {
-	GnomeObject *object;
+	BonoboObject *object;
 
-	object = gnome_object_from_servant (servant);
-	gnome_object_unref (object);
+	object = bonobo_object_from_servant (servant);
+	bonobo_object_unref (object);
 }
 
 static CORBA_Object
-impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
+impl_Bonobo_Unknown_query_interface (PortableServer_Servant servant,
 				    const CORBA_char *repoid,
 				    CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-	GnomeObject *object;
+	BonoboObject *object;
 	GtkType type;
 	GList *l;
 
-	object = gnome_object_from_servant (servant);
+	object = bonobo_object_from_servant (servant);
 
 	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
 
 	gtk_signal_emit (
-		GTK_OBJECT (object), gnome_object_signals [QUERY_INTERFACE],
+		GTK_OBJECT (object), bonobo_object_signals [QUERY_INTERFACE],
 		repoid, &retval);
 
 	if (!CORBA_Object_is_nil (retval, ev)){
-		gnome_object_ref (object);
+		bonobo_object_ref (object);
 		return retval;
 	}
 
@@ -225,7 +225,7 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 
 	/* Try looking at the gtk types */
 	for (l = object->priv->ao->objs; l; l = l->next){
-		GnomeObject *tryme = l->data;
+		BonoboObject *tryme = l->data;
 
 		if ((type && gtk_type_is_a (GTK_OBJECT (tryme)->klass->type, type)) ||
 #ifdef ORBIT_IMPLEMENTS_IS_A
@@ -239,25 +239,25 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 		}
 	}
 	if (!CORBA_Object_is_nil (retval, ev))
-		gnome_object_ref (object);
+		bonobo_object_ref (object);
 
 	return retval;
 }
 
 /**
- * gnome_object_get_epv:
+ * bonobo_object_get_epv:
  *
  */
-POA_GNOME_Unknown__epv *
-gnome_object_get_epv (void)
+POA_Bonobo_Unknown__epv *
+bonobo_object_get_epv (void)
 {
-	POA_GNOME_Unknown__epv *epv;
+	POA_Bonobo_Unknown__epv *epv;
 
-	epv = g_new0 (POA_GNOME_Unknown__epv, 1);
+	epv = g_new0 (POA_Bonobo_Unknown__epv, 1);
 
-	epv->ref = impl_GNOME_Unknown_ref;
-	epv->unref = impl_GNOME_Unknown_unref;
-	epv->query_interface = impl_GNOME_Unknown_query_interface;
+	epv->ref = impl_Bonobo_Unknown_ref;
+	epv->unref = impl_Bonobo_Unknown_unref;
+	epv->query_interface = impl_Bonobo_Unknown_query_interface;
 
 	return epv;
 }
@@ -265,20 +265,20 @@ gnome_object_get_epv (void)
 static void
 init_object_corba_class (void)
 {
-	gnome_object_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	bonobo_object_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
 }
 
 static void
-gnome_object_object_destroy (GtkObject *object)
+bonobo_object_object_destroy (GtkObject *object)
 {
-	GnomeObject *gnome_object = GNOME_OBJECT (object);
-	void *servant = gnome_object->servant;
+	BonoboObject *bonobo_object = BONOBO_OBJECT (object);
+	void *servant = bonobo_object->servant;
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
 
-	if (gnome_object->corba_objref != CORBA_OBJECT_NIL)
-		CORBA_Object_release (gnome_object->corba_objref, &ev);
+	if (bonobo_object->corba_objref != CORBA_OBJECT_NIL)
+		CORBA_Object_release (bonobo_object->corba_objref, &ev);
 
 	if (servant){
 		PortableServer_ObjectId *oid;
@@ -286,66 +286,66 @@ gnome_object_object_destroy (GtkObject *object)
 		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, &ev);
 		PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
 
-		POA_GNOME_Unknown__fini (servant, &ev);
+		POA_Bonobo_Unknown__fini (servant, &ev);
 		CORBA_free(oid);
 	}
 	CORBA_exception_free (&ev);
 
-	g_free (gnome_object->priv);
-	gnome_object_parent_class->destroy (object);
+	g_free (bonobo_object->priv);
+	bonobo_object_parent_class->destroy (object);
 }
 
 static void
-gnome_object_class_init (GnomeObjectClass *klass)
+bonobo_object_class_init (BonoboObjectClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
-	gnome_object_parent_class = gtk_type_class (gtk_object_get_type ());
+	bonobo_object_parent_class = gtk_type_class (gtk_object_get_type ());
 
-	gnome_object_signals [QUERY_INTERFACE] =
+	bonobo_object_signals [QUERY_INTERFACE] =
 		gtk_signal_new ("query_interface",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeObjectClass,query_interface),
+				GTK_SIGNAL_OFFSET(BonoboObjectClass,query_interface),
 				gtk_marshal_NONE__POINTER_POINTER,
 				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER);
-	gnome_object_signals [SYSTEM_EXCEPTION] =
+	bonobo_object_signals [SYSTEM_EXCEPTION] =
 		gtk_signal_new ("system_exception",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeObjectClass,system_exception),
+				GTK_SIGNAL_OFFSET(BonoboObjectClass,system_exception),
 				gtk_marshal_NONE__POINTER,
 				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
-	gnome_object_signals [OBJECT_GONE] =
+	bonobo_object_signals [OBJECT_GONE] =
 		gtk_signal_new ("object_gone",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeObjectClass,object_gone),
+				GTK_SIGNAL_OFFSET(BonoboObjectClass,object_gone),
 				gtk_marshal_NONE__POINTER,
 				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
 
 
-	gtk_object_class_add_signals (object_class, gnome_object_signals, LAST_SIGNAL);
+	gtk_object_class_add_signals (object_class, bonobo_object_signals, LAST_SIGNAL);
 
-	object_class->destroy = gnome_object_object_destroy;
+	object_class->destroy = bonobo_object_object_destroy;
 
 	init_object_corba_class ();
 }
 
 static void
-gnome_object_usage_error (GnomeObject *object)
+bonobo_object_usage_error (BonoboObject *object)
 {
-	g_error ("Aggregate gnome_object member %p has been destroyed using gtk_object_* methods\n", object);
+	g_error ("Aggregate bonobo_object member %p has been destroyed using gtk_object_* methods\n", object);
 }
 
 static void
-gnome_object_instance_init (GtkObject *gtk_object)
+bonobo_object_instance_init (GtkObject *gtk_object)
 {
-	GnomeObject *object = GNOME_OBJECT (gtk_object);
+	BonoboObject *object = BONOBO_OBJECT (gtk_object);
 
-	object->priv = g_new (GnomeObjectPrivate, 1);
+	object->priv = g_new (BonoboObjectPrivate, 1);
 	object->priv->destroy_id = gtk_signal_connect (
-		gtk_object, "destroy", GTK_SIGNAL_FUNC (gnome_object_usage_error),
+		gtk_object, "destroy", GTK_SIGNAL_FUNC (bonobo_object_usage_error),
 		NULL);
 
 	object->priv->ao = g_new0 (GnomeAggregateObject, 1);
@@ -354,22 +354,22 @@ gnome_object_instance_init (GtkObject *gtk_object)
 }
 
 /**
- * gnome_object_get_type:
+ * bonobo_object_get_type:
  *
- * Returns: the GtkType associated with the base GnomeObject class type.
+ * Returns: the GtkType associated with the base BonoboObject class type.
  */
 GtkType
-gnome_object_get_type (void)
+bonobo_object_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/obj:1.0",
-			sizeof (GnomeObject),
-			sizeof (GnomeObjectClass),
-			(GtkClassInitFunc) gnome_object_class_init,
-			(GtkObjectInitFunc) gnome_object_instance_init,
+			"BonoboObject",
+			sizeof (BonoboObject),
+			sizeof (BonoboObjectClass),
+			(GtkClassInitFunc) bonobo_object_class_init,
+			(GtkObjectInitFunc) bonobo_object_instance_init,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
@@ -382,8 +382,8 @@ gnome_object_get_type (void)
 }
 
 /**
- * gnome_object_activate_servant:
- * @object: a GnomeObject
+ * bonobo_object_activate_servant:
+ * @object: a BonoboObject
  * @servant: The servant to activate.
  *
  * This routine activates the @servant which is wrapped inside the
@@ -393,13 +393,13 @@ gnome_object_get_type (void)
  * servant is @servant.  Might return CORBA_OBJECT_NIL on failure.
  */
 CORBA_Object
-gnome_object_activate_servant (GnomeObject *object, void *servant)
+bonobo_object_activate_servant (BonoboObject *object, void *servant)
 {
 	CORBA_Environment ev;
 	CORBA_Object o;
 
 	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (GNOME_IS_OBJECT (object), CORBA_OBJECT_NIL);
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), CORBA_OBJECT_NIL);
 	g_return_val_if_fail (servant != NULL, CORBA_OBJECT_NIL);
 
 	CORBA_exception_init (&ev);
@@ -414,7 +414,7 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 
 	if (o){
 		object->corba_objref = o;
-		gnome_object_bind_to_servant (object, servant);
+		bonobo_object_bind_to_servant (object, servant);
 		return o;
 	} else
 		return CORBA_OBJECT_NIL;
@@ -422,42 +422,42 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 }
 
 /**
- * gnome_object_construct:
+ * bonobo_object_construct:
  * @object: The GTK object server wrapper for the CORBA service.
  * @corba_object: the reference to the real CORBA object.
  *
- * Initializes the provided GnomeObject @object. This method is
+ * Initializes the provided BonoboObject @object. This method is
  * usually invoked from the construct method for other Gtk-based CORBA
  * wrappers that derive from the GNOME::obj interface
  *
- * Returns: the initialized GnomeObject.
+ * Returns: the initialized BonoboObject.
  */
-GnomeObject *
-gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
+BonoboObject *
+bonobo_object_construct (BonoboObject *object, CORBA_Object corba_object)
 {
 	g_return_val_if_fail (object != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 
 	object->corba_objref = corba_object;
 
-	/* GnomeObjects are self-owned */
+	/* BonoboObjects are self-owned */
 	GTK_OBJECT_UNSET_FLAGS (GTK_OBJECT (object), GTK_FLOATING);
 
 	return object;
 }
 
 /**
- * gnome_object_add_interface:
- * @object: The GnomeObject to which an interface is going to be added.
- * @newobj: The GnomeObject containing the new interface to be added.
+ * bonobo_object_add_interface:
+ * @object: The BonoboObject to which an interface is going to be added.
+ * @newobj: The BonoboObject containing the new interface to be added.
  *
  * Adds the interfaces supported by @newobj to the list of interfaces
  * for @object.  This function adds the interfaces supported by
  * @newobj to the list of interfaces support by @object.
  */
 void
-gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
+bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 {
        GnomeAggregateObject *oldao;
        GList *l;
@@ -480,7 +480,7 @@ gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
        for (l = newobj->priv->ao->objs; l; l = l->next){
                if (!g_list_find (object->priv->ao->objs, l->data)){
                        object->priv->ao->objs = g_list_prepend (object->priv->ao->objs, l->data);
-                       ((GnomeObject *)l->data)->priv->ao = object->priv->ao;
+                       ((BonoboObject *)l->data)->priv->ao = object->priv->ao;
                }
        }
 
@@ -489,20 +489,20 @@ gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
 }
 
 /**
- * gnome_object_query_interface:
- * @object: A GnomeObject to be queried for a given interface.
+ * bonobo_object_query_interface:
+ * @object: A BonoboObject to be queried for a given interface.
  * @repo_id: The name of the interface to be queried.
  *
  * Returns: The CORBA interface named @repo_id for @object.
  */
 CORBA_Object
-gnome_object_query_interface (GnomeObject *object, const char *repo_id)
+bonobo_object_query_interface (BonoboObject *object, const char *repo_id)
 {
        CORBA_Environment ev;
        CORBA_Object retval;
 
        CORBA_exception_init(&ev);
-       retval = GNOME_Unknown_query_interface (object->corba_objref, (CORBA_char *)repo_id, &ev);
+       retval = Bonobo_Unknown_query_interface (object->corba_objref, (CORBA_char *)repo_id, &ev);
        if(ev._major != CORBA_NO_EXCEPTION)
                retval = CORBA_OBJECT_NIL;
        CORBA_exception_free (&ev);
@@ -510,22 +510,22 @@ gnome_object_query_interface (GnomeObject *object, const char *repo_id)
 }
 
 /**
- * gnome_object_corba_objref:
- * @object: A GnomeObject whose CORBA object is requested.
+ * bonobo_object_corba_objref:
+ * @object: A BonoboObject whose CORBA object is requested.
  *
  * Returns: The CORBA interface object for which @object is a wrapper.
  */
 CORBA_Object
-gnome_object_corba_objref (GnomeObject *object)
+bonobo_object_corba_objref (BonoboObject *object)
 {
 	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
 	return object->corba_objref;
 }
 
 /**
- * gnome_object_check_env:
+ * bonobo_object_check_env:
  * @object: The object on which we operate
  * @ev: CORBA Environment to check
  *
@@ -537,32 +537,32 @@ gnome_object_corba_objref (GnomeObject *object)
  * to become defunct.
  */
 void
-gnome_object_check_env (GnomeObject *object, CORBA_Object obj, CORBA_Environment *ev)
+bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environment *ev)
 {
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (ev != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
 
 	if (ev->_major == CORBA_NO_EXCEPTION)
 		return;
 
 	if (ev->_major == CORBA_SYSTEM_EXCEPTION){
 		gtk_signal_emit (
-			GTK_OBJECT (object), gnome_object_signals [SYSTEM_EXCEPTION], obj, ev);
+			GTK_OBJECT (object), bonobo_object_signals [SYSTEM_EXCEPTION], obj, ev);
 	}
 }
 
 /**
  * gnome_unknown_ping:
- * @object: a CORBA object reference of type GNOME::Unknown
+ * @object: a CORBA object reference of type Bonobo::Unknown
  *
- * Pings the object @object using the ref/unref methods from GNOME::Unknown.
+ * Pings the object @object using the ref/unref methods from Bonobo::Unknown.
  * You can use this one to see if a remote object has gone away.
  *
  * Returns: %TRUE if the GNOME::Unkonwn @object is alive.
  */
 gboolean
-gnome_unknown_ping (GNOME_Unknown object)
+gnome_unknown_ping (Bonobo_Unknown object)
 {
 	CORBA_Environment ev;
 	gboolean alive;
@@ -571,9 +571,9 @@ gnome_unknown_ping (GNOME_Unknown object)
 
 	alive = FALSE;
 	CORBA_exception_init (&ev);
-	GNOME_Unknown_ref (object, &ev);
+	Bonobo_Unknown_ref (object, &ev);
 	if (ev._major == CORBA_NO_EXCEPTION){
-		GNOME_Unknown_unref (object, &ev);
+		Bonobo_Unknown_unref (object, &ev);
 		if (ev._major == CORBA_NO_EXCEPTION)
 			alive = TRUE;
 	}
@@ -583,25 +583,25 @@ gnome_unknown_ping (GNOME_Unknown object)
 }
 
 /**
- * gnome_object_from_servant:
- * @servant: A Servant that implements the GNOME::Unknown interface
+ * bonobo_object_from_servant:
+ * @servant: A Servant that implements the Bonobo::Unknown interface
  *
- * This wraps the servant @servant in a GnomeObject.
+ * This wraps the servant @servant in a BonoboObject.
  */
-GnomeObject *
-gnome_object_new_from_servant (void *servant)
+BonoboObject *
+bonobo_object_new_from_servant (void *servant)
 {
-	GnomeObject *object;
+	BonoboObject *object;
 	CORBA_Object corba_object;
 
 	g_return_val_if_fail (servant != NULL, NULL);
 
-	object = gtk_type_new (gnome_object_get_type ());
+	object = gtk_type_new (bonobo_object_get_type ());
 	if (object == NULL)
 		return NULL;
 
-	corba_object = gnome_object_activate_servant (object, servant);
-	gnome_object_construct (object, corba_object);
+	corba_object = bonobo_object_activate_servant (object, servant);
+	bonobo_object_construct (object, corba_object);
 
 	return object;
 }

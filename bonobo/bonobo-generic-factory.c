@@ -2,9 +2,9 @@
 /**
  * GNOME GenericFactory object.
  *
- * The GnomeGenericFactory object is used to instantiate new
+ * The BonoboGenericFactory object is used to instantiate new
  * GnomeGeneric objects.  It acts as a wrapper for the
- * GNOME::GenericFactory CORBA interface, and dispatches to
+ * Bonobo::GenericFactory CORBA interface, and dispatches to
  * a user-specified factory function whenever its create_object()
  * method is invoked.
  *
@@ -17,16 +17,16 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
 #include <libgnorba/gnorba.h>
-#include <bonobo/bonobo.h>
-#include <bonobo/gnome-main.h>
-#include <bonobo/gnome-generic-factory.h>
+#include <bonobo/Bonobo.h>
+#include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-generic-factory.h>
 
-POA_GNOME_GenericFactory__vepv gnome_generic_factory_vepv;
+POA_Bonobo_GenericFactory__vepv bonobo_generic_factory_vepv;
 
-static GnomeObjectClass *gnome_generic_factory_parent_class;
+static BonoboObjectClass *bonobo_generic_factory_parent_class;
 
 static CORBA_boolean
-impl_GNOME_GenericFactory_supports (PortableServer_Servant servant,
+impl_Bonobo_GenericFactory_supports (PortableServer_Servant servant,
 				    const CORBA_char      *obj_goad_id,
 				    CORBA_Environment     *ev)
 {
@@ -35,38 +35,38 @@ impl_GNOME_GenericFactory_supports (PortableServer_Servant servant,
 }
 
 static CORBA_Object
-impl_GNOME_GenericFactory_create_object (PortableServer_Servant  servant,
+impl_Bonobo_GenericFactory_create_object (PortableServer_Servant  servant,
 					 const CORBA_char       *obj_goad_id,
 					 const GNOME_stringlist *params,
 					 CORBA_Environment      *ev)
 {
-	GnomeGenericFactoryClass *class;
-	GnomeGenericFactory *factory;
-	GnomeObject *object;
+	BonoboGenericFactoryClass *class;
+	BonoboGenericFactory *factory;
+	BonoboObject *object;
 
-	factory = GNOME_GENERIC_FACTORY (gnome_object_from_servant (servant));
+	factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
 
-	class = GNOME_GENERIC_FACTORY_CLASS (GTK_OBJECT (factory)->klass);
+	class = BONOBO_GENERIC_FACTORY_CLASS (GTK_OBJECT (factory)->klass);
 	object = (*class->new_generic) (factory, obj_goad_id);
 
 	if (!object)
 		return CORBA_OBJECT_NIL;
 	
-	return CORBA_Object_duplicate (gnome_object_corba_objref (GNOME_OBJECT (object)), ev);
+	return CORBA_Object_duplicate (bonobo_object_corba_objref (BONOBO_OBJECT (object)), ev);
 }
 
 static CORBA_Object
-create_gnome_generic_factory (GnomeObject *object)
+create_bonobo_generic_factory (BonoboObject *object)
 {
-	POA_GNOME_GenericFactory *servant;
+	POA_Bonobo_GenericFactory *servant;
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
 
-	servant = (POA_GNOME_GenericFactory *)g_new0 (GnomeObjectServant, 1);
-	servant->vepv = &gnome_generic_factory_vepv;
+	servant = (POA_Bonobo_GenericFactory *)g_new0 (BonoboObjectServant, 1);
+	servant->vepv = &bonobo_generic_factory_vepv;
 
-	POA_GNOME_GenericFactory__init ((PortableServer_Servant) servant, &ev);
+	POA_Bonobo_GenericFactory__init ((PortableServer_Servant) servant, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_free (servant);
 		CORBA_exception_free (&ev);
@@ -74,29 +74,29 @@ create_gnome_generic_factory (GnomeObject *object)
 	}
 
 	CORBA_exception_free (&ev);
-	return gnome_object_activate_servant (object, servant);
+	return bonobo_object_activate_servant (object, servant);
 }
 
 /**
- * gnome_generic_factory_construct:
+ * bonobo_generic_factory_construct:
  * @goad_id: The GOAD id that the new factory will implement.
  * @c_factory: The object to be initialized.
  * @corba_factory: The CORBA object which supports the
- * GNOME::GenericFactory interface and which will be used to
- * construct this GnomeGenericFactory Gtk object.
+ * Bonobo::GenericFactory interface and which will be used to
+ * construct this BonoboGenericFactory Gtk object.
  * @factory: A callback which is used to create new GnomeGeneric object instances.
  * @data: The closure data to be passed to the @factory callback routine.
  *
  * Initializes @c_factory with the command-line arguments and registers
  * the new factory in the name server.
  *
- * Returns: The initialized GnomeGenericFactory object.
+ * Returns: The initialized BonoboGenericFactory object.
  */
-GnomeGenericFactory *
-gnome_generic_factory_construct (const char *goad_id,
-				 GnomeGenericFactory *c_factory,
+BonoboGenericFactory *
+bonobo_generic_factory_construct (const char *goad_id,
+				 BonoboGenericFactory *c_factory,
 				 CORBA_Object         corba_factory,
-				 GnomeGenericFactoryFn factory,
+				 BonoboGenericFactoryFn factory,
 				 GnomeFactoryCallback factory_cb,
 				 void *data)
 {
@@ -104,10 +104,10 @@ gnome_generic_factory_construct (const char *goad_id,
 	int ret;
 	
 	g_return_val_if_fail (c_factory != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_GENERIC_FACTORY (c_factory), NULL);
+	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (c_factory), NULL);
 	g_return_val_if_fail (corba_factory != CORBA_OBJECT_NIL, NULL);
 
-	gnome_object_construct (GNOME_OBJECT (c_factory), corba_factory);
+	bonobo_object_construct (BONOBO_OBJECT (c_factory), corba_factory);
 
 	c_factory->factory = factory;
 	c_factory->factory_cb = factory_cb;
@@ -123,7 +123,7 @@ gnome_generic_factory_construct (const char *goad_id,
 	CORBA_exception_free (&ev);
 
 	if (ret != 0){
-		gnome_object_unref (GNOME_OBJECT (c_factory));
+		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
 	}
 	
@@ -131,87 +131,87 @@ gnome_generic_factory_construct (const char *goad_id,
 }
 
 /**
- * gnome_generic_factory_new:
+ * bonobo_generic_factory_new:
  * @goad_id: The GOAD id that this factory implements
- * @factory: A callback which is used to create new GnomeObject instances.
+ * @factory: A callback which is used to create new BonoboObject instances.
  * @data: The closure data to be passed to the @factory callback routine.
  *
  * This is a helper routine that simplifies the creation of factory
  * objects for GNOME objects.  The @factory function will be
  * invoked by the CORBA server when a request arrives to create a new
- * instance of an object supporting the GNOME::Generic interface.
+ * instance of an object supporting the Bonobo::Generic interface.
  * The factory callback routine is passed the @data pointer to provide
  * the creation function with some state information.
  *
- * Returns: A GnomeGenericFactory object that has an activated
- * GNOME::GenericFactory object that has registered with the GNOME
+ * Returns: A BonoboGenericFactory object that has an activated
+ * Bonobo::GenericFactory object that has registered with the GNOME
  * name server.
  */
-GnomeGenericFactory *
-gnome_generic_factory_new (const char *goad_id, GnomeGenericFactoryFn factory, void *data)
+BonoboGenericFactory *
+bonobo_generic_factory_new (const char *goad_id, BonoboGenericFactoryFn factory, void *data)
 {
-	GnomeGenericFactory *c_factory;
-	GNOME_GenericFactory corba_factory;
+	BonoboGenericFactory *c_factory;
+	Bonobo_GenericFactory corba_factory;
 
 	g_return_val_if_fail (factory != NULL, NULL);
 	
-	c_factory = gtk_type_new (gnome_generic_factory_get_type ());
+	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
 
-	corba_factory = create_gnome_generic_factory (GNOME_OBJECT (c_factory));
+	corba_factory = create_bonobo_generic_factory (BONOBO_OBJECT (c_factory));
 	if (corba_factory == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (c_factory));
 		return NULL;
 	}
 	
-	return gnome_generic_factory_construct (
+	return bonobo_generic_factory_construct (
 		goad_id, c_factory, corba_factory, factory, NULL, data);
 }
 
 /**
- * gnome_generic_factory_new:
+ * bonobo_generic_factory_new:
  * @goad_id: The GOAD id that this factory implements
- * @factory_cb: A callback which is used to create new GnomeObject instances.
+ * @factory_cb: A callback which is used to create new BonoboObject instances.
  * @data: The closure data to be passed to the @factory callback routine.
  *
  * This is a helper routine that simplifies the creation of factory
  * objects for GNOME objects.  The @factory function will be
  * invoked by the CORBA server when a request arrives to create a new
- * instance of an object supporting the GNOME::Generic interface.
+ * instance of an object supporting the Bonobo::Generic interface.
  * The factory callback routine is passed the @data pointer to provide
  * the creation function with some state information.
  *
- * Returns: A GnomeGenericFactory object that has an activated
- * GNOME::GenericFactory object that has registered with the GNOME
+ * Returns: A BonoboGenericFactory object that has an activated
+ * Bonobo::GenericFactory object that has registered with the GNOME
  * name server.
  */
-GnomeGenericFactory *gnome_generic_factory_new_multi (
+BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	const char *goad_id,
 	GnomeFactoryCallback factory_cb,
 	gpointer data)
 {
-	GnomeGenericFactory *c_factory;
-	GNOME_GenericFactory corba_factory;
+	BonoboGenericFactory *c_factory;
+	Bonobo_GenericFactory corba_factory;
 
 	g_return_val_if_fail (factory_cb != NULL, NULL);
 	g_return_val_if_fail (goad_id != NULL, NULL);
 	
-	c_factory = gtk_type_new (gnome_generic_factory_get_type ());
+	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
 
-	corba_factory = create_gnome_generic_factory (GNOME_OBJECT (c_factory));
+	corba_factory = create_bonobo_generic_factory (BONOBO_OBJECT (c_factory));
 	if (corba_factory == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (c_factory));
 		return NULL;
 	}
 	
-	return gnome_generic_factory_construct (
+	return bonobo_generic_factory_construct (
 		goad_id, c_factory, corba_factory, NULL, factory_cb, data);
 }
 
 
 static void
-gnome_generic_factory_finalize (GtkObject *object)
+bonobo_generic_factory_finalize (GtkObject *object)
 {
-	GnomeGenericFactory *c_factory G_GNUC_UNUSED = GNOME_GENERIC_FACTORY (object);
+	BonoboGenericFactory *c_factory G_GNUC_UNUSED = BONOBO_GENERIC_FACTORY (object);
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
@@ -219,14 +219,14 @@ gnome_generic_factory_finalize (GtkObject *object)
 	CORBA_exception_free (&ev);
 	g_free (c_factory->goad_id);
 	
-	GTK_OBJECT_CLASS (gnome_generic_factory_parent_class)->destroy (object);
+	GTK_OBJECT_CLASS (bonobo_generic_factory_parent_class)->destroy (object);
 }
 
-static GnomeObject *
-gnome_generic_factory_new_generic (GnomeGenericFactory *factory, const char *goad_id)
+static BonoboObject *
+bonobo_generic_factory_new_generic (BonoboGenericFactory *factory, const char *goad_id)
 {
 	g_return_val_if_fail (factory != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_GENERIC_FACTORY (factory), NULL);
+	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 
 	if(factory->factory_cb)
 		return (*factory->factory_cb)(factory, goad_id, factory->factory_closure);
@@ -237,59 +237,59 @@ gnome_generic_factory_new_generic (GnomeGenericFactory *factory, const char *goa
 static void
 init_generic_factory_corba_class (void)
 {
-	gnome_generic_factory_vepv.GNOME_GenericFactory_epv = gnome_generic_factory_get_epv ();
+	bonobo_generic_factory_vepv.Bonobo_GenericFactory_epv = bonobo_generic_factory_get_epv ();
 }
 
 static void
-gnome_generic_factory_class_init (GnomeGenericFactoryClass *klass)
+bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
-	gnome_generic_factory_parent_class = gtk_type_class (gnome_object_get_type ());
+	bonobo_generic_factory_parent_class = gtk_type_class (bonobo_object_get_type ());
 
-	object_class->finalize = gnome_generic_factory_finalize;
+	object_class->finalize = bonobo_generic_factory_finalize;
 
-	klass->new_generic = gnome_generic_factory_new_generic;
+	klass->new_generic = bonobo_generic_factory_new_generic;
 
 	init_generic_factory_corba_class ();
 }
 
 static void
-gnome_generic_factory_init (GnomeObject *object)
+bonobo_generic_factory_init (BonoboObject *object)
 {
 }
 
 /**
- * gnome_generic_factory_get_type:
+ * bonobo_generic_factory_get_type:
  *
- * Returns: The GtkType of the GnomeGenericFactory class.
+ * Returns: The GtkType of the BonoboGenericFactory class.
  */
 GtkType
-gnome_generic_factory_get_type (void)
+bonobo_generic_factory_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
-			"GnomeGenericFactory",
-			sizeof (GnomeGenericFactory),
-			sizeof (GnomeGenericFactoryClass),
-			(GtkClassInitFunc) gnome_generic_factory_class_init,
-			(GtkObjectInitFunc) gnome_generic_factory_init,
+			"BonoboGenericFactory",
+			sizeof (BonoboGenericFactory),
+			sizeof (BonoboGenericFactoryClass),
+			(GtkClassInitFunc) bonobo_generic_factory_class_init,
+			(GtkObjectInitFunc) bonobo_generic_factory_init,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_object_get_type (), &info);
+		type = gtk_type_unique (bonobo_object_get_type (), &info);
 	}
 
 	return type;
 }
 
 /**
- * gnome_generic_factory_set:
- * @c_factory: The GnomeGenericFactory object whose callback will be set.
+ * bonobo_generic_factory_set:
+ * @c_factory: The BonoboGenericFactory object whose callback will be set.
  * @factory: A callback routine which is used to create new object instances.
  * @data: The closure data to be passed to the @factory callback.
  *
@@ -297,12 +297,12 @@ gnome_generic_factory_get_type (void)
  * @factory and @data, respectively.
  */
 void
-gnome_generic_factory_set (GnomeGenericFactory *c_factory,
-			      GnomeGenericFactoryFn factory,
+bonobo_generic_factory_set (BonoboGenericFactory *c_factory,
+			      BonoboGenericFactoryFn factory,
 			      void *data)
 {
 	g_return_if_fail (c_factory != NULL);
-	g_return_if_fail (GNOME_IS_GENERIC_FACTORY (c_factory));
+	g_return_if_fail (BONOBO_IS_GENERIC_FACTORY (c_factory));
 	g_return_if_fail (factory != NULL);
 
 	c_factory->factory = factory;
@@ -311,17 +311,17 @@ gnome_generic_factory_set (GnomeGenericFactory *c_factory,
 
 
 /**
- * gnome_generic_factory_get_epv:
+ * bonobo_generic_factory_get_epv:
  */
-POA_GNOME_GenericFactory__epv *
-gnome_generic_factory_get_epv (void)
+POA_Bonobo_GenericFactory__epv *
+bonobo_generic_factory_get_epv (void)
 {
-	POA_GNOME_GenericFactory__epv *epv;
+	POA_Bonobo_GenericFactory__epv *epv;
 
-	epv = g_new0 (POA_GNOME_GenericFactory__epv, 1);
+	epv = g_new0 (POA_Bonobo_GenericFactory__epv, 1);
 
-	epv->supports	   = impl_GNOME_GenericFactory_supports;
-	epv->create_object = impl_GNOME_GenericFactory_create_object;
+	epv->supports	   = impl_Bonobo_GenericFactory_supports;
+	epv->create_object = impl_Bonobo_GenericFactory_create_object;
 
 	return epv;
 }

@@ -6,65 +6,65 @@
  * Copyright 1999 Helix Code, Inc.
  */
 
-#ifndef _GNOME_CONTAINER_H_
-#define _GNOME_CONTAINER_H_
+#ifndef _BONOBO_CONTAINER_H_
+#define _BONOBO_CONTAINER_H_
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkobject.h>
-#include <bonobo/gnome-object.h>
-#include <bonobo/gnome-moniker.h>
-#include <bonobo/gnome-container.h>
+#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-moniker.h>
+#include <bonobo/bonobo-container.h>
 
 BEGIN_GNOME_DECLS
  
-#define GNOME_CONTAINER_TYPE        (gnome_container_get_type ())
-#define GNOME_CONTAINER(o)          (GTK_CHECK_CAST ((o), GNOME_CONTAINER_TYPE, GnomeContainer))
-#define GNOME_CONTAINER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_CONTAINER_TYPE, GnomeContainerClass))
-#define GNOME_IS_CONTAINER(o)       (GTK_CHECK_TYPE ((o), GNOME_CONTAINER_TYPE))
-#define GNOME_IS_CONTAINER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_CONTAINER_TYPE))
+#define BONOBO_CONTAINER_TYPE        (bonobo_container_get_type ())
+#define BONOBO_CONTAINER(o)          (GTK_CHECK_CAST ((o), BONOBO_CONTAINER_TYPE, BonoboContainer))
+#define BONOBO_CONTAINER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_CONTAINER_TYPE, BonoboContainerClass))
+#define BONOBO_IS_CONTAINER(o)       (GTK_CHECK_TYPE ((o), BONOBO_CONTAINER_TYPE))
+#define BONOBO_IS_CONTAINER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_CONTAINER_TYPE))
 
-typedef GList GnomeClientSiteList;
+typedef GList BonoboClientSiteList;
 
-typedef struct _GnomeContainerPrivate GnomeContainerPrivate;
+typedef struct _BonoboContainerPrivate BonoboContainerPrivate;
 
 typedef struct {
-	GnomeObject base;
+	BonoboObject base;
 
-	GnomeClientSiteList *client_sites;
+	BonoboClientSiteList *client_sites;
 	
-	GnomeMoniker *moniker;
+	BonoboMoniker *moniker;
 
-	GnomeContainerPrivate *priv;
-} GnomeContainer;
+	BonoboContainerPrivate *priv;
+} BonoboContainer;
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
-	GNOME_Unknown (*get_object) (GnomeContainer *item_container,
+	Bonobo_Unknown (*get_object) (BonoboContainer *item_container,
 				     CORBA_char *item_name,
 				     CORBA_boolean *only_if_exists,
 				     CORBA_Environment *ev);
-} GnomeContainerClass;
+} BonoboContainerClass;
 
-GtkType          gnome_container_get_type    (void);
-GnomeContainer  *gnome_container_new         (void);
-GnomeContainer  *gnome_container_construct   (GnomeContainer *container,
-					      GNOME_Container container_corba);
-GnomeMoniker    *gnome_container_get_moniker (GnomeContainer *container);
+GtkType          bonobo_container_get_type    (void);
+BonoboContainer  *bonobo_container_new         (void);
+BonoboContainer  *bonobo_container_construct   (BonoboContainer *container,
+					      Bonobo_Container container_corba);
+BonoboMoniker    *bonobo_container_get_moniker (BonoboContainer *container);
 
-void             gnome_container_add         (GnomeContainer *container,
-					      GnomeObject    *object);
+void             bonobo_container_add         (BonoboContainer *container,
+					      BonoboObject    *object);
 
-void             gnome_container_remove       (GnomeContainer *container,
-					       GnomeObject    *object);
+void             bonobo_container_remove       (BonoboContainer *container,
+					       BonoboObject    *object);
 
-POA_GNOME_Container__epv *gnome_container_get_epv (void);
+POA_Bonobo_Container__epv *bonobo_container_get_epv (void);
 
 /*
  * Exported vectors
  */
-extern POA_GNOME_Container__epv gnome_container_epv;
-extern POA_GNOME_Container__vepv gnome_container_vepv;
+extern POA_Bonobo_Container__epv bonobo_container_epv;
+extern POA_Bonobo_Container__vepv bonobo_container_vepv;
 
 END_GNOME_DECLS
 

@@ -1,35 +1,35 @@
-#ifndef __GNOME_PROPERTY_BAG_CLIENT_H__
-#define __GNOME_PROPERTY_BAG_CLIENT_H__
+#ifndef __BONOBO_PROPERTY_BAG_CLIENT_H__
+#define __BONOBO_PROPERTY_BAG_CLIENT_H__
 
 #include <libgnome/gnome-defs.h>
-#include <bonobo/gnome-object.h>
-#include <bonobo/gnome-stream.h>
-#include <bonobo/gnome-property-bag.h>
+#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-stream.h>
+#include <bonobo/bonobo-property-bag.h>
 
 BEGIN_GNOME_DECLS
 
 typedef struct {
 	GtkObject		        parent;
-	GNOME_PropertyBag		corba_pb;
-} GnomePropertyBagClient;
+	Bonobo_PropertyBag		corba_pb;
+} BonoboPropertyBagClient;
 
 typedef struct {
 	GtkObjectClass			parent;
-} GnomePropertyBagClientClass;
+} BonoboPropertyBagClientClass;
 
 /* Property bag proxy routines */
-GnomePropertyBagClient  *gnome_property_bag_client_new		      (GNOME_PropertyBag corba_property_bag);
-GList			*gnome_property_bag_client_get_properties     (GnomePropertyBagClient *pbc);
-void                     gnome_property_bag_client_free_properties    (GList *list);
-GList			*gnome_property_bag_client_get_property_names (GnomePropertyBagClient *pbc);
-GNOME_Property		 gnome_property_bag_client_get_property       (GnomePropertyBagClient *pbc,
+BonoboPropertyBagClient  *bonobo_property_bag_client_new		      (Bonobo_PropertyBag corba_property_bag);
+GList			*bonobo_property_bag_client_get_properties     (BonoboPropertyBagClient *pbc);
+void                     bonobo_property_bag_client_free_properties    (GList *list);
+GList			*bonobo_property_bag_client_get_property_names (BonoboPropertyBagClient *pbc);
+Bonobo_Property		 bonobo_property_bag_client_get_property       (BonoboPropertyBagClient *pbc,
 								       const char *property_name);
-void			 gnome_property_bag_client_persist	      (GnomePropertyBagClient *pbc,
-								       GNOME_Stream stream);
-void			 gnome_property_bag_client_depersist	      (GnomePropertyBagClient *pbc,
-								       GNOME_Stream stream);
+void			 bonobo_property_bag_client_persist	      (BonoboPropertyBagClient *pbc,
+								       Bonobo_Stream stream);
+void			 bonobo_property_bag_client_depersist	      (BonoboPropertyBagClient *pbc,
+								       Bonobo_Stream stream);
 
-GtkType			 gnome_property_bag_client_get_type	      (void);
+GtkType			 bonobo_property_bag_client_get_type	      (void);
 
 
 
@@ -43,91 +43,91 @@ GtkType			 gnome_property_bag_client_get_type	      (void);
  */
 
 /* Querying the property type. */
-CORBA_TypeCode           gnome_property_bag_client_get_property_type   (GnomePropertyBagClient *pbc,
+CORBA_TypeCode           bonobo_property_bag_client_get_property_type   (BonoboPropertyBagClient *pbc,
 									const char *propname);
 
 /* Querying property values. */
-gboolean		 gnome_property_bag_client_get_value_boolean   (GnomePropertyBagClient *pbc,
+gboolean		 bonobo_property_bag_client_get_value_boolean   (BonoboPropertyBagClient *pbc,
 									const char *propname);
-gshort			 gnome_property_bag_client_get_value_short     (GnomePropertyBagClient *pbc,
+gshort			 bonobo_property_bag_client_get_value_short     (BonoboPropertyBagClient *pbc,
 									const char *propname);
-gushort			 gnome_property_bag_client_get_value_ushort    (GnomePropertyBagClient *pbc,
+gushort			 bonobo_property_bag_client_get_value_ushort    (BonoboPropertyBagClient *pbc,
 									const char *propname);
-glong			 gnome_property_bag_client_get_value_long      (GnomePropertyBagClient *pbc,
+glong			 bonobo_property_bag_client_get_value_long      (BonoboPropertyBagClient *pbc,
 									const char *propname);
-gulong			 gnome_property_bag_client_get_value_ulong     (GnomePropertyBagClient *pbc,
+gulong			 bonobo_property_bag_client_get_value_ulong     (BonoboPropertyBagClient *pbc,
 								       	const char *propname);
-gfloat			 gnome_property_bag_client_get_value_float     (GnomePropertyBagClient *pbc,
+gfloat			 bonobo_property_bag_client_get_value_float     (BonoboPropertyBagClient *pbc,
 								       	const char *propname);
-gdouble			 gnome_property_bag_client_get_value_double    (GnomePropertyBagClient *pbc,
+gdouble			 bonobo_property_bag_client_get_value_double    (BonoboPropertyBagClient *pbc,
 								       	const char *propname);
-char			*gnome_property_bag_client_get_value_string    (GnomePropertyBagClient *pbc,
+char			*bonobo_property_bag_client_get_value_string    (BonoboPropertyBagClient *pbc,
 								       	const char *propname);
-CORBA_any		*gnome_property_bag_client_get_value_any       (GnomePropertyBagClient *pbc,
+CORBA_any		*bonobo_property_bag_client_get_value_any       (BonoboPropertyBagClient *pbc,
 									const char *propname);
 
 /* Querying property default values. */ 						  		       
-gboolean		 gnome_property_bag_client_get_default_boolean (GnomePropertyBagClient *pbc,
+gboolean		 bonobo_property_bag_client_get_default_boolean (BonoboPropertyBagClient *pbc,
 									const char *propname);
-gshort			 gnome_property_bag_client_get_default_short   (GnomePropertyBagClient *pbc,
+gshort			 bonobo_property_bag_client_get_default_short   (BonoboPropertyBagClient *pbc,
 									const char *propname);
-gushort			 gnome_property_bag_client_get_default_ushort  (GnomePropertyBagClient *pbc,
+gushort			 bonobo_property_bag_client_get_default_ushort  (BonoboPropertyBagClient *pbc,
 									const char *propname);
-glong			 gnome_property_bag_client_get_default_long    (GnomePropertyBagClient *pbc,
+glong			 bonobo_property_bag_client_get_default_long    (BonoboPropertyBagClient *pbc,
 									const char *propname);
-gulong			 gnome_property_bag_client_get_default_ulong   (GnomePropertyBagClient *pbc,
+gulong			 bonobo_property_bag_client_get_default_ulong   (BonoboPropertyBagClient *pbc,
 									const char *propname);
-gfloat			 gnome_property_bag_client_get_default_float   (GnomePropertyBagClient *pbc,
+gfloat			 bonobo_property_bag_client_get_default_float   (BonoboPropertyBagClient *pbc,
 									const char *propname);
-gdouble			 gnome_property_bag_client_get_default_double  (GnomePropertyBagClient *pbc,
+gdouble			 bonobo_property_bag_client_get_default_double  (BonoboPropertyBagClient *pbc,
 									const char *propname);
-char			*gnome_property_bag_client_get_default_string  (GnomePropertyBagClient *pbc,
+char			*bonobo_property_bag_client_get_default_string  (BonoboPropertyBagClient *pbc,
 								       	const char *propname);
-CORBA_any		*gnome_property_bag_client_get_default_any     (GnomePropertyBagClient *pbc,
+CORBA_any		*bonobo_property_bag_client_get_default_any     (BonoboPropertyBagClient *pbc,
 									const char *propname);
 
 /* Setting property values. */
-void			 gnome_property_bag_client_set_value_boolean   (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_boolean   (BonoboPropertyBagClient *pbc,
 								       	const char *propname,
 									gboolean value);
-void			 gnome_property_bag_client_set_value_short     (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_short     (BonoboPropertyBagClient *pbc,
 								       	const char *propname,
 									gshort value);
-void			 gnome_property_bag_client_set_value_ushort    (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_ushort    (BonoboPropertyBagClient *pbc,
 								       	const char *propname,
 									gushort value);
-void			 gnome_property_bag_client_set_value_long      (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_long      (BonoboPropertyBagClient *pbc,
 								       	const char *propname,
 									glong value);
-void			 gnome_property_bag_client_set_value_ulong     (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_ulong     (BonoboPropertyBagClient *pbc,
 								       	const char *propname,
 									gulong value);
-void			 gnome_property_bag_client_set_value_float     (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_float     (BonoboPropertyBagClient *pbc,
 								       	const char *propname,
 									gfloat value);
-void			 gnome_property_bag_client_set_value_double    (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_double    (BonoboPropertyBagClient *pbc,
 									const char *propname,
 									gdouble value);
-void			 gnome_property_bag_client_set_value_string    (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_string    (BonoboPropertyBagClient *pbc,
 									const char *propname,
 									char *value);
-void			 gnome_property_bag_client_set_value_any       (GnomePropertyBagClient *pbc,
+void			 bonobo_property_bag_client_set_value_any       (BonoboPropertyBagClient *pbc,
 									const char *propname,
 									CORBA_any *value);
 
 /* Querying other fields and flags. */
-char			*gnome_property_bag_client_get_docstring       (GnomePropertyBagClient *pbc,
+char			*bonobo_property_bag_client_get_docstring       (BonoboPropertyBagClient *pbc,
 									const char *propname);
-GnomePropertyFlags	 gnome_property_bag_client_get_flags	       (GnomePropertyBagClient *pbc,
+BonoboPropertyFlags	 bonobo_property_bag_client_get_flags	       (BonoboPropertyBagClient *pbc,
 									const char *propname);
 
 
-#define GNOME_PROPERTY_BAG_CLIENT_TYPE        (gnome_property_bag_client_get_type ())
-#define GNOME_PROPERTY_BAG_CLIENT(o)          (GTK_CHECK_CAST ((o), GNOME_PROPERTY_BAG_CLIENT_TYPE, GnomePropertyBagClient))
-#define GNOME_PROPERTY_BAG_CLIENT_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_PROPERTY_BAG_CLIENT_TYPE, GnomePropertyBagClientClass))
-#define GNOME_IS_PROPERTY_BAG_CLIENT(o)       (GTK_CHECK_TYPE ((o), GNOME_PROPERTY_BAG_CLIENT_TYPE))
-#define GNOME_IS_PROPERTY_BAG_CLIENT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PROPERTY_BAG_CLIENT_TYPE))
+#define BONOBO_PROPERTY_BAG_CLIENT_TYPE        (bonobo_property_bag_client_get_type ())
+#define BONOBO_PROPERTY_BAG_CLIENT(o)          (GTK_CHECK_CAST ((o), BONOBO_PROPERTY_BAG_CLIENT_TYPE, BonoboPropertyBagClient))
+#define BONOBO_PROPERTY_BAG_CLIENT_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PROPERTY_BAG_CLIENT_TYPE, BonoboPropertyBagClientClass))
+#define BONOBO_IS_PROPERTY_BAG_CLIENT(o)       (GTK_CHECK_TYPE ((o), BONOBO_PROPERTY_BAG_CLIENT_TYPE))
+#define BONOBO_IS_PROPERTY_BAG_CLIENT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PROPERTY_BAG_CLIENT_TYPE))
 
 END_GNOME_DECLS
 
-#endif /* ! ___GNOME_PROPERTY_BAG_CLIENT_H__ */
+#endif /* ! ___BONOBO_PROPERTY_BAG_CLIENT_H__ */

@@ -8,21 +8,21 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
-#include <bonobo/gnome-moniker.h>
+#include <bonobo/bonobo-moniker.h>
 #include <string.h>
 
-GtkObject *gnome_moniker_parent_class;
+GtkObject *bonobo_moniker_parent_class;
 /**
- * gnome_moniker_set_server:
+ * bonobo_moniker_set_server:
  * @moniker: the moniker on which we act.
  * @goadid: a GOAD ID for the server
  * @filename: the url on which this
  */
 void
-gnome_moniker_set_server (GnomeMoniker *moniker, const char *goadid, const char *url)
+bonobo_moniker_set_server (BonoboMoniker *moniker, const char *goadid, const char *url)
 {
 	g_return_if_fail (moniker != NULL);
-	g_return_if_fail (GNOME_IS_MONIKER (moniker));
+	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
 	g_return_if_fail (goadid != NULL);
 	g_return_if_fail (url != NULL);
 
@@ -36,15 +36,15 @@ gnome_moniker_set_server (GnomeMoniker *moniker, const char *goadid, const char 
 }
 	
 /**
- * gnome_moniker_append_item_name:
+ * bonobo_moniker_append_item_name:
  * @moniker: the moniker on which we act.
  * @item_name: a string describing the item to append.
  */
 void
-gnome_moniker_append_item_name (GnomeMoniker *moniker, const char *item_name)
+bonobo_moniker_append_item_name (BonoboMoniker *moniker, const char *item_name)
 {
 	g_return_if_fail (moniker != NULL);
-	g_return_if_fail (GNOME_IS_MONIKER (moniker));
+	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
 	g_return_if_fail (item_name != NULL);
 
 	moniker->items = g_list_prepend (moniker->items, g_strdup (item_name));
@@ -83,14 +83,14 @@ escape (const char *str)
 }
 
 /**
- * gnome_moniker_get_as_string:
+ * bonobo_moniker_get_as_string:
  * @moniker: the moniker object we operate on.
  *
  * Returns a textual representation of the moniker @moniker.  A %NULL
  * is returned on any errors encountered.
  */
 char *
-gnome_moniker_get_as_string (GnomeMoniker *moniker)
+bonobo_moniker_get_as_string (BonoboMoniker *moniker)
 {
 	int n, i;
 	GList *l;
@@ -99,7 +99,7 @@ gnome_moniker_get_as_string (GnomeMoniker *moniker)
 	int len;
 	
 	g_return_val_if_fail (moniker != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_MONIKER (moniker), NULL);
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), NULL);
 
 	if (moniker->goadid == NULL)
 		return NULL;
@@ -139,26 +139,26 @@ gnome_moniker_get_as_string (GnomeMoniker *moniker)
 }
 
 /**
- * gnome_moniker_new:
+ * bonobo_moniker_new:
  *
- * Creates a new GnomeMoniker object
+ * Creates a new BonoboMoniker object
  *
- * Returns: The newly-constructed GnomeMoniker object.
+ * Returns: The newly-constructed BonoboMoniker object.
  */
-GnomeMoniker *
-gnome_moniker_new (void)
+BonoboMoniker *
+bonobo_moniker_new (void)
 {
-	GnomeMoniker *moniker;
+	BonoboMoniker *moniker;
 
-	moniker = gtk_type_new (gnome_moniker_get_type ());
+	moniker = gtk_type_new (bonobo_moniker_get_type ());
 
 	return moniker;
 }
 
 static void
-gnome_moniker_destroy (GtkObject *object)
+bonobo_moniker_destroy (GtkObject *object)
 {
-	GnomeMoniker *moniker = (GnomeMoniker *) object;
+	BonoboMoniker *moniker = (BonoboMoniker *) object;
 	GList *l;
 	
 	if (moniker->goadid)
@@ -172,33 +172,33 @@ gnome_moniker_destroy (GtkObject *object)
 		g_free (string);
 	}
 	g_list_free (moniker->items);
-	GTK_OBJECT_CLASS (gnome_moniker_parent_class)->destroy(object);
+	GTK_OBJECT_CLASS (bonobo_moniker_parent_class)->destroy(object);
 }
 
 static void
-gnome_moniker_class_init (GtkObjectClass *object_class)
+bonobo_moniker_class_init (GtkObjectClass *object_class)
 {
-	gnome_moniker_parent_class = gtk_type_class (gtk_object_get_type ());
+	bonobo_moniker_parent_class = gtk_type_class (gtk_object_get_type ());
 	
-	object_class->destroy = gnome_moniker_destroy;
+	object_class->destroy = bonobo_moniker_destroy;
 }
 
 /**
- * gnome_moniker_get_type:
+ * bonobo_moniker_get_type:
  *
- * Returns: The GtkType of the GnomeMoniker class.
+ * Returns: The GtkType of the BonoboMoniker class.
  */
 GtkType
-gnome_moniker_get_type (void)
+bonobo_moniker_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
-			"GnomeMoniker",
-			sizeof (GnomeMoniker),
-			sizeof (GnomeMonikerClass),
-			(GtkClassInitFunc) gnome_moniker_class_init,
+			"BonoboMoniker",
+			sizeof (BonoboMoniker),
+			sizeof (BonoboMonikerClass),
+			(GtkClassInitFunc) bonobo_moniker_class_init,
 			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */

@@ -1,44 +1,44 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_MONIKER_H_
-#define _GNOME_MONIKER_H_
+#ifndef _BONOBO_MONIKER_H_
+#define _BONOBO_MONIKER_H_
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkobject.h>
-#include <bonobo/bonobo.h>
+#include <bonobo/Bonobo.h>
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_MONIKER_TYPE        (gnome_moniker_get_type ())
-#define GNOME_MONIKER(o)          (GTK_CHECK_CAST ((o), GNOME_MONIKER_TYPE, GnomeMoniker))
-#define GNOME_MONIKER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_MONIKER_TYPE, GnomeMonikerClass))
-#define GNOME_IS_MONIKER(o)       (GTK_CHECK_TYPE ((o), GNOME_MONIKER_TYPE))
-#define GNOME_IS_MONIKER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_MONIKER_TYPE))
+#define BONOBO_MONIKER_TYPE        (bonobo_moniker_get_type ())
+#define BONOBO_MONIKER(o)          (GTK_CHECK_CAST ((o), BONOBO_MONIKER_TYPE, BonoboMoniker))
+#define BONOBO_MONIKER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_MONIKER_TYPE, BonoboMonikerClass))
+#define BONOBO_IS_MONIKER(o)       (GTK_CHECK_TYPE ((o), BONOBO_MONIKER_TYPE))
+#define BONOBO_IS_MONIKER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_TYPE))
 
-struct _GnomeMoniker;
-typedef struct _GnomeMoniker GnomeMoniker;
-struct _GnomeMonikerPrivate;
-typedef struct _GnomeMonikerPrivate GnomeMonikerPrivate;
+struct _BonoboMoniker;
+typedef struct _BonoboMoniker BonoboMoniker;
+struct _BonoboMonikerPrivate;
+typedef struct _BonoboMonikerPrivate BonoboMonikerPrivate;
 
-struct _GnomeMoniker {
+struct _BonoboMoniker {
 	GtkObject parent;
 
 	char *goadid, *url;
 	GList *items;
-	GnomeMonikerPrivate *priv;
+	BonoboMonikerPrivate *priv;
 };
 
 typedef struct {
 	GtkObjectClass parent_class;
-} GnomeMonikerClass;
+} BonoboMonikerClass;
 
-GtkType           gnome_moniker_get_type         (void);
-GnomeMoniker	 *gnome_moniker_new              (void);
-void              gnome_moniker_set_server       (GnomeMoniker *moniker,
+GtkType           bonobo_moniker_get_type         (void);
+BonoboMoniker	 *bonobo_moniker_new              (void);
+void              bonobo_moniker_set_server       (BonoboMoniker *moniker,
 					          const char *goad_id,
 					          const char *filename);
-void              gnome_moniker_append_item_name (GnomeMoniker *moniker,
+void              bonobo_moniker_append_item_name (BonoboMoniker *moniker,
 						  const char *item_name);
-char             *gnome_moniker_get_as_string    (GnomeMoniker *moniker);
+char             *bonobo_moniker_get_as_string    (BonoboMoniker *moniker);
 
 
 END_GNOME_DECLS

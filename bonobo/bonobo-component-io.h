@@ -1,28 +1,28 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_EMBEDDABLE_IO_H_
-#define _GNOME_EMBEDDABLE_IO_H_
+#ifndef _BONOBO_EMBEDDABLE_IO_H_
+#define _BONOBO_EMBEDDABLE_IO_H_
 
-#include <bonobo/gnome-embeddable.h>
-#include <bonobo/gnome-storage.h>
+#include <bonobo/bonobo-embeddable.h>
+#include <bonobo/bonobo-storage.h>
 
 BEGIN_GNOME_DECLS
 
-GnomeEmbeddable *gnome_embeddable_load             (GnomeStorage *storage,
+BonoboEmbeddable *bonobo_embeddable_load             (BonoboStorage *storage,
 							 const char *interface,
-							 GnomeClientSite *client_site);
+							 BonoboClientSite *client_site);
 
-int                gnome_embeddable_save             (GnomeEmbeddable *bonobo_object,
-							 GnomeStorage   *storage,
+int                bonobo_embeddable_save             (BonoboEmbeddable *bonobo_object,
+							 BonoboStorage   *storage,
 							 gboolean       same_as_loaded);
 
-GnomeEmbeddable *gnome_embeddable_load_from_stream (GnomeStream *stream,
+BonoboEmbeddable *bonobo_embeddable_load_from_stream (BonoboStream *stream,
 							 const char *interface);
 
-int                gnome_embeddable_save_to_stream   (GnomeEmbeddable *bonobo_object,
-							 GnomeStream    *stream);
+int                bonobo_embeddable_save_to_stream   (BonoboEmbeddable *bonobo_object,
+							 BonoboStream    *stream);
 
 char              *gnome_get_class_id_from_file         (const char *filename);
 
 END_GNOME_DECLS
 
-#endif /* _GNOME_EMBEDDABLE_IO_H_ */
+#endif /* _BONOBO_EMBEDDABLE_IO_H_ */

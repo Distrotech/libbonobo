@@ -1,53 +1,53 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_OBJECT_CLIENT_H_
-#define _GNOME_OBJECT_CLIENT_H_
+#ifndef _BONOBO_OBJECT_CLIENT_H_
+#define _BONOBO_OBJECT_CLIENT_H_
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkobject.h>
-#include <bonobo/bonobo.h>
+#include <bonobo/Bonobo.h>
 #include <libgnorba/gnorba.h>
-#include <bonobo/gnome-object.h>
+#include <bonobo/bonobo-object.h>
 
-#define GNOME_OBJECT_CLIENT_TYPE        (gnome_object_client_get_type ())
-#define GNOME_OBJECT_CLIENT(o)          (GTK_CHECK_CAST ((o), GNOME_OBJECT_CLIENT_TYPE, GnomeObjectClient))
-#define GNOME_OBJECT_CLIENT_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_OBJECT_CLIENT_TYPE, GnomeObjectClientClass))
-#define GNOME_IS_OBJECT_CLIENT(o)       (GTK_CHECK_TYPE ((o), GNOME_OBJECT_CLIENT_TYPE))
-#define GNOME_IS_OBJECT_CLIENT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_OBJECT_CLIENT_TYPE))
-
-typedef struct {
-	GnomeObject parent;
-} GnomeObjectClient;
+#define BONOBO_OBJECT_CLIENT_TYPE        (bonobo_object_client_get_type ())
+#define BONOBO_OBJECT_CLIENT(o)          (GTK_CHECK_CAST ((o), BONOBO_OBJECT_CLIENT_TYPE, BonoboObjectClient))
+#define BONOBO_OBJECT_CLIENT_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_OBJECT_CLIENT_TYPE, BonoboObjectClientClass))
+#define BONOBO_IS_OBJECT_CLIENT(o)       (GTK_CHECK_TYPE ((o), BONOBO_OBJECT_CLIENT_TYPE))
+#define BONOBO_IS_OBJECT_CLIENT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_OBJECT_CLIENT_TYPE))
 
 typedef struct {
-	GnomeObjectClass parent_class;
-} GnomeObjectClientClass;
+	BonoboObject parent;
+} BonoboObjectClient;
 
-GtkType            gnome_object_client_get_type        (void);
+typedef struct {
+	BonoboObjectClass parent_class;
+} BonoboObjectClientClass;
 
-GnomeObjectClient *gnome_object_client_construct       (GnomeObjectClient *object_client,
+GtkType            bonobo_object_client_get_type        (void);
+
+BonoboObjectClient *bonobo_object_client_construct       (BonoboObjectClient *object_client,
 							CORBA_Object corba_object);
 
-GnomeObjectClient *gnome_object_activate               (const char *object_desc,
+BonoboObjectClient *bonobo_object_activate               (const char *object_desc,
 							GoadActivationFlags flags);
-GnomeObjectClient *gnome_object_activate_with_repo_id  (GoadServerList *list,
+BonoboObjectClient *bonobo_object_activate_with_repo_id  (GoadServerList *list,
 							const char *repo_id,
 							GoadActivationFlags flags,
 							const char **params);
-GnomeObjectClient *gnome_object_activate_with_goad_id  (GoadServerList *list,
+BonoboObjectClient *bonobo_object_activate_with_goad_id  (GoadServerList *list,
 							const char *goad_id,
 							GoadActivationFlags flags,
 							const char **params);
-GNOME_Unknown      gnome_object_restore_from_url       (const char *goad_id,
+Bonobo_Unknown      bonobo_object_restore_from_url       (const char *goad_id,
 							const char *url);
-GnomeObjectClient *gnome_object_client_from_corba      (GNOME_Unknown o);
+BonoboObjectClient *bonobo_object_client_from_corba      (Bonobo_Unknown o);
 
-/* Convenience GNOME_Unknown wrappers */
-gboolean           gnome_object_client_has_interface   (GnomeObjectClient *object,
+/* Convenience Bonobo_Unknown wrappers */
+gboolean           bonobo_object_client_has_interface   (BonoboObjectClient *object,
 							const char *interface_desc,
 							CORBA_Environment *opt_ev);
-GNOME_Unknown      gnome_object_client_query_interface (GnomeObjectClient *object,
+Bonobo_Unknown      bonobo_object_client_query_interface (BonoboObjectClient *object,
 							const char *interface_desc,
 							CORBA_Environment *opt_ev);
 
-#endif /* _GNOME_OBJECT_CLIENT_H_ */
+#endif /* _BONOBO_OBJECT_CLIENT_H_ */
 

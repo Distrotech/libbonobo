@@ -1,5 +1,5 @@
-#ifndef _GNOME_OBJECT_IO_H_
-#define _GNOME_OBJECT_IO_H_
+#ifndef _BONOBO_OBJECT_IO_H_
+#define _BONOBO_OBJECT_IO_H_
 
 typedef enum {
 	GNOME_IO_OK,
@@ -12,15 +12,15 @@ typedef enum {
 	
 } GnomeIOStatus;
 
-void            gnome_persist_stream_save_goad_id  (GNOME_Stream target,
+void            bonobo_persist_stream_save_goad_id  (Bonobo_Stream target,
 						    const CORBA_char *goad_id,
 						    CORBA_Environment *ev);
-char           *gnome_persist_stream_load_goad_id  (GNOME_Stream source);
-GnomeIOStatus   gnome_persiststream_save_to_stream (GNOME_PersistStream pstream,
-						    GNOME_Stream target,
+char           *bonobo_persist_stream_load_goad_id  (Bonobo_Stream source);
+GnomeIOStatus   bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream,
+						    Bonobo_Stream target,
 						    const char *goad_id);
-GnomeIOStatus   gnome_object_save_to_stream        (GnomeObject *object,
-						    GNOME_Stream stream,
+GnomeIOStatus   bonobo_object_save_to_stream        (BonoboObject *object,
+						    Bonobo_Stream stream,
 						    const char *goad_id);
 	
-#endif /* _GNOME_OBJECT_IO_H_ */
+#endif /* _BONOBO_OBJECT_IO_H_ */

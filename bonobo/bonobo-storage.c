@@ -9,88 +9,88 @@
  */
 #include <config.h>
 #include <gmodule.h>
-#include <bonobo/gnome-storage.h>
+#include <bonobo/bonobo-storage.h>
 
-static GnomeObjectClass *gnome_storage_parent_class;
+static BonoboObjectClass *bonobo_storage_parent_class;
 
-POA_GNOME_Storage__vepv gnome_storage_vepv;
+POA_Bonobo_Storage__vepv bonobo_storage_vepv;
 
-#define CLASS(o) GNOME_STORAGE_CLASS(GTK_OBJECT(o)->klass)
+#define CLASS(o) BONOBO_STORAGE_CLASS(GTK_OBJECT(o)->klass)
 
-static inline GnomeStorage *
-gnome_storage_from_servant (PortableServer_Servant servant)
+static inline BonoboStorage *
+bonobo_storage_from_servant (PortableServer_Servant servant)
 {
-	return GNOME_STORAGE (gnome_object_from_servant (servant));
+	return BONOBO_STORAGE (bonobo_object_from_servant (servant));
 }
 
-static GNOME_Stream
+static Bonobo_Stream
 impl_create_stream (PortableServer_Servant servant,
 		    const CORBA_char      *path,
 		    CORBA_Environment     *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
-	GnomeStream *stream;
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
+	BonoboStream *stream;
 	
 	if ((stream = CLASS (storage)->create_stream (storage, path, ev)))
-		return (GNOME_Stream) CORBA_Object_duplicate (
-			gnome_object_corba_objref (GNOME_OBJECT (stream)), ev);
+		return (Bonobo_Stream) CORBA_Object_duplicate (
+			bonobo_object_corba_objref (BONOBO_OBJECT (stream)), ev);
 	else
 		return CORBA_OBJECT_NIL;
 }
 
-static GNOME_Stream
+static Bonobo_Stream
 impl_open_stream (PortableServer_Servant servant,
 		  const CORBA_char      *path,
-		  GNOME_Storage_OpenMode mode,
+		  Bonobo_Storage_OpenMode mode,
 		  CORBA_Environment     *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
-	GnomeStream *stream;
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
+	BonoboStream *stream;
 	
 	if ((stream = CLASS (storage)->open_stream (storage, path, mode, ev)))
-		return (GNOME_Stream) CORBA_Object_duplicate (
-			gnome_object_corba_objref (GNOME_OBJECT (stream)), ev);
+		return (Bonobo_Stream) CORBA_Object_duplicate (
+			bonobo_object_corba_objref (BONOBO_OBJECT (stream)), ev);
 	else
 		return CORBA_OBJECT_NIL;
 }
 
-static GNOME_Storage 
+static Bonobo_Storage 
 impl_create_storage (PortableServer_Servant servant,
 		     const CORBA_char      *path,
 		     CORBA_Environment     *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
-	GnomeStorage *new_storage;
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
+	BonoboStorage *new_storage;
 	
 	if ((new_storage = CLASS(storage)->create_storage (storage, path, ev)))
-		return (GNOME_Storage) CORBA_Object_duplicate (
-			gnome_object_corba_objref (GNOME_OBJECT (new_storage)), ev);
+		return (Bonobo_Storage) CORBA_Object_duplicate (
+			bonobo_object_corba_objref (BONOBO_OBJECT (new_storage)), ev);
 	else
 		return CORBA_OBJECT_NIL;
 }
 
-static GNOME_Storage
+static Bonobo_Storage
 impl_open_storage (PortableServer_Servant servant,
 		   const CORBA_char      *path,
-		   GNOME_Storage_OpenMode mode,
+		   Bonobo_Storage_OpenMode mode,
 		   CORBA_Environment     *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
-	GnomeStorage *open_storage;
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
+	BonoboStorage *open_storage;
 	
 	if ((open_storage = CLASS(storage)->open_storage (storage, path, ev)))
-		return (GNOME_Storage) CORBA_Object_duplicate (
-			gnome_object_corba_objref (GNOME_OBJECT (open_storage)), ev);
+		return (Bonobo_Storage) CORBA_Object_duplicate (
+			bonobo_object_corba_objref (BONOBO_OBJECT (open_storage)), ev);
 	else
 		return CORBA_OBJECT_NIL;
 }
 
 static void
 impl_copy_to (PortableServer_Servant servant,
-	      GNOME_Storage          target,
+	      Bonobo_Storage          target,
 	      CORBA_Environment     *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	
 	CLASS(storage)->copy_to (storage, target, ev);
 }
@@ -101,7 +101,7 @@ impl_rename (PortableServer_Servant servant,
 	     const CORBA_char      *new_path_name,
 	     CORBA_Environment     *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	
 	CLASS (storage)->rename (storage, path_name, new_path_name, ev);
 }
@@ -109,17 +109,17 @@ impl_rename (PortableServer_Servant servant,
 static void
 impl_commit (PortableServer_Servant servant, CORBA_Environment *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	
 	CLASS (storage)->commit (storage, ev);
 }
 
-static GNOME_Storage_directory_list *
+static Bonobo_Storage_directory_list *
 impl_list_contents (PortableServer_Servant servant,
 		    const CORBA_char      *path,
 		    CORBA_Environment     *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 
 	return CLASS (storage)->list_contents (storage, path, ev);
 }
@@ -129,21 +129,21 @@ impl_erase (PortableServer_Servant servant,
             const CORBA_char      *path,
             CORBA_Environment     *ev)
 {
-	GnomeStorage *storage = gnome_storage_from_servant (servant);
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	
 	CLASS (storage)->erase (storage, path, ev);
 }
 
 /**
- * gnome_storage_get_epv:
+ * bonobo_storage_get_epv:
  *
  */
-POA_GNOME_Storage__epv *
-gnome_storage_get_epv (void)
+POA_Bonobo_Storage__epv *
+bonobo_storage_get_epv (void)
 {
-	POA_GNOME_Storage__epv *epv;
+	POA_Bonobo_Storage__epv *epv;
 
-	epv = g_new0 (POA_GNOME_Storage__epv, 1);
+	epv = g_new0 (POA_Bonobo_Storage__epv, 1);
 
 	epv->create_stream	= impl_create_stream;
 	epv->open_stream	= impl_open_stream;
@@ -162,77 +162,77 @@ static void
 init_storage_corba_class (void)
 {
 	/* The VEPV */
-	gnome_storage_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
-	gnome_storage_vepv.GNOME_Storage_epv = gnome_storage_get_epv ();
+	bonobo_storage_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
+	bonobo_storage_vepv.Bonobo_Storage_epv = bonobo_storage_get_epv ();
 }
 
 static void
-gnome_storage_class_init (GnomeStorageClass *klass)
+bonobo_storage_class_init (BonoboStorageClass *klass)
 {
-	gnome_storage_parent_class = gtk_type_class (gnome_object_get_type ());
+	bonobo_storage_parent_class = gtk_type_class (bonobo_object_get_type ());
 
 	init_storage_corba_class ();
 }
 
 static void
-gnome_storage_init (GnomeObject *object)
+bonobo_storage_init (BonoboObject *object)
 {
 }
 
 /**
- * gnome_storage_get_type:
+ * bonobo_storage_get_type:
  *
- * Returns: The GtkType for the GnomeStorage class.
+ * Returns: The GtkType for the BonoboStorage class.
  */
 GtkType
-gnome_storage_get_type (void)
+bonobo_storage_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
 			"IDL:GNOME/Storage:1.0",
-			sizeof (GnomeStorage),
-			sizeof (GnomeStorageClass),
-			(GtkClassInitFunc) gnome_storage_class_init,
-			(GtkObjectInitFunc) gnome_storage_init,
+			sizeof (BonoboStorage),
+			sizeof (BonoboStorageClass),
+			(GtkClassInitFunc) bonobo_storage_class_init,
+			(GtkObjectInitFunc) bonobo_storage_init,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_object_get_type (), &info);
+		type = gtk_type_unique (bonobo_object_get_type (), &info);
 	}
 
 	return type;
 }
 
 /**
- * gnome_storage_construct:
- * @storage: The GnomeStorage object to be initialized
- * @corba_storage: The CORBA object for the GNOME_Storage interface.
+ * bonobo_storage_construct:
+ * @storage: The BonoboStorage object to be initialized
+ * @corba_storage: The CORBA object for the Bonobo_Storage interface.
  *
  * Initializes @storage using the CORBA interface object specified
  * by @corba_storage.
  *
- * Returns: the initialized GnomeStorage object @storage.
+ * Returns: the initialized BonoboStorage object @storage.
  */
-GnomeStorage *
-gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage)
+BonoboStorage *
+bonobo_storage_construct (BonoboStorage *storage, Bonobo_Storage corba_storage)
 {
 	g_return_val_if_fail (storage != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_STORAGE (storage), NULL);
+	g_return_val_if_fail (BONOBO_IS_STORAGE (storage), NULL);
 	g_return_val_if_fail (corba_storage != CORBA_OBJECT_NIL, NULL);
 
-	gnome_object_construct (
-		GNOME_OBJECT (storage),
+	bonobo_object_construct (
+		BONOBO_OBJECT (storage),
 		(CORBA_Object) corba_storage);
 
 	
 	return storage;
 }
 
-typedef GnomeStorage * (*driver_open_t)(const char *path, gint flags, gint mode);
+typedef BonoboStorage * (*driver_open_t)(const char *path, gint flags, gint mode);
 
 static driver_open_t
 load_storage_driver (const char *driver_name)
@@ -250,14 +250,14 @@ load_storage_driver (const char *driver_name)
 		return NULL;
 	}
 	
-	if (g_module_symbol (m, "gnome_storage_driver_open", &driver))
+	if (g_module_symbol (m, "bonobo_storage_driver_open", &driver))
 		return driver;
 	else
 		return NULL;
 }
 
 /**
- * gnome_storage_open:
+ * bonobo_storage_open:
  * @driver: driver to use for opening.
  * @path: path where the base file resides
  * @flags: Unix open(2) flags
@@ -267,10 +267,10 @@ load_storage_driver (const char *driver_name)
  *
  * @driver is one of: "efs" or "fs" for now.
  *
- * Returns: a created GnomeStorage object.
+ * Returns: a created BonoboStorage object.
  */
-GnomeStorage *
-gnome_storage_open (const char *driver, const char *path, gint flags, gint mode)
+BonoboStorage *
+bonobo_storage_open (const char *driver, const char *path, gint flags, gint mode)
 {
 	static driver_open_t fs_driver, efs_driver;
 	driver_open_t *driver_ptr = NULL;

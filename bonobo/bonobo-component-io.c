@@ -11,8 +11,8 @@
 #include <config.h>
 #include <bonobo/gnome-embeddable-io.h>
 
-GnomeEmbeddable *
-gnome_embeddable_load (GnomeStorage *storage, const char *interface, GnomeClientSite *client_site)
+BonoboEmbeddable *
+bonobo_embeddable_load (BonoboStorage *storage, const char *interface, BonoboClientSite *client_site)
 {
 	/*
 	 * 1. Get the class ID from the open Storage, by
@@ -42,8 +42,8 @@ gnome_embeddable_load (GnomeStorage *storage, const char *interface, GnomeClient
 /*
  *
  */
-GnomeEmbeddable *
-gnome_embeddable_load_from_stream (GnomeStream *stream, const char *interface)
+BonoboEmbeddable *
+bonobo_embeddable_load_from_stream (BonoboStream *stream, const char *interface)
 {
 	/*
 	 * 1. Load the class id from @stream
@@ -63,43 +63,43 @@ gnome_embeddable_load_from_stream (GnomeStream *stream, const char *interface)
 }
 
 int
-gnome_embeddable_save (GnomeEmbeddable *bonobo_object, GnomeStorage *storage, gboolean same_as_loaded)
+bonobo_embeddable_save (BonoboEmbeddable *bonobo_object, BonoboStorage *storage, gboolean same_as_loaded)
 {
 	GnomePersisStorage *persist_storage;
 	char *class;
 	
-	persist_storage = gnome_object_query_interface (
+	persist_storage = bonobo_object_query_interface (
 		bonobo_object, "IDL:GNOME/PersistStorage:1.0");
 
 	if (persist_storage == NULL)
 		return -1;
 
-	class = gnome_persist_storage_get_class_id (persist_storage);
-	gnome_storage_write_class_id (persist_storage, class);
+	class = bonobo_persist_storage_get_class_id (persist_storage);
+	bonobo_storage_write_class_id (persist_storage, class);
 	
-	if (gnome_persist_storage_save (persist_storage, same_as_loaded) == 0){
-		gnome_persist_storage_commit (persist_storage);
+	if (bonobo_persist_storage_save (persist_storage, same_as_loaded) == 0){
+		bonobo_persist_storage_commit (persist_storage);
 	}
 
 	return 0;
 }
 
 int
-gnome_embeddable_save_to_stream (GnomeEmbeddable *bonobo_object, GnomeStream *stream)
+bonobo_embeddable_save_to_stream (BonoboEmbeddable *bonobo_object, BonoboStream *stream)
 {
 	GnomePersisStream *persist_stream;
 	const char *goad_id;
 	
-	persist_stream = gnome_object_query_interface (
+	persist_stream = bonobo_object_query_interface (
 		bonobo_object, "IDL:GNOME/PersistStream:1.0");
 
 	if (persist_stream == NULL)
 		return -1;
 
-	goad_id = gnome_persist_stream_get_goad_id (persist_stream);
-	gnome_stream_write_goad_id (persist_stream, goad_id);
+	goad_id = bonobo_persist_stream_get_goad_id (persist_stream);
+	bonobo_stream_write_goad_id (persist_stream, goad_id);
 	
-	gnome_persist_stream_save (persist_stream);
+	bonobo_persist_stream_save (persist_stream);
 
 	return 0;
 }

@@ -1,62 +1,62 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_STREAM_H_
-#define _GNOME_STREAM_H_
+#ifndef _BONOBO_STREAM_H_
+#define _BONOBO_STREAM_H_
 
-#include <bonobo/gnome-object.h>
+#include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_STREAM_TYPE        (gnome_stream_get_type ())
-#define GNOME_STREAM(o)          (GTK_CHECK_CAST ((o), GNOME_STREAM_TYPE, GnomeStream))
-#define GNOME_STREAM_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_STREAM_TYPE, GnomeStreamClass))
-#define GNOME_IS_STREAM(o)       (GTK_CHECK_TYPE ((o), GNOME_STREAM_TYPE))
-#define GNOME_IS_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STREAM_TYPE))
+#define BONOBO_STREAM_TYPE        (bonobo_stream_get_type ())
+#define BONOBO_STREAM(o)          (GTK_CHECK_CAST ((o), BONOBO_STREAM_TYPE, BonoboStream))
+#define BONOBO_STREAM_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_STREAM_TYPE, BonoboStreamClass))
+#define BONOBO_IS_STREAM(o)       (GTK_CHECK_TYPE ((o), BONOBO_STREAM_TYPE))
+#define BONOBO_IS_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_STREAM_TYPE))
 
 typedef struct {
-        GnomeObject object;
-} GnomeStream;
+        BonoboObject object;
+} BonoboStream;
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	/*
 	 * virtual methods
 	 */
-	CORBA_long    (*write)    (GnomeStream *stream,
-				   const GNOME_Stream_iobuf *buffer,
+	CORBA_long    (*write)    (BonoboStream *stream,
+				   const Bonobo_Stream_iobuf *buffer,
 				   CORBA_Environment *ev);
-	CORBA_long    (*read)     (GnomeStream *stream, CORBA_long count,
-				   GNOME_Stream_iobuf **buffer,
+	CORBA_long    (*read)     (BonoboStream *stream, CORBA_long count,
+				   Bonobo_Stream_iobuf **buffer,
 				   CORBA_Environment *ev);
-        CORBA_long    (*seek)     (GnomeStream *stream,
-				   CORBA_long offset, GNOME_Stream_SeekType whence,
+        CORBA_long    (*seek)     (BonoboStream *stream,
+				   CORBA_long offset, Bonobo_Stream_SeekType whence,
 				   CORBA_Environment *ev);
-        void          (*truncate) (GnomeStream *stream,
+        void          (*truncate) (BonoboStream *stream,
 				   const CORBA_long new_size, 
 				   CORBA_Environment *ev);
-	void          (*copy_to)  (GnomeStream *stream,
+	void          (*copy_to)  (BonoboStream *stream,
 				   const CORBA_char * dest,
 				   const CORBA_long bytes,
 				   CORBA_long *read,
 				   CORBA_long *written,
 				   CORBA_Environment *ev);
-        void          (*commit)   (GnomeStream *stream,
+        void          (*commit)   (BonoboStream *stream,
 				   CORBA_Environment *ev);
-        void          (*close)    (GnomeStream *stream,
+        void          (*close)    (BonoboStream *stream,
 				   CORBA_Environment *ev);
-        CORBA_boolean (*eos)      (GnomeStream *stream,
+        CORBA_boolean (*eos)      (BonoboStream *stream,
 				   CORBA_Environment *ev);
-	CORBA_long    (*length)   (GnomeStream *stream,
+	CORBA_long    (*length)   (BonoboStream *stream,
 				   CORBA_Environment *ev);
-} GnomeStreamClass;
+} BonoboStreamClass;
 
-POA_GNOME_Stream__epv *gnome_stream_get_epv (void);
+POA_Bonobo_Stream__epv *bonobo_stream_get_epv (void);
 
-extern POA_GNOME_Stream__vepv gnome_stream_vepv;
+extern POA_Bonobo_Stream__vepv bonobo_stream_vepv;
 
-GtkType         gnome_stream_get_type     (void);
+GtkType         bonobo_stream_get_type     (void);
 
 END_GNOME_DECLS
 
-#endif /* _GNOME_STREAM_H_ */
+#endif /* _BONOBO_STREAM_H_ */
 

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * GNOME::ProgressiveDataSink
+ * Bonobo::ProgressiveDataSink
  *
  * Author:
  *   Nat Friedman (nat@nat.org)
@@ -11,19 +11,19 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
-#include <bonobo/gnome-progressive.h>
+#include <bonobo/bonobo-progressive.h>
 
 /* Parent GTK object class */
-static GnomeObjectClass *gnome_progressive_data_sink_parent_class;
+static BonoboObjectClass *bonobo_progressive_data_sink_parent_class;
 
-POA_GNOME_ProgressiveDataSink__vepv gnome_progressive_data_sink_vepv;
+POA_Bonobo_ProgressiveDataSink__vepv bonobo_progressive_data_sink_vepv;
 
 static void
 impl_start (PortableServer_Servant servant,
 	    CORBA_Environment *ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
-	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
+	BonoboObject *object = bonobo_object_from_servant (servant);
+	BonoboProgressiveDataSink *psink = BONOBO_PROGRESSIVE_DATA_SINK (object);
 	int result;
 
 	if (psink->start_fn != NULL)
@@ -31,7 +31,7 @@ impl_start (PortableServer_Servant servant,
 	else
 	{
 		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
-		GnomeProgressiveDataSinkClass *class = GNOME_PROGRESSIVE_DATA_SINK_CLASS (oc);
+		BonoboProgressiveDataSinkClass *class = BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
 		result = (*class->start_fn) (psink);
 	}
@@ -47,8 +47,8 @@ static void
 impl_end (PortableServer_Servant servant,
 	  CORBA_Environment *ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
-	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
+	BonoboObject *object = bonobo_object_from_servant (servant);
+	BonoboProgressiveDataSink *psink = BONOBO_PROGRESSIVE_DATA_SINK (object);
 	int result;
 
 	if (psink->end_fn != NULL)
@@ -56,7 +56,7 @@ impl_end (PortableServer_Servant servant,
 	else
 	{
 		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
-		GnomeProgressiveDataSinkClass *class = GNOME_PROGRESSIVE_DATA_SINK_CLASS (oc);
+		BonoboProgressiveDataSinkClass *class = BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
 		result = (*class->end_fn) (psink);
 	}
@@ -70,11 +70,11 @@ impl_end (PortableServer_Servant servant,
 
 static void
 impl_add_data (PortableServer_Servant                 servant,
-	       const GNOME_ProgressiveDataSink_iobuf *buffer,
+	       const Bonobo_ProgressiveDataSink_iobuf *buffer,
 	       CORBA_Environment                     *ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
-	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
+	BonoboObject *object = bonobo_object_from_servant (servant);
+	BonoboProgressiveDataSink *psink = BONOBO_PROGRESSIVE_DATA_SINK (object);
 	int result;
 
 	if (psink->add_data_fn != NULL)
@@ -84,8 +84,8 @@ impl_add_data (PortableServer_Servant                 servant,
 	else
 	{
 		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
-		GnomeProgressiveDataSinkClass *class =
-			GNOME_PROGRESSIVE_DATA_SINK_CLASS (oc);
+		BonoboProgressiveDataSinkClass *class =
+			BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
 		result = (*class->add_data_fn) (psink, buffer);
 	}
@@ -102,8 +102,8 @@ impl_set_size (PortableServer_Servant servant,
 	       CORBA_long count,
 	       CORBA_Environment *ev)
 {
-	GnomeObject *object = gnome_object_from_servant (servant);
-	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
+	BonoboObject *object = bonobo_object_from_servant (servant);
+	BonoboProgressiveDataSink *psink = BONOBO_PROGRESSIVE_DATA_SINK (object);
 	int result;
 
 	if (psink->set_size_fn != NULL)
@@ -113,8 +113,8 @@ impl_set_size (PortableServer_Servant servant,
 	else
 	{
 		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
-		GnomeProgressiveDataSinkClass *class =
-			GNOME_PROGRESSIVE_DATA_SINK_CLASS (oc);
+		BonoboProgressiveDataSinkClass *class =
+			BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
 		result = (*class->set_size_fn) (psink, count);
 	}
@@ -127,14 +127,14 @@ impl_set_size (PortableServer_Servant servant,
 } /* impl_set_size */
 
 /**
- * gnome_progressive_get_epv:
+ * bonobo_progressive_get_epv:
  */
-POA_GNOME_ProgressiveDataSink__epv *
-gnome_progressive_get_epv (void)
+POA_Bonobo_ProgressiveDataSink__epv *
+bonobo_progressive_get_epv (void)
 {
-	POA_GNOME_ProgressiveDataSink__epv *epv;
+	POA_Bonobo_ProgressiveDataSink__epv *epv;
 
-	epv = g_new0 (POA_GNOME_ProgressiveDataSink__epv, 1);
+	epv = g_new0 (POA_Bonobo_ProgressiveDataSink__epv, 1);
 
 	epv->start	= impl_start;
 	epv->end	= impl_end;
@@ -148,99 +148,99 @@ static void
 init_progressive_data_sink_corba_class (void)
 {
 	/*
-	 * Initialize the entry point vector for GNOME::ProgressiveDataSink.
+	 * Initialize the entry point vector for Bonobo::ProgressiveDataSink.
 	 */
-	gnome_progressive_data_sink_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
-	gnome_progressive_data_sink_vepv.GNOME_ProgressiveDataSink_epv =
-		gnome_progressive_get_epv ();
+	bonobo_progressive_data_sink_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
+	bonobo_progressive_data_sink_vepv.Bonobo_ProgressiveDataSink_epv =
+		bonobo_progressive_get_epv ();
 }
 
 static void
-gnome_progressive_data_sink_destroy (GtkObject *object)
+bonobo_progressive_data_sink_destroy (GtkObject *object)
 {
 }
 
 static int
-gnome_progressive_data_sink_start_end_nop (GnomeProgressiveDataSink *psink)
-{
-	return 0;
-}
-
-static int
-gnome_progressive_data_sink_add_data_nop (GnomeProgressiveDataSink *psink,
-					  const GNOME_ProgressiveDataSink_iobuf *buffer)
+bonobo_progressive_data_sink_start_end_nop (BonoboProgressiveDataSink *psink)
 {
 	return 0;
 }
 
 static int
-gnome_progressive_data_sink_set_size_nop (GnomeProgressiveDataSink *psink,
+bonobo_progressive_data_sink_add_data_nop (BonoboProgressiveDataSink *psink,
+					  const Bonobo_ProgressiveDataSink_iobuf *buffer)
+{
+	return 0;
+}
+
+static int
+bonobo_progressive_data_sink_set_size_nop (BonoboProgressiveDataSink *psink,
 					  const CORBA_long count)
 {
 	return 0;
 }
 
 static void
-gnome_progressive_data_sink_class_init (GnomeProgressiveDataSinkClass *klass)
+bonobo_progressive_data_sink_class_init (BonoboProgressiveDataSinkClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
-	gnome_progressive_data_sink_parent_class =
-		gtk_type_class (gnome_object_get_type ());
+	bonobo_progressive_data_sink_parent_class =
+		gtk_type_class (bonobo_object_get_type ());
 
 	/*
 	 * Override and initialize methods
 	 */
-	object_class->destroy = gnome_progressive_data_sink_destroy;
+	object_class->destroy = bonobo_progressive_data_sink_destroy;
 
-	klass->start_fn    = gnome_progressive_data_sink_start_end_nop;
-	klass->end_fn      = gnome_progressive_data_sink_start_end_nop;
-	klass->add_data_fn = gnome_progressive_data_sink_add_data_nop;
-	klass->set_size_fn = gnome_progressive_data_sink_set_size_nop;
+	klass->start_fn    = bonobo_progressive_data_sink_start_end_nop;
+	klass->end_fn      = bonobo_progressive_data_sink_start_end_nop;
+	klass->add_data_fn = bonobo_progressive_data_sink_add_data_nop;
+	klass->set_size_fn = bonobo_progressive_data_sink_set_size_nop;
 
 	init_progressive_data_sink_corba_class ();
 }
 
 static void
-gnome_progressive_data_sink_init (GnomeProgressiveDataSink *psink)
+bonobo_progressive_data_sink_init (BonoboProgressiveDataSink *psink)
 {
 }
 
 /**
- * gnome_progressive_data_sink_get_type:
+ * bonobo_progressive_data_sink_get_type:
  *
- * Returns: The GtkType for the GnomeProgressiveDataSink class type.
+ * Returns: The GtkType for the BonoboProgressiveDataSink class type.
  */
 GtkType
-gnome_progressive_data_sink_get_type (void)
+bonobo_progressive_data_sink_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
 			"IDL:GNOME/ProgressiveDataSink:1.0",
-			sizeof (GnomeProgressiveDataSink),
-			sizeof (GnomeProgressiveDataSinkClass),
-			(GtkClassInitFunc) gnome_progressive_data_sink_class_init,
-			(GtkObjectInitFunc) gnome_progressive_data_sink_init,
+			sizeof (BonoboProgressiveDataSink),
+			sizeof (BonoboProgressiveDataSinkClass),
+			(GtkClassInitFunc) bonobo_progressive_data_sink_class_init,
+			(GtkObjectInitFunc) bonobo_progressive_data_sink_init,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_object_get_type (), &info);
+		type = gtk_type_unique (bonobo_object_get_type (), &info);
 	}
 
 	return type;
 } 
 
 /**
- * gnome_progressive_data_sink_construct:
- * @psink: The #GnomeProgressiveDataSink object to initialize.
- * @corba_psink: The CORBA object for the #GNOME_ProgressiveDataSink interface.
+ * bonobo_progressive_data_sink_construct:
+ * @psink: The #BonoboProgressiveDataSink object to initialize.
+ * @corba_psink: The CORBA object for the #Bonobo_ProgressiveDataSink interface.
  * @start_fn: A callback which is invoked when the #start method is
  * called on the interface.  The #start method is used to indicate that
- * a new set of data is being loaded into the #GNOME_ProgressiveDataSink interface.
+ * a new set of data is being loaded into the #Bonobo_ProgressiveDataSink interface.
  * @end_fn: A callback which is invoked when the #end method is called
  * on the interface.  The #end method is called after the entire data transmission
  * is complete.
@@ -250,7 +250,7 @@ gnome_progressive_data_sink_get_type (void)
  * @set_size_fn: A callback which is invoked when the #set_size method is called
  * on the interface.  The #set_size method is used by the caller to specify
  * the total size of the current transmission.  This method may be used
- * at any point after #start has been called.  Objects implementing #GNOME_ProgressiveDataSink
+ * at any point after #start has been called.  Objects implementing #Bonobo_ProgressiveDataSink
  * may want to use this to know what percentage of the data has been received.
  * @closure: A closure which pis passed to all the callback functions.
  *
@@ -258,22 +258,22 @@ gnome_progressive_data_sink_get_type (void)
  * provided in @corba_psink and the callback functions
  * specified by @start_fn, @end_fn, @add_data_fn and @set_size_fn.
  * 
- * Returns: the initialized GnomeProgressiveDataSink object.
+ * Returns: the initialized BonoboProgressiveDataSink object.
  */
-GnomeProgressiveDataSink *
-gnome_progressive_data_sink_construct (GnomeProgressiveDataSink *psink,
-				       GNOME_ProgressiveDataSink corba_psink,
-				       GnomeProgressiveDataSinkStartFn start_fn,
-				       GnomeProgressiveDataSinkEndFn end_fn,
-				       GnomeProgressiveDataSinkAddDataFn add_data_fn,
-				       GnomeProgressiveDataSinkSetSizeFn set_size_fn,
+BonoboProgressiveDataSink *
+bonobo_progressive_data_sink_construct (BonoboProgressiveDataSink *psink,
+				       Bonobo_ProgressiveDataSink corba_psink,
+				       BonoboProgressiveDataSinkStartFn start_fn,
+				       BonoboProgressiveDataSinkEndFn end_fn,
+				       BonoboProgressiveDataSinkAddDataFn add_data_fn,
+				       BonoboProgressiveDataSinkSetSizeFn set_size_fn,
 				       void *closure)
 {
 	g_return_val_if_fail (psink != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_PROGRESSIVE_DATA_SINK (psink), NULL);
+	g_return_val_if_fail (BONOBO_IS_PROGRESSIVE_DATA_SINK (psink), NULL);
 	g_return_val_if_fail (corba_psink != CORBA_OBJECT_NIL, NULL);
 
-	gnome_object_construct (GNOME_OBJECT (psink), corba_psink);
+	bonobo_object_construct (BONOBO_OBJECT (psink), corba_psink);
 
 	psink->start_fn = start_fn;
 	psink->end_fn = end_fn;
@@ -285,18 +285,18 @@ gnome_progressive_data_sink_construct (GnomeProgressiveDataSink *psink,
 	return psink;
 } 
 
-static GNOME_ProgressiveDataSink
-create_gnome_progressive_data_sink (GnomeObject *object)
+static Bonobo_ProgressiveDataSink
+create_bonobo_progressive_data_sink (BonoboObject *object)
 {
-	POA_GNOME_ProgressiveDataSink *servant;
+	POA_Bonobo_ProgressiveDataSink *servant;
 	CORBA_Environment ev;
 
-	servant = (POA_GNOME_ProgressiveDataSink *)g_new0 (GnomeObjectServant, 1);
-	servant->vepv = &gnome_progressive_data_sink_vepv;
+	servant = (POA_Bonobo_ProgressiveDataSink *)g_new0 (BonoboObjectServant, 1);
+	servant->vepv = &bonobo_progressive_data_sink_vepv;
 
 	CORBA_exception_init (&ev);
 
-	POA_GNOME_ProgressiveDataSink__init ((PortableServer_Servant) servant, &ev);
+	POA_Bonobo_ProgressiveDataSink__init ((PortableServer_Servant) servant, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
 		CORBA_exception_free (&ev);
@@ -304,14 +304,14 @@ create_gnome_progressive_data_sink (GnomeObject *object)
 	}
 
 	CORBA_exception_free (&ev);
-	return (GNOME_ProgressiveDataSink) gnome_object_activate_servant (object, servant);
+	return (Bonobo_ProgressiveDataSink) bonobo_object_activate_servant (object, servant);
 } 
 
 /**
- * gnome_progressive_data_sink_new:
+ * bonobo_progressive_data_sink_new:
  * @start_fn: A callback which is invoked when the #start method is
  * called on the interface.  The #start method is used to indicate that
- * a new set of data is being loaded into the #GNOME_ProgressiveDataSink interface.
+ * a new set of data is being loaded into the #Bonobo_ProgressiveDataSink interface.
  * @end_fn: A callback which is invoked when the #end method is called
  * on the interface.  The #end method is called after the entire data transmission
  * is complete.
@@ -321,35 +321,35 @@ create_gnome_progressive_data_sink (GnomeObject *object)
  * @set_size_fn: A callback which is invoked when the #set_size method is called
  * on the interface.  The #set_size method is used by the caller to specify
  * the total size of the current transmission.  This method may be used
- * at any point after #start has been called.  Objects implementing #GNOME_ProgressiveDataSink
+ * at any point after #start has been called.  Objects implementing #Bonobo_ProgressiveDataSink
  * may want to use this to know what percentage of the data has been received.
  * @closure: A closure which pis passed to all the callback functions.
  *
- * This function creates a new GnomeProgressiveDataSink object and the
+ * This function creates a new BonoboProgressiveDataSink object and the
  * corresponding CORBA interface object.  The new object is
  * initialized with the callback functionss specified by @start_fn,
  * @end_fn, @add_data_fn and @set_size_fn.
  * 
- * Returns: the newly-constructed GnomeProgressiveDataSink object.
+ * Returns: the newly-constructed BonoboProgressiveDataSink object.
  */
-GnomeProgressiveDataSink *
-gnome_progressive_data_sink_new (GnomeProgressiveDataSinkStartFn start_fn,
-				 GnomeProgressiveDataSinkEndFn end_fn,
-				 GnomeProgressiveDataSinkAddDataFn add_data_fn,
-				 GnomeProgressiveDataSinkSetSizeFn set_size_fn,
+BonoboProgressiveDataSink *
+bonobo_progressive_data_sink_new (BonoboProgressiveDataSinkStartFn start_fn,
+				 BonoboProgressiveDataSinkEndFn end_fn,
+				 BonoboProgressiveDataSinkAddDataFn add_data_fn,
+				 BonoboProgressiveDataSinkSetSizeFn set_size_fn,
 				 void *closure)
 {
-	GnomeProgressiveDataSink *psink;
-	GNOME_ProgressiveDataSink corba_psink;
+	BonoboProgressiveDataSink *psink;
+	Bonobo_ProgressiveDataSink corba_psink;
 
-	psink = gtk_type_new (gnome_progressive_data_sink_get_type ());
-	corba_psink = create_gnome_progressive_data_sink (GNOME_OBJECT (psink));
+	psink = gtk_type_new (bonobo_progressive_data_sink_get_type ());
+	corba_psink = create_bonobo_progressive_data_sink (BONOBO_OBJECT (psink));
 	if (corba_psink == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (psink));
 		return NULL;
 	}
 
-	gnome_progressive_data_sink_construct (psink, corba_psink, start_fn,
+	bonobo_progressive_data_sink_construct (psink, corba_psink, start_fn,
 					       end_fn, add_data_fn,
 					       set_size_fn, closure);
 

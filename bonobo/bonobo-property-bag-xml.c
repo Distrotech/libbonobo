@@ -1,5 +1,5 @@
 /*
- * An XML-based GnomePropertyBag persistence implementation.
+ * An XML-based BonoboPropertyBag persistence implementation.
  *
  * Author:
  *   Nat Friedman (nat@nat.org)
@@ -10,13 +10,13 @@
 #include <stdlib.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
-#include <bonobo/gnome-stream-client.h>
+#include <bonobo/bonobo-stream-client.h>
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
-#include <bonobo/gnome-property-bag.h>
-#include <bonobo/gnome-property-bag-xml.h>
+#include <bonobo/bonobo-property-bag.h>
+#include <bonobo/bonobo-property-bag-xml.h>
 
-static GHashTable *gnome_property_bag_xml_global_types = NULL;
+static GHashTable *bonobo_property_bag_xml_global_types = NULL;
 
 #define PROPERTY_NAME_TOKEN  "name"
 #define PROPERTY_VALUE_TOKEN "value"
@@ -26,25 +26,25 @@ static GHashTable *gnome_property_bag_xml_global_types = NULL;
  */
 typedef struct {
 	GHashTable *types;
-} GnomePropertyBagXMLPersister;
+} BonoboPropertyBagXMLPersister;
 
 typedef struct {
-	GnomePropertyBagValueToXMLStringFn   to_string;
-	GnomePropertyBagValueFromXMLStringFn from_string;
+	BonoboPropertyBagValueToXMLStringFn   to_string;
+	BonoboPropertyBagValueFromXMLStringFn from_string;
 	gpointer			     user_data;
-} GnomePropertyValueXMLConverter;
+} BonoboPropertyValueXMLConverter;
 
 /*
  * Static prototypes.
  */
-static void  gnome_property_bag_xml_setup_global_types (GnomePropertyBagXMLPersister *persister,
-							GnomePropertyBag *pb);
+static void  bonobo_property_bag_xml_setup_global_types (BonoboPropertyBagXMLPersister *persister,
+							BonoboPropertyBag *pb);
 
-static GnomePropertyValueXMLConverter *
-gnome_property_bag_xml_get_converter (GnomePropertyBagXMLPersister *persister,
+static BonoboPropertyValueXMLConverter *
+bonobo_property_bag_xml_get_converter (BonoboPropertyBagXMLPersister *persister,
 				      const char *type)
 {
-	GnomePropertyValueXMLConverter *converter;
+	BonoboPropertyValueXMLConverter *converter;
 
 	g_assert (persister != NULL);
 	g_assert (type != NULL);
@@ -54,24 +54,24 @@ gnome_property_bag_xml_get_converter (GnomePropertyBagXMLPersister *persister,
 	if (converter != NULL)
 		return converter;
 
-	return g_hash_table_lookup (gnome_property_bag_xml_global_types, type);
+	return g_hash_table_lookup (bonobo_property_bag_xml_global_types, type);
 }
 
 static char *
-gnome_property_bag_xml_value_to_string (GnomePropertyBagXMLPersister *persister,
+bonobo_property_bag_xml_value_to_string (BonoboPropertyBagXMLPersister *persister,
 					const char *type, gpointer value)
 {
-	GnomePropertyValueXMLConverter *converter;
+	BonoboPropertyValueXMLConverter *converter;
 
-	g_assert (gnome_property_bag_xml_global_types != NULL);
+	g_assert (bonobo_property_bag_xml_global_types != NULL);
 	g_assert (persister != NULL);
 	g_assert (persister->types != NULL);
 	g_assert (type != NULL);
 
-	converter = gnome_property_bag_xml_get_converter (persister, type);
+	converter = bonobo_property_bag_xml_get_converter (persister, type);
 
 	if (converter == NULL) {
-		g_warning ("GnomePropertyBagXML: Could not find converter for type \"%s\".  "
+		g_warning ("BonoboPropertyBagXML: Could not find converter for type \"%s\".  "
 			   "Maybe you forgot to add it?", type);
 		return g_strdup ("Unknown");
 	}
@@ -80,21 +80,21 @@ gnome_property_bag_xml_value_to_string (GnomePropertyBagXMLPersister *persister,
 }
 
 static gpointer
-gnome_property_bag_xml_string_to_value (GnomePropertyBagXMLPersister *persister,
+bonobo_property_bag_xml_string_to_value (BonoboPropertyBagXMLPersister *persister,
 					const char *type, const char *str)
 {
-	GnomePropertyValueXMLConverter *converter;
+	BonoboPropertyValueXMLConverter *converter;
 
-	g_assert (gnome_property_bag_xml_global_types != NULL);
+	g_assert (bonobo_property_bag_xml_global_types != NULL);
 	g_assert (persister != NULL);
 	g_assert (persister->types != NULL);
 	g_assert (type != NULL);
 	g_assert (str != NULL);
 
-	converter = gnome_property_bag_xml_get_converter (persister, type);
+	converter = bonobo_property_bag_xml_get_converter (persister, type);
 
 	if (converter == NULL) {
-		g_warning ("GnomePropertyBagXML: Could not find converter for type \"%s\".  "
+		g_warning ("BonoboPropertyBagXML: Could not find converter for type \"%s\".  "
 			   "Maybe you forgot to add it?", type);
 		return NULL;
 	}
@@ -103,8 +103,8 @@ gnome_property_bag_xml_string_to_value (GnomePropertyBagXMLPersister *persister,
 }
 
 static gboolean
-gnome_property_bag_xml_stream_buffer (xmlChar *docbuff, size_t docsz,
-				      const GNOME_Stream stream)
+bonobo_property_bag_xml_stream_buffer (xmlChar *docbuff, size_t docsz,
+				      const Bonobo_Stream stream)
 {
 	CORBA_Environment  ev;
 	size_t		   pos;
@@ -114,10 +114,10 @@ gnome_property_bag_xml_stream_buffer (xmlChar *docbuff, size_t docsz,
 	 */
 	CORBA_exception_init (&ev);
 
-	gnome_stream_client_printf (stream, TRUE, &ev, "%d", docsz);
+	bonobo_stream_client_printf (stream, TRUE, &ev, "%d", docsz);
 
 	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("GnomePropertyBagXML: Exception while writing size header to stream!\n");
+		g_warning ("BonoboPropertyBagXML: Exception while writing size header to stream!\n");
 		return FALSE;
 	}
 
@@ -128,10 +128,10 @@ gnome_property_bag_xml_stream_buffer (xmlChar *docbuff, size_t docsz,
 	while (pos < docsz) {
 		CORBA_long bytes_written;
 
-		bytes_written = gnome_stream_client_write (stream, docbuff + pos, docsz - pos, &ev);
+		bytes_written = bonobo_stream_client_write (stream, docbuff + pos, docsz - pos, &ev);
 
 		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("GnomePropertyBagXML: Exception while writing properties to stream\n");
+			g_warning ("BonoboPropertyBagXML: Exception while writing properties to stream\n");
 			CORBA_exception_free (&ev);
 			return FALSE;
 		}
@@ -146,13 +146,13 @@ gnome_property_bag_xml_stream_buffer (xmlChar *docbuff, size_t docsz,
 
 
 /**
- * gnome_property_bag_xml_persist:
+ * bonobo_property_bag_xml_persist:
  */
 gboolean
-gnome_property_bag_xml_persist (GnomePropertyBag *pb, const GNOME_Stream stream,
+bonobo_property_bag_xml_persist (BonoboPropertyBag *pb, const Bonobo_Stream stream,
 				gpointer user_data)
 {
-	GnomePropertyBagXMLPersister *persister = user_data;
+	BonoboPropertyBagXMLPersister *persister = user_data;
 	xmlDocPtr		      doc;
 	xmlNsPtr		      ns;
 	GList			     *props;
@@ -171,28 +171,28 @@ gnome_property_bag_xml_persist (GnomePropertyBag *pb, const GNOME_Stream stream,
 	/*
 	 * Now create each property.
 	 */
-	props = gnome_property_bag_get_prop_list (pb);
+	props = bonobo_property_bag_get_prop_list (pb);
 
 	for (l = props; l != NULL; l = l->next) {
-		GnomeProperty *prop = l->data;
+		BonoboProperty *prop = l->data;
 		xmlNodePtr propnode;
 		char *value_str;
 		char *default_str;
 
-		if (prop->flags & GNOME_PROPERTY_UNSTORED)
+		if (prop->flags & BONOBO_PROPERTY_UNSTORED)
 			continue;
 
-		if (! (prop->flags & GNOME_PROPERTY_READ_ONLY))
+		if (! (prop->flags & BONOBO_PROPERTY_READ_ONLY))
 			continue;
 
-		if (prop->flags & GNOME_PROPERTY_USE_DEFAULT_OPT) {
-			if (gnome_property_bag_compare_values (pb, prop->type,
+		if (prop->flags & BONOBO_PROPERTY_USE_DEFAULT_OPT) {
+			if (bonobo_property_bag_compare_values (pb, prop->type,
 							       prop->value, prop->default_value))
 				continue;
 		}
 
-		value_str   = gnome_property_bag_xml_value_to_string (persister, prop->type, prop->value);
-		default_str = gnome_property_bag_xml_value_to_string (persister, prop->type, prop->default_value);
+		value_str   = bonobo_property_bag_xml_value_to_string (persister, prop->type, prop->value);
+		default_str = bonobo_property_bag_xml_value_to_string (persister, prop->type, prop->default_value);
 
 		propnode = xmlNewChild (doc->root, ns, "property", NULL);
 		xmlNewChild (propnode, ns, PROPERTY_NAME_TOKEN, prop->name);
@@ -214,8 +214,8 @@ gnome_property_bag_xml_persist (GnomePropertyBag *pb, const GNOME_Stream stream,
 	/*
 	 * Synchronously (vomit!) stream the document into @stream.
 	 */
-	if (! gnome_property_bag_xml_stream_buffer (docbuff, docsz, stream))
-		g_warning ("GnomePropertyBagXML: Unable to stream property XML buffer!");
+	if (! bonobo_property_bag_xml_stream_buffer (docbuff, docsz, stream))
+		g_warning ("BonoboPropertyBagXML: Unable to stream property XML buffer!");
 
 	g_free (docbuff);
 
@@ -223,7 +223,7 @@ gnome_property_bag_xml_persist (GnomePropertyBag *pb, const GNOME_Stream stream,
 }
 
 static gboolean
-gnome_property_bag_xml_unstream_buffer (const GNOME_Stream stream,
+bonobo_property_bag_xml_unstream_buffer (const Bonobo_Stream stream,
 					xmlChar **docbuff, size_t *docsize)
 {
 	CORBA_Environment  ev;
@@ -235,8 +235,8 @@ gnome_property_bag_xml_unstream_buffer (const GNOME_Stream stream,
 	 */
 	CORBA_exception_init (&ev);
 
-	if ( gnome_stream_client_read_string (stream, &szstr, &ev) == -1) {
-		g_warning ("GnomePropertyBagXML: Exception reading buffer size from stream!\n");
+	if ( bonobo_stream_client_read_string (stream, &szstr, &ev) == -1) {
+		g_warning ("BonoboPropertyBagXML: Exception reading buffer size from stream!\n");
 		CORBA_exception_free (&ev);
 		return FALSE;
 	}
@@ -250,16 +250,16 @@ gnome_property_bag_xml_unstream_buffer (const GNOME_Stream stream,
 	(*docbuff) = g_new (xmlChar, *docsize);
 	pos = 0;
 	while (pos < *docsize) {
-		GNOME_Stream_iobuf *buffer;
+		Bonobo_Stream_iobuf *buffer;
 
 #define READ_CHUNK_SIZE 65536
-		GNOME_Stream_read (stream,
+		Bonobo_Stream_read (stream,
 				   MIN (READ_CHUNK_SIZE, (*docsize) - pos),
 				   &buffer,
 				   &ev);
 
 		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("GnomePropertyBagXML: Exception while reading XML buffer from stream!\n");
+			g_warning ("BonoboPropertyBagXML: Exception while reading XML buffer from stream!\n");
 			g_free (*docbuff);
 			CORBA_exception_free (&ev);
 			return FALSE;
@@ -305,8 +305,8 @@ xml_value_get (xmlNodePtr node, const char *name)
 }
 
 static void
-gnome_property_bag_xml_load_property (GnomePropertyBag *pb,
-				      GnomePropertyBagXMLPersister *persister,
+bonobo_property_bag_xml_load_property (BonoboPropertyBag *pb,
+				      BonoboPropertyBagXMLPersister *persister,
 				      xmlNodePtr prop_node)
 {
 	const char *name_str;
@@ -315,7 +315,7 @@ gnome_property_bag_xml_load_property (GnomePropertyBag *pb,
 	gpointer    value;
 	
 	if (strcmp (prop_node->name, "property")) {
-		g_warning ("GnomePropertyBagXML: Top-level property node name is not \"property\" -- "
+		g_warning ("BonoboPropertyBagXML: Top-level property node name is not \"property\" -- "
 			   "malformatted XML buffer!\n");
 		return;
 	}
@@ -326,21 +326,21 @@ gnome_property_bag_xml_load_property (GnomePropertyBag *pb,
 	name_str      = xml_value_get (prop_node, "name");
 	value_str     = xml_value_get (prop_node, "value");
 
-	type = gnome_property_bag_get_prop_type (pb, name_str);
+	type = bonobo_property_bag_get_prop_type (pb, name_str);
 
-	value = gnome_property_bag_xml_string_to_value (persister, type, value_str);
+	value = bonobo_property_bag_xml_string_to_value (persister, type, value_str);
 
-	gnome_property_bag_set_value (pb, name_str, value);
+	bonobo_property_bag_set_value (pb, name_str, value);
 }
 
 /**
- * gnome_property_bag_xml_depersist:
+ * bonobo_property_bag_xml_depersist:
  */
 gboolean
-gnome_property_bag_xml_depersist (GnomePropertyBag *pb, const GNOME_Stream stream,
+bonobo_property_bag_xml_depersist (BonoboPropertyBag *pb, const Bonobo_Stream stream,
 				  gpointer user_data)
 {
-	GnomePropertyBagXMLPersister *persister = user_data;
+	BonoboPropertyBagXMLPersister *persister = user_data;
 	xmlChar			     *docbuff;
 	xmlDocPtr		      doc;
 	xmlNodePtr		      curr;
@@ -349,7 +349,7 @@ gnome_property_bag_xml_depersist (GnomePropertyBag *pb, const GNOME_Stream strea
 	/*
 	 * Read in the PropertyBag XML document.
 	 */
-	if (! gnome_property_bag_xml_unstream_buffer (stream, &docbuff, &docsz))
+	if (! bonobo_property_bag_xml_unstream_buffer (stream, &docbuff, &docsz))
 		return FALSE;
 
 	/*
@@ -357,7 +357,7 @@ gnome_property_bag_xml_depersist (GnomePropertyBag *pb, const GNOME_Stream strea
 	 */
 	doc = xmlParseMemory (docbuff, docsz);
 	if (doc == NULL) {
-		g_warning ("GnomePropertyBagXML: Could not parse XML buffer!\n");
+		g_warning ("BonoboPropertyBagXML: Could not parse XML buffer!\n");
 		g_free (docbuff);
 		return FALSE;
 	}
@@ -369,7 +369,7 @@ gnome_property_bag_xml_depersist (GnomePropertyBag *pb, const GNOME_Stream strea
 	 * modify our internal properties accordingly.
 	 */
 	for (curr = doc->root->childs; curr != NULL; curr = curr->next)
-		gnome_property_bag_xml_load_property (pb, persister, curr);
+		bonobo_property_bag_xml_load_property (pb, persister, curr);
 
 	xmlFreeDoc (doc);
 
@@ -377,7 +377,7 @@ gnome_property_bag_xml_depersist (GnomePropertyBag *pb, const GNOME_Stream strea
 }
 
 static gboolean
-gnome_property_bag_xml_foreach_remove_type (gpointer key, gpointer value,
+bonobo_property_bag_xml_foreach_remove_type (gpointer key, gpointer value,
 					    gpointer user_data)
 {
 	g_free (key);
@@ -388,15 +388,15 @@ gnome_property_bag_xml_foreach_remove_type (gpointer key, gpointer value,
 
 /* This function is called when the PropertyBag is destroyed. */
 static void
-gnome_property_bag_xml_destroy_cb (GnomePropertyBag *pb, gpointer data)
+bonobo_property_bag_xml_destroy_cb (BonoboPropertyBag *pb, gpointer data)
 {
-	GnomePropertyBagXMLPersister *persister = data;
+	BonoboPropertyBagXMLPersister *persister = data;
 
 	/*
 	 * Destroy the local types table.
 	 */
 	g_hash_table_foreach_remove (persister->types,
-				     gnome_property_bag_xml_foreach_remove_type,
+				     bonobo_property_bag_xml_foreach_remove_type,
 				     NULL);
 
 	g_hash_table_destroy (persister->types);
@@ -405,39 +405,39 @@ gnome_property_bag_xml_destroy_cb (GnomePropertyBag *pb, gpointer data)
 }
 
 /**
- * gnome_property_bag_xml_register:
- * @pb: A GnomePropertyBag.
+ * bonobo_property_bag_xml_register:
+ * @pb: A BonoboPropertyBag.
  *
  * Sets @pb to use the XML persistence implementation for
  * saving/loading properties.
  */
 void
-gnome_property_bag_xml_register (GnomePropertyBag *pb)
+bonobo_property_bag_xml_register (BonoboPropertyBag *pb)
 {
-	GnomePropertyBagXMLPersister *persister;
+	BonoboPropertyBagXMLPersister *persister;
 
 	/*
 	 * We will pass 'persister' around as the closure to all the
-	 * GnomePropertyBag persistence functions.
+	 * BonoboPropertyBag persistence functions.
 	 */
-	persister = g_new0 (GnomePropertyBagXMLPersister, 1);
+	persister = g_new0 (BonoboPropertyBagXMLPersister, 1);
 	persister->types = g_hash_table_new (g_str_hash, g_str_equal);
 
 	gtk_signal_connect (GTK_OBJECT (pb), "destroy",
-			    GTK_SIGNAL_FUNC (gnome_property_bag_xml_destroy_cb),
+			    GTK_SIGNAL_FUNC (bonobo_property_bag_xml_destroy_cb),
 			    persister);
 
 	/*
 	 * Create the default XML types.
 	 */
-	gnome_property_bag_xml_setup_global_types (persister, pb);
+	bonobo_property_bag_xml_setup_global_types (persister, pb);
 
 	/*
 	 * Register this persister with the PropertyBag.
 	 */
-	gnome_property_bag_set_persister (pb,
-					  gnome_property_bag_xml_persist,
-					  gnome_property_bag_xml_depersist,
+	bonobo_property_bag_set_persister (pb,
+					  bonobo_property_bag_xml_persist,
+					  bonobo_property_bag_xml_depersist,
 					  persister);
 
 }
@@ -447,18 +447,18 @@ gnome_property_bag_xml_register (GnomePropertyBag *pb)
  * The XML persistence type system.
  */
 static void
-gnome_property_bag_xml_create_global_type (const char				*type_name,
-					   GnomePropertyBagValueToXMLStringFn    to_string,
-					   GnomePropertyBagValueFromXMLStringFn  from_string)
+bonobo_property_bag_xml_create_global_type (const char				*type_name,
+					   BonoboPropertyBagValueToXMLStringFn    to_string,
+					   BonoboPropertyBagValueFromXMLStringFn  from_string)
 {
-	GnomePropertyValueXMLConverter *converter;
+	BonoboPropertyValueXMLConverter *converter;
 
-	converter = g_hash_table_lookup (gnome_property_bag_xml_global_types, type_name);
+	converter = g_hash_table_lookup (bonobo_property_bag_xml_global_types, type_name);
 
 	if (converter == NULL) {
-		converter = g_new0 (GnomePropertyValueXMLConverter, 1);
+		converter = g_new0 (BonoboPropertyValueXMLConverter, 1);
 
-		g_hash_table_insert (gnome_property_bag_xml_global_types, g_strdup (type_name),
+		g_hash_table_insert (bonobo_property_bag_xml_global_types, g_strdup (type_name),
 				     converter);
 	}
 
@@ -467,18 +467,18 @@ gnome_property_bag_xml_create_global_type (const char				*type_name,
 }
 
 static void
-gnome_property_bag_xml_create_local_type (GnomePropertyBagXMLPersister		*persister,
+bonobo_property_bag_xml_create_local_type (BonoboPropertyBagXMLPersister		*persister,
 					  const char				*type_name,
-					  GnomePropertyBagValueToXMLStringFn     to_string,
-					  GnomePropertyBagValueFromXMLStringFn   from_string,
+					  BonoboPropertyBagValueToXMLStringFn     to_string,
+					  BonoboPropertyBagValueFromXMLStringFn   from_string,
 					  gpointer				 user_data)
 {
-	GnomePropertyValueXMLConverter *converter;
+	BonoboPropertyValueXMLConverter *converter;
 
 	converter = g_hash_table_lookup (persister->types, type_name);
 
 	if (converter == NULL) {
-		converter = g_new0 (GnomePropertyValueXMLConverter, 1);
+		converter = g_new0 (BonoboPropertyValueXMLConverter, 1);
 
 		g_hash_table_insert (persister->types, g_strdup (type_name),
 				     converter);
@@ -490,27 +490,27 @@ gnome_property_bag_xml_create_local_type (GnomePropertyBagXMLPersister		*persist
 }
 
 /**
- * gnome_property_bag_xml_add_type:
+ * bonobo_property_bag_xml_add_type:
  */
 void
-gnome_property_bag_xml_add_type (GnomePropertyBag		      *pb,
+bonobo_property_bag_xml_add_type (BonoboPropertyBag		      *pb,
 				 const char			      *type_name,
-				 GnomePropertyBagValueToXMLStringFn    to_string,
-				 GnomePropertyBagValueFromXMLStringFn  from_string,
+				 BonoboPropertyBagValueToXMLStringFn    to_string,
+				 BonoboPropertyBagValueFromXMLStringFn  from_string,
 				 gpointer			       user_data)
 {
-	GnomePropertyBagXMLPersister   *persister;
+	BonoboPropertyBagXMLPersister   *persister;
 
 	g_return_if_fail (pb != NULL);
-	g_return_if_fail (GNOME_IS_PROPERTY_BAG (pb));
+	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
 	g_return_if_fail (type_name != NULL);
 	g_return_if_fail (to_string != NULL);
 	g_return_if_fail (from_string != NULL);
 
-	persister = gnome_property_bag_get_persist_data (pb);
+	persister = bonobo_property_bag_get_persist_data (pb);
 	g_return_if_fail (persister != NULL);
 
-	gnome_property_bag_xml_create_local_type (persister, type_name,
+	bonobo_property_bag_xml_create_local_type (persister, type_name,
 						  to_string, from_string,
 						  user_data);
 }
@@ -521,7 +521,7 @@ gnome_property_bag_xml_add_type (GnomePropertyBag		      *pb,
 
 /* Value -> XML String */
 static char *
-gnome_property_bag_boolean_to_xml_string (const char *type, gpointer value,
+bonobo_property_bag_boolean_to_xml_string (const char *type, gpointer value,
 					  gpointer user_data)
 {
 	gboolean b = *(gboolean *) value;
@@ -530,7 +530,7 @@ gnome_property_bag_boolean_to_xml_string (const char *type, gpointer value,
 }
 
 static char *
-gnome_property_bag_short_to_xml_string (const char *type, gpointer value,
+bonobo_property_bag_short_to_xml_string (const char *type, gpointer value,
 					gpointer user_data)
 {
 	gshort s = *(gshort *) value;
@@ -539,7 +539,7 @@ gnome_property_bag_short_to_xml_string (const char *type, gpointer value,
 }
 
 static char *
-gnome_property_bag_ushort_to_xml_string (const char *type, gpointer value,
+bonobo_property_bag_ushort_to_xml_string (const char *type, gpointer value,
 					 gpointer user_data)
 {
 	gushort s = *(gushort *) value;
@@ -548,7 +548,7 @@ gnome_property_bag_ushort_to_xml_string (const char *type, gpointer value,
 }
 
 static char *
-gnome_property_bag_long_to_xml_string (const char *type, gpointer value,
+bonobo_property_bag_long_to_xml_string (const char *type, gpointer value,
 				       gpointer user_data)
 {
 	glong l = *(glong *) value;
@@ -557,7 +557,7 @@ gnome_property_bag_long_to_xml_string (const char *type, gpointer value,
 }
 
 static char *
-gnome_property_bag_ulong_to_xml_string (const char *type, gpointer value,
+bonobo_property_bag_ulong_to_xml_string (const char *type, gpointer value,
 					gpointer user_data)
 {
 	gulong l = *(gulong *) value;
@@ -566,7 +566,7 @@ gnome_property_bag_ulong_to_xml_string (const char *type, gpointer value,
 }
 
 static char *
-gnome_property_bag_float_to_xml_string (const char *type, gpointer value,
+bonobo_property_bag_float_to_xml_string (const char *type, gpointer value,
 					gpointer user_data)
 {
 	gfloat f = *(gfloat *) value;
@@ -575,7 +575,7 @@ gnome_property_bag_float_to_xml_string (const char *type, gpointer value,
 }
 
 static char *
-gnome_property_bag_double_to_xml_string (const char *type, gpointer value,
+bonobo_property_bag_double_to_xml_string (const char *type, gpointer value,
 					 gpointer user_data)
 {
 	gdouble d = *(gdouble *) value;
@@ -584,7 +584,7 @@ gnome_property_bag_double_to_xml_string (const char *type, gpointer value,
 }
 
 static char *
-gnome_property_bag_string_to_xml_string (const char *type, gpointer value,
+bonobo_property_bag_string_to_xml_string (const char *type, gpointer value,
 					 gpointer user_data)
 {
 	return g_strdup ((char *) value);
@@ -592,7 +592,7 @@ gnome_property_bag_string_to_xml_string (const char *type, gpointer value,
 
 /* XML String -> Value */
 static gpointer
-gnome_property_bag_xml_string_to_boolean (const char *type, const char *str,
+bonobo_property_bag_xml_string_to_boolean (const char *type, const char *str,
 					  gpointer user_data)
 {
 	gboolean *b;
@@ -608,7 +608,7 @@ gnome_property_bag_xml_string_to_boolean (const char *type, const char *str,
 }
 
 static gpointer
-gnome_property_bag_xml_string_to_short (const char *type, const char *str,
+bonobo_property_bag_xml_string_to_short (const char *type, const char *str,
 					gpointer user_data)
 {
 	gshort *s;
@@ -621,7 +621,7 @@ gnome_property_bag_xml_string_to_short (const char *type, const char *str,
 }
 
 static gpointer
-gnome_property_bag_xml_string_to_ushort (const char *type, const char *str,
+bonobo_property_bag_xml_string_to_ushort (const char *type, const char *str,
 					 gpointer user_data)
 {
 	gushort *s;
@@ -634,7 +634,7 @@ gnome_property_bag_xml_string_to_ushort (const char *type, const char *str,
 }
 
 static gpointer
-gnome_property_bag_xml_string_to_long (const char *type, const char *str,
+bonobo_property_bag_xml_string_to_long (const char *type, const char *str,
 				       gpointer user_data)
 {
 	glong *l;
@@ -647,7 +647,7 @@ gnome_property_bag_xml_string_to_long (const char *type, const char *str,
 }
 
 static gpointer
-gnome_property_bag_xml_string_to_ulong (const char *type, const char *str,
+bonobo_property_bag_xml_string_to_ulong (const char *type, const char *str,
 					gpointer user_data)
 {
 	gulong *l;
@@ -660,7 +660,7 @@ gnome_property_bag_xml_string_to_ulong (const char *type, const char *str,
 }
 
 static gpointer
-gnome_property_bag_xml_string_to_float (const char *type, const char *str,
+bonobo_property_bag_xml_string_to_float (const char *type, const char *str,
 					gpointer user_data)
 {
 	gfloat *f;
@@ -673,7 +673,7 @@ gnome_property_bag_xml_string_to_float (const char *type, const char *str,
 }
 
 static gpointer
-gnome_property_bag_xml_string_to_double (const char *type, const char *str,
+bonobo_property_bag_xml_string_to_double (const char *type, const char *str,
 					 gpointer user_data)
 {
 	gdouble *d;
@@ -686,7 +686,7 @@ gnome_property_bag_xml_string_to_double (const char *type, const char *str,
 }
 
 static gpointer
-gnome_property_bag_xml_string_to_string (const char *type, const char *str,
+bonobo_property_bag_xml_string_to_string (const char *type, const char *str,
 					 gpointer user_data)
 {
 	return g_strdup ((char *) str);
@@ -694,31 +694,31 @@ gnome_property_bag_xml_string_to_string (const char *type, const char *str,
 
 
 static void
-gnome_property_bag_xml_setup_global_types (GnomePropertyBagXMLPersister *persister,
-					   GnomePropertyBag *pb)
+bonobo_property_bag_xml_setup_global_types (BonoboPropertyBagXMLPersister *persister,
+					   BonoboPropertyBag *pb)
 {
-	gnome_property_bag_xml_create_global_type ("boolean",
-						   gnome_property_bag_boolean_to_xml_string,
-						   gnome_property_bag_xml_string_to_boolean);
-	gnome_property_bag_xml_create_global_type ("short",
-						   gnome_property_bag_short_to_xml_string,
-						   gnome_property_bag_xml_string_to_short);
-	gnome_property_bag_xml_create_global_type ("ushort",
-						   gnome_property_bag_ushort_to_xml_string,
-						   gnome_property_bag_xml_string_to_ushort);
-	gnome_property_bag_xml_create_global_type ("long",
-						   gnome_property_bag_long_to_xml_string,
-						   gnome_property_bag_xml_string_to_long);
-	gnome_property_bag_xml_create_global_type ("ulong",
-						   gnome_property_bag_ulong_to_xml_string,
-						   gnome_property_bag_xml_string_to_ulong);
-	gnome_property_bag_xml_create_global_type ("float",
-						   gnome_property_bag_float_to_xml_string,
-						   gnome_property_bag_xml_string_to_float);
-	gnome_property_bag_xml_create_global_type ("double",
-						   gnome_property_bag_double_to_xml_string,
-						   gnome_property_bag_xml_string_to_double);
-	gnome_property_bag_xml_create_global_type ("string",
-						   gnome_property_bag_string_to_xml_string,
-						   gnome_property_bag_xml_string_to_string);
+	bonobo_property_bag_xml_create_global_type ("boolean",
+						   bonobo_property_bag_boolean_to_xml_string,
+						   bonobo_property_bag_xml_string_to_boolean);
+	bonobo_property_bag_xml_create_global_type ("short",
+						   bonobo_property_bag_short_to_xml_string,
+						   bonobo_property_bag_xml_string_to_short);
+	bonobo_property_bag_xml_create_global_type ("ushort",
+						   bonobo_property_bag_ushort_to_xml_string,
+						   bonobo_property_bag_xml_string_to_ushort);
+	bonobo_property_bag_xml_create_global_type ("long",
+						   bonobo_property_bag_long_to_xml_string,
+						   bonobo_property_bag_xml_string_to_long);
+	bonobo_property_bag_xml_create_global_type ("ulong",
+						   bonobo_property_bag_ulong_to_xml_string,
+						   bonobo_property_bag_xml_string_to_ulong);
+	bonobo_property_bag_xml_create_global_type ("float",
+						   bonobo_property_bag_float_to_xml_string,
+						   bonobo_property_bag_xml_string_to_float);
+	bonobo_property_bag_xml_create_global_type ("double",
+						   bonobo_property_bag_double_to_xml_string,
+						   bonobo_property_bag_xml_string_to_double);
+	bonobo_property_bag_xml_create_global_type ("string",
+						   bonobo_property_bag_string_to_xml_string,
+						   bonobo_property_bag_xml_string_to_string);
 }

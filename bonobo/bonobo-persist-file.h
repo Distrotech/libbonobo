@@ -1,25 +1,25 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_PERSIST_FILE_H_
-#define _GNOME_PERSIST_FILE_H_
+#ifndef _BONOBO_PERSIST_FILE_H_
+#define _BONOBO_PERSIST_FILE_H_
 
-#include <bonobo/gnome-persist.h>
+#include <bonobo/bonobo-persist.h>
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_PERSIST_FILE_TYPE (gnome_persist_file_get_type ())
-#define GNOME_PERSIST_FILE(o)   (GTK_CHECK_CAST ((o), GNOME_PERSIST_FILE_TYPE, GnomePersistFile))
-#define GNOME_PERSIST_FILE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_PERSIST_FILE_TYPE, GnomePersistFileClass))
-#define GNOME_IS_PERSIST_FILE(o)       (GTK_CHECK_TYPE ((o), GNOME_PERSIST_FILE_TYPE))
-#define GNOME_IS_PERSIST_FILE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_FILE_TYPE))
+#define BONOBO_PERSIST_FILE_TYPE (bonobo_persist_file_get_type ())
+#define BONOBO_PERSIST_FILE(o)   (GTK_CHECK_CAST ((o), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFile))
+#define BONOBO_PERSIST_FILE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFileClass))
+#define BONOBO_IS_PERSIST_FILE(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_FILE_TYPE))
+#define BONOBO_IS_PERSIST_FILE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_FILE_TYPE))
 
-typedef struct _GnomePersistFile GnomePersistFile;
-typedef struct _GnomePersistFilePrivate GnomePersistFilePrivate;
+typedef struct _BonoboPersistFile BonoboPersistFile;
+typedef struct _BonoboPersistFilePrivate BonoboPersistFilePrivate;
 
 
-typedef int (*GnomePersistFileIOFn)(GnomePersistFile *pf, const CORBA_char *filename, void *closure);
+typedef int (*BonoboPersistFileIOFn)(BonoboPersistFile *pf, const CORBA_char *filename, void *closure);
 
-struct _GnomePersistFile {
-	GnomePersist persist;
+struct _BonoboPersistFile {
+	BonoboPersist persist;
 
 	gboolean     is_dirty;
 	char *filename;
@@ -28,40 +28,40 @@ struct _GnomePersistFile {
 	 * For the sample routines, NULL if we use the ::save and ::load
 	 * methods from the class
 	 */
-	GnomePersistFileIOFn  save_fn;
-	GnomePersistFileIOFn  load_fn;
+	BonoboPersistFileIOFn  save_fn;
+	BonoboPersistFileIOFn  load_fn;
 	void *closure;
 
-	GnomePersistFilePrivate *priv;
+	BonoboPersistFilePrivate *priv;
 };
 
 typedef struct {
-	GnomePersistClass parent_class;
+	BonoboPersistClass parent_class;
 
 	/*
 	 * methods
 	 */
-	int        (*load)(GnomePersistFile *ps, const CORBA_char *filename);
-	int        (*save)(GnomePersistFile *ps, const CORBA_char *filename);
-	char*      (*get_current_file)(GnomePersistFile *ps);	
-} GnomePersistFileClass;
+	int        (*load)(BonoboPersistFile *ps, const CORBA_char *filename);
+	int        (*save)(BonoboPersistFile *ps, const CORBA_char *filename);
+	char*      (*get_current_file)(BonoboPersistFile *ps);	
+} BonoboPersistFileClass;
 
-GtkType             gnome_persist_file_get_type  (void);
-void                gnome_persist_file_set_dirty (GnomePersistFile *ps,
+GtkType             bonobo_persist_file_get_type  (void);
+void                bonobo_persist_file_set_dirty (BonoboPersistFile *ps,
 						    gboolean dirty);
 
-GnomePersistFile *gnome_persist_file_new       (GnomePersistFileIOFn load_fn,
-						GnomePersistFileIOFn save_fn,
+BonoboPersistFile *bonobo_persist_file_new       (BonoboPersistFileIOFn load_fn,
+						BonoboPersistFileIOFn save_fn,
 						void *closure);
-GnomePersistFile *gnome_persist_file_construct (GnomePersistFile *ps,
-						GNOME_PersistFile corba_ps,
-						GnomePersistFileIOFn load_fn,
-						GnomePersistFileIOFn save_fn,
+BonoboPersistFile *bonobo_persist_file_construct (BonoboPersistFile *ps,
+						Bonobo_PersistFile corba_ps,
+						BonoboPersistFileIOFn load_fn,
+						BonoboPersistFileIOFn save_fn,
 						void *closure);
 
-POA_GNOME_PersistFile__epv *gnome_persist_file_get_epv (void);
+POA_Bonobo_PersistFile__epv *bonobo_persist_file_get_epv (void);
 
-extern POA_GNOME_PersistFile__vepv gnome_persist_file_vepv;
+extern POA_Bonobo_PersistFile__vepv bonobo_persist_file_vepv;
 END_GNOME_DECLS
 
-#endif /* _GNOME_PERSIST_FILE_H_ */
+#endif /* _BONOBO_PERSIST_FILE_H_ */

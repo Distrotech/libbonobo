@@ -1,6 +1,6 @@
 
-#ifndef __GNOME_PROPERTY_H__
-#define __GNOME_PROPERTY_H__
+#ifndef __BONOBO_PROPERTY_H__
+#define __BONOBO_PROPERTY_H__
 
 /*
  * Every function and data structure in this file is private and
@@ -9,11 +9,11 @@
  * no peeking.
  */
 
-#include <bonobo/gnome-property-bag.h>
+#include <bonobo/bonobo-property-bag.h>
 
-PortableServer_Servant gnome_property_servant_new     (PortableServer_POA adapter, GnomePropertyBag *pb,
+PortableServer_Servant bonobo_property_servant_new     (PortableServer_POA adapter, BonoboPropertyBag *pb,
 							char *property_name);
-void		       gnome_property_servant_destroy (PortableServer_Servant servant);
+void		       bonobo_property_servant_destroy (PortableServer_Servant servant);
 
 typedef struct {
 	char			*name;
@@ -21,7 +21,7 @@ typedef struct {
 	gpointer		 value;
 	gpointer		 default_value;
 	char			*docstring;
-	GnomePropertyFlags	 flags;
-} GnomeProperty;
+	BonoboPropertyFlags	 flags;
+} BonoboProperty;
 
-#endif /* ! __GNOME_PROPERTY_H__ */
+#endif /* ! __BONOBO_PROPERTY_H__ */

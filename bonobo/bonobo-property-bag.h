@@ -1,121 +1,121 @@
 
-#ifndef __GNOME_PROPERTY_BAG_H__
-#define __GNOME_PROPERTY_BAG_H__
+#ifndef __BONOBO_PROPERTY_BAG_H__
+#define __BONOBO_PROPERTY_BAG_H__
 
-#include <bonobo/gnome-object.h>
+#include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
 
-typedef struct _GnomePropertyBagPrivate GnomePropertyBagPrivate;
-typedef struct _GnomePropertyBag	GnomePropertyBag;
+typedef struct _BonoboPropertyBagPrivate BonoboPropertyBagPrivate;
+typedef struct _BonoboPropertyBag	BonoboPropertyBag;
 
 
 typedef enum {
-	GNOME_PROPERTY_UNSTORED	       = 1,
-	GNOME_PROPERTY_READ_ONLY       = 2,
-	GNOME_PROPERTY_USE_DEFAULT_OPT = 4
-} GnomePropertyFlags;
+	BONOBO_PROPERTY_UNSTORED	       = 1,
+	BONOBO_PROPERTY_READ_ONLY       = 2,
+	BONOBO_PROPERTY_USE_DEFAULT_OPT = 4
+} BonoboPropertyFlags;
 
-#include <bonobo/gnome-property.h>
+#include <bonobo/bonobo-property.h>
 
-struct _GnomePropertyBag {
-	GnomeObject               parent;
-	GnomePropertyBagPrivate *priv;
+struct _BonoboPropertyBag {
+	BonoboObject               parent;
+	BonoboPropertyBagPrivate *priv;
 };
 
 typedef struct {
-	GnomeObjectClass   parent;
+	BonoboObjectClass   parent;
 
 	/*
 	 * Signals.
 	 */
-	void (*value_changed)	(GnomePropertyBag *pb, char *name, char *type,
+	void (*value_changed)	(BonoboPropertyBag *pb, char *name, char *type,
 				 gpointer old_value, gpointer new_value);
-} GnomePropertyBagClass;
+} BonoboPropertyBagClass;
 
-GnomePropertyBag	 *gnome_property_bag_new	      (void);
+BonoboPropertyBag	 *bonobo_property_bag_new	      (void);
 		          				      
-GtkType		          gnome_property_bag_get_type	      (void);
+GtkType		          bonobo_property_bag_get_type	      (void);
 							      
 /* Creating properties. */		   		      			
-void		          gnome_property_bag_add	      (GnomePropertyBag *pb, const char *name,
+void		          bonobo_property_bag_add	      (BonoboPropertyBag *pb, const char *name,
 							       const char *type, gpointer value,
 							       gpointer default_value, const char *docstring,
-							       GnomePropertyFlags flags);
+							       BonoboPropertyFlags flags);
 							      
 /* Modifying properties. */		   		      
-void		          gnome_property_bag_set_value        (GnomePropertyBag *pb, const char *name,
+void		          bonobo_property_bag_set_value        (BonoboPropertyBag *pb, const char *name,
 							       gpointer value);
-void		          gnome_property_bag_set_default      (GnomePropertyBag *pb, const char *name,
+void		          bonobo_property_bag_set_default      (BonoboPropertyBag *pb, const char *name,
 							       gpointer default_value);
-void		          gnome_property_bag_set_docstring    (GnomePropertyBag *pb, const char *name,
+void		          bonobo_property_bag_set_docstring    (BonoboPropertyBag *pb, const char *name,
 							       char *docstring);
-void		          gnome_property_bag_set_flags        (GnomePropertyBag *pb, const char *name,
-							       GnomePropertyFlags flags);
+void		          bonobo_property_bag_set_flags        (BonoboPropertyBag *pb, const char *name,
+							       BonoboPropertyFlags flags);
 							      
 /* Inspecting properties. */
-const char	         *gnome_property_bag_get_prop_type    (GnomePropertyBag *pb, const char *name);
-const gpointer	          gnome_property_bag_get_value        (GnomePropertyBag *pb, const char *name);
-const gpointer	          gnome_property_bag_get_default      (GnomePropertyBag *pb, const char *name);
-const char	         *gnome_property_bag_get_docstring    (GnomePropertyBag *pb, const char *name);
-const GnomePropertyFlags  gnome_property_bag_get_flags        (GnomePropertyBag *pb, const char *name);
-gboolean		  gnome_property_bag_has_property     (GnomePropertyBag *pb, const char *name);
+const char	         *bonobo_property_bag_get_prop_type    (BonoboPropertyBag *pb, const char *name);
+const gpointer	          bonobo_property_bag_get_value        (BonoboPropertyBag *pb, const char *name);
+const gpointer	          bonobo_property_bag_get_default      (BonoboPropertyBag *pb, const char *name);
+const char	         *bonobo_property_bag_get_docstring    (BonoboPropertyBag *pb, const char *name);
+const BonoboPropertyFlags  bonobo_property_bag_get_flags        (BonoboPropertyBag *pb, const char *name);
+gboolean		  bonobo_property_bag_has_property     (BonoboPropertyBag *pb, const char *name);
 
 /*
  * Property types.
  */
 
 /*
- * Mainly used by GnomeProperty for marshaling and demarshaling
+ * Mainly used by BonoboProperty for marshaling and demarshaling
  * property values across CORBA.
  */
-typedef CORBA_any *(*GnomePropertyBagValueMarshalerFn)	      (const char *type, const gpointer value,
+typedef CORBA_any *(*BonoboPropertyBagValueMarshalerFn)	      (const char *type, const gpointer value,
 							       gpointer user_data);
-typedef gpointer   (*GnomePropertyBagValueDemarshalerFn)      (const char *type, const CORBA_any *any,
+typedef gpointer   (*BonoboPropertyBagValueDemarshalerFn)      (const char *type, const CORBA_any *any,
 							       gpointer user_data);
-typedef void       (*GnomePropertyBagValueReleaserFn)         (const char *type, gpointer value,
+typedef void       (*BonoboPropertyBagValueReleaserFn)         (const char *type, gpointer value,
 							       gpointer user_data);
-typedef gboolean   (*GnomePropertyBagValueComparerFn)         (const char *type, gpointer value1,
+typedef gboolean   (*BonoboPropertyBagValueComparerFn)         (const char *type, gpointer value1,
 							       gpointer value2, gpointer user_data);
 
-void		          gnome_property_bag_create_type      (GnomePropertyBag *pb, char *type_name,
-							       GnomePropertyBagValueMarshalerFn   marshaler,
-							       GnomePropertyBagValueDemarshalerFn demarshaler,
-							       GnomePropertyBagValueComparerFn    comparer,
-							       GnomePropertyBagValueReleaserFn    releaser,
+void		          bonobo_property_bag_create_type      (BonoboPropertyBag *pb, char *type_name,
+							       BonoboPropertyBagValueMarshalerFn   marshaler,
+							       BonoboPropertyBagValueDemarshalerFn demarshaler,
+							       BonoboPropertyBagValueComparerFn    comparer,
+							       BonoboPropertyBagValueReleaserFn    releaser,
 							       gpointer user_data);
-CORBA_any		 *gnome_property_bag_value_to_any     (GnomePropertyBag *pb, const char *type,
+CORBA_any		 *bonobo_property_bag_value_to_any     (BonoboPropertyBag *pb, const char *type,
 							       const gpointer value);
-gpointer		  gnome_property_bag_any_to_value     (GnomePropertyBag *pb, const char *type,
+gpointer		  bonobo_property_bag_any_to_value     (BonoboPropertyBag *pb, const char *type,
 							       const CORBA_any *any);
-gboolean		  gnome_property_bag_compare_values   (GnomePropertyBag *pb, const char *type,
+gboolean		  bonobo_property_bag_compare_values   (BonoboPropertyBag *pb, const char *type,
 							       gpointer value1, gpointer value2);
 							      
 
 /* Persisting/depersisting properties. */
-typedef gboolean          (*GnomePropertyBagPersisterFn)      (GnomePropertyBag *pb, const GNOME_Stream stream,
+typedef gboolean          (*BonoboPropertyBagPersisterFn)      (BonoboPropertyBag *pb, const Bonobo_Stream stream,
 							       gpointer user_data);
-typedef gboolean          (*GnomePropertyBagDepersisterFn)    (GnomePropertyBag *pb, const GNOME_Stream stream,
+typedef gboolean          (*BonoboPropertyBagDepersisterFn)    (BonoboPropertyBag *pb, const Bonobo_Stream stream,
 							       gpointer user_data);
 
-void			  gnome_property_bag_set_persister    (GnomePropertyBag              *pb,
-							       GnomePropertyBagPersisterFn    persister,
-							       GnomePropertyBagDepersisterFn  depersister,
+void			  bonobo_property_bag_set_persister    (BonoboPropertyBag              *pb,
+							       BonoboPropertyBagPersisterFn    persister,
+							       BonoboPropertyBagDepersisterFn  depersister,
 							       gpointer			      user_data);
-gpointer		  gnome_property_bag_get_persist_data (GnomePropertyBag *pb);
+gpointer		  bonobo_property_bag_get_persist_data (BonoboPropertyBag *pb);
 
 /* A private function, only to be used by persistence implementations. */
-GList			 *gnome_property_bag_get_prop_list    (GnomePropertyBag *pb);
+GList			 *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);
 
 /* For implementation inheritance. */
-POA_GNOME_PropertyBag__epv *gnome_property_bag_get_epv	      (void);
+POA_Bonobo_PropertyBag__epv *bonobo_property_bag_get_epv	      (void);
 
-#define GNOME_PROPERTY_BAG_TYPE			(gnome_property_bag_get_type ())
-#define GNOME_PROPERTY_BAG(o)		        (GTK_CHECK_CAST ((o), GNOME_PROPERTY_BAG_TYPE, GnomePropertyBag))
-#define GNOME_PROPERTY_BAG_CLASS(k)		(GTK_CHECK_CLASS_CAST((k), GNOME_PROPERTY_BAG_TYPE, GnomePropertyBagClass))
-#define GNOME_IS_PROPERTY_BAG(o)		(GTK_CHECK_TYPE ((o), GNOME_PROPERTY_BAG_TYPE))
-#define GNOME_IS_PROPERTY_BAG_CLASS(k)		(GTK_CHECK_CLASS_TYPE ((k), GNOME_PROPERTY_BAG_TYPE))
+#define BONOBO_PROPERTY_BAG_TYPE			(bonobo_property_bag_get_type ())
+#define BONOBO_PROPERTY_BAG(o)		        (GTK_CHECK_CAST ((o), BONOBO_PROPERTY_BAG_TYPE, BonoboPropertyBag))
+#define BONOBO_PROPERTY_BAG_CLASS(k)		(GTK_CHECK_CLASS_CAST((k), BONOBO_PROPERTY_BAG_TYPE, BonoboPropertyBagClass))
+#define BONOBO_IS_PROPERTY_BAG(o)		(GTK_CHECK_TYPE ((o), BONOBO_PROPERTY_BAG_TYPE))
+#define BONOBO_IS_PROPERTY_BAG_CLASS(k)		(GTK_CHECK_CLASS_TYPE ((k), BONOBO_PROPERTY_BAG_TYPE))
 
 END_GNOME_DECLS
 
-#endif /* ! __GNOME_PROPERTY_BAG_H__ */
+#endif /* ! __BONOBO_PROPERTY_BAG_H__ */

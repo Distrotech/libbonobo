@@ -1,87 +1,87 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_PROGRESSIVE_DATA_SINK_H_
-#define _GNOME_PROGRESSIVE_DATA_SINK_H_
+#ifndef _BONOBO_PROGRESSIVE_DATA_SINK_H_
+#define _BONOBO_PROGRESSIVE_DATA_SINK_H_
 
-#include <bonobo/gnome-object.h>
+#include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_PROGRESSIVE_DATA_SINK_TYPE        (gnome_progressive_data_sink_get_type ())
-#define GNOME_PROGRESSIVE_DATA_SINK(o)          (GTK_CHECK_CAST ((o), GNOME_PROGRESSIVE_DATA_SINK_TYPE, GnomeProgressiveDataSink))
-#define GNOME_PROGRESSIVE_DATA_SINK_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_PROGRESSIVE_DATA_SINK_TYPE, GnomeProgressiveDataSinkClass))
-#define GNOME_IS_PROGRESSIVE_DATA_SINK(o)       (GTK_CHECK_TYPE ((o), GNOME_PROGRESSIVE_DATA_SINK_TYPE))
-#define GNOME_IS_PROGRESSIVE_DATA_SINK_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PROGRESSIVE_DATA_SINK_TYPE))
+#define BONOBO_PROGRESSIVE_DATA_SINK_TYPE        (bonobo_progressive_data_sink_get_type ())
+#define BONOBO_PROGRESSIVE_DATA_SINK(o)          (GTK_CHECK_CAST ((o), BONOBO_PROGRESSIVE_DATA_SINK_TYPE, BonoboProgressiveDataSink))
+#define BONOBO_PROGRESSIVE_DATA_SINK_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PROGRESSIVE_DATA_SINK_TYPE, BonoboProgressiveDataSinkClass))
+#define BONOBO_IS_PROGRESSIVE_DATA_SINK(o)       (GTK_CHECK_TYPE ((o), BONOBO_PROGRESSIVE_DATA_SINK_TYPE))
+#define BONOBO_IS_PROGRESSIVE_DATA_SINK_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PROGRESSIVE_DATA_SINK_TYPE))
 
-typedef struct _GnomeProgressiveDataSink GnomeProgressiveDataSink;
-typedef struct _GnomeProgressiveDataSinkPrivate GnomeProgressiveDataSinkPrivate;
+typedef struct _BonoboProgressiveDataSink BonoboProgressiveDataSink;
+typedef struct _BonoboProgressiveDataSinkPrivate BonoboProgressiveDataSinkPrivate;
 
 /* Callback typedefs. */
-typedef int (*GnomeProgressiveDataSinkStartFn)   (GnomeProgressiveDataSink *psink,
+typedef int (*BonoboProgressiveDataSinkStartFn)   (BonoboProgressiveDataSink *psink,
 						  void *closure);
 
-typedef int (*GnomeProgressiveDataSinkEndFn)     (GnomeProgressiveDataSink *psink, void *closure);
+typedef int (*BonoboProgressiveDataSinkEndFn)     (BonoboProgressiveDataSink *psink, void *closure);
 
-typedef int (*GnomeProgressiveDataSinkAddDataFn) (GnomeProgressiveDataSink *psink,
-						  const GNOME_ProgressiveDataSink_iobuf *buffer,
+typedef int (*BonoboProgressiveDataSinkAddDataFn) (BonoboProgressiveDataSink *psink,
+						  const Bonobo_ProgressiveDataSink_iobuf *buffer,
 						  void *closure);
 
-typedef int (*GnomeProgressiveDataSinkSetSizeFn) (GnomeProgressiveDataSink *psink,
+typedef int (*BonoboProgressiveDataSinkSetSizeFn) (BonoboProgressiveDataSink *psink,
 						  const CORBA_long count, void *closure);
 
-struct _GnomeProgressiveDataSink {
-	GnomeObject object;
+struct _BonoboProgressiveDataSink {
+	BonoboObject object;
 
 	/*
 	 * These are the callbacks the user can set.  If we use the
 	 * default class methods, then these are NULL.
 	 */
-	GnomeProgressiveDataSinkStartFn start_fn;
-	GnomeProgressiveDataSinkEndFn end_fn;
-	GnomeProgressiveDataSinkAddDataFn add_data_fn;
-	GnomeProgressiveDataSinkSetSizeFn set_size_fn;
+	BonoboProgressiveDataSinkStartFn start_fn;
+	BonoboProgressiveDataSinkEndFn end_fn;
+	BonoboProgressiveDataSinkAddDataFn add_data_fn;
+	BonoboProgressiveDataSinkSetSizeFn set_size_fn;
 
 	void *closure;
 
-	GnomeProgressiveDataSinkPrivate *priv;
+	BonoboProgressiveDataSinkPrivate *priv;
 };
 
 typedef struct {
-	GnomeObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	/*
 	 * Methods.
 	 */
-	int (*start_fn)    (GnomeProgressiveDataSink *psink);
-	int (*end_fn)      (GnomeProgressiveDataSink *psink);
-	int (*add_data_fn) (GnomeProgressiveDataSink *psink,
-			    const GNOME_ProgressiveDataSink_iobuf *buffer);
-	int (*set_size_fn) (GnomeProgressiveDataSink *psink,
+	int (*start_fn)    (BonoboProgressiveDataSink *psink);
+	int (*end_fn)      (BonoboProgressiveDataSink *psink);
+	int (*add_data_fn) (BonoboProgressiveDataSink *psink,
+			    const Bonobo_ProgressiveDataSink_iobuf *buffer);
+	int (*set_size_fn) (BonoboProgressiveDataSink *psink,
 			    const CORBA_long count);
 			 
-} GnomeProgressiveDataSinkClass;
+} BonoboProgressiveDataSinkClass;
 
 
-GtkType		gnome_progressive_data_sink_get_type  (void);
+GtkType		bonobo_progressive_data_sink_get_type  (void);
 
-GnomeProgressiveDataSink *gnome_progressive_data_sink_new		(GnomeProgressiveDataSinkStartFn start_fn,
-									 GnomeProgressiveDataSinkEndFn end_fn,
-									 GnomeProgressiveDataSinkAddDataFn add_data_fn,
-									 GnomeProgressiveDataSinkSetSizeFn set_size_fn,
+BonoboProgressiveDataSink *bonobo_progressive_data_sink_new		(BonoboProgressiveDataSinkStartFn start_fn,
+									 BonoboProgressiveDataSinkEndFn end_fn,
+									 BonoboProgressiveDataSinkAddDataFn add_data_fn,
+									 BonoboProgressiveDataSinkSetSizeFn set_size_fn,
 									 void *closure);
 
-GnomeProgressiveDataSink *gnome_progressive_data_sink_construct		(GnomeProgressiveDataSink *psink,
-									 GNOME_ProgressiveDataSink corba_psink,
-									 GnomeProgressiveDataSinkStartFn start_fn,
-									 GnomeProgressiveDataSinkEndFn end_fn,
-									 GnomeProgressiveDataSinkAddDataFn add_data_fn,
-									 GnomeProgressiveDataSinkSetSizeFn set_size_fn,
+BonoboProgressiveDataSink *bonobo_progressive_data_sink_construct		(BonoboProgressiveDataSink *psink,
+									 Bonobo_ProgressiveDataSink corba_psink,
+									 BonoboProgressiveDataSinkStartFn start_fn,
+									 BonoboProgressiveDataSinkEndFn end_fn,
+									 BonoboProgressiveDataSinkAddDataFn add_data_fn,
+									 BonoboProgressiveDataSinkSetSizeFn set_size_fn,
 									 void *closure);
 							       
 
-POA_GNOME_ProgressiveDataSink__epv *gnome_progressive_get_epv (void);
+POA_Bonobo_ProgressiveDataSink__epv *bonobo_progressive_get_epv (void);
 
-extern POA_GNOME_ProgressiveDataSink__vepv gnome_progressive_data_sink_vepv;
+extern POA_Bonobo_ProgressiveDataSink__vepv bonobo_progressive_data_sink_vepv;
 END_GNOME_DECLS
 
-#endif /* _GNOME_PROGRESSIVE_DATA_SINK_H_ */
+#endif /* _BONOBO_PROGRESSIVE_DATA_SINK_H_ */
 

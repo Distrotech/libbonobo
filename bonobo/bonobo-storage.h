@@ -1,66 +1,66 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_STORAGE_H_
-#define _GNOME_STORAGE_H_
+#ifndef _BONOBO_STORAGE_H_
+#define _BONOBO_STORAGE_H_
 
-#include <bonobo/gnome-object.h>
-#include <bonobo/gnome-stream.h>
+#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-stream.h>
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_STORAGE_TYPE        (gnome_storage_get_type ())
-#define GNOME_STORAGE(o)          (GTK_CHECK_CAST ((o), GNOME_STORAGE_TYPE, GnomeStorage))
-#define GNOME_STORAGE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_STORAGE_TYPE, GnomeStorageClass))
-#define GNOME_IS_STORAGE(o)       (GTK_CHECK_TYPE ((o), GNOME_STORAGE_TYPE))
-#define GNOME_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STORAGE_TYPE))
+#define BONOBO_STORAGE_TYPE        (bonobo_storage_get_type ())
+#define BONOBO_STORAGE(o)          (GTK_CHECK_CAST ((o), BONOBO_STORAGE_TYPE, BonoboStorage))
+#define BONOBO_STORAGE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_STORAGE_TYPE, BonoboStorageClass))
+#define BONOBO_IS_STORAGE(o)       (GTK_CHECK_TYPE ((o), BONOBO_STORAGE_TYPE))
+#define BONOBO_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_STORAGE_TYPE))
 
-typedef struct _GnomeStoragePrivate GnomeStoragePrivate;
-
-typedef struct {
-        GnomeObject object;
-
-	GnomeStoragePrivate *priv;
-} GnomeStorage;
+typedef struct _BonoboStoragePrivate BonoboStoragePrivate;
 
 typedef struct {
-	GnomeObjectClass parent_class;
+        BonoboObject object;
+
+	BonoboStoragePrivate *priv;
+} BonoboStorage;
+
+typedef struct {
+	BonoboObjectClass parent_class;
 
 	/*
 	 * virtual methods
 	 */
-	GnomeStream  *(*create_stream)  (GnomeStorage *storage,
+	BonoboStream  *(*create_stream)  (BonoboStorage *storage,
 					 const CORBA_char *path,
 					 CORBA_Environment *ev);
-	GnomeStream  *(*open_stream)    (GnomeStorage *storage,
+	BonoboStream  *(*open_stream)    (BonoboStorage *storage,
 					 const CORBA_char *path,
-					 GNOME_Storage_OpenMode, CORBA_Environment *ev);
-	GnomeStorage *(*create_storage) (GnomeStorage *storage,
-					 const CORBA_char *path,
-					 CORBA_Environment *ev);
-	GnomeStorage *(*open_storage)   (GnomeStorage *storage,
+					 Bonobo_Storage_OpenMode, CORBA_Environment *ev);
+	BonoboStorage *(*create_storage) (BonoboStorage *storage,
 					 const CORBA_char *path,
 					 CORBA_Environment *ev);
-	void         (*copy_to)         (GnomeStorage *storage, GNOME_Storage target,
+	BonoboStorage *(*open_storage)   (BonoboStorage *storage,
+					 const CORBA_char *path,
 					 CORBA_Environment *ev);
-	void         (*rename)          (GnomeStorage *storage,
+	void         (*copy_to)         (BonoboStorage *storage, Bonobo_Storage target,
+					 CORBA_Environment *ev);
+	void         (*rename)          (BonoboStorage *storage,
 					 const CORBA_char *path_name,
 					 const CORBA_char *new_path_name,
 					 CORBA_Environment *ev);
-	void         (*commit)          (GnomeStorage *storage,
+	void         (*commit)          (BonoboStorage *storage,
 					 CORBA_Environment *ev);
-	GNOME_Storage_directory_list *
-	             (*list_contents)   (GnomeStorage *storage,
+	Bonobo_Storage_directory_list *
+	             (*list_contents)   (BonoboStorage *storage,
 					 const CORBA_char *path,
 					 CORBA_Environment *ev);
-	void         (*erase)          (GnomeStorage *storage,
+	void         (*erase)          (BonoboStorage *storage,
                                         const CORBA_char *path,
                                         CORBA_Environment *ev);
-} GnomeStorageClass;
+} BonoboStorageClass;
 
-GtkType         gnome_storage_get_type     (void);
-GnomeStorage   *gnome_storage_construct    (GnomeStorage *storage,
-					    GNOME_Storage corba_storage);
+GtkType         bonobo_storage_get_type     (void);
+BonoboStorage   *bonobo_storage_construct    (BonoboStorage *storage,
+					    Bonobo_Storage corba_storage);
 
-GnomeStorage   *gnome_storage_open         (const char *driver,
+BonoboStorage   *bonobo_storage_open         (const char *driver,
 					    const char *path,
 					    gint flags,
 					    gint mode);
@@ -69,37 +69,37 @@ GnomeStorage   *gnome_storage_open         (const char *driver,
  * Functions to open storages and streams from and existing.
  * Storage
  */
-GnomeStorage   *gnome_storage_storage_open (GnomeStorage *storage,
+BonoboStorage   *bonobo_storage_storage_open (BonoboStorage *storage,
 					    const char *path,
 					    const char *open_mode);
-GnomeStream    *gnome_stream_storage_open (GnomeStorage *storage,
+BonoboStream    *bonobo_stream_storage_open (BonoboStorage *storage,
 					    const char *path,
 					    const char *open_mode);
 
-void gnome_storage_write_class_id (GnomeStorage *storage,
+void bonobo_storage_write_class_id (BonoboStorage *storage,
 				   char *class_id);
 
-void gnome_stream_write_class_id  (GnomeStream *stream,
+void bonobo_stream_write_class_id  (BonoboStream *stream,
 				   char *class_id);
 
-POA_GNOME_Storage__epv *gnome_storage_get_epv (void);
+POA_Bonobo_Storage__epv *bonobo_storage_get_epv (void);
 
-extern POA_GNOME_Storage__vepv gnome_storage_vepv;
+extern POA_Bonobo_Storage__vepv bonobo_storage_vepv;
 
 /* Open modes */
 
-#define GNOME_SS_READ   1
-#define GNOME_SS_WRITE  2
-#define GNOME_SS_RDWR   3
-#define GNOME_SS_CREATE 4
-#define GNOME_SS_EXCL   8
+#define BONOBO_SS_READ   1
+#define BONOBO_SS_WRITE  2
+#define BONOBO_SS_RDWR   3
+#define BONOBO_SS_CREATE 4
+#define BONOBO_SS_EXCL   8
 
 /*
  * Signature for Storage drivers
  */
-GnomeStorage *gnome_storage_driver_open  (const char *path, gint flags, gint mode);
+BonoboStorage *bonobo_storage_driver_open  (const char *path, gint flags, gint mode);
 
 END_GNOME_DECLS
 
-#endif /* _GNOME_STORAGE_H_ */
+#endif /* _BONOBO_STORAGE_H_ */
 

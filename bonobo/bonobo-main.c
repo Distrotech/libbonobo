@@ -10,7 +10,7 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
-#include <bonobo/gnome-main.h>
+#include <bonobo/bonobo-main.h>
 #include <libgnorba/gnorba.h>
 #include <signal.h>
 

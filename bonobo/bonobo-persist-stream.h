@@ -1,26 +1,26 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef _GNOME_PERSIST_STREAM_H_
-#define _GNOME_PERSIST_STREAM_H_
+#ifndef _BONOBO_PERSIST_STREAM_H_
+#define _BONOBO_PERSIST_STREAM_H_
 
-#include <bonobo/gnome-persist.h>
+#include <bonobo/bonobo-persist.h>
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_PERSIST_STREAM_TYPE        (gnome_persist_stream_get_type ())
-#define GNOME_PERSIST_STREAM(o)          (GTK_CHECK_CAST ((o), GNOME_PERSIST_STREAM_TYPE, GnomePersistStream))
-#define GNOME_PERSIST_STREAM_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_PERSIST_STREAM_TYPE, GnomePersistStreamClass))
-#define GNOME_IS_PERSIST_STREAM(o)       (GTK_CHECK_TYPE ((o), GNOME_PERSIST_STREAM_TYPE))
-#define GNOME_IS_PERSIST_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_STREAM_TYPE))
+#define BONOBO_PERSIST_STREAM_TYPE        (bonobo_persist_stream_get_type ())
+#define BONOBO_PERSIST_STREAM(o)          (GTK_CHECK_CAST ((o), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStream))
+#define BONOBO_PERSIST_STREAM_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStreamClass))
+#define BONOBO_IS_PERSIST_STREAM(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_STREAM_TYPE))
+#define BONOBO_IS_PERSIST_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_STREAM_TYPE))
 
-typedef struct _GnomePersistStream GnomePersistStream;
-typedef struct _GnomePersistStreamPrivate GnomePersistStreamPrivate;
+typedef struct _BonoboPersistStream BonoboPersistStream;
+typedef struct _BonoboPersistStreamPrivate BonoboPersistStreamPrivate;
 
 
-typedef int (*GnomePersistStreamIOFn)(GnomePersistStream *ps, const GNOME_Stream stream, void *closure);
-typedef CORBA_long (*GnomePersistStreamMaxFn)(GnomePersistStream *ps, void *closure);
+typedef int (*BonoboPersistStreamIOFn)(BonoboPersistStream *ps, const Bonobo_Stream stream, void *closure);
+typedef CORBA_long (*BonoboPersistStreamMaxFn)(BonoboPersistStream *ps, void *closure);
 
-struct _GnomePersistStream {
-	GnomePersist persist;
+struct _BonoboPersistStream {
+	BonoboPersist persist;
 
 	gboolean     is_dirty;
 
@@ -28,42 +28,42 @@ struct _GnomePersistStream {
 	 * For the sample routines, NULL if we use the ::save and ::load
 	 * methods from the class
 	 */
-	GnomePersistStreamIOFn  save_fn;
-	GnomePersistStreamIOFn  load_fn;
-	GnomePersistStreamMaxFn get_size_max_fn;
+	BonoboPersistStreamIOFn  save_fn;
+	BonoboPersistStreamIOFn  load_fn;
+	BonoboPersistStreamMaxFn get_size_max_fn;
 	
 	void *closure;
 
-	GnomePersistStreamPrivate *priv;
+	BonoboPersistStreamPrivate *priv;
 };
 
 typedef struct {
-	GnomePersistClass parent_class;
+	BonoboPersistClass parent_class;
 
 	/*
 	 * methods
 	 */
-	int        (*load)(GnomePersistStream *ps, GNOME_Stream stream);
-	int        (*save)(GnomePersistStream *ps, GNOME_Stream stream);
-	CORBA_long (*get_size_max) (GnomePersistStream *ps);
-} GnomePersistStreamClass;
+	int        (*load)(BonoboPersistStream *ps, Bonobo_Stream stream);
+	int        (*save)(BonoboPersistStream *ps, Bonobo_Stream stream);
+	CORBA_long (*get_size_max) (BonoboPersistStream *ps);
+} BonoboPersistStreamClass;
 
-GtkType             gnome_persist_stream_get_type  (void);
-void                gnome_persist_stream_set_dirty (GnomePersistStream *ps,
+GtkType             bonobo_persist_stream_get_type  (void);
+void                bonobo_persist_stream_set_dirty (BonoboPersistStream *ps,
 						    gboolean dirty);
 
-GnomePersistStream *gnome_persist_stream_new       (GnomePersistStreamIOFn load_fn,
-						    GnomePersistStreamIOFn save_fn,
+BonoboPersistStream *bonobo_persist_stream_new       (BonoboPersistStreamIOFn load_fn,
+						    BonoboPersistStreamIOFn save_fn,
 						    void *closure);
-GnomePersistStream *gnome_persist_stream_construct (GnomePersistStream *ps,
-						    GNOME_PersistStream corba_ps,
-						    GnomePersistStreamIOFn load_fn,
-						    GnomePersistStreamIOFn save_fn,
+BonoboPersistStream *bonobo_persist_stream_construct (BonoboPersistStream *ps,
+						    Bonobo_PersistStream corba_ps,
+						    BonoboPersistStreamIOFn load_fn,
+						    BonoboPersistStreamIOFn save_fn,
 						    void *closure);
 
-POA_GNOME_PersistStream__epv *gnome_persist_stream_get_epv (void);
+POA_Bonobo_PersistStream__epv *bonobo_persist_stream_get_epv (void);
 
-extern POA_GNOME_PersistStream__vepv gnome_persist_stream_vepv;
+extern POA_Bonobo_PersistStream__vepv bonobo_persist_stream_vepv;
 END_GNOME_DECLS
 
-#endif /* _GNOME_PERSIST_STREAM_H_ */
+#endif /* _BONOBO_PERSIST_STREAM_H_ */

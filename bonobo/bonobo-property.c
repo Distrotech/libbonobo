@@ -8,38 +8,38 @@
  */
 
 #include <config.h>
-#include <bonobo/gnome-main.h>
-#include <bonobo/gnome-property-bag.h>
-#include <bonobo/gnome-property.h>
+#include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-property-bag.h>
+#include <bonobo/bonobo-property.h>
 
 typedef struct {
-	POA_GNOME_Property		 prop;
-	GnomePropertyBag		*pb;
+	POA_Bonobo_Property		 prop;
+	BonoboPropertyBag		*pb;
 	char				*property_name;
-} GnomePropertyServant;
+} BonoboPropertyServant;
 
 static CORBA_char *
-impl_GNOME_Property_get_name (PortableServer_Servant servant,
+impl_Bonobo_Property_get_name (PortableServer_Servant servant,
 			      CORBA_Environment *ev)
 {
-	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 
 	return CORBA_string_dup (pservant->property_name);
 }
 
 static CORBA_TypeCode
-impl_GNOME_Property_get_type (PortableServer_Servant servant,
+impl_Bonobo_Property_get_type (PortableServer_Servant servant,
 			      CORBA_Environment *ev)
 {
-	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 	CORBA_TypeCode tc;
 	const char *type;
 	CORBA_any *any;
 	gpointer value;
 
-	value = gnome_property_bag_get_value (pservant->pb, pservant->property_name);
-	type  = gnome_property_bag_get_prop_type (pservant->pb, pservant->property_name);
-	any = gnome_property_bag_value_to_any (pservant->pb, type, value);
+	value = bonobo_property_bag_get_value (pservant->pb, pservant->property_name);
+	type  = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
+	any = bonobo_property_bag_value_to_any (pservant->pb, type, value);
 
 	tc = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) (any->_type), ev);
 
@@ -50,122 +50,122 @@ impl_GNOME_Property_get_type (PortableServer_Servant servant,
 
 
 static CORBA_any *
-impl_GNOME_Property_get_value (PortableServer_Servant servant,
+impl_Bonobo_Property_get_value (PortableServer_Servant servant,
 			       CORBA_Environment *ev)
 {
-	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 	const char *type;
 	gpointer value;
 
-	type = gnome_property_bag_get_prop_type (pservant->pb, pservant->property_name);
-	value = gnome_property_bag_get_value (pservant->pb, pservant->property_name);
+	type = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
+	value = bonobo_property_bag_get_value (pservant->pb, pservant->property_name);
 
-	return gnome_property_bag_value_to_any (pservant->pb, type, value);
+	return bonobo_property_bag_value_to_any (pservant->pb, type, value);
 }
 
 static void
-impl_GNOME_Property_set_value (PortableServer_Servant servant,
+impl_Bonobo_Property_set_value (PortableServer_Servant servant,
 			       const CORBA_any       *any,
 			       CORBA_Environment     *ev)
 {
-	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 	gpointer new_value;
 	const char *type;
 
-	type = gnome_property_bag_get_prop_type (pservant->pb, pservant->property_name);
-	new_value = gnome_property_bag_any_to_value (pservant->pb, type, any);
+	type = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
+	new_value = bonobo_property_bag_any_to_value (pservant->pb, type, any);
 
-	gnome_property_bag_set_value (pservant->pb, pservant->property_name, new_value);
+	bonobo_property_bag_set_value (pservant->pb, pservant->property_name, new_value);
 }
 
 static CORBA_any *
-impl_GNOME_Property_get_default (PortableServer_Servant servant,
+impl_Bonobo_Property_get_default (PortableServer_Servant servant,
 				 CORBA_Environment *ev)
 {
-	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 	gpointer default_value;
 	const char *type;
 
-	type = gnome_property_bag_get_prop_type (pservant->pb, pservant->property_name);
-	default_value = gnome_property_bag_get_default (pservant->pb, pservant->property_name);
+	type = bonobo_property_bag_get_prop_type (pservant->pb, pservant->property_name);
+	default_value = bonobo_property_bag_get_default (pservant->pb, pservant->property_name);
 
-	return gnome_property_bag_value_to_any (pservant->pb, type, default_value);
+	return bonobo_property_bag_value_to_any (pservant->pb, type, default_value);
 }
 
 static CORBA_char *
-impl_GNOME_Property_get_doc_string (PortableServer_Servant servant,
+impl_Bonobo_Property_get_doc_string (PortableServer_Servant servant,
 				    CORBA_Environment *ev)
 {
-	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 
-	return CORBA_string_dup (gnome_property_bag_get_docstring (pservant->pb, pservant->property_name));
+	return CORBA_string_dup (bonobo_property_bag_get_docstring (pservant->pb, pservant->property_name));
 }
 
 
 static CORBA_boolean
-impl_GNOME_Property_is_read_only (PortableServer_Servant servant,
+impl_Bonobo_Property_is_read_only (PortableServer_Servant servant,
 				  CORBA_Environment *ev)
 {
-	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
-	GnomePropertyFlags flags;
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
+	BonoboPropertyFlags flags;
 
-	flags = gnome_property_bag_get_flags (pservant->pb, pservant->property_name);
+	flags = bonobo_property_bag_get_flags (pservant->pb, pservant->property_name);
 
-	return (CORBA_boolean) ((flags & GNOME_PROPERTY_READ_ONLY) != 0);
+	return (CORBA_boolean) ((flags & BONOBO_PROPERTY_READ_ONLY) != 0);
 
 }
 
-static POA_GNOME_Property__epv *
-gnome_property_get_epv (void)
+static POA_Bonobo_Property__epv *
+bonobo_property_get_epv (void)
 {
-	static POA_GNOME_Property__epv *epv = NULL;
+	static POA_Bonobo_Property__epv *epv = NULL;
 
 	if (epv != NULL)
 		return epv;
 
-	epv = g_new0 (POA_GNOME_Property__epv, 1);
+	epv = g_new0 (POA_Bonobo_Property__epv, 1);
 
-	epv->get_name		      = impl_GNOME_Property_get_name;
-	epv->get_type		      = impl_GNOME_Property_get_type;
-	epv->get_value		      = impl_GNOME_Property_get_value;
-	epv->set_value		      = impl_GNOME_Property_set_value;
-	epv->get_default	      = impl_GNOME_Property_get_default;
-	epv->get_doc_string	      = impl_GNOME_Property_get_doc_string;
-	epv->is_read_only	      = impl_GNOME_Property_is_read_only;
+	epv->get_name		      = impl_Bonobo_Property_get_name;
+	epv->get_type		      = impl_Bonobo_Property_get_type;
+	epv->get_value		      = impl_Bonobo_Property_get_value;
+	epv->set_value		      = impl_Bonobo_Property_set_value;
+	epv->get_default	      = impl_Bonobo_Property_get_default;
+	epv->get_doc_string	      = impl_Bonobo_Property_get_doc_string;
+	epv->is_read_only	      = impl_Bonobo_Property_is_read_only;
 
 	return epv;
 }
 
-static POA_GNOME_Property__vepv *
-gnome_property_get_vepv (void)
+static POA_Bonobo_Property__vepv *
+bonobo_property_get_vepv (void)
 {
-	static POA_GNOME_Property__vepv *vepv = NULL;
+	static POA_Bonobo_Property__vepv *vepv = NULL;
 
 	if (vepv != NULL)
 		return vepv;
 
-	vepv = g_new0 (POA_GNOME_Property__vepv, 1);
+	vepv = g_new0 (POA_Bonobo_Property__vepv, 1);
 
-	vepv->GNOME_Property_epv = gnome_property_get_epv ();
+	vepv->Bonobo_Property_epv = bonobo_property_get_epv ();
 
 	return vepv;
 }
 
 PortableServer_Servant
-gnome_property_servant_new (PortableServer_POA adapter, GnomePropertyBag *pb,
+bonobo_property_servant_new (PortableServer_POA adapter, BonoboPropertyBag *pb,
 			    char *property_name)
 {
-	GnomePropertyServant	*servant;
+	BonoboPropertyServant	*servant;
 	CORBA_Environment        ev;
 
 	g_return_val_if_fail (pb != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG (pb), NULL);
+	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), NULL);
 	g_return_val_if_fail (property_name != NULL, NULL);
 
 	/*
 	 * Verify that the specified property exists.
 	 */
-	if (! gnome_property_bag_has_property (pb, property_name))
+	if (! bonobo_property_bag_has_property (pb, property_name))
 		return NULL;
 
 
@@ -174,16 +174,16 @@ gnome_property_servant_new (PortableServer_POA adapter, GnomePropertyBag *pb,
 	/*
 	 * Create a transient servant for the property.
 	 */
-	servant = g_new0 (GnomePropertyServant, 1);
+	servant = g_new0 (BonoboPropertyServant, 1);
 
 	servant->property_name = g_strdup (property_name);
 	servant->pb = pb;
 
-	((POA_GNOME_Property *) servant)->vepv = gnome_property_get_vepv ();
+	((POA_Bonobo_Property *) servant)->vepv = bonobo_property_get_vepv ();
 	
-	POA_GNOME_Property__init ((PortableServer_Servant) servant, &ev);
+	POA_Bonobo_Property__init ((PortableServer_Servant) servant, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("GnomeProperty: Could not initialize Property servant");
+		g_warning ("BonoboProperty: Could not initialize Property servant");
 		g_free (servant->property_name);
 		g_free (servant);
 		CORBA_exception_free (&ev);
@@ -196,7 +196,7 @@ gnome_property_servant_new (PortableServer_POA adapter, GnomePropertyBag *pb,
 }
 
 void
-gnome_property_servant_destroy (PortableServer_Servant servant)
+bonobo_property_servant_destroy (PortableServer_Servant servant)
 {
 	CORBA_Environment ev;
 
@@ -204,15 +204,15 @@ gnome_property_servant_destroy (PortableServer_Servant servant)
 
 	CORBA_exception_init (&ev);
 
-	POA_GNOME_Property__fini ((PortableServer_Servant) servant, &ev);
+	POA_Bonobo_Property__fini ((PortableServer_Servant) servant, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("GnomeProperty: Could not deconstruct Property servant");
+		g_warning ("BonoboProperty: Could not deconstruct Property servant");
 		CORBA_exception_free (&ev);
 		return;
 	}
 
 	CORBA_exception_free (&ev);
 
-	g_free (((GnomePropertyServant *) servant)->property_name);
+	g_free (((BonoboPropertyServant *) servant)->property_name);
 	g_free (servant);
 }

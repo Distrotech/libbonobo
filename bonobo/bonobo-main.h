@@ -5,7 +5,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkobject.h>
-#include <bonobo/bonobo.h>
+#include <bonobo/Bonobo.h>
 
 gboolean		    bonobo_init			 (CORBA_ORB orb,
 							  PortableServer_POA poa,

@@ -1,5 +1,5 @@
 /*
- * gnome-stream-client.c: Helper routines to access a GNOME_Stream CORBA object
+ * gnome-stream-client.c: Helper routines to access a Bonobo_Stream CORBA object
  *
  * Author:
  *   Nat Friedman (nat@nat.org)
@@ -8,13 +8,13 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
-#include <bonobo/bonobo.h>
-#include <bonobo/gnome-object.h>
-#include <gnome-stream-client.h>
+#include <bonobo/Bonobo.h>
+#include <bonobo/bonobo-object.h>
+#include <bonobo-stream-client.h>
 
 /**
- * gnome_stream_client_write:
- * @stream: A CORBA Object reference to a GNOME_Stream
+ * bonobo_stream_client_write:
+ * @stream: A CORBA Object reference to a Bonobo_Stream
  * @buffer: the buffer to write
  * @size: number of bytes to write
  * @ev: a CORBA environment to return status information.  If this item
@@ -27,12 +27,12 @@
  * error, unless it is NULL, of course.
  */
 CORBA_long
-gnome_stream_client_write (const GNOME_Stream stream,
+bonobo_stream_client_write (const Bonobo_Stream stream,
 			   const void *buffer, const size_t size,
 			   CORBA_Environment *ev)
 {
 	CORBA_long          v;
-	GNOME_Stream_iobuf *buf;
+	Bonobo_Stream_iobuf *buf;
 	CORBA_Environment  *local_ev;
 
 	if (size == 0)
@@ -47,7 +47,7 @@ gnome_stream_client_write (const GNOME_Stream stream,
 	} else
 		local_ev = ev;
 
-	buf = GNOME_Stream_iobuf__alloc ();
+	buf = Bonobo_Stream_iobuf__alloc ();
 
 	if (! buf) {
 		goto stream_error;
@@ -61,7 +61,7 @@ gnome_stream_client_write (const GNOME_Stream stream,
 	buf->_maximum = size;
 	memcpy (buf->_buffer, buffer, size);
 
-	v = GNOME_Stream_write (stream, buf, ev);
+	v = Bonobo_Stream_write (stream, buf, ev);
 
 	CORBA_free (buf);
 
@@ -87,8 +87,8 @@ stream_error:
 }
 
 /**
- * gnome_stream_client_write_string:
- * @stream: A CORBA object reference to a #GNOME_Stream.
+ * bonobo_stream_client_write_string:
+ * @stream: A CORBA object reference to a #Bonobo_Stream.
  * @str: A string.
  * @terminate: Whether or not to write the \0 at the end of the
  * string.
@@ -98,14 +98,14 @@ stream_error:
  * If @terminate is TRUE, a NULL character will be written out at the
  * end of the string.  This function will not return until the entire
  * string has been written out, unless an exception is raised.  See
- * also gnome_stream_client_write().
+ * also bonobo_stream_client_write().
  *
  * Returns: The number of bytes written, or -1 if an error
  * occurs.  In the event of an error, @ev will be filled with
  * the details of the error, unless it is NULL.
  */
 CORBA_long
-gnome_stream_client_write_string (const GNOME_Stream stream, const char *str,
+bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
 				  gboolean terminate, CORBA_Environment *ev)
 {
 	size_t total_length;
@@ -123,13 +123,13 @@ gnome_stream_client_write_string (const GNOME_Stream stream, const char *str,
 	while (bytes_written < total_length) {
 
 		bytes_written +=
-			gnome_stream_client_write (stream,
+			bonobo_stream_client_write (stream,
 						   str + bytes_written,
 						   total_length - bytes_written,
 						   ev);
 
 		if (ev->_major != CORBA_NO_EXCEPTION) {
-			g_warning ("GnomeStreamClient: Exception writing to stream!\n");
+			g_warning ("BonoboStreamClient: Exception writing to stream!\n");
 			return bytes_written;
 		}
 	}
@@ -138,8 +138,8 @@ gnome_stream_client_write_string (const GNOME_Stream stream, const char *str,
 }
 
 /**
- * gnome_stream_client_printf:
- * @stream: A CORBA object reference to a #GNOME_Stream.
+ * bonobo_stream_client_printf:
+ * @stream: A CORBA object reference to a #Bonobo_Stream.
  * @terminate: Whether or not to null-terminate the string when it is
  * written out to the stream.
  * @ev: A CORBA_Environment pointer, optionally NULL.
@@ -148,11 +148,11 @@ gnome_stream_client_write_string (const GNOME_Stream stream, const char *str,
  * Processes @fmt and the arguments which follow it to produce a
  * string.  Writes this string out to @stream.  This function will not
  * return until the entire string is written out, unless an exception
- * is raised.  See also gnome_stream_client_write_string() and
- * gnome_stream_client_write().
+ * is raised.  See also bonobo_stream_client_write_string() and
+ * bonobo_stream_client_write().
  */
 CORBA_long
-gnome_stream_client_printf (const GNOME_Stream stream, const gboolean terminate,
+bonobo_stream_client_printf (const Bonobo_Stream stream, const gboolean terminate,
 			    CORBA_Environment *ev, const char *fmt, ...)
 {
 	va_list      args;
@@ -165,7 +165,7 @@ gnome_stream_client_printf (const GNOME_Stream stream, const gboolean terminate,
 	str = g_strdup_vprintf (fmt, args);
 	va_end (args);
 
-	retval = gnome_stream_client_write_string (stream, str, terminate, ev);
+	retval = bonobo_stream_client_write_string (stream, str, terminate, ev);
 
 	g_free (str);
 
@@ -173,8 +173,8 @@ gnome_stream_client_printf (const GNOME_Stream stream, const gboolean terminate,
 }
 
 /**
- * gnome_stream_client_read_string:
- * @stream: The #GNOME_Stream from which the string will be read.
+ * bonobo_stream_client_read_string:
+ * @stream: The #Bonobo_Stream from which the string will be read.
  * @str: The string pointer in which the string will be stored.
  * @ev: A pointer to a #CORBA_Environment.
  *
@@ -185,10 +185,10 @@ gnome_stream_client_printf (const GNOME_Stream stream, const gboolean terminate,
  * If an exception occurs, @ev will contain the exception.
  */
 CORBA_long
-gnome_stream_client_read_string (const GNOME_Stream stream, char **str,
+bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 				 CORBA_Environment *ev)
 {
-	GNOME_Stream_iobuf *buffer;
+	Bonobo_Stream_iobuf *buffer;
 	CORBA_long	    bytes_read;
 	CORBA_long	    strsz;
 
@@ -196,11 +196,11 @@ gnome_stream_client_read_string (const GNOME_Stream stream, char **str,
 	strsz	   = 0;
 	*str       = NULL;
 	while (TRUE) {
-		bytes_read = GNOME_Stream_read (stream, 1, &buffer, ev);
+		bytes_read = Bonobo_Stream_read (stream, 1, &buffer, ev);
 
 		if (ev->_major != CORBA_NO_EXCEPTION) {
 			g_free (*str);
-			g_warning ("GnomeStreamClient: Exception while reading string!\n");
+			g_warning ("BonoboStreamClient: Exception while reading string!\n");
 			return -1;
 		}
 
@@ -208,7 +208,7 @@ gnome_stream_client_read_string (const GNOME_Stream stream, char **str,
 			gboolean got_null = FALSE;
 
 			*str = g_realloc (*str, bytes_read);
-			str [strsz] = buffer->_buffer [0];
+			(*str) [strsz] = buffer->_buffer [0];
 			strsz ++;
 
 			if (buffer->_buffer [0] == '\0')
