@@ -1,39 +1,44 @@
-Bonobo release task list:
--------------------------
+    This is a list of outstanding items that need to be done to bring
+Bonobo to a state of perfection.  Feel free to add to this list.  I've
+made an effort to assign these tasks to the people who would be best
+suited to do them, but feel free to jump on something if it's not
+getting done.
 
-Miguel's list
--------------
-* exception handling trick deployed everywhere				
-* All existing components updated to make sense
-* all existing components fully documented
-* Bonobo.sgml updated
-* check for proper unref/destruction handling/mem leaks
-* size negotiation working for gnome views
-* in-place methods moved to GnomeView
-* missing embeddable methods implemented
-* container-side verb-popup-menu construction helper function
-* Moniker sample code
-* Compile with zero warnings
-* Document signals, undo setup.
-* all interfaces (PersistStream, etc) documented with paragragraphs describing their purpose
-* Printing
+Nat Friedman (nat@nat.org)
 
-Nat's list
-----------
-* Update my gdk patch.
-* Fix robustness issues
-	- SIGSEGV on unfinished corba method invocation
-* UIHandler toolbar code finished
-* UIHandler documented
-* reference container in a samples/
-* write up description of paint component
-* reference component in samples/, using gtk-object method
-* clean up text/plain
-* Make sample-container support system_exception
-* FIXMEs
-* Put system_exception checks into sample-container.
-* Move all test code out of bonobo/bonobo
-* Update components to do size negotiation
-* GnomeBonoboWidget
-* Write README file.
+Bonobo-endemic issues
+---------------------
+* check for proper unref/destruction handling/mem leaks.
+* Compile with zero warnings.
+* Hunt down and kill all FIXMEs.
+
+Bonobo Core (files in bonobo/)
+------------------------------
+* Missing embeddable methods implemented.
+* Document signals and undo setup.
+* Implement printing. (Miguel)
+* Update gdk unexpected window destruction patch. (Nat)
+* Fix CORBA robustness issues (SIGSEGV on unfinished corba method invocation)
+* UIHandler toolbar code finished (Nat)
+* UIHandler documented (Nat)
+* Move all test code out of bonobo/bonobo.
+* Implement GnomeBonoboWidget. (Nat)
 * Make sure HACKING is up-to-date.
+
+Interfaces (files in idl/)
+--------------------------
+* Documented.
+* Clean, API-doc'd IDL files.
+
+Components
+----------
+* Updated to use the new semantics.
+* Fully documented.
+* Clean up text/plain (Nat)
+* Update to do size negotiation.
+
+Sample code (the code in samples/)
+----------------------------------
+* Write moniker sample code.
+* Write up description of paint component. (Nat)
+* Reference component in samples/, using gtk-object method (Nat).

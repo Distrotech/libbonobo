@@ -31,7 +31,10 @@ to compile and install Bonobo.
 
    You will find documentation for Bonobo in the "doc" directory.  The
 actual implementation of bonobo is in the "bonobo" directory.  The
-CORBA interfaces are in the "idl" directory.
+CORBA interfaces are in the "idl" directory.  Sample implementations
+of components and containers are in the "samples" directory.  You
+should use these implementations as your reference when you write
+Bonobo code.
 
 * Bonobos
 
