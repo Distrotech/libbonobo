@@ -382,7 +382,7 @@ bonobo_activation_activate (const char             *requirements,
                  bonobo_activation_context_get (), ev);
         
         if (ev->_major == CORBA_SYSTEM_EXCEPTION &&
-            !strcmp (ev->_id, ex_CORBA_NO_IMPLEMENT)) /* fall-back */
+            !strcmp (ev->_id, ex_CORBA_BAD_OPERATION)) /* fall-back */
         {
                 g_warning ("TESTME: Fall-back activate");
                 result = Bonobo_ActivationContext_activateMatching
@@ -457,7 +457,7 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
                  bonobo_activation_context_get (), ev);
 
         if (ev->_major == CORBA_SYSTEM_EXCEPTION &&
-            !strcmp (ev->_id, ex_CORBA_NO_IMPLEMENT)) /* fall-back */
+            !strcmp (ev->_id, ex_CORBA_BAD_OPERATION)) /* fall-back */
                 result = Bonobo_ActivationContext_activateFromAid
                         (ac, aid, flags, bonobo_activation_context_get (), ev);
 

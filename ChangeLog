@@ -1,3 +1,15 @@
+2004-01-06  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: require a decent/recent ORBit2.
+
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_register_active_server_ext),
+	* bonobo-activation/bonobo-activation-activate.c
+	(bonobo_activation_activate_from_id),
+	(bonobo_activation_activate): check for BAD_OPERATION not
+	NO_IMPLEMENT for backwards compatibility #129841, thanks
+	Crispin.
+
 2004-01-06  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* activation-server/object-directory-load.c (parse_oaf_attribute)
