@@ -1,0 +1,204 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# Wang Jian <lark@linux.net.cn>, 2001
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libbonobo\n"
+"POT-Creation-Date: 2001-09-20 01:56+0200\n"
+"PO-Revision-Date: 2001-09-22 15:44+0800\n"
+"Last-Translator: Wang Jian <lark@linux.net.cn>\n"
+"Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bonobo/bonobo-exception.c:153
+msgid "An unsupported action was attempted"
+msgstr "试图执行不支持的动作"
+
+#: bonobo/bonobo-exception.c:156
+msgid "IO Error"
+msgstr "IO 错误"
+
+#: bonobo/bonobo-exception.c:159
+msgid "Invalid argument value"
+msgstr "无效的参数值"
+
+#: bonobo/bonobo-exception.c:163
+msgid "Object not found"
+msgstr "未找到对象"
+
+#: bonobo/bonobo-exception.c:166
+msgid "Syntax error in object description"
+msgstr "对象描述中有语法错误"
+
+#: bonobo/bonobo-exception.c:171
+msgid "Cannot activate object from factory"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:176
+msgid "No permission to access stream"
+msgstr "不允许访问流"
+
+#: bonobo/bonobo-exception.c:179
+msgid "An unsupported stream action was attempted"
+msgstr "试图执行不支持的流动作"
+
+#: bonobo/bonobo-exception.c:182
+msgid "IO Error on stream"
+msgstr "流 IO 错误"
+
+#: bonobo/bonobo-exception.c:186
+msgid "IO Error on storage"
+msgstr "存储 IO 错误"
+
+#: bonobo/bonobo-exception.c:189
+msgid "Name already exists in storage"
+msgstr "存储中已经有该名字"
+
+#: bonobo/bonobo-exception.c:192
+msgid "Object not found in storage"
+msgstr "存储中未找到对象"
+
+#: bonobo/bonobo-exception.c:195
+msgid "No permission to do operation on storage"
+msgstr "没有权限在存储上操作"
+
+#: bonobo/bonobo-exception.c:197
+msgid "An unsupported storage action was attempted"
+msgstr "试图执行不支持的存储动作"
+
+#: bonobo/bonobo-exception.c:199
+msgid "Object is not a stream"
+msgstr "对象不是流"
+
+#: bonobo/bonobo-exception.c:202
+msgid "Object is not a storage"
+msgstr "对象不是存储"
+
+#: bonobo/bonobo-exception.c:205
+msgid "Storage is not empty"
+msgstr "存储不为空"
+
+#: bonobo/bonobo-exception.c:209
+msgid "malformed user interface XML description"
+msgstr "格式不正确的用户界面 XML 描述"
+
+#: bonobo/bonobo-exception.c:212
+msgid "invalid path to XML user interface element"
+msgstr "无效的到 XML 用户界面元素的路径"
+
+#: bonobo/bonobo-exception.c:215
+msgid "Unknown command or verb"
+msgstr "未知的命令或动词"
+
+#: bonobo/bonobo-exception.c:218
+msgid "Command is insensitive"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:222
+msgid "incorrect data type"
+msgstr "不正确的数据类型"
+
+#: bonobo/bonobo-exception.c:225
+msgid "stream not found"
+msgstr "未找到流"
+
+#: bonobo/bonobo-exception.c:229
+msgid "property not found"
+msgstr "未找到属性"
+
+#: bonobo/bonobo-exception.c:232
+msgid "property has invalid type"
+msgstr "属性的类型无效"
+
+#: bonobo/bonobo-exception.c:235
+msgid "property is read only"
+msgstr "属性是只读的"
+
+#: bonobo/bonobo-exception.c:238
+msgid "config database backend failed "
+msgstr "配置数据库后端错误"
+
+#: bonobo/bonobo-exception.c:242
+msgid "Moniker interface cannot be found"
+msgstr "无法找到 Moniker 接口"
+
+#: bonobo/bonobo-exception.c:245
+msgid "Moniker activation timed out"
+msgstr "Moniker 激活超时"
+
+#: bonobo/bonobo-exception.c:248
+msgid "Syntax error within moniker"
+msgstr "在 Moniker 中语法错误"
+
+#: bonobo/bonobo-exception.c:251
+msgid "Moniker has an unknown moniker prefix"
+msgstr "Moniker 有一个未知的 moniker 前缀"
+
+#: bonobo/bonobo-exception.c:275
+msgid "Error checking error; no exception"
+msgstr "检测错误时发生错误；没有异常"
+
+#: bonobo/bonobo-exception.c:284
+#, fuzzy
+msgid "General activation error with no description"
+msgstr "对象描述中有语法错误"
+
+#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+msgid "Could not initialize Bonobo"
+msgstr "无法初始化 Bonobo"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
+msgid "HTTP Moniker"
+msgstr "HTTP Moniker"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "ORB IOR handling moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "Standard Moniker factory"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Oaf activation moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
+msgid "generic Oaf query moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
+msgid "generic factory 'new' moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
+msgid "generic item moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:8
+msgid "stream MonikerExtender"
+msgstr ""
+
+msgid "The User canceled the save"
+msgstr "用户取消了保存"
+
+msgid "No filename"
+msgstr "没有文件名"
+
+msgid "unknown mime type for '%s'"
+msgstr "“%s”的 MIME 类型未知"
+
+msgid "no handlers for mime type '%s'"
+msgstr "没有 MIME 类型“%s”的处理方法"
+
+msgid "file MonikerExtender"
+msgstr ""
+
+msgid "generic file moniker"
+msgstr ""
+
+msgid "Can not bonobo_init"
+msgstr "无法 bonobo_init"

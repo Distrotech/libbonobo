@@ -1,3 +1,7 @@
+2001-09-22  Wang Jian  <lark@linux.net.cn>
+
+	* configure.in(ALL_LINGUAS): Added zh_CN for Simplified Chinese.
+
 2001-09-21  Havoc Pennington  <hp@redhat.com>
 
 	* configure.in, autogen.sh: remove CERTIFIED_GNOMIE
