@@ -102,7 +102,7 @@ msgstr "iid %s hefur enga staðsetningu"
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "ógilt tákn '%s' í iid '%s'"
+msgstr "ógilt tákn '%c' í iid '%s'"
 
 #: activation-server/object-directory-load.c:306
 #, c-format
