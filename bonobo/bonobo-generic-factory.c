@@ -26,9 +26,9 @@ POA_Bonobo_GenericFactory__vepv bonobo_generic_factory_vepv;
 static BonoboObjectClass *bonobo_generic_factory_parent_class;
 
 static CORBA_boolean
-impl_Bonobo_GenericFactory_supports (PortableServer_Servant  servant,
-				     const CORBA_char       *obj_goad_id,
-				     CORBA_Environment      *ev)
+impl_Bonobo_GenericFactory_manufactures (PortableServer_Servant  servant,
+					 const CORBA_char       *obj_goad_id,
+					 CORBA_Environment      *ev)
 {
 	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
 
@@ -326,7 +326,7 @@ bonobo_generic_factory_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_GenericFactory__epv, 1);
 
-	epv->supports	   = impl_Bonobo_GenericFactory_supports;
+	epv->manufactures  = impl_Bonobo_GenericFactory_manufactures;
 	epv->create_object = impl_Bonobo_GenericFactory_create_object;
 
 	return epv;

@@ -242,7 +242,7 @@ module Bonobo {
 		 * Toolbar items.
 		 */
 		void toolbar_create_item (in UIHandler containee, in string path, in ToolbarType type,
-					  in string label, in string hint, in long pos, in Control control,
+					  in string label, in string hint, in long pos, in Bonobo::Control control,
 					  in PixmapType pixmap_type, in iobuf pixmap_data,
 					  in unsigned long accelerator_key, in long modifier)
 			raises (NotToplevelHandler, PathNotFound);
@@ -333,7 +333,7 @@ module Bonobo {
 
 		boolean dock_add (in UIHandler      containee,
 				  in string         name,
-				  in Control        control,
+				  in Bonobo::Control control,
 				  in long           behavior,
 				  in DockPlacement  placement,
 				  in long           band_num,

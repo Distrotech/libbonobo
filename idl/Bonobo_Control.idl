@@ -137,7 +137,7 @@ interface Control : Bonobo::Unknown {
 	 *
 	 * Set the control's activity state.
 	 */
-	void set_state (in State state);
+	void set_state (in Control::State state);
 };
 
 };

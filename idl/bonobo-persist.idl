@@ -87,7 +87,7 @@ module Bonobo {
 		 * The bonobo_object should load its state from the
 		 * @storage provided
 		 */
-		void load (in Storage storage) raises (WrongDataType);
+		void load (in Bonobo::Storage storage) raises (WrongDataType);
 
 		/**
 		 * save:
@@ -98,7 +98,8 @@ module Bonobo {
 		 *
 		 * BonoboObjects should save their sate in the @storage
 		 */
-		void save (in Storage storage, in boolean same_as_loaded);
+		void save (in Bonobo::Storage storage,
+			   in boolean same_as_loaded);
 	
 		/**
 		 * init_new:
@@ -108,7 +109,7 @@ module Bonobo {
 		 * their entire life.  This is a chance given to initialize such 
 		 * storage and keep it around (users should addref it).
 		 */
-		void init_new (in Storage storage);
+		void init_new (in Bonobo::Storage storage);
 
 	};
 	
@@ -131,7 +132,7 @@ module Bonobo {
 		 *
 		 * Loads the status of the object from @stream
 		 */
-		void load (in Stream stream) raises (WrongDataType);
+		void load (in Bonobo::Stream stream) raises (WrongDataType);
 
 		/**
 		 * save:
@@ -139,7 +140,7 @@ module Bonobo {
 		 *
 		 * Saves the state of the object to the @stream
 		 */
-		void save (in Stream stream);
+		void save (in Bonobo::Stream stream);
 
 		/**
 		 * get_size_max:

@@ -48,7 +48,7 @@ module Gdk {
 	typedef long Time;
 
 	struct MotionEvent {
-		Time   time;
+		Gdk::Time time;
 		double x, y, x_root, y_root;
 		double pressure;
 		double xtilt, ytilt;
@@ -58,7 +58,7 @@ module Gdk {
 
 	struct ButtonEvent {
 		ButtonType type;
-		Time       time;
+		Gdk::Time time;
 		
 		double x, y, x_root, y_root;
 
@@ -67,7 +67,7 @@ module Gdk {
 
 	struct KeyEvent {
 		KeyType type;
-		Time    time;
+		Gdk::Time time;
 		short	state;
 		short	keyval;
 		short	length;
@@ -76,7 +76,7 @@ module Gdk {
 
 	struct CrossingEvent {
 		CrossType    type;
-		Time         time;
+		Gdk::Time    time;
 		double	     x, y, x_root, y_root;
 		CrossMode    mode;
 		boolean      focus;
@@ -91,11 +91,11 @@ module Gdk {
 	 * Only the lists of events supported by the Canvas
 	 */
 	union Event switch (EventType) {
-		case FOCUS:    FocusEvent focus;
-		case KEY:      KeyEvent key;
-		case MOTION:   MotionEvent motion;
-		case BUTTON:   ButtonEvent button;
-		case CROSSING: CrossingEvent crossing;
+		case Gdk::FOCUS:    FocusEvent focus;
+		case Gdk::KEY:      KeyEvent key;
+		case Gdk::MOTION:   MotionEvent motion;
+		case Gdk::BUTTON:   ButtonEvent button;
+		case Gdk::CROSSING: CrossingEvent crossing;
 	};
 };
 
@@ -139,7 +139,7 @@ module Canvas {
 	struct SVPSegment {
 		boolean up;     /* up or down */
 	        DRect   bbox;
-		Points  points;
+		Canvas::Points  points;
 	};
 			  
 	typedef sequence<SVPSegment> SVP;
@@ -166,7 +166,7 @@ module Canvas {
 		 * 
 		 * Returns the update region.
 		 */
-		ArtUTA update  (in State state,
+		ArtUTA update  (in Canvas::State state,
 				in affine aff, in SVP clip_path, in long flags,
 				out double x1, out double y1, out double x2, out double y2);
 
@@ -175,7 +175,7 @@ module Canvas {
 		void map ();
 		void unmap ();
 
-		void draw   (in State state,
+		void draw   (in Canvas::State state,
 			     in window_id drawable, 
 			     in short x, in short y, 
 			     in short width, in short height);
@@ -188,7 +188,7 @@ module Canvas {
 		 * so we avoid sending the buffer out, we just return it.
 		 *
 		 */
-		void render (inout Buf buf);
+		void render (inout Canvas::Buf buf);
 
 		/**
 		 * contains:
@@ -200,11 +200,11 @@ module Canvas {
 		 */
 		boolean contains (in double x, in double y);
 
-		void bounds (in State state, 
+		void bounds (in Canvas::State state, 
 			     out double x1, out double x2, 
 			     out double y1, out double y2);
 
-		boolean event (in State state, 
+		boolean event (in Canvas::State state, 
 			       in Bonobo::Gdk::Event event);
 
 		/*

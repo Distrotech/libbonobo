@@ -1,3 +1,44 @@
+2000-03-08  Jon K Hellan  <hellan@acm.org>
+
+	Fixed problems when compiling Bonobo IDL with the omniORB IDL
+	compiler: 
+
+	* idl/bonobo-factory.idl: Changed supports to
+	manufactures. 'supports' is a keyword in IDL.
+
+	* bonobo/bonobo-generic-factory.c
+	(impl_Bonobo_GenericFactory_manufactures): Renamed from
+	.._supports. 
+	(bonobo_generic_factory_get_epv): s/supports/manufactures
+
+	The following are cases where a name at an inner scope differs
+	only in case from a name at an outer scope. This breaks the rule
+	that identifiers cannot differ only in case, because an identifier
+	from a surrounding scope is introduced into a scope if it is used
+	in that scope. The solution is to scope the outer identifiers
+	explicitly:
+
+	* idl/bonobo-ui-handler.idl (UIHandler::toolbar_create_item,
+	UIHandler::dock_add): Changed Control to Bonobo::Control.
+
+	* idl/bonobo-persist.idl (PersistStorage::load,
+	PersistStorage::save, PersistStorage::init_new): Changed Storage
+	to Bonobo::Storage.
+	(PersistStream::load, PersistStream::save): Changed Stream to
+	Bonobo::Stream.
+
+	* idl/bonobo-control.idl (Control::set_state): Changed State to
+	Control::State.
+
+	* idl/bonobo-canvas.idl (Gdk::MotionEvent, Gdk::ButtonEvent,
+	Gdk::KeyEvent, Gdk::CrossingEvent): Changed Time to Gdk::Time.
+	(Gdk::Event): Changed FOCUS to Gdk::FOCUS, KEY to Gdk::KEY, MOTION
+	to Gdk::MOTION, BUTTON to Gdk::BUTTON, CROSSING to Gdk::CROSSING .
+	(Canvas::SVPSegment): Changed Points to Canvas::Points.
+	(Canvas::Component::update, Canvas::Component::draw,
+	Canvas::Component::bounds, Canvas::Component::event): Changed
+	State to Canvas::State.
+	
 2000-03-07  John Sullivan  <sullivan@eazel.com>
 
         Fixed some widget ownership problems that were manifesting
