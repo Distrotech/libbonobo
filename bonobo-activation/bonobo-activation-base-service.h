@@ -31,6 +31,8 @@
 #ifndef BONOBO_ACTIVATION_BASE_SERVICE_H
 #define BONOBO_ACTIVATION_BASE_SERVICE_H
 
+#ifndef BONOBO_DISABLE_DEPRECATED
+
 #include <orbit/orbit.h>
 
 G_BEGIN_DECLS
@@ -93,5 +95,7 @@ void         bonobo_activation_base_service_activator_add (BonoboActivationBaseS
 void         bonobo_activation_base_service_debug_shutdown (CORBA_Environment            *ev);
 
 G_END_DECLS
+
+#endif /* BONOBO_DISABLE_DEPRECATED */
 
 #endif /* BONOBO_ACTIVATION_BASE_SERVICE_H */
