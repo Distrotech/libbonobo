@@ -1,3 +1,28 @@
+libbonobo 2.3.4
+	* Bugs fixed
+		+ don't use C++ keyword in C code (Frederic Crozat)
+		+ fix activation test linking and script (Michael)
+	* Translations
+		+ az (Metin Amiroff)
+		+ id (Mohammad Damt)
+		+ ml (Guntupalli Karunakar)
+		+ nl (Huib Kleinhout)
+		+ bn (Mahmudur Rahman)
+		+ fi (Pauli Virtanen)
+		+ ru (Russian team, Dmitry G. Mastrukov)
+		+ da (Ole Laursen)
+		+ sr (Serbian team, Danilo Å egan)
+		+ sq (Laurent Dhima)
+
+libbonobo 2.3.3
+	* Features
+		+ use Gdk::WindowId for Bonobo_Canvas (Michael)
+
+	* Bugs fixed
+		+ CORBA_boolean handling in property bag (Dan Winship)
+		+ cancel pending timeouts when destroying factory (Gustavo Carneiro)		
+
+
 libbonobo 2.3.2
 
 	* Features
@@ -71,7 +96,7 @@ libbonobo 2.0.0
 
 	* Featurelets
 		+ add BonoboObject padding (Michael)
-		+ add --enable-debug config option (Gustavo Gir�ldez)
+		+ add --enable-debug config option (Gustavo Giráldez)
 
 libbonobo 1.117.1
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mn\n"
-"POT-Creation-Date: 2003-06-09 17:26+0100\n"
+"POT-Creation-Date: 2003-07-04 13:33+0200\n"
 "PO-Revision-Date: 2003-01-16 21:05+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: mongolian <mn@li.org>\n"

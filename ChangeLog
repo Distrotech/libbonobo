@@ -1,3 +1,7 @@
+2003-07-04  Frederic Crozat  <fcrozat@mandrakesoft.com>
+
+	* Version 2.3.4
+
 2003-06-24  Michael Meeks  <michael@ximian.com>
 
 	* test/test-activation/Makefile.am: resolve linking snafu

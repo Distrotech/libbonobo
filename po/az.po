@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.103.0\n"
-"POT-Creation-Date: 2003-06-22 13:14+0200\n"
+"POT-Creation-Date: 2003-07-04 13:33+0200\n"
 "PO-Revision-Date: 2003-06-22 17:54+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkish <gnome@azitt.com>\n"
@@ -64,8 +64,12 @@ msgstr "Bölüşdürə bilən cismləri uzaqdan istifadə etməyi indilik dəst�
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
-msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
-msgstr "OAF quraşdırma faylı müvəffəqiyyətlə oxunmadı. Lütfən, hökmlü olub olmadığını yoxla :%s"
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"OAF quraşdırma faylı müvəffəqiyyətlə oxunmadı. Lütfən, hökmlü olub "
+"olmadığını yoxla :%s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -138,7 +142,9 @@ msgstr "%s icra edilə bilmədi: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr "Lokal üçün həddindən artıq ləqəb səviyəsi var, buna döngü səbəp olmuş olabilər"
+msgstr ""
+"Lokal üçün həddindən artıq ləqəb səviyəsi var, buna döngü səbəp olmuş "
+"olabilər"
 
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
@@ -321,8 +327,7 @@ msgstr "Xəta yoxlaması xətası; xüsusi hal yoxdur"
 msgid "General activation error with no description"
 msgstr "İzahsız ümumi fəallaşdırma xətası"
 
-#: bonobo/bonobo-generic-factory.h:79
-#: bonobo/bonobo-generic-factory.h:83
+#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
 
@@ -445,8 +450,7 @@ msgstr "Bonobo fəallaşdırma quraşdırma faylı möhtəviyyatı :\n"
 msgid "Directory to remove from configuration file"
 msgstr "Quraşdırma faylından silinecek cərgə"
 
-#: utils/bonobo-activation-sysconf.c:233
-#: utils/bonobo-activation-sysconf.c:236
+#: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
 msgstr "dizinleme"
 
@@ -461,4 +465,3 @@ msgstr "Quraşdırma faylındakı cərgələri göstər"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Quraşdırma faylındakı cığırları göstər"
-

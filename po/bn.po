@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:linbbonobo.gnome-2.2\n"
-"POT-Creation-Date: 2003-06-16 00:56-0700\n"
+"POT-Creation-Date: 2003-07-04 13:33+0200\n"
 "PO-Revision-Date: 2003-5-12 1:58+0600\n"
 "Last-Translator: Muhammad Mahmudur Rahman Khan  <mrk_ju@yahoo.con>\n"
 "Language-Team: Bengali <gnome-translation@bengalinux.org>\n"

@@ -11,14 +11,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-13 20:50+0200\n"
+"POT-Creation-Date: 2003-07-04 13:33+0200\n"
 "PO-Revision-Date: 2003-06-15 20:50+0000\n"
 "Last-Translator: Vladislav Bidikov <bidikovi@mail.com.mk>\n"
 "Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.1\n"
 
 #: activation-server/activation-context-corba.c:472
@@ -152,7 +152,8 @@ msgstr "Грешка при извршување %s: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr "Премногу нивоа на алиаси за тоа локале, може да дојде до бесконечен процес"
+msgstr ""
+"Премногу нивоа на алиаси за тоа локале, може да дојде до бесконечен процес"
 
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
@@ -473,4 +474,3 @@ msgstr "Приказ на директориумите во конфигурац
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Приказ на патеката до конфигурациската датотека"
-
