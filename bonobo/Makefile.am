@@ -64,6 +64,7 @@ libbonoboinclude_HEADERS =		\
 	bonobo-item-handler.h		\
 	bonobo-listener.h		\
 	bonobo-main.h			\
+	bonobo-macros.h			\
 	bonobo-moniker-extender.h	\
 	bonobo-moniker-simple.h		\
 	bonobo-moniker-util.h		\

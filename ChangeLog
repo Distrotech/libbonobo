@@ -1,3 +1,14 @@
+2001-11-14  Michael Meeks  <michael@ximian.com>
+
+	* libbonobo.h: include bonobo-macros.h
+
+	* bonobo/bonobo-object.h: move new macros into
+
+	* bonobo/bonobo-macros.h: here; create & pull in
+	GNOME_BOILERPLATE bits -> BONOBO_BOILERPLATE.
+
+	* bonobo/Makefile.am: add bonobo-macros.h
+
 2001-11-12  Darin Adler  <darin@bentspoon.com>
 
 	* bonobo/bonobo-object.h: Add BONOBO_CLASS_BOILERPLATE and
