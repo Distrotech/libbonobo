@@ -47,11 +47,14 @@ main (int argc, char *argv [])
 	if (bonobo_init (orb, NULL, NULL) == FALSE)
 		g_error ("Can not bonobo_init");
 
-/*	check_string ("a:1\\!\\#\\!\\!\\#\\\\",
-		      "a:1!#!!#\\");
+	check_string ("a:\\\\", "a:\\");
 
-	check_string ("a:\\",
-	"a:\\");*/
+	check_string ("a:\\#", "a:#");
+
+	check_string ("a:\\!", "a:!");
+
+	check_string ("a:1\\!\\#\\!\\!\\#\\\\",
+		      "a:1!#!!#\\");
 
 	return 0;
 }

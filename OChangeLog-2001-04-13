@@ -1,3 +1,7 @@
+2000-12-15  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker.c (escape_moniker): fix precondition.
+
 2000-12-14  Darin Adler  <darin@eazel.com>
 
 	* bonobo.spec.in: Update for recent changes in names of some

@@ -104,7 +104,7 @@ escape_moniker (const char *string,
 	g_return_val_if_fail (string != NULL, NULL);
 
 	len = strlen (string);
-	g_return_val_if_fail (offset >= len, NULL);
+	g_return_val_if_fail (offset < len, NULL);
 
 	for (i = offset; i < len; i++) {
 		if (string [i] == '\0')
