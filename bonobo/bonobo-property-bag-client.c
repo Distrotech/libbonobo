@@ -5,6 +5,7 @@
  * Copyright 1999, Helix Code, Inc.
  */
 #include <config.h>
+#include <stdarg.h>
 #include <bonobo/bonobo-property-bag-client.h>
 #include <bonobo/bonobo-property-types.h>
 
@@ -1078,3 +1079,115 @@ bonobo_property_bag_client_get_type (void)
 
 	return type;
 }
+
+#define SEND_OBTUSE(pbc,name,args,t,odd) \
+	case CORBA_tk##t: \
+		bonobo_property_bag_client_set_value##t (pbc, name, va_arg (args, CORBA##odd)); \
+		break;
+
+#define SEND(pbc,name,args,t) SEND_OBTUSE(pbc,name,args,t,t)
+
+char *
+bonobo_property_bag_client_setv (BonoboPropertyBagClient *pbc,
+				 const char              *first_arg,
+				 va_list                  var_args)
+{
+	const char *arg_name;
+
+	g_return_val_if_fail (pbc != NULL, g_strdup ("No property bag"));
+	g_return_val_if_fail (first_arg != NULL, g_strdup ("No arg"));
+
+	arg_name = first_arg;
+	while (arg_name) {
+		CORBA_TypeCode type;
+
+		type = bonobo_property_bag_client_get_property_type (pbc, arg_name);
+
+		if (type == TC_null)
+			return g_strdup_printf ("No such arg '%s'", arg_name);
+
+		switch (type->kind) {
+		case CORBA_tk_string:
+			bonobo_property_bag_client_set_value_string (pbc, arg_name,
+								     va_arg (var_args, CORBA_char *));
+			break;
+
+			SEND        (pbc, arg_name, var_args, _boolean);
+			SEND_OBTUSE (pbc, arg_name, var_args, _ushort, _unsigned_short);
+			SEND        (pbc, arg_name, var_args, _short);
+			SEND        (pbc, arg_name, var_args, _float);
+			SEND        (pbc, arg_name, var_args, _double);
+			SEND_OBTUSE (pbc, arg_name, var_args, _ulong, _unsigned_long);
+			SEND        (pbc, arg_name, var_args, _long);
+
+		default:
+			return g_strdup_printf ("Unhandled setv arg '%s' type %d",
+						arg_name, type->kind);
+		}
+
+		arg_name = va_arg (var_args, char *);
+	}
+
+	return NULL;
+}
+#undef SEND
+#undef SEND_OBTUSE
+
+#define RECIEVE_OBTUSE(pbc,name,args,t,odd) \
+	case CORBA_tk##t: \
+		*((CORBA##odd *)va_arg (args, CORBA##odd *)) = \
+		    bonobo_property_bag_client_get_value##t (pbc, name); \
+		break;
+
+#define RECIEVE(pbc,name,args,t) RECIEVE_OBTUSE(pbc,name,args,t,t)
+
+
+char *
+bonobo_property_bag_client_getv (BonoboPropertyBagClient *pbc,
+				 const char              *first_arg,
+				 va_list                  var_args)
+{
+	const char *arg_name;
+
+	g_return_val_if_fail (pbc != NULL, g_strdup ("No property bag"));
+	g_return_val_if_fail (first_arg != NULL, g_strdup ("No arg"));
+
+	arg_name = first_arg;
+	while (arg_name) {
+		CORBA_TypeCode type;
+
+		type = bonobo_property_bag_client_get_property_type (pbc, arg_name);
+
+		if (type == TC_null)
+			return g_strdup_printf ("No such arg '%s'", arg_name);
+
+		switch (type->kind) {
+		case CORBA_tk_string:
+		{
+			char *txt = bonobo_property_bag_client_get_value_string (pbc, arg_name);
+			*((CORBA_char **)(va_arg (var_args, CORBA_char **))) =
+				CORBA_string_dup (txt);
+			g_free (txt);
+			break;
+		}
+
+			RECIEVE        (pbc, arg_name, var_args, _boolean);
+			RECIEVE_OBTUSE (pbc, arg_name, var_args, _ushort, _unsigned_short);
+			RECIEVE        (pbc, arg_name, var_args, _short);
+			RECIEVE        (pbc, arg_name, var_args, _float);
+			RECIEVE        (pbc, arg_name, var_args, _double);
+			RECIEVE_OBTUSE (pbc, arg_name, var_args, _ulong, _unsigned_long);
+			RECIEVE        (pbc, arg_name, var_args, _long);
+
+		default:
+			return g_strdup_printf ("Unhandled getv arg '%s' type %d",
+						arg_name, type->kind);
+		}
+
+		arg_name = va_arg (var_args, char *);
+	}
+
+	return NULL;
+}
+#undef RECIEVE
+#undef RECIEVE_OBTUSE

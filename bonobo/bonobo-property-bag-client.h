@@ -1,6 +1,7 @@
 #ifndef __BONOBO_PROPERTY_BAG_CLIENT_H__
 #define __BONOBO_PROPERTY_BAG_CLIENT_H__
 
+#include <stdarg.h>
 #include <libgnome/gnome-defs.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-stream.h>
@@ -18,20 +19,25 @@ typedef struct {
 } BonoboPropertyBagClientClass;
 
 /* Property bag proxy routines */
-BonoboPropertyBagClient  *bonobo_property_bag_client_new		      (Bonobo_PropertyBag corba_property_bag);
+BonoboPropertyBagClient *bonobo_property_bag_client_new                (Bonobo_PropertyBag corba_property_bag);
 GList			*bonobo_property_bag_client_get_properties     (BonoboPropertyBagClient *pbc);
 void                     bonobo_property_bag_client_free_properties    (GList *list);
 GList			*bonobo_property_bag_client_get_property_names (BonoboPropertyBagClient *pbc);
 Bonobo_Property		 bonobo_property_bag_client_get_property       (BonoboPropertyBagClient *pbc,
-								       const char *property_name);
-void			 bonobo_property_bag_client_persist	      (BonoboPropertyBagClient *pbc,
-								       Bonobo_Stream stream);
-void			 bonobo_property_bag_client_depersist	      (BonoboPropertyBagClient *pbc,
-								       Bonobo_Stream stream);
+									const char *property_name);
+void			 bonobo_property_bag_client_persist	       (BonoboPropertyBagClient *pbc,
+									Bonobo_Stream stream);
+void			 bonobo_property_bag_client_depersist	       (BonoboPropertyBagClient *pbc,
+									Bonobo_Stream stream);
 
-GtkType			 bonobo_property_bag_client_get_type	      (void);
+GtkType			 bonobo_property_bag_client_get_type	       (void);
 
-
+char                    *bonobo_property_bag_client_setv               (BonoboPropertyBagClient *pb,
+									const char              *first_arg,
+									va_list                  var_args);
+char                    *bonobo_property_bag_client_getv               (BonoboPropertyBagClient *pb,
+									const char              *first_arg,
+									va_list                  var_args);
 
 /*
  *

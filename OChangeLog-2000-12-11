@@ -1,3 +1,24 @@
+2000-02-28  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_getv),
+	(bonobo_property_bag_client_setv): Implement.
+
+	* bonobo/bonobo-control.c (bonobo_control_set_property),
+	(bonobo_control_get_property): implement thin wrappers on the above.
+
+	* bonobo/bonobo-widget.c (bonobo_widget_set_property),
+	(bonobo_widget_get_property): ditto.
+
+	* samples/controls/bonobo-calculator-control.c (bonobo_calculator_factory):
+	add Calculation result property. (bonobo_calc_control_prop_value_changed_cb): 
+	dummy function to print the value out.
+
+	* samples/controls/sample-control-container.c (incr_calc): add new
+	property demo. (container_create): add incr button
+
+	* bonobo/bonobo-object-directory-goad.c (od_get_server_list): fixup an
+	error case I saw once.
+
 2000-02-28  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-uih-toolbar.c
