@@ -1,3 +1,9 @@
+2002-01-03  jacob berkman  <jacob@ximian.com>
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_map_params):
+	use g_param_spec_get_(name|nick|blurb) to get the property name,
+	doc title, and dock string
+
 2002-01-02  Jens Finke  <jens@triq.net>
 
 	* bonobo/bonobo-item-container.c

@@ -781,7 +781,6 @@ bonobo_property_bag_map_params (BonoboPropertyBag *pb,
 		GType                value_type;
 		Bonobo_PropertyFlags flags;
 		BonoboArgType        type;
-		char                *desc;
 
 		pspec = pspecs [i];
 		value_type = G_PARAM_SPEC_VALUE_TYPE (pspec);
@@ -797,18 +796,15 @@ bonobo_property_bag_map_params (BonoboPropertyBag *pb,
 
 		flags = flags_gparam_to_bonobo (pspec->flags);
 
-		desc = g_strconcat (pspec->name, " is a ",
-				    g_type_name (value_type), NULL);
-
-#ifdef MAPPING_DEBUG
-		g_warning ("Mapping '%s'", desc);
-#endif
 		bonobo_property_bag_add_full
-			(pb, pspec->name, i, type,
-			 NULL, desc, NULL, flags,
+			(pb, 
+			 g_param_spec_get_name ((GParamSpec *)pspec), 
+			 i, type, NULL,
+			 g_param_spec_get_nick ((GParamSpec *)pspec),
+			 g_param_spec_get_blurb ((GParamSpec *)pspec), 
+			 flags,
 			 g_cclosure_new (G_CALLBACK (get_prop), (gpointer) pspec, NULL),
 			 g_cclosure_new (G_CALLBACK (set_prop), (gpointer) pspec, NULL));
-		g_free (desc);
 	}
 }
 
