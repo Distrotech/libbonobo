@@ -39,19 +39,23 @@ typedef struct {
 	GtkObjectClass parent_class;
 
 	/*
-	 * signals.  I am not sure we want to support this signal in the future.
+	 * signals.  
 	 */
-	void  (*query_interface)(GnomeObject *object, const char *repo_id, CORBA_Object *retval);
+	void  (*query_interface) (GnomeObject *object, const char *repo_id, CORBA_Object *retval);
+	void  (*user_exception)  (GnomeObject *object, CORBA_Environment *ev);
+	void  (*system_exception)(GnomeObject *object, CORBA_Environment *ev);
+	void  (*object_gone)     (GnomeObject *object, CORBA_Environment *ev);
 } GnomeObjectClass;
 
 GtkType      gnome_object_get_type         (void);
-GnomeObject *gnome_object_construct       (GnomeObject *object,
-					     CORBA_Object corba_object);
+GnomeObject *gnome_object_construct        (GnomeObject *object,
+					    CORBA_Object corba_object);
 
-GnomeObject *gnome_object_from_servant    (PortableServer_Servant servant);
-PortableServer_Servant gnome_object_get_servant (GnomeObject *object);
+GnomeObject *gnome_object_from_servant     (PortableServer_Servant servant);
 void         gnome_object_bind_to_servant  (GnomeObject *object,
 					     void *servant);
+PortableServer_Servant
+             gnome_object_get_servant      (GnomeObject *object);
 
 CORBA_Object gnome_object_activate_servant (GnomeObject *object,
 					     void *servant);
@@ -59,12 +63,24 @@ CORBA_Object gnome_object_activate_servant (GnomeObject *object,
 void         gnome_object_add_interface    (GnomeObject *object,
 					     GnomeObject *newobj);
 CORBA_Object gnome_object_query_interface  (GnomeObject *object,
-					     const char *repo_id);
+					    const char *repo_id);
 CORBA_Object gnome_object_corba_objref     (GnomeObject *object);
 
 void         gnome_object_ref              (GnomeObject *object);
 void         gnome_object_unref            (GnomeObject *object);
 
+/*
+ * Error checking
+ */
+void         gnome_object_check_env        (GnomeObject *object,
+					    CORBA_Environment *ev);
+
+#define GNOME_OBJECT_CHECK(o,e) do { \
+                                        if ((e)->_major != CORBA_NO_EXCEPTION) { \
+                                        	gnome_object_check_env(o,e);     \
+			        } while (0)
+#define GNOME_OBJECT_EV(o) &(GNOME_OBJECT (o)->ev)
+ 
 /* CORBA default vector methods we provide */
 extern PortableServer_ServantBase__epv  gnome_object_base_epv;
 extern POA_GNOME_Unknown__epv           gnome_object_epv;
@@ -73,3 +89,4 @@ extern POA_GNOME_Unknown__vepv          gnome_object_vepv;
 END_GNOME_DECLS
 
 #endif
+

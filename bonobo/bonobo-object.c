@@ -25,6 +25,9 @@ struct _GnomeObjectPrivate {
 
 enum {
 	QUERY_INTERFACE,
+	USER_EXCEPTION,
+	SYSTEM_EXCEPTION,
+	OBJECT_GONE,
 	LAST_SIGNAL
 };
 
@@ -242,11 +245,12 @@ gnome_object_destroy (GtkObject *object)
 	
 	if (gnome_object->corba_objref != CORBA_OBJECT_NIL){
 		PortableServer_ObjectId *oid;
-		CORBA_Object_release (gnome_object->corba_objref, &gnome_object->ev);
 		
-		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, &gnome_object->ev);
+		CORBA_Object_release (gnome_object->corba_objref, GNOME_OBJECT_EV (gnome_object));
+		
+		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, GNOME_OBJECT_EV (gnome_object));
 		PortableServer_POA_deactivate_object (
-			bonobo_poa (), oid, &gnome_object->ev);
+			bonobo_poa (), oid, GNOME_OBJECT_EV (gnome_object));
 		CORBA_free(oid);
 	}
 	CORBA_exception_free (&gnome_object->ev);
@@ -269,6 +273,29 @@ gnome_object_class_init (GnomeObjectClass *class)
 				GTK_SIGNAL_OFFSET(GnomeObjectClass,query_interface), 
 				gtk_marshal_NONE__POINTER_POINTER,
 				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER); 
+	gnome_object_signals [SYSTEM_EXCEPTION] =
+		gtk_signal_new ("system_exception",
+				GTK_RUN_LAST,
+				object_class->type,
+				GTK_SIGNAL_OFFSET(GnomeObjectClass,system_exception),
+				gtk_marshal_NONE__POINTER,
+				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
+	gnome_object_signals [USER_EXCEPTION] =
+		gtk_signal_new ("user_exception",
+				GTK_RUN_LAST,
+				object_class->type,
+				GTK_SIGNAL_OFFSET(GnomeObjectClass,user_exception),
+				gtk_marshal_NONE__POINTER,
+				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
+	gnome_object_signals [OBJECT_GONE] =
+		gtk_signal_new ("object_gone",
+				GTK_RUN_LAST,
+				object_class->type,
+				GTK_SIGNAL_OFFSET(GnomeObjectClass,object_gone),
+				gtk_marshal_NONE__POINTER,
+				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
+	
+
 	gtk_object_class_add_signals (object_class, gnome_object_signals, LAST_SIGNAL);
 
 	object_class->destroy = gnome_object_destroy;
@@ -464,3 +491,32 @@ gnome_object_corba_objref (GnomeObject *object)
 	return object->corba_objref;
 }
 
+/**
+ * gnome_object_check_env:
+ * @object: The object on which we operate
+ * @ev: CORBA Environment to check
+ *
+ * This routine verifies the @ev environment for any possible
+ * exceptions and emits signals depending on the values of it
+ *
+ */
+void
+gnome_object_check_env (GnomeObject *object, CORBA_Environment *ev)
+{
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (ev != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+
+	if (ev->_major == CORBA_NO_EXCEPTION)
+		return;
+
+	if (ev->_major == CORBA_USER_EXCEPTION){
+		gtk_signal_emit (
+			GTK_OBJECT (object), gnome_object_signals [USER_EXCEPTION], ev);
+	}
+
+	if (ev->_major == CORBA_SYSTEM_EXCEPTION){
+		gtk_signal_emit (
+			GTK_OBJECT (object), gnome_object_signals [SYSTEM_EXCEPTION], ev);
+	}
+}

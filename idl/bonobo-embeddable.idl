@@ -165,12 +165,6 @@ interface Embeddable : GNOME::Unknown {
 	 */
 	void set_moniker (in Moniker mon, in Moniker::type which);
 
-	/** 
-	 * get_moniker:
-	 * FIXME
-	 *
-	 */
-
 	struct GnomeVerb {
 		string name;
 		string label;
