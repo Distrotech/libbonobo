@@ -10,33 +10,29 @@
 
 BEGIN_GNOME_DECLS
 
-typedef struct {
-	BonoboObjectClient      parent;
-	Bonobo_PropertyBag      corba_pb;
-} BonoboPropertyBagClient;
-
-typedef struct {
-	BonoboObjectClientClass parent;
-} BonoboPropertyBagClientClass;
-
-/* Property bag proxy routines */
-BonoboPropertyBagClient *bonobo_property_bag_client_new                (Bonobo_PropertyBag corba_property_bag);
-GList			*bonobo_property_bag_client_get_properties     (BonoboPropertyBagClient *pbc);
+GList			*bonobo_property_bag_client_get_properties     (Bonobo_PropertyBag       pb,
+									CORBA_Environment       *ev);
 void                     bonobo_property_bag_client_free_properties    (GList *list);
-GList			*bonobo_property_bag_client_get_property_names (BonoboPropertyBagClient *pbc);
-Bonobo_Property		 bonobo_property_bag_client_get_property       (BonoboPropertyBagClient *pbc,
-									const char *property_name);
-void			 bonobo_property_bag_client_persist	       (BonoboPropertyBagClient *pbc,
-									Bonobo_Stream stream);
-void			 bonobo_property_bag_client_depersist	       (BonoboPropertyBagClient *pbc,
-									Bonobo_Stream stream);
+GList			*bonobo_property_bag_client_get_property_names (Bonobo_PropertyBag       pb,
+									CORBA_Environment       *ev);
+Bonobo_Property		 bonobo_property_bag_client_get_property       (Bonobo_PropertyBag       pb,
+									const char              *property_name,
+									CORBA_Environment       *ev);
+void			 bonobo_property_bag_client_persist	       (Bonobo_PropertyBag       pb,
+									Bonobo_Stream            stream,
+									CORBA_Environment       *ev);
+void			 bonobo_property_bag_client_depersist	       (Bonobo_PropertyBag       pb,
+									Bonobo_Stream            stream,
+									CORBA_Environment       *ev);
 
 GtkType			 bonobo_property_bag_client_get_type	       (void);
 
-char                    *bonobo_property_bag_client_setv               (BonoboPropertyBagClient *pb,
+char                    *bonobo_property_bag_client_setv               (Bonobo_PropertyBag       pb,
+									CORBA_Environment       *ev,
 									const char              *first_arg,
 									va_list                  var_args);
-char                    *bonobo_property_bag_client_getv               (BonoboPropertyBagClient *pb,
+char                    *bonobo_property_bag_client_getv               (Bonobo_PropertyBag       pb,
+									CORBA_Environment       *ev,
 									const char              *first_arg,
 									va_list                  var_args);
 
@@ -50,76 +46,93 @@ char                    *bonobo_property_bag_client_getv               (BonoboPr
  */
 
 /* Querying the property type. */
-CORBA_TypeCode           bonobo_property_bag_client_get_property_type   (BonoboPropertyBagClient *pbc,
-									 const char *propname);
+CORBA_TypeCode           bonobo_property_bag_client_get_property_type    (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
 
 /* Querying property values. */
-gboolean		 bonobo_property_bag_client_get_value_gboolean   (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-gint			 bonobo_property_bag_client_get_value_gint       (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-glong			 bonobo_property_bag_client_get_value_glong      (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-gfloat			 bonobo_property_bag_client_get_value_gfloat     (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-gdouble			 bonobo_property_bag_client_get_value_gdouble    (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-char			*bonobo_property_bag_client_get_value_string     (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-BonoboArg		*bonobo_property_bag_client_get_value_any        (BonoboPropertyBagClient *pbc,
-									  const char *propname);
+gboolean		 bonobo_property_bag_client_get_value_gboolean   (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+gint			 bonobo_property_bag_client_get_value_gint       (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+glong			 bonobo_property_bag_client_get_value_glong      (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+gfloat			 bonobo_property_bag_client_get_value_gfloat     (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+gdouble			 bonobo_property_bag_client_get_value_gdouble    (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+char			*bonobo_property_bag_client_get_value_string     (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+BonoboArg		*bonobo_property_bag_client_get_value_any        (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
 
 /* Querying property default values. */ 						  		       
-gboolean		 bonobo_property_bag_client_get_default_gboolean (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-gint			 bonobo_property_bag_client_get_default_gint     (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-glong			 bonobo_property_bag_client_get_default_glong    (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-gfloat			 bonobo_property_bag_client_get_default_gfloat   (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-gdouble			 bonobo_property_bag_client_get_default_gdouble  (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-char			*bonobo_property_bag_client_get_default_string   (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-BonoboArg		*bonobo_property_bag_client_get_default_any      (BonoboPropertyBagClient *pbc,
-									  const char *propname);
+gboolean		 bonobo_property_bag_client_get_default_gboolean (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+gint			 bonobo_property_bag_client_get_default_gint     (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+glong			 bonobo_property_bag_client_get_default_glong    (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+gfloat			 bonobo_property_bag_client_get_default_gfloat   (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+gdouble			 bonobo_property_bag_client_get_default_gdouble  (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+char			*bonobo_property_bag_client_get_default_string   (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+BonoboArg		*bonobo_property_bag_client_get_default_any      (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
 
 /* Setting property values. */
-void			 bonobo_property_bag_client_set_value_gboolean   (BonoboPropertyBagClient *pbc,
-									  const char *propname,
-									  gboolean value);
-void			 bonobo_property_bag_client_set_value_gint       (BonoboPropertyBagClient *pbc,
-									  const char *propname,
-									  gint value);
-void			 bonobo_property_bag_client_set_value_glong      (BonoboPropertyBagClient *pbc,
-									  const char *propname,
-									  glong value);
-void			 bonobo_property_bag_client_set_value_gfloat     (BonoboPropertyBagClient *pbc,
-									  const char *propname,
-									  gfloat value);
-void			 bonobo_property_bag_client_set_value_gdouble    (BonoboPropertyBagClient *pbc,
-									  const char *propname,
-									  gdouble value);
-void			 bonobo_property_bag_client_set_value_string     (BonoboPropertyBagClient *pbc,
-									  const char *propname,
-									  const char *value);
-void			 bonobo_property_bag_client_set_value_any        (BonoboPropertyBagClient *pbc,
-									  const char *propname,
-									  BonoboArg  *value);
+void			 bonobo_property_bag_client_set_value_gboolean   (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  gboolean                value,
+									  CORBA_Environment       *ev);
+void			 bonobo_property_bag_client_set_value_gint       (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  gint                     value,
+									  CORBA_Environment       *ev);
+void			 bonobo_property_bag_client_set_value_glong      (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  glong                    value,
+									  CORBA_Environment       *ev);
+void			 bonobo_property_bag_client_set_value_gfloat     (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  gfloat                   value,
+									  CORBA_Environment       *ev);
+void			 bonobo_property_bag_client_set_value_gdouble    (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  gdouble                  value,
+									  CORBA_Environment       *ev);
+void			 bonobo_property_bag_client_set_value_string     (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  const char              *value,
+									  CORBA_Environment       *ev);
+void			 bonobo_property_bag_client_set_value_any        (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  BonoboArg               *value,
+									  CORBA_Environment       *ev);
 
 /* Querying other fields and flags. */
-char			*bonobo_property_bag_client_get_docstring        (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-BonoboPropertyFlags	 bonobo_property_bag_client_get_flags	         (BonoboPropertyBagClient *pbc,
-									  const char *propname);
-
-
-#define BONOBO_PROPERTY_BAG_CLIENT_TYPE        (bonobo_property_bag_client_get_type ())
-#define BONOBO_PROPERTY_BAG_CLIENT(o)          (GTK_CHECK_CAST ((o), BONOBO_PROPERTY_BAG_CLIENT_TYPE, BonoboPropertyBagClient))
-#define BONOBO_PROPERTY_BAG_CLIENT_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PROPERTY_BAG_CLIENT_TYPE, BonoboPropertyBagClientClass))
-#define BONOBO_IS_PROPERTY_BAG_CLIENT(o)       (GTK_CHECK_TYPE ((o), BONOBO_PROPERTY_BAG_CLIENT_TYPE))
-#define BONOBO_IS_PROPERTY_BAG_CLIENT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PROPERTY_BAG_CLIENT_TYPE))
+char			*bonobo_property_bag_client_get_docstring        (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
+BonoboPropertyFlags	 bonobo_property_bag_client_get_flags	         (Bonobo_PropertyBag       pb,
+									  const char              *propname,
+									  CORBA_Environment       *ev);
 
 END_GNOME_DECLS
 

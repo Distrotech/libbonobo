@@ -198,7 +198,7 @@ od_server_activate_with_id     (const gchar       *iid,
 		ev = &myev;
 	}
 		
-	retval = oaf_activate_from_id(iid, 0, NULL, ev);
+	retval = oaf_activate_from_id ((gchar *)iid, 0, NULL, ev);
 
 	CORBA_exception_free(ev);
 	

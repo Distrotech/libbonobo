@@ -1,5 +1,38 @@
 2000-08-12  Michael Meeks  <michael@helixcode.com>
 
+	* Bump version to 0.17
+	
+	* samples/controls/sample-control-container.c: Update for new property code.
+
+	* all Makefile.am: Unify on a sane CFLAGS / LIBS scheme for in-bonobo
+	built test cases.
+
+	* bonobo/bonobo-plug.c (bonobo_plug_destroy): cull debugging code.
+
+	* bonobo/bonobo-control.c (bonobo_control_set_property),
+	(bonobo_control_get_property): update.
+
+	* bonobo/bonobo-widget.c (bonobo_widget_get_property, bonobo_widget_set_property): 
+	clean re-write.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_get_control_property_bag):
+	return a Bonobo_PropertyBag.
+
+	* bonobo/bonobo-control.c (bonobo_control_get_ambient_properties): ditto.
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_construct),
+	(bonobo_property_bag_client_new, bonobo_property_bag_client_get_type): remove.
+	Rename all API's to take the raw Bonobo_PropertyBag and propagate exceptions
+	sensibly.
+
+	* bonobo/Makefile.am: remove cruft.
+
+	* configure.in: Disable bonobrowser build.
+
+	* all Makefile.am: s/OBJECT_DIRECTORY_LIBS/OAF_LIBS/
+
+2000-08-12  Michael Meeks  <michael@helixcode.com>
+
 	* configure.in (vers): remove OAF conditionals, sanitize configure,
 	depend on oaf-0.5.0
 

@@ -12,7 +12,7 @@ gnome_libs =				\
 	$(GNOME_LIBDIR)			\
 	$(GDK_PIXBUF_LIBS) 		\
         $(GNOMEUI_LIBS)			\
-	$(OBJECT_DIRECTORY_LIBS) 	\
+	$(OAF_LIBS) 	\
 	$(INTLLIBS)
 
 bonobo_libs =				\
