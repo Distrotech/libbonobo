@@ -120,4 +120,6 @@ extern const guint liboaf_major_version,
 	liboaf_micro_version;
 extern const char liboaf_version[];
 
+CORBA_Object oaf_name_service_get (CORBA_Environment *ev);
+
 #endif

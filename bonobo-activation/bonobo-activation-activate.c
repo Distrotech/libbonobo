@@ -178,3 +178,11 @@ oaf_activate_from_id(const OAF_ActivationID aid, OAF_ActivationFlags flags, OAF_
 
   return retval;
 }
+
+CORBA_Object oaf_name_service_get (CORBA_Environment *ev)
+{
+
+  return oaf_activate_from_id("OAFIID:OAFNamingService:20000410", 
+			      0, NULL, ev);
+}
+
