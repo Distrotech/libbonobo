@@ -1,3 +1,8 @@
+2000-09-30    <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (hide_not_fitting_items): make more
+	successful for large widgets.
+
 2000-09-30  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (bonobo_win_object_set): set the node dirty
