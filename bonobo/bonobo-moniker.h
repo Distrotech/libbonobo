@@ -57,7 +57,7 @@ Bonobo_Moniker           bonobo_moniker_corba_object_create (BonoboObject      *
 
 BonoboMoniker           *bonobo_moniker_construct           (BonoboMoniker *monike,
 							     Bonobo_Moniker corba_moniker,
-							     const char    *name);
+							     const char    *prefix);
 
 Bonobo_Moniker           bonobo_moniker_get_parent          (BonoboMoniker     *moniker,
 							     CORBA_Environment *ev);
@@ -66,10 +66,12 @@ void                     bonobo_moniker_set_parent          (BonoboMoniker     *
 							     CORBA_Environment *ev);
 
 /*
- * Common case convenience functions
+ *   Common case convenience functions, for people not
+ * overriding the base BonoboMoniker methods.
  */
 const char              *bonobo_moniker_get_name            (BonoboMoniker     *moniker);
 
+const char              *bonobo_moniker_get_name_full       (BonoboMoniker     *moniker);
 char                    *bonobo_moniker_get_name_escaped    (BonoboMoniker     *moniker);
 
 void                     bonobo_moniker_set_name            (BonoboMoniker     *moniker,

@@ -54,6 +54,16 @@ impl_set_parent (PortableServer_Servant servant,
 	return CLASS (moniker)->set_parent (moniker, value, ev);
 }
 
+/**
+ * bonobo_moniker_set_parent:
+ * @moniker: the moniker
+ * @parent: the parent
+ * @ev: a corba exception environment
+ * 
+ *  This sets the monikers parent; a moniker is really a long chain
+ * of hierarchical monikers; referenced by the most local moniker.
+ * This sets the parent pointer.
+ **/
 void
 bonobo_moniker_set_parent (BonoboMoniker     *moniker,
 			   Bonobo_Moniker     parent,
@@ -71,6 +81,15 @@ bonobo_moniker_set_parent (BonoboMoniker     *moniker,
 		moniker->priv->parent = CORBA_OBJECT_NIL;
 }
 
+/**
+ * bonobo_moniker_get_parent:
+ * @moniker: the moniker
+ * @ev: a corba exception environment
+ * 
+ * See bonobo_moniker_set_parent;
+ *
+ * Return value: the parent of this moniker
+ **/
 Bonobo_Moniker
 bonobo_moniker_get_parent (BonoboMoniker     *moniker,
 			   CORBA_Environment *ev)
@@ -84,6 +103,15 @@ bonobo_moniker_get_parent (BonoboMoniker     *moniker,
 	return bonobo_object_dup_ref (moniker->priv->parent, ev);
 }
 
+/**
+ * bonobo_moniker_get_name:
+ * @moniker: the moniker
+ * 
+ * gets the unescaped name of the moniker less the prefix eg
+ * file:/tmp/hash\#.gz returns /tmp/hash#.gz
+ * 
+ * Return value: the string
+ **/
 const char *
 bonobo_moniker_get_name (BonoboMoniker *moniker)
 {	
@@ -96,85 +124,39 @@ bonobo_moniker_get_name (BonoboMoniker *moniker)
 	return "";
 }
 
+/**
+ * bonobo_moniker_get_name_full:
+ * @moniker: the moniker
+ * 
+ * gets the full unescaped display name of the moniker eg.
+ * file:/tmp/hash\#.gz returns file:/tmp/hash#.gz
+ * 
+ * Return value: the string
+ **/
+const char *
+bonobo_moniker_get_name_full (BonoboMoniker *moniker)
+{	
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
 
-static char *
-escape_moniker (const char *string,
-		int         offset)
-{
-	gchar *escaped, *p;
-	guint  backslashes = 0;
-	int    i, len;
+	if (moniker->priv->name)
+		return moniker->priv->name;
 
-	g_return_val_if_fail (string != NULL, NULL);
-
-	len = strlen (string);
-	g_return_val_if_fail (offset < len, NULL);
-
-	for (i = offset; i < len; i++) {
-		if (string [i] == '\0')
-			break;
-		else if (string [i] == '\\' ||
-			 string [i] == '#'  ||
-			 string [i] == '!')
-			backslashes ++;
-	}
-	
-	if (!backslashes)
-		return g_strdup (&string [offset]);
-
-	p = escaped = g_new (gchar, len - offset + backslashes + 1);
-
-	for (i = offset; i < len; i++) {
-		if (string [i] == '\\' ||
-		    string [i] == '#'  ||
-		    string [i] == '!')
-			*p++ = '\\';
-		*p++ = string [i];
-	}
-	*p = '\0';
-
-	return escaped;
+	return "";
 }
 
+/**
+ * bonobo_moniker_get_name_escaped:
+ * @moniker: a moniker
+ * 
+ * Get the full; escaped display name of the moniker eg.
+ * file:/tmp/hash\#.gz returns file:/tmp/hash\#.gz
+ * 
+ * Return value: the string.
+ **/
 char *
 bonobo_moniker_get_name_escaped (BonoboMoniker *moniker)
 {
-	return escape_moniker (moniker->priv->name, 0);
-}
-
-static char *
-unescape_moniker (const char *string,
-		  int         num_chars)
-{
-	gchar *escaped, *p;
-	guint  backslashes = 0;
-	int    i;
-
-	g_return_val_if_fail (string != NULL, NULL);
-
-	for (i = 0; i < num_chars; i++) {
-		if (string [i] == '\0')
-			break;
-		else if (string [i] == '\\')
-			backslashes ++;
-	}
-
-	if (!backslashes)
-		return g_strndup (string, num_chars);
-
-	p = escaped = g_new (gchar, strlen (string) - backslashes + 1);
-
-	for (i = 0; i < num_chars; i++) {
-		if (string [i] == '\\') {
-			if (!string [++i])
-				break;
-			*p++ = string [i];
-		} else
-			*p++ = string [i];
-	}
-	*p = '\0';
-
-	return escaped;
+	return bonobo_moniker_util_escape (moniker->priv->name, 0);
 }
 
 /**
@@ -194,7 +176,8 @@ bonobo_moniker_set_name (BonoboMoniker *moniker,
 	g_return_if_fail (strlen (name) > moniker->priv->prefix_len);
 
 	g_free (moniker->priv->name);
-	moniker->priv->name = unescape_moniker (name, num_chars);
+	moniker->priv->name = bonobo_moniker_util_unescape (
+		name, num_chars);
 }
 
 static CORBA_char *
@@ -298,9 +281,9 @@ impl_resolve (PortableServer_Servant       servant,
 
 		else if (extender != CORBA_OBJECT_NIL) {
 			retval = Bonobo_MonikerExtender_resolve (
-				extender, 
+				extender,
 				bonobo_object_corba_objref (BONOBO_OBJECT (moniker)),
-				moniker->priv->name,
+				options, moniker->priv->name,
 				requested_interface, ev);
 
 			bonobo_object_release_unref (extender, ev);
@@ -448,10 +431,21 @@ bonobo_moniker_corba_object_create (BonoboObject *object)
 	return bonobo_object_activate_servant (object, servant);
 }
 
+/**
+ * bonobo_moniker_construct:
+ * @moniker: an un-constructed moniker object.
+ * @corba_moniker: a CORBA handle inheriting from Bonobo::Moniker, or
+ * CORBA_OBJECT_NIL, in which case a base Bonobo::Moniker is created.
+ * @prefix: the prefix name of the moniker eg. 'file:', '!' or 'tar:'
+ * 
+ *  Constructs a newly created bonobo moniker with the given arguments.
+ * 
+ * Return value: the constructed moniker or NULL on failure.
+ **/
 BonoboMoniker *
 bonobo_moniker_construct (BonoboMoniker *moniker,
 			  Bonobo_Moniker corba_moniker,
-			  const char    *name)
+			  const char    *prefix)
 {
 	BonoboMoniker *retval;
 
@@ -465,9 +459,9 @@ bonobo_moniker_construct (BonoboMoniker *moniker,
 		}
 	}
 
-	if (name) {
-		moniker->priv->prefix = g_strdup (name);
-		moniker->priv->prefix_len = strlen (name);
+	if (prefix) {
+		moniker->priv->prefix = g_strdup (prefix);
+		moniker->priv->prefix_len = strlen (prefix);
 	}
 
 	retval = BONOBO_MONIKER (bonobo_object_construct (

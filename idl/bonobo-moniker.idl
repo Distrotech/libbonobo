@@ -16,7 +16,7 @@
 module Bonobo {
 
 	typedef long ResolveFlag;
-	const ResolveFlag ALLOW_USER_INTERACTION = 1;
+	const ResolveFlag MONIKER_ALLOW_USER_INTERACTION = 1;
 
 	struct ResolveOptions {
 		ResolveFlag  flags;
@@ -66,18 +66,28 @@ module Bonobo {
 		 * activated object described by the moniker
 		 */
 		Unknown resolve            (in ResolveOptions options,
-					    in string         requested_interface)
+					    in string         requestedInterface)
 			raises (InterfaceNotFound, TimeOut);
 	};
 
         interface MonikerExtender : Bonobo::Unknown {
-		exception InterfaceNotFound {};
-		exception TimeOut           {};
-
-                Unknown resolve (in Moniker m,
-                                 in string  display_name,
-                                 in string  requested_interface)
-			raises (InterfaceNotFound, TimeOut);
+		/**
+		 * resolve:
+		 * @m: the moniker we are about to extend
+		 * @options: resolve options
+		 * @display_name: the display name of 'm' by itself eg. 'file:/tmp/a'
+		 * @requested_interface: the interface we want to get back
+		 *
+		 *  The interface for a later extension to a moniker that allows it
+		 * to be resolved against new and exotic interfaces.
+		 *
+		 * Returns: The interface requested, or CORBA_OBJECT_NIL.
+		 */
+                Unknown resolve (in Moniker        m,
+				 in ResolveOptions options,
+                                 in string         displayName,
+                                 in string         requestedInterface)
+			raises (Moniker::InterfaceNotFound, Moniker::TimeOut);
         };
 };
 

@@ -41,13 +41,13 @@ typedef void (*BonoboMonikerAsyncFn) (Bonobo_Unknown     object,
 void                bonobo_get_object_async                      (const CORBA_char        *name,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
-								  guint                    timeout_usec,
+								  guint                    timeout_msec,
 								  BonoboMonikerAsyncFn     cb,
 								  gpointer                 user_data);
 
 void                bonobo_moniker_client_new_from_name_async    (const CORBA_char        *name,
 								  CORBA_Environment       *ev,
-								  guint                    timeout_usec,
+								  guint                    timeout_msec,
 								  BonoboMonikerAsyncFn     cb,
 								  gpointer                 user_data);
 
@@ -55,14 +55,14 @@ void                bonobo_moniker_resolve_async                 (Bonobo_Moniker
 								  Bonobo_ResolveOptions   *options,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
-								  guint                    timeout_usec,
+								  guint                    timeout_msec,
 								  BonoboMonikerAsyncFn     cb,
 								  gpointer                 user_data);
 
 void                bonobo_moniker_resolve_async_default         (Bonobo_Moniker           moniker,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
-								  guint                    timeout_usec,
+								  guint                    timeout_msec,
 								  BonoboMonikerAsyncFn     cb,
 								  gpointer                 user_data);
 
@@ -77,5 +77,9 @@ Bonobo_Unknown bonobo_moniker_util_qi_return            (Bonobo_Unknown     obje
 							 CORBA_Environment *ev);
 int            bonobo_moniker_util_seek_std_separator   (const CORBA_char  *str,
 							 int                min_idx);
+char          *bonobo_moniker_util_escape               (const char        *string,
+							 int                offset);
+char          *bonobo_moniker_util_unescape             (const char        *string,
+							 int                num_chars);
 
 #endif /* _BONOBO_MONIKER_UTIL_H */

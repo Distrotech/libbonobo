@@ -1,3 +1,62 @@
+2000-12-19  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker-extender.c (bonobo_moniker_extender_init): remove.
+	fully documented.
+	(bonobo_moniker_extender_resolve): use the generic Moniker exceptions.
+
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_unescape),
+	(bonobo_moniker_util_escape): move to here.
+
+	* tests/test-moniker.c (check_string): upd.
+
+	* bonobo/bonobo-moniker.c (escape_moniker, unescape_moniker): move
+	(bonobo_moniker_get_name_escaped, bonobo_moniker_set_name): upd.
+
+	* bonobo/bonobo-moniker-util.c: s/usec/msec/
+	fully documented.
+
+2000-12-18  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/Makefile.am: Update seds to be more standard
+	and work in odd build environments.
+	
+	* monikers/bonobo-moniker-oaf.c (oaf_resolve): use
+	get_name_full.
+	(bonobo_moniker_oaf_resolve): rename to this.
+
+	* monikers/bonobo-moniker-*: Drasticaly prune, lots of tedious gtk+
+	sub-classing code removed; killed loads of headers.
+
+	* monikers/bonobo-moniker-std.h: prototype the resolve fns here.
+
+	* bonobo/bonobo-moniker-simple.[ch]: Implement.
+
+	* bonobo/Makefile.am: Add simple.
+
+	* bonobo/bonobo-object-directory.c: sort out house of horrors
+	of style, and implementation; dragon removal.
+
+	* monikers/bonobo-moniker-file.c (file_resolve): use the file and stream
+	extenders as fallbacks.
+
+	* bonobo/bonobo-moniker.c (impl_resolve): add options.
+	(bonobo_moniker_get_name_full): impl.
+
+	* bonobo/bonobo-moniker-extender.c (impl_Bonobo_MonikerExtender_resolve): upd.
+	(bonobo_moniker_use_extender): impl.
+
+	* monikers/bonobo-moniker-extender-stream.c (stream_extender_resolve):
+	create.
+
+	* monikers/Bonobo_Moniker_Extender_stream.oafinfo: add.
+
+	* monikers/Bonobo_Moniker_Extender_file.oafinfo: upd.
+
+	* monikers/bonobo-moniker-extender-file.c (file_extender_resolve):
+	unref the stream after resolving.
+
+	* idl/bonobo-moniker.idl: Add ResolveOptions to 'resolve'.
+
 2000-12-18  Dave Camp  <dave@helixcode.com>
 
 	* monikers/Makefile.am (EXTRA_DIST): 
@@ -16,8 +75,6 @@
 	* monikers/Bonobo_Moniker_cache.oafinfo.in: new file
 
 	* monikers/bonobo-moniker-cache.[ch]: new files
-
-	
 
 2000-12-17  Miguel de Icaza  <miguel@helixcode.com>
 

@@ -11,6 +11,7 @@
 #define _BONOBO_MONIKER_EXTENDER_H_
 
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-moniker.h>
 
 BEGIN_GNOME_DECLS
 
@@ -22,11 +23,12 @@ BEGIN_GNOME_DECLS
 
 typedef struct _BonoboMonikerExtender BonoboMonikerExtender;
 
-typedef Bonobo_Unknown (*BonoboMonikerExtenderFn) (BonoboMonikerExtender *extender,
-						   const Bonobo_Moniker   parent,
-						   const CORBA_char      *display_name,
-						   const CORBA_char      *requested_interface,
-						   CORBA_Environment     *ev);
+typedef Bonobo_Unknown (*BonoboMonikerExtenderFn) (BonoboMonikerExtender       *extender,
+						   const Bonobo_Moniker         parent,
+						   const Bonobo_ResolveOptions *options,
+						   const CORBA_char            *display_name,
+						   const CORBA_char            *requested_interface,
+						   CORBA_Environment           *ev);
 struct _BonoboMonikerExtender {
         BonoboObject            object;
 	BonoboMonikerExtenderFn resolve;
@@ -34,27 +36,29 @@ struct _BonoboMonikerExtender {
 };
 
 typedef struct {
-	BonoboObjectClass parent_class;
+	BonoboObjectClass       parent_class;
 	
-	Bonobo_Unknown (*resolve) (BonoboMonikerExtender *extender,
-				   const Bonobo_Moniker   parent,
-				   const CORBA_char      *display_name,
-				   const CORBA_char      *requested_interface,
-				   CORBA_Environment     *ev);
+	BonoboMonikerExtenderFn resolve;
 } BonoboMonikerExtenderClass;
 
 GtkType                          bonobo_moniker_extender_get_type            (void);
 POA_Bonobo_MonikerExtender__epv *bonobo_moniker_extender_get_epv             (void);
-Bonobo_MonikerExtender           bonobo_moniker_extender_corba_object_create (BonoboObject *object);
+Bonobo_MonikerExtender           bonobo_moniker_extender_corba_object_create (BonoboObject                *object);
 
-BonoboMonikerExtender           *bonobo_moniker_extender_construct           (BonoboMonikerExtender  *extender,
-									      Bonobo_MonikerExtender  corba_extender);
-BonoboMonikerExtender           *bonobo_moniker_extender_new                 (BonoboMonikerExtenderFn resolve,
-									      gpointer                data);
+BonoboMonikerExtender           *bonobo_moniker_extender_construct           (BonoboMonikerExtender       *extender,
+									      Bonobo_MonikerExtender       corba_extender);
+BonoboMonikerExtender           *bonobo_moniker_extender_new                 (BonoboMonikerExtenderFn      resolve,
+									      gpointer                     data);
 
-Bonobo_MonikerExtender           bonobo_moniker_find_extender                (const gchar            *name,
-									      const gchar            *interface,
-									      CORBA_Environment      *ev);
+Bonobo_MonikerExtender           bonobo_moniker_find_extender                (const gchar                 *name,
+									      const gchar                 *interface,
+									      CORBA_Environment           *ev);
+
+Bonobo_Unknown                   bonobo_moniker_use_extender                 (const gchar                 *extender_oafiid,
+									      BonoboMoniker               *moniker,
+									      const Bonobo_ResolveOptions *options,
+									      const CORBA_char            *requested_interface,
+									      CORBA_Environment           *ev);
 
 END_GNOME_DECLS
 

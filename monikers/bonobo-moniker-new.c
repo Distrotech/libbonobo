@@ -1,23 +1,24 @@
 /*
- * gnome-moniker-new.c: Sample generic factory 'new' Moniker implementation
+ * gnome-moniker-new.c: Sample generic factory 'new'
+ * Moniker implementation.
  *
  * Author:
  *	Michael Meeks (michael@helixcode.com)
+ *
+ * Copyright 2000, Helix Code, Inc.
  */
 #include <config.h>
 
 #include <liboaf/liboaf.h>
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-util.h>
-#include "bonobo-moniker-new.h"
+#include "bonobo-moniker-std.h"
 
-static BonoboMonikerClass *bonobo_moniker_new_parent_class;
-
-static Bonobo_Unknown
-new_resolve (BonoboMoniker               *moniker,
-	      const Bonobo_ResolveOptions *options,
-	      const CORBA_char            *requested_interface,
-	      CORBA_Environment           *ev)
+Bonobo_Unknown
+bonobo_moniker_new_resolve (BonoboMoniker               *moniker,
+			    const Bonobo_ResolveOptions *options,
+			    const CORBA_char            *requested_interface,
+			    CORBA_Environment           *ev)
 {
 	Bonobo_Moniker      parent;
 	GNOME_ObjectFactory factory;
@@ -56,51 +57,4 @@ new_resolve (BonoboMoniker               *moniker,
 	bonobo_object_release_unref (parent, ev);
 
 	return retval;
-}
-
-static void
-bonobo_moniker_new_class_init (BonoboMonikerNewClass *klass)
-{
-	BonoboMonikerClass *mclass = (BonoboMonikerClass *) klass;
-	
-	bonobo_moniker_new_parent_class = gtk_type_class (
-		bonobo_moniker_get_type ());
-
-	mclass->resolve = new_resolve;
-}
-
-/**
- * bonobo_moniker_new_get_type:
- *
- * Returns the GtkType for the BonoboMonikerNew class.
- */
-GtkType
-bonobo_moniker_new_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboMonikerNew",
-			sizeof (BonoboMonikerNew),
-			sizeof (BonoboMonikerNewClass),
-			(GtkClassInitFunc) bonobo_moniker_new_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = gtk_type_unique (bonobo_moniker_get_type (), &info);
-	}
-
-	return type;
-}
-
-BonoboMoniker *
-bonobo_moniker_new_new (void)
-{
-	return bonobo_moniker_construct (
-		gtk_type_new (bonobo_moniker_new_get_type ()),
-		CORBA_OBJECT_NIL, "new:");
 }

@@ -7,7 +7,6 @@
  *	Michael Meeks    (michael@helixcode.com)
  *	Ettore Perazzoli (ettore@helixcode.com)
  */
-
 #include "bonobo.h"
 #include <liboaf/liboaf.h>
 #include <liboaf/oaf-async.h>
@@ -51,7 +50,7 @@ moniker_id_from_nickname (const CORBA_char *name)
  * @ifname: original name: can be in form Bonobo/Control
  *
  * Return value: full name eg. IDL:Bonobo/Control:1.0
- **/
+ */
 static gchar *
 get_full_interface_name (const char *ifname)
 {
@@ -106,6 +105,23 @@ query_from_name (const char *name)
 	return query;
 }
 
+/**
+ * bonobo_moniker_util_new_from_name_full:
+ * @parent: A parent moniker to chain to or CORBA_OBJECT_NIL
+ * @name: the display name
+ * @ev: corba environment
+ * 
+ *  This routine is used to continue building up the chain
+ * that forms a multi-part moniker. The parent is referenced
+ * as the parent and passed onto the next stage of parsing
+ * the 'name'. We eventualy return a moniker handle which
+ * represents the end of a linked list of monikers each
+ * pointing to their parent:
+ *
+ * file:/tmp/a.tar.gz <-- gzip: <-- tar: <-- [ this is returned ]
+ * 
+ * Return value: The end node of a list of monikers representing @name
+ **/
 Bonobo_Moniker
 bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 					const CORBA_char  *name,
@@ -177,6 +193,16 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 	return moniker;
 }
 
+/**
+ * bonobo_moniker_util_get_parent_name:
+ * @moniker: the moniker
+ * @ev: a corba exception environment
+ * 
+ *  This gets the display name of the parent moniker ( recursively
+ * all of the parents of this moniker ).
+ * 
+ * Return value: the display name; use CORBA_free to release it.
+ **/
 CORBA_char *
 bonobo_moniker_util_get_parent_name (Bonobo_Moniker     moniker,
 				     CORBA_Environment *ev)
@@ -203,6 +229,18 @@ bonobo_moniker_util_get_parent_name (Bonobo_Moniker     moniker,
 	return name;
 }
 
+/**
+ * bonobo_moniker_util_qi_return:
+ * @object: the unknown to query
+ * @requested_interface: the desired interface
+ * @ev: a corba exception environment 
+ * 
+ *  A helper function to share code from the end of a resolve
+ * implementation; this ensures that the returned object is of
+ * the correct interface by doing a queryInterface on the object.
+ * 
+ * Return value: an handle to the requested interface
+ **/
 Bonobo_Unknown
 bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 			       const CORBA_char  *requested_interface,
@@ -242,6 +280,20 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 		return CORBA_OBJECT_NIL;
 }
 
+/**
+ * bonobo_moniker_util_seek_std_separator:
+ * @str: the string to scan
+ * @min_idx: the minimum offset at which a separator can be found.
+ * 
+ *  This looks for a standard separator in a moniker's
+ * display name string. Most monikers will want to use
+ * standard separators.
+ *
+ *  See also bonobo_moniker_util_escape
+ * 
+ * Return value: the position of the standard separator, or a
+ * pointer to the end of the string.
+ **/
 int
 bonobo_moniker_util_seek_std_separator (const CORBA_char *str,
 					int               min_idx)
@@ -271,6 +323,114 @@ bonobo_moniker_util_seek_std_separator (const CORBA_char *str,
 	return i;
 }
 
+/**
+ * bonobo_moniker_util_escape:
+ * @string: an unescaped string
+ * @offset: an offset of characters to ignore
+ * 
+ *  Escapes possible separator characters inside a moniker
+ * these include '!' and '#', the '\' escaping character is
+ * used.
+ * 
+ * Return value: an escaped sub-string.
+ **/
+char *
+bonobo_moniker_util_escape (const char *string, int offset)
+{
+	gchar *escaped, *p;
+	guint  backslashes = 0;
+	int    i, len;
+
+	g_return_val_if_fail (string != NULL, NULL);
+
+	len = strlen (string);
+	g_return_val_if_fail (offset < len, NULL);
+
+	for (i = offset; i < len; i++) {
+		if (string [i] == '\0')
+			break;
+		else if (string [i] == '\\' ||
+			 string [i] == '#'  ||
+			 string [i] == '!')
+			backslashes ++;
+	}
+	
+	if (!backslashes)
+		return g_strdup (&string [offset]);
+
+	p = escaped = g_new (gchar, len - offset + backslashes + 1);
+
+	for (i = offset; i < len; i++) {
+		if (string [i] == '\\' ||
+		    string [i] == '#'  ||
+		    string [i] == '!')
+			*p++ = '\\';
+		*p++ = string [i];
+	}
+	*p = '\0';
+
+	return escaped;
+}
+
+/**
+ * bonobo_moniker_util_unescape:
+ * @string: a string
+ * @num_chars: the number of chars to process.
+ * 
+ *  This routine strips @num_chars: from the start of
+ * @string, discards the rest, and proceeds to un-escape
+ * characters escaped with '\'.
+ * 
+ * Return value: the unescaped sub string.
+ **/
+char *
+bonobo_moniker_util_unescape (const char *string, int num_chars)
+{
+	gchar *escaped, *p;
+	guint  backslashes = 0;
+	int    i;
+
+	g_return_val_if_fail (string != NULL, NULL);
+
+	for (i = 0; i < num_chars; i++) {
+		if (string [i] == '\0')
+			break;
+		else if (string [i] == '\\')
+			backslashes ++;
+	}
+
+	if (!backslashes)
+		return g_strndup (string, num_chars);
+
+	p = escaped = g_new (gchar, strlen (string) - backslashes + 1);
+
+	for (i = 0; i < num_chars; i++) {
+		if (string [i] == '\\') {
+			if (!string [++i])
+				break;
+			*p++ = string [i];
+		} else
+			*p++ = string [i];
+	}
+	*p = '\0';
+
+	return escaped;
+}
+
+/**
+ * bonobo_moniker_client_new_from_name:
+ * @name: the display name of a moniker
+ * @ev: a corba exception environment 
+ * 
+ *  This routine tries to parse a Moniker in string form
+ *
+ * eg. file:/tmp/a.tar.gz#gzip:#tar:
+ *
+ * into a CORBA_Object representation of this that can
+ * later be resolved against an interface.
+ * 
+ * Return value: a new Moniker handle
+ **/
 Bonobo_Moniker
 bonobo_moniker_client_new_from_name (const CORBA_char  *name,
 				     CORBA_Environment *ev)
@@ -279,6 +439,13 @@ bonobo_moniker_client_new_from_name (const CORBA_char  *name,
 		CORBA_OBJECT_NIL, name, ev);
 }
 
+/**
+ * bonobo_moniker_client_get_name:
+ * @moniker: a moniker handle
+ * @ev: a corba exception environment 
+ * 
+ * Return value: the display name of the moniker.
+ **/
 CORBA_char *
 bonobo_moniker_client_get_name (Bonobo_Moniker     moniker,
 				CORBA_Environment *ev)
@@ -303,6 +470,17 @@ init_default_resolve_options (Bonobo_ResolveOptions *options)
 	options->timeout = -1;
 }
 
+/**
+ * bonobo_moniker_client_resolve_default:
+ * @moniker: a moniker
+ * @interface_name: the name of the interface we want returned as the result 
+ * @ev: a corba exception environment 
+ * 
+ *  This resolves the moniker object against the given interface,
+ * with a default set of resolve options.
+ * 
+ * Return value: the interfaces resolved to or CORBA_OBJECT_NIL
+ **/
 Bonobo_Unknown
 bonobo_moniker_client_resolve_default (Bonobo_Moniker     moniker,
 				       const char        *interface_name,
@@ -326,6 +504,17 @@ bonobo_moniker_client_resolve_default (Bonobo_Moniker     moniker,
 	return retval;
 }
 
+/**
+ * bonobo_moniker_client_resolve_client_default:
+ * @moniker: the moniker
+ * @interface_name: the name of the interface we want returned as the result 
+ * @ev: a corba exception environment 
+ * 
+ * See: bonobo_moniker_client_resolve_default; however this version returns
+ * a BonoboObjectClient wrapped reference.
+ * 
+ * Return value: a BonoboObjectClient style reference.
+ **/
 BonoboObjectClient *
 bonobo_moniker_client_resolve_client_default (Bonobo_Moniker     moniker,
 					      const char        *interface_name,
@@ -347,6 +536,18 @@ bonobo_moniker_client_resolve_client_default (Bonobo_Moniker     moniker,
 	return bonobo_object_client_from_corba (unknown);
 }
 
+/**
+ * bonobo_get_object:
+ * @name: the display name of a moniker
+ * @interface_name: the name of the interface we want returned as the result 
+ * @ev: a corba exception environment 
+ * 
+ *  This encapsulates both the parse stage and resolve process of using
+ * a moniker, providing a simple VisualBasic like mechanism for using the
+ * object name space.
+ * 
+ * Return value: the requested interface or CORBA_OBJECT_NIL
+ **/
 Bonobo_Unknown
 bonobo_get_object (const CORBA_char *name,
 		   const char        *interface_name,
@@ -375,7 +576,7 @@ typedef struct {
 	char                *name;
 	BonoboMonikerAsyncFn cb;
 	gpointer             user_data;
-	guint                timeout_usec;
+	guint                timeout_msec;
 	Bonobo_Unknown       moniker;
 } parse_async_ctx_t;
 
@@ -461,7 +662,7 @@ async_activation_cb (CORBA_Object activated_object,
 			gpointer arg_values [2] = { &obj, &ctx->name };
 	
 			bonobo_async_invoke (&method, async_parse_cb, ctx,
-					     ctx->timeout_usec,
+					     ctx->timeout_msec,
 					     ctx->moniker, arg_values, &ev);
 			
 			if (BONOBO_EX (&ev)) {
@@ -476,10 +677,20 @@ async_activation_cb (CORBA_Object activated_object,
 	CORBA_exception_free (&ev);
 }
 
+/**
+ * bonobo_moniker_client_new_from_name_async:
+ * @name: the name
+ * @ev: a corba exception environment 
+ * @timeout_msec: the timeout in milliseconds 
+ * @cb: the async callback that gets the response
+ * @user_data: user context data to pass to that callback
+ * 
+ * An asynchronous version of new_from_name
+ **/
 void
 bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 					   CORBA_Environment   *ev,
-					   guint                timeout_usec,
+					   guint                timeout_msec,
 					   BonoboMonikerAsyncFn cb,
 					   gpointer             user_data)
 {
@@ -502,7 +713,7 @@ bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 	ctx->name         = g_strdup (name);
 	ctx->cb           = cb;
 	ctx->user_data    = user_data;
-	ctx->timeout_usec = timeout_usec;
+	ctx->timeout_msec = timeout_msec;
 	ctx->moniker      = CORBA_OBJECT_NIL;
 
 	if (!(iid = moniker_id_from_nickname (name))) {
@@ -544,12 +755,24 @@ resolve_async_cb (BonoboAsyncReply  *handle,
 	g_free (ctx);
 }
 
+/**
+ * bonobo_moniker_resolve_async:
+ * @moniker: the moniker to resolve
+ * @options: resolve options
+ * @interface_name: the name of the interface we want returned as the result 
+ * @ev: a corba exception environment 
+ * @timeout_msec: the timeout in milliseconds 
+ * @cb: the async callback that gets the response 
+ * @user_data: user context data to pass to that callback 
+ * 
+ * An async version of bonobo_moniker_client_resolve
+ **/
 void
 bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 			      Bonobo_ResolveOptions *options,
 			      const char            *interface_name,
 			      CORBA_Environment     *ev,
-			      guint                  timeout_usec,
+			      guint                  timeout_msec,
 			      BonoboMonikerAsyncFn   cb,
 			      gpointer               user_data)
 {
@@ -585,14 +808,25 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 	ctx->moniker = bonobo_object_dup_ref (moniker, ev);
 
 	bonobo_async_invoke (&method, resolve_async_cb, ctx,
-			     timeout_usec, ctx->moniker, arg_values, ev);
+			     timeout_msec, ctx->moniker, arg_values, ev);
 }
 
+/**
+ * bonobo_moniker_resolve_async_default:
+ * @moniker: 
+ * @interface_name: the name of the interface we want returned as the result 
+ * @ev: a corba exception environment 
+ * @timeout_msec: the timeout in milliseconds 
+ * @cb: the async callback that gets the response 
+ * @user_data: user context data to pass to that callback 
+ * 
+ * An async version of bonobo_moniker_client_resolve_default
+ **/
 void
 bonobo_moniker_resolve_async_default (Bonobo_Moniker       moniker,
 				      const char          *interface_name,
 				      CORBA_Environment   *ev,
-				      guint                timeout_usec,
+				      guint                timeout_msec,
 				      BonoboMonikerAsyncFn cb,
 				      gpointer             user_data)
 {
@@ -606,12 +840,12 @@ bonobo_moniker_resolve_async_default (Bonobo_Moniker       moniker,
 	init_default_resolve_options (&options);
 
 	bonobo_moniker_resolve_async (moniker, &options, interface_name,
-				      ev, timeout_usec, cb, user_data);
+				      ev, timeout_msec, cb, user_data);
 }
 
 
 typedef struct {
-	guint                timeout_usec;
+	guint                timeout_msec;
 	char                *interface_name;
 	BonoboMonikerAsyncFn cb;
 	gpointer             user_data;
@@ -651,7 +885,7 @@ get_async1_cb (Bonobo_Unknown     object,
 	} else {
                 bonobo_moniker_resolve_async_default (
 			object, ctx->interface_name, ev,
-			ctx->timeout_usec, get_async2_cb, ctx);
+			ctx->timeout_msec, get_async2_cb, ctx);
 
 		if (BONOBO_EX (ev)) {
 			ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
@@ -660,11 +894,22 @@ get_async1_cb (Bonobo_Unknown     object,
 	}
 }	
 
+/**
+ * bonobo_get_object_async:
+ * @name: 
+ * @interface_name: the name of the interface we want returned as the result 
+ * @ev: a corba exception environment 
+ * @timeout_msec: the timeout in milliseconds 
+ * @cb: the async callback that gets the response 
+ * @user_data: user context data to pass to that callback 
+ * 
+ * An async version of bonobo_get_object
+ **/
 void
 bonobo_get_object_async (const CORBA_char    *name,
 			 const char          *interface_name,
 			 CORBA_Environment   *ev,
-			 guint                timeout_usec,
+			 guint                timeout_msec,
 			 BonoboMonikerAsyncFn cb,
 			 gpointer             user_data)
 {
@@ -679,8 +924,8 @@ bonobo_get_object_async (const CORBA_char    *name,
 	ctx->cb = cb;
 	ctx->user_data = user_data;
 	ctx->interface_name = get_full_interface_name (interface_name);
-	ctx->timeout_usec = timeout_usec;
+	ctx->timeout_msec = timeout_msec;
 
 	bonobo_moniker_client_new_from_name_async (
-		name, ev, timeout_usec, get_async1_cb, ctx);
+		name, ev, timeout_msec, get_async1_cb, ctx);
 }

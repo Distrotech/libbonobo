@@ -12,15 +12,13 @@
 
 #include <liboaf/liboaf.h>
 
-#include "bonobo-moniker-item.h"
+#include "bonobo-moniker-std.h"
 
-static BonoboMonikerClass *bonobo_moniker_item_parent_class;
-
-static Bonobo_Unknown
-item_resolve (BonoboMoniker               *moniker,
-	      const Bonobo_ResolveOptions *options,
-	      const CORBA_char            *requested_interface,
-	      CORBA_Environment           *ev)
+Bonobo_Unknown
+bonobo_moniker_item_resolve (BonoboMoniker               *moniker,
+			     const Bonobo_ResolveOptions *options,
+			     const CORBA_char            *requested_interface,
+			     CORBA_Environment           *ev)
 {
 	Bonobo_Moniker       parent;
 	Bonobo_ItemContainer container;
@@ -64,51 +62,4 @@ item_resolve (BonoboMoniker               *moniker,
 	bonobo_object_release_unref (parent, ev);
 
 	return retval;
-}
-
-static void
-bonobo_moniker_item_class_init (BonoboMonikerItemClass *klass)
-{
-	BonoboMonikerClass *mclass = (BonoboMonikerClass *) klass;
-	
-	bonobo_moniker_item_parent_class = gtk_type_class (
-		bonobo_moniker_get_type ());
-
-	mclass->resolve            = item_resolve;
-}
-
-/**
- * bonobo_moniker_item_get_type:
- *
- * Returns the GtkType for the BonoboMonikerItem class.
- */
-GtkType
-bonobo_moniker_item_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboMonikerItem",
-			sizeof (BonoboMonikerItem),
-			sizeof (BonoboMonikerItemClass),
-			(GtkClassInitFunc) bonobo_moniker_item_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = gtk_type_unique (bonobo_moniker_get_type (), &info);
-	}
-
-	return type;
-}
-
-BonoboMoniker *
-bonobo_moniker_item_new (void)
-{
-	BonoboMoniker *moniker = gtk_type_new (bonobo_moniker_item_get_type ());
-
-	return bonobo_moniker_construct (moniker, CORBA_OBJECT_NIL, "!");
 }

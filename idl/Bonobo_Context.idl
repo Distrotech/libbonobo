@@ -121,18 +121,6 @@ module Bonobo {
 		Stream getTemp ();
 
 		/**
-		 * getMimeType:
-		 * @stream: a seekable stream
-		 *
-		 *  If the stream is not seekable, we return
-		 * an exception without seeking, otherwise
-		 * we determine the mime type and return the
-		 * stream with offset at the beggining.
-		 */
-		string  getMimeType (in Stream stream)
-			raises (NotSeekable);
-
-		/**
 		 * sniffStream:
 		 * @stream: a seekable stream
 		 *

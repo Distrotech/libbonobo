@@ -3,12 +3,13 @@
  * bonobo-object-directory.c: abstract the object directory
  *
  * Authors:
+ *    Michael Meeks     (michael@helixcode.com)
  *    Havoc Pennington  (hp@redhat.com)
  *    Anders Carlsson   (andersca@gnu.org)
  *    Maciej Stachowiak (mjs@eazel.com)
  *
  * Copyright 1999, 2000 Havoc Pennington, Anders Carlsson,
- *                      Eazel, Inc.
+ *                      Eazel, Inc. Helix Code, Inc.
  */
 
 #include "config.h"
@@ -24,11 +25,13 @@ struct _ODServerInfo {
 };
 
 ODServerInfo*
-bonobo_directory_new_server_info (const gchar* iid, const gchar* name, const gchar* desc)
+bonobo_directory_new_server_info (const gchar *iid,
+				  const gchar *name,
+				  const gchar *desc)
 {
         ODServerInfo *info;
 
-        info = g_new(ODServerInfo, 1);
+        info = g_new (ODServerInfo, 1);
 
         info->refcount = 1;
         info->iid = iid ? g_strdup (iid) : NULL;
@@ -39,31 +42,31 @@ bonobo_directory_new_server_info (const gchar* iid, const gchar* name, const gch
 }
 
 const gchar*
-bonobo_directory_get_server_info_id          (ODServerInfo      *info)
+bonobo_directory_get_server_info_id (ODServerInfo *info)
 {
         return info->iid;
 }
 
 const gchar*
-bonobo_directory_get_server_info_name (ODServerInfo     *info)
+bonobo_directory_get_server_info_name (ODServerInfo *info)
 {
 	return info->name;
 }
 			 
 const gchar*
-bonobo_directory_get_server_info_description (ODServerInfo      *info)
+bonobo_directory_get_server_info_description (ODServerInfo *info)
 {
         return info->desc;
 }
 
 void
-bonobo_directory_server_info_ref             (ODServerInfo      *info)
+bonobo_directory_server_info_ref (ODServerInfo *info)
 {
         info->refcount += 1;
 }
 
 void
-bonobo_directory_server_info_unref           (ODServerInfo      *info)
+bonobo_directory_server_info_unref (ODServerInfo *info)
 {
         g_return_if_fail(info != NULL);
         g_return_if_fail(info->refcount > 0);
@@ -79,17 +82,12 @@ bonobo_directory_server_info_unref           (ODServerInfo      *info)
 }
 
 void
-bonobo_directory_free_server_list            (GList             *list)
+bonobo_directory_free_server_list (GList *list)
 {
-        GList *iter;
+        GList *l;
 
-        iter = list;
-
-        while (iter != NULL) {
-                bonobo_directory_server_info_unref (iter->data);
-                
-                iter = g_list_next (iter);
-        }
+	for (l = list; l; l = l->next)
+                bonobo_directory_server_info_unref (l->data);
 
         g_list_free (list);
 }
@@ -98,7 +96,7 @@ bonobo_directory_free_server_list            (GList             *list)
 CORBA_ORB
 bonobo_directory_get_orb (void)
 {
-	return oaf_orb_get();
+	return oaf_orb_get ();
 }
 
 static char *
@@ -139,7 +137,7 @@ build_id_query_fragment (const char **required_ids)
 	return query;
 }
 
-GList*
+GList *
 bonobo_directory_get_server_list (const gchar **required_ids)
 {
         GList *retval = NULL;
@@ -268,60 +266,64 @@ bonobo_directory_find_for_file (const char  *fname,
 }
 
 CORBA_Object
-od_server_activate_with_id     (const gchar       *iid,
-				gint               flags,
-                                CORBA_Environment *ev)
+od_server_activate_with_id (const gchar       *iid,
+			    gint               flags,
+			    CORBA_Environment *ev)
 {
-	CORBA_Environment myev;
+	CORBA_Environment *real_ev, tmp_ev;
 	CORBA_Object retval;
 	
-	CORBA_exception_init(&myev);
-	
-	if (ev == NULL) {
-		ev = &myev;
+	if (ev)
+		real_ev = ev;
+	else {
+		CORBA_exception_init (&tmp_ev);
+		real_ev = &tmp_ev;
 	}
 		
-	retval = oaf_activate_from_id ((gchar *)iid, 0, NULL, ev);
+	retval = oaf_activate_from_id ((gchar *) iid, 0, NULL, real_ev);
 
-	CORBA_exception_free(ev);
+	if (!ev)
+		CORBA_exception_free (&tmp_ev);
 	
 	return retval;
 }
 
 ODRegistrationResult
-bonobo_directory_register_server             (CORBA_Object       objref,
-                                const gchar       *iid)
+bonobo_directory_register_server (CORBA_Object objref,
+				  const gchar *iid)
 {
         OAF_RegistrationResult result;
+	ODRegistrationResult retval;
 
-
-        result = oaf_active_server_register(iid, objref);
+        result = oaf_active_server_register (iid, objref);
 
         switch (result) {
         case OAF_REG_SUCCESS:
-                return OD_REG_SUCCESS;
+                retval = OD_REG_SUCCESS;
                 break;
                 
         case OAF_REG_NOT_LISTED:
-                return OD_REG_NOT_LISTED;
+                retval = OD_REG_NOT_LISTED;
                 break;
 
         case OAF_REG_ALREADY_ACTIVE:
-                return OD_REG_ALREADY_ACTIVE;
+                retval = OD_REG_ALREADY_ACTIVE;
                 break;
 
         case OAF_REG_ERROR:
         default:
-                return OD_REG_ERROR;
+                retval = OD_REG_ERROR;
                 break;
         }
+
+	return retval;
 }
 
 ODRegistrationResult
-bonobo_directory_unregister_server           (CORBA_Object       objref,
-                                const gchar       *iid)
+bonobo_directory_unregister_server (CORBA_Object objref,
+				    const gchar *iid)
 {
-        oaf_active_server_unregister(iid, objref);
+        oaf_active_server_unregister (iid, objref);
         
         return OD_REG_SUCCESS;
 }

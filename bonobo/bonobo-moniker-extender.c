@@ -5,6 +5,7 @@
  * Author:
  *	Dietmar Maurer (dietmar@maurer-it.com)
  *
+ * Copyright 2000, Helix Code, Inc.
  */
 #include <config.h>
   
@@ -29,6 +30,7 @@ bonobo_moniker_extender_from_servant (PortableServer_Servant servant)
 static Bonobo_Unknown 
 impl_Bonobo_MonikerExtender_resolve (PortableServer_Servant servant,
 				     const Bonobo_Moniker   parent,
+				     const Bonobo_ResolveOptions *options,
 				     const CORBA_char      *display_name,
 				     const CORBA_char      *requested_interface,
 				     CORBA_Environment     *ev)
@@ -36,14 +38,12 @@ impl_Bonobo_MonikerExtender_resolve (PortableServer_Servant servant,
 	BonoboMonikerExtender *extender = bonobo_moniker_extender_from_servant (servant);
 
 	if (extender->resolve)
-		return extender->resolve (extender, parent, display_name,
+		return extender->resolve (extender, parent, options, display_name,
 					  requested_interface, ev);
 	else
-		return CLASS (extender)->resolve (extender, parent, display_name,
+		return CLASS (extender)->resolve (extender, parent, options, display_name,
 						  requested_interface, ev);
 }
-
-
 
 /**
  * bonobo_moniker_extender_get_epv:
@@ -73,13 +73,14 @@ init_moniker_extender_corba_class (void)
 static Bonobo_Unknown
 bonobo_moniker_extender_resolve (BonoboMonikerExtender *extender,
 				 const Bonobo_Moniker   parent,
+				 const Bonobo_ResolveOptions *options,
 				 const CORBA_char      *display_name,
 				 const CORBA_char      *requested_interface,
 				 CORBA_Environment     *ev)
 {
 
 	CORBA_exception_set (ev, CORBA_USER_EXCEPTION, 
-			     ex_Bonobo_MonikerExtender_InterfaceNotFound, NULL);
+			     ex_Bonobo_Moniker_InterfaceNotFound, NULL);
 
 	return CORBA_OBJECT_NIL;
 }
@@ -88,11 +89,6 @@ static void
 bonobo_moniker_extender_destroy (GtkObject *object)
 {
 	GTK_OBJECT_CLASS (bonobo_moniker_extender_parent_class)->destroy (object);
-}
-
-static void
-bonobo_moniker_extender_init (GtkObject *object)
-{
 }
 
 static void
@@ -124,8 +120,8 @@ bonobo_moniker_extender_get_type (void)
 			"BonoboMonikerExtender",
 			sizeof (BonoboMonikerExtender),
 			sizeof (BonoboMonikerExtenderClass),
-			(GtkClassInitFunc) bonobo_moniker_extender_class_init,
-			(GtkObjectInitFunc) bonobo_moniker_extender_init,
+			(GtkClassInitFunc)  bonobo_moniker_extender_class_init,
+			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
@@ -170,6 +166,15 @@ bonobo_moniker_extender_corba_object_create (BonoboObject *object)
 	return bonobo_object_activate_servant (object, servant);
 }
 
+/**
+ * bonobo_moniker_extender_construct:
+ * @extender: the extender to construct
+ * @corba_extender: a CORBA object inherited from Bonobo::MonikerExtender
+ * 
+ * a constructor function for an extender.
+ * 
+ * Return value: @extender: on succeess or NULL
+ **/
 BonoboMonikerExtender *
 bonobo_moniker_extender_construct (BonoboMonikerExtender *extender,
 				   Bonobo_MonikerExtender corba_extender)
@@ -178,6 +183,15 @@ bonobo_moniker_extender_construct (BonoboMonikerExtender *extender,
 		bonobo_object_construct (BONOBO_OBJECT (extender), corba_extender));
 }
 
+/**
+ * bonobo_moniker_extender_new:
+ * @resolve: the resolve function that will be used to do the extension
+ * @data: user data to be passed back to the resolve function.
+ * 
+ * This creates a new moniker extender.
+ * 
+ * Return value: the extender object
+ **/
 BonoboMonikerExtender *
 bonobo_moniker_extender_new (BonoboMonikerExtenderFn resolve, gpointer data)
 {
@@ -200,6 +214,18 @@ bonobo_moniker_extender_new (BonoboMonikerExtenderFn resolve, gpointer data)
 	return bonobo_moniker_extender_construct (extender, corba_extender);
 }
 
+/**
+ * bonobo_moniker_find_extender:
+ * @name: the name of the moniker we want to extend eg. 'file:'
+ * @interface: the interface we want to resolve to
+ * @ev: a corba exception environment.
+ * 
+ *  This routine tries to locate an extender for our moniker
+ * by examining a registry of extenders that map new interfaces
+ * to certain moniker names.
+ * 
+ * Return value: an appropriate extender or CORBA_OBJECT_NIL.
+ **/
 Bonobo_MonikerExtender
 bonobo_moniker_find_extender (const gchar *name, 
 			      const gchar *interface, 
@@ -219,4 +245,50 @@ bonobo_moniker_find_extender (const gchar *name,
 	g_free (query);
 
 	return extender;
+}
+
+/**
+ * bonobo_moniker_use_extender:
+ * @extender_oafiid: The IID of the extender to use
+ * @moniker: the moniker to extend
+ * @options: resolve options
+ * @requested_interface: the requested interface
+ * @ev: corba environment
+ * 
+ *  Locates a known extender via. OAFIID; eg.
+ * OAFIID:Bonobo_Moniker_Extender_file
+ * 
+ * Return value: the resolved result or CORBA_OBJECT_NIL.
+ **/
+Bonobo_Unknown
+bonobo_moniker_use_extender (const gchar                 *extender_oafiid,
+			     BonoboMoniker               *moniker,
+			     const Bonobo_ResolveOptions *options,
+			     const CORBA_char            *requested_interface,
+			     CORBA_Environment           *ev)
+{
+	Bonobo_MonikerExtender extender;
+	Bonobo_Unknown         retval;
+
+	g_return_val_if_fail (ev != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (options != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (moniker != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (extender_oafiid != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (requested_interface != NULL, CORBA_OBJECT_NIL);
+
+	extender = oaf_activate_from_id (
+		(gchar *) extender_oafiid, 0, NULL, ev);
+
+	if (BONOBO_EX (ev) || extender == CORBA_OBJECT_NIL)
+		return CORBA_OBJECT_NIL;
+
+	retval = Bonobo_MonikerExtender_resolve (
+		extender,
+		bonobo_object_corba_objref (BONOBO_OBJECT (moniker)),
+		options, bonobo_moniker_get_name_full (moniker),
+		requested_interface, ev);
+
+	bonobo_object_release_unref (extender, ev);
+
+	return retval;
 }
