@@ -1,0 +1,68 @@
+/*
+ * The GNOME::UIHandler Interface
+ *
+ * The UIHandler interface provides a CORBA service for
+ * managing menus and toolbars.  It allows both the top-
+ * level container and embedded BonoboObjects to
+ * manipulate the application's menu and toolbar items.
+ *
+ * Author:
+ *    Nat Friedman (nat@gnome-support.com)
+ *
+ */
+
+
+module GNOME {
+
+interface UIHandler : GNOME::obj {
+
+	/*
+	 * Containee ==> Container
+	 */
+
+	/*
+	 * This method is used by an embedded component to register
+	 * its GnomeUIHandler with the container's GnomeUIHandler.
+	 */
+	void register_containee_uihandler (in UIHandler uih);
+
+	/*
+	 * This method is used by an embedded component to unregister
+	 * its GnomeUIHandler with the container's GnomeUIHandler.
+	 * The container will then 
+	 */
+	void unregister_containee_uihandler (in UIHandler uih);
+
+	/*
+	 * These methods allow embedded components to create menu and
+	 * toolbar items and manipulate them.
+	 */
+
+	/*
+	 * These methods are for the creation and manipulation of
+	 * dynamic menu items.
+	 */
+
+	/*
+	 * These methods allow embedded components to create UI groups
+	 * and manipulate them.
+	 */
+	
+
+	/*
+	 * Container ==> Containee
+	 */
+
+	/*
+	 * These methods are used by containers to notify containees
+	 * that a menu or toolbar item has been activated or
+	 * overriden.
+	 */
+
+	void item_activated (in string path);
+	void item_overriden (in string path);
+	
+};
+
+} ;
+
