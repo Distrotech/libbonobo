@@ -40,6 +40,8 @@
 #include "ac-query-expr.h"
 #include "od-utils.h"
 
+#include <libxml/parser.h>
+
 #ifdef OAF_DEBUG
 static void debug_queries (void);
 #endif
@@ -109,7 +111,9 @@ main (int argc, char *argv[])
 
 	poptFreeContext (ctx);
 
-        LIBXML_TEST_VERSION
+        LIBXML_TEST_VERSION;
+
+	xmlKeepBlanksDefault(0);
 
 	ml = g_main_new (FALSE);
 
