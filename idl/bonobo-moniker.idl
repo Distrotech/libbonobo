@@ -1,30 +1,16 @@
 module GNOME {
 
-	interface BindContext : obj {
-		/**
-		 * register_object:
-		 *
-		 * Keeps track of the object withing the
-		 * context.  The object is ref()ed
-		 */
-		void register_object (in obj object);
-		
-		/**
-		 * drop_one_object:
-		 * @object: Forgets about the object
-		 *
-		 * Applications usually call drop_objects.
-		 */
-		void drop_one_object (in obj object);
+	typedef long BindFlag;
+	const BindFlag user_interaction_allowed = 1;
+	
+	struct BindOptions {
+		BindFlag flags;
+		long timeout_ms;
 
-		/**
-		 * drop_objects:
-		 *
-		 * Drops all the objects that were tied in this binding
-		 * context
-		 */
-		void drop_objects ();
+		/* FIXME: rxw stuff for file monikers?
+		 * where to put that? */
 	};
+	
 
 	interface Moniker : PersistStream {
 		
@@ -59,7 +45,7 @@ module GNOME {
 		 * the @requester_interface
 		 */
 
-		Object bind_to_object (in Object bind_context, 
+		Object bind_to_object (in BindOptions bind_context, 
 				       in Moniker left_moniker,
 				       in string requested_interface)
 			raises (InterfaceNotFound, TimeOut, MissingInterface);
@@ -71,7 +57,7 @@ module GNOME {
 		 * @persistent_interface_name: the name of the persistent
 		 * object (GNOME::Storage, GNOME::Stream, GNOME::Lockbytes).
 		 */
-		Object bind_to_storage (in Object bind_context,
+		Object bind_to_storage (in BindOptions bind_context,
 					in Moniker left_moniker,
 					in string persistent_interface_name);
 
@@ -86,7 +72,7 @@ module GNOME {
 		 * 
 		 * Returns a representation of the Moniker
 		 */
-		string get_display_name (in Object bind_context,
+		string get_display_name (in BindOptions bind_context,
 					 in Moniker left);
 
 		/**
@@ -94,7 +80,7 @@ module GNOME {
 		 *
 		 * Returns a moniker from the string representation
 		 */
-		Moniker parse_display_name (in Object bind_context,
+		Moniker parse_display_name (in BindOptions bind_context,
 					    in Moniker left,
 					    in string display_name,
 					    out short display_name_bytes_parsed);
@@ -102,9 +88,38 @@ module GNOME {
 	};
 
 	interface ParseDisplayName : obj {
-		Moniker parse_display_name (in Object bind_context,
+		Moniker parse_display_name (in BindOptions bind_context,
 					    in string display_name,
 					    out short display_name_bytes_parsed);
 	};
+
+	/* UNUSED: This may be replaced by the
+	 * simpler `BindOptions' struct; we'll see */
+	interface BindContext : obj {
+
+		/**
+		 * register_object:
+		 *
+		 * Keeps track of the object withing the
+		 * context.  The object is ref()ed */
+		void register_object (in obj object);
+		
+		/**
+		 * drop_one_object:
+		 * @object: Forgets about the object
+		 *
+		 * Applications usually call drop_objects.
+		 */
+		void drop_one_object (in obj object);
+
+		/**
+		 * drop_objects:
+		 *
+		 * Drops all the objects that were tied in this binding
+		 * context
+		 */
+		void drop_objects ();
+	};
+
 
 };

@@ -20,19 +20,24 @@ POA_GNOME_Moniker__vepv gnome_moniker_vepv;
 
 static CORBA_Object
 impl_bind_to_object (PortableServer_Servant servant,
-		     const CORBA_Object bind_context,
+		     const GNOME_BindOptions * bind_context,
 		     const GNOME_Moniker left_moniker,
 		     const CORBA_char *requested_interface,
 		     CORBA_Environment *ev)
 {
-	g_error ("not implemented");
-	return CORBA_OBJECT_NIL;
+	GnomeMonikerClass *class;
+	GnomeMoniker *moniker;
+	CORBA_Object bound_object_rtn;
+	
+	moniker = GNOME_MONIKER (gnome_object_from_servant (servant));
+
+	return (*moniker->bind_function)(moniker, bind_context, NULL);
 }
 
 
 static CORBA_Object
 impl_bind_to_storage (PortableServer_Servant servant,
-		      const CORBA_Object bind_context,
+		      const GNOME_BindOptions * bind_context,
 		      const GNOME_Moniker left_moniker,
 		      const CORBA_char *persistent_interface_name,
 		      CORBA_Environment *ev)
@@ -64,7 +69,7 @@ impl_enum_pieces (PortableServer_Servant servant,
 
 static CORBA_char *
 impl_get_display_name (PortableServer_Servant servant,
-		       const CORBA_Object bind_context,
+		       const GNOME_BindOptions * bind_context,
 		       const GNOME_Moniker left,
 		       CORBA_Environment * ev)
 {
@@ -74,7 +79,7 @@ impl_get_display_name (PortableServer_Servant servant,
 
 static GNOME_Moniker
 impl_parse_display_name (PortableServer_Servant servant,
-			 const CORBA_Object bind_context,
+			 const GNOME_BindOptions * bind_context,
 			 const GNOME_Moniker left,
 			 const CORBA_char * display_name,
 			 CORBA_short * display_name_bytes_parsed,
@@ -113,8 +118,60 @@ gnome_moniker_class_init (GnomeMonikerClass *class)
 	init_moniker_corba_class ();
 }
 
+CORBA_Object
+find_moniker_in_naming_service (gchar *name, gchar *kind)
+{
+	CosNaming_NameComponent nc[3] = {{"GNOME", "subcontext"},
+					 {"Monikers", "subcontext"}};
+	CosNaming_Name          nom;
+	CORBA_Object name_server;
+	CORBA_Object object_in_name_server;
+	CORBA_Environment ev;
+
+	g_assert (name);
+	nom._maximum = 0;
+	nom._length = 3;
+	nom._buffer = nc;
+	nom._release = CORBA_FALSE;
+
+	CORBA_exception_init (&ev);
+
+	nc[2].id   = (char *)name;
+	nc[2].kind = (char *)kind;
+
+	name_server = gnome_name_service_get();
+
+	g_assert(name_server != CORBA_OBJECT_NIL);
+
+	object_in_name_server = CosNaming_NamingContext_resolve(name_server, &nom, &ev);
+
+	if(ev._major == CORBA_NO_EXCEPTION
+	   || (ev._major == CORBA_USER_EXCEPTION
+	       && strcmp(CORBA_exception_id(&ev),
+			 ex_CosNaming_NamingContext_NotFound))) {
+
+		/* found it! */
+
+		CORBA_Object_release(name_server, &ev);
+
+		CORBA_exception_free(&ev);
+		return object_in_name_server;
+	}
+
+	/* didn't find it, return nothing */
+	CORBA_Object_release(name_server, &ev);
+	CORBA_exception_free(&ev);
+
+	return CORBA_OBJECT_NIL;
+
+} /* find_moniker_in_naming_service */
+
+
+
+
 GnomeMoniker *
-gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker, GnomeMonikerBindFn bind_function)
+gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker,
+			 GnomeMonikerBindFn bind_function)
 {
 	g_return_val_if_fail (moniker != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MONIKER (moniker), NULL);

@@ -1,3 +1,30 @@
+1999-06-11  Matt Loper  <matt@gnome-support.com>
+
+	* bonobo/gnome-file-moniker.c (map_file): helper function. Is
+	there already a function to do this?
+
+	* bonobo/gnome-moniker.h: Add find_moniker_in_naming_service.
+
+	* bonobo/gnome-moniker.c (find_moniker_in_naming_service): New function.
+
+	* bonobo/gnome-moniker.c (impl_bind_to_object): Changed it to take
+	a GNOME_BindOptions* struct instead of a BindContext CORBA object.
+	(impl_bind_to_storage): same.
+	(impl_get_display_name): same.
+	(impl_parse_display_name): same.
+
+	* bonobo/gnome-moniker.h: Changed GnomeMonikerBindFn to take a
+	GNOME_BindOptions struct.
+
+	* idl/gnome-moniker.idl: Added BindOptions struct, which is
+	analogous to GNOME::BindContext. I don't think we'll need the
+	CORBA object form of BindContext; we'll see. . .
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_bind): New
+	function, which acts as the filemoniker-specific binding function.
+	(gnome_file_moniker_construct): Give gnome_file_moniker_bind to
+	gnome_moniker_construct.
+
 1999-06-10  Matt Loper  <matt@gnome-support.com>
 
 	* bonobo/gnome-file-moniker.h: Change gnome_file_moniker_new to

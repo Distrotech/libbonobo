@@ -16,7 +16,9 @@ BEGIN_GNOME_DECLS
 struct _GnomeMoniker;
 typedef struct _GnomeMoniker GnomeMoniker;
 
-typedef CORBA_Object * (*GnomeMonikerBindFn)(GnomeMoniker *moniker, void *closure);
+typedef CORBA_Object (*GnomeMonikerBindFn)(GnomeMoniker *moniker,
+					   GNOME_BindOptions *bind_options,
+					   void *closure);
 
 struct _GnomeMoniker {
 	GnomePersistStream persist_stream;
@@ -36,6 +38,9 @@ GnomeBindContext *gnome_bind_context_new   (void);
 GnomeMoniker     *gnome_parse_display_name (GnomeBindContext *bind,
 					    const char *display_name,
 					    int *chars_parsed);
+
+CORBA_Object      find_moniker_in_naming_service (gchar *name, gchar *kind);
+
 
 /* The CORBA vepv for the class */
 extern POA_GNOME_Moniker__vepv gnome_moniker_vepv;
