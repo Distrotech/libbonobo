@@ -1,15 +1,12 @@
-# Nepali Translation of libbonobo
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the libbonobo package.
 # Pawan Chitrakar <pawan@nplinux.org>.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"Report-Msgid-Bugs-To: <pawan@nplinux.org> \n"
-"POT-Creation-Date: 2004-07-01 21:39+0200\n"
-"PO-Revision-Date: 2004-07-02 2:25+0545\n"
-"Last-Translator: Pawan Chitrakar  <pawan@nplinux.org>\n"
+"POT-Creation-Date: 2004-07-13 04:50+0200\n"
+"PO-Revision-Date: 2004-08-29 18:59+0545\n"
+"Last-Translator: Pawan Chitrakar <pawan@nplinux.org>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,7 +14,7 @@ msgstr ""
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
-msgstr "सेवादायक  कुन द्वितीयक सूचीमा आएको हो थाहा भएन "
+msgstr "सेवाप्रदायक  कुन द्वितीयक सूचीमा आएको हो थाहा भएन "
 
 #: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
@@ -25,7 +22,7 @@ msgstr "स्वीकृत सक्रिय आई डि होइन"
 
 #: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
-msgstr " सेवादायक लेखपात्रबाट पढ्नलाई निर्देशिका "
+msgstr " सेवाप्रदायक फाइलबाट पढ्नलाई निर्देशिका "
 
 #: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
@@ -37,7 +34,7 @@ msgstr "सक्रिय विषयका रुपमा सेवा द�
 
 #: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
-msgstr "फाइल वाचक आज्ञओआरमा लेख्नलाई हो"
+msgstr "फाइल वाचक आइओआरमा लेख्नलाई हो"
 
 #: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:200
@@ -46,11 +43,11 @@ msgstr "एफ डी"
 
 #: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
-msgstr "मूल्याङ्कनका लागि  अनुसन्धान संप्रेषण"
+msgstr "मूल्याङ्कनका लागि  अनुसन्धान संकथन"
 
 #: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
-msgstr "संप्रेषण"
+msgstr "संकथन"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -70,23 +67,18 @@ msgstr "सक्रियताको लागि ज्ञापन सेव
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "shlibवस्तुहरु हामी टाढैबाट सक्रिय गर्न सक्तैनौ "
+msgstr "स्लिबवस्तुहरु हामी टाढैबाट सक्रिय गर्न सक्तैनौ "
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
-msgid ""
-"The Bonobo Activation configuration file was not read successfully. Please, "
-"check it is valid in: %s"
-msgstr ""
-"बोनोबो सक्रिय गर्ने समायोजन फाइल राम्ररी पढ्न सकिएन.यो %s लाई स्वीकार्य छ छैन जाच्नुहोस्"
+msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
+msgstr "बोनोबो सक्रिय गर्ने समायोजन फाइल राम्ररी पढ्न सकिएन.यो %s लाई स्वीकार्य छ छैन जाँच्नुहोस्"
 
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
+#  * If this exception blows ( which it will only do with a multi-object )
+#  * factory, you need to ensure you register the object you were activated
+#  * for [use const char *bonobo_activation_iid_get (void); ] is registered
+#  * with bonobo_activation_active_server_register - _after_ any other
+#  * servers are registered.
 #: activation-server/object-directory-corba.c:1148
 #, c-format
 msgid "Race condition activating server '%s'"
@@ -94,32 +86,32 @@ msgstr "प्रतियोगितालाई सक्रिय गरा�
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr "एउटा खालि आईआई डि स्वीकृत आईआई डि होइन"
+msgstr "एउटा खाली आईआईडि स्वीकृत आईआईडि होइन"
 
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr "आईआई डि %s खालि किसिमको छ"
+msgstr "आईआईडी %s खाली किसिमको छ"
 
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr "आईआई डि %s सँग  खालि स्थान छ"
+msgstr "आईआईडी %s सँग  खाली स्थान छ"
 
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "'%c' नै आईआई डि '%s' मा अवैधानिक स्वन "
+msgstr "'%c' नै आईआईडी '%s' मा अवैधानिक स्वन "
 
 #: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "सम्पति '%s'को कुनै मुल्य छैन"
+msgstr "सम्पति '%s'को कुनै मूल्य छैन"
 
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr "गलत रुपान्तरण गरिएको एक्स एम एल लेखोट %s खोज्न सकिएन"
+msgstr "गलत रुपान्तरण गरिएको एक्स एम एल मिसिल %s खोज्न सकिएन"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
@@ -128,12 +120,12 @@ msgstr "%s कोसिस निर्देशिका"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "चाईल्ड प्रोसेसले गलत सन्देशको जानकारी दिएन,अज्ञात असफलता भयो"
+msgstr "शाखा प्रोसेसले गलत सन्देशको जानकारी दिएन, अज्ञात असफलता भेटियो"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "चाईल्ड प्रोसेस बाट %s पढ्न असफल \n"
+msgstr "शाखा प्रणालीबाट %s पढ्न असफल \n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
@@ -142,17 +134,17 @@ msgstr "एउटा नयाँ प्रणाली टुक्राटु
 #: bonobo-activation/bonobo-activation-fork-server.c:318
 #, c-format
 msgid "Child received signal %u (%s)"
-msgstr "चाईल्डले %u(%s) सङ्केत पाएकोछ"
+msgstr "शाखाले %u(%s) सङ्केत पाएकोछ"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr "बाहिर-नजाने थाहा नभएको गल्ती( हैसियत चाँहि %u)"
+msgstr "बाहिर-नजाने थाहा नभएको गल्ती( हैसियत चाँही %uहो)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "सक्रिय बोनोबो %s: %s को प्रणाली समुहलाई जडान गर्न  असफल भयो \n"
+msgstr "सक्रिय बोनोबो %s: %s को प्रणाली समूहलाई जडान गर्न  असफल भयो \n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
@@ -161,19 +153,19 @@ msgstr " %s: %d (%s) सम्पादन गर्न असफल \n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr "बैठक कक्षमा धेरै सहचारी भए, सम्बन्ध जोडिन सक्छ"
+msgstr "स्थानीय कक्षमा धेरै सहचारी भए, सम्बन्ध जोडिन सक्छ"
 
 #: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
-msgstr "आईओआरमा  छाप्न प्रबाचक लेखपत्र"
+msgstr "आईओआरमा  छाप्न प्रबाचक फाइल"
 
 #: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
-msgstr "सक्रिय हुनको लागि आईआईडी"
+msgstr "सक्रिय गर्नका लागि आईआईडी"
 
 #: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
-msgstr " ओएएफसंग  सेवादायकको पंजीकरण रोक  "
+msgstr " ओएएफसँग  सेवाप्रदायकको पंजीकरण रोक  "
 
 #: bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
@@ -222,7 +214,7 @@ msgstr "समर्थन नभएको काम गर्ने कोस�
 
 #: bonobo/bonobo-exception.c:157
 msgid "IO Error"
-msgstr "आईओमा गल्ती"
+msgstr "आईओ गल्ती"
 
 #: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
@@ -242,7 +234,7 @@ msgstr "कारखानाको वस्तुलाई सक्रिय 
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "प्रवाह उपलब्ध गर्ने अनुमति छैन"
+msgstr "प्रवाह उपलब्ध गर्ने पहुँच‌ छैन"
 
 # º bonïbo/bonobo-exceðtion.ã:180
 #: bonobo/bonobo-exception.c:180
@@ -263,7 +255,7 @@ msgstr "संग्रहमा यो नाम पहिलेदेखिन
 
 #: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr "संग्रहमा बस्तु भेटिएन"
+msgstr "संग्रहमा वस्तु भेटिएन"
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
@@ -275,11 +267,11 @@ msgstr "अनुमति नभएको संग्रह गर्ने �
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr "बस्तु एउटा प्रवाह होइन"
+msgstr "वस्तु एउटा प्रवाह होइन"
 
 #: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr "बस्तु एउटा संग्रह होइन"
+msgstr "वस्तु एउटा संग्रह होइन"
 
 #: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
@@ -315,15 +307,15 @@ msgstr "प्रवाह भेटिएन"
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
-msgstr "संपत्ति भेटिएन"
+msgstr "विशेषता भेटिएन"
 
 #: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr "संपतिको किसिम अवैधानिक  छ "
+msgstr "विशेषताको किसिम अवैधानिक  छ "
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr "संपति पढ्नका लागि मात्र हो "
+msgstr "विशेषता पढ्नका लागि मात्र हो "
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
@@ -343,7 +335,7 @@ msgstr "मोनिकरभित्र वाक्यात्मक गल�
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "मोनिकरसंग एउटा अज्ञात मोनिकर उपसर्ग छ"
+msgstr "मोनिकरसँग एउटा अज्ञात मोनिकर उपसर्ग छ"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
@@ -353,9 +345,10 @@ msgstr "भूल जाँच्ने भूल;कुनै अपवाद �
 msgid "General activation error with no description"
 msgstr "वर्णन नभएको सामान्य सक्रिय गल्ती"
 
-#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
+#: bonobo/bonobo-generic-factory.h:79
+#: bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
-msgstr "बोनोबोको सुरुवात गर्न सकिएन"
+msgstr "बोनोबोको सुरुआत गर्न सकिएन"
 
 #: bonobo/bonobo-moniker.c:352
 #, c-format
@@ -369,7 +362,7 @@ msgstr "वस्तुलाई सक्रिय गर्न असफल"
 #: monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
-msgstr " अपबाद '%s'सक्रिय हँदैछ"
+msgstr " अपवाद '%s'सक्रिय हँदैछ"
 
 #: monikers/bonobo-moniker-oaf.c:62
 #, c-format
@@ -386,7 +379,7 @@ msgstr "ORB IOR सन्चालन गर्ने मोनिकर"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "स्तरिय मोनिकर कारखाना"
+msgstr "स्तरीय मोनिकर कारखाना"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
@@ -398,7 +391,7 @@ msgstr "वंशानुगत ओएएफ अनुसन्धान मो
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "वंशानुगत कारखाना 'नया' मोनिकर"
+msgstr "वंशानुगत कारखाना 'नयाँ' मोनिकर"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
@@ -410,11 +403,11 @@ msgstr "प्रवाह  मोनिकर विस्तार"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "बोनोबो प्रतिध्वनि सेवक कारखाना"
+msgstr "बोनोबो प्रतिध्वनि सेवाप्रदायक कारखाना"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "बोनोबो प्रतिध्वनि सेवक नमुना कार्यक्रम"
+msgstr "बोनोबो प्रतिध्वनि सेवाप्रदायक नमुना कार्यक्रम"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
@@ -439,7 +432,7 @@ msgstr "'%s' अपवाद  भेटियो"
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr "संरचना लेखपत्रको बचत गर्न सकिएन \n"
+msgstr "संरचना फाइल भण्डारण गर्न सकिएन \n"
 
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
@@ -448,45 +441,48 @@ msgstr "कृपया '%s' मा लेख्ने अनुमति भए
 
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
-msgstr "संरचना लेखपत्र सफलतापूर्वक लेखियो.\n"
+msgstr "संरचना फाइल सफलतापूर्वक लेखियो.\n"
 
 #: utils/bonobo-activation-sysconf.c:80
 #, c-format
 msgid ""
 "configuration file is:\n"
 "    %s\n"
-msgstr "संरचना लेखपत्र  हो :\n"
+msgstr ""
+"संरचना फाइल  हो :\n"
 "%s \n"
 
 #: utils/bonobo-activation-sysconf.c:118
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr " %s पहिलेनै संरचना लेखपत्रमा छ \n"
+msgstr " %s पहिलेनै संरचना फाइलमा छ \n"
 
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr "ब्ववस्थित संरचना समायोजन लेखपत्र छैन\n"
+msgstr "व्यवस्थित संरचना समायोजन फाइल छैन\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "सकृय-बोनोबो समायोजन लेखपत्र समावेश  छ :\n"
+msgstr "सक्रिय-बोनोबो समायोजन फाइल समावेस  छ :\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr "समायोजन लेखपत्रबाट हटाउनु पर्ने निर्देशिका"
+msgstr "समायोजन फाइलबाट हटाउनु पर्ने निर्देशिका"
 
-#: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
+#: utils/bonobo-activation-sysconf.c:233
+#: utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
 msgstr "निर्देशिकाको बाटो"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr "समायोजन लेखपत्रमा थप्नुपर्ने निर्देशिका"
+msgstr "समायोजन फाइलमा थप्नुपर्ने निर्देशिका"
 
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
-msgstr "समायोजन लेखपत्रमा भएका निर्देशिकाहरु देखाउनुहोस् "
+msgstr "समायोजन फाइलमा भएका निर्देशिकाहरु देखाउनुहोस् "
 
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr "समायोजन लेखपत्रको बाटो देखाउनुहोस्"
+msgstr "समायोजन फाइलको बाटो देखाउनुहोस्"
+
