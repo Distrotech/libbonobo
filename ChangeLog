@@ -1,3 +1,7 @@
+2003-05-05  Christian Rose  <menthos@menthos.com>
+
+	* configure.in: Added sr and sr@Latn to ALL_LINGUAS.
+
 2003-04-28  Michael Meeks  <michael@ximian.com>
 
 	* doc/activation-api/tmpl/registration.sgml:
