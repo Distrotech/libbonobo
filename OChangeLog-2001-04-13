@@ -1,3 +1,11 @@
+2000-08-31  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-uih-menu.c: (menu_toplevel_set_label_internal):
+	Fixed bug where changing the label of a menu item wasn't
+	forgetting the old accelerator. There was code to forget the
+	old accelerator but it was forgetting the new accelerator
+	instead (before adding it).
+
 2000-08-29  JP Rosevear  <jpr@helixcode.com>
 
 	* bonobo/bonobo-uih-toolbar.c 
