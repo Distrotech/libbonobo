@@ -1,3 +1,8 @@
+1999-05-29  Nat Friedman  <nat@gnome-support.com>
+
+	* components/text-plain/bonobo-text-plain.c (view_factory): Put
+	the GtkText widget in a scrolled window.
+
 1999-05-28  Nat Friedman  <nat@gnome-support.com>
 
 	* components/text-plain/bonobo-text-plain.c
