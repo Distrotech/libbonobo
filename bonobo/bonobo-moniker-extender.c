@@ -15,9 +15,9 @@
 #include <bonobo/bonobo-moniker-extender.h>
 #include <liboaf/liboaf.h>
 
-static GtkObjectClass *bonobo_moniker_extender_parent_class;
+#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-POA_Bonobo_MonikerExtender__vepv bonobo_moniker_extender_vepv;
+static GtkObjectClass *bonobo_moniker_extender_parent_class;
 
 #define CLASS(o) BONOBO_MONIKER_EXTENDER_CLASS (GTK_OBJECT (o)->klass)
 
@@ -45,31 +45,6 @@ impl_Bonobo_MonikerExtender_resolve (PortableServer_Servant servant,
 						  requested_interface, ev);
 }
 
-/**
- * bonobo_moniker_extender_get_epv:
- *
- * Returns: The EPV for the default Bonobo Moniker Extender implementation.
- */
-POA_Bonobo_MonikerExtender__epv *
-bonobo_moniker_extender_get_epv (void)
-{
-	POA_Bonobo_MonikerExtender__epv *epv;
-
-	epv = g_new0 (POA_Bonobo_MonikerExtender__epv, 1);
-
-	epv->resolve          = impl_Bonobo_MonikerExtender_resolve;
-
-	return epv;
-}
-
-static void
-init_moniker_extender_corba_class (void)
-{
-	/* The VEPV */
-	bonobo_moniker_extender_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
-	bonobo_moniker_extender_vepv.Bonobo_MonikerExtender_epv = bonobo_moniker_extender_get_epv ();
-}
-
 static Bonobo_Unknown
 bonobo_moniker_extender_resolve (BonoboMonikerExtender *extender,
 				 const Bonobo_Moniker   parent,
@@ -88,21 +63,22 @@ bonobo_moniker_extender_resolve (BonoboMonikerExtender *extender,
 static void
 bonobo_moniker_extender_destroy (GtkObject *object)
 {
-	GTK_OBJECT_CLASS (bonobo_moniker_extender_parent_class)->destroy (object);
+	bonobo_moniker_extender_parent_class->destroy (object);
 }
 
 static void
 bonobo_moniker_extender_class_init (BonoboMonikerExtenderClass *klass)
 {
 	GtkObjectClass *oclass = (GtkObjectClass *)klass;
+	POA_Bonobo_MonikerExtender__epv *epv = &klass->epv;
 
-	bonobo_moniker_extender_parent_class = gtk_type_class (bonobo_object_get_type ());
+	bonobo_moniker_extender_parent_class = gtk_type_class (PARENT_TYPE);
 
 	oclass->destroy = bonobo_moniker_extender_destroy;
 
 	klass->resolve = bonobo_moniker_extender_resolve;
 
-	init_moniker_extender_corba_class ();
+	epv->resolve = impl_Bonobo_MonikerExtender_resolve;
 }
 
 /**
@@ -127,60 +103,14 @@ bonobo_moniker_extender_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = bonobo_x_type_unique (
+			PARENT_TYPE,
+			POA_Bonobo_MonikerExtender__init, NULL,
+			GTK_STRUCT_OFFSET (BonoboMonikerExtenderClass, epv),
+			&info);
 	}
 
 	return type;
-}
-
-/**
- * bonobo_moniker_extender_corba_object_create:
- * @object: the GtkObject that will wrap the CORBA object
- *
- * Creates and activates the CORBA object that is wrapped by the
- * @object BonoboObject.
- *
- * Returns: An activated object reference to the created object
- * or %CORBA_OBJECT_NIL in case of failure.
- */
-Bonobo_Moniker
-bonobo_moniker_extender_corba_object_create (BonoboObject *object)
-{
-	POA_Bonobo_MonikerExtender *servant;
-	CORBA_Environment ev;
-
-	servant = (POA_Bonobo_MonikerExtender *) g_new0 (BonoboObjectServant, 1);
-	servant->vepv = &bonobo_moniker_extender_vepv;
-
-	CORBA_exception_init (&ev);
-
-	POA_Bonobo_MonikerExtender__init ((PortableServer_Servant) servant, &ev);
-	if (BONOBO_EX (&ev)) {
-                g_free (servant);
-		CORBA_exception_free (&ev);
-                return CORBA_OBJECT_NIL;
-        }
-
-	CORBA_exception_free (&ev);
-
-	return bonobo_object_activate_servant (object, servant);
-}
-
-/**
- * bonobo_moniker_extender_construct:
- * @extender: the extender to construct
- * @corba_extender: a CORBA object inherited from Bonobo::MonikerExtender
- * 
- * a constructor function for an extender.
- * 
- * Return value: @extender: on succeess or NULL
- **/
-BonoboMonikerExtender *
-bonobo_moniker_extender_construct (BonoboMonikerExtender *extender,
-				   Bonobo_MonikerExtender corba_extender)
-{
-	return BONOBO_MONIKER_EXTENDER (
-		bonobo_object_construct (BONOBO_OBJECT (extender), corba_extender));
 }
 
 /**
@@ -196,22 +126,13 @@ BonoboMonikerExtender *
 bonobo_moniker_extender_new (BonoboMonikerExtenderFn resolve, gpointer data)
 {
 	BonoboMonikerExtender *extender = NULL;
-	Bonobo_MonikerExtender corba_extender;
 	
 	extender = gtk_type_new (bonobo_moniker_extender_get_type ());
 
 	extender->resolve = resolve;
 	extender->data = data;
 
-	corba_extender = bonobo_moniker_extender_corba_object_create (
-		BONOBO_OBJECT (extender));
-
-	if (corba_extender == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (extender));
-		return NULL;
-	}
-
-	return bonobo_moniker_extender_construct (extender, corba_extender);
+	return extender;
 }
 
 /**

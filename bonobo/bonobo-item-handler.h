@@ -14,7 +14,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkobject.h>
-#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-xobject.h>
 
 BEGIN_GNOME_DECLS
  
@@ -35,7 +35,9 @@ typedef Bonobo_Unknown (*BonoboItemHandlerGetObjectFn)
 	 gpointer data, CORBA_Environment *ev);
 
 struct _BonoboItemHandler {
-	BonoboObject base;
+	BonoboXObject base;
+
+	POA_Bonobo_ItemContainer__epv epv;
 
 	BonoboItemHandlerEnumObjectsFn enum_objects;
 	BonoboItemHandlerGetObjectFn   get_object;
@@ -45,7 +47,9 @@ struct _BonoboItemHandler {
 };
 
 typedef struct {
-	BonoboObjectClass parent_class;
+	BonoboXObjectClass parent_class;
+
+	POA_Bonobo_ItemContainer__epv epv;
 } BonoboItemHandlerClass;
 
 GtkType              bonobo_item_handler_get_type    (void);
@@ -54,16 +58,11 @@ BonoboItemHandler   *bonobo_item_handler_new         (BonoboItemHandlerEnumObjec
 						      gpointer                       user_data);
 
 BonoboItemHandler   *bonobo_item_handler_construct   (BonoboItemHandler             *handler,
-						      Bonobo_ItemContainer           corba_handler,
 						      BonoboItemHandlerEnumObjectsFn enum_objects,
 						      BonoboItemHandlerGetObjectFn   get_object,
 						      gpointer                       user_data);
 
-POA_Bonobo_ItemContainer__epv *bonobo_item_handler_get_epv (void);
-
-/*
- * Utility functions that can be used by getObject routines
- */
+/* Utility functions that can be used by getObject routines */
 typedef struct {
 	char *key;
 	char *value;

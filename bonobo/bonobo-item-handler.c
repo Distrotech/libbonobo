@@ -16,42 +16,7 @@
 #include <bonobo/bonobo-exception.h>
 #include "bonobo-item-handler.h"
 
-static POA_Bonobo_ItemContainer__vepv item_handler_vepv;
-
-static CORBA_Object
-create_bonobo_item_handler (BonoboObject *object)
-{
-	POA_Bonobo_ItemContainer *servant;
-	CORBA_Environment ev;
-	CORBA_Object o;
-
-	CORBA_exception_init (&ev);
-
-	servant = (POA_Bonobo_ItemContainer *) g_new0 (BonoboObjectServant, 1);
-	servant->vepv = &item_handler_vepv;
-
-	POA_Bonobo_ItemContainer__init ((PortableServer_Servant) servant, &ev);
-	if (BONOBO_EX (&ev)){
-		g_free (servant);
-		CORBA_exception_free (&ev);
-		return CORBA_OBJECT_NIL;
-	}
-
-	CORBA_free (PortableServer_POA_activate_object (
-		bonobo_poa (), servant, &ev));
-
-	o = PortableServer_POA_servant_to_reference (
-		bonobo_poa(), servant, &ev);
-
-	if (o) {
-		bonobo_object_bind_to_servant (object, servant);
-		CORBA_exception_free (&ev);
-		return o;
-	} else {
-		CORBA_exception_free (&ev);
-		return CORBA_OBJECT_NIL;
-	}
-}
+#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
 /*
  * Returns a list of the objects in this container
@@ -85,43 +50,13 @@ impl_get_object (PortableServer_Servant servant,
 		return CORBA_OBJECT_NIL;
 }
 
-/*
- * BonoboItemHandler CORBA vector-class initialization routine
- */
-
-/**
- * bonobo_item_handler_get_epv:
- *
- * Returns: The EPV for the default BonoboItemHandler implementation.  
- */
-POA_Bonobo_ItemContainer__epv *
-bonobo_item_handler_get_epv (void)
+static void
+bonobo_item_handler_class_init (BonoboItemHandlerClass *klass)
 {
-	POA_Bonobo_ItemContainer__epv *epv;
-
-	epv = g_new0 (POA_Bonobo_ItemContainer__epv, 1);
+	POA_Bonobo_ItemContainer__epv *epv = &klass->epv;
 
 	epv->enumObjects     = impl_enum_objects;
 	epv->getObjectByName = impl_get_object;
-
-	return epv;
-}
-
-static void
-corba_item_handler_class_init (void)
-{
-	/* Init the vepv */
-	item_handler_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
-	item_handler_vepv.Bonobo_ItemContainer_epv = bonobo_item_handler_get_epv ();
-}
-
-/*
- * BonoboItemContainer class initialization routine
- */
-static void
-bonobo_item_handler_class_init (BonoboItemHandlerClass *container_class)
-{
-	corba_item_handler_class_init ();
 }
 
 /**
@@ -135,18 +70,14 @@ bonobo_item_handler_class_init (BonoboItemHandlerClass *container_class)
  * Returns: The constructed BonoboItemContainer object.
  */
 BonoboItemHandler *
-bonobo_item_handler_construct (BonoboItemHandler  *handler,
-			       Bonobo_ItemContainer corba_handler,
+bonobo_item_handler_construct (BonoboItemHandler             *handler,
 			       BonoboItemHandlerEnumObjectsFn enum_objects,
-			       BonoboItemHandlerGetObjectFn get_object,
-			       gpointer user_data)
+			       BonoboItemHandlerGetObjectFn   get_object,
+			       gpointer                       user_data)
 {
 	g_return_val_if_fail (handler != NULL, NULL);
-	g_return_val_if_fail (corba_handler != CORBA_OBJECT_NIL, NULL);
 	g_return_val_if_fail (BONOBO_IS_ITEM_HANDLER (handler), NULL);
 	
-	bonobo_object_construct (BONOBO_OBJECT (handler), (CORBA_Object) corba_handler);
-
 	handler->get_object   = get_object;
 	handler->enum_objects = enum_objects;
 	handler->user_data    = user_data;
@@ -176,7 +107,11 @@ bonobo_item_handler_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = bonobo_x_type_unique (
+			PARENT_TYPE,
+			POA_Bonobo_ItemContainer__init, NULL,
+			GTK_STRUCT_OFFSET (BonoboItemHandlerClass, epv),
+			&info);
 	}
 
 	return type;
@@ -197,19 +132,11 @@ bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
 
 {
 	BonoboItemHandler *handler;
-	Bonobo_ItemContainer corba_handler;
 
 	handler = gtk_type_new (bonobo_item_handler_get_type ());
-	corba_handler = create_bonobo_item_handler (BONOBO_OBJECT (handler));
 
-	if (corba_handler == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (handler));
-		return NULL;
-	}
-	
 	return bonobo_item_handler_construct (
-		handler, corba_handler,
-		enum_objects, get_object, user_data);
+		handler, enum_objects, get_object, user_data);
 }
 
 /**

@@ -1,5 +1,49 @@
 2001-02-07  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-property-control.c (corba_class_init): kill.
+	(bonobo_property_control_get_epv): move to
+	(bonobo_property_control_class_init): here & upd.
+	(bonobo_property_control_get_type): upd.
+	(bonobo_property_control_corba_object_create): kill.
+	(bonobo_property_control_construct): upd.
+	(bonobo_property_control_new_full): upd.
+	(bonobo_property_control_new): upd.
+
+	* bonobo/bonobo-progressive.c (bonobo_progressive_get_epv): move into
+	(bonobo_progressive_data_sink_class_init): here & upd.
+	(init_progressive_data_sink_corba_class): kill.
+	(bonobo_progressive_data_sink_construct): upd.
+	(bonobo_progressive_data_sink_new): upd.
+	(create_bonobo_progressive_data_sink): kill.
+	(bonobo_progressive_data_sink_get_type): upd.
+
+	* bonobo/bonobo-moniker-extender.c (bonobo_moniker_extender_get_epv): move into
+	(bonobo_moniker_extender_class_init): here & upd.
+	(init_moniker_extender_corba_class): kill.
+	(bonobo_moniker_extender_get_type): upd.
+	(bonobo_moniker_extender_construct): kill.
+	(bonobo_moniker_extender_new): upd.
+	(bonobo_moniker_extender_corba_object_create): kill.
+
+	* bonobo/bonobo-item-handler.c (bonobo_item_handler_get_epv): move to
+	(bonobo_item_handler_class_init): here & upd.
+	(corba_item_handler_class_init): kill.
+	(bonobo_item_handler_construct): upd.
+	(bonobo_item_handler_new): upd.
+	(create_bonobo_item_handler): kill.
+
+	* bonobo/bonobo-item-container.c (corba_container_class_init): kill.
+	(bonobo_item_container_get_epv): move into
+	(bonobo_item_container_class_init): here & upd
+	(corba_container_class_init): kill.
+	(bonobo_item_container_construct): kill.
+	(bonobo_item_container_get_type): upd.
+	(bonobo_item_container_new): upd.
+	(create_bonobo_item_container): kill.
+
+2001-02-07  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-item-container.c (bonobo_item_container_class_init): 
 	* bonobo/bonobo-view-frame.c (init_view_frame_corba_class): kill.
 	(bonobo_view_frame_get_epv): move to
 	(bonobo_view_frame_class_init): here & upd.

@@ -32,48 +32,13 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
-static BonoboObjectClass *bonobo_item_container_parent_class;
+#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+
+static GtkObjectClass *bonobo_item_container_parent_class;
 
 struct _BonoboItemContainerPrivate {
 	GHashTable *objects;
 };
-
-POA_Bonobo_ItemContainer__vepv bonobo_item_container_vepv;
-
-static CORBA_Object
-create_bonobo_item_container (BonoboObject *object)
-{
-	POA_Bonobo_ItemContainer *servant;
-	CORBA_Environment ev;
-	CORBA_Object o;
-
-	CORBA_exception_init (&ev);
-
-	servant = (POA_Bonobo_ItemContainer *) g_new0 (BonoboObjectServant, 1);
-	servant->vepv = &bonobo_item_container_vepv;
-
-	POA_Bonobo_ItemContainer__init ((PortableServer_Servant) servant, &ev);
-	if (BONOBO_EX (&ev)){
-		g_free (servant);
-		CORBA_exception_free (&ev);
-		return CORBA_OBJECT_NIL;
-	}
-
-	CORBA_free (PortableServer_POA_activate_object (
-		bonobo_poa (), servant, &ev));
-
-	o = PortableServer_POA_servant_to_reference (
-		bonobo_poa(), servant, &ev);
-
-	if (o) {
-		bonobo_object_bind_to_servant (object, servant);
-		CORBA_exception_free (&ev);
-		return o;
-	} else {
-		CORBA_exception_free (&ev);
-		return CORBA_OBJECT_NIL;
-	}
-}
 
 static gboolean
 remove_object (gpointer key,
@@ -96,7 +61,7 @@ bonobo_item_container_destroy (GtkObject *object)
 				     remove_object, NULL);
 	g_hash_table_destroy (container->priv->objects);
 	
-	GTK_OBJECT_CLASS (bonobo_item_container_parent_class)->destroy (object);
+	bonobo_item_container_parent_class->destroy (object);
 }
 
 static void
@@ -167,36 +132,6 @@ impl_Bonobo_ItemContainer_getObjectByName (PortableServer_Servant servant,
 	return ret;
 }
 
-/*
- * BonoboItemContainer CORBA vector-class initialization routine
- */
-
-/**
- * bonobo_item_container_get_epv:
- *
- * Returns: The EPV for the default BonoboItemContainer implementation.  
- */
-POA_Bonobo_ItemContainer__epv *
-bonobo_item_container_get_epv (void)
-{
-	POA_Bonobo_ItemContainer__epv *epv;
-
-	epv = g_new0 (POA_Bonobo_ItemContainer__epv, 1);
-
-	epv->enumObjects     = impl_Bonobo_ItemContainer_enumObjects;
-	epv->getObjectByName = impl_Bonobo_ItemContainer_getObjectByName;
-
-	return epv;
-}
-
-static void
-corba_container_class_init (void)
-{
-	/* Init the vepv */
-	bonobo_item_container_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
-	bonobo_item_container_vepv.Bonobo_ItemContainer_epv = bonobo_item_container_get_epv ();
-}
-
 typedef Bonobo_Unknown (*GnomeSignal_POINTER__POINTER_BOOL_POINTER) (
 	BonoboItemContainer *item_container,
 	CORBA_char *item_name,
@@ -220,15 +155,15 @@ gnome_marshal_POINTER__POINTER_BOOL_POINTER (GtkObject * object,
 				GTK_VALUE_POINTER (args[2]),
 				func_data);
 }
-/*
- * BonoboItemContainer class initialization routine
- */
-static void
-bonobo_item_container_class_init (BonoboItemContainerClass *container_class)
-{
-	GtkObjectClass *object_class = (GtkObjectClass *) container_class;
 
-	bonobo_item_container_parent_class = gtk_type_class (bonobo_object_get_type ());
+/* BonoboItemContainer class initialization routine  */
+static void
+bonobo_item_container_class_init (BonoboItemContainerClass *klass)
+{
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	POA_Bonobo_ItemContainer__epv *epv = &klass->epv;
+
+	bonobo_item_container_parent_class = gtk_type_class (PARENT_TYPE);
 
 	object_class->destroy = bonobo_item_container_destroy;
 
@@ -244,7 +179,8 @@ bonobo_item_container_class_init (BonoboItemContainerClass *container_class)
 			GTK_TYPE_POINTER, GTK_TYPE_BOOL, GTK_TYPE_POINTER);
 	gtk_object_class_add_signals (object_class, signals, LAST_SIGNAL);
 
-	corba_container_class_init ();
+	epv->enumObjects     = impl_Bonobo_ItemContainer_enumObjects;
+	epv->getObjectByName = impl_Bonobo_ItemContainer_getObjectByName;
 }
 
 /*
@@ -256,29 +192,6 @@ bonobo_item_container_init (BonoboItemContainer *container)
 	container->priv = g_new0 (BonoboItemContainerPrivate, 1);
 	container->priv->objects = g_hash_table_new (
 		g_str_hash, g_str_equal);
-}
-
-/**
- * bonobo_item_container_construct:
- * @container: The container object to construct
- * @corba_container: The CORBA object that implements Bonobo::ItemContainer
- *
- * Constructs the @container Gtk object using the provided CORBA
- * object.
- *
- * Returns: The constructed BonoboItemContainer object.
- */
-BonoboItemContainer *
-bonobo_item_container_construct (BonoboItemContainer  *container,
-				 Bonobo_ItemContainer corba_container)
-{
-	g_return_val_if_fail (container != NULL, NULL);
-	g_return_val_if_fail (corba_container != CORBA_OBJECT_NIL, NULL);
-	g_return_val_if_fail (BONOBO_IS_ITEM_CONTAINER (container), NULL);
-	
-	bonobo_object_construct (BONOBO_OBJECT (container), (CORBA_Object) corba_container);
-
-	return container;
 }
 
 /**
@@ -303,7 +216,11 @@ bonobo_item_container_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = bonobo_x_type_unique (
+			PARENT_TYPE,
+			POA_Bonobo_ItemContainer__init, NULL,
+			GTK_STRUCT_OFFSET (BonoboItemContainerClass, epv),
+			&info);
 	}
 
 	return type;
@@ -320,18 +237,7 @@ bonobo_item_container_get_type (void)
 BonoboItemContainer *
 bonobo_item_container_new (void)
 {
-	BonoboItemContainer *container;
-	Bonobo_ItemContainer corba_container;
-
-	container = gtk_type_new (bonobo_item_container_get_type ());
-	corba_container = create_bonobo_item_container (BONOBO_OBJECT (container));
-
-	if (corba_container == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (container));
-		return NULL;
-	}
-	
-	return bonobo_item_container_construct (container, corba_container);
+	return gtk_type_new (bonobo_item_container_get_type ());
 }
 
 /**
