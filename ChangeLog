@@ -1,5 +1,18 @@
 2001-05-02  Michael Meeks  <michael@ximian.com>
 
+	* Serious cruft cleaning - kill unused things.
+
+	* bonobo/bonobo-persist-stream.c (impl_get_size_max): kill.
+	(bonobo_persist_stream_class_init): kill.
+	(bonobo_persist_stream_size_unknown): kill.
+	(bonobo_persist_stream_new),
+	(bonobo_persist_stream_construct): upd.
+
+	* idl/Makefile.am: kill Bonobo/Advise,
+	Bonobo/ProgressiveDataSink, Bonobo/DesktopWindow
+
+2001-05-02  Michael Meeks  <michael@ximian.com>
+	
 	* bonobo/Makefile.am: remove bonobo-object-io.[ch],
 	bonobo-object-client.[ch]
 

@@ -30,10 +30,6 @@ typedef void  (*BonoboPersistStreamIOFn) (BonoboPersistStream         *ps,
 					  void                       *closure,
 					  CORBA_Environment          *ev);
 
-typedef CORBA_long (*BonoboPersistStreamMaxFn) (BonoboPersistStream *ps,
-						void                *closure,
-						CORBA_Environment   *ev);
-
 typedef Bonobo_Persist_ContentTypeList * (*BonoboPersistStreamTypesFn) (BonoboPersistStream *ps,
 									void                *closure,
 									CORBA_Environment   *ev);
@@ -49,7 +45,6 @@ struct _BonoboPersistStream {
 	 */
 	BonoboPersistStreamIOFn     save_fn;
 	BonoboPersistStreamIOFn     load_fn;
-	BonoboPersistStreamMaxFn    max_fn;
 	BonoboPersistStreamTypesFn  types_fn;
 	
 	void                       *closure;
@@ -71,27 +66,26 @@ typedef struct {
 				    Bonobo_Stream              stream,
 				    Bonobo_Persist_ContentType type,
 				    CORBA_Environment          *ev);
-	CORBA_long (*get_size_max) (BonoboPersistStream *ps,
-				    CORBA_Environment   *ev);
+
 	Bonobo_Persist_ContentTypeList * (*get_content_types) (BonoboPersistStream *ps,
 							       CORBA_Environment   *ev);
 
 } BonoboPersistStreamClass;
 
-GType              bonobo_persist_stream_get_type  (void);
+GType                bonobo_persist_stream_get_type  (void);
 void                 bonobo_persist_stream_set_dirty (BonoboPersistStream       *ps,
 						      gboolean                   dirty);
 
 BonoboPersistStream *bonobo_persist_stream_new       (BonoboPersistStreamIOFn    load_fn,
 						      BonoboPersistStreamIOFn    save_fn,
-						      BonoboPersistStreamMaxFn   max_fn,
+						      gpointer                   compat_dummy,
 						      BonoboPersistStreamTypesFn types_fn,
 						      void                      *closure);
 
 BonoboPersistStream *bonobo_persist_stream_construct (BonoboPersistStream       *ps,
 						      BonoboPersistStreamIOFn    load_fn,
 						      BonoboPersistStreamIOFn    save_fn,
-						      BonoboPersistStreamMaxFn   max_fn,
+						      gpointer                   compat_dummy,
 						      BonoboPersistStreamTypesFn types_fn,
 						      void                      *closure);
 

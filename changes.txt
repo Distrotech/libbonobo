@@ -44,12 +44,29 @@ bonobo-object-client.[ch]:
 bonobo-moniker-util.[ch]:
 	Removed bonobo_moniker_client_resolve_client_default: it used
 	BonoboObjectClient, use bonobo_moniker_client_resolve_default intead.
-	
+
+bonobo-progressive.[ch]:
+	Removed entirely - unused & stale.
 
 IDL:
 
 Bonobo_Storage.idl:
 	remove copyTo
+
+Bonobo_PersistStream:
+	remove getMaxSize: use the stream interface for this
+
+Bonobo_PersistStorage:
+	remove initNew: use the stream context for this.
+
+Bonobo_Embeddable:
+	remove advise, unadvise: use an aggregated EventSource instead.
+
+Removed:
+	Bonobo_Advise.idl:          unused,
+	Bonobo_ProgressiveDataSink: unused & stale
+	Bonobo_DesktopWindow:       deprecated
+	
 
 
 Insignificant:

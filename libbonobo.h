@@ -41,7 +41,6 @@ G_BEGIN_DECLS
 #include <bonobo/bonobo-persist-file.h>
 #include <bonobo/bonobo-persist-stream.h>
 
-#include <bonobo/bonobo-progressive.h>
 #include <bonobo/bonobo-storage.h>
 
 G_END_DECLS

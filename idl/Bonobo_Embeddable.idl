@@ -20,7 +20,6 @@
 #include "Bonobo_Control.idl"
 #include "Bonobo_Canvas.idl"
 #include "Bonobo_ClientSite.idl"
-#include "Bonobo_Advise.idl"
 
 module Bonobo {
 
@@ -97,25 +96,6 @@ interface Embeddable : Bonobo::Unknown {
 
 	void close (in CloseMode mode)
 		raises (UserCancelledSave);
-
-	/**
-	 * advise:
-	 * @advise: Where can the object inform of state changes
-	 *
-	 * Sets the object AdviseSink to @advise.  This is used
-	 * to allow the Object to notify its container of any state
-	 * changes like:
-	 * close, save, rename, lik source change events.
-	 */
-	void advise (in AdviseSink advise);
-
-	/**
-	 * unadvise:
-	 * 
-	 * Informs the object that the AdviseSink set with ::advise
-	 * is no longer valid
-	 */
-	void unadvise ();
 
 	/**
 	 * getMiscStatus:

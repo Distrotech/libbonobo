@@ -130,17 +130,6 @@ module Bonobo {
 		void save (in Bonobo::Storage storage,
 			   in boolean same_as_loaded)
 			raises (IOError, NotSupported);
-	
-		/**
-		 * initNew: - Deprecated
-		 * @storage: A storage that is provided for this object
-		 *
-		 * Deprecated.
-		 * BonoboObjects do have access to a valid storage through
-		 * their entire life.  This is a chance given to initialize such 
-		 * storage and keep it around (users should addref it).
-		 */
-		void initNew (in Bonobo::Storage storage);
 	};
 	
 	/*
@@ -183,16 +172,6 @@ module Bonobo {
 		void save (in Bonobo::Stream stream, in ContentType type)
 			raises (IOError, NotSupported,
 				WrongDataType);
-
-		/**
-		 * getMaxSize:
-		 *
-		 * Should return the number of bytes requested to save
-		 * this object, or -1 if it is not known.
-		 *
-		 * Deprecated - this information should be on the stream.
-		 */
-		long getMaxSize ();
 	};
 
 };

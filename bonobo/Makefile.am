@@ -30,8 +30,6 @@ CORBA_SOURCE =			\
 
 idls =							\
 	$(top_srcdir)/idl/Bonobo.idl			\
-	$(top_srcdir)/idl/Bonobo_Advise.idl		\
-	$(top_srcdir)/idl/Bonobo_Desktop.idl		\
 	$(top_srcdir)/idl/Bonobo_Canvas.idl		\
 	$(top_srcdir)/idl/Bonobo_ClientSite.idl		\
 	$(top_srcdir)/idl/Bonobo_Context.idl		\
@@ -43,7 +41,6 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_Moniker.idl		\
 	$(top_srcdir)/idl/Bonobo_Persist.idl		\
 	$(top_srcdir)/idl/Bonobo_Print.idl		\
-	$(top_srcdir)/idl/Bonobo_Progressive.idl	\
 	$(top_srcdir)/idl/Bonobo_Property.idl		\
 	$(top_srcdir)/idl/Bonobo_Storage.idl		\
 	$(top_srcdir)/idl/Bonobo_UI.idl			\
@@ -86,7 +83,6 @@ libbonoboinclude_HEADERS =		\
 	bonobo-persist-file.h		\
 	bonobo-persist-stream.h		\
 	bonobo-persist.h		\
-	bonobo-progressive.h		\
 	bonobo-property-bag-client.h	\
 	bonobo-property-bag.h		\
 	bonobo-property.h		\
@@ -129,7 +125,6 @@ libbonobo_src =				\
 	bonobo-persist-file.c		\
 	bonobo-persist-stream.c		\
 	bonobo-persist.c		\
-	bonobo-progressive.c		\
 	bonobo-shlib-factory.c		\
 	bonobo-storage-plugin.c		\
 	bonobo-storage.c		\

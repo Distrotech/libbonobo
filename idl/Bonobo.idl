@@ -23,9 +23,6 @@
 /* Storage stuff. */
 #include <Bonobo_Storage.idl>
 #include <Bonobo_Persist.idl>
-#include <Bonobo_Progressive.idl>
-
-#include <Bonobo_Advise.idl>
 
 /* Control stuff. */
 #include <Bonobo_Listener.idl>
@@ -45,9 +42,6 @@
 
 /* Printing stuff */
 #include <Bonobo_Print.idl>
-
-/* Misc. stuff. */
-#include <Bonobo_Desktop.idl>
 
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop

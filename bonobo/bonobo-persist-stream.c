@@ -78,28 +78,6 @@ impl_save (PortableServer_Servant servant,
 	ps->is_dirty = FALSE;
 }
 
-static CORBA_long
-impl_get_size_max (PortableServer_Servant servant, CORBA_Environment * ev)
-{
-	BonoboObject *object = bonobo_object_from_servant (servant);
-	BonoboPersistStream *ps = BONOBO_PERSIST_STREAM (object);
-	GObjectClass *oc = G_OBJECT_GET_CLASS (object);
-	BonoboPersistStreamClass *class = BONOBO_PERSIST_STREAM_CLASS (oc);
-
-
-	if (ps->max_fn != NULL)
-		return (*ps->max_fn)(ps, ps->closure, ev);
-
-	return (*class->get_size_max)(BONOBO_PERSIST_STREAM (object), ev);
-}
-
-static CORBA_long
-bonobo_persist_stream_size_unknown (BonoboPersistStream *ps,
-				    CORBA_Environment *ev)
-{
-	return -1;
-}
-
 static Bonobo_Persist_ContentTypeList *
 get_content_types (BonoboPersist *persist, CORBA_Environment *ev)
 {
@@ -122,13 +100,11 @@ bonobo_persist_stream_class_init (BonoboPersistStreamClass *klass)
 	/* Override and initialize methods */
 	klass->save = NULL;
 	klass->load = NULL;
-	klass->get_size_max = bonobo_persist_stream_size_unknown;
 
 	persist_class->get_content_types = get_content_types;
 
 	epv->load       = impl_load;
 	epv->save       = impl_save;
-	epv->getMaxSize = impl_get_size_max;
 	epv->isDirty    = impl_is_dirty;
 }
 
@@ -148,6 +124,8 @@ BONOBO_TYPE_FUNC_FULL (BonoboPersistStream,
  * @ps: A BonoboPersistStream object
  * @load_fn: Loading routine
  * @save_fn: Saving routine
+ * @compat_dummy: unused, NULL
+ * @types_fn: returns the supported types
  * @closure: Data passed to IO routines.
  *
  * Initializes the BonoboPersistStream object.  The load and save
@@ -163,7 +141,7 @@ BonoboPersistStream *
 bonobo_persist_stream_construct (BonoboPersistStream       *ps,
 				 BonoboPersistStreamIOFn    load_fn,
 				 BonoboPersistStreamIOFn    save_fn,
-				 BonoboPersistStreamMaxFn   max_fn,
+				 gpointer                   compat_dummy,
 				 BonoboPersistStreamTypesFn types_fn,
 				 void                      *closure)
 {
@@ -172,7 +150,6 @@ bonobo_persist_stream_construct (BonoboPersistStream       *ps,
 
 	ps->load_fn = load_fn;
 	ps->save_fn = save_fn;
-	ps->max_fn = max_fn;
 	ps->types_fn = types_fn;
 	ps->closure = closure;
 	
@@ -183,7 +160,7 @@ bonobo_persist_stream_construct (BonoboPersistStream       *ps,
  * bonobo_persist_stream_new:
  * @load_fn: Loading routine
  * @save_fn: Saving routine
- * @max_fn: get_max_size routine
+ * @compat_dummy: unused, NULL
  * @types_fn: get_content_types routine
  * @closure: Data passed to IO routines.
  *
@@ -198,7 +175,7 @@ bonobo_persist_stream_construct (BonoboPersistStream       *ps,
 BonoboPersistStream *
 bonobo_persist_stream_new (BonoboPersistStreamIOFn    load_fn,
 			   BonoboPersistStreamIOFn    save_fn,
-			   BonoboPersistStreamMaxFn   max_fn,
+			   gpointer                   compat_dummy,
 			   BonoboPersistStreamTypesFn types_fn,
 			   void                      *closure)
 {
@@ -207,7 +184,7 @@ bonobo_persist_stream_new (BonoboPersistStreamIOFn    load_fn,
 	ps = g_object_new (bonobo_persist_stream_get_type (), NULL);
 
 	bonobo_persist_stream_construct (ps, load_fn, save_fn,
-					 max_fn, types_fn, closure);
+					 compat_dummy, types_fn, closure);
 
 	return ps;
 }
