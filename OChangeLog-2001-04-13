@@ -1,3 +1,19 @@
+2000-10-09  Martin Baulig  <baulig@suse.de>
+
+	Added support for controls to gshell.
+
+	* gshell/controls.[ch]: New file.
+	(gshell_control_wraper): This function wraps a BonoboEmbeddable around
+	a BonoboControl.
+
+	* gshell/gshell.c (buffer_create_for_control): New function.
+	(verb_FileKill_cb): Call update_buffer_menu() after deleting the buffer.
+
+	* gshell/inout.c (verb_LaunchComponent_cb): Split this into
+	verb_LaunchControl_cb() and verb_LaunchEmbeddable_cb().
+
+	* gshell/ui.xml: Did the cmd/widget thingie.
+
 2000-10-09  Mathieu Lacage  <mathieu@eazel.com>
 
 	* bonobo/bonobo-ui-util.c: (bonobo_ui_util_xml_get_icon_pixbuf):
