@@ -69,7 +69,7 @@ orb_remove_connection(GIOPConnection *cnx)
 #endif /* !ORBIT_USES_GLIB_MAIN_LOOP */
 
 
-static CORBA_ORB oaf_orb;
+static CORBA_ORB oaf_orb = CORBA_OBJECT_NIL;
 static CORBA_Context oaf_context;
 static gboolean is_initialized = FALSE;
 
