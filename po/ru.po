@@ -1,233 +1,234 @@
 # Copyright (C) 2001-2002 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2001-2002.
+# Dmitry Mastrukov <dmitry@taurussoft.ru>, 2002
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2002-03-15 13:48+0300\n"
-"Last-Translator: Valek Filippov <frob@df.ru>\n"
+"Last-Translator: Dmitry Mastrukov <dmitry@taurussoft.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
-msgstr "Попытка выполнить неподдерживаемое действие"
+msgstr "п÷п╬п©я▀я┌п╨п╟ п╡я▀п©п╬п╩п╫п╦я┌я▄ п╫п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪п╬п╣ п╢п╣п╧я│я┌п╡п╦п╣"
 
 #: bonobo/bonobo-exception.c:157
 msgid "IO Error"
-msgstr "Ошибка ввода-вывода"
+msgstr "п·я┬п╦п╠п╨п╟ п╡п╡п╬п╢п╟-п╡я▀п╡п╬п╢п╟"
 
 #: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "Недопустимое значение аргумента"
+msgstr "п²п╣п╢п╬п©я┐я│я┌п╦п╪п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╟я─пЁя┐п╪п╣п╫я┌п╟"
 
 #: bonobo/bonobo-exception.c:164
 msgid "Object not found"
-msgstr "Объект не найден"
+msgstr "п·п╠я┼п╣п╨я┌ п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
-msgstr "Синтаксическая ошибка в описании объекта"
+msgstr "п║п╦п╫я┌п╟п╨я│п╦я┤п╣я│п╨п╟я▐ п╬я┬п╦п╠п╨п╟ п╡ п╬п©п╦я│п╟п╫п╦п╦ п╬п╠я┼п╣п╨я┌п╟"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Невозможно активировать объект из фабрики"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╟п╨я┌п╦п╡п╦я─п╬п╡п╟я┌я▄ п╬п╠я┼п╣п╨я┌ п╦п╥ я└п╟п╠я─п╦п╨п╦"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "Нет прав на доступ к потоку"
+msgstr "п²п╣я┌ п©я─п╟п╡ п╫п╟ п╢п╬я│я┌я┐п© п╨ п©п╬я┌п╬п╨я┐"
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "Попытка выполнить неподдерживаемое действие потока"
+msgstr "п÷п╬п©я▀я┌п╨п╟ п╡я▀п©п╬п╩п╫п╦я┌я▄ п╫п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪п╬п╣ п╢п╣п╧я│я┌п╡п╦п╣ п©п╬я┌п╬п╨п╟"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "Ошибка ввода-вывода в потоке"
+msgstr "п·я┬п╦п╠п╨п╟ п╡п╡п╬п╢п╟-п╡я▀п╡п╬п╢п╟ п╡ п©п╬я┌п╬п╨п╣"
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "Ошибка ввода-вывода в хранилище"
+msgstr "п·я┬п╦п╠п╨п╟ п╡п╡п╬п╢п╟-п╡я▀п╡п╬п╢п╟ п╡ я┘я─п╟п╫п╦п╩п╦я┴п╣"
 
 #: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr "Название уже существует в хранилище"
+msgstr "п²п╟п╥п╡п╟п╫п╦п╣ я┐п╤п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌ п╡ я┘я─п╟п╫п╦п╩п╦я┴п╣"
 
 #: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr "Объект в хранилище не найден"
+msgstr "п·п╠я┼п╣п╨я┌ п╡ я┘я─п╟п╫п╦п╩п╦я┴п╣ п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "Нет прав для выполнения действий c хранилищем"
+msgstr "п²п╣я┌ п©я─п╟п╡ п╢п╩я▐ п╡я▀п©п╬п╩п╫п╣п╫п╦я▐ п╢п╣п╧я│я┌п╡п╦п╧ c я┘я─п╟п╫п╦п╩п╦я┴п╣п╪"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr "Попытка выполнить неподдерживаемое действие с хранилищем"
+msgstr "п÷п╬п©я▀я┌п╨п╟ п╡я▀п©п╬п╩п╫п╦я┌я▄ п╫п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪п╬п╣ п╢п╣п╧я│я┌п╡п╦п╣ я│ я┘я─п╟п╫п╦п╩п╦я┴п╣п╪"
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr "Объект не является потоком"
+msgstr "п·п╠я┼п╣п╨я┌ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©п╬я┌п╬п╨п╬п╪"
 
 #: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr "Объект не является хранилищем"
+msgstr "п·п╠я┼п╣п╨я┌ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я┘я─п╟п╫п╦п╩п╦я┴п╣п╪"
 
 #: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr "Хранилище не пусто"
+msgstr "п╔я─п╟п╫п╦п╩п╦я┴п╣ п╫п╣ п©я┐я│я┌п╬"
 
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "неправильное XML-описание пользовательского интерфейса"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ XML-п╬п©п╦я│п╟п╫п╦п╣ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬пЁп╬ п╦п╫я┌п╣я─я└п╣п╧я│п╟"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "недопустимый путь к XML-элементу пользовательского интерфейса"
+msgstr "п╫п╣п╢п╬п©я┐я│я┌п╦п╪я▀п╧ п©я┐я┌я▄ п╨ XML-я█п╩п╣п╪п╣п╫я┌я┐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬пЁп╬ п╦п╫я┌п╣я─я└п╣п╧я│п╟"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr "Запрошенный атрибут интерфейса пользователя не существовал"
+msgstr "п╥п╟п©я─п╬я┬п╣п╫п╫я▀п╧ п╟я┌я─п╦п╠я┐я┌ п╦п╫я┌п╣я─я└п╣п╧я│п╟ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ п╫п╣ я│я┐я┴п╣я│я┌п╡п╬п╡п╟п╩"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "Неизвестная команда или действие"
+msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ п╨п╬п╪п╟п╫п╢п╟ п╦п╩п╦ п╢п╣п╧я│я┌п╡п╦п╣"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "Бессмысленная команда"
+msgstr "п▒п╣я│я│п╪я▀я│п╩п╣п╫п╫п╟я▐ п╨п╬п╪п╟п╫п╢п╟"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
-msgstr "неправильный тип данных"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╦п© п╢п╟п╫п╫я▀я┘"
 
 #: bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr "поток не найден"
+msgstr "п©п╬я┌п╬п╨ п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
-msgstr "свойство не найдено"
+msgstr "я│п╡п╬п╧я│я┌п╡п╬ п╫п╣ п╫п╟п╧п╢п╣п╫п╬"
 
 #: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr "свойство имеет недопустимый тип"
+msgstr "я│п╡п╬п╧я│я┌п╡п╬ п╦п╪п╣п╣я┌ п╫п╣п╢п╬п©я┐я│я┌п╦п╪я▀п╧ я┌п╦п©"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr "свойство только для чтения"
+msgstr "я│п╡п╬п╧я│я┌п╡п╬ я┌п╬п╩я▄п╨п╬ п╢п╩я▐ я┤я┌п╣п╫п╦я▐"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr ""
+msgstr "я│п╠п╬п╧ п╡ п╪п╬п╢я┐п╩п╣ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫п╬п╧ п╠п╟п╥я▀ п╢п╟п╫п╫я▀я┘"
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Не удалось найти интерфейс моникера"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╫п╟п╧я┌п╦ п╦п╫я┌п╣я─я└п╣п╧я│ п╪п╬п╫п╦п╨п╣я─п╟"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr "Превышение времени ожидания активации моникера"
+msgstr "п÷я─п╣п╡я▀я┬п╣п╫п╦п╣ п╡я─п╣п╪п╣п╫п╦ п╬п╤п╦п╢п╟п╫п╦я▐ п╟п╨я┌п╦п╡п╟я├п╦п╦ п╪п╬п╫п╦п╨п╣я─п╟"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr "Синтаксическая ошибка в моникере"
+msgstr "п║п╦п╫я┌п╟п╨я│п╦я┤п╣я│п╨п╟я▐ п╬я┬п╦п╠п╨п╟ п╡ п╪п╬п╫п╦п╨п╣я─п╣"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "Моникер имеет неизвестный префикс"
+msgstr "п°п╬п╫п╦п╨п╣я─ п╦п╪п╣п╣я┌ п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ п©я─п╣я└п╦п╨я│"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "Ошибка проверки ошибок; нет исключения"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╬п╡п╣я─п╨п╦ п╬я┬п╦п╠п╬п╨; п╫п╣я┌ п╦я│п╨п╩я▌я┤п╣п╫п╦я▐"
 
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr "Общая ошибка активирования без описания"
+msgstr "п·п╠я┴п╟я▐ п╬я┬п╦п╠п╨п╟ п╟п╨я┌п╦п╡п╦я─п╬п╡п╟п╫п╦я▐ п╠п╣п╥ п╬п©п╦я│п╟п╫п╦я▐"
 
 #: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
-msgstr "Не удалось инициализировать Bonobo"
+msgstr "п²п╣ я┐п╢п╟п╩п╬я│я▄ п╦п╫п╦я├п╦п╟п╩п╦п╥п╦я─п╬п╡п╟я┌я▄ Bonobo"
 
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "Не удалось разрешить или расширить \"%s\""
+msgstr "п║п╠п╬п╧ п©я─п╦ я─п╟п╥я─п╣я┬п╣п╫п╦п╦ п╦п╩п╦ я─п╟я│я┬п╦я─п╣п╫п╦п╦ \"%s\""
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr "Сбой при активации объекта"
+msgstr "п║п╠п╬п╧ п©я─п╦ п╟п╨я┌п╦п╡п╟я├п╦п╦ п╬п╠я┼п╣п╨я┌п╟"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr "Моникер HTTP"
+msgstr "п°п╬п╫п╦п╨п╣я─ HTTP"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr "Моникер обработки ORB IOR"
+msgstr "п°п╬п╫п╦п╨п╣я─ п╬п╠я─п╟п╠п╬я┌п╨п╦ ORB IOR"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "Фабрика стандартного моникера"
+msgstr "п╓п╟п╠я─п╦п╨п╟ я│я┌п╟п╫п╢п╟я─я┌п╫п╬пЁп╬ п╪п╬п╫п╦п╨п╣я─п╟"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr "обычный моникер активации Oaf"
+msgstr "п╬п╠я┴п╦п╧ п╪п╬п╫п╦п╨п╣я─ п╟п╨я┌п╦п╡п╟я├п╦п╦ Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr "обычный моникер запроса Oaf"
+msgstr "п╬п╠я┴п╦п╧ п╪п╬п╫п╦п╨п╣я─ п╥п╟п©я─п╬я│п╟ Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "п╬п╠я┴п╦п╧ п╪п╬п╫п╦п╨п╣я─ \"new\" я└п╟п╠я─п╦п╨п╦"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr "моникер обычного элемента"
+msgstr "п╬п╠я┴п╦п╧ п╪п╬п╫п╦п╨п╣я─ я█п╩п╣п╪п╣п╫я┌п╟"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "п©п╬я┌п╬п╨п╬п╡я▀п╧ MonikerExtender"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
 msgid "Exception activating '%s"
-msgstr "Вызов исключения \"%s\""
+msgstr "п▓я▀п╥п╬п╡ п╦я│п╨п╩я▌я┤п╣п╫п╦я▐ \"%s\""
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
 msgid "Failed to activate '%s"
-msgstr "Сбой при активации \"%s\""
+msgstr "п║п╠п╬п╧ п©я─п╦ п╟п╨я┌п╦п╡п╟я├п╦п╦ \"%s\""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "Фабрика эхо-сервера Bonobo"
+msgstr "п╓п╟п╠я─п╦п╨п╟ я█я┘п╬-я│п╣я─п╡п╣я─п╟ Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "Образец программы эхо-сервера Bonobo"
+msgstr "п·п╠я─п╟п╥п╣я├ п©я─п╬пЁя─п╟п╪п╪я▀ я█я┘п╬-я│п╣я─п╡п╣я─п╟ Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr "Компонент Эхо"
+msgstr "п п╬п╪п©п╬п╫п╣п╫я┌ п╜я┘п╬"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr "Фабрика компонента Эхо"
+msgstr "п╓п╟п╠я─п╦п╨п╟ п╨п╬п╪п©п╬п╫п╣п╫я┌п╟ п╜я┘п╬"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr "Не удалось инициализировать Bonobo"
+msgstr "п²п╣ я┐п╢п╟п╩п╬я│я▄ п╦п╫п╦я├п╦п╟п╩п╦п╥п╦я─п╬п╡п╟я┌я▄ Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "Не удалось создать экземпляр образца компонента эхо"
+msgstr "п²п╣ я┐п╢п╟п╩п╬я│я▄ я│п╬п╥п╢п╟я┌я▄ я█п╨п╥п╣п╪п©п╩я▐я─ п╬п╠я─п╟п╥я├п╟ п╨п╬п╪п©п╬п╫п╣п╫я┌п╟ я█я┘п╬"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr "Возникло исключение \"%s\""
+msgstr "п▓п╬п╥п╫п╦п╨п╩п╬ п╦я│п╨п╩я▌я┤п╣п╫п╦п╣ \"%s\""
