@@ -81,7 +81,7 @@ module GNOME {
 		/**
 		 * eos:
 		 *
-		 * End of Stream
+		 * End of Stream?
 		 */
 
 		boolean eos ();

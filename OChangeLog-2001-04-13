@@ -1,3 +1,11 @@
+1999-05-18  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* idl/gnome-storage.idl (interface Stream):
+ 	added new functions close, eos, length. seek now returns the 
+	current position.
+	* idl/gnome-storage.idl (interface Storage):
+	renamed destory to delete 
+	
 1999-05-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* idl/gnome-object.idl, idl/*.idl: Renamed GNOME::object to
