@@ -1,3 +1,18 @@
+1999-08-23  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-ui-handler.c (toolbar_remote_create_item): remove
+	redundant GNOME_UIHandler uih_corba.
+	(gnome_ui_handler_toolbar_add_one): remove in call.
+	(toolbar_uiinfo_type_to_uih): added.
+	(toolbar_local_remove_parent_entry, toolbar_local_add_parent_entry): 
+	Add failure cases snarfed from menus.
+	(toolbar_toplevel_item_remove_parent_entry): add failure return.
+	(toolbar_toplevel_item_add_parent_entry): add null internal return.
+	(toolbar_toplevel_item_create_widgets): add preconditions.
+
+	* bonobo/gnome-ui-hander.c: Make toolbar API more similar to menu API
+	( removed probably redundant GnomeUIHandlerToolbar argument ).
+
 1999-08-23  Elliot Lee  <sopwith@redhat.com>
 	* bonobo/gnome-bonobo-selector.c: Fix this aweful, ugly, totally messed up hack
 	of a bonobo component directory to build with gcc 2.95.
