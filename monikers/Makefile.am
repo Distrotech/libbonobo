@@ -25,3 +25,5 @@ std_moniker_SOURCES =			\
 std_moniker_LDADD =				\
 	$(top_builddir)/bonobo/libbonobo.la	\
 	$(BONOBOX_TEST_LIBS)
+
+EXTRA_DIST=std-moniker.oafinfo
