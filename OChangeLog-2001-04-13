@@ -1,3 +1,35 @@
+1999-07-05  Elliot Lee <sopwith@redhat.com>
+
+	* bonobo/gnome-component-factory.c
+	(impl_GNOME_ComponentFactory_create_object): Use
+	gnome_unknown_corba_objref here.  
+
+	Make the code CORBA_Object_duplicate return values from
+	implementation functions.
+	
+	* bonobo/gnome-unknown.h: Revamped the query interface mechanism
+
+	* bonobo/gnome-view-frame.c (impl_GNOME_ViewFrame_get_client_site): ditto.
+
+	* bonobo/gnome-storage.c (impl_create_stream): ditto.
+	(impl_open_stream): ditto.
+	(impl_create_storage): ditto.
+	(impl_open_storage): ditto.
+
+	* bonobo/gnome-object-client.c (gnome_unknown_client_destroy): ditto.
+
+	* bonobo/gnome-bonobo-object.c (impl_GNOME_BonoboObject_new_view): ditto.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_bind_bonobo_object): ditto.
+	(impl_GNOME_client_site_get_moniker): ditto.
+	(impl_GNOME_client_site_get_container): ditto.
+
+	* bonobo/gnome-component-client.c
+	(gnome_bonobo_object_client_new_view): ditto.
+	(gnome_bonobo_object_client_get_verbs): ditto.
+	(gnome_view_client_do_verb): ditto.
+
+
 1999-07-06  Elliot Lee  <sopwith@redhat.com>
 
 	* configure.in: s/gnome-object/gnome-unknown/

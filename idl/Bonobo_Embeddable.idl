@@ -67,6 +67,13 @@ interface View : GNOME::Unknown {
 	 */
 	void do_verb (in string verb_name);
 
+	/**
+	 * set_zoom_factor:
+	 * @zoom: zoom factor
+	 *
+	 * Requests that the view be running at zoom factor
+	 */
+	void set_zoom_factor (in double zoom);
 };
 
 interface ViewFrame : GNOME::Unknown {

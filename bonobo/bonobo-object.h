@@ -23,29 +23,38 @@ typedef struct {
 	gpointer gnome_unknown;
 } GnomeUnknownServant;
 
+typedef struct _GnomeAggregateObject GnomeAggregateObject;
+
 typedef struct {
 	GtkObject base;
 
-	CORBA_Object object;
-	CORBA_Environment ev;
-	gpointer servant;
+	CORBA_Object          corba_objref;
+	CORBA_Environment     ev;
+	gpointer              servant;
+	GnomeAggregateObject *ao;
 } GnomeUnknown;
 
 typedef struct {
 	GtkObjectClass parent_class;
-	void  (*test)(GnomeUnknown *object);
+	void  (*query_interface)(GnomeUnknown *object, const char *repo_id, CORBA_Object *retval);
 } GnomeUnknownClass;
 
 GtkType      gnome_unknown_get_type         (void);
-GnomeUnknown *gnome_unknown_construct        (GnomeUnknown *object,
-					    CORBA_Object corba_object);
+GnomeUnknown *gnome_unknown_construct       (GnomeUnknown *object,
+					     CORBA_Object corba_object);
 
-GnomeUnknown *gnome_unknown_from_servant     (PortableServer_Servant servant);
+GnomeUnknown *gnome_unknown_from_servant    (PortableServer_Servant servant);
 void         gnome_unknown_bind_to_servant  (GnomeUnknown *object,
-					    void *servant);
+					     void *servant);
 
 CORBA_Object gnome_unknown_activate_servant (GnomeUnknown *object,
-					    void *servant);
+					     void *servant);
+
+void         gnome_unknown_add_interface    (GnomeUnknown *object,
+					     GnomeUnknown *newobj);
+CORBA_Object gnome_unknown_query_interfac   (GnomeUnknown *object,
+					     const char *repo_id);
+CORBA_Object gnome_unknown_corba_objref     (GnomeUnknown *object);
 
 /* CORBA default vector methods we provide */
 extern PortableServer_ServantBase__epv gnome_unknown_base_epv;

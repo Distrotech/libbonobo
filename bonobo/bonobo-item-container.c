@@ -99,7 +99,6 @@ gnome_container_construct (GnomeContainer  *container,
 	g_return_val_if_fail (corba_container != CORBA_OBJECT_NIL, NULL);
 	
 	gnome_unknown_construct (GNOME_UNKNOWN (container), (CORBA_Object) corba_container);
-	GNOME_UNKNOWN (container)->object = corba_container;
 
 	return GNOME_UNKNOWN (container);
 }

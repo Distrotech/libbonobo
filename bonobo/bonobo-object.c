@@ -11,10 +11,13 @@
 #include <bonobo/gnome-main.h>
 #include <bonobo/gnome-unknown.h>
 #include "bonobo.h"
-#include "gtk-interfaces.h"
+
+struct _GnomeAggregateObject {
+	GList *objs;
+};
 
 enum {
-	TEST,
+	QUERY_INTERFACE,
 	LAST_SIGNAL
 };
 
@@ -98,34 +101,34 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 				const CORBA_char *repoid,
 				CORBA_Environment *ev)
 {
-	CORBA_Object retval;
+	CORBA_Object retval = CORBA_OBJECT_NIL;
 	GnomeUnknown *object;
 	GtkType type;
-	GtkObject *interface;
+	GList *l;
 	
 	object = gnome_unknown_from_servant (servant);
 
 	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
 
-	type = gtk_type_from_name (repoid);
+	gtk_signal_emit (
+		GTK_OBJECT (object), gnome_unknown_signals [QUERY_INTERFACE],
+		repoid, &retval);
 
-	/*
-	 * Type has not been registered
-	 */
-	if (type == 0)
-		return CORBA_OBJECT_NIL;
-
-	interface = gtk_object_query_interface (GTK_OBJECT (object), type);
-	if (!interface)
-		return CORBA_OBJECT_NIL;
-	
-	if (GNOME_IS_UNKNOWN (interface)){
-		GnomeUnknown *io = GNOME_UNKNOWN (interface);
+	if (CORBA_Object_is_nil (retval, ev)){
+		type = gtk_type_from_name (repoid);
 		
-		gtk_object_ref (interface);
-		return CORBA_Object_duplicate (io->object, &io->ev);
+		/* Try looking at the gtk types */
+		for (l = object->ao->objs; l; l = l->next){
+                       GnomeUnknown *tryme = l->data;
+
+                       if ((type && gtk_type_is_a(GTK_OBJECT(tryme)->klass->type, type)) ||
+			   !strcmp(tryme->corba_objref->object_id, repoid)){
+                               retval = CORBA_Object_duplicate (tryme->corba_objref, ev);
+                               break;
+                       }
+               }
 	}
-	return CORBA_OBJECT_NIL;
+	return retval;
 }
 
 PortableServer_ServantBase__epv gnome_unknown_base_epv =
@@ -149,22 +152,22 @@ POA_GNOME_Unknown__vepv gnome_unknown_vepv = {
 };
 
 static void
-default_test (GnomeUnknown *object)
-{
-}
-
-static void
 gnome_unknown_destroy (GtkObject *object)
 {
 	GnomeUnknown *gnome_unknown = GNOME_UNKNOWN (object);
 	void *servant = gnome_unknown->servant;
 	
-	if (gnome_unknown->object != CORBA_OBJECT_NIL){
+	if (gnome_unknown->corba_objref != CORBA_OBJECT_NIL){
+		CORBA_Object_release (gnome_unknown->corba_objref, &gnome_unknown->ev);
 		PortableServer_POA_deactivate_object (
 			bonobo_poa (), servant, &gnome_unknown->ev);
-		CORBA_Object_release (gnome_unknown->object, &gnome_unknown->ev);
 	}
 	CORBA_exception_free (&gnome_unknown->ev);
+
+	gnome_unknown->ao->objs = g_list_remove (gnome_unknown->ao->objs, object);
+	if (!gnome_unknown->ao->objs)
+		g_free (gnome_unknown->ao);
+	
 	gnome_unknown_parent_class->destroy (object);
 }
 
@@ -175,18 +178,16 @@ gnome_unknown_class_init (GnomeUnknownClass *class)
 
 	gnome_unknown_parent_class = gtk_type_class (gtk_object_get_type ());
 
-	gnome_unknown_signals [TEST] =
-		gtk_signal_new ("test",
+	gnome_unknown_signals [QUERY_INTERFACE] =
+		gtk_signal_new ("query_interface",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeUnknownClass,test), 
-				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0); 
+				GTK_SIGNAL_OFFSET(GnomeUnknownClass,query_interface), 
+				gtk_marshal_NONE__POINTER_POINTER,
+				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER); 
 	gtk_object_class_add_signals (object_class, gnome_unknown_signals, LAST_SIGNAL);
 
 	object_class->destroy = gnome_unknown_destroy;
-	
-	class->test = default_test;
 }
 
 static void
@@ -195,6 +196,8 @@ gnome_unknown_instance_init (GtkObject *gtk_object)
 	GnomeUnknown *object = GNOME_UNKNOWN (gtk_object);
 	
 	CORBA_exception_init (&object->ev);
+	object->ao = g_new0 (GnomeAggregateObject, 1);
+	object->ao->objs = g_list_append (object->ao->objs, object);
 }
 
 /**
@@ -268,6 +271,7 @@ gnome_unknown_activate_servant (GnomeUnknown *object, void *servant)
  * construct method for other Gtk-based CORBA wrappers that derive
  * from the GNOME::obj interface
  *
+ *
  * This returns a constructed GnomeUnknown. 
  *
  */
@@ -278,11 +282,55 @@ gnome_unknown_construct (GnomeUnknown *object, CORBA_Object corba_object)
 	g_return_val_if_fail (GNOME_IS_UNKNOWN (object), NULL);
 	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 
-	object->object = CORBA_Object_duplicate (corba_object, &object->ev);
+	
+/* * This routine assumes ownership of the corba_object that is passed in. */
+	object->corba_objref = CORBA_Object_duplicate (corba_object, &object->ev);
 
 	return object;
 }
 
+void
+gnome_unknown_add_interface (GnomeUnknown *object, GnomeUnknown *newobj)
+{
+       GnomeAggregateObject *oldao;
+       GList *l;
 
+        if (object->ao == newobj->ao)
+               return;
 
+       oldao = newobj->ao;
 
+       /* Merge the two AggregateObject lists */
+       for (l = newobj->ao->objs; l; l = l->next){
+               if (!g_list_find (object->ao->objs, l->data)){
+                       object->ao->objs = g_list_prepend (object->ao->objs, l->data);
+                       ((GnomeUnknown *)l->data)->ao = object->ao;
+               }
+       }
+
+       g_list_free (oldao->objs);
+       g_free (oldao);
+}
+
+CORBA_Object
+gnome_unknown_query_interface (GnomeUnknown *object, const char *repo_id)
+{
+       CORBA_Environment ev;
+       CORBA_Object retval;
+
+       CORBA_exception_init(&ev);
+       retval = GNOME_Unknown_query_interface (object->corba_objref, (CORBA_char *)repo_id, &ev);
+       if(ev._major != CORBA_NO_EXCEPTION)
+               retval = CORBA_OBJECT_NIL;
+       CORBA_exception_free (&ev);
+       return retval;
+}
+
+CORBA_Object
+gnome_unknown_corba_objref (GnomeUnknown *object)
+{
+	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (GNOME_IS_UNKNOWN (object), NULL);
+	
+	return object->corba_objref;
+}

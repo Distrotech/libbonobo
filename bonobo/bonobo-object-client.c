@@ -1,11 +1,11 @@
 /*
- * gnome-object-client.c:
+ * gnome-unknown-client.c:
  *   This handles the client-view of a remote GNOME object.
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  */
-#include <bonobo/gnome-object-client.h>
+#include <bonobo/gnome-unknown-client.h>
 
 static GnomeUnknownClass *gnome_unknown_client_parent_class;
 
@@ -23,7 +23,7 @@ gnome_unknown_client_construct (GnomeUnknownClient *object_client, CORBA_Object 
 	g_return_val_if_fail (GNOME_IS_UNKNOWN_CLIENT (object_client), NULL);
 	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 	
-	GNOME_UNKNOWN (object_client)->object = corba_object;
+	GNOME_UNKNOWN (object_client)->corba_objref = corba_object;
 
 	return object_client;
 }
@@ -98,7 +98,7 @@ gnome_unknown_client_destroy (GtkObject *object)
 	GnomeUnknown *gnome_unknown = GNOME_UNKNOWN (object);
 	GnomeUnknownClient *gnome_unknown_client = GNOME_UNKNOWN_CLIENT (object);
 
-	GNOME_Unknown_unref (gnome_unknown->object, &gnome_unknown->ev);
+	GNOME_Unknown_unref (gnome_unknown_corba_objref (gnome_unknown), &gnome_unknown->ev);
 	GTK_OBJECT_CLASS (gnome_unknown_client_parent_class)->destroy (object);
 }
 

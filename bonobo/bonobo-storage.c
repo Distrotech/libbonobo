@@ -28,9 +28,10 @@ impl_create_stream (PortableServer_Servant servant, const CORBA_char *path, CORB
 	GnomeStream *stream;
 	
 	if ((stream = CLASS (storage)->create_stream (storage, path, ev)))
-	  return (GNOME_Stream) GNOME_UNKNOWN (stream)->object;
-
-	return NULL;
+		return (GNOME_Stream) CORBA_Object_duplicate (
+			gnome_unknown_corba_objref (GNOME_UNKNOWN (stream)), ev);
+	else
+		return CORBA_OBJECT_NIL;
 }
 
 static GNOME_Stream
@@ -43,9 +44,10 @@ impl_open_stream (PortableServer_Servant servant,
 	GnomeStream *stream;
 	
 	if ((stream = CLASS (storage)->open_stream (storage, path, mode, ev)))
-	  return (GNOME_Stream) GNOME_UNKNOWN (stream)->object;
-
-	return NULL;
+		return (GNOME_Stream) CORBA_Object_duplicate (
+			gnome_unknown_corba_objref (GNOME_UNKNOWN (stream)), ev);
+	else
+		return CORBA_OBJECT_NIL;
 }
 
 static GNOME_Storage 
@@ -57,9 +59,10 @@ impl_create_storage (PortableServer_Servant servant,
 	GnomeStorage *new_storage;
 	
 	if ((new_storage = CLASS(storage)->create_storage (storage, path, ev)))
-	  return (GNOME_Storage) GNOME_UNKNOWN (new_storage)->object;
-
-	return NULL;
+		return (GNOME_Storage) CORBA_Object_duplicate (
+			gnome_unknown_corba_objref (GNOME_UNKNOWN (new_storage)), ev);
+	else
+		return CORBA_OBJECT_NIL;
 }
 
 static GNOME_Storage
@@ -72,9 +75,10 @@ impl_open_storage (PortableServer_Servant servant,
 	GnomeStorage *open_storage;
 	
 	if ((open_storage = CLASS(storage)->open_storage (storage, path, ev)))
-	  return (GNOME_Storage) GNOME_UNKNOWN (open_storage)->object;
-
-	return NULL;
+		return (GNOME_Storage) CORBA_Object_duplicate (
+			gnome_unknown_corba_objref (GNOME_UNKNOWN (open_storage)), ev);
+	else
+		return CORBA_OBJECT_NIL;
 }
 
 static void
