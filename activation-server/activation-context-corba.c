@@ -677,6 +677,8 @@ impl_OAF_ActivationContext_activate_async(impl_POA_OAF_ActivationContext *
                 return;
         }
 
+	g_free (hostname);
+
         /* return the correct value back to the client */
         OAF_ActivationCallback_report_activation_succeeded (callback_object, retval, ev);
 }
@@ -1094,6 +1096,7 @@ impl_OAF_ActivationContext_activate_from_id_async
         ac_context_to_string_array (ctx, sort_criteria, ev);
         if (ev->_major != CORBA_NO_EXCEPTION) {
                 char *message;
+		g_free (requirements);
                 servant->refs--;
                 message = g_strconcat (_("Could not parse context: "), CORBA_exception_id (ev), NULL);
                 OAF_ActivationCallback_report_activation_failed (callback_object,

@@ -398,6 +398,7 @@ od_get_active_server (impl_POA_OAF_ObjectDirectory * servant,
                 
                 retval = g_hash_table_lookup (servant->active_servers, display_iid);
 
+		g_free (display);
                 g_free (display_iid);
                 
                 if (!CORBA_Object_is_nil (retval, ev)

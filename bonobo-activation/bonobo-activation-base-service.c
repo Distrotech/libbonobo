@@ -721,7 +721,7 @@ rloc_file_check (const OAFRegistrationLocation * regloc,
 	if (fh)
 		goto useme;
 
-      useme:
+	useme:
 	if (fh) {
 		char iorbuf[8192];
 
