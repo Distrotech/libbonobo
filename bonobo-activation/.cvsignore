@@ -4,11 +4,12 @@ Makefile.in
 .libs
 *.lo
 *.la
-liboaf-version.h
+bonobo-activation-version.h
 *-stubs.c
 *-skels.c
 *-common.c
 stamp*idl
-oaf-factory.h
-oaf.h
+Bonobo_Unknown.h
+Bonobo_GenericFactory.h
+Bonobo_ActivationContext.h
 *-imodule.c

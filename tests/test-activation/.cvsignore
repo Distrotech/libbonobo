@@ -7,10 +7,8 @@ empty-skels.c
 empty-stubs.c
 empty.h
 empty_built
-oaf-empty-server
-oaf-run-query
-oaf-slay
-oaf-slay
-oaf-test-async
-oaf-test-client
+bonobo-activation-empty-server
+bonobo-activation-test-async
+bonobo-activation-run-query
+bonobo-activation-test
 *-imodule.c

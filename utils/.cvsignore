@@ -3,7 +3,7 @@
 *~
 Makefile
 Makefile.in
-oaf-sysconf
+bonobo-activation-sysconf
 *.o
 *.lo
 *.la
