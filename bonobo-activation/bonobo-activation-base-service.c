@@ -149,7 +149,7 @@ bonobo_activation_registration_iterate (const BonoboActivationBaseService *base_
 
 	for (link = registries; link; link = link->next) {
 		RegistryInfo *ri;
-		void (*func_ptr) (void);
+		void (*func_ptr) ();
 
 		ri = link->data;
 
