@@ -480,16 +480,19 @@ rloc_file_check (const OAFBaseServiceRegistry *registry,
                               namecopy,
                               base_service->session_name ? base_service->session_name : "local");
         
-        g_free (namecopy);
-
 	fh = fopen (fn, "r");
-
         g_free (fn);
 
         if (fh == NULL) {
-                sprintf (fn, "/tmp/orbit-%s/reg.%s", uname, namecopy);
+                fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s",
+                                      uname,
+                                      namecopy);
+                
                 fh = fopen (fn, "r");
+                g_free (fn);
         }
+
+        g_free (namecopy);
 
 	if (fh != NULL) {
 		char iorbuf[8192];
