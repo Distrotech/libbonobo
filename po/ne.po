@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the libbonobo package.
 # Pawan Chitrakar <pawan@nplinux.org>.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"Report-Msgid-Bugs-To: pawan@nplinux.org\n"
-"POT-Creation-Date: 2004-04-11 03:55+0200\n"
-"PO-Revision-Date: 2004-06-25 12:55+0545\n"
-"Last-Translator: laxmi prasad khatiwada <laxmi@mpp.org.np>\n"
+"Report-Msgid-Bugs-To: <pawan@nplinux.org> \n"
+"POT-Creation-Date: 2004-07-01 21:39+0200\n"
+"PO-Revision-Date: 2004-07-02 2:25+0545\n"
+"Last-Translator: Pawan Chitrakar  <pawan@nplinux.org>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr "सेवादायक  कुन द्वितीयक सूच�
 
 #: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
-msgstr "स्वीकृत सक्रिय आई डि होइन" 
+msgstr "स्वीकृत सक्रिय आई डि होइन"
 
 #: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
@@ -40,7 +40,7 @@ msgid "File descriptor to write IOR to"
 msgstr "फाइल वाचक आज्ञओआरमा लेख्नलाई हो"
 
 #: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "FD"
 msgstr "एफ डी"
 
@@ -74,9 +74,11 @@ msgstr "shlibवस्तुहरु हामी टाढैबाट सक�
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
-msgid "The Bonobo Activation configuration file was not read successfully. Please, "
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr "बोनोबो सक्रिय गर्ने समायोजन फाइल राम्ररी पढ्न सकिएन.यो %s लाई स्वीकार्य छ छैन जाच्नुहोस्"
+msgstr ""
+"बोनोबो सक्रिय गर्ने समायोजन फाइल राम्ररी पढ्न सकिएन.यो %s लाई स्वीकार्य छ छैन जाच्नुहोस्"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -85,7 +87,7 @@ msgstr "बोनोबो सक्रिय गर्ने समायोज
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1167
+#: activation-server/object-directory-corba.c:1148
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "प्रतियोगितालाई सक्रिय गराउने सेवक '%s'"
@@ -154,26 +156,26 @@ msgstr "सक्रिय बोनोबो %s: %s को प्रणाल�
 
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
-msgid "Failed to execute \n"
-msgstr " सम्पादन गर्न असफल \n"
+msgid "Failed to execute %s: %d (%s)\n"
+msgstr " %s: %d (%s) सम्पादन गर्न असफल \n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "बैठक कक्षमा धेरै सहचारी भए, सम्बन्ध जोडिन सक्छ"
 
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
 msgstr "आईओआरमा  छाप्न प्रबाचक लेखपत्र"
 
-#: bonobo-activation/bonobo-activation-init.c:195
+#: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
 msgstr "सक्रिय हुनको लागि आईआईडी"
 
-#: bonobo-activation/bonobo-activation-init.c:197
+#: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
 msgstr " ओएएफसंग  सेवादायकको पंजीकरण रोक  "
 
-#: bonobo-activation/bonobo-activation-init.c:283
+#: bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
 msgstr "बोनोबो सक्रियताको विकल्प"
 
@@ -231,7 +233,7 @@ msgid "Object not found"
 msgstr "वस्तु भेटिएन"
 
 #: bonobo/bonobo-exception.c:167
-msgid "Syntax error in /bject description"
+msgid "Syntax error in object description"
 msgstr "वस्तुको वर्णनमा वाक्यगत गल्ती"
 
 #: bonobo/bonobo-exception.c:172
@@ -242,10 +244,10 @@ msgstr "कारखानाको वस्तुलाई सक्रिय 
 msgid "No permission to access stream"
 msgstr "प्रवाह उपलब्ध गर्ने अनुमति छैन"
 
-#º bonïbo/bonobo-exceðtion.ã:180
+# º bonïbo/bonobo-exceðtion.ã:180
+#: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
 msgstr "समर्थन नभएको  प्रवाह कार्य गर्ने कोसिस"
-
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
@@ -281,7 +283,7 @@ msgstr "बस्तु एउटा संग्रह होइन"
 
 #: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr "संग्रह खाली छैन" 
+msgstr "संग्रह खाली छैन"
 
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
@@ -339,7 +341,6 @@ msgstr "मोनिकरको सक्रिय हुने समय स�
 msgid "Syntax error within moniker"
 msgstr "मोनिकरभित्र वाक्यात्मक गल्ती छ "
 
-
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
 msgstr "मोनिकरसंग एउटा अज्ञात मोनिकर उपसर्ग छ"
@@ -368,13 +369,12 @@ msgstr "वस्तुलाई सक्रिय गर्न असफल"
 #: monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
-msgstr " अपबाद '%s'सक्रिय हँदैछ" 
+msgstr " अपबाद '%s'सक्रिय हँदैछ"
 
 #: monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
 msgstr "'%s'लाई सक्रिय गर्न असफल"
-
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -452,8 +452,11 @@ msgstr "संरचना लेखपत्र सफलतापूर्व�
 
 #: utils/bonobo-activation-sysconf.c:80
 #, c-format
-msgid "configuration file is:\n"
+msgid ""
+"configuration file is:\n"
+"    %s\n"
 msgstr "संरचना लेखपत्र  हो :\n"
+"%s \n"
 
 #: utils/bonobo-activation-sysconf.c:118
 #, c-format
@@ -487,4 +490,3 @@ msgstr "समायोजन लेखपत्रमा भएका निर
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "समायोजन लेखपत्रको बाटो देखाउनुहोस्"
-
