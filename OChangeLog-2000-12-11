@@ -1,5 +1,8 @@
 Wed Oct 25 10:44:59 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
+	* bonobo/bonobo-exception.c (bonobo_exception_get_text): add the
+	new storage interface exceptions.
+
 	* idl/bonobo-storage.idl: This is the long expected storage
 	interface patch. I have changed the following:
 

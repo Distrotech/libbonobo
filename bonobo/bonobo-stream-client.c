@@ -49,19 +49,17 @@ bonobo_stream_client_write (const Bonobo_Stream stream,
 		goto alloc_error;
 
 	for (pos = 0; pos < size;) {
-		CORBA_long v;
-
 		buf->_buffer = (mem + pos);
 		buf->_length = (pos + CORBA_BLOCK_SIZE < size) ?
 			CORBA_BLOCK_SIZE : size - pos;
 		buf->_maximum = buf->_length;
 
-		v = Bonobo_Stream_write (stream, buf, ev);
+		Bonobo_Stream_write (stream, buf, ev);
 		if (ev->_major != CORBA_NO_EXCEPTION) {
 			CORBA_free (buf);
 			return;
 		}
-		pos += v;
+		pos += buf->_length;
 	}
 
 	CORBA_free (buf);

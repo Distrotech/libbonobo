@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * gnome-stream-mem.c: Memory based stream
+ * bonobo-stream-memory.h: Memory based stream
  *
  * Author:
  *   Miguel de Icaza (miguel@gnu.org)

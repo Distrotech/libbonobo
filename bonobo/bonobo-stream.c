@@ -23,6 +23,27 @@ bonobo_stream_from_servant (PortableServer_Servant servant)
 	return BONOBO_STREAM (bonobo_object_from_servant (servant));
 }
 
+static Bonobo_StorageInfo*
+impl_get_info (PortableServer_Servant servant,
+	       const Bonobo_StorageInfoFields mask,
+	       CORBA_Environment *ev)
+{
+	BonoboStream *stream = bonobo_stream_from_servant (servant);
+
+	return CLASS (stream)->get_info (stream, mask, ev);
+}
+
+static void          
+impl_set_info (PortableServer_Servant servant,
+	       const Bonobo_StorageInfo *info,
+	       const Bonobo_StorageInfoFields mask,
+	       CORBA_Environment *ev)
+{
+	BonoboStream *stream = bonobo_stream_from_servant (servant);
+
+	CLASS (stream)->set_info (stream, info, mask, ev);
+}
+
 static void
 impl_read (PortableServer_Servant servant,
 	   CORBA_long             count,
@@ -34,14 +55,14 @@ impl_read (PortableServer_Servant servant,
 	CLASS (stream)->read (stream, count, buffer, ev);
 }
 
-static CORBA_long
+static void
 impl_write (PortableServer_Servant servant,
 	    const Bonobo_Stream_iobuf *buffer,
 	    CORBA_Environment *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
-	return CLASS (stream)->write (stream, buffer, ev);
+	CLASS (stream)->write (stream, buffer, ev);
 }
 
 static CORBA_long
@@ -81,33 +102,17 @@ impl_copy_to (PortableServer_Servant servant,
 static void
 impl_commit (PortableServer_Servant servant, CORBA_Environment * ev)
 {
-	BonoboStream *stream = bonobo_stream_from_servant (servant);
+       BonoboStream *stream = bonobo_stream_from_servant (servant);
 
-	CLASS (stream)->commit (stream, ev);
+       CLASS (stream)->commit (stream, ev);
 }
 
 static void
-impl_close (PortableServer_Servant servant, CORBA_Environment * ev)
+impl_revert (PortableServer_Servant servant, CORBA_Environment * ev)
 {
-	BonoboStream *stream = bonobo_stream_from_servant (servant);
+       BonoboStream *stream = bonobo_stream_from_servant (servant);
 
-	CLASS (stream)->close (stream, ev);
-}
-
-static CORBA_boolean
-impl_eos (PortableServer_Servant servant, CORBA_Environment * ev)
-{
-	BonoboStream *stream = bonobo_stream_from_servant (servant);
-
-	return CLASS (stream)->eos (stream, ev);
-}
-
-static CORBA_long
-impl_length (PortableServer_Servant servant, CORBA_Environment * ev)
-{
-	BonoboStream *stream = bonobo_stream_from_servant (servant);
-
-	return CLASS (stream)->length (stream, ev);
+       CLASS (stream)->revert (stream, ev);
 }
 
 /**
@@ -120,15 +125,15 @@ bonobo_stream_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Stream__epv, 1);
 
+	epv->get_info	= impl_get_info;
+	epv->set_info	= impl_set_info;
 	epv->read	= impl_read;
 	epv->write	= impl_write;
 	epv->seek	= impl_seek;
 	epv->truncate	= impl_truncate;
 	epv->copy_to	= impl_copy_to;
-	epv->commit	= impl_commit;
-	epv->close	= impl_close;
-	epv->eos	= impl_eos;
-	epv->length	= impl_length;
+	epv->commit     = impl_commit;
+	epv->revert     = impl_revert;
 
 	return epv;
 }

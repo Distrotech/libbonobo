@@ -24,19 +24,27 @@ bonobo_storage_from_servant (PortableServer_Servant servant)
 	return BONOBO_STORAGE (bonobo_object_from_servant (servant));
 }
 
-static Bonobo_Stream
-impl_create_stream (PortableServer_Servant servant,
-		    const CORBA_char      *path,
-		    CORBA_Environment     *ev)
+static Bonobo_StorageInfo*
+impl_get_info (PortableServer_Servant servant,
+	       const CORBA_char * path,
+	       const Bonobo_StorageInfoFields mask,
+	       CORBA_Environment *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
-	BonoboStream *stream;
-	
-	if ((stream = CLASS (storage)->create_stream (storage, path, ev)))
-		return (Bonobo_Stream) CORBA_Object_duplicate (
-			bonobo_object_corba_objref (BONOBO_OBJECT (stream)), ev);
-	else
-		return CORBA_OBJECT_NIL;
+
+	return CLASS (storage)->get_info (storage, path, mask, ev);
+}
+
+static void          
+impl_set_info (PortableServer_Servant servant,
+	       const CORBA_char * path,
+	       const Bonobo_StorageInfo *info,
+	       const Bonobo_StorageInfoFields mask,
+	       CORBA_Environment *ev)
+{
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
+
+	CLASS (storage)->set_info (storage, path, info, mask, ev);
 }
 
 static Bonobo_Stream
@@ -55,21 +63,6 @@ impl_open_stream (PortableServer_Servant servant,
 		return CORBA_OBJECT_NIL;
 }
 
-static Bonobo_Storage 
-impl_create_storage (PortableServer_Servant servant,
-		     const CORBA_char      *path,
-		     CORBA_Environment     *ev)
-{
-	BonoboStorage *storage = bonobo_storage_from_servant (servant);
-	BonoboStorage *new_storage;
-	
-	if ((new_storage = CLASS(storage)->create_storage (storage, path, ev)))
-		return (Bonobo_Storage) CORBA_Object_duplicate (
-			bonobo_object_corba_objref (BONOBO_OBJECT (new_storage)), ev);
-	else
-		return CORBA_OBJECT_NIL;
-}
-
 static Bonobo_Storage
 impl_open_storage (PortableServer_Servant servant,
 		   const CORBA_char      *path,
@@ -79,7 +72,7 @@ impl_open_storage (PortableServer_Servant servant,
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	BonoboStorage *open_storage;
 	
-	if ((open_storage = CLASS(storage)->open_storage (storage, path, ev)))
+	if ((open_storage = CLASS(storage)->open_storage (storage, path, mode, ev)))
 		return (Bonobo_Storage) CORBA_Object_duplicate (
 			bonobo_object_corba_objref (BONOBO_OBJECT (open_storage)), ev);
 	else
@@ -115,14 +108,23 @@ impl_commit (PortableServer_Servant servant, CORBA_Environment *ev)
 	CLASS (storage)->commit (storage, ev);
 }
 
-static Bonobo_Storage_directory_list *
+static void
+impl_revert (PortableServer_Servant servant, CORBA_Environment *ev)
+{
+	BonoboStorage *storage = bonobo_storage_from_servant (servant);
+	
+	CLASS (storage)->commit (storage, ev);
+}
+
+static Bonobo_Storage_DirectoryList *
 impl_list_contents (PortableServer_Servant servant,
 		    const CORBA_char      *path,
+		    Bonobo_StorageInfoFields mask,
 		    CORBA_Environment     *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 
-	return CLASS (storage)->list_contents (storage, path, ev);
+	return CLASS (storage)->list_contents (storage, path, mask, ev);
 }
 
 static void
@@ -146,13 +148,14 @@ bonobo_storage_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Storage__epv, 1);
 
-	epv->create_stream	= impl_create_stream;
+	epv->get_info	        = impl_get_info;
+	epv->set_info	        = impl_set_info;
 	epv->open_stream	= impl_open_stream;
-	epv->create_storage	= impl_create_storage;
 	epv->open_storage	= impl_open_storage;
 	epv->copy_to		= impl_copy_to;
 	epv->rename		= impl_rename;
 	epv->commit		= impl_commit;
+	epv->revert		= impl_revert;
 	epv->list_contents	= impl_list_contents;
 	epv->erase		= impl_erase;
 

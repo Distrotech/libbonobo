@@ -35,19 +35,25 @@ typedef struct {
 	/*
 	 * virtual methods
 	 */
-	BonoboStream  *(*create_stream)  (BonoboStorage *storage,
+	Bonobo_StorageInfo *(*get_info) (BonoboStorage *storage,
 					 const CORBA_char *path,
+					 const Bonobo_StorageInfoFields mask,
 					 CORBA_Environment *ev);
-	BonoboStream  *(*open_stream)    (BonoboStorage *storage,
+	void          (*set_info)       (BonoboStorage *storage,
 					 const CORBA_char *path,
-					 Bonobo_Storage_OpenMode, CORBA_Environment *ev);
-	BonoboStorage *(*create_storage) (BonoboStorage *storage,
-					 const CORBA_char *path,
+					 const Bonobo_StorageInfo * info,
+					 const Bonobo_StorageInfoFields mask,
 					 CORBA_Environment *ev);
-	BonoboStorage *(*open_storage)   (BonoboStorage *storage,
+	BonoboStream  *(*open_stream)   (BonoboStorage *storage,
 					 const CORBA_char *path,
+					 Bonobo_Storage_OpenMode, 
 					 CORBA_Environment *ev);
-	void         (*copy_to)         (BonoboStorage *storage, Bonobo_Storage target,
+	BonoboStorage *(*open_storage)  (BonoboStorage *storage,
+					 const CORBA_char *path,
+					 Bonobo_Storage_OpenMode, 
+					 CORBA_Environment *ev);
+	void         (*copy_to)         (BonoboStorage *storage, 
+					 Bonobo_Storage target,
 					 CORBA_Environment *ev);
 	void         (*rename)          (BonoboStorage *storage,
 					 const CORBA_char *path_name,
@@ -55,13 +61,16 @@ typedef struct {
 					 CORBA_Environment *ev);
 	void         (*commit)          (BonoboStorage *storage,
 					 CORBA_Environment *ev);
-	Bonobo_Storage_directory_list *
+	void         (*revert)          (BonoboStorage *storage,
+					 CORBA_Environment *ev);
+	Bonobo_Storage_DirectoryList *
 	             (*list_contents)   (BonoboStorage *storage,
 					 const CORBA_char *path,
+					 Bonobo_StorageInfoFields mask,
 					 CORBA_Environment *ev);
-	void         (*erase)          (BonoboStorage *storage,
-                                        const CORBA_char *path,
-                                        CORBA_Environment *ev);
+	void         (*erase)           (BonoboStorage *storage,
+                                         const CORBA_char *path,
+                                         CORBA_Environment *ev);
 } BonoboStorageClass;
 
 GtkType          bonobo_storage_get_type     (void);

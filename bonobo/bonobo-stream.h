@@ -35,43 +35,48 @@ typedef struct {
 	/*
 	 * virtual methods
 	 */
-	CORBA_long    (*write)    (BonoboStream *stream,
-				   const Bonobo_Stream_iobuf *buffer,
-				   CORBA_Environment *ev);
-	void          (*read)     (BonoboStream *stream, CORBA_long count,
-				   Bonobo_Stream_iobuf **buffer,
-				   CORBA_Environment *ev);
-        CORBA_long    (*seek)     (BonoboStream *stream,
-				   CORBA_long offset, Bonobo_Stream_SeekType whence,
-				   CORBA_Environment *ev);
-        void          (*truncate) (BonoboStream *stream,
-				   const CORBA_long new_size, 
-				   CORBA_Environment *ev);
-	void          (*copy_to)  (BonoboStream *stream,
-				   const CORBA_char * dest,
-				   const CORBA_long bytes,
-				   CORBA_long *read,
-				   CORBA_long *written,
-				   CORBA_Environment *ev);
-        void          (*commit)   (BonoboStream *stream,
-				   CORBA_Environment *ev);
-        void          (*close)    (BonoboStream *stream,
-				   CORBA_Environment *ev);
-        CORBA_boolean (*eos)      (BonoboStream *stream,
-				   CORBA_Environment *ev);
-	CORBA_long    (*length)   (BonoboStream *stream,
-				   CORBA_Environment *ev);
+
+	Bonobo_StorageInfo *(*get_info) (BonoboStream *stream,
+					 const Bonobo_StorageInfoFields mask,
+					 CORBA_Environment *ev);
+	void          (*set_info)       (BonoboStream *stream,
+					 const Bonobo_StorageInfo *info,
+					 const Bonobo_StorageInfoFields mask,
+					 CORBA_Environment *ev);
+	void          (*write)          (BonoboStream *stream,
+					 const Bonobo_Stream_iobuf *buffer,
+					 CORBA_Environment *ev);
+	void          (*read)           (BonoboStream *stream, 
+					 CORBA_long count,
+					 Bonobo_Stream_iobuf **buffer,
+					 CORBA_Environment *ev);
+        CORBA_long    (*seek)           (BonoboStream *stream,
+					 CORBA_long offset, 
+					 Bonobo_Stream_SeekType whence,
+					 CORBA_Environment *ev);
+        void          (*truncate)       (BonoboStream *stream,
+					 const CORBA_long new_size, 
+					 CORBA_Environment *ev);
+	void          (*copy_to)        (BonoboStream *stream,
+					 const CORBA_char * dest,
+					 const CORBA_long bytes,
+					 CORBA_long *read,
+					 CORBA_long *written,
+					 CORBA_Environment *ev);
+        void          (*commit)         (BonoboStream *stream,
+					 CORBA_Environment *ev);
+        void          (*revert)         (BonoboStream *stream,
+					 CORBA_Environment *ev);
 } BonoboStreamClass;
 
 GtkType                 bonobo_stream_get_type            (void);
 POA_Bonobo_Stream__epv *bonobo_stream_get_epv             (void);
 Bonobo_Stream           bonobo_stream_corba_object_create (BonoboObject *object);
 
-BonoboStream            *bonobo_stream_open   (const char *driver,
-					       const char *path,
-					       gint flags,
-					       gint mode);
-
+BonoboStream *bonobo_stream_open     (const char *driver,
+				      const char *path,
+				      gint flags,
+				      gint mode);
 
 END_GNOME_DECLS
 

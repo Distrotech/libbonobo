@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * gnome-stream-mem.c: Memory based stream
+ * bonobo-stream-memory.c: Memory based stream
  *
  * Author:
  *   Miguel de Icaza (miguel@gnu.org)
@@ -16,6 +16,25 @@
 #include <errno.h>
 
 static BonoboStreamClass *bonobo_stream_mem_parent_class;
+
+static Bonobo_StorageInfo*
+mem_get_info (BonoboStream *stream,
+	      const Bonobo_StorageInfoFields mask,
+	      CORBA_Environment *ev)
+{
+	g_warning ("Not implemented");
+
+	return CORBA_OBJECT_NIL;
+}
+
+static void
+mem_set_info (BonoboStream *stream,
+	      const Bonobo_StorageInfo *info,
+	      const Bonobo_StorageInfoFields mask,
+	      CORBA_Environment *ev)
+{
+	g_warning ("Not implemented");
+}
 
 static void
 mem_truncate (BonoboStream *stream,
@@ -42,7 +61,7 @@ mem_truncate (BonoboStream *stream,
 		smem->pos = new_size;
 }
 
-static CORBA_long
+static void
 mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
 	   CORBA_Environment *ev)
 {
@@ -51,7 +70,7 @@ mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
 
 	if (smem->read_only){
 		g_warning ("Should signal an exception here");
-		return 0;
+		return;
 	}
 
 	if (smem->pos + len > smem->size){
@@ -70,7 +89,7 @@ mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
 	memcpy (smem->buffer + smem->pos, buffer->_buffer, len);
 	smem->pos += len;
 		
-	return len;
+	return;
 }
 
 static void
@@ -171,9 +190,19 @@ mem_copy_to  (BonoboStream *stream,
 }
 
 static void
-mem_commit   (BonoboStream *stream,
-	      CORBA_Environment *ev)
+mem_commit (BonoboStream *stream,
+	    CORBA_Environment *ev)
 {
+	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+			     ex_Bonobo_Stream_NotSupported, NULL);
+}
+
+static void
+mem_revert (BonoboStream *stream,
+	    CORBA_Environment *ev)
+{
+	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+			     ex_Bonobo_Stream_NotSupported, NULL);
 }
 
 static void
@@ -213,12 +242,15 @@ bonobo_stream_mem_class_init (BonoboStreamMemClass *klass)
 
 	object_class->destroy = mem_destroy;
 	
+	sclass->get_info  = mem_get_info;
+	sclass->set_info  = mem_set_info;
 	sclass->write     = mem_write;
 	sclass->read      = mem_read;
 	sclass->seek      = mem_seek;
 	sclass->truncate  = mem_truncate;
 	sclass->copy_to   = mem_copy_to;
 	sclass->commit    = mem_commit;
+	sclass->revert    = mem_revert;
 
 	klass->get_buffer = mem_get_buffer;
 	klass->get_size   = mem_get_size;

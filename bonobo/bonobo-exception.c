@@ -165,6 +165,9 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 		return g_strdup (_("IO Error on stream"));
 
 	/* Bonobo::Storage */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_IOError))
+		return g_strdup (_("IO Error on storage"));
+
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NameExists))
 		return g_strdup (_("Name already exists in storage"));
 
@@ -173,6 +176,13 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NoPermission))
 		return g_strdup (_("No permission to do operation on storage"));
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NotSupported))
+		return g_strdup (_("An unsupported storage action was attempted"));
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NotStream))
+		return g_strdup (_("Object is not a stream"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NotStorage))
+		return g_strdup (_("Object is not a storage"));
 
 	/* Bonobo::UIContainer */
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_UIContainer_MalFormedXML))
