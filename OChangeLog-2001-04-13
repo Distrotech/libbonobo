@@ -1,5 +1,12 @@
 2001-02-19  Michael Meeks  <michael@ximian.com>
 
+	* doc/api/Makefile.am (scan): add bonobo-async,
+	remove bonobo-moniker-async, add bonobo-ui-engine
+
+	* doc/api/bonobo-sections.txt: upd.
+
+2001-02-19  Michael Meeks  <michael@ximian.com>
+
 	* doc/FAQ: update slightly.
 
 	* doc/api/bonobo-api.sgml: remove dup. of bonobo-moniker.
