@@ -1,3 +1,13 @@
+2001-04-09  Michael Meeks  <michael@ximian.com>
+
+	* tests/Makefile.am: add test-focus
+
+	* tests/test-focus.c: Add.
+
+2001-04-04  Michael Meeks  <michael@ximian.com>
+
+	* tests/Makefile.am: disable test-container completely.
+
 2001-04-07  Vladimir Vukicevic  <vladimir@ximian.com>
 
 	* storage-modules/bonobo-storage-fs.c (fs_get_info,
