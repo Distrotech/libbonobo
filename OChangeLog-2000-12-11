@@ -1,3 +1,14 @@
+2000-01-05  Sergey Panov <sipan@mit.edu>
+	*  bonobo/gnome-ui-handler.c (menu_toplevel_create_label):
+	Remove translation -- the container should not translate
+	(menu_uiinfo_type_to_uih,toolbar_uiinfo_type_to_uih):
+	Translate hint and label using L_(), defined in libgnomeui
+	* components/application-x-gnomine/bonobo-application-x-mines.c
+	Changes needed to check if new transl scheem works.
+	(view_create_menus) N_ changed to _ and L_
+	(init_server_factory) Call bindtextdomain and textdomain for
+	translations to work in gnomine.  
+	
 2000-01-05  Yuri Syrota <rasta@renome.rovno.ua>
 
 	* configure.in: Add "uk" into ALL_LINGUAS
