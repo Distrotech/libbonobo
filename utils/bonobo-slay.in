@@ -120,6 +120,7 @@ do {
 					# bonobo-activation-server needs to be last.
 					#
 					if ($line ne "bonobo-activation-server" and
+					    not ($line =~m/^OAFIID:/) and
 					    ($regexp and $line =~m/$regexp/) or (not $regexp)) {
 						push @file_process, $line;
 					}
@@ -137,21 +138,19 @@ do {
 
 	foreach $filep (@file_process) {
 
-		if (not($filep =~m/^OAFIID:/)) {
-
 			# Search through @ps_result and look for matches
 			#
 			foreach $el (@ps_result) {
 				chomp $el;
-				if ($el =~m/$filep/ ) {
-					@ps_array = split(' ', $el);
+			@ps_array = split(' ', $el, 3);
+
+			if ($ps_array[1] =~m/(\A|\/)$filep$/ ) {
 					$list_array[$index]=$ps_array[0]."\t".$ps_array[1]."\n";
 					$process_pids[$index]=$ps_array[0]."\n";
 					$index++;
 					}
 				}
 			}
-		}
 
 	# Do the killing.
 	#
