@@ -9,6 +9,8 @@
 gboolean   bonobo_init      (CORBA_ORB orb,
 			     PortableServer_POA poa,
 			     PortableServer_POAManager manager);
+void	   bonobo_setup_x_error_handler (void);
+
 
 extern CORBA_ORB                 __bonobo_orb;
 extern PortableServer_POA        __bonobo_poa;

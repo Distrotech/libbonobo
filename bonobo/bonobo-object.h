@@ -68,6 +68,7 @@ CORBA_Object gnome_object_corba_objref     (GnomeObject *object);
 
 void         gnome_object_ref              (GnomeObject *object);
 void         gnome_object_unref            (GnomeObject *object);
+void	     gnome_object_destroy	   (GnomeObject *object);
 
 /*
  * Error checking

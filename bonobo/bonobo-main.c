@@ -4,14 +4,79 @@
  *
  * Author:
  *    Miguel de Icaza (miguel@gnu.org)
+ *    Nat Friedman (nat@gnome-support.com)
  */
 #include <config.h>
 #include <bonobo/gnome-main.h>
 #include <libgnorba/gnorba.h>
 
+#include <X11/Xlib.h>
+
 CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;
 PortableServer_POAManager __bonobo_poa_manager;
+
+static int
+bonobo_x_error_handler (Display *display, XErrorEvent *error)
+{
+	char buf [64];
+
+	if (!error->error_code)
+		return 0;
+
+	/*
+	 * If we got a Bad Drawable, we ignore it for now.  FIXME: We
+	 * need to somehow distinguish real errors from
+	 * X-server-induced errors.  Keeping a list of windows for
+	 * which we will ignore BadDrawables would be a good idea.
+	 */
+	if (error->error_code == BadDrawable)
+		return 0;
+
+	/*
+	 * If it wasn't a BadDrawable error, we abort.
+	 */
+
+	XGetErrorText (display, error->error_code, buf, 63);
+
+	g_error ("%s\n  serial %ld error_code %d request_code %da minor_code %d\n",
+		 buf, error->serial, error->error_code, error->request_code,
+		 error->minor_code);
+
+	return 0;
+}
+
+/**
+ * bonobo_setup_x_error_handler:
+ *
+ * In order to do graphical embedding in the X window system, Bonobo
+ * uses the classic foreign-window-reparenting trick.  The
+ * GtkPlug/GtkSocket widgets are used for thise purpose.  However,
+ * serious robustness problems arise if the GtkSocket end of the
+ * connection unexpectedly dies.  The X server sends out DestroyNotify
+ * events for the descendents of the GtkPlug (i.e., your embedded
+ * component's windows) in effectively random order.  Furthermore, if
+ * you happened to be drawing on any of those windows when the
+ * GtkSocket was destroyed (a common state of affairs), an X error
+ * will kill your application.
+ *
+ * To solve this latter problem, Bonobo sets up its own X error
+ * handler which ignores certain X errors that might have been
+ * caused by such a scenario.  Other X errors get passed to gdk_x_error
+ * normally.
+ */
+void
+bonobo_setup_x_error_handler (void)
+{
+	static gboolean error_handler_setup = FALSE;
+
+	if (error_handler_setup)
+		return;
+
+	error_handler_setup = TRUE;
+
+	XSetErrorHandler (bonobo_x_error_handler);
+}
 
 /**
  * bonobo_init:

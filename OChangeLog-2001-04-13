@@ -1,6 +1,27 @@
+1999-08-18  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/gnome-view.c (gnome_view_new): Call bonobo_setup_x_error_handler.
+
+	* bonobo/gnome-main.c (bonobo_x_error_handler): New function to
+ 	handle X errors in bonobo.
+	(bonobo_setup_x_error_handler): New function to setup the X error
+ 	handler.
+
+	* bonobo/gnome-object.h: Added prototype for gnome_object_destroy.
+
+	* bonobo/gnome-view.c (gnome_view_get_embeddable): Use
+ 	g_return_val_if_fail.
+	(impl_GNOME_View_set_window): Connect to the destroy_event signal
+ 	when creating the plug.
+	(plug_destroy_cb): New function to handle unexpected plug
+ 	destruction.  Please also see README-gdk-patch.
+
+	* bonobo/gnome-view.h (GnomeView): Added plug_destroy_id.
+
 1999-08-18  Miguel de Icaza  <miguel@gnu.org>
 
-	* bonobo/gnome-object.c (gnome_object_destroy): Implement gnome_object_destroy
+	* bonobo/gnome-object.c (gnome_object_destroy): Implement
+ 	gnome_object_destroy
 
 1998-08-11 Michael Meeks <michael@imagiantor.com>
 
