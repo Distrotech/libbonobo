@@ -1,3 +1,7 @@
+2002-02-01  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* monikers/Makefile.am: small fix for automake 1.5.
+
 2002-01-29  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.110.0

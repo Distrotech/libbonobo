@@ -15,7 +15,7 @@ INCLUDES = \
 Bonobo_Moniker_std.server.in: Bonobo_Moniker_std.server.in.in
 	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" $< > $@
 
-CLEANFILES+=Bonobo_Moniker_std.server Bonobo_Moniker_std.server.in
+CLEANFILES = Bonobo_Moniker_std.server Bonobo_Moniker_std.server.in
 
 serverdir = $(libdir)/bonobo/servers
 server_DATA = Bonobo_Moniker_std.server
