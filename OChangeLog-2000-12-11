@@ -1,3 +1,8 @@
+1999-09-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-bonobo-item.c: New file, implements a proxy canvas
+	item that will talk to a GNOME::Canvas::Item returned by a GNOME::View.
+
 1999-09-07  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-object.c (gnome_object_usage_error): Updated warning to

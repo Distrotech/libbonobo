@@ -147,7 +147,7 @@ module Canvas {
 		void unmap ();
 
 		void draw   (in window_id drawable, in short x, in short y, in short width, in short height);
-		void render (in Buf buf);
+		void render (inout Buf buf);
 
 		boolean contains (in double x, in double y);
 

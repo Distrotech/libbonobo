@@ -67,6 +67,14 @@ interface View : GNOME::Unknown {
 	 * Requests that the view be running at zoom factor
 	 */
 	void set_zoom_factor (in double zoom);
+
+	/**
+	 * get_canvas_item:
+	 *
+	 * Returns a GNOME::Canvas::Item interface, or CORBA_OBJECT_NIL
+	 * if this object does not support the Item interface
+	 */
+	Canvas::Item get_canvas_item ();
 };
 
 interface ViewFrame : GNOME::Unknown {
