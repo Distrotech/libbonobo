@@ -92,15 +92,6 @@ main (int argc, char *argv[])
 		real_od_source_dir = g_string_new (OAFINFODIR);
 		env_od_source_dir = g_getenv ("OAF_INFO_PATH");
 		gnome_env_od_source_dir = g_getenv ("GNOME_PATH");
-                gnome_dirs = g_strsplit (gnome_env_od_source_dir, ":", -1);
-                gnome_od_source_dir = g_string_new("");
-                for (i=0; gnome_dirs[i]; i++) {
-                        g_string_append (gnome_od_source_dir,
-                                         gnome_dirs[i]);
-                        g_string_append (gnome_od_source_dir,
-                                         "/share/oaf:");
-                }
-                g_strfreev (gnome_dirs);
 
 		if (od_source_dir) {
 			g_string_append_c (real_od_source_dir, ':');
@@ -112,6 +103,15 @@ main (int argc, char *argv[])
 					 env_od_source_dir);
 		}
 		if (gnome_env_od_source_dir) {
+                        gnome_dirs = g_strsplit (gnome_env_od_source_dir, ":", -1);
+                        gnome_od_source_dir = g_string_new("");
+                        for (i=0; gnome_dirs[i]; i++) {
+                                g_string_append (gnome_od_source_dir,
+                                                 gnome_dirs[i]);
+                                g_string_append (gnome_od_source_dir,
+                                                 "/share/oaf:");
+                        }
+                        g_strfreev (gnome_dirs);
 			g_string_append_c (real_od_source_dir, ':');
 			g_string_append (real_od_source_dir,
 					 gnome_od_source_dir->str);
