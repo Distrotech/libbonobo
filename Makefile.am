@@ -8,7 +8,7 @@ libinclude_HEADERS = \
 	libbonobo.h
 
 EXTRA_DIST = \
-	bonobo-activation-config.xml.in \
+	bonobo-activation-config.xml \
 	intltool-extract.in  \
 	intltool-merge.in    \
 	intltool-update.in   \
@@ -17,6 +17,10 @@ EXTRA_DIST = \
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
-sysconfigdir=$(sysconfdir)/bonobo-activation
-sysconfig_DATA = \
-	bonobo-activation-config.xml
+install-data-local:
+	-mkdir -p $(sysconfdir)/bonobo-activation
+	if test -f $(sysconfdir)/bonobo-activation/bonobo-activation-config.xml; then		\
+		echo "bonobo-activation-config.xml configuration file not changed";		\
+	else											\
+		$(INSTALL_DATA) bonobo-activation-config.xml $(sysconfdir)/bonobo-activation;	\
+	fi

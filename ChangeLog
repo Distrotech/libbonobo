@@ -1,5 +1,13 @@
 2003-04-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* Makefile.am (EXTRA_DIST): Include bonobo-activation-config.xml,
+	not bonobo-activation-config.xml.in.
+	(install-data-local): Override default
+	bonobo-activation-config.xml installation procedure so that it is
+	not overwritten if it already exists.
+
+2003-04-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
 	* doc/api/libbonobo.args, doc/api/libbonobo.prerequisistes,
 	doc/api/libbonobo.interfaces: Removed (purely-generated files).
 	
