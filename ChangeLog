@@ -1,5 +1,8 @@
 2004-01-15  Michael Meeks  <michael@ximian.com>
 
+	* activation-server/activation-server-main.c (main): 
+	beef up the --register-server case for debugging.
+
 	* bonobo-activation/bonobo-activation-register.c
 	(bonobo_activation_timeout_reg_check): add env. check for
 	BONOBO_ACTIVATION_NO_TIMEOUT to disable the timeout.

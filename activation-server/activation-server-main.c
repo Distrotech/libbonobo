@@ -370,11 +370,22 @@ main (int argc, char *argv[])
 	if (existing != CORBA_OBJECT_NIL)
 		CORBA_Object_release (existing, NULL);
 
-        if (ior_fd < 0 && !server_ac)
+        if (ior_fd < 0 && !server_ac
+#ifdef BONOBO_ACTIVATION_DEBUG
+            && !server_reg
+#endif
+            )
                 g_critical ("\n\n-- \nThe bonobo-activation-server must be forked by\n"
                             "libbonobo-activation, and cannot be run itself.\n"
                             "This is due to us doing client side locking.\n-- \n");
 
+#ifdef BONOBO_ACTIVATION_DEBUG
+        if (server_reg) {
+                g_warning ("Running in user-forked debugging mode");
+                server_ac = 1;
+        }
+#endif
+        
         /*
          *     It is no longer useful at all to be a pure
          * ObjectDirectory we have binned that mode of

@@ -10,7 +10,7 @@
  *    Define, and export BONOBO_ACTIVATION_DEBUG_OUTPUT
  * for a smoother, closer debugging experience.
  */
-#undef BONOBO_ACTIVATION_DEBUG
+#define noBONOBO_ACTIVATION_DEBUG 1
 
 /*
  *    Time delay after all servers are de-registered / dead
