@@ -184,7 +184,6 @@ do_query_server_info()
         } else
                 ac = bonobo_activation_activation_context_get ();
 
-	g_print ("Query spec is \"%s\"\n", specs);
 	slist = Bonobo_ActivationContext_query (
                                         ac, specs, &reqs,
                                         bonobo_activation_context_get (), &ev);
@@ -241,6 +240,7 @@ do_activating()
 				bonobo_activation_context_get (), &ev);
 	switch (ev._major) {
 	case CORBA_NO_EXCEPTION:
+		g_print ("Activation ID \"%s\" ", a_res->aid);
 		switch (a_res->res._d) {
 		case Bonobo_ACTIVATION_RESULT_OBJECT:
 			g_print ("RESULT_OBJECT\n");
@@ -324,6 +324,7 @@ main (int argc, char *argv[])
 	orb = bonobo_activation_init (argc, argv);
 
 	if (specs) {
+		g_print ("Query spec is \"%s\"\n", specs);
 		if (do_query)
 			do_query_server_info();
 		else
