@@ -1,6 +1,15 @@
-libbonobo 1.107.1
+libbonobo 1.108.0
 
-	* NB. Gero == Gergo.
+	* Bugs fixed (Me)
+		+ exception translation use right domain
+		+ don't fiddle with ref at all if immortal
+		+ build fixage (Jacob Berkman, Abel Cheung)
+		+ Gergo's name is not spelt Gero, doh.
+
+	* Featurelets (Me)
+		+ imported docs from bonobo/
+		+ moniker resolution has chatty exceptions
+		+ install 'echo' in sample directory (Rodrigo)
 
 libbonobo 1.107.0
 
