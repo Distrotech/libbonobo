@@ -1,3 +1,33 @@
+1999-09-26  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-bonobo-selector.c (gnome_bonobo_select_goad_id):
+	Use GnomeDialogRun here.
+
+	* bonobo/gnome-bonobo-item.c (gbi_finalize): Unref the remote item
+	here. 
+	(gbi_set_arg): Also unref the remote item if we are changing it here.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_new_item,
+	gnome_client_site_new): CORBA_Object_release the view refereces we
+	get. 
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_destroy): Unref the
+	remote view when we are destroyed.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_new_item): Catch
+	view destruction to clean up the list of view-frames.
+
+1999-09-25  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-client-site.c (gnome_client_site_new_item): API
+	change to improve consistency.
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_init): Allocate
+	private structure.
+	(gnome_view_frame_get_canvas_item,
+	gnome_view_frame_set_canvas_item): New accessor methods.
+	(gnome_view_frame_destroy): Free private.
+
 1999-09-23  Miguel de Icaza  <miguel@gnu.org>
 
 	* idl/gnome-embeddable.idl: Embeddables no longer throw a
