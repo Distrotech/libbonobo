@@ -394,19 +394,11 @@ od_get_active_server (impl_POA_OAF_ObjectDirectory * servant,
         char *display;
         char *display_iid;
 
-        puts ("XXX - in od_get_active_server");
-
         display = oafd_CORBA_Context_get_value (ctx, "display", NULL, ev);
         
-        puts ("XXX - in od_get_active_server 2");
-
         if (display != NULL) {
-                puts ("XXX - display != NULL");
-
                 display_iid = g_strconcat (display, ",", iid, NULL);
                 
-                printf ("XXX - trying display active %s\n", display_iid);
-
                 retval = g_hash_table_lookup (servant->active_servers, display_iid);
 
                 g_free (display_iid);
@@ -417,8 +409,6 @@ od_get_active_server (impl_POA_OAF_ObjectDirectory * servant,
                 }
         }
 
-        printf ("XXX - trying active %s\n", iid);
-        
         retval = g_hash_table_lookup (servant->active_servers, iid);
         
         if (!CORBA_Object_is_nil (retval, ev)
@@ -445,8 +435,6 @@ impl_OAF_ObjectDirectory_activate (impl_POA_OAF_ObjectDirectory * servant,
         update_registry (servant);
 
         if (!(flags & OAF_FLAG_PRIVATE)) {
-                puts ("XXX - Getting active server");
-
                 retval = od_get_active_server (servant, iid, ctx, ev);
 
                 if (retval != CORBA_OBJECT_NIL) {
@@ -520,8 +508,6 @@ impl_OAF_ObjectDirectory_register (impl_POA_OAF_ObjectDirectory * servant,
 	if (!g_hash_table_lookup (servant->by_iid, actual_iid))
 		return OAF_REG_NOT_LISTED;
 
-        printf ("XXX about to register %s\n", iid);
-        
 	g_hash_table_insert (servant->active_servers,
 			     oldobj ? iid : g_strdup (iid),
 			     CORBA_Object_duplicate (obj, ev));
