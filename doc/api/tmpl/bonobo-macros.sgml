@@ -215,8 +215,28 @@ bonobo-macros
 @\
 			   parent_type:
 @\
+			   parent_type:
+@\
+			   parent_type:
+@\
+			   parent_type:
+@\
+			   parent_type:
+@\
+			   parent_type:
+@\
 			   parent_type: 
 @parent_type_macro: 
+@\
+			   register_type_macro:
+@\
+			   register_type_macro:
+@\
+			   register_type_macro:
+@\
+			   register_type_macro:
+@\
+			   register_type_macro:
 @\
 			   register_type_macro:
 @\
@@ -625,6 +645,16 @@ bonobo-macros
 @\
 					name:
 @\
+					name:
+@\
+					name:
+@\
+					name:
+@\
+					name:
+@\
+					name:
+@\
 					name: 
 @args: 
 @def_return: 
@@ -832,6 +862,16 @@ bonobo-macros
 @\
 				 parent_type:
 @\
+				 parent_type:
+@\
+				 parent_type:
+@\
+				 parent_type:
+@\
+				 parent_type:
+@\
+				 parent_type:
+@\
 				 parent_type: 
 @parent_type_macro: 
 <!-- # Unused Parameters # -->
@@ -846,6 +886,16 @@ bonobo-macros
 @type: 
 @type_as_function: 
 @corba_type: 
+@\
+			     parent_type:
+@\
+			     parent_type:
+@\
+			     parent_type:
+@\
+			     parent_type:
+@\
+			     parent_type:
 @\
 			     parent_type:
 @\
@@ -1439,6 +1489,26 @@ bonobo-macros
 @\
 				      corba_type: 
 @\
+				      parent_type:
+@\
+				      corba_type: 
+@\
+				      parent_type:
+@\
+				      corba_type: 
+@\
+				      parent_type:
+@\
+				      corba_type: 
+@\
+				      parent_type:
+@\
+				      corba_type: 
+@\
+				      parent_type:
+@\
+				      corba_type: 
+@\
 				      parent_type: 
 @parent_type_macro: 
 <!-- # Unused Parameters # -->
@@ -1454,6 +1524,16 @@ bonobo-macros
 @type: 
 @type_as_function: 
 @corba_type: 
+@\
+				  parent_type:
+@\
+				  parent_type:
+@\
+				  parent_type:
+@\
+				  parent_type:
+@\
+				  parent_type:
 @\
 				  parent_type:
 @\

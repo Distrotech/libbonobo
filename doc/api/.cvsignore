@@ -1,14 +1,9 @@
-tmpl.stamp
-tmpl-build.stamp
-sgml.stamp
-sgml-build.stamp
-sgml
-scan-build.stamp
-html.stamp
-html-build.stamp
-html
-Makefile.in
 Makefile
+Makefile.in
+*.stamp
+*.lo
+.libs
+html
 xml
 libbonobo-decl-list.txt
 libbonobo-decl.txt
@@ -16,4 +11,6 @@ libbonobo-undocumented.txt
 libbonobo-unused.txt
 libbonobo.hierarchy
 libbonobo.signals
-
+libbonobo.args
+libbonobo.interfaces
+libbonobo.prerequisites

@@ -518,6 +518,7 @@ BONOBO_REGISTER_TYPE_FULL
 
 <SECTION>
 <FILE>bonobo-main</FILE>
+BonoboThreadHint
 bonobo_is_initialized
 bonobo_init
 bonobo_init_full
@@ -529,6 +530,7 @@ bonobo_setup_x_error_handler
 bonobo_orb
 bonobo_poa
 bonobo_poa_manager
+bonobo_poa_get_threaded
 </SECTION>
 
 <SECTION>

@@ -320,7 +320,7 @@ bonobo_main_quit (void)
  * 
  * Get a predefined POA for a given threading policy/hint.  The
  * returned POA can be passed as the "poa" constructor property of a
- * BonoboOject.
+ * #BonoboOject.
  * 
  * Return value: the requested POA.
  **/

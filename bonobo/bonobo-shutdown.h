@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/**
+/*
  * bonobo-shutdown.h: internal private init & shutdown routines
  *                    used by bonobo_init & bonobo_shutdown
  *

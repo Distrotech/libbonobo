@@ -14,6 +14,15 @@ Bonobo initialization.
 
 </para>
 
+<!-- ##### ENUM BonoboThreadHint ##### -->
+<para>
+
+</para>
+
+@BONOBO_POA_ALL_AT_IDLE: 
+@BONOBO_POA_ONEWAY_AT_IDLE: 
+@BONOBO_POA_THREAD_PER_REQUEST: 
+
 <!-- ##### FUNCTION bonobo_is_initialized ##### -->
 <para>
 
@@ -107,6 +116,15 @@ Bonobo initialization.
    Returns the POA Manager object that is being used by Bonobo.
 </para>
 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_poa_get_threaded ##### -->
+<para>
+
+</para>
+
+@hint: 
 @Returns: 
 
 

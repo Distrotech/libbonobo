@@ -490,3 +490,20 @@ Returns the #GtkType for the BonoboObject object.
 @arg1: 
 @arg2: 
 
+<!-- ##### ARG BonoboObject:poa ##### -->
+<para>
+  Pass this property during construction to specify a custom POA for the BonoboObject. Example:
+    <informalexample>
+	<programlisting>
+BonoboObject * my_bonobo_object_new (void)
+{
+	BonoboObject *object;
+
+	object = g_object_new (MY_TYPE_BONOBO_OBJECT, "poa",
+			       bonobo_poa_get_threaded (BONOBO_POA_ALL_AT_IDLE), NULL);
+	return object;
+}
+	</programlisting>
+    </informalexample>
+</para>
+
