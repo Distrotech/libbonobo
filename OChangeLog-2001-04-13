@@ -1,5 +1,12 @@
 2000-12-14  Michael Meeks  <michael@helixcode.com>
 
+	* components/selector/bonobo-selector.c (generic_factory): deal
+	with running object issues in the old way for now.
+	(get_prop, set_prop, generic_factory): add properties to make it
+	actualy useful.
+
+2000-12-14  Michael Meeks  <michael@helixcode.com>
+
 	* Version 0.30
 
 2000-12-14  Michael Meeks  <michael@helixcode.com>

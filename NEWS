@@ -1,3 +1,8 @@
+Bonobo 0.30
+
+	* Released since Elliot would not produce a fixed ORBit release,
+	reverts fixes in 0.29, should not pass distcheck.
+
 Bonobo 0.29
 
 	* Evil bugs
