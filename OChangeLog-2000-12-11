@@ -1,3 +1,9 @@
+1999-08-22  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-embeddable-factory.c
+	(gnome_embeddable_factory_construct): Use gnome_object_unref
+	instead of gtk_object_unref.
+
 1999-08-22  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-view-frame.h: Add gnome_view_frame_set_zoom_factor
