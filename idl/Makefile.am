@@ -3,7 +3,6 @@ NULL=
 idldir = $(datadir)/idl
 
 idl_DATA =				\
-	bonobo.idl			\
 	Bonobo.idl			\
 	bonobo-unknown.idl		\
 	bonobo-advise.idl		\

@@ -1,3 +1,9 @@
+2000-11-27  Pavel Cisler  <pavel@eazel.com>
+
+	* idl/Makefile.am:
+	Make it build.
+	Mathieu forgot to remove bonobo.idl from Makefile.am.
+
 2000-11-27  Michael Meeks  <michael@helixcode.com>
 
 	* tests/Makefile.am (TESTS): add test-any
