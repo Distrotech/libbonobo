@@ -1,3 +1,11 @@
+2003-05-29  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-thread.c: add.
+
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_pbclient_get_boolean): fix a nasty with
+	CORBA_boolean vs. 'gboolean'.
+
 2003-05-27  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* doc/api/figures/Makefile.am: Indicate the need to use dia 0.91

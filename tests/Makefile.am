@@ -1,6 +1,7 @@
 SUBDIRS = test-activation
 
 noinst_PROGRAMS =		\
+	test-thread		\
 	test-moniker		\
 	test-properties-server	\
 	test-properties-client	\
@@ -23,6 +24,8 @@ test_properties_server_SOURCES =			\
 test_properties_client_SOURCES =			\
 	test-properties-client.c
 
+test_thread_SOURCES = test-thread.c
+
 test_moniker_SOURCES = test-moniker.c
 
 test_object_SOURCES = test-object.c
@@ -37,6 +40,6 @@ TESTS_ENVIRONMENT =					\
 	LD_LIBRARY_PATH="$(top_builddir)/bonobo/.libs:$$LD_LIBRARY_PATH"	\
 	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"
 
-TESTS = test-moniker test-event-source test-object \
+TESTS = test-thread test-moniker test-event-source test-object \
 	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem
 EXTRA_DIST = test-properties.sh
