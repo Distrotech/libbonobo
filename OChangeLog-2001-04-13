@@ -1,5 +1,8 @@
 Fri Nov 26 08:15:53 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
+	* gshell/inout.c (buffer_save_pf): new save routine.
+	(buffer_save_ps): new save routine.
+
 	* components/bonobo.keys: use embeddable:text-plain as default
 	viewer for text/* 
 
