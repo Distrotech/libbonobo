@@ -1,3 +1,9 @@
+2001-06-06  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/Makefile.am ($(CORBA_SOURCE)): removed --small option
+
+	* idl/Bonobo_Property.idl: removed that unused filter_path
+
 2001-06-05  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-event-source.c

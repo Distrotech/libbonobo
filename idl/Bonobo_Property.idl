@@ -188,8 +188,7 @@ interface ConfigDatabase : PropertyBag {
 	 * The added database will be used to lookup default values.
 	 */
 	void            addDatabase (in ConfigDatabase default_db, 
-				     in string filter_path,
-				     in string append_path)
+				     in string path)
 		raises (BackendFailed);
 
 	/** 
