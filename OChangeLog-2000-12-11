@@ -1,3 +1,7 @@
+1999-06-22  Tomas Ogren  <stric@ing.umu.se>
+
+	* configure.in: Added 'sv' to ALL_LINGUAS
+
 1999-06-22  Nat Friedman  <nat@gnome-support.com>
 
 	* idl/gnome-component.idl (GNOME): Moved do_verb to the View.
