@@ -1,3 +1,10 @@
+2003-05-24  Martin Kretzschmar  <m_kretzschmar@gmx.net>
+
+	* doc/activation-api/server-xml-reference.sgml: added markup,
+	updated .server snippets for GNOME2, s/OAF/Bonobo Activation in
+	text, went into nautilus code and came back with information about
+	oaf_attributes for nautilus views, written down here
+	
 2003-05-22  Michael Meeks  <michael@ximian.com>
 
 	* bonobo-activation/bonobo-activation-fork-server.c
