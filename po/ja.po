@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo CVS-20030311\n"
-"POT-Creation-Date: 2003-07-31 13:11+0100\n"
+"POT-Creation-Date: 2003-08-26 14:07+0100\n"
 "PO-Revision-Date: 2003-05-06 22:10+0900\n"
 "Last-Translator: KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -82,7 +82,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:889
+#: activation-server/object-directory-corba.c:890
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "サーバ '%s' を活性化する際に競合発生"

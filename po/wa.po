@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bonobo-activation\n"
-"POT-Creation-Date: 2003-07-31 13:11+0100\n"
+"POT-Creation-Date: 2003-08-26 14:07+0100\n"
 "PO-Revision-Date: 2003-01-12 15:28+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -79,7 +79,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:889
+#: activation-server/object-directory-corba.c:890
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
 msgstr "L' enondaedje di %s a fwait berwete: %d (%s)\n"

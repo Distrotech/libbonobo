@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-31 13:11+0100\n"
+"POT-Creation-Date: 2003-08-26 14:07+0100\n"
 "PO-Revision-Date: 2002-08-24 18:29+0430\n"
 "Last-Translator: Roozbeh Pournader <roozbeh@sharif.edu>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -76,7 +76,7 @@ msgstr "پرونده‌ی پیکربندی فعال‌سازی Bonobo با مو�
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:889
+#: activation-server/object-directory-corba.c:890
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
 msgstr "استثنا در فعال‌سازی '%s"

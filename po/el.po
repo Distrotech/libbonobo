@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.1.0\n"
-"POT-Creation-Date: 2003-07-31 13:11+0100\n"
+"POT-Creation-Date: 2003-08-26 14:07+0100\n"
 "PO-Revision-Date: 2003-01-28 13:15+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -88,7 +88,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:889
+#: activation-server/object-directory-corba.c:890
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Συνθήκη αποκλεισμού στην ενεργοποίηση του εξυπηρετητή '%s'"

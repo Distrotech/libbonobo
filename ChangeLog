@@ -1,3 +1,10 @@
+2003-08-26  Michael Meeks  <michael@ximian.com>
+
+	* Version 2.4.0
+
+	* activation-server/object-directory-corba.c
+	(remove_active_server): don't spew a warning.
+
 2003-08-22  Samúel Jón Gunnarsson  <sammi@techattack.nu>
 
 	* configure.in:  Added "is" to ALL_LINGUAS.

@@ -647,7 +647,8 @@ remove_active_server (ObjectDirectory *od,
 	int               i;
 
 	servers = g_hash_table_lookup (od->active_server_lists, iid);
-        g_return_val_if_fail (servers != NULL, FALSE);
+        if (!servers)
+                return FALSE;
 
 	for (i = 0; i < servers->n_servers; i++)
 		if (CORBA_Object_is_equivalent (
