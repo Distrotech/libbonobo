@@ -1,8 +1,33 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+/*
+ *  oafd: OAF CORBA dameon.
+ *
+ *  Copyright (C) 1999, 2000 Red Hat, Inc.
+ *  Copyright (C) 1999, 2000 Eazel, Inc.
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as
+ *  published by the Free Software Foundation; either version 2 of the
+ *  License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *  Authors: Elliot Lee <sopwith@redhat.com>,
+ *
+ */
+
 #include <stdio.h>
 #include <time.h>
 
 #include "oafd.h"
+#include "oaf-i18n.h"
 #include "liboaf/liboaf.h"
 #include "ac-query-expr.h"
 
@@ -19,7 +44,8 @@ typedef struct
 	GHashTable *by_iid;
 
 	GHashTable *active_servers;	/* It is assumed that accesses to this
-					 * hash table are atomic - i.e. a CORBA call cannot come in while
+					 * hash table are atomic - i.e. a CORBA 
+                                         * call cannot come in while
 					 * checking a value in this table */
 	OAF_ServerStateCache *active_server_list;
 	OAF_CacheTime time_active_pulled;
@@ -394,15 +420,17 @@ ac_do_activation (impl_POA_OAF_ActivationContext * servant,
 	OAF_ServerInfo *activatable;
 	int num_layers;
 
-	/* When doing checks for shlib loadability, we have to find the info on the factory object in case
-	 * a factory is inside a shlib */
+	/* When doing checks for shlib loadability, we 
+         * have to find the info on the factory object in case
+	 * a factory is inside a shlib 
+         */
 	child = ac_find_child_for_server (servant, server, ev);
 
 	if (!child || !child->obj || ev->_major != CORBA_NO_EXCEPTION) {
 		OAF_GeneralError *errval = OAF_GeneralError__alloc ();
 		errval->description =
 			CORBA_string_dup
-			("Couldn't find which child the server was listed in");
+			(N_("Couldn't find which child the server was listed in"));
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_OAF_GeneralError, errval);
 		return;
@@ -499,8 +527,10 @@ ctx_get_value (CORBA_Context ctx, const char *propname,
 	CORBA_NVList *nvout;
 	char *retval;
 
-	/* Figure out what the host the activating client is running on (for
-	 * purposes of fun & pleasure) */
+	/* Figure out what the host the 
+         * activating client is running on (for
+	 * purposes of fun & pleasure) 
+         */
 	CORBA_Context_get_values (ctx, NULL, 0, (char *) propname, &nvout,
 				  ev);
 	if (ev->_major == CORBA_NO_EXCEPTION) {
@@ -953,7 +983,7 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                      ex_OAF_ActivationContext_IncompleteContext,
                                      NULL);
-		goto out;	/* XXX in future, add hook to allow starting a new OD on demand */
+		goto out;	/* FIXME: in future, add hook to allow starting a new OD on demand */
         }
 
 
@@ -991,3 +1021,8 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 
 	return retval;
 }
+
+
+
+
+

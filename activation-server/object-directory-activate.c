@@ -1,8 +1,33 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+/*
+ *  oafd: OAF CORBA dameon.
+ *
+ *  Copyright (C) 1999, 2000 Red Hat, Inc.
+ *  Copyright (C) 1999, 2000 Eazel, Inc.
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as
+ *  published by the Free Software Foundation; either version 2 of the
+ *  License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *  Authors: Elliot Lee <sopwith@redhat.com>,
+ *
+ */
+
 #include "config.h"
 
 #include "oafd.h"
 #include "liboaf/liboaf-private.h"
+#include "oaf-i18n.h"
 
 #include <signal.h>
 #include <ctype.h>
@@ -32,7 +57,7 @@ od_server_activate (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 
 	else if (!strcmp (si->server_type, "shlib"))
 		g_warning
-			("We don't handle activating shlib objects in a remote process yet");
+			(N_("We don't handle activating shlib objects in a remote process yet"));
 
 	return CORBA_OBJECT_NIL;
 }

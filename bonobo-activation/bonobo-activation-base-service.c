@@ -1,11 +1,38 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-/* This is part of the per-app CORBA bootstrapping - we use this to get hold of a running metaserver and such */
+/*
+ *  liboaf: A library for accessing oafd in a nice way.
+ *
+ *  Copyright (C) 1999, 2000 Red Hat, Inc.
+ *  Copyright (C) 2000 Eazel, Inc.
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Library General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Library General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Library General Public
+ *  License along with this library; if not, write to the Free
+ *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *  Author: Elliot Lee <sopwith@redhat.com>
+ *
+ */
+
+/* This is part of the per-app CORBA bootstrapping - we use this to get 
+   hold of a running metaserver and such */
+
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
 #include <string.h>
 
 #include "liboaf-private.h"
+#include "oaf-i18n.h"
 #include <limits.h>
 #include <errno.h>
 #include <unistd.h>
@@ -269,7 +296,7 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 
 	if (childpid < 0) {
 		errval = OAF_GeneralError__alloc ();
-		errval->description = CORBA_string_dup ("Couldn't fork a new process");
+		errval->description = CORBA_string_dup (N_("Couldn't fork a new process"));
 
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_OAF_GeneralError, errval);
@@ -287,13 +314,13 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 
 			if (WIFSIGNALED (status))
 				g_snprintf (cbuf, sizeof (cbuf),
-					    "Child received signal %u (%s)",
+					    N_("Child received signal %u (%s)"),
 					    WTERMSIG (status),
 					    oaf_strsignal (WTERMSIG
 							   (status)));
 			else
 				g_snprintf (cbuf, sizeof (cbuf),
-					    "Unknown non-exit error (status is %u)",
+					    N_("Unknown non-exit error (status is %u)"),
 					    status);
 			errval->description = CORBA_string_dup (cbuf);
 			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -364,7 +391,7 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 		execvp (cmd[0], (char **) cmd);
 		if (iopipes[1] != 1)
 			dup2 (iopipes[1], 1);
-		fprintf (stdout, "Exec failed: %d (%s)\n", errno,
+		g_print (N_("Exec failed: %d (%s)\n"), errno,
 			 g_strerror (errno));
 		_exit (1);
 	}
@@ -535,7 +562,8 @@ oaf_service_get (const OAFRegistrationCategory * regcat)
 
 		CORBA_Object_release (retval, &myev);
 
-		oaf_reglocs_unlock (ev);	/* The activator may want to do Fancy Stuff, and having the X server grabbed at this time
+		oaf_reglocs_unlock (ev);	/* The activator may want to do Fancy Stuff, and 
+                                                 * having the X server grabbed at this time
 						 * is Broken (tm) */
 		retval =
 			oaf_activators_use (regcat,
@@ -767,3 +795,8 @@ oaf_rloc_file_register (void)
 {
 	oaf_registration_location_add (&rloc_file, 0, NULL);
 }
+
+
+
+
+

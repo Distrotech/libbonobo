@@ -1,6 +1,30 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-#include "config.h"
+/*
+ *  liboaf: A library for accessing oafd in a nice way.
+ *
+ *  Copyright (C) 1999, 2000 Red Hat, Inc.
+ *  Copyright (C) 2000 Eazel, Inc.
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Library General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Library General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Library General Public
+ *  License along with this library; if not, write to the Free
+ *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *  Author: Elliot Lee <sopwith@redhat.com>
+ *
+ */
 
+#include "config.h"
+#include "oaf-i18n.h"
 #include "liboaf/liboaf-private.h"
 
 #include <sys/socket.h>
@@ -151,13 +175,13 @@ static char *oaf_activate_iid = NULL;
 struct poptOption oaf_popt_options[] = {
 
 	{"oaf-od-ior", '\0', POPT_ARG_STRING, &oaf_od_ior, 0,
-	 "Object directory to use when registering servers", "IOR"},
+	 N_("Object directory to use when registering servers"), "IOR"},
 	{"oaf-ior-fd", '\0', POPT_ARG_INT, &oaf_ior_fd, 0,
-	 "File descriptor to print IOR on", "FD"},
+	 N_("File descriptor to print IOR on"), N_("FD")},
 	{"oaf-activate-iid", '\0', POPT_ARG_STRING, &oaf_activate_iid, 0,
-	 "IID to activate", "IID"},
+	 N_("IID to activate"), "IID"},
         {"oaf-private", '\0', POPT_ARG_NONE, &oaf_private, 0,
-         "Prevent registering of server with OAF", NULL},
+         N_("Prevent registering of server with OAF"), NULL},
 	{NULL}
 };
 
@@ -407,3 +431,7 @@ const char liboaf_version[] = VERSION;
 const guint liboaf_major_version = OAF_MAJOR_VERSION,
 	liboaf_minor_version = OAF_MINOR_VERSION,
 	liboaf_micro_version = OAF_MICRO_VERSION;
+
+
+
+

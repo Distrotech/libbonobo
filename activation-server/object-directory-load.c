@@ -1,5 +1,30 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+/*
+ *  oafd: OAF CORBA dameon.
+ *
+ *  Copyright (C) 1999, 2000 Red Hat, Inc.
+ *  Copyright (C) 1999, 2000 Eazel, Inc.
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU General Public License as
+ *  published by the Free Software Foundation; either version 2 of the
+ *  License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *  Authors: Elliot Lee <sopwith@redhat.com>,
+ *
+ */
+
 #include "oafd.h"
+#include "oaf-i18n.h"
 #include <stdlib.h>
 #include <ctype.h>
 #include <sys/types.h>
@@ -88,7 +113,7 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 						CORBA_string_dup (valuestr);
 				else {
 					g_warning
-						("Attribute '%s' has no value",
+						(N_("Attribute '%s' has no value"),
 						 curattr->name);
 					curattr->v._u.
 						value_stringv._buffer[j] =
@@ -118,7 +143,7 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 				curattr->v._u.value_string =
 					CORBA_string_dup (valuestr);
 			else {
-				g_warning ("Attribute '%s' has no value",
+				g_warning (N_("Attribute '%s' has no value"),
 					   curattr->name);
 				curattr->v._u.value_string =
 					CORBA_string_dup ("");
@@ -176,7 +201,7 @@ OAF_ServerInfo_load (char **dirs,
 	*nservers = 0;
 
 	for (dirnum = 0; dirs[dirnum]; dirnum++) {
-		g_print ("Trying dir %s\n", dirs[dirnum]);
+		g_print (N_("Trying dir %s\n"), dirs[dirnum]);
 		dirh = opendir (dirs[dirnum]);
 		if (!dirh)
 			continue;
@@ -222,7 +247,8 @@ OAF_ServerInfo_load (char **dirs,
 				iid = xmlGetProp (curnode, "iid");
 
                                 if (!od_validate_iid (iid)) {
-                                        g_print ("IID '%s' contains illegal characters; discarding\n", iid);
+                                        g_print (N_("IID '%s' contains illegal characters; discarding\n"), 
+                                                 iid);
                                         free (iid);
                                         continue;
                                 }
