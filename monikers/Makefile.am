@@ -7,17 +7,18 @@ INCLUDES =                                              \
         -I$(includedir)                                 \
 	$(BONOBO_TEST_CFLAGS)
 
-OAF_FILES =				\
-	Bonobo_Moniker_std.oafinfo	\
-	Bonobo_Moniker_gzip.oafinfo	\
-	Bonobo_Moniker_http.oafinfo
+OAF_FILES =					\
+	Bonobo_Moniker_std.oafinfo		\
+	Bonobo_Moniker_gzip.oafinfo		\
+	Bonobo_Moniker_http.oafinfo		\
+	Bonobo_Moniker_Extender_file.oafinfo
 
 oafdir = $(datadir)/oaf
 oaf_DATA = $(OAF_FILES)
 
 # bonobo-moniker-untar.oafinfo
 
-bin_PROGRAMS = std-moniker bonobo-moniker-gunzip bonobo-moniker-http
+bin_PROGRAMS = std-moniker bonobo-moniker-gunzip bonobo-moniker-http bonobo-moniker-extender-file
 
 # bonobo-moniker-untar
 
@@ -43,6 +44,13 @@ std_moniker_SOURCES =			\
 	std-moniker.c
 
 std_moniker_LDADD =			\
+	$(moniker_ldadd)
+
+bonobo_moniker_extender_file_SOURCES =	\
+	bonobo-moniker-extender-file.h	\
+	bonobo-moniker-extender-file.c
+
+bonobo_moniker_extender_file_LDADD =	\
 	$(moniker_ldadd)
 
 bonobo_moniker_gunzip_SOURCES =		\

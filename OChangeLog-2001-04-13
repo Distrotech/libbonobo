@@ -1,3 +1,20 @@
+2000-12-15  Dietmar Maurer <dietmar@maurer-it.com>
+
+	* monikers/bonobo-moniker-file.c (file_resolve): impl.
+	Bonobo/Storage, chain to extender.
+
+	* monikers/Makefile.am: Add bits.
+
+	* monikers/bonobo-moniker-extender-file.[ch]: impl.
+
+	* monikers/Bonobo_Moniker_Extender_file.oafinfo: add.
+
+	* bonobo/Makefile.am: add bits.
+
+	* bonobo/bonobo-moniker-extender.[ch]: impl.
+
+	* idl/bonobo-moniker.idl: add MonikerExtender interface.
+
 2000-12-15  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-moniker.c (escape_moniker): fix precondition.

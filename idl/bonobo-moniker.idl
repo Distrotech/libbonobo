@@ -69,6 +69,16 @@ module Bonobo {
 					    in string         requested_interface)
 			raises (InterfaceNotFound, TimeOut);
 	};
+
+        interface MonikerExtender : Bonobo::Unknown {
+		exception InterfaceNotFound {};
+		exception TimeOut           {};
+
+                Unknown resolve (in Moniker m,
+                                 in string  display_name,
+                                 in string  requested_interface)
+			raises (InterfaceNotFound, TimeOut);
+        };
 };
 
 #endif /* BONOBO_MONIKER_IDL */
