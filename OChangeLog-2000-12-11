@@ -1,5 +1,12 @@
 2000-03-10  Michael Meeks  <michael@helixcode.com>
 
+	* samples/controls/bonobo-clock-control.gnorba:
+	use IDL:Bonobo/Control
+
+	* samples/controls/bonobo-calculator-control.gnorba: ditto.
+
+2000-03-10  Michael Meeks  <michael@helixcode.com>
+
 	* idl/bonobo-property.idl: conditional non use of CORBA::TypeCode
 	since ORBit can't cope with it.
 
