@@ -4,6 +4,7 @@ INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR
 
 oafd_SOURCES=			\
 	qsort_ex.c              \
+	qsort_ex.h              \
 	oaf-skels.c		\
 	ac-query-lex.c		\
 	ac-query-parse.c	\
