@@ -1,3 +1,10 @@
+2001-02-13  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-ui-sync-menu.c: (str_uscore_equal): Fix bug where
+	it would consider two strings matching even if only the prefixes
+	matched. Also fix handling of strings with double underscores,
+	which match a single underscore (old code would match empty string).
+
 2001-02-09  Cody Russell  <bratsche@gnome.org>
 	* bonobo/bonobo-ui-engine-config.c: Remove the Cancel button.
 	Since this dialog makes changes in real time, this button serves
