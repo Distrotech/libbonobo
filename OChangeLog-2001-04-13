@@ -1,3 +1,8 @@
+2000-08-11  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/Makefile.am: Removed bonobo-moniker-client.h; this was
+	breaking the build.
+
 2000-08-11  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-object-client.c (bonobo_object_restore_from_url):
