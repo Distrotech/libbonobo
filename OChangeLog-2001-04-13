@@ -1,3 +1,9 @@
+2000-12-11  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-ui-toolbar.c: (impl_destroy):
+	Fixed loop that destroys the unparented widgets. It was looking at
+	p->next after code that might have destroyed p.
+
 2000-12-11  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-xml.c (override_node_with): revert
