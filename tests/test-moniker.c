@@ -92,7 +92,7 @@ main (int argc, char *argv [])
 
 	check_parse_name ("a:#b:", "b:", 2);
 
-	check_parse_name ("a:!b:", "b:", 2);
+	check_parse_name ("a:!b:", "!b:", 2);
 
 	check_parse_name ("a:3456789#b:", "b:", 9);
 

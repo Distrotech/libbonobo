@@ -1,4 +1,11 @@
+2001-09-10  Martin Baulig  <baulig@suse.de>
+
+	* tests/test-moniker.c: The expected result of "a:!b:" is "!b:",
+	not "b:" - see my ChangeLog entry for bonobo/bonobo-moniker-util.c
+	(bonobo_moniker_util_parse_name) from 2001-08-11.
+	
 2001-09-09  Frank Belew <frb@ximian.com>
+
 	* bonobo/bonobo-types.c: removed references to gbsearcharray
 	  (otaylor@redhat.com)
 
