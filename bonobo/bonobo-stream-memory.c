@@ -262,8 +262,11 @@ bonobo_stream_mem_get_type (void)
 			(GInstanceInitFunc) NULL
 		};
 
-		type = g_type_register_static (
-			BONOBO_X_OBJECT_TYPE, "BonoboStreamMem", &info, 0);
+		type = bonobo_type_unique (
+			BONOBO_OBJECT_TYPE,
+			POA_Bonobo_Stream__init, NULL,
+			GTK_STRUCT_OFFSET (BonoboStreamMemClass, epv),
+			&info, "BonoboStreamMem");
 	}
 
 	return type;

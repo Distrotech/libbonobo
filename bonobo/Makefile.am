@@ -169,5 +169,3 @@ dist-hook:
 	for file in $(CORBA_SOURCE) ; do \
 	    rm -f $(distdir)/$$file ; \
 	done
-
-
