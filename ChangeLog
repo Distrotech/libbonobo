@@ -1,3 +1,8 @@
+2001-08-14  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_full):
+	fix secondary 'add_full' closure store to use new marshaller.
+
 2001-08-13  Michael Meeks  <michael@ximian.com>
 
 	* idl/Makefile.am (Bonobo-imodule.c): fix itype lib build deps.

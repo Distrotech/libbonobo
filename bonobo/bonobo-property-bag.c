@@ -640,7 +640,7 @@ bonobo_property_bag_add_full (BonoboPropertyBag    *pb,
 	prop->doctitle       = g_strdup (doctitle);
 
 	prop->priv = g_new0 (BonoboPropertyPrivate, 1);
-	prop->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
+	prop->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_ANY__TYPECODE_UINT_POINTER);
 	prop->priv->set_prop = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
 
 	if (default_value)
