@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-25 01:51+0100\n"
-"PO-Revision-Date: 2003-12-26 01:02+0100\n"
+"POT-Creation-Date: 2003-12-27 17:17+0100\n"
+"PO-Revision-Date: 2003-12-27 19:01+0100\n"
 "Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: activation-server/activation-context-corba.c:473
 msgid "Couldn't find which child the server was listed in"
-msgstr "Kunne ikkje finne kva barn tenarar var oppført i"
+msgstr "Kunne ikkje finna kva barn tenaren var oppført i"
 
 #: activation-server/activation-context-corba.c:751
 msgid "Not a valid Activation ID"
@@ -29,7 +29,7 @@ msgstr "Ikkje eit gyldig aktiviserings-ID"
 
 #: activation-server/activation-server-main.c:66
 msgid "Directory to read .server files from"
-msgstr "Katalog å lese .server filer frå"
+msgstr "Katalog å lesa .server filer frå"
 
 #: activation-server/activation-server-main.c:66
 msgid "DIRECTORY"
@@ -41,7 +41,7 @@ msgstr "Fungér som ActivationContext (vanleg er kun ObjectDirectory)"
 
 #: activation-server/activation-server-main.c:73
 msgid "File descriptor to write IOR to"
-msgstr "Fildeskriptor å skrive IOR til"
+msgstr "Fildeskriptor å skriva IOR til"
 
 #: activation-server/activation-server-main.c:73
 #: bonobo-activation/bonobo-activation-init.c:193
@@ -74,7 +74,7 @@ msgstr "Varslingsteneste for aktivering"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Vi handterar ikkje avtivering av shlib-objekt i ein fjernprosess enno"
+msgstr "Me handsamar ikkje aktivering av shlib-objekt i ein fjernprosess enno"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
@@ -94,12 +94,13 @@ msgstr ""
 #.
 #: activation-server/object-directory-corba.c:1130
 #, c-format
+#, fuzzy
 msgid "Race condition activating server '%s'"
 msgstr "«Race condition» under aktivering av tenaren «%s»"
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr "ein NULL iid er ikkje gyldig"
+msgstr "ein NULL-iid er ikkje gyldig"
 
 #: activation-server/object-directory-load.c:98
 #, c-format
@@ -123,12 +124,12 @@ msgstr "Eigenskap «%s» har ingen verdi"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Barnprosess ga ikkje frå seg ei feilmelding, ein ukjent feil oppstod"
+msgstr "Barnprosess gav ikkje frå seg ei feilmelding. Ein ukjent feil oppstod"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Klarte ikkje å lese frå barnprosess: %s\n"
+msgstr "Klarte ikkje å lesa frå barnprosess: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
@@ -142,17 +143,17 @@ msgstr "Barn mottok signal %u (%s)"
 #: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr "Ukjent ikkje-eksisterande feil (status er %u)"
+msgstr "Ukjent feil som ikkje avslutta (status er %u)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-activation klarte ikkje å sette prosessgruppe på %s: %s\n"
+msgstr "bonobo-activation klarte ikkje å setja prosessgruppe på %s: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Klarte ikkje å køyre %s: %d (%s)\n"
+msgstr "Klarte ikkje å køyra %s: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
@@ -160,7 +161,7 @@ msgstr "For mange alias-nivå for eit locale. Dette kan tyda på ei løkke"
 
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
-msgstr "Fildeskriptor å skrive IOR på"
+msgstr "Fildeskriptor å skriva IOR på"
 
 #: bonobo-activation/bonobo-activation-init.c:195
 msgid "IID to activate"
@@ -168,7 +169,7 @@ msgstr "IID som skal aktiverast"
 
 #: bonobo-activation/bonobo-activation-init.c:197
 msgid "Prevent registering of server with OAF"
-msgstr "Forhindre registrering av tenarar i OAF"
+msgstr "Hindra registrering av tenarar i OAF"
 
 #: bonobo-activation/bonobo-activation-init.c:282
 msgid "Bonobo activation options"
@@ -183,7 +184,7 @@ msgstr "g_module_open i «%s» feila med «%s»"
 #: bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr "Klarar ikkje å finne symbol Bonobo_Plugin_info i «%s»"
+msgstr "Klarar ikkje å finna symbol Bonobo_Plugin_info i «%s»"
 
 #: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
@@ -193,13 +194,13 @@ msgstr "Fabrikken «%s» returnerte NIL for «%s»"
 #: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr "Shlib «%s» innheldt ikkje «%s»"
+msgstr "Shlib «%s» inneheldt ikkje «%s»"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
 msgstr "Namn"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
 msgstr "Unikt namn på programmet"
 
@@ -233,7 +234,7 @@ msgstr "Syntaksfeil i objektskildringa"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Kan ikkje aktivere objekt frå fabrikk"
+msgstr "Kan ikkje aktivera objekt frå fabrikk"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -261,7 +262,7 @@ msgstr "Objektet ikkje funne i lageret"
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "Ikkje løyve til å gjere operasjonar på lager"
+msgstr "Ikkje løyve til å gjera operasjonar på lager"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
@@ -349,7 +350,7 @@ msgstr "Generelle aktiviseringsfeil utan skildring"
 
 #: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
-msgstr "Kunne ikkje initialisere Bonobo"
+msgstr "Kunne ikkje initialisera Bonobo"
 
 #: bonobo/bonobo-moniker.c:352
 #, c-format
@@ -358,7 +359,7 @@ msgstr "Klarte ikkje å slå opp, eller utvide «%s»"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr "Klarter ikkje å aktivere objekt"
+msgstr "Klarte ikkje å aktivera objekt"
 
 #: monikers/bonobo-moniker-oaf.c:53
 #, c-format
@@ -420,25 +421,25 @@ msgstr "Ekkokomponent fabrikk"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr "Klarte ikkje å initialisere Bonobo"
+msgstr "Klarte ikkje å initialisera Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "Klarte ikkje å opprette ein instans av eksempel ekkokomponent"
+msgstr "Klarte ikkje å oppretta ein instans av eksempel ekkokomponent"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr "Eit unntakk skjedde «%s»"
+msgstr "Eit unntakk skjedde: «%s»"
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr "Klarte ikkje å lagre oppsettsfil.\n"
+msgstr "Klarte ikkje å lagra oppsettsfil.\n"
 
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "Sjekk at du har løyve til å skrive til denne fila «%s».\n"
+msgstr "Sjekk at du har løyve til å skriva til fila «%s».\n"
 
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
@@ -456,11 +457,11 @@ msgstr ""
 #: utils/bonobo-activation-sysconf.c:118
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr "%s allereide i oppsettsfil\n"
+msgstr "%s allereie i oppsettsfil\n"
 
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr "det eksisterar ikkje ei strukturert oppsettsfil\n"
+msgstr "det finst ikkje ei strukturert oppsettsfil\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
