@@ -91,7 +91,7 @@ impl_Bonobo_ObjectFactory_create_object (PortableServer_Servant   servant,
 	return CORBA_Object_duplicate (bonobo_object_corba_objref (BONOBO_OBJECT (object)), ev);
 }
 
-static CORBA_Object
+CORBA_Object
 bonobo_generic_factory_corba_object_create (BonoboGenericFactory *object, 
 					    gpointer              shlib_id)
 {

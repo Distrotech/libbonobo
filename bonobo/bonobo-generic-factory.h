@@ -50,7 +50,11 @@ typedef struct {
 				      const char           *component_id);
 } BonoboGenericFactoryClass;
 
-GType               bonobo_generic_factory_get_type  (void);
+GType                 bonobo_generic_factory_get_type  (void);
+
+CORBA_Object          bonobo_generic_factory_corba_object_create (
+	BonoboGenericFactory *object, 
+	gpointer              shlib_id);
 
 BonoboGenericFactory *bonobo_generic_factory_new (
 	const char            *oaf_iid,

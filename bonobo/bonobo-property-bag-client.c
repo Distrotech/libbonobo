@@ -247,8 +247,7 @@ bonobo_property_bag_client_persist (Bonobo_PropertyBag       pb,
 
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (pb != CORBA_OBJECT_NIL);
-	g_return_if_fail (stream != NULL);
-	g_return_if_fail (BONOBO_IS_STREAM (stream));
+	g_return_if_fail (stream != CORBA_OBJECT_NIL);
 
 	persist = Bonobo_Unknown_queryInterface (pb, "IDL:Bonobo/PersistStream:1.0", ev);
 

@@ -1,5 +1,6 @@
 #include <config.h>
 #include <stdio.h>
+#include <gtk/gtk.h>
 #include <libbonobo.h>
 
 CORBA_ORB	    orb;

@@ -8,7 +8,6 @@
  *
  * Copyright 2001 Ximian, Inc.
  */
-
 #ifndef LIBBONOBO_H
 #define LIBBONOBO_H 1
 

@@ -102,10 +102,10 @@ bonobo_shlib_factory_new (const char            *oaf_iid,
 	c_factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
 
 	corba_factory = bonobo_generic_factory_corba_object_create (
-		BONOBO_OBJECT (c_factory), factory);
+		BONOBO_GENERIC_FACTORY (c_factory), factory);
 
 	if (corba_factory == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (c_factory));
+		g_object_unref (G_OBJECT (c_factory));
 		return NULL;
 	}
 	
@@ -149,10 +149,10 @@ BonoboShlibFactory *bonobo_shlib_factory_new_multi (
 	c_factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
 
 	corba_factory = bonobo_generic_factory_corba_object_create (
-		BONOBO_OBJECT (c_factory), factory_cb);
+		BONOBO_GENERIC_FACTORY (c_factory), factory_cb);
 
 	if (corba_factory == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (c_factory));
+		g_object_unref (G_OBJECT (c_factory));
 		return NULL;
 	}
 	

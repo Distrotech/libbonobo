@@ -1,4 +1,6 @@
 #include <config.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <libbonobo.h>
 
 static void
@@ -10,7 +12,7 @@ check_string (const char *prefix, const char *escaped, const char *unescaped)
 	char          *s, *name;
 
 	moniker = bonobo_moniker_construct (
-		gtk_type_new (bonobo_moniker_get_type ()), prefix);
+		g_object_new (bonobo_moniker_get_type (), NULL), prefix);
 	
 	name = g_strconcat (prefix, escaped, NULL);
 	bonobo_moniker_set_name (moniker, name, strlen (name));
@@ -46,7 +48,7 @@ main (int argc, char *argv [])
 	ev = &real_ev;
 	CORBA_exception_init (ev);
 
-	gtk_type_init ();
+	g_type_init (G_TYPE_DEBUG_NONE);
 
 	orb = oaf_init (argc, argv);
 	
