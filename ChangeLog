@@ -1,3 +1,10 @@
+2001-09-06  Anders Carlsson  <andersca@gnu.org>
+
+	* bonobo/Makefile.am: Change includedir to gnome-2.0/ 
+	instead of gnome/2/
+
+	* bonobo/libbonobo-2.0.pc.in (Cflags): Likewise.
+
 2001-09-04  Martin Baulig  <baulig@suse.de>
 
 	This big closures / types patch:
@@ -85,6 +92,7 @@
 	BONOBO_PROPERTY_BAG_TYPE, BONOBO_TYPE_CORBA_ANY, G_TYPE_UINT,
 	BONOBO_TYPE_CORBA_EXCEPTION.
 
+>>>>>>> 1.171
 2001-08-31  Abel Cheung  <maddog@linux.org.hk>
 
 	* configure.in (ALL_LINGUAS): zh_TW.Big5 -> zh_TW

@@ -50,7 +50,7 @@ lib_LTLIBRARIES = libbonobo-2.la
 libbonobo_2_la_LIBADD = \
 	$(LIBBONOBO_LIBS)
 
-libbonoboincludedir = $(includedir)/gnome/2/bonobo
+libbonoboincludedir = $(includedir)/gnome-2.0/bonobo
 
 libbonoboinclude_HEADERS =		\
 	Bonobo.h			\
