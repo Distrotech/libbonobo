@@ -124,7 +124,7 @@ const char *
 bonobo_activation_hostname_get (void)
 {
 	static char *hostname = NULL;
-	char hn_tmp[65], ha_tmp[4];
+	char ha_tmp[4], hn_tmp[65];
 	struct hostent *hent;
 
 	if (!hostname) {
