@@ -8,39 +8,15 @@
 #ifndef __BONOBO_CONFIG_IDL__
 #define __BONOBO_CONFIG_IDL__
 
-%{
-#pragma include_defs bonobo/Bonobo.h
-%}
-#pragma inhibit push
-
 #include <Bonobo_Property.idl>
-#include <Bonobo_Control.idl>
-
-#pragma inhibit pop
 
 module Bonobo {
-
-	interface PropertyEditor : Bonobo::Control {
-		struct Pair {
-			string         name;
-			PropertyEditor editor;
-		};
-
-		typedef sequence<Pair> PropertyEditorSet;
-		
-		exception InvalidType {};
-
-		void setProperty (in Property property)
-			raises (InvalidType);    
-
-		PropertyEditorSet getSubEditors ();
-	};
-
 	typedef sequence<string> KeyList;
 
 	/*
-	 * aggregated with an event source
-	 *
+	 *  This interface is always aggregated with an
+	 * event source that supplies change notification
+	 * on properties.
 	 */
 	interface ConfigDatabase : Unknown {
 		

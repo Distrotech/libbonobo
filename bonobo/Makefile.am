@@ -36,6 +36,7 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_ClientSite.idl		\
 	$(top_srcdir)/idl/Bonobo_Context.idl		\
 	$(top_srcdir)/idl/Bonobo_Control.idl		\
+	$(top_srcdir)/idl/Bonobo_ConfigDatabase.idl	\
 	$(top_srcdir)/idl/Bonobo_Embeddable.idl		\
 	$(top_srcdir)/idl/Bonobo_ItemContainer.idl	\
 	$(top_srcdir)/idl/Bonobo_Listener.idl		\
@@ -64,11 +65,10 @@ libbonoboincludedir = $(includedir)/gnome/2/bonobo
 
 libbonoboinclude_HEADERS =		\
 	Bonobo.h			\
-	bonobo-activation-context.h	\
 	bonobo-arg.h			\
 	bonobo-async.h			\
-	bonobo-component-io.h		\
 	bonobo-context.h		\
+	bonobo-config-database.h	\
 	bonobo-event-source.h		\
 	bonobo-exception.h		\
 	bonobo-generic-factory.h	\
@@ -92,7 +92,6 @@ libbonoboinclude_HEADERS =		\
 	bonobo-property-bag-client.h	\
 	bonobo-property-bag.h		\
 	bonobo-property.h		\
-	bonobo-running-context.h	\
 	bonobo-shlib-factory.h		\
 	bonobo-simple-source.h		\
 	bonobo-storage-plugin.h		\
@@ -105,6 +104,10 @@ libbonoboinclude_HEADERS =		\
 	bonobo-i18n.h			\
 	bonobo-marshal.h
 
+noinst_HEADERS =			\
+	bonobo-activation-context.h	\
+	bonobo-running-context.h
+
 libbonobo_2_la_SOURCES =		\
 	$(libbonoboinclude_HEADERS)	\
 	$(CORBA_SOURCE)			\
@@ -113,6 +116,7 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-arg.c			\
 	bonobo-async.c			\
 	bonobo-context.c		\
+	bonobo-config-database.c	\
 	bonobo-event-source.c		\
 	bonobo-exception.c		\
 	bonobo-generic-factory.c	\

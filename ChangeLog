@@ -1,3 +1,18 @@
+2001-04-20  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am: add bonobo-config-database.[ch]
+
+	* bonobo/bonobo-config-database.[ch]: add from bonobo-conf
+
+	* idl/Makefile.am: add Bonobo_ConfigDatabase.idl
+
+	* idl/Bonobo_ConfigDatabase.idl: add.
+
+2001-04-19  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am: don't install the old no-inst
+	headers.
+
 2001-04-18  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am: remove bonobo-defs.h - unneccessary.
