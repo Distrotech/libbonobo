@@ -306,7 +306,6 @@ main (int argc, char *argv[])
         poa_manager = PortableServer_POA__get_the_POAManager (root_poa, ev);
 	PortableServer_POAManager_activate (poa_manager, ev);
 
-	sleep (10000);
 	g_main_loop_run (main_loop);
 
         nameserver_destroy (root_poa, naming_service, ev);
