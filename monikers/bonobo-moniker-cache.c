@@ -19,6 +19,7 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
 #include <bonobo/bonobo-moniker.h>
+#include <bonobo/bonobo-moniker-simple.h>
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-main.h>
 
@@ -28,7 +29,6 @@
 
 static int running_objects;
 static BonoboGenericFactory *cache_factory = NULL;
-static BonoboMonikerClass   *bonobo_moniker_cache_parent_class;
 
 static Bonobo_Unknown
 cache_resolve (BonoboMoniker               *moniker,
@@ -39,45 +39,6 @@ cache_resolve (BonoboMoniker               *moniker,
 	g_warning ("cache_resolve: not implemented");
 
 	return CORBA_OBJECT_NIL; /* use the extender */
-}
-
-static void
-bonobo_moniker_cache_class_init (BonoboMonikerCacheClass *klass)
-{
-	BonoboMonikerClass *mclass = (BonoboMonikerClass *) klass;
-
-	bonobo_moniker_cache_parent_class = gtk_type_class (
-		bonobo_moniker_get_type ());
-
-	mclass->resolve = cache_resolve;
-}
-
-/**
- * bonobo_moniker_cache_get_type:
- *
- * Returns the GtkType for the BonoboMonikerCache class.
- */
-GtkType
-bonobo_moniker_cache_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboMonikerCache",
-			sizeof (BonoboMonikerCache),
-			sizeof (BonoboMonikerCacheClass),
-			(GtkClassInitFunc) bonobo_moniker_cache_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = gtk_type_unique (bonobo_moniker_get_type (), &info);
-	}
-
-	return type;
 }
 
 static void
@@ -103,10 +64,8 @@ moniker_cache_destroy_cb (BonoboMoniker *config, void *data)
 static BonoboMoniker *
 bonobo_moniker_cache_new (void)
 {
-	return bonobo_moniker_construct (
-		gtk_type_new (bonobo_moniker_cache_get_type ()),
-		CORBA_OBJECT_NIL, "cache:");
-
+	return bonobo_moniker_simple_new (
+		"cache:", cache_resolve);
 }
 
 static BonoboObject *

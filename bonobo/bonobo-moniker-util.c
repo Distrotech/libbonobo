@@ -99,7 +99,7 @@ query_from_name (const char *name)
 		
 	query = g_strdup_printf (
 		"repo_ids.has ('IDL:Bonobo/Moniker:1.0') AND "
-		"bonobo:moniker == '%s'", prefix);
+		"bonobo:moniker.has ('%s')", prefix);
 	g_free (prefix);
 
 	return query;

@@ -1,3 +1,20 @@
+2000-12-19  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: Bump version to 0.31
+
+	* monikers/bonobo-moniker-extender-file.c (extender_destroy_cb):
+	don't use global variables housed in a just removed shared library!
+	this needs splitting into the core...
+
+	* monikers/moniker-test.c (main): remove erroneous double option
+	processing.
+
+	* monikers/bonobo-moniker-gunzip.c (gunzip_resolve): use the stream
+	extender, don't hard code interface to resolve to; split code into
+	(gunzip_resolve_stream): here.
+
+	* monikers/*: Prune scads of code.
+
 2000-12-19  Daniel Egger  <egger@suse.de>
 
 	* components/application-x-gnomine/Makefile.am:
