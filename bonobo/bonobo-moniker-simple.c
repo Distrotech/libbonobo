@@ -12,6 +12,13 @@
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-simple.h>
 
+#include <bonobo/bonobo-types.h>
+#include <bonobo/bonobo-marshal.h>
+
+struct _BonoboMonikerSimplePrivate {
+	GClosure *resolve_closure;
+};
+
 static Bonobo_Unknown
 simple_resolve (BonoboMoniker               *moniker,
 		const Bonobo_ResolveOptions *options,
@@ -29,7 +36,8 @@ simple_resolve (BonoboMoniker               *moniker,
 
 	g_value_init (&value, BONOBO_TYPE_CORBA_OBJECT);
 
-	bonobo_closure_invoke (simple->resolve_fn, &value,
+	bonobo_closure_invoke (simple->priv->resolve_closure,
+			       &value,
 			       BONOBO_MONIKER_TYPE, moniker,
 			       G_TYPE_POINTER, options,
 			       G_TYPE_STRING, requested_interface,
@@ -46,9 +54,14 @@ simple_finalize (GObject *object)
 {
 	BonoboMonikerSimple *simple = (BonoboMonikerSimple *) object;
 
-	if (simple->resolve_fn)
-		g_closure_unref (simple->resolve_fn);
-	simple->resolve_fn = NULL;
+	if (simple->priv)
+	{
+		if (simple->priv->resolve_closure)
+			g_closure_unref (simple->priv->resolve_closure);
+
+		g_free (simple->priv);
+		simple->priv = NULL;
+	}
 }
 
 static void
@@ -64,7 +77,9 @@ bonobo_moniker_simple_class_init (BonoboMonikerClass *klass)
 static void 
 bonobo_moniker_simple_init (GObject *object)
 {
-	/* nothing to do */
+	BonoboMonikerSimple *simple = BONOBO_MONIKER_SIMPLE (object);
+
+	simple->priv = g_new0 (BonoboMonikerSimplePrivate, 1);
 }
 
 BONOBO_TYPE_FUNC (BonoboMonikerSimple, 
@@ -75,7 +90,7 @@ BONOBO_TYPE_FUNC (BonoboMonikerSimple,
  * bonobo_moniker_simple_construct:
  * @moniker: the moniker to construct
  * @name: the name of the moniker eg. 'file:'
- * @resolve_fn: the function used to resolve the moniker
+ * @resolve_closure: the closure used to resolve the moniker
  * 
  * Constructs a simple moniker
  * 
@@ -84,28 +99,29 @@ BONOBO_TYPE_FUNC (BonoboMonikerSimple,
 BonoboMoniker *
 bonobo_moniker_simple_construct (BonoboMonikerSimple *moniker,
 				 const char          *name,
-				 GClosure            *resolve_fn)
+				 GClosure            *resolve_closure)
 {
-	g_return_val_if_fail (resolve_fn != NULL, NULL);
+	g_return_val_if_fail (resolve_closure != NULL, NULL);
 
-	moniker->resolve_fn = resolve_fn;
-
+	moniker->priv->resolve_closure =
+		bonobo_closure_store (resolve_closure, bonobo_marshal_BOXED__POINTER_STRING_POINTER);
+	
 	return bonobo_moniker_construct (
 		BONOBO_MONIKER (moniker), name);
 }
 
 /**
- * bonobo_moniker_simple_new_gc:
+ * bonobo_moniker_simple_new_closure:
  * @name: the display name for the moniker
- * @resolve_fn: a closure for the resolve process.
+ * @resolve_closure: a closure for the resolve process.
  * 
  * Create a new instance of a simplified moniker.
  * 
  * Return value: the moniker object
  **/
 BonoboMoniker *
-bonobo_moniker_simple_new_gc (const char *name,
-			      GClosure   *resolve_fn)
+bonobo_moniker_simple_new_closure (const char *name,
+				   GClosure   *resolve_closure)
 {
 	BonoboMoniker *moniker;
 
@@ -113,7 +129,7 @@ bonobo_moniker_simple_new_gc (const char *name,
 
 	return bonobo_moniker_simple_construct (
 		BONOBO_MONIKER_SIMPLE (moniker),
-		name, resolve_fn);
+		name, resolve_closure);
 }
 
 /**
@@ -129,7 +145,7 @@ BonoboMoniker *
 bonobo_moniker_simple_new (const char                  *name,
 			   BonoboMonikerSimpleResolveFn resolve_fn)
 {
-	return bonobo_moniker_simple_new_gc (
+	return bonobo_moniker_simple_new_closure (
 		name, g_cclosure_new (G_CALLBACK (resolve_fn), NULL, NULL));
 }
 

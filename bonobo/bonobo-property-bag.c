@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * bonobo-property-bag.c: property bag object implementation.
  *
@@ -13,6 +14,9 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-property-bag.h>
 
+#include <bonobo/bonobo-marshal.h>
+#include <bonobo/bonobo-types.h>
+
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 #define CLASS(o) BONOBO_PROPERTY_BAG_CLASS (G_OBJECT_GET_CLASS (o))
@@ -26,11 +30,23 @@ static GObjectClass *parent_class = NULL;
  * Internal data structures.
  */
 struct _BonoboPropertyBagPrivate {
-	GHashTable           *prop_hash;
+	GHashTable *prop_hash;
 
-	BonoboPropertySetFn   set_prop;
-	BonoboPropertyGetFn   get_prop;
-	gpointer              user_data;
+	GClosure   *get_prop;
+	GClosure   *set_prop;
+};
+
+struct _BonoboProperty {
+	char		     *name;
+	int                   idx;
+	BonoboArgType         type;
+	BonoboArg            *default_value;
+	char		     *doctitle;
+	char		     *docstring;
+	Bonobo_PropertyFlags  flags;
+
+	GClosure             *get_prop;
+	GClosure             *set_prop;	
 };
 
 static void
@@ -157,8 +173,12 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 
 	arg = bonobo_arg_new (prop->type);
 
-	prop->get_prop (pb, arg, prop->idx, ev, prop->user_data);
-
+	bonobo_closure_invoke (prop->get_prop,
+			       NULL,
+			       BONOBO_PROPERTY_BAG_TYPE, pb,
+			       BONOBO_TYPE_CORBA_ANY,    arg,
+			       G_TYPE_UINT,              prop->idx,
+			       G_TYPE_POINTER,           ev);
 	return arg;
 }
 
@@ -193,9 +213,13 @@ impl_Bonobo_PropertyBag_getValues (PortableServer_Servant  servant,
 			CORBA_string_dup (prop->name);
 
 		arg = bonobo_arg_new (prop->type);
-	
-		prop->get_prop (pb, arg, prop->idx, ev, 
-				prop->user_data);
+
+		bonobo_closure_invoke (prop->get_prop,
+				       NULL,
+				       BONOBO_PROPERTY_BAG_TYPE, pb,
+				       BONOBO_TYPE_CORBA_ANY,    arg,
+				       G_TYPE_UINT,              prop->idx,
+				       G_TYPE_POINTER,           ev);
 
 		set->_buffer [set->_length].value = *arg;
 
@@ -227,8 +251,13 @@ impl_Bonobo_PropertyBag_setValue (PortableServer_Servant  servant,
 		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_InvalidType);
 		return;
 	}
-	
-	prop->set_prop (pb, value, prop->idx, ev, prop->user_data);
+
+	bonobo_closure_invoke (prop->set_prop,
+			       NULL,
+			       BONOBO_PROPERTY_BAG_TYPE, pb,
+			       BONOBO_TYPE_CORBA_ANY,    value,
+			       G_TYPE_UINT,              prop->idx,
+			       G_TYPE_POINTER,           ev);
 	
 	if (!BONOBO_EX (ev))
 		notify_listeners (pb, prop, value, NULL);
@@ -265,9 +294,14 @@ impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
 	for (i = 0; i < set->_length; i++) {
 		prop = g_hash_table_lookup (pb->priv->prop_hash, 
 					    set->_buffer [i].name);
+		
+		bonobo_closure_invoke (prop->set_prop,
+				       NULL,
+				       BONOBO_PROPERTY_BAG_TYPE, pb,
+				       BONOBO_TYPE_CORBA_ANY,   &set->_buffer [i].value,
+				       G_TYPE_UINT,              prop->idx,
+				       G_TYPE_POINTER,           ev);
 
-		prop->set_prop (pb, &set->_buffer [i].value, prop->idx, ev, 
-				prop->user_data);
 		if (BONOBO_EX (ev))
 			return;
 
@@ -355,10 +389,9 @@ impl_Bonobo_PropertyBag_getFlags (PortableServer_Servant  servant,
 /**
  * bonobo_property_bag_construct:
  * @pb: #BonoboPropertyBag to construct
- * @get_prop: the property get callback
- * @set_prop: the property set callback
+ * @get_prop: the property get closure
+ * @set_prop: the property set closure
  * @es: an event source to aggregate
- * @user_data: user data for the callbacks
  * 
  * Constructor, only for use in wrappers and object derivation, please
  * refer to the #bonobo_property_bag_new for normal use.
@@ -369,16 +402,14 @@ impl_Bonobo_PropertyBag_getFlags (PortableServer_Servant  servant,
  * Returns:  #BonoboPropertyBag pointer or %NULL.
  */
 BonoboPropertyBag *
-bonobo_property_bag_construct (BonoboPropertyBag   *pb,
-			       BonoboPropertyGetFn  get_prop,
-			       BonoboPropertySetFn  set_prop,
-			       BonoboEventSource   *es,
-			       gpointer             user_data)
+bonobo_property_bag_construct (BonoboPropertyBag *pb,
+			       GClosure          *get_prop,
+			       GClosure          *set_prop,
+			       BonoboEventSource *es)
 {
-	pb->es              = es;
-	pb->priv->set_prop  = set_prop;
-	pb->priv->get_prop  = get_prop;
-	pb->priv->user_data = user_data;
+	pb->es             = es;
+	pb->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
+	pb->priv->set_prop = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
 
 	bonobo_object_add_interface (BONOBO_OBJECT (pb), BONOBO_OBJECT (es));
 	
@@ -387,20 +418,18 @@ bonobo_property_bag_construct (BonoboPropertyBag   *pb,
 
 /**
  * bonobo_property_bag_new_full:
- * @get_prop: the property get callback
- * @set_prop: the property set callback
+ * @get_prop: the property get closure
+ * @set_prop: the property set closure
  * @es: an event source to aggregate
- * @user_data: user data for the callbacks
  *
  * Creates a new property bag with the specified callbacks.
  *
  * Returns: A new #BonoboPropertyBag object.
  */
 BonoboPropertyBag *
-bonobo_property_bag_new_full (BonoboPropertyGetFn  get_prop,
-			      BonoboPropertySetFn  set_prop,
-			      BonoboEventSource   *es,
-			      gpointer             user_data)
+bonobo_property_bag_new_full (GClosure          *get_prop,
+			      GClosure          *set_prop,
+			      BonoboEventSource *es)
 {
 	BonoboPropertyBag *pb;
 
@@ -408,8 +437,7 @@ bonobo_property_bag_new_full (BonoboPropertyGetFn  get_prop,
 
 	pb = g_object_new (BONOBO_PROPERTY_BAG_TYPE, NULL);
 
-	return bonobo_property_bag_construct (pb, get_prop, set_prop, es, 
-					      user_data);
+	return bonobo_property_bag_construct (pb, get_prop, set_prop, es);
 }
 
 /**
@@ -423,16 +451,33 @@ bonobo_property_bag_new_full (BonoboPropertyGetFn  get_prop,
  * Returns: A new #BonoboPropertyBag object.
  */
 BonoboPropertyBag *
-bonobo_property_bag_new (BonoboPropertyGetFn get_prop,
-			 BonoboPropertySetFn set_prop,
-			 gpointer            user_data)
+bonobo_property_bag_new	           (BonoboPropertyGetFn get_prop_cb,
+			            BonoboPropertySetFn set_prop_cb,
+			            gpointer            user_data)
+{
+	return bonobo_property_bag_new_closure (
+		g_cclosure_new (G_CALLBACK (get_prop_cb), user_data, NULL),
+		g_cclosure_new (G_CALLBACK (set_prop_cb), user_data, NULL));
+}
+
+/**
+ * bonobo_property_bag_new_closure:
+ * @get_prop: the property get closure
+ * @set_prop: the property set closure
+ *
+ * Creates a new property bag with the specified callbacks.
+ *
+ * Returns: A new #BonoboPropertyBag object.
+ */
+BonoboPropertyBag *
+bonobo_property_bag_new_closure (GClosure *get_prop,
+				 GClosure *set_prop)
 {
 	BonoboEventSource *es;
 
 	es = bonobo_event_source_new ();
 
-	return bonobo_property_bag_new_full (get_prop, set_prop, es, 
-					     user_data);
+	return bonobo_property_bag_new_full (get_prop, set_prop, es);
 }
 
 static gboolean
@@ -453,6 +498,9 @@ bonobo_property_bag_foreach_remove_prop (gpointer key,
 	if (prop->doctitle)
 		g_free (prop->doctitle);
 
+	g_closure_unref (prop->get_prop);
+	g_closure_unref (prop->set_prop);
+	
 	g_free (prop);
 
 	return TRUE;
@@ -470,6 +518,9 @@ bonobo_property_bag_finalize (GObject *object)
 
 	g_hash_table_destroy (pb->priv->prop_hash);
 
+	g_closure_unref (pb->priv->get_prop);
+	g_closure_unref (pb->priv->set_prop);
+	
 	g_free (pb->priv);
 
 	parent_class->finalize (object);
@@ -496,17 +547,16 @@ bonobo_property_bag_finalize (GObject *object)
  * This adds a property to @pb at the full tilt of complexity.
  **/
 void
-bonobo_property_bag_add_full (BonoboPropertyBag   *pb,
-			      const char          *name,
-			      int                  idx,
-			      BonoboArgType        type,
-			      BonoboArg           *default_value,
-			      const char          *doctitle,
-			      const char          *docstring,
-			      Bonobo_PropertyFlags flags,
-			      BonoboPropertyGetFn  get_prop,
-			      BonoboPropertySetFn  set_prop,
-			      gpointer             user_data)
+bonobo_property_bag_add_full (BonoboPropertyBag    *pb,
+			      const char           *name,
+			      int                   idx,
+			      BonoboArgType         type,
+			      BonoboArg            *default_value,
+			      const char           *doctitle,
+			      const char           *docstring,
+			      Bonobo_PropertyFlags  flags,
+			      GClosure             *get_prop,
+			      GClosure             *set_prop)
 {
 	BonoboProperty *prop;
 
@@ -531,16 +581,15 @@ bonobo_property_bag_add_full (BonoboPropertyBag   *pb,
 	if (!(flags & Bonobo_PROPERTY_READABLE) && default_value)
 		g_warning ("Assigning a default value to a non readable "
 			   "property '%s'", name);
-
+	
 	prop = g_new0 (BonoboProperty, 1);
 
 	prop->name          = g_strdup (name);
 	prop->idx           = idx;
 	prop->type          = type;
 	prop->flags         = flags;
-	prop->get_prop      = get_prop;
-	prop->set_prop      = set_prop;
-	prop->user_data     = user_data;
+	prop->get_prop      = bonobo_closure_store (get_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
+	prop->set_prop      = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
 	prop->docstring     = g_strdup (docstring);
 	prop->doctitle      = g_strdup (doctitle);
 		
@@ -683,9 +732,11 @@ bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 				    g_type_name (value_type), NULL);
 
 		g_warning ("Mapping '%s'", desc);
-		bonobo_property_bag_add_full (pb, pspec->name, i, type,
-					      NULL, desc, NULL, flags,
-					      get_prop, set_prop, pspec);
+		bonobo_property_bag_add_full
+			(pb, pspec->name, i, type,
+			 NULL, desc, NULL, flags,
+			 g_cclosure_new (G_CALLBACK (get_prop), pspec, NULL),
+			 g_cclosure_new (G_CALLBACK (set_prop), pspec, NULL));
 		g_free (desc);
 	}
 
@@ -721,8 +772,7 @@ bonobo_property_bag_add (BonoboPropertyBag   *pb,
 				      default_value, doctitle, 
 				      NULL, flags,
 				      pb->priv->get_prop,
-				      pb->priv->set_prop,
-				      pb->priv->user_data);
+				      pb->priv->set_prop);
 }
 
 

@@ -42,16 +42,19 @@ BonoboArg         *bonobo_value_get_corba_any       (GValue *value);
 CORBA_Object       bonobo_value_get_corba_object    (GValue *value);
 CORBA_Environment *bonobo_value_get_corba_exception (GValue *value);
 
-void  bonobo_closure_invoke_va_list                 (GClosure            *closure,
+void       bonobo_closure_invoke_va_list            (GClosure            *closure,
 						     GValue              *retval,
 						     GType                first_type,
 						     va_list              var_args);
 
-void  bonobo_closure_invoke			    (GClosure            *closure,
+void       bonobo_closure_invoke		    (GClosure            *closure,
 						     GValue              *retval,
 						     GType                first_type,
 						     ...);
 
+GClosure * bonobo_closure_store                     (GClosure            *closure,
+						     GClosureMarshal      default_marshal);
+						     
 G_END_DECLS
 
 #endif

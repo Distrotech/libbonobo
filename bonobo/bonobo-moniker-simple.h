@@ -31,7 +31,7 @@ typedef Bonobo_Unknown (*BonoboMonikerSimpleResolveFn) (BonoboMoniker           
 
 struct _BonoboMonikerSimple {
         BonoboMoniker                moniker;
-	GClosure                    *resolve_fn;
+
 	BonoboMonikerSimplePrivate  *priv;
 };
 
@@ -39,17 +39,17 @@ typedef struct {
 	BonoboMonikerClass parent_class;
 } BonoboMonikerSimpleClass;
 
-GType          bonobo_moniker_simple_get_type  (void);
+GType          bonobo_moniker_simple_get_type    (void);
 
-BonoboMoniker *bonobo_moniker_simple_construct (BonoboMonikerSimple         *moniker,
-						const char                  *name,
-						GClosure                    *resolve_fn);
+BonoboMoniker *bonobo_moniker_simple_construct   (BonoboMonikerSimple         *moniker,
+						  const char                  *name,
+						  GClosure                    *resolve_closure);
 
-BonoboMoniker *bonobo_moniker_simple_new       (const char                  *name,
-						BonoboMonikerSimpleResolveFn resolve_fn);
+BonoboMoniker *bonobo_moniker_simple_new         (const char                  *name,
+						  BonoboMonikerSimpleResolveFn resolve_fn);
 
-BonoboMoniker *bonobo_moniker_simple_new_gc    (const char                  *name,
-						GClosure                    *resolve_fn);
+BonoboMoniker *bonobo_moniker_simple_new_closure (const char                  *name,
+						  GClosure                    *resolve_closure);
 
 G_END_DECLS
 

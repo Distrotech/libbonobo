@@ -53,10 +53,10 @@ BonoboShlibFactory *bonobo_shlib_factory_new          (const char            *co
 						       BonoboFactoryCallback  factory_cb,
 						       gpointer               user_data);
 
-BonoboShlibFactory *bonobo_shlib_factory_new_gc       (const char            *component_id,
+BonoboShlibFactory *bonobo_shlib_factory_new_closure  (const char            *component_id,
 						       PortableServer_POA     poa,
 						       gpointer               oaf_impl_ptr,
-						       GClosure              *closure);
+						       GClosure              *factory_closure);
 
 void                bonobo_shlib_factory_track_object (BonoboShlibFactory    *factory,
 						       BonoboObject          *object);

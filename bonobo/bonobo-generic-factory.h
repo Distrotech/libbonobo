@@ -55,17 +55,17 @@ GNOME_ObjectFactory   bonobo_generic_factory_corba_objref (BonoboGenericFactory 
 GNOME_ObjectFactory   bonobo_generic_factory_corba_object_create (BonoboGenericFactory *object, 
 								  gpointer              shlib_id);
 
-BonoboGenericFactory *bonobo_generic_factory_new (const char            *oaf_iid,
-						  BonoboFactoryCallback  factory_cb,
-						  gpointer               user_data);
+BonoboGenericFactory *bonobo_generic_factory_new	 (const char            *oaf_iid,
+							  BonoboFactoryCallback  factory_cb,
+							  gpointer               user_data);
 
-BonoboGenericFactory *bonobo_generic_factory_new_gc (const char            *oaf_iid,
-						     GClosure              *factory_cb);
+BonoboGenericFactory *bonobo_generic_factory_new_closure (const char            *oaf_iid,
+							  GClosure              *factory_closure);
 
-BonoboGenericFactory *bonobo_generic_factory_construct (BonoboGenericFactory  *factory,
-							GNOME_ObjectFactory    corba_factory,
-							const char            *oaf_iid,
-							GClosure              *factory_cb);
+BonoboGenericFactory *bonobo_generic_factory_construct	 (BonoboGenericFactory  *factory,
+							  GNOME_ObjectFactory    corba_factory,
+							  const char            *oaf_iid,
+							  GClosure              *factory_cb);
 
 POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 

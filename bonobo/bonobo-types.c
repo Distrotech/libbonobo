@@ -350,3 +350,22 @@ bonobo_closure_invoke (GClosure *closure,
 	va_end (var_args);
 }
 
+/**
+ * bonobo_closure_store:
+ * @closure: a standard GClosure
+ * @default_marshal: the default marshaller to use
+ * 
+ * Does the necessary refcounting magic and returns a directly
+ * storable closure
+ **/
+GClosure *
+bonobo_closure_store (GClosure        *closure,
+		      GClosureMarshal  default_marshal)
+{
+	g_closure_ref (closure);
+	g_closure_sink (closure);
+	if (G_CLOSURE_NEEDS_MARSHAL (closure))
+		g_closure_set_marshal (closure, default_marshal);
+
+	return closure;
+}

@@ -15,6 +15,8 @@
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-event-source.h>
 
+#include <gobject/gclosure.h>
+
 G_BEGIN_DECLS
 
 #define BONOBO_PROPERTY_READABLE     Bonobo_PROPERTY_READABLE
@@ -23,6 +25,8 @@ G_BEGIN_DECLS
  
 typedef struct _BonoboPropertyBagPrivate BonoboPropertyBagPrivate;
 typedef struct _BonoboPropertyBag        BonoboPropertyBag;
+
+typedef struct _BonoboProperty           BonoboProperty;
 
 typedef void (*BonoboPropertyGetFn) (BonoboPropertyBag *bag,
 				     BonoboArg         *arg,
@@ -34,21 +38,6 @@ typedef void (*BonoboPropertySetFn) (BonoboPropertyBag *bag,
 				     guint              arg_id,
 				     CORBA_Environment *ev,
 				     gpointer           user_data);
-
-typedef struct {
-	char		     *name;
-	int                   idx;
-	BonoboArgType         type;
-	BonoboArg            *default_value;
-	char		     *doctitle;
-	char		     *docstring;
-	Bonobo_PropertyFlags  flags;
-
-	BonoboPropertyGetFn   get_prop;
-	BonoboPropertySetFn   set_prop;
-	gpointer              user_data;
-} BonoboProperty;
-
 
 struct _BonoboPropertyBag {
 	BonoboObject             parent;
@@ -72,22 +61,24 @@ GType
 bonobo_property_bag_get_type  (void);
 
 BonoboPropertyBag *
-bonobo_property_bag_new	      (BonoboPropertyGetFn get_prop,
-			       BonoboPropertySetFn set_prop,
-			       gpointer            user_data);
+bonobo_property_bag_new	           (BonoboPropertyGetFn get_prop_cb,
+			            BonoboPropertySetFn set_prop_cb,
+			            gpointer            user_data);
 
 BonoboPropertyBag *
-bonobo_property_bag_new_full      (BonoboPropertyGetFn get_prop,
-				   BonoboPropertySetFn set_prop,
-				   BonoboEventSource  *event_source,
-				   gpointer            user_data);
+bonobo_property_bag_new_closure   (GClosure          *get_prop,
+				   GClosure          *set_prop);
 
 BonoboPropertyBag *
-bonobo_property_bag_construct     (BonoboPropertyBag   *pb,
-				   BonoboPropertyGetFn  get_prop,
-				   BonoboPropertySetFn  set_prop,
-				   BonoboEventSource   *event_source,
-				   gpointer             user_data);
+bonobo_property_bag_new_full      (GClosure          *get_prop,
+				   GClosure          *set_prop,
+				   BonoboEventSource *event_source);
+
+BonoboPropertyBag *
+bonobo_property_bag_construct     (BonoboPropertyBag *pb,
+				   GClosure          *get_prop,
+				   GClosure          *set_prop,
+				   BonoboEventSource *event_source);
 
 void                      
 bonobo_property_bag_add           (BonoboPropertyBag   *pb,
@@ -99,17 +90,16 @@ bonobo_property_bag_add           (BonoboPropertyBag   *pb,
 				   Bonobo_PropertyFlags flags);
 
 void
-bonobo_property_bag_add_full      (BonoboPropertyBag   *pb,
-				   const char          *name,
-				   int                  idx,
-				   BonoboArgType        type,
-				   BonoboArg           *default_value,
-				   const char          *doctitle,
-				   const char          *docstring,
-				   Bonobo_PropertyFlags flags,
-				   BonoboPropertyGetFn  get_prop,
-				   BonoboPropertySetFn  set_prop,
-				   gpointer             user_data);
+bonobo_property_bag_add_full      (BonoboPropertyBag    *pb,
+				   const char           *name,
+				   int                   idx,
+				   BonoboArgType         type,
+				   BonoboArg            *default_value,
+				   const char           *doctitle,
+				   const char           *docstring,
+				   Bonobo_PropertyFlags  flags,
+				   GClosure             *get_prop,
+				   GClosure             *set_prop);
 
 void
 bonobo_property_bag_add_gtk_args  (BonoboPropertyBag   *pb,

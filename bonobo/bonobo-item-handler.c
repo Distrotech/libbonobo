@@ -13,9 +13,20 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-exception.h>
+
+#include <bonobo/bonobo-types.h>
+#include <bonobo/bonobo-marshal.h>
+
 #include "bonobo-item-handler.h"
 
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
+static GObjectClass *bonobo_item_handler_parent_class;
+
+struct _BonoboItemHandlerPrivate
+{
+	GClosure *enum_objects;
+	GClosure *get_object;
+};
 
 /*
  * Returns a list of the objects in this container
@@ -26,9 +37,23 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
 
-	if (handler->enum_objects)
-		return handler->enum_objects (handler, handler->user_data, ev);
-	else
+	if (handler->priv->enum_objects)
+	{
+		Bonobo_ItemContainer_ObjectNames *ret;
+		GValue ret_val = {0, };
+
+		g_value_init (&ret_val, G_TYPE_POINTER);
+		
+		bonobo_closure_invoke (handler->priv->enum_objects,
+				       &ret_val,
+				       BONOBO_ITEM_HANDLER_TYPE, handler,
+				       G_TYPE_POINTER,           ev);
+
+		ret = g_value_get_pointer (&ret_val);
+		g_value_unset (&ret_val);
+
+		return ret;
+	} else
 		return Bonobo_ItemContainer_ObjectNames__alloc ();
 }
 
@@ -41,27 +66,61 @@ impl_get_object (PortableServer_Servant servant,
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
 
-	if (handler->get_object)
-		return handler->get_object (handler, item_name,
-					    only_if_exists,
-					    handler->user_data, ev);
-	else
+	if (handler->priv->get_object)
+	{
+		Bonobo_Unknown ret;
+		GValue ret_val = {0, };
+
+		g_value_init (&ret_val, G_TYPE_BOXED);
+		
+		bonobo_closure_invoke (handler->priv->enum_objects,
+				       &ret_val,
+				       BONOBO_ITEM_HANDLER_TYPE, handler,
+				       G_TYPE_STRING,            item_name,
+				       G_TYPE_BOOLEAN,           only_if_exists,
+				       G_TYPE_POINTER,           ev);
+				       
+				       
+		ret = g_value_get_boxed (&ret_val);
+		g_value_unset (&ret_val);
+
+		return ret;
+	} else
 		return CORBA_OBJECT_NIL;
 }
+
+static void
+bonobo_item_handler_finalize (GObject *object)
+{
+	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
+
+	g_free (handler->priv);
+
+	bonobo_item_handler_parent_class->finalize (object);
+
+}
+
+static void 
+bonobo_item_handler_init (GObject *object)
+{
+	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
+
+	handler->priv = g_new0 (BonoboItemHandlerPrivate, 1);
+}
+
 
 static void
 bonobo_item_handler_class_init (BonoboItemHandlerClass *klass)
 {
 	POA_Bonobo_ItemContainer__epv *epv = &klass->epv;
 
+	bonobo_item_handler_parent_class = g_type_class_peek_parent (klass);
+
+	G_OBJECT_CLASS (klass)->finalize = bonobo_item_handler_finalize;
+
 	epv->enumObjects     = impl_enum_objects;
 	epv->getObjectByName = impl_get_object;
-}
 
-static void 
-bonobo_item_handler_init (GObject *object)
-{
-	/* nothing to do */
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboItemHandler, 
@@ -72,25 +131,26 @@ BONOBO_TYPE_FUNC_FULL (BonoboItemHandler,
 /**
  * bonobo_item_handler_construct:
  * @container: The handler object to construct
- * @corba_container: The CORBA object that implements Bonobo::ItemContainer
+ * @enum_objects: The closure implementing enumObjects
+ * @get_object: The closure implementing getObject
  *
- * Constructs the @container Gtk object using the provided CORBA
- * object.
+ * Constructs the @container BonoboObject using the provided closures
+ * for the actual implementation.
  *
  * Returns: The constructed BonoboItemContainer object.
  */
 BonoboItemHandler *
-bonobo_item_handler_construct (BonoboItemHandler             *handler,
-			       BonoboItemHandlerEnumObjectsFn enum_objects,
-			       BonoboItemHandlerGetObjectFn   get_object,
-			       gpointer                       user_data)
+bonobo_item_handler_construct (BonoboItemHandler *handler,
+			       GClosure          *enum_objects,
+			       GClosure          *get_object)
 {
 	g_return_val_if_fail (handler != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_ITEM_HANDLER (handler), NULL);
 	
-	handler->get_object   = get_object;
-	handler->enum_objects = enum_objects;
-	handler->user_data    = user_data;
+	handler->priv->enum_objects = bonobo_closure_store
+		(enum_objects, bonobo_marshal_POINTER__POINTER_POINTER);
+	handler->priv->get_object   = bonobo_closure_store
+		(get_object, bonobo_marshal_BOXED__STRING_BOOLEAN_POINTER_POINTER);
 	
 	return handler;
 }
@@ -107,14 +167,29 @@ BonoboItemHandler *
 bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
 			 BonoboItemHandlerGetObjectFn   get_object,
 			 gpointer                       user_data)
+{
+	return bonobo_item_handler_new_closure (
+		g_cclosure_new (G_CALLBACK (enum_objects), user_data, NULL),
+		g_cclosure_new (G_CALLBACK (get_object), user_data, NULL));
+}
 
+/**
+ * bonobo_item_handler_new_closure:
+ *
+ * Creates a new BonoboItemHandler object.  These are used to hold
+ * client sites.
+ *
+ * Returns: The newly created BonoboItemHandler object
+ */
+BonoboItemHandler *
+bonobo_item_handler_new_closure (GClosure *enum_objects,
+				 GClosure *get_object)
 {
 	BonoboItemHandler *handler;
 
 	handler = g_object_new (bonobo_item_handler_get_type (), NULL);
 
-	return bonobo_item_handler_construct (
-		handler, enum_objects, get_object, user_data);
+	return bonobo_item_handler_construct (handler, enum_objects, get_object);
 }
 
 /**

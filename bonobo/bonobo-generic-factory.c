@@ -26,6 +26,8 @@
 #include <bonobo/bonobo-running-context.h>
 #include <liboaf/liboaf.h>
 
+#include <bonobo/bonobo-types.h>
+
 /* FIXME: cut and paste nastiness from old bonobo */
 
 typedef struct {
@@ -37,7 +39,7 @@ typedef struct {
 struct _BonoboGenericFactoryPrivate
 {	
 	/* The function factory */
-	GClosure              *factory_cb;
+	GClosure              *factory_closure;
 
 	/* The CORBA Object */
 	GNOME_ObjectFactory    corba_objref;
@@ -148,8 +150,7 @@ bonobo_generic_factory_corba_object_create (BonoboGenericFactory *object,
  * @oaf_iid: The GOAD id that the new factory will implement.
  * Bonobo::GenericFactory interface and which will be used to
  * construct this BonoboGenericFactory Gtk object.
- * @factory_cb: A Multi object factory callback.
- * @user_data: The closure data to be passed to the @factory callback routine.
+ * @factory_closure: A Multi object factory closure.
  *
  * Initializes @c_factory with the command-line arguments and registers
  * the new factory in the name server.
@@ -160,7 +161,7 @@ BonoboGenericFactory *
 bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
 				  GNOME_ObjectFactory     corba_factory,
 				  const char             *oaf_iid,
-				  GClosure               *factory_cb)
+				  GClosure               *factory_closure)
 {
 	CORBA_Environment ev;
 	int ret;
@@ -168,13 +169,9 @@ bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 	g_return_val_if_fail (corba_factory != CORBA_OBJECT_NIL, NULL);
-
-	g_closure_ref (factory_cb);
-	g_closure_sink (factory_cb);
-	if (G_CLOSURE_NEEDS_MARSHAL (factory_cb))
-		g_closure_set_marshal (factory_cb, g_cclosure_marshal_VOID__STRING);
 	
-	factory->priv->factory_cb = factory_cb;
+	factory->priv->factory_closure =
+		bonobo_closure_store (factory_closure, g_cclosure_marshal_VOID__STRING);
 	factory->priv->oaf_iid    = g_strdup (oaf_iid);
 
 	CORBA_exception_init (&ev);
@@ -196,13 +193,12 @@ bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
 }
 
 /**
- * bonobo_generic_factory_new_gc:
+ * bonobo_generic_factory_new_closure:
  * @oaf_iid: The GOAD id that this factory implements
- * @factory_cb: A callback which is used to create new BonoboObject instances.
- * @data: The closure data to be passed to the @factory callback routine.
+ * @factory_closure: A closure which is used to create new BonoboObject instances.
  *
  * This is a helper routine that simplifies the creation of factory
- * objects for GNOME objects.  The @factory function will be
+ * objects for GNOME objects.  The @factory_closure closure will be
  * invoked by the CORBA server when a request arrives to create a new
  * instance of an object supporting the Bonobo::Generic interface.
  * The factory callback routine is passed the @data pointer to provide
@@ -213,25 +209,25 @@ bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
  * name server.
  */
 BonoboGenericFactory *
-bonobo_generic_factory_new_gc (const char *oaf_iid,
-			       GClosure   *factory_cb)
+bonobo_generic_factory_new_closure (const char *oaf_iid,
+				    GClosure   *factory_closure)
 {
 	BonoboGenericFactory *factory;
 	GNOME_ObjectFactory corba_factory;
 
-	g_return_val_if_fail (factory_cb != NULL, NULL);
+	g_return_val_if_fail (factory_closure != NULL, NULL);
 	g_return_val_if_fail (oaf_iid != NULL, NULL);
 	
 	factory = g_object_new (bonobo_generic_factory_get_type (), NULL);
 	
-	corba_factory = bonobo_generic_factory_corba_object_create (factory, factory_cb);
+	corba_factory = bonobo_generic_factory_corba_object_create (factory, factory_closure);
 	if (corba_factory == CORBA_OBJECT_NIL) {
 		g_object_unref (G_OBJECT (factory));
 		return NULL;
 	}
 	
 	return bonobo_generic_factory_construct (factory, corba_factory,
-						 oaf_iid, factory_cb);
+						 oaf_iid, factory_closure);
 }
 
 
@@ -257,7 +253,7 @@ bonobo_generic_factory_new (const char           *oaf_iid,
 			    BonoboFactoryCallback factory_cb,
 			    gpointer              user_data)
 {
-	return bonobo_generic_factory_new_gc (
+	return bonobo_generic_factory_new_closure (
 		oaf_iid, g_cclosure_new (G_CALLBACK (factory_cb), user_data, NULL));
 }
 
@@ -275,7 +271,7 @@ bonobo_generic_factory_finalize (GObject *object)
 		CORBA_exception_free (&ev);
 
 		g_free (factory->priv->oaf_iid);
-		g_closure_unref (factory->priv->factory_cb);
+		g_closure_unref (factory->priv->factory_closure);
 		
 		g_free (factory->priv);
 		factory->priv = 0;
@@ -296,7 +292,7 @@ bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
 
 	g_value_init (&ret_val, BONOBO_OBJECT_TYPE);
 	
-	bonobo_closure_invoke (factory->priv->factory_cb,
+	bonobo_closure_invoke (factory->priv->factory_closure,
 			       &ret_val,
 			       BONOBO_GENERIC_FACTORY_TYPE, factory,
 			       G_TYPE_STRING, oaf_iid, 0);

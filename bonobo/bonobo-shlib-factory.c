@@ -74,15 +74,14 @@ bonobo_shlib_factory_construct (BonoboShlibFactory    *factory,
 }
 
 /**
- * bonobo_shlib_factory_new_gc:
+ * bonobo_shlib_factory_new_closure:
  * @oaf_iid: The GOAD id that this factory implements
  * @poa: the poa.
  * @oaf_impl_ptr: Oaf shlib handle
- * @factory_cb: A callback which is used to create new BonoboObject instances.
- * @user_data: The closure data to be passed to the @factory callback routine.
+ * @factory_closure: A closure which is used to create new BonoboObject instances.
  *
  * This is a helper routine that simplifies the creation of factory
- * objects for GNOME objects.  The @factory function will be
+ * objects for GNOME objects.  The @factory_closure closure will be
  * invoked by the CORBA server when a request arrives to create a new
  * instance of an object supporting the Bonobo::Shlib interface.
  * The factory callback routine is passed the @data pointer to provide
@@ -93,21 +92,21 @@ bonobo_shlib_factory_construct (BonoboShlibFactory    *factory,
  * name server.
  */
 BonoboShlibFactory *
-bonobo_shlib_factory_new_gc (const char           *oaf_iid,
-			     PortableServer_POA    poa,
-			     gpointer              oaf_impl_ptr,
-			     GClosure             *closure)
+bonobo_shlib_factory_new_closure (const char           *oaf_iid,
+				  PortableServer_POA    poa,
+				  gpointer              oaf_impl_ptr,
+				  GClosure             *factory_closure)
 {
 	BonoboShlibFactory *factory;
 	GNOME_ObjectFactory corba_factory;
 
-	g_return_val_if_fail (closure != NULL, NULL);
+	g_return_val_if_fail (factory_closure != NULL, NULL);
 	g_return_val_if_fail (oaf_iid != NULL, NULL);
 	
 	factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
 
 	corba_factory = bonobo_generic_factory_corba_object_create (
-		BONOBO_GENERIC_FACTORY (factory), closure);
+		BONOBO_GENERIC_FACTORY (factory), factory_closure);
 
 	if (corba_factory == CORBA_OBJECT_NIL) {
 		g_object_unref (G_OBJECT (factory));
@@ -116,7 +115,7 @@ bonobo_shlib_factory_new_gc (const char           *oaf_iid,
 	
 	return bonobo_shlib_factory_construct (factory, corba_factory,
 					       oaf_iid, poa, oaf_impl_ptr,
-					       closure);
+					       factory_closure);
 }
 
 /**
@@ -145,9 +144,9 @@ bonobo_shlib_factory_new (const char           *component_id,
 			  BonoboFactoryCallback factory_cb,
 			  gpointer              user_data)
 {
-	return bonobo_shlib_factory_new_gc (
+	return bonobo_shlib_factory_new_closure (
 		component_id, poa, oaf_impl_ptr,
-		g_cclosure_new (factory_cb, user_data, NULL));
+		g_cclosure_new (G_CALLBACK (factory_cb), user_data, NULL));
 }
 
 static void

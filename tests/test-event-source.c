@@ -39,15 +39,13 @@ run_tests ()
 
 	es = bonobo_event_source_new ();
 	g_assert (es != NULL);
-
+	
 	mask = "a/test";
-	bonobo_event_source_client_add_listener (BONOBO_OBJREF (es),
-						 event_cb, mask, &ev, mask);
+	bonobo_event_source_client_add_listener (BONOBO_OBJREF (es), event_cb, mask, &ev, mask);
 
 	mask = "=a/test";
-	bonobo_event_source_client_add_listener (BONOBO_OBJREF (es),
-						 event_cb, mask, &ev, mask);
-
+	bonobo_event_source_client_add_listener (BONOBO_OBJREF (es), event_cb, mask, &ev, mask);
+	
 	bonobo_event_source_notify_listeners (es, "a/test", value, &ev); 
 	CHECK_RESULT (&ev, 2, 1);
 

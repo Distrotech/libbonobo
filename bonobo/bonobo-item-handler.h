@@ -13,7 +13,7 @@
 #define _BONOBO_ITEM_HANDLER_H_
 
 
-#include <gobject/gobject.h>
+#include <gobject/gclosure.h>
 #include <bonobo/bonobo-object.h>
 
 G_BEGIN_DECLS
@@ -39,10 +39,6 @@ struct _BonoboItemHandler {
 
 	POA_Bonobo_ItemContainer__epv epv;
 
-	BonoboItemHandlerEnumObjectsFn enum_objects;
-	BonoboItemHandlerGetObjectFn   get_object;
-	gpointer                       user_data;
-
 	BonoboItemHandlerPrivate      *priv;
 };
 
@@ -57,10 +53,12 @@ BonoboItemHandler   *bonobo_item_handler_new         (BonoboItemHandlerEnumObjec
 						      BonoboItemHandlerGetObjectFn   get_object,
 						      gpointer                       user_data);
 
-BonoboItemHandler   *bonobo_item_handler_construct   (BonoboItemHandler             *handler,
-						      BonoboItemHandlerEnumObjectsFn enum_objects,
-						      BonoboItemHandlerGetObjectFn   get_object,
-						      gpointer                       user_data);
+BonoboItemHandler   *bonobo_item_handler_new_closure (GClosure *enum_objects,
+						      GClosure *get_object);
+
+BonoboItemHandler   *bonobo_item_handler_construct   (BonoboItemHandler *handler,
+						      GClosure          *enum_objects,
+						      GClosure          *get_object);
 
 /* Utility functions that can be used by getObject routines */
 typedef struct {
@@ -74,4 +72,3 @@ void    bonobo_item_options_free (GSList *options);
 G_END_DECLS
 
 #endif
-

@@ -45,26 +45,27 @@ typedef struct {
 } BonoboListenerClass;
 
 
-typedef void (*BonoboListenerCallbackFn)  (BonoboListener    *listener,
-					   char              *event_name, 
-					   CORBA_any         *any,
-					   CORBA_Environment *ev,
-					   gpointer           user_data);
+typedef void (*BonoboListenerCallbackFn)    (BonoboListener    *listener,
+					     char              *event_name, 
+					     CORBA_any         *any,
+					     CORBA_Environment *ev,
+					     gpointer           user_data);
 
-GType           bonobo_listener_get_type  (void);
+GType           bonobo_listener_get_type    (void);
 
-BonoboListener *bonobo_listener_new       (BonoboListenerCallbackFn event_callback,
-					   gpointer                 user_data);
-BonoboListener *bonobo_listener_new_gc    (GClosure                *event_callback);
+BonoboListener *bonobo_listener_new         (BonoboListenerCallbackFn event_cb,
+					     gpointer                 user_data);
 
-char           *bonobo_event_make_name    (const char *idl_path, 
-					   const char *kind,
-					   const char *subtype);
+BonoboListener *bonobo_listener_new_closure (GClosure                *event_closure);
 
-char           *bonobo_event_type         (const char *event_name);
-char           *bonobo_event_subtype      (const char *event_name);
-char           *bonobo_event_kind         (const char *event_name);
-char           *bonobo_event_idl_path     (const char *event_name);
+char           *bonobo_event_make_name      (const char *idl_path, 
+					     const char *kind,
+					     const char *subtype);
+
+char           *bonobo_event_type           (const char *event_name);
+char           *bonobo_event_subtype        (const char *event_name);
+char           *bonobo_event_kind           (const char *event_name);
+char           *bonobo_event_idl_path       (const char *event_name);
 
 G_END_DECLS
 

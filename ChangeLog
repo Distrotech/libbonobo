@@ -1,3 +1,21 @@
+2001-07-30  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* bonobo/bonobo-moniker-simple.h: cleanup, privatization
+	Maybe next time someone creates a new Bonobo object they can make
+	it privatized form the beginning... grr...
+	
+	* bonobo/bonobo-shlib-factory.h: cleanup 
+
+	* bonobo/bonobo-generic-factory.h: cleanup
+
+	* bonobo/bonobo-property-bag.c: Completely privatized BonoboPoperty
+	plus GClosure-ization
+	
+	* bonobo/bonobo-marshal.list: Added new signature for PropertyBag,
+	MonikerSimple and ItemHandler callbacks
+	
+        * bonobo/bonobo-item-handler.c: Privatization, GClosure-ization
+
 2001-07-30  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-exception.c (bonobo_exception_get_text):
@@ -92,6 +110,7 @@
 	* bonobo/bonobo-shlib-factory.c (bonobo_shlib_factory_new): impl.
 	(bonobo_shlib_factory_new_gc): impl.
 
+>>>>>>> 1.107
 2001-07-30  ERDI Gergo <cactus@cactus.rulez.org>
 
 	Checked in Bonobo_Clipboard (now for real:)

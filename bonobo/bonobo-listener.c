@@ -114,12 +114,11 @@ BONOBO_TYPE_FUNC_FULL (BonoboListener,
 		       bonobo_listener);
 
 /**
- * bonobo_listener_new:
- * @event_callback: function to be invoked when an event is emitted by the EventSource.
- * @user_data: data passed to the functioned pointed by @event_call.
+ * bonobo_listener_new_closure:
+ * @event_closure: closure to be invoked when an event is emitted by the EventSource.
  *
- * Creates a generic event listener.  The listener calls the @event_callback 
- * function and emits an "event_notify" signal when notified of an event.  
+ * Creates a generic event listener.  The listener invokes the @event_closure 
+ * closure and emits an "event_notify" signal when notified of an event.  
  * The signal callback should be of the form:
  *
  * <informalexample>
@@ -138,19 +137,14 @@ BONOBO_TYPE_FUNC_FULL (BonoboListener,
  * Returns: A BonoboListener object.
  */
 BonoboListener*
-bonobo_listener_new_gc (GClosure *event_cb)
+bonobo_listener_new_closure (GClosure *event_closure)
 {
 	BonoboListener *listener;
 
 	listener = g_object_new (BONOBO_LISTENER_TYPE, NULL);
-	
-	g_closure_ref (event_cb);
-	g_closure_sink (event_cb);
-	if (G_CLOSURE_NEEDS_MARSHAL (event_cb))
-		g_closure_set_marshal (event_cb,
-				       bonobo_marshal_VOID__STRING_BOXED_POINTER);
 
-	listener->priv->event_callback = event_cb;
+	listener->priv->event_callback = bonobo_closure_store (
+		event_closure, bonobo_marshal_VOID__STRING_BOXED_POINTER);
 
 	return listener;
 }
@@ -180,11 +174,11 @@ bonobo_listener_new_gc (GClosure *event_cb)
  * Returns: A BonoboListener object.
  */
 BonoboListener *
-bonobo_listener_new (BonoboListenerCallbackFn event_callback,
+bonobo_listener_new (BonoboListenerCallbackFn event_cb,
 		     gpointer                 user_data)
 {
-	return bonobo_listener_new_gc (
-		g_cclosure_new (G_CALLBACK (event_callback), user_data, NULL));
+	return bonobo_listener_new_closure (
+		g_cclosure_new (G_CALLBACK (event_cb), user_data, NULL));
 }
 
 /**
