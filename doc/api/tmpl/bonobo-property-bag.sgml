@@ -133,7 +133,7 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 }
 ...
 	gtk_signal_connect (GTK_OBJECT (clock), "color_changed",
-			    GTK_SIGNAL_FUNC (signal_handler), clock);
+			    GTK_SIGNAL_FUNC (signal_handler), pb);
      </programlisting>
   </example>
   See also #BonoboArg.

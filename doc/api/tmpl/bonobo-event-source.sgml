@@ -66,13 +66,13 @@ fire_event (BonoboEventSource *on_source,
 	    CORBA_Environment *opt_ev)
 {
 	CORBA_any any;
-	Foo_BaaEvent e;
+	GNOME_Foo_BaaEvent e;
 
 	e.a = a_double;
 	e.b = a_string;
 	e.c = a_float;
 
-	any->_type = TC_Foo_BaaEvent;
+	any->_type = TC_GNOME_Foo_BaaEvent;
 	any->_data = &amp;e;
 
 	bonobo_event_source_notify_listeners_full (
