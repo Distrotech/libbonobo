@@ -1,3 +1,10 @@
+2000-05-29  Matt Bissiri  <bissiri@eecs.umich.edu>
+ 
+	* bonobo/bonobo-object-directory-oaf.c (od_get_server_list):
+ 	Fix bug where only the last element of the required_ids argument
+ 	was included in the oaf query.
+ 	Also changed `and' to `AND' in the query, to avoid an oaf parse error.
+ 	
 2000-05-30  Michael Meeks  <michael@helixcode.com>
 
 	* doc/api/bonobo.types: update gnome-bonobo.h, rename.
