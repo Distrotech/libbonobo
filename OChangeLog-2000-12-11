@@ -1,3 +1,11 @@
+2000-10-11  Andy Hertzfeld  <andy@eazel.com>
+
+	* bonobo/bonobo-win.c: (string_array_contains),
+	(toolbar_sync_state):
+	added a comma-delimited "behavior" property for toolbar items,
+	and set an item's expandable boolean if "expandable" is
+	specified in the behavior list.
+	
 2000-10-11  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar.c: Add args "preferred_width" e
