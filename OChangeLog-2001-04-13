@@ -1,4 +1,4 @@
-2000-10-07  Andy Hertzfeld  <set EMAIL_ADDRESS environment variable>
+2000-10-07  Andy Hertzfeld  <andy@eazel.com>
 
 	* bonobo/bonobo-win.c: (toolbar_build_widget):
 	fixed bug introduced by Michael's previous check-in where toolbar
