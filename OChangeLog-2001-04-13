@@ -1,5 +1,9 @@
 1999-07-05  Miguel de Icaza  <miguel@gnu.org>
 
+	* components/image-x-png/bonobo-image-x-png.c: Make it use
+	GNOME::Unknown as well.
+	* components/text-plain/bonobo-text-plain.c (bonobo_object_factory): ditto.
+
 	* idl/*, src/*: Changed from GNOME::obj to GNOME::Unknown. 
 
 1999-06-28  Nat Friedman  <nat@gnome-support.com>
