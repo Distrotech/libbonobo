@@ -1,4 +1,5 @@
 #include <config.h>
+#include <string.h>
 #include <gobject/gbsearcharray.h>
 #include <gobject/gvalue.h>
 #include <gobject/gvaluearray.h>
@@ -242,4 +243,69 @@ bonobo_corba_any_get_type (void)
 	return type;
 }
 
+void
+bonobo_closure_invoke_va_list (GClosure *closure,
+			       GValue   *retval,
+			       GType     first_type,
+			       va_list   var_args)
+{
+	GArray *params;
+	GType   type;
+	int     i;
+  
+	g_return_if_fail (closure != NULL);
+
+	params = g_array_sized_new (FALSE, TRUE, sizeof (GValue), 6);
+
+	for (type = first_type; type; type = va_arg (var_args, GType)) {
+		GValue value;
+		gchar *error;
+
+		g_value_init (&value, type);
+
+		G_VALUE_COLLECT (&value, var_args, 0, &error);
+		if (error) {
+			g_warning ("%s: %s", G_STRLOC, error);
+			g_free (error);
+			break;
+		}
+      
+		g_array_append_val (params, value);
+	}
+
+	g_closure_invoke (closure,
+			  retval,
+			  params->len,
+			  (GValue *)params->data,
+			  NULL);
+
+	for (i = 0; i < params->len; i++)
+		g_value_unset (&g_array_index (params, GValue, i));
+}
+
+/**
+ * bonobo_closure_invoke:
+ * @closure: a standard GClosure
+ * @return_value: a pointer to the return value ie. &my_int
+ * @return_type: the return type.
+ * @first_type: the type of the first va_arg argument in a
+ * set of type / arg pairs.
+ * 
+ * Invokes the closure with the arguments.
+ **/
+void
+bonobo_closure_invoke (GClosure *closure,
+		       GValue   *retval,
+		       GType     first_type,
+		       ...)
+{
+	va_list var_args;
+
+	va_start (var_args, first_type);
+	
+	bonobo_closure_invoke_va_list (
+		closure, retval, first_type, var_args);
+
+	va_end (var_args);
+}
 
