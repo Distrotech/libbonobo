@@ -1,3 +1,9 @@
+2003-12-09  Michael Meeks  <michael@ximian.com>
+
+	* bonobo-activation/bonobo-activation-client.c
+	(bonobo_activation_register_client): switch to using
+	environ instead - with our own extern for Solaris.
+
 2003-12-08  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.5.1
