@@ -71,8 +71,9 @@ BUILT_SOURCES=			\
 	$(NULL)
 
 oaf-stubs.c oaf-skels.c oaf.h oaf-common.c: stamp-idl
-
 oaf-factory-stubs.c oaf-factory-skels.c oaf-factory.h oaf-factory-common.c: stamp-factory-idl
+
+oaf-stubs.o oaf-skels.o oaf-common.o: oaf-factory.h
 
 # Work around automake brokenness.
 ../liboaf/oaf.h: stamp-idl
