@@ -8,10 +8,7 @@
 #ifndef _BONOBO_IDL_INCLUDED_
 #define _BONOBO_IDL_INCLUDED_
 
-#if defined(__ORBIT_IDL__)
-%{
-#pragma include_defs "libgnorba/gnome-factory.h"
-%}
+#include <gnome-factory.idl>
 
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 %{
