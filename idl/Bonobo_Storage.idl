@@ -201,7 +201,7 @@ module GNOME {
 	
 		/**
 		 * erase:
-		 * @path: path to the element to delete.
+		 * @path: path to the element to erase.
 		 * 
 		 * Destroys the element pointed to by @path.  The element
 		 * can be a Storage or a Stream.

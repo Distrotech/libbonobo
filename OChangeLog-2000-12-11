@@ -1,3 +1,12 @@
+1999-05-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-storage-repo.c (gnome_storage_repo_class_init):
+	Method rename from delete to erase to deal with C++.
+
+	* bonobo/gnome-storage.c (init_storage_corba_class): ditto
+
+	* idl/gnome-storage.idl: ditto.
+
 1999-05-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-component.c (gnome_component_remove_verb): Add
