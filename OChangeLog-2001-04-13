@@ -1,5 +1,16 @@
 2001-02-17  Michael Meeks  <michael@ximian.com>
 
+	* doc/api/bonobo-api.sgml: remove bonobo-embeddable-factory &
+	bonobo-property-listener
+	
+	* doc/api/bonobo-sections.txt: update.
+
+	* doc/api/Makefile.am: remove activation-context - private.
+
+	* doc/api/bonobo-api.sgml: ditto & add BonoboMoniker.
+
+2001-02-17  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-zoomable.c: Fix up some broken API docs.
 
 	* bonobo/bonobo-ui-util.c: fully document API.

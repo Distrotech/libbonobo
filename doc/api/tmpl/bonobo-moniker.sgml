@@ -2,11 +2,16 @@
 BonoboMoniker
 
 <!-- ##### SECTION Short_Description ##### -->
-
+The base implementation of our abstract object naming space
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
+Monikers are used to name objects, they effectively implement
+an object naming space.   You can obtain monikers either because
+you created the moniker manually, or from a stringified
+representation of a moniker.
 
+For more information see bonobo/doc/Monikers
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -69,23 +74,6 @@ BonoboMoniker
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_moniker_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_moniker_corba_object_create ##### -->
-<para>
-
-</para>
-
-@object: 
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_get_parent ##### -->
