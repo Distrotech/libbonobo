@@ -58,6 +58,7 @@ libbonobo_activation_la_SOURCES=		\
 	bonobo-activation-init.c		\
 	$(NULL)
 
+libbonobo_activation_la_LIBADD = $(INTLLIBS)
 
 IDL_FLAGS = -I$(top_srcdir)/idl
 IDL_DIR = $(top_srcdir)/idl/

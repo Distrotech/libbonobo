@@ -52,7 +52,8 @@ lib_LTLIBRARIES = libbonobo-2.la
 
 libbonobo_2_la_LIBADD = \
 	$(LIBBONOBO_LIBS) \
-	../bonobo-activation/libbonobo-activation.la
+	../bonobo-activation/libbonobo-activation.la \
+	$(INTLLIBS)
 
 libbonobo_2_la_LDFLAGS = -no-undefined
 

@@ -1,3 +1,11 @@
+2005-03-11  Tor Lillqvist  <tml@novell.com>
+
+	* configure.in: Call AC_CANONICAL_HOST before looking at $host.
+
+	* bonobo/Makefile.am (libbonobo_2_la_LIBADD)
+	* bonobo-activation/Makefile.am (libbonobo_activation_la_LIBADD)
+	* monikers/Makefile.am (libmoniker_std_2_la_LIBADD): Add $(INTLLIBS).
+
 2005-02-25  Tor Lillqvist  <tml@novell.com>
 
 	Further improvements to Windows port. Make it independent of

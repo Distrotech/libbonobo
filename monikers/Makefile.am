@@ -42,6 +42,7 @@ libmoniker_std_2_la_SOURCES =			\
 libmoniker_std_2_la_LDFLAGS = -module -avoid-version -no-undefined
 libmoniker_std_2_la_LIBADD = $(top_builddir)/bonobo/libbonobo-2.la \
 	$(top_builddir)/bonobo-activation/libbonobo-activation.la \
-	$(LIBBONOBO_LIBS)
+	$(LIBBONOBO_LIBS) \
+	$(INTLLIBS)
 
 EXTRA_DIST = Bonobo_Moniker_std.server.in.in
