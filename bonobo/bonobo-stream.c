@@ -140,7 +140,7 @@ init_stream_corba_class (void)
 }
 
 static void
-gnome_stream_class_init (GnomeStreamClass *class)
+gnome_stream_class_init (GnomeStreamClass *klass)
 {
 	gnome_stream_parent_class = gtk_type_class (gnome_object_get_type ());
 

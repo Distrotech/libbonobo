@@ -131,9 +131,9 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 
 static GNOME_Unknown
 impl_get_object (PortableServer_Servant servant,
-		 CORBA_char *item_name,
-		 CORBA_boolean only_if_exists,
-		 CORBA_Environment * ev)
+		 const CORBA_char      *item_name,
+		 CORBA_boolean          only_if_exists,
+		 CORBA_Environment     *ev)
 {
 	GNOME_Unknown ret;
 	

@@ -52,8 +52,8 @@ impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
 
 static void
 impl_load (PortableServer_Servant servant,
-	   CORBA_char *filename,
-	   CORBA_Environment *ev)
+	   const CORBA_char      *filename,
+	   CORBA_Environment     *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomePersistFile *pf = GNOME_PERSIST_FILE (object);
@@ -67,7 +67,7 @@ impl_load (PortableServer_Servant servant,
 		
 		result = (*class->load)(pf, filename);
 	}
-	if (result != 0){
+	if (result != 0) {
 		CORBA_exception_set (
 			ev, CORBA_USER_EXCEPTION,
 			ex_GNOME_Persist_FileNotFound, NULL);
@@ -76,8 +76,8 @@ impl_load (PortableServer_Servant servant,
 
 static void
 impl_save (PortableServer_Servant servant,
-	   CORBA_char *filename,
-	   CORBA_Environment *ev)
+	   const CORBA_char      *filename,
+	   CORBA_Environment     *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomePersistFile *pf = GNOME_PERSIST_FILE (object);
@@ -141,7 +141,7 @@ gnome_persist_file_get_current_file (GnomePersistFile *pf)
 }
 
 static void
-gnome_persist_file_class_init (GnomePersistFileClass *class)
+gnome_persist_file_class_init (GnomePersistFileClass *klass)
 {
 	gnome_persist_file_parent_class = gtk_type_class (gnome_persist_get_type ());
 
@@ -149,9 +149,9 @@ gnome_persist_file_class_init (GnomePersistFileClass *class)
 	 * Override and initialize methods
 	 */
 
-	class->save = gnome_persist_file_nop;
-	class->load = gnome_persist_file_nop;
-	class->get_current_file = gnome_persist_file_get_current_file;
+	klass->save = gnome_persist_file_nop;
+	klass->load = gnome_persist_file_nop;
+	klass->get_current_file = gnome_persist_file_get_current_file;
 	
 	init_persist_file_corba_class ();
 }

@@ -65,8 +65,8 @@ impl_GNOME_Property_get_value (PortableServer_Servant servant,
 
 static void
 impl_GNOME_Property_set_value (PortableServer_Servant servant,
-			       const CORBA_any *any,
-			       CORBA_Environment *ev)
+			       const CORBA_any       *any,
+			       CORBA_Environment     *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 	gpointer new_value;

@@ -69,9 +69,9 @@ impl_end (PortableServer_Servant servant,
 } /* impl_end */
 
 static void
-impl_add_data (PortableServer_Servant servant,
-	       GNOME_ProgressiveDataSink_iobuf *buffer,
-	       CORBA_Environment *ev)
+impl_add_data (PortableServer_Servant                 servant,
+	       const GNOME_ProgressiveDataSink_iobuf *buffer,
+	       CORBA_Environment                     *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
@@ -181,9 +181,9 @@ gnome_progressive_data_sink_set_size_nop (GnomeProgressiveDataSink *psink,
 }
 
 static void
-gnome_progressive_data_sink_class_init (GnomeProgressiveDataSinkClass *class)
+gnome_progressive_data_sink_class_init (GnomeProgressiveDataSinkClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
 	gnome_progressive_data_sink_parent_class =
 		gtk_type_class (gnome_object_get_type ());
@@ -193,10 +193,10 @@ gnome_progressive_data_sink_class_init (GnomeProgressiveDataSinkClass *class)
 	 */
 	object_class->destroy = gnome_progressive_data_sink_destroy;
 
-	class->start_fn = gnome_progressive_data_sink_start_end_nop;
-	class->end_fn = gnome_progressive_data_sink_start_end_nop;
-	class->add_data_fn = gnome_progressive_data_sink_add_data_nop;
-	class->set_size_fn = gnome_progressive_data_sink_set_size_nop;
+	klass->start_fn    = gnome_progressive_data_sink_start_end_nop;
+	klass->end_fn      = gnome_progressive_data_sink_start_end_nop;
+	klass->add_data_fn = gnome_progressive_data_sink_add_data_nop;
+	klass->set_size_fn = gnome_progressive_data_sink_set_size_nop;
 
 	init_progressive_data_sink_corba_class ();
 }

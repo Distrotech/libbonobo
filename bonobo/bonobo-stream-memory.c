@@ -148,10 +148,10 @@ mem_destroy (GtkObject *object)
 }
 
 static void
-gnome_stream_mem_class_init (GnomeStreamMemClass *class)
+gnome_stream_mem_class_init (GnomeStreamMemClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
-	GnomeStreamClass *sclass = GNOME_STREAM_CLASS (class);
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GnomeStreamClass *sclass = GNOME_STREAM_CLASS (klass);
 	
 	gnome_stream_mem_parent_class = gtk_type_class (gnome_stream_get_type ());
 

@@ -24,7 +24,9 @@ gnome_storage_from_servant (PortableServer_Servant servant)
 }
 
 static GNOME_Stream
-impl_create_stream (PortableServer_Servant servant, CORBA_char *path, CORBA_Environment *ev)
+impl_create_stream (PortableServer_Servant servant,
+		    const CORBA_char      *path,
+		    CORBA_Environment     *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStream *stream;
@@ -38,9 +40,9 @@ impl_create_stream (PortableServer_Servant servant, CORBA_char *path, CORBA_Envi
 
 static GNOME_Stream
 impl_open_stream (PortableServer_Servant servant,
-		  CORBA_char *path,
+		  const CORBA_char      *path,
 		  GNOME_Storage_OpenMode mode,
-		  CORBA_Environment *ev)
+		  CORBA_Environment     *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStream *stream;
@@ -54,8 +56,8 @@ impl_open_stream (PortableServer_Servant servant,
 
 static GNOME_Storage 
 impl_create_storage (PortableServer_Servant servant,
-		     CORBA_char *path,
-		     CORBA_Environment *ev)
+		     const CORBA_char      *path,
+		     CORBA_Environment     *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStorage *new_storage;
@@ -69,9 +71,9 @@ impl_create_storage (PortableServer_Servant servant,
 
 static GNOME_Storage
 impl_open_storage (PortableServer_Servant servant,
-		   CORBA_char *path,
+		   const CORBA_char      *path,
 		   GNOME_Storage_OpenMode mode,
-		   CORBA_Environment *ev)
+		   CORBA_Environment     *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStorage *open_storage;
@@ -85,8 +87,8 @@ impl_open_storage (PortableServer_Servant servant,
 
 static void
 impl_copy_to (PortableServer_Servant servant,
-	      GNOME_Storage target,
-	      CORBA_Environment *ev)
+	      GNOME_Storage          target,
+	      CORBA_Environment     *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	
@@ -95,9 +97,9 @@ impl_copy_to (PortableServer_Servant servant,
 
 static void
 impl_rename (PortableServer_Servant servant,
-	     CORBA_char *path_name,
-	     CORBA_char *new_path_name,
-	     CORBA_Environment *ev)
+	     const CORBA_char      *path_name,
+	     const CORBA_char      *new_path_name,
+	     CORBA_Environment     *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	
@@ -105,7 +107,7 @@ impl_rename (PortableServer_Servant servant,
 }
 
 static void
-impl_commit (PortableServer_Servant servant, CORBA_Environment * ev)
+impl_commit (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	
@@ -114,8 +116,8 @@ impl_commit (PortableServer_Servant servant, CORBA_Environment * ev)
 
 static GNOME_Storage_directory_list *
 impl_list_contents (PortableServer_Servant servant,
-		    const CORBA_char * path,
-		    CORBA_Environment * ev)
+		    const CORBA_char      *path,
+		    CORBA_Environment     *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 
@@ -124,8 +126,8 @@ impl_list_contents (PortableServer_Servant servant,
 
 static void
 impl_erase (PortableServer_Servant servant, 
-            const CORBA_char *path,
-            CORBA_Environment * ev)
+            const CORBA_char      *path,
+            CORBA_Environment     *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	
@@ -165,7 +167,7 @@ init_storage_corba_class (void)
 }
 
 static void
-gnome_storage_class_init (GnomeStorageClass *class)
+gnome_storage_class_init (GnomeStorageClass *klass)
 {
 	gnome_storage_parent_class = gtk_type_class (gnome_object_get_type ());
 

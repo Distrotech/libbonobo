@@ -40,9 +40,9 @@ gnome_persist_destroy (GtkObject *object)
 }
 
 static void
-gnome_persist_class_init (GnomePersistClass *class)
+gnome_persist_class_init (GnomePersistClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
 	gnome_persist_parent_class = gtk_type_class (gnome_object_get_type ());
 

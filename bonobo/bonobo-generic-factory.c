@@ -27,18 +27,18 @@ static GnomeObjectClass *gnome_generic_factory_parent_class;
 
 static CORBA_boolean
 impl_GNOME_GenericFactory_supports (PortableServer_Servant servant,
-				    CORBA_char *obj_goad_id,
-				    CORBA_Environment *ev)
+				    const CORBA_char      *obj_goad_id,
+				    CORBA_Environment     *ev)
 {
 	g_message ("support invoked\n");
 	return TRUE;
 }
 
 static CORBA_Object
-impl_GNOME_GenericFactory_create_object (PortableServer_Servant servant,
-					 CORBA_char *obj_goad_id,
-					 GNOME_stringlist *params,
-					 CORBA_Environment *ev)
+impl_GNOME_GenericFactory_create_object (PortableServer_Servant  servant,
+					 const CORBA_char       *obj_goad_id,
+					 const GNOME_stringlist *params,
+					 CORBA_Environment      *ev)
 {
 	GnomeGenericFactoryClass *class;
 	GnomeGenericFactory *factory;
@@ -47,12 +47,12 @@ impl_GNOME_GenericFactory_create_object (PortableServer_Servant servant,
 	factory = GNOME_GENERIC_FACTORY (gnome_object_from_servant (servant));
 
 	class = GNOME_GENERIC_FACTORY_CLASS (GTK_OBJECT (factory)->klass);
-	object = (*class->new_generic)(factory, obj_goad_id);
+	object = (*class->new_generic) (factory, obj_goad_id);
 
 	if (!object)
 		return CORBA_OBJECT_NIL;
 	
-	return CORBA_Object_duplicate(gnome_object_corba_objref (GNOME_OBJECT (object)), ev);
+	return CORBA_Object_duplicate (gnome_object_corba_objref (GNOME_OBJECT (object)), ev);
 }
 
 static CORBA_Object
@@ -67,7 +67,7 @@ create_gnome_generic_factory (GnomeObject *object)
 	servant->vepv = &gnome_generic_factory_vepv;
 
 	POA_GNOME_GenericFactory__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_free (servant);
 		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
@@ -241,15 +241,15 @@ init_generic_factory_corba_class (void)
 }
 
 static void
-gnome_generic_factory_class_init (GnomeGenericFactoryClass *class)
+gnome_generic_factory_class_init (GnomeGenericFactoryClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
 	gnome_generic_factory_parent_class = gtk_type_class (gnome_object_get_type ());
 
 	object_class->finalize = gnome_generic_factory_finalize;
 
-	class->new_generic = gnome_generic_factory_new_generic;
+	klass->new_generic = gnome_generic_factory_new_generic;
 
 	init_generic_factory_corba_class ();
 }

@@ -297,9 +297,9 @@ gnome_object_object_destroy (GtkObject *object)
 }
 
 static void
-gnome_object_class_init (GnomeObjectClass *class)
+gnome_object_class_init (GnomeObjectClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
 	gnome_object_parent_class = gtk_type_class (gtk_object_get_type ());
 

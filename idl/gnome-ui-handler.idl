@@ -113,35 +113,40 @@ module GNOME {
 		boolean menu_get_children (in string path, out StringSeq children);
 
 		/**
-		 * menu_item_get_pos:
-		 * FIXME: set pos?
+		 * menu_set_attributes: small data entries.
 		 */
-       		long menu_get_pos (in string path);
-		void menu_set_pos (in UIHandler containee, in long pos);
+		void menu_set_attributes (in  UIHandler containee, in string path,
+					  in  boolean sensitivity,
+					  in  long pos,
+					  in  string label,
+					  in  string hint,
+					  in  long accelerator_key, in  long ac_mods,
+					  in  boolean toggle_state);
 
 		/**
-		 * menu_item_set_sensitivity:
+		 * menu_get_attributes: small data entries.
 		 */
-       		void menu_set_sensitivity (in UIHandler containee, in string path, in boolean sensitivity);
-       		boolean menu_get_sensitivity (in string path);
+		void menu_get_attributes (in  UIHandler containee, in string path,
+					  out boolean sensitivity,
+					  out long pos,
+					  out string label,
+					  out string hint,
+					  out long accelerator_key, out long ac_mods,
+					  out boolean toggle_state);
 
-		void menu_set_label (in UIHandler containee, in string path, in string label);		
-		string menu_get_label (in string path);
 
-		void menu_set_hint (in UIHandler containee, in string path, in string hint);		
-		string menu_get_hint (in string path);
+		/**
+		 * menu_set_data: chunky data entries.
+		 */
+		void menu_set_data       (in  UIHandler containee, in string path,
+					  in  PixmapType pixmap_type, in  iobuf pixmap_data);
 
-		void menu_set_pixmap (in UIHandler containee, in string path,
-				      in PixmapType pixmap_type, in iobuf pixmap_data);
-		void menu_get_pixmap (in string path, out PixmapType pixmap_type, out iobuf pixmap_data);
+		/**
+		 * menu_get_data: chunky data entries.
+		 */
+		void menu_get_data       (in  UIHandler containee, in string path,
+					  out PixmapType pixmap_type, out iobuf pixmap_data);
 
-		void menu_set_accel (in UIHandler containee, in string path,
-				     in long accelerator_key, in long ac_mods);
-		void menu_get_accel (in string path, out long accelerator_key, out long ac_mods);
-
-       		void menu_set_toggle_state (in UIHandler containee, in string path, in boolean state);
-       		boolean menu_get_toggle_state (in string path);
-       
 
        		/*
        		 *
@@ -164,6 +169,32 @@ module GNOME {
 			TOOLBAR_ORIENTATION_HORIZONTAL,
 			TOOLBAR_ORIENTATION_VERTICAL
 		};
+
+		/**
+		 * menu_set_attributes: small data entries.
+		 */
+		void toolbar_set_attributes (in  UIHandler containee, in string path,
+					     in  ToolbarOrientation orientation,
+					     in  boolean sensitivity,
+					     in  long pos,
+					     in  long style,
+					     in  string label,
+					     in  string hint,
+					     in  long accelerator_key, in  long ac_mods,
+					     in  boolean toggle_state);
+
+		/**
+		 * menu_get_attributes: small data entries.
+		 */
+		void toolbar_get_attributes (in  UIHandler containee, in string path,
+					     out ToolbarOrientation orientation,
+					     out boolean sensitivity,
+					     out long pos,
+					     out long style,
+					     out string label,
+					     out string hint,
+					     out long accelerator_key, out long ac_mods,
+					     out boolean toggle_state);
 
 		void toolbar_set_orientation (in UIHandler containee, in string name, in ToolbarOrientation orientation);
 		ToolbarOrientation toolbar_get_orientation (in string name);
@@ -210,6 +241,9 @@ module GNOME {
 		void toolbar_set_pos (in UIHandler containee, in long pos);
 		
        
+/*
+ * These are unimplemented & probably redundant.
+ *
        		long toolbar_item_get_pos (in string path);
        
        		void toolbar_item_set_sensitivity (in string path, in boolean sensitivity);
@@ -231,7 +265,7 @@ module GNOME {
        		boolean toolbar_item_toggle_get_state (in string path);
        
        		void toolbar_item_radio_set_state (in string path, in boolean state);
-       		boolean toolbar_item_radio_get_state (in string path);
+       		boolean toolbar_item_radio_get_state (in string path);*/
        
        		/*
        		 * These methods allow embedded components to create UI groups

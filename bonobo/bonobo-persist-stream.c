@@ -130,7 +130,7 @@ gnome_persist_stream_zero (GnomePersistStream *ps)
 }
 
 static void
-gnome_persist_stream_class_init (GnomePersistStreamClass *class)
+gnome_persist_stream_class_init (GnomePersistStreamClass *klass)
 {
 	gnome_persist_stream_parent_class = gtk_type_class (gnome_persist_get_type ());
 
@@ -138,9 +138,9 @@ gnome_persist_stream_class_init (GnomePersistStreamClass *class)
 	 * Override and initialize methods
 	 */
 
-	class->save = gnome_persist_stream_nop;
-	class->load = gnome_persist_stream_nop;
-	class->get_size_max = gnome_persist_stream_zero;
+	klass->save = gnome_persist_stream_nop;
+	klass->load = gnome_persist_stream_nop;
+	klass->get_size_max = gnome_persist_stream_zero;
 
 	init_persist_stream_corba_class ();
 }

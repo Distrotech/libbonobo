@@ -99,9 +99,9 @@ gnome_simple_data_source_remaining_data_zero (GnomeSimpleDataSource *ssource)
 } /* gnome_simple_data_source_remaining_data_zero */
 
 static void
-gnome_simple_data_source_class_init (GnomeSimpleDataSourceClass *class)
+gnome_simple_data_source_class_init (GnomeSimpleDataSourceClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
 	gnome_simple_data_source_parent_class =
 		gtk_type_class (gnome_object_get_type ());
@@ -111,8 +111,8 @@ gnome_simple_data_source_class_init (GnomeSimpleDataSourceClass *class)
 	 */
 	object_class->destroy = gnome_simple_data_source_destroy;
 
-	class->pop_data_fn = gnome_simple_data_source_pop_data_nop;
-	class->remaining_data_fn = gnome_simple_data_source_remaining_data_zero;
+	klass->pop_data_fn = gnome_simple_data_source_pop_data_nop;
+	klass->remaining_data_fn = gnome_simple_data_source_remaining_data_zero;
 
 	init_simple_data_source_corba_class ();
 } /* gnome_simple_data_source_class_init */

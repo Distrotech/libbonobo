@@ -1,3 +1,90 @@
+1999-12-16  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-view.c (gnome_view_construct): kill 
+
+1999-12-13  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-ui-handler.c (impl_menu_set_attributes): Implement.
+	(impl_menu_set_data): implement. (impl_menu_get_attributes): implement.
+	(menu_remote_attribute_data_set, menu_remote_attribute_data_get),
+	(menu_remote_attribute_data_free):  implement convenience helpers.
+	(menu_remote_set_label, menu_remote_set_hint, menu_remote_set_accel),
+	(menu_remote_set_toggle_state, menu_remote_set_accel),
+	(menu_remote_set_sensitivity): mangle utterly.
+	(menu_remote_get_pos, menu_remote_get_sensitivity, menu_remote_get_label),
+	(menu_remote_get_hint, menu_remote_get_accel, menu_remote_get_toggle_state): 
+	more mangling. (menu_remote_set_pixmap): use menu_set_data.
+	(impl_menu_get_pos, impl_menu_set_sensitivity, impl_menu_get_sensitivity),
+	(impl_menu_set_label, impl_menu_get_label, impl_menu_set_hint),
+	(impl_menu_get_hint, impl_menu_set_pixmap, impl_menu_get_pixmap),
+	(impl_menu_set_accel, impl_menu_get_accel, impl_menu_set_toggle_state),
+	(impl_menu_get_toggle_state): kill.
+	(gnome_ui_handler_get_epv): Shrink epv lots.
+
+	* gshell/gshell.c (set_buffer_cb): const.
+
+	* bonobo/gnome-property.c (impl_GNOME_Property_set_value): const.
+
+	* bonobo/gnome-view.c (gnome_view_verb_selected_cb): const.
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_verb_selected_cb),
+	(gnome_view_frame_view_do_verb): const.
+
+	* bonobo/gnome-view.c (impl_GNOME_View_do_verb): const.
+
+	* bonobo/gnome-ui-handler.c (toolbar_local_toolbar_create): fix mem
+	error. (toolbar_toplevel_toolbar_store_data): ditto.
+
+1999-12-12  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-ui-handler.c: Almost every routine constified.
+	(pixmap_corba_to_data): kill forward prototype.
+	(menu_local_remove_item): fix mem error on path_to_menu_callback insert.
+
+	* bonobo/gnome-ui-handler.h: (GnomeUIHandlerCallbackFunc) const path.
+	(GnomeUIHandlerMenuItem): marvel at the conflicting temporary / permanant
+	usage of this struct.
+
+	* bonobo/gnome-container.c (impl_get_object): const.
+
+	* bonobo/gnome-storage.c (impl_create_stream, impl_open_stream),
+	(impl_create_storage, impl_open_storage, impl_rename): contify.
+
+	* bonobo/gnome-progressive.c (impl_add_data): const.
+
+	* bonobo/gnome-persist-file.c (impl_save, impl_load): const.
+
+	* bonobo/gnome-generic-factory.c (impl_GNOME_GenericFactory_supports),
+	(impl_GNOME_GenericFactory_create_object): const.
+
+	* bonobo/gnome-embeddable.c (impl_GNOME_Embeddable_set_host_name),
+	(impl_GNOME_Embeddable_set_uri): const.
+
+	* bonobo/gnome-desktop-window.c (impl_desktop_window_set_title),
+	(impl_desktop_window_set_geometry): const.
+
+	* bonobo/gnome-control-frame.c (impl_GNOME_ControlFrame_activate_uri): const.
+
+	* bonobo/gnome-canvas-component.c (gcc_update, gcc_draw, gcc_bounds),
+	(gcc_event, gcc_set_bounds, restore_state, GNOME_Gdk_Event_to_GdkEvent): constify.
+	(gcc_update): Add nasty cast to GnomeCanvasItemClass->update 'affine' arg.
+
+	* bonobo/gnome-bonobo-item.c (impl_GNOME_Canvas_ItemProxy_request_update):
+	constify.
+
+	* bonobo/gnome-bonobo-selector.c (gnome_dialog_clicked): kill warning.
+
+	* bonobo/gnome-ui-handler.c (gnome_ui_handler_get_epv): Added FIXME's
+	for missing items + re-orderd to match idl.
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c (view_activate_cb): kill
+	deferring to new builtin default.
+
+	* bonobo/gnome-view.c (gnome_view_activate): implement default handler.
+	(gnome_view_construct): connect it.
+
+	* Allfiles: rename XXX_class_init (XXX *class) to (XXX *klass)
+
 1999-12-14  Darin Adler  <darin@eazel.com>
 
 	* bonobo/.cvsignore: Ignore more generated files.
