@@ -1,3 +1,8 @@
+2000-10-09  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_destroy):
+	Unref the socket and disconnect it's destroy handler.
+
 2000-10-09  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (put_hint_in_statusbar): fall back to the tip
