@@ -1,3 +1,11 @@
+2001-03-16  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-control.c (bonobo_control_construct):
+	delay creation of default UI component.
+	(bonobo_control_set_automerge),
+	(bonobo_control_get_ui_component): create ui component
+	if neccessary.
+
 2001-03-14  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-ui-toolbar-icon.c (paint_with_pixbuf): 

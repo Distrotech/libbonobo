@@ -55,7 +55,8 @@ typedef struct {
 	 */
 	void  (*query_interface) (BonoboObject *object, const char *repo_id,  CORBA_Object      *retval);
 	void  (*system_exception)(BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
-	gpointer expansion;
+
+	gpointer expansion; /* Used by XObject */
 } BonoboObjectClass;
 
 GtkType                  bonobo_object_get_type               (void);
