@@ -196,8 +196,20 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 								    &dummy,
 								    ev);
 			if (ev->_major != CORBA_NO_EXCEPTION
-			    || CORBA_Object_is_nil (new_retval, ev))
+			    || CORBA_Object_is_nil (new_retval, ev)) {
+                                if (ev->_major == CORBA_NO_EXCEPTION) {
+                                        OAF_GeneralError *error = OAF_GeneralError__alloc ();
+                                        char *error_string = g_strdup_printf (
+                                                _("Factory '%s' returned NIL for '%s'"),
+                                                pobj->iid, iid);
+                                        error->description = CORBA_string_dup (error_string);
+                                        CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                                             ex_OAF_GeneralError, error);
+                                        g_free (error_string);
+                                        
+                                }
 				new_retval = CORBA_OBJECT_NIL;
+                        }
 
 			CORBA_Object_release (retval, ev);
 			retval = new_retval;
