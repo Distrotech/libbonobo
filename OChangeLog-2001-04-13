@@ -1,3 +1,34 @@
+2000-10-09  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/bonobo-control.c: 
+	(impl_Bonobo_Control_set_window): In the local bypass case, don't
+	just `gtk_widget_hide' the GtkSocket, destroy it, or it might come
+	back as a floating mystery gray box.
+	(idle_destroy_socket): But we can't just destroy it, because you
+	can't destroy a widget from a handler for the "realized" signalD,
+	or bad things happen.
+	(remove_destroy_idle): But we need to remove the idle callback if
+	the socket gets destroyed.
+	(bonobo_control_destroy): Or if the control gets destroyed.
+
+	* bonobo/bonobo-control-frame.c:
+	(bonobo_control_frame_socket_destroy): handle the socket being
+	destroyed.
+	(bonobo_control_frame_create_socket): factor out the code to
+	recreate the socket
+	(bonobo_control_frame_construct): use the above
+	(bonobo_control_frame_bind_to_control): create socket as needed.
+
+	* components/text-plain/bonobo-text-plain.c
+	(progressive_update): Avoid dividing by zero when the total size
+	has not been set.
+
+	(embeddable_factory): Connect the "destroy" signal with
+	`gtk_signal_connect', not `gtk_signal_connect_after'; `after'
+	connections to the "destroy" signal don't work because the default
+	destroy handler disconnects all signal handlers. This is needed to
+	make bonobo-text-plain exit when it should.
+
 2000-10-09  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-control-frame.[ch]: Remove undo signal.
