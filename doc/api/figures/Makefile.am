@@ -15,5 +15,5 @@ all-local: $(diagrams_png)
 
 MAINTAINERCLEANFILES = $(diagrams_png)
 
-EXTRADIST = $(diagrams) $(diagrams_png)
+EXTRA_DIST = $(diagrams) $(diagrams_png)
 
