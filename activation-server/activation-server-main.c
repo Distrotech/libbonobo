@@ -29,6 +29,7 @@
 #include <popt.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <locale.h>
 
 #include "liboaf/liboaf.h"
 
