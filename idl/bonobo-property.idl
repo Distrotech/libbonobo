@@ -77,7 +77,14 @@ interface Property {
 	/** 
 	 * get_flags:
 	 * 
-	 * Returns this property's flags
+	 * Returns this property's flags,
+	 * see bonobo-property-bag.h
+	 *
+	 * BONOBO_PROPERTY_UNSTORED        = 1,
+	 * BONOBO_PROPERTY_READABLE        = 2,
+	 * BONOBO_PROPERTY_WRITEABLE       = 4,
+	 * BONOBO_PROPERTY_USE_DEFAULT_OPT = 8
+	 * 
 	 */
 	long get_flags ();
 };

@@ -9,6 +9,7 @@ BEGIN_GNOME_DECLS
 typedef struct _BonoboPropertyBagPrivate BonoboPropertyBagPrivate;
 typedef struct _BonoboPropertyBag	 BonoboPropertyBag;
 
+/* Keep this enumeration synced with the docs in bonobo-property.idl */
 typedef enum {
 	BONOBO_PROPERTY_UNSTORED        = 1,
 	BONOBO_PROPERTY_READABLE        = 2,

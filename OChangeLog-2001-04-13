@@ -1,5 +1,11 @@
 2000-04-10  Michael Meeks  <michael@helixcode.com>
 
+	* idl/bonobo-property.idl: add comments describing values.
+
+	* doc/properties.txt: write.
+
+2000-04-10  Michael Meeks  <michael@helixcode.com>
+
 	* samples/compound-doc/sample-container.c (container_create): init components.
 	(Container): Add list of  (container_activate_component): manage list.
 	(component_shutdown): ditto. (container_print_preview_cmd): use the list.
