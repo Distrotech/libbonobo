@@ -1,3 +1,4 @@
+# traducción de es.po al Spanish
 # translation of es.po to Spanish
 # Translation into spanish of libbonobo.
 # Copyright (C) 2001,2003, 2004 Free Software Foundation, Inc.
@@ -12,14 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "POT-Creation-Date: 2004-05-29 11:19+0100\n"
-"PO-Revision-Date: 2004-03-06 19:36+0100\n"
+"PO-Revision-Date: 2004-08-31 23:53+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -62,7 +64,7 @@ msgstr "EXPRESIÓN"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr "Servicio CORBA CosNaming"
+msgstr "Servicio CORBA CosNaming."
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
@@ -163,8 +165,7 @@ msgstr "Error de salida desconocido (el estado es %u)"
 #: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr ""
-"bonobo-activation no ha podido establecer el grupo del proceso de %s: %s\n"
+msgstr "bonobo-activation no ha podido establecer el grupo del proceso de %s: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
@@ -417,7 +418,7 @@ msgstr "Ítem de moniker genérico"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr "stream MonikerExtender"
+msgstr "flujo MonikerExtender"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
@@ -502,3 +503,4 @@ msgstr "Mostrar los directorios del archivo de configuración"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Mostrar la ruta del archivo de configuración"
+
