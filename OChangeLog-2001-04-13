@@ -1,3 +1,7 @@
+2000-09-01  Michael Meeks  <michael@helixcode.com>
+
+	* More initial work on new UI handler code.
+
 2000-08-31  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/Makefile.am: Make the includes work.

@@ -1,12 +1,5 @@
 module Bonobo {
 	interface UIComponent : Bonobo::Unknown {
-		struct Verb {
-			string    cname;
-			string     label;
-			string     descr;
-		};
-		typedef sequence<Verb> VerbList;
-
 		enum EventType {
 			ACTIVATED,
 			REMOVED,
@@ -15,12 +8,22 @@ module Bonobo {
 			STATE_CHANGED
 		};
 
-		VerbList    get_verb_list ();
-		oneway void exec_verb     (in string   cname);
+		/*
+		 * Returns an XML description of all available verbs.
+		 */
+		string      describe_verbs ();
 
-		oneway void ui_event     (in string    path,
-					  in EventType type,
-					  in string    state);
+		/*
+		 * Allows a remote user to execute a verb by name.
+		 */
+		oneway void exec_verb      (in string   cname);
+
+		/*
+		 * Allows a remote user to flag an event
+		 */
+		oneway void ui_event       (in string    id,
+					    in EventType type,
+					    in string    state);
 	};
 
 	interface UIContainer : Bonobo::Unknown {
