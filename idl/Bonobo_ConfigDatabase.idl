@@ -1,0 +1,75 @@
+/*
+ * Bonobo_Config.idl: The Bonobo Configuration System
+ *
+ * Author:
+ *	Dietmar Maurer (dietmar@ximian.com)
+ */
+
+#ifndef __BONOBO_CONFIG_IDL__
+#define __BONOBO_CONFIG_IDL__
+
+%{
+#pragma include_defs bonobo/Bonobo.h
+%}
+#pragma inhibit push
+
+#include <Bonobo_Property.idl>
+#include <Bonobo_Control.idl>
+
+#pragma inhibit pop
+
+module Bonobo {
+
+	interface PropertyEditor : Bonobo::Control {
+		struct Pair {
+			string         name;
+			PropertyEditor editor;
+		};
+
+		typedef sequence<Pair> PropertyEditorSet;
+		
+		exception InvalidType {};
+
+		void setProperty (in Property property)
+			raises (InvalidType);    
+
+		PropertyEditorSet getSubEditors ();
+	};
+
+	interface ConfigDatabase;
+
+	typedef sequence<string> KeyList;
+
+	struct ConfigEvent {
+		ConfigDatabase database;
+		string         key;
+		any            value;
+	};
+
+	/*
+	 * aggregated with an event source
+	 *
+	 */
+	interface ConfigDatabase : Unknown {
+
+		any          getValue    (in string key);
+
+		void         setValue    (in string key, in any value);
+
+		KeyList      listDirs    (in string dir);
+		KeyList      listKeys    (in string dir);
+
+		boolean      dirExists   (in string dir);
+		
+		void         remove      (in string path);
+
+		void         addDatabase (in ConfigDatabase ddb, 
+					  in string filter_path,
+					  in string append_path);
+		void         sync        ();
+
+	};
+
+};
+
+#endif /* ! __BONOBO_CONFIG_IDL__ */
