@@ -27,9 +27,9 @@
 #include <time.h>
 #include <string.h>
 
-#include "oafd.h"
-#include "oaf-i18n.h"
-#include "liboaf/liboaf.h"
+#include "server.h"
+#include "bonobo-activation/bonobo-activation.h"
+
 #include "ac-query-expr.h"
 #include "oafd-corba-extensions.h"
 

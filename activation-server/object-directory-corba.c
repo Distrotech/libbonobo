@@ -26,14 +26,14 @@
 #include "config.h"
 
 #include <stdio.h>
-
-#include "oafd.h"
-#include "liboaf/liboaf.h"
 #include <time.h>
 #include <glib.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
+
+#include "server.h"
+#include "bonobo-activation/bonobo-activation.h"
 
 #include "oafd-corba-extensions.h"
 

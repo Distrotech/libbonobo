@@ -27,13 +27,17 @@
 
 #include <config.h>
 
+#include "server.h"
+#include "bonobo-activation/bonobo-activation.h"
+
 #include "activation-server-corba-extensions.h"
 
 #include <bonobo-activation/bonobo-activation-i18n.h>
 #include <orbit/orbit.h>
+
 #include <stdio.h>
 #include <string.h>
-
+#include "oafd-corba-extensions.h"
 
 char *
 activation_server_CORBA_Context_get_value (CORBA_Context         ctx, 

@@ -23,9 +23,6 @@
  *           Maciej Stachowiak <mjs@eazel.com>
  *
  */
-
-#include "oafd.h"
-#include "oaf-i18n.h"
 #include <stdlib.h>
 #include <ctype.h>
 #include <sys/types.h>
@@ -34,6 +31,8 @@
 #include <parser.h>      /* gnome-xml */
 #include <xmlmemory.h>   /* gnome-xml */
 
+#include "server.h"
+#include "bonobo-activation/bonobo-activation.h"
 
 static gboolean od_string_to_boolean      (const char *str);
 static gboolean od_filename_has_extension (const char *filename,

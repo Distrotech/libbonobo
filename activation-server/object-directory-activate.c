@@ -24,11 +24,6 @@
  */
 
 #include "config.h"
-
-#include "oafd.h"
-#include "liboaf/liboaf-private.h"
-#include "oaf-i18n.h"
-
 #include <signal.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -36,6 +31,9 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+#include "server.h"
+#include "bonobo-activation/bonobo-activation.h"
 
 #include "oafd-corba-extensions.h"
 

@@ -25,11 +25,11 @@
 
 #include <config.h>
 
-#include "oaf-i18n.h"
-#include "oafd.h"
+#include "server.h"
+#include "bonobo-activation/bonobo-activation.h"
+
 #include "ac-query-expr.h"
 #include "od-utils.h"
-#include "liboaf/liboaf.h"
 
 #include <ORBitservices/CosNaming.h>
 #include <ORBitservices/CosNaming_impl.h>
