@@ -1,3 +1,22 @@
+1999-06-10  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/test-container.c: Added comment at top of file.
+
+	* bonobo/sample-server.c (main): Return an int.
+
+	* bonobo/gnome-component-client.c: Include gdktypes.h
+	(view_frame_activated_cb): New simple default callback function to
+ 	attach to the view_activated signal of a newly-created
+ 	GnomeViewFrame.  Uncovers the BonoboObject by removing the
+ 	GnomeWrapper.  For use with gnome_bonobo_object_new_view_simple.
+	(wrapper_button_press_cb): New simple default callback function to
+ 	attach to the button_press_event signal of a GnomeWrapper.  Sends
+ 	the bonobo_open verb to the contained BonoboObject when the user
+ 	double clicks on the GnomeWrapper.  For use with
+ 	gnome_bonobo_object_new_view_simple.
+	(gnome_bonobo_object_new_view_simple): New function to make it
+ 	easy to setup a new view of an existing BonoboObject.
+
 1999-06-09  Matt Loper <matt@gnome-support.com>
 
 	* bonobo/test-container.c (add_image_cmd): Released `persist' properly.
