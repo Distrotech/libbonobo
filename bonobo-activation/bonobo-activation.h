@@ -54,6 +54,7 @@ void oaf_plugin_unuse(gpointer impl_ptr);
 
 CORBA_Object oaf_activate(const char *requirements, const char **selection_order,
 			  OAF_ActivationFlags flags, CORBA_Environment *ev);
+CORBA_Object oaf_activate_from_id(const OAF_ActivationID aid, OAF_ActivationFlags flags, CORBA_Environment *ev);
 
 /* oaf-registration.c - not intended for application use */
 typedef struct {

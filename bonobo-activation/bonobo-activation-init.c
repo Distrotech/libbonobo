@@ -158,7 +158,7 @@ oaf_ior_fd_get(void)
 }
 
 /* If it is specified on the command line, it overrides everything else */
-char *
+static char *
 cmdline_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCategory *regcat,
 	      int *ret_distance, gpointer user_data)
 {
@@ -180,7 +180,7 @@ static OAFRegistrationLocation cmdline_regloc = {
 };
 
 /* If it is specified on the command line, it overrides everything else */
-char *
+static char *
 ac_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCategory *regcat,
 	 int *ret_distance, gpointer user_data)
 {
