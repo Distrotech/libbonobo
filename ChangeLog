@@ -1,3 +1,14 @@
+2003-05-08  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/activation-api/Makefile.am: Replace common gtk-doc makefile
+	code with an include.
+	(DOC_SOURCE_DIR): Fixed bonobo-activation directory location.
+
+	* doc/Makefile.am (SUBDIRS): Added activation and activation-api.
+
+	* configure.in: AC_OUTPUT doc/activation/Makefile and
+	doc/activation-api/Makefile.
+
 2003-05-08  Jens Granseuer  <jensgr@gmx.net>
 
 	* Makefile.am (install-data-local): use DESTDIR.

@@ -182,5 +182,7 @@ tests/test-activation/Makefile
 doc/Makefile
 doc/api/Makefile
 doc/api/figures/Makefile
+doc/activation/Makefile
+doc/activation-api/Makefile
 ])
 
