@@ -1,460 +1,460 @@
-# Big5 Translation.
+# traditional Chinese translation for libbonobo2.
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ammonite\n"
-"POT-Creation-Date: 2001-08-07 15:33-0400\n"
-"PO-Revision-Date: 2001-05-30 11:55+0800\n"
+"Project-Id-Version: libbonobo2 1.101.1\n"
+"POT-Creation-Date: 2001-09-02 14:43+0800\n"
+"PO-Revision-Date: 2001-09-02 14:45+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
-"Language-Team: chinese <zh@li.org>\n"
+"Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=big5\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: bonobo/bonobo-exception.c:153
 msgid "An unsupported action was attempted"
-msgstr "¹Á¸Õ°õ¦æ¤F¤@­Ó¤£¤ä´©ªº°Ê§@"
+msgstr "å˜—è©¦åŸ·è¡Œäº†ä¸€å€‹ä¸æ”¯æ´çš„å‹•ä½œ"
 
 #: bonobo/bonobo-exception.c:156
 msgid "IO Error"
-msgstr "¿é¥X¤J¿ù»~"
+msgstr "è¼¸å‡ºå…¥éŒ¯èª¤"
 
 #: bonobo/bonobo-exception.c:159
 msgid "Invalid argument value"
-msgstr "¤£¦Xªkªº°Ñ¼Æ¼Æ­È"
+msgstr "ä¸åˆæ³•çš„åƒæ•¸æ•¸å€¼"
 
 #: bonobo/bonobo-exception.c:163
 msgid "Object not found"
-msgstr "§ä¤£¨ìª«¥ó"
+msgstr "æ‰¾ä¸åˆ°ç‰©ä»¶"
 
 #: bonobo/bonobo-exception.c:166
 msgid "Syntax error in object description"
-msgstr "ª«¥ó´y­z¤º¦³»yªk¿ù»~"
+msgstr "ç‰©ä»¶æè¿°å…§æœ‰èªæ³•éŒ¯èª¤"
 
 #: bonobo/bonobo-exception.c:171
 msgid "Cannot activate object from factory"
-msgstr "µLªk±q¤¸¥ó¤u¼t¥h±Ò°Êª«¥ó"
+msgstr "ç„¡æ³•å¾å…ƒä»¶å·¥å» å»å•Ÿå‹•ç‰©ä»¶"
 
 #: bonobo/bonobo-exception.c:176
 msgid "No permission to access stream"
-msgstr "¤£¤¹³\¥h¦s¨ú¸ê®Æ¬y"
+msgstr "ä¸å…è¨±å»å­˜å–è³‡æ–™æµ"
 
 #: bonobo/bonobo-exception.c:179
 msgid "An unsupported stream action was attempted"
-msgstr "¹Á¸Õ°õ¦æ¤F¤@­Ó¤£¤ä´©ªº¸ê®Æ¬y°Ê§@"
+msgstr "å˜—è©¦åŸ·è¡Œäº†ä¸€å€‹ä¸æ”¯æ´çš„è³‡æ–™æµå‹•ä½œ"
 
 #: bonobo/bonobo-exception.c:182
 msgid "IO Error on stream"
-msgstr "¸ê®Æ¬yªº¿é¥X¤J¿ù»~"
+msgstr "è³‡æ–™æµçš„è¼¸å‡ºå…¥éŒ¯èª¤"
 
 #: bonobo/bonobo-exception.c:186
 msgid "IO Error on storage"
-msgstr "Àx¦s®wªº¿é¥X¤J¿ù»~"
+msgstr "å„²å­˜åº«çš„è¼¸å‡ºå…¥éŒ¯èª¤"
 
 #: bonobo/bonobo-exception.c:189
 msgid "Name already exists in storage"
-msgstr "Àx¦s®w¤º¤w¦³¬Û¦Pªº¦WºÙ"
+msgstr "å„²å­˜åº«å…§å·²æœ‰ç›¸åŒçš„åç¨±"
 
 #: bonobo/bonobo-exception.c:192
 msgid "Object not found in storage"
-msgstr "¦bÀx¦s®w¤º§ä¤£¨ìª«¥ó"
+msgstr "åœ¨å„²å­˜åº«å…§æ‰¾ä¸åˆ°ç‰©ä»¶"
 
 #: bonobo/bonobo-exception.c:195
 msgid "No permission to do operation on storage"
-msgstr "¦bÀx¦s®w¤º¤£¤¹³\°õ¦æ°Ê§@"
+msgstr "åœ¨å„²å­˜åº«å…§ä¸å…è¨±åŸ·è¡Œå‹•ä½œ"
 
 #: bonobo/bonobo-exception.c:197
 msgid "An unsupported storage action was attempted"
-msgstr "¹Á¸Õ°õ¦æ¤F¤@­Ó¤£¤ä´©ªºÀx¦s®w°Ê§@"
+msgstr "å˜—è©¦åŸ·è¡Œäº†ä¸€å€‹ä¸æ”¯æ´çš„å„²å­˜åº«å‹•ä½œ"
 
 #: bonobo/bonobo-exception.c:199
 msgid "Object is not a stream"
-msgstr "ª«¥ó¤£¬O¸ê®Æ¬y"
+msgstr "ç‰©ä»¶ä¸æ˜¯è³‡æ–™æµ"
 
 #: bonobo/bonobo-exception.c:202
 msgid "Object is not a storage"
-msgstr "ª«¥ó¤£¬OÀx¦s®w"
+msgstr "ç‰©ä»¶ä¸æ˜¯å„²å­˜åº«"
 
 #: bonobo/bonobo-exception.c:205
 msgid "Storage is not empty"
-msgstr "Àx¦s®w¤º¤´¦³ª«¥ó"
+msgstr "å„²å­˜åº«å…§ä»æœ‰ç‰©ä»¶"
 
 #: bonobo/bonobo-exception.c:209
 msgid "malformed user interface XML description"
-msgstr "¤£¦X®æ¦¡ªº¨Ï¥ÎªÌ¤¶­± XML ´y­z"
+msgstr "ä¸åˆæ ¼å¼çš„ä½¿ç”¨è€…ä»‹é¢ XML æè¿°"
 
 #: bonobo/bonobo-exception.c:212
 msgid "invalid path to XML user interface element"
-msgstr "«ü¨ì XML ¨Ï¥ÎªÌ¤¶­±¤¸¥óªº¸ô®|¤£¦Xªk"
+msgstr "æŒ‡åˆ° XML ä½¿ç”¨è€…ä»‹é¢å…ƒä»¶çš„è·¯å¾‘ä¸åˆæ³•"
 
 #: bonobo/bonobo-exception.c:216
 msgid "incorrect data type"
-msgstr "¤£¥¿½Tªº¸ê®ÆÃş§O"
+msgstr "ä¸æ­£ç¢ºçš„è³‡æ–™é¡åˆ¥"
 
 #: bonobo/bonobo-exception.c:219
 msgid "stream not found"
-msgstr "§ä¤£¨ì¸ê®Æ¬y"
+msgstr "æ‰¾ä¸åˆ°è³‡æ–™æµ"
 
 #: bonobo/bonobo-exception.c:223
 msgid "property not found"
-msgstr "§ä¤£¨ìÄİ©Ê"
+msgstr "æ‰¾ä¸åˆ°å±¬æ€§"
 
 #: bonobo/bonobo-exception.c:227
 msgid "Moniker interface cannot be found"
-msgstr "µLªk§ä¨ì©R¦W¾¹¤¶­±"
+msgstr "ç„¡æ³•æ‰¾åˆ°å‘½åå™¨ä»‹é¢"
 
 #: bonobo/bonobo-exception.c:230
 msgid "Moniker activation timed out"
-msgstr "±Ò°Ê©R¦W¾¹¹O®É"
+msgstr "å•Ÿå‹•å‘½åå™¨é€¾æ™‚"
 
 #: bonobo/bonobo-exception.c:233
 msgid "Syntax error within moniker"
-msgstr "©R¦W¾¹¤º§t¦³»yªk¿ù»~"
+msgstr "å‘½åå™¨å…§å«æœ‰èªæ³•éŒ¯èª¤"
 
 #: bonobo/bonobo-exception.c:236
 msgid "Moniker has an unknown moniker prefix"
-msgstr "©R¦W¾¹¨ã¦³¤£¸Ôªº«e¸m¦r"
+msgstr "å‘½åå™¨å…·æœ‰ä¸è©³çš„å‰ç½®å­—"
 
 #: bonobo/bonobo-exception.c:260
 msgid "Error checking error; no exception"
-msgstr "ÀË¬d¿ù»~®Éµo¥Í¿ù»~¡F¨S¦³¦C¥~³B²z"
+msgstr "æª¢æŸ¥éŒ¯èª¤æ™‚ç™¼ç”ŸéŒ¯èª¤ï¼›æ²’æœ‰åˆ—å¤–è™•ç†"
 
 #: bonobo/bonobo-exception.c:269
 #, fuzzy
 msgid "General activation error with no description"
-msgstr "ª«¥ó´y­z¤º¦³»yªk¿ù»~"
+msgstr "ç‰©ä»¶æè¿°å…§æœ‰èªæ³•éŒ¯èª¤"
 
 #: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
 msgid "Could not initialize Bonobo"
-msgstr "µLªkªì©l¤Æ Bonobo"
+msgstr "ç„¡æ³•åˆå§‹åŒ– Bonobo"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
-msgstr "HTTP ©R¦W¾¹"
+msgstr "HTTP å‘½åå™¨"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
 msgid "Standard Moniker factory"
-msgstr "¼Ğ·Ç©R¦W¾¹ªº¤¸¥ó¤u¼t"
+msgstr "æ¨™æº–å‘½åå™¨çš„å…ƒä»¶å·¥å» "
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
 msgid "generic Oaf activation moniker"
-msgstr "¤@¯ëªº Oaf ±Ò°Ê©R¦W¾¹"
+msgstr "ä¸€èˆ¬çš„ Oaf å•Ÿå‹•å‘½åå™¨"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
 msgid "generic Oaf query moniker"
-msgstr "¤@¯ëªº Oaf ¬d¸ß©R¦W¾¹"
+msgstr "ä¸€èˆ¬çš„ Oaf æŸ¥è©¢å‘½åå™¨"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
 msgid "generic factory 'new' moniker"
-msgstr "¤@¯ëªº '·s¼W' ©R¦W¾¹ªº¤¸¥ó¤u¼t"
+msgstr "ä¸€èˆ¬çš„ 'æ–°å¢' å‘½åå™¨çš„å…ƒä»¶å·¥å» "
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
 msgid "generic item moniker"
-msgstr "¤@¯ëªº¶µ¥Ø©R¦W¾¹"
+msgstr "ä¸€èˆ¬çš„é …ç›®å‘½åå™¨"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
-msgstr "¸ê®Æ¬y©R¦W©µ¦ù¾¹"
+msgstr "è³‡æ–™æµå‘½åå»¶ä¼¸å™¨"
 
 #~ msgid "Visible"
-#~ msgstr "¥i¨£"
+#~ msgstr "å¯è¦‹"
 
 #~ msgid "_Show"
-#~ msgstr "Åã¥Ü (_S)"
+#~ msgstr "é¡¯ç¤º (_S)"
 
 #~ msgid "_Hide"
-#~ msgstr "ÁôÂÃ (_H)"
+#~ msgstr "éš±è— (_H)"
 
 #~ msgid "_View tooltips"
-#~ msgstr "Åã¥Ü¤u¨ã¦C´£¥Ü (_V)"
+#~ msgstr "é¡¯ç¤ºå·¥å…·åˆ—æç¤º (_V)"
 
 #~ msgid "Toolbars"
-#~ msgstr "¤u¨ã¦C"
+#~ msgstr "å·¥å…·åˆ—"
 
 #~ msgid "Look"
-#~ msgstr "ÀËµø"
+#~ msgstr "æª¢è¦–"
 
 #~ msgid "_Icon"
-#~ msgstr "¹Ï¥Ü (_I)"
+#~ msgstr "åœ–ç¤º (_I)"
 
 #~ msgid "_Text and Icon"
-#~ msgstr "¹Ï¥Ü¤Î¤å¦r (_T)"
+#~ msgstr "åœ–ç¤ºåŠæ–‡å­— (_T)"
 
 #~ msgid "_Priority text only"
-#~ msgstr "¾î¦V¤å¦r (_P)"
+#~ msgstr "æ©«å‘æ–‡å­— (_P)"
 
 #~ msgid "Customize Toolbars"
-#~ msgstr "¦Û­q¤u¨ã¦C"
+#~ msgstr "è‡ªè¨‚å·¥å…·åˆ—"
 
 #~ msgid "B_oth"
-#~ msgstr "¹Ï¤å (_O)"
+#~ msgstr "åœ–æ–‡ (_O)"
 
 #~ msgid "T_ext"
-#~ msgstr "¤å¦r (_E)"
+#~ msgstr "æ–‡å­— (_E)"
 
 #~ msgid "Hide t_ips"
-#~ msgstr "ÁôÂÃ´£¥Ü (_I)"
+#~ msgstr "éš±è—æç¤º (_I)"
 
 #~ msgid "Show t_ips"
-#~ msgstr "Åã¥Ü´£¥Ü (_I)"
+#~ msgstr "é¡¯ç¤ºæç¤º (_I)"
 
 #~ msgid "_Hide toolbar"
-#~ msgstr "ÁôÂÃ¤u¨ã¦C (_H)"
+#~ msgstr "éš±è—å·¥å…·åˆ— (_H)"
 
 #~ msgid "Customi_ze"
-#~ msgstr "¦Û­q (_Z)"
+#~ msgstr "è‡ªè¨‚ (_Z)"
 
 #~ msgid "Customize the toolbar"
-#~ msgstr "¦Û­q¤u¨ã¦C"
+#~ msgstr "è‡ªè¨‚å·¥å…·åˆ—"
 
 #~ msgid "Oaf options"
-#~ msgstr "Oaf ¿ï¶µ"
+#~ msgstr "Oaf é¸é …"
 
 #~ msgid "Could not initialize Bonobo!\n"
-#~ msgstr "µLªkªì©l¤Æ Bonobo!\n"
+#~ msgstr "ç„¡æ³•åˆå§‹åŒ– Bonobo!\n"
 
 #~ msgid "The User canceled the save"
-#~ msgstr "¨Ï¥ÎªÌ¨ú®ø¤FÀx¦sªº°Ê§@"
+#~ msgstr "ä½¿ç”¨è€…å–æ¶ˆäº†å„²å­˜çš„å‹•ä½œ"
 
 #~ msgid "No filename"
-#~ msgstr "¨S¦³ÀÉ®×¦WºÙ"
+#~ msgstr "æ²’æœ‰æª”æ¡ˆåç¨±"
 
 #~ msgid "unknown mime type for '%s'"
-#~ msgstr "'%s' µLªk³B²z³oºØ mime Ãş§O"
+#~ msgstr "'%s' ç„¡æ³•è™•ç†é€™ç¨® mime é¡åˆ¥"
 
 #~ msgid "no handlers for mime type '%s'"
-#~ msgstr "¨S¦³µ{¦¡¥h³B²z³oºØ mime Ãş§O '%s'"
+#~ msgstr "æ²’æœ‰ç¨‹å¼å»è™•ç†é€™ç¨® mime é¡åˆ¥ '%s'"
 
 #~ msgid "Name"
-#~ msgstr "¦WºÙ"
+#~ msgstr "åç¨±"
 
 #~ msgid "Description"
-#~ msgstr "´y­z"
+#~ msgstr "æè¿°"
 
 #~ msgid "GnoMines control"
-#~ msgstr "GnoMines ¤¸¥ó"
+#~ msgstr "GnoMines å…ƒä»¶"
 
 #~ msgid "GnoMines control factory"
-#~ msgstr "GnoMines ¤¸¥óªº¤¸¥ó¤u¼t"
+#~ msgstr "GnoMines å…ƒä»¶çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "bonobo GnoMines object"
-#~ msgstr "bonobo GnoMines ª«¥ó"
+#~ msgstr "bonobo GnoMines ç‰©ä»¶"
 
 #~ msgid "bonobo GnoMines object factory"
-#~ msgstr "bonobo GnoMines ª«¥óªº¤¸¥ó¤u¼t"
+#~ msgstr "bonobo GnoMines ç‰©ä»¶çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "Load a saved game"
-#~ msgstr "¸ü¤J¤§«eÀx¦sªº¹CÀ¸"
+#~ msgstr "è¼‰å…¥ä¹‹å‰å„²å­˜çš„éŠæˆ²"
 
 #~ msgid "New game"
-#~ msgstr "·s¹CÀ¸"
+#~ msgstr "æ–°éŠæˆ²"
 
 #~ msgid "Open game"
-#~ msgstr "¶}±Ò¹CÀ¸"
+#~ msgstr "é–‹å•ŸéŠæˆ²"
 
 #~ msgid "Start a new game"
-#~ msgstr "­«·s¶}©l¤@­Ó·sªº¹CÀ¸"
+#~ msgstr "é‡æ–°é–‹å§‹ä¸€å€‹æ–°çš„éŠæˆ²"
 
 #~ msgid "_Game"
-#~ msgstr "¹CÀ¸ (_G)"
+#~ msgstr "éŠæˆ² (_G)"
 
 #~ msgid "Waveform"
 #~ msgstr "Waveform"
 
 #~ msgid "Waveform component"
-#~ msgstr "Waveform ¤¸¥ó"
+#~ msgstr "Waveform å…ƒä»¶"
 
 #~ msgid "Waveform component factory"
-#~ msgstr "Waveform ¤¸¥óªº¤¸¥ó¤u¼t"
+#~ msgstr "Waveform å…ƒä»¶çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "audio/ulaw bonobo object"
-#~ msgstr "audio/ulaw bonobo Án­µª«¥ó"
+#~ msgstr "audio/ulaw bonobo è²éŸ³ç‰©ä»¶"
 
 #~ msgid "audio/ulaw bonobo object factory"
-#~ msgstr "audio/ulaw bonobo Án­µª«¥óªº¤¸¥ó¤u¼t"
+#~ msgstr "audio/ulaw bonobo è²éŸ³ç‰©ä»¶çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "Component Selector"
-#~ msgstr "¤¸¥ó¿ï¾Ü¾¹"
+#~ msgstr "å…ƒä»¶é¸æ“‡å™¨"
 
 #~ msgid "Component Selector factory"
-#~ msgstr "¤¸¥ó¿ï¾Ü¾¹ªº¤¸¥ó¤u¼t"
+#~ msgstr "å…ƒä»¶é¸æ“‡å™¨çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "Component selector control"
-#~ msgstr "¤¸¥ó¿ï¾Ü¾¹ªº¤¸¥ó"
+#~ msgstr "å…ƒä»¶é¸æ“‡å™¨çš„å…ƒä»¶"
 
 #~ msgid "component selector control factory"
-#~ msgstr "¤¸¥ó¿ï¾Ü¾¹¤¸¥óªº¤¸¥ó¤u¼t"
+#~ msgstr "å…ƒä»¶é¸æ“‡å™¨å…ƒä»¶çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "Text"
-#~ msgstr "¤å¥»"
+#~ msgstr "æ–‡æœ¬"
 
 #~ msgid "Text component"
-#~ msgstr "¤å¥»¤¸¥ó"
+#~ msgstr "æ–‡æœ¬å…ƒä»¶"
 
 #~ msgid "Text component factory"
-#~ msgstr "¤å¥»¤¸¥óªº¤¸¥ó¤u¼t"
+#~ msgstr "æ–‡æœ¬å…ƒä»¶çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "text/plain component"
-#~ msgstr "text/plain ¯Â¤å¦r¤¸¥ó"
+#~ msgstr "text/plain ç´”æ–‡å­—å…ƒä»¶"
 
 #~ msgid "text/plain embeddable factory"
-#~ msgstr "text/plain ¯Â¤å¦r´O¤J¦¡ªº¤¸¥ó¤u¼t"
+#~ msgstr "text/plain ç´”æ–‡å­—åµŒå…¥å¼çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "_Clear Text"
-#~ msgstr "²M°£¤å¥» (_C)"
+#~ msgstr "æ¸…é™¤æ–‡æœ¬ (_C)"
 
 #~ msgid "Clears the text in the component"
-#~ msgstr "²M°£¤¸¥ó¤ºªº¤å¥»"
+#~ msgstr "æ¸…é™¤å…ƒä»¶å…§çš„æ–‡æœ¬"
 
 #~ msgid ""
 #~ "An exception occured while trying to load data into the component with "
 #~ "PersistFile"
-#~ msgstr "·í¹Á¸Õ±N¸ê®Æ¸ü¤J¨ì¨ã¦³¹êÅéÀÉ®×ªº¤¸¥ó®Éµo¥Í¦C¥~³B²z"
+#~ msgstr "ç•¶å˜—è©¦å°‡è³‡æ–™è¼‰å…¥åˆ°å…·æœ‰å¯¦é«”æª”æ¡ˆçš„å…ƒä»¶æ™‚ç™¼ç”Ÿåˆ—å¤–è™•ç†"
 
 #~ msgid "Could not open file %s"
-#~ msgstr "µLªk¶}±ÒÀÉ®× %s"
+#~ msgstr "ç„¡æ³•é–‹å•Ÿæª”æ¡ˆ %s"
 
 #~ msgid ""
 #~ "An exception occured while trying to load data into the component with "
 #~ "PersistStream"
-#~ msgstr "·í¹Á¸Õ±N¸ê®Æ¸ü¤J¨ì¨ã¦³¹êÅé¸ê®Æ¬yªº¤¸¥ó®Éµo¥Í¦C¥~³B²z"
+#~ msgstr "ç•¶å˜—è©¦å°‡è³‡æ–™è¼‰å…¥åˆ°å…·æœ‰å¯¦é«”è³‡æ–™æµçš„å…ƒä»¶æ™‚ç™¼ç”Ÿåˆ—å¤–è™•ç†"
 
 #~ msgid "About this application"
-#~ msgstr "Ãö©ó³o­Óµ{¦¡"
+#~ msgstr "é—œæ–¼é€™å€‹ç¨‹å¼"
 
 #~ msgid "Close the current window"
-#~ msgstr "Ãö³¬¥Ø«eµøµ¡"
+#~ msgstr "é—œé–‰ç›®å‰è¦–çª—"
 
 #~ msgid "Configure the application"
-#~ msgstr "³]©w³o­Óµ{¦¡"
+#~ msgstr "è¨­å®šé€™å€‹ç¨‹å¼"
 
 #~ msgid "Create New _Window"
-#~ msgstr "·s¼Wµøµ¡ (_W)"
+#~ msgstr "æ–°å¢è¦–çª— (_W)"
 
 #~ msgid "Create a new window"
-#~ msgstr "«Ø¥ß¤@­Ó·sªºµøµ¡"
+#~ msgstr "å»ºç«‹ä¸€å€‹æ–°çš„è¦–çª—"
 
 #~ msgid "Displays only one window"
-#~ msgstr "¥uÅã¥Ü¤@­Óµøµ¡"
+#~ msgstr "åªé¡¯ç¤ºä¸€å€‹è¦–çª—"
 
 #~ msgid "E_xit"
-#~ msgstr "Â÷¶} (_X)"
+#~ msgstr "é›¢é–‹ (_X)"
 
 #~ msgid "Exit the program"
-#~ msgstr "Â÷¶}³o­Óµ{¦¡"
+#~ msgstr "é›¢é–‹é€™å€‹ç¨‹å¼"
 
 #~ msgid "Help on GNOME"
-#~ msgstr "¶}±Ò GNOME ªº»¡©ú¨D§U"
+#~ msgstr "é–‹å•Ÿ GNOME çš„èªªæ˜æ±‚åŠ©"
 
 #~ msgid "Kill the current buffer"
-#~ msgstr "²M°£¥Ø«eªº¼È¦s°Ï"
+#~ msgstr "æ¸…é™¤ç›®å‰çš„æš«å­˜å€"
 
 #~ msgid "Launch Control..."
-#~ msgstr "±Ò°Ê±±¨î¤¸¥ó..."
+#~ msgstr "å•Ÿå‹•æ§åˆ¶å…ƒä»¶..."
 
 #~ msgid "Launch Embeddable..."
-#~ msgstr "±Ò°Ê´O¤J¦¡¤¸¥ó..."
+#~ msgstr "å•Ÿå‹•åµŒå…¥å¼å…ƒä»¶..."
 
 #~ msgid "Launches a new Control component"
-#~ msgstr "±Ò°Ê¤@­Ó·sªº±±¨î¤¸¥ó"
+#~ msgstr "å•Ÿå‹•ä¸€å€‹æ–°çš„æ§åˆ¶å…ƒä»¶"
 
 #~ msgid "Launches a new Embeddable component"
-#~ msgstr "±Ò°Ê¤@­Ó·sªº´O¤J¦¡¤¸¥ó"
+#~ msgstr "å•Ÿå‹•ä¸€å€‹æ–°çš„åµŒå…¥å¼å…ƒä»¶"
 
 #~ msgid "Loads a file into the current component"
-#~ msgstr "¸ü¤J¤@­ÓÀÉ®×¨ì¥Ø«eªº¤¸¥ó"
+#~ msgstr "è¼‰å…¥ä¸€å€‹æª”æ¡ˆåˆ°ç›®å‰çš„å…ƒä»¶"
 
 #~ msgid "Open a file"
-#~ msgstr "¶}±Ò¤@­ÓÀÉ®×"
+#~ msgstr "é–‹å•Ÿä¸€å€‹æª”æ¡ˆ"
 
 #~ msgid "Print S_etup..."
-#~ msgstr "¦Lªí¾÷³]©w (_E)..."
+#~ msgstr "å°è¡¨æ©Ÿè¨­å®š (_E)..."
 
 #~ msgid "Print the current file"
-#~ msgstr "¦C¦L¥Ø«eÀÉ®×"
+#~ msgstr "åˆ—å°ç›®å‰æª”æ¡ˆ"
 
 #~ msgid "Save _As..."
-#~ msgstr "¥t¦s·sÀÉ (_A)..."
+#~ msgstr "å¦å­˜æ–°æª” (_A)..."
 
 #~ msgid "Save the current file"
-#~ msgstr "Àx¦s¥Ø«eÀÉ®×"
+#~ msgstr "å„²å­˜ç›®å‰æª”æ¡ˆ"
 
 #~ msgid "Save the current file with a different name"
-#~ msgstr "¨Ï¥Î·s¦WºÙÀx¦s¥Ø«eÀÉ®×"
+#~ msgstr "ä½¿ç”¨æ–°åç¨±å„²å­˜ç›®å‰æª”æ¡ˆ"
 
 #~ msgid "Setup the page settings for your current printer"
-#~ msgstr "³]©w¥Ø«e¦Lªí¾÷ªº¦C¦L­¶­±"
+#~ msgstr "è¨­å®šç›®å‰å°è¡¨æ©Ÿçš„åˆ—å°é é¢"
 
 #~ msgid "Splits the current window"
-#~ msgstr "¤À¶}¥Ø«eµøµ¡"
+#~ msgstr "åˆ†é–‹ç›®å‰è¦–çª—"
 
 #~ msgid "Zoom ..."
-#~ msgstr "ÁY©ñ..."
+#~ msgstr "ç¸®æ”¾..."
 
 #~ msgid "Zoom _in"
-#~ msgstr "©ñ¤j (_I)"
+#~ msgstr "æ”¾å¤§ (_I)"
 
 #~ msgid "Zoom _out"
-#~ msgstr "ÁY¤p (_O)"
+#~ msgstr "ç¸®å° (_O)"
 
 #~ msgid "Zoom to _default"
-#~ msgstr "¹w³] (_D)"
+#~ msgstr "é è¨­ (_D)"
 
 #~ msgid "Zoom to _fit"
-#~ msgstr "ªş¦X­¶­± (_F)"
+#~ msgstr "é™„åˆé é¢ (_F)"
 
 #~ msgid "_About..."
-#~ msgstr "Ãö©ó (_A)..."
+#~ msgstr "é—œæ–¼ (_A)..."
 
 #~ msgid "_Buffers"
-#~ msgstr "¼È¦s°Ï (_B)"
+#~ msgstr "æš«å­˜å€ (_B)"
 
 #~ msgid "_Close This Window"
-#~ msgstr "Ãö³¬³o­Óµøµ¡ (_C)"
+#~ msgstr "é—œé–‰é€™å€‹è¦–çª— (_C)"
 
 #~ msgid "_File"
-#~ msgstr "ÀÉ®× (_F)"
+#~ msgstr "æª”æ¡ˆ (_F)"
 
 #~ msgid "_Help"
-#~ msgstr "»¡©ú (_H)"
+#~ msgstr "èªªæ˜ (_H)"
 
 #~ msgid "_Help on GNOME"
-#~ msgstr "GNOME »¡©ú¨D§U (_H)"
+#~ msgstr "GNOME èªªæ˜æ±‚åŠ© (_H)"
 
 #~ msgid "_Kill"
-#~ msgstr "²M°£ (_K)"
+#~ msgstr "æ¸…é™¤ (_K)"
 
 #~ msgid "_Load..."
-#~ msgstr "¸ü¤J (_L)..."
+#~ msgstr "è¼‰å…¥ (_L)..."
 
 #~ msgid "_One Window"
-#~ msgstr "³æµøµ¡ (_O)"
+#~ msgstr "å–®è¦–çª— (_O)"
 
 #~ msgid "_Open..."
-#~ msgstr "¶}±Ò (_O)..."
+#~ msgstr "é–‹å•Ÿ (_O)..."
 
 #~ msgid "_Preferences..."
-#~ msgstr "½s¦n³]©w (_P)..."
+#~ msgstr "ç·¨å¥½è¨­å®š (_P)..."
 
 #~ msgid "_Print"
-#~ msgstr "¦C¦L (_P)"
+#~ msgstr "åˆ—å° (_P)"
 
 #~ msgid "_Save"
-#~ msgstr "Àx¦s (_S)"
+#~ msgstr "å„²å­˜ (_S)"
 
 #~ msgid "_Settings"
-#~ msgstr "³]©w (_S)..."
+#~ msgstr "è¨­å®š (_S)..."
 
 #~ msgid "_Split Window"
-#~ msgstr "¤À¶}µøµ¡ (_S)"
+#~ msgstr "åˆ†é–‹è¦–çª— (_S)"
 
 #~ msgid "_Window"
-#~ msgstr "µøµ¡ (_W)"
+#~ msgstr "è¦–çª— (_W)"
 
 #~ msgid "_Zoom"
-#~ msgstr "ÁY©ñ (_Z)"
+#~ msgstr "ç¸®æ”¾ (_Z)"
 
 #~ msgid ""
 #~ "This program is part of the GNOME project. Gnome Shell comes with "
@@ -462,107 +462,107 @@ msgstr "¸ê®Æ¬y©R¦W©µ¦ù¾¹"
 #~ "redistribute it under the conditions of the GNU General Public License. "
 #~ "Please report bugs to dietmar@maurer-it.com"
 #~ msgstr ""
-#~ "³o­Óµ{¦¡¬OÄİ©ó GNOME ±M®×ªº¤@³¡¥÷¡CGnome Shell µ´¹ï¨S¦³¾á«O¡C¥»µ{¦¡¬O¤@­Ó"
-#~ "¦Û¥Ñ³nÅé¡A¨Ã¥BÅwªï±z ¿í·Ó GNU ³q¥Î¤½¦@³\¥iÃÒ±ø´Ú­«·sµo§G¥¦¡C½Ğ±N¦³Ãö¦¹µ{¦¡"
-#~ "ªº¿ù»~³ø§i¹q¶l¨ìdietmar@maurer-it.com"
+#~ "é€™å€‹ç¨‹å¼æ˜¯å±¬æ–¼ GNOME å°ˆæ¡ˆçš„ä¸€éƒ¨ä»½ã€‚Gnome Shell çµ•å°æ²’æœ‰æ“”ä¿ã€‚æœ¬ç¨‹å¼æ˜¯ä¸€å€‹"
+#~ "è‡ªç”±è»Ÿé«”ï¼Œä¸¦ä¸”æ­¡è¿æ‚¨ éµç…§ GNU é€šç”¨å…¬å…±è¨±å¯è­‰æ¢æ¬¾é‡æ–°ç™¼ä½ˆå®ƒã€‚è«‹å°‡æœ‰é—œæ­¤ç¨‹å¼"
+#~ "çš„éŒ¯èª¤å ±å‘Šé›»éƒµåˆ°dietmar@maurer-it.com"
 
 #~ msgid "fatal CORBA exception!  Shutting down..."
-#~ msgstr "ÄY­«ªº CORBA ¦C¥~³B²z! ¥¿¦bÃö³¬..."
+#~ msgstr "åš´é‡çš„ CORBA åˆ—å¤–è™•ç†! æ­£åœ¨é—œé–‰..."
 
 #~ msgid "New zoom level is %.3g."
-#~ msgstr "·sªºÁY©ñµ¥¯Å¬O %.3g."
+#~ msgstr "æ–°çš„ç¸®æ”¾ç­‰ç´šæ˜¯ %.3g."
 
 #~ msgid "Set zoom level:"
-#~ msgstr "³]©wÁY©ñµ¥¯Å¡G"
+#~ msgstr "è¨­å®šç¸®æ”¾ç­‰ç´šï¼š"
 
 #~ msgid "Could not initialize Bonobo!"
-#~ msgstr "µLªkªì©l¤Æ Bonobo!"
+#~ msgstr "ç„¡æ³•åˆå§‹åŒ– Bonobo!"
 
 #~ msgid ""
 #~ "An exception occured while trying to save data from the component with "
 #~ "PersistFile"
-#~ msgstr "·í¹Á¸Õ±q¨ã¦³¹êÅéÀÉ®×ªº¤¸¥ó±N¸ê®ÆÀx¦s®Éµo¥Í¦C¥~³B²z"
+#~ msgstr "ç•¶å˜—è©¦å¾å…·æœ‰å¯¦é«”æª”æ¡ˆçš„å…ƒä»¶å°‡è³‡æ–™å„²å­˜æ™‚ç™¼ç”Ÿåˆ—å¤–è™•ç†"
 
 #~ msgid "Could not save file %s"
-#~ msgstr "µLªkÀx¦sÀÉ®× %s"
+#~ msgstr "ç„¡æ³•å„²å­˜æª”æ¡ˆ %s"
 
 #~ msgid ""
 #~ "An exception occured while trying to save data from the component with "
 #~ "PersistStream"
-#~ msgstr "·í¹Á¸Õ±q¨ã¦³¹êÅé¸ê®Æ¬yªº¤¸¥ó±N¸ê®ÆÀx¦s®Éµo¥Í¦C¥~³B²z"
+#~ msgstr "ç•¶å˜—è©¦å¾å…·æœ‰å¯¦é«”è³‡æ–™æµçš„å…ƒä»¶å°‡è³‡æ–™å„²å­˜æ™‚ç™¼ç”Ÿåˆ—å¤–è™•ç†"
 
 #~ msgid "Open"
-#~ msgstr "¶}±Ò"
+#~ msgstr "é–‹å•Ÿ"
 
 #~ msgid "Launch component"
-#~ msgstr "±Ò°Ê¤¸¥ó"
+#~ msgstr "å•Ÿå‹•å…ƒä»¶"
 
 #~ msgid "Load"
-#~ msgstr "¸ü¤J"
+#~ msgstr "è¼‰å…¥"
 
 #~ msgid "Save As"
-#~ msgstr "¥t¦s·sÀÉ"
+#~ msgstr "å¦å­˜æ–°æª”"
 
 #~ msgid "Component has no editable properties"
-#~ msgstr "¤¸¥ó¨S¦³¥i¨Ñ½s¿èªºÄİ©Ê"
+#~ msgstr "å…ƒä»¶æ²’æœ‰å¯ä¾›ç·¨è¼¯çš„å±¬æ€§"
 
 #~ msgid "Gunzip Moniker factory"
-#~ msgstr "Gunzip ©R¦W¾¹ªº¤¸¥ó¤u¼t"
+#~ msgstr "Gunzip å‘½åå™¨çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "gunzip Moniker"
-#~ msgstr "gunzip ©R¦W¾¹"
+#~ msgstr "gunzip å‘½åå™¨"
 
 #~ msgid "file MonikerExtender"
-#~ msgstr "ÀÉ®×©R¦W©µ¦ù¾¹"
+#~ msgstr "æª”æ¡ˆå‘½åå»¶ä¼¸å™¨"
 
 #~ msgid "generic file moniker"
-#~ msgstr "¤@¯ëªºÀÉ®×©R¦W¾¹"
+#~ msgstr "ä¸€èˆ¬çš„æª”æ¡ˆå‘½åå™¨"
 
 #~ msgid "Bonobo Echo server factory"
-#~ msgstr "Bonobo ¦^À³¦øªA¾¹ªº¤¸¥ó¤u¼t"
+#~ msgstr "Bonobo å›æ‡‰ä¼ºæœå™¨çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "Bonobo Echo server sample program"
-#~ msgstr "Bonobo ¦^À³¦øªA¾¹½d¨Òµ{¦¡"
+#~ msgstr "Bonobo å›æ‡‰ä¼ºæœå™¨ç¯„ä¾‹ç¨‹å¼"
 
 #~ msgid "Echo component"
-#~ msgstr "¦^À³¤¸¥ó"
+#~ msgstr "å›æ‡‰å…ƒä»¶"
 
 #~ msgid "Echo component factory"
-#~ msgstr "¦^À³¤¸¥óªº¤¸¥ó¤u¼t"
+#~ msgstr "å›æ‡‰å…ƒä»¶çš„å…ƒä»¶å·¥å» "
 
 #~ msgid "I could not initialize Bonobo"
-#~ msgstr "µLªkªì©l¤Æ Bonobo"
+#~ msgstr "ç„¡æ³•åˆå§‹åŒ– Bonobo"
 
 #~ msgid "The component now claims that it doesn't support PersistStream!"
-#~ msgstr "¤¸¥ó²{¦b«Å§i¥¦¤£¤ä´©¹êÅé¸ê®Æ¬y!"
+#~ msgstr "å…ƒä»¶ç¾åœ¨å®£å‘Šå®ƒä¸æ”¯æ´å¯¦é«”è³‡æ–™æµ!"
 
 #~ msgid "Select file"
-#~ msgstr "¿ï¾ÜÀÉ®×"
+#~ msgstr "é¸æ“‡æª”æ¡ˆ"
 
 #~ msgid "Select an embeddable Bonobo component to add"
-#~ msgstr "¿ï¾Ü¤@­Ó´O¤J¦¡ªº Bonobo ¤¸¥ó¥Î§@·s¼W"
+#~ msgstr "é¸æ“‡ä¸€å€‹åµŒå…¥å¼çš„ Bonobo å…ƒä»¶ç”¨ä½œæ–°å¢"
 
 #~ msgid "Bonobo sample container"
-#~ msgstr "Bonobo ®e¾¹½d¨Ò"
+#~ msgstr "Bonobo å®¹å™¨ç¯„ä¾‹"
 
 #~ msgid "Sample Bonobo container"
-#~ msgstr "Bonobo ®e¾¹½d¨Ò"
+#~ msgstr "Bonobo å®¹å™¨ç¯„ä¾‹"
 
 #~ msgid "Could not launch Embeddable %s!"
-#~ msgstr "µLªk±Ò°Ê´O¤J¦¡ªº %s!"
+#~ msgstr "ç„¡æ³•å•Ÿå‹•åµŒå…¥å¼çš„ %s!"
 
 #~ msgid ""
 #~ "An exception occured while trying to load data into the component with "
 #~ "PersistStorage"
-#~ msgstr "·í¹Á¸Õ±N¸ê®Æ¸ü¤J¨ì¨ã¦³¹êÅéÀx¦s®wªº¤¸¥ó®Éµo¥Í¦C¥~³B²z"
+#~ msgstr "ç•¶å˜—è©¦å°‡è³‡æ–™è¼‰å…¥åˆ°å…·æœ‰å¯¦é«”å„²å­˜åº«çš„å…ƒä»¶æ™‚ç™¼ç”Ÿåˆ—å¤–è™•ç†"
 
 #~ msgid ""
 #~ "An exception occured while trying to save data from the component with "
 #~ "PersistStorage"
-#~ msgstr "·í¹Á¸Õ±q¨ã¦³¹êÅéÀx¦s®wªº¤¸¥ó±N¸ê®ÆÀx¦s®Éµo¥Í¦C¥~³B²z"
+#~ msgstr "ç•¶å˜—è©¦å¾å…·æœ‰å¯¦é«”å„²å­˜åº«çš„å…ƒä»¶å°‡è³‡æ–™å„²å­˜æ™‚ç™¼ç”Ÿåˆ—å¤–è™•ç†"
 
 #~ msgid "Select an object"
-#~ msgstr "¿ï¾Ü¤@­Óª«¥ó"
+#~ msgstr "é¸æ“‡ä¸€å€‹ç‰©ä»¶"
 
 #~ msgid "Can not bonobo_init"
-#~ msgstr "µLªkªì©l¤Æ Bononbo"
+#~ msgstr "ç„¡æ³•åˆå§‹åŒ– Bononbo"
