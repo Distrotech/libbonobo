@@ -42,7 +42,7 @@ subdomains:
 	VCS/			gnome-vcs	snaggen@acc.umu.se
 	VFS/			gnome-vfs	pavel@eazel.com
 	Vertigo/		Panel 2.0	jirka@5z.com, jacob@helixcode.com	
-
+	Yelp/			Yelp		micke@codefactory.se
 
 standard interfaces:
 	HTMLEditor		gtkhtml

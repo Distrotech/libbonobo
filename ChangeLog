@@ -1,3 +1,7 @@
+2002-01-05  Mikael Hallendal  <micke@codefactory.se>
+
+	* doc/NAMESPACE (subdomains): added Yelp
+	
 2002-01-04  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-event-source.c
