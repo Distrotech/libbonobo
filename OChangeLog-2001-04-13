@@ -1,3 +1,10 @@
+2000-12-05  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-win.c: (parse_look):
+	Made toolbar respect xml-specified looks "both", "icon", and "text", 
+	as the FAQ said it did. Also, if no look (or some unknown look) is 
+	specified, fall	back to using GNOME preference.
+
 2000-12-05  Michael Meeks  <michael@helixcode.com>
 
 	* tests/selector_test.c (noact_callback, panel_callback): clean.
