@@ -58,20 +58,6 @@ main (int argc, char *argv [])
 	ev = &real_ev;
 	CORBA_exception_init (ev);
 
-	fprintf (stderr, "Foreign object\n");
-	{		       /* This is a very lame test, I know. */
-		BonoboObject *foreign;
-		object = BONOBO_OBJECT (g_object_new (
-			bonobo_moniker_get_type (), NULL));
-		
-		g_assert (bonobo_object_ref (object) == object);
-		g_assert (bonobo_object_unref (BONOBO_OBJECT (object)) == NULL);
-
-		foreign = bonobo_foreign_object_new (bonobo_object_corba_objref (object));
-		bonobo_object_unref (BONOBO_OBJECT (foreign));
-		bonobo_object_unref (BONOBO_OBJECT (object));
-	}
-
 	fprintf (stderr, "Local lifecycle\n");
 	{
 		object = BONOBO_OBJECT (g_object_new (

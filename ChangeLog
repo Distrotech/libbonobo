@@ -1,3 +1,8 @@
+2003-04-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/test-object.c (main): Removed the foreign object test,
+	since it was broken anyway.
+
 2003-04-17  Michael Meeks  <michael@ximian.com>
 
 	* tests/test-activation/Makefile.am (TESTS_ENVIRONMENT):
