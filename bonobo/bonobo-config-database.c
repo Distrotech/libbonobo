@@ -446,6 +446,25 @@ c_type bonobo_config_get_##name  (Bonobo_ConfigDatabase  db,                  \
 	return retval;                                                        \
 }
 
+#define MAKE_GET_WITH_DEFAULT(c_type, name, assign_fn)                        \
+c_type bonobo_config_get_##name##_with_default (Bonobo_ConfigDatabase  db,    \
+						const char            *key,   \
+						c_type                 defval,\
+						gboolean              *def)   \
+{                                                                             \
+	c_type retval;                                                        \
+	CORBA_Environment ev;                                                 \
+	CORBA_exception_init (&ev);                                           \
+        if (def) *def = FALSE;                                                \
+	retval = bonobo_config_get_##name (db, key, &ev);                     \
+	if (BONOBO_EX (&ev)) {                                                \
+		retval = assign_fn (defval);                                  \
+                if (def) *def = TRUE;                                         \
+        }                                                                     \
+	CORBA_exception_free (&ev);                                           \
+	return retval;                                                        \
+}
+
 /**
  * bonobo_config_get_string:
  * @db: a reference to the database object
@@ -458,6 +477,9 @@ c_type bonobo_config_get_##name  (Bonobo_ConfigDatabase  db,                  \
  */
 MAKE_GET_SIMPLE (gchar *, NULL, string, TC_string, 
 		 g_strdup (*(char **)value->_value));
+
+MAKE_GET_WITH_DEFAULT (gchar *, string, g_strdup);
+
 /**
  * bonobo_config_get_short:
  * @db: a reference to the database object
@@ -469,6 +491,9 @@ MAKE_GET_SIMPLE (gchar *, NULL, string, TC_string,
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (gint16, 0, short, TC_short, (*(gint16 *)value->_value));
+
+MAKE_GET_WITH_DEFAULT (gint16, short, );
+
 /**
  * bonobo_config_get_ushort:
  * @db: a reference to the database object
@@ -480,6 +505,9 @@ MAKE_GET_SIMPLE (gint16, 0, short, TC_short, (*(gint16 *)value->_value));
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (guint16, 0, ushort, TC_ushort, (*(guint16 *)value->_value));
+
+MAKE_GET_WITH_DEFAULT (guint16, ushort, );
+
 /**
  * bonobo_config_get_long:
  * @db: a reference to the database object
@@ -491,6 +519,9 @@ MAKE_GET_SIMPLE (guint16, 0, ushort, TC_ushort, (*(guint16 *)value->_value));
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (gint32, 0, long, TC_long, (*(gint32 *)value->_value));
+
+MAKE_GET_WITH_DEFAULT (gint32, long, );
+
 /**
  * bonobo_config_get_ulong:
  * @db: a reference to the database object
@@ -502,6 +533,9 @@ MAKE_GET_SIMPLE (gint32, 0, long, TC_long, (*(gint32 *)value->_value));
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (guint32, 0, ulong, TC_ulong, (*(guint32 *)value->_value));
+
+MAKE_GET_WITH_DEFAULT (guint32, ulong, );
+
 /**
  * bonobo_config_get_float:
  * @db: a reference to the database object
@@ -513,6 +547,9 @@ MAKE_GET_SIMPLE (guint32, 0, ulong, TC_ulong, (*(guint32 *)value->_value));
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (gfloat, 0.0, float, TC_float, (*(gfloat *)value->_value));
+
+MAKE_GET_WITH_DEFAULT (gfloat, float, );
+
 /**
  * bonobo_config_get_double:
  * @db: a reference to the database object
@@ -524,6 +561,9 @@ MAKE_GET_SIMPLE (gfloat, 0.0, float, TC_float, (*(gfloat *)value->_value));
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (gdouble, 0.0, double, TC_double, (*(gdouble *)value->_value));
+
+MAKE_GET_WITH_DEFAULT (gdouble, double, );
+
 /**
  * bonobo_config_get_char:
  * @db: a reference to the database object
@@ -535,6 +575,9 @@ MAKE_GET_SIMPLE (gdouble, 0.0, double, TC_double, (*(gdouble *)value->_value));
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (gchar, '\0', char, TC_char, (*(gchar *)value->_value));
+
+MAKE_GET_WITH_DEFAULT (gchar, char, );
+
 /**
  * bonobo_config_get_boolean:
  * @db: a reference to the database object
@@ -547,6 +590,9 @@ MAKE_GET_SIMPLE (gchar, '\0', char, TC_char, (*(gchar *)value->_value));
  */
 MAKE_GET_SIMPLE (gboolean, FALSE, boolean, TC_boolean, 
 		 (*(gboolean *)value->_value));
+
+MAKE_GET_WITH_DEFAULT (gboolean, boolean, );
+
 /**
  * bonobo_config_get_value:
  * @db: a reference to the database object
@@ -768,10 +814,6 @@ bonobo_config_set_value  (Bonobo_ConfigDatabase  db,
 	
 	Bonobo_ConfigDatabase_setValue (db, key, value, my_ev);
 	
-	if (BONOBO_EX (my_ev) && !opt_ev)
-		g_warning ("Cannot set value: %s\n", 
-			   bonobo_exception_get_text (my_ev));
-
 	if (!opt_ev)
 		CORBA_exception_free (&ev);
 }
