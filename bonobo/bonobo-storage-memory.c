@@ -13,6 +13,7 @@
  *  * Create a subclass that supports commit/revert
  */
 #include <config.h>
+#include <string.h>
 
 #include <bonobo/bonobo-storage-memory.h>
 #include <bonobo/bonobo-stream-memory.h>

@@ -1,5 +1,12 @@
 2001-07-28  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.c
+	(bonobo_object_unref): special case imortal objects.
+	(bonobo_object_trace_refs): ditto.
+	(bonobo_object_set_imortal): impl.
+
+2001-07-28  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-object.c (bonobo_object_dummy_destroy): impl
 	to make chaining easier.
 	(bonobo_object_class_init): hook up.

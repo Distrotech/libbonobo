@@ -100,11 +100,14 @@ void                     bonobo_object_release_unref          (Bonobo_Unknown   
 void                     bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_idle_unref             (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
+void                     bonobo_object_set_imortal            (BonoboObject           *object,
+							       gboolean                imortal);
 void                     bonobo_object_init                   (void);
 void                     bonobo_object_trace_refs             (BonoboObject *object,
 							       const char   *fn,
 							       int           line,
 							       gboolean      ref);
+
 #ifdef BONOBO_OBJECT_DEBUG
 #	define           bonobo_object_ref(o)   G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);}G_STMT_END
 #	define           bonobo_object_unref(o) G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,FALSE);}G_STMT_END

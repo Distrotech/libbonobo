@@ -46,11 +46,12 @@ typedef struct {
 #endif
 
 typedef struct {
-	int   ref_count;
-	GList *objs;
+	int      ref_count;
+	gboolean imortal;
+	GList   *objs;
 #ifdef BONOBO_REF_HOOKS
-	GList *refs;
-	int    destroyed;
+	GList   *refs;
+	int      destroyed;
 #endif
 } BonoboAggregateObject;
 
@@ -285,13 +286,17 @@ bonobo_object_unref (BonoboObject *object)
 	g_return_if_fail (ao != NULL);
 	g_return_if_fail (ao->ref_count > 0);
 
-	if (ao->ref_count == 1)
-		bonobo_object_destroy (ao);
+	if (ao->imortal)
+		ao->ref_count--;
+	else {
+		if (ao->ref_count == 1)
+			bonobo_object_destroy (ao);
 
-	ao->ref_count--;
-
-	if (ao->ref_count == 0)
-		bonobo_object_finalize_internal (ao);
+		ao->ref_count--;
+		
+		if (ao->ref_count == 0)
+			bonobo_object_finalize_internal (ao);
+	}
 #endif /* BONOBO_REF_HOOKS */
 }
 #endif /* bonobo_object_unref */
@@ -334,30 +339,36 @@ bonobo_object_trace_refs (BonoboObject *object,
 
 		g_return_if_fail (ao->ref_count > 0);
 
-		if (ao->ref_count == 1) {
-			bonobo_object_destroy (ao);
-
-			g_return_if_fail (ao->ref_count > 0);
-		}
-
-		/*
-		 * If this blows it is likely some loony used
-		 * g_object_unref somewhere instead of
-		 * bonobo_object_unref, send them my regards.
-		 */
-		g_assert (object->priv->ao == ao);
-		
-		ao->ref_count--;
-	
-		if (ao->ref_count == 0) {
-
-			g_assert (g_hash_table_lookup (living_ao_ht, ao) == ao);
-			g_hash_table_remove (living_ao_ht, ao);
+		if (ao->imortal) {
+			ao->ref_count--;
+			bonobo_debug_print ("unusual", "imortal object");
+		} else {
+			if (ao->ref_count == 1) {
+				bonobo_object_destroy (ao);
+				
+				g_return_if_fail (ao->ref_count > 0);
+			}
 			
-			bonobo_object_finalize_internal (ao);
-		} else if (ao->ref_count < 0) {
-			bonobo_debug_print ("unusual", 
-					    "[%p] already finalized", ao);
+			/*
+			 * If this blows it is likely some loony used
+			 * g_object_unref somewhere instead of
+			 * bonobo_object_unref, send them my regards.
+			 */
+			g_assert (object->priv->ao == ao);
+			
+			ao->ref_count--;
+			
+			if (ao->ref_count == 0) {
+				
+				g_assert (g_hash_table_lookup (living_ao_ht, ao) == ao);
+				g_hash_table_remove (living_ao_ht, ao);
+				
+				bonobo_object_finalize_internal (ao);
+				
+			} else if (ao->ref_count < 0) {
+				bonobo_debug_print ("unusual", 
+						    "[%p] already finalized", ao);
+			}
 		}
 	}
 #else
@@ -380,6 +391,21 @@ impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 #else
 	bonobo_object_ref (object);
 #endif
+}
+
+void
+bonobo_object_set_imortal (BonoboObject *object,
+			   gboolean      imortal)
+{
+	BonoboAggregateObject *ao;
+
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
+	g_return_if_fail (object->priv != NULL);
+	g_return_if_fail (object->priv->ao != NULL);
+
+	ao = object->priv->ao;
+
+	ao->imortal = imortal;
 }
 
 /**
