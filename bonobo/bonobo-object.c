@@ -163,23 +163,27 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
 	g_return_if_fail (ao->ref_count == 0);
 
 	for (l = ao->objs; l; l = l->next) {
-		BonoboObject *o = BONOBO_OBJECT (l->data);
+		GtkObject *o = GTK_OBJECT (l->data);
 
 		if (!o)
 			g_error ("Serious bonobo object corruption");
 		else {
-			g_assert (o->priv->ao != NULL);
+			g_assert (BONOBO_OBJECT (o)->priv->ao != NULL);
 #ifdef BONOBO_REF_HOOKS
-			g_assert (o->priv->ao->destroyed);
+			g_assert (BONOBO_OBJECT (o)->priv->ao->destroyed);
 #endif
 
 			/*
-			 * Disconnect the object from the aggregate object
+			 * Disconnect the GTK+ object from the aggregate object
 			 * and unref it so that it is possibly finalized ---
+			 * other parts of GTK+ may still have references to it.
+			 *
+			 * The GTK+ object was already destroy()ed in
+			 * bonobo_object_destroy().
 			 */
 
-			o->priv->ao = NULL;
-			bonobo_object_unref (o);
+			BONOBO_OBJECT (o)->priv->ao = NULL;
+			gtk_object_unref (o);
 		}
 	}
 

@@ -1,5 +1,10 @@
 2000-10-31  JP Rosevear  <jpr@helixcode.com>
 
+	* bonobo/bonobo-object.c (bonobo_object_finalize): Revert unauthorized
+	patch (misunderstanding) pending approval.
+	
+2000-10-31  JP Rosevear  <jpr@helixcode.com>
+
 	* bonobo/bonobo-object.c (bonobo_object_finalize): bonobo_object_unref
 	rather than gtk_object_unref
 
