@@ -1,3 +1,7 @@
+2001-04-13  Martin Baulig  <baulig@suse.de>
+
+	Tagged the whole module `BONOBO_BEFORE_MODULE_SPLIT'.
+
 2001-04-12  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-ui-toolbar-control-item.c:
