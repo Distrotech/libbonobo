@@ -1,3 +1,10 @@
+2001-08-17  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_notify_listeners): hold a CORBA
+	reference over the notification re-enterancy hazard.
+	Homogenise opt_ev handling, to keep 'ev' consistant always.
+
 2001-08-17  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* bonobo/bonobo-event-source.c

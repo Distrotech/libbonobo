@@ -163,14 +163,14 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 				      CORBA_Environment *opt_ev)
 {
 	GSList *l, *notify;
-	CORBA_Environment ev, *my_ev;
+	CORBA_Environment  *ev, temp_ev;
 	const BonoboArg *my_value;
 	
 	if (!opt_ev) {
-		CORBA_exception_init (&ev);
-		my_ev = &ev;
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
 	} else
-		my_ev = opt_ev;
+		ev = opt_ev;
 
 	if (!opt_value)
 		my_value = bonobo_arg_new (BONOBO_ARG_NULL);
@@ -183,23 +183,29 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 		ListenerDesc *desc = (ListenerDesc *) l->data;
 
 		if (desc->event_masks == NULL || 
-		    event_match (event_name, desc->event_masks))
-			notify = g_slist_prepend (notify, desc->listener);
+		    event_match (event_name, desc->event_masks)) {
+			notify = g_slist_prepend (
+				notify,
+				CORBA_Object_duplicate (desc->listener, ev));
+		}
 	}
 
 	bonobo_object_ref (BONOBO_OBJECT (event_source));
 
-	for (l = notify; l; l = l->next)
-		Bonobo_Listener_event (l->data, event_name, my_value, my_ev);
+	for (l = notify; l; l = l->next) {
+		Bonobo_Listener_event (l->data, event_name, my_value, ev);
+		CORBA_Object_release (l->data, ev);
+	}
 
 	bonobo_object_unref (BONOBO_OBJECT (event_source));
 
 	g_slist_free (notify);
 
 	if (!opt_ev)
-		CORBA_exception_free (&ev);
+		CORBA_exception_free (ev);
+
 	if (!opt_value)
-		bonobo_arg_release ((BonoboArg*)my_value);
+		bonobo_arg_release ((BonoboArg *) my_value);
 }
 
 void
@@ -315,32 +321,32 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown     object,
 					    Bonobo_Listener    listener,
 					    CORBA_Environment *opt_ev)
 {
-	CORBA_Environment ev, *my_ev;
-	Bonobo_Unknown es;
+	Bonobo_Unknown     es;
+	CORBA_Environment *ev, temp_ev;
 
 	g_return_if_fail (object != CORBA_OBJECT_NIL);
-
+       
 	if (!opt_ev) {
-		CORBA_exception_init (&ev);
-		my_ev = &ev;
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
 	} else
-		my_ev = opt_ev;
+		ev = opt_ev;
 
 	es = Bonobo_Unknown_queryInterface (object, 
-	        "IDL:Bonobo/EventSource:1.0", my_ev);
+	        "IDL:Bonobo/EventSource:1.0", ev);
 
-	if (!BONOBO_EX (my_ev) && es) {
+	if (!BONOBO_EX (ev) && es) {
 
-		Bonobo_EventSource_removeListener (es, listener, my_ev);
+		Bonobo_EventSource_removeListener (es, listener, ev);
 
-		Bonobo_Unknown_unref (es, my_ev);
+		Bonobo_Unknown_unref (es, ev);
 	}
 
 	if (!opt_ev) {
-		if (BONOBO_EX (my_ev))
+		if (BONOBO_EX (ev))
 			g_warning ("remove_listener failed '%s'",
-				   bonobo_exception_get_text (my_ev));
-		CORBA_exception_free (&ev);
+				   bonobo_exception_get_text (ev));
+		CORBA_exception_free (ev);
 	}
 }
 
@@ -350,23 +356,23 @@ bonobo_event_source_client_add_listener_full (Bonobo_Unknown     object,
 					      const char        *opt_mask,
 					      CORBA_Environment *opt_ev)
 {
-	CORBA_Environment ev, *my_ev;
-	BonoboListener *listener = NULL;
-	Bonobo_Listener corba_listener = CORBA_OBJECT_NIL;
-	Bonobo_Unknown es;
+	BonoboListener    *listener = NULL;
+	Bonobo_Listener    corba_listener = CORBA_OBJECT_NIL;
+	Bonobo_Unknown     es;
+	CORBA_Environment *ev, temp_ev;
 
 	g_return_val_if_fail (event_callback != NULL, CORBA_OBJECT_NIL);
 	
 	if (!opt_ev) {
-		CORBA_exception_init (&ev);
-		my_ev = &ev;
+		ev = &temp_ev;
+		CORBA_exception_init (ev);
 	} else
-		my_ev = opt_ev;
+		ev = opt_ev;
 
 	es = Bonobo_Unknown_queryInterface (object, 
-		"IDL:Bonobo/EventSource:1.0", my_ev);
+		"IDL:Bonobo/EventSource:1.0", ev);
 
-	if (BONOBO_EX (my_ev) || !es)
+	if (BONOBO_EX (ev) || !es)
 		goto add_listener_end;
 
 	if (!(listener = bonobo_listener_new_closure (event_callback)))
@@ -376,25 +382,25 @@ bonobo_event_source_client_add_listener_full (Bonobo_Unknown     object,
 	
 	if (opt_mask)
 		Bonobo_EventSource_addListenerWithMask (
-			es, corba_listener, opt_mask, my_ev);
+			es, corba_listener, opt_mask, ev);
 	else 
 		Bonobo_EventSource_addListener (
-			es, corba_listener, my_ev);
+			es, corba_listener, ev);
 
-	corba_listener = CORBA_Object_duplicate (corba_listener, my_ev);
+	corba_listener = CORBA_Object_duplicate (corba_listener, ev);
 
 	bonobo_object_unref (BONOBO_OBJECT (listener));
 
 	/* FIXME: wtf. is this doing ? */
-	Bonobo_Unknown_unref (es, my_ev);
+	Bonobo_Unknown_unref (es, ev);
 
  add_listener_end:
 
 	if (!opt_ev) {
-		if (BONOBO_EX (my_ev))
+		if (BONOBO_EX (ev))
 			g_warning ("add_listener failed '%s'",
-				   bonobo_exception_get_text (my_ev));
-		CORBA_exception_free (&ev);
+				   bonobo_exception_get_text (ev));
+		CORBA_exception_free (ev);
 	}
 
 	return corba_listener;
