@@ -28,73 +28,13 @@ bonobo_arg_new (BonoboArgType t)
 {
 	CORBA_any *any = NULL;
 	DynamicAny_DynAny dyn = NULL;
-	CORBA_ORB orb;
 	CORBA_Environment ev;
 
 	g_return_val_if_fail (t != NULL, NULL);
 
 	CORBA_exception_init (&ev);
 	
-	orb = bonobo_orb ();
-
-	switch (t->kind) {
-
-	case CORBA_tk_null: 
-	case CORBA_tk_void: 
-	case CORBA_tk_short:
-	case CORBA_tk_long:
-	case CORBA_tk_ushort:
-	case CORBA_tk_ulong:
-	case CORBA_tk_float:
-	case CORBA_tk_double:
-	case CORBA_tk_boolean:
-	case CORBA_tk_char:
-	case CORBA_tk_octet:
-	case CORBA_tk_string:
-	case CORBA_tk_longlong:
-	case CORBA_tk_ulonglong:
-	case CORBA_tk_longdouble:
-	case CORBA_tk_wchar:
-	case CORBA_tk_wstring:
-	case CORBA_tk_objref:
-	case CORBA_tk_any:
-	case CORBA_tk_TypeCode:
-	case CORBA_tk_Principal:
-
-		dyn = CORBA_ORB_create_basic_dyn_any (orb, t, &ev);
-		break;
-
- 	case CORBA_tk_sequence:
-
-		dyn = CORBA_ORB_create_dyn_sequence (orb, t, &ev);
-		break;
-
-	case CORBA_tk_array:
-
-		dyn = CORBA_ORB_create_dyn_array (orb, t, &ev);
-		break;
-		
-	case CORBA_tk_except:
-	case CORBA_tk_struct:
-
-		dyn = CORBA_ORB_create_dyn_struct (orb, t, &ev);
-		break;
-
-	case CORBA_tk_union:
-
-		dyn = CORBA_ORB_create_dyn_union (orb, t, &ev);
-		break;
-       
-	case CORBA_tk_enum:
-
-		dyn = CORBA_ORB_create_dyn_enum (orb, t, &ev);
-		break;
-       
-	default:
-
-		g_warning ("Unhandled typecode");
-		break;
-	}
+	dyn = CORBA_ORB_create_basic_dyn_any (bonobo_orb (), t, &ev);
 
 	if (!BONOBO_EX (&ev) && dyn != NULL) {
 		any = DynamicAny_DynAny_to_any (dyn, &ev);

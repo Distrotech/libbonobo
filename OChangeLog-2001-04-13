@@ -1,3 +1,19 @@
+2001-03-13  Dietmar Maurer  <dietmar@ximian.com>
+
+	* monikers/bonobo-moniker-extender-file.c
+	(bonobo_file_extender_resolve): search for registered servers.
+
+	* bonobo/bonobo-moniker-util.c (bonobo_url_register): impl.
+	(bonobo_url_unregister): impl.
+	(bonobo_url_lookup): impl.
+
+	* bonobo/bonobo-exception.h (BONOBO_USER_EX): replace (ev)->major
+	with (ev)->_major
+
+	* bonobo/bonobo-arg.h (BONOBO_ARG_SET_STRING): fix a memory leak.
+
+	* bonobo/bonobo-arg.c (bonobo_arg_new): simplify the code.
+
 Mon Mar 12 23:55:17 CET 2001 Paolo Molaro <lupus@ximian.com>
 
 	* tools/idl-grep.c, tools/Makefile.am: add idl-grep tool
