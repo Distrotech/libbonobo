@@ -1,3 +1,27 @@
+1999-06-01  Chris Lahey  <clahey@umich.edu>
+
+	* configure.in, components/Makefile.am: Added audio-ulaw subdirectory.
+
+	* components/audio-ulaw/Makefile.am,
+	components/audio-ulaw/.cvsignore: Files needed for compilation and cvs.
+
+	* components/audio-ulaw/audio-ulaw.gnorba: Description of this
+	component for gnorba to use.
+
+	* components/audio-ulaw/color.h, components/audio-ulaw/color.c:
+	These are borrowed almost exactly from gnumeric/src/color.[ch].
+	They handle color allocation.
+
+	* components/audio-ulaw/bonobo-audio-ulaw.h,
+	components/audio-ulaw/bonobo-audio-ulaw.c: The bonobo component.
+	Uses item-audio to display audio/ulaw data.
+
+	* components/audio-ulaw/item-audio.h,
+	components/audio-ulaw/item-audio.c: This is the gnome-canvas item
+	which displays the audio data.
+
+	* components/audio-ulaw/: Added a audio/ulaw component.
+
 1999-06-01  Nat Friedman  <nat@gnome-support.com>
 
 	* components/text-plain/bonobo-text-plain.c (view_data_t): Added a
