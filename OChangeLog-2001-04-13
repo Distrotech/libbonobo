@@ -1,3 +1,12 @@
+2001-02-24  Michael Meeks  <michael@ximian.com>
+
+	* doc/api: add bonobo-ui-sync
+	remove bonobo-ui-xml
+
+	* bonobo/bonobo-ui-container.c: Fully API document.
+
+	* doc/api/bonobo-api.sgml: re-organise.
+
 2001-02-23  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-ui-component.c: Fully API documented.
