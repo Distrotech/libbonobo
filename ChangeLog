@@ -1,5 +1,7 @@
 2001-07-30  ERDI Gergo  <cactus@cactus.rulez.org>
 
+	* configure.in: Bumped version number because of new GClosure APIs
+
 	* bonobo/bonoob-item-handler.c: finalization fixes
 	
 	* bonobo/bonobo-marshal-main.c: Include <gobject/gboxed.h> to
