@@ -1,3 +1,7 @@
+1999-09-04  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* samples/sample-container.c (component_add_view): fix typo
+
 1999-09-03  Nat Friedman  <nat@gnome-support.com>
 
 	* samples/paint-component-simple.c (view_button_press_cb): New
@@ -159,6 +163,7 @@
 	* bonobo/gnome-embeddable.h (GnomeEmbeddable): Added private field
 	for future growth.
 
+>>>>>>> 1.173
 1999-08-30  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-bonobo-selector.c (select_row): Transparent handler
