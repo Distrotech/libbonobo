@@ -5,3 +5,4 @@
 #undef HAVE_LC_MESSAGES
 #undef HAVE_STPCPY
 #undef HAVE_DLADDR
+#undef ENABLE_ORBIT2

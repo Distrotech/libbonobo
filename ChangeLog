@@ -1,3 +1,30 @@
+2001-06-26  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: add --enable-orbit2=[yes/no]
+
+	* orbit2-convert.pl: fix some buglets.
+
+	* bonobo/bonobo-arg.c (bonobo_arg_new): port to new DynamicAny
+	conditionaly.
+
+	* bonobo/bonobo-async.c: disable for ORBit2.
+
+	* bonobo/bonobo-moniker-util.c (bonobo_string_to_CosNaming_Name):
+	impl for ORBit2 case. (url_to_name): trash for ORBit2 - FIXME.
+
+	* bonobo/bonobo-object.c (bonobo_object_dump_interfaces): upd.
+	(bonobo_type_setup): init base_epv for ORBit2.
+
+	* bonobo/bonobo-object.h: Add PortableServer_ServantBase__epv
+	for both cases - only used in ORBit2 version.
+
+	* bonobo/bonobo-property-bag-client.c: renamed all TC_ duffness.
+
+	* bonobo/bonobo-transient.c: disabled for ORBit2 - not used
+	anyway.
+
+	* *.c: added lots of missing string.h includes.
+
 2001-06-26  Fatih Demir <kabalak@gtranslator.org>
 
 	* configure.in: Added ta to the languages list.

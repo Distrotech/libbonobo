@@ -10,12 +10,13 @@
  * Copyright (C) 2000, Helix Code, Inc.
  */
 #include <config.h>
+#include <time.h>
+#include <string.h>
 #include <gobject/gsignal.h>
 #include <bonobo/bonobo-listener.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-running-context.h>
-#include <time.h>
 
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
 

@@ -11,13 +11,13 @@
 
 	s/TC_short/TC_CORBA_short/g;
 	s/TC_long/TC_CORBA_long/g;
-	s/TC_longlong/TC_CORBA_longlong/g;
-	s/TC_ushort/TC_CORBA_ushort/g;
-	s/TC_ulong/TC_CORBA_ulong/g;
-	s/TC_ulonglong/TC_CORBA_ulonglong/g;
+	s/TC_longlong/TC_CORBA_long_long/g;
+	s/TC_ushort/TC_CORBA_unsigned_short/g;
+	s/TC_ulong/TC_CORBA_unsigned_long/g;
+	s/TC_ulonglong/TC_CORBA_unsigned_long_long/g;
 	s/TC_float/TC_CORBA_float/g;
 	s/TC_double/TC_CORBA_double/g;
-	s/TC_longdouble/TC_CORBA_longdouble/g;
+	s/TC_longdouble/TC_CORBA_long_double/g;
 	s/TC_boolean/TC_CORBA_boolean/g;
 	s/TC_char/TC_CORBA_char/g;
 	s/TC_wchar/TC_CORBA_wchar/g;

@@ -35,8 +35,25 @@ bonobo_arg_new (BonoboArgType t)
 	g_return_val_if_fail (t != NULL, NULL);
 
 	CORBA_exception_init (&ev);
-	
+
+#ifdef ENABLE_ORBIT2
+	{
+		DynamicAny_DynAnyFactory f;
+
+		f = (DynamicAny_DynAnyFactory)
+			CORBA_ORB_resolve_initial_references (
+				bonobo_orb(), "DynAnyFactory", &ev);
+
+		g_return_val_if_fail (!BONOBO_EX (&ev), NULL);
+
+		dyn = DynamicAny_DynAnyFactory_create_dyn_any_from_type_code (
+			f, t, &ev);
+
+		CORBA_Object_release ((CORBA_Object) f, &ev);
+	}
+#else
 	dyn = CORBA_ORB_create_basic_dyn_any (bonobo_orb (), t, &ev);
+#endif
 
 	if (!BONOBO_EX (&ev) && dyn != NULL) {
 		any = DynamicAny_DynAny_to_any (dyn, &ev);
@@ -100,9 +117,9 @@ bonobo_arg_type_from_gtk (GType id)
 	case G_TYPE_UCHAR:  return TC_CORBA_char;
 	case G_TYPE_BOOLEAN:return TC_CORBA_boolean;
 	case G_TYPE_INT:    return TC_CORBA_short;
-	case G_TYPE_UINT:   return TC_CORBA_ushort;
+	case G_TYPE_UINT:   return TC_CORBA_unsigned_short;
 	case G_TYPE_LONG:   return TC_CORBA_long;
-	case G_TYPE_ULONG:  return TC_CORBA_ulong;
+	case G_TYPE_ULONG:  return TC_CORBA_unsigned_long;
 	case G_TYPE_FLOAT:  return TC_CORBA_float;
 	case G_TYPE_DOUBLE: return TC_CORBA_double;
 	case G_TYPE_STRING: return TC_CORBA_string;
@@ -136,11 +153,11 @@ bonobo_arg_type_to_gtk (BonoboArgType id)
 		g_type = G_TYPE_BOOLEAN;
 	else if (bonobo_arg_type_is_equal (TC_CORBA_short,   id, &ev))
 		g_type = G_TYPE_INT;
-	else if (bonobo_arg_type_is_equal (TC_CORBA_ushort,  id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_unsigned_short, id, &ev))
 		g_type = G_TYPE_UINT;
 	else if (bonobo_arg_type_is_equal (TC_CORBA_long,    id, &ev))
 		g_type = G_TYPE_LONG;
-	else if (bonobo_arg_type_is_equal (TC_CORBA_ulong,   id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_unsigned_long, id, &ev))
 		g_type = G_TYPE_ULONG;
 	else if (bonobo_arg_type_is_equal (TC_CORBA_float,   id, &ev))
 		g_type = G_TYPE_FLOAT;
@@ -191,9 +208,9 @@ bonobo_arg_from_gtk (BonoboArg *a, const GValue *value)
 		MAKE_FROM_GVALUE (UCHAR,   uchar,   TC_CORBA_char,    uchar_data, CORBA_char,           CORBA_tk_char);
 		MAKE_FROM_GVALUE (BOOLEAN, boolean, TC_CORBA_boolean,  bool_data, CORBA_boolean,        CORBA_tk_boolean);
 		MAKE_FROM_GVALUE (INT,     int,     TC_CORBA_short,     int_data, CORBA_short,          CORBA_tk_short);
-		MAKE_FROM_GVALUE (UINT,    uint,    TC_CORBA_ushort,   uint_data, CORBA_unsigned_short, CORBA_tk_ushort);
+		MAKE_FROM_GVALUE (UINT,    uint,    TC_CORBA_unsigned_short,   uint_data, CORBA_unsigned_short, CORBA_tk_ushort);
 		MAKE_FROM_GVALUE (LONG,    long,    TC_CORBA_long,     long_data, CORBA_long,           CORBA_tk_long);
-		MAKE_FROM_GVALUE (ULONG,   ulong,   TC_CORBA_ulong,   ulong_data, CORBA_unsigned_long,  CORBA_tk_ulong);
+		MAKE_FROM_GVALUE (ULONG,   ulong,   TC_CORBA_unsigned_long,   ulong_data, CORBA_unsigned_long,  CORBA_tk_ulong);
 		MAKE_FROM_GVALUE (FLOAT,   float,   TC_CORBA_float,   float_data, CORBA_float,          CORBA_tk_float);
 		MAKE_FROM_GVALUE (DOUBLE,  double,  TC_CORBA_double, double_data, CORBA_double,         CORBA_tk_double);
 

@@ -22,12 +22,12 @@ typedef CORBA_any      BonoboArg;
 typedef CORBA_TypeCode BonoboArgType;
 
 #define BONOBO_ARG_NULL    TC_null
-#define BONOBO_ARG_BOOLEAN TC_boolean
-#define BONOBO_ARG_INT     TC_long
-#define BONOBO_ARG_LONG    TC_long
-#define BONOBO_ARG_FLOAT   TC_float
-#define BONOBO_ARG_DOUBLE  TC_double
-#define BONOBO_ARG_STRING  TC_string
+#define BONOBO_ARG_BOOLEAN TC_CORBA_boolean
+#define BONOBO_ARG_INT     TC_CORBA_long
+#define BONOBO_ARG_LONG    TC_CORBA_long
+#define BONOBO_ARG_FLOAT   TC_CORBA_float
+#define BONOBO_ARG_DOUBLE  TC_CORBA_double
+#define BONOBO_ARG_STRING  TC_CORBA_string
 
 #ifdef __GNUC__
 #	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
@@ -39,19 +39,19 @@ typedef CORBA_TypeCode BonoboArgType;
 #	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (*((t *)(a->_value)) = (t)(v))
 #endif
 
-#define BONOBO_ARG_GET_BOOLEAN(a)   (BONOBO_ARG_GET_GENERAL (a, TC_boolean, CORBA_boolean, NULL))
-#define BONOBO_ARG_SET_BOOLEAN(a,v) (BONOBO_ARG_SET_GENERAL (a, v, TC_boolean, CORBA_boolean, NULL))
+#define BONOBO_ARG_GET_BOOLEAN(a)   (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_boolean, CORBA_boolean, NULL))
+#define BONOBO_ARG_SET_BOOLEAN(a,v) (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_boolean, CORBA_boolean, NULL))
 
-#define BONOBO_ARG_GET_INT(a)       (BONOBO_ARG_GET_GENERAL (a, TC_long, CORBA_long, NULL))
-#define BONOBO_ARG_SET_INT(a,v)     (BONOBO_ARG_SET_GENERAL (a, v, TC_long, CORBA_long, NULL))
-#define BONOBO_ARG_GET_LONG(a)      (BONOBO_ARG_GET_GENERAL (a, TC_long, CORBA_long, NULL))
-#define BONOBO_ARG_SET_LONG(a,v)    (BONOBO_ARG_SET_GENERAL (a, v, TC_long, CORBA_long, NULL))
+#define BONOBO_ARG_GET_INT(a)       (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_long, CORBA_long, NULL))
+#define BONOBO_ARG_SET_INT(a,v)     (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_long, CORBA_long, NULL))
+#define BONOBO_ARG_GET_LONG(a)      (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_long, CORBA_long, NULL))
+#define BONOBO_ARG_SET_LONG(a,v)    (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_long, CORBA_long, NULL))
 
-#define BONOBO_ARG_GET_FLOAT(a)     (BONOBO_ARG_GET_GENERAL (a, TC_float, CORBA_float, NULL))
-#define BONOBO_ARG_SET_FLOAT(a,v)   (BONOBO_ARG_SET_GENERAL (a, v, TC_float, CORBA_float, NULL))
+#define BONOBO_ARG_GET_FLOAT(a)     (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_float, CORBA_float, NULL))
+#define BONOBO_ARG_SET_FLOAT(a,v)   (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_float, CORBA_float, NULL))
 
-#define BONOBO_ARG_GET_DOUBLE(a)    (BONOBO_ARG_GET_GENERAL (a, TC_double, CORBA_double, NULL))
-#define BONOBO_ARG_SET_DOUBLE(a,v)  (BONOBO_ARG_SET_GENERAL (a, v, TC_double, CORBA_double, NULL))
+#define BONOBO_ARG_GET_DOUBLE(a)    (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_double, CORBA_double, NULL))
+#define BONOBO_ARG_SET_DOUBLE(a,v)  (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_double, CORBA_double, NULL))
 
 
 #ifdef __GNUC__

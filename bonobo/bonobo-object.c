@@ -1027,8 +1027,13 @@ bonobo_object_dump_interfaces (BonoboObject *object)
 		
 		g_return_if_fail (BONOBO_IS_OBJECT (o));
 
+#ifdef ENABLE_ORBIT2
+		if (o->corba_objref && o->corba_objref->type_id)
+			fprintf (stderr, "I/F: '%s'\n", o->corba_objref->type_id);
+#else
 		if (o->corba_objref && o->corba_objref->object_id)
 			fprintf (stderr, "I/F: '%s'\n", o->corba_objref->object_id);
+#endif
 		else
 			fprintf (stderr, "I/F: NIL error\n");
 	}
@@ -1180,10 +1185,20 @@ bonobo_type_setup (GType             type,
 	/* Setup the Unknown epv */
 	bonobo_object_epv_init (&klass->epv);
 	klass->epv._private = NULL;
-	
+
+#ifdef ENABLE_ORBIT2
+	klass->base_epv._private = NULL;
+	klass->base_epv.finalize = NULL;
+	klass->base_epv.default_POA = NULL;
+#endif
+
 	vepv = g_new0 (gpointer, depth + 2);
 	klass->vepv = (POA_Bonobo_Unknown__vepv *) vepv;
+#ifdef ENABLE_ORBIT2
+	klass->vepv->_base_epv = &klass->base_epv;
+#else
 	klass->vepv->_base_epv = NULL;
+#endif
 	klass->vepv->Bonobo_Unknown_epv = &klass->epv;
 
 	/* Build our EPV */

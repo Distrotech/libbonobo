@@ -66,12 +66,13 @@ typedef struct {
 	BonoboObjectPOAFn          poa_init_fn;
 	BonoboObjectPOAFn          poa_fini_fn;
 
-	POA_Bonobo_Unknown__vepv  *vepv;
+	POA_Bonobo_Unknown__vepv       *vepv;
 
 	/* The offset of this class' additional epv */
-	int                        epv_struct_offset;
+	int                             epv_struct_offset;
 
-	POA_Bonobo_Unknown__epv    epv;
+	PortableServer_ServantBase__epv base_epv;
+	POA_Bonobo_Unknown__epv         epv;
 } BonoboObjectClass;
 
 GType                    bonobo_object_get_type               (void);

@@ -1,4 +1,9 @@
+#include "config.h"
 #include <bonobo/bonobo-async.h>
+
+#ifdef ENABLE_ORBIT2
+#warning Hacked up Async code is broken
+#else
 
 struct _BonoboAsyncReply {
 	CORBA_Object        object;
@@ -419,3 +424,4 @@ bonobo_async_handle_get_recv (BonoboAsyncReply *handle)
 
 	return handle->recv_buffer;
 }
+#endif

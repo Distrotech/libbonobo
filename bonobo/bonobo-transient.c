@@ -19,6 +19,10 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-transient.h>
 
+#ifdef ENABLE_ORBIT2
+#warning Bonobo-transient unused, and will hamper a new object system
+#else
+
 static GObjectClass *parent_class = NULL;
 
 /*
@@ -578,3 +582,4 @@ bonobo_transient_create_objref (BonoboTransient   *transient,
 		transient->priv->poa, oid, (char *) iface_name, ev);
 }
 
+#endif

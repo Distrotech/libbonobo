@@ -8,8 +8,8 @@
  *
  * Copyright 1999,2000 Helix Code, Inc.
  */
-#include <config.h>
-
+#include "config.h"
+#include <string.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-exception.h>

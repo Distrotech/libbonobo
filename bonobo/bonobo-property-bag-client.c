@@ -342,10 +342,10 @@ c_type bonobo_pbclient_get_##name##_with_default (Bonobo_PropertyBag  bag,    \
  *
  * Returns: the value contained in the database, or zero on error.
  */
-MAKE_GET_SIMPLE (gchar *, NULL, string, TC_string, 
+MAKE_GET_SIMPLE (gchar *, NULL, string, TC_CORBA_string, 
 		 g_strdup (*(char **)value->_value));
 
-MAKE_GET_DEFAULT (gchar *, NULL, string, TC_string, 
+MAKE_GET_DEFAULT (gchar *, NULL, string, TC_CORBA_string, 
 		  g_strdup (*(char **)value->_value));
 
 MAKE_GET_WITH_DEFAULT (gchar *, string, g_strdup);
@@ -360,9 +360,9 @@ MAKE_GET_WITH_DEFAULT (gchar *, string, g_strdup);
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gint16, 0, short, TC_short, (*(gint16 *)value->_value));
+MAKE_GET_SIMPLE (gint16, 0, short, TC_CORBA_short, (*(gint16 *)value->_value));
 
-MAKE_GET_DEFAULT (gint16, 0, short, TC_short, (*(gint16 *)value->_value));
+MAKE_GET_DEFAULT (gint16, 0, short, TC_CORBA_short, (*(gint16 *)value->_value));
 
 MAKE_GET_WITH_DEFAULT (gint16, short, );
 
@@ -376,9 +376,9 @@ MAKE_GET_WITH_DEFAULT (gint16, short, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (guint16, 0, ushort, TC_ushort, (*(guint16 *)value->_value));
+MAKE_GET_SIMPLE (guint16, 0, ushort, TC_CORBA_unsigned_short, (*(guint16 *)value->_value));
 
-MAKE_GET_DEFAULT (guint16, 0, ushort, TC_ushort, (*(guint16 *)value->_value));
+MAKE_GET_DEFAULT (guint16, 0, ushort, TC_CORBA_unsigned_short, (*(guint16 *)value->_value));
 
 MAKE_GET_WITH_DEFAULT (guint16, ushort, );
 
@@ -392,9 +392,9 @@ MAKE_GET_WITH_DEFAULT (guint16, ushort, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gint32, 0, long, TC_long, (*(gint32 *)value->_value));
+MAKE_GET_SIMPLE (gint32, 0, long, TC_CORBA_long, (*(gint32 *)value->_value));
 
-MAKE_GET_DEFAULT (gint32, 0, long, TC_long, (*(gint32 *)value->_value));
+MAKE_GET_DEFAULT (gint32, 0, long, TC_CORBA_long, (*(gint32 *)value->_value));
 
 MAKE_GET_WITH_DEFAULT (gint32, long, );
 
@@ -408,9 +408,9 @@ MAKE_GET_WITH_DEFAULT (gint32, long, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (guint32, 0, ulong, TC_ulong, (*(guint32 *)value->_value));
+MAKE_GET_SIMPLE (guint32, 0, ulong, TC_CORBA_unsigned_long, (*(guint32 *)value->_value));
 
-MAKE_GET_DEFAULT (guint32, 0, ulong, TC_ulong, (*(guint32 *)value->_value));
+MAKE_GET_DEFAULT (guint32, 0, ulong, TC_CORBA_unsigned_long, (*(guint32 *)value->_value));
 
 MAKE_GET_WITH_DEFAULT (guint32, ulong, );
 
@@ -424,9 +424,9 @@ MAKE_GET_WITH_DEFAULT (guint32, ulong, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gfloat, 0.0, float, TC_float, (*(gfloat *)value->_value));
+MAKE_GET_SIMPLE (gfloat, 0.0, float, TC_CORBA_float, (*(gfloat *)value->_value));
 
-MAKE_GET_DEFAULT (gfloat, 0.0, float, TC_float, (*(gfloat *)value->_value));
+MAKE_GET_DEFAULT (gfloat, 0.0, float, TC_CORBA_float, (*(gfloat *)value->_value));
 
 MAKE_GET_WITH_DEFAULT (gfloat, float, );
 
@@ -440,9 +440,9 @@ MAKE_GET_WITH_DEFAULT (gfloat, float, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gdouble, 0.0, double, TC_double, (*(gdouble *)value->_value));
+MAKE_GET_SIMPLE (gdouble, 0.0, double, TC_CORBA_double, (*(gdouble *)value->_value));
 
-MAKE_GET_DEFAULT (gdouble, 0.0, double, TC_double,(*(gdouble *)value->_value));
+MAKE_GET_DEFAULT (gdouble, 0.0, double, TC_CORBA_double,(*(gdouble *)value->_value));
 
 MAKE_GET_WITH_DEFAULT (gdouble, double, );
 
@@ -456,9 +456,9 @@ MAKE_GET_WITH_DEFAULT (gdouble, double, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gchar, '\0', char, TC_char, (*(gchar *)value->_value));
+MAKE_GET_SIMPLE (gchar, '\0', char, TC_CORBA_char, (*(gchar *)value->_value));
 
-MAKE_GET_DEFAULT (gchar, '\0', char, TC_char, (*(gchar *)value->_value));
+MAKE_GET_DEFAULT (gchar, '\0', char, TC_CORBA_char, (*(gchar *)value->_value));
 
 MAKE_GET_WITH_DEFAULT (gchar, char, );
 
@@ -472,10 +472,10 @@ MAKE_GET_WITH_DEFAULT (gchar, char, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gboolean, FALSE, boolean, TC_boolean, 
+MAKE_GET_SIMPLE (gboolean, FALSE, boolean, TC_CORBA_boolean, 
 		 (*(gboolean *)value->_value));
 
-MAKE_GET_DEFAULT (gboolean, FALSE, boolean, TC_boolean, 
+MAKE_GET_DEFAULT (gboolean, FALSE, boolean, TC_CORBA_boolean, 
 		  (*(gboolean *)value->_value));
 
 MAKE_GET_WITH_DEFAULT (gboolean, boolean, );
@@ -644,7 +644,7 @@ void bonobo_pbclient_set_##name (Bonobo_PropertyBag  bag,                     \
  *
  * Set a 16 bit integer value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (gint16, short, TC_short)
+MAKE_SET_SIMPLE (gint16, short, TC_CORBA_short)
 /**
  * bonobo_pbclient_set_ushort:
  * @bag: a reference to the PropertyBag
@@ -654,7 +654,7 @@ MAKE_SET_SIMPLE (gint16, short, TC_short)
  *
  * Set a 16 bit unsigned integer value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (guint16, ushort, TC_ushort)
+MAKE_SET_SIMPLE (guint16, ushort, TC_CORBA_unsigned_short)
 /**
  * bonobo_pbclient_set_long:
  * @bag: a reference to the PropertyBag
@@ -664,7 +664,7 @@ MAKE_SET_SIMPLE (guint16, ushort, TC_ushort)
  *
  * Set a 32 bit integer value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (gint32, long, TC_long)
+MAKE_SET_SIMPLE (gint32, long, TC_CORBA_long)
 /**
  * bonobo_pbclient_set_ulong:
  * @bag: a reference to the PropertyBag
@@ -674,7 +674,7 @@ MAKE_SET_SIMPLE (gint32, long, TC_long)
  *
  * Set a 32 bit unsigned integer value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (guint32, ulong, TC_ulong)
+MAKE_SET_SIMPLE (guint32, ulong, TC_CORBA_unsigned_long)
 /**
  * bonobo_pbclient_set_float:
  * @bag: a reference to the PropertyBag
@@ -684,7 +684,7 @@ MAKE_SET_SIMPLE (guint32, ulong, TC_ulong)
  *
  * Set a single precision floating point value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (gfloat, float, TC_float)
+MAKE_SET_SIMPLE (gfloat, float, TC_CORBA_float)
 /**
  * bonobo_pbclient_set_double:
  * @bag: a reference to the PropertyBag
@@ -694,7 +694,7 @@ MAKE_SET_SIMPLE (gfloat, float, TC_float)
  *
  * Set a double precision floating point value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (gdouble, double, TC_double)
+MAKE_SET_SIMPLE (gdouble, double, TC_CORBA_double)
 /**
  * bonobo_pbclient_set_boolean:
  * @bag: a reference to the PropertyBag
@@ -704,7 +704,7 @@ MAKE_SET_SIMPLE (gdouble, double, TC_double)
  *
  * Set a boolean value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (gboolean, boolean, TC_boolean)
+MAKE_SET_SIMPLE (gboolean, boolean, TC_CORBA_boolean)
 /**
  * bonobo_pbclient_set_char:
  * @bag: a reference to the PropertyBag
@@ -714,7 +714,7 @@ MAKE_SET_SIMPLE (gboolean, boolean, TC_boolean)
  *
  * Set a 8 bit characte value in the PropertyBag.
  */
-MAKE_SET_SIMPLE (gchar, char, TC_char)
+MAKE_SET_SIMPLE (gchar, char, TC_CORBA_char)
 /**
  * bonobo_pbclient_set_string:
  * @bag: a reference to the PropertyBag
@@ -734,7 +734,7 @@ bonobo_pbclient_set_string (Bonobo_PropertyBag  bag,
 
 	bonobo_return_if_fail (value != NULL, opt_ev);
 
-	any = bonobo_arg_new (TC_string);
+	any = bonobo_arg_new (TC_CORBA_string);
 
 	BONOBO_ARG_SET_STRING (any, value);
 

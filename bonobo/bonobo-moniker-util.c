@@ -7,6 +7,8 @@
  *	Michael Meeks    (michael@helixcode.com)
  *	Ettore Perazzoli (ettore@helixcode.com)
  */
+#include "config.h"
+#include <string.h>
 #include <liboaf/liboaf.h>
 #include <liboaf/oaf-async.h>
 #include <ORBitservices/CosNaming.h>
@@ -550,6 +552,9 @@ bonobo_get_object (const CORBA_char *name,
 	return retval;
 }
 
+#ifdef ENABLE_ORBIT2
+#warning Async monikers disabled
+#else
 typedef struct {
 	char                *name;
 	BonoboMonikerAsyncFn cb;
@@ -620,8 +625,8 @@ async_activation_cb (CORBA_Object activated_object,
 			parse_async_ctx_free (ctx);
 		} else {
 			static const BonoboAsyncArg arguments [] = {
-				{ TC_Object, BONOBO_ASYNC_IN },
-				{ TC_string, BONOBO_ASYNC_IN },
+				{ TC_CORBA_Object, BONOBO_ASYNC_IN },
+				{ TC_CORBA_string, BONOBO_ASYNC_IN },
 				{ NULL }
 			};
 			static const CORBA_TypeCode exceptions [] = {
@@ -631,7 +636,7 @@ async_activation_cb (CORBA_Object activated_object,
 			};
 			static const BonoboAsyncMethod method = {
 				"parseDisplayName", 
-				TC_Object, 
+				TC_CORBA_Object, 
 				arguments,
 				exceptions
 			};
@@ -755,7 +760,7 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 {
 	static const BonoboAsyncArg arguments [] = {
 		{ TC_Bonobo_ResolveOptions, BONOBO_ASYNC_IN },
-		{ TC_string,                BONOBO_ASYNC_IN },
+		{ TC_CORBA_string,                BONOBO_ASYNC_IN },
 		{ NULL }
 	};
 	static const CORBA_TypeCode exceptions [] = {
@@ -765,7 +770,7 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 	};
 	static const BonoboAsyncMethod method = {
 		"resolve", 
-		TC_Object, 
+		TC_CORBA_Object, 
 		arguments,
 		exceptions
 	};
@@ -905,6 +910,7 @@ bonobo_get_object_async (const CORBA_char    *name,
 	bonobo_moniker_client_new_from_name_async (
 		name, ev, timeout_msec, get_async1_cb, ctx);
 }
+#endif
 
 /**
  * bonobo_moniker_client_equal:
@@ -945,6 +951,93 @@ bonobo_moniker_client_equal (Bonobo_Moniker     moniker,
 	return l != 0;
 }
 
+#ifdef ENABLE_ORBIT2
+/* A product of dire API design ...  */
+static CosNaming_Name*
+bonobo_string_to_CosNaming_Name (const CORBA_char *string,
+				 CORBA_Environment * ev)
+{
+  CosNaming_Name *retval = CosNaming_Name__alloc ();
+  GPtrArray *ids = g_ptr_array_new ();
+  GPtrArray *kinds = g_ptr_array_new ();
+  gint pos = 0, i, len;
+  gboolean used = FALSE;
+  GPtrArray *append_to;
+
+  g_ptr_array_add (ids, g_string_new (""));
+  g_ptr_array_add (kinds, g_string_new (""));
+
+  append_to = ids;
+
+  while (*string)
+    {
+      gchar append;
+      switch (*string)
+	{
+	case '.':
+	  used = TRUE;
+	  g_return_val_if_fail (append_to != kinds, NULL);  
+	  append_to = kinds;
+	  append = '\0';
+	  break;
+	case '/':
+	  if (used)
+	    {
+	      pos++;
+	      g_ptr_array_add (ids, g_string_new (""));
+	      g_ptr_array_add (kinds, g_string_new (""));
+	      g_assert (ids->len == pos + 1 && kinds->len == pos + 1);
+	    }
+	  used = FALSE;
+	  append_to = ids;
+	  append = '\0';
+	  break;
+	case '\\':
+	  string++;
+	  g_return_val_if_fail (*string == '.' || 
+				*string == '/' || *string == '\\', NULL);  
+	  append = *string;
+	  break;
+	default:
+	  append = *string;
+	  used = TRUE;
+	  break;
+	}
+
+      if (append)
+	g_string_append_c (g_ptr_array_index (append_to, pos), append);
+
+      string++;
+    }
+
+  len = used ? pos + 1 : pos;
+
+  retval->_buffer = CORBA_sequence_CosNaming_NameComponent_allocbuf (len);
+  retval->_length = len;
+  retval->_maximum = len;
+
+  for (i = 0; i < len; i++)
+    {  
+      GString *id = g_ptr_array_index (ids, i);
+      GString *kind = g_ptr_array_index (kinds, i);
+      
+      retval->_buffer[i].id = CORBA_string_dup (id->str);
+      retval->_buffer[i].kind = CORBA_string_dup (kind->str);
+    }
+  
+  for (i = 0; i <= pos; i++)
+    {  
+      g_string_free (g_ptr_array_index (ids, i), TRUE);
+      g_string_free (g_ptr_array_index (kinds, i), TRUE);
+    }
+
+  g_ptr_array_free (ids, TRUE);
+  g_ptr_array_free (kinds, TRUE);
+
+  return retval;
+}
+#endif
+
 static CosNaming_NamingContext
 lookup_naming_context (GList *path,
 		       CORBA_Environment *ev)
@@ -965,7 +1058,12 @@ lookup_naming_context (GList *path,
 
 	for (l = path; l != NULL; l = l->next) {
 
-		cn =  ORBit_string_to_CosNaming_Name (l->data, ev);
+#ifdef ENABLE_ORBIT2
+		cn = bonobo_string_to_CosNaming_Name (l->data, ev);
+#else
+		cn = ORBit_string_to_CosNaming_Name (l->data, ev);
+#endif
+
 		if (BONOBO_EX (ev) || !cn)
 			break;
 
@@ -999,6 +1097,10 @@ lookup_naming_context (GList *path,
 static CosNaming_Name *
 url_to_name (char *url, char *opt_kind)
 {
+#ifdef ENABLE_ORBIT2
+#warning LName code totaly broken in ORBit2
+	return NULL;
+#else
 	LName ln;
 	LNameComponent lnc;
 	CosNaming_Name *retval;
@@ -1024,6 +1126,7 @@ url_to_name (char *url, char *opt_kind)
 	CORBA_exception_free (&ev);
 
 	return retval;
+#endif
 }
 
 static CosNaming_NamingContext

@@ -7,8 +7,8 @@
  *
  * Copyright 2000, Helix Code, Inc.
  */
-#include <config.h>
-
+#include "config.h"
+#include <string.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-util.h>
