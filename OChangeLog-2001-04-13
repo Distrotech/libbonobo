@@ -1,7 +1,24 @@
 2000-10-05  Michael Meeks  <michael@helixcode.com>
 
-	* bonobo/bonobo-win.c (build_menu_widget): add "hidden" attribute
-	to menu items.
+	* bonobo/bonobo-win.c (update_status): don't return after
+	a hide missing the tree clean.
+	(do_show_hide): split out.
+
+	* bonobo/bonobo-ui-node.c (bonobo_ui_node_transparent): remove debug.
+
+	* doc/ui-xml.txt: add hidden descr.
+
+	* bonobo/bonobo-win.c (build_menu_widget): add "hidden" support.
+	(build_toolbar_widget): ditto.
+	(widget_set_state): ditto.
+	(build_control): add "hidden" support here
+	(update_status): upd.
+	(build_menu_widget): remove show on control.
+	(build_toolbar_control): ditto.
+	(update_status): ditto.
+	(update_menus): allow hiding the whole menu.
+
+2000-10-05  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/app.c (main): add transparency regression test
 
