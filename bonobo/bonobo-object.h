@@ -24,6 +24,7 @@ G_BEGIN_DECLS
 #define BONOBO_OBJECT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_OBJECT_TYPE, BonoboObjectClass))
 #define BONOBO_IS_OBJECT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_OBJECT_TYPE))
 #define BONOBO_IS_OBJECT_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_OBJECT_TYPE))
+#define BONOBO_OBJECT_GET_CLASS(o)(G_TYPE_INSTANCE_GET_CLASS ((o), BONOBO_OBJECT_TYPE, BonoboObjectClass))
 
 #define BONOBO_OBJREF(o)          (bonobo_object_corba_objref(BONOBO_OBJECT(o)))
 
@@ -58,10 +59,12 @@ typedef struct {
 typedef struct {
 	GObjectClass parent_class;
 
+	/* virtual methods. */
+	CORBA_Object (*query_interface)  (BonoboObject *object, const char *repo_id);
+
 	/* signals. */
-	void  (*destroy)          (BonoboObject *object);
-	void  (*query_interface)  (BonoboObject *object, const char *repo_id,  CORBA_Object      *retval);
-	void  (*system_exception) (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
+	void         (*destroy)          (BonoboObject *object);
+	void         (*system_exception) (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 
 	BonoboObjectPOAFn          poa_init_fn;
 	BonoboObjectPOAFn          poa_fini_fn;

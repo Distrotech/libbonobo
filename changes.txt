@@ -38,6 +38,7 @@ bonobo-object.[ch]:
 		removed bonobo_object_bind_to_servant
 		removed bonobo_object_activate_servant
 		removed bonobo_object_activate_servant_full
+	"query_interface" is a virtual method and no long a signal.
 
 bonobo-generic-factory.[ch]:
 	A very broken module

@@ -1,3 +1,10 @@
+2001-07-18  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-types.[ch]: New files.
+
+	* bonobo/bonobo-object.h (BonoboObjectClass): Made "query_interface"
+	a virtual method, not a signal.
+
 2001-07-17  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am (libbonoboinclude_HEADERS): don't install

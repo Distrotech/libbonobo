@@ -88,7 +88,8 @@ libbonoboinclude_HEADERS =		\
 	bonobo-stream-memory.h		\
 	bonobo-xobject.h		\
 	bonobo-i18n.h			\
-	bonobo-marshal.h
+	bonobo-marshal.h		\
+	bonobo-types.h
 
 noinst_HEADERS =			\
 	bonobo-activation-context.h	\
@@ -122,7 +123,8 @@ libbonobo_src =				\
 	bonobo-storage.c		\
 	bonobo-stream-client.c		\
 	bonobo-stream-memory.c		\
-	bonobo-running-context.c
+	bonobo-running-context.c	\
+	bonobo-types.c
 
 $(libbonobo_src) : $(CORBA_SOURCE)
 

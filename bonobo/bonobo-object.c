@@ -26,6 +26,7 @@
 #include "bonobo-running-context.h"
 #include "bonobo-object-directory.h"
 #include "bonobo-marshal.h"
+#include "bonobo-types.h"
 
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_REF_HOOKS
@@ -60,7 +61,6 @@ struct _BonoboObjectPrivate {
 
 enum {
 	DESTROY,
-	QUERY_INTERFACE,
 	SYSTEM_EXCEPTION,
 	LAST_SIGNAL
 };
@@ -513,7 +513,8 @@ bonobo_object_query_local_interface (BonoboObject *object,
 {
 	CORBA_Environment  ev;
 	BonoboObject      *retval;
-	CORBA_Object       corba_retval;
+	BonoboObjectClass *klass;
+	CORBA_Object       corba_retval = CORBA_OBJECT_NIL;
 	GType              type;
 	GList             *l;
 
@@ -522,9 +523,9 @@ bonobo_object_query_local_interface (BonoboObject *object,
 	retval       = NULL;
 	corba_retval = CORBA_OBJECT_NIL;
 
-	g_signal_emit (
-		G_OBJECT (object), bonobo_object_signals [QUERY_INTERFACE],
-		0, repo_id, &corba_retval);
+	klass = BONOBO_OBJECT_GET_CLASS (object);
+	if (klass->query_interface)
+		corba_retval = klass->query_interface (object, repo_id);
 
 	CORBA_exception_init (&ev);
 
@@ -640,14 +641,6 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
-	bonobo_object_signals [QUERY_INTERFACE] =
-		g_signal_new ("query_interface",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (BonoboObjectClass,query_interface),
-			      NULL, NULL,
-			      bonobo_marshal_VOID__POINTER_POINTER,
-			      G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
 	bonobo_object_signals [SYSTEM_EXCEPTION] =
 		g_signal_new ("system_exception",
 			      G_TYPE_FROM_CLASS (object_class),
