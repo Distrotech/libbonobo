@@ -1,3 +1,8 @@
+2000-12-19  Daniel Egger  <egger@suse.de>
+
+	* components/application-x-gnomine/Makefile.am:
+	Fix linking order.
+
 2000-12-18  Maciej Stachowiak  <mjs@eazel.com>
 
 	* monikers/Makefile.am: Removed no longer existent files from
