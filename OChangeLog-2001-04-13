@@ -1,5 +1,10 @@
 2001-02-16  John R. Sheets  <dusk@ravendusk.org>
 
+	* doc/dia/client-site.dia, doc/dia/control.dia, doc/dia/view.dia:
+	New Dia diagrams to help visualize Bonobo component interactions.
+
+2001-02-16  John R. Sheets  <dusk@ravendusk.org>
+
 	* doc/api/bonobo-sections.txt: Removed orphaned <FILE> and
 	<SECTION> tags, and errant PortableServer_Servant function decl in
 	BonoboTransient.
