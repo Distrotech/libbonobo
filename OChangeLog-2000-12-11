@@ -1,3 +1,9 @@
+1999-06-07  Matt Loper  <matt@gnome-support.com>
+
+	* idl/gnome-persist.idl (GNOME): Added a `WrongDataType' exception
+	to the load functions in PersistFile, PersistStorage, and
+	PersistStream.
+
 1999-06-06  Nat Friedman  <nat@gnome-support.com>
 
 	* components/text-plain/bonobo-text-plain.c (text_inserted_cb):

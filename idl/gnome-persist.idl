@@ -15,6 +15,8 @@ module GNOME {
 		};
 
 		string get_class_id ();
+		
+		exception WrongDataType {};		
 	};
 	
 	/*
@@ -37,7 +39,7 @@ module GNOME {
 		 * Loads the document object from the file
 		 * pointed in by @path
 		 */
-		void load (in string path);
+		void load (in string path) raises (WrongDataType);
 
 		/**
 		 * save:
@@ -86,7 +88,7 @@ module GNOME {
 		 * The bonobo_object should load its state from the
 		 * @storage provided
 		 */
-		void load (in Storage storage);
+		void load (in Storage storage) raises (WrongDataType);
 
 		/**
 		 * save:
@@ -130,7 +132,7 @@ module GNOME {
 		 *
 		 * Loads the status of the object from @stream
 		 */
-		void load (in Stream stream);
+		void load (in Stream stream) raises (WrongDataType);
 
 		/**
 		 * save:
