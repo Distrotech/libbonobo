@@ -1,3 +1,9 @@
+2002-12-17  Gustavo J. A. M. Carneiro <gjc@inescporto.pt>
+
+	* bonobo/bonobo-storage.h,
+	* bonobo/bonobo-stream.h: add blurb on why these
+	headers are deprecated, and how to do things now.
+
 2002-11-28  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.1.1
