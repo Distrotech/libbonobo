@@ -145,7 +145,9 @@ oaf_plugin_use(PortableServer_Servant servant, gpointer impl_ptr)
 
   local_plugin_info->refcount++;
 
+#if 0
   ORBit_servant_set_deathwatch(servant, &(local_plugin_info->refcount), gnome_plugin_unload, local_plugin_info);
+#endif
 }
 
 /**
