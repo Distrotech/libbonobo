@@ -1,3 +1,8 @@
+2001-12-21  Michael Meeks  <michael@ximian.com>
+
+	* idl/Bonobo_Control.idl: add getParentAccessible
+	for Bill, in place of unImplemented3 - no ABI impact.
+
 2001-12-17  Darin Adler  <darin@bentspoon.com>
 
 	* bonobo/bonobo-generic-factory.c:

@@ -75,13 +75,21 @@ interface ControlFrame : Bonobo::Unknown {
 	oneway void activateURI (in string uri, in boolean relative);
 
 	/**
+	 * getParentAccessible:
+	 *
+	 * Returns: A CORBA Accessibility reference, related to the
+	 * parent of the container widget associated with this control
+	 * frame.
+	 */
+	Unknown getParentAccessible ();
+
+	/**
 	 * unImplemented:
 	 *
 	 * placeholders for future expansion.
 	 */
 	void unImplemented ();
 	void unImplemented2 ();
-	void unImplemented3 ();
 };
 
 interface Control : Bonobo::Unknown {
