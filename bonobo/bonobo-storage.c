@@ -163,37 +163,16 @@ bonobo_storage_class_init (BonoboStorageClass *klass)
 	epv->erase        = impl_Bonobo_Storage_erase;
 }
 
-/**
- * bonobo_storage_get_type:
- *
- * Returns: The GtkType for the BonoboStorage class.
- */
-GtkType
-bonobo_storage_get_type (void)
+static void 
+bonobo_storage_init (GtkObject *object)
 {
-	static GtkType type = 0;
-
-	if (!type){
-		GtkTypeInfo info = {
-			"BonoboStorage",
-			sizeof (BonoboStorage),
-			sizeof (BonoboStorageClass),
-			(GtkClassInitFunc) bonobo_storage_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_Storage__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboStorageClass, epv),
-			&info);
-	}
-
-	return type;
+	/* nothing to do */
 }
+
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboStorage, 
+			   Bonobo_Storage,
+			   PARENT_TYPE,
+			   bonobo_storage);
 
 /**
  * bonobo_storage_open:

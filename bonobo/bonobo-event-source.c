@@ -216,16 +216,6 @@ bonobo_event_source_destroy (GtkObject *object)
 }
 
 static void
-bonobo_event_source_init (GtkObject *object)
-{
-	BonoboEventSource *event_source;
-
-	event_source = BONOBO_EVENT_SOURCE (object);
-	event_source->priv = g_new (BonoboEventSourcePrivate, 1);
-	event_source->priv->listeners = NULL;
-}
-
-static void
 bonobo_event_source_class_init (BonoboEventSourceClass *klass)
 {
 	GtkObjectClass *oclass = (GtkObjectClass *) klass;
@@ -240,40 +230,20 @@ bonobo_event_source_class_init (BonoboEventSourceClass *klass)
 	epv->removeListener      = impl_Bonobo_EventSource_removeListener;
 }
 
-/**
- * bonobo_event_source_get_type:
- * 
- * Registers the GtkType for this BonoboObject.
- * 
- * Return value: the type.
- **/
-GtkType
-bonobo_event_source_get_type (void)
+static void
+bonobo_event_source_init (GtkObject *object)
 {
-        static GtkType type = 0;
+	BonoboEventSource *event_source;
 
-        if (!type) {
-                GtkTypeInfo info = {
-                        "BonoboEventSource",
-                        sizeof (BonoboEventSource),
-                        sizeof (BonoboEventSourceClass),
-                        (GtkClassInitFunc) bonobo_event_source_class_init,
-                        (GtkObjectInitFunc) bonobo_event_source_init,
-                        NULL, /* reserved 1 */
-                        NULL, /* reserved 2 */
-                        (GtkClassInitFunc) NULL
-                };
-
-                type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_EventSource__init,
-			NULL,
-			GTK_STRUCT_OFFSET (BonoboEventSourceClass, epv),
-			&info);
-        }
-
-        return type;
+	event_source = BONOBO_EVENT_SOURCE (object);
+	event_source->priv = g_new (BonoboEventSourcePrivate, 1);
+	event_source->priv->listeners = NULL;
 }
+
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboEventSource, 
+			   Bonobo_EventSource,
+			   PARENT_TYPE,
+			   bonobo_event_source);
 
 /**
  * bonobo_event_source_new:

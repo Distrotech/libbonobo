@@ -34,36 +34,15 @@ bonobo_moniker_simple_class_init (BonoboMonikerClass *klass)
 	klass->resolve = simple_resolve;
 }
 
-/**
- * bonobo_moniker_simple_get_type:
- *
- * Returns: the GtkType for a BonoboMonikerSimple.
- */
-GtkType
-bonobo_moniker_simple_get_type (void)
+static void 
+bonobo_moniker_simple_init (GtkObject *object)
 {
-	static GtkType type = 0;
-
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboMonikerSimple",
-			sizeof (BonoboMonikerSimple),
-			sizeof (BonoboMonikerSimpleClass),
-			(GtkClassInitFunc)  bonobo_moniker_simple_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			bonobo_moniker_get_type (),
-			NULL, NULL, 0,
-			&info);
-	}
-
-	return type;
+	/* nothing to do */
 }
+
+BONOBO_GTK_TYPE_FUNC (BonoboMonikerSimple, 
+		      bonobo_moniker_get_type (),
+		      bonobo_moniker_simple);
 
 /**
  * bonobo_moniker_simple_construct:

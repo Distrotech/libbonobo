@@ -63,17 +63,6 @@ bonobo_listener_finalize (GtkObject *object)
 }
 
 static void
-bonobo_listener_init (GtkObject *object)
-{
-	BonoboListener *listener;
-
-	listener = BONOBO_LISTENER(object);
-	listener->priv = g_new (BonoboListenerPrivate, 1);
-	listener->priv->event_callback = NULL;
-	listener->priv->user_data = NULL;
-}
-
-static void
 bonobo_listener_class_init (BonoboListenerClass *klass)
 {
 	GtkObjectClass *oclass = (GtkObjectClass *)klass;
@@ -94,38 +83,21 @@ bonobo_listener_class_init (BonoboListenerClass *klass)
 	epv->event = impl_Bonobo_Listener_event;
 }
 
-/**
- * bonobo_listener_get_type:
- *
- * Returns: the GtkType for a BonoboListener.
- */
-GtkType
-bonobo_listener_get_type (void)
+static void
+bonobo_listener_init (GtkObject *object)
 {
-	static GtkType type = 0;
+	BonoboListener *listener;
 
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboListener",
-			sizeof (BonoboListener),
-			sizeof (BonoboListenerClass),
-			(GtkClassInitFunc) bonobo_listener_class_init,
-			(GtkObjectInitFunc) bonobo_listener_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_Listener__init,
-			NULL,
-			GTK_STRUCT_OFFSET (BonoboListenerClass, epv),
-			&info);
-	}
-
-	return type;
+	listener = BONOBO_LISTENER(object);
+	listener->priv = g_new (BonoboListenerPrivate, 1);
+	listener->priv->event_callback = NULL;
+	listener->priv->user_data = NULL;
 }
+
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboListener, 
+			   Bonobo_Listener,
+			   PARENT_TYPE,
+			   bonobo_listener);
 
 /**
  * bonobo_listener_new:

@@ -35,7 +35,7 @@ impl_Bonobo_Property_getType (PortableServer_Servant servant,
 	BonoboPropertyServant *ps = (BonoboPropertyServant *) servant;
 	BonoboArgType          type;
 
-	type = bonobo_property_bag_get_type (ps->pb, ps->property_name, ev);
+	type = bonobo_property_bag_get_property_type (ps->pb, ps->property_name, ev);
 	/* FIXME: we need to handle obscure cases like non existance of the property */
 
 	return (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) (type), ev);

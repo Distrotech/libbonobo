@@ -135,40 +135,13 @@ bonobo_persist_stream_class_init (BonoboPersistStreamClass *klass)
 static void
 bonobo_persist_stream_init (BonoboPersistStream *ps)
 {
+	/* nothing to do */
 }
 
-/**
- * bonobo_persist_stream_get_type:
- *
- * Returns: The GtkType for the BonoboPersistStream class.
- */
-GtkType
-bonobo_persist_stream_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboPersistStream",
-			sizeof (BonoboPersistStream),
-			sizeof (BonoboPersistStreamClass),
-			(GtkClassInitFunc) bonobo_persist_stream_class_init,
-			(GtkObjectInitFunc) bonobo_persist_stream_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_PersistStream__init,
-			NULL,
-			GTK_STRUCT_OFFSET (BonoboPersistStreamClass, epv),
-			&info);
-	}
-
-	return type;
-}
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboPersistStream,
+			   Bonobo_PersistStream,
+			   PARENT_TYPE,
+			   bonobo_persist_stream);
 
 /**
  * bonobo_persist_stream_construct:

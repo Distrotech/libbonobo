@@ -335,32 +335,16 @@ bonobo_running_context_class_init (BonoboRunningContextClass *klass)
 
 }
 
-static GtkType
-bonobo_running_context_get_type (void)
+static void 
+bonobo_running_context_init (GtkObject *object)
 {
-        static GtkType type = 0;
-
-        if (!type) {
-                GtkTypeInfo info = {
-                        "BonoboRunningContext",
-                        sizeof (BonoboRunningContext),
-                        sizeof (BonoboRunningContextClass),
-                        (GtkClassInitFunc) bonobo_running_context_class_init,
-                        (GtkObjectInitFunc) NULL,
-                        NULL, /* reserved 1 */
-                        NULL, /* reserved 2 */
-                        (GtkClassInitFunc) NULL
-                };
-
-                type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_RunningContext__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboRunningContextClass, epv),
-			&info);
-        }
-
-        return type;
+	/* nothing to do */
 }
+
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboRunningContext, 
+			   Bonobo_RunningContext,
+			   PARENT_TYPE,
+			   bonobo_running_context);
 
 BonoboObject *
 bonobo_running_context_new (void)

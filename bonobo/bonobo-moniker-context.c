@@ -65,32 +65,17 @@ bonobo_activation_context_class_init (BonoboActivationContextClass *klass)
 	epv->getExtender      = impl_Bonobo_ActivationContext_getExtender;
 }
 
-static GtkType
-bonobo_activation_context_get_type (void)
+static void 
+bonobo_activation_context_init (GtkObject *object)
 {
-        static GtkType type = 0;
-
-        if (!type) {
-                GtkTypeInfo info = {
-                        "BonoboActivationContext",
-                        sizeof (BonoboActivationContext),
-                        sizeof (BonoboActivationContextClass),
-                        (GtkClassInitFunc) bonobo_activation_context_class_init,
-                        (GtkObjectInitFunc) NULL,
-                        NULL, /* reserved 1 */
-                        NULL, /* reserved 2 */
-                        (GtkClassInitFunc) NULL
-                };
-
-                type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_ActivationContext__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboActivationContextClass, epv),
-			&info);
-        }
-
-        return type;
+	/* nothing to do */
 }
+
+static
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboActivationContext,
+			   Bonobo_ActivationContext,
+			   PARENT_TYPE,
+			   bonobo_activation_context);
 
 BonoboObject *
 bonobo_activation_context_new (void)

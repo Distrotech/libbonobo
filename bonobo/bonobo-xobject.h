@@ -18,7 +18,7 @@
 
 BEGIN_GNOME_DECLS
 
-#define BONOBO_OBJECT_TYPE_INFO(class_name, corba_name, parent_type, prefix)  \
+#define BONOBO_GTK_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)     \
 GtkType                                                                       \
 prefix##_get_type (void)                                                      \
 {                                                                             \
@@ -34,11 +34,33 @@ prefix##_get_type (void)                                                      \
 			(GtkObjectInitFunc)prefix##_init,                     \
 			NULL, NULL, (GtkClassInitFunc) NULL                   \
 		};                                                            \
-		ptype = (parent_type);                                        \
+		ptype = (parent);                                             \
 		type = bonobo_x_type_unique (ptype,                           \
 			POA_##corba_name##__init, POA_##corba_name##__fini,   \
 			GTK_STRUCT_OFFSET (class_name##Class, epv),           \
 			&info);                                               \
+	}                                                                     \
+	return type;                                                          \
+}
+ 
+#define BONOBO_GTK_TYPE_FUNC(class_name, parent, prefix)                      \
+GtkType                                                                       \
+prefix##_get_type (void)                                                      \
+{                                                                             \
+	GtkType ptype;                                                        \
+	static GtkType type = 0;                                              \
+                                                                              \
+	if (type == 0) {                                                      \
+		static GtkTypeInfo info = {                                   \
+			#class_name,                                          \
+			sizeof (class_name),                                  \
+			sizeof (class_name##Class),                           \
+			(GtkClassInitFunc)prefix##_class_init,                \
+			(GtkObjectInitFunc)prefix##_init,                     \
+			NULL, NULL, (GtkClassInitFunc) NULL                   \
+		};                                                            \
+		ptype = (parent);                                             \
+		type = bonobo_x_type_unique (ptype, NULL, NULL, 0, &info);    \
 	}                                                                     \
 	return type;                                                          \
 }

@@ -399,17 +399,6 @@ bonobo_moniker_destroy (GtkObject *object)
 }
 
 static void
-bonobo_moniker_init (GtkObject *object)
-{
-	BonoboMoniker *moniker = BONOBO_MONIKER (object);
-
-	moniker->priv = g_new (BonoboMonikerPrivate, 1);
-
-	moniker->priv->parent = CORBA_OBJECT_NIL;
-	moniker->priv->name   = NULL;
-}
-
-static void
 bonobo_moniker_class_init (BonoboMonikerClass *klass)
 {
 	GtkObjectClass *oclass = (GtkObjectClass *)klass;
@@ -436,37 +425,21 @@ bonobo_moniker_class_init (BonoboMonikerClass *klass)
 	epv->equal            = impl_equal;
 }
 
-/**
- * bonobo_moniker_get_type:
- *
- * Returns: the GtkType for a BonoboMoniker.
- */
-GtkType
-bonobo_moniker_get_type (void)
+static void
+bonobo_moniker_init (GtkObject *object)
 {
-	static GtkType type = 0;
+	BonoboMoniker *moniker = BONOBO_MONIKER (object);
 
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboMoniker",
-			sizeof (BonoboMoniker),
-			sizeof (BonoboMonikerClass),
-			(GtkClassInitFunc) bonobo_moniker_class_init,
-			(GtkObjectInitFunc) bonobo_moniker_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
+	moniker->priv = g_new (BonoboMonikerPrivate, 1);
 
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_Moniker__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboMonikerClass, epv),
-			&info);
-	}
-
-	return type;
+	moniker->priv->parent = CORBA_OBJECT_NIL;
+	moniker->priv->name   = NULL;
 }
+
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboMoniker, 
+			   Bonobo_Moniker,
+			   PARENT_TYPE,
+			   bonobo_moniker);
 
 /**
  * bonobo_moniker_construct:

@@ -1,6 +1,14 @@
 2001-02-08  Dietmar Maurer  <dietmar@ximian.com>
+	
+	* bonobo/bonobo-property-bag.h: renamed
+	bonobo_property_bag_get_type to
+	bonobo_property_bag_get_property_type,
+	and bonobo_property_get_gtk_type to bonobo_property_bag_get_type
 
-	* bonobo/bonobo-xobject.h (BONOBO_OBJECT_TYPE_INFO): new macro.
+	* bonobo/bonobo-xobject.h (BONOBO_GTK_TYPE_FUNC): new macro.
+	(BONOBO_GTK_TYPE_FUNC_FULL): new macro.
+
+	* *.c: use the new macros everywhere.
 
 2001-02-07  Pavel Cisler  <pavel@eazel.com>
 

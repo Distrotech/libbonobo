@@ -59,6 +59,17 @@ bonobo_item_handler_class_init (BonoboItemHandlerClass *klass)
 	epv->getObjectByName = impl_get_object;
 }
 
+static void 
+bonobo_item_handler_init (GtkObject *object)
+{
+	/* nothing to do */
+}
+
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboItemHandler, 
+			   Bonobo_ItemContainer,
+			   PARENT_TYPE,
+			   bonobo_item_handler);
+
 /**
  * bonobo_item_handler_construct:
  * @container: The handler object to construct
@@ -83,38 +94,6 @@ bonobo_item_handler_construct (BonoboItemHandler             *handler,
 	handler->user_data    = user_data;
 	
 	return handler;
-}
-
-/**
- * bonobo_item_handler_get_type:
- *
- * Returns: The GtkType for the BonoboItemContainer class.
- */
-GtkType
-bonobo_item_handler_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboItemHandler",
-			sizeof (BonoboItemHandler),
-			sizeof (BonoboItemHandlerClass),
-			(GtkClassInitFunc) bonobo_item_handler_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_ItemContainer__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboItemHandlerClass, epv),
-			&info);
-	}
-
-	return type;
 }
 
 /**

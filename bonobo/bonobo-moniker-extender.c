@@ -81,37 +81,16 @@ bonobo_moniker_extender_class_init (BonoboMonikerExtenderClass *klass)
 	epv->resolve = impl_Bonobo_MonikerExtender_resolve;
 }
 
-/**
- * bonobo_moniker__extender_get_type:
- *
- * Returns: the GtkType for a BonoboMonikerExtender.
- */
-GtkType
-bonobo_moniker_extender_get_type (void)
+static void
+bonobo_moniker_extender_init (GtkObject *object)
 {
-	static GtkType type = 0;
-
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboMonikerExtender",
-			sizeof (BonoboMonikerExtender),
-			sizeof (BonoboMonikerExtenderClass),
-			(GtkClassInitFunc)  bonobo_moniker_extender_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_MonikerExtender__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboMonikerExtenderClass, epv),
-			&info);
-	}
-
-	return type;
+	/* nothing to do */
 }
+
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboMonikerExtender, 
+			   Bonobo_MonikerExtender,
+			   PARENT_TYPE,
+			   bonobo_moniker_extender);
 
 /**
  * bonobo_moniker_extender_new:

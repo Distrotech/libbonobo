@@ -664,9 +664,9 @@ bonobo_property_bag_get_value (BonoboPropertyBag *pb,
 }
 
 BonoboArgType
-bonobo_property_bag_get_type (BonoboPropertyBag *pb, 
-			      const char        *name,
-			      CORBA_Environment *opt_ev)
+bonobo_property_bag_get_property_type (BonoboPropertyBag *pb, 
+				       const char        *name,
+				       CORBA_Environment *opt_ev)
 {
 	BonoboProperty *prop;
 
@@ -802,34 +802,7 @@ bonobo_property_bag_init (BonoboPropertyBag *pb)
 	pb->priv->props = g_hash_table_new (g_str_hash, g_str_equal);
 }
 
-/**
- * bonobo_property_bag_get_type:
- *
- * Returns: The GtkType corresponding to the BonoboPropertyBag class.
- */
-GtkType
-bonobo_property_bag_get_gtk_type (void)
-{
-	static GtkType type = 0;
-
-	if (! type) {
-		GtkTypeInfo info = {
-			"BonoboPropertyBag",
-			sizeof (BonoboPropertyBag),
-			sizeof (BonoboPropertyBagClass),
-			(GtkClassInitFunc) bonobo_property_bag_class_init,
-			(GtkObjectInitFunc) bonobo_property_bag_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_PropertyBag__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboPropertyBagClass, epv),
-			&info);
-	}
-
-	return type;
-}
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboPropertyBag, 
+			   Bonobo_PropertyBag,
+			   PARENT_TYPE,
+			   bonobo_property_bag);

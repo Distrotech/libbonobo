@@ -154,41 +154,15 @@ bonobo_progressive_data_sink_class_init (BonoboProgressiveDataSinkClass *klass)
 }
 
 static void
-bonobo_progressive_data_sink_init (BonoboProgressiveDataSink *psink)
+bonobo_progressive_data_sink_init (GtkObject *object)
 {
+	/* nothing to do */
 }
 
-/**
- * bonobo_progressive_data_sink_get_type:
- *
- * Returns: The GtkType for the BonoboProgressiveDataSink class type.
- */
-GtkType
-bonobo_progressive_data_sink_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type){
-		GtkTypeInfo info = {
-			"BonoboProgressiveDataSink",
-			sizeof (BonoboProgressiveDataSink),
-			sizeof (BonoboProgressiveDataSinkClass),
-			(GtkClassInitFunc) bonobo_progressive_data_sink_class_init,
-			(GtkObjectInitFunc) bonobo_progressive_data_sink_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_ProgressiveDataSink__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboProgressiveDataSinkClass, epv),
-			&info);
-	}
-
-	return type;
-} 
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboProgressiveDataSink, 
+			   Bonobo_ProgressiveDataSink,
+			   PARENT_TYPE,
+			   bonobo_progressive_data_sink);
 
 /**
  * bonobo_progressive_data_sink_construct:

@@ -194,37 +194,10 @@ bonobo_item_container_init (BonoboItemContainer *container)
 		g_str_hash, g_str_equal);
 }
 
-/**
- * bonobo_item_container_get_type:
- *
- * Returns: The GtkType for the BonoboItemContainer class.
- */
-GtkType
-bonobo_item_container_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboItemContainer",
-			sizeof (BonoboItemContainer),
-			sizeof (BonoboItemContainerClass),
-			(GtkClassInitFunc) bonobo_item_container_class_init,
-			(GtkObjectInitFunc) bonobo_item_container_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_ItemContainer__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboItemContainerClass, epv),
-			&info);
-	}
-
-	return type;
-}
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboItemContainer, 
+			   Bonobo_ItemContainer,
+			   PARENT_TYPE,
+			   bonobo_item_container);
 
 /**
  * bonobo_item_container_new:

@@ -54,13 +54,13 @@ typedef struct {
 	POA_Bonobo_PropertyBag__epv epv;
 } BonoboPropertyBagClass;
 
-#define BONOBO_PROPERTY_BAG_TYPE                (bonobo_property_bag_get_gtk_type ())
+#define BONOBO_PROPERTY_BAG_TYPE                (bonobo_property_bag_get_type ())
 #define BONOBO_PROPERTY_BAG(o)		        (GTK_CHECK_CAST ((o), BONOBO_PROPERTY_BAG_TYPE, BonoboPropertyBag))
 #define BONOBO_PROPERTY_BAG_CLASS(k)		(GTK_CHECK_CLASS_CAST((k), BONOBO_PROPERTY_BAG_TYPE, BonoboPropertyBagClass))
 #define BONOBO_IS_PROPERTY_BAG(o)		(GTK_CHECK_TYPE ((o), BONOBO_PROPERTY_BAG_TYPE))
 #define BONOBO_IS_PROPERTY_BAG_CLASS(k)		(GTK_CHECK_CLASS_TYPE ((k), BONOBO_PROPERTY_BAG_TYPE))
 
-GtkType		          bonobo_property_bag_get_gtk_type    (void);
+GtkType		          bonobo_property_bag_get_type        (void);
 BonoboPropertyBag	 *bonobo_property_bag_new	      (BonoboPropertyGetFn get_prop,
 							       BonoboPropertySetFn set_prop,
 							       gpointer            user_data);
@@ -98,7 +98,7 @@ void                      bonobo_property_bag_add_full         (BonoboPropertyBa
 void                      bonobo_property_bag_add_gtk_args     (BonoboPropertyBag  *pb,
 								GtkObject          *object);
 
-BonoboArgType             bonobo_property_bag_get_type         (BonoboPropertyBag *pb, 
+BonoboArgType             bonobo_property_bag_get_property_type (BonoboPropertyBag *pb, 
 								const char *name,
 								CORBA_Environment *opt_ev);
 

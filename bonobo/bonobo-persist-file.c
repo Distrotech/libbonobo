@@ -145,37 +145,15 @@ bonobo_persist_file_class_init (BonoboPersistFileClass *klass)
 }
 
 static void
-bonobo_persist_file_init (BonoboPersistFile *pf)
+bonobo_persist_file_init (GtkObject *object)
 {
+	/* nothing to do */
 }
 
-GtkType
-bonobo_persist_file_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type){
-		GtkTypeInfo info = {
-			"BonoboPersistFile",
-			sizeof (BonoboPersistFile),
-			sizeof (BonoboPersistFileClass),
-			(GtkClassInitFunc) bonobo_persist_file_class_init,
-			(GtkObjectInitFunc) bonobo_persist_file_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
-		};
-
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
-			POA_Bonobo_PersistFile__init,
-			NULL,
-			GTK_STRUCT_OFFSET (BonoboPersistFileClass, epv),
-			&info);
-	}
-
-	return type;
-}
+BONOBO_GTK_TYPE_FUNC_FULL (BonoboPersistFile, 
+			   Bonobo_PersistFile,
+			   PARENT_TYPE,
+			   bonobo_persist_file);
 
 /**
  * bonobo_persist_file_construct:
