@@ -43,6 +43,29 @@
   </any>
  */
 
+static gpointer
+ORBit_demarshal_allocate_mem(CORBA_TypeCode tc, gint nelements)
+{
+	size_t block_size;
+	gpointer retval = NULL;
+
+	if (!nelements)
+		return retval;
+
+	block_size = ORBit_gather_alloc_info(tc);
+
+	if (block_size) {
+		retval = ORBit_alloc_2 (block_size * nelements,
+				       (ORBit_free_childvals) ORBit_free_via_TypeCode,
+				       GINT_TO_POINTER (nelements),
+				       sizeof (CORBA_TypeCode));
+
+		*(CORBA_TypeCode *)((char *)retval-sizeof(ORBit_mem_info)-sizeof(CORBA_TypeCode)) = (CORBA_TypeCode)CORBA_Object_duplicate((CORBA_Object)tc, NULL);
+	}
+
+	return retval;
+}
+
 static void
 encode_type (BonoboUINode      *type_parent,
 	     CORBA_TypeCode     tc,
@@ -175,7 +198,26 @@ encode_value (BonoboUINode      *parent,
 		*value = ((guchar *)*value) + sizeof (CORBA_any);
 		break;
 
-	case CORBA_tk_sequence:
+	case CORBA_tk_sequence: {
+		CORBA_sequence_octet *sval = *value;
+		gpointer subval;
+
+		*value = ALIGN_ADDRESS (*value,
+					MAX(MAX(ALIGNOF_CORBA_LONG, ALIGNOF_CORBA_STRUCT), ALIGNOF_CORBA_POINTER));
+
+		snprintf (scratch, 127, "%d", sval->_length);
+		bonobo_ui_node_set_attr (node, "length", scratch);
+
+		subval = sval->_buffer;
+
+		for (i = 0; i < sval->_length; i++)
+			encode_value (node, tc->subtypes [0], &subval, ev);;
+	    
+		*value = ((guchar *)*value) + sizeof (CORBA_sequence_octet);
+		scratch [0] = '\0';
+		break;
+	}
+
 	case CORBA_tk_array:
 		for (i = 0; i < tc->length; i++)
 			encode_value (node, tc->subtypes [0], value, ev);
@@ -382,7 +424,9 @@ decode_type (BonoboUINode      *node,
 #define DO_DECODE(tckind,format,corbatype,value,align)				\
 	case tckind:								\
 		*value = ALIGN_ADDRESS (*value, align);				\
-		if (sscanf (scratch, format, (corbatype *) *value) != 1)	\
+		if (!scratch)							\
+			g_warning ("Null content");				\
+		else if (sscanf (scratch, format, (corbatype *) *value) != 1)	\
 			g_warning ("Broken scanf on '%s'", scratch);		\
 		*value = ((guchar *)*value) + sizeof (corbatype);		\
 		break;
@@ -391,38 +435,24 @@ decode_type (BonoboUINode      *node,
 	case tckind: {								\
 		CORBA_unsigned_long i;						\
 		*value = ALIGN_ADDRESS (*value, align);				\
-		if (sscanf (scratch, format, &i) != 1)				\
+		if (!scratch)							\
+			g_warning ("Null content");				\
+		else if (sscanf (scratch, format, &i) != 1)			\
 			g_warning ("Broken scanf on '%s'", scratch);		\
 		*(corbatype *) *value = i;					\
 		*value = ((guchar *)*value) + sizeof (corbatype);		\
 		break;								\
 	}
 
-static gpointer
+static void
 decode_value (BonoboUINode      *node,
 	      CORBA_TypeCode     tc,
+	      gpointer          *value,
 	      CORBA_Environment *ev)
 {
-	size_t   block_size;
-	gpointer value = NULL;
-	gpointer retval;
-	char    *scratch;
-
-	block_size = ORBit_gather_alloc_info (tc);
-
-	/* Uglier than your average butt cf.
-	   ORBit/src/corba_any/ORBit_demarshal_allocate_mem */
-	if (block_size) {
-		retval = ORBit_alloc_2 (
-			block_size,
-			(ORBit_free_childvals) ORBit_free_via_TypeCode,
-			GINT_TO_POINTER (1), sizeof(CORBA_TypeCode));
-		*(CORBA_TypeCode *)((char *) retval - sizeof (ORBit_mem_info) -
-				    sizeof (CORBA_TypeCode)) = (CORBA_TypeCode) CORBA_Object_duplicate((CORBA_Object)tc, NULL);
-	} else
-		retval = NULL;
-
-	value = retval;
+	BonoboUINode *l;
+	char *scratch;
+	int   i;
 
 	scratch = bonobo_ui_node_get_content (node);
 
@@ -431,32 +461,32 @@ decode_value (BonoboUINode      *node,
 	case CORBA_tk_void:
 		break;
 
-		DO_DECODEI (CORBA_tk_short,  "%d", CORBA_short, &value, ALIGNOF_CORBA_SHORT);
-		DO_DECODEI (CORBA_tk_ushort, "%u", CORBA_unsigned_short, &value, ALIGNOF_CORBA_SHORT);
-		DO_DECODEI (CORBA_tk_long,   "%d", CORBA_long, &value, ALIGNOF_CORBA_LONG);
-		DO_DECODEI (CORBA_tk_enum,   "%d", CORBA_enum, &value, ALIGNOF_CORBA_LONG);
-		DO_DECODEI (CORBA_tk_ulong,  "%u", CORBA_unsigned_long, &value, ALIGNOF_CORBA_LONG);
-		DO_DECODEI (CORBA_tk_boolean, "%d", CORBA_boolean, &value, 1);
-		DO_DECODEI (CORBA_tk_char,    "%d", CORBA_char, &value,  1);
-		DO_DECODEI (CORBA_tk_octet,   "%d", CORBA_octet, &value, 1);
-		DO_DECODEI (CORBA_tk_wchar,   "%d", CORBA_wchar, &value, ALIGNOF_CORBA_SHORT);
+		DO_DECODEI (CORBA_tk_short,  "%d", CORBA_short, value, ALIGNOF_CORBA_SHORT);
+		DO_DECODEI (CORBA_tk_ushort, "%u", CORBA_unsigned_short, value, ALIGNOF_CORBA_SHORT);
+		DO_DECODEI (CORBA_tk_long,   "%d", CORBA_long, value, ALIGNOF_CORBA_LONG);
+		DO_DECODEI (CORBA_tk_enum,   "%d", CORBA_enum, value, ALIGNOF_CORBA_LONG);
+		DO_DECODEI (CORBA_tk_ulong,  "%u", CORBA_unsigned_long, value, ALIGNOF_CORBA_LONG);
+		DO_DECODEI (CORBA_tk_boolean, "%d", CORBA_boolean, value, 1);
+		DO_DECODEI (CORBA_tk_char,    "%d", CORBA_char, value,  1);
+		DO_DECODEI (CORBA_tk_octet,   "%d", CORBA_octet, value, 1);
+		DO_DECODEI (CORBA_tk_wchar,   "%d", CORBA_wchar, value, ALIGNOF_CORBA_SHORT);
 
-		DO_DECODE (CORBA_tk_float,   "%g",  CORBA_float,   &value, ALIGNOF_CORBA_FLOAT);
-		DO_DECODE (CORBA_tk_double,  "%lg", CORBA_double,  &value, ALIGNOF_CORBA_DOUBLE);
+		DO_DECODE (CORBA_tk_float,   "%g",  CORBA_float,   value, ALIGNOF_CORBA_FLOAT);
+		DO_DECODE (CORBA_tk_double,  "%lg", CORBA_double,  value, ALIGNOF_CORBA_DOUBLE);
 
 /*
 #ifdef G_HAVE_GINT64
-		DO_DECODE (CORBA_tk_longlong,   "%ll",  CORBA_long_long, &value);
-		DO_DECODE (CORBA_tk_ulonglong,  "%ull", CORBA_unsigned_long_long, &value);
+		DO_DECODE (CORBA_tk_longlong,   "%ll",  CORBA_long_long, value);
+		DO_DECODE (CORBA_tk_ulonglong,  "%ull", CORBA_unsigned_long_long, value);
 #endif
-		DO_DECODE (CORBA_tk_longdouble, "%L", CORBA_long_double, &value);
+		DO_DECODE (CORBA_tk_longdouble, "%L", CORBA_long_double, value);
 */
 
 	case CORBA_tk_string:
 	case CORBA_tk_wstring:
-		value = ALIGN_ADDRESS (value, ALIGNOF_CORBA_POINTER);
-		*(CORBA_char **) value = CORBA_string_dup (scratch);
-		value = ((guchar *)value) + sizeof (CORBA_char *);
+		*value = ALIGN_ADDRESS (*value, ALIGNOF_CORBA_POINTER);
+		*(CORBA_char **) *value = CORBA_string_dup (scratch);
+		*value = ((guchar *)*value) + sizeof (CORBA_char *);
 		break;
 
 	case CORBA_tk_objref:
@@ -464,31 +494,90 @@ decode_value (BonoboUINode      *node,
 		break;
 
 	case CORBA_tk_TypeCode:
-		value = ALIGN_ADDRESS (value, ALIGNOF_CORBA_POINTER);
-		*(CORBA_TypeCode *) value = decode_type (node, ev);
-		value = ((guchar *) value) + sizeof (CORBA_TypeCode);
+		*value = ALIGN_ADDRESS (*value, ALIGNOF_CORBA_POINTER);
+		*(CORBA_TypeCode *) *value = decode_type (node, ev);
+		*value = ((guchar *) *value) + sizeof (CORBA_TypeCode);
 		break;
 
-/*	case CORBA_tk_any:
-		value = ALIGN_ADDRESS (value,
+	case CORBA_tk_any:
+		*value = ALIGN_ADDRESS (*value,
 				       MAX (ALIGNOF_CORBA_LONG,
 					    MAX (ALIGNOF_CORBA_POINTER, ALIGNOF_CORBA_STRUCT)));
-		*(CORBA_any **)value = bonobo_property_bag_xml_decode_any (node, ev);
-		value = ((guchar *) value) + sizeof (CORBA_any);
+		*(CORBA_any **)*value = bonobo_property_bag_xml_decode_any (node, ev);
+		*value = ((guchar *) *value) + sizeof (CORBA_any);
 		break;
 
-	case CORBA_tk_sequence:
-	case CORBA_tk_array:
-		for (i = 0; i < tc->length; i++) {
-			decode_value (node, tc->subtypes [0], wrvalue, ev);
+	case CORBA_tk_sequence: {
+		CORBA_sequence_octet *sval = *value;
+		gpointer subval;
+		char *txt = bonobo_ui_node_get_attr (node, "length");
+
+		if (!txt) {
+			g_warning ("No length on sequence");
+			break;
 		}
+
+		sval->_length = atoi (txt);
+		sval->_maximum = tc->length;
+		if (sval->_maximum && sval->_maximum <= sval->_length)
+			g_warning ("Sequence too long");
+
+		sval->_buffer = sval->_length ? ORBit_demarshal_allocate_mem (
+			tc->subtypes [0], sval->_length) : NULL;
+
+		*value = ALIGN_ADDRESS (*value,
+				      MAX(MAX(ALIGNOF_CORBA_LONG, ALIGNOF_CORBA_STRUCT), ALIGNOF_CORBA_POINTER));
+
+		subval = sval->_buffer;
+		i = 0;
+		for (l = bonobo_ui_node_children (node); l;
+		     l = bonobo_ui_node_next (l)) {
+			if (i < sval->_length)
+				decode_value (l, tc->subtypes [0], &subval, ev);
+			else
+				g_warning ("Too many sequence elements %d", i);
+			i++;
+		}
+		if (i < sval->_length)
+			g_warning ("Not enough sequence elements: %d should be %d",
+				   i, tc->length);
+
+		bonobo_ui_node_free_string (txt);
+		*value = ((guchar *)*value) + sizeof (CORBA_sequence_octet);
+		break;
+	}
+
+	case CORBA_tk_array:
+		i = 0;
+		for (l = bonobo_ui_node_children (node); l;
+		     l = bonobo_ui_node_next (l)) {
+			if (i < tc->length)
+				decode_value (l, tc->subtypes [0], value, ev);
+			else
+				g_warning ("Too many elements %d", tc->length);
+			i++;
+		}
+		if (i < tc->length)
+			g_warning ("Not enough elements: %d should be %d",
+				   i, tc->length);
 		break;
 
  	case CORBA_tk_struct:
 	case CORBA_tk_except:
-		for (i = 0; i < tc->sub_parts; i++)
-			encode_value (node, tc->subtypes [i], &value, ev);
-			break;*/
+		i = 0;
+		for (l = bonobo_ui_node_children (node); l;
+		     l = bonobo_ui_node_next (l)) {
+			if (i < tc->sub_parts)
+				decode_value (l, tc->subtypes [i], value, ev);
+			else
+				g_warning ("Too many structure elements %d",
+					   tc->sub_parts);
+			i++;
+		}
+		if (i < tc->sub_parts)
+			g_warning ("Not enough structure elements: %d should be %d",
+				   i, tc->sub_parts);
+		break;
 
 	case CORBA_tk_alias:
 	case CORBA_tk_union:
@@ -501,8 +590,6 @@ decode_value (BonoboUINode      *node,
 	}
 
 	bonobo_ui_node_free_string (scratch);
-
-	return retval;
 }
 
 CORBA_any *
@@ -512,6 +599,8 @@ bonobo_property_bag_xml_decode_any (BonoboUINode      *node,
 	CORBA_any *any;
 	CORBA_TypeCode tc;
 	BonoboUINode *l, *type = NULL, *value = NULL;
+	size_t   block_size;
+	gpointer retval;
 
 	g_return_val_if_fail (node != NULL, NULL);
 
@@ -529,17 +618,35 @@ bonobo_property_bag_xml_decode_any (BonoboUINode      *node,
 			value = l;
 	}
 	if (!type || !value) {
-		g_warning ("No type node under '%s'",
-			   bonobo_ui_node_get_name (node));
+		g_warning ("Missing type(%p) or value(%p) node under '%s'",
+			   type, value, bonobo_ui_node_get_name (node));
 		return NULL;
 	}
 
 	tc = decode_type (type, ev);
 	g_return_val_if_fail (tc != NULL, NULL);
 
+	block_size = ORBit_gather_alloc_info (tc);
+
+	/*
+	 * Uglier than your average butt cf.
+	 * ORBit/src/corba_any/ORBit_demarshal_allocate_mem
+	 */
+	if (block_size) {
+		retval = ORBit_alloc_2 (
+			block_size,
+			(ORBit_free_childvals) ORBit_free_via_TypeCode,
+			GINT_TO_POINTER (1), sizeof(CORBA_TypeCode));
+		*(CORBA_TypeCode *)((char *) retval - sizeof (ORBit_mem_info) -
+				    sizeof (CORBA_TypeCode)) = (CORBA_TypeCode) CORBA_Object_duplicate((CORBA_Object)tc, NULL);
+	} else
+		retval = NULL;
+
 	any = CORBA_any__alloc ();
 	any->_type = tc;
-	any->_value = decode_value (value, tc, ev);
-	
+	any->_value = retval;
+
+	decode_value (value, tc, &retval, ev);
+
 	return any;
 }

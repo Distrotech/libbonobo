@@ -1,3 +1,12 @@
+2000-11-27  Michael Meeks  <michael@helixcode.com>
+
+	* tests/Makefile.am (TESTS): add test-any
+
+	* bonobo/bonobo-property-bag-xml.c (ORBit_demarshal_allocate_mem):
+	cut and paste from ORBit: ug.
+
+	* test/test-any.c: update.
+
 2000-11-23  Mathieu Lacage  <mathieu@eazel.com>
 
 	Add necessary magic to make each of those file 
@@ -34,6 +43,8 @@
 	very badly, and should be available in the ORBit includes.
 
 	* acconfig.h: upd to cover.
+
+	* tests/test-any.c: add.
 
 2000-11-27  Michael Meeks  <michael@helixcode.com>
 

@@ -165,15 +165,20 @@ main (int argc, char *argv [])
 
 		any2 = bonobo_property_bag_xml_decode_any (node, ev);
 
+		g_assert (any2);
+		g_assert (ORBit_any_equivalent (any, any2, ev));
+		CHECK_OK (ev);
+
+		CORBA_free (any2);
+		CORBA_free (any);
+
 		bonobo_ui_node_free (node);
 	}
-
-	CORBA_free (any);
 
 	CORBA_Object_release ((CORBA_Object) dyn_any, ev);
 	CHECK_OK (ev);
 
 #endif /* HAVE_DYNANY */
 
-	return 1;
+	return 0;
 }
