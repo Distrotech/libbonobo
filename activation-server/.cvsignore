@@ -16,3 +16,4 @@ oafd
 stamp-parser
 y.output
 OAF_naming-service.oaf
+*-imodule.c

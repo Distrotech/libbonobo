@@ -11,3 +11,4 @@ liboaf-version.h
 stamp*idl
 oaf-factory.h
 oaf.h
+*-imodule.c

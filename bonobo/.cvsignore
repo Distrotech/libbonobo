@@ -15,3 +15,4 @@ Bonobo.h
 bonobo-marshal.c
 bonobo-marshal.h
 stamp-bonobo-marshal.h
+*-imodule.c
