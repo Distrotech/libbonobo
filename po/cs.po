@@ -5,15 +5,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.x\n"
-"POT-Creation-Date: 2003-12-08 23:52+0000\n"
-"PO-Revision-Date: 2003-11-25 16:15+0100\n"
+"Project-Id-Version: libbonobo VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-12 15:15+0100\n"
+"PO-Revision-Date: 2003-12-12 18:56+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:473
 msgid "Couldn't find which child the server was listed in"
@@ -61,13 +61,12 @@ msgid "Name service"
 msgstr "Pojmenovávací služba"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Pojmenovávací služba"
+msgstr "Služba upozornění"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Služba upozornění na aktivaci"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
