@@ -105,7 +105,7 @@ libbonoboinclude_HEADERS =		\
 	bonobo-xobject.h		\
 	libbonobo-init.h		\
 	libbonobo.h			\
-	stamp-bonobo-marshal.h		\
+	bonobo-marshal.h		\
 	libbonobo-init.h
 
 libbonobo_2_la_SOURCES =		\
@@ -151,14 +151,13 @@ BUILT_SOURCES = \
 	bonobo-marshal.c		\
 	bonobo-marshal.h
 
-bonobo-marshal.h stamp-bonobo-marshal.h: bonobo-marshal.list
+bonobo-marshal.h: bonobo-marshal.list
 	cd $(srcdir) \
 	&& glib-genmarshal --prefix=bonobo_marshal bonobo-marshal.list --header >> xgen-gmh \
 	&& (cmp -s xgen-gmh bonobo-marshal.h || cp xgen-gmh bonobo-marshal.h) \
-	&& rm -f xgen-gmh xgen-gmh~ \
-	&& echo timestamp > stamp-bonobo-marshal.h
+	&& rm -f xgen-gmh xgen-gmh~
 
-bonobo-marshal.c: stamp-bonobo-marshal.h
+bonobo-marshal.c: bonobo-marshal.list bonobo-marshal.h
 	cd $(srcdir) \
 	&& glib-genmarshal --prefix=bonobo_marshal bonobo-marshal.list --body >> xgen-gmc \
 	&& cp xgen-gmc bonobo-marshal.c \
