@@ -1,3 +1,12 @@
+2000-04-25  Maciej Stachowiak  <mjs@eazel.com>
+
+	* samples/controls/sample-control-container.c,
+	samples/controls/bonobo-clock-control.c,
+	samples/controls/bonobo-calculator-control.c: Add forgotten
+	USING_OAF conditionals which made this not work with
+	gnorba. Thanks to Michael Meeks <michael@helixcode.com> for
+	catching this problem.
+
 2000-04-24  Arjan Scherpenisse  <Arjan Scherpenisse <acscherp@wins.uva.nl>>
 
 	* configure.in (ALL_LINGUAS): Added dutch translation
