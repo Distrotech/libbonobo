@@ -1,3 +1,10 @@
+2001-03-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo-ui-config-widget.c: Added #include <config.h> to
+	make the config dialog translated.
+	* bonobo-ui-compat.c: #include <config.h>
+	* bonobo-ui-engine-config.c: Same here.
+		
 2001-03-22  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo/Makefile.am: Remove $(GNOME_LIBS) entirely from libbonobo
