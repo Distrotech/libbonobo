@@ -446,7 +446,7 @@ impl_Bonobo_ObjectDirectory_activate (impl_POA_Bonobo_ObjectDirectory * servant,
 
         update_registry (servant);
 
-        if (!(flags & Bonobo_FLAG_PRIVATE)) {
+        if (!(flags & Bonobo_ACTIVATION_FLAG_PRIVATE)) {
                 retval = od_get_active_server (servant, iid, ctx, ev);
 
                 if (retval != CORBA_OBJECT_NIL) {
@@ -454,7 +454,7 @@ impl_Bonobo_ObjectDirectory_activate (impl_POA_Bonobo_ObjectDirectory * servant,
                 }
         }
 
-	if (flags & Bonobo_FLAG_EXISTING_ONLY) {
+	if (flags & Bonobo_ACTIVATION_FLAG_EXISTING_ONLY) {
 		return CORBA_OBJECT_NIL;
         }
 
@@ -511,21 +511,21 @@ impl_Bonobo_ObjectDirectory_register_new (impl_POA_Bonobo_ObjectDirectory * serv
 
 	if (!CORBA_Object_is_nil (oldobj, ev)) {
 		if (!CORBA_Object_non_existent (oldobj, ev))
-			return Bonobo_REG_ALREADY_ACTIVE;
+			return Bonobo_ACTIVATION_REG_ALREADY_ACTIVE;
 		else
 			CORBA_Object_release (oldobj, ev);
 	}
 
 
 	if (!g_hash_table_lookup (servant->by_iid, actual_iid))
-		return Bonobo_REG_NOT_LISTED;
+		return Bonobo_ACTIVATION_REG_NOT_LISTED;
 
 	g_hash_table_insert (servant->active_servers,
 			     oldobj ? iid : g_strdup (iid),
 			     CORBA_Object_duplicate (obj, ev));
 	servant->time_active_changed = time (NULL);
 
-	return Bonobo_REG_SUCCESS;
+	return Bonobo_ACTIVATION_REG_SUCCESS;
 }
 
 static void

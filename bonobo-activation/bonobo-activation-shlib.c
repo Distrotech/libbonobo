@@ -76,7 +76,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
 	char *filename;
 	const char *iid;
 
-	g_return_val_if_fail (sh->res._d == Bonobo_RESULT_SHLIB,
+	g_return_val_if_fail (sh->res._d == Bonobo_ACTIVATION_RESULT_SHLIB,
 			      CORBA_OBJECT_NIL);
 	g_return_val_if_fail (sh->res._u.res_shlib._length > 0,
 			      CORBA_OBJECT_NIL);

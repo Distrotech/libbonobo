@@ -44,7 +44,7 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 {
 	int i, n;
 	xmlNodePtr sub;
-	Bonobo_Property *curprop;
+	Bonobo_ActivationProperty *curprop;
 
 	for (n = 0, sub = node->xmlChildrenNode; sub; sub = sub->next) {
 		if (sub->type != XML_ELEMENT_NODE) {
@@ -60,7 +60,7 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 	}
 
 	server->props._length = n;
-	server->props._buffer = g_new0 (Bonobo_Property, n);
+	server->props._buffer = g_new0 (Bonobo_ActivationProperty, n);
 
         curprop = server->props._buffer;
 
@@ -89,7 +89,7 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 			int j, o;
 			xmlNodePtr sub2;
 
-			curprop->v._d = Bonobo_P_STRINGV;
+			curprop->v._d = Bonobo_ACTIVATION_P_STRINGV;
 
 			for (o = 0, sub2 = sub->xmlChildrenNode; sub2;
 			     sub2 = sub2->next) {
@@ -129,20 +129,20 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 		} else if (strcasecmp (type, "number") == 0) {
 			valuestr = xmlGetProp (sub, "value");
 
-			curprop->v._d = Bonobo_P_NUMBER;
+			curprop->v._d = Bonobo_ACTIVATION_P_NUMBER;
 			curprop->v._u.value_number = atof (valuestr);
 
 			xmlFree (valuestr);
 		} else if (strcasecmp (type, "boolean") == 0) {
 			valuestr = xmlGetProp (sub, "value");
-			curprop->v._d = Bonobo_P_BOOLEAN;
+			curprop->v._d = Bonobo_ACTIVATION_P_BOOLEAN;
 			curprop->v._u.value_boolean =
 				od_string_to_boolean (valuestr);
 			xmlFree (valuestr);
 		} else {
 			valuestr = xmlGetProp (sub, "value");
 			/* Assume string */
-			curprop->v._d = Bonobo_P_STRING;
+			curprop->v._d = Bonobo_ACTIVATION_P_STRING;
 			if (valuestr != NULL) {
 				curprop->v._u.value_string =
 					CORBA_string_dup (valuestr);

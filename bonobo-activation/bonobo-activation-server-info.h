@@ -28,20 +28,20 @@
 
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 
-Bonobo_Property   *bonobo_server_info_prop_find        (Bonobo_ServerInfo                      *server,
-                                                        const char                             *prop_name);
-const char        *bonobo_server_info_prop_lookup      (Bonobo_ServerInfo                      *server,
-                                                        const char                             *prop_name,
-                                                        GSList                                 *i18n_languages);
-void               Bonobo_PropertyValue_copy           (Bonobo_PropertyValue                   *copy,
-                                                        const Bonobo_PropertyValue             *original);
-void               Bonobo_Property_copy                (Bonobo_Property                        *copy,
-                                                        const Bonobo_Property                  *original);
-void               CORBA_sequence_Bonobo_Property_copy (CORBA_sequence_Bonobo_Property         *copy,
-                                                        const CORBA_sequence_Bonobo_Property   *original);
-void               Bonobo_ServerInfo_copy              (Bonobo_ServerInfo                      *copy, 
-                                                        const Bonobo_ServerInfo                *original);
-Bonobo_ServerInfo *Bonobo_ServerInfo_duplicate         (const Bonobo_ServerInfo                *original);
+Bonobo_ActivationProperty *bonobo_server_info_prop_find        (Bonobo_ServerInfo                      *server,
+                                                                const char                             *prop_name);
+const char                *bonobo_server_info_prop_lookup      (Bonobo_ServerInfo                      *server,
+                                                                const char                             *prop_name,
+                                                                GSList                                 *i18n_languages);
+void                       Bonobo_ActivationPropertyValue_copy           (Bonobo_ActivationPropertyValue                   *copy,
+                                                                          const Bonobo_ActivationPropertyValue             *original);
+void                       Bonobo_ActivationProperty_copy                (Bonobo_ActivationProperty                        *copy,
+                                                                          const Bonobo_ActivationProperty                  *original);
+void                       CORBA_sequence_Bonobo_ActivationProperty_copy (CORBA_sequence_Bonobo_ActivationProperty         *copy,
+                                                                          const CORBA_sequence_Bonobo_ActivationProperty   *original);
+void                       Bonobo_ServerInfo_copy              (Bonobo_ServerInfo                      *copy, 
+                                                                const Bonobo_ServerInfo                *original);
+Bonobo_ServerInfo         *Bonobo_ServerInfo_duplicate         (const Bonobo_ServerInfo                *original);
 
 #endif /* BONOBO_ACTIVATION_SERVER_INFO_H */
 

@@ -45,21 +45,21 @@ module Bonobo {
         interface ActivationContext;
 
         typedef long ActivationFlags;
-        const ActivationFlags FLAG_NO_LOCAL = 1<<0; // No shared libraries
-        const ActivationFlags FLAG_PRIVATE = 1<<1; // start a new server and don't register it
-        const ActivationFlags FLAG_EXISTING_ONLY = 1<<2; // don't start the server if not started
+        const ActivationFlags ACTIVATION_FLAG_NO_LOCAL = 1<<0; // No shared libraries
+        const ActivationFlags ACTIVATION_FLAG_PRIVATE = 1<<1; // start a new server and don't register it
+        const ActivationFlags ACTIVATION_FLAG_EXISTING_ONLY = 1<<2; // don't start the server if not started
 
         /* ActivationResult */
         enum ActivationResultType { 
-                RESULT_OBJECT, 
-                RESULT_SHLIB, 
-                RESULT_NONE 
+                ACTIVATION_RESULT_OBJECT, 
+                ACTIVATION_RESULT_SHLIB, 
+                ACTIVATION_RESULT_NONE 
         };
 
         union ActivationResultData switch (ActivationResultType) {
-        case RESULT_OBJECT:
+        case ACTIVATION_RESULT_OBJECT:
                 Object res_object;
-        case RESULT_SHLIB:
+        case ACTIVATION_RESULT_SHLIB:
                 Bonobo::StringList res_shlib;
         };
 
@@ -68,28 +68,28 @@ module Bonobo {
                 ActivationResultData res;
         };
 
-        /* Property */
-        enum PropertyType { 
-                P_STRING, 
-                P_NUMBER, 
-                P_BOOLEAN, 
-                P_STRINGV 
+        /* ActivationProperty */
+        enum ActivationPropertyType { 
+                ACTIVATION_P_STRING, 
+                ACTIVATION_P_NUMBER, 
+                ACTIVATION_P_BOOLEAN, 
+                ACTIVATION_P_STRINGV 
         };
 
-        union PropertyValue switch (PropertyType) {
-        case P_STRING:
+        union ActivationPropertyValue switch (ActivationPropertyType) {
+        case ACTIVATION_P_STRING:
                 string value_string;
-        case P_NUMBER:
+        case ACTIVATION_P_NUMBER:
                 double value_number;
-        case P_BOOLEAN:
+        case ACTIVATION_P_BOOLEAN:
                 boolean value_boolean;
-        case P_STRINGV:
+        case ACTIVATION_P_STRINGV:
                 Bonobo::StringList value_stringv;
         };
 
-        struct Property {
+        struct ActivationProperty {
                 string name;
-                PropertyValue v;
+                ActivationPropertyValue v;
         };
 
         /* Server */
@@ -100,7 +100,7 @@ module Bonobo {
                 string location_info;
                 string username, hostname, domain;
 		
-                sequence<Property> props;
+                sequence<ActivationProperty> props;
         };
 
         typedef sequence<ServerInfo> ServerInfoList;
@@ -118,10 +118,10 @@ module Bonobo {
         };
 
         enum RegistrationResult { 
-                REG_SUCCESS, 
-                REG_NOT_LISTED, 
-                REG_ALREADY_ACTIVE, 
-                REG_ERROR 
+                ACTIVATION_REG_SUCCESS, 
+                ACTIVATION_REG_NOT_LISTED, 
+                ACTIVATION_REG_ALREADY_ACTIVE, 
+                ACTIVATION_REG_ERROR 
         };
 
         interface ActivationCallback : Bonobo::Unknown {

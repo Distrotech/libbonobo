@@ -545,12 +545,12 @@ ac_do_activation (impl_POA_Bonobo_ActivationContext * servant,
 	 * far too quickly :-) */
 	
 	if (activatable && !strcmp (activatable->server_type, "shlib")
-	    && !(flags & Bonobo_FLAG_NO_LOCAL)
+	    && !(flags & Bonobo_ACTIVATION_FLAG_NO_LOCAL)
 	    && (hostname && !strcmp (activatable->hostname, hostname))) {
 		int j;
 		char tbuf[512];
 		
-		out->res._d = Bonobo_RESULT_SHLIB;		
+		out->res._d = Bonobo_ACTIVATION_RESULT_SHLIB;		
 
 		/* Here is an explanation as to why we add 2 to num_layers.
 		 * At the end of the string list, after all the factory iids are added
@@ -589,7 +589,7 @@ ac_do_activation (impl_POA_Bonobo_ActivationContext * servant,
 						      ev);
 		if (ev->_major == CORBA_NO_EXCEPTION) {
 			char tbuf[512];
-			out->res._d = Bonobo_RESULT_OBJECT;
+			out->res._d = Bonobo_ACTIVATION_RESULT_OBJECT;
 			out->res._u.res_object = retval;
 			g_snprintf (tbuf, sizeof (tbuf),
 				    "OAFAID:[%s,%s,%s,%s]", activatable->iid,
@@ -630,9 +630,9 @@ impl_Bonobo_ActivationContext_activate (PortableServer_Servant _servant,
         }
 
 	retval = Bonobo_ActivationResult__alloc ();
-	retval->res._d = Bonobo_RESULT_NONE;
+	retval->res._d = Bonobo_ACTIVATION_RESULT_NONE;
 
-	for (i = 0; (retval->res._d == Bonobo_RESULT_NONE) && items[i]
+	for (i = 0; (retval->res._d == Bonobo_ACTIVATION_RESULT_NONE) && items[i]
 	     && (i < servant->total_servers); i++) {
 		curitem = items[i];
 
@@ -640,7 +640,7 @@ impl_Bonobo_ActivationContext_activate (PortableServer_Servant _servant,
 				  ctx, ev);
 	}
 
-	if (retval->res._d == Bonobo_RESULT_NONE)
+	if (retval->res._d == Bonobo_ACTIVATION_RESULT_NONE)
 		retval->aid = CORBA_string_dup ("");
 
       out:
@@ -689,9 +689,9 @@ impl_Bonobo_ActivationContext_activate_async(PortableServer_Servant _servant,
         }
 
 	retval = Bonobo_ActivationResult__alloc ();
-	retval->res._d = Bonobo_RESULT_NONE;
+	retval->res._d = Bonobo_ACTIVATION_RESULT_NONE;
 
-	for (i = 0; (retval->res._d == Bonobo_RESULT_NONE) && items[i]
+	for (i = 0; (retval->res._d == Bonobo_ACTIVATION_RESULT_NONE) && items[i]
 	     && (i < servant->total_servers); i++) {
 		curitem = items[i];
 
@@ -699,7 +699,7 @@ impl_Bonobo_ActivationContext_activate_async(PortableServer_Servant _servant,
 				  ctx, ev);
 	}
 
-	if (retval->res._d == Bonobo_RESULT_NONE)
+	if (retval->res._d == Bonobo_ACTIVATION_RESULT_NONE)
 		retval->aid = CORBA_string_dup ("");
 
 

@@ -226,13 +226,13 @@ bonobo_activation_activate (const char *requirements, char *const *selection_ord
 
 
 	switch (res->res._d) {
-	case Bonobo_RESULT_SHLIB:
+	case Bonobo_ACTIVATION_RESULT_SHLIB:
 		retval = bonobo_activation_activate_shlib_server (res, ev);
 		break;
-	case Bonobo_RESULT_OBJECT:
+	case Bonobo_ACTIVATION_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (res->res._u.res_object, ev);
 		break;
-	case Bonobo_RESULT_NONE:
+	case Bonobo_ACTIVATION_RESULT_NONE:
 	default:
 		break;
 	}
@@ -286,7 +286,8 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
 		CORBA_exception_init (&myev);
 	}
 
-        ac = bonobo_activation_internal_activation_context_get_extended ((flags & Bonobo_FLAG_EXISTING_ONLY) != 0, ev);
+        ac = bonobo_activation_internal_activation_context_get_extended (
+                (flags & Bonobo_ACTIVATION_FLAG_EXISTING_ONLY) != 0, ev);
 
         if (ac == CORBA_OBJECT_NIL)
                 goto out;
@@ -307,13 +308,13 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
 		goto out;
 
 	switch (res->res._d) {
-	case Bonobo_RESULT_SHLIB:
+	case Bonobo_ACTIVATION_RESULT_SHLIB:
                 retval = bonobo_activation_activate_shlib_server (res, ev);
 		break;
-	case Bonobo_RESULT_OBJECT:
+	case Bonobo_ACTIVATION_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (res->res._u.res_object, ev);
 		break;
-	case Bonobo_RESULT_NONE:
+	case Bonobo_ACTIVATION_RESULT_NONE:
 	default:
 		break;
 	}

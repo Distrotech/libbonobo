@@ -38,9 +38,9 @@
  * Tries to find a server with the given property. Returns
  * NULL if not found.
  *
- * Return value: a pointer to the %Bonobo_Property structure.
+ * Return value: a pointer to the %Bonobo_ActivationProperty structure.
  */
-Bonobo_Property *
+Bonobo_ActivationProperty *
 bonobo_server_info_prop_find (Bonobo_ServerInfo *server,
                            const char *prop_name)
 {
@@ -68,7 +68,7 @@ bonobo_server_info_prop_lookup (Bonobo_ServerInfo * server, const char *prop_nam
 			     GSList * i18n_languages)
 {
 	GSList *cur;
-	Bonobo_Property *prop;
+	Bonobo_ActivationProperty *prop;
         const char *retval;
         char *prop_name_buf;
         char short_lang[3];
@@ -95,7 +95,7 @@ bonobo_server_info_prop_lookup (Bonobo_ServerInfo * server, const char *prop_nam
 	} 
 
         prop = bonobo_server_info_prop_find (server, prop_name);
-        if (prop != NULL && prop->v._d == Bonobo_P_STRING)
+        if (prop != NULL && prop->v._d == Bonobo_ACTIVATION_P_STRING)
                 return prop->v._u.value_string;
 
 	return NULL;
@@ -118,20 +118,20 @@ CORBA_sequence_CORBA_string_copy (CORBA_sequence_CORBA_string *copy, const CORBA
 }
 
 void
-Bonobo_PropertyValue_copy (Bonobo_PropertyValue *copy, const Bonobo_PropertyValue *original)
+Bonobo_ActivationPropertyValue_copy (Bonobo_ActivationPropertyValue *copy, const Bonobo_ActivationPropertyValue *original)
 {
 	copy->_d = original->_d;
 	switch (original->_d) {
-	case Bonobo_P_STRING:
+	case Bonobo_ACTIVATION_P_STRING:
 		copy->_u.value_string =	CORBA_string_dup (original->_u.value_string);
 		break;
-	case Bonobo_P_NUMBER:
+	case Bonobo_ACTIVATION_P_NUMBER:
 		copy->_u.value_number =	original->_u.value_number;
 		break;
-	case Bonobo_P_BOOLEAN:
+	case Bonobo_ACTIVATION_P_BOOLEAN:
 		copy->_u.value_boolean = original->_u.value_boolean;
 		break;
-	case Bonobo_P_STRINGV:
+	case Bonobo_ACTIVATION_P_STRINGV:
 		CORBA_sequence_CORBA_string_copy
 			(&copy->_u.value_stringv,
 			 &original->_u.value_stringv);
@@ -142,23 +142,23 @@ Bonobo_PropertyValue_copy (Bonobo_PropertyValue *copy, const Bonobo_PropertyValu
 }
 
 void
-Bonobo_Property_copy (Bonobo_Property *copy, const Bonobo_Property *original)
+Bonobo_ActivationProperty_copy (Bonobo_ActivationProperty *copy, const Bonobo_ActivationProperty *original)
 {
 	copy->name = CORBA_string_dup (original->name);
-	Bonobo_PropertyValue_copy (&copy->v, &original->v);
+	Bonobo_ActivationPropertyValue_copy (&copy->v, &original->v);
 }
 
 void
-CORBA_sequence_Bonobo_Property_copy (CORBA_sequence_Bonobo_Property *copy, const CORBA_sequence_Bonobo_Property *original)
+CORBA_sequence_Bonobo_ActivationProperty_copy (CORBA_sequence_Bonobo_ActivationProperty *copy, const CORBA_sequence_Bonobo_ActivationProperty *original)
 {
 	int i;
 
 	copy->_maximum = original->_length;
 	copy->_length = original->_length;
-	copy->_buffer = CORBA_sequence_Bonobo_Property_allocbuf (original->_length);
+	copy->_buffer = CORBA_sequence_Bonobo_ActivationProperty_allocbuf (original->_length);
 
 	for (i = 0; i < original->_length; i++) {
-		Bonobo_Property_copy (&copy->_buffer[i], &original->_buffer[i]);
+		Bonobo_ActivationProperty_copy (&copy->_buffer[i], &original->_buffer[i]);
 	}
 
 	CORBA_sequence_set_release (copy, TRUE);
@@ -173,7 +173,7 @@ Bonobo_ServerInfo_copy (Bonobo_ServerInfo *copy, const Bonobo_ServerInfo *origin
 	copy->username = CORBA_string_dup (original->username);
 	copy->hostname = CORBA_string_dup (original->hostname);
 	copy->domain = CORBA_string_dup (original->domain);
-	CORBA_sequence_Bonobo_Property_copy (&copy->props, &original->props);
+	CORBA_sequence_Bonobo_ActivationProperty_copy (&copy->props, &original->props);
 }
 
 

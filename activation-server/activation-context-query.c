@@ -865,27 +865,27 @@ qexp_evaluate_id (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 			retval.value_known = FALSE;
 
 			if (i < si->props._length) {
-				Bonobo_PropertyValue *av;
+				Bonobo_ActivationPropertyValue *av;
 
 				av = &si->props._buffer[i].v;
 
 				switch (av->_d) {
-				case Bonobo_P_STRING:
+				case Bonobo_ACTIVATION_P_STRING:
 					retval.type = CONST_STRING;
 					retval.u.v_string =
 						av->_u.value_string;
 					break;
-				case Bonobo_P_NUMBER:
+				case Bonobo_ACTIVATION_P_NUMBER:
 					retval.type = CONST_NUMBER;
 					retval.u.v_number =
 						av->_u.value_number;
 					break;
-				case Bonobo_P_BOOLEAN:
+				case Bonobo_ACTIVATION_P_BOOLEAN:
 					retval.type = CONST_BOOLEAN;
 					retval.u.v_boolean =
 						av->_u.value_boolean;
 					break;
-				case Bonobo_P_STRINGV:
+				case Bonobo_ACTIVATION_P_STRINGV:
 					{
 						/* FIXME bugzilla.eazel.com 2729: it would be nice to replace the
 						 * NULL-terminated string arrays with

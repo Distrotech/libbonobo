@@ -166,13 +166,13 @@ impl_Bonobo_ActivationCallback_report_activation_succeeded
         }
 
 	switch (result->res._d) {
-	case Bonobo_RESULT_SHLIB:
+	case Bonobo_ACTIVATION_RESULT_SHLIB:
                 retval = bonobo_activation_activate_shlib_server (result, ev);
 		break;
-	case Bonobo_RESULT_OBJECT:
+	case Bonobo_ACTIVATION_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (result->res._u.res_object, ev);
 		break;
-	case Bonobo_RESULT_NONE:
+	case Bonobo_ACTIVATION_RESULT_NONE:
                 retval = CORBA_OBJECT_NIL;
                 break;
 	default:

@@ -22,6 +22,7 @@ bonobo_activationincludedir = $(includedir)/bonobo-activation-2.0/bonobo-activat
 bonobo_activationinclude_HEADERS=		\
 	Bonobo_Unknown.h			\
 	Bonobo_GenericFactory.h			\
+	bonobo-activation.h			\
 	bonobo-activation-async.h		\
 	bonobo-activation-base-service.h	\
 	bonobo-activation-id.h			\

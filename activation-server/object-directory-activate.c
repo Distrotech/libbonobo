@@ -72,24 +72,22 @@ od_server_activate_factory (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
 	Bonobo_ActivationResult *res;
 	Bonobo_StringList params = { 0 };
 
-	res =
-		Bonobo_ActivationContext_activate_from_id (actinfo->ac,
-							si->location_info,
-							((actinfo->flags |
-							  Bonobo_FLAG_NO_LOCAL) &
-							 (~Bonobo_FLAG_PRIVATE)),
-							actinfo->ctx,
-							ev);
+	res = Bonobo_ActivationContext_activate_from_id (
+                actinfo->ac, si->location_info,
+                ((actinfo->flags |
+                  Bonobo_ACTIVATION_FLAG_NO_LOCAL) &
+                 (~Bonobo_ACTIVATION_FLAG_PRIVATE)),
+                actinfo->ctx, ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
 
 	switch (res->res._d) {
-	case Bonobo_RESULT_NONE:
+	case Bonobo_ACTIVATION_RESULT_NONE:
 		CORBA_free (res);
 		goto out;
 		break;
-	case Bonobo_RESULT_OBJECT:
+	case Bonobo_ACTIVATION_RESULT_OBJECT:
 		factory = res->res._u.res_object;
 		break;
 	default:
@@ -160,7 +158,7 @@ od_server_activate_exe (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
         if (ev->_major != CORBA_NO_EXCEPTION)
 	  iorstr = NULL;
 
-        if(actinfo->flags & Bonobo_FLAG_PRIVATE) {
+        if(actinfo->flags & Bonobo_ACTIVATION_FLAG_PRIVATE) {
                 extra_arg = g_alloca (sizeof ("--oaf-private"));
                 args[i++] = extra_arg;
                 g_snprintf (extra_arg, sizeof ("--oaf-private"),

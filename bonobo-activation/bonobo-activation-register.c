@@ -91,14 +91,14 @@ bonobo_activation_active_server_register (const char *registration_id,
 	actid = bonobo_activation_iid_get ();
 
         if (actid && strcmp (actid, iid) == 0 && bonobo_activation_private) {
-                retval = Bonobo_REG_SUCCESS;
+                retval = Bonobo_ACTIVATION_REG_SUCCESS;
         } else {
                 od = bonobo_activation_object_directory_get (bonobo_activation_username_get (),
                                                              bonobo_activation_hostname_get (),
                                                              NULL);
                 
                 if (CORBA_Object_is_nil (od, &ev)) {
-                        return Bonobo_REG_ERROR;
+                        return Bonobo_ACTIVATION_REG_ERROR;
                 }
                 
                 retval = Bonobo_ObjectDirectory_register_new (od, 

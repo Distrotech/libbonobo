@@ -30,6 +30,7 @@
 #include <string.h>
 
 #include <bonobo-activation/bonobo-activation.h>
+#include <bonobo-activation/bonobo-activation-private.h>
 
 static char *acior = NULL, *specs = NULL;
 static int do_query;
@@ -56,22 +57,22 @@ od_dump_list (Bonobo_ServerInfoList * list)
 			 list->_buffer[i].server_type,
 			 list->_buffer[i].location_info);
 		for (j = 0; j < list->_buffer[i].props._length; j++) {
-			Bonobo_Property *prop =
+			Bonobo_ActivationProperty *prop =
 				&(list->_buffer[i].props._buffer[j]);
 			g_print ("    %s = ", prop->name);
 			switch (prop->v._d) {
-			case Bonobo_P_STRING:
+			case Bonobo_ACTIVATION_P_STRING:
 				g_print ("\"%s\"\n", prop->v._u.value_string);
 				break;
-			case Bonobo_P_NUMBER:
+			case Bonobo_ACTIVATION_P_NUMBER:
 				g_print ("%f\n", prop->v._u.value_number);
 				break;
-			case Bonobo_P_BOOLEAN:
+			case Bonobo_ACTIVATION_P_BOOLEAN:
 				g_print ("%s\n",
 					 prop->v.
 					 _u.value_boolean ? "TRUE" : "FALSE");
 				break;
-			case Bonobo_P_STRINGV:
+			case Bonobo_ACTIVATION_P_STRINGV:
 				g_print ("[");
 				for (k = 0;
 				     k < prop->v._u.value_stringv._length;
@@ -127,7 +128,7 @@ main (int argc, char *argv[])
 			do_usage_exit = TRUE;
 		}
 	} else
-		ac = bonobo_activation_context_get ();
+		ac = bonobo_activation_activation_context_get ();
 
 	poptFreeContext (ctx);
 
@@ -185,7 +186,7 @@ main (int argc, char *argv[])
 		case CORBA_NO_EXCEPTION:
 			g_print ("Activation ID \"%s\" ", res->aid);
 			switch (res->res._d) {
-			case Bonobo_RESULT_OBJECT:
+			case Bonobo_ACTIVATION_RESULT_OBJECT:
 				g_print ("RESULT_OBJECT\n");
 				acior =
 					CORBA_ORB_object_to_string (orb,
@@ -194,10 +195,10 @@ main (int argc, char *argv[])
 								    &ev);
 				g_print ("%s\n", acior);
 				break;
-			case Bonobo_RESULT_SHLIB:
+			case Bonobo_ACTIVATION_RESULT_SHLIB:
 				g_print ("RESULT_SHLIB\n");
 				break;
-			case Bonobo_RESULT_NONE:
+			case Bonobo_ACTIVATION_RESULT_NONE:
 				g_print ("RESULT_NONE\n");
 				break;
 			}
