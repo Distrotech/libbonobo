@@ -3,7 +3,7 @@ NULL =
 bin_SCRIPTS   = $(BONOBO_SLAY)
 EXTRA_SCRIPTS = bonobo-slay.in 
 
-bin_PROGRAMS  = bonobo-activation-sysconf
+sbin_PROGRAMS  = bonobo-activation-sysconf
 
 bonobo_activation_sysconf_SOURCES =	\
 	bonobo-activation-sysconf.c	\
