@@ -1,3 +1,21 @@
+2003-12-09  Shmyrev  <nshmyrev@yandex.ru>
+
+	* activation-server/activation-server-main.c (main):
+	create / register the event source.
+
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory_register_new),
+	(impl_Bonobo_ObjectDirectory_unregister): emit
+	notifications.
+
+	* tests/test-activation/Makefile.am: use libbonobo
+	
+	* tests/test-activation/bonobo-activation-test.c (main):
+	add activation notification tests.
+
+	* activation-server/Bonobo_CosNaming_NamingContext.server.in.in:
+	describe the activation event source.
+
 2003-12-08  Michael Meeks  <michael@ximian.com>
 
 	* bonobo-activation/bonobo-activation-activate.c

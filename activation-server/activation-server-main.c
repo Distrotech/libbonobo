@@ -221,6 +221,7 @@ main (int argc, char *argv[])
         CORBA_Object                  naming_service, existing;
         Bonobo_ActivationEnvironment  environment;
         Bonobo_ObjectDirectory        od;
+	Bonobo_EventSource            event_source;
         poptContext                   ctx;
         int                           dev_null_fd;
         struct sigaction              sa;
@@ -273,6 +274,7 @@ main (int argc, char *argv[])
         g_string_free (src_dir, TRUE);
 
         od = bonobo_object_directory_get ();
+	event_source = bonobo_object_directory_event_source_get();
 
 	memset (&environment, 0, sizeof (Bonobo_ActivationEnvironment));
 
@@ -287,6 +289,13 @@ main (int argc, char *argv[])
 
         Bonobo_ObjectDirectory_register_new 
                 (od, NAMING_CONTEXT_IID, &environment, naming_service, 0, "", &existing, ev);
+        g_assert (ev->_major == CORBA_NO_EXCEPTION);
+
+	if (existing != CORBA_OBJECT_NIL)
+		CORBA_Object_release (existing, NULL);
+
+        Bonobo_ObjectDirectory_register_new 
+                (od, EVENT_SOURCE_IID, &environment, event_source, 0, "", &existing, ev);
         g_assert (ev->_major == CORBA_NO_EXCEPTION);
         
 	if (existing != CORBA_OBJECT_NIL)

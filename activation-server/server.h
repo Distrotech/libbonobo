@@ -19,6 +19,7 @@
 #define SERVER_IDLE_QUIT_TIMEOUT 1000
 
 #define NAMING_CONTEXT_IID "OAFIID:Bonobo_CosNaming_NamingContext"
+#define EVENT_SOURCE_IID "OAFIID:Bonobo_Activation_EventSource"
 
 /* object-directory-load.c */
 void bonobo_server_info_load         (char                  **dirs,

@@ -11,7 +11,7 @@
 #include "empty.h"
 #include "plugin.h"
 
-#define TOTAL_TEST_SCORE 16
+#define TOTAL_TEST_SCORE 17
 
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
@@ -181,6 +181,18 @@ race_empty (CORBA_Environment *ev)
                 g_main_context_iteration (NULL, TRUE);
 }
 
+static void
+listener_cb (BonoboListener *listener,
+             const char *event_name,
+             const CORBA_any *any,
+             CORBA_Environment *ev,
+             gpointer user_data)
+{
+        g_message ("Activation callback successfully called on %s",
+                   bonobo_event_subtype (event_name));
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -192,6 +204,8 @@ main (int argc, char *argv[])
         char *query;
         int   i;
         GTimer *timer = g_timer_new ();
+	Bonobo_EventSource event_source;
+	
 
 	CORBA_exception_init (&ev);
 
@@ -199,8 +213,24 @@ main (int argc, char *argv[])
                 bonobo_activation_username_get (),
                 bonobo_activation_hostname_get ());
 
-	bonobo_activation_init (argc, argv);
+	bonobo_init (&argc, &argv);
 /*      putenv("Bonobo_BARRIER_INIT=1"); */
+
+
+	event_source = bonobo_activation_activate_from_id
+                ("OAFIID:Bonobo_Activation_EventSource", 0, NULL, &ev);
+        if (event_source != CORBA_OBJECT_NIL) {
+		passed++;
+		fprintf (stderr, "PASSED %d of %d: Activation event source okay\n",
+                         passed + failed, TOTAL_TEST_SCORE);
+   	        bonobo_event_source_client_add_listener (event_source, listener_cb,
+                                                         "Bonobo/ObjectDirectory", &ev, NULL);
+        } else {
+		failed++;
+		fprintf (stderr, "FAILED %d of %d: Activation event source not found\n",
+                         passed + failed, TOTAL_TEST_SCORE);
+	}
+
 
         race_base_init ();
 
@@ -279,6 +309,10 @@ main (int argc, char *argv[])
                   ORBIT_CONNECTION_CONNECTED);
 
         race_empty (&ev);
+	
+	
+	
+	
 
 	obj = bonobo_activation_activate_from_id ("OAFIID:Empty:19991025", 0, NULL, &ev);
         if (test_object (obj, &ev, "from id") && test_empty (obj, &ev, "from id")) {
@@ -423,11 +457,14 @@ main (int argc, char *argv[])
 
         if (name_service != CORBA_OBJECT_NIL)
                 CORBA_Object_release (name_service, &ev);
+        
+        if (event_source != CORBA_OBJECT_NIL)
+		CORBA_Object_release (event_source, &ev);
 
 	CORBA_exception_free (&ev);
 
         if (passed == TOTAL_TEST_SCORE) {
-                if (bonobo_activation_debug_shutdown ()) {
+                if (bonobo_debug_shutdown ()) {
                         return 0;
                 } else {
                         return 1;

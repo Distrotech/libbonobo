@@ -14,8 +14,9 @@ bonobo_activation_test_SOURCES=		\
 	bonobo-activation-test.c	\
 	empty-common.c			\
 	empty.h				\
-	empty-stubs.c
-bonobo_activation_test_LDADD=libtest-plugin.la
+	empty-stubs.c 
+
+bonobo_activation_test_LDADD=libtest-plugin.la ../../bonobo/libbonobo-2.la
 
 
 # Horrible, digusting and atrocious hack to
@@ -76,7 +77,7 @@ INCLUDES= \
 	-DG_DISABLE_DEPRECATED $(LIBBONOBO_CFLAGS)
 
 LDADD = ../../bonobo-activation/libbonobo-activation.la \
-	$(LIBBONOBO_LIBS) $(POPT_LIBS)
+	$(LIBBONOBO_LIBS) $(POPT_LIBS) 
 
 serverfiles=empty.server broken.server plugin.server
 

@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-event-source.h>
 #include <bonobo-activation/Bonobo_ObjectDirectory.h>
 
 G_BEGIN_DECLS
@@ -48,6 +49,9 @@ struct _ObjectDirectory {
         char           **registry_source_directories;
         time_t           time_did_stat;
         GHashTable      *registry_directory_mtimes;
+	
+	/* Notification source */
+	BonoboEventSource *event_source;
 };
 
 typedef struct {
@@ -63,6 +67,7 @@ void                   bonobo_object_directory_init        (PortableServer_POA  
 void                   bonobo_object_directory_shutdown    (PortableServer_POA     poa,
                                                             CORBA_Environment     *ev);
 Bonobo_ObjectDirectory bonobo_object_directory_get         (void);
+Bonobo_EventSource     bonobo_object_directory_event_source_get (void);
 CORBA_Object           bonobo_object_directory_re_check_fn (const Bonobo_ActivationEnvironment *environment,
                                                             const char                         *od_iorstr,
                                                             gpointer                            user_data,

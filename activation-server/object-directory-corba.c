@@ -586,7 +586,8 @@ add_active_server (ObjectDirectory    *od,
                                 NULL);
                 }
         } else
-                g_assert (!strcmp (iid, NAMING_CONTEXT_IID));
+                g_assert (!strcmp (iid, NAMING_CONTEXT_IID) ||
+                          !strcmp(iid, EVENT_SOURCE_IID));
 
 	servers = g_hash_table_lookup (od->active_server_lists, iid);
 	if (!servers) {
@@ -756,6 +757,11 @@ impl_Bonobo_ObjectDirectory_register_new (
 #endif
 
         add_active_server (od, iid, environment, obj);
+	
+	bonobo_event_source_notify_listeners
+                (od->event_source,
+                 "Bonobo/ObjectDirectory:activation:register",
+                 NULL, ev);
 
 	return Bonobo_ACTIVATION_REG_SUCCESS;
 }
@@ -773,6 +779,11 @@ impl_Bonobo_ObjectDirectory_unregister (
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                      ex_Bonobo_ObjectDirectory_NotRegistered,
                                      NULL);
+	else 
+                bonobo_event_source_notify_listeners
+                        (od->event_source,
+                         "Bonobo/ObjectDirectory:activation:unregister",
+                         NULL, ev);
 }
 
 static Bonobo_DynamicPathLoadResult 
@@ -897,6 +908,15 @@ bonobo_object_directory_get (void)
                 return BONOBO_OBJREF (main_dir);
 }
 
+Bonobo_EventSource
+bonobo_object_directory_event_source_get (void)
+{
+     if (!main_dir)
+    	      return CORBA_OBJECT_NIL;
+     else
+              return BONOBO_OBJREF (main_dir->event_source);
+}
+
 void
 bonobo_object_directory_init (PortableServer_POA poa,
                               const char        *registry_path,
@@ -1012,6 +1032,8 @@ object_directory_init (ObjectDirectory *od)
         od->no_servers_timeout = 0;
 
         od->attr_runtime_servers = g_ptr_array_new ();
+	
+	od->event_source = bonobo_event_source_new ();
 }
 
 BONOBO_TYPE_FUNC_FULL (ObjectDirectory,
