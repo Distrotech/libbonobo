@@ -1,3 +1,20 @@
+2000-10-13  Andy Hertzfeld  <andy@eazel.com>
+
+	* bonobo/bonobo-ui-toolbar-item.c: (init),
+	(bonobo_ui_toolbar_item_set_pack_end),
+	(bonobo_ui_toolbar_item_get_pack_end):
+	added a "pack_end" instance variable, and accessing routines
+	* bonobo/bonobo-ui-toolbar-item.h:
+	added get_pack_end and set_pack_end_routines
+	* bonobo/bonobo-ui-toolbar.c: (create_popup_window),
+	(allocate_popup_item), (hide_not_fitting_items),
+	(size_allocate_helper), (impl_get_arg):
+	handle toolbars with a single item specially, giving them all of
+	the toolbar area and refraining from putting them in the pop-up
+	window.  Also, lay out the "pack_end" items from the right/bottom.
+	* bonobo/bonobo-win.c: (toolbar_sync_state):
+	add the "pack_end" property to the toolbar item behaviors.
+	
 2000-10-13  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar.c (impl_remove): Don't remove from the
