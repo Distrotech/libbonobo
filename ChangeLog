@@ -1,5 +1,8 @@
 2003-04-07  Michael Meeks  <michael@ximian.com>
 
+	* Makefile.am: disable doc until we can work with a
+	newer automake that can do conditionals inside an include.
+
 	* autogen.sh (REQUIRED_AUTOMAKE_VERSION): revert to
 	automake-1.4 which doesn't screw-up with IDL compilation.
 	* bonobo/Makefile.am (LDFLAGS): use just LDFLAGS.
