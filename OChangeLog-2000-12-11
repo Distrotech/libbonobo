@@ -1,5 +1,26 @@
 1999-09-01  Miguel de Icaza  <miguel@gnu.org>
 
+	* bonobo/gnome-embeddable.h: host_name_changed signature now
+	includes the new name.
+	new uri_changed signal
+
+	* bonobo/gnome-embeddable.c (gnome_embeddable_destroy): Release
+	the uri if we have one.
+	(gnome_embeddable_set_uri): New method.
+	(gnome_embeddable_get_uri): New method.
+	(gnome_embeddable_corba_class_init): Use this method instead of
+	the static initialization scheme.
+
+	* bonobo/gnome-view-frame.c (impl_GNOME_ViewFrame_activate_uri):
+	Emit the "activate_uri" signal here.
+	(init_view_frame_corba_class): Implement the activate_uri. 
+	
+	* idl/gnome-embeddable.idl (GNOME::ViewFrame): new method:
+	activate_uri
+	(GNOME::Embeddable): new method: set_uri.
+	
+	* bonobo/gnome-view-frame.c  
+
 	* bonobo/gnome-view-frame.h (GnomeViewFrame): Added private field
 	for future growth.
 

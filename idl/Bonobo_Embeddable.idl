@@ -114,6 +114,14 @@ interface ViewFrame : GNOME::Unknown {
 	 * Returns FALSE on failure, TRUE on success.
 	 */
 	void request_resize (in short new_width, in short new_height);
+
+	/**
+	 * activate_uri:
+	 * @uri: the uri we would like to get loaded
+	 *
+	 * The user has requested that the uri be loaded
+	 */
+	void activate_uri (in string uri, in boolean relative);
 };
 
 /* Equivalent to IOleObject */
@@ -143,6 +151,12 @@ interface Embeddable : GNOME::Unknown {
 	 * when this object is opened in a separate window for editing
 	 */
 	void set_host_name (in string name, in string appname);
+
+	/**
+	 * set_uri:
+	 * @uri: the uri that this component represents.
+	 */
+	void set_uri (in string uri);
 
 	/**
 	 * close:
@@ -210,6 +224,8 @@ interface Embeddable : GNOME::Unknown {
 	 * @type: type
 	 */
 	long get_misc_status (in long type);
+
+	exception MultiViewNotSupported {};
 
 	/**
 	 * new_view:

@@ -24,7 +24,7 @@ struct _GnomeMoniker {
 
 	char *goadid, *url;
 	GList *items;
-	GnomeMonikerPrivate *priv
+	GnomeMonikerPrivate *priv;
 };
 
 typedef struct {
