@@ -1,3 +1,7 @@
+2001-09-20  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* configure.in: Added Catalan (ca) language
+
 2001-09-17  Havoc Pennington  <hp@redhat.com>
 
 	* bonobo/bonobo-types.c (bonobo_closure_invoke_va_list): patch
