@@ -270,7 +270,7 @@ bonobo_property_bag_construct (BonoboPropertyBag   *pb,
 	return pb;
 }
 
-static CORBA_Object
+CORBA_Object
 bonobo_property_bag_create_corba_object (BonoboObject *object)
 {
 	POA_Bonobo_PropertyBag *servant;

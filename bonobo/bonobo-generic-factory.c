@@ -25,7 +25,7 @@
 
 POA_GNOME_ObjectFactory__vepv bonobo_generic_factory_vepv;
 
-static BonoboObjectClass *bonobo_generic_factory_parent_class;
+static BonoboObjectClass *bonobo_generic_factory_parent_class = NULL;
 
 static CORBA_boolean
 impl_Bonobo_ObjectFactory_manufactures (PortableServer_Servant  servant,
@@ -61,15 +61,15 @@ impl_Bonobo_ObjectFactory_create_object (PortableServer_Servant   servant,
 	return CORBA_Object_duplicate (bonobo_object_corba_objref (BONOBO_OBJECT (object)), ev);
 }
 
-static CORBA_Object
-create_bonobo_generic_factory (BonoboObject *object)
+CORBA_Object
+bonobo_generic_factory_corba_object_create (BonoboObject *object)
 {
 	POA_GNOME_ObjectFactory *servant;
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
 
-	servant = (POA_GNOME_ObjectFactory *)g_new0 (BonoboObjectServant, 1);
+	servant = (POA_GNOME_ObjectFactory *) g_new0 (BonoboObjectServant, 1);
 	servant->vepv = &bonobo_generic_factory_vepv;
 
 	POA_GNOME_ObjectFactory__init ((PortableServer_Servant) servant, &ev);
@@ -91,7 +91,7 @@ create_bonobo_generic_factory (BonoboObject *object)
  * Bonobo::GenericFactory interface and which will be used to
  * construct this BonoboGenericFactory Gtk object.
  * @factory: A callback which is used to create new GnomeGeneric object instances.
- * @data: The closure data to be passed to the @factory callback routine.
+ * @user_data: The closure data to be passed to the @factory callback routine.
  *
  * Initializes @c_factory with the command-line arguments and registers
  * the new factory in the name server.
@@ -104,7 +104,7 @@ bonobo_generic_factory_construct (const char             *oaf_iid,
 				  CORBA_Object            corba_factory,
 				  BonoboGenericFactoryFn  factory,
 				  GnomeFactoryCallback    factory_cb,
-				  void                   *data)
+				  gpointer                user_data)
 {
 	CORBA_Environment ev;
 	int ret;
@@ -119,7 +119,7 @@ bonobo_generic_factory_construct (const char             *oaf_iid,
 
 	c_factory->factory         = factory;
 	c_factory->factory_cb      = factory_cb;
-	c_factory->factory_closure = data;
+	c_factory->factory_closure = user_data;
 	c_factory->oaf_iid         = g_strdup (oaf_iid);
 
 	CORBA_exception_init (&ev);
@@ -140,7 +140,7 @@ bonobo_generic_factory_construct (const char             *oaf_iid,
  * bonobo_generic_factory_new:
  * @oaf_iid: The GOAD id that this factory implements
  * @factory: A callback which is used to create new BonoboObject instances.
- * @data: The closure data to be passed to the @factory callback routine.
+ * @user_data: The closure data to be passed to the @factory callback routine.
  *
  * This is a helper routine that simplifies the creation of factory
  * objects for GNOME objects.  The @factory function will be
@@ -156,7 +156,7 @@ bonobo_generic_factory_construct (const char             *oaf_iid,
 BonoboGenericFactory *
 bonobo_generic_factory_new (const char             *oaf_iid,
 			    BonoboGenericFactoryFn  factory,
-			    void                   *data)
+			    gpointer                user_data)
 {
 	BonoboGenericFactory *c_factory;
 	GNOME_ObjectFactory corba_factory;
@@ -165,14 +165,14 @@ bonobo_generic_factory_new (const char             *oaf_iid,
 	
 	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
 
-	corba_factory = create_bonobo_generic_factory (BONOBO_OBJECT (c_factory));
+	corba_factory = bonobo_generic_factory_corba_object_create (BONOBO_OBJECT (c_factory));
 	if (corba_factory == CORBA_OBJECT_NIL) {
 		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
 	}
 	
 	return bonobo_generic_factory_construct (
-		oaf_iid, c_factory, corba_factory, factory, NULL, data);
+		oaf_iid, c_factory, corba_factory, factory, NULL, user_data);
 }
 
 /**
@@ -205,7 +205,7 @@ BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	
 	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
 
-	corba_factory = create_bonobo_generic_factory (BONOBO_OBJECT (c_factory));
+	corba_factory = bonobo_generic_factory_corba_object_create (BONOBO_OBJECT (c_factory));
 	if (corba_factory == CORBA_OBJECT_NIL) {
 		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
@@ -228,7 +228,7 @@ bonobo_generic_factory_finalize (GtkObject *object)
 	CORBA_exception_free (&ev);
 	g_free (c_factory->oaf_iid);
 	
-	GTK_OBJECT_CLASS (bonobo_generic_factory_parent_class)->destroy (object);
+	GTK_OBJECT_CLASS (bonobo_generic_factory_parent_class)->finalize (object);
 }
 
 static BonoboObject *
@@ -238,7 +238,7 @@ bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 
-	if(factory->factory_cb)
+	if (factory->factory_cb)
 		return factory->factory_cb (factory, oaf_iid,
 					    factory->factory_closure);
 	else
@@ -265,11 +265,6 @@ bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 	init_generic_factory_corba_class ();
 }
 
-static void
-bonobo_generic_factory_init (BonoboObject *object)
-{
-}
-
 /**
  * bonobo_generic_factory_get_type:
  *
@@ -286,7 +281,7 @@ bonobo_generic_factory_get_type (void)
 			sizeof (BonoboGenericFactory),
 			sizeof (BonoboGenericFactoryClass),
 			(GtkClassInitFunc) bonobo_generic_factory_class_init,
-			(GtkObjectInitFunc) bonobo_generic_factory_init,
+			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL

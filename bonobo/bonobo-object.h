@@ -82,6 +82,7 @@ Bonobo_Unknown           bonobo_object_dup_ref                (Bonobo_Unknown   
 void                     bonobo_object_release_unref          (Bonobo_Unknown          object,
 							       CORBA_Environment      *ev);
 void                     bonobo_object_ref                    (BonoboObject           *object);
+void                     bonobo_object_idle_unref             (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
 POA_Bonobo_Unknown__epv *bonobo_object_get_epv                (void);
 void                     bonobo_object_init                   (void);

@@ -1032,3 +1032,19 @@ bonobo_object_dump_interfaces (BonoboObject *object)
 			fprintf (stderr, "I/F: NIL error\n");
 	}
 }
+
+static gboolean
+idle_unref_fn (BonoboObject *object)
+{
+	bonobo_object_unref (object);
+
+	return FALSE;
+}
+
+void
+bonobo_object_idle_unref (BonoboObject *object)
+{
+	g_idle_add ((GSourceFunc) idle_unref_fn, object);
+}
+
+

@@ -52,10 +52,13 @@ typedef struct {
 
 GtkType               bonobo_generic_factory_get_type  (void);
 
+CORBA_Object          bonobo_generic_factory_corba_object_create (
+	BonoboObject *object);
+
 BonoboGenericFactory *bonobo_generic_factory_new (
 	const char            *component_id,
 	BonoboGenericFactoryFn factory,
-	void *                 data);
+	gpointer               user_data);
 
 BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	const char            *component_id,

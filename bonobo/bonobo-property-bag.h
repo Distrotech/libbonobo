@@ -120,6 +120,7 @@ GList                    *bonobo_property_bag_get_prop_list    (BonoboPropertyBa
 
 /* For implementation inheritance. */
 POA_Bonobo_PropertyBag__epv *bonobo_property_bag_get_epv       (void);
+CORBA_Object bonobo_property_bag_create_corba_object           (BonoboObject *object);
 
 END_GNOME_DECLS
 

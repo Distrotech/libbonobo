@@ -1,3 +1,28 @@
+2000-12-20  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/bonobo-moniker-extender-file.c (extender_destroy_cb): 
+	kill. (file_extender_factory): upd.
+	(file_extender_resolve): only check for PersistFile leave stream
+	to the stream extender.
+
+	* bonobo/bonobo-object.c (idle_unref_fn),
+	(bonobo_object_idle_unref): impl.
+
+2000-12-19  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_init): 
+	remove.
+	(bonobo_generic_factory_get_type): upd.
+	(create_bonobo_generic_factory): rename to
+	(bonobo_generic_factory_corba_object_create): this & publicize.
+	(bonobo_generic_factory_new_multi),
+	(bonobo_generic_factory_new): upd.
+	(bonobo_generic_factory_finalize): chain to finalize not destroy !
+
+	* bonobo/bonobo-shlib-factory.[ch]: Create.
+
+	* bonobo/Makefile.am: update.
+
 2000-12-19  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* monikers/bonobo-moniker-cache.c (bonobo_cache_factory): count
