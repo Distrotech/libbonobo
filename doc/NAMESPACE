@@ -17,7 +17,7 @@ subdomains:
 	EOG/			EOG		federico@helixcode.com
 	Evolution/		Evolution	ettore@helixcode.com
 	Config/			GConf		hp@redhat.com
-	GDA/			libgda		rodrigo@linuxave.net
+	GDA/			libgda		rodrigo@gnome-db.org
 	Gnumeric/		Gnumeric	jgoldberg@home.com
 	Grapevine/		grapevine	jirka@5z.com
 	GtkHtml/		GtkHtml		rodo@helixcode.com
