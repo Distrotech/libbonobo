@@ -1,5 +1,5 @@
-echo-client
-bonobo-echo
+echo-client-2
+bonobo-echo-2
 .libs
 Makefile
 Bonobo_Sample_Echo.server
