@@ -25,7 +25,6 @@
 
 #include "config.h"
 #include <signal.h>
-#include <ctype.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -121,7 +120,7 @@ od_server_activate_exe (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
 	/* Munge the args */
 	args = g_alloca (36 * sizeof (char *));
 	for (i = 0, ctmp = ctmp2 = si->location_info; i < 32; i++) {
-		while (*ctmp2 && !isspace ((guchar) *ctmp2))
+		while (*ctmp2 && !g_ascii_isspace ((guchar) *ctmp2))
 			ctmp2++;
 		if (!*ctmp2)
 			break;
@@ -131,13 +130,13 @@ od_server_activate_exe (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
 		args[i][ctmp2 - ctmp] = '\0';
 
 		ctmp = ctmp2;
-		while (*ctmp2 && isspace ((guchar) *ctmp2))
+		while (*ctmp2 && g_ascii_isspace ((guchar) *ctmp2))
 			ctmp2++;
 		if (!*ctmp2)
 			break;
 		ctmp = ctmp2;
 	}
-	if (!isspace ((guchar) *ctmp) && i < 32)
+	if (!g_ascii_isspace ((guchar) *ctmp) && i < 32)
 		args[i++] = ctmp;
 
 	extra_arg =

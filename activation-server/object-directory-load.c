@@ -24,7 +24,6 @@
  *
  */
 #include <stdlib.h>
-#include <ctype.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
