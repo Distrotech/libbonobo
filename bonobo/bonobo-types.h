@@ -52,6 +52,9 @@ CORBA_Object             bonobo_value_get_corba_object    (const GValue *value);
 CORBA_TypeCode           bonobo_value_get_corba_typecode  (const GValue *value);
 const CORBA_Environment *bonobo_value_get_corba_exception (const GValue *value);
 
+void bonobo_value_set_corba_object       (GValue                      *value,
+                                          const CORBA_Object           object);
+
 void bonobo_value_set_unknown            (GValue                      *value,
                                           const Bonobo_Unknown         unknown);
 

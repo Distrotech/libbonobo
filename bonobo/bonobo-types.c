@@ -344,6 +344,19 @@ bonobo_value_get_corba_exception (const GValue *value)
 }
 
 void
+bonobo_value_set_corba_object (GValue *value, const CORBA_Object object)
+{
+	g_return_if_fail (BONOBO_VALUE_HOLDS_CORBA_TYPECODE (value));
+  
+	if (!(value->data[1].v_uint & G_VALUE_NOCOPY_CONTENTS) &&
+	    value->data[0].v_pointer != CORBA_OBJECT_NIL)
+		CORBA_Object_release (value->data[0].v_pointer, NULL);
+
+	value->data[1].v_uint = G_VALUE_NOCOPY_CONTENTS;
+	value->data[0].v_pointer = CORBA_Object_duplicate (object, NULL);
+}
+
+void
 bonobo_value_set_unknown (GValue *value, const Bonobo_Unknown unknown)
 {
 	g_return_if_fail (BONOBO_VALUE_HOLDS_UNKNOWN (value));
@@ -368,11 +381,26 @@ bonobo_value_set_corba_any (GValue *value, const CORBA_any *any)
 void
 bonobo_value_set_corba_typecode (GValue *value, const CORBA_TypeCode tc)
 {
+	g_return_if_fail (BONOBO_VALUE_HOLDS_CORBA_TYPECODE (value));
+  
+	if (!(value->data[1].v_uint & G_VALUE_NOCOPY_CONTENTS) &&
+	    value->data[0].v_pointer != CORBA_OBJECT_NIL)
+		CORBA_Object_release (value->data[0].v_pointer, NULL);
+
+	value->data[1].v_uint = G_VALUE_NOCOPY_CONTENTS;
+	value->data[0].v_pointer = CORBA_Object_duplicate ((CORBA_Object) tc, NULL);
 }
 
 void
 bonobo_value_set_corba_environment (GValue *value, const CORBA_Environment *ev)
 {
+	g_return_if_fail (BONOBO_VALUE_HOLDS_CORBA_EXCEPTION (value));
+  
+	if (!(value->data[1].v_uint & G_VALUE_NOCOPY_CONTENTS))
+		CORBA_free (value->data[0].v_pointer);
+
+	value->data[1].v_uint = G_VALUE_NOCOPY_CONTENTS;
+	value->data[0].v_pointer = CORBA_exception__copy (ev);
 }
 
 void

@@ -1,5 +1,12 @@
 2002-01-08  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-types.c
+	(bonobo_value_set_corba_typecode): impl.
+	(bonobo_value_set_corba_object): impl.
+	(bonobo_value_set_corba_environment): impl.
+
+2002-01-08  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/libbonobo-2.0.pc.in (idlinclude): add.
 
 2002-01-07  Michael Meeks  <michael@ximian.com>
