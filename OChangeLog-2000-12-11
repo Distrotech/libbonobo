@@ -1,3 +1,8 @@
+1999-06-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	bonobo/test-container-autoload.c (application_new): set default
+	size and resizing policy (makes it behave better with ps component).
+
 1999-06-26  Matt Loper  <matt@gnome-support.com>
 
 	* bonobo/gnome-persist-file.h: new file.
