@@ -43,29 +43,42 @@ module Bonobo {
 	 *
 	 */
 	interface ConfigDatabase : Unknown {
+		
+		exception BackendFailed {};
 
 		readonly attribute boolean writeable;
 
-		any          getValue    (in string key);
+		any          getValue    (in string key)
+			raises (BackendFailed);
 
-		void         setValue    (in string key, in any value);
+		void         setValue    (in string key, in any value)
+			raises (BackendFailed);
 
-		any          getDefault  (in string key);
+		any          getDefault  (in string key)
+			raises (BackendFailed);
 
-		KeyList      listDirs    (in string dir);
-		KeyList      listKeys    (in string dir);
+		KeyList      listDirs    (in string dir)
+			raises (BackendFailed);
 
-		boolean      dirExists   (in string dir);
+		KeyList      listKeys    (in string dir)
+			raises (BackendFailed);
+
+		boolean      dirExists   (in string dir)
+			raises (BackendFailed);
 		
-		void         removeValue (in string key);
+		void         removeValue (in string key)
+			raises (BackendFailed);
 
-		void         removeDir   (in string dir);
+		void         removeDir   (in string dir)
+			raises (BackendFailed);
 
 		void         addDatabase (in ConfigDatabase ddb, 
 					  in string filter_path,
-					  in string append_path);
+					  in string append_path)
+			raises (BackendFailed);
 
-		void         sync        ();
+		void         sync        ()
+			raises (BackendFailed);
 	};
 
 };

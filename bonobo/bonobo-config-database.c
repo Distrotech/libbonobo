@@ -311,6 +311,18 @@ impl_Bonobo_ConfigDatabase_addDatabase (PortableServer_Servant servant,
 {
 	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
 	DataBaseInfo *info;
+	GList *l;
+
+	/* we cant add ourselves */
+	if (CORBA_Object_is_equivalent (BONOBO_OBJREF (cd), ddb, NULL))
+		return;
+
+	/* check if the database was already added */
+	for (l = cd->priv->db_list; l != NULL; l = l->next) {
+		info = (DataBaseInfo *)l->data;
+		if (CORBA_Object_is_equivalent (info->db, ddb, NULL))
+			return;
+	}
 
 	info = g_new0 (DataBaseInfo , 1);
 
@@ -413,95 +425,31 @@ BONOBO_X_TYPE_FUNC_FULL (BonoboConfigDatabase,
 			 PARENT_TYPE,
 			 bonobo_config_database);
 
-char *
-bonobo_config_get_string (Bonobo_ConfigDatabase  db,
-			  const char            *key,
-			  CORBA_Environment     *opt_ev)
-{
-	CORBA_any *value;
-	char *retval;
-
-	if (!(value = bonobo_config_get_value (db, key, TC_string, opt_ev)))
-		return NULL;
-
-	retval = g_strdup (BONOBO_ARG_GET_STRING (value));
-
-	CORBA_free (value);
-
-	return retval;
+#define MAKE_GET_SIMPLE(c_type, default, name, corba_tc, extract_fn)          \
+c_type bonobo_config_get_##name  (Bonobo_ConfigDatabase  db,                  \
+				 const char            *key,                  \
+				 CORBA_Environment     *opt_ev)               \
+{                                                                             \
+	CORBA_any *value;                                                     \
+	c_type retval;                                                        \
+	if (!(value = bonobo_config_get_value (db, key, corba_tc, opt_ev)))   \
+		return default;                                               \
+	retval = extract_fn;                                                  \
+	CORBA_free (value);                                                   \
+	return retval;                                                        \
 }
 
-gint32
-bonobo_config_get_long   (Bonobo_ConfigDatabase  db,
-			  const char            *key,
-			  CORBA_Environment     *opt_ev)
-{
-	CORBA_any *value;
-	gint32 retval;
-
-	if (!(value = bonobo_config_get_value (db, key, TC_long, opt_ev)))
-		return 0;
-
-	retval = BONOBO_ARG_GET_LONG (value);
-
-	CORBA_free (value);
-
-	return retval;
-}
-
-gfloat
-bonobo_config_get_float   (Bonobo_ConfigDatabase  db,
-			   const char            *key,
-			   CORBA_Environment     *opt_ev)
-{
-	CORBA_any *value;
-	gfloat retval;
-
-	if (!(value = bonobo_config_get_value (db, key, TC_float, opt_ev)))
-		return 0.0;
-
-	retval = BONOBO_ARG_GET_FLOAT (value);
-
-	CORBA_free (value);
-
-	return retval;
-}
-
-gdouble 
-bonobo_config_get_double  (Bonobo_ConfigDatabase  db,
-			   const char            *key,
-			   CORBA_Environment     *opt_ev)
-{
-	CORBA_any *value;
-	gdouble retval;
-
-	if (!(value = bonobo_config_get_value (db, key, TC_double, opt_ev)))
-		return 0.0;
-
-	retval = BONOBO_ARG_GET_DOUBLE (value);
-
-	CORBA_free (value);
-
-	return retval;
-}
-
-gboolean
-bonobo_config_get_bool   (Bonobo_ConfigDatabase  db,
-			  const char            *key,
-			  CORBA_Environment     *opt_ev)
-{
-	CORBA_any *value;
-	gboolean retval;
-
-	if (!(value = bonobo_config_get_value (db, key, TC_boolean, opt_ev)))
-		return FALSE;
-
-	retval = BONOBO_ARG_GET_BOOLEAN (value);
-
-	CORBA_free (value);
-
-	return retval;
-}
+MAKE_GET_SIMPLE (gchar *, NULL, string, TC_string, 
+		 g_strdup (*(char **)value->_value));
+MAKE_GET_SIMPLE (gint16, 0, short, TC_short, (*(gint16 *)value->_value));
+MAKE_GET_SIMPLE (guint16, 0, ushort, TC_ushort, (*(guint16 *)value->_value));
+MAKE_GET_SIMPLE (gint32, 0, long, TC_long, (*(gint32 *)value->_value));
+MAKE_GET_SIMPLE (guint32, 0, ulong, TC_ulong, (*(guint32 *)value->_value));
+MAKE_GET_SIMPLE (gfloat, 0.0, float, TC_float, (*(gfloat *)value->_value));
+MAKE_GET_SIMPLE (gdouble, 0.0, double, TC_double, (*(gdouble *)value->_value));
+MAKE_GET_SIMPLE (gchar, '\0', char, TC_char, (*(gchar *)value->_value));
+MAKE_GET_SIMPLE (gboolean, FALSE, boolean, TC_boolean, 
+		 (*(gboolean *)value->_value));
 
 CORBA_any *
 bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
@@ -548,6 +496,30 @@ bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
 	return retval;
 }
 
+#define MAKE_SET_SIMPLE(c_type, name, corba_tc)                               \
+void bonobo_config_set_##name (Bonobo_ConfigDatabase  db,                     \
+			       const char            *key,                    \
+			       const c_type           value,                  \
+			       CORBA_Environment     *opt_ev)                 \
+{                                                                             \
+	CORBA_any *any;                                                       \
+	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);               \
+	bonobo_return_if_fail (key != NULL, opt_ev);                          \
+	any = bonobo_arg_new (corba_tc);                                      \
+	*((c_type *)(any->_value)) = value;                                   \
+	bonobo_config_set_value (db, key, any, opt_ev);                       \
+	bonobo_arg_release (any);                                             \
+}
+
+MAKE_SET_SIMPLE (gint16, short, TC_short)
+MAKE_SET_SIMPLE (guint16, ushort, TC_ushort)
+MAKE_SET_SIMPLE (gint32, long, TC_long)
+MAKE_SET_SIMPLE (guint32, ulong, TC_ulong)
+MAKE_SET_SIMPLE (gfloat, float, TC_float)
+MAKE_SET_SIMPLE (gdouble, double, TC_double)
+MAKE_SET_SIMPLE (gboolean, boolean, TC_boolean)
+MAKE_SET_SIMPLE (gchar, char, TC_char)
+
 void
 bonobo_config_set_string (Bonobo_ConfigDatabase  db,
 			  const char            *key,
@@ -563,86 +535,6 @@ bonobo_config_set_string (Bonobo_ConfigDatabase  db,
 	any = bonobo_arg_new (TC_string);
 
 	BONOBO_ARG_SET_STRING (any, value);
-
-	bonobo_config_set_value (db, key, any, opt_ev);
-
-	bonobo_arg_release (any);
-}
-
-void
-bonobo_config_set_long   (Bonobo_ConfigDatabase  db,
-			  const char            *key,
-			  gint32                 value,
-			  CORBA_Environment     *opt_ev)
-{
-	CORBA_any *any;
-
-	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
-	bonobo_return_if_fail (key != NULL, opt_ev);
-
-	any = bonobo_arg_new (TC_long);
-
-	BONOBO_ARG_SET_LONG (any, value);
-
-	bonobo_config_set_value (db, key, any, opt_ev);
-
-	bonobo_arg_release (any);
-}
-
-void
-bonobo_config_set_float  (Bonobo_ConfigDatabase  db,
-			  const char            *key,
-			  gfloat                 value,
-			  CORBA_Environment     *opt_ev)
-{
-	CORBA_any *any;
-
-	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
-	bonobo_return_if_fail (key != NULL, opt_ev);
-
-	any = bonobo_arg_new (TC_float);
-
-	BONOBO_ARG_SET_FLOAT (any, value);
-
-	bonobo_config_set_value (db, key, any, opt_ev);
-
-	bonobo_arg_release (any);
-}
-
-void
-bonobo_config_set_double (Bonobo_ConfigDatabase  db,
-			  const char            *key,
-			  gdouble                value,
-			  CORBA_Environment     *opt_ev)
-{
-	CORBA_any *any;
-
-	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
-	bonobo_return_if_fail (key != NULL, opt_ev);
-
-	any = bonobo_arg_new (TC_double);
-
-	BONOBO_ARG_SET_DOUBLE (any, value);
-
-	bonobo_config_set_value (db, key, any, opt_ev);
-
-	bonobo_arg_release (any);
-}
-
-void
-bonobo_config_set_bool   (Bonobo_ConfigDatabase  db,
-			  const char            *key,
-			  gboolean               value,
-			  CORBA_Environment     *opt_ev)
-{
-	CORBA_any *any;
-
-	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
-	bonobo_return_if_fail (key != NULL, opt_ev);
-
-	any = bonobo_arg_new (TC_boolean);
-
-	BONOBO_ARG_SET_BOOLEAN (any, value);
 
 	bonobo_config_set_value (db, key, any, opt_ev);
 
