@@ -1,3 +1,11 @@
+2003-12-08  Michael Meeks  <michael@ximian.com>
+
+	* bonobo-activation/bonobo-activation-activate.c
+	(query_cache_lookup): grok for _active, don't use
+	the cache if we're querying on live state.
+	(bonobo_activation_query): don't insert into the
+	cache if _active used.
+
 2003-12-07  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-application.c, bonobo/bonobo-application.h
@@ -238,7 +246,7 @@
 	* activation-server/object-directory-corba.c
 	(remove_active_server): don't spew a warning.
 
-2003-08-22  Samúel Jón Gunnarsson  <sammi@techattack.nu>
+2003-08-22  SamÃºel JÃ³n Gunnarsson  <sammi@techattack.nu>
 
 	* configure.in:  Added "is" to ALL_LINGUAS.
 	
@@ -1123,7 +1131,7 @@
 	* autogen.sh, bonobo/Makefile.am, doc/api/Makefile.am:
 	switch back to automake-1.6
 
-2003-04-07  Carlos Perelló Marín <carlos@gome.org>
+2003-04-07  Carlos PerellÃ³ MarÃ­n <carlos@gome.org>
 
 	* configure.in (ALL_LINGUAS): Added ga, hi, wa and yi from
 	bonobo-activation.
@@ -1581,7 +1589,7 @@
 
 	* idl/*.idl: add dummy padding.
 
-2002-05-27  Gustavo Giráldez  <gustavo.giraldez@gmx.net>
+2002-05-27  Gustavo GirÃ¡ldez  <gustavo.giraldez@gmx.net>
 
 	* configure.in: add a --enable-debug parameter to compile the
 	debugging code.
@@ -1804,7 +1812,7 @@
 	(BONOBO_PROPERTY_WRITABLE): add for people who like
 	sueing other people.
 
-2002-02-01  Tomasz K³oczko  <kloczek@pld.org.pl>
+2002-02-01  Tomasz KÂ³oczko  <kloczek@pld.org.pl>
 
 	* monikers/Makefile.am: small fix for automake 1.5.
 
@@ -3541,7 +3549,7 @@ Tue Nov 20 21:14:15 2001  Owen Taylor  <otaylor@redhat.com>
 	* bonobo/bonobo-moniker-util.c (url_to_name): Implemented
 	this for ORBit2.
 
-2001-07-09  Lutz Müller  <urc8@rz.uni-karlsruhe.de>
+2001-07-09  Lutz MÃ¼ller  <urc8@rz.uni-karlsruhe.de>
 
         * bonobo/bonobo-stream-memory.[c,h]: Make mem_[get,set]_info
         functional.
@@ -3826,7 +3834,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_gtk_args): 
 	Update to match new GObject property retrieval API.
 
-2001-06-19  Héctor García Álvarez <hector@scouts-es.org>
+2001-06-19  HÃ©ctor GarcÃ­a Ãlvarez <hector@scouts-es.org>
 
 	* configure.in: added "es" for Spanish to $ALL_LINGUAS
 

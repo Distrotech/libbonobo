@@ -176,7 +176,8 @@ create_query_cache (void)
 
 static Bonobo_ServerInfoList *
 query_cache_lookup (const char   *query,
-		    char * const *sort_criteria)
+		    char * const *sort_criteria,
+                    gboolean *active)
 {
 	QueryCacheEntry  fake;
 	QueryCacheEntry *entry;
@@ -189,6 +190,12 @@ query_cache_lookup (const char   *query,
                 BONOBO_ACTIVATION_UNLOCK ();
 		return NULL;
 	}
+
+        if (strstr (query, "_active")) {
+                *active = TRUE;
+                return NULL;
+        }
+        *active = FALSE;
 
 	fake.query = (char *) query;
 	fake.sort_criteria = (char **) sort_criteria;
@@ -256,6 +263,7 @@ bonobo_activation_query (const char        *requirements,
                          char * const      *selection_order,
                          CORBA_Environment *opt_ev)
 {
+        gboolean                  active;
 	Bonobo_StringList         selorder;
 	Bonobo_ServerInfoList    *retval;
 	Bonobo_ActivationContext  ac;
@@ -266,7 +274,7 @@ bonobo_activation_query (const char        *requirements,
 	ac = bonobo_activation_activation_context_get ();
 	g_return_val_if_fail (ac != NULL, CORBA_OBJECT_NIL);
 
-	retval = query_cache_lookup (requirements, selection_order);
+	retval = query_cache_lookup (requirements, selection_order, &active);
 	if (retval)
 		return retval;
 
@@ -282,7 +290,7 @@ bonobo_activation_query (const char        *requirements,
                 ac, requirements, &selorder,
                 bonobo_activation_context_get (), ev);
 
-        if (ev->_major == CORBA_NO_EXCEPTION)
+        if (ev->_major == CORBA_NO_EXCEPTION && !active)
                 query_cache_insert (requirements, selection_order, retval);
         else
                 retval = NULL;
