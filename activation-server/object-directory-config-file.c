@@ -70,7 +70,7 @@ od_utils_load_config_file (void)
                         while (item_node != NULL) {
                                 if (strcmp (item_node->name, "item") == 0) {
                                         char *directory;
-                                        /* FIXME: this may be slow and has probably
+                                        /* FIXME bugzilla.eazel.com 2726: this may be slow and has probably
                                            a direct influence on startup time. */
                                         directory = xmlNodeGetContent (item_node);
                                         result = g_strconcat (result, ":", directory, NULL);

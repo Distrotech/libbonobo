@@ -743,7 +743,9 @@ qexp_evaluate_variable (OAF_ServerInfo * si, QueryExpr * e,
 		CORBA_Context_get_values (qctx->cctx, NULL, 0, e->u.var_value,
 					  &nvout, &ev);
 
-		/* XXX non-standard - I screwed up the NVList implementation in ORBit */
+		/* FIXME bugzilla.eazel.com 2732: non-standard - I
+                 * screwed up the NVList implementation in ORBit */
+
 		if (ev._major == CORBA_NO_EXCEPTION) {
 			if (nvout->list->len > 0) {
 				CORBA_NamedValue *nv;
@@ -827,18 +829,20 @@ qexp_evaluate_id (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 					break;
 				case OAF_P_STRINGV:
 					{
-						/* XXX it would be nice to replace the
+						/* FIXME bugzilla.eazel.com 2729: it would be nice to replace the
 						 * NULL-terminated string arrays with
-						 * CORBA_sequence_string all over */
+						 * CORBA_sequence_string all over 
+                                                 */
 
 						int i;
 						retval.type = CONST_STRINGV;
 
-						/* FIXME: Not freeing this freshly consed up
+						/* FIXME bugzilla.eazel.com 2728: Not freeing this freshly consed up
 						 * constant leaks memory. But freeing it makes
 						 * oafd segfault whenever it encounters a stringv
 						 * value of more than 3 items, so I am hacking it
-						 * for now. */
+						 * for now. 
+                                                 */
 						/* retval.needs_free = TRUE; */
 
 						retval.u.v_stringv =

@@ -220,7 +220,7 @@ update_registry (impl_POA_OAF_ObjectDirectory *servant)
         gboolean must_load;
         int i;
 
-        /* FIXME: we should only reload those directories that have
+        /* FIXME bugzilla.eazel.com 2727: we should only reload those directories that have
          * actually changed instead of reloading all when any has
          * changed. 
          */

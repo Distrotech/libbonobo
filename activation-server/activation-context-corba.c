@@ -919,8 +919,9 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
         g_free (hostname_requirement);
         g_free (domain_requirement);
 
-        /* FIXME: either I am doing something really wrong here or
-           CORBA_Context is broken in ORBit */
+        /* FIXME bugzilla.eazel.com 2730: either I am doing something
+         * really wrong here or CORBA_Context is broken in ORBit 
+         */
 
         context_username = ctx_get_value (ctx, "username", ev);
         context_hostname = ctx_get_value (ctx, "hostname", ev);
@@ -984,7 +985,7 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                      ex_OAF_ActivationContext_IncompleteContext,
                                      NULL);
-		goto out;	/* FIXME: in future, add hook to allow starting a new OD on demand */
+		goto out;	/* FIXME bugzilla.eazel.com 2731: in future, add hook to allow starting a new OD on demand */
         }
 
 
