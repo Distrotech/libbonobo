@@ -32,3 +32,6 @@ libbonobo-*.tar.gz
 libbonobo2-*.tar.gz
 autom4te*
 stamp-h1
+depcomp
+gtk-doc.make
+
