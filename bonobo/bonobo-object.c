@@ -30,7 +30,7 @@ POA_Bonobo_Unknown__vepv bonobo_object_vepv;
  * NB. for a quicker debugging experience simply
  * #define BONOBO_REF_HOOKS
  */
-#if 0
+#if 1
 #	define BONOBO_REF_HOOKS
 #endif
 

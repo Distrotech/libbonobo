@@ -18,11 +18,8 @@ module Bonobo {
 		attribute string name;
 
 		enum EventType {
-			ACTIVATED,
-			REMOVED,
-			OVERRIDDEN,
-			REINSTATED,
-			STATE_CHANGED
+			STATE_CHANGED,
+			OTHER
 		};
 
 		/*

@@ -1,3 +1,41 @@
+2000-10-20  Michael Meeks  <michael@helixcode.com>
+
+	* samples/compound-doc/paint-component-simple.c (view_color_select_cb):
+	remove BonoboUIHandler reference.
+
+	* bonobo/bonobo-widget.c (bonobo_widget_construct_control_from_objref): sink
+	the CORBA reference into the control frame to couple its lifetime with the
+	returned GtkWidget.
+
+	* configure.in (vers): depend on at least gnome-libs-1.2.6
+
+	* bonobo/bonobo-win.c (bonobo_win_get_contents): actualy return the contents!
+
+	* bonobo/bonobo.h: remove bonobo-ui-compat.h
+
+	* bonobo/Makefile.am: Don't install or build the compat code / headers
+
+	* bonobo/bonobo-win.c (override_fn, reinstate_fn, remove_fn): kill rather
+	pointless event emission.
+
+	* idl/bonobo-ui.idl: remove a load of events no-one uses.
+
+	* bonobo/bonobo-ui-toolbar.c (impl_destroy): NULL the popup window so we don't
+	do a double destroy in gtk_container_destroy; do priv free below parent destroy.
+
+	* samples/controls/bonobo-clock-control.c (bonobo_clock_factory),
+	(bonobo_entry_factory): unref property bag.
+
+	* samples/controls/bonobo-calculator-control.c (bonobo_calculator_factory): ditto.
+
+	* bonobo/bonobo-control.c (bonobo_control_set_property_bag): ref on set.
+	(bonobo_control_destroy): unref the bag.
+
+	* bonobo/bonobo-control-frame.c (impl_Bonobo_ControlFrame_get_ambient_properties): upd.
+
+	* bonobo/bonobo-control.c (bonobo_control_plug_destroy_event_cb):
+	release the associated property bag.
+
 2000-10-20  John Gotts  <jgotts@linuxsavvy.com>
 
 	* bonobo.spec.in: Added some missing files.  lib/*.so should probably
