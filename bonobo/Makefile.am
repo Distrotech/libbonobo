@@ -82,6 +82,7 @@ libbonoboinclude_HEADERS =		\
 	bonobo-moniker-simple.h		\
 	bonobo-moniker-util.h		\
 	bonobo-moniker.h		\
+	bonobo-node.h			\
 	bonobo-object-client.h		\
 	bonobo-object-directory.h	\
 	bonobo-object-io.h		\
@@ -91,7 +92,6 @@ libbonoboinclude_HEADERS =		\
 	bonobo-persist.h		\
 	bonobo-progressive.h		\
 	bonobo-property-bag-client.h	\
-	bonobo-property-bag-xml.h	\
 	bonobo-property-bag.h		\
 	bonobo-property.h		\
 	bonobo-running-context.h	\
@@ -128,7 +128,6 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-moniker-simple.c		\
 	bonobo-moniker-util.c		\
 	bonobo-node.c			\
-	bonobo-node.h			\
 	bonobo-object.c			\
 	bonobo-object-client.c		\
 	bonobo-object-io.c		\

@@ -28,6 +28,11 @@ bonobo-generic-factory.[ch]:
 	A very broken module
 		removed bonobo_generic_factory_corba_object_create
 
+bonobo-property-bag-xml.[ch]:
+	Removed, use bonobo-conf or soap support code instead
+		 removed bonobo_property_bag_xml_encode_any
+		 removed bonobo_property_bag_xml_decode_any
+
 IDL:
 
 Bonobo_Storage.idl:

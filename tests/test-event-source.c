@@ -1,5 +1,5 @@
 #include <config.h>
-#include <bonobo.h>
+#include <libbonobo.h>
 
 static int idle_id, em_count, ev_count;
 

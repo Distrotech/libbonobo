@@ -1,6 +1,5 @@
 #include <config.h>
-#include <liboaf/liboaf.h>
-#include <bonobo/bonobo.h>
+#include <libbonobo.h>
 
 static void
 check_string (const char *prefix, const char *escaped, const char *unescaped)

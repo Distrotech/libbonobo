@@ -1,7 +1,6 @@
 #include <config.h>
 #include <stdio.h>
-#include <bonobo.h>
-#include <liboaf/liboaf.h>
+#include <libbonobo.h>
 
 CORBA_ORB	    orb;
 BonoboPropertyBag  *pb;

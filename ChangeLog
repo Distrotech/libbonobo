@@ -1,5 +1,12 @@
 2001-04-17  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/Makefile.am (libbonobo_2_la_SOURCES): add
+	bonobo-property-bag-xml.c
+
+	* Makefile.am: add libbonobo.h
+
+2001-04-17  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-property-bag-xml.h: include bonobo-node.h
 
 	* bonobo/bonobo-node.[ch]: create from bonobo-ui-node,
