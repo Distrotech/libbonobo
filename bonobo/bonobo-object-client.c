@@ -320,7 +320,7 @@ gnome_object_activate (const char *object_desc, GoadActivationFlags flags)
  *
  * Wraps the @corba_object CORBA object reference in a GnomeObjectClient
  * object.  This is typically used if you got a CORBA object yourself and not
- * trough one of the activation routines and you want to have a GnomeObjectClient
+ * through one of the activation routines and you want to have a GnomeObjectClient
  * handle to use in any of the Bonobo routines. 
  *
  * Returns: A wrapped GnomeObjectClient.

@@ -42,7 +42,7 @@ interface ControlFrame : GNOME::Unknown {
 };
 
 interface Control : GNOME::Unknown {
-	typedef unsigned long windowid;
+	typedef string windowid;
 	/**
 	 * set_frame:
 	 * @frame: A GNOME_ControlFrame.

@@ -1,3 +1,21 @@
+1999-12-07  Michael Meeks  <mmeeks@gnu.org>
+
+	* components/image-x-png/bonobo-image-x-png.c (view_factory): kill
+	size_query connect. (view_size_query_cb): kill.
+
+	* bonobo/gnome-control.c (gnome_control_windowid_from_x11),
+	(window_id_demangle, impl_GNOME_Control_set_window): update to string
+	id passing.
+
+	* bonobo/gnome-control-frame.c (gnome_control_frame_set_remote_window): 
+	use windowid_from_x11.
+
+	* bonobo/gnome-client-site.c (set_remote_window): ditto.
+
+	* idl/gnome-control.idl: string up the windowid
+
+	* idl/gnome-ui-handler.idl: fix typo 'toiolbar_get_accel'
+
 1999-12-03  Michael Meeks  <mmeeks@gnu.org>
 
 	* bonobo/gnome-ui-handler.c (menu_toplevel_create_hint): check

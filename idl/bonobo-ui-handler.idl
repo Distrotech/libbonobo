@@ -201,7 +201,7 @@ module GNOME {
 
 		void toolbar_set_accel (in UIHandler containee, in string path,
 					in long accelerator_key, in long ac_mods);
-		void toiolbar_get_accel (in string path, out long accelerator_key, out long ac_mods);
+		void toolbar_get_accel (in string path, out long accelerator_key, out long ac_mods);
 
 		void toolbar_set_toggle_state (in UIHandler containee, in string path, in boolean state);
 		boolean toolbar_get_toggle_state (in UIHandler containee, in string path);
