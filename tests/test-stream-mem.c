@@ -1,10 +1,12 @@
 /* -*- mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
+#include <stdlib.h>
+#include <string.h>
+
 #include <bonobo/bonobo-stream-client.h>
 #include <bonobo/bonobo-stream-memory.h>
-
-#include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-exception.h>
+#include <bonobo/bonobo-main.h>
 
 #define BUFSIZE 100
 
@@ -51,6 +53,8 @@ int main (int argc, char *argv [])
 {
 	BonoboStream *memstream;
 	guint8       *buffer;
+
+	free (malloc (8));
 	
 	if (!bonobo_init (&argc, argv))
 		g_error ("bonobo_init failed");

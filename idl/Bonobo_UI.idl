@@ -58,6 +58,11 @@ module Bonobo {
 		oneway void     freeze      ();
 		oneway void     thaw        ();
 
+		oneway void     setAttr     (in string path, in string attr,
+					     in string value);
+		string          getAttr     (in string path, in string attr)
+			raises (InvalidPath);
+
 		void    setNode             (in string path, in string xml,
 					     in string component_name)
 			raises (MalFormedXML, InvalidPath);
@@ -74,8 +79,7 @@ module Bonobo {
 
 		/*
 		 *  Currently the object should be a Bonobo::Control interface
-		 * but this should be probably be changed to a Moniker interface
-		 * in due course.
+		 * but this may be changed to a string based Moniker approach.
 		 * 
 		 *   The control's property bag will have the following
 		 * properties set on it in various circumstances:
