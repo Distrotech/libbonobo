@@ -27,7 +27,7 @@
 #ifndef __BONOBO_ACTIVATION_CONTEXT_IDL__
 #define __BONOBO_ACTIVATION_CONTEXT_IDL__
 
-#if !defined(__BONOBO_ACTIVATION_CONTEXT_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__Bonobo_ActivationContext_COMPILATION) && defined(__ORBIT_IDL__)
 %{
 #pragma include_defs bonobo-activation/Bonobo_ActivationContext.h
 %}
@@ -89,7 +89,7 @@ module Bonobo {
         };
 };
 
-#if !defined(__BONOBO_ACTIVATION_CONTEXT_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__Bonobo_ActivationContext_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif
 

@@ -7,7 +7,7 @@
 #ifndef __BONOBO_GENERIC_FACTORY_IDL__
 #define __BONOBO_GENERIC_FACTORY_IDL__
 
-#if !defined(__BONOBO_GENERIC_FACTORY_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__Bonobo_GenericFactory_COMPILATION) && defined(__ORBIT_IDL__)
 %{
 #pragma include_defs bonobo-activation/Bonobo_GenericFactory.h
 %}
@@ -37,7 +37,7 @@ module Bonobo {
 	};
 };
 
-#if !defined(__BONOBO_GENERIC_FACTORY_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__Bonobo_GenericFactory_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif
 

@@ -20,7 +20,6 @@ bonobo_activation_server_SOURCES=				\
 	activation-context-query.c				\
 	qsort_ex.c						\
 	qsort_ex.h						\
-	Bonobo_ActivationContext-skels.c			\
 	activation-context-query-lexer.c			\
 	activation-context-query-parser.c			\
 	activation-context-query-parser.h			\
@@ -64,15 +63,7 @@ activation-context-query-parser.h: stamp-parser
 	test -f y.tab.h && mv -f y.tab.h activation-context-query-parser.h || touch $@
 
 BUILT_SOURCES= activation-context-query-lexer.c activation-context-query-parser.c \
-	activation-context-query-parser.h Bonobo_ActivationContext-skels.c Bonobo_CosNaming_NamingContext.server
-
-idl_deps = \
-	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
-	$(top_srcdir)/idl/Bonobo_GenericFactory.idl	\
-	$(top_srcdir)/idl/Bonobo_ActivationContext.idl
-
-Bonobo_ActivationContext-skels.c : $(top_srcdir)/idl/Bonobo_ActivationContext.idl $(ORBIT_IDL)
-	$(ORBIT_IDL) --noheaders $(top_srcdir)/idl/Bonobo_ActivationContext.idl
+	activation-context-query-parser.h Bonobo_CosNaming_NamingContext.server
 
 CLEANFILES=stamp-parser 
 

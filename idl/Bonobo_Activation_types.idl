@@ -7,7 +7,7 @@
 #ifndef __BONOBO_ACTIVATION_TYPES_IDL__
 #define __BONOBO_ACTIVATION_TYPES_IDL__
 
-#if !defined(__BONOBO_ACTIVATION_TYPES_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__Bonobo_Activation_types_COMPILATION) && defined(__ORBIT_IDL__)
 %{
 #pragma include_defs bonobo-activation/Bonobo_Activation_types.h
 %}
@@ -103,7 +103,7 @@ module Bonobo {
 };
 
 
-#if !defined(__BONOBO_ACTIVATION_TYPES_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__Bonobo_Activation_types_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif
 

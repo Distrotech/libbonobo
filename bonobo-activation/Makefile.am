@@ -35,51 +35,6 @@ bonobo_activationinclude_HEADERS=		\
 	$(NULL)
 
 
-bonobo_unknown_sources =			\
-	Bonobo_Unknown.h			\
-	Bonobo_Unknown-common.c			\
-	Bonobo_Unknown-stubs.c			\
-	Bonobo_Unknown-skels.c			\
-	$(NULL)
-
-bonobo_generic_factory_sources =		\
-	Bonobo_GenericFactory.h			\
-	Bonobo_GenericFactory-common.c		\
-	Bonobo_GenericFactory-stubs.c		\
-	Bonobo_GenericFactory-skels.c		\
-	$(NULL)
-
-bonobo_activation_types_sources =		\
-	Bonobo_Activation_types.h		\
-	Bonobo_Activation_types-common.c	\
-	Bonobo_Activation_types-stubs.c	\
-	Bonobo_Activation_types-skels.c	\
-	$(NULL)
-
-bonobo_object_directory_sources =		\
-	Bonobo_ObjectDirectory.h		\
-	Bonobo_ObjectDirectory-common.c		\
-	Bonobo_ObjectDirectory-stubs.c		\
-	Bonobo_ObjectDirectory-skels.c		\
-	$(NULL)
-
-bonobo_activation_context_sources =		\
-	Bonobo_ActivationContext.h		\
-	Bonobo_ActivationContext-common.c	\
-	Bonobo_ActivationContext-stubs.c	\
-	Bonobo_ActivationContext-skels.c	\
-	$(NULL)
-
-
-BUILT_SOURCES=					\
-	$(bonobo_unknown_sources)		\
-	$(bonobo_generic_factory_sources)	\
-	$(bonobo_activation_types_sources)	\
-	$(bonobo_object_directory_sources)	\
-	$(bonobo_activation_context_sources)	\
-	$(NULL)
-
-
 libbonobo_activation_la_SOURCES=		\
 	$(BUILT_SOURCES)			\
 	bonobo-activation-id.c			\
@@ -99,53 +54,36 @@ libbonobo_activation_la_SOURCES=		\
 	$(NULL)
 
 
-bonobo_unknown_idls =				\
-	$(top_srcdir)/idl/Bonobo_Unknown.idl	\
+IDL_FLAGS = -I$(top_srcdir)/idl
+IDL_DIR = $(top_srcdir)/idl/
+IDL_FILES = Bonobo_Unknown.idl			\
+	    Bonobo_GenericFactory.idl		\
+	    Bonobo_Activation_types.idl		\
+	    Bonobo_ObjectDirectory.idl		\
+	    Bonobo_ActivationContext.idl	\
+	    $(NULL)
+
+IDL_HEADER_FILES = $(IDL_FILES:.idl=.h)
+IDL_COMMONS = $(IDL_FILES:.idl=-common.c)
+IDL_SKELS = $(IDL_FILES:.idl=-skels.c)
+IDL_STUBS = $(IDL_FILES:.idl=-stubs.c)
+
+BUILT_SOURCES= $(IDL_HEADER_FILES) $(IDL_COMMONS) $(IDL_SKELS) $(IDL_STUBS) \
 	$(NULL)
-bonobo_unknown_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_UNKNOWN_COMPILATION
-$(bonobo_unknown_sources): $(bonobo_unknown_idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(bonobo_unknown_idl_flags) $(top_srcdir)/idl/Bonobo_Unknown.idl
 
 
-bonobo_generic_factory_idls =				\
-	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
-	$(top_srcdir)/idl/Bonobo_Activation_types.idl	\
-	$(top_srcdir)/idl/Bonobo_GenericFactory.idl	\
-	$(NULL)
-bonobo_generic_factory_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_GENERIC_FACTORY_COMPILATION
-$(bonobo_generic_factory_sources): $(bonobo_generic_factory_idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(bonobo_generic_factory_idl_flags) $(top_srcdir)/idl/Bonobo_GenericFactory.idl
+%.h %-stubs.c %-skels.c %-common.c %-imodule.c %-skelimpl.c: $(IDL_DIR)/%.idl $(ORBIT_IDL_COMPILER)
+	-(rm -f $(*).h $(*)-stubs.c $(*)-skels.c $(*)-common.c $(*)-imodule.c $(*)-skelimpl.c || true) > /dev/null
+	$(ORBIT_IDL) $(IDL_FLAGS) "-D__$(*)_COMPILATION" --deps .deps/$*.idl.P $<
 
 
-bonobo_activation_types_idls =			\
-	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
-	$(top_srcdir)/idl/Bonobo_Activation_types.idl	\
-	$(top_srcdir)/idl/Bonobo_ObjectDirectory.idl	\
-	$(NULL)
-bonobo_activation_types_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_ACTIVATION_TYPES_COMPILATION
-$(bonobo_activation_types_sources): $(bonobo_activation_types_idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(bonobo_activation_types_idl_flags) $(top_srcdir)/idl/Bonobo_Activation_types.idl
-
-
-bonobo_object_directory_idls =			\
-	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
-	$(top_srcdir)/idl/Bonobo_Activation_types.idl	\
-	$(top_srcdir)/idl/Bonobo_ObjectDirectory.idl	\
-	$(NULL)
-bonobo_object_directory_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_OBJECT_DIRECTORY_COMPILATION
-$(bonobo_object_directory_sources): $(bonobo_object_directory_idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(bonobo_object_directory_idl_flags) $(top_srcdir)/idl/Bonobo_ObjectDirectory.idl
-
-
-bonobo_activation_context_idls =			\
-	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
-	$(top_srcdir)/idl/Bonobo_Activation_types.idl	\
-	$(top_srcdir)/idl/Bonobo_ObjectDirectory.idl	\
-	$(top_srcdir)/idl/Bonobo_ActivationContext.idl	\
-	$(NULL)
-bonobo_activation_context_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_ACTIVATION_CONTEXT_COMPILATION
-$(bonobo_activation_context_sources): $(bonobo_activation_context_idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(bonobo_activation_context_idl_flags) $(top_srcdir)/idl/Bonobo_ActivationContext.idl
+if MAINTAINER_MODE
+DEPS_MAGIC := $(shell mkdir .deps > /dev/null 2>&1 || :)
+IDL_DEP_FILES = $(IDL_FILES:%.idl=.deps/%.idl.P)
+-include $(IDL_DEP_FILES)
+distclean-local:
+	-rm -rf .deps
+endif
 
 
 CLEANFILES=					\
