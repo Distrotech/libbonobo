@@ -64,15 +64,15 @@ od_dump_list (ObjectDirectory * od)
 #if 0
 	int i, j, k;
 
-	for (i = 0; i < od->attr_servers._length; i++) {
+	for (i = 0; i < od->attr_servers->_length; i++) {
 		g_print ("IID %s, type %s, location %s\n",
-			 od->attr_servers._buffer[i].iid,
-			 od->attr_servers._buffer[i].server_type,
-			 od->attr_servers._buffer[i].location_info);
-		for (j = 0; j < od->attr_servers._buffer[i].props._length;
+			 od->attr_servers->_buffer[i].iid,
+			 od->attr_servers->_buffer[i].server_type,
+			 od->attr_servers->_buffer[i].location_info);
+		for (j = 0; j < od->attr_servers->_buffer[i].props._length;
 		     j++) {
 			Bonobo_ActivationProperty *prop =
-				&(od->attr_servers._buffer[i].
+				&(od->attr_servers->_buffer[i].
 				  props._buffer[j]);
                         if (strchr (prop->name, '-') != NULL) /* Translated, likely to
                                                          be annoying garbage value */
@@ -184,8 +184,11 @@ update_registry (ObjectDirectory *od, gboolean force_reload)
 #ifdef BONOBO_ACTIVATION_DEBUG
                 g_warning ("Re-load %d %d", must_load, force_reload);
 #endif
+                if (od->attr_servers)
+                        CORBA_free (od->attr_servers);
+                od->attr_servers = CORBA_sequence_Bonobo_ServerInfo__alloc ();
                 bonobo_server_info_load (od->registry_source_directories,
-                                         &od->attr_servers,
+                                         od->attr_servers,
                                          od->attr_runtime_servers,
                                          &od->by_iid,
                                          bonobo_activation_hostname_get ());
@@ -260,7 +263,7 @@ impl_Bonobo_ObjectDirectory__get_servers (
 
 	retval->_d = (only_if_newer < od->time_list_changed);
 	if (retval->_d) {
-		retval->_u.server_list = od->attr_servers;
+		retval->_u.server_list = *od->attr_servers;
 		CORBA_sequence_set_release (&retval->_u.server_list,
 					    CORBA_FALSE);
 	}
@@ -772,6 +775,7 @@ od_register_runtime_server_info (ObjectDirectory  *od,
 {
         Bonobo_ServerInfo *old_serverinfo, *new_serverinfo;
         GSList *parsed_serverinfo = NULL, *l;
+        int     i;
 
         old_serverinfo = (Bonobo_ServerInfo *) g_hash_table_lookup (od->by_iid, iid);
         if (!(*description)) /* empty description? */
@@ -799,24 +803,44 @@ od_register_runtime_server_info (ObjectDirectory  *od,
 
          if (old_serverinfo) {
                  Bonobo_ServerInfo *old_runtime_serverinfo;
-                 int i;
-
+                   /* find and replace new serverinfo in attr_runtime_servers */
                  for (i = 0; i < od->attr_runtime_servers->len; i++) {
                          old_runtime_serverinfo = g_ptr_array_index (od->attr_runtime_servers, i);
                          if (strcmp (old_runtime_serverinfo->iid, iid) == 0) {
                                  Bonobo_ServerInfo__freekids (old_runtime_serverinfo, NULL);
                                  g_free (old_runtime_serverinfo);
                                  g_ptr_array_index (od->attr_runtime_servers, i) = new_serverinfo;
-                                 return new_serverinfo;
+                                 break;
                          }
                  }
-                 g_warning ("Inconsistency between od->attr_servers "
-                            "and od->attr_runtime_servers");
-         } else
+                 if (i == od->attr_runtime_servers->len) {
+                         g_warning ("Inconsistency between od->attr_servers "
+                                    "and od->attr_runtime_servers");
+                           /* something must be wrong, but we try to remedy as we can */
+                         g_ptr_array_add (od->attr_runtime_servers, new_serverinfo);
+                 }
+                   /* replace old for new serverinfo in attr_servers */
+                 g_hash_table_remove (od->by_iid, old_serverinfo->iid);
+                 Bonobo_ServerInfo__freekids (old_serverinfo, NULL);
+                 Bonobo_ServerInfo_copy (old_serverinfo, new_serverinfo);
+                 g_hash_table_insert (od->by_iid, old_serverinfo->iid, old_serverinfo);
+         } else {
                  g_ptr_array_add (od->attr_runtime_servers, new_serverinfo);
-           /* FIXME: this kills performance, need an alternative */
-         update_registry (od, TRUE);
-         return new_serverinfo;
+                 ORBit_sequence_append (od->attr_servers, new_serverinfo);
+                   /* rebuild od->by_iid hash table, because
+                    * ORBit_sequence_append reallocs _buffer, and that
+                    * sometimes changes the addresses of the
+                    * serverinfo items */
+                 g_hash_table_destroy (od->by_iid);
+                 od->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
+                 for (i = 0; i < od->attr_servers->_length; ++i)
+                         g_hash_table_insert (od->by_iid,
+                                              od->attr_servers->_buffer[i].iid,
+                                              od->attr_servers->_buffer + i);
+         }
+         od->time_list_changed = time (NULL);
+         activation_clients_cache_notify ();
+         return old_serverinfo;
 }
 
 static Bonobo_RegistrationResult
@@ -1042,7 +1066,6 @@ impl_Bonobo_ObjectDirectory_addClientEnv (
 {
         Bonobo_ActivationEnvironment *env;
 	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
-        ORBitConnection *cnx;
         int i;
         
         env = Bonobo_ActivationEnvironment__alloc ();
@@ -1072,12 +1095,8 @@ impl_Bonobo_ObjectDirectory_addClientEnv (
 
         g_hash_table_insert (od->client_envs, client, env);
 
-        cnx = ORBit_small_get_connection (client);
-        if (cnx) {
-                g_signal_connect (cnx, "broken",
-                                  G_CALLBACK (client_cnx_broken),
-                                  (gpointer) client);
-        }
+        ORBit_small_listen_for_broken (client, G_CALLBACK (client_cnx_broken),
+                                       (gpointer) client);
 }
 
 

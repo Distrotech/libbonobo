@@ -1,3 +1,37 @@
+2004-01-06  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* activation-server/object-directory-load.c (parse_oaf_attribute)
+	(od_EndElement): Allocate all serverinfo members with CORBA typed
+	allocators, so that we can use Bonobo_ServerInfo__freekids to free
+	the serverinfo.
+	(bonobo_server_info_load): Set servers->_maximum equal to
+	servers->_length, so that ORBit_sequence_append works correctly.
+	Removed FIXME comment, since it is already fixed.
+	
+	* activation-server/object-directory-corba.c (od_dump_list): Use
+	-> instead of . to dereference od->attr_servers pointer.
+	(update_registry): CORBA_free old od->attr_servers before creating
+	new one with CORBA dynamic allocation.
+	(impl_Bonobo_ObjectDirectory__get_servers): Dereference
+	od->attr_servers pointer.
+	(od_register_runtime_server_info): Avoid calling
+	update_registry(od, TRUE), which rescans/parses all XML .server
+	files.  Instead, just add/replace new serverinfo in
+	od->attr_servers, od->attr_runtime_servers, and od->by_iid, then
+	notify clients the serverinfo list has changed.
+	(impl_Bonobo_ObjectDirectory_addClientEnv): Use
+	ORBit_small_listen_for_broken instead of (deprecated)
+	ORBit_small_get_connection.
+
+	* activation-server/activation-context-corba.c (ac_update_list):
+	Make a deep copy of the Bonobo_ServerInfoList, instead of keeping
+	a pointer to it.
+
+	* activation-server/object-directory.h (struct _ObjectDirectory):
+	Change attr_servers to a pointer to structure instead of a direct
+	structure, since we need to dynamically allocate it now (in order
+	to be able to use ORBit_sequence_append).
+
 2004-01-04  Martin Kretzschmar  <m_kretzschmar@gmx.net>
 
 	* doc/activation-api/server-xml-reference.sgml: l10n fix (see also

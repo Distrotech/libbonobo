@@ -283,7 +283,7 @@ parse_oaf_attribute (ParseInfo     *info,
                          "- property names beginning with '_' are reserved",
                          name);
         
-        info->cur_prop = g_new0 (Bonobo_ActivationProperty, 1);
+        info->cur_prop = ORBit_small_alloc (TC_Bonobo_ActivationProperty);
         info->cur_prop->name = CORBA_string_dup (name);
 
         if (g_ascii_strcasecmp (type, "stringv") == 0) {
@@ -454,11 +454,13 @@ od_EndElement (ParseInfo     *info,
                         len = g_list_length (info->cur_props);
 
                         info->cur_server->props._length = len;
-                        info->cur_server->props._buffer = g_new0 (Bonobo_ActivationProperty, len);
+                        info->cur_server->props._buffer =
+                                CORBA_sequence_Bonobo_ActivationProperty_allocbuf (len);
 
                         for (i = 0, p = g_list_reverse (info->cur_props); p; p = p->next, i++) {
-                                info->cur_server->props._buffer[i] = *((Bonobo_ActivationProperty *)p->data);
-                                g_free (p->data);
+                                Bonobo_ActivationProperty_copy (&info->cur_server->props._buffer[i],
+                                                                (Bonobo_ActivationProperty *) p->data);
+                                CORBA_free (p->data);
                         }
                         g_list_free (info->cur_props);
                         info->cur_props = NULL;
@@ -696,10 +698,8 @@ bonobo_server_info_load (char                  **directories,
 
 	servers->_buffer = CORBA_sequence_Bonobo_ServerInfo_allocbuf
                 (length + runtime_servers->len);
-	/*
-	 * FIXME: servers->_buffer should be freed
-	 */
 	servers->_length = length + runtime_servers->len;
+        servers->_maximum = servers->_length;
 
 	for (j = 0, p = entries; j < length; j++, p = p->next) {
 		memcpy (&servers->_buffer[j], p->data, sizeof (Bonobo_ServerInfo));

@@ -138,11 +138,8 @@ ac_update_list (ActivationContext *actx, CORBA_Environment *ev)
 			actx->list = NULL;
 		}
 
-		actx->list = Bonobo_ServerInfoList__alloc ();
-		*(actx->list) = cache->_u.server_list;
-		CORBA_sequence_set_release (actx->list, CORBA_FALSE);
-		CORBA_sequence_set_release (&(cache->_u.server_list),
-					    CORBA_FALSE);
+                actx->list = ORBit_copy_value (&cache->_u.server_list,
+                                               TC_Bonobo_ServerInfoList);
 
 		actx->time_list_pulled = time (NULL);
 		actx->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
