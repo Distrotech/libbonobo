@@ -123,7 +123,7 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 
                        if ((type && gtk_type_is_a(GTK_OBJECT(tryme)->klass->type, type)) ||
 #ifdef ORBIT_IMPLEMENTS_IS_A
-			   CORBA_Object_is_a(tryme, repoid, ev)
+			   CORBA_Object_is_a(tryme->corba_objref, repoid, ev)
 #else
 			   !strcmp(tryme->corba_objref->object_id, repoid)
 #endif
@@ -139,7 +139,7 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 PortableServer_ServantBase__epv gnome_object_base_epv =
 {
 	NULL,			/* _private data */
-	&impl_GNOME_Unknown__destroy,	/* finalize routine */
+	NULL,                   /* finalize routine */
 	NULL,			/* default_POA routine */
 };
 
@@ -163,9 +163,13 @@ gnome_object_destroy (GtkObject *object)
 	void *servant = gnome_object->servant;
 	
 	if (gnome_object->corba_objref != CORBA_OBJECT_NIL){
+	  PortableServer_ObjectId *oid;
 		CORBA_Object_release (gnome_object->corba_objref, &gnome_object->ev);
+
+		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, &gnome_object->ev);
 		PortableServer_POA_deactivate_object (
-			bonobo_poa (), servant, &gnome_object->ev);
+			bonobo_poa (), oid, &gnome_object->ev);
+		CORBA_free(oid);
 	}
 	CORBA_exception_free (&gnome_object->ev);
 
