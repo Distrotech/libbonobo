@@ -1,5 +1,11 @@
 1999-09-22  Michael Meeks  <michael@nuclecu.unam.mx>
 
+	* components/Makefile.am: add gnomine.
+
+	* configure.in: add gnomine
+
+1999-09-22  Michael Meeks  <michael@nuclecu.unam.mx>
+
 	* components/image-generic/bonobo-image-generic.c (view_size_allocate_cb):
 	Remove redundant duplicate + use new gdk_pixbuf scaling API + protect with
 	a const.
