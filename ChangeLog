@@ -1,3 +1,8 @@
+2001-07-19  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* tests/test-stream-mem.c: New test to see if BonoboStreamMem
+	works (currently, it looks like it doesn't)
+
 2001-07-19  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-types.c (BONOBO_TYPE_CORBA_OBJECT_IMPL): fix
