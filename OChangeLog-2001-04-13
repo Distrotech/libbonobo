@@ -1,3 +1,14 @@
+2001-04-02  Richard Hult  <rhult@codefactory.se>
+
+	* bonobo/bonobo-event-source.c: Keep a stringv of event masks 
+	instead of a comma separated string.
+	(desc_free): Free the string vector.
+	(impl_Bonobo_EventSource_addListenerWithMask): Split the comma
+	separated event mask string into a stringv.
+	(event_match): Try to match with all the events in the vector,
+	to make this work like expected.
+	(bonobo_event_source_notify_listeners): Adapt to use the vector.
+
 2001-03-30  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-control.c: (impl_Bonobo_Control_setWindowId): Use

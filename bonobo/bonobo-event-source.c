@@ -30,7 +30,7 @@ struct _BonoboEventSourcePrivate {
 typedef struct {
 	Bonobo_Listener listener;
 	Bonobo_EventSource_ListenerId id;
-	CORBA_char *event_mask; /* send all events if NULL */
+	gchar **event_masks; /* send all events if NULL */
 } ListenerDesc;
 
 /*
@@ -61,7 +61,7 @@ static void
 desc_free (ListenerDesc *desc, CORBA_Environment *ev)
 {
 	if (desc) {
-		CORBA_free (desc->event_mask);
+		g_strfreev (desc->event_masks);
 		bonobo_object_release_unref (desc->listener, ev);
 		g_free (desc);
 	}
@@ -74,15 +74,11 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 					     CORBA_Environment     *ev)
 {
 	BonoboEventSource *event_source;
-	CORBA_char        *mask_copy = NULL;
 	ListenerDesc      *desc;
 
 	g_return_val_if_fail (!CORBA_Object_is_nil (l, ev), 0);
 
 	event_source = bonobo_event_source_from_servant (servant);
-
-	if (event_mask)
-		mask_copy = CORBA_string_dup (event_mask);
 
 	if (event_source->priv->ignore) /* Hook for running context */
 		bonobo_running_context_ignore_object (l);
@@ -90,7 +86,10 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 	desc = g_new0 (ListenerDesc, 1);
 	desc->listener = bonobo_object_dup_ref (l, ev);
 	desc->id = create_listener_id (event_source);
-	desc->event_mask = mask_copy;
+
+	if (event_mask) {
+		desc->event_masks = g_strsplit (event_mask, ",", 0);
+	}
 
 	event_source->priv->listeners = g_slist_prepend (event_source->priv->listeners, desc);
 
@@ -137,19 +136,26 @@ impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
  * if the mask is a prefix of name.
  */
 static gboolean
-event_match (const char *name, const char *mask)
+event_match (const char *name, gchar **event_masks)
 {
-	int i = 0;
+	int i = 0, j = 0;
 
-	if (mask [0] == '=')
-		return !strcmp (name, mask + 1);
+	while (event_masks[j]) {
+		char *mask = event_masks[j];
+		
+		if (mask [0] == '=')
+			if (!strcmp (name, mask + 1))
+				return TRUE;
 
-	while (name [i] && mask [i] && name [i] == mask [i])
-		i++;
+		while (name [i] && mask [i] && name [i] == mask [i])
+			i++;
+		
+		if (mask [i] == '\0')
+			return TRUE;
 
-	if (mask [i] == '\0')
-		return TRUE;
-
+		j++;
+	}
+	
 	return FALSE;
 } 
 
@@ -188,8 +194,8 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 	for (l = event_source->priv->listeners; l; l = l->next) {
 		ListenerDesc *desc = (ListenerDesc *) l->data;
 
-		if (desc->event_mask == NULL || 
-		    event_match (event_name, desc->event_mask))
+		if (desc->event_masks == NULL || 
+		    event_match (event_name, desc->event_masks))
 			notify = g_slist_prepend (notify, desc->listener);
 	}
 
