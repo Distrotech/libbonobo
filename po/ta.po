@@ -16,7 +16,7 @@ msgstr ""
 # server/activation-context-corba.c:513
 #: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
-msgstr "±ó¾ §ºö §º¨ÅÂ¸ò¾¢ø ÀðÊÂÄ¢¼ôÀð¼Ð ±É ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "எந்த சேய் சேவையகத்தில் பட்டியலிடப்பட்டது என கண்டுபிடிக்க முடியவில்லை"
 
 #: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
@@ -25,22 +25,22 @@ msgstr ""
 # server/activation-server-main.c:64
 #: activation-server/activation-server-main.c:66
 msgid "Directory to read .server files from"
-msgstr ".server §¸¡ôÒ¸¨Ç Å¡º¢ì¸ §ÅñÊÂ «¨¼×"
+msgstr ".server கோப்புகளை வாசிக்க வேண்டிய அடைவு"
 
 # server/activation-server-main.c:64
 #: activation-server/activation-server-main.c:66
 msgid "DIRECTORY"
-msgstr "«¨¼×"
+msgstr "அடைவு"
 
 # server/activation-server-main.c:69
 #: activation-server/activation-server-main.c:69
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "ActivationContext'¬¸ §º¨ÅÂ¢Î (¦¸¡¼¡ ¿¢¨Ä ObjectDirectory ÁðÎõ)"
+msgstr "ActivationContext'ஆக சேவையிடு (கொடா நிலை ObjectDirectory மட்டும்)"
 
 # server/activation-server-main.c:74
 #: activation-server/activation-server-main.c:73
 msgid "File descriptor to write IOR to"
-msgstr "IOR ±Ø¾ §ÅñÊÂ §¸¡ôÒ Å¢ÅÃ¢ôÒ"
+msgstr "IOR எழுத வேண்டிய கோப்பு விவரிப்பு"
 
 # bonobo-activation/bonobo-activation-init.c:224
 # server/activation-server-main.c:74
@@ -52,12 +52,12 @@ msgstr "FD"
 # server/activation-server-main.c:79
 #: activation-server/activation-server-main.c:81
 msgid "Query expression to evaluate"
-msgstr "Á¾¢ôÀ¢¼ §ÅñÊÂ Å¢É¡ §¸¡¨Å"
+msgstr "மதிப்பிட வேண்டிய வினா கோவை"
 
 # server/activation-server-main.c:79
 #: activation-server/activation-server-main.c:81
 msgid "EXPRESSION"
-msgstr "§¸¡¨Å"
+msgstr "கோவை"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -70,7 +70,7 @@ msgstr ""
 # server/object-directory-activate.c:62
 #: activation-server/object-directory-activate.c:185
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "¾ü§À¡Ð ¦¾¡¨Ä ¦ºÂÄ¸ò¾¢É¡ø shlib ­ÄìÌ¸¨Ç ­Âì¸ ÓÊÂ¡Ð"
+msgstr "தற்போது தொலை செயலகத்தினால் shlib இலக்குகளை இயக்க முடியாது"
 
 # server/object-directory-config-file.c:47
 #: activation-server/object-directory-config-file.c:47
@@ -79,7 +79,7 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"OAF «¨Á-ÅÊÅ §¸¡ôÒ ¦ÅüÈ¢¸ÃÁ¡¸ Å¡º¢ì¸ôÀ¼Å¢ø¨Ä. ¾ÂÅ¢¨ºöÐ ­¾É¢ø ºÃ¢À¡÷ì¸×õ: %s"
+"OAF அமை-வடிவ கோப்பு வெற்றிகரமாக வாசிக்கப்படவில்லை. தயவிசைய்து இதனில் சரிபார்க்கவும்: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -91,76 +91,76 @@ msgstr ""
 #: activation-server/object-directory-corba.c:891
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
-msgstr "'%s àñÎ ¦ºöÔõ§À¡Ð Å¢¾¢Å¢ÄìÌ (exception)"
+msgstr "'%s தூண்டு செய்யும்போது விதிவிலக்கு (exception)"
 
 # server/object-directory-load.c:170
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr "NULL ±Ûõ iid ¦ºøÖÀÊÂ¡¸¡¾Ð"
+msgstr "NULL எனும் iid செல்லுபடியாகாதது"
 
 # server/object-directory-load.c:174
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr "%s iid ­ø µ÷ NULL Å¨¸"
+msgstr "%s iid இல் ஓர் NULL வகை"
 
 # server/object-directory-load.c:178
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr "%s iid ­ø µ÷ NULL ­ÕôÀ¢¼õ"
+msgstr "%s iid இல் ஓர் NULL இருப்பிடம்"
 
 # server/object-directory-load.c:187
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "À¢¨ÆÂ¡É ÅÃ¢ÔÕ '%c' iid '%s' ­ø"
+msgstr "பிழையான வரியுரு '%c' iid '%s' இல்"
 
 # server/object-directory-load.c:120 server/object-directory-load.c:150
 #: activation-server/object-directory-load.c:306
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "'%s' ÀñÒìÌ Á¾¢ôÒ ¸¢¨¼Â¡Ð"
+msgstr "'%s' பண்புக்கு மதிப்பு கிடையாது"
 
 # bonobo-activation/bonobo-activation-fork-server.c:263
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "§ºö ¦ºÂø À¢¨Æ ¦ºö¾¢ ´ý¨Èì ¾ÃÅ¢ø¨Ä, ¦¾Ã¢Â¡¾ ¦¿¡ÊôÒ ¿¨¼¦ÀüÈÐ"
+msgstr "சேய் செயல் பிழை செய்தி ஒன்றைக் தரவில்லை, தெரியாத நொடிப்பு நடைபெற்றது"
 
 # bonobo-activation/bonobo-activation-fork-server.c:82
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "§ºö ¦ºÂÄ¢Â¢Ä¢ÕóÐ Å¡º¢ì¸ÓÊÂÅ¢ø¨Ä: %s\n"
+msgstr "சேய் செயலியிலிருந்து வாசிக்கமுடியவில்லை: %s\n"
 
 # bonobo-activation/bonobo-activation-fork-server.c:181
 #: bonobo-activation/bonobo-activation-fork-server.c:296
 msgid "Couldn't fork a new process"
-msgstr "Ò¾¢Â ¦ºÂ¨Ä ¦¾¡¼í¸Å¢ø¨Ä"
+msgstr "புதிய செயலை தொடங்கவில்லை"
 
 # bonobo-activation/bonobo-activation-fork-server.c:202
 #: bonobo-activation/bonobo-activation-fork-server.c:319
 #, c-format
 msgid "Child received signal %u (%s)"
-msgstr "ÌÈ¢ôÒ ´ýÚ §ºìÌ ¸¢¨¼ò¾Ð %u (%s)"
+msgstr "குறிப்பு ஒன்று சேக்கு கிடைத்தது %u (%s)"
 
 # bonobo-activation/bonobo-activation-fork-server.c:208
 #: bonobo-activation/bonobo-activation-fork-server.c:324
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr "¦¾Ã¢Â¡¾, ¦ÅÇ¢§ÂÈò §¾¨ÅÂ¢øÄ¡¾ À¢¨Æ (¿¢¨Ä %u)"
+msgstr "தெரியாத, வெளியேறத் தேவையில்லாத பிழை (நிலை %u)"
 
 # bonobo-activation/bonobo-activation-fork-server.c:291
 #: bonobo-activation/bonobo-activation-fork-server.c:387
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-¦¾¡¼ì¸õ, ¦ºÂø ¦¾¡Ì¾¢¨Â %s «¨Áì¸Å¢ø¨Ä: %s\n"
+msgstr "bonobo-தொடக்கம், செயல் தொகுதியை %s அமைக்கவில்லை: %s\n"
 
 # bonobo-activation/bonobo-activation-fork-server.c:302
 #: bonobo-activation/bonobo-activation-fork-server.c:399
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
-msgstr "%s ¦ºÂøÀÎò¾ ÓÊÂÅ¢ø¨Ä: %d (%s)\n"
+msgstr "%s செயல்படுத்த முடியவில்லை: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
@@ -169,28 +169,28 @@ msgstr ""
 # bonobo-activation/bonobo-activation-init.c:224
 #: bonobo-activation/bonobo-activation-init.c:255
 msgid "File descriptor to print IOR on"
-msgstr "IOR «îº¢¼ §ÅñÊÂ §¸¡ôÒ Å¢ÅÃ¢ôÒ"
+msgstr "IOR அச்சிட வேண்டிய கோப்பு விவரிப்பு"
 
 # bonobo-activation/bonobo-activation-init.c:226
 #: bonobo-activation/bonobo-activation-init.c:257
 msgid "IID to activate"
-msgstr "àñÎ ¦ºöÂ §ÅñÊÂ IID"
+msgstr "தூண்டு செய்ய வேண்டிய IID"
 
 # bonobo-activation/bonobo-activation-init.c:228
 #: bonobo-activation/bonobo-activation-init.c:259
 msgid "Prevent registering of server with OAF"
-msgstr "OAF­ø §º¨ÅÂ¸ò¨¾ À¾¢×¦ºöÅ¨¾ ¾Îì¸×õ"
+msgstr "OAFஇல் சேவையகத்தை பதிவுசெய்வதை தடுக்கவும்"
 
 # bonobo-activation/bonobo-activation-init.c:426
 #: bonobo-activation/bonobo-activation-init.c:344
 msgid "Bonobo activation options"
-msgstr "Bonobo ¦¾¡¼ì¸ Å¢ÕôÀí¸û"
+msgstr "Bonobo தொடக்க விருப்பங்கள்"
 
 # bonobo-activation/bonobo-activation-shlib.c:102
 #: bonobo-activation/bonobo-activation-shlib.c:101
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr "'%s' ­ý ('%s' ¯¼ý) g_module_open ¦¿¡ÊôÀ¨¼ó¾Ð"
+msgstr "'%s' இன் ('%s' உடன்) g_module_open நொடிப்படைந்தது"
 
 # bonobo-activation/bonobo-activation-shlib.c:120
 # bonobo-activation/bonobo-activation-shlib.c:156
@@ -198,19 +198,19 @@ msgstr "'%s' ­ý ('%s' ¯¼ý) g_module_open ¦¿¡ÊôÀ¨¼ó¾Ð"
 #: bonobo-activation/bonobo-activation-shlib.c:155
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr "'%s' ­ø Bonobo_Plugin_info ÌÈ¢Â£¨¼ì ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "'%s' இல் Bonobo_Plugin_info குறியீடைக் கண்டுபிடிக்க முடியவில்லை"
 
 # bonobo-activation/bonobo-activation-shlib.c:204
 #: bonobo-activation/bonobo-activation-shlib.c:203
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr "'%s' ¦¾¡Æ¢üº¡¨Ä, '%s' ­ìÌ NIL Á£ñ¼Ð"
+msgstr "'%s' தொழிற்சாலை, '%s' இக்கு NIL மீண்டது"
 
 # bonobo-activation/bonobo-activation-shlib.c:221
 #: bonobo-activation/bonobo-activation-shlib.c:220
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr "Shlib '%s' ­ø '%s' ¸¢¨¼Â¡Ð"
+msgstr "Shlib '%s' இல் '%s' கிடையாது"
 
 #: bonobo/bonobo-object.c:881
 msgid "POA"
@@ -222,127 +222,127 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
-msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
+msgstr "ஓர் ஆதரவளிள்ளா செயல் முயற்சிக்கப்பட்டது"
 
 #: bonobo/bonobo-exception.c:157
 msgid "IO Error"
-msgstr "IO À¢¨Æ"
+msgstr "IO பிழை"
 
 #: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "À¢¨ÆÂ¡É Á¡È¢ Á¾¢ôÒ"
+msgstr "பிழையான மாறி மதிப்பு"
 
 #: bonobo/bonobo-exception.c:164
 msgid "Object not found"
-msgstr "­ÄìÌ ¸¡½Å¢ø¨Ä"
+msgstr "இலக்கு காணவில்லை"
 
 #: bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
-msgstr "­ÄìÌ Å¢ÅÃ¢ôÀ¢ø ¦¾¡¼Ã¢Âø À¢¨Æ"
+msgstr "இலக்கு விவரிப்பில் தொடரியல் பிழை"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "¦¾¡Æ¢üº¡¨ÄÂ¢ø ¦ÀüÈ ­Äì¨¸ ¦ºÂüÀ¼ ÓÊÂÅ¢ø¨Ä"
+msgstr "தொழிற்சாலையில் பெற்ற இலக்கை செயற்பட முடியவில்லை"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "µ¨¼ «Ï¸ÖìÌ «ÑÁ¾¢ ¸¢¨¼Â¡Ð"
+msgstr "ஓடை அணுகலுக்கு அநுமதி கிடையாது"
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ µ¨¼î ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
+msgstr "ஓர் ஆதரவளிள்ளா ஓடைச் செயல் முயற்சிக்கப்பட்டது"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "µ¨¼Â¢ø IO À¢¨Æ"
+msgstr "ஓடையில் IO பிழை"
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "§¾ì¸ò¾¢ø IO À¢¨Æ"
+msgstr "தேக்கத்தில் IO பிழை"
 
 #: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr "§¾ì¸ò¾¢ø ²ü¸É§Å ¦ÀÂ÷ ¯ñÎ"
+msgstr "தேக்கத்தில் ஏற்கனவே பெயர் உண்டு"
 
 #: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr "§¾ì¸ò¾¢ø ­ÄìÌ ¸¡½Å¢ø¨Ä"
+msgstr "தேக்கத்தில் இலக்கு காணவில்லை"
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "§¾ì¸ò¾¢ø ­Âì¸ «ÑÁ¾¢ ¸¢¨¼Â¡Ð"
+msgstr "தேக்கத்தில் இயக்க அநுமதி கிடையாது"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ §¾ì¸¸î ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
+msgstr "ஓர் ஆதரவளிள்ளா தேக்ககச் செயல் முயற்சிக்கப்பட்டது"
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr "­ÄìÌ µÕ µ¨¼ «øÄ"
+msgstr "இலக்கு ஓரு ஓடை அல்ல"
 
 #: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr "­ÄìÌ µÕ §¾ì¸¸õ «øÄ"
+msgstr "இலக்கு ஓரு தேக்ககம் அல்ல"
 
 #: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr "§¾ì¸¸õ ¦ÅüÈ¡ÉÐ «øÄ"
+msgstr "தேக்ககம் வெற்றானது அல்ல"
 
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "¦À¡Õò¾-ÁüÈ ÀÂÉ÷ ­¨¼Ó¸ XML Å¢ÅÃ¢ôÒ"
+msgstr "பொருத்த-மற்ற பயனர் இடைமுக XML விவரிப்பு"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "XML ÀÂÉ÷ ­¨¼Ó¸ ¯ÚôÀ¢ý À¡¨¾ À¢¨ÆÂ¡ÉÐ"
+msgstr "XML பயனர் இடைமுக உறுப்பின் பாதை பிழையானது"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr "§ÅñÎ§¸¡ÇÇ¢ò¾ UI ÀñÒ þø¨Ä/¸¢¨¼Â¡Ð"
+msgstr "வேண்டுகோளளித்த UI பண்பு இல்லை/கிடையாது"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "¦¾Ã¢Â¡¾ ¸ð¼¨Ç «øÄÐ Å¢¨Éî¦º¡ø"
+msgstr "தெரியாத கட்டளை அல்லது வினைச்சொல்"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "¸ð¼¨Ç ¯½÷Å¢ûÇ¡¾Ð"
+msgstr "கட்டளை உணர்விள்ளாதது"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
-msgstr "À¢¨ÆÂ¡É ¾Ã× Å¨¸"
+msgstr "பிழையான தரவு வகை"
 
 #: bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr "µ¨¼ ¸¡½Å¢ø¨Ä"
+msgstr "ஓடை காணவில்லை"
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
-msgstr "ÀñÒ ¸¡½Å¢ø¨Ä"
+msgstr "பண்பு காணவில்லை"
 
 #: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr "ÀñÀ¢ø ¦ºøÖÀÊÂ¡¸¡¾ Å¨¸"
+msgstr "பண்பில் செல்லுபடியாகாத வகை"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr "ÀñÒ Å¡º¢ì¸ìÜÊÂÐ ÁðÎõ"
+msgstr "பண்பு வாசிக்கக்கூடியது மட்டும்"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr "config ¾Ã×ò¾Çò¾¢ý À¢ý-þ¨ÉôÒ ¦¿¡ÊôÀ¨¼ó¾Ð "
+msgstr "config தரவுத்தளத்தின் பின்-இனைப்பு நொடிப்படைந்தது "
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Moniker ­¨¼Ó¸õ ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "Moniker இடைமுகம் கண்டுபிடிக்க முடியவில்லை"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr "Moniker àñÎ ¦ºöÔõ §¿Ãõ ÓÊÅ¨¼ó¾Ð"
+msgstr "Moniker தூண்டு செய்யும் நேரம் முடிவடைந்தது"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr "Moniker ¯û§Ç ¦¾¡¼Ã¢Âø À¢¨Æ"
+msgstr "Moniker உள்ளே தொடரியல் பிழை"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
@@ -350,34 +350,34 @@ msgstr "Moniker has an unknown moniker prefix"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "À¢¨ÆÀ¡÷ìÌõ§À¡Ð À¢¨Æ; Å¢¾¢Å¢ÄìÌ ¸¢¨¼Â¡Ð"
+msgstr "பிழைபார்க்கும்போது பிழை; விதிவிலக்கு கிடையாது"
 
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr "Å¢ÅÃ½õ ­øÄ¡Áø ¦À¡Ðò ¦¾¡¼í¸ø À¢¨Æ"
+msgstr "விவரணம் இல்லாமல் பொதுத் தொடங்கல் பிழை"
 
 #: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
-msgstr "¦À¡§É¡§À¡Å¢ý ¦¾¡¼ì¸Á¾¢ôÀÇ¢ì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "பொனோபோவின் தொடக்கமதிப்பளிக்க முடியவில்லை"
 
 #: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "'%s ºÃ¢ÀÎò¾ «øÄÐ ¿£ðÊì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "'%s சரிபடுத்த அல்லது நீட்டிக்க முடியவில்லை"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr "þÄì¨¸ àñÎ ¦ºö ÓÊÂÅ¢ø¨Ä"
+msgstr "இலக்கை தூண்டு செய் முடியவில்லை"
 
 #: monikers/bonobo-moniker-oaf.c:53
 #, fuzzy, c-format
 msgid "Exception activating '%s'"
-msgstr "'%s àñÎ ¦ºöÔõ§À¡Ð Å¢¾¢Å¢ÄìÌ (exception)"
+msgstr "'%s தூண்டு செய்யும்போது விதிவிலக்கு (exception)"
 
 #: monikers/bonobo-moniker-oaf.c:62
 #, fuzzy, c-format
 msgid "Failed to activate '%s'"
-msgstr "'%s àñÎ ¦ºöÂ ÓÊÂÅ¢ø¨Ä"
+msgstr "'%s தூண்டு செய்ய முடியவில்லை"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -389,72 +389,72 @@ msgstr "ORB IOR handling moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "¦ºó¾Ã Moniker ¦¾¡Æ¢üº¡¨Ä"
+msgstr "செந்தர Moniker தொழிற்சாலை"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr "ÅÊÅ¢Âø Oaf àñÎ ¦ºöÔõ moniker"
+msgstr "வடிவியல் Oaf தூண்டு செய்யும் moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr "ÅÊÅ¢Âø Oaf Å¢ÉÅø moniker"
+msgstr "வடிவியல் Oaf வினவல் moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "ÅÊÅ¢Âø ¦¾¡Æ¢üº¡¨Ä 'Ò¾¢Â' moniker"
+msgstr "வடிவியல் தொழிற்சாலை 'புதிய' moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr "ÅÊÅ¢Âø ¯ÕôÀÊ moniker"
+msgstr "வடிவியல் உருப்படி moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr "µ¨¼ MonikerExtender"
+msgstr "ஓடை MonikerExtender"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "Bonobo Echo §º¨ÅÂ¸ ¦¾¡Æ¢üº¡¨Ä"
+msgstr "Bonobo Echo சேவையக தொழிற்சாலை"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "Bonobo Echo §º¨ÅÂ¸ò¾¢ý Á¡¾¢Ã¢ ¿¢Ãø"
+msgstr "Bonobo Echo சேவையகத்தின் மாதிரி நிரல்"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr "±¾¢ÃÇ¢ôÒ ÜÚ"
+msgstr "எதிரளிப்பு கூறு"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr "±¾¢ÃÇ¢ôÒ ÜÚ ¦¾¡Æ¢üº¡¨Ä"
+msgstr "எதிரளிப்பு கூறு தொழிற்சாலை"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr "±ýÉ¡ø ¦À¡§É¡§À¡¨Å ¦¾¡¼í¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "என்னால் பொனோபோவை தொடங்க முடியவில்லை"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "Á¡¾¢Ã¢ ±¾¢ÃÇ¢ôÒ ÜÚ ¯ÕÅ¡ì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "மாதிரி எதிரளிப்பு கூறு உருவாக்க முடியவில்லை"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr "µ÷ Å¢¾¢Å¢ÄìÌ ¿¨¼¦ÀüÈÐ '%s'"
+msgstr "ஓர் விதிவிலக்கு நடைபெற்றது '%s'"
 
 # utils/bonobo-activation-sysconf.c:62
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ô¨À §ºÁ¢ì¸ ÓÊÂÅ¢ø¨Ä.\n"
+msgstr "அமை வடிவக கோப்பை சேமிக்க முடியவில்லை.\n"
 
 # utils/bonobo-activation-sysconf.c:63
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "¾Â×¦ºöÐ '%s' ìÌ ±ØÐÅ¾üÌ «ÛÁ¾¢ ¯ñ¼¡ ±É ºÃ¢À¡÷ì¸×õ.\n"
+msgstr "தயவுசெய்து '%s' க்கு எழுதுவதற்கு அனுமதி உண்டா என சரிபார்க்கவும்.\n"
 
 # utils/bonobo-activation-sysconf.c:66
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÒ ¿øÄÀÊÂ¡¸ §ºÁ¢ì¸ôÀð¼Ð.\n"
+msgstr "அமை வடிவக கோப்பு நல்லபடியாக சேமிக்கப்பட்டது.\n"
 
 # utils/bonobo-activation-sysconf.c:80
 #: utils/bonobo-activation-sysconf.c:80
@@ -463,82 +463,82 @@ msgid ""
 "configuration file is:\n"
 "    %s\n"
 msgstr ""
-"«¨Á ÅÊÅ¸ §¸¡ôÒ:\n"
+"அமை வடிவக கோப்பு:\n"
 "    %s\n"
 
 # utils/bonobo-activation-sysconf.c:118
 #: utils/bonobo-activation-sysconf.c:118
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr "%s ²ü¦¸É§Å «¨Á ÅÊÅ¸ §¸¡ôÀ¢ø ¯ûÇÐ\n"
+msgstr "%s ஏற்கெனவே அமை வடிவக கோப்பில் உள்ளது\n"
 
 # utils/bonobo-activation-sysconf.c:138
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr "ºÃ¢Â¡¸ ¸ð¼¨Áì¸ôÀð¼ «¨Á ÅÊÅ §¸¡ôÒ ¸¢¨¼Â¡Ð\n"
+msgstr "சரியாக கட்டமைக்கப்பட்ட அமை வடிவ கோப்பு கிடையாது\n"
 
 # utils/bonobo-activation-sysconf.c:201
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "Bonobo-activation «¨Á ÅÊÅ¸ §¸¡ôÀ¢Ûû:\n"
+msgstr "Bonobo-activation அமை வடிவக கோப்பினுள்:\n"
 
 # utils/bonobo-activation-sysconf.c:233
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÀ¢ø ­ÕóÐ ¿£ì¸ §ÅñÊÂ «¨¼×"
+msgstr "அமை வடிவக கோப்பில் இருந்து நீக்க வேண்டிய அடைவு"
 
 # utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
-msgstr "«¨¼× À¡¨¾"
+msgstr "அடைவு பாதை"
 
 # utils/bonobo-activation-sysconf.c:236
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÀ¢ø §º÷ì¸ §ÅñÊÂ «¨¼×"
+msgstr "அமை வடிவக கோப்பில் சேர்க்க வேண்டிய அடைவு"
 
 # utils/bonobo-activation-sysconf.c:239
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÀ¢ø ¯øÄ «¨¼×¸¨Çì ¸¡ñÀ¢"
+msgstr "அமை வடிவக கோப்பில் உல்ல அடைவுகளைக் காண்பி"
 
 # utils/bonobo-activation-sysconf.c:242
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÀ¢ý À¡¨¾¨Âì ¸¡ñÀ¢"
+msgstr "அமை வடிவக கோப்பின் பாதையைக் காண்பி"
 
 # bonobo-activation/bonobo-activation-async-callback.c:119
 #~ msgid "No server corresponding to your query"
-#~ msgstr "¯í¸û Å¢É¡×ìÌ ¦À¡Õò¾Á¡É §º¨ÅÂ¸õ ¸¢¨¼Â¡Ð"
+#~ msgstr "உங்கள் வினாவுக்கு பொருத்தமான சேவையகம் கிடையாது"
 
 # server/activation-context-corba.c:684
 #~ msgid "Query failed: "
-#~ msgstr "Å¢É¡ ¦¿¡ÊôÀ¨¼ó¾Ð: "
+#~ msgstr "வினா நொடிப்படைந்தது: "
 
 # server/activation-context-corba.c:712
 #~ msgid "Activation failed: "
-#~ msgstr "­Âì¸ø ¦¿¡ÊôÀ¨¼ó¾Ð: "
+#~ msgstr "இயக்கல் நொடிப்படைந்தது: "
 
 # server/activation-context-corba.c:974
 #~ msgid "Could not parse AID"
-#~ msgstr "AID «Ä¸¢¼ ÓÊÂÅ¢ø¨Ä"
+#~ msgstr "AID அலகிட முடியவில்லை"
 
 # server/activation-context-corba.c:984
 #~ msgid "Could not parse context: "
-#~ msgstr "ÝÆø «Ä¸¢¼ ÓÊÂÅ¢ø¨Ä: "
+#~ msgstr "சூழல் அலகிட முடியவில்லை: "
 
 # server/activation-context-corba.c:1008
 #~ msgid "Could not activate server: "
-#~ msgstr "§º¨ÅÂ¸ò¨¾ ¦¾¡¼í¸ ÓÊÂÅ¢ø¨Ä: "
+#~ msgstr "சேவையகத்தை தொடங்க முடியவில்லை: "
 
 # server/activation-server-main.c:66
 #~ msgid "Domain of ObjectDirectory"
-#~ msgstr "ObjectDirectory'­ý ¸Çõ"
+#~ msgstr "ObjectDirectory'இன் களம்"
 
 # server/activation-server-main.c:66
 #~ msgid "DOMAIN"
-#~ msgstr "¸Çõ"
+#~ msgstr "களம்"
 
 # bonobo-activation/bonobo-activation-init.c:222
 #~ msgid "Object directory to use when registering servers"
-#~ msgstr "§º¨ÅÂ¸í¸¨Ç À¾¢Å¸¢ìÌõ §À¡Ð ÀÂýÀÎò¾ §ÅñÊÂ ­ÄìÌ «¨¼×"
+#~ msgstr "சேவையகங்களை பதிவகிக்கும் போது பயன்படுத்த வேண்டிய இலக்கு அடைவு"
