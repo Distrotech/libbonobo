@@ -256,6 +256,35 @@ const char *requirements,
 			   CORBA_Environment * ev
 </FUNCTION>
 
+<STRUCT>
+<NAME>OAFActivationCallback</NAME>
+typedef void (*OAFActivationCallback) (CORBA_Object   activated_object, 
+				       const char    *error_reason, 
+				       gpointer       user_data);
+
+</STRUCT>
+
+<FUNCTION>
+<RETURNS>void</RETURNS>
+<NAME>oaf_activate_async</NAME>
+const char *requirements,
+			 char *const *selection_order,
+			 OAF_ActivationFlags flags,
+			 OAFActivationCallback callback,
+			 gpointer user_data,
+			 CORBA_Environment * ev
+</FUNCTION>
+
+<FUNCTION>
+<RETURNS>void</RETURNS>
+<NAME>oaf_activate_from_id_async</NAME>
+				 const OAF_ActivationID aid,
+				 OAF_ActivationFlags flags,
+				 OAFActivationCallback callback,
+				 gpointer user_data,
+				 CORBA_Environment * ev
+</FUNCTION>
+
 
 <FUNCTION>
 <NAME>oaf_active_server_unregister</NAME>

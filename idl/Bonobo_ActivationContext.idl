@@ -114,6 +114,11 @@ module OAF {
                 REG_ERROR 
         };
 
+        interface ActivationCallback {
+                oneway void report_activation_failed (in string reason);
+                oneway void report_activation_succeeded (in ActivationResult result);
+        };
+
         /* Interfaces */
         interface ObjectDirectory {
 		enum UnregisterType {
@@ -127,7 +132,7 @@ module OAF {
 
                 Object activate (in ImplementationID iid, in ActivationContext ac, in ActivationFlags flags)
                         context ("username", "hostname", "domain", "display");
-                
+
                 /* Ensures consistency for activations of publicly advertised objects */
                 void lock();
                 oneway void unlock();
@@ -156,6 +161,14 @@ module OAF {
                         raises (ParseFailed, IncompleteContext, GeneralError)
                         context ("username", "hostname", "domain", "display");
 
+                oneway void activate_async (in string requirements,
+                                            in GNOME::stringlist selection_order,
+                                            in ActivationFlags flags,
+                                            in ActivationCallback callback_object)
+                        context ("username", "hostname", "domain", "display");
+
+
+
                 readonly attribute ServerInfoList servers;
                 ServerInfoList query (in string requirements,
                                       in GNOME::stringlist selection_order)
@@ -165,5 +178,11 @@ module OAF {
                 ActivationResult activate_from_id (in ActivationID aid, in ActivationFlags flags)
                         raises (ParseFailed, IncompleteContext, GeneralError)
                         context ("username", "hostname", "domain", "display");
+
+                oneway void activate_from_id_async (in ActivationID aid, 
+                                                    in ActivationFlags flags,
+                                                    in ActivationCallback callback_object)
+                        context ("username", "hostname", "domain", "display");
+
         };
 };

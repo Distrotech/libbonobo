@@ -68,4 +68,8 @@ BUILT_SOURCES=ac-query-lex.c ac-query-parse.c ac-query-parse.h oaf-skels.c
 CLEANFILES=stamp-parser stamp-idl
 
 oaf-skels.c: $(top_srcdir)/idl/oaf.idl
-	$(ORBIT_IDL) --nostubs --noheaders $(top_srcdir)/idl/oaf.idl
+	$(ORBIT_IDL) --noheaders $(top_srcdir)/idl/oaf.idl
+
+
+
+

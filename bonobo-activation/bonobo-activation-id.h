@@ -23,45 +23,30 @@
  *
  */
 
-#ifndef LIBOAF_H
-#define LIBOAF_H 1
+#ifndef OAF_ACTID_H
+#define OAF_ACTID_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <liboaf/liboaf-version.h>
-#include <liboaf/oaf.h>
-
-/* Need to conditionalize this */
-#include <orb/orbit.h>
-
-#include <liboaf/oaf-activate.h>
-#include <liboaf/oaf-servreg.h>
-#include <liboaf/oaf-util.h>
-#include <liboaf/oaf-actid.h>
-#include <liboaf/oaf-plugin.h>
-#include <liboaf/oaf-mainloop.h>
-#include <liboaf/oaf-registration.h>
-
-
-
-/* Optional stuff for libgnome to use */
-#ifdef HAVE_POPT_H
-#include <popt.h>
-#endif
-
-#ifdef POPT_AUTOHELP
-extern struct poptOption oaf_popt_options[];
-#endif
-
-extern const guint liboaf_major_version,
-	liboaf_minor_version, liboaf_micro_version;
-extern const char liboaf_version[];
-
-#ifdef __cplusplus
+/* If you wish to manipulate the internals of this structure, please
+   use g_malloc/g_free to allocate memory. */
+typedef struct
+{
+	char *iid;		/* Implementation ID */
+	char *user;		/* user name */
+	char *host;		/* DNS name or IP address */
+	char *domain;		/* This is not a DNS domain, but an activation domain */
 }
-#endif
+OAFActivationInfo;
 
-#endif /* LIBOAF_H */
 
+OAF_ActivationID    oaf_actinfo_stringify    (const OAFActivationInfo   *actinfo);
+
+OAFActivationInfo  *oaf_servinfo_to_actinfo  (const OAF_ServerInfo      *servinfo);
+
+OAFActivationInfo  *oaf_actid_parse          (const OAF_ActivationID     actid);
+
+OAFActivationInfo  *oaf_actinfo_new          (void);
+
+void                oaf_actinfo_free         (OAFActivationInfo          *actinfo);
+
+
+#endif /* OAF_ACTID_H */

@@ -207,7 +207,6 @@ main (int argc, char *argv[])
         }
         fprintf (stderr, "\n");
 
-
         fprintf (stderr, "\n%d of %d tests passed (%s)\n", passed,
                  TOTAL_TEST_SCORE,
                  passed == TOTAL_TEST_SCORE? "All": "some failures");

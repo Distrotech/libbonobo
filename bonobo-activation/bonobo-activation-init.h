@@ -23,45 +23,27 @@
  *
  */
 
-#ifndef LIBOAF_H
-#define LIBOAF_H 1
+#ifndef OAF_MAINLOOP_H
+#define OAF_MAINLOOP_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+CORBA_ORB      oaf_orb_init   (int   *argc, 
+			       char **argv);
+CORBA_ORB      oaf_orb_get    (void);
 
-#include <liboaf/liboaf-version.h>
-#include <liboaf/oaf.h>
+gboolean       oaf_is_initialized   (void);
+CORBA_ORB      oaf_init       (int      argc, 
+			       char   **argv);
+void           oaf_preinit    (gpointer app, 
+			       gpointer mod_info);
+void           oaf_postinit   (gpointer app, 
+			       gpointer mod_info);
 
-/* Need to conditionalize this */
-#include <orb/orbit.h>
+CORBA_Context  oaf_context_get      (void);
 
-#include <liboaf/oaf-activate.h>
-#include <liboaf/oaf-servreg.h>
-#include <liboaf/oaf-util.h>
-#include <liboaf/oaf-actid.h>
-#include <liboaf/oaf-plugin.h>
-#include <liboaf/oaf-mainloop.h>
-#include <liboaf/oaf-registration.h>
+const char    *oaf_hostname_get     (void);
+const char    *oaf_session_name_get (void);
+const char    *oaf_domain_get       (void);
+#define oaf_username_get() g_get_user_name()
 
-
-
-/* Optional stuff for libgnome to use */
-#ifdef HAVE_POPT_H
-#include <popt.h>
-#endif
-
-#ifdef POPT_AUTOHELP
-extern struct poptOption oaf_popt_options[];
-#endif
-
-extern const guint liboaf_major_version,
-	liboaf_minor_version, liboaf_micro_version;
-extern const char liboaf_version[];
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* LIBOAF_H */
+#endif /* OAF_MAINLOOP_H */
 

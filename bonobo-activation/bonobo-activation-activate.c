@@ -24,6 +24,8 @@
  */
 
 #include "liboaf/liboaf-private.h"
+#include "liboaf/oaf-activate.h"
+#include "liboaf/oaf-activate-private.h"
 
 extern CORBA_Object oaf_server_activate_shlib (OAF_ActivationResult * sh,
 					       CORBA_Environment * ev);
@@ -31,19 +33,70 @@ extern CORBA_Object oaf_server_activate_shlib (OAF_ActivationResult * sh,
 
 static gboolean test_components_enabled = FALSE;
 
+
+/**
+ * oaf_set_test_components_enabled:
+ * @val: if TRUE, enable test components. If FALSE, disable them.
+ * 
+ *
+ * FIXME: add doc for this. 
+ */
 void
 oaf_set_test_components_enabled (gboolean val)
 {
         test_components_enabled = val;
 }
 
-
+/**
+ * oaf_get_test_components_enabled:
+ * 
+ * Return value: returns whether or not the 
+ *               test components are enabled.
+ */
 gboolean
 oaf_get_test_components_enabled ()
 {
         return test_components_enabled;
 }
 
+/**
+ * oaf_maybe_add_test_requirements:
+ * @requirements: the user requirements.
+ *
+ * internal function only: returns a new query string.
+ **/
+char *
+oaf_maybe_add_test_requirements (const char *requirements) 
+{
+        char *ext_requirements;
+
+        if (!oaf_get_test_components_enabled ()) {
+                ext_requirements = g_strconcat ("( ", requirements,
+                                                " ) AND (NOT test_only.defined() OR NOT test_only)",
+                                                NULL);
+        } else {
+                ext_requirements = NULL;
+        }
+
+        return ext_requirements;
+}
+
+void 
+oaf_copy_string_array_to_GNOME_stringlist (char *const *selection_order, GNOME_stringlist *ret_val)
+{
+        int i;
+
+	if (selection_order) {
+		for (i = 0; selection_order[i]; i++)
+			/**/;
+
+		ret_val->_length = i;
+		ret_val->_buffer = (char **) selection_order;
+		CORBA_sequence_set_release (ret_val, CORBA_FALSE);
+	} else {
+		memset (ret_val, 0, sizeof (*ret_val));
+        }
+}
 
 /**
  * oaf_query: 
@@ -66,7 +119,6 @@ oaf_query (const char *requirements, char *const *selection_order,
 {
 	GNOME_stringlist selorder;
 	OAF_ServerInfoList *res;
-	int i;
 	CORBA_Environment myev;
 	OAF_ActivationContext ac;
         char *ext_requirements;
@@ -76,31 +128,22 @@ oaf_query (const char *requirements, char *const *selection_order,
 	ac = oaf_activation_context_get ();
 	g_return_val_if_fail (ac, CORBA_OBJECT_NIL);
 
-        if (!oaf_get_test_components_enabled ()) {
-                ext_requirements = g_strconcat ("( ", requirements,
-                                                " ) AND (NOT test_only.defined() OR NOT test_only)",
-                                                NULL);
-        } else {
-                ext_requirements = NULL;
-        }
+        ext_requirements = oaf_maybe_add_test_requirements (requirements);
 
 	if (!ev) {
 		ev = &myev;
 		CORBA_exception_init (&myev);
 	}
 
-	if (selection_order) {
-		for (i = 0; selection_order[i]; i++)
-			/**/;
+        oaf_copy_string_array_to_GNOME_stringlist (selection_order, &selorder);
 
-		selorder._length = i;
-		selorder._buffer = (char **) selection_order;
-		CORBA_sequence_set_release (&selorder, CORBA_FALSE);
-	} else
-		memset (&selorder, 0, sizeof (selorder));
-
-	res = OAF_ActivationContext_query (ac, (char *) (ext_requirements ? ext_requirements : requirements),
-					   &selorder, oaf_context_get (), ev);
+        if (ext_requirements == NULL) {
+                res = OAF_ActivationContext_query (ac, (char *) requirements,
+                                                   &selorder, oaf_context_get (), ev);
+        } else {
+                res = OAF_ActivationContext_query (ac, (char *) ext_requirements,
+                                                   &selorder, oaf_context_get (), ev);
+        }
 
         if (ext_requirements != NULL) {
                 g_free (ext_requirements);
@@ -137,50 +180,49 @@ oaf_activate (const char *requirements, char *const *selection_order,
 	      CORBA_Environment * ev)
 {
 	GNOME_stringlist selorder;
-	CORBA_Object retval = CORBA_OBJECT_NIL;
+	CORBA_Object retval;
 	OAF_ActivationResult *res;
-	int i;
 	CORBA_Environment myev;
 	OAF_ActivationContext ac;
         char *ext_requirements;
+
+        retval = CORBA_OBJECT_NIL;
 
 	g_return_val_if_fail (requirements, CORBA_OBJECT_NIL);
 	ac = oaf_activation_context_get ();
 	g_return_val_if_fail (ac, CORBA_OBJECT_NIL);
 
-        if (!oaf_get_test_components_enabled ()) {
-                ext_requirements = g_strconcat ("( ", requirements,
-                                                " ) AND (NOT test_only.defined() OR NOT test_only)",
-                                                NULL);
-        } else {
-                ext_requirements = NULL;
-        }
+        ext_requirements = oaf_maybe_add_test_requirements (requirements);
 
 	if (!ev) {
 		ev = &myev;
 		CORBA_exception_init (&myev);
 	}
 
-	if (selection_order) {
-		for (i = 0; selection_order[i]; i++)
-			/**/;
+        oaf_copy_string_array_to_GNOME_stringlist (selection_order, &selorder);
 
-		selorder._length = i;
-		selorder._buffer = (char **) selection_order;
-		CORBA_sequence_set_release (&selorder, CORBA_FALSE);
-	} else
-		memset (&selorder, 0, sizeof (selorder));
-
-	res = OAF_ActivationContext_activate (ac, (char *) (ext_requirements ? ext_requirements : requirements),
-					      &selorder, flags,
-					      oaf_context_get (), ev);
+        if (ext_requirements == NULL) {
+                res = OAF_ActivationContext_activate (ac, (char *) requirements,
+                                                      &selorder, flags,
+                                                      oaf_context_get (), ev);
+        } else {
+                res = OAF_ActivationContext_activate (ac, (char *) ext_requirements,
+                                                      &selorder, flags,
+                                                      oaf_context_get (), ev);
+        }
 
         if (ext_requirements != NULL) {
                 g_free (ext_requirements);
         }
 
-	if (ev->_major != CORBA_NO_EXCEPTION)
-		goto out;
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+                if (ev == &myev) {
+                        CORBA_exception_free (&myev);
+                }
+                
+                return retval;
+        }
+
 
 	switch (res->res._d) {
 	case OAF_RESULT_SHLIB:
@@ -202,7 +244,6 @@ oaf_activate (const char *requirements, char *const *selection_order,
 
 	CORBA_free (res);
 
-      out:
 	if (ev == &myev)
 		CORBA_exception_free (&myev);
 
@@ -238,8 +279,9 @@ oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
 
 	ai = oaf_actid_parse (aid);
 
-	if (ai) {		/* This is so that using an AID in an unactivated OD will work nicely */
-		OAFRegistrationCategory regcat;
+	if (ai) {		
+                /* This is so that using an AID in an unactivated OD will work nicely */
+                OAFRegistrationCategory regcat;
 
 		memset (&regcat, 0, sizeof (regcat));
 		regcat.name = "IDL:OAF/ObjectDirectory:1.0";
@@ -258,10 +300,9 @@ oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
 		CORBA_exception_init (&myev);
 	}
 
-	res =
-		OAF_ActivationContext_activate_from_id (ac, aid, flags,
-							oaf_context_get (),
-							ev);
+	res = OAF_ActivationContext_activate_from_id (ac, aid, flags,
+                                                      oaf_context_get (),
+                                                      ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
 

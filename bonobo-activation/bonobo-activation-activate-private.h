@@ -23,45 +23,13 @@
  *
  */
 
-#ifndef LIBOAF_H
-#define LIBOAF_H 1
+#ifndef OAF_ACTIVATE_PRIVATE_H
+#define OAF_ACTIVATE_PRIVATE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <liboaf/liboaf-version.h>
-#include <liboaf/oaf.h>
-
-/* Need to conditionalize this */
-#include <orb/orbit.h>
-
-#include <liboaf/oaf-activate.h>
-#include <liboaf/oaf-servreg.h>
-#include <liboaf/oaf-util.h>
-#include <liboaf/oaf-actid.h>
-#include <liboaf/oaf-plugin.h>
-#include <liboaf/oaf-mainloop.h>
-#include <liboaf/oaf-registration.h>
+char              *oaf_maybe_add_test_requirements            (const char *requirements);
+void               oaf_copy_string_array_to_GNOME_stringlist  (char *const *selection_order, 
+                                                               GNOME_stringlist *ret_val);
 
 
 
-/* Optional stuff for libgnome to use */
-#ifdef HAVE_POPT_H
-#include <popt.h>
-#endif
-
-#ifdef POPT_AUTOHELP
-extern struct poptOption oaf_popt_options[];
-#endif
-
-extern const guint liboaf_major_version,
-	liboaf_minor_version, liboaf_micro_version;
-extern const char liboaf_version[];
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* LIBOAF_H */
-
+#endif /* OAF_ACTIVATE_PRIVATE_H */

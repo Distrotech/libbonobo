@@ -107,9 +107,8 @@ oaf_registration_check (const OAFRegistrationCategory * regcat,
 		if (!ri->regloc->check)
 			continue;
 
-		new_ior =
-			ri->regloc->check (ri->regloc, regcat, &new_dist,
-					   ri->user_data);
+		new_ior = ri->regloc->check (ri->regloc, regcat, 
+                                             &new_dist, ri->user_data);
 		if (new_ior && (new_dist < dist)) {
 			g_free (ior);
 			ior = new_ior;
@@ -451,14 +450,11 @@ struct SysServer
 }
 activatable_servers[] =
 {
-	{
-		"IDL:OAF/ActivationContext:1.0", (const char **) oaf_ac_cmd,
-			2, CORBA_OBJECT_NIL}
-	, {
-		"IDL:OAF/ObjectDirectory:1.0", (const char **) oaf_od_cmd,
-			1, CORBA_OBJECT_NIL}
-	, {
-	NULL}
+	{"IDL:OAF/ActivationContext:1.0", (const char **) oaf_ac_cmd,
+         2, CORBA_OBJECT_NIL}, 
+        {"IDL:OAF/ObjectDirectory:1.0", (const char **) oaf_od_cmd,
+         1, CORBA_OBJECT_NIL},
+	{ NULL}
 };
 
 #define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
@@ -479,7 +475,9 @@ existing_check (const OAFRegistrationCategory * regcat, struct SysServer *ss)
 		    && (!ssi->domain
 			|| STRMATCH (ssi->domain,
 				     regcat->
-				     domain))) return ssi->already_running;
+				     domain))) {
+                        return ssi->already_running;
+                }
 	}
 
 	return CORBA_OBJECT_NIL;

@@ -23,45 +23,47 @@
  *
  */
 
-#ifndef LIBOAF_H
-#define LIBOAF_H 1
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <liboaf/liboaf-version.h>
-#include <liboaf/oaf.h>
-
-/* Need to conditionalize this */
-#include <orb/orbit.h>
-
-#include <liboaf/oaf-activate.h>
-#include <liboaf/oaf-servreg.h>
-#include <liboaf/oaf-util.h>
-#include <liboaf/oaf-actid.h>
-#include <liboaf/oaf-plugin.h>
-#include <liboaf/oaf-mainloop.h>
-#include <liboaf/oaf-registration.h>
+#ifndef OAF_ACTIVATE_H
+#define OAF_ACTIVATE_H
 
 
+CORBA_Object oaf_name_service_get (CORBA_Environment * ev);
 
-/* Optional stuff for libgnome to use */
-#ifdef HAVE_POPT_H
-#include <popt.h>
-#endif
 
-#ifdef POPT_AUTOHELP
-extern struct poptOption oaf_popt_options[];
-#endif
+OAF_ServerInfoList *oaf_query (const char *requirements,
+			       char *const *selection_order,
+			       CORBA_Environment * ev);
+CORBA_Object oaf_activate (const char *requirements,
+			   char *const *selection_order,
+			   OAF_ActivationFlags flags,
+			   OAF_ActivationID * ret_aid,
+			   CORBA_Environment * ev);
+CORBA_Object oaf_activate_from_id (const OAF_ActivationID aid,
+				   OAF_ActivationFlags flags,
+				   OAF_ActivationID * ret_aid,
+				   CORBA_Environment * ev);
 
-extern const guint liboaf_major_version,
-	liboaf_minor_version, liboaf_micro_version;
-extern const char liboaf_version[];
 
-#ifdef __cplusplus
-}
-#endif
 
-#endif /* LIBOAF_H */
+
+/* debugging functions. */
+void         oaf_set_test_components_enabled (gboolean val);
+gboolean     oaf_get_test_components_enabled (void);
+
+
+
+#endif /* OAF_ACTIVATE_H */
+
+
+
+
+
+
+
+
+
+
+
+
+
 

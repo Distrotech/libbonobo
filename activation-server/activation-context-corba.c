@@ -55,6 +55,17 @@ typedef struct
 }
 ChildODInfo;
 
+
+
+/* forward declarations */
+char     *ac_aid_to_query_string       (OAF_ActivationID aid);
+void      ac_context_to_string_array   (CORBA_Context context, 
+                                        char *sort_criteria[4],
+                                        CORBA_Environment *ev);
+
+
+
+
 static ChildODInfo *
 child_od_info_new (OAF_ObjectDirectory obj, CORBA_Environment * ev)
 {
@@ -240,6 +251,15 @@ impl_OAF_ActivationContext_activate (impl_POA_OAF_ActivationContext * servant,
 				     CORBA_Context ctx,
 				     CORBA_Environment * ev);
 
+static void
+impl_OAF_ActivationContext_activate_async(impl_POA_OAF_ActivationContext *
+					  servant, CORBA_char * requirements,
+					  GNOME_stringlist * selection_order,
+					  OAF_ActivationFlags flags,
+					  OAF_ActivationCallback
+					  callback_object, CORBA_Context ctx,
+					  CORBA_Environment * ev);
+
 static OAF_ServerInfoList
 	* impl_OAF_ActivationContext__get_servers
 	(impl_POA_OAF_ActivationContext * servant, CORBA_Environment * ev);
@@ -258,6 +278,13 @@ static OAF_ActivationResult
 	(impl_POA_OAF_ActivationContext * servant, OAF_ActivationID aid,
 	 OAF_ActivationFlags flags, CORBA_Context ctx,
 	 CORBA_Environment * ev);
+
+static void
+impl_OAF_ActivationContext_activate_from_id_async
+   (impl_POA_OAF_ActivationContext * servant, OAF_ActivationID aid,
+    OAF_ActivationFlags flags, OAF_ActivationCallback callback_object,
+    CORBA_Context ctx, CORBA_Environment * ev);
+
 
 static void
 ac_query_run (impl_POA_OAF_ActivationContext * servant,
@@ -286,9 +313,11 @@ static POA_OAF_ActivationContext__epv impl_OAF_ActivationContext_epv = {
 	(gpointer) &impl_OAF_ActivationContext_add_directory,
 	(gpointer) &impl_OAF_ActivationContext_remove_directory,
 	(gpointer) &impl_OAF_ActivationContext_activate,
+        (gpointer) &impl_OAF_ActivationContext_activate_async,
 	(gpointer) &impl_OAF_ActivationContext__get_servers,
 	(gpointer) &impl_OAF_ActivationContext_query,
-	(gpointer) &impl_OAF_ActivationContext_activate_from_id
+	(gpointer) &impl_OAF_ActivationContext_activate_from_id,
+        (gpointer) &impl_OAF_ActivationContext_activate_from_id_async
 };
 
 /*** vepv structures ***/
@@ -584,6 +613,75 @@ impl_OAF_ActivationContext_activate (impl_POA_OAF_ActivationContext * servant,
 	return retval;
 }
 
+
+static void
+impl_OAF_ActivationContext_activate_async(impl_POA_OAF_ActivationContext *
+					  servant, CORBA_char * requirements,
+					  GNOME_stringlist * selection_order,
+					  OAF_ActivationFlags flags,
+					  OAF_ActivationCallback callback_object, 
+                                          CORBA_Context ctx,
+					  CORBA_Environment * ev)
+{
+	OAF_ActivationResult *retval = NULL;
+	OAF_ServerInfo **items, *curitem;
+	int i;
+	char *hostname;
+
+	hostname = ac_CORBA_Context_get_value (ctx, "hostname", ev);
+	ac_update_lists (servant, ev);
+
+	servant->refs++;
+
+	items = oaf_alloca (servant->total_servers *
+			    sizeof (OAF_ServerInfo *));
+	ac_query_run (servant, requirements, selection_order, ctx, items, ev);
+
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+                char *message;
+                g_free (hostname);
+                servant->refs--;
+                
+                message = g_strconcat(_("Query failed: "), CORBA_exception_id (ev), NULL);
+                OAF_ActivationCallback_report_activation_failed (callback_object,
+                                                                 message, ev);
+                g_free (message);
+                return;
+        }
+
+	retval = OAF_ActivationResult__alloc ();
+	retval->res._d = OAF_RESULT_NONE;
+
+	for (i = 0; (retval->res._d == OAF_RESULT_NONE) && items[i]
+	     && (i < servant->total_servers); i++) {
+		curitem = items[i];
+
+		ac_do_activation (servant, curitem, retval, flags, hostname,
+				  ctx, ev);
+	}
+
+	if (retval->res._d == OAF_RESULT_NONE)
+		retval->aid = CORBA_string_dup ("");
+
+
+        if (ev->_major != CORBA_NO_EXCEPTION) {
+                char *message;
+                g_free (hostname);
+                CORBA_free (retval);
+                servant->refs--;
+                
+                message = g_strconcat(_("Activation failed: "), CORBA_exception_id (ev), NULL);
+                OAF_ActivationCallback_report_activation_failed (callback_object,
+                                                                 message, ev);
+                g_free (message);
+                return;
+        }
+
+        /* return the correct value back to the client */
+        OAF_ActivationCallback_report_activation_succeeded (callback_object, retval, ev);
+}
+
+
 static void
 ac_update_lists (impl_POA_OAF_ActivationContext * servant,
 		 CORBA_Environment * ev)
@@ -831,34 +929,18 @@ impl_OAF_ActivationContext_query (impl_POA_OAF_ActivationContext * servant,
 	return retval;
 }
 
-static OAF_ActivationResult *
-impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
-					     servant, OAF_ActivationID aid,
-					     OAF_ActivationFlags flags,
-					     CORBA_Context ctx,
-					     CORBA_Environment * ev)
+char *
+ac_aid_to_query_string (OAF_ActivationID aid)
 {
-	OAF_ActivationResult *retval;
-	OAFActivationInfo *ainfo;
-	char *context_username;
-	char *context_hostname;
-	char *context_domain;
         char *tmp_aid;
         char *requirements;
         char *iid_requirement;
         char *username_requirement;
         char *hostname_requirement;
         char *domain_requirement;
-        char *sort_criteria[4];
-        GNOME_stringlist selection_order;
+	OAFActivationInfo *ainfo;
 
-	ac_update_lists (servant, ev);
-
-	servant->refs++;
-
-	retval = OAF_ActivationResult__alloc ();
-	retval->res._d = OAF_RESULT_NONE;
-
+        /* FIXME: this is completely broken. we activate by AID, not IID. */
         if (strncmp ("OAFIID:", aid, 7) == 0) {
                 tmp_aid = g_strconcat ("OAFAID:[", aid, "]", NULL);
                 ainfo = oaf_actid_parse (tmp_aid);
@@ -867,8 +949,8 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
                 ainfo = oaf_actid_parse (aid);
         }
 
-	if (!ainfo) {
-                goto out;
+	if (ainfo == NULL) {
+                return NULL;
 	}
 
         iid_requirement = g_strconcat ("iid == \'", ainfo->iid, "\' ", NULL);
@@ -898,18 +980,27 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
         g_free (username_requirement);
         g_free (hostname_requirement);
         g_free (domain_requirement);
+        oaf_actinfo_free (ainfo);
+
+        return requirements;
+}
+
+void
+ac_context_to_string_array (CORBA_Context context, char **sort_criteria, CORBA_Environment *ev)
+{
+	char *context_username;
+	char *context_hostname;
+	char *context_domain;
 
         /* FIXME bugzilla.eazel.com 2730: either I am doing something
          * really wrong here or CORBA_Context is broken in ORBit 
          */
 
-        context_username = ac_CORBA_Context_get_value (ctx, "username", ev);
-        context_hostname = ac_CORBA_Context_get_value (ctx, "hostname", ev);
-        context_domain = ac_CORBA_Context_get_value (ctx, "domain", ev);
-
-	if (ev->_major != CORBA_NO_EXCEPTION)
-        {
-                goto out;
+        context_username = ac_CORBA_Context_get_value (context, "username", ev);
+        context_hostname = ac_CORBA_Context_get_value (context, "hostname", ev);
+        context_domain = ac_CORBA_Context_get_value (context, "domain", ev);
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+                return;
         }
         
         sort_criteria[0] = g_strconcat ("username == \'", context_username, "\'", NULL);
@@ -920,91 +1011,128 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
         g_free (context_username);
         g_free (context_hostname);
         g_free (context_domain);
+}
+
+
+
+
+static OAF_ActivationResult *
+impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
+					     servant, OAF_ActivationID aid,
+					     OAF_ActivationFlags flags,
+					     CORBA_Context ctx,
+					     CORBA_Environment * ev)
+{
+	OAF_ActivationResult *retval;
+        char *requirements;
+        char *sort_criteria[4];
+        GNOME_stringlist selection_order;
+
+	ac_update_lists (servant, ev);
+        if (ev->_major != CORBA_NO_EXCEPTION) {
+                return CORBA_OBJECT_NIL;
+        }
+
+
+	servant->refs++;
+
+        requirements = ac_aid_to_query_string (aid);
+        if (requirements == NULL) {
+                servant->refs--;
+                return CORBA_OBJECT_NIL;
+        }
+
+        ac_context_to_string_array (ctx, sort_criteria, ev);
+        if (ev->_major != CORBA_NO_EXCEPTION) {
+                servant->refs--;
+                return CORBA_OBJECT_NIL;
+        }
 
         selection_order._length = 3;
         selection_order._buffer = sort_criteria;
         CORBA_sequence_set_release (&selection_order, CORBA_FALSE);
-        
-        retval =
-                impl_OAF_ActivationContext_activate (servant,
-                                                     requirements,
-                                                     &selection_order,
-                                                     flags,
-                                                     ctx, ev);
 
+        retval = impl_OAF_ActivationContext_activate (servant,
+                                                      requirements,
+                                                      &selection_order,
+                                                      flags,
+                                                      ctx, ev);        
         g_free (sort_criteria[0]);
         g_free (sort_criteria[1]);
         g_free (sort_criteria[2]);
 
-        goto out;
+        servant->refs--;
 
-#if 0
-
-	for (cur = servant->dirs; cur && !child; cur = cur->next) {
-		ChildODInfo *curchild;
-
-		curchild = cur->data;
-
-		if (ainfo->user
-		    && (!curchild->username
-			|| strcmp (ainfo->user,
-				   curchild->username))) continue;
-		if (ainfo->host
-		    && (!curchild->hostname
-			|| strcmp (ainfo->host,
-				   curchild->hostname))) continue;
-		if (ainfo->domain
-		    && (!curchild->domain
-			|| strcmp (ainfo->domain,
-				   curchild->domain))) continue;
-		child = curchild;
-	}
-
-	if (!child)
-        {
-                CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-                                     ex_OAF_ActivationContext_IncompleteContext,
-                                     NULL);
-		goto out;	/* FIXME bugzilla.eazel.com 2731: in future, add hook to allow starting a new OD on demand */
-        }
-
-
-
-	if (!si)
-		goto out;
-
-	hostname = ac_CORBA_Context_get_value (ctx, "hostname", ev);
-	if (ev->_major != CORBA_NO_EXCEPTION)
-        {
-                CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-                                     ex_OAF_ActivationContext_IncompleteContext,
-                                     NULL);
-		goto out;
-        }
-
-	ac_do_activation (servant, si, retval, flags, hostname, ctx, ev);
-
-	g_free (hostname);
-#endif
-
-      out:
-	servant->refs--;
-	if (ainfo) {
-		oaf_actinfo_free (ainfo);
-	}
-
-	if (ev->_major == CORBA_NO_EXCEPTION) {
-		if (retval->res._d == OAF_RESULT_NONE)
-			retval->aid = CORBA_string_dup ("");
-	} else {
-		CORBA_free (retval);
-		retval = NULL;
-	}
-
-	return retval;
+        return retval;
 }
 
 
+static void
+impl_OAF_ActivationContext_activate_from_id_async
+                (impl_POA_OAF_ActivationContext * servant, 
+                 OAF_ActivationID aid,
+                 OAF_ActivationFlags flags, 
+                 OAF_ActivationCallback callback_object,
+                 CORBA_Context ctx, 
+                 CORBA_Environment * ev)
+{
+	OAF_ActivationResult *retval;
+        char *requirements;
+        char *sort_criteria[4];
+        GNOME_stringlist selection_order;
+
+	ac_update_lists (servant, ev);
+
+	servant->refs++;
+
+        requirements = ac_aid_to_query_string (aid);
+        if (requirements == NULL) {
+                servant->refs--;
+                OAF_ActivationCallback_report_activation_failed (callback_object,
+                                                                 _("Could not parse AID"), ev);
+                return;
+        }
+
+
+        ac_context_to_string_array (ctx, sort_criteria, ev);
+        if (ev->_major != CORBA_NO_EXCEPTION) {
+                char *message;
+                servant->refs--;
+                message = g_strconcat (_("Could not parse context: "), CORBA_exception_id (ev), NULL);
+                OAF_ActivationCallback_report_activation_failed (callback_object,
+                                                                 message, ev);
+                g_free (message);
+                return;
+        }
+
+        selection_order._length = 3;
+        selection_order._buffer = sort_criteria;
+        CORBA_sequence_set_release (&selection_order, CORBA_FALSE);
+
+        retval = impl_OAF_ActivationContext_activate (servant,
+                                                      requirements,
+                                                      &selection_order,
+                                                      flags,
+                                                      ctx, ev);
+        g_free (sort_criteria[0]);
+        g_free (sort_criteria[1]);
+        g_free (sort_criteria[2]);
+
+        if (ev->_major != CORBA_NO_EXCEPTION) {
+                char *message;
+                servant->refs--;
+                message = g_strconcat (_("Could not activate server: "), CORBA_exception_id (ev), NULL);
+                OAF_ActivationCallback_report_activation_failed (callback_object,
+                                                                 message, ev);
+                g_free (message);
+                return;
+        }
+
+        servant->refs--;
+
+        OAF_ActivationCallback_report_activation_succeeded (callback_object,
+                                                            retval, ev);
+}
 
 
 

@@ -29,6 +29,8 @@
 /* ORBit-specific hack */
 #include <orb/orbit_poa.h>
 
+#include "oaf-plugin.h"
+
 typedef struct
 {
 	GModule *loaded;

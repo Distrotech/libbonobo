@@ -1,13 +1,46 @@
-noinst_PROGRAMS=oaf-empty-server oaf-test-client
-bin_PROGRAMS=oaf-run-query
+NULL=
 
-oaf_test_client_SOURCES=oaf-test-client.c empty-common.c empty.h empty-stubs.c
+noinst_PROGRAMS=		\
+	oaf-empty-server 	\
+	oaf-test-client		\
+	oaf-test-async		\
+	$(NULL)
 
-oaf_run_query_SOURCES=oaf-run-query.c empty-common.c empty.h empty-stubs.c
+bin_PROGRAMS=			\
+	oaf-run-query		\
+	$(NULL)
 
-oaf_empty_server_SOURCES=empty-server.c empty.h empty-common.c empty-skels.c
+oaf_test_async_SOURCES=		\
+	oaf-test-async.c 	\
+	$(NULL)
 
-BUILT_SOURCES=empty.h empty-common.c empty-stubs.c empty-skels.c
+oaf_test_client_SOURCES=	\
+	oaf-test-client.c 	\
+	empty-common.c 		\
+	empty.h 		\
+	empty-stubs.c		\
+	$(NULL)
+
+oaf_run_query_SOURCES=		\
+	oaf-run-query.c 	\
+	empty-common.c 		\
+	empty.h 		\
+	empty-stubs.c		\
+	$(NULL)
+
+oaf_empty_server_SOURCES=	\
+	empty-server.c 		\
+	empty.h 		\
+	empty-common.c 		\
+	empty-skels.c		\
+	$(NULL)
+
+BUILT_SOURCES=			\
+	empty.h 		\
+	empty-common.c 		\
+	empty-stubs.c 		\
+	empty-skels.c		\
+	$(NULL)
 
 empty.h empty-common.c empty-stubs.c empty-skels.c: empty_built
 

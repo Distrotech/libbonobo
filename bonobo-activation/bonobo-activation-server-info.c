@@ -23,7 +23,8 @@
  *
  */
 
-#include "liboaf.h"
+
+#include "oaf-util.h"
 
 /**
  * oaf_server_info_prop_find:

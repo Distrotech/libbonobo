@@ -99,4 +99,32 @@ since there are optimizations to save this call but the general idea is right).
 
 </sect1>
 
+<sect1>
+<title>Async Activation</title>
+
+<para>
+OAF also has a set of asynchronous activation interfaces so that you do not need to block
+on activation calls. The CORBA level is pretty simple: the activation context has a set of 
+<function>_async</function> calls: <function>OAF_ACtivationContext_activate_async</function>
+and <function>OAF_ACtivationContext_activate_from_id_async</function>. Both of those calls
+take an OAFActivationCallback CORBA object as parameter. This object, which is supposed to 
+be implemented by client applications (it is actually implemented in liboaf) will receive
+CORBA calls when the activation is finished:
+<programlisting>
+module OAF {
+        interface ActivationCallback {
+                oneway void report_activation_failed (in string reason);
+                oneway void report_activation_succeeded (in ActivationResult result);
+        };
+};
+</programlisting>
+</para>
+
+<para>
+Of course, liboaf provides comvenient wrappers for those CORBA functions. Those are named
+<function>oaf_activate_async</function> and <function>oaf_activate_from_id_async</function>.
+</para>
+
+</sect1>
+
 </chapter>

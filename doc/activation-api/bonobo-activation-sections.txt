@@ -23,6 +23,9 @@ OAF_ActivationFlags
 oaf_query
 oaf_activate
 oaf_activate_from_id
+OAFActivationCallback
+oaf_activate_async
+oaf_activate_from_id_async
 </SECTION>
 
 <SECTION>

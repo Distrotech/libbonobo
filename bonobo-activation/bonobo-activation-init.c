@@ -27,6 +27,9 @@
 #include "oaf-i18n.h"
 #include "liboaf/liboaf-private.h"
 
+#include "liboaf/oaf-mainloop.h"
+#include "liboaf/oaf-registration.h"
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>

@@ -23,45 +23,20 @@
  *
  */
 
-#ifndef LIBOAF_H
-#define LIBOAF_H 1
+#ifndef OAF_SERVREG_H
+#define OAF_SERVREG_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+OAF_RegistrationResult oaf_active_server_register (const char  *iid,
+						   CORBA_Object obj);
+void        oaf_active_server_unregister (const char  *iid, 
+					  CORBA_Object obj);
 
-#include <liboaf/liboaf-version.h>
-#include <liboaf/oaf.h>
-
-/* Need to conditionalize this */
-#include <orb/orbit.h>
-
-#include <liboaf/oaf-activate.h>
-#include <liboaf/oaf-servreg.h>
-#include <liboaf/oaf-util.h>
-#include <liboaf/oaf-actid.h>
-#include <liboaf/oaf-plugin.h>
-#include <liboaf/oaf-mainloop.h>
-#include <liboaf/oaf-registration.h>
+char       *oaf_make_registration_id     (const char *iid, 
+					  const char *display);
 
 
+const char *oaf_activation_iid_get       (void);
 
-/* Optional stuff for libgnome to use */
-#ifdef HAVE_POPT_H
-#include <popt.h>
-#endif
 
-#ifdef POPT_AUTOHELP
-extern struct poptOption oaf_popt_options[];
-#endif
-
-extern const guint liboaf_major_version,
-	liboaf_minor_version, liboaf_micro_version;
-extern const char liboaf_version[];
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* LIBOAF_H */
+#endif /* OAF_SERVREG_H */
 
