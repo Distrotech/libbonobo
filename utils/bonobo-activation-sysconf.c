@@ -26,9 +26,9 @@
 #include "config.h"
 #include <string.h>
 #include <glib.h>
-#include <libxml/tree.h>        /* gnome-xml */
-#include <libxml/parser.h>      /* gnome-xml */
-#include <libxml/xmlmemory.h>   /* gnome-xml */
+#include <libxml/tree.h>   
+#include <libxml/parser.h>  
+#include <libxml/xmlmemory.h>
 #include <popt.h>        /* popt :) */
 
 #include <bonobo-activation/bonobo-activation.h>

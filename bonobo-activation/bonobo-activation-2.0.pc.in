@@ -3,7 +3,7 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@/bonobo-activation-2.0
 datadir=@datadir@
-idldir=@datadir@/idl
+idldir=@datadir@/idl/bonobo-activation-2.0
 
 Name: Bonobo Activation
 Version: @VERSION@

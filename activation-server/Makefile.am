@@ -31,7 +31,7 @@ bonobo_activation_server_SOURCES=				\
 	server.h
 
 LDADD=../bonobo-activation/libbonobo-activation.la \
-	$(SERVER_LIBS) -lname-server @INTLLIBS@
+	$(SERVER_LIBS) -lname-server-2 @INTLLIBS@
 
 activation_client_SOURCES=client.c
 
