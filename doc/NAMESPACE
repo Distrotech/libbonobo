@@ -11,6 +11,7 @@ subdomains:
 	Achtung/		achtung		mkestner@ameritech.net
 	ControlCenter/		control-center	?
 	Crescendo/		creschendo	will@lashell.net
+	Database/		libgda		rodrigo@linuxave.net
 	DB/			Gnome-db	rodrigo@linuxave.net
 	Dia/			Dia		james@daa.com.au
 	Development/		gnome-debug,	jpr@helixcode.com, dave@helixcode.com
