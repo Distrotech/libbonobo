@@ -87,6 +87,18 @@ an interface for exposing property editors as controls
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_property_control_new_full ##### -->
+<para>
+
+</para>
+
+@get_fn: 
+@num_pages: 
+@event_source: 
+@closure: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_property_control_construct ##### -->
 <para>
 
@@ -109,5 +121,14 @@ an interface for exposing property editors as controls
 
 @property_control: 
 @opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_property_control_get_event_source ##### -->
+<para>
+
+</para>
+
+@property_control: 
+@Returns: 
 
 

@@ -2,11 +2,76 @@
 bonobo-property-bag-xml
 
 <!-- ##### SECTION Short_Description ##### -->
-
+BonoboArg XML persistance logic
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
+This API is really super simple, it is designed in conjuction
+with the #BonoboUINode API to allow you to serialize a #BonoboArg
+( in fact a CORBA_any ) to an XML format, and obviously the
+converse.
+</para>
 
+<para>
+Here is a sample use in code to produce an XML string from a
+CORBA_any or BonoboArg:
+   <example>
+     <title>Converting Any to XML</title>
+     <programlisting>
+#include <bonobo.h>
+
+char *
+convert_arg_to_xml (BonoboArg *bonobo_arg)
+{
+	CORBA_Environment ev;
+	BonoboUINode     *node;
+	char             *value;
+
+	CORBA_exception_init (&ev);
+
+	node = bonobo_property_bag_xml_encode_any (NULL, bonobo_arg, &ev);
+	if (!node)
+		return NULL;
+
+	value = bonobo_property_bag_xml_decode_any (node, &ev);
+	bonobo_ui_node_free (node);
+
+	CORBA_exception_free (&ev);
+
+	return value;
+}
+     </programlisting>
+   </example>
+</para>
+
+<para>
+Here is the converse sample to produce a BonoboArg from an XML string:
+   <example>
+     <title>Converting XML to an Any</title>
+     <programlisting>
+#include <bonobo.h>
+
+BonoboArg *
+convert_xml_to_arg (const char *xml)
+{
+	CORBA_Environment ev;
+	BonoboUINode     *node;
+
+	CORBA_exception_init (&ev);
+
+	node = bonobo_ui_node_from_string (xml);
+	if (!node)
+		return NULL;
+
+	value = bonobo_property_bag_xml_decode_any (node, &ev);
+
+	bonobo_ui_node_free (node);
+	CORBA_exception_free (&ev);
+
+	return value;
+}
+     </programlisting>
+   </example>
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

@@ -269,6 +269,17 @@ Returns the #GtkType for the BonoboObject object.
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_object_activate_servant_full ##### -->
+<para>
+
+</para>
+
+@object: 
+@servant: 
+@shlib_id: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_object_add_interface ##### -->
 <para>
 
@@ -384,6 +395,22 @@ Returns the #GtkType for the BonoboObject object.
 @object: 
 @corba_object: 
 @ev: 
+
+
+<!-- ##### FUNCTION bonobo_object_list_unref_all ##### -->
+<para>
+
+</para>
+
+@list: 
+
+
+<!-- ##### FUNCTION bonobo_object_slist_unref_all ##### -->
+<para>
+
+</para>
+
+@list: 
 
 
 <!-- ##### MACRO BONOBO_OBJREF ##### -->

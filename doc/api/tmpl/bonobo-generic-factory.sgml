@@ -200,3 +200,45 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI
 @data: 
 
 
+<!-- ##### FUNCTION bonobo_generic_factory_get_epv ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_generic_factory_corba_object_create ##### -->
+<para>
+
+</para>
+
+@object: 
+@shlib_id: 
+@Returns: 
+
+
+<!-- ##### MACRO BONOBO_OAF_FACTORY ##### -->
+<para>
+
+</para>
+
+@oafiid: 
+@descr: 
+@version: 
+@fn: 
+@data: 
+
+
+<!-- ##### MACRO BONOBO_OAF_FACTORY_MULTI ##### -->
+<para>
+
+</para>
+
+@oafiid: 
+@descr: 
+@version: 
+@fn: 
+@data: 
+
+

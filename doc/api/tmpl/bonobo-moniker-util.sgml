@@ -34,6 +34,16 @@ The moniker utility functions provide two sets of functions
 
 </para>
 
+<!-- ##### USER_FUNCTION BonoboMonikerAsyncFn ##### -->
+<para>
+
+</para>
+
+@object: 
+@ev: 
+@user_data: 
+
+
 <!-- ##### FUNCTION bonobo_get_object ##### -->
 <para>
 
@@ -127,6 +137,19 @@ The moniker utility functions provide two sets of functions
 @str: 
 @min_idx: 
 @Returns: 
+
+
+<!-- ##### FUNCTION bonobo_get_object_async ##### -->
+<para>
+
+</para>
+
+@name: 
+@interface_name: 
+@ev: 
+@timeout_msec: 
+@cb: 
+@user_data: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_client_new_from_name_async ##### -->

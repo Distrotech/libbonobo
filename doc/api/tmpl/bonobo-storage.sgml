@@ -2,7 +2,7 @@
 bonobo-storage
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Abstract implementation of the Bonobo::Storage interface
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>

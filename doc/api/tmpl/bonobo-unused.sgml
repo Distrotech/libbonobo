@@ -4950,13 +4950,6 @@ Returns the #GtkType for the GnomeObject object.
 
 @Returns: 
 
-<!-- ##### FUNCTION bonobo_generic_factory_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
 <!-- ##### FUNCTION bonobo_generic_factory_get_type ##### -->
 <para>
 

@@ -1,3 +1,10 @@
+2001-02-21  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-ui-engine.c
+	(bonobo_ui_engine_xml_merge_tree): fix tedious warning.
+
+	* bonobo/bonobo-print.c: Full API documented.
+
 2001-02-20  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-property-bag-xml.c: Fully API documented.

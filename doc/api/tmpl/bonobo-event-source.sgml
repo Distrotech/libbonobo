@@ -84,6 +84,19 @@ An Event Source where clients can connect to listen to events.
 @opt_ev: 
 
 
+<!-- ##### FUNCTION bonobo_event_source_notify_listeners_full ##### -->
+<para>
+
+</para>
+
+@event_source: 
+@path: 
+@type: 
+@subtype: 
+@value: 
+@opt_ev: 
+
+
 <!-- ##### FUNCTION bonobo_event_source_client_add_listener ##### -->
 <para>
 
@@ -105,5 +118,13 @@ An Event Source where clients can connect to listen to events.
 @object: 
 @id: 
 @opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_event_source_ignore_listeners ##### -->
+<para>
+
+</para>
+
+@event_source: 
 
 

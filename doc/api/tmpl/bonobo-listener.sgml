@@ -152,3 +152,50 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_event_kind ##### -->
+<para>
+
+</para>
+
+@event_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_event_type ##### -->
+<para>
+
+</para>
+
+@event_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_event_subtype ##### -->
+<para>
+
+</para>
+
+@event_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_event_idl_path ##### -->
+<para>
+
+</para>
+
+@event_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_event_make_name ##### -->
+<para>
+
+</para>
+
+@idl_path: 
+@kind: 
+@subtype: 
+@Returns: 
+
+

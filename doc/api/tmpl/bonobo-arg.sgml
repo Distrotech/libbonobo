@@ -212,6 +212,34 @@ mappings between Gtk Args and CORBA_anys.
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_arg_release ##### -->
+<para>
+
+</para>
+
+@arg: 
+
+
+<!-- ##### FUNCTION bonobo_arg_copy ##### -->
+<para>
+
+</para>
+
+@arg: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_arg_is_equal ##### -->
+<para>
+
+</para>
+
+@a: 
+@b: 
+@opt_ev: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_arg_type_to_gtk ##### -->
 <para>
 
@@ -257,22 +285,5 @@ mappings between Gtk Args and CORBA_anys.
 @b: 
 @opt_ev: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_arg_copy ##### -->
-<para>
-
-</para>
-
-@arg: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_arg_release ##### -->
-<para>
-
-</para>
-
-@arg: 
 
 

@@ -125,6 +125,18 @@ Implements a generic property storage interface
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_property_bag_new_full ##### -->
+<para>
+
+</para>
+
+@get_prop: 
+@set_prop: 
+@event_source: 
+@user_data: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_property_bag_add ##### -->
 <para>
 
@@ -163,6 +175,19 @@ Implements a generic property storage interface
 
 @pb: 
 @object: 
+
+
+<!-- ##### FUNCTION bonobo_property_bag_construct ##### -->
+<para>
+
+</para>
+
+@pb: 
+@get_prop: 
+@set_prop: 
+@event_source: 
+@user_data: 
+@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_set_value ##### -->

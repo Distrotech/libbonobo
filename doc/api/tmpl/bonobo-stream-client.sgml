@@ -14,6 +14,18 @@ Simplified client wrapper functions for the Stream interface
 
 </para>
 
+<!-- ##### FUNCTION bonobo_stream_client_read ##### -->
+<para>
+
+</para>
+
+@stream: 
+@size: 
+@length_read: 
+@ev: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_stream_client_write ##### -->
 <para>
 

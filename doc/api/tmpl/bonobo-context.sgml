@@ -47,3 +47,19 @@ Extensible runtime service interface
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_context_running_get ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_running_context_auto_exit_unref ##### -->
+<para>
+
+</para>
+
+@object: 
+
+

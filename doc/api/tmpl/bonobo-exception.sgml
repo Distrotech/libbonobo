@@ -62,6 +62,34 @@ strings suitable for display to the user.
 @Returns: 
 
 
+<!-- ##### MACRO bonobo_return_if_fail ##### -->
+<para>
+
+</para>
+
+@expr: 
+@opt_ev: 
+
+
+<!-- ##### MACRO bonobo_return_val_if_fail ##### -->
+<para>
+
+</para>
+
+@expr: 
+@val: 
+@opt_ev: 
+
+
+<!-- ##### MACRO bonobo_exception_set ##### -->
+<para>
+
+</para>
+
+@opt_ev: 
+@repo_id: 
+
+
 <!-- ##### FUNCTION bonobo_exception_get_text ##### -->
 <para>
 
@@ -89,5 +117,14 @@ strings suitable for display to the user.
 @fn: 
 @user_data: 
 @destroy_fn: 
+
+
+<!-- ##### FUNCTION bonobo_exception_repoid_to_text ##### -->
+<para>
+
+</para>
+
+@repo_id: 
+@Returns: 
 
 
