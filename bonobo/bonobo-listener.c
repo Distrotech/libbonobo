@@ -11,10 +11,12 @@
 #include <bonobo/bonobo-listener.h>
 
 static BonoboObjectClass *bonobo_listener_parent_class;
-
 POA_Bonobo_Listener__vepv bonobo_listener_vepv;
 
-#define CLASS(o) BONOBO_LISTENER_CLASS (GTK_OBJECT (o)->klass)
+struct _BonoboListenerPrivate {
+	BonoboListenerCallbackFn event_callback;
+	gpointer                 user_data;
+};
 
 enum SIGNALS {
 	EVENT_NOTIFY,
@@ -22,18 +24,25 @@ enum SIGNALS {
 };
 static guint signals [LAST_SIGNAL] = { 0 };
 
-static inline BonoboListener *
-bonobo_listener_from_servant (PortableServer_Servant servant)
-{
-	return BONOBO_LISTENER (bonobo_object_from_servant (servant));
-}
-
 static void
-impl_event (PortableServer_Servant servant, const BonoboArg *data, CORBA_Environment *ev)
+impl_Bonobo_Listener_event (PortableServer_Servant servant, 
+			    const CORBA_char      *event_name, 
+			    const CORBA_any       *args, 
+			    CORBA_Environment     *ev)
 {
-	BonoboListener *listener = bonobo_listener_from_servant (servant);
+	BonoboListener *listener;
 
-	gtk_signal_emit (GTK_OBJECT (listener), signals [EVENT_NOTIFY], data);
+	listener = BONOBO_LISTENER (bonobo_object_from_servant (servant));
+
+	if (listener->priv->event_callback)
+		listener->priv->event_callback (
+			listener, (CORBA_char *) event_name, 
+			(CORBA_any *) args, ev,
+			listener->priv->user_data);
+
+	gtk_signal_emit (GTK_OBJECT (listener),
+			 signals [EVENT_NOTIFY],
+			 event_name, args, ev);
 }
 
 /**
@@ -46,7 +55,7 @@ bonobo_listener_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Listener__epv, 1);
 
-	epv->event = impl_event;
+	epv->event = impl_Bonobo_Listener_event;
 
 	return epv;
 }
@@ -55,7 +64,7 @@ static void
 init_listener_corba_class (void)
 {
 	/* The VEPV */
-	bonobo_listener_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
+	bonobo_listener_vepv.Bonobo_Unknown_epv  = bonobo_object_get_epv ();
 	bonobo_listener_vepv.Bonobo_Listener_epv = bonobo_listener_get_epv ();
 }
 
@@ -68,6 +77,12 @@ bonobo_listener_destroy (GtkObject *object)
 static void
 bonobo_listener_init (GtkObject *object)
 {
+	BonoboListener *listener;
+
+	listener = BONOBO_LISTENER(object);
+	listener->priv = g_new (BonoboListenerPrivate, 1);
+	listener->priv->event_callback = NULL;
+	listener->priv->user_data = NULL;
 }
 
 static void
@@ -75,15 +90,16 @@ bonobo_listener_class_init (BonoboListenerClass *klass)
 {
 	GtkObjectClass *oclass = (GtkObjectClass *)klass;
 
-	bonobo_listener_parent_class = gtk_type_class (bonobo_object_get_type ());
+	bonobo_listener_parent_class = 
+		gtk_type_class (bonobo_object_get_type ());
 
 	oclass->destroy = bonobo_listener_destroy;
 
 	signals [EVENT_NOTIFY] = gtk_signal_new (
 		"event_notify", GTK_RUN_LAST, oclass->type,
 		GTK_SIGNAL_OFFSET (BonoboListenerClass, event_notify),
-		gtk_marshal_NONE__POINTER, GTK_TYPE_NONE, 1,
-		GTK_TYPE_POINTER);
+		gtk_marshal_NONE__POINTER_POINTER_POINTER, GTK_TYPE_NONE, 3,
+		GTK_TYPE_POINTER, GTK_TYPE_POINTER, GTK_TYPE_POINTER);
 
 	gtk_object_class_add_signals (oclass, signals, LAST_SIGNAL);
 
@@ -118,7 +134,7 @@ bonobo_listener_get_type (void)
 	return type;
 }
 
-static Bonobo_Listener
+Bonobo_Listener
 bonobo_listener_corba_object_create (BonoboObject *object)
 {
 	POA_Bonobo_Listener *servant;
@@ -141,32 +157,54 @@ bonobo_listener_corba_object_create (BonoboObject *object)
 	return bonobo_object_activate_servant (object, servant);
 }
 
+BonoboListener *
+bonobo_listener_construct (BonoboListener  *listener, 
+			   Bonobo_Listener  corba_listener) 
+{
+        g_return_val_if_fail (listener != NULL, NULL);
+        g_return_val_if_fail (BONOBO_IS_LISTENER (listener), NULL);
+        g_return_val_if_fail (corba_listener != NULL, NULL);
+
+        bonobo_object_construct (BONOBO_OBJECT (listener), 
+				 corba_listener);
+
+        return listener;
+}
+
 /**
  * bonobo_listener_new:
  *
- * Creates a generic event listener.  The listener emits an "event_notify" signal when
- * notified of an event.  The signal callback should be of the form:
+ * Creates a generic event listener.  The listener calls the @event_callback 
+ * function and emits an "event_notify" signal when notified of an event.  
+ * The signal callback should be of the form:
  *
- *	void some_callback (GtkObject *, BonoboArg *event_data, gpointer some_data);
+ *	void some_callback (GtkObject *, 
+ *                          char *event_name, 
+ *                          BonoboArg *event_data, 
+ *                          CORBA_Environment *ev, 
+ *                          gpointer user_data);
  *
  * Returns: A BonoboListener object.
  */
 BonoboListener*
-bonobo_listener_new ()
+bonobo_listener_new (BonoboListenerCallbackFn event_callback, 
+		     gpointer                 user_data)
 {
 	BonoboListener *listener;
 	Bonobo_Listener corba_listener;
 
 	listener = gtk_type_new (BONOBO_LISTENER_TYPE);
 
-	corba_listener = bonobo_listener_corba_object_create (BONOBO_OBJECT (listener));
-	if (corba_listener == CORBA_OBJECT_NIL){
+	corba_listener = bonobo_listener_corba_object_create (
+		BONOBO_OBJECT (listener));
+
+	if (corba_listener == CORBA_OBJECT_NIL) {
 		bonobo_object_unref (BONOBO_OBJECT (listener));
 		return NULL;
 	}
 	
-	bonobo_object_construct (BONOBO_OBJECT (listener), corba_listener);
+	listener->priv->event_callback = event_callback;
+	listener->priv->user_data = user_data;
 
-	return listener;
+	return bonobo_listener_construct (listener, corba_listener);
 }
-
