@@ -1,3 +1,11 @@
+2003-02-28  Hidetoshi Tajima <hidetoshi.tajima@sun.com>
+
+	* bonobo/bonobo-exception.c (BONOBO_EXPLICIT_TRANSLATION_DOMAIN):
+	* bonobo/bonobo-moniker.c (BONOBO_EXPLICIT_TRANSLATION_DOMAIN):
+	* bonobo/bonobo-moniker-util.c (BONOBO_EXPLICIT_TRANSLATION_DOMAIN):
+	use GETTEXT_PACKAGE instead of PACKAGE (#107228).
+	Michael: back-port - got missed somehow.
+
 2003-03-04  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-arg.h: update macros.
