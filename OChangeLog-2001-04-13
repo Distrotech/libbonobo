@@ -1,3 +1,44 @@
+1999-06-01  Nat Friedman  <nat@gnome-support.com>
+
+	* components/text-plain/bonobo-text-plain.c (view_data_t): Added a
+ 	progress field for the progress bar widget.
+	(view_destroy_cb): Renamed destroy_view to this.
+	(blank_all_views): Hide the progress bar.
+	(progressive_update): Removed the old progress meter code.  Update
+ 	the new progress bar widget.
+	(progressive_start): Show the progress bar.
+	(progressive_end): Removed the old progress meter code.  Hide the
+ 	progress bar widget.
+	(view_factory): Create a vbox to hold both the GtkText and the new
+ 	GtkProgressBar.
+
+	* bonobo/gnome-progressive.h (GnomeProgressiveDataSinkAddDataFn):
+ 	Made the iobuf const.
+	(GnomeProgressiveDataSinkClass): Made the iobuf in the add_data_fn
+ 	callback's paramter list const.
+
+	* bonobo/gnome-progressive.c (impl_add_data): Made the iobuf
+ 	parameter const to match the skels.
+	(gnome_progressive_data_sink_add_data_nop): Removed the
+ 	CORBA_Environment parameter.
+
+	* bonobo/gnome-view.c (impl_GNOME_View_set_window): Moved the call
+ 	to gtk_widget_show_all before the gtk_container_add so that the
+ 	component can control when its subwidgets are displayed.
+
+	* bonobo/gnome-inplace-site.c (create_inplace_site): Removed
+ 	unused untyped variable corba_class_inited.
+
+1999-05-31  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/test-container.c (timeout_next_line): Call
+ 	GNOME_ProgressiveDataSink_end when the whole file has been sent.
+  	Then free the tmt struct, close the file, and release the
+ 	interface object.
+
+	* bonobo/test-container.c (send_text_cmd): Stat the file and call
+ 	GNOME_ProgressiveDataSink_set_size.
+	
 1999-06-01  Elliot Lee <sopwith@redhat.com>
 
 	* bonobo/gnome-object.[ch]: Removed servant_to_object hash table.

@@ -20,7 +20,7 @@ typedef int (*GnomeProgressiveDataSinkStartFn)   (GnomeProgressiveDataSink *psin
 typedef int (*GnomeProgressiveDataSinkEndFn)     (GnomeProgressiveDataSink *psink, void *closure);
 
 typedef int (*GnomeProgressiveDataSinkAddDataFn) (GnomeProgressiveDataSink *psink,
-						    GNOME_ProgressiveDataSink_iobuf *buffer,
+						    const GNOME_ProgressiveDataSink_iobuf *buffer,
 						    void *closure);
 
 typedef int (*GnomeProgressiveDataSinkSetSizeFn) (GnomeProgressiveDataSink *psink,
@@ -50,7 +50,7 @@ typedef struct {
 	int (*start_fn)    (GnomeProgressiveDataSink *psink);
 	int (*end_fn)      (GnomeProgressiveDataSink *psink);
 	int (*add_data_fn) (GnomeProgressiveDataSink *psink,
-			    GNOME_ProgressiveDataSink_iobuf *buffer);
+			    const GNOME_ProgressiveDataSink_iobuf *buffer);
 	int (*set_size_fn) (GnomeProgressiveDataSink *psink,
 			    const CORBA_long count);
 			 
