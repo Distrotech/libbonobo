@@ -1,5 +1,9 @@
 2000-10-11  Michael Meeks  <michael@helixcode.com>
 
+	* doc/ui-faq.txt: explain the translation issue.
+
+2000-10-11  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (status_sync_state): decode status.
 
 	* bonobo/bonobo-ui-xml.c (override_node_with): prune overrides
