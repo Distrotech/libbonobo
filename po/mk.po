@@ -1,20 +1,25 @@
+# translation of libbonobo.HEAD.mk.po to Macedonian
+# translation of libbonobo.HEAD.mk.po to
+# translation of libbonobo.HEAD.mk.po to
 # translation of libbonobo.HEAD.po to Macedonian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # Ivan Stojmirov <stojmir@linux.net.mk>, 2002
-# Maratonec <kjdskjds@dksjd>, 2002
+# Maratonec <kjdskjds@dksjd>, 2002,2003
+# Vladislav Bidikov <bidikovi@mail.com.mk>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo.HEAD\n"
-"POT-Creation-Date: 2003-06-09 17:26+0100\n"
-"PO-Revision-Date: 2002-12-15 22:55+0100\n"
-"Last-Translator: Ivan Stojmirov <stojmir@linux.net.mk>\n"
-"Language-Team: Macedonian <mk@li.org>\n"
+"Project-Id-Version: libbonobo.HEAD.mk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-13 20:50+0200\n"
+"PO-Revision-Date: 2003-06-15 20:50+0000\n"
+"Last-Translator: Vladislav Bidikov <bidikovi@mail.com.mk>\n"
+"Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0beta2\n"
+"X-Generator: KBabel 1.0.1\n"
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
@@ -84,7 +89,7 @@ msgstr ""
 #. * servers are registered.
 #.
 #: activation-server/object-directory-corba.c:889
-#, fuzzy, c-format
+#, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Исклучок при активирање на '%s"
 
@@ -147,7 +152,7 @@ msgstr "Грешка при извршување %s: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr ""
+msgstr "Премногу нивоа на алиаси за тоа локале, може да дојде до бесконечен процес"
 
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
@@ -188,11 +193,11 @@ msgstr "Shlib `%s' не содржи `%s'"
 
 #: bonobo/bonobo-object.c:910
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "CORBA POA по желба"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -264,7 +269,7 @@ msgstr "Складот не е празен"
 
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr ""
+msgstr "лошо формирана корисничка XML инструкција"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
@@ -312,7 +317,7 @@ msgstr "Не може да се најде Moniker интерфејсот"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr ""
+msgstr "Времето за активирање на Moniker помина"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
@@ -337,19 +342,19 @@ msgstr "Неможам да го инизијализирам Bonobo"
 #: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "Неуспешно разрешување или проширување на '%s"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
 msgstr "Неупешно активирање на објект"
 
 #: monikers/bonobo-moniker-oaf.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Exception activating '%s'"
 msgstr "Исклучок при активирање на '%s"
 
 #: monikers/bonobo-moniker-oaf.c:62
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to activate '%s'"
 msgstr "Неуспешно активирање на '%s"
 
@@ -375,7 +380,7 @@ msgstr "Општ Moniker за Oaf прашалник"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "Нов предефиниран Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
@@ -407,7 +412,7 @@ msgstr "Неможам да го иницијализирам Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "Неможе да се создаде нова копија на  пример излезна компонента"
 
 #: samples/echo/echo-client.c:45
 #, c-format
@@ -468,3 +473,4 @@ msgstr "Приказ на директориумите во конфигурац
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Приказ на патеката до конфигурациската датотека"
+
