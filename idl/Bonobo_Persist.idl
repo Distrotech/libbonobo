@@ -132,9 +132,10 @@ module Bonobo {
 			raises (IOError, NotSupported);
 	
 		/**
-		 * initNew:
+		 * initNew: - Deprecated
 		 * @storage: A storage that is provided for this object
 		 *
+		 * Deprecated.
 		 * BonoboObjects do have access to a valid storage through
 		 * their entire life.  This is a chance given to initialize such 
 		 * storage and keep it around (users should addref it).

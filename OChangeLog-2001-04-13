@@ -1,3 +1,12 @@
+2001-03-12  Paolo Molaro <lupus@ximian.com>
+
+	* idl/Bonobo_Print.idl: include Bonobo_Storage.idl not the
+	non-existant Bonobo_Stream.idl
+
+2001-03-09  Michael Meeks  <michael@ximian.com>
+
+	* doc/FAQ: update structure naming conventions.
+
 2001-03-11  Martin Baulig  <baulig@suse.de>
 
 	* gshell/inout.c (file_save_as_cb, file_load_cb): Use g_strdup()

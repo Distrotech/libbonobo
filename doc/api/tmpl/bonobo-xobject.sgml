@@ -6,11 +6,11 @@ a simplified CORBA server object wrapper
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-The BonoboXObject provides a backwards compatible, but easy to
-use way of writing CORBA servers. It drastically simplifies the
-issues of epv and vepv construction by automating these, and
-automatically instantiates a CORBA_Object on gtk_type_new. This
-removes clutter from construction time.
+BonoboXObject provides an easy to use way of writing CORBA servers. It
+strongly deprecates #BonoboObject ( with which it is compatible ). It
+drastically simplifies the issues of epv and vepv construction by
+automating these, and automatically instantiates a CORBA_Object on
+gtk_type_new. This removes clutter from construction time.
 </para>
 
 <para>
@@ -121,7 +121,7 @@ bonobo_control_class_init (BonoboControlClass *klass)
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
-
+#BonoboObject
 </para>
 
 <!-- ##### MACRO BONOBO_IS_X_OBJECT ##### -->
