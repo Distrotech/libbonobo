@@ -1095,22 +1095,31 @@ bonobo_object_dump_interfaces (BonoboObject *object)
 {
 	BonoboAggregateObject *ao;
 	GList                 *l;
+	CORBA_Environment      ev;
 
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
 
 	ao = object->priv->ao;
 	
+	CORBA_exception_init (&ev);
+
 	fprintf (stderr, "references %d\n", ao->ref_count);
 	for (l = ao->objs; l; l = l->next) {
 		BonoboObject *o = l->data;
 		
 		g_return_if_fail (BONOBO_IS_OBJECT (o));
 
-		if (o->corba_objref && o->corba_objref->type_id)
-			fprintf (stderr, "I/F: '%s'\n", o->corba_objref->type_id);
-		else
+		if (o->corba_objref != CORBA_OBJECT_NIL) {
+			CORBA_char   *type_id;
+
+			type_id = ORBit_small_get_type_id (o->corba_objref, &ev);
+			fprintf (stderr, "I/F: '%s'\n", type_id);
+			CORBA_free (type_id);
+		} else
 			fprintf (stderr, "I/F: NIL error\n");
 	}
+
+	CORBA_exception_free (&ev);
 }
 
 static gboolean

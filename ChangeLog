@@ -1,5 +1,8 @@
 2001-10-18  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.c (bonobo_object_dump_interfaces):
+	re-write not to poke at obj->type_id.
+
 	* tests/test-moniker.c (check_string): test 'equal' as well.
 
 2001-10-18  Michael Meeks  <michael@ximian.com>
