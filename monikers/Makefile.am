@@ -7,11 +7,11 @@ INCLUDES =                                              \
 	$(BONOBO_TEST_CFLAGS)
 
 oafdir = $(datadir)/oaf
-oaf_DATA = std-moniker.oafinfo bonobo-moniker-gunzip.oafinfo bonobo-moniker-http.oafinfo
+oaf_DATA = std-moniker.oafinfo bonobo-moniker-gunzip.oafinfo bonobo-moniker-http.oafinfo bonobo-moniker-untar.oafinfo
 
-bin_PROGRAMS = std-moniker bonobo-moniker-config bonobo-moniker-gunzip bonobo-moniker-http
+bin_PROGRAMS = std-moniker bonobo-moniker-config bonobo-moniker-gunzip bonobo-moniker-http bonobo-moniker-untar
 
-noinst_PROGRAMS = moniker-control-test
+noinst_PROGRAMS = moniker-control-test moniker-test
 
 moniker_ldadd = 				\
 	$(top_builddir)/bonobo/libbonobo.la	\
@@ -48,6 +48,13 @@ bonobo_moniker_gunzip_SOURCES =		\
 bonobo_moniker_gunzip_LDADD =		\
 	$(moniker_ldadd)
 
+bonobo_moniker_untar_SOURCES =          \
+	bonobo-moniker-untar.c          \
+	bonobo-moniker-untar.h
+
+bonobo_moniker_untar_LDADD =            \
+	$(moniker_ldadd)
+
 bonobo_moniker_http_SOURCES =		\
 	bonobo-moniker-http.c		\
 	bonobo-moniker-http.h
@@ -59,6 +66,12 @@ moniker_control_test_SOURCES =		\
 	moniker-control-test.c
 
 moniker_control_test_LDADD =		\
-	$(moniker_ldadd)
+	$(moniker_ldadd) -lgtkhtml
+
+moniker_test_SOURCSE =			\
+	moniker-test.c
+
+moniker_test_LDADD =			\
+	$(moniker_ldadd) -lgtkhtml
 
 EXTRA_DIST=std-moniker.oafinfo bonobo-moniker-gunzip.oafinfo bonobo-moniker-http.oafinfo
