@@ -72,7 +72,9 @@ module Bonobo {
 		 */
 		Unknown resolve            (in ResolveOptions options,
 					    in string         requestedInterface)
-			raises (InterfaceNotFound, TimeOut);
+			raises (InterfaceNotFound,
+				TimeOut,
+				GeneralError);
 
 		/**
 		 * equal:
@@ -102,7 +104,9 @@ module Bonobo {
 				 in ResolveOptions options,
                                  in string         name,
                                  in string         requestedInterface)
-			raises (Moniker::InterfaceNotFound, Moniker::TimeOut);
+			raises (Moniker::InterfaceNotFound,
+				Moniker::TimeOut,
+				GeneralError);
         };
 };
 

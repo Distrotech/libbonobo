@@ -1,5 +1,16 @@
 2001-12-08  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-moniker.c (impl_resolve): make the
+	failure more chatty.
+
+	* bonobo/bonobo-exception.c: fix exception translation.
+
+	* monikers/bonobo-moniker-oaf.c
+	(bonobo_moniker_oaf_resolve): return some friendly
+	activation type errors.
+
+	* idl/Bonobo_Moniker.idl: return GeneralError from resolves.
+
 	* doc/*: move documents across from bonobo 1.0,
 	particularly NAMESPACE is now canonicaly here.
 

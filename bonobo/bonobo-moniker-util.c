@@ -9,6 +9,8 @@
  */
 #include "config.h"
 #include <string.h>
+#define BONOBO_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
+#include <bonobo/bonobo-i18n.h>
 #include <ORBitservices/CosNaming.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-exception.h>
@@ -239,8 +241,8 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 		return CORBA_OBJECT_NIL;
 	
 	if (object == CORBA_OBJECT_NIL) {
-		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_Bonobo_Moniker_InterfaceNotFound, NULL);
+		bonobo_exception_general_error_set (
+			ev, NULL, _("Failed to activate object"));
 		return CORBA_OBJECT_NIL;
 	}
 

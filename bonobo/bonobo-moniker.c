@@ -9,6 +9,9 @@
  */
 #include "config.h"
 #include <string.h>
+
+#define BONOBO_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
+#include <bonobo/bonobo-i18n.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-util.h>
@@ -345,10 +348,11 @@ impl_resolve (PortableServer_Servant       servant,
 		}
 	}
 
-	if (!BONOBO_EX (ev) && retval == CORBA_OBJECT_NIL)
-		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_Bonobo_Moniker_InterfaceNotFound,
-				     NULL);
+	if (!BONOBO_EX (ev) && retval == CORBA_OBJECT_NIL) {
+		bonobo_exception_general_error_set (
+			ev, NULL, _("Failed to resolve, or extend '%s"),
+			bonobo_moniker_get_name_full (moniker));
+	}
 
 	return retval;
 }
