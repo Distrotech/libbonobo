@@ -10,7 +10,6 @@
 
 #include "bonobo.h"
 #include <liboaf/liboaf.h>
-#include "bonobo-object-directory.h"
 
 struct {
 	char *prefix;
@@ -90,7 +89,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 			return CORBA_OBJECT_NIL;
 		}
 	} else {
-		object = od_server_activate_with_id (iid, 0, ev);
+		object = oaf_activate_from_id ((gchar *) iid, 0, NULL, ev);
 
 		if (ev->_major != CORBA_NO_EXCEPTION)
 			return CORBA_OBJECT_NIL;

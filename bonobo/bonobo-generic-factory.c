@@ -19,7 +19,7 @@
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-generic-factory.h>
-#include "bonobo-object-directory.h"
+#include <liboaf/liboaf.h>
 
 POA_GNOME_ObjectFactory__vepv bonobo_generic_factory_vepv;
 
@@ -120,11 +120,11 @@ bonobo_generic_factory_construct (const char             *goad_id,
 
 	CORBA_exception_init (&ev);
 
-	ret = od_server_register (corba_factory, c_factory->goad_id);
+	ret = oaf_active_server_register (c_factory->goad_id, corba_factory);
 
 	CORBA_exception_free (&ev);
 
-	if (ret == OD_REG_ERROR) {
+	if (ret == OAF_REG_ERROR) {
 		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
 	}
@@ -219,8 +219,8 @@ bonobo_generic_factory_finalize (GtkObject *object)
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
-	od_server_unregister (BONOBO_OBJECT(c_factory)->corba_objref,
-			      c_factory->goad_id);
+	oaf_active_server_unregister (c_factory->goad_id,
+				      BONOBO_OBJECT (c_factory)->corba_objref);
 	CORBA_exception_free (&ev);
 	g_free (c_factory->goad_id);
 	

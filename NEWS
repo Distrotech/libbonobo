@@ -1,3 +1,7 @@
+Bonobo 0.26
+
+	* Use OAF more cleanly internaly (Joe Shaw)
+
 Bonobo 0.25
 
 	* UI related bonobo-control-frame fix (Martin)

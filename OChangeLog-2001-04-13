@@ -1,3 +1,33 @@
+2000-10-23  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: Require Oaf >= 0.6.0,
+	bump version in CVS.
+	Demand gnome-libs >= 1.2.7, apparently 1.2.6 was broken.
+
+2000-10-22  Joe Shaw  <joe@helixcode.com>
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_construct): 
+	Don't use od_server_register() anymore. Use 
+	oaf_active_server_register() instead. Also change OD_REG_ERROR to 
+	OAF_REG_ERROR.
+	(bonobo_generic_factory_finalize): Don't use od_server_unregister().
+	Use oaf_active_server_unregister() instead.
+
+	* bonobo/bonobo-main.c (bonobo_init): Don't use od_get_org() anymore.
+	Use oaf_orb_get() instead.
+
+	* bonobo/bonobo-moniker-util.c 
+	(bonobo_moniker_util_new_from_name_full): Don't use
+	od_server_activate_with_id() anymore. Use oaf_activate_from_id()
+	instead.
+
+	* bonobo/bonobo-object-client.c	(bonobo_object_activate):
+	Don't use od_server_activate_with_id(). Use oaf_activate_from_id instead.
+	(bonobo_object_activate_async): New.
+	Uses oaf_activate_from_id_async() for asynchronous activation.
+	(oaf_activate_async_cb): Callback from the OAF function that calls the
+	user provided bonobo callback.
+
 2000-10-22  Mathieu Lacage  <mathieu@eazel.com>
 
 	* bonobo/Makefile.am: fix the build: remove the new files

@@ -9,10 +9,15 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <bonobo/bonobo-object-client.h>
-
-/* These are for the Moniker activation */
+#include <liboaf/liboaf.h>
 #include <bonobo/bonobo-stream.h>
-#include "bonobo-object-directory.h"
+#include <bonobo/bonobo-exception.h>
+
+/* Internal data structure for bonobo_object_client_activate_async */
+typedef struct {
+	BonoboObjectClientAsyncCallback callback;
+	gpointer                        user_data;
+} BonoboObjectClientAsyncCallbackData;
 
 static BonoboObjectClass *bonobo_object_client_parent_class;
 
@@ -51,6 +56,7 @@ bonobo_object_client_construct (BonoboObjectClient *object_client, CORBA_Object 
 BonoboObjectClient *
 bonobo_object_activate (const char *iid, gint oaf_flags)
 {
+	CORBA_Environment ev;
 	BonoboObjectClient *object;
 	Bonobo_Unknown      corba_object;
 	
@@ -61,16 +67,73 @@ bonobo_object_activate (const char *iid, gint oaf_flags)
 	 * need to break the API to add 'requested_interface' and it's
 	 * a different paradigm.
 	 */
-	corba_object = od_server_activate_with_id (iid, oaf_flags, NULL);
+	CORBA_exception_init (&ev);
+	corba_object = oaf_activate_from_id ((gchar *) iid, oaf_flags, NULL, &ev);
 
-	if (corba_object == CORBA_OBJECT_NIL)
+	if (BONOBO_EX (&ev) || corba_object == CORBA_OBJECT_NIL) {
+		CORBA_exception_free (&ev);
 		return NULL;
+	}
+
+	CORBA_exception_free (&ev);
 	
 	object = gtk_type_new (bonobo_object_client_get_type ());
 
 	bonobo_object_client_construct (object, corba_object);
 
 	return object;
+}
+
+static void
+oaf_activate_async_cb (CORBA_Object activated_object,
+		       const char  *error,
+		       gpointer     user_data)
+{
+	BonoboObjectClientAsyncCallbackData *callback_data =
+		(BonoboObjectClientAsyncCallbackData *) user_data;
+	BonoboObjectClient *object;
+
+	if (activated_object == CORBA_OBJECT_NIL) {
+		callback_data->callback (NULL, error, callback_data->user_data);
+		g_free(callback_data);
+		return;
+	}
+
+	object = gtk_type_new (bonobo_object_client_get_type ());
+	bonobo_object_client_construct (object, activated_object);
+
+	callback_data->callback (object, NULL, callback_data->user_data);
+
+	g_free (callback_data);
+}
+
+/**
+ * bonobo_object_activate_async:
+ * @iid: an OAFIID
+ * @flags: activation flags
+ * @callback: a callback function
+ * @user_data: user data
+ *
+ *   This activates the object from the IID using oaf; you probably
+ * don't want to do this; instead do capability based activation
+ * using Oaf directly.
+ */
+void
+bonobo_object_activate_async (const char                    *iid,
+			      gint                           oaf_flags,
+			     BonoboObjectClientAsyncCallback callback,
+			     gpointer                        user_data)
+{
+	BonoboObjectClientAsyncCallbackData *callback_data;
+
+	g_return_if_fail (iid != NULL);
+
+	callback_data = g_new0 (BonoboObjectClientAsyncCallbackData, 1);
+	callback_data->callback = callback;
+	callback_data->user_data = user_data;
+
+	oaf_activate_from_id_async ((gchar*) iid, oaf_flags, 
+				    oaf_activate_async_cb, callback_data, NULL);
 }
 
 /**

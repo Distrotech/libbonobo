@@ -30,27 +30,30 @@ typedef struct {
 	BonoboObjectClass parent_class;
 } BonoboObjectClientClass;
 
+typedef void      (*BonoboObjectClientAsyncCallback)     (BonoboObjectClient             *o,
+							  const char                     *error,
+							  gpointer                        user_data);
 GtkType             bonobo_object_client_get_type        (void);
-
-BonoboObjectClient *bonobo_object_client_from_corba      (Bonobo_Unknown o);
-
-BonoboObjectClient *bonobo_object_client_construct       (BonoboObjectClient *object_client,
-							  CORBA_Object corba_object);
-
-BonoboObjectClient *bonobo_object_activate               (const char *iid,
-							  gint        oaf_flags);
-
+BonoboObjectClient *bonobo_object_client_from_corba      (Bonobo_Unknown                  o);
+BonoboObjectClient *bonobo_object_client_construct       (BonoboObjectClient             *object_client,
+							  CORBA_Object                    corba_object);
+BonoboObjectClient *bonobo_object_activate               (const char                     *iid,
+							  gint                            oaf_flags);
+void                bonobo_object_activate_async         (const char                     *iid,
+							  gint                            oaf_flags,
+							  BonoboObjectClientAsyncCallback callback,
+							  gpointer                        user_data);
 /* Convenience Bonobo_Unknown wrappers */
-gboolean            bonobo_object_client_has_interface   (BonoboObjectClient *object,
-							  const char *interface_desc,
-							   CORBA_Environment *opt_ev);
-Bonobo_Unknown      bonobo_object_client_query_interface (BonoboObjectClient *object,
-							  const char *interface_desc,
-							  CORBA_Environment *opt_ev);
-void                bonobo_object_client_ref             (BonoboObjectClient *object_client,
-							  BonoboObject       *opt_exception_obj);
-void                bonobo_object_client_unref           (BonoboObjectClient *object_client,
-							  BonoboObject       *opt_exception_obj);
+gboolean            bonobo_object_client_has_interface   (BonoboObjectClient             *object,
+							  const char                     *interface_desc,
+							  CORBA_Environment              *opt_ev);
+Bonobo_Unknown      bonobo_object_client_query_interface (BonoboObjectClient             *object,
+							  const char                     *interface_desc,
+							  CORBA_Environment              *opt_ev);
+void                bonobo_object_client_ref             (BonoboObjectClient             *object_client,
+							  BonoboObject                   *opt_exception_obj);
+void                bonobo_object_client_unref           (BonoboObjectClient             *object_client,
+							  BonoboObject                   *opt_exception_obj);
 
 #endif /* _BONOBO_OBJECT_CLIENT_H_ */
 

@@ -11,7 +11,6 @@
  */
 #include <config.h>
 #include <bonobo/bonobo-main.h>
-#include "bonobo-object-directory.h"
 #include "bonobo-object.h"
 
 #include <signal.h>
@@ -181,7 +180,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	 * Create the POA.
 	 */
 	if (orb == CORBA_OBJECT_NIL) {
-		orb = od_get_orb();
+		orb = oaf_orb_get ();
 		if (orb == CORBA_OBJECT_NIL) {
 			g_warning ("Can not resolve initial reference to ORB");
 			CORBA_exception_free (&ev);
@@ -189,9 +188,9 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 		}
 	}
 	
-	if (CORBA_Object_is_nil ((CORBA_Object)poa, &ev)){
-		poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
-		if (ev._major != CORBA_NO_EXCEPTION){
+	if (CORBA_Object_is_nil ((CORBA_Object) poa, &ev)) {
+		poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
+		if (ev._major != CORBA_NO_EXCEPTION) {
 			g_warning ("Can not resolve initial reference to RootPOA");
 			CORBA_exception_free (&ev);
 			return FALSE;
