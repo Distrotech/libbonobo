@@ -1,10 +1,14 @@
+2004-04-06  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* ChangeLog: converted to UTF-8
+
 2004-03-30  Adam Weinberger <adamw@gnome.org>
 
-        * configure.in: Added en_CA to ALL_LINGUAS.
+	* configure.in: Added en_CA to ALL_LINGUAS.
 
 2004-03-22  Guntupalli Karunakar  <karunakar@freedomink.org>
 
-        * configure.in: Added "pa" (Punjabi) to ALL_LINGUAS.
+	* configure.in: Added "pa" (Punjabi) to ALL_LINGUAS.
 
 2004-03-17  Tony Arnold  <tonyarnold@users.sourceforge.net>
 
@@ -33,9 +37,9 @@
 
 2004-02-07  Robert Sedak  <robert.sedak@sk.htnet.hr>
 
-        * configure.in: Added "hr" (Croatian) to ALL_LINGUAS.
+	* configure.in: Added "hr" (Croatian) to ALL_LINGUAS.
 
-2004-02-03  Tomasz K³oczko <kloczek@pld.org.pl>
+2004-02-03  Tomasz KÅ‚oczko <kloczek@pld.org.pl>
 
 	* configure.in: Trival cleanup: remove AC_SUBST(CFLAGS),
 	  AC_SUBST(CPPFLAGS) and AC_SUBST(LDFLAGS). This variables are substed
