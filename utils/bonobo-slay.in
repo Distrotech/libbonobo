@@ -98,7 +98,7 @@ do {
 	#
 	while ($fname = shift(@files)) {
 
-		if ("$fname" =~ /\.oaf$/) {
+		if ("$fname" =~ /\.(oafinfo|oaf|server)$/) {
 		
 			open(FILE, $fname);
 			while (<FILE>) {
