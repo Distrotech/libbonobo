@@ -1,3 +1,8 @@
+1999-08-29  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-embeddable.c (gnome_embeddable_destroy): Fix
+	nasty bug using freed GList pointer.
+
 1999-08-29  Nat Friedman  <nat@gnome-support.com>
 
 	* samples/sample-container.c (component_view_set_size): New
