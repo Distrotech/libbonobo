@@ -1,3 +1,10 @@
+2000-03-22  John Sullivan  <sullivan@eazel.com>
+
+	Another toolbar bug fix.
+
+	* bonobo/bonobo-uih-toolbar.c: (bonobo_ui_handler_set_toolbar):
+	Store new toolbar widget in the hash table in this case also.
+
 2000-03-17  John Sullivan  <sullivan@eazel.com>
 
 	More toolbar bug fixes.
