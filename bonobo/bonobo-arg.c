@@ -344,7 +344,7 @@ bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b, CORBA_Environment *o
  * Return value: TRUE if @a == @b
  **/
 gboolean
-bonobo_arg_is_equal (BonoboArg *a, BonoboArg *b, CORBA_Environment *opt_ev)
+bonobo_arg_is_equal (const BonoboArg *a, const BonoboArg *b, CORBA_Environment *opt_ev)
 {
 	CORBA_Environment ev, *my_ev;
 	gboolean retval;
@@ -356,7 +356,7 @@ bonobo_arg_is_equal (BonoboArg *a, BonoboArg *b, CORBA_Environment *opt_ev)
 	} else
 		my_ev = opt_ev;
 
-	retval = ORBit_any_equivalent (a, b, my_ev);
+	retval = ORBit_any_equivalent ((CORBA_any *) a, (CORBA_any *) b, my_ev);
 
 	if (!opt_ev)
 		CORBA_exception_free (&ev);

@@ -80,8 +80,8 @@ void          bonobo_arg_to_gtk        (GValue            *value,
 
 GType         bonobo_arg_type_to_gtk   (BonoboArgType      id);
 
-gboolean      bonobo_arg_is_equal      (BonoboArg         *a, 
-					BonoboArg         *b, 
+gboolean      bonobo_arg_is_equal      (const BonoboArg   *a, 
+					const BonoboArg   *b, 
 					CORBA_Environment *opt_ev);
 
 gboolean      bonobo_arg_type_is_equal (BonoboArgType      a, 

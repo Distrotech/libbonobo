@@ -1,3 +1,10 @@
+2001-07-13  Darin Adler  <darin@bentspoon.com>
+
+	* bonobo/bonobo-arg.h:
+	* bonobo/bonobo-arg.c: (bonobo_arg_is_equal): Take const BonoboArg *.
+
+	* configure.in: Elminate redundant macros.
+
 2001-07-12  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-generic-factory.c (init_generic_factory_corba_class):
