@@ -39,11 +39,12 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 
 	g_return_val_if_fail (sh->res._d == OAF_RESULT_SHLIB,
 			      CORBA_OBJECT_NIL);
-	g_return_val_if_fail (sh->res._u.res_shlib._length < 1,
+	g_return_val_if_fail (sh->res._u.res_shlib._length > 0,
 			      CORBA_OBJECT_NIL);
 
-	i = sh->res._u.res_shlib._length - 1;
-	filename = sh->res._u.res_shlib._buffer[i];
+	/* The location info is at the end to of the string list */
+	filename = sh->res._u.res_shlib._buffer[sh->res._u.res_shlib._length - 1];
+	g_message ("%s", filename);
 	if (living_by_filename)
 		local_plugin_info =
 			g_hash_table_lookup (living_by_filename, filename);
@@ -52,15 +53,14 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 		/* We have to load the thing from scratch */
 		GModule *gmod;
 		gboolean success;
-		OAFPlugin *plugin;
 
 		gmod = g_module_open (filename, G_MODULE_BIND_LAZY);
-
-		if (!gmod)
+		if (!gmod) {
 			return CORBA_OBJECT_NIL;	/* Couldn't load it */
-
+		}
+		
 		success = g_module_symbol (gmod, "OAF_Plugin_info",
-					   (gpointer *) & plugin);
+					   (gpointer *) &plugin);
 		if (!success) {
 			g_module_close (gmod);
 			return CORBA_OBJECT_NIL;
@@ -88,8 +88,9 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 			g_module_symbol (local_plugin_info->loaded,
 					 "OAF_Plugin_info",
 					 (gpointer *) & plugin);
-		if (!success)
+		if (!success) {
 			return CORBA_OBJECT_NIL;
+		}
 	}
 
 	retval = CORBA_OBJECT_NIL;
@@ -98,21 +99,24 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 	poa = (PortableServer_POA)
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", ev);
 
-	i = sh->res._u.res_shlib._length - 2;
-	iid = sh->res._u.res_shlib._buffer[i];
+	/* Index into the string list one element from the end to get the iid of the shlib */
+	iid = sh->res._u.res_shlib._buffer[sh->res._u.res_shlib._length - 2];
 	for (pobj = plugin->plugin_object_list; pobj->iid; pobj++) {
-		if (!strcmp (iid, pobj->iid))
+		if (strcmp (iid, pobj->iid) == 0) {
+			/* Found a match */
 			break;
+		}
 	}
 
 	if (pobj->iid) {
-		retval =
-			pobj->activate (poa, pobj->iid, local_plugin_info,
-					ev);
+		/* Activate the shlib */
+		retval = pobj->activate (poa, pobj->iid, local_plugin_info, ev);
 
 		if (ev->_major != CORBA_NO_EXCEPTION)
 			retval = CORBA_OBJECT_NIL;
 
+		/* Activate the factiories contained in the shlib */
+		i =  sh->res._u.res_shlib._length - 2;
 		for (i--; i >= 0 && !CORBA_Object_is_nil (retval, ev); i--) {
 			CORBA_Object new_retval;
 			GNOME_stringlist dummy = { 0 };

@@ -411,22 +411,20 @@ ac_do_activation (impl_POA_OAF_ActivationContext * servant,
 	for (num_layers = 0, activatable = server;
              activatable && !strcmp (activatable->server_type, "factory") &&
              num_layers < OAF_LINK_TIME_TO_LIVE; num_layers++) {
-		activatable =
-			g_hash_table_lookup (child->by_iid,
-					     activatable->location_info);
+
+		activatable = g_hash_table_lookup (child->by_iid, activatable->location_info);
 	}
 
-	if (activatable == NULL) {
+	if (activatable == NULL) {		
 		OAF_GeneralError *errval = OAF_GeneralError__alloc ();
-		errval->description =
-			CORBA_string_dup ("Couldn't find the factory server");
-		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+		errval->description = CORBA_string_dup ("Couldn't find the factory server");
+		CORBA_exception_set (ev, CORBA_USER_EXCEPTION, 
 				     ex_OAF_GeneralError, errval);
 		return;
-	} else if (num_layers == OAF_LINK_TIME_TO_LIVE) {
+	} 
+	else if (num_layers == OAF_LINK_TIME_TO_LIVE) {
 		OAF_GeneralError *errval = OAF_GeneralError__alloc ();
-		errval->description =
-			CORBA_string_dup ("Location loop");
+		errval->description = CORBA_string_dup ("Location loop");
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_OAF_GeneralError, errval);
 		return;
@@ -436,30 +434,38 @@ ac_do_activation (impl_POA_OAF_ActivationContext * servant,
 	 * order for loading to work properly (no, we're not going to
 	 * bother with loading a remote shlib into a process - it gets far too complicated
 	 * far too quickly :-) */
+	
 	if (activatable && !strcmp (activatable->server_type, "shlib")
 	    && !(flags & OAF_FLAG_NO_LOCAL)
 	    && (hostname && !strcmp (activatable->hostname, hostname))) {
 		int j;
 		char tbuf[512];
+		
+		out->res._d = OAF_RESULT_SHLIB;		
 
-		out->res._d = OAF_RESULT_SHLIB;
-		out->res._u.res_shlib._length = num_layers + 1;
-		out->res._u.res_shlib._buffer =
-			CORBA_sequence_CORBA_string_allocbuf (num_layers);
+		/* Here is an explanation as to why we add 2 to num_layers.
+		 * At the end of the string list, after all the factory iids are added
+		 * to the string list, we then add the iid of the shaed library and the 
+		 * location info.  This data is later used in oaf_server_activate_shlib
+		 * to activate the component
+		 */		 
+		out->res._u.res_shlib._length = num_layers + 2;
+		out->res._u.res_shlib._buffer = CORBA_sequence_CORBA_string_allocbuf (num_layers + 2);
 
-		for (j = 0, activatable = server;
-		     activatable
+		/* Copy over factory info */
+		for (j = 0, activatable = server; activatable
 		     && !strcmp (activatable->server_type, "factory"); j++) {
-			out->res._u.res_shlib._buffer[j] =
-				CORBA_string_dup (activatable->iid);
-			activatable =
-				g_hash_table_lookup (child->by_iid,
-						     activatable->location_info);
+			out->res._u.res_shlib._buffer[j] = CORBA_string_dup (activatable->iid);
+			activatable = g_hash_table_lookup (child->by_iid,
+						     	   activatable->location_info);
 		}
 
-		out->res._u.res_shlib._buffer[j] =
-			CORBA_string_dup (activatable->iid);
+		/* Copy shlib iid into buffer */
+		out->res._u.res_shlib._buffer[j] = CORBA_string_dup (activatable->iid);
 
+		/* Copy location into last buffer slot for use in later activation */
+		out->res._u.res_shlib._buffer[j+1] = CORBA_string_dup (activatable->location_info);
+		
 		g_snprintf (tbuf, sizeof (tbuf), "OAFAID:[%s,%s,%s,%s]",
 			    activatable->iid,
 			    activatable->username,
@@ -501,9 +507,7 @@ ctx_get_value (CORBA_Context ctx, const char *propname,
 		if (nvout->list->len > 0) {
 			CORBA_NamedValue *nv;
 
-			nv =
-				&g_array_index (nvout->list, CORBA_NamedValue,
-						0);
+			nv = &g_array_index (nvout->list, CORBA_NamedValue, 0);
 			retval = g_strdup (*(char **) nv->argument._value);
 		} else
 			retval = NULL;
