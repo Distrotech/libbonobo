@@ -6,6 +6,7 @@ Makefile
 _libs
 *-helper
 .libs
+.libs-no-undefined
 so_locations
 libbonobo-2.0.pc
 Bonobo-common.c
