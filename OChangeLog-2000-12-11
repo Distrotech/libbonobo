@@ -1,3 +1,8 @@
+2000-01-26  Martijn van Beers  <martijn@earthling.net>
+
+	* bonobo/bonobo-control-frame.c: s/control/container/ in the
+	_BonoboControlFramePrivate struct so it actually compiles
+
 2000-01-26  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo/bonobo-control.c, bonobo/bonobo-control-frame.c: Detect
