@@ -198,8 +198,8 @@ gnome_simple_data_source_new (GnomeSimpleDataSourcePopDataFn pop_data_fn,
 
 	ssource = gtk_type_new (gnome_simple_data_source_get_type ());
 	corba_ssource = create_gnome_simple_data_source (BONOBO_OBJECT (ssource));
-	if (corba_ssource == CORBA_OBJECT_NIL){
-		gtk_object_destroy (GTK_OBJECT (ssource));
+	if (corba_ssource == CORBA_OBJECT_NIL) {
+		bonobo_object_unref (BONOBO_OBJECT (ssource));
 		return NULL;
 	}
 

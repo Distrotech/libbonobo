@@ -162,8 +162,8 @@ bonobo_generic_factory_new (const char             *goad_id,
 	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
 
 	corba_factory = create_bonobo_generic_factory (BONOBO_OBJECT (c_factory));
-	if (corba_factory == CORBA_OBJECT_NIL){
-		gtk_object_destroy (GTK_OBJECT (c_factory));
+	if (corba_factory == CORBA_OBJECT_NIL) {
+		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
 	}
 	
@@ -202,8 +202,8 @@ BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
 
 	corba_factory = create_bonobo_generic_factory (BONOBO_OBJECT (c_factory));
-	if (corba_factory == CORBA_OBJECT_NIL){
-		gtk_object_destroy (GTK_OBJECT (c_factory));
+	if (corba_factory == CORBA_OBJECT_NIL) {
+		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
 	}
 	

@@ -281,8 +281,8 @@ bonobo_persist_stream_new (BonoboPersistStreamIOFn load_fn,
 	ps = gtk_type_new (bonobo_persist_stream_get_type ());
 	corba_ps = create_bonobo_persist_stream (
 		BONOBO_OBJECT (ps));
-	if (corba_ps == CORBA_OBJECT_NIL){
-		gtk_object_destroy (GTK_OBJECT (ps));
+	if (corba_ps == CORBA_OBJECT_NIL) {
+		bonobo_object_unref (BONOBO_OBJECT (ps));
 		return NULL;
 	}
 

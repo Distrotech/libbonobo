@@ -257,8 +257,8 @@ bonobo_persist_file_new (BonoboPersistFileIOFn load_fn,
 	pf = gtk_type_new (bonobo_persist_file_get_type ());
 	corba_pf = create_bonobo_persist_file (
 		BONOBO_OBJECT (pf));
-	if (corba_pf == CORBA_OBJECT_NIL){
-		gtk_object_destroy (GTK_OBJECT (pf));
+	if (corba_pf == CORBA_OBJECT_NIL) {
+		bonobo_object_unref (BONOBO_OBJECT (pf));
 		return NULL;
 	}
 

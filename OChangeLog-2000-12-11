@@ -1,3 +1,133 @@
+2000-07-12  Michael Meeks  <michael@helixcode.com>
+
+	* storage-modules/gnome-stream-efs.c (bonobo_stream_efs_destroy),
+	(bonobo_stream_efs_open_create): pernicious gtk_object_ ref/unrefs
+	killed.
+
+	* bonobo/bonobo-file-moniker.c (gnome_file_moniker_new): ditto.
+
+	* storage-modules/bonobo-storage-vfs.c (do_bonobo_storage_vfs_create): dtto.
+
+	* storage-modules/bonobo-stream-vfs.c (bonobo_stream_create): ditto.
+
+	* storage-modules/gnome-storage-fs.c (do_bonobo_storage_fs_create): ditto.
+
+	* storage-modules/gnome-storage-efs.c (real_create_storage),
+	(real_open_storage, bonobo_storage_efs_destroy): ditto.
+
+	* bonobo/bonobo-view.c (bonobo_view_destroy): unref the embeddable.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_new_view_full): unref
+	the view when we have boind it. (bonobo_client_site_bind_embeddable): kill
+	possible ref leak.
+
+	* gshell/gshell.c (container_system_exception_cb, view_system_exception_cb),
+	(view_remove, file_menu_exit_cb): ditto.
+
+	* components/text-plain/bonobo-text-plain.c (embeddable_system_exception_cb),
+	(view_system_exception_cb): unref not destroy. (main): add shutdown.
+	(embeddable_factory): unref fix.
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c (embeddable_system_exception_cb),
+	(view_system_exception_cb): ditto.
+
+	* samples/compound-doc/paint-component-simple.c (view_system_exception_cb),
+	(embeddable_system_exception_cb): ditto.
+
+	* bonobo/bonobo-object.c (bonobo_object_trace_refs): move the ref-counting
+	bloat and ugliness here.
+
+	* bonobo/bonobo-object.h (BONOBO_OBJECT_CHECK): update.
+
+	* bonobo/bonobo-main.c (bonobo_shutdown): implement, since we can't
+	unref our UI handler in gtk_main, so a quit fn. approach won't work.
+	Optional function.
+
+2000-07-11  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-control.c (bonobo_control_set_property),
+	(bonobo_control_get_property): s/gtk_object_unref/bonobo_object_unref/
+
+	* bonobo/bonobo-widget.c (bonobo_widget_set_property),
+	(bonobo_widget_get_property): ditto.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_construct): ditto.
+
+	* bonobo/bonobo-view.c (bonobo_view_set_embeddable): ditto.
+
+	* bonobo/bonobo-container.c (bonobo_container_remove): Kill EVIL
+	gtk_object_unref that was stuffing everything.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_destroy): add
+	destroy chaining.
+
+	* bonobo/bonobo-control.c (bonobo_control_destroy),
+	(bonobo_control_set_control_frame): Fix from Darin; remove ref count
+	loop on control-frame.
+
+	* bonobo/bonobo-object.c: s/GnomeAggregateObject/BonoboAggregateObject/
+	(bonobo_object_add_interface): remove stale aggregate objects.
+	(bonobo_object_finalize): pass an aggregate object in.
+
+	* bonobo/test-container.c (add_gnumeric_cmd): Replace instances of
+	gtk_object_destroy being performed on half constructed bonobo objects,
+	use bonobo_object_unref instead to avoid confusion, and unify the
+	reference counting semantics.
+
+	* bonobo/bonobo-view.c (bonobo_view_new): ditto.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_new): ditto.
+
+	* bonobo/bonobo-ui-handler.c (bonobo_ui_handler_new): ditto.
+
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_create): ditto.
+
+	* bonobo/bonobo-stream-fs.c (bonobo_stream_create): ditto.
+
+	* bonobo/bonobo-simple-source.c (gnome_simple_data_source_new): ditto.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_new): ditto.
+
+	* bonobo/bonobo-progressive.c (bonobo_progressive_data_sink_new): ditto.
+
+	* bonobo/bonobo-persist-stream.c (bonobo_persist_stream_new): ditto.
+
+	* bonobo/bonobo-persist-file.c (bonobo_persist_file_new): ditto.
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_new): ditto.
+	(bonobo_generic_factory_new_multi): ditto.
+
+	* bonobo/bonobo-file-moniker.c (gnome_file_moniker_new): ditto.
+
+	* bonobo/bonobo-embeddable.c (impl_Bonobo_Embeddable_new_view),
+	(bonobo_embeddable_new_canvas_item): ditto.
+
+	* bonobo/bonobo-desktop-window.c (bonobo_desktop_window_new): ditto.
+
+	* bonobo/bonobo-control.c (bonobo_control_new): ditto.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_new): ditto.
+
+	* bonobo/bonobo-container.c (bonobo_container_new): ditto.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_new): ditto.
+
+	* bonobo/bonobo-canvas-component.c (bonobo_canvas_component_new): ditto.
+
+	* bonobo/bonobo-bind-context.c (bonobo_bind_context_new): ditto.
+
+	* bonobo/bonobo-object.c (bonobo_object_ref, bonobo_object_unref): make
+	it easier to solve ref-counting bugs. (bonobo_object_instance_init): ditto.,
+	(bonobo_object_destroy): kill ref-count set to 0.
+	(bonobo_object_finalize): update assertion, kill ref-count set.
+	(bonobo_object_debug_foreach, bonobo_object_debug): implement.
+	(bonobo_object_get_type): setup the living objects hash.
+	(bonobo_object_instance_init): init corba_objref / servant.
+
+	* bonobo/selector_test.c (panel_callback): kill warning.
+	kill redundant prototypes; re-order and comply to gnome programming
+	guidelines.
+
 2000-07-11  Mike Kestner  <mkestner@ameritech.net>
 
 	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_toolbar_create_widget):

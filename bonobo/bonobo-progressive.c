@@ -344,8 +344,8 @@ bonobo_progressive_data_sink_new (BonoboProgressiveDataSinkStartFn start_fn,
 
 	psink = gtk_type_new (bonobo_progressive_data_sink_get_type ());
 	corba_psink = create_bonobo_progressive_data_sink (BONOBO_OBJECT (psink));
-	if (corba_psink == CORBA_OBJECT_NIL){
-		gtk_object_destroy (GTK_OBJECT (psink));
+	if (corba_psink == CORBA_OBJECT_NIL) {
+		bonobo_object_unref (BONOBO_OBJECT (psink));
 		return NULL;
 	}
 

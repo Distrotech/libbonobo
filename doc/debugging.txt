@@ -37,8 +37,8 @@ running in the background, check with
 	ps ax | grep 'bonobo-my-component'
 	
 or just:
-	
-	killall -9 bonobo-my-component
+
+	oaf-slay	
 
 
 * Weird stuff

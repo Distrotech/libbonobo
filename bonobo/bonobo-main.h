@@ -16,6 +16,9 @@ void			    bonobo_setup_x_error_handler (void);
 
 CORBA_ORB		    bonobo_orb			 (void);
 PortableServer_POA	    bonobo_poa			 (void);
-PortableServer_POAManager  bonobo_poa_manager		 (void);
+PortableServer_POAManager   bonobo_poa_manager		 (void);
+
+/* Optional; can help with debugging */
+void                        bonobo_shutdown		 (void);
 
 #endif /* __GNOME_MAIN_H__ */

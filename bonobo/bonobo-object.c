@@ -2,10 +2,11 @@
 /**
  * Bonobo Unknown interface base implementation
  *
- * Author:
+ * Authors:
  *   Miguel de Icaza (miguel@kernel.org)
+ *   Michael Meeks (michael@helixcode.com)
  *
- * Copyright 1999 Helix Code, Inc.
+ * Copyright 1999,2000 Helix Code, Inc.
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
@@ -16,15 +17,28 @@
 #include "Bonobo.h"
 #include "bonobo-object-directory.h"
 
+/* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
+
 POA_Bonobo_Unknown__vepv bonobo_object_vepv;
+
+#ifdef BONOBO_OBJECT_DEBUG
+typedef struct {
+	const char *fn;
+	gboolean    ref;
+	int         line;
+} BonoboDebugRefData;
+#endif
 
 typedef struct {
 	int   ref_count;
 	GList *objs;
-} GnomeAggregateObject;
+#ifdef BONOBO_OBJECT_DEBUG
+	GList *refs;
+#endif
+} BonoboAggregateObject;
 
 struct _BonoboObjectPrivate {
-	GnomeAggregateObject *ao;
+	BonoboAggregateObject *ao;
 	int destroy_id;
 };
 
@@ -38,7 +52,40 @@ enum {
 static guint bonobo_object_signals [LAST_SIGNAL];
 static GtkObjectClass *bonobo_object_parent_class;
 
-/* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
+#ifdef BONOBO_OBJECT_DEBUG
+
+static int         ref_indent = 0;
+static GHashTable *living_ao_ht = NULL;
+
+static void
+bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
+{
+	BonoboAggregateObject *ao = value;
+	GList *l;
+
+	g_return_if_fail (ao != NULL);
+
+	g_print ("[%p]\tref_count=%d, %d interfaces:\n", ao,
+		   ao->ref_count, g_list_length (ao->objs));
+		
+	for (l = ao->objs; l; l = l->next) {
+		BonoboObject *object = BONOBO_OBJECT (l->data);
+
+		g_print ("- [%p] %20s\tgtk_ref_count=%d\n", object,
+			   gtk_type_name (GTK_OBJECT_TYPE (object)),
+			   GTK_OBJECT (object)->ref_count);
+	}
+	g_print ("Referencing: \n");
+	for (l = g_list_last (ao->refs); l; l = l->prev) {
+		BonoboDebugRefData *descr = l->data;
+
+		g_print ("%s -\t%s:%d\n", descr->ref?"ref":"unref",
+			 descr->fn, descr->line);
+	}
+	g_print ("\n");
+}
+
+#endif /* BONOBO_OBJECT_DEBUG */
 
 /**
  * bonobo_object_from_servant:
@@ -100,6 +147,55 @@ bonobo_object_bind_to_servant (BonoboObject *object, void *servant)
 	((BonoboObjectServant *)servant)->bonobo_object = object;
 }
 
+/* Do not use this function, it is not what you want; see unref */
+static void
+bonobo_object_destroy (BonoboAggregateObject *ao)
+{
+	GList *l;
+
+	g_return_if_fail (ao->ref_count > 0);
+
+	for (l = ao->objs; l; l = l->next) {
+		GtkObject *o = l->data;
+
+		gtk_signal_disconnect (o, BONOBO_OBJECT (o)->priv->destroy_id);
+		if (o->ref_count >= 1)
+			gtk_object_destroy (GTK_OBJECT (o));
+		else
+			g_warning ("Serious ref-counting error [%p]", o);
+	}
+}
+
+static void
+bonobo_object_finalize (BonoboAggregateObject *ao)
+{
+	GList *l;
+
+	g_return_if_fail (ao->ref_count == 0);
+
+	for (l = ao->objs; l; l = l->next) {
+		GtkObject *o = GTK_OBJECT (l->data);
+
+		if (!o || !o->klass || !o->klass->finalize)
+			g_warning ("Serious bonobo object corruption");
+		else
+			o->klass->finalize (o);
+	}
+
+	g_list_free (ao->objs);
+	ao->objs = NULL;
+
+#ifdef BONOBO_OBJECT_DEBUG
+	for (l = ao->refs; l; l = l->next)
+		g_free (l->data);
+	g_list_free (ao->refs);
+#endif
+
+	g_free (ao);
+}
+
+#ifndef BONOBO_OBJECT_DEBUG
+
 /**
  * bonobo_object_ref:
  * @object: A BonoboObject you want to ref-count
@@ -115,53 +211,6 @@ bonobo_object_ref (BonoboObject *object)
 	object->priv->ao->ref_count++;
 }
 
-/* Do not use this function, it is not what you want; see unref */
-#warning Make this static when we know Nautilus works.
-void
-bonobo_object_destroy (BonoboObject *object)
-{
-	GnomeAggregateObject *ao;
-	GList *l;
-
-	g_return_if_fail (BONOBO_IS_OBJECT (object));
-	g_return_if_fail (object->priv->ao->ref_count > 0);
-
-	ao = object->priv->ao;
-
-	ao->ref_count = 0;
-	for (l = ao->objs; l; l = l->next) {
-		BonoboObject *o = l->data;
-
-		gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
-		gtk_object_destroy (GTK_OBJECT (o));
-	}
-}
-
-static void
-bonobo_object_finalize (BonoboObject *object)
-{
-	GnomeAggregateObject *ao;
-	GList *l;
-
-	g_return_if_fail (BONOBO_IS_OBJECT (object));
-	g_return_if_fail (object->priv->ao->ref_count > 0);
-
-	ao = object->priv->ao;
-
-	ao->ref_count = 0;
-	for (l = ao->objs; l; l = l->next) {
-		GtkObject *o = GTK_OBJECT (l->data);
-
-		if (!o || !o->klass || !o->klass->finalize)
-			g_warning ("Serious bonobo object corruption");
-		else
-			o->klass->finalize (o);
-	}
-
-	g_list_free (ao->objs);
-	g_free (ao);
-}
-
 /**
  * bonobo_object_unref:
  * @object: A BonoboObject you want to unref.
@@ -171,17 +220,95 @@ bonobo_object_finalize (BonoboObject *object)
 void
 bonobo_object_unref (BonoboObject *object)
 {
+	BonoboAggregateObject *ao;
+
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
-	g_return_if_fail (object->priv->ao->ref_count > 0);
 
-	if (object->priv->ao->ref_count == 1)
-		bonobo_object_destroy (object);
+	ao = object->priv->ao;
+	g_return_if_fail (ao != NULL);
+	g_return_if_fail (ao->ref_count > 0);
 
-	object->priv->ao->ref_count--;
+	if (ao->ref_count == 1)
+		bonobo_object_destroy (ao);
 
-	if (object->priv->ao->ref_count == 0)
-		bonobo_object_finalize (object);
+	ao->ref_count--;
+
+	if (ao->ref_count == 0)
+		bonobo_object_finalize (ao);
 }
+
+#else
+
+void
+bonobo_object_trace_refs (BonoboObject *object,
+			  const char   *fn,
+			  int           line,
+			  gboolean      ref)
+{
+	char *indent;
+	BonoboAggregateObject *ao;
+	BonoboDebugRefData *descr;
+	
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
+	ao = object->priv->ao;
+	g_return_if_fail (ao != NULL);
+
+	descr  = g_new (BonoboDebugRefData, 1);
+	ao->refs = g_list_prepend (ao->refs, descr);
+	descr->fn = fn;
+	descr->ref = ref;
+	descr->line = line;
+
+	if (ref) {
+		g_return_if_fail (ao->ref_count > 0);
+		
+		object->priv->ao->ref_count++;
+		
+		indent = g_strnfill (++ref_indent, ' ');
+		g_printerr ("%sRef %s:[%p] to %d at %s:%d\n", indent,
+			    gtk_type_name (GTK_OBJECT (object)->klass->type),
+			    object, ao->ref_count, fn, line);
+
+		g_free (indent);
+	} else { /* unref */
+		indent = g_strnfill (ref_indent--, ' ');
+		g_printerr ("%sUnRef %s:[%p] from %d at %s:%d\n", indent, 
+			    gtk_type_name (GTK_OBJECT (object)->klass->type),
+			    ao, ao->ref_count, fn, line);
+		g_free (indent);
+
+		g_return_if_fail (ao->ref_count > 0);
+	
+		if (ao->ref_count == 1) {
+			bonobo_object_destroy (ao);
+
+			g_return_if_fail (ao->ref_count > 0);
+		}
+
+		/*
+		 * If this blows it is likely some loony used
+		 * gtk_object_unref somewhere instead of
+		 * bonobo_object_unref, send them my regards.
+		 */
+		g_assert (object->priv->ao == ao);
+		
+		ao->ref_count--;
+	
+		if (ao->ref_count == 0) {
+
+			g_assert (g_hash_table_lookup (living_ao_ht, ao) == ao);
+			g_hash_table_remove (living_ao_ht, ao);
+			
+			bonobo_object_finalize (ao);
+		} else if (ao->ref_count < 0) {
+			indent = g_strnfill (ref_indent + 1, ' ');
+			g_printerr ("%sUnusual: [%p] already finalized\n",
+				    indent, ao);
+			g_free (indent);
+		}
+	}
+}
+#endif
 
 static void
 impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
@@ -319,6 +446,7 @@ impl_Bonobo_Unknown_query_interface (PortableServer_Servant  servant,
 /**
  * bonobo_object_get_epv:
  *
+ * Returns: the Bonobo Object epv.
  */
 POA_Bonobo_Unknown__epv *
 bonobo_object_get_epv (void)
@@ -363,7 +491,9 @@ bonobo_object_finalize_real (GtkObject *object)
 	}
 	CORBA_exception_free (&ev);
 
+	bonobo_object->priv->ao = NULL;
 	g_free (bonobo_object->priv);
+
 	bonobo_object_parent_class->finalize (object);
 }
 
@@ -407,22 +537,41 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 static void
 bonobo_object_usage_error (BonoboObject *object)
 {
-	g_error ("Aggregate bonobo_object member %p has been destroyed using gtk_object_* methods", object);
+	g_error ("Aggregate bonobo_object member [%p] has been "
+		 "destroyed using gtk_object_* methods", object);
 }
 
 static void
 bonobo_object_instance_init (GtkObject *gtk_object)
 {
 	BonoboObject *object = BONOBO_OBJECT (gtk_object);
+	BonoboAggregateObject *ao;
 
 	object->priv = g_new (BonoboObjectPrivate, 1);
 	object->priv->destroy_id = gtk_signal_connect (
 		gtk_object, "destroy", GTK_SIGNAL_FUNC (bonobo_object_usage_error),
 		NULL);
 
-	object->priv->ao = g_new0 (GnomeAggregateObject, 1);
-	object->priv->ao->objs = g_list_append (object->priv->ao->objs, object);
-	object->priv->ao->ref_count = 1;
+	object->priv->ao = ao = g_new0 (BonoboAggregateObject, 1);
+
+	ao->objs = g_list_append (object->priv->ao->objs, object);
+	ao->ref_count = 1;
+
+	object->corba_objref = CORBA_OBJECT_NIL;
+	object->servant = NULL;
+
+#ifdef BONOBO_OBJECT_DEBUG
+	{
+		char *indent = g_strnfill (++ref_indent, ' ');
+		g_printerr ("%sCreate %s:[%p] to %d\n", indent,
+			    gtk_type_name (GTK_OBJECT (object)->klass->type),
+			    ao, ao->ref_count);
+		g_free (indent);
+
+		g_assert (g_hash_table_lookup (living_ao_ht, ao) == NULL);
+		g_hash_table_insert (living_ao_ht, ao, ao);
+	}
+#endif
 }
 
 /**
@@ -448,9 +597,37 @@ bonobo_object_get_type (void)
 		};
 
 		type = gtk_type_unique (gtk_object_get_type (), &info);
+
+#ifdef BONOBO_OBJECT_DEBUG
+		living_ao_ht = g_hash_table_new (NULL, NULL);
+#endif
 	}
 
 	return type;
+}
+
+/**
+ * bonobo_object_shutdown:
+ *
+ * Dumps object usage information.
+ * 
+ **/
+void
+bonobo_object_shutdown (void)
+{
+#ifdef BONOBO_OBJECT_DEBUG
+
+	if (living_ao_ht)
+		g_hash_table_foreach (living_ao_ht,
+				      bonobo_ao_debug_foreach, NULL);
+
+	if (g_hash_table_size (living_ao_ht) > 0)
+		g_print ("living bonobo objects count = %d\n",
+			   g_hash_table_size (living_ao_ht));
+	else
+		g_print ("No object references leaked\n");
+
+#endif
 }
 
 /**
@@ -529,7 +706,7 @@ bonobo_object_construct (BonoboObject *object, CORBA_Object corba_object)
 void
 bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 {
-       GnomeAggregateObject *oldao;
+       BonoboAggregateObject *oldao, *ao;
        GList *l;
 
        if (object->priv->ao == newobj->priv->ao)
@@ -547,15 +724,28 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 	*   This check is not perfect, but might help some people.
 	*/
 
+       ao = object->priv->ao;
        oldao = newobj->priv->ao;
 
        /* Merge the two AggregateObject lists */
-       for (l = newobj->priv->ao->objs; l; l = l->next) {
-               if (!g_list_find (object->priv->ao->objs, l->data)) {
-                       object->priv->ao->objs = g_list_prepend (object->priv->ao->objs, l->data);
-                       ((BonoboObject *)l->data)->priv->ao = object->priv->ao;
-               }
+       for (l = oldao->objs; l; l = l->next) {
+	       BonoboObject *new_if = l->data;
+
+	       /* FIXME: we prolly also want to check for duplicate interfaces */
+               if (!g_list_find (ao->objs, new_if)) {
+                       ao->objs = g_list_prepend (ao->objs, new_if);
+
+		       new_if->priv->ao = ao;
+               } else
+		       g_warning ("attempting to merge identical interfaces [%p]", new_if);
        }
+
+       g_assert (newobj->priv->ao == ao);
+
+#ifdef BONOBO_OBJECT_DEBUG
+       g_assert (g_hash_table_lookup (living_ao_ht, oldao) == oldao);
+       g_hash_table_remove (living_ao_ht, oldao);
+#endif
 
        g_list_free (oldao->objs);
        g_free (oldao);
@@ -658,7 +848,7 @@ gnome_unknown_ping (Bonobo_Unknown object)
  * bonobo_object_from_servant:
  * @servant: A Servant that implements the Bonobo::Unknown interface
  *
- * This wraps the servant @servant in a BonoboObject.
+ * Returns: The servant @servant wrapped in a BonoboObject.
  */
 BonoboObject *
 bonobo_object_new_from_servant (void *servant)

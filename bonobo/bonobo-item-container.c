@@ -301,7 +301,7 @@ bonobo_container_new (void)
 	corba_container = create_bonobo_container (BONOBO_OBJECT (container));
 
 	if (corba_container == CORBA_OBJECT_NIL) {
-		gtk_object_destroy (GTK_OBJECT (container));
+		bonobo_object_unref (BONOBO_OBJECT (container));
 		return NULL;
 	}
 	
@@ -370,6 +370,5 @@ bonobo_container_remove (BonoboContainer *container, BonoboObject *client_site)
 	g_return_if_fail (BONOBO_IS_OBJECT (client_site));
 
 	container->client_sites = g_list_remove (container->client_sites, client_site);
-	gtk_object_unref (GTK_OBJECT (client_site));
 }
 

@@ -15,6 +15,7 @@
 #include <bonobo/bonobo-persist-stream.h>
 
 POA_Bonobo_PropertyBag__vepv bonobo_property_bag_vepv;
+static GtkObjectClass *parent_class = NULL;
 
 
 /*
@@ -563,7 +564,7 @@ bonobo_property_bag_new (BonoboPropertyGetFn get_prop,
 
 	corba_pb = bonobo_property_bag_create_corba_object (BONOBO_OBJECT (pb));
 	if (corba_pb == CORBA_OBJECT_NIL) {
-		gtk_object_destroy (GTK_OBJECT (pb));
+		bonobo_object_unref (BONOBO_OBJECT (pb));
 		return NULL;
 	}
 
@@ -614,6 +615,8 @@ bonobo_property_bag_destroy (GtkObject *object)
 	g_hash_table_destroy (pb->priv->props);
 
 	g_free (pb->priv);
+
+	parent_class->destroy (object);
 }
 
 /**
@@ -988,6 +991,8 @@ static void
 bonobo_property_bag_class_init (BonoboPropertyBagClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
+
+	parent_class = gtk_type_class (BONOBO_OBJECT_TYPE);
 
 	object_class->destroy = bonobo_property_bag_destroy;
 

@@ -278,8 +278,8 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 	corba_stream = bonobo_stream_corba_object_create (
 		BONOBO_OBJECT (stream_mem));
 
-	if (corba_stream == CORBA_OBJECT_NIL){
-		gtk_object_destroy (GTK_OBJECT (stream_mem));
+	if (corba_stream == CORBA_OBJECT_NIL) {
+		bonobo_object_unref (BONOBO_OBJECT (stream_mem));
 		return NULL;
 	}
 

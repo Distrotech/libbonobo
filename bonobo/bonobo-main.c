@@ -12,6 +12,8 @@
 #include <config.h>
 #include <bonobo/bonobo-main.h>
 #include "bonobo-object-directory.h"
+#include "bonobo-object.h"
+
 #include <signal.h>
 #include <gnome.h>
 
@@ -255,9 +257,20 @@ bonobo_activate (void)
 	}
 
 	CORBA_exception_free (&ev);
+	
 	return TRUE;
 }
 
+/**
+ * bonobo_shutdown:
+ * 
+ * Can print helpful debug at shutdown time.
+ **/
+void
+bonobo_shutdown (void)
+{
+	bonobo_object_shutdown ();
+}
 
 /**
  * bonobo_main:

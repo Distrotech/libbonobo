@@ -7,6 +7,8 @@
 #include <bonobo/Bonobo.h>
 
 BEGIN_GNOME_DECLS
+
+#undef BONOBO_OBJECT_DEBUG
  
 #define BONOBO_OBJECT_TYPE        (bonobo_object_get_type ())
 #define BONOBO_OBJECT(o)          (GTK_CHECK_CAST ((o), BONOBO_OBJECT_TYPE, BonoboObject))
@@ -69,7 +71,17 @@ Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject     
 void                     bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
 POA_Bonobo_Unknown__epv *bonobo_object_get_epv                (void);
+void                     bonobo_object_shutdown               (void);
 
+
+#ifdef BONOBO_OBJECT_DEBUG
+void                     bonobo_object_trace_refs             (BonoboObject *object,
+							       const char   *fn,
+							       int           line,
+							       gboolean      ref);
+#	define           bonobo_object_ref(o)   G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);}G_STMT_END
+#	define           bonobo_object_unref(o) G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,FALSE);}G_STMT_END
+#endif	/* BONOBO_OBJECT_DEBUG */
 
 /*
  * Error checking
@@ -78,10 +90,11 @@ void                     bonobo_object_check_env              (BonoboObject     
 							       CORBA_Object            corba_object,
 							       CORBA_Environment      *ev);
 
-#define BONOBO_OBJECT_CHECK(o,c,e) do { \
-                                        if ((e)->_major != CORBA_NO_EXCEPTION) { \
-                                        	bonobo_object_check_env(o,c,e);     \
-			        } while (0)
+#define BONOBO_OBJECT_CHECK(o,c,e)	\
+			G_STMT_START {				\
+			if ((e)->_major != CORBA_NO_EXCEPTION)	\
+				bonobo_object_check_env(o,c,e);	\
+			} G_STMT_END
 
 /*
  * Others
