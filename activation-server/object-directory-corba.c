@@ -179,13 +179,9 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant, gboolean force_reload
         g_warning ("Update registry");
 #endif
 
-        must_load = FALSE;
+        /* get first time init right */
+        must_load = (servant->by_iid == NULL);
         
-        /*
-         * Don't stat more than once every 5 seconds or activation
-         * could be too slow. This works even on the first read
-         * because then `time_did_stat is 0'
-         */
         cur_time = time (NULL);
 
         if (cur_time - 5 > servant->time_did_stat) {
@@ -193,9 +189,8 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant, gboolean force_reload
                 
                 for (i = 0; servant->registry_source_directories[i] != NULL; i++) {
                         if (registry_directory_needs_update 
-                            (servant, servant->registry_source_directories[i])) {
+                            (servant, servant->registry_source_directories[i]))
                                 must_load = TRUE;
-                        }
                 }
         }
         
