@@ -34,6 +34,7 @@ my_sgml_files = 			\
 	configuring.sgml		\
 	query-langage.sgml		\
 	architecture.sgml		\
+	fdl.sgml			\
 	$(NULL)
 
 EXTRA_DIST = $(my_sgml_files)
