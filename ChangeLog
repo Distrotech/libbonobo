@@ -1,5 +1,12 @@
 2001-12-14  Mark McLoughlin  <mark@skynet.ie>
 
+	* bonobo/bonobo-item-handler.c:
+	(bonobo_item_option_new_append): impl.
+	(bonobo_item_option_parse): re-write to handle corner cases
+	better and be more readable.
+
+2001-12-14  Mark McLoughlin  <mark@skynet.ie>
+
 	* bonobo/bonobo-item-handler.c: (bonobo_item_handler_finalize),
 	  (bonobo_item_handler_construct), (bonobo_item_handler_new):
 	tolerate NULL get_object and enum_objects callbacks/closures.

@@ -279,6 +279,28 @@ bonobo_item_handler_new_closure (GClosure *enum_objects,
 	return bonobo_item_handler_construct (handler, enum_objects, get_object);
 }
 
+static GSList *
+bonobo_item_option_new_append (GSList  *option_list,
+			       GString *key,
+			       GString *value)
+{
+	BonoboItemOption *option;
+
+	g_assert (key && key->str);
+
+	option = g_new0 (BonoboItemOption, 1);
+
+	option->key  = key->str;
+	g_string_free (key, FALSE);
+
+	if (value) {
+		option->value = value->str;
+		g_string_free (value, FALSE);
+	}
+
+	return g_slist_append (option_list, option);
+}
+
 /**
  * bonobo_parse_item_options:
  * @option_string: a string with a list of options
@@ -305,61 +327,54 @@ bonobo_item_handler_new_closure (GClosure *enum_objects,
 GSList *
 bonobo_item_option_parse (const char *option_string)
 {
-	GSList *list = NULL;
-	GString *key = NULL;
-	BonoboItemOption *option = NULL;
+	GSList     *list  = NULL;
+	GString    *key   = NULL;
+	GString    *value = NULL;
 	const char *p;
 	
-	for (p = option_string; *p; p++) {
-		if (*p == '=' ) {
-			GString *value = NULL;
+	for (p = option_string; *p; p++)
+		switch (*p) {
+		case '=':
+			if (!key || value)
+				goto parse_error_free;
+
+			value = g_string_new ("");
+			break;
+		case ';':
 			if (!key)
-				return list;
-			
-			option = g_new0 (BonoboItemOption, 1);
-			option->key = key->str;
-			g_string_free (key, FALSE);
-			key = NULL;
-
-			for (p++; *p; p++) {
-				if (*p == ';')
-					goto next;
-				if (!value)
-					value = g_string_new ("");
-
-				if (*p == '\\') {
-					p++;
-					if (*p == 0)
-						break;
-					g_string_append_c (value, *p);
-					continue;
-				}
-				g_string_append_c (value, *p);
-			}
-		next:
-			if (value) {
-				option->value = value->str;
-				g_string_free (value, FALSE);
-			}
-			list = g_slist_append (list, option);
-			if (*p == 0)
 				break;
-		} else {
-			if (key == NULL)
-				key = g_string_new ("");
-			g_string_append_c (key, *p);
-		}
-	}
 
-	if (key) {
-		BonoboItemOption *option = g_new (BonoboItemOption, 1);
-		
-		option->key = key->str;
-		g_string_free (key, FALSE);
-		
-		list = g_slist_append (list, option);
-	}
-	
+			list = bonobo_item_option_new_append (list, key, value);
+			key = NULL; value = NULL;
+			break;
+		case '\\':
+			if (!key || !*++p)
+				goto parse_error_free;
+
+			/* drop through */
+		default:
+			if (!key)
+				key = g_string_new ("");
+
+			if (value)
+				g_string_append_c (value, *p);
+			else
+				g_string_append_c (key, *p);
+			break;
+		}
+
+	if (key)
+		list = bonobo_item_option_new_append (list, key, value);
+
+	return list;
+
+ parse_error_free:
+	if (key)
+		g_string_free (key, TRUE);
+
+	if (value)
+		g_string_free (value, TRUE);
+
 	return list;
 }
 
