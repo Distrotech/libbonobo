@@ -162,7 +162,10 @@ OAF_ServerInfo_load(const char *source_directory,
 	  /* This should go in a separate function, but I'm sticking it in
 	     here so alloca can be used. "Eeeek!" is still fine as a
 	     response, :) but this has a direct impact on startup time. */
-	  for(curnode = doc->root; curnode; curnode = curnode->next)
+
+	  for (curnode = (!strcasecmp (doc->root->name, "oaf_info") 
+			 ? doc->root->childs : doc->root)
+		; NULL != curnode; curnode = curnode->next)
 	    {
 	      OAF_ServerInfo *new_ent;
 	      char *ctmp;
