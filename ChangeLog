@@ -1,3 +1,8 @@
+2001-09-03  Jody Goldberg <jgoldberg@home.com>
+
+	* bonobo/bonobo-stream-memory.c (mem_get_info) : CORBA does not like
+	  NULL as a CORBA_String
+
 2001-09-06  Mark McLoughlin  <mark@skynet.ie>
 
 	* Makefile.am: change includedir to gnome-2.0/ as well.

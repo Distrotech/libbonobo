@@ -35,8 +35,10 @@ mem_get_info (PortableServer_Servant         servant,
 		si->size = smem->size;
 	if (mask & Bonobo_FIELD_TYPE)
 		si->type = Bonobo_STORAGE_TYPE_REGULAR;
-	if (mask & Bonobo_FIELD_CONTENT_TYPE)
-		si->content_type = CORBA_string_dup (smem->content_type);
+	si->content_type = CORBA_string_dup (
+		(mask & Bonobo_FIELD_CONTENT_TYPE)
+		? smem->content_type
+		: "");
 
 	return si;
 }
