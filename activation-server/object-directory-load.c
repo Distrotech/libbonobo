@@ -83,6 +83,10 @@ od_entry_read_props (OAF_ServerInfo * ent, xmlNodePtr node)
 			free (type);
 			continue;
 		}
+		if(valuestr[0] == '_')
+			g_error("%s is an invalid property name "
+				"- property names beginning with '_' are reserved",
+				valuestr);
 		curprop->name = CORBA_string_dup (valuestr);
 		free (valuestr);
 
