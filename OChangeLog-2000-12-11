@@ -1,3 +1,10 @@
+2000-10-12  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-zoomable.c (bonobo_zoomable_class_init): Added
+	"set_frame" signal and emit it in impl_Bonobo_Zoomable_set_frame().
+	* bonobo/bonobo-zoomable-frame.c (bonobo_zoomable_frame_class_init):
+	Use correct signal marshaler for the "zoom_parameters_changed" signal.
+
 2000-10-12  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (sync_generic_widgets): remove a hack
