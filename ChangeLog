@@ -1,3 +1,8 @@
+2002-02-08  Mark McLoughlin  <mark@skynet.ie>
+
+	* bonobo/bonobo-item-handler.c:
+	(bonobo_item_options_free): fix leak.
+
 2002-02-07  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-moniker-util.c
