@@ -50,10 +50,9 @@ interface ControlFrame : Bonobo::Unknown {
 	/**
 	 * get_ui_handler:
 	 *
-	 * Returns: The Bonobo::UIHandler interface to be used for
-	 * menu/toolbar item merging.
+	 * Returns: The interface to be used for menu/toolbar item merging.
 	 */
-	UIHandler get_ui_handler ();
+	Bonobo::Unknown get_ui_handler ();
 
 	/**
 	 * deactivate_and_undo:

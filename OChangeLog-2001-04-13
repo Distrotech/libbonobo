@@ -1,3 +1,15 @@
+2000-08-31  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo.h: Add new headers.
+
+	* idl/bonobo-app.idl: add.
+
+	* idl/bonobo-control.idl: Return Unknown not UIHandler
+
+	* idl/Makefile.am: add app.
+
+	* bonobo/Makefile.am: hook in new UI handler test stuff.
+
 2000-08-31  John Sullivan  <sullivan@eazel.com>
 
 	* bonobo/bonobo-uih-menu.c: (menu_toplevel_set_label_internal):

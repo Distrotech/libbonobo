@@ -26,6 +26,7 @@
 #include <bonobo-advise.idl>
 
 /* Control stuff. */
+#include <bonobo-app.idl>
 #include <bonobo-ui-handler.idl>
 #include <bonobo-property.idl>
 #include <bonobo-control.idl>

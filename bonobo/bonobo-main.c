@@ -94,7 +94,7 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_UIHandler_NotToplevelHandler))
 		return g_strdup (_("internal menu or toolbar exception"));
-
+		
 	/* Bonobo::Persist */
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_Persist_WrongDataType))
 		return g_strdup (_("incorrect data type"));

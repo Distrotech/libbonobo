@@ -84,6 +84,7 @@ void                     bonobo_object_trace_refs             (BonoboObject *obj
 #	define           bonobo_object_ref(o)   G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);}G_STMT_END
 #	define           bonobo_object_unref(o) G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,FALSE);}G_STMT_END
 #endif	/* BONOBO_OBJECT_DEBUG */
+void                     bonobo_object_dump_interfaces        (BonoboObject *object);
 
 /*
  * Error checking

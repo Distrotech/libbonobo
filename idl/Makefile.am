@@ -7,6 +7,7 @@ idl_DATA =			\
 	Bonobo.idl		\
 	bonobo-unknown.idl	\
 	bonobo-advise.idl	\
+	bonobo-app.idl		\
 	bonobo-canvas.idl	\
 	bonobo-container.idl	\
 	bonobo-control.idl	\
