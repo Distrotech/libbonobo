@@ -1,3 +1,7 @@
+1999-03-26  Timur Bakeyev <mc@bat.ru>
+
+	* bonobo/Makefile.am: fixed library inclusion order in $(bonobo_libs).
+
 1999-03-08  Martijn van Beers <martijn@earthling.net>
 
 	* bonobo/Makefile.am: fixed double -I for orbit-idl
