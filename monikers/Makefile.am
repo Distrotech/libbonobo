@@ -52,15 +52,12 @@ moniker_ldadd = 				\
 
 std_moniker_SOURCES =			\
 	bonobo-moniker-file.c		\
-	bonobo-moniker-file.h		\
 	bonobo-moniker-item.c		\
-	bonobo-moniker-item.h		\
 	bonobo-moniker-new.c		\
-	bonobo-moniker-new.h		\
 	bonobo-moniker-oaf.c		\
-	bonobo-moniker-oaf.h		\
 	bonobo-moniker-query.c		\
 	bonobo-moniker-query.h		\
+	bonobo-moniker-std.h            \
 	std-moniker.c
 
 std_moniker_LDADD =			\
