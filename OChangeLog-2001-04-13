@@ -1,3 +1,16 @@
+July 19, 1999, Elliot:
+	bonobo/gnome-embeddable-factory.c:
+		Remove warning about using params - don't need to use
+		them.
+	bonobo/gnome-embeddable.h:
+		Make the gnome_embeddable_epv be extern.
+	bonobo/test-container-autoload.c:
+		query_interface doesn't grant a refcount, so don't
+		unref the results.
+
+		Use CORBA_Object_is_nil instead of assuming that
+		CORBA_OBJECT_NIL == NULL.
+
 1999-07-18  Dave Camp  <campd@oit.edu>
 
 	* bonobo/gnome-view.c (impl_GNOME_View_size_allocate): If view->plug
