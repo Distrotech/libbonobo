@@ -1,5 +1,10 @@
 2000-09-12  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-component.c (impl_exec_verb): lookup verbs in the
+	verb hash, not the listner hash
+
+2000-09-12  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (gnome_app_construct): implement.
 	(bonobo_win_new): use it.
 
