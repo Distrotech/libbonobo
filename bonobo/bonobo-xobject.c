@@ -14,7 +14,7 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
 #include <gtk/gtktypeutils.h>
-#include <bonobo/bonobo-mobject.h>
+#include <bonobo/bonobo-xobject.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include "bonobo-running-context.h"
@@ -28,16 +28,16 @@ extern int bonobo_object_get_refs (BonoboObject *object);
 	guchar is_pseudo_object;
 	gint refs;
 */
-#define BONOBO_M_GTK_OBJ_FLAG_PATTERN 0x8000
-#define BONOBO_M_GTK_FLAG_PATTERN    (GTK_FLOATING | 0x4000)
+#define BONOBO_X_GTK_OBJ_FLAG_PATTERN 0x8000
+#define BONOBO_X_GTK_FLAG_PATTERN    (GTK_FLOATING | 0x4000)
 
 static GtkObjectClass *m_object_parent_class;
 
 /* FIXME: cut and paste from orbit_object.c: CORBA_Object_release_fn */
 static void
-b_corba_object_free (BonoboMObject *object)
+b_corba_object_free (BonoboXObject *object)
 {
-	CORBA_Object obj = BONOBO_M_OBJECT_GET_CORBA (object);
+	CORBA_Object obj = BONOBO_X_OBJECT_GET_CORBA (object);
 
 	g_assert (obj!=NULL);
 
@@ -62,15 +62,15 @@ b_corba_object_free (BonoboMObject *object)
 static void
 m_object_finalize_real (GtkObject *object)
 {
-	BonoboMObject           *m_object;
-	BonoboMObjectClass      *klass;
+	BonoboXObject           *m_object;
+	BonoboXObjectClass      *klass;
 	void                    *servant;
 	PortableServer_ObjectId *oid;
 	CORBA_Environment        ev;
 	
-	m_object = BONOBO_M_OBJECT (object);
-	klass = (BonoboMObjectClass *)GTK_OBJECT (object)->klass;
-	servant = BONOBO_M_OBJECT_GET_SERVANT (m_object);
+	m_object = BONOBO_X_OBJECT (object);
+	klass = (BonoboXObjectClass *)GTK_OBJECT (object)->klass;
+	servant = BONOBO_X_OBJECT_GET_SERVANT (m_object);
 
 	CORBA_exception_init (&ev);
 
@@ -101,7 +101,7 @@ m_object_finalize_real (GtkObject *object)
 static void
 dont_release (gpointer obj, CORBA_Environment *ev)
 {
-	BonoboMObject *object = BONOBO_M_CORBA_GET_OBJECT (obj);
+	BonoboXObject *object = BONOBO_X_CORBA_GET_OBJECT (obj);
 
 	g_warning ("Reference counting error: "
 		   "Attempts to release CORBA_Object associated with "
@@ -111,8 +111,8 @@ dont_release (gpointer obj, CORBA_Environment *ev)
 }
 
 static void
-do_corba_hacks (BonoboMObject      *object,
-		BonoboMObjectClass *klass)
+do_corba_hacks (BonoboXObject      *object,
+		BonoboXObjectClass *klass)
 {
 	CORBA_Object obj;
 	CORBA_Environment ev;
@@ -160,7 +160,7 @@ do_corba_hacks (BonoboMObject      *object,
 		object->object.parent.interface = &ri;
 	}
 
-	bonobo_running_context_add_object (BONOBO_M_OBJECT_GET_CORBA (object));
+	bonobo_running_context_add_object (BONOBO_X_OBJECT_GET_CORBA (object));
 
 	CORBA_exception_free (&ev);
 }
@@ -169,7 +169,7 @@ static void
 m_object_instance_init (GtkObject    *gtk_object,
 			GtkTypeClass *klass)
 {
-	BonoboMObject *object = BONOBO_M_OBJECT (gtk_object);
+	BonoboXObject *object = BONOBO_X_OBJECT (gtk_object);
 
 	GTK_OBJECT_UNSET_FLAGS (GTK_OBJECT (object), GTK_FLOATING);
 
@@ -177,14 +177,14 @@ m_object_instance_init (GtkObject    *gtk_object,
 		   gtk_type_name (gtk_object->klass->type),
 		   gtk_type_name (klass->type));
 
-	do_corba_hacks (object, BONOBO_M_OBJECT_CLASS (klass));
+	do_corba_hacks (object, BONOBO_X_OBJECT_CLASS (klass));
 
-	object->base.corba_objref = BONOBO_M_OBJECT_GET_CORBA   (object);
-	object->base.servant      = BONOBO_M_OBJECT_GET_SERVANT (object);
+	object->base.corba_objref = BONOBO_X_OBJECT_GET_CORBA   (object);
+	object->base.servant      = BONOBO_X_OBJECT_GET_SERVANT (object);
 }
 
 static void
-m_object_class_init (BonoboMObjectClass *klass)
+m_object_class_init (BonoboXObjectClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
 
@@ -196,18 +196,18 @@ m_object_class_init (BonoboMObjectClass *klass)
 /**
  * m_object_get_type:
  *
- * Returns: the GtkType associated with the base BonoboMObject class type.
+ * Returns: the GtkType associated with the base BonoboXObject class type.
  */
 GtkType
-bonobo_m_object_get_type (void)
+bonobo_x_object_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type) {
 		GtkTypeInfo info = {
-			"BonoboMObject",
-			sizeof (BonoboMObject),
-			sizeof (BonoboMObjectClass),
+			"BonoboXObject",
+			sizeof (BonoboXObject),
+			sizeof (BonoboXObjectClass),
 			(GtkClassInitFunc) m_object_class_init,
 			(GtkObjectInitFunc) m_object_instance_init,
 			NULL, /* reserved 1 */
@@ -223,14 +223,14 @@ bonobo_m_object_get_type (void)
 }
 
 static gboolean
-setup_type (GtkType type, BonoboMObjectPOAFn init_fn, BonoboMObjectPOAFn fini_fn)
+setup_type (GtkType type, BonoboXObjectPOAFn init_fn, BonoboXObjectPOAFn fini_fn)
 {
 	GtkType       p, b_type;
 	int           depth;
-	BonoboMObjectClass *klass;
+	BonoboXObjectClass *klass;
 	gpointer     *vepv;
 
-	b_type = bonobo_m_object_get_type ();
+	b_type = bonobo_x_object_get_type ();
 
 	/* How far down the tree are we ? */
 	for (depth = 0, p = type; p && p != b_type;
@@ -238,8 +238,8 @@ setup_type (GtkType type, BonoboMObjectPOAFn init_fn, BonoboMObjectPOAFn fini_fn
 		depth++;
 
 	if (!type) {
-		g_warning ("Trying to inherit '%s' from a BonoboMObject, but "
-			   "no BonoboMObject in the ancestory",
+		g_warning ("Trying to inherit '%s' from a BonoboXObject, but "
+			   "no BonoboXObject in the ancestory",
 			   gtk_type_name (type));
 		return FALSE;
 	}
@@ -286,9 +286,9 @@ setup_type (GtkType type, BonoboMObjectPOAFn init_fn, BonoboMObjectPOAFn fini_fn
 }
 
 GtkType
-bonobo_m_type_unique (GtkType            parent_type,
-		      BonoboMObjectPOAFn init_fn,
-		      BonoboMObjectPOAFn fini_fn,
+bonobo_x_type_unique (GtkType            parent_type,
+		      BonoboXObjectPOAFn init_fn,
+		      BonoboXObjectPOAFn fini_fn,
 		      const GtkTypeInfo *info)
 {
 	GtkType       type;
@@ -303,8 +303,8 @@ bonobo_m_type_unique (GtkType            parent_type,
 		return 0;
 }
 
-BonoboMObject *
-bonobo_m_object (gpointer p)
+BonoboXObject *
+bonobo_x_object (gpointer p)
 {
 	if (!p)
 		return NULL;

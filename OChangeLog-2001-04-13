@@ -1,3 +1,7 @@
+2001-02-05  Michael Meeks  <michael@helixcode.com>
+
+	* Rename mobject to xobject - the transience of decisiveness.
+	
 2001-02-05  Lutz Müller <urc8@rz.uni-karlsruhe.de>
 
 	* monikers/bonobo-moniker-extender-stream.c
