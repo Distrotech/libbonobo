@@ -1,3 +1,24 @@
+2000-11-16  Darin Adler  <darin@eazel.com>
+
+	Make "hidden" attribute on placeholder hide all the items inside
+	the placeholder too. Change the definition of "empty" for a
+	placeholder to include placeholders containing only hidden items.
+
+	* bonobo/bonobo-win.c: (placeholder_sync): Remove code to hide
+	empty placeholders and hidden placeholders. That's handled
+	elsewhere now.
+	(hide_all_widgets): New function that hides every widget.
+	(contains_visible_widget): New function that returns true if it
+	finds any visible widget.
+	(hide_placeholder_if_empty_or_hidden): New function to hide the
+	placeholder itself it it's empty, or the placeholder and all items
+	inside it if it's marked "hidden".
+	(sync_generic_widgets): Call hide_placeholder_if_empty_or_hidden
+	after the contents of each placeholder is synced.
+	(state_update_new), (state_update_destroy), (state_update_exec):
+	Change to update "hidden" and "sensitive" right away, but still
+	defer changes to "state".
+
 2000-11-16  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (placeholder_sync): Add 'hidden' attribute
