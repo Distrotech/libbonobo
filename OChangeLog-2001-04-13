@@ -1,5 +1,9 @@
 2000-04-01  Michael Meeks  <michael@helixcode.com>
 
+	* configure.in: bump version to 0.10
+
+2000-04-01  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/Makefile.am (libbonoboinclude_HEADERS): install bonobo-arg.h and not
 	bonobo-property-types.h
 
