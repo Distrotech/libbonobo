@@ -1,3 +1,11 @@
+2000-11-15  Martin Baulig  <baulig@suse.de>
+
+	reviewed by: Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo-win.c (bonobo_window_deregister_dead_components):
+	Don't return a value in this void function; fixes a compiler
+	warning.
+
 2000-11-14  Maciej Stachowiak  <mjs@eazel.com>
 
 	reviewed by: Michael Meeks  <michael@helixcode.com>
