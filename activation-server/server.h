@@ -19,7 +19,13 @@ OAF_ObjectDirectory_create(PortableServer_POA poa,
 			   const char *source_directory,
 			   CORBA_Environment *ev);
 /* od-load.c */
-OAF_ServerInfo *OAF_ServerInfo_load(const char *source_directory, CORBA_unsigned_long *nservers, GHashTable **by_iid);
+
+OAF_ServerInfo *OAF_ServerInfo_load(const char *source_directory,
+				    CORBA_unsigned_long *nservers,
+				    GHashTable **by_iid,
+				    const char *user,
+				    const char *host,
+				    const char *domain);
 
 /* od-activate.c */
 CORBA_Object od_server_activate(OAF_ServerInfo *si);

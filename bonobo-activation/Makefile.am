@@ -1,6 +1,6 @@
 lib_LTLIBRARIES=liboaf.la
 
-INCLUDES=@ORBIT_CFLAGS@
+INCLUDES=@ORBIT_CFLAGS@ -I$(top_srcdir) -I$(top_builddir)
 
 LDADD=@ORBIT_LIBS@
 

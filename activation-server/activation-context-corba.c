@@ -202,6 +202,21 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
 					    CORBA_Context ctx,
 					    CORBA_Environment * ev);
 
+static void
+ac_query_run(impl_POA_OAF_ActivationContext * servant,
+	     CORBA_char * requirements,
+	     OAF_StringList * selection_order,
+	     CORBA_Context ctx,
+	     OAF_ServerInfo **items,
+	     CORBA_Environment * ev);
+static ChildODInfo *
+ac_find_child_for_server(impl_POA_OAF_ActivationContext *servant,
+			 OAF_ServerInfo *server,
+			 CORBA_Environment *ev);
+static void
+ac_update_lists(impl_POA_OAF_ActivationContext *servant,
+		CORBA_Environment *ev);
+
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_OAF_ActivationContext_base_epv =
@@ -335,9 +350,30 @@ impl_OAF_ActivationContext_remove_directory(impl_POA_OAF_ActivationContext * ser
       break;
     }
   }
+
   if(!cur)
     CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
 			ex_OAF_ActivationContext_NotListed, NULL);
+}
+
+static CORBA_Object
+ac_do_activation(impl_POA_OAF_ActivationContext *servant,
+		 OAF_ServerInfo *server,
+		 CORBA_Environment *ev)
+{
+  ChildODInfo *child;
+  CORBA_Object retval;
+
+  child = ac_find_child_for_server(servant, server, ev);
+
+  if(!child || !child->obj || ev->_major != CORBA_NO_EXCEPTION)
+    return CORBA_OBJECT_NIL;
+
+  retval = OAF_ObjectDirectory_activate(child->obj, server->iid, ev);
+  if(ev->_major != CORBA_NO_EXCEPTION)
+    retval = CORBA_OBJECT_NIL;
+
+  return retval;
 }
 
 static OAF_ActivationResult *
@@ -347,7 +383,70 @@ impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
 				    CORBA_Context ctx,
 				    CORBA_Environment * ev)
 {
-   OAF_ActivationResult *retval;
+   OAF_ActivationResult *retval = NULL;
+   OAF_ServerInfo **items, *curitem;
+   int i;
+   char *hostname;
+   CORBA_NVList *nvout;
+
+   /* Figure out what the host the activating client is running on (for
+      purposes of fun & pleasure) */
+   CORBA_Context_get_values(ctx, NULL, 0, "hostname", &nvout, ev);
+   if (ev->_major == CORBA_NO_EXCEPTION)
+     {
+       if (nvout->list->len > 0)
+	 {
+	   CORBA_NamedValue *nv;
+
+	   nv = &g_array_index(nvout->list, CORBA_NamedValue, 0);
+	   hostname = g_strdup(*(char **)nv->argument._value);
+	 }
+       else
+	 hostname = NULL;
+
+       CORBA_NVList_free(nvout, ev);
+     }
+   else
+     hostname = NULL;
+
+   ac_update_lists(servant, ev);
+
+   items = oaf_alloca(servant->total_servers * sizeof(OAF_ServerInfo *));
+   ac_query_run(servant, requirements, selection_order, ctx, items, ev);
+
+   if(ev->_major != CORBA_NO_EXCEPTION)
+     goto out;
+
+   retval = OAF_ActivationResult__alloc();
+   retval->_d = OAF_RESULT_NONE;
+
+   for(i = 0; items[i] && i < servant->total_servers; i++) {
+     curitem = items[i];
+
+     /* A shared library must be on the same host as the activator in
+	order for loading to work properly (no, we're not going to
+	bother with remote shlib loading - it gets far too complicated
+	far too quickly :-) */
+     if(!strcmp(curitem->server_type, "shlib")
+	&& (!hostname || strcmp(curitem->hostname, hostname)))
+       continue;
+
+     if(!strcmp(curitem->server_type, "shlib")) {
+       retval->_d = OAF_RESULT_SHLIB;
+       retval->_u.res_shlib = CORBA_string_dup(curitem->location_info);
+       break;
+     } else {
+       retval->_u.res_object = ac_do_activation(servant, curitem, ev);
+
+       if(!CORBA_Object_is_nil(retval->_u.res_object, ev)) {
+	 retval->_d = OAF_RESULT_OBJECT;
+	 break;
+       }
+     }
+   }
+
+ out:
+   g_free(hostname);
 
    return retval;
 }
@@ -429,19 +528,7 @@ ac_query_get_var(OAF_ServerInfo *si, const char *id, QueryContext *qctx)
   if(!child)
     goto out;
 
-  if(!strcasecmp(id, "_hostname")) {
-    retval.value_known = TRUE;
-    retval.type = CONST_STRING;
-    retval.u.v_string = child->hostname;
-  } else if (!strcasecmp(id, "_domain")) {
-    retval.value_known = TRUE;
-    retval.type = CONST_STRING;
-    retval.u.v_string = child->domain;
-  } else if (!strcasecmp(id, "_username")) {
-    retval.value_known = TRUE;
-    retval.type = CONST_STRING;
-    retval.u.v_string = child->username;
-  } else if (!strcasecmp(id, "_active")) {
+  if (!strcasecmp(id, "_active")) {
     CORBA_Environment ev;
 
     CORBA_exception_init(&ev);
@@ -458,31 +545,29 @@ ac_query_get_var(OAF_ServerInfo *si, const char *id, QueryContext *qctx)
   return retval;
 }
 
-
-static OAF_ServerInfoList *
-impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
-				 CORBA_char * requirements,
-				 OAF_StringList * selection_order,
-				 CORBA_Context ctx,
-				 CORBA_Environment * ev)
+/* This function should only be called by
+ * impl_OAF_ActivationContext_query and
+ * impl_OAF_ActivationContext_activate - hairy implicit preconditions
+ * exist. */
+static void
+ac_query_run(impl_POA_OAF_ActivationContext * servant,
+	     CORBA_char * requirements,
+	     OAF_StringList * selection_order,
+	     CORBA_Context ctx,
+	     OAF_ServerInfo **items,
+	     CORBA_Environment * ev)
 {
-  OAF_ServerInfoList *retval;
-  int total, i, j;
+  int total, i;
   GSList *cur;
   QueryContext qctx;
 
-  OAF_ServerInfo **items, **orig_items;
+  OAF_ServerInfo **orig_items;
   int item_count, orig_item_count;
   char *errstr;
   OAF_ActivationContext_ParseFailed *ex;
 
   QueryExpr *qexp_requirements;
   QueryExpr **qexp_sort_items;
-
-  retval = OAF_ServerInfoList__alloc();
-  retval->_length = 0;
-  retval->_buffer = NULL;
-  CORBA_sequence_set_release(retval, CORBA_TRUE);
 
   /* First, parse the query */
   errstr = (char *)qexp_parse(requirements, &qexp_requirements);
@@ -492,7 +577,7 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
     g_free(errstr);
     CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
 			ex_OAF_ActivationContext_ParseFailed, ex);
-    return retval;
+    return;
   }
 
   qexp_sort_items = oaf_alloca(selection_order->_length * sizeof(QueryExpr *));
@@ -510,15 +595,11 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
 
       CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
 			  ex_OAF_ActivationContext_ParseFailed, ex);
-      return retval;
+      return;
     }
   }
 
-  /* Then, pull in new lists from OD servers */
-  ac_update_lists(servant, ev);
-
   total = servant->total_servers;
-  items = oaf_alloca(total * sizeof(OAF_ServerInfo *));
   orig_items = oaf_alloca(total * sizeof(OAF_ServerInfo *));
 
   for(item_count = 0, cur = servant->dirs; cur; cur = cur->next) {
@@ -527,12 +608,14 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
 
     child = cur->data;
 
-    if(CORBA_Object_is_nil(child->obj, ev) || !child->list)
+    if(child->obj == CORBA_OBJECT_NIL)
       continue;
 
-    for(i = 0; i < child->list->_length; i++, item_count++)
+    for(i = 0; i < child->list->_length;
+	i++, item_count++)
       items[item_count] = &child->list->_buffer[i];
   }
+
   memcpy(orig_items, items, item_count * sizeof(OAF_ServerInfo *));
   orig_item_count = item_count;
 
@@ -548,21 +631,48 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
   }
 
   qexp_sort(items, item_count, qexp_sort_items, selection_order->_length, &qctx);
+}
 
-  for(total = i = 0; i < item_count; i++) {
-    if(items[i])
-      total++;
-  }
+static OAF_ServerInfoList *
+impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
+				 CORBA_char * requirements,
+				 OAF_StringList * selection_order,
+				 CORBA_Context ctx,
+				 CORBA_Environment * ev)
+{
+  OAF_ServerInfoList *retval;
+  OAF_ServerInfo **items;
+  int item_count;
+  int i, j, total;
 
-  retval->_length = total;
-  retval->_buffer = CORBA_sequence_OAF_ServerInfo_allocbuf(total);
-  for(i = j = 0; i < item_count; i++) {
-    if(!items[i])
-      continue;
+  retval = OAF_ServerInfoList__alloc();
+  retval->_length = 0;
+  retval->_buffer = NULL;
+  CORBA_sequence_set_release(retval, CORBA_TRUE);
 
-    OAF_ServerInfo__copy(&retval->_buffer[j], items[i]);
+  /* Pull in new lists from OD servers */
+  ac_update_lists(servant, ev);
+  items = oaf_alloca(servant->total_servers * sizeof(OAF_ServerInfo *));
 
-    j++;
+  ac_query_run(servant, requirements, selection_order, ctx, items, ev);
+
+  if(ev->_major == CORBA_NO_EXCEPTION) {
+    for(total = i = 0; i < item_count; i++) {
+      if(items[i])
+	total++;
+    }
+
+    retval->_length = total;
+    retval->_buffer = CORBA_sequence_OAF_ServerInfo_allocbuf(total);
+
+    for(i = j = 0; i < item_count; i++) {
+      if(!items[i])
+	continue;
+      
+      OAF_ServerInfo__copy(&retval->_buffer[j], items[i]);
+      
+      j++;
+    }
   }
 
   return retval;

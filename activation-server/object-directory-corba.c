@@ -39,6 +39,9 @@ impl_OAF_ObjectDirectory__get_domain(impl_POA_OAF_ObjectDirectory * servant,
 static CORBA_char *
 impl_OAF_ObjectDirectory__get_hostID(impl_POA_OAF_ObjectDirectory * servant,
 				     CORBA_Environment * ev);
+static CORBA_char *
+impl_OAF_ObjectDirectory__get_username(impl_POA_OAF_ObjectDirectory * servant,
+				       CORBA_Environment * ev);
 
 static CORBA_Object
 impl_OAF_ObjectDirectory_activate(impl_POA_OAF_ObjectDirectory * servant,
@@ -64,13 +67,14 @@ static PortableServer_ServantBase__epv impl_OAF_ObjectDirectory_base_epv =
 static POA_OAF_ObjectDirectory__epv impl_OAF_ObjectDirectory_epv =
 {
    NULL,			/* _private */
-   (gpointer) & impl_OAF_ObjectDirectory__get_servers,
-   (gpointer) & impl_OAF_ObjectDirectory_get_active_servers,
-   (gpointer) & impl_OAF_ObjectDirectory__get_domain,
-   (gpointer) & impl_OAF_ObjectDirectory__get_hostID,
-   (gpointer) & impl_OAF_ObjectDirectory_activate,
-   (gpointer) & impl_OAF_ObjectDirectory_lock,
-   (gpointer) & impl_OAF_ObjectDirectory_unlock
+   & impl_OAF_ObjectDirectory__get_servers,
+   & impl_OAF_ObjectDirectory_get_active_servers,
+   & impl_OAF_ObjectDirectory__get_username,
+   & impl_OAF_ObjectDirectory__get_hostID,
+   & impl_OAF_ObjectDirectory__get_domain,
+   & impl_OAF_ObjectDirectory_activate,
+   & impl_OAF_ObjectDirectory_lock,
+   & impl_OAF_ObjectDirectory_unlock
 };
 
 /*** vepv structures ***/
@@ -144,8 +148,13 @@ OAF_ObjectDirectory_create(PortableServer_POA poa,
    newservant->attr_domain = g_strdup(domain);
    newservant->attr_hostID = liboaf_hostname_get();
    newservant->by_iid = NULL;
-   newservant->attr_servers._buffer = OAF_ServerInfo_load(source_directory, &newservant->attr_servers._length,
-							  &newservant->by_iid);
+   newservant->attr_servers._buffer =
+     OAF_ServerInfo_load(source_directory,
+			 &newservant->attr_servers._length,
+			 &newservant->by_iid,
+			 g_get_user_name(),
+			 newservant->attr_hostID,
+			 newservant->attr_domain);
    newservant->active_servers = g_hash_table_new(g_str_hash, g_str_equal);
    newservant->time_list_changed = time(NULL);
 
@@ -220,6 +229,13 @@ impl_OAF_ObjectDirectory__get_hostID(impl_POA_OAF_ObjectDirectory * servant,
 				     CORBA_Environment * ev)
 {
    return CORBA_string_dup(servant->attr_hostID);
+}
+
+static CORBA_char *
+impl_OAF_ObjectDirectory__get_username(impl_POA_OAF_ObjectDirectory * servant,
+				       CORBA_Environment * ev)
+{
+  return CORBA_string_dup(g_get_user_name());
 }
 
 static CORBA_Object

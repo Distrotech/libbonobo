@@ -1,96 +1,97 @@
 module OAF {
-	typedef string ImplementationID;
-	typedef string ActivationID;
+  typedef string ImplementationID;
+  typedef string ActivationID;
 
-	typedef sequence<string> StringList;
+  typedef sequence<string> StringList;
 
-	/* ActivationResult */
-	enum ActivationResultType { RESULT_OBJECT, RESULT_SHLIB };
+  /* ActivationResult */
+  enum ActivationResultType { RESULT_OBJECT, RESULT_SHLIB, RESULT_NONE };
 
-	union ActivationResult switch(ActivationResultType) {
-	case RESULT_OBJECT:
-		Object res_object;
-	case RESULT_SHLIB:
-		string res_shlib;
-	};
+  union ActivationResult switch(ActivationResultType) {
+  case RESULT_OBJECT:
+    Object res_object;
+  case RESULT_SHLIB:
+    string res_shlib;
+  };
 
-	/* Attribute */
-	enum AttributeType { A_STRING, A_NUMBER, A_BOOLEAN, A_STRINGV };
-	union AttributeValue switch(AttributeType) {
-	case A_STRING:
-		string value_string;
-	case A_NUMBER:
-		double value_number;
-	case A_BOOLEAN:
-		boolean value_boolean;
-	case A_STRINGV:
-		StringList value_stringv;
-	};
-	struct Attribute {
-		string name;
-		AttributeValue v;
-	};
+  /* Attribute */
+  enum AttributeType { A_STRING, A_NUMBER, A_BOOLEAN, A_STRINGV };
+  union AttributeValue switch(AttributeType) {
+  case A_STRING:
+    string value_string;
+  case A_NUMBER:
+    double value_number;
+  case A_BOOLEAN:
+    boolean value_boolean;
+  case A_STRINGV:
+    StringList value_stringv;
+  };
+  struct Attribute {
+    string name;
+    AttributeValue v;
+  };
 
-	/* Server */
-	struct ServerInfo {
-		ImplementationID iid;
+  /* Server */
+  struct ServerInfo {
+    ImplementationID iid;
 
-		string server_type;
-		string location_info;
+    string server_type;
+    string location_info;
+    string username, hostname, domain;
 		
-		sequence<Attribute> attrs;
-	};
-	typedef sequence<ServerInfo> ServerInfoList;
+    sequence<Attribute> attrs;
+  };
+  typedef sequence<ServerInfo> ServerInfoList;
 
-	typedef long long CacheTime;
+  typedef long long CacheTime;
 
-	union ServerInfoListCache switch(boolean) {
-	case TRUE:
-	  ServerInfoList server_list;
-	};
+  union ServerInfoListCache switch(boolean) {
+  case TRUE:
+    ServerInfoList server_list;
+  };
 
-	union ServerStateCache switch(boolean) {
-	case TRUE:
-	  sequence<ImplementationID> active_servers;
-	};
+  union ServerStateCache switch(boolean) {
+  case TRUE:
+    sequence<ImplementationID> active_servers;
+  };
 
-	/* Interfaces */
-	interface ObjectDirectory {
-	  ServerInfoListCache get_servers(in CacheTime only_if_newer);
-	  ServerStateCache get_active_servers(in CacheTime only_if_newer);
+  /* Interfaces */
+  interface ObjectDirectory {
+    ServerInfoListCache get_servers(in CacheTime only_if_newer);
+    ServerStateCache get_active_servers(in CacheTime only_if_newer);
 
-	  readonly attribute string domain, hostname, username;
+    readonly attribute string username, hostname, domain;
 
-	  Object activate(in ImplementationID iid);
+    Object activate(in ImplementationID iid);
 
-	  /* Ensures consistency for activations of publicly advertised objects */
-	  void lock();
-	  oneway void unlock();
-	};
+    /* Ensures consistency for activations of publicly advertised objects */
+    void lock();
+    oneway void unlock();
+  };
 
-	typedef sequence<ObjectDirectory> ObjectDirectoryList;
+  typedef sequence<ObjectDirectory> ObjectDirectoryList;
 
-	interface ActivationContext {
-	  exception NotListed {};
-	  exception AlreadyListed {};
-	  exception ParseFailed { string description; };
+  interface ActivationContext {
+    exception NotListed {};
+    exception AlreadyListed {};
+    exception ParseFailed { string description; };
 
-	  readonly attribute ObjectDirectoryList directories;
-	  void add_directory(in ObjectDirectory dir) raises(AlreadyListed);
-	  void remove_directory(in ObjectDirectory dir) raises(NotListed);
+    readonly attribute ObjectDirectoryList directories;
+    void add_directory(in ObjectDirectory dir) raises(AlreadyListed);
+    void remove_directory(in ObjectDirectory dir) raises(NotListed);
 
-	  ActivationResult activate(in string requirements,
-				    in StringList selection_order)
-	    raises(ParseFailed)
-	    context("hostname", "domain", "username");
+    ActivationResult activate(in string requirements,
+			      in StringList selection_order)
+      raises(ParseFailed)
+      context("username", "hostname", "domain");
 
-	  readonly attribute ServerInfoList servers;
-	  ServerInfoList query(in string requirements,
-			       in StringList selection_order)
-	    raises(ParseFailed)
-	    context("hostname", "domain", "username");
+    readonly attribute ServerInfoList servers;
+    ServerInfoList query(in string requirements,
+			 in StringList selection_order)
+      raises(ParseFailed)
+      context("username", "hostname", "domain");
 
-	  ActivationResult activate_from_id(in ActivationID aid)
-	    context("hostname", "domain", "username");
-	};
+    ActivationResult activate_from_id(in ActivationID aid)
+      context("username", "hostname", "domain");
+  };
 };

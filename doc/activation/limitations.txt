@@ -1,0 +1,7 @@
+Objects activated via factories cannot automatically be activated on a
+different computer than the factory itself. It's up to the factory to
+do the activation of objects.
+
+Shared libraries servers must be activated from an ObjectDirectory on
+the same host as the activating client. File accessability checking is
+not normally done.

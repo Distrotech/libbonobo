@@ -108,7 +108,12 @@ od_entry_read_attrs(OAF_ServerInfo *ent, xmlNodePtr node)
 }
 
 OAF_ServerInfo *
-OAF_ServerInfo_load(const char *source_directory, CORBA_unsigned_long *nservers, GHashTable **by_iid)
+OAF_ServerInfo_load(const char *source_directory,
+		    CORBA_unsigned_long *nservers,
+		    GHashTable **by_iid,
+		    const char *user,
+		    const char *host,
+		    const char *domain)
 {
   DIR *dirh;
   struct dirent *dent;
@@ -176,6 +181,9 @@ OAF_ServerInfo_load(const char *source_directory, CORBA_unsigned_long *nservers,
 
       ctmp = xmlGetProp(curnode, "location");
       new_ent->location_info = CORBA_string_dup(ctmp);
+      new_ent->hostname = CORBA_string_dup(host);
+      new_ent->domain = CORBA_string_dup(domain);
+      new_ent->username = CORBA_string_dup(g_get_user_name());
       free(ctmp);
 
       od_entry_read_attrs(new_ent, curnode);

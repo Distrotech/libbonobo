@@ -739,6 +739,12 @@ qexp_evaluate_id(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 	retval.u.v_string = si->server_type;
       else if (!strcasecmp(e->u.id_value, "iid"))
 	retval.u.v_string = si->iid;
+      else if (!strcasecmp(e->u.id_value, "username"))
+	retval.u.v_string = si->iid;
+      else if (!strcasecmp(e->u.id_value, "hostname"))
+	retval.u.v_string = si->iid;
+      else if (!strcasecmp(e->u.id_value, "domain"))
+	retval.u.v_string = si->iid;
       else
 	{
 	  int i;
@@ -1049,12 +1055,15 @@ qexp_sort_compare(OAF_ServerInfo *x, OAF_ServerInfo *y, QueryExpr **sexps, int n
 }
 
 void
-qexp_sort(OAF_ServerInfo **servers, int nservers, QueryExpr **sexps, int nexps, QueryContext *qctx)
+
+qexp_sort(OAF_ServerInfo **servers, int nservers, QueryExpr **sexps,
+	  int nexps, QueryContext *qctx)
 {
   int n, h, i, j;
-  OAF_ServerInfo *t, **a;
+  OAF_ServerInfo *t;
 
-  /* This is a shell sort algorithm from http://members.xoom.com/_XOOM/thomasn/s_shl.txt */
+  /* This is a shell sort algorithm, taken from
+     http://members.xoom.com/_XOOM/thomasn/s_shl.txt */
 
   /**************************
     *  sort array a[0..nservers]  *
@@ -1075,12 +1084,12 @@ qexp_sort(OAF_ServerInfo **servers, int nservers, QueryExpr **sexps, int nexps, 
 
     /* sort-by-insertion in increments of h */
     for (i = 0 + h; i < nservers; i++) {
-      t = a[i];
+      t = servers[i];
 
-      for (j = i-h; j >= 0 && compGT(a[j], t); j -= h) {
-	a[j+h] = a[j];
+      for (j = i-h; j >= 0 && compGT(servers[j], t); j -= h) {
+	servers[j+h] = servers[j];
       }
-      a[j+h] = t;
+      servers[j+h] = t;
     }
 
     /* compute next increment */
