@@ -991,10 +991,11 @@ gnome_property_bag_any_to_value (GnomePropertyBag *pb, const char *type,
 #define CORBA_unsigned_short__alloc() (CORBA_unsigned_short *) CORBA_octet_allocbuf (sizeof (CORBA_unsigned_short))
 #define CORBA_long__alloc() (CORBA_long *) CORBA_octet_allocbuf (sizeof (CORBA_long))
 #define CORBA_unsigned_long__alloc() (CORBA_unsigned_long *) CORBA_octet_allocbuf (sizeof (CORBA_unsigned_long))
-#define CORBA_string__alloc() (CORBA_char **) CORBA_octet_allocbuf (sizeof (CORBA_char *))
+#define CORBA_string__alloc() (CORBA_char **)ORBit_alloc(sizeof(gpointer), CORBA_string__free, GUINT_TO_POINTER(1)) 
 #define CORBA_float__alloc() (CORBA_float *) CORBA_octet_allocbuf (sizeof (CORBA_float))
 #define CORBA_double__alloc() (CORBA_double *) CORBA_octet_allocbuf (sizeof (CORBA_double))
 #define CORBA_boolean__alloc() (CORBA_boolean *) CORBA_octet_allocbuf (sizeof (CORBA_boolean))
+
 
 static CORBA_any *
 gnome_property_bag_marshal_boolean (GnomePropertyBag *pb, const char *type,

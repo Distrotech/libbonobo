@@ -1,5 +1,23 @@
 1999-11-30  Nat Friedman  <nat@helixcode.com>
 
+	* samples/controls/sample-control-container.c
+ 	(populate_property_list): Hacked to display all of the CORBA types
+ 	we'll be marshaling in properties.
+
+	* bonobo/gnome-property-bag.c (CORBA_string__alloc): Fixed so it
+ 	deep-frees the string.  Thanks, Elliot.
+	
+	* bonobo/gnome-property-bag.c: Added a bunch of macros to fake
+ 	CORBA type allocation.  Fixed the CORBA value memory allocation in
+ 	the marshalers to use those.
+
+	* bonobo/gnome-property-bag.c
+ 	(gnome_property_bag_marshal_boolean): New function.
+	(gnome_property_bag_demarshal_boolean): Likewise.
+	(gnome_property_bag_init): Create the boolean type.
+	(gnome_property_bag_create_type): Reverse the parity on the type
+ 	existence assertion.  Durh.
+
 	* bonobo/gnome-property.c: New file.  Implement the GnomeProperty
  	server.  Read gnome-property-bag.c first.
 
