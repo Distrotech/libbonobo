@@ -761,6 +761,119 @@ impl_Bonobo_ObjectDirectory__get_username (
 	return CORBA_string_dup (g_get_user_name ());
 }
 
+static Bonobo_DynamicPathLoadResult 
+impl_Bonobo_ObjectDirectory_add_path(
+	PortableServer_Servant		_servant,
+	const CORBA_char *		add_path,
+	CORBA_Environment               *ev)
+{
+	impl_POA_Bonobo_ObjectDirectory *servant = _servant;
+	int i, j, dir_num, max;
+	char **add_directoies, **ret;
+	GSList *l, *tmp = NULL;
+	gboolean different;
+
+	if (!servant->registry_source_directories) {
+		servant->registry_source_directories = split_path_unique (add_path);
+		return Bonobo_DYNAMIC_LOAD_SUCCESS;
+	} else
+		add_directoies = split_path_unique (add_path);
+
+	if (!add_directoies)
+		return Bonobo_DYNAMIC_LOAD_ERROR;
+
+	for (max = i = 0; servant->registry_source_directories[i]; i++) {
+		tmp = g_slist_append(tmp,g_strdup(servant->registry_source_directories[i]));
+		max++;
+	}
+
+	dir_num = max;
+
+	for (i = 0; add_directoies[i]; i++) {
+		different = TRUE;
+		for (j = 0; servant->registry_source_directories[j]; j++) {
+			if (!strcmp(add_directoies[i], servant->registry_source_directories[j])) {
+				different = FALSE;
+				break;
+			}
+		}	
+		if (different) {
+			tmp = g_slist_append(tmp, g_strdup(add_directoies[i]));	
+			max++;
+		}
+	}
+
+	if (max == dir_num) {
+		g_strfreev(add_directoies);
+		g_slist_free(tmp);
+		return Bonobo_DYNAMIC_LOAD_ALREADY_LISTED;
+	}
+
+	ret = g_new(char *, max + 1);
+	for (l = tmp, i = 0; l; l = l->next)
+		ret[i++]=l->data;
+
+	ret[i] = NULL;
+
+	g_slist_free(tmp);
+	g_strfreev(add_directoies);
+	g_strfreev(servant->registry_source_directories);
+
+	servant->registry_source_directories = ret;
+	update_registry(servant, TRUE);	
+	return Bonobo_DYNAMIC_LOAD_SUCCESS;
+}
+
+static Bonobo_DynamicPathLoadResult 
+impl_Bonobo_ObjectDirectory_remove_path(
+        PortableServer_Servant          _servant,
+        const CORBA_char *              remove_path,
+        CORBA_Environment               *ev)
+{
+	impl_POA_Bonobo_ObjectDirectory *servant = _servant;
+	char **remove_directoies, **ret;
+	int i, j, max;
+	GSList *l, *tmp = NULL;
+	gboolean different;
+
+	remove_directoies = split_path_unique (remove_path);
+	if (!remove_directoies)
+		return Bonobo_DYNAMIC_LOAD_ERROR;
+
+	for (max = i = 0; servant->registry_source_directories[i]; i++) {
+		different = TRUE;
+		for (j = 0; remove_directoies[j]; j++) {
+			if (!strcmp(servant->registry_source_directories[i], remove_directoies[j])) {
+				different = FALSE;
+				break;
+			}
+		}
+
+		if (different) {
+			tmp = g_slist_append(tmp, g_strdup(servant->registry_source_directories[i]));
+			max++;
+		}
+	}
+
+	if (max == i) {
+		g_slist_free(tmp);
+		g_strfreev(remove_directoies);
+		return Bonobo_DYNAMIC_LOAD_NOT_LISTED;
+	}	
+	ret = g_new(char *, max + 1);
+	for (l = tmp, i = 0; l; l = l->next)
+		ret[i++]=l->data;
+	ret[i] = NULL;
+	
+	g_slist_free(tmp);
+	g_strfreev(remove_directoies);
+	g_strfreev(servant->registry_source_directories);
+
+	servant->registry_source_directories = ret;
+	update_registry(servant, TRUE);
+	return Bonobo_DYNAMIC_LOAD_SUCCESS;
+}
+
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_Bonobo_ObjectDirectory_base_epv = {
@@ -785,7 +898,9 @@ static POA_Bonobo_ObjectDirectory__epv impl_Bonobo_ObjectDirectory_epv = {
 	impl_Bonobo_ObjectDirectory__get_hostID,
 	impl_Bonobo_ObjectDirectory_activate,
 	impl_Bonobo_ObjectDirectory_register_new,
-	impl_Bonobo_ObjectDirectory_unregister
+	impl_Bonobo_ObjectDirectory_unregister,
+	impl_Bonobo_ObjectDirectory_add_path,
+	impl_Bonobo_ObjectDirectory_remove_path
 };
 
 /*** vepv structures ***/

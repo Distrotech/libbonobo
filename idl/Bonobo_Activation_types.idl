@@ -112,6 +112,14 @@ module Bonobo {
                 ACTIVATION_REG_ALREADY_ACTIVE, 
                 ACTIVATION_REG_ERROR 
         };
+
+        enum DynamicPathLoadResult
+        {
+               DYNAMIC_LOAD_SUCCESS,
+               DYNAMIC_LOAD_ERROR,
+               DYNAMIC_LOAD_NOT_LISTED,
+               DYNAMIC_LOAD_ALREADY_LISTED
+        };
 };
 
 

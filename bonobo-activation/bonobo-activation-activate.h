@@ -47,6 +47,13 @@ CORBA_Object bonobo_activation_activate_from_id  (const Bonobo_ActivationID aid,
 void         bonobo_activation_set_activation_env_value (const char *name,
 							 const char *value);
 
+Bonobo_DynamicPathLoadResult
+bonobo_activation_dynamic_add_path (const char *add_path,
+				    CORBA_Environment * ev);
+
+Bonobo_DynamicPathLoadResult
+bonobo_activation_dynamic_remove_path (const char *remove_path,
+				       CORBA_Environment * ev);
 #ifndef BONOBO_DISABLE_DEPRECATED
 /* debugging functions. */
 void         bonobo_activation_set_test_components_enabled (gboolean val);

@@ -829,3 +829,67 @@ bonobo_activation_name_service_get (CORBA_Environment * ev)
 	return bonobo_activation_activate_from_id (
                 "OAFIID:Bonobo_CosNaming_NamingContext", 0, NULL, ev);
 }
+
+/**
+ * bonobo_activation_dynamic_add_path:
+ * @add_path: The path would be loaded in runtime.  
+ * @ev: %CORBA_Environment structure which will contain
+ *      the CORBA exception status of the operation.
+ * This function could make BAS server load the specific
+ * search path in runtime.
+ * 
+ * Return value: a result of dynamic path load
+ */
+Bonobo_DynamicPathLoadResult
+bonobo_activation_dynamic_add_path (const char *add_path,
+				    CORBA_Environment * ev)
+{
+	Bonobo_ObjectDirectory        od;
+	Bonobo_DynamicPathLoadResult  res;
+
+	g_return_val_if_fail (add_path != NULL, Bonobo_DYNAMIC_LOAD_ERROR);
+	od = bonobo_activation_object_directory_get (
+					bonobo_activation_username_get (),
+					bonobo_activation_hostname_get ());
+	if (CORBA_Object_is_nil (od, ev))
+		return Bonobo_DYNAMIC_LOAD_ERROR;
+
+	res = Bonobo_ObjectDirectory_dynamic_add_path(od, add_path, ev);
+	if (ev->_major != CORBA_NO_EXCEPTION) 
+		return Bonobo_DYNAMIC_LOAD_ERROR;
+
+	return res;
+					
+}
+
+/**
+ * bonobo_activation_dynamic_remove_path:
+ * @remove_path: The path would be unloaded in runtime.
+ * @ev: %CORBA_Environment structure which will contain
+ * the CORBA exception status of the operation.
+ * This function could make BAS server unload the specific
+ * search path in runtime.
+ * 
+ * Return value: a result of dynamic path load
+ */
+Bonobo_DynamicPathLoadResult
+bonobo_activation_dynamic_remove_path (const char *remove_path,
+				       CORBA_Environment * ev)
+{
+	Bonobo_ObjectDirectory        od;
+	Bonobo_DynamicPathLoadResult  res;
+
+	g_return_val_if_fail (remove_path != NULL, Bonobo_DYNAMIC_LOAD_ERROR);
+	od = bonobo_activation_object_directory_get (
+						bonobo_activation_username_get (),
+						bonobo_activation_hostname_get ());
+	if (CORBA_Object_is_nil (od, ev))
+		return Bonobo_DYNAMIC_LOAD_ERROR;
+
+	res = Bonobo_ObjectDirectory_dynamic_remove_path(od, remove_path, ev);
+	if (ev->_major != CORBA_NO_EXCEPTION)
+		return Bonobo_DYNAMIC_LOAD_ERROR;
+
+	return res;
+}
+

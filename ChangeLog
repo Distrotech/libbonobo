@@ -1,3 +1,41 @@
+2003-05-09  Antonio Xu  <antonio.xu@sun.com>
+	* activation-server/client.c (poptOption): add some options
+	for handle add/remove search path in runtime and register
+	server with command line.
+	(add_load_path): add a new function to handle add search
+	path in runtime.
+	(remove_load_path): add a new function to handle remove
+	search patch in runtime.
+	(register_activate_server): add a new function to handle
+	register bonobo server with command line.
+	(do_query_server_info): add a new function to handle query
+	server info with command line.
+	(do_activating): add a new function to handle activating
+	server with command line.
+	(main): clean code.
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory_add_path): add a new function to
+	implement the new method of interface.
+	(impl_Bonobo_ObjectDirectory_remove_path): add a new function
+	to implement the new method of interface.
+	* activation-server/object-directory-load.c
+	(bonobo_server_info_load): add FIXME, servers->_buffer should
+	be freed.
+	* bonobo-activation/bonobo-activation-activate.c
+	(bonobo_activation_dynamic_add_path): add a new function to
+	handle add search path in runtime.
+	(bonobo_activation_dynamic_remove_path): add a new function
+	to handle remove search path in runtime.
+	* bonobo-activation/bonobo-activation-activate.h:
+	(bonobo_activation_dynamic_add_path)
+	(bonobo_activation_dynamic_remove_path): add two new function
+	to handle add and remove search path in runtime.
+	* idl/Bonobo_Activation_types.idl (DynamicPathLoadResult):
+	add new enum for define the result of dynamic path load.
+	* idl/Bonobo_ObjectDirectory.idl (dynamic_add_path)
+	(dynamic_remove_path): add two new function to handle add and
+	remove search path in runtime.
+
 2003-05-08  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* doc/activation-api/Makefile.am: Replace common gtk-doc makefile

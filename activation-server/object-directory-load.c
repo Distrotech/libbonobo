@@ -672,7 +672,10 @@ bonobo_server_info_load (char **directories,
 	length = g_slist_length (entries);
 
 	servers->_buffer = CORBA_sequence_Bonobo_ServerInfo_allocbuf (length);
-        servers->_length = length;
+	/*
+	 * FIXME: servers->_buffer should be freed
+	 */
+	servers->_length = length;
 
 	for (j = 0, p = entries; j < length; j++, p = p->next) {
 		memcpy (&servers->_buffer[j], p->data, sizeof (Bonobo_ServerInfo));

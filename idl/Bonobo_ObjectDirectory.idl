@@ -81,6 +81,9 @@ module Bonobo {
                 void               unregister   (in ImplementationID              iid,
                                                  in Object                        obj)
                         raises (NotRegistered);
+
+                DynamicPathLoadResult dynamic_add_path (in string add_path);
+                DynamicPathLoadResult dynamic_remove_path (in string remove_path);
         };
 
 };

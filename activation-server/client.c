@@ -33,8 +33,10 @@
 #include <bonobo-activation/bonobo-activation-private.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 
-static char *acior = NULL, *specs = NULL;
+static char *acior = NULL, *specs = NULL, *add_path = NULL, *remove_path = NULL, *registerior = NULL, *registeriid = NULL;
 static int do_query;
+static CORBA_ORB orb;
+static CORBA_Environment ev;
 
 static struct poptOption options[] = {
 
@@ -44,6 +46,14 @@ static struct poptOption options[] = {
 	 "Run a query instead of activating", "QUERY"},
 	{"spec", 's', POPT_ARG_STRING, &specs, 0,
 	 "Specification string for object to activate", "SPEC"},
+	{"add-path", '\0', POPT_ARG_STRING, &add_path, 0,
+	 "Specification string for search path to be added in runtime", "PATH"},
+	{"remove-path", '\0', POPT_ARG_STRING, &remove_path, 0,
+	 "Specification string for search path to be removed in runtime", "PATH"},
+	{"register-ior", '\0', POPT_ARG_STRING, &registerior, 0,
+	 "IOR of the server to be registered", "IOR"},
+	{"register-iid", '\0', POPT_ARG_STRING, &registeriid, 0,
+         "IID of the server to be registered", "IID"},
 	POPT_AUTOHELP {NULL}
 };
 
@@ -93,16 +103,199 @@ od_dump_list (Bonobo_ServerInfoList * list)
 	}
 }
 
+static void
+add_load_path ()
+{
+	Bonobo_DynamicPathLoadResult  res;
+
+	res = bonobo_activation_dynamic_add_path (add_path, &ev);
+ 
+	switch (res) {
+	case Bonobo_DYNAMIC_LOAD_SUCCESS:
+		g_print ("Doing dynamic path(%s) adding successfully\n", add_path);
+		break;
+	case Bonobo_DYNAMIC_LOAD_ERROR:
+		g_print ("Doing dynamic path(%s) adding unsuccessfully\n", add_path);
+		break;
+	case Bonobo_DYNAMIC_LOAD_ALREADY_LISTED:
+		g_print ("The path(%s) already been listed\n", add_path);
+		break;
+	}
+}
+
+static void
+remove_load_path ()
+{
+	Bonobo_DynamicPathLoadResult  res;
+
+	res = bonobo_activation_dynamic_remove_path (remove_path, &ev);
+
+	switch (res) {
+	case Bonobo_DYNAMIC_LOAD_SUCCESS:
+		g_print ("Doing dynamic path(%s) removing successfully\n", remove_path);
+		break;
+	case Bonobo_DYNAMIC_LOAD_ERROR:
+		g_print ("Doing dynamic path(%s) removing unsuccessfully\n", remove_path);
+		break;
+	case Bonobo_DYNAMIC_LOAD_NOT_LISTED:
+		g_print ("The path(%s) wasn't listed\n", remove_path);
+		break;
+	}
+}
+
+static int
+register_activate_server()
+{
+	Bonobo_RegistrationResult res;
+	CORBA_Object r_obj;
+
+	if (registerior) {
+		r_obj = CORBA_ORB_string_to_object (orb, registerior, &ev);
+		if (ev._major != CORBA_NO_EXCEPTION)
+			return 1;
+	}
+
+	if (r_obj) {
+		res = bonobo_activation_active_server_register(registeriid, r_obj);
+		if (res == Bonobo_ACTIVATION_REG_SUCCESS || res == Bonobo_ACTIVATION_REG_ALREADY_ACTIVE)
+			return 0;
+	}
+
+	return 1;
+}
+
+static void
+do_query_server_info()
+{
+	Bonobo_ActivationContext ac;
+	Bonobo_ServerInfoList *slist;
+	Bonobo_StringList reqs = { 0 };
+
+	if (acior) {
+                ac = CORBA_ORB_string_to_object (orb, acior, &ev);
+                if (ev._major != CORBA_NO_EXCEPTION)
+                        g_print ("Error doing string_to_object(%s)\n", acior);
+        } else
+                ac = bonobo_activation_activation_context_get ();
+
+	g_print ("Query spec is \"%s\"\n", specs);
+	slist = Bonobo_ActivationContext_query (
+                                        ac, specs, &reqs,
+                                        bonobo_activation_context_get (), &ev);
+	switch (ev._major) {
+        case CORBA_NO_EXCEPTION:
+		od_dump_list (slist);
+		CORBA_free (slist);
+		break;
+	case CORBA_USER_EXCEPTION:
+		{
+			char *id;
+			id = CORBA_exception_id (&ev);
+			g_print ("User exception \"%s\" resulted from query\n", id);
+			if (!strcmp (id, "IDL:Bonobo/ActivationContext/ParseFailed:1.0")) {
+				Bonobo_Activation_ParseFailed
+						* exdata = CORBA_exception_value (&ev);
+				if (exdata)
+					g_print ("Description: %s\n", exdata->description);
+			}
+		}
+		break;
+	case CORBA_SYSTEM_EXCEPTION:
+		{
+			char *id;
+			id = CORBA_exception_id (&ev);
+			g_print ("System exception \"%s\" resulted from query\n", id);	
+        	}
+		break;
+        }	
+	return;	
+}
+
+static int
+do_activating()
+{
+	Bonobo_ActivationEnvironment environment;
+	Bonobo_ActivationResult *a_res;
+	Bonobo_ActivationContext ac;	
+	Bonobo_StringList reqs = { 0 };
+	char *resior;
+	int res = 1;
+
+	if (acior) {
+                ac = CORBA_ORB_string_to_object (orb, acior, &ev);
+                if (ev._major != CORBA_NO_EXCEPTION)
+        	return 1;
+	} else
+                ac = bonobo_activation_activation_context_get ();
+
+	memset (&environment, 0, sizeof (Bonobo_ActivationEnvironment));
+                                                                                                                             
+	a_res = Bonobo_ActivationContext_activateMatching (
+ 				ac, specs, &reqs, &environment, 0,
+				bonobo_activation_context_get (), &ev);
+	switch (ev._major) {
+	case CORBA_NO_EXCEPTION:
+		switch (a_res->res._d) {
+		case Bonobo_ACTIVATION_RESULT_OBJECT:
+			g_print ("RESULT_OBJECT\n");
+			resior = CORBA_ORB_object_to_string (orb,
+							     a_res->
+							     res._u.res_object,
+							     &ev);
+			g_print ("%s\n", resior);
+			break;
+		case Bonobo_ACTIVATION_RESULT_SHLIB:
+			g_print ("RESULT_SHLIB\n");
+      			break;
+		case Bonobo_ACTIVATION_RESULT_NONE:
+			g_print ("RESULT_NONE\n");
+			break;
+		}
+		res = 0;	
+		break;
+	case CORBA_USER_EXCEPTION:
+		{
+			char *id;
+			id = CORBA_exception_id (&ev);
+			g_print ("User exception \"%s\" resulted from query\n",
+				 id);
+			if (!strcmp (id,"IDL:Bonobo/ActivationContext/ParseFailed:1.0")) {
+				Bonobo_Activation_ParseFailed
+					* exdata = CORBA_exception_value (&ev);
+                                if (exdata)
+					g_print ("Description: %s\n",
+						 exdata->description);
+			} else if (!strcmp (id,"IDL:Bonobo/GeneralError:1.0")) {
+				Bonobo_GeneralError *exdata;
+                                                                                                                             
+				exdata = CORBA_exception_value (&ev);
+                                                                                                                             
+				if (exdata)
+					g_print ("Description: %s\n",
+						 exdata->description);
+			}
+			res = 1;
+		}
+		break;
+	case CORBA_SYSTEM_EXCEPTION:
+		{
+			char *id;
+			id = CORBA_exception_id (&ev);
+			g_print ("System exception \"%s\" resulted from query\n",
+				 id);
+			res = 1;
+		}
+		break;
+	}
+	return res;
+}
+
 int
 main (int argc, char *argv[])
 {
-	CORBA_Environment ev;
-	Bonobo_ActivationContext ac;
 	poptContext ctx;
 	gboolean do_usage_exit = FALSE;
-	Bonobo_ServerInfoList *slist;
-	CORBA_ORB orb;
-	Bonobo_StringList reqs = { 0 };
+	int res = 0;
 
 	CORBA_exception_init (&ev);
 
@@ -110,9 +303,7 @@ main (int argc, char *argv[])
 	while (poptGetNextOpt (ctx) >= 0)
 		/**/;
 
-	orb = bonobo_activation_init (argc, argv);
-
-	if (!specs) {
+	if (!specs && !add_path && !remove_path && !(registerior && registeriid)) {
 		g_print ("You must specify an operation to perform.\n");
 		do_usage_exit = TRUE;
 	}
@@ -122,129 +313,27 @@ main (int argc, char *argv[])
 		return 1;
 	}
 
-	if (acior) {
-		ac = CORBA_ORB_string_to_object (orb, acior, &ev);
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_print ("Error doing string_to_object(%s)\n", acior);
-			do_usage_exit = TRUE;
-		}
-	} else
-		ac = bonobo_activation_activation_context_get ();
-
 	poptFreeContext (ctx);
 
-	g_print ("Query spec is \"%s\"\n", specs);
+	orb = bonobo_activation_init (argc, argv);
 
-	if (do_query) {
+	if (specs) {
+		if (do_query)
+			do_query_server_info();
+		else
+			res = do_activating();
+	} 
 
-		slist =
-			Bonobo_ActivationContext_query (
-                                ac, specs, &reqs,
-                                bonobo_activation_context_get (), &ev);
-		switch (ev._major) {
-		case CORBA_NO_EXCEPTION:
-			od_dump_list (slist);
-			CORBA_free (slist);
-			break;
-		case CORBA_USER_EXCEPTION:
-			{
-				char *id;
-				id = CORBA_exception_id (&ev);
-				g_print
-					("User exception \"%s\" resulted from query\n",
-					 id);
-				if (!strcmp (id, "IDL:Bonobo/ActivationContext/ParseFailed:1.0")) {
-					Bonobo_Activation_ParseFailed
-						* exdata =
-						CORBA_exception_value (&ev);
+	if (add_path && !res)
+		add_load_path();
 
-					if (exdata)
-						g_print ("Description: %s\n",
-							 exdata->description);
-				}
-			}
-			break;
-		case CORBA_SYSTEM_EXCEPTION:
-			{
-				char *id;
-				id = CORBA_exception_id (&ev);
-				g_print
-					("System exception \"%s\" resulted from query\n",
-					 id);
-			}
-			break;
-		}
-	} else {
-		Bonobo_ActivationEnvironment  environment;
-		Bonobo_ActivationResult      *res;
+	if (remove_path && !res)
+		remove_load_path();
 
-		memset (&environment, 0, sizeof (Bonobo_ActivationEnvironment));
-
-		res = Bonobo_ActivationContext_activateMatching (
-                        ac, specs, &reqs, &environment, 0,
-                        bonobo_activation_context_get (), &ev);
-		switch (ev._major) {
-		case CORBA_NO_EXCEPTION:
-			g_print ("Activation ID \"%s\" ", res->aid);
-			switch (res->res._d) {
-			case Bonobo_ACTIVATION_RESULT_OBJECT:
-				g_print ("RESULT_OBJECT\n");
-				acior =
-					CORBA_ORB_object_to_string (orb,
-								    res->
-								    res._u.res_object,
-								    &ev);
-				g_print ("%s\n", acior);
-				break;
-			case Bonobo_ACTIVATION_RESULT_SHLIB:
-				g_print ("RESULT_SHLIB\n");
-				break;
-			case Bonobo_ACTIVATION_RESULT_NONE:
-				g_print ("RESULT_NONE\n");
-				break;
-			}
-			break;
-		case CORBA_USER_EXCEPTION:
-			{
-				char *id;
-				id = CORBA_exception_id (&ev);
-				g_print
-					("User exception \"%s\" resulted from query\n",
-					 id);
-				if (!strcmp (id,"IDL:Bonobo/ActivationContext/ParseFailed:1.0")) {
-					Bonobo_Activation_ParseFailed
-						* exdata =
-						CORBA_exception_value (&ev);
-
-					if (exdata)
-						g_print ("Description: %s\n",
-							 exdata->description);
-				}
-				else if (!strcmp (id,"IDL:Bonobo/GeneralError:1.0")) {
-					Bonobo_GeneralError *exdata;
-
-					exdata = CORBA_exception_value (&ev);
-
-					if (exdata)
-						g_print ("Description: %s\n",
-							  exdata->description);
-
-				}
-			}
-			break;
-		case CORBA_SYSTEM_EXCEPTION:
-			{
-				char *id;
-				id = CORBA_exception_id (&ev);
-				g_print
-					("System exception \"%s\" resulted from query\n",
-					 id);
-			}
-			break;
-		}
-	}
+	if (registerior && registeriid && !res)
+		res = register_activate_server();
 
 	CORBA_exception_free (&ev);
 
-        return 0;
+        return res;
 }
