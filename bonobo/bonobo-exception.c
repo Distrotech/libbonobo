@@ -64,6 +64,16 @@ get_hash (void)
 	return bonobo_exceptions;
 }
 
+/**
+ * bonobo_exception_add_handler_str:
+ * @repo_id: exception repository id
+ * @str: the user readable, translated exception text.
+ * 
+ * This routine adds a simple string mapping for an exception
+ * with repository id @repo_id, such that when we call
+ * bonobo_exception_get_text on an exception of id @repo_id we
+ * get @str back.
+ **/
 void
 bonobo_exception_add_handler_str (const char *repo_id, const char *str)
 {
@@ -84,6 +94,20 @@ bonobo_exception_add_handler_str (const char *repo_id, const char *str)
 	g_hash_table_insert (hash, e->repo_id, e);
 }
 
+/**
+ * bonobo_exception_add_handler_fn:
+ * @repo_id: exception repository id
+ * @fn: function to make exception human readable
+ * @user_data: the user data
+ * @destroy_fn: user data destroy function or NULL.
+ * 
+ * This routine adds a method mapping for an exception
+ * with repository id @repo_id, such that when we call
+ * bonobo_exception_get_text on an exception of id @repo_id
+ * the @fn is called and passed @user_data.
+ * When the handler is removed the @destroy_fn is called
+ * on its @user_data.
+ **/
 void
 bonobo_exception_add_handler_fn (const char *repo_id,
 				 BonoboExceptionFn fn,
@@ -109,6 +133,15 @@ bonobo_exception_add_handler_fn (const char *repo_id,
 	g_hash_table_insert (hash, e->repo_id, e);
 }
 
+/**
+ * bonobo_exception_repoid_to_text:
+ * @repo_id: exception repository id
+ * 
+ *  This maps builtin bonobo exceptions that the system
+ * knows about to user readable strings.
+ * 
+ * Return value: a user string or NULL for an unknown repo_id
+ **/
 char *
 bonobo_exception_repoid_to_text  (const char *repo_id)
 {

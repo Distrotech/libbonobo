@@ -275,6 +275,13 @@ bonobo_object_client_has_interface (BonoboObjectClient *object,
 		return FALSE;
 }
 
+/**
+ * bonobo_object_client_ref:
+ * @object_client: the object client
+ * @opt_exception_obj: optional CORBA exception environment
+ * 
+ * Increments the Bonobo ref count on the remote object
+ **/
 void
 bonobo_object_client_ref (BonoboObjectClient *object_client,
 			  BonoboObject       *opt_exception_obj)
@@ -299,6 +306,13 @@ bonobo_object_client_ref (BonoboObjectClient *object_client,
 	CORBA_exception_free (&ev);
 }
 
+/**
+ * bonobo_object_client_unref:
+ * @object_client: the object client
+ * @opt_exception_obj: optional CORBA exception environment
+ * 
+ * Decrements the Bonobo ref count on the remote object
+ **/
 void
 bonobo_object_client_unref (BonoboObjectClient *object_client,
 			    BonoboObject       *opt_exception_obj)

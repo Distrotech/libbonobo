@@ -28,6 +28,40 @@ The moniker utility functions provide two sets of functions
     </listitem>
   </itemizedlist>
 </para>
+<para>
+The most useful function to get a feel for what monikers can do
+is the <function>bonobo_get_object</function> method. This is
+used to create a moniker and resolve it against a given interface
+like this:
+  <example>
+     <title>GetObject example</title>
+     <programlisting>
+GtkWidget *
+moniker_resolve_demo (void)
+{
+	Bonobo_Control control;
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+
+	control = bonobo_get_object ("file:/demo/a.jpeg",
+                                     "Bonobo/Control", NULL);
+
+	if (control == CORBA_OBJECT_NIL)
+		g_error ("Failed to get object file:/demo/a.jpeg");
+
+	return bonobo_widget_new_control (control);
+}
+     </programlisting>
+  </example>
+  This also makes a control out of the widget.
+</para>
+
+<para>
+  It is worth noting that when resolving monikers a contracted
+version of the interface name may be used, ommitting the 'IDL:'
+prefix and / or the ':0' suffix.
+</para>
 
 <!-- ##### SECTION See_Also ##### -->
 <para>

@@ -13,6 +13,33 @@ complex CORBA_Environment exception's and helpful
 strings suitable for display to the user.
 </para>
 
+<para>
+Typicaly to test for exceptions the BONOBO_EX macro
+is used thus:
+  <example>
+     <title>Bonobo exception trapping and reporting</title>
+     <programlisting>
+int
+do_something (CORBA_Environment *ev)
+{
+	...
+
+	retval = Foo_Baa_method (object, ev);
+
+	if (BONOBO_EX (ev)) {
+		char *str;
+		g_warning ("Exception '%s' occured",
+			   (str = bonobo_exception_get_text (ev)));
+		g_free (str);
+		return -1;
+	}
+	...
+}
+     </programlisting>
+  </example>
+
+</para>
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 

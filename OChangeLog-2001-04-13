@@ -1,5 +1,7 @@
 2001-02-21  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-exception.c: Full API documentation.
+
 	* doc/api/tmpl/bonobo-context.sgml: fill out.
 
 2001-02-21  Michael Meeks  <michael@ximian.com>
