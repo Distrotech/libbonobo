@@ -1,3 +1,9 @@
+2000-10-03  Zach Frey <zfrey@lanich.com>
+
+	* doc/api/Makefile.am: Update for new headers.
+
+	* doc/api/*: update.
+
 2000-10-03  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (update_status): don't pack controls wierdly
