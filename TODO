@@ -3,3 +3,5 @@ API issues
 	+ need a bonobo_object_query_remote
 	+ need to allow custom POAs for object construction,
 	  a construct time property ?
+
+UI stuff - need a CORBA_Object bonobo_widget_query_interface () method.

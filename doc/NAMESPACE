@@ -32,6 +32,7 @@ subdomains:
 	Grapevine/		grapevine	jirka@5z.com
 	GtkHTML/		GtkHTML		rodo@helixcode.com
 	Guppi/			guppi3		trow@gnu.org
+	Magnifier/		gnome-mag	bill.haneman@sun.com
 	Media/			gnome-media	peter@ximian.com
 	MrProject/		mrproject	richard.hult@codefactory.se
 	Nautilus/		Nautilus	darin@eazel.com
