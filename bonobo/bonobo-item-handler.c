@@ -124,7 +124,7 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 				       G_TYPE_POINTER,                    &ret,
 				       BONOBO_TYPE_ITEM_HANDLER,           handler,
 				       BONOBO_TYPE_STATIC_CORBA_EXCEPTION, ev,
-				       0);
+				       G_TYPE_INVALID);
 
 		return ret;
 	} else
@@ -149,7 +149,7 @@ impl_get_object (PortableServer_Servant servant,
 				       G_TYPE_STRING,                      item_name,
 				       G_TYPE_BOOLEAN,                     only_if_exists,
 				       BONOBO_TYPE_STATIC_CORBA_EXCEPTION, ev,
-				       0);
+				       G_TYPE_INVALID);
 				       
 		return ret;
 	} else

@@ -92,7 +92,7 @@ simple_resolve (BonoboMoniker               *moniker,
 		G_TYPE_LONG,                                timeout,
 		G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE, requested_interface,
 		BONOBO_TYPE_STATIC_CORBA_EXCEPTION,         ev,
-		0);
+		G_TYPE_INVALID);
 
 	return ret;
 }

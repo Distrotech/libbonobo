@@ -52,7 +52,7 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 			G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE, event_name,
 			BONOBO_TYPE_STATIC_CORBA_ANY,               args,
 			BONOBO_TYPE_STATIC_CORBA_EXCEPTION,         ev,
-			0);
+			G_TYPE_INVALID);
 		
 	g_signal_emit (G_OBJECT (listener),
 		       signals [EVENT_NOTIFY], 0,
