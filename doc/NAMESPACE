@@ -32,6 +32,7 @@ subdomains:
 	Spell/			gtkhtml		rodo@helixcode.com
 	Terminal/		gnome-core	jirka@5z.com, jacob@helixcode.com	
 	Vertigo/		Panel 2.0	jirka@5z.com, jacob@helixcode.com	
+	VCS/			gnome-vcs	snaggen@acc.umu.se
 	VFS/			gnome-vfs	pavel@eazel.com
 
 
