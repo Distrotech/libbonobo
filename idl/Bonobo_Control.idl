@@ -144,6 +144,14 @@ interface Control : Bonobo::Unknown {
 	 * Set the control's activity state.
 	 */
 	void set_state (in Control::State state);
+
+	/**
+	 *   These methods are used to synchronize the Async X event
+	 * queue with the synchronous CORBA connection. Effectively
+	 * the 'X sync' extension in Bonobo.
+	 */
+	void realize   ();
+	void unrealize ();
 };
 
 interface PropertyControl : Bonobo::Unknown {

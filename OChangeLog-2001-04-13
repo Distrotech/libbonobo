@@ -1,3 +1,41 @@
+2000-10-07  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (reinstate_fn): prune widget info (
+	although almost always it is NULL ).
+	(toolbar_build_widget): make toolbar separators insensitive.
+	(sync_generic_widgets): iterate over placeholder whether parent
+	was dirty or not.
+	(exec_verb_cb, real_exec_verb, win_item_emit_ui_event): re-arrange
+	passing of node pointer to make it safer and to allow dynamic
+	changing of verbs.
+	(put_hint_in_statusbar, remove_hint_from_statusbar): ditto.
+	(toolbar_build_widget, toolbar_build_placeholder),
+	(toolbar_build_control, menu_build_item),
+	(menu_build_placeholder, status_build_item): Update the position
+	ourselfs, but only if we do an insertion.
+	(sync_generic_widgets): fix a problem with non-widget itmes
+	such as controls spewing warnings.
+
+	* bonobo/bonobo-ui-xml.c (reinstate_old_node): fixup the path
+	taken when removing a node that has had children of a different
+	component added to it. Always emit a 'Remove' signal on a node
+	we are about to destroy.
+
+	* bonobo/bonobo-win.c (menu_build_placeholder): impl.
+	(put_hint_in_statusbar): update to cope with a lack of hint.
+	(menu_item_set_global_accels): subsume with
+	(menu_item_set_label): this one into
+	(menu_sync_state): this one ( impl. ).
+	(menu_item_create): subsume into
+	(menu_build_item): here ( impl. )
+	(get_item_widget): impl. to overcome GtkMenu.
+	(do_show_hide): use it.
+	(prune_widget_info): remove the item widget.
+	(container_destroy_siblings): remove nasty hackish routine.
+
+	* idl/bonobo-control.idl: add realize / unrealize for the XSync
+	code.
+
 2000-10-06  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (widget_is_special, widget_get_node),
