@@ -1,0 +1,150 @@
+# Ukrainian translation of libbonobo.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Yuriy Syrota <rasta@renome.rovno.ua>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libbonobo\n"
+"POT-Creation-Date: 2001-12-11 17:25+0200\n"
+"PO-Revision-Date: 2001-12-11 17:29+0200\n"
+"Last-Translator: Yuriy Syrota <rasta@renome.rovno.ua>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=koi8-u\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bonobo/bonobo-exception.c:154
+msgid "An unsupported action was attempted"
+msgstr "Зд╕йснено неп╕дтримувану д╕ю"
+
+#: bonobo/bonobo-exception.c:157
+msgid "IO Error"
+msgstr "Помилка В/В"
+
+#: bonobo/bonobo-exception.c:160
+msgid "Invalid argument value"
+msgstr "Нев╕рне значення ар╜умента"
+
+#: bonobo/bonobo-exception.c:164
+msgid "Object not found"
+msgstr "Об'╓кта не знайдено"
+
+#: bonobo/bonobo-exception.c:167
+msgid "Syntax error in object description"
+msgstr "Синтаксична помилка в опис╕ об'╓кта"
+
+#: bonobo/bonobo-exception.c:172
+msgid "Cannot activate object from factory"
+msgstr "Неможливо активувати об'╓кт з фабрики"
+
+#: bonobo/bonobo-exception.c:177
+msgid "No permission to access stream"
+msgstr "Нема╓ права на досуп до потоку"
+
+#: bonobo/bonobo-exception.c:180
+msgid "An unsupported stream action was attempted"
+msgstr "Зд╕йснено неп╕дтримувану д╕ю потоку"
+
+#: bonobo/bonobo-exception.c:183
+msgid "IO Error on stream"
+msgstr "Помилка В/В у потоц╕"
+
+#: bonobo/bonobo-exception.c:187
+msgid "IO Error on storage"
+msgstr "Помилка В/В у сховищ╕"
+
+#: bonobo/bonobo-exception.c:190
+msgid "Name already exists in storage"
+msgstr "Назва вже ╕сну╓ у сховищ╕"
+
+#: bonobo/bonobo-exception.c:193
+msgid "Object not found in storage"
+msgstr "Об'екта не знайдено у сховищ╕"
+
+#: bonobo/bonobo-exception.c:196
+msgid "No permission to do operation on storage"
+msgstr "Нема╓ права на викрнання операц╕╖ з╕ сховищем"
+
+#: bonobo/bonobo-exception.c:198
+msgid "An unsupported storage action was attempted"
+msgstr "Зд╕йснено неп╕дтримувану д╕ю сховища"
+
+#: bonobo/bonobo-exception.c:200
+msgid "Object is not a stream"
+msgstr "Об'╓кт не ╓ потоком"
+
+#: bonobo/bonobo-exception.c:203
+msgid "Object is not a storage"
+msgstr "Об'╓кт не ╓ сховищем"
+
+#: bonobo/bonobo-exception.c:206
+msgid "Storage is not empty"
+msgstr "Сховище не порожн╓"
+
+#: bonobo/bonobo-exception.c:210
+msgid "malformed user interface XML description"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:213
+msgid "invalid path to XML user interface element"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:216
+msgid "the requested UI attribute didn't exist"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:219
+msgid "Unknown command or verb"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:222
+msgid "Command is insensitive"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:226
+msgid "incorrect data type"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:229
+msgid "stream not found"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:233
+msgid "property not found"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:236
+msgid "property has invalid type"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:239
+msgid "property is read only"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:242
+msgid "config database backend failed "
+msgstr ""
+
+#: bonobo/bonobo-exception.c:246
+msgid "Moniker interface cannot be found"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:249
+msgid "Moniker activation timed out"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:252
+msgid "Syntax error within moniker"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:255
+msgid "Moniker has an unknown moniker prefix"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:279
+msgid "Error checking error; no exception"
+msgstr "Помилка перев╕рки на помилку; без вийнятково╖ ситуац╕╖"
+
+#: bonobo/bonobo-exception.c:288
+msgid "General activation error with no description"
+msgstr "Загальна помилка активац╕╖ без опису"
