@@ -1,3 +1,12 @@
+1999-04-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-file-moniker.c, bonobo/gnome-moniker.c: Initial
+	implementations. 
+
+1999-03-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-bind-context.c: New file. 
+
 1999-03-26  Timur Bakeyev <mc@bat.ru>
 
 	* bonobo/Makefile.am: fixed library inclusion order in $(bonobo_libs).

@@ -6,6 +6,12 @@
 
 BEGIN_GNOME_DECLS
 
+#define GNOME_MONIKER_TYPE        (gnome_moniker_get_type ())
+#define GNOME_MONIKER(o)          (GTK_CHECK_CAST ((o), GNOME_MONIKER_TYPE, GnomeMoniker))
+#define GNOME_MONIKER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_MONIKER_TYPE, GnomeMonikerClass))
+#define GNOME_IS_MONIKER(o)       (GTK_CHECK_TYPE ((o), GNOME_MONIKER_TYPE))
+#define GNOME_IS_MONIKER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_MONIKER_TYPE))
+
 typedef struct {
 	GnomePersistStream persist_stream;
 } GnomeMoniker;
@@ -18,7 +24,10 @@ GnomeBindContext *gnome_bind_context_new   (void);
 GnomeMoniker     *gnome_parse_display_name (GnomeBindContext *bind,
 					    const char *display_name,
 					    int *chars_parsed);
-					    
+
+/* The CORBA vepv for the class */
+extern POA_GNOME_Moniker__vepv gnome_moniker_vepv;
+
 END_GNOME_DECLS
 
 #endif

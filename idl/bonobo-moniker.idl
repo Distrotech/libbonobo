@@ -75,7 +75,7 @@ module GNOME {
 					in Moniker left_moniker,
 					in string persistent_interface_name);
 
-		Moniker ComposeWith (in Moniker right, in boolean only_if_exists);
+		Moniker compose_with (in Moniker right, in boolean only_if_exists);
 
 		typedef sequence<Moniker> MonikerList;
 

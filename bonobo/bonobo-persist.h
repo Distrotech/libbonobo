@@ -5,6 +5,12 @@
 
 BEGIN_GNOME_DECLS
 
+#define GNOME_PERSIST_TYPE        (gnome_persist_get_type ())
+#define GNOME_PERSIST(o)          (GTK_CHECK_CAST ((o), GNOME_PERSIST_TYPE, GnomePersist))
+#define GNOME_PERSIST_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_PERSIST_TYPE, GnomePersistClass))
+#define GNOME_IS_PERSIST(o)       (GTK_CHECK_TYPE ((o), GNOME_PERSIST_TYPE))
+#define GNOME_IS_PERSIST_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_TYPE))
+
 typedef struct {
 	GnomeObject object;
 } GnomePersist;
@@ -12,6 +18,9 @@ typedef struct {
 typedef struct {
 	GnomeObjectClass parent_class;
 } GnomePersistClass;
+
+GtkType       gnome_persist_get_type  (void);
+GnomePersist *gnome_persist_construct (GnomePersist *persist);
 
 END_GNOME_DECLS
 
