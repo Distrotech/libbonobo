@@ -1,30 +1,23 @@
 # Translation of libbonobo to Croatian
 # Copyright (C) Croatian team
 # Translators: Automatski Prijevod <>,Robert Sedak <robert.sedak@sk.tel.hr>,
-
-# Translation of libbonobo to Croatian
-# Copyright (C) Croatian team
-# Translators: Automatski Prijevod <>,Robert Sedak <robert.sedak@sk.tel.hr>,
-# Translation of libbonobo to Croatian
-# Copyright (C) Croatian team
-# Translators: Automatski Prijevod <>,Robert Sedak <robert.sedak@sk.tel.hr>,
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 0\n"
-"POT-Creation-Date: 2003-12-26 15:48+0100\n"
-"PO-Revision-Date: 2003-12-26 20:50+CET\n"
-"Last-Translator: Robert Sedak <robert.sedak@sk.tel.hr>\n"
+"POT-Creation-Date: 2003-11-06 18:12+0100\n"
+"PO-Revision-Date: 2003-12-30 20:36+CET\n"
+"Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: TransDict server\n"
 
-#: activation-server/activation-context-corba.c:473
+#: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
 msgstr "Ne mogu pronaći koji je nasljedni proces poslužitelj slušao"
 
-#: activation-server/activation-context-corba.c:751
+#: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
 msgstr "Neispravan aktivacijski ID"
 
@@ -65,15 +58,7 @@ msgstr "Servis CORBA CosNaming."
 msgid "Name service"
 msgstr "Ime servisa"
 
-#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-msgid "Notification service"
-msgstr "Servis obavješćivanja"
-
-#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
-msgid "Notification service for activation"
-msgstr "Servis obavješćivanja za pokretanje"
-
-#: activation-server/object-directory-activate.c:187
+#: activation-server/object-directory-activate.c:185
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Još ne upravljamo pokretanjem shlib objektima na udeljanim procesima"
 
@@ -89,7 +74,7 @@ msgstr "Datoteka s postavkama za pokretanje Bonobo-a nije uspješno pročitana. 
 #.  * for [use const char *bonobo_activation_iid_get (void); ] is registered
 #.  * with bonobo_activation_active_server_register - _after_ any other
 #.  * servers are registered.
-#: activation-server/object-directory-corba.c:1130
+#: activation-server/object-directory-corba.c:890
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Uvjeti natjecanja kod pokretanja poslužitelja '%s'"
@@ -191,14 +176,6 @@ msgstr "Tvornica je vratila `%s' NIL za `%s'"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' ne sadrži `%s'"
-
-#: bonobo/bonobo-application.c:341
-msgid "Name"
-msgstr "Ime"
-
-#: bonobo/bonobo-application.c:341
-msgid "Application unique name"
-msgstr "Jedinstveno ime programa"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
