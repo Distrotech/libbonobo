@@ -6,19 +6,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.x\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
-"PO-Revision-Date: 2003-01-01 16:20+0100\n"
+"POT-Creation-Date: 2003-04-29 13:33+0200\n"
+"PO-Revision-Date: 2003-04-29 18:51+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "Nebylo možné zjistit, u kterého potomka byl server zapsán"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr "Neplatné ID aktivace"
 
@@ -79,7 +79,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Problém se synchronizací aktivace serveru '%s'"
@@ -181,6 +181,14 @@ msgstr "Generátor `%s' vrátil pro `%s' hodnotu NIL"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' neobsahovala `%s'"
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr "POA"
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr "Vlastní POA CORBA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -322,7 +330,7 @@ msgstr "Obecná chyba aktivace bez popisu"
 msgid "Could not initialize Bonobo"
 msgstr "Nelze inicializovat Bonobo"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "Selhalo rozpoznání, nebo rozšíření '%s"
@@ -456,27 +464,3 @@ msgstr "Zobrazit adresáře, které jsou v souboru s nastavením"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Zobrazit cestu k souboru s nastavením"
-
-#~ msgid "No server corresponding to your query"
-#~ msgstr "Vašemu dotazu neodpovídá žádný server"
-
-#~ msgid "Query failed: "
-#~ msgstr "Dotaz selhal: "
-
-#~ msgid "Activation failed: "
-#~ msgstr "Aktivace selhala: "
-
-#~ msgid "Could not parse AID"
-#~ msgstr "Nelze zpracovat AID"
-
-#~ msgid "Could not parse context: "
-#~ msgstr "Nelze zpracovat kontext: "
-
-#~ msgid "Could not activate server: "
-#~ msgstr "Nelze aktivovat server: "
-
-#~ msgid "Domain of ObjectDirectory"
-#~ msgstr "Doména ObjectDirectory"
-
-#~ msgid "DOMAIN"
-#~ msgstr "DOMÉNA"
