@@ -1,3 +1,14 @@
+1999-07-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (ALL_LINGUAS): Added es to the list of languages.
+
+	* components/image-x-png/Makefile.am (bonobo_image_x_png_LDADD):
+	Reference libefs in a libtool-happy fashion.
+
+	* components/text-plain/Makefile.am (bonobo_text_plain_LDADD): Likewise.
+
+	* components/audio-ulaw/Makefile.am (bonobo_audio_ulaw_LDADD): Likewise.
+
 1999-07-29  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-ui-handler.c: Use CORBA_Object_duplicate and
