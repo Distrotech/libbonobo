@@ -1,3 +1,15 @@
+2000-05-02  Michael Meeks  <michael@helixcode.com>
+
+	* components/text-plain/bonobo-text-plain.c (init_server_factory):
+	use the right orb.
+
+	* bonobo/bonobo-selector.c (get_filtered_objects): fix serious bug
+	in sorting.
+
+	* bonobo/bonobo-object-directory-oaf.c (od_get_server_list): clean.
+
+	* idl/bonobo-storage.idl: fix docs.
+
 2000-05-01  Darin Adler  <darin@eazel.com>
 
         * bonobo/bonobo-uih-menu.c (menu_toplevel_remove_radio_menu_item),

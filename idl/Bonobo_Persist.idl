@@ -16,6 +16,29 @@ module Bonobo {
 
 		exception WrongDataType {};
 		exception FileNotFound {};
+
+		typedef string               StreamType;
+		typedef sequence<StreamType> StreamTypeList;
+		
+		/**
+		 * get_types:
+		 *
+		 *  Gets a list of supported mime types that this
+		 * persistor can cope with. The default / preferred
+		 * type being the first element.
+		 */
+		StreamTypeList get_types ();
+
+/*		Attribute StreamType type;*/
+
+		/**
+		 * type:
+		 *
+		 *  Determines the content type of the stream about to
+		 * be passed.
+		 */
+		void       set_type (in StreamType type);
+		StreamType get_type ();
 	};
 	
 	/*

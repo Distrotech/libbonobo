@@ -38,7 +38,6 @@ module Bonobo {
 	
 		/**
 		 * write:
-		 * @count:  number of bytes to write.
 		 * @buffer: a buffer to write.
 		 *
 		 * writes the buffer to this stream.
