@@ -1,3 +1,23 @@
+1999-05-26  Nat Friedman  <nat@nat.org>
+
+	* components/image-x-png/bonobo-image-x-png.c (view_factory): Add
+ 	the new view to the component_data's view list.
+
+	* bonobo/test-container.c (add_text_cmd): New function to embed a
+ 	text/plain component.
+	(container_file_menu): Added a menu item to embed a text/plain
+ 	component.
+
+	* configure.in: Added components/text-plain/Makefile to the build
+ 	list.
+
+	* components/text-plain/text-plain.gnorba (location_info): New file.
+
+	* components/text-plain/Makefile.am: New file.
+
+	* components/text-plain/bonobo-text-plain.c: New component to
+ 	implement the text/plain display component.
+
 1999-05-25  Nat Friedman  <nat@nat.org>
 
 	* components/image-x-png/image-x-png.gnorba (location_info):
