@@ -1,3 +1,12 @@
+2002-01-10  Michael Meeks  <michael@ximian.com>
+
+	* Version 1.109.0
+
+2002-01-09  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-moniker-util.c: add
+	GNOME_Moniker_Config shortcut.
+
 2002-01-10  Mark McLoughlin  <mark@skynet.ie>
 
 	* bonobo/bonobo-moniker-util.c:

@@ -1,3 +1,19 @@
+libbonobo 1.109.0
+
+	* Features
+		+ API documentation setup (John Fleck)
+		+ Control Accessibility method (Me)
+		+ always on Bonobo reference accounting (Me)
+
+	* Bugs fixed
+		+ update various GType bits (Me)
+		+ generic factory fixage (Anders, Darin)
+		+ improved GObject property mapping (Jacob)
+		+ fixed item container signal (Jens Finke)
+		+ marshaler fixage (Mark McLouglin)
+		+ item handler fixage (Mark)
+		+ C++ comments nailed (Mark)
+
 libbonobo 1.108.0
 
 	* Bugs fixed (Me)

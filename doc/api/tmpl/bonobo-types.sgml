@@ -100,48 +100,6 @@ bonobo-types
 
 
 
-<!-- ##### MACRO BONOBO_TYPE_STRING ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_UNKNOWN ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_CORBA_ANY ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_CORBA_OBJECT ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### MACRO BONOBO_VALUE_HOLDS_UNKNOWN ##### -->
 <para>
 

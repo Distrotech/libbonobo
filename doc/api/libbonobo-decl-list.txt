@@ -2434,26 +2434,6 @@ BONOBO_IS_STREAM_MEM_CLASS
 </SECTION>
 
 <SECTION>
-<FILE>bonobo-transient</FILE>
-BONOBO_TRANSIENT_TYPE
-BonoboTransientPriv
-BonoboTransient
-BonoboTransientClass
-BonoboTransientServantNew
-BonoboTransientServantDestroy
-bonobo_transient_new
-bonobo_transient_construct
-bonobo_transient_create_objref
-<SUBSECTION Standard>
-BONOBO_TRANSIENT
-BONOBO_IS_TRANSIENT
-BONOBO_TYPE_TRANSIENT
-bonobo_transient_get_type
-BONOBO_TRANSIENT_CLASS
-BONOBO_IS_TRANSIENT_CLASS
-</SECTION>
-
-<SECTION>
 <FILE>bonobo-xobject</FILE>
 BONOBO_X_OBJECT_TYPE
 BONOBO_X_OBJECT_HEADER_SIZE
@@ -2477,17 +2457,17 @@ BONOBO_IS_X_OBJECT_CLASS
 </SECTION>
 
 <SECTION>
-<FILE>bonobo-persist-client</FILE>
-bonobo_object_save_to_stream
-bonobo_object_from_stream
-</SECTION>
-
-<SECTION>
 <FILE>bonobo-marshal</FILE>
 bonobo_marshal_BOXED__STRING_BOOLEAN_BOXED
 bonobo_marshal_VOID__STRING_BOXED_BOXED
 bonobo_marshal_VOID__BOXED_UINT_BOXED
 bonobo_marshal_OBJECT__STRING
+</SECTION>
+
+<SECTION>
+<FILE>bonobo-persist-client</FILE>
+bonobo_object_save_to_stream
+bonobo_object_from_stream
 </SECTION>
 
 <SECTION>
@@ -2795,12 +2775,11 @@ BONOBO_TYPE_CORBA_ANY
 BONOBO_TYPE_CORBA_OBJECT
 BONOBO_TYPE_CORBA_TYPECODE
 BONOBO_TYPE_CORBA_EXCEPTION
-BONOBO_TYPE_STRING
-BONOBO_TYPE_NONSTATIC_UNKNOWN
-BONOBO_TYPE_NONSTATIC_CORBA_ANY
-BONOBO_TYPE_NONSTATIC_CORBA_OBJECT
-BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE
-BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION
+BONOBO_TYPE_STATIC_UNKNOWN
+BONOBO_TYPE_STATIC_CORBA_ANY
+BONOBO_TYPE_STATIC_CORBA_OBJECT
+BONOBO_TYPE_STATIC_CORBA_TYPECODE
+BONOBO_TYPE_STATIC_CORBA_EXCEPTION
 BONOBO_VALUE_HOLDS_UNKNOWN
 BONOBO_VALUE_HOLDS_CORBA_ANY
 BONOBO_VALUE_HOLDS_CORBA_OBJECT
@@ -2811,6 +2790,7 @@ bonobo_value_get_corba_any
 bonobo_value_get_corba_object
 bonobo_value_get_corba_typecode
 bonobo_value_get_corba_exception
+bonobo_value_set_corba_object
 bonobo_value_set_unknown
 bonobo_value_set_corba_any
 bonobo_value_set_corba_typecode

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.103.0\n"
-"POT-Creation-Date: 2001-12-11 17:49+0000\n"
+"POT-Creation-Date: 2002-01-10 10:58+0000\n"
 "PO-Revision-Date: 2001-12-19 19:44GMT+0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
@@ -155,6 +155,16 @@ msgstr "İzahsız ümumi fəallaşdırma xətası"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
 
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr ""
+
+#: bonobo/bonobo-moniker-util.c:245
+#, fuzzy
+msgid "Failed to activate object"
+msgstr "Cism vericisini işə sala bilmədim"
+
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP Moniker"
@@ -187,3 +197,12 @@ msgstr "sıravi üzv monikeri"
 msgid "stream MonikerExtender"
 msgstr "axım MonikerExtender"
 
+#: monikers/bonobo-moniker-oaf.c:51
+#, c-format
+msgid "Exception activating '%s"
+msgstr ""
+
+#: monikers/bonobo-moniker-oaf.c:60
+#, c-format
+msgid "Failed to activate '%s"
+msgstr ""

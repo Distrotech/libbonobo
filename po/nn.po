@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Bonobo 0.32\n"
-"POT-Creation-Date: 2001-12-11 17:49+0000\n"
+"POT-Creation-Date: 2002-01-10 10:58+0000\n"
 "PO-Revision-Date: 2001-09-26 08:36+0200\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: nynorsk <nn@li.org>\n"
@@ -154,6 +154,16 @@ msgstr "Generelle aktiviseringsfeil utan skildring"
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikkje initialisere Bonobo"
 
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr ""
+
+#: bonobo/bonobo-moniker-util.c:245
+#, fuzzy
+msgid "Failed to activate object"
+msgstr "Kan ikkje aktivera objekt fra factory"
+
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP Moniker"
@@ -185,3 +195,13 @@ msgstr "vanleg oppørings moniker"
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "straum Moniker utvidar"
+
+#: monikers/bonobo-moniker-oaf.c:51
+#, c-format
+msgid "Exception activating '%s"
+msgstr ""
+
+#: monikers/bonobo-moniker-oaf.c:60
+#, c-format
+msgid "Failed to activate '%s"
+msgstr ""

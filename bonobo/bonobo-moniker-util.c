@@ -26,6 +26,7 @@ struct {
 	{ "cache:",  "OAFIID:Bonobo_Moniker_Cache" },
 	{ "query:(", "OAFIID:Bonobo_Moniker_Query" },
 	{ "new:",    "OAFIID:Bonobo_Moniker_New"   },
+	{ "conf:",   "OAFIID:GNOME_Moniker_Config" },
 	{ NULL, NULL }
 };
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.103.1\n"
-"POT-Creation-Date: 2001-12-11 17:49+0000\n"
+"POT-Creation-Date: 2002-01-10 10:58+0000\n"
 "PO-Revision-Date: 2001-10-03 14:08+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -153,6 +153,16 @@ msgstr "一般的不具描述的啟動錯誤"
 msgid "Could not initialize Bonobo"
 msgstr "無法初始化 Bonobo"
 
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr ""
+
+#: bonobo/bonobo-moniker-util.c:245
+#, fuzzy
+msgid "Failed to activate object"
+msgstr "無法從元件工廠去啟動物件"
+
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP 命名器"
@@ -184,3 +194,13 @@ msgstr "一般的項目命名器"
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "資料流命名延伸器"
+
+#: monikers/bonobo-moniker-oaf.c:51
+#, c-format
+msgid "Exception activating '%s"
+msgstr ""
+
+#: monikers/bonobo-moniker-oaf.c:60
+#, c-format
+msgid "Failed to activate '%s"
+msgstr ""

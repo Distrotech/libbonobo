@@ -2822,6 +2822,48 @@ Returns the #GtkType for the BonoboObjectClient object.
 
 @k: 
 
+<!-- ##### MACRO BONOBO_TRANSIENT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_CORBA_ANY ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_CORBA_OBJECT ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_NONSTATIC_UNKNOWN ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_STRING ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### MACRO BONOBO_TYPE_UI_ENGINE ##### -->
 <para>
 
@@ -3484,6 +3526,43 @@ An opaque async reply handle
 
 </para>
 
+
+<!-- ##### TYPEDEF BonoboTransient ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF BonoboTransientClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboTransientPriv ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION BonoboTransientServantDestroy ##### -->
+<para>
+
+</para>
+
+@servant: 
+@data: 
+
+<!-- ##### USER_FUNCTION BonoboTransientServantNew ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Param2: 
+@name: 
+@data: 
+@Returns: 
 
 <!-- ##### STRUCT BonoboUIComponentPrivate ##### -->
 <para>
@@ -7928,11 +8007,45 @@ Returns the #GtkType for the GnomeObject object.
 @stream: 
 @class_id: 
 
+<!-- ##### FUNCTION bonobo_transient_construct ##### -->
+<para>
+
+</para>
+
+@transient: 
+@poa: 
+@new_servant: 
+@destroy_servant: 
+@data: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_transient_create_objref ##### -->
+<para>
+
+</para>
+
+@transient: 
+@iface_name: 
+@name: 
+@ev: 
+@Returns: 
+
 <!-- ##### FUNCTION bonobo_transient_get_type ##### -->
 <para>
 
 </para>
 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_transient_new ##### -->
+<para>
+
+</para>
+
+@poa: 
+@new_servant: 
+@destroy_servant: 
+@data: 
 @Returns: 
 
 <!-- ##### FUNCTION bonobo_ui_component_corba_object_create ##### -->

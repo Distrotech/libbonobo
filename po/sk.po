@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-12-11 17:49+0000\n"
+"POT-Creation-Date: 2002-01-10 10:58+0000\n"
 "PO-Revision-Date: 2001-11-13 09:34+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -153,6 +153,16 @@ msgstr "V¹eobecná chyba aktivácie bez popisu"
 msgid "Could not initialize Bonobo"
 msgstr "Nemô¾em inicializova» Bonobo"
 
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr ""
+
+#: bonobo/bonobo-moniker-util.c:245
+#, fuzzy
+msgid "Failed to activate object"
+msgstr "Nemô¾em aktivova» objekt z továrne"
+
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP moniker"
@@ -184,3 +194,13 @@ msgstr "v¹eobecný moniker polo¾iek"
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "prúd MonikerExtender"
+
+#: monikers/bonobo-moniker-oaf.c:51
+#, c-format
+msgid "Exception activating '%s"
+msgstr ""
+
+#: monikers/bonobo-moniker-oaf.c:60
+#, c-format
+msgid "Failed to activate '%s"
+msgstr ""

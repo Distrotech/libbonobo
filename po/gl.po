@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-12-07 07:52-0500\n"
+"POT-Creation-Date: 2002-01-10 10:58+0000\n"
 "PO-Revision-Date: 2001-12-27 01:21+0100\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -71,7 +71,8 @@ msgstr "Non se ten permiso para facer a operación no medio de almacenamento"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr "Tentouse levar a cabo unha acción non soportada sobre medio de almacenamento"
+msgstr ""
+"Tentouse levar a cabo unha acción non soportada sobre medio de almacenamento"
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
@@ -157,6 +158,16 @@ msgstr "Erro xeral de activación sen descrición"
 msgid "Could not initialize Bonobo"
 msgstr "Non se puido inicializar Bonobo"
 
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr ""
+
+#: bonobo/bonobo-moniker-util.c:245
+#, fuzzy
+msgid "Failed to activate object"
+msgstr "Non se pode activar obxecto de fábrica"
+
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "Alias (moniker) HTTP"
@@ -188,3 +199,13 @@ msgstr "alias (moniker) de obxecto xenérico"
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "fluxo MonikerExtender"
+
+#: monikers/bonobo-moniker-oaf.c:51
+#, c-format
+msgid "Exception activating '%s"
+msgstr ""
+
+#: monikers/bonobo-moniker-oaf.c:60
+#, c-format
+msgid "Failed to activate '%s"
+msgstr ""
