@@ -6,13 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2003-08-26 14:07+0100\n"
-"PO-Revision-Date: 2003-05-18 17:05-0300\n"
+"POT-Creation-Date: 2003-09-30 11:42-0400\n"
+"PO-Revision-Date: 2003-09-30 11:37-0400\n"
 "Last-Translator: Evandro Fernandes Giovanini <evandrofg@ig.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
@@ -217,7 +218,7 @@ msgstr "Erro de sintaxe na descrição do objeto"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Não é possível ativar o objeto no gerador"
+msgstr "Não é possível ativar o objeto na fábrica"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -365,7 +366,7 @@ msgstr "Moniker de tratamento de IOR ORB"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "Gerador de moniker padrão"
+msgstr "Fábrica de moniker padrão"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
@@ -377,7 +378,7 @@ msgstr "moniker de consulta Oaf genérico"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "'novo' moniker de gerador genérico"
+msgstr "'novo' moniker de fábrica genérica"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
@@ -389,11 +390,11 @@ msgstr "MonikerExtender de fluxo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "Gerador do servidor Bonobo Echo"
+msgstr "Fábrica do servidor Bonobo Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "Programa de exemplo do servidor Bonobo Echo"
+msgstr "Programa exemplo do servidor Bonobo Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
@@ -401,7 +402,7 @@ msgstr "Componente do Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr "Gerador de componente do Echo"
+msgstr "Fábrica de componente do Echo"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
@@ -409,7 +410,7 @@ msgstr "Não foi possível inicializar o Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "Não foi possível criar uma ocorrência de exemplo do componente do Echo"
+msgstr "Não foi possível criar uma ocorrência de componente exemplo Echo"
 
 #: samples/echo/echo-client.c:45
 #, c-format
