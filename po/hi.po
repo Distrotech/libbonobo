@@ -1,85 +1,75 @@
-# libbonobo translation in Tamil
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Tamil Libbonobo 1.9.7\n"
+"Project-Id-Version: bonobo activation\n"
 "POT-Creation-Date: 2003-04-07 20:13+0200\n"
-"PO-Revision-Date: 2002-11-09 9:30-0500\n"
-"Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
-"Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
+"PO-Revision-Date: 2003-01-10 20:39+0530\n"
+"Last-Translator: Anurag Seetha <anuragseetha@yahoo.com>\n"
+"Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# server/activation-context-corba.c:513
 #: activation-server/activation-context-corba.c:549
 msgid "Couldn't find which child the server was listed in"
-msgstr "±ó¾ §ºö §º¨ÅÂ¸ò¾¢ø ÀðÊÂÄ¢¼ôÀð¼Ð ±É ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "Couldn't find which child the server was listed in"
 
 #: activation-server/activation-context-corba.c:844
 msgid "Not a valid Activation ID"
-msgstr ""
+msgstr "अवेध सक्रियता ID"
 
-# server/activation-server-main.c:64
 #: activation-server/activation-server-main.c:66
 msgid "Directory to read .server files from"
-msgstr ".server §¸¡ôÒ¸¨Ç Å¡º¢ì¸ §ÅñÊÂ «¨¼×"
+msgstr "से saver फाइल बढ़ने के लिए डायरेक्टरी पढ़ी जा रही है"
 
-# server/activation-server-main.c:64
 #: activation-server/activation-server-main.c:66
 msgid "DIRECTORY"
-msgstr "«¨¼×"
+msgstr "डायरेक्टरी"
 
-# server/activation-server-main.c:69
 #: activation-server/activation-server-main.c:69
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "ActivationContext'¬¸ §º¨ÅÂ¢Î (¦¸¡¼¡ ¿¢¨Ä ObjectDirectory ÁðÎõ)"
+msgstr "मूल्यांकन हेतु प्रश्न समीकरण"
 
-# server/activation-server-main.c:74
 #: activation-server/activation-server-main.c:73
 msgid "File descriptor to write IOR to"
-msgstr "IOR ±Ø¾ §ÅñÊÂ §¸¡ôÒ Å¢ÅÃ¢ôÒ"
+msgstr "File descriptor to write IOR to"
 
-# bonobo-activation/bonobo-activation-init.c:224
-# server/activation-server-main.c:74
 #: activation-server/activation-server-main.c:73
 #: bonobo-activation/bonobo-activation-init.c:255
 msgid "FD"
 msgstr "FD"
 
-# server/activation-server-main.c:79
 #: activation-server/activation-server-main.c:81
 msgid "Query expression to evaluate"
-msgstr "Á¾¢ôÀ¢¼ §ÅñÊÂ Å¢É¡ §¸¡¨Å"
+msgstr "Query expression to evaluate"
 
-# server/activation-server-main.c:79
 #: activation-server/activation-server-main.c:81
 msgid "EXPRESSION"
-msgstr "§¸¡¨Å"
+msgstr "समीकरण"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr ""
+msgstr "CORBA CosNaming service"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
-msgstr ""
+msgstr "नाम सुविधा"
 
-# server/object-directory-activate.c:62
 #: activation-server/object-directory-activate.c:185
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "¾ü§À¡Ð ¦¾¡¨Ä ¦ºÂÄ¸ò¾¢É¡ø shlib ­ÄìÌ¸¨Ç ­Âì¸ ÓÊÂ¡Ð"
+msgstr "We dont handle activating shlib objects in a remote process yet"
 
-# server/object-directory-config-file.c:47
 #: activation-server/object-directory-config-file.c:47
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"OAF «¨Á-ÅÊÅ §¸¡ôÒ ¦ÅüÈ¢¸ÃÁ¡¸ Å¡º¢ì¸ôÀ¼Å¢ø¨Ä. ¾ÂÅ¢¨ºöÐ ­¾É¢ø ºÃ¢À¡÷ì¸×õ: %s"
+"बोनबो सक्रियता कानफिगरेशन फाइल को सफलतापूर्वक नहीं पढ़ा जा सका कपया यह जांच कर लें कि "
+"यह %s में वैध है"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -91,446 +81,406 @@ msgstr ""
 #: activation-server/object-directory-corba.c:886
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
-msgstr "'%s àñÎ ¦ºöÔõ§À¡Ð Å¢¾¢Å¢ÄìÌ (exception)"
+msgstr "रेस स्थिति से सर्वर '%s' सक्रिय हो रहा है"
 
-# server/object-directory-load.c:170
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr "NULL ±Ûõ iid ¦ºøÖÀÊÂ¡¸¡¾Ð"
+msgstr "एक Null iid वैध नहीं है"
 
-# server/object-directory-load.c:174
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr "%s iid ­ø µ÷ NULL Å¨¸"
+msgstr "iid %s का मान NULL प्रकार का है"
 
-# server/object-directory-load.c:178
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr "%s iid ­ø µ÷ NULL ­ÕôÀ¢¼õ"
+msgstr "iid %s में एक NULL स्थान है"
 
-# server/object-directory-load.c:187
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "À¢¨ÆÂ¡É ÅÃ¢ÔÕ '%c' iid '%s' ­ø"
+msgstr "अवैध कैरेक्टर '%c' iid '%s' में"
 
-# server/object-directory-load.c:120 server/object-directory-load.c:150
 #: activation-server/object-directory-load.c:306
-#, c-format
+#, fuzzy, c-format
 msgid "Property '%s' has no value"
-msgstr "'%s' ÀñÒìÌ Á¾¢ôÒ ¸¢¨¼Â¡Ð"
+msgstr "गुणधर्म '%s' का कोई मान नहीं है"
 
-# bonobo-activation/bonobo-activation-fork-server.c:263
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "§ºö ¦ºÂø À¢¨Æ ¦ºö¾¢ ´ý¨Èì ¾ÃÅ¢ø¨Ä, ¦¾Ã¢Â¡¾ ¦¿¡ÊôÒ ¿¨¼¦ÀüÈÐ"
+msgstr "बच्चा प्रक्रियाएं कोई त्रुटि संदेश देती है, अज्ञात असफलता आई है"
 
-# bonobo-activation/bonobo-activation-fork-server.c:82
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "§ºö ¦ºÂÄ¢Â¢Ä¢ÕóÐ Å¡º¢ì¸ÓÊÂÅ¢ø¨Ä: %s\n"
+msgstr "बच्चा प्रक्रिया %s से पढ़ने में असफल\n"
 
-# bonobo-activation/bonobo-activation-fork-server.c:181
 #: bonobo-activation/bonobo-activation-fork-server.c:296
 msgid "Couldn't fork a new process"
-msgstr "Ò¾¢Â ¦ºÂ¨Ä ¦¾¡¼í¸Å¢ø¨Ä"
+msgstr "एक नयी प्रोसेस उत्पन्न नहीं की जा सकी"
 
-# bonobo-activation/bonobo-activation-fork-server.c:202
 #: bonobo-activation/bonobo-activation-fork-server.c:319
 #, c-format
 msgid "Child received signal %u (%s)"
-msgstr "ÌÈ¢ôÒ ´ýÚ §ºìÌ ¸¢¨¼ò¾Ð %u (%s)"
+msgstr "बच्चा प्रक्रिया को मिला संकेत %u (%s)"
 
-# bonobo-activation/bonobo-activation-fork-server.c:208
+# c-format
 #: bonobo-activation/bonobo-activation-fork-server.c:324
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr "¦¾Ã¢Â¡¾, ¦ÅÇ¢§ÂÈò §¾¨ÅÂ¢øÄ¡¾ À¢¨Æ (¿¢¨Ä %u)"
+msgstr "अज्ञात बाहर नहीं जा सकने वाली त्रुटि (स्थिति %u है)"
 
-# bonobo-activation/bonobo-activation-fork-server.c:291
 #: bonobo-activation/bonobo-activation-fork-server.c:387
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-¦¾¡¼ì¸õ, ¦ºÂø ¦¾¡Ì¾¢¨Â %s «¨Áì¸Å¢ø¨Ä: %s\n"
+msgstr "बोनबो सक्रियता प्रक्रिया असफल प्रोसेस समूह %s को समायोजित करने वाली %s\n"
 
-# bonobo-activation/bonobo-activation-fork-server.c:302
 #: bonobo-activation/bonobo-activation-fork-server.c:399
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
-msgstr "%s ¦ºÂøÀÎò¾ ÓÊÂÅ¢ø¨Ä: %d (%s)\n"
+msgstr "%s को क्रियान्वित करने में असफल %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr ""
+msgstr "लोकेल मे अत्याधिक उपनाम सतर, शायद फंदा है"
 
-# bonobo-activation/bonobo-activation-init.c:224
 #: bonobo-activation/bonobo-activation-init.c:255
 msgid "File descriptor to print IOR on"
-msgstr "IOR «îº¢¼ §ÅñÊÂ §¸¡ôÒ Å¢ÅÃ¢ôÒ"
+msgstr "IOR प्रिंट करने के लिए फाइल वर्णनकर्ता"
 
-# bonobo-activation/bonobo-activation-init.c:226
 #: bonobo-activation/bonobo-activation-init.c:257
 msgid "IID to activate"
-msgstr "àñÎ ¦ºöÂ §ÅñÊÂ IID"
+msgstr "IID to activate"
 
-# bonobo-activation/bonobo-activation-init.c:228
 #: bonobo-activation/bonobo-activation-init.c:259
 msgid "Prevent registering of server with OAF"
-msgstr "OAF­ø §º¨ÅÂ¸ò¨¾ À¾¢×¦ºöÅ¨¾ ¾Îì¸×õ"
+msgstr "AOF में सर्वर के पंजीकरण को रोका जा रहा है"
 
-# bonobo-activation/bonobo-activation-init.c:426
 #: bonobo-activation/bonobo-activation-init.c:344
+#, fuzzy
 msgid "Bonobo activation options"
-msgstr "Bonobo ¦¾¡¼ì¸ Å¢ÕôÀí¸û"
+msgstr "बोनबो क्रियाशील विकल्प"
 
-# bonobo-activation/bonobo-activation-shlib.c:102
 #: bonobo-activation/bonobo-activation-shlib.c:101
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr "'%s' ­ý ('%s' ¯¼ý) g_module_open ¦¿¡ÊôÀ¨¼ó¾Ð"
+msgstr "%s का g-module-open %s से असफल"
 
-# bonobo-activation/bonobo-activation-shlib.c:120
-# bonobo-activation/bonobo-activation-shlib.c:156
 #: bonobo-activation/bonobo-activation-shlib.c:119
 #: bonobo-activation/bonobo-activation-shlib.c:155
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr "'%s' ­ø Bonobo_Plugin_info ÌÈ¢Â£¨¼ì ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr "चिन्ह Bonobo_Plugin_info '%s' में नही मिला"
 
-# bonobo-activation/bonobo-activation-shlib.c:204
 #: bonobo-activation/bonobo-activation-shlib.c:203
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr "'%s' ¦¾¡Æ¢üº¡¨Ä, '%s' ­ìÌ NIL Á£ñ¼Ð"
+msgstr "%s के लिए फैक्ट्री %s से वापिस मिला है NIL"
 
-# bonobo-activation/bonobo-activation-shlib.c:221
 #: bonobo-activation/bonobo-activation-shlib.c:220
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr "Shlib '%s' ­ø '%s' ¸¢¨¼Â¡Ð"
+msgstr "Shlib '%s' didn't contain '%s'"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
-msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:157
 msgid "IO Error"
-msgstr "IO À¢¨Æ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "À¢¨ÆÂ¡É Á¡È¢ Á¾¢ôÒ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:164
 msgid "Object not found"
-msgstr "­ÄìÌ ¸¡½Å¢ø¨Ä"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
-msgstr "­ÄìÌ Å¢ÅÃ¢ôÀ¢ø ¦¾¡¼Ã¢Âø À¢¨Æ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "¦¾¡Æ¢üº¡¨ÄÂ¢ø ¦ÀüÈ ­Äì¨¸ ¦ºÂüÀ¼ ÓÊÂÅ¢ø¨Ä"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "µ¨¼ «Ï¸ÖìÌ «ÑÁ¾¢ ¸¢¨¼Â¡Ð"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ µ¨¼î ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "µ¨¼Â¢ø IO À¢¨Æ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "§¾ì¸ò¾¢ø IO À¢¨Æ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr "§¾ì¸ò¾¢ø ²ü¸É§Å ¦ÀÂ÷ ¯ñÎ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr "§¾ì¸ò¾¢ø ­ÄìÌ ¸¡½Å¢ø¨Ä"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "§¾ì¸ò¾¢ø ­Âì¸ «ÑÁ¾¢ ¸¢¨¼Â¡Ð"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ §¾ì¸¸î ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr "­ÄìÌ µÕ µ¨¼ «øÄ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr "­ÄìÌ µÕ §¾ì¸¸õ «øÄ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr "§¾ì¸¸õ ¦ÅüÈ¡ÉÐ «øÄ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "¦À¡Õò¾-ÁüÈ ÀÂÉ÷ ­¨¼Ó¸ XML Å¢ÅÃ¢ôÒ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "XML ÀÂÉ÷ ­¨¼Ó¸ ¯ÚôÀ¢ý À¡¨¾ À¢¨ÆÂ¡ÉÐ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr "§ÅñÎ§¸¡ÇÇ¢ò¾ UI ÀñÒ þø¨Ä/¸¢¨¼Â¡Ð"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "¦¾Ã¢Â¡¾ ¸ð¼¨Ç «øÄÐ Å¢¨Éî¦º¡ø"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "¸ð¼¨Ç ¯½÷Å¢ûÇ¡¾Ð"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
-msgstr "À¢¨ÆÂ¡É ¾Ã× Å¨¸"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr "µ¨¼ ¸¡½Å¢ø¨Ä"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
-msgstr "ÀñÒ ¸¡½Å¢ø¨Ä"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:236
+#, fuzzy
 msgid "property has invalid type"
-msgstr "ÀñÀ¢ø ¦ºøÖÀÊÂ¡¸¡¾ Å¨¸"
+msgstr "गुणधर्म '%s' का कोई मान नहीं है"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr "ÀñÒ Å¡º¢ì¸ìÜÊÂÐ ÁðÎõ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr "config ¾Ã×ò¾Çò¾¢ý À¢ý-þ¨ÉôÒ ¦¿¡ÊôÀ¨¼ó¾Ð "
+msgstr ""
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Moniker ­¨¼Ó¸õ ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:249
+#, fuzzy
 msgid "Moniker activation timed out"
-msgstr "Moniker àñÎ ¦ºöÔõ §¿Ãõ ÓÊÅ¨¼ó¾Ð"
+msgstr "बोनबो क्रियाशील विकल्प"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr "Moniker ¯û§Ç ¦¾¡¼Ã¢Âø À¢¨Æ"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "Moniker has an unknown moniker prefix"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "À¢¨ÆÀ¡÷ìÌõ§À¡Ð À¢¨Æ; Å¢¾¢Å¢ÄìÌ ¸¢¨¼Â¡Ð"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr "Å¢ÅÃ½õ ­øÄ¡Áø ¦À¡Ðò ¦¾¡¼í¸ø À¢¨Æ"
+msgstr ""
 
 #: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
-msgstr "¦À¡§É¡§À¡Å¢ý ¦¾¡¼ì¸Á¾¢ôÀÇ¢ì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr ""
 
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "'%s ºÃ¢ÀÎò¾ «øÄÐ ¿£ðÊì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr ""
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr "þÄì¨¸ àñÎ ¦ºö ÓÊÂÅ¢ø¨Ä"
+msgstr ""
 
 #: monikers/bonobo-moniker-oaf.c:53
 #, fuzzy, c-format
 msgid "Exception activating '%s'"
-msgstr "'%s àñÎ ¦ºöÔõ§À¡Ð Å¢¾¢Å¢ÄìÌ (exception)"
+msgstr "रेस स्थिति से सर्वर '%s' सक्रिय हो रहा है"
 
 #: monikers/bonobo-moniker-oaf.c:62
 #, fuzzy, c-format
 msgid "Failed to activate '%s'"
-msgstr "'%s àñÎ ¦ºöÂ ÓÊÂÅ¢ø¨Ä"
+msgstr "रेस स्थिति से सर्वर '%s' सक्रिय हो रहा है"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr "HTTP Moniker"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr "ORB IOR handling moniker"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "¦ºó¾Ã Moniker ¦¾¡Æ¢üº¡¨Ä"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr "ÅÊÅ¢Âø Oaf àñÎ ¦ºöÔõ moniker"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr "ÅÊÅ¢Âø Oaf Å¢ÉÅø moniker"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "ÅÊÅ¢Âø ¦¾¡Æ¢üº¡¨Ä 'Ò¾¢Â' moniker"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr "ÅÊÅ¢Âø ¯ÕôÀÊ moniker"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr "µ¨¼ MonikerExtender"
+msgstr ""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "Bonobo Echo §º¨ÅÂ¸ ¦¾¡Æ¢üº¡¨Ä"
+msgstr ""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "Bonobo Echo §º¨ÅÂ¸ò¾¢ý Á¡¾¢Ã¢ ¿¢Ãø"
+msgstr ""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr "±¾¢ÃÇ¢ôÒ ÜÚ"
+msgstr ""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr "±¾¢ÃÇ¢ôÒ ÜÚ ¦¾¡Æ¢üº¡¨Ä"
+msgstr ""
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr "±ýÉ¡ø ¦À¡§É¡§À¡¨Å ¦¾¡¼í¸ ÓÊÂÅ¢ø¨Ä"
+msgstr ""
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "Á¡¾¢Ã¢ ±¾¢ÃÇ¢ôÒ ÜÚ ¯ÕÅ¡ì¸ ÓÊÂÅ¢ø¨Ä"
+msgstr ""
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr "µ÷ Å¢¾¢Å¢ÄìÌ ¿¨¼¦ÀüÈÐ '%s'"
+msgstr ""
 
-# utils/bonobo-activation-sysconf.c:62
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ô¨À §ºÁ¢ì¸ ÓÊÂÅ¢ø¨Ä.\n"
+msgstr "कानफिगरेशन फाइल संग्रहित नहीं की जा सकी\n"
 
-# utils/bonobo-activation-sysconf.c:63
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "¾Â×¦ºöÐ '%s' ìÌ ±ØÐÅ¾üÌ «ÛÁ¾¢ ¯ñ¼¡ ±É ºÃ¢À¡÷ì¸×õ.\n"
+msgstr "कपया यह सुनिश्चित करें कि आपको %s में लिखने की अनुमति है?\n"
 
-# utils/bonobo-activation-sysconf.c:66
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÒ ¿øÄÀÊÂ¡¸ §ºÁ¢ì¸ôÀð¼Ð.\n"
+msgstr "कानफिगरेशन फाइल को सफलतापूर्वक लिखा गया\n"
 
-# utils/bonobo-activation-sysconf.c:80
 #: utils/bonobo-activation-sysconf.c:80
 #, c-format
 msgid ""
 "configuration file is:\n"
 "    %s\n"
-msgstr ""
-"«¨Á ÅÊÅ¸ §¸¡ôÒ:\n"
-"    %s\n"
+msgstr "कानफिगरेशन फाइल है:   %s\n"
 
-# utils/bonobo-activation-sysconf.c:118
 #: utils/bonobo-activation-sysconf.c:118
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr "%s ²ü¦¸É§Å «¨Á ÅÊÅ¸ §¸¡ôÀ¢ø ¯ûÇÐ\n"
+msgstr "कानफिगरेशन फाइल में %s पहले से ही मौजूद है\n"
 
-# utils/bonobo-activation-sysconf.c:138
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr "ºÃ¢Â¡¸ ¸ð¼¨Áì¸ôÀð¼ «¨Á ÅÊÅ §¸¡ôÒ ¸¢¨¼Â¡Ð\n"
+msgstr "कानफिगरेशन फाइल की संरचना सही नहीं है\n"
 
-# utils/bonobo-activation-sysconf.c:201
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "Bonobo-activation «¨Á ÅÊÅ¸ §¸¡ôÀ¢Ûû:\n"
+msgstr "बोनबो सक्रियता कानफिगरेशन फाइल में है\n"
 
-# utils/bonobo-activation-sysconf.c:233
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÀ¢ø ­ÕóÐ ¿£ì¸ §ÅñÊÂ «¨¼×"
+msgstr "कानफिगरेशन फाइल से डायरेक्टरी को हटाएं"
 
-# utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
-msgstr "«¨¼× À¡¨¾"
+msgstr "डायरेक्टरी पाथ"
 
-# utils/bonobo-activation-sysconf.c:236
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÀ¢ø §º÷ì¸ §ÅñÊÂ «¨¼×"
+msgstr "डायरेक्टरी जिसमें कानफिगरेशन फाइल जोड़नी है"
 
-# utils/bonobo-activation-sysconf.c:239
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÀ¢ø ¯øÄ «¨¼×¸¨Çì ¸¡ñÀ¢"
+msgstr "कानफिगरेशन फाइल में दर्शायी डायरेक्टरी"
 
-# utils/bonobo-activation-sysconf.c:242
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr "«¨Á ÅÊÅ¸ §¸¡ôÀ¢ý À¡¨¾¨Âì ¸¡ñÀ¢"
+msgstr "कानफिगरेशन फाइल का दर्शाया पाथ"
 
-# bonobo-activation/bonobo-activation-async-callback.c:119
 #~ msgid "No server corresponding to your query"
-#~ msgstr "¯í¸û Å¢É¡×ìÌ ¦À¡Õò¾Á¡É §º¨ÅÂ¸õ ¸¢¨¼Â¡Ð"
+#~ msgstr "आपके प्रश्न के संगत कोई सर्वर नहीं है"
 
-# server/activation-context-corba.c:684
 #~ msgid "Query failed: "
-#~ msgstr "Å¢É¡ ¦¿¡ÊôÀ¨¼ó¾Ð: "
+#~ msgstr "प्रश्न असफल"
 
-# server/activation-context-corba.c:712
 #~ msgid "Activation failed: "
-#~ msgstr "­Âì¸ø ¦¿¡ÊôÀ¨¼ó¾Ð: "
+#~ msgstr "सक्रियता प्रक्रिया असफल"
 
-# server/activation-context-corba.c:974
 #~ msgid "Could not parse AID"
-#~ msgstr "AID «Ä¸¢¼ ÓÊÂÅ¢ø¨Ä"
+#~ msgstr "AID को पार्स नहीं किया जा सकता"
 
-# server/activation-context-corba.c:984
 #~ msgid "Could not parse context: "
-#~ msgstr "ÝÆø «Ä¸¢¼ ÓÊÂÅ¢ø¨Ä: "
+#~ msgstr "संदर्भ को पार्स नहीं किया जा सकता"
 
-# server/activation-context-corba.c:1008
 #~ msgid "Could not activate server: "
-#~ msgstr "§º¨ÅÂ¸ò¨¾ ¦¾¡¼í¸ ÓÊÂÅ¢ø¨Ä: "
+#~ msgstr "सर्वर को सक्रिय नहीं किया जा सका"
 
-# server/activation-server-main.c:66
 #~ msgid "Domain of ObjectDirectory"
-#~ msgstr "ObjectDirectory'­ý ¸Çõ"
+#~ msgstr "Object Directory का डोमेन"
 
-# server/activation-server-main.c:66
 #~ msgid "DOMAIN"
-#~ msgstr "¸Çõ"
+#~ msgstr "डोमेन"
 
-# bonobo-activation/bonobo-activation-init.c:222
 #~ msgid "Object directory to use when registering servers"
-#~ msgstr "§º¨ÅÂ¸í¸¨Ç À¾¢Å¸¢ìÌõ §À¡Ð ÀÂýÀÎò¾ §ÅñÊÂ ­ÄìÌ «¨¼×"
+#~ msgstr "सर्वर को पंजीक=त करते समय आब्जेक्ट डायरेक्टरी का प्रयोग किया जा रहा है"

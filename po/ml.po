@@ -6,13 +6,186 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo-2.2.x\n"
-"POT-Creation-Date: 2003-03-21 14:56+0530\n"
+"POT-Creation-Date: 2003-04-07 20:13+0200\n"
 "PO-Revision-Date: 2003-03-05 10:29+0530\n"
 "Last-Translator: FSF-India <locale@gnu.org.in>\n"
 "Language-Team: Malayalam <locale@gnu.org.in>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: activation-server/activation-context-corba.c:549
+msgid "Couldn't find which child the server was listed in"
+msgstr ""
+
+#: activation-server/activation-context-corba.c:844
+msgid "Not a valid Activation ID"
+msgstr ""
+
+#: activation-server/activation-server-main.c:66
+msgid "Directory to read .server files from"
+msgstr ""
+
+#: activation-server/activation-server-main.c:66
+msgid "DIRECTORY"
+msgstr "ഡയറക്‌റ്ററി"
+
+#: activation-server/activation-server-main.c:69
+msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
+msgstr ""
+
+#: activation-server/activation-server-main.c:73
+#, fuzzy
+msgid "File descriptor to write IOR to"
+msgstr "അച്ചടിക്കുവാനുള്ള രചനയുടെ പേര‍്"
+
+#: activation-server/activation-server-main.c:73
+#: bonobo-activation/bonobo-activation-init.c:255
+msgid "FD"
+msgstr ""
+
+#: activation-server/activation-server-main.c:81
+msgid "Query expression to evaluate"
+msgstr ""
+
+#: activation-server/activation-server-main.c:81
+msgid "EXPRESSION"
+msgstr ""
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
+#, fuzzy
+msgid "CORBA CosNaming service."
+msgstr "വെബ് സേവനങ്ങള്‌"
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
+#, fuzzy
+msgid "Name service"
+msgstr "വെബ് സേവനങ്ങള്‌"
+
+#: activation-server/object-directory-activate.c:185
+msgid "We don't handle activating shlib objects in a remote process yet"
+msgstr ""
+
+#: activation-server/object-directory-config-file.c:47
+#, c-format
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+
+#.
+#. * If this exception blows ( which it will only do with a multi-object )
+#. * factory, you need to ensure you register the object you were activated
+#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
+#. * with bonobo_activation_active_server_register - _after_ any other
+#. * servers are registered.
+#.
+#: activation-server/object-directory-corba.c:886
+#, fuzzy, c-format
+msgid "Race condition activating server '%s'"
+msgstr "%s ചിത്രം നിറയ്‌ക്കുന്നതില്‌ പരാജയം : %s"
+
+#: activation-server/object-directory-load.c:94
+msgid "a NULL iid is not valid"
+msgstr ""
+
+#: activation-server/object-directory-load.c:98
+#, c-format
+msgid "iid %s has a NULL type"
+msgstr ""
+
+#: activation-server/object-directory-load.c:102
+#, c-format
+msgid "iid %s has a NULL location"
+msgstr ""
+
+#: activation-server/object-directory-load.c:111
+#, fuzzy, c-format
+msgid "invalid character '%c' in iid '%s'"
+msgstr "സാധുതയില്ലാത്ത സ‌‌ര്‌വ്വ‌ര് നി‌ര്‌ദ്ദേശം '%s'"
+
+#: activation-server/object-directory-load.c:306
+#, c-format
+msgid "Property '%s' has no value"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-fork-server.c:102
+msgid "Child process did not give an error message, unknown failure occurred"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-fork-server.c:174
+#, fuzzy, c-format
+msgid "Failed to read from child process: %s\n"
+msgstr "രചന %sലെ പ്രമേയം വായിക്കുന്നതില്‌ പരാജയപ്പെട്ടു: %s\n"
+
+#: bonobo-activation/bonobo-activation-fork-server.c:296
+#, fuzzy
+msgid "Couldn't fork a new process"
+msgstr "ശേഷിച്ചവ സംരക്ഷിക്കാന്‌ കഴിയുന്നില്ല."
+
+#: bonobo-activation/bonobo-activation-fork-server.c:319
+#, c-format
+msgid "Child received signal %u (%s)"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-fork-server.c:324
+#, c-format
+msgid "Unknown non-exit error (status is %u)"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-fork-server.c:387
+#, c-format
+msgid "bonobo-activation failed to set process group of %s: %s\n"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-fork-server.c:399
+#, fuzzy, c-format
+msgid "Failed to execute %s: %d (%s)\n"
+msgstr "%s കൊണ്ട് വരാന് കഴിഞ്ഞില്ല: %s\n"
+
+#: bonobo-activation/bonobo-activation-get-language-list.c:87
+msgid "Too many alias levels for a locale, may indicate a loop"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-init.c:255
+#, fuzzy
+msgid "File descriptor to print IOR on"
+msgstr "അച്ചടിക്കുവാനുള്ള രചനയുടെ പേര‍്"
+
+#: bonobo-activation/bonobo-activation-init.c:257
+#, fuzzy
+msgid "IID to activate"
+msgstr "അചേതനമായ"
+
+#: bonobo-activation/bonobo-activation-init.c:259
+msgid "Prevent registering of server with OAF"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-init.c:344
+#, fuzzy
+msgid "Bonobo activation options"
+msgstr "ബന്ധസമയം അധികരിച്ചു"
+
+#: bonobo-activation/bonobo-activation-shlib.c:101
+#, c-format
+msgid "g_module_open of `%s' failed with `%s'"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-shlib.c:119
+#: bonobo-activation/bonobo-activation-shlib.c:155
+#, c-format
+msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-shlib.c:203
+#, c-format
+msgid "Factory `%s' returned NIL for `%s'"
+msgstr ""
+
+#: bonobo-activation/bonobo-activation-shlib.c:220
+#, c-format
+msgid "Shlib `%s' didn't contain `%s'"
+msgstr ""
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -177,6 +350,16 @@ msgstr "പുനരാരംഭിക്കുന്നതില്‌ പര�
 msgid "Failed to activate object"
 msgstr "സ്വയം പുനരാരംഭിക്കുന്നതില്‌ പരാജയപ്പെട്ടു"
 
+#: monikers/bonobo-moniker-oaf.c:53
+#, c-format
+msgid "Exception activating '%s'"
+msgstr ""
+
+#: monikers/bonobo-moniker-oaf.c:62
+#, fuzzy, c-format
+msgid "Failed to activate '%s'"
+msgstr "%s ചിത്രം നിറയ്‌ക്കുന്നതില്‌ പരാജയം : %s"
+
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr ""
@@ -211,16 +394,6 @@ msgstr "പൊതു പിശക്"
 msgid "stream MonikerExtender"
 msgstr ""
 
-#: monikers/bonobo-moniker-oaf.c:53
-#, c-format
-msgid "Exception activating '%s'"
-msgstr ""
-
-#: monikers/bonobo-moniker-oaf.c:62
-#, fuzzy, c-format
-msgid "Failed to activate '%s'"
-msgstr "%s ചിത്രം നിറയ്‌ക്കുന്നതില്‌ പരാജയം : %s"
-
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
 msgstr ""
@@ -251,3 +424,65 @@ msgstr ""
 #, c-format
 msgid "An exception occured '%s'"
 msgstr ""
+
+#: utils/bonobo-activation-sysconf.c:62
+#, fuzzy
+msgid "Could not save configuration file.\n"
+msgstr "%s എന്ന രചന സംരക്ഷിക്കാന്‌ കഴിയുന്നില്ല."
+
+#: utils/bonobo-activation-sysconf.c:63
+#, c-format
+msgid "Please, make sure you have permissions to write to '%s'.\n"
+msgstr ""
+
+#: utils/bonobo-activation-sysconf.c:66
+#, fuzzy
+msgid "Successfully wrote configuration file.\n"
+msgstr "%s എന്ന രചന സംരക്ഷിക്കാന്‌ കഴിയുന്നില്ല."
+
+#: utils/bonobo-activation-sysconf.c:80
+#, fuzzy, c-format
+msgid ""
+"configuration file is:\n"
+"    %s\n"
+msgstr "വിന്യാസ രചനകള്"
+
+#: utils/bonobo-activation-sysconf.c:118
+#, fuzzy, c-format
+msgid "%s already in configuration file\n"
+msgstr "വിന്യാസ രചനകള്"
+
+#: utils/bonobo-activation-sysconf.c:138
+#, fuzzy
+msgid "there is not a properly structured configuration file\n"
+msgstr "വിന്യാസ രചനകള്"
+
+#: utils/bonobo-activation-sysconf.c:201
+#, fuzzy
+msgid "Bonobo-activation configuration file contains:\n"
+msgstr "%s എന്ന രചന സംരക്ഷിക്കാന്‌ കഴിയുന്നില്ല."
+
+#: utils/bonobo-activation-sysconf.c:233
+#, fuzzy
+msgid "Directory to remove from configuration file"
+msgstr "ഛായാചിത്രസഞ്ചരണ രചനയിലേക്കുള്ള വഴി"
+
+#: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
+#, fuzzy
+msgid "directory path"
+msgstr "കൂട്"
+
+#: utils/bonobo-activation-sysconf.c:236
+#, fuzzy
+msgid "Directory to add to configuration file"
+msgstr "ഛായാചിത്രസഞ്ചരണ രചനയിലേക്കുള്ള വഴി"
+
+#: utils/bonobo-activation-sysconf.c:239
+#, fuzzy
+msgid "Display directories in configuration file"
+msgstr "ഛായാചിത്രസഞ്ചരണ രചനയിലേക്കുള്ള വഴി"
+
+#: utils/bonobo-activation-sysconf.c:242
+#, fuzzy
+msgid "Display path to configuration file"
+msgstr "ഛായാചിത്രസഞ്ചരണ രചനയിലേക്കുള്ള വഴി"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mn\n"
-"POT-Creation-Date: 2003-01-08 06:04+0100\n"
+"POT-Creation-Date: 2003-04-07 20:13+0200\n"
 "PO-Revision-Date: 2003-01-16 21:05+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: mongolian <mn@li.org>\n"
@@ -14,6 +14,178 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.1\n"
+
+#: activation-server/activation-context-corba.c:549
+msgid "Couldn't find which child the server was listed in"
+msgstr "Ямар хүү (процесс)сервер дотор жигсаагдсан мэдээлэл алга"
+
+#: activation-server/activation-context-corba.c:844
+msgid "Not a valid Activation ID"
+msgstr "Хүчингүй идэвхижүүлэх дугаар (ID)"
+
+#: activation-server/activation-server-main.c:66
+msgid "Directory to read .server files from"
+msgstr "Сервер файлууд уншигдах ёстой лавлах"
+
+#: activation-server/activation-server-main.c:66
+msgid "DIRECTORY"
+msgstr "ЛАВЛАХ"
+
+#: activation-server/activation-server-main.c:69
+msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
+msgstr "ActivationContext -р гүйцэтгэх (Стандарт нь объект лавлах)"
+
+#: activation-server/activation-server-main.c:73
+msgid "File descriptor to write IOR to"
+msgstr "IOR бичигдэх файлын тодорхойлогч"
+
+#: activation-server/activation-server-main.c:73
+#: bonobo-activation/bonobo-activation-init.c:255
+msgid "FD"
+msgstr "FD"
+
+#: activation-server/activation-server-main.c:81
+msgid "Query expression to evaluate"
+msgstr "Үнэлэгдэх ёстой илэрхийлэл"
+
+#: activation-server/activation-server-main.c:81
+msgid "EXPRESSION"
+msgstr "Илэрхийлэл"
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
+msgid "CORBA CosNaming service."
+msgstr "CORBA-CosNaming-Үйлчилгээ."
+
+# CHECK
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
+msgid "Name service"
+msgstr "Нэрний үйлчилгээ"
+
+#: activation-server/object-directory-activate.c:185
+msgid "We don't handle activating shlib objects in a remote process yet"
+msgstr "Бид алсын процесс доторхи shlib-Объект идэвхижүүлэхийг авч үзэхгүй"
+
+#: activation-server/object-directory-config-file.c:47
+#, c-format
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"Bonobo-Activation тохируулгын файл амжилттай уншигдсангүй. Та түүнийг "
+"хүчинтэй эсэхийг шалгана уу : %s"
+
+#.
+#. * If this exception blows ( which it will only do with a multi-object )
+#. * factory, you need to ensure you register the object you were activated
+#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
+#. * with bonobo_activation_active_server_register - _after_ any other
+#. * servers are registered.
+#.
+#: activation-server/object-directory-corba.c:886
+#, c-format
+msgid "Race condition activating server '%s'"
+msgstr "»%s« серверийг идэвхижүүлэх »Race condition« "
+
+#: activation-server/object-directory-load.c:94
+msgid "a NULL iid is not valid"
+msgstr "NULL iid хүчингүй байна"
+
+#: activation-server/object-directory-load.c:98
+#, c-format
+msgid "iid %s has a NULL type"
+msgstr "IID %s NULL төрөлтэй байна"
+
+#: activation-server/object-directory-load.c:102
+#, c-format
+msgid "iid %s has a NULL location"
+msgstr "IID %s NULL байрлалтай байна"
+
+#: activation-server/object-directory-load.c:111
+#, c-format
+msgid "invalid character '%c' in iid '%s'"
+msgstr "Хүчингүй »%c« тэмдэгт iid »%s« дотор байна"
+
+#: activation-server/object-directory-load.c:306
+#, c-format
+msgid "Property '%s' has no value"
+msgstr "»%s« аттрибутад утга алга"
+
+#: bonobo-activation/bonobo-activation-fork-server.c:102
+msgid "Child process did not give an error message, unknown failure occurred"
+msgstr "Хүү процесс сонордуулга өгсөнгүй. Тодорхойгүй саатал гарлаа."
+
+#: bonobo-activation/bonobo-activation-fork-server.c:174
+#, c-format
+msgid "Failed to read from child process: %s\n"
+msgstr "Хүү процесс уншигдсангүй: %s\n"
+
+#: bonobo-activation/bonobo-activation-fork-server.c:296
+msgid "Couldn't fork a new process"
+msgstr "Шинэ процессийг салаалж чадсангүй"
+
+#: bonobo-activation/bonobo-activation-fork-server.c:319
+#, c-format
+msgid "Child received signal %u (%s)"
+msgstr "Хүү процесс %u сигналыг хүлээн авлаа (%s)"
+
+#: bonobo-activation/bonobo-activation-fork-server.c:324
+#, c-format
+msgid "Unknown non-exit error (status is %u)"
+msgstr "Тодорхойгүй non-exit Алдаа (Төлөв нь %u)"
+
+#: bonobo-activation/bonobo-activation-fork-server.c:387
+#, c-format
+msgid "bonobo-activation failed to set process group of %s: %s\n"
+msgstr "bonobo-activation %s -н процесс группыг суулгаж чадсангүй: %s\n"
+
+#: bonobo-activation/bonobo-activation-fork-server.c:399
+#, c-format
+msgid "Failed to execute %s: %d (%s)\n"
+msgstr "%s ажилласангүй: %d (%s)\n"
+
+# CHECK
+#: bonobo-activation/bonobo-activation-get-language-list.c:87
+msgid "Too many alias levels for a locale, may indicate a loop"
+msgstr ""
+"Нэгэн байрлалын хувьд хэт олон Aliase өгөгдсөн байна. Энэ цикл хамаарлыг "
+"заадаг."
+
+#: bonobo-activation/bonobo-activation-init.c:255
+msgid "File descriptor to print IOR on"
+msgstr "IOR бичигдэх файлын тодорхойлогч"
+
+#: bonobo-activation/bonobo-activation-init.c:257
+msgid "IID to activate"
+msgstr "IID идэвхижүүлэх"
+
+#: bonobo-activation/bonobo-activation-init.c:259
+msgid "Prevent registering of server with OAF"
+msgstr "OAF тай серверүүдийн бүртгэлээс зайлсхийх"
+
+#: bonobo-activation/bonobo-activation-init.c:344
+msgid "Bonobo activation options"
+msgstr "Bonobo идэвхижүүлэлт сонголт"
+
+#: bonobo-activation/bonobo-activation-shlib.c:101
+#, c-format
+msgid "g_module_open of `%s' failed with `%s'"
+msgstr "`%s'-н »g_module_open« модулыг нээхэд `%s' -тэй алдаа гарлаа"
+
+#: bonobo-activation/bonobo-activation-shlib.c:119
+#: bonobo-activation/bonobo-activation-shlib.c:155
+#, c-format
+msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
+msgstr "Символ Bonobo_Plugin_info »%s« дотроос олдсонгүй"
+
+#: bonobo-activation/bonobo-activation-shlib.c:203
+#, c-format
+msgid "Factory `%s' returned NIL for `%s'"
+msgstr "»%s« үйлдвэр »%s« NIL -г буцаав"
+
+#: bonobo-activation/bonobo-activation-shlib.c:220
+#, c-format
+msgid "Shlib `%s' didn't contain `%s'"
+msgstr "»%s« Shlib »%s« -г агуулаагүй байна"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -165,6 +337,16 @@ msgstr "»%s« задрах эсвэл өргөтгөгдсөнгүй"
 msgid "Failed to activate object"
 msgstr "Objekt konnte nicht aktiviert werden"
 
+#: monikers/bonobo-moniker-oaf.c:53
+#, c-format
+msgid "Exception activating '%s'"
+msgstr "Онцгой алдаа идэвхижилээ »%s«"
+
+#: monikers/bonobo-moniker-oaf.c:62
+#, c-format
+msgid "Failed to activate '%s'"
+msgstr "»%s« идэвхижсэнгүй"
+
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP-Moniker"
@@ -199,16 +381,6 @@ msgstr "Ерөнхий элемент moniker"
 msgid "stream MonikerExtender"
 msgstr "урсгал MonikerExtender"
 
-#: monikers/bonobo-moniker-oaf.c:51
-#, c-format
-msgid "Exception activating '%s'"
-msgstr "Онцгой алдаа идэвхижилээ »%s«"
-
-#: monikers/bonobo-moniker-oaf.c:60
-#, c-format
-msgid "Failed to activate '%s'"
-msgstr "»%s« идэвхижсэнгүй"
-
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
 msgstr "Bonobo Echo серверын үйлдвэр"
@@ -238,3 +410,57 @@ msgstr "Жишээ echo бүрэлдхүүний объект(instance) үүсг
 msgid "An exception occured '%s'"
 msgstr "Онцгой алдаа гарлаа »%s«"
 
+#: utils/bonobo-activation-sysconf.c:62
+msgid "Could not save configuration file.\n"
+msgstr "Тохируулгын файл хадгалагдсангүй.\n"
+
+#: utils/bonobo-activation-sysconf.c:63
+#, c-format
+msgid "Please, make sure you have permissions to write to '%s'.\n"
+msgstr "»%s« рүү бичихээр хандах эрх байгаа эсэхээ нягтлана уу.\n"
+
+#: utils/bonobo-activation-sysconf.c:66
+msgid "Successfully wrote configuration file.\n"
+msgstr "Тохируулгын файл амжилттай бичигдлээ.\n"
+
+#: utils/bonobo-activation-sysconf.c:80
+#, c-format
+msgid ""
+"configuration file is:\n"
+"    %s\n"
+msgstr ""
+"Тохируулгын файл нь:\n"
+"    %s\n"
+
+#: utils/bonobo-activation-sysconf.c:118
+#, c-format
+msgid "%s already in configuration file\n"
+msgstr "%s хэдийнэ тохируулгын файлд байна\n"
+
+#: utils/bonobo-activation-sysconf.c:138
+msgid "there is not a properly structured configuration file\n"
+msgstr "Зөв бүтэцтэй тохируулгын файл алга\n"
+
+#: utils/bonobo-activation-sysconf.c:201
+msgid "Bonobo-activation configuration file contains:\n"
+msgstr "Bonobo-Activation тохируулгын файлын агуулга:\n"
+
+#: utils/bonobo-activation-sysconf.c:233
+msgid "Directory to remove from configuration file"
+msgstr "Тохируулгын файлаас устгах ёстой лавлах"
+
+#: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
+msgid "directory path"
+msgstr "Лавлахын зам"
+
+#: utils/bonobo-activation-sysconf.c:236
+msgid "Directory to add to configuration file"
+msgstr "Тохируулгын файлд нэмэгдэх ёстой лавлах "
+
+#: utils/bonobo-activation-sysconf.c:239
+msgid "Display directories in configuration file"
+msgstr "Тохируулгын файл доторхи лавлахуудыг харуулах"
+
+#: utils/bonobo-activation-sysconf.c:242
+msgid "Display path to configuration file"
+msgstr "Тохируулгын файлын замыг харуулах"

@@ -1,17 +1,233 @@
 # Copyright (C) 2001-2002 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2001-2002.
 # Dmitry Mastrukov <dmitry@taurussoft.org>, 2002
+# Sun G11n <gnome_int_l10n@ireland.sun.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-01-20 16:07+0000\n"
+"POT-Creation-Date: 2003-04-07 20:13+0200\n"
 "PO-Revision-Date: 2003-01-09 11:00+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+# server/activation-context-corba.c:559
+#: activation-server/activation-context-corba.c:549
+msgid "Couldn't find which child the server was listed in"
+msgstr "Не удалось найти потомок со ссылкой на сервер"
+
+#: activation-server/activation-context-corba.c:844
+msgid "Not a valid Activation ID"
+msgstr "Идентификатор активации (Activation ID) недопустим"
+
+# server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:66
+msgid "Directory to read .server files from"
+msgstr "Каталог, из которого будут считываться файлы типа .server"
+
+# server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:66
+msgid "DIRECTORY"
+msgstr "КАТАЛОГ"
+
+# server/activation-server-main.c:71
+#: activation-server/activation-server-main.c:69
+msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
+msgstr ""
+"Обрабатывать как ActivationContext (по умолчанию только как ObjectDirectory)"
+
+# server/activation-server-main.c:76
+#: activation-server/activation-server-main.c:73
+msgid "File descriptor to write IOR to"
+msgstr "Дескриптор файла для записи IOR"
+
+# bonobo-activation/bonobo-activation-init.c:224
+# server/activation-server-main.c:76
+#: activation-server/activation-server-main.c:73
+#: bonobo-activation/bonobo-activation-init.c:255
+msgid "FD"
+msgstr "FD"
+
+# server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:81
+msgid "Query expression to evaluate"
+msgstr "Выражение-запрос для разбора"
+
+# server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:81
+msgid "EXPRESSION"
+msgstr "ВЫРАЖЕНИЕ"
+
+# server/Bonobo_CosNaming_NamingContext.server.in.h:1
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
+msgid "CORBA CosNaming service."
+msgstr "Сервис CosNaming среды CORBA."
+
+# server/Bonobo_CosNaming_NamingContext.server.in.h:2
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
+msgid "Name service"
+msgstr "Сервис имён"
+
+# server/object-directory-activate.c:176
+#: activation-server/object-directory-activate.c:185
+msgid "We don't handle activating shlib objects in a remote process yet"
+msgstr ""
+"Активация объектов разделяемых библиотек в удаленных процессах ещё не "
+"поддерживается"
+
+# server/object-directory-config-file.c:47
+#: activation-server/object-directory-config-file.c:47
+#, c-format
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"Не удалось прочитать файл конфигурации Bonobo Activation. Проверьте, что "
+"файл \"%s\" указан правильно"
+
+# server/object-directory-corba.c:615
+#.
+#. * If this exception blows ( which it will only do with a multi-object )
+#. * factory, you need to ensure you register the object you were activated
+#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
+#. * with bonobo_activation_active_server_register - _after_ any other
+#. * servers are registered.
+#.
+#: activation-server/object-directory-corba.c:886
+#, c-format
+msgid "Race condition activating server '%s'"
+msgstr ""
+"Произошла попытка одновременной активации сервера \"%s\" несколькими "
+"процессами"
+
+# server/object-directory-load.c:180
+#: activation-server/object-directory-load.c:94
+msgid "a NULL iid is not valid"
+msgstr "IID не может иметь значение NULL"
+
+# server/object-directory-load.c:184
+#: activation-server/object-directory-load.c:98
+#, c-format
+msgid "iid %s has a NULL type"
+msgstr "iid %s равен NULL"
+
+# server/object-directory-load.c:188
+#: activation-server/object-directory-load.c:102
+#, c-format
+msgid "iid %s has a NULL location"
+msgstr "Местоположение iid %s равно NULL"
+
+# server/object-directory-load.c:197
+#: activation-server/object-directory-load.c:111
+#, c-format
+msgid "invalid character '%c' in iid '%s'"
+msgstr "Cимвол \"%c\" в iid \"%s\" недопустим"
+
+# server/object-directory-load.c:127 server/object-directory-load.c:157
+#: activation-server/object-directory-load.c:306
+#, c-format
+msgid "Property '%s' has no value"
+msgstr "Свойству \"%s\" не задано значение"
+
+# bonobo-activation/bonobo-activation-fork-server.c:101
+#: bonobo-activation/bonobo-activation-fork-server.c:102
+msgid "Child process did not give an error message, unknown failure occurred"
+msgstr ""
+"Процесс-потомок не выдал сообщения об ошибке, произошел неопознанный сбой"
+
+# bonobo-activation/bonobo-activation-fork-server.c:170
+#: bonobo-activation/bonobo-activation-fork-server.c:174
+#, c-format
+msgid "Failed to read from child process: %s\n"
+msgstr "Произошёл сбой при чтении из процесса-потомка: %s\n"
+
+# bonobo-activation/bonobo-activation-fork-server.c:280
+#: bonobo-activation/bonobo-activation-fork-server.c:296
+msgid "Couldn't fork a new process"
+msgstr "Не удалось ответвить новый процесс"
+
+# bonobo-activation/bonobo-activation-fork-server.c:301
+#: bonobo-activation/bonobo-activation-fork-server.c:319
+#, c-format
+msgid "Child received signal %u (%s)"
+msgstr "Потомок получил сигнал %u (%s)"
+
+# bonobo-activation/bonobo-activation-fork-server.c:306
+#: bonobo-activation/bonobo-activation-fork-server.c:324
+#, c-format
+msgid "Unknown non-exit error (status is %u)"
+msgstr ""
+"Произошла неопознанная ошибка, не приводящая к завершению работы (состояние: "
+"%u)"
+
+# bonobo-activation/bonobo-activation-fork-server.c:366
+#: bonobo-activation/bonobo-activation-fork-server.c:387
+#, c-format
+msgid "bonobo-activation failed to set process group of %s: %s\n"
+msgstr ""
+"Компоненту \"bonobo-activation\" не удалось установить группу процесса для "
+"\"%s\": %s\n"
+
+# bonobo-activation/bonobo-activation-fork-server.c:378
+#: bonobo-activation/bonobo-activation-fork-server.c:399
+#, c-format
+msgid "Failed to execute %s: %d (%s)\n"
+msgstr "Произошёл сбой при выполнении \"%s\": %d (%s)\n"
+
+#: bonobo-activation/bonobo-activation-get-language-list.c:87
+msgid "Too many alias levels for a locale, may indicate a loop"
+msgstr ""
+"Существует слишком много уровней псевдонимов для локали, это может означать "
+"петлю"
+
+# bonobo-activation/bonobo-activation-init.c:224
+#: bonobo-activation/bonobo-activation-init.c:255
+msgid "File descriptor to print IOR on"
+msgstr "Дескриптор файла для печати IOR"
+
+# bonobo-activation/bonobo-activation-init.c:226
+#: bonobo-activation/bonobo-activation-init.c:257
+msgid "IID to activate"
+msgstr "IID для активации"
+
+# bonobo-activation/bonobo-activation-init.c:228
+#: bonobo-activation/bonobo-activation-init.c:259
+msgid "Prevent registering of server with OAF"
+msgstr "Запретить регистрацию сервера через OAF"
+
+# bonobo-activation/bonobo-activation-init.c:439
+#: bonobo-activation/bonobo-activation-init.c:344
+msgid "Bonobo activation options"
+msgstr "Параметры активации Bonobo"
+
+# bonobo-activation/bonobo-activation-shlib.c:101
+#: bonobo-activation/bonobo-activation-shlib.c:101
+#, c-format
+msgid "g_module_open of `%s' failed with `%s'"
+msgstr "Произошёл сбой в  функции g_module_open для \"%s\" с \"%s\""
+
+# bonobo-activation/bonobo-activation-shlib.c:119
+# bonobo-activation/bonobo-activation-shlib.c:155
+#: bonobo-activation/bonobo-activation-shlib.c:119
+#: bonobo-activation/bonobo-activation-shlib.c:155
+#, c-format
+msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
+msgstr "Невозможно найти символ Bonobo_Plugin_info в \"%s\""
+
+# bonobo-activation/bonobo-activation-shlib.c:203
+#: bonobo-activation/bonobo-activation-shlib.c:203
+#, c-format
+msgid "Factory `%s' returned NIL for `%s'"
+msgstr "Фабрика \"%s\" возвратила для \"%s\" значение NIL"
+
+# bonobo-activation/bonobo-activation-shlib.c:220
+#: bonobo-activation/bonobo-activation-shlib.c:220
+#, c-format
+msgid "Shlib `%s' didn't contain `%s'"
+msgstr "Разделяемая библиотека \"%s\" не содержит \"%s\""
 
 # bonobo/bonobo-exception.c:154
 #: bonobo/bonobo-exception.c:154
@@ -199,6 +415,18 @@ msgstr "Произошёл сбой при разрешении или расш�
 msgid "Failed to activate object"
 msgstr "Произошёл сбой при активации объекта"
 
+# monikers/bonobo-moniker-oaf.c:51
+#: monikers/bonobo-moniker-oaf.c:53
+#, c-format
+msgid "Exception activating '%s'"
+msgstr "Исключение \"%s\" активируется"
+
+# monikers/bonobo-moniker-oaf.c:60
+#: monikers/bonobo-moniker-oaf.c:62
+#, c-format
+msgid "Failed to activate '%s'"
+msgstr "Произошёл сбой при активации \"%s\""
+
 # monikers/Bonobo_Moniker_std.server.in.in.h:1
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -239,18 +467,6 @@ msgstr "общий моникер элемента"
 msgid "stream MonikerExtender"
 msgstr "потоковый MonikerExtender"
 
-# monikers/bonobo-moniker-oaf.c:51
-#: monikers/bonobo-moniker-oaf.c:51
-#, c-format
-msgid "Exception activating '%s'"
-msgstr "Исключение \"%s\" активируется"
-
-# monikers/bonobo-moniker-oaf.c:60
-#: monikers/bonobo-moniker-oaf.c:60
-#, c-format
-msgid "Failed to activate '%s'"
-msgstr "Произошёл сбой при активации \"%s\""
-
 # samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
@@ -286,3 +502,106 @@ msgstr "Не удалось создать экземпляр образца к�
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Возникло исключение \"%s\""
+
+# utils/bonobo-activation-sysconf.c:62
+#: utils/bonobo-activation-sysconf.c:62
+msgid "Could not save configuration file.\n"
+msgstr "Не удалось сохранить файл конфигурации.\n"
+
+# utils/bonobo-activation-sysconf.c:63
+#: utils/bonobo-activation-sysconf.c:63
+#, c-format
+msgid "Please, make sure you have permissions to write to '%s'.\n"
+msgstr "Убедитесь, что у вас есть права на запись в \"%s\".\n"
+
+# utils/bonobo-activation-sysconf.c:66
+#: utils/bonobo-activation-sysconf.c:66
+msgid "Successfully wrote configuration file.\n"
+msgstr "Файл конфигурации успешно записан.\n"
+
+# utils/bonobo-activation-sysconf.c:80
+#: utils/bonobo-activation-sysconf.c:80
+#, c-format
+msgid ""
+"configuration file is:\n"
+"    %s\n"
+msgstr ""
+"файл конфигурации:\n"
+"    %s\n"
+
+# utils/bonobo-activation-sysconf.c:118
+#: utils/bonobo-activation-sysconf.c:118
+#, c-format
+msgid "%s already in configuration file\n"
+msgstr "%s уже содержится в файле конфигурации\n"
+
+# utils/bonobo-activation-sysconf.c:138
+#: utils/bonobo-activation-sysconf.c:138
+msgid "there is not a properly structured configuration file\n"
+msgstr "файл конфигурации имеет неправильную структуру\n"
+
+# utils/bonobo-activation-sysconf.c:201
+#: utils/bonobo-activation-sysconf.c:201
+msgid "Bonobo-activation configuration file contains:\n"
+msgstr "Файл конфигурации сервиса Bonobo-activation содержит:\n"
+
+# utils/bonobo-activation-sysconf.c:233
+#: utils/bonobo-activation-sysconf.c:233
+msgid "Directory to remove from configuration file"
+msgstr "Каталог, который нужно удалить из файла конфигурации"
+
+# utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
+#: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
+msgid "directory path"
+msgstr "путь к каталогу"
+
+# utils/bonobo-activation-sysconf.c:236
+#: utils/bonobo-activation-sysconf.c:236
+msgid "Directory to add to configuration file"
+msgstr "Каталог, который нужно добавить в файл конфигурации"
+
+# utils/bonobo-activation-sysconf.c:239
+#: utils/bonobo-activation-sysconf.c:239
+msgid "Display directories in configuration file"
+msgstr "Показать каталоги из файла конфигурации"
+
+# utils/bonobo-activation-sysconf.c:242
+#: utils/bonobo-activation-sysconf.c:242
+msgid "Display path to configuration file"
+msgstr "Показать путь к файлу конфигурации"
+
+# bonobo-activation/bonobo-activation-async-callback.c:119
+#~ msgid "No server corresponding to your query"
+#~ msgstr "Ни один сервер не соответствует запросу"
+
+# server/activation-context-corba.c:730
+#~ msgid "Query failed: "
+#~ msgstr "Произошёл сбой при запросе:"
+
+# server/activation-context-corba.c:758
+#~ msgid "Activation failed: "
+#~ msgstr "Произошёл сбой при активации:"
+
+# server/activation-context-corba.c:1018
+#~ msgid "Could not parse AID"
+#~ msgstr "Не удалось выполнить разбор AID"
+
+# server/activation-context-corba.c:1028
+#~ msgid "Could not parse context: "
+#~ msgstr "Не удалось выполнить разбор контекста:"
+
+# server/activation-context-corba.c:1052
+#~ msgid "Could not activate server: "
+#~ msgstr "Не удалось активировать сервер:"
+
+# server/activation-server-main.c:68
+#~ msgid "Domain of ObjectDirectory"
+#~ msgstr "Домен объекта ObjectDirectory"
+
+# server/activation-server-main.c:68
+#~ msgid "DOMAIN"
+#~ msgstr "ДОМЕН"
+
+# bonobo-activation/bonobo-activation-init.c:222
+#~ msgid "Object directory to use when registering servers"
+#~ msgstr "Каталог объектов, используемый при регистрации серверов"
