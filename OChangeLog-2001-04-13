@@ -1,3 +1,9 @@
+1999-10-10  Michael Meeks  <mmeeks@gnu.org>
+
+	* samples/paint-component-simple.c (main): Make factory global, add
+	running_object count. (embeddable_factory): increment count.
+	(embeddable_destroy_cb): Add quit on 0 objects.
+
 1999-10-06  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-generic-factory.c: New file.  Now we use a generic
