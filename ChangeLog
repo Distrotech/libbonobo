@@ -1,3 +1,23 @@
+2003-04-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/api/libbonobo.args, doc/api/libbonobo.prerequisistes,
+	doc/api/libbonobo.interfaces: Removed (purely-generated files).
+	
+	* doc/api/libbonobo-sections.txt: Added bonobo_poa_get_threaded
+	and BonoboThreadHint.
+
+	* doc/api/tmpl/bonobo-object.sgml: Added an example of using the
+	"poa" proterty.
+
+	* doc/api/bonobo-api.sgml, doc/api/bonobo.hierarchy,
+	* doc/api/bonobo.signals, doc/api/bonobo.args,
+	* doc/api/bonobo-sections-bad.txt, doc/api/bonobo.types,
+	* doc/api/bonobo-decl.txt, doc/api/bonobo-sections.txt: Removed
+	these unused files (the real files are named libbonobo*)
+
+	* bonobo/bonobo-shutdown.h: Removed one '*' to prevent gtk-doc
+	from trying to parse this as a documentation header.
+
 2003-04-22  Michael Meeks  <michael@ximian.com>
 
 	* tests/test-activation/Makefile.am: do most
