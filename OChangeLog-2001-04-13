@@ -1,3 +1,8 @@
+2001-02-09  Cody Russell  <bratsche@gnome.org>
+	* bonobo/bonobo-ui-engine-config.c: Remove the Cancel button.
+	Since this dialog makes changes in real time, this button serves
+	no purpose.
+
 2001-02-09  Michael Meeks  <michael@ximian.com>
 
 	* Version 0.36
