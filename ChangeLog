@@ -1,3 +1,8 @@
+2003-04-28  Michael Meeks  <michael@ximian.com>
+
+	* doc/activation-api/tmpl/registration.sgml:
+	fix Bonobo_Plugin_info.
+
 2003-04-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* doc/api/Makefile.am (IGNORE_HFILES): Ignore Bonobo.h and

@@ -86,7 +86,7 @@ to Bonobo Activation once it is created.
 <para>
 Components which want to be activated as 
 shared libraries must export an BonoboActivationPlugin
-structure of name <structname>BonoboActivation_Plugin_info</structname>.
+structure of name <structname>Bonobo_Plugin_info</structname>.
 An exmaple of how to use it folows:
 <programlisting>
 static CORBA_Object
@@ -119,7 +119,7 @@ static const BonoboActivationPluginObject hi_plugin_list[] = {
   	}
 };
 
-const BonoboActivationPlugin BonoboActivation_Plugin_info = {
+const BonoboActivationPlugin Bonobo_Plugin_info = {
         hi_plugin_list,
         "Hi example"
 };
