@@ -186,7 +186,7 @@ gnome_property_bag_get_servant_locator_vepv (void)
 static gboolean
 gnome_property_bag_create_poa (GnomePropertyBag *pb)
 {
-	static PortableServer_POA	   property_poa = NULL;
+        PortableServer_POA                 property_poa = NULL;
 	CORBA_PolicyList		  *policies;
 	GnomePropertyBagServantManager    *sm;
 	CORBA_Environment		   ev;
@@ -223,99 +223,95 @@ gnome_property_bag_create_poa (GnomePropertyBag *pb)
 	 * not created until someone actually invokes one of its
 	 * methods.
 	 */
-
-	if (property_poa)
-		pb->priv->poa = property_poa;
-	else {
-		/*
-		 * Create a list of CORBA policies which we will apply to our
-		 * new POA.
-		 */
-		policies = g_new0 (CORBA_PolicyList, 1);
-		policies->_maximum = 2;
-		policies->_length  = 2;
-		policies->_buffer = g_new0 (CORBA_Policy,
-					    policies->_length);
-		policies->_release = CORBA_FALSE;
-
-		/*
-		 * Create a new CORBA Policy object which specifies that we
-		 * will be using a ServantManager, thank you very much.
-		 */
-		policies->_buffer [0] = (CORBA_Policy)
-			PortableServer_POA_create_request_processing_policy (
-				bonobo_poa (),			     /* This argument is ignored. */
-				PortableServer_USE_SERVANT_MANAGER,
-				&ev);
-
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("Could not create request processing policy for GnomeProperty POA");
-			g_free (policies->_buffer);
-			g_free (policies);
-			CORBA_exception_free (&ev);
-			return FALSE;
-		}
-
-		/*
-		 * Now, to add a touch more complexity to the whole
-		 * system, we go further than just creating Property
-		 * servants on-demand; we make them completely transient.
-		 * What this means is that, when a Property servant has
-		 * finished processing a request on the property object,
-		 * it disappears.  So we only use resources on property
-		 * servants while a property method invocation is being
-		 * processed.  (Now I'm just showing off)
-		 *
-		 * This is actually important because, with Controls,
-		 * properties are used to manipulate many highly-variant
-		 * run-time attributes (not just crap like font size).  The
-		 * Microsoft ActiveX web controls, for example, use properties
-		 * to allow the user (the parent application) to get/set the
-		 * current URL being displayed.
-		 *
-		 * Accordingly, the following CORBA Policy specifies that
-		 * servants should not be retained.
-		 */
-		policies->_buffer [1] = (CORBA_Policy)
-			PortableServer_POA_create_servant_retention_policy (
-				bonobo_poa (),
-				PortableServer_NON_RETAIN,
-				&ev);
-
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("Could not create servant retention policy for GnomeProperty POA");
-			g_free (policies->_buffer);
-			g_free (policies);
-			CORBA_exception_free (&ev);
-			return FALSE;
-		}
-
-		/*
-		 * Create the GnomeProperty POA as a child of the root
-		 * Bonobo POA.
-		 */
-		poa_name = g_strdup_printf ("GnomePropertyBag %p", pb);
-		pb->priv->poa =
-			PortableServer_POA_create_POA (bonobo_poa (),
-						       poa_name,
-						       bonobo_poa_manager (),
-						       policies,
-						       &ev);
-		g_free (poa_name);
-
-
+	
+	/*
+	 * Create a list of CORBA policies which we will apply to our
+	 * new POA.
+	 */
+	policies = g_new0 (CORBA_PolicyList, 1);
+	policies->_maximum = 2;
+	policies->_length  = 2;
+	policies->_buffer = g_new0 (CORBA_Policy,
+				    policies->_length);
+	policies->_release = CORBA_FALSE;
+	
+	/*
+	 * Create a new CORBA Policy object which specifies that we
+	 * will be using a ServantManager, thank you very much.
+	 */
+	policies->_buffer [0] = (CORBA_Policy)
+		PortableServer_POA_create_request_processing_policy (
+			bonobo_poa (),			     /* This argument is ignored. */
+			PortableServer_USE_SERVANT_MANAGER,
+			&ev);
+	
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("Could not create request processing policy for GnomeProperty POA");
 		g_free (policies->_buffer);
 		g_free (policies);
-
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("GnomePropertyBag: Could not create GnomePropertyBag POA");
-			CORBA_exception_free (&ev);
-			return FALSE;
-		}
-
-		property_poa = pb->priv->poa;
+		CORBA_exception_free (&ev);
+		return FALSE;
 	}
-
+	
+	/*
+	 * Now, to add a touch more complexity to the whole
+	 * system, we go further than just creating Property
+	 * servants on-demand; we make them completely transient.
+	 * What this means is that, when a Property servant has
+	 * finished processing a request on the property object,
+	 * it disappears.  So we only use resources on property
+	 * servants while a property method invocation is being
+	 * processed.  (Now I'm just showing off)
+	 *
+	 * This is actually important because, with Controls,
+	 * properties are used to manipulate many highly-variant
+	 * run-time attributes (not just crap like font size).  The
+	 * Microsoft ActiveX web controls, for example, use properties
+	 * to allow the user (the parent application) to get/set the
+	 * current URL being displayed.
+	 *
+	 * Accordingly, the following CORBA Policy specifies that
+	 * servants should not be retained.
+	 */
+	policies->_buffer [1] = (CORBA_Policy)
+		PortableServer_POA_create_servant_retention_policy (
+			bonobo_poa (),
+			PortableServer_NON_RETAIN,
+			&ev);
+	
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("Could not create servant retention policy for GnomeProperty POA");
+		g_free (policies->_buffer);
+		g_free (policies);
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+	
+	/*
+	 * Create the GnomeProperty POA as a child of the root
+	 * Bonobo POA.
+	 */
+	poa_name = g_strdup_printf ("GnomePropertyBag %p", pb);
+	pb->priv->poa =
+		PortableServer_POA_create_POA (bonobo_poa (),
+					       poa_name,
+					       bonobo_poa_manager (),
+					       policies,
+					       &ev);
+	g_free (poa_name);
+	
+	
+	g_free (policies->_buffer);
+	g_free (policies);
+	
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("GnomePropertyBag: Could not create GnomePropertyBag POA");
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+	
+	property_poa = pb->priv->poa;
+	
 	/*
 	 * Create our ServantManager.
 	 */

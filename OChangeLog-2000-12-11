@@ -1,3 +1,9 @@
+2000-01-12  Dave Camp  <campd@oit.edu>
+
+	* bonobo/gnome-property-bag.c (gnome_property_bag_create_poa): Create
+	a unique POA for each PropertyBag object rather than trying to share
+	a single POA between all objects.
+
 2000-01-07  Federico Mena Quintero  <federico@helixcode.com>
 
 	* bonobo/gnome-control.c (gnome_control_destroy): Call the destroy
