@@ -9,18 +9,19 @@ following people [ subject to any pending complaints ]:
 
 subdomains:
 	Achtung/		achtung		mkestner@ameritech.net
+	Config/			GConf		hp@redhat.com
 	ControlCenter/		control-center	?
 	Crescendo/		creschendo	will@lashell.net
-	Database/		libgda		rodrigo@linuxave.net
 	DB/			Gnome-db	rodrigo@linuxave.net
-	Dia/			Dia		james@daa.com.au
+	Database/		libgda		rodrigo@linuxave.net
 	Development/		gnome-debug,	jpr@helixcode.com, dave@helixcode.com
-	Encompass/		Encompass	dobey@free.fr
+	Dia/			Dia		james@daa.com.au
 	EOG/			EOG		federico@helixcode.com
+	Encompass/		Encompass	dobey@free.fr
 	Evolution/		Evolution	ettore@helixcode.com
-	Config/			GConf		hp@redhat.com
 	GDA/			libgda		rodrigo@gnome-db.org
 	GGV/			ggv		jaka@gnu.org
+	Galeon/			galeon		marco@it.gnome.org
 	Gnumeric/		Gnumeric	jgoldberg@home.com
 	Grapevine/		grapevine	jirka@5z.com
 	GtkHTML/		GtkHTML		rodo@helixcode.com
@@ -34,9 +35,9 @@ subdomains:
 	SodiPodi/		sodipodi	lauris@helixcode.com
 	Spell/			gtkhtml		rodo@helixcode.com
 	Terminal/		gnome-core	jirka@5z.com, jacob@helixcode.com	
-	Vertigo/		Panel 2.0	jirka@5z.com, jacob@helixcode.com	
 	VCS/			gnome-vcs	snaggen@acc.umu.se
 	VFS/			gnome-vfs	pavel@eazel.com
+	Vertigo/		Panel 2.0	jirka@5z.com, jacob@helixcode.com	
 
 
 standard interfaces:
