@@ -1,5 +1,8 @@
 Wed Nov 24 15:49:45 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
+	* bonobo/gnome-client-site.c (gnome_client_site_new_view): don't
+	call gtk_widget_show for the wrapper.
+
 	* bonobo/gnome-view.h: set GnomeViewClass parent class to
 	GnomeControlClass.
 
