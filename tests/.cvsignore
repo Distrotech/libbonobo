@@ -1,0 +1,15 @@
+.deps
+.libs
+Makefile
+Makefile.in
+selector_test
+test-any
+test-focus
+test-moniker
+test-properties-client
+test-properties-server
+test-storage
+test-moniker
+test-ui
+test-toolbar
+test-event-source
