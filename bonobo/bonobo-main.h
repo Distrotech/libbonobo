@@ -40,7 +40,7 @@ PortableServer_POA          bonobo_poa_get_threaded      (ORBitThreadHint       
 							  ...);
 PortableServer_POA          bonobo_poa_get_threadedv     (ORBitThreadHint         hint,
 							  va_list                 args);
-PortableServer_POA          bonobo_poa_new_from          (PortableServer_POA      template,
+PortableServer_POA          bonobo_poa_new_from          (PortableServer_POA      tmpl,
 							  const char             *name,
 							  const CORBA_PolicyList *opt_policies,
 							  CORBA_Environment      *opt_ev);

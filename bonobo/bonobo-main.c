@@ -413,7 +413,7 @@ bonobo_poa_get_threaded (ORBitThreadHint hint, ...)
 }
 
 PortableServer_POA
-bonobo_poa_new_from (PortableServer_POA      template,
+bonobo_poa_new_from (PortableServer_POA      tmpl,
 		     const char             *name,
 		     const CORBA_PolicyList *opt_policies,
 		     CORBA_Environment      *opt_ev)
@@ -427,7 +427,7 @@ bonobo_poa_new_from (PortableServer_POA      template,
 		ev = opt_ev;
 
 	poa = ORBit_POA_new_from (bonobo_orb(),
-				  template, name, opt_policies, ev);
+				  tmpl, name, opt_policies, ev);
 
 	if (!opt_ev)
 		CORBA_exception_free (real_ev);
