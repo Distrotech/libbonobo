@@ -1,5 +1,16 @@
 2000-11-29  Michael Meeks  <michael@helixcode.com>
 
+	* storage-modules/bonobo-storage-vfs.c (vfs_list_contents): impl.
+	(bonobo_storage_vfs_open): add exceptions, clean cruft.
+	(vfs_erase): impl.
+
+	* storage-modules/bonobo-stream-vfs.c (vfs_get_info): impl.
+	(vfs_set_info): update comment; wierd api.
+	(bonobo_stream_vfs_storageinfo_from_file_info): split out and
+	publicize.
+
+2000-11-29  Michael Meeks  <michael@helixcode.com>
+
 	* configure.in: Un-comment the gnome-vfs check.
 
 	* storage-modules/bonobo-storage-vfs.c (fs_commit): impl.
