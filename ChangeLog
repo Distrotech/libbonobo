@@ -1,3 +1,16 @@
+2003-05-11  Martin Kretzschmar  <m_kretzschmar@gmx.net>
+
+	* doc/activation-api/configuring.sgml: update for GNOME2
+
+	* doc/activation-api/bonobo-activation.sgml: changed license blurb
+	to say that there are no Invariant Sections, with permission of the
+	original author, Mathieu Lacage, see 
+	http://mail.gnome.org/archives/gnome-components-list/2003-May/msg00015.html
+
+	* doc/activation-api/bonobo-activation-docs.sgml: ditto
+
+	* bonobo-activation-config.xml: made examples GNOME2-ish 
+
 2003-05-10  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
                                                                                 
         * bonobo-activation-config.xml: Added an example configuration as
