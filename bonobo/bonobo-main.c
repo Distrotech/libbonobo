@@ -3,8 +3,9 @@
  * Bonobo Main
  *
  * Author:
- *    Miguel de Icaza (miguel@gnu.org)
- *    Nat Friedman (nat@nat.org)
+ *    Miguel de Icaza  (miguel@gnu.org)
+ *    Nat Friedman     (nat@nat.org)
+ *    Peter Wainwright (prw@wainpr.demo.co.uk)
  *
  * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
@@ -16,7 +17,7 @@
 
 CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;
-PortableServer_POAManager __bonobo_poa_manager;
+PortableServer_POAManager __bonobo_poa_manager = NULL;
 
 static int
 bonobo_x_error_handler (Display *display, XErrorEvent *error)
@@ -32,9 +33,11 @@ bonobo_x_error_handler (Display *display, XErrorEvent *error)
 	 * X-server-induced errors.  Keeping a list of windows for
 	 * which we will ignore BadDrawables would be a good idea.
 	 */
+#if 0
 	if (error->error_code == BadDrawable ||
 	    error->error_code == BadWindow)
 		return 0;
+#endif
 
 	/*
 	 * If it wasn't a BadDrawable error, we abort.
@@ -122,12 +125,45 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 		}
 	}
 	
-	PortableServer_POAManager_activate (manager, &ev);
+	/* If we do this, embedded components may try to process incoming
+	   requests before they are properly initialized - PRW */
+	/* PortableServer_POAManager_activate (manager, &ev); */
 	__bonobo_orb = orb;
 	__bonobo_poa = poa;
 	__bonobo_poa_manager = manager;
 
+	CORBA_exception_free (&ev);
 	return TRUE;
 }
 
+/**
+ * bonobo_activate:
+ *
+ * Activates the Bonobo POA manager registered by bonobo_init
+ * This should be called at the end of application initialization.
+ * 
+ * Returns %TRUE on success, or %FALSE on failure.
+ */
+gboolean
+bonobo_activate (void)
+{
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+
+	if (!__bonobo_poa_manager) {
+		g_warning ("Tried to activate Bonobo before initializing");
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+	PortableServer_POAManager_activate (__bonobo_poa_manager, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION){
+		g_warning ("Failed to activate the Bonobo POA manager");
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}
+
+	CORBA_exception_free (&ev);
+	return TRUE;
+}
 

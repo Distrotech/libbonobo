@@ -8,8 +8,9 @@
 #include <bonobo/bonobo.h>
 
 gboolean   bonobo_init           (CORBA_ORB orb,
-			     PortableServer_POA poa,
-			     PortableServer_POAManager manager);
+				  PortableServer_POA poa,
+				  PortableServer_POAManager manager);
+gboolean   bonobo_activate	 (void);
 void	   bonobo_setup_x_error_handler (void);
 
 

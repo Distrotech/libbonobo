@@ -1,3 +1,31 @@
+1999-08-22  Nat Friedman  <nat@gnome-support.com>
+
+	* samples/sample-container.c (component_load_cancel_cb): Callback
+ 	for the file selector 'cancel' button.  Kills the file selector.
+	(component_load_ps_ok_cb): Callback for the PersistStream file
+ 	selector 'ok' button.  Tries to load a file into a component using
+ 	the GNOME::PersistStream interface.
+	(component_load_ps_cb): Create a file selector and connect the
+ 	above callback functions to the Ok/Cancel buttons.
+
+	* bonobo/gnome-ui-handler.c (gnome_ui_handler_do_popup_menu): Hook
+ 	up to the "deactivate" signal on the popup menu so that we pop a
+ 	frame off the gtk main stack when the popup is destroyed.
+	(menu_toplevel_popup_deactivated): Callback to handle popup
+ 	disappearance.
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_popup_verbs): Use
+ 	gnome_object_unref to destroy the popup menu.
+
+	* bonobo/gnome-view.c (gnome_view_destroy): Don't g_free the keys
+ 	when we destroy the verb closures.
+
+1999-08-22  Peter Wainwright  <prw@wainpr.demon.co.uk>
+
+	* bonobo/gnome-main.c (bonobo_activate): New function to perform
+ 	the actual POA manager activation.
+	(bonobo_init): Reomved POA manager activation from here.
+	
 1999-08-19  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-view.c (impl_GNOME_View_set_zoom_factor):
