@@ -79,6 +79,15 @@ impl_Bonobo_ActivationClient_resetCache (PortableServer_Servant servant,
         reset_caches ();
 }
 
+static CORBA_long
+impl_Bonobo_ActivationClient_getVersion (PortableServer_Servant  servant,
+                                          CORBA_Environment      *ev)
+{
+        return (BONOBO_ACTIVATION_MAJOR_VERSION*10000 + 
+                BONOBO_ACTIVATION_MINOR_VERSION*100 +
+                BONOBO_ACTIVATION_MICRO_VERSION);
+}
+
 static PortableServer_ServantBase__epv impl_Bonobo_ActivationClient_base_epv = {
         NULL, /* private data */
         impl_Bonobo_ActivationClient__finalize,
@@ -86,7 +95,8 @@ static PortableServer_ServantBase__epv impl_Bonobo_ActivationClient_base_epv = {
 };
 static POA_Bonobo_ActivationClient__epv impl_Bonobo_ActivationClient_epv = {
         NULL, /* private */
-        &impl_Bonobo_ActivationClient_resetCache
+        &impl_Bonobo_ActivationClient_resetCache,
+        &impl_Bonobo_ActivationClient_getVersion
 };
 
 static POA_Bonobo_Unknown__epv impl_Bonobo_Unknown_epv = {

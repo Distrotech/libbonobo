@@ -49,6 +49,7 @@ module Bonobo {
 module Bonobo {
         interface ActivationClient : Bonobo::Unknown {
                 oneway void resetCache ();
+                long getVersion ();
         };
 
         typedef sequence<ObjectDirectory> ObjectDirectoryList;
@@ -84,6 +85,8 @@ module Bonobo {
                                 Bonobo::Activation::IncompleteContext,
                                 Bonobo::GeneralError)
                         context ("username", "hostname");
+
+                long getVersion ();
         };
 };
 

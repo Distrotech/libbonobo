@@ -1,3 +1,17 @@
+2003-12-01  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo-activation/bonobo-activation-client.c
+	(impl_Bonobo_ActivationClient_getVersion):
+	implement Bonobo::ActivationClient::getVersion().
+
+	* activation-server/activation-context-corba.c
+	(impl_Bonobo_ActivationContext_getVersion)
+	(activation_context_class_init):
+	implement Bonobo::ActivationContext::getVersion().
+	
+	* idl/Bonobo_ActivationContext.idl: Added getVersion() method to
+	both ActivationClient and ActivationContext.
+
 2003-11-24  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-application.c

@@ -825,6 +825,16 @@ impl_Bonobo_ActivationContext_activateFromAid (PortableServer_Servant  servant,
         return retval;
 }
 
+
+static CORBA_long
+impl_Bonobo_ActivationContext_getVersion (PortableServer_Servant  servant,
+                                          CORBA_Environment      *ev)
+{
+        return (BONOBO_ACTIVATION_MAJOR_VERSION*10000 + 
+                BONOBO_ACTIVATION_MINOR_VERSION*100 +
+                BONOBO_ACTIVATION_MICRO_VERSION);
+}
+
 static ActivationContext *main_ac = NULL;
 
 void
@@ -889,6 +899,7 @@ activation_context_class_init (ActivationContextClass *klass)
 	epv->query             = impl_Bonobo_ActivationContext_query;
 	epv->activateMatching  = impl_Bonobo_ActivationContext_activateMatching;
 	epv->activateFromAid   = impl_Bonobo_ActivationContext_activateFromAid;
+	epv->getVersion        = impl_Bonobo_ActivationContext_getVersion;
 }
 
 static void
