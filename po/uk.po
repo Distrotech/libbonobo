@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-12-11 17:49+0000\n"
+"POT-Creation-Date: 2001-12-21 12:34+0200\n"
 "PO-Revision-Date: 2001-12-11 17:29+0200\n"
 "Last-Translator: Yuriy Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -103,23 +103,23 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
-msgstr ""
+msgstr "нев╕рний тип даних"
 
 #: bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr ""
+msgstr "потоку не знайдено"
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
-msgstr ""
+msgstr "властивост╕ не знайдено"
 
 #: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr ""
+msgstr "властив╕сть ма╓ нев╕рний тип"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr ""
+msgstr "властив╕сть лише для зчитування"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
@@ -127,19 +127,19 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr ""
+msgstr "Неможливо знати ╕нтерфейс мон╕кера"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr ""
+msgstr "Вийшов час активац╕╖ мон╕кера"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr ""
+msgstr "Синтаксична помилка в мон╕кер╕"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr ""
+msgstr "Мон╕кер ма╓ нев╕домий преф╕кс мон╕кера"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
@@ -149,38 +149,21 @@ msgstr "Помилка перев╕рки на помилку; без вийнятково╖ ситуац╕╖"
 msgid "General activation error with no description"
 msgstr "Загальна помилка активац╕╖ без опису"
 
-#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
-msgid "Could not initialize Bonobo"
-msgstr ""
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr "Не вдалося розв'язати чи розширити \"%s\""
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:1
-msgid "HTTP Moniker"
-msgstr ""
+#: bonobo/bonobo-moniker-util.c:245
+msgid "Failed to activate object"
+msgstr "Не вдалося активувати об'╓кт"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:2
-msgid "ORB IOR handling moniker"
-msgstr ""
+#: monikers/bonobo-moniker-oaf.c:51
+#, c-format
+msgid "Exception activating '%s"
+msgstr "Вийняткова ситуац╕я п╕д час активац╕╖ \"%s\""
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:3
-msgid "Standard Moniker factory"
-msgstr ""
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:4
-msgid "generic Oaf activation moniker"
-msgstr ""
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:5
-msgid "generic Oaf query moniker"
-msgstr ""
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:6
-msgid "generic factory 'new' moniker"
-msgstr ""
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:7
-msgid "generic item moniker"
-msgstr ""
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:8
-msgid "stream MonikerExtender"
-msgstr ""
+#: monikers/bonobo-moniker-oaf.c:60
+#, c-format
+msgid "Failed to activate '%s"
+msgstr "Не вдалося активувати \"%s\""
