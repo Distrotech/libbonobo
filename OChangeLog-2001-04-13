@@ -1,3 +1,13 @@
+1999-08-28  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* bonobo/gnome-view-frame.c: Make `gnome_view_frame_epv' and
+	`gnome_view_frame_vepv' extern.
+	* bonobo/gnome-view-frame.h: Declare them here.
+
+	* bonobo/gnome-view.c: Make `gnome_view_epv' and `gnome_view_vepv'
+	extern.
+	* bonobo/gnome-view.h: Declare them here.
+
 1999-08-27  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-object.c (gnome_object_destroy): Move use of pointer
