@@ -10,8 +10,8 @@ the beginning.
   - ECL
  */
 
-#include "ac-query-expr.h"
-#include "ac-query-parse.h"
+#include "activation-context-query.h"
+#include "activation-context-query-parser.h"
 
 #include <string.h>
 #include <stdlib.h>

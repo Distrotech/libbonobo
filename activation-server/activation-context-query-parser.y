@@ -25,9 +25,9 @@
 %{
 #define YYSTACK_USE_ALLOCA
 
-#include <glib.h>
+#include "activation-context-query.h"
 
-#include "ac-query-expr.h"
+#include <glib.h>
 #include <stdlib.h>
 
 void yyerror(char *s);

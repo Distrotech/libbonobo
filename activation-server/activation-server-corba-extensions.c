@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  oafd
+ *  bonobo_activation
  *
  *  Copyright (C) 2000 Eazel, Inc.
  *
@@ -22,22 +22,24 @@
  *
  */
 
-/* oafd-corba-extensions.c - CORBA utility functions
+/* bonobo-activation-corba-extensions.c - CORBA utility functions
  */
 
-#include "oafd.h"
-#include "oaf-i18n.h"
-#include "liboaf/liboaf.h"
+#include <config.h>
+
+#include "activation-server-corba-extensions.h"
+
+#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <orbit/orbit.h>
 #include <stdio.h>
 #include <string.h>
 
-#include "oafd-corba-extensions.h"
 
 char *
-oafd_CORBA_Context_get_value (CORBA_Context         ctx, 
-			      const char           *propname,
-			      const CORBA_char     *exception_if_fail,
-			      CORBA_Environment    *ev)
+activation_server_CORBA_Context_get_value (CORBA_Context         ctx, 
+                                           const char           *propname,
+                                           const CORBA_char     *exception_if_fail,
+                                           CORBA_Environment    *ev)
 {
 	CORBA_NVList nvout;
 	char *retval;

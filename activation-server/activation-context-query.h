@@ -26,7 +26,7 @@
 #ifndef QUERY_EXPR_H
 #define QUERY_EXPR_H 1
 
-#include "liboaf/oaf.h"
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 
 #include <glib.h>
 
@@ -120,13 +120,13 @@ gint qexp_constant_compare (const QueryExprConst * c1,
 
 typedef struct _QueryContext QueryContext;
 
-typedef QueryExprConst (*QueryIDEvaluateFunc) (OAF_ServerInfo * si,
+typedef QueryExprConst (*QueryIDEvaluateFunc) (Bonobo_ServerInfo * si,
 					       const char *id,
 					       QueryContext * qctx);
 
 struct _QueryContext
 {
-	OAF_ServerInfo **sil;
+	Bonobo_ServerInfo **sil;
 	int nservers;
 
 	QueryIDEvaluateFunc id_evaluator;
@@ -136,11 +136,11 @@ struct _QueryContext
 	gpointer user_data;
 };
 
-QueryExprConst qexp_evaluate (OAF_ServerInfo * si, QueryExpr * e,
+QueryExprConst qexp_evaluate (Bonobo_ServerInfo * si, QueryExpr * e,
 			      QueryContext * qctx);
-gboolean qexp_matches (OAF_ServerInfo * si, QueryExpr * e,
+gboolean qexp_matches (Bonobo_ServerInfo * si, QueryExpr * e,
 		       QueryContext * qctx);
-void qexp_sort (OAF_ServerInfo ** servers, int nservers, QueryExpr ** sexps,
+void qexp_sort (Bonobo_ServerInfo ** servers, int nservers, QueryExpr ** sexps,
 		int nexps, QueryContext * qctx);
 
 #endif

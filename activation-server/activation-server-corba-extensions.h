@@ -22,10 +22,12 @@
  *
  */
 
-/* oafd-corba-extensions.h - CORBA utility functions
+/* activation-server-corba-extensions.h - CORBA utility functions
  */
 
-char *oafd_CORBA_Context_get_value (CORBA_Context      ctx, 
+#include <orbit/orbit.h>
+
+char *activation_server_CORBA_Context_get_value (CORBA_Context      ctx, 
 				    const char        *propname,
                                     const CORBA_char     *exception_if_fail,
 				    CORBA_Environment *ev);
