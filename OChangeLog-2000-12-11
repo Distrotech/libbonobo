@@ -1,3 +1,7 @@
+2000-11-20  Michael Meeks  <michael@helixcode.com>
+
+	* doc/NAMESPACE: add gnome-core stuff from George.
+
 2000-11-19  Michael Meeks  <michael@helixcode.com>
 
 	* doc/NAMESPACE: add PonG, Grapevine, update gnumeric / guppi3,
