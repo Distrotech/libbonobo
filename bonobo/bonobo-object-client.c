@@ -312,7 +312,29 @@ gnome_object_activate (const char *object_desc, GoadActivationFlags flags)
 	
 	return object;
 }
-	
+
+/**
+ * gnome_object_client_from_corba:
+ * @corba_object: An existing CORBA object that implements GNOME_Unknown.
+ *
+ * Wraps the @corba_object CORBA object reference in a GnomeObjectClient
+ * object.  This is typically used if you got a CORBA object yourself and not
+ * trough one of the activation routines and you want to have a GnomeObjectClient
+ * handle to use in any of the Bonobo routines. 
+ *
+ * Returns: A wrapped GnomeObjectClient.
+ */
+GnomeObjectClient *
+gnome_object_client_from_corba (GNOME_Unknown o)
+{
+	g_return_val_if_fail (o != CORBA_OBJECT_NIL, NULL);
+
+	object = gtk_type_new (gnome_object_client_get_type ());
+	gnome_object_client_construct (object, o);
+
+	return object;
+}
+
 static void
 gnome_object_client_destroy (GtkObject *object)
 {

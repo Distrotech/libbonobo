@@ -1,3 +1,17 @@
+1999-08-19  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-object-client.c (gnome_object_client_from_corba):
+	New function.
+
+	* doc/api/tmpl/gnome-client-site.smgl: Documented.  
+
+	* doc/api/tmpl/gnome-wrapper.sgml: Documented.
+	
+1999-08-18  Miguel de Icaza  <miguel@gnu.org>
+
+	* doc/api/tmpl/gnome-object.sgml: Wrote the gnome-object
+	documentation. 
+
 1999-08-19  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-view.c (gnome_view_destroy_remove_verb): A new

@@ -44,5 +44,6 @@ GnomeObjectClient *gnome_object_activate_with_goad_id (GoadServerList *list,
 						       const char **params);
 GNOME_Unknown      gnome_object_restore_from_url      (const char *goad_id,
 						       const char *url);
+GnomeObjectClient *gnome_object_client_from_corba     (GNOME_Unknown o);
 
 #endif /* _GNOME_OBJECT_CLIENT_H_ */
