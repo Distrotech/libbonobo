@@ -1,3 +1,10 @@
+2001-04-17  Michael Meeks  <michael@ximian.com>
+
+	* autogen.sh: fixup so we configure, always dump the message of
+	doom.
+
+	* message-of-doom: make more explicit and doomful.
+
 2001-04-17  Martin Baulig  <baulig@suse.de>
 
 	* tests/Makefile.am: New file; this is almost empty at the moment.

@@ -15,7 +15,7 @@ PKG_NAME="libbonobo"
 
 (test -f $srcdir/configure.in \
   && test -f $srcdir/autogen.sh \
-  && test -d $srcdir/libbonobo) || {
+  && test -d $srcdir/bonobo) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level $PKG_NAME directory"
     exit 1
