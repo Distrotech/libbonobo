@@ -1,18 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
+# translation of libbonobo.gnome-2-8.gu.po to Gujarati
+# Copyright (C) 2004 Free Software Foundation, Inc.
 # MagNet <magnet@magnet-i.com>, 2004.
+# Ankit Patel <ankit@redhat.com>, 2004.
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo-2.6\n"
+"Project-Id-Version: libbonobo.gnome-2-8.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 15:34+0100\n"
-"PO-Revision-Date: 2004-02-29 20:47+0530\n"
-"Last-Translator: Nirav, Ankit, Ankur, Atit, Bhavin, Kartik, Khushbu, Sweta. "
+"POT-Creation-Date: 2004-10-26 12:44+0200\n"
+"PO-Revision-Date: 2004-10-27 10:00+0530\n"
+"Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "<magnet@magnet-i.com>\n"
-"Language-Team: MagNet <magnet@magnet-i.com>\n"
+"Language-Team: Gujarati\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -24,7 +27,7 @@ msgstr "યોગ્ય કાર્યશીલ ઓળખ નથી"
 
 #: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
-msgstr ".સર્વર ફાઈલો માંથી વાંચવા માટેની ડિરેક્ટરી"
+msgstr ".server ફાઈલોમાંથી વાંચવા માટેની ડિરેક્ટરી"
 
 #: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
@@ -36,7 +39,7 @@ msgstr "સર્વર કાર્યશીલ સંદર્ભ તરીક
 
 #: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
-msgstr "IORમાં લખાણ માટેની ફાઈલ વર્ણનકર્તા"
+msgstr "IOR માં લખાણ માટેની ફાઈલ વર્ણનકર્તા"
 
 #: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:200
@@ -45,7 +48,7 @@ msgstr "FD"
 
 #: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
-msgstr "શોધવા માટે પ્રશ્ર્ન વ્યક્ત કરવા"
+msgstr "શોધવા માટે પ્રશ્ન વ્યક્ત કરવા"
 
 #: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
@@ -78,7 +81,7 @@ msgid ""
 "check it is valid in: %s"
 msgstr ""
 "બોનોબો રુપરેખાને કાર્યશીલ કરવાની ફાઈલ સફળતાથી વાંચી શકાઈ નહિ. મહેરબાની કરીને તપાસો "
-"કે તે યોગ્ય %sમાં છે"
+"કે તે યોગ્ય %s માં છે"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -114,17 +117,17 @@ msgstr "અયોગ્ય અક્ષર '%c' iid '%s' માં"
 #: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "ગુણધર્મ '%s'ની કોઈ કિંમત નથી"
+msgstr "ગુણધર્મ '%s' ની કોઈ કિંમત નથી"
 
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr "ખરાબ રીતે બનેલ XML દસ્તાવેજ %sનો પદચ્છેદ કરી શકાતો નથી"
+msgstr "ખરાબ રીતે બનેલ XML દસ્તાવેજ %s નો પદચ્છેદ કરી શકાતો નથી"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr "ડિરેક્ટરી %sનો પ્રયત્ન કરી રહ્યા છે"
+msgstr "ડિરેક્ટરી %s નો પ્રયત્ન કરી રહ્યા છે"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -153,7 +156,7 @@ msgstr "અજાણીતી બહાર ન નીકળી શકાય ત�
 #: bonobo-activation/bonobo-activation-fork-server.c:404
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "કાર્યશીલ બોનોબો પ્રક્રિયાઓનો સમૂહ %sને ગોઠવણી કરવામાં નિષ્ફળતા: %s\n"
+msgstr "કાર્યશીલ બોનોબો પ્રક્રિયાઓનો સમૂહ %s ને ગોઠવણી કરવામાં નિષ્ફળતા: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
@@ -239,7 +242,7 @@ msgstr "વસ્તુના વર્ણનમાં વાક્યરચન�
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "કારખાનાં માંથી વસ્તુ કાર્યરત કરી શકાતી નથી"
+msgstr "કારખાનાંમાંથી વસ્તુ કાર્યરત કરી શકાતી નથી"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -360,7 +363,7 @@ msgstr "બોનોબો શરુ કરી શકાતું નથી"
 #: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "'%s'ને ફરીથી ઉકેલવામાં અથવા વિસ્તારવામાં નિષ્ફળતા"
+msgstr "'%s' ને ફરીથી ઉકેલવામાં અથવા વિસ્તારવામાં નિષ્ફળતા"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
@@ -411,11 +414,11 @@ msgstr "સ્ટ્રીમ મોનિકરએક્સટેન્ડર"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "બોનાેબો ઈકો સર્વર કારખાનું"
+msgstr "બોનોબો ઈકો સર્વર કારખાનું"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "બોનાેબો ઈકો સર્વર નમૂનો કાર્યક્રમ"
+msgstr "બોનોબો ઈકો સર્વર નમૂનો કાર્યક્રમ"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
@@ -493,29 +496,3 @@ msgstr "રુપરેખા ફાઈલમાં દર્શાવાયે�
 msgid "Display path to configuration file"
 msgstr "રુપરેખા ફાઈલનો દર્શાવાયેલો માર્ગ"
 
-#~ msgid "No server corresponding to your query"
-#~ msgstr "તમારા પ્રશ્નને અનુરુપ કોઈ સર્વર નથી"
-
-#~ msgid "Query failed: "
-#~ msgstr "પ્રશ્ન નિષ્ફળઃ  "
-
-#~ msgid "Activation failed: "
-#~ msgstr "સક્રિયકરણ નિષ્ફળઃ  "
-
-#~ msgid "Could not parse AID"
-#~ msgstr "AID નું પદચ્છેદ કરી શકાતું નથી"
-
-#~ msgid "Could not parse context: "
-#~ msgstr "સંદર્ભનું પદચ્છેદ કરી શકાતું નથીઃ  "
-
-#~ msgid "Could not activate server: "
-#~ msgstr "સર્વરને સક્રિય કરી શકાતું નથીઃ  "
-
-#~ msgid "Domain of ObjectDirectory"
-#~ msgstr "વસ્તુ ડિરેક્ટરીનો પ્રદેશ"
-
-#~ msgid "DOMAIN"
-#~ msgstr "પ્રદેશ"
-
-#~ msgid "Object directory to use when registering servers"
-#~ msgstr "સર્વરોની નોંધ કરતી વખતે વાપરવાની વસ્તુની ડિરેક્ટરી"
