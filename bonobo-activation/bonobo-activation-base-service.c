@@ -260,21 +260,6 @@ print_exit_status (int status)
 }
 #endif
 
-#ifdef HAVE_STRSIGNAL
-#define oaf_strsignal strsignal
-#else
-static char *
-oaf_strsignal (int sig)
-{
-	if (sig < NSIG)
-		return sys_siglist[sig];
-	else
-		return "Unknown signal";
-
-}
-#endif
-
-
 static 
 void oaf_setenv (const char *name, const char *value) 
 {
@@ -343,8 +328,8 @@ oaf_server_by_forking (const char **cmd,
 				g_snprintf (cbuf, sizeof (cbuf),
 					    _("Child received signal %u (%s)"),
 					    WTERMSIG (status),
-					    oaf_strsignal (WTERMSIG
-							   (status)));
+					    g_strsignal (WTERMSIG
+                                                         (status)));
 			else
 				g_snprintf (cbuf, sizeof (cbuf),
 					    _("Unknown non-exit error (status is %u)"),

@@ -38,6 +38,7 @@ oafd_SOURCES=					\
 LDADD=../liboaf/liboaf.la \
 	@ORBIT_LIBS@ -lORBitCosNaming -lname-server \
 	@XML_LIBS@ \
+	@INTLLIBS@ \
 	@GLIB_LIBS@
 
 oaf_client_SOURCES=client.c
