@@ -91,7 +91,6 @@ od_server_activate_exe (Bonobo_ServerInfo *si,
         int fd_arg;
 	int i;
         char *iorstr;
-        char *display;
         CORBA_Object retval;
 
 	/* Munge the args */
@@ -142,19 +141,15 @@ od_server_activate_exe (Bonobo_ServerInfo *si,
 
 	args[i] = NULL;
 
-        display = activation_server_CORBA_Context_get_value (
-                actinfo->ctx, "display", NULL, ev);
-        
         /*
          * We set the process group of activated servers to our process group;
          * this allows people to destroy all OAF servers along with oafd
          * if necessary
          */
 	retval = bonobo_activation_server_by_forking (
-                (const char **) args, TRUE, fd_arg, display, iorstr,
+                (const char **) args, TRUE, fd_arg, actinfo->ctx, iorstr,
                 si->iid, bonobo_object_directory_re_check_fn, actinfo, ev);
         
-        g_free (display);
 	CORBA_free (iorstr);
 
         return retval;

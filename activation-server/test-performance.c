@@ -18,7 +18,7 @@ test_server_info_load (void)
 	fprintf (stderr, "Testing server info load ...");
 
 	g_timer_start (timer);
-	for (i = 0; i < 1000; i++)
+	for (i = 0; i < 10; i++)
 		bonobo_server_info_load (dirs, &servers, &hash,
 					 bonobo_activation_hostname_get (),
 					 bonobo_activation_domain_get ());

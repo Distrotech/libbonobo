@@ -198,18 +198,6 @@ main (int argc, char *argv[])
          */
         setsid ();
         
-        /*
-         * This is needed because otherwise, if oafd persists across X
-         * sessions, spawned processes will inherit an invalid value of
-         * SESSION_MANAGER and be very very slow while attempting to 
-         * connect to it.
-         */
-#if HAVE_UNSETENV
-        unsetenv ("SESSION_MANAGER");
-#else
-        putenv ("SESSION_MANAGER=");
-#endif
-
 	/* internationalization. */
 	setlocale (LC_ALL, "");
         bindtextdomain (PACKAGE, SERVER_LOCALEDIR);

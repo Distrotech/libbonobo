@@ -138,115 +138,21 @@ BonoboActivationBaseServiceActivator       activator,int                        
 <RETURNS>void  </RETURNS>
 CORBA_Environment                         *ev
 </FUNCTION>
-<MACRO>
-<NAME>ORBIT_IDL_SERIAL</NAME>
-#define ORBIT_IDL_SERIAL 19
-</MACRO>
-<MACRO>
-<NAME>ORBIT_DECL_Bonobo_Unknown</NAME>
-#define ORBIT_DECL_Bonobo_Unknown 1
-</MACRO>
-<MACRO>
-<NAME>Bonobo_Unknown__freekids</NAME>
-#define Bonobo_Unknown__freekids CORBA_Object__freekids
-</MACRO>
-<TYPEDEF>
-<NAME>Bonobo_Unknown</NAME>
-   typedef CORBA_Object Bonobo_Unknown;
-</TYPEDEF>
-<VARIABLE>
-<NAME>Bonobo_Unknown__classid</NAME>
-   extern CORBA_unsigned_long Bonobo_Unknown__classid;
-</VARIABLE>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_0</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_0 'B'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_1</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_1 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_2</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_2 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_3</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_3 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_4</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_4 'b'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_5</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_5 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_6</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_6 '_'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_7</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_7 'U'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_8</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_8 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_9</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_9 'k'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_10</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_10 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_11</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_11 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_12</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_12 'w'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_13</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_13 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_Bonobo_Unknown</NAME>
-#define TC_Bonobo_Unknown ((CORBA_TypeCode)&TC_Bonobo_Unknown_struct)
-</MACRO>
 <FUNCTION>
-<NAME>POA_Bonobo_Unknown__init</NAME>
+<NAME>bonobo_activation_release_corba_client</NAME>
 <RETURNS>void  </RETURNS>
-PortableServer_Servant servant,CORBA_Environment * ev
+void
 </FUNCTION>
 <FUNCTION>
-<NAME>POA_Bonobo_Unknown__fini</NAME>
+<NAME>bonobo_activation_add_reset_notify</NAME>
 <RETURNS>void  </RETURNS>
-PortableServer_Servant servant,CORBA_Environment * ev
+GVoidFunc fn
 </FUNCTION>
 <FUNCTION>
-<NAME>Bonobo_Unknown_ref</NAME>
+<NAME>bonobo_activation_register_client</NAME>
 <RETURNS>void  </RETURNS>
-Bonobo_Unknown _obj, CORBA_Environment * ev
+Bonobo_ActivationContext context,CORBA_Environment       *ev
 </FUNCTION>
-<FUNCTION>
-<NAME>Bonobo_Unknown_unref</NAME>
-<RETURNS>void  </RETURNS>
-Bonobo_Unknown _obj, CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>Bonobo_Unknown_queryInterface</NAME>
-<RETURNS>Bonobo_Unknown  </RETURNS>
-Bonobo_Unknown _obj,const CORBA_char * repoid,CORBA_Environment * ev
-</FUNCTION>
-<MACRO>
-<NAME>Bonobo_Unknown_IMETHODS_LEN</NAME>
-#define Bonobo_Unknown_IMETHODS_LEN 3
-</MACRO>
 <MACRO>
 <NAME>_</NAME>
 #    define _(String) dgettext (PACKAGE, String)
@@ -401,7 +307,7 @@ const char        *display,
 <FUNCTION>
 <NAME>bonobo_activation_server_by_forking</NAME>
 <RETURNS>CORBA_Object  </RETURNS>
-const char       **cmd,gboolean           set_process_group,int                fd_arg,const char        *display,const char        *od_iorstr,const char        *act_iid,BonoboForkReCheckFn re_check,gpointer            user_data,CORBA_Environment *ev
+const char       **cmd,gboolean           set_process_group,int                fd_arg,CORBA_Context      ctx,const char        *od_iorstr,const char        *act_iid,BonoboForkReCheckFn re_check,gpointer            user_data,CORBA_Environment *ev
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_base_service_init</NAME>
@@ -457,18 +363,6 @@ const char *iid,const char *display
 <RETURNS>const char  *</RETURNS>
 void
 </FUNCTION>
-<MACRO>
-<NAME>BONOBO_ACTIVATION_MAJOR_VERSION</NAME>
-#define BONOBO_ACTIVATION_MAJOR_VERSION (1)
-</MACRO>
-<MACRO>
-<NAME>BONOBO_ACTIVATION_MINOR_VERSION</NAME>
-#define BONOBO_ACTIVATION_MINOR_VERSION (0)
-</MACRO>
-<MACRO>
-<NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
-#define BONOBO_ACTIVATION_MICRO_VERSION (3)
-</MACRO>
 <FUNCTION>
 <NAME>bonobo_server_info_prop_find</NAME>
 <RETURNS>Bonobo_ActivationProperty  *</RETURNS>
@@ -554,6 +448,127 @@ gpointer impl_ptr
 <RETURNS>CORBA_Object  </RETURNS>
 Bonobo_ActivationResult *sh,CORBA_Environment    *ev
 </FUNCTION>
+<MACRO>
+<NAME>BONOBO_ACTIVATION_MAJOR_VERSION</NAME>
+#define BONOBO_ACTIVATION_MAJOR_VERSION (1)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ACTIVATION_MINOR_VERSION</NAME>
+#define BONOBO_ACTIVATION_MINOR_VERSION (0)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
+#define BONOBO_ACTIVATION_MICRO_VERSION (3)
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IDL_SERIAL</NAME>
+#define ORBIT_IDL_SERIAL 19
+</MACRO>
+<MACRO>
+<NAME>ORBIT_DECL_Bonobo_Unknown</NAME>
+#define ORBIT_DECL_Bonobo_Unknown 1
+</MACRO>
+<MACRO>
+<NAME>Bonobo_Unknown__freekids</NAME>
+#define Bonobo_Unknown__freekids CORBA_Object__freekids
+</MACRO>
+<TYPEDEF>
+<NAME>Bonobo_Unknown</NAME>
+   typedef CORBA_Object Bonobo_Unknown;
+</TYPEDEF>
+<VARIABLE>
+<NAME>Bonobo_Unknown__classid</NAME>
+   extern CORBA_unsigned_long Bonobo_Unknown__classid;
+</VARIABLE>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_0</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_0 'B'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_1</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_1 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_2</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_2 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_3</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_3 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_4</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_4 'b'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_5</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_5 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_6</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_6 '_'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_7</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_7 'U'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_8</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_8 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_9</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_9 'k'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_10</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_10 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_11</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_11 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_12</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_12 'w'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_13</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_13 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_Bonobo_Unknown</NAME>
+#define TC_Bonobo_Unknown ((CORBA_TypeCode)&TC_Bonobo_Unknown_struct)
+</MACRO>
+<FUNCTION>
+<NAME>POA_Bonobo_Unknown__init</NAME>
+<RETURNS>void  </RETURNS>
+PortableServer_Servant servant,CORBA_Environment * ev
+</FUNCTION>
+<FUNCTION>
+<NAME>POA_Bonobo_Unknown__fini</NAME>
+<RETURNS>void  </RETURNS>
+PortableServer_Servant servant,CORBA_Environment * ev
+</FUNCTION>
+<FUNCTION>
+<NAME>Bonobo_Unknown_ref</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Unknown _obj, CORBA_Environment * ev
+</FUNCTION>
+<FUNCTION>
+<NAME>Bonobo_Unknown_unref</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Unknown _obj, CORBA_Environment * ev
+</FUNCTION>
+<FUNCTION>
+<NAME>Bonobo_Unknown_queryInterface</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+Bonobo_Unknown _obj,const CORBA_char * repoid,CORBA_Environment * ev
+</FUNCTION>
+<MACRO>
+<NAME>Bonobo_Unknown_IMETHODS_LEN</NAME>
+#define Bonobo_Unknown_IMETHODS_LEN 3
+</MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
 #define ORBIT_IDL_SERIAL 19
@@ -7945,18 +7960,3 @@ Bonobo_ActivationContext_obj,const CORBA_char * aid,constBonobo_ActivationFlagsf
 <NAME>Bonobo_ActivationContext_IMETHODS_LEN</NAME>
 #define Bonobo_ActivationContext_IMETHODS_LEN 10
 </MACRO>
-<FUNCTION>
-<NAME>bonobo_activation_release_corba_client</NAME>
-<RETURNS>void  </RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>bonobo_activation_add_reset_notify</NAME>
-<RETURNS>void  </RETURNS>
-GVoidFunc fn
-</FUNCTION>
-<FUNCTION>
-<NAME>bonobo_activation_register_client</NAME>
-<RETURNS>void  </RETURNS>
-Bonobo_ActivationContext context,CORBA_Environment       *ev
-</FUNCTION>
