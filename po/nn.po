@@ -92,8 +92,13 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
+<<<<<<< nn.po
+#: activation-server/object-directory-corba.c:1130
+#, fuzzy, c-format
+=======
 #: activation-server/object-directory-corba.c:1167
 #, fuzzy, c-format
+>>>>>>> 1.35
 msgid "Race condition activating server '%s'"
 msgstr "«Race condition» under aktivering av tenaren «%s»"
 
