@@ -1,3 +1,12 @@
+2000-07-24  Dan Winship  <danw@helixcode.com>
+
+	* components/text-plain/bonobo-text-plain.c (pstream_load): The
+	oafinfo file says it can load any text/ subtype, so allow that.
+	It's not really clear what to do about saving... you can't
+	load a text/xml, let the user edit it arbitrarily, and then assume
+	it's still text/xml. So for now at least, pstream_save still only
+	accepts text/plain.
+
 2000-07-22  J Shane Culpepper  <pepper@eazel.com>
 
 	* storage-modules/bonobo-storage-vfs.c: (fs_list_contents),
