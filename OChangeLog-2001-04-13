@@ -1,3 +1,10 @@
+1999-12-03  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-ui-handler.c (menu_toplevel_create_hint): check
+	old_hint before freeing it.
+
+	* bonobo/gnome-view-frame.c: Privatize GnomeViewFrame->uih.
+
 1999-12-03  Nat Friedman  <nat@helixcode.com>
 
 	* samples/controls/sample-control-container.c
