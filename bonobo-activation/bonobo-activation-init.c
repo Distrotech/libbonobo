@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  liboaf: A library for accessing oafd in a nice way.
+ *  bonobo-activation: A library for accessing bonobo-activation-server.
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000 Eazel, Inc.
@@ -20,7 +20,6 @@
  *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *  Author: Elliot Lee <sopwith@redhat.com>
- *
  */
 
 #include <config.h>
@@ -349,7 +348,7 @@ local_activator (const BonoboActivationBaseService *base_service,
 		|| STRMATCH (base_service->hostname, bonobo_activation_hostname_get ()))
 	    && (!base_service->domain
 		|| STRMATCH (base_service->domain, bonobo_activation_domain_get ()))) {
-		return bonobo_activation_server_by_forking (cmd, fd_arg, NULL, NULL, ev);
+		return bonobo_activation_server_by_forking (cmd, FALSE, fd_arg, NULL, NULL, ev);
 	}
 
 	return CORBA_OBJECT_NIL;
@@ -433,10 +432,10 @@ bonobo_activation_get_popt_table_name (void)
  * @argv: array of strings containing the command-line 
  *        arguments of the program.
  *
- * Initializes liboaf. Should be called before any other call to 
- * the library.
+ * Initializes bonobo-activation. Should be called before any other
+ * call to the library.
  *
- * Return value: the ORB used by OAF.
+ * Return value: the ORB used by bonobo-activation.
  */
 CORBA_ORB
 bonobo_activation_init (int argc, char **argv)

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  liboaf: A library for accessing oafd in a nice way.
+ *  bonobo-activation: A library for accessing bonobo-activation-server.
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000, 2001 Eazel, Inc.
@@ -463,8 +463,8 @@ bonobo_activation_service_get (const BonoboActivationBaseService *base_service)
 
 CORBA_Object
 bonobo_activation_internal_service_get_extended (const BonoboActivationBaseService *base_service,
-                                   gboolean              existing_only,
-                                   CORBA_Environment    *ev)
+                                                 gboolean              existing_only,
+                                                 CORBA_Environment    *ev)
 {
         return bonobo_activation_service_get_internal (base_service, existing_only, ev);
 }
@@ -533,7 +533,7 @@ rloc_file_unlock (const BonoboActivationBaseServiceRegistry *registry,
 	char *fn;
 
 
-	fn = bonobo_activation_alloca (sizeof ("/tmp/orbit-%s/oaf-register.lock") + 32);
+	fn = g_alloca (sizeof ("/tmp/orbit-%s/oaf-register.lock") + 32);
 	sprintf (fn, "/tmp/orbit-%s/oaf-register.lock", g_get_user_name ());
 
 	unlink (fn);

@@ -196,4 +196,25 @@ Bonobo_ServerInfo_duplicate (const Bonobo_ServerInfo *original)
 	return copy;
 }
 
+Bonobo_ServerInfoList *
+Bonobo_ServerInfoList_duplicate (const Bonobo_ServerInfoList *original)
+{
+        int i;
+        Bonobo_ServerInfoList *list;
 
+        if (!original)
+                return NULL;
+
+        list = Bonobo_ServerInfoList__alloc ();
+
+        list->_length = original->_length;
+        list->_maximum = list->_length;
+        list->_buffer = Bonobo_ServerInfoList_allocbuf (list->_length);
+
+        for (i = 0; i < list->_length; i++)
+                Bonobo_ServerInfo_copy (&list->_buffer [i], &original->_buffer [i]);
+
+        CORBA_sequence_set_release (list, TRUE);
+
+        return list;
+}

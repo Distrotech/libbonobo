@@ -246,7 +246,7 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
 
         /* Don't stat more than once every 5 seconds or activation
            could be too slow. This works even on the first read
-           because then `time_read is 0' */
+           because then `time_did_stat is 0' */
         if (time (NULL) - 5 > servant->time_did_stat) {
                 for (i = 0; servant->registry_source_directories[i] != NULL; i++) {
                         if (registry_directory_needs_update 
@@ -274,11 +274,56 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
         }
 }
 
+static gchar **
+split_path_unique (const char *colon_delimited_path)
+{
+        int i, max;
+        gboolean different;
+        gchar **ret, **wrk;
+        GSList *l, *tmp = NULL;
+
+        g_return_val_if_fail (colon_delimited_path != NULL, NULL);
+
+        wrk = g_strsplit (colon_delimited_path, ":", -1);
+
+        g_return_val_if_fail (wrk != NULL, NULL);
+
+        for (max = i = 0; wrk [i]; i++) {
+                different = TRUE;
+                for (l = tmp; l; l = l->next) {
+                        if (!strcmp (l->data, wrk [i])) {
+                                different = FALSE;
+                        } else if (wrk [i] == '\0') {
+                                different = FALSE;
+                        }
+                }
+                if (different) {
+                        tmp = g_slist_prepend (tmp, g_strdup (wrk [i]));
+                        max++;
+                }
+        }
+
+        tmp = g_slist_reverse (tmp);
+
+        ret = g_new (char *, max + 1);
+
+        for (l = tmp, i = 0; l; l = l->next) {
+                ret [i++] = l->data;
+        }
+
+        ret [i] = NULL;
+
+        g_slist_free (tmp);
+        g_strfreev (wrk);
+
+        return ret;
+}
+
 Bonobo_ObjectDirectory
 Bonobo_ObjectDirectory_create (PortableServer_POA poa,
-			    const char *domain,
-			    const char *registry_path,
-			    CORBA_Environment * ev)
+                               const char        *domain,
+                               const char        *registry_path,
+                               CORBA_Environment *ev)
 {
 	Bonobo_ObjectDirectory retval;
 	impl_POA_Bonobo_ObjectDirectory *newservant;
@@ -298,7 +343,7 @@ Bonobo_ObjectDirectory_create (PortableServer_POA poa,
 	newservant->attr_hostID = bonobo_activation_hostname_get ();
 	newservant->by_iid = NULL;
 
-        newservant->registry_source_directories = g_strsplit (registry_path, ":", -1);
+        newservant->registry_source_directories = split_path_unique (registry_path);
         newservant->registry_directory_mtimes = g_hash_table_new (g_str_hash, g_str_equal);
 
         update_registry (newservant);

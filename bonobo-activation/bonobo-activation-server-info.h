@@ -44,6 +44,7 @@ void                       CORBA_sequence_Bonobo_ActivationProperty_copy (CORBA_
 void                       Bonobo_ServerInfo_copy              (Bonobo_ServerInfo                      *copy, 
                                                                 const Bonobo_ServerInfo                *original);
 Bonobo_ServerInfo         *Bonobo_ServerInfo_duplicate         (const Bonobo_ServerInfo                *original);
+Bonobo_ServerInfoList     *Bonobo_ServerInfoList_duplicate     (const Bonobo_ServerInfoList            *original);
 
 G_END_DECLS
 

@@ -24,6 +24,8 @@
  */
 
 #include <config.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 #include "server.h"
 #include "bonobo-activation/bonobo-activation-i18n.h"
@@ -142,6 +144,11 @@ main (int argc, char *argv[])
 
 	xmlKeepBlanksDefault(0);
 
+#if 0
+        while (!g_file_test ("/tmp/orbit-go", G_FILE_TEST_EXISTS))
+                sleep (1);
+#endif
+
         oaf_debug_output = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
 
         dev_null_fd = -1;
@@ -171,7 +178,7 @@ main (int argc, char *argv[])
 
 		real_od_source_dir = g_string_new (SERVERINFODIR);
 		env_od_source_dir = g_getenv ("BONOBO_ACTIVATION_PATH");
-		gnome_env_od_source_dir = g_getenv ("GNOME_PATH");
+		gnome_env_od_source_dir = g_getenv ("GNOME2_PATH");
                 config_file_od_source_dir = object_directory_load_config_file ();
 
 		if (od_source_dir) {

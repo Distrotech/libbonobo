@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  liboaf: A library for accessing oafd in a nice way.
+ *  bonobo-activation: A library for accessing bonobo-activation-server.
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000 Eazel, Inc.
@@ -115,7 +115,7 @@ bonobo_activation_id_parse (const CORBA_char *actid)
 
 	retval = bonobo_activation_info_new ();
 
-	splitme = bonobo_activation_alloca (strlen (ctmp) + 1);
+	splitme = g_alloca (strlen (ctmp) + 1);
 	strcpy (splitme, ctmp);
 
 	parts[0] = &(retval->iid);

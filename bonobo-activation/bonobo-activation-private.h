@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  liboaf: A library for accessing oafd in a nice way.
+ *  bonobo-activation: A library for accessing bonobo-activation-server.
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000 Eazel, Inc.
@@ -20,61 +20,41 @@
  *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *  Author: Elliot Lee <sopwith@redhat.com>
- *
  */
-
-
 #ifndef BONOBO_ACTIVATION_PRIVATE_H
 #define BONOBO_ACTIVATION_PRIVATE_H 1
 
 #include <config.h>
-
-#include <bonobo-activation/bonobo-activation-base-service.h>
-
-#ifdef g_alloca
-#define bonobo_activation_alloca g_alloca
-#else
-#define bonobo_activation_alloca alloca
-#ifdef HAVE_ALLOCA_H
-#include <alloca.h>
-#endif
-#endif
-
 #include <string.h>
+#include <bonobo-activation/bonobo-activation-base-service.h>
 
 #define BONOBO_ACTIVATION_FACTORY_TIMEOUT 1000
 
-void         bonobo_activation_timeout_reg_check_set  (gboolean on);
-gboolean     bonobo_activation_timeout_reg_check      (gpointer data);
-CORBA_Object bonobo_activation_server_by_forking      (const char **cmd, 
-                                                       int fd_Arg,
-                                                       const char *display,
-                                                       const char *od_iorstr,
-                                                       CORBA_Environment * ev);
+void         bonobo_activation_timeout_reg_check_set  (gboolean           on);
+gboolean     bonobo_activation_timeout_reg_check      (gpointer           data);
+CORBA_Object bonobo_activation_server_by_forking      (const char       **cmd, 
+                                                       gboolean           set_process_group,
+                                                       int                fd_arg,
+                                                       const char        *display,
+                                                       const char        *od_iorstr,
+                                                       CORBA_Environment *ev);
 void         bonobo_activation_rloc_file_register     (void);
 int          bonobo_activation_ior_fd_get             (void);
 CORBA_Object bonobo_activation_activation_context_get (void);
-CORBA_Object bonobo_activation_object_directory_get   (const char *username,
-                                                       const char *hostname,
-                                                       const char *domain);
+CORBA_Object bonobo_activation_object_directory_get   (const char        *username,
+                                                       const char        *hostname,
+                                                       const char        *domain);
 
 extern gboolean bonobo_activation_private;
 
 #define BONOBO_ACTIVATION_STR_NULL_OR_MATCH(x, y) ((x == NULL) || (x != NULL && y != NULL && strcmp (x, y) != 0))
 
-CORBA_Object bonobo_activation_internal_service_get_extended  (const BonoboActivationBaseService         *base_service,
-                                                               gboolean                     existing_only,
-                                                               CORBA_Environment          *ev);
-
 CORBA_Object bonobo_activation_internal_activation_context_get_extended (gboolean           existing_only,
                                                                          CORBA_Environment *ev);
 
-CORBA_Object bonobo_activation_internal_server_by_forking_extended (const char **cmd,
-                                                                    gboolean set_process_group,
-                                                                    int fd_arg, 
-                                                                    const char *display,
-                                                                    const char *od_iorstr,
-                                                                    CORBA_Environment * ev);
+CORBA_Object bonobo_activation_internal_service_get_extended (const BonoboActivationBaseService *base_service,
+                                                              gboolean              existing_only,
+                                                              CORBA_Environment    *ev);
 
 #endif
 

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  liboaf: A library for accessing oafd in a nice way.
+ *  bonobo-activation: A library for accessing bonobo-activation-server.
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000 Eazel, Inc.
@@ -20,9 +20,7 @@
  *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  *  Author: Elliot Lee <sopwith@redhat.com>
- *
  */
-
 #ifndef BONOBO_ACTIVATION_SHLIB_H
 #define BONOBO_ACTIVATION_SHLIB_H
 

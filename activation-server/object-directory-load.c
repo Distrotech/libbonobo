@@ -46,30 +46,33 @@ static gboolean od_filename_has_extension (const char *filename,
 static void
 od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 {
-	int i, n;
+	int i, max;
 	xmlNodePtr sub;
 	Bonobo_ActivationProperty *curprop;
 
-	for (n = 0, sub = node->xmlChildrenNode; sub; sub = sub->next) {
-		if (sub->type != XML_ELEMENT_NODE) {
+	for (max = 0, sub = node->xmlChildrenNode; sub; sub = sub->next) {
+		if (sub->type != XML_ELEMENT_NODE || sub->name == NULL) {
 			continue;
                 }
 
-		if (g_ascii_strcasecmp (sub->name, "oaf_attribute") != 0 &&
-                    g_ascii_strcasecmp (sub->name, "oaf_property") != 0) {
-			continue;
+		if (sub->name[0] != 'o' && sub->name [0] != 'O') {
+                        continue;
                 }
                 
-		n++;
+		max++;
 	}
 
-	server->props._length = n;
-	server->props._buffer = g_new0 (Bonobo_ActivationProperty, n);
+	server->props._buffer = g_new0 (Bonobo_ActivationProperty, max);
 
         curprop = server->props._buffer;
 
-	for (i = 0, sub = node->xmlChildrenNode; i < n; sub = sub->next, i++) {
+	for (i = 0, sub = node->xmlChildrenNode; sub != NULL && (i < max);
+             sub = sub->next) {
 		char *type, *valuestr;
+
+		if (sub->type != XML_ELEMENT_NODE || sub->name == NULL) {
+                        continue;
+                }
 
 		type = xmlGetProp (sub, "type");
 		if (type == NULL) {
@@ -161,8 +164,11 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
                 
 		free (type);
                 
+                i++;
 		curprop++;
 	}
+
+	server->props._length = i;
 }
 
 static char *

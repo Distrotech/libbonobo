@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include <bonobo-activation/bonobo-activation.h>
+#include <bonobo-activation/bonobo-activation-private.h>
 
 #include "empty.h"
 #include "plugin.h"
@@ -113,46 +114,81 @@ main (int argc, char *argv[])
 	CORBA_Object obj;
 	CORBA_Environment ev;
         Bonobo_ServerInfoList *info;
-        char *sort_by[2];
+        char *sort_by[4];
+        char *query;
+        int   i;
+        GTimer *timer = g_timer_new ();
 
 	CORBA_exception_init (&ev);
 	bonobo_activation_init (argc, argv);
-
 /*      putenv("Bonobo_BARRIER_INIT=1"); */
 
+	obj = bonobo_activation_activate ("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL,
+                                          &ev);
+        if (test_object (obj, &ev, "by query")) {
+                passed += test_empty (obj, &ev, "by query");
+        }
         sort_by[0] = "prefer_by_list_order(iid, ["
                 "'OAFIID:nautilus_file_manager_icon_view:42681b21-d5ca-4837-87d2-394d88ecc058',"
                 "'OAFIID:nautilus_file_manager_list_view:521e489d-0662-4ad7-ac3a-832deabe111c',"
                 "'OAFIID:nautilus_music_view:9456b5d2-60a8-407f-a56e-d561e1821391'])";
-        sort_by[1] = NULL;
+        sort_by[1] = "iid != 'OAFIID:nautilus_content_loser:95901458-c68b-43aa-aaca-870ced11062d'";
+        sort_by[2] = "iid != 'OAFIID:nautilus_sample_content_view:45c746bc-7d64-4346-90d5-6410463b43ae'";
+        sort_by[3] = NULL;
 
-        info = bonobo_activation_query (
-                "(bonobo:supported_mime_types.has_one (['x-directory/normal',"
-                "                                       'x-directory/*', '*']) AND "
-                "has (['OAFIID:nautilus_file_manager_icon_view:42681b21-d5ca-4837-87d2-394d88ecc058',"
-                "      'OAFIID:nautilus_file_manager_list_view:521e489d-0662-4ad7-ac3a-832deabe111c',"
-                "      'OAFIID:nautilus_music_view:9456b5d2-60a8-407f-a56e-d561e1821391'], iid) ) ",
-                sort_by, &ev);
+        query = "( (((repo_ids.has_all (['IDL:Bonobo/Control:1.0',"
+                "'IDL:Nautilus/View:1.0']) OR (repo_ids.has_one "
+                "(['IDL:Bonobo/Control:1.0','IDL:Bonobo/Embeddable:1.0']) AND "
+                "repo_ids.has_one (['IDL:Bonobo/PersistStream:1.0', "
+                "'IDL:Bonobo/ProgressiveDataSink:1.0', "
+                "'IDL:Bonobo/PersistFile:1.0']))) AND (bonobo:supported_mime_types.defined () OR "
+                "bonobo:supported_uri_schemes.defined () OR "
+                "bonobo:additional_uri_schemes.defined ()) AND "
+                "(((NOT bonobo:supported_mime_types.defined () OR "
+                "bonobo:supported_mime_types.has ('x-directory/normal') OR "
+                "bonobo:supported_mime_types.has ('x-directory/*') OR "
+                "bonobo:supported_mime_types.has ('*/*')) AND "
+                "(NOT bonobo:supported_uri_schemes.defined () OR "
+                "bonobo:supported_uri_schemes.has ('file') OR "
+                "bonobo:supported_uri_schemes.has ('*'))) OR "
+                "(bonobo:additional_uri_schemes.has ('file') OR "
+                "bonobo:additional_uri_schemes.has ('*'))) AND "
+                "nautilus:view_as_name.defined ()) OR false) AND "
+                "(has (['OAFIID:nautilus_file_manager_icon_view:42681b21-d5ca-4837-87d2-394d88ecc058', "
+                "'OAFIID:nautilus_file_manager_list_view:521e489d-0662-4ad7-ac3a-832deabe111c'], iid)) ) AND "
+                "(NOT test_only.defined() OR NOT test_only)";
 
-        if (ev._major == CORBA_NO_EXCEPTION) {
-                fprintf (stderr, "Query passed\n");
-                passed++;
-                CORBA_free (info);
-        } else
-                fprintf (stderr, "Test of query failed\n");
+        g_timer_start (timer);
 
-	obj = bonobo_activation_activate ("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL,
-                            &ev);
-        if (test_object (obj, &ev, "by query")) {
-                passed += test_empty (obj, &ev, "by query");
+        info = bonobo_activation_query (query, sort_by, &ev);
+
+        for (i = 0; i < 1000; i++) {
+                Bonobo_ServerInfoList *copy;
+#if 0
+                info = bonobo_activation_query (query, sort_by, &ev);
+
+                if (ev._major == CORBA_NO_EXCEPTION) {
+                        CORBA_free (info);
+                } else {
+                        fprintf (stderr, "Test of query failed '%s'\n",
+                                 bonobo_activation_exception_id (&ev));
+                }
+#else
+                copy = Bonobo_ServerInfoList_duplicate (info);
+                CORBA_free (copy);
+#endif
         }
+        g_timer_stop (timer);
 
+        g_warning ("Time to query '%g'", g_timer_elapsed (timer, NULL));
+        if (ev._major == CORBA_NO_EXCEPTION) {
+                passed++;
+        }
 
 	obj = bonobo_activation_activate_from_id ("OAFIID:Empty:19991025", 0, NULL, &ev);
         if (test_object (obj, &ev, "from id")) {
                 passed += test_empty (obj, &ev, "from id");
         }
-
 
 	obj = bonobo_activation_activate_from_id ("OAFAID:[OAFIID:Empty:19991025]", 0, NULL, &ev);
         if (test_object (obj, &ev, "from aid")) {
@@ -180,7 +216,6 @@ main (int argc, char *argv[])
                 fprintf (stderr, ", failed 2");
         }
         fprintf (stderr, "\n");
-
 
         fprintf (stderr, "Broken exe test ");
         obj = bonobo_activation_activate_from_id ("OAFIID:Broken:20000530", 0, NULL, &ev);

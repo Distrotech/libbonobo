@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  liboaf: A library for accessing oafd in a nice way.
+ *  bonobo-activation: A library for accessing bonobo-activation-server.
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000, 2001 Eazel, Inc.
@@ -116,8 +116,8 @@ print_exit_status (int status)
 }
 #endif
 
-static 
-void bonobo_activation_setenv (const char *name, const char *value) 
+static void
+bonobo_activation_setenv (const char *name, const char *value) 
 {
 #if HAVE_SETENV
         setenv (name, value, 1);
@@ -131,24 +131,13 @@ void bonobo_activation_setenv (const char *name, const char *value)
 }
 
 CORBA_Object
-bonobo_activation_server_by_forking (const char **cmd, 
-                       int fd_arg, 
-                       const char *display,
-		       const char *od_iorstr,
-                       CORBA_Environment * ev)
-{
-        return bonobo_activation_internal_server_by_forking_extended (cmd, FALSE, fd_arg,
-                                                        display, od_iorstr,
-                                                        ev);
-}
-
-CORBA_Object
-bonobo_activation_internal_server_by_forking_extended (const char **cmd,
-                                         gboolean set_process_group,
-                                         int fd_arg, 
-                                         const char *display,
-                                         const char *od_iorstr,
-                                         CORBA_Environment * ev)
+bonobo_activation_server_by_forking (
+        const char       **cmd,
+        gboolean           set_process_group,
+        int                fd_arg, 
+        const char        *display,
+        const char        *od_iorstr,
+        CORBA_Environment *ev)
 {
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
