@@ -60,10 +60,11 @@ void        bonobo_event_source_client_add_listener     (Bonobo_Unknown         
 							 CORBA_Environment       *opt_ev,
 							 gpointer                 user_data);
 
-void        bonobo_event_source_client_add_listener_gc  (Bonobo_Unknown     object,
-							 GClosure          *callback,
-							 const char        *opt_mask,
-							 CORBA_Environment *opt_ev);
+
+void        bonobo_event_source_client_add_listener_closure   (Bonobo_Unknown     object,
+							       GClosure          *callback,
+							       const char        *opt_mask,
+							       CORBA_Environment *opt_ev);
 
 Bonobo_Listener bonobo_event_source_client_add_listener_full  (Bonobo_Unknown     object,
 							       GClosure          *callback,
