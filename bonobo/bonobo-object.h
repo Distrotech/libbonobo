@@ -22,7 +22,7 @@ G_BEGIN_DECLS
 #undef BONOBO_OBJECT_DEBUG
  
 #define BONOBO_TYPE_OBJECT        (bonobo_object_get_type ())
-#define BONOBO_OBJECT_TYPE        BONOBO_TYPE_OBJECT // deprecated, you should use BONOBO_TYPE_OBJECT
+#define BONOBO_OBJECT_TYPE        BONOBO_TYPE_OBJECT /* deprecated, you should use BONOBO_TYPE_OBJECT */
 #define BONOBO_OBJECT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_OBJECT, BonoboObject))
 #define BONOBO_OBJECT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_OBJECT, BonoboObjectClass))
 #define BONOBO_IS_OBJECT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_OBJECT))

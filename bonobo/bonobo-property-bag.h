@@ -65,7 +65,7 @@ typedef struct {
 } BonoboPropertyBagClass;
 
 #define BONOBO_TYPE_PROPERTY_BAG        (bonobo_property_bag_get_type ())
-#define BONOBO_PROPERTY_BAG_TYPE        BONOBO_TYPE_PROPERTY_BAG // deprecated, you should use BONOBO_TYPE_PROPERTY_BAG
+#define BONOBO_PROPERTY_BAG_TYPE        BONOBO_TYPE_PROPERTY_BAG /* deprecated, you should use BONOBO_TYPE_PROPERTY_BAG */
 #define BONOBO_PROPERTY_BAG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PROPERTY_BAG, BonoboPropertyBag))
 #define BONOBO_PROPERTY_BAG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PROPERTY_BAG, BonoboPropertyBagClass))
 #define BONOBO_IS_PROPERTY_BAG(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PROPERTY_BAG))

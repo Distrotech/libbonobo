@@ -16,7 +16,7 @@ G_BEGIN_DECLS
 
 /* Compatibility code */
 #define BONOBO_TYPE_X_OBJECT        BONOBO_TYPE_OBJECT
-#define BONOBO_X_OBJECT_TYPE        BONOBO_TYPE_X_OBJECT // deprecated, you should use BONOBO_TYPE_X_OBJECT
+#define BONOBO_X_OBJECT_TYPE        BONOBO_TYPE_X_OBJECT /* deprecated, you should use BONOBO_TYPE_X_OBJECT */
 #define BONOBO_X_OBJECT(o)          BONOBO_OBJECT (o)
 #define BONOBO_X_OBJECT_CLASS(k)    BONOBO_OBJECT_CLASS (k)
 #define BONOBO_IS_X_OBJECT(o)       BONOBO_IS_OBJECT (o)

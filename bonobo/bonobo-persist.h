@@ -15,7 +15,7 @@
 G_BEGIN_DECLS
 
 #define BONOBO_TYPE_PERSIST        (bonobo_persist_get_type ())
-#define BONOBO_PERSIST_TYPE        BONOBO_TYPE_PERSIST // deprecated, you should use BONOBO_TYPE_PERSIST
+#define BONOBO_PERSIST_TYPE        BONOBO_TYPE_PERSIST /* deprecated, you should use BONOBO_TYPE_PERSIST */
 #define BONOBO_PERSIST(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PERSIST, BonoboPersist))
 #define BONOBO_PERSIST_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PERSIST, BonoboPersistClass))
 #define BONOBO_IS_PERSIST(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PERSIST))

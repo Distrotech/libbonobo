@@ -15,7 +15,7 @@
 G_BEGIN_DECLS
 
 #define BONOBO_TYPE_STORAGE_MEM        (bonobo_storage_mem_get_type ())
-#define BONOBO_STORAGE_MEM_TYPE        BONOBO_TYPE_STORAGE_MEM // deprecated, you should use BONOBO_TYPE_STORAGE_MEM
+#define BONOBO_STORAGE_MEM_TYPE        BONOBO_TYPE_STORAGE_MEM /* deprecated, you should use BONOBO_TYPE_STORAGE_MEM */
 #define BONOBO_STORAGE_MEM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_STORAGE_MEM, BonoboStorageMem))
 #define BONOBO_STORAGE_MEM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_STORAGE_MEM, BonoboStorageMemClass))
 #define BONOBO_IS_STORAGE_MEM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_STORAGE_MEM))

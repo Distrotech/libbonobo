@@ -24,7 +24,7 @@
 G_BEGIN_DECLS
 
 #define BONOBO_TYPE_TRANSIENT        (bonobo_transient_get_type ())
-#define BONOBO_TRANSIENT_TYPE        BONOBO_TYPE_TRANSIENT // deprecated, you should use BONOBO_TYPE_TRANSIENT
+#define BONOBO_TRANSIENT_TYPE        BONOBO_TYPE_TRANSIENT /* deprecated, you should use BONOBO_TYPE_TRANSIENT */
 #define BONOBO_TRANSIENT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_TRANSIENT, BonoboTransient))
 #define BONOBO_TRANSIENT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_TRANSIENT, BonoboTransientClass))
 #define BONOBO_IS_TRANSIENT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_TRANSIENT))
