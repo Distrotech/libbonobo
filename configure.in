@@ -40,9 +40,6 @@ AC_SUBST(LDFLAGS)
 
 GNOME_COMPILE_WARNINGS(maximum)
 
-dnl Utility conditional
-AM_CONDITIONAL(FALSE, test x = y)
-
 dnl Test for dladdr
 AC_MSG_CHECKING(for dladdr)
 have_dladdr=false
@@ -78,6 +75,10 @@ AC_SUBST(GLIB_LIBS)
 GNOME_PKGCONFIG_CHECK_MODULES(OAF, oaf-2.0)
 AC_SUBST(OAF_CFLAGS)
 AC_SUBST(OAF_LIBS)
+
+dnl OAF idl files
+OAF_IDL_DIR="`$PKG_CONFIG --variable=datadir oaf-2.0`/idl"
+AC_SUBST(OAF_IDL_DIR)
 
 AC_OUTPUT([
 Makefile

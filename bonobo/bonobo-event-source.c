@@ -336,24 +336,15 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
 	} else
 		my_ev = opt_ev;
 
-	if (CORBA_Object_is_a (object, "IDL:Bonobo/Property:1.0", my_ev)) {
+	es = Bonobo_Unknown_queryInterface (object, 
+	        "IDL:Bonobo/EventSource:1.0", my_ev);
 
-		Bonobo_Property_removeListener (object, id, my_ev);
-
-	} else { 
-
-		es = Bonobo_Unknown_queryInterface (object, 
-		       "IDL:Bonobo/EventSource:1.0", my_ev);
-
-		if (BONOBO_EX(my_ev) || !es)
-			goto remove_listener_end;
+	if (!BONOBO_EX (my_ev) && es) {
 
 		Bonobo_EventSource_removeListener (es, id, my_ev);
 
 		Bonobo_Unknown_unref (es, my_ev);
 	}
-
- remove_listener_end:
 
 	if (!opt_ev) {
 		if (BONOBO_EX (my_ev))

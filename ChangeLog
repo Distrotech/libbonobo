@@ -1,3 +1,18 @@
+2001-06-05  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_client_remove_listener): removed
+	Bonobo_Property_ code
+
+2001-06-04  Peter Williams  <peterw@ximian.com>
+
+	* configure.in (OAF_IDL_DIR): Grab oaf's IDL directory for use with
+	orbit-idl later.
+	(utility_conditional): Remove a duplicate of the "utility 
+	conditional"
+	
+	* bonobo/Makefile.am (idl_flags): Use OAF_IDL_DIR here.
+	
 2001-06-01  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-event-source.c (bonobo_event_source_destroy):

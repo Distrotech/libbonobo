@@ -47,7 +47,7 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_Zoomable.idl		\
 	$(top_srcdir)/idl/Bonobo_Exception.idl
 
-idl_flags = `$(GNOME_CONFIG) --cflags idl` -D__BONOBO_COMPILATION
+idl_flags = -I $(OAF_IDL_DIR) -D__BONOBO_COMPILATION
 
 $(CORBA_SOURCE): $(idls) $(ORBIT_IDL)
 	$(ORBIT_IDL) --small $(top_srcdir)/idl/Bonobo.idl -I$(top_srcdir)/idl $(idl_flags)
