@@ -70,8 +70,6 @@ interface View : GNOME::Unknown {
 };
 
 interface ViewFrame : GNOME::Unknown {
-	typedef sequence<octet> pixbuf;
-
 	/**
 	 * get_client_site:
 	 *

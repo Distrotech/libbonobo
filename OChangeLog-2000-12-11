@@ -1,3 +1,7 @@
+1999-09-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* idl/gnome-canvas.idl: New interface for canvas-based renderers. 
+
 Mon Sep  6 01:22:10 1999 Timur Bakeyev <timur@gnu.org>
 
 	* storage-modules/Makefile.am: Remove in libstorage_efs_la_LDFLAGS
