@@ -1,3 +1,23 @@
+2000-10-19  Martin Baulig  <baulig@suse.de>
+
+	* idl/bonobo-zoomable.idl (ZoomLevelName, ZoomLevelNameList): New typedefs.
+	(Zoomable): Added `preferred_zoom_level_names' attribute.
+
+	* bonobo/bonobo-zoomable.h (bonobo_zoomable_set_parameters): Renamed to
+	bonobo_zoomable_set_parameters_full().
+	(bonobo_zoomable_set_parameters_full): Added `preferred_zoom_level_names'
+	argument.
+	(bonobo_zoomable_set_parameters): New function; this is a simplified
+	version of bonobo_zoomable_set_parameters_full().
+
+	* bonobo/bonobo-zoomable.c (bonobo_zoomable_destroy): New static function.
+	(bonobo_zoomable_finalize): New static function.
+
+	* bonobo/bonobo-zoomable-frame.h
+	(bonobo_zoomable_frame_get_preferred_zoom_levels): Changed return value
+	from `float *' to a GList of float's and remove the `pnum_ret' argument.
+	(bonobo_zoomable_frame_get_preferred_zoom_level_names): New function.
+
 2000-10-18  Eskil Heyn Olsen  <eskil@eazel.com>
 
 	* bonobo.spec.in:

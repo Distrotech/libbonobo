@@ -25,7 +25,10 @@
 module Bonobo {
 
 typedef float ZoomLevel;
+typedef string ZoomLevelName;
+
 typedef sequence<ZoomLevel> ZoomLevelList;
+typedef sequence<ZoomLevelName> ZoomLevelNameList;
 	
 /* A zoomable has the responsibility to look for this
  * interface on its Bonobo control frame and call
@@ -73,6 +76,7 @@ interface Zoomable : Bonobo::Unknown {
 	readonly attribute boolean has_max_zoom_level;
 	readonly attribute boolean is_continuous;
 	readonly attribute ZoomLevelList preferred_zoom_levels;
+	readonly attribute ZoomLevelNameList preferred_zoom_level_names;
 		
 	/* High level operations.
 	 * These can cause a change in the zoom level.
