@@ -26,11 +26,11 @@ gnome-factory-stubs.c gnome-factory.h gnome-factory-common.c: stamp-factory-idl
 ../liboaf/gnome-factory.h: stamp-factory-idl
 
 stamp-idl: $(top_srcdir)/idl/oaf.idl
-	orbit-idl --noskels -I$(top_srcdir)/idl --define=OAF_COMPILATION $(top_srcdir)/idl/oaf.idl
+	$(ORBIT_IDL) --noskels -I$(top_srcdir)/idl --define=OAF_COMPILATION $(top_srcdir)/idl/oaf.idl
 	touch stamp-idl
 
 gnome-factory.h stamp-factory-idl: $(top_srcdir)/idl/gnome-factory.idl
-	orbit-idl --noskels -I$(top_srcdir)/idl --define=GNOME_FACTORY_COMPILATION $(top_srcdir)/idl/gnome-factory.idl
+	$(ORBIT_IDL) --noskels -I$(top_srcdir)/idl --define=GNOME_FACTORY_COMPILATION $(top_srcdir)/idl/gnome-factory.idl
 	touch stamp-factory-idl
 
 CLEANFILES=stamp-idl stamp-factory-idl $(BUILT_SOURCES)
