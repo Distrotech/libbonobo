@@ -169,16 +169,15 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant, gboolean force_reload
         int i;
         time_t cur_time;
         gboolean must_load;
-        static int reload_recurse_depth = 0;
+        static gboolean doing_reload = FALSE;
 
-        
+        if (doing_reload)
+                return;
+        doing_reload = TRUE;
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_warning ("Update registry %d", reload_recurse_depth);
+        g_warning ("Update registry");
 #endif
-
-        if (reload_recurse_depth++)
-                return;
 
         must_load = FALSE;
         
@@ -223,7 +222,7 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant, gboolean force_reload
                         activation_clients_cache_notify ();
         }
 
-        reload_recurse_depth--;
+        doing_reload = FALSE;
 }
 
 static gchar **
