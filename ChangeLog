@@ -1,3 +1,8 @@
+2003-07-30  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_instance_init):
+	add an inheritance trap.
+
 2003-07-26  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* doc/api/faq.xml: Added link to the C language mapping spec.
