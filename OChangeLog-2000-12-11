@@ -1,5 +1,9 @@
 2000-08-31  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/Makefile.am: Make the includes work.
+
+2000-08-31  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo.h: Add new headers.
 
 	* idl/bonobo-app.idl: add.
