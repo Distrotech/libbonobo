@@ -1,6 +1,11 @@
 2000-10-13  Eskil Heyn Olsen  <eskil@eazel.com>
 
 	* po/POTFILES.in:
+	Still buildfixing...
+
+2000-10-13  Eskil Heyn Olsen  <eskil@eazel.com>
+
+	* po/POTFILES.in:
 	Removed
 	./components/application-x-gnomine/bonobo-application-x-mines-ui.h
 	to fix build
