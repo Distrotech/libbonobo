@@ -1,3 +1,33 @@
+2000-12-06  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (node_free): free overridden node's data too.
+	(free_nodedata_tree): don't put a ';' at the end of a for loop.
+
+2000-12-05  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_sync_unrealize),
+	(bonobo_control_frame_sync_realize): move here and upd. Add the
+	set_remote_window so we can be sure this is synced too.
+	(bonobo_control_frame_create_socket): remove 'realize' signal connection.
+	(bonobo_control_frame_set_remote_window): tolerate NULL socket.
+	(bonobo_control_frame_bind_to_control): remove the socket bind to
+	control.
+	(bonobo_control_frame_create_socket): associate the control frame
+	with the socket at creation instead.
+
+	* bonobo/bonobo-control.c (bonobo_control_sync_unrealize),
+	(bonobo_control_sync_realize): move to bonobo-control-frame.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_destroy): disconnect
+	ourselfs from the socket on destroy.
+
+	* bonobo/bonobo-socket.c (bonobo_socket_init, bonobo_socket_realize),
+	(bonobo_socket_unrealize): upd.
+	(bonobo_socket_set_control_frame): impl
+	(bonobo_socket_set_control): remove.
+
+	* configure.in: setup cflags to use orbit-config for the alignment checks.
+
 2000-12-05  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-win.c: (process_state_updates): Remove state
