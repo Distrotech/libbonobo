@@ -1,3 +1,8 @@
+2000-10-18  Eskil Heyn Olsen  <eskil@eazel.com>
+
+	* bonobo.spec.in:
+	Added requirements to the base package
+
 2000-10-17  John Sullivan  <sullivan@eazel.com>
 
 	* doc/ui-faq.txt: Added a Q/A pair about how to avoid
