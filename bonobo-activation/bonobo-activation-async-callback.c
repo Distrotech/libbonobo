@@ -32,58 +32,136 @@
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 
 /*** App-specific servant structures ***/
+
 typedef struct {
 
    POA_Bonobo_ActivationCallback servant;
-   PortableServer_POA poa;
-   BonoboActivationCallback callback;
-   gpointer user_data;
+   PortableServer_POA            poa;
+   BonoboActivationCallback      callback;
+   gpointer                      user_data;
 
 } impl_POA_Bonobo_ActivationCallback;
 
-void
-impl_Bonobo_ActivationCallback__destroy(impl_POA_Bonobo_ActivationCallback *servant, 
-				     CORBA_Environment *ev);
 
-
-
-/*** Implementation stub prototypes ***/
+/*** Stub implementations ***/
 
 static void
-impl_Bonobo_ActivationCallback_report_activation_failed
-           (impl_POA_Bonobo_ActivationCallback * servant, 
-	    CORBA_char * reason,
-	    CORBA_Environment * ev);
+impl_Bonobo_ActivationCallback__finalize (
+        PortableServer_Servant servant,
+        CORBA_Environment *ev)
+{
+        g_free (servant);
+}
 
 static void
-impl_Bonobo_ActivationCallback_report_activation_succeeded
-           (impl_POA_Bonobo_ActivationCallback * servant, 
-	    Bonobo_ActivationResult * result,
-	    CORBA_Environment * ev);
+impl_Bonobo_ActivationCallback__destroy (
+        impl_POA_Bonobo_ActivationCallback *servant, 
+        CORBA_Environment *ev)
+{
+        PortableServer_ObjectId *objid;
+
+        objid = PortableServer_POA_servant_to_id (servant->poa, servant, ev);
+        PortableServer_POA_deactivate_object (servant->poa, objid, ev);
+        CORBA_free (objid);
+}
+
+static void
+impl_Bonobo_ActivationCallback_report_activation_failed (
+        PortableServer_Servant _servant,
+        const CORBA_char * reason,
+        CORBA_Environment * ev)
+{
+        char *message;
+        impl_POA_Bonobo_ActivationCallback * servant;
+
+        servant = (impl_POA_Bonobo_ActivationCallback *) _servant;
+
+        if (servant->callback == NULL) {
+                return;
+        }
+
+        message = g_strconcat ("Activation failed: ", reason, NULL);
+        servant->callback (CORBA_OBJECT_NIL, message, servant->user_data);
+        g_free (message);
+        
+        /* destroy this object */
+        impl_Bonobo_ActivationCallback__destroy (servant, ev);
+}
+
+static void
+impl_Bonobo_ActivationCallback_report_activation_succeeded (
+        PortableServer_Servant _servant,
+        const Bonobo_ActivationResult * result,
+        CORBA_Environment * ev)
+{
+        CORBA_Object retval;
+        impl_POA_Bonobo_ActivationCallback * servant;
+
+        servant = (impl_POA_Bonobo_ActivationCallback *) _servant;
+
+        retval = CORBA_OBJECT_NIL;
+
+        if (servant->callback == NULL) {
+                return;
+        }
+
+	switch (result->res._d) {
+	case Bonobo_ACTIVATION_RESULT_SHLIB:
+                retval = bonobo_activation_activate_shlib_server (
+                        (Bonobo_ActivationResult *) result, ev);
+		break;
+	case Bonobo_ACTIVATION_RESULT_OBJECT:
+		retval = CORBA_Object_duplicate (result->res._u.res_object, ev);
+		break;
+	case Bonobo_ACTIVATION_RESULT_NONE:
+                retval = CORBA_OBJECT_NIL;
+                break;
+	default:
+                g_assert_not_reached ();
+		break;
+	}
+
+        if (retval == CORBA_OBJECT_NIL) {
+                servant->callback (CORBA_OBJECT_NIL,
+                                   _("No server corresponding to your query"), 
+                                   servant->user_data);
+        } else {
+                servant->callback (retval, NULL, servant->user_data);
+        }
+
+        /* destroy this object */
+        impl_Bonobo_ActivationCallback__destroy (servant, ev);
+}
 
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_Bonobo_ActivationCallback_base_epv = {
-   NULL,			/* _private data */
-   NULL,			/* finalize routine */
-   NULL,			/* default_POA routine */
+        NULL, /* _private data */
+        impl_Bonobo_ActivationCallback__finalize,
+        NULL, /* default_POA routine */
 };
 static POA_Bonobo_ActivationCallback__epv impl_Bonobo_ActivationCallback_epv = {
-   NULL,			/* _private */
-   (gpointer) &impl_Bonobo_ActivationCallback_report_activation_failed,
+        NULL, /* _private */
+        &impl_Bonobo_ActivationCallback_report_activation_failed,
+        &impl_Bonobo_ActivationCallback_report_activation_succeeded,
+};
 
-   (gpointer) &impl_Bonobo_ActivationCallback_report_activation_succeeded,
-
+/* FIXME: fill me in / deal with me globaly */
+static POA_Bonobo_Unknown__epv impl_Bonobo_Unknown_epv = {
+	NULL, /* _private data */
+	NULL,
+	NULL,
+        NULL
 };
 
 /*** vepv structures ***/
 
 static POA_Bonobo_ActivationCallback__vepv impl_Bonobo_ActivationCallback_vepv = {
-        (gpointer) &impl_Bonobo_ActivationCallback_base_epv,
-        (gpointer) &impl_Bonobo_ActivationCallback_epv,
+        &impl_Bonobo_ActivationCallback_base_epv,
+        &impl_Bonobo_Unknown_epv,
+        &impl_Bonobo_ActivationCallback_epv,
 };
 
-/*** Stub implementations ***/
 
 CORBA_Object
 bonobo_activation_async_corba_callback_new (BonoboActivationCallback callback,
@@ -115,79 +193,4 @@ bonobo_activation_async_corba_callback_new (BonoboActivationCallback callback,
    retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
 
    return retval;
-}
-
-void
-impl_Bonobo_ActivationCallback__destroy(impl_POA_Bonobo_ActivationCallback *servant, 
-				     CORBA_Environment * ev)
-{
-   PortableServer_ObjectId *objid;
-
-   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
-   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
-   CORBA_free(objid);
-
-   POA_Bonobo_ActivationCallback__fini((PortableServer_Servant) servant, ev);
-   g_free(servant);
-}
-
-static void
-impl_Bonobo_ActivationCallback_report_activation_failed
-   (impl_POA_Bonobo_ActivationCallback * servant, 
-    CORBA_char * reason,
-    CORBA_Environment * ev)
-{
-        char *message;
-
-        if (servant->callback == NULL) {
-                return;
-        }
-
-        message = g_strconcat ("Activation failed: ", reason, NULL);
-        servant->callback (CORBA_OBJECT_NIL, message, servant->user_data);
-        g_free (message);
-
-        /* destroy this object */
-        impl_Bonobo_ActivationCallback__destroy (servant, ev);
-}
-
-static void
-impl_Bonobo_ActivationCallback_report_activation_succeeded
-   (impl_POA_Bonobo_ActivationCallback * servant, 
-    Bonobo_ActivationResult * result,
-    CORBA_Environment * ev)
-{
-        CORBA_Object retval;
-
-        retval = CORBA_OBJECT_NIL;
-
-        if (servant->callback == NULL) {
-                return;
-        }
-
-	switch (result->res._d) {
-	case Bonobo_ACTIVATION_RESULT_SHLIB:
-                retval = bonobo_activation_activate_shlib_server (result, ev);
-		break;
-	case Bonobo_ACTIVATION_RESULT_OBJECT:
-		retval = CORBA_Object_duplicate (result->res._u.res_object, ev);
-		break;
-	case Bonobo_ACTIVATION_RESULT_NONE:
-                retval = CORBA_OBJECT_NIL;
-                break;
-	default:
-                g_assert_not_reached ();
-		break;
-	}
-
-        if (retval == CORBA_OBJECT_NIL) {
-                servant->callback (CORBA_OBJECT_NIL,
-                                   _("No server corresponding to your query"), 
-                                   servant->user_data);
-        } else {
-                servant->callback (retval, NULL, servant->user_data);
-        }
-
-        /* destroy this object */
-        impl_Bonobo_ActivationCallback__destroy (servant, ev);
 }

@@ -10,7 +10,7 @@
 typedef struct {
         gboolean callback_called;
         gboolean succeeded;
-} callback_data;
+} callback_data_t;
 
 
 static 
@@ -18,9 +18,9 @@ void test_callback (CORBA_Object   activated_object,
                     const char    *error_reason, 
                     gpointer       user_data)
 {
-        callback_data *data;
+        callback_data_t *data;
 
-        data = (callback_data *) user_data;
+        data = (callback_data_t *) user_data;
 
         if (activated_object == CORBA_OBJECT_NIL) {
                 data->succeeded = FALSE;
@@ -38,7 +38,7 @@ static int
 test_activate (char *requirements)
 {
         CORBA_Environment ev;
-        callback_data data;
+        callback_data_t data;
 #if DEBUG_TIME        
         time_t beg_time;
 #endif
@@ -75,7 +75,7 @@ static int
 test_activate_from_id (char *aid)
 {
         CORBA_Environment ev;
-        callback_data data;
+        callback_data_t data;
 #if DEBUG_TIME        
         time_t beg_time;
 #endif

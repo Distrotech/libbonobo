@@ -217,9 +217,3 @@ void bonobo_activation_activate_from_id_async (const Bonobo_ActivationID aid,
         }
             
 }
-
-
-
-
-
-
