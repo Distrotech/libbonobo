@@ -1,3 +1,10 @@
+2001-03-27  Larry Ewing  <lewing@ximian.com>
+
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_property_bag_client_get_property_type): make sure we don't
+	segfault when we call Bonobo_Property_getType on a property that
+	doesn't exist, safely return TC_null instead.
+
 2001-03-26  Dietmar Maurer  <dietmar@ximian.com>
 
 	* storage-modules/bonobo-storage-fs.c (bonobo_storage_fs_open):

@@ -354,6 +354,7 @@ bonobo_property_bag_client_get_property_type (Bonobo_PropertyBag       pb,
 			g_warning ("prop is NIL");
 			CORBA_exception_free (&tmp_ev);
 		}
+		return (CORBA_TypeCode) TC_null;
 	}
 
 	tc = Bonobo_Property_getType (prop, real_ev);
