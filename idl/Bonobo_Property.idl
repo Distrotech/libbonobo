@@ -32,8 +32,12 @@ interface Property {
 	 * 
 	 * Returns this Property's type.
 	 */
+#if defined(__ORBIT_IDL__)
+	/* Bug filed */
 	TypeCode get_type ();
-
+#else
+	CORBA::TypeCode get_type ();
+#endif
 	/**
 	 * get_value:
 	 *
