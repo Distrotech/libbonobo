@@ -1,5 +1,11 @@
 2001-01-03  Michael Meeks  <michael@helixcode.com>
 
+	* tests/Makefile.am: move them here.
+
+	* bonobo/Makefile.am: removed tests.
+
+2001-01-03  Michael Meeks  <michael@helixcode.com>
+	
 	Re-factoring:
 
 	* bonobo/bonobo-win.c: Gut.
