@@ -1,12 +1,13 @@
 # Korean messages for libbonobo
 # Chideok Hwang <hwang@mizi.co.kr>, 2000.
-# Changwoo Ryu <cwryu@debian.org>, 2002-2003.
+# Changwoo Ryu <cwryu@debian.org>, 2002-2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.3.0\n"
-"POT-Creation-Date: 2004-01-09 15:27+0000\n"
-"PO-Revision-Date: 2003-05-01 21:24+0900\n"
+"Project-Id-Version: libbonobo 2.5.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-10 06:13+0900\n"
+"PO-Revision-Date: 2004-01-10 06:14+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -60,13 +61,12 @@ msgid "Name service"
 msgstr "네임 서비스"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "네임 서비스"
+msgstr "알림 서비스"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "액티베이션 알림 서비스"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -196,11 +196,11 @@ msgstr "`%s' 공유라이브러리에 `%s'이(가) 들어 있지 않습니다"
 
 #: bonobo/bonobo-application.c:341
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 #: bonobo/bonobo-application.c:341
 msgid "Application unique name"
-msgstr ""
+msgstr "응용 프로그램 고유 이름"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
