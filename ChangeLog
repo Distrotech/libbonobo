@@ -1,3 +1,11 @@
+2001-08-01  Maciej Stachowiak  <mjs@noisehavoc.org>
+
+	* bonobo/bonobo-generic-factory.c:
+	(impl_Bonobo_ObjectFactory_createObject): Don't pass params argument.
+	(bonobo_generic_factory_class_init): Remove `manufactures'
+	* monikers/bonobo-moniker-new.c: (bonobo_moniker_new_resolve):
+	Don't pass params argument.
+
 2001-08-02  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-types.c (bonobo_value_get_unknown): fixup.

@@ -38,25 +38,9 @@ struct _BonoboGenericFactoryPrivate {
 
 static GObjectClass *bonobo_generic_factory_parent_class = NULL;
 
-static CORBA_boolean
-impl_Bonobo_ObjectFactory_manufactures (PortableServer_Servant  servant,
-					const CORBA_char       *obj_oaf_iid,
-					CORBA_Environment      *ev)
-{
-	BonoboGenericFactory *factory;
-
-	factory = BONOBO_GENERIC_FACTORY (bonobo_object (servant));
-
-	if (! strcmp (obj_oaf_iid, factory->priv->oaf_iid))
-		return CORBA_TRUE;
-
-	return CORBA_FALSE;
-}
-
 static CORBA_Object
 impl_Bonobo_ObjectFactory_createObject (PortableServer_Servant   servant,
 					const CORBA_char        *obj_oaf_iid,
-					const Bonobo_StringList *params,
 					CORBA_Environment       *ev)
 {
 	BonoboGenericFactoryClass *class;
@@ -218,7 +202,6 @@ bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 	GObjectClass *object_class = (GObjectClass *) klass;
 	POA_Bonobo_GenericFactory__epv *epv = &klass->epv;
 
-	epv->manufactures = impl_Bonobo_ObjectFactory_manufactures;
 	epv->createObject = impl_Bonobo_ObjectFactory_createObject;
 
 	object_class->finalize = bonobo_generic_factory_finalize;

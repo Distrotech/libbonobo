@@ -46,7 +46,7 @@ bonobo_moniker_new_resolve (BonoboMoniker               *moniker,
 	}
 
 	containee = Bonobo_GenericFactory_createObject (
-		factory, requested_interface, &params, ev);
+		factory, requested_interface, ev);
 
 	bonobo_object_release_unref (factory, ev);
 
