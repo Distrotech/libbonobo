@@ -1,3 +1,12 @@
+2000-10-11  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (containee_destroy_cb): Use correct
+	cast and don't issue a stupid warning.
+	(bonobo_ui_toolbar_clean): Don't issue a stupid warning here
+	either.
+	(containee_destroy_cb): Also, use the right types here.
+	(bonobo_ui_toolbar_clean): Pass the toolbar instead of `->priv'.
+
 2000-10-11  Michael Meeks  <michael@helixcode.com>
 
 	* samples/compound-doc/paint-component-simple.c (view_create_menus): 
@@ -35,6 +44,30 @@
 	(bonobo_ui_util_encode_str): impl.
 
 	* bonobo/app.c (main): add test cases.
+
+2000-10-11  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/Makefile.am (noinst_PROGRAMS): Add `test-toolbar'.
+	(test_app_SOURCES): Set up the source file for `test-toolbar'.
+	(test_app_LDADD): Likewise with the libraries.
+
+	* test-toolbar.c: New file, test program for the toolbar widget
+	alone.
+
+	* bonobo/bonobo-ui-toolbar.c (impl_size_request): Request size for
+	the popup item only.  Yes, I really mean it.  Don't change it back
+	again.  I am not stupid.
+	(size_allocate_horizontally): Removed.
+	(size_allocate_vertically): Removed.
+	(size_allocate_helper): New.  It uses the new `expandable'
+	property for items.
+	(impl_size_allocate): Use it.
+
+	* bonobo/bonobo-ui-toolbar-item.c: New member `expandable' in
+	`BonoboUIToolbarItemPrivate'.
+	(init): Init.
+	(bonobo_ui_toolbar_item_get_expandable): New.
+	(bonobo_ui_toolbar_item_set_expandable): New.
 
 2000-10-11  Cody Russell  <bratsche@gnome.org>
 
