@@ -62,13 +62,19 @@ extern gboolean oaf_private;
 
 #define OAF_STR_NULL_OR_MATCH(x, y) ((x == NULL) || (x != NULL && y != NULL && strcmp (x, y) != 0))
 
-/* Rename oaf_service_get () in unstable branch */
 CORBA_Object oaf_internal_service_get_extended  (const OAFBaseService         *base_service,
                                                  gboolean                     existing_only,
                                                  CORBA_Environment          *ev);
 CORBA_Object oaf_internal_activation_context_get_extended (gboolean           existing_only,
                                                            CORBA_Environment *ev);
 
+
+CORBA_Object oaf_internal_server_by_forking_extended (const char **cmd,
+                                                      gboolean set_process_group,
+                                                      int fd_arg, 
+                                                      const char *display,
+                                                      const char *od_iorstr,
+                                                      CORBA_Environment * ev);
 
 #endif
 

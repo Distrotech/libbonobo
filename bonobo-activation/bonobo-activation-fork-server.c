@@ -131,6 +131,19 @@ oaf_server_by_forking (const char **cmd,
 		       const char *od_iorstr,
                        CORBA_Environment * ev)
 {
+        return oaf_internal_server_by_forking_extended (cmd, FALSE, fd_arg,
+                                                        display, od_iorstr,
+                                                        ev);
+}
+
+CORBA_Object
+oaf_internal_server_by_forking_extended (const char **cmd,
+                                         gboolean set_process_group,
+                                         int fd_arg, 
+                                         const char *display,
+                                         const char *od_iorstr,
+                                         CORBA_Environment * ev)
+{
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	OAF_GeneralError *errval;
@@ -142,7 +155,8 @@ oaf_server_by_forking (const char **cmd,
         guint watchid;
         struct sigaction sa;
         sigset_t mask, omask;
-                
+        int parent_pid;
+        
      	pipe (iopipes);
 
         /* Block SIGCHLD so no one else can wait() on the child before us. */
@@ -150,6 +164,8 @@ oaf_server_by_forking (const char **cmd,
         sigaddset (&mask, SIGCHLD);
         sigprocmask (SIG_BLOCK, &mask, &omask);
 
+        parent_pid = getpid ();
+        
 	/* fork & get the IOR from the magic pipe */
 	childpid = fork ();
 
@@ -260,11 +276,20 @@ oaf_server_by_forking (const char **cmd,
                         cmd[fd_arg] = g_strdup_printf (cmd[fd_arg], iopipes[1]);
                 }
 
-		setsid ();
 		memset (&sa, 0, sizeof (sa));
 		sa.sa_handler = SIG_IGN;
 		sigaction (SIGPIPE, &sa, 0);
 
+                if (set_process_group) {
+                        if (setpgid (getpid (), parent_pid) < 0) {
+                                g_print (_("OAF failed to set process group of %s: %s\n"),
+                                         cmd[0], g_strerror (errno));
+                                _exit (1);
+                        }
+                } else {
+                        setsid ();
+                }
+                
 		execvp (cmd[0], (char **) cmd);
 		if (iopipes[1] != 1)
 			dup2 (iopipes[1], 1);
