@@ -1,0 +1,12 @@
+/* FIXME FIXME FIXME : Apr/8/2000 JEG
+ * temporary HACK suggested by Michael until he can commit the real code.
+ */
+module Bonobo {
+	typedef sequence<char> PrintData;
+	interface Print : Unknown {
+		void init (in double x, in double y, in double width, in
+			   double height);
+		PrintData render ();
+	};
+};
+

@@ -1,3 +1,8 @@
+2000-04-08  Jody Goldber <jgoldberg@home.com>
+
+	* idl/bonobo-print.idl: Create a dummy version until Michael can
+	  commit the real one.
+
 2000-04-08  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-print-client.[ch]: Created.
