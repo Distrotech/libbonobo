@@ -9,7 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-12-08 23:52+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-28 21:46+0000\n"
 "PO-Revision-Date: 2003-02-10 18:40+0200\n"
 "Last-Translator: Arman Aksoy (Armish) <armish@linux-sevenler.de>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -93,7 +94,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1128
+#: activation-server/object-directory-corba.c:1130
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Sınıflandırma konumu '%s' sunucusu açılıyor"
@@ -196,11 +197,11 @@ msgstr "`%s' `%s' için NIL ile döndü"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' `%s' içermiyor"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
 msgstr ""
 
