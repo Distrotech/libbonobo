@@ -22,7 +22,15 @@ idl_DATA =				\
 	Bonobo_Clipboard.idl		\
 	$(NULL)
 
-EXTRA_DIST = $(idl_DATA)
+activation_idldir=$(datadir)/idl/bonobo-activation-2.0
+activation_idl_DATA =                   \
+	Bonobo_Unknown.idl              \
+	Bonobo_GenericFactory.idl       \
+	Bonobo_Activation_types.idl     \
+	Bonobo_ObjectDirectory.idl      \
+	Bonobo_ActivationContext.idl
+
+EXTRA_DIST = $(idl_DATA) $(activation_idl_DATA)
 
 orbittypelib_LTLIBRARIES = Bonobo_module.la
 orbittypelibdir = $(libdir)/orbit-2.0

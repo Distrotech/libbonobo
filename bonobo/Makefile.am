@@ -14,7 +14,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"Bonobo\"			\
 	-DVERSION=\"$(VERSION)\"
 
-AM_LDFLAGS=@LT_VERSION_INFO@
+AM_LDFLAGS=@LIBBONOBO_LT_VERSION_INFO@
 
 CORBA_SOURCE =			\
 	Bonobo.h		\
@@ -49,7 +49,8 @@ $(CORBA_SOURCE): $(idls) $(ORBIT_IDL)
 lib_LTLIBRARIES = libbonobo-2.la
 
 libbonobo_2_la_LIBADD = \
-	$(LIBBONOBO_LIBS)
+	$(LIBBONOBO_LIBS) \
+	../bonobo-activation/libbonobo-activation.la
 
 libbonoboincludedir = $(includedir)/libbonobo-2.0/bonobo
 

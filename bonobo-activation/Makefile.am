@@ -7,14 +7,14 @@ INCLUDES=					\
 	-I$(top_builddir)			\
 	-DSERVER_LIBEXECDIR=\""$(libexecdir)\"" \
         -DBONOBO_ACTIVATION_LOCALEDIR=\""${prefix}/${DATADIRNAME}/locale"\" \
-	$(BONOBO_ACTIVATION_CFLAGS)		\
+	$(LIBBONOBO_CFLAGS)			\
 	-DVERSION=\"$(VERSION)\"		\
 	-DG_DISABLE_DEPRECATED			\
 	$(NULL)
 
 LDFLAGS=					\
-	$(BONOBO_ACTIVATION_LIBS)		\
-	@LT_VERSION_INFO@			\
+	$(LIBBONOBO_LIBS)			\
+	@BONOBO_ACTIVATION_LT_VERSION_INFO@	\
 	$(NULL)
 
 bonobo_activationincludedir = $(includedir)/bonobo-activation-2.0/bonobo-activation
@@ -97,3 +97,8 @@ CLEANFILES=					\
 
 dist-hook:
 	cd $(distdir) ; rm -f $(CLEANFILES)
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = bonobo-activation-2.0.pc
+
+EXTRA_DIST = $(pkgconfig_DATA)

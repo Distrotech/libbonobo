@@ -44,3 +44,5 @@ module Bonobo {
 #pragma inhibit pop
 #endif
 #endif
+
+#endif /* __BONOBO_GENERIC_FACTORY_IDL__ */

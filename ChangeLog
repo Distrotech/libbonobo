@@ -1,3 +1,23 @@
+2003-04-07  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am (AM_LDFLAGS): upd version info.
+
+	* bonobo-activation/bonobo-activation-version.h.in: upd.
+
+	* idl/Makefile.am: add activation IDL bits.
+
+	* Makefile.am (SUBDIRS): upd.
+
+	* configure.in (SERVER_CFLAGS): add.
+
+	* bonobo-activation/Makefile.am: upd. particularly
+	LT_VERSION_INFO.
+
+	* configure.in (ENABLE_ORBIT2): bin; unused anyway.
+
+	* bonobo-activation: Merge from bonobo-activation/bonobo-activation
+	* activation-server: Merge from bonobo-activation/server
+
 2003-03-24  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Pass --enable-gtk-doc
