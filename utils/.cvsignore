@@ -1,0 +1,9 @@
+.deps
+.libs
+*~
+Makefile
+Makefile.in
+oaf-sysconf
+*.o
+*.lo
+*.la
