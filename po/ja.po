@@ -1,13 +1,13 @@
 # libbonobo ja.po
-# Copyright (C) 1999-2001 Free Software Foundation, Inc.
+# Copyright (C) 1999-2002 Free Software Foundation, Inc.
 # Yukihiro Nakai <nacai@iname.com>, 1999.
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 1999-2001.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 1999-2002.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 1.108.0\n"
-"POT-Creation-Date: 2002-01-10 10:58+0000\n"
-"PO-Revision-Date: 2001-12-23 22:11+0900\n"
+"Project-Id-Version: libbonobo 1.109.0cvs\n"
+"POT-Creation-Date: 2002-01-18 01:00+0900\n"
+"PO-Revision-Date: 2002-01-18 01:02+0900\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -205,6 +205,35 @@ msgstr "'%s' の活性化で例外"
 msgid "Failed to activate '%s"
 msgstr "'%s' の活性化に失敗"
 
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+msgid "Bonobo Echo server factory"
+msgstr "Bonobo Echo サーバ ファクトリ"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+msgid "Bonobo Echo server sample program"
+msgstr "Bonobo Echo サーバ サンプル プログラム"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+msgid "Echo component"
+msgstr "Echo コンポーネント"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+msgid "Echo component factory"
+msgstr "Echo コンポーネント ファクトリ"
+
+#: samples/echo/echo-client.c:22
+msgid "I could not initialize Bonobo"
+msgstr "Bonoboを初期化できません"
+
+#: samples/echo/echo-client.c:33
+msgid "Could not create an instance of the sample echo component"
+msgstr "サンプルの Echo コンポーネントのインスタンスを作成できませんでした"
+
+#: samples/echo/echo-client.c:45
+#, c-format
+msgid "An exception occured '%s'"
+msgstr "例外発生 '%s'"
+
 #~ msgid "Name"
 #~ msgstr "名称"
 
@@ -371,9 +400,6 @@ msgstr "'%s' の活性化に失敗"
 
 #~ msgid "Save"
 #~ msgstr "保存"
-
-#~ msgid "I could not initialize Bonobo"
-#~ msgstr "Bonoboを初期化できません"
 
 #~ msgid "Select drawing color..."
 #~ msgstr "描画色を選択..."
@@ -542,9 +568,6 @@ msgstr "'%s' の活性化に失敗"
 
 #~ msgid "Load with PersistStream"
 #~ msgstr "PersistStream で読み込み"
-
-#~ msgid "Destroy component"
-#~ msgstr "コンポーネントを削除"
 
 #~ msgid "Could not launch Embeddable %s!"
 #~ msgstr "Embeddable %s を起動できません!"
