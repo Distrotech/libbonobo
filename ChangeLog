@@ -1,5 +1,9 @@
 2001-04-17  Martin Baulig  <baulig@suse.de>
 
+	* tests/Makefile.am: New file; this is almost empty at the moment.
+
+2001-04-17  Martin Baulig  <baulig@suse.de>
+
 	* bonobo/*.[ch]: Ported to GObject.
 
 	* bonobo/bonobo-exception.h (BONOBO_EX_REPOID): New macro.
