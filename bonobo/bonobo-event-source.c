@@ -232,21 +232,25 @@ bonobo_event_source_notify_listeners_full (BonoboEventSource *event_source,
 static void
 bonobo_event_source_finalize (GObject *object)
 {
-	BonoboEventSource *event_source;
-	GSList            *l;
-	CORBA_Environment  ev;
+	CORBA_Environment         ev;
+	BonoboEventSourcePrivate *priv;
 	
-	event_source = BONOBO_EVENT_SOURCE (object);
+	priv = BONOBO_EVENT_SOURCE (object)->priv;
 
 	CORBA_exception_init (&ev);
+	
+	while (priv->listeners) {
+		ListenerDesc *d = priv->listeners->data;
 
-	for (l = event_source->priv->listeners; l; l = l->next)
-		desc_free (l->data, &ev);
+		priv->listeners = g_slist_remove (
+			priv->listeners, d);
+
+		desc_free (d, &ev);
+	}
 
 	CORBA_exception_free (&ev);
 
-	g_slist_free (event_source->priv->listeners);
-	g_free (event_source->priv);
+	g_free (priv);
 
 	bonobo_event_source_parent_class->finalize (object);
 }
@@ -332,15 +336,24 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
 	} else
 		my_ev = opt_ev;
 
-	es = Bonobo_Unknown_queryInterface (object, 
-		"IDL:Bonobo/EventSource:1.0", my_ev);
+	if (CORBA_Object_is_a (object, "IDL:Bonobo/Property:1.0", my_ev)) {
 
-	if (!BONOBO_EX (my_ev) && es) {
-		
+		Bonobo_Property_removeListener (object, id, my_ev);
+
+	} else { 
+
+		es = Bonobo_Unknown_queryInterface (object, 
+		       "IDL:Bonobo/EventSource:1.0", my_ev);
+
+		if (BONOBO_EX(my_ev) || !es)
+			goto remove_listener_end;
+
 		Bonobo_EventSource_removeListener (es, id, my_ev);
 
 		Bonobo_Unknown_unref (es, my_ev);
 	}
+
+ remove_listener_end:
 
 	if (!opt_ev) {
 		if (BONOBO_EX (my_ev))

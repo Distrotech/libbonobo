@@ -50,7 +50,7 @@ idls =							\
 idl_flags = `$(GNOME_CONFIG) --cflags idl` -D__BONOBO_COMPILATION
 
 $(CORBA_SOURCE): $(idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(top_srcdir)/idl/Bonobo.idl -I$(top_srcdir)/idl $(idl_flags)
+	$(ORBIT_IDL) --small $(top_srcdir)/idl/Bonobo.idl -I$(top_srcdir)/idl $(idl_flags)
 
 lib_LTLIBRARIES = libbonobo-2.la
 

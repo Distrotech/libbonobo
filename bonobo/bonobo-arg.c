@@ -18,7 +18,7 @@
 
 /**
  * bonobo_arg_new:
- * @t: the BonoboArgType eg. TC_long
+ * @t: the BonoboArgType eg. TC_CORBA_long
  * 
  * Create a new BonoboArg with the specified type
  * the value of the BonoboArg is initially empty.
@@ -96,16 +96,16 @@ BonoboArgType
 bonobo_arg_type_from_gtk (GType id)
 {
 	switch (id) {
-	case G_TYPE_CHAR:   return TC_char;
-	case G_TYPE_UCHAR:  return TC_char;
-	case G_TYPE_BOOLEAN:return TC_boolean;
-	case G_TYPE_INT:    return TC_short;
-	case G_TYPE_UINT:   return TC_ushort;
-	case G_TYPE_LONG:   return TC_long;
-	case G_TYPE_ULONG:  return TC_ulong;
-	case G_TYPE_FLOAT:  return TC_float;
-	case G_TYPE_DOUBLE: return TC_double;
-	case G_TYPE_STRING: return TC_string;
+	case G_TYPE_CHAR:   return TC_CORBA_char;
+	case G_TYPE_UCHAR:  return TC_CORBA_char;
+	case G_TYPE_BOOLEAN:return TC_CORBA_boolean;
+	case G_TYPE_INT:    return TC_CORBA_short;
+	case G_TYPE_UINT:   return TC_CORBA_ushort;
+	case G_TYPE_LONG:   return TC_CORBA_long;
+	case G_TYPE_ULONG:  return TC_CORBA_ulong;
+	case G_TYPE_FLOAT:  return TC_CORBA_float;
+	case G_TYPE_DOUBLE: return TC_CORBA_double;
+	case G_TYPE_STRING: return TC_CORBA_string;
 	default:
 		g_warning ("Unmapped arg type '%d'", id);
 		break;
@@ -130,23 +130,23 @@ bonobo_arg_type_to_gtk (BonoboArgType id)
 
 	CORBA_exception_init (&ev);
 
-	if (bonobo_arg_type_is_equal (TC_char, id, &ev))
+	if (bonobo_arg_type_is_equal (TC_CORBA_char, id, &ev))
 		g_type = G_TYPE_CHAR;
-	else if (bonobo_arg_type_is_equal (TC_boolean, id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_boolean, id, &ev))
 		g_type = G_TYPE_BOOLEAN;
-	else if (bonobo_arg_type_is_equal (TC_short,   id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_short,   id, &ev))
 		g_type = G_TYPE_INT;
-	else if (bonobo_arg_type_is_equal (TC_ushort,  id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_ushort,  id, &ev))
 		g_type = G_TYPE_UINT;
-	else if (bonobo_arg_type_is_equal (TC_long,    id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_long,    id, &ev))
 		g_type = G_TYPE_LONG;
-	else if (bonobo_arg_type_is_equal (TC_ulong,   id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_ulong,   id, &ev))
 		g_type = G_TYPE_ULONG;
-	else if (bonobo_arg_type_is_equal (TC_float,   id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_float,   id, &ev))
 		g_type = G_TYPE_FLOAT;
-	else if (bonobo_arg_type_is_equal (TC_double,  id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_double,  id, &ev))
 		g_type = G_TYPE_DOUBLE;
-	else if (bonobo_arg_type_is_equal (TC_string,  id, &ev))
+	else if (bonobo_arg_type_is_equal (TC_CORBA_string,  id, &ev))
 		g_type = G_TYPE_STRING;
 	else
 		g_warning ("Unmapped bonobo arg type");
@@ -187,15 +187,15 @@ bonobo_arg_from_gtk (BonoboArg *a, const GValue *value)
 		g_warning ("Strange gtk arg type %d", id);
 		break;
 		
-		MAKE_FROM_GVALUE (CHAR,    char,    TC_char,     char_data, CORBA_char,           CORBA_tk_char);
-		MAKE_FROM_GVALUE (UCHAR,   uchar,   TC_char,    uchar_data, CORBA_char,           CORBA_tk_char);
-		MAKE_FROM_GVALUE (BOOLEAN, boolean, TC_boolean,  bool_data, CORBA_boolean,        CORBA_tk_boolean);
-		MAKE_FROM_GVALUE (INT,     int,     TC_short,     int_data, CORBA_short,          CORBA_tk_short);
-		MAKE_FROM_GVALUE (UINT,    uint,    TC_ushort,   uint_data, CORBA_unsigned_short, CORBA_tk_ushort);
-		MAKE_FROM_GVALUE (LONG,    long,    TC_long,     long_data, CORBA_long,           CORBA_tk_long);
-		MAKE_FROM_GVALUE (ULONG,   ulong,   TC_ulong,   ulong_data, CORBA_unsigned_long,  CORBA_tk_ulong);
-		MAKE_FROM_GVALUE (FLOAT,   float,   TC_float,   float_data, CORBA_float,          CORBA_tk_float);
-		MAKE_FROM_GVALUE (DOUBLE,  double,  TC_double, double_data, CORBA_double,         CORBA_tk_double);
+		MAKE_FROM_GVALUE (CHAR,    char,    TC_CORBA_char,     char_data, CORBA_char,           CORBA_tk_char);
+		MAKE_FROM_GVALUE (UCHAR,   uchar,   TC_CORBA_char,    uchar_data, CORBA_char,           CORBA_tk_char);
+		MAKE_FROM_GVALUE (BOOLEAN, boolean, TC_CORBA_boolean,  bool_data, CORBA_boolean,        CORBA_tk_boolean);
+		MAKE_FROM_GVALUE (INT,     int,     TC_CORBA_short,     int_data, CORBA_short,          CORBA_tk_short);
+		MAKE_FROM_GVALUE (UINT,    uint,    TC_CORBA_ushort,   uint_data, CORBA_unsigned_short, CORBA_tk_ushort);
+		MAKE_FROM_GVALUE (LONG,    long,    TC_CORBA_long,     long_data, CORBA_long,           CORBA_tk_long);
+		MAKE_FROM_GVALUE (ULONG,   ulong,   TC_CORBA_ulong,   ulong_data, CORBA_unsigned_long,  CORBA_tk_ulong);
+		MAKE_FROM_GVALUE (FLOAT,   float,   TC_CORBA_float,   float_data, CORBA_float,          CORBA_tk_float);
+		MAKE_FROM_GVALUE (DOUBLE,  double,  TC_CORBA_double, double_data, CORBA_double,         CORBA_tk_double);
 
 	case G_TYPE_STRING:
 		/* Orbit really doesn't like NULL string's in anys: why ? ... */
@@ -253,15 +253,15 @@ bonobo_arg_to_gtk (GValue *value, const BonoboArg *arg)
 		g_warning ("Strange corba arg type %d", id);
 		break;
 		
-		MAKE_TO_GVALUE (CHAR,    char,    TC_char,     char_data, CORBA_char,           CORBA_tk_char);
-/*		MAKE_TO_GVALUE (UCHAR,   uchar,   TC_char,    uchar_data, CORBA_char,           CORBA_tk_char);*/
-		MAKE_TO_GVALUE (BOOLEAN, boolean, TC_boolean,  bool_data, CORBA_boolean,        CORBA_tk_boolean);
-		MAKE_TO_GVALUE (INT,     int,     TC_short,     int_data, CORBA_short,          CORBA_tk_short);
-		MAKE_TO_GVALUE (UINT,    uint,    TC_ushort,   uint_data, CORBA_unsigned_short, CORBA_tk_ushort);
-		MAKE_TO_GVALUE (LONG,    long,    TC_long,     long_data, CORBA_long,           CORBA_tk_long);
-		MAKE_TO_GVALUE (ULONG,   ulong,   TC_ulong,   ulong_data, CORBA_unsigned_long,  CORBA_tk_ulong);
-		MAKE_TO_GVALUE (FLOAT,   float,   TC_float,   float_data, CORBA_float,          CORBA_tk_float);
-		MAKE_TO_GVALUE (DOUBLE,  double,  TC_double, double_data, CORBA_double,         CORBA_tk_double);
+		MAKE_TO_GVALUE (CHAR,    char,    TC_CORBA_char,     char_data, CORBA_char,           CORBA_tk_char);
+/*		MAKE_TO_GVALUE (UCHAR,   uchar,   TC_CORBA_char,    uchar_data, CORBA_char,           CORBA_tk_char);*/
+		MAKE_TO_GVALUE (BOOLEAN, boolean, TC_CORBA_boolean,  bool_data, CORBA_boolean,        CORBA_tk_boolean);
+		MAKE_TO_GVALUE (INT,     int,     TC_CORBA_short,     int_data, CORBA_short,          CORBA_tk_short);
+		MAKE_TO_GVALUE (UINT,    uint,    TC_CORBA_ushort,   uint_data, CORBA_unsigned_short, CORBA_tk_ushort);
+		MAKE_TO_GVALUE (LONG,    long,    TC_CORBA_long,     long_data, CORBA_long,           CORBA_tk_long);
+		MAKE_TO_GVALUE (ULONG,   ulong,   TC_CORBA_ulong,   ulong_data, CORBA_unsigned_long,  CORBA_tk_ulong);
+		MAKE_TO_GVALUE (FLOAT,   float,   TC_CORBA_float,   float_data, CORBA_float,          CORBA_tk_float);
+		MAKE_TO_GVALUE (DOUBLE,  double,  TC_CORBA_double, double_data, CORBA_double,         CORBA_tk_double);
 
 	case CORBA_tk_string:
 		g_value_set_string (value, BONOBO_ARG_GET_STRING (arg));
