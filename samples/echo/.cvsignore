@@ -2,7 +2,7 @@ echo-client
 bonobo-echo
 .libs
 Makefile
-Bonobo_Sample_Echo.oaf
+Bonobo_Sample_Echo.server
 Bonobo_Sample_Echo.h
 Bonobo_Sample_Echo-common.c
 Bonobo_Sample_Echo-skels.c

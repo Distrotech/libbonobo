@@ -8,5 +8,5 @@ Makefile.in
 *.lo
 libmoniker_std.la
 
-Bonobo_Moniker_std.oaf
-Bonobo_Moniker_std.oaf.in
+Bonobo_Moniker_std.server
+Bonobo_Moniker_std.server.in
