@@ -1,3 +1,8 @@
+2000-08-02 Alastair McKinstry <mckinstry@computer.org>
+
+	* configure.in: Added Language ga - Irish
+	* po/ga.po: Added Irish language translation.
+
 2000-08-01  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-socket.c (bonobo_socket_focus_in_event): Prevent a
