@@ -1,3 +1,9 @@
+2000-12-27  Richard Hult  <rhult@codefactory.se>
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_get_ui_fname): 
+	Added final NULL argument to g_strconcat call to prevent
+	crash.
+
 2000-12-24  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* bonobo/bonobo-persist-stream.c: allow missong save/load
