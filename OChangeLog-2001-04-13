@@ -1,3 +1,8 @@
+1999-08-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* bonobo/gnome-moniker-client.[ch]: added some #includes to
+	make them compile.
+
 1999-08-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-object-client.c (gnome_object_activate): Use
