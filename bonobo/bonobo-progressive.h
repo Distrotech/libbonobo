@@ -78,7 +78,7 @@ GnomeProgressiveDataSink *gnome_progressive_data_sink_construct		(GnomeProgressi
 									 void *closure);
 							       
 
-POA_GNOME_ProgressiveDataSink__epv *gnome_progressive_get_epv (gboolean duplicate);
+POA_GNOME_ProgressiveDataSink__epv *gnome_progressive_get_epv (void);
 
 extern POA_GNOME_ProgressiveDataSink__vepv gnome_progressive_data_sink_vepv;
 END_GNOME_DECLS

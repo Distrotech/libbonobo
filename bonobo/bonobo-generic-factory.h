@@ -27,7 +27,7 @@ struct _GnomeGenericFactory;
 typedef struct _GnomeGenericFactory GnomeGenericFactory;
 typedef struct _GnomeGenericFactoryPrivate GnomeGenericFactoryPrivate;
 
-typedef GnomeObject * (*GnomeGenericFactoryFn)(GnomeGenericFactory *Factory, const char *goad_id, void *closure);
+typedef GnomeObject * (*GnomeGenericFactoryFn)(GnomeGenericFactory *Factory, void *closure);
 					
 struct _GnomeGenericFactory {
 	GnomeObject base;
@@ -52,7 +52,7 @@ typedef struct {
 	/*
 	 * Virtual methods
 	 */
-	GnomeObject * (*new_generic)(GnomeGenericFactory *c_factory, const char *goad_id);
+	GnomeObject * (*new_generic)(GnomeGenericFactory *c_factory);
 } GnomeGenericFactoryClass;
 
 GtkType gnome_generic_factory_get_type  (void);
@@ -74,7 +74,7 @@ void gnome_generic_factory_set (
 	GnomeGenericFactoryFn factory,
 	void *data);
 
-POA_GNOME_GenericFactory__epv *gnome_generic_factory_get_epv (gboolean duplicate);
+POA_GNOME_GenericFactory__epv *gnome_generic_factory_get_epv (void);
 
 extern POA_GNOME_GenericFactory__vepv gnome_generic_factory_vepv;
 

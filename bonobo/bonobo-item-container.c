@@ -153,20 +153,14 @@ impl_get_object (PortableServer_Servant servant,
  *
  */
 POA_GNOME_Container__epv *
-gnome_container_get_epv (gboolean duplicate)
+gnome_container_get_epv (void)
 {
-	static POA_GNOME_Container__epv cont_epv = {
-		NULL,
-		&impl_enum_objects,
-		&impl_get_object
-	};
 	POA_GNOME_Container__epv *epv;
 
-	if (duplicate) {
-		epv = g_new0 (POA_GNOME_Container__epv, 1);
-		memcpy(epv, &cont_epv, sizeof(cont_epv));
-	} else
-		epv = &cont_epv;
+	epv = g_new0 (POA_GNOME_Container__epv, 1);
+
+	epv->enum_objects = impl_enum_objects;
+	epv->get_object   = impl_get_object;
 
 	return epv;
 }
@@ -175,8 +169,8 @@ static void
 corba_container_class_init (void)
 {
 	/* Init the vepv */
-	gnome_container_vepv.GNOME_Unknown_epv = gnome_object_get_epv (FALSE);
-	gnome_container_vepv.GNOME_Container_epv = gnome_container_get_epv (FALSE);
+	gnome_container_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_container_vepv.GNOME_Container_epv = gnome_container_get_epv ();
 }
 
 typedef GNOME_Unknown (*GnomeSignal_POINTER__POINTER_BOOL_POINTER) (

@@ -7,16 +7,9 @@
 #include <gtk/gtkobject.h>
 #include <bonobo/bonobo.h>
 
-#ifdef BONOBO_USE_GNOME2
-#include <libgnome/gnomelib-init2.h>
-extern GnomeModuleInfo bonobo_module_info;
-
-#define BONOBO_INIT GNOME_PARAM_MODULE,&bonobo_module_info
-#else
 gboolean		    bonobo_init			 (CORBA_ORB orb,
 							  PortableServer_POA poa,
 							  PortableServer_POAManager manager);
-#endif
 void			    bonobo_main			 (void);
 gboolean		    bonobo_activate		 (void);
 void			    bonobo_setup_x_error_handler (void);

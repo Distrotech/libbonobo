@@ -119,13 +119,13 @@ gnome_moniker_get_as_string (GnomeMoniker *moniker)
 	for (i = 0, l = moniker->items; l; l = l->next)
 		array [i+2] = escape (l->data);
 
-	len = sizeof ("moniker:");
+	len = sizeof ("moniker_url:");
 	for (i = 0; i < n; i++)
 		len += strlen (array [i]) + 1;
 
 	res = g_malloc (len);
 	if (res != NULL){
-		strcpy (res, "moniker:");
+		strcpy (res, "moniker_url:");
 		for (i = 0; i < n; i++){
 			strcat (res, array [i]);
 			strcat (res, ",");

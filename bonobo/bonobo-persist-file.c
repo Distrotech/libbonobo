@@ -30,9 +30,15 @@ impl_get_current_file (PortableServer_Servant servant, CORBA_Environment *ev)
 	{
 		/* otherwise, raise a `NoCurrentName' exception */
 		GNOME_PersistFile_NoCurrentName *exception;
-		exception = GNOME_PersistFile_NoCurrentName__alloc();
+		exception = g_new (GNOME_PersistFile_NoCurrentName, 1);
+		if (exception == NULL) {
+			CORBA_exception_set_system (ev, ex_CORBA_NO_MEMORY,
+						    CORBA_COMPLETED_NO);
+
+			return NULL;
+		}
 		
-		exception->extension = CORBA_string_dup("");
+		exception->extension = "";
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_GNOME_PersistFile_NoCurrentName,
 				     exception);
@@ -104,22 +110,16 @@ impl_save (PortableServer_Servant servant,
  * gnome_persist_file_get_epv:
  */
 POA_GNOME_PersistFile__epv *
-gnome_persist_file_get_epv (gboolean duplicate)
+gnome_persist_file_get_epv (void)
 {
 	POA_GNOME_PersistFile__epv *epv;
-	static POA_GNOME_PersistFile__epv pf_epv = {
-		NULL,
-		impl_load,
-		impl_save,
-		impl_is_dirty,
-		impl_get_current_file
-	};
 
-	if(duplicate) {
-		epv = g_new0 (POA_GNOME_PersistFile__epv, 1);
-		memcpy(epv, &pf_epv, sizeof(pf_epv));
-	} else
-		epv = &pf_epv;
+	epv = g_new0 (POA_GNOME_PersistFile__epv, 1);
+
+	epv->load		= impl_load;
+	epv->save		= impl_save;
+	epv->is_dirty		= impl_is_dirty;
+	epv->get_current_file   = impl_get_current_file;
 
 	return epv;
 }
@@ -127,9 +127,9 @@ gnome_persist_file_get_epv (gboolean duplicate)
 static void
 init_persist_file_corba_class (void)
 {
-	gnome_persist_file_vepv.GNOME_Unknown_epv = gnome_object_get_epv (FALSE);
-	gnome_persist_file_vepv.GNOME_Persist_epv = gnome_persist_get_epv (FALSE);
-	gnome_persist_file_vepv.GNOME_PersistFile_epv = gnome_persist_file_get_epv (FALSE);
+	gnome_persist_file_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_persist_file_vepv.GNOME_Persist_epv = gnome_persist_get_epv ();
+	gnome_persist_file_vepv.GNOME_PersistFile_epv = gnome_persist_file_get_epv ();
 }
 
 static int

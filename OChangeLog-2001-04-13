@@ -1,3 +1,7 @@
+1999-12-10  Nat Friedman  <nat@helixcode.com>
+
+	* Reverted Elliot's previous patch.
+
 1999-12-09  Elliot Lee  <sopwith@redhat.com>
 
 	* bonobo/gnome-generic-factory.[ch],

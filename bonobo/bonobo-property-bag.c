@@ -422,9 +422,18 @@ impl_GNOME_PropertyBag_get_property (PortableServer_Servant servant,
 	GNOME_Property		 prop;
 
 	if (g_hash_table_lookup (pb->priv->props, name) == NULL) {
+		GNOME_PropertyBag_PropertyNotFound *exception;
+
+		exception = g_new0 (GNOME_PropertyBag_PropertyNotFound, 1);
+		if (exception == NULL) {
+			CORBA_exception_set_system (ev, ex_CORBA_NO_MEMORY,
+						    CORBA_COMPLETED_NO);
+			return CORBA_OBJECT_NIL;
+		}
+
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_GNOME_PropertyBag_PropertyNotFound,
-				     NULL);
+				     exception);
 
 		return CORBA_OBJECT_NIL;
 	}
@@ -625,21 +634,15 @@ gnome_property_bag_destroy (GtkObject *object)
  * gnome_property_bag_get_epv:
  */
 POA_GNOME_PropertyBag__epv *
-gnome_property_bag_get_epv (gboolean duplicate)
+gnome_property_bag_get_epv (void)
 {
 	POA_GNOME_PropertyBag__epv *epv;
-	static POA_GNOME_PropertyBag__epv pb_epv = {
-	  NULL,
-	  impl_GNOME_PropertyBag_get_properties,
-	  impl_GNOME_PropertyBag_get_property,
-	  impl_GNOME_PropertyBag_get_property_names
-	};
 
-	if(duplicate) {
-	  epv = g_new0 (POA_GNOME_PropertyBag__epv, 1);
-	  memcpy(epv, &pb_epv, sizeof(pb_epv));
-	} else
-	  epv = &pb_epv;
+	epv = g_new0 (POA_GNOME_PropertyBag__epv, 1);
+
+	epv->get_properties     = impl_GNOME_PropertyBag_get_properties;
+	epv->get_property       = impl_GNOME_PropertyBag_get_property;
+	epv->get_property_names = impl_GNOME_PropertyBag_get_property_names;
 
 	return epv;
 }
@@ -1272,8 +1275,8 @@ gnome_property_bag_generic_releaser (GnomePropertyBag *pb, const char *type,
 static void
 gnome_property_bag_init_corba_class (void)
 {
-	gnome_property_bag_vepv.GNOME_Unknown_epv = gnome_object_get_epv (FALSE);
-	gnome_property_bag_vepv.GNOME_PropertyBag_epv = gnome_property_bag_get_epv (FALSE);
+	gnome_property_bag_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_property_bag_vepv.GNOME_PropertyBag_epv = gnome_property_bag_get_epv ();
 }
 
 typedef void (*GtkSignal_NONE__POINTER_POINTER_POINTER_POINTER) (GtkObject * object,

@@ -83,7 +83,7 @@ void		          gnome_property_bag_create_type    (GnomePropertyBag *pb, char *t
 							     GnomePropertyBagValueReleaserFn    releaser);
 
  
-POA_GNOME_PropertyBag__epv *gnome_property_bag_get_epv	    (gboolean duplicate);
+POA_GNOME_PropertyBag__epv *gnome_property_bag_get_epv	    (void);
 
 #define GNOME_PROPERTY_BAG_TYPE			(gnome_property_bag_get_type ())
 #define GNOME_PROPERTY_BAG(o)		        (GTK_CHECK_CAST ((o), GNOME_PROPERTY_BAG_TYPE, GnomePropertyBag))

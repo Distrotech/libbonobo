@@ -94,22 +94,16 @@ impl_get_size_max (PortableServer_Servant servant, CORBA_Environment * ev)
  *
  */
 POA_GNOME_PersistStream__epv *
-gnome_persist_stream_get_epv (gboolean duplicate)
+gnome_persist_stream_get_epv (void)
 {
 	POA_GNOME_PersistStream__epv *epv;
-	static POA_GNOME_PersistStream__epv ps_epv = {
-		NULL,
-		impl_load,
-		impl_save,
-		impl_get_size_max,
-		impl_is_dirty
-	};
 
-	if(duplicate) {
-		epv = g_new0 (POA_GNOME_PersistStream__epv, 1);
-		memcpy(epv, &ps_epv, sizeof(ps_epv));
-	} else
-		epv = &ps_epv;
+	epv = g_new0 (POA_GNOME_PersistStream__epv, 1);
+
+	epv->load		= impl_load;
+	epv->save		= impl_save;
+	epv->get_size_max	= impl_get_size_max;
+	epv->is_dirty		= impl_is_dirty;
 
 	return epv;
 }
@@ -117,9 +111,9 @@ gnome_persist_stream_get_epv (gboolean duplicate)
 static void
 init_persist_stream_corba_class (void)
 {
-	gnome_persist_stream_vepv.GNOME_Unknown_epv = gnome_object_get_epv (FALSE);
-	gnome_persist_stream_vepv.GNOME_Persist_epv = gnome_persist_get_epv (FALSE);
-	gnome_persist_stream_vepv.GNOME_PersistStream_epv = gnome_persist_stream_get_epv (FALSE);
+	gnome_persist_stream_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_persist_stream_vepv.GNOME_Persist_epv = gnome_persist_get_epv ();
+	gnome_persist_stream_vepv.GNOME_PersistStream_epv = gnome_persist_stream_get_epv ();
 }
 
 static int

@@ -28,19 +28,13 @@ impl_get_goad_id (PortableServer_Servant servant, CORBA_Environment * ev)
  * gnome_persist_get_epv:
  */
 POA_GNOME_Persist__epv *
-gnome_persist_get_epv (gboolean duplicate)
+gnome_persist_get_epv (void)
 {
 	POA_GNOME_Persist__epv *epv;
-	static POA_GNOME_Persist__epv per_epv = {
-		NULL,
-		&impl_get_goad_id
-	};
 
-	if(duplicate) {
-		epv = g_new0 (POA_GNOME_Persist__epv, 1);
-		memcpy(epv, &per_epv, sizeof(per_epv));
-	} else
-		epv = &per_epv;
+	epv = g_new0 (POA_GNOME_Persist__epv, 1);
+
+	epv->get_goad_id = impl_get_goad_id;
 
 	return epv;
 }
