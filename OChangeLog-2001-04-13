@@ -1,3 +1,22 @@
+2001-02-16  John R. Sheets  <dusk@ravendusk.org>
+
+	* doc/api/bonobo-sections.txt: Removed orphaned <FILE> and
+	<SECTION> tags, and errant PortableServer_Servant function decl in
+	BonoboTransient.
+
+	* doc/api/bonobo-api.sgml: Minor capitalization tweaks to title
+	text.
+
+	* doc/api/Makefile.am: Renamed old bonobo-api-doc.bottom to
+	current bonobo-doc.bottom.
+	(LDFLAGS): Added missing double-quotes
+	(sgml): Changed gtkdoc-mkdb --source-dir to point to
+	$(top_srcdir), rather than the hard-coded '..'.  This should now
+	fix the broken API build, and allow gtkdoc to find *.c comments.
+	(tmpl_sources): Added list of files in tmpl (formerly blank).
+
+	* bonobo/bonobo-control.c: Fixed typo in comment.
+
 2001-02-16  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-item-container.c
