@@ -14,7 +14,10 @@
 #include <glib.h>
 #include <bonobo/Bonobo.h>
 
-#define BONOBO_EX(ev) ((ev) && (ev)->_major != CORBA_NO_EXCEPTION)
+#define BONOBO_EX(ev)         ((ev) && (ev)->_major != CORBA_NO_EXCEPTION)
+
+#define BONOBO_USER_EX(ev,id) ((ev) && (ev)->major == CORBA_USER_EXCEPTION &&	\
+			       (ev)->_repo_id != NULL && !strcmp ((ev)->_repo_id, id))
 
 #define BONOBO_RET_EX(ev)		\
 	G_STMT_START			\

@@ -1,3 +1,46 @@
+2000-11-07  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: bump version.
+
+	* bonobo/bonobo-exception.h (BONOBO_USER_EX): helper macro.
+
+2000-11-06  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (impl_get_arg): do an update_sizes
+	first.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_destroy): 
+	destroy before unreffing the control.
+	(bonobo_control_frame_bind_to_control): set the socket's control.
+
+	* bonobo/bonobo-control.c (bonobo_control_sync_realize),
+	(bonobo_control_sync_unrealize): impl.
+	(impl_Bonobo_Control_unrealize, proces_events),
+	(impl_Bonobo_Control_realize): impl
+	(bonobo_control_get_epv): hook them up.
+
+	* bonobo/bonobo-socket.c (bonobo_socket_realize),
+	(bonobo_socket_unrealize): call them.
+
+	* bonobo/bonobo-socket.c (bonobo_socket_set_control): impl.
+
+2000-08-08  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/bonobo-socket.c (BonoboSocketPrivate): Added a control
+	field to hold the control that we will call on the other side to
+	do a gdk_flush() at the proper time.
+
+2000-08-08  Federico Mena Quintero  <federico@gnu.org>
+
+	* bonobo/bonobo-socket.c (bonobo_socket_init): Create a private
+	structure. (bonobo_socket_destroy): Free the private structure.
+	Update all element uses to use the private structure.
+
+2000-08-08  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_destroy):
+	Destroy the priv->container socket instead of unrefing it.
+
 Mon Nov  6 10:06:23 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/bonobo-stream-fs.c (fs_write): code cleanup
