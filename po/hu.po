@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo cvs\n"
-"POT-Creation-Date: 2002-01-24 19:35+0100\n"
+"POT-Creation-Date: 2002-01-24 10:32+0000\n"
 "PO-Revision-Date: 2002-01-27 23:05+0100\n"
 "Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"

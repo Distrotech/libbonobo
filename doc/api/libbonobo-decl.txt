@@ -625,7 +625,7 @@ BonoboArgType      a,BonoboArgType      b,CORBA_Environment *opt_ev
 </FUNCTION>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
-#define ORBIT_IDL_SERIAL 18
+#define ORBIT_IDL_SERIAL 19
 </MACRO>
 <MACRO>
 <NAME>ex_Bonobo_NotSupported</NAME>
@@ -7941,7 +7941,7 @@ Bonobo_UIContainer _obj,CORBA_Environment * ev
 <FUNCTION>
 <NAME>Bonobo_UIContainer_setAttr</NAME>
 <RETURNS>void  </RETURNS>
-Bonobo_UIContainer _obj,const CORBA_char * path,const CORBA_char * attr,const CORBA_char * value,CORBA_Environment * ev
+Bonobo_UIContainer _obj,const CORBA_char * path,const CORBA_char * attr,const CORBA_char * value,const CORBA_char * component_name,CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
 <NAME>Bonobo_UIContainer_getAttr</NAME>

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-01-10 10:58+0000\n"
+"POT-Creation-Date: 2002-01-24 10:32+0000\n"
 "PO-Revision-Date: 2001-09-22 15:44+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -203,4 +203,34 @@ msgstr ""
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
 msgid "Failed to activate '%s"
+msgstr ""
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+msgid "Bonobo Echo server factory"
+msgstr ""
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+msgid "Bonobo Echo server sample program"
+msgstr ""
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+msgid "Echo component"
+msgstr ""
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+msgid "Echo component factory"
+msgstr ""
+
+#: samples/echo/echo-client.c:22
+#, fuzzy
+msgid "I could not initialize Bonobo"
+msgstr "无法初始化 Bonobo"
+
+#: samples/echo/echo-client.c:33
+msgid "Could not create an instance of the sample echo component"
+msgstr ""
+
+#: samples/echo/echo-client.c:45
+#, c-format
+msgid "An exception occured '%s'"
 msgstr ""

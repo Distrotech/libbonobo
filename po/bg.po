@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2002-01-25 07:25-0500\n"
+"POT-Creation-Date: 2002-01-24 10:32+0000\n"
 "PO-Revision-Date: 2002-01-25 15:44+2000\n"
 "Last-Translator: Alexander Shopov <al_shopov@web.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -154,6 +154,16 @@ msgstr "Обща грешка при активиране, няма описан
 msgid "Could not initialize Bonobo"
 msgstr "Не можах да активирам Бонобо"
 
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr ""
+
+#: bonobo/bonobo-moniker-util.c:245
+#, fuzzy
+msgid "Failed to activate object"
+msgstr "Не мога да активирам обекта от фабриката"
+
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP моникър"
@@ -185,3 +195,43 @@ msgstr "стандартен монкър"
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "поточен моникър-разширител"
+
+#: monikers/bonobo-moniker-oaf.c:51
+#, c-format
+msgid "Exception activating '%s"
+msgstr ""
+
+#: monikers/bonobo-moniker-oaf.c:60
+#, c-format
+msgid "Failed to activate '%s"
+msgstr ""
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+msgid "Bonobo Echo server factory"
+msgstr ""
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+msgid "Bonobo Echo server sample program"
+msgstr ""
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+msgid "Echo component"
+msgstr ""
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+msgid "Echo component factory"
+msgstr ""
+
+#: samples/echo/echo-client.c:22
+#, fuzzy
+msgid "I could not initialize Bonobo"
+msgstr "Не можах да активирам Бонобо"
+
+#: samples/echo/echo-client.c:33
+msgid "Could not create an instance of the sample echo component"
+msgstr ""
+
+#: samples/echo/echo-client.c:45
+#, c-format
+msgid "An exception occured '%s'"
+msgstr ""
