@@ -1,3 +1,11 @@
+2003-05-27  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/api/figures/Makefile.am: Indicate the need to use dia 0.91
+	instead of 0.90.
+
+	* doc/api/figures/*.{dia,png}: Open all dia files with dia 0.91,
+	tune the class fonts, and export as png.  Figures now look nicer.
+
 2003-05-24  Martin Kretzschmar  <m_kretzschmar@gmx.net>
 
 	* doc/activation-api/server-xml-reference.sgml: added markup,
