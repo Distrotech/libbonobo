@@ -1,3 +1,7 @@
+2001-02-05  Cody Russell  <bratsche@gnome.org>
+	* bonobo/bonobo-ui-sync-toolbar.c: Force GnomeDock to resize when
+	the BonoboUIToolbar's style changes.
+
 2001-02-03  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_class_init):
