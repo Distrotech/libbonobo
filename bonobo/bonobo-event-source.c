@@ -166,8 +166,10 @@ bonobo_event_source_has_listener (BonoboEventSource *event_source,
 		ListenerDesc *desc = (ListenerDesc *) l->data;
 
 		if (desc->event_masks == NULL || 
-		    event_match (event_name, desc->event_masks))
+		    event_match (event_name, desc->event_masks)) {
 			notify = TRUE;
+			break;
+		}
 	}
 
 	return notify;

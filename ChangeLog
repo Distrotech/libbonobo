@@ -1,3 +1,8 @@
+2002-03-21  Stephane Demurget  <demurgets@free.fr>
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_has_listener): efficiency fix.
+
 2002-03-18  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.113.0
