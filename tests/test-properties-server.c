@@ -202,7 +202,9 @@ create_bag (void)
 	BONOBO_ARG_SET_STRING (def, "a default string");
 
 	bonobo_property_bag_add (pb, "string-test", PROP_STRING_TEST,
-				 BONOBO_ARG_STRING, def, dstr, 0);
+				 BONOBO_ARG_STRING, def, dstr,
+				 BONOBO_PROPERTY_READABLE |
+				 BONOBO_PROPERTY_WRITEABLE);
 
 	bonobo_property_bag_add (pb, "long-test", PROP_LONG_TEST,
 				 BONOBO_ARG_LONG, NULL, dstr, 0);
@@ -265,6 +267,12 @@ print_props (void)
 	g_list_free (props);
 }
 
+static void
+quit_main (GtkObject *object, gpointer dummy)
+{
+	gtk_main_quit ();
+}
+
 int
 main (int argc, char **argv)
 {
@@ -290,6 +298,9 @@ main (int argc, char **argv)
 	create_bag ();
 
 	print_props ();
+
+	gtk_signal_connect (GTK_OBJECT (bonobo_context_running_get ()),
+			    "last_unref", GTK_SIGNAL_FUNC (quit_main), NULL);
 
 	bonobo_main ();
 
