@@ -90,6 +90,13 @@ gnome_container_init (GnomeContainer *container)
 {
 }
 
+/**
+ * gnome_container_construct:
+ * @container: The container object to construct
+ * @corba_container: The CORBA object that implements GNOME::Container
+ *
+ * Constructs the @container objet.
+ */
 GnomeObject *
 gnome_container_construct (GnomeContainer  *container,
 			   GNOME_Container corba_container)
@@ -103,6 +110,11 @@ gnome_container_construct (GnomeContainer  *container,
 	return GNOME_OBJECT (container);
 }
 
+/**
+ * gnome_container_get_type:
+ *
+ * Returns: The GtkType for the GnomeContainer object
+ */
 GtkType
 gnome_container_get_type (void)
 {
@@ -126,6 +138,14 @@ gnome_container_get_type (void)
 	return type;
 }
 
+/**
+ * gnome_container_new:
+ *
+ * Creates a new GnomeContainer object.  These are used to hold
+ * client sites.
+ *
+ * Returns: The new created GnomeContainer object
+ */
 GnomeObject *
 gnome_container_new (void)
 {
@@ -143,6 +163,14 @@ gnome_container_new (void)
 	return gnome_container_construct (container, corba_container);
 }
 
+/**
+ * gnome_container_add:
+ * @container: The object to operate on.
+ * @client_site: The client site to add to the container
+ *
+ * Adds the @client_site to the list of client-sites managed by this
+ * container
+ */
 void
 gnome_container_add (GnomeContainer *container, GnomeObject *client_site)
 {
@@ -155,6 +183,13 @@ gnome_container_add (GnomeContainer *container, GnomeObject *client_site)
 	container->client_sites = g_list_prepend (container->client_sites, client_site);
 }
 
+/**
+ * gnome_container_remove:
+ * @container: The object to operate on.
+ * @client_site: The client site to remove from the container
+ *
+ * Removes the @client_site from the @container
+ */
 void
 gnome_container_remove (GnomeContainer *container, GnomeObject *client_site)
 {
