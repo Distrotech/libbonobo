@@ -1,3 +1,12 @@
+2000-10-06  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-win.c: 
+	(update_menus): removed unused variable
+	(string_array_contains): new helper function
+	(create_dockitem): made behavior attribute be a comma-separated
+	set of choices, matching all the GNOME_DOCK_ITEM_BEH_* ones.
+	* doc/ui-xml.txt: explained behavior attribute
+
 2000-10-06  Ramiro Estrugo  <ramiro@eazel.com>
 
 	* bonobo.spec.in:
