@@ -34,7 +34,6 @@ typedef struct _BonoboTransientPriv BonoboTransientPriv;
 typedef struct {
 	GtkObject parent;
 
-	PortableServer_POA  poa;
 	BonoboTransientPriv *priv;
 } BonoboTransient;
 

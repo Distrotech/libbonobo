@@ -1,3 +1,16 @@
+2000-12-06  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* bonobo/bonobo-transient.c: use transient->priv->poa instead
+	of transient->poa.
+        
+	* bonobo/bonobo-transient.c 
+	(bonobo_transient_servant_locator_postinvoke): use 
+	BONOBO_TRANSIENT (*((BonoboTransient **)cookie)), instead of 
+	BONOBO_TRANSIENT (cookie)
+        
+	(bonobo_transient_new): return NULL if
+	something fails.
+
 2000-12-05  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-ui-xml.c: (override_node_with): Do an override

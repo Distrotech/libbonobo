@@ -107,7 +107,8 @@ bonobo_transient_servant_locator_postinvoke (PortableServer_Servant servant_mana
 					     PortableServer_Servant servant,
 					     CORBA_Environment *ev)
 {
-	BonoboTransient *transient = BONOBO_TRANSIENT (cookie);
+	BonoboTransient *transient = 
+	        BONOBO_TRANSIENT (*((BonoboTransient **)cookie));
 	
 	transient->priv->destroy_servant (servant, transient->priv->callback_data);
 
@@ -308,7 +309,7 @@ bonobo_transient_construct (BonoboTransient          *transient,
 	 * Bonobo POA.
 	 */
 	poa_name = g_strdup_printf ("BonoboTransient %p", transient);
-	transient->poa = PortableServer_POA_create_POA (
+	transient->priv->poa = PortableServer_POA_create_POA (
 		bonobo_poa (), poa_name, bonobo_poa_manager (),
 		policies, &ev);
 	
@@ -363,7 +364,7 @@ bonobo_transient_destroy (GtkObject *object)
 	
 	/* Destroy the POA. */
 	CORBA_exception_init (&ev);
-	PortableServer_POA_destroy (transient->poa, TRUE, TRUE, &ev);
+	PortableServer_POA_destroy (transient->priv->poa, TRUE, TRUE, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION)
 		g_warning ("bonobo_transient_destroy: Could not destroy POA.");
 	CORBA_exception_free (&ev);
@@ -450,8 +451,10 @@ bonobo_transient_new (PortableServer_POA poa,
 	BonoboTransient *transient;
 
 	transient = gtk_type_new (BONOBO_TRANSIENT_TYPE);
-	if (bonobo_transient_construct (transient, poa, new_servant, destroy_servant, data) == NULL)
+	if (bonobo_transient_construct (transient, poa, new_servant, destroy_servant, data) == NULL) {
 		gtk_object_destroy (GTK_OBJECT (transient));
+		return NULL;
+	}
 
 	return transient;
 }
