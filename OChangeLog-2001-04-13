@@ -1,3 +1,7 @@
+1999-12-17  Michael Meeks  <mmeeks@gnu.org>
+
+	* components/bonobo.keys: update to image-generic.
+
 1999-12-16  Michael Meeks  <mmeeks@gnu.org>
 
 	* bonobo/gnome-view.c (gnome_view_construct): kill 
