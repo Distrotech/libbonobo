@@ -1,3 +1,8 @@
+2001-02-05  Lutz Müller <urc8@rz.uni-karlsruhe.de>
+
+	* monikers/bonobo-moniker-extender-stream.c
+	(bonobo_stream_extender_resolve): fix bug in oaf query.
+
 2001-02-05  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/Makefile.am: Add bonobo-mobject.
