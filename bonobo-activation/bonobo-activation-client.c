@@ -194,6 +194,7 @@ get_lang_list (void)
         }
         result_set = TRUE;
         g_free (tmp2);
+        g_free (lang_with_locale);
         
         result = str->str ? str->str : "";
         g_string_free (str, FALSE);
