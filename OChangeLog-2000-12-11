@@ -14,10 +14,10 @@
 
 	* gshell/ui.xml: Did the cmd/widget thingie.
 
-2000-10-09  Mathieu Lacage  <mathieu@eazel.com>
+2000-10-09  Michael Meeks  <michael@helixcode.com>
 
-	* bonobo/bonobo-ui-util.c: (bonobo_ui_util_xml_get_icon_pixbuf):
-	fix segfault in certain cases.
+	* bonobo/bonobo-ui-util.c (get_stock_pixbuf): return NULL if no name.
+	(bonobo_ui_util_xml_get_icon_pixbuf): fixup.
 
 2000-10-09  Michael Meeks  <michael@helixcode.com>
 
