@@ -1,3 +1,15 @@
+2000-12-02  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: Remove vfs check.
+
+	* storage-modules/Makefile.am: conditionalize vfs storage
+	module build.
+
+2000-12-02  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-context.c (bonobo_context_add): document the
+	burgeoning API.
+
 2000-12-01  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-context.h: Fixed include that said <Bonobo.h>
