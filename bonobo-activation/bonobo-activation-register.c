@@ -154,7 +154,6 @@ copy_env_list_to_sequence (Bonobo_ActivationEnvironment *environment,
 	}
 }
 
-#ifdef BONOBO_ACTIVATION_DEBUG
 static char *
 registration_result_to_string (Bonobo_RegistrationResult result)
 {
@@ -178,7 +177,6 @@ registration_result_to_string (Bonobo_RegistrationResult result)
 
 	return "(invalid)";
 }
-#endif /* BONOBO_ACTIVATION_DEBUG */
 
 /**
  * bonobo_activation_register_active_server:
@@ -312,11 +310,12 @@ bonobo_activation_register_active_server_ext (const char               *iid,
 			CORBA_free (environment._buffer);
         }
 
-#ifdef BONOBO_ACTIVATION_DEBUG
-	if (g_getenv ("BONOBO_DEBUG") && retval != ACTIVATION_REG_SUCCESS)
+#ifndef BONOBO_ACTIVATION_DEBUG
+	if (g_getenv ("BONOBO_DEBUG") && retval != Bonobo_ACTIVATION_REG_SUCCESS)
+#endif
         	g_warning ("registration of '%s' returns %s", iid,
 			   registration_result_to_string (retval));
-#endif
+
 	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
 		char *iorstr;
 		FILE *fh;

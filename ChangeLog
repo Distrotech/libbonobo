@@ -1,3 +1,10 @@
+2004-01-30  Michael Meeks  <michael@ximian.com>
+
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_register_active_server_ext): only
+	be cautious about displaying if not in debugging mode,
+	fix failure to compile.
+
 2004-01-27  Rodrigo Moya <rodrigo@ximian.com>
 
 	* activation-server/object-directory-corba.c
