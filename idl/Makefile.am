@@ -50,7 +50,7 @@ Bonobo_module_la_LIBADD = \
 	$(LIBBONOBO_LIBS)
 
 Bonobo_module_la_LDFLAGS = \
-	-export-dynamic -module
+	-export-dynamic -module -avoid-version
 
 $(IMODULE_SOURCE): $(idl_DATA) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(idl_flags) --imodule $(top_srcdir)/idl/Bonobo.idl
