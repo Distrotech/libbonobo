@@ -1,3 +1,9 @@
+2000-07-25  Andy Hertzfeld <andy@eazel.com>
+
+	* bonobo/bonobo-uih-menu.c: Fixed problem in 
+	menu_toplevel_set_pixmap_internal where it forgot to show a newly
+	allocated pixmap widget.  Fixed by calling gtk_widget_show.
+	
 2000-07-25  Dan Winship  <danw@helixcode.com>
 
 	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_construct): Fix
