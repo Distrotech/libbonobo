@@ -12,8 +12,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
-"POT-Creation-Date: 2003-06-09 17:26+0100\n"
-"PO-Revision-Date: 2003-01-02 15:36+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-17 20:59+0300\n"
+"PO-Revision-Date: 2003-06-16 21:09+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +60,7 @@ msgstr "LAUSEKE"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr "CORBA CosNaming -palvelu"
+msgstr "CORBA CosNaming -palvelu."
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
@@ -107,12 +108,12 @@ msgstr "iid:llä %s on NULL-sijainti"
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "virheellinen merkki '%c' iid:ssä '%s'"
+msgstr "virheellinen merkki \"%c\" iid:ssä \"%s\""
 
 #: activation-server/object-directory-load.c:306
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "Ominaisuudella '%s' ei ole arvoa"
+msgstr "Ominaisuudella \"%s\" ei ole arvoa"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -163,7 +164,7 @@ msgstr "Aktivoitava IID"
 
 #: bonobo-activation/bonobo-activation-init.c:197
 msgid "Prevent registering of server with OAF"
-msgstr "Estä palvelimen rekisteröityminen OAF:lla"
+msgstr "Estä palvelimen rekisteröityminen OAF:iin"
 
 #: bonobo-activation/bonobo-activation-init.c:282
 msgid "Bonobo activation options"
@@ -172,31 +173,31 @@ msgstr "Bonobo-aktivoinnin valitsimet"
 #: bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr "g_module_open '%s' epäonnistui: %s"
+msgstr "g_module_open \"%s\" epäonnistui: %s"
 
 #: bonobo-activation/bonobo-activation-shlib.c:126
 #: bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr "Symboli Bonobo_Plugin_info ei löytynyt tiedostosta '%s'"
+msgstr "Symbolia Bonobo_Plugin_info ei löytynyt tiedostosta \"%s\""
 
 #: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr "Tehdas '%s' palautti arvon NIL iid:lle '%s'"
+msgstr "Tehdas \"%s\" palautti arvon NIL iid:lle \"%s\""
 
 #: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr "Jaettu kirjasto '%s' ei sisältänyt iid:tä '%s'"
+msgstr "Jaettu kirjasto \"%s\" ei sisältänyt iid:tä \"%s\""
 
 #: bonobo/bonobo-object.c:910
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Mukautettu CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -448,7 +449,7 @@ msgstr "%s on jo asetustiedostossa\n"
 
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr "oikeanrakenteista asetustiedosta ei ole\n"
+msgstr "oikearakenteista asetustiedosta ei ole\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
