@@ -1,3 +1,13 @@
+2000-02-28  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-uih-toolbar.c (toolbar_remote_set_state): implement.
+	(toolbar_toplevel_item_set_toggle_state_internal): implement.
+	(toolbar_toplevel_item_get_toggle_state_internal): implement.
+	(toolbar_item_remote_get_state): 
+	(toolbar_toplevel_item_get_state): 
+	(bonobo_ui_handler_toolbar_item_toggle_get_state): implement.
+	(bonobo_ui_handler_toolbar_item_toggle_set_state): implement.
+
 2000-02-19  Mathieu Lacage <mathieu@advogato.org>
 
 	* configure.in: make the libIDL/libuuid check be more friendly
@@ -325,7 +335,8 @@
 
 2000-02-10  Elliot Lee <sopwith@redhat.com>
 
-	* bonobo/bonobo-ui-handler.c: Handle a NULL 'hint' and 'label' for menu items.
+	* bonobo/bonobo-ui-handler.c: Handle a NULL 'hint' and 'label' for
+	menu items.
 
 2000-02-09  Michael Meeks  <michael@helixcode.com>
 
@@ -351,6 +362,7 @@
 	(which I #if 0'd out).
 	
 2000-02-07  Elliot Lee <sopwith@redhat.com>
+
 	* idl/Bonobo.idl: #include <gnome-factory.idl> to avoid
 	duplication of symbols in the libraries.
 
