@@ -15,9 +15,8 @@ check_string (const char *prefix, const char *escaped, const char *unescaped)
 	char          *str;
 	char          *s, *name;
 
-	moniker = bonobo_moniker_construct (gtk_type_new (bonobo_moniker_get_type ()),
-					    CORBA_OBJECT_NIL, prefix, "shlib_id");
-
+	moniker = bonobo_moniker_construct (
+		gtk_type_new (bonobo_moniker_get_type ()), prefix);
 	
 	name = g_strconcat (prefix, escaped, NULL);
 	bonobo_moniker_set_name (moniker, name, strlen (name));

@@ -1,5 +1,9 @@
 2001-02-06  Michael Meeks  <michael@ximian.com>
 
+	* tests/test-moniker.c (check_string): upd.
+
+2001-02-06  Michael Meeks  <michael@ximian.com>
+
 	* monikers/bonobo-moniker-query.c (bonobo_moniker_query_new): upd.
 
 	* bonobo/bonobo-shlib-factory.c (bonobo_shlib_factory_finalize): kill warning.
