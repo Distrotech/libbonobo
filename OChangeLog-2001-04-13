@@ -1,5 +1,19 @@
 2000-08-02  Michael Meeks  <michael@helixcode.com>
 
+	* storage-modules/gnome-storage-efs.c (bonobo_storage_efs_open):
+	kill lurking bonobo_object_destroys
+
+	* bonoboxConf.sh.in: Add.
+
+	* bonobox-printConf.sh.in: Add.
+
+	* Makefile.am (bonoboxConf.sh, bonobox-printConf.sh): create new conf
+	scripts.
+
+	* configure.in (BONOBOX_PRINT_LIBS, BONOBOX_LIBS): add.
+
+2000-08-02  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-control.c (bonobo_control_destroy): split out the widget
 	unrefs to (bonobo_control_finalize): here & priv free.
 	(bonobo_control_class_init): hook it in.
