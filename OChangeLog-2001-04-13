@@ -1,3 +1,16 @@
+2000-12-23  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* bonobo/bonobo-event-source.c 
+	(bonobo_event_source_notify_listeners_full): new function
+
+	* bonobo/bonobo-listener.h: added some new methods to handle event
+	names.
+
+	* bonobo/bonobo-listener.c: impl. the new methods.
+
+	* bonobo/bonobo-property-bag.c (notify_listeners): use the new
+	functions.
+
 2000-12-22  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* bonobo/bonobo-exception.c (bonobo_exception_get_text): removed

@@ -40,6 +40,13 @@ void               bonobo_event_source_notify_listeners (BonoboEventSource *even
 							 const CORBA_any   *value,
 							 CORBA_Environment *opt_ev);
 
+void          bonobo_event_source_notify_listeners_full (BonoboEventSource *event_source,
+							 const char        *path,
+							 const char        *type,
+							 const char        *subtype,
+							 const CORBA_any   *value,                          
+							 CORBA_Environment *opt_ev);
+
 POA_Bonobo_EventSource__epv *bonobo_event_source_get_epv   (void);
 Bonobo_EventSource bonobo_event_source_corba_object_create (BonoboObject *object);
 /* You don't want this routine */

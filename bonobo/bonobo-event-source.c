@@ -174,6 +174,24 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 		CORBA_exception_free (&ev);
 }
 
+void
+bonobo_event_source_notify_listeners_full (BonoboEventSource *event_source,
+					   const char        *path,
+					   const char        *type,
+					   const char        *subtype,
+					   const CORBA_any   *value,                          
+					   CORBA_Environment *opt_ev)
+{
+	char *event_name;
+
+	event_name = bonobo_event_make_name (path, type, subtype);
+
+	bonobo_event_source_notify_listeners (event_source, event_name,
+					      value, opt_ev);
+
+	g_free (event_name);
+}
+
 
 /**
  * bonobo_event_source_get_epv:

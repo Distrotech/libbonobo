@@ -241,3 +241,152 @@ bonobo_listener_new (BonoboListenerCallbackFn event_callback,
 
 	return bonobo_listener_construct (listener, corba_listener);
 }
+
+
+/**
+ * bonobo_event_make_name:
+ * @idl_path: the IDL part of the event name.
+ * @kind: the kind of the event
+ * @subtype: an optional subtype
+ *
+ * Creates an event name. Event names consists of three part. The @idl_path is
+ * mainly to create an unique namespace, and should identify the interface 
+ * which triggered the event, for example "Bonobo/Property". The @kind denotes
+ * what happened, for example "change". Finally you can use the optional 
+ * @subtype to make events more specific. All three parts of the name are 
+ * joined together separated by colons. "Bonobo/Property:change" or 
+ * "Bonobo/Property:change:autosave" are examples of valid event names.
+ *
+ * Returns: A valid event_name, or NULL on error.
+ */
+char *
+bonobo_event_make_name (const char *idl_path, 
+			const char *kind,
+			const char *subtype)
+{
+	g_return_val_if_fail (idl_path != NULL, NULL);
+	g_return_val_if_fail (kind != NULL, NULL);
+	g_return_val_if_fail (!strchr (idl_path, ':'), NULL);
+	g_return_val_if_fail (!strchr (kind, ':'), NULL);
+	g_return_val_if_fail (!subtype || !strchr (subtype, ':'), NULL);
+	g_return_val_if_fail (strlen (idl_path), NULL);
+	g_return_val_if_fail (strlen (kind), NULL);
+	g_return_val_if_fail (!subtype || strlen (subtype), NULL);
+
+	if (subtype)
+		return g_strconcat (idl_path, ":", kind, ":", 
+				    subtype, NULL);
+	else
+		return g_strconcat (idl_path, ":", kind, NULL);
+}
+
+static gboolean
+bonobo_event_name_valid (const char *event_name)
+{
+	gint i = 0, c = 0, l = -1;
+
+	g_return_val_if_fail (event_name != NULL, FALSE);
+	g_return_val_if_fail (strlen (event_name), FALSE);
+
+	if (event_name [0] == ':') 
+		return FALSE;
+
+	if (event_name [strlen (event_name) - 1] == ':') 
+		return FALSE;
+
+	while (event_name [i]) {
+		if (event_name [i] == ':') {
+			if (l == (i -1))
+				return FALSE;
+			l = i;
+			c++;
+		}
+		i++;
+	}
+
+	if ((c == 1) || (c == 2)) 
+		return TRUE;
+
+	return FALSE;
+}
+
+static char *
+bonobo_event_token (const char *event_name, gint pos)
+{
+	char **str_array, *res;
+
+	if (!bonobo_event_name_valid (event_name))
+		return NULL;
+
+	str_array = g_strsplit (event_name, ":", 3);
+
+	res = g_strdup (str_array [pos]);
+
+	g_strfreev (str_array);
+
+	return res;
+}
+
+/**
+ * bonobo_event_type:
+ * @event_name: the event name
+ *
+ * The event type consists of the first two parts of the event name, the idl_path
+ * combined with the kind.
+ *
+ * Returns: The event type, or NULL on error.
+ */
+char *
+bonobo_event_type (const char *event_name)
+{
+	gint i = 0, c = 0;
+       
+	if (!bonobo_event_name_valid (event_name))
+		return NULL;
+
+	while (event_name [i]) { 
+		if (event_name [i] == ':') 
+			c++;
+		if (c == 2) 
+			break;
+		i++;
+	}
+
+	return g_strndup (event_name, i);
+}
+
+/**
+ * bonobo_event_type:
+ * @event_name: the event name
+ *
+ * Returns: The event subtype, or NULL on error.
+ */
+char *
+bonobo_event_subtype (const char *event_name)
+{
+	return bonobo_event_token (event_name, 2);
+}
+
+/**
+ * bonobo_event_kind:
+ * @event_name: the event name
+ *
+ * Returns: The event kind, or NULL on error.
+ */
+char *
+bonobo_event_kind (const char *event_name)
+{
+	return bonobo_event_token (event_name, 1);
+}
+
+/**
+ * bonobo_event_idl_path:
+ * @event_name: the event name
+ *
+ * Returns: The event idl path, or NULL on error.
+ */
+char *
+bonobo_event_idl_path (const char *event_name)
+{
+	return bonobo_event_token (event_name, 0);
+}

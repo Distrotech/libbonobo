@@ -585,20 +585,13 @@ notify_listeners (BonoboPropertyBag *pb,
 		  const BonoboArg   *new_value,
 		  CORBA_Environment *ev)
 {
-	gchar             *name;
-	CORBA_char        *event_name;
-
 	if (prop->flags & BONOBO_PROPERTY_NO_LISTENING)
 		return;
 	
-	name = g_strconcat ("Bonobo/Property:change:", prop->name, NULL);
-
-	event_name = CORBA_string_dup (name);
-
-	g_free (name);
-
-	bonobo_event_source_notify_listeners (pb->priv->es, event_name, 
-					      new_value, ev);
+	bonobo_event_source_notify_listeners_full (pb->priv->es,
+						   "Bonobo/Property",
+						   "change", prop->name,
+						   new_value, ev);
 }
 
 void

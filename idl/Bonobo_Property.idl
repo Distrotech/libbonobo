@@ -12,6 +12,14 @@
  /*
   * The Property-manipulation interfaces here are based in large part
   * on suggestions from Chuck Jazdzewski <cjazdzewski@inprise.com>.
+  *
+  * Each PropertyBag is aggregated with an EventSource, so that it is
+  * possible to attach event listeners. The event name is composed
+  * of "Bonobo/Property", the type of the event and finally the property
+  * name - everything separated by colons. At the moment there is only one 
+  * type defined - "change". So if a property with name "autosave" changes
+  * its value, we emit an event with the name: 
+  * "Bonobo/Property:change:autosave"
   */
 
 #ifndef BONOBO_PROPERTY_IDL
