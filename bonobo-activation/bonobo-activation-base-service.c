@@ -214,6 +214,20 @@ static void print_exit_status(int status)
 }
 #endif
 
+#ifdef HAVE_STRSIGNAL
+#define oaf_strsignal strsignal
+#else
+static char *
+oaf_strsignal(int sig)
+{
+  if (sig<NSIG)
+    return sys_siglist[sig];
+  else
+    return "Unknown signal";
+
+}
+#endif
+
 CORBA_Object
 oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev)
 {
@@ -255,7 +269,7 @@ oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev)
 
 	  if(WIFSIGNALED(status))
 	    g_snprintf(cbuf, sizeof(cbuf), "Child received signal %u (%s)", WTERMSIG(status),
-		       sys_siglist[WTERMSIG(status)]);
+		       oaf_strsignal(WTERMSIG(status)));
 	  else
 	    g_snprintf(cbuf, sizeof(cbuf), "Unknown non-exit error (status is %u)", status);
 	  errval->description = CORBA_string_dup(cbuf);
