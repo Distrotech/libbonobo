@@ -160,7 +160,7 @@ init_storage_corba_class (void)
 	gnome_storage_epv.rename = impl_rename;
 	gnome_storage_epv.commit = impl_commit;
 	gnome_storage_epv.list_contents = impl_list_contents;
-	gnome_storage_epv.delete = impl_delete;
+	gnome_storage_epv.erase = impl_delete;
 
 	/* The VEPV */
 	gnome_storage_vepv.GNOME_obj_epv = &gnome_obj_epv;

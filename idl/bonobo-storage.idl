@@ -206,7 +206,7 @@ module GNOME {
 		 * Destroys the element pointed to by @path.  The element
 		 * can be a Storage or a Stream.
 		 */
-		void delete (in string path)
+		void erase (in string path)
 			raises (NotFound);
 	};
 };
