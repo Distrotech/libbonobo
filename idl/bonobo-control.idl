@@ -5,6 +5,9 @@
  *   Miguel de Icaza, based on the interfaces from Chuck
  *
  */
+
+module GNOME {
+
 interface Property : GNOME::Unknown {
 	/**
 	 * get_name:
@@ -32,30 +35,30 @@ interface Property : GNOME::Unknown {
 	 * 
 	 * Returns the kind for this object
 	 */
-	CORBA::TypeKind get_kind ();
+	TypeCode get_kind ();
 
 	/**
 	 * get_value:
 	 *
 	 * Returns the value for this property
 	 */
-	CORBA::Any get_value ();
+	any get_value ();
 
-	exception {} InvalidValue;
+	exception InvalidValue {};
 
 	/**
 	 * set_value:
 	 * 
 	 * Sets the value for this object to @value
 	 */
-	void set_value (CORBA::Any value) raises (InvalidValue);
+	void set_value (in any value) raises (InvalidValue);
 
 	/**
 	 * get_default:
 	 *
 	 * Gets the default value for this property
 	 */
-	CORBA::Any get_default ();
+	any get_default ();
 };
 
 typedef sequence<Property> Properties;
@@ -112,7 +115,7 @@ interface PersistableCollection : GNOME::Unknown {
 	 *
 	 * Returns the number of items in the Persistable
 	 */
-	int get_count ();
+	long get_count ();
 
 	/**
 	 * get_item:
@@ -120,7 +123,7 @@ interface PersistableCollection : GNOME::Unknown {
 	 *
 	 * Returns the persistable interface for this object
 	 */
-	Peristable get_item (in int index);
+	Persistable get_item (in long index);
 
 	/**
 	 * add:
@@ -133,8 +136,58 @@ interface PersistableCollection : GNOME::Unknown {
 	 * @index: index to modify
 	 * @instance: the object to replace with.
 	 */
-	void setItem(in int index, in Persistable instance);
+	void set_item (in long index, in Persistable instance);
 };
 
+interface Control : GNOME::Unknown {
+	typedef unsigned long windowid;
 
+	/**
+	 * size_allocate:
+	 * @width: width given to the view
+	 * @height: height given to the view.
+	 *
+	 * Informs the View of the size assigned by its container application
+	 */
+	void size_allocate (in short width, in short height);
 
+	/**
+	 * size_query:
+	 * @desired_width: In this value you should return the desired width you want.
+	 * @desired_height: In this value you should return the desired height you want.
+	 *
+	 */
+	void size_query (out short desired_width, out short desired_height);
+
+	/**
+	 * set_window:
+	 *
+	 * Sets the window ID that should be used for the plug
+	 * of this window
+	 */
+	void set_window (in windowid id);
+};
+
+interface ControlFrame : GNOME::Unknown {
+	/** 
+	 * request_resize:
+	 * @new_width: New requested width
+	 * @new_height: New requested height
+	 *
+	 * Requests the parent container to assign @new_width and
+	 * @new_height.  
+	 *
+	 * Returns FALSE on failure, TRUE on success.
+	 */
+	void request_resize (in short new_width, in short new_height);
+
+	/**
+	 * activate_uri:
+	 * @uri: the uri we would like to get loaded
+	 *
+	 * The user has requested that the uri be loaded
+	 */
+	void activate_uri (in string uri, in boolean relative);
+};
+
+};

@@ -212,6 +212,15 @@ module Canvas {
 		 * canvas
 		 */
 		void canvas_size_set (in short x, in short y, in short width, in short height);
+
+		/**
+		 * set_bounds:
+		 * @bbox: the requested bounding box.
+		 *
+		 * Sets the bounding box of the item to (x1,y1)-(x2,y2)
+		 *
+		 */
+		void set_bounds (in DRect bbox);
 	};
 
 	/*

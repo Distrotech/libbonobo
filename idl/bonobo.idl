@@ -24,6 +24,7 @@
 #include "gnome-client-site.idl"
 #include "gnome-ui-handler.idl"
 #include "gnome-canvas.idl"
+#include "gnome-control.idl"
 #include "gnome-embeddable.idl"
 
 #include "gnome-progressive.idl"

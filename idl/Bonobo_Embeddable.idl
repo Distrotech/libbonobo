@@ -9,34 +9,7 @@
 
 module GNOME {
 
-interface View : GNOME::Unknown {
-	typedef unsigned long windowid;
-
-	/**
-	 * size_allocate:
-	 * @width: width given to the view
-	 * @height: height given to the view.
-	 *
-	 * Informs the View of the size assigned by its container application
-	 */
-	void size_allocate (in short width, in short height);
-
-	/**
-	 * size_query:
-	 * @desired_width: In this value you should return the desired width you want.
-	 * @desired_height: In this value you should return the desired height you want.
-	 *
-	 */
-	void size_query (out short desired_width, out short desired_height);
-
-	/**
-	 * set_window:
-	 *
-	 * Sets the window ID that should be used for the plug
-	 * of this window
-	 */
-	void set_window (in windowid id);
-
+interface View : Control {
 	/**
 	 * activate:
 	 *
@@ -67,19 +40,9 @@ interface View : GNOME::Unknown {
 	 * Requests that the view be running at zoom factor
 	 */
 	void set_zoom_factor (in double zoom);
-
-	/**
-	 * get_canvas_item:
-	 * @aa: Whether the item should be an AA-item or not
-	 * @proxy: The Proxy used to notify of requested updates.
-	 *
-	 * Returns a GNOME::Canvas::Item interface, or CORBA_OBJECT_NIL
-	 * if this object does not support the Item interface
-	 */
-	Canvas::Item get_canvas_item (in boolean aa, in Canvas::ItemProxy proxy);
 };
 
-interface ViewFrame : GNOME::Unknown {
+interface ViewFrame : ControlFrame {
 	/**
 	 * get_client_site:
 	 *
@@ -111,25 +74,6 @@ interface ViewFrame : GNOME::Unknown {
 	 */
 	void deactivate_and_undo ();
 
-	/** 
-	 * request_resize:
-	 * @new_width: New requested width
-	 * @new_height: New requested height
-	 *
-	 * Requests the parent container to assign @new_width and
-	 * @new_height.  
-	 *
-	 * Returns FALSE on failure, TRUE on success.
-	 */
-	void request_resize (in short new_width, in short new_height);
-
-	/**
-	 * activate_uri:
-	 * @uri: the uri we would like to get loaded
-	 *
-	 * The user has requested that the uri be loaded
-	 */
-	void activate_uri (in string uri, in boolean relative);
 };
 
 /* Equivalent to IOleObject */
@@ -244,6 +188,16 @@ interface Embeddable : GNOME::Unknown {
 	 * of the same data as requested.
 	 */
 	View new_view (in ViewFrame frame) ;
+
+	/**
+	 * new_canvas_item:
+	 * @aa: Whether the item should be an AA-item or not
+	 * @proxy: The Proxy used to notify of requested updates.
+	 *
+	 * Returns a GNOME::Canvas::Item interface, or CORBA_OBJECT_NIL
+	 * if this object does not support the Item interface
+	 */
+	Canvas::Item new_canvas_item (in boolean aa, in Canvas::ItemProxy proxy);
 };
 
 

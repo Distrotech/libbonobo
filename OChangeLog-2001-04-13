@@ -1,3 +1,40 @@
+1999-10-06  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-client-site.c (gnome_client_site_new_item): Updated
+	to the new setup.
+
+	* bonobo/gnome-bonobo-item.c (gnome_bonobo_item_new): Take a
+	gnome-embddable rathern than a ViewFrame. 
+
+	* bonobo/gnome-client-site.c: Updated and initialize corba class
+	in a routine rather than using a structure.
+
+	* bonobo/gnome-embeddable.c (gnome_embeddable_destroy): Destroy
+	the items as well.
+
+	* bonobo/gnome-embeddable.c (GnomeEmbeddablePrivate): move the
+	list of views here;  Add support for creating canvas items;  Add
+	the canvas creation functions here;  add the callback pointers
+	here. 
+
+1999-10-05  Miguel de Icaza  <miguel@gnu.org>
+
+	* idl/gnome-canvas.idl (set_bounds): New method.
+
+	* bonobo/gnome-view.c (gnome_view_class_init): Removed the code
+	that has been moved to the gnome-control.
+
+	* bonobo/gnome-control.c: New file, implements the control side.
+	This is a very simple interface for creating controls 
+
+	* idl/gnome-control.idl (Control, ControlFrame): new interfaces,
+	they are now the basis for View and ViewFrame.
+
+	* idl/gnome-embeddable.idl (View): we no longer return the canvas
+	item here.
+	(Embeddable): new method for returning a canvas item from this
+	embeddable. 
+
 1999-10-04  Michael Meeks  <michael@nuclecu.unam.mx>
 
 	* bonobo/gnome-desktop-window.c (gnome_desktop_window_construct):
