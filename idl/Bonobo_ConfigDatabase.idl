@@ -36,15 +36,7 @@ module Bonobo {
 		PropertyEditorSet getSubEditors ();
 	};
 
-	interface ConfigDatabase;
-
 	typedef sequence<string> KeyList;
-
-	struct ConfigEvent {
-		ConfigDatabase database;
-		string         key;
-		any            value;
-	};
 
 	/*
 	 * aggregated with an event source
