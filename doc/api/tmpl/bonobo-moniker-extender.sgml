@@ -1,5 +1,5 @@
 <!-- ##### SECTION Title ##### -->
-bonobo-moniker-extender
+BonoboMonikerExtender
 
 <!-- ##### SECTION Short_Description ##### -->
 A way to extend arbitary monikers
@@ -40,9 +40,9 @@ like this:
   <example>
     <title>Oaf information for an extender</title>
     <programlisting>
-<oaf_attribute name="bonobo:moniker_extender" type="stringv">
-	<item value="file:"/>
-</oaf_attribute>
+&gt;oaf_attribute name="bonobo:moniker_extender" type="stringv"&lt;
+	&gt;item value="file:"/&lt;
+&gt;/oaf_attribute&lt;
     </programlisting>
   </example>
 to the .oaf file. This registers the extender with the system, such
