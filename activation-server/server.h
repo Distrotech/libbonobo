@@ -36,6 +36,7 @@ typedef struct {
 
 CORBA_Object od_server_activate(OAF_ServerInfo *si,
 				ODActivationInfo *actinfo,
+				CORBA_Object od_obj,
 				CORBA_Environment *ev);
 
 /* ac-corba.c */

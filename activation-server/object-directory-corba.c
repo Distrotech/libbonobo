@@ -280,7 +280,7 @@ impl_OAF_ObjectDirectory_activate(impl_POA_OAF_ObjectDirectory * servant,
   si = g_hash_table_lookup(servant->by_iid, iid);
 
   if(si && /* XXX !server_is_running(si) */ 1)
-    retval = od_server_activate(si, &ai, ev);
+    retval = od_server_activate(si, &ai, servant->self, ev);
 
   return retval;
 }

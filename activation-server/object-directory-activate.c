@@ -14,13 +14,14 @@
 #define OAF_MAGIC_FD 123
 
 CORBA_Object od_server_activate_factory(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Environment *ev);
-CORBA_Object od_server_activate_exe(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Environment *ev);
+CORBA_Object od_server_activate_exe(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Object od_obj,
+				    CORBA_Environment *ev);
 
 CORBA_Object
-od_server_activate(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Environment *ev)
+od_server_activate(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Object od_obj, CORBA_Environment *ev)
 {
   if(!strcmp(si->server_type, "exe"))
-    return od_server_activate_exe(si, actinfo, ev);
+    return od_server_activate_exe(si, actinfo, od_obj, ev);
 
   else if(!strcmp(si->server_type, "factory"))
     return od_server_activate_factory(si, actinfo, ev);
@@ -70,14 +71,14 @@ od_server_activate_factory(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_
 
 /* Copied largely from goad.c, goad_server_activate_exe() */
 CORBA_Object
-od_server_activate_exe(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Environment *ev)
+od_server_activate_exe(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Object od_obj, CORBA_Environment *ev)
 {
   char **args;
   char *extra_arg, *ctmp, *ctmp2;
   int i;
 
   /* Munge the args */
-  args = oaf_alloca(34 * sizeof(char *));
+  args = oaf_alloca(36 * sizeof(char *));
   for(i = 0, ctmp = ctmp2 = si->location_info; i < 32; i++) {
     while(*ctmp2 && !isspace(*ctmp2)) ctmp2++;
     if(!*ctmp2) break;
@@ -102,6 +103,21 @@ od_server_activate_exe(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Envi
   extra_arg = oaf_alloca(sizeof("--oaf-ior-fd=") + 10);
   args[i++] = extra_arg;
   sprintf(extra_arg, "--oaf-ior-fd=%d", OAF_MAGIC_FD);
+
+  {
+    char *iorstr;
+
+    iorstr = CORBA_ORB_object_to_string(oaf_orb_get(), od_obj, ev);
+
+    if(ev->_major == CORBA_NO_EXCEPTION)
+      {
+	extra_arg = oaf_alloca(sizeof("--oaf-od-ior=") + strlen(iorstr));
+	args[i++] = extra_arg;
+	sprintf(extra_arg, "--oaf-od-ior=%s", iorstr);
+
+	CORBA_free(iorstr);
+      }
+  }
 
   args[i] = NULL;
 
