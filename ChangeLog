@@ -1,3 +1,8 @@
+2001-08-09 Dirk-Jan C. Binnema <djcb@djcbsoftware.nl>
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_get_name_escaped):
+	return NULL in case of failure.
+
 2001-08-08  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-types.c (bonobo_closure_store),
