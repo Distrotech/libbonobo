@@ -537,14 +537,13 @@ impl_OAF_ActivationContext_activate (impl_POA_OAF_ActivationContext * servant,
 
 	servant->refs++;
 
-	items =
-		oaf_alloca (servant->total_servers *
+	items = oaf_alloca (servant->total_servers *
 			    sizeof (OAF_ServerInfo *));
 	ac_query_run (servant, requirements, selection_order, ctx, items, ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION) {
 		goto out;
-	}
+        }
 
 	retval = OAF_ActivationResult__alloc ();
 	retval->res._d = OAF_RESULT_NONE;
@@ -915,7 +914,6 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 		CORBA_free (retval);
 		retval = NULL;
 	}
-
 
 	return retval;
 }

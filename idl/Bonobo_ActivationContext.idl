@@ -124,7 +124,7 @@ module OAF {
                 ActivationResult activate (in string requirements,
                                            in GNOME::stringlist selection_order,
                                            in ActivationFlags flags)
-                        raises (ParseFailed)
+                        raises (ParseFailed, GeneralError)
                         context ("username", "hostname", "domain");
 
                 readonly attribute ServerInfoList servers;
@@ -134,6 +134,7 @@ module OAF {
                         context ("username", "hostname", "domain");
 
                 ActivationResult activate_from_id (in ActivationID aid, in ActivationFlags flags)
+                        raises (ParseFailed, GeneralError)
                         context ("username", "hostname", "domain");
         };
 };
