@@ -11,16 +11,16 @@
 #ifndef _BONOBO_OBJECT_CLIENT_H_
 #define _BONOBO_OBJECT_CLIENT_H_
 
-#include <libgnome/gnome-defs.h>
-#include <gtk/gtkobject.h>
+#include <libgnomebase/gnome-defs.h>
+#include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 
 #define BONOBO_OBJECT_CLIENT_TYPE        (bonobo_object_client_get_type ())
-#define BONOBO_OBJECT_CLIENT(o)          (GTK_CHECK_CAST ((o), BONOBO_OBJECT_CLIENT_TYPE, BonoboObjectClient))
-#define BONOBO_OBJECT_CLIENT_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_OBJECT_CLIENT_TYPE, BonoboObjectClientClass))
-#define BONOBO_IS_OBJECT_CLIENT(o)       (GTK_CHECK_TYPE ((o), BONOBO_OBJECT_CLIENT_TYPE))
-#define BONOBO_IS_OBJECT_CLIENT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_OBJECT_CLIENT_TYPE))
+#define BONOBO_OBJECT_CLIENT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_OBJECT_CLIENT_TYPE, BonoboObjectClient))
+#define BONOBO_OBJECT_CLIENT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_OBJECT_CLIENT_TYPE, BonoboObjectClientClass))
+#define BONOBO_IS_OBJECT_CLIENT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_OBJECT_CLIENT_TYPE))
+#define BONOBO_IS_OBJECT_CLIENT_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_OBJECT_CLIENT_TYPE))
 
 typedef struct {
 	BonoboObject parent;
@@ -33,7 +33,7 @@ typedef struct {
 typedef void      (*BonoboObjectClientAsyncCallback)     (BonoboObjectClient             *o,
 							  const char                     *error,
 							  gpointer                        user_data);
-GtkType             bonobo_object_client_get_type        (void);
+GType             bonobo_object_client_get_type        (void);
 BonoboObjectClient *bonobo_object_client_from_corba      (Bonobo_Unknown                  o);
 BonoboObjectClient *bonobo_object_client_construct       (BonoboObjectClient             *object_client,
 							  CORBA_Object                    corba_object);

@@ -18,7 +18,7 @@
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-static GtkObjectClass *parent_class = NULL;
+static GObjectClass *parent_class = NULL;
          
 
 /*
@@ -335,7 +335,7 @@ bonobo_property_bag_new_full (BonoboPropertyGetFn  get_prop,
 
 	g_return_val_if_fail (es != NULL, NULL);
 
-	pb = gtk_type_new (BONOBO_PROPERTY_BAG_TYPE);
+	pb = g_object_new (BONOBO_PROPERTY_BAG_TYPE, NULL);
 
 	return bonobo_property_bag_construct (pb, get_prop, set_prop, es, 
 					      user_data);
@@ -365,7 +365,7 @@ bonobo_property_bag_new (BonoboPropertyGetFn get_prop,
 }
 
 static void
-bonobo_property_destroy (BonoboProperty *prop)
+bonobo_property_finalize (BonoboProperty *prop)
 {
 	g_free (prop->name);
 	prop->idx = -1;
@@ -382,18 +382,18 @@ bonobo_property_bag_foreach_remove_prop (gpointer key,
 					 gpointer value,
 					 gpointer user_data)
 {
-	bonobo_property_destroy (value);
+	bonobo_property_finalize (value);
 
 	return TRUE;
 }
 
 static void
-bonobo_property_bag_destroy (GtkObject *object)
+bonobo_property_bag_finalize (GObject *object)
 {
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (object);
 	
 	/* Destroy the transient POA */
-	gtk_object_unref (GTK_OBJECT (pb->priv->transient));
+	g_object_unref (G_OBJECT (pb->priv->transient));
 
 	/* Destroy all properties. */
 	g_hash_table_foreach_remove (pb->priv->props,
@@ -403,7 +403,7 @@ bonobo_property_bag_destroy (GtkObject *object)
 
 	g_free (pb->priv);
 
-	parent_class->destroy (object);
+	parent_class->finalize (object);
 }
 
 
@@ -484,16 +484,18 @@ flags_gtk_to_bonobo (guint flags)
 {
 	BonoboPropertyFlags f = 0;
 
-	if (!flags & GTK_ARG_READABLE)
+	if (!flags & G_PARAM_READABLE)
 		f |= BONOBO_PROPERTY_READABLE;
 
-	if (!flags & GTK_ARG_WRITABLE)
+	if (!flags & G_PARAM_WRITABLE)
 		f |= BONOBO_PROPERTY_WRITEABLE;
 
 	return f;
 }
 
 #define BONOBO_GTK_MAP_KEY "BonoboGtkMapKey"
+
+static GQuark quark_gobject_map = 0;
 
 static void
 get_prop (BonoboPropertyBag *bag,
@@ -502,27 +504,23 @@ get_prop (BonoboPropertyBag *bag,
 	  CORBA_Environment *ev,
 	  gpointer           user_data)
 {
-	GtkArg *gtk_arg = user_data;
-	GtkArg  new;
-	GtkObject *obj;
+	GParamSpec *pspec = user_data;
+	GValue      new = { 0, };
+	GObject    *obj;
 
-	if (!(obj = gtk_object_get_data (GTK_OBJECT (bag), 
-					 BONOBO_GTK_MAP_KEY))) {
+	if (!(obj = g_object_get_qdata (G_OBJECT (bag), quark_gobject_map))) {
 		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
 		return;
 	}
-	
-/*	g_warning ("Get prop ... %d: %s", arg_id, gtk_arg->name);*/
 
-	new.type = gtk_arg->type;
-	new.name = gtk_arg->name;
-	gtk_object_getv (obj, 1, &new);
+/*	g_warning ("Get prop ... %d: %s", arg_id, g_arg->name);*/
+
+	g_value_init (&new, G_PARAM_SPEC_VALUE_TYPE (pspec));
+	g_object_get_property (obj, pspec->name, &new);
 
 	bonobo_arg_from_gtk (arg, &new);
 
-	if (new.type == GTK_TYPE_STRING &&
-	    GTK_VALUE_STRING (new))
-		g_free (GTK_VALUE_STRING (new));
+	g_value_unset (&new);
 }
 
 static void
@@ -532,96 +530,96 @@ set_prop (BonoboPropertyBag *bag,
 	  CORBA_Environment *ev,
 	  gpointer           user_data)
 {
-	GtkArg *gtk_arg = user_data;
-	GtkArg  new;
-	GtkObject *obj;
+	GParamSpec *pspec = user_data;
+	GValue      new = { 0, };
+	GObject    *obj;
 
-	if (!(obj = gtk_object_get_data (GTK_OBJECT (bag),
-					 BONOBO_GTK_MAP_KEY))) {
+	if (!(obj = g_object_get_qdata (G_OBJECT (bag), quark_gobject_map))) {
 		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
 		return;
 	}
-		
-/*	g_warning ("Set prop ... %d: %s", arg_id, gtk_arg->name);*/
 
-	new.type = gtk_arg->type;
-	new.name = gtk_arg->name;
+/*	g_warning ("Set prop ... %d: %s", arg_id, g_arg->name);*/
+
+	g_value_init (&new, G_PARAM_SPEC_VALUE_TYPE (pspec));
+
 	bonobo_arg_to_gtk (&new, arg);
+	g_object_set_property (obj, pspec->name, &new);
 
-	gtk_object_setv (obj, 1, &new);
+	g_value_unset (&new);
 }
 
 /**
  * bonobo_property_bag_add_gtk_args:
  * @pb: destination property bag
- * @object: a generic Gtk Object
+ * @object: a generic GObject
  * 
  * Transfers GtkArgs from the object to the property bag,
  * and maps between the two objects property systems.
  **/
 void
 bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
-				  GtkObject          *object)
+				  GObject            *object)
 {
-	GtkArg  *args, *arg;
-	guint32 *arg_flags;
-	int      nargs = 0;
-	int      i;
+	GParamSpec **pspecs;
+	int          i, nargs = 0;
 
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
 	g_return_if_fail (object != NULL);
-	g_return_if_fail (GTK_IS_OBJECT (object));
+	g_return_if_fail (G_IS_OBJECT (object));
 
-	if (gtk_object_get_data (GTK_OBJECT (pb),
-				 BONOBO_GTK_MAP_KEY)) {
+	if (g_object_get_qdata (G_OBJECT (pb), quark_gobject_map)) {
 		g_warning ("Cannot proxy two gtk objects in the same bag yet");
 		return;
 	}
 
-	gtk_object_set_data (GTK_OBJECT (pb),
-			     BONOBO_GTK_MAP_KEY, object);
+	g_object_set_qdata (G_OBJECT (pb), quark_gobject_map, object);
+
 	/*
 	 * FIXME: we should do this on a per class basis perhaps.
 	 */
-	args = gtk_object_query_args (GTK_OBJECT_TYPE (object),
-				      &arg_flags, &nargs);
-	
+
+	pspecs = G_OBJECT_GET_CLASS (object)->property_specs;
+	nargs = G_OBJECT_GET_CLASS (object)->n_property_specs;
+
 	if (!nargs) {
-		g_warning ("Strange, no Gtk arguments to map to Bonobo");
+		g_warning ("Strange, no GRuntime arguments to map to Bonobo");
 		return;
 	}
 
-	arg = args;
 	/* Setup types, and names */
-	for (i = 0; i < nargs; arg++, i++) {
+	for (i = 0; i < nargs; i++) {
+		GParamSpec         *pspec;
+		GType               value_type;
 		BonoboPropertyFlags flags;
 		BonoboArgType       type;
 		char               *desc;
 
-		type = bonobo_arg_type_from_gtk (arg->type);
+		pspec = pspecs [i];
+		value_type = G_PARAM_SPEC_VALUE_TYPE (pspec);
+
+		type = bonobo_arg_type_from_gtk (value_type);
 		if (!type) {
 			g_warning ("Can't handle type '%s' on arg '%s'",
-				   gtk_type_name (arg->type),
-				   arg->name);
+				   g_type_name (value_type), pspec->name);
 			continue;
 		}
 
-		flags = flags_gtk_to_bonobo (arg_flags [i]);
+		flags = flags_gtk_to_bonobo (pspec->flags);
 
-		desc = g_strconcat (arg->name, " is a ",
-				    gtk_type_name (arg->type), NULL);
+		desc = g_strconcat (pspec->name, " is a ",
+				    g_type_name (value_type), NULL);
 
 		g_warning ("Mapping '%s'", desc);
-		bonobo_property_bag_add_full (pb, arg->name, i, type,
+		bonobo_property_bag_add_full (pb, pspec->name, i, type,
 					      NULL, desc, flags,
-					      get_prop, set_prop, arg);
+					      get_prop, set_prop, pspec);
 		g_free (desc);
 	}
 
 /* FIXME: leaks like a privatised water company */
 /*	g_free (args);*/
-	g_free (arg_flags);
 }
 
 /**
@@ -946,12 +944,16 @@ bonobo_property_bag_get_flags (BonoboPropertyBag *pb,
 static void
 bonobo_property_bag_class_init (BonoboPropertyBagClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 	POA_Bonobo_PropertyBag__epv *epv = &klass->epv;
 
-	parent_class = gtk_type_class (PARENT_TYPE);
+	if (!quark_gobject_map)
+		quark_gobject_map = g_quark_from_static_string (
+			"BonoboGObjectMap");
 
-	object_class->destroy = bonobo_property_bag_destroy;
+	parent_class = g_type_class_peek_parent (klass);
+
+	object_class->finalize = bonobo_property_bag_finalize;
 
 	epv->getProperties        = impl_Bonobo_PropertyBag_getProperties;
 	epv->getPropertyByName    = impl_Bonobo_PropertyBag_getPropertyByName;

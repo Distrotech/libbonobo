@@ -8,9 +8,8 @@
  * Copyright 2000 Miguel de Icaza.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
-#include <gtk/gtkwidget.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-exception.h>
@@ -60,7 +59,7 @@ bonobo_item_handler_class_init (BonoboItemHandlerClass *klass)
 }
 
 static void 
-bonobo_item_handler_init (GtkObject *object)
+bonobo_item_handler_init (GObject *object)
 {
 	/* nothing to do */
 }
@@ -112,7 +111,7 @@ bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
 {
 	BonoboItemHandler *handler;
 
-	handler = gtk_type_new (bonobo_item_handler_get_type ());
+	handler = g_object_new (bonobo_item_handler_get_type (), NULL);
 
 	return bonobo_item_handler_construct (
 		handler, enum_objects, get_object, user_data);

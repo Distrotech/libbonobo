@@ -8,9 +8,9 @@
  */
 #include <config.h>
 #include <glib.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #define GNOME_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
-#include <libgnome/gnome-i18n.h>
+#include <libgnomebase/gnome-i18n.h>
 #include <bonobo/bonobo-exception.h>
 
 typedef enum {
@@ -272,14 +272,14 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 	if (!ev || !BONOBO_EX (ev))
 		return g_strdup (_("Error checking error; no exception"));
 
-	if ((rval = bonobo_exception_repoid_to_text (ev->_repo_id)))
+	if ((rval = bonobo_exception_repoid_to_text (ev->_id)))
 		return rval;
 	else {
 		ExceptionHandle *e;
 		GHashTable *hash = get_hash ();
 		char *str = NULL;
 		
-		if ((e = g_hash_table_lookup (hash, ev->_repo_id))) {
+		if ((e = g_hash_table_lookup (hash, ev->_id))) {
 			if (e->type == EXCEPTION_STR)
 				str = g_strdup (e->str);
 			else
@@ -291,6 +291,6 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 		else
 			return g_strdup_printf (
 				"Unknown CORBA exception id: '%s'", 
-				ev->_repo_id);
+				ev->_id);
 	}
 }

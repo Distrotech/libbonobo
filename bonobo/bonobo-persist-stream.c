@@ -9,8 +9,8 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-persist-stream.h>
 
@@ -40,7 +40,7 @@ impl_load (PortableServer_Servant servant,
 	if (ps->load_fn != NULL)
 		(*ps->load_fn)(ps, stream, type, ps->closure, ev);
 	else {
-		GtkObjectClass *oc = GTK_OBJECT (ps)->klass;
+		GObjectClass *oc = G_OBJECT_GET_CLASS (ps);
 		BonoboPersistStreamClass *class = BONOBO_PERSIST_STREAM_CLASS (oc);
 
 		if (class->load)
@@ -64,7 +64,7 @@ impl_save (PortableServer_Servant servant,
 	if (ps->save_fn != NULL)
 		(*ps->save_fn)(ps, stream, type, ps->closure, ev);
 	else {
-		GtkObjectClass *oc = GTK_OBJECT (ps)->klass;
+		GObjectClass *oc = G_OBJECT_GET_CLASS (ps);
 		BonoboPersistStreamClass *class = BONOBO_PERSIST_STREAM_CLASS (oc);
 
 		if (class->save)
@@ -83,7 +83,7 @@ impl_get_size_max (PortableServer_Servant servant, CORBA_Environment * ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboPersistStream *ps = BONOBO_PERSIST_STREAM (object);
-	GtkObjectClass *oc = GTK_OBJECT (object)->klass;
+	GObjectClass *oc = G_OBJECT_GET_CLASS (object);
 	BonoboPersistStreamClass *class = BONOBO_PERSIST_STREAM_CLASS (oc);
 
 
@@ -117,7 +117,7 @@ bonobo_persist_stream_class_init (BonoboPersistStreamClass *klass)
 	BonoboPersistClass *persist_class = BONOBO_PERSIST_CLASS (klass);
 	POA_Bonobo_PersistStream__epv *epv = &klass->epv;
 
-	bonobo_persist_stream_parent_class = gtk_type_class (PARENT_TYPE);
+	bonobo_persist_stream_parent_class = g_type_class_peek_parent (klass);
 
 	/* Override and initialize methods */
 	klass->save = NULL;
@@ -204,7 +204,7 @@ bonobo_persist_stream_new (BonoboPersistStreamIOFn    load_fn,
 {
 	BonoboPersistStream *ps;
 
-	ps = gtk_type_new (bonobo_persist_stream_get_type ());
+	ps = g_object_new (bonobo_persist_stream_get_type (), NULL);
 
 	bonobo_persist_stream_construct (ps, load_fn, save_fn,
 					 max_fn, types_fn, closure);

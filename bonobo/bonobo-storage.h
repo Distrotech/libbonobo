@@ -16,10 +16,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_STORAGE_TYPE        (bonobo_storage_get_type ())
-#define BONOBO_STORAGE(o)          (GTK_CHECK_CAST ((o), BONOBO_STORAGE_TYPE, BonoboStorage))
-#define BONOBO_STORAGE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_STORAGE_TYPE, BonoboStorageClass))
-#define BONOBO_IS_STORAGE(o)       (GTK_CHECK_TYPE ((o), BONOBO_STORAGE_TYPE))
-#define BONOBO_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_STORAGE_TYPE))
+#define BONOBO_STORAGE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_STORAGE_TYPE, BonoboStorage))
+#define BONOBO_STORAGE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_STORAGE_TYPE, BonoboStorageClass))
+#define BONOBO_IS_STORAGE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_STORAGE_TYPE))
+#define BONOBO_IS_STORAGE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_STORAGE_TYPE))
 
 typedef struct _BonoboStoragePrivate BonoboStoragePrivate;
 
@@ -73,7 +73,7 @@ typedef struct {
                                          CORBA_Environment *ev);
 } BonoboStorageClass;
 
-GtkType          bonobo_storage_get_type     (void);
+GType          bonobo_storage_get_type     (void);
 
 BonoboStorage   *bonobo_storage_open         (const char *driver,
 					      const char *path,

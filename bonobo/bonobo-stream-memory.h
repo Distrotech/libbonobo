@@ -24,10 +24,10 @@ typedef struct _BonoboStorageMem BonoboStorageMem;
 #endif
 
 #define BONOBO_STREAM_MEM_TYPE        (bonobo_stream_mem_get_type ())
-#define BONOBO_STREAM_MEM(o)          (GTK_CHECK_CAST ((o), BONOBO_STREAM_MEM_TYPE, BonoboStreamMem))
-#define BONOBO_STREAM_MEM_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_STREAM_MEM_TYPE, BonoboStreamMemClass))
-#define BONOBO_IS_STREAM_MEM(o)       (GTK_CHECK_TYPE ((o), BONOBO_STREAM_MEM_TYPE))
-#define BONOBO_IS_STREAM_MEM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_STREAM_MEM_TYPE))
+#define BONOBO_STREAM_MEM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_STREAM_MEM_TYPE, BonoboStreamMem))
+#define BONOBO_STREAM_MEM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_STREAM_MEM_TYPE, BonoboStreamMemClass))
+#define BONOBO_IS_STREAM_MEM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_STREAM_MEM_TYPE))
+#define BONOBO_IS_STREAM_MEM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_STREAM_MEM_TYPE))
 
 struct _BonoboStreamMem {
 	BonoboStream  stream;
@@ -47,7 +47,7 @@ typedef struct {
 	size_t          (*get_size)   (BonoboStreamMem *stream_mem);
 } BonoboStreamMemClass;
 
-GtkType          bonobo_stream_mem_get_type   (void);
+GType          bonobo_stream_mem_get_type   (void);
 BonoboStreamMem *bonobo_stream_mem_construct  (BonoboStreamMem  *stream_mem,
 					       Bonobo_Stream     corba_stream,
 					       const char       *buffer,

@@ -10,7 +10,7 @@
  * Copyright (C) 2000, Helix Code, Inc.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
+#include <gobject/gsignal.h>
 #include <bonobo/bonobo-listener.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-event-source.h>
@@ -19,7 +19,7 @@
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-static GtkObjectClass *bonobo_event_source_parent_class;
+static GObjectClass *bonobo_event_source_parent_class;
 
 struct _BonoboEventSourcePrivate {
 	GSList  *listeners;  /* CONTAINS: ListenerDesc* */
@@ -230,7 +230,7 @@ bonobo_event_source_notify_listeners_full (BonoboEventSource *event_source,
 }
 
 static void
-bonobo_event_source_destroy (GtkObject *object)
+bonobo_event_source_finalize (GObject *object)
 {
 	BonoboEventSource *event_source;
 	GSList            *l;
@@ -248,18 +248,18 @@ bonobo_event_source_destroy (GtkObject *object)
 	g_slist_free (event_source->priv->listeners);
 	g_free (event_source->priv);
 
-	bonobo_event_source_parent_class->destroy (object);
+	bonobo_event_source_parent_class->finalize (object);
 }
 
 static void
 bonobo_event_source_class_init (BonoboEventSourceClass *klass)
 {
-	GtkObjectClass *oclass = (GtkObjectClass *) klass;
+	GObjectClass *oclass = (GObjectClass *) klass;
 	POA_Bonobo_EventSource__epv *epv = &klass->epv;
 
-	bonobo_event_source_parent_class = gtk_type_class (PARENT_TYPE);
+	bonobo_event_source_parent_class = g_type_class_peek_parent (klass);
 
-	oclass->destroy = bonobo_event_source_destroy;
+	oclass->finalize = bonobo_event_source_finalize;
 
 	epv->addListener         = impl_Bonobo_EventSource_addListener;
 	epv->addListenerWithMask = impl_Bonobo_EventSource_addListenerWithMask;
@@ -267,7 +267,7 @@ bonobo_event_source_class_init (BonoboEventSourceClass *klass)
 }
 
 static void
-bonobo_event_source_init (GtkObject *object)
+bonobo_event_source_init (GObject *object)
 {
 	BonoboEventSource *event_source;
 
@@ -297,7 +297,7 @@ BONOBO_X_TYPE_FUNC_FULL (BonoboEventSource,
 BonoboEventSource *
 bonobo_event_source_new (void)
 {
-	return gtk_type_new (BONOBO_EVENT_SOURCE_TYPE);
+	return g_object_new (BONOBO_EVENT_SOURCE_TYPE, NULL);
 }
 
 /**

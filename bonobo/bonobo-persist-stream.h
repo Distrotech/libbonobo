@@ -16,10 +16,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_PERSIST_STREAM_TYPE        (bonobo_persist_stream_get_type ())
-#define BONOBO_PERSIST_STREAM(o)          (GTK_CHECK_CAST ((o), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStream))
-#define BONOBO_PERSIST_STREAM_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStreamClass))
-#define BONOBO_IS_PERSIST_STREAM(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_STREAM_TYPE))
-#define BONOBO_IS_PERSIST_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_STREAM_TYPE))
+#define BONOBO_PERSIST_STREAM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStream))
+#define BONOBO_PERSIST_STREAM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStreamClass))
+#define BONOBO_IS_PERSIST_STREAM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_PERSIST_STREAM_TYPE))
+#define BONOBO_IS_PERSIST_STREAM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_STREAM_TYPE))
 
 typedef struct _BonoboPersistStreamPrivate BonoboPersistStreamPrivate;
 typedef struct _BonoboPersistStream        BonoboPersistStream;
@@ -78,7 +78,7 @@ typedef struct {
 
 } BonoboPersistStreamClass;
 
-GtkType              bonobo_persist_stream_get_type  (void);
+GType              bonobo_persist_stream_get_type  (void);
 void                 bonobo_persist_stream_set_dirty (BonoboPersistStream       *ps,
 						      gboolean                   dirty);
 

@@ -10,7 +10,7 @@
 #define __BONOBO_PROPERTY_BAG_CLIENT_H__
 
 #include <stdarg.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-stream.h>
 #include <bonobo/bonobo-property-bag.h>
@@ -33,7 +33,7 @@ void			 bonobo_property_bag_client_depersist	       (Bonobo_PropertyBag       pb
 									Bonobo_Stream            stream,
 									CORBA_Environment       *ev);
 
-GtkType			 bonobo_property_bag_client_get_type	       (void);
+GType			 bonobo_property_bag_client_get_type	       (void);
 
 char                    *bonobo_property_bag_client_setv               (Bonobo_PropertyBag       pb,
 									CORBA_Environment       *ev,

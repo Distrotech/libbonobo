@@ -9,14 +9,15 @@
  * Copyright (C) 2000, Helix Code, Inc.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
+#include <gobject/gsignal.h>
 
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-listener.h>
+#include <bonobo/bonobo-marshal.h>
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-static GtkObjectClass *bonobo_listener_parent_class;
+static GObjectClass *bonobo_listener_parent_class;
 
 struct _BonoboListenerPrivate {
 	BonoboListenerCallbackFn event_callback;
@@ -46,14 +47,14 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 			(CORBA_any *) args, ev,
 			listener->priv->user_data);
 
-	gtk_signal_emit (GTK_OBJECT (listener),
-			 signals [EVENT_NOTIFY],
-			 event_name, args, ev);
+	g_signal_emit (G_OBJECT (listener),
+		       signals [EVENT_NOTIFY], 0,
+		       event_name, args, ev);
 	bonobo_object_unref (BONOBO_OBJECT (listener));
 }
 
 static void
-bonobo_listener_finalize (GtkObject *object)
+bonobo_listener_finalize (GObject *object)
 {
 	BonoboListener *listener;
 
@@ -66,26 +67,26 @@ bonobo_listener_finalize (GtkObject *object)
 static void
 bonobo_listener_class_init (BonoboListenerClass *klass)
 {
-	GtkObjectClass *oclass = (GtkObjectClass *)klass;
+	GObjectClass *oclass = (GObjectClass *)klass;
 	POA_Bonobo_Listener__epv *epv = &klass->epv;
 
-	bonobo_listener_parent_class = gtk_type_class (PARENT_TYPE);
+	bonobo_listener_parent_class = g_type_class_peek_parent (klass);
 
 	oclass->finalize = bonobo_listener_finalize;
 
-	signals [EVENT_NOTIFY] = gtk_signal_new (
-		"event_notify", GTK_RUN_LAST, oclass->type,
-		GTK_SIGNAL_OFFSET (BonoboListenerClass, event_notify),
-		gtk_marshal_NONE__POINTER_POINTER_POINTER, GTK_TYPE_NONE, 3,
-		GTK_TYPE_POINTER, GTK_TYPE_POINTER, GTK_TYPE_POINTER);
-
-	gtk_object_class_add_signals (oclass, signals, LAST_SIGNAL);
+	signals [EVENT_NOTIFY] = g_signal_newc (
+		"event_notify", G_TYPE_FROM_CLASS (oclass), G_SIGNAL_RUN_LAST,
+		G_STRUCT_OFFSET (BonoboListenerClass, event_notify),
+		NULL, NULL,
+		bonobo_marshal_VOID__POINTER_POINTER_POINTER,
+		G_TYPE_NONE, 3,
+		G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_POINTER);
 
 	epv->event = impl_Bonobo_Listener_event;
 }
 
 static void
-bonobo_listener_init (GtkObject *object)
+bonobo_listener_init (GObject *object)
 {
 	BonoboListener *listener;
 
@@ -130,7 +131,7 @@ bonobo_listener_new (BonoboListenerCallbackFn event_callback,
 {
 	BonoboListener *listener;
 
-	listener = gtk_type_new (BONOBO_LISTENER_TYPE);
+	listener = g_object_new (BONOBO_LISTENER_TYPE, NULL);
 	
 	listener->priv->event_callback = event_callback;
 	listener->priv->user_data = user_data;

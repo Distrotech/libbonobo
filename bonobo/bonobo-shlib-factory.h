@@ -10,8 +10,8 @@
 #ifndef _BONOBO_SHLIB_FACTORY_H_
 #define _BONOBO_SHLIB_FACTORY_H_
 
-#include <libgnome/gnome-defs.h>
-#include <gtk/gtkobject.h>
+#include <libgnomebase/gnome-defs.h>
+#include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 #include <liboaf/oaf.h>
@@ -21,10 +21,10 @@
 BEGIN_GNOME_DECLS
  
 #define BONOBO_SHLIB_FACTORY_TYPE        (bonobo_shlib_factory_get_type ())
-#define BONOBO_SHLIB_FACTORY(o)          (GTK_CHECK_CAST ((o), BONOBO_SHLIB_FACTORY_TYPE, BonoboShlibFactory))
-#define BONOBO_SHLIB_FACTORY_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_SHLIB_FACTORY_TYPE, BonoboShlibFactoryClass))
-#define BONOBO_IS_SHLIB_FACTORY(o)       (GTK_CHECK_TYPE ((o), BONOBO_SHLIB_FACTORY_TYPE))
-#define BONOBO_IS_SHLIB_FACTORY_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_SHLIB_FACTORY_TYPE))
+#define BONOBO_SHLIB_FACTORY(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_SHLIB_FACTORY_TYPE, BonoboShlibFactory))
+#define BONOBO_SHLIB_FACTORY_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_SHLIB_FACTORY_TYPE, BonoboShlibFactoryClass))
+#define BONOBO_IS_SHLIB_FACTORY(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_SHLIB_FACTORY_TYPE))
+#define BONOBO_IS_SHLIB_FACTORY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_SHLIB_FACTORY_TYPE))
 
 #define BONOBO_OAF_SHLIB_FACTORY_MULTI(oafiid, descr, fn, data)               \
 static CORBA_Object                                                           \
@@ -79,7 +79,7 @@ typedef struct {
 	BonoboGenericFactoryClass parent_class;
 } BonoboShlibFactoryClass;
 
-GtkType             bonobo_shlib_factory_get_type  (void);
+GType             bonobo_shlib_factory_get_type  (void);
 
 BonoboShlibFactory *bonobo_shlib_factory_construct (
 	BonoboShlibFactory    *c_factory,

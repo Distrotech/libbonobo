@@ -17,7 +17,7 @@ static BonoboObjectClass *bonobo_stream_parent_class;
 
 POA_Bonobo_Stream__vepv bonobo_stream_vepv;
 
-#define CLASS(o) BONOBO_STREAM_CLASS(GTK_OBJECT(o)->klass)
+#define CLASS(o) BONOBO_STREAM_CLASS(G_OBJECT_GET_CLASS (o))
 
 static inline BonoboStream *
 bonobo_stream_from_servant (PortableServer_Servant servant)
@@ -153,7 +153,7 @@ init_stream_corba_class (void)
 static void
 bonobo_stream_class_init (BonoboStreamClass *klass)
 {
-	bonobo_stream_parent_class = gtk_type_class (bonobo_object_get_type ());
+	bonobo_stream_parent_class = g_type_class_peek_parent (klass);
 
 	init_stream_corba_class ();
 }
@@ -161,26 +161,28 @@ bonobo_stream_class_init (BonoboStreamClass *klass)
 /**
  * bonobo_stream_get_type:
  *
- * Returns: the GtkType for a BonoboStream.
+ * Returns: the GType for a BonoboStream.
  */
-GtkType
+GType
 bonobo_stream_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type){
-		GtkTypeInfo info = {
-			"BonoboStream",
+		GTypeInfo info = {
 			sizeof (BonoboStream),
-			sizeof (BonoboStreamClass),
-			(GtkClassInitFunc) bonobo_stream_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_stream_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BonoboStream),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = g_type_register_static (bonobo_object_get_type (),
+					       "BonoboStream", &info, 0);
 	}
 
 	return type;
@@ -242,7 +244,7 @@ bonobo_stream_open (const char *driver, const char *path,
 
 /**
  * bonobo_stream_corba_object_create:
- * @object: the GtkObject that will wrap the CORBA object
+ * @object: the GObject that will wrap the CORBA object
  *
  * Creates and activates the CORBA object that is wrapped by the
  * @object BonoboObject.

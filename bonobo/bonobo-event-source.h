@@ -16,10 +16,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_EVENT_SOURCE_TYPE        (bonobo_event_source_get_type ())
-#define BONOBO_EVENT_SOURCE(o)          (GTK_CHECK_CAST ((o), BONOBO_EVENT_SOURCE_TYPE, BonoboEventSource))
-#define BONOBO_EVENT_SOURCE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_EVENT_SOURCE_TYPE, BonoboEventSourceClass))
-#define BONOBO_IS_EVENT_SOURCE(o)       (GTK_CHECK_TYPE ((o), BONOBO_EVENT_SOURCE_TYPE))
-#define BONOBO_IS_EVENT_SOURCE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_EVENT_SOURCE_TYPE))
+#define BONOBO_EVENT_SOURCE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_EVENT_SOURCE_TYPE, BonoboEventSource))
+#define BONOBO_EVENT_SOURCE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_EVENT_SOURCE_TYPE, BonoboEventSourceClass))
+#define BONOBO_IS_EVENT_SOURCE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_EVENT_SOURCE_TYPE))
+#define BONOBO_IS_EVENT_SOURCE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_EVENT_SOURCE_TYPE))
 
 typedef struct _BonoboEventSourcePrivate BonoboEventSourcePrivate;
 
@@ -34,7 +34,7 @@ typedef struct {
 	POA_Bonobo_EventSource__epv epv;
 } BonoboEventSourceClass;
 
-GtkType            bonobo_event_source_get_type         (void);
+GType            bonobo_event_source_get_type         (void);
 BonoboEventSource *bonobo_event_source_new              (void);
 void               bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 							 const char        *event_name,

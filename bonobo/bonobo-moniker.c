@@ -27,9 +27,9 @@ struct _BonoboMonikerPrivate {
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-static GtkObjectClass *bonobo_moniker_parent_class;
+static GObjectClass *bonobo_moniker_parent_class;
 
-#define CLASS(o) BONOBO_MONIKER_CLASS (GTK_OBJECT (o)->klass)
+#define CLASS(o) BONOBO_MONIKER_CLASS (G_OBJECT_GET_CLASS (o))
 
 static inline BonoboMoniker *
 bonobo_moniker_from_servant (PortableServer_Servant servant)
@@ -385,7 +385,7 @@ impl_equal (PortableServer_Servant servant,
 }
 
 static void
-bonobo_moniker_destroy (GtkObject *object)
+bonobo_moniker_finalize (GObject *object)
 {
 	BonoboMoniker *moniker = BONOBO_MONIKER (object);
 
@@ -396,18 +396,18 @@ bonobo_moniker_destroy (GtkObject *object)
 	g_free (moniker->priv->name);
 	g_free (moniker->priv);
 
-	bonobo_moniker_parent_class->destroy (object);
+	bonobo_moniker_parent_class->finalize (object);
 }
 
 static void
 bonobo_moniker_class_init (BonoboMonikerClass *klass)
 {
-	GtkObjectClass *oclass = (GtkObjectClass *)klass;
+	GObjectClass *oclass = (GObjectClass *)klass;
 	POA_Bonobo_Moniker__epv *epv = &klass->epv;
 
-	bonobo_moniker_parent_class = gtk_type_class (PARENT_TYPE);
+	bonobo_moniker_parent_class = g_type_class_peek_parent (klass);
 
-	oclass->destroy = bonobo_moniker_destroy;
+	oclass->finalize = bonobo_moniker_finalize;
 
 	klass->get_parent = bonobo_moniker_get_parent;
 	klass->set_parent = bonobo_moniker_set_parent;
@@ -427,7 +427,7 @@ bonobo_moniker_class_init (BonoboMonikerClass *klass)
 }
 
 static void
-bonobo_moniker_init (GtkObject *object)
+bonobo_moniker_init (GObject *object)
 {
 	BonoboMoniker *moniker = BONOBO_MONIKER (object);
 

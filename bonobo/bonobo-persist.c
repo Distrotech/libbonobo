@@ -8,16 +8,16 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-persist.h>
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
 /* Parent GTK object class */
-static GtkObjectClass *bonobo_persist_parent_class;
+static GObjectClass *bonobo_persist_parent_class;
 
-#define CLASS(o) BONOBO_PERSIST_CLASS(GTK_OBJECT(o)->klass)
+#define CLASS(o) BONOBO_PERSIST_CLASS(G_OBJECT_GET_CLASS (o))
 
 static inline BonoboPersist *
 bonobo_persist_from_servant (PortableServer_Servant servant)
@@ -35,27 +35,27 @@ impl_Bonobo_Persist_getContentTypes (PortableServer_Servant servant,
 }
 
 static void
-bonobo_persist_destroy (GtkObject *object)
+bonobo_persist_finalize (GObject *object)
 {
-	bonobo_persist_parent_class->destroy (object);
+	bonobo_persist_parent_class->finalize (object);
 }
 
 static void
 bonobo_persist_class_init (BonoboPersistClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 	POA_Bonobo_Persist__epv *epv = &klass->epv;
 
-	bonobo_persist_parent_class = gtk_type_class (PARENT_TYPE);
+	bonobo_persist_parent_class = g_type_class_peek_parent (klass);
 
 	/* Override and initialize methods */
-	object_class->destroy = bonobo_persist_destroy;
+	object_class->finalize = bonobo_persist_finalize;
 
 	epv->getContentTypes = impl_Bonobo_Persist_getContentTypes;
 }
 
 static void
-bonobo_persist_init (GtkObject *object)
+bonobo_persist_init (GObject *object)
 {
 	/* nothing to do */
 }

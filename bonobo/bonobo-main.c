@@ -16,8 +16,10 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
 
+#include <libintl.h>
 #include <signal.h>
-#include <gtk/gtkmain.h>
+
+#include <gmain.h>
 #include <liboaf/liboaf.h>
 
 #include <X11/Xlib.h>
@@ -25,6 +27,9 @@
 CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;
 PortableServer_POAManager __bonobo_poa_manager = NULL;
+
+static guint              __bonobo_main_loop_level = 0;
+static GSList *           __bonobo_main_loops = NULL;
 
 /**
  * bonobo_orb:
@@ -273,6 +278,35 @@ bonobo_activate (void)
 void
 bonobo_main (void)
 {
+	GMainLoop *loop;
+
 	bonobo_activate ();
-	gtk_main ();
+
+	__bonobo_main_loop_level++;
+  
+	loop = g_main_new (TRUE);
+	__bonobo_main_loops = g_slist_prepend (__bonobo_main_loops, loop);
+
+	if (g_main_is_running (__bonobo_main_loops->data)) {
+		g_main_run (loop);
+	}
+
+	__bonobo_main_loops = g_slist_remove (__bonobo_main_loops, loop);
+
+	g_main_destroy (loop);
+
+	__bonobo_main_loop_level--;
+}
+
+/**
+ * bonobo_main_quit:
+ * 
+ * Quits the main event loop.
+ */
+void
+bonobo_main_quit (void)
+{
+	g_return_if_fail (__bonobo_main_loops != NULL);
+
+	g_main_quit (__bonobo_main_loops->data);
 }

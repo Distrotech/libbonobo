@@ -17,10 +17,10 @@ BEGIN_GNOME_DECLS
 typedef struct _BonoboMonikerPrivate BonoboMonikerPrivate;
 
 #define BONOBO_MONIKER_TYPE        (bonobo_moniker_get_type ())
-#define BONOBO_MONIKER(o)          (GTK_CHECK_CAST ((o), BONOBO_MONIKER_TYPE, BonoboMoniker))
-#define BONOBO_MONIKER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_MONIKER_TYPE, BonoboMonikerClass))
-#define BONOBO_IS_MONIKER(o)       (GTK_CHECK_TYPE ((o), BONOBO_MONIKER_TYPE))
-#define BONOBO_IS_MONIKER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_TYPE))
+#define BONOBO_MONIKER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_MONIKER_TYPE, BonoboMoniker))
+#define BONOBO_MONIKER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_MONIKER_TYPE, BonoboMonikerClass))
+#define BONOBO_IS_MONIKER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_MONIKER_TYPE))
+#define BONOBO_IS_MONIKER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_TYPE))
 
 typedef struct {
         BonoboXObject         object;
@@ -62,7 +62,7 @@ typedef struct {
 	gpointer        dummy;
 } BonoboMonikerClass;
 
-GtkType                  bonobo_moniker_get_type            (void);
+GType                  bonobo_moniker_get_type            (void);
 
 BonoboMoniker           *bonobo_moniker_construct           (BonoboMoniker     *moniker,
 							     const char        *prefix);

@@ -9,8 +9,8 @@
  */
 
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-persist-file.h>
 
@@ -64,7 +64,7 @@ impl_load (PortableServer_Servant servant,
 	if (pf->load_fn != NULL)
 		result = (*pf->load_fn)(pf, filename, ev, pf->closure);
 	else {
-		GtkObjectClass *oc = GTK_OBJECT (pf)->klass;
+		GObjectClass *oc = G_OBJECT_GET_CLASS (pf);
 		BonoboPersistFileClass *class = BONOBO_PERSIST_FILE_CLASS (oc);
 
 		if (class->load)
@@ -96,7 +96,7 @@ impl_save (PortableServer_Servant servant,
 	if (pf->save_fn != NULL)
 		result = (*pf->save_fn)(pf, filename, ev, pf->closure);
 	else {
-		GtkObjectClass *oc = GTK_OBJECT (pf)->klass;
+		GObjectClass *oc = G_OBJECT_GET_CLASS (pf);
 		BonoboPersistFileClass *class = BONOBO_PERSIST_FILE_CLASS (oc);
 
 		if (class->save)
@@ -131,7 +131,7 @@ bonobo_persist_file_class_init (BonoboPersistFileClass *klass)
 {
 	POA_Bonobo_PersistFile__epv *epv = &klass->epv;
 
-	bonobo_persist_file_parent_class = gtk_type_class (PARENT_TYPE);
+	bonobo_persist_file_parent_class = g_type_class_peek_parent (klass);
 
 	/* Override and initialize methods */
 	klass->save = NULL;
@@ -145,7 +145,7 @@ bonobo_persist_file_class_init (BonoboPersistFileClass *klass)
 }
 
 static void
-bonobo_persist_file_init (GtkObject *object)
+bonobo_persist_file_init (GObject *object)
 {
 	/* nothing to do */
 }
@@ -199,7 +199,7 @@ bonobo_persist_file_new (BonoboPersistFileIOFn load_fn,
 {
 	BonoboPersistFile *pf;
 
-	pf = gtk_type_new (bonobo_persist_file_get_type ());
+	pf = g_object_new (bonobo_persist_file_get_type (), NULL);
 
 	pf->filename = NULL;
 

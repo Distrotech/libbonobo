@@ -1,5 +1,25 @@
 2001-04-17  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/*.[ch]: Ported to GObject.
+
+	* bonobo/bonobo-exception.h (BONOBO_EX_REPOID): New macro.
+
+	* bonobo/bonobo-marshal-main.c: New file.
+	* bonobo/bonobo-marshal.list: New file.
+
+	* bonobo/libbonobo-init.c: New file.
+	* bonobo/libbonobo-init.h: New public header file; you only need to
+	include this to get the module initialization stuff.
+
+	* bonobo/libbonobo.h: New public header file; if you're only using
+	libbonobo (and not libbonoboui), use <bonobo/libbonobo.h> instead of
+	<bonobo/bonobo.h>. There'll also be <bonobo/libbonoboui.h> in
+	libbonoboui - and <bonobo/bonobo.h> will include both of them.
+
+	* bonobo/bonobo-main.c (bonobo_main_quit): New function.
+
+2001-04-17  Martin Baulig  <baulig@suse.de>
+
 	* configure.in: Check for gobject and gthread.
 
 2001-04-15  Martin Baulig  <baulig@suse.de>

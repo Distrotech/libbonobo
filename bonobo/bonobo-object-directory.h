@@ -14,8 +14,8 @@
 #define __BONOBO_OBJECT_DIRECTORY_H__
 
 #include <glib.h>
-#include <libgnome/gnome-defs.h>
-#include <orb/orbit.h>
+#include <libgnomebase/gnome-defs.h>
+#include <orbit/orbit.h>
 #include <ORBitservices/CosNaming.h>
 
 BEGIN_GNOME_DECLS

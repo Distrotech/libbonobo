@@ -9,16 +9,19 @@
  */
 #include <config.h>
 #include <stdio.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtksignal.h>
+#include <gmain.h>
+#include <gobject/gsignal.h>
 
 #include <bonobo/bonobo-context.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-running-context.h>
+#include <bonobo/bonobo-main.h>
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+
+static BonoboXObjectClass *bonobo_running_context_parent_class = NULL;
 
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_RUNNING_HOOKS
@@ -119,8 +122,7 @@ running_info_destroy (void)
 }
 
 static void
-check_destroy (BonoboObject *object,
-	       gpointer      dummy)
+check_destroy (GObject *object)
 {
 	bonobo_running_context = NULL;
 	bonobo_running_event_source = NULL;
@@ -155,8 +157,8 @@ check_empty (void)
 
 		ri->emitted_last_unref = TRUE;
 
-		gtk_signal_emit (GTK_OBJECT (bonobo_running_context),
-				 signals [LAST_UNREF]);
+		g_signal_emit (G_OBJECT (bonobo_running_context),
+			       signals [LAST_UNREF], 0);
 
 		g_return_if_fail (bonobo_running_event_source != NULL);
 
@@ -315,17 +317,19 @@ impl_Bonobo_RunningContext_atExitUnref (PortableServer_Servant servant,
 static void
 bonobo_running_context_class_init (BonoboRunningContextClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 	POA_Bonobo_RunningContext__epv *epv = &klass->epv;
+
+	bonobo_running_context_parent_class = g_type_class_peek_parent (klass);
 
 	((BonoboRunningContextClass *)klass)->last_unref = NULL;
 
-	signals [LAST_UNREF] = gtk_signal_new (
-		"last_unref", GTK_RUN_FIRST, object_class->type,
-		GTK_SIGNAL_OFFSET (BonoboRunningContextClass, last_unref),
-		gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
-
-	gtk_object_class_add_signals (object_class, signals, LAST_SIGNAL);
+	signals [LAST_UNREF] = g_signal_newc (
+		"last_unref", G_TYPE_FROM_CLASS (object_class),
+		G_SIGNAL_RUN_FIRST,
+		G_STRUCT_OFFSET (BonoboRunningContextClass, last_unref),
+		NULL, NULL,
+		g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
 
 	epv->addObject     = impl_Bonobo_RunningContext_addObject;
 	epv->removeObject  = impl_Bonobo_RunningContext_removeObject;
@@ -336,15 +340,15 @@ bonobo_running_context_class_init (BonoboRunningContextClass *klass)
 }
 
 static void 
-bonobo_running_context_init (GtkObject *object)
+bonobo_running_context_init (GObject *object)
 {
 	/* nothing to do */
 }
 
 BONOBO_X_TYPE_FUNC_FULL (BonoboRunningContext, 
-			   Bonobo_RunningContext,
-			   PARENT_TYPE,
-			   bonobo_running_context);
+			 Bonobo_RunningContext,
+			 PARENT_TYPE,
+			 bonobo_running_context);
 
 BonoboObject *
 bonobo_running_context_new (void)
@@ -354,7 +358,8 @@ bonobo_running_context_new (void)
 		return bonobo_running_context;
 	}
 
-	bonobo_running_context = gtk_type_new (bonobo_running_context_get_type ());
+	bonobo_running_context = g_object_new (
+		bonobo_running_context_get_type (), NULL);
 
 	bonobo_running_event_source = bonobo_event_source_new ();
 	bonobo_running_context_ignore_object (
@@ -364,8 +369,8 @@ bonobo_running_context_new (void)
 	bonobo_object_add_interface (BONOBO_OBJECT (bonobo_running_context),
 				     BONOBO_OBJECT (bonobo_running_event_source));
 
-	gtk_signal_connect (GTK_OBJECT (bonobo_running_context), "destroy",
-			    (GtkSignalFunc) check_destroy, NULL);
+	g_signal_connectc (G_OBJECT (bonobo_running_context), "destroy",
+			   G_CALLBACK (check_destroy), NULL, FALSE);
 
 	return bonobo_running_context;
 }
@@ -396,8 +401,9 @@ bonobo_running_context_at_exit_unref (CORBA_Object object)
 	bonobo_running_context_ignore_object (obj_dup);
 
 	if (bonobo_running_context)
-		gtk_signal_connect (GTK_OBJECT (bonobo_running_context),
-				    "last_unref", last_unref_cb, obj_dup);
+		g_signal_connectc (G_OBJECT (bonobo_running_context),
+				   "last_unref", G_CALLBACK (last_unref_cb),
+				   obj_dup, FALSE);
 	
 	CORBA_exception_free (&ev);
 }
@@ -407,7 +413,7 @@ last_unref_exit_cb (gpointer      context,
 		    BonoboObject *object)
 {
         bonobo_object_unref (object);
-	gtk_main_quit ();
+	bonobo_main_quit ();
 }
 
 void 
@@ -419,8 +425,10 @@ bonobo_running_context_auto_exit_unref (BonoboObject *object)
 	bonobo_running_context_ignore_object (BONOBO_OBJREF (object));
 
 	if (bonobo_running_context)
-		gtk_signal_connect (GTK_OBJECT (bonobo_running_context),
-				    "last_unref", last_unref_exit_cb, object);
+		g_signal_connectc (G_OBJECT (bonobo_running_context),
+				   "last_unref",
+				   G_CALLBACK (last_unref_exit_cb),
+				   object, FALSE);
 
 }
 

@@ -9,8 +9,8 @@
  */
 
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-progressive.h>
 
@@ -27,7 +27,7 @@ impl_Bonobo_ProgressiveDataSink_start (PortableServer_Servant servant,
 	if (psink->start_fn != NULL)
 		result = (*psink->start_fn) (psink, psink->closure);
 	else {
-		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
+		GObjectClass *oc = G_OBJECT_GET_CLASS (psink);
 		BonoboProgressiveDataSinkClass *class = BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
 		result = (*class->start_fn) (psink);
@@ -48,7 +48,7 @@ impl_Bonobo_ProgressiveDataSink_end (PortableServer_Servant servant,
 	if (psink->end_fn != NULL)
 		result = (*psink->end_fn) (psink, psink->closure);
 	else {
-		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
+		GObjectClass *oc = G_OBJECT_GET_CLASS (psink);
 		BonoboProgressiveDataSinkClass *class = BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
 		result = (*class->end_fn) (psink);
@@ -72,7 +72,7 @@ impl_Bonobo_ProgressiveDataSink_addData (PortableServer_Servant                 
 						buffer,
 						psink->closure);
 	else {
-		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
+		GObjectClass *oc = G_OBJECT_GET_CLASS (psink);
 		BonoboProgressiveDataSinkClass *class =
 			BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
@@ -97,7 +97,7 @@ impl_Bonobo_ProgressiveDataSink_setSize (PortableServer_Servant servant,
 						count,
 						psink->closure);
 	else {
-		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
+		GObjectClass *oc = G_OBJECT_GET_CLASS (psink);
 		BonoboProgressiveDataSinkClass *class =
 			BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
 
@@ -109,7 +109,7 @@ impl_Bonobo_ProgressiveDataSink_setSize (PortableServer_Servant servant,
 }
 
 static void
-bonobo_progressive_data_sink_destroy (GtkObject *object)
+bonobo_progressive_data_sink_finalize (GObject *object)
 {
 }
 
@@ -136,11 +136,11 @@ bonobo_progressive_data_sink_set_size_nop (BonoboProgressiveDataSink *psink,
 static void
 bonobo_progressive_data_sink_class_init (BonoboProgressiveDataSinkClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 	POA_Bonobo_ProgressiveDataSink__epv *epv = &klass->epv;
 
 	/* Override and initialize methods */
-	object_class->destroy = bonobo_progressive_data_sink_destroy;
+	object_class->finalize = bonobo_progressive_data_sink_finalize;
 
 	klass->start_fn    = bonobo_progressive_data_sink_start_end_nop;
 	klass->end_fn      = bonobo_progressive_data_sink_start_end_nop;
@@ -154,7 +154,7 @@ bonobo_progressive_data_sink_class_init (BonoboProgressiveDataSinkClass *klass)
 }
 
 static void
-bonobo_progressive_data_sink_init (GtkObject *object)
+bonobo_progressive_data_sink_init (GObject *object)
 {
 	/* nothing to do */
 }
@@ -245,7 +245,7 @@ bonobo_progressive_data_sink_new (BonoboProgressiveDataSinkStartFn   start_fn,
 {
 	BonoboProgressiveDataSink *psink;
 
-	psink = gtk_type_new (bonobo_progressive_data_sink_get_type ());
+	psink = g_object_new (bonobo_progressive_data_sink_get_type (), NULL);
 
 	bonobo_progressive_data_sink_construct (psink, start_fn,
 						end_fn, add_data_fn,

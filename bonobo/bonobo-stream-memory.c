@@ -10,8 +10,7 @@
 #include <config.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <libgnome/gnome-defs.h>
-#include <libgnome/gnome-util.h>
+#include <libgnomebase/gnome-defs.h>
 #include <bonobo/bonobo-stream-memory.h>
 #include <errno.h>
 
@@ -223,14 +222,14 @@ mem_revert (BonoboStream *stream,
 }
 
 static void
-mem_destroy (GtkObject *object)
+mem_finalize (GObject *object)
 {
 	BonoboStreamMem *smem = BONOBO_STREAM_MEM (object);
 	
 	if (smem->buffer)
 		g_free (smem->buffer);
 	
-	GTK_OBJECT_CLASS (bonobo_stream_mem_parent_class)->destroy (object);
+	G_OBJECT_CLASS (bonobo_stream_mem_parent_class)->finalize (object);
 }
 
 static char *
@@ -252,12 +251,12 @@ mem_get_size (BonoboStreamMem *stream_mem)
 static void
 bonobo_stream_mem_class_init (BonoboStreamMemClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 	BonoboStreamClass *sclass = BONOBO_STREAM_CLASS (klass);
 	
-	bonobo_stream_mem_parent_class = gtk_type_class (bonobo_stream_get_type ());
+	bonobo_stream_mem_parent_class = g_type_class_peek_parent (klass);
 
-	object_class->destroy = mem_destroy;
+	object_class->finalize = mem_finalize;
 	
 	sclass->get_info  = mem_get_info;
 	sclass->set_info  = mem_set_info;
@@ -276,26 +275,28 @@ bonobo_stream_mem_class_init (BonoboStreamMemClass *klass)
 /**
  * bonobo_stream_mem_get_type:
  *
- * Returns: the GtkType of the BonoboStreamMem class.
+ * Returns: the GType of the BonoboStreamMem class.
  */
-GtkType
+GType
 bonobo_stream_mem_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type){
-		GtkTypeInfo info = {
-			"BonoboStreamMem",
+		GTypeInfo info = {
 			sizeof (BonoboStreamMem),
-			sizeof (BonoboStreamMemClass),
-			(GtkClassInitFunc) bonobo_stream_mem_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_stream_mem_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BonoboStreamMem),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_stream_get_type (), &info);
+		type = g_type_register_static (bonobo_stream_get_type (),
+					       "BonoboStreamMem", &info, 0);
 	}
 
 	return type;
@@ -357,7 +358,7 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 	BonoboStreamMem *stream_mem;
 	Bonobo_Stream corba_stream;
 
-	stream_mem = gtk_type_new (bonobo_stream_mem_get_type ());
+	stream_mem = g_object_new (bonobo_stream_mem_get_type (), NULL);
 	if (stream_mem == NULL)
 		return NULL;
 
@@ -390,7 +391,7 @@ const char *
 bonobo_stream_mem_get_buffer (BonoboStreamMem *stream_mem)
 {
 	return BONOBO_STREAM_MEM_CLASS(
-		GTK_OBJECT(stream_mem)->klass)->get_buffer (stream_mem);
+		G_OBJECT_GET_CLASS (stream_mem))->get_buffer (stream_mem);
 }
 
 /**
@@ -406,5 +407,5 @@ size_t
 bonobo_stream_mem_get_size (BonoboStreamMem *stream_mem)
 {
 	return BONOBO_STREAM_MEM_CLASS(
-		GTK_OBJECT(stream_mem)->klass)->get_size (stream_mem);
+		G_OBJECT_GET_CLASS (stream_mem))->get_size (stream_mem);
 }

@@ -20,10 +20,10 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IO_DRIVER_VFS "vfs"
 
 #define BONOBO_STREAM_TYPE        (bonobo_stream_get_type ())
-#define BONOBO_STREAM(o)          (GTK_CHECK_CAST ((o), BONOBO_STREAM_TYPE, BonoboStream))
-#define BONOBO_STREAM_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_STREAM_TYPE, BonoboStreamClass))
-#define BONOBO_IS_STREAM(o)       (GTK_CHECK_TYPE ((o), BONOBO_STREAM_TYPE))
-#define BONOBO_IS_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_STREAM_TYPE))
+#define BONOBO_STREAM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_STREAM_TYPE, BonoboStream))
+#define BONOBO_STREAM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_STREAM_TYPE, BonoboStreamClass))
+#define BONOBO_IS_STREAM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_STREAM_TYPE))
+#define BONOBO_IS_STREAM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_STREAM_TYPE))
 
 typedef struct {
         BonoboObject object;
@@ -69,7 +69,7 @@ typedef struct {
 					 CORBA_Environment *ev);
 } BonoboStreamClass;
 
-GtkType                 bonobo_stream_get_type            (void);
+GType                 bonobo_stream_get_type            (void);
 POA_Bonobo_Stream__epv *bonobo_stream_get_epv             (void);
 Bonobo_Stream           bonobo_stream_corba_object_create (BonoboObject *object);
 

@@ -15,10 +15,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_MONIKER_SIMPLE_TYPE        (bonobo_moniker_simple_get_type ())
-#define BONOBO_MONIKER_SIMPLE(o)          (GTK_CHECK_CAST ((o), BONOBO_MONIKER_SIMPLE_TYPE, BonoboMonikerSimple))
-#define BONOBO_MONIKER_SIMPLE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_MONIKER_SIMPLE_TYPE, BonoboMonikerSimpleClass))
-#define BONOBO_IS_MONIKER_SIMPLE(o)       (GTK_CHECK_TYPE ((o), BONOBO_MONIKER_SIMPLE_TYPE))
-#define BONOBO_IS_MONIKER_SIMPLE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_SIMPLE_TYPE))
+#define BONOBO_MONIKER_SIMPLE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_MONIKER_SIMPLE_TYPE, BonoboMonikerSimple))
+#define BONOBO_MONIKER_SIMPLE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_MONIKER_SIMPLE_TYPE, BonoboMonikerSimpleClass))
+#define BONOBO_IS_MONIKER_SIMPLE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_MONIKER_SIMPLE_TYPE))
+#define BONOBO_IS_MONIKER_SIMPLE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_SIMPLE_TYPE))
 
 typedef struct _BonoboMonikerSimple        BonoboMonikerSimple;
 typedef struct _BonoboMonikerSimplePrivate BonoboMonikerSimplePrivate;
@@ -39,7 +39,7 @@ typedef struct {
 	BonoboMonikerClass parent_class;
 } BonoboMonikerSimpleClass;
 
-GtkType        bonobo_moniker_simple_get_type  (void);
+GType        bonobo_moniker_simple_get_type  (void);
 
 BonoboMoniker *bonobo_moniker_simple_construct (BonoboMonikerSimple         *moniker,
 						const char                  *name,

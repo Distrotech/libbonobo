@@ -12,8 +12,8 @@
 #define _BONOBO_ASYNC_H_
 
 #include <glib.h>
-#include <orb/orbit.h>
-#include <libgnome/gnome-defs.h>
+#include <orbit/orbit.h>
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

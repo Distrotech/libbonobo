@@ -15,10 +15,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_PERSIST_TYPE        (bonobo_persist_get_type ())
-#define BONOBO_PERSIST(o)          (GTK_CHECK_CAST ((o), BONOBO_PERSIST_TYPE, BonoboPersist))
-#define BONOBO_PERSIST_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PERSIST_TYPE, BonoboPersistClass))
-#define BONOBO_IS_PERSIST(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_TYPE))
-#define BONOBO_IS_PERSIST_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_TYPE))
+#define BONOBO_PERSIST(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_TYPE, BonoboPersist))
+#define BONOBO_PERSIST_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_PERSIST_TYPE, BonoboPersistClass))
+#define BONOBO_IS_PERSIST(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_PERSIST_TYPE))
+#define BONOBO_IS_PERSIST_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_TYPE))
 
 typedef struct _BonoboPersistPrivate BonoboPersistPrivate;
 
@@ -38,7 +38,7 @@ typedef struct {
 						    CORBA_Environment *ev);
 } BonoboPersistClass;
 
-GtkType                         bonobo_persist_get_type               (void);
+GType                         bonobo_persist_get_type               (void);
 
 Bonobo_Persist_ContentTypeList *bonobo_persist_generate_content_types (int num,
 								       ...);

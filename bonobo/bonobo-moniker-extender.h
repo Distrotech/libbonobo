@@ -15,10 +15,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_MONIKER_EXTENDER_TYPE        (bonobo_moniker_extender_get_type ())
-#define BONOBO_MONIKER_EXTENDER(o)          (GTK_CHECK_CAST ((o), BONOBO_MONIKER_EXTENDER_TYPE, BonoboMonikerExtender))
-#define BONOBO_MONIKER_EXTENDER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_MONIKER_EXTENDER_TYPE, BonoboMonikerExtenderClass))
-#define BONOBO_IS_MONIKER_EXTENDER(o)       (GTK_CHECK_TYPE ((o), BONOBO_MONIKER_EXTENDER_TYPE))
-#define BONOBO_IS_MONIKER_EXTENDER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_EXTENDER_TYPE))
+#define BONOBO_MONIKER_EXTENDER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_MONIKER_EXTENDER_TYPE, BonoboMonikerExtender))
+#define BONOBO_MONIKER_EXTENDER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_MONIKER_EXTENDER_TYPE, BonoboMonikerExtenderClass))
+#define BONOBO_IS_MONIKER_EXTENDER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_MONIKER_EXTENDER_TYPE))
+#define BONOBO_IS_MONIKER_EXTENDER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_EXTENDER_TYPE))
 
 typedef struct _BonoboMonikerExtender BonoboMonikerExtender;
 
@@ -42,7 +42,7 @@ typedef struct {
 	BonoboMonikerExtenderFn resolve;
 } BonoboMonikerExtenderClass;
 
-GtkType                bonobo_moniker_extender_get_type (void);
+GType                bonobo_moniker_extender_get_type (void);
 BonoboMonikerExtender *bonobo_moniker_extender_new      (BonoboMonikerExtenderFn      resolve,
 							 gpointer                     data);
  

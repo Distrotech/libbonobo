@@ -17,9 +17,9 @@
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-static GtkObjectClass *bonobo_moniker_extender_parent_class;
+static GObjectClass *bonobo_moniker_extender_parent_class;
 
-#define CLASS(o) BONOBO_MONIKER_EXTENDER_CLASS (GTK_OBJECT (o)->klass)
+#define CLASS(o) BONOBO_MONIKER_EXTENDER_CLASS (G_OBJECT_GET_CLASS (o))
 
 static inline BonoboMonikerExtender *
 bonobo_moniker_extender_from_servant (PortableServer_Servant servant)
@@ -61,20 +61,20 @@ bonobo_moniker_extender_resolve (BonoboMonikerExtender *extender,
 }
 
 static void
-bonobo_moniker_extender_destroy (GtkObject *object)
+bonobo_moniker_extender_finalize (GObject *object)
 {
-	bonobo_moniker_extender_parent_class->destroy (object);
+	bonobo_moniker_extender_parent_class->finalize (object);
 }
 
 static void
 bonobo_moniker_extender_class_init (BonoboMonikerExtenderClass *klass)
 {
-	GtkObjectClass *oclass = (GtkObjectClass *)klass;
+	GObjectClass *oclass = (GObjectClass *)klass;
 	POA_Bonobo_MonikerExtender__epv *epv = &klass->epv;
 
-	bonobo_moniker_extender_parent_class = gtk_type_class (PARENT_TYPE);
+	bonobo_moniker_extender_parent_class = g_type_class_peek_parent (klass);
 
-	oclass->destroy = bonobo_moniker_extender_destroy;
+	oclass->finalize = bonobo_moniker_extender_finalize;
 
 	klass->resolve = bonobo_moniker_extender_resolve;
 
@@ -82,7 +82,7 @@ bonobo_moniker_extender_class_init (BonoboMonikerExtenderClass *klass)
 }
 
 static void
-bonobo_moniker_extender_init (GtkObject *object)
+bonobo_moniker_extender_init (GObject *object)
 {
 	/* nothing to do */
 }
@@ -106,7 +106,7 @@ bonobo_moniker_extender_new (BonoboMonikerExtenderFn resolve, gpointer data)
 {
 	BonoboMonikerExtender *extender = NULL;
 	
-	extender = gtk_type_new (bonobo_moniker_extender_get_type ());
+	extender = g_object_new (bonobo_moniker_extender_get_type (), NULL);
 
 	extender->resolve = resolve;
 	extender->data = data;

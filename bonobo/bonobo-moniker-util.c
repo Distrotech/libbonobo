@@ -7,7 +7,7 @@
  *	Michael Meeks    (michael@helixcode.com)
  *	Ettore Perazzoli (ettore@helixcode.com)
  */
-#include "bonobo.h"
+#include "libbonobo.h"
 #include <liboaf/liboaf.h>
 #include <liboaf/oaf-async.h>
 #include <ORBitservices/CosNaming.h>

@@ -81,7 +81,7 @@ bonobo_object_activate (const char *iid, gint oaf_flags)
 
 	CORBA_exception_free (&ev);
 	
-	object = gtk_type_new (bonobo_object_client_get_type ());
+	object = g_object_new (bonobo_object_client_get_type (), NULL);
 
 	bonobo_object_client_construct (object, corba_object);
 
@@ -103,7 +103,7 @@ oaf_activate_async_cb (CORBA_Object activated_object,
 		return;
 	}
 
-	object = gtk_type_new (bonobo_object_client_get_type ());
+	object = g_object_new (bonobo_object_client_get_type (), NULL);
 	bonobo_object_client_construct (object, activated_object);
 
 	callback_data->callback (object, NULL, callback_data->user_data);
@@ -158,7 +158,7 @@ bonobo_object_client_from_corba (Bonobo_Unknown o)
 	
 	g_return_val_if_fail (o != CORBA_OBJECT_NIL, NULL);
 
-	object = gtk_type_new (bonobo_object_client_get_type ());
+	object = g_object_new (bonobo_object_client_get_type (), NULL);
 	bonobo_object_client_construct (object, o);
 
 	return object;
@@ -338,7 +338,7 @@ bonobo_object_client_unref (BonoboObjectClient *object_client,
 }
 
 static void
-bonobo_object_client_destroy (GtkObject *object)
+bonobo_object_client_finalize (GObject *object)
 {
 	BonoboObject *bonobo_object = BONOBO_OBJECT (object);
 	Bonobo_Unknown objref;
@@ -352,42 +352,45 @@ bonobo_object_client_destroy (GtkObject *object)
 		CORBA_exception_free (&ev);
 	}
 
-	GTK_OBJECT_CLASS (bonobo_object_client_parent_class)->destroy (object);
+	G_OBJECT_CLASS (bonobo_object_client_parent_class)->finalize (object);
 }
 
 static void
 bonobo_object_client_class_init (BonoboObjectClientClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 
-	bonobo_object_client_parent_class = gtk_type_class (bonobo_object_get_type ());
+	bonobo_object_client_parent_class = g_type_class_peek_parent (klass);
 
-	object_class->destroy = bonobo_object_client_destroy;
+	object_class->finalize = bonobo_object_client_finalize;
 }
 
 /**
  * bonobo_object_client_get_type:
  *
- * Returns: the GtkType for the BonoboObjectClient class.
+ * Returns: the GType for the BonoboObjectClient class.
  */
-GtkType
+GType
 bonobo_object_client_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type){
-		GtkTypeInfo info = {
-			"Handle to remote Bonobo::Unknown",
-			sizeof (BonoboObjectClient),
+		GTypeInfo info = {
 			sizeof (BonoboObjectClientClass),
-			(GtkClassInitFunc) bonobo_object_client_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_object_client_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BonoboObjectClient),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = g_type_register_static (bonobo_object_get_type (),
+					       "BonoboObjectClient",
+					       &info, 0);
 	}
 
 	return type;

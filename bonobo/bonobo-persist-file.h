@@ -16,10 +16,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_PERSIST_FILE_TYPE (bonobo_persist_file_get_type ())
-#define BONOBO_PERSIST_FILE(o)   (GTK_CHECK_CAST ((o), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFile))
-#define BONOBO_PERSIST_FILE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFileClass))
-#define BONOBO_IS_PERSIST_FILE(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_FILE_TYPE))
-#define BONOBO_IS_PERSIST_FILE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_FILE_TYPE))
+#define BONOBO_PERSIST_FILE(o)   (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFile))
+#define BONOBO_PERSIST_FILE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFileClass))
+#define BONOBO_IS_PERSIST_FILE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_PERSIST_FILE_TYPE))
+#define BONOBO_IS_PERSIST_FILE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_FILE_TYPE))
 
 typedef struct _BonoboPersistFilePrivate BonoboPersistFilePrivate;
 typedef struct _BonoboPersistFile        BonoboPersistFile;
@@ -65,7 +65,7 @@ typedef struct {
 
 } BonoboPersistFileClass;
 
-GtkType             bonobo_persist_file_get_type  (void);
+GType             bonobo_persist_file_get_type  (void);
 void                bonobo_persist_file_set_dirty (BonoboPersistFile   *ps,
 						   gboolean             dirty);
 

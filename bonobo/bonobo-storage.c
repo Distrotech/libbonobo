@@ -17,7 +17,7 @@
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-#define CLASS(o) BONOBO_STORAGE_CLASS (GTK_OBJECT(o)->klass)
+#define CLASS(o) BONOBO_STORAGE_CLASS (G_OBJECT_GET_CLASS (o))
 
 static inline BonoboStorage *
 bonobo_storage_from_servant (PortableServer_Servant servant)
@@ -164,7 +164,7 @@ bonobo_storage_class_init (BonoboStorageClass *klass)
 }
 
 static void 
-bonobo_storage_init (GtkObject *object)
+bonobo_storage_init (GObject *object)
 {
 	/* nothing to do */
 }

@@ -12,17 +12,17 @@
 #ifndef _BONOBO_ITEM_HANDLER_H_
 #define _BONOBO_ITEM_HANDLER_H_
 
-#include <libgnome/gnome-defs.h>
-#include <gtk/gtkobject.h>
+#include <libgnomebase/gnome-defs.h>
+#include <gobject/gobject.h>
 #include <bonobo/bonobo-xobject.h>
 
 BEGIN_GNOME_DECLS
  
 #define BONOBO_ITEM_HANDLER_TYPE        (bonobo_item_handler_get_type ())
-#define BONOBO_ITEM_HANDLER(o)          (GTK_CHECK_CAST ((o), BONOBO_ITEM_HANDLER_TYPE, BonoboItemHandler))
-#define BONOBO_ITEM_HANDLER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_ITEM_HANDLER_TYPE, BonoboItemHandlerClass))
-#define BONOBO_IS_ITEM_HANDLER(o)       (GTK_CHECK_TYPE ((o), BONOBO_ITEM_HANDLER_TYPE))
-#define BONOBO_IS_ITEM_HANDLER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_ITEM_HANDLER_TYPE))
+#define BONOBO_ITEM_HANDLER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_ITEM_HANDLER_TYPE, BonoboItemHandler))
+#define BONOBO_ITEM_HANDLER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_ITEM_HANDLER_TYPE, BonoboItemHandlerClass))
+#define BONOBO_IS_ITEM_HANDLER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_ITEM_HANDLER_TYPE))
+#define BONOBO_IS_ITEM_HANDLER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_ITEM_HANDLER_TYPE))
 
 typedef struct _BonoboItemHandlerPrivate BonoboItemHandlerPrivate;
 typedef struct _BonoboItemHandler        BonoboItemHandler;
@@ -52,7 +52,7 @@ typedef struct {
 	POA_Bonobo_ItemContainer__epv epv;
 } BonoboItemHandlerClass;
 
-GtkType              bonobo_item_handler_get_type    (void);
+GType              bonobo_item_handler_get_type    (void);
 BonoboItemHandler   *bonobo_item_handler_new         (BonoboItemHandlerEnumObjectsFn enum_objects,
 						      BonoboItemHandlerGetObjectFn   get_object,
 						      gpointer                       user_data);

@@ -14,8 +14,8 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-exception.h>
@@ -29,8 +29,8 @@ static BonoboObjectClass *bonobo_generic_factory_parent_class = NULL;
 
 static CORBA_boolean
 impl_Bonobo_ObjectFactory_manufactures (PortableServer_Servant  servant,
-					 const CORBA_char       *obj_oaf_iid,
-					 CORBA_Environment      *ev)
+					const CORBA_char       *obj_oaf_iid,
+					CORBA_Environment      *ev)
 {
 	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
 
@@ -52,7 +52,7 @@ impl_Bonobo_ObjectFactory_create_object (PortableServer_Servant   servant,
 
 	factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
 
-	class = BONOBO_GENERIC_FACTORY_CLASS (GTK_OBJECT (factory)->klass);
+	class = BONOBO_GENERIC_FACTORY_CLASS (G_OBJECT_GET_CLASS (factory));
 	object = (*class->new_generic) (factory, obj_oaf_iid);
 
 	if (!object)
@@ -166,7 +166,7 @@ bonobo_generic_factory_new (const char             *oaf_iid,
 
 	g_return_val_if_fail (factory != NULL, NULL);
 	
-	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
+	c_factory = g_object_new (bonobo_generic_factory_get_type (), NULL);
 
 	corba_factory = bonobo_generic_factory_corba_object_create (BONOBO_OBJECT (c_factory), factory);
 	if (corba_factory == CORBA_OBJECT_NIL) {
@@ -206,7 +206,7 @@ BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	g_return_val_if_fail (factory_cb != NULL, NULL);
 	g_return_val_if_fail (oaf_iid != NULL, NULL);
 	
-	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
+	c_factory = g_object_new (bonobo_generic_factory_get_type (), NULL);
 
 	corba_factory = bonobo_generic_factory_corba_object_create (BONOBO_OBJECT (c_factory), factory_cb);
 	if (corba_factory == CORBA_OBJECT_NIL) {
@@ -220,7 +220,7 @@ BonoboGenericFactory *bonobo_generic_factory_new_multi (
 
 
 static void
-bonobo_generic_factory_finalize (GtkObject *object)
+bonobo_generic_factory_finalize (GObject *object)
 {
 	BonoboGenericFactory *c_factory G_GNUC_UNUSED = BONOBO_GENERIC_FACTORY (object);
 	CORBA_Environment ev;
@@ -231,7 +231,7 @@ bonobo_generic_factory_finalize (GtkObject *object)
 	CORBA_exception_free (&ev);
 	g_free (c_factory->oaf_iid);
 	
-	GTK_OBJECT_CLASS (bonobo_generic_factory_parent_class)->finalize (object);
+	G_OBJECT_CLASS (bonobo_generic_factory_parent_class)->finalize (object);
 }
 
 static BonoboObject *
@@ -257,9 +257,9 @@ init_generic_factory_corba_class (void)
 static void
 bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 
-	bonobo_generic_factory_parent_class = gtk_type_class (bonobo_object_get_type ());
+	bonobo_generic_factory_parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = bonobo_generic_factory_finalize;
 
@@ -271,26 +271,29 @@ bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 /**
  * bonobo_generic_factory_get_type:
  *
- * Returns: The GtkType of the BonoboGenericFactory class.
+ * Returns: The GType of the BonoboGenericFactory class.
  */
-GtkType
+GType
 bonobo_generic_factory_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type){
-		GtkTypeInfo info = {
-			"BonoboGenericFactory",
+		GTypeInfo info = {
 			sizeof (BonoboGenericFactory),
-			sizeof (BonoboGenericFactoryClass),
-			(GtkClassInitFunc) bonobo_generic_factory_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_generic_factory_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BonoboGenericFactory),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = g_type_register_static (bonobo_object_get_type (),
+					       "BonoboGenericFactory",
+					       &info, 0);
 	}
 
 	return type;

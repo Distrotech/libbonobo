@@ -10,9 +10,8 @@
 
 #include <config.h>
 #include <stdio.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
-#include <gtk/gtktypeutils.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-xobject.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
@@ -30,10 +29,9 @@ extern void bonobo_object_epv_init (POA_Bonobo_Unknown__epv *epv);
 	guchar is_pseudo_object;
 	gint refs;
 */
-#define BONOBO_X_GTK_FLAG_PATTERN    (GTK_FLOATING | 0x4000)
 #define BONOBO_X_SERVANT_FLAG_PATTERN 0x7132
 
-static GtkObjectClass *x_object_parent_class;
+static GObjectClass *x_object_parent_class;
 
 /* FIXME: cut and paste from orbit_object.c: CORBA_Object_release_fn */
 static void
@@ -77,7 +75,7 @@ corba_cleanup (BonoboXObject *x_object)
 	BonoboXObjectClass      *klass;
 	PortableServer_ObjectId *oid;
 
-	klass = (BonoboXObjectClass *) GTK_OBJECT (x_object)->klass;
+	klass = (BonoboXObjectClass *) G_OBJECT_GET_CLASS (x_object);
 	servant = BONOBO_X_OBJECT_GET_SERVANT (x_object);
 
 	b_corba_object_free (x_object);
@@ -112,7 +110,7 @@ try_finalize (BonoboXObject *object)
 		if (bonobo_object_get_refs ((BonoboObject *) object) <= 0) {
 
 			corba_cleanup (object);
-			x_object_parent_class->finalize ((GtkObject *) object);
+			g_object_unref (object);
 #ifdef BONOBO_X_OBJECT_DEBUG
 			g_warning ("Finalized '%p'", object);
 #endif
@@ -120,13 +118,13 @@ try_finalize (BonoboXObject *object)
 			g_warning ("Reference counting error: "
 				   "Attempts to release CORBA_Object associated with "
 				   "'%s' which still has a reference count of %d",
-				   gtk_type_name (GTK_OBJECT (object)->klass->type),
+				   G_OBJECT_TYPE_NAME (object),
 				   bonobo_object_get_refs (BONOBO_OBJECT (object)));
 	}
 }
 
 static void
-bonobo_x_object_finalize_real (GtkObject *object)
+bonobo_x_object_finalize_real (GObject *object)
 {
 	BonoboXObject *x_object;
 	CORBA_Object   obj;
@@ -176,13 +174,12 @@ do_corba_hacks (BonoboXObject      *object,
 
 	/* Initialize the servant structure with our POA__init fn */
 	for (xklass = klass; xklass && !xklass->poa_init_fn;)
-		xklass = gtk_type_class (gtk_type_parent (
-			((GtkObjectClass *)xklass)->type));
+		xklass = g_type_class_peek_parent (xklass);
 
 	if (!xklass || !xklass->epv_struct_offset) {
-		g_warning ("It looks like you used gtk_type_unique "
+		g_warning ("It looks like you used g_type_unique "
 			   "instead of b_type_unique on type '%s'",
-			   gtk_type_name (((GtkObjectClass *)klass)->type));
+			   G_OBJECT_CLASS_NAME (klass));
 		return;
 	}
 
@@ -231,17 +228,15 @@ do_corba_hacks (BonoboXObject      *object,
 }
 
 static void
-bonobo_x_object_instance_init (GtkObject    *gtk_object,
-			       GtkTypeClass *klass)
+bonobo_x_object_instance_init (GObject    *g_object,
+			       GTypeClass *klass)
 {
-	BonoboXObject *object = BONOBO_X_OBJECT (gtk_object);
-
-	GTK_OBJECT_UNSET_FLAGS (GTK_OBJECT (object), GTK_FLOATING);
+	BonoboXObject *object = BONOBO_X_OBJECT (g_object);
 
 #ifdef BONOBO_X_OBJECT_DEBUG
 	g_warning ("bonobo_x_object_instance init '%s' '%s' -> %p",
-		   gtk_type_name (gtk_object->klass->type),
-		   gtk_type_name (klass->type), object);
+		   G_OBJECT_TYPE_NAME (g_object),
+		   G_OBJECT_CLASS_NAME (klass), object);
 #endif
 
 	do_corba_hacks (object, BONOBO_X_OBJECT_CLASS (klass));
@@ -253,9 +248,9 @@ bonobo_x_object_instance_init (GtkObject    *gtk_object,
 static void
 bonobo_x_object_class_init (BonoboXObjectClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 
-	x_object_parent_class = gtk_type_class (gtk_object_get_type ());
+	x_object_parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = bonobo_x_object_finalize_real;
 }
@@ -263,27 +258,29 @@ bonobo_x_object_class_init (BonoboXObjectClass *klass)
 /**
  * bonobo_x_object_get_type:
  *
- * Returns: the GtkType associated with the base BonoboXObject class type.
+ * Returns: the GType associated with the base BonoboXObject class type.
  */
-GtkType
+GType
 bonobo_x_object_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboXObject",
-			sizeof (BonoboXObject),
+		GTypeInfo info = {
 			sizeof (BonoboXObjectClass),
-			(GtkClassInitFunc) bonobo_x_object_class_init,
-			(GtkObjectInitFunc) bonobo_x_object_instance_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_x_object_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BonoboXObject),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) bonobo_x_object_instance_init
 		};
 
-		type = gtk_type_unique (
-			bonobo_object_get_type (), &info);
+		type = g_type_register_static (
+			bonobo_object_get_type (), "BonoboXObject",
+			&info, 0);
 	}
 
 	return type;
@@ -297,24 +294,24 @@ bonobo_x_object_get_type (void)
  * @epv_struct_offset: the offset in the class structure where the epv is or 0
  * 
  *   This function initializes a type derived from BonoboXObject, such that
- * when you instantiate a new object of this type with gtk_type_new the
+ * when you instantiate a new object of this type with g_type_new the
  * CORBA object will be correctly created and embedded.
  * 
  * Return value: TRUE on success, FALSE on error.
  **/
 gboolean
-bonobo_x_type_setup (GtkType            type,
+bonobo_x_type_setup (GType              type,
 		     BonoboXObjectPOAFn init_fn,
 		     BonoboXObjectPOAFn fini_fn,
 		     int                epv_struct_offset)
 {
-	GtkType       p, b_type;
+	GType       p, b_type;
 	int           depth;
 	BonoboXObjectClass *klass;
 	gpointer     *vepv;
 
 	/* Setup our class data */
-	klass = gtk_type_class (type);
+	klass = g_type_class_ref (type);
 	klass->epv_struct_offset = epv_struct_offset;
 	klass->poa_init_fn       = init_fn;
 	klass->poa_fini_fn       = fini_fn;
@@ -322,10 +319,10 @@ bonobo_x_type_setup (GtkType            type,
 	/* Calculate how far down the tree we are in epvs */
 	b_type = bonobo_x_object_get_type ();
 	for (depth = 0, p = type; p && p != b_type;
-	     p = gtk_type_parent (p)) {
+	     p = g_type_parent (p)) {
 		BonoboXObjectClass *xklass;
 
-		xklass = gtk_type_class (p);
+		xklass = g_type_class_peek (p);
 
 		if (xklass->epv_struct_offset)
 			depth++;
@@ -333,13 +330,13 @@ bonobo_x_type_setup (GtkType            type,
 	if (!p) {
 		g_warning ("Trying to inherit '%s' from a BonoboXObject, but "
 			   "no BonoboXObject in the ancestory",
-			   gtk_type_name (type));
+			   g_type_name (type));
 		return FALSE;
 	}
 
 #ifdef BONOBO_X_OBJECT_DEBUG
 	g_warning ("We are at depth %d with type '%s'",
-		   depth, gtk_type_name (type));
+		   depth, g_type_name (type));
 #endif
 
 	/* Setup the Unknown epv */
@@ -358,7 +355,7 @@ bonobo_x_type_setup (GtkType            type,
 		for (p = type, i = depth; i > 0;) {
 			BonoboXObjectClass *xklass;
 
-			xklass = gtk_type_class (p);
+			xklass = g_type_class_peek (p);
 
 			if (xklass->epv_struct_offset) {
 				vepv [i + 1] = ((guchar *)klass) +
@@ -366,7 +363,7 @@ bonobo_x_type_setup (GtkType            type,
 				i--;
 			}
 
-			p = gtk_type_parent (p);
+			p = g_type_parent (p);
 		}
 	}
 
@@ -375,38 +372,39 @@ bonobo_x_type_setup (GtkType            type,
 
 /**
  * bonobo_x_type_unique:
- * @parent_type: the parent Gtk Type
+ * @parent_type: the parent GType
  * @init_fn: a POA initialization function
  * @fini_fn: a POA finialization function or NULL
  * @epv_struct_offset: the offset into the struct that the epv
- * commences at, or 0 if we are inheriting a plain Gtk Object
+ * commences at, or 0 if we are inheriting a plain GObject
  * from a BonoboXObject, adding no new CORBA interfaces
- * @info: the standard GtkTypeInfo.
+ * @info: the standard GTypeInfo.
  * 
  * This function is the main entry point for deriving bonobo
  * server interfaces.
  * 
- * Return value: the constructed Gtk Type.
+ * Return value: the constructed GType.
  **/
-GtkType
-bonobo_x_type_unique (GtkType            parent_type,
+GType
+bonobo_x_type_unique (GType              parent_type,
 		      BonoboXObjectPOAFn init_fn,
 		      BonoboXObjectPOAFn fini_fn,
 		      int                epv_struct_offset,
-		      const GtkTypeInfo *info)
+		      const GTypeInfo   *info,
+		      const gchar       *type_name)
 {
-	GtkType       type;
+	GType       type;
 
 	/*
-	 *  Since we call gtk_type_class after the gtk_type_unique
+	 * Since we call g_type_class after the g_type_unique
 	 * and before we can return the type to the get_type fn.
 	 * it is possible we can re-enter here through eg. a
 	 * type check macro, hence we need this guard.
 	 */
-	if ((type = gtk_type_from_name (info->type_name)))
+	if ((type = g_type_from_name (type_name)))
 		return type;
 
-	type = gtk_type_unique (parent_type, info);
+	type = g_type_register_static (parent_type, type_name, info, 0);
 	if (!type)
 		return 0;
 
@@ -431,18 +429,16 @@ bonobo_x_type_unique (GtkType            parent_type,
 BonoboXObject *
 bonobo_x_object (gpointer p)
 {
-	GtkObject     *obj;
 	BonoboXObject *xobj;
 	
 
 	if (!p)
 		return NULL;
 
-	if (((obj = p)->flags & BONOBO_X_GTK_FLAG_PATTERN) ==
-	    BONOBO_X_GTK_FLAG_PATTERN)
-		return BONOBO_X_OBJECT (p);
+	if ((xobj = p)->flags == BONOBO_X_SERVANT_FLAG_PATTERN)
+		return xobj;
 
-	else if ((xobj = BONOBO_X_SERVANT_GET_OBJECT (p))->flags ==
+	if ((xobj = BONOBO_X_SERVANT_GET_OBJECT (p))->flags ==
 		 BONOBO_X_SERVANT_FLAG_PATTERN)
 		return xobj;
 

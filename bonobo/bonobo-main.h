@@ -13,13 +13,15 @@
 #ifndef __GNOME_MAIN_H__
 #define __GNOME_MAIN_H__ 1
 
-#include <gtk/gtkobject.h>
+#include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 
 gboolean		    bonobo_init			 (CORBA_ORB orb,
 							  PortableServer_POA poa,
 							  PortableServer_POAManager manager);
 void			    bonobo_main			 (void);
+void                        bonobo_main_quit             (void);
+
 gboolean		    bonobo_activate		 (void);
 void			    bonobo_setup_x_error_handler (void);
 

@@ -17,10 +17,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_LISTENER_TYPE        (bonobo_listener_get_type ())
-#define BONOBO_LISTENER(o)          (GTK_CHECK_CAST ((o), BONOBO_LISTENER_TYPE, BonoboListener))
-#define BONOBO_LISTENER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_LISTENER_TYPE, BonoboListenerClass))
-#define BONOBO_IS_LISTENER(o)       (GTK_CHECK_TYPE ((o), BONOBO_LISTENER_TYPE))
-#define BONOBO_IS_LISTENER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_LISTENER_TYPE))
+#define BONOBO_LISTENER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_LISTENER_TYPE, BonoboListener))
+#define BONOBO_LISTENER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_LISTENER_TYPE, BonoboListenerClass))
+#define BONOBO_IS_LISTENER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_LISTENER_TYPE))
+#define BONOBO_IS_LISTENER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_LISTENER_TYPE))
 
 typedef struct _BonoboListenerPrivate BonoboListenerPrivate;
 
@@ -49,7 +49,7 @@ typedef void (*BonoboListenerCallbackFn)  (BonoboListener    *listener,
 					   CORBA_Environment *ev,
 					   gpointer           user_data);
 
-GtkType         bonobo_listener_get_type  (void);
+GType         bonobo_listener_get_type  (void);
 
 BonoboListener *bonobo_listener_new       (BonoboListenerCallbackFn event_callback, 
 					   gpointer                 user_data);

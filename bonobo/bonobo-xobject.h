@@ -10,18 +10,18 @@
 #ifndef _BONOBO_X_OBJECT_H_
 #define _BONOBO_X_OBJECT_H_
 
-#include <libgnome/gnome-defs.h>
-#include <gtk/gtkobject.h>
+#include <libgnomebase/gnome-defs.h>
+#include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
 
 #define BONOBO_X_OBJECT_TYPE        (bonobo_x_object_get_type ())
-#define BONOBO_X_OBJECT(o)          (GTK_CHECK_CAST ((o), BONOBO_X_OBJECT_TYPE, BonoboXObject))
-#define BONOBO_X_OBJECT_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_X_OBJECT_TYPE, BonoboXObjectClass))
-#define BONOBO_IS_X_OBJECT(o)       (GTK_CHECK_TYPE ((o), BONOBO_X_OBJECT_TYPE))
-#define BONOBO_IS_X_OBJECT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_X_OBJECT_TYPE))
+#define BONOBO_X_OBJECT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_X_OBJECT_TYPE, BonoboXObject))
+#define BONOBO_X_OBJECT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_X_OBJECT_TYPE, BonoboXObjectClass))
+#define BONOBO_IS_X_OBJECT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_X_OBJECT_TYPE))
+#define BONOBO_IS_X_OBJECT_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_X_OBJECT_TYPE))
 
 #define BONOBO_X_OBJECT_HEADER_SIZE (sizeof (BonoboObject))
 
@@ -84,64 +84,70 @@ typedef struct {
 	POA_Bonobo_Unknown__epv    epv;
 } BonoboXObjectClass;
 
-GtkType        bonobo_x_object_get_type        (void);
+GType          bonobo_x_object_get_type        (void);
 
-/* Use GTK_STRUCT_OFFSET to calc. epv_struct_offset */
-GtkType        bonobo_x_type_unique            (GtkType            parent_type,
+/* Use G_STRUCT_OFFSET to calc. epv_struct_offset */
+GType          bonobo_x_type_unique            (GType              parent_type,
 						BonoboXObjectPOAFn init_fn,
 						BonoboXObjectPOAFn fini_fn,
 						int                epv_struct_offset,
-						const GtkTypeInfo *info);
+						const GTypeInfo   *info,
+						const gchar       *type_name);
 
-gboolean       bonobo_x_type_setup             (GtkType            type,
+gboolean       bonobo_x_type_setup             (GType              type,
 						BonoboXObjectPOAFn init_fn,
 						BonoboXObjectPOAFn fini_fn,
 						int                epv_struct_offset);
 						
 
-#define BONOBO_X_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)     \
-GtkType                                                                       \
+#define BONOBO_X_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)       \
+GType                                                                         \
 prefix##_get_type (void)                                                      \
 {                                                                             \
-	GtkType ptype;                                                        \
-	static GtkType type = 0;                                              \
+	GType ptype;                                                          \
+	static GType type = 0;                                                \
                                                                               \
 	if (type == 0) {                                                      \
-		static GtkTypeInfo info = {                                   \
-			#class_name,                                          \
-			sizeof (class_name),                                  \
+		static GTypeInfo info = {                                     \
 			sizeof (class_name##Class),                           \
-			(GtkClassInitFunc)prefix##_class_init,                \
-			(GtkObjectInitFunc)prefix##_init,                     \
-			NULL, NULL, (GtkClassInitFunc) NULL                   \
+			(GBaseInitFunc) NULL,                                 \
+			(GBaseFinalizeFunc) NULL,                             \
+			(GClassInitFunc) prefix##_class_init,                 \
+			NULL, NULL,                                           \
+			sizeof (class_name),                                  \
+			0,                                                    \
+			(GInstanceInitFunc) prefix##_init                     \
 		};                                                            \
 		ptype = (parent);                                             \
 		type = bonobo_x_type_unique (ptype,                           \
 			POA_##corba_name##__init, POA_##corba_name##__fini,   \
-			GTK_STRUCT_OFFSET (class_name##Class, epv),           \
-			&info);                                               \
+			G_STRUCT_OFFSET (class_name##Class, epv),             \
+			&info, #class_name);                                  \
 	}                                                                     \
 	return type;                                                          \
 }
  
-#define BONOBO_X_TYPE_FUNC(class_name, parent, prefix)                      \
-GtkType                                                                       \
+#define BONOBO_X_TYPE_FUNC(class_name, parent, prefix)                        \
+GType                                                                         \
 prefix##_get_type (void)                                                      \
 {                                                                             \
-	GtkType ptype;                                                        \
-	static GtkType type = 0;                                              \
+	GType ptype;                                                          \
+	static GType type = 0;                                                \
                                                                               \
 	if (type == 0) {                                                      \
-		static GtkTypeInfo info = {                                   \
-			#class_name,                                          \
-			sizeof (class_name),                                  \
+		static GTypeInfo info = {                                     \
 			sizeof (class_name##Class),                           \
-			(GtkClassInitFunc)prefix##_class_init,                \
-			(GtkObjectInitFunc)prefix##_init,                     \
-			NULL, NULL, (GtkClassInitFunc) NULL                   \
+			(GBaseInitFunc) NULL,                                 \
+			(GBaseFinalizeFunc) NULL,                             \
+			(GClassInitFunc) prefix##_class_init,                 \
+			NULL, NULL,                                           \
+			sizeof (class_name),                                  \
+			0,                                                    \
+			(GInstanceInitFunc) prefix##_init                     \
 		};                                                            \
 		ptype = (parent);                                             \
-		type = bonobo_x_type_unique (ptype, NULL, NULL, 0, &info);    \
+		type = bonobo_x_type_unique (ptype, NULL, NULL, 0,            \
+					     &info, #class_name);             \
 	}                                                                     \
 	return type;                                                          \
 }

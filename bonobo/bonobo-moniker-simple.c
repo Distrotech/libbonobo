@@ -35,7 +35,7 @@ bonobo_moniker_simple_class_init (BonoboMonikerClass *klass)
 }
 
 static void 
-bonobo_moniker_simple_init (GtkObject *object)
+bonobo_moniker_simple_init (GObject *object)
 {
 	/* nothing to do */
 }
@@ -82,7 +82,7 @@ bonobo_moniker_simple_new (const char                  *name,
 {
 	BonoboMoniker *moniker;
 
-	moniker = gtk_type_new (bonobo_moniker_simple_get_type ());
+	moniker = g_object_new (bonobo_moniker_simple_get_type (), NULL);
 
 	return bonobo_moniker_simple_construct (
 		BONOBO_MONIKER_SIMPLE (moniker),

@@ -19,7 +19,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-transient.h>
 
-static GtkObjectClass *parent_class = NULL;
+static GObjectClass *parent_class = NULL;
 
 /*
  * BonoboTransient POA and Servant Manager.
@@ -433,7 +433,7 @@ bonobo_transient_construct (BonoboTransient          *transient,
 }
 
 static void
-bonobo_transient_destroy (GtkObject *object)
+bonobo_transient_finalize (GObject *object)
 {
 	BonoboTransient *transient = BONOBO_TRANSIENT (object);
 	
@@ -453,17 +453,17 @@ bonobo_transient_destroy (GtkObject *object)
 
 	g_free (transient->priv);
 	
-	parent_class->destroy (object);
+	parent_class->finalize (object);
 }
 
 static void
 bonobo_transient_class_init (BonoboTransientClass *class)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GObjectClass *object_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gtk_object_get_type ());
+	parent_class = g_type_class_peek_parent (class);
 
-	object_class->destroy = bonobo_transient_destroy;
+	object_class->finalize = bonobo_transient_finalize;
 }
 
 static void
@@ -475,26 +475,29 @@ bonobo_transient_init (BonoboTransient *transient)
 /**
  * bonobo_transient_get_type:
  *
- * Returns: The GtkType corresponding to the BonoboTransient class.
+ * Returns: The GType corresponding to the BonoboTransient class.
  */
-GtkType
+GType
 bonobo_transient_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (! type) {
-		GtkTypeInfo info = {
-			"BonoboTransient",
+		GTypeInfo info = {
 			sizeof (BonoboTransient),
-			sizeof (BonoboTransientClass),
-			(GtkClassInitFunc) bonobo_transient_class_init,
-			(GtkObjectInitFunc) bonobo_transient_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_transient_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BonoboTransient),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) bonobo_transient_init
 		};
 
-		type = gtk_type_unique (gtk_object_get_type (), &info);
+		type = g_type_register_static (G_TYPE_OBJECT,
+					       "BonoboTransient",
+					       &info, 0);
 	}
 
 	return type;
@@ -532,9 +535,9 @@ bonobo_transient_new (PortableServer_POA poa,
 {
 	BonoboTransient *transient;
 
-	transient = gtk_type_new (BONOBO_TRANSIENT_TYPE);
+	transient = g_object_new (BONOBO_TRANSIENT_TYPE, NULL);
 	if (bonobo_transient_construct (transient, poa, new_servant, destroy_servant, data) == NULL) {
-		gtk_object_destroy (GTK_OBJECT (transient));
+		g_object_unref (G_OBJECT (transient));
 		return NULL;
 	}
 

@@ -13,8 +13,8 @@
 #define __BONOBO_ARG_H__
 
 #include <bonobo/Bonobo.h>
-#include <libgnome/gnome-defs.h>
-#include <gtk/gtktypeutils.h>
+#include <libgnomebase/gnome-defs.h>
+#include <gobject/gtype.h>
 
 BEGIN_GNOME_DECLS
 
@@ -65,20 +65,20 @@ typedef CORBA_TypeCode BonoboArgType;
 				     *((CORBA_char **)(a->_value)) = CORBA_string_dup ((v)?(v):""))
 #endif
 
-BonoboArg    *bonobo_arg_new           (BonoboArgType  t);
+BonoboArg    *bonobo_arg_new           (BonoboArgType      t);
 
-void          bonobo_arg_release       (BonoboArg     *arg);
+void          bonobo_arg_release       (BonoboArg         *arg);
 
-BonoboArg    *bonobo_arg_copy          (const BonoboArg *arg);
+BonoboArg    *bonobo_arg_copy          (const BonoboArg   *arg);
 
-void          bonobo_arg_from_gtk      (BonoboArg    *a, 
-					const GtkArg *arg);
-BonoboArgType bonobo_arg_type_from_gtk (GtkType t);
+void          bonobo_arg_from_gtk      (BonoboArg         *a, 
+					const GValue      *value);
+BonoboArgType bonobo_arg_type_from_gtk (GType              t);
 
-void          bonobo_arg_to_gtk        (GtkArg          *a, 
-					const BonoboArg *arg);
+void          bonobo_arg_to_gtk        (GValue            *value, 
+					const BonoboArg   *arg);
 
-GtkType       bonobo_arg_type_to_gtk   (BonoboArgType id);
+GType         bonobo_arg_type_to_gtk   (BonoboArgType      id);
 
 gboolean      bonobo_arg_is_equal      (BonoboArg         *a, 
 					BonoboArg         *b, 

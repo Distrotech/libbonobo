@@ -14,8 +14,8 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-exception.h>
@@ -99,7 +99,7 @@ bonobo_shlib_factory_new (const char            *oaf_iid,
 
 	g_return_val_if_fail (factory != NULL, NULL);
 	
-	c_factory = gtk_type_new (bonobo_shlib_factory_get_type ());
+	c_factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
 
 	corba_factory = bonobo_generic_factory_corba_object_create (
 		BONOBO_OBJECT (c_factory), factory);
@@ -146,7 +146,7 @@ BonoboShlibFactory *bonobo_shlib_factory_new_multi (
 	g_return_val_if_fail (factory_cb != NULL, NULL);
 	g_return_val_if_fail (oaf_iid != NULL, NULL);
 	
-	c_factory = gtk_type_new (bonobo_shlib_factory_get_type ());
+	c_factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
 
 	corba_factory = bonobo_generic_factory_corba_object_create (
 		BONOBO_OBJECT (c_factory), factory_cb);
@@ -162,7 +162,7 @@ BonoboShlibFactory *bonobo_shlib_factory_new_multi (
 }
 
 static void
-bonobo_shlib_factory_finalize (GtkObject *object)
+bonobo_shlib_factory_finalize (GObject *object)
 {
 /*	BonoboShlibFactory *c_factory = BONOBO_SHLIB_FACTORY (object);*/
 
@@ -177,7 +177,7 @@ bonobo_shlib_factory_finalize (GtkObject *object)
 	/* we dont unload it because of a problem with the gtk type system */
 	/* oaf_plugin_unuse (c_factory->oaf_impl_ptr); */
 
-	GTK_OBJECT_CLASS (bonobo_shlib_factory_parent_class)->finalize (object);
+	G_OBJECT_CLASS (bonobo_shlib_factory_parent_class)->finalize (object);
 }
 
 static BonoboObject *
@@ -195,10 +195,9 @@ bonobo_shlib_factory_new_generic (BonoboGenericFactory *factory,
 static void
 bonobo_shlib_factory_class_init (BonoboGenericFactoryClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 
-	bonobo_shlib_factory_parent_class = gtk_type_class (
-		bonobo_generic_factory_get_type ());
+	bonobo_shlib_factory_parent_class = g_type_class_peek_parent (klass);
 
 	klass->new_generic = bonobo_shlib_factory_new_generic;
 
@@ -208,27 +207,29 @@ bonobo_shlib_factory_class_init (BonoboGenericFactoryClass *klass)
 /**
  * bonobo_shlib_factory_get_type:
  *
- * Returns: The GtkType of the BonoboShlibFactory class.
+ * Returns: The GType of the BonoboShlibFactory class.
  */
-GtkType
+GType
 bonobo_shlib_factory_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboShlibFactory",
+		GTypeInfo info = {
 			sizeof (BonoboShlibFactory),
-			sizeof (BonoboShlibFactoryClass),
-			(GtkClassInitFunc)  bonobo_shlib_factory_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_shlib_factory_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BonoboShlibFactory),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) NULL
 		};
 
-		type = gtk_type_unique (
-			bonobo_generic_factory_get_type (), &info);
+		type = g_type_register_static (
+			bonobo_generic_factory_get_type (),
+			"BonoboShlibFactory", &info, 0);
 	}
 
 	return type;
@@ -263,7 +264,7 @@ bonobo_shlib_factory_dec_live (BonoboShlibFactory *factory)
 }
 
 static void
-destroy_handler (GtkObject *object, BonoboShlibFactory *factory)
+destroy_handler (GObject *object, BonoboShlibFactory *factory)
 {
 	bonobo_shlib_factory_dec_live (factory);
 }
@@ -277,6 +278,7 @@ bonobo_shlib_factory_track_object (BonoboShlibFactory *factory,
 
 	bonobo_shlib_factory_inc_live (factory);
 
-	gtk_signal_connect (GTK_OBJECT (object), "destroy",
-			    destroy_handler, factory);
+	g_signal_connectc (G_OBJECT (object), "destroy",
+			   G_CALLBACK (destroy_handler),
+			   factory, FALSE);
 }

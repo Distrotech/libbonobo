@@ -16,9 +16,8 @@
 #include <dlfcn.h>
 #endif
 #include <stdio.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
-#include <gtk/gtktypeutils.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
@@ -26,6 +25,7 @@
 #include "Bonobo.h"
 #include "bonobo-running-context.h"
 #include "bonobo-object-directory.h"
+#include "bonobo-marshal.h"
 
 /* Shared stuff with BonoboMObject */
 extern int  bonobo_object_get_refs (BonoboObject            *object);
@@ -74,7 +74,7 @@ enum {
 };
 
 static guint bonobo_object_signals [LAST_SIGNAL];
-static GtkObjectClass *bonobo_object_parent_class;
+static GObjectClass *bonobo_object_parent_class;
 
 #ifdef BONOBO_REF_HOOKS
 
@@ -103,9 +103,9 @@ bonobo_debug_print (char *name, char *fmt, ...)
  * #PortableServer_Servant which is a pointer to the servant that was
  * used to create this specific CORBA object instance.
  *
- * This routine allows the user to get the #BonoboObject (ie, Gtk
- * object wrapper) from the servant.  This #BonoboObject is the Gtk
- * object wrapper associated with the CORBA object instance whose
+ * This routine allows the user to get the #BonoboObject (ie, GObject
+ * wrapper) from the servant.  This #BonoboObject is the GObject
+ * wrapper associated with the CORBA object instance whose
  * method is being invoked.
  *
  * Returns: the #BonoboObject wrapper associated with @servant.
@@ -164,15 +164,17 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 	g_return_if_fail (ao->ref_count > 0);
 
 	for (l = ao->objs; l; l = l->next) {
-		GtkObject *o = l->data;
+		GObject *o = l->data;
 		guint id = BONOBO_OBJECT (o)->priv->destroy_id;
 
 		if (id)
-			gtk_signal_disconnect (o, id);
+			g_signal_handler_disconnect (o, id);
 		BONOBO_OBJECT (o)->priv->destroy_id = 0;
-		if (o->ref_count >= 1)
-			gtk_object_destroy (GTK_OBJECT (o));
-		else
+		if (o->ref_count >= 1) {
+			g_object_ref (o);
+			G_OBJECT_GET_CLASS (o)->shutdown (o);
+			g_object_unref (o);
+		} else
 			g_warning ("Serious ref-counting error [%p]", o);
 	}
 #ifdef BONOBO_REF_HOOKS
@@ -188,7 +190,7 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
 	g_return_if_fail (ao->ref_count == 0);
 
 	for (l = ao->objs; l; l = l->next) {
-		GtkObject *o = GTK_OBJECT (l->data);
+		GObject *o = G_OBJECT (l->data);
 
 		if (!o)
 			g_error ("Serious bonobo object corruption");
@@ -199,10 +201,10 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
 
 			bonobo_debug_print ("finalize", 
 					    "[%p] %-20s corba_objref=[%p]"
-					    " gtk_ref_count=%d", o,
-					    gtk_type_name (GTK_OBJECT_TYPE (o)),
+					    " g_ref_count=%d", o,
+					    G_OBJECT_TYPE_NAME (o),
 					    BONOBO_OBJECT (o)->corba_objref,
-					    GTK_OBJECT (o)->ref_count);
+					    G_OBJECT (o)->ref_count);
 #endif
 
 			/*
@@ -215,7 +217,7 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
 			 */
 
 			BONOBO_OBJECT (o)->priv->ao = NULL;
-			gtk_object_unref (o);
+			g_object_unref (o);
 		}
 	}
 
@@ -312,13 +314,13 @@ bonobo_object_trace_refs (BonoboObject *object,
 		
 		bonobo_debug_print ("ref", "[%p]:[%p]:%s to %d at %s:%d", 
 			object, ao,
-		        gtk_type_name (GTK_OBJECT (object)->klass->type),
+		        G_OBJECT_TYPE_NAME (object),
 			ao->ref_count, fn, line);
 
 	} else { /* unref */
 		bonobo_debug_print ("unref", "[%p]:[%p]:%s from %d at %s:%d", 
 			object, ao,
-			gtk_type_name (GTK_OBJECT (object)->klass->type),
+			G_OBJECT_TYPE_NAME (object),
 			ao->ref_count, fn, line);
 
 		g_return_if_fail (ao->ref_count > 0);
@@ -331,7 +333,7 @@ bonobo_object_trace_refs (BonoboObject *object,
 
 		/*
 		 * If this blows it is likely some loony used
-		 * gtk_object_unref somewhere instead of
+		 * g_object_unref somewhere instead of
 		 * bonobo_object_unref, send them my regards.
 		 */
 		g_assert (object->priv->ao == ao);
@@ -502,7 +504,7 @@ bonobo_object_query_local_interface (BonoboObject *object,
 	CORBA_Environment  ev;
 	BonoboObject      *retval;
 	CORBA_Object       corba_retval;
-	GtkType            type;
+	GType              type;
 	GList             *l;
 
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
@@ -510,9 +512,9 @@ bonobo_object_query_local_interface (BonoboObject *object,
 	retval       = NULL;
 	corba_retval = CORBA_OBJECT_NIL;
 
-	gtk_signal_emit (
-		GTK_OBJECT (object), bonobo_object_signals [QUERY_INTERFACE],
-		repo_id, &corba_retval);
+	g_signal_emit (
+		G_OBJECT (object), bonobo_object_signals [QUERY_INTERFACE],
+		0, repo_id, &corba_retval);
 
 	CORBA_exception_init (&ev);
 
@@ -528,13 +530,13 @@ bonobo_object_query_local_interface (BonoboObject *object,
 		return local_interface;
 	}
 
-	type = gtk_type_from_name (repo_id);
+	type = g_type_from_name (repo_id);
 
 	/* Try looking at the gtk types */
 	for (l = object->priv->ao->objs; l; l = l->next){
 		BonoboObject *tryme = l->data;
 
-		if ((type && gtk_type_is_a (GTK_OBJECT (tryme)->klass->type, type)) ||
+		if ((type && g_type_is_a (G_OBJECT_TYPE (tryme), type)) ||
 #ifdef ORBIT_IMPLEMENTS_IS_A
 		    CORBA_Object_is_a (tryme->corba_objref, (char *) repo_id, &ev)
 #else
@@ -569,7 +571,7 @@ impl_Bonobo_Unknown_queryInterface (PortableServer_Servant  servant,
 	bonobo_debug_print ("query-interface", 
 			    "[%p]:[%p]:%s repoid=%s", 
 			    object, object->priv->ao,
-			    gtk_type_name (GTK_OBJECT (object)->klass->type),
+			    G_OBJECT_TYPE_NAME (object),
 			    repoid);
 #endif
 
@@ -604,8 +606,15 @@ bonobo_object_get_epv (void)
 	return epv;
 }
 
+static void G_GNUC_UNUSED
+bonobo_object_usage_error (BonoboObject *object)
+{
+	g_error ("Aggregate bonobo_object member [%p] has been "
+		 "destroyed using g_object_* methods", object);
+}
+
 static void
-bonobo_object_finalize_real (GtkObject *object)
+bonobo_object_finalize_real (GObject *object)
 {
 	BonoboObject *bonobo_object = BONOBO_OBJECT (object);
 	void *servant = bonobo_object->servant;
@@ -640,48 +649,38 @@ bonobo_object_finalize_real (GtkObject *object)
 static void
 bonobo_object_class_init (BonoboObjectClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 
-	bonobo_object_parent_class = gtk_type_class (gtk_object_get_type ());
+	bonobo_object_parent_class = g_type_class_peek_parent (klass);
 
 	bonobo_object_signals [QUERY_INTERFACE] =
-		gtk_signal_new ("query_interface",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET(BonoboObjectClass,query_interface),
-				gtk_marshal_NONE__POINTER_POINTER,
-				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER);
+		g_signal_newc ("query_interface",
+			       G_TYPE_FROM_CLASS (object_class),
+			       G_SIGNAL_RUN_LAST,
+			       G_STRUCT_OFFSET (BonoboObjectClass,query_interface),
+			       NULL, NULL,
+			       bonobo_marshal_VOID__POINTER_POINTER,
+			       G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
 	bonobo_object_signals [SYSTEM_EXCEPTION] =
-		gtk_signal_new ("system_exception",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET(BonoboObjectClass,system_exception),
-				gtk_marshal_NONE__POINTER_POINTER,
-				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER);
-
-	gtk_object_class_add_signals (object_class, bonobo_object_signals, LAST_SIGNAL);
+		g_signal_newc ("system_exception",
+			       G_TYPE_FROM_CLASS (object_class),
+			       G_SIGNAL_RUN_LAST,
+			       G_STRUCT_OFFSET (BonoboObjectClass,system_exception),
+			       NULL, NULL,
+			       bonobo_marshal_VOID__POINTER_POINTER,
+			       G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
 
 	object_class->finalize = bonobo_object_finalize_real;
 }
 
 static void
-bonobo_object_usage_error (BonoboObject *object)
+bonobo_object_instance_init (GObject    *g_object,
+			     GTypeClass *klass)
 {
-	g_error ("Aggregate bonobo_object member [%p] has been "
-		 "destroyed using gtk_object_* methods", object);
-}
-
-static void
-bonobo_object_instance_init (GtkObject    *gtk_object,
-			     GtkTypeClass *klass)
-{
-	BonoboObject *object = BONOBO_OBJECT (gtk_object);
+	BonoboObject *object = BONOBO_OBJECT (g_object);
 	BonoboAggregateObject *ao;
 
 	object->priv = g_new (BonoboObjectPrivate, 1);
-	object->priv->destroy_id = gtk_signal_connect (
-		gtk_object, "destroy", GTK_SIGNAL_FUNC (bonobo_object_usage_error),
-		NULL);
 
 	object->priv->ao = ao = g_new0 (BonoboAggregateObject, 1);
 
@@ -694,7 +693,7 @@ bonobo_object_instance_init (GtkObject    *gtk_object,
 #ifdef BONOBO_REF_HOOKS
 	{
 		bonobo_debug_print ("create", "[%p]:[%p]:%s to %d", object, ao,
-				    gtk_type_name (klass->type),
+				    g_type_name (G_TYPE_FROM_CLASS (klass)),
 				    ao->ref_count);
 
 		g_assert (g_hash_table_lookup (living_ao_ht, ao) == NULL);
@@ -706,26 +705,28 @@ bonobo_object_instance_init (GtkObject    *gtk_object,
 /**
  * bonobo_object_get_type:
  *
- * Returns: the GtkType associated with the base BonoboObject class type.
+ * Returns: the GType associated with the base BonoboObject class type.
  */
-GtkType
+GType
 bonobo_object_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboObject",
-			sizeof (BonoboObject),
+		GTypeInfo info = {
 			sizeof (BonoboObjectClass),
-			(GtkClassInitFunc) bonobo_object_class_init,
-			(GtkObjectInitFunc) bonobo_object_instance_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_object_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BonoboObject),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) bonobo_object_instance_init
 		};
-
-		type = gtk_type_unique (gtk_object_get_type (), &info);
+		
+		type = g_type_register_static (G_TYPE_OBJECT, "BonoboObject",
+					       &info, 0);
 
 #ifdef BONOBO_REF_HOOKS
 		living_ao_ht = g_hash_table_new (NULL, NULL);
@@ -752,10 +753,10 @@ bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 		BonoboObject *object = BONOBO_OBJECT (l->data);
 		
 		bonobo_debug_print ("", "[%p] %-20s corba_objref=[%p]"
-				    " gtk_ref_count=%d", object,
-				    gtk_type_name (GTK_OBJECT_TYPE (object)),
+				    " g_ref_count=%d", object,
+				    G_OBJECT_TYPE_NAME (object),
 				    object->corba_objref,
-				    GTK_OBJECT (object)->ref_count);
+				    G_OBJECT (object)->ref_count);
 	}
 
 	l = g_list_last (ao->refs);
@@ -921,9 +922,6 @@ bonobo_object_construct (BonoboObject *object, CORBA_Object corba_object)
 
 	object->corba_objref = corba_object;
 
-	/* BonoboObjects are self-owned */
-	GTK_OBJECT_UNSET_FLAGS (GTK_OBJECT (object), GTK_FLOATING);
-
 	return object;
 }
 
@@ -970,9 +968,9 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        bonobo_debug_print ("add_interface", 
 			   "[%p]:[%p]:%s to [%p]:[%p]:%s ref_count=%d", 
 			   object, object->priv->ao,
-			   gtk_type_name (GTK_OBJECT (object)->klass->type),
+			   G_OBJECT_TYPE_NAME (object),
 			   newobj, newobj->priv->ao,
-			   gtk_type_name (GTK_OBJECT (newobj)->klass->type),
+			   G_OBJECT_TYPE_NAME (newobj),
 			   ao->ref_count);
 #endif
 
@@ -1044,7 +1042,7 @@ bonobo_object_corba_objref (BonoboObject *object)
  *
  * This routine verifies the @ev environment for any fatal system
  * exceptions.  If a system exception occurs, the object raises a
- * "system_exception" signal.  The idea is that GtkObjects which are
+ * "system_exception" signal.  The idea is that GObjects which are
  * used to wrap a CORBA interface can use this function to notify
  * the user if a fatal exception has occurred, causing the object
  * to become defunct.
@@ -1059,10 +1057,10 @@ bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environme
 		return;
 
 	if (ev->_major == CORBA_SYSTEM_EXCEPTION)
-		gtk_signal_emit (
-			GTK_OBJECT (object),
+		g_signal_emit (
+			G_OBJECT (object),
 			bonobo_object_signals [SYSTEM_EXCEPTION],
-			obj, ev);
+			0, obj, ev);
 }
 
 /**
@@ -1109,7 +1107,7 @@ bonobo_object_new_from_servant (void *servant)
 
 	g_return_val_if_fail (servant != NULL, NULL);
 
-	object = gtk_type_new (bonobo_object_get_type ());
+	object = g_object_new (bonobo_object_get_type (), NULL);
 	if (object == NULL)
 		return NULL;
 

@@ -15,10 +15,10 @@
 BEGIN_GNOME_DECLS
 
 #define BONOBO_PROGRESSIVE_DATA_SINK_TYPE        (bonobo_progressive_data_sink_get_type ())
-#define BONOBO_PROGRESSIVE_DATA_SINK(o)          (GTK_CHECK_CAST ((o), BONOBO_PROGRESSIVE_DATA_SINK_TYPE, BonoboProgressiveDataSink))
-#define BONOBO_PROGRESSIVE_DATA_SINK_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_PROGRESSIVE_DATA_SINK_TYPE, BonoboProgressiveDataSinkClass))
-#define BONOBO_IS_PROGRESSIVE_DATA_SINK(o)       (GTK_CHECK_TYPE ((o), BONOBO_PROGRESSIVE_DATA_SINK_TYPE))
-#define BONOBO_IS_PROGRESSIVE_DATA_SINK_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PROGRESSIVE_DATA_SINK_TYPE))
+#define BONOBO_PROGRESSIVE_DATA_SINK(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PROGRESSIVE_DATA_SINK_TYPE, BonoboProgressiveDataSink))
+#define BONOBO_PROGRESSIVE_DATA_SINK_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_PROGRESSIVE_DATA_SINK_TYPE, BonoboProgressiveDataSinkClass))
+#define BONOBO_IS_PROGRESSIVE_DATA_SINK(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_PROGRESSIVE_DATA_SINK_TYPE))
+#define BONOBO_IS_PROGRESSIVE_DATA_SINK_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_PROGRESSIVE_DATA_SINK_TYPE))
 
 typedef struct _BonoboProgressiveDataSink BonoboProgressiveDataSink;
 typedef struct _BonoboProgressiveDataSinkPrivate BonoboProgressiveDataSinkPrivate;
@@ -68,7 +68,7 @@ typedef struct {
 			 
 } BonoboProgressiveDataSinkClass;
 
-GtkType		           bonobo_progressive_data_sink_get_type        (void);
+GType		           bonobo_progressive_data_sink_get_type        (void);
 
 BonoboProgressiveDataSink *bonobo_progressive_data_sink_new		(BonoboProgressiveDataSinkStartFn   start_fn,
 									 BonoboProgressiveDataSinkEndFn     end_fn,

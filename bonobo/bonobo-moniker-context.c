@@ -8,7 +8,7 @@
  * Copyright (C) 2000, Helix Code, Inc.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
+#include <gobject/gsignal.h>
 
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
@@ -66,20 +66,20 @@ bonobo_activation_context_class_init (BonoboActivationContextClass *klass)
 }
 
 static void 
-bonobo_activation_context_init (GtkObject *object)
+bonobo_activation_context_init (GObject *object)
 {
 	/* nothing to do */
 }
 
 static
 BONOBO_X_TYPE_FUNC_FULL (BonoboActivationContext,
-			   Bonobo_ActivationContext,
-			   PARENT_TYPE,
-			   bonobo_activation_context);
+			 Bonobo_ActivationContext,
+			 PARENT_TYPE,
+			 bonobo_activation_context);
 
 BonoboObject *
 bonobo_activation_context_new (void)
 {
-        return BONOBO_OBJECT (gtk_type_new (
-		bonobo_activation_context_get_type ()));
+        return BONOBO_OBJECT (g_object_new (
+		bonobo_activation_context_get_type (), NULL));
 }

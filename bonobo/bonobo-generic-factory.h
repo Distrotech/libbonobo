@@ -10,21 +10,20 @@
 #ifndef _BONOBO_GENERIC_FACTORY_H_
 #define _BONOBO_GENERIC_FACTORY_H_
 
-#include <libgnome/gnome-defs.h>
-#include <gtk/gtkobject.h>
+#include <libgnomebase/gnome-defs.h>
+#include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
-#include <gnome.h>
 #include <liboaf/oaf.h>
 #include <liboaf/liboaf.h>
 
 BEGIN_GNOME_DECLS
  
 #define BONOBO_GENERIC_FACTORY_TYPE        (bonobo_generic_factory_get_type ())
-#define BONOBO_GENERIC_FACTORY(o)          (GTK_CHECK_CAST ((o), BONOBO_GENERIC_FACTORY_TYPE, BonoboGenericFactory))
-#define BONOBO_GENERIC_FACTORY_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_GENERIC_FACTORY_TYPE, BonoboGenericFactoryClass))
-#define BONOBO_IS_GENERIC_FACTORY(o)       (GTK_CHECK_TYPE ((o), BONOBO_GENERIC_FACTORY_TYPE))
-#define BONOBO_IS_GENERIC_FACTORY_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_GENERIC_FACTORY_TYPE))
+#define BONOBO_GENERIC_FACTORY(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_GENERIC_FACTORY_TYPE, BonoboGenericFactory))
+#define BONOBO_GENERIC_FACTORY_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_GENERIC_FACTORY_TYPE, BonoboGenericFactoryClass))
+#define BONOBO_IS_GENERIC_FACTORY(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_GENERIC_FACTORY_TYPE))
+#define BONOBO_IS_GENERIC_FACTORY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_GENERIC_FACTORY_TYPE))
 
 typedef struct _BonoboGenericFactoryPrivate BonoboGenericFactoryPrivate;
 typedef struct _BonoboGenericFactory        BonoboGenericFactory;
@@ -52,7 +51,7 @@ typedef struct {
 				      const char           *component_id);
 } BonoboGenericFactoryClass;
 
-GtkType               bonobo_generic_factory_get_type  (void);
+GType               bonobo_generic_factory_get_type  (void);
 
 CORBA_Object          bonobo_generic_factory_corba_object_create (
 	BonoboObject *object,
