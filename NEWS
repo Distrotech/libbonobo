@@ -1,11 +1,37 @@
-Bonobo 0.16
+Bonobo 0.17
 
-Michael:
-	* Updated docs/refcounting.txt
-	* Enforced ref counting policy globaly.
+Main bits:
 
-Gergo:
-	* Purged 'attribute' code from oaf bits
+	* Monikers, total re-write along with some standard
+	  monikers, 'file', 'oafiid', 'item' (Myself)
 
-Ettore:
-	* More fixing of BadMatch errors on plug/socket
+	* Aggregate Object finalization bug nailed (Federico)
+
+	* Switched to a single Oaf build (Gnorba is no longer
+          supported) cleaning loads of cruft, object activation 
+	  cleaned, bonobo-selector API shrunk (Myself)
+
+	* Bonobo has been split into GUI-less and GUI versions of
+          Bonobo (bonobo, bonobox libraries to assist non-gui Bonobo 
+	  component development (Myself).
+
+	* Property Bag Client - new more flexible helper
+	  interface removing BonoboObjectClient (Myself)
+
+Bugs fixed:
+
+	* Bonobo-Widget bug nailed (Dan)
+	
+	* Evil, fatal, intermittent plug / socket unrealize bug
+	inherited from Gtk fixed (Federico, Myself)
+
+	* UI handler bugs nailed (Darin, Myself, Peter Williams)
+
+	* Blocking problems in listners fixed (Ettore)
+
+	* Spec file sorted (Robin Slomkowski)
+
+	* Updated docs/refcounting.txt and enforced inter object
+	  ref counting policy globaly
+
+	* Various naming daftnesses cleaned (Gergo)

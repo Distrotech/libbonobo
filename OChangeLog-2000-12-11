@@ -1,5 +1,17 @@
 2000-08-13  Michael Meeks  <michael@helixcode.com>
 
+	* Version 0.18
+
+2000-08-13  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in (OAF_CFLAGS): allow oaf to be on a different prefix again.
+
+2000-08-13  Michael Meeks  <michael@helixcode.com>
+
+	* Version 0.17
+	
+2000-08-13  Michael Meeks  <michael@helixcode.com>
+
 	* monikers/Makefile.am (EXTRA_DIST): Add std-moniker.oafinfo.
 
 2000-08-12  Michael Meeks  <michael@helixcode.com>
@@ -358,6 +370,8 @@
 	conventions.
 
 2000-07-26  Michael Meeks  <michael@helixcode.com>
+
+	* Version 0.16
 
 	* storage-modules/gnome-stream-efs.c (real_close): stub.
 	(bonobo_stream_efs_class_init): hook it in.
