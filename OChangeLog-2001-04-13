@@ -1,3 +1,8 @@
+2000-10-30  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* monikers/bonobo-moniker-item.c (item_resolve):
+	s/Container/ItemContainer/ in the query_interface call
+
 2000-10-30  Darin Adler  <darin@eazel.com>
 
 	* bonobo.spec.in: Remove bonobo-ui-extract from here.
@@ -33,6 +38,7 @@
 
 	* storage-modules/bonobo-stream-fs.[ch]: Update
 	
+>>>>>>> 1.707
 2000-10-28  Eskil Heyn Olsen  <eskil@eazel.com>
 
 	* components/application-x-gnomine/Makefile.am:

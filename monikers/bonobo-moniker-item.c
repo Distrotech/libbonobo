@@ -68,7 +68,7 @@ item_resolve (BonoboMoniker               *moniker,
 	}
 
 	container = Bonobo_Moniker_resolve (parent, options,
-					    "IDL:Bonobo/Container:1.0", ev);
+					    "IDL:Bonobo/ItemContainer:1.0", ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto return_unref_parent;
