@@ -1,9 +1,17 @@
-Bonobo 
+Bonobo 1.103
 
+	* Bug fixes
+		* glib API tracking (Alex Larsson)
+		* closure invocations (Me, Ariel Rios)
+		* build system updates (Mark McLouglin, Havoc)
+		* property bag segv (Me)
+		* moniker escaping ABE (Me)
+		* event source fix (Dan Winship)
 
-
-
-
+	* Featurelets
+		* improved regression tests (Me)
+		* more ansification (Frank Belew)
+		* several new translations
 
 Bonobo 1.0.0
 

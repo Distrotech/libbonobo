@@ -1,3 +1,7 @@
+2001-09-27  Michael Meeks  <michael@ximian.com>
+
+	* Version 1.103
+
 2001-09-25  Mark McLoughlin  <mark@skynet.ie>
 
 	* samples/echo/Makefile.am: s/orbit-idl/$(ORBIT_IDL).
