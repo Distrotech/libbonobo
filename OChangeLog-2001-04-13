@@ -1,3 +1,32 @@
+Wed Oct 25 10:44:59 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* idl/bonobo-storage.idl: This is the long expected storage
+	interface patch. I have changed the following:
+
+	- no return value for writes
+	- changed list_contents to return more infos
+	- more exceptions
+	- more open modes
+	- removed the create methods (use open with the CREATE flag instead)
+	- removed the eos() (read return a zero length buffer at eof)
+	- removed length() (use the new get_info method instead)
+	- changed the stream copy_to method to use out instead of inout
+	- new revert() method
+	- new get_info method (something like unix stat). 
+	- new set_info method
+	
+	* bonobo/bonobo-storage.[ch]: see above
+	* tests/test-storage.c: see above
+	* storage-modules/bonobo-stream-fs.[ch]: see above
+	* storage-modules/bonobo-stream-efs.[ch]: see above
+	* storage-modules/bonobo-storage-fs.[ch]: see above
+	* storage-modules/bonobo-storage-efs.c: see above
+	* components/text-plain/bonobo-text-plain.c: see above
+	* components/audio-ulaw/bonobo-audio-ulaw.c: see above
+	* bonobo/bonobo-stream.[ch]: see above
+	* bonobo/bonobo-stream-memory.c: see above
+	* bonobo/bonobo-stream-client.c: see above
+
 2000-10-24  Mike Kestner  <mkestner@ameritech.net>
 
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_set_value): Fix
@@ -278,6 +307,9 @@ Thu Oct 19 09:50:37 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 	* storage-modules/bonobo-storage-fs.c (fs_create_storage): small
 	bug fix.
 
+	* storage-modules/bonobo-stream-fs.c (bonobo_stream_fs_open):
+	create the file if necessary, and removed the create method.
+	
 	* bonobo/bonobo-storage-plugin.c (plugin_load): use g_module_error
 	(suggestion from martin)
 
