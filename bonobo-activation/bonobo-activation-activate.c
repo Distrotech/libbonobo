@@ -272,9 +272,13 @@ bonobo_activation_query (const char        *requirements,
 	copy_strv_to_sequence (selection_order, &selorder);
 
 	retval = Bonobo_ActivationContext_query (
-			ac, requirements, &selorder, bonobo_activation_context_get (), ev);
+                ac, requirements, &selorder,
+                bonobo_activation_context_get (), ev);
 
-	query_cache_insert (requirements, selection_order, retval);
+        if (ev->_major == CORBA_NO_EXCEPTION)
+                query_cache_insert (requirements, selection_order, retval);
+        else
+                retval = NULL;
 
 	if (!opt_ev)
 		CORBA_exception_free (&tempenv);
