@@ -1,3 +1,10 @@
+2003-10-08  Mark McLoughlin  <mark@skynet.ie>
+
+	* bonobo/bonobo-item-handler.c:
+	(bonobo_item_handler_finalize): don't leak the get_object
+	closure - we only freed it if the enum_object closure
+	wasn't NULL. Nailed down using valgrind info from Kjartan.
+
 2003-10-01  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-generic-factory.c: include

@@ -165,7 +165,7 @@ bonobo_item_handler_finalize (GObject *object)
 		if (handler->priv->enum_objects)
 			g_closure_unref (handler->priv->enum_objects);
 
-		if (handler->priv->enum_objects)
+		if (handler->priv->get_object)
 			g_closure_unref (handler->priv->get_object);
 
 		g_free (handler->priv);
