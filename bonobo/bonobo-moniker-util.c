@@ -206,6 +206,8 @@ bonobo_moniker_util_seek_std_separator (const CORBA_char *str,
 		}
 	}
 
+#warning We need escaping support here 
+
 	for (; str [i]; i++) {
 
 		if (str [i] == '!' ||

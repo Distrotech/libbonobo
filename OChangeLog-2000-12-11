@@ -1,3 +1,11 @@
+2000-10-25  Miguel de Icaza  <miguel@helixcode.com>
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_create_poa):
+	Set the threading policy to SINGLE_THREAD_MODEL in the PropertyBag
+	POA to avoid having the ORB use new threads as requests come in. 
+
+	* bonobo/bonobo-transient.c (bonobo_transient_construct): ditto
+
 Wed Oct 25 10:44:59 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* bonobo/bonobo-exception.c (bonobo_exception_get_text): add the

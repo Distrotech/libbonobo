@@ -219,8 +219,8 @@ bonobo_transient_construct (BonoboTransient *bt,
 	 * new POA.
 	 */
 	policies = g_new0 (CORBA_PolicyList, 1);
-	policies->_maximum = 2;
-	policies->_length  = 2;
+	policies->_maximum = 3;
+	policies->_length  = 3;
 	policies->_buffer = g_new0 (CORBA_Policy,
 				    policies->_length);
 	policies->_release = CORBA_FALSE;
@@ -277,6 +277,25 @@ bonobo_transient_construct (BonoboTransient *bt,
 		return NULL;
 	}
 	
+	/*
+	 * Set the threading model to SINGLE_THREAD_MODEL, otherwise
+	 * an ORB could use the default ORB_CTRL_MODEL, which is to
+	 * let the ORB make threads for requests as it likes.
+	 */
+	policies->_buffer [2] = (CORBA_Policy)
+		PortableServer_POA_create_thread_policy (
+			bonobo_poa (),
+			PortableServer_SINGLE_THREAD_MODEL,
+			&ev);
+	
+	if (ev._major != CORBA_NO_EXCEPTION){
+		g_warning ("Could not create threading policy for BonoboTransient POA");
+		g_free (policies->_buffer);
+		g_free (policies);
+		CORBA_exception_free (&ev);
+		return FALSE;
+	}   
+
 	/*
 	 * Create the BonoboProperty POA as a child of the root
 	 * Bonobo POA.

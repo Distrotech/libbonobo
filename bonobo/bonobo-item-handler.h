@@ -49,7 +49,7 @@ typedef struct {
 
 GtkType              bonobo_item_handler_get_type    (void);
 BonoboItemHandler   *bonobo_item_handler_new         (BonoboItemHandlerEnumObjectsFn enum_objects,
-						      BonoboItemHandlerEnumObjectsFn get_object,
+						      BonoboItemHandlerGetObjectFn get_object,
 						      gpointer user_data);
 
 BonoboItemHandler   *bonobo_item_handler_construct   (BonoboItemHandler *handler,
