@@ -51,6 +51,7 @@ qexp_free (QueryExpr * qexp)
 
 	switch (qexp->type) {
 	case EXPR_FUNCTION:
+                g_free (qexp->u.function_value.func_name);
 		g_slist_foreach (qexp->u.function_value.arguments,
 				 (GFunc) qexp_free, NULL);
 		g_slist_free (qexp->u.function_value.arguments);
@@ -188,9 +189,11 @@ qexp_function_new (char *name, GSList * exprlist)
 	retval->u.function_value.func_name = name;
 	retval->u.function_value.arguments = exprlist;
 
-	for (cur = exprlist; cur && !((QueryExpr *) cur->data)->has_fields;
-	     cur = cur->next)	/* */
-		;
+        cur = exprlist;
+        
+	while (cur != NULL && !((QueryExpr *) cur->data)->has_fields) {
+                cur = cur->next;
+        }
 
 	retval->has_fields = cur ? TRUE : FALSE;
 
@@ -891,13 +894,7 @@ qexp_evaluate_id (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 						int i;
 						retval.type = CONST_STRINGV;
 
-						/* FIXME bugzilla.eazel.com 2728: Not freeing this freshly consed up
-						 * constant leaks memory. But freeing it makes
-						 * oafd segfault whenever it encounters a stringv
-						 * value of more than 3 items, so I am hacking it
-						 * for now. 
-                                                 */
-						/* retval.needs_free = TRUE; */
+						retval.needs_free = TRUE; 
 
 						retval.u.v_stringv =
 							g_malloc (sizeof
