@@ -102,6 +102,15 @@ main (int argc, char *argv[])
 		exit (EXIT_FAILURE);
 	}
 
+        /* This is needed because otherwise, if oafd persists across X
+         * sessions, spawned processes will inherit an invalid value
+         * and be very very slow while attempting to connect to the
+         * old, dead session manager.
+         * FIXME: do spawned processes need this info? If so, we're
+         * in trouble.
+         */
+        unsetenv ("SESSION_MANAGER");
+
 	setlocale(LC_ALL, "");
 
 	/* internationalization. */
