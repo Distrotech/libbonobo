@@ -1,117 +1,66 @@
+/*
+ * bonobo-moniker.idl: Implements an object naming and resolution interface
+ *
+ * Copyright (C) 2000  Helix Code, Inc.
+ *
+ * Authors:
+ *	Michael Meeks (michael@helixcode.com)
+ *	Ettore Perazzoli (ettore@helixcode.com)
+ */
+
 module Bonobo {
 
-	typedef long BindFlag;
-	const BindFlag user_interaction_allowed = 1;
-	
-	struct BindOptions {
-		BindFlag flags;
-		long timeout_ms;
+	typedef long ResolveFlag;
+	const ResolveFlag ALLOW_USER_INTERACTION = 1;
 
-		/* FIXME: rxw stuff for file monikers?
-		 * where to put that? */
+	struct ResolveOptions {
+		ResolveFlag  flags;
+		long         timeout; /* in ms */
 	};
-	
 
-	interface Moniker : PersistStream {
-		
-		enum type {
-			CONTAINER,	// Return the Container's moniker.
-			OBJ_RELATIVE,	// Return a relative moniker to the object
-			OBJ_FULL	// Return an absolute moniker for this object.
-		};
-
-		exception InterfaceNotFound {
-			string interface_name;
-		};
-	       
-		exception TimeOut {
-			string interface_name;
-		};
-
-		exception MissingInterface {
-			string interface_name;
-			string object_name;
-		};
+	interface Moniker : Bonobo::Unknown {
+		exception InterfaceNotFound {};
+		exception TimeOut           {};
+		exception InvalidSyntax     {};
+		exception UnknownPrefix     {};
 
 		/**
-		 * bind_to_object:
-		 * @bind_context: a BindContext
-		 * @left_moniker: moniker for the left side
-		 * @requested_interface: which interface we want in the end
+		 * parent:
 		 *
-		 * Binds a moniker under bind_context, the left
-		 * moniker (ie, the parent moniker is left_moniker), once the
-		 * service has been registered, it will attempt to get
-		 * the @requester_interface
+		 * A moniker can be composed of a chain of monikers
+		 * which can be collectively resolved, displayed etc.
 		 */
-
-		Object bind_to_object (in BindOptions bind_context, 
-				       in Moniker left_moniker,
-				       in string requested_interface)
-			raises (InterfaceNotFound, TimeOut, MissingInterface);
-
-		/**
-		 * bind_to_storage:
-		 * @bind_context: binding context
-		 * @left_moniker: parent moniker (left side)
-		 * @persistent_interface_name: the name of the persistent
-		 * object (GNOME::Storage, Bonobo::Stream, GNOME::Lockbytes).
-		 */
-		Object bind_to_storage (in BindOptions bind_context,
-					in Moniker left_moniker,
-					in string persistent_interface_name);
-
-		Moniker compose_with (in Moniker right, in boolean only_if_exists);
-
-		typedef sequence<Moniker> MonikerList;
-
-		MonikerList enum_pieces (in Moniker composite_moniker);
+		attribute Moniker parent;
 
 		/**
 		 * get_display_name:
 		 * 
-		 * Returns a representation of the Moniker
+		 * Returns a human readable representation of the Moniker
 		 */
-		string get_display_name (in BindOptions bind_context,
-					 in Moniker left);
+		string  get_display_name ()
+			raises (InvalidSyntax);
 
 		/**
 		 * parse_display_name:
 		 *
-		 * Returns a moniker from the string representation
+		 * Generates a moniker from the string representation,
+		 * it builds a list returning the root node in a
+		 * similar way to g_list_append ();
 		 */
-		Moniker parse_display_name (in BindOptions bind_context,
-					    in Moniker left,
-					    in string display_name,
-					    out short display_name_bytes_parsed);
-					    
-	};
-
-	interface BindContext : Unknown {
-
-		/**
-		 * register_object:
-		 *
-		 * Keeps track of the object withing the
-		 * context.  The object is ref()ed */
-		void register_object (in Unknown object);
+		Moniker parse_display_name (in Moniker parent, in string name)
+			raises (InvalidSyntax, UnknownPrefix);
 		
 		/**
-		 * drop_one_object:
-		 * @object: Forgets about the object
+		 * resolve:
+		 * @options: resolution options
+		 * @inferface: what interface we want from the result
 		 *
-		 * Applications usually call drop_objects.
+		 * Resolves a moniker; this returns a reference to the
+		 * activated object described by the moniker
 		 */
-		void drop_one_object (in Unknown object);
-
-		/**
-		 * drop_objects:
-		 *
-		 * Drops all the objects that were tied in this binding
-		 * context
-		 */
-		void drop_objects ();
+		Unknown resolve            (in ResolveOptions options,
+					    in string         requested_interface)
+			raises (InterfaceNotFound, TimeOut);
 	};
-
-
 };
+
