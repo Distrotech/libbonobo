@@ -13,7 +13,7 @@ INCLUDES =	\
 	$(WARN_CFLAGS)					\
 	$(LIBBONOBO_CFLAGS)
 
-LDADD =	$(top_builddir)/bonobo/libbonobo-2.la
+LDADD =	$(top_builddir)/bonobo/libbonobo-2.la $(LIBBONOBO_LIBS)
 
 test_properties_server_SOURCES =			\
 	test-properties-server.c

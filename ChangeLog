@@ -1,3 +1,7 @@
+2002-09-23  Michael Meeks  <michael@ximian.com>
+
+	* tests/Makefile.am (LDADD): add LIBBONOBO_LIBS.
+
 2002-09-19  Padraig O'Briain <padraig.obriain@sun.com>
 
 	* samples/echo/Makefile.am:
