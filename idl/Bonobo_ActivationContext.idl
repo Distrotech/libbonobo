@@ -58,28 +58,28 @@ module OAF {
                 ActivationResultData res;
         };
 
-        /* Attribute */
-        enum AttributeType { 
-                A_STRING, 
-                A_NUMBER, 
-                A_BOOLEAN, 
-                A_STRINGV 
+        /* Property */
+        enum PropertyType { 
+                P_STRING, 
+                P_NUMBER, 
+                P_BOOLEAN, 
+                P_STRINGV 
         };
 
-        union AttributeValue switch (AttributeType) {
-        case A_STRING:
+        union PropertyValue switch (PropertyType) {
+        case P_STRING:
                 string value_string;
-        case A_NUMBER:
+        case P_NUMBER:
                 double value_number;
-        case A_BOOLEAN:
+        case P_BOOLEAN:
                 boolean value_boolean;
-        case A_STRINGV:
+        case P_STRINGV:
                 GNOME::stringlist value_stringv;
         };
 
-        struct Attribute {
+        struct Property {
                 string name;
-                AttributeValue v;
+                PropertyValue v;
         };
 
         /* Server */
@@ -90,7 +90,7 @@ module OAF {
                 string location_info;
                 string username, hostname, domain;
 		
-                sequence<Attribute> attrs;
+                sequence<Property> props;
         };
 
         typedef sequence<ServerInfo> ServerInfoList;

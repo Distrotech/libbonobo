@@ -167,18 +167,18 @@ OAF_RegistrationResult oaf_active_server_register (const char *iid,
 void oaf_active_server_unregister (const char *iid, CORBA_Object obj);
 
 /* oaf-util.c */
-OAF_Attribute *oaf_server_info_attr_find (OAF_ServerInfo * server,
-					  const char *attr_name);
-const char *oaf_server_info_attr_lookup (OAF_ServerInfo * server,
-					 const char *attr_name,
+OAF_Property *oaf_server_info_prop_find (OAF_ServerInfo * server,
+                                         const char *prop_name);
+const char *oaf_server_info_prop_lookup (OAF_ServerInfo * server,
+					 const char *prop_name,
 					 GSList * i18n_languages);
-void OAF_AttributeValue_copy (OAF_AttributeValue *copy,
-                              const OAF_AttributeValue *original);
-void OAF_Attribute_copy (OAF_Attribute *copy,
-                         const OAF_Attribute *original);
+void OAF_PropertyValue_copy (OAF_PropertyValue *copy,
+                             const OAF_PropertyValue *original);
+void OAF_Property_copy (OAF_Property *copy,
+                        const OAF_Property *original);
 void
-CORBA_sequence_OAF_Attribute_copy (CORBA_sequence_OAF_Attribute *copy,
-                                   const CORBA_sequence_OAF_Attribute *original);
+CORBA_sequence_OAF_Property_copy (CORBA_sequence_OAF_Property *copy,
+                                  const CORBA_sequence_OAF_Property *original);
 void
 OAF_ServerInfo_copy (OAF_ServerInfo *copy, const OAF_ServerInfo *original);
 OAF_ServerInfo *

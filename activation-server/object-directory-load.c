@@ -51,24 +51,24 @@ od_string_to_boolean (const char *str)
 }
 
 static void
-od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
+od_entry_read_props (OAF_ServerInfo * ent, xmlNodePtr node)
 {
 	int i, n;
 	xmlNodePtr sub;
-	OAF_Attribute *curattr;
+	OAF_Property *curprop;
 
 	for (n = 0, sub = node->childs; sub; sub = sub->next) {
 		if (sub->type != XML_ELEMENT_NODE)
 			continue;
 
-		if (strcasecmp (sub->name, "oaf_attribute"))
+		if (strcasecmp (sub->name, "oaf_propibute"))
 			continue;
 
 		n++;
 	}
 
-	ent->attrs._length = n;
-	ent->attrs._buffer = curattr = g_new (OAF_Attribute, n);
+	ent->props._length = n;
+	ent->props._buffer = curprop = g_new (OAF_Property, n);
 
 	for (i = 0, sub = node->childs; i < n; sub = sub->next, i++) {
 		char *type, *valuestr;
@@ -82,14 +82,14 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 			free (type);
 			continue;
 		}
-		curattr->name = CORBA_string_dup (valuestr);
+		curprop->name = CORBA_string_dup (valuestr);
 		free (valuestr);
 
 		if (!strcasecmp (type, "stringv")) {
 			int j, o;
 			xmlNodePtr sub2;
 
-			curattr->v._d = OAF_A_STRINGV;
+			curprop->v._d = OAF_P_STRINGV;
 
 			for (o = 0, sub2 = sub->childs; sub2;
 			     sub2 = sub2->next) {
@@ -101,22 +101,22 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 				o++;
 			}
 
-			curattr->v._u.value_stringv._length = o;
-			curattr->v._u.value_stringv._buffer =
+			curprop->v._u.value_stringv._length = o;
+			curprop->v._u.value_stringv._buffer =
 				CORBA_sequence_CORBA_string_allocbuf (o);
 
 			for (j = 0, sub2 = sub->childs; j < o;
 			     sub2 = sub2->next, j++) {
 				valuestr = xmlGetProp (sub2, "value");
 				if (valuestr)
-					curattr->v._u.
+					curprop->v._u.
 						value_stringv._buffer[j] =
 						CORBA_string_dup (valuestr);
 				else {
 					g_warning
-						(_("Attribute '%s' has no value"),
-						 curattr->name);
-					curattr->v._u.
+						(_("Property '%s' has no value"),
+						 curprop->name);
+					curprop->v._u.
 						value_stringv._buffer[j] =
 						CORBA_string_dup ("");
 				}
@@ -126,27 +126,27 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 		} else if (!strcasecmp (type, "number")) {
 			valuestr = xmlGetProp (sub, "value");
 
-			curattr->v._d = OAF_A_NUMBER;
-			curattr->v._u.value_number = atof (valuestr);
+			curprop->v._d = OAF_P_NUMBER;
+			curprop->v._u.value_number = atof (valuestr);
 
 			free (valuestr);
 		} else if (!strcasecmp (type, "boolean")) {
 			valuestr = xmlGetProp (sub, "value");
-			curattr->v._d = OAF_A_BOOLEAN;
-			curattr->v._u.value_boolean =
+			curprop->v._d = OAF_P_BOOLEAN;
+			curprop->v._u.value_boolean =
 				od_string_to_boolean (valuestr);
 			free (valuestr);
 		} else {
 			valuestr = xmlGetProp (sub, "value");
 			/* Assume string */
-			curattr->v._d = OAF_A_STRING;
+			curprop->v._d = OAF_P_STRING;
 			if (valuestr)
-				curattr->v._u.value_string =
+				curprop->v._u.value_string =
 					CORBA_string_dup (valuestr);
 			else {
-				g_warning (_("Attribute '%s' has no value"),
-					   curattr->name);
-				curattr->v._u.value_string =
+                                g_warning (_("Property '%s' has no value"),
+					   curprop->name);
+				curprop->v._u.value_string =
 					CORBA_string_dup ("");
 			}
 			free (valuestr);
@@ -154,7 +154,7 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 
 		free (type);
 
-		curattr++;
+		curprop++;
 	}
 }
 
@@ -286,7 +286,7 @@ OAF_ServerInfo_load (char **dirs,
                                                 CORBA_string_dup (g_get_user_name ());
                                         free (ctmp);
 
-                                        od_entry_read_attrs (new_ent, curnode);
+                                        od_entry_read_props (new_ent, curnode);
                                         
                                         my_slist_prepend (entries, new_ent);
                                 } else {

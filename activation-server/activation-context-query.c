@@ -796,36 +796,36 @@ qexp_evaluate_id (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 			retval.u.v_string = si->domain;
 		else {
 			int i;
-			for (i = 0; i < si->attrs._length; i++) {
+			for (i = 0; i < si->props._length; i++) {
 				if (!strcmp
 				    (e->u.id_value,
-				     si->attrs._buffer[i].name)) break;
+				     si->props._buffer[i].name)) break;
 			}
 
 			retval.value_known = FALSE;
 
-			if (i < si->attrs._length) {
-				OAF_AttributeValue *av;
+			if (i < si->props._length) {
+				OAF_PropertyValue *av;
 
-				av = &si->attrs._buffer[i].v;
+				av = &si->props._buffer[i].v;
 
 				switch (av->_d) {
-				case OAF_A_STRING:
+				case OAF_P_STRING:
 					retval.type = CONST_STRING;
 					retval.u.v_string =
 						av->_u.value_string;
 					break;
-				case OAF_A_NUMBER:
+				case OAF_P_NUMBER:
 					retval.type = CONST_NUMBER;
 					retval.u.v_number =
 						av->_u.value_number;
 					break;
-				case OAF_A_BOOLEAN:
+				case OAF_P_BOOLEAN:
 					retval.type = CONST_BOOLEAN;
 					retval.u.v_boolean =
 						av->_u.value_boolean;
 					break;
-				case OAF_A_STRINGV:
+				case OAF_P_STRINGV:
 					{
 						/* XXX it would be nice to replace the
 						 * NULL-terminated string arrays with

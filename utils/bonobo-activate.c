@@ -54,32 +54,32 @@ od_dump_list (OAF_ServerInfoList * list)
 			 list->_buffer[i].iid,
 			 list->_buffer[i].server_type,
 			 list->_buffer[i].location_info);
-		for (j = 0; j < list->_buffer[i].attrs._length; j++) {
-			OAF_Attribute *attr =
-				&(list->_buffer[i].attrs._buffer[j]);
-			g_print ("    %s = ", attr->name);
-			switch (attr->v._d) {
-			case OAF_A_STRING:
-				g_print ("\"%s\"\n", attr->v._u.value_string);
+		for (j = 0; j < list->_buffer[i].props._length; j++) {
+			OAF_Property *prop =
+				&(list->_buffer[i].props._buffer[j]);
+			g_print ("    %s = ", prop->name);
+			switch (prop->v._d) {
+			case OAF_P_STRING:
+				g_print ("\"%s\"\n", prop->v._u.value_string);
 				break;
-			case OAF_A_NUMBER:
-				g_print ("%f\n", attr->v._u.value_number);
+			case OAF_P_NUMBER:
+				g_print ("%f\n", prop->v._u.value_number);
 				break;
-			case OAF_A_BOOLEAN:
+			case OAF_P_BOOLEAN:
 				g_print ("%s\n",
-					 attr->v.
+					 prop->v.
 					 _u.value_boolean ? "TRUE" : "FALSE");
 				break;
-			case OAF_A_STRINGV:
+			case OAF_P_STRINGV:
 				g_print ("[");
 				for (k = 0;
-				     k < attr->v._u.value_stringv._length;
+				     k < prop->v._u.value_stringv._length;
 				     k++) {
 					g_print ("\"%s\"",
-						 attr->v._u.
+						 prop->v._u.
 						 value_stringv._buffer[k]);
 					if (k <
-					    (attr->v._u.
+					    (prop->v._u.
 					     value_stringv._length - 1))
 						g_print (", ");
 				}
