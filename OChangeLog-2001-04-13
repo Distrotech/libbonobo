@@ -1,3 +1,13 @@
+2000-10-04  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (update_status): don't re-build status if not
+	dirty & clean the tree after use (update_keybindings): ditto.
+
+	* bonobo/bonobo-ui-compat.c (compat_toolbar_parse_uiinfo_one_with_data):
+	add separator.
+	(bonobo_ui_handler_toolbar_add_list): insert into the right path, not
+	into the parent path.
+
 2000-10-03  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar.c (impl_size_request): request more space
