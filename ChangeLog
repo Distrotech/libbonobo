@@ -1,20 +1,20 @@
 2003-03-24  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
-      * Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Pass --enable-gtk-doc
-      to configure when making distcheck, otherwise it fails.
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Pass --enable-gtk-doc
+	to configure when making distcheck, otherwise it fails.
 
-      * doc/api/figures/Makefile.am: Don't delete the png files when
-      doing make maintainer-clean.
+	* doc/api/figures/Makefile.am: Don't delete the png files when
+	doing make maintainer-clean.
 
-      * bonobo/Makefile.am (AM_LDFLAGS): Define AM_LDFLAGS instead of
-      LDFLAGS to please automake 1.7.
+	* bonobo/Makefile.am (AM_LDFLAGS): Define AM_LDFLAGS instead of
+	LDFLAGS to please automake 1.7.
 
-      * doc/api/Makefile.am: Require automake 1.6.  Replaced the generic
-      code with a generic gtk-doc makefile template include.
+	* doc/api/Makefile.am: Require automake 1.6.  Replaced the generic
+	code with a generic gtk-doc makefile template include.
 
-      * autogen.sh (REQUIRED_AUTOMAKE_VERSION): Require automake >= 1.6.
+	* autogen.sh (REQUIRED_AUTOMAKE_VERSION): Require automake >= 1.6.
 
-      * configure.in: Use the macro GTK_DOC_CHECK to check for gtk-doc.
+	* configure.in: Use the macro GTK_DOC_CHECK to check for gtk-doc.
 
 2003-03-21  Guntupalli Karunakar  <karunakar@freedomink.org>
 
