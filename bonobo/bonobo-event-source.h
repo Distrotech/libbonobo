@@ -40,14 +40,14 @@ GType              bonobo_event_source_get_type         (void) G_GNUC_CONST;
 BonoboEventSource *bonobo_event_source_new              (void);
 void               bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 							 const char        *event_name,
-							 const CORBA_any   *value,
+							 const CORBA_any   *opt_value,
 							 CORBA_Environment *opt_ev);
 
 void        bonobo_event_source_notify_listeners_full   (BonoboEventSource *event_source,
 							 const char        *path,
 							 const char        *type,
 							 const char        *subtype,
-							 const CORBA_any   *value,                          
+							 const CORBA_any   *opt_value,
 							 CORBA_Environment *opt_ev);
 
 void        bonobo_event_source_client_remove_listener  (Bonobo_Unknown     object,

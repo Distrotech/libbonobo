@@ -1,3 +1,9 @@
+2001-08-17  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_notify_listeners): Allow CORBA_OBJECT_NIL for
+	the `value' argument
+
 2001-08-16  Fatih Demir <kabalak@gtranslator.org>
 
 	* configure.in: Added "tr" to the languages list.

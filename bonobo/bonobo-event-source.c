@@ -144,7 +144,8 @@ event_match (const char *name, gchar **event_masks)
  * bonobo_event_source_notify_listeners:
  * @event_source: the Event Source that will emit the event.
  * @event_name: Name of the event being emitted
- * @value: A CORBA_any value that contains the data that is passed to interested clients
+ * @opt_value: A CORBA_any value that contains the data that is passed
+ * to interested clients, or NULL for an empty value
  * @opt_ev: A CORBA_Environment where a failure code can be returned, can be NULL.
  *
  * This will notify all clients that have registered with this EventSource
@@ -158,18 +159,24 @@ event_match (const char *name, gchar **event_masks)
 void
 bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 				      const char        *event_name,
-				      const CORBA_any   *value,
+				      const CORBA_any   *opt_value,
 				      CORBA_Environment *opt_ev)
 {
 	GSList *l, *notify;
 	CORBA_Environment ev, *my_ev;
-
+	const BonoboArg *my_value;
+	
 	if (!opt_ev) {
 		CORBA_exception_init (&ev);
 		my_ev = &ev;
 	} else
 		my_ev = opt_ev;
 
+	if (!opt_value)
+		my_value = bonobo_arg_new (BONOBO_ARG_NULL);
+	else
+		my_value = opt_value;
+	
 	notify = NULL;
 
 	for (l = event_source->priv->listeners; l; l = l->next) {
@@ -183,7 +190,7 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 	bonobo_object_ref (BONOBO_OBJECT (event_source));
 
 	for (l = notify; l; l = l->next)
-		Bonobo_Listener_event (l->data, event_name, value, my_ev);
+		Bonobo_Listener_event (l->data, event_name, my_value, my_ev);
 
 	bonobo_object_unref (BONOBO_OBJECT (event_source));
 
@@ -191,6 +198,8 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 
 	if (!opt_ev)
 		CORBA_exception_free (&ev);
+	if (!opt_value)
+		bonobo_arg_release ((BonoboArg*)my_value);
 }
 
 void
@@ -198,7 +207,7 @@ bonobo_event_source_notify_listeners_full (BonoboEventSource *event_source,
 					   const char        *path,
 					   const char        *type,
 					   const char        *subtype,
-					   const CORBA_any   *value,                          
+					   const CORBA_any   *opt_value,
 					   CORBA_Environment *opt_ev)
 {
 	char *event_name;
@@ -206,7 +215,7 @@ bonobo_event_source_notify_listeners_full (BonoboEventSource *event_source,
 	event_name = bonobo_event_make_name (path, type, subtype);
 
 	bonobo_event_source_notify_listeners (event_source, event_name,
-					      value, opt_ev);
+					      opt_value, opt_ev);
 
 	g_free (event_name);
 }
