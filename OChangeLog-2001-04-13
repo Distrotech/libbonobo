@@ -1,3 +1,8 @@
+2000-06-28  Dan Winship  <danw@helixcode.com>
+
+	* bonobo/bonobo-main.c (bonobo_init): If we can't resolve the ORB,
+	warn about that, rather than warning about the POA later.
+
 2000-06-28  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-uih-menu.c (menu_toplevel_create_widgets): hack, utterly,

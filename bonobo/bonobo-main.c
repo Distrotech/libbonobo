@@ -183,8 +183,14 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	/*
 	 * Create the POA.
 	 */
-	if (orb == CORBA_OBJECT_NIL)
+	if (orb == CORBA_OBJECT_NIL) {
 		orb = od_get_orb();
+		if (orb == CORBA_OBJECT_NIL) {
+			g_warning ("Can not resolve initial reference to ORB");
+			CORBA_exception_free (&ev);
+			return FALSE;
+		}
+	}
 	
 	if (CORBA_Object_is_nil ((CORBA_Object)poa, &ev)){
 		poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
