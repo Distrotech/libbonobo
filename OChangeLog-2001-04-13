@@ -1,3 +1,7 @@
+2000-09-01  JP Rosevear  <jpr@helixcode.com>
+
+	* bonobo/bonobo.h: Remove deleted file
+
 2000-09-01  Michael Meeks  <michael@helixcode.com>
 
 	* More initial work on new UI handler code.
