@@ -6,20 +6,20 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.1.1\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
-"PO-Revision-Date: 2003-01-02 18:55+0100\n"
+"Project-Id-Version: libbonobo 2.3.0\n"
+"POT-Creation-Date: 2003-05-04 18:35+0200\n"
+"PO-Revision-Date: 2003-05-04 18:32+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "Impossible de déterminer dans quel fils était listé le serveur"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr "N'est pas un ID d'activation valide"
 
@@ -83,7 +83,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Condition de compétitivité activant le serveur « %s »"
@@ -121,7 +121,7 @@ msgstr ""
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Échec de la lecture à partir du processus fils : %s\n"
+msgstr "La lecture depuis le processus fils a échoué : %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:296
 msgid "Couldn't fork a new process"
@@ -146,7 +146,7 @@ msgstr ""
 #: bonobo-activation/bonobo-activation-fork-server.c:399
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Échec de l'exécution de %s : %d (%s)\n"
+msgstr "L'exécution de %s a échoué : %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
@@ -188,6 +188,14 @@ msgstr "Le fabrique « %s » a renvoyé NIL pour « %s »"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib « %s » ne contenait pas « %s »"
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr "POA"
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr "POA Corba personnalisé"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -299,7 +307,7 @@ msgstr "la propriété est en lecture seule"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr "échec du moteur de base de données de configuration"
+msgstr "Le moteur de base de données de configuration a échoué"
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
@@ -329,14 +337,14 @@ msgstr "Erreur générale d'activation sans description"
 msgid "Could not initialize Bonobo"
 msgstr "Impossible d'initialiser Bonobo"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "Impossible de résoudre ou d'étendre %s"
+msgstr "La résolution ou l'extension de %s a échoué"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr "Impossible d'activer l'objet"
+msgstr "L'activation de l'objet a échoué"
 
 #: monikers/bonobo-moniker-oaf.c:53
 #, c-format
@@ -346,7 +354,7 @@ msgstr "Exception lors de l'activation de « %s »"
 #: monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
-msgstr "Impossible d'activer « %s »"
+msgstr "L'activation de « %s » a échoué"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
