@@ -12,8 +12,6 @@ bonobo_activation_sysconf_SOURCES =	\
 INCLUDES = 					\
 	$(UTILS_CFLAGS)				\
 	-I$(top_srcdir)				\
-	-I$(top_srcdir)/oafd/			\
-	-I$(top_srcdir)/liboaf/			\
 	-DSERVER_LOCALEDIR=\""$(datadir)/locale"\"	\
 	-DSERVER_CONFDIR=\"$(sysconfdir)\"		\
 	$(NULL)
