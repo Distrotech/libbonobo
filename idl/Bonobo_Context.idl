@@ -10,7 +10,7 @@
 #ifndef BONOBO_CONTEXT_IDL
 #define BONOBO_CONTEXT_IDL
 
-#include "bonobo-stream.idl"
+#include "bonobo-storage.idl"
 #include "bonobo-moniker.idl"
 
 module Bonobo {

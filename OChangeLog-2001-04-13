@@ -1,5 +1,10 @@
 2001-01-04  Michael Meeks  <michael@helixcode.com>
 
+	* idl/bonobo-context.idl: include bonobo-storage.idl not the
+	(non existant bonobo-stream.idl): from Colm.
+
+2001-01-04  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-sync.h: remove duplicate def. of
 	bonobo_ui_engine_dump: wierd, move sync type getter functions
 	here.
