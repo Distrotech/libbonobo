@@ -19,26 +19,36 @@ oaf_server_info_attr_lookup (OAF_ServerInfo * server, const char *attr_name,
 			     GSList * i18n_languages)
 {
 	GSList *cur;
-
+	OAF_Attribute *attr;
+        const char *retval;
+        char *attr_name_buf;
+        char short_lang[3];
+                     
 	if (i18n_languages) {
 		for (cur = i18n_languages; cur; cur = cur->next) {
-			const char *retval;
-			char cbuf[256];
+                        attr_name_buf = g_strdup_printf ("%s-%s", attr_name, (char *) cur->data);
 
-			g_snprintf (cbuf, sizeof (cbuf), "%s-%s", attr_name,
-				    (char *) cur->data);
-			retval =
-				oaf_server_info_attr_lookup (server, cbuf,
-							     NULL);
+			retval = oaf_server_info_attr_lookup (server, attr_name_buf, NULL);
+                        g_free (attr_name_buf);
+
+                        if (!retval) {
+                                if (strlen ((char *) cur->data) > 2) {
+                                        strncpy (short_lang, (char *) cur->data, 2);
+                                        attr_name_buf = g_strdup_printf ("%s-%s", short_lang, (char *) cur->data);
+                                        retval = oaf_server_info_attr_lookup (server, attr_name_buf, NULL);
+                                        g_free (attr_name_buf);
+                                }
+                        }
+
+
 			if (retval)
 				return retval;
 		}
-	} {
-		OAF_Attribute *attr;
-		attr = oaf_server_info_attr_find (server, attr_name);
-		if (attr->v._d == OAF_A_STRING)
-			return attr->v._u.value_string;
-	}
+	} 
+
+        attr = oaf_server_info_attr_find (server, attr_name);
+        if (attr->v._d == OAF_A_STRING)
+                return attr->v._u.value_string;
 
 	return NULL;
 }
