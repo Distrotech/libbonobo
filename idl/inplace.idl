@@ -3,13 +3,14 @@
  * container side
  *
  */
+module GNOME {
 
 /**
  * InPlaceSite:
  * 
  * This interface must be implemented by container applications
  */
-interface InPlaceSite {
+interface InPlaceSite : ClientSite {
 
 	/**
 	 * can_activate_in_place:
@@ -56,7 +57,10 @@ interface InPlaceSite {
 	 *
 	 * Returns FALSE on failure, TRUE on success.
 	 */
-	boolean request_resize (in short new_width, in short new_height);
+	void request_resize (in short new_width, in short new_height);
+};
+
+interface InPlaceUIWindow {
 };
 
 interface InPlaceFrame : InPlaceUIWindow {
@@ -71,7 +75,7 @@ interface InPlaceFrame : InPlaceUIWindow {
 	 * that menus are about to be merged, toolbars merged, space
 	 * requested.
 	 */
-        void set_active_object (in InPlaceComponent object, boolean active);
+        void set_active_object (in InPlaceComponent object, in boolean active);
 
 	/** 
 	 * dock:
@@ -108,5 +112,7 @@ interface InPlaceFrame : InPlaceUIWindow {
 	 * disable nevent processing on the containee.
 	 */
 	void modal_state_notify (in boolean state);
+
+};
 
 };

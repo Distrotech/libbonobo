@@ -19,6 +19,6 @@
 
 #include "container.idl"
 #include "clientsite.idl"
-
 #include "bobject.idl"
+#include "inplace.idl"
 

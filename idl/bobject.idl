@@ -20,12 +20,12 @@ interface View : GNOME::object {
 	void size_allocate (in short width, in short height);
 
 	/**
-	 * get_window:
+	 * set_window:
 	 *
-	 * Returns a windowid suitable for representing this object in
-	 * the container.
+	 * Sets the window ID that should be used for the plug
+	 * of this window
 	 */
-	windowid get_window ();
+	void set_window (in windowid id);
 
 };
 
@@ -208,9 +208,7 @@ interface InPlaceComponent : Component {
 		FOCUS_IN
 	};
 	void status_notify (in Status status);
-};
 
-interface InPlaceActiveComponent : Component {
 	/**
 	 * frame_window_activate_notify:
 	 * @state: TRUE if frame window has been activated.
@@ -222,6 +220,7 @@ interface InPlaceActiveComponent : Component {
 	 * @state: TRUE if the document window has been activated
 	 */
 	void doc_window_activated_notify (in boolean state);
+
 };
 
 interface ComponentFactory : GNOME::GenericFactory {
