@@ -277,7 +277,7 @@ main (int argc, char *argv[])
         struct sigaction              sa;
         GString                      *src_dir;
 	gchar                        *syslog_ident;
-	gchar                        *debug_output_env;
+	const gchar                  *debug_output_env;
 
         /*
          *    Become process group leader, detach from controlling
@@ -402,6 +402,9 @@ main (int argc, char *argv[])
         dump_ior (orb, dev_null_fd, ev);
 
 	od_finished_internal_registration (); 
+
+        if (getenv ("BONOBO_ACTIVATION_DEBUG") == NULL)
+                chdir ("/");
 
 	g_main_loop_run (main_loop);
 

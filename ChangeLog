@@ -1,5 +1,14 @@
 2004-08-12  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* tests/test-activation/Makefile.am (TESTS_ENVIRONMENT): Set
+	BONOBO_ACTIVATION_DEBUG, since some tests use relative server
+	paths, thus fail if the b-a-s changes dir on startup.
+
+	* activation-server/activation-server-main.c (main): Declare
+	debug_output_env as const, to suppress compiler warning.
+	(main): Unless env. var. BONOBO_ACTIVATION_DEBUG is set,
+	chdir("/") before entering main loop.
+
 	* bonobo/bonobo-running-context.c
 	(bonobo_running_context_trace_objects_T): Add
 	ri->emitted_last_unref = FALSE, missing in debug version of
