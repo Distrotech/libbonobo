@@ -1,3 +1,11 @@
+2000-12-23  Miguel de Icaza  <miguel@helixcode.com>
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_get_ui_fname): Do not
+	allow for the user file ui to exist.  
+	(bonobo_ui_util_get_ui_fname): Do not use
+	gnome_datadir_unconditional.  This is broken too.
+	(Makefile.am): Define BONOBO_UIDIR to be $(datadir)/gnome/ui
+
 2000-12-23  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* bonobo/bonobo-event-source.c 
