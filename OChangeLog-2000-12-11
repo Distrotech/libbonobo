@@ -1,3 +1,12 @@
+2000-06-13  Martin Baulig  <martin@suse.de>
+
+	* gshell/gshell.c (main): If USING_OAF, initialize it.
+	(buffer_create): Call bonobo_object_activate_with_oaf_id
+	if we're USING_OAF.
+
+	* gshell/inout.c (file_open): When USING_OAF, use
+	"default_component_iid" as mime key.
+
 2000-06-13  Maciej Stachowiak  <mjs@eazel.com>
 
 	* components/text-plain/text-plain.oafinfo: Added text/*
