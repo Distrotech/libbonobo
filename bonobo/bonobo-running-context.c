@@ -226,6 +226,7 @@ bonobo_running_context_trace_objects_T (CORBA_Object object,
 		switch (mode) {
 		case 0:
 			g_hash_table_insert (ri->objects, object, object);
+			ri->emitted_last_unref = FALSE;
 			break;
 		case 1:
 			g_hash_table_remove (ri->objects, object);

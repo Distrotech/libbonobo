@@ -1,3 +1,10 @@
+2004-08-12  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-running-context.c
+	(bonobo_running_context_trace_objects_T): Add
+	ri->emitted_last_unref = FALSE, missing in debug version of
+	addObject, but present in the non-debug version.
+
 2004-08-11  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* activation-server/object-directory-corba.c
