@@ -3,6 +3,7 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@/oaf-2.0
 datadir=@datadir@
+idldir=@datadir@/idl
 
 Name: OAF
 Version: @VERSION@
