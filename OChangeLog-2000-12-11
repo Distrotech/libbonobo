@@ -1,5 +1,16 @@
 2000-03-17  John Sullivan  <sullivan@eazel.com>
 
+	More toolbar bug fixes.
+
+	* bonobo/bonobo-uih-toolbar.c:
+	(toolbar_toplevel_item_remove_widgets): Don't free key
+	found in hash table lookup if it returned FALSE.
+	(toolbar_toplevel_item_create_widgets): item position 
+	was only respected if > 0, but needs to be >= 0. Fixed
+	three occurrences of this bug in this function.
+
+2000-03-17  John Sullivan  <sullivan@eazel.com>
+
 	* bonobo/bonobo-uih-toolbar.c:
 	(toolbar_toplevel_item_create_widgets): Check for NULL
 	toolbar_item before reffing and adding to hash table.
