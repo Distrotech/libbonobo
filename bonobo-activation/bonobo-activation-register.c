@@ -195,16 +195,9 @@ bonobo_activation_active_server_unregister (const char *iid, CORBA_Object obj)
 char *
 bonobo_activation_make_registration_id (const char *iid, const char *display)
 {
-        /* We're seeing problems when we use registration IDs with the display in them.
-         * So for now, lets not use them. We can re-enable this and fix the problems
-         * when we're ready to spend some time on this.
-         */
-        return g_strdup (iid);
-#if 0
         if (display == NULL) {
                 return g_strdup (iid);
         } else {
                 return g_strconcat (display, ",", iid, NULL);
         }
-#endif
 }

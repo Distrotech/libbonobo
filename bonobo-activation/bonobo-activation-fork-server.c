@@ -259,11 +259,12 @@ bonobo_activation_server_by_forking (
 	} else if ((childpid = fork ())) {
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
-                if (display)
-		  bonobo_activation_setenv ("DISPLAY", display);
-		if (od_iorstr)
-		  bonobo_activation_setenv ("BONOBO_ACTIVATION_OD_IOR", od_iorstr);
-                
+                if (display != NULL) {
+                        bonobo_activation_setenv ("DISPLAY", display);
+                }
+		if (od_iorstr != NULL) {
+                        bonobo_activation_setenv ("BONOBO_ACTIVATION_OD_IOR", od_iorstr);
+                }
 
 		close (iopipes[0]);
                 
@@ -286,8 +287,9 @@ bonobo_activation_server_by_forking (
                 }
                 
 		execvp (cmd[0], (char **) cmd);
-		if (iopipes[1] != 1)
+		if (iopipes[1] != 1) {
 			dup2 (iopipes[1], 1);
+                }
 		g_print (_("Failed to execute %s: %d (%s)\n"),
                          cmd[0],
                          errno, g_strerror (errno));
