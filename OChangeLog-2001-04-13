@@ -1,3 +1,11 @@
+1999-10-22  Michael Meeks  <mmeeks@gnu.org>
+
+	* components/image-generic/bonobo-image-generic.c:
+	s/GdkPixBuf/GdkPixbuf/
+	(release_pixbuf_cb): create. (release_pixbuf): use foreach_view.
+	(load_image_from_stream, redraw_all_cb): ditto
+	(load_image_from_stream): Update to new gdk-pixbuf API.
+
 1999-09-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/test-container.c (add_gnumeric_cmd): Change this to goadid
