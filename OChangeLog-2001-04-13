@@ -1,5 +1,14 @@
 2001-02-24  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-print-client.c
+	(bonobo_print_client_class_init): remove.
+	(bonobo_print_client_get_type): upd.
+	Fully API document.
+
+	* bonobo/bonobo-ui-sync.c: Fully API document.
+
+2001-02-24  Michael Meeks  <michael@ximian.com>
+
 	* doc/api: add bonobo-ui-sync
 	remove bonobo-ui-xml
 
