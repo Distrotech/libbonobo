@@ -10,7 +10,7 @@
 #ifndef BONOBO_ADVISE_IDL
 #define BONOBO_ADVISE_IDL
 
-#include "bonobo-unknown.idl"
+#include "Bonobo_Unknown.idl"
 
 /*
  *  This interface is deprecated, use the BonoboListener

@@ -17,7 +17,7 @@
 #ifndef BONOBO_PROGRESSIVE_IDL
 #define BONOBO_PROGRESSIVE_IDL
 
-#include "bonobo-unknown.idl"
+#include "Bonobo_Unknown.idl"
 
 module Bonobo {
 

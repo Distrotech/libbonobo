@@ -10,7 +10,7 @@
 #ifndef BONOBO_ITEM_CONTAIER_IDL
 #define BONOBO_ITEM_CONTAIER_IDL
 
-#include "bonobo-unknown.idl"
+#include "Bonobo_Unknown.idl"
 
 module Bonobo {
 

@@ -10,7 +10,7 @@
 #ifndef BONOBO_DESKTOP_IDL
 #define BONOBO_DESKTOP_IDL
 
-#include "bonobo-unknown.idl"
+#include "Bonobo_Unknown.idl"
 
 module Bonobo {
 

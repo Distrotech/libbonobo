@@ -19,7 +19,7 @@
 #ifndef BONOBO_STORAGE_IDL
 #define BONOBO_STORAGE_IDL
 
-#include "bonobo-unknown.idl"
+#include "Bonobo_Unknown.idl"
 
 module Bonobo {
 

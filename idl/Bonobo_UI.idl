@@ -10,7 +10,7 @@
 #ifndef BONOBO_UI_IDL
 #define BONOBO_UI_IDL
 
-#include "bonobo-unknown.idl"
+#include "Bonobo_Unknown.idl"
 
 module Bonobo {
 	interface UIContainer;

@@ -16,11 +16,11 @@
 #ifndef BONOBO_EMBEDDABLE_IDL
 #define BONOBO_EMBEDDABLE_IDL
 
-#include "bonobo-control.idl"
-#include "bonobo-unknown.idl"
-#include "bonobo-canvas.idl"
-#include "bonobo-client-site.idl"
-#include "bonobo-advise.idl"
+#include "Bonobo_Unknown.idl"
+#include "Bonobo_Control.idl"
+#include "Bonobo_Canvas.idl"
+#include "Bonobo_ClientSite.idl"
+#include "Bonobo_Advise.idl"
 
 module Bonobo {
 

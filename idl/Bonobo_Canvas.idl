@@ -10,8 +10,8 @@
 #ifndef BONOBO_CANVAS_IDL
 #define BONOBO_CANVAS_IDL
 
-#include "bonobo-unknown.idl"
-#include "bonobo-ui.idl"
+#include "Bonobo_Unknown.idl"
+#include "Bonobo_UI.idl"
 
 module Bonobo {
 

@@ -11,7 +11,7 @@
 #ifndef BONOBO_LISTENER_IDL
 #define BONOBO_LISTENER_IDL
 
-#include "bonobo-unknown.idl"
+#include "Bonobo_Unknown.idl"
 
 module Bonobo {
   

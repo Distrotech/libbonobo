@@ -11,9 +11,9 @@
 #ifndef BONOBO_PERSIST_IDL
 #define BONOBO_PERSIST_IDL
 
-#include "bonobo-unknown.idl"
-#include "bonobo-storage.idl"
-#include "bonobo-exception.idl"
+#include "Bonobo_Unknown.idl"
+#include "Bonobo_Storage.idl"
+#include "Bonobo_Exception.idl"
 
 module Bonobo {
 

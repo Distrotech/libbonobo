@@ -25,7 +25,7 @@
 #ifndef BONOBO_ZOOMABLE_IDL
 #define BONOBO_ZOOMABLE_IDL
 
-#include "bonobo-unknown.idl"
+#include "Bonobo_Unknown.idl"
 
 module Bonobo {
 

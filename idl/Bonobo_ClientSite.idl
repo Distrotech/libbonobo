@@ -15,9 +15,9 @@
 #ifndef BONOBO_CLIENT_SITE_IDL
 #define BONOBO_CLIENT_SITE_IDL
 
-#include "bonobo-unknown.idl"
-#include "bonobo-persist.idl"
-#include "bonobo-item-container.idl"
+#include "Bonobo_Unknown.idl"
+#include "Bonobo_Persist.idl"
+#include "Bonobo_ItemContainer.idl"
 
 module Bonobo {
 

@@ -11,8 +11,8 @@
 #ifndef BONOBO_CONTROL_IDL
 #define BONOBO_CONTROL_IDL
 
-#include "bonobo-unknown.idl"
-#include "bonobo-property.idl"
+#include "Bonobo_Unknown.idl"
+#include "Bonobo_Property.idl"
 
 module Bonobo {
 

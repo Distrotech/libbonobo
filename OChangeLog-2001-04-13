@@ -1,3 +1,10 @@
+2001-01-25  Michael Meeks  <michael@helixcode.com>
+
+	* idl/Makefile.am: Rename all the IDL files to comply to the
+	namespacing rules.
+
+	* configure.in: Bump version to 0.34
+
 2001-01-25  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-object.c (bonobo_track_shlib_objects): removed an
