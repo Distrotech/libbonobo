@@ -1,3 +1,7 @@
+2001-02-05  Cody Russell  <bratsche@gnome.org>
+	* bonobo/bonobo-zoomable.[ch]: Use GArray to store zoom levels
+	and names and added bonobo_zoomable_add_preferred_zoom_level().
+
 2001-02-05  Michael Meeks  <michael@helixcode.com>
 
 	* Rename mobject to xobject - the transience of decisiveness.
