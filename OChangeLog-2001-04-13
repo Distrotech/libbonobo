@@ -1,3 +1,11 @@
+2000-10-20  Darin Adler  <darin@eazel.com>
+
+	* bonobo/Makefile.am:
+	* bonobo/extract.c: (find_strings), (print_line),
+	(seek_translatable_strings), (main):
+	Write translatable strings out in alphabetical order so trivial
+	changes to the XML file don't cause changes to the generated file.
+
 2000-10-19  Darin Adler  <darin@eazel.com>
 
 	* bonobo.spec.in: Use "-k" so you see more than just the first
