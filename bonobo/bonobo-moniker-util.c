@@ -1043,8 +1043,8 @@ bonobo_string_to_CosNaming_Name (const CORBA_char *string,
 	gboolean used = FALSE;
 	GPtrArray *append_to;
 
-	g_ptr_array_add (ids, g_string_new (""));
-	g_ptr_array_add (kinds, g_string_new (""));
+	g_ptr_array_add (ids, g_string_new (NULL));
+	g_ptr_array_add (kinds, g_string_new (NULL));
 
 	append_to = ids;
 
@@ -1060,8 +1060,8 @@ bonobo_string_to_CosNaming_Name (const CORBA_char *string,
 		case '/':
 			if (used) {
 				pos++;
-				g_ptr_array_add (ids, g_string_new (""));
-				g_ptr_array_add (kinds, g_string_new (""));
+				g_ptr_array_add (ids, g_string_new (NULL));
+				g_ptr_array_add (kinds, g_string_new (NULL));
 				g_assert (ids->len == pos + 1 && kinds->len == pos + 1);
 			}
 			used = FALSE;

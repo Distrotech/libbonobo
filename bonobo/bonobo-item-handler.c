@@ -338,7 +338,7 @@ bonobo_item_option_parse (const char *option_string)
 			if (!key || value)
 				goto parse_error_free;
 
-			value = g_string_new ("");
+			value = g_string_new (NULL);
 			break;
 		case ';':
 			if (!key)
@@ -354,7 +354,7 @@ bonobo_item_option_parse (const char *option_string)
 			/* drop through */
 		default:
 			if (!key)
-				key = g_string_new ("");
+				key = g_string_new (NULL);
 
 			if (value)
 				g_string_append_c (value, *p);
