@@ -1,3 +1,13 @@
+Wed Nov 24 15:49:45 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* bonobo/gnome-view.h: set GnomeViewClass parent class to
+	GnomeControlClass.
+
+	* bonobo/gnome-view-frame.h: set GnomeViewFrameClass parent class
+	type to GnomeControlFrameClass.
+
+	* gshell/gshell.c (buffer_create_cb): check if buffer is NULL
+
 Sun Nov 21 11:51:37 1999  Dietmar Maurer  <dm@darkstar>
 
 	* storage-modules/gnome-storage-efs.c (gnome_storage_efs_open):
