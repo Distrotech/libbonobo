@@ -1,5 +1,7 @@
 Wed Nov 17 10:52:15 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
+	* gshell/*: added a new subdir for gshell (see gshell/README)
+
 	* bonobo/gnome-wrapper.c (gnome_wrapper_init): unset the
 	GTK_NO_WINDOW flag, since we have a window.
 
