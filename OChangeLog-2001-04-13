@@ -1,3 +1,8 @@
+1999-06-14  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* bonobo/bonobo-stream-fs.c (fs_copy_to): implemented.
+	(gnome_stream_fs_open): always g_free(full).
+
 1999-06-13  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
 	* doc/Bonobo.sgml: fixed typo ("funtion") in ref()/unref() section
