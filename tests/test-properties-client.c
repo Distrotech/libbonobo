@@ -148,6 +148,8 @@ print_props (void)
 			 simple_print_value (name, tc),
 			 simple_print_default_value (name, tc),
 			 simple_print_read_only (name));
+
+		CORBA_Object_release ((CORBA_Object) tc, NULL);
 	}
 
 	bonobo_pbclient_free_keys (props);
@@ -174,8 +176,6 @@ create_bag_client (void)
 		"double-test", TC_CORBA_double, 2.0001,
 		"string-test", TC_CORBA_string, "you are a precious flower",
 		NULL);
-
-	bonobo_object_release_unref (pb, NULL);
 
 	bonobo_main_quit ();
 
@@ -207,7 +207,8 @@ main (int argc, char **argv)
 		g_assert (ev._major == CORBA_NO_EXCEPTION);
 	}
 	
-	if (pb == CORBA_OBJECT_NIL || CORBA_Object_non_existent (pb, &ev)) {
+	if (pb == CORBA_OBJECT_NIL ||
+	    CORBA_Object_non_existent (pb, &ev)) {
 		g_error ("Could not bind to PropertyBag object");
 		return 1;
 	}
@@ -215,6 +216,8 @@ main (int argc, char **argv)
 	g_idle_add ((GSourceFunc) create_bag_client, NULL);
 
 	bonobo_main ();
+
+	bonobo_object_release_unref (pb, NULL);
 
 	return bonobo_shutdown ();
 }

@@ -1,5 +1,8 @@
 2001-10-27  Michael Meeks  <michael@ximian.com>
 
+	* tests/test-properties-client.c (print_props): 
+	release the typecode.
+
 	* bonobo/bonobo-object.c (bonobo_object_corba_deactivate): 
 	remove stale code.
 
