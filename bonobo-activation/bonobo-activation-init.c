@@ -225,6 +225,8 @@ ac_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCategory *r
 
        *ret_distance = 1;
 
+       CORBA_free(od);
+       
        return retval;
      }
 
