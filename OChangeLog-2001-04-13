@@ -1,5 +1,10 @@
 2001-03-14  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-ui-toolbar-icon.c (paint_with_pixbuf): 
+	Revert to a version BC.
+
+2001-03-14  Michael Meeks  <michael@ximian.com>
+
 	* configure.in: Update version to 1.0.0 in preparation for
 	Gnome 1.4.
 
