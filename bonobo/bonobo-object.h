@@ -98,7 +98,7 @@ Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject     
  */
 Bonobo_Unknown           bonobo_object_dup_ref                (Bonobo_Unknown          object,
 							       CORBA_Environment      *opt_ev);
-void                     bonobo_object_release_unref          (Bonobo_Unknown          object,
+Bonobo_Unknown           bonobo_object_release_unref          (Bonobo_Unknown          object,
 							       CORBA_Environment      *opt_ev);
 gpointer                 bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_idle_unref             (BonoboObject           *object);

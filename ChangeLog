@@ -4,6 +4,8 @@
 	NULL silently.
 	(bonobo_object_unref): ditto & return NULL.
 	(bonobo_object_trace_refs): upd.
+	(bonobo_object_unref): fixup.
+	(bonobo_object_release_unref): make symmetrical.
 
 	* tests/test-object.c (main): upd.
 

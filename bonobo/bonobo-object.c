@@ -280,11 +280,11 @@ bonobo_object_unref (BonoboObject *object)
 	if (!object)
 		return NULL;
 
-	g_return_if_fail (BONOBO_IS_OBJECT (object));
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
 	ao = object->priv->ao;
-	g_return_if_fail (ao != NULL);
-	g_return_if_fail (ao->ref_count > 0);
+	g_return_val_if_fail (ao != NULL, NULL);
+	g_return_val_if_fail (ao->ref_count > 0, NULL);
 
 	if (ao->immortal)
 		ao->ref_count--;
@@ -467,14 +467,14 @@ bonobo_object_dup_ref (Bonobo_Unknown     object,
  * This is the converse of bonobo_object_dup_ref. We
  * tolerate object == CORBA_OBJECT_NIL silently.
  **/
-void
+Bonobo_Unknown
 bonobo_object_release_unref (Bonobo_Unknown     object,
 			     CORBA_Environment *opt_ev)
 {
-	CORBA_Environment  *ev, temp_ev;
+	CORBA_Environment *ev, temp_ev;
 
 	if (object == CORBA_OBJECT_NIL)
-		return;
+		return CORBA_OBJECT_NIL;
 
 	if (!opt_ev) {
 		CORBA_exception_init (&temp_ev);
@@ -487,6 +487,8 @@ bonobo_object_release_unref (Bonobo_Unknown     object,
 
 	if (!opt_ev)
 		CORBA_exception_free (&temp_ev);
+
+	return CORBA_OBJECT_NIL;
 }
 
 static void
