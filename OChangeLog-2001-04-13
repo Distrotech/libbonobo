@@ -1,3 +1,8 @@
+2000-10-09  Martin Baulig  <baulig@suse.de>
+
+	* COPYING.LIB: Replaced this with version 2.1 of the
+	GNU Lesser General Public License.
+
 2000-10-09  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-util.c: s/descr/tip/
