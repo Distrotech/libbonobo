@@ -190,6 +190,7 @@ gnome_persist_stream_construct (GnomePersistStream *ps,
 {
 	g_return_val_if_fail (ps != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PERSIST_STREAM (ps), NULL);
+	g_return_val_if_fail (corba_ps != CORBA_OBJECT_NIL, NULL);
 
 	gnome_persist_construct (GNOME_PERSIST (ps), corba_ps);
 	

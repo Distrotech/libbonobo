@@ -1,3 +1,112 @@
+1999-06-22  Nat Friedman  <nat@gnome-support.com>
+
+	* idl/gnome-component.idl (GNOME): Moved do_verb to the View.
+  	Prefixed all standard bonobo verbs with "bonobo_".
+	(GNOME::ViewFrame): Added the view_activated method.
+	(GNOME): Fixed a typo in the get_verb_list comment.
+
+	* components/text-plain/bonobo-text-plain.c (view_data_t): Keep
+ 	track of our View and ViewFrame, and the internal widgets we will
+ 	need to unref when the View is destroyed.
+	(destroy_view): Unref the widgets we're done with and unref our
+ 	ViewFrame object.
+	(bonobo_object_destroy_cb): New function to handle destroying the
+ 	BonoboObject and all its views.
+	(verb_struct): Simple structure to pair verb names with their
+ 	functions.
+	(view_do_verb_cb): This is the do_verb signal handler.  It
+ 	dispatches to the appropriate verb handling function.
+	(verb_bonobo_activate): New function to handle activation.  All it
+ 	does is tell the container's ViewFrame that we're active.  The
+ 	ViewFrame will then uncover us so that we can receive X events.
+	(view_factory): CORBA_Object_duplicate the ViewFrame interface so
+ 	that we can hang onto it.  Also save the widgets we need to unref
+ 	later.
+	(create_menu_string): Takes a list of GnomeUIInfos and creates a
+ 	menu string.  Ignore all this menu stuff for now; it will all
+ 	change soon.
+	(bonobo_object_factory): Connect to the destroy signal for the
+ 	BonoboObject.  Build a verb list.
+
+	* components/image-x-png/bonobo-image-x-png.c (view_factory): Take
+ 	the view frame as a parameter.
+
+	* bonobo/test-container.c (view_frame_activated_cb): New function
+ 	to handle the view_activated signal on the ViewFrame.
+	(add_view): Use gnome_bonobo_object_client_new_view_simple now,
+ 	since it sets up the verb handler for BonoboObject activation.
+  	Removed the call to gnome_bonobo_object_client_activate, since we
+ 	can now do activation properly.
+
+	* bonobo/test-container-autoload.c (add_object_cmd): Use
+ 	gnome_bonobo_object_client_new_view, since
+ 	gnome_bonobo_object_new_view changed names.
+
+	* bonobo/sample-server.c (view_factory): Take the ViewFrame as an
+ 	argument.
+
+	* bonobo/gnome-wrapper.c (gnome_wrapper_realize): Added
+ 	GDK_BUTTON_PRESS_MASK to the event mask for the wrapper.
+
+	* bonobo/gnome-view.c: Added a DO_VERB signal, since do_verb was
+ 	moved from the GNOME::BonoboObject to the GNOME::View.
+	(gnome_view_construct): Added precondition that corba_view isn't
+ 	CORBA_OBJECT_NIL.
+	(init_view_corba_class): Add do_verb to the epv.
+	(gnome_view_class_init): Create a do_verb signal.
+	(impl_GNOME_View_do_verb): New function to handle do_verb.
+
+	* bonobo/gnome-view.h: Added do_verb to the GnomeViewClass.
+
+	* bonobo/gnome-simple-source.c
+ 	(gnome_simple_data_source_construct): Added precondition that
+ 	corba_ssource isn't CORBA_OBJECT_NIL.
+
+	* bonobo/gnome-progressive.c
+ 	(gnome_progressive_data_sink_construct): Added precondition that
+ 	corba_psink isn't CORBA_OBJECT_NIL.
+
+	* bonobo/gnome-persist.c (gnome_persist_construct): Added
+ 	precondition that corba_persist isn't CORBA_OBJECT_NIL.
+
+	* bonobo/gnome-persist-stream.c (gnome_persist_stream_construct):
+ 	Added precondition that corba_ps isn't CORBA_OBJECT_NIL.
+
+	* bonobo/gnome-inplace-site.c (gnome_inplace_site_construct):
+ 	Added preconditions where none were.
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_construct):
+ 	Added precondition that gfm_corba isn't CORBA_OBJECT_NIL.
+
+	* bonobo/gnome-component.c (enum): Removed DO_VERB.
+	(impl_GNOME_BonoboObject_do_verb): Removed.
+	(impl_GNOME_BonoboObject_new_view): Now takes a GNOME::ViewFrame
+ 	as a parameter and passes it to the view factory.
+	(gnome_bonobo_object_epv): Removed do_verb.
+	(gnome_bonobo_object_class_init): Removed DO_VERB signal.
+
+	* bonobo/gnome-component.h: Removed do_verb signal handler pointer
+ 	from GnomeBonoboObjectClass.  Updated prototypes to reflect the
+ 	changes described above.
+
+	* bonobo/gnome-component-client.c
+ 	(gnome_bonobo_object_client_new_view): Renamed from
+ 	gnome_bonobo_object_new_view, since it is not a method on a
+ 	GNOME::BonoboObject, but a helper function that the client uses.
+	(gnome_bonobo_object_client_new_view_simple): Likewise.
+	(gnome_bonobo_object_client_get_verbs): Likewise.
+	(gnome_bonobo_object_client_free_verbs): Likewise.
+	(gnome_view_client_do_verb): Likewise.
+	(gnome_bonobo_object_client_new_view_simple): Connect to the
+ 	button_pres_event on the ViewFrame, not the server object.
+	(gnome_view_client_do_verb): Now acts on a View, not a
+ 	BonoboObject.
+	(wrapper_button_press_cb): Activate the view corresponding to this
+ 	wrapper when we get a double click.
+
+	* bonobo/gnome-component-client.h: Include bonobo/gnome-view.h.
+  	Updated function prototypes to reflect changes described above.
+
 1999-06-22  Matt Loper  <matt@gnome-support.com>
 
 	* bonobo/gnome-component-factory.c: Rename BonoboObjectFactory to

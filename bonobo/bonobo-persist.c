@@ -49,6 +49,7 @@ gnome_persist_construct (GnomePersist *persist, GNOME_Persist corba_persist)
 {
 	g_return_val_if_fail (persist != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PERSIST (persist), NULL);
+	g_return_val_if_fail (corba_persist != CORBA_OBJECT_NIL, NULL);
 
 	gnome_object_construct (GNOME_OBJECT (persist), corba_persist);
 

@@ -30,7 +30,7 @@ interface ClientSite : GNOME::obj {
 	 *
 	 */
 	void show_window (in boolean shown);
-
+	
 	/**
 	 * get_moniker:
 	 * @which: Which kind of moniker is requested

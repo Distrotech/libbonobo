@@ -151,6 +151,7 @@ gnome_simple_data_source_construct (GnomeSimpleDataSource *ssource,
 {
 	g_return_val_if_fail (ssource != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_SIMPLE_DATA_SOURCE (ssource), NULL);
+	g_return_val_if_fail (corba_ssource != CORBA_OBJECT_NIL, NULL);
 
 	gnome_object_construct (GNOME_OBJECT (ssource), corba_ssource);
 

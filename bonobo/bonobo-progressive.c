@@ -226,6 +226,7 @@ gnome_progressive_data_sink_construct (GnomeProgressiveDataSink *psink,
 {
 	g_return_val_if_fail (psink != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PROGRESSIVE_DATA_SINK (psink), NULL);
+	g_return_val_if_fail (corba_psink != CORBA_OBJECT_NIL, NULL);
 
 	gnome_object_construct (GNOME_OBJECT (psink), corba_psink);
 

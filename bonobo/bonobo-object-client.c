@@ -20,8 +20,8 @@ GnomeObjectClient *
 gnome_object_client_construct (GnomeObjectClient *object_client, CORBA_Object corba_object)
 {
 	g_return_val_if_fail (object_client != NULL, NULL);
-	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 	g_return_val_if_fail (GNOME_IS_OBJECT_CLIENT (object_client), NULL);
+	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 	
 	GNOME_OBJECT (object_client)->object = corba_object;
 

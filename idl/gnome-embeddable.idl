@@ -27,9 +27,51 @@ interface View : GNOME::obj {
 	 */
 	void set_window (in windowid id);
 
+	/**
+	 * Some standard verbs in Bonobo:
+	 * "bonobo_primary":
+	 *     Action invoked when user double clicks on
+	 *     this object.  Triggers inplace editing if this
+	 *     object supports it.
+	 *
+	 * "bonobo_show":
+	 *     The object should be shown to the user, for 
+	 *     editing or viewing.  Used during initial editing
+	 *
+	 * "bonobo_open":
+	 *     Edit the object in a separate window.
+	 *
+	 * "bonobo_hide":
+	 *     Hide any open separate windows.
+	 *
+	 * "bonobo_activate_inplace_uia":
+	 *     Activate in place and negotiate toolbars and menus
+	 *
+	 * "bonobo_activate_inplace":	
+	 *     Activate in place but do not merge UI elements.
+	 *
+	 * "bonobo_deactivate"
+	 *     Deactivate, often when another component has been
+	 *     activated.
+	 *
+	 * "bonobo_discardundo"
+	 *     Discard any pending Undo information in this object.
+	 */
+		
+	/**
+	 * do_verb:
+	 * @verb_name: string that identifies the verb.
+	 *
+	 *
+	 * Performs the @verb.
+	 */
+	void do_verb (in string verb_name);
+
 };
 
 interface ViewFrame : GNOME::obj {
+	typedef sequence<octet> pixbuf;
+
 	ClientSite get_client_site ();
 
 	/**
@@ -42,43 +84,6 @@ interface ViewFrame : GNOME::obj {
 
 /* Equivalent to IOleObject */
 interface BonoboObject : GNOME::obj {
-
-	/**
-	 * Some standard verbs in Bonobo:
-	 * "primary":
-	 *     Action invoked when user double clicks on
-	 *     this object.  Triggers inplace editing if this
-	 *     object supports it.
-	 *
-	 * "show":
-	 *     The object should be shown to the user, for 
-	 *     editing or viewing.  Used during initial editing
-	 *
-	 * "open":
-	 *     Edit the object in a separate window.
-	 *
-	 * "hide":
-	 *     Hide any open separate windows.
-	 *
-	 * "inplace_uia":
-	 *     Activate in place and negotiate toolbars and menus
-	 *
-	 * "inplace":	
-	 *     Activate in place but do not merge UI elements.
-	 *
-	 * "discardundo"
-	 *     Discard any pending Undo information in this object.
-	 */
-		
-	/**
-	 * do_verb:
-	 * @verb: verb identifier
-	 * @verbname: string that activated the verb
-	 *
-	 *
-	 * Performs the @verb.
-	 */
-	void do_verb (in string verb_name);
 
 	/**
 	 * set_client_site:
@@ -118,6 +123,7 @@ interface BonoboObject : GNOME::obj {
 		NO_SAVE,
 		PROMPT_SAVE
 	};
+
 	void close (in CloseMode mode)
 		raises (UserCancelledSave);
 	
@@ -140,7 +146,7 @@ interface BonoboObject : GNOME::obj {
 	typedef sequence<string> verb_list;
 
 	/**
-	 * get_verbs_list:
+	 * get_verb_list:
 	 * 
 	 * Returns a list of the supported verbs
 	 */
