@@ -61,7 +61,7 @@ static int server_ac = 0, ior_fd = -1, server_ns = 1;
 static struct poptOption options[] = {
 
 	{"od-source-dir", '\0', POPT_ARG_STRING, &od_source_dir, 0,
-	 N_("Directory to read .oafinfo files from"), N_("DIRECTORY")},
+	 N_("Directory to read .server files from"), N_("DIRECTORY")},
 	{"od-domain", '\0', POPT_ARG_STRING, &od_domain, 0,
 	 N_("Domain of ObjectDirectory"), N_("DOMAIN")},
 
