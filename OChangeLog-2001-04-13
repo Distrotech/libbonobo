@@ -1,3 +1,22 @@
+2000-03-05  John Sullivan  <sullivan@eazel.com>
+
+        Fixed two bugs in menu merging.
+
+        * bonobo/bonobo-uih-menu.c:
+        (menu_shell_has_tearoff_item): New helper function, checks whether
+        a GtkMenuShell starts with a GtkTearoffMenuItem.
+        (menu_toplevel_create_widgets): Increment position before inserting
+        new widget if menu_shell_has_tearoff_item is true, since the position
+        stored in the Bonobo item doesn't account for the tearoff item.
+
+        (menu_toplevel_renumber_children): New function, resets the pos fields
+        of all items in a menu to match the sequence in the parent's list of
+        paths.
+        (menu_toplevel_add_parent_entry): Call menu_toplevel_renumber_children
+        after inserting a new item anywhere other than at the end. The items
+        were having their pos field updated when an item was removed, but not
+        when an item was inserted.
+
 2000-03-05  Dan Winship  <danw@helixcode.com>
 
 	* doc/Bonobo.sgml: beautify a bit more. In particular, make
