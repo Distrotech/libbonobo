@@ -1,3 +1,7 @@
+2000-07-02  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo-idl/bonobo-idl.1: Added man page.
+
 2000-07-01  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo-idl/main.c: Split the code from here into names.c and
