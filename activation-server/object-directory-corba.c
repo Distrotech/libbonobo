@@ -1,5 +1,5 @@
 #include "oafd.h"
-#include "oaf.h"
+#include "liboaf/liboaf.h"
 #include <time.h>
 
 /*** App-specific servant structures ***/
@@ -46,6 +46,9 @@ impl_OAF_ObjectDirectory__get_username(impl_POA_OAF_ObjectDirectory * servant,
 static CORBA_Object
 impl_OAF_ObjectDirectory_activate(impl_POA_OAF_ObjectDirectory * servant,
 				  OAF_ImplementationID iid,
+				  OAF_ActivationContext ac,
+				  OAF_ActivationFlags flags,
+				  CORBA_Context ctx,
 				  CORBA_Environment * ev);
 
 static void
@@ -241,13 +244,21 @@ impl_OAF_ObjectDirectory__get_username(impl_POA_OAF_ObjectDirectory * servant,
 static CORBA_Object
 impl_OAF_ObjectDirectory_activate(impl_POA_OAF_ObjectDirectory * servant,
 				  OAF_ImplementationID iid,
+				  OAF_ActivationContext ac,
+				  OAF_ActivationFlags flags,
+				  CORBA_Context ctx,
 				  CORBA_Environment * ev)
 {
   CORBA_Object retval;
   OAF_ServerInfo *si;
+  ODActivationInfo ai;
+
+  ai.ac = ac;
+  ai.flags = flags;
+  ai.ctx = ctx;
 
   if(/* XXX !server_is_running(si) */ 1)
-    retval = od_server_activate(si);
+    retval = od_server_activate(si, &ai, ev);
   else
     retval = CORBA_OBJECT_NIL;
 

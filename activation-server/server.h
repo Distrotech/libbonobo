@@ -28,7 +28,15 @@ OAF_ServerInfo *OAF_ServerInfo_load(const char *source_directory,
 				    const char *domain);
 
 /* od-activate.c */
-CORBA_Object od_server_activate(OAF_ServerInfo *si);
+typedef struct {
+  OAF_ActivationContext ac;
+  OAF_ActivationFlags flags;
+  CORBA_Context ctx;
+} ODActivationInfo;
+
+CORBA_Object od_server_activate(OAF_ServerInfo *si,
+				ODActivationInfo *actinfo,
+				CORBA_Environment *ev);
 
 /* ac-corba.c */
 OAF_ActivationContext

@@ -15,7 +15,7 @@ oaf_actinfo_free(OAFActivationInfo *actinfo)
 }
 
 OAFActivationInfo *
-oaf_parse_actid(const char *actid)
+oaf_actid_parse(const OAF_ActivationID actid)
 {
   OAFActivationInfo *retval;
   char *splitme, *ctmp, *ctmp2;
@@ -72,7 +72,7 @@ oaf_parse_actid(const char *actid)
 }
 
 char *
-oaf_stringify_actinfo(OAFActivationInfo *actinfo)
+oaf_actinfo_stringify(const OAFActivationInfo *actinfo)
 {
   g_return_val_if_fail(actinfo, NULL);
 

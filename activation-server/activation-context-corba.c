@@ -1,4 +1,5 @@
 #include "oafd.h"
+#include "liboaf/liboaf.h"
 #include "ac-query-expr.h"
 #include <time.h>
 
@@ -21,7 +22,9 @@ typedef struct {
   OAF_CacheTime time_list_pulled;
   GHashTable *by_iid;
 
-  GHashTable *active_servers;
+  GHashTable *active_servers; /* It is assumed that accesses to this
+				 hash table are atomic - i.e. a CORBA call cannot come in while
+				 checking a value in this table */
   OAF_ServerStateCache *active_server_list;
   OAF_CacheTime time_active_pulled;
 
@@ -79,28 +82,32 @@ child_od_update_active(ChildODInfo *child, CORBA_Environment *ev)
   cache = OAF_ObjectDirectory_get_active_servers(child->obj,
 						 child->time_active_pulled,
 						 ev);
-  if(ev->_major != CORBA_NO_EXCEPTION) {
-    child_od_exception(child, ev);
-    return;
-  }
-
-  if(cache->_d) {
-    if(child->active_servers) {
-      g_hash_table_destroy(child->active_servers);
-      CORBA_free(child->active_server_list);
+  if(ev->_major != CORBA_NO_EXCEPTION)
+    {
+      child_od_exception(child, ev);
+      return;
     }
 
-    child->active_server_list = cache;
+  if(cache->_d)
+    {
+      if(child->active_servers)
+	{
+	  g_hash_table_destroy(child->active_servers);
+	  CORBA_free(child->active_server_list);
+	}
 
-    child->time_active_pulled = time(NULL);
-    child->active_servers = g_hash_table_new(g_str_hash, g_str_equal);
-    g_hash_table_freeze(child->active_servers);
-    for(i = 0; i < cache->_u.active_servers._length; i++)
-      g_hash_table_insert(child->active_servers,
-			  cache->_u.active_servers._buffer[i],
-			  GINT_TO_POINTER(1));
-    g_hash_table_thaw(child->active_servers);
-  } else
+      child->active_server_list = cache;
+
+      child->time_active_pulled = time(NULL);
+      child->active_servers = g_hash_table_new(g_str_hash, g_str_equal);
+      g_hash_table_freeze(child->active_servers);
+      for(i = 0; i < cache->_u.active_servers._length; i++)
+	g_hash_table_insert(child->active_servers,
+			    cache->_u.active_servers._buffer[i],
+			    GINT_TO_POINTER(1));
+      g_hash_table_thaw(child->active_servers);
+    }
+  else
     CORBA_free(cache);
 }
 
@@ -113,30 +120,32 @@ child_od_update_list(ChildODInfo *child, CORBA_Environment *ev)
   cache = OAF_ObjectDirectory_get_servers(child->obj,
 					  child->time_list_pulled,
 					  ev);
-  if(ev->_major != CORBA_NO_EXCEPTION) {
-    child->list = NULL;
-    child_od_exception(child, ev);
-    return;
-  }
+  if(ev->_major != CORBA_NO_EXCEPTION)
+    {
+      child->list = NULL;
+      child_od_exception(child, ev);
+      return;
+    }
 
-  if(cache->_d) {
+  if(cache->_d)
+    {
 
-    if(child->by_iid)
-      g_hash_table_destroy(child->by_iid);
-    CORBA_free(child->list); child->list = NULL;
+      if(child->by_iid)
+	g_hash_table_destroy(child->by_iid);
+      CORBA_free(child->list); child->list = NULL;
 
-    child->list = OAF_ServerInfoList__alloc();
-    *(child->list) = cache->_u.server_list;
+      child->list = OAF_ServerInfoList__alloc();
+      *(child->list) = cache->_u.server_list;
 
-    child->time_list_pulled = time(NULL);
-    child->by_iid = g_hash_table_new(g_str_hash, g_str_equal);
-    g_hash_table_freeze(child->by_iid);
-    for(i = 0; i < child->list->_length; i++)
-      g_hash_table_insert(child->by_iid,
-			  child->list->_buffer[i].iid,
-			  &(child->list->_buffer[i]));
-    g_hash_table_thaw(child->by_iid);
-  }
+      child->time_list_pulled = time(NULL);
+      child->by_iid = g_hash_table_new(g_str_hash, g_str_equal);
+      g_hash_table_freeze(child->by_iid);
+      for(i = 0; i < child->list->_length; i++)
+	g_hash_table_insert(child->by_iid,
+			    child->list->_buffer[i].iid,
+			    &(child->list->_buffer[i]));
+      g_hash_table_thaw(child->by_iid);
+    }
 
   CORBA_free(cache);
 }
@@ -160,55 +169,62 @@ typedef struct {
   GSList *dirs;
 
   int total_servers;
+
+  gint refs; /* This is a use count, so we don't accidentally go
+		updating our server list and invalidating memory */
+  OAF_ActivationContext me;
 } impl_POA_OAF_ActivationContext;
 
 /*** Implementation stub prototypes ***/
 
 static OAF_ObjectDirectoryList *
 impl_OAF_ActivationContext__get_directories(impl_POA_OAF_ActivationContext *servant,
-					     CORBA_Environment * ev);
+					    CORBA_Environment * ev);
 
 static void
- impl_OAF_ActivationContext_add_directory(impl_POA_OAF_ActivationContext * servant,
-					  OAF_ObjectDirectory dir,
-					  CORBA_Environment * ev);
+impl_OAF_ActivationContext_add_directory(impl_POA_OAF_ActivationContext * servant,
+					 OAF_ObjectDirectory dir,
+					 CORBA_Environment * ev);
 
 static void
- impl_OAF_ActivationContext_remove_directory(impl_POA_OAF_ActivationContext * servant,
-					     OAF_ObjectDirectory dir,
-					     CORBA_Environment * ev);
+impl_OAF_ActivationContext_remove_directory(impl_POA_OAF_ActivationContext * servant,
+					    OAF_ObjectDirectory dir,
+					    CORBA_Environment * ev);
 
 static OAF_ActivationResult *
- impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
-				     CORBA_char * requirements,
-				     OAF_StringList * selection_order,
-				     CORBA_Context ctx,
-				     CORBA_Environment * ev);
+impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
+				    CORBA_char * requirements,
+				    GNOME_stringlist * selection_order,
+				    OAF_ActivationFlags flags,
+				    CORBA_Context ctx,
+				    CORBA_Environment * ev);
 
 static OAF_ServerInfoList *
- impl_OAF_ActivationContext__get_servers(impl_POA_OAF_ActivationContext * servant,
-					 CORBA_Environment * ev);
+impl_OAF_ActivationContext__get_servers(impl_POA_OAF_ActivationContext * servant,
+					CORBA_Environment * ev);
 
 static OAF_ServerInfoList *
 impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
 				 CORBA_char * requirements,
-				 OAF_StringList * selection_order,
+				 GNOME_stringlist * selection_order,
 				 CORBA_Context ctx,
 				 CORBA_Environment * ev);
 
 static OAF_ActivationResult *
 impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * servant,
 					    OAF_ActivationID aid,
+					    OAF_ActivationFlags flags,
 					    CORBA_Context ctx,
 					    CORBA_Environment * ev);
 
 static void
 ac_query_run(impl_POA_OAF_ActivationContext * servant,
 	     CORBA_char * requirements,
-	     OAF_StringList * selection_order,
+	     GNOME_stringlist * selection_order,
 	     CORBA_Context ctx,
 	     OAF_ServerInfo **items,
 	     CORBA_Environment * ev);
+
 static ChildODInfo *
 ac_find_child_for_server(impl_POA_OAF_ActivationContext *servant,
 			 OAF_ServerInfo *server,
@@ -241,8 +257,8 @@ static POA_OAF_ActivationContext__epv impl_OAF_ActivationContext_epv =
 
 static POA_OAF_ActivationContext__vepv impl_OAF_ActivationContext_vepv =
 {
-   &impl_OAF_ActivationContext_base_epv,
-   &impl_OAF_ActivationContext_epv
+  &impl_OAF_ActivationContext_base_epv,
+  &impl_OAF_ActivationContext_epv
 };
 
 /*** Stub implementations ***/
@@ -251,19 +267,19 @@ OAF_ActivationContext
 OAF_ActivationContext_create(PortableServer_POA poa,
 			     CORBA_Environment *ev)
 {
-   OAF_ActivationContext retval;
-   impl_POA_OAF_ActivationContext *newservant;
-   PortableServer_ObjectId *objid;
+  OAF_ActivationContext retval;
+  impl_POA_OAF_ActivationContext *newservant;
+  PortableServer_ObjectId *objid;
 
-   newservant = g_new0(impl_POA_OAF_ActivationContext, 1);
-   newservant->servant.vepv = &impl_OAF_ActivationContext_vepv;
-   newservant->poa = poa;
-   POA_OAF_ActivationContext__init((PortableServer_Servant) newservant, ev);
-   objid = PortableServer_POA_activate_object(poa, newservant, ev);
-   CORBA_free(objid);
-   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+  newservant = g_new0(impl_POA_OAF_ActivationContext, 1);
+  newservant->servant.vepv = &impl_OAF_ActivationContext_vepv;
+  newservant->poa = poa;
+  POA_OAF_ActivationContext__init((PortableServer_Servant) newservant, ev);
+  objid = PortableServer_POA_activate_object(poa, newservant, ev);
+  CORBA_free(objid);
+  retval = newservant->me = PortableServer_POA_servant_to_reference(poa, newservant, ev);
 
-   return retval;
+  return CORBA_Object_duplicate(retval, ev);
 }
 
 static void
@@ -271,6 +287,9 @@ ac_update_list(impl_POA_OAF_ActivationContext *servant,
 	       ChildODInfo *child, CORBA_Environment *ev)
 {
   int prev, new;
+
+  if(servant->refs > 0)
+    return;
 
   if(child->list)
     prev = child->list->_length;
@@ -291,24 +310,25 @@ static OAF_ObjectDirectoryList *
 impl_OAF_ActivationContext__get_directories(impl_POA_OAF_ActivationContext * servant,
 					    CORBA_Environment * ev)
 {
-   OAF_ObjectDirectoryList *retval;
-   int i;
-   GSList *cur;
+  OAF_ObjectDirectoryList *retval;
+  int i;
+  GSList *cur;
 
-   retval = OAF_ObjectDirectoryList__alloc();
-   retval->_length = g_slist_length(servant->dirs);
-   retval->_buffer =
-     CORBA_sequence_OAF_ObjectDirectory_allocbuf(retval->_length);
+  retval = OAF_ObjectDirectoryList__alloc();
+  retval->_length = g_slist_length(servant->dirs);
+  retval->_buffer =
+    CORBA_sequence_OAF_ObjectDirectory_allocbuf(retval->_length);
 
-   for(i = 0, cur = servant->dirs; cur; cur = cur->next) {
-     ChildODInfo *child;
-     child = cur->data;
-     retval->_buffer[i] = CORBA_Object_duplicate(child->obj, ev);
-   }
+  for(i = 0, cur = servant->dirs; cur; cur = cur->next)
+    {
+      ChildODInfo *child;
+      child = cur->data;
+      retval->_buffer[i] = CORBA_Object_duplicate(child->obj, ev);
+    }
 
-   CORBA_sequence_set_release(retval, CORBA_TRUE);
+  CORBA_sequence_set_release(retval, CORBA_TRUE);
 
-   return retval;
+  return retval;
 }
 
 static void
@@ -319,15 +339,17 @@ impl_OAF_ActivationContext_add_directory(impl_POA_OAF_ActivationContext * servan
   GSList *cur;
   ChildODInfo *new_child;
 
-  for(cur = servant->dirs; cur; cur = cur->next) {
-    ChildODInfo *child;
-    child = cur->data;
-    if(CORBA_Object_is_equivalent(dir, child->obj, ev)) {
-      CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
-			  ex_OAF_ActivationContext_AlreadyListed, NULL);
-      return;
+  for(cur = servant->dirs; cur; cur = cur->next)
+    {
+      ChildODInfo *child;
+      child = cur->data;
+      if(CORBA_Object_is_equivalent(dir, child->obj, ev))
+	{
+	  CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
+			      ex_OAF_ActivationContext_AlreadyListed, NULL);
+	  return;
+	}
     }
-  }
 
   new_child = child_od_info_new(dir, ev);
   if(new_child)
@@ -341,37 +363,118 @@ impl_OAF_ActivationContext_remove_directory(impl_POA_OAF_ActivationContext * ser
 {
   GSList *cur;
 
-  for(cur = servant->dirs; cur; cur = cur->next) {
-    ChildODInfo *child;
-    child = cur->data;
-    if(CORBA_Object_is_equivalent(dir, child->obj, ev)) {
-      servant->dirs = g_slist_remove(servant->dirs, child);
-      child_od_info_free(child, ev);
-      break;
+  for(cur = servant->dirs; cur; cur = cur->next)
+    {
+      ChildODInfo *child;
+      child = cur->data;
+
+      if(CORBA_Object_is_equivalent(dir, child->obj, ev))
+	{
+	  if(servant->refs)
+	    {
+	      CORBA_Object_release(child->obj, ev);
+	      child->obj = CORBA_OBJECT_NIL;
+	    }
+	  else
+	    {
+	      servant->dirs = g_slist_remove(servant->dirs, child);
+	      child_od_info_free(child, ev);
+	    }
+	  break;
+	}
     }
-  }
 
   if(!cur)
     CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
 			ex_OAF_ActivationContext_NotListed, NULL);
 }
 
-static CORBA_Object
+static void
 ac_do_activation(impl_POA_OAF_ActivationContext *servant,
 		 OAF_ServerInfo *server,
+		 OAF_ActivationResult *out,
+		 OAF_ActivationFlags flags,
+		 const char *hostname,
+		 CORBA_Context ctx,
 		 CORBA_Environment *ev)
 {
   ChildODInfo *child;
-  CORBA_Object retval;
+  OAF_ServerInfo *activatable;
+  int num_layers;
 
+  /* When doing checks for shlib loadability, we have to find the info on the factory object in case
+     a factory is inside a shlib */
   child = ac_find_child_for_server(servant, server, ev);
 
   if(!child || !child->obj || ev->_major != CORBA_NO_EXCEPTION)
-    return CORBA_OBJECT_NIL;
+    return;
 
-  retval = OAF_ObjectDirectory_activate(child->obj, server->iid, ev);
-  if(ev->_major != CORBA_NO_EXCEPTION)
-    retval = CORBA_OBJECT_NIL;
+  for(num_layers = 0, activatable = server;
+      activatable && !strcmp(activatable->server_type, "factory");
+      num_layers++)
+    {
+      activatable = g_hash_table_lookup(child->by_iid, activatable->location_info);
+    }
+
+  /* A shared library must be on the same host as the activator in
+     order for loading to work properly (no, we're not going to
+     bother with loading a remote shlib into a process - it gets far too complicated
+     far too quickly :-) */
+  if(activatable && !strcmp(activatable->server_type, "shlib")
+     && !(flags & OAF_FLAG_NO_LOCAL)
+     && (hostname && !strcmp(activatable->hostname, hostname)))
+    {
+      int j;
+
+      out->_d = OAF_RESULT_SHLIB;
+      out->_u.res_shlib._length = num_layers + 1;
+      out->_u.res_shlib._buffer = CORBA_sequence_CORBA_string_allocbuf(num_layers);
+
+      for(j = 0, activatable = server; activatable && !strcmp(activatable->server_type, "factory"); j++)
+	{
+	  out->_u.res_shlib._buffer[j] = CORBA_string_dup(activatable->iid);
+	  activatable = g_hash_table_lookup(child->by_iid, activatable->location_info);
+	}
+      out->_u.res_shlib._buffer[j] = CORBA_string_dup(activatable->iid);
+    }
+  else
+    {
+      CORBA_Object retval;
+
+      retval = OAF_ObjectDirectory_activate(child->obj, server->iid, servant->me, flags, ctx, ev);
+      if(ev->_major == CORBA_NO_EXCEPTION)
+	{
+	  out->_d = OAF_RESULT_OBJECT;
+	  out->_u.res_object = retval;
+	}
+    }
+}
+
+static char *
+ctx_get_value(CORBA_Context ctx, const char *propname, CORBA_Environment *ev)
+{
+  CORBA_NVList *nvout;
+  char *retval;
+
+  /* Figure out what the host the activating client is running on (for
+     purposes of fun & pleasure) */
+  CORBA_Context_get_values(ctx, NULL, 0, propname, &nvout, ev);
+  if (ev->_major == CORBA_NO_EXCEPTION)
+    {
+      if (nvout->list->len > 0)
+	{
+	  CORBA_NamedValue *nv;
+
+	  nv = &g_array_index(nvout->list, CORBA_NamedValue, 0);
+	  retval = g_strdup(*(char **)nv->argument._value);
+	}
+      else
+	retval = NULL;
+
+      CORBA_NVList_free(nvout, ev);
+    }
+  else
+    retval = NULL;
 
   return retval;
 }
@@ -379,91 +482,62 @@ ac_do_activation(impl_POA_OAF_ActivationContext *servant,
 static OAF_ActivationResult *
 impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
 				    CORBA_char * requirements,
-				    OAF_StringList * selection_order,
+				    GNOME_stringlist * selection_order,
+				    OAF_ActivationFlags flags,
 				    CORBA_Context ctx,
 				    CORBA_Environment * ev)
 {
-   OAF_ActivationResult *retval = NULL;
-   OAF_ServerInfo **items, *curitem;
-   int i;
-   char *hostname;
-   CORBA_NVList *nvout;
+  OAF_ActivationResult *retval = NULL;
+  OAF_ServerInfo **items, *curitem;
+  int i;
+  char *hostname;
 
-   /* Figure out what the host the activating client is running on (for
-      purposes of fun & pleasure) */
-   CORBA_Context_get_values(ctx, NULL, 0, "hostname", &nvout, ev);
-   if (ev->_major == CORBA_NO_EXCEPTION)
-     {
-       if (nvout->list->len > 0)
-	 {
-	   CORBA_NamedValue *nv;
 
-	   nv = &g_array_index(nvout->list, CORBA_NamedValue, 0);
-	   hostname = g_strdup(*(char **)nv->argument._value);
-	 }
-       else
-	 hostname = NULL;
+  servant->refs++;
+  hostname = ctx_get_value(ctx, "hostname", ev);
 
-       CORBA_NVList_free(nvout, ev);
-     }
-   else
-     hostname = NULL;
+  ac_update_lists(servant, ev);
 
-   ac_update_lists(servant, ev);
+  items = oaf_alloca(servant->total_servers * sizeof(OAF_ServerInfo *));
+  ac_query_run(servant, requirements, selection_order, ctx, items, ev);
 
-   items = oaf_alloca(servant->total_servers * sizeof(OAF_ServerInfo *));
-   ac_query_run(servant, requirements, selection_order, ctx, items, ev);
+  if(ev->_major != CORBA_NO_EXCEPTION)
+    goto out;
 
-   if(ev->_major != CORBA_NO_EXCEPTION)
-     goto out;
+  retval = OAF_ActivationResult__alloc();
+  retval->_d = OAF_RESULT_NONE;
 
-   retval = OAF_ActivationResult__alloc();
-   retval->_d = OAF_RESULT_NONE;
+  for(i = 0; (retval->_d == OAF_RESULT_NONE) && items[i] && (i < servant->total_servers); i++)
+    {
+      curitem = items[i];
 
-   for(i = 0; items[i] && i < servant->total_servers; i++) {
-     curitem = items[i];
-
-     /* A shared library must be on the same host as the activator in
-	order for loading to work properly (no, we're not going to
-	bother with remote shlib loading - it gets far too complicated
-	far too quickly :-) */
-     if(!strcmp(curitem->server_type, "shlib")
-	&& (!hostname || strcmp(curitem->hostname, hostname)))
-       continue;
-
-     if(!strcmp(curitem->server_type, "shlib")) {
-       retval->_d = OAF_RESULT_SHLIB;
-       retval->_u.res_shlib = CORBA_string_dup(curitem->location_info);
-       break;
-     } else {
-       retval->_u.res_object = ac_do_activation(servant, curitem, ev);
-
-       if(!CORBA_Object_is_nil(retval->_u.res_object, ev)) {
-	 retval->_d = OAF_RESULT_OBJECT;
-	 break;
-       }
-     }
-   }
+      ac_do_activation(servant, curitem, retval, flags, hostname, ctx, ev);
+    }
 
  out:
-   g_free(hostname);
-
-   return retval;
+  g_free(hostname);
+  
+  servant->refs--;
+  
+  return retval;
 }
 
 static void
 ac_update_lists(impl_POA_OAF_ActivationContext *servant,
-		CORBA_Environment *ev)
+  CORBA_Environment *ev)
 {
-  GSList *cur;
+GSList *cur;
 
-  for(cur = servant->dirs; cur; cur = cur->next)
-    ac_update_list(servant, cur->data, ev);
-}
+if(servant->refs > 0)
+     return;
+
+     for(cur = servant->dirs; cur; cur = cur->next)
+     ac_update_list(servant, cur->data, ev);
+     }
 
 static OAF_ServerInfoList *
 impl_OAF_ActivationContext__get_servers(impl_POA_OAF_ActivationContext * servant,
-					CORBA_Environment * ev)
+  CORBA_Environment * ev)
 {
   OAF_ServerInfoList *retval;
   GSList *cur;
@@ -479,17 +553,19 @@ impl_OAF_ActivationContext__get_servers(impl_POA_OAF_ActivationContext * servant
   retval->_buffer = CORBA_sequence_OAF_ServerInfo_allocbuf(total);
   CORBA_sequence_set_release(retval, CORBA_TRUE);
 
-  for(i = 0; i < total; ) {
-    for(cur = servant->dirs; cur; cur = cur->next) {
-      ChildODInfo *child;
-      int j;
+  for(i = 0; i < total; )
+    {
+      for(cur = servant->dirs; cur; cur = cur->next)
+	{
+	  ChildODInfo *child;
+	  int j;
 
-      child = cur->data;
+	  child = cur->data;
 
-      for(j = 0; j < child->list->_length; j++, i++)
-	OAF_ServerInfo__copy(&retval->_buffer[i], &child->list->_buffer[j]);
+	  for(j = 0; j < child->list->_length; j++, i++)
+	    OAF_ServerInfo__copy(&retval->_buffer[i], &child->list->_buffer[j]);
+	}
     }
-  }
 
   return retval;
 }
@@ -501,16 +577,17 @@ ac_find_child_for_server(impl_POA_OAF_ActivationContext *servant,
 {
   GSList *cur;
 
-  for(cur = servant->dirs; cur; cur = cur->next) {
-    ChildODInfo *child;
+  for(cur = servant->dirs; cur; cur = cur->next)
+    {
+      ChildODInfo *child;
 
-    if(CORBA_Object_is_nil(child->obj, ev) || !child->list)
-      continue;
+      if(CORBA_Object_is_nil(child->obj, ev) || !child->list)
+	continue;
 
-    if((server > child->list->_buffer)
-       && (server < (child->list->_buffer + child->list->_length)))
-      return child;
-  }
+      if((server > child->list->_buffer)
+	 && (server < (child->list->_buffer + child->list->_length)))
+	return child;
+    }
 
   return NULL;
 }
@@ -528,17 +605,18 @@ ac_query_get_var(OAF_ServerInfo *si, const char *id, QueryContext *qctx)
   if(!child)
     goto out;
 
-  if (!strcasecmp(id, "_active")) {
-    CORBA_Environment ev;
+  if (!strcasecmp(id, "_active"))
+    {
+      CORBA_Environment ev;
 
-    CORBA_exception_init(&ev);
-    child_od_update_active(child, &ev);
-    CORBA_exception_free(&ev);
+      CORBA_exception_init(&ev);
+      child_od_update_active(child, &ev);
+      CORBA_exception_free(&ev);
 
-    retval.value_known = TRUE;
-    retval.type = CONST_BOOLEAN;
-    retval.u.v_boolean = g_hash_table_lookup(child->active_servers, si->iid)?TRUE:FALSE;
-  }
+      retval.value_known = TRUE;
+      retval.type = CONST_BOOLEAN;
+      retval.u.v_boolean = g_hash_table_lookup(child->active_servers, si->iid)?TRUE:FALSE;
+    }
 
  out:
 
@@ -552,7 +630,7 @@ ac_query_get_var(OAF_ServerInfo *si, const char *id, QueryContext *qctx)
 static void
 ac_query_run(impl_POA_OAF_ActivationContext * servant,
 	     CORBA_char * requirements,
-	     OAF_StringList * selection_order,
+	     GNOME_stringlist * selection_order,
 	     CORBA_Context ctx,
 	     OAF_ServerInfo **items,
 	     CORBA_Environment * ev)
@@ -571,50 +649,54 @@ ac_query_run(impl_POA_OAF_ActivationContext * servant,
 
   /* First, parse the query */
   errstr = (char *)qexp_parse(requirements, &qexp_requirements);
-  if(errstr) {
-    ex = OAF_ActivationContext_ParseFailed__alloc();
-    ex->description = CORBA_string_dup(errstr);
-    g_free(errstr);
-    CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
-			ex_OAF_ActivationContext_ParseFailed, ex);
-    return;
-  }
-
-  qexp_sort_items = oaf_alloca(selection_order->_length * sizeof(QueryExpr *));
-  for(i = 0; i < selection_order->_length; i++) {
-    errstr = (char *)qexp_parse(selection_order->_buffer[i], &qexp_sort_items[i]);
-
-    if(errstr) {
-      qexp_free(qexp_requirements);
-      for(i--; i >= 0; i--)
-	qexp_free(qexp_sort_items[i]);
-
+  if(errstr)
+    {
       ex = OAF_ActivationContext_ParseFailed__alloc();
       ex->description = CORBA_string_dup(errstr);
       g_free(errstr);
-
       CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
 			  ex_OAF_ActivationContext_ParseFailed, ex);
       return;
     }
-  }
+
+  qexp_sort_items = oaf_alloca(selection_order->_length * sizeof(QueryExpr *));
+  for(i = 0; i < selection_order->_length; i++)
+    {
+      errstr = (char *)qexp_parse(selection_order->_buffer[i], &qexp_sort_items[i]);
+
+      if(errstr)
+	{
+	  qexp_free(qexp_requirements);
+	  for(i--; i >= 0; i--)
+	    qexp_free(qexp_sort_items[i]);
+
+	  ex = OAF_ActivationContext_ParseFailed__alloc();
+	  ex->description = CORBA_string_dup(errstr);
+	  g_free(errstr);
+
+	  CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
+			      ex_OAF_ActivationContext_ParseFailed, ex);
+	  return;
+	}
+    }
 
   total = servant->total_servers;
   orig_items = oaf_alloca(total * sizeof(OAF_ServerInfo *));
 
-  for(item_count = 0, cur = servant->dirs; cur; cur = cur->next) {
-    ChildODInfo *child;
-    int i;
+  for(item_count = 0, cur = servant->dirs; cur; cur = cur->next)
+    {
+      ChildODInfo *child;
+      int i;
 
-    child = cur->data;
+      child = cur->data;
 
-    if(child->obj == CORBA_OBJECT_NIL)
-      continue;
+      if(child->obj == CORBA_OBJECT_NIL)
+	continue;
 
-    for(i = 0; i < child->list->_length;
-	i++, item_count++)
-      items[item_count] = &child->list->_buffer[i];
-  }
+      for(i = 0; i < child->list->_length;
+	  i++, item_count++)
+	items[item_count] = &child->list->_buffer[i];
+    }
 
   memcpy(orig_items, items, item_count * sizeof(OAF_ServerInfo *));
   orig_item_count = item_count;
@@ -625,10 +707,11 @@ ac_query_run(impl_POA_OAF_ActivationContext * servant,
   qctx.id_evaluator = ac_query_get_var;
   qctx.user_data = servant;
 
-  for(i = 0; i < item_count; i++) {
-    if(!qexp_matches(items[i], qexp_requirements, &qctx))
-      items[i] = NULL;
-  }
+  for(i = 0; i < item_count; i++)
+    {
+      if(!qexp_matches(items[i], qexp_requirements, &qctx))
+	items[i] = NULL;
+    }
 
   qexp_sort(items, item_count, qexp_sort_items, selection_order->_length, &qctx);
 }
@@ -636,7 +719,7 @@ ac_query_run(impl_POA_OAF_ActivationContext * servant,
 static OAF_ServerInfoList *
 impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
 				 CORBA_char * requirements,
-				 OAF_StringList * selection_order,
+				 GNOME_stringlist * selection_order,
 				 CORBA_Context ctx,
 				 CORBA_Environment * ev)
 {
@@ -644,6 +727,8 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
   OAF_ServerInfo **items;
   int item_count;
   int i, j, total;
+
+  servant->refs++;
 
   retval = OAF_ServerInfoList__alloc();
   retval->_length = 0;
@@ -656,24 +741,29 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
 
   ac_query_run(servant, requirements, selection_order, ctx, items, ev);
 
-  if(ev->_major == CORBA_NO_EXCEPTION) {
-    for(total = i = 0; i < item_count; i++) {
-      if(items[i])
-	total++;
+  if(ev->_major == CORBA_NO_EXCEPTION)
+    {
+      for(total = i = 0; i < item_count; i++)
+	{
+	  if(items[i])
+	    total++;
+	}
+
+      retval->_length = total;
+      retval->_buffer = CORBA_sequence_OAF_ServerInfo_allocbuf(total);
+
+      for(i = j = 0; i < item_count; i++)
+	{
+	  if(!items[i])
+	    continue;
+      
+	  OAF_ServerInfo__copy(&retval->_buffer[j], items[i]);
+      
+	  j++;
+	}
     }
 
-    retval->_length = total;
-    retval->_buffer = CORBA_sequence_OAF_ServerInfo_allocbuf(total);
-
-    for(i = j = 0; i < item_count; i++) {
-      if(!items[i])
-	continue;
-      
-      OAF_ServerInfo__copy(&retval->_buffer[j], items[i]);
-      
-      j++;
-    }
-  }
+  servant->refs--;
 
   return retval;
 }
@@ -681,12 +771,55 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
 static OAF_ActivationResult *
 impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * servant,
 					    OAF_ActivationID aid,
+					    OAF_ActivationFlags flags,
 					    CORBA_Context ctx,
 					    CORBA_Environment * ev)
 {
   OAF_ActivationResult *retval;
+  GSList *cur;
+  OAFActivationInfo *ainfo;
+  ChildODInfo *child = NULL;
+  OAF_ServerInfo *si;
+  char *hostname;
+
+  servant->refs++;
 
   retval = OAF_ActivationResult__alloc();
+  retval->_d = OAF_RESULT_NONE;
+
+  ainfo = oaf_actid_parse(aid);
+
+  if(!ainfo)
+    goto out;
+
+  for(cur = servant->dirs; cur && !child; cur = cur->next)
+    {
+      ChildODInfo *curchild;
+
+      curchild = cur->data;
+
+      if(!strcmp(ainfo->user, curchild->username)
+	 && !strcmp(ainfo->host, curchild->hostname)
+	 && !strcmp(ainfo->domain, curchild->domain))
+	child = curchild;
+    }
+
+  if(!child)
+    goto out; /* XXX in future, add hook to allow starting a new OD on demand */
+
+  si = g_hash_table_lookup(child->by_iid, ainfo->iid);
+  if(!si)
+    goto out;
+
+  hostname = ctx_get_value(ctx, "hostname", ev);
+
+  ac_do_activation(servant, si, retval, flags, hostname, ctx, ev);
+
+  g_free(hostname);
+
+ out:
+  servant->refs--;
+  oaf_actinfo_free(ainfo);
 
   return retval;
 }

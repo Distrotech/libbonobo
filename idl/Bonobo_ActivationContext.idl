@@ -1,8 +1,13 @@
+#include "gnome-factory.idl"
+
 module OAF {
   typedef string ImplementationID;
   typedef string ActivationID;
+  interface ActivationContext;
 
-  typedef sequence<string> StringList;
+  typedef long ActivationFlags;
+  const ActivationFlags FLAG_NO_LOCAL = 1<<0; // No shared libraries
+  const ActivationFlags FLAG_IGNORE_EXISTING = 1<<1;
 
   /* ActivationResult */
   enum ActivationResultType { RESULT_OBJECT, RESULT_SHLIB, RESULT_NONE };
@@ -11,7 +16,7 @@ module OAF {
   case RESULT_OBJECT:
     Object res_object;
   case RESULT_SHLIB:
-    string res_shlib;
+    GNOME::stringlist res_shlib;
   };
 
   /* Attribute */
@@ -24,7 +29,7 @@ module OAF {
   case A_BOOLEAN:
     boolean value_boolean;
   case A_STRINGV:
-    StringList value_stringv;
+    GNOME::stringlist value_stringv;
   };
   struct Attribute {
     string name;
@@ -62,7 +67,8 @@ module OAF {
 
     readonly attribute string username, hostname, domain;
 
-    Object activate(in ImplementationID iid);
+    Object activate(in ImplementationID iid, in ActivationContext ac, in ActivationFlags flags)
+      context("username", "hostname", "domain");
 
     /* Ensures consistency for activations of publicly advertised objects */
     void lock();
@@ -81,17 +87,18 @@ module OAF {
     void remove_directory(in ObjectDirectory dir) raises(NotListed);
 
     ActivationResult activate(in string requirements,
-			      in StringList selection_order)
+			      in GNOME::stringlist selection_order,
+			      in ActivationFlags flags)
       raises(ParseFailed)
       context("username", "hostname", "domain");
 
     readonly attribute ServerInfoList servers;
     ServerInfoList query(in string requirements,
-			 in StringList selection_order)
+			 in GNOME::stringlist selection_order)
       raises(ParseFailed)
       context("username", "hostname", "domain");
 
-    ActivationResult activate_from_id(in ActivationID aid)
+    ActivationResult activate_from_id(in ActivationID aid, in ActivationFlags flags)
       context("username", "hostname", "domain");
   };
 };

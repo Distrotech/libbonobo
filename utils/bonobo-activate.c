@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
   poptFreeContext(ctx);
 
   {
-    OAF_StringList reqs = {0};
+    GNOME_stringlist reqs = {0};
 
     slist = OAF_ActivationContext_query(ac, query, &reqs, oaf_context_get(), &ev);
     switch(ev._major) {
