@@ -5,4 +5,6 @@ Makefile
 Makefile.in
 liboaf.hml
 liboaf-unused.txt
+liboaf-undocumented.txt
 tmpl/liboaf-unused.sgml
+*.stamp
