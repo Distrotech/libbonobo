@@ -27,6 +27,9 @@
 #include "bonobo-running-context.h"
 #include "bonobo-object-directory.h"
 
+/* Shared stuff with BonoboMObject */
+extern int bonobo_object_get_refs (BonoboObject *object);
+
 /* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
 
 POA_Bonobo_Unknown__vepv bonobo_object_vepv;
@@ -1195,4 +1198,12 @@ void
 bonobo_object_slist_unref_all (GSList **list)
 {
 	g_warning ("Dummy - cut and paste above");
+}
+
+int
+bonobo_object_get_refs (BonoboObject *object)
+{
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), -1);
+
+	return object->priv->ao->ref_count;
 }

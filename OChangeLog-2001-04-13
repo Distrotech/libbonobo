@@ -1,3 +1,11 @@
+2001-02-05  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/Makefile.am: Add bonobo-mobject.
+
+	* bonobo/bonobo-mobject.[ch]: Add.
+
+	* bonobo/bonobo-object.c (bonobo_object_get_refs): impl.
+
 2001-02-05  Cody Russell  <bratsche@gnome.org>
 	* bonobo/bonobo-ui-sync-toolbar.c: Force GnomeDock to resize when
 	the BonoboUIToolbar's style changes.

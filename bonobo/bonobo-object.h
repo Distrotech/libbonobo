@@ -124,4 +124,3 @@ void      bonobo_object_slist_unref_all (GSList       **list);
 END_GNOME_DECLS
 
 #endif
-
