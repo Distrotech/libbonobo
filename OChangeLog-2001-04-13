@@ -1,3 +1,10 @@
+2000-12-11  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker-util.c (get_async1_cb): impl.
+	(get_object_async_ctx_free): impl.
+	(bonobo_get_object_async): impl.
+	(get_async2_cb): impl.
+
 2000-12-11  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-ui-toolbar.c: (impl_destroy):

@@ -562,6 +562,57 @@ bonobo_moniker_resolve_async_default (Bonobo_Moniker       moniker,
 				      ev, timeout_usec, cb, user_data);
 }
 
+
+typedef struct {
+	guint                timeout_usec;
+	char                *interface_name;
+	BonoboMonikerAsyncFn cb;
+	gpointer             user_data;
+} get_object_async_ctx_t;
+
+static void
+get_object_async_ctx_free (get_object_async_ctx_t *ctx)
+{
+	if (ctx) {
+		g_free (ctx->interface_name);
+		g_free (ctx);
+	}
+}
+
+static void
+get_async2_cb (Bonobo_Unknown     object,
+	       CORBA_Environment *ev,
+	       gpointer           user_data)
+{
+	get_object_async_ctx_t *ctx = user_data;
+
+	ctx->cb (object, ev, ctx->user_data);
+
+	get_object_async_ctx_free (ctx);
+}	
+
+static void
+get_async1_cb (Bonobo_Unknown     object,
+	       CORBA_Environment *ev,
+	       gpointer           user_data)
+{
+	get_object_async_ctx_t *ctx = user_data;
+
+	if (BONOBO_EX (ev)) {
+		ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
+		get_object_async_ctx_free (ctx);
+	} else {
+                bonobo_moniker_resolve_async_default (
+			object, ctx->interface_name, ev,
+			ctx->timeout_usec, get_async2_cb, ctx);
+
+		if (BONOBO_EX (ev)) {
+			ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
+			get_object_async_ctx_free (ctx);
+		}
+	}
+}	
+
 void
 bonobo_get_object_async (const CORBA_char    *name,
 			 const char          *interface_name,
@@ -570,5 +621,19 @@ bonobo_get_object_async (const CORBA_char    *name,
 			 BonoboMonikerAsyncFn cb,
 			 gpointer             user_data)
 {
-	g_warning ("As yet unimplemented");
+	get_object_async_ctx_t *ctx;
+
+	g_return_if_fail (ev != NULL);
+	g_return_if_fail (cb != NULL);
+	g_return_if_fail (name != NULL);
+	g_return_if_fail (interface_name != NULL);
+
+	ctx = g_new0 (get_object_async_ctx_t, 1);
+	ctx->cb = cb;
+	ctx->user_data = user_data;
+	ctx->interface_name = g_strdup (interface_name);
+	ctx->timeout_usec = timeout_usec;
+
+	bonobo_moniker_client_new_from_name_async (
+		name, ev, timeout_usec, get_async1_cb, ctx);
 }
