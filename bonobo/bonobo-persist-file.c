@@ -62,7 +62,7 @@ impl_load (PortableServer_Servant servant,
 	int result;
 	
 	if (pf->load_fn != NULL)
-		result = (*pf->load_fn)(pf, filename, pf->closure, ev);
+		result = (*pf->load_fn)(pf, filename, ev, pf->closure);
 	else {
 		GtkObjectClass *oc = GTK_OBJECT (pf)->klass;
 		BonoboPersistFileClass *class = BONOBO_PERSIST_FILE_CLASS (oc);
@@ -86,7 +86,7 @@ impl_save (PortableServer_Servant servant,
 	int result;
 	
 	if (pf->save_fn != NULL)
-		result = (*pf->save_fn)(pf, filename, pf->closure, ev);
+		result = (*pf->save_fn)(pf, filename, ev, pf->closure);
 	else {
 		GtkObjectClass *oc = GTK_OBJECT (pf)->klass;
 		BonoboPersistFileClass *class = BONOBO_PERSIST_FILE_CLASS (oc);

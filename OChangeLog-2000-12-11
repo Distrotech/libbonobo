@@ -1,3 +1,8 @@
+2000-10-27  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-persist-file.c (impl_load, impl_save): Use correct
+	order or arguments to the load_fn and save_fn.
+
 2000-10-26  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar.c (impl_destroy): free the priv->items list.
