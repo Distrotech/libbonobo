@@ -1,5 +1,5 @@
-NULL=
 
+NULL=
 man_MANS = bonobo-activation-server.1
 
 bin_PROGRAMS=bonobo-activation-server activation-client
@@ -45,7 +45,8 @@ serverinfo_DATA = $(server_in_files:.server.in=.server)
 @INTLTOOL_SERVER_RULE@
 
 EXTRA_DIST=activation-context-query-lexer.l activation-context-query-parser.y \
-	$(server_in_files) $(serverinfo_DATA)
+	$(server_in_files) $(serverinfo_DATA)	\
+	$(man_MANS)
 
 YFLAGS = -d -v
 
