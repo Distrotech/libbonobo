@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-05 14:40+0000\n"
-"PO-Revision-Date: 2004-08-19 02:02+0300\n"
+"POT-Creation-Date: 2005-02-23 23:05+0100\n"
+"PO-Revision-Date: 2005-02-24 00:40+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -29,32 +29,32 @@ msgstr "Ei selvinnyt, missä lapsiprosessissa palvelin on luetteloitu"
 msgid "Not a valid Activation ID"
 msgstr "Epäkelpo aktivointi-ID"
 
-#: activation-server/activation-server-main.c:68
+#: activation-server/activation-server-main.c:70
 msgid "Directory to read .server files from"
 msgstr "Kansio, josta .server-tiedostot luetaan"
 
-#: activation-server/activation-server-main.c:68
+#: activation-server/activation-server-main.c:70
 msgid "DIRECTORY"
 msgstr "KANSIO"
 
-#: activation-server/activation-server-main.c:71
+#: activation-server/activation-server-main.c:73
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Toimi ActivationContextina (oletuksena on vain ObjectDirectory)"
 
-#: activation-server/activation-server-main.c:75
+#: activation-server/activation-server-main.c:77
 msgid "File descriptor to write IOR to"
 msgstr "Tiedostokahva, johon IOR kirjoittuu"
 
-#: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:200
+#: activation-server/activation-server-main.c:77
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:83
+#: activation-server/activation-server-main.c:85
 msgid "Query expression to evaluate"
 msgstr "Käsiteltävä kyselylauseke"
 
-#: activation-server/activation-server-main.c:83
+#: activation-server/activation-server-main.c:85
 msgid "EXPRESSION"
 msgstr "LAUSEKE"
 
@@ -74,7 +74,7 @@ msgstr "Huomautuspalvelu"
 msgid "Notification service for activation"
 msgstr "Huomautuspalvelu aktivointia varten"
 
-#: activation-server/object-directory-activate.c:187
+#: activation-server/object-directory-activate.c:186
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "shlib-olioiden aktivointi etäprosessissa ei onnistu vielä"
 
@@ -133,54 +133,37 @@ msgstr "Virheellisen muotoisen XML-tiedoston jäsennys epäonnistui: %s"
 msgid "Trying dir %s"
 msgstr "Kokeillaan kansiota %s"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:102
+#: bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
 "Lapsiprosessi ei lähettänyt virheviestiä: tuntematon virhe on tapahtunut"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:174
+#: bonobo-activation/bonobo-activation-fork-server.c:177
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Luku lapsiprosessista epäonnistui: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:297
-msgid "Couldn't fork a new process"
-msgstr "Uuden prosessin haarautuminen epäonnistui"
+#: bonobo-activation/bonobo-activation-fork-server.c:184
+msgid "EOF from child process\n"
+msgstr "Tiedoston loppu lapsiprosessilta\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:318
-#, c-format
-msgid "Child received signal %u (%s)"
-msgstr "Lapsiprosessi vastaanotti signaalin %u (%s)"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:323
-#, c-format
-msgid "Unknown non-exit error (status is %u)"
-msgstr "Tuntematon ei-lopetusvirhe (tila on %u)"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:404
-#, c-format
-msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr ""
-"bonobo-aktivointi ei onnistunut asettamaan komennon %s prosessiryhmää: %s\n"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:416
-#, c-format
-msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Ohjelman %s käynnistys epäonnistui: %d (%s)\n"
+#: bonobo-activation/bonobo-activation-fork-server.c:332
+msgid "Couldn't spawn a new process"
+msgstr "Uuden prosessin käynnistäminen epäonnistui"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "Maa-asetustolla on liian monta alias-tasoa, mikä voi merkitä silmukkaa"
 
-#: bonobo-activation/bonobo-activation-init.c:200
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "File descriptor to print IOR on"
 msgstr "Tiedostokahva, johon IOR tulostuu"
 
-#: bonobo-activation/bonobo-activation-init.c:202
+#: bonobo-activation/bonobo-activation-init.c:197
 msgid "IID to activate"
 msgstr "Aktivoitava IID"
 
-#: bonobo-activation/bonobo-activation-init.c:204
+#: bonobo-activation/bonobo-activation-init.c:199
 msgid "Prevent registering of server with OAF"
 msgstr "Estä palvelimen rekisteröityminen OAF:iin"
 
@@ -500,3 +483,17 @@ msgstr "Näytä asetustiedostossa olevat kansiot"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Näytä asetustiedoston polku"
+
+#~ msgid "Child received signal %u (%s)"
+#~ msgstr "Lapsiprosessi vastaanotti signaalin %u (%s)"
+
+#~ msgid "Unknown non-exit error (status is %u)"
+#~ msgstr "Tuntematon ei-lopetusvirhe (tila on %u)"
+
+#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
+#~ msgstr ""
+#~ "bonobo-aktivointi ei onnistunut asettamaan komennon %s prosessiryhmää: %"
+#~ "s\n"
+
+#~ msgid "Failed to execute %s: %d (%s)\n"
+#~ msgstr "Ohjelman %s käynnistys epäonnistui: %d (%s)\n"
