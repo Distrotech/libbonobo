@@ -1,8 +1,12 @@
+2002-04-20  Christophe Merlet  <christophe@merlet.net>
+
+	* fr.po: Updated French translation.
+
 2002-04-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian (bokmål) translation.
 
-2002-04-11  Christophe Merlet  <redfox@eikonex.org>
+2002-04-11  Christophe Merlet  <christophe@merlet.net>
 
 	* fr.po: Updated French translation from work of
 	Christophe fergeau <teuf@users.sourceforge.net>.
@@ -305,7 +309,7 @@
 	are real po fles
 	* az.po: Added Azeri file
 
-2001-05-30  Christophe Merlet  <redfox@eikonex.org>
+2001-05-30  Christophe Merlet  <christophe@merlet.net>
 
 	* fr.po: Added French translation.
 
