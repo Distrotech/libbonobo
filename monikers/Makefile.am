@@ -96,5 +96,4 @@ moniker_test_LDADD =			\
 EXTRA_DIST = $(OAF_FILES)			\
 	$(POST_PROCESSED_OAF_FILES:.oaf.in=.oaf)\
 	$(oaf_DATA)				\
-	Bonobo_Moniker_cache.oaf.in		\
-	Bonobo_Moniker_std.oaf.in.in
+	Bonobo_Moniker_cache.oaf.in

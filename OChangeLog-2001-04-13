@@ -1,3 +1,10 @@
+2001-01-15  Darin Adler  <darin@eazel.com>
+
+	* monikers/Makefile.am: Remove an old file name accidentally
+	left behind.
+	* tests/.cvsignore: Ignore the moniker test binary as well as
+	the other test binaries.
+
 2001-01-15  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/Makefile.am: Fix the build problems caused by
