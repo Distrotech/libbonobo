@@ -1,3 +1,8 @@
+2000-10-09  Mathieu Lacage  <mathieu@eazel.com>
+
+	* bonobo/bonobo-ui-util.c: (bonobo_ui_util_xml_get_icon_pixbuf):
+	fix segfault in certain cases.
+
 2000-10-09  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-compat.c (do_set_pixmap, deal_with_pixmap): chop
