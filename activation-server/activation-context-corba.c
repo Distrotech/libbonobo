@@ -826,7 +826,17 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 	OAFActivationInfo *ainfo;
 	ChildODInfo *child = NULL;
 	OAF_ServerInfo *si;
-	char *hostname;
+	char *context_username;
+	char *context_hostname;
+	char *context_domain;
+        char *tmp_aid;
+        char *requirements;
+        char *iid_requirement;
+        char *username_requirement;
+        char *hostname_requirement;
+        char *domain_requirement;
+        char *sort_criteria[4];
+        GNOME_stringlist selection_order;
 
 	ac_update_lists (servant, ev);
 
@@ -835,36 +845,87 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 	retval = OAF_ActivationResult__alloc ();
 	retval->res._d = OAF_RESULT_NONE;
 
-	ainfo = oaf_actid_parse (aid);
+
+        if (strncmp ("OAFIID:", aid, 7) == 0) {
+                tmp_aid = g_strconcat ("OAFAID:[", aid, "]", NULL);
+                ainfo = oaf_actid_parse (tmp_aid);
+                g_free (tmp_aid);
+        } else {
+                ainfo = oaf_actid_parse (aid);
+        }
 
 	if (!ainfo) {
-		if (!strncmp ("OAFIID:", aid, 7)) {
-			static const char *query_prefix = "iid == \'";
-			static const char *query_suffix = "\'";
-			char *requirements;
-			GNOME_stringlist selection_order;
-
-			requirements = g_malloc (strlen (query_prefix) +
-						 strlen (aid) +
-						 strlen (query_suffix) + 1);
-			strcpy (requirements, query_prefix);
-			strcat (requirements, aid);
-			strcat (requirements, query_suffix);
-
-			selection_order._length = 0;
-			selection_order._buffer = NULL;
-
-			retval =
-				impl_OAF_ActivationContext_activate (servant,
-								     requirements,
-								     &selection_order,
-								     flags,
-								     ctx, ev);
-			goto out;
-		} else {
-			goto out;
-		}
+                goto out;
 	}
+
+        iid_requirement = g_strconcat ("iid == \'", ainfo->iid, "\' ", NULL);
+
+        if (ainfo->user) {
+                username_requirement = g_strconcat ("AND username == \'", ainfo->user, "\'", NULL);
+        } else {
+                username_requirement = g_strdup ("");
+        }
+        
+        if (ainfo->host) {
+                hostname_requirement = g_strconcat ("AND hostname == \'", ainfo->host, "\'", NULL);
+        } else {
+                hostname_requirement = g_strdup ("");
+        }
+        
+        if (ainfo->domain) {
+                domain_requirement = g_strconcat ("AND domain == \'", ainfo->domain, "\'", NULL);
+        } else {
+                domain_requirement = g_strdup ("");
+        }
+
+        requirements = g_strconcat (iid_requirement, username_requirement, 
+                                    hostname_requirement, domain_requirement, NULL);
+
+        g_free (iid_requirement);
+        g_free (username_requirement);
+        g_free (hostname_requirement);
+        g_free (domain_requirement);
+
+        /* FIXME: either I am doing something really wrong here or
+           CORBA_Context is broken in ORBit */
+
+        context_username = ctx_get_value (ctx, "username", ev);
+        context_hostname = ctx_get_value (ctx, "hostname", ev);
+        context_domain = ctx_get_value (ctx, "domain", ev);
+        
+        sort_criteria[0] = g_strconcat ("username == \'", context_username, "\'", NULL);
+        sort_criteria[1] = g_strconcat ("hostname == \'", context_hostname, "\'", NULL);
+        sort_criteria[2] = g_strconcat ("session == \'", context_domain, "\'", NULL);
+        sort_criteria[3] = NULL;
+
+        puts ("XXX - sort");
+        puts (sort_criteria[0]);
+        puts (sort_criteria[1]);
+        puts (sort_criteria[2]);
+
+
+        g_free (context_username);
+        g_free (context_hostname);
+        g_free (context_domain);
+
+        selection_order._length = 3;
+        selection_order._buffer = sort_criteria;
+        CORBA_sequence_set_release (&selection_order, CORBA_FALSE);
+        
+        retval =
+                impl_OAF_ActivationContext_activate (servant,
+                                                     requirements,
+                                                     &selection_order,
+                                                     flags,
+                                                     ctx, ev);
+
+        g_free (sort_criteria[0]);
+        g_free (sort_criteria[1]);
+        g_free (sort_criteria[2]);
+
+        goto out;
+
+#if 0
 
 	for (cur = servant->dirs; cur && !child; cur = cur->next) {
 		ChildODInfo *curchild;
@@ -889,7 +950,9 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 	if (!child)
 		goto out;	/* XXX in future, add hook to allow starting a new OD on demand */
 
-	si = g_hash_table_lookup (child->by_iid, ainfo->iid);
+
+
+
 	if (!si)
 		goto out;
 
@@ -900,6 +963,7 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 	ac_do_activation (servant, si, retval, flags, hostname, ctx, ev);
 
 	g_free (hostname);
+#endif
 
       out:
 	servant->refs--;
