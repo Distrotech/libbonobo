@@ -1,3 +1,23 @@
+2000-11-11  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (destroy_priv): finalize the
+	popups before we destroy the tree they use to clean
+	up...
+
+	* bonobo/app.c (cb_do_popup): don't insert stuff that
+	isn't managed into the list.
+
+	* bonobo/bonobo-win.c (menu_build_item): return if
+	widget is NULL to calm some warnings.
+	(bonobo_window_add_popup): dirty the whole tree from
+	here down.
+
+2000-11-10  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (popup_destroy): use accessor
+	function immediately.
+	(popup_remove): prune stale widget info from the tree.
+
 2000-11-11  Maciej Stachowiak  <mjs@eazel.com>
 
 	* components/text-plain/bonobo-text-plain.c
