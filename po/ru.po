@@ -1,13 +1,13 @@
 # Copyright (C) 2001-2002 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2001-2002.
-#  Dmitry Mastrukov <dmitry@taurussoft.ru>, 2002
+# Dmitry Mastrukov <dmitry@taurussoft.org>, 2002
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "POT-Creation-Date: 2002-04-29 13:50+0200\n"
-"PO-Revision-Date: 2002-03-15 13:48+0300\n"
-"Last-Translator: Dmitry Mastrukov <dmitry@taurussoft.ru>\n"
+"PO-Revision-Date: 2002-05-03 15:35+0400\n"
+"Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
