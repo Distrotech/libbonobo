@@ -8,7 +8,8 @@ EXTRA_DIST = \
 	intltool-extract.in  \
 	intltool-merge.in    \
 	intltool-update.in   \
-	changes.txt
+	changes.txt          \
+	gtk-doc.make
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 

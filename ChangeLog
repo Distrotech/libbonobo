@@ -2,6 +2,7 @@
 
 	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Pass --enable-gtk-doc
 	to configure when making distcheck, otherwise it fails.
+	(EXTRA_DIST): Include gtk-doc.make in the distribution.
 
 	* doc/api/figures/Makefile.am: Don't delete the png files when
 	doing make maintainer-clean.
