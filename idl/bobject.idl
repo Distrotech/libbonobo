@@ -15,7 +15,7 @@ interface View : GNOME::object {
 	 * @width: width given to the view
 	 * @height: height given to the view.
 	 */
-	void size_allocate (in short widht, in short height);
+	void size_allocate (in short width, in short height);
 
 	/**
 	 * get_window:
