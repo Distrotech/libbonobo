@@ -1,3 +1,8 @@
+1999-10-24  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-embeddable.c (impl_GNOME_Embeddable_new_view): Add
+	warning if an object returned does not have a valid corba object.
+
 1999-10-22  Michael Meeks  <mmeeks@gnu.org>
 
 	* components/image-generic/bonobo-image-generic.c:

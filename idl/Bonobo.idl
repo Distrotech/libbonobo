@@ -5,6 +5,9 @@
  *     Miguel de Icaza (miguel@gnu.org)
  *
  */
+#ifndef _BONOBO_IDL_INCLUDED_
+#define _BONOBO_IDL_INCLUDED_
+
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 %{
 #pragma include_defs bonobo/bonobo.h
@@ -15,22 +18,24 @@
 #include <gnome-factory.idl>
 #include <gnome-unknown.idl>
 
-#include "gnome-storage.idl"
-#include "gnome-persist.idl"
+#include <gnome-storage.idl>
+#include <gnome-persist.idl>
 
-#include "gnome-advise.idl"
+#include <gnome-advise.idl>
 
-#include "gnome-container.idl"
-#include "gnome-client-site.idl"
-#include "gnome-ui-handler.idl"
-#include "gnome-canvas.idl"
-#include "gnome-control.idl"
-#include "gnome-embeddable.idl"
+#include <gnome-container.idl>
+#include <gnome-client-site.idl>
+#include <gnome-ui-handler.idl>
+#include <gnome-canvas.idl>
+#include <gnome-control.idl>
+#include <gnome-embeddable.idl>
 
-#include "gnome-progressive.idl"
+#include <gnome-progressive.idl>
 
-#include "gnome-desktop.idl"
+#include <gnome-desktop.idl>
 
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif
+
+#endif /* _BONOBO_IDL_INCLUDED_ */
