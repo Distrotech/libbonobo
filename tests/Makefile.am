@@ -9,7 +9,8 @@ noinst_PROGRAMS =		\
 	test-object		\
 	test-stream-mem		\
 	test-storage-mem	\
-	test-generic-factory
+	test-generic-factory	\
+	generic-factory
 
 INCLUDES =	\
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
@@ -39,7 +40,9 @@ test_storage_mem_SOURCES = test-storage-mem.c
 
 TESTS_ENVIRONMENT =					\
 	LD_LIBRARY_PATH="$(top_builddir)/bonobo/.libs:$$LD_LIBRARY_PATH"	\
-	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"
+	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"\
+	BONOBO_ACTIVATION_PATH="$(srcdir):$$BONOBO_ACTIVATION_PATH"\
+	MODELS_DIR="$(srcdir)/models"
 
 TESTS = test-moniker test-event-source test-object \
 	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem \

@@ -1,3 +1,16 @@
+2003-07-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/Makefile.am (TESTS_ENVIRONMENT): Define MODELS_DIR...
+
+	* tests/test-generic-factory.sh: ... and use it here.
+
+	* tests/test-generic-factory.sh (BONOBO_ACTIVATION_PATH): Don't
+	define it here.
+
+	* tests/Makefile.am (noinst_PROGRAMS): Added generic-factory.
+	(TESTS_ENVIRONMENT): Define BONOBO_ACTIVATION_PATH here, to make
+	it dependent on srcdir.
+
 2003-07-15  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/test-generic-factory.sh: Set TMPDIR to a private
