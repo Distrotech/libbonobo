@@ -1,3 +1,24 @@
+2000-05-31  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-uih-menu.c (menu_toplevel_create_widgets):
+	Initialize the status of the item to zero.
+	(menu_toplevel_store_data): Don't initialize `active'.
+	(menu_toplevel_set_toggle_state_internal): Don't set `active'.
+	(menu_toplevel_get_toggle_state): Reimplemented by getting the
+	widget and reading the state from it.
+
+	* bonobo/bonobo-uih-private.h: Removed member `active' from
+	`MenuItemInternal'.
+
+	* bonobo/bonobo-widget.c
+	(bonobo_widget_set_property): Leak plug: release the property bag
+	after getting it from the control frame.
+
+	* bonobo/bonobo-uih-menu.c
+	(impl_Bonobo_UIHandler_menu_create): Leak plug: free the
+	`BonoboUIHandlerMenuItem' with `menu_free()' and don't free
+	`item->pixmap_type' and `item->pixmap_data' manually.
+
 2000-05-29  Matt Bissiri  <bissiri@eecs.umich.edu>
  
 	* bonobo/bonobo-object-directory-oaf.c (od_get_server_list):
