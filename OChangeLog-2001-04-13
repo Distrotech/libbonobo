@@ -1,5 +1,10 @@
 2000-10-12  Ettore Perazzoli  <ettore@helixcode.com>
 
+	* bonobo/bonobo-ui-toolbar.c (impl_remove): Duh.  Remove the item
+	from ->items.
+
+2000-10-12  Ettore Perazzoli  <ettore@helixcode.com>
+
 	* bonobo/bonobo-ui-toolbar.c (impl_get_arg): Take account of the
 	border width for `ARG_PREFERRED_WIDTH' and `ARG_PREFERRED_HEIGHT'.
 
