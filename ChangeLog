@@ -1,5 +1,8 @@
 2001-08-22  Rodrigo Moya <rodrigo@gnome-db.org>
 
+	* bonobo/bonobo-arg.c (bonobo_arg_new_from): new function to create
+	BonoboArg's from a given type and data
+
 	* bonobo/bonobo-arg.h: added GET/SET macros for more CORBA types
 
 2001-08-21 Dirk-Jan C. Binnema <djcb@djcbsoftware.nl>

@@ -21,13 +21,16 @@ G_BEGIN_DECLS
 typedef CORBA_any      BonoboArg;
 typedef CORBA_TypeCode BonoboArgType;
 
-#define BONOBO_ARG_NULL    TC_null
-#define BONOBO_ARG_BOOLEAN TC_CORBA_boolean
-#define BONOBO_ARG_INT     TC_CORBA_long
-#define BONOBO_ARG_LONG    TC_CORBA_long
-#define BONOBO_ARG_FLOAT   TC_CORBA_float
-#define BONOBO_ARG_DOUBLE  TC_CORBA_double
-#define BONOBO_ARG_STRING  TC_CORBA_string
+#define BONOBO_ARG_NULL     TC_null
+#define BONOBO_ARG_BOOLEAN  TC_CORBA_boolean
+#define BONOBO_ARG_SHORT    TC_CORBA_short
+#define BONOBO_ARG_INT      TC_CORBA_long
+#define BONOBO_ARG_LONG     TC_CORBA_long
+#define BONOBO_ARG_LONGLONG TC_CORBA_long_long
+#define BONOBO_ARG_FLOAT    TC_CORBA_float
+#define BONOBO_ARG_DOUBLE   TC_CORBA_double
+#define BONOBO_ARG_CHAR     TC_CORBA_char
+#define BONOBO_ARG_STRING   TC_CORBA_string
 
 #ifdef __GNUC__
 #	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
@@ -72,6 +75,9 @@ typedef CORBA_TypeCode BonoboArgType;
 #endif
 
 BonoboArg    *bonobo_arg_new           (BonoboArgType      t);
+
+BonoboArg    *bonobo_arg_new_from      (BonoboArgType      t,
+					gconstpointer      data);
 
 void          bonobo_arg_release       (BonoboArg         *arg);
 

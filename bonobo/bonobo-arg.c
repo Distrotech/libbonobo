@@ -60,6 +60,26 @@ bonobo_arg_new (BonoboArgType t)
 }
 
 /**
+ * bonobo_arg_new_from
+ * @t: the BonoboArgType eg. TC_CORBA_long
+ * @data: the data for the BonoboArg to be created
+ *
+ * Create a new BonoboArg with the specified type and data
+ */
+BonoboArg * 
+bonobo_arg_new_from (BonoboArgType t, gconstpointer data)
+{
+	BonoboArg *arg;
+
+	arg = CORBA_any__alloc ();
+	arg->_release = TRUE;
+	arg->_type = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) t, NULL);
+	arg->_value = ORBit_copy_value (data, t);
+
+	return arg;
+}
+
+/**
  * bonobo_arg_release:
  * @arg: the bonobo arg.
  * 
