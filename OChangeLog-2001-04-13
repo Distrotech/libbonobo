@@ -1,3 +1,7 @@
+2001-02-20  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-ui-engine.c: Fully API document.
+
 2001-02-20  Jens Finke <jens@gnome.org>
 
 	* storage-modules/bonobo-storage-fs.c (fs_get_info): Obtain mime

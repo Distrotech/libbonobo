@@ -14,12 +14,6 @@ bonobo-context
 
 </para>
 
-<!-- ##### TYPEDEF BonoboActivationContext ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### FUNCTION bonobo_context_init ##### -->
 <para>
 

@@ -251,6 +251,14 @@ Returns the #GtkType for the BonoboObject object.
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_object_get_epv ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_object_activate_servant ##### -->
 <para>
 
@@ -334,12 +342,12 @@ Returns the #GtkType for the BonoboObject object.
 @object: 
 
 
-<!-- ##### FUNCTION bonobo_object_get_epv ##### -->
+<!-- ##### FUNCTION bonobo_object_idle_unref ##### -->
 <para>
 
 </para>
 
-@Returns: 
+@object: 
 
 
 <!-- ##### FUNCTION bonobo_object_init ##### -->
@@ -378,6 +386,14 @@ Returns the #GtkType for the BonoboObject object.
 @ev: 
 
 
+<!-- ##### MACRO BONOBO_OBJREF ##### -->
+<para>
+
+</para>
+
+@o: 
+
+
 <!-- ##### MACRO BONOBO_OBJECT_CHECK ##### -->
 <para>
    Checks if the exception in @e needs to be signaled.  If so, then
@@ -390,7 +406,7 @@ Returns the #GtkType for the BonoboObject object.
 @e: 
 
 
-<!-- ##### FUNCTION gnome_unknown_ping ##### -->
+<!-- ##### FUNCTION bonobo_unknown_ping ##### -->
 <para>
 
 </para>
@@ -416,12 +432,4 @@ Returns the #GtkType for the BonoboObject object.
 @bonoboobject: the object which received the signal.
 @arg1: 
 @arg2: 
-
-<!-- ##### SIGNAL BonoboObject::object-gone ##### -->
-<para>
-
-</para>
-
-@bonoboobject: the object which received the signal.
-@arg1: 
 

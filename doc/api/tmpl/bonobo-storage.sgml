@@ -65,16 +65,6 @@ bonobo-storage
 </para>
 
 
-<!-- ##### FUNCTION bonobo_storage_construct ##### -->
-<para>
-
-</para>
-
-@storage: 
-@corba_storage: 
-@Returns: 
-
-
 <!-- ##### FUNCTION bonobo_storage_open ##### -->
 <para>
 
@@ -110,15 +100,6 @@ bonobo-storage
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_storage_corba_object_create ##### -->
-<para>
-
-</para>
-
-@object: 
-@Returns: 
-
-
 <!-- ##### FUNCTION bonobo_storage_write_class_id ##### -->
 <para>
 
@@ -135,13 +116,5 @@ bonobo-storage
 
 @stream: 
 @class_id: 
-
-
-<!-- ##### FUNCTION bonobo_storage_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 

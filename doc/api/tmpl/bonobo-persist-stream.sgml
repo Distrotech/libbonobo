@@ -127,20 +127,13 @@ BonoboPersistStream
 </para>
 
 @ps: 
-@corba_ps: 
 @load_fn: 
 @save_fn: 
 @max_fn: 
 @types_fn: 
 @closure: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_persist_stream_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
+<!-- # Unused Parameters # -->
+@corba_ps: 
 
 

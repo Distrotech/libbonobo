@@ -138,7 +138,7 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 @listener: a pointer to the BonoboListener.
 @event_name: the event name that was emmited.
 @any: The value (A CORBA Any) that was passed by the EventSource.
-@ev: Environment for returning CORBA errors. 
+@ev: Environment for returning CORBA errors.
 @user_data: the data pointer specified when you called bonobo_listener_new
 
 
@@ -152,35 +152,3 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_listener_construct ##### -->
-<para>
-
-</para>
-
-@listener: 
-@corba_listener: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_listener_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_listener_corba_object_create ##### -->
-<para>
-
-</para>
-
-@object: 
-@Returns: 
-
-
-<!-- ##### SIGNAL BonoboListener::event_notify ##### -->
-<para>
-   This signal is emmited when an event is received from the
-   EventSource this BonoboListener is registered with. 
-</para>

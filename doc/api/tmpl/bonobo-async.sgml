@@ -1,0 +1,87 @@
+<!-- ##### SECTION Title ##### -->
+bonobo-async
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ENUM BonoboAsyncArgFlag ##### -->
+<para>
+
+</para>
+
+@BONOBO_ASYNC_IN: 
+@BONOBO_ASYNC_OUT: 
+
+<!-- ##### TYPEDEF BonoboAsyncArg ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF BonoboAsyncMethod ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboAsyncReply ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION BonoboAsyncCallback ##### -->
+<para>
+
+</para>
+
+@reply: 
+@ev: 
+@user_data: 
+
+
+<!-- ##### FUNCTION bonobo_async_demarshal ##### -->
+<para>
+
+</para>
+
+@reply: 
+@retval: 
+@out_args: 
+
+
+<!-- ##### FUNCTION bonobo_async_invoke ##### -->
+<para>
+
+</para>
+
+@method: 
+@cb: 
+@user_data: 
+@timeout_usec: 
+@object: 
+@args: 
+@ev: 
+
+
+<!-- ##### FUNCTION bonobo_async_handle_get_recv ##### -->
+<para>
+
+</para>
+
+@reply: 
+@Returns: 
+
+

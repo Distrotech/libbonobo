@@ -76,6 +76,16 @@ For more information see bonobo/doc/Monikers
 </para>
 
 
+<!-- ##### FUNCTION bonobo_moniker_construct ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@prefix: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_moniker_get_parent ##### -->
 <para>
 
@@ -102,8 +112,9 @@ For more information see bonobo/doc/Monikers
 </para>
 
 @moniker: 
-@char_offset: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@char_offset: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_set_name ##### -->
@@ -112,7 +123,54 @@ For more information see bonobo/doc/Monikers
 </para>
 
 @moniker: 
-@name: 
+@unescaped_name: 
 @num_chars: 
+<!-- # Unused Parameters # -->
+@name: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_get_name_escaped ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_get_name_full ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_get_case_sensitive ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_set_case_sensitive ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@sensitive: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_get_prefix ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@Returns: 
 
 

@@ -93,11 +93,13 @@ bonobo-property-control
 </para>
 
 @property_control: 
-@corba_control: 
+@event_source: 
 @get_fn: 
 @num_pages: 
 @closure: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@corba_control: 
 
 
 <!-- ##### FUNCTION bonobo_property_control_changed ##### -->
@@ -107,22 +109,5 @@ bonobo-property-control
 
 @property_control: 
 @opt_ev: 
-
-
-<!-- ##### FUNCTION bonobo_property_control_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_control_corba_object_create ##### -->
-<para>
-
-</para>
-
-@object: 
-@Returns: 
 
 

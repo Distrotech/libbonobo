@@ -103,18 +103,11 @@ BonoboPersistFile
 </para>
 
 @ps: 
-@corba_ps: 
 @load_fn: 
 @save_fn: 
 @closure: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_persist_file_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
+<!-- # Unused Parameters # -->
+@corba_ps: 
 
 

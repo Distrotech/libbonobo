@@ -65,16 +65,6 @@ BonoboPersist
 </para>
 
 
-<!-- ##### FUNCTION bonobo_persist_construct ##### -->
-<para>
-
-</para>
-
-@persist: 
-@corba_persist: 
-@Returns: 
-
-
 <!-- ##### FUNCTION bonobo_persist_generate_content_types ##### -->
 <para>
 
@@ -82,14 +72,6 @@ BonoboPersist
 
 @num: 
 @Varargs: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_persist_get_epv ##### -->
-<para>
-
-</para>
-
 @Returns: 
 
 

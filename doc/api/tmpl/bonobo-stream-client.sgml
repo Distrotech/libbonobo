@@ -59,3 +59,13 @@ bonobo-stream-client
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_stream_client_get_length ##### -->
+<para>
+
+</para>
+
+@stream: 
+@ev: 
+@Returns: 
+
+

@@ -21,6 +21,7 @@ BonoboPropertyBag
 
 @parent: 
 @priv: 
+@es: 
 
 <!-- ##### ENUM BonoboPropertyFlags ##### -->
 <para>
@@ -41,6 +42,7 @@ BonoboPropertyBag
 @bag: 
 @arg: 
 @arg_id: 
+@ev: 
 @user_data: 
 
 
@@ -52,6 +54,7 @@ BonoboPropertyBag
 @bag: 
 @arg: 
 @arg_id: 
+@ev: 
 @user_data: 
 
 
@@ -100,12 +103,15 @@ BonoboPropertyBag
 @k: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_get_gtk_type ##### -->
+<!-- ##### FUNCTION bonobo_property_bag_get_type ##### -->
 <para>
 
 </para>
 
 @Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@name: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_new ##### -->
@@ -177,6 +183,7 @@ BonoboPropertyBag
 
 @pb: 
 @name: 
+@opt_ev: 
 @Returns: 
 
 
@@ -187,6 +194,7 @@ BonoboPropertyBag
 
 @pb: 
 @name: 
+@opt_ev: 
 @Returns: 
 
 
@@ -197,6 +205,7 @@ BonoboPropertyBag
 
 @pb: 
 @name: 
+@opt_ev: 
 @Returns: 
 
 
@@ -207,6 +216,18 @@ BonoboPropertyBag
 
 @pb: 
 @name: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_property_bag_get_property_type ##### -->
+<para>
+
+</para>
+
+@pb: 
+@name: 
+@opt_ev: 
 @Returns: 
 
 
@@ -218,28 +239,6 @@ BonoboPropertyBag
 @pb: 
 @name: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_add_listener ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@listener: 
-@opt_ev: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_remove_listener ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@listener: 
-@opt_ev: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_notify_listeners ##### -->
@@ -259,14 +258,6 @@ BonoboPropertyBag
 </para>
 
 @pb: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_get_epv ##### -->
-<para>
-
-</para>
-
 @Returns: 
 
 

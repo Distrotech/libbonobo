@@ -116,6 +116,65 @@ bonobo-moniker-util
 
 @name: 
 @ev: 
+@timeout_msec: 
+@cb: 
+@user_data: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_util_escape ##### -->
+<para>
+
+</para>
+
+@string: 
+@offset: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_util_unescape ##### -->
+<para>
+
+</para>
+
+@string: 
+@num_chars: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_client_equal ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@name: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_resolve_async ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@options: 
+@interface_name: 
+@ev: 
+@timeout_msec: 
+@cb: 
+@user_data: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_resolve_async_default ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@interface_name: 
+@ev: 
+@timeout_msec: 
 @cb: 
 @user_data: 
 

@@ -245,14 +245,6 @@ bonobo-arg
 @arg: 
 
 
-<!-- ##### FUNCTION bonobo_arg_init_default ##### -->
-<para>
-
-</para>
-
-@arg: 
-
-
 <!-- ##### FUNCTION bonobo_arg_type_is_equal ##### -->
 <para>
 

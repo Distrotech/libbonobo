@@ -14,14 +14,6 @@ An Event Source where clients can connect to listen to events.
   #BonoboListener
 </para>
 
-<!-- ##### FUNCTION bonobo_event_source_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
 <!-- ##### MACRO BONOBO_EVENT_SOURCE ##### -->
 <para>
 
@@ -81,16 +73,6 @@ An Event Source where clients can connect to listen to events.
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_event_source_construct ##### -->
-<para>
-
-</para>
-
-@event_source: 
-@corba_event_source: 
-@Returns: 
-
-
 <!-- ##### FUNCTION bonobo_event_source_notify_listeners ##### -->
 <para>
 
@@ -102,12 +84,26 @@ An Event Source where clients can connect to listen to events.
 @opt_ev: 
 
 
-<!-- ##### FUNCTION bonobo_event_source_corba_object_create ##### -->
+<!-- ##### FUNCTION bonobo_event_source_client_add_listener ##### -->
 <para>
 
 </para>
 
 @object: 
+@event_callback: 
+@opt_mask: 
+@opt_ev: 
+@user_data: 
 @Returns: 
+
+
+<!-- ##### FUNCTION bonobo_event_source_client_remove_listener ##### -->
+<para>
+
+</para>
+
+@object: 
+@id: 
+@opt_ev: 
 
 
