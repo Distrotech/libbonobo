@@ -9,8 +9,6 @@
  */
 #include "config.h"
 #include <string.h>
-#include <liboaf/liboaf.h>
-#include <liboaf/oaf-async.h>
 #include <ORBitservices/CosNaming.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-exception.h>

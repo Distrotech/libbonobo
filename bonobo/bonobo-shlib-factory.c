@@ -21,7 +21,6 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-shlib-factory.h>
 #include <bonobo/bonobo-running-context.h>
-#include <liboaf/liboaf.h>
 
 POA_GNOME_ObjectFactory__vepv bonobo_shlib_factory_vepv;
 

@@ -20,7 +20,6 @@
 #include <signal.h>
 
 #include <glib/gmain.h>
-#include <liboaf/liboaf.h>
 
 #if 0
 #include <X11/Xlib.h>

@@ -14,7 +14,6 @@
 #include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
-#include <liboaf/oaf.h>
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-exception.h>
 

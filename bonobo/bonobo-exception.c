@@ -13,7 +13,7 @@
 #define GNOME_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
 #include <bonobo/bonobo-i18n.h>
 #include <bonobo/bonobo-exception.h>
-#include <liboaf/liboaf.h>
+#include <bonobo/bonobo-object.h>
 
 typedef enum {
 	EXCEPTION_STR,

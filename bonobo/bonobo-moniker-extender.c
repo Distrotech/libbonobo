@@ -13,7 +13,6 @@
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-moniker-extender.h>
-#include <liboaf/liboaf.h>
 
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
 

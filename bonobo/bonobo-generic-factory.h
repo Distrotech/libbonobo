@@ -16,8 +16,6 @@
 #include <gobject/gclosure.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-i18n.h>
-#include <liboaf/oaf.h>
-#include <liboaf/liboaf.h>
 
 G_BEGIN_DECLS
  

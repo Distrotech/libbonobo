@@ -1,5 +1,21 @@
 2001-07-31  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.h: include liboaf here.
+
+	* libbonobo.h: not here.
+
+	* bonobo/bonobo-moniker-extender.c,
+	* monikers/bonobo-moniker-query.c,
+	* monikers/bonobo-moniker-oaf.c,
+	* monikers/bonobo-moniker-new.c, 
+	* monikers/bonobo-moniker-extender-stream.c,
+	* bonobo/bonobo-shlib-factory.c,
+	* bonobo/bonobo-generic-factory.c,
+	* bonobo/bonobo-exception.c,
+	* bonobo/bonobo-moniker-util.c: prune liboaf.h includes.
+
+2001-07-31  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-context.c (bonobo_context_init): register
 	as the "Moniker" context instead.
 

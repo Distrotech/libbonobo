@@ -15,8 +15,6 @@
 
 G_BEGIN_DECLS
 
-#include <liboaf/liboaf.h>
-
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-simple.h>

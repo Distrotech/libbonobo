@@ -24,7 +24,6 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-running-context.h>
-#include <liboaf/liboaf.h>
 
 #include <bonobo/bonobo-types.h>
 
