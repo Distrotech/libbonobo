@@ -105,7 +105,6 @@ test_threads (TestClosure *tc)
 int
 main (int argc, char *argv [])
 {
-	CORBA_ORB          orb;
 	CORBA_Environment  ev[1];
 	BonoboPropertyBag *pb;
 	PortableServer_POA poa;
@@ -114,9 +113,6 @@ main (int argc, char *argv [])
 	free (malloc (8));
 
 	CORBA_exception_init (ev);
-
-	orb = CORBA_ORB_init (&argc, argv,
-			      "orbit-local-mt-orb", ev);
 
 	if (bonobo_init (&argc, argv) == FALSE)
 		g_error ("Can not bonobo_init");
@@ -155,8 +151,6 @@ main (int argc, char *argv [])
 
 		bonobo_object_unref (pb);
 	}
-
-	CORBA_Object_release ((CORBA_Object) orb, ev);
 
 	CORBA_exception_free (ev);
 

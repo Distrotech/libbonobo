@@ -100,7 +100,7 @@ Bonobo_ActivationEnvValue_copy (Bonobo_ActivationEnvValue *dest,
 
 	dest->name  = CORBA_string_dup (src->name);
 	dest->value = CORBA_string_dup (src->value);
-	dest->unset = src->unset;
+	dest->flags = src->flags;
 }
 
 void
@@ -111,17 +111,17 @@ Bonobo_ActivationEnvValue_set (Bonobo_ActivationEnvValue *env,
 	g_return_if_fail (env != NULL);
 	g_return_if_fail (name != NULL);
 
-	if (env->name)
-		CORBA_free (env->name);
-
-	if (env->value)
-		CORBA_free (env->value);
+        CORBA_free (env->name);
+        CORBA_free (env->value);
 
 	env->name  = CORBA_string_dup (name);
 	env->value = value ?
 			CORBA_string_dup (value) :
 			CORBA_string_dup ("");
-	env->unset = !value;
+
+	env->flags = 0;
+        if (!value)
+                env->flags |= Bonobo_ACTIVATION_ENV_FLAG_UNSET;
 }
 
 static void

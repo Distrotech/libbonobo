@@ -282,7 +282,8 @@ bonobo_activation_base_service_debug_shutdown (CORBA_Environment *ev)
 }
 
 static void
-bonobo_activation_existing_set (const BonoboActivationBaseService *base_service, struct SysServer *ss,
+bonobo_activation_existing_set (const BonoboActivationBaseService *base_service,
+                                struct SysServer *ss,
                                 CORBA_Object obj, CORBA_Environment *ev)
 {
 	GSList *link;
@@ -375,13 +376,17 @@ bonobo_activation_internal_service_get_extended (
 
 	g_return_val_if_fail (base_service, CORBA_OBJECT_NIL);
 
+        BONOBO_ACTIVATION_LOCK ();
+
 	for (i = 0; activatable_servers[i].name; i++) {
 		if (!strcmp (base_service->name, activatable_servers[i].name))
 			break;
 	}
 
-	if (!activatable_servers[i].name)
+	if (!activatable_servers[i].name) {
+                BONOBO_ACTIVATION_UNLOCK ();
 		return retval;
+        }
 
 	CORBA_exception_init (&myev);
         CORBA_exception_init (&important_error_ev);
@@ -432,6 +437,8 @@ bonobo_activation_internal_service_get_extended (
         }
         
         CORBA_exception_free (&myev);
+
+        BONOBO_ACTIVATION_LOCK ();
 
 	return retval;
 }

@@ -4,6 +4,7 @@
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000 Eazel, Inc.
+ *  Copyright (C) 2003 Ximian, Inc.
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public
@@ -19,7 +20,9 @@
  *  License along with this library; if not, write to the Free
  *  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  Author: Elliot Lee <sopwith@redhat.com>
+ *  Authors:
+ *      Elliot Lee <sopwith@redhat.com>
+ *      Michael Meeks <michael@ximian.com>
  */
 
 #include <config.h>
@@ -49,56 +52,7 @@
 
 #include <orbit/orbit.h>
 
-#ifdef ORBIT2
-#  define ORBIT_USES_GLIB_MAIN_LOOP 1
-#endif
-
-#ifndef ORBIT_USES_GLIB_MAIN_LOOP
-static int bonobo_activation_corba_prio = G_PRIORITY_LOW;
-
-static gboolean
-orb_handle_connection (GIOChannel * source, GIOCondition cond,
-		       GIOPConnection * cnx)
-{
-	/* The best way to know about an fd exception is if select()/poll()
-	 * tells you about it, so we just relay that information on to ORBit
-	 * if possible
-	 */
-
-	if (cond & (G_IO_HUP | G_IO_NVAL | G_IO_ERR))
-		giop_main_handle_connection_exception (cnx);
-	else
-		giop_main_handle_connection (cnx);
-
-	return TRUE;
-}
-
-static void
-orb_add_connection (GIOPConnection * cnx)
-{
-	int tag;
-	GIOChannel *channel;
-
-	channel = g_io_channel_unix_new (GIOP_CONNECTION_GET_FD (cnx));
-	tag = g_io_add_watch_full (channel, bonobo_activation_corba_prio,
-				   G_IO_IN | G_IO_ERR | G_IO_HUP | G_IO_NVAL,
-				   (GIOFunc) orb_handle_connection,
-				   cnx, NULL);
-	g_io_channel_unref (channel);
-
-	cnx->user_data = GUINT_TO_POINTER (tag);
-}
-
-static void
-orb_remove_connection (GIOPConnection * cnx)
-{
-	g_source_remove (GPOINTER_TO_UINT (cnx->user_data));
-	cnx->user_data = GINT_TO_POINTER (-1);
-}
-
-#endif /* !ORBIT_USES_GLIB_MAIN_LOOP */
-
-
+GStaticRecMutex _bonobo_activation_guard = G_STATIC_REC_MUTEX_INIT;
 static CORBA_ORB bonobo_activation_orb = CORBA_OBJECT_NIL;
 static CORBA_Context bonobo_activation_context;
 static gboolean is_initialized = FALSE;
@@ -395,14 +349,9 @@ bonobo_activation_orb_init (int *argc, char **argv)
 	CORBA_Environment ev;
 	const char *hostname;
 
-#ifndef ORBIT_USES_GLIB_MAIN_LOOP
-	IIOPAddConnectionHandler = orb_add_connection;
-	IIOPRemoveConnectionHandler = orb_remove_connection;
-#endif /* !ORBIT_USES_GLIB_MAIN_LOOP */
-
 	CORBA_exception_init (&ev);
 
-	bonobo_activation_orb = CORBA_ORB_init (argc, argv, "orbit-local-orb", &ev);
+	bonobo_activation_orb = CORBA_ORB_init (argc, argv, "orbit-local-mt-orb", &ev);
 	g_assert (ev._major == CORBA_NO_EXCEPTION);
 
 	bonobo_activation_init_activation_env ();

@@ -35,6 +35,7 @@
 #include "server.h"
 
 #include "activation-context.h"
+#include "bonobo-activation-id.h"
 #include "activation-context-query.h"
 #include "activation-server-corba-extensions.h"
 #include <libbonobo.h>

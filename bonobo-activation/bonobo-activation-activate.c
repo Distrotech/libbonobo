@@ -28,7 +28,6 @@
 
 #include <bonobo-activation/bonobo-activation-activate.h>
 
-#include <bonobo-activation/bonobo-activation-id.h>
 #include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/bonobo-activation-server-info.h>
 #include <bonobo-activation/bonobo-activation-private.h>
@@ -181,9 +180,13 @@ query_cache_lookup (const char   *query,
 {
 	QueryCacheEntry  fake;
 	QueryCacheEntry *entry;
+        Bonobo_ServerInfoList *result;
+
+        BONOBO_ACTIVATION_LOCK ();
 
 	if (!query_cache) {
                 create_query_cache ();
+                BONOBO_ACTIVATION_UNLOCK ();
 		return NULL;
 	}
 
@@ -193,13 +196,17 @@ query_cache_lookup (const char   *query,
 #ifdef QUERY_CACHE_DEBUG
 		g_warning ("\n\n ---  Hit (%p)  ---\n\n\n", entry->list);
 #endif /* QUERY_CACHE_DEBUG */
-		return Bonobo_ServerInfoList_duplicate (entry->list);
+		result = Bonobo_ServerInfoList_duplicate (entry->list);
 	} else {
 #ifdef QUERY_CACHE_DEBUG
 		g_warning ("Miss");
 #endif /* QUERY_CACHE_DEBUG */
-		return NULL;
+		result = NULL;
 	}
+
+        BONOBO_ACTIVATION_UNLOCK ();
+
+        return result;
 }
 
 static void

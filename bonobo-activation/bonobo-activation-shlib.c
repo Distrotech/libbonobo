@@ -47,11 +47,15 @@ static void
 gnome_plugin_unload (gpointer data, gpointer user_data)
 {
 	ActivePluginInfo *api = user_data;
+
+        BONOBO_ACTIVATION_LOCK ();
+
 	g_module_close (api->loaded);
 	g_hash_table_remove (living_by_filename, api->filename);
 	g_free (api);
-}
 
+        BONOBO_ACTIVATION_UNLOCK ();
+}
 
 /**
  * bonobo_activation_activate_shlib_server:
@@ -81,6 +85,8 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
 	g_return_val_if_fail (sh->res._u.res_shlib._length > 0,
 			      CORBA_OBJECT_NIL);
 
+        BONOBO_ACTIVATION_LOCK ();
+
 	/* The location info is at the end to of the string list */
 	filename = sh->res._u.res_shlib._buffer[sh->res._u.res_shlib._length - 1];
 	if (living_by_filename)
@@ -104,6 +110,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                              ex_Bonobo_GeneralError, error);
                         g_free (error_string);
+                        BONOBO_ACTIVATION_UNLOCK ();
 			return CORBA_OBJECT_NIL; /* Couldn't load it */
 		}
 		
@@ -122,6 +129,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                              ex_Bonobo_GeneralError, error);
                         g_free (error_string);
+                        BONOBO_ACTIVATION_UNLOCK ();
 			return CORBA_OBJECT_NIL;
 		}
 
@@ -158,6 +166,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                              ex_Bonobo_GeneralError, error);
                         g_free (error_string);
+                        BONOBO_ACTIVATION_UNLOCK ();
 			return CORBA_OBJECT_NIL;
 		}
 	}
@@ -226,6 +235,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
         }
 
         CORBA_Object_release ((CORBA_Object) poa, ev);
+        BONOBO_ACTIVATION_UNLOCK ();
 
 	return retval;
 }

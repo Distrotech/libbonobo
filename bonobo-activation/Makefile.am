@@ -26,8 +26,6 @@ bonobo_activationinclude_HEADERS=		\
 	Bonobo_Activation_types.h		\
 	bonobo-activation.h			\
 	bonobo-activation-async.h		\
-	bonobo-activation-base-service.h	\
-	bonobo-activation-id.h			\
 	bonobo-activation-activate.h		\
 	bonobo-activation-init.h		\
 	bonobo-activation-shlib.h		\
@@ -43,11 +41,13 @@ libbonobo_activation_la_SOURCES=		\
 	bonobo-activation-get-language-list.c	\
 	bonobo-activation-client.c		\
 	bonobo-activation-client.h		\
+	bonobo-activation-id.h			\
 	bonobo-activation-id.c			\
 	bonobo-activation-private.h		\
 	bonobo-activation-shlib.c		\
 	bonobo-activation-activate.c		\
 	bonobo-activation-activate-private.h	\
+	bonobo-activation-base-service.h	\
 	bonobo-activation-base-service.c	\
 	bonobo-activation-register.c		\
 	bonobo-activation-server-info.c		\

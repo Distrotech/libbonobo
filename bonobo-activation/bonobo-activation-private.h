@@ -31,6 +31,10 @@
 
 #define BONOBO_ACTIVATION_FACTORY_TIMEOUT 1000
 
+extern GStaticRecMutex _bonobo_activation_guard;
+#define BONOBO_ACTIVATION_LOCK()   g_static_rec_mutex_lock   (&_bonobo_activation_guard)
+#define BONOBO_ACTIVATION_UNLOCK() g_static_rec_mutex_unlock (&_bonobo_activation_guard)
+
 void         bonobo_activation_timeout_reg_check_set  (gboolean           on);
 gboolean     bonobo_activation_timeout_reg_check      (gpointer           data);
 

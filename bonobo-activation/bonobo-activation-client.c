@@ -35,18 +35,26 @@ reset_caches (void)
         GSList   *l;
         GVoidFunc cb;
 
+        BONOBO_ACTIVATION_LOCK ();
+
         for (l = reset_notify_callbacks; l; l = l->next) {
                 cb = l->data;
                 cb ();
         }
+
+        BONOBO_ACTIVATION_UNLOCK ();
 }
 
 void
 bonobo_activation_add_reset_notify (GVoidFunc fn)
 {
+        BONOBO_ACTIVATION_LOCK ();
+
         if (!g_slist_find (reset_notify_callbacks, fn))
                 reset_notify_callbacks = g_slist_prepend (
                         reset_notify_callbacks, fn);
+
+        BONOBO_ACTIVATION_UNLOCK ();
 }
 
 typedef struct {
@@ -155,6 +163,8 @@ get_lang_list (void)
         
         if (result_set)
                 return result;
+
+        BONOBO_ACTIVATION_LOCK ();
         
         str = g_string_new (NULL);
 	language_list = bonobo_activation_i18n_get_language_list ("LANG");
@@ -170,6 +180,8 @@ get_lang_list (void)
         
         result = str->str ? str->str : "";
         g_string_free (str, FALSE);
+
+        BONOBO_ACTIVATION_UNLOCK ();
         
         return result;
 }

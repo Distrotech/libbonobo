@@ -32,8 +32,6 @@
 #include <bonobo-activation/bonobo-activation-activate.h>
 #include <bonobo-activation/bonobo-activation-server-info.h>
 #include <bonobo-activation/bonobo-activation-init.h>
-#include <bonobo-activation/bonobo-activation-base-service.h>
-#include <bonobo-activation/bonobo-activation-id.h>
 #include <bonobo-activation/bonobo-activation-shlib.h>
 #include <bonobo-activation/bonobo-activation-register.h>
 

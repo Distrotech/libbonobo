@@ -1,3 +1,48 @@
+2003-06-09  Michael Meeks  <michael@ximian.com>
+
+	* idl/Bonobo_Activation_types.idl: make 'unset' a flags
+	field instead; just as efficient and more expandable.
+
+	* bonobo-activation/bonobo-activation-register.c
+	(Bonobo_ActivationEnvValue_copy, Bonobo_ActivationEnvValue_set):
+	switch to new unset scheme with flag.
+
+	* bonobo-activation/bonobo-activation-shlib.c
+	(bonobo_activation_activate_shlib_server),
+	(gnome_plugin_unload): hold guard.
+
+	* bonobo-activation/bonobo-activation-get-language-list.c
+	(bonobo_activation_i18n_get_language_list): add guard.
+
+	* bonobo-activation/bonobo-activation-client.c
+	(bonobo_activation_add_reset_notify, reset_caches):
+	guard reset_caches list.
+	(get_lang_list): guard lang list.
+
+	* bonobo-activation/bonobo-activation-base-service.c
+	(bonobo_activation_internal_service_get_extended):
+	guard the activator list - the only real entry
+	point here.
+
+	* bonobo-activation/bonobo-activation-activate.c
+	(query_cache_lookup): guard the cache.
+
+	* activation-server/activation-context-corba.c,
+	* bonobo-activation/bonobo-activation.h,
+	* bonobo-activation/Makefile.am: don't include
+	or install the (deprecated) -base-service.h,
+	or -activation-id.h headers.
+
+	* bonobo-activation/bonobo-activation-init.c
+	(bonobo_activation_orb_init): always initialize
+	the thread safe ORB.
+	(orb_handle_connection, orb_add_connection) 
+	(orb_remove_connection, bonobo_activation_orb_init): 
+	bin ancient, stale USES_GLIB cruft.
+
+	* tests/test-thread.c (main): bin the special
+	case for thread-safe init.
+
 2003-06-09  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-running-context.c
@@ -48,6 +93,8 @@
 	timeouts.
 
 2003-06-09  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: bump required bits, version.
 
 	* bonobo/bonobo-main.c (bonobo_poa_get_threaded):
 	don't leak a policy (thanks to NotZed).

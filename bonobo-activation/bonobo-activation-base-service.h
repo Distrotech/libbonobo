@@ -77,32 +77,35 @@ typedef CORBA_Object (*BonoboActivationBaseServiceActivator) (
                                 int                                ior_fd,
                                 CORBA_Environment                 *ev);
 
-
+/* unused / deprecated */
 void         bonobo_activation_base_service_registry_add
                                (const BonoboActivationBaseServiceRegistry *registry,
                                 int                                        priority, 
                                 gpointer                                   user_data);
-
+/* unused / deprecated */
 CORBA_Object bonobo_activation_base_service_check
                                (const BonoboActivationBaseService *base_service,
                                 CORBA_Environment                 *ev);
 
+/* unused / deprecated */
 void         bonobo_activation_base_service_set
                                (const BonoboActivationBaseService         *base_service,
                                 CORBA_Object                               obj, 
                                 CORBA_Environment                         *ev);
+/* unused / deprecated */
 void         bonobo_activation_base_service_unset
                                (const BonoboActivationBaseService         *base_service,
                                 CORBA_Object                               obj, 
                                 CORBA_Environment                         *ev);
+/* unused / deprecated */
+void         bonobo_activation_base_service_activator_add
+                               (BonoboActivationBaseServiceActivator       activator,
+                                int                                        priority);
 
 /* Do not release() the returned value */
 CORBA_Object bonobo_activation_service_get
                                (const BonoboActivationBaseService         *base_service);
 
-void         bonobo_activation_base_service_activator_add
-                               (BonoboActivationBaseServiceActivator       activator,
-                                int                                        priority);
 void         bonobo_activation_base_service_debug_shutdown
                                (CORBA_Environment                         *ev);
 

@@ -268,6 +268,8 @@ bonobo_activation_i18n_get_language_list (const gchar *category_name)
 {
   GList *list;
 
+  BONOBO_ACTIVATION_LOCK ();
+
   if (!category_name)
     category_name= "LC_ALL";
 
@@ -325,6 +327,8 @@ bonobo_activation_i18n_get_language_list (const gchar *category_name)
 
       g_hash_table_insert (category_table, (gpointer) category_name, list);
     }
+
+  BONOBO_ACTIVATION_UNLOCK ();
   
   return list;
 }

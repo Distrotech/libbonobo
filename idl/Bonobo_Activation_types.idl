@@ -42,10 +42,11 @@ module Bonobo {
         typedef long RegistrationFlags;
         const RegistrationFlags REGISTRATION_FLAG_NO_SERVERINFO = 1<<0; // no .server file
 
+        const long ACTIVATION_ENV_FLAG_UNSET = 1<<0;
 	struct ActivationEnvValue {
 		string  name;
 		string  value;
-		boolean unset;
+                long    flags;
 	};
 
 	typedef sequence<ActivationEnvValue> ActivationEnvironment;
