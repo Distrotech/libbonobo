@@ -58,6 +58,10 @@ GtkType		          bonobo_property_bag_get_gtk_type    (void);
 BonoboPropertyBag	 *bonobo_property_bag_new	      (BonoboPropertyGetFn get_prop,
 							       BonoboPropertySetFn set_prop,
 							       gpointer            user_data);
+BonoboPropertyBag        *bonobo_property_bag_construct       (BonoboPropertyBag   *pb,
+							       BonoboPropertyGetFn  get_prop,
+							       BonoboPropertySetFn  set_prop,
+							       gpointer             user_data);
 
 void                      bonobo_property_bag_add              (BonoboPropertyBag  *pb,
 								const char         *name,

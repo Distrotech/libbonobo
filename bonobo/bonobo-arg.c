@@ -46,7 +46,7 @@ bonobo_arg_init_default (BonoboArg *a)
 	 * Hope this is good enough;
 	 * FIXME: perhaps we should special case strings
 	 */
-	memset (a->_value, size, 0);
+	memset (a->_value, 0, size);
 }
 
 void

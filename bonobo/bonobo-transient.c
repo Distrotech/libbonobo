@@ -169,7 +169,23 @@ bonobo_transient_get_servant_locator_vepv (void)
 	return vepv;
 }
 
-static BonoboTransient *
+/**
+ * bonobo_transient_construct:
+ * @transient: the BonoboTransient to construct
+ * @parent_poa: the POA where the object is created, CORBA_OBJECT_NIL for the default Bonobo POA.
+ * @new_servant: A function pointer used to incarnate servants on demand.
+ * @destroy_servant: A function pointer used to destroy the on-demand server.
+ * @data: data passed to the @new_servant and @destroy_servant functions.
+ *
+ * This function is only for wrappers and object derivation.  For normal
+ * use, please see #bonobo_transient_new.
+ *
+ * This function will return %NULL on failiure, however it is your
+ * responsibility to destroy the failed object in that case.
+ *
+ * Returns: a #BonoboTransient object (the @transient)
+ */
+BonoboTransient *
 bonobo_transient_construct (BonoboTransient          *transient,
 			    PortableServer_POA        poa,
 			    BonoboTransientServantNew new_servant,

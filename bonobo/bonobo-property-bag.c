@@ -227,14 +227,43 @@ impl_Bonobo_PropertyBag_removeChangeListener (PortableServer_Servant        serv
 /*
  * BonoboPropertyBag construction/deconstruction functions. 
  */
-static BonoboPropertyBag *
-bonobo_property_bag_construct (BonoboPropertyBag *pb,
-			       CORBA_Object corba_pb)
+/**
+ * bonobo_property_bag_construct:
+ * @pb: #BonoboPropertyBag to construct
+ * @get_prop:
+ * @set_prop:
+ * @user_data:
+ * 
+ * Constructor, only for use in wrappers and object derivation, please
+ * refer to the #bonobo_property_bag_new for normal use.
+ *
+ * This function returns @pb, or %NULL in case of error.  If it returns %NULL,
+ * the passed in @pb is unrefed.
+ *
+ * Returns:  #BonoboPropertyBag pointer or %NULL.
+ **/
+BonoboPropertyBag *
+bonobo_property_bag_construct (BonoboPropertyBag   *pb,
+			       BonoboPropertyGetFn  get_prop,
+			       BonoboPropertySetFn  set_prop,
+			       gpointer             user_data)
 {
+	CORBA_Object      corba_pb;
+
+	pb->priv->set_prop  = set_prop;
+	pb->priv->get_prop  = get_prop;
+	pb->priv->user_data = user_data;
+
+	corba_pb = bonobo_property_bag_create_corba_object (BONOBO_OBJECT (pb));
+	if (corba_pb == CORBA_OBJECT_NIL) {
+		bonobo_object_unref (BONOBO_OBJECT (pb));
+		return NULL;
+	}
+
 	bonobo_object_construct (BONOBO_OBJECT (pb), corba_pb);
 
 	if (!(pb->priv->transient = bonobo_transient_new (NULL, bonobo_property_servant_new, bonobo_property_servant_destroy, pb))) {
-		g_free (pb);
+		bonobo_object_unref (BONOBO_OBJECT (pb));
 		return NULL;
 	}
 	
@@ -275,21 +304,11 @@ bonobo_property_bag_new (BonoboPropertyGetFn get_prop,
 			 gpointer            user_data)
 {
 	BonoboPropertyBag *pb;
-	CORBA_Object      corba_pb;
 
 	pb = gtk_type_new (BONOBO_PROPERTY_BAG_TYPE);
 
-	pb->priv->set_prop  = set_prop;
-	pb->priv->get_prop  = get_prop;
-	pb->priv->user_data = user_data;
-
-	corba_pb = bonobo_property_bag_create_corba_object (BONOBO_OBJECT (pb));
-	if (corba_pb == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (pb));
-		return NULL;
-	}
-
-	return bonobo_property_bag_construct (pb, corba_pb);
+	return bonobo_property_bag_construct (pb, get_prop,
+					      set_prop, user_data);
 }
 
 static void

@@ -1,3 +1,16 @@
+Fri Dec 15 16:53:30 2000  George Lebl <jirka@5z.com>
+
+	* bonobo/bonobo-arg.c, bonobo/bonobo-ui-component.c:  Swap order
+	  of memset arguments to be correct
+
+	* bonobo/bonobo-property-bag.[ch]:  Make constructor method public
+	  to allow derivation.  Also use bonobo_object_unref instead of
+	  g_free on failed object.
+
+	* bonobo/bonobo-transient.[ch],
+	  bonobo/bonobo-ui-toolbar-control-item.[ch], bonobo-widget.[ch]: 
+	  Make constructor method public to allow derivation.
+
 2000-12-16  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/bonobo-moniker-query.c (query_resolve): upd.

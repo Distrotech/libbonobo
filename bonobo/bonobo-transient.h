@@ -55,6 +55,11 @@ BonoboTransient *bonobo_transient_new           (PortableServer_POA poa,
 				BonoboTransientServantNew     new_servant,
 				BonoboTransientServantDestroy destroy_servant,
 				void *data);
+BonoboTransient *bonobo_transient_construct     (BonoboTransient *transient,
+				PortableServer_POA        poa,
+				BonoboTransientServantNew new_servant,
+				BonoboTransientServantDestroy destroy_servant,
+				gpointer                  data);
 
 CORBA_Object bonobo_transient_create_objref (BonoboTransient   *transient,
 				const char        *iface_name,
