@@ -1,3 +1,44 @@
+1999-12-20  Nat Friedman  <nat@helixcode.com>
+
+	* idl/gnome-ui-handler.idl (GNOME::UIHandler): Added forward
+ 	declaration of interface Control.
+
+	* idl/gnome-embeddable.idl (GNOME::ViewFrame): Removed get_ui_handler.
+
+	* idl/gnome-control.idl (GNOME::Control): Moved get_ui_handler
+ 	here.
+
+	* idl/bonobo.idl: Rearranged to reflect the New World Order --
+ 	controls now do the UIHandler stuff.
+
+	* bonobo/gnome-view.c (gnome_view_get_remote_ui_handler): Use the
+ 	Control method.
+
+	* bonobo/gnome-view-frame.c (impl_GNOME_ViewFrame_get_ui_handler):
+ 	Removed.
+	(gnome_view_frame_get_epv): Don't set the get_ui_handler method. 
+	(gnome_view_frame_set_ui_handler): Use the ControlFrame method.
+	(gnome_view_frame_get_ui_handler): Likewise.
+
+	* bonobo/gnome-control.c (gnome_control_get_remote_ui_handler):
+ 	New function.
+
+	* bonobo/gnome-control-frame.c (GnomeControlFramePrivate): Added
+ 	uih and propbag elements.
+	(impl_GNOME_ControlFrame_get_ui_handler): New function.
+	(impl_GNOME_ControlFrame_get_ambient_properties): Likewise.
+	(gnome_control_frame_get_epv): Set get_ui_handler and get_ambient_properties.
+	(gnome_control_frame_set_propbag): New function.
+	(gnome_control_frame_get_propbag): Likewise.
+	(gnome_control_frame_set_ui_handler): Likewise.
+	(gnome_control_frame_get_ui_handler): Likewise.
+
+	* bonobo/gnome-bonobo-widget.c
+ 	(gnome_bonobo_widget_new_control_from_objref): Check if bw is NULL
+ 	before casting it to a GtkWidget.
+	(gnome_bonobo_widget_new_control): Likewise.
+	(gnome_bonobo_widget_new_subdoc): Likewise.
+
 1999-12-17  Michael Meeks  <mmeeks@gnu.org>
 
 	* components/bonobo.keys: update to image-generic.
