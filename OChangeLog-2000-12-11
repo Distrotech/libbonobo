@@ -1,3 +1,43 @@
+1999-06-06  Nat Friedman  <nat@gnome-support.com>
+
+	* components/text-plain/bonobo-text-plain.c (text_inserted_cb):
+ 	New function to catch "insert_text" signals on a view.  Adds the
+ 	new text to all existing views and adds it to BonoboObject's
+ 	internal data.
+	(text_deleted_cb): New function to catch "delete_text" signals on
+ 	a view.  Deletes the appropriate text from all existing views and
+ 	removes it from the BonoboObject's internal data.
+	(view_factory): Use a table instead of a vbox to store the
+ 	progress bar and the scrollable window.  Add any existing
+ 	BonoboObject text into the new view when it is created.  Connect
+ 	to the "insert_text" and "delete_text" signals.
+
+	* components/image-x-png/bonobo-image-x-png.c (view_factory):
+ 	Removed call to gtk_widget_set_usize.
+
+	* bonobo/test-container.c (image_png_obj): New global variable to
+ 	hold a pointer to an existing image/x-png BonoboObject.
+	(add_view): New function.  Creates a new view from a
+ 	BonoboObject's GnomeObjectClient.
+	(add_cmd): Modified to use add_view.
+	(add_image_cmd): Store a pointer to the new image BonoboObject in
+ 	image_png_obj.
+	(add_image_view): New function to add a new view of an existing
+ 	image/x-png BonoboObject.
+	(add_text_view): New function to add a new view of an existing
+ 	text/plain BonoboObject.
+	(container_text_plain_menu): New menu subtree for all the
+ 	text/plain operations.
+	(container_image_png_menu): New menu subtree for all the
+ 	image/x-png operations.
+	(container_file_menu): Removed image/x-png and text/plain
+ 	operations.
+	(container_main_menu): Added subtree entries for
+ 	container_text_plain_menu and container_image_png_menu.
+
+	* bonobo/gnome-component.c (gnome_bonobo_object_remove_verb): Cast
+ 	l->data to a char * in the strcmp to avoid a compiler warning.
+
 1999-06-04  Richard Hestilow  <hestgray@ionet.net>
 
 	* bonobo/gnome-bonobo-selector.h: Use 
@@ -22,7 +62,7 @@
 
 	* components/image-x-png/bonobo-image-x-png.c (save_image): New
  	function implementing GNOME::PersistStream.save.
-	(stream_write): New function.  Helper for save_image.
+	(stream_write): New fuhnction.  Helper for save_image.
 	(bonobo_object_factory): Setup callback to save_image for
  	GNOME::PersistStream.save.
 
