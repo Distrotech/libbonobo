@@ -1,3 +1,7 @@
+2002-11-22  Dan Mills  <thunder@vximian.com>
+
+	* configure.in: fixed gtk-doc check.
+
 2002-11-10  Ole Laursen  <olau@hardworking.dk>
 
 	* configure.in: Added da to ALL_LINGUAS.
