@@ -1,3 +1,12 @@
+2000-10-08  Martin Baulig  <martin@home-of-linux.org>
+
+	* gshell/gshell.c (zoom_level_changed_cb): New callback function.
+	(buffer_create_zoomable_frame): Connect to the "zoom_level_changed"
+	signal and display the new zoom level in the statusbar.
+	(verb_Zoom_cb): Implement the "WindowZoom" verb; this pops up a
+	dialog asking for a zoom level and then calls
+	bonobo_view_frame_set_zoom_factor().
+
 2000-10-08  Martin Baulig  <baulig@suse.de>
 
 	* gshell/ui.c (frame_set_zoomable): New function.
@@ -9,7 +18,7 @@
 
 2000-10-08  Martin Baulig  <baulig@suse.de>
 
-	* gshell/inout.c (verb_FileLoad): Added verb "FileLoad" to load a
+	* gshell/inout.c (verb_FileLoad_cb): Added verb "FileLoad" to load a
 	file into the current component.
 
 	* gshell/ui.xml: Removed the "Edit" menu.
@@ -20,7 +29,7 @@
 	(bonobo_selector_get_selected_name): New function.
 	(bonobo_selector_get_selected_description): New function.
 
-	* gshell/inout.c (verb_LaunchComponent): Added verb "LaunchComponent"
+	* gshell/inout.c (verb_LaunchComponent_cb): Added verb "LaunchComponent"
 	which is used to launch an arbitrary component.
 
 2000-10-08  Martin Baulig  <baulig@suse.de>
