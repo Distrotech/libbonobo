@@ -1,12 +1,14 @@
 <!-- ##### SECTION Title ##### -->
-initialization
+Initialization
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Initializing OAF and its ORB.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+These functions allow you to initialize OAF and the ORB
+it is using. Initializing OAF launches the OAF daemon if
+it is not started.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
