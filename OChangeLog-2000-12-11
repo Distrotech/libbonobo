@@ -1,3 +1,35 @@
+2000-12-01  Michael Meeks  <michael@helixcode.com>
+
+	* doc/ui-faq.txt: add more help on where to find XKeysym names
+	for Anna.
+	
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_async_handle_construct),
+	(bonobo_moniker_async_handle_release),
+	(bonobo_moniker_async_handle_set_connection),
+	(bonobo_moniker_async_forward),
+	(bonobo_moniker_async_marshal), 
+	(unhook_io_channel),
+	(bonobo_moniker_invoke_callback),
+	(bonobo_moniker_async_handle_get_moniker),
+	(bonobo_moniker_async_handle_get_object),
+	(bonobo_moniker_async_handle_get_environment): impl.
+	(bonobo_moniker_client_new_from_name_async): stub.
+	(resolve_marshal): hack.
+	(resolve_demarshal): another hack.
+	(bonobo_moniker_resolve_async): impl.
+	(bonobo_moniker_resolve_async_default): impl.
+
+	* monikers/bonobo-moniker-gunzip.c: substantial fix indentation.
+
+	* bonobo/bonobo.h: add bonobo-context.h
+
+	* bonobo/bonobo-moniker-util.c (init_default_resolve_options): add.
+	(bonobo_moniker_client_resolve_default): use it.
+
+	* monikers/Makefile.am: rename oafinfo file names.
+
+	* monikers/*.oafinfo: rename to namespace nicely.
+
 2000-11-30  Michael Meeks  <michael@helixcode.com>
 
 	* storage-modules/bonobo-stream-vfs.c (vfs_copy_to): fix huge leak.
