@@ -1,3 +1,12 @@
+2000-11-08  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-event-source.c:
+	* bonobo/bonobo-listener.c:
+	Temporarily turned off compiling two files that depend on
+	bonobo-listener.idl. The last commit added these to the
+	build but did not turn bonobo-listener.idl back on. Also,
+	there's no ChangeLog for it for some reason.
+
 2000-11-07  Michael Meeks  <michael@helixcode.com>
 
 	* configure.in: bump version.

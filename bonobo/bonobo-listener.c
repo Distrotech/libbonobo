@@ -5,6 +5,9 @@
  * Author:
  *	Mike Kestner (mkestner@ameritech.net)
  */
+
+#if 0 /* turn this off until we are compiling bonobo-listener.idl */
+
 #include <config.h>
 #include <gtk/gtksignal.h>
 
@@ -208,3 +211,5 @@ bonobo_listener_new (BonoboListenerCallbackFn event_callback,
 
 	return bonobo_listener_construct (listener, corba_listener);
 }
+
+#endif
