@@ -1,0 +1,45 @@
+/*
+ * Generic listener handling interfaces
+ *
+ * Copyright 2000, Helix Code, Inc.
+ */
+
+module Bonobo {
+
+	typedef sequence<Any> ListenerArgs;
+
+	interface Listener : Bonobo::Unknown {
+		exception UnknownEvent {};
+
+		/**
+		 * event:   Invokes a named event on this listener object,
+		 * thus a single Bonobo / CORBA object can multiplex
+		 * many event requests without the overhead of an
+		 * object per type of event we want to listen to.
+		 * @event_name: the name of the event
+		 * @args: A sequence of arguments.
+		 */
+		oneway void event (in string event_name, in ListenerArgs args)
+			raises (UnknownEvent);
+	};
+
+	interface EventSource : Bonobo::Unknown {
+		exception UnknownListener {};
+
+		/**
+		 * add_listener: Adds a listener to events happening
+		 * on this object.
+		 * @l: the listener implementation.
+		 */
+		void add_listener    (in Listener l);
+		
+		/**
+		 * remove_listener: Removes a listener
+		 * @l: the listener
+		 */
+		void remove_listener (in Listener l)
+			raises (UnknownListener);
+	};
+}
+
+

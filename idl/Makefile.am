@@ -20,7 +20,6 @@ idl_DATA =				\
 	bonobo-desktop.idl		\
 	bonobo-print.idl		\
 	bonobo-moniker.idl		\
-	bonobo-sizeable.idl		\
 	$(NULL)
 
 EXTRA_DIST = $(idl_DATA)

@@ -1,3 +1,18 @@
+2000-10-08  Michael Meeks  <michael@helixcode.com>
+
+	* idl/bonobo-listener.idl: add.
+
+2000-10-07  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/Makefile.am: remove bonobo-sizeable, it was a bad idea.
+
+	* bonobo/bonobo.h: ditto.
+
+	* idl/Makefile.am: ditto.
+
+	* doc/Makefile.am (EXTRA_DIST): add all the docs we forgot to
+	distribute for the last months (doh).
+
 2000-10-07  Andy Hertzfeld  <andy@eazel.com>
 
 	* bonobo/bonobo-win.c: (toolbar_build_widget):
