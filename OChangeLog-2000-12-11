@@ -1,5 +1,15 @@
 1999-08-29  Michael Meeks  <michael@imaginator.com>
 
+	* bonobo/gnome-view.c (plug_destroy_cb): Added debug.
+	(gnome_view_destroy): Set plug to NULL: paranoid.
+
+	* bonobo/gnome-container.c (gnome_container_destroy): Fix
+	nasty bug using freed GList pointer.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_destroy): ditto.
+
+1999-08-29  Michael Meeks  <michael@imaginator.com>
+
 	* bonobo/gnome-embeddable.c (gnome_embeddable_destroy): Fix
 	nasty bug using freed GList pointer.
 

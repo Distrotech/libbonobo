@@ -76,13 +76,12 @@ static void
 gnome_container_destroy (GtkObject *object)
 {
 	GnomeContainer *container = GNOME_CONTAINER (object);
-	GList *l;
 
 	/*
 	 * Destroy all the ClientSites.
 	 */
-	for (l = container->client_sites; l != NULL; l = l->next) {
-		GnomeClientSite *client_site = GNOME_CLIENT_SITE (l->data);
+	while (container->client_sites) {
+		GnomeClientSite *client_site = GNOME_CLIENT_SITE (container->client_sites->data);
 
 		gnome_object_destroy (GNOME_OBJECT (client_site));
 	}
