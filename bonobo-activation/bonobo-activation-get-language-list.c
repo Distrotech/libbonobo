@@ -26,9 +26,15 @@
 
 /*
  * FIXME: this code should be in glib.
+ *
+ */
+
+/* ALEX:
  *        I collected the code fixes from libgnome and gnome-vfs and
  *        made them all use this code, since the dupliated alias tables
  *        were using quite a lot of memory.
+ *        Even though this function is technically private it shouldn't
+ *        be changed since gnome-vfs and libgnome use it too.
  */
 #include <string.h>
 #include <stdio.h>
