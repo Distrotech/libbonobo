@@ -4,19 +4,7 @@ INCLUDES =                                              \
 	-I$(srcdir) -I$(top_srcdir) 			\
 	-I$(top_builddir)				\
         -I$(includedir)                                 \
-	$(GNOME_INCLUDEDIR)				\
-	$(OAF_CFLAGS)					\
-	$(GDK_PIXBUF_CFLAGS)
-
-gnome_libs =				\
-	$(GNOME_LIBDIR)			\
-	$(GDK_PIXBUF_LIBS) 		\
-        $(GNOMEUI_LIBS)			\
-	$(INTLLIBS)
-
-bonobo_libs =				\
-	$(top_builddir)/bonobo/libbonobo.la \
-	$(BONOBO_LIBS)
+	$(BONOBO_TEST_CFLAGS)
 
 oafdir = $(datadir)/oaf
 oaf_DATA = std-moniker.oafinfo
@@ -34,6 +22,6 @@ std_moniker_SOURCES =			\
 	bonobo-moniker-query.h		\
 	std-moniker.c
 
-std_moniker_LDADD =			\
-	$(bonobo_libs)			\
-	$(gnome_libs)
+std_moniker_LDADD =				\
+	$(top_builddir)/bonobo/libbonobo.la	\
+	$(BONOBOX_TEST_LIBS)

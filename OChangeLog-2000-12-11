@@ -1,3 +1,16 @@
+2000-08-12  Michael Meeks  <michael@helixcode.com>
+
+	* Makefile.am (SUBDIRS): add monikers duh;
+
+	* monikers/std-moniker.c (bonobo_moniker_factory): remove the 'query:'
+	moniker.
+
+	* monikers/bonobo-moniker-query.c (query_parse_display_name): fix typo.
+
+	* monikers/Makefile.am: update.
+
+	* configure.in (BONOBO_TEST_LIBS): add gtk, glib.
+
 2000-08-12  Joe Shaw  <joe@helixcode.com>
 
 	* monikers/Makefile.am: Fixed so it will build this directory.
