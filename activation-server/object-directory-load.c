@@ -97,7 +97,9 @@ static void
 parse_oaf_server_attrs (ParseInfo      *info,
                         const xmlChar **attrs)
 {
-        char *iid = NULL, *type = NULL, *location = NULL;
+        const char *iid = NULL;
+        const char *type = NULL;
+        const char *location = NULL;
         const char *att, *val;
         char *error;
         int i = 0;
@@ -148,8 +150,9 @@ static void
 parse_oaf_attribute (ParseInfo     *info,
                      const xmlChar **attrs)
 {
-        char *type = NULL, *name = NULL;
-        char *value = NULL;
+        const char *type = NULL;
+        const char *name = NULL;
+        const char *value = NULL;
         char *locale = NULL, *equal_char;
         const char *att, *val;
         int i = 0;
@@ -176,23 +179,21 @@ parse_oaf_attribute (ParseInfo     *info,
                 
         } while (att && val);
 
-        if (!type || !name) {
+        if (!type || !name)
                 return;
-        }
         
-        if(name[0] == '_') 
-                g_error("%s is an invalid property name "
-                        "- property names beginning with '_' are reserved",
-                        name);
+        if (name[0] == '_')
+                g_error ("%s is an invalid property name "
+                         "- property names beginning with '_' are reserved",
+                         name);
 
         equal_char = strchr (name, '-');
         if (equal_char) {
                 locale = equal_char + 1;
 
                 /* Don't add the localized property if we aren't interested in it */
-                if (!is_locale_interesting (locale)) {
-                return;
-                }
+                if (!is_locale_interesting (locale))
+                        return;
         }
         
         info->cur_prop = g_new0 (Bonobo_ActivationProperty, 1);
@@ -200,12 +201,15 @@ parse_oaf_attribute (ParseInfo     *info,
 
         if (g_ascii_strcasecmp (type, "stringv") == 0) {
                 info->cur_prop->v._d = Bonobo_ACTIVATION_P_STRINGV;
+
         } else if (g_ascii_strcasecmp (type, "number") == 0) {
                 info->cur_prop->v._d = Bonobo_ACTIVATION_P_NUMBER;
                 info->cur_prop->v._u.value_number = atof (value);
+
         } else if (g_ascii_strcasecmp (type, "boolean") == 0) {
                 info->cur_prop->v._d = Bonobo_ACTIVATION_P_BOOLEAN;
                 info->cur_prop->v._u.value_boolean = od_string_to_boolean (value);
+
         } else {
                 /* Assume string */
                 info->cur_prop->v._d = Bonobo_ACTIVATION_P_STRING;
@@ -224,7 +228,7 @@ static void
 parse_stringv_item (ParseInfo     *info,
                     const xmlChar **attrs)
 {
-        char *value = NULL;
+        const char *value = NULL;
         const char *att, *val;
         int i = 0;
 
@@ -306,6 +310,21 @@ od_StartElement (ParseInfo     *info,
 }
 
 static void
+add_entry (ParseInfo *info)
+{
+        GSList *l;
+
+        for (l = *(info->entries); l; l = l->next) {
+                Bonobo_ServerInfo *si = l->data;
+
+                if (!strcmp (si->iid, info->cur_server->iid))
+                        return;
+        }
+
+        *(info->entries) = g_slist_prepend (*(info->entries), info->cur_server);
+}
+
+static void
 od_EndElement (ParseInfo     *info,
                const xmlChar *name)
 {
@@ -356,8 +375,8 @@ od_EndElement (ParseInfo     *info,
                         }
                         g_list_free (info->cur_props);
                         info->cur_props = NULL;
-                        
-                        *(info->entries) = g_slist_prepend (*(info->entries), info->cur_server);
+
+                        add_entry (info);
                         info->cur_server = NULL;
                 }
                 info->state = STATE_OAF_INFO;
@@ -545,9 +564,7 @@ od_load_directory (const char *directory,
              directory_entry = readdir (directory_handle)) {
                 pathname = g_strdup_printf ("%s/%s", directory, directory_entry->d_name);
 
-                if (od_filename_has_extension (pathname, ".oaf") ||
-                    od_filename_has_extension (pathname, ".oafinfo") ||
-                    od_filename_has_extension (pathname, ".server")) {
+                if (od_filename_has_extension (pathname, ".server")) {
                         od_load_file (pathname, entries, host, domain);
                 }
 
@@ -595,7 +612,9 @@ Bonobo_ServerInfo_load (char **directories,
 
 	for (j = 0, p = entries; j < length; j++, p = p->next) {
 		memcpy (&servers->_buffer[j], p->data, sizeof (Bonobo_ServerInfo));
-		g_hash_table_insert (*iid_to_server_info_map, servers->_buffer[j].iid, &servers->_buffer[j]);
+		g_hash_table_insert (*iid_to_server_info_map,
+                                     servers->_buffer[j].iid,
+                                     &servers->_buffer[j]);
 	}
 
 	g_hash_table_thaw (*iid_to_server_info_map);
@@ -604,21 +623,16 @@ Bonobo_ServerInfo_load (char **directories,
         g_slist_free (entries);
 }
 
-
-
-
 static gboolean 
 od_string_to_boolean (const char *str)
 {
-	if (g_ascii_strcasecmp (str, "true") == 0
-	    || g_ascii_strcasecmp (str, "yes") == 0
-	    || strcmp (str, "1") == 0) {
+	if (!g_ascii_strcasecmp (str, "true") ||
+            !g_ascii_strcasecmp (str, "yes") ||
+	    !strcmp (str, "1"))
 		return TRUE;
-	} else {
+	else
 		return FALSE;
-        }
 }
-
 
 static gboolean
 od_filename_has_extension (const char *filename,

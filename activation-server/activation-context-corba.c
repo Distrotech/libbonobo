@@ -37,6 +37,8 @@
 #include "activation-context-query.h"
 #include "activation-server-corba-extensions.h"
 
+#undef LOCALE_DEBUG
+
 #define Bonobo_LINK_TIME_TO_LIVE 256
 
 typedef struct
@@ -473,10 +475,19 @@ add_initial_locales (void)
                         *equal_char = 0;
                 }
 
-                if (lang_with_locale && strcmp (lang_with_locale, "")) 
+                if (lang_with_locale && strcmp (lang_with_locale, "")) {
                         locale_list = g_list_prepend (locale_list, lang_with_locale);
-                if (lang && strcmp (lang, "")) 
-                        locale_list = g_list_prepend (locale_list, lang);
+#ifdef LOCALE_DEBUG
+                        g_warning ("Init lang '%s'", lang_with_locale);
+#endif
+                }
+
+                if (lang && strcmp (lang, "")) {
+                        locale_list = g_list_prepend (locale_list, g_strdup (lang));
+#ifdef LOCALE_DEBUG
+                        g_warning ("Init lang(2) '%s'", lang);
+#endif
+                }
         }
 
         g_free (tmp2);
@@ -504,6 +515,10 @@ impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
         for (i = 0; localev[i]; i++) {
                 if (!g_list_find_custom (locale_list, localev[i],
                                          (GCompareFunc)strcmp)) {
+#ifdef LOCALE_DEBUG
+                        g_warning ("New locale '%s' (%d)!",
+                                   localev[i], g_list_length (locale_list));
+#endif
                         locale_list = g_list_prepend (locale_list, g_strdup (localev[i]));
                         new_locale = TRUE;
                 }
