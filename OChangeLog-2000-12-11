@@ -1,3 +1,16 @@
+1999-06-23  Matt Loper  <matt@gnome-support.com>
+
+	* bonobo/test-container-autoload.c
+	(add_object_to_container): Add buttons for each containee, which
+	correspond to loading and destruction of that containee. Also
+	renamed.
+	(gnome_object_has_interface): new function.
+	(destroy_embedded_object_cb): new function.  
+	(cancel_hydrating_object_from_file_cb): new function.
+	(hydrate_object_from_file_cb): renamed.
+	(create_persist_file_dialog_cb): renamed.
+	Commenting.
+
 1999-06-22  Tomas Ogren  <stric@ing.umu.se>
 
 	* configure.in: Added 'sv' to ALL_LINGUAS
