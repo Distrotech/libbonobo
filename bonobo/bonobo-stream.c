@@ -224,8 +224,9 @@ bonobo_stream_open_full (const char *driver, const char *path, gint flags,
 		stream = p->stream_open (path, flags, mode, my_ev);
 
 	if (!opt_ev) {
-		g_warning ("bonobo_stream_open failed '%s'",
-			   bonobo_exception_get_text (my_ev));
+		if (my_ev->_major != CORBA_NO_EXCEPTION)
+			g_warning ("bonobo_stream_open failed '%s'",
+				   bonobo_exception_get_text (my_ev));
 		CORBA_exception_free (&ev);
 	}
 

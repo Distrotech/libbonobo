@@ -1,5 +1,16 @@
 2000-11-11  Michael Meeks  <michael@helixcode.com>
 
+	* storage-modules/bonobo-storage-fs.c (bonobo_storage_fs_open): 
+	add 'x' attributes on storages; most storages are treated as
+	files wrt. flags.
+
+	* bonobo/bonobo-storage.c (bonobo_storage_open_full): 
+	don't warn unless we get an exception.
+
+	* bonobo/bonobo-stream.c (bonobo_stream_open_full): ditto.
+
+2000-11-11  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-toolbar.c (size_allocate_helper):
 	go through the allocation of pack-end widgets backwards
 	so they appear in the same order as in the xml file.
