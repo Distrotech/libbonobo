@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.103.0\n"
-"POT-Creation-Date: 2003-07-31 13:11+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-11 12:36+0200\n"
 "PO-Revision-Date: 2003-06-22 17:54+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkish <gnome@azitt.com>\n"
@@ -15,15 +16,15 @@ msgstr ""
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
-msgstr "Vericinin sıralandığı törəmə gedişatı tapa bilmədim"
+msgstr "Vericinin sıralandığı törəmə gedişatı tapıla bilmədi"
 
 #: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
-msgstr "Hökmsüz Aktivləşdirmə ID-i"
+msgstr "Hökmsüz Aktivləşdirmə ID'si"
 
 #: activation-server/activation-server-main.c:66
 msgid "Directory to read .server files from"
-msgstr "Verici fayllarının oxunacağı qovluqlar"
+msgstr ".server fayllarının oxunacağı qovluq"
 
 #: activation-server/activation-server-main.c:66
 msgid "DIRECTORY"
@@ -31,11 +32,11 @@ msgstr "QOVLUQ"
 
 #: activation-server/activation-server-main.c:69
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "Fəallaşdırma vəiyyəti olaraq işlə (varsayılan: Cismlər qovluğu)"
+msgstr "FəallaşdırmaMəzmunu olaraq xidmət et (əsas: yalnız Cismlər qovluğu)"
 
 #: activation-server/activation-server-main.c:73
 msgid "File descriptor to write IOR to"
-msgstr "IORu yazdıracaq dosye izahatı"
+msgstr "IOR'u yazacaq fayl izahatçısı"
 
 #: activation-server/activation-server-main.c:73
 #: bonobo-activation/bonobo-activation-init.c:193
@@ -44,7 +45,7 @@ msgstr "FD"
 
 #: activation-server/activation-server-main.c:81
 msgid "Query expression to evaluate"
-msgstr "Daranacaq soruşma mətni"
+msgstr "Qiymət veriləcək sorğulama ifadəsi"
 
 #: activation-server/activation-server-main.c:81
 msgid "EXPRESSION"
@@ -52,7 +53,7 @@ msgstr "İFADƏ"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr "CORBA CosAdlandırma xidməti"
+msgstr "CORBA CosNaming xidməti"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
@@ -68,8 +69,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"OAF quraşdırma faylı müvəffəqiyyətlə oxunmadı. Lütfən, hökmlü olub "
-"olmadığını yoxla :%s"
+"Bonobo Başlatma quraşdırma faylı müvəffəqiyyətlə oxunmadı. Xahiş edirik, hökmlü olub "
+"olmadığını yoxlayın: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -85,7 +86,7 @@ msgstr "'%s' vericisini fəallaşdırırkən yarış vəziyyəti"
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr "bir NULL iid hökmsüzdür"
+msgstr "NULL iid hökmsüzdür"
 
 #: activation-server/object-directory-load.c:98
 #, c-format
@@ -100,7 +101,7 @@ msgstr "iid %s bir NULL yerini daxil edir"
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "hökmsüz hərf '%c' (iid '%s')"
+msgstr "iid '%s' içində hökmsüz hərf '%c'"
 
 #: activation-server/object-directory-load.c:306
 #, c-format
@@ -109,7 +110,7 @@ msgstr "Xüsusiyyət '%s'nin qiyməti yoxdur"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Törəmə gedişat xəta ismarıcı vermədi, naməlum iflas baş verdi"
+msgstr "Törəmə gedişat xəta ismarıcı vermədi, namə'lum iflas baş verdi"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
@@ -176,7 +177,7 @@ msgstr "`%s' içində Bonobo_Plugin_info simvolu tapıla bilmir"
 #: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr "`%s' emalatxanası `%s' üçün NIL cavabı verdi"
+msgstr "`%s' e'malatxanası `%s' üçün NIL cavabı verdi"
 
 #: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
@@ -360,7 +361,7 @@ msgstr "ORB IOR dəstək monikeri"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "Standard Moniker emalatxanası"
+msgstr "Standard Moniker e'malatxanası"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
@@ -372,7 +373,7 @@ msgstr "sıravi Oaf sorğu monikeri"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "sıravi emalatxanası 'yeni' monikeri"
+msgstr "sıravi e'malatxanası 'yeni' monikeri"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
