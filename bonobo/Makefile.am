@@ -52,7 +52,7 @@ idls =							\
 
 idl_flags = -I$(top_srcdir)/idl -I $(BONOBO_ACTIVATION_IDL_DIR) -D__BONOBO_COMPILATION
 
-$(CORBA_ALL_SOURCE): $(idls) $(ORBIT_IDL)
+$(CORBA_SOURCE): $(idls) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo.idl
 
 Bonobo-imodule.c : $(idls) $(ORBIT_IDL)
@@ -106,7 +106,6 @@ noinst_HEADERS =			\
 	bonobo-running-context.h
 
 libbonobo_src =				\
-	bonobo-marshal-main.c		\
 	bonobo-moniker-context.c	\
 	bonobo-arg.c			\
 	bonobo-async.c			\
@@ -137,8 +136,6 @@ libbonobo_src =				\
 	bonobo-running-context.c	\
 	bonobo-types.c
 
-$(libbonobo_src) : $(CORBA_SOURCE)
-
 libbonobo_2_la_SOURCES = \
 	$(libbonoboinclude_HEADERS)	\
 	$(libbonobo_src)		\
@@ -156,8 +153,6 @@ Bonobo_module_la_LDFLAGS = \
 marshal_sources = \
 	bonobo-marshal.c \
 	bonobo-marshal.h
-
-bonobo-marshal-main.c : bonobo-marshal.h bonobo-marshal.c
 
 bonobo-marshal.h: bonobo-marshal.list
 	cd $(srcdir) \
@@ -177,7 +172,9 @@ MAINTAINERCLEANFILES = $(marshal_sources)
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libbonobo-2.0.pc
 
+DONT_DIST_SOURCE = $(CORBA_ALL_SOURCE) $(marshal_sources)
+
 dist-hook:
-	for file in $(CORBA_ALL_SOURCE) ; do \
+	for file in $(DONT_DIST_SOURCE) ; do \
 	    rm -f $(distdir)/$$file ; \
 	done

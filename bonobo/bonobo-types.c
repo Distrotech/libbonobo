@@ -4,11 +4,19 @@
 #include <gobject/gvalue.h>
 #include <gobject/gvaluearray.h>
 #include <gobject/gvaluecollector.h>
+#include <gobject/gobject.h>
+#include <gobject/genums.h>
+#include <gobject/gvaluetypes.h>
+#include <gobject/gboxed.h>
 #include <bonobo/bonobo-types.h>
 #include <bonobo/bonobo-arg.h>
 
-typedef struct
-{
+/* The marshalers */
+#include <bonobo/bonobo-marshal.h>
+#include "bonobo-marshal.c"
+/* end of marshalers */
+
+typedef struct {
 	GType            type;
 	CORBA_TypeCode   tc;
 	gboolean         is_bonobo_unknown;

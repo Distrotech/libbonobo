@@ -1,11 +1,15 @@
+2001-08-02  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-types.c (bonobo_closure_store): make this
+	include the marshalers.
+
+	* bonobo/bonobo-marshal-main.c: remove.
+
+	* bonobo/Makefile.am: update the strange dependency rules.
+
 2001-08-03  Abel Cheung  <maddog@linux.org.hk>
 
 	* configure.in: Added zh_TW.Big5 (traditional Chinese) to ALL_LINGUAS.
-
-2001-08-02  Michael Meeks  <michael@ximian.com>
-
-	* bonobo/Makefile.am: make bonobo-marshal-main.c depend
-	on bonobo-marshal.c and bonobo-marshal.h
 
 2001-08-01  Michael Meeks  <michael@ximian.com>
 
