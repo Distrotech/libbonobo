@@ -1,3 +1,13 @@
+2000-04-21  Martin Baulig  <martin@home-of-linux.org>
+
+	* gshell/properties.[ch]: New files. Basically copied from
+	samples/controls/bonobo-clock-control.c.
+	(show_properties_dialog): New function to show a dialog box
+	in which the user can edit the control's properties.
+
+	* gshell/gshell.c (edit_menu_preferences_cb): Call
+	show_properties_dialog ().
+
 2000-04-21  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* configure.in: Prepend `BONOBO_INCLUDEDIR' with `-I{$includedir}'
