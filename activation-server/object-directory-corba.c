@@ -638,10 +638,10 @@ add_active_server (impl_POA_Bonobo_ObjectDirectory    *servant,
 					servers, environment, object);
 
 		if (new_servers != servers) { /* Need to reset the pointer */
-			g_hash_table_steal (servant->active_server_lists, servers->iid);
+			g_hash_table_steal (servant->active_server_lists, new_servers->iid);
 
 			g_hash_table_insert (
-				servant->active_server_lists, servers->iid, new_servers);
+				servant->active_server_lists, new_servers->iid, new_servers);
 		}
 	}
 
