@@ -1,3 +1,7 @@
+2003-05-20  Telsa Gwynne  <hobbit@aloss.ukuu.org.uk>
+
+	* configure.in: Added cy (Welsh) to ALL_LINGUAS
+
 2003-05-19  Michael Meeks  <michael@ximian.com>
 
 	* activation-server/object-directory-corba.c
