@@ -80,13 +80,13 @@ bonobo_app_client_init (BonoboAppClient *app_client)
 
  * @app_server: object reference to a Bonobo::Application; this
  * function takes ownership of this reference (use
- * bonobo_object_dup_ref if you want to keep your own reference.)
+ * bonobo_object_dup_ref() if you want to keep your own reference.)
  * 
  * Create an application client object connected to the remote (or
  * local) Bonobo::Application object.
  *
- * Warning: Applications should not use this function. See
- * bonobo_register_unique_application().
+ * <warning>Applications should not use this function. See
+ * bonobo_application_register_unique().</warning>
  * 
  * Return value: a #BonoboAppClient object.
  **/
@@ -236,7 +236,7 @@ bonobo_app_client_msg_send_valist (BonoboAppClient   *app_client,
  * 
  * Send a message to the application server. Takes a variable length
  * argument list of GType, value pairs, terminated with
- * G_TYPE_NONE. Values are direct C values, not GValues! Example:
+ * %G_TYPE_NONE. Values are direct C values, not GValues! Example:
  * <informalexample><programlisting>
  * GValue *retval;
  * retval = bonobo_app_client_msg_send (app_client, "openURL",
