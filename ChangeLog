@@ -1,5 +1,8 @@
 2003-04-17  Michael Meeks  <michael@ximian.com>
 
+	* tests/test-activation/Makefile.am (TESTS_ENVIRONMENT):
+	update test path.
+
 	* bonobo/bonobo-object.c (bonobo_object_get_property) 
 	(bonobo_object_set_property): impl.
 	(bonobo_object_instance_init): chop out do_corba_setup

@@ -96,7 +96,7 @@ EXTRA_DIST=empty.idl plugin.idl $(serverfiles)
 TESTS_ENVIRONMENT = \
 	TMPDIR="/tmp/orbit-$$USER/tst" \
 	BONOBO_ACTIVATION_DEBUG_OUTPUT="1" \
-	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test:$$BONOBO_ACTIVATION_PATH" \
+	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test/test-activation:$$BONOBO_ACTIVATION_PATH" \
 	PATH="$(top_builddir)/test:$(top_builddir)/activation-server:$$PATH" \
 	LD_LIBRARY_PATH="$(top_builddir)/test/.libs:$$LD_LIBRARY_PATH"
 
