@@ -29,7 +29,7 @@ interface ClientSite : GNOME::obj {
 	 * when it shows its own separate editing window.
 	 *
 	 */
-	oneway void show_window (in boolean shown);
+	void show_window (in boolean shown);
 
 	/**
 	 * get_moniker:

@@ -78,7 +78,7 @@ gnome_container_class_init (GnomeContainerClass *container_class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) container_class;
 
-	gnome_container_parent_class = gtk_type_class (gtk_object_get_type ());
+	gnome_container_parent_class = gtk_type_class (gnome_object_get_type ());
 
 	object_class->destroy = gnome_container_destroy;
 

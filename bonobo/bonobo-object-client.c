@@ -107,7 +107,7 @@ gnome_object_client_class_init (GnomeObjectClientClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
-	gnome_object_client_parent_class = gtk_type_class (gtk_object_get_type ());
+	gnome_object_client_parent_class = gtk_type_class (gnome_object_get_type ());
 
 	object_class->destroy = gnome_object_client_destroy;
 }

@@ -19,7 +19,7 @@ typedef struct {
 	/*
 	 * Some objects might use this, not always used.
 	 */
-	GList *views;		/* List of GnomeCovers. */
+	GList *view_frames;		/* List of GnomeViewFrames. */
 } GnomeObjectClient;
 
 typedef struct {

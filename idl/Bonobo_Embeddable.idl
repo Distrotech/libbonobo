@@ -29,6 +29,17 @@ interface View : GNOME::obj {
 
 };
 
+interface ViewFrame : GNOME::obj {
+	ClientSite get_client_site ();
+
+	/**
+	 * view_activated:
+	 * @state: TRUE if the view has been activated, FALSE if
+	 * it just became inactive.
+	 */
+	void view_activated (in boolean state);
+};
+
 /* Equivalent to IOleObject */
 interface BonoboObject : GNOME::obj {
 
@@ -162,14 +173,15 @@ interface BonoboObject : GNOME::obj {
 
 	/**
 	 * new_view:
-	 * 
+	 * @frame: the View frame containing this view.
+	 *
 	 * This returns a new window-id to provide a view of the
 	 * object.
 	 * 
 	 * BonoboObjects should be able to produce as many views
 	 * of the same data as requested.
 	 */
-	View new_view ();
+	View new_view (in ViewFrame frame);
 
 };
 

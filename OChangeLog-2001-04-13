@@ -1,3 +1,72 @@
+1999-06-08  Nat Friedman  <nat@gnome-support.com>
+
+	* idl/gnome-component.idl (ViewFrame): Added the GNOME::ViewFrame interface.
+	(BonoboObject): Added the ViewFrame argument to new_view.
+
+	* idl/gnome-client-site.idl (show_window): No longer oneway.
+
+	* components/text-plain/bonobo-text-plain.c: Added
+	progressive_data field to the BonoboObject private data structure
+	to keep track of whether or not the component is in the process of
+	receiving data view the ProgressiveDataSink.
+	(progressive_start): Set bonobo_object_data->progressive_data to TRUE.
+	(progressive_end): Set bonobo_object_data->progressive_data to FALSE.
+	(view_factory): Only hide the progress meter if we're not
+	receiving progressive data.
+
+	* bonobo/test-container.c (text_client_site): New global variable
+	to cache the client site associated with the text_obj
+	BonoboObject.
+	(image_client_site): Ditto for image_png_obj.
+	(launch_server): Take the GnomeClientSite as a paramter.
+	(add_view): Take the GnomeClientSite as an argument so it can be
+	passed to gnome_bonobo_object_new_view.  Get the GnomeWrapper from
+	the ViewFrame.  Return the ViewFrame, not the wrapper.
+	(add_cmd): Create the client site and return it in a new
+	parameter.  Pass it to add_view.
+	(add_demo_cmd): Pass &client_site to add_cmd.
+	(add_image_cmd): Pass &image_client_site to add_cmd.
+	(add_image_view): Pass image_client_site to add_view.
+	(add_text_cmd): Pass &text_client_site to add_cmd.
+	(add_text_view): Pass text_client_site to add_view.
+
+	* bonobo/test-container-autoload.c (launch_server): Added a
+	client_site parameter.  Don't create the client_site here.
+	(add_object_cmd): Create the client site here and pass it to
+	launch_server.  Pass the client site to
+	gnome_bonobo_object_new_view .  Get the view_widget from the
+	view_frame that new_view returned.
+
+	* bonobo/gnome-object-client.h: Changed views list to view_frames.
+
+	* bonobo/gnome-component-client.h: Include gnome-client-site.h and
+	gnome-view-frame.h.
+	(gnome_bonobo_object_new_view): Changed prototype to have
+	client_site argument.
+
+	* bonobo/gnome-component-client.c (destroy_view_frame): Thre
+	destroy_view function was renamed to this.  Remove the specified
+	ViewFrame from the GnomeClientSite's ViewFrame list.
+	(gnome_bonobo_object_client_activate): Get the wrapper from the
+	ViewFrame list.
+	(gnome_bonobo_object_client_deactivate): Likewise.
+
+	(gnome_bonobo_object_new_view): Take the GnomeClientSite as an
+	argument.  Create the view frame for the new view and return it.
+	Associate the view and the view frame with the cover.
+
+	* bonobo/Makefile.am (libbonobo_la_SOURCES): Added gnome-view-frame.c
+	(libbonoboinclude_HEADERS): Added gnome-view-frame.h
+
+1999-06-08  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-view.c (gnome_view_class_init): Parent is
+	GNOME::obj, not GtkObject.
+	
+	* bonobo/gnome-container.c (gnome_container_class_init): ditto.
+	* bonobo/gnome-component-factory.c (gnome_bonobo_object_factory_class_init): ditto.
+	* bonobo/gnome-bind-context.c (gnome_bind_context_class_init): ditto
+
 1999-06-07  Matt Loper  <matt@gnome-support.com>
 
 	* idl/gnome-persist.idl (GNOME): Added a `WrongDataType' exception
