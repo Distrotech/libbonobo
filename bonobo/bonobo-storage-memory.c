@@ -439,8 +439,7 @@ smem_open_stream_impl (PortableServer_Servant   servant,
  ok_out:
 	g_free (path_last);
 	
-	return bonobo_object_dup_ref (bonobo_object_corba_objref (stream),
-				      NULL);
+	return bonobo_object_dup_ref (BONOBO_OBJREF (stream), ev);
 	
  ex_out:
 	g_free (path_last);
@@ -504,8 +503,7 @@ smem_open_storage_impl (PortableServer_Servant   servant,
  ok_out:
 	g_free (path_last);
 	
-	return bonobo_object_dup_ref (bonobo_object_corba_objref (ret),
-				      NULL);
+	return bonobo_object_dup_ref (BONOBO_OBJREF (ret), ev);
 	
  ex_out:
 	g_free (path_last);

@@ -134,7 +134,6 @@ main (int argc, char *argv [])
 		CORBA_exception_free (ev);
 	}
 
-#if 1
 	printf ("getInfo (storage):\t");
 	num_tests++;
 	info = Bonobo_Storage_getInfo (corba_storage,
@@ -296,17 +295,13 @@ main (int argc, char *argv [])
 		CORBA_exception_free (ev);
 	}
 	CORBA_exception_free (ev);
-#endif
+
+	bonobo_object_unref (BONOBO_OBJECT (storage));
 	
 	printf ("%d of %d tests passed\n", num_ok, num_tests);
 	
 	if (num_ok != num_tests)
 		return 1;
 
-	bonobo_object_unref (BONOBO_OBJECT (storage));
-	
-	printf ("FIXME: bonobo-storage-memory is just too perfect!\n");
-	
-	/* return bonobo_debug_shutdown (); */
-	return 0;
+	return bonobo_debug_shutdown ();
 }
