@@ -36,7 +36,6 @@ G_BEGIN_DECLS
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-shlib-factory.h>
 #include <bonobo/bonobo-main.h>
-#include <bonobo/bonobo-running-context.h>
 
 #include <bonobo/bonobo-stream.h>
 #include <bonobo/bonobo-stream-memory.h>

@@ -2,7 +2,6 @@
 
 bonobo_generic_factory_get_type
 bonobo_storage_mem_get_type
-bonobo_running_context_get_type
 bonobo_event_source_get_type
 bonobo_persist_stream_get_type
 bonobo_moniker_extender_get_type
