@@ -5,7 +5,6 @@ idldir = $(datadir)/idl
 idl_DATA =				\
 	Bonobo.idl			\
 	Bonobo_Canvas.idl		\
-	Bonobo_ClientSite.idl		\
 	Bonobo_Context.idl		\
 	Bonobo_Control.idl		\
 	Bonobo_Embeddable.idl		\

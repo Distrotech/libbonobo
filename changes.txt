@@ -98,8 +98,18 @@ Bonobo_PersistStream:
 Bonobo_PersistStorage:
 	remove initNew: use the stream context for this.
 
+Bonobo_ClientSite:
 Bonobo_Embeddable:
-	remove advise, unadvise: use an aggregated EventSource instead.
+Bonobo_View:
+Bonobo_ViewFrame:
+	killed: use the new ControlFactory and CanvasComponentFactory
+	interfaces to create compound document view objects.  
+
+Bonobo_ControlFactory:
+	new: use to expose control based compound-doc view support.
+
+Bonobo_CanvasComponentFactory:
+	new: use to expose canvas based compound-doc view support.
 
 Removed:
 	Bonobo_Advise.idl:          unused,

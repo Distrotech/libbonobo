@@ -33,7 +33,6 @@
 
 /* Subdocument stuff. */
 #include <Bonobo_ItemContainer.idl>
-#include <Bonobo_ClientSite.idl>
 #include <Bonobo_Canvas.idl>
 #include <Bonobo_Embeddable.idl>
 

@@ -633,7 +633,8 @@ bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 				  GObject            *object)
 {
 	GParamSpec **pspecs;
-	int          i, nargs = 0;
+	int          i;
+	guint	     nargs = 0;
 
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));

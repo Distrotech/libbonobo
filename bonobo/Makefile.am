@@ -29,7 +29,6 @@ CORBA_SOURCE =			\
 idls =							\
 	$(top_srcdir)/idl/Bonobo.idl			\
 	$(top_srcdir)/idl/Bonobo_Canvas.idl		\
-	$(top_srcdir)/idl/Bonobo_ClientSite.idl		\
 	$(top_srcdir)/idl/Bonobo_Context.idl		\
 	$(top_srcdir)/idl/Bonobo_Control.idl		\
 	$(top_srcdir)/idl/Bonobo_Embeddable.idl		\

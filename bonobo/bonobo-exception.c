@@ -175,10 +175,6 @@ bonobo_exception_repoid_to_text  (const char *repo_id)
 	else if (!strcmp (repo_id, ex_Bonobo_ItemContainer_SyntaxError))
 		return g_strdup (_("Syntax error in object description"));
 
-	/* Bonobo::Embeddable */
-	else if (!strcmp (repo_id, ex_Bonobo_Embeddable_UserCancelledSave))
-		return g_strdup (_("The User canceled the save"));
-
 #if 0
 	/* Bonobo::GenericFactory */
 	else if (!strcmp (repo_id, ex_GNOME_ObjectFactory_CannotActivate))

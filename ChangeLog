@@ -1,3 +1,15 @@
+2001-07-22  Mike Kestner <mkestner@speakeasy.net>
+
+	Added tag BEFORE_DOC_REWRITE prior to this commit.
+
+	* bonobo/Makefile.am : remove Bonobo_ClientSite.idl from build.
+	* bonobo/bonobo-exception.c : kill Bonobo_Embeddable exception strings
+	* idl/Bonobo.idl : remove Bonobo_ClientSite.idl.
+	* idl/Bonobo_Embeddable.idl : kill View, ViewFrame, and get Embeddable.
+	Add the new CanvasComponentFactory and ControlFactory interfaces.
+	* idl/Bonobo_ClientSite.idl : kill.
+	* idl/Makefile.am : remove Bonobo_ClientSite.idl from build.
+	
 2001-07-21  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* changes.txt (Bonobo_Persist): Added note about new getIId method
