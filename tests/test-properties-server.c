@@ -248,8 +248,8 @@ print_props (void)
 			 s1, s2,
 			 prop->docstring,
 			 prop->flags & BONOBO_PROPERTY_UNSTORED        ? "Unstored"         : "Stored",
-			 prop->flags & BONOBO_PROPERTY_READ_ONLY       ? "ReadOnly"         : "Readable",
-			 prop->flags & BONOBO_PROPERTY_WRITE_ONLY      ? "WriteOnly"        : "Writeable",
+			 prop->flags & BONOBO_PROPERTY_READABLE        ? "Readable"         : "NotReadable",
+			 prop->flags & BONOBO_PROPERTY_WRITEABLE       ? "Writeable"        : "NotWriteable",
 			 prop->flags & BONOBO_PROPERTY_USE_DEFAULT_OPT ? "DefaultOptimized" : "NotDefaultOptimized");
 
 		g_free (s1);

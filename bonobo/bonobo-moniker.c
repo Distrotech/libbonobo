@@ -12,6 +12,7 @@
 #include <string.h>
 
 GtkObject *bonobo_moniker_parent_class;
+
 /**
  * bonobo_moniker_set_server:
  * @moniker: the moniker on which we act.
@@ -21,7 +22,6 @@ GtkObject *bonobo_moniker_parent_class;
 void
 bonobo_moniker_set_server (BonoboMoniker *moniker, const char *goadid, const char *url)
 {
-	g_return_if_fail (moniker != NULL);
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
 	g_return_if_fail (goadid != NULL);
 	g_return_if_fail (url != NULL);
@@ -43,7 +43,6 @@ bonobo_moniker_set_server (BonoboMoniker *moniker, const char *goadid, const cha
 void
 bonobo_moniker_append_item_name (BonoboMoniker *moniker, const char *item_name)
 {
-	g_return_if_fail (moniker != NULL);
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
 	g_return_if_fail (item_name != NULL);
 
@@ -98,7 +97,6 @@ bonobo_moniker_get_as_string (BonoboMoniker *moniker)
 	char **array;
 	int len;
 	
-	g_return_val_if_fail (moniker != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), NULL);
 
 	if (moniker->goadid == NULL)

@@ -182,7 +182,7 @@ bonobo_property_bag_xml_persist (BonoboPropertyBag *pb, const Bonobo_Stream stre
 		if (prop->flags & BONOBO_PROPERTY_UNSTORED)
 			continue;
 
-		if (! (prop->flags & BONOBO_PROPERTY_READ_ONLY))
+		if (! (prop->flags & BONOBO_PROPERTY_READABLE))
 			continue;
 
 		if (prop->flags & BONOBO_PROPERTY_USE_DEFAULT_OPT) {

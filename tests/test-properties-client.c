@@ -126,7 +126,7 @@ simple_print_read_only (char *name)
 
 	flags = bonobo_property_bag_client_get_flags (pbc, name);
 
-	return (flags & BONOBO_PROPERTY_READ_ONLY) ?
+	return (flags & BONOBO_PROPERTY_READABLE) ?
 		"ReadOnly" : "ReadWrite";
 }
 

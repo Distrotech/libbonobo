@@ -31,7 +31,6 @@ static BonoboObjectClass *bonobo_object_client_parent_class;
 BonoboObjectClient *
 bonobo_object_client_construct (BonoboObjectClient *object_client, CORBA_Object corba_object)
 {
-	g_return_val_if_fail (object_client != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_OBJECT_CLIENT (object_client), NULL);
 	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 	
@@ -364,9 +363,8 @@ bonobo_object_client_query_interface (BonoboObjectClient *object,
 	Bonobo_Unknown      interface;
 	CORBA_Environment *ev, real_ev;
 
-	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (interface_desc != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (BONOBO_IS_OBJECT_CLIENT (object), CORBA_OBJECT_NIL);
+	g_return_val_if_fail (interface_desc != NULL, CORBA_OBJECT_NIL);
 
 	if (opt_ev)
 		ev = opt_ev;

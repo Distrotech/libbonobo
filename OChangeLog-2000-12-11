@@ -1,3 +1,21 @@
+2000-04-04  Darin Adler  <darin@eazel.com>
+
+	Changes to get things building again.
+
+	* bonobo/bonobo-property-bag-xml.c (bonobo_property_bag_xml_persist):
+	* tests/test-properties-client.c (simple_print_read_only):
+	* tests/test-properties-server.c (print_props)
+	Fixed places where it was still using BONOBO_PROPERTY_READ_ONLY and
+	BONOBO_PROPERTY_WRITE_ONLY.
+
+	* bonobo/bonobo-control-frame.c:
+	* bonobo/bonobo-control.c: 
+	* bonobo/bonobo-moniker-client.c: 
+	* bonobo/bonobo-moniker.c: 
+	* bonobo/bonobo-object-client.c:
+	Remove some redundant checks for NULL just before object type checks
+	which also check for NULL.
+
 2000-04-04  Michael Meeks  <michael@helixcode.com>
 
 	* samples/controls/bonobo-clock-control.c (bonobo_entry_factory): implement.
