@@ -8,7 +8,7 @@
 #ifndef _BONOBO_IDL_INCLUDED_
 #define _BONOBO_IDL_INCLUDED_
 
-#if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__Bonobo_COMPILATION) && defined(__ORBIT_IDL__)
 %{
 #pragma include_defs bonobo/Bonobo.h
 %}
@@ -47,7 +47,7 @@
 /* Clipboard */
 #include <Bonobo_Clipboard.idl>
 
-#if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__Bonobo_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif
 
