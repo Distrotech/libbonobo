@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-01-09 15:27+0000\n"
+"POT-Creation-Date: 2004-01-15 15:40+0000\n"
 "PO-Revision-Date: 2003-01-01 21:24+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Bahasa Melayu <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -22,33 +22,33 @@ msgstr "Tak dapat mencari anak yang mana yang pelayan disenaraikan"
 msgid "Not a valid Activation ID"
 msgstr "BUkan satu ID pengaktifan"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
 msgstr "Direktori untuk dibaca oleh fail .server"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
 msgstr "DIREKTORI"
 
-#: activation-server/activation-server-main.c:69
+#: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Dilayan sebagai ActivationContext (default ialah ObjectDirectory sahaja)"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
 msgstr "Keterangan fail untuk ditulis oleh IOR"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
 msgstr "Kueri penyataan untuk dinilai"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
 msgstr "UNGKAPAN"
 
@@ -113,10 +113,20 @@ msgstr "iid %s mempunyai lokasi NULL"
 msgid "invalid character '%c' in iid '%s'"
 msgstr "Aksara tidak sah '%c' pada iid '%s'"
 
-#: activation-server/object-directory-load.c:306
+#: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Ciri-ciri '%s' tidak mempunyai nilai"
+
+#: activation-server/object-directory-load.c:588
+#, c-format
+msgid "Could not parse badly formed XML document %s"
+msgstr ""
+
+#: activation-server/object-directory-load.c:641
+#, c-format
+msgid "Trying dir %s"
+msgstr ""
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"

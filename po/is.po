@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.4\n"
-"POT-Creation-Date: 2004-01-09 15:27+0000\n"
+"POT-Creation-Date: 2004-01-15 15:40+0000\n"
 "PO-Revision-Date: 2003-08-18 18:05+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <is@li.org>\n"
@@ -22,33 +22,33 @@ msgstr "Gat ekki fundið í hvaða barni þjónninn var listaður í"
 msgid "Not a valid Activation ID"
 msgstr "Ekki gilt virkjunarskilríki"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
 msgstr "Mappa sem lesa á .server skrár úr"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
 msgstr "MAPPA"
 
-#: activation-server/activation-server-main.c:69
+#: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Vinna sem 'ActivationContext' (sjálfgefið er einungis 'ObjectDirectory')"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
 msgstr "Skráarhandfang sem rita á IOR í"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
 msgstr "Fyrirspurn sem á að þátta"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
 msgstr "FYRIRSPURN"
 
@@ -113,10 +113,20 @@ msgstr "iid %s hefur enga staðsetningu"
 msgid "invalid character '%c' in iid '%s'"
 msgstr "ógilt tákn '%c' í iid '%s'"
 
-#: activation-server/object-directory-load.c:306
+#: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Eiginleikinn '%s' hefur ekkert gildi"
+
+#: activation-server/object-directory-load.c:588
+#, c-format
+msgid "Could not parse badly formed XML document %s"
+msgstr ""
+
+#: activation-server/object-directory-load.c:641
+#, c-format
+msgid "Trying dir %s"
+msgstr ""
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"

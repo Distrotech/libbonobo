@@ -1,3 +1,12 @@
+libbonobo 2.5.3
+
+	+ bugs fixed
+		+ regression tests problems (Gustavo)
+		+ AIX portability (Albert Chin-A-Young)
+	+ featurelets
+		+ improve b-a-s debug code (Michael)
+		+ use syslog for run-time spew (Michael Terry)
+
 libbonobo 2.5.2
 
 	+ bugs fixed

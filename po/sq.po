@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD\n"
-"POT-Creation-Date: 2004-01-09 15:27+0000\n"
+"POT-Creation-Date: 2004-01-15 15:40+0000\n"
 "PO-Revision-Date: 2003-07-01 01:45+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -24,33 +24,33 @@ msgstr "E pamundur të gjesh në çfarë procesi bir ishte rrjeshtuar serveri"
 msgid "Not a valid Activation ID"
 msgstr "ID Aktivimi e pavlefshme"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
 msgstr "Directory nga e cila të lexosh files .server"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
 msgstr "DIRECTORY"
 
-#: activation-server/activation-server-main.c:69
+#: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Sjellje si ActivationContext (e përcaktuara është vetëm ObjectDirectory)"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
 msgstr "Përshkruesi i file ku do të shkruhet IOR"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
 msgstr "Ekspresioni i kërkesës që duhet vlerësuar"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
 msgstr "EKSPRESION"
 
@@ -115,10 +115,20 @@ msgstr "iid %s ka një pozicion NULL"
 msgid "invalid character '%c' in iid '%s'"
 msgstr "karakter i pavlefshëm '%c' tek iid '%s'"
 
-#: activation-server/object-directory-load.c:306
+#: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Pronësia '%s' nuk ka një vlerë"
+
+#: activation-server/object-directory-load.c:588
+#, c-format
+msgid "Could not parse badly formed XML document %s"
+msgstr ""
+
+#: activation-server/object-directory-load.c:641
+#, c-format
+msgid "Trying dir %s"
+msgstr ""
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo VERSION\n"
-"POT-Creation-Date: 2004-01-09 15:27+0000\n"
+"POT-Creation-Date: 2004-01-15 15:40+0000\n"
 "PO-Revision-Date: 2003-10-02 10:06+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -23,32 +23,32 @@ msgstr "Không thể tìm tiến trình con được liệt kê"
 msgid "Not a valid Activation ID"
 msgstr "Activation ID không hợp lệ"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
 msgstr "Thư mục chứa tập tin .server cần đoc"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
 msgstr "THƯ MỤC"
 
-#: activation-server/activation-server-main.c:69
+#: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Phục vụ như là ActivationContext (mặc định chỉ là ObjectDirectory)"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
 msgstr "Bộ mô tả tập tin để ghi IOR"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
 msgstr "Biểu thức truy vấn cần xử lý"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
 msgstr "BIỂU THỨC"
 
@@ -113,10 +113,20 @@ msgstr "IID %s có vị trí NULL"
 msgid "invalid character '%c' in iid '%s'"
 msgstr "ký tự không hợp lệ '%c' trong iid '%s'"
 
-#: activation-server/object-directory-load.c:306
+#: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Thuộc tính '%s' không có giá trị"
+
+#: activation-server/object-directory-load.c:588
+#, c-format
+msgid "Could not parse badly formed XML document %s"
+msgstr ""
+
+#: activation-server/object-directory-load.c:641
+#, c-format
+msgid "Trying dir %s"
+msgstr ""
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"

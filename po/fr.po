@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.1\n"
-"POT-Creation-Date: 2004-01-09 15:27+0000\n"
+"POT-Creation-Date: 2004-01-15 15:40+0000\n"
 "PO-Revision-Date: 2004-01-02 21:21+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -25,33 +25,33 @@ msgstr "Impossible de déterminer dans quel fils était listé le serveur"
 msgid "Not a valid Activation ID"
 msgstr "N'est pas un ID d'activation valide"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
 msgstr "Répertoire dans lequel lire les fichiers .server"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
 msgstr "RÉPERTOIRE"
 
-#: activation-server/activation-server-main.c:69
+#: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Sert comme ActivationContext (par défaut, uniquement comme ObjectDirectory)"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
 msgstr "Descripteur de fichier dans lequel écrire IOR"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
 msgstr "Expression de requête à évaluer"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
@@ -117,10 +117,20 @@ msgstr "l'iid %s a un emplacement NULL"
 msgid "invalid character '%c' in iid '%s'"
 msgstr "caractère non valide « %c » dans l'iid « %s »"
 
-#: activation-server/object-directory-load.c:306
+#: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "La propriété « %s » n'a pas de valeur"
+
+#: activation-server/object-directory-load.c:588
+#, c-format
+msgid "Could not parse badly formed XML document %s"
+msgstr ""
+
+#: activation-server/object-directory-load.c:641
+#, fuzzy, c-format
+msgid "Trying dir %s"
+msgstr "Essaie le répertoire %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -524,9 +534,6 @@ msgstr "Affiche le chemin du fichier de configuration"
 #  liboaf/oaf-registration.c:394
 #~ msgid "Exec failed: %d (%s)\n"
 #~ msgstr "Exec a échoué : %d (%s)\n"
-
-#~ msgid "Trying dir %s\n"
-#~ msgstr "Essaie le répertoire %s\n"
 
 #~ msgid "IID '%s' contains illegal characters; discarding\n"
 #~ msgstr "l'IID « %s » contient des caractères illégaux ; refusé\n"
