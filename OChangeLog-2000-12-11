@@ -1,4 +1,13 @@
-2000-09-30    <michael@helixcode.com>
+2000-10-02  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar-button-item.c (create_pixmap_widget_from_pixbuf): 
+	don't set the alpha threshold to a daft value.
+
+2000-10-30  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/app.c (main): Leak removal.
+
+2000-09-30  Michael Meeks  <michael@helixcode.com>
 
 	* doc/ui-xml.txt: Add description of the XML for the UI descriptions
 	
