@@ -1,3 +1,7 @@
+1999-08-20  Michael Meeks  <michael@imaginator.com>
+
+	* doc/debugging.txt: Even more advice from Nat.
+
 1999-08-19  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-view.h (GnomeView): Added the GnomeUIHandler field.
