@@ -1,5 +1,7 @@
 2001-07-30  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-marshal.list: add STRING,ENUM,STRING.
+
 	* bonobo/bonobo-event-source.c (create_listener_id): kill.
 	(impl_Bonobo_EventSource_addListenerWithMask): upd.
 	(impl_Bonobo_EventSource_removeListener): remove by equivalence
