@@ -1,3 +1,10 @@
+Thu Nov 30 11:03:10 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* idl/bonobo-storage.idl: add NotSupported exception to getInfo, 
+	setInfo and listContents.
+
+	* storage-modules/*.c: see above.
+
 2000-11-30  Cody Russell  <bratsche@gnome.org>
 	* bonobo/bonobo-ui-toolbar-icon.c:  When the theme makes use of bg_pixmap,
 	and when mode == BONOBO_UI_TOOLBAR_ICON_COLOR, do full 8-bit alpha

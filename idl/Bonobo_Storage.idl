@@ -62,14 +62,14 @@ module Bonobo {
 		 * the name, content_type and size info.
 		 */
 		StorageInfo getInfo (in StorageInfoFields mask)
-			raises (IOError, NoPermission);
+			raises (IOError, NoPermission, NotSupported);
 		
 		/**	
 		 * setInfo:
 		 *
 		 */
 		void setInfo (in StorageInfo info, in StorageInfoFields mask)
-			raises (IOError, NoPermission);
+			raises (IOError, NoPermission, NotSupported);
 
 		/**
 		 * read:
@@ -169,7 +169,7 @@ module Bonobo {
 		 */
 		StorageInfo getInfo (in string path, 
 				     in StorageInfoFields mask)
-			raises (IOError, NoPermission, NotFound);
+			raises (IOError, NoPermission, NotFound, NotSupported);
 		
 		/**	
 		 * setInfo:
@@ -177,7 +177,7 @@ module Bonobo {
 		 */
 		void setInfo (in string path, in StorageInfo info, 
 			      in StorageInfoFields mask)
-			raises (IOError, NoPermission, NotFound);
+			raises (IOError, NoPermission, NotFound, NotSupported);
 
 		/**
 		 * openStream:
@@ -219,7 +219,7 @@ module Bonobo {
 		 */
 		DirectoryList listContents (in string path, 
 					    in StorageInfoFields mask)
-			raises (IOError, NotStorage, NotFound);
+			raises (IOError, NotStorage, NotFound, NotSupported);
 	
 		/**
 		 * erase:
