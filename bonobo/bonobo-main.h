@@ -7,6 +7,7 @@
 #include <gtk/gtkobject.h>
 #include <bonobo/Bonobo.h>
 
+char                       *bonobo_exception_get_txt     (CORBA_Environment *ev);
 gboolean		    bonobo_init			 (CORBA_ORB orb,
 							  PortableServer_POA poa,
 							  PortableServer_POAManager manager);
@@ -17,8 +18,5 @@ void			    bonobo_setup_x_error_handler (void);
 CORBA_ORB		    bonobo_orb			 (void);
 PortableServer_POA	    bonobo_poa			 (void);
 PortableServer_POAManager   bonobo_poa_manager		 (void);
-
-/* Optional; can help with debugging */
-void                        bonobo_shutdown		 (void);
 
 #endif /* __GNOME_MAIN_H__ */

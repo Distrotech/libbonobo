@@ -1,3 +1,30 @@
+2000-07-13  Michael Meeks  <michael@helixcode.com>
+
+	* TODO: pruned it a tad.
+
+	* HACKING: updated.
+
+	* bonobo/bonobo-main.c (bonobo_exception_get_txt): UI helper routine.
+	(bonobo_exception_get_txt): implement.
+
+	* bonobo/bonobo-object.c (bonobo_object_destroy): flag destroyed.
+	(bonobo_object_finalize_real): check we have been destroyed via
+	bonobo_object_destroy correctly.
+
+2000-07-12  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_init): implement; hook the
+	shutdown at exit.
+	s/BONOBO_OBJECT_DEBUG/BONOBO_REF_HOOKS/ + allow a quicker, nicer mode
+	of ref-count debug without a re-build.
+
+	* bonobo/bonobo-object.h: add init.
+
+	* bonobo/bonobo-main.c (bonobo_init): init objects.
+
+	* bonobo/bonobo-main.h (bonobo_poa_manager): kill shutdown; Darin, kind
+	soul told me about g_atexit; couldn't find it earlier.
+
 2000-07-12  Michael Meeks  <michael@helixcode.com>
 
 	* storage-modules/gnome-stream-efs.c (bonobo_stream_efs_destroy),

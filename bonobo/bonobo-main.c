@@ -24,6 +24,88 @@ PortableServer_POA        __bonobo_poa;
 PortableServer_POAManager __bonobo_poa_manager = NULL;
 
 /**
+ * bonobo_exception_get_txt:
+ * @ev: the corba environment.
+ * 
+ * Returns a user readable description of the exception, busks
+ * something convincing if it is not know.
+ * 
+ * Return value: a g_malloc'd description; needs freeing as,
+ * and when. NULL is never returned.
+ **/
+char *
+bonobo_exception_get_txt (CORBA_Environment *ev)
+{
+	g_return_val_if_fail (ev != NULL, NULL);
+
+	if (ev->_major == CORBA_NO_EXCEPTION)
+		return g_strdup (_("Error checking error; no execption"));
+
+	/* Oaf */
+/*	if (!strcmp (ev->_repo_id, "IDL:OAF/GeneralError:1.0")) {
+		OAF_GeneralError *err = ev->_params;
+		
+		if (!err || !err->description)
+			return g_strdup (_("General oaf error with no description"));
+		else
+			return g_strdup (err->description);
+
+			}*/
+
+	/* Bonobo::Container */
+	if (!strcmp (ev->_repo_id, ex_Bonobo_Container_NotFound))
+		return g_strdup (_("Object not found"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Container_SyntaxError))
+		return g_strdup (_("Syntax error in object description"));
+
+	/* Bonobo::Embeddable */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Embeddable_UserCancelledSave))
+		return g_strdup (_("The User canceled the save"));
+
+	/* Bonobo::GenericFactory */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_GenericFactory_CannotActivate))
+		return g_strdup (_("Cannot activate object from factory"));
+
+	/* Bonobo::Stream */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Stream_NoPermission))
+		return g_strdup (_("No permission to access stream"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Stream_NotSupported))
+		return g_strdup (_("An unsupported stream action was attempted"));
+	
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Stream_IOError))
+		return g_strdup (_("IO Error on stream"));
+
+	/* Bonobo::Storage */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NameExists))
+		return g_strdup (_("Name already exists in storage"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NotFound))
+		return g_strdup (_("Object not found in storage"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NoPermission))
+		return g_strdup (_("No permission to do operation on storage"));
+
+	/* Bonobo::UIHandler */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_UIHandler_PathNotFound))
+		return g_strdup (_("path to menu or toolbar item not found"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_UIHandler_NotToplevelHandler))
+		return g_strdup (_("internal menu or toolbar exception"));
+
+	/* Bonobo::Persist */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Persist_WrongDataType))
+		return g_strdup (_("incorrect data type"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Persist_FileNotFound))
+		return g_strdup (_("stream not found"));
+
+	else
+		return g_strdup_printf ("Unknown CORBA exception id: '%s'", ev->_repo_id);
+}
+
+/**
  * bonobo_orb:
  *
  * Returns: The ORB used for this Bonobo application.  The ORB
@@ -225,6 +307,9 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	__bonobo_poa_manager = manager;
 
 	CORBA_exception_free (&ev);
+
+	bonobo_object_init ();
+
 	return TRUE;
 }
 
@@ -259,17 +344,6 @@ bonobo_activate (void)
 	CORBA_exception_free (&ev);
 	
 	return TRUE;
-}
-
-/**
- * bonobo_shutdown:
- * 
- * Can print helpful debug at shutdown time.
- **/
-void
-bonobo_shutdown (void)
-{
-	bonobo_object_shutdown ();
 }
 
 /**

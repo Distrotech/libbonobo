@@ -71,14 +71,12 @@ Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject     
 void                     bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
 POA_Bonobo_Unknown__epv *bonobo_object_get_epv                (void);
-void                     bonobo_object_shutdown               (void);
-
-
-#ifdef BONOBO_OBJECT_DEBUG
+void                     bonobo_object_init                   (void);
 void                     bonobo_object_trace_refs             (BonoboObject *object,
 							       const char   *fn,
 							       int           line,
 							       gboolean      ref);
+#ifdef BONOBO_OBJECT_DEBUG
 #	define           bonobo_object_ref(o)   G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);}G_STMT_END
 #	define           bonobo_object_unref(o) G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,FALSE);}G_STMT_END
 #endif	/* BONOBO_OBJECT_DEBUG */

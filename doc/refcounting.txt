@@ -53,6 +53,10 @@ your code. Having re-build bonobo you will need to re-build your
 application, otherwise you will get link errors moaning about not
 being able to find 'bonobo_object_ref / unref'.
 
+A simpler but less verbose way to get ref count debugging without
+re-compiling everything is to simply define BONOBO_REF_HOOKS at the
+top of bonobo-object.c
+
 Another good way of catching leaks, having guessed which object is
 not getting freed is to fire up container and component in gdb,
 break in eg. bonobo_embeddable_new and insert a hardware watch point
@@ -67,6 +71,4 @@ This will result in gdb giving you control each time the ref count
 is changed. At this point halt the other end of the CORBA link and
 start logging traces at both ends. By the time the program exits
 you should have worked out where the reference went astray.
-
-
 
