@@ -22,6 +22,10 @@
  *  Author: Elliot Lee <sopwith@redhat.com>
  */
 #include <config.h>
+#include <string.h>
+#include <stdlib.h>
+#include <locale.h>
+
 #include <bonobo-activation/bonobo-activation-activate.h>
 
 #include <bonobo-activation/bonobo-activation-id.h>
@@ -33,9 +37,6 @@
 #include <bonobo-activation/bonobo-activation-async.h>
 #include <bonobo-activation/bonobo-activation-i18n.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
-
-#include <string.h>
-#include <stdlib.h>
 
 static Bonobo_ActivationEnvironment activation_environment;
 
