@@ -1,5 +1,21 @@
 1999-05-26  Nat Friedman  <nat@nat.org>
 
+	* components/text-plain/bonobo-text-plain.c (blank_all_views): New
+ 	function.
+	(progressive_update_all_views): New function.
+	(stream_read): Update the display as the data comes in.
+	(load_text_from_stream): Updated to use the progressive display.
+	(component_factory): No default text.
+	(view_factory): No default text.
+
+	* bonobo/test-container.c (add_text_cmd): Load /usr/dict/words.
+	(text_obj): New variable.
+	(send_text_cmd): New callback to send /tmp/pipe to the current
+	text component.  To show off progressive loading.
+	(container_file_menu): Added a menu entry for send_text_cmd.
+
+1999-05-26  Nat Friedman  <nat@nat.org>
+
 	* components/image-x-png/bonobo-image-x-png.c (view_factory): Add
  	the new view to the component_data's view list.
 
