@@ -51,6 +51,10 @@
 
 static int oaf_corba_prio = G_PRIORITY_LOW;
 
+#ifdef ORBIT2
+#define ORBIT_USES_GLIB_MAIN_LOOP 1
+#endif
+
 #ifndef ORBIT_USES_GLIB_MAIN_LOOP
 
 static gboolean
