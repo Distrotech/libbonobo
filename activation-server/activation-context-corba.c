@@ -131,13 +131,15 @@ child_od_update_list(ChildODInfo *child, CORBA_Environment *ev)
     {
       if(child->by_iid)
 	g_hash_table_destroy(child->by_iid);
-      if(child->list)
-	CORBA_sequence_set_release(child->list, TRUE);
-      CORBA_free(child->list); child->list = NULL;
+      if(child->list) {
+	CORBA_sequence_set_release(child->list, CORBA_TRUE);
+        CORBA_free(child->list); child->list = NULL;
+      }
 
-      CORBA_sequence_set_release(&(cache->_u.server_list), FALSE);
       child->list = OAF_ServerInfoList__alloc();
       *(child->list) = cache->_u.server_list;
+      CORBA_sequence_set_release(child->list, CORBA_FALSE);
+      CORBA_sequence_set_release(&(cache->_u.server_list), CORBA_FALSE);
 
       child->time_list_pulled = time(NULL);
       child->by_iid = g_hash_table_new(g_str_hash, g_str_equal);
