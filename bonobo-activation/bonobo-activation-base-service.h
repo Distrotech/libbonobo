@@ -90,6 +90,7 @@ CORBA_Object bonobo_activation_service_get                (const BonoboActivatio
 
 void         bonobo_activation_base_service_activator_add (BonoboActivationBaseServiceActivator       activator,
                                                            int                           priority);
+void         bonobo_activation_base_service_debug_shutdown (CORBA_Environment            *ev);
 
 G_END_DECLS
 

@@ -268,6 +268,31 @@ existing_check (const BonoboActivationBaseService *base_service, struct SysServe
 	return CORBA_OBJECT_NIL;
 }
 
+void
+bonobo_activation_base_service_debug_shutdown (CORBA_Environment *ev)
+{
+        int     i;
+        GSList *l, *instances;
+        struct SysServerInstance *ssi;
+
+	for (i = 0; activatable_servers[i].name; i++) {
+
+                instances = activatable_servers[i].instances;
+                activatable_servers[i].instances = NULL;
+
+                for (l = instances; l; l = l->next) {
+                        ssi = l->data;
+
+                        CORBA_Object_release (ssi->already_running, ev);
+                        g_free (ssi->username);
+                        g_free (ssi->hostname);
+                        g_free (ssi->domain);
+                        g_free (ssi);
+                }
+                g_slist_free (instances);
+        }
+}
+
 static void
 bonobo_activation_existing_set (const BonoboActivationBaseService *base_service, struct SysServer *ss,
 	          CORBA_Object obj, CORBA_Environment *ev)

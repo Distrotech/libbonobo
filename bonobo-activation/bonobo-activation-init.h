@@ -51,6 +51,7 @@ const char    *bonobo_activation_domain_get       (void);
 #define bonobo_activation_username_get() g_get_user_name()
 
 char          *bonobo_activation_get_popt_table_name (void);
+gboolean       bonobo_activation_debug_shutdown      (void);
 
 extern struct poptOption bonobo_activation_popt_options[];
 

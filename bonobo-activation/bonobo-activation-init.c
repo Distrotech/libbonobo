@@ -534,6 +534,52 @@ bonobo_activation_orb_init (int *argc, char **argv)
 	return bonobo_activation_orb;
 }
 
+/**
+ * bonobo_activation_debug_shutdown:
+ * @void: 
+ * 
+ *   A debugging function to shutdown the ORB and process
+ * any reference count leaks that may have occured.
+ * 
+ * Return value: FALSE if there were leaks detected, else TRUE
+ **/
+gboolean
+bonobo_activation_debug_shutdown (void)
+{
+        int retval = TRUE;
+        CORBA_Environment ev;
+
+        if (is_initialized) {
+                CORBA_exception_init (&ev);
+
+                bonobo_activation_base_service_debug_shutdown (&ev);
+                if (ev._major != CORBA_NO_EXCEPTION) {
+                        retval = FALSE;
+                }
+
+                if (bonobo_activation_context != CORBA_OBJECT_NIL) {
+                        CORBA_Object_release (
+                                (CORBA_Object) bonobo_activation_context, &ev);
+                        bonobo_activation_context = CORBA_OBJECT_NIL;
+                }
+
+                if (bonobo_activation_orb != CORBA_OBJECT_NIL) {
+                        CORBA_ORB_destroy (bonobo_activation_orb, &ev);
+                        if (ev._major != CORBA_NO_EXCEPTION) {
+                                retval = FALSE;
+                        }
+                        CORBA_Object_release (
+                                (CORBA_Object) bonobo_activation_orb, &ev);
+                        is_initialized = FALSE;
+                }
+
+                CORBA_exception_free (&ev);
+
+        }
+
+        return retval;
+}
+
 const char  bonobo_activation_version []    = VERSION;
 const guint bonobo_activation_major_version = BONOBO_ACTIVATION_MAJOR_VERSION;
 const guint bonobo_activation_minor_version = BONOBO_ACTIVATION_MINOR_VERSION;
