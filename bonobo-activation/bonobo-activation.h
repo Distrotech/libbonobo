@@ -54,8 +54,8 @@ typedef struct {
 void oaf_plugin_use(PortableServer_Servant servant, gpointer impl_ptr);
 void oaf_plugin_unuse(gpointer impl_ptr);
 
-OAF_ServerInfoList *oaf_query(const char *requirements, const char **selection_order, CORBA_Environment *ev);
-CORBA_Object oaf_activate(const char *requirements, const char **selection_order,
+OAF_ServerInfoList *oaf_query(const char *requirements, char * const *selection_order, CORBA_Environment *ev);
+CORBA_Object oaf_activate(const char *requirements, char * const * selection_order,
 			  OAF_ActivationFlags flags, OAF_ActivationID *ret_aid,
 			  CORBA_Environment *ev);
 CORBA_Object oaf_activate_from_id(const OAF_ActivationID aid, OAF_ActivationFlags flags,

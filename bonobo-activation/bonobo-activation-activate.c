@@ -3,7 +3,7 @@
 extern CORBA_Object oaf_server_activate_shlib(OAF_ActivationResult *sh, CORBA_Environment *ev);
 
 OAF_ServerInfoList *
-oaf_query(const char *requirements, const char **selection_order, CORBA_Environment *ev)
+oaf_query(const char *requirements, char * const *selection_order, CORBA_Environment *ev)
 {
   GNOME_stringlist selorder;
   OAF_ServerInfoList *res;
@@ -44,7 +44,7 @@ oaf_query(const char *requirements, const char **selection_order, CORBA_Environm
 }
 
 CORBA_Object
-oaf_activate(const char *requirements, const char **selection_order, OAF_ActivationFlags flags,
+oaf_activate(const char *requirements, char * const *selection_order, OAF_ActivationFlags flags,
 	     OAF_ActivationID *ret_aid, CORBA_Environment *ev)
 {
   GNOME_stringlist selorder;
