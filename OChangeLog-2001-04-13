@@ -1,3 +1,8 @@
+2001-03-26  Dietmar Maurer  <dietmar@ximian.com>
+
+	* storage-modules/bonobo-storage-fs.c (bonobo_storage_fs_open):
+	bug fix, 0111 is the right mode, not 010101.
+
 2001-03-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo-ui-config-widget.c: Added #include <config.h> to
