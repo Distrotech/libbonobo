@@ -39,7 +39,7 @@ bonobo_exception_get_txt (CORBA_Environment *ev)
 	g_return_val_if_fail (ev != NULL, NULL);
 
 	if (ev->_major == CORBA_NO_EXCEPTION)
-		return g_strdup (_("Error checking error; no execption"));
+		return g_strdup (_("Error checking error; no exception"));
 
 	/* Oaf */
 /*	if (!strcmp (ev->_repo_id, "IDL:OAF/GeneralError:1.0")) {
