@@ -1,8 +1,71 @@
+2001-02-06  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-control.c (bonobo_control_destroy): chain to
+	parent destroy method correctly.
+
+	* bonobo/bonobo-ui-container.c (bonobo_ui_container_class_init): setup
+	the parent type nicely.
+	(bonobo_ui_container_destroy, bonobo_ui_container_finalize): 
+	chain correctly to parents.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_destroy): chain
+	to parent destroy !
+
+	* bonobo/bonobo-xobject.c (corba_cleanup): release the
+	servant before the object it references.
+	(do_corba_hacks): update the orb's objref hash correctly.
+
+	* bonobo/bonobo-xobject.c (bonobo_x_type_unique): guard against
+	re-enterancy.
+	(dont_release): rename to
+	(final_release): be more intelligent
+	(bonobo_x_object_finalize_real): call try_finalize
+	(try_finalize): impl - delay finalization until we have no
+	CORBA objrefs left.
+
+2001-02-05  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_get_type),
+	(bonobo_ui_component_construct): upd.
+	(bonobo_ui_component_corba_object_create): kill.
+	(bonobo_ui_component_get_epv): move to
+	(bonobo_ui_component_class_init): here and upd.
+	(bonobo_ui_component_new): upd.
+
+	* bonobo/bonobo-ui-container.c (bonobo_ui_container_construct),
+	(bonobo_ui_container_corba_object_create): kill.
+	(bonobo_ui_container_new): upd.
+	(bonobo_ui_container_get_type): upd.
+	(bonobo_ui_container_get_epv): move
+	(bonobo_ui_container_class_init): to here & upd.
+
+	* bonobo/bonobo-xobject.c (dont_release): update to work.
+	(bonobo_x_object_instance_init): calm debug.
+	(setup_type): ditto.
+
+	* bonobo/bonobo-view.c (bonobo_view_construct),
+	(bonobo_view_new, bonobo_view_get_type): upd.
+	(bonobo_view_corba_object_create): kill.
+	(bonobo_view_get_epv): move into
+	(bonobo_view_class_init): here & upd.
+	(init_view_corba_class): kill.
+
+	* bonobo/bonobo-control.c (bonobo_control_construct),
+	(bonobo_control_new, bonobo_control_get_type): upd.
+	(bonobo_control_corba_object_create): kill.
+	(init_control_corba_class): kill.
+	(bonobo_control_get_epv): move into 
+	(bonobo_control_class_init): here & upd.
+
+	* bonobo/bonobo-xobject.c (setup_type): update EPV
+	build strategy - more speed & slickness.
+
 2001-02-05  Cody Russell  <bratsche@gnome.org>
-	* bonobo/bonobo-zoomable.[ch]: Use GArray to store zoom levels
+
+	* bonobo/bonobo-zoomable.[ch]: Use a GArray to store zoom levels
 	and names and added bonobo_zoomable_add_preferred_zoom_level().
 
-2001-02-05  Michael Meeks  <michael@helixcode.com>
+2001-02-05  Michael Meeks  <michael@ximian.com>
 
 	* Rename mobject to xobject - the transience of decisiveness.
 	
@@ -11,7 +74,7 @@
 	* monikers/bonobo-moniker-extender-stream.c
 	(bonobo_stream_extender_resolve): fix bug in oaf query.
 
-2001-02-05  Michael Meeks  <michael@helixcode.com>
+2001-02-05  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am: Add bonobo-mobject.
 
@@ -20,10 +83,11 @@
 	* bonobo/bonobo-object.c (bonobo_object_get_refs): impl.
 
 2001-02-05  Cody Russell  <bratsche@gnome.org>
+	
 	* bonobo/bonobo-ui-sync-toolbar.c: Force GnomeDock to resize when
 	the BonoboUIToolbar's style changes.
 
-2001-02-03  Michael Meeks  <michael@helixcode.com>
+2001-02-03  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_class_init):
 	strip out object_gone - un-fired, and unused.
@@ -31,7 +95,7 @@
 	* bonobo/bonobo-object.h: replaced 'object_gone' with an
 	expansion gpointer in BonoboObjectClass.
 
-2001-01-30  Michael Meeks  <michael@helixcode.com>
+2001-01-30  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-client-site.c (bonobo_client_site_destroy): 
 	use bonobo_object_list_unref to free the view_frames.
@@ -45,12 +109,12 @@
 	* bonobo/bonobo-ui-engine.c (bonobo_ui_engine_node_get_widget):
 	add precondition.
 
-2001-01-30  Michael Meeks  <michael@helixcode.com>
+2001-01-30  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-object.c (gnome_unknown_ping): rename to
 	(bonobo_unknown_ping): this.
 
-2001-01-29  Michael Meeks  <michael@helixcode.com>
+2001-01-29  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-ui-engine-config.c
 	(bonobo_ui_engine_config_get_engine): impl.

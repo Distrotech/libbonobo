@@ -17,8 +17,6 @@
 #include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
-
-#undef BONOBO_X_OBJECT_DEBUG
  
 #define BONOBO_X_OBJECT_TYPE        (bonobo_x_object_get_type ())
 #define BONOBO_X_OBJECT(o)          (GTK_CHECK_CAST ((o), BONOBO_X_OBJECT_TYPE, BonoboXObject))
@@ -81,15 +79,19 @@ typedef struct {
 
 	POA_Bonobo_Unknown__vepv  *vepv;
 
-	POA_Bonobo_Unknown__epv    epv;
+	/* The offset of this class' additional epv */
+	int                        epv_struct_offset;
 
-	/* Inherited vpev methods ... */
+	POA_Bonobo_Unknown__epv    epv;
 } BonoboXObjectClass;
 
 GtkType        bonobo_x_object_get_type        (void);
+
+/* Use GTK_STRUCT_OFFSET to calc. epv_struct_offset */
 GtkType        bonobo_x_type_unique            (GtkType            parent_type,
 						BonoboXObjectPOAFn init_fn,
 						BonoboXObjectPOAFn fini_fn,
+						int                epv_struct_offset,
 						const GtkTypeInfo *info);
 
 END_GNOME_DECLS

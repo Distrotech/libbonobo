@@ -28,7 +28,8 @@
 #include "bonobo-object-directory.h"
 
 /* Shared stuff with BonoboMObject */
-extern int bonobo_object_get_refs (BonoboObject *object);
+extern int  bonobo_object_get_refs (BonoboObject            *object);
+extern void bonobo_object_epv_init (POA_Bonobo_Unknown__epv *epv);
 
 /* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
 
@@ -577,6 +578,14 @@ impl_Bonobo_Unknown_queryInterface (PortableServer_Servant  servant,
 	return CORBA_Object_duplicate (local_interface->corba_objref, ev);
 }
 
+void
+bonobo_object_epv_init (POA_Bonobo_Unknown__epv *epv)
+{
+	epv->ref            = impl_Bonobo_Unknown_ref;
+	epv->unref          = impl_Bonobo_Unknown_unref;
+	epv->queryInterface = impl_Bonobo_Unknown_queryInterface;
+}
+
 /**
  * bonobo_object_get_epv:
  *
@@ -589,9 +598,7 @@ bonobo_object_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Unknown__epv, 1);
 
-	epv->ref            = impl_Bonobo_Unknown_ref;
-	epv->unref          = impl_Bonobo_Unknown_unref;
-	epv->queryInterface = impl_Bonobo_Unknown_queryInterface;
+	bonobo_object_epv_init (epv);
 
 	return epv;
 }
@@ -1205,5 +1212,8 @@ bonobo_object_get_refs (BonoboObject *object)
 {
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), -1);
 
-	return object->priv->ao->ref_count;
+	if (!object->priv || !object->priv->ao)
+		return 0;
+	else
+		return object->priv->ao->ref_count;
 }
