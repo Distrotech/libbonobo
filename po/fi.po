@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
-"POT-Creation-Date: 2002-12-11 21:30+0200\n"
-"PO-Revision-Date: 2002-01-26 14:21+0200\n"
+"POT-Creation-Date: 2003-01-01 06:10+0100\n"
+"PO-Revision-Date: 2003-01-02 15:36+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,8 @@ msgstr "Virhe virhettä tarkistaessa; ei poikkeusta"
 msgid "General activation error with no description"
 msgstr "Yleinen aktivointivirhe, jolla ei ole kuvausta"
 
-#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:74
+#: bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "Ei voinut alustaa Bonoboa"
 
@@ -203,12 +204,12 @@ msgstr "virta-MonikerExtender"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
-msgid "Exception activating '%s"
-msgstr "Poikkeus aktivoidessa monikeria \"%s\""
+msgid "Exception activating '%s'"
+msgstr "Poikkeus monikerin \"%s\" aktivoinnissa"
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
-msgid "Failed to activate '%s"
+msgid "Failed to activate '%s'"
 msgstr "Monikerin \"%s\" aktivointi epäonnistui"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
@@ -239,3 +240,4 @@ msgstr "Ei voinut luoda ilmentymää esimerkkikaikukomponentista"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Poikkeus tapahtui \"%s\""
+
