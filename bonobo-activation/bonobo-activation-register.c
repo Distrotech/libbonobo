@@ -147,7 +147,8 @@ copy_env_list_to_sequence (Bonobo_ActivationEnvironment *environment,
 		g_warning ("Registration environment for '%s' = '%s'%s",
 			   environment->_buffer [i].name,
 			   environment->_buffer [i].value,
-			   environment->_buffer [i].unset ? "(unset)" : "");
+			   (environment->_buffer [i].flags &
+                            Bonobo_ACTIVATION_ENV_FLAG_UNSET) ? "(unset)" : "");
 #endif
 	}
 }
@@ -288,19 +289,23 @@ bonobo_activation_register_active_server_ext (const char               *iid,
                         bonobo_activation_username_get (),
                         bonobo_activation_hostname_get ());
                 
-                if (CORBA_Object_is_nil (od, &ev)) {
+                if (CORBA_Object_is_nil (od, &ev))
                         return Bonobo_ACTIVATION_REG_ERROR;
-                }
 
 		if (reg_env)
 			copy_env_list_to_sequence (&environment, reg_env);
 
-                retval = Bonobo_ObjectDirectory_register_new (
-					od, iid,
-					reg_env ? &environment : &global_reg_env,
-				        obj, flags,
-                                        description ? description : "",
-                                        existing, &ev);
+                retval = Bonobo_ObjectDirectory_register_new_full
+                        (od, iid, reg_env ? &environment : &global_reg_env,
+                         obj, flags, description ? description : "",
+                         existing, bonobo_activation_client_get (), &ev);
+
+                if (ev._major == CORBA_SYSTEM_EXCEPTION &&
+                    !strcmp (ev._id, ex_CORBA_NO_IMPLEMENT)) /* fall-back */
+                        retval = Bonobo_ObjectDirectory_register_new
+                                (od, iid, reg_env ? &environment : &global_reg_env,
+                                 obj, flags, description ? description : "",
+                                 existing, &ev);
 
 		if (reg_env)
 			CORBA_free (environment._buffer);

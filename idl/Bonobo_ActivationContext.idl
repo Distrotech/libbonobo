@@ -42,6 +42,7 @@
 /* ObjectDirectory needs a forward declaration of ActivationContext */
 module Bonobo {
         interface ActivationContext;
+        interface ActivationClient;
 };
 
 #include <Bonobo_ObjectDirectory.idl>
@@ -78,9 +79,25 @@ module Bonobo {
                                 Bonobo::Activation::IncompleteContext,
                                 Bonobo::GeneralError)
                         context ("username", "hostname");
+                ActivationResult activateMatchingFull (in string                        requirements,
+                                                       in Bonobo::StringList            selection_order,
+                                                       in Bonobo::ActivationEnvironment environment,
+                                                       in ActivationFlags               flags,
+                                                       in ActivationClient              client)
+                        raises (Bonobo::Activation::ParseFailed,
+                                Bonobo::Activation::IncompleteContext,
+                                Bonobo::GeneralError)
+                        context ("username", "hostname");
 
                 ActivationResult activateFromAid (in ActivationID    aid,
                                                   in ActivationFlags flags)
+                        raises (Bonobo::Activation::ParseFailed,
+                                Bonobo::Activation::IncompleteContext,
+                                Bonobo::GeneralError)
+                        context ("username", "hostname");
+                ActivationResult activateFromAidFull (in ActivationID     aid,
+                                                      in ActivationFlags  flags,
+                                                      in ActivationClient client)
                         raises (Bonobo::Activation::ParseFailed,
                                 Bonobo::Activation::IncompleteContext,
                                 Bonobo::GeneralError)

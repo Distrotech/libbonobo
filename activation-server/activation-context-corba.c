@@ -455,6 +455,7 @@ ac_do_activation (ActivationContext                  *actx,
 		  Bonobo_ActivationResult            *out,
 		  Bonobo_ActivationFlags              flags,
 		  const char                         *hostname,
+                  Bonobo_ActivationClient             client,
 		  CORBA_Context                       ctx,
                   CORBA_Environment                  *ev)
 {
@@ -543,7 +544,8 @@ ac_do_activation (ActivationContext                  *actx,
 		CORBA_Object retval;
 
 		retval = Bonobo_ObjectDirectory_activate (
-                        actx->obj, server->iid, BONOBO_OBJREF (actx), environment, flags, ctx, ev);
+                        actx->obj, server->iid, BONOBO_OBJREF (actx),
+                        environment, flags, client, ctx, ev);
 
 		if (ev->_major == CORBA_NO_EXCEPTION) {
 			char tbuf[512];
@@ -565,12 +567,13 @@ ac_do_activation (ActivationContext                  *actx,
 
 
 static Bonobo_ActivationResult *
-impl_Bonobo_ActivationContext_activateMatching (
+impl_Bonobo_ActivationContext_activateMatchingFull (
         PortableServer_Servant              servant,
         const CORBA_char                   *requirements,
         const Bonobo_StringList            *selection_order,
 	const Bonobo_ActivationEnvironment *environment,
         const Bonobo_ActivationFlags        flags,
+        Bonobo_ActivationClient             client,
         CORBA_Context                       ctx,
         CORBA_Environment                  *ev)
 {
@@ -601,7 +604,7 @@ impl_Bonobo_ActivationContext_activateMatching (
 		curitem = items[i];
 
 		ac_do_activation (actx, curitem, environment,
-				  retval, flags, hostname, ctx, ev);
+				  retval, flags, hostname, client, ctx, ev);
 	}
 
 	if (retval->res._d == Bonobo_ACTIVATION_RESULT_NONE)
@@ -620,6 +623,20 @@ impl_Bonobo_ActivationContext_activateMatching (
 	return retval;
 }
 
+static Bonobo_ActivationResult *
+impl_Bonobo_ActivationContext_activateMatching (
+        PortableServer_Servant              servant,
+        const CORBA_char                   *requirements,
+        const Bonobo_StringList            *selection_order,
+	const Bonobo_ActivationEnvironment *environment,
+        const Bonobo_ActivationFlags        flags,
+        CORBA_Context                       ctx,
+        CORBA_Environment                  *ev)
+{
+        return impl_Bonobo_ActivationContext_activateMatchingFull
+                (servant, requirements, selection_order,
+                 environment, flags, CORBA_OBJECT_NIL, ctx, ev);
+}
 
 static Bonobo_ServerInfoList *
 impl_Bonobo_ActivationContext__get_servers (PortableServer_Servant servant,
@@ -763,11 +780,12 @@ ac_context_to_string_array (CORBA_Context context, char **sort_criteria,
 #define PARSE_ERROR_NOT_AN_AID (_("Not a valid Activation ID"))
 
 static Bonobo_ActivationResult *
-impl_Bonobo_ActivationContext_activateFromAid (PortableServer_Servant  servant,
-					       const CORBA_char       *aid,
-					       Bonobo_ActivationFlags  flags,
-					       CORBA_Context           ctx,
-					       CORBA_Environment      *ev)
+impl_Bonobo_ActivationContext_activateFromAidFull (PortableServer_Servant  servant,
+                                                   const CORBA_char       *aid,
+                                                   Bonobo_ActivationFlags  flags,
+                                                   Bonobo_ActivationClient client,
+                                                   CORBA_Context           ctx,
+                                                   CORBA_Environment      *ev)
 {
         ActivationContext *actx = ACTIVATION_CONTEXT (servant);
 	Bonobo_ActivationResult *retval;
@@ -813,8 +831,9 @@ impl_Bonobo_ActivationContext_activateFromAid (PortableServer_Servant  servant,
 
 	memset (&environment, 0, sizeof (Bonobo_ActivationEnvironment));
 
-        retval = impl_Bonobo_ActivationContext_activateMatching (
-                actx, requirements, &selection_order, &environment, flags, ctx, ev);
+        retval = impl_Bonobo_ActivationContext_activateMatchingFull (
+                actx, requirements, &selection_order, &environment,
+                flags, client, ctx, ev);
 
         g_free (sort_criteria[0]);
         g_free (sort_criteria[1]);
@@ -825,6 +844,16 @@ impl_Bonobo_ActivationContext_activateFromAid (PortableServer_Servant  servant,
         return retval;
 }
 
+static Bonobo_ActivationResult *
+impl_Bonobo_ActivationContext_activateFromAid (PortableServer_Servant  servant,
+					       const CORBA_char       *aid,
+					       Bonobo_ActivationFlags  flags,
+					       CORBA_Context           ctx,
+					       CORBA_Environment      *ev)
+{
+        return impl_Bonobo_ActivationContext_activateFromAidFull
+                (servant, aid, flags, CORBA_OBJECT_NIL, ctx, ev);
+}
 
 static CORBA_long
 impl_Bonobo_ActivationContext_getVersion (PortableServer_Servant  servant,
@@ -900,6 +929,8 @@ activation_context_class_init (ActivationContextClass *klass)
 	epv->activateMatching  = impl_Bonobo_ActivationContext_activateMatching;
 	epv->activateFromAid   = impl_Bonobo_ActivationContext_activateFromAid;
 	epv->getVersion        = impl_Bonobo_ActivationContext_getVersion;
+	epv->activateMatchingFull = impl_Bonobo_ActivationContext_activateMatchingFull;
+	epv->activateFromAidFull  = impl_Bonobo_ActivationContext_activateFromAidFull;
 }
 
 static void

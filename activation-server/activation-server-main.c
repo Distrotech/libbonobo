@@ -288,14 +288,16 @@ main (int argc, char *argv[])
         CORBA_exception_init (ev);
 
         Bonobo_ObjectDirectory_register_new 
-                (od, NAMING_CONTEXT_IID, &environment, naming_service, 0, "", &existing, ev);
+                (od, NAMING_CONTEXT_IID, &environment, naming_service,
+                 0, "", &existing, ev);
         g_assert (ev->_major == CORBA_NO_EXCEPTION);
 
 	if (existing != CORBA_OBJECT_NIL)
 		CORBA_Object_release (existing, NULL);
 
         Bonobo_ObjectDirectory_register_new 
-                (od, EVENT_SOURCE_IID, &environment, event_source, 0, "", &existing, ev);
+                (od, EVENT_SOURCE_IID, &environment, event_source,
+                 0, "", &existing, ev);
         g_assert (ev->_major == CORBA_NO_EXCEPTION);
         
 	if (existing != CORBA_OBJECT_NIL)

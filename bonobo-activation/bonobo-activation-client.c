@@ -22,6 +22,7 @@
  */
 
 #include <config.h>
+#include <unistd.h>
 #include <bonobo-activation/bonobo-activation.h>
 #include <bonobo-activation/bonobo-activation-private.h>
 #include <bonobo-activation/bonobo-activation-client.h>
@@ -200,9 +201,47 @@ void
 bonobo_activation_register_client (Bonobo_ActivationContext context,
                                    CORBA_Environment       *ev)
 {
-        if (client == CORBA_OBJECT_NIL) {
+        Bonobo_StringList      client_env;
+        int                    i;
+        Bonobo_ObjectDirectory od;
+
+        if (client == CORBA_OBJECT_NIL)
                 client = bonobo_activation_corba_client_new ();
-        }
 
         Bonobo_ActivationContext_addClient (context, client, get_lang_list (), ev);
+        if (ev->_major != CORBA_NO_EXCEPTION)
+                return;
+
+        od = bonobo_activation_object_directory_get (
+                bonobo_activation_username_get (),
+                bonobo_activation_hostname_get ());
+
+        /* send environment to activation server */
+        client_env._buffer = __environ;
+        if (client_env._buffer) {
+                for (i = 0; client_env._buffer[i]; ++i);
+                client_env._length = i;
+        } else 
+                client_env._length = 0;
+
+        Bonobo_ObjectDirectory_addClientEnv (od, client, &client_env, ev);
+        CORBA_exception_init (ev); /* bin potential missing method exception */
 }
+
+Bonobo_ActivationClient
+bonobo_activation_client_get (void)
+{
+        CORBA_Environment ev;
+
+        if (client == CORBA_OBJECT_NIL) {
+                CORBA_exception_init (&ev);
+                bonobo_activation_register_client
+                        ((Bonobo_ActivationContext)
+                         bonobo_activation_activation_context_get (), &ev);
+                if (ev._major != CORBA_NO_EXCEPTION)
+                        g_warning ("Failed to register Bonobo::ActivationClient");
+                CORBA_exception_free (&ev);
+        }
+        return client;
+}
+

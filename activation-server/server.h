@@ -44,6 +44,7 @@ CORBA_Object             od_server_activate              (Bonobo_ServerInfo     
                                                           ODActivationInfo                   *actinfo,
                                                           CORBA_Object                        od_obj,
                                                           const Bonobo_ActivationEnvironment *environment,
+                                                          Bonobo_ActivationClient             client,
                                                           CORBA_Environment                  *ev);
 
 /* activation-context-corba.c */

@@ -290,9 +290,10 @@ bonobo_activation_query (const char        *requirements,
                 ac, requirements, &selorder,
                 bonobo_activation_context_get (), ev);
 
-        if (ev->_major == CORBA_NO_EXCEPTION && !active)
-                query_cache_insert (requirements, selection_order, retval);
-        else
+        if (ev->_major == CORBA_NO_EXCEPTION) {
+                if (!active)
+                        query_cache_insert (requirements, selection_order, retval);
+        } else
                 retval = NULL;
 
 	if (!opt_ev)
@@ -374,10 +375,20 @@ bonobo_activation_activate (const char             *requirements,
 		ev = opt_ev;
 
 	copy_strv_to_sequence (selection_order, &selorder);
-
-	result = Bonobo_ActivationContext_activateMatching (
-			ac, requirements, &selorder, &activation_environment,
-			flags, bonobo_activation_context_get (), ev);
+        
+        result = Bonobo_ActivationContext_activateMatchingFull
+                (ac, requirements, &selorder, &activation_environment,
+                 flags, bonobo_activation_client_get (),
+                 bonobo_activation_context_get (), ev);
+        
+        if (ev->_major == CORBA_SYSTEM_EXCEPTION &&
+            !strcmp (ev->_id, ex_CORBA_NO_IMPLEMENT)) /* fall-back */
+        {
+                g_warning ("TESTME: Fall-back activate");
+                result = Bonobo_ActivationContext_activateMatching
+                        (ac, requirements, &selorder, &activation_environment,
+                         flags, bonobo_activation_context_get (), ev);
+        }
 
 	if (ev->_major == CORBA_NO_EXCEPTION)
 		retval = handle_activation_result (result, ret_aid, ev);
@@ -441,8 +452,14 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
 		return CORBA_OBJECT_NIL;
 	}
 
-	result = Bonobo_ActivationContext_activateFromAid (
-			ac, aid, flags, bonobo_activation_context_get (), ev);
+	result = Bonobo_ActivationContext_activateFromAidFull
+                (ac, aid, flags, bonobo_activation_client_get (),
+                 bonobo_activation_context_get (), ev);
+
+        if (ev->_major == CORBA_SYSTEM_EXCEPTION &&
+            !strcmp (ev->_id, ex_CORBA_NO_IMPLEMENT)) /* fall-back */
+                result = Bonobo_ActivationContext_activateFromAid
+                        (ac, aid, flags, bonobo_activation_context_get (), ev);
 
 	if (ev->_major == CORBA_NO_EXCEPTION)
 		retval = handle_activation_result (result, ret_aid, ev);
@@ -463,8 +480,8 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
 #define ASYNC_ERROR_GENERAL_EXCEPTION (_("System exception: %s : %s"))
 #define ASYNC_ERROR_EXCEPTION         (_("System exception: %s"))
 
-static ORBit_IMethod *activate_matching_method = NULL;
-static ORBit_IMethod *activate_from_aid_method = NULL;
+static ORBit_IMethod *activate_matching_full_method = NULL;
+static ORBit_IMethod *activate_from_aid_full_method = NULL;
 
 typedef struct {
 	BonoboActivationCallback user_cb;
@@ -474,13 +491,13 @@ typedef struct {
 static void
 setup_methods (void)
 {
-	activate_matching_method = &Bonobo_ActivationContext__iinterface.methods._buffer [6];
-	activate_from_aid_method = &Bonobo_ActivationContext__iinterface.methods._buffer [7];
+	activate_matching_full_method = &Bonobo_ActivationContext__iinterface.methods._buffer [7];
+	activate_from_aid_full_method = &Bonobo_ActivationContext__iinterface.methods._buffer [9];
 
 	/* If these blow the IDL changed order, and the above
 	   indexes need updating */
-	g_assert (!strcmp (activate_matching_method->name, "activateMatching"));
-	g_assert (!strcmp (activate_from_aid_method->name, "activateFromAid"));
+	g_assert (!strcmp (activate_matching_full_method->name, "activateMatchingFull"));
+	g_assert (!strcmp (activate_from_aid_full_method->name, "activateFromAidFull"));
 }
 
 static void
@@ -571,7 +588,8 @@ bonobo_activation_activate_async (const char               *requirements,
 	AsyncActivationData      *async_data;
 	CORBA_Environment        *ev, tempenv;
 	Bonobo_StringList         selorder;
-	gpointer                  args [4];
+        Bonobo_ActivationClient   client;
+	gpointer                  args [5];
 
 	if (!requirements) {
 		async_cb (CORBA_OBJECT_NIL, ASYNC_ERROR_NO_REQUIREMENTS, user_data);
@@ -596,15 +614,18 @@ bonobo_activation_activate_async (const char               *requirements,
 
 	copy_strv_to_sequence (selection_order, &selorder);
 
-	args [0] = &requirements;
+        client = bonobo_activation_client_get ();
+
+        args [0] = &requirements;
 	args [1] = &selorder;
 	args [2] = &activation_environment;
 	args [3] = &flags;
+	args [4] = &client;
 
-	if (!activate_matching_method)
+	if (!activate_matching_full_method)
 		setup_methods ();
 
-	ORBit_small_invoke_async (ac, activate_matching_method,
+	ORBit_small_invoke_async (ac, activate_matching_full_method,
 				  activation_async_callback, async_data,
 				  args, bonobo_activation_context_get (), ev);
 
@@ -649,7 +670,8 @@ bonobo_activation_activate_from_id_async (const Bonobo_ActivationID  aid,
 	Bonobo_ActivationContext  ac;
 	AsyncActivationData      *async_data;
 	CORBA_Environment        *ev, tempenv;
-	gpointer                  args [2];
+        Bonobo_ActivationClient   client;
+	gpointer                  args [3];
 
 	if (!aid) {
 		async_cb (CORBA_OBJECT_NIL, ASYNC_ERROR_NO_AID, user_data);
@@ -687,13 +709,16 @@ bonobo_activation_activate_from_id_async (const Bonobo_ActivationID  aid,
 	async_data->user_cb   = async_cb;
 	async_data->user_data = user_data;
 
-	if (!activate_from_aid_method)
+	if (!activate_from_aid_full_method)
 		setup_methods ();
+
+        client = bonobo_activation_client_get ();
 
 	args [0] = (gpointer) &aid;
 	args [1] = &flags;
+	args [2] = &client;
 
-	ORBit_small_invoke_async (ac, activate_from_aid_method,
+	ORBit_small_invoke_async (ac, activate_from_aid_full_method,
 				  activation_async_callback, async_data,
 				  args, bonobo_activation_context_get (), ev);
 

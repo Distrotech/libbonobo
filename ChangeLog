@@ -1,3 +1,49 @@
+2003-12-08  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo-activation/bonobo-activation-activate.c
+	(bonobo_activation_query): fix daft snafu.
+
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_register_active_server_ext):
+	register the full version.
+
+	* bonobo-activation/bonobo-activation-client.c
+	(bonobo_activation_client_get): export internally.
+	(bonobo_activation_register_client): pass the environment.
+
+	* bonobo-activation/bonobo-activation-activate.c
+	(bonobo_activation_activate_from_id),
+	(bonobo_activation_activate): use new APIs and fallback
+	on exception.
+	(setup_methods): update.
+	(bonobo_activation_activate_from_id_async),
+	(bonobo_activation_activate_async): pass client - no
+	fallbacks though (yet).
+
+	* activation-server/object-directory-corba.c
+	(object_directory_init): upd.
+	(od_merge_client_environment): impl.
+	(impl_Bonobo_ObjectDirectory_activate): add client handle
+	(impl_Bonobo_ObjectDirectory_register_new_full): split/add
+	(impl_Bonobo_ObjectDirectory_register_new),
+	(impl_Bonobo_ObjectDirectory_activate): update.
+	(od_register_runtime_server_info): return the right value.
+	(impl_Bonobo_ObjectDirectory_addClientEnv): add envs.
+	(object_directory_finalize): cleanup envs.
+
+	* activation-server/object-directory-activate.c
+	(od_server_activate_factory): propagate client context.
+
+	* activation-server/client.c (do_activating): do a
+	'Full' activation.
+
+	* activation-server/activation-context-corba.c
+	(activation_context_class_init): expand vtable.
+	(impl_Bonobo_ActivationContext_activateMatchingFull),
+	(impl_Bonobo_ActivationContext_activateFromAidFull): split/add
+	(impl_Bonobo_ActivationContext_activateMatching),
+	(impl_Bonobo_ActivationContext_activateFromAid): update.
+
 2003-12-09  Shmyrev  <nshmyrev@yandex.ru>
 
 	* activation-server/activation-server-main.c (main):

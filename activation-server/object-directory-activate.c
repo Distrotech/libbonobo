@@ -42,6 +42,7 @@ static CORBA_Object
 od_server_activate_factory (Bonobo_ServerInfo                  *si,
 			    ODActivationInfo                   *actinfo,
 			    const Bonobo_ActivationEnvironment *environment,
+                            Bonobo_ActivationClient             client,
 			    CORBA_Environment                  *ev)
 {
 	Bonobo_ActivationResult *res;
@@ -58,9 +59,9 @@ od_server_activate_factory (Bonobo_ServerInfo                  *si,
 
 	flags = ((actinfo->flags | Bonobo_ACTIVATION_FLAG_NO_LOCAL) & (~Bonobo_ACTIVATION_FLAG_PRIVATE));
 
-	res = Bonobo_ActivationContext_activateMatching (
+	res = Bonobo_ActivationContext_activateMatchingFull (
 			actinfo->ac, requirements, &selorder,
-			environment, flags, actinfo->ctx, ev);
+			environment, flags, client, actinfo->ctx, ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
@@ -170,6 +171,7 @@ od_server_activate (Bonobo_ServerInfo                  *si,
 		    ODActivationInfo                   *actinfo,
 		    CORBA_Object                        od_obj,
 		    const Bonobo_ActivationEnvironment *environment,
+                    Bonobo_ActivationClient             client,
 		    CORBA_Environment                  *ev)
 {
         g_return_val_if_fail (ev->_major == CORBA_NO_EXCEPTION,
@@ -179,7 +181,7 @@ od_server_activate (Bonobo_ServerInfo                  *si,
 		return od_server_activate_exe (si, actinfo, od_obj, environment, ev);
 
 	else if (!strcmp (si->server_type, "factory"))
-		return od_server_activate_factory (si, actinfo, environment, ev);
+		return od_server_activate_factory (si, actinfo, environment, client, ev);
 
 	else if (!strcmp (si->server_type, "shlib"))
 		g_warning (_("We don't handle activating shlib objects in a remote process yet"));

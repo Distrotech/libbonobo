@@ -70,7 +70,8 @@ module Bonobo {
                 Object activate (in ImplementationID              iid,
                                  in ActivationContext             ac,
                                  in Bonobo::ActivationEnvironment environment,
-                                 in ActivationFlags               flags)
+                                 in ActivationFlags               flags,
+                                 in ActivationClient              client)
                         context ("username", "hostname");
 
                 RegistrationResult register_new (in  ImplementationID              iid,
@@ -79,12 +80,22 @@ module Bonobo {
 						 in  RegistrationFlags             flags,
                                                  in  string                        description,
                                                  out Object                        existing);
+                RegistrationResult register_new_full (in  ImplementationID              iid,
+                                                      in  Bonobo::ActivationEnvironment environment,
+                                                      in  Object                        obj,
+                                                      in  RegistrationFlags             flags,
+                                                      in  string                        description,
+                                                      out Object                        existing,
+                                                      in ActivationClient               client);
                 void               unregister   (in ImplementationID              iid,
                                                  in Object                        obj)
                         raises (NotRegistered);
 
                 DynamicPathLoadResult dynamic_add_path (in string add_path);
                 DynamicPathLoadResult dynamic_remove_path (in string remove_path);
+
+                void addClientEnv (in ActivationClient client,
+                                   in StringList       env);
         };
 
 };

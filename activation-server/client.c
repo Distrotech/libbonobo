@@ -235,8 +235,9 @@ do_activating()
 
 	memset (&environment, 0, sizeof (Bonobo_ActivationEnvironment));
                                                                                                                              
-	a_res = Bonobo_ActivationContext_activateMatching (
+	a_res = Bonobo_ActivationContext_activateMatchingFull (
  				ac, specs, &reqs, &environment, 0,
+                                bonobo_activation_client_get (),
 				bonobo_activation_context_get (), &ev);
 	switch (ev._major) {
 	case CORBA_NO_EXCEPTION:
