@@ -1,3 +1,16 @@
+2000-12-07  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-selector.c (bonobo_selector_new): clean.
+	(get_filtered_objects): kill n_inters cruft, don't do redundant
+	allocations, don't do wierd signaling on priv; return the list
+	without sort anchoring bug - bugs / line of code count here
+	is desparate.
+	(bonobo_selector_destroy): upd.
+	(add_objects): do the server list free in here, remove
+	priv->servers, remove priv->n_servers, clean loop.
+	(bonobo_selector_get_selected_id): use GPOINTER_TO_INT
+	(bonobo_selector_get_selected_name): ditto.
+
 2000-12-06  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* bonobo/bonobo-transient.c: use transient->priv->poa instead
