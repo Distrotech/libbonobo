@@ -8,7 +8,7 @@
 
 BEGIN_GNOME_DECLS
 
-#define BONOBO_OBJECT_DEBUG
+#undef BONOBO_OBJECT_DEBUG
  
 #define BONOBO_OBJECT_TYPE        (bonobo_object_get_type ())
 #define BONOBO_OBJECT(o)          (GTK_CHECK_CAST ((o), BONOBO_OBJECT_TYPE, BonoboObject))

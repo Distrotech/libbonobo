@@ -1,3 +1,7 @@
+2000-08-03  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object.h: undef BONOBO_OBJECT_DEBUG; doh.
+
 2000-08-02  Michael Meeks  <michael@helixcode.com>
 
 	* storage-modules/gnome-storage-efs.c (bonobo_storage_efs_open):
