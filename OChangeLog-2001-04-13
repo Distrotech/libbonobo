@@ -1,3 +1,8 @@
+1999-08-10  Federico Mena Quintero  <federico@redhat.com>
+
+	* doc/Bonobo.sgml: Made it valid DocBook.  Spell-checked it.
+	Someone should fix the grammatical errors.
+
 1999-08-09  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-ui-handler.c: Fixed numerous menu bugs.  Wrote half
