@@ -14,4 +14,5 @@ test-ui
 test-toolbar
 test-event-source
 test-object
+test-storage-mem
 test-stream-mem

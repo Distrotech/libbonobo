@@ -1,3 +1,7 @@
+2001-07-26  Darin Adler  <darin@bentspoon.com>
+
+	* tests/.cvsignore: Add test-storage-mem.
+
 2001-07-26  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* bonobo/bonobo-storage-memory.h: Virtualized implementations to
