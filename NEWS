@@ -1,3 +1,15 @@
+Bonobo 0.34
+
+	* Fix bonobo-idl build (Me)
+
+Bonobo 0.33
+
+	* Fixed broken standard moniker id (Me)
+
+	* Fix UI verb tracking leak (Me)
+
+	* Fix old UI race condition (Me)
+
 Bonobo 0.32
 
 	* Monikers
