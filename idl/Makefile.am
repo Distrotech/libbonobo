@@ -19,6 +19,7 @@ idl_DATA =				\
 	Bonobo_Unknown.idl		\
 	Bonobo_Zoomable.idl		\
 	Bonobo_Exception.idl		\
+	Bonobo_Clipboard.idl		\
 	$(NULL)
 
 EXTRA_DIST = $(idl_DATA)

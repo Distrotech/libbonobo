@@ -1,3 +1,11 @@
+2001-07-29  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* configure.in: bumped version number (depend on 1.99.0 if you
+	want to access the Clipboard)
+
+	* idl/Bonobo_Clipboard.idl: Moved here from bonobo-clipboard (the
+	implementation still resides there)
+
 2001-07-29  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-types.c (bonobo_closure_invoke): impl.
