@@ -28,7 +28,7 @@
 /**
  * oaf_server_info_prop_find:
  * @server: the server where to seek the data.
- * @propname: the data to seek in teh server.
+ * @prop_name: the data to seek in the server.
  *
  * Tries to find a server with the given property. Returns
  * NULL if not found.

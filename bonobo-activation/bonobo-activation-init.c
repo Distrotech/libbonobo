@@ -349,7 +349,7 @@ do_barrier (int signum)
 /**
  * oaf_is_initialized:
  *
- * Tells you if OAF is initialized.
+ * Tells you whether or not OAF is initialized.
  *
  * Return value: whether OAF is initialized or not.
  */

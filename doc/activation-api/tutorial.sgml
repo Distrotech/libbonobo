@@ -112,12 +112,40 @@ CORBA_Object o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
    <listitem>
    <para>
    Create a proper <filename>.oafinfo</filename> file for your server describing its
-   IDL interfaces
+   IDL interfaces, its main properties and the way it is to be activated.
    </para>
    </listitem>
 
-   </itemizedlit>
+   <listitem>
+   <para>
+   Call <function>oaf_init</function> (make sure you do not initialize twice by calling 
+   <function>oaf_is_initialized</function>). Then, call <function>oaf_active_server_register</function>
+   to register yourself as running to the OAF daemon.
    </para>
+   </listitem>
+
+   </itemizedlist>
+
+   If you are a client wiling to activate a few servers, it is a little simpler: you 
+   just must make sure you call the <function>oaf_init</function> function and you can then
+   call <function>oaf_query</function> or <function>oaf_activate</function> or 
+   <function>oaf_activate_from_id</function>.
+   </para>
+
+   <para>
+   Here, put a real-life example of a client and a server.
+   </para>
+
+
+   <sect2>
+   <title>The non-local case</title>
+   <para>
+   Here, present how to use setup the system for the non-local case.
+   If anyone is willing to write this part, mail gnome-components-list@gnome.org.
+   in the meantime, you can have a look at the code in gnome-libs HEAD from cvs.
+   (I never had time to go look at it)
+   </para>
+   </sect2>
 
    </sect1>
 

@@ -9,11 +9,37 @@ utilities
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
+
+<!-- ##### STRUCT OAF_Property ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT OAF_PropertyValue ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT OAF_PropertyType ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION oaf_server_info_prop_find ##### -->
+<para>
+
+</para>
+
+@server: 
+@prop_name: 
+@Returns: 
 
 
 <!-- ##### STRUCT OAFActivationInfo ##### -->

@@ -2,6 +2,10 @@
 
 <SECTION>
 <FILE>utilities</FILE>
+OAF_Property
+OAF_PropertyValue
+OAF_PropertyType
+oaf_server_info_prop_find
 OAFActivationInfo
 oaf_actinfo_stringify
 oaf_servinfo_to_actinfo

@@ -10,6 +10,46 @@ typedef struct
 </STRUCT>
 
 <STRUCT>
+<NAME>OAF_PropertyType</NAME>
+   typedef enum
+   {
+      OAF_P_STRING,
+      OAF_P_NUMBER,
+      OAF_P_BOOLEAN,
+      OAF_P_STRINGV
+   }
+   OAF_PropertyType;
+</STRUCT>
+
+<STRUCT>
+<NAME>OAF_Property</NAME>
+   typedef struct
+   {
+      CORBA_char *name;
+      OAF_PropertyValue v;
+   }
+   OAF_Property;
+</STRUCT>
+
+
+<STRUCT>
+<NAME>OAF_PropertyValue</NAME>
+   typedef struct
+   {
+      OAF_PropertyType _d;
+      union
+      {
+	 CORBA_char *value_string;
+	 CORBA_double value_number;
+	 CORBA_boolean value_boolean;
+	 GNOME_stringlist value_stringv;
+      }
+      _u;
+   }
+   OAF_PropertyValue;
+</STRUCT>
+
+<STRUCT>
 <NAME>OAF_ServerInfo</NAME>
    typedef struct
    {

@@ -250,10 +250,9 @@ oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
  * @ev: %CORBA_Environment structure which will contain 
  *      the CORBA exception status of the operation. 
  *
- * Returns the name server used by OAF. This name server 
- * should be used by all applications.
+ * Returns the name server of OAF.
  *
- * Return value: the name server used by OAF.
+ * Return value: the name server of OAF.
  */
 CORBA_Object oaf_name_service_get (CORBA_Environment * ev)
 {
