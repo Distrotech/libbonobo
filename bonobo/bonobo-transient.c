@@ -539,7 +539,7 @@ bonobo_transient_new (PortableServer_POA poa,
 {
 	BonoboTransient *transient;
 
-	transient = g_object_new (BONOBO_TRANSIENT_TYPE, NULL);
+	transient = g_object_new (BONOBO_TYPE_TRANSIENT, NULL);
 	if (bonobo_transient_construct (transient, poa, new_servant, destroy_servant, data) == NULL) {
 		g_object_unref (G_OBJECT (transient));
 		return NULL;

@@ -25,7 +25,7 @@ struct _BonoboMonikerPrivate {
 	gboolean       sensitive;
 };
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 
 static GObjectClass *bonobo_moniker_parent_class;
 

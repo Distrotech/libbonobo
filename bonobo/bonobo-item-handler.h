@@ -18,11 +18,12 @@
 
 G_BEGIN_DECLS
  
-#define BONOBO_ITEM_HANDLER_TYPE        (bonobo_item_handler_get_type ())
-#define BONOBO_ITEM_HANDLER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_ITEM_HANDLER_TYPE, BonoboItemHandler))
-#define BONOBO_ITEM_HANDLER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_ITEM_HANDLER_TYPE, BonoboItemHandlerClass))
-#define BONOBO_IS_ITEM_HANDLER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_ITEM_HANDLER_TYPE))
-#define BONOBO_IS_ITEM_HANDLER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_ITEM_HANDLER_TYPE))
+#define BONOBO_TYPE_ITEM_HANDLER        (bonobo_item_handler_get_type ())
+#define BONOBO_ITEM_HANDLER_TYPE        BONOBO_TYPE_ITEM_HANDLER // deprecated, you should use BONOBO_TYPE_ITEM_HANDLER
+#define BONOBO_ITEM_HANDLER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_ITEM_HANDLER, BonoboItemHandler))
+#define BONOBO_ITEM_HANDLER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_ITEM_HANDLER, BonoboItemHandlerClass))
+#define BONOBO_IS_ITEM_HANDLER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_ITEM_HANDLER))
+#define BONOBO_IS_ITEM_HANDLER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_ITEM_HANDLER))
 
 typedef struct _BonoboItemHandlerPrivate BonoboItemHandlerPrivate;
 typedef struct _BonoboItemHandler        BonoboItemHandler;

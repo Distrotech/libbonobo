@@ -186,7 +186,7 @@ bonobo_shlib_factory_init (GObject *object)
  * Returns: The GType of the BonoboShlibFactory class.
  */
 BONOBO_TYPE_FUNC (BonoboShlibFactory, 
-		  BONOBO_GENERIC_FACTORY_TYPE,
+		  BONOBO_TYPE_GENERIC_FACTORY,
 		  bonobo_shlib_factory);
 
 /**

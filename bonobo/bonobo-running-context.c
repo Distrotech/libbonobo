@@ -20,7 +20,7 @@
 #include <bonobo/bonobo-shutdown.h>
 #include <bonobo/bonobo-main.h>
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 
 static BonoboObjectClass *bonobo_running_context_parent_class = NULL;
 

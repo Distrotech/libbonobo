@@ -17,7 +17,7 @@
 #include <bonobo/bonobo-marshal.h>
 #include <bonobo/bonobo-types.h>
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 
 #define CLASS(o) BONOBO_PROPERTY_BAG_CLASS (G_OBJECT_GET_CLASS (o))
 
@@ -165,7 +165,7 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 
 	bonobo_closure_invoke (prop->priv->get_prop,
 			       BONOBO_TYPE_CORBA_ANY,       &arg,
-			       BONOBO_PROPERTY_BAG_TYPE,    pb,
+			       BONOBO_TYPE_PROPERTY_BAG,    pb,
 			       BONOBO_TYPE_CORBA_TYPECODE,  prop->type,
 			       G_TYPE_UINT,                 prop->idx,
 			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
@@ -206,7 +206,7 @@ impl_Bonobo_PropertyBag_getValues (PortableServer_Servant  servant,
 
 		bonobo_closure_invoke (prop->priv->get_prop,
 				       BONOBO_TYPE_CORBA_ANY,       &arg,
-				       BONOBO_PROPERTY_BAG_TYPE,    pb,
+				       BONOBO_TYPE_PROPERTY_BAG,    pb,
 				       BONOBO_TYPE_CORBA_TYPECODE,  prop->type,
 				       G_TYPE_UINT,                 prop->idx,
 				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
@@ -245,7 +245,7 @@ impl_Bonobo_PropertyBag_setValue (PortableServer_Servant  servant,
 
 	bonobo_closure_invoke (prop->priv->set_prop,
 			       G_TYPE_NONE,
-			       BONOBO_PROPERTY_BAG_TYPE,    pb,
+			       BONOBO_TYPE_PROPERTY_BAG,    pb,
 			       BONOBO_TYPE_CORBA_ANY,       value,
 			       G_TYPE_UINT,                 prop->idx,
 			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
@@ -292,7 +292,7 @@ impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
 		
 		bonobo_closure_invoke (prop->priv->set_prop,
 				       G_TYPE_NONE,
-				       BONOBO_PROPERTY_BAG_TYPE,    pb,
+				       BONOBO_TYPE_PROPERTY_BAG,    pb,
 				       BONOBO_TYPE_CORBA_ANY,       &set->_buffer [i].value,
 				       G_TYPE_UINT,                 prop->idx,
 				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
@@ -476,7 +476,7 @@ bonobo_property_bag_new_full (GClosure          *get_prop,
 
 	g_return_val_if_fail (es != NULL, NULL);
 
-	pb = g_object_new (BONOBO_PROPERTY_BAG_TYPE, NULL);
+	pb = g_object_new (BONOBO_TYPE_PROPERTY_BAG, NULL);
 
 	return bonobo_property_bag_construct (pb, get_prop, set_prop, es);
 }

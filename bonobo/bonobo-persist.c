@@ -13,7 +13,7 @@
 #include <gobject/gmarshal.h>
 #include <bonobo/bonobo-persist.h>
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 
 /* Parent object class */
 static GObjectClass *bonobo_persist_parent_class;

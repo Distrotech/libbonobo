@@ -19,7 +19,7 @@
 #include <bonobo/bonobo-marshal.h>
 #include <bonobo/bonobo-types.h>
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 
 static GObjectClass *bonobo_listener_parent_class;
 
@@ -48,7 +48,7 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 	if (listener->priv->event_callback)
 		bonobo_closure_invoke (listener->priv->event_callback,
 				       G_TYPE_NONE,
-				       BONOBO_LISTENER_TYPE, listener,
+				       BONOBO_TYPE_LISTENER, listener,
 				       BONOBO_TYPE_STRING, event_name,
 				       BONOBO_TYPE_CORBA_ANY, args,
 				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
@@ -144,7 +144,7 @@ bonobo_listener_new_closure (GClosure *event_closure)
 {
 	BonoboListener *listener;
 
-	listener = g_object_new (BONOBO_LISTENER_TYPE, NULL);
+	listener = g_object_new (BONOBO_TYPE_LISTENER, NULL);
 
 	listener->priv->event_callback = bonobo_closure_store (
 		event_closure, bonobo_marshal_VOID__STRING_BOXED_BOXED);

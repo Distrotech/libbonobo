@@ -14,7 +14,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-persist-stream.h>
 
-#define PARENT_TYPE BONOBO_PERSIST_TYPE
+#define PARENT_TYPE BONOBO_TYPE_PERSIST
 
 /* Parent GTK object class */
 static BonoboPersistClass *bonobo_persist_stream_parent_class;

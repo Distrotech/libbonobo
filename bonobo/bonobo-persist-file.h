@@ -15,11 +15,12 @@
 
 G_BEGIN_DECLS
 
-#define BONOBO_PERSIST_FILE_TYPE (bonobo_persist_file_get_type ())
-#define BONOBO_PERSIST_FILE(o)   (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFile))
-#define BONOBO_PERSIST_FILE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFileClass))
-#define BONOBO_IS_PERSIST_FILE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_PERSIST_FILE_TYPE))
-#define BONOBO_IS_PERSIST_FILE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_FILE_TYPE))
+#define BONOBO_TYPE_PERSIST_FILE (bonobo_persist_file_get_type ())
+#define BONOBO_PERSIST_FILE_TYPE        BONOBO_TYPE_PERSIST_FILE // deprecated, you should use BONOBO_TYPE_PERSIST_FILE
+#define BONOBO_PERSIST_FILE(o)   (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PERSIST_FILE, BonoboPersistFile))
+#define BONOBO_PERSIST_FILE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PERSIST_FILE, BonoboPersistFileClass))
+#define BONOBO_IS_PERSIST_FILE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PERSIST_FILE))
+#define BONOBO_IS_PERSIST_FILE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_PERSIST_FILE))
 
 typedef struct _BonoboPersistFilePrivate BonoboPersistFilePrivate;
 typedef struct _BonoboPersistFile        BonoboPersistFile;

@@ -1,3 +1,62 @@
+2001-10-28  Seth Nickell  <snickell@stanford.edu>
+
+	* bonobo/bonobo-event-source.c: (bonobo_event_source_new):
+	* bonobo/bonobo-event-source.h:
+	* bonobo/bonobo-generic-factory.c:
+	(bonobo_generic_factory_new_generic):
+	* bonobo/bonobo-generic-factory.h:
+	* bonobo/bonobo-item-container.c:
+	* bonobo/bonobo-item-container.h:
+	* bonobo/bonobo-item-handler.c: (impl_enum_objects),
+	(impl_get_object):
+	* bonobo/bonobo-item-handler.h:
+	* bonobo/bonobo-listener.c: (impl_Bonobo_Listener_event),
+	(bonobo_listener_new_closure):
+	* bonobo/bonobo-listener.h:
+	* bonobo/bonobo-moniker-context.c:
+	* bonobo/bonobo-moniker-extender.c:
+	* bonobo/bonobo-moniker-extender.h:
+	* bonobo/bonobo-moniker-simple.c: (simple_resolve):
+	* bonobo/bonobo-moniker-simple.h:
+	* bonobo/bonobo-moniker.c:
+	* bonobo/bonobo-moniker.h:
+	* bonobo/bonobo-object.c: (bonobo_object_class_init):
+	* bonobo/bonobo-object.h:
+	* bonobo/bonobo-persist-file.c:
+	* bonobo/bonobo-persist-file.h:
+	* bonobo/bonobo-persist-stream.c:
+	* bonobo/bonobo-persist-stream.h:
+	* bonobo/bonobo-persist.c:
+	* bonobo/bonobo-persist.h:
+	* bonobo/bonobo-property-bag.c: (impl_Bonobo_PropertyBag_getValue),
+	(impl_Bonobo_PropertyBag_getValues),
+	(impl_Bonobo_PropertyBag_setValue),
+	(impl_Bonobo_PropertyBag_setValues),
+	(bonobo_property_bag_new_full):
+	* bonobo/bonobo-property-bag.h:
+	* bonobo/bonobo-running-context.c:
+	* bonobo/bonobo-shlib-factory.c:
+	* bonobo/bonobo-shlib-factory.h:
+	* bonobo/bonobo-storage-memory.c:
+	* bonobo/bonobo-storage-memory.h:
+	* bonobo/bonobo-stream-memory.c: (bonobo_stream_mem_get_type):
+	* bonobo/bonobo-stream-memory.h:
+	* bonobo/bonobo-transient.c: (bonobo_transient_new):
+	* bonobo/bonobo-transient.h:
+	* bonobo/bonobo-xobject.h:
+
+        Convert Bonobo TYPE macros from: 
+	 
+	BONOBO_..._TYPE to BONOBO_TYPE_...  
+	 
+	Add #defines to the old style for compatibility, but 
+	add a magic comment so its easy to remove them in the  
+	future. 
+	 
+	See also: http://www.stanford.edu/~snickell/bonobo_type_convert.pl 
+	 
+	(converts source code to use the new macros) 
+	
 2001-10-30  Michael Meeks  <michael@ximian.com>
 
 	* libbonobo.h: add bonobo-stream-mem.h, bonobo-storage-memory.h

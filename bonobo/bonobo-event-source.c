@@ -18,7 +18,7 @@
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-running-context.h>
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 
 static GObjectClass *bonobo_event_source_parent_class;
 
@@ -298,7 +298,7 @@ BONOBO_TYPE_FUNC_FULL (BonoboEventSource,
 BonoboEventSource *
 bonobo_event_source_new (void)
 {
-	return g_object_new (BONOBO_EVENT_SOURCE_TYPE, NULL);
+	return g_object_new (BONOBO_TYPE_EVENT_SOURCE, NULL);
 }
 
 /**

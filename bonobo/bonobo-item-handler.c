@@ -19,7 +19,7 @@
 
 #include "bonobo-item-handler.h"
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 static GObjectClass *bonobo_item_handler_parent_class;
 
 struct _BonoboItemHandlerPrivate
@@ -121,7 +121,7 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 
 		bonobo_closure_invoke (handler->priv->enum_objects,
 				       G_TYPE_POINTER,              &ret,
-				       BONOBO_ITEM_HANDLER_TYPE,    handler,
+				       BONOBO_TYPE_ITEM_HANDLER,    handler,
 				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
 				       0);
 
@@ -145,7 +145,7 @@ impl_get_object (PortableServer_Servant servant,
 
 		bonobo_closure_invoke (handler->priv->get_object,
 				       BONOBO_TYPE_UNKNOWN,         &ret,
-				       BONOBO_ITEM_HANDLER_TYPE,    handler,
+				       BONOBO_TYPE_ITEM_HANDLER,    handler,
 				       G_TYPE_STRING,               item_name,
 				       G_TYPE_BOOLEAN,              only_if_exists,
 				       BONOBO_TYPE_CORBA_EXCEPTION, ev,

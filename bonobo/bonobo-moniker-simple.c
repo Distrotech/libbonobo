@@ -84,8 +84,8 @@ simple_resolve (BonoboMoniker               *moniker,
 
 	bonobo_closure_invoke (simple->priv->resolve_closure,
 			       BONOBO_TYPE_CORBA_OBJECT, &ret,
-			       BONOBO_MONIKER_TYPE, moniker,
-			       BONOBO_RESOLVE_FLAG_TYPE, resolve_flag,
+			       BONOBO_TYPE_MONIKER, moniker,
+			       BONOBO_TYPE_RESOLVE_FLAG, resolve_flag,
 			       G_TYPE_LONG, timeout,
 			       BONOBO_TYPE_STRING, requested_interface,
 			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
@@ -163,7 +163,7 @@ bonobo_moniker_simple_construct (BonoboMonikerSimple *moniker,
  * Create a new instance of a simplified moniker.
  *
  * Instead of the Bonobo_ResolveOptions struct, the closure takes its
- * contents as two arguments: BONOBO_RESOLVE_FLAG_TYPE and G_TYPE_LONG.
+ * contents as two arguments: BONOBO_TYPE_RESOLVE_FLAG and G_TYPE_LONG.
  * 
  * Return value: the moniker object
  **/

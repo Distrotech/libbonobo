@@ -66,11 +66,12 @@ typedef struct {
 	POA_Bonobo_PropertyBag__epv epv;
 } BonoboPropertyBagClass;
 
-#define BONOBO_PROPERTY_BAG_TYPE        (bonobo_property_bag_get_type ())
-#define BONOBO_PROPERTY_BAG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PROPERTY_BAG_TYPE, BonoboPropertyBag))
-#define BONOBO_PROPERTY_BAG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), BONOBO_PROPERTY_BAG_TYPE, BonoboPropertyBagClass))
-#define BONOBO_IS_PROPERTY_BAG(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_PROPERTY_BAG_TYPE))
-#define BONOBO_IS_PROPERTY_BAG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_PROPERTY_BAG_TYPE))
+#define BONOBO_TYPE_PROPERTY_BAG        (bonobo_property_bag_get_type ())
+#define BONOBO_PROPERTY_BAG_TYPE        BONOBO_TYPE_PROPERTY_BAG // deprecated, you should use BONOBO_TYPE_PROPERTY_BAG
+#define BONOBO_PROPERTY_BAG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PROPERTY_BAG, BonoboPropertyBag))
+#define BONOBO_PROPERTY_BAG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PROPERTY_BAG, BonoboPropertyBagClass))
+#define BONOBO_IS_PROPERTY_BAG(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PROPERTY_BAG))
+#define BONOBO_IS_PROPERTY_BAG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_PROPERTY_BAG))
 
 GType		          
 bonobo_property_bag_get_type  (void) G_GNUC_CONST;

@@ -18,11 +18,12 @@
 
 G_BEGIN_DECLS
 
-#define BONOBO_LISTENER_TYPE        (bonobo_listener_get_type ())
-#define BONOBO_LISTENER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_LISTENER_TYPE, BonoboListener))
-#define BONOBO_LISTENER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_LISTENER_TYPE, BonoboListenerClass))
-#define BONOBO_IS_LISTENER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_LISTENER_TYPE))
-#define BONOBO_IS_LISTENER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_LISTENER_TYPE))
+#define BONOBO_TYPE_LISTENER        (bonobo_listener_get_type ())
+#define BONOBO_LISTENER_TYPE        BONOBO_TYPE_LISTENER // deprecated, you should use BONOBO_TYPE_LISTENER
+#define BONOBO_LISTENER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_LISTENER, BonoboListener))
+#define BONOBO_LISTENER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_LISTENER, BonoboListenerClass))
+#define BONOBO_IS_LISTENER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_LISTENER))
+#define BONOBO_IS_LISTENER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_LISTENER))
 
 typedef struct _BonoboListenerPrivate BonoboListenerPrivate;
 

@@ -32,7 +32,7 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 
 static GObjectClass *bonobo_item_container_parent_class;
 

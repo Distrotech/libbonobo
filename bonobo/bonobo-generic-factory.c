@@ -201,8 +201,8 @@ bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 
 	bonobo_closure_invoke (factory->priv->factory_closure,
-			       BONOBO_OBJECT_TYPE, &ret,
-			       BONOBO_GENERIC_FACTORY_TYPE, factory,
+			       BONOBO_TYPE_OBJECT, &ret,
+			       BONOBO_TYPE_GENERIC_FACTORY, factory,
 			       BONOBO_TYPE_STRING, act_iid, 0);
 
 	return ret;
@@ -233,7 +233,7 @@ bonobo_generic_factory_init (GObject *object)
 
 BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory, 
 		       Bonobo_GenericFactory,
-		       BONOBO_OBJECT_TYPE,
+		       BONOBO_TYPE_OBJECT,
 		       bonobo_generic_factory);
 
 

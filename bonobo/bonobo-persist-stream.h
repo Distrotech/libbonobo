@@ -15,11 +15,12 @@
 
 G_BEGIN_DECLS
 
-#define BONOBO_PERSIST_STREAM_TYPE        (bonobo_persist_stream_get_type ())
-#define BONOBO_PERSIST_STREAM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStream))
-#define BONOBO_PERSIST_STREAM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStreamClass))
-#define BONOBO_IS_PERSIST_STREAM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_PERSIST_STREAM_TYPE))
-#define BONOBO_IS_PERSIST_STREAM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_STREAM_TYPE))
+#define BONOBO_TYPE_PERSIST_STREAM        (bonobo_persist_stream_get_type ())
+#define BONOBO_PERSIST_STREAM_TYPE        BONOBO_TYPE_PERSIST_STREAM // deprecated, you should use BONOBO_TYPE_PERSIST_STREAM
+#define BONOBO_PERSIST_STREAM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PERSIST_STREAM, BonoboPersistStream))
+#define BONOBO_PERSIST_STREAM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PERSIST_STREAM, BonoboPersistStreamClass))
+#define BONOBO_IS_PERSIST_STREAM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PERSIST_STREAM))
+#define BONOBO_IS_PERSIST_STREAM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_PERSIST_STREAM))
 
 typedef struct _BonoboPersistStreamPrivate BonoboPersistStreamPrivate;
 typedef struct _BonoboPersistStream        BonoboPersistStream;

@@ -18,11 +18,12 @@ struct _BonoboStreamMem;
 typedef struct _BonoboStreamMem BonoboStreamMem;
 typedef struct _BonoboStreamMemPrivate BonoboStreamMemPrivate;
 
-#define BONOBO_STREAM_MEM_TYPE        (bonobo_stream_mem_get_type ())
-#define BONOBO_STREAM_MEM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_STREAM_MEM_TYPE, BonoboStreamMem))
-#define BONOBO_STREAM_MEM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_STREAM_MEM_TYPE, BonoboStreamMemClass))
-#define BONOBO_IS_STREAM_MEM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_STREAM_MEM_TYPE))
-#define BONOBO_IS_STREAM_MEM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_STREAM_MEM_TYPE))
+#define BONOBO_TYPE_STREAM_MEM        (bonobo_stream_mem_get_type ())
+#define BONOBO_STREAM_MEM_TYPE        BONOBO_TYPE_STREAM_MEM // deprecated, you should use BONOBO_TYPE_STREAM_MEM
+#define BONOBO_STREAM_MEM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_STREAM_MEM, BonoboStreamMem))
+#define BONOBO_STREAM_MEM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_STREAM_MEM, BonoboStreamMemClass))
+#define BONOBO_IS_STREAM_MEM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_STREAM_MEM))
+#define BONOBO_IS_STREAM_MEM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_STREAM_MEM))
 
 struct _BonoboStreamMem {
 	BonoboObject parent;

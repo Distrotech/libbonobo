@@ -15,7 +15,7 @@
 #include <bonobo/bonobo-moniker-extender.h>
 #include <bonobo/bonobo-moniker-context.h>
 
-#define PARENT_TYPE BONOBO_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_OBJECT
 
 static Bonobo_Moniker
 impl_Bonobo_MonikerContext_createFromName (PortableServer_Servant servant,
