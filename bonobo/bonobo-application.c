@@ -19,7 +19,7 @@ enum SIGNALS {
 
 enum PROPERTIES {
 	PROP_0,
-	PROP_NAME,
+	PROP_NAME
 };
 
 static guint signals [LAST_SIGNAL] = { 0 };
@@ -371,7 +371,7 @@ bonobo_application_init (BonoboApplication *self)
 BONOBO_TYPE_FUNC_FULL (BonoboApplication,
 		       Bonobo_Application,
 		       BONOBO_TYPE_OBJECT,
-		       bonobo_application);
+		       bonobo_application)
 
 
 /**
