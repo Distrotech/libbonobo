@@ -1,3 +1,9 @@
+2000-09-04  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_wrapper_button_press_cb): 
+	ref / unref around signal emission.
+	(bonobo_view_frame_key_press_cb): ditto.
+
 2000-09-02  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-view.c (bonobo_view_popup_verbs),
