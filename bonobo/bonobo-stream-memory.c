@@ -59,7 +59,7 @@ mem_write (GnomeStream *stream, const GNOME_Stream_iobuf *buffer,
 	if (smem->pos + len > smem->size)
 		len = smem->size - smem->pos;
 	
-	memcpy (smem->buffer, buffer->_buffer, len);
+	memcpy (smem->buffer + smem->pos, buffer->_buffer, len);
 	smem->pos += len;
 		
 	return len;
@@ -80,7 +80,7 @@ mem_read (GnomeStream *stream, CORBA_long count,
 	(*buffer)->_buffer = CORBA_sequence_CORBA_octet_allocbuf (count);
 	(*buffer)->_length = count;
 	
-	memcpy ((*buffer)->_buffer, smem->buffer, count);
+	memcpy ((*buffer)->_buffer, smem->buffer + smem->pos, count);
 
 	smem->pos += count;
 	

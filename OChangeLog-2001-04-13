@@ -1,3 +1,10 @@
+1999-09-16  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* bonobo/gnome-canvas-component.c: include stdio.h
+
+	* bonobo/gnome-stream-memory.c (mem_read): Read from the current offset,
+	and not the BOF. (mem_write): ditto.
+
 1999-09-15  Michael Meeks  <michael@nuclecu.unam.mx>
 
 	* bonobo/test-container.c (add_pdf_cmd): Update to application-x-pdf,
