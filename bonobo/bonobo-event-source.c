@@ -11,6 +11,7 @@
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
+#include <bonobo/bonobo-listener.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-running-context.h>

@@ -49,6 +49,11 @@ typedef struct {
 					      const Bonobo_ResolveOptions *options,
 					      const CORBA_char            *requested_interface,
 					      CORBA_Environment           *ev);
+
+	void           (*set_name)           (BonoboMoniker               *moniker,
+					      const char                  *unescaped_name);
+	const char    *(*get_name)           (BonoboMoniker               *moniker);
+
 } BonoboMonikerClass;
 
 GtkType                  bonobo_moniker_get_type            (void);
@@ -65,10 +70,6 @@ void                     bonobo_moniker_set_parent          (BonoboMoniker     *
 							     Bonobo_Moniker     parent,
 							     CORBA_Environment *ev);
 
-/*
- *   Common case convenience functions, for people not
- * overriding the base BonoboMoniker methods.
- */
 const char              *bonobo_moniker_get_name            (BonoboMoniker     *moniker);
 
 const char              *bonobo_moniker_get_name_full       (BonoboMoniker     *moniker);
@@ -77,6 +78,8 @@ char                    *bonobo_moniker_get_name_escaped    (BonoboMoniker     *
 void                     bonobo_moniker_set_name            (BonoboMoniker     *moniker,
 							     const char        *unescaped_name,
 							     int                num_chars);
+
+const char              *bonobo_moniker_get_prefix          (BonoboMoniker     *moniker);
 
 END_GNOME_DECLS
 

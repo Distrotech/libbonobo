@@ -115,13 +115,16 @@ bonobo_moniker_get_parent (BonoboMoniker     *moniker,
 const char *
 bonobo_moniker_get_name (BonoboMoniker *moniker)
 {	
+	const char *str;
+
 	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
 
-	if (moniker->priv->name)
-		return & moniker->priv->name [
-			moniker->priv->prefix_len];
+	str = CLASS (moniker)->get_name (moniker);
 
-	return "";
+	if (str)
+		return str + moniker->priv->prefix_len;
+	else
+		return "";
 }
 
 /**
@@ -138,10 +141,7 @@ bonobo_moniker_get_name_full (BonoboMoniker *moniker)
 {	
 	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
 
-	if (moniker->priv->name)
-		return moniker->priv->name;
-
-	return "";
+	return CLASS (moniker)->get_name (moniker);
 }
 
 /**
@@ -156,7 +156,10 @@ bonobo_moniker_get_name_full (BonoboMoniker *moniker)
 char *
 bonobo_moniker_get_name_escaped (BonoboMoniker *moniker)
 {
-	return bonobo_moniker_util_escape (moniker->priv->name, 0);
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
+
+	return bonobo_moniker_util_escape (
+		CLASS (moniker)->get_name (moniker), 0);
 }
 
 /**
@@ -172,12 +175,49 @@ bonobo_moniker_set_name (BonoboMoniker *moniker,
 			 const char    *name,
 			 int            num_chars)
 {
+	char *str;
+
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
-	g_return_if_fail (strlen (name) >= moniker->priv->prefix_len);
+
+	str = bonobo_moniker_util_unescape (name, num_chars);
+
+	CLASS (moniker)->set_name (moniker, str);
+
+	g_free (str);
+}
+
+/**
+ * bonobo_moniker_get_prefix:
+ * @moniker: a moniker
+ * 
+ * Return value: the registered prefix for this moniker or
+ * NULL if there isn't one. eg "file:"
+ **/
+const char *
+bonobo_moniker_get_prefix (BonoboMoniker *moniker)
+{
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
+
+	return moniker->priv->prefix;
+}
+
+static void
+impl_bonobo_moniker_set_name (BonoboMoniker *moniker,
+			      const char    *unescaped_name)
+{
+	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
+	g_return_if_fail (strlen (unescaped_name) >= moniker->priv->prefix_len);
 
 	g_free (moniker->priv->name);
-	moniker->priv->name = bonobo_moniker_util_unescape (
-		name, num_chars);
+	moniker->priv->name = g_strdup (unescaped_name);
+}
+
+static const char *
+impl_bonobo_moniker_get_name (BonoboMoniker *moniker)
+{
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
+
+	return moniker->priv->name;
 }
 
 static CORBA_char *
@@ -221,7 +261,6 @@ bonobo_moniker_default_parse_display_name (BonoboMoniker     *moniker,
 	
 	g_return_val_if_fail (moniker != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (moniker->priv != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (moniker->priv->prefix != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (strlen (name) >= moniker->priv->prefix_len, CORBA_OBJECT_NIL);
 
 	bonobo_moniker_set_parent (moniker, parent, ev);
@@ -269,7 +308,9 @@ impl_resolve (PortableServer_Servant       servant,
 					   requested_interface, ev);
 
 	/* Try an extender */
-	if (!BONOBO_EX (ev) && retval == CORBA_OBJECT_NIL) {
+	if (!BONOBO_EX (ev) && retval == CORBA_OBJECT_NIL &&
+	    moniker->priv->prefix) {
+
 		Bonobo_Unknown extender;
 		
 		extender = bonobo_moniker_find_extender (
@@ -367,6 +408,9 @@ bonobo_moniker_class_init (BonoboMonikerClass *klass)
 	klass->get_display_name = bonobo_moniker_default_get_display_name;
 	klass->parse_display_name = bonobo_moniker_default_parse_display_name;
 
+	klass->set_name   = impl_bonobo_moniker_set_name;
+	klass->get_name   = impl_bonobo_moniker_get_name;
+
 	init_moniker_corba_class ();
 }
 
@@ -436,7 +480,7 @@ bonobo_moniker_corba_object_create (BonoboObject *object)
  * @moniker: an un-constructed moniker object.
  * @corba_moniker: a CORBA handle inheriting from Bonobo::Moniker, or
  * CORBA_OBJECT_NIL, in which case a base Bonobo::Moniker is created.
- * @prefix: the prefix name of the moniker eg. 'file:', '!' or 'tar:'
+ * @prefix: the prefix name of the moniker eg. 'file:', '!' or 'tar:' or NULL
  * 
  *  Constructs a newly created bonobo moniker with the given arguments.
  * 

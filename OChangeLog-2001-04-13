@@ -1,5 +1,19 @@
 2000-12-29  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-event-source.c: Include listener to kill warning.
+
+	* bonobo/bonobo-moniker.c (impl_bonobo_moniker_set_name): impl.
+	(bonobo_moniker_get_name_full): upd.
+	(bonobo_moniker_get_name): upd.
+	(bonobo_moniker_get_name_escaped): upd.
+	(impl_bonobo_moniker_get_name): impl.
+	(bonobo_moniker_class_init): upd.
+	(bonobo_moniker_get_prefix): impl.
+	(bonobo_moniker_default_parse_display_name): allow NULL prefix.
+	(impl_resolve): ditto.
+
+2000-12-29  Michael Meeks  <michael@helixcode.com>
+
 	* Version 0.31
 	
 2000-12-29  Michael Meeks  <michael@helixcode.com>
