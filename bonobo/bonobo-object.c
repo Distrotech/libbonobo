@@ -9,7 +9,7 @@
 #include <gtk/gtkmarshal.h>
 #include <libgnorba/gnorba.h>
 #include <bonobo/gnome-main.h>
-#include <bonobo/gnome-object.h>
+#include <bonobo/gnome-unknown.h>
 #include "bonobo.h"
 #include "gtk-interfaces.h"
 

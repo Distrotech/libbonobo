@@ -1,7 +1,7 @@
 #ifndef _GNOME_STORAGE_H_
 #define _GNOME_STORAGE_H_
 
-#include <bonobo/gnome-object.h>
+#include <bonobo/gnome-unknown.h>
 #include <bonobo/gnome-stream.h>
 
 BEGIN_GNOME_DECLS

@@ -9,7 +9,7 @@
 #include <gtk/gtkmarshal.h>
 #include <gtk/gtkwidget.h>
 #include <bonobo/gnome-main.h>
-#include <bonobo/gnome-object.h>
+#include <bonobo/gnome-unknown.h>
 #include <bonobo/gnome-container.h>
 
 static GnomeUnknownClass *gnome_container_parent_class;

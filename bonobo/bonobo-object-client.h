@@ -5,7 +5,7 @@
 #include <gtk/gtkobject.h>
 #include <bonobo/bonobo.h>
 #include <libgnorba/gnorba.h>
-#include <bonobo/gnome-object.h>
+#include <bonobo/gnome-unknown.h>
 
 #define GNOME_UNKNOWN_CLIENT_TYPE        (gnome_unknown_client_get_type ())
 #define GNOME_UNKNOWN_CLIENT(o)          (GTK_CHECK_CAST ((o), GNOME_UNKNOWN_CLIENT_TYPE, GnomeUnknownClient))

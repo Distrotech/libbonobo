@@ -1,7 +1,7 @@
 #ifndef _GNOME_PROGRESSIVE_DATA_SINK_H_
 #define _GNOME_PROGRESSIVE_DATA_SINK_H_
 
-#include <bonobo/gnome-object.h>
+#include <bonobo/gnome-unknown.h>
 
 BEGIN_GNOME_DECLS
 
