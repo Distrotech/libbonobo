@@ -244,17 +244,19 @@ bonobo_object_finalize_servant (PortableServer_Servant servant,
  *
  * Increments the reference count for the aggregate BonoboObject.
  */
-void
+gpointer
 bonobo_object_ref (BonoboObject *object)
 {
-	g_return_if_fail (BONOBO_IS_OBJECT (object));
-	g_return_if_fail (object->priv->ao->ref_count > 0);
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), object);
+	g_return_val_if_fail (object->priv->ao->ref_count > 0, object);
 
 #ifdef BONOBO_REF_HOOKS
 	bonobo_object_trace_refs (object, "local", 0, TRUE);
 #else
 	object->priv->ao->ref_count++;
 #endif
+
+	return object;
 }
 #endif /* bonobo_object_ref */
 
@@ -581,6 +583,41 @@ bonobo_object_dummy_destroy (BonoboObject *object)
 	/* Just to make chaining possibly cleaner */
 }
 
+/* VOID:CORBA_OBJECT,BOXED */
+static void
+bonobo_marshal_VOID__CORBA_BOXED (GClosure     *closure,
+				  GValue       *return_value,
+				  guint         n_param_values,
+				  const GValue *param_values,
+				  gpointer      invocation_hint,
+				  gpointer      marshal_data)
+{
+	typedef void (*GMarshalFunc_VOID__OBJECT_BOXED) (gpointer     data1,
+							 gpointer     arg_1,
+							 gpointer     arg_2,
+							 gpointer     data2);
+	register GMarshalFunc_VOID__OBJECT_BOXED callback;
+	register GCClosure *cc = (GCClosure*) closure;
+	register gpointer data1, data2;
+	CORBA_Object arg1;
+
+	g_return_if_fail (n_param_values == 3);
+
+	if (G_CCLOSURE_SWAP_DATA (closure)) {
+		data1 = closure->data;
+		data2 = g_value_peek_pointer (param_values + 0);
+	} else {
+		data1 = g_value_peek_pointer (param_values + 0);
+		data2 = closure->data;
+	}
+	callback = (GMarshalFunc_VOID__OBJECT_BOXED) (
+		marshal_data ? marshal_data : cc->callback);
+
+	arg1 = bonobo_value_get_corba_object (param_values + 1);
+	callback (data1, arg1, g_value_get_boxed (param_values + 2), data2);
+	CORBA_Object_release (arg1, NULL);
+}
+
 static void
 bonobo_object_class_init (BonoboObjectClass *klass)
 {
@@ -606,10 +643,10 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (BonoboObjectClass,system_exception),
 			      NULL, NULL,
-			      bonobo_marshal_VOID__OBJECT_BOXED,
+			      bonobo_marshal_VOID__CORBA_BOXED,
 			      G_TYPE_NONE, 2,
-			      BONOBO_TYPE_OBJECT | G_SIGNAL_TYPE_STATIC_SCOPE,
-			      BONOBO_TYPE_CORBA_EXCEPTION);
+			      BONOBO_TYPE_CORBA_OBJECT | G_SIGNAL_TYPE_STATIC_SCOPE,
+			      BONOBO_TYPE_CORBA_EXCEPTION | G_SIGNAL_TYPE_STATIC_SCOPE);
 
 	klass->destroy = bonobo_object_dummy_destroy;
 

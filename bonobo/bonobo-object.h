@@ -64,7 +64,9 @@ typedef struct {
 
 	/* signals. */
 	void         (*destroy)          (BonoboObject *object);
-	void         (*system_exception) (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
+	void         (*system_exception) (BonoboObject *object,
+					  CORBA_Object  cobject,
+					  CORBA_Environment *ev);
 
 	BonoboObjectPOAFn          poa_init_fn;
 	BonoboObjectPOAFn          poa_fini_fn;
@@ -98,7 +100,7 @@ Bonobo_Unknown           bonobo_object_dup_ref                (Bonobo_Unknown   
 							       CORBA_Environment      *opt_ev);
 void                     bonobo_object_release_unref          (Bonobo_Unknown          object,
 							       CORBA_Environment      *opt_ev);
-void                     bonobo_object_ref                    (BonoboObject           *object);
+gpointer                 bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_idle_unref             (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
 void                     bonobo_object_set_immortal           (BonoboObject           *object,

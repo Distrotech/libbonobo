@@ -5,6 +5,8 @@
 #include <libbonobo.h>
 #include <orbit/poa/poa.h>
 
+#define GENERAL_ERROR_MESSAGE "Hello World"
+
 static int
 ret_ex_test (CORBA_Environment *ev)
 {
@@ -17,6 +19,25 @@ static void
 ex_test (CORBA_Environment *ev)
 {
 	BONOBO_RET_EX (ev);
+}
+
+static int signal_emitted = 0;
+
+static void
+system_exception_cb (BonoboObject      *object,
+		     CORBA_Object       cobject,
+		     CORBA_Environment *ev,
+		     gpointer           user_data)
+{
+	g_assert (BONOBO_IS_OBJECT (object));
+	g_assert ((BonoboObject *)user_data == object);
+
+	g_assert (ev != NULL);
+	g_assert (ev->_major == CORBA_SYSTEM_EXCEPTION);
+	g_assert (!strcmp (BONOBO_EX_REPOID (ev),
+			   ex_CORBA_COMM_FAILURE));
+
+	signal_emitted = 1;
 }
 
 int
@@ -109,23 +130,30 @@ main (int argc, char *argv [])
 		bonobo_object_unref (a);
 	}
 
-#ifdef CAN_POKE_ORB_INTERNALS
-	fprintf (stderr, "Out of proc lifecycle\n");
+	fprintf (stderr, "Environment exception checks\n");
 	{
 		object = BONOBO_OBJECT (g_object_new (
 			bonobo_moniker_get_type (), NULL));
 
-		ref = CORBA_Object_duplicate (BONOBO_OBJREF (object), NULL);
+		g_signal_connect (G_OBJECT (object),
+				  "system_exception",
+				  G_CALLBACK (system_exception_cb),
+				  object);
 
-		ORBit_small_handle_request (
-			ORBIT_STUB_GetPoaObj (BONOBO_OBJREF (object)),
-			"unref", NULL, NULL, NULL, NULL, ev);
-		g_assert (!BONOBO_EX (ev));
+		CORBA_exception_set_system (
+			ev, ex_CORBA_COMM_FAILURE,
+			CORBA_COMPLETED_MAYBE);
+		g_assert (BONOBO_EX (ev));
 
-		CORBA_Object_release (ref, ev);
-		g_assert (!BONOBO_EX (ev));
+		signal_emitted = 0;
+		BONOBO_OBJECT_CHECK (
+			object, BONOBO_OBJREF (object), ev);
+		g_assert (signal_emitted);
+
+		CORBA_exception_free (ev);
+
+		bonobo_object_unref (object);
 	}
-#endif
 
 	fprintf (stderr, "Ret-ex tests...\n");
 

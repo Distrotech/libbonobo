@@ -272,38 +272,9 @@ bonobo_corba_typecode_get_type (void)
 }
 
 static gpointer
-CORBA_exception__freekids (gpointer mem, gpointer dat)
-{
-	CORBA_Environment *env;
-	env = mem;
-	CORBA_exception_free (env);
-	return env + 1;
-}
-
-static CORBA_Environment *
-CORBA_exception__alloc (void)
-{
-	CORBA_Environment *retval = ORBit_alloc (sizeof (CORBA_Environment), 1, 
-						 &CORBA_exception__freekids);
-	CORBA_exception_init (retval);
-	return retval;
-}
-
-static gpointer
 corba_exception_copy (gpointer any)
 {
-	CORBA_Environment *src, *dest;
-
-	g_warning (G_STRLOC);
-
-	src = any;
-	dest = CORBA_exception__alloc ();
-	if (src->_major != CORBA_NO_EXCEPTION) {
-	    *dest = *src;
-	    CORBA_any__copy (&dest->_any, &src->_any);
-	}
-
-	return dest;
+	return CORBA_exception__copy (any);
 }
 
 static void

@@ -8,6 +8,7 @@ idl_DATA =				\
 	Bonobo_Context.idl		\
 	Bonobo_Control.idl		\
 	Bonobo_Embeddable.idl		\
+	Bonobo_Gdk.idl			\
 	Bonobo_ItemContainer.idl	\
 	Bonobo_Listener.idl		\
 	Bonobo_Moniker.idl		\

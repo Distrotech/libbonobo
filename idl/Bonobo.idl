@@ -30,6 +30,7 @@
 
 /* Control stuff. */
 #include <Bonobo_Listener.idl>
+#include <Bonobo_Gdk.idl>
 #include <Bonobo_UI.idl>
 #include <Bonobo_Property.idl>
 #include <Bonobo_Control.idl>

@@ -28,6 +28,7 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_Context.idl		\
 	$(top_srcdir)/idl/Bonobo_Control.idl		\
 	$(top_srcdir)/idl/Bonobo_Embeddable.idl		\
+	$(top_srcdir)/idl/Bonobo_Gdk.idl		\
 	$(top_srcdir)/idl/Bonobo_ItemContainer.idl	\
 	$(top_srcdir)/idl/Bonobo_Listener.idl		\
 	$(top_srcdir)/idl/Bonobo_Moniker.idl		\

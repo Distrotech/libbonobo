@@ -258,6 +258,7 @@ bonobo_generic_factory_main (const char           *act_iid,
 	factory = bonobo_generic_factory_new (
 		act_iid, factory_cb, user_data);
 	
+	/* FIXME: register ref tracking stuff */
 	if (factory) {
 		bonobo_main ();
 		return bonobo_shutdown ();

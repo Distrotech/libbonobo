@@ -12,6 +12,7 @@
 #define BONOBO_CONTROL_IDL
 
 #include "Bonobo_Unknown.idl"
+#include "Bonobo_Gdk.idl"
 #include "Bonobo_Property.idl"
 
 module Bonobo {
@@ -19,11 +20,12 @@ module Bonobo {
 interface ControlFrame : Bonobo::Unknown {
 
 	/**
-	 * activated:
-	 * @state: TRUE if the associated Control has been activated,
-	 * FALSE if it just became inactive.
+	 * getToplevelId
+	 *
+	 * Returns: the WindowId of the true toplevel of the
+	 * application the control is embedded inside.
 	 */
-	void activated (in boolean state);
+	Gdk::WindowId getToplevelId ();
 
 	/**
 	 * getAmbientProperties:
@@ -32,6 +34,22 @@ interface ControlFrame : Bonobo::Unknown {
 	 * for this container.
 	 */
 	PropertyBag getAmbientProperties ();
+
+	/**
+	 * getUIHandler:
+	 *
+	 * Returns: The interface to be used for menu/toolbar item merging.
+	 */
+	Bonobo::Unknown getUIHandler ();
+
+	/* --- Notifications --- */
+
+	/**
+	 * activated:
+	 * @state: TRUE if the associated Control has been activated,
+	 * FALSE if it just became inactive.
+	 */
+	oneway void notifyActivated (in boolean state);
 
 	/** 
 	 * queueResize:
@@ -57,54 +75,14 @@ interface ControlFrame : Bonobo::Unknown {
 	oneway void activateURI (in string uri, in boolean relative);
 
 	/**
-	 * getUIHandler:
-	 *
-	 * Returns: The interface to be used for menu/toolbar item merging.
-	 */
-	Bonobo::Unknown getUIHandler ();
-
-	/**
 	 * unImplemented:
 	 *
-	 * Placeholder for Federico's focus fixing.
+	 * a placeholder for future expansion.
 	 */
 	void unImplemented ();
 };
 
 interface Control : Bonobo::Unknown {
-	/*
-	 * This is a ':' delimited string
-	 *   under X11 the first entry ( before a ':' ) contains
-	 *  window ID as an integer. Other fields are reserved for
-	 *  future use.
-	 * See also bonobo-control.c (window_id_demangle)
-	 */
-	typedef string windowId;
-
-	/**
-	 * activate:
-	 *
-	 * Activates or deactivates this Control.
-	 */
-	void activate (in boolean activate);
-
-	/**
-	 * setFrame:
-	 * @frame: A Bonobo_ControlFrame.
-	 *
-	 * Gives the Control a handle to its ControlFrame.
-	 */
-	void setFrame (in ControlFrame frame);
-
-	/**
-	 * setWindowId:
-	 * @id: An X Window ID.
-	 *
-	 *   Sets the window ID that should be used for the plug
-	 * of this window, the id encoding is as described above.
-	 */
-	void setWindowId (in windowId id);
-
 	/**
 	 * getProperties:
 	 *
@@ -113,28 +91,37 @@ interface Control : Bonobo::Unknown {
 	PropertyBag getProperties ();
 
 	/**
+	 * getDesiredSize:
+	 * @desired_width: In this value you should return the desired width you want.
+	 * @desired_height: In this value you should return the desired height you want.
+	 */
+	Gtk::Requisition getDesiredSize ();
+
+	/**
+	 * setFrame:
+	 * @frame: A Bonobo_ControlFrame.
+	 *
+	 * Gives the Control a handle to its ControlFrame.
+	 */
+	oneway void setFrame (in ControlFrame frame);
+
+	/**
+	 * setWindowId:
+	 * @id: An X Window ID.
+	 *
+	 *   Sets the window ID that should be used for the plug
+	 * of this window, the id encoding is as described above.
+	 */
+	oneway void setWindowId (in Gdk::WindowId id);
+
+	/**
 	 * setSize:
 	 * @width: width given to the control
 	 * @height: height given to the control
 	 *
 	 * Informs the Control of the size assigned by its container application
 	 */
-	void setSize (in short width, in short height);
-
-	/**
-	 * getDesiredSize:
-	 * @desired_width: In this value you should return the desired width you want.
-	 * @desired_height: In this value you should return the desired height you want.
-	 */
-	void getDesiredSize (out short desired_width, out short desired_height);
-
-	enum State {
-		StateNormal,
-		StateActive,
-		StatePrelight,
-		StateSelected,
-		StateInsensitive
-	};
+	oneway void setSize (in short width, in short height);
 
 	/**
 	 * setState:
@@ -142,28 +129,30 @@ interface Control : Bonobo::Unknown {
 	 *
 	 * Set the control's activity state.
 	 */
-	void setState (in Control::State state);
+	oneway void setState (in Gtk::State state);
 
 	/**
-	 *   These methods are used to synchronize the Async X event
-	 * queue with the synchronous CORBA connection. Effectively
-	 * the 'X sync' extension in Bonobo.
+	 * activate:
+	 *
+	 * Activates or deactivates this Control.
 	 */
-	void realize   ();
-	void unrealize ();
+	oneway void activate (in boolean activate);
 
-	/* GTK+ focus direction equivalents */
-	enum FocusDirection {
-		TAB_FORWARD,
-		TAB_BACKWARD,
-		UP,
-		DOWN,
-		LEFT,
-		RIGHT
-	};
+	/**
+	 * focus:
+	 *
+	 * a Control proxy for GtkContainer::focus()
+	 *
+	 * Returns: whether focus was transfered.
+	 */
+	boolean focus (in Gtk::Direction direction);
 
-	/* Control proxy for GtkContainer::focus() */
-	boolean focus (in FocusDirection direction);
+	/**
+	 * unImplemented:
+	 *
+	 * a placeholder for future expansion.
+	 */
+	void unImplemented ();
 };
 
 interface PropertyControl : Bonobo::Unknown {
@@ -210,7 +199,6 @@ interface PropertyControl : Bonobo::Unknown {
 	 */
 	void notifyAction (in long pagenumber, in Action action)
 		raises (NoPage);
-
 };
 
 };

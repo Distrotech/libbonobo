@@ -1,3 +1,31 @@
+2001-10-31  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c
+	(bonobo_object_class_init): fixup signal definition.
+	(bonobo_object_check_env): fixup signal emission.
+	(bonobo_marshal_VOID__CORBA_BOXED): impl.
+
+	* bonobo/bonobo-types.c: use new ORB methods for
+	exception handling.
+
+	* tests/test-object.c (system_exception_cb): impl.
+	(main): test bonobo_check_env.
+
+2001-10-30  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_ref): return
+	the object you just reffed.
+
+	* idl/Bonobo_Control.idl: getDesiredSize, return a
+	Gtk::Requisition, update WindowId bits.
+	add getToplevelId - to avoid ugly property hacks.
+	Move State to Gtk. Make all 'set' methods oneway.
+
+	* idl/Bonobo_Canvas.idl: Split out Gdk bits into:
+
+	* idl/Bonobo_Gdk.idl: Add & add Gtk::Requisition.
+	move windowId into here.
+
 2001-10-29  jacob berkman  <jacob@ximian.com>
 
 	* monikers/Makefile.am (server_DATA): s/XML_I18N_TOOLS/INTLTOOL/
