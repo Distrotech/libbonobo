@@ -71,22 +71,13 @@ merge_keylists (Bonobo_KeyList *cur_list,
 }
 
 static CORBA_any *
-impl_Bonobo_ConfigDatabase_getValue (PortableServer_Servant  servant,
-				     const CORBA_char       *key, 
-				     CORBA_Environment      *ev)
+get_default (BonoboConfigDatabase   *cd,
+	     const CORBA_char       *key, 
+	     CORBA_Environment      *ev)
 {
-	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
 	CORBA_any *value = NULL;
 	DataBaseInfo *info;
 	GList *l;
-
-	if (CLASS (cd)->get_value)
-		value = CLASS (cd)->get_value (cd, key, ev);
-
-	if (value)
-		return value;
-	
-	/* try to get a default value */
 
 	for (l = cd->priv->db_list; l != NULL; l = l->next) {
 		info = (DataBaseInfo *)l->data;
@@ -103,6 +94,23 @@ impl_Bonobo_ConfigDatabase_getValue (PortableServer_Servant  servant,
 	return NULL;
 }
 
+static CORBA_any *
+impl_Bonobo_ConfigDatabase_getValue (PortableServer_Servant  servant,
+				     const CORBA_char       *key, 
+				     CORBA_Environment      *ev)
+{
+	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
+	CORBA_any *value = NULL;
+
+	if (CLASS (cd)->get_value)
+		value = CLASS (cd)->get_value (cd, key, ev);
+
+	if (value)
+		return value;
+
+	return get_default (cd, key, ev);
+}
+
 static void 
 impl_Bonobo_ConfigDatabase_setValue (PortableServer_Servant  servant,
 				     const CORBA_char       *key, 
@@ -113,6 +121,16 @@ impl_Bonobo_ConfigDatabase_setValue (PortableServer_Servant  servant,
 
 	if (CLASS (cd)->set_value)
 		CLASS (cd)->set_value (cd, key, value, ev);
+}
+
+static CORBA_any *
+impl_Bonobo_ConfigDatabase_getDefault (PortableServer_Servant  servant,
+				       const CORBA_char       *key, 
+				       CORBA_Environment      *ev)
+{
+	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
+
+	return get_default (cd, key, ev);
 }
 
 static Bonobo_KeyList *
@@ -349,6 +367,7 @@ bonobo_config_database_class_init (BonoboConfigDatabaseClass *class)
 
 	epv->getValue    = impl_Bonobo_ConfigDatabase_getValue;
 	epv->setValue    = impl_Bonobo_ConfigDatabase_setValue;
+	epv->getDefault  = impl_Bonobo_ConfigDatabase_getDefault;
 	epv->listDirs    = impl_Bonobo_ConfigDatabase_listDirs;
 	epv->listKeys    = impl_Bonobo_ConfigDatabase_listKeys;
 	epv->dirExists   = impl_Bonobo_ConfigDatabase_dirExists;
