@@ -2,6 +2,12 @@ How to Hack Bonobo
 
 Nat Friedman (nat@nat.org)
 
+    All changes to Bonobo must be approved before they can be
+committed.  Mail your patch (created using diff -u) along with a
+*detailed* ChangeLog and a description of the changes (if they are
+non-trivial) to gnome-components-list@gnome.org, and do not apply it
+until it is approved by either myself or Miguel.
+
     Bonobo will serve as the foundation for component-based
 application development in GNOME.  Modern GNOME applications will
 therefore be built out of Bonobo components.  One of the goals of the
