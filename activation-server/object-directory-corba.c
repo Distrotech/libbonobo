@@ -502,9 +502,9 @@ remove_active_server_entry (ActiveServerList *servers,
 	CORBA_free (servers->servers [index].environment._buffer);
 
 	if (index != servers->n_servers - 1)
-		memcpy (servers->servers [index].server,
-			servers->servers [servers->n_servers - 1].server,
-			sizeof (servers->servers [index].server));
+		memcpy (&servers->servers [index],
+			&servers->servers [servers->n_servers - 1],
+			sizeof (servers->servers [index]));
 
 	servers->n_servers--;
 }
