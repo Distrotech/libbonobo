@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.101.2\n"
 "POT-Creation-Date: 2001-08-18 16:40+0200\n"
-"PO-Revision-Date: 2001-08-18 16:45GMT +0200\n"
+"PO-Revision-Date: 2001-09-01 22:39GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
 "MIME-Version: 1.0\n"
@@ -93,11 +93,11 @@ msgstr "xətalı XML istifadəçi ara üzü elementi"
 
 #: bonobo/bonobo-exception.c:215
 msgid "Unknown command or verb"
-msgstr ""
+msgstr "Namə'lum əmr ya da fe'l"
 
 #: bonobo/bonobo-exception.c:218
 msgid "Command is insensitive"
-msgstr ""
+msgstr "Əmr qeyri həssasdır"
 
 #: bonobo/bonobo-exception.c:222
 msgid "incorrect data type"
@@ -150,24 +150,3 @@ msgstr "İzahsız ümumi fəallaşdırma xətası"
 #: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
-
-#~ msgid "HTTP Moniker"
-#~ msgstr "HTTP Moniker"
-
-#~ msgid "Standard Moniker factory"
-#~ msgstr "Standart Moniker mərkəzi"
-
-#~ msgid "generic Oaf activation moniker"
-#~ msgstr "sıravi Oaf fəllaşdırma monikeri"
-
-#~ msgid "generic Oaf query moniker"
-#~ msgstr "soravi Oaf istəmə monikeri"
-
-#~ msgid "generic factory 'new' moniker"
-#~ msgstr "sıravi mərkəz 'yeni' monikeri"
-
-#~ msgid "generic item moniker"
-#~ msgstr "sıravi üzv monikeri"
-
-#~ msgid "stream MonikerExtender"
-#~ msgstr "axım MonikerExtender"
