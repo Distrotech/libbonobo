@@ -1,7 +1,7 @@
 
 Bonobo component reference counting, version 0.1
-by Michael Meeks <mmeeks@gnu.org>
-
+by  Michael Meeks <mmeeks@gnu.org>
+and Mike Fleming <mfleming@eazel.com>
 
 * Bonobo Objects
 
@@ -71,4 +71,31 @@ This will result in gdb giving you control each time the ref count
 is changed. At this point halt the other end of the CORBA link and
 start logging traces at both ends. By the time the program exits
 you should have worked out where the reference went astray.
+
+* Ref Counting Conventions
+
+	And now for the important stuff:
+
+The Bonobo ref count convention is as follows.  (Mild rewording; same
+meaning as before)
+
+1. A function returning an object, either as the return value or
+by-reference, must always add a reference before returning.
+(Alternately: the callee must create a reference to the returned object
+that the caller owns)
+  
+2. A function that accepts a bonobo object as an in/out parameter must
+unreference the originally passed object once if the function wishes to
+change the value of the in/out parameter.  (The function must ref() new
+objects returned via this in/out in accordance with [1])
+
+3. An object passed into a function needs only be ref()'d if the
+ifunction wishes to retain a reference to the object beyond the scope of
+the function call.
+
+In addition, there's a consensus that interface designers should be
+advised against designing methods with in/out parameters.  In/out
+parameters can obscure the lifetime of the passed argument to casual
+code observers, and thus may cause hidden side-effects.
+
 
