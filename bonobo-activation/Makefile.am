@@ -101,4 +101,4 @@ dist-hook:
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = bonobo-activation-2.0.pc
 
-EXTRA_DIST = $(pkgconfig_DATA)
+EXTRA_DIST = $(pkgconfig_DATA) AUTHORS

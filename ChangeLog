@@ -1,5 +1,18 @@
 2003-04-07  Michael Meeks  <michael@ximian.com>
 
+	* autogen.sh (REQUIRED_AUTOMAKE_VERSION): revert to
+	automake-1.4 which doesn't screw-up with IDL compilation.
+	* bonobo/Makefile.am (LDFLAGS): use just LDFLAGS.
+	* doc/api/Makefile.am (AUTOMAKE_OPTIONS): set to 1.4
+
+	* configure.in: merge in bonobo-slay bits, update dirs.
+
+	* docs/activation: Merge from bonobo-activation/docs
+	* docs/activation-api: Merge from bonobo-activation/api-docs
+	* utils:  Merge from bonobo-activation/utils
+
+2003-04-07  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/Makefile.am (AM_LDFLAGS): upd version info.
 
 	* bonobo-activation/bonobo-activation-version.h.in: upd.

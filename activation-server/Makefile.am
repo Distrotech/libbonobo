@@ -57,7 +57,7 @@ serverinfo_DATA = $(server_in_file:.server.in=.server)
 
 EXTRA_DIST=activation-context-query-lexer.l activation-context-query-parser.y \
 	$(server_in_file).in $(serverinfo_DATA)	\
-	$(man_MANS)
+	$(man_MANS) AUTHORS
 
 YFLAGS = -d -v
 

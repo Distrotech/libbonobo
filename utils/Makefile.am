@@ -9,15 +9,16 @@ bonobo_activation_sysconf_SOURCES =	\
 	bonobo-activation-sysconf.c	\
 	$(NULL)
 
-INCLUDES = 					\
-	$(UTILS_CFLAGS)				\
-	-I$(top_srcdir)				\
+INCLUDES =						\
+	$(LIBBONOBO_CFLAGS)				\
+	-I$(top_srcdir)					\
 	-DSERVER_LOCALEDIR=\""$(datadir)/locale"\"	\
 	-DSERVER_CONFDIR=\"$(sysconfdir)\"		\
 	$(NULL)
 
 bonobo_activation_sysconf_LDADD =	\
-	$(UTILS_LIBS)			\
+	$(LIBBONOBO_LIBS)		\
+	$(top_builddir)/bonobo-activation/libbonobo-activation.la \
 	$(INTLLIBS)			\
 	$(NULL)
 

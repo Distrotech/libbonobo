@@ -79,9 +79,9 @@ CLEANFILES=empty_built plugin_built
 INCLUDES= \
 	-I$(top_srcdir)			\
 	-I$(top_builddir)		\
-	-DG_DISABLE_DEPRECATED $(UTILS_CFLAGS)
+	-DG_DISABLE_DEPRECATED $(LIBBONOBO_CFLAGS)
 
-LDADD=../bonobo-activation/libbonobo-activation.la $(UTILS_LIBS)
+LDADD=../bonobo-activation/libbonobo-activation.la $(LIBBONOBO_LIBS)
 
 serverfiles=empty.server broken.server plugin.server
 
