@@ -1,18 +1,20 @@
 idldir = $(datadir)/idl
 
 idl_DATA =			\
-	bonobo.idl		\
-	gnome-advise.idl	\
-	gnome-canvas.idl	\
-	gnome-container.idl	\
-	gnome-control.idl	\
-	gnome-client-site.idl	\
-	gnome-embeddable.idl	\
-	gnome-container.idl	\
-	gnome-persist.idl	\
-	gnome-storage.idl	\
-	gnome-progressive.idl	\
-	gnome-ui-handler.idl	\
-	gnome-property.idl
+	Bonobo.idl		\
+	bonobo-unknown.idl	\
+	bonobo-factory.idl	\
+	bonobo-advise.idl	\
+	bonobo-canvas.idl	\
+	bonobo-container.idl	\
+	bonobo-control.idl	\
+	bonobo-client-site.idl	\
+	bonobo-embeddable.idl	\
+	bonobo-container.idl	\
+	bonobo-persist.idl	\
+	bonobo-storage.idl	\
+	bonobo-progressive.idl	\
+	bonobo-ui-handler.idl	\
+	bonobo-property.idl
 
 EXTRA_DIST = $(idl_DATA)

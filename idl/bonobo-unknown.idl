@@ -1,0 +1,32 @@
+#ifndef __BONOBO_UNKNOWN_IDL__
+#define __BONOBO_UNKNOWN_IDL__
+
+module Bonobo {
+	interface Unknown {
+		/**
+		 * ref:
+		 *
+		 * increments the reference count
+		 */
+		void ref ();
+
+		/**
+		 * unref:
+		 * 
+		 * decrements the reference count
+		 */
+		void unref ();
+
+		/**
+		 * query_interface:
+		 * @repoid: A string identifying an interface.
+		 *
+		 * Returns: A CORBA object exposing the interface
+		 * specified by @repoid, or a nil object if the
+		 * interface cannot be queried.
+		 */
+		Object query_interface (in string repoid);
+	};
+};
+
+#endif /* ! __BONOBO_UNKNOWN_IDL__ */

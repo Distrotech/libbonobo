@@ -1,0 +1,21 @@
+/*
+ * bonobo-factory.idl: Basic object factory interface, based on CORBA
+ * LifeCycle version
+ */
+
+#ifndef __BONOBO_FACTORY_IDL__
+#define __BONOBO_FACTORY_IDL__
+
+module Bonobo {
+	typedef sequence<string> stringlist;
+
+	interface GenericFactory {
+		exception CannotActivate { };
+		boolean supports (in string obj_goad_id);
+
+		Object create_object (in string goad_id, in stringlist params)
+			raises (CannotActivate);
+	};
+};
+
+#endif /* ! __BONOBO_FACTORY_IDL__ */
