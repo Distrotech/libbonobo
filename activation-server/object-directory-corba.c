@@ -475,9 +475,11 @@ quit_server_timeout (gpointer user_data)
 
         if (!main_dir ||
             g_hash_table_size (main_dir->active_servers) > RESIDUAL_SERVERS)
-                g_warning ("Serious error hanlding server count, quitting anyway");
+                g_warning ("Serious error handling server count, not quitting");
+        else
+                g_main_loop_quit (main_loop);
 
-        g_main_loop_quit (main_loop);
+        main_dir->no_servers_timeout = 0;
 
         return FALSE;
 }
@@ -485,15 +487,14 @@ quit_server_timeout (gpointer user_data)
 static void
 check_quit (impl_POA_Bonobo_ObjectDirectory *servant)
 {
-        if (g_hash_table_size (servant->active_servers) > RESIDUAL_SERVERS) {
-                if (servant->no_servers_timeout != 0)
-                        g_source_remove (servant->no_servers_timeout);
-                servant->no_servers_timeout = 0;
-        } else {
-                
+        /* We had some activity - so push out the shutdown timeout */
+        if (servant->no_servers_timeout != 0)
+                g_source_remove (servant->no_servers_timeout);
+        servant->no_servers_timeout = 0;
+
+        if (g_hash_table_size (servant->active_servers) <= RESIDUAL_SERVERS)
                 servant->no_servers_timeout = g_timeout_add (
                         IDLE_QUIT_TIMEOUT, quit_server_timeout, NULL);
-        }
 
 	servant->time_active_changed = time (NULL);
 }
