@@ -157,6 +157,8 @@ marshal_sources = \
 	bonobo-marshal.c \
 	bonobo-marshal.h
 
+bonobo-marshal-main.c : bonobo-marshal.h bonobo-marshal.c
+
 bonobo-marshal.h: bonobo-marshal.list
 	cd $(srcdir) \
 	&& glib-genmarshal --prefix=bonobo_marshal bonobo-marshal.list --header >> xgen-gmh \

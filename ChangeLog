@@ -1,3 +1,8 @@
+2001-08-02  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am: make bonobo-marshal-main.c depend
+	on bonobo-marshal.c and bonobo-marshal.h
+
 2001-08-01  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.100.0
