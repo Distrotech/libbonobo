@@ -60,7 +60,7 @@ impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
 
 static void
 impl_load (PortableServer_Servant servant,
-	   CORBA_char *filename,
+	   const CORBA_char *filename,
 	   CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -84,7 +84,7 @@ impl_load (PortableServer_Servant servant,
 
 static void
 impl_save (PortableServer_Servant servant,
-	   CORBA_char *filename,
+	   const CORBA_char *filename,
 	   CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);

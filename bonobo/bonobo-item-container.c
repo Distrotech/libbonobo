@@ -11,6 +11,8 @@
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
+ *
+ * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
@@ -112,8 +114,8 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 
 static GNOME_Unknown
 impl_get_object (PortableServer_Servant servant,
-		 CORBA_char *item_name,
-		 CORBA_boolean only_if_exists,
+		 const CORBA_char *item_name,
+		 const CORBA_boolean only_if_exists,
 		 CORBA_Environment * ev)
 {
 	GNOME_Unknown ret;
@@ -123,17 +125,6 @@ impl_get_object (PortableServer_Servant servant,
 		signals [GET_OBJECT], item_name, only_if_exists, ev, &ret);
 
 	return ret;
-}
-
-static GNOME_Moniker
-impl_parse_display_name (PortableServer_Servant servant,
-			 GNOME_BindOptions *bind_context,
-			 GNOME_Moniker left,
-			 CORBA_char *display_name,
-			 CORBA_short *display_name_bytes_parsed,
-			 CORBA_Environment *ev)
-{
-	return CORBA_OBJECT_NIL;
 }
 
 /*
@@ -146,8 +137,6 @@ corba_container_class_init (void)
 	gnome_container_epv.enum_objects = impl_enum_objects;
 	gnome_container_epv.get_object = impl_get_object;
 
-	gnome_parse_display_name_epv.parse_display_name = &impl_parse_display_name;
-	
 	/* Init the vepv */
 	gnome_container_vepv._base_epv     = &gnome_object_base_epv;
 	gnome_container_vepv.GNOME_Unknown_epv = &gnome_object_epv;

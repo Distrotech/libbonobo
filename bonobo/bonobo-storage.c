@@ -5,6 +5,7 @@
  * Author:
  *   Miguel de Icaza (miguel@gnu.org).
  *
+ * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
 #include <config.h>
 #include <gmodule.h>

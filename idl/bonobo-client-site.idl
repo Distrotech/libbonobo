@@ -36,8 +36,8 @@ interface ClientSite : GNOME::Unknown {
 	 * @which: Which kind of moniker is requested
 	 *
 	 * FIXME: Rethink this.
+	 * Moniker get_moniker (in Moniker::type which);
 	 */
-	Moniker get_moniker (in Moniker::type which);
 
 
 	/**

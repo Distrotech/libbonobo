@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 #ifndef __GNOME_MAIN_H__
 #define __GNOME_MAIN_H__ 1
 
@@ -6,7 +7,7 @@
 #include <gtk/gtkobject.h>
 #include <bonobo/bonobo.h>
 
-gboolean   bonobo_init      (CORBA_ORB orb,
+gboolean   bonobo_init           (CORBA_ORB orb,
 			     PortableServer_POA poa,
 			     PortableServer_POAManager manager);
 void	   bonobo_setup_x_error_handler (void);

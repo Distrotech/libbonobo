@@ -5,6 +5,8 @@
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
+ *
+ * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
 #include <config.h>
 #include <gtk/gtksignal.h>

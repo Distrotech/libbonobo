@@ -18,15 +18,12 @@
 #include "gnome-storage.idl"
 #include "gnome-persist.idl"
 
-#include "gnome-moniker.idl"
-
 #include "gnome-advise.idl"
 
 #include "gnome-container.idl"
 #include "gnome-client-site.idl"
 #include "gnome-ui-handler.idl"
 #include "gnome-embeddable.idl"
-#include "gnome-inplace.idl"
 
 #include "gnome-progressive.idl"
 

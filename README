@@ -1,0 +1,27 @@
+
+This is the distribution of Bonobo, the GNOME component and compound
+document system for the GNU system.
+
+* What is Bonobo
+
+   Bonobo is a set of language and system independante CORBA
+interfaces for creating reusable components and creating compound
+documents.
+
+   The Bonobo distribution includes a Gtk+ based implementation of the
+Bonobo interfaces, enabling developers to create reusable components
+and applications that can be used to form more complex documents.
+
+* What you will need
+
+   You will need a working GNOME 1.0 system with the development tools
+to compile and install Bonobo.
+
+* The layout 
+
+   You will find documentation for Bonobo in the "doc" directory.  The
+actual implementation of bonobo is in the "bonobo" directory.  The
+CORBA interfaces are in the "idl" directory.
+
+Miguel de Icaza (miguel@gnu.org)
+August, 1999.

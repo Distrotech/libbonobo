@@ -4,6 +4,8 @@
  *
  * Author:
  *   Nat Friedman (nat@gnome-support.com)
+ *
+ * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
 
 #include <config.h>
@@ -69,7 +71,7 @@ impl_end (PortableServer_Servant servant,
 
 static void
 impl_add_data (PortableServer_Servant servant,
-	       GNOME_ProgressiveDataSink_iobuf *buffer,
+	       const GNOME_ProgressiveDataSink_iobuf *buffer,
 	       CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -140,32 +142,32 @@ init_progressive_data_sink_corba_class (void)
 	gnome_progressive_data_sink_vepv.GNOME_ProgressiveDataSink_epv =
 		&gnome_progressive_data_sink_epv;
 	
-} /* init_progressive_data_sink_corba_class */
+}
 
 static void
 gnome_progressive_data_sink_destroy (GtkObject *object)
 {
-} /* gnome_progressive_data_sink_destroy */
+}
 
 static int
 gnome_progressive_data_sink_start_end_nop (GnomeProgressiveDataSink *psink)
 {
 	return 0;
-} /* gnome_progressive_data_sink_start_end_nop */
+}
 
 static int
 gnome_progressive_data_sink_add_data_nop (GnomeProgressiveDataSink *psink,
 					  const GNOME_ProgressiveDataSink_iobuf *buffer)
 {
 	return 0;
-} /* gnome_progressive_data_sink_add_data_nop */
+}
 
 static int
 gnome_progressive_data_sink_set_size_nop (GnomeProgressiveDataSink *psink,
 					  const CORBA_long count)
 {
 	return 0;
-} /* gnome_progressive_data_sink_set_size_nop */
+}
 
 static void
 gnome_progressive_data_sink_class_init (GnomeProgressiveDataSinkClass *class)
@@ -186,12 +188,12 @@ gnome_progressive_data_sink_class_init (GnomeProgressiveDataSinkClass *class)
 	class->set_size_fn = gnome_progressive_data_sink_set_size_nop;
 
 	init_progressive_data_sink_corba_class ();
-} /* gnome_progressive_data_sink_class_init */
+}
 
 static void
 gnome_progressive_data_sink_init (GnomeProgressiveDataSink *psink)
 {
-} /* gnome_progressive_data_sink_init */
+}
 
 /**
  * gnome_progressive_data_sink_get_type:
@@ -219,7 +221,7 @@ gnome_progressive_data_sink_get_type (void)
 	}
 
 	return type;
-} /* gnome_progressive_data_sink_get_type */
+} 
 
 /**
  * gnome_progressive_data_sink_construct:
@@ -270,7 +272,7 @@ gnome_progressive_data_sink_construct (GnomeProgressiveDataSink *psink,
 	psink->closure = closure;
 
 	return psink;
-} /* gnome_progressive_data_sink_construct */
+} 
 
 static GNOME_ProgressiveDataSink
 create_gnome_progressive_data_sink (GnomeObject *object)
@@ -286,7 +288,7 @@ create_gnome_progressive_data_sink (GnomeObject *object)
 	}
 
 	return (GNOME_ProgressiveDataSink) gnome_object_activate_servant (object, servant);
-} /* create_gnome_progressive_data_sink */
+} 
 
 /**
  * gnome_progressive_data_sink_new:
@@ -335,4 +337,4 @@ gnome_progressive_data_sink_new (GnomeProgressiveDataSinkStartFn start_fn,
 					       set_size_fn, closure);
 
 	return psink;
-} /* gnome_progressive_data_sink_new */
+} 

@@ -16,8 +16,18 @@ interface View : GNOME::Unknown {
 	 * size_allocate:
 	 * @width: width given to the view
 	 * @height: height given to the view.
+	 *
+	 * Informs the View of the size assigned by its container application
 	 */
 	void size_allocate (in short width, in short height);
+
+	/**
+	 * size_request:
+	 * @desired_width: In this value you should return the desired width you want.
+	 * @desired_height: In this value you should return the desired height you want.
+	 *
+	 */
+	void size_request (out short desired_width, out short desired_height);
 
 	/**
 	 * set_window:
@@ -33,6 +43,13 @@ interface View : GNOME::Unknown {
 	 * Activates or deactivates this in-place View.
 	 */
 	void activate (in boolean activated);
+
+	/**
+	 * reactivate_and_undo:
+	 * 
+	 * Activates the object and undoes the last operation.
+	 */
+	void reactivate_and_undo ();
 
 	/**
 	 * Some standard verbs in Bonobo:
@@ -108,6 +125,26 @@ interface ViewFrame : GNOME::Unknown {
 	 * it just became inactive.
 	 */
 	void view_activated (in boolean state);
+
+	/**
+	 * deactivate_and_undo:
+	 *
+	 * This is called by the active object if it has just been activated
+	 * and the undo operation has been called
+	 */
+	void deactivate_and_undo ();
+
+	/** 
+	 * request_resize:
+	 * @new_width: New requested width
+	 * @new_height: New requested height
+	 *
+	 * Requests the parent container to assign @new_width and
+	 * @new_height.  
+	 *
+	 * Returns FALSE on failure, TRUE on success.
+	 */
+	void request_resize (in short new_width, in short new_height);
 };
 
 /* Equivalent to IOleObject */
@@ -162,8 +199,8 @@ interface Embeddable : GNOME::Unknown {
 	 *
 	 * Informs the application its moniker name
 	 * or its container moniker's name.
+	 *	void set_moniker (in Moniker mon, in Moniker::type which);
 	 */
-	void set_moniker (in Moniker mon, in Moniker::type which);
 
 	struct GnomeVerb {
 		string name;
@@ -219,57 +256,6 @@ interface Embeddable : GNOME::Unknown {
 
 };
 
-interface InPlaceEmbeddable : Embeddable {
-	/**
-	 * deactivate:
-	 *
-	 * deactivates the object and discards the object's undo state.
-	 * if UI is still active, the object should call its own
-	 * ui_deactivate.
-	 */
-        void deactivate ();
-
-	/**
-	 * ui_deactivate:
-	 *
-	 * Deactivates the object and removes the GUI bonobo_objects
-	 * for this object (this is done in the containee by calling 
-	 * InPlaceSite::ui_state_notify (FALSE).
-	 */
-	void ui_deactivate ();
-
-	/**
-	 * reactivate_and_undo:
-	 * 
-	 * Activates the object and undoes the last operation.
-	 */
-	void reactivate_and_undo ();
-
-	/**
-	 * status_notify
-	 * @type
-	 *
-	 * Notifies of the server of a state change on the container 
-	 */
-	enum Status {
-		FOCUS_OUT,
-		FOCUS_IN
-	};
-	void status_notify (in Status status);
-
-	/**
-	 * frame_window_activate_notify:
-	 * @state: TRUE if frame window has been activated.
-	 */
-        void frame_window_activate_notify (in boolean state);
-
-	/**
-	 * doc_window_activated_notify:
-	 * @state: TRUE if the document window has been activated
-	 */
-	void doc_window_activated_notify (in boolean state);
-
-};
 
 interface EmbeddableFactory : GNOME::GenericFactory {
 	Embeddable create_path (in string path);

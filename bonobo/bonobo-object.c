@@ -4,6 +4,8 @@
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
+ *
+ * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
@@ -203,7 +205,7 @@ impl_GNOME_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 
 static CORBA_Object
 impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
-				    CORBA_char *repoid,
+				    const CORBA_char *repoid,
 				    CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
@@ -531,7 +533,7 @@ gnome_object_corba_objref (GnomeObject *object)
  *
  */
 void
-gnome_object_check_env (GnomeObject *object, CORBA_Environment *ev)
+gnome_object_check_env (GnomeObject *object, CORBA_Object obj, CORBA_Environment *ev)
 {
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (ev != NULL);
@@ -542,11 +544,41 @@ gnome_object_check_env (GnomeObject *object, CORBA_Environment *ev)
 
 	if (ev->_major == CORBA_USER_EXCEPTION){
 		gtk_signal_emit (
-			GTK_OBJECT (object), gnome_object_signals [USER_EXCEPTION], ev);
+			GTK_OBJECT (object), gnome_object_signals [USER_EXCEPTION], obj, ev);
 	}
 
 	if (ev->_major == CORBA_SYSTEM_EXCEPTION){
 		gtk_signal_emit (
-			GTK_OBJECT (object), gnome_object_signals [SYSTEM_EXCEPTION], ev);
+			GTK_OBJECT (object), gnome_object_signals [SYSTEM_EXCEPTION], obj, ev);
 	}
+}
+
+/**
+ * gnome_unknown_ping:
+ * @object: a CORBA object reference of type GNOME::Unknown
+ *
+ * Pings the object @object using the ref/unref methods from GNOME::Unknown.
+ * You can use this one to see if a remote object has gone away.
+ *
+ * Returns: %TRUE if the GNOME::Unkonwn @object is alive.
+ */
+gboolean
+gnome_unknown_ping (GNOME_Unknown object)
+{
+	CORBA_Environment ev;
+	gboolean alive;
+	
+	g_return_val_if_fail (object != NULL, FALSE);
+
+	alive = FALSE;
+	CORBA_exception_init (&ev);
+	GNOME_Unknown_ref (object, &ev);
+	if (ev._major == CORBA_NO_EXCEPTION){
+		GNOME_Unknown_unref (object, &ev);
+		if (ev._major == CORBA_NO_EXCEPTION)
+			alive = TRUE;
+	}
+	CORBA_exception_free (&ev);
+
+	return alive;
 }

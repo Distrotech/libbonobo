@@ -4,6 +4,8 @@
  *
  * Author:
  *   Nat Friedman (nat@gnome-support.com)
+ *
+ * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
 
 #include <config.h>

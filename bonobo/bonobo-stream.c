@@ -35,7 +35,7 @@ impl_read (PortableServer_Servant servant,
 
 static CORBA_long
 impl_write (PortableServer_Servant servant,
-	    GNOME_Stream_iobuf *buffer,
+	    const GNOME_Stream_iobuf *buffer,
 	    CORBA_Environment *ev)
 {
 	GnomeStream *stream = gnome_stream_from_servant (servant);
@@ -66,7 +66,7 @@ impl_truncate (PortableServer_Servant servant,
 
 static void
 impl_copy_to (PortableServer_Servant servant,
-	      CORBA_char *dest,
+	      const CORBA_char *dest,
 	      CORBA_long bytes,
 	      CORBA_long *read,
 	      CORBA_long *written,

@@ -6,8 +6,6 @@ idl_DATA =			\
 	gnome-client-site.idl	\
 	gnome-embeddable.idl	\
 	gnome-container.idl	\
-	gnome-inplace.idl	\
-	gnome-moniker.idl	\
 	gnome-persist.idl	\
 	gnome-storage.idl	\
 	gnome-progressive.idl	\

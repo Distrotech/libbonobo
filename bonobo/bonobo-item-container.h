@@ -1,4 +1,11 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Author:
+ *   Miguel de Icaza (miguel@kernel.org)
+ *
+ * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ */
+
 #ifndef _GNOME_CONTAINER_H_
 #define _GNOME_CONTAINER_H_
 

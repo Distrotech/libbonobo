@@ -9,6 +9,7 @@
 #include <bonobo/gnome-object.h>
 #include <bonobo/gnome-object-io.h>
 #include <bonobo/gnome-object-client.h>
+#include <bonobo/gnome-stream-client.h>
 
 /** 
  * gnome_persist_stream_save_goad_id:

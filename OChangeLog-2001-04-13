@@ -1,3 +1,74 @@
+1999-08-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* doc/api/bonobo.types: Updated to reflect the new data types.
+
+	* doc/Makefile.am: Added
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_view_activate):
+	added error checking.
+	(gnome_view_frame_view_deactivate): ditto.
+	(gnome_view_frame_view_do_verb): ditto.
+	(gnome_view_frame_size_request): ditto.
+
+	* bonobo/gnome-ui-handler.c (gnome_ui_handler_unset_container):
+	Free exception for all cases.
+	(gnome_ui_handler_set_container): Added gnome_object_check_enving.
+	(gnome_ui_handler_unset_container): ditto.
+	(uih_remote_unregister_containee): ditto.
+	(menu_toplevel_item_activated): ditto
+	(menu_toplevel_override_notify): ditto
+	(menu_remote_create_item): ditto
+	(menu_toplevel_remove_notify): ditto
+	(menu_toplevel_reinstate_notify): ditto
+	(menu_remote_remove_item): ditto
+	(menu_remote_fetch): ditto
+	(menu_remote_get_children): ditto
+	(menu_remote_get_pos): ditto
+	(menu_remote_set_sensitivity): ditto
+	(menu_remote_get_sensitivity): ditto
+	(menu_remote_set_label): ditto
+	(menu_remote_get_label): ditto
+	(menu_remote_get_hint): ditto
+	(menu_remote_set_hint): ditto.
+	(menu_remote_set_pixmap): ditto.
+	(menu_remote_set_accel): ditto.
+	(menu_remote_get_accel): ditto.
+	(menu_remote_set_toggle_state): ditto
+	(menu_remote_get_toggle_state): ditto.
+	(toolbar_toplevel_toolbar_override_notify_recursive): ditto.
+	(toolbar_remote_toolbar_create): ditto.
+	(toolbar_remote_toolbar_remove): ditto
+	(toolbar_toplevel_item_override_notify): ditto.
+	(toolbar_remote_create_item): ditto.
+
+	* bonobo/gnome-object.c (gnome_object_check_env): Change to the
+	new signature.
+	(gnome_unknown_ping): New method.
+
+	* bonobo/gnome-view.c (impl_GNOME_View_size_request): Implement
+	size_request method.
+
+	* bonobo/gnome-view.c (gnome_view_class_init): Added new signal
+	view_undo_last_operation.   
+	(impl_GNOME_View_reactivate_and_undo): New method implementation.
+	Emit activate followed by view_undo_last_operation.
+
+	* idl/gnome-embeddable.idl: Added reactivate_and_undo to the GNOME::View.
+
+	* idl/Makefile.am (idl_DATA): gnome-inplace.idl has been dropped
+	in favor of the GNOME::View interfaces.
+
+	* idl/gnome-embeddable.idl: Added deactivate_and_undo to the
+	GNOME::ViewFrame. 
+	Added request_resize to the GNOME::ViewFrame.
+	(ViewFrame): add size_request method.
+	
+	* bonobo/gnome-client-site.c (gnome_client_site_new_view): Check
+	errors.  Pass view_frame to enable error signal emission.
+	(gnome_client_site_get_verbs): Removed free of list in this case.
+	If we got an exception, there is probably no information here.
+	(gnome_client_site_get_verbs): added error checking.
+
 1999-08-18  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-view.c (gnome_view_new): Call bonobo_setup_x_error_handler.
