@@ -1,3 +1,8 @@
+1999-07-11  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* bonobo/gnome-file-moniker.c (MAP_FILE): 
+	Define to zero if not already defined.
+
 1999-07-08  Miguel de Icaza  <miguel@gnu.org>
 
 	* components/text-plain/bonobo-text-plain.c
