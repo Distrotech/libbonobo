@@ -41,7 +41,7 @@ bonobo_storage_mem_entry_free (gpointer data)
 {
 	BonoboStorageMemEntry *entry = (BonoboStorageMemEntry*) data;
 
-	if (!data)
+	if (!entry)
 		return;
 	
 	bonobo_object_unref (entry->child);
@@ -72,7 +72,7 @@ split_path (const char  *path,
 	if (g_path_is_absolute (path))
 		path = g_path_skip_root (path);
 	
-	path_parts = g_strsplit (path, "/", 1);
+	path_parts = g_strsplit (path, "/", 2);
 	
 	*path_head = path_parts[0];
 	*path_tail = path_parts[1];
@@ -110,10 +110,9 @@ smem_get_parent (BonoboStorageMem       *storage,
 	/* No child is found */
 	if (!entry) {
 		g_free (path_head);
-		g_free (path_tail);
 
 		if (filename)
-			*filename = NULL;
+			*filename = path_tail;
 
 		if (ret_entry)
 			*ret_entry = NULL;
@@ -391,20 +390,20 @@ smem_open_stream_impl (PortableServer_Servant   servant,
 		       CORBA_Environment       *ev)
 {
 	BonoboStorageMem       *storage;
-	BonoboStorageMem       *last_storage;
+	BonoboStorageMem       *parent;
 	BonoboStorageMemEntry  *entry;
 	gchar                  *path_last;
 	BonoboObject           *stream = NULL;
 
 	storage = BONOBO_STORAGE_MEM (bonobo_object (servant));
-	last_storage = smem_get_last_storage (storage, path, &path_last);
+	parent = smem_get_last_storage (storage, path, &path_last);
 	
-	if (!last_storage || !path_last) {
+	if (!parent) {
 		bonobo_exception_set (ev, ex_Bonobo_Storage_NotFound);
 		goto ex_out;
 	}
-	
-	entry = g_hash_table_lookup (last_storage->priv->entries, path_last);
+
+	entry = g_hash_table_lookup (parent->priv->entries, path_last); 
 
 	/* Error cases */
 	/* Case 1: Stream not found */
@@ -429,7 +428,7 @@ smem_open_stream_impl (PortableServer_Servant   servant,
 		entry->is_directory = FALSE;
 		entry->child = stream;
 
-		g_hash_table_insert (last_storage->priv->entries,
+		g_hash_table_insert (parent->priv->entries,
 				     g_strdup (path_last),
 				     entry);
 		goto ok_out;
@@ -440,7 +439,8 @@ smem_open_stream_impl (PortableServer_Servant   servant,
  ok_out:
 	g_free (path_last);
 	
-	return bonobo_object_corba_objref (stream);
+	return bonobo_object_dup_ref (bonobo_object_corba_objref (stream),
+				      NULL);
 	
  ex_out:
 	g_free (path_last);
@@ -504,7 +504,8 @@ smem_open_storage_impl (PortableServer_Servant   servant,
  ok_out:
 	g_free (path_last);
 	
-	return bonobo_object_corba_objref (ret);
+	return bonobo_object_dup_ref (bonobo_object_corba_objref (ret),
+				      NULL);
 	
  ex_out:
 	g_free (path_last);
@@ -642,7 +643,6 @@ smem_rename_impl (PortableServer_Servant  servant,
 	BonoboStorageMem      *parent_storage, *target_storage;
 	BonoboStorageMemEntry *entry;
 	gchar                 *filename, *new_filename;
-	BonoboStorageMemEntry *tmp_entry;
 
 	if (!strcmp (path, "/") || !strcmp (path, "")) {
 		bonobo_exception_set (ev, ex_Bonobo_Storage_IOError);
@@ -667,20 +667,17 @@ smem_rename_impl (PortableServer_Servant  servant,
 		goto out;
 	}
 
-	tmp_entry = bonobo_storage_mem_entry_dup (entry);
 	g_hash_table_remove (parent_storage->priv->entries, filename);
-	entry = NULL;
 	
 	/* If target does not exists, new_filename will be non-NULL */
 	if (new_filename)
 		g_hash_table_insert (target_storage->priv->entries,
-				     new_filename, tmp_entry);
+				     new_filename, entry);
 	else
 		g_hash_table_insert (target_storage->priv->entries,
-				     g_strdup (filename), tmp_entry);
-	
+				     g_strdup (filename), entry);
+
  out:
-	bonobo_storage_mem_entry_free (entry);
 	g_free (filename);
 }
 

@@ -1,3 +1,18 @@
+2001-11-09  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* bonobo/bonobo-storage-memory.c (smem_rename_impl): 
+	(smem_open_stream_impl): 
+	(smem_open_storage_impl): Do proper ref/unref stuff (you have to
+	bonobo_object_release_unref the return value of openStream/openStorage)
+
+2001-11-07  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* bonobo/bonobo-storage-memory.c (split_path): use new GLib
+	g_strsplit API
+
+	* tests/test-storage-mem.c: more intelligent counting of number of
+	tests
+
 2001-11-08  Michael Meeks  <michael@ximian.com>
 
 	* idl/Bonobo_UI.idl: more spelling fixage from Darin.
