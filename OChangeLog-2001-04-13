@@ -1,5 +1,8 @@
 2000-12-17  Miguel de Icaza  <miguel@helixcode.com>
 
+	* bonobo/bonobo-widget.c (bonobo_widget_new_control): Removed
+	FIXME as it has been fixed.
+
 	* bonobo/bonobo-moniker-util.c: Sync the name with the actual
 	OAFIDD of the HTTP moniker.
 
