@@ -1,3 +1,57 @@
+2001-01-05  Maciej Stachowiak  <mjs@eazel.com>
+
+	xml-i18n-toolize
+	
+	* configure.in: add AM_PROG_XML_I18N_TOOLS
+
+	* .cvsignore: Ignore xml-i18n-{extract,merge,update}
+	* Makefile.am: Distribute xml-i18n-{extract,merge,update}
+	
+	* components/application-x-gnomine/Bonobo_Sample_Mines.oaf.in:
+	Renamed from,
+	components/application-x-gnomine/Bonobo_Sample_Mines.oafinfo;
+	marked some strings translatable.
+	* components/application-x-gnomine/Makefile.am: add oaf merge
+	rule, distribute .oaf and .oaf.in file.
+	* components/audio-ulaw/Bonobo_Sample_Audio.oaf.in,
+	components/audio-ulaw/Bonobo_Sample_Audio.oafinfo,
+	components/audio-ulaw/Makefile.am: Same deal.
+	* components/selector/Bonobo_Selector.oaf.in,
+	components/selector/Bonobo_Selector.oafinfo,
+	components/selector/Makefile.am: Ditto.
+	* components/text-plain/Bonobo_Sample_Text.oaf.in,
+	components/text-plain/Bonobo_Sample_Text.oafinfo,
+	components/text-plain/Makefile.am: Ditto.
+
+	* samples/compound-doc/Bonobo_Sample_CanvasItem.oaf.in,
+	samples/compound-doc/Bonobo_Sample_CanvasItem.oafinfo,
+	samples/compound-doc/Bonobo_Sample_Paint.oaf.in,
+	samples/compound-doc/Bonobo_Sample_Paint.oafinfo,
+	samples/compound-doc/Makefile.am: Ditto.
+
+	* monikers/Bonobo_Moniker_cache.oaf.in,
+	monikers/Bonobo_Moniker_gzip.oaf.in,
+	monikers/Bonobo_Moniker_gzip.oafinfo,
+	monikers/Bonobo_Moniker_http.oaf.in,
+	monikers/Bonobo_Moniker_http.oafinfo,
+	monikers/Bonobo_Moniker_std.oafinfo.in, monikers/Makefile.am,
+	monikers/Bonobo_Moniker_std.oaf.in.in: Ditto, but create .in.in
+	file for Bomobo_Moniker_std, since it needs to be preprocessed
+	twice.
+	
+	* samples/bonobo-class/Bonobo_Sample_Echo.oaf.in,
+	samples/bonobo-class/Bonobo_Sample_Echo.oafinfo,
+	samples/bonobo-class/Makefile.am: Ditto.
+
+	* samples/controls/Bonobo_Sample_Controls.oaf.in,
+	samples/controls/Bonobo_Sample_Controls.oafinfo,
+	samples/controls/Makefile.am: Ditto.
+
+	* po/POTFILES.in: Add .oaf.in files
+	* po/Makefile.i18npatch, po/ui-extract.pl, po/update.pl: Remove
+	these no longer needed files.
+	* bonobo.spec.in: Include .oaf files in rpm, not .oafinfo
+
 2001-01-08  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* idl/bonobo-property.idl: new add/removeListener methods.
