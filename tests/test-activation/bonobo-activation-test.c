@@ -35,8 +35,8 @@ test_oafd (CORBA_Environment *ev, const char *type)
 
         ns = oaf_name_service_get (ev);
         if (ev->_major != CORBA_NO_EXCEPTION) {
-                g_warning ("Exception '%s' finding oafd %s",
-                           oaf_exception_id (ev), type);
+                g_warning ("Exception '%s' (%s) finding oafd %s",
+                           oaf_exception_id (ev), ev->_repo_id, type);
                 return FALSE;
         }
 
