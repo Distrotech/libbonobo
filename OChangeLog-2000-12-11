@@ -1,5 +1,7 @@
 1999-05-26  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
+	* components/text-plain/.cvsignore: added file
+
 	* doc/Bonobo.sgml: changed some GNOME::object -> GNOME::obj
 
 	* bonoboConf.sh.in: typo: XML -> Bonobo
