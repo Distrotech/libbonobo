@@ -14,7 +14,7 @@ typedef struct {
 	GnomePersistStreamClass parent_class;
 } GnomeMonikerClass;
 
-GnomeBindContext *gnome_bind_context_new (void);
+GnomeBindContext *gnome_bind_context_new   (void);
 GnomeMoniker     *gnome_parse_display_name (GnomeBindContext *bind,
 					    const char *display_name,
 					    int *chars_parsed);

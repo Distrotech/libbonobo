@@ -11,7 +11,7 @@ BEGIN_GNOME_DECLS
 typedef struct {
 	GnomeObject *object;
 
-	GnomeStoragePrivate storage;
+	GnomeStoragePrivate driver;
 } GnomeStorage;
 
 GnomeStorage   *gnome_storage_file_open    (const char *path,

@@ -182,6 +182,8 @@ gnome_storage_file_open (const char *path, const char *open_mode)
 	g_return_val_if_fail (open_mode != NULL, NULL);
 
 	storage = gtk_type_new (gnome_storage_get_type ());
+	storage->driver = gnome_storage_driver_new ("file", path, open_mode);
+	
 	corba_storage = create_gnome_storage (
 		GNOME_OBJECT (storage));
 	if (corba_storage == CORBA_OBJECT_NIL){
