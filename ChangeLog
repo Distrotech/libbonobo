@@ -1,3 +1,11 @@
+2002-11-22  Hidetoshi Tajima <hidetoshi.tajima@sun.com>
+
+	* configure.in: check for bind_textdomain_codeset
+
+	* bonobo/bonobo-main.c: use it.
+
+	* monikers/bonobo-moniker-oaf.c: set explicit domain properly.
+
 2002-11-22  Dan Mills  <thunder@vximian.com>
 
 	* configure.in: fixed gtk-doc check.
