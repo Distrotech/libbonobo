@@ -74,7 +74,6 @@ libbonoboinclude_HEADERS =		\
 	bonobo-moniker-simple.h		\
 	bonobo-moniker-util.h		\
 	bonobo-moniker.h		\
-	bonobo-object-directory.h	\
 	bonobo-object.h			\
 	bonobo-persist-file.h		\
 	bonobo-persist-stream.h		\
@@ -113,7 +112,6 @@ libbonobo_src =				\
 	bonobo-moniker-simple.c		\
 	bonobo-moniker-util.c		\
 	bonobo-object.c			\
-	bonobo-object-directory.c	\
 	bonobo-persist-file.c		\
 	bonobo-persist-stream.c		\
 	bonobo-persist.c		\

@@ -1,3 +1,8 @@
+2001-07-18  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am (libbonoboinclude_HEADERS): don't install /
+	build bonobo-object-directory - it's horribly stale and old.
+
 2001-07-18  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-types.[ch]: New files.

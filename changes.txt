@@ -72,6 +72,9 @@ bonobo-property-bag-client.[ch]
 	Change the way varrag wrappers work, to be name / type / value
 	triplets instead of type-unsafe name / value pairs.
 
+bonobo-object-directory.[ch]:
+	bonobo_directory_*: remove, deprecated by oaf,
+	use the liboaf functions instead.
 
 
 IDL:

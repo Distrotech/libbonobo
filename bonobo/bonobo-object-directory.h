@@ -38,8 +38,8 @@ typedef enum {
 CORBA_ORB            bonobo_directory_get_orb                     (void);
 
 ODServerInfo        *bonobo_directory_new_server_info             (const gchar       *iid,
-						     const gchar       *name,
-                                                     const gchar       *desc);
+								   const gchar       *name,
+								   const gchar       *desc);
 const gchar         *bonobo_directory_get_server_info_id          (ODServerInfo      *info);
 const gchar         *bonobo_directory_get_server_info_name        (ODServerInfo      *info);
 const gchar         *bonobo_directory_get_server_info_description (ODServerInfo      *info);
