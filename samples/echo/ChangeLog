@@ -1,3 +1,7 @@
+2001-10-18  Mark McLoughlin <mark@skynet.ie>
+
+	* Makefile.am (ECHO_CORBA_GENERATED): depend on $(ORBIT_IDL).
+
 2001-10-11  Abel Cheung  <maddog@linux.org.hk>
 
 	* Makefile.am: idl file now goes into $(datadir)/idl/bonobo-2.0.
