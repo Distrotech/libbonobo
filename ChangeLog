@@ -1,3 +1,10 @@
+2003-03-07  Bill Haneman <bill.haneman@sun.com>
+
+	* idl/Bonobo.idl:
+	* idl/Bonobo_Property.idl:
+	Replaced #if !defined(FOO) with #ifndef(FOO), for more
+	IDL portability.  Fixes bug #107729.
+
 2003-02-28  Hidetoshi Tajima <hidetoshi.tajima@sun.com>
 
 	* bonobo/bonobo-exception.c (BONOBO_EXPLICIT_TRANSLATION_DOMAIN):
