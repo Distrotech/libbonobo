@@ -3,16 +3,46 @@
 
 #include <bonobo/gnome-object.h>
 
-struct _GnomeStoragePrivate;
-typedef struct _GnomeStoragePrivate GnomeStoragePrivate;
-
 BEGIN_GNOME_DECLS
 
-typedef struct {
-	GnomeObject *object;
+#define GNOME_STORAGE_TYPE        (gnome_storage_get_type ())
+#define GNOME_STORAGE(o)          (GTK_CHECK_CAST ((o), GNOME_STORAGE_TYPE, GnomeStorage))
+#define GNOME_STORAGE_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), GNOME_STORAGE_TYPE, GnomeStorageClass))
+#define GNOME_IS_STORAGE(o)       (GTK_CHECK_TYPE ((o), GNOME_STORAGE_TYPE))
+#define GNOME_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STORAGE_TYPE))
 
-	GnomeStoragePrivate driver;
+typedef struct {
+	GnomeObject object;
 } GnomeStorage;
+
+typedef struct {
+	GnomeObjectClass parent_class;
+
+	/*
+	 * virtual methods
+	 */
+	GnomeStream  *(*create_stream)  (GnomeStorage *storage,
+					 const CORBA_char *path,
+					 CORBA_Environment *ev);
+	GnomeStream  *(*open_stream)    (GnomeStorage *storage,
+					 const CORBA_char *path,
+					 GNOME_Storage_OpenMode, CORBA_Environment *ev);
+	GnomeStorage *(*create_storage) (GnomeStorage *storage,
+					 const CORBA_char *path,
+					 CORBA_Environment *ev);
+	void         (*copy_to)         (GnomeStorage *storage, GNOME_Storage target,
+					 CORBA_Environment *ev);
+	void         (*rename)          (GnomeStorage *storage,
+					 const CORBA_char *path_name,
+					 const CORBA_char *new_path_name,
+					 CORBA_Environment *ev);
+	void         (*commit)          (GnomeStorage *storage,
+					 CORBA_Environment *ev);
+	GNOME_Storage_directory_list *
+	             (*list_contents)   (GnomeStorage *storage,
+					 const CORBA_char *path,
+					 CORBA_Environment *ev);
+} GnomeStorageClass;
 
 GnomeStorage   *gnome_storage_file_open    (const char *path,
 					    const char *open_mode);
@@ -29,6 +59,9 @@ void gnome_storage_write_class_id (GnomeStorage *storage,
 void gnome_stream_write_class_id  (GnomeStream *stream,
 				   char *class_id);
 
+extern POA_GNOME_Storage__vepv gnome_storage_vepv;
+
 END_GNOME_DECLS
 
 #endif /* _GNOME_STORAGE_H_ */
+

@@ -1,8 +1,7 @@
 /*
- * Bonobo::*
  *
  * Author:
- *    Miguel de Icaza (miguel@gnu.org)Xs
+ *    Miguel de Icaza (miguel@gnu.org)
  *
  * Terms:
  *
@@ -19,18 +18,19 @@ module GNOME {
 	interface Stream : object {
 		/**
 		 * read:
-		 * @count:  number of bytes to read
-		 * @buffer: the buffer where the data is returned
+		 * @count:  number of bytes to read.
+		 * @buffer: the buffer where the data is returned.
 		 */
 		long read     (in long count, out string buffer);
 	
 		/**
 		 * write:
-		 * @buffer: a buffer to write
+		 * @count:  number of bytes to write.
+		 * @buffer: a buffer to write.
 		 *
-		 * writes the buffer to this stream
+		 * writes the buffer to this stream.
 		 */
-		long write    (in string buffer);
+		long write    (in long count, in string buffer);
 
 		/**
 		 * seek:
@@ -67,7 +67,7 @@ module GNOME {
 		 *
 		 * Commits any pending changes to the Storage
 		 */
-		void commid ();
+		void commit ();
 
 		/**
 		 * lock_region:
