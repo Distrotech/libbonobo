@@ -210,21 +210,31 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
  **/
 CORBA_long
 bonobo_stream_client_get_length (const Bonobo_Stream stream,
-				 CORBA_Environment  *ev)
+				 CORBA_Environment  *opt_ev)
 {
 	CORBA_long len;
 	Bonobo_StorageInfo *info;
-
-	g_return_val_if_fail (ev != NULL, -1);
+	CORBA_Environment  *ev, temp_ev;
+       
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
 
 	info = Bonobo_Stream_getInfo (stream, Bonobo_FIELD_SIZE, ev);
 
 	if (BONOBO_EX (ev) || !info)
-		return -1;
+		len = -1;
 
-	len = info->size;
+	else {
+		len = info->size;
 
-	CORBA_free (info);
+		CORBA_free (info);
+	}
+
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
 	
 	return len;
 }

@@ -1,3 +1,8 @@
+2001-07-30  Jamil Geor <geor@ihug.co.nz>
+
+	* bonobo/bonobo-stream-client.c (bonobo_stream_client_get_length):
+	update to make exception environment optional.
+
 2001-07-29  Maciej Stachowiak  <mjs@noisehavoc.org>
 
 	* bonobo/Makefile.am: Remove references to Bonobo_Clipboard.idl
@@ -36,7 +41,7 @@
 
 	* bonobo/bonobo-shlib-factory.[ch]: ditto
 
-2001-07-28  Jamil <geor@ihug.co.nz>
+2001-07-28  Jamil Geor <geor@ihug.co.nz>
 
 	* bonobo/bonobo-object.c (bonobo_object_query_interface), 
 	(bonobo_unknown_ping): add opt_evs
