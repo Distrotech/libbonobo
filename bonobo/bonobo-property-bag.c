@@ -170,7 +170,7 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 			       BONOBO_PROPERTY_BAG_TYPE, pb,
 			       BONOBO_TYPE_CORBA_ANY,    arg,
 			       G_TYPE_UINT,              prop->idx,
-			       G_TYPE_POINTER,           ev);
+			       G_TYPE_POINTER,           ev, 0);
 	return arg;
 }
 
@@ -211,7 +211,7 @@ impl_Bonobo_PropertyBag_getValues (PortableServer_Servant  servant,
 				       BONOBO_PROPERTY_BAG_TYPE, pb,
 				       BONOBO_TYPE_CORBA_ANY,    arg,
 				       G_TYPE_UINT,              prop->idx,
-				       G_TYPE_POINTER,           ev);
+				       G_TYPE_POINTER,           ev, 0);
 
 		set->_buffer [set->_length].value = *arg;
 
@@ -249,7 +249,7 @@ impl_Bonobo_PropertyBag_setValue (PortableServer_Servant  servant,
 			       BONOBO_PROPERTY_BAG_TYPE, pb,
 			       BONOBO_TYPE_CORBA_ANY,    value,
 			       G_TYPE_UINT,              prop->idx,
-			       G_TYPE_POINTER,           ev);
+			       G_TYPE_POINTER,           ev, 0);
 	
 	if (!BONOBO_EX (ev))
 		notify_listeners (pb, prop, value, NULL);
@@ -292,7 +292,7 @@ impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
 				       BONOBO_PROPERTY_BAG_TYPE, pb,
 				       BONOBO_TYPE_CORBA_ANY,   &set->_buffer [i].value,
 				       G_TYPE_UINT,              prop->idx,
-				       G_TYPE_POINTER,           ev);
+				       G_TYPE_POINTER,           ev, 0);
 
 		if (BONOBO_EX (ev))
 			return;

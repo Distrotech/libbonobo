@@ -51,7 +51,7 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 				       BONOBO_LISTENER_TYPE, listener,
 				       G_TYPE_STRING, event_name,
 				       BONOBO_TYPE_CORBA_ANY, args,
-				       G_TYPE_POINTER, ev);
+				       G_TYPE_POINTER, ev, 0);
 		
 	g_signal_emit (G_OBJECT (listener),
 		       signals [EVENT_NOTIFY], 0,

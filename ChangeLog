@@ -1,5 +1,19 @@
 2001-08-07  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-listener.c (impl_Bonobo_Listener_event):
+	0 terminate the list of arguments - argh.
+
+	* bonobo/bonobo-property-bag.c
+	(impl_Bonobo_PropertyBag_getValue),
+	(impl_Bonobo_PropertyBag_getValues),
+	(impl_Bonobo_PropertyBag_setValue),
+	(impl_Bonobo_PropertyBag_setValues): ditto.
+
+	* bonobo/bonobo-item-handler.c (impl_enum_objects),
+	(impl_get_object): ditto.
+
+2001-08-07  Michael Meeks  <michael@ximian.com>
+
 	* Version 1.101.1
 
 2001-08-07  Michael Meeks  <michael@ximian.com>

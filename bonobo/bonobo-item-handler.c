@@ -47,7 +47,7 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 		bonobo_closure_invoke (handler->priv->enum_objects,
 				       &ret_val,
 				       BONOBO_ITEM_HANDLER_TYPE, handler,
-				       G_TYPE_POINTER,           ev);
+				       G_TYPE_POINTER,           ev, 0);
 
 		ret = g_value_get_pointer (&ret_val);
 		g_value_unset (&ret_val);
@@ -78,7 +78,7 @@ impl_get_object (PortableServer_Servant servant,
 				       BONOBO_ITEM_HANDLER_TYPE, handler,
 				       G_TYPE_STRING,            item_name,
 				       G_TYPE_BOOLEAN,           only_if_exists,
-				       G_TYPE_POINTER,           ev);
+				       G_TYPE_POINTER,           ev, 0);
 				       
 				       
 		ret = g_value_get_boxed (&ret_val);
