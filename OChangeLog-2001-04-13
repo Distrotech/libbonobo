@@ -1,3 +1,8 @@
+2000-10-18  Eskil Heyn Olsen  <eskil@eazel.com>
+
+	* bonobo.spec.in:
+	Added bonobo-ui-extract to the rpm
+
 2000-10-18  Michael Meeks  <michael@helixcode.com>
 
 	* doc/ui-faq.txt (practice): remove show all comment; has been fixed.
