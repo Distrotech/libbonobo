@@ -23,7 +23,7 @@ tmpl_sources =				\
 
 liboaf_docdir = $(HTML_DIR)
 liboaf_doc_DATA =			\
-	html/book1.html			\
+	liboaf.html			\
 	$(NULL)
 
 
@@ -40,7 +40,6 @@ EXTRA_DIST = $(my_sgml_files)
 
 if ENABLE_GTK_DOC
 liboaf.html: html/book1.html
-	-cd $(srcdir) && cp html/book1.html liboaf.html
 else
 liboaf.html:
 endif
