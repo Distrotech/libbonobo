@@ -56,7 +56,7 @@ bonobo_stream_client_write (const Bonobo_Stream stream,
 		buf->_maximum = buf->_length;
 
 		Bonobo_Stream_write (stream, buf, ev);
-		if (BONOBO_EX(ev)) {
+		if (BONOBO_EX (ev)) {
 			CORBA_free (buf);
 			return;
 		}
@@ -166,7 +166,7 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 		Bonobo_Stream_read (stream, 1,
 				    &buffer, ev);
 
-		if (BONOBO_EX(ev))
+		if (BONOBO_EX (ev))
 			break;
 
 		else if (buffer->_length == 0 ||
@@ -179,7 +179,7 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 		}
 	}
 
-	if (BONOBO_EX(ev)) {
+	if (BONOBO_EX (ev)) {
 		*str = NULL;
 		g_string_free (gstr, TRUE);
 

@@ -157,7 +157,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 	toplevel = Bonobo_Unknown_queryInterface (
 		object, "IDL:Bonobo/Moniker:1.0", ev);
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 
 	if (object == CORBA_OBJECT_NIL) {
@@ -168,11 +168,11 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 
 	moniker = Bonobo_Moniker_parseDisplayName (toplevel, parent,
 						   name, ev);
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 
 	bonobo_object_release_unref (toplevel, ev);
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 
 	return moniker;
@@ -190,13 +190,13 @@ bonobo_moniker_util_get_parent_name (Bonobo_Moniker     moniker,
 
 	parent = Bonobo_Moniker__get_parent (moniker, ev);
 
-	if (BONOBO_EX(ev) ||
+	if (BONOBO_EX (ev) ||
 	    parent == CORBA_OBJECT_NIL)
 		return NULL;
 	
 	name = Bonobo_Moniker_getDisplayName (parent, ev);
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		name = NULL;
 
 	bonobo_object_release_unref (parent, ev);
@@ -211,7 +211,7 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 {
 	Bonobo_Unknown retval = CORBA_OBJECT_NIL;
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 	
 	if (object == CORBA_OBJECT_NIL) {
@@ -224,7 +224,7 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 	retval = Bonobo_Unknown_queryInterface (
 		object, requested_interface, ev);
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		goto release_unref_object;
 	
 	if (retval == CORBA_OBJECT_NIL) {
@@ -291,7 +291,7 @@ bonobo_moniker_client_get_name (Bonobo_Moniker     moniker,
 
 	name = Bonobo_Moniker_getDisplayName (moniker, ev);
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return NULL;
 
 	return name;
@@ -339,7 +339,7 @@ bonobo_moniker_client_resolve_client_default (Bonobo_Moniker     moniker,
 	unknown = bonobo_moniker_client_resolve_default (
 		moniker, interface_name, ev);
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return NULL;
 
 	if (unknown == CORBA_OBJECT_NIL)

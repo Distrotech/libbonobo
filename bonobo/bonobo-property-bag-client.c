@@ -247,7 +247,7 @@ bonobo_property_bag_client_persist (Bonobo_PropertyBag       pb,
 
 	persist = Bonobo_Unknown_queryInterface (pb, "IDL:Bonobo/PersistStream:1.0", ev);
 
-	if (BONOBO_EX(ev) ||
+	if (BONOBO_EX (ev) ||
 	    persist   == CORBA_OBJECT_NIL) {
 		g_warning ("Bonobo_PropertyBag     : No PersistStream interface "
 			   "found on remote PropertyBag!");
@@ -256,7 +256,7 @@ bonobo_property_bag_client_persist (Bonobo_PropertyBag       pb,
 
 	Bonobo_PersistStream_save (persist, stream, "", ev);
 
-	if (BONOBO_EX(ev)) {
+	if (BONOBO_EX (ev)) {
 		g_warning ("Bonobo_PropertyBag     : Exception caught while persisting "
 			   "remote PropertyBag!");
 		return;
@@ -283,7 +283,7 @@ bonobo_property_bag_client_depersist (Bonobo_PropertyBag       pb,
 	persist = Bonobo_Unknown_queryInterface (
 		pb, "IDL:Bonobo/PersistStream:1.0", ev);
 
-	if (BONOBO_EX(ev) ||
+	if (BONOBO_EX (ev) ||
 	    persist    == CORBA_OBJECT_NIL) {
 		g_warning ("Bonobo_PropertyBag     : No PersistStream interface "
 			   "found on remote PropertyBag!");
@@ -292,7 +292,7 @@ bonobo_property_bag_client_depersist (Bonobo_PropertyBag       pb,
 
 	Bonobo_PersistStream_load (persist, stream, "", ev);
 
-	if (BONOBO_EX(ev)) {
+	if (BONOBO_EX (ev)) {
 		g_warning ("Bonobo_PropertyBag     : Exception caught while persisting "
 			   "remote PropertyBag!");
 		return;

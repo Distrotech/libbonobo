@@ -41,7 +41,7 @@ bonobo_persist_stream_save_object_iid (Bonobo_Stream target,
 		
 	bonobo_stream_client_write (target, copy, len, ev);
 
-	if (BONOBO_EX(ev)){
+	if (BONOBO_EX (ev)){
 		CORBA_exception_free (ev);
 		return;
 	}

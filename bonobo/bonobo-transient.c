@@ -64,7 +64,7 @@ bonobo_transient_servant_locator_preinvoke (PortableServer_Servant servant_manag
 	 * Grab the Property name and the Property Bag.
 	 */
 	object_name = PortableServer_ObjectId_to_string (oid, ev);
-	if (BONOBO_EX(ev)) {
+	if (BONOBO_EX (ev)) {
 		CORBA_free (object_name);
 		g_warning ("BonoboPropertyBag: Could not get property name from Object ID");
 		return NULL;

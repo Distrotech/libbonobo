@@ -116,7 +116,7 @@ impl_Bonobo_PropertyBag_getProperties (PortableServer_Servant  servant,
 			pb->priv->transient, "IDL:Bonobo/Property:1.0",
 			prop->name, ev);
 
-		if (BONOBO_EX(ev)) {
+		if (BONOBO_EX (ev)) {
 			g_warning ("BonoboPropertyBag: Could not create property objref!");
 			g_list_free (props);
 			CORBA_free (prop_list);

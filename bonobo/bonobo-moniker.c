@@ -203,7 +203,7 @@ bonobo_moniker_default_get_display_name (BonoboMoniker     *moniker,
 	parent_name = bonobo_moniker_util_get_parent_name (
 		bonobo_object_corba_objref (BONOBO_OBJECT (moniker)), ev);
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return NULL;
 
 	if (!parent_name)
