@@ -1,3 +1,8 @@
+2000-05-18  Iain Holmes  <ih@csd.abdn.ac.uk>
+
+	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_set_pixmap_internal): 
+	Fixup brokenness in paths.
+
 2000-05-15  Darin Adler  <darin@eazel.com>
 
 	* configure.in: Added gdk_pixbuf to the list for CFLAGS and LIBS.
