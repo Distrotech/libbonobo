@@ -1,3 +1,11 @@
+2001-03-14  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: Update version to 1.0.0 in preparation for
+	Gnome 1.4.
+
+	* bonobo/bonobo-ui-sync-status.c (clobber_request_cb): impl.
+	(impl_bonobo_ui_sync_status_build): upd.
+
 2001-03-13  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-moniker-util.c (lookup_naming_context): fix a
