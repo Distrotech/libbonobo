@@ -1,3 +1,8 @@
+2001-01-15  Eskil Heyn Olsen  <eskil@eazel.com>
+
+	* monikers/Makefile.am:
+	Some makefile magic to put all the oaf.in files in dist.
+
 2001-01-15  Darin Adler  <darin@eazel.com>
 
 	* monikers/Makefile.am: Remove an old file name accidentally

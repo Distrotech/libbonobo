@@ -9,7 +9,9 @@ INCLUDES =                                              \
 
 OAF_FILES =					\
 	Bonobo_Moniker_gzip.oaf.in		\
-	Bonobo_Moniker_http.oaf.in
+	Bonobo_Moniker_http.oaf.in		\
+	Bonobo_Moniker_cache.oaf.in		\
+	Bonobo_Moniker_std.oaf.in
 
 POST_PROCESSED_OAF_FILES =			\
 	Bonobo_Moniker_std.oaf.in
