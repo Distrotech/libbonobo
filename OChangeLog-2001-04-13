@@ -1,5 +1,11 @@
 2001-02-20  Michael Meeks  <michael@ximian.com>
 
+	* doc/api: remove bonobo-property, it was private.
+
+	* doc/api: Write lots of examples and comments.
+
+2001-02-20  Michael Meeks  <michael@ximian.com>
+
 	* doc/api/bonobo-api.sgml: remove bonobo-moniker-async.
 
 2001-02-20  Michael Meeks  <michael@ximian.com>

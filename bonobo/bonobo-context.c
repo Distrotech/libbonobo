@@ -83,7 +83,8 @@ context_add (BonoboObject *object, const char *name)
  * bonobo_context_init:
  * @void: 
  * 
- * Sets up the context system, internal use only.
+ * Sets up the context system, internal use only, called
+ * by bonobo_init.
  **/
 void
 bonobo_context_init (void)

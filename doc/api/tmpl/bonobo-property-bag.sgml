@@ -2,7 +2,7 @@
 BonoboPropertyBag
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Implements a generic property storage interface
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
