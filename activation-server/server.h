@@ -2,8 +2,14 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include "Bonobo_ActivationContext.h"
 #include <bonobo-activation/bonobo-activation.h>
+#include "bonobo-activation/Bonobo_ActivationContext.h"
+
+/*
+ *    Time delay after all servers are de-registered / dead
+ * before quitting the server. (ms)
+ */
+#define SERVER_IDLE_QUIT_TIMEOUT 1000
 
 #define NAMING_CONTEXT_IID "OAFIID:Bonobo_CosNaming_NamingContext"
 

@@ -408,7 +408,7 @@ const char        *display,
 const char       **cmd,gboolean           set_process_group,int                fd_arg,const char        *display,const char        *od_iorstr,const char        *act_iid,BonoboForkReCheckFn re_check,gpointer            user_data,CORBA_Environment *ev
 </FUNCTION>
 <FUNCTION>
-<NAME>bonobo_activation_rloc_file_register</NAME>
+<NAME>bonobo_activation_base_service_init</NAME>
 <RETURNS>void  </RETURNS>
 void
 </FUNCTION>
@@ -799,7 +799,7 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
-#define BONOBO_ACTIVATION_MICRO_VERSION (0)
+#define BONOBO_ACTIVATION_MICRO_VERSION (2)
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>

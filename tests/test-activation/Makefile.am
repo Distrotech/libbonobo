@@ -77,8 +77,8 @@ plugin_built: plugin.idl $(ORBIT_IDL)
 CLEANFILES=empty_built plugin_built
 
 INCLUDES= \
-	-I$(top_srcdir)		\
-	-I$(top_builddir)	\
+	-I$(top_srcdir)			\
+	-I$(top_builddir)		\
 	-DG_DISABLE_DEPRECATED $(UTILS_CFLAGS)
 
 LDADD=../bonobo-activation/libbonobo-activation.la $(UTILS_LIBS)
