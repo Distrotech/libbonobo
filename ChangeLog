@@ -1,5 +1,10 @@
 2001-07-26  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/Makefile.am (libbonobo_2_la_SOURCES): update for
+	new ORBit2 orbit-idl '--imodule' flag.
+
+2001-07-26  Michael Meeks  <michael@ximian.com>
+
 	* idl/Bonobo_UI.idl: add the setAttr / getAttr stuff...
 
 2001-07-25  ERDI Gergo  <cactus@cactus.rulez.org>

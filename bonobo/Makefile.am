@@ -49,10 +49,13 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_Zoomable.idl		\
 	$(top_srcdir)/idl/Bonobo_Exception.idl
 
-idl_flags = -I $(OAF_IDL_DIR) -D__BONOBO_COMPILATION
+idl_flags = -I$(top_srcdir)/idl -I $(OAF_IDL_DIR) -D__BONOBO_COMPILATION
 
 $(CORBA_ALL_SOURCE): $(idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(top_srcdir)/idl/Bonobo.idl -I$(top_srcdir)/idl $(idl_flags)
+	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo.idl
+
+Bonobo-imodule.c : $(idls) $(ORBIT_IDL)
+	$(ORBIT_IDL) $(idl_flags) --imodule $(top_srcdir)/idl/Bonobo.idl
 
 lib_LTLIBRARIES = libbonobo-2.la
 
