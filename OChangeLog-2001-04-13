@@ -1,3 +1,10 @@
+2001-02-14  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-arg.h: include gtk/gtktypeutils.h
+
+	* bonobo/bonobo-property-bag-xml.c: support
+	load/store of aliases.
+
 2001-02-14  Cody Russell  <bratsche@gnome.org>
 	* bonobo/bonobo-zoomable.c: Append the array, not the address of
 	the array.  *duh*  Thanks, Mike Engber.
