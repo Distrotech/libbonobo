@@ -1,3 +1,18 @@
+2000-10-07  Andy Hertzfeld  <set EMAIL_ADDRESS environment variable>
+
+	* bonobo/bonobo-win.c: (toolbar_build_widget):
+	fixed bug introduced by Michael's previous check-in where toolbar
+	buttons were broken.  He changed the parameters to exec_verb_cb and
+	updated the menu item case, but not the toolbar item case.  Fixed
+	by passing the priv parameter instead of the node like the
+	callback now expects.
+	
+	* bonobo/bonobo-ui-util.c: (bonobo_ui_util_xml_get_icon_pixbuf):
+	addded support for full path image filenames as well as gnome_pixmap
+	relative ones for nautilus toolbar button theming.  Also, fixed
+	minor bug where it was deallocating a text string before using it
+	in a diagnostic message.
+	
 2000-10-07  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (reinstate_fn): prune widget info (
