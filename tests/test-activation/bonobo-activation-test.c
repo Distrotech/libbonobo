@@ -215,6 +215,8 @@ main (int argc, char *argv[])
                 fprintf (stderr, "It looks like you havn't installed broken.oafinfo "
                          "into ${prefix}/oaf, this must be done by hand to avoid "
                          "redundant warnings.\n");
+		fprintf (stderr, "Another possibility is that you failed to kill "
+			 "oafd before running make check; try running oaf-slay.\n");
         }
 
 	CORBA_exception_free (&ev);
