@@ -329,7 +329,8 @@ od_load_directory (const char *directory,
                 pathname = g_strdup_printf ("%s/%s", directory, directory_entry->d_name);
 
                 if (od_filename_has_extension (pathname, ".oaf") ||
-                    od_filename_has_extension (pathname, ".oafinfo")) {
+                    od_filename_has_extension (pathname, ".oafinfo") ||
+                    od_filename_has_extension (pathname, ".server")) {
                         od_load_file (pathname, entries, host, domain);
                 }
 
