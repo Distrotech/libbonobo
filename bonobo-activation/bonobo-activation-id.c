@@ -11,6 +11,10 @@ oaf_actinfo_new(void)
 void
 oaf_actinfo_free(OAFActivationInfo *actinfo)
 {
+  g_free(actinfo->iid);
+  g_free(actinfo->user);
+  g_free(actinfo->host);
+  g_free(actinfo->domain);
   g_free(actinfo);
 }
 
