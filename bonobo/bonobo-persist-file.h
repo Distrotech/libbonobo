@@ -61,7 +61,9 @@ GnomePersistFile *gnome_persist_file_construct (GnomePersistFile *ps,
 						GnomePersistFileIOFn save_fn,
 						void *closure);
 
-extern POA_GNOME_PersistFile__epv gnome_persist_file_epv;
+POA_GNOME_PersistFile__epv *gnome_persist_file_get_epv (void);
+
+extern POA_GNOME_PersistFile__vepv gnome_persist_file_vepv;
 END_GNOME_DECLS
 
 #endif /* _GNOME_PERSIST_FILE_H_ */

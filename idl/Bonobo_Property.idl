@@ -1,0 +1,139 @@
+/*
+ * The Bonobo Property interfaces.
+ *
+ * Author:
+ *   Nat Friemdan (nat@nat.org)
+ *
+ * Copyright 1999, Helix Code, Inc.
+ */
+ /*
+  * The Property-manipulation interfaces here are based in large part
+  * on suggestions from Chuck Jazdzewski <cjazdzewski@inprise.com>.
+ */
+
+module GNOME {
+
+interface Property {
+	/**
+	 * get_name:
+	 * 
+	 * Returns the name of the property.
+	 *
+	 * Do not confuse this with the human-readable string which
+	 * should be presented to the user in a property editor.  A
+	 * property name is a human-language-independent key used to
+	 * identify a property.  See get_docstring() for more
+	 * information about human-readable property descriptors.
+	 */
+	string get_name ();
+
+	/**
+	 * get_type:
+	 * 
+	 * Returns this Property's type.
+	 */
+	TypeCode get_type ();
+
+	/**
+	 * get_value:
+	 *
+	 * Returns the current value for this property.  The value
+	 * is returned
+	 */
+	any get_value ();
+
+	/**
+	 * set_value:
+	 * 
+	 * Sets the value for this object to @value
+	 */
+	exception InvalidValue {};
+	exception ReadOnlyProperty {};
+	void set_value (in any value) raises (InvalidValue, ReadOnlyProperty);
+
+	/**
+	 * get_default:
+	 *
+	 * Returns the default value for this property.
+	 *
+	 * While this *can* be used when streaming the properties to
+	 * disk to avoid writing out properties whose current value is
+	 * the default value, this is not recommended.  The reason
+	 * being that the "default value" could change and
+	 * unpredictable behavior could result.
+	 *
+	 * The only real use of this method is to provide a default
+	 * value to Property editors, so that a "restore defaults"
+	 * button will work.
+	 */
+	any get_default ();
+
+	/**
+	 * get_doc_string:
+	 *
+	 * Returns a string describing this property.
+	 */
+	string get_doc_string ();
+
+	/**
+	 * is_stored:
+	 * 
+	 * Returns %TRUE if the property should be stored when the
+	 * property list is streamed to a persistent store.
+	 *
+	 * The idea is that you can use this method to distinguish
+	 * between properties which are permanent characteristics of a
+	 * component (is_stored == TRUE) and those which are just
+	 * transient (is_stored == FALSE).
+	 */
+	boolean is_stored ();
+
+	/** 
+	 * is_read_only:
+	 * 
+	 * Returns whether this property is read-only.
+	 */
+	boolean is_read_only ();
+	
+};
+
+typedef sequence<string> PropertyNames;
+typedef sequence<Property> PropertyList;
+
+interface PropertyBag : GNOME::Unknown {
+	/**
+	 * get_properties:
+	 *
+	 * Returns: All of the properties in this property bag.
+	 */
+	PropertyList get_properties ();
+
+	/**
+	 * get_property:
+	 * @name: A string which uniquely identifies a given property.
+	 *
+	 * Returns: The single property in this PropertyBag identified
+	 * by @name.
+	 */
+	exception PropertyNotFound {};
+	Property get_property (in string name)
+		raises (PropertyNotFound);
+
+	/**
+	 * get_property_names:
+	 *
+	 * Returns: The names of the properties available in this
+	 * PropertyBag.
+	 *
+	 * There's no particular need for this function, but without
+	 * it the only way to get a list of all the property names in
+	 * a given PropertyBag, you have to iterate through all the
+	 * properties, and that will cause the Property servants to be
+	 * incarnated, which is not very resource-conscious.
+	 */
+	PropertyNames get_property_names ();
+
+};
+
+};
+

@@ -5,7 +5,7 @@
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
@@ -14,8 +14,6 @@
 
 /* Parent GTK object class */
 static GnomeObjectClass *gnome_persist_parent_class;
-
-POA_GNOME_Persist__epv gnome_persist_epv;
 
 static CORBA_char *
 impl_get_goad_id (PortableServer_Servant servant, CORBA_Environment * ev)
@@ -26,10 +24,24 @@ impl_get_goad_id (PortableServer_Servant servant, CORBA_Environment * ev)
 	return CORBA_string_dup (persist->goad_id);
 }
 
+/**
+ * gnome_persist_get_epv:
+ */
+POA_GNOME_Persist__epv *
+gnome_persist_get_epv (void)
+{
+	POA_GNOME_Persist__epv *epv;
+
+	epv = g_new0 (POA_GNOME_Persist__epv, 1);
+
+	epv->get_goad_id = impl_get_goad_id;
+
+	return epv;
+}
+
 static void
 init_persist_corba_class (void)
 {
-	gnome_persist_epv.get_goad_id = impl_get_goad_id;
 }
 
 static void

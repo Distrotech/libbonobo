@@ -1,146 +1,67 @@
 /**
  * Control interfaces
  *
- * Author:
- *   Miguel de Icaza, based on the interfaces from Chuck
- *
+ * Authors:
+ *   Nat Friedman <nat@nat.org>
+ *   Miguel de Icaza <miguel@gnu.org>
  */
 
 module GNOME {
 
-interface Property : GNOME::Unknown {
-	/**
-	 * get_name:
-	 * 
-	 * Returns the name of the property
-	 */
-	string get_name ();
+interface ControlFrame : GNOME::Unknown {
 
 	/**
-	 * is_stored:
+	 * get_ambient_properties:
 	 * 
-	 * Returns %TRUE if the property has been stored already
+	 * Returns: A PropertyBag containing the ambient properties
+	 * for this container.
 	 */
-	boolean is_stored ();
+	PropertyBag get_ambient_properties ();
 
 	/** 
-	 * is_readonly:
-	 * 
-	 * Returns whether this property is read-only
-	 */
-	boolean is_readonly ();
-	
-	/**
-	 * get_kind:
-	 * 
-	 * Returns the kind for this object
-	 */
-	TypeCode get_kind ();
-
-	/**
-	 * get_value:
+	 * queue_resize:
 	 *
-	 * Returns the value for this property
-	 */
-	any get_value ();
-
-	exception InvalidValue {};
-
-	/**
-	 * set_value:
-	 * 
-	 * Sets the value for this object to @value
-	 */
-	void set_value (in any value) raises (InvalidValue);
-
-	/**
-	 * get_default:
+	 * Tell the container that the Control would like to be
+	 * resized.  It should follow-up by calling
+	 * Control:size_request()
 	 *
-	 * Gets the default value for this property
 	 */
-	any get_default ();
-};
-
-typedef sequence<Property> Properties;
-
-interface Persistable : GNOME::Unknown {
-	/**
-	 * get_name:
-	 * 
-	 * Returns the name of this Persistable collection
-	 */
-	string get_name ();
+	void queue_resize ();
 
 	/**
-	 * get_class_id:
+	 * activate_uri:
+	 * @uri: the uri we would like to get loaded
 	 *
-	 * Returns the class ID for this persistable
+	 * The user has requested that the uri be loaded
 	 */
-	string get_class_id ();
-
-	/**
-	 * get_properties:
-	 * 
-	 * returns all the properties for this object
-	 */
-	Properties get_properties ();
-
-	/**
-	 * get_property:
-	 *
-	 * Returns the property named @property_name
-	 */
-	Property get_property (in string property_name);
-
-	/**
-	 * loading:
-	 *
-	 * Used to notify the Persistable that loading of its
-	 * state has begun.
-	 */
-	void loading ();
-
-	/**
-	 * loaded:
-	 * 
-	 * Used to notify the Persistable that loading of its stat
-	 * has finished
-	 */
-	void loaded ();
-};
-
-interface PersistableCollection : GNOME::Unknown {
-	/** 
-	 * get_count:
-	 *
-	 * Returns the number of items in the Persistable
-	 */
-	long get_count ();
-
-	/**
-	 * get_item:
-	 * @index: the nth element to return
-	 *
-	 * Returns the persistable interface for this object
-	 */
-	Persistable get_item (in long index);
-
-	/**
-	 * add:
-	 * @instance: object to add to the PersistableCollection
-	 */
-	void add (in Persistable instance);
-
-	/**
-	 * set_item:
-	 * @index: index to modify
-	 * @instance: the object to replace with.
-	 */
-	void set_item (in long index, in Persistable instance);
+	void activate_uri (in string uri, in boolean relative);
 };
 
 interface Control : GNOME::Unknown {
 	typedef unsigned long windowid;
+	/**
+	 * set_frame:
+	 * @frame: A GNOME_ControlFrame.
+	 *
+	 * Gives the Control a handle to its ControlFrame.
+	 */
+	void set_frame (in ControlFrame frame);
+
+	/**
+	 * set_window:
+	 * @id: An X Window ID.
+	 *
+	 * Sets the window ID that should be used for the plug
+	 * of this window.
+	 */
+	void set_window (in windowid id);
+
+	/**
+	 * get_property_bag:
+	 *
+	 * Returns: A PropertyBag containing this Control's properties.
+	 */
+	PropertyBag get_property_bag ();
 
 	/**
 	 * size_allocate:
@@ -152,42 +73,13 @@ interface Control : GNOME::Unknown {
 	void size_allocate (in short width, in short height);
 
 	/**
-	 * size_query:
+	 * size_request:
 	 * @desired_width: In this value you should return the desired width you want.
 	 * @desired_height: In this value you should return the desired height you want.
 	 *
 	 */
-	void size_query (out short desired_width, out short desired_height);
+	void size_request (out short desired_width, out short desired_height);
 
-	/**
-	 * set_window:
-	 *
-	 * Sets the window ID that should be used for the plug
-	 * of this window
-	 */
-	void set_window (in windowid id);
-};
-
-interface ControlFrame : GNOME::Unknown {
-	/** 
-	 * request_resize:
-	 * @new_width: New requested width
-	 * @new_height: New requested height
-	 *
-	 * Requests the parent container to assign @new_width and
-	 * @new_height.  
-	 *
-	 * Returns FALSE on failure, TRUE on success.
-	 */
-	void request_resize (in short new_width, in short new_height);
-
-	/**
-	 * activate_uri:
-	 * @uri: the uri we would like to get loaded
-	 *
-	 * The user has requested that the uri be loaded
-	 */
-	void activate_uri (in string uri, in boolean relative);
 };
 
 };

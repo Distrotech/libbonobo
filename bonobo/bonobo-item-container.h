@@ -3,7 +3,7 @@
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 
 #ifndef _GNOME_CONTAINER_H_
@@ -57,6 +57,8 @@ void             gnome_container_add         (GnomeContainer *container,
 
 void             gnome_container_remove       (GnomeContainer *container,
 					       GnomeObject    *object);
+
+POA_GNOME_Container__epv *gnome_container_get_epv (void);
 
 /*
  * Exported vectors

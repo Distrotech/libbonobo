@@ -31,7 +31,9 @@ GnomePersist *gnome_persist_construct (GnomePersist *persist,
 				       GNOME_Persist corba_persist,
 				       const char *goad_id);
 
-extern POA_GNOME_Persist__epv gnome_persist_epv;
+POA_GNOME_Persist__epv *gnome_persist_get_epv (void);
+
+extern POA_GNOME_Persist__vepv gnome_persist_vepv;
 END_GNOME_DECLS
 
 #endif /* _GNOME_PERSIST_H_ */

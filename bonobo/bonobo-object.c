@@ -5,7 +5,7 @@
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
@@ -15,6 +15,8 @@
 #include <bonobo/gnome-main.h>
 #include <bonobo/gnome-object.h>
 #include "bonobo.h"
+
+POA_GNOME_Unknown__vepv gnome_object_vepv;
 
 typedef struct {
 	int   ref_count;
@@ -179,13 +181,6 @@ gnome_object_destroy (GnomeObject *object)
 }
 
 static void
-impl_GNOME_Unknown__destroy (PortableServer_Servant servant, CORBA_Environment *ev)
-{
-	POA_GNOME_Unknown__fini ((POA_GNOME_Unknown *)servant, ev);
-	g_free (servant);
-}
-
-static void
 impl_GNOME_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	GnomeObject *object;
@@ -250,25 +245,29 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 	return retval;
 }
 
-PortableServer_ServantBase__epv gnome_object_base_epv =
+/**
+ * gnome_object_get_epv:
+ *
+ */
+POA_GNOME_Unknown__epv *
+gnome_object_get_epv (void)
 {
-	NULL,			/* _private data */
-	NULL,                   /* finalize routine */
-	NULL,			/* default_POA routine */
-};
+	POA_GNOME_Unknown__epv *epv;
 
-POA_GNOME_Unknown__epv gnome_object_epv =
+	epv = g_new0 (POA_GNOME_Unknown__epv, 1);
+
+	epv->ref = impl_GNOME_Unknown_ref;
+	epv->unref = impl_GNOME_Unknown_unref;
+	epv->query_interface = impl_GNOME_Unknown_query_interface;
+
+	return epv;
+}
+
+static void
+init_object_corba_class (void)
 {
-	NULL,			/* _private */
-	&impl_GNOME_Unknown_ref,
-	&impl_GNOME_Unknown_unref,
-	&impl_GNOME_Unknown_query_interface,
-};
-
-POA_GNOME_Unknown__vepv gnome_object_vepv = {
-	&gnome_object_base_epv,
-	&gnome_object_epv
-};
+	gnome_object_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+}
 
 static void
 gnome_object_object_destroy (GtkObject *object)
@@ -330,6 +329,8 @@ gnome_object_class_init (GnomeObjectClass *class)
 	gtk_object_class_add_signals (object_class, gnome_object_signals, LAST_SIGNAL);
 
 	object_class->destroy = gnome_object_object_destroy;
+
+	init_object_corba_class ();
 }
 
 static void

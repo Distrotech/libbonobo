@@ -23,7 +23,8 @@ interface ClientSite : GNOME::Unknown {
 	
 	/**
 	 * show_window:
-	 * @show: boolean value, reports whethe
+	 * @show: boolean value, reports whether the
+	 * containee is showing its own separate editing window.
 	 *
 	 * Used by the containee to inform the parent process
 	 * when it shows its own separate editing window.

@@ -7,7 +7,7 @@
  * manipulate the application's menu and toolbar items.
  *
  * Author:
- *    Nat Friedman (nat@gnome-support.com)
+ *    Nat Friedman (nat@nat.org)
  */
 
 
@@ -42,7 +42,8 @@ module GNOME {
 			ToolbarTypeRadioItem,
 			ToolbarTypeRadioGroup,
 			ToolbarTypeToggleItem,
-			ToolbarTypeSeparator
+			ToolbarTypeSeparator,
+			ToolbarTypeControl
        		};
        
        		/*
@@ -174,8 +175,9 @@ module GNOME {
 		 * Toolbar items.
 		 */
 		void toolbar_create_item (in UIHandler containee, in string path, in ToolbarType type,
-					  in string label, in string hint, in long pos, in PixmapType pixmap_type,
-					  in iobuf pixmap_data, in unsigned long accelerator_key, in long modifier);
+					  in string label, in string hint, in long pos, in Control control,
+					  in PixmapType pixmap_type, in iobuf pixmap_data,
+					  in unsigned long accelerator_key, in long modifier);
 
 		exception ToolbarItemNotFound {};
 		void toolbar_remove_item (in UIHandler containee, in string path)

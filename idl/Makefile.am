@@ -12,6 +12,7 @@ idl_DATA =			\
 	gnome-persist.idl	\
 	gnome-storage.idl	\
 	gnome-progressive.idl	\
-	gnome-ui-handler.idl
+	gnome-ui-handler.idl	\
+	gnome-property.idl
 
 EXTRA_DIST = $(idl_DATA)

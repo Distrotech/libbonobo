@@ -5,7 +5,7 @@
  * Author:
  *   Miguel de Icaza (miguel@gnu.org).
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
 #include <gmodule.h>
@@ -13,7 +13,6 @@
 
 static GnomeObjectClass *gnome_storage_parent_class;
 
-POA_GNOME_Storage__epv gnome_storage_epv;
 POA_GNOME_Storage__vepv gnome_storage_vepv;
 
 #define CLASS(o) GNOME_STORAGE_CLASS(GTK_OBJECT(o)->klass)
@@ -133,23 +132,36 @@ impl_erase (PortableServer_Servant servant,
 	CLASS (storage)->erase (storage, path, ev);
 }
 
+/**
+ * gnome_storage_get_epv:
+ *
+ */
+POA_GNOME_Storage__epv *
+gnome_storage_get_epv (void)
+{
+	POA_GNOME_Storage__epv *epv;
+
+	epv = g_new0 (POA_GNOME_Storage__epv, 1);
+
+	epv->create_stream	= impl_create_stream;
+	epv->open_stream	= impl_open_stream;
+	epv->create_storage	= impl_create_storage;
+	epv->open_storage	= impl_open_storage;
+	epv->copy_to		= impl_copy_to;
+	epv->rename		= impl_rename;
+	epv->commit		= impl_commit;
+	epv->list_contents	= impl_list_contents;
+	epv->erase		= impl_erase;
+
+	return epv;
+}
+
 static void
 init_storage_corba_class (void)
 {
-	/* The EPV for the Storage */
-	gnome_storage_epv.create_stream = impl_create_stream;
-	gnome_storage_epv.open_stream = impl_open_stream;
-	gnome_storage_epv.create_storage = impl_create_storage;
-	gnome_storage_epv.open_storage = impl_open_storage;
-	gnome_storage_epv.copy_to = impl_copy_to;
-	gnome_storage_epv.rename = impl_rename;
-	gnome_storage_epv.commit = impl_commit;
-	gnome_storage_epv.list_contents = impl_list_contents;
-	gnome_storage_epv.erase = impl_erase;
-
 	/* The VEPV */
-	gnome_storage_vepv.GNOME_Unknown_epv = &gnome_object_epv;
-	gnome_storage_vepv.GNOME_Storage_epv = &gnome_storage_epv;
+	gnome_storage_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_storage_vepv.GNOME_Storage_epv = gnome_storage_get_epv ();
 }
 
 static void

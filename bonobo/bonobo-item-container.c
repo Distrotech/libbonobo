@@ -13,7 +13,7 @@
  *   Miguel de Icaza (miguel@kernel.org)
  *   Nat Friedman    (nat@nat.org)
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
@@ -33,8 +33,6 @@ static guint signals [LAST_SIGNAL] = { 0, };
 
 static GnomeObjectClass *gnome_container_parent_class;
 
-POA_GNOME_ParseDisplayName__epv gnome_parse_display_name_epv = { NULL, };
-POA_GNOME_Container__epv gnome_container_epv = { NULL, };
 POA_GNOME_Container__vepv gnome_container_vepv;
 
 static CORBA_Object
@@ -149,18 +147,30 @@ impl_get_object (PortableServer_Servant servant,
 /*
  * GnomeContainer CORBA vector-class initialization routine
  */
+
+/**
+ * gnome_container_get_epv:
+ *
+ */
+POA_GNOME_Container__epv *
+gnome_container_get_epv (void)
+{
+	POA_GNOME_Container__epv *epv;
+
+	epv = g_new0 (POA_GNOME_Container__epv, 1);
+
+	epv->enum_objects = impl_enum_objects;
+	epv->get_object   = impl_get_object;
+
+	return epv;
+}
+
 static void
 corba_container_class_init (void)
 {
-	/* Init the epv */
-	gnome_container_epv.enum_objects = impl_enum_objects;
-	gnome_container_epv.get_object = impl_get_object;
-
 	/* Init the vepv */
-	gnome_container_vepv._base_epv     = &gnome_object_base_epv;
-	gnome_container_vepv.GNOME_Unknown_epv = &gnome_object_epv;
-	gnome_container_vepv.GNOME_ParseDisplayName_epv = &gnome_parse_display_name_epv;
-	gnome_container_vepv.GNOME_Container_epv = &gnome_container_epv;
+	gnome_container_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_container_vepv.GNOME_Container_epv = gnome_container_get_epv ();
 }
 
 typedef GNOME_Unknown (*GnomeSignal_POINTER__POINTER_BOOL_POINTER) (

@@ -1,3 +1,142 @@
+1999-11-30  Nat Friedman  <nat@helixcode.com>
+
+	* bonobo/gnome-property.c: New file.  Implement the GnomeProperty
+ 	server.  Read gnome-property-bag.c first.
+
+	* bonobo/gnome-property.h: New file.
+
+	* bonobo/gnome-property-bag-client.c: New file.  A convenient
+ 	GtkObject to allow you to manipulate a remote PropertyBag.
+
+	* bonobo/gnome-property-bag-client.h: New file.
+
+	* bonobo/gnome-property-bag.c: New file.  Implements the
+ 	PropertyBag server which dishes out properties on demand.
+
+	* bonobo/gnome-property-bag.h: New file.
+
+	* samples/controls/sample-control-container.c: New file.  Use this
+ 	to learn how to use controls.  Marvel at how easy it is.
+
+	* samples/controls/sample-control-factory.c: New file.  A factory
+ 	to start controls.
+
+	* samples/controls/bonobo-clock-control.c: New file.  A sample
+ 	control.  Use this to learn how to write controls.
+
+	* samples/controls/bonobo-clock-control.h: New file.  Prototypes
+ 	for the above.
+
+	* samples/controls/bonobo-clock-control.gnorba: New file.  GNORBA
+ 	file for the clock control.
+
+	* bonobo/gnome-wrapper.c: Ok, lots of changes.  First, I took
+ 	Mathieu's patch, modified it very heavily, and applied it.
+  	Mathieu, please test your patches a bit more before sending them
+ 	in.  So GnomeWrapper now puts a little border around the embedded
+ 	component if the 'covered' flag is FALSE and the 'visible' flag is
+ 	TRUE.  Visibile is a new new flag for which I added
+ 	manipulation/inspection functions.  Also, GnomeWrapper now uses a
+ 	private data structure.  I moved the covered flag there, and some
+ 	other stuff, I think.
+
+	* bonobo/gnome-view.c: Use the new epv system.  Seem to have
+ 	renamed some functions accidentally; oh well.  Removed all size
+ 	negotiation.
+
+	* bonobo/gnome-view-frame.c: Use the new epv system.  Fixed some
+ 	bugs.  Activate the view if the user hits ENTER on it.  Destroy
+ 	things in the right order.  Removed all size negotiation.  Moved
+ 	all X window embedding to controls.
+
+	* bonobo/gnome-ui-handler.c: Use the new epv system.  Now destroys
+ 	toolbar items when a containee unregisters itself.  Commented out
+ 	some g_slist_frees that were causing the glib slist allocator to
+ 	become corrupt for some strange reason.  Added support for
+ 	inserting Controls into toolbars.
+
+	* bonobo/gnome-stream.c: Use the new epv system.
+
+	* bonobo/gnome-storage.c: Use the new epv system.
+
+	* bonobo/gnome-progressive.c: Use the new epv system.
+
+	* bonobo/gnome-persist.c: Use the new epv system.
+
+	* bonobo/gnome-persist-stream.c: Use the new epv system.
+
+	* bonobo/gnome-persist-file.c: Use the new epv system.
+
+	* bonobo/gnome-object.c: Removed the __destroy method
+ 	implementation.  Uses the new epv system.
+
+	* bonobo/gnome-generic-factory.c: Use the new epv system.
+
+	* bonobo/gnome-embeddable.c: Use the new epv system.
+
+	* bonobo/gnome-embeddable-factory.c: Use the new epv system.
+  	Actually inits the corba class now -- This was apparently never
+ 	tested before :-).  
+
+	* bonobo/gnome-desktop-window.c: Use the new epv system.
+
+	* bonobo/gnome-control.c: Use the new epv system.  Support
+ 	PropertyBags.  Gutted all size negotiation.  Fixed plug
+ 	destruction.  Added set_frame.  Fixed the set_window logic.  Fixed
+ 	destruction.  Added functionality to support ControlFrame ambient
+ 	property bags.  Fixed many bugs.
+
+	* bonobo/gnome-control-frame.c: Use the new epv system.  Gutted
+ 	all the size negotiation.  Moved remote-window setting here from
+ 	the view.  Moved the GtkSocket here.  Now properly binds itself to
+ 	remote controls without race conditions.  Added several functions
+ 	to allow you to inspect the object.  Added the ambient properties
+ 	property bag.
+
+	* bonobo/gnome-container.c: Use the new epv system.
+
+	* bonobo/gnome-client-site.c: Use the new epv system.  Removed
+ 	some old functions that weren't useful.  Fixed the SHOW_WINDOW
+ 	signal so it actually works.  Removed all the size negotiation
+ 	logic.
+
+	* bonobo/gnome-canvas-component.c: Use the new epv system.
+
+	* bonobo/gnome-bonobo-widget.c: It now works.  It embed
+ 	subdocuments as well as controls.  It rocks your world.  You want
+ 	to be me.
+  
+	* bonobo/Makefile.am: Added all the property files.
+
+	* samples/controls/bonobo-clock-control.c (bonobo_clock_factory): 
+
+	* samples/controls/bonobo-clock-control.h: New file.
+
+	* samples/paint-component-simple.c: Renamed update_view to
+ 	update_view_foreach.  Removed all size-negotiation code.
+
+	* samples/sample-container.c: Removed all size negotiation code.
+
+	* idl/gnome-ui-handler.idl: Added ToolbarTypeControl to the
+ 	ToolbarType enum.  Added a control argument to the
+ 	toolbar_create_item() method.
+
+	* idl/gnome-control.idl: Removed all property stuff from here.
+  	Added a get_ambient_properties() method to ControlFrame.  Added
+ 	queue_resize to ControlFrame.  Added get_property_bag() to
+ 	Control.  Added size_request and size_allocate() to control.
+  	Removed size_query().  We are fully Gtk+-adherent in our
+ 	size-negotiation semantics now.
+ 
+	* idl/gnome-container.idl: Moved the SyntaxError exception into
+ 	the Container interface.
+
+	* idl/bonobo.idl: Added gnome-property.idl.  Rearranged things
+ 	slightly.
+
+	* idl/Makefile.am: Added gnome-property.idl
+	
+
 Sun Nov 28 17:15:13 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gshell/menu.[ch]: new files for menu related things 

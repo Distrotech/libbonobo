@@ -50,8 +50,9 @@ typedef struct {
 				   CORBA_Environment *ev);
 } GnomeStreamClass;
 
+POA_GNOME_Stream__epv *gnome_stream_get_epv (void);
+
 extern POA_GNOME_Stream__vepv gnome_stream_vepv;
-extern POA_GNOME_Stream__epv gnome_stream_epv;
 
 GtkType         gnome_stream_get_type     (void);
 

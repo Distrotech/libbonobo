@@ -11,7 +11,6 @@
 
 static GnomeObjectClass *gnome_stream_parent_class;
 
-POA_GNOME_Stream__epv gnome_stream_epv;
 POA_GNOME_Stream__vepv gnome_stream_vepv;
 
 #define CLASS(o) GNOME_STREAM_CLASS(GTK_OBJECT(o)->klass)
@@ -109,24 +108,35 @@ impl_length (PortableServer_Servant servant, CORBA_Environment * ev)
 	return CLASS (stream)->length (stream, ev);
 }
 
+/**
+ * gnome_stream_get_epv:
+ */
+POA_GNOME_Stream__epv *
+gnome_stream_get_epv (void)
+{
+	POA_GNOME_Stream__epv *epv;
+
+	epv = g_new0 (POA_GNOME_Stream__epv, 1);
+
+	epv->read	= impl_read;
+	epv->write	= impl_write;
+	epv->seek	= impl_seek;
+	epv->truncate	= impl_truncate;
+	epv->copy_to	= impl_copy_to;
+	epv->commit	= impl_commit;
+	epv->close	= impl_close;
+	epv->eos	= impl_eos;
+	epv->length	= impl_length;
+
+	return epv;
+}
 
 static void
 init_stream_corba_class (void)
 {
-	/* The EPV for the Storage */
-	gnome_stream_epv.read = impl_read;
-	gnome_stream_epv.write = impl_write;
-	gnome_stream_epv.seek = impl_seek;
-	gnome_stream_epv.truncate = impl_truncate;
-	gnome_stream_epv.copy_to = impl_copy_to;
-	gnome_stream_epv.commit = impl_commit;
-	gnome_stream_epv.close = impl_close;
-	gnome_stream_epv.eos = impl_eos;
-	gnome_stream_epv.length = impl_length;
-
 	/* The VEPV */
-	gnome_stream_vepv.GNOME_Unknown_epv = &gnome_object_epv;
-	gnome_stream_vepv.GNOME_Stream_epv = &gnome_stream_epv;
+	gnome_stream_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_stream_vepv.GNOME_Stream_epv = gnome_stream_get_epv ();
 }
 
 static void

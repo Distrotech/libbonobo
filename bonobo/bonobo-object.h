@@ -72,6 +72,8 @@ void         gnome_object_ref              (GnomeObject *object);
 void         gnome_object_unref            (GnomeObject *object);
 void         gnome_object_destroy          (GnomeObject *object);
 
+POA_GNOME_Unknown__epv *gnome_object_get_epv (void);
+
 
 /*
  * Error checking

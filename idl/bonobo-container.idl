@@ -1,16 +1,6 @@
 module GNOME {
 
-	interface ParseDisplayName : Unknown {
-		/**
-		 * SyntaxError{}:
-		 *
-		 * This exception is launched if there is a syntax error
-		 * during the name parsing
-		 */
-		exception SyntaxError {};
-	};
-
-	interface Container : ParseDisplayName {
+	interface Container : Unknown {
 		typedef sequence<Unknown> ObjectList;
 
 		/**
@@ -27,6 +17,14 @@ module GNOME {
 		 * be found
 		 */
 		exception NotFound {};
+
+		/**
+		 * SyntaxError{}:
+		 *
+		 * This exception is launched if there is a syntax error
+		 * during the name parsing
+		 */
+		exception SyntaxError {};
 
 		/**
 		 * get_object:

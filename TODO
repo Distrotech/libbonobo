@@ -6,6 +6,26 @@ getting done.
 
 Nat Friedman (nat@nat.org)
 
+Controls etc
+------------
+* Add Prop CList to Control sample container.
+* free values when pb is destroyed.  ReleaserFn
+* Fix g_slist_frees in gnome-ui-handler.c -- added FIXMEs.  Don't
+  understand the problem currently.
+* Fix GnomeUIHandler crashing problem -- unknown.
+* Fix gill
+* Fix gnumeric
+* Fix gpdf
+* Fix ggv
+* doc new control/control frame functions
+* From gnome-client-site.c: 	CORBA_free (list);	/* FIXME: This does not make any sense at all to me */
+* system exception should be on gnome object client. sigh.
+* Doc GnomeBonoboWidget functions
+* out-of-place views are fucked -- show_window does not make sense in client_site.
+* out-of-place -- add embeddable routine, one per
+* Toolbar controls -- test
+
+
 Bonobo-endemic issues
 ---------------------
 * check for proper unref/destruction handling/mem leaks.
@@ -22,7 +42,6 @@ Bonobo Core (files in bonobo/)
 * Missing embeddable methods implemented.
 * Document signals and undo setup.
 * Implement printing. (Miguel)
-* Update gdk unexpected window destruction patch. (Nat)
 * Fix CORBA robustness issues (SIGSEGV on unfinished corba method invocation)
 * UIHandler toolbar code finished (Nat)
 * UIHandler documented (Nat)
@@ -53,5 +72,3 @@ Sample code (the code in samples/)
 * Write moniker sample code.
 * Write up description of paint component. (Nat)
 * Reference component in samples/, using gtk-object method (Nat).
-
-

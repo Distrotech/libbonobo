@@ -6,7 +6,7 @@
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
@@ -17,8 +17,6 @@
 static GnomePersistClass *gnome_persist_stream_parent_class;
 
 /* The CORBA entry point vectors */
-static POA_GNOME_Persist__epv gnome_persist_epv;
-POA_GNOME_PersistStream__epv  gnome_persist_stream_epv;
 POA_GNOME_PersistStream__vepv gnome_persist_stream_vepv;
 
 static CORBA_boolean
@@ -91,21 +89,31 @@ impl_get_size_max (PortableServer_Servant servant, CORBA_Environment * ev)
 	return (*class->get_size_max)(GNOME_PERSIST_STREAM (object));
 }
 
+/**
+ * gnome_persist_stream_get_epv:
+ *
+ */
+POA_GNOME_PersistStream__epv *
+gnome_persist_stream_get_epv (void)
+{
+	POA_GNOME_PersistStream__epv *epv;
+
+	epv = g_new0 (POA_GNOME_PersistStream__epv, 1);
+
+	epv->load		= impl_load;
+	epv->save		= impl_save;
+	epv->get_size_max	= impl_get_size_max;
+	epv->is_dirty		= impl_is_dirty;
+
+	return epv;
+}
+
 static void
 init_persist_stream_corba_class (void)
 {
-	/*
-	 * The Entry Point Vectors for GNOME::Persist
-	 * and GNOME::PersistStream
-	 */
-	gnome_persist_stream_epv.load = impl_load;
-	gnome_persist_stream_epv.save = impl_save;
-	gnome_persist_stream_epv.get_size_max = impl_get_size_max;
-	gnome_persist_stream_epv.is_dirty = impl_is_dirty;
-
-	gnome_persist_stream_vepv.GNOME_Unknown_epv = &gnome_object_epv;
-	gnome_persist_stream_vepv.GNOME_Persist_epv = &gnome_persist_epv;
-	gnome_persist_stream_vepv.GNOME_PersistStream_epv = &gnome_persist_stream_epv;
+	gnome_persist_stream_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_persist_stream_vepv.GNOME_Persist_epv = gnome_persist_get_epv ();
+	gnome_persist_stream_vepv.GNOME_PersistStream_epv = gnome_persist_stream_get_epv ();
 }
 
 static int

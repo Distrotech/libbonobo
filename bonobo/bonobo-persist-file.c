@@ -15,8 +15,6 @@
 static GnomePersistClass *gnome_persist_file_parent_class;
 
 /* The CORBA entry point vectors */
-static POA_GNOME_Persist__epv gnome_persist_epv;
-POA_GNOME_PersistFile__epv gnome_persist_file_epv;
 POA_GNOME_PersistFile__vepv gnome_persist_file_vepv;
 
 static CORBA_char *
@@ -108,21 +106,30 @@ impl_save (PortableServer_Servant servant,
 	pf->is_dirty = FALSE;
 }
 
+/**
+ * gnome_persist_file_get_epv:
+ */
+POA_GNOME_PersistFile__epv *
+gnome_persist_file_get_epv (void)
+{
+	POA_GNOME_PersistFile__epv *epv;
+
+	epv = g_new0 (POA_GNOME_PersistFile__epv, 1);
+
+	epv->load		= impl_load;
+	epv->save		= impl_save;
+	epv->is_dirty		= impl_is_dirty;
+	epv->get_current_file   = impl_get_current_file;
+
+	return epv;
+}
+
 static void
 init_persist_file_corba_class (void)
 {
-	/*
-	 * The Entry Point Vectors for GNOME::Persist
-	 * and GNOME::PersistFile
-	 */
-	gnome_persist_file_epv.load = impl_load;
-	gnome_persist_file_epv.save = impl_save;
-	gnome_persist_file_epv.is_dirty = impl_is_dirty;
-	gnome_persist_file_epv.get_current_file = impl_get_current_file;
-
-	gnome_persist_file_vepv.GNOME_Unknown_epv = &gnome_object_epv;
-	gnome_persist_file_vepv.GNOME_Persist_epv = &gnome_persist_epv;
-	gnome_persist_file_vepv.GNOME_PersistFile_epv = &gnome_persist_file_epv;
+	gnome_persist_file_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_persist_file_vepv.GNOME_Persist_epv = gnome_persist_get_epv ();
+	gnome_persist_file_vepv.GNOME_PersistFile_epv = gnome_persist_file_get_epv ();
 }
 
 static int

@@ -5,7 +5,7 @@
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 #ifndef _GNOME_GENERIC_FACTORY_H_
 #define _GNOME_GENERIC_FACTORY_H_
@@ -73,6 +73,10 @@ void gnome_generic_factory_set (
 	GnomeGenericFactory *c_factory,
 	GnomeGenericFactoryFn factory,
 	void *data);
+
+POA_GNOME_GenericFactory__epv *gnome_generic_factory_get_epv (void);
+
+extern POA_GNOME_GenericFactory__vepv gnome_generic_factory_vepv;
 
 END_GNOME_DECLS
 

@@ -5,13 +5,13 @@
  * The GnomeGenericFactory object is used to instantiate new
  * GnomeGeneric objects.  It acts as a wrapper for the
  * GNOME::GenericFactory CORBA interface, and dispatches to
- * a user-specified factory function whenever its create_objecd()
+ * a user-specified factory function whenever its create_object()
  * method is invoked.
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
@@ -21,11 +21,13 @@
 #include <bonobo/gnome-main.h>
 #include <bonobo/gnome-generic-factory.h>
 
+POA_GNOME_GenericFactory__vepv gnome_generic_factory_vepv;
+
 static GnomeObjectClass *gnome_generic_factory_parent_class;
 
 static CORBA_boolean
 impl_GNOME_GenericFactory_supports (PortableServer_Servant servant,
-				    const CORBA_char *obj_goad_id,
+				    CORBA_char *obj_goad_id,
 				    CORBA_Environment *ev)
 {
 	g_message ("support invoked\n");
@@ -34,8 +36,8 @@ impl_GNOME_GenericFactory_supports (PortableServer_Servant servant,
 
 static CORBA_Object
 impl_GNOME_GenericFactory_create_object (PortableServer_Servant servant,
-					 const CORBA_char *obj_goad_id,
-					 const GNOME_stringlist *params,
+					 CORBA_char *obj_goad_id,
+					 GNOME_stringlist *params,
 					 CORBA_Environment *ev)
 {
 	GnomeGenericFactoryClass *class;
@@ -52,17 +54,6 @@ impl_GNOME_GenericFactory_create_object (PortableServer_Servant servant,
 	
 	return CORBA_Object_duplicate(gnome_object_corba_objref (GNOME_OBJECT (object)), ev);
 }
-
-static POA_GNOME_GenericFactory__epv gnome_generic_factory_generic = {
-	NULL,
-	(gpointer) &impl_GNOME_GenericFactory_supports,
-	(gpointer) &impl_GNOME_GenericFactory_create_object,
-};
-
-static POA_GNOME_GenericFactory__vepv gnome_generic_factory_vepv = {
-	&gnome_object_base_epv,
-	&gnome_generic_factory_generic
-};
 
 static CORBA_Object
 create_gnome_generic_factory (GnomeObject *object)
@@ -199,6 +190,12 @@ gnome_generic_factory_new_generic (GnomeGenericFactory *factory)
 }
 
 static void
+init_generic_factory_corba_class (void)
+{
+	gnome_generic_factory_vepv.GNOME_GenericFactory_epv = gnome_generic_factory_get_epv ();
+}
+
+static void
 gnome_generic_factory_class_init (GnomeGenericFactoryClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
@@ -208,6 +205,8 @@ gnome_generic_factory_class_init (GnomeGenericFactoryClass *class)
 	object_class->finalize = gnome_generic_factory_finalize;
 
 	class->new_generic = gnome_generic_factory_new_generic;
+
+	init_generic_factory_corba_class ();
 }
 
 static void
@@ -265,4 +264,20 @@ gnome_generic_factory_set (GnomeGenericFactory *c_factory,
 	c_factory->factory_closure = data;
 }
 
+
+/**
+ * gnome_generic_factory_get_epv:
+ */
+POA_GNOME_GenericFactory__epv *
+gnome_generic_factory_get_epv (void)
+{
+	POA_GNOME_GenericFactory__epv *epv;
+
+	epv = g_new0 (POA_GNOME_GenericFactory__epv, 1);
+
+	epv->supports	   = impl_GNOME_GenericFactory_supports;
+	epv->create_object = impl_GNOME_GenericFactory_create_object;
+
+	return epv;
+}
 

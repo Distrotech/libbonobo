@@ -5,7 +5,7 @@
  * Author:
  *   Nat Friedman (nat@nat.org)
  *
- * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
+ * Copyright 1999 Helix Code, Inc.
  */
 
 #include <config.h>
@@ -16,7 +16,6 @@
 /* Parent GTK object class */
 static GnomeObjectClass *gnome_progressive_data_sink_parent_class;
 
-POA_GNOME_ProgressiveDataSink__epv gnome_progressive_data_sink_epv;
 POA_GNOME_ProgressiveDataSink__vepv gnome_progressive_data_sink_vepv;
 
 static void
@@ -127,21 +126,33 @@ impl_set_size (PortableServer_Servant servant,
 	
 } /* impl_set_size */
 
+/**
+ * gnome_progressive_get_epv:
+ */
+POA_GNOME_ProgressiveDataSink__epv *
+gnome_progressive_get_epv (void)
+{
+	POA_GNOME_ProgressiveDataSink__epv *epv;
+
+	epv = g_new0 (POA_GNOME_ProgressiveDataSink__epv, 1);
+
+	epv->start	= impl_start;
+	epv->end	= impl_end;
+	epv->add_data	= impl_add_data;
+	epv->set_size	= impl_set_size;
+
+	return epv;
+}
+
 static void
 init_progressive_data_sink_corba_class (void)
 {
 	/*
 	 * Initialize the entry point vector for GNOME::ProgressiveDataSink.
 	 */
-	gnome_progressive_data_sink_epv.start = impl_start;
-	gnome_progressive_data_sink_epv.end = impl_end;
-	gnome_progressive_data_sink_epv.add_data = impl_add_data;
-	gnome_progressive_data_sink_epv.set_size = impl_set_size;
-
-	gnome_progressive_data_sink_vepv.GNOME_Unknown_epv = &gnome_object_epv;
+	gnome_progressive_data_sink_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
 	gnome_progressive_data_sink_vepv.GNOME_ProgressiveDataSink_epv =
-		&gnome_progressive_data_sink_epv;
-	
+		gnome_progressive_get_epv ();
 }
 
 static void

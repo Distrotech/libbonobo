@@ -63,7 +63,9 @@ GnomePersistStream *gnome_persist_stream_construct (GnomePersistStream *ps,
 						    GnomePersistStreamIOFn save_fn,
 						    void *closure);
 
-extern POA_GNOME_PersistStream__epv gnome_persist_stream_epv;
+POA_GNOME_PersistStream__epv *gnome_persist_stream_get_epv (void);
+
+extern POA_GNOME_PersistStream__vepv gnome_persist_stream_vepv;
 END_GNOME_DECLS
 
 #endif /* _GNOME_PERSIST_STREAM_H_ */
