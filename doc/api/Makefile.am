@@ -14,7 +14,7 @@ DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.sgml
 DOC_SOURCE_DIR=../../bonobo
 
 # Extra options to supply to gtkdoc-scan.
-SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED"
+SCAN_OPTIONS=--deprecated-guards="BONOBO_DISABLE_DEPRECATED"
 
 # Extra options to supply to gtkdoc-mkdb.
 MKDB_OPTIONS=--sgml-mode --output-format=xml

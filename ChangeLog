@@ -2,6 +2,11 @@
 
 	* configure.in: Added "mn" to ALL_LINGUAS.
 
+2003-01-21  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/api/Makefile.am (SCAN_OPTIONS): Changed --deprecated-guards
+	option value to BONOBO_DISABLE_DEPRECATED, as it should be.
+
 2003-01-20  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.2.0
