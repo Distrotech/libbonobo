@@ -59,9 +59,10 @@ void  bonobo_activation_plugin_use    (PortableServer_Servant servant,
 
 void  bonobo_activation_plugin_unuse  (gpointer impl_ptr);
 
-
+#ifndef BONOBO_DISABLE_DEPRECATED
 CORBA_Object bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh, 
                                                       CORBA_Environment    *ev);
+#endif
 
 G_END_DECLS
 

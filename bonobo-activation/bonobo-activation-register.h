@@ -43,7 +43,6 @@ void    bonobo_activation_registration_env_free       (GSList       *reg_env);
 
 void    bonobo_activation_registration_env_set_global (GSList       *reg_env,
 						       gboolean      append_if_existing);
-GSList *bonobo_activation_registration_env_get_global (void);
 
 
 #ifndef BONOBO_DISABLE_DEPRECATED

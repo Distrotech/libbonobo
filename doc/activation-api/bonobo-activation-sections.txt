@@ -10,7 +10,6 @@ bonobo_activation_servinfo_to_actinfo
 bonobo_activation_id_parse
 bonobo_activation_info_new
 bonobo_activation_info_free
-bonobo_activation_add_reset_notify
 bonobo_server_info_prop_lookup
 Bonobo_ServerInfoList
 
@@ -45,7 +44,6 @@ bonobo_activation_activate_from_id_async
 bonobo_activation_set_activation_env_value
 
 <SUBSECTION Private>
-bonobo_activation_activate_shlib_server
 Bonobo_ACTIVATION_FLAG_PRIVATE
 Bonobo_ACTIVATION_FLAG_NO_LOCAL
 Bonobo_ACTIVATION_FLAG_EXISTING_ONLY
@@ -873,21 +871,23 @@ TC_IMPL_TC_CORBA_sequence_CORBA_string_9
 <TITLE>Registration</TITLE>
 Bonobo_RegistrationResult
 bonobo_activation_unregister_active_server
-bonobo_activation_active_server_register
-bonobo_activation_active_server_unregister
-bonobo_activation_make_registration_id
 bonobo_activation_registration_env_free
 bonobo_activation_registration_env_set
 bonobo_activation_registration_env_set_global
 bonobo_activation_registration_env_get_global
 bonobo_activation_register_active_server
-bonobo_activation_register_client
 bonobo_activation_iid_get
 
 BonoboActivationPlugin
 BonoboActivationPluginObject
 bonobo_activation_plugin_use
 bonobo_activation_plugin_unuse
+
+<SUBSECTION Private>
+bonobo_activation_activate_shlib_server
+bonobo_activation_active_server_register
+bonobo_activation_active_server_unregister
+bonobo_activation_make_registration_id
 </SECTION>
 
 <SECTION>
@@ -898,41 +898,29 @@ BONOBO_ACTIVATION_MINOR_VERSION
 BONOBO_ACTIVATION_MICRO_VERSION
 bonobo_activation_is_initialized
 bonobo_activation_init
-bonobo_activation_postinit
-bonobo_activation_preinit
 bonobo_activation_orb_init
 bonobo_activation_orb_get
 bonobo_activation_name_service_get
-bonobo_activation_get_popt_table_name
+
+<SUBSECTION Private>
 bonobo_activation_hostname_get
 bonobo_activation_domain_get
 bonobo_activation_username_get
 bonobo_activation_context_get
 bonobo_activation_session_name_get
-
-<SUBSECTION Private>
+bonobo_activation_get_popt_table_name
+bonobo_activation_postinit
+bonobo_activation_preinit
 bonobo_activation_release_corba_client
+bonobo_activation_add_reset_notify
+bonobo_activation_register_client
 </SECTION>
 
 <SECTION>
 <FILE>debugging</FILE>
 <TITLE>Debugging</TITLE>
+bonobo_activation_debug_shutdown
+<SUBSECTION Private>
 bonobo_activation_get_test_components_enabled
 bonobo_activation_set_test_components_enabled
-bonobo_activation_debug_shutdown
-bonobo_activation_base_service_debug_shutdown
-</SECTION>
-
-<SECTION>
-<FILE>base</FILE>
-<TITLE>Base Services</TITLE>
-BonoboActivationBaseService
-BonoboActivationBaseServiceActivator
-BonoboActivationBaseServiceRegistry
-bonobo_activation_base_service_activator_add
-bonobo_activation_base_service_check
-bonobo_activation_base_service_registry_add
-bonobo_activation_base_service_set
-bonobo_activation_base_service_unset
-bonobo_activation_service_get
 </SECTION>

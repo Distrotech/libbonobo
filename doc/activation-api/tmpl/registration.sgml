@@ -35,37 +35,6 @@ to Bonobo Activation once it is created.
 @obj: 
 
 
-<!-- ##### FUNCTION bonobo_activation_active_server_register ##### -->
-<para>
-
-</para>
-
-@registration_id: 
-@obj: 
-@Returns: 
-<!-- # Unused Parameters # -->
-@iid: 
-
-
-<!-- ##### FUNCTION bonobo_activation_active_server_unregister ##### -->
-<para>
-
-</para>
-
-@iid: 
-@obj: 
-
-
-<!-- ##### FUNCTION bonobo_activation_make_registration_id ##### -->
-<para>
-
-</para>
-
-@iid: 
-@display: 
-@Returns: 
-
-
 <!-- ##### FUNCTION bonobo_activation_registration_env_free ##### -->
 <para>
 
@@ -94,14 +63,6 @@ to Bonobo Activation once it is created.
 @append_if_existing: 
 
 
-<!-- ##### FUNCTION bonobo_activation_registration_env_get_global ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
 <!-- ##### FUNCTION bonobo_activation_register_active_server ##### -->
 <para>
 
@@ -111,15 +72,6 @@ to Bonobo Activation once it is created.
 @obj: 
 @reg_env: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_activation_register_client ##### -->
-<para>
-
-</para>
-
-@context: 
-@ev: 
 
 
 <!-- ##### FUNCTION bonobo_activation_iid_get ##### -->

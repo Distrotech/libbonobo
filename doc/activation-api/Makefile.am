@@ -30,6 +30,7 @@ IGNORE_HFILES=				\
 	Bonobo_ActivationContext.h	\
 	bonobo-activation-i18n.h	\
 	bonobo-activation-private.h	\
+	bonobo-activation-base-service.h \
 	bonobo-activation-activate-private.h
 
 # Extra files to add when scanning

@@ -41,13 +41,14 @@ void           bonobo_activation_preinit    (gpointer app,
 void           bonobo_activation_postinit   (gpointer app, 
                                              gpointer mod_info);
 
+/* deprecated / private to libbonoboui */
 CORBA_Context  bonobo_activation_context_get      (void);
-
+#ifndef BONOBO_DISABLE_DEPRECATED
 const char    *bonobo_activation_hostname_get     (void);
 const char    *bonobo_activation_session_name_get (void);
-/* FIXME: unused - remove ? */
 const char    *bonobo_activation_domain_get       (void);
 #define bonobo_activation_username_get() g_get_user_name()
+#endif
 
 char          *bonobo_activation_get_popt_table_name (void);
 gboolean       bonobo_activation_debug_shutdown      (void);

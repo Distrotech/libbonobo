@@ -150,6 +150,18 @@ bonobo_activation_hostname_get (void)
 }
 
 
+/**
+ * bonobo_activation_context_get:
+ * @void: 
+ * 
+ * Fetches the internal CORBA_Context used with every activation
+ * request. This can be used to manipulate some of the associated
+ * fields; particularly 'display'.
+ *
+ * This method is deprecated.
+ * 
+ * Return value: the CORBA context for activating with.
+ **/
 CORBA_Context
 bonobo_activation_context_get (void)
 {
@@ -257,7 +269,6 @@ struct poptOption bonobo_activation_popt_options[] = {
  * 
  * Return value: The IID of the activated server or NULL.
  */
-
 const char *
 bonobo_activation_iid_get (void)
 {
@@ -326,7 +337,6 @@ bonobo_activation_is_initialized (void)
  * 
  * Return value: A localized copy of the string "bonobo activation options"
  */
-
 char *
 bonobo_activation_get_popt_table_name (void)
 {
@@ -384,6 +394,16 @@ bonobo_activation_init (int argc, char **argv)
 	return retval;
 }
 
+/**
+ * bonobo_activation_orb_init:
+ * @argc: pointer to program's argument count
+ * @argv: argument array
+ * 
+ * Initialize Bonobo Activation's ORB - do this once centrally
+ * so it can be easily shared.
+ * 
+ * Return value: the ORB.
+ **/
 CORBA_ORB
 bonobo_activation_orb_init (int *argc, char **argv)
 {
