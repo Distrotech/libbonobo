@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.107.0\n"
-"POT-Creation-Date: 2003-07-31 13:11+0100\n"
-"PO-Revision-Date: 2003-01-02 09:45+0100\n"
+"POT-Creation-Date: 2003-08-18 13:31+0200\n"
+"PO-Revision-Date: 2003-08-18 13:31+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -186,11 +186,11 @@ msgstr "Shlib «%s» inneholdt ikke «%s»"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Egendefinert CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
