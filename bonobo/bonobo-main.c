@@ -82,7 +82,7 @@ bonobo_x_error_handler (Display *display, XErrorEvent *error)
 
 	XGetErrorText (display, error->error_code, buf, 63);
 
-	g_error ("%s\n  serial %ld error_code %d request_code %da minor_code %d\n",
+	g_error ("%s\n  serial %ld error_code %d request_code %da minor_code %d",
 		 buf, error->serial, error->error_code, error->request_code,
 		 error->minor_code);
 

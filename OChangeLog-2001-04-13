@@ -1,3 +1,102 @@
+2000-04-28  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-uih-menu.c (menu_toplevel_create_widgets):
+	Fixed a bug that caused all the radio items to be linked into
+	one huge radio group. There's still a problem if you remove one
+	of the radio items and then try to add more to the same group,
+	since the GtkRadioMenuItem class doesn't know to update the
+	radio_items list pointer inside the UI handler.
+
+	* bonobo/bonobo-control.c (bonobo_control_construct):
+	Sink the widget when we ref it, since the container is going to
+	sink it later anyway. This makes things work better in the case
+	where we fail before the widget gets added to a container.
+	
+	* bonobo/bonobo-arg.c (bonobo_arg_from_gtk), (bonobo_arg_to_gtk):
+	* bonobo/bonobo-canvas-component.c (gcc_realize), (gcc_draw):
+	* bonobo/bonobo-canvas-item.c (gbi_update), (gbi_realize),
+	(gbi_unrealize), (gbi_draw), (gbi_point), (gbi_bounds),
+	(gbi_render), (gbi_event):
+	* bonobo/bonobo-control-frame.c
+	(bonobo_control_frame_state_to_corba):
+	* bonobo/bonobo-control.c (bonobo_control_gtk_state_from_corba):
+	* bonobo/bonobo-embeddable.c (impl_Bonobo_Embeddable_new_view),
+	(bonobo_embeddable_remove_verb):
+	* bonobo/bonobo-main.c (bonobo_x_error_handler):
+	* bonobo/bonobo-object-directory-goad.c (od_assert_using_goad):
+	* bonobo/bonobo-object-directory-oaf.c (od_server_unregister):
+	* bonobo/bonobo-object.c (bonobo_object_class_init):
+	* bonobo/bonobo-persist-stream.c (impl_load), (impl_save):
+	* bonobo/bonobo-progressive.c (impl_start), (impl_end),
+	(impl_add_data), (impl_set_size):
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_property_bag_client_persist),
+	(bonobo_property_bag_client_depersist):
+	* bonobo/bonobo-property-bag-xml.c
+	(bonobo_property_bag_xml_stream_buffer),
+	(bonobo_property_bag_xml_unstream_buffer),
+	(bonobo_property_bag_xml_load_property),
+	(bonobo_property_bag_xml_depersist):
+	* bonobo/bonobo-property-bag.c
+	(impl_Bonobo_PropertyBag_get_properties),
+	(bonobo_property_bag_destroy):
+	* bonobo/bonobo-simple-source.c (impl_pop_data):
+	* bonobo/bonobo-stream-client.c
+	(bonobo_stream_client_write_string),
+	(bonobo_stream_client_read_string):
+	* bonobo/bonobo-stream-memory.c (mem_copy_to):
+	* bonobo/bonobo-ui-handler.c
+	(bonobo_ui_handler_toplevel_check_toplevel),
+	(bonobo_ui_handler_local_do_path),
+	(bonobo_ui_handler_toplevel_create_pixmap),
+	(bonobo_ui_handler_pixmap_free_data),
+	(bonobo_ui_handler_pixmap_copy_data),
+	(bonobo_ui_handler_pixmap_type_to_corba),
+	(bonobo_ui_handler_pixmap_corba_to_type),
+	(bonobo_ui_handler_pixmap_data_to_corba),
+	(bonobo_ui_handler_pixmap_corba_to_data),
+	(bonobo_ui_handler_uiinfo_pixmap_type_to_):
+	* bonobo/bonobo-uih-dock.c
+	(bonobo_ui_handler_dock_placement_to_corb),
+	(bonobo_ui_handler_dock_placement_from_co):
+	* bonobo/bonobo-uih-menu.c (menu_type_to_corba),
+	(menu_corba_to_type), (menu_local_remove_parent_entry),
+	(menu_local_remove_item_recursive),
+	(menu_toplevel_create_item_widget),
+	(impl_Bonobo_UIHandler_menu_activated),
+	(menu_toplevel_remove_parent_entry),
+	(menu_toplevel_add_parent_entry),
+	(impl_Bonobo_UIHandler_menu_overridden),
+	(impl_Bonobo_UIHandler_menu_removed),
+	(impl_Bonobo_UIHandler_menu_reinstated), (BonoboUIHandlerMenuItem):
+	* bonobo/bonobo-uih-toolbar.c (toolbar_type_to_corba),
+	(toolbar_corba_to_type), (toolbar_local_remove_parent_entry),
+	(impl_Bonobo_UIHandler_toolbar_overridden),
+	(impl_Bonobo_UIHandler_toolbar_activated),
+	(toolbar_type_to_gtk_type), (toolbar_toplevel_item_create_widgets),
+	(toolbar_toplevel_item_remove_parent_entr),
+	(impl_Bonobo_UIHandler_toolbar_reinstated),
+	(impl_Bonobo_UIHandler_toolbar_removed),
+	(toolbar_uiinfo_type_to_uih):
+	* bonobo/gnome-property-bag.c
+	(impl_GNOME_PropertyBag_get_properties),
+	(gnome_property_bag_destroy), (gnome_property_bag_set_prop_type):
+	* bonobo/sample-item.c (main):
+	* bonobo/sample-server.c (main):
+	* bonobo/test-container-autoload.c (launch_server), (main):
+	* bonobo/test-container.c (launch_server), (launch_server_moniker),
+	(view_activated_cb), (main):
+	* bonobo/test-storage.c (main):
+	* bonobo/test-ui-handler.c (main):
+	* gshell/gshell.c (main):
+	* samples/compound-doc/sample-container.c
+	(component_view_activated_cb), (main):
+	* samples/controls/bonobo-clock-control.c (get_prop), (set_prop):
+	* samples/controls/sample-control-container.c (main):
+	* tests/test-properties-client.c (create_bag_client), (main):
+	* tests/test-properties-server.c (simple_prop_to_string):
+	Took out lots of excess \n characters in log messages. So sue me!
+
 2000-04-27  Mathieu Lacage <mathieu@gnu.org>
 
 	* bonobo/bonobo-wrapper.c: fixes the good old bug which left
@@ -47,7 +146,7 @@
 	gnorba. Thanks to Michael Meeks <michael@helixcode.com> for
 	catching this problem.
 
-2000-04-24  Arjan Scherpenisse  <Arjan Scherpenisse <acscherp@wins.uva.nl>>
+2000-04-24  Arjan Scherpenisse  <acscherp@wins.uva.nl>
 
 	* configure.in (ALL_LINGUAS): Added dutch translation
 

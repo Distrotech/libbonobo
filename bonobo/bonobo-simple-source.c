@@ -41,7 +41,7 @@ impl_pop_data (PortableServer_Servant servant,
 
 	if (result != 0)
 	{
-		g_warning ("FIXME: should report an exception\n");
+		g_warning ("FIXME: should report an exception");
 	}
 	
 } /* impl_pop_data */

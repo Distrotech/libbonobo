@@ -161,7 +161,7 @@ create_bag_client (void)
 	pbc = bonobo_property_bag_client_new (pb);
 
 	if (pbc == NULL) {
-		g_error ("Could not create PropertyBagClient!\n");
+		g_error ("Could not create PropertyBagClient!");
 		exit (1);
 	}
 
@@ -201,7 +201,7 @@ main (int argc, char **argv)
 
 	pb = CORBA_ORB_string_to_object (orb, argv [1], &ev);
 	if (pb == CORBA_OBJECT_NIL) {
-		g_error ("Could not bind to PropertyBag object\n");
+		g_error ("Could not bind to PropertyBag object");
 		return 1;
 	}
 

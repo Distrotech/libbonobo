@@ -38,7 +38,7 @@ impl_start (PortableServer_Servant servant,
 
 	if (result != 0)
 	{
-		g_warning ("FIXME: should report an exception\n");
+		g_warning ("FIXME: should report an exception");
 	}
 	
 } /* impl_start */
@@ -63,7 +63,7 @@ impl_end (PortableServer_Servant servant,
 
 	if (result != 0)
 	{
-		g_warning ("FIXME: should report an exception\n");
+		g_warning ("FIXME: should report an exception");
 	}
 	
 } /* impl_end */
@@ -92,7 +92,7 @@ impl_add_data (PortableServer_Servant                 servant,
 
 	if (result != 0)
 	{
-		g_warning ("FIXME: should report an exception\n");
+		g_warning ("FIXME: should report an exception");
 	}
 	
 } /* impl_add_data */
@@ -121,7 +121,7 @@ impl_set_size (PortableServer_Servant servant,
 
 	if (result != 0)
 	{
-		g_warning ("FIXME: should report an exception\n");
+		g_warning ("FIXME: should report an exception");
 	}
 	
 } /* impl_set_size */

@@ -145,7 +145,7 @@ simple_prop_to_string (BonoboArg *arg)
 	}
 
 	default:
-		g_error ("Unhandled type: %d\n", arg->_type->kind);
+		g_error ("Unhandled type: %d", arg->_type->kind);
 		break;
 	}
 

@@ -393,7 +393,7 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 static void
 bonobo_object_usage_error (BonoboObject *object)
 {
-	g_error ("Aggregate bonobo_object member %p has been destroyed using gtk_object_* methods\n", object);
+	g_error ("Aggregate bonobo_object member %p has been destroyed using gtk_object_* methods", object);
 }
 
 static void

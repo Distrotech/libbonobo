@@ -117,7 +117,7 @@ bonobo_property_bag_xml_stream_buffer (xmlChar *docbuff, size_t docsz,
 	bonobo_stream_client_printf (stream, TRUE, &ev, "%d", docsz);
 
 	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("BonoboPropertyBagXML: Exception while writing size header to stream!\n");
+		g_warning ("BonoboPropertyBagXML: Exception while writing size header to stream!");
 		return FALSE;
 	}
 
@@ -131,7 +131,7 @@ bonobo_property_bag_xml_stream_buffer (xmlChar *docbuff, size_t docsz,
 		bytes_written = bonobo_stream_client_write (stream, docbuff + pos, docsz - pos, &ev);
 
 		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("BonoboPropertyBagXML: Exception while writing properties to stream\n");
+			g_warning ("BonoboPropertyBagXML: Exception while writing properties to stream");
 			CORBA_exception_free (&ev);
 			return FALSE;
 		}
@@ -236,7 +236,7 @@ bonobo_property_bag_xml_unstream_buffer (const Bonobo_Stream stream,
 	CORBA_exception_init (&ev);
 
 	if ( bonobo_stream_client_read_string (stream, &szstr, &ev) == -1) {
-		g_warning ("BonoboPropertyBagXML: Exception reading buffer size from stream!\n");
+		g_warning ("BonoboPropertyBagXML: Exception reading buffer size from stream!");
 		CORBA_exception_free (&ev);
 		return FALSE;
 	}
@@ -259,7 +259,7 @@ bonobo_property_bag_xml_unstream_buffer (const Bonobo_Stream stream,
 				   &ev);
 
 		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("BonoboPropertyBagXML: Exception while reading XML buffer from stream!\n");
+			g_warning ("BonoboPropertyBagXML: Exception while reading XML buffer from stream!");
 			g_free (*docbuff);
 			CORBA_exception_free (&ev);
 			return FALSE;
@@ -316,7 +316,7 @@ bonobo_property_bag_xml_load_property (BonoboPropertyBag *pb,
 	
 	if (strcmp (prop_node->name, "property")) {
 		g_warning ("BonoboPropertyBagXML: Top-level property node name is not \"property\" -- "
-			   "malformatted XML buffer!\n");
+			   "malformatted XML buffer!");
 		return;
 	}
 
@@ -357,7 +357,7 @@ bonobo_property_bag_xml_depersist (BonoboPropertyBag *pb, const Bonobo_Stream st
 	 */
 	doc = xmlParseMemory (docbuff, docsz);
 	if (doc == NULL) {
-		g_warning ("BonoboPropertyBagXML: Could not parse XML buffer!\n");
+		g_warning ("BonoboPropertyBagXML: Could not parse XML buffer!");
 		g_free (docbuff);
 		return FALSE;
 	}

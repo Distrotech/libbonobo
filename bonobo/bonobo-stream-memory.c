@@ -148,7 +148,7 @@ mem_copy_to  (BonoboStream *stream,
 	/* create the output file */
 	fd_out = creat(dest, 0666);
 	if(fd_out == -1) {
-		g_warning ("unable to create output file\n");
+		g_warning ("unable to create output file");
 		return;
 	}
 	
@@ -161,7 +161,7 @@ mem_copy_to  (BonoboStream *stream,
 		*written = w;
 	else if (errno != EINTR) {
 		/* should probably do something to signal an error here */
-		g_warning ("ouput file write failed\n");
+		g_warning ("ouput file write failed");
 	}
 	
 	

@@ -46,7 +46,7 @@ impl_load (PortableServer_Servant servant,
 		result = (*class->load)(ps, stream);
 	}
 	if (result != 0){
-		g_warning ("FIXME: should report an exception\n");
+		g_warning ("FIXME: should report an exception");
 	}
 }
 
@@ -69,7 +69,7 @@ impl_save (PortableServer_Servant servant,
 	}
 	
 	if (result != 0){
-		g_warning ("FIXME: should report an exception\n");
+		g_warning ("FIXME: should report an exception");
 	}
 	ps->is_dirty = FALSE;
 }

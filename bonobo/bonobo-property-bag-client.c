@@ -258,7 +258,7 @@ bonobo_property_bag_client_persist (BonoboPropertyBagClient *pbc,
 	if (ev._major != CORBA_NO_EXCEPTION ||
 	    persist   == CORBA_OBJECT_NIL) {
 		g_warning ("BonoboPropertyBagClient: No PersistStream interface "
-			   "found on remote PropertyBag!\n");
+			   "found on remote PropertyBag!");
 		CORBA_exception_free (&ev);
 		return;
 	}
@@ -267,14 +267,14 @@ bonobo_property_bag_client_persist (BonoboPropertyBagClient *pbc,
 
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboPropertyBagClient: Exception caught while persisting "
-			   "remote PropertyBag!\n");
+			   "remote PropertyBag!");
 		CORBA_exception_free (&ev);
 		return;
 	}
 
 	Bonobo_Unknown_unref  (persist, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("BonoboPropertyBagClient: Exception caught while unrefing PersistStream!\n");
+		g_warning ("BonoboPropertyBagClient: Exception caught while unrefing PersistStream!");
 		CORBA_exception_free (&ev);
 		CORBA_exception_init (&ev);
 	}
@@ -282,7 +282,7 @@ bonobo_property_bag_client_persist (BonoboPropertyBagClient *pbc,
 	CORBA_Object_release (persist, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboPropertyBagClient: Exception caught while releasing "
-			   "PersistStream objref!\n");
+			   "PersistStream objref!");
 	}
 
 	CORBA_exception_free (&ev);
@@ -310,7 +310,7 @@ bonobo_property_bag_client_depersist (BonoboPropertyBagClient *pbc,
 	if (ev._major != CORBA_NO_EXCEPTION ||
 	    persist   == CORBA_OBJECT_NIL) {
 		g_warning ("BonoboPropertyBagClient: No PersistStream interface "
-			   "found on remote PropertyBag!\n");
+			   "found on remote PropertyBag!");
 		CORBA_exception_free (&ev);
 		return;
 	}
@@ -319,14 +319,14 @@ bonobo_property_bag_client_depersist (BonoboPropertyBagClient *pbc,
 
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboPropertyBagClient: Exception caught while persisting "
-			   "remote PropertyBag!\n");
+			   "remote PropertyBag!");
 		CORBA_exception_free (&ev);
 		return;
 	}
 
 	Bonobo_Unknown_unref  (persist, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("BonoboPropertyBagClient: Exception caught while unrefing PersistStream!\n");
+		g_warning ("BonoboPropertyBagClient: Exception caught while unrefing PersistStream!");
 		CORBA_exception_free (&ev);
 		CORBA_exception_init (&ev);
 	}
@@ -334,7 +334,7 @@ bonobo_property_bag_client_depersist (BonoboPropertyBagClient *pbc,
 	CORBA_Object_release (persist, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboPropertyBagClient: Exception caught while releasing "
-			   "PersistStream objref!\n");
+			   "PersistStream objref!");
 	}
 
 	CORBA_exception_free (&ev);

@@ -421,7 +421,7 @@ impl_Bonobo_PropertyBag_get_properties (PortableServer_Servant  servant,
 			& (prop_list->_buffer [i]), ev);
 
 		if (ev->_major != CORBA_NO_EXCEPTION) {
-			g_warning ("BonoboPropertyBag: Could not create property objref!\n");
+			g_warning ("BonoboPropertyBag: Could not create property objref!");
 			g_list_free (props);
 			CORBA_free (prop_list);
 			return CORBA_OBJECT_NIL;
@@ -603,7 +603,7 @@ bonobo_property_bag_destroy (GtkObject *object)
 	CORBA_exception_init (&ev);
 	PortableServer_POA_destroy (pb->priv->poa, TRUE, TRUE, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION)
-		g_warning ("bonobo_property_bag_destroy: Could not destroy POA.\n");
+		g_warning ("bonobo_property_bag_destroy: Could not destroy POA.");
 
 	CORBA_exception_free (&ev);
 

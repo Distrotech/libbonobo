@@ -156,7 +156,7 @@ bonobo_arg_from_gtk (BonoboArg *a, const GtkArg *arg)
 	case GTK_TYPE_BOXED:
 	case GTK_TYPE_FOREIGN:
 	default:
-		g_warning ("Unmapped gtk arg type %d\n", id);
+		g_warning ("Unmapped gtk arg type %d", id);
 		break;
 	}
 }
@@ -212,7 +212,7 @@ bonobo_arg_to_gtk (GtkArg *a, const BonoboArg *arg)
 		break;
 
 	default:
-		g_warning ("Unmapped corba arg type %d\n", id);
+		g_warning ("Unmapped corba arg type %d", id);
 		break;
 	}
 }

@@ -129,7 +129,7 @@ bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
 						   ev);
 
 		if (ev->_major != CORBA_NO_EXCEPTION) {
-			g_warning ("BonoboStreamClient: Exception writing to stream!\n");
+			g_warning ("BonoboStreamClient: Exception writing to stream!");
 			return bytes_written;
 		}
 	}
@@ -200,7 +200,7 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 
 		if (ev->_major != CORBA_NO_EXCEPTION) {
 			g_free (*str);
-			g_warning ("BonoboStreamClient: Exception while reading string!\n");
+			g_warning ("BonoboStreamClient: Exception while reading string!");
 			return -1;
 		}
 
