@@ -1,3 +1,14 @@
+2000-01-30  Martijn van Beers  <martijn@earthling.net>
+
+	Re-commit my 2000-01-25 patch:
+	* bonobo/idl/gnome-ui-handler.idl: replace MenuItemNotFound and
+	ToolbarItemNotFound exceptions by a more generic PathNotFound
+	exception. Also added a NotToplevelHandler exception, and made
+	all the applicable (almost all of them) use these exceptions.
+
+	* bonobo/bonobo/gnome-ui-handler.c: Make all the CORBA method
+	implementations emit the exceptions they can throw when needed
+
 2000-01-30  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-control.c (bonobo_control_class_init): Use
@@ -136,7 +147,6 @@
 
 2000-01-26  Martijn van Beers  <martijn@earthling.net>
 
->>>>>>> 1.278
 	* bonobo/bonobo/.cvsignore: s/bonobo/Bonobo/;
 	* bonobo/components/*/Makefile.am: added -I$(top_srcdir)/bonobo to
 	$INCLUDES, so it will compile without the lib headers installed
