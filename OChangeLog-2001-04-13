@@ -1,5 +1,21 @@
 2000-10-12  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-win.c (info_dump_fn): use the node; check the
+	widget's associated node for parity, beef up debugging power.
+	(widget_set_node): make more clear & efficient.
+	(status_build_placholder): impl.
+	(build_control): add assertion back.
+	(check_excess_widgets): impl.
+	(sync_generic_widgets): increment pos as we sync state.
+	(box_get_children_in_order): impl.
+	(update_status): upd.
+
+	* bonobo/bonobo-ui-xml.c (dump_internals): dump the node.
+
+	* bonobo/bonobo-win.c (status_build_item): don't leak name.
+
+2000-10-12  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (update_dockitem): use
 	bonobo_ui_toolbar_get_children.
 
