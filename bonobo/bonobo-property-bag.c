@@ -1279,6 +1279,31 @@ gnome_property_bag_init_corba_class (void)
 	gnome_property_bag_vepv.GNOME_PropertyBag_epv = gnome_property_bag_get_epv ();
 }
 
+typedef void (*GtkSignal_NONE__POINTER_POINTER_POINTER_POINTER) (GtkObject * object,
+								 gpointer arg1,
+								 gpointer arg2,
+								 gpointer arg3,
+								 gpointer arg4,
+								 gpointer user_data);
+
+static void
+gtk_marshal_NONE__POINTER_POINTER_POINTER_POINTER (GtkObject *object,
+						   GtkSignalFunc func,
+						   gpointer func_data,
+						   GtkArg *args)
+{
+	GtkSignal_NONE__POINTER_POINTER_POINTER_POINTER rfunc;
+	rfunc = (GtkSignal_NONE__POINTER_POINTER_POINTER_POINTER) func;
+
+	(*rfunc) (object,
+		  GTK_VALUE_POINTER (args[0]),
+		  GTK_VALUE_POINTER (args[1]),
+		  GTK_VALUE_POINTER (args[2]),
+		  GTK_VALUE_POINTER (args[3]),
+		  func_data);
+
+}
+
 static void
 gnome_property_bag_class_init (GnomePropertyBagClass *class)
 {
@@ -1291,8 +1316,9 @@ gnome_property_bag_class_init (GnomePropertyBagClass *class)
 				GTK_RUN_LAST,
 				object_class->type,
 				GTK_SIGNAL_OFFSET (GnomePropertyBagClass, value_changed),
-				gtk_marshal_NONE__POINTER_POINTER,
-				GTK_TYPE_NONE, 2,
+				gtk_marshal_NONE__POINTER_POINTER_POINTER_POINTER,
+				GTK_TYPE_NONE, 4,
+				GTK_TYPE_POINTER, GTK_TYPE_POINTER,
 				GTK_TYPE_POINTER, GTK_TYPE_POINTER);
 
 	gtk_object_class_add_signals (object_class, gnome_property_bag_signals, LAST_SIGNAL);

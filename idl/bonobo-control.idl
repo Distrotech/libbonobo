@@ -30,7 +30,11 @@ interface ControlFrame : GNOME::Unknown {
 
 	/**
 	 * activate_uri:
-	 * @uri: the uri we would like to get loaded
+	 * @uri: The uri we would like to get loaded.
+	 *
+	 * This is used by the containee when it needs
+	 * to ask the container to perform some action
+	 * with a given URI.
 	 *
 	 * The user has requested that the uri be loaded
 	 */

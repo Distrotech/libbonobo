@@ -1,3 +1,18 @@
+1999-12-03  Nat Friedman  <nat@helixcode.com>
+
+	* samples/controls/sample-control-container.c
+ 	(populate_property_list): Check the exception when we read the
+ 	name and when we get the value.
+
+	* idl/gnome-control.idl (ControlFrame): Updated the comment on
+ 	activate_uri to make sense.
+
+	* bonobo/gnome-property-bag.c
+ 	(gtk_marshal_NONE__POINTER_POINTER_POINTER_POINTER): New function
+ 	to marshal value_changed signals.
+	(gnome_property_bag_class_init): Fixed to use the new marshaler
+ 	and the correct number of arguments.
+
 Fri Dec  3 19:23:07 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* bonobo/gnome-ui-handler.c (impl_get_toplevel):

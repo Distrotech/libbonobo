@@ -14,9 +14,7 @@ Controls etc
   understand the problem currently.
 * Fix GnomeUIHandler crashing problem -- unknown.
 * Fix gill
-* Fix gnumeric
 * Fix gpdf
-* Fix ggv
 * doc new control/control frame functions
 * From gnome-client-site.c: 	CORBA_free (list);	/* FIXME: This does not make any sense at all to me */
 * system exception should be on gnome object client. sigh.

@@ -20,7 +20,7 @@ typedef struct {
 
 static CORBA_char *
 impl_GNOME_Property_get_name (PortableServer_Servant servant,
-			       CORBA_Environment *ev)
+			      CORBA_Environment *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 
@@ -29,7 +29,7 @@ impl_GNOME_Property_get_name (PortableServer_Servant servant,
 
 static CORBA_TypeCode
 impl_GNOME_Property_get_type (PortableServer_Servant servant,
-			       CORBA_Environment *ev)
+			      CORBA_Environment *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 	const char *type;
@@ -49,7 +49,7 @@ impl_GNOME_Property_get_type (PortableServer_Servant servant,
 
 static CORBA_any *
 impl_GNOME_Property_get_value (PortableServer_Servant servant,
-				CORBA_Environment *ev)
+			       CORBA_Environment *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 	const char *type;
@@ -63,8 +63,8 @@ impl_GNOME_Property_get_value (PortableServer_Servant servant,
 
 static void
 impl_GNOME_Property_set_value (PortableServer_Servant servant,
-				CORBA_any *any,
-				CORBA_Environment *ev)
+			       CORBA_any *any,
+			       CORBA_Environment *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 	gpointer new_value;
@@ -78,7 +78,7 @@ impl_GNOME_Property_set_value (PortableServer_Servant servant,
 
 static CORBA_any *
 impl_GNOME_Property_get_default (PortableServer_Servant servant,
-				  CORBA_Environment *ev)
+				 CORBA_Environment *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 	gpointer default_value;
@@ -90,9 +90,21 @@ impl_GNOME_Property_get_default (PortableServer_Servant servant,
 	return gnome_property_bag_value_to_any (pservant->pb, type, default_value);
 }
 
+static CORBA_boolean
+impl_GNOME_Property_use_default_optimization (PortableServer_Servant servant,
+					      CORBA_Environment *ev)
+{
+	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
+	GnomePropertyFlags flags;
+
+	flags = gnome_property_bag_get_flags (pservant->pb, pservant->property_name);
+
+	return (CORBA_boolean) ((flags & GNOME_PROPERTY_USE_DEFAULT_OPTIMIZATION) != 0);
+}
+
 static CORBA_char *
 impl_GNOME_Property_get_doc_string (PortableServer_Servant servant,
-				     CORBA_Environment *ev)
+				    CORBA_Environment *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 
@@ -102,7 +114,7 @@ impl_GNOME_Property_get_doc_string (PortableServer_Servant servant,
 
 static CORBA_boolean
 impl_GNOME_Property_is_stored (PortableServer_Servant servant,
-				CORBA_Environment *ev)
+			       CORBA_Environment *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 	GnomePropertyFlags flags;
@@ -114,7 +126,7 @@ impl_GNOME_Property_is_stored (PortableServer_Servant servant,
 
 static CORBA_boolean
 impl_GNOME_Property_is_read_only (PortableServer_Servant servant,
-				   CORBA_Environment *ev)
+				  CORBA_Environment *ev)
 {
 	GnomePropertyServant *pservant = (GnomePropertyServant *) servant;
 	GnomePropertyFlags flags;
@@ -135,14 +147,15 @@ gnome_property_get_epv (void)
 
 	epv = g_new0 (POA_GNOME_Property__epv, 1);
 
-	epv->get_name       = impl_GNOME_Property_get_name;
-	epv->get_type       = impl_GNOME_Property_get_type;
-	epv->get_value      = impl_GNOME_Property_get_value;
-	epv->set_value      = impl_GNOME_Property_set_value;
-	epv->get_default    = impl_GNOME_Property_get_default;
-	epv->get_doc_string = impl_GNOME_Property_get_doc_string;
-	epv->is_stored	    = impl_GNOME_Property_is_stored;
-	epv->is_read_only   = impl_GNOME_Property_is_read_only;
+	epv->get_name		      = impl_GNOME_Property_get_name;
+	epv->get_type		      = impl_GNOME_Property_get_type;
+	epv->get_value		      = impl_GNOME_Property_get_value;
+	epv->set_value		      = impl_GNOME_Property_set_value;
+	epv->get_default	      = impl_GNOME_Property_get_default;
+	epv->use_default_optimization = impl_GNOME_Property_use_default_optimization;
+	epv->get_doc_string	      = impl_GNOME_Property_get_doc_string;
+	epv->is_stored	 	      = impl_GNOME_Property_is_stored;
+	epv->is_read_only	      = impl_GNOME_Property_is_read_only;
 
 	return epv;
 }
@@ -164,7 +177,7 @@ gnome_property_get_vepv (void)
 
 PortableServer_Servant
 gnome_property_servant_new (PortableServer_POA adapter, GnomePropertyBag *pb,
-			     char *property_name)
+			    char *property_name)
 {
 	GnomePropertyServant	*servant;
 	CORBA_Environment        ev;

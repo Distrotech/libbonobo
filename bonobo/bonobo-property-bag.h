@@ -11,8 +11,9 @@ typedef struct _GnomePropertyBag GnomePropertyBag;
 
 
 typedef enum {
-	GNOME_PROPERTY_STORED    = 1<<0,
-	GNOME_PROPERTY_READ_ONLY = 2
+	GNOME_PROPERTY_STORED			= 1,
+	GNOME_PROPERTY_READ_ONLY		= 2,
+	GNOME_PROPERTY_USE_DEFAULT_OPTIMIZATION = 4
 } GnomePropertyFlags;
 
 #include <bonobo/gnome-property.h>
@@ -32,25 +33,25 @@ typedef struct {
 				 gpointer old_value, gpointer new_value);
 } GnomePropertyBagClass;
 
-GnomePropertyBag	 *gnome_property_bag_new	     (void);
+GnomePropertyBag	 *gnome_property_bag_new	    (void);
 		          				    
-GtkType		          gnome_property_bag_get_type	     (void);
+GtkType		          gnome_property_bag_get_type	    (void);
 
 /* Creating properties. */		   				      
-void		          gnome_property_bag_add	     (GnomePropertyBag *pb, char *name,
-							      char *type, gpointer value,
-							      gpointer default_value, char *docstring,
-							      GnomePropertyFlags flags);
+void		          gnome_property_bag_add	    (GnomePropertyBag *pb, char *name,
+							     char *type, gpointer value,
+							     gpointer default_value, char *docstring,
+							     GnomePropertyFlags flags);
 
 /* Modifying properties. */		   
 void		          gnome_property_bag_set_value      (GnomePropertyBag *pb, char *name,
-		          				      gpointer value);
+							     gpointer value);
 void		          gnome_property_bag_set_default    (GnomePropertyBag *pb, char *name,
-		          				      gpointer default_value);
+							     gpointer default_value);
 void		          gnome_property_bag_set_docstring  (GnomePropertyBag *pb, char *name,
-		          				      char *docstring);
+							     char *docstring);
 void		          gnome_property_bag_set_flags      (GnomePropertyBag *pb, char *name,
-							      GnomePropertyFlags flags);
+							     GnomePropertyFlags flags);
 
 /* Inspecting properties. */		   
 const char	         *gnome_property_bag_get_prop_type  (GnomePropertyBag *pb, const char *name);
@@ -65,22 +66,21 @@ gboolean		  gnome_property_bag_has_property   (GnomePropertyBag *pb, const char 
  * property values across CORBA.
  */
 CORBA_any		 *gnome_property_bag_value_to_any   (GnomePropertyBag *pb, const char *type,
-							      const gpointer value);
+							     const gpointer value);
 gpointer		  gnome_property_bag_any_to_value   (GnomePropertyBag *pb, const char *type,
-							      const CORBA_any *any);
+							     const CORBA_any *any);
 
 typedef CORBA_any *(*GnomePropertyBagValueMarshalerFn)	    (GnomePropertyBag *pb, const char *type,
-							      const gpointer value);
+							     const gpointer value);
 typedef gpointer   (*GnomePropertyBagValueDemarshalerFn)    (GnomePropertyBag *pb, const char *type,
-							      const CORBA_any *any);
+							     const CORBA_any *any);
 typedef void       (*GnomePropertyBagValueReleaserFn)       (GnomePropertyBag *pb, const char *type,
-							      gpointer value);
-
+							     gpointer value);
 /* Creating new property types. */
 void		          gnome_property_bag_create_type    (GnomePropertyBag *pb, char *type_name,
-							      GnomePropertyBagValueMarshalerFn   marshaler,
-							      GnomePropertyBagValueDemarshalerFn demarshaler,
-							      GnomePropertyBagValueReleaserFn    releaser);
+							     GnomePropertyBagValueMarshalerFn   marshaler,
+							     GnomePropertyBagValueDemarshalerFn demarshaler,
+							     GnomePropertyBagValueReleaserFn    releaser);
 
  
 POA_GNOME_PropertyBag__epv *gnome_property_bag_get_epv	    (void);
