@@ -1,6 +1,46 @@
-Bonobo 0.34
+Bonobo 0.35
 
-	* Fix bonobo-idl build (Me)
+	* BonoboXObject (Me)
+
+	* Canvas fixes (Mike Kestner)
+		* IDL cleanups
+		* Misc bug fixage
+
+	* UI handler
+		* Toolbar shadow preference fix (Federico Mena)
+		* Toolbar sizing problems (Ettore)
+		* Builtin toolbar customization GUI & popup (Me)
+		* UI configuration code (Me)
+		* UI Menu rebuild acceleration (Me)
+		* UI config Leak fixes (Iain)
+		* Toolbar resize bug (Cody Russell)
+		* Tearoff menu fixage (Me, Darin Adler)
+
+	* Monikers
+		* comparison method (Me)
+		* stream cache moniker (Dietmar)
+
+	* Misc new features
+		* Use a Stream to transfer print data (Me)
+		* Re-namespace IDL files (Me)
+		* Property bag fixage (Dietmar)
+		* Automatic shlib reference tracking (Dietmar)
+		* Profiling config support (Pavel Cisler)
+		* Zoomable interface expansion (Cody Russell)
+
+	* Misc bug fixing
+		* Leak fixes (Morten, Me)
+		* Method chaining bugs (Me)
+		* Depend on oaf >= 0.6.2 (Me)
+		* LibIDL checks for bonobo-idl (Me)
+		* Fix bonobo-idl build (Me)
+		* function signature fix (George Lebl)
+		* Stream moniker extender fix (Lutz Muller)
+		* Calm ORBit warnings (Maciej Stachowiak)
+
+	* Reference counting problems nailed (Owen, Me)
+
+	* Begginings of keyboard focus fixage (Federico)
 
 Bonobo 0.33
 
