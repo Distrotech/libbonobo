@@ -7,6 +7,7 @@ INCLUDES = \
 	-I. 						\
 	-I$(srcdir) -I$(top_srcdir) 			\
 	-I$(top_builddir)				\
+	-I$(top_builddir)/bonobo			\
 	-I$(builddir)					\
         -I$(includedir)                                 \
 	$(WARN_CFLAGS)					\
@@ -152,8 +153,8 @@ Bonobo_module_la_LIBADD = \
 Bonobo_module_la_LDFLAGS = \
 	-export-dynamic -module
 
-BUILT_SOURCES = \
-	bonobo-marshal.c		\
+marshal_sources = \
+	bonobo-marshal.c \
 	bonobo-marshal.h
 
 bonobo-marshal.h: bonobo-marshal.list
@@ -168,7 +169,8 @@ bonobo-marshal.c: bonobo-marshal.list bonobo-marshal.h
 	&& cp xgen-gmc bonobo-marshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
 
-EXTRA_DIST = libbonobo-2.0.pc.in bonobo-marshal.list
+EXTRA_DIST = libbonobo-2.0.pc.in bonobo-marshal.list $(marshal_sources)
+MAINTAINERCLEANFILES = $(marshal_sources)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libbonobo-2.0.pc

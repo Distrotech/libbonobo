@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-06-10 21:18+0200\n"
+"POT-Creation-Date: 2001-08-01 08:10+0100\n"
 "PO-Revision-Date: 2001-06-10 21:18+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -13,132 +13,158 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bonobo/bonobo-exception.c:162
+#: bonobo/bonobo-exception.c:153
 msgid "An unsupported action was attempted"
 msgstr "Skúsená nepodporovaná akcia"
 
-#: bonobo/bonobo-exception.c:165
+#: bonobo/bonobo-exception.c:156
 msgid "IO Error"
 msgstr "V/V chyba"
 
-#: bonobo/bonobo-exception.c:168
+#: bonobo/bonobo-exception.c:159
 msgid "Invalid argument value"
 msgstr "Nesprávna hodnota argumentu"
 
-#: bonobo/bonobo-exception.c:172
+#: bonobo/bonobo-exception.c:163
 msgid "Object not found"
 msgstr "Objekt nenájdený"
 
-#: bonobo/bonobo-exception.c:175
+#: bonobo/bonobo-exception.c:166
 msgid "Syntax error in object description"
 msgstr "Chyba syntaxe v popise objektu"
 
-#: bonobo/bonobo-exception.c:179
-msgid "The User canceled the save"
-msgstr "Pou¾ívateµ stornoval ukladanie"
-
-#: bonobo/bonobo-exception.c:184
+#: bonobo/bonobo-exception.c:171
 msgid "Cannot activate object from factory"
 msgstr "Nemô¾em aktivova» objekt z továrne"
 
-#: bonobo/bonobo-exception.c:189
+#: bonobo/bonobo-exception.c:176
 msgid "No permission to access stream"
 msgstr "Nie sú práva na prístup k prúdu"
 
-#: bonobo/bonobo-exception.c:192
+#: bonobo/bonobo-exception.c:179
 msgid "An unsupported stream action was attempted"
 msgstr "Skúsená nepodporovaná akcia prúdu"
 
-#: bonobo/bonobo-exception.c:195
+#: bonobo/bonobo-exception.c:182
 msgid "IO Error on stream"
 msgstr "V/V chyba v prúde"
 
-#: bonobo/bonobo-exception.c:199
+#: bonobo/bonobo-exception.c:186
 msgid "IO Error on storage"
 msgstr "V/V chyba v úlo¾isku"
 
-#: bonobo/bonobo-exception.c:202
+#: bonobo/bonobo-exception.c:189
 msgid "Name already exists in storage"
 msgstr "Meno u¾ existuje v úlo¾isku"
 
-#: bonobo/bonobo-exception.c:205
+#: bonobo/bonobo-exception.c:192
 msgid "Object not found in storage"
 msgstr "Objekt nebol nájdený v úlo¾isku"
 
-#: bonobo/bonobo-exception.c:208
+#: bonobo/bonobo-exception.c:195
 msgid "No permission to do operation on storage"
 msgstr "Nie sú práva na vykonanie operácie v úlo¾isku"
 
-#: bonobo/bonobo-exception.c:210
+#: bonobo/bonobo-exception.c:197
 msgid "An unsupported storage action was attempted"
 msgstr "Skúsená nepodporovaná akcia úlo¾iska"
 
-#: bonobo/bonobo-exception.c:212
+#: bonobo/bonobo-exception.c:199
 msgid "Object is not a stream"
 msgstr "Objekt nie je prúd"
 
-#: bonobo/bonobo-exception.c:215
+#: bonobo/bonobo-exception.c:202
 msgid "Object is not a storage"
 msgstr "Objekt nie je úlo¾isko"
 
-#: bonobo/bonobo-exception.c:218
+#: bonobo/bonobo-exception.c:205
 msgid "Storage is not empty"
 msgstr "Úlo¾isko nie je prázdne"
 
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:209
 msgid "malformed user interface XML description"
 msgstr "poru¹ený XML popis pou¾ívateµského rozhrania"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:212
 msgid "invalid path to XML user interface element"
 msgstr "neplatná cesta k prvku XML pou¾ívateµského rozhrania"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:216
 msgid "incorrect data type"
 msgstr "nesprávny typ dát"
 
-#: bonobo/bonobo-exception.c:232
+#: bonobo/bonobo-exception.c:219
 msgid "stream not found"
 msgstr "prúd nenájdený"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:223
 msgid "property not found"
 msgstr "vlastnos» nenájdená"
 
-#: bonobo/bonobo-exception.c:240
+#: bonobo/bonobo-exception.c:227
 msgid "Moniker interface cannot be found"
 msgstr "Rozhranie monikera nemô¾e by» nájdené"
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:230
 msgid "Moniker activation timed out"
 msgstr "Èasový limit aktivácie monikera vypr¹al"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:233
 msgid "Syntax error within moniker"
 msgstr "Chyba syntaxe v monikeri"
 
-#: bonobo/bonobo-exception.c:249
+#: bonobo/bonobo-exception.c:236
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker má neznámu predponu"
 
-#: bonobo/bonobo-exception.c:273
+#: bonobo/bonobo-exception.c:260
 msgid "Error checking error; no exception"
 msgstr "Chyba pri kontrole chyby; bez výnimky"
 
-#: bonobo/bonobo-object-directory.c:223
-msgid "No filename"
-msgstr "Bez názvu súboru"
+#: bonobo/bonobo-exception.c:269
+#, fuzzy
+msgid "General activation error with no description"
+msgstr "Chyba syntaxe v popise objektu"
 
-#: bonobo/bonobo-object-directory.c:229
-#, c-format
-msgid "unknown mime type for '%s'"
-msgstr "neznámy typ mime pre '%s'"
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+msgid "HTTP Moniker"
+msgstr ""
 
-#: bonobo/bonobo-object-directory.c:254
-#, c-format
-msgid "no handlers for mime type '%s'"
-msgstr "nie sú obslu¾né programy pre typ mime '%s'"
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+msgid "Standard Moniker factory"
+msgstr ""
 
-#: tests/test-storage.c:473
-msgid "Can not bonobo_init"
-msgstr "Nemô¾em bonobo_init"
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
+msgid "generic Oaf activation moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
+msgid "generic Oaf query moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+msgid "generic factory 'new' moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+msgid "generic item moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+msgid "stream MonikerExtender"
+msgstr ""
+
+#~ msgid "The User canceled the save"
+#~ msgstr "Pou¾ívateµ stornoval ukladanie"
+
+#~ msgid "No filename"
+#~ msgstr "Bez názvu súboru"
+
+#~ msgid "unknown mime type for '%s'"
+#~ msgstr "neznámy typ mime pre '%s'"
+
+#~ msgid "no handlers for mime type '%s'"
+#~ msgstr "nie sú obslu¾né programy pre typ mime '%s'"
+
+#~ msgid "Can not bonobo_init"
+#~ msgstr "Nemô¾em bonobo_init"

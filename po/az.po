@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.96.0\n"
-"POT-Creation-Date: 2001-06-07 17:21+0200\n"
+"POT-Creation-Date: 2001-08-01 08:10+0100\n"
 "PO-Revision-Date: 2000-06-19 20:30GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -15,135 +15,118 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
 
-#: bonobo/bonobo-exception.c:162
+#: bonobo/bonobo-exception.c:153
 msgid "An unsupported action was attempted"
 msgstr "Dəstəklənməyən əməliyyat sınandı"
 
-#: bonobo/bonobo-exception.c:165
+#: bonobo/bonobo-exception.c:156
 msgid "IO Error"
 msgstr "GÇ (IO) Xətası"
 
-#: bonobo/bonobo-exception.c:168
+#: bonobo/bonobo-exception.c:159
 msgid "Invalid argument value"
 msgstr "Hökmsüz arqument qiyməti"
 
-#: bonobo/bonobo-exception.c:172
+#: bonobo/bonobo-exception.c:163
 msgid "Object not found"
 msgstr "Cism tapılmadı"
 
-#: bonobo/bonobo-exception.c:175
+#: bonobo/bonobo-exception.c:166
 msgid "Syntax error in object description"
 msgstr "Cism izahında imla xətası var"
 
-#: bonobo/bonobo-exception.c:179
-msgid "The User canceled the save"
-msgstr "İstifadəçi qeydi dayandırdı"
-
-#: bonobo/bonobo-exception.c:184
+#: bonobo/bonobo-exception.c:171
 msgid "Cannot activate object from factory"
 msgstr "Cism vericisini işə sala bilmədim"
 
-#: bonobo/bonobo-exception.c:189
+#: bonobo/bonobo-exception.c:176
 msgid "No permission to access stream"
 msgstr "Axıma yetişmək üçün lazımi səlahiyyətlərə sahib deyilsən"
 
-#: bonobo/bonobo-exception.c:192
+#: bonobo/bonobo-exception.c:179
 msgid "An unsupported stream action was attempted"
 msgstr "Dəstəklənməyən bir axım əməliyyatı sınandı"
 
-#: bonobo/bonobo-exception.c:195
+#: bonobo/bonobo-exception.c:182
 msgid "IO Error on stream"
 msgstr "Axımda bir G/Ç xətası oldu"
 
-#: bonobo/bonobo-exception.c:199
+#: bonobo/bonobo-exception.c:186
 msgid "IO Error on storage"
 msgstr "Saxlamada bir G/Ç xətası oldu"
 
-#: bonobo/bonobo-exception.c:202
+#: bonobo/bonobo-exception.c:189
 msgid "Name already exists in storage"
 msgstr "Ad qeydlərdə onsuz da var"
 
-#: bonobo/bonobo-exception.c:205
+#: bonobo/bonobo-exception.c:192
 msgid "Object not found in storage"
 msgstr "Cism qeydlərdə tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:208
+#: bonobo/bonobo-exception.c:195
 msgid "No permission to do operation on storage"
 msgstr "Qeydlərdə dəyişiklik üçün səlahiyyətlər yoxdur"
 
-#: bonobo/bonobo-exception.c:210
+#: bonobo/bonobo-exception.c:197
 msgid "An unsupported storage action was attempted"
 msgstr "Dəstəklənməyən bir saxlama əməliyyatı sınandı"
 
-#: bonobo/bonobo-exception.c:212
+#: bonobo/bonobo-exception.c:199
 msgid "Object is not a stream"
 msgstr "Cism bir axım deyildir"
 
-#: bonobo/bonobo-exception.c:215
+#: bonobo/bonobo-exception.c:202
 msgid "Object is not a storage"
 msgstr "Cism bir saxlama deyildir"
 
-#: bonobo/bonobo-exception.c:218
+#: bonobo/bonobo-exception.c:205
 msgid "Storage is not empty"
 msgstr "Saxlama boş deyildir"
 
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:209
 msgid "malformed user interface XML description"
 msgstr "xətalı istifadəçi ara üzü XML izahı"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:212
 msgid "invalid path to XML user interface element"
 msgstr "xətalı XML istifadəçi ara üzü elementi"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:216
 msgid "incorrect data type"
 msgstr "hökmsüz mə'lumat növü"
 
-#: bonobo/bonobo-exception.c:232
+#: bonobo/bonobo-exception.c:219
 msgid "stream not found"
 msgstr "axım tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:223
 msgid "property not found"
 msgstr "mülkiyyət tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:240
+#: bonobo/bonobo-exception.c:227
 msgid "Moniker interface cannot be found"
 msgstr "Moniker ara üzü tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:230
 msgid "Moniker activation timed out"
 msgstr "Moniker fəallaşdırılması vaxtı doldu"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:233
 msgid "Syntax error within moniker"
 msgstr "Monikerdə sintaks xətası"
 
-#: bonobo/bonobo-exception.c:249
+#: bonobo/bonobo-exception.c:236
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker namə'lum moniker prefiksinə malikdir"
 
-#: bonobo/bonobo-exception.c:273
+#: bonobo/bonobo-exception.c:260
 msgid "Error checking error; no exception"
 msgstr "Xəta yoxlaması xətası; xüsusi hal yoxdur"
 
-#: bonobo/bonobo-generic-factory.h:94 bonobo/bonobo-generic-factory.h:98
-msgid "Could not initialize Bonobo"
-msgstr "Bonobonu başlada bilmədim"
-
-#: bonobo/bonobo-object-directory.c:223
-msgid "No filename"
-msgstr "Fayl adı yoxdur"
-
-#: bonobo/bonobo-object-directory.c:229
-#, c-format
-msgid "unknown mime type for '%s'"
-msgstr "'%s' üçün namə'lum mime növü"
-
-#: bonobo/bonobo-object-directory.c:254
-#, c-format
-msgid "no handlers for mime type '%s'"
-msgstr "'%s' mime növü üçün qulp yoxdur"
+#: bonobo/bonobo-exception.c:269
+#, fuzzy
+msgid "General activation error with no description"
+msgstr "Cism izahında imla xətası var"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
@@ -154,33 +137,45 @@ msgid "Standard Moniker factory"
 msgstr "Standart Moniker mərkəzi"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
-msgid "file MonikerExtender"
-msgstr "fayl MonikerExtender"
-
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
 msgid "generic Oaf activation moniker"
 msgstr "sıravi Oaf fəllaşdırma monikeri"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
 msgid "generic Oaf query moniker"
 msgstr "soravi Oaf istəmə monikeri"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
 msgid "generic factory 'new' moniker"
 msgstr "sıravi mərkəz 'yeni' monikeri"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
-msgid "generic file moniker"
-msgstr "sıravi fayl monikeri"
-
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:8
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
 msgid "generic item moniker"
 msgstr "sıravi üzv monikeri"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:9
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "axım MonikerExtender"
 
-#: tests/test-storage.c:473
-msgid "Can not bonobo_init"
-msgstr "Bonobo_initi başlada bilmədim"
+#~ msgid "The User canceled the save"
+#~ msgstr "İstifadəçi qeydi dayandırdı"
+
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "Bonobonu başlada bilmədim"
+
+#~ msgid "No filename"
+#~ msgstr "Fayl adı yoxdur"
+
+#~ msgid "unknown mime type for '%s'"
+#~ msgstr "'%s' üçün namə'lum mime növü"
+
+#~ msgid "no handlers for mime type '%s'"
+#~ msgstr "'%s' mime növü üçün qulp yoxdur"
+
+#~ msgid "file MonikerExtender"
+#~ msgstr "fayl MonikerExtender"
+
+#~ msgid "generic file moniker"
+#~ msgstr "sıravi fayl monikeri"
+
+#~ msgid "Can not bonobo_init"
+#~ msgstr "Bonobo_initi başlada bilmədim"

@@ -304,7 +304,7 @@ bonobo_value_get_unknown (GValue *value)
 		BONOBO_VALUE_HOLDS_UNKNOWN (value),
 		CORBA_OBJECT_NIL);
 
-	return bonobo_unknown_dup_ref (value->data[0].v_pointer);
+	return bonobo_object_dup_ref (value->data[0].v_pointer, NULL);
 }
 
 BonoboArg *

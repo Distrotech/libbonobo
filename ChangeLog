@@ -1,3 +1,7 @@
+2001-08-02  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-types.c (bonobo_value_get_unknown): fixup.
+
 2001-08-01  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-types.c (bonobo_value_get_unknown): ref.
