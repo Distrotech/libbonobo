@@ -1,3 +1,7 @@
+2003-07-26  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/api/faq.xml: Added link to the C language mapping spec.
+
 2003-07-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/test-activation/Makefile.am (TESTS_ENVIRONMENT): Define
