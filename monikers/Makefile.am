@@ -12,6 +12,7 @@ OAF_FILES =					\
 	Bonobo_Moniker_gzip.oafinfo		\
 	Bonobo_Moniker_http.oafinfo		\
 	Bonobo_Moniker_cache.oafinfo		\
+	Bonobo_Moniker_Extender_stream.oafinfo	\
 	Bonobo_Moniker_Extender_file.oafinfo
 
 Bonobo_Moniker_cache.oafinfo : Bonobo_Moniker_cache.oafinfo.in 
@@ -37,7 +38,8 @@ bin_PROGRAMS = 				\
 	std-moniker 			\
 	bonobo-moniker-gunzip 		\
 	bonobo-moniker-http		\
-	moniker-test		
+	bonobo-moniker-extender-stream	\
+	moniker-test
 
 # bonobo-moniker-untar.oafinfo
 
@@ -90,6 +92,12 @@ bonobo_moniker_http_SOURCES =		\
 	bonobo-moniker-http.h
 
 bonobo_moniker_http_LDADD =		\
+	$(moniker_ldadd)
+
+bonobo_moniker_extender_stream_SOURCES =	\
+	bonobo-moniker-extender-stream.c
+
+bonobo_moniker_extender_stream_LDADD =		\
 	$(moniker_ldadd)
 
 #moniker_control_test_SOURCES =		\

@@ -1,6 +1,24 @@
+2000-12-21  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/Makefile.am: Add bonobo-moniker-stream-extender again.
+
+	* monikers/bonobo-moniker-extender-stream.c (main): correct to
+	the right OAFIID.
+
 2000-12-20  Michael Meeks  <michael@helixcode.com>
 
+	* tests/test-container.c (do_add_canvas_cmd): re-size the canvas area.
+
+	* samples/compound-doc/sample-canvas-item.c (last_unref_cb),
+	(main): count objects, setup colormap & visual.
+	(item_factory): upd.
+	(make_hilbert, setup_item): copy from gnome-libs.
+
 	* bonobo/bonobo-canvas-component.c: Some renaming.
+	(impl_Bonobo_Canvas_Component_getUIComponent): impl.
+	(gcc_destroy): impl.
+	(bonobo_canvas_component_set_ui_component),
+	(bonobo_canvas_component_get_ui_component): impl.
 
 	* idl/bonobo-canvas.idl: add setUIContainer.
 

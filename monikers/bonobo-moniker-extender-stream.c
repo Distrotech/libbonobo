@@ -168,7 +168,7 @@ main (int argc, char *argv [])
 
 	CORBA_exception_init (&ev);
 
-        gnome_init_with_popt_table ("file-moniker-extender", "0.0", argc, argv,
+        gnome_init_with_popt_table ("bonobo-moniker-extender-stream", "0.0", argc, argv,
 				    oaf_popt_options, 0, NULL); 
 	orb = oaf_init (argc, argv);
 
@@ -176,7 +176,7 @@ main (int argc, char *argv [])
 		g_error (_("I could not initialize Bonobo"));
 
 	extender_factory = bonobo_generic_factory_new (
-		"OAFIID:Bonobo_MonikerExtender_fileFactory",
+		"OAFIID:Bonobo_MonikerExtender_streamFactory",
 		file_extender_factory, NULL);	
 
 	bonobo_main ();
