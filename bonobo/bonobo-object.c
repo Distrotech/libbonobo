@@ -99,7 +99,7 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 
 		if (o->ref_count >= 1) {
 			g_object_ref (o);
-			G_OBJECT_GET_CLASS (o)->dispose (o);
+			g_signal_emit (o, bonobo_object_signals [DESTROY], 0);
 			g_object_unref (o);
 		} else
 			g_warning ("Serious ref-counting error [%p]", o);
@@ -600,14 +600,6 @@ bonobo_object_epv_init (POA_Bonobo_Unknown__epv *epv)
 }
 
 static void
-bonobo_object_dispose (GObject *gobject)
-{
-	g_signal_emit (gobject, bonobo_object_signals [DESTROY], 0);
-
-	bonobo_object_parent_class->dispose (gobject);
-}
-
-static void
 bonobo_object_finalize_gobject (GObject *gobject)
 {
 	BonoboObject *object = (BonoboObject *) gobject;
@@ -619,6 +611,12 @@ bonobo_object_finalize_gobject (GObject *gobject)
 	g_free (object->priv);
 
 	bonobo_object_parent_class->finalize (gobject);
+}
+
+static void
+bonobo_object_dummy_destroy (BonoboObject *object)
+{
+	/* Just to make chaining possibly cleaner */
 }
 
 static void
@@ -649,7 +647,8 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 			      bonobo_marshal_VOID__POINTER_POINTER,
 			      G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
 
-	object_class->dispose = bonobo_object_dispose;
+	klass->destroy = bonobo_object_dummy_destroy;
+
 	object_class->finalize = bonobo_object_finalize_gobject;
 }
 

@@ -1,9 +1,20 @@
+2001-07-28  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_dummy_destroy): impl
+	to make chaining easier.
+	(bonobo_object_class_init): hook up.
+
 2001-07-27  Laszlo Peter  <laca@ireland.sun.com>
 
 	* bonobo/bonobo-arg.h: fix BONOBO_ARG_SET_GENERAL for non-GNU
 	C compilers.
 
 2001-07-27  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_destroy): fire
+	a DESTROY signal, not a glib internal dispose signal !
+	(bonobo_object_dispose): kill.
+	(bonobo_object_class_init): unhook dispose.
 
 	* bonobo/bonobo-moniker-util.c: update the table of builtin
 	monikers.
