@@ -1,5 +1,7 @@
 NULL=
 
+man_MANS = bonobo-activation-server.1
+
 bin_PROGRAMS=bonobo-activation-server activation-client
 
 INCLUDES=					\
