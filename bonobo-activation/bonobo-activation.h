@@ -47,12 +47,11 @@ extern "C" {
 
 #include <popt.h>
 
-#ifdef POPT_AUTOHELP
 extern struct poptOption oaf_popt_options[];
-#endif
-
+        
 extern const guint liboaf_major_version,
-	liboaf_minor_version, liboaf_micro_version;
+                   liboaf_minor_version, 
+                   liboaf_micro_version;
 extern const char liboaf_version[];
 
 #ifdef __cplusplus
