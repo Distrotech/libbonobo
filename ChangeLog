@@ -1,3 +1,10 @@
+2003-09-24  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_construct): If the env.var BONOBO_DEBUG
+	includes 'lifecycle' and bonobo is configured with --enable-debug,
+	then give a warning when registration fails saying why.
+
 2003-09-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/Makefile.am (EXTRA_DIST): Added Test_Generic_Factory.server.

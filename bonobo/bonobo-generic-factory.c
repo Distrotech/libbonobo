@@ -137,6 +137,21 @@ bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
 
 	if (ret != Bonobo_ACTIVATION_REG_SUCCESS) {
 		bonobo_object_unref (BONOBO_OBJECT (factory));
+#ifdef G_ENABLE_DEBUG
+		if (_bonobo_debug_flags & BONOBO_DEBUG_LIFECYCLE) {
+			const char *err;
+			switch (ret)
+			{
+			case Bonobo_ACTIVATION_REG_SUCCESS:        err = "success";        break;
+			case Bonobo_ACTIVATION_REG_NOT_LISTED:     err = "not listed";     break;
+			case Bonobo_ACTIVATION_REG_ALREADY_ACTIVE: err = "already active"; break;
+			case Bonobo_ACTIVATION_REG_ERROR: 	   err = "error";          break;
+			default: err = "(invalid error!)"; break;
+			}
+			g_warning ("'%s' factory registration failed: %s",
+				   act_iid, err);
+		}
+#endif
 		return NULL;
 	}
 
