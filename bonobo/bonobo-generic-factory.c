@@ -16,7 +16,7 @@
  */
 #include <config.h>
 #include <string.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
