@@ -198,7 +198,7 @@ main (int argc, char *argv[])
         } else if (obj) {
                 fprintf (stderr, "failed (obj) 1");
         } else {
-                fprintf (stderr, "passed 1 ('%s')", bonobo_activation_exception_id (&ev));
+                fprintf (stderr, "passed 1");
                 passed++;
         }
         if (test_oafd (&ev, "with no-type/loc server")) {
