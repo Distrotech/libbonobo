@@ -98,7 +98,7 @@ bonobo_item_handler_get_epv (void)
 }
 
 static void
-corba_container_class_init (void)
+corba_item_handler_class_init (void)
 {
 	/* Init the vepv */
 	item_handler_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
@@ -109,9 +109,9 @@ corba_container_class_init (void)
  * BonoboItemContainer class initialization routine
  */
 static void
-bonobo_item_container_class_init (BonoboItemHandlerClass *container_class)
+bonobo_item_handler_class_init (BonoboItemHandlerClass *container_class)
 {
-	corba_container_class_init ();
+	corba_item_handler_class_init ();
 }
 
 /**
@@ -135,7 +135,7 @@ bonobo_item_handler_construct (BonoboItemHandler  *handler,
 	g_return_val_if_fail (corba_handler != CORBA_OBJECT_NIL, NULL);
 	g_return_val_if_fail (BONOBO_IS_ITEM_HANDLER (handler), NULL);
 	
-	bonobo_object_construct (BONOBO_OBJECT (container), (CORBA_Object) corba_container);
+	bonobo_object_construct (BONOBO_OBJECT (handler), (CORBA_Object) corba_handler);
 
 	handler->get_object = get_object;
 	handler->enum_objects = enum_objects;
@@ -187,7 +187,7 @@ bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
 
 {
 	BonoboItemHandler *handler;
-	Bonobo_ItemHandler corba_handler;
+	Bonobo_ItemContainer corba_handler;
 
 	handler = gtk_type_new (bonobo_item_handler_get_type ());
 	corba_handler = create_bonobo_item_handler (BONOBO_OBJECT (handler));
@@ -198,7 +198,7 @@ bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
 	}
 	
 	return bonobo_item_handler_construct (
-		container, corba_container,
+		handler, corba_handler,
 		enum_objects, get_object, user_data);
 }
 
