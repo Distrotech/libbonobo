@@ -1,6 +1,11 @@
 2002-10-28  Michael Meeks  <michael@ximian.com>
 
-	* bonobo/bonobo-property-bag-client.c
+	* bonobo/bonobo-object.c
+	(bonobo_object_query_remote): helper wrapper
+	for queryInterface.
+	(get_unknown_unref_imethod): impl.
+	(bonobo_object_release_unref): make these
+	unrefs asynchronous for more speed.
 
 	* tests/test-properties-client.c
 	(create_bag_client): add test.
