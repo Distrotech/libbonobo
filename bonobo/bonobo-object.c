@@ -850,6 +850,9 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        BonoboAggregateObject *oldao, *ao;
        GList *l;
 
+       g_return_if_fail (object->priv->ao->ref_count > 0);
+       g_return_if_fail (newobj->priv->ao->ref_count > 0);
+
        if (object->priv->ao == newobj->priv->ao)
                return;
 
@@ -867,6 +870,7 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 
        ao = object->priv->ao;
        oldao = newobj->priv->ao;
+       ao->ref_count = ao->ref_count + oldao->ref_count - 1;
 
        /* Merge the two AggregateObject lists */
        for (l = oldao->objs; l; l = l->next) {

@@ -1,3 +1,8 @@
+2001-01-04  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_add_interface): compute a
+	new reference count if we aggregate to objects.
+
 2001-01-04  Michael Meeks  <michael@helixcode.com>
 
 	* idl/bonobo-context.idl: include bonobo-storage.idl not the
