@@ -24,6 +24,7 @@
 
 #include <config.h>
 
+#include <string.h>
 #include <bonobo-activation/bonobo-activation-async.h>
 #include <bonobo-activation/bonobo-activation-async-callback.h>
 #include <bonobo-activation/bonobo-activation-i18n.h>
@@ -115,9 +116,16 @@ impl_Bonobo_ActivationCallback_report_activation_succeeded (
 	}
 
         if (retval == CORBA_OBJECT_NIL) {
-                servant->callback (CORBA_OBJECT_NIL,
-                                   _("No server corresponding to your query"), 
-                                   servant->user_data);
+                const char * msg = _("No server corresponding to your query");
+
+                if ((ev) && (ev)->_major != CORBA_NO_EXCEPTION &&
+                    !strcmp(ev->_id, "IDL:Bonobo/GeneralError:1.0")) {
+                        Bonobo_GeneralError *err = ev->_any._value;
+
+                        if (err && err->description)
+                                msg = err->description;
+                }
+                servant->callback (CORBA_OBJECT_NIL, msg, servant->user_data);
         } else {
                 servant->callback (retval, NULL, servant->user_data);
         }
