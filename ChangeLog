@@ -1,3 +1,52 @@
+2003-06-09  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-running-context.c
+	(bonobo_running_context_add_object): Set emitted_last_unref =
+	FALSE, just in case.
+
+	* doc/api/tmpl/bonobo-generic-factory.sgm: Documented
+	BONOBO_ACTIVATION_FACTORY_TIMEOUT.
+
+	* doc/api/libbonobo-sections.txt: Added
+	bonobo_generic_factory_main_timeout and
+	BONOBO_ACTIVATION_FACTORY_TIMEOUT.
+
+	* tests/Makefile.am: Build and declare generic factory regression
+	test.
+
+	* tests/models/generic-factory.output: generic factory client
+	model output.
+
+	* tests/models/generic-factory.output: generic factory server
+	model output.
+	
+	* tests/test-generic-factory.sh.in: Regression test script for
+	generic factory.
+
+	* tests/generic-factory.c: generic factory regression test
+	server.
+
+	* tests/test-generic-factory.c: generic factory regression test
+	client.
+
+	* tests/Test_Generic_Factory.server.in: .server file for
+	regression test of generic factory.
+
+	* bonobo/bonobo-generic-factory.h (BONOBO_ACTIVATION_FACTORY_TIMEOUT):
+	New generic factory macro that accepts an extra quit_timeout argument.
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_main):
+	Call bonobo_generic_factory_main_timeout with default 2 seconds
+	timeout.
+	(bonobo_generic_factory_main_timeout): New generic factory main
+	mainloop with startup timeout (if somehow the server "forgets" to
+	request an object after one minute) and quit timeout, to avoid
+	quitting immediately after all objects have been released.
+	(bonobo_generic_factory_init): Initialize
+	factory->priv->last_unref_timeout to the default value.
+	(impl_Bonobo_ObjectFactory_createObject): Cancel any pending
+	timeouts.
+
 2003-06-09  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-main.c (bonobo_poa_get_threaded):

@@ -1,0 +1,44 @@
+#! /bin/sh
+
+# Warning: this test requires bonobo-activation-server to be already installed.
+
+# job control must be active
+set -m
+
+ln -s $(pwd)/Test_Generic_Factory.server @bonoboserverdir@
+
+echo "Starting factory"
+./generic-factory > generic-factory.output &
+sleep 1
+
+echo "Starting client"
+./test-generic-factory > test-generic-factory.output
+
+echo "Waiting for factory to terminate; Please hold on 1.0 second, otherwise hit Ctrl-C."
+wait %1
+
+rm -f @bonoboserverdir@/Test_Generic_Factory.server
+
+echo "Comparing factory output with model..."
+if diff -u models/generic-factory.output generic-factory.output; then
+    echo "...OK"
+    rm -f generic-factory.output
+else
+    echo "...DIFFERENT!"
+    rm -f generic-factory.output
+    rm -f test-generic-factory.output
+    exit 1;
+fi
+
+echo "Comparing client output with model..."
+if diff -u models/test-generic-factory.output test-generic-factory.output; then
+    echo "...OK"
+    rm -f test-generic-factory.output
+else
+    echo "...DIFFERENT!"
+    rm -f test-generic-factory.output
+    exit 1;
+fi
+
+exit 0
+

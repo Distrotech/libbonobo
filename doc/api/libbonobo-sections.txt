@@ -31,10 +31,12 @@ bonobo_generic_factory_new_closure
 bonobo_generic_factory_construct
 bonobo_generic_factory_construct_noreg
 bonobo_generic_factory_main
+bonobo_generic_factory_main_timeout
 BONOBO_FACTORY_INIT
 BONOBO_OAF_FACTORY
 BONOBO_OAF_FACTORY_MULTI
 BONOBO_ACTIVATION_FACTORY
+BONOBO_ACTIVATION_FACTORY_TIMEOUT
 <SUBSECTION Standard>
 BONOBO_GENERIC_FACTORY
 BONOBO_IS_GENERIC_FACTORY

@@ -5,7 +5,6 @@
 #include <string.h>
 #include <libbonobo.h>
 #include <orbit/poa/poa.h>
-#include <bonobo/bonobo-foreign-object.h>
 
 #define GENERAL_ERROR_MESSAGE "Hello World"
 

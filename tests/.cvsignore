@@ -16,3 +16,8 @@ test-event-source
 test-object
 test-storage-mem
 test-stream-mem
+Test_Generic_Factory.server
+generic-factory
+test-generic-factory
+test-generic-factory.sh
+

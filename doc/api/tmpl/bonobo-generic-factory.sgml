@@ -138,6 +138,18 @@ Type of function that is called when it's time for the factory to create a new i
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_generic_factory_main_timeout ##### -->
+<para>
+
+</para>
+
+@act_iid: 
+@factory_cb: 
+@user_data: 
+@quit_timeout: 
+@Returns: 
+
+
 <!-- ##### MACRO BONOBO_FACTORY_INIT ##### -->
 <para>
 Macro that expands to the code need to initialize an exe factory.  Should be placed at the beginning of the main() function.
@@ -176,8 +188,8 @@ Deprecated; see BONOBO_ACTIVATION_FACTORY().
 <!-- ##### MACRO BONOBO_ACTIVATION_FACTORY ##### -->
 
 <para>
-  Macro that includes all boiler-plate code necessary to create an exe
-  type factory, including a main() function and a generic factory.
+    Macro that includes all boiler-plate code necessary to create an exe
+    type factory, including a main() function and a generic factory.
 </para>
 
 @oafiid: The factory's OAFIID
@@ -185,5 +197,18 @@ Deprecated; see BONOBO_ACTIVATION_FACTORY().
 @version: Version string of the factory program
 @callback: Function (#BonoboFactoryCallback) responsible for intantiating components
 @data: Additional data to be passed to the callback
+
+
+<!-- ##### MACRO BONOBO_ACTIVATION_FACTORY_TIMEOUT ##### -->
+<para>
+    Like BONOBO_ACTIVATION_FACTORY(), but has an extra @quit_timeout argument.
+</para>
+
+@oafiid: The factory's OAFIID
+@descr: Description of the factory
+@version: Version string of the factory program
+@callback: Function (#BonoboFactoryCallback) responsible for intantiating components
+@data: Additional data to be passed to the callback
+@quit_timeout: Ammount of time to wait (in milliseconds) before deciding to quit the factory.  A larger value prevents frequent respawning of a new factory process when there are many consecutive one-time requests, so that your factory appears to start faster after the first time.
 
 

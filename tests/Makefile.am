@@ -8,7 +8,9 @@ noinst_PROGRAMS =		\
 	test-event-source	\
 	test-object		\
 	test-stream-mem		\
-	test-storage-mem
+	test-storage-mem	\
+	generic-factory		\
+	test-generic-factory
 
 INCLUDES =	\
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
@@ -41,5 +43,19 @@ TESTS_ENVIRONMENT =					\
 	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"
 
 TESTS = test-moniker test-event-source test-object \
-	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem
-EXTRA_DIST = test-properties.sh
+	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem \
+	test-generic-factory test-generic-factory.sh
+EXTRA_DIST = test-properties.sh Test_Generic_Server.server.in test-generic-factory.sh.in
+
+noinst_DATA=Test_Generic_Factory.server
+
+Test_Generic_Factory.server: Test_Generic_Factory.server.in
+	sed -e "s|\@builddir\@|$(shell pwd)|"  $< > $@
+
+test-generic-factory.sh: test-generic-factory.sh.in
+	sed -e "s|\@bonoboserverdir\@|$(libdir)/bonobo/servers|"  $< > $@
+
+noinst_SCRIPTS=test-generic-factory.sh
+
+CLEANFILES=Test_Generic_Factory.server test-generic-factory.sh
+

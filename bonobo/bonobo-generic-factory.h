@@ -67,6 +67,11 @@ void                  bonobo_generic_factory_construct_noreg (BonoboGenericFacto
 int                   bonobo_generic_factory_main	     (const char           *act_iid,
 							      BonoboFactoryCallback factory_cb,
 							      gpointer              user_data);
+int                   bonobo_generic_factory_main_timeout    (const char           *act_iid,
+							      BonoboFactoryCallback factory_cb,
+							      gpointer              user_data,
+							      guint                 quit_timeout);
+
 
 #if defined (__BONOBO_UI_MAIN_H__) || defined (LIBBONOBOUI_H)
 #define BONOBO_FACTORY_INIT(descr, version, argcp, argv)			\
@@ -89,6 +94,14 @@ int main (int argc, char *argv [])						\
 	BONOBO_FACTORY_INIT (descr, version, &argc, argv);			\
 									        \
 	return bonobo_generic_factory_main (oafiid, callback, data);		\
+}                                                                             
+
+#define BONOBO_ACTIVATION_FACTORY_TIMEOUT(oafiid, descr, version, callback, data, quit_timeout)	\
+int main (int argc, char *argv [])								\
+{												\
+	BONOBO_FACTORY_INIT (descr, version, &argc, argv);					\
+												\
+	return bonobo_generic_factory_main_timeout (oafiid, callback, data, quit_timeout);	\
 }                                                                             
 
 G_END_DECLS

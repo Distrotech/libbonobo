@@ -14,15 +14,6 @@ Bonobo initialization.
 
 </para>
 
-<!-- ##### ENUM BonoboThreadHint ##### -->
-<para>
-
-</para>
-
-@BONOBO_POA_ALL_AT_IDLE: 
-@BONOBO_POA_ONEWAY_AT_IDLE: 
-@BONOBO_POA_THREAD_PER_REQUEST: 
-
 <!-- ##### FUNCTION bonobo_is_initialized ##### -->
 <para>
 

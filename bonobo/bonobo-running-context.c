@@ -130,7 +130,6 @@ check_empty (void)
 	    (g_hash_table_size (ri->keys) == 0)) {
 
 		ri->emitted_last_unref = TRUE;
-
 		g_signal_emit (G_OBJECT (bonobo_running_context),
 			       signals [LAST_UNREF], 0);
 
@@ -154,6 +153,7 @@ bonobo_running_context_add_object (CORBA_Object object)
 	{
 		BonoboRunningInfo *ri = get_running_info (TRUE);
 
+		ri->emitted_last_unref = FALSE;
 		g_hash_table_insert (ri->objects, object, object);
 	}
 }

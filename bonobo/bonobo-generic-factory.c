@@ -28,13 +28,21 @@
 
 #include <bonobo/bonobo-types.h>
 
-struct _BonoboGenericFactoryPrivate {	
+#define DEFAULT_LAST_UNREF_TIMEOUT 	2000
+#define STARTUP_TIMEOUT 		60000
+
+struct _BonoboGenericFactoryPrivate {
 	/* The function factory */
 	GClosure *factory_closure;
 	/* The component_id for this generic factory */
 	char     *act_iid;
 	/* Whether we should register with the activation server */
 	gboolean  noreg;
+	  /* Startup timeout when no object is ever requested */
+	guint startup_timeout_id;
+	  /* Timeout after last unref before quitting */
+	guint last_unref_timeout_id;
+	guint last_unref_timeout; /* miliseconds */
 };
 
 static GObjectClass *bonobo_generic_factory_parent_class = NULL;
@@ -51,6 +59,21 @@ impl_Bonobo_ObjectFactory_createObject (PortableServer_Servant   servant,
 	factory = BONOBO_GENERIC_FACTORY (bonobo_object (servant));
 
 	class = BONOBO_GENERIC_FACTORY_CLASS (G_OBJECT_GET_CLASS (factory));
+
+	  /* Cancel the startup timeout, if active. */
+	if (factory->priv->startup_timeout_id) {
+	    g_source_destroy (g_main_context_find_source_by_id
+			      (NULL, factory->priv->startup_timeout_id));
+	    factory->priv->startup_timeout_id = 0;
+	}
+
+	  /* Cancel the last unref timeout, if active. */
+	if (factory->priv->last_unref_timeout_id) {
+	    g_source_destroy (g_main_context_find_source_by_id
+			      (NULL, factory->priv->last_unref_timeout_id));
+	    factory->priv->last_unref_timeout_id = 0;
+	}
+
 	object = (*class->new_generic) (factory, obj_act_iid);
 	factory = NULL; /* unreffed by new_generic in the shlib case */
 
@@ -239,6 +262,7 @@ bonobo_generic_factory_init (GObject *object)
 
 	factory->priv = g_new0 (BonoboGenericFactoryPrivate, 1);
 	factory->priv->noreg = FALSE;
+	factory->priv->last_unref_timeout = DEFAULT_LAST_UNREF_TIMEOUT;
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory, 
@@ -247,6 +271,29 @@ BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory,
 		       bonobo_generic_factory)
 
 
+static gboolean
+startup_timeout (gpointer data)
+{
+	bonobo_main_quit ();
+	return FALSE;
+}
+
+static gboolean
+last_unref_timeout (gpointer data)
+{
+	bonobo_main_quit ();
+	return FALSE;
+}
+
+static void
+last_unref_cb (BonoboRunningContext *context, BonoboGenericFactory *factory)
+{
+	g_return_if_fail (!factory->priv->last_unref_timeout_id);
+	g_return_if_fail (BONOBO_IS_GENERIC_FACTORY (factory));
+	factory->priv->last_unref_timeout_id = g_timeout_add
+		(factory->priv->last_unref_timeout, last_unref_timeout, factory);
+}
+
 /**
  * bonobo_generic_factory_main:
  * @act_iid: the oaf iid of the factory
@@ -254,7 +301,7 @@ BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory,
  * @user_data: a user data pointer
  * 
  *    A Generic 'main' routine so we don't stick a load of code
- * inside a public macro.
+ * inside a public macro. See also bonobo_generic_factory_main_timeout().
  * 
  * Return value: 0 on success, 1 on failure.
  **/
@@ -263,22 +310,57 @@ bonobo_generic_factory_main (const char           *act_iid,
 			     BonoboFactoryCallback factory_cb,
 			     gpointer              user_data)
 {
+	return bonobo_generic_factory_main_timeout
+		(act_iid, factory_cb, user_data, DEFAULT_LAST_UNREF_TIMEOUT);
+}
+
+/**
+ * bonobo_generic_factory_main_timeout:
+ * @act_iid: the oaf iid of the factory
+ * @factory_cb: the factory callback
+ * @user_data: a user data pointer
+ * @quit_timeout: ammount of time to wait (miliseconds) after all
+ * objects have been released before quitting the main loop.
+ * 
+ *    A Generic 'main' routine so we don't stick a load of code
+ * inside a public macro.
+ * 
+ * Return value: 0 on success, 1 on failure.
+ **/
+int
+bonobo_generic_factory_main_timeout (const char           *act_iid,
+				     BonoboFactoryCallback factory_cb,
+				     gpointer              user_data,
+				     guint                 quit_timeout)
+{
 	BonoboGenericFactory *factory;
 
 	factory = bonobo_generic_factory_new (
 		act_iid, factory_cb, user_data);
 
-	/* FIXME: we need a nice timeout here so if we
-	 * havn't created anything within a few minutes
-	 * we just quit */
-
 	if (factory) {
-		bonobo_running_context_auto_exit_unref (
-			BONOBO_OBJECT (factory));
-	
+		BonoboObject *context;
+		guint         signal;
+
+		factory->priv->last_unref_timeout = quit_timeout;
+		context = bonobo_running_context_new ();
+		signal = g_signal_connect (G_OBJECT (context), "last-unref",
+					   G_CALLBACK (last_unref_cb), factory);
+		bonobo_running_context_ignore_object (BONOBO_OBJREF (factory));
+
+		  /* Create timeout here so if we haven't created anything
+		   * within a few minutes we just quit */
+		factory->priv->startup_timeout_id = g_timeout_add
+			(STARTUP_TIMEOUT, startup_timeout, factory);
+
 		bonobo_main ();
+
+		g_signal_handler_disconnect (G_OBJECT (context), signal);
+		bonobo_object_unref (BONOBO_OBJECT (factory));
+		bonobo_object_unref (context);
 
 		return bonobo_debug_shutdown ();
 	} else
 		return 1;
 }
+
