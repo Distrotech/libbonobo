@@ -1,8 +1,17 @@
+2000-07-18  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-plug.c (bonobo_plug_key_press_event): Forward unhandled
+	events on to socket.
+
 2000-07-17  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo-idl/main.c (generate_get_epv): Fix the _get_epv return
-	value. 
-	(generate_h_protos): ditto.
+	value.  (generate_h_protos): ditto.
+
+2000-07-15  Michael Meeks  <michael@helixcode.com>
+
+	* idl/bonobo-persist.idl: add a comment about the save method to save others my
+	idiotic mental wandering.
 
 2000-07-15  Michael Meeks  <michael@helixcode.com>
 

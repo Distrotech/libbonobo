@@ -155,9 +155,14 @@ module Bonobo {
 		 * @type: the MIME content type to save the data in,
 		 * or "" if any type is acceptable.
 		 *
+		 * If no exception was thrown the data in the stream has
+		 * the requested content type; if no type was requested
+		 * the first entry from get_content_types is returned.
+		 * Hence no return value is needed.
+		 * 
 		 * Saves the state of the object to the @stream
 		 */
-/*		ContentType */ void save (in Bonobo::Stream stream, in ContentType type)
+		void save (in Bonobo::Stream stream, in ContentType type)
 			raises (WrongDataType, NotSupported);
 
 		/**
@@ -170,10 +175,3 @@ module Bonobo {
 	};
 
 };
-	
-
-
-
-
-
-
