@@ -1,5 +1,14 @@
 2001-02-19  Michael Meeks  <michael@ximian.com>
 
+	* doc/api/bonobo-api.sgml: remove dup. of bonobo-moniker.
+
+	* doc/api/bonobo-sections.txt: slay *_get_epv *_corba_object_create
+	except on zoom & stream.
+
+	* doc/api: remove bonobo-property-types - it died years ago.
+
+2001-02-19  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-ui-engine-config.c (bonobo_ui_engine_config_construct):
 	remove bogus config hydration.
 
