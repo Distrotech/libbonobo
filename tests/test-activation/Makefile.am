@@ -23,9 +23,6 @@ bonobo_activation_test_SOURCES=		\
 	empty-common.c			\
 	empty.h				\
 	empty-stubs.c			\
-	plugin-common.c			\
-	plugin.h			\
-	plugin-stubs.c			\
 	$(NULL)
 
 # Horrible, digusting and atrocious hack to
@@ -39,6 +36,7 @@ libtest_plugin_la_SOURCES=		\
 	plugin.h			\
 	plugin-common.c			\
 	plugin-skels.c			\
+	plugin-stubs.c			\
 	bonobo-activation-testplugin.c	\
 	$(NULL)
 
@@ -81,7 +79,8 @@ INCLUDES= \
 	-I$(top_builddir)		\
 	-DG_DISABLE_DEPRECATED $(LIBBONOBO_CFLAGS)
 
-LDADD=../../bonobo-activation/libbonobo-activation.la $(LIBBONOBO_LIBS)
+LDADD = ../../bonobo-activation/libbonobo-activation.la \
+	$(LIBBONOBO_LIBS) libtest-plugin.la
 
 serverfiles=empty.server broken.server plugin.server
 

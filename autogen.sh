@@ -5,7 +5,7 @@ srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
 PKG_NAME="libbonobo"
-REQUIRED_AUTOMAKE_VERSION=1.4
+REQUIRED_AUTOMAKE_VERSION=1.6
 
 (test -f $srcdir/configure.in \
   && test -f $srcdir/autogen.sh \

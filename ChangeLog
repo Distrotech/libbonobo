@@ -1,3 +1,12 @@
+2003-04-08  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-activation/Makefile.am:
+	don't link objects into both binaries and
+	libraries in the same directory.
+
+	* autogen.sh, bonobo/Makefile.am, doc/api/Makefile.am:
+	switch back to automake-1.6
+
 2003-04-07  Carlos Perelló Marín <carlos@gome.org>
 
 	* configure.in (ALL_LINGUAS): Added ga, hi, wa and yi from
