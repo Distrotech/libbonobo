@@ -184,6 +184,9 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NotStorage))
 		return g_strdup (_("Object is not a storage"));
 
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Storage_NotEmpty))
+		return g_strdup (_("Storage is not empty"));
+
 	/* Bonobo::UIContainer */
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_UIContainer_MalFormedXML))
 		return g_strdup (_("malformed user interface XML description"));
