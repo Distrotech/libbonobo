@@ -1,3 +1,18 @@
+2000-11-29  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: Un-comment the gnome-vfs check.
+
+	* storage-modules/bonobo-storage-vfs.c (fs_commit): impl.
+	(fs_revert): impl. (vfs_create_storage): kill.
+	(init_storage_plugin): impl.
+	(vfs_copy_to): kill. (vfs_list_contents): upd.
+	(bonobo_storage_vfs_construct): kill.
+
+	* storage-modules/bonobo-stream-vfs.c (fs_close): remove.
+	(fs_revert): impl. (fs_commit): upd. (fs_eos): kill.
+	(bonobo_stream_vfs_construct): kill.
+	(bonobo_stream_vfs_create): kill.
+
 2000-11-28  Iain Holmes  <iain@helixcode.com>
 
 	* storage-modules/bonobo-storage-fs.c (fs_list_contents): Don't
