@@ -1,5 +1,13 @@
 module Bonobo {
+	interface UIContainer;
+
 	interface UIComponent : Bonobo::Unknown {
+
+		void set_container   (in UIContainer container);
+		void unset_container ();
+
+		attribute string name;
+
 		enum EventType {
 			ACTIVATED,
 			REMOVED,

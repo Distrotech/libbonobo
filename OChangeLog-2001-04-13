@@ -1,3 +1,24 @@
+2000-10-09  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-util.c: s/descr/tip/
+
+	* doc/ui-xml.txt: upd.
+
+	* bonobo/bonobo-win.c (toolbar_build_widget): upd.
+
+	* bonobo/ui.xml: add comment; deferring to std-ui.xml
+
+	* doc/std-ui.xml: cmd/widgitify
+
+	* bonobo/bonobo-win.c (setup_root_widgets): add do show / hide.
+	(remove_fn): hide the global menu dock item as it is removed,
+	comment out; serious flicker causer; just use the "hidden"
+	attribute.
+
+2000-10-08  Mathieu Lacage  <mathieu@eazel.com>
+	
+	* bonobo/bonobo-win.c (update_menus): add do show / hide.
+
 2000-10-09  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo/bonobo-control.c: 
@@ -30,6 +51,44 @@
 	make bonobo-text-plain exit when it should.
 
 2000-10-09  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (do_strip): make safer.
+	(bonobo_ui_xml_strip): make safe.
+
+	* bonobo/bonobo-win.c (win_components_dump): impl.
+	(bonobo_win_dump): use it.
+	(bonobo_win_xml_merge_tree): always 'strip' the tree, killing some
+	nasty floating doc node bugs.
+	
+	* bonobo/bonobo-win.c (toolbar_sync_state, put_hint_in_statusbar)
+	change 'descr' -> 'tip'
+	s/get_cmd_state/get_cmd_node/
+	(get_cmd_node): change semantics; fix leak.
+	(set_cmd_dirty): upd.
+	(get_cmd_attr): impl.
+	(get_cmd_pixbuf): impl.
+	(toolbar_sync_state): use get_cmd_attr, make cmd/widget complete, add
+	warning for offenders.
+	(menu_sync_state): ditto.
+	(move_dirt_cmd_to_widget, dirty_by_cmd): make state set by cmd work.
+	(update_widgets): call it.
+	(set_cmd_state): rename to
+	(set_cmd_attr): this and simplify.
+	(menu_toggle_emit_ui_event): use it
+	(win_item_emit_ui_event): use it.
+	(get_cmd_node): transfer the CORBA id across as we create.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_set_container):
+	do the register once here.
+	(impl_xml_rm): remove de-registration hack.
+	(bonobo_ui_component_unset_container): move code here.
+
+	* idl/bonobo-ui.idl: add set_container / unset_container & name
+	attribute; no impl yet.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_set_name),
+	(bonobo_ui_component_get_name): impl.
+	(impl_xml_set): split out register_component
 
 	* bonobo/bonobo-control-frame.[ch]: Remove undo signal.
 
