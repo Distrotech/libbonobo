@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo cvs\n"
 "POT-Creation-Date: 2003-07-04 13:33+0200\n"
-"PO-Revision-Date: 2003-01-03 11:02+0100\n"
-"Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
+"PO-Revision-Date: 2003-07-09 13:37+0200\n"
+"Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,11 +189,11 @@ msgstr "A(z) `%s' shlib nem tartalmazta a következőt: `%s'"
 
 #: bonobo/bonobo-object.c:910
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Egyéni CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -249,7 +249,7 @@ msgstr "Nincs jogosultságod művelet végzéséhez a storage-on"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr "Nem támogatott 'storage action'-t probáltál"
+msgstr "Nem támogatott 'storage action'-t próbáltál"
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
@@ -360,7 +360,7 @@ msgstr "HTTP Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr "ORB IOR kezekő moniker"
+msgstr "ORB IOR kezelő moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
@@ -404,7 +404,7 @@ msgstr "Echo komponens factory"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr "A Bonobo inicializásála sikertelen"
+msgstr "A Bonobo inicializálása sikertelen"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
