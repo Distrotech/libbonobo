@@ -34,12 +34,11 @@ oaf_server_info_attr_lookup (OAF_ServerInfo * server, const char *attr_name,
                         if (!retval) {
                                 if (strlen ((char *) cur->data) > 2) {
                                         strncpy (short_lang, (char *) cur->data, 2);
-                                        attr_name_buf = g_strdup_printf ("%s-%s", short_lang, (char *) cur->data);
+                                        attr_name_buf = g_strdup_printf ("%s-%s", attr_name, short_lang);
                                         retval = oaf_server_info_attr_lookup (server, attr_name_buf, NULL);
                                         g_free (attr_name_buf);
                                 }
                         }
-
 
 			if (retval)
 				return retval;
@@ -47,7 +46,7 @@ oaf_server_info_attr_lookup (OAF_ServerInfo * server, const char *attr_name,
 	} 
 
         attr = oaf_server_info_attr_find (server, attr_name);
-        if (attr->v._d == OAF_A_STRING)
+        if (attr != NULL && attr->v._d == OAF_A_STRING)
                 return attr->v._u.value_string;
 
 	return NULL;
