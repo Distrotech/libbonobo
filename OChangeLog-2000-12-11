@@ -1,3 +1,12 @@
+1999-06-26  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/gnome-view.h: Include bonobo/gnome-view-frame.h.
+	(GnomeView): Added a field to store the GNOME_ViewFrame for this
+ 	View.
+
+	* bonobo/gnome-component.c (impl_GNOME_BonoboObject_new_view):
+ 	Save a handle to the ViewFrame.
+
 1999-06-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	bonobo/test-container-autoload.c (application_new): set default
