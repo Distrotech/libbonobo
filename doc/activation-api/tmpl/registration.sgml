@@ -21,6 +21,10 @@ to Bonobo Activation once it is created.
 
 </para>
 
+@Bonobo_ACTIVATION_REG_SUCCESS: 
+@Bonobo_ACTIVATION_REG_NOT_LISTED: 
+@Bonobo_ACTIVATION_REG_ALREADY_ACTIVE: 
+@Bonobo_ACTIVATION_REG_ERROR: 
 
 <!-- ##### FUNCTION bonobo_activation_active_server_register ##### -->
 <para>
@@ -41,7 +45,7 @@ to Bonobo Activation once it is created.
 @obj: 
 
 
-<!-- ##### STRUCT BonoboActivationPlugin ##### -->
+<!-- ##### TYPEDEF BonoboActivationPlugin ##### -->
 <para>
 Components which want to be activated as 
 shared libraries must export an BonoboActivationPlugin
@@ -86,7 +90,7 @@ const BonoboActivationPlugin BonoboActivation_Plugin_info = {
 </para>
 
 
-<!-- ##### STRUCT BonoboActivationPluginObject ##### -->
+<!-- ##### TYPEDEF BonoboActivationPluginObject ##### -->
 <para>
 
 </para>

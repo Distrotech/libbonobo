@@ -14,7 +14,7 @@
 <!entity FDL SYSTEM "fdl.sgml">
 ]>
 
-<book>
+<book id="index">
   <bookinfo>
     <title>Bonobo Activation API Reference Manual</title>
 
