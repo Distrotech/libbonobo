@@ -1,3 +1,7 @@
+2000-02-14  Elliot Lee  <sopwith@redhat.com>
+	* bonobo/bonobo-wrapper.c (bonobo_wrapper_unrealize): Don't
+	destroy widget->window - gtk+ already does this for us.
+
 2000-02-12  Matt Loper  <matt@helixcode.com>
 
 	* bonobo/bonobo-generic-factory.c
