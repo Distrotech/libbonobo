@@ -734,8 +734,10 @@ async_activation_cb (CORBA_Object activated_object,
 			parse_async_ctx_free (ctx);
 
 		} else {
-			gpointer args [] = { &ctx->name };
+			gpointer args [] = { NULL };
 	
+			args[0] = &ctx->name;
+
 			if (!set_name_method)
 				setup_methods ();
 				
@@ -857,8 +859,11 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 			      gpointer               user_data)
 {
 	resolve_async_ctx_t *ctx;
-	gpointer args [] = { &options, &interface_name };
-	
+	gpointer args [] = { NULL, NULL };
+
+	args[0] = &options;
+	args[1] = &interface_name;
+
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (cb != NULL);
 	g_return_if_fail (moniker != CORBA_OBJECT_NIL);

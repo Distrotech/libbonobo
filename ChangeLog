@@ -1,3 +1,8 @@
+2004-01-14  The Written Word  <bugzilla-gnome@thewrittenword.com>
+
+	* bonobo/bonobo-moniker-util.c (async_activation_cb) 
+	(bonobo_moniker_resolve_async): fix for AIX.
+
 2004-01-09  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.5.2
