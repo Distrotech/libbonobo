@@ -8,17 +8,17 @@
 #include <gnome-factory.idl>
 #include "gnome-object.idl"
 
-#include "base.idl"
+#include "gnome-base.idl"
 
-#include "storage.idl"
-#include "persist.idl"
+#include "gnome-storage.idl"
+#include "gnome-persist.idl"
 
-#include "moniker.idl"
+#include "gnome-moniker.idl"
 
-#include "advise.idl"
+#include "gnome-advise.idl"
 
-#include "container.idl"
-#include "clientsite.idl"
-#include "bobject.idl"
-#include "inplace.idl"
+#include "gnome-container.idl"
+#include "gnome-client-site.idl"
+#include "gnome-component.idl"
+#include "gnome-inplace.idl"
 

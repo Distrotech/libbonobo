@@ -1,0 +1,13 @@
+/*
+ * GNOME::base
+ *
+ * Author:
+ *     Miguel de Icaza (miguel@gnu.org)
+ */
+
+module GNOME {
+	interface base {
+		oneway void ref ();
+		oneway void unref ();
+	};
+};
