@@ -1,3 +1,5 @@
+iid OAFIID:BrokenNoType:20000808 has a NULL type
+invalid character '#' in iid 'OAFIID:This#!!%$iid%^$%_|~!OAFIID_ContainsBadChars'
 new instance: #1
 instance #1 destroyed
 new instance: #2

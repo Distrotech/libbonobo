@@ -1,3 +1,16 @@
+2003-07-15  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/models/generic-factory.output: Reference model changed a bit.
+
+	* tests/Makefile.am: Added back a simplified version of the
+	generic factory test.
+
+	* tests/Test_Generic_Factory.server,
+	* tests/test-generic-factory.sh: added.
+	
+	* tests/Test_Generic_Factory.server.in,
+	* tests/test-generic-factory.sh.in: removed.
+
 2003-07-15  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.3.5
