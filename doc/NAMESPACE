@@ -81,3 +81,7 @@ help_browser/
 		Hello		bonobo-hello
 		Paint		paint-component-simple
 		Text		bonobo-text-plain
+
+[ reserved for accessibility ]
+
+* Accessibility/		bill.haneman@sun.com

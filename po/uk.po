@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-12-11 17:25+0200\n"
+"POT-Creation-Date: 2001-12-11 17:49+0000\n"
 "PO-Revision-Date: 2001-12-11 17:29+0200\n"
 "Last-Translator: Yuriy Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -148,3 +148,39 @@ msgstr "Помилка перев╕рки на помилку; без вийнятково╖ ситуац╕╖"
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
 msgstr "Загальна помилка активац╕╖ без опису"
+
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
+msgid "Could not initialize Bonobo"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
+msgid "HTTP Moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "ORB IOR handling moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "Standard Moniker factory"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Oaf activation moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
+msgid "generic Oaf query moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
+msgid "generic factory 'new' moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
+msgid "generic item moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:8
+msgid "stream MonikerExtender"
+msgstr ""

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.96.0\n"
-"POT-Creation-Date: 2001-11-26 13:13+1100\n"
+"POT-Creation-Date: 2001-12-11 17:49+0000\n"
 "PO-Revision-Date: 2001-05-30 11:37+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@eikonex.org>\n"
 "Language-Team: GNOME French Team <gnomefr@gnomefr.traduc.org>\n"

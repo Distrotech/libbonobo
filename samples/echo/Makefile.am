@@ -51,7 +51,7 @@ server_DATA = $(server_in_files:.server.in=.server)
 idldir    = $(datadir)/idl/bonobo-2.0
 idl_DATA  = Bonobo_Sample_Echo.idl
 
-EXTRA_DIST = $(server_DATA) $(idl_DATA) $(server_dot_in)
+EXTRA_DIST = $(server_DATA) $(idl_DATA) $(server_dot_in).in
 
 INCLUDES = 						\
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \

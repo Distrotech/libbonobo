@@ -1,7 +1,7 @@
 AC_INIT(message-of-doom)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(libbonobo, 1.107.0)
+AM_INIT_AUTOMAKE(libbonobo, 1.108.0)
 
 AM_MAINTAINER_MODE
 
@@ -57,7 +57,7 @@ AC_DEFINE(HAVE_DLADDR,$have_dladdr)
 #
 # Start of pkg-config checks
 #
-ORBIT_VERSION=2.3.99
+ORBIT_VERSION=2.3.100
 GLIB_VERSION=1.3.11
 
 PKG_CHECK_MODULES(LIBBONOBO, \
