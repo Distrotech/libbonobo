@@ -1,3 +1,13 @@
+2001-01-25  Ettore Perazzoli  <ettore@ximian.com>
+
+	* bonobo/bonobo-ui-toolbar.c (item_set_want_label_cb): Call
+	`set_attributes_on_child()' before queueing a resize.
+
+	* bonobo/bonobo-ui-toolbar-item.c (impl_set_style): Don't queue
+	resize if the style didn't change.
+	(impl_set_orientation): Don't queue resize if the orientation
+	didn't change.
+
 2001-01-25  Michael Meeks  <michael@helixcode.com>
 
 	* idl/Makefile.am: Rename all the IDL files to comply to the
