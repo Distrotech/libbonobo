@@ -96,11 +96,11 @@ msgstr "要求的 UI 屬性並不存在"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "不詳的指令"
+msgstr "不詳的指令或行動"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr ""
+msgstr "指令暫時無法使用"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -154,10 +154,11 @@ msgstr "一般的不具描述的啟動錯誤"
 msgid "Could not initialize Bonobo"
 msgstr "無法初始化 Bonobo"
 
+# If I know more about CORBA stuff..... -- Abel
 #: bonobo/bonobo-moniker.c:353
-#, c-format
+#, fuzzy, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "無法解析或擴展‘%s’"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
