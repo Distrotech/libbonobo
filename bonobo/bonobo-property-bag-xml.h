@@ -6,12 +6,12 @@
 
 BEGIN_GNOME_DECLS
 
-void       bonobo_property_bag_xml_encode_any (BonoboUINode      *parent,
-					       CORBA_any         *any,
-					       CORBA_Environment *ev);
+BonoboUINode *bonobo_property_bag_xml_encode_any (BonoboUINode      *opt_parent,
+						  CORBA_any         *any,
+						  CORBA_Environment *ev);
 
-CORBA_any *bonobo_property_bag_xml_decode_any (BonoboUINode      *node,
-					       CORBA_Environment *ev);
+CORBA_any    *bonobo_property_bag_xml_decode_any (BonoboUINode      *node,
+						  CORBA_Environment *ev);
 
 END_GNOME_DECLS
 

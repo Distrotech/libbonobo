@@ -1,5 +1,18 @@
 2000-11-27  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-property-bag-xml.c (encode_value): update to fix
+	alignment issues.
+	(decode_type, decode_value, bonobo_property_bag_xml_decode_any): impl.
+
+	* bonobo/bonobo.h: add bonobo-property-bag-xml.h
+
+	* configure.in: Copy the ORBit ALIGNOF macro setup here; this sucks
+	very badly, and should be available in the ORBit includes.
+
+	* acconfig.h: upd to cover.
+
+2000-11-27  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-property-bag-xml.c (bonobo_property_bag_xml_encode_any),
 	(encode_value, encode_type): impl.
 	(bonobo_property_bag_xml_decode_any): stub. & Rip all the rest out.

@@ -76,7 +76,7 @@ encode_type (BonoboUINode      *type_parent,
 	case CORBA_tk_except: { /* subnames */
 		BonoboUINode *subnames;
 
-		subnames = bonobo_ui_node_new_child (type_parent, "subnames");
+		subnames = bonobo_ui_node_new_child (node, "subnames");
 
 		for (i = 0; i < tc->sub_parts; i++) {
 			BonoboUINode *subname;
@@ -84,13 +84,15 @@ encode_type (BonoboUINode      *type_parent,
 			bonobo_ui_node_set_content (subname, tc->subnames [i]);
 		}
 	}
+	if (tc->kind == CORBA_tk_enum)
+		break;
 
 	case CORBA_tk_alias:
 	case CORBA_tk_array:
 	case CORBA_tk_sequence: { /* subtypes */
 		BonoboUINode *subtypes;
 
-		subtypes = bonobo_ui_node_new_child (type_parent, "subtypes");
+		subtypes = bonobo_ui_node_new_child (node, "subtypes");
 
 		for (i = 0; i < tc->sub_parts; i++)
 			encode_type (subtypes, tc->subtypes [i], ev);
@@ -100,10 +102,12 @@ encode_type (BonoboUINode      *type_parent,
 	}
 }
 
-#define DO_ENCODE(tckind,format,corbatype,value)			\
+#define DO_ENCODE(tckind,format,corbatype,value,align)			\
 	case tckind:							\
+		*value = ALIGN_ADDRESS (*value, align);			\
 		snprintf (scratch, 127, format,				\
 			  * (corbatype *) *value);			\
+		*value = ((guchar *)*value) + sizeof (corbatype);	\
 		break;
 
 static void
@@ -114,6 +118,7 @@ encode_value (BonoboUINode      *parent,
 {
 	BonoboUINode *node;
 	char scratch [256] = "";
+	int  i;
 
 	node = bonobo_ui_node_new_child (parent, "value");
 
@@ -122,20 +127,20 @@ encode_value (BonoboUINode      *parent,
 	case CORBA_tk_void:
 		break;
 
-		DO_ENCODE (CORBA_tk_short,  "%d", CORBA_short, value);
-		DO_ENCODE (CORBA_tk_ushort, "%u", CORBA_unsigned_short, value);
-		DO_ENCODE (CORBA_tk_long,   "%d", CORBA_long, value);
-		DO_ENCODE (CORBA_tk_enum,   "%d", CORBA_enum, value);
-		DO_ENCODE (CORBA_tk_ulong,  "%u", CORBA_unsigned_long, value);
+		DO_ENCODE (CORBA_tk_short,  "%d", CORBA_short, value, ALIGNOF_CORBA_SHORT);
+		DO_ENCODE (CORBA_tk_ushort, "%u", CORBA_unsigned_short, value, ALIGNOF_CORBA_SHORT);
+		DO_ENCODE (CORBA_tk_long,   "%d", CORBA_long, value, ALIGNOF_CORBA_LONG);
+		DO_ENCODE (CORBA_tk_enum,   "%d", CORBA_enum, value, ALIGNOF_CORBA_LONG);
+		DO_ENCODE (CORBA_tk_ulong,  "%u", CORBA_unsigned_long, value, ALIGNOF_CORBA_LONG);
 
-		DO_ENCODE (CORBA_tk_float,   "%g", CORBA_float,   value);
-		DO_ENCODE (CORBA_tk_double,  "%g", CORBA_double,  value);
-		DO_ENCODE (CORBA_tk_boolean, "%d", CORBA_boolean, value);
+		DO_ENCODE (CORBA_tk_float,   "%g", CORBA_float,   value, ALIGNOF_CORBA_FLOAT);
+		DO_ENCODE (CORBA_tk_double,  "%g", CORBA_double,  value, ALIGNOF_CORBA_DOUBLE);
+		DO_ENCODE (CORBA_tk_boolean, "%d", CORBA_boolean, value, 1);
 
-		DO_ENCODE (CORBA_tk_char,  "%d", CORBA_char, value);
-		DO_ENCODE (CORBA_tk_octet, "%d", CORBA_octet, value);
+		DO_ENCODE (CORBA_tk_char,  "%d", CORBA_char, value,  1);
+		DO_ENCODE (CORBA_tk_octet, "%d", CORBA_octet, value, 1);
 
-		DO_ENCODE (CORBA_tk_wchar, "%d", CORBA_wchar, value);
+		DO_ENCODE (CORBA_tk_wchar, "%d", CORBA_wchar, value, ALIGNOF_CORBA_SHORT);
 
 /*
 #ifdef G_HAVE_GINT64
@@ -147,7 +152,9 @@ encode_value (BonoboUINode      *parent,
 
 	case CORBA_tk_string:
 	case CORBA_tk_wstring:
+		*value = ALIGN_ADDRESS(*value, ALIGNOF_CORBA_POINTER);
 		bonobo_ui_node_set_content (node, *(CORBA_char **) *value);
+		*value = ((guchar *)*value) + sizeof (CORBA_char *);
 		break;
 
 	case CORBA_tk_objref:
@@ -155,18 +162,333 @@ encode_value (BonoboUINode      *parent,
 		break;
 
 	case CORBA_tk_TypeCode:
+		*value = ALIGN_ADDRESS (*value, ALIGNOF_CORBA_POINTER);
 		encode_type (node, * (CORBA_TypeCode *) *value, ev);
+		*value = ((guchar *)*value) + sizeof(CORBA_TypeCode);
 		break;
 
 	case CORBA_tk_any:
+		*value = ALIGN_ADDRESS (*value,
+				       MAX (ALIGNOF_CORBA_LONG,
+					   MAX (ALIGNOF_CORBA_POINTER, ALIGNOF_CORBA_STRUCT)));
 		bonobo_property_bag_xml_encode_any (node, (CORBA_any *) *value, ev);
+		*value = ((guchar *)*value) + sizeof (CORBA_any);
+		break;
+
+	case CORBA_tk_sequence:
+	case CORBA_tk_array:
+		for (i = 0; i < tc->length; i++)
+			encode_value (node, tc->subtypes [0], value, ev);
 		break;
 
  	case CORBA_tk_struct:
 	case CORBA_tk_except:
+		for (i = 0; i < tc->sub_parts; i++)
+			encode_value (node, tc->subtypes [i], value, ev);
+		break;
+
+	case CORBA_tk_alias:
+	case CORBA_tk_union:
+	case CORBA_tk_Principal:
+	case CORBA_tk_fixed:
+	case CORBA_tk_recursive:
+	default:
+		g_warning ("Unhandled kind '%d'", tc->kind);
+		break;
+	}
+
+	if (scratch [0])
+		bonobo_ui_node_set_content (node, scratch);
+}
+
+BonoboUINode *
+bonobo_property_bag_xml_encode_any (BonoboUINode      *opt_parent,
+				    CORBA_any         *any,
+				    CORBA_Environment *ev)
+{
+	BonoboUINode *node;
+	gpointer      value;
+
+	g_return_val_if_fail (any != NULL, NULL);
+
+	if (opt_parent)
+		node = bonobo_ui_node_new_child (opt_parent, "any");
+	else
+		node = bonobo_ui_node_new ("any");
+
+	value = any->_value;
+
+	encode_type  (node, any->_type, ev);
+	encode_value (node, any->_type, &value, ev);
+
+	return node;
+}
+
+static CORBA_TypeCode
+decode_type (BonoboUINode      *node,
+	     CORBA_Environment *ev)
+{
+	CORBA_TypeCode tc;
+	BonoboUINode  *l;
+	CORBA_TCKind   kind;
+	char *txt;
+
+	if ((txt = bonobo_ui_node_get_attr (node, "tckind"))) {
+		kind = atoi (txt);
+		bonobo_ui_node_free_string (txt);
+	} else {
+		g_warning ("Format error no tckind");
+		return NULL;
+	}
+	
+	switch (kind) {
+#define HANDLE_SIMPLE_TYPE(tc,kind)		\
+	case CORBA_tk_##kind:			\
+		return tc;
+
+	HANDLE_SIMPLE_TYPE (TC_string,             string);
+	HANDLE_SIMPLE_TYPE (TC_short,              short);
+	HANDLE_SIMPLE_TYPE (TC_long,               long);
+	HANDLE_SIMPLE_TYPE (TC_ushort,             ushort);
+	HANDLE_SIMPLE_TYPE (TC_ulong,              ulong);
+	HANDLE_SIMPLE_TYPE (TC_float,              float);
+	HANDLE_SIMPLE_TYPE (TC_double,             double);
+	HANDLE_SIMPLE_TYPE (TC_longdouble,         longdouble);
+	HANDLE_SIMPLE_TYPE (TC_boolean,            boolean);
+	HANDLE_SIMPLE_TYPE (TC_char,               char);
+	HANDLE_SIMPLE_TYPE (TC_wchar,              wchar);
+	HANDLE_SIMPLE_TYPE (TC_octet,              octet);
+	HANDLE_SIMPLE_TYPE (TC_any,                any);
+	HANDLE_SIMPLE_TYPE (TC_wstring,            wstring);
+	HANDLE_SIMPLE_TYPE (TC_longlong,           longlong); 
+	HANDLE_SIMPLE_TYPE (TC_ulonglong,          ulonglong);
+
+	default:
+		break;
+	}
+
+	tc = g_new0 (struct CORBA_TypeCode_struct, 1);
+	tc->kind = kind;
+
+	/* Passing in NULL for CORBA_Environment is patently dangerous. */
+	ORBit_pseudo_object_init ((ORBit_PseudoObject) tc,
+				  ORBIT_PSEUDO_TYPECODE, NULL);
+	ORBit_RootObject_set_interface ((ORBit_RootObject) tc,
+					(ORBit_RootObject_Interface *) &ORBit_TypeCode_epv,
+					NULL);
+
+	if ((txt = bonobo_ui_node_get_attr (node, "name"))) {
+		tc->name = g_strdup (txt);
+		bonobo_ui_node_free_string (txt);
+	}
+
+	if ((txt = bonobo_ui_node_get_attr (node, "repo_id"))) {
+		tc->repo_id = g_strdup (txt);
+		bonobo_ui_node_free_string (txt);
+	}
+
+	if ((txt = bonobo_ui_node_get_attr (node, "length"))) {
+		tc->length = atoi (txt);
+		bonobo_ui_node_free_string (txt);
+	} else
+		g_warning ("Format error no length");
+
+	if ((txt = bonobo_ui_node_get_attr (node, "sub_parts"))) {
+		tc->sub_parts = atoi (txt);
+		bonobo_ui_node_free_string (txt);
+	} else
+		g_warning ("Format error no sub_parts");
+
+	switch (tc->kind) {
+ 	case CORBA_tk_struct:
+	case CORBA_tk_union:
+	case CORBA_tk_enum:
+	case CORBA_tk_except: { /* subnames */
+		BonoboUINode *subnames = NULL;
+		int           i = 0;
+
+		for (l = bonobo_ui_node_children (node); l;
+		     l = bonobo_ui_node_next (l)) {
+			if (bonobo_ui_node_has_name (l, "subnames"))
+				subnames = l;
+		}
+		if (!subnames) {
+			g_warning ("Missing subnames field - leak");
+			return NULL;
+		}
+
+		tc->subnames = (const char **) g_new (char *, tc->sub_parts);
+
+		for (l = bonobo_ui_node_children (subnames); l;
+		     l = bonobo_ui_node_next (l)) {
+			if (i >= tc->sub_parts)
+				g_warning ("Too many sub names should be %d", tc->sub_parts);
+			else {
+				char *txt = bonobo_ui_node_get_content (l);
+				tc->subnames [i++] = g_strdup (txt);
+				bonobo_ui_node_free_string (txt);
+			}
+		}
+		if (i < tc->sub_parts) {
+			g_warning ("Not enough sub names: %d should be %d", i, tc->sub_parts);
+			return NULL;
+		}
+	}
+	if (tc->kind == CORBA_tk_enum)
+		break;
+
+	case CORBA_tk_alias:
+	case CORBA_tk_array:
+	case CORBA_tk_sequence: { /* subtypes */
+		BonoboUINode *subtypes = NULL;
+		int           i = 0;
+
+		for (l = bonobo_ui_node_children (node); l;
+		     l = bonobo_ui_node_next (l)) {
+			if (bonobo_ui_node_has_name (l, "subtypes"))
+				subtypes = l;
+		}
+		if (!subtypes) {
+			g_warning ("Missing subtypes field - leak");
+			return NULL;
+		}
+
+		tc->subtypes = g_new (CORBA_TypeCode, tc->sub_parts);
+
+		for (l = bonobo_ui_node_children (subtypes); l;
+		     l = bonobo_ui_node_next (l)) {
+
+			if (i >= tc->sub_parts)
+				g_warning ("Too many sub types should be %d", tc->sub_parts);
+			else {
+				tc->subtypes [i] = decode_type (l, ev);
+				g_assert (tc->subtypes [i]);
+			}
+			i++;
+		}
+
+		if (i < tc->sub_parts) {
+			g_warning ("Not enough sub names: %d should be %d", i, tc->sub_parts);
+			return NULL;
+		}
+	}
+	default:
+		break;
+	}
+
+	return tc;
+}
+
+#define DO_DECODE(tckind,format,corbatype,value,align)				\
+	case tckind:								\
+		*value = ALIGN_ADDRESS (*value, align);				\
+		if (sscanf (scratch, format, (corbatype *) *value) != 1)	\
+			g_warning ("Broken scanf on '%s'", scratch);		\
+		*value = ((guchar *)*value) + sizeof (corbatype);		\
+		break;
+
+#define DO_DECODEI(tckind,format,corbatype,value,align)				\
+	case tckind: {								\
+		CORBA_unsigned_long i;						\
+		*value = ALIGN_ADDRESS (*value, align);				\
+		if (sscanf (scratch, format, &i) != 1)				\
+			g_warning ("Broken scanf on '%s'", scratch);		\
+		*(corbatype *) *value = i;					\
+		*value = ((guchar *)*value) + sizeof (corbatype);		\
+		break;								\
+	}
+
+static gpointer
+decode_value (BonoboUINode      *node,
+	      CORBA_TypeCode     tc,
+	      CORBA_Environment *ev)
+{
+	size_t   block_size;
+	gpointer value = NULL;
+	gpointer retval;
+	char    *scratch;
+
+	block_size = ORBit_gather_alloc_info (tc);
+
+	/* Uglier than your average butt cf.
+	   ORBit/src/corba_any/ORBit_demarshal_allocate_mem */
+	if (block_size) {
+		retval = ORBit_alloc_2 (
+			block_size,
+			(ORBit_free_childvals) ORBit_free_via_TypeCode,
+			GINT_TO_POINTER (1), sizeof(CORBA_TypeCode));
+		*(CORBA_TypeCode *)((char *) retval - sizeof (ORBit_mem_info) -
+				    sizeof (CORBA_TypeCode)) = (CORBA_TypeCode) CORBA_Object_duplicate((CORBA_Object)tc, NULL);
+	} else
+		retval = NULL;
+
+	value = retval;
+
+	scratch = bonobo_ui_node_get_content (node);
+
+	switch (tc->kind) {
+	case CORBA_tk_null:
+	case CORBA_tk_void:
+		break;
+
+		DO_DECODEI (CORBA_tk_short,  "%d", CORBA_short, &value, ALIGNOF_CORBA_SHORT);
+		DO_DECODEI (CORBA_tk_ushort, "%u", CORBA_unsigned_short, &value, ALIGNOF_CORBA_SHORT);
+		DO_DECODEI (CORBA_tk_long,   "%d", CORBA_long, &value, ALIGNOF_CORBA_LONG);
+		DO_DECODEI (CORBA_tk_enum,   "%d", CORBA_enum, &value, ALIGNOF_CORBA_LONG);
+		DO_DECODEI (CORBA_tk_ulong,  "%u", CORBA_unsigned_long, &value, ALIGNOF_CORBA_LONG);
+		DO_DECODEI (CORBA_tk_boolean, "%d", CORBA_boolean, &value, 1);
+		DO_DECODEI (CORBA_tk_char,    "%d", CORBA_char, &value,  1);
+		DO_DECODEI (CORBA_tk_octet,   "%d", CORBA_octet, &value, 1);
+		DO_DECODEI (CORBA_tk_wchar,   "%d", CORBA_wchar, &value, ALIGNOF_CORBA_SHORT);
+
+		DO_DECODE (CORBA_tk_float,   "%g",  CORBA_float,   &value, ALIGNOF_CORBA_FLOAT);
+		DO_DECODE (CORBA_tk_double,  "%lg", CORBA_double,  &value, ALIGNOF_CORBA_DOUBLE);
+
+/*
+#ifdef G_HAVE_GINT64
+		DO_DECODE (CORBA_tk_longlong,   "%ll",  CORBA_long_long, &value);
+		DO_DECODE (CORBA_tk_ulonglong,  "%ull", CORBA_unsigned_long_long, &value);
+#endif
+		DO_DECODE (CORBA_tk_longdouble, "%L", CORBA_long_double, &value);
+*/
+
+	case CORBA_tk_string:
+	case CORBA_tk_wstring:
+		value = ALIGN_ADDRESS (value, ALIGNOF_CORBA_POINTER);
+		*(CORBA_char **) value = CORBA_string_dup (scratch);
+		value = ((guchar *)value) + sizeof (CORBA_char *);
+		break;
+
+	case CORBA_tk_objref:
+		g_warning ("Error objref in stream");
+		break;
+
+	case CORBA_tk_TypeCode:
+		value = ALIGN_ADDRESS (value, ALIGNOF_CORBA_POINTER);
+		*(CORBA_TypeCode *) value = decode_type (node, ev);
+		value = ((guchar *) value) + sizeof (CORBA_TypeCode);
+		break;
+
+/*	case CORBA_tk_any:
+		value = ALIGN_ADDRESS (value,
+				       MAX (ALIGNOF_CORBA_LONG,
+					    MAX (ALIGNOF_CORBA_POINTER, ALIGNOF_CORBA_STRUCT)));
+		*(CORBA_any **)value = bonobo_property_bag_xml_decode_any (node, ev);
+		value = ((guchar *) value) + sizeof (CORBA_any);
+		break;
 
 	case CORBA_tk_sequence:
 	case CORBA_tk_array:
+		for (i = 0; i < tc->length; i++) {
+			decode_value (node, tc->subtypes [0], wrvalue, ev);
+		}
+		break;
+
+ 	case CORBA_tk_struct:
+	case CORBA_tk_except:
+		for (i = 0; i < tc->sub_parts; i++)
+			encode_value (node, tc->subtypes [i], &value, ev);
+			break;*/
 
 	case CORBA_tk_alias:
 	case CORBA_tk_union:
@@ -178,31 +500,46 @@ encode_value (BonoboUINode      *parent,
 		break;
 	}
 
-	if (scratch [0])
-		bonobo_ui_node_set_content (node, scratch);
-}
+	bonobo_ui_node_free_string (scratch);
 
-void 
-bonobo_property_bag_xml_encode_any (BonoboUINode      *parent,
-				    CORBA_any         *any,
-				    CORBA_Environment *ev)
-{
-	BonoboUINode *node;
-	gpointer      value;
-
-	g_return_if_fail (any != NULL);
-	g_return_if_fail (parent != NULL);
-
-	node = bonobo_ui_node_new_child (parent, "any");
-	value = any->_value;
-
-	encode_type  (node, any->_type, ev);
-	encode_value (node, any->_type, &value, ev);
+	return retval;
 }
 
 CORBA_any *
 bonobo_property_bag_xml_decode_any (BonoboUINode      *node,
 				    CORBA_Environment *ev)
 {
-	return NULL;
+	CORBA_any *any;
+	CORBA_TypeCode tc;
+	BonoboUINode *l, *type = NULL, *value = NULL;
+
+	g_return_val_if_fail (node != NULL, NULL);
+
+	if (!bonobo_ui_node_has_name (node, "any")) {
+		g_warning ("Not an any");
+		return NULL;
+	}
+
+	for (l = bonobo_ui_node_children (node); l;
+	     l = bonobo_ui_node_next (l)) {
+
+		if (bonobo_ui_node_has_name (l, "type"))
+			type = l;
+		if (bonobo_ui_node_has_name (l, "value"))
+			value = l;
+	}
+	if (!type || !value) {
+		g_warning ("No type node under '%s'",
+			   bonobo_ui_node_get_name (node));
+		return NULL;
+	}
+
+	tc = decode_type (type, ev);
+	g_return_val_if_fail (tc != NULL, NULL);
+
+	any = CORBA_any__alloc ();
+	any->_type = tc;
+	any->_value = decode_value (value, tc, ev);
+	
+	return any;
 }
