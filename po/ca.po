@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.102.0\n"
 "POT-Creation-Date: 2001-09-20 01:56+0200\n"
-"PO-Revision-Date: 2001-09-19 21:15+0200\n"
+"PO-Revision-Date: 2001-09-20 15:13+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -92,11 +92,11 @@ msgstr "camí invalid cap a l'element de la interfície d'usuari XML"
 
 #: bonobo/bonobo-exception.c:215
 msgid "Unknown command or verb"
-msgstr ""
+msgstr "Ordre o verb desconegut"
 
 #: bonobo/bonobo-exception.c:218
 msgid "Command is insensitive"
-msgstr ""
+msgstr "L'ordre no és sensible"
 
 #: bonobo/bonobo-exception.c:222
 msgid "incorrect data type"
@@ -112,16 +112,15 @@ msgstr "no s'ha trobat la propietat"
 
 #: bonobo/bonobo-exception.c:232
 msgid "property has invalid type"
-msgstr ""
+msgstr "la propietat té un tipus no válid"
 
 #: bonobo/bonobo-exception.c:235
-#, fuzzy
 msgid "property is read only"
-msgstr "no s'ha trobat la propietat"
+msgstr "la propietat és només de lectura"
 
 #: bonobo/bonobo-exception.c:238
 msgid "config database backend failed "
-msgstr ""
+msgstr "el 'backend' de la base de dades de configuració ha fallat "
 
 #: bonobo/bonobo-exception.c:242
 msgid "Moniker interface cannot be found"
@@ -144,9 +143,8 @@ msgid "Error checking error; no exception"
 msgstr "Error en comprovar l'error; cap excepció"
 
 #: bonobo/bonobo-exception.c:284
-#, fuzzy
 msgid "General activation error with no description"
-msgstr "Error de sintaxi en la descripció de l'objecte"
+msgstr "Error general d'activació sense descripció"
 
 #: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
 msgid "Could not initialize Bonobo"
@@ -158,7 +156,7 @@ msgstr "HTTP Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "moniker de maneig ORB IOR"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
