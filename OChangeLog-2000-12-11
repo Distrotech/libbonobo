@@ -1,3 +1,80 @@
+2000-09-22  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_set_ui): impl helper fn.
+	(bonobo_ui_util_set_pixbuf): impl.
+
+	* bonobo/bonobo-win.c (update_dockitem): fixup using parent instead
+	of child in node_has_name's (update_status): same mistake.
+	(update_menus): remove double 'container_destroy_siblings' mistake.
+	(update_status): add back the container_destroy_siblings.
+
+	* bonobo/bonobo-ui-node.c (bonobo_ui_node_to_string): update so we
+	free all the children; old bug.
+
+2000-09-22  Havoc Pennington  <hp@redhat.com>
+
+	* bonobo/bonobo-win.[ch], bonobo/bonobo-ui-xml.[ch],
+	bonobo/bonobo-ui-util.[ch], bonobo/bonobo-ui-compat.[ch]:
+	Abstract all xmlXYZ methods to bonobo_ui_node_XYZ methods to
+	give us flexibility in future.
+
+	* bonobo/bonobo-ui-node.[ch]: Generic attributed tree abstraction.
+
+2000-09-22  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/Makefile.am: Remove bonobo-listener.[ch]
+
+	* bonobo/bonobo-property-listener.c (bonobo_property_listener_init),
+	(bonobo_property_listener_destroy): remove.
+	(bonobo_property_listener_class_init): upd.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_listener):
+	dup-ref instead of CORBA_Object_ref.
+	(bonobo_property_bag_add_listener): remove the listener before
+	adding so we can't leak references.
+	(bonobo_property_bag_destroy): unref the listeners
+	s/change_listeners/listeners/
+	(bonobo_property_destroy): unref listeners.
+	(notify_listeners): add CORBA_Environment & overhaul.
+	(bonobo_property_bag_set_value): ditto.
+
+	* samples/controls/sample-control-container.c (app_destroy_cb): 
+	release listener after use.
+
+	* bonobo/bonobo.h: Add bonobo-property-listener.h
+
+2000-09-22  Mike Kestner <mkestner@ameritech.net>
+
+	* samples/controls/sample-control-container.c (prop_changed_cb): 
+	impl. (populate_property_list):
+
+	* samples/controls/sample-control-container.c (add_listener):
+	impl.
+
+2000-09-21  Michael Meeks  <michael@helixcode.com>
+
+	* samples/compound-doc/paint-component-simple.oafinfo: switch
+	to GNOME/ObjectFactory
+
+	* samples/controls/bonobo-clock-control.oafinfo: ditto.
+
+	* bonobo/bonobo-exception.c (bonobo_exception_get_text): update
+	exceptions.
+
+	* Everything: s/BonoboContainer/BonoboItemContainer/
+	s/bonobo_container/bonobo_item_container/
+	s/Bonobo_Container/Bonobo_ItemContainer/
+	
+	* bonobo/Makefile.am: update for item-container.
+
+	* idl/Makefile.am: rename to item-container
+
+	* idl/bonobo-item-container.idl: renamed from
+
+	* idl/Bonobo.idl: use item-container.
+
+	* idl/bonobo-container.idl this.
+
 Sat Sep 23 08:45:02 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/gnome-stream-efs.c (real_read): use the

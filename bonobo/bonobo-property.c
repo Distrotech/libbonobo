@@ -55,7 +55,7 @@ impl_Bonobo_Property_set_value (PortableServer_Servant servant,
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
 
-	bonobo_property_bag_set_value (pservant->pb, pservant->property_name, any);
+	bonobo_property_bag_set_value (pservant->pb, pservant->property_name, any, ev);
 }
 
 static CORBA_any *

@@ -49,10 +49,10 @@ item_resolve (BonoboMoniker               *moniker,
 	      const CORBA_char            *requested_interface,
 	      CORBA_Environment           *ev)
 {
-	Bonobo_Moniker     parent;
-	Bonobo_Container   container;
-	Bonobo_Unknown     containee;
-	Bonobo_Unknown     retval = CORBA_OBJECT_NIL;
+	Bonobo_Moniker       parent;
+	Bonobo_ItemContainer container;
+	Bonobo_Unknown       containee;
+	Bonobo_Unknown       retval = CORBA_OBJECT_NIL;
 	
 	parent = bonobo_moniker_get_parent (moniker, ev);
 
@@ -79,7 +79,7 @@ item_resolve (BonoboMoniker               *moniker,
 		goto return_unref_parent;
 	}
 
-	containee = Bonobo_Container_get_object (
+	containee = Bonobo_ItemContainer_get_object (
 		container, bonobo_moniker_get_name (moniker, PREFIX_LEN),
 		TRUE, ev);
 

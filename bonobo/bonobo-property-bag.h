@@ -75,8 +75,10 @@ void                      bonobo_property_bag_add_gtk_args     (BonoboPropertyBa
 BonoboArgType             bonobo_property_bag_get_type         (BonoboPropertyBag *pb, const char *name);
 
 /* Modifying properties. */		   		      
-void		          bonobo_property_bag_set_value        (BonoboPropertyBag *pb, const char *name,
-								const BonoboArg   *value);
+void		          bonobo_property_bag_set_value        (BonoboPropertyBag *pb,
+								const char        *name,
+								const BonoboArg   *value,
+								CORBA_Environment *opt_ev);
 
 BonoboArg                *bonobo_property_bag_get_value        (BonoboPropertyBag *pb, const char *name);
 BonoboArg                *bonobo_property_bag_get_default      (BonoboPropertyBag *pb, const char *name);
@@ -85,16 +87,19 @@ const BonoboPropertyFlags bonobo_property_bag_get_flags        (BonoboPropertyBa
 
 gboolean		  bonobo_property_bag_has_property     (BonoboPropertyBag *pb, const char *name);
 
+/* Listener interface functions */
+void                      bonobo_property_bag_add_listener     (BonoboPropertyBag      *pb,
+								const gchar            *name,
+								Bonobo_PropertyListener listener,
+								CORBA_Environment      *opt_ev);
+
+void                      bonobo_property_bag_remove_listener  (BonoboPropertyBag      *pb,
+								const gchar            *name, 
+								Bonobo_PropertyListener listener,
+								CORBA_Environment      *opt_ev);
+
 /* A private function, only to be used by persistence implementations. */
 GList                    *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);
-
-/* Listener interface functions */
-void	 bonobo_property_bag_add_listener 	(BonoboPropertyBag *pb,
-					   	 const gchar *name,
-					   	 Bonobo_Listener listener);
-void	 bonobo_property_bag_remove_listener 	(BonoboPropertyBag *pb,
-					      	 const gchar *name, 
-					      	 Bonobo_Listener listener);
 
 /* For implementation inheritance. */
 POA_Bonobo_PropertyBag__epv *bonobo_property_bag_get_epv	      (void);

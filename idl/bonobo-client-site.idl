@@ -19,7 +19,7 @@ interface ClientSite : Bonobo::Unknown {
 	 *
 	 * Returns a pointer to the Container instance.
 	 */
-	Container get_container ();
+	ItemContainer get_container ();
 	
 	/**
 	 * show_window:

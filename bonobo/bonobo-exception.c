@@ -128,11 +128,11 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 
 			}*/
 
-	/* Bonobo::Container */
-	if (!strcmp (ev->_repo_id, ex_Bonobo_Container_NotFound))
+	/* Bonobo::ItemContainer */
+	if (!strcmp (ev->_repo_id, ex_Bonobo_ItemContainer_NotFound))
 		return g_strdup (_("Object not found"));
 
-	else if (!strcmp (ev->_repo_id, ex_Bonobo_Container_SyntaxError))
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_ItemContainer_SyntaxError))
 		return g_strdup (_("Syntax error in object description"));
 
 	/* Bonobo::Embeddable */

@@ -32,7 +32,7 @@
 #include <bonobo-control.idl>
 
 /* Subdocument stuff. */
-#include <bonobo-container.idl>
+#include <bonobo-item-container.idl>
 #include <bonobo-client-site.idl>
 #include <bonobo-canvas.idl>
 #include <bonobo-embeddable.idl>

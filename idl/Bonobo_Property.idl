@@ -13,7 +13,18 @@
 
 module Bonobo {
 
-interface Listener;
+interface PropertyListener : Bonobo::Unknown {
+
+	/**
+	 * event:
+	 * @name: Property name
+	 * @value: Property value
+	 *
+	 * This method implements the action to take when an event 
+	 * occurs on the listened to interface.
+	 */
+	oneway void event (in string name, in any value);
+};
 
 interface Property {
 	/**

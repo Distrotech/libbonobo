@@ -26,7 +26,7 @@ typedef struct {
 	BonoboPropertyGetFn      get_prop;
 	BonoboPropertySetFn      set_prop;
 	gpointer                 user_data;
-	GList			*change_listeners;
+	GSList                  *listeners;
 } BonoboProperty;
 
 #endif /* ! __BONOBO_PROPERTY_H__ */

@@ -10,6 +10,7 @@
 #include <config.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-property-bag.h>
 #include <bonobo/bonobo-property.h>
 #include <bonobo/bonobo-property-types.h>
@@ -23,14 +24,15 @@ static GtkObjectClass *parent_class = NULL;
  * Internal data structures.
  */
 struct _BonoboPropertyBagPrivate {
-	PortableServer_POA	       poa;
+	PortableServer_POA  poa;
 
-	GHashTable		      *props;
+	GHashTable         *props;
 
-	BonoboPropertySetFn            set_prop;
-	BonoboPropertyGetFn            get_prop;
-	gpointer                       user_data;
-	GList			      *change_listeners;
+	BonoboPropertySetFn set_prop;
+	BonoboPropertyGetFn get_prop;
+	gpointer            user_data;
+
+	GSList             *listeners;
 };
 
 
@@ -40,7 +42,7 @@ struct _BonoboPropertyBagPrivate {
 
 typedef struct {
 	POA_PortableServer_ServantLocator servant_locator;
-	BonoboPropertyBag *property_bag;
+	BonoboPropertyBag                *property_bag;
 } BonoboPropertyBagServantManager;
 
 /*
@@ -505,25 +507,27 @@ impl_Bonobo_PropertyBag_get_property_names (PortableServer_Servant servant,
 }
 
 static void
-impl_Bonobo_PropertyBag_add_listener (PortableServer_Servant servant,
-				      const CORBA_char *name,
-				      const Bonobo_Listener listener,
-				      CORBA_Environment *ev)
+impl_Bonobo_PropertyBag_add_listener (PortableServer_Servant        servant,
+				      const CORBA_char             *name,
+				      const Bonobo_PropertyListener listener,
+				      CORBA_Environment            *ev)
 {
-	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
+	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (
+		bonobo_object_from_servant (servant));
 
-	bonobo_property_bag_add_listener (pb, name, listener);
+	bonobo_property_bag_add_listener (pb, name, listener, ev);
 }
 						     
 static void
-impl_Bonobo_PropertyBag_remove_listener (PortableServer_Servant servant,
-				         const CORBA_char *name,
-					 const Bonobo_Listener listener,
-					 CORBA_Environment *ev)
+impl_Bonobo_PropertyBag_remove_listener (PortableServer_Servant        servant,
+				         const CORBA_char             *name,
+					 const Bonobo_PropertyListener listener,
+					 CORBA_Environment            *ev)
 {
-	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
+	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (
+		bonobo_object_from_servant (servant));
 
-	bonobo_property_bag_remove_listener (pb, name, listener);
+	bonobo_property_bag_remove_listener (pb, name, listener, ev);
 }
 
 
@@ -600,10 +604,19 @@ bonobo_property_destroy (BonoboProperty *prop)
 {
 	g_free (prop->name);
 	prop->idx = -1;
-	/*
-	 * If you made up an exotic type code you get to free it.
-	 */
+
 	bonobo_arg_release (prop->default_value);
+
+	/* Unref all listeners */
+	while (prop->listeners) {
+		Bonobo_PropertyListener listener = prop->listeners->data;
+		
+		prop->listeners =
+			g_slist_remove (prop->listeners, listener);
+
+		bonobo_object_release_unref (listener, NULL);
+	}
+
 	g_free (prop->docstring);
 
 	g_free (prop);
@@ -637,6 +650,16 @@ bonobo_property_bag_destroy (GtkObject *object)
 				     bonobo_property_bag_foreach_remove_prop,
 				     NULL);
 	g_hash_table_destroy (pb->priv->props);
+
+	/* Unref all listeners */
+	while (pb->priv->listeners) {
+		Bonobo_PropertyListener listener = pb->priv->listeners->data;
+		
+		pb->priv->listeners =
+			g_slist_remove (pb->priv->listeners, listener);
+
+		bonobo_object_release_unref (listener, NULL);
+	}
 
 	g_free (pb->priv);
 
@@ -867,56 +890,68 @@ bonobo_property_bag_add (BonoboPropertyBag  *pb,
 }
 
 static void
-notify_change_listeners (BonoboPropertyBag *pb, BonoboProperty *prop)
+notify_listeners (BonoboPropertyBag *pb,
+		  BonoboProperty    *prop,
+		  CORBA_Environment *ev)
 {
-	CORBA_Environment ev;
-	GList *l;
-	BonoboArg *arg; 
+	GSList *l;
+	BonoboArg *arg = bonobo_property_bag_get_value (pb, prop->name);
+	CORBA_Environment *real_ev, tmp_ev;
+
+	if (ev)
+		real_ev = ev;
+	else {
+		CORBA_exception_init (&tmp_ev);
+		real_ev = &tmp_ev;
+	}
 
 	/* Notify the bag listeners. */
+	for (l = pb->priv->listeners; l; l = l->next) {
+		Bonobo_PropertyListener_event ((Bonobo_PropertyListener) l->data, 
+					       prop->name, arg, real_ev);
 
-	arg = bonobo_arg_new (BONOBO_ARG_STRING);
-
-	BONOBO_ARG_SET_STRING (arg, prop->name);
-
-	CORBA_exception_init (&ev);
-
-	for (l = pb->priv->change_listeners; l; l = l->next) {
-		Bonobo_Listener corba_listener = (Bonobo_Listener) l->data;
-
-		Bonobo_Listener_event (corba_listener, arg, &ev);
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("Listener exception occured.");
-			CORBA_exception_init (&ev);
-		}
+		if (BONOBO_EX (real_ev))
+			break;
 	}
 
-	bonobo_arg_release (arg);
+	if (BONOBO_EX (real_ev)) {
+		if (!ev) {
+			g_warning ("Listener exception '%s' occured.",
+				   bonobo_exception_get_text (real_ev));
+			CORBA_exception_free (&tmp_ev);
+		}
+		return;
+	}
 
 	/* Notify the property listeners. */
+	for (l = prop->listeners; l; l = l->next) {
+		Bonobo_PropertyListener_event ((Bonobo_PropertyListener) l->data, 
+					       prop->name, arg, real_ev);
 
-	arg = bonobo_property_bag_get_value (pb, prop->name);
-
-	CORBA_exception_init (&ev);
-
-	for (l = prop->change_listeners; l; l = l->next) {
-		Bonobo_Listener corba_listener = (Bonobo_Listener) l->data;
-
-		Bonobo_Listener_event (corba_listener, arg, &ev);
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("Listener exception occured.");
-			CORBA_exception_init (&ev);
-		}
+		if (BONOBO_EX (real_ev))
+			break;
 	}
 
-	bonobo_arg_release (arg);
+	if (BONOBO_EX (real_ev)) {
+		if (!ev) {
+			g_warning ("Listener exception '%s' occured.",
+				   bonobo_exception_get_text (real_ev));
+			CORBA_exception_free (&tmp_ev);
+		}
+		return;
+	}
 
-	CORBA_exception_free (&ev);
+	if (!ev)
+		CORBA_exception_free (&tmp_ev);
+
+	bonobo_arg_release (arg);
 }
 
 void
-bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
-			       const BonoboArg *value)
+bonobo_property_bag_set_value (BonoboPropertyBag *pb,
+			       const char        *name,
+			       const BonoboArg   *value,
+			       CORBA_Environment *opt_ev)
 {
 	BonoboProperty *prop;
 
@@ -932,7 +967,7 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
 
 	prop->set_prop (pb, value, prop->idx, prop->user_data);
 
-	notify_change_listeners (pb, prop);
+	notify_listeners (pb, prop, opt_ev);
 }
 
 /**
@@ -1111,89 +1146,125 @@ bonobo_property_bag_get_gtk_type (void)
 
 /**
  * bonobo_property_bag_add_bag_listener:
- *
+ * @pb: the property bag from which to remove
+ * @name: the name of the listener to remove or "" for a global
+ * @listener: the listener to remove
+ * @ev: optional corba environment or NULL
+ * 
  * Adds a listener for any changes to properties in a bag.
- *
- * @pb: Property Bag
- *
- * @name: Name of property to listen to for changes. Pass in "" (not NULL) to listen
- * to all properties in the bag.
- *
- * @listener: Corba object reference for listener object.
  */
 void
-bonobo_property_bag_add_listener (BonoboPropertyBag *pb, const gchar *name, 
-				  Bonobo_Listener listener)
+bonobo_property_bag_add_listener (BonoboPropertyBag      *pb,
+				  const gchar            *name, 
+				  Bonobo_PropertyListener listener,
+				  CORBA_Environment      *ev)
 {
-	CORBA_Environment ev;
+	CORBA_Environment *real_ev, tmp_ev;
 
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (name != NULL);
 	g_return_if_fail (listener != CORBA_OBJECT_NIL);
 
-	CORBA_exception_init (&ev);
+	if (ev)
+		real_ev = ev;
+	else {
+		CORBA_exception_init (&tmp_ev);
+		real_ev = &tmp_ev;
+	}
 
-	if (!g_strcasecmp (name, ""))
-		pb->priv->change_listeners = g_list_prepend (
-					pb->priv->change_listeners, 
-					CORBA_Object_duplicate (listener, &ev));
+	bonobo_property_bag_remove_listener (pb, name, listener, real_ev);
+	if (BONOBO_EX (real_ev))
+		return;
+
+	if (!strcmp (name, ""))
+		pb->priv->listeners =
+			g_slist_prepend (
+				pb->priv->listeners, 
+				bonobo_object_dup_ref (listener, real_ev));
 
 	else if (bonobo_property_bag_has_property (pb, name)) {
 		BonoboProperty *prop = g_hash_table_lookup (pb->priv->props, name);
 
 		if (prop)
-			prop->change_listeners = g_list_prepend (
-					prop->change_listeners,
-					CORBA_Object_duplicate (listener, &ev));
+			prop->listeners =
+				g_slist_prepend (
+					prop->listeners,
+					bonobo_object_dup_ref (listener, real_ev));
 	}
-	
-	CORBA_exception_free (&ev);
+
+	if (BONOBO_EX (real_ev) && !ev)
+		g_warning ("Exception setting listener '%s'",
+			   bonobo_exception_get_text (real_ev));
+
+	if (!ev)
+		CORBA_exception_free (&tmp_ev);
 }
 
 static gint
-listener_cmp (Bonobo_Listener a, Bonobo_Listener b) 
+listener_cmp (Bonobo_PropertyListener a, Bonobo_PropertyListener b) 
 {
 	return !g_CORBA_Object_equal (a, b);
 }
 
 /**
  * bonobo_property_bag_remove_listener:
- *
- * Removes a change listener.
- */
+ * @pb: the property bag from which to remove
+ * @name: the name of the listener to remove or "" for a global
+ * @listener: the listener to remove
+ * @ev: optional corba environment or NULL
+ * 
+ * Removes a listener
+ **/
 void
-bonobo_property_bag_remove_listener (BonoboPropertyBag *pb, const gchar *name, 
-				     Bonobo_Listener listener)
+bonobo_property_bag_remove_listener (BonoboPropertyBag      *pb,
+				     const gchar            *name, 
+				     Bonobo_PropertyListener listener,
+				     CORBA_Environment      *ev)
 {
-	GList *node = NULL;
-	Bonobo_Listener obj = CORBA_OBJECT_NIL;
-	CORBA_Environment ev;
+	GSList *node = NULL;
+	CORBA_Environment *real_ev, tmp_ev;
 
-	if (!g_strcasecmp (name, "")) {
-		node = g_list_find_custom (pb->priv->change_listeners, listener,
+	g_return_if_fail (pb != NULL);
+	g_return_if_fail (name != NULL);
+	g_return_if_fail (listener != CORBA_OBJECT_NIL);
+
+	if (ev)
+		real_ev = ev;
+	else {
+		CORBA_exception_init (&tmp_ev);
+		real_ev = &tmp_ev;
+	}
+
+	if (!strcmp (name, "")) {
+		node = g_slist_find_custom (pb->priv->listeners, listener,
 					   (GCompareFunc) listener_cmp);
-		if (node) {
-			obj = (CORBA_Object) node->data; 
-			pb->priv->change_listeners = g_list_remove (
-					pb->priv->change_listeners, obj);
-		}
-
+		if (node)
+			pb->priv->listeners = g_slist_remove (
+				pb->priv->listeners, node->data);
+		
 	} else if (bonobo_property_bag_has_property (pb, name)) {
 		BonoboProperty *prop = g_hash_table_lookup (pb->priv->props, name);
 
 		if (prop)
-			node = g_list_find_custom (prop->change_listeners, listener,
-						   (GCompareFunc) listener_cmp);
-		if (node) {
-			obj = (CORBA_Object) node->data; 
-			prop->change_listeners = g_list_remove (
-					prop->change_listeners, obj);
-		}
+			node = g_slist_find_custom (prop->listeners, listener,
+						    (GCompareFunc) listener_cmp);
+		if (node)
+			prop->listeners = g_slist_remove (
+				prop->listeners, node->data);
 	}
 
 	if (node) {
-		CORBA_exception_init (&ev);
-		CORBA_Object_release (obj, &ev);
-		CORBA_exception_free (&ev);
+		Bonobo_PropertyListener listener;
+
+		listener = (Bonobo_PropertyListener) node->data; 
+		bonobo_object_release_unref (listener, real_ev);
 	}
+
+	if (BONOBO_EX (real_ev) && !ev)
+		g_warning ("Exception setting listener '%s'",
+			   bonobo_exception_get_text (real_ev));
+
+	if (!ev)
+		CORBA_exception_free (&tmp_ev);
 }
+
