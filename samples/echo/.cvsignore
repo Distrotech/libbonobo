@@ -3,6 +3,7 @@ bonobo-echo-2
 .libs
 Makefile
 Bonobo_Sample_Echo.server
+Bonobo_Sample_Echo.server.in
 Bonobo_Sample_Echo.h
 Bonobo_Sample_Echo-common.c
 Bonobo_Sample_Echo-skels.c
