@@ -101,8 +101,8 @@ Unary arithmetic operators
 
 To get a component implementing the IDL:GNOME/Graph/Layout interface you might use:
 
-CORBA_Object *o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
-                                NULL, 0, NULL, &ev);
+CORBA_Object o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
+                               NULL, 0, NULL, &ev);
 
 A more complicated query might be:
 
