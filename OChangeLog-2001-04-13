@@ -1,3 +1,9 @@
+2000-10-21  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-zoomable-frame.c (bonobo_zoomable_frame_destroy): New
+	static function; release Bonobo::Zoomable object here.
+	(bonobo_zoomable_frame_finalize): New static function.
+
 2000-10-21  Michael Meeks  <michael@helixcode.com>
 
 	* Version 0.24
