@@ -1,3 +1,25 @@
+2004-02-01  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* configure.in: Explicitly require GLib >= 2.3.2.
+
+	* tests/test-uniqapp.c (message_quit_cb): Quit after a timeout, so
+	that remote BonoboAppClient has time to unref our
+	BonoboApplication reference.
+
+	* bonobo/bonobo-application.c, bonobo/bonobo-application.h:
+	s/BONOBO_TYPE_APPLICATION_ARGV/G_TYPE_STRV/ (new type available
+	since glib 2.3.2).
+
+	* bonobo/bonobo-app-client.c (bonobo_app_client_finalize):
+	release_unref() the app_server remote object.
+
+	* bonobo/bonobo-application.c
+	(bonobo_application_register_unique): Ref() the application server
+	object returned by b-a-s. Loop a few times trying to register as
+	server, for as long as the ref() operation raises an exception.
+	It should be noted that this situation is very unlikely to happen,
+	though.
+
 2004-01-30  Michael Meeks  <michael@ximian.com>
 
 	* bonobo-activation/bonobo-activation-register.c

@@ -48,6 +48,11 @@ bonobo_app_client_finalize (GObject *object)
 	if (self->msgdescs)
 		bonobo_app_client_free_msgdescs (self);
 
+	if (self->app_server != CORBA_OBJECT_NIL) {
+		bonobo_object_release_unref (self->app_server, NULL);
+		self->app_server = CORBA_OBJECT_NIL;
+	}
+
 	if (G_OBJECT_CLASS(parent_class)->finalize)
 		G_OBJECT_CLASS(parent_class)->finalize (object);
 }

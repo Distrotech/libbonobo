@@ -333,7 +333,7 @@ bonobo_application_class_init (BonoboApplicationClass *klass)
 		NULL, NULL,	/* accumulator and accumulator data */
 		bonobo_marshal_INT__INT_BOXED,
 		G_TYPE_INT, 2, /* return_type, nparams */
-		G_TYPE_INT, BONOBO_TYPE_APPLICATION_ARGV);
+		G_TYPE_INT, G_TYPE_STRV);
 
 	g_object_class_install_property
 		(object_class, PROP_NAME,
@@ -561,6 +561,8 @@ bonobo_application_register_unique (BonoboApplication  *app,
 	Bonobo_RegistrationResult  reg_res;
 	gchar                     *iid;
 	CORBA_Object               remote_obj = CORBA_OBJECT_NIL;
+	CORBA_Environment          ev;
+	int                        tries = 10;
 
 	g_return_val_if_fail (app, Bonobo_ACTIVATION_REG_ERROR);
 	g_return_val_if_fail (BONOBO_IS_APPLICATION (app), Bonobo_ACTIVATION_REG_ERROR);
@@ -568,20 +570,30 @@ bonobo_application_register_unique (BonoboApplication  *app,
 	g_return_val_if_fail (client, Bonobo_ACTIVATION_REG_ERROR);
 
 	iid     = g_strdup_printf ("OAFIID:%s", app->name);
-	reg_res = bonobo_activation_register_active_server_ext
-		(iid, bonobo_object_corba_objref (BONOBO_OBJECT (app)), NULL,
-		 Bonobo_REGISTRATION_FLAG_NO_SERVERINFO, &remote_obj,
-		 serverinfo);
-	g_free (iid);
-
 	*client = NULL;
-	
-	if (reg_res == Bonobo_ACTIVATION_REG_SUCCESS)
-		return reg_res;
-	else if (reg_res == Bonobo_ACTIVATION_REG_ALREADY_ACTIVE) {
-		*client = bonobo_app_client_new ((Bonobo_Application) remote_obj);
-		return reg_res;
-	} 
+	while (tries--)
+	{
+		reg_res = bonobo_activation_register_active_server_ext
+			(iid, bonobo_object_corba_objref (BONOBO_OBJECT (app)), NULL,
+			 Bonobo_REGISTRATION_FLAG_NO_SERVERINFO, &remote_obj,
+			 serverinfo);
+		if (reg_res == Bonobo_ACTIVATION_REG_SUCCESS)
+			break;
+		else if (reg_res == Bonobo_ACTIVATION_REG_ALREADY_ACTIVE) {
+			CORBA_exception_init (&ev);
+			Bonobo_Unknown_ref (remote_obj, &ev);
+			if (ev._major != CORBA_NO_EXCEPTION) {
+				  /* Likely cause: server has quit, leaving a
+				   * stale reference.  Solution: keep trying
+				   * to register as application server. */
+				CORBA_exception_free (&ev);
+				continue;
+			}
+			*client = bonobo_app_client_new ((Bonobo_Application) remote_obj);
+			break;
+		}
+	}
+	g_free (iid);
 	return reg_res;
 }
 
@@ -647,18 +659,5 @@ bonobo_application_invoke_hooks (BonoboApplication *app)
 		hook = &g_array_index (bonobo_application_hooks, BonoboAppHook, i);
 		hook->func (app, hook->data);
 	}
-}
-
-
-GType
-bonobo_application_argv_get_type (void)
-{
-	static GType type = 0;
-	if (!type)
-		type = g_boxed_type_register_static (
-			"BonoboApplicationArgv",
-			(GBoxedCopyFunc) g_strdupv,
-			(GBoxedFreeFunc) g_strfreev);
-	return type;
 }
 

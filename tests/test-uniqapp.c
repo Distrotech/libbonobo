@@ -7,11 +7,17 @@
 #define TEST_MESSAGE    "test-message"
 #define CLOSURE_MESSAGE "closure-message"
 
+static gboolean
+quit_after_timeout (gpointer data)
+{
+	bonobo_main_quit ();
+	return FALSE;
+}
 
 static GValue *
 message_quit_cb (BonoboAppClient *app_client, const gchar *message, GValueArray *args)
 {
-	bonobo_main_quit ();
+	g_timeout_add (1000, quit_after_timeout, NULL);
 	return NULL;
 }
 
