@@ -1,12 +1,12 @@
 # libbonobo sk.po
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Marcel Telka <marcel@telka.sk>, 2001.
+# Copyright (C) 2001, 2002 Free Software Foundation, Inc.
+# Marcel Telka <marcel@telka.sk>, 2001, 2002.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-02-11 10:21+0000\n"
-"PO-Revision-Date: 2001-11-13 09:34+0100\n"
+"POT-Creation-Date: 2002-02-24 20:57+0100\n"
+"PO-Revision-Date: 2002-02-24 21:05+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -156,12 +156,11 @@ msgstr "Nemô¾em inicializova» Bonobo"
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "Zlyhalo rozdelenie alebo roz¹írenie '%s'"
 
 #: bonobo/bonobo-moniker-util.c:246
-#, fuzzy
 msgid "Failed to activate object"
-msgstr "Nemô¾em aktivova» objekt z továrne"
+msgstr "Zlyhala aktivácia objektu"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -198,39 +197,38 @@ msgstr "prúd MonikerExtender"
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
 msgid "Exception activating '%s"
-msgstr ""
+msgstr "Aktivácia výnimky '%s'"
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
 msgid "Failed to activate '%s"
-msgstr ""
+msgstr "Zlyhala aktivácia '%s'"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Bonobo továreò servera echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Uká¾kový program bonobo servera echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "Komponent echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Továreò komponentu echo"
 
 #: samples/echo/echo-client.c:22
-#, fuzzy
 msgid "I could not initialize Bonobo"
 msgstr "Nemô¾em inicializova» Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "Nemô¾em vytvori» in¹tanciu uká¾kového komponentu echo"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr ""
+msgstr "Vyskytla sa výnimka '%s'"
