@@ -7,6 +7,9 @@
 	(toolbar_toplevel_item_get_state): 
 	(bonobo_ui_handler_toolbar_item_toggle_get_state): implement.
 	(bonobo_ui_handler_toolbar_item_toggle_set_state): implement.
+	(toolbar_toplevel_item_get_toggle_state): implement.
+	(toolbar_toplevel_item_get_sensitivity): rename.
+	(impl_Bonobo_UIHandler_toolbar_item_get_attributes): actually use it.
 
 2000-02-19  Mathieu Lacage <mathieu@advogato.org>
 
