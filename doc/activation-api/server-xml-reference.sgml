@@ -278,8 +278,8 @@
                 <quote>View as <replaceable>name</replaceable></quote> where
                 <replaceable>name</replaceable> is the value of the
                 <emphasis>view_as_name</emphasis> attribute.
-                Specify this attribute if you want to override the
-                <quote>View as</quote> part.
+		It is discouraged to rely on this fallback because it makes
+		correct translation impossible for some languages.
               </entry>
 	    </row>
 
@@ -305,8 +305,8 @@
                 <quote><replaceable>name</replaceable> Viewer</quote> where
                 <replaceable>name</replaceable> is the value of the
                 <emphasis>view_as_name</emphasis> attribute.
-                Specify this attribute if <quote>Viewer</quote> is not
-                appropriate for your component.
+		It is discouraged to rely on this fallback because it makes
+		correct translation impossible for some languages.
               </entry>
 	    </row>
 
