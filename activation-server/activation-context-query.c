@@ -444,6 +444,7 @@ typedef struct {
 static QueryExprConst qexp_func_has_one(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
 static QueryExprConst qexp_func_has_all(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
 static QueryExprConst qexp_func_has(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
+static QueryExprConst qexp_func_defined(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
 static QueryExprConst qexp_func_max(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
 static QueryExprConst qexp_func_min(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
 
@@ -451,6 +452,7 @@ static const QueryExprFuncInfo qexp_func_impls[] = {
   {"has_one", qexp_func_has_one, 2},
   {"has_all", qexp_func_has_all, 2},
   {"has", qexp_func_has, 2},
+  {"defined", qexp_func_defined, 1},
   {"max", qexp_func_max, 1},
   {"min", qexp_func_min, 1},
   {NULL}
@@ -638,6 +640,29 @@ qexp_func_has(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 
   return retval;
 }
+
+static QueryExprConst
+qexp_func_defined (OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
+{
+  QueryExprConst retval, v1;
+  char **check_one, *check_two;
+  int i;
+
+  v1 = qexp_evaluate (si, e->u.function_value.arguments->data, qctx);
+
+  retval.value_known = TRUE;
+
+  retval.type = CONST_BOOLEAN;
+
+  retval.u.v_boolean = v1.value_known ? TRUE : FALSE; 
+  
+  retval.needs_free = FALSE;
+  
+  qexp_constant_unuse (v1);
+
+  return retval;
+}
+
 
 static QueryExprConst
 qexp_func_max(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
