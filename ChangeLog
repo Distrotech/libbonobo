@@ -1,3 +1,8 @@
+2001-11-28  jacob berkman  <jacob@ximian.com>
+
+	* tests/Makefile.am (TESTS_ENVIRONMENT): prepend our new paths
+	rather than replace them
+
 2001-11-26  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.107.0
