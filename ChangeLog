@@ -229,6 +229,19 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* configure.in: Added ta to the languages list.
 
+2001-06-21  ERDI Gergo  <cactus@cactus.rulez.org>
+
+        * idl/Bonobo_Persist.idl: Added new getIId method to
+        Bonobo::Persist
+
+        * bonobo/bonobo-persist.[ch]:
+        * bonobo/bonobo-persist-file.[ch]:
+        * bonobo/bonobo-persist-stream.[ch]: Added code to support
+        Bonobo::Persist::getIID
+
+        * bonobo/bonobo-persist-stream.[ch]: Since new arguments are added
+        to _new and _construct, I removed the legacy dummy argument
+
 2001-06-19  Peter Williams  <peterw@ximian.com>
 
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_gtk_args): 

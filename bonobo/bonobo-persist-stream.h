@@ -78,15 +78,15 @@ void                 bonobo_persist_stream_set_dirty (BonoboPersistStream       
 
 BonoboPersistStream *bonobo_persist_stream_new       (BonoboPersistStreamIOFn    load_fn,
 						      BonoboPersistStreamIOFn    save_fn,
-						      gpointer                   compat_dummy,
 						      BonoboPersistStreamTypesFn types_fn,
+						      const gchar               *iid,
 						      void                      *closure);
 
 BonoboPersistStream *bonobo_persist_stream_construct (BonoboPersistStream       *ps,
 						      BonoboPersistStreamIOFn    load_fn,
 						      BonoboPersistStreamIOFn    save_fn,
-						      gpointer                   compat_dummy,
 						      BonoboPersistStreamTypesFn types_fn,
+						      const gchar               *iid,
 						      void                      *closure);
 
 G_END_DECLS

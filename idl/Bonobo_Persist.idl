@@ -26,7 +26,6 @@ module Bonobo {
 
 		exception WrongDataType {};
 		exception FileNotFound {};
-	
 
 		typedef string                ContentType;
 		typedef sequence<ContentType> ContentTypeList;
@@ -39,6 +38,16 @@ module Bonobo {
 		 * preferred type being the first element.
 		 */
 		ContentTypeList getContentTypes ();
+
+		typedef string                IID;
+		
+		/**
+		 * getIId:
+		 *
+		 * Get the IID necessary to recreate the object whose
+		 * internal state this interface represents
+		 */
+		IID getIId ();
 	};
 	
 	/*

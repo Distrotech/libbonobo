@@ -38,11 +38,13 @@ typedef struct {
 						    CORBA_Environment *ev);
 } BonoboPersistClass;
 
-GType                         bonobo_persist_get_type               (void);
+GType                           bonobo_persist_get_type (void);
 
 Bonobo_Persist_ContentTypeList *bonobo_persist_generate_content_types (int num,
 								       ...);
 
+BonoboPersist                  *bonobo_persist_construct (BonoboPersist *persist,
+							  const gchar   *iid);
 G_END_DECLS
 
 #endif /* _BONOBO_PERSIST_H_ */

@@ -161,6 +161,7 @@ BONOBO_TYPE_FUNC_FULL (BonoboPersistFile,
  * @pf: A BonoboPersistFile
  * @load_fn: Loading routine
  * @save_fn: Saving routine
+ * @iid: OAF IID of the object this interface is aggregated to
  * @closure: Data passed to IO routines.
  *
  * Initializes the BonoboPersistFile object.  The @load_fn and @save_fn
@@ -171,6 +172,7 @@ BonoboPersistFile *
 bonobo_persist_file_construct (BonoboPersistFile    *pf,
 			       BonoboPersistFileIOFn load_fn,
 			       BonoboPersistFileIOFn save_fn,
+			       const gchar          *iid,
 			       void                 *closure)
 {
 	g_return_val_if_fail (pf != NULL, NULL);
@@ -179,6 +181,8 @@ bonobo_persist_file_construct (BonoboPersistFile    *pf,
 	pf->load_fn = load_fn;
 	pf->save_fn = save_fn;
 	pf->closure = closure;
+
+	bonobo_persist_construct (BONOBO_PERSIST (pf), iid);
 		
 	return pf;
 }
@@ -187,6 +191,7 @@ bonobo_persist_file_construct (BonoboPersistFile    *pf,
  * bonobo_persist_file_new:
  * @load_fn: Loading routine
  * @save_fn: Saving routine
+ * @iid: OAF IID of the object this interface is aggregated to
  * @closure: Data passed to IO routines.
  *
  * Creates a BonoboPersistFile object.  The @load_fn and @save_fn
@@ -194,9 +199,10 @@ bonobo_persist_file_construct (BonoboPersistFile    *pf,
  * operations are performed by the class load and save methods
  */
 BonoboPersistFile *
-bonobo_persist_file_new (BonoboPersistFileIOFn load_fn,
-			 BonoboPersistFileIOFn save_fn,
-			 void                 *closure)
+bonobo_persist_file_new (BonoboPersistFileIOFn  load_fn,
+			 BonoboPersistFileIOFn  save_fn,
+			 const gchar           *iid,
+			 void                  *closure)
 {
 	BonoboPersistFile *pf;
 
@@ -204,7 +210,7 @@ bonobo_persist_file_new (BonoboPersistFileIOFn load_fn,
 
 	pf->filename = NULL;
 
-	bonobo_persist_file_construct (pf, load_fn, save_fn, closure);
+	bonobo_persist_file_construct (pf, load_fn, save_fn, iid, closure);
 
 	return pf;
 }

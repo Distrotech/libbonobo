@@ -71,11 +71,13 @@ void                bonobo_persist_file_set_dirty (BonoboPersistFile   *ps,
 
 BonoboPersistFile *bonobo_persist_file_new       (BonoboPersistFileIOFn load_fn,
 						  BonoboPersistFileIOFn save_fn,
+						  const gchar          *iid,
 						  void                 *closure);
 
 BonoboPersistFile *bonobo_persist_file_construct (BonoboPersistFile    *ps,
 						  BonoboPersistFileIOFn load_fn,
 						  BonoboPersistFileIOFn save_fn,
+						  const gchar          *iid,
 						  void                 *closure);
 
 G_END_DECLS

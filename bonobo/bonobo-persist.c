@@ -20,6 +20,11 @@ static GObjectClass *bonobo_persist_parent_class;
 
 #define CLASS(o) BONOBO_PERSIST_CLASS(G_OBJECT_GET_CLASS (o))
 
+struct _BonoboPersistPrivate
+{
+	gchar *iid;
+};
+
 static inline BonoboPersist *
 bonobo_persist_from_servant (PortableServer_Servant servant)
 {
@@ -35,9 +40,23 @@ impl_Bonobo_Persist_getContentTypes (PortableServer_Servant servant,
 	return CLASS (persist)->get_content_types (persist, ev);
 }
 
+static CORBA_char*
+impl_Bonobo_Persist_getIId (PortableServer_Servant   servant,
+			    CORBA_Environment       *ev)
+{
+	BonoboPersist *persist = bonobo_persist_from_servant (servant);
+
+	return CORBA_string_dup (persist->priv->iid);
+}
+
 static void
 bonobo_persist_finalize (GObject *object)
 {
+	BonoboPersist *persist = BONOBO_PERSIST (object);
+	
+	g_free (persist->priv->iid);
+	g_free (persist->priv);
+	
 	bonobo_persist_parent_class->finalize (object);
 }
 
@@ -53,12 +72,14 @@ bonobo_persist_class_init (BonoboPersistClass *klass)
 	object_class->finalize = bonobo_persist_finalize;
 
 	epv->getContentTypes = impl_Bonobo_Persist_getContentTypes;
+	epv->getIId = impl_Bonobo_Persist_getIId;
 }
 
 static void
 bonobo_persist_init (GObject *object)
 {
-	/* nothing to do */
+	BonoboPersist *persist = BONOBO_PERSIST (object);
+	persist->priv = g_new0 (BonoboPersistPrivate, 1);
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboPersist, 
@@ -95,4 +116,28 @@ bonobo_persist_generate_content_types (int num, ...)
 	va_end (ap);
 
 	return types;
+}
+
+/**
+ * bonobo_persist_construct:
+ * @persist: A BonoboPersist
+ * @iid: OAF IID of the object this interface is aggregated to
+ *
+ * Initializes the BonoboPersist object. You should only use this
+ * method in derived implementations, because a BonoboPersist instance
+ * doesn't make a lot of sense, but the iid private field has to be
+ * set at construction time.
+ */
+BonoboPersist *
+bonobo_persist_construct (BonoboPersist *persist,
+			  const gchar   *iid)
+{
+	g_return_val_if_fail (persist != NULL, NULL);
+	g_return_val_if_fail (BONOBO_IS_PERSIST (persist), NULL);
+
+	g_return_val_if_fail (iid != NULL, NULL);
+
+	persist->priv->iid = g_strdup (iid);
+
+	return persist;
 }

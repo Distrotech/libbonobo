@@ -124,8 +124,8 @@ BONOBO_TYPE_FUNC_FULL (BonoboPersistStream,
  * @ps: A BonoboPersistStream object
  * @load_fn: Loading routine
  * @save_fn: Saving routine
- * @compat_dummy: unused, NULL
  * @types_fn: returns the supported types
+ * @iid: OAF IID of the object this interface is aggregated to
  * @closure: Data passed to IO routines.
  *
  * Initializes the BonoboPersistStream object.  The load and save
@@ -141,8 +141,8 @@ BonoboPersistStream *
 bonobo_persist_stream_construct (BonoboPersistStream       *ps,
 				 BonoboPersistStreamIOFn    load_fn,
 				 BonoboPersistStreamIOFn    save_fn,
-				 gpointer                   compat_dummy,
 				 BonoboPersistStreamTypesFn types_fn,
+				 const gchar               *iid,
 				 void                      *closure)
 {
 	g_return_val_if_fail (ps != NULL, NULL);
@@ -152,6 +152,8 @@ bonobo_persist_stream_construct (BonoboPersistStream       *ps,
 	ps->save_fn = save_fn;
 	ps->types_fn = types_fn;
 	ps->closure = closure;
+
+	bonobo_persist_construct (BONOBO_PERSIST (ps), iid);
 	
 	return ps;
 }
@@ -160,8 +162,8 @@ bonobo_persist_stream_construct (BonoboPersistStream       *ps,
  * bonobo_persist_stream_new:
  * @load_fn: Loading routine
  * @save_fn: Saving routine
- * @compat_dummy: unused, NULL
  * @types_fn: get_content_types routine
+ * @iid: OAF IID of the object this interface is aggregated to
  * @closure: Data passed to IO routines.
  *
  * Creates a new BonoboPersistStream object. The various operations
@@ -175,8 +177,8 @@ bonobo_persist_stream_construct (BonoboPersistStream       *ps,
 BonoboPersistStream *
 bonobo_persist_stream_new (BonoboPersistStreamIOFn    load_fn,
 			   BonoboPersistStreamIOFn    save_fn,
-			   gpointer                   compat_dummy,
 			   BonoboPersistStreamTypesFn types_fn,
+			   const gchar               *iid,
 			   void                      *closure)
 {
 	BonoboPersistStream *ps;
@@ -184,7 +186,7 @@ bonobo_persist_stream_new (BonoboPersistStreamIOFn    load_fn,
 	ps = g_object_new (bonobo_persist_stream_get_type (), NULL);
 
 	bonobo_persist_stream_construct (ps, load_fn, save_fn,
-					 compat_dummy, types_fn, closure);
+					 types_fn, iid, closure);
 
 	return ps;
 }
