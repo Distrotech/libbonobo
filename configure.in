@@ -200,6 +200,7 @@ utils/Makefile
 utils/bonobo-slay
 tests/Makefile
 tests/test-activation/Makefile
+tests/models/Makefile
 doc/Makefile
 doc/api/Makefile
 doc/api/figures/Makefile

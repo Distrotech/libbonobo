@@ -1,3 +1,17 @@
+2003-08-28  Michael Meeks  <michael@ximian.com>
+
+	* tests/models/generic-factory.output: bin the 
+	duff stuff from here too.
+
+	* tests/test-generic-factory.sh: add a funky
+	sed script to bin the duplicated / uninteresting
+	bits.
+
+	* tests/models/Makefile.am: add.
+	* tests/Makefile.am (SUBDIRS): upd.
+	* configure.in: add tests/models/Makefile -
+	we wern't distributing the test output.
+
 2003-08-26  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.4.0

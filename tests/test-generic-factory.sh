@@ -18,7 +18,8 @@ export BONOBO_ACTIVATION_SERVER PATH LD_LIBRARY_PATH
 set -m
 
 echo "Starting factory"
-./generic-factory > generic-factory.output &
+./generic-factory | sed -e '/^iid OAFIID:BrokenNoType.*/{ d; }
+                            /^.*OAFIID:This#!!\%\$iid.*OAFIID_ContainsBadChars.*/{ d; }' > generic-factory.output &
 sleep 1
 
 echo "Starting client"
