@@ -1,3 +1,15 @@
+2000-06-03  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_create): constipate.
+
+2000-05-31  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-widget.c (bonobo_widget_get_property): fix leaking
+	property bag.
+
+	* bonobo/bonobo-control.c (bonobo_control_get_property),
+	(bonobo_control_set_property): ditto.
+
 2000-05-31  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-uih-menu.c (menu_toplevel_create_widgets):

@@ -38,7 +38,7 @@ typedef struct {
 } BonoboStreamMemClass;
 
 GtkType         bonobo_stream_mem_get_type     (void);
-BonoboStream   *bonobo_stream_mem_create       (char *buffer, size_t size,
+BonoboStream   *bonobo_stream_mem_create       (const char *buffer, size_t size,
 						gboolean read_only,
 						gboolean resizable);
 const char     *bonobo_stream_mem_get_buffer   (BonoboStreamMem *stream_mem);
