@@ -111,7 +111,9 @@ impl_GNOME_object_query_interface (PortableServer_Servant servant,
 	object = gnome_object_from_servant (servant);
 
 	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
-	retval = object->object;
+
+	g_warning ("Should do a hierarchy lookpu for the name here\n");
+	retval = CORBA_Object_duplicate (object->object, &object->ev);
 	return retval;
 }
 
@@ -220,8 +222,14 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 		bonobo_poa(), servant, &object->ev);
 
 	if (o){
+		/*
+		 * FIXME: I need to ask Elliot why I need to
+		 * duplicate the object here. (otherise the
+		 * gnome-component-container ends up with a
+		 * refcount of 0
+		 */
 		gnome_object_bind_to_servant (object, servant);
-		return o;
+		return CORBA_Object_duplicate (o, &object->ev);
 	} else
 		return CORBA_OBJECT_NIL;
 	
@@ -246,3 +254,14 @@ gnome_object_activate_with_repo_id (GoadServerList *list,
 	return object;
 }
 
+GnomeObject *
+gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
+{
+	g_return_val_if_fail (object != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
+	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
+
+	object->object = corba_object;
+
+	return object;
+}
