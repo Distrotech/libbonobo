@@ -1,5 +1,9 @@
 2000-12-17  Miguel de Icaza  <miguel@helixcode.com>
 
+	* monikers/bonobo-moniker-oaf.c (bonobo_moniker_oaf_new): Remove
+	the registered prefix, as the code checked in on friday is just
+	broken. 
+
 	* bonobo/bonobo-widget.c (bonobo_widget_new_control): Removed
 	FIXME as it has been fixed.
 

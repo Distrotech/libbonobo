@@ -89,5 +89,5 @@ bonobo_moniker_oaf_new (void)
 {
 	return bonobo_moniker_construct (
 		gtk_type_new (bonobo_moniker_oaf_get_type ()),
-		CORBA_OBJECT_NIL, "oaf:");
+		CORBA_OBJECT_NIL, "");
 }
