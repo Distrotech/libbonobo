@@ -21,6 +21,6 @@ echo_factory (BonoboGenericFactory *this_factory,
 	return g_object_new (ECHO_TYPE, NULL);
 }
 
-BONOBO_OAF_FACTORY ("OAFIID:Bonobo_Sample_Echo_Factory",
-		    "Sample Echo component factory", "1.0",
-		    echo_factory, NULL);
+BONOBO_ACTIVATION_FACTORY ("OAFIID:Bonobo_Sample_Echo_Factory",
+			   "Sample Echo component factory", "1.0",
+			   echo_factory, NULL);

@@ -1,3 +1,20 @@
+2001-10-24  Michael Meeks  <michael@ximian.com>
+
+	* monikers/bonobo-moniker-std.c: upd.
+
+	* bonobo/bonobo-generic-factory.h
+	(BONOBO_OAF_FACTORY): rename to
+	(BONOBO_ACTIVATION_FACTORY): and add compat macros,
+	use the generic_factory_main method, not a load of inline code.
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_main): impl.
+
+	* bonobo/bonobo-shlib-factory.h
+	(BONOBO_ACTIVATION_SHLIB_FACTORY): similar renames.
+
+	* bonobo/bonobo-shlib-factory.c (bonobo_shlib_factory_std): impl.
+
 2001-10-21  jacob berkman  <jacob@ximian.com>
 
 	* bonobo/bonobo-generic-factory.c

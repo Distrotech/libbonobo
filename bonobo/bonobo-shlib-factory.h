@@ -56,6 +56,13 @@ BonoboShlibFactory *bonobo_shlib_factory_new_closure  (const char            *co
 						       gpointer               oaf_impl_ptr,
 						       GClosure              *factory_closure);
 
+Bonobo_Unknown      bonobo_shlib_factory_std          (const char            *component_id,
+						       PortableServer_POA     poa,
+						       gpointer               oaf_impl_ptr,
+						       BonoboFactoryCallback  factory_cb,
+						       gpointer               user_data,
+						       CORBA_Environment     *ev);
+
 void                bonobo_shlib_factory_track_object (BonoboShlibFactory    *factory,
 						       BonoboObject          *object);
 
@@ -64,13 +71,16 @@ void                bonobo_shlib_factory_inc_live     (BonoboShlibFactory    *fa
 void                bonobo_shlib_factory_dec_live     (BonoboShlibFactory    *factory);
 
 #define BONOBO_OAF_SHLIB_FACTORY(oafiid, descr, fn, data)                     \
-static CORBA_Object                                                           \
+	BONOBO_ACTIVATION_SHLIB_FACTORY(oafiid, descr, fn, data)
+#define BONOBO_OAF_SHLIB_FACTORY_MULTI(oafiid, descr, fn, data)               \
+	BONOBO_ACTIVATION_SHLIB_FACTORY(oafiid, descr, fn, data)
+
+#define BONOBO_ACTIVATION_SHLIB_FACTORY(oafiid, descr, fn, data)	      \
+static Bonobo_Unknown                                                         \
 make_factory (PortableServer_POA poa, const char *iid, gpointer impl_ptr,     \
 	      CORBA_Environment *ev)                                          \
 {                                                                             \
-	BonoboShlibFactory *f;                                                \
-	f = bonobo_shlib_factory_new (oafiid, poa, impl_ptr, fn, data);	      \
-        return CORBA_Object_duplicate (BONOBO_OBJREF (f), ev);		      \
+	return bonobo_shlib_factory_std (oafiid, poa, impl_ptr, fn, data, ev);\
 }                                                                             \
 static BonoboActivationPluginObject plugin_list[] = {{oafiid, make_factory}, { NULL } };   \
 const  BonoboActivationPlugin Bonobo_Plugin_info = { plugin_list, descr };

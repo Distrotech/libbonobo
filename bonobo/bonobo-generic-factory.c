@@ -217,3 +217,32 @@ BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory,
 		       Bonobo_GenericFactory,
 		       BONOBO_OBJECT_TYPE,
 		       bonobo_generic_factory);
+
+
+/**
+ * bonobo_generic_factory_main:
+ * @oaf_iid: the oaf iid of the factory
+ * @factory_cb: the factory callback
+ * @user_data: a user data pointer
+ * 
+ *    A Generic 'main' routine so we don't stick a load of code
+ * inside a public macro.
+ * 
+ * Return value: 0 on success, 1 on failure.
+ **/
+int
+bonobo_generic_factory_main (const char           *oaf_iid,
+			     BonoboFactoryCallback factory_cb,
+			     gpointer              user_data)
+{
+	BonoboGenericFactory *factory;
+
+	factory = bonobo_generic_factory_new (
+		oaf_iid, factory_cb, user_data);
+	
+	if (factory) {
+		bonobo_main ();
+		return 0;
+	} else
+		return 1;
+}

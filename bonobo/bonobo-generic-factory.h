@@ -61,30 +61,32 @@ BonoboGenericFactory *bonobo_generic_factory_construct	 (BonoboGenericFactory  *
 							  const char            *oaf_iid,
 							  GClosure              *factory_cb);
 
+int                  bonobo_generic_factory_main	 (const char            *oaf_iid,
+							  BonoboFactoryCallback  factory_cb,
+							  gpointer               user_data);
+
 #if defined (__BONOBO_UI_MAIN_H__) || defined (LIBBONOBOUI_H)
-#define BONOBO_FACTORY_INIT(descr, version, argcp, argv)                      \
-	if (!bonobo_ui_init (descr, version, argcp, argv))                    \
+#define BONOBO_FACTORY_INIT(descr, version, argcp, argv)			\
+	if (!bonobo_ui_init (descr, version, argcp, argv))			\
 		g_error (_("Could not initialize Bonobo"));
 #else
-#define BONOBO_FACTORY_INIT(desc, version, argcp, argv)                       \
-	if (!bonobo_init (argcp, argv))                                       \
+#define BONOBO_FACTORY_INIT(desc, version, argcp, argv)				\
+	if (!bonobo_init (argcp, argv))						\
 		g_error (_("Could not initialize Bonobo"));
 #endif
 
 #define BONOBO_OAF_FACTORY(oafiid, descr, version, callback, data)		\
+	BONOBO_ACTIVATION_FACTORY(oafiid, descr, version, callback, data)
+#define BONOBO_OAF_FACTORY_MULTI(oafiid, descr, version, callback, data)	\
+	BONOBO_ACTIVATION_FACTORY(oafiid, descr, version, callback, data)
+
+#define BONOBO_ACTIVATION_FACTORY(oafiid, descr, version, callback, data)	\
 int main (int argc, char *argv [])						\
 {										\
-	BonoboGenericFactory *factory;						\
-										\
 	BONOBO_FACTORY_INIT (descr, version, &argc, argv);			\
-										\
-	factory = bonobo_generic_factory_new (oafiid, callback, data);		\
-	bonobo_main ();								\
-	return 0;								\
+									        \
+	return bonobo_generic_factory_main (oafiid, callback, data);		\
 }                                                                             
-
-#define BONOBO_OAF_FACTORY_MULTI(oafiid, descr, version, callback, data)      \
-	BONOBO_OAF_FACTORY(oafiid, descr, version, callback, data)
 
 G_END_DECLS
 

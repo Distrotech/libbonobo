@@ -263,3 +263,36 @@ bonobo_shlib_factory_track_object (BonoboShlibFactory *factory,
 			  G_CALLBACK (destroy_handler),
 			  factory);
 }
+
+
+/**
+ * bonobo_shlib_factory_std:
+ * @component_id:
+ * @poa:
+ * @oaf_impl_ptr:
+ * @factory_cb:
+ * @user_data:
+ * @ev:
+ * 
+ *    A Generic std shlib routine so we don't stick a load of code
+ * inside a public macro.
+ * 
+ * Return value: 0 on success, 1 on failure.
+ **/
+Bonobo_Unknown
+bonobo_shlib_factory_std (const char            *component_id,
+			  PortableServer_POA     poa,
+			  gpointer               oaf_impl_ptr,
+			  BonoboFactoryCallback  factory_cb,
+			  gpointer               user_data,
+			  CORBA_Environment     *ev)
+{
+	BonoboShlibFactory *f;
+
+	f = bonobo_shlib_factory_new (
+		component_id, poa,
+		oaf_impl_ptr,
+		factory_cb, user_data);
+
+        return CORBA_Object_duplicate (BONOBO_OBJREF (f), ev);
+}
