@@ -1,3 +1,7 @@
+2000-12-12  Michael Meeks  <michael@helixcode.com>
+
+	* tests/test-any.c (main): add gtk_type_init.
+
 2000-12-11  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-moniker-util.c (get_async1_cb): impl.

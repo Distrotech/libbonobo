@@ -122,6 +122,8 @@ main (int argc, char *argv [])
 	ev = &real_ev;
 	CORBA_exception_init (ev);
 
+	gtk_type_init ();
+
 	orb = oaf_init (argc, argv);
 	
 	if (bonobo_init (orb, NULL, NULL) == FALSE)
