@@ -1,5 +1,15 @@
 2001-04-09  Michael Meeks  <michael@ximian.com>
 
+	* doc/dia/Makefile.am: add.
+
+	* doc/Makefile.am: add dia subdir
+
+	* configure.in: add doc/dia/Makefile
+
+	* doc/Makefile.am (text_files): add bonobo.dtd
+
+2001-04-09  Michael Meeks  <michael@ximian.com>
+
 	* tests/Makefile.am: add test-focus
 
 	* tests/test-focus.c: Add.
