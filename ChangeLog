@@ -1,3 +1,22 @@
+2003-04-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
+
+	* configure.in: call AC_LIBTOOL_WIN32_DLL.
+
+	* bonobo/Makefile.am, bonobo-activation/Makefile.am, idl/Makefile.am,
+	monikers/Makefile.am, tests/test-activation/Makefile.am:
+	append -no-undefined to each library's LDFLAGS.
+
+	* monikers/Makefile.am (libmoniker_std_2_la_LIBADD): write dependency
+	libraries explicitly in it.
+
+	* tests/test-activation/Makefile.am (libtest_plugin_la_LIBADD): ditto.
+
+	* activation-server/Makefile.am (LDADD): move -lname-server-2 before
+	$(SERVER_LIBS). because it depends on $(SERVER_LIBS).
+	
+	* samples/echo/Makefile.am (bonobo_echo_2_LDADD, echo_client_2_LDADD):
+	move libEcho.a to the first. because it depends on other libraries.
+
 2003-04-16  Michael Meeks  <michael@ximian.com>
 
 	* configure.in: add activation debug flags, and the

@@ -52,6 +52,8 @@ libbonobo_2_la_LIBADD = \
 	$(LIBBONOBO_LIBS) \
 	../bonobo-activation/libbonobo-activation.la
 
+libbonobo_2_la_LDFLAGS = -no-undefined
+
 libbonoboincludedir = $(includedir)/libbonobo-2.0/bonobo
 
 libbonoboinclude_HEADERS =		\

@@ -29,8 +29,12 @@ bonobo_activation_test_SOURCES=		\
 # get libtool to build a noinst shared lib.
 libtest_plugin_la_LDFLAGS=					\
 	-rpath $(shell (cd $(top_builddir);pwd))/test/.libs 	\
-	-module -avoid-version					\
+	-module -avoid-version -no-undefined			\
 	$(NULL)
+
+libtest_plugin_la_LIBADD=					\
+	../../bonobo-activation/libbonobo-activation.la		\
+	$(LIBBONOBO_LIBS)
 
 libtest_plugin_la_SOURCES=		\
 	plugin.h			\

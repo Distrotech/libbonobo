@@ -15,6 +15,7 @@ INCLUDES=					\
 LDFLAGS=					\
 	$(LIBBONOBO_LIBS)			\
 	$(BONOBO_ACTIVATION_LT_VERSION_INFO)	\
+	-no-undefined				\
 	$(NULL)
 
 bonobo_activationincludedir = $(includedir)/bonobo-activation-2.0/bonobo-activation
