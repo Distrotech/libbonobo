@@ -1,5 +1,10 @@
 1999-09-26  Miguel de Icaza  <miguel@gnu.org>
 
+	* bonobo/gnome-bonobo-item.c (gbi_set_arg): Add support for
+	delayed realization of the remote item for the startup case (ie,
+	the parent item is shown, tries to be realized, but the
+	GnomeBonoboItem is not yet finished setting itself up).
+
 	* bonobo/gnome-bonobo-selector.c (gnome_bonobo_select_goad_id):
 	Use GnomeDialogRun here.
 
