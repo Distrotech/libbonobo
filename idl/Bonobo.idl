@@ -1,0 +1,29 @@
+/*
+ * The Bonobo Document Model
+ *
+ * Author: 
+ *     Miguel de Icaza (miguel@gnu.org)
+ *
+ */
+
+module GNOME {
+};
+
+module GNOME {
+
+#include "base.idl"
+
+#include "storage.idl"
+#include "persist.idl"
+
+#include "moniker.idl"
+
+#include "advise.idl"
+
+#include "container.idl"
+#include "clientsite.idl"
+
+#include "bobject.idl"
+
+};
+

@@ -1,0 +1,9 @@
+interface Moniker {
+
+	enum MonikerWhich {
+		CONTAINER,	// Return the Container's moniker.
+		OBJ_RELATIVE,	// Return a relative moniker to the object
+		OBJ_FULL	// Return an absolute moniker for this object.
+	};
+	
+};

@@ -1,0 +1,3 @@
+interface AdviseSink {
+	void notify (in long notify_type);
+};

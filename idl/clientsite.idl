@@ -1,0 +1,60 @@
+/*
+ * Bonobo::ClientSite
+ *
+ * This interface must be provided by containers.
+ *
+ * Containers must provide an instance of ClientSite
+ * for every compound document object it contains.
+ *
+ * Author:
+ *    Miguel de Icaza (miguel@gnu.org)Xs
+ */
+
+interface ClientSite : base {
+
+	/**
+	 * get_container:
+	 *
+	 * Returns a pointer to the Container instance.
+	 */
+	Container get_container ();
+	
+	/**
+	 * show_window:
+	 * @show: boolean value, reports whethe
+	 *
+	 * Used by the containee to inform the parent process
+	 * when it shows its own separate editing window.
+	 *
+	 */
+	oneway void show_window (in boolean shown);
+
+	/**
+	 * get_moniker:
+	 * @which: Which kind of moniker is requested
+	 *
+	 * FIXME: Rethink this.
+	 */
+	Moniker get_moniker (in Moniker::MonikerWhich which);
+
+
+	/**
+	 * queue_resize:
+	 * 
+	 * Queues a resize for this object
+	 */
+	oneway void queue_resize ();
+
+	/**
+	 * save_object:
+	 * 
+	 * Saves the object that is attached to this client site.
+	 * This operation is syncronous and will be done by the time
+	 * the function returns.
+	 */
+	Persist::Status save_object ();
+};
+
+
+
+
