@@ -1,5 +1,8 @@
 1999-07-24  Nat Friedman  <nat@gnome-support.com>
 
+	* components/text-plain/bonobo-text-plain.c: Removed obsolete verb
+ 	code.
+
 	* bonobo/gnome-ui-handler.c: Continued work.
 	
 	* bonobo/gnome-moniker.c (gnome_moniker_construct): Fixed the call

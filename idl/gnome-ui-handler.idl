@@ -18,19 +18,18 @@ module GNOME {
 		typedef sequence<octet> iobuf;
        
        		enum MenuType {
-			MenuTypeBlah
+			MenuTypeEnd,
+			MenuTypeItem,
+			MenuTypeSubtree,
+			MenuTypeRadioItem,
+			MenuTypeRadioGroup,
+			MenuTypeToggleItem,
+			MenuTypeDynlist,
+			MenuTypeSeparator
        		};
        
        		enum ToolbarType {
 			ToolbarTypeBlah
-       		};
-       
-       		enum PixmapType {
-			PixmapTypeBlah
-       		};
-       
-       		enum ModifierType {
-			ModifierTypeBlah
        		};
        
        		/*
@@ -64,18 +63,19 @@ module GNOME {
 		 *
 		 * These routines are for the creation and
 		 * manipulation of menu items.
+		 *
+		 * FIXME: Missing routine to get parent's children.
        		 *
 		 */
-       		boolean menu_item_create (in string path, in MenuType type, in string label,
-       					       in PixmapType pixmap_type, in iobuf pixmap_data,
-       					       in unsigned long accelerator_key, in ModifierType modifier,
-					       in long pos);
-       		boolean menu_item_remove (in string path);
-       		boolean menu_item_fetch (in string path, out MenuType type, out string label,
-       					 out PixmapType pixmap_type, out iobuf pixmap_data,
-       					 out unsigned long accelerator_key, out ModifierType modifier,
-					 out long pos);
-       
+       		void menu_item_create (in string path, in MenuType type, in string label,
+				       in string hint, in iobuf pixmap_data,
+				       in unsigned long accelerator_key, in long modifier,
+				       in long pos, in UIHandler uih);
+       		void menu_item_remove (in string path);
+       		void menu_item_fetch (in string path, out MenuType type, out string label,
+				      out string hint, out iobuf pixmap_data,
+				      out unsigned long accelerator_key, out long modifier, out long pos);
+		
        		long menu_item_get_pos (in string path);
        
        		void menu_item_set_sensitivity (in string path, in boolean sensitivity);
@@ -93,11 +93,11 @@ module GNOME {
        		void menu_item_set_hint (in string path, in string hint);
        		string menu_item_get_hint (in string path);
        
-       		void menu_item_set_pixmap (in string path, in PixmapType type, in iobuf data);
-       		void menu_item_get_pixmap (in string path, out PixmapType type, out iobuf data);
+       		void menu_item_set_pixmap (in string path, in iobuf data);
+       		void menu_item_get_pixmap (in string path, out iobuf data);
        
-       		void menu_item_set_accel (in string path, in unsigned long accelerator_key, in ModifierType ac_mods);
-       		void menu_item_get_accel (in string path, out unsigned long accelerator_key, out ModifierType ac_mods);
+       		void menu_item_set_accel (in string path, in unsigned long accelerator_key, in long ac_mods);
+       		void menu_item_get_accel (in string path, out unsigned long accelerator_key, out long ac_mods);
        
        		void menu_item_toggle_set_state (in string path, in boolean state);
        		boolean menu_item_toggle_get_state (in string path);
@@ -129,14 +129,12 @@ module GNOME {
        		 *
 		 */
        		boolean toolbar_item_create_full (in string path, in ToolbarType type, in string label,
-       					       in PixmapType pixmap_type, in iobuf pixmap_data,
-       					       in unsigned long accelerator_key, in ModifierType modifier,
-       					       in long pos);
+						  in iobuf pixmap_data, in unsigned long accelerator_key,
+						  in long modifier, in long pos);
        		boolean toolbar_item_remove (in string path);
        		boolean toolbar_item_fetch (in string path, out ToolbarType type, out string label,
-       					 out PixmapType pixmap_type, out iobuf pixmap_data,
-       					 out unsigned long accelerator_key, out ModifierType modifier,
-       					 out long pos);
+					    out iobuf pixmap_data, out unsigned long accelerator_key,
+					    out long modifier, out long pos);
        
        		long toolbar_item_get_pos (in string path);
        
@@ -149,11 +147,11 @@ module GNOME {
        		void toolbar_item_set_label (in string path, in string label);
        		string toolbar_item_get_label (in string path);
        
-       		void toolbar_item_set_pixmap (in string path, in PixmapType type, in iobuf data);
-       		void toolbar_item_get_pixmap (in string path, out PixmapType type, out iobuf data);
+       		void toolbar_item_set_pixmap (in string path, in iobuf data);
+       		void toolbar_item_get_pixmap (in string path, out iobuf data);
        
-       		void toolbar_item_set_accel (in string path, in unsigned long accelerator_key, in ModifierType ac_mods);
-       		void toolbar_item_get_accel (in string path, out unsigned long accelerator_key, out ModifierType ac_mods);
+       		void toolbar_item_set_accel (in string path, in unsigned long accelerator_key, in long ac_mods);
+       		void toolbar_item_get_accel (in string path, out unsigned long accelerator_key, out long ac_mods);
        
        		void toolbar_item_toggle_set_state (in string path, in boolean state);
        		boolean toolbar_item_toggle_get_state (in string path);
@@ -188,8 +186,11 @@ module GNOME {
        		 * overriden.
        		 */
        
-       		void item_activated (in string path);
-       		void item_overriden (in string path);
+       		void menu_item_activated (in string path);
+       		void menu_item_overriden (in string path);
+
+       		void toolbar_item_activated (in string path);
+       		void toolbar_item_overriden (in string path);
        
        	};
        
