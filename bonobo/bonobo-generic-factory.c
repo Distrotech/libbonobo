@@ -120,7 +120,7 @@ bonobo_generic_factory_construct (const char *goad_id,
 
 	CORBA_exception_free (&ev);
 
-	if (ret != OD_REG_SUCCESS){
+	if (ret == OD_REG_ERROR){
 		bonobo_object_unref (BONOBO_OBJECT (c_factory));
 		return NULL;
 	}

@@ -1,3 +1,11 @@
+2000-02-12  Matt Loper  <matt@helixcode.com>
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_construct): Since od_server_register() can
+	return two types of success (OD_REG_SUCCESS or
+	OD_REG_ALREADY_ACTIVE), we now return NULL only if OD_REG_ERROR is
+	returned.
+	
 2000-02-10  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo-ui-handler.c: Replace strdup() with g_strdup(), thanks to
