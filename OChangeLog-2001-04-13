@@ -1,3 +1,11 @@
+1999-09-28  Nat Friedman  <nat@gnome-support.com>
+
+	* storage-modules/Makefile.am (libstorage_efs_la_LDFLAGS): Link
+ 	with -Llibefs/src/.libs, not -Llibefs/src/.
+
+	* idl/gnome-client-site.idl (GNOME::ClientSite): Remove the
+ 	queue_resize method from this ineterface.
+
 1999-09-28  Kjartan Maraas  <kmaraas@online.no>
 
 	* configure.in: Added "ro" to ALL_LINGUAS.
