@@ -1,3 +1,40 @@
+Bonobo 0.31
+
+	* Serious bugs fixed
+		* Depend on ORBit-0.5.6
+		* Re-include Federico's Policy leak fixes.
+		* Fix fatal toolbar icon bug (DanW)
+		* memset fixes (George Lebl)
+
+	* Monikers
+		Drastic simplification of Moniker API (Me)
+		Std monikers merged to shlib (Dietmar)
+		Moniker extenders implemented (Dietmar, Me)
+		Misc. fixes (Miguel)
+		Parsing tests added (Me)
+		Simplify interface naming on resolve (Me)
+
+	* Property bag
+		Listening re-written using EventSource (Dietmar)
+		Use our own ID scheme to identity listeners (Dietmar)
+		Allow sub-classing (George Lebl)
+
+	* Running context to track references implemented (Me)
+
+	* Useful cleanups
+		* API documentation (Miguel, Me)
+		* Make generic-factory sub-classable (Me)
+		* Make the component selector control useful (Me)
+		* Implement a shlib factory to handle module unloading (Me)
+		* UI methods on Canvas embeddables (Me)
+		* VFS storage fixes (Lutz Muller)
+		* Persist fixes (Gergo Erdi)
+		* Make bonobo-transient sub-classable (George Lebl)
+
+	* Build & misc. bug fixes (Arturo Tena, Richard Hult, Dave Camp
+	                           Daniel Egger, Maciej Stachowiak)
+
+
 Bonobo 0.30
 
 	* Released since Elliot would not produce a fixed ORBit release,

@@ -363,7 +363,6 @@ bonobo_transient_construct (BonoboTransient          *transient,
 	success = TRUE;
 
  out:
-#ifdef ORBIT_IS_FINALLY_RELEASED_AND_I_DO_NOT_HAVE_TO_GO_THROUGH_THIS_BULLSHIT
 	if (policies->_buffer[0] != NULL) {
 		CORBA_Policy_destroy (policies->_buffer[0], &ev);
 
@@ -396,7 +395,7 @@ bonobo_transient_construct (BonoboTransient          *transient,
 			success = FALSE;
 		}
 	}
-#endif
+
 	g_free (policies->_buffer);
 	g_free (policies);
 
