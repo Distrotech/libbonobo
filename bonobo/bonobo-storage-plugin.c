@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "bonobo-storage-plugin.h"
 
@@ -57,29 +58,47 @@ bonobo_storage_load_plugins (void)
 {
 	DIR *dir;
 	struct dirent *de;
-	gchar *plugin_name;
-	gint len;
+	gchar *plugin_name, *path;
+	gchar **plugin_dir;
+	gchar *bonobo_plugin_path;
+	gint len, i = 0;
 
-	if (!g_module_supported ()) return;
+	if (!g_module_supported ()) 
+		return;
 
-	if (storage_plugin_list) return; /* already loaded */
+	if (storage_plugin_list) /* already loaded */
+		return; 
 
-	if ((dir = opendir (PLUGIN_DIR)) == NULL) return;
+	if ((bonobo_plugin_path = getenv ("BONOBO_PLUGIN_PATH")))
+		bonobo_plugin_path = g_strconcat (bonobo_plugin_path, ":",  
+						  PLUGIN_DIR, NULL);
+	else 
+		bonobo_plugin_path = PLUGIN_DIR;
+	
+	plugin_dir = g_strsplit (bonobo_plugin_path, ":", 100);
 
-	while ((de = readdir (dir)) != NULL){
-		len = strlen (de->d_name);
+	while ((path = plugin_dir[i++])) {
 
-		if (len > (strlen (PLUGIN_PREFIX) + 3) &&
-		    strncmp (de->d_name, PLUGIN_PREFIX, 
-			     strlen (PLUGIN_PREFIX)) == 0 &&
-		    strncmp (de->d_name + len - 3, ".so", 3) == 0){
-			plugin_name=g_strconcat (PLUGIN_DIR, "/", 
-						 de->d_name, NULL);
-			plugin_load (plugin_name);
-			g_free (plugin_name);
+		if ((dir = opendir (path)) == NULL)  
+			continue;
+
+		while ((de = readdir (dir)) != NULL){
+			len = strlen (de->d_name);
+
+			if (len > (strlen (PLUGIN_PREFIX) + 3) &&
+			    strncmp (de->d_name, PLUGIN_PREFIX, 
+				     strlen (PLUGIN_PREFIX)) == 0 &&
+			    strncmp (de->d_name + len - 3, ".so", 3) == 0) {
+				plugin_name=g_strconcat (path, "/", 
+							 de->d_name, NULL);
+				plugin_load (plugin_name);
+				g_free (plugin_name);
+			}
 		}
+		closedir (dir);
 	}
-	closedir (dir);
+
+	g_strfreev (plugin_dir);
 }
 
 

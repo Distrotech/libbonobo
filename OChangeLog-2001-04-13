@@ -1,3 +1,17 @@
+Tue Oct 31 09:29:17 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* storage-modules/bonobo-stream-efs.c (real_set_info): raise more
+	exceptions.
+
+	* storage-modules/bonobo-storage-efs.c (real_set_info): raise more
+	exceptions.
+
+	* tests/test-storage.c: a complete new test environment for
+ 	storage drivers.
+
+	* bonobo/bonobo-storage-plugin.c (bonobo_storage_load_plugins):
+	new environment variable BONOBO_PLUGIN_PATH.
+
 2000-10-30  John Sullivan  <sullivan@eazel.com>
 
 	* doc/ui-faq.txt:
@@ -50,7 +64,6 @@ Mon Oct 30 20:41:10 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/bonobo-stream-fs.[ch]: Update
 	
->>>>>>> 1.707
 2000-10-28  Eskil Heyn Olsen  <eskil@eazel.com>
 
 	* components/application-x-gnomine/Makefile.am:
