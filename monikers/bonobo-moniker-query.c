@@ -56,7 +56,7 @@ query_parse_display_name (BonoboMoniker     *moniker,
 	}
 	
 	if (in_string || brackets != 0) {
-		CORBA_set_exception (ev, CORBA_USER_EXCEPTION,
+		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_Bonobo_Moniker_InvalidSyntax, NULL);
 		return CORBA_OBJECT_NIL;
 	}

@@ -12,11 +12,11 @@ gnome_libs =				\
 	$(GNOME_LIBDIR)			\
 	$(GDK_PIXBUF_LIBS) 		\
         $(GNOMEUI_LIBS)			\
-	$(OAF_LIBS) 	\
 	$(INTLLIBS)
 
 bonobo_libs =				\
-	$(top_builddir)/bonobo/libbonobo.la
+	$(top_builddir)/bonobo/libbonobo.la \
+	$(BONOBO_LIBS)
 
 oafdir = $(datadir)/oaf
 oaf_DATA = std-moniker.oafinfo
@@ -35,4 +35,5 @@ std_moniker_SOURCES =			\
 	std-moniker.c
 
 std_moniker_LDADD =			\
-	$(bonobo_libs)
+	$(bonobo_libs)			\
+	$(gnome_libs)

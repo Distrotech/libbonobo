@@ -1,3 +1,10 @@
+2000-08-12  Joe Shaw  <joe@helixcode.com>
+
+	* monikers/Makefile.am: Fixed so it will build this directory.
+	
+	* monikers/bonobo-moniker-query.c: changed call of CORBA_set_exception
+	to CORBA_exception_set.
+
 2000-08-12  Michael Meeks  <michael@helixcode.com>
 
 	* Bump version to 0.17
