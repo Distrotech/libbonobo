@@ -1,5 +1,11 @@
+2000-06-28  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo-idl/main.c: (search_interface): Fix random compile
+	problem (I think I fixed it right, but who knows).
+
 2000-06-27 J SHane Culpepper <pepper@eazel.com>
-	*Makefile.am: addiing missing \ to subdirs.
+	
+	* Makefile.am: addiing missing \ to subdirs.
 
 2000-06-27  Miguel de Icaza  <miguel@helixcode.com>
 
