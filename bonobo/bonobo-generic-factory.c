@@ -30,7 +30,7 @@ impl_GNOME_GenericFactory_supports (PortableServer_Servant servant,
 				    CORBA_char *obj_goad_id,
 				    CORBA_Environment *ev)
 {
-	g_message ("support invoked\n");
+	g_warning ("supports operation invoked for ID %s", obj_goad_id);
 	return TRUE;
 }
 
@@ -47,7 +47,7 @@ impl_GNOME_GenericFactory_create_object (PortableServer_Servant servant,
 	factory = GNOME_GENERIC_FACTORY (gnome_object_from_servant (servant));
 
 	class = GNOME_GENERIC_FACTORY_CLASS (GTK_OBJECT (factory)->klass);
-	object = (*class->new_generic)(factory);
+	object = (*class->new_generic)(factory, obj_goad_id);
 
 	if (!object)
 		return CORBA_OBJECT_NIL;
@@ -189,12 +189,12 @@ gnome_generic_factory_finalize (GtkObject *object)
 }
 
 static GnomeObject *
-gnome_generic_factory_new_generic (GnomeGenericFactory *factory)
+gnome_generic_factory_new_generic (GnomeGenericFactory *factory, const char *goad_id)
 {
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_GENERIC_FACTORY (factory), NULL);
 
-	return (*factory->factory)(factory, factory->factory_closure);
+	return (*factory->factory)(factory, goad_id, factory->factory_closure);
 }
 
 static void

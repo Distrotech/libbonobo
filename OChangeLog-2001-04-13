@@ -1,5 +1,9 @@
 1999-12-09  Elliot Lee  <sopwith@redhat.com>
 
+	* bonobo/gnome-generic-factory.[ch],
+	samples/controls/bonobo-clock-control.c: Pass the goad_id to the
+	GnomeGenericFacoryFn etc.
+
 	* All files: Use GNOME2 (e.g. OAF) if BONOBO_USE_GNOME2 is defined.
 	* bonobo/*.[ch]: Have the get_epv() functions take a 'duplicate flag
 	that indicates whether a copy of the epv or a pointer to the default should be used.
