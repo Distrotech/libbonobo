@@ -174,7 +174,7 @@ CORBA_Object
 bonobo_activation_internal_activation_context_get_extended (gboolean           existing_only,
                                                             CORBA_Environment *ev)
 {
-	BonoboActivationBaseService base_service = {};
+	BonoboActivationBaseService base_service = { NULL };
 
 	base_service.name = "IDL:Bonobo/ActivationContext:1.0";
 	base_service.session_name = bonobo_activation_session_name_get ();
@@ -187,7 +187,7 @@ bonobo_activation_internal_activation_context_get_extended (gboolean           e
 CORBA_Object
 bonobo_activation_activation_context_get (void)
 {
-	BonoboActivationBaseService base_service = {};
+	BonoboActivationBaseService base_service = { NULL };
 
 	base_service.name = "IDL:Bonobo/ActivationContext:1.0";
 	base_service.session_name = bonobo_activation_session_name_get ();
@@ -201,7 +201,7 @@ bonobo_activation_object_directory_get (const char *username,
                           const char *hostname,
                           const char *domain)
 {
-        BonoboActivationBaseService base_service = {};
+        BonoboActivationBaseService base_service = { NULL };
 
         base_service.name = "IDL:Bonobo/ObjectDirectory:1.0";
         base_service.session_name = bonobo_activation_session_name_get ();
