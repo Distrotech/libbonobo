@@ -4,7 +4,7 @@
 #include <string.h>
 #include <libbonobo.h>
 
-#define NUM_THREADS 1
+#define NUM_THREADS 8
 #define NUM_GETS    8
 
 #define PROP_IN_MAIN   1
@@ -64,10 +64,17 @@ test_thread (gpointer data)
 	return data;
 }
 
+static gboolean
+wakeup_fn (gpointer data)
+{
+	return TRUE;
+}
+
 static void
 test_threads (TestClosure *tc)
 {
 	int i;
+	guint wakeup;
 	GThread *threads [NUM_THREADS];
 
 	running_threads = NUM_THREADS;
@@ -75,6 +82,8 @@ test_threads (TestClosure *tc)
 	for (i = 0; i < NUM_THREADS; i++)
 		threads [i] = g_thread_create (test_thread, tc, TRUE, NULL);
 	
+	wakeup = g_timeout_add (100, wakeup_fn, NULL);
+
 	while (1) {
 		G_LOCK (running_threads);
 		if (running_threads == 0) {
@@ -82,8 +91,10 @@ test_threads (TestClosure *tc)
 			break;
 		}
 		G_UNLOCK (running_threads);
-		g_main_context_iteration (NULL, FALSE);
+		g_main_context_iteration (NULL, TRUE);
 	}
+
+	g_source_remove (wakeup);
 	
 	for (i = 0; i < NUM_THREADS; i++) {
 		if (!(g_thread_join (threads [i]) == tc))

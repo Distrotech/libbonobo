@@ -1,5 +1,8 @@
 2003-05-29  Michael Meeks  <michael@ximian.com>
 
+	* tests/test-thread.c (test_threads): add a
+	timeout to the glib mainloop for loop graunching.
+
 	* bonobo/bonobo-main.c
 	(bonobo_poa_get_threaded): set the ORB_CTRL_MODEL
 	policy without which this is mostly useless, also
