@@ -600,7 +600,7 @@ char *
 bonobo_activation_make_registration_id (const char *iid, const char *display)
 {
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_warning ("Make registration id from '%s' '%s'", iid, display);
+        g_message ("Make registration id from '%s' '%s'", iid, display);
 #endif
         if (display == NULL) {
                 return g_strdup (iid);

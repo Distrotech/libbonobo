@@ -1,3 +1,9 @@
+2004-08-10  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_make_registration_id): g_message instead of
+	g_warning.
+
 2004-08-09  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/test-activation/Makefile.am: Don't install $(serverfiles).
