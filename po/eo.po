@@ -1,11 +1,14 @@
 # Esperanto translation of libbonobo.
 # Copyright (C) 2003 Free Software Foundation, Inc.
+# This file is distributed under the same license as the bonobo-activation package.
+# Charles Voelger <cvoelger@dweasel.com>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 1.0\n"
-"POT-Creation-Date: 2003-07-04 13:33+0200\n"
-"PO-Revision-Date: 2003-03-06 13:55+0500\n"
+"Project-Id-Version: libbonobo 2.3.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-07-01 15:54-0400\n"
+"PO-Revision-Date: 2003-07-01 15:54-0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,52 +17,52 @@ msgstr ""
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
-msgstr ""
+msgstr "Ne eblis trovi kion idon la servilo estis listigita en"
 
 #: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
-msgstr ""
+msgstr "Identigilo de aktivigo ne estas valida."
 
 #: activation-server/activation-server-main.c:66
 msgid "Directory to read .server files from"
-msgstr ""
+msgstr "Dosierujo por legado .server dosierojn"
 
 #: activation-server/activation-server-main.c:66
 msgid "DIRECTORY"
-msgstr ""
+msgstr "DOSIERUJO"
 
 #: activation-server/activation-server-main.c:69
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr ""
+msgstr "Servu ĉar ActivationContext (defaŭlto etas nur ObjectDirectory)"
 
 #: activation-server/activation-server-main.c:73
 msgid "File descriptor to write IOR to"
-msgstr ""
+msgstr "Dosiera priskribisto skribi IOR el"
 
 #: activation-server/activation-server-main.c:73
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
-msgstr ""
+msgstr "FD"
 
 #: activation-server/activation-server-main.c:81
 msgid "Query expression to evaluate"
-msgstr ""
+msgstr "Informmenda esprimo komputi"
 
 #: activation-server/activation-server-main.c:81
 msgid "EXPRESSION"
-msgstr ""
+msgstr "ESPRIMO"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr ""
+msgstr "CORBA CosNaming servo."
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
-msgstr ""
+msgstr "Noma servo"
 
 #: activation-server/object-directory-activate.c:185
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr ""
+msgstr "Ni ankoraŭ ne traktas aktivigojn de shlib-a objektojn en fora procezo"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
@@ -67,6 +70,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
+"La Bonobo-Activation-a agordodosiero legis malsukcese. Bonvolu, kontroli ke "
+"ĝi estas valida en : %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -76,117 +81,115 @@ msgstr ""
 #. * servers are registered.
 #.
 #: activation-server/object-directory-corba.c:889
-#, fuzzy, c-format
+#, c-format
 msgid "Race condition activating server '%s'"
-msgstr "Escepto dum aktivigas '%s'"
+msgstr "Kurada stato dum aktivado servilo '%s'"
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr ""
+msgstr "nula IID ne estas valida"
 
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr ""
+msgstr "IID '%s' havas nulan tipon"
 
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr ""
+msgstr "IID '%s' havas nulan lokon"
 
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr ""
+msgstr "signo '%c' nevalida en IID '%s'"
 
 #: activation-server/object-directory-load.c:306
-#, fuzzy, c-format
+#, c-format
 msgid "Property '%s' has no value"
-msgstr "eco havas malvalidan tipon"
+msgstr "Eco '%s' havas neniu valoron"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr ""
+msgstr "Procezido ne donis erarmesaĝon, nekonata malsukcesego okazis"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr ""
+msgstr "Malsukcesis dum legi de procezido : %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
-msgstr ""
+msgstr "Ne eblas branĉiĝi novan procezon"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:318
 #, c-format
 msgid "Child received signal %u (%s)"
-msgstr ""
+msgstr "Procezio ricevis signalon %u (%s)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr ""
+msgstr "Nekonata nefina eraro (stato estas %u)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:400
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr ""
+msgstr "bonobo-activation-o malsukcesis meti procezaron de %s : %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:412
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Malsukcesis aktivigi '%s'"
+msgstr "Malsukcesis lanĉi %s : %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr ""
+msgstr "Tro multaj alinomaj niveloj por lokaĵo, ĉi tio eble indikas ripeto"
 
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
-msgstr ""
+msgstr "Dosiera priskribo presi IOR el"
 
 #: bonobo-activation/bonobo-activation-init.c:195
-#, fuzzy
 msgid "IID to activate"
-msgstr "Malsukcesis aktivigi '%s'"
+msgstr "IID aktivigi"
 
 #: bonobo-activation/bonobo-activation-init.c:197
 msgid "Prevent registering of server with OAF"
-msgstr ""
+msgstr "Preventi registri servilon per OAF"
 
 #: bonobo-activation/bonobo-activation-init.c:282
-#, fuzzy
 msgid "Bonobo activation options"
-msgstr "Moniker-Aktivigo pasis tempolimon"
+msgstr "Bonobo aktiviga agordo"
 
 #: bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr ""
+msgstr "g_module_open de '%s' malsukcesis kun '%s'"
 
 #: bonobo-activation/bonobo-activation-shlib.c:126
 #: bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr ""
+msgstr "Ne trovas simbolon Bonobo_Plugin_info en '%s'"
 
 #: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr ""
+msgstr "Fabrikejo '%s' revenis NULON por '%s'"
 
 #: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr ""
+msgstr "Shlib-o '%s' ne enhavis '%s'"
 
 #: bonobo/bonobo-object.c:910
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Propra CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -210,7 +213,7 @@ msgstr "Sintakseraro en la Objekt-priskribo"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Ne povis aktivigi objekto de fabrikejo"
+msgstr "Ne povis aktivigi objekton de fabrikejo"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -406,20 +409,20 @@ msgstr "Ne povis krei instancon de la ekzempla echo-a komponanto"
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr "Okazis escepto '%s'"
+msgstr "Okazis escepton '%s'"
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr ""
+msgstr "Ne eblis sekurigi agordodosieron.\n"
 
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr ""
+msgstr "Bonvolu, certigu ke vi havas permesojn skribi al '%s'.\n"
 
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
-msgstr ""
+msgstr "Agordodosiero sukcese skribis.\n"
 
 #: utils/bonobo-activation-sysconf.c:80
 #, c-format
@@ -427,36 +430,38 @@ msgid ""
 "configuration file is:\n"
 "    %s\n"
 msgstr ""
+"agordodosiero estas :\n"
+"    %s\n"
 
 #: utils/bonobo-activation-sysconf.c:118
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr ""
+msgstr "%s jam estas en la agordodosiero\n"
 
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr ""
+msgstr "ne estas ĝusta struktura agordodosiero\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr ""
+msgstr "Bonobo-activation-a agordodosiero enhavas :\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr ""
+msgstr "Dosierujo forigi el la agordodosiero"
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
-msgstr ""
+msgstr "dosieruja pado"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr ""
+msgstr "Dosierujo por aldoni al la agordodosiero"
 
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
-msgstr ""
+msgstr "Montri dosierujojn en agordodosiero"
 
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr ""
+msgstr "Montri padon al la agordodosiero"
