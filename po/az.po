@@ -110,7 +110,7 @@ msgstr "iid %s bir NULL yerini daxil edir"
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "iid '%s' içində hökmsüz hərf '%c'"
+msgstr ""
 
 #: activation-server/object-directory-load.c:305
 #, c-format
