@@ -1,3 +1,19 @@
+2000-04-27  Maciej Stachowiak  <mjs@eazel.com>
+
+	* doc/standard-attributes.txt: Added a pointer to the attributes
+	document in the oaf module.
+	
+	* bonobo/item.oafinfo, bonobo/sample.oafinfo,
+	components/audio-ulaw/audio-ulaw.oafinfo
+	components/application-x-gnomine/application-x-mines.oafinfo,
+	components/image-x-png/image-x-png.oafinfo,
+	components/text-plain/text-plain.oafinfo,
+	samples/bonobo-class/echo.oafinfo,
+	samples/compound-doc/paint-component-simple.oafinfo,
+	samples/controls/bonobo-calculator-control.oafinfo,
+	samples/controls/bonobo-clock-control.oafinfo: Added all standard
+	attributes that make sense.
+
 2000-04-26  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-control-frame.c
