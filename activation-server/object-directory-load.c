@@ -551,19 +551,14 @@ static xmlSAXHandler od_SAXParser = {
 };
 
 static void
-od_load_file (const char *file,
-              GSList    **entries,
-              const char *host)
+od_load_context (xmlParserCtxt *ctxt,
+                 GSList    **entries,
+                 const char *host)
 {
         ParseInfo *info;
 	xmlSAXHandlerPtr oldsax;
-        xmlParserCtxt *ctxt;
         int ret = 0;
 
-        ctxt = xmlCreateFileParserCtxt (file);
-        if (!ctxt)
-                return;
-        
         info = parse_info_new ();
         info->host = host;
         info->entries = entries;
@@ -585,7 +580,6 @@ od_load_file (const char *file,
                         ret = -1;
         }
         ctxt->sax = oldsax;
-        xmlFreeParserCtxt (ctxt);
 
         parse_info_free (info);
 
@@ -593,6 +587,34 @@ od_load_file (const char *file,
                 /* FIXME: syslog the error */
                 return;
         }
+}
+
+static void
+od_load_file (const char *file,
+              GSList    **entries,
+              const char *host)
+{
+        xmlParserCtxt *ctxt;
+
+        ctxt = xmlCreateFileParserCtxt (file);
+        if (!ctxt)
+                return;
+        od_load_context (ctxt, entries, host);
+        xmlFreeParserCtxt (ctxt);
+}
+
+void
+bonobo_parse_server_info_memory (const char *server_info,
+                                 GSList    **entries,
+                                 const char *host)
+{
+        xmlParserCtxt *ctxt;
+
+        ctxt = xmlCreateMemoryParserCtxt (server_info, strlen (server_info));
+        if (!ctxt)
+                return;
+        od_load_context (ctxt, entries, host);
+        xmlFreeParserCtxt (ctxt);
 }
 
 static gboolean
@@ -643,10 +665,11 @@ od_load_directory (const char *directory,
 
 
 void
-bonobo_server_info_load (char **directories,
-                         Bonobo_ServerInfoList   *servers,
-                         GHashTable **iid_to_server_info_map,
-                         const char *host)
+bonobo_server_info_load (char                  **directories,
+                         Bonobo_ServerInfoList  *servers,
+                         GPtrArray const        *runtime_servers,
+                         GHashTable            **iid_to_server_info_map,
+                         const char             *host)
 {
 	GSList *entries;
         int length;
@@ -671,17 +694,26 @@ bonobo_server_info_load (char **directories,
 	/* Now convert 'entries' into something that the server can store and pass back */
 	length = g_slist_length (entries);
 
-	servers->_buffer = CORBA_sequence_Bonobo_ServerInfo_allocbuf (length);
+	servers->_buffer = CORBA_sequence_Bonobo_ServerInfo_allocbuf
+                (length + runtime_servers->len);
 	/*
 	 * FIXME: servers->_buffer should be freed
 	 */
-	servers->_length = length;
+	servers->_length = length + runtime_servers->len;
 
 	for (j = 0, p = entries; j < length; j++, p = p->next) {
 		memcpy (&servers->_buffer[j], p->data, sizeof (Bonobo_ServerInfo));
 		g_hash_table_insert (*iid_to_server_info_map,
                                      servers->_buffer[j].iid,
                                      &servers->_buffer[j]);
+	}
+          /* append information of runtime-defined servers  */
+	for (j = 0; j < runtime_servers->len; j++) {
+                servers->_buffer[length + j] = *(Bonobo_ServerInfo *)
+                        g_ptr_array_index (runtime_servers, j);
+		g_hash_table_insert (*iid_to_server_info_map,
+                                     servers->_buffer[length + j].iid,
+                                     &servers->_buffer[length + j]);
 	}
 
         g_slist_foreach (entries, (GFunc) g_free, NULL);

@@ -21,10 +21,15 @@
 #define NAMING_CONTEXT_IID "OAFIID:Bonobo_CosNaming_NamingContext"
 
 /* object-directory-load.c */
-void                   bonobo_server_info_load             (char                 **dirs,
-                                                            Bonobo_ServerInfoList *servers,
-                                                            GHashTable           **by_iid,
-                                                            const char            *host);
+void bonobo_server_info_load         (char                  **dirs,
+                                      Bonobo_ServerInfoList  *servers,
+                                      GPtrArray const        *runtime_servers,
+                                      GHashTable            **by_iid,
+                                      const char             *host);
+void bonobo_parse_server_info_memory (const char             *server_info,
+                                      GSList                **entries,
+                                      const char             *host);
+
 
 /* od-activate.c */
 typedef struct {

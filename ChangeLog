@@ -1,3 +1,40 @@
+2003-11-24  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-application.c
+	(bonobo_application_register_unique): Build a <oaf_info> XML
+	fragment to pass as description of the server being registered.
+
+	* activation-server/test-performance.c (test_server_info_load):
+	Pass new required parameter to bonobo_server_info_load.
+
+	* activation-server/object-directory.h: New attribute
+	attr_runtime_servers, for servers without .server file, completely
+	defined at run-time.
+
+	* activation-server/object-directory-corba.c (update_registry):
+	Pass in new 'runtime_servers' argument to bonobo_server_info_load.
+	(od_register_runtime_server_info): new function to register new
+	ServerInfo from XML string description.
+	(impl_Bonobo_ObjectDirectory_register_new): Call
+	od_register_runtime_server_info, instead of directly doing
+	hashtable lookup to register ServerInfo from description and at
+	the same time find out if ServerInfo is available (description
+	could be empty).
+	(object_directory_init): Initialize runtime_servers array here.
+
+	* activation-server/server.h: Declare
+	bonobo_parse_server_info_memory; update signature of
+	bonobo_server_info_load.
+
+	* activation-server/object-directory-load.c
+	(bonobo_server_info_load): Add argument 'runtime_servers'; Append
+	elements from runtime_servers to list of servers.
+	(od_load_context): common code from file and string parsing
+	functions.
+	(od_load_file): moved most call to od_load_context; call it here.
+	(bonobo_parse_server_info_memory): like od_load_file, but parses a
+	memory string instead of a file.
+
 2003-11-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-app-client.c, bonobo/bonobo-application.c:

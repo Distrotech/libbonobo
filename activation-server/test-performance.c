@@ -13,13 +13,14 @@ test_server_info_load (void)
 	int i;
 	char *dirs [] = { SERVERINFODIR, NULL };
 	Bonobo_ServerInfoList servers;
+	GPtrArray *runtime_servers = g_ptr_array_new ();
 	GHashTable *hash = NULL;
 
 	fprintf (stderr, "Testing server info load ...");
 
 	g_timer_start (timer);
 	for (i = 0; i < 10; i++)
-		bonobo_server_info_load (dirs, &servers, &hash,
+		bonobo_server_info_load (dirs, &servers, runtime_servers, &hash,
 					 bonobo_activation_hostname_get ());
 
 	fprintf (stderr, " %g(ms)\n",

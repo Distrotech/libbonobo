@@ -32,7 +32,10 @@ struct _ObjectDirectory {
 
         /* Information on all servers */
 	GHashTable           *by_iid;
+	  /* Includes contents of attr_runtime_servers at the end */
 	Bonobo_ServerInfoList attr_servers;
+	  /* Servers without .server file, completely defined at run-time */
+	GPtrArray            *attr_runtime_servers;
 	Bonobo_CacheTime      time_list_changed;
 
         /* CORBA Object tracking */

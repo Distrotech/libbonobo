@@ -186,6 +186,7 @@ update_registry (ObjectDirectory *od, gboolean force_reload)
 #endif
                 bonobo_server_info_load (od->registry_source_directories,
                                          &od->attr_servers,
+                                         od->attr_runtime_servers,
                                          &od->by_iid,
                                          bonobo_activation_hostname_get ());
                 od->time_did_stat = od->time_list_changed = time (NULL);
@@ -668,6 +669,61 @@ remove_active_server (ObjectDirectory *od,
 	return removed;
 }
 
+  /* Parse server description and register it, replacing older
+   * definition if necessary.  Returns the regsitered ServerInfo */
+static Bonobo_ServerInfo const *
+od_register_runtime_server_info (ObjectDirectory  *od,
+                                 const char       *iid,
+                                 const CORBA_char *description)
+{
+        Bonobo_ServerInfo *old_serverinfo, *new_serverinfo;
+        GSList *parsed_serverinfo = NULL, *l;
+
+        old_serverinfo = (Bonobo_ServerInfo *) g_hash_table_lookup (od->by_iid, iid);
+        if (!(*description)) /* empty description? */
+                return old_serverinfo;
+
+          /* parse description */
+         bonobo_parse_server_info_memory (description, &parsed_serverinfo,
+                                          bonobo_activation_hostname_get ());
+
+           /* check for zero entries */
+         if (!parsed_serverinfo)
+                 return NULL;
+           /* check for more than one entry */
+         if (parsed_serverinfo->next) {
+                 g_warning ("More than one <oaf_server> specified, ignoring all");
+                 for (l = parsed_serverinfo; l; l = l->next) {
+                         Bonobo_ServerInfo__freekids (l->data, NULL);
+                         g_free (l->data);
+                 }
+                 g_slist_free (parsed_serverinfo);
+                 return NULL;
+         }
+         new_serverinfo = (Bonobo_ServerInfo *) parsed_serverinfo->data;
+         g_slist_free (parsed_serverinfo);
+
+         if (old_serverinfo) {
+                 Bonobo_ServerInfo *old_runtime_serverinfo;
+                 int i;
+
+                 for (i = 0; i < od->attr_runtime_servers->len; i++) {
+                         old_runtime_serverinfo = g_ptr_array_index (od->attr_runtime_servers, i);
+                         if (strcmp (old_runtime_serverinfo->iid, iid) == 0) {
+                                 Bonobo_ServerInfo__freekids (old_runtime_serverinfo, NULL);
+                                 g_free (old_runtime_serverinfo);
+                                 g_ptr_array_index (od->attr_runtime_servers, i) = new_serverinfo;
+                                 return new_serverinfo;
+                         }
+                 }
+                 g_warning ("Inconsistency between od->attr_servers "
+                            "and od->attr_runtime_servers");
+         } else
+                 g_ptr_array_add (od->attr_runtime_servers, new_serverinfo);
+           /* FIXME: this kills performance, need an alternative */
+         update_registry (od, TRUE);
+}
+
 static Bonobo_RegistrationResult
 impl_Bonobo_ObjectDirectory_register_new (
 	PortableServer_Servant              servant,
@@ -690,7 +746,7 @@ impl_Bonobo_ObjectDirectory_register_new (
 			return Bonobo_ACTIVATION_REG_ALREADY_ACTIVE;
 	}
 
-        if (!g_hash_table_lookup (od->by_iid, iid)) {
+        if (!od_register_runtime_server_info (od, iid, description)) {
                 if (!(flags&Bonobo_REGISTRATION_FLAG_NO_SERVERINFO))
                         return Bonobo_ACTIVATION_REG_NOT_LISTED;
         }
@@ -954,6 +1010,8 @@ object_directory_init (ObjectDirectory *od)
                 g_hash_table_new_full (g_str_hash, g_str_equal,
                                        g_free, active_server_list_free);
         od->no_servers_timeout = 0;
+
+        od->attr_runtime_servers = g_ptr_array_new ();
 }
 
 BONOBO_TYPE_FUNC_FULL (ObjectDirectory,

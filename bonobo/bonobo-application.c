@@ -484,8 +484,19 @@ bonobo_application_register_unique (BonoboApplication *app)
 	CORBA_Object               remote_obj = CORBA_OBJECT_NIL;
 
 	iid     = g_strdup_printf ("OAFIID:%s", app->name);
-	description = g_strdup_printf ("Unique Application instance: '%s'",
-				       app->name);
+	description = g_strdup_printf (
+		"<oaf_info>\n"
+		"  <oaf_server iid=\"%s\" location=\"unknown\" type=\"runtime\">\n"
+		"    <oaf_attribute name=\"repo_ids\" type=\"stringv\">\n"
+		"       <item value=\"IDL:Bonobo/Unknown:1.0\"/>\n"
+		"       <item value=\"IDL:Bonobo/Application:1.0\"/>\n"
+		"    </oaf_attribute>\n"
+		"    <oaf_attribute name=\"name\" type=\"string\" value=\"%s\"/>\n"
+		"    <oaf_attribute name=\"description\" type=\"string\" "
+		" value=\"%s application instance\"/>\n"
+		"  </oaf_server>\n"
+		"</oaf_info>",
+		iid, app->name, app->name);
 	reg_res = bonobo_activation_register_active_server_ext
 		(iid, bonobo_object_corba_objref (BONOBO_OBJECT (app)), NULL,
 		 Bonobo_REGISTRATION_FLAG_NO_SERVERINFO, &remote_obj,
