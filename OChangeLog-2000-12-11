@@ -1,3 +1,7 @@
+1999-09-28  Kjartan Maraas  <kmaraas@online.no>
+
+	* configure.in: Added "ro" to ALL_LINGUAS.
+	
 1999-09-26  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-bonobo-item.c (gbi_set_arg): Add support for
