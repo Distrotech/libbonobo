@@ -1,3 +1,10 @@
+2000-12-13  Federico Mena Quintero  <federico@helixcode.com>
+
+	* bonobo/bonobo-transient.c (bonobo_transient_construct): Disable
+	policy destruction code until ORBit is released, sigh.  THIS WILL
+	LEAK.  THIS WILL LEAK.  THE ROOF IS ON FIRE.  WE ARE SORRY ABOUT
+	OUR APPEARANCE.
+
 2000-12-13  Dietmar Maurer <dietmar@maurer-it.com>
 
 	* bonobo/bonobo-property-bag-xml.c 
