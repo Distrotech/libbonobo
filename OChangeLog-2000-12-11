@@ -1,5 +1,28 @@
 2000-09-12  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-win.c (gnome_app_construct): implement.
+	(bonobo_win_new): use it.
+
+	* bonobo/bonobo-ui-component.c: Re-engineer to use g_hash_table.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_construct): add
+	helpful assertion.
+
+2000-09-12  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_create_menubar): simplify
+	(bonobo_ui_handler_create_toolbar): fix.
+	(setup_priv): add menu by default; despite create_menubar API.
+	(bonobo_ui_handler_toolbar_item_set_pixmap): lop parent off the path
+
+	* samples/compound-doc/paint-component-simple.c (view_create_menus):
+	kill creation of non-existant menu;
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_set): dump the
+	dodgy xml on exception.
+
+2000-09-12  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_set_app): re-order.
 	(make_path): remove fluff.
 
