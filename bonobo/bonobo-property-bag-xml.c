@@ -166,7 +166,7 @@ bonobo_property_bag_xml_persist (BonoboPropertyBag *pb, const Bonobo_Stream stre
 	 */
 	doc = xmlNewDoc ("1.0");
 	ns = xmlNewGlobalNs (doc, "http://www.helixcode.com/bonobo/property-persist-xml", NULL);
-	doc->root = xmlNewDocNode (doc, ns, "properties", NULL);
+	doc->xmlRootNode = xmlNewDocNode (doc, ns, "properties", NULL);
 
 	/*
 	 * Now create each property.
@@ -194,7 +194,7 @@ bonobo_property_bag_xml_persist (BonoboPropertyBag *pb, const Bonobo_Stream stre
 		value_str   = bonobo_property_bag_xml_value_to_string (persister, prop->type, prop->value);
 		default_str = bonobo_property_bag_xml_value_to_string (persister, prop->type, prop->default_value);
 
-		propnode = xmlNewChild (doc->root, ns, "property", NULL);
+		propnode = xmlNewChild (doc->xmlRootNode, ns, "property", NULL);
 		xmlNewChild (propnode, ns, PROPERTY_NAME_TOKEN, prop->name);
 		xmlNewChild (propnode, ns, PROPERTY_VALUE_TOKEN, value_str);
 
@@ -287,7 +287,7 @@ xml_value_get (xmlNodePtr node, const char *name)
 	ret = (char *) xmlGetProp (node, name);
 	if (ret != NULL)
 		return ret;
-	child = node->childs;
+	child = node->xmlChildrenNode;
 
 	while (child != NULL) {
 		if (!strcmp (child->name, name)) {
@@ -368,7 +368,7 @@ bonobo_property_bag_xml_depersist (BonoboPropertyBag *pb, const Bonobo_Stream st
 	 * Read all of the properties out of the XML document and
 	 * modify our internal properties accordingly.
 	 */
-	for (curr = doc->root->childs; curr != NULL; curr = curr->next)
+	for (curr = doc->xmlRootNode->xmlChildrenNode; curr != NULL; curr = curr->next)
 		bonobo_property_bag_xml_load_property (pb, persister, curr);
 
 	xmlFreeDoc (doc);

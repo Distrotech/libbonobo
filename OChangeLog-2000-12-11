@@ -1,3 +1,32 @@
+2000-11-15  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-win.c: (menu_sync_state): Update the state from
+	the command node rather than the main node if one exists. This
+	fixes the bug where pop-up menus weren't properly set up.
+	(toolbar_sync_state): Update the state from the command node
+	rather than the main node if one exists. Also do propagation of
+	the changes from the main node to command node even after the
+	first time (even though we only want to warn the first time).
+	Finally, remove a redundant call to cmd_set_dirty, since the
+	set_cmd_attr call takes care of setting the dirty flag as needed.
+
+	* bonobo/bonobo-ui-node.c: Add a private struct definition
+	for _BonoboUINode to make debugging easier.
+
+	* bonobo/bonobo-property-bag-xml.c:
+	(bonobo_property_bag_xml_persist), (xml_value_get),
+	(bonobo_property_bag_xml_depersist):
+	* bonobo/bonobo-ui-node.c: (bonobo_ui_node_children),
+	(bonobo_ui_node_to_string), (bonobo_ui_node_from_string),
+	(bonobo_ui_node_from_file):
+	* bonobo/bonobo-ui-xml.c: (do_strip), (bonobo_ui_xml_dump),
+	(override_node_with):
+	Use the xmlRootNode and xmlChildrenNode macros as suggested by Dan
+	Veillard when getting directly at xmlNode objects. It doesn't make
+	Bonobo work with gnome-xml 2.X -- we aren't ready to do that yet
+	-- but it will reduce the amount of work needed some day when we
+	do switch to 2.X.
+
 2000-11-15  Michael Meeks  <michael@helixcode.com>
 
 	* storage-modules/bonobo-stream-vfs.c (fs_copy_to): special
