@@ -185,6 +185,13 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
 			g_assert (BONOBO_OBJECT (o)->priv->ao != NULL);
 #ifdef BONOBO_REF_HOOKS
 			g_assert (BONOBO_OBJECT (o)->priv->ao->destroyed);
+
+			bonobo_debug_print ("finalize", 
+					    "[%p] %-20s corba_objref=[%p]"
+					    " gtk_ref_count=%d", o,
+					    gtk_type_name (GTK_OBJECT_TYPE (o)),
+					    BONOBO_OBJECT (o)->corba_objref,
+					    GTK_OBJECT (o)->ref_count);
 #endif
 
 			/*
@@ -292,17 +299,19 @@ bonobo_object_trace_refs (BonoboObject *object,
 		
 		object->priv->ao->ref_count++;
 		
-		bonobo_debug_print ("ref", "[%p]:%s to %d at %s:%d", object,
+		bonobo_debug_print ("ref", "[%p]:[%p]:%s to %d at %s:%d", 
+			object, ao,
 		        gtk_type_name (GTK_OBJECT (object)->klass->type),
 			ao->ref_count, fn, line);
 
 	} else { /* unref */
-		bonobo_debug_print ("unref", "[%p]:%s from %d at %s:%d", ao,
+		bonobo_debug_print ("unref", "[%p]:[%p]:%s from %d at %s:%d", 
+			object, ao,
 			gtk_type_name (GTK_OBJECT (object)->klass->type),
 			ao->ref_count, fn, line);
 
 		g_return_if_fail (ao->ref_count > 0);
-	
+
 		if (ao->ref_count == 1) {
 			bonobo_object_destroy (ao);
 
@@ -536,14 +545,22 @@ bonobo_object_query_local_interface (BonoboObject *object,
 
 static CORBA_Object
 impl_Bonobo_Unknown_queryInterface (PortableServer_Servant  servant,
-				     const CORBA_char       *repoid,
-				     CORBA_Environment      *ev)
+				    const CORBA_char       *repoid,
+				    CORBA_Environment      *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboObject *local_interface;
 
 	local_interface = bonobo_object_query_local_interface (
 		object, repoid);
+
+#ifdef BONOBO_REF_HOOKS
+	bonobo_debug_print ("query-interface", 
+			    "[%p]:[%p]:%s repoid=%s", 
+			    object, object->priv->ao,
+			    gtk_type_name (GTK_OBJECT (object)->klass->type),
+			    repoid);
+#endif
 
 	if (local_interface == NULL)
 		return CORBA_OBJECT_NIL;
@@ -675,7 +692,7 @@ bonobo_object_instance_init (GtkObject    *gtk_object,
 
 #ifdef BONOBO_REF_HOOKS
 	{
-		bonobo_debug_print ("create", "[%p]:%s to %d", ao,
+		bonobo_debug_print ("create", "[%p]:[%p]:%s to %d", object, ao,
 				    gtk_type_name (klass->type),
 				    ao->ref_count);
 
@@ -748,7 +765,7 @@ bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 	for (; l; l = l->prev) {
 		BonoboDebugRefData *descr = l->data;
 
-		bonobo_debug_print ("", "%s -\t%s:%d", 
+		bonobo_debug_print ("", "%-7s - %s:%d", 
 				    descr->ref ? "ref" : "unref",
 				    descr->fn, descr->line);
 	}
@@ -805,13 +822,13 @@ bonobo_object_activate_servant (BonoboObject *object, void *servant)
 	CORBA_exception_init (&ev);
 
 	CORBA_free (PortableServer_POA_activate_object (
-		bonobo_poa (), servant, &ev));
+                bonobo_poa (), servant, &ev));
 
 	o = PortableServer_POA_servant_to_reference (
 		bonobo_poa(), servant, &ev);
 
 	CORBA_exception_free (&ev);
-
+	
 	if (o) {
 		object->corba_objref = o;
 		bonobo_object_bind_to_servant (object, servant);
@@ -886,6 +903,16 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        oldao = newobj->priv->ao;
        ao->ref_count = ao->ref_count + oldao->ref_count - 1;
 
+#ifdef BONOBO_REF_HOOKS		
+       bonobo_debug_print ("add_interface", 
+			   "[%p]:[%p]:%s to [%p]:[%p]:%s ref_count=%d", 
+			   object, object->priv->ao,
+			   gtk_type_name (GTK_OBJECT (object)->klass->type),
+			   newobj, newobj->priv->ao,
+			   gtk_type_name (GTK_OBJECT (newobj)->klass->type),
+			   ao->ref_count);
+#endif
+
        /* Merge the two AggregateObject lists */
        for (l = oldao->objs; l; l = l->next) {
 	       BonoboObject *new_if = l->data;
@@ -904,6 +931,7 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 #ifdef BONOBO_REF_HOOKS
        g_assert (g_hash_table_lookup (living_ao_ht, oldao) == oldao);
        g_hash_table_remove (living_ao_ht, oldao);
+       ao->refs = g_list_concat (ao->refs, oldao->refs);
 #endif
 
        g_list_free (oldao->objs);

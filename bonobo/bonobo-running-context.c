@@ -8,6 +8,7 @@
  * Copyright (C) 2000, Helix Code, Inc.
  */
 #include <config.h>
+#include <stdio.h>
 #include <gtk/gtksignal.h>
 
 #include <bonobo/bonobo-context.h>

@@ -115,7 +115,7 @@ bonobo_shlib_factory_new (const char            *oaf_iid,
 }
 
 /**
- * bonobo_shlib_factory_new:
+ * bonobo_shlib_factory_new_multi:
  * @oaf_iid: The GOAD id that this factory implements
  * @poa: the poa.
  * @oaf_impl_ptr: Oaf shlib handle

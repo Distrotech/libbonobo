@@ -180,8 +180,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 		return CORBA_OBJECT_NIL;
 	}
 
-/* FIXME: what is happening here */
-/*	bonobo_object_release_unref (object, ev); */
+	bonobo_object_release_unref (object, ev);
 
 	if (toplevel == CORBA_OBJECT_NIL) {
 		g_warning ("Moniker object '%s' doesn't implement "

@@ -1,3 +1,15 @@
+2001-01-11  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* bonobo/bonobo-moniker-util.c
+	(bonobo_moniker_util_new_from_name_full): unref again
+
+	* monikers/bonobo-moniker-std.c (make_std_factory): duplicate the
+	factory object before return.
+
+	* bonobo/bonobo-object.c (bonobo_object_add_interface): also merge
+	the reference list in debugging mode.
+	added more debugging output.
+
 001-01-10  Miguel de Icaza  <miguel@helixcode.com>
 
 	* bonobo/bonobo-item-handler.c (bonobo_item_options_free): Implement.
