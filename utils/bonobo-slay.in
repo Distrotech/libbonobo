@@ -28,7 +28,9 @@ if ($opt_l && $opt_s) {
    $usage_error = 1;
 }
 
-$regexp = $ARGV[0];
+if ($ARGV[0]) {
+	$regexp = $ARGV[0];
+}
 
 # Print usage if necessary.
 #
@@ -118,7 +120,7 @@ do {
 					# bonobo-activation-server needs to be last.
 					#
 					if ($line ne "bonobo-activation-server" and
-					    $regexp && $line =~m/$regexp/) {
+					    ($regexp and $line =~m/$regexp/) or (not $regexp)) {
 						push @file_process, $line;
 					}
 				} #end while(<FILE>)
@@ -129,13 +131,13 @@ do {
 
 	#   Add bonobo-activation-server so that it is last,
 	# but only if we're killing without a regexp
-	if (!$regexp) {
+	if (not $regexp) {
 	 	push @file_process, "bonobo-activation-server";
 	}
 
 	foreach $filep (@file_process) {
 
-		if (not($filep =~m/^BonoboIID:/)) {
+		if (not($filep =~m/^OAFIID:/)) {
 
 			# Search through @ps_result and look for matches
 			#
