@@ -1,3 +1,9 @@
+2000-11-10  Zach Frey  <zfrey@bright.net>
+
+	* Some basic cleanup of the API documentation.
+	Removed old gnome-*.sgml templates, moved text
+	to new bonobo-*.sgml templates where obvious.
+
 2000-11-08  Alex Graveley  <alex@helixcode.com>
 
 	* bonobo/bonobo-event-source.[ch]: Implement.
