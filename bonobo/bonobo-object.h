@@ -52,7 +52,7 @@ CORBA_Object gnome_unknown_activate_servant (GnomeUnknown *object,
 
 void         gnome_unknown_add_interface    (GnomeUnknown *object,
 					     GnomeUnknown *newobj);
-CORBA_Object gnome_unknown_query_interfac   (GnomeUnknown *object,
+CORBA_Object gnome_unknown_query_interface  (GnomeUnknown *object,
 					     const char *repo_id);
 CORBA_Object gnome_unknown_corba_objref     (GnomeUnknown *object);
 
