@@ -1,3 +1,11 @@
+2000-05-30  Michael Meeks  <michael@helixcode.com>
+
+	* doc/api/bonobo.types: update gnome-bonobo.h, rename.
+
+	* configure.in (have_oaf): add gtkdoc check.
+
+	* doc/api/Makefile.am (dist-hook): add rule.
+
 2000-05-29  Michael Meeks  <michael@helixcode.com>
 
 	* Makefile.am: add doc & macros.
