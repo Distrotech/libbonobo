@@ -151,11 +151,11 @@ bonobo_item_container_class_init (BonoboItemContainerClass *klass)
 			       G_STRUCT_OFFSET (BonoboItemContainerClass, get_object),
 			       NULL, NULL,
 			       bonobo_marshal_BOXED__STRING_BOOLEAN_BOXED,
-			       bonobo_unknown_get_type (),
+			       BONOBO_TYPE_UNKNOWN,
 			       3,
-			       BONOBO_TYPE_STRING,
+			       G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE,
 			       G_TYPE_BOOLEAN,
-			       BONOBO_TYPE_CORBA_EXCEPTION);
+			       BONOBO_TYPE_STATIC_CORBA_EXCEPTION);
 
 	epv->enumObjects     = impl_Bonobo_ItemContainer_enumObjects;
 	epv->getObjectByName = impl_Bonobo_ItemContainer_getObjectByName;
@@ -173,9 +173,9 @@ bonobo_item_container_init (BonoboItemContainer *container)
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboItemContainer, 
-			   Bonobo_ItemContainer,
-			   PARENT_TYPE,
-			   bonobo_item_container);
+		       Bonobo_ItemContainer,
+		       PARENT_TYPE,
+		       bonobo_item_container);
 
 /**
  * bonobo_item_container_new:

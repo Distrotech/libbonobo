@@ -164,11 +164,11 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 	}
 
 	bonobo_closure_invoke (prop->priv->get_prop,
-			       BONOBO_TYPE_CORBA_ANY,       &arg,
-			       BONOBO_TYPE_PROPERTY_BAG,    pb,
-			       BONOBO_TYPE_CORBA_TYPECODE,  prop->type,
-			       G_TYPE_UINT,                 prop->idx,
-			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+			       BONOBO_TYPE_STATIC_CORBA_ANY,       &arg,
+			       BONOBO_TYPE_PROPERTY_BAG,           pb,
+			       BONOBO_TYPE_STATIC_CORBA_TYPECODE,  prop->type,
+			       G_TYPE_UINT,                        prop->idx,
+			       BONOBO_TYPE_STATIC_CORBA_EXCEPTION, ev,
 			       0);
 
 	return arg;
@@ -205,11 +205,11 @@ impl_Bonobo_PropertyBag_getValues (PortableServer_Servant  servant,
 			CORBA_string_dup (prop->name);
 
 		bonobo_closure_invoke (prop->priv->get_prop,
-				       BONOBO_TYPE_CORBA_ANY,       &arg,
-				       BONOBO_TYPE_PROPERTY_BAG,    pb,
-				       BONOBO_TYPE_CORBA_TYPECODE,  prop->type,
-				       G_TYPE_UINT,                 prop->idx,
-				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       BONOBO_TYPE_STATIC_CORBA_ANY,       &arg,
+				       BONOBO_TYPE_PROPERTY_BAG,           pb,
+				       BONOBO_TYPE_STATIC_CORBA_TYPECODE,  prop->type,
+				       G_TYPE_UINT,                        prop->idx,
+				       BONOBO_TYPE_STATIC_CORBA_EXCEPTION, ev,
 				       0);
 
 		set->_buffer [set->_length].value = *arg;
@@ -245,10 +245,10 @@ impl_Bonobo_PropertyBag_setValue (PortableServer_Servant  servant,
 
 	bonobo_closure_invoke (prop->priv->set_prop,
 			       G_TYPE_NONE,
-			       BONOBO_TYPE_PROPERTY_BAG,    pb,
-			       BONOBO_TYPE_CORBA_ANY,       value,
-			       G_TYPE_UINT,                 prop->idx,
-			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+			       BONOBO_TYPE_PROPERTY_BAG,           pb,
+			       BONOBO_TYPE_STATIC_CORBA_ANY,       value,
+			       G_TYPE_UINT,                        prop->idx,
+			       BONOBO_TYPE_STATIC_CORBA_EXCEPTION, ev,
 			       0);
 
 	if (prop->flags & Bonobo_PROPERTY_NO_AUTONOTIFY)
@@ -292,10 +292,10 @@ impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
 		
 		bonobo_closure_invoke (prop->priv->set_prop,
 				       G_TYPE_NONE,
-				       BONOBO_TYPE_PROPERTY_BAG,    pb,
-				       BONOBO_TYPE_CORBA_ANY,       &set->_buffer [i].value,
-				       G_TYPE_UINT,                 prop->idx,
-				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       BONOBO_TYPE_PROPERTY_BAG,           pb,
+				       BONOBO_TYPE_STATIC_CORBA_ANY,       &set->_buffer [i].value,
+				       G_TYPE_UINT,                        prop->idx,
+				       BONOBO_TYPE_STATIC_CORBA_EXCEPTION, ev,
 				       0);
 
 		if (BONOBO_EX (ev))

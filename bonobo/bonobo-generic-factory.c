@@ -207,7 +207,7 @@ bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
 	bonobo_closure_invoke (factory->priv->factory_closure,
 			       BONOBO_TYPE_OBJECT, &ret,
 			       BONOBO_TYPE_GENERIC_FACTORY, factory,
-			       BONOBO_TYPE_STRING, act_iid, 0);
+			       G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE, act_iid, 0);
 
 	return ret;
 }

@@ -84,14 +84,15 @@ simple_resolve (BonoboMoniker               *moniker,
 	resolve_flag = options ? options->flags : 0;
 	timeout = options ? options->timeout : -1;
 
-	bonobo_closure_invoke (simple->priv->resolve_closure,
-			       BONOBO_TYPE_CORBA_OBJECT | G_SIGNAL_TYPE_STATIC_SCOPE, &ret,
-			       BONOBO_TYPE_MONIKER, moniker,
-			       BONOBO_TYPE_RESOLVE_FLAG, resolve_flag,
-			       G_TYPE_LONG, timeout,
-			       BONOBO_TYPE_STRING, requested_interface,
-			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
-			       0);
+	bonobo_closure_invoke (
+		simple->priv->resolve_closure,
+		BONOBO_TYPE_STATIC_CORBA_OBJECT,            &ret,
+		BONOBO_TYPE_MONIKER,                        moniker,
+		BONOBO_TYPE_RESOLVE_FLAG,                   resolve_flag,
+		G_TYPE_LONG,                                timeout,
+		G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE, requested_interface,
+		BONOBO_TYPE_STATIC_CORBA_EXCEPTION,         ev,
+		0);
 
 	return ret;
 }

@@ -45,13 +45,14 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 	bonobo_object_ref (BONOBO_OBJECT (listener));
 
 	if (listener->priv->event_callback)
-		bonobo_closure_invoke (listener->priv->event_callback,
-				       G_TYPE_NONE,
-				       BONOBO_TYPE_LISTENER, listener,
-				       BONOBO_TYPE_STRING, event_name,
-				       BONOBO_TYPE_CORBA_ANY, args,
-				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
-				       0);
+		bonobo_closure_invoke (
+			listener->priv->event_callback,
+			G_TYPE_NONE,
+			BONOBO_TYPE_LISTENER,                       listener,
+			G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE, event_name,
+			BONOBO_TYPE_STATIC_CORBA_ANY,               args,
+			BONOBO_TYPE_STATIC_CORBA_EXCEPTION,         ev,
+			0);
 		
 	g_signal_emit (G_OBJECT (listener),
 		       signals [EVENT_NOTIFY], 0,
@@ -93,9 +94,9 @@ bonobo_listener_class_init (BonoboListenerClass *klass)
 		NULL, NULL,
 		bonobo_marshal_VOID__STRING_BOXED_BOXED,
 		G_TYPE_NONE, 3,
-		BONOBO_TYPE_STRING,
-		BONOBO_TYPE_CORBA_ANY,
-		BONOBO_TYPE_CORBA_EXCEPTION);
+		G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE,
+		BONOBO_TYPE_STATIC_CORBA_ANY,
+		BONOBO_TYPE_STATIC_CORBA_EXCEPTION);
 
 	epv->event = impl_Bonobo_Listener_event;
 }

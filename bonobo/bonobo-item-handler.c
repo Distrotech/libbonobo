@@ -20,6 +20,7 @@
 #include "bonobo-item-handler.h"
 
 #define PARENT_TYPE BONOBO_TYPE_OBJECT
+
 static GObjectClass *bonobo_item_handler_parent_class;
 
 struct _BonoboItemHandlerPrivate
@@ -120,9 +121,9 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 		Bonobo_ItemContainer_ObjectNames *ret;
 
 		bonobo_closure_invoke (handler->priv->enum_objects,
-				       G_TYPE_POINTER,              &ret,
-				       BONOBO_TYPE_ITEM_HANDLER,    handler,
-				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       G_TYPE_POINTER,                    &ret,
+				       BONOBO_TYPE_ITEM_HANDLER,           handler,
+				       BONOBO_TYPE_STATIC_CORBA_EXCEPTION, ev,
 				       0);
 
 		return ret;
@@ -139,16 +140,15 @@ impl_get_object (PortableServer_Servant servant,
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
 
-	if (handler->priv->get_object)
-	{
+	if (handler->priv->get_object) {
 		Bonobo_Unknown ret;
 
 		bonobo_closure_invoke (handler->priv->get_object,
-				       BONOBO_TYPE_UNKNOWN,         &ret,
-				       BONOBO_TYPE_ITEM_HANDLER,    handler,
-				       G_TYPE_STRING,               item_name,
-				       G_TYPE_BOOLEAN,              only_if_exists,
-				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       BONOBO_TYPE_STATIC_UNKNOWN,         &ret,
+				       BONOBO_TYPE_ITEM_HANDLER,           handler,
+				       G_TYPE_STRING,                      item_name,
+				       G_TYPE_BOOLEAN,                     only_if_exists,
+				       BONOBO_TYPE_STATIC_CORBA_EXCEPTION, ev,
 				       0);
 				       
 		return ret;
@@ -200,9 +200,9 @@ bonobo_item_handler_class_init (BonoboItemHandlerClass *klass)
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboItemHandler, 
-			   Bonobo_ItemContainer,
-			   PARENT_TYPE,
-			   bonobo_item_handler);
+		       Bonobo_ItemContainer,
+		       PARENT_TYPE,
+		       bonobo_item_handler);
 
 /**
  * bonobo_item_handler_construct:

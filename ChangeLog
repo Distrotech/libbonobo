@@ -1,3 +1,26 @@
+2002-01-07  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-types.h (BONOBO_TYPE_UNKNOWN): 
+	remove the SIGNAL_STATIC_SCOPE from the standard
+	BONOBO_TYPE_whatevers, _Everyone_ should use
+	BONOBO_TYPE_STATIC_... for their signal arguments,
+	sigh, moan, groan - this should be the default.
+	(BONOBO_TYPE_STRING): nice idea Martin - sadly has
+	to go.
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_new_generic): upd. to new type scheme.
+
+	* bonobo/bonobo-item-container.c
+	(bonobo_item_container_class_init): ditto.
+
+	* bonobo/bonobo-moniker-simple.c (simple_resolve): ditto.
+
+	* bonobo/bonobo-listener.c (bonobo_listener_class_init): ditto.
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_new_generic): ditto.
+
 2002-01-05  Mikael Hallendal  <micke@codefactory.se>
 
 	* doc/NAMESPACE (subdomains): added Yelp

@@ -672,8 +672,8 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 			      NULL, NULL,
 			      bonobo_marshal_VOID__CORBA_BOXED,
 			      G_TYPE_NONE, 2,
-			      BONOBO_TYPE_CORBA_OBJECT | G_SIGNAL_TYPE_STATIC_SCOPE,
-			      BONOBO_TYPE_CORBA_EXCEPTION | G_SIGNAL_TYPE_STATIC_SCOPE);
+			      BONOBO_TYPE_STATIC_CORBA_OBJECT,
+			      BONOBO_TYPE_STATIC_CORBA_EXCEPTION);
 
 	klass->destroy = bonobo_object_dummy_destroy;
 

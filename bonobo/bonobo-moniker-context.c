@@ -61,9 +61,9 @@ bonobo_moniker_context_init (GObject *object)
 
 static
 BONOBO_TYPE_FUNC_FULL (BonoboMonikerContext,
-			 Bonobo_MonikerContext,
-			 PARENT_TYPE,
-			 bonobo_moniker_context);
+		       Bonobo_MonikerContext,
+		       PARENT_TYPE,
+		       bonobo_moniker_context);
 
 BonoboObject *
 bonobo_moniker_context_new (void)

@@ -9,12 +9,10 @@ bonobo-macros
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### MACRO BONOBO_BOILERPLATE ##### -->
 <para>
@@ -25,8 +23,12 @@ bonobo-macros
 @type_as_function: 
 @corba_type: 
 @\
+			   parent_type:
+@\
 			   parent_type: 
 @parent_type_macro: 
+@\
+			   register_type_macro:
 @\
 			   register_type_macro: 
 
@@ -48,6 +50,8 @@ bonobo-macros
 
 @parent_class_cast: 
 @\
+					name:
+@\
 					name: 
 @args: 
 @def_return: 
@@ -61,6 +65,8 @@ bonobo-macros
 @type: 
 @type_as_function: 
 @\
+				 parent_type:
+@\
 				 parent_type: 
 @parent_type_macro: 
 
@@ -73,6 +79,8 @@ bonobo-macros
 @type: 
 @type_as_function: 
 @corba_type: 
+@\
+			     parent_type:
 @\
 			     parent_type: 
 @parent_type_macro: 
@@ -88,6 +96,10 @@ bonobo-macros
 @\
 				      corba_type: 
 @\
+				      parent_type:
+@\
+				      corba_type: 
+@\
 				      parent_type: 
 @parent_type_macro: 
 
@@ -100,6 +112,8 @@ bonobo-macros
 @type: 
 @type_as_function: 
 @corba_type: 
+@\
+				  parent_type:
 @\
 				  parent_type: 
 @parent_type_macro: 
