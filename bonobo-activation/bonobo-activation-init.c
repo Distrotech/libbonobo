@@ -49,13 +49,12 @@
 
 #include <orbit/orbit.h>
 
-static int oaf_corba_prio = G_PRIORITY_LOW;
-
-#ifdef ORBIT2
-#define ORBIT_USES_GLIB_MAIN_LOOP 1
+#if ORBIT_MAJOR_VERSION >= 2
+#  define ORBIT_USES_GLIB_MAIN_LOOP 1
 #endif
 
 #ifndef ORBIT_USES_GLIB_MAIN_LOOP
+static int oaf_corba_prio = G_PRIORITY_LOW;
 
 static gboolean
 orb_handle_connection (GIOChannel * source, GIOCondition cond,
