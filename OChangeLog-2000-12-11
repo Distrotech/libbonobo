@@ -1,3 +1,22 @@
+Changes July 1[456], 1999 by Elliot:
+	bonobo/gnome-main.c: Make it work with CORBA_OBJECT_NIL for all
+			     params.
+
+	bonobo/gnome-component-directory: Prototype solution for
+		"How do I find a component to handle X" problem.
+
+	doc/Bonobo.sgml: Change GNOME::obj to GNOME::Unknown
+
+	components/image-x-png:
+		. Don't need to initialize the 'ev' every time we use it,
+		  as long as it is initialized somewhere.
+		. Don't need to copy the data that we are writing to a
+		  stream.
+		. Use gnome_object_add_interface instead of
+		  gtk_object_add_interface.
+		. Pass CORBA_OBJECT_NIL to bonobo_init instead of NULL
+		  (objrefs are totally opaque & non-equivalent).
+
 1999-07-13  Nat Friedman  <nat@gnome-support.com>
 
 	* idl/gnome-embeddable.idl (GNOME::ViewFrame): Documented

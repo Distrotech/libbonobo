@@ -1,5 +1,6 @@
 #include <config.h>
 #include <bonobo/gnome-main.h>
+#include <libgnorba/gnorba.h>
 
 CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;
@@ -27,7 +28,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	if (CORBA_Object_is_nil(orb, &ev))
 	  orb = gnome_CORBA_ORB();
 	
-	if (CORBA_Object_is_nil(poa, &ev)){
+	if (CORBA_Object_is_nil((CORBA_Object)poa, &ev)){
 		poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 		if (ev._major != CORBA_NO_EXCEPTION){
 			g_warning ("Can not resolve initial reference to RootPOA");
@@ -37,7 +38,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 		
 	}
 
-	if (CORBA_Object_is_nil(manager, &ev)){
+	if (CORBA_Object_is_nil((CORBA_Object)manager, &ev)){
 	  manager = PortableServer_POA__get_the_POAManager (poa, &ev);
 	  if (ev._major != CORBA_NO_EXCEPTION){
 	    g_warning ("Can not get the POA manager");
