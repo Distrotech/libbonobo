@@ -1,3 +1,7 @@
+2003-08-04  Steve Chaplin  <stevech1097@yahoo.com.au>
+
+	* bonobo-activation/Makefile.am: use AM_LDFLAGS.
+
 2003-07-31  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.3.6

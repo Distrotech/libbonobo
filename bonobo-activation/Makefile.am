@@ -12,7 +12,7 @@ INCLUDES=					\
 	-DG_DISABLE_DEPRECATED			\
 	$(NULL)
 
-LDFLAGS=					\
+AM_LDFLAGS=					\
 	$(LIBBONOBO_LIBS)			\
 	$(BONOBO_ACTIVATION_LT_VERSION_INFO)	\
 	-no-undefined				\
