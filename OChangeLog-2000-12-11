@@ -2,6 +2,8 @@ Wed Dec  1 15:45:55 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* bonobo/gnome-bonobo-selector.c (select_row): bug fix: emit a clicked
 	signal to simulate an OK button press.
+	(gnome_dialog_clicked): temporary function - remove it as soon it
+	is included into gnome-dialog
 
 1999-12-01  Michael Meeks  <mmeeks@gnu.org>
 
