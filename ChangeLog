@@ -11,6 +11,16 @@
 
 2003-06-02  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* doc/api/figures/running-context.png,
+	* doc/api/figures/running-context.dia: Added.
+	
+	* doc/api/figures/Makefile.am (diagrams): Added running-context.dia.
+
+	* doc/api/Makefile.am (HTML_IMAGES): Added figures/running-context.png.
+
+	* doc/api/tmpl/bonobo-running-context.sgml: Added a bit of
+	documentation about this.
+
 	* bonobo/bonobo-item-container.h: Removed the no longer used
 	BonoboClientSiteList typedef.
 

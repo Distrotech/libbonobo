@@ -34,7 +34,8 @@ IGNORE_HFILES= Bonobo.h bonobo-marshal.h bonobo-macros.h bonobo-x-object.h\
 # Images to copy into HTML directory.
 HTML_IMAGES = figures/persist.png figures/persist-file.png\
 	      figures/persist-storage.png figures/persist-stream.png\
-              figures/stream.png figures/storage.png figures/unknown.png
+              figures/stream.png figures/storage.png figures/unknown.png\
+	      figures/running-context.png
 
 # Extra SGML files that are included by $(DOC_MAIN_SGML_FILE).
 content_files = faq.xml debugging.xml properties.xml refcounting.xml\
