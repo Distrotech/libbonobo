@@ -51,16 +51,22 @@ GType	         bonobo_app_client_get_type        (void) G_GNUC_CONST;
 BonoboAppClient* bonobo_app_client_new             (Bonobo_Application  app_server);
 GValue *         bonobo_app_client_msg_send_argv   (BonoboAppClient    *app_client,
 						    const char         *message,
-						    const GValue       *argv[]);
+						    const GValue       *argv[],
+						    CORBA_Environment  *opt_env);
 GValue*          bonobo_app_client_msg_send_valist (BonoboAppClient    *app_client,
 						    const char         *message,
+						    CORBA_Environment  *opt_env,
+						    GType               first_arg_type,
 						    va_list             var_args);
 GValue*          bonobo_app_client_msg_send        (BonoboAppClient    *app_client,
 						    const char         *message,
+						    CORBA_Environment  *opt_env,
+						    GType               first_arg_type,
 						    ...);
 gint             bonobo_app_client_new_instance    (BonoboAppClient    *app_client,
 						    int                 argc,
-						    char               *argv[]);
+						    char               *argv[],
+						    CORBA_Environment  *opt_env);
 BonoboAppClientMsgDesc const *
                  bonobo_app_client_msg_list        (BonoboAppClient    *app_client);
 

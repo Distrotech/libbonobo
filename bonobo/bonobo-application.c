@@ -488,9 +488,51 @@ bonobo_application_register_message (BonoboApplication *app,
 }
 
 
+gchar *
+bonobo_application_create_serverinfo (BonoboApplication *app,
+				      gchar const       *envp[])
+{
+	GString *description;
+	int      i;
+	gchar   *rv;
+
+	description = g_string_new ("<oaf_info>\n");
+	g_string_append_printf (description,
+		"  <oaf_server iid=\"OAFIID:%s\" location=\"unknown\" type=\"runtime\">\n"
+		"    <oaf_attribute name=\"repo_ids\" type=\"stringv\">\n"
+		"       <item value=\"IDL:Bonobo/Unknown:1.0\"/>\n"
+		"       <item value=\"IDL:Bonobo/Application:1.0\"/>\n"
+		"    </oaf_attribute>\n"
+		"    <oaf_attribute name=\"name\" type=\"string\" value=\"%s\"/>\n"
+		"    <oaf_attribute name=\"description\" type=\"string\" "
+		" value=\"%s application instance\"/>\n",
+		app->name, app->name, app->name);
+
+	if (envp && envp[0]) {
+		g_string_append (description, "    <oaf_attribute name="
+				 "\"bonobo:environment\" type=\"stringv\">\n");
+		for (i = 0; envp[i]; ++i)
+			g_string_append_printf (description,
+						"       <item value=\"%s\"/>\n",
+						envp[i]);
+		g_string_append (description, "    </oaf_attribute>");
+	}
+	g_string_append (description,
+			 "  </oaf_server>\n"
+			 "</oaf_info>");
+	rv = description->str;
+	g_string_free (description, FALSE);
+	return rv;
+}
+
 /**
  * bonobo_application_register_unique:
  * @app: a #BonoboApplication instance
+ * @serverinfo: the XML server
+ * description. bonobo_application_create_server_description() may
+ * help here.
+ * @client: output parameter that will contain a client object if
+ * an application server is already registered.
  * 
  * Try to register the running application, or check for an existing
  * application already registered and get a reference to it.
@@ -498,49 +540,49 @@ bonobo_application_register_message (BonoboApplication *app,
  * usually means different displays, or whatever is set with
  * bonobo_activation_registration_env_set) than this one are ignored
  * and do not interfere.
+ *
+ * If the registration attempt indicates that another instance of this
+ * application is already running, then the output variable
+ * @client will receive a newly created #BonoboAppClient
+ * associated with the running application.  Otherwise, *@client is
+ * set to %NULL.
  * 
- * Return value: %NULL if this process was the first to register, or a
- * BonoboAppClient which acts as client to another process that has
- * registered earlier with the same name.  If the return value is
- * non-%NULL, the programmer is responsible for freeing the
- * #BonoboApplication with bonobo_object_unref().
+ * Return value: the registration result.
+ * Bonobo_ACTIVATION_REG_SUCCESS means the application was registered,
+ * since no other running instance was detected.  If, however, a
+ * running application is detected,
+ * Bonobo_ACTIVATION_REG_ALREADY_ACTIVE is returned.
  **/
-BonoboAppClient *
-bonobo_application_register_unique (BonoboApplication *app)
+Bonobo_RegistrationResult
+bonobo_application_register_unique (BonoboApplication  *app,
+				    gchar const        *serverinfo,
+				    BonoboAppClient   **client)
 {
 	Bonobo_RegistrationResult  reg_res;
-	gchar                     *iid, *description;
+	gchar                     *iid;
 	CORBA_Object               remote_obj = CORBA_OBJECT_NIL;
 
+	g_return_val_if_fail (app, Bonobo_ACTIVATION_REG_ERROR);
+	g_return_val_if_fail (BONOBO_IS_APPLICATION (app), Bonobo_ACTIVATION_REG_ERROR);
+	g_return_val_if_fail (serverinfo, Bonobo_ACTIVATION_REG_ERROR);
+	g_return_val_if_fail (client, Bonobo_ACTIVATION_REG_ERROR);
+
 	iid     = g_strdup_printf ("OAFIID:%s", app->name);
-	description = g_strdup_printf (
-		"<oaf_info>\n"
-		"  <oaf_server iid=\"%s\" location=\"unknown\" type=\"runtime\">\n"
-		"    <oaf_attribute name=\"repo_ids\" type=\"stringv\">\n"
-		"       <item value=\"IDL:Bonobo/Unknown:1.0\"/>\n"
-		"       <item value=\"IDL:Bonobo/Application:1.0\"/>\n"
-		"    </oaf_attribute>\n"
-		"    <oaf_attribute name=\"name\" type=\"string\" value=\"%s\"/>\n"
-		"    <oaf_attribute name=\"description\" type=\"string\" "
-		" value=\"%s application instance\"/>\n"
-		"  </oaf_server>\n"
-		"</oaf_info>",
-		iid, app->name, app->name);
 	reg_res = bonobo_activation_register_active_server_ext
 		(iid, bonobo_object_corba_objref (BONOBO_OBJECT (app)), NULL,
 		 Bonobo_REGISTRATION_FLAG_NO_SERVERINFO, &remote_obj,
-		 description);
+		 serverinfo);
 	g_free (iid);
-	g_free (description);
+
+	*client = NULL;
+	
 	if (reg_res == Bonobo_ACTIVATION_REG_SUCCESS)
-		return NULL;
+		return reg_res;
 	else if (reg_res == Bonobo_ACTIVATION_REG_ALREADY_ACTIVE) {
-		return bonobo_app_client_new ((Bonobo_Application) remote_obj);
-	} else {
-		g_warning ("bonobo_register_unique_application failed"
-			   " with error code %i", reg_res);
-		return NULL;
-	}
+		*client = bonobo_app_client_new ((Bonobo_Application) remote_obj);
+		return reg_res;
+	} 
+	return reg_res;
 }
 
 

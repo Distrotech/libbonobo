@@ -109,14 +109,15 @@ bonobo_app_client_new (Bonobo_Application app_server)
  * Return value: the message return value
  **/
 GValue *
-bonobo_app_client_msg_send_argv (BonoboAppClient *app_client,
-				 const char      *message,
-				 const GValue    *argv[])
+bonobo_app_client_msg_send_argv (BonoboAppClient   *app_client,
+				 const char        *message,
+				 const GValue      *argv[],
+				 CORBA_Environment *opt_env)
 {
 	CORBA_any                  *ret;
 	Bonobo_Application_ArgList *args;
 	GValue                     *rv;
-	CORBA_Environment           ev;
+	CORBA_Environment           ev1, *ev;
 	int                         i, argv_len;
 
 	g_return_val_if_fail (app_client, NULL);
@@ -136,16 +137,24 @@ bonobo_app_client_msg_send_argv (BonoboAppClient *app_client,
 	}
 	CORBA_sequence_set_release (args, CORBA_TRUE);
 
-	CORBA_exception_init (&ev);
-	ret = Bonobo_Application_message (app_client->app_server, message, args, &ev);
+	if (opt_env)
+		ev = opt_env;
+	else {
+		CORBA_exception_init (&ev1);
+		ev = &ev1;
+	}
+	ret = Bonobo_Application_message (app_client->app_server, message, args, ev);
 	CORBA_free (args);
-	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("error while sending message to application server: %s",
-			   bonobo_exception_get_text (&ev));
-		CORBA_exception_free (&ev);
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+		if (!opt_env) {
+			g_warning ("error while sending message to application server: %s",
+				   bonobo_exception_get_text (ev));
+			CORBA_exception_free (&ev1);
+		}
 		return NULL;
 	}
-	CORBA_exception_free (&ev);
+	if (!opt_env)
+		CORBA_exception_free (&ev1);
 	
 	if (ret->_type != TC_void) {
 		rv = g_new0 (GValue, 1);
@@ -158,22 +167,27 @@ bonobo_app_client_msg_send_argv (BonoboAppClient *app_client,
 
 
 GValue *
-bonobo_app_client_msg_send_valist (BonoboAppClient *app_client,
-				   const char      *message,
-				   va_list          var_args)
+bonobo_app_client_msg_send_valist (BonoboAppClient   *app_client,
+				   const char        *message,
+				   CORBA_Environment *opt_env,
+				   GType              first_arg_type,
+				   va_list            var_args)
 {
 	GValue                     *value, *rv;
 	GPtrArray                  *argv;
 	GType                       type;
 	gchar                      *err;
 	int                         i;
+	gboolean                    first_arg = TRUE;
 
 	g_return_val_if_fail (app_client, NULL);
 	g_return_val_if_fail (BONOBO_IS_APP_CLIENT (app_client), NULL);
 
 	argv = g_ptr_array_new ();
-	while ((type = va_arg (var_args, GType)) != G_TYPE_NONE)
+	while ((type = (first_arg? first_arg_type :
+			va_arg (var_args, GType))) != G_TYPE_NONE)
 	{
+		first_arg = FALSE;
 		value = g_new0 (GValue, 1);
 		g_value_init (value, type);
 		G_VALUE_COLLECT(value, var_args, 0, &err);
@@ -183,7 +197,8 @@ bonobo_app_client_msg_send_valist (BonoboAppClient *app_client,
 	g_ptr_array_add (argv, NULL);
 
 	rv = bonobo_app_client_msg_send_argv (app_client, message,
-					      (const GValue **) argv->pdata);
+					      (const GValue **) argv->pdata,
+					      opt_env);
 
 	for (i = 0; i < argv->len - 1; ++i) {
 		value = g_ptr_array_index (argv, i);
@@ -217,15 +232,18 @@ bonobo_app_client_msg_send_valist (BonoboAppClient *app_client,
  * aplication server.
  **/
 GValue *
-bonobo_app_client_msg_send (BonoboAppClient *app_client,
-			    const char      *message,
+bonobo_app_client_msg_send (BonoboAppClient   *app_client,
+			    const char        *message,
+			    CORBA_Environment *opt_env,
+			    GType              first_arg_type,
 			    ...)
 {
 	GValue  *rv;
 	va_list  var_args;
 	
-	va_start (var_args, message);
-	rv = bonobo_app_client_msg_send_valist (app_client, message, var_args);
+	va_start (var_args, first_arg_type);
+	rv = bonobo_app_client_msg_send_valist (app_client, message, opt_env,
+						first_arg_type, var_args);
 	va_end (var_args);
 	return rv;
 }
@@ -326,14 +344,15 @@ bonobo_app_client_msg_list (BonoboAppClient *app_client)
 
 
 gint
-bonobo_app_client_new_instance (BonoboAppClient *app_client,
-				int              argc,
-				char            *argv[])
+bonobo_app_client_new_instance (BonoboAppClient   *app_client,
+				int                argc,
+				char              *argv[],
+				CORBA_Environment *opt_env)
 {
 	CORBA_sequence_CORBA_string *corba_argv;
 	int                          i;
 	gint                         rv;
-	CORBA_Environment            ev;
+	CORBA_Environment            *ev, ev1;
 
 	corba_argv = CORBA_sequence_CORBA_string__alloc();
 	corba_argv->_buffer  = CORBA_sequence_CORBA_string_allocbuf (argc);
@@ -342,13 +361,19 @@ bonobo_app_client_new_instance (BonoboAppClient *app_client,
 	for (i = 0; i < argc; ++i)
 		corba_argv->_buffer[i] = CORBA_string_dup (argv[i]);
 
-	CORBA_exception_init (&ev);
-	rv = Bonobo_Application_newInstance (app_client->app_server, corba_argv, &ev);
+	if (opt_env)
+		ev = opt_env;
+	else {
+		CORBA_exception_init (&ev1);
+		ev = &ev1;
+	}
+	rv = Bonobo_Application_newInstance (app_client->app_server, corba_argv, ev);
 	CORBA_free (corba_argv);
-	if (ev._major != CORBA_NO_EXCEPTION)
-		g_warning ("newInstance failed: %s", bonobo_exception_get_text (&ev));
-	CORBA_exception_free (&ev);
-
+	if (!opt_env) {
+		if (ev->_major != CORBA_NO_EXCEPTION)
+			g_warning ("newInstance failed: %s", bonobo_exception_get_text (ev));
+		CORBA_exception_free (&ev1);
+	}
 	return rv;
 }
 

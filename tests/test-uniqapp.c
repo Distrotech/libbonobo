@@ -66,10 +66,13 @@ closure_message_cb (BonoboApplication *app, gint arg_1, gdouble arg_2, gpointer 
 int
 main (int argc, char *argv [])
 {
-	BonoboApplication *app;
-	BonoboAppClient   *client;
-	double             msg_arg = 3.141592654;
-	GClosure          *closure;
+	BonoboApplication         *app;
+	gchar                     *serverinfo;
+	Bonobo_RegistrationResult  reg_res;
+	BonoboAppClient           *client;
+	double                     msg_arg = 3.141592654;
+	GClosure                  *closure;
+	gchar const               *envp[] = { "LANG", NULL };
 
 	if (bonobo_init (&argc, argv) == FALSE)
 		g_error ("Can not bonobo_init");
@@ -87,11 +90,14 @@ main (int argc, char *argv [])
 					     closure,
 					     G_TYPE_DOUBLE, G_TYPE_LONG,
 					     G_TYPE_DOUBLE, G_TYPE_NONE);
+	serverinfo = bonobo_application_create_serverinfo (app, envp);
+	reg_res = bonobo_application_register_unique (app, serverinfo, &client);
+	g_free (serverinfo);
 
-	client = bonobo_application_register_unique (app);
-
-	if (client)
+	switch (reg_res)
 	{
+
+	case Bonobo_ACTIVATION_REG_ALREADY_ACTIVE: {
 		BonoboAppClientMsgDesc const *msgdescs;
 		GValue                       *retval;
 		int                           i;
@@ -108,7 +114,7 @@ main (int argc, char *argv [])
 
 		g_message ("Sending message string '%s' with argument %f",
 			   TEST_MESSAGE, msg_arg);
-		retval = bonobo_app_client_msg_send (client, TEST_MESSAGE,
+		retval = bonobo_app_client_msg_send (client, TEST_MESSAGE, NULL,
 						     G_TYPE_DOUBLE, msg_arg,
 						     G_TYPE_STRING, "this is a string",
 						     G_TYPE_NONE);
@@ -121,6 +127,7 @@ main (int argc, char *argv [])
 		g_message ("Sending message string '%s' with arguments %i and %f",
 			   CLOSURE_MESSAGE, 10, 3.141592654);
 		retval = bonobo_app_client_msg_send (client, CLOSURE_MESSAGE,
+						     NULL,
 						     G_TYPE_LONG, 10,
 						     G_TYPE_DOUBLE, 3.141592654,
 						     G_TYPE_NONE);
@@ -131,11 +138,11 @@ main (int argc, char *argv [])
 		}
 
 		g_message ("Sending new-instance, with argc/argv");
-		i = bonobo_app_client_new_instance (client, argc, argv);
+		i = bonobo_app_client_new_instance (client, argc, argv, NULL);
 		g_message ("new-instance returned %i", i);
 
 		g_message ("Asking the server to quit");
-		retval = bonobo_app_client_msg_send (client, "quit", G_TYPE_NONE);
+		retval = bonobo_app_client_msg_send (client, "quit", NULL, G_TYPE_NONE);
 		if (retval) {
 			g_value_unset (retval);
 			g_free (retval);
@@ -143,7 +150,8 @@ main (int argc, char *argv [])
 
 		g_object_unref (client);
 		return bonobo_debug_shutdown ();
-	} else {
+	}
+	case Bonobo_ACTIVATION_REG_SUCCESS:
 		g_message ("I am an application server");
 		g_signal_connect (app, "message::test-message",
 				  G_CALLBACK (message_cb), NULL);
@@ -152,6 +160,11 @@ main (int argc, char *argv [])
 		bonobo_application_new_instance (app, argc, argv);
 		g_signal_connect (app, "message::quit",
 				  G_CALLBACK (message_quit_cb), NULL);
+		break;
+
+	case Bonobo_ACTIVATION_REG_ERROR:
+	default:
+		g_error("bonobo activation error when registering unique application");
 	}
 
 	bonobo_main ();

@@ -1,3 +1,25 @@
+2003-12-31  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-app-client.c (bonobo_app_client_new_instance): Add
+	optional CORBA_Environment parameter, for better error handling.
+	(bonobo_app_client_msg_send): Add CORBA_Environment; Declare a
+	mandatory GType argument, for better compile-time checking, since
+	the function needs at least one GType.
+	(bonobo_app_client_msg_send_valist): idem.
+	(bonobo_app_client_msg_send_argv): idem.
+	(bonobo_app_client_new_instance): Add CORBA_Environment.
+
+	* bonobo/bonobo-application.c
+	(bonobo_application_register_unique): now returns
+	Bonobo_RegistrationResult, receives serverinfo raw description and
+	client interface is returned in an output parameter.
+	(bonobo_application_create_serverinfo): New convenience method to
+	build a XML server description for the app, including a list of
+	cared-for environment variables.
+
+	* bonobo/bonobo-application.h, bonobo/bonobo-app-client.h,
+	* tests/test-uniqapp.c: Update to API changes.
+
 2003-12-25  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-marshal.list, bonobo/bonobo-application.c
