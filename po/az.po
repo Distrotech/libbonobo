@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.101.2\n"
-"POT-Creation-Date: 2001-08-18 16:40+0200\n"
+"POT-Creation-Date: 2001-09-10 03:24+0200\n"
 "PO-Revision-Date: 2001-09-01 22:39GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -150,3 +150,35 @@ msgstr "İzahsız ümumi fəallaşdırma xətası"
 #: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
+msgid "HTTP Moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "ORB IOR handling moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "Standard Moniker factory"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Oaf activation moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
+msgid "generic Oaf query moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
+msgid "generic factory 'new' moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
+msgid "generic item moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:8
+msgid "stream MonikerExtender"
+msgstr ""

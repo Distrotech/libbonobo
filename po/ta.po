@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.96.0\n"
-"POT-Creation-Date: 2001-06-07 17:21+0200\n"
+"POT-Creation-Date: 2001-09-10 03:24+0200\n"
 "PO-Revision-Date: 2001-06-16 17:04-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <www.tamillinux.org>\n"
@@ -13,173 +13,193 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bonobo/bonobo-exception.c:162
+#: bonobo/bonobo-exception.c:153
 msgid "An unsupported action was attempted"
 msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
 
-#: bonobo/bonobo-exception.c:165
+#: bonobo/bonobo-exception.c:156
 msgid "IO Error"
 msgstr "IO À¢¨Æ"
 
-#: bonobo/bonobo-exception.c:168
+#: bonobo/bonobo-exception.c:159
 msgid "Invalid argument value"
 msgstr "À¢¨ÆÂ¡É Á¡È¢ Á¾¢ôÒ"
 
-#: bonobo/bonobo-exception.c:172
+#: bonobo/bonobo-exception.c:163
 msgid "Object not found"
 msgstr "­ÄìÌ ¸¡½Å¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:175
+#: bonobo/bonobo-exception.c:166
 msgid "Syntax error in object description"
 msgstr "­ÄìÌ Å¢ÅÃ¢ôÀ¢ø ¦¾¡¼Ã¢Âø À¢¨Æ"
 
-#: bonobo/bonobo-exception.c:179
-msgid "The User canceled the save"
-msgstr "ÀÂÉ÷ §ºÁ¢ô¨À ¿£ì¸¢Å¢ð¼¡÷"
-
-#: bonobo/bonobo-exception.c:184
+#: bonobo/bonobo-exception.c:171
 msgid "Cannot activate object from factory"
 msgstr "¦¾¡Æ¢üº¡¨ÄÂ¢ø ¦ÀüÈ ­Äì¨¸ ¦ºÂüÀ¼ ÓÊÂÅ¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:189
+#: bonobo/bonobo-exception.c:176
 msgid "No permission to access stream"
 msgstr "µ¨¼ «Ï¸ÖìÌ «ÑÁ¾¢ ¸¢¨¼Â¡Ð"
 
-#: bonobo/bonobo-exception.c:192
+#: bonobo/bonobo-exception.c:179
 msgid "An unsupported stream action was attempted"
 msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ µ¨¼î ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
 
-#: bonobo/bonobo-exception.c:195
+#: bonobo/bonobo-exception.c:182
 msgid "IO Error on stream"
 msgstr "µ¨¼Â¢ø IO À¢¨Æ"
 
-#: bonobo/bonobo-exception.c:199
+#: bonobo/bonobo-exception.c:186
 msgid "IO Error on storage"
 msgstr "§¾ì¸ò¾¢ø IO À¢¨Æ"
 
-#: bonobo/bonobo-exception.c:202
+#: bonobo/bonobo-exception.c:189
 msgid "Name already exists in storage"
 msgstr "§¾ì¸ò¾¢ø ²ü¸É§Å ¦ÀÂ÷ ¯ñÎ"
 
-#: bonobo/bonobo-exception.c:205
+#: bonobo/bonobo-exception.c:192
 msgid "Object not found in storage"
 msgstr "§¾ì¸ò¾¢ø ­ÄìÌ ¸¡½Å¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:208
+#: bonobo/bonobo-exception.c:195
 msgid "No permission to do operation on storage"
 msgstr "§¾ì¸ò¾¢ø ­Âì¸ «ÑÁ¾¢ ¸¢¨¼Â¡Ð"
 
-#: bonobo/bonobo-exception.c:210
+#: bonobo/bonobo-exception.c:197
 msgid "An unsupported storage action was attempted"
 msgstr "µ÷ ¬¾ÃÅÇ¢ûÇ¡ §¾ì¸¸î ¦ºÂø ÓÂüº¢ì¸ôÀð¼Ð"
 
-#: bonobo/bonobo-exception.c:212
+#: bonobo/bonobo-exception.c:199
 msgid "Object is not a stream"
 msgstr "­ÄìÌ µÕ µ¨¼ «øÄ"
 
-#: bonobo/bonobo-exception.c:215
+#: bonobo/bonobo-exception.c:202
 msgid "Object is not a storage"
 msgstr "­ÄìÌ µÕ §¾ì¸¸õ «øÄ"
 
-#: bonobo/bonobo-exception.c:218
+#: bonobo/bonobo-exception.c:205
 msgid "Storage is not empty"
 msgstr "§¾ì¸¸õ ¦ÅüÈ¡ÉÐ «øÄ"
 
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:209
 msgid "malformed user interface XML description"
 msgstr "¦À¡Õò¾-ÁüÈ ÀÂÉ÷ ­¨¼Ó¸ XML Å¢ÅÃ¢ôÒ"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:212
 msgid "invalid path to XML user interface element"
 msgstr "XML ÀÂÉ÷ ­¨¼Ó¸ ¯ÚôÀ¢ý À¡¨¾ À¢¨ÆÂ¡ÉÐ"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:215
+msgid "Unknown command or verb"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:218
+msgid "Command is insensitive"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:222
 msgid "incorrect data type"
 msgstr "À¢¨ÆÂ¡É ¾Ã× Å¨¸"
 
-#: bonobo/bonobo-exception.c:232
+#: bonobo/bonobo-exception.c:225
 msgid "stream not found"
 msgstr "µ¨¼ ¸¡½Å¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:229
 msgid "property not found"
 msgstr "ÀñÒ ¸¡½Å¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:240
+#: bonobo/bonobo-exception.c:232
+msgid "property has invalid type"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:235
+#, fuzzy
+msgid "property is read only"
+msgstr "ÀñÒ ¸¡½Å¢ø¨Ä"
+
+#: bonobo/bonobo-exception.c:238
+msgid "config database backend failed "
+msgstr ""
+
+#: bonobo/bonobo-exception.c:242
 msgid "Moniker interface cannot be found"
 msgstr "Moniker ­¨¼Ó¸õ ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:245
 msgid "Moniker activation timed out"
 msgstr "Moniker àñÎ ¦ºöÔõ §¿Ãõ ÓÊÅ¨¼ó¾Ð"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:248
 msgid "Syntax error within moniker"
 msgstr "Moniker ¯û§Ç ¦¾¡¼Ã¢Âø À¢¨Æ"
 
-#: bonobo/bonobo-exception.c:249
+#: bonobo/bonobo-exception.c:251
 msgid "Moniker has an unknown moniker prefix"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:273
+#: bonobo/bonobo-exception.c:275
 msgid "Error checking error; no exception"
 msgstr ""
 
-#: bonobo/bonobo-generic-factory.h:94 bonobo/bonobo-generic-factory.h:98
+#: bonobo/bonobo-exception.c:284
+#, fuzzy
+msgid "General activation error with no description"
+msgstr "­ÄìÌ Å¢ÅÃ¢ôÀ¢ø ¦¾¡¼Ã¢Âø À¢¨Æ"
+
+#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
 msgid "Could not initialize Bonobo"
 msgstr "¦À¡§É¡§À¡Å¢ý ¦¾¡¼ì¸Á¾¢ôÀÇ¢ì¸ ÓÊÂÅ¢ø¨Ä"
 
-#: bonobo/bonobo-object-directory.c:223
-msgid "No filename"
-msgstr "§¸¡ôÒô ¦ÀÂ÷ ¸¢¨¼Â¡Ð"
-
-#: bonobo/bonobo-object-directory.c:229
-#, c-format
-msgid "unknown mime type for '%s'"
-msgstr "'%s' -ìÌ ¦¾Ã¢Â¡¾ mime Å¨¸"
-
-#: bonobo/bonobo-object-directory.c:254
-#, c-format
-msgid "no handlers for mime type '%s'"
-msgstr "mime Å¨¸ '%s' -ìÌ ¨¸ôÀ¢Ê ¸¢¨¼Â¡Ð"
-
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "ORB IOR handling moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
 msgstr "¦ºó¾Ã Moniker ¦¾¡Æ¢üº¡¨Ä"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
-msgid "file MonikerExtender"
-msgstr "MonikerExtender §¸¡ôÒ"
-
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
 msgstr "ÅÊÅ¢Âø Oaf àñÎ ¦ºöÔõ moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
 msgstr "ÅÊÅ¢Âø Oaf Å¢ÉÅø moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
 msgstr "ÅÊÅ¢Âø ¦¾¡Æ¢üº¡¨Ä 'Ò¾¢Â' moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
-msgid "generic file moniker"
-msgstr "ÅÊÅ¢Âø §¸¡ôÒ moniker"
-
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:8
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
 msgstr "ÅÊÅ¢Âø ¯ÕôÀÊ moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:9
+#: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "µ¨¼ MonikerExtender"
 
-#: tests/test-storage.c:473
-msgid "Can not bonobo_init"
-msgstr "bonobo_init ÓÊÂÅ¢ø¨Ä"
+#~ msgid "The User canceled the save"
+#~ msgstr "ÀÂÉ÷ §ºÁ¢ô¨À ¿£ì¸¢Å¢ð¼¡÷"
 
+#~ msgid "No filename"
+#~ msgstr "§¸¡ôÒô ¦ÀÂ÷ ¸¢¨¼Â¡Ð"
+
+#~ msgid "unknown mime type for '%s'"
+#~ msgstr "'%s' -ìÌ ¦¾Ã¢Â¡¾ mime Å¨¸"
+
+#~ msgid "no handlers for mime type '%s'"
+#~ msgstr "mime Å¨¸ '%s' -ìÌ ¨¸ôÀ¢Ê ¸¢¨¼Â¡Ð"
+
+#~ msgid "file MonikerExtender"
+#~ msgstr "MonikerExtender §¸¡ôÒ"
+
+#~ msgid "generic file moniker"
+#~ msgstr "ÅÊÅ¢Âø §¸¡ôÒ moniker"
+
+#~ msgid "Can not bonobo_init"
+#~ msgstr "bonobo_init ÓÊÂÅ¢ø¨Ä"
