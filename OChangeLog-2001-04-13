@@ -1,3 +1,13 @@
+2000-11-01  Joe Shaw  <joe@helixcode.com>
+
+	* monikers/bonobo-moniker-http.c (http_parse_display_name): Added a
+	hack so that the ! is a seperator and does not invoke the item moniker.
+
+	* monikers/bonobo-moniker-gunzip.c: Added. Decompresses a 
+	Bonobo_Stream.
+
+	* monikers/Makefile.am: Build and install the gunzip moniker.
+
 2000-10-31  JP Rosevear  <jpr@helixcode.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_finalize): Revert unauthorized
