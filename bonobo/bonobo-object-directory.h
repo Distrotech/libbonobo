@@ -59,6 +59,10 @@ ODRegistrationResult od_server_unregister           (CORBA_Object       objref,
 
 CORBA_Object         od_name_service_get            (CORBA_Environment *ev);
 
+char                *bonobo_directory_find_for_file (const char  *fname,
+						     const char **required_ids,
+						     char       **error);
+
 END_GNOME_DECLS
 
 #endif /* __BONOBO_OBJECT_DIRECTORY_H__ */

@@ -11,6 +11,8 @@
  *                      Eazel, Inc.
  */
 
+#include "config.h"
+#include <gnome.h>
 #include "bonobo-object-directory.h"
 #include <liboaf/liboaf.h>
 
@@ -99,26 +101,19 @@ od_get_orb (void)
 	return oaf_orb_get();
 }
 
-GList*
-od_get_server_list (const gchar **required_ids)
+static char *
+build_id_query_fragment (const char **required_ids)
 {
-        GList *retval = NULL;
-        gchar *query;
-        const gchar** required_ids_iter;
-        const gchar** query_components_iter;
-        guint n_required = 0;
-        gchar **query_components;
-        OAF_ServerInfoList *servers;
-        CORBA_Environment ev;
-        guint i, j;
-        
-        g_return_val_if_fail (required_ids != NULL, NULL);
-        g_return_val_if_fail (*required_ids != NULL, NULL);
+        const char **required_ids_iter;
+	const char **query_components_iter;
+        char       **query_components;
+	char        *query;
+        guint        n_required = 0;
 
         /* We need to build a query up from the required_ids */
         required_ids_iter = required_ids;
 
-        while (*required_ids_iter) {
+        while (required_ids && *required_ids_iter) {
                 ++n_required;
                 ++required_ids_iter;
         }
@@ -140,6 +135,23 @@ od_get_server_list (const gchar **required_ids)
         query = g_strjoinv (" AND ", query_components);
 
         g_strfreev (query_components);
+
+	return query;
+}
+
+GList*
+od_get_server_list (const gchar **required_ids)
+{
+        GList *retval = NULL;
+        gchar *query;
+        OAF_ServerInfoList *servers;
+        CORBA_Environment ev;
+        guint i, j;
+        
+        g_return_val_if_fail (required_ids != NULL, NULL);
+        g_return_val_if_fail (*required_ids != NULL, NULL);
+
+	query = build_id_query_fragment (required_ids);
 
         CORBA_exception_init (&ev);
         servers = oaf_query (query, NULL, &ev);
@@ -185,14 +197,74 @@ od_get_server_list (const gchar **required_ids)
 					   name,
 					   desc);
 
-
                 retval = g_list_prepend (retval, info);
-
         }
 
         CORBA_free (servers);
         
         return g_list_reverse (retval);
+}
+
+
+char *
+bonobo_directory_find_for_file (const char  *fname,
+				const char **required_ids,
+				char       **error)
+{
+	char *query, *interfaces;
+	const char *mime_type;
+	char *iid;
+	CORBA_Environment ev;
+        OAF_ServerInfoList *servers;
+	OAF_ServerInfo *oafinfo;
+
+	if (!fname) {
+		if (error)
+			*error = g_strdup (_("No filename"));
+		return NULL;
+	}
+
+	if (!(mime_type = gnome_mime_type ((char *) fname))) {
+		if (error)
+			*error = g_strdup_printf (_("unknown mime type for '%s'"), fname);
+		return CORBA_OBJECT_NIL;
+	}
+
+	interfaces = build_id_query_fragment (required_ids);
+
+	if (required_ids && required_ids [0] && interfaces)
+		query = g_strdup_printf ("%s AND bonobo:supported_mime_types.has ('%s')",
+					 interfaces, mime_type);
+	else
+		query = g_strdup_printf ("bonobo:supported_mime_types.has ('%s')",
+					 mime_type);
+
+	g_free (interfaces);
+
+        CORBA_exception_init (&ev);
+
+        servers = oaf_query (query, NULL, &ev);
+        g_free (query);
+
+        CORBA_exception_free (&ev);
+
+        if (servers == CORBA_OBJECT_NIL || !servers->_buffer) {
+		if (error)
+			*error = g_strdup_printf (
+				_("no handlers for mime type '%s'"), mime_type);
+                return NULL;
+	}
+
+	/* Just return the first one */
+	oafinfo = &servers->_buffer [0];
+	iid = g_strdup (oafinfo->iid);
+
+        CORBA_free (servers);
+
+	if (error)
+		*error = NULL;
+        
+        return iid;
 }
 
 CORBA_Object

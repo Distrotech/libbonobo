@@ -14,6 +14,11 @@
 
 BEGIN_GNOME_DECLS
 
+/* Constants to make it easier to safely select drivers */
+#define BONOBO_IO_DRIVER_FS  "fs"
+#define BONOBO_IO_DRIVER_EFS "efs"
+#define BONOBO_IO_DRIVER_VFS "vfs"
+
 #define BONOBO_STREAM_TYPE        (bonobo_stream_get_type ())
 #define BONOBO_STREAM(o)          (GTK_CHECK_CAST ((o), BONOBO_STREAM_TYPE, BonoboStream))
 #define BONOBO_STREAM_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_STREAM_TYPE, BonoboStreamClass))

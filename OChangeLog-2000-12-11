@@ -1,3 +1,12 @@
+2000-10-19  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object-directory.c (build_id_query_fragment): split from
+	(od_get_server_list): here.
+	(bonobo_directory_find_for_file): impl.
+
+	* bonobo/bonobo-stream.h (BONOBO_IO_DRIVER_FS): add constants to
+	make selecting drivers less error prone.
+
 Thu Oct 19 09:50:37 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/bonobo-storage-fs.c (fs_create_storage): small

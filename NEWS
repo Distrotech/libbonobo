@@ -1,5 +1,9 @@
 Bonobo 0.24
 
+	* cleanup of storage / stream plugins (Dietmar)
+
+	* 
+
 Bonobo 0.23
 
 	* fix pernicious UI widget parenting problem (Me)
