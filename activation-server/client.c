@@ -120,6 +120,9 @@ add_load_path ()
 	case Bonobo_DYNAMIC_LOAD_ALREADY_LISTED:
 		g_print ("The path(%s) already been listed\n", add_path);
 		break;
+        default:
+		g_print ("Unknown error return (%d)\n", res);
+                break;
 	}
 }
 
@@ -140,6 +143,9 @@ remove_load_path ()
 	case Bonobo_DYNAMIC_LOAD_NOT_LISTED:
 		g_print ("The path(%s) wasn't listed\n", remove_path);
 		break;
+        default:
+		g_print ("Unknown error return (%d)\n", res);
+                break;
 	}
 }
 
@@ -147,7 +153,7 @@ static int
 register_activate_server()
 {
 	Bonobo_RegistrationResult res;
-	CORBA_Object r_obj;
+	CORBA_Object r_obj = CORBA_OBJECT_NIL;
 
 	if (registerior) {
 		r_obj = CORBA_ORB_string_to_object (orb, registerior, &ev);

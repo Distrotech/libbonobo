@@ -1,36 +1,26 @@
-NULL=
-
 noinst_PROGRAMS=			\
 	bonobo-activation-test		\
 	bonobo-activation-test-async	\
-	$(NULL)
+	bonobo-activation-empty-server
 
-noinst_LTLIBRARIES=			\
-	libtest-plugin.la		\
-	$(NULL)
+noinst_LTLIBRARIES=libtest-plugin.la
 
-bin_PROGRAMS=				\
-	bonobo-activation-empty-server 	\
-	bonobo-activation-run-query	\
-	$(NULL)
+bin_PROGRAMS=bonobo-activation-run-query
 
-bonobo_activation_test_async_SOURCES=	\
-	bonobo-activation-test-async.c 	\
-	$(NULL)
+bonobo_activation_test_async_SOURCES=   \
+	bonobo-activation-test-async.c
 
 bonobo_activation_test_SOURCES=		\
 	bonobo-activation-test.c	\
 	empty-common.c			\
 	empty.h				\
-	empty-stubs.c			\
-	$(NULL)
+	empty-stubs.c
 
 # Horrible, digusting and atrocious hack to
 # get libtool to build a noinst shared lib.
 libtest_plugin_la_LDFLAGS=					\
 	-rpath $(shell (cd $(top_builddir);pwd))/test/.libs 	\
-	-module -avoid-version -no-undefined			\
-	$(NULL)
+	-module -avoid-version -no-undefined
 
 libtest_plugin_la_LIBADD=					\
 	../../bonobo-activation/libbonobo-activation.la		\
@@ -41,29 +31,25 @@ libtest_plugin_la_SOURCES=		\
 	plugin-common.c			\
 	plugin-skels.c			\
 	plugin-stubs.c			\
-	bonobo-activation-testplugin.c	\
-	$(NULL)
+	bonobo-activation-testplugin.c
 
 bonobo_activation_run_query_SOURCES=	\
 	bonobo-activation-run-query.c 	\
 	empty-common.c			\
 	empty.h				\
-	empty-stubs.c			\
-	$(NULL)
+	empty-stubs.c
 
 bonobo_activation_empty_server_SOURCES=	\
 	empty-server.c			\
 	empty.h				\
 	empty-common.c			\
-	empty-skels.c			\
-	$(NULL)
+	empty-skels.c
 
 BUILT_SOURCES=				\
 	empty.h				\
 	empty-common.c			\
 	empty-stubs.c			\
-	empty-skels.c			\
-	$(NULL)
+	empty-skels.c
 
 empty.h empty-common.c empty-stubs.c empty-skels.c: empty_built
 plugin.h plugin-common.c plugin-stubs.c plugin-skels.c: plugin_built

@@ -1,3 +1,25 @@
+2003-05-12  Michael Meeks  <michael@ximian.com>
+
+	* activation-server/client.c (remove_load_path, add_load_path):
+	handle unknown error cases.
+	(register_activate_server): initialize r_obj always.
+
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory__get_username),
+	(impl_Bonobo_ObjectDirectory__get_hostID): bin.
+	(object_directory_class_init, object_directory_init) 
+	(object_directory_finalize): add.
+	(bonobo_object_directory_init, bonobo_object_directory_shutdown): 
+	substantial update.
+	Large scale re-factoring action towards BonoboObject, and
+	final removal.
+
+2003-05-12  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-activation/Makefile.am: don't install
+	bonobo-activation-emtpy-server, it's a test program.
+	bin NULL bits.
+
 2003-05-12  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* MAINTAINERS: Declare myself as documentation maintainer.
