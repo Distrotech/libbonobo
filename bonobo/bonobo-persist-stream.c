@@ -101,6 +101,7 @@ init_persist_stream_corba_class (void)
 	gnome_persist_stream_epv.load = impl_load;
 	gnome_persist_stream_epv.save = impl_save;
 	gnome_persist_stream_epv.get_size_max = impl_get_size_max;
+	gnome_persist_stream_epv.is_dirty = impl_is_dirty;
 
 	gnome_persist_stream_vepv.GNOME_Unknown_epv = &gnome_object_epv;
 	gnome_persist_stream_vepv.GNOME_Persist_epv = &gnome_persist_epv;

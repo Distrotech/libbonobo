@@ -146,6 +146,11 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	 * for lack of a better solution, we ignore SIGPIPE here.  This
 	 * is open for reconsideration in the future.
 	 *
+	 * When SIGPIPE is ignored, write() calls which would
+	 * ordinarily trigger a signal will instead return -1 and set
+	 * errno to EPIPE.  So ORBit will be able to catch these
+	 * errors instead of letting them kill the component.
+	 *
 	 * Possibilities are the MSG_PEEK trick, where you test if the
 	 * connection is dead right before doing the writev().  That
 	 * approach has two problems:

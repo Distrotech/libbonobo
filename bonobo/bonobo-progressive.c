@@ -71,7 +71,7 @@ impl_end (PortableServer_Servant servant,
 
 static void
 impl_add_data (PortableServer_Servant servant,
-	       const GNOME_ProgressiveDataSink_iobuf *buffer,
+	       GNOME_ProgressiveDataSink_iobuf *buffer,
 	       CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);

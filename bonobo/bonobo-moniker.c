@@ -145,10 +145,6 @@ gnome_moniker_get_as_string (GnomeMoniker *moniker)
  *
  * Returns: The newly-constructed GnomeMoniker object.
  */
-
-/* The parent class for GnomeMoniker */
-static GtkObjectClass *parent_class;
-
 GnomeMoniker *
 gnome_moniker_new (void)
 {

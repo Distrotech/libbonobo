@@ -340,7 +340,7 @@ gnome_container_add (GnomeContainer *container, GnomeObject *client_site)
 	container->client_sites = g_list_prepend (container->client_sites, client_site);
 
 	gtk_signal_connect (GTK_OBJECT (client_site), "destroy",
-			    GTK_SIGNAL_FUNC (gnome_container_client_site_destroy_cb), client_site);
+			    GTK_SIGNAL_FUNC (gnome_container_client_site_destroy_cb), container);
 }
 
 /**
