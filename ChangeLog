@@ -1,5 +1,10 @@
 2001-08-14  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_pbclient_get_value): remove redundant cleanout: label
+
+	* monikers/Makefile.am: s/oaf/server, update install dir.
+
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_full):
 	fix secondary 'add_full' closure store to use new marshaller.
 

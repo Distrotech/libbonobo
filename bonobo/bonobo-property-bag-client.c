@@ -548,7 +548,6 @@ bonobo_pbclient_get_value  (Bonobo_PropertyBag  bag,
 	} else
 		retval = value;
 
- cleanout:
 	if (!opt_ev)
 		CORBA_exception_free (&ev);
 

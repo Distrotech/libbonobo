@@ -16,16 +16,16 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"Bonobo\"			\
 	-DVERSION=\"$(VERSION)\"
 
-Bonobo_Moniker_std.oaf.in : $(srcdir)/Bonobo_Moniker_std.oaf.in.in
+Bonobo_Moniker_std.server.in : $(srcdir)/Bonobo_Moniker_std.server.in.in
 	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" \
-	 $(srcdir)/Bonobo_Moniker_std.oaf.in.in > Bonobo_Moniker_std.oaf.in
+	 $(srcdir)/Bonobo_Moniker_std.server.in.in > Bonobo_Moniker_std.server.in
 
-CLEANFILES+=Bonobo_Moniker_std.oaf Bonobo_Moniker_std.oaf.in
+CLEANFILES+=Bonobo_Moniker_std.server Bonobo_Moniker_std.server.in
 
-oafdir = $(datadir)/oaf
-oaf_DATA = Bonobo_Moniker_std.oaf
+serverdir = $(libdir)/bonobo/servers
+server_DATA = Bonobo_Moniker_std.server
 
-@XML_I18N_MERGE_OAF_RULE@
+@XML_I18N_MERGE_SERVER_RULE@
 
 monikerdir = $(libdir)/bonobo/monikers
 moniker_LTLIBRARIES = libmoniker_std.la
@@ -43,4 +43,4 @@ libmoniker_std_la_SOURCES =			\
 	bonobo-moniker-std.h            	\
 	bonobo-moniker-std.c			
 
-EXTRA_DIST = Bonobo_Moniker_std.oaf.in.in
+EXTRA_DIST = Bonobo_Moniker_std.server.in.in

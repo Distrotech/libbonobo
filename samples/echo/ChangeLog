@@ -1,3 +1,7 @@
+2001-08-14  Michael Meeks  <michael@ximian.com>
+
+	* Makefile.am: s/oaf/server, update install dir.
+
 2001-08-01  Michael Meeks  <michael@ximian.com>
 
 	* echo-client.c (init_bonobo): prune crud.
