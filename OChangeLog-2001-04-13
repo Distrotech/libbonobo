@@ -1,5 +1,9 @@
 2001-02-13  Darin Adler  <darin@eazel.com>
 
+	* .cvsignore: Fix for recent xml-i18n-tools.
+
+2001-02-13  Darin Adler  <darin@eazel.com>
+
 	* bonobo/bonobo-ui-sync-menu.c: (str_uscore_equal): Fix bug where
 	it would consider two strings matching even if only the prefixes
 	matched. Also fix handling of strings with double underscores,
