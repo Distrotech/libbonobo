@@ -183,6 +183,14 @@
 
 2001-08-08  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_parse_name):
+	Return "!" for the item moniker.
+
+	* bonobo/bonobo-item-handler.c (impl_enum_objects): Fixed closure.
+	(impl_get_objects): Ditto.
+
+2001-08-08  Martin Baulig  <baulig@suse.de>
+
 	* bonobo/bonobo-types.h (bonobo_value_get_*): Constify the arg.
 	(BONOBO_TYPE_CORBA_TYPECODE): New type.
 
