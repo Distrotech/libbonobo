@@ -1,5 +1,8 @@
 Sun Nov 21 11:51:37 1999  Dietmar Maurer  <dm@darkstar>
 
+	* storage-modules/gnome-storage-efs.c (gnome_storage_efs_open):
+	use gnome_object_destroy instead of gtk_object_destroy.
+
 	* bonobo/gnome-control.h: added prototype for
 	gnome_control_corba_object_create()
 
