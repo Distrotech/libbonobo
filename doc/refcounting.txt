@@ -1,0 +1,72 @@
+
+Bonobo component reference counting, version 0.1
+by Michael Meeks <mmeeks@gnu.org>
+
+
+* Bonobo Objects
+
+A bonobo object is a gtk object that implements an CORBA interface, it also
+contains a pointer to the BonoboAggregateObject that it is part of. A bonobo
+object has two reference counts; the first is a GtkObject reference count on
+the object. This should be 1 at all times except pre-finalization. The main
+reference count for the aggregate is stored in the 
+
+	typedef struct {
+		int   ref_count;
+		GList *objs;
+	} BonoboAggregateObject;
+
+structure. Also in this structure is a list of all the objects implementing
+other interfaces in this aggregate. Clearly an object is always in its own
+aggregate hence:
+
+	  g_assert (g_list_find (object->priv->ao->objs, object) == object);
+
+	  Is always true. The object->priv->ao dereference is merely a nice
+way of encapsulating this information inside bonobo-object.c and ensuring
+that it can't be fiddled with elsewhere.
+
+
+* Ref counting
+
+The only ref count to manipulate is that on the aggregate obejct, this is
+done via the bonobo_object_ref / unref pair, it is also done remotely via
+the Bonobo_Object_ref / unref CORBA stubs. There is no 'destroy' method,
+if you want this method you are probably confused about how Gtk+ deals
+with allocation.
+
+Some people try to use gtk_object_ref / unref on BonoboObjects; sadly
+this will cause very serious grief. This if you gtk_object_unref a bonobo
+object, then that object will be destroyed without consulting the
+aggregate ref-count, and without sorting out the aggregate. The net
+effect of this is that the aggregate is left including a finalized
+object. This is a very bad move indeed.
+
+
+* Reference leaks
+
+Catching reference leaks is evily difficult. The first approach is to
+re-build bonobo with BONOBO_OBJECT_DEBUG defined in bonobo-object.h.
+This combined with a call to bonobo_shutdown () before exiting your
+program should provide a dump of all object references floating in
+your code. Having re-build bonobo you will need to re-build your
+application, otherwise you will get link errors moaning about not
+being able to find 'bonobo_object_ref / unref'.
+
+Another good way of catching leaks, having guessed which object is
+not getting freed is to fire up container and component in gdb,
+break in eg. bonobo_embeddable_new and insert a hardware watch point
+on the ref count [ see also debugging.txt ]:
+
+(gdb) p &((BonoboObject *)embeddable)->priv->ao->ref_count
+$N = (int *) 0x80808102
+(gdb) watch *0x80808102
+(gdb) cont
+
+This will result in gdb giving you control each time the ref count
+is changed. At this point halt the other end of the CORBA link and
+start logging traces at both ends. By the time the program exits
+you should have worked out where the reference went astray.
+
+
+
