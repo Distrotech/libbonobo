@@ -126,7 +126,7 @@ if test $have_getaddrinfo != yes; then
   done
 fi
 if test $have_getaddrinfo = yes; then
-  AC_DEFINE(HAVE_GETADDRINFO)
+  AC_DEFINE(HAVE_GETADDRINFO, 1, [whether we have getaddrinfo])
 fi
 
 #end checks for getaddrinfo
@@ -152,7 +152,8 @@ AC_ARG_ENABLE(bonobo-activation-debug, [
 ],enable_bonobo_activation_debug=$enableval,enable_bonobo_activation_debug=$debug_default)
 
 if test "x$enable_bonobo_activation_debug" = "xyes"; then
-	AC_DEFINE(BONOBO_ACTIVATION_DEBUG)
+	AC_DEFINE(BONOBO_ACTIVATION_DEBUG, 1,
+                  [whether to compile with bonobo activation debugging])
 fi
 
 AC_PATH_PROG(PERL_PATH, perl)

@@ -1,3 +1,8 @@
+2005-01-06  Thomas Vander Stichele  <thomas at apestaart dot org>
+
+	* configure.in:
+	  Fix autoheader warnings
+
 2004-12-13  Padraig O'Briain <padraig.obriain@sun.com>
 
 	* activation-server/object-directory-corba.c (od_get_active_server):
