@@ -33,6 +33,8 @@ struct _BonoboGenericFactoryPrivate {
 	GClosure *factory_closure;
 	/* The component_id for this generic factory */
 	char     *act_iid;
+	/* Whether we should register with the activation server */
+	gboolean  noreg;
 };
 
 static GObjectClass *bonobo_generic_factory_parent_class = NULL;
@@ -74,6 +76,7 @@ bonobo_generic_factory_construct_noreg (BonoboGenericFactory   *factory,
 	g_return_if_fail (BONOBO_IS_GENERIC_FACTORY (factory));
 	
 	factory->priv->act_iid = g_strdup (act_iid);
+	factory->priv->noreg   = TRUE;
 
 	if (factory_closure)
 		factory->priv->factory_closure =
@@ -104,6 +107,8 @@ bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 	
 	bonobo_generic_factory_construct_noreg (factory, act_iid, factory_closure);
+
+	factory->priv->noreg = FALSE;
 
 	ret = bonobo_activation_active_server_register (act_iid, BONOBO_OBJREF (factory));
 
@@ -179,7 +184,7 @@ bonobo_generic_factory_destroy (BonoboObject *object)
 	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (object);
 
 	if (factory->priv) {
-		if (factory->priv->act_iid)
+		if (!factory->priv->noreg && factory->priv->act_iid)
 			bonobo_activation_active_server_unregister (
 				factory->priv->act_iid, BONOBO_OBJREF (factory));
 
@@ -233,6 +238,7 @@ bonobo_generic_factory_init (GObject *object)
 	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (object);
 
 	factory->priv = g_new0 (BonoboGenericFactoryPrivate, 1);
+	factory->priv->noreg = FALSE;
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory, 
