@@ -1,3 +1,58 @@
+2000-06-07  Darin Adler  <darin@eazel.com>
+
+	Added a destroy-notify feature to callbacks for UI handler
+	menu and toolbar items.
+
+	* bonobo/bonobo-ui-handler.h: Added a destroy_notify field
+	for the callback data inside both menu and toolbar items.  Added a
+	destroy_notify parameter to bonobo_ui_handler_menu_set_callback,
+	bonobo_ui_handler_menu_get_callback,
+	bonobo_ui_handler_toolbar_item_set_callback, and
+	bonobo_ui_handler_toolbar_item_get_callback. Added
+	bonobo_ui_handler_menu_remove_callback_no_notify and
+	bonobo_ui_handler_toolbar_item_remove_callback_no_notify.
+	* bonobo/bonobo-uih-private.h: Added a destroy_notify field
+	for the internal data for both menu and toolbar items.
+	
+	* bonobo/bonobo-uih-menu.c: (menu_copy_item): Don't copy callback
+	data so it stays only in the local UI handler.
+	(menu_free_data): Free the callback data too now that we have a
+	function to do that.
+	(bonobo_ui_handler_menu_fetch_one): Copy the destroy notify
+	function pointer too.
+	(bonobo_ui_handler_menu_set_callback): Set the destroy notify
+	function and destroy the old callback data if present.
+	(bonobo_ui_handler_menu_get_callback): Get the destroy notify
+	function as well.
+	(bonobo_ui_handler_menu_remove_callback_no_notify): New function
+	that clears out the callback and data without calling the
+	destroy-notify function. Needed for code that saves and restores
+	the callback; similar to gtk_object_remove_no_notify.
+	
+	* bonobo/bonobo-uih-toolbar.c: (toolbar_copy_item): Don't copy
+	callback data so it stays only in the local UI handler.
+	(toolbar_free_data): Free the callback data too now that we have a
+	function to do that.
+	(toolbar_local_create_item): Set the destroy notify function.
+	(bonobo_ui_handler_toolbar_item_set_callback): Added parameter
+	to this unimplemented function stub.
+	(bonobo_ui_handler_toolbar_item_get_callback):  Added parameter
+	to this unimplemented function stub.
+	(bonobo_ui_handler_toolbar_item_remove_callback_no_notify):
+	Added an unimplemented function stub.
+
+	* bonobo/bonobo-ui-handler.h:
+	* bonobo/bonobo-uih-menu.c:
+	* bonobo/bonobo-uih-private.h:
+	* bonobo/bonobo-uih-toolbar.c:
+	Changed BonoboUIHandlerCallbackFunc to BonoboUIHandlerCallback.
+	Got rid of lots of extraneous NULL checks just before doing
+	BONOBO_IS_XXX checks.
+	
+	(Editorial comment: It's lame that the toolbar and menu files
+	contain	two nearly-identical cut-and-pasted piles of code. But
+	I did nothing to improve the situation.)
+
 2000-06-03  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_create): constipate.
