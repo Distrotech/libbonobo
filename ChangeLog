@@ -1,3 +1,10 @@
+2004-01-21  Anders Carlsson  <andersca@gnome.org>
+
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_preinit):
+	Fix translation of program arguments. 
+	(#106549, patch by Hidetoshi Tajima).
+
 2004-01-15  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.5.3

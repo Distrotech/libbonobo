@@ -188,7 +188,7 @@ static int   bonobo_activation_ior_fd = 1;
 static char *bonobo_activation_activate_iid = NULL;
 
 struct poptOption bonobo_activation_popt_options[] = {
-        { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL },
+        { NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL },
         { "oaf-ior-fd", '\0', POPT_ARG_INT, &bonobo_activation_ior_fd, 0,
           N_("File descriptor to print IOR on"), N_("FD") },
         { "oaf-activate-iid", '\0', POPT_ARG_STRING, &bonobo_activation_activate_iid, 0,
@@ -222,6 +222,7 @@ bonobo_activation_ior_fd_get (void)
 void
 bonobo_activation_preinit (gpointer app, gpointer mod_info)
 {
+        bindtextdomain (GETTEXT_PACKAGE, BONOBO_ACTIVATION_LOCALEDIR);
 }
 
 void
