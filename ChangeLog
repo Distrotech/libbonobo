@@ -1,3 +1,7 @@
+2005-03-31  Steve Murphy  <murf@e-tools.com>
+
+        * configure.in: Added "rw" to ALL_LINGUAS.
+
 2005-02-20  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* doc/api/libbonobo.types: Remove bonobo_running_context_get_type,
