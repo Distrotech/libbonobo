@@ -1,3 +1,10 @@
+2001-03-17  Ravi Pratap  <ravi@che.iitm.ac.in>
+
+	* tests/test-container.c (verb_AddPDF_cb): Commented out g_error;
+	supplied correct oafid.
+	(add_view): Commented out line to connect to non-existent signal :
+	view_activated
+
 2001-03-19  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-event-source.c
