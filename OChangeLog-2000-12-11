@@ -1,5 +1,15 @@
 2000-10-11  Martin Baulig  <baulig@suse.de>
 
+	* samples/compound-doc/paint-component-simple.c: Use the new
+	UI handler [FIXME: someone need to look at the radio menu items].
+
+	* samples/compond-doc/container/: Use the new UI handler.
+	* samples/controls/sample-control-container.c: Lisewise.
+
+	* tests/test-container.c: Add the text/plain component as a Control.
+
+2000-10-11  Martin Baulig  <baulig@suse.de>
+
 	* gshell/controls.c: Add support for PersistStream.
 
 2000-10-11  Martin Baulig  <baulig@suse.de>
