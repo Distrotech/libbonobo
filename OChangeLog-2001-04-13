@@ -1,3 +1,12 @@
+1999-06-01  Richard Hestilow  <hestgray@ionet.net>
+
+	* bonobo/gnome-bonobo-selector.[ch]: New widget, a dialog
+	that prompts the user to select from a filtered list of goad servers.
+
+	* bonobo/selector_test.c: Test program for aforementioned widget
+	
+	* bonobo/Makefile.am: added new sources, test program
+
 1999-06-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-object.c: Removed object_to_servant hash table.
