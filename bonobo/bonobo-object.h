@@ -27,51 +27,53 @@ BEGIN_GNOME_DECLS
 
 #define BONOBO_OBJREF(o)          (bonobo_object_corba_objref(BONOBO_OBJECT(o)))
 
-/*
- * If you're using a custom servant for your CORBA objects, just make
- * sure that the second element is a 'gpointer' to hold the BonoboObject
- * pointer for servant->BonoboObject translation
- */
-typedef struct {
-	POA_Bonobo_Unknown servant_placeholder;
-	gpointer           bonobo_object;
-} BonoboObjectServant;
+typedef void  (*BonoboObjectPOAFn) (PortableServer_Servant servant,
+				    CORBA_Environment     *ev);
 
 typedef struct _BonoboObjectPrivate BonoboObjectPrivate;
 
 typedef struct {
-	GObject            base;
+	GObject              base;             /* pointer + guint + pointer */
+	BonoboObjectPrivate *priv;             /* pointer */
+	guint                object_signature; /* guint   */
+} BonoboObjectHeader;
 
-	Bonobo_Unknown       corba_objref;
-	gpointer             servant;
-	BonoboObjectPrivate *priv;
+#define BONOBO_OBJECT_HEADER_SIZE (sizeof (BonoboObjectHeader))
+#define BONOBO_OBJECT_SIGNATURE   0xaef2
+#define BONOBO_SERVANT_SIGNATURE  0x2fae
+
+typedef struct {
+	/* A GObject and its signature of type BonoboObjectHeader */
+	GObject              base;             /* pointer + guint + pointer */
+	BonoboObjectPrivate *priv;             /* pointer */
+	guint                object_signature; /* guint   */
+
+	/* A Servant and its signature - same memory layout */
+	POA_Bonobo_Unknown   servant;          /* pointer + pointer */
+	guint                dummy;            /* guint   */
+	Bonobo_Unknown       corba_objref;     /* pointer */
+	guint                servant_signature;
 } BonoboObject;
 
 typedef struct {
 	GObjectClass parent_class;
 
-	/*
-	 * signals.  
-	 */
-	void  (*query_interface) (BonoboObject *object, const char *repo_id,  CORBA_Object      *retval);
-	void  (*system_exception)(BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
+	/* signals. */
+	void  (*query_interface)  (BonoboObject *object, const char *repo_id,  CORBA_Object      *retval);
+	void  (*system_exception) (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 
-	gpointer expansion; /* Used by XObject */
+	BonoboObjectPOAFn          poa_init_fn;
+	BonoboObjectPOAFn          poa_fini_fn;
+
+	POA_Bonobo_Unknown__vepv  *vepv;
+
+	/* The offset of this class' additional epv */
+	int                        epv_struct_offset;
+
+	POA_Bonobo_Unknown__epv    epv;
 } BonoboObjectClass;
 
 GType                    bonobo_object_get_type               (void);
-BonoboObject            *bonobo_object_construct              (BonoboObject           *object,
-							       CORBA_Object            corba_object);
-BonoboObject            *bonobo_object_new_from_servant       (void                   *servant);
-BonoboObject            *bonobo_object_from_servant           (PortableServer_Servant  servant);
-void                     bonobo_object_bind_to_servant        (BonoboObject           *object,
-							       void                   *servant);
-PortableServer_Servant   bonobo_object_get_servant            (BonoboObject           *object);
-Bonobo_Unknown           bonobo_object_activate_servant_full  (BonoboObject           *object,
-							       void                   *servant,
-							       gpointer shlib_id);
-Bonobo_Unknown           bonobo_object_activate_servant       (BonoboObject           *object,
-							       void                   *servant);
 void                     bonobo_object_add_interface          (BonoboObject           *object,
 							       BonoboObject           *newobj);
 BonoboObject            *bonobo_object_query_local_interface  (BonoboObject           *object,
@@ -79,6 +81,9 @@ BonoboObject            *bonobo_object_query_local_interface  (BonoboObject     
 Bonobo_Unknown           bonobo_object_query_interface        (BonoboObject           *object,
 							       const char             *repo_id);
 Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject           *object);
+/* Compat */
+#define                  bonobo_object_from_servant(s)        (bonobo_object (s))
+#define                  bonobo_object_get_servant(o)         ((PortableServer_Servant)((guchar *)(o) + BONOBO_OBJECT_HEADER_SIZE))
 
 /*
  * Gnome Object Life Cycle
@@ -90,7 +95,6 @@ void                     bonobo_object_release_unref          (Bonobo_Unknown   
 void                     bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_idle_unref             (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
-POA_Bonobo_Unknown__epv *bonobo_object_get_epv                (void);
 void                     bonobo_object_init                   (void);
 void                     bonobo_object_trace_refs             (BonoboObject *object,
 							       const char   *fn,
@@ -121,6 +125,23 @@ void                     bonobo_object_check_env              (BonoboObject     
 gboolean  bonobo_unknown_ping           (Bonobo_Unknown object);
 void      bonobo_object_list_unref_all  (GList        **list);
 void      bonobo_object_slist_unref_all (GSList       **list);
+
+
+/* Detects the pointer type and returns the object reference - magic. */
+BonoboObject *bonobo_object (gpointer p);
+/* Use G_STRUCT_OFFSET to calc. epv_struct_offset */
+GType          bonobo_type_unique (GType             parent_type,
+				   BonoboObjectPOAFn init_fn,
+				   BonoboObjectPOAFn fini_fn,
+				   int               epv_struct_offset,
+				   const GTypeInfo  *info,
+				   const gchar      *type_name);
+
+gboolean       bonobo_type_setup  (GType             type,
+				   BonoboObjectPOAFn init_fn,
+				   BonoboObjectPOAFn fini_fn,
+				   int               epv_struct_offset);
+						
 
 END_GNOME_DECLS
 

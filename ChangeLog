@@ -1,5 +1,18 @@
 2001-04-17  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.c (bonobo_object): impl.
+	(bonobo_object_finalize_real): upd.
+	(do_corba_hacks): move from bonobo_xobject.c
+	(bonobo_object_get_refs): kill.
+
+	* bonobo/Makefile.am: remove bonobo-xobject.c, leave only the
+	header for compat.
+
+	* bonobo/bonobo-object.c (bonobo_object_get_epv): kill.
+	(bonobo_object_construct, bonobo_object_new_from_servant),
+	(bonobo_object_bind_to_servant, bonobo_object_activate_servant),
+	(bonobo_object_activate_servant_full): kill.
+
 	* idl/Bonobo_Storage.idl: kill copyTo - its Broken!
 
 	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_class_init): 

@@ -121,7 +121,6 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-item-handler.c		\
 	bonobo-listener.c		\
 	bonobo-main.c			\
-	bonobo-xobject.c		\
 	bonobo-moniker.c		\
 	bonobo-moniker-extender.c	\
 	bonobo-moniker-simple.c		\

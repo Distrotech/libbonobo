@@ -1,5 +1,9 @@
 Significant:
 
+	No effort to keep compatibility with BonoboObject, only
+BonoboXObject, thus, poking at elements inside BonoboObject will
+fail in future.
+
 C:
 
 bonobo-stream.[ch]:
@@ -10,6 +14,15 @@ bonobo-stream.[ch]:
 	removed bonobo_stream_open
 	renamed bonobo_stream_open_full to bonobo_stream_open
 	moved bonobo_stream_open into bonobo_storage
+
+bonobo-object.[ch]:
+	Deprecate in favour of BonoboXObject
+		removed bonobo_object_get_epv
+		removed bonobo_object_construct
+		removed bonobo_object_new_from_servant
+		removed bonobo_object_bind_to_servant
+		removed bonobo_object_activate_servant
+		removed bonobo_object_activate_servant_full
 
 IDL:
 

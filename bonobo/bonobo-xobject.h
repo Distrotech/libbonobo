@@ -10,81 +10,35 @@
 #ifndef _BONOBO_X_OBJECT_H_
 #define _BONOBO_X_OBJECT_H_
 
-#include <libgnomebase/gnome-defs.h>
-#include <gobject/gobject.h>
-#include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
 
-#define BONOBO_X_OBJECT_TYPE        (bonobo_x_object_get_type ())
-#define BONOBO_X_OBJECT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_X_OBJECT_TYPE, BonoboXObject))
-#define BONOBO_X_OBJECT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_X_OBJECT_TYPE, BonoboXObjectClass))
-#define BONOBO_IS_X_OBJECT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_X_OBJECT_TYPE))
-#define BONOBO_IS_X_OBJECT_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_X_OBJECT_TYPE))
-
-#define BONOBO_X_OBJECT_HEADER_SIZE (sizeof (BonoboObject))
+/* Compatibility code */
+#define BONOBO_X_OBJECT_TYPE        BONOBO_OBJECT_TYPE
+#define BONOBO_X_OBJECT(o)          BONOBO_OBJECT (o)
+#define BONOBO_X_OBJECT_CLASS(k)    BONOBO_OBJECT_CLASS (k)
+#define BONOBO_IS_X_OBJECT(o)       BONOBO_IS_OBJECT (o)
+#define BONOBO_IS_X_OBJECT_CLASS(k) BONOBO_IS_OBJECT_CLASS (k)
 
 /*
- * Macros to convert between types.
- *  - foolproof versions to follow.
+ * Compatibility macros to convert between types,
+ * use bonobo_object (), it's more foolproof.
  */
+#define BONOBO_X_OBJECT_HEADER_SIZE BONOBO_OBJECT_HEADER_SIZE
 #define BONOBO_X_OBJECT_GET_SERVANT(o) ((PortableServer_Servant)&(o)->servant)
 #define BONOBO_X_SERVANT_GET_OBJECT(o) ((BonoboXObject *)((guchar *)(o)				\
 					     - BONOBO_X_OBJECT_HEADER_SIZE			\
 					     - sizeof (struct CORBA_Object_struct)	\
 					     - sizeof (gpointer) * 4))
 
-typedef struct _BonoboXObject BonoboXObject;
-
-/* Detects the pointer type and returns the object reference - magic. */
-BonoboXObject *bonobo_x_object (gpointer p);
-
-struct _BonoboXObject {
-	BonoboObject               base;
-	
-	/* Start: BonoboObjectServant */
-	BonoboObjectServant        servant;
-	int                        flags;        /* discriminant */
-	/* End:   BonoboObjectServant */
-
-	gpointer                   dummy;
-
-	/* User data ... */
-};
-
-typedef void (*BonoboXObjectPOAFn) (PortableServer_Servant servant,
-				    CORBA_Environment     *ev);
-
-typedef struct {
-	BonoboObjectClass          parent_class;
-
-	BonoboXObjectPOAFn         poa_init_fn;
-	BonoboXObjectPOAFn         poa_fini_fn;
-
-	POA_Bonobo_Unknown__vepv  *vepv;
-
-	/* The offset of this class' additional epv */
-	int                        epv_struct_offset;
-
-	POA_Bonobo_Unknown__epv    epv;
-} BonoboXObjectClass;
-
-GType          bonobo_x_object_get_type        (void);
-
-/* Use G_STRUCT_OFFSET to calc. epv_struct_offset */
-GType          bonobo_x_type_unique            (GType              parent_type,
-						BonoboXObjectPOAFn init_fn,
-						BonoboXObjectPOAFn fini_fn,
-						int                epv_struct_offset,
-						const GTypeInfo   *info,
-						const gchar       *type_name);
-
-gboolean       bonobo_x_type_setup             (GType              type,
-						BonoboXObjectPOAFn init_fn,
-						BonoboXObjectPOAFn fini_fn,
-						int                epv_struct_offset);
-						
+#define BonoboXObject            BonoboObject
+#define BonoboXObjectClass       BonoboObjectClass
+#define bonobo_x_object          bonobo_object
+#define BonoboXObjectPOAFn       BonoboObjectPOAFn
+#define bonobo_x_object_get_type bonobo_object_get_type
+#define bonobo_x_type_unique     bonobo_type_unique
+#define bonobo_x_type_setup      bonobo_type_setup
 
 #define BONOBO_X_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)       \
 GType                                                                         \
