@@ -6,9 +6,12 @@
 static void
 OAF_ServerInfo__copy(OAF_ServerInfo *new, const OAF_ServerInfo *old)
 {
-  new->iid = CORBA_string_dup(old->iid);
-  new->server_type = CORBA_string_dup(old->server_type);
-  new->location_info = CORBA_string_dup(old->location_info);
+  new->iid = CORBA_string_dup (old->iid);
+  new->server_type = CORBA_string_dup (old->server_type);
+  new->location_info = CORBA_string_dup (old->location_info);
+  new->username = CORBA_string_dup ("");
+  new->hostname = CORBA_string_dup ("");
+  new->domain = CORBA_string_dup ("");
   new->attrs = old->attrs;
   CORBA_sequence_set_release(&new->attrs, CORBA_FALSE);
 }
