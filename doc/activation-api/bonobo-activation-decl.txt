@@ -280,10 +280,18 @@ gboolean           on
 <RETURNS>gboolean  </RETURNS>
 gpointer           data
 </FUNCTION>
+<USER_FUNCTION>
+<NAME>BonoboForkReCheckFn</NAME>
+<RETURNS>CORBA_Object </RETURNS>
+const char        *display,
+                                                       const char        *act_iid,
+                                                       gpointer           user_data,
+                                                       CORBA_Environment *ev
+</USER_FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_server_by_forking</NAME>
 <RETURNS>CORBA_Object  </RETURNS>
-const char       **cmd,gboolean           set_process_group,int                fd_arg,const char        *display,const char        *od_iorstr,CORBA_Environment *ev
+const char       **cmd,gboolean           set_process_group,int                fd_arg,const char        *display,const char        *od_iorstr,const char        *act_iid,BonoboForkReCheckFn re_check,gpointer            user_data,CORBA_Environment *ev
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_rloc_file_register</NAME>
@@ -788,7 +796,7 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
-#define BONOBO_ACTIVATION_MICRO_VERSION (4)
+#define BONOBO_ACTIVATION_MICRO_VERSION (6)
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
