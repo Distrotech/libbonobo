@@ -1,3 +1,11 @@
+2000-10-12  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-win.c: 
+	(put_hint_in_statusbar): Restructured slightly to avoid
+	leaking two strings.
+	(toolbar_sync_state): Decode the tool bar button text. This
+	fixes the bug where tool bar button tips were in ASCII code.
+
 2000-10-12  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-zoomable.c (bonobo_zoomable_set_zoom_parameters):
