@@ -1,3 +1,7 @@
+2001-08-20  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* idl/Bonobo_Clipboard.idl: more sensible argument order
+
 2001-08-18  Michael Meeks  <michael@ximian.com>
 
 	* idl/Makefile.am: build the Activation_types into our

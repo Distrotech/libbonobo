@@ -63,15 +63,15 @@ module Bonobo {
 		/**
 		 * fetchStream:
 		 */
-		void fetchStream (in Moniker       linking_moniker,
-				  in PersistStream source);
+		void fetchStream (in PersistStream source,
+				  in Moniker       linking_moniker);
 
 		
 		/**
 		 * fetchStorage:
 		 */
-		void fetchStorage (in Moniker        linking_moniker,
-				   in PersistStorage source);
+		void fetchStorage (in PersistStorage source,
+				   in Moniker        linking_moniker);
 	};
 	
 };
