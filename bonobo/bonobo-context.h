@@ -10,7 +10,7 @@
 #ifndef _BONOBO_CONTEXT_H_
 #define _BONOBO_CONTEXT_H_
 
-#include <bonobo/Bonobo.h>
+#include <bonobo/bonobo-object.h>
 
 Bonobo_Unknown bonobo_context_get (const CORBA_char  *context_name,
 				   CORBA_Environment *opt_ev);
@@ -18,7 +18,9 @@ Bonobo_Unknown bonobo_context_get (const CORBA_char  *context_name,
 void           bonobo_context_add (const CORBA_char  *context_name,
 				   Bonobo_Unknown     context);
 
-void           bonobo_context_init     (void);
-void           bonobo_context_shutdown (void);
+BonoboObject  *bonobo_context_running_get (void);
+
+void           bonobo_context_init        (void);
+void           bonobo_context_shutdown    (void);
 
 #endif /* _BONOBO_CONTEXT_H_ */

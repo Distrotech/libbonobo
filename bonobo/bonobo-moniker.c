@@ -92,6 +92,88 @@ bonobo_moniker_get_name (BonoboMoniker *moniker,
 	return "";
 }
 
+
+static char *
+escape_moniker (const char *string,
+		int         offset)
+{
+	gchar *escaped, *p;
+	guint  backslashes = 0;
+	int    i, len;
+
+	g_return_val_if_fail (string != NULL, NULL);
+
+	len = strlen (string);
+	g_return_val_if_fail (offset >= len, NULL);
+
+	for (i = offset; i < len; i++) {
+		if (string [i] == '\0')
+			break;
+		else if (string [i] == '\\' ||
+			 string [i] == '#'  ||
+			 string [i] == '!')
+			backslashes ++;
+	}
+	
+	if (!backslashes)
+		return g_strdup (&string [offset]);
+
+	p = escaped = g_new (gchar, len - offset + backslashes + 1);
+
+	for (i = offset; i < len; i++) {
+		if (string [i] == '\\' ||
+		    string [i] == '#'  ||
+		    string [i] == '!')
+			*p++ = '\\';
+		*p++ = string [i];
+	}
+	*p = '\0';
+
+	return escaped;
+}
+
+char *
+bonobo_moniker_get_name_escaped (BonoboMoniker *moniker,
+				 int            char_offset)
+{
+	return escape_moniker (moniker->priv->name, char_offset);
+}
+
+static char *
+unescape_moniker (const char *string,
+		  int         num_chars)
+{
+	gchar *escaped, *p;
+	guint  backslashes = 0;
+	int    i;
+
+	g_return_val_if_fail (string != NULL, NULL);
+
+	for (i = 0; i < num_chars; i++) {
+		if (string [i] == '\0')
+			break;
+		else if (string [i] == '\\')
+			backslashes ++;
+	}
+
+	if (!backslashes)
+		return g_strndup (string, num_chars);
+
+	p = escaped = g_new (gchar, strlen (string) - backslashes + 1);
+
+	for (i = 0; i < num_chars; i++) {
+		if (string [i] == '\\') {
+			if (!string [++i])
+				break;
+			*p++ = string [i];
+		} else
+			*p++ = string [i];
+	}
+	*p = '\0';
+
+	return escaped;
+}
+
 /**
  * bonobo_moniker_set_name:
  * @moniker: the BonoboMoniker to configure.
@@ -108,7 +190,7 @@ bonobo_moniker_set_name (BonoboMoniker *moniker,
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
 
 	g_free (moniker->priv->name);
-	moniker->priv->name = g_strndup (name, num_chars);
+	moniker->priv->name = unescape_moniker (name, num_chars);
 }
 
 static CORBA_char *

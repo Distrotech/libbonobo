@@ -33,52 +33,47 @@ typedef BonoboObject * (*GnomeFactoryCallback)(BonoboGenericFactory *factory, co
 struct _BonoboGenericFactory {
 	BonoboObject base;
 
-	/*
-	 * The function factory
-	 */
+	/* The function factory */
 	BonoboGenericFactoryFn factory; /* compat reasons only */
-	GnomeFactoryCallback factory_cb;
-	gpointer factory_closure;
+	GnomeFactoryCallback   factory_cb;
+	gpointer               factory_closure;
 
-	/*
-	 * The component_id for this generic factory
-	 */
-	char *goad_id;
+	/* The component_id for this generic factory */
+	char *oaf_iid;
 };
 
 typedef struct {
 	BonoboObjectClass parent_class;
 
-	/*
-	 * Virtual methods
-	 */
-	BonoboObject * (*new_generic)(BonoboGenericFactory *c_factory, const char *component_id);
+	/* Virtual methods */
+	BonoboObject *(*new_generic) (BonoboGenericFactory *c_factory,
+				      const char           *component_id);
 } BonoboGenericFactoryClass;
 
-GtkType bonobo_generic_factory_get_type  (void);
+GtkType               bonobo_generic_factory_get_type  (void);
 
 BonoboGenericFactory *bonobo_generic_factory_new (
-	const char *component_id,
+	const char            *component_id,
 	BonoboGenericFactoryFn factory,
-	void *data);
+	void *                 data);
 
 BonoboGenericFactory *bonobo_generic_factory_new_multi (
-	const char *component_id,
-	GnomeFactoryCallback factory_cb,
-	gpointer data);
+	const char            *component_id,
+	GnomeFactoryCallback   factory_cb,
+	gpointer               data);
 
 BonoboGenericFactory *bonobo_generic_factory_construct (
-	const char *component_id,
+	const char            *component_id,
 	BonoboGenericFactory  *c_factory,
-	CORBA_Object          corba_factory,
+	CORBA_Object           corba_factory,
 	BonoboGenericFactoryFn factory,
-	GnomeFactoryCallback factory_cb,
-	void *data);
+	GnomeFactoryCallback   factory_cb,
+	void                  *data);
 
 void bonobo_generic_factory_set (
-	BonoboGenericFactory *c_factory,
+	BonoboGenericFactory  *c_factory,
 	BonoboGenericFactoryFn factory,
-	void *data);
+	void                  *data);
 
 POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 

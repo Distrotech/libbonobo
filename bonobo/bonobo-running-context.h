@@ -25,7 +25,7 @@ typedef struct {
 typedef struct {
 	BonoboObjectClass parent;
 
-	void (*last_ref) (void);
+	void (*last_unref) (void);
 } BonoboRunningContextClass;
 
 BonoboObject *bonobo_running_context_new (void);

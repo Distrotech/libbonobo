@@ -46,7 +46,47 @@ moniker_id_from_nickname (const CORBA_char *name)
 	return NULL;
 }
 
-static char *
+/*
+ * get_full_interface_name:
+ * @ifname: original name: can be in form Bonobo/Control
+ *
+ * Return value: full name eg. IDL:Bonobo/Control:1.0
+ **/
+static gchar *
+get_full_interface_name (const char *ifname)
+{
+	int len, had_ver;
+	const char *a;
+	char *retval, *b;
+
+	g_return_val_if_fail (ifname != NULL, NULL);
+
+	len = strlen (ifname);
+	retval = g_new (char, len + 4 + 4 + 1);
+
+	strcpy (retval, "IDL:");
+	a = ifname;
+	b = retval + 4;
+
+	if (ifname [0] == 'I' &&
+	    ifname [1] == 'D' &&
+	    ifname [2] == 'L' &&
+	    ifname [3] == ':')
+		a += 4;
+
+	for (had_ver = 0; *a; a++, b++) {
+		if (*a == ':')
+			had_ver = 1;
+		*b = *a;
+	}
+
+	if (!had_ver)
+		strcpy (b, ":1.0");
+
+	return retval;
+}
+
+static gchar *
 query_from_name (const char *name)
 {
 	char *prefix, *query;
@@ -94,7 +134,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 
 		g_free (query);
 		
-		if (BONOBO_EX(ev))
+		if (BONOBO_EX (ev))
 			return CORBA_OBJECT_NIL;
 
 		if (object == CORBA_OBJECT_NIL) {
@@ -105,7 +145,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 	} else {
 		object = oaf_activate_from_id ((gchar *) iid, 0, NULL, ev);
 
-		if (BONOBO_EX(ev))
+		if (BONOBO_EX (ev))
 			return CORBA_OBJECT_NIL;
 		
 		if (object == CORBA_OBJECT_NIL) {
@@ -220,12 +260,12 @@ bonobo_moniker_util_seek_std_separator (const CORBA_char *str,
 		}
 	}
 
-#warning We need escaping support here 
-
 	for (; str [i]; i++) {
 
-		if (str [i] == '!' ||
-		    str [i] == '#')
+		if (str [i] == '\\' && str [i + 1])
+			i++;
+		else if (str [i] == '!' ||
+			 str [i] == '#')
 			break;
 	}
 	
@@ -270,12 +310,21 @@ bonobo_moniker_client_resolve_default (Bonobo_Moniker     moniker,
 				       CORBA_Environment *ev)
 {
 	Bonobo_ResolveOptions options;
+	Bonobo_Unknown        retval;
+	char                 *real_if;
 	
+	g_return_val_if_fail (interface_name != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (moniker != CORBA_OBJECT_NIL, CORBA_OBJECT_NIL);
+
+	real_if = get_full_interface_name (interface_name);
 
 	init_default_resolve_options (&options);
 
-	return Bonobo_Moniker_resolve (moniker, &options, interface_name, ev);
+	retval = Bonobo_Moniker_resolve (moniker, &options, real_if, ev);
+
+	g_free (real_if);
+
+	return retval;
 }
 
 BonoboObjectClient *
@@ -309,7 +358,7 @@ bonobo_get_object (const CORBA_char *name,
 
 	moniker = bonobo_moniker_client_new_from_name (name, ev);
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 
 	retval = bonobo_moniker_client_resolve_default (
@@ -317,11 +366,10 @@ bonobo_get_object (const CORBA_char *name,
 
 	bonobo_object_release_unref (moniker, ev);
 
-	if (BONOBO_EX(ev))
+	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 	
 	return retval;
-
 }
 
 typedef struct {
@@ -631,7 +679,7 @@ bonobo_get_object_async (const CORBA_char    *name,
 	ctx = g_new0 (get_object_async_ctx_t, 1);
 	ctx->cb = cb;
 	ctx->user_data = user_data;
-	ctx->interface_name = g_strdup (interface_name);
+	ctx->interface_name = get_full_interface_name (interface_name);
 	ctx->timeout_usec = timeout_usec;
 
 	bonobo_moniker_client_new_from_name_async (

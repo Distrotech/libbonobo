@@ -13,13 +13,15 @@
 #include <gtk/gtksignal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-event-source.h>
+#include <bonobo/bonobo-running-context.h>
 
 static BonoboObjectClass    *bonobo_event_source_parent_class;
 POA_Bonobo_EventSource__vepv bonobo_event_source_vepv;
 
 
 struct _BonoboEventSourcePrivate {
-	GSList *listeners;  /* CONTAINS: ListenerDesc* */
+	GSList  *listeners;  /* CONTAINS: ListenerDesc* */
+	gboolean ignore;
 };
 
 typedef struct {
@@ -61,6 +63,9 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 
 	if (event_mask)
 		mask_copy = CORBA_string_dup (event_mask);
+
+	if (event_source->priv->ignore) /* Hook for running context */
+		bonobo_running_context_ignore_object (l);
 
 	/* 
 	 * Check if listener is already registered, and if so modify 
@@ -236,6 +241,13 @@ bonobo_event_source_class_init (BonoboEventSourceClass *klass)
 	init_event_source_corba_class ();
 }
 
+/**
+ * bonobo_event_source_get_type:
+ * 
+ * Registers the GtkType for this BonoboObject.
+ * 
+ * Return value: the type.
+ **/
 GtkType
 bonobo_event_source_get_type (void)
 {
@@ -259,6 +271,14 @@ bonobo_event_source_get_type (void)
         return type;
 }
 
+/**
+ * bonobo_event_source_corba_object_create:
+ * @object: the object to tie the CORBA object to
+ * 
+ * creates the CORBA object associated with an event source
+ * 
+ * Return value: the CORBA handle to this object.
+ **/
 Bonobo_EventSource
 bonobo_event_source_corba_object_create (BonoboObject *object)
 {
@@ -282,6 +302,15 @@ bonobo_event_source_corba_object_create (BonoboObject *object)
         return bonobo_object_activate_servant (object, servant);
 }
 
+/**
+ * bonobo_event_source_construct:
+ * @event_source: 
+ * @corba_event_source: 
+ * 
+ * constructs an event source.
+ * 
+ * Return value: the constructed event source or NULL on error.
+ **/
 BonoboEventSource *
 bonobo_event_source_construct (BonoboEventSource  *event_source, 
 			       Bonobo_EventSource corba_event_source) 
@@ -326,4 +355,19 @@ bonobo_event_source_new (void)
 	
 	return bonobo_event_source_construct (
 		event_source, corba_event_source);
+}
+
+/**
+ * bonobo_event_source_ignore_listeners:
+ * @event_source: 
+ * 
+ *  Instructs the event source to de-register any listeners
+ * that are added from the global running context.
+ **/
+void
+bonobo_event_source_ignore_listeners (BonoboEventSource *event_source)
+{
+	g_return_if_fail (BONOBO_IS_EVENT_SOURCE (event_source));
+
+	event_source->priv->ignore = TRUE;
 }

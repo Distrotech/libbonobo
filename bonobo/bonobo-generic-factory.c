@@ -20,6 +20,7 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-generic-factory.h>
+#include <bonobo/bonobo-running-context.h>
 #include <liboaf/liboaf.h>
 
 POA_GNOME_ObjectFactory__vepv bonobo_generic_factory_vepv;
@@ -28,12 +29,12 @@ static BonoboObjectClass *bonobo_generic_factory_parent_class;
 
 static CORBA_boolean
 impl_Bonobo_ObjectFactory_manufactures (PortableServer_Servant  servant,
-					 const CORBA_char       *obj_goad_id,
+					 const CORBA_char       *obj_oaf_iid,
 					 CORBA_Environment      *ev)
 {
 	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
 
-	if (! strcmp (obj_goad_id, factory->goad_id))
+	if (! strcmp (obj_oaf_iid, factory->oaf_iid))
 		return CORBA_TRUE;
 
 	return CORBA_FALSE;
@@ -41,7 +42,7 @@ impl_Bonobo_ObjectFactory_manufactures (PortableServer_Servant  servant,
 
 static CORBA_Object
 impl_Bonobo_ObjectFactory_create_object (PortableServer_Servant   servant,
-					  const CORBA_char        *obj_goad_id,
+					  const CORBA_char        *obj_oaf_iid,
 					  const GNOME_stringlist *params,
 					  CORBA_Environment       *ev)
 {
@@ -52,7 +53,7 @@ impl_Bonobo_ObjectFactory_create_object (PortableServer_Servant   servant,
 	factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
 
 	class = BONOBO_GENERIC_FACTORY_CLASS (GTK_OBJECT (factory)->klass);
-	object = (*class->new_generic) (factory, obj_goad_id);
+	object = (*class->new_generic) (factory, obj_oaf_iid);
 
 	if (!object)
 		return CORBA_OBJECT_NIL;
@@ -84,7 +85,7 @@ create_bonobo_generic_factory (BonoboObject *object)
 
 /**
  * bonobo_generic_factory_construct:
- * @goad_id: The GOAD id that the new factory will implement.
+ * @oaf_iid: The GOAD id that the new factory will implement.
  * @c_factory: The object to be initialized.
  * @corba_factory: The CORBA object which supports the
  * Bonobo::GenericFactory interface and which will be used to
@@ -98,7 +99,7 @@ create_bonobo_generic_factory (BonoboObject *object)
  * Returns: The initialized BonoboGenericFactory object.
  */
 BonoboGenericFactory *
-bonobo_generic_factory_construct (const char             *goad_id,
+bonobo_generic_factory_construct (const char             *oaf_iid,
 				  BonoboGenericFactory   *c_factory,
 				  CORBA_Object            corba_factory,
 				  BonoboGenericFactoryFn  factory,
@@ -114,14 +115,16 @@ bonobo_generic_factory_construct (const char             *goad_id,
 
 	bonobo_object_construct (BONOBO_OBJECT (c_factory), corba_factory);
 
+	bonobo_running_context_ignore_object (corba_factory);
+
 	c_factory->factory         = factory;
 	c_factory->factory_cb      = factory_cb;
 	c_factory->factory_closure = data;
-	c_factory->goad_id         = g_strdup (goad_id);
+	c_factory->oaf_iid         = g_strdup (oaf_iid);
 
 	CORBA_exception_init (&ev);
 
-	ret = oaf_active_server_register (c_factory->goad_id, corba_factory);
+	ret = oaf_active_server_register (c_factory->oaf_iid, corba_factory);
 
 	CORBA_exception_free (&ev);
 
@@ -135,7 +138,7 @@ bonobo_generic_factory_construct (const char             *goad_id,
 
 /**
  * bonobo_generic_factory_new:
- * @goad_id: The GOAD id that this factory implements
+ * @oaf_iid: The GOAD id that this factory implements
  * @factory: A callback which is used to create new BonoboObject instances.
  * @data: The closure data to be passed to the @factory callback routine.
  *
@@ -151,7 +154,7 @@ bonobo_generic_factory_construct (const char             *goad_id,
  * name server.
  */
 BonoboGenericFactory *
-bonobo_generic_factory_new (const char             *goad_id,
+bonobo_generic_factory_new (const char             *oaf_iid,
 			    BonoboGenericFactoryFn  factory,
 			    void                   *data)
 {
@@ -169,12 +172,12 @@ bonobo_generic_factory_new (const char             *goad_id,
 	}
 	
 	return bonobo_generic_factory_construct (
-		goad_id, c_factory, corba_factory, factory, NULL, data);
+		oaf_iid, c_factory, corba_factory, factory, NULL, data);
 }
 
 /**
  * bonobo_generic_factory_new:
- * @goad_id: The GOAD id that this factory implements
+ * @oaf_iid: The GOAD id that this factory implements
  * @factory_cb: A callback which is used to create new BonoboObject instances.
  * @data: The closure data to be passed to the @factory callback routine.
  *
@@ -190,7 +193,7 @@ bonobo_generic_factory_new (const char             *goad_id,
  * name server.
  */
 BonoboGenericFactory *bonobo_generic_factory_new_multi (
-	const char *goad_id,
+	const char *oaf_iid,
 	GnomeFactoryCallback factory_cb,
 	gpointer data)
 {
@@ -198,7 +201,7 @@ BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	GNOME_ObjectFactory corba_factory;
 
 	g_return_val_if_fail (factory_cb != NULL, NULL);
-	g_return_val_if_fail (goad_id != NULL, NULL);
+	g_return_val_if_fail (oaf_iid != NULL, NULL);
 	
 	c_factory = gtk_type_new (bonobo_generic_factory_get_type ());
 
@@ -209,7 +212,7 @@ BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	}
 	
 	return bonobo_generic_factory_construct (
-		goad_id, c_factory, corba_factory, NULL, factory_cb, data);
+		oaf_iid, c_factory, corba_factory, NULL, factory_cb, data);
 }
 
 
@@ -220,25 +223,26 @@ bonobo_generic_factory_finalize (GtkObject *object)
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
-	oaf_active_server_unregister (c_factory->goad_id,
+	oaf_active_server_unregister (c_factory->oaf_iid,
 				      BONOBO_OBJECT (c_factory)->corba_objref);
 	CORBA_exception_free (&ev);
-	g_free (c_factory->goad_id);
+	g_free (c_factory->oaf_iid);
 	
 	GTK_OBJECT_CLASS (bonobo_generic_factory_parent_class)->destroy (object);
 }
 
 static BonoboObject *
 bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
-				    const char           *goad_id)
+				    const char           *oaf_iid)
 {
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 
 	if(factory->factory_cb)
-		return (*factory->factory_cb)(factory, goad_id, factory->factory_closure);
+		return factory->factory_cb (factory, oaf_iid,
+					    factory->factory_closure);
 	else
-		return (*factory->factory)(factory, factory->factory_closure);
+		return factory->factory    (factory, factory->factory_closure);
 }
 
 static void

@@ -1,5 +1,65 @@
 2000-12-14  Michael Meeks  <michael@helixcode.com>
 
+	* tests/Makefile.am: add test-moniker
+
+	* tests/test-moniker.c: create.
+
+	* bonobo/bonobo-moniker.c (escape_moniker): impl.
+	(bonobo_moniker_get_name_escaped): use it.
+	(unescape_moniker): impl.
+	(bonobo_moniker_set_name): impl.
+
+	* bonobo/bonobo-generic-factory.h: s/goad_id/oaf_iid/
+
+	* bonobo/bonobo-selector.c (bonobo_selector_construct): set 'Ok' as
+	default on selector.
+
+	* bonobo/bonobo-running-context.c (get_running_info): add create param
+	update all calls.
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_new):
+	ignore factories on the running context.
+
+	* components/selector/bonobo-selector.c (last_unref_cb): impl.
+	(main): connect to running context.
+
+	* bonobo/bonobo-running-context.c (bonobo_running_context_new): 
+	aggregate an event source with the interface.
+	(bonobo_context_running_get): impl.
+	(check_empty): notify listener.
+
+	* bonobo/bonobo-event-source.c (bonobo_event_source_ignore_listeners): impl.
+	(impl_Bonobo_EventSource_addListenerWithMask): add ignore.
+
+	* bonobo/bonobo-moniker-util.c (get_full_interface_name): impl: maps
+	Bonobo/Control         -> IDL:Bonobo/Control:1.0,
+	Bonobo/Control:3.5     -> IDL:Bonobo/Control:3.5
+	IDL:Bonobo/Control     -> IDL:Bonobo/Control:1.0
+	IDL:Bonobo/Control:1.0 -> IDL:Bonobo/Control:1.0
+	(bonobo_get_object_async): use it.
+	(bonobo_moniker_client_resolve_default): use it too.
+	(bonobo_moniker_util_seek_std_separator): impl. escaping support.
+
+	* samples/controls/bonobo-calculator-control.c: update
+	
+	* samples/controls/bonobo-clock-control.c: update
+
+	* samples/controls/sample-control-factory.c: re-write.
+
+	* samples/controls/Bonobo_Sample_Controls.oafinfo: create.
+
+	* samples/controls/Bonobo_Sample_Calculator.oafinfo: remove.
+
+	* samples/controls/Bonobo_Sample_Clock.oafinfo: remove.
+
+	* samples/compound-doc/Makefile.am: Rename samples.
+
+	* samples/compound-doc/Bonobo_Sample_CanvasItem.oafinfo: upd.
+
+	* samples/compound-doc/Bonobo_Sample_Paint.oafinfo: ditto.
+
+2000-12-14  Michael Meeks  <michael@helixcode.com>
+
 	* components/selector/bonobo-selector.c (generic_factory): deal
 	with running object issues in the old way for now.
 	(get_prop, set_prop, generic_factory): add properties to make it

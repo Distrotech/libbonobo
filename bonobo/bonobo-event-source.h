@@ -42,6 +42,8 @@ void               bonobo_event_source_notify_listeners (BonoboEventSource *even
 
 POA_Bonobo_EventSource__epv *bonobo_event_source_get_epv   (void);
 Bonobo_EventSource bonobo_event_source_corba_object_create (BonoboObject *object);
+/* You don't want this routine */
+void               bonobo_event_source_ignore_listeners    (BonoboEventSource *event_source);
 
 END_GNOME_DECLS
 

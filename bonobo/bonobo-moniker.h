@@ -66,8 +66,12 @@ void                     bonobo_moniker_set_parent          (BonoboMoniker     *
  */
 const char              *bonobo_moniker_get_name            (BonoboMoniker     *moniker,
 							     int                char_offset);
+
+char                    *bonobo_moniker_get_name_escaped    (BonoboMoniker     *moniker,
+							     int                char_offset);
+
 void                     bonobo_moniker_set_name            (BonoboMoniker     *moniker,
-							     const char        *name,
+							     const char        *unescaped_name,
 							     int                num_chars);
 
 END_GNOME_DECLS
