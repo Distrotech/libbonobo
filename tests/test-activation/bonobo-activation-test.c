@@ -2,6 +2,7 @@
 #include <liboaf/liboaf.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "empty.h"
 
 #define TOTAL_TEST_SCORE 13

@@ -70,7 +70,7 @@ ac-query-parse.c: stamp-parser
 ac-query-parse.h: stamp-parser
 	test -f y.tab.h && mv -f y.tab.h ac-query-parse.h || touch $@
 
-BUILT_SOURCES=ac-query-lex.c ac-query-parse.c ac-query-parse.h oaf-skels.c
+BUILT_SOURCES=ac-query-lex.c ac-query-parse.c ac-query-parse.h oaf-skels.c OAF_naming-service.oaf
 
 CLEANFILES=stamp-parser stamp-idl
 

@@ -27,6 +27,7 @@
 
 #include "liboaf/liboaf-private.h"
 #include <stdio.h>
+#include <unistd.h>
 
 static gboolean check_registration = TRUE;
 static gboolean need_ior_printout  = TRUE;

@@ -42,6 +42,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <locale.h>
+#include <string.h>
 
 #include <libxml/parser.h>
 
@@ -95,7 +96,7 @@ main (int argc, char *argv[])
 	char *ior;
 	FILE *fh;
 	struct sigaction sa;
-        char *oaf_debug_output;
+        const char *oaf_debug_output;
         int dev_null_fd;
         
 	if (chdir ("/")) {
@@ -136,10 +137,12 @@ main (int argc, char *argv[])
 
         if (oaf_debug_output == NULL || strlen (oaf_debug_output) == 0) {
                 dev_null_fd = open ("/dev/null", O_RDWR);
-                dup2 (dev_null_fd, 0);
-                dup2 (dev_null_fd, 1);
-                dup2 (dev_null_fd, 2);
-                close (dev_null_fd);
+		if(ior_fd != 0)
+		  dup2 (dev_null_fd, 0);
+		if(ior_fd != 1)
+		  dup2 (dev_null_fd, 1);
+		if(ior_fd != 2)
+		  dup2 (dev_null_fd, 2);
         }
 
 	orb = oaf_init (argc, argv);
@@ -224,10 +227,13 @@ main (int argc, char *argv[])
 	if (fh) {
 		fprintf (fh, "%s\n", ior);
 		fclose (fh);
+		if(ior_fd <= 2)
+		  dup2 (dev_null_fd, ior_fd);
 	} else {
-		fprintf (stdout, "%s\n", ior);
+		printf ("%s\n", ior);
 		fflush (stdout);
 	}
+	close (dev_null_fd);
 	CORBA_free (ior);
 
 #ifdef OAF_DEBUG
