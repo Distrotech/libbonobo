@@ -1,3 +1,8 @@
+1999-09-21  Miguel de Icaza  <miguel@gnu.org>
+
+	* idl/gnome-control.idl: New interface, based on Chuck's
+	suggestions. 
+
 1999-09-22  Michael Meeks  <michael@nuclecu.unam.mx>
 
 	* components/Makefile.am: add gnomine.

@@ -160,7 +160,7 @@ module Canvas {
 		ArtUTA update  (in affine aff, in SVP clip_path, in long flags,
 				out double x1, out double y1, out double x2, out double y2);
 
-		void realize ();
+		void realize (in window_id drawable);
 		void unrealize ();
 		void map ();
 		void unmap ();

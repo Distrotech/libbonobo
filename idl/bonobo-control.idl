@@ -1,4 +1,10 @@
-
+/**
+ * Control interfaces
+ *
+ * Author:
+ *   Miguel de Icaza, based on the interfaces from Chuck
+ *
+ */
 interface Property : GNOME::Unknown {
 	/**
 	 * get_name:
