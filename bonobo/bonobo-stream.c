@@ -204,6 +204,6 @@ bonobo_stream_corba_object_create (BonoboObject *object)
         }
 
 	CORBA_exception_free (&ev);
-	return (Bonobo_Stream) bonobo_object_activate_servant (object, servant);
-}
 
+	return bonobo_object_activate_servant (object, servant);
+}

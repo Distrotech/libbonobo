@@ -1,3 +1,25 @@
+2000-07-06  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/Makefile.am: Add files.
+
+	* bonobo/bonobo-control.c (impl_Bonobo_Control_set_window): use
+	bonobo_plug_new
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_construct): use
+	bonobo_socket_new
+
+	* bonobo/bonobo-socket.[ch], bonobo/bonobo-plug.[ch]: Private copies
+	from gtk so we can fiddle effectively.
+
+	* storage-modules/bonobo-stream-vfs.c (fs_copy_to): implement with
+	nautilus code. (fs_seek): update. (fs_write): return IOError
+	(fs_read): add eof code. (fs_eos): implement.
+	(bonobo_stream_vfs_destroy): implement.
+	(bonobo_stream_vfs_class_init): hook in.
+
+	* bonobo/bonobo-selector.c (bonobo_selector_init): kill
+	redundant vbox construction.
+
 2000-07-05  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-client-site.h: fix terminal logic bug; using single

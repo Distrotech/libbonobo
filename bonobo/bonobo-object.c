@@ -116,25 +116,6 @@ bonobo_object_ref (BonoboObject *object)
 }
 
 /**
- * bonobo_object_unref:
- * @object: A BonoboObject you want to unref.
- *
- * decrements the reference count for the aggregate BonoboObject.
- */
-void
-bonobo_object_unref (BonoboObject *object)
-{
-	g_return_if_fail (BONOBO_IS_OBJECT (object));
-	g_return_if_fail (object->priv->ao->ref_count > 0);
-
-	if (object->priv->ao->ref_count == 1) {
-		bonobo_object_destroy (object);
-	} else {
-		object->priv->ao->ref_count--;
-	}
-}
-
-/**
  * bonobo_object_destroy
  * @object: A BonoboObject you want to destroy.
  *
@@ -167,6 +148,25 @@ bonobo_object_destroy (BonoboObject *object)
 
 	g_list_free (ao->objs);
 	g_free (ao);
+}
+
+/**
+ * bonobo_object_unref:
+ * @object: A BonoboObject you want to unref.
+ *
+ * decrements the reference count for the aggregate BonoboObject.
+ */
+void
+bonobo_object_unref (BonoboObject *object)
+{
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
+	g_return_if_fail (object->priv->ao->ref_count > 0);
+
+	if (object->priv->ao->ref_count == 1) {
+		bonobo_object_destroy (object);
+	} else {
+		object->priv->ao->ref_count--;
+	}
 }
 
 static void
@@ -338,14 +338,14 @@ bonobo_object_object_destroy (GtkObject *object)
 	if (bonobo_object->corba_objref != CORBA_OBJECT_NIL)
 		CORBA_Object_release (bonobo_object->corba_objref, &ev);
 
-	if (servant){
+	if (servant) {
 		PortableServer_ObjectId *oid;
 
-		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, &ev);
+		oid = PortableServer_POA_servant_to_id (bonobo_poa(), servant, &ev);
 		PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
 
 		POA_Bonobo_Unknown__fini (servant, &ev);
-		CORBA_free(oid);
+		CORBA_free (oid);
 	}
 	CORBA_exception_free (&ev);
 

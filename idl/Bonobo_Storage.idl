@@ -45,7 +45,7 @@ module Bonobo {
 		 * writes the buffer to this stream.
 		 */
 		long write    (in iobuf buffer)
-			raises (NoPermission);
+			raises (NoPermission, IOError);
 
 		/**
 		 * seek:
