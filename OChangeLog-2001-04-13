@@ -1,3 +1,22 @@
+2001-01-16  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/Makefile.am: Sort out the mess.
+
+	* bonobo/bonobo-ui-xml.c (merge): Extract loop invariant a_name
+	to make more efficient, make a nameless placeholder the default
+	insertion point, split insertion to (do_insert): here.
+
+2001-01-15  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-engine-config.c (bonobo_ui_engine_config_configure): 
+	return if we have no path.
+
+	* bonobo/bonobo-ui-engine.c (add_node_fn): cauterize merge logic.
+
+	* bonobo/bonobo-ui-sync-menu.c (impl_bonobo_ui_sync_menu_build):
+	connect to key_press_event and ignore it for all we are worth.
+	(sucking_gtk_keybindings_cb): do some ignoring here.
+
 2001-01-16  Dietmar Maurer  <dietmar@ximian.com>
 
 	* samples/controls/bonobo-clock-control.c (get/set_prop): add the

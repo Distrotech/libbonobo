@@ -9,24 +9,16 @@ INCLUDES =                                              \
 
 OAF_FILES =					\
 	Bonobo_Moniker_gzip.oaf.in		\
-	Bonobo_Moniker_http.oaf.in		\
-	Bonobo_Moniker_cache.oaf.in		\
-	Bonobo_Moniker_std.oaf.in
+	Bonobo_Moniker_http.oaf.in
 
-POST_PROCESSED_OAF_FILES =			\
-	Bonobo_Moniker_std.oaf.in
-
-Bonobo_Moniker_std.oafinfo : $(srcdir)/Bonobo_Moniker_std.oaf 
+Bonobo_Moniker_std.oaf.in : $(srcdir)/Bonobo_Moniker_std.oaf.in.in
 	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" \
-	 $(srcdir)/Bonobo_Moniker_std.oaf > Bonobo_Moniker_std.oafinfo
+	 $(srcdir)/Bonobo_Moniker_std.oaf.in.in > Bonobo_Moniker_std.oaf.in
 
-CLEANFILES+=Bonobo_Moniker_std.oaf
-
-oafinfodir = $(datadir)/oaf
-oafinfo_DATA = $(POST_PROCESSED_OAF_FILES)
+CLEANFILES+=Bonobo_Moniker_std.oaf Bonobo_Moniker_std.oaf.in
 
 oafdir = $(datadir)/oaf
-oaf_DATA = $(OAF_FILES:.oaf.in=.oaf)
+oaf_DATA = $(OAF_FILES:.oaf.in=.oaf) Bonobo_Moniker_std.oaf
 
 @XML_I18N_MERGE_OAF_RULE@
 
@@ -95,7 +87,5 @@ moniker_test_SOURCES =			\
 moniker_test_LDADD =			\
 	$(moniker_ldadd)
 
-EXTRA_DIST = $(OAF_FILES)			\
-	$(POST_PROCESSED_OAF_FILES:.oaf.in=.oaf)\
-	$(oaf_DATA)				\
-	Bonobo_Moniker_cache.oaf.in
+EXTRA_DIST = $(OAF_FILES)		\
+	Bonobo_Moniker_std.oaf.in.in
