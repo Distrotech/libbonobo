@@ -46,6 +46,12 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
 		else if (iorfd > 2)
 			close (iorfd);
 	}
+#ifdef OAF_DEBUG
+        else if (actid && need_printout) {
+                g_message ("Unusual '%s' was activated, but "
+                           "'%s' is needed", iid, actid);
+        }
+#endif
 
         if (actid && !strcmp(actid, iid) && oaf_private)
                 return OAF_REG_SUCCESS;
