@@ -1,3 +1,10 @@
+2001-02-17  John R. Sheets  <dusk@ravendusk.org>
+
+	* doc/dia/bonobo-widget.dia: New diagram of BonoboWidget.
+
+	* doc/dia/client-site.dia: Added BonoboView and
+	BonoboCanvasComponent to diagram.
+
 2001-02-17  Iain Holmes  <iain@ximian.com>
 
 	* bonobo/bonobo-ui-config-widget.c (set_values): Set the values in the
