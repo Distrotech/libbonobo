@@ -1,3 +1,12 @@
+2004-08-24  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_new_generic)
+	(last_unref_cb): Ignore "last-unref" if it happens during the
+	object creation callback and an object is actually created in the
+	end.  Fixes bug #139140 (Can't get bonobo objects in _init method
+	of bonobo object)
+
 2004-08-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* Makefile.am (DISTCLEANFILES): Only clean intltool-* in make
