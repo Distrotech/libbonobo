@@ -1,5 +1,13 @@
 2001-04-09  Michael Meeks  <michael@ximian.com>
 
+	* Version 1.0.1
+	
+2001-04-09  Michael Meeks  <michael@ximian.com>
+
+	* po/POTFILES.in: remove test-container
+	
+2001-04-09  Michael Meeks  <michael@ximian.com>
+
 	* Version 1.0.0
 	
 2001-04-09  Michael Meeks  <michael@ximian.com>

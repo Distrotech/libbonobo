@@ -8,7 +8,7 @@ Bonobo 1.0.0
 	* Storage / Stream
 		* fix symlink issues in fs storage (Vladimir Vukicevic)
 		* fs storage permissions fix (Dietmar)
-		* improved storage-fs / stream-fs mime type handling (Jens Finke)
+		* improved storage-fs / stream-fs mime typing (Jens Finke)
 
 	* Event source / Listener
 		* event-source fixes (Richard Hult)
@@ -43,8 +43,6 @@ Bonobo 1.0.0
 		* include config.h some more (Kjartan)
 		* control / object destruction race fix (Darin)
 		* Reduce control's memory footprint (Me)
-
-	* idl-grep, a new tool for groking IDL (Paolo Molaro)
 
 Bonobo 0.37
 
