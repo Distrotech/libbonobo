@@ -1,5 +1,9 @@
 2001-02-21  Michael Meeks  <michael@ximian.com>
 
+	* doc/api/tmpl/bonobo-context.sgml: fill out.
+
+2001-02-21  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-xobject.c: Fully API document.
 
 	* bonobo/bonobo-property-bag-client.c: Fully API document.
