@@ -1,9 +1,12 @@
 2005-02-20  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
-	* libbonobo.h: Add missing includes for bonobo-running-context.h,
-	bonobo-moniker-extender.h, bonobo-item-handler.h, and
-	bonobo-shlib-factory.h.  Fixes #167 (documentation's build
-	segfault on ia64).  Based on patch by Sebastien Bacher.
+	* doc/api/libbonobo.types: Remove bonobo_running_context_get_type,
+	it is private.
+	
+	* libbonobo.h: Add missing includes for bonobo-moniker-extender.h,
+	bonobo-item-handler.h, and bonobo-shlib-factory.h.  Fixes #167:
+	documentation's build segfault on ia64.  Based on patch by
+	Sebastien Bacher.
 
 2005-02-08  Christian Rose  <menthos@menthos.com>
 
