@@ -467,7 +467,9 @@ impl_OAF_ObjectDirectory_register (impl_POA_OAF_ObjectDirectory * servant,
 static void
 impl_OAF_ObjectDirectory_unregister (impl_POA_OAF_ObjectDirectory * servant,
 				     OAF_ImplementationID iid,
-				     CORBA_Object obj, CORBA_Environment * ev)
+				     CORBA_Object obj,
+				     OAF_ObjectDirectory_UnregisterType notify,
+				     CORBA_Environment * ev)
 {
 	char *orig_iid;
 	CORBA_Object orig_obj;

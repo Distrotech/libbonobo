@@ -71,7 +71,8 @@ main (int argc, char *argv[])
 	while (1)
 		g_main_iteration (TRUE);
 
-	oaf_active_server_unregister ("OAFIID:Empty:19991025", empty_client);
+	oaf_active_server_unregister ("OAFIID:Empty:19991025", empty_client,
+				      OAF_ObjectDirectory_UNREGISTER_NORMAL);
 
 	PortableServer_POA_deactivate_object (poa, &objid, &ev);
 
