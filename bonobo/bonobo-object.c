@@ -929,6 +929,7 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        ao = object->priv->ao;
        oldao = newobj->priv->ao;
        ao->ref_count = ao->ref_count + oldao->ref_count - 1;
+       bonobo_total_aggregate_refs--;
 
 #ifdef BONOBO_REF_HOOKS		
        bonobo_debug_print ("add_interface", 
