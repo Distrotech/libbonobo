@@ -425,6 +425,13 @@ ac_do_activation(impl_POA_OAF_ActivationContext *servant,
       activatable = g_hash_table_lookup(child->by_iid, activatable->location_info);
     }
 
+  if (activatable == NULL) {
+      OAF_GeneralError *errval = OAF_GeneralError__alloc();
+      errval->description = CORBA_string_dup("Couldn't find the factory server");
+      CORBA_exception_set(ev, CORBA_USER_EXCEPTION, ex_OAF_GeneralError, errval);
+      return;
+  }
+
   /* A shared library must be on the same host as the activator in
      order for loading to work properly (no, we're not going to
      bother with loading a remote shlib into a process - it gets far too complicated
@@ -525,8 +532,9 @@ impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
   items = oaf_alloca(servant->total_servers * sizeof(OAF_ServerInfo *));
   ac_query_run(servant, requirements, selection_order, ctx, items, ev);
 
-  if(ev->_major != CORBA_NO_EXCEPTION)
+  if(ev->_major != CORBA_NO_EXCEPTION) {
     goto out;
+  }
 
   retval = OAF_ActivationResult__alloc();
   retval->res._d = OAF_RESULT_NONE;
@@ -538,11 +546,11 @@ impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
       ac_do_activation(servant, curitem, retval, flags, hostname, ctx, ev);
     }
 
-  if(retval->res._d == OAF_RESULT_NONE)
-    retval->aid = CORBA_string_dup("");
+  if (retval->res._d == OAF_RESULT_NONE)
+    retval->aid = CORBA_string_dup ("");
 
  out:
-  g_free(hostname);
+  g_free (hostname);
   
   servant->refs--;
   
@@ -678,6 +686,8 @@ ac_query_run(impl_POA_OAF_ActivationContext * servant,
   errstr = (char *)qexp_parse(requirements, &qexp_requirements);
   if(errstr)
     {
+      puts (errstr);
+
       g_strstrip(errstr);
       ex = OAF_ActivationContext_ParseFailed__alloc();
       ex->description = CORBA_string_dup(errstr);
@@ -685,7 +695,7 @@ ac_query_run(impl_POA_OAF_ActivationContext * servant,
 			  ex_OAF_ActivationContext_ParseFailed, ex);
       return;
     }
-
+  
   qexp_sort_items = oaf_alloca(selection_order->_length * sizeof(QueryExpr *));
   for(i = 0; i < selection_order->_length; i++)
     {
@@ -819,8 +829,30 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
 
   ainfo = oaf_actid_parse(aid);
 
-  if(!ainfo)
-    goto out;
+  if(!ainfo) {
+    if (!strncmp("OAFIID:", aid, 7)) {
+      static const char *query_prefix = "iid == \'";
+      static const char *query_suffix = "\'";
+      char *requirements;
+      GNOME_stringlist selection_order;
+
+      requirements = g_malloc (strlen (query_prefix) + 
+			       strlen (aid) + strlen (query_suffix) + 1);
+      strcpy (requirements, query_prefix);
+      strcat (requirements, aid);
+      strcat (requirements, query_suffix);
+
+      selection_order._length = 0;
+      selection_order._buffer = NULL;
+
+      retval = impl_OAF_ActivationContext_activate(servant, requirements,
+						   &selection_order, flags,
+						   ctx, ev);
+      goto out;
+    } else {
+      goto out;
+    }
+  }
 
   for(cur = servant->dirs; cur && !child; cur = cur->next)
     {
@@ -854,7 +886,9 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
 
  out:
   servant->refs--;
-  oaf_actinfo_free(ainfo);
+  if (ainfo) {
+    oaf_actinfo_free(ainfo);
+  }
 
   if(ev->_major == CORBA_NO_EXCEPTION)
     {
