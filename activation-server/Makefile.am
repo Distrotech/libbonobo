@@ -18,11 +18,17 @@ oafd_SOURCES=			\
 	main.c			\
 	oafd.h
 
-LDADD=../liboaf/liboaf.la @ORBIT_LIBS@ @XML_LIBS@ @GLIB_LIBS@
+LDADD=../liboaf/liboaf.la \
+	@ORBIT_LIBS@ -lORBitCosNaming -lname-server \
+	@XML_LIBS@ \
+	@GLIB_LIBS@
 
 oaf_client_SOURCES=client.c
 
-EXTRA_DIST=ac-query-lex.l ac-query-parse.y
+oafinfodir=$(pkgdatadir)
+oafinfo_DATA=oafd.oafinfo
+
+EXTRA_DIST=ac-query-lex.l ac-query-parse.y oafd.oafinfo
 
 YFLAGS                  = -d -v
 
@@ -40,11 +46,9 @@ ac-query-parse.c: stamp-parser
 ac-query-parse.h: stamp-parser
 	test -f y.tab.h && mv -f y.tab.h ac-query-parse.h || touch $@
 
-BUILT_SOURCES=ac-query-lex.c ac-query-parse.c ac-query-parse.h
+BUILT_SOURCES=ac-query-lex.c ac-query-parse.c ac-query-parse.h oaf-skels.c
 
 CLEANFILES=stamp-parser stamp-idl
-
-BUILT_SOURCES=oaf-skels.c
 
 oaf-skels.c: $(top_srcdir)/idl/oaf.idl
 	orbit-idl --nostubs --noheaders $(top_srcdir)/idl/oaf.idl

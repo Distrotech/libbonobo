@@ -6,6 +6,9 @@
 
 #include "liboaf/liboaf.h"
 
+#include <ORBitservices/CosNaming.h>
+#include <ORBitservices/CosNaming_impl.h>
+
 #include "oafd.h"
 #include "ac-query-expr.h"
 
@@ -16,7 +19,7 @@ static void debug_queries(void);
 /* Option values */
 static char *od_source_dir = NULL;
 static char *ac_evaluate = NULL, *od_domain = "session";
-static int server_ac = 0, ior_fd = -1;
+static int server_ac = 0, ior_fd = -1, server_ns = 1;
 
 static struct poptOption options[] = {
   {"od-source-dir", '\0', POPT_ARG_STRING, &od_source_dir, 0, "Directory to read .oafinfo files from", "DIRECTORY"},
@@ -83,6 +86,13 @@ int main(int argc, char *argv[])
       }
 
     od = OAF_ObjectDirectory_create(root_poa, od_domain, real_od_source_dir->str, &ev);
+    if(server_ns) {
+      CORBA_Object naming_service;
+
+      naming_service = impl_CosNaming_NamingContext__create(root_poa, &ev);
+      OAF_ObjectDirectory_register_new(od, "OAFIID:OAFNamingService:20000410",
+				   naming_service, &ev);
+    }
 
     g_string_free(real_od_source_dir, TRUE);
   }
