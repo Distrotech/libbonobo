@@ -413,8 +413,7 @@ rloc_file_lock (const OAFBaseServiceRegistry *registry,
 	char *fn;
 	struct flock lock;
 
-	fn = oaf_alloca (sizeof ("/tmp/orbit-%s/oaf-register.lock") + 32);
-	sprintf (fn, "/tmp/orbit-%s/oaf-register.lock", g_get_user_name ());
+        fn = g_strdup_printf ("/tmp/orbit-%s/oaf-register.lock", g_get_user_name ());
 
 	while ((lock_fd = open (fn, O_CREAT | O_RDONLY, 0700)) < 0) {
 		if (errno == EEXIST) {
@@ -447,6 +446,8 @@ rloc_file_lock (const OAFBaseServiceRegistry *registry,
 		while (fcntl (lock_fd, F_SETLKW, &lock) < 0
 		       && errno == EINTR) /**/;
 	}
+
+        g_free (fn);
 }
 
 static void
@@ -493,30 +494,35 @@ rloc_file_check (const OAFBaseServiceRegistry *registry,
 		 gpointer user_data)
 {
 	FILE *fh;
-	char fn[PATH_MAX], *namecopy;
+	char *fn;
 	const char *uname;
+	char *namecopy;
 
-	namecopy = oaf_alloca (strlen (base_service->name) + 1);
-	strcpy (namecopy, base_service->name);
+	namecopy = g_strdup (base_service->name);
 	filename_fixup (namecopy);
 
 	uname = g_get_user_name ();
 
-	sprintf (fn, "/tmp/orbit-%s/reg.%s-%s",
-		 uname,
-		 namecopy,
-		 base_service->session_name ? base_service->session_name : "local");
+	fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s-%s",
+                              uname,
+                              namecopy,
+                              base_service->session_name ? base_service->session_name : "local");
+        
 	fh = fopen (fn, "r");
-	if (fh)
-		goto useme;
+        g_free (fn);
 
-	sprintf (fn, "/tmp/orbit-%s/reg.%s", uname, namecopy);
-	fh = fopen (fn, "r");
-	if (fh)
-		goto useme;
+        if (fh == NULL) {
+                fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s",
+                                      uname,
+                                      namecopy);
+                
+                fh = fopen (fn, "r");
+                g_free (fn);
+        }
 
-	useme:
-	if (fh) {
+        g_free (namecopy);
+
+	if (fh != NULL) {
 		char iorbuf[8192];
 
 		iorbuf[0] = '\0';
@@ -541,28 +547,33 @@ rloc_file_register (const OAFBaseServiceRegistry *registry, const char *ior,
 		    const OAFBaseService *base_service,
 		    gpointer user_data)
 {
-	char fn[PATH_MAX], fn2[PATH_MAX], *namecopy;
+	char *fn, *fn2;
 	FILE *fh;
 	const char *uname;
 
-	namecopy = oaf_alloca (strlen (base_service->name) + 1);
-	strcpy (namecopy, base_service->name);
+	namecopy = g_strdup (base_service->name);
 	filename_fixup (namecopy);
 
 	uname = g_get_user_name ();
 
-	sprintf (fn, "/tmp/orbit-%s/reg.%s-%s",
-		 uname,
-		 namecopy,
-		 base_service->session_name ? base_service->session_name : "local");
+	fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s-%s",
+                              uname,
+                              namecopy,
+                              base_service->session_name ? base_service->session_name : "local");
 
-	sprintf (fn2, "/tmp/orbit-%s/reg.%s", uname, namecopy);
+	fn2 = g_strdup_printf ("/tmp/orbit-%s/reg.%s", uname, namecopy);
+        g_free (namecopy);
 
 	fh = fopen (fn, "w");
-	fprintf (fh, "%s\n", ior);
-	fclose (fh);
 
-	symlink (fn, fn2);
+        if (fh != NULL) {
+                fprintf (fh, "%s\n", ior);
+                fclose (fh);
+        }       
+
+        symlink (fn, fn2);
+        g_free (fn);
+        g_free (fn2);
 }
 
 static void
@@ -571,30 +582,36 @@ rloc_file_unregister (const OAFBaseServiceRegistry *registry,
 		      const OAFBaseService *base_service,
 		      gpointer user_data)
 {
-	char fn2[PATH_MAX], fn3[PATH_MAX];
-	char fn[PATH_MAX];
+	char *fn, *fn2;
+        char fn3[PATH_MAX + 1];
 	const char *uname;
 	char *namecopy;
+        int link_length;
 
-	namecopy = oaf_alloca (strlen (base_service->name) + 1);
-	strcpy (namecopy, base_service->name);
+	namecopy = g_strdup (base_service->name);
 	filename_fixup (namecopy);
 
 	uname = g_get_user_name ();
 
-	sprintf (fn, "/tmp/orbit-%s/reg.%s-%s",
-		 uname,
-		 namecopy,
-		 base_service->session_name ? base_service->session_name : "local");
+	fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s-%s",
+                              uname,
+                              namecopy,
+                              base_service->session_name ? base_service->session_name : "local");
 	unlink (fn);
 
-	sprintf (fn2, "/tmp/orbit-%s/reg.%s", uname, namecopy);
+	fn2 = g_strdup_printf ("/tmp/orbit-%s/reg.%s", uname, namecopy);
 
-	if (readlink (fn2, fn3, sizeof (fn3) < 0))
+	link_length = readlink (fn2, fn3, sizeof (fn3) - 1);
+
+        if (link_length < 0) {
 		return;
-
-	if (!strcmp (fn3, fn))
+        }
+        
+        fn3[link_length] = 0;
+        
+	if (strcmp (fn3, fn) == 0) {
 		unlink (fn2);
+        }
 }
 
 static const OAFBaseServiceRegistry rloc_file = {

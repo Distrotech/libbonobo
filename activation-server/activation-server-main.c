@@ -139,6 +139,7 @@ main (int argc, char *argv[])
 
         oaf_debug_output = g_getenv ("OAF_DEBUG_OUTPUT");
 
+        dev_null_fd = -1;
         if (oaf_debug_output == NULL || strlen (oaf_debug_output) == 0) {
                 dev_null_fd = open ("/dev/null", O_RDWR);
 		if(ior_fd != 0)
@@ -237,7 +238,8 @@ main (int argc, char *argv[])
 		printf ("%s\n", ior);
 		fflush (stdout);
 	}
-	close (dev_null_fd);
+        if (dev_null_fd != -1)
+                close (dev_null_fd);
 	CORBA_free (ior);
 
 #ifdef OAF_DEBUG
