@@ -1,3 +1,9 @@
+2001-06-27  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am: add bonobo-storage / stream plugin.
+
+	* tests/test-storage.c (main): don't test efs.
+
 2001-06-26  Michael Meeks  <michael@ximian.com>
 
 	* configure.in: add --enable-orbit2=[yes/no]
