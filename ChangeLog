@@ -1,3 +1,12 @@
+2001-09-17  Havoc Pennington  <hp@redhat.com>
+
+	* bonobo/bonobo-types.c (bonobo_closure_invoke_va_list): patch
+	from Ariel Rios to fix on Alpha, PPC
+
+	* bonobo/libbonobo-2.0.pc.in (idldir): update
+
+	* idl/Makefile.am (idldir): change to datadir/idl/bonobo-2.0
+
 2001-09-10  Alex Larsson <alexl@redhat.com>
 
 	* bonobo/bonobo-types.c (bonobo_corba_any_get_type),

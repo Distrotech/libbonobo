@@ -1,6 +1,6 @@
 NULL=
 
-idldir = $(datadir)/idl
+idldir = $(datadir)/idl/bonobo-2.0
 
 idl_DATA =				\
 	Bonobo.idl			\

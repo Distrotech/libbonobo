@@ -420,7 +420,6 @@ bonobo_closure_invoke_va_list (GClosure *closure,
 {
 	GArray   *params;
 	GValue    return_value = { 0, };
-	gpointer  retloc_ptr = var_args;
 	GType     type, rtype;
 	int       i;
   
@@ -479,7 +478,7 @@ bonobo_closure_invoke_va_list (GClosure *closure,
 		 * g_value_unset() it here.
 		 */
 
-		G_VALUE_LCOPY (&return_value, retloc_ptr,
+		G_VALUE_LCOPY (&return_value, var_args,
 			       G_VALUE_NOCOPY_CONTENTS,
 			       &error);
 

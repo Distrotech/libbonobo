@@ -2,7 +2,7 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
-idldir=@datadir@/idl
+idldir=@datadir@/idl/bonobo-2.0
 
 Name: libbonobo
 Description: libbonobo
