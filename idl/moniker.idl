@@ -1,6 +1,6 @@
 module GNOME {
 
-	interface Moniker : GNOME::object {
+	interface Moniker : object {
 		
 		enum type {
 			CONTAINER,	// Return the Container's moniker.

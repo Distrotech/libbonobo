@@ -80,7 +80,7 @@ module GNOME {
 		 */
 	};
 
-	interface Storage : GNOME::object {
+	interface Storage : object {
 		
 		typedef long OpenMode;
 		const OpenMode READ  = 1;
