@@ -45,6 +45,7 @@ module Bonobo {
 	interface ConfigDatabase : Unknown {
 		
 		exception BackendFailed {};
+		exception InvalidType {};
 
 		readonly attribute boolean writeable;
 

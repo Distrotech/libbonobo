@@ -439,18 +439,118 @@ c_type bonobo_config_get_##name  (Bonobo_ConfigDatabase  db,                  \
 	return retval;                                                        \
 }
 
+/**
+ * bonobo_config_get_string:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a string from the configuration database
+ *
+ * Returns: the value contained in the database, or zero on error.
+ */
 MAKE_GET_SIMPLE (gchar *, NULL, string, TC_string, 
 		 g_strdup (*(char **)value->_value));
+/**
+ * bonobo_config_get_short:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a 16 bit integer from the configuration database
+ *
+ * Returns: the value contained in the database.
+ */
 MAKE_GET_SIMPLE (gint16, 0, short, TC_short, (*(gint16 *)value->_value));
+/**
+ * bonobo_config_get_ushort:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a 16 bit unsigned integer from the configuration database
+ *
+ * Returns: the value contained in the database.
+ */
 MAKE_GET_SIMPLE (guint16, 0, ushort, TC_ushort, (*(guint16 *)value->_value));
+/**
+ * bonobo_config_get_long:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a 32 bit integer from the configuration database
+ *
+ * Returns: the value contained in the database.
+ */
 MAKE_GET_SIMPLE (gint32, 0, long, TC_long, (*(gint32 *)value->_value));
+/**
+ * bonobo_config_get_ulong:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a 32 bit unsigned integer from the configuration database
+ *
+ * Returns: the value contained in the database.
+ */
 MAKE_GET_SIMPLE (guint32, 0, ulong, TC_ulong, (*(guint32 *)value->_value));
+/**
+ * bonobo_config_get_float:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a single precision floating point value from the configuration database
+ *
+ * Returns: the value contained in the database.
+ */
 MAKE_GET_SIMPLE (gfloat, 0.0, float, TC_float, (*(gfloat *)value->_value));
+/**
+ * bonobo_config_get_double:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a double precision floating point value from the configuration database
+ *
+ * Returns: the value contained in the database.
+ */
 MAKE_GET_SIMPLE (gdouble, 0.0, double, TC_double, (*(gdouble *)value->_value));
+/**
+ * bonobo_config_get_char:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a 8 bit character value from the configuration database
+ *
+ * Returns: the value contained in the database.
+ */
 MAKE_GET_SIMPLE (gchar, '\0', char, TC_char, (*(gchar *)value->_value));
+/**
+ * bonobo_config_get_boolean:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a boolean value from the configuration database
+ *
+ * Returns: the value contained in the database.
+ */
 MAKE_GET_SIMPLE (gboolean, FALSE, boolean, TC_boolean, 
 		 (*(gboolean *)value->_value));
-
+/**
+ * bonobo_config_get_value:
+ * @db: a reference to the database object
+ * @key: key of the value to get
+ * @opt_tc: the type of the value, optional
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Get a value from the configuration database
+ *
+ * Returns: the value contained in the database, or zero on error.
+ */
 CORBA_any *
 bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
 			  const char            *key,
@@ -483,8 +583,8 @@ bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
 			CORBA_free (retval);
 			if (!opt_ev)
 				CORBA_exception_free (&ev);
-			/* fixme: we need an InvalidType exception */
-			bonobo_exception_set (opt_ev, ex_Bonobo_BadArg);
+			bonobo_exception_set (opt_ev, 
+			        ex_Bonobo_ConfigDatabase_InvalidType);
 			return NULL;
 		}
 
@@ -511,15 +611,95 @@ void bonobo_config_set_##name (Bonobo_ConfigDatabase  db,                     \
 	bonobo_arg_release (any);                                             \
 }
 
+/**
+ * bonobo_config_set_short:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a 16 bit integer value in the configuration database.
+ */
 MAKE_SET_SIMPLE (gint16, short, TC_short)
+/**
+ * bonobo_config_set_ushort:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a 16 bit unsigned integer value in the configuration database.
+ */
 MAKE_SET_SIMPLE (guint16, ushort, TC_ushort)
+/**
+ * bonobo_config_set_long:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a 32 bit integer value in the configuration database.
+ */
 MAKE_SET_SIMPLE (gint32, long, TC_long)
+/**
+ * bonobo_config_set_ulong:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a 32 bit unsigned integer value in the configuration database.
+ */
 MAKE_SET_SIMPLE (guint32, ulong, TC_ulong)
+/**
+ * bonobo_config_set_float:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a single precision floating point value in the configuration database.
+ */
 MAKE_SET_SIMPLE (gfloat, float, TC_float)
+/**
+ * bonobo_config_set_double:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a double precision floating point value in the configuration database.
+ */
 MAKE_SET_SIMPLE (gdouble, double, TC_double)
+/**
+ * bonobo_config_set_boolean:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a boolean value in the configuration database.
+ */
 MAKE_SET_SIMPLE (gboolean, boolean, TC_boolean)
+/**
+ * bonobo_config_set_char:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a 8 bit characte value in the configuration database.
+ */
 MAKE_SET_SIMPLE (gchar, char, TC_char)
-
+/**
+ * bonobo_config_set_string:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a string value in the configuration database.
+ */
 void
 bonobo_config_set_string (Bonobo_ConfigDatabase  db,
 			  const char            *key,
@@ -541,6 +721,15 @@ bonobo_config_set_string (Bonobo_ConfigDatabase  db,
 	bonobo_arg_release (any);
 }
 
+/**
+ * bonobo_config_set_value:
+ * @db: a reference to the database object
+ * @key: key of the value to set
+ * @value: the new value
+ * @opt_ev: an optional CORBA_Environment to return failure codes
+ *
+ * Set a value in the configuration database.
+ */
 void
 bonobo_config_set_value  (Bonobo_ConfigDatabase  db,
 			  const char            *key,
