@@ -10,7 +10,7 @@
 #include <bonobo/gnome-persist.h>
 
 /* Parent GTK object class */
-static GnomeUnknownClass *gnome_persist_parent_class;
+static GnomeObjectClass *gnome_persist_parent_class;
 
 POA_GNOME_Persist__epv gnome_persist_epv;
 
@@ -29,7 +29,7 @@ gnome_persist_class_init (GnomePersistClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
-	gnome_persist_parent_class = gtk_type_class (gnome_unknown_get_type ());
+	gnome_persist_parent_class = gtk_type_class (gnome_object_get_type ());
 
 	/*
 	 * Override and initialize methods
@@ -51,7 +51,7 @@ gnome_persist_construct (GnomePersist *persist, GNOME_Persist corba_persist)
 	g_return_val_if_fail (GNOME_IS_PERSIST (persist), NULL);
 	g_return_val_if_fail (corba_persist != CORBA_OBJECT_NIL, NULL);
 
-	gnome_unknown_construct (GNOME_UNKNOWN (persist), corba_persist);
+	gnome_object_construct (GNOME_OBJECT (persist), corba_persist);
 
 	return persist;
 }
@@ -73,7 +73,7 @@ gnome_persist_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_unknown_get_type (), &info);
+		type = gtk_type_unique (gnome_object_get_type (), &info);
 	}
 
 	return type;

@@ -29,7 +29,7 @@ impl_bind_to_object (PortableServer_Servant servant,
 	GnomeMoniker *moniker;
 	CORBA_Object bound_object_rtn;
 	
-	moniker = GNOME_MONIKER (gnome_unknown_from_servant (servant));
+	moniker = GNOME_MONIKER (gnome_object_from_servant (servant));
 
 	return (*moniker->bind_function)(moniker, bind_context, NULL);
 }
@@ -101,7 +101,7 @@ init_moniker_corba_class (void)
 	gnome_moniker_epv.parse_display_name = impl_parse_display_name;
 		
 	/* Now the Vepv */
-	gnome_moniker_vepv.GNOME_Unknown_epv = &gnome_unknown_epv;
+	gnome_moniker_vepv.GNOME_Unknown_epv = &gnome_object_epv;
 	gnome_moniker_vepv.GNOME_Persist_epv = &gnome_persist_epv;
 	gnome_moniker_vepv.GNOME_PersistStream_epv = &gnome_persist_stream_epv;
 	gnome_moniker_vepv.GNOME_Moniker_epv = &gnome_moniker_epv;
@@ -188,7 +188,7 @@ gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker,
 }
 
 static void
-gnome_moniker_init (GnomeUnknown *object)
+gnome_moniker_init (GnomeObject *object)
 {
 }
 

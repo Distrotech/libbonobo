@@ -11,7 +11,7 @@
 #include <bonobo/gnome-simple-source.h>
 
 /* Parent GTK object class */
-static GnomeUnknownClass *gnome_simple_data_source_parent_class;
+static GnomeObjectClass *gnome_simple_data_source_parent_class;
 
 POA_GNOME_SimpleDataSource__epv gnome_simple_data_source_epv;
 POA_GNOME_SimpleDataSource__vepv gnome_simple_data_source_vepv;
@@ -22,7 +22,7 @@ impl_pop_data (PortableServer_Servant servant,
 	       GNOME_SimpleDataSource_iobuf **buffer,	       
 	       CORBA_Environment *ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeSimpleDataSource *ssource = GNOME_SIMPLE_DATA_SOURCE (object);
 	int result;
 
@@ -47,7 +47,7 @@ static CORBA_long
 impl_remaining_data (PortableServer_Servant servant,
 		     CORBA_Environment *ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeSimpleDataSource *ssource = GNOME_SIMPLE_DATA_SOURCE (object);
 
 	if (ssource->remaining_data_fn != NULL)
@@ -70,7 +70,7 @@ init_simple_data_source_corba_class (void)
 	gnome_simple_data_source_epv.pop_data = impl_pop_data;
 	gnome_simple_data_source_epv.remaining_data = impl_remaining_data;
 
-	gnome_simple_data_source_vepv.GNOME_Unknown_epv = &gnome_unknown_epv;
+	gnome_simple_data_source_vepv.GNOME_Unknown_epv = &gnome_object_epv;
 	gnome_simple_data_source_vepv.GNOME_SimpleDataSource_epv =
 		&gnome_simple_data_source_epv;
 	
@@ -101,7 +101,7 @@ gnome_simple_data_source_class_init (GnomeSimpleDataSourceClass *class)
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
 	gnome_simple_data_source_parent_class =
-		gtk_type_class (gnome_unknown_get_type ());
+		gtk_type_class (gnome_object_get_type ());
 
 	/*
 	 * Override and initialize methods
@@ -136,7 +136,7 @@ gnome_simple_data_source_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_unknown_get_type (), &info);
+		type = gtk_type_unique (gnome_object_get_type (), &info);
 	}
 
 	return type;
@@ -153,7 +153,7 @@ gnome_simple_data_source_construct (GnomeSimpleDataSource *ssource,
 	g_return_val_if_fail (GNOME_IS_SIMPLE_DATA_SOURCE (ssource), NULL);
 	g_return_val_if_fail (corba_ssource != CORBA_OBJECT_NIL, NULL);
 
-	gnome_unknown_construct (GNOME_UNKNOWN (ssource), corba_ssource);
+	gnome_object_construct (GNOME_OBJECT (ssource), corba_ssource);
 
 	ssource->pop_data_fn = pop_data_fn;
 	ssource->remaining_data_fn = remaining_data_fn;
@@ -164,12 +164,12 @@ gnome_simple_data_source_construct (GnomeSimpleDataSource *ssource,
 } /* gnome_simple_data_source_construct */
 
 static GNOME_SimpleDataSource
-create_gnome_simple_data_source (GnomeUnknown *object)
+create_gnome_simple_data_source (GnomeObject *object)
 {
 	POA_GNOME_SimpleDataSource *servant;
 	CORBA_Object o;
 
-	servant = (POA_GNOME_SimpleDataSource *) g_new0 (GnomeUnknownServant, 1);
+	servant = (POA_GNOME_SimpleDataSource *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_simple_data_source_vepv;
 	POA_GNOME_SimpleDataSource__init ((PortableServer_Servant) servant, &object->ev);
 	if (object->ev._major != CORBA_NO_EXCEPTION){
@@ -177,7 +177,7 @@ create_gnome_simple_data_source (GnomeUnknown *object)
 		return CORBA_OBJECT_NIL;
 	}
 
-	return (GNOME_SimpleDataSource) gnome_unknown_activate_servant (object, servant);
+	return (GNOME_SimpleDataSource) gnome_object_activate_servant (object, servant);
 } /* create_gnome_simple_data_source */
 
 GnomeSimpleDataSource *
@@ -189,7 +189,7 @@ gnome_simple_data_source_new (GnomeSimpleDataSourcePopDataFn pop_data_fn,
 	GNOME_SimpleDataSource corba_ssource;
 
 	ssource = gtk_type_new (gnome_simple_data_source_get_type ());
-	corba_ssource = create_gnome_simple_data_source (GNOME_UNKNOWN (ssource));
+	corba_ssource = create_gnome_simple_data_source (GNOME_OBJECT (ssource));
 	if (corba_ssource == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (ssource));
 		return NULL;

@@ -1,8 +1,8 @@
 #include <config.h>
-#include <bonobo/gnome-component-io.h>
+#include <bonobo/gnome-embeddable-io.h>
 
-GnomeBonoboObject *
-gnome_bonobo_object_load (GnomeStorage *storage, const char *interface, GnomeClientSite *client_site)
+GnomeEmbeddable *
+gnome_embeddable_load (GnomeStorage *storage, const char *interface, GnomeClientSite *client_site)
 {
 	/*
 	 * 1. Get the class ID from the open Storage, by
@@ -32,8 +32,8 @@ gnome_bonobo_object_load (GnomeStorage *storage, const char *interface, GnomeCli
 /*
  *
  */
-GnomeBonoboObject *
-gnome_bonobo_object_load_from_stream (GnomeStream *stream, const char *interface)
+GnomeEmbeddable *
+gnome_embeddable_load_from_stream (GnomeStream *stream, const char *interface)
 {
 	/*
 	 * 1. Load the class id from @stream
@@ -53,12 +53,12 @@ gnome_bonobo_object_load_from_stream (GnomeStream *stream, const char *interface
 }
 
 int
-gnome_bonobo_object_save (GnomeBonoboObject *bonobo_object, GnomeStorage *storage, gboolean same_as_loaded)
+gnome_embeddable_save (GnomeEmbeddable *bonobo_object, GnomeStorage *storage, gboolean same_as_loaded)
 {
 	GnomePersisStorage *persist_storage;
 	char *class;
 	
-	persist_storage = gnome_unknown_query_interface (
+	persist_storage = gnome_object_query_interface (
 		bonobo_object, "IDL:GNOME/PersistStorage:1.0");
 
 	if (persist_storage == NULL)
@@ -75,12 +75,12 @@ gnome_bonobo_object_save (GnomeBonoboObject *bonobo_object, GnomeStorage *storag
 }
 
 int
-gnome_bonobo_object_save_to_stream (GnomeBonoboObject *bonobo_object, GnomeStream *stream)
+gnome_embeddable_save_to_stream (GnomeEmbeddable *bonobo_object, GnomeStream *stream)
 {
 	GnomePersisStream *persist_stream;
 	char *class;
 	
-	persist_stream = gnome_unknown_query_interface (
+	persist_stream = gnome_object_query_interface (
 		bonobo_object, "IDL:GNOME/PersistStream:1.0");
 
 	if (persist_stream == NULL)

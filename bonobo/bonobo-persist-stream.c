@@ -28,7 +28,7 @@ impl_get_class_id (PortableServer_Servant servant, CORBA_Environment * ev)
 static CORBA_boolean
 impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomePersistStream *pstream = GNOME_PERSIST_STREAM (object);
 
 	return pstream->is_dirty;
@@ -39,7 +39,7 @@ impl_load (PortableServer_Servant servant,
 	   GNOME_Stream stream,
 	   CORBA_Environment *ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomePersistStream *ps = GNOME_PERSIST_STREAM (object);
 	int result;
 	
@@ -61,7 +61,7 @@ impl_save (PortableServer_Servant servant,
 	   GNOME_Stream stream,
 	   CORBA_Environment *ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomePersistStream *ps = GNOME_PERSIST_STREAM (object);
 	int result;
 	
@@ -83,7 +83,7 @@ impl_save (PortableServer_Servant servant,
 static CORBA_long
 impl_get_size_max (PortableServer_Servant servant, CORBA_Environment * ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomePersistStream *ps = GNOME_PERSIST_STREAM (object);
 	GtkObjectClass *oc = GTK_OBJECT (object)->klass;
 	GnomePersistStreamClass *class = GNOME_PERSIST_STREAM_CLASS (oc);
@@ -107,7 +107,7 @@ init_persist_stream_corba_class (void)
 	gnome_persist_stream_epv.save = impl_save;
 	gnome_persist_stream_epv.get_size_max = impl_get_size_max;
 
-	gnome_persist_stream_vepv.GNOME_Unknown_epv = &gnome_unknown_epv;
+	gnome_persist_stream_vepv.GNOME_Unknown_epv = &gnome_object_epv;
 	gnome_persist_stream_vepv.GNOME_PersistStream_epv = &gnome_persist_stream_epv;
 }
 
@@ -202,19 +202,19 @@ gnome_persist_stream_construct (GnomePersistStream *ps,
 }
 
 static GNOME_PersistStream
-create_gnome_persist_stream (GnomeUnknown *object)
+create_gnome_persist_stream (GnomeObject *object)
 {
 	POA_GNOME_PersistStream *servant;
 	CORBA_Object o;
 
-	servant = (POA_GNOME_PersistStream *) g_new0 (GnomeUnknownServant, 1);
+	servant = (POA_GNOME_PersistStream *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_persist_stream_vepv;
 	POA_GNOME_PersistStream__init ((PortableServer_Servant) servant, &object->ev);
 	if (object->ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
 		return CORBA_OBJECT_NIL;
 	}
-	return (GNOME_PersistStream) gnome_unknown_activate_servant (object, servant);
+	return (GNOME_PersistStream) gnome_object_activate_servant (object, servant);
 }
 
 
@@ -238,7 +238,7 @@ gnome_persist_stream_new (GnomePersistStreamIOFn load_fn,
 
 	ps = gtk_type_new (gnome_persist_stream_get_type ());
 	corba_ps = create_gnome_persist_stream (
-		GNOME_UNKNOWN (ps));
+		GNOME_OBJECT (ps));
 	if (corba_ps == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (ps));
 		return NULL;

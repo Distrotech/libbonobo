@@ -1,7 +1,7 @@
 #ifndef _GNOME_STREAM_H_
 #define _GNOME_STREAM_H_
 
-#include <bonobo/gnome-unknown.h>
+#include <bonobo/gnome-object.h>
 
 BEGIN_GNOME_DECLS
 
@@ -12,11 +12,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STREAM_TYPE))
 
 typedef struct {
-        GnomeUnknown object;
+        GnomeObject object;
 } GnomeStream;
 
 typedef struct {
-	GnomeUnknownClass parent_class;
+	GnomeObjectClass parent_class;
 
 	/*
 	 * virtual methods

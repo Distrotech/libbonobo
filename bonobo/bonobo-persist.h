@@ -1,7 +1,7 @@
 #ifndef _GNOME_PERSIST_H_
 #define _GNOME_PERSIST_H_
 
-#include <bonobo/gnome-unknown.h>
+#include <bonobo/gnome-object.h>
 
 BEGIN_GNOME_DECLS
 
@@ -12,11 +12,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_PERSIST_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_TYPE))
 
 typedef struct {
-	GnomeUnknown object;
+	GnomeObject object;
 } GnomePersist;
 
 typedef struct {
-	GnomeUnknownClass parent_class;
+	GnomeObjectClass parent_class;
 } GnomePersistClass;
 
 GtkType       gnome_persist_get_type  (void);

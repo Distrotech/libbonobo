@@ -1,7 +1,7 @@
 #ifndef _GNOME_PROGRESSIVE_DATA_SINK_H_
 #define _GNOME_PROGRESSIVE_DATA_SINK_H_
 
-#include <bonobo/gnome-unknown.h>
+#include <bonobo/gnome-object.h>
 
 BEGIN_GNOME_DECLS
 
@@ -27,7 +27,7 @@ typedef int (*GnomeProgressiveDataSinkSetSizeFn) (GnomeProgressiveDataSink *psin
 						  const CORBA_long count, void *closure);
 
 struct _GnomeProgressiveDataSink {
-	GnomeUnknown object;
+	GnomeObject object;
 
 	/*
 	 * These are the callbacks the user can set.  If we use the
@@ -42,7 +42,7 @@ struct _GnomeProgressiveDataSink {
 };
 
 typedef struct {
-	GnomeUnknownClass parent_class;
+	GnomeObjectClass parent_class;
 
 	/*
 	 * Methods.

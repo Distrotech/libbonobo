@@ -11,7 +11,7 @@
 #include <bonobo/gnome-progressive.h>
 
 /* Parent GTK object class */
-static GnomeUnknownClass *gnome_progressive_data_sink_parent_class;
+static GnomeObjectClass *gnome_progressive_data_sink_parent_class;
 
 POA_GNOME_ProgressiveDataSink__epv gnome_progressive_data_sink_epv;
 POA_GNOME_ProgressiveDataSink__vepv gnome_progressive_data_sink_vepv;
@@ -20,7 +20,7 @@ static void
 impl_start (PortableServer_Servant servant,
 	    CORBA_Environment *ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
 	int result;
 
@@ -45,7 +45,7 @@ static void
 impl_end (PortableServer_Servant servant,
 	  CORBA_Environment *ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
 	int result;
 
@@ -71,7 +71,7 @@ impl_add_data (PortableServer_Servant servant,
 	       const GNOME_ProgressiveDataSink_iobuf *buffer,
 	       CORBA_Environment *ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
 	int result;
 
@@ -100,7 +100,7 @@ impl_set_size (PortableServer_Servant servant,
 	       CORBA_long count,
 	       CORBA_Environment *ev)
 {
-	GnomeUnknown *object = gnome_unknown_from_servant (servant);
+	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeProgressiveDataSink *psink = GNOME_PROGRESSIVE_DATA_SINK (object);
 	int result;
 
@@ -135,7 +135,7 @@ init_progressive_data_sink_corba_class (void)
 	gnome_progressive_data_sink_epv.add_data = impl_add_data;
 	gnome_progressive_data_sink_epv.set_size = impl_set_size;
 
-	gnome_progressive_data_sink_vepv.GNOME_Unknown_epv = &gnome_unknown_epv;
+	gnome_progressive_data_sink_vepv.GNOME_Unknown_epv = &gnome_object_epv;
 	gnome_progressive_data_sink_vepv.GNOME_ProgressiveDataSink_epv =
 		&gnome_progressive_data_sink_epv;
 	
@@ -172,7 +172,7 @@ gnome_progressive_data_sink_class_init (GnomeProgressiveDataSinkClass *class)
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
 	gnome_progressive_data_sink_parent_class =
-		gtk_type_class (gnome_unknown_get_type ());
+		gtk_type_class (gnome_object_get_type ());
 
 	/*
 	 * Override and initialize methods
@@ -209,7 +209,7 @@ gnome_progressive_data_sink_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_unknown_get_type (), &info);
+		type = gtk_type_unique (gnome_object_get_type (), &info);
 	}
 
 	return type;
@@ -228,7 +228,7 @@ gnome_progressive_data_sink_construct (GnomeProgressiveDataSink *psink,
 	g_return_val_if_fail (GNOME_IS_PROGRESSIVE_DATA_SINK (psink), NULL);
 	g_return_val_if_fail (corba_psink != CORBA_OBJECT_NIL, NULL);
 
-	gnome_unknown_construct (GNOME_UNKNOWN (psink), corba_psink);
+	gnome_object_construct (GNOME_OBJECT (psink), corba_psink);
 
 	psink->start_fn = start_fn;
 	psink->end_fn = end_fn;
@@ -241,12 +241,12 @@ gnome_progressive_data_sink_construct (GnomeProgressiveDataSink *psink,
 } /* gnome_progressive_data_sink_construct */
 
 static GNOME_ProgressiveDataSink
-create_gnome_progressive_data_sink (GnomeUnknown *object)
+create_gnome_progressive_data_sink (GnomeObject *object)
 {
 	POA_GNOME_ProgressiveDataSink *servant;
 	CORBA_Object o;
 
-	servant = (POA_GNOME_ProgressiveDataSink *)g_new0 (GnomeUnknownServant, 1);
+	servant = (POA_GNOME_ProgressiveDataSink *)g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_progressive_data_sink_vepv;
 	POA_GNOME_ProgressiveDataSink__init ((PortableServer_Servant) servant, &object->ev);
 	if (object->ev._major != CORBA_NO_EXCEPTION){
@@ -254,7 +254,7 @@ create_gnome_progressive_data_sink (GnomeUnknown *object)
 		return CORBA_OBJECT_NIL;
 	}
 
-	return (GNOME_ProgressiveDataSink) gnome_unknown_activate_servant (object, servant);
+	return (GNOME_ProgressiveDataSink) gnome_object_activate_servant (object, servant);
 } /* create_gnome_progressive_data_sink */
 
 GnomeProgressiveDataSink *
@@ -268,7 +268,7 @@ gnome_progressive_data_sink_new (GnomeProgressiveDataSinkStartFn start_fn,
 	GNOME_ProgressiveDataSink corba_psink;
 
 	psink = gtk_type_new (gnome_progressive_data_sink_get_type ());
-	corba_psink = create_gnome_progressive_data_sink (GNOME_UNKNOWN (psink));
+	corba_psink = create_gnome_progressive_data_sink (GNOME_OBJECT (psink));
 	if (corba_psink == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (psink));
 		return NULL;

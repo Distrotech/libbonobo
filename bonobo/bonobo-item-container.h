@@ -3,7 +3,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkobject.h>
-#include <bonobo/gnome-unknown.h>
+#include <bonobo/gnome-object.h>
 #include <bonobo/gnome-moniker.h>
 #include <bonobo/gnome-container.h>
 
@@ -18,7 +18,7 @@ BEGIN_GNOME_DECLS
 typedef GList GnomeClientSiteList;
 
 typedef struct {
-	GnomeUnknown base;
+	GnomeObject base;
 
 	GnomeClientSiteList *client_sites;
 	
@@ -26,21 +26,21 @@ typedef struct {
 } GnomeContainer;
 
 typedef struct {
-	GnomeUnknownClass parent_class;
+	GnomeObjectClass parent_class;
 	
 } GnomeContainerClass;
 
 GtkType       gnome_container_get_type    (void);
-GnomeUnknown  *gnome_container_new         (void);
-GnomeUnknown  *gnome_container_construct   (GnomeContainer *container,
+GnomeObject  *gnome_container_new         (void);
+GnomeObject  *gnome_container_construct   (GnomeContainer *container,
 					   GNOME_Container container_corba);
 GnomeMoniker *gnome_container_get_moniker (GnomeContainer *container);
 
 void          gnome_container_add         (GnomeContainer *container,
-					   GnomeUnknown    *object);
+					   GnomeObject    *object);
 
 void         gnome_container_remove       (GnomeContainer *container,
-					   GnomeUnknown    *object);
+					   GnomeObject    *object);
 
 END_GNOME_DECLS
 

@@ -1,7 +1,7 @@
 #ifndef _GNOME_STORAGE_H_
 #define _GNOME_STORAGE_H_
 
-#include <bonobo/gnome-unknown.h>
+#include <bonobo/gnome-object.h>
 #include <bonobo/gnome-stream.h>
 
 BEGIN_GNOME_DECLS
@@ -13,11 +13,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STORAGE_TYPE))
 
 typedef struct {
-        GnomeUnknown object;
+        GnomeObject object;
 } GnomeStorage;
 
 typedef struct {
-	GnomeUnknownClass parent_class;
+	GnomeObjectClass parent_class;
 
 	/*
 	 * virtual methods

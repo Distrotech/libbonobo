@@ -1,27 +1,27 @@
-#ifndef _GNOME_BONOBO_OBJECT_IO_H_
-#define _GNOME_BONOBO_OBJECT_IO_H_
+#ifndef _GNOME_EMBEDDABLE_IO_H_
+#define _GNOME_EMBEDDABLE_IO_H_
 
-#include <bonobo/gnome-component.h>
+#include <bonobo/gnome-embeddable.h>
 #include <bonobo/gnome-storage.h>
 
 BEGIN_GNOME_DECLS
 
-GnomeBonoboObject *gnome_bonobo_object_load             (GnomeStorage *storage,
+GnomeEmbeddable *gnome_embeddable_load             (GnomeStorage *storage,
 							 const char *interface,
 							 GnomeClientSite *client_site);
 
-int                gnome_bonobo_object_save             (GnomeBonoboObject *bonobo_object,
+int                gnome_embeddable_save             (GnomeEmbeddable *bonobo_object,
 							 GnomeStorage   *storage,
 							 gboolean       same_as_loaded);
 
-GnomeBonoboObject *gnome_bonobo_object_load_from_stream (GnomeStream *stream,
+GnomeEmbeddable *gnome_embeddable_load_from_stream (GnomeStream *stream,
 							 const char *interface);
 
-int                gnome_bonobo_object_save_to_stream   (GnomeBonoboObject *bonobo_object,
+int                gnome_embeddable_save_to_stream   (GnomeEmbeddable *bonobo_object,
 							 GnomeStream    *stream);
 
 char              *gnome_get_class_id_from_file         (const char *filename);
 
 END_GNOME_DECLS
 
-#endif /* _GNOME_BONOBO_OBJECT_IO_H_ */
+#endif /* _GNOME_EMBEDDABLE_IO_H_ */

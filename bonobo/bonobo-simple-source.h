@@ -1,7 +1,7 @@
 #ifndef _GNOME_SIMPLE_DATA_SOURCE_H_
 #define _GNOME_SIMPLE_DATA_SOURCE_H_
 
-#include <bonobo/gnome-unknown.h>
+#include <bonobo/gnome-object.h>
 
 BEGIN_GNOME_DECLS
 
@@ -24,7 +24,7 @@ typedef CORBA_long (*GnomeSimpleDataSourceRemainingDataFn)	(GnomeSimpleDataSourc
 
 
 struct _GnomeSimpleDataSource {
-	GnomeUnknown object;
+	GnomeObject object;
 
 	/*
 	 * These are the callbacks the user can set.  If we use the
@@ -37,7 +37,7 @@ struct _GnomeSimpleDataSource {
 };
 
 typedef struct {
-	GnomeUnknownClass parent_class;
+	GnomeObjectClass parent_class;
 
 	/*
 	 * Methods.
