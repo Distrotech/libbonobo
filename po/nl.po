@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2001-12-07 07:52-0500\n"
-"PO-Revision-Date: 2002-02-07 08:23+0100\n"
+"POT-Creation-Date: 2002-03-04 12:54+0100\n"
+"PO-Revision-Date: 2002-03-03 15:41+0100\n"
 "Last-Translator: Huib Kleinhout <huib@stack.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -150,10 +150,18 @@ msgstr "Fout bij het nakijken van fout; geen uitzondering"
 msgid "General activation error with no description"
 msgstr "Algemene activeringsfout zonder omschrijving"
 
-#: bonobo/bonobo-generic-factory.h:74
-#: bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo kon niet geinitialiseerd worden"
+
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr "'%s kon niet gevonden worden of het uitbreiden hiervan is mislukt"
+
+#: bonobo/bonobo-moniker-util.c:246
+msgid "Failed to activate object"
+msgstr "Kan object niet activeren"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -187,3 +195,42 @@ msgstr "generieke itemmoniker"
 msgid "stream MonikerExtender"
 msgstr "stream MonikerExtender"
 
+#: monikers/bonobo-moniker-oaf.c:51
+#, c-format
+msgid "Exception activating '%s"
+msgstr "Uitzondering bij activeren '%s"
+
+#: monikers/bonobo-moniker-oaf.c:60
+#, c-format
+msgid "Failed to activate '%s"
+msgstr "Het activeren van '%s is mislukt"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+msgid "Bonobo Echo server factory"
+msgstr "Bonobo Echo-server factory"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+msgid "Bonobo Echo server sample program"
+msgstr "Bonobo Echo-server voorbeeldprogramma"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+msgid "Echo component"
+msgstr "Echo component"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+msgid "Echo component factory"
+msgstr "Echo component fabriek"
+
+#: samples/echo/echo-client.c:22
+msgid "I could not initialize Bonobo"
+msgstr "Bonobo kon niet geinitialiseerd worden"
+
+#: samples/echo/echo-client.c:33
+msgid "Could not create an instance of the sample echo component"
+msgstr ""
+"Er kon geen realisatie van het voorbeeld 'echo' component worden aangemaakt"
+
+#: samples/echo/echo-client.c:45
+#, c-format
+msgid "An exception occured '%s'"
+msgstr "Er is een uitzondering opgetreden '%s'"
