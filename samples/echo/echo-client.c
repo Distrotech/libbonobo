@@ -29,12 +29,12 @@ main (int argc, char *argv [])
 	echo_server = bonobo_get_object ("OAFIID:Bonobo_Sample_Echo",
 					 "Bonobo/Sample/Echo", NULL);
 
-	if (echo_server == CORBA_OBJECT_NIL)
-		g_error (_("Could not create an instance of the sample echo component"));
-
+	if (echo_server == CORBA_OBJECT_NIL) {
+		g_warning (_("Could not create an instance of the sample echo component"));
+		return bonobo_shutdown ();
+	}
 
 	/* Send a message */
-
 	CORBA_exception_init (&ev);
 
 	Bonobo_Sample_Echo_echo (echo_server, "This is the message from the client\n", &ev);

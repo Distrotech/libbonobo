@@ -21,11 +21,6 @@
 #include "echo.h"
 
 /*
- * Our parent Gtk object type
- */ 
-#define PARENT_TYPE BONOBO_TYPE_X_OBJECT
-
-/*
  * A pointer to our parent object class
  */
 static GObjectClass *echo_parent_class;
@@ -39,7 +34,6 @@ echo_object_finalize (GObject *object)
 	Echo *echo = ECHO (object);
 
 	g_free (echo->instance_data);
-	echo->instance_data = NULL;
 	
 	echo_parent_class->finalize (object);
 }
@@ -79,7 +73,7 @@ echo_init (Echo *echo)
 	echo->instance_data = g_strdup_printf ("Hello %d!", i++);
 }
 
-BONOBO_TYPE_FUNC_FULL(
+BONOBO_TYPE_FUNC_FULL (
 	Echo,                /* Glib class name */
 	Bonobo_Sample_Echo,  /* CORBA interface name */
 	BONOBO_TYPE_OBJECT,  /* parent type */

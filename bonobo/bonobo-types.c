@@ -134,10 +134,13 @@ corba_object_proxy_lcopy_value (const GValue *value,
 	gpointer *corba_p = collect_values[0].v_pointer;
 
 	if (!corba_p)
-		return g_strdup_printf ("value location for `%s' passed as NULL", G_VALUE_TYPE_NAME (value));
+		return g_strdup_printf ("value location for `%s' passed as NULL",
+					G_VALUE_TYPE_NAME (value));
 
 	if (!value->data[0].v_pointer)
 		*corba_p = NULL;
+	else if (collect_flags & G_VALUE_NOCOPY_CONTENTS)
+		*corba_p = value->data[0].v_pointer;
 	else {
 		CorbaObjectProxy *proxy;
 		CORBA_Environment ev;

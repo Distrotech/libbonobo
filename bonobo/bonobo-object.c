@@ -839,7 +839,7 @@ bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 }
 #endif
 
-void
+int
 bonobo_object_shutdown (void)
 {
 #ifdef BONOBO_REF_HOOKS
@@ -858,9 +858,13 @@ bonobo_object_shutdown (void)
 	bonobo_debug_print ("shutdown-end", 
 		"-------------------------------------------------");
 #endif
-	if (bonobo_total_aggregates > 0)
+	if (bonobo_total_aggregates > 0) {
 		g_warning ("Leaked %ld bonobo objects total",
 			   bonobo_total_aggregates);
+		return 1;
+	}
+
+	return 0;
 }
 
 void

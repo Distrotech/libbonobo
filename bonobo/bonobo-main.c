@@ -107,7 +107,8 @@ bonobo_shutdown (void)
 		bonobo_property_bag_shutdown ();
 		bonobo_running_context_shutdown ();
 		bonobo_context_shutdown ();
-		bonobo_object_shutdown ();
+		if (bonobo_object_shutdown ())
+			retval = 1;
 		bonobo_exception_shutdown ();
 
 		if (__bonobo_poa != CORBA_OBJECT_NIL)
@@ -119,9 +120,9 @@ bonobo_shutdown (void)
 			CORBA_Object_release (
 				(CORBA_Object) __bonobo_poa_manager, &ev);
 		__bonobo_poa_manager = CORBA_OBJECT_NIL;
-
 #ifdef BONOBO_ACTIVATION_IS_FIXED
-		retval = bonobo_activation_shutdown ();
+		if (bonobo_activation_shutdown ())
+			retval = 1;
 #else
 		/* Cleanup of bonobo-activation resources -
 		 * important that this happens only once ! */

@@ -83,7 +83,7 @@ simple_resolve (BonoboMoniker               *moniker,
 	timeout = options ? options->timeout : -1;
 
 	bonobo_closure_invoke (simple->priv->resolve_closure,
-			       BONOBO_TYPE_CORBA_OBJECT, &ret,
+			       BONOBO_TYPE_CORBA_OBJECT | G_SIGNAL_TYPE_STATIC_SCOPE, &ret,
 			       BONOBO_TYPE_MONIKER, moniker,
 			       BONOBO_TYPE_RESOLVE_FLAG, resolve_flag,
 			       G_TYPE_LONG, timeout,
@@ -99,8 +99,7 @@ simple_finalize (GObject *object)
 {
 	BonoboMonikerSimple *simple = (BonoboMonikerSimple *) object;
 
-	if (simple->priv)
-	{
+	if (simple->priv) {
 		if (simple->priv->resolve_closure)
 			g_closure_unref (simple->priv->resolve_closure);
 

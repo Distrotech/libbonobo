@@ -15,7 +15,7 @@ void bonobo_context_init     (void);
 void bonobo_context_shutdown (void);
 
 void bonobo_object_init      (void);
-void bonobo_object_shutdown  (void);
+int  bonobo_object_shutdown  (void);
 
 void bonobo_exception_shutdown       (void);
 void bonobo_property_bag_shutdown    (void);

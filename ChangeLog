@@ -1,5 +1,24 @@
 2001-10-31  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-moniker-simple.c (simple_resolve): make
+	the return value SIGNAL_TYPE_STATIC
+
+	* bonobo/bonobo-types.c (corba_object_proxy_lcopy_value):
+	if G_BALUE_NOCOPY_CONTENTS, then just blit the pointer
+	across instead of erroneously dupping; a pain to get this
+	one.
+
+	* bonobo/bonobo-object.c (bonobo_object_shutdown):
+	return error status.
+
+	* bonobo/bonobo-main.c (bonobo_shutdown): use error status.
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_main): do an auto-exit unref
+	on the factory.
+
+2001-10-31  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-object.c
 	(bonobo_object_class_init): fixup signal definition.
 	(bonobo_object_check_env): fixup signal emission.
