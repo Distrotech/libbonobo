@@ -1,15 +1,15 @@
 # traditional Chinese translation for libbonobo.
-# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
-# Joe Man <trmetal@yahoo.com.hk>, 2001-2002.
+# Copyright (C) 2001, 02, 03, 04 Free Software Foundation, Inc.
+# Joe Man <trmetal@yahoo.com.hk>, 2001, 2002.
 # Ben Wu <hpwu@redhat.com>, 2002
-# Abel Cheung <maddog@linux.org.hk>, 2003.
+# Abel Cheung <maddog@linux.org.hk>, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.3.1\n"
+"Project-Id-Version: libbonobo 2.8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 15:34+0100\n"
-"PO-Revision-Date: 2003-05-28 00:11+0800\n"
+"POT-Creation-Date: 2004-10-02 00:49+0800\n"
+"PO-Revision-Date: 2004-10-02 00:47+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -62,9 +62,8 @@ msgid "Name service"
 msgstr "名稱服務"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "名稱服務"
+msgstr ""
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
@@ -120,12 +119,12 @@ msgstr "屬性‘%s’沒有設定值"
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "無法解析格式不正確的 XML 文件 %s"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "嘗試開啟 %s 目錄"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -203,11 +202,12 @@ msgstr "Shlib‘%s’沒有包含‘%s’"
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "名稱"
 
+# FIXME: 我很不滿意自己這個翻譯，表達不出 unique 的意義 -- Abel
 #: bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr ""
+msgstr "程式唯一名稱"
 
 #: bonobo/bonobo-object.c:925
 msgid "POA"
