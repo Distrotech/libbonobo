@@ -123,7 +123,7 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 			bonobo_client_site_get_embeddable (l->data);
 
 		return_list->_buffer [i] = CORBA_Object_duplicate (
-			bonobo_object_corba_objref (embeddable), ev);
+			bonobo_object_corba_objref (BONOBO_OBJECT (embeddable)), ev);
 	}
 
 	return return_list;

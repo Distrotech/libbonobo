@@ -36,7 +36,8 @@ module Bonobo {
 			MenuTypeRadioItem,
 			MenuTypeRadioGroup,
 			MenuTypeToggleItem,
-			MenuTypeSeparator
+			MenuTypeSeparator,
+			MenuTypePlaceholder
        		};
        
 

@@ -1,5 +1,29 @@
 2000-06-28  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-uih-menu.c (menu_toplevel_create_widgets): hack, utterly,
+	brutaly, disgustingly and unmaintainably, this is the price of a placeholder.
+
+	* bonobo/bonobo-container.c (impl_enum_objects): add BONOBO_OBJECT cast.
+
+	* bonobo/bonobo-uih-menu.c (menu_type_to_corba, menu_corba_to_type),
+	(bonobo_ui_handler_menu_new_placeholder),
+	(menu_toplevel_create_item_widget): Add placeholder type.
+	(NO_WIDGET_ITEM): add helper macro.
+	(menu_toplevel_get_shell, menu_toplevel_create_widgets),
+	(bonobo_ui_handler_menu_toplevel_remove_item_internal): use it.
+	(RECURSE_ITEM): add helper macro.
+	(menu_parse_uiinfo_tree, menu_parse_uiinfo_tree_with_data): use it.
+	(bonobo_ui_handler_menu_path_exists): implement.
+	(impl_Bonobo_UIHandler_menu_get_attributes): remove daftness in pos fetch.
+	(debug_dump_uih_menu): implement for gdb;
+	(impl_Bonobo_UIHandler_menu_get_attributes): don't get toggle state from
+	non existant widgets.
+	(menu_uiinfo_type_to_uih): add placeholder mapping.
+
+	* bonobo/bonobo-ui-handler.h: add placeholder bits.
+
+2000-06-28  Michael Meeks  <michael@helixcode.com>
+
 	* Makefile.am (SUBDIRS): remove bonobo-idl for now.
 
 2000-06-28  Maciej Stachowiak  <mjs@eazel.com>
