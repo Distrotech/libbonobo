@@ -1,3 +1,8 @@
+2001-03-11  Martin Baulig  <baulig@suse.de>
+
+	* gshell/inout.c (file_save_as_cb, file_load_cb): Use g_strdup()
+	instead of strdup() to avoid problems when g_free()ing stuff.
+
 2001-03-08  Darin Adler  <darin@eazel.com>
 
 	Fix bug where the control screws up if the control frame goes
