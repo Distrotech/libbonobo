@@ -28,6 +28,7 @@ struct _BonoboStreamMem {
 	size_t       size;
 	long         pos;
 	gboolean     read_only;
+	gboolean     resizable;
 
 	BonoboStreamMemPrivate *priv;
 };
@@ -37,7 +38,10 @@ typedef struct {
 } BonoboStreamMemClass;
 
 GtkType         bonobo_stream_mem_get_type     (void);
-BonoboStream    *bonobo_stream_mem_create       (char *buffer, size_t size, gboolean read_only);
+BonoboStream   *bonobo_stream_mem_create       (char *buffer, size_t size,
+						gboolean read_only,
+						gboolean resizable);
+const char     *bonobo_stream_mem_get_buffer   (BonoboStreamMem *stream_mem);
 
 END_GNOME_DECLS
 

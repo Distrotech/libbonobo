@@ -1,3 +1,13 @@
+2000-04-20  Dan Winship  <danw@helixcode.com>
+
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_create): Always
+	copy the provided buffer, rather than adopting it in the read_only
+	case. Allow the caller to pass NULL for buffer, meaning "allocate
+	it yourself". Add a new arg saying whether or not to expand the
+	buffer on writes/seeks off the end.
+	(mem_write, mem_seek): expand buffer when needed.
+	(bonobo_stream_mem_get_buffer): new accessor.
+
 2000-04-18  Matt Loper  <matt@helixcode.com>
 
 	* bonobo/bonobo-control.c (bonobo_control_construct): Set

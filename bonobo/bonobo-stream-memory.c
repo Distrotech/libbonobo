@@ -52,8 +52,13 @@ mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
 	}
 
 	if (smem->pos + len > smem->size){
-		mem_truncate (stream, smem->pos + len, ev);
-		g_warning ("Should check for an exception here");
+		if (smem->resizable){
+			smem->size = smem->pos + len;
+			smem->buffer = g_realloc (smem->buffer, smem->size);
+		} else {
+			mem_truncate (stream, smem->pos + len, ev);
+			g_warning ("Should check for an exception here");
+		}
 	}
 
 	if (smem->pos + len > smem->size)
@@ -113,7 +118,13 @@ mem_seek (BonoboStream *stream,
 	}
 
 	if (pos > smem->size){
-		mem_truncate (stream, pos, ev);
+		if (smem->resizable){
+			smem->buffer = g_realloc (smem->buffer, pos);
+			memset (smem->buffer + smem->size, 0,
+				pos - smem->size);
+			smem->size = pos;
+		} else
+			mem_truncate (stream, pos, ev);
 	}
 	smem->pos = pos;
 	return pos;
@@ -245,59 +256,72 @@ create_bonobo_stream_mem (BonoboObject *object)
 
 /**
  * bonobo_stream_mem_create:
- * @buffer: The memory buffer for which a BonoboStreamMem object is to be created.
+ * @buffer: The data for which a BonoboStreamMem object is to be created.
  * @size: The size in bytes of @buffer.
  * @read_only: Specifies whether or not the returned BonoboStreamMem
  * object should allow write() operations.
+ * @resizable: Whether or not the buffer should be resized as needed.
  *
- * Creates a new BonoboStreamMem object which is bound to
- * the provided memory buffer @buffer.  When data is read
- * out of or written into the returned BonoboStream object,
- * the read() and write() operations operate on @buffer.
+ * Creates a new BonoboStreamMem object.
  *
- * Returns: the constructed BonoboStream object which operates on the specified memory buffer.
- */
+ * If @buffer is non-%NULL, @size bytes are copied from it into a new
+ * buffer. If @buffer is %NULL, a new buffer of size @size is created
+ * and filled with zero bytes.
+ *
+ * When data is read out of or (if @read_only is FALSE) written into
+ * the returned BonoboStream object, the read() and write() operations
+ * operate on the new buffer. If @resizable is TRUE, writing or seeking
+ * past the end of the buffer will cause the buffer to be expanded (with
+ * the new space zero-filled for a seek).
+ *
+ * Returns: the constructed BonoboStream object
+ **/
 BonoboStream *
-bonobo_stream_mem_create (char *buffer, size_t size, gboolean read_only)
+bonobo_stream_mem_create (char *buffer, size_t size,
+			  gboolean read_only, gboolean resizable)
 {
 	BonoboStreamMem *stream_mem;
 	Bonobo_Stream corba_stream;
-	char *copy;
-	
-	g_return_val_if_fail (buffer != NULL, NULL);
 
-	if (read_only)
-		copy = buffer;
-	else {
-		copy = g_malloc (size);
-		if (!copy)
-			return NULL;
-		memcpy (copy, buffer, size);
-	}
-	
 	stream_mem = gtk_type_new (bonobo_stream_mem_get_type ());
-	if (stream_mem == NULL){
-		g_free (copy);
+	if (stream_mem == NULL)
 		return NULL;
-	}
 
-	stream_mem->buffer = copy;
+	if (buffer == NULL) {
+		stream_mem->buffer = g_malloc (size);
+		memset (buffer, 0, size);
+	} else
+		stream_mem->buffer = g_memdup (buffer, size);
+
 	stream_mem->size = size;
 	stream_mem->pos = 0;
 	stream_mem->read_only = read_only;
-	
-	corba_stream = create_bonobo_stream_mem (
-		BONOBO_OBJECT (stream_mem));
+	stream_mem->resizable = resizable;
+
+	corba_stream = create_bonobo_stream_mem (BONOBO_OBJECT (stream_mem));
 
 	if (corba_stream == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (stream_mem));
 		return NULL;
 	}
 
-	bonobo_object_construct (
-		BONOBO_OBJECT (stream_mem), corba_stream);
+	bonobo_object_construct (BONOBO_OBJECT (stream_mem), corba_stream);
 	return BONOBO_STREAM (stream_mem);
 }
 
-
-
+/**
+ * bonobo_stream_mem_get_buffer:
+ * @stream_mem: a BonoboStreamMem
+ *
+ * Returns the buffer associated with a BonoboStreamMem. If the stream
+ * is set to automatically resize itself, this buffer is only guaranteed
+ * to stay valid until the next write operation on the stream.
+ *
+ * Return value: a buffer containing the data written to the stream (or
+ * the data the stream was initialized with if nothing has been written).
+ **/
+const char *
+bonobo_stream_mem_get_buffer (BonoboStreamMem *stream_mem)
+{
+	return stream_mem->buffer;
+}
