@@ -83,6 +83,8 @@ interface ControlFrame : Bonobo::Unknown {
 };
 
 interface Control : Bonobo::Unknown {
+	exception NoContents { };
+
 	/**
 	 * getProperties:
 	 *
@@ -92,27 +94,28 @@ interface Control : Bonobo::Unknown {
 
 	/**
 	 * getDesiredSize:
-	 * @desired_width: In this value you should return the desired width you want.
-	 * @desired_height: In this value you should return the desired height you want.
+	 *
+	 * Returns the requested size for the contained widget.
 	 */
 	Gtk::Requisition getDesiredSize ();
+
+	/**
+	 * getAccessible:
+	 *
+	 * Returns: accessibility related resources
+	 */
+	Bonobo::Unknown getAccessible ();
 
 	/**
 	 * setFrame:
 	 * @frame: A Bonobo_ControlFrame.
 	 *
 	 * Gives the Control a handle to its ControlFrame.
-	 */
-	oneway void setFrame (in ControlFrame frame);
-
-	/**
-	 * setWindowId:
-	 * @id: An X Window ID.
 	 *
-	 *   Sets the window ID that should be used for the plug
-	 * of this window, the id encoding is as described above.
+	 * Returns: The windowId of the plug
 	 */
-	oneway void setWindowId (in Gdk::WindowId id);
+	Gdk::WindowId setFrame (in ControlFrame frame)
+		raises (NoContents);
 
 	/**
 	 * setSize:

@@ -1,5 +1,11 @@
 2001-11-01  Michael Meeks  <michael@ximian.com>
 
+	* idl/Bonobo_Control.idl: kill getWindowId, return the Id
+	the other way round - from setFrame.
+	add getAccessible.
+
+2001-11-01  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-object.h (bonobo_object_fast): impl. ultra
 	fast method for casting an unknown servant / object to an
 	BonoboObject. Make bonobo_object_from_servant faster too.
