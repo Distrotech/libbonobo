@@ -6,7 +6,7 @@
  *	Alex Graveley (alex@helixcode.com)
  *	Mike Kestner  (mkestner@ameritech.net)
  *
- * Copyright (C) 2000, Helix Code, Inc.
+ * Copyright (C) 2000, Ximian, Inc.
  */
 #include <config.h>
 #include <string.h>

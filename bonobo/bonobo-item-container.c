@@ -13,7 +13,7 @@
  *   Miguel de Icaza (miguel@kernel.org)
  *   Nat Friedman    (nat@nat.org)
  *
- * Copyright 1999, 2000 Helix Code, Inc.
+ * Copyright 1999, 2000 Ximian, Inc.
  */
 #include <config.h>
 #include <gobject/gsignal.h>

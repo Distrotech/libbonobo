@@ -11,7 +11,7 @@
  * I just refactored the code from the original PropertyBag, all the smart hacks
  * are from Nat -mig.
  *
- * (C) 2000 Helix Code, Inc.
+ * (C) 2000 Ximian, Inc.
  */
 #include <config.h>
 #include <bonobo/Bonobo.h>

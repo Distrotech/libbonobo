@@ -7,7 +7,7 @@
  *    Nat Friedman     (nat@nat.org)
  *    Peter Wainwright (prw@wainpr.demo.co.uk)
  *
- * Copyright 1999 Helix Code, Inc.
+ * Copyright 1999,2001 Ximian, Inc.
  */
 #include <config.h>
 

@@ -5,9 +5,8 @@
  * Author:
  *   Matt Loper (matt@gnome-support.com)
  *
- * Copyright 1999,2000 Helix Code, Inc.
+ * Copyright 1999, 2000 Ximian, Inc.
  */
-
 #include "config.h"
 #include <string.h>
 #include <gobject/gsignal.h>

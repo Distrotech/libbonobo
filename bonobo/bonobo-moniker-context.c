@@ -5,7 +5,7 @@
  * Author:
  *	Michael Meeks (michael@helixcode.com)
  *
- * Copyright (C) 2000, Helix Code, Inc.
+ * Copyright (C) 2000, Ximian, Inc.
  */
 #include <config.h>
 #include <gobject/gsignal.h>

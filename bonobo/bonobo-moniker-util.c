@@ -1,11 +1,11 @@
 /*
  * bonobo-moniker-util.c
  *
- * Copyright (C) 2000  Helix Code, Inc.
- *
  * Authors:
  *	Michael Meeks    (michael@helixcode.com)
  *	Ettore Perazzoli (ettore@helixcode.com)
+ *
+ * Copyright (C) 2000 Ximian, Inc.
  */
 #include "config.h"
 #include <string.h>

@@ -6,7 +6,7 @@
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *
- * Copyright 1999 Helix Code, Inc.
+ * Copyright 1999 Ximian, Inc.
  */
 #include <config.h>
 #include <gobject/gsignal.h>

@@ -12,7 +12,7 @@
  *   Miguel de Icaza (miguel@kernel.org)
  *   ÉRDI Gergõ (cactus@cactus.rulez.org): cleanup
  *
- * Copyright 1999 Helix Code, Inc., 2001 Gergõ Érdi
+ * Copyright 1999 Ximian, Inc., 2001 Gergõ Érdi
  */
 #include <config.h>
 #include <string.h>
