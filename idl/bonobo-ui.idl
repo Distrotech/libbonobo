@@ -28,6 +28,7 @@ module Bonobo {
 
 	interface UIContainer : Bonobo::Unknown {
 		exception MalFormedXML {};
+		exception InvalidPath {};
 
 		void    register_component   (in string component_name,
 					      in Bonobo::UIComponent component);
@@ -36,13 +37,15 @@ module Bonobo {
 
 		void    node_set             (in string path, in string xml,
 					      in string component_name)
-			raises (MalFormedXML);
+			raises (MalFormedXML, InvalidPath);
 
 		string  node_get             (in string path,
-					      in boolean nodeOnly);
+					      in boolean nodeOnly)
+			raises (InvalidPath);
 
 		void    node_remove          (in string path,
-					      in string by_component_name);
+					      in string by_component_name)
+			raises (InvalidPath);
 
 		boolean node_exists          (in string path);
 
@@ -52,7 +55,10 @@ module Bonobo {
 		 * in due course.
 		 */
 		void            object_set   (in string path,
-					      in Bonobo::Unknown control);
-		Bonobo::Unknown object_get   (in string path);
+					      in Bonobo::Unknown control)
+			raises (InvalidPath);
+
+		Bonobo::Unknown object_get   (in string path)
+			raises (InvalidPath);
 	};
 };

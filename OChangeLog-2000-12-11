@@ -1,3 +1,43 @@
+2000-09-12  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_set_app): re-order.
+	(make_path): remove fluff.
+
+2000-09-11  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (reinstate_old_node): Don't remove
+	nodes with existing children from other components. & re-tag nodes.
+
+	* bonobo/bonobo-win.c (construct_priv): setup the skeleton.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_make_path): barborously
+	remove great chunks of auto-creation code; simplify paths.
+	(bonobo_ui_xml_make_path): remove # stuff
+	(merge): only merge on name property.
+	(find_sibling): exorcise. (find_child): update.
+
+	* bonobo/bonobo-ui-container.c: Exceptionalized.
+
+	* bonobo/bonobo-win.c: ditto.
+
+	* bonobo/bonobo-ui-xml.c: ditto.
+	
+	* idl/bonobo-app.idl (UIContainer): Add InvalidPath exception.
+
+	* bonobo/bonobo-win.c (get_cmd_state): update.
+	(bonobo_win_xml_get): check path valid.
+
+	* bonobo/bonobo-ui-compat.c (setup_priv): setup skeleton.
+	(bonobo_ui_handler_menu_new, bonobo_ui_handler_menu_add_one),
+	(bonobo_ui_handler_toolbar_add_list, bonobo_ui_handler_toolbar_new): 
+	warn on invalid paths.
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_build_skeleton),
+	(add_node): impl.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_create_toolbar): 
+	update.
+
 2000-09-11  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	* bonobo.spec.in: brought this a little bit more up to date
