@@ -1,3 +1,7 @@
+2000-06-13 Ville Hautamaki <villeh@cs.joensuu.fi>
+
+	* configure.in: Added fi
+
 2000-06-13  Martin Baulig  <martin@suse.de>
 
 	* gshell/gshell.c (main): If USING_OAF, initialize it.
