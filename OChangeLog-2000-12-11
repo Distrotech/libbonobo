@@ -1,3 +1,9 @@
+2000-10-16  John Sullivan  <sullivan@eazel.com>
+
+	* doc/ui-faq.txt:
+	* doc/ui-xml.txt:
+	Updated to add some info about non-alphanumeric accelerators.
+
 2000-10-16  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar.c (bonobo_ui_toolbar_get_children): upd.
