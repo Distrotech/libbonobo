@@ -1,0 +1,60 @@
+This file documents the Grand OAF Database Query Language.
+
+	Constants:
+Strings: As in SQL, delimited by single quotes. Example: 'mystring'
+
+Stringvs (string arrays): A comma-separated list of strings, surrounded by square brackets. Example: ['red','blue']
+
+Numbers: Floating point decimals. (aka "whatever atof() accepts" :)
+
+Booleans: TRUE or FALSE (other common boolean value identifiers also accepted, but not encouraged).
+
+	Field identifiers:
+Names of fields attributes of a ServerInfo record.
+
+	Variables:
+
+Variables are various miscellaneous data items that are part of the
+environment. The syntax for referring to a variable is a '$' sign
+followed by the variable name. The following variables are available:
+
+$hostname - the hostname that the requesting client is running on.
+$domain - the "domain" that the client is requesting activation in.
+
+	Functions:
+
+Functions perform transformations on data and return a result. There are two possible syntaxes for a function call:
+	funcname(arguments)
+	field.funcname(other-arguments...)
+
+Internally, 'field.funcname(other-arguments...)' is translated to be
+exactly the same as 'funcname(field, other-arguments)', so
+'priority.max()' is exactly the same as 'max(priority)'. The following functions are available:
+
+has_field(string)
+   Returns a boolean value that indicates whether the current record has a particular field.
+
+has_one(stringv1, stringv2)
+   Returns a boolean value that indicates whether any of the strings
+   in the 'stringv2' array are contained in the 'stringv1' array.
+
+has_all(stringv1, stringv2)
+   Returns a boolean value that indicates whether all of the strings
+   in the 'stringv2' array are contained in the 'stringv1' array.
+
+has(stringv, string)
+   Returns a boolean value that indicates whether 'string' is contained in the 'stringv' array.
+
+max(expr)
+   Evaluates 'expr' over all the available server information records in the database, and returns
+   the maximum value as dictated by the normal sort order for the data type of 'expr'.
+   This function is not valid for string vectors.
+
+min(expr)
+   As with the 'max' function, but finds the minimum value.
+
+Function names are case insensitive.
+
+	Operators:
+
+	Example queries:

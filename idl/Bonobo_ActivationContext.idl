@@ -13,7 +13,7 @@ module OAF {
 	};
 
 	/* Attribute */
-	enum AttributeType { A_STRING, A_NUMBER, A_BOOLEAN };
+	enum AttributeType { A_STRING, A_NUMBER, A_BOOLEAN, A_STRINGV };
 	union AttributeValue switch(AttributeType) {
 	case A_STRING:
 		string value_string;
@@ -21,6 +21,8 @@ module OAF {
 		double value_number;
 	case A_BOOLEAN:
 		boolean value_boolean;
+	case A_STRINGV:
+		sequence<string> value_stringv;
 	};
 	struct Attribute {
 		string name;
@@ -28,7 +30,7 @@ module OAF {
 	};
 
 	/* Server */
-	struct Server {
+	struct ServerInfo {
 		ImplementationID iid;
 
 		string server_type;
@@ -36,11 +38,11 @@ module OAF {
 		
 		sequence<Attribute> attrs;
 	};
-	typedef sequence<Server> ServerList;
+	typedef sequence<ServerInfo> ServerInfoList;
 
 	/* Interfaces */
-	interface ObjectActivator {
-	  readonly attribute ServerList servers;
+	interface ObjectDirectory {
+	  readonly attribute ServerInfoList servers;
 	  readonly attribute string domain, hostID;
 
 	  Object activate(in ImplementationID iid);
