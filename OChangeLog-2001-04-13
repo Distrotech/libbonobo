@@ -1,3 +1,8 @@
+2000-10-14  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_create_toolbar):
+	Make the toolbar exclusive.
+
 2000-10-13  Eskil Heyn Olsen  <eskil@eazel.com>
 
 	* components/application-x-gnomine/Makefile.am:
