@@ -1,3 +1,9 @@
+2000-07-17  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo-idl/main.c (generate_get_epv): Fix the _get_epv return
+	value. 
+	(generate_h_protos): ditto.
+
 2000-07-15  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_toolbar_remove_widgets_recursive):
