@@ -16,6 +16,18 @@
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-running-context.h>
 
+#ifdef BONOBO_OBJECT_DEBUG
+#	define BONOBO_RUNNING_HOOKS
+#endif
+
+/*
+ * NB. for a quicker debugging experience simply
+ * #define BONOBO_RUNNING_HOOKS
+ */
+#if 0
+#	define BONOBO_RUNNING_HOOKS
+#endif
+
 POA_Bonobo_RunningContext__vepv bonobo_running_context_vepv;
 
 typedef struct {
@@ -115,17 +127,28 @@ check_empty (void)
 	}
 }
 
+#ifndef bonobo_running_context_add_object
 void
 bonobo_running_context_add_object (CORBA_Object object)
 {
+#ifdef BONOBO_RUNNING_HOOKS
+	bonobo_running_context_trace_objects (object, "local", 0, 0);
+#else 
 	BonoboRunningInfo *ri = get_running_info (TRUE);
 
 	g_hash_table_insert (ri->objects, object, object);
+#endif
 }
+#endif
 
+
+#ifndef bonobo_running_context_remove_object
 void
 bonobo_running_context_remove_object (CORBA_Object object)
 {
+#ifdef BONOBO_RUNNING_HOOKS
+	bonobo_running_context_trace_objects (object, "local", 0, 1);
+#else 
 	BonoboRunningInfo *ri = get_running_info (FALSE);
 
 	if (ri) {
@@ -133,15 +156,60 @@ bonobo_running_context_remove_object (CORBA_Object object)
 
 		check_empty ();
 	}
+#endif
 }
+#endif
 
+#ifndef bonobo_running_context_ignore_object
 void
 bonobo_running_context_ignore_object (CORBA_Object object)
 {
+#ifdef BONOBO_RUNNING_HOOKS
+	bonobo_running_context_trace_objects (object, "local", 0, 2);
+#else 
 	BonoboRunningInfo *ri = get_running_info (FALSE);
 
-	if (ri)
+	if (ri) {
 		g_hash_table_remove (ri->objects, object);
+	}
+#endif
+}
+#endif
+
+void          
+bonobo_running_context_trace_objects (CORBA_Object object,
+				      const char  *fn,
+				      int          line,
+				      int          mode)
+{
+	BonoboRunningInfo *ri = get_running_info (mode == 0);
+#ifdef BONOBO_RUNNING_HOOKS
+	char *cmode[] = {
+		"add_object",
+		"remove_object",
+		"ignore_object"
+	};
+#endif
+	if (ri) {
+		switch (mode) {
+		case 0:
+			g_hash_table_insert (ri->objects, object, object);
+			break;
+		case 1:
+			g_hash_table_remove (ri->objects, object);
+
+			check_empty ();
+			break;
+		case 2:
+			g_hash_table_remove (ri->objects, object);
+			break;
+		}
+#ifdef BONOBO_RUNNING_HOOKS
+		g_printerr ("[%d]:%-15s [%p]: %d running objects at %s:%d\n", 
+			    getpid(), cmode [mode], object, 
+			    g_hash_table_size (ri->objects), fn, line);
+#endif
+	}
 }
 
 static void

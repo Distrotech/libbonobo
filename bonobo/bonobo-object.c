@@ -70,7 +70,6 @@ static GtkObjectClass *bonobo_object_parent_class;
 
 #ifdef BONOBO_REF_HOOKS
 
-static int         ref_indent = 0;
 static GHashTable *living_ao_ht = NULL;
 
 #endif /* BONOBO_REF_HOOKS */
@@ -262,7 +261,6 @@ bonobo_object_trace_refs (BonoboObject *object,
 			  gboolean      ref)
 {
 #ifdef BONOBO_REF_HOOKS
-	char *indent;
 	BonoboAggregateObject *ao;
 	BonoboDebugRefData *descr;
 	
@@ -281,18 +279,16 @@ bonobo_object_trace_refs (BonoboObject *object,
 		
 		object->priv->ao->ref_count++;
 		
-		indent = g_strnfill (++ref_indent, ' ');
-		g_printerr ("%s[%d]:Ref %s:[%p] to %d at %s:%d\n", indent, getpid(),
+		g_printerr ("[%d]:%-15s %s:[%p] to %d at %s:%d\n", getpid(), 
+			    "Ref",
 			    gtk_type_name (GTK_OBJECT (object)->klass->type),
 			    object, ao->ref_count, fn, line);
 
-		g_free (indent);
 	} else { /* unref */
-		indent = g_strnfill (ref_indent--, ' ');
-		g_printerr ("%s[%d]:UnRef %s:[%p] from %d at %s:%d\n", indent, getpid(),
+		g_printerr ("[%d]:%-15s %s:[%p] from %d at %s:%d\n", getpid(),
+			    "UnRef",
 			    gtk_type_name (GTK_OBJECT (object)->klass->type),
 			    ao, ao->ref_count, fn, line);
-		g_free (indent);
 
 		g_return_if_fail (ao->ref_count > 0);
 	
@@ -318,10 +314,7 @@ bonobo_object_trace_refs (BonoboObject *object,
 			
 			bonobo_object_finalize (ao);
 		} else if (ao->ref_count < 0) {
-			indent = g_strnfill (ref_indent + 1, ' ');
-			g_printerr ("%sUnusual: [%p] already finalized\n",
-				    indent, ao);
-			g_free (indent);
+			g_printerr ("Unusual: [%p] already finalized\n",ao);
 		}
 	}
 #else
@@ -670,11 +663,9 @@ bonobo_object_instance_init (GtkObject    *gtk_object,
 
 #ifdef BONOBO_REF_HOOKS
 	{
-		char *indent = g_strnfill (++ref_indent, ' ');
-		g_printerr ("%s[%d]:Create %s:[%p] to %d\n", indent, getpid(),
+		g_printerr ("[%d]:%-15s %s:[%p] to %d\n", getpid(), "Create",
 			    gtk_type_name (klass->type),
 			    ao, ao->ref_count);
-		g_free (indent);
 
 		g_assert (g_hash_table_lookup (living_ao_ht, ao) == NULL);
 		g_hash_table_insert (living_ao_ht, ao, ao);

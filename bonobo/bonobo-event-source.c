@@ -431,7 +431,7 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
 
 	if (!opt_ev) {
 		if (BONOBO_EX (my_ev))
-			g_warning ("bonobo_stream_open failed '%s'",
+			g_warning ("remove_listener failed '%s'",
 				   bonobo_exception_get_text (my_ev));
 		CORBA_exception_free (&ev);
 	}
@@ -489,7 +489,7 @@ bonobo_event_source_client_add_listener (Bonobo_Unknown object,
 
 	if (!opt_ev) {
 		if (BONOBO_EX (my_ev))
-			g_warning ("bonobo_stream_open failed '%s'",
+			g_warning ("add_listener failed '%s'",
 				   bonobo_exception_get_text (my_ev));
 		CORBA_exception_free (&ev);
 	}

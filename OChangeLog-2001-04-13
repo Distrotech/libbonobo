@@ -1,3 +1,22 @@
+2001-01-08  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* bonobo/bonobo-object.c: removed indentation for debugging output
+	to make the output more clear if used with the new running
+	context debugging code.
+
+	* bonobo/bonobo-running-context.c
+	(bonobo_running_context_trace_objects): new debugging code. 
+
+	* idl/bonobo-property.idl: new getEventSource method for the
+	PropertyBag interface.
+
+	* bonobo/bonobo-property-bag.c 
+	(impl_Bonobo_PropertyBag_getEventSource): impl.
+
+	* idl/bonobo-property.idl: derive the property from Bonobo::Unknown.
+
+	* bonobo/bonobo-property.c (impl_Bonobo_Property_queryInterface): impl.
+
 2001-01-08  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-engine-config.c (bonobo_ui_engine_config_get_path),
@@ -17,8 +36,6 @@
 	(is_watched_node): impl.
 	(watch_add_node, watch_update): impl.
 	(bonobo_ui_xml_add_watch, bonobo_ui_xml_set_watch_fn): impl.
-
-2001-01-08  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/moniker-test.c (display_as_control): update to use
 	a BonoboWindow so we can test components more trivialy.

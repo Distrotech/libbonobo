@@ -30,7 +30,6 @@ struct _BonoboPropertyBagPrivate {
 	BonoboPropertyGetFn get_prop;
 	gpointer            user_data;
 
-	BonoboEventSource  *es;
 	BonoboTransient    *transient;
 };
 
@@ -75,6 +74,17 @@ bonobo_property_bag_get_prop_list (BonoboPropertyBag *pb)
 	return l;
 }
 
+static Bonobo_EventSource
+impl_Bonobo_PropertyBag_getEventSource (PortableServer_Servant servant,
+					CORBA_Environment      *ev)
+{
+	BonoboPropertyBag   *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
+	CORBA_Object  corba_es;
+
+	corba_es = bonobo_object_corba_objref (BONOBO_OBJECT (pb->es));
+
+	return bonobo_object_dup_ref (corba_es, ev);
+}
 
 static Bonobo_PropertyList *
 impl_Bonobo_PropertyBag_getProperties (PortableServer_Servant  servant,
@@ -226,9 +236,9 @@ bonobo_property_bag_construct (BonoboPropertyBag   *pb,
 {
 	CORBA_Object      corba_pb;
 
+	pb->es              = es;
 	pb->priv->set_prop  = set_prop;
 	pb->priv->get_prop  = get_prop;
-	pb->priv->es        = es;
 	pb->priv->user_data = user_data;
 
 	bonobo_object_add_interface (BONOBO_OBJECT (pb), BONOBO_OBJECT (es));
@@ -339,7 +349,7 @@ bonobo_property_bag_destroy (GtkObject *object)
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (object);
 	
 	/* unref the event source */
-	bonobo_object_unref (BONOBO_OBJECT (pb->priv->es));
+	bonobo_object_unref (BONOBO_OBJECT (pb->es));
 
 	/* Destroy the transient POA */
 	gtk_object_unref (GTK_OBJECT (pb->priv->transient));
@@ -371,6 +381,7 @@ bonobo_property_bag_get_epv (void)
 	epv->getProperties        = impl_Bonobo_PropertyBag_getProperties;
 	epv->getPropertyByName    = impl_Bonobo_PropertyBag_getPropertyByName;
 	epv->getPropertyNames     = impl_Bonobo_PropertyBag_getPropertyNames;
+	epv->getEventSource       = impl_Bonobo_PropertyBag_getEventSource;
 
 	return epv;
 }
@@ -588,7 +599,7 @@ notify_listeners (BonoboPropertyBag *pb,
 	if (prop->flags & BONOBO_PROPERTY_NO_LISTENING)
 		return;
 	
-	bonobo_event_source_notify_listeners_full (pb->priv->es,
+	bonobo_event_source_notify_listeners_full (pb->es,
 						   "Bonobo/Property",
 						   "change", prop->name,
 						   new_value, ev);

@@ -15,6 +15,7 @@
 typedef struct {
 	POA_Bonobo_Property		 prop;
 	BonoboPropertyBag		*pb;
+	BonoboTransient                 *transient;
 	char				*property_name;
 } BonoboPropertyServant;
 
@@ -97,13 +98,56 @@ bonobo_property_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Property__epv, 1);
 
-	epv->getName      = impl_Bonobo_Property_getName;
-	epv->getType      = impl_Bonobo_Property_getType;
-	epv->getValue     = impl_Bonobo_Property_getValue;
-	epv->setValue     = impl_Bonobo_Property_setValue;
-	epv->getDefault   = impl_Bonobo_Property_getDefault;
-	epv->getDocString = impl_Bonobo_Property_getDocString;
-	epv->getFlags     = impl_Bonobo_Property_getFlags;
+	epv->getName        = impl_Bonobo_Property_getName;
+	epv->getType        = impl_Bonobo_Property_getType;
+	epv->getValue       = impl_Bonobo_Property_getValue;
+	epv->setValue       = impl_Bonobo_Property_setValue;
+	epv->getDefault     = impl_Bonobo_Property_getDefault;
+	epv->getDocString   = impl_Bonobo_Property_getDocString;
+	epv->getFlags       = impl_Bonobo_Property_getFlags;
+
+	return epv;
+}
+
+static void
+impl_Bonobo_Property_ref (PortableServer_Servant servant, 
+			  CORBA_Environment *ev)
+{
+	/* nothing to do */
+}
+
+static void
+impl_Bonobo_Property_unref (PortableServer_Servant servant, 
+			    CORBA_Environment *ev)
+{
+	/* nothing to do */
+}
+
+static CORBA_Object
+impl_Bonobo_Property_queryInterface (PortableServer_Servant  servant,
+				     const CORBA_char       *repoid,
+				     CORBA_Environment      *ev)
+{
+	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
+
+	if (!strcmp (repoid, "IDL:Bonobo/Property:1.0"))
+		return bonobo_transient_create_objref (pservant->transient,
+			"IDL:Bonobo/Property:1.0", pservant->property_name, 
+			ev);
+	else
+		return CORBA_OBJECT_NIL;
+}
+
+static POA_Bonobo_Unknown__epv *
+bonobo_property_get_unknown_epv (void)
+{
+	POA_Bonobo_Unknown__epv *epv;
+
+	epv = g_new0 (POA_Bonobo_Unknown__epv, 1);
+
+	epv->ref            = impl_Bonobo_Property_ref;
+	epv->unref          = impl_Bonobo_Property_unref;
+	epv->queryInterface = impl_Bonobo_Property_queryInterface;
 
 	return epv;
 }
@@ -119,7 +163,8 @@ bonobo_property_get_vepv (void)
 	vepv = g_new0 (POA_Bonobo_Property__vepv, 1);
 
 	vepv->Bonobo_Property_epv = bonobo_property_get_epv ();
-
+	vepv->Bonobo_Unknown_epv = bonobo_property_get_unknown_epv ();
+	
 	return vepv;
 }
 
@@ -134,6 +179,7 @@ bonobo_property_servant_new (PortableServer_POA     poa,
 	CORBA_Environment        ev;
 
 	g_return_val_if_fail (pb != NULL, NULL);
+	g_return_val_if_fail (bt != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG (pb), NULL);
 	g_return_val_if_fail (property_name != NULL, NULL);
 
@@ -151,6 +197,7 @@ bonobo_property_servant_new (PortableServer_POA     poa,
 	servant = g_new0 (BonoboPropertyServant, 1);
 
 	servant->property_name = g_strdup (property_name);
+	servant->transient = bt;
 	servant->pb = pb;
 
 	((POA_Bonobo_Property *) servant)->vepv = bonobo_property_get_vepv ();

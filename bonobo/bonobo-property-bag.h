@@ -43,6 +43,7 @@ typedef void (*BonoboPropertySetFn) (BonoboPropertyBag *bag,
 struct _BonoboPropertyBag {
 	BonoboObject              parent;
 	BonoboPropertyBagPrivate *priv;
+	BonoboEventSource        *es;
 };
 
 typedef struct {
