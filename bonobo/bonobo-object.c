@@ -618,8 +618,8 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 				GTK_RUN_LAST,
 				object_class->type,
 				GTK_SIGNAL_OFFSET(BonoboObjectClass,system_exception),
-				gtk_marshal_NONE__POINTER,
-				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
+				gtk_marshal_NONE__POINTER_POINTER,
+				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER);
 	bonobo_object_signals [OBJECT_GONE] =
 		gtk_signal_new ("object_gone",
 				GTK_RUN_LAST,
@@ -935,16 +935,17 @@ bonobo_object_corba_objref (BonoboObject *object)
 void
 bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environment *ev)
 {
-	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (ev != NULL);
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
 
 	if (ev->_major == CORBA_NO_EXCEPTION)
 		return;
 
-	if (ev->_major == CORBA_SYSTEM_EXCEPTION){
+	if (ev->_major == CORBA_SYSTEM_EXCEPTION)
 		gtk_signal_emit (
-			GTK_OBJECT (object), bonobo_object_signals [SYSTEM_EXCEPTION], obj, ev);
-	}
+			GTK_OBJECT (object),
+			bonobo_object_signals [SYSTEM_EXCEPTION],
+			obj, ev);
 }
 
 /**

@@ -1,3 +1,26 @@
+2000-11-14  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_class_init): make
+	system_exception correctly marshal the ev as specified.
+
+	* bonobo/bonobo-win.c (win_component_get_by_ref): impl.
+	(bonobo_window_deregister_component_by_ref): impl.
+
+	* bonobo/bonobo-ui-container.c (bonobo_ui_container_get_win): impl.
+
+	* bonobo/bonobo-win.h (BONOBO_IS_WINDOW): rename to this,
+	got missed in the rename.
+
+	* bonobo/bonobo-win.c (real_emit_ui_event): add a check_env.
+	(real_exec_verb): ditto.
+
+	* bonobo/bonobo-ui-container.c (bonobo_ui_container_class_init),
+	(bonobo_ui_container_destroy): setup destruction more elegantly.
+
+	* bonobo/bonobo-win.c (blank_container): impl.
+	(bonobo_window_set_ui_container): impl.
+	(destroy_priv): disconnect signal.
+
 2000-11-13  John Sullivan  <sullivan@eazel.com>
 
 	* bonobo/bonobo-win.c: (popup_destroy):
