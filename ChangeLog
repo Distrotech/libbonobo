@@ -1,3 +1,12 @@
+2001-11-19  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (do_corba_setup): prune
+	the wasteful:
+		CORBA_free (PortableServer_POA_activate_object (
+			bonobo_poa (), &object->servant, &ev));
+	for a speedup; assumes our POA supports implicit
+	activation.
+
 Tue Nov 20 21:14:15 2001  Owen Taylor  <otaylor@redhat.com>
 
 	* bonobo/bonobo-arg.[ch] bonobo/bonobo-event-source.h

@@ -711,17 +711,8 @@ do_corba_setup (BonoboObject      *object,
 		}
 	}
 
-	/* Activate - but we don't need the ObjectId */
-	CORBA_free (PortableServer_POA_activate_object (
-		bonobo_poa (), &object->servant, &ev));
-
-	if (BONOBO_EX (&ev)) {
-		g_warning ("Exception '%s' activating object",
-			   bonobo_exception_get_text (&ev));
-		return;
-	}
-
-	/* Instantiate a CORBA_Object reference for the servant */
+	/*  Instantiate a CORBA_Object reference for the servant
+	 * assumes the bonobo POA supports implicit activation */
 	obj = PortableServer_POA_servant_to_reference (
 		bonobo_poa (), &object->servant, &ev);
 
