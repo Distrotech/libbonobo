@@ -1,3 +1,7 @@
+2001-10-11  Abel Cheung  <maddog@linux.org.hk>
+
+	* Makefile.am: idl file now goes into $(datadir)/idl/bonobo-2.0.
+
 2001-10-05  Abel Cheung  <maddog@linux.org.hk>
 
 	* Bonobo_Sample_Echo.server.in: Rename bonobo-echo -> bonobo-echo-2 
