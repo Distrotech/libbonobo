@@ -59,7 +59,7 @@ CORBA_sequence_CORBA_string_copy (CORBA_sequence_CORBA_string *copy, const CORBA
 
 	copy->_maximum = original->_length;
 	copy->_length = original->_length;
-	copy->_buffer = CORBA_sequence_CORBA_string_allocbuf (sizeof (CORBA_char *) * original->_length);
+	copy->_buffer = CORBA_sequence_CORBA_string_allocbuf (original->_length);
 
 	for (i = 0; i < original->_length; i++) {
 		copy->_buffer[i] = CORBA_string_dup (original->_buffer[i]);
