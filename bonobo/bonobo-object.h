@@ -44,17 +44,6 @@ void  gnome_object_drop_binding            (GnomeObject *obj);
 CORBA_Object gnome_object_activate_servant (GnomeObject *object,
 					    void *servant);
 
-#ifdef GNORBA_H
-GnomeObject *gnome_object_activate_with_repo_id (GoadServerList *list,
-						 const char *repo_id,
-						 GoadActivationFlags flags,
-						 const char **params);
-GnomeObject *gnome_object_activate_with_goad_id (GoadServerList *list,
-						 const char *goad_id,
-						 GoadActivationFlags flags,
-						 const char **params);
-#endif
-
 /* CORBA defaults we provide */
 extern PortableServer_ServantBase__epv gnome_object_base_epv;
 extern POA_GNOME_object__epv           gnome_object_epv;

@@ -1,3 +1,16 @@
+1999-04-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-client-site.c (gnome_client_site_bind_component):
+	Adapt to new GnomeObjectClient existance.
+
+	Added documentation.
+
+	* bonobo/test-container.c: ditto.
+
+	* bonobo/gnome-object-client.c (set_remote_window): New file.
+	Includes all the client-side implementation of a remote
+	GNOME::object. 
+
 1999-04-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/test-container.c,sample-server.c,

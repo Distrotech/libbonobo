@@ -259,46 +259,6 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 }
 
 GnomeObject *
-gnome_object_activate_with_repo_id (GoadServerList *list,
-				    const char *repo_id,
-				    GoadActivationFlags flags,
-				    const char **params)
-{
-	CORBA_Object corba_object;
-	GnomeObject *object;
-
-	corba_object = goad_server_activate_with_repo_id (NULL, repo_id, 0, NULL);
-	if (corba_object == CORBA_OBJECT_NIL)
-		return NULL;
-	
-	object = gtk_type_new (gnome_object_get_type ());
-	object->object = corba_object;
-
-	g_warning ("This should be a derived object that knows how to destory the other end");
-	return object;
-}
-
-GnomeObject *
-gnome_object_activate_with_goad_id (GoadServerList *list,
-				    const char *goad_id,
-				    GoadActivationFlags flags,
-				    const char **params)
-{
-	CORBA_Object corba_object;
-	GnomeObject *object;
-
-	corba_object = goad_server_activate_with_id (NULL, goad_id, 0, NULL);
-	if (corba_object == CORBA_OBJECT_NIL)
-		return NULL;
-	
-	object = gtk_type_new (gnome_object_get_type ());
-	object->object = corba_object;
-
-	g_warning ("This should be a derived object that knows how to destory the other end");
-	return object;
-}
-
-GnomeObject *
 gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
 {
 	g_return_val_if_fail (object != NULL, NULL);
