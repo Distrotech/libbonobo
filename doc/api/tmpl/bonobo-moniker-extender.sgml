@@ -40,9 +40,9 @@ like this:
   <example>
     <title>Oaf information for an extender</title>
     <programlisting>
-&gt;oaf_attribute name="bonobo:moniker_extender" type="stringv"&lt;
-	&gt;item value="file:"/&lt;
-&gt;/oaf_attribute&lt;
+&lt;oaf_attribute name="bonobo:moniker_extender" type="stringv"&gt;
+	&lt;item value="file:"/&gt;
+&lt;/oaf_attribute&gt;
     </programlisting>
   </example>
 to the .oaf file. This registers the extender with the system, such
