@@ -272,6 +272,7 @@ bonobo_stream_mem_create (char *buffer, size_t size, gboolean read_only)
 		copy = g_malloc (size);
 		if (!copy)
 			return NULL;
+		memcpy (copy, buffer, size);
 	}
 	
 	stream_mem = gtk_type_new (bonobo_stream_mem_get_type ());

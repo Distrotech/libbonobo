@@ -1,3 +1,9 @@
+2000-03-05  Matt Loper  <matt.loper@splashtech.com>
+
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_create): If
+	read_only param is FALSE, copy the incoming buffer into our newly
+	allocated memory.
+
 2000-03-04  Dan Winship  <danw@helixcode.com>
 
 	* doc/Bonobo.sgml: many grammar, style, and clarification fixes,
