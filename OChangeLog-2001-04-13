@@ -1,3 +1,8 @@
+2000-10-20  Robin * Slomkowski  <rslomkow@eazel.com>
+
+	* bonobo.spec.in:references to non-existent documentation
+	need to figure out where it moved to and put it back in.
+
 2000-10-20  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-object.c (BONOBO_REF_HOOKS): turn off reference debugging; doh.
