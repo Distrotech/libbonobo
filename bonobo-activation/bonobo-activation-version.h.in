@@ -6,3 +6,4 @@
 #define OAF_MICRO_VERSION (@OAF_MICRO_VERSION@)
 
 #endif
+
