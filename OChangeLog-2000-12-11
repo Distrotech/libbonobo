@@ -1,3 +1,9 @@
+2000-07-15  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_toolbar_remove_widgets_recursive):
+	remove the ToolbarToolbarInternal struct from the name_to_toolbar hash and leak it
+	for now. (toolbar_toplevel_toolbar_check_override): notify before removing widgets.
+
 2000-07-15  Robert Brady  <rwb197@zepler.org>
 
 	* configure.in (ALL_LINGUAS): Added en_GB translation
