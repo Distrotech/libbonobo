@@ -1,5 +1,14 @@
 2001-11-06  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-moniker-simple.c (simple_finalize):
+	chain to parent correctly.
+	(bonobo_moniker_simple_class_init): setup parent.
+
+	* bonobo/bonobo-main.c (bonobo_init_full): init glib
+	with G_TYPE_DEBUG_OBJECTS.
+
+2001-11-06  Michael Meeks  <michael@ximian.com>
+
 	* idl/Bonobo_UI.idl: Add NonExistantAttr for Darin.
 
 2001-11-05  Michael Meeks  <michael@ximian.com>

@@ -15,6 +15,8 @@
 #include <bonobo/bonobo-types.h>
 #include <bonobo/bonobo-marshal.h>
 
+GObjectClass *parent_class = NULL;
+
 struct _BonoboMonikerSimplePrivate {
 	GClosure *resolve_closure;
 };
@@ -106,6 +108,8 @@ simple_finalize (GObject *object)
 		g_free (simple->priv);
 		simple->priv = NULL;
 	}
+
+	parent_class->finalize (object);
 }
 
 static void
@@ -116,6 +120,8 @@ bonobo_moniker_simple_class_init (BonoboMonikerClass *klass)
 	klass->resolve = simple_resolve;
 	
 	gobject_class->finalize = simple_finalize;
+
+	parent_class = g_type_class_peek_parent (klass);
 }
 
 static void 
