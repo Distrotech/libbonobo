@@ -196,7 +196,7 @@ main (int argc, char *argv[])
                                 g_string_append (gnome_od_source_dir,
                                                  gnome_dirs[i]);
                                 g_string_append (gnome_od_source_dir,
-                                                 "/share/oaf:");
+                                                 "/lib/bonobo/servers:");
                         }
                         g_strfreev (gnome_dirs);
 			g_string_append_c (real_od_source_dir, ':');
@@ -215,7 +215,7 @@ main (int argc, char *argv[])
 				(root_poa, &ev);
 			Bonobo_ObjectDirectory_register_new 
                                 (od,
-                                 "OAFIID:oaf_naming_service:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
+                                 "OAFIID:Bonobo_CosNaming_NamingContext:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
                                  naming_service,
                                  &ev);
 		}

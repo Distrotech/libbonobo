@@ -38,7 +38,7 @@ LDADD=../bonobo-activation/libbonobo-activation.la \
 
 activation_client_SOURCES=client.c
 
-serverinfodir=$(pkgdatadir)
+serverinfodir=$(libdir)/bonobo/servers
 server_in_files = Bonobo_CosNaming_NamingContext.server.in
 serverinfo_DATA = $(server_in_files:.server.in=.server)
 

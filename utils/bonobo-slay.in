@@ -51,15 +51,15 @@ chomp($username);
 
 # get OAF files
 #
-@oaf_dirs = ( "@prefix@/share/oaf" );
+@oaf_dirs = ( "@prefix@/lib/bonobo/servers" );
 foreach $dir (split(':', $ENV{'OAF_INFO_PATH'})) {
 	if (-d $dir) {
 		push @oaf_dirs, $dir;
 	}
 }
 foreach $dir (split(':', $ENV{'GNOME_PATH'})) {
-	if (-d "$dir/share/oaf") {
-		push @oaf_dirs, "$dir/share/oaf";
+	if (-d "$dir/lib/bonobo/servers") {
+		push @oaf_dirs, "$dir/lib/bonobo/servers";
 	}
 }
 
@@ -98,7 +98,7 @@ do {
 	#
 	while ($fname = shift(@files)) {
 
-		if ("$fname" =~ /\.(oafinfo|oaf|server)$/) {
+		if ("$fname" =~ /\.server$/) {
 		
 			open(FILE, $fname);
 			while (<FILE>) {
