@@ -108,9 +108,9 @@ msgid "iid %s has a NULL location"
 msgstr "iid %s bir NULL yerini daxil edir"
 
 #: activation-server/object-directory-load.c:111
-#, c-format
+#, fuzzy, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr ""
+msgstr "iid '%s' içində hökmsüz hərf '%c'"
 
 #: activation-server/object-directory-load.c:305
 #, c-format
