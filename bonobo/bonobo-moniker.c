@@ -71,14 +71,8 @@ bonobo_moniker_set_parent (BonoboMoniker     *moniker,
 {
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
 	
-	if (moniker->priv->parent != CORBA_OBJECT_NIL)
-		bonobo_object_release_unref (moniker->priv->parent, ev);
-
-	if (parent != CORBA_OBJECT_NIL)
-		moniker->priv->parent =
-			bonobo_object_dup_ref (parent, ev);
-	else
-		moniker->priv->parent = CORBA_OBJECT_NIL;
+	bonobo_object_release_unref (moniker->priv->parent, ev);
+	moniker->priv->parent = bonobo_object_dup_ref (parent, ev);
 }
 
 /**

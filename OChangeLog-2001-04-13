@@ -1,3 +1,26 @@
+2001-01-10  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_new_from_name_full): 
+	remove Dietmar's unref that causes problems for now.
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_set_parent): simplify.
+
+2001-01-09  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-sync-status.c (remove_hint_cb): use the
+	correct hint key to remove hints so they don't just lurk
+	forever.
+
+	* doc/ui-xml.txt: document 'config' attr.
+
+	* bonobo/bonobo-ui-sync-toolbar.c (create_dockitem): check
+	for a 'config' attr.
+	(create_dockitem): move toolbar creation here.
+	(impl_bonobo_ui_sync_toolbar_update_root): upd.
+
+	* bonobo/bonobo-ui-engine-config.c (bonobo_ui_engine_config_connect): r
+	re-order to make more sense.
+
 2001-01-09  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-sync-toolbar.c (do_config_popup),
