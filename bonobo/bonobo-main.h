@@ -16,6 +16,14 @@
 #include <glib-object.h>
 #include <bonobo/Bonobo.h>
 
+typedef enum {
+        BONOBO_POA_ALL_AT_IDLE,
+        BONOBO_POA_ONEWAY_AT_IDLE,
+        BONOBO_POA_THREAD_PER_REQUEST
+} BonoboThreadHint;
+
+G_BEGIN_DECLS
+
 gboolean                    bonobo_is_initialized        (void);
 gboolean		    bonobo_init			 (int *argc,
 							  char **argv);
@@ -34,5 +42,8 @@ void			    bonobo_setup_x_error_handler (void);
 CORBA_ORB		    bonobo_orb			 (void);
 PortableServer_POA	    bonobo_poa			 (void);
 PortableServer_POAManager   bonobo_poa_manager		 (void);
+PortableServer_POA          bonobo_poa_get_threaded      (BonoboThreadHint hint);
+
+G_END_DECLS
 
 #endif /* __LIBBONOBO_MAIN_H__ */

@@ -250,6 +250,7 @@ BONOBO_ITEM_HANDLER_TYPE
 
 <SECTION>
 <FILE>bonobo-main</FILE>
+BonoboThreadHint
 bonobo_init
 bonobo_main
 bonobo_activate
@@ -257,6 +258,7 @@ bonobo_setup_x_error_handler
 bonobo_orb
 bonobo_poa
 bonobo_poa_manager
+bonobo_poa_get_threaded
 <SUBSECTION Standard>
 </SECTION>
 

@@ -19,6 +19,16 @@
 
 2003-04-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* doc/api/bonobo-sections.txt: Added bonobo_poa_get_threaded to
+	the bonobo-main section.
+
+	* bonobo/bonobo-main.c (bonobo_poa_get_threaded): New function to
+	get a predefined POA for a given threading policy/hint:
+	one-way-at-idle, all-at-idle, and thread-per-request.
+
+	* bonobo/bonobo-main.h: Declare bonobo_poa_get_threaded.  Added
+	G_BEGIN_DECLS/G_END_DECLS.
+
 	* bonobo-activation/bonobo-activation-register.h,
 	* bonobo-activation/bonobo-activation-register.c
 	(bonobo_activation_register_active_server): Renamed to
