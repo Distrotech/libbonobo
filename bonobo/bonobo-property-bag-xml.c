@@ -69,6 +69,26 @@ ORBit_demarshal_allocate_mem(CORBA_TypeCode tc, gint nelements)
 static void
 encode_type (BonoboUINode      *type_parent,
 	     CORBA_TypeCode     tc,
+	     CORBA_Environment *ev);
+
+static void
+encode_subtypes (BonoboUINode      *parent,
+		 CORBA_TypeCode     tc,
+		 int                num_subtypes,
+		 CORBA_Environment *ev)
+{
+	BonoboUINode *subtypes;
+	int           i;
+
+	subtypes = bonobo_ui_node_new_child (parent, "subtypes");
+
+	for (i = 0; i < num_subtypes; i++)
+		encode_type (subtypes, tc->subtypes [i], ev);
+}
+
+static void
+encode_type (BonoboUINode      *type_parent,
+	     CORBA_TypeCode     tc,
 	     CORBA_Environment *ev)
 {
 	BonoboUINode *node;
@@ -107,19 +127,16 @@ encode_type (BonoboUINode      *type_parent,
 			bonobo_ui_node_set_content (subname, tc->subnames [i]);
 		}
 	}
-	if (tc->kind == CORBA_tk_enum)
-		break;
+	if (tc->kind != CORBA_tk_enum)
+		encode_subtypes (node, tc, tc->sub_parts, ev);
+	break;
 
 	case CORBA_tk_alias:
 	case CORBA_tk_array:
-	case CORBA_tk_sequence: { /* subtypes */
-		BonoboUINode *subtypes;
+	case CORBA_tk_sequence:
+		encode_subtypes (node, tc, 1, ev);
+		break;
 
-		subtypes = bonobo_ui_node_new_child (node, "subtypes");
-
-		for (i = 0; i < tc->sub_parts; i++)
-			encode_type (subtypes, tc->subtypes [i], ev);
-	}
 	default:
 		break;
 	}
@@ -271,6 +288,51 @@ bonobo_property_bag_xml_encode_any (BonoboUINode      *opt_parent,
 
 static CORBA_TypeCode
 decode_type (BonoboUINode      *node,
+	     CORBA_Environment *ev);
+
+static gboolean
+decode_subtypes_into (BonoboUINode      *parent,
+		      CORBA_TypeCode     tc,
+		      int                num_subtypes,
+		      CORBA_Environment *ev)
+{
+	BonoboUINode *l, *subtypes = NULL;
+	int           i = 0;
+
+	for (l = bonobo_ui_node_children (parent); l;
+	     l = bonobo_ui_node_next (l)) {
+		if (bonobo_ui_node_has_name (l, "subtypes"))
+			subtypes = l;
+	}
+	if (!subtypes) {
+		g_warning ("Missing subtypes field - leak");
+		return FALSE;
+	}
+
+	tc->subtypes = g_new (CORBA_TypeCode, num_subtypes);
+
+	for (l = bonobo_ui_node_children (subtypes); l;
+	     l = bonobo_ui_node_next (l)) {
+
+		if (i >= num_subtypes)
+			g_warning ("Too many sub types should be %d", num_subtypes);
+		else {
+			tc->subtypes [i] = decode_type (l, ev);
+			g_assert (tc->subtypes [i]);
+		}
+		i++;
+	}
+
+	if (i < num_subtypes) {
+		g_warning ("Not enough sub names: %d should be %d", i, num_subtypes);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static CORBA_TypeCode
+decode_type (BonoboUINode      *node,
 	     CORBA_Environment *ev)
 {
 	CORBA_TypeCode tc;
@@ -359,7 +421,7 @@ decode_type (BonoboUINode      *node,
 		}
 		if (!subnames) {
 			g_warning ("Missing subnames field - leak");
-			return NULL;
+			goto decode_error;
 		}
 
 		tc->subnames = (const char **) g_new (char *, tc->sub_parts);
@@ -376,52 +438,30 @@ decode_type (BonoboUINode      *node,
 		}
 		if (i < tc->sub_parts) {
 			g_warning ("Not enough sub names: %d should be %d", i, tc->sub_parts);
-			return NULL;
+			goto decode_error;
 		}
 	}
-	if (tc->kind == CORBA_tk_enum)
-		break;
+	if (tc->kind != CORBA_tk_enum)
+		if (!decode_subtypes_into (node, tc, tc->sub_parts, ev))
+			goto decode_error;
+	break;
 
 	case CORBA_tk_alias:
 	case CORBA_tk_array:
-	case CORBA_tk_sequence: { /* subtypes */
-		BonoboUINode *subtypes = NULL;
-		int           i = 0;
+	case CORBA_tk_sequence:
+		if (!decode_subtypes_into (node, tc, 1, ev))
+			goto decode_error;
+		break;
 
-		for (l = bonobo_ui_node_children (node); l;
-		     l = bonobo_ui_node_next (l)) {
-			if (bonobo_ui_node_has_name (l, "subtypes"))
-				subtypes = l;
-		}
-		if (!subtypes) {
-			g_warning ("Missing subtypes field - leak");
-			return NULL;
-		}
-
-		tc->subtypes = g_new (CORBA_TypeCode, tc->sub_parts);
-
-		for (l = bonobo_ui_node_children (subtypes); l;
-		     l = bonobo_ui_node_next (l)) {
-
-			if (i >= tc->sub_parts)
-				g_warning ("Too many sub types should be %d", tc->sub_parts);
-			else {
-				tc->subtypes [i] = decode_type (l, ev);
-				g_assert (tc->subtypes [i]);
-			}
-			i++;
-		}
-
-		if (i < tc->sub_parts) {
-			g_warning ("Not enough sub names: %d should be %d", i, tc->sub_parts);
-			return NULL;
-		}
-	}
 	default:
 		break;
 	}
 
 	return tc;
+
+ decode_error:
+	CORBA_Object_release ((CORBA_Object) tc, ev);
+	return NULL;
 }
 
 #define DO_DECODE(tckind,format,corbatype,value,align)				\

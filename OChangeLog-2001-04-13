@@ -1,3 +1,29 @@
+2001-02-16  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag-xml.c (encode_subtypes): split from
+	(encode_type): here & fix.
+	(decode_subtypes_into): split out of
+	(decode_type): here, upd & handle errors cleanly.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_merge): upd.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_get_tree):
+	remove redundant strip.
+
+	* bonobo/bonobo-ui-node.c (bonobo_ui_node_strip): move here.
+	(do_strip): move here
+	(bonobo_ui_node_from_string): strip the nodes as they come
+	out of the string.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_strip): stub.
+	(do_strip): remove.
+
+	* bonobo/bonobo-property-bag-xml.c (encode_type): force only a
+	single sub_part for an alias.
+	(decode_type): cope with alias' correctly as well.
+
+	* bonobo/bonobo-arg.c (bonobo_arg_copy): constify.
+
 2001-02-16  John R. Sheets  <dusk@ravendusk.org>
 
 	* doc/dia/client-site.dia, doc/dia/control.dia, doc/dia/view.dia:

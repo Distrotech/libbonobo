@@ -62,7 +62,7 @@ BonoboArg    *bonobo_arg_new           (BonoboArgType  t);
 
 void          bonobo_arg_release       (BonoboArg     *arg);
 
-BonoboArg    *bonobo_arg_copy          (BonoboArg     *arg);
+BonoboArg    *bonobo_arg_copy          (const BonoboArg *arg);
 
 void          bonobo_arg_from_gtk      (BonoboArg    *a, 
 					const GtkArg *arg);

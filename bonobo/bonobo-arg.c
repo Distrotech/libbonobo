@@ -107,7 +107,7 @@ bonobo_arg_release (BonoboArg *a)
 }
 
 BonoboArg *
-bonobo_arg_copy (BonoboArg *a)
+bonobo_arg_copy (const BonoboArg *a)
 {
 	BonoboArg *copy = CORBA_any__alloc ();
 
