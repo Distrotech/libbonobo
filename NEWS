@@ -6,7 +6,6 @@ Bonobo 0.29
 		* Toolbar widget leak (Darin Alder)
 		* Lots of misc leaks nailed (Morten)
 		* Bonobo plug / socket race condition nailed (Me)
-		* XML transparent node merging bug nailed (Darin)
 
 	* Storage stuff
 		* Local FS Stream / Storage impl. completed (Dietmar)

@@ -1,3 +1,9 @@
+2000-12-13  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in (orbit_version): Depend on the as yet unreleased
+	ORBit-0.5.6: badger Elliot about this.
+	Totaly expunge the libuuid checks and BonoboBrowser stuff.
+
 2000-12-12  Michael Meeks  <michael@helixcode.com>
 
 	* components/selector/bonobo-selector.c (generic_factory): 
