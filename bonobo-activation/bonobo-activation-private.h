@@ -40,11 +40,14 @@
 #endif
 #endif
 
+#define OAF_FACTORY_TIMEOUT 1000
 
-CORBA_Object oaf_server_by_forking (const char **cmd, int fd_Arg,
-				    CORBA_Environment * ev);
-void oaf_rloc_file_register (void);
-int oaf_ior_fd_get (void);
+void         oaf_timeout_reg_check_set  (gboolean on);
+gboolean     oaf_timeout_reg_check      (gpointer data);
+CORBA_Object oaf_server_by_forking      (const char **cmd, int fd_Arg,
+                                         CORBA_Environment * ev);
+void         oaf_rloc_file_register     (void);
+int          oaf_ior_fd_get             (void);
 CORBA_Object oaf_activation_context_get (void);
 
 extern gboolean oaf_private;

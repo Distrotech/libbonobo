@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "empty.h"
 
-#define TOTAL_TEST_SCORE 9
+#define TOTAL_TEST_SCORE 11
 
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
@@ -170,13 +170,34 @@ main (int argc, char *argv[])
         }
         fprintf (stderr, "\n");
 
-        fprintf (stderr, "\n%d tests passed (%s)\n", passed,
+
+        fprintf (stderr, "Server that doesn't register IID test ");
+        obj = oaf_activate_from_id ("OAFIID:NotInServer:20000717", 0, NULL, &ev);
+        if (obj || ev._major == CORBA_NO_EXCEPTION) {
+                fprintf (stderr, "failed 1");
+        } else {
+                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                CORBA_exception_free (&ev);
+                passed++;
+        }
+        if (test_oafd (&ev, "with non-registering server")) {
+                fprintf (stderr, ", passed 2");
+                passed++;
+        } else {
+                fprintf (stderr, ", failed 2");
+        }
+        fprintf (stderr, "\n");
+
+
+        fprintf (stderr, "\n%d of %d tests passed (%s)\n", passed,
+                 TOTAL_TEST_SCORE,
                  passed == TOTAL_TEST_SCORE? "All": "some failures");
 
 	CORBA_exception_free (&ev);
 
-        if (passed == TOTAL_TEST_SCORE)
+        if (passed == TOTAL_TEST_SCORE) {
                 return 0;
-        else
+        } else {
                 return 1;
+        }
 }

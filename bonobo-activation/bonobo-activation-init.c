@@ -317,6 +317,14 @@ oaf_postinit (gpointer app, gpointer mod_info)
 	if (oaf_od_ior)
 		oaf_registration_location_add (&cmdline_regloc, -1000, NULL);
 
+        if (oaf_activate_iid)
+                g_timeout_add_full (G_PRIORITY_LOW,
+                                    OAF_FACTORY_TIMEOUT,
+                                    oaf_timeout_reg_check,
+                                    NULL, NULL);
+        else
+                oaf_timeout_reg_check_set (FALSE);
+
 	is_initialized = TRUE;
 }
 

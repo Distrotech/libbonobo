@@ -28,6 +28,32 @@
 #include "liboaf/liboaf-private.h"
 #include <stdio.h>
 
+static gboolean check_registration = TRUE;
+static gboolean need_ior_printout  = TRUE;
+
+void
+oaf_timeout_reg_check_set (gboolean on)
+{
+        check_registration = on;
+}
+
+gboolean
+oaf_timeout_reg_check (gpointer data)
+{
+        if (!check_registration)
+                return FALSE;
+
+        if (need_ior_printout) {
+                g_error ("This process has not registered the required OafIID "
+                         "your source code should register '%s'. If your code is "
+                         "performing delayed registration and this message is trapped "
+                         "in error, see oaf_idle_reg_check_set.",
+                         oaf_activation_iid_get ());
+        }
+
+        return FALSE;
+}
+
 OAF_RegistrationResult
 oaf_active_server_register (const char *iid, CORBA_Object obj)
 {
@@ -37,18 +63,17 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
 	CORBA_Environment ev;
 	OAF_RegistrationResult retval;
 	const char *actid;
-	static gboolean need_printout = TRUE;
 
 	CORBA_exception_init (&ev);
 
 	actid = oaf_activation_iid_get ();
 
-	if (actid && !strcmp (actid, iid) && need_printout) {
+	if (actid && !strcmp (actid, iid) && need_ior_printout) {
 		char *iorstr;
 		FILE *fh;
 		int iorfd = oaf_ior_fd_get ();
 
-		need_printout = FALSE;
+		need_ior_printout = FALSE;
 
 		if (iorfd == 1)
 			fh = stdout;
@@ -71,7 +96,7 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
 			close (iorfd);
 	}
 #ifdef OAF_DEBUG
-        else if (actid && need_printout) {
+        else if (actid && need_ior_printout) {
                 g_message ("Unusual '%s' was activated, but "
                            "'%s' is needed", iid, actid);
         }
