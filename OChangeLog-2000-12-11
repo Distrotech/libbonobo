@@ -1,3 +1,8 @@
+2000-07-25  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-uih-menu.c (menu_toplevel_create_widgets): another
+	evil hack to make placeholders work <sigh>, re-write well overdue.
+
 2000-07-24  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-print-client.c (bonobo_print_data_render): remove
