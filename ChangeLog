@@ -1,5 +1,8 @@
 2003-09-12  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* tests/Makefile.am (EXTRA_DIST): Removed non-existent file
+	clean-warnings.sed.
+
 	* doc/activation-api/tutorial.sgml: In the section "The need for a
 	replacement" we should be talking about replacing gnorba, not
 	bonobo activation.
