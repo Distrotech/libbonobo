@@ -1,3 +1,7 @@
+2001-02-14  Cody Russell  <bratsche@gnome.org>
+	* bonobo/bonobo-zoomable.c: Append the array, not the address of
+	the array.  *duh*  Thanks, Mike Engber.
+
 2001-02-13  Dan Winship  <danw@ximian.com>
 
 	* bonobo/bonobo-listener.c (impl_Bonobo_Listener_event): ref the
