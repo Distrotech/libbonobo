@@ -23,27 +23,27 @@
  *
  */
 
-#include "config.h"
+#include <config.h>
+#include "bonobo-activation-init.h"
+
+#include "Bonobo_ActivationContext.h"
 #include "bonobo-activation-i18n.h"
-
-#include "bonobo-activation/bonobo-activation.h"
-#include "bonobo-activation/bonobo-activation-private.h"
-#include "bonobo-activation/bonobo-activation-register.h"
-
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
+#include "bonobo-activation-private.h"
+#include "bonobo-activation-register.h"
+#include "bonobo-activation-version.h"
 #include <arpa/inet.h>
-#include <unistd.h>
 #include <fcntl.h>
+#include <glib.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <popt.h>
 #include <signal.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <glib.h>
-#include <popt.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 /****************** ORBit-specific stuff ****************/
 
@@ -420,10 +420,10 @@ bonobo_activation_is_initialized (void)
  */
 
 char *
-bonobo_activation_get_popt_table_name ()
+bonobo_activation_get_popt_table_name (void)
 {
         bindtextdomain (PACKAGE, BONOBO_ACTIVATION_LOCALEDIR);
-        return _("OAF options");
+        return _("Bonobo activation options");
 }
 
 

@@ -22,13 +22,14 @@
  */
 
 #include <config.h>
-
 #include <bonobo-activation/bonobo-activation-async.h>
-#include <bonobo-activation/bonobo-activation-async-callback.h>
-#include <bonobo-activation/bonobo-activation-activate.h>
+
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 #include <bonobo-activation/bonobo-activation-activate-private.h>
-#include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/bonobo-activation-activate.h>
+#include <bonobo-activation/bonobo-activation-async-callback.h>
 #include <bonobo-activation/bonobo-activation-id.h>
+#include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/bonobo-activation-private.h>
 
 

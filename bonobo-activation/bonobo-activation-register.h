@@ -27,7 +27,7 @@
 #define BONOBO_ACTIVATION_REGISTER_H
 
 #include <orbit/orbit.h>
-#include <bonobo-activation/Bonobo_ActivationContext.h>
+#include <bonobo-activation/Bonobo_Activation_types.h>
 
 Bonobo_RegistrationResult bonobo_activation_active_server_register (const char  *iid,
                                                                  CORBA_Object obj);

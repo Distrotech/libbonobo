@@ -26,7 +26,7 @@
 #ifndef BONOBO_ACTIVATION_ID_H
 #define BONOBO_ACTIVATION_ID_H
 
-#include <bonobo-activation/Bonobo_ActivationContext.h>
+#include <bonobo-activation/Bonobo_Activation_types.h>
 
 /* If you wish to manipulate the internals of this structure, please
    use g_malloc/g_free to allocate memory. */

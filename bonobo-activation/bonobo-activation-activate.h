@@ -26,7 +26,7 @@
 #ifndef BONOBO_ACTIVATION_ACTIVATE_H
 #define BONOBO_ACTIVATION_ACTIVATE_H
 
-#include <bonobo-activation/Bonobo_ActivationContext.h>
+#include <bonobo-activation/Bonobo_Activation_types.h>
 
 
 CORBA_Object bonobo_activation_name_service_get (CORBA_Environment * ev);

@@ -26,7 +26,7 @@
 #ifndef BONOBO_ACTIVATION_SERVER_INFO_H
 #define BONOBO_ACTIVATION_SERVER_INFO_H
 
-#include <bonobo-activation/Bonobo_ActivationContext.h>
+#include <bonobo-activation/Bonobo_Activation_types.h>
 
 Bonobo_ActivationProperty *bonobo_server_info_prop_find        (Bonobo_ServerInfo                      *server,
                                                                 const char                             *prop_name);

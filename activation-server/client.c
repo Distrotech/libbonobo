@@ -31,6 +31,7 @@
 
 #include <bonobo-activation/bonobo-activation.h>
 #include <bonobo-activation/bonobo-activation-private.h>
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 
 static char *acior = NULL, *specs = NULL;
 static int do_query;

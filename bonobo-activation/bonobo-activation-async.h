@@ -26,7 +26,8 @@
 #ifndef BONOBO_ACTIVATION_ASYNC_H
 #define BONOBO_ACTIVATION_ASYNC_H
 
-#include <bonobo-activation/Bonobo_ActivationContext.h>
+#include <bonobo-activation/Bonobo_Activation_types.h>
+
 /* activated_object is CORBA_OBJECT_NIL if the activation 
    failed somehow. If this is the case, error_reason contains
    a valid string which describes the pb encountered.

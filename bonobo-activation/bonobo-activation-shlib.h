@@ -26,7 +26,7 @@
 #ifndef BONOBO_ACTIVATION_SHLIB_H
 #define BONOBO_ACTIVATION_SHLIB_H
 
-#include <bonobo-activation/Bonobo_ActivationContext.h>
+#include <bonobo-activation/Bonobo_Activation_types.h>
 
 typedef struct {
 	const char *iid;

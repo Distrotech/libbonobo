@@ -26,7 +26,6 @@
 #ifndef BONOBO_ACTIVATION_ASYNC_CORBA_H
 #define BONOBO_ACTIVATION_ASYNC_CORBA_H
 
-#include <bonobo-activation/Bonobo_ActivationContext.h>
 #include <bonobo-activation/bonobo-activation-async.h>
 
 CORBA_Object 
