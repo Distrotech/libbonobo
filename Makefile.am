@@ -18,10 +18,10 @@ EXTRA_DIST = \
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
 install-data-local:
-	-mkdir -p $(sysconfdir)/bonobo-activation
-	if test -f $(sysconfdir)/bonobo-activation/bonobo-activation-config.xml; then		\
+	-mkdir -p $(DESTDIR)$(sysconfdir)/bonobo-activation
+	if test -f $(DESTDIR)$(sysconfdir)/bonobo-activation/bonobo-activation-config.xml; then		\
 		echo "bonobo-activation-config.xml configuration file not changed";		\
 	else											\
 		$(INSTALL_DATA) $(top_srcdir)/bonobo-activation-config.xml			\
-			$(sysconfdir)/bonobo-activation;					\
+			$(DESTDIR)$(sysconfdir)/bonobo-activation;					\
 	fi
