@@ -12,6 +12,7 @@
 
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
+#include <bonobo/bonobo-moniker-extender.h>
 #include <bonobo/bonobo-activation-context.h>
 
 POA_Bonobo_ActivationContext__vepv bonobo_activation_context_vepv;
@@ -44,6 +45,15 @@ impl_Bonobo_ActivationContext_getObject (PortableServer_Servant servant,
 	return bonobo_get_object (name, repo_id, ev);
 }
 
+static Bonobo_MonikerExtender
+impl_Bonobo_ActivationContext_getExtender (PortableServer_Servant servant,
+					   const CORBA_char      *monikerPrefix,
+					   const CORBA_char      *interfaceId,
+					   CORBA_Environment     *ev)
+{
+	return bonobo_moniker_find_extender (monikerPrefix, interfaceId, ev);
+}
+
 /**
  * bonobo_activation_context_get_epv:
  *
@@ -59,6 +69,7 @@ bonobo_activation_context_get_epv (void)
 	epv->getObject        = impl_Bonobo_ActivationContext_getObject;
 	epv->createFromName   = impl_Bonobo_ActivationContext_createFromName;
 	epv->createWithParent = impl_Bonobo_ActivationContext_createWithParent;
+	epv->getExtender      = impl_Bonobo_ActivationContext_getExtender;
 
 	return epv;
 }

@@ -14,35 +14,7 @@
 
 #include "bonobo-moniker-item.h"
 
-#define PREFIX_LEN (sizeof ("!") - 1)
-
 static BonoboMonikerClass *bonobo_moniker_item_parent_class;
-
-static Bonobo_Moniker 
-item_parse_display_name (BonoboMoniker     *moniker,
-			 Bonobo_Moniker     parent,
-			 const CORBA_char  *name,
-			 CORBA_Environment *ev)
-{
-	BonoboMonikerItem *m_item = BONOBO_MONIKER_ITEM (moniker);
-	int i;
-
-	g_return_val_if_fail (m_item != NULL,
-			      CORBA_OBJECT_NIL);
-
-	bonobo_moniker_set_parent (moniker, parent, ev);
-
-	i = bonobo_moniker_util_seek_std_separator (name, PREFIX_LEN);
-	bonobo_moniker_set_name (moniker, name, i);
-
-	if (name [i])
-		return bonobo_moniker_util_new_from_name_full (
-			bonobo_object_corba_objref (BONOBO_OBJECT (m_item)),
-			&name [i], ev);
-	else
-		return bonobo_object_dup_ref (
-			bonobo_object_corba_objref (BONOBO_OBJECT (m_item)), ev);
-}
 
 static Bonobo_Unknown
 item_resolve (BonoboMoniker               *moniker,
@@ -81,7 +53,7 @@ item_resolve (BonoboMoniker               *moniker,
 	}
 
 	containee = Bonobo_ItemContainer_getObjectByName (
-		container, bonobo_moniker_get_name (moniker, PREFIX_LEN),
+		container, bonobo_moniker_get_name (moniker),
 		TRUE, ev);
 
 	bonobo_object_release_unref (container, ev);
@@ -102,7 +74,6 @@ bonobo_moniker_item_class_init (BonoboMonikerItemClass *klass)
 	bonobo_moniker_item_parent_class = gtk_type_class (
 		bonobo_moniker_get_type ());
 
-	mclass->parse_display_name = item_parse_display_name;
 	mclass->resolve            = item_resolve;
 }
 
@@ -132,4 +103,12 @@ bonobo_moniker_item_get_type (void)
 	}
 
 	return type;
+}
+
+BonoboMoniker *
+bonobo_moniker_item_new (void)
+{
+	BonoboMoniker *moniker = gtk_type_new (bonobo_moniker_item_get_type ());
+
+	return bonobo_moniker_construct (moniker, CORBA_OBJECT_NIL, "!");
 }

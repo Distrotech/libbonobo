@@ -1,3 +1,60 @@
+2000-12-16  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/bonobo-moniker-query.c (query_resolve): upd.
+
+	* monikers/bonobo-moniker-new.c (new_parse_display_name): kill.
+	(new_resolve): upd.
+	(bonobo_moniker_new_class_init): upd.
+
+	* monikers/bonobo-moniker-oaf.c (oaf_parse_display_name): kill.
+	(bonobo_moniker_oaf_new): impl.
+
+	* monikers/bonobo-moniker-http.c (bonobo_moniker_http_factory): simplify.
+	(last_unref_cb): impl.
+	remove running object stuff.
+	(http_destroy_cb): kill.
+	(bonobo_moniker_http_new): shrink.
+	(bonobo_moniker_http_class_init): upd.
+	(http_parse_display_name): kill.
+
+	* monikers/bonobo-moniker-gunzip.c (bonobo_moniker_gunzip_new): upd.
+	(gunzip_destroy_cb): kill.
+	remove running objects stuff.
+	(last_unref_cb): impl.
+	(gunzip_parse_display_name): kill.
+	(bonobo_moniker_gunzip_class_init): upd.
+
+	* monikers/bonobo-moniker-item.c (item_parse_display_name): kill.
+	(bonobo_moniker_item_new): impl.
+	(item_resolve): upd.
+	(bonobo_moniker_item_class_init): upd.
+
+	* monikers/std-moniker.c (main, last_unref_cb): update to new
+	running context scheme.
+	(std_destroy_cb): kill old scheme.
+	(bonobo_moniker_factory): update to new constructors.
+
+	* monikers/bonobo-moniker-file.c (file_parse_display_name): kill.
+	(file_resolve): prune.
+	(bonobo_moniker_file_class_init): upd.
+
+2000-12-15  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker.c (impl_resolve): add auto exception
+	set on CORBA_OBJECT_NIL, impl. extenders.
+	(bonobo_moniker_construct): impl.
+	(bonobo_moniker_default_parse_display_name): impl.
+	(bonobo_moniker_get_name): simplify.
+	(bonobo_moniker_get_name_escaped): simplify.
+
+	* tests/test-moniker.c (check_string): upd.
+
+	* bonobo/bonobo-activation-context.c (impl_Bonobo_ActivationContext_getExtender): 
+	impl. (bonobo_activation_context_get_epv): hook up.
+
+	* bonobo/bonobo-moniker-extender.c (bonobo_moniker_find_extender): 
+	allow 1 MonikerExtender to extend many monikers.
+
 2000-12-15  Dietmar Maurer <dietmar@maurer-it.com>
 
 	* monikers/bonobo-moniker-file.c (file_resolve): impl.

@@ -16,28 +16,6 @@
 
 static BonoboMonikerClass *bonobo_moniker_oaf_parent_class;
 
-static Bonobo_Moniker 
-oaf_parse_display_name (BonoboMoniker     *moniker,
-			Bonobo_Moniker     parent,
-			const CORBA_char  *name,
-			CORBA_Environment *ev)
-{
-	BonoboMonikerOaf *m_oaf = BONOBO_MONIKER_OAF (moniker);
-	int i;
-
-	g_return_val_if_fail (m_oaf != NULL, CORBA_OBJECT_NIL);
-
-	bonobo_moniker_set_parent (moniker, parent, ev);
-
-	i = bonobo_moniker_util_seek_std_separator (name, 0);
-
-	bonobo_moniker_set_name (moniker, name, i);
-
-	return bonobo_moniker_util_new_from_name_full (
-		bonobo_object_corba_objref (BONOBO_OBJECT (m_oaf)),
-		&name [i], ev);
-}
-
 static Bonobo_Unknown
 oaf_resolve (BonoboMoniker               *moniker,
 	     const Bonobo_ResolveOptions *options,
@@ -62,7 +40,7 @@ oaf_resolve (BonoboMoniker               *moniker,
 	}
 
 	object = oaf_activate_from_id (
-		(char *)bonobo_moniker_get_name (moniker, 0), 0, NULL, ev);
+		(char *) bonobo_moniker_get_name (moniker), 0, NULL, ev);
 
 	return bonobo_moniker_util_qi_return (object, requested_interface, ev);
 }
@@ -75,8 +53,7 @@ bonobo_moniker_oaf_class_init (BonoboMonikerOafClass *klass)
 	bonobo_moniker_oaf_parent_class = gtk_type_class (
 		bonobo_moniker_get_type ());
 
-	mclass->parse_display_name = oaf_parse_display_name;
-	mclass->resolve            = oaf_resolve;
+	mclass->resolve = oaf_resolve;
 }
 
 /**
@@ -105,4 +82,12 @@ bonobo_moniker_oaf_get_type (void)
 	}
 
 	return type;
+}
+
+BonoboMoniker *
+bonobo_moniker_oaf_new (void)
+{
+	return bonobo_moniker_construct (
+		gtk_type_new (bonobo_moniker_oaf_get_type ()),
+		CORBA_OBJECT_NIL, "oaf:");
 }

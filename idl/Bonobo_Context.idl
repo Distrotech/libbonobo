@@ -1,16 +1,16 @@
 /*
  * bonobo-context.idl: Exposes global bonobo functionality
  *
- * Copyright (C) 1999, 2000  Helix Code, Inc.
- *
  * Author:
  *    Michael Meeks (michael@helixcode.com)
  *
+ * Copyright (C) 1999, 2000  Helix Code, Inc.
  */
 
 #ifndef BONOBO_CONTEXT_IDL
 #define BONOBO_CONTEXT_IDL
 
+#include "bonobo-stream.idl"
 #include "bonobo-moniker.idl"
 
 module Bonobo {
@@ -43,6 +43,18 @@ module Bonobo {
 		 */
 		Moniker createWithParent (in Moniker optParent,
 					  in string  name);
+
+		/**
+		 * getExtender:
+		 * @monikerName: the name of the moniker to extend eg. 'file'
+		 * @interface: the interface we want to resolve against
+		 *
+		 *  Finds an extender that can be plugged into the object
+		 * namespace later to allow new interfaces to be exported.
+		 * Used in implementing new monikers.
+		 */
+		MonikerExtender getExtender (in string monikerPrefix,
+					     in string interfaceId);
 	};
 
 	/*
@@ -102,6 +114,13 @@ module Bonobo {
 		exception NotSeekable {};
 
 		/**
+		 * getTemp:
+		 * 
+		 * creates a temporary stream
+		 */
+		Stream getTemp ();
+
+		/**
 		 * getMimeType:
 		 * @stream: a seekable stream
 		 *
@@ -127,8 +146,6 @@ module Bonobo {
 			raises (NotSeekable);
 	};
 #endif
-
-	
 };
 
 #endif /* BONOBO_CONTEXT_IDL */

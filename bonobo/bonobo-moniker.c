@@ -12,9 +12,14 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-util.h>
+#include <bonobo/bonobo-moniker-extender.h>
 
 struct _BonoboMonikerPrivate {
 	Bonobo_Moniker parent;
+
+	int            prefix_len;
+	char          *prefix;
+
 	char          *name;
 };
 
@@ -80,14 +85,13 @@ bonobo_moniker_get_parent (BonoboMoniker     *moniker,
 }
 
 const char *
-bonobo_moniker_get_name (BonoboMoniker *moniker,
-			 int            char_offset)
+bonobo_moniker_get_name (BonoboMoniker *moniker)
 {	
 	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
 
 	if (moniker->priv->name)
-		if (strlen (moniker->priv->name) >= char_offset)
-			return & moniker->priv->name [char_offset];
+		return & moniker->priv->name [
+			moniker->priv->prefix_len];
 
 	return "";
 }
@@ -133,10 +137,9 @@ escape_moniker (const char *string,
 }
 
 char *
-bonobo_moniker_get_name_escaped (BonoboMoniker *moniker,
-				 int            char_offset)
+bonobo_moniker_get_name_escaped (BonoboMoniker *moniker)
 {
-	return escape_moniker (moniker->priv->name, char_offset);
+	return escape_moniker (moniker->priv->name, 0);
 }
 
 static char *
@@ -188,6 +191,7 @@ bonobo_moniker_set_name (BonoboMoniker *moniker,
 			 int            num_chars)
 {
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
+	g_return_if_fail (strlen (name) > moniker->priv->prefix_len);
 
 	g_free (moniker->priv->name);
 	moniker->priv->name = unescape_moniker (name, num_chars);
@@ -224,6 +228,30 @@ bonobo_moniker_default_get_display_name (BonoboMoniker     *moniker,
 	return ans;
 }
 
+static Bonobo_Moniker
+bonobo_moniker_default_parse_display_name (BonoboMoniker     *moniker,
+					   Bonobo_Moniker     parent,
+					   const CORBA_char  *name,
+					   CORBA_Environment *ev)
+{
+	int i;
+	
+	g_return_val_if_fail (moniker != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (moniker->priv != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (moniker->priv->prefix != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (strlen (name) >= moniker->priv->prefix_len, CORBA_OBJECT_NIL);
+
+	bonobo_moniker_set_parent (moniker, parent, ev);
+
+	i = bonobo_moniker_util_seek_std_separator (name, moniker->priv->prefix_len);
+
+	bonobo_moniker_set_name (moniker, name, i);
+
+	return bonobo_moniker_util_new_from_name_full (
+		bonobo_object_corba_objref (BONOBO_OBJECT (moniker)),
+		&name [i], ev);	
+}
+
 static CORBA_char *
 impl_get_display_name (PortableServer_Servant servant,
 		       CORBA_Environment     *ev)
@@ -251,9 +279,40 @@ impl_resolve (PortableServer_Servant       servant,
 	      CORBA_Environment           *ev)
 {
 	BonoboMoniker *moniker = bonobo_moniker_from_servant (servant);
+	Bonobo_Unknown retval;
 
-	return CLASS (moniker)->resolve (moniker, options,
-					 requested_interface, ev);
+	/* Try a standard resolve */
+	retval = CLASS (moniker)->resolve (moniker, options,
+					   requested_interface, ev);
+
+	/* Try an extender */
+	if (!BONOBO_EX (ev) && retval == CORBA_OBJECT_NIL) {
+		Bonobo_Unknown extender;
+		
+		extender = bonobo_moniker_find_extender (
+			moniker->priv->prefix,
+			requested_interface, ev);
+		
+		if (BONOBO_EX (ev))
+			return CORBA_OBJECT_NIL;
+
+		else if (extender != CORBA_OBJECT_NIL) {
+			retval = Bonobo_MonikerExtender_resolve (
+				extender, 
+				bonobo_object_corba_objref (BONOBO_OBJECT (moniker)),
+				moniker->priv->name,
+				requested_interface, ev);
+
+			bonobo_object_release_unref (extender, ev);
+		}
+	}
+
+	if (!BONOBO_EX (ev) && retval == CORBA_OBJECT_NIL)
+		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+				     ex_Bonobo_Moniker_InterfaceNotFound,
+				     NULL);
+
+	return retval;
 }
 
 /**
@@ -293,8 +352,8 @@ bonobo_moniker_destroy (GtkObject *object)
 	if (moniker->priv->parent != CORBA_OBJECT_NIL)
 		bonobo_object_release_unref (moniker->priv->parent, NULL);
 
+	g_free (moniker->priv->prefix);
 	g_free (moniker->priv->name);
-
 	g_free (moniker->priv);
 
 	GTK_OBJECT_CLASS (bonobo_moniker_parent_class)->destroy (object);
@@ -323,6 +382,7 @@ bonobo_moniker_class_init (BonoboMonikerClass *klass)
 	klass->get_parent = bonobo_moniker_get_parent;
 	klass->set_parent = bonobo_moniker_set_parent;
 	klass->get_display_name = bonobo_moniker_default_get_display_name;
+	klass->parse_display_name = bonobo_moniker_default_parse_display_name;
 
 	init_moniker_corba_class ();
 }
@@ -386,5 +446,33 @@ bonobo_moniker_corba_object_create (BonoboObject *object)
 	CORBA_exception_free (&ev);
 
 	return bonobo_object_activate_servant (object, servant);
+}
+
+BonoboMoniker *
+bonobo_moniker_construct (BonoboMoniker *moniker,
+			  Bonobo_Moniker corba_moniker,
+			  const char    *name)
+{
+	BonoboMoniker *retval;
+
+	if (!corba_moniker) {
+		corba_moniker = bonobo_moniker_corba_object_create (
+			BONOBO_OBJECT (moniker));
+
+		if (corba_moniker == CORBA_OBJECT_NIL) {
+			bonobo_object_unref (BONOBO_OBJECT (moniker));
+			return NULL;
+		}
+	}
+
+	if (name) {
+		moniker->priv->prefix = g_strdup (name);
+		moniker->priv->prefix_len = strlen (name);
+	}
+
+	retval = BONOBO_MONIKER (bonobo_object_construct (
+		BONOBO_OBJECT (moniker), corba_moniker));
+
+	return retval;
 }
 

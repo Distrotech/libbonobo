@@ -200,7 +200,7 @@ bonobo_moniker_extender_new (BonoboMonikerExtenderFn resolve, gpointer data)
 	return bonobo_moniker_extender_construct (extender, corba_extender);
 }
 
-Bonobo_Unknown              
+Bonobo_MonikerExtender
 bonobo_moniker_find_extender (const gchar *name, 
 			      const gchar *interface, 
 			      CORBA_Environment *ev)
@@ -212,7 +212,7 @@ bonobo_moniker_find_extender (const gchar *name,
 	query = g_strdup_printf (
 		"repo_ids.has ('IDL:Bonobo/MonikerExtender:1.0') AND "
 		"repo_ids.has ('%s') AND "
-		"(bonobo:monikerextender == '%s')", interface, name);
+		"bonobo:moniker_extender.has ('%s')", interface, name);
 
 	extender = oaf_activate (query, NULL, 0, &ret_id, ev);
 

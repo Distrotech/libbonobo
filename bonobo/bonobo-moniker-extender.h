@@ -52,7 +52,7 @@ BonoboMonikerExtender           *bonobo_moniker_extender_construct           (Bo
 BonoboMonikerExtender           *bonobo_moniker_extender_new                 (BonoboMonikerExtenderFn resolve,
 									      gpointer                data);
 
-Bonobo_Unknown                   bonobo_moniker_find_extender                (const gchar            *name,
+Bonobo_MonikerExtender           bonobo_moniker_find_extender                (const gchar            *name,
 									      const gchar            *interface,
 									      CORBA_Environment      *ev);
 

@@ -25,7 +25,7 @@ typedef struct {
 
 GtkType        bonobo_moniker_query_get_type  (void);
 BonoboMoniker *bonobo_moniker_query_construct (BonoboMonikerQuery *stream,
-					      Bonobo_Moniker corba_stream);
+					       Bonobo_Moniker corba_stream);
 BonoboMoniker *bonobo_moniker_query_new       (void);
 	
 END_GNOME_DECLS

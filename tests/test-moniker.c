@@ -8,23 +8,33 @@
 #include <bonobo/bonobo.h>
 
 static void
-check_string (const char *escaped, const char *unescaped)
+check_string (const char *prefix, const char *escaped, const char *unescaped)
 {
 	BonoboMoniker *moniker;
+	const char    *const_str;
 	char          *str;
-	const char    *cstr;
+	char          *s;
 
-	moniker = gtk_type_new (bonobo_moniker_get_type ());
+	moniker = bonobo_moniker_construct (gtk_type_new (bonobo_moniker_get_type ()),
+					    CORBA_OBJECT_NIL, prefix);
 
-	bonobo_moniker_set_name (moniker, escaped, strlen (escaped));
-	cstr = bonobo_moniker_get_name (moniker, 0);
-	fprintf (stderr, "'%s' == '%s'\n", unescaped, cstr);
-	g_assert (!strcmp (cstr, unescaped));
+	
+	s = g_strconcat (prefix, escaped, NULL);
+	bonobo_moniker_set_name (moniker, s, strlen (s));
+	g_free (s);
 
-	str = bonobo_moniker_get_name_escaped (moniker, 0);
-	fprintf (stderr, "'%s' == '%s'\n", str, escaped);
-	g_assert (!strcmp (str, escaped));
+
+	const_str = bonobo_moniker_get_name (moniker);
+	fprintf (stderr, "'%s' == '%s'\n", unescaped, const_str);
+	g_assert (!strcmp (const_str, unescaped));
+
+
+	s = g_strconcat (prefix, escaped, NULL);
+	str = bonobo_moniker_get_name_escaped (moniker);
+	fprintf (stderr, "'%s' == '%s'\n", str, s);
+	g_assert (!strcmp (str, s));
 	g_free (str);
+	g_free (s);
 
 	bonobo_object_unref (BONOBO_OBJECT (moniker));
 }
@@ -47,14 +57,15 @@ main (int argc, char *argv [])
 	if (bonobo_init (orb, NULL, NULL) == FALSE)
 		g_error ("Can not bonobo_init");
 
-	check_string ("a:\\\\", "a:\\");
+	check_string ("a:", "\\\\", "\\");
 
-	check_string ("a:\\#", "a:#");
+	check_string ("a:", "\\#", "#");
 
-	check_string ("a:\\!", "a:!");
+	check_string ("prefix:", "\\!", "!");
 
-	check_string ("a:1\\!\\#\\!\\!\\#\\\\",
-		      "a:1!#!!#\\");
+	check_string ("a:",
+		      "1\\!\\#\\!\\!\\#\\\\",
+		      "1!#!!#\\");
 
 	return 0;
 }

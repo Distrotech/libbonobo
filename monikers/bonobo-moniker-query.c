@@ -93,7 +93,7 @@ query_resolve (BonoboMoniker               *moniker,
 	}
 
 	query = g_strdup_printf ("%s AND repo_ids.has ('%s')",
-				 bonobo_moniker_get_name (moniker, PREFIX_LEN),
+				 bonobo_moniker_get_name (moniker),
 				 requested_interface);
 
 	object = oaf_activate (query, NULL, 0, NULL, ev);
@@ -141,4 +141,12 @@ bonobo_moniker_query_get_type (void)
 	}
 
 	return type;
+}
+
+BonoboMoniker *
+bonobo_moniker_query_new (void)
+{
+	return bonobo_moniker_construct (
+		gtk_type_new (bonobo_moniker_query_get_type ()),
+		CORBA_OBJECT_NIL, "query:(");
 }

@@ -55,6 +55,10 @@ GtkType                  bonobo_moniker_get_type            (void);
 POA_Bonobo_Moniker__epv *bonobo_moniker_get_epv             (void);
 Bonobo_Moniker           bonobo_moniker_corba_object_create (BonoboObject      *object);
 
+BonoboMoniker           *bonobo_moniker_construct           (BonoboMoniker *monike,
+							     Bonobo_Moniker corba_moniker,
+							     const char    *name);
+
 Bonobo_Moniker           bonobo_moniker_get_parent          (BonoboMoniker     *moniker,
 							     CORBA_Environment *ev);
 void                     bonobo_moniker_set_parent          (BonoboMoniker     *moniker,
@@ -64,11 +68,9 @@ void                     bonobo_moniker_set_parent          (BonoboMoniker     *
 /*
  * Common case convenience functions
  */
-const char              *bonobo_moniker_get_name            (BonoboMoniker     *moniker,
-							     int                char_offset);
+const char              *bonobo_moniker_get_name            (BonoboMoniker     *moniker);
 
-char                    *bonobo_moniker_get_name_escaped    (BonoboMoniker     *moniker,
-							     int                char_offset);
+char                    *bonobo_moniker_get_name_escaped    (BonoboMoniker     *moniker);
 
 void                     bonobo_moniker_set_name            (BonoboMoniker     *moniker,
 							     const char        *unescaped_name,
