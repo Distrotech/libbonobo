@@ -7,6 +7,7 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
+#include <bonobo/gnome-moniker.h>
 
 /* Parent GTK object class */
 static GnomePersistStreamClass *gnome_moniker_parent_class;
@@ -25,6 +26,7 @@ impl_bind_to_object (PortableServer_Servant servant,
 		     CORBA_Environment *ev)
 {
 	g_error ("not implemented");
+	return CORBA_OBJECT_NIL;
 }
 
 
@@ -36,6 +38,7 @@ impl_bind_to_storage (PortableServer_Servant servant,
 		      CORBA_Environment *ev)
 {
 	g_error ("not implemented");
+	return CORBA_OBJECT_NIL;
 }
 
 
@@ -46,6 +49,7 @@ impl_compose_with (PortableServer_Servant servant,
 		   CORBA_Environment * ev)
 {
 	g_error ("not implemented");
+	return CORBA_OBJECT_NIL;
 }
 
 static GNOME_Moniker_MonikerList *
@@ -54,6 +58,7 @@ impl_enum_pieces (PortableServer_Servant servant,
 		  CORBA_Environment * ev)
 {
 	g_error ("not implemented");
+	return CORBA_OBJECT_NIL;
 }
 
 
@@ -64,6 +69,7 @@ impl_get_display_name (PortableServer_Servant servant,
 		       CORBA_Environment * ev)
 {
 	g_error ("not implemented");
+	return CORBA_OBJECT_NIL;
 }
 
 static GNOME_Moniker
@@ -75,6 +81,7 @@ impl_parse_display_name (PortableServer_Servant servant,
 			 CORBA_Environment * ev)
 {
 	g_error ("not implemented");
+	return CORBA_OBJECT_NIL;
 }
 
 static void
@@ -89,17 +96,17 @@ init_moniker_corba_class (void)
 	gnome_moniker_epv.parse_display_name = impl_parse_display_name;
 		
 	/* Now the Vepv */
-	gnome_moniker_vepv.GNOME_object = &gnome_object_epv;
-	gnome_moniker_vepv.GNOME_Persist = &gnome_persist_epv;
-	gnome_moniker_vepv.GNOME_PersistStream = &gnome_persist_stream_epv;
-	gnome_moniker_vepv.GNOME_Moniker = &gnome_moniker_epv
+	gnome_moniker_vepv.GNOME_object_epv = &gnome_object_epv;
+	gnome_moniker_vepv.GNOME_Persist_epv = &gnome_persist_epv;
+	gnome_moniker_vepv.GNOME_PersistStream_epv = &gnome_persist_stream_epv;
+	gnome_moniker_vepv.GNOME_Moniker_epv = &gnome_moniker_epv;
 }
 
 static void
 gnome_moniker_class_init (GnomeMonikerClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
-	GnomePersistStream *ps_class = (GnomePersistStreamClass *) class;
+	GnomePersistStreamClass *ps_class = (GnomePersistStreamClass *) class;
 	
 	gnome_moniker_parent_class = gtk_type_class (gnome_persist_stream_get_type ());
 
@@ -107,12 +114,15 @@ gnome_moniker_class_init (GnomeMonikerClass *class)
 }
 
 GnomeMoniker *
-gnome_moniker_construct (GnomeMoniker *moniker)
+gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker)
 {
 	g_return_val_if_fail (moniker != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MONIKER (moniker), NULL);
+	g_return_val_if_fail (corba_moniker != CORBA_OBJECT_NIL, NULL);
 
-	gnome_persist_stream_construct (GNOME_PERSIST_STREAM (moniker), NULL, NULL, NULL);
+	gnome_persist_stream_construct (GNOME_PERSIST_STREAM (moniker),
+					(GNOME_Moniker) corba_moniker,
+					NULL, NULL, NULL);
 	return moniker;
 }
 

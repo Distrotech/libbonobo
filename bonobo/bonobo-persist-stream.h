@@ -48,10 +48,12 @@ GnomePersistStream *gnome_persist_stream_new       (GnomePersistStreamIOFn load_
 						    GnomePersistStreamIOFn save_fn,
 						    void *closure);
 GnomePersistStream *gnome_persist_stream_construct (GnomePersistStream *ps,
+						    GNOME_PersistStream corba_ps,
 						    GnomePersistStreamIOFn load_fn,
 						    GnomePersistStreamIOFn save_fn,
 						    void *closure);
 
+extern POA_GNOME_PersistStream__epv gnome_persist_stream_epv;
 END_GNOME_DECLS
 
 #endif /* _GNOME_PERSIST_STREAM_H_ */

@@ -20,8 +20,10 @@ typedef struct {
 } GnomePersistClass;
 
 GtkType       gnome_persist_get_type  (void);
-GnomePersist *gnome_persist_construct (GnomePersist *persist);
+GnomePersist *gnome_persist_construct (GnomePersist *persist,
+				       GNOME_Persist corba_persist);
 
+extern POA_GNOME_Persist__epv gnome_persist_epv;
 END_GNOME_DECLS
 
 #endif /* _GNOME_PERSIST_H_ */

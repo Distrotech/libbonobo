@@ -7,12 +7,20 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
+#include <bonobo/gnome-persist.h>
 
 /* Parent GTK object class */
 static GnomeObjectClass *gnome_persist_parent_class;
 
+POA_GNOME_Persist__epv gnome_persist_epv;
+
 static void
 init_persist_corba_class (void)
+{
+}
+
+static void
+gnome_persist_destroy (GtkObject *object)
 {
 }
 
@@ -37,12 +45,14 @@ gnome_persist_init (GnomePersist *persist)
 }
 
 GnomePersist *
-gnome_persist_construct (GnomePersist *persist)
+gnome_persist_construct (GnomePersist *persist, GNOME_Persist corba_persist)
 {
 	g_return_val_if_fail (persist != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PERSIST (persist), NULL);
 
-	gnome_object_construct (GNOME_OBJECT (persist));
+	gnome_object_construct (GNOME_OBJECT (persist), corba_persist);
+
+	return persist;
 }
 
 GtkType

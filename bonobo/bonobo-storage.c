@@ -70,12 +70,13 @@ impl_list_contents (PortableServer_Servant servant,
 {
 }
 
+#if 0
 gnome_save (GnomeObject *object, GnomeStorage *storage)
 {
 	GnomePersistStorage *persist;
 	
-	g_return_val_if_fail (object != NULL);
-	g_return_val_if_fail (storage != NULL);
+	g_return_val_if_fail (object != NULL, NULL);
+	g_return_val_if_fail (storage != NULL, NULL);
 
 	persist = gtk_object_query_interface (
 		GTK_OBJECT (object), gnome_persist_storage_get_type ());
@@ -88,6 +89,7 @@ gnome_save (GnomeObject *object, GnomeStorage *storage)
 	if (gnome_persist_storage_save (persist, storage) == NO_ERROR)
 		gnome_persist_storage_commit (persist);
 }
+#endif
 
 static void
 init_storage_corba_class (void)
@@ -153,7 +155,7 @@ gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage,
 {
 	StorageHandle *handle;
 	
-	g_return_val_if_fail (storage != NULL);
+	g_return_val_if_fail (storage != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_STORAGE (storage), NULL);
 	g_return_val_if_fail (corba_storage != CORBA_OBJECT_NIL, NULL);
 
