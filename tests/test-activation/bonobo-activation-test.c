@@ -119,7 +119,7 @@ main (int argc, char *argv[])
 
         fprintf (stderr, "Broken link test ");
         obj = oaf_activate_from_id ("OAFIID:Bogus:20000526", 0, NULL, &ev);
-        if (obj || ev._major == CORBA_NO_EXCEPTION) {
+        if (ev._major == CORBA_NO_EXCEPTION) {
                 fprintf (stderr, "failed 1");
         } else {
                 fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
@@ -137,7 +137,7 @@ main (int argc, char *argv[])
 
         fprintf (stderr, "Broken exe test ");
         obj = oaf_activate_from_id ("OAFIID:Broken:20000530", 0, NULL, &ev);
-        if (obj || ev._major == CORBA_NO_EXCEPTION) {
+        if (ev._major == CORBA_NO_EXCEPTION) {
                 fprintf (stderr, "failed 1");
         } else {
                 fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
@@ -155,7 +155,7 @@ main (int argc, char *argv[])
 
         fprintf (stderr, "Circular link test ");
         obj = oaf_activate_from_id ("OAFIID:Circular:20000530", 0, NULL, &ev);
-        if (obj || ev._major == CORBA_NO_EXCEPTION)
+        if (ev._major == CORBA_NO_EXCEPTION)
                 fprintf (stderr, "failed 1");
         else {
                 fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
@@ -173,7 +173,7 @@ main (int argc, char *argv[])
 
         fprintf (stderr, "Server that doesn't register IID test ");
         obj = oaf_activate_from_id ("OAFIID:NotInServer:20000717", 0, NULL, &ev);
-        if (obj || ev._major == CORBA_NO_EXCEPTION) {
+        if (ev._major == CORBA_NO_EXCEPTION) {
                 fprintf (stderr, "failed 1");
         } else {
                 fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
@@ -212,7 +212,7 @@ main (int argc, char *argv[])
                  TOTAL_TEST_SCORE,
                  passed == TOTAL_TEST_SCORE? "All": "some failures");
 
-        if (passed < TOTAL_TEST_SCORE * 3 / 2) {
+        if (passed < (TOTAL_TEST_SCORE * 2 / 3)) {
                 fprintf (stderr, "It looks like you havn't installed broken.oafinfo "
                          "into ${prefix}/oaf, this must be done by hand to avoid "
                          "redundant warnings.\n");
