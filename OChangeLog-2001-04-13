@@ -1,3 +1,8 @@
+1999-07-08  Miguel de Icaza  <miguel@gnu.org>
+
+	* components/text-plain/bonobo-text-plain.c
+	(bonobo_object_factory): Removed unused initialization.
+
 1999-07-08  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/Makefile.am: Don't compile gnome-ui-handler yet.
