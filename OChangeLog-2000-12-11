@@ -1,3 +1,9 @@
+1999-06-26  Matt Loper  <matt@gnome-support.com>
+
+	* bonobo/gnome-persist-file.h: new file.
+
+	* bonobo/gnome-persist-file.c: new file.
+
 1999-06-23  Matt Loper  <matt@gnome-support.com>
 
 	* bonobo/test-container-autoload.c
