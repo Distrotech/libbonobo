@@ -1,8 +1,8 @@
 #include <config.h>
 #include <bonobo/gnome-component-io.h>
 
-GnomeComponent *
-gnome_component_load (GnomeStorage *storage, const char *interface, GnomeClientSite *client_site)
+GnomeBonoboObject *
+gnome_bonobo_object_load (GnomeStorage *storage, const char *interface, GnomeClientSite *client_site)
 {
 	/*
 	 * 1. Get the class ID from the open Storage, by
@@ -14,7 +14,7 @@ gnome_component_load (GnomeStorage *storage, const char *interface, GnomeClientS
 	 */
 
 	/*
-	 * 3. Call Component::SetClientSite to inform about the client
+	 * 3. Call BonoboObject::SetClientSite to inform about the client
 	 * site
 	 */
 
@@ -32,8 +32,8 @@ gnome_component_load (GnomeStorage *storage, const char *interface, GnomeClientS
 /*
  *
  */
-GnomeComponent *
-gnome_component_load_from_stream (GnomeStream *stream, const char *interface)
+GnomeBonoboObject *
+gnome_bonobo_object_load_from_stream (GnomeStream *stream, const char *interface)
 {
 	/*
 	 * 1. Load the class id from @stream
@@ -53,13 +53,13 @@ gnome_component_load_from_stream (GnomeStream *stream, const char *interface)
 }
 
 int
-gnome_component_save (GnomeComponent *component, GnomeStorage *storage, gboolean same_as_loaded)
+gnome_bonobo_object_save (GnomeBonoboObject *bonobo_object, GnomeStorage *storage, gboolean same_as_loaded)
 {
 	GnomePersisStorage *persist_storage;
 	char *class;
 	
 	persist_storage = gnome_object_query_interface (
-		component, "IDL:GNOME/PersistStorage:1.0");
+		bonobo_object, "IDL:GNOME/PersistStorage:1.0");
 
 	if (persist_storage == NULL)
 		return -1;
@@ -75,13 +75,13 @@ gnome_component_save (GnomeComponent *component, GnomeStorage *storage, gboolean
 }
 
 int
-gnome_component_save_to_stream (GnomeComponent *component, GnomeStream *stream)
+gnome_bonobo_object_save_to_stream (GnomeBonoboObject *bonobo_object, GnomeStream *stream)
 {
 	GnomePersisStream *persist_stream;
 	char *class;
 	
 	persist_stream = gnome_object_query_interface (
-		component, "IDL:GNOME/PersistStream:1.0");
+		bonobo_object, "IDL:GNOME/PersistStream:1.0");
 
 	if (persist_stream == NULL)
 		return -1;

@@ -248,7 +248,7 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 		/*
 		 * FIXME: I need to ask Elliot why I need to
 		 * duplicate the object here. (otherise the
-		 * gnome-component-container ends up with a
+		 * gnome-bonobo-object-container ends up with a
 		 * refcount of 0
 		 */
 		gnome_object_bind_to_servant (object, servant);

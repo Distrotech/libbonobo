@@ -1,3 +1,55 @@
+1999-05-30  Matt Loper  <matt@gnome-support.com>
+
+	* idl/gnome-component.idl (GNOME): Changed the GNOME::Component
+	interface to GNOME::BonoboObject. This implies changes in all of
+	the following files.
+
+	* idl/gnome-persist.idl (GNOME): likewise
+
+	* idl/gnome-inplace.idl (GNOME): likewise
+
+	* components/text-plain/text-plain.gnorba: likewise
+
+	* components/text-plain/bonobo-text-plain.c: likewise
+
+	* components/image-x-png/image-x-png.gnorba: likewise
+
+	* components/image-x-png/bonobo-image-x-png.c: likewise
+
+	* bonobo/test-container.c: likewise
+
+	* bonobo/test-container-autoload.c: likewise 
+
+	* bonobo/sample.gnorba: likewise
+
+	* bonobo/sample-server.c: likewise
+
+	* bonobo/gnome-object.c: likewise
+
+	* bonobo/gnome-inplace-component.c: likewise
+
+	* bonobo/gnome-container.c: likewise.
+
+	* bonobo/gnome-component.h: likewise
+
+	* bonobo/gnome-component.c: likewise
+
+	* bonobo/gnome-component-io.h: likewise
+
+	* bonobo/gnome-component-io.c: likewise
+
+	* bonobo/gnome-component-factory.h: likewise
+
+	* bonobo/gnome-component-factory.c: likewise
+
+	* bonobo/gnome-component-client.h: likewise
+
+	* bonobo/gnome-component-client.c: likewise
+
+	* bonobo/gnome-client-site.h: likewise
+
+	* bonobo/gnome-client-site.c:likewise
+
 1999-05-29  Nat Friedman  <nat@gnome-support.com>
 
 	* components/text-plain/bonobo-text-plain.c (view_factory): Put

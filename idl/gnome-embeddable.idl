@@ -30,7 +30,7 @@ interface View : GNOME::obj {
 };
 
 /* Equivalent to IOleObject */
-interface Component : GNOME::obj {
+interface BonoboObject : GNOME::obj {
 
 	typedef long Verb;
 	const Verb PRIMARY = 0; // Action invoked when user double clicks on
@@ -171,7 +171,7 @@ interface Component : GNOME::obj {
 
 };
 
-interface InPlaceComponent : Component {
+interface InPlaceBonoboObject : BonoboObject {
 	/**
 	 * deactivate:
 	 *
@@ -184,7 +184,7 @@ interface InPlaceComponent : Component {
 	/**
 	 * ui_deactivate:
 	 *
-	 * Deactivates the object and removes the GUI components
+	 * Deactivates the object and removes the GUI bonobo_objects
 	 * for this object (this is done in the containee by calling 
 	 * InPlaceSite::ui_state_notify (FALSE).
 	 */
@@ -223,8 +223,8 @@ interface InPlaceComponent : Component {
 
 };
 
-interface ComponentFactory : GNOME::GenericFactory {
-	Component create_path (in string path);
+interface BonoboObjectFactory : GNOME::GenericFactory {
+	BonoboObject create_path (in string path);
 };
 
 };

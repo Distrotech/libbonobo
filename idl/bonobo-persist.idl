@@ -64,7 +64,7 @@ module GNOME {
 	};
 
 	/*
-	 * PersistStorage is implemented by Components.
+	 * PersistStorage is implemented by BonoboObjects.
 	 * 
 	 * The methods are used by Bonobo and the container
 	 * applications to manipulate the storage of a componet
@@ -83,7 +83,7 @@ module GNOME {
 		 * load:
 		 * @storage: The storage to load the state from
 		 *
-		 * The component should load its state from the
+		 * The bonobo_object should load its state from the
 		 * @storage provided
 		 */
 		void load (in Storage storage);
@@ -91,11 +91,11 @@ module GNOME {
 		/**
 		 * save:
 		 * @storage: The storage in which to save the state
-		 * of the component
+		 * of the bonobo_object
 		 * @same_as_loaded: if TRUE, this means the object
 		 * is being saved to the same source used to load the object
 		 *
-		 * Components should save their sate in the @storage
+		 * BonoboObjects should save their sate in the @storage
 		 */
 		void save (in Storage storage, in boolean same_as_loaded);
 	
@@ -103,7 +103,7 @@ module GNOME {
 		 * init_new:
 		 * @storage: A storage that is provided for this object
 		 *
-		 * Components do have access to a valid storage through
+		 * BonoboObjects do have access to a valid storage through
 		 * their entire life.  This is a chance given to initialize such 
 		 * storage and keep it around (users should addref it).
 		 */
