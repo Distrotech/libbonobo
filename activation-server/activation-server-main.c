@@ -27,14 +27,14 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "server.h"
-#include "bonobo-activation/bonobo-activation-i18n.h"
-
-#include "activation-context-query.h"
-#include "object-directory-config-file.h"
-
 #include <ORBitservices/CosNaming.h>
 #include <ORBitservices/CosNaming_impl.h>
+#include <libbonobo.h>
+
+#include "server.h"
+#include "activation-context.h"
+#include "activation-context-query.h"
+#include "object-directory-config-file.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -172,6 +172,45 @@ nameserver_destroy (PortableServer_POA  poa,
 	CORBA_free (oid);
 }
 
+static void
+dump_ior (CORBA_ORB orb, int dev_null_fd, CORBA_Environment *ev)
+{
+        char *ior;
+        FILE *fh;
+
+	ior = CORBA_ORB_object_to_string (orb, activation_context_get (), ev);
+
+	fh = NULL;
+	if (ior_fd >= 0)
+		fh = fdopen (ior_fd, "w");
+	if (fh) {
+		fprintf (fh, "%s\n", ior);
+		fclose (fh);
+		if (ior_fd <= 2)
+                        dup2 (dev_null_fd, ior_fd);
+	} else {
+		printf ("%s\n", ior);
+		fflush (stdout);
+	}
+        if (dev_null_fd != -1)
+                close (dev_null_fd);
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+	debug_queries ();
+        if (server_reg) {
+                char *fname;
+                fname = g_strconcat (linc_get_tmpdir (),
+                                     "/bonobo-activation-server-ior", NULL);
+                fh = fopen (fname, "w+");
+		fprintf (fh, "%s\n", ior);
+		fclose (fh);
+                g_free (fname);
+        }
+#endif
+
+	CORBA_free (ior);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -184,8 +223,6 @@ main (int argc, char *argv[])
         Bonobo_ObjectDirectory        od;
         poptContext                   ctx;
         int                           dev_null_fd;
-        char                         *ior;
-        FILE                         *fh;
         struct sigaction              sa;
         GString                      *src_dir;
 
@@ -205,7 +242,6 @@ main (int argc, char *argv[])
 	sa.sa_handler = SIG_IGN;
 	sigaction (SIGPIPE, &sa, NULL);
 
-
 	ctx = poptGetContext ("oafd", argc, (const char **)argv, options, 0);
 	while (poptGetNextOpt (ctx) >= 0) ;
 	poptFreeContext (ctx);
@@ -220,7 +256,9 @@ main (int argc, char *argv[])
 
         dev_null_fd = redirect_output (ior_fd);
 
-	orb = bonobo_activation_init (argc, argv);
+        if (!bonobo_init (&argc, argv))
+                g_warning ("Failed to initialize libbonobo");
+	orb = bonobo_activation_orb_get ();
 	main_loop = g_main_loop_new (NULL, FALSE);
 
         add_initial_locales ();
@@ -256,39 +294,9 @@ main (int argc, char *argv[])
          */
         g_assert (server_ac);
         
-        activation_context_init (root_poa, od, ev);
+        activation_context_setup (root_poa, od, ev);
 
-	ior = CORBA_ORB_object_to_string (orb, activation_context_get (), ev);
-
-	fh = NULL;
-	if (ior_fd >= 0)
-		fh = fdopen (ior_fd, "w");
-	if (fh) {
-		fprintf (fh, "%s\n", ior);
-		fclose (fh);
-		if (ior_fd <= 2)
-                        dup2 (dev_null_fd, ior_fd);
-	} else {
-		printf ("%s\n", ior);
-		fflush (stdout);
-	}
-        if (dev_null_fd != -1)
-                close (dev_null_fd);
-
-#ifdef BONOBO_ACTIVATION_DEBUG
-	debug_queries ();
-        if (server_reg) {
-                char *fname;
-                fname = g_strconcat (linc_get_tmpdir (),
-                                     "/bonobo-activation-server-ior", NULL);
-                fh = fopen (fname, "w+");
-		fprintf (fh, "%s\n", ior);
-		fclose (fh);
-                g_free (fname);
-        }
-#endif
-
-	CORBA_free (ior);
+        dump_ior (orb, dev_null_fd, ev);
 
         poa_manager = PortableServer_POA__get_the_POAManager (root_poa, ev);
 	PortableServer_POAManager_activate (poa_manager, ev);
@@ -299,12 +307,12 @@ main (int argc, char *argv[])
         CORBA_Object_release (naming_service, ev);
 
         bonobo_object_directory_shutdown (root_poa, ev);
-        activation_context_shutdown (root_poa, ev);
+        activation_context_shutdown ();
 
         CORBA_Object_release ((CORBA_Object) poa_manager, ev);
         CORBA_Object_release ((CORBA_Object) root_poa, ev);
 
-	return !bonobo_activation_debug_shutdown ();
+	return !bonobo_debug_shutdown ();
 }
 
 #ifdef BONOBO_ACTIVATION_DEBUG

@@ -55,11 +55,6 @@ CORBA_Object             od_server_activate              (Bonobo_ServerInfo     
                                                           CORBA_Environment                  *ev);
 
 /* activation-context-corba.c */
-void                     activation_context_init         (PortableServer_POA     poa,
-                                                          Bonobo_ObjectDirectory dir,
-                                                          CORBA_Environment     *ev);
-void                     activation_context_shutdown     (PortableServer_POA     poa,
-                                                          CORBA_Environment     *ev);
 Bonobo_ActivationContext activation_context_get          (void);
 
 void                     activation_clients_cache_notify (void);

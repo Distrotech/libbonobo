@@ -1,5 +1,16 @@
 2003-04-07  Michael Meeks  <michael@ximian.com>
 
+	* activation-server/activation-server-main.c
+	(main): upd.
+
+	* activation-server/activation-context-corba.c
+	(activation_context_init): use BonoboObject for a major
+	clean. Much internal cleaning ...
+
+	* activation-server/activation-server-main.c (main):
+	init / shutdown libbonobo.
+	(dump_ior): split from main.
+
 	* tests/test-activation/Makefile.am
 	(TESTS_ENVIRONMENT): run tests in an isolated (by TMPDIR)
 	environment, update path for b-a-s activation.
