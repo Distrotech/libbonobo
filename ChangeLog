@@ -1,3 +1,10 @@
+Fri Feb 28 09:15:39 2003    <hidetoshi.tajima@sun.com>
+
+	* bonobo/bonobo-exception.c (BONOBO_EXPLICIT_TRANSLATION_DOMAIN):
+	* bonobo/bonobo-moniker.c (BONOBO_EXPLICIT_TRANSLATION_DOMAIN):
+	* bonobo/bonobo-moniker-util.c (BONOBO_EXPLICIT_TRANSLATION_DOMAIN):
+	use GETTEXT_PACKAGE instead of PACKAGE (#107228).
+
 2003-02-19  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* monikers/bonobo-moniker-std.c (bonobo_std_moniker_factory): idem.
