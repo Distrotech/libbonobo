@@ -28,7 +28,7 @@ emptydata_DATA=$(oaffiles)
 
 bin_SCRIPTS=oaf-slay
 
-oaf-slay: oaf-slay.tmpl
+oaf-slay: $(srcdir)/oaf-slay.tmpl
 	sed 's|@oafdir@|'$(pkgdatadir)'|g' < $< > $@
 
 EXTRA_DIST=empty.idl $(oaffiles)
