@@ -1,3 +1,7 @@
+2000-07-15  Robert Brady  <rwb197@zepler.org>
+
+	* configure.in (ALL_LINGUAS): Added en_GB translation
+
 2000-07-15  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-control-frame.c (bonobo_control_frame_construct): don't
