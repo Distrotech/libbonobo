@@ -1,5 +1,7 @@
 2001-07-19  ERDI Gergo  <cactus@cactus.rulez.org>
 
+	* tests/Makefile.am (TESTS): Added test-stream-mem
+
 	* tests/test-stream-mem.c: New test to see if BonoboStreamMem
 	works (currently, it looks like it doesn't)
 
