@@ -37,5 +37,14 @@
 	<oaf_attribute name="test" type="string" value="test"/>
 </oaf_server>
 
+<oaf_server iid="OAFIID:Duplicate" type="factory"
+	location="OAFIID:NotInServer:20000717">
+	<oaf_attribute name="test" type="string" value="test"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:Duplicate" type="factory"
+	location="OAFIID:NotInServer:20000717">
+	<oaf_attribute name="test" type="string" value="test"/>
+</oaf_server>
 
 </oaf_info>

@@ -53,7 +53,7 @@
 #define IORBUFSIZE 2048
 
 typedef struct {
-	GMainLoop *mloop;
+        gboolean   done;
 	char iorbuf[IORBUFSIZE];
 #ifdef BONOBO_ACTIVATION_DEBUG
 	char *do_srv_output;
@@ -128,7 +128,8 @@ scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
                         continue;
 
                 /* We run the loop too ... */
-                g_main_loop_run (ai->mloop);
+                while (!ai->done)
+                        linc_main_iteration (TRUE);
 
                 if (!strcmp (seek_ai->act_iid, ai->act_iid)) {
 #ifdef BONOBO_ACTIVATION_DEBUG
@@ -187,7 +188,7 @@ handle_exepipe (GIOChannel * source,
 #endif
 
 	if (!retval)
-		g_main_loop_quit (data->mloop);
+                data->done = TRUE;
 
 	return retval;
 }
@@ -232,13 +233,11 @@ bonobo_activation_server_by_forking (
 {
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-	Bonobo_GeneralError *errval;
         FILE *iorfh;
         EXEActivateInfo ai;
         GIOChannel *gioc;
         int childpid;
         int status;
-        guint watchid;
         struct sigaction sa;
         sigset_t mask, omask;
         int parent_pid;
@@ -275,6 +274,8 @@ bonobo_activation_server_by_forking (
 	childpid = fork ();
 
 	if (childpid < 0) {
+                Bonobo_GeneralError *errval;
+
                 sigprocmask (SIG_SETMASK, &omask, NULL);
 		errval = Bonobo_GeneralError__alloc ();
 		errval->description = CORBA_string_dup (_("Couldn't fork a new process"));
@@ -285,6 +286,8 @@ bonobo_activation_server_by_forking (
 	}
 
 	if (childpid != 0) {
+                LincWatch *watch;
+
                 /* de-zombify */
                 while (waitpid (childpid, &status, 0) == -1 && errno == EINTR)
                         ;
@@ -322,18 +325,22 @@ bonobo_activation_server_by_forking (
 		ai.fh = iorfh = fdopen (iopipes[0], "r");
                 
 		ai.iorbuf[0] = '\0';
-		ai.mloop = g_main_loop_new (NULL, FALSE);
+                ai.done = FALSE;
 
                 running_activations = g_slist_prepend (running_activations, &ai);
 
 		gioc = g_io_channel_unix_new (iopipes[0]);
-		watchid = g_io_add_watch (gioc,
-                                          G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL |
-                                          G_IO_ERR, (GIOFunc) & handle_exepipe,
-                                          &ai);
+
+                watch = linc_io_add_watch (
+                        gioc, 
+                        G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR,
+                        (GIOFunc) & handle_exepipe, &ai);
+
+                while (!ai.done)
+                        linc_main_iteration (TRUE);
+
+                linc_io_remove_watch (watch);
 		g_io_channel_unref (gioc);
-		g_main_loop_run (ai.mloop);
-		g_main_loop_unref (ai.mloop);
 		fclose (iorfh);
 
                 running_activations = g_slist_remove (running_activations, &ai);
