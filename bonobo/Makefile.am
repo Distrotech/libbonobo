@@ -97,6 +97,7 @@ libbonoboinclude_HEADERS =		\
 	bonobo-simple-source.h		\
 	bonobo-storage-plugin.h		\
 	bonobo-storage.h		\
+	bonobo-stream.h			\
 	bonobo-stream-client.h		\
 	bonobo-stream-memory.h		\
 	bonobo-transient.h		\

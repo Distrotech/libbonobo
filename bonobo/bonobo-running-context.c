@@ -369,8 +369,8 @@ bonobo_running_context_new (void)
 	bonobo_object_add_interface (BONOBO_OBJECT (bonobo_running_context),
 				     BONOBO_OBJECT (bonobo_running_event_source));
 
-	g_signal_connectc (G_OBJECT (bonobo_running_context), "destroy",
-			   G_CALLBACK (check_destroy), NULL, FALSE);
+	g_signal_connectc (G_OBJECT (bonobo_running_context),
+			   "destroy", G_CALLBACK (check_destroy), NULL, FALSE);
 
 	return bonobo_running_context;
 }

@@ -57,6 +57,7 @@ struct _BonoboObjectPrivate {
 };
 
 enum {
+	DESTROY,
 	QUERY_INTERFACE,
 	SYSTEM_EXCEPTION,
 	LAST_SIGNAL
@@ -527,6 +528,14 @@ bonobo_object_usage_error (BonoboObject *object)
 }
 
 static void
+bonobo_object_shutdown (GObject *gobject)
+{
+	g_signal_emit (gobject, bonobo_object_signals [DESTROY], 0);
+
+	bonobo_object_parent_class->shutdown (gobject);
+}
+
+static void
 bonobo_object_finalize_real (GObject *gobject)
 {
 	BonoboObject            *object = (BonoboObject *) gobject;
@@ -568,10 +577,20 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
 
+	/* Ensure that the signature checking is going to work */
 	g_assert (sizeof (POA_Bonobo_Unknown) == sizeof (gpointer) * 2);
+	g_assert (sizeof (BonoboObjectHeader) * 2 == sizeof (BonoboObject));
 
 	bonobo_object_parent_class = g_type_class_peek_parent (klass);
 
+	bonobo_object_signals [DESTROY] =
+		g_signal_newc ("destroy",
+			       G_TYPE_FROM_CLASS (object_class),
+			       G_SIGNAL_RUN_LAST,
+			       G_STRUCT_OFFSET (BonoboObjectClass,destroy),
+			       NULL, NULL,
+			       g_cclosure_marshal_VOID__VOID,
+			       G_TYPE_NONE, 0);
 	bonobo_object_signals [QUERY_INTERFACE] =
 		g_signal_newc ("query_interface",
 			       G_TYPE_FROM_CLASS (object_class),
@@ -589,6 +608,7 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 			       bonobo_marshal_VOID__POINTER_POINTER,
 			       G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
 
+	object_class->shutdown = bonobo_object_shutdown;
 	object_class->finalize = bonobo_object_finalize_real;
 }
 
@@ -666,7 +686,7 @@ bonobo_object_instance_init (GObject    *g_object,
 
 	/* Setup aggregate */
 	ao            = g_new0 (BonoboAggregateObject, 1);
-	ao->objs      = g_list_append (object->priv->ao->objs, object);
+	ao->objs      = g_list_append (ao->objs, object);
 	ao->ref_count = 1;
 
 	/* Setup Private fields */
@@ -764,7 +784,7 @@ bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 #endif
 
 static void
-bonobo_object_shutdown (void)
+bonobo_object_tracking_shutdown (void)
 {
 #ifdef BONOBO_REF_HOOKS
 	
@@ -787,7 +807,7 @@ bonobo_object_shutdown (void)
 void
 bonobo_object_init (void)
 {
-	g_atexit (bonobo_object_shutdown);
+	g_atexit (bonobo_object_tracking_shutdown);
 }
 
 #ifdef HAVE_DLADDR

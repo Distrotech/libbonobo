@@ -12,6 +12,8 @@
 
 BEGIN_BONOBO_DECLS
 
+#include <bonobo/bonobo-storage.h>
+
 END_BONOBO_DECLS
 
 #endif /* _BONOBO_STREAM_H_ */

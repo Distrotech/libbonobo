@@ -1,5 +1,19 @@
 2001-04-18  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-stream.h: add back to build for compat,
+	include bonobo-storage.h
+
+	* bonobo/bonobo-running-context.c (bonobo_running_context_new): 
+	connect to final_unref.
+
+	* bonobo/bonobo-object.c (bonobo_object_instance_init): fix
+	thinko.
+	(bonobo_object_class_init): add more useful assertions and
+	add "destroy" signal - this sucks but is very compatible.
+	(bonobo_object_shutdown): impl.
+
+2001-04-18  Michael Meeks  <michael@ximian.com>
+
 	* tests/test-storage.c (stream_copy_tests): prine copyTo
 	test.
 

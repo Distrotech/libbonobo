@@ -59,6 +59,7 @@ typedef struct {
 	GObjectClass parent_class;
 
 	/* signals. */
+	void  (*destroy)          (BonoboObject *object);
 	void  (*query_interface)  (BonoboObject *object, const char *repo_id,  CORBA_Object      *retval);
 	void  (*system_exception) (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 
