@@ -1,5 +1,18 @@
 2001-02-07  Michael Meeks  <michael@ximian.com>
 
+	* storage-modules/bonobo-storage-fs.c
+	(bonobo_storage_fs_get_type): upd.
+	(bonobo_storage_fs_construct): kill.
+	(do_bonobo_storage_fs_create): upd.
+
+	* storage-modules/bonobo-storage-efs.c
+	(bonobo_storage_efs_get_type): upd.
+	(create_storage_efs_server): kill.
+	(real_open_storage): upd.
+	(bonobo_storage_efs_open): upd.
+
+2001-02-07  Michael Meeks  <michael@ximian.com>
+
 	* Makefile.am: Fix for recent xml-i18n-tools.
 
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_get_epv): move into
