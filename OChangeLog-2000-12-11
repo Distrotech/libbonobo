@@ -1,3 +1,22 @@
+2000-10-09  Andy Hertzfeld  <andy@eazel.com>
+
+	added a "minimum width" attribute to toolbar items for nicer
+	toolbar button layout in Nautilus and elsewhere.
+	
+	* bonobo/bonobo-ui-toolbar-item.c: (impl_size_request), (init),
+	(bonobo_ui_toolbar_item_activate),
+	(bonobo_ui_toolbar_item_set_minimum_width):
+	added minimum_width private instance variable, set to 0 in initialize,
+	and used it to determine the size in size_request.
+	
+	* bonobo/bonobo-ui-toolbar-item.h:
+	added bonobo_ui_toolbar_item_set_minimum_width.
+	
+	* bonobo/bonobo-win.c: (de_accelerate_string),
+	(toolbar_sync_state):
+	read the "min_width" attribute from the xml node and set the
+	property of the toolbar item if present.
+	
 2000-10-09  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-control-frame.c (bonobo_control_frame_destroy):
