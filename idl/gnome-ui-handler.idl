@@ -255,17 +255,17 @@ module GNOME {
        		/*
        		 * These methods are used by containers to notify containees
        		 * that a menu or toolbar item has been activated or
-       		 * overriden.
+       		 * overridden.
        		 */
        
        		void menu_activated (in string path);
        		void menu_removed   (in string path);
-       		void menu_overriden (in string path);
+       		void menu_overridden (in string path);
        		void menu_reinstated (in string path);
 
        		void toolbar_activated (in string path);
        		void toolbar_removed   (in string path);
-       		void toolbar_overriden (in string path);
+       		void toolbar_overridden (in string path);
        		void toolbar_reinstated (in string path);
        	};
        

@@ -1,10 +1,20 @@
+1999-08-09  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/gnome-ui-handler.c: Fixed numerous menu bugs.  Wrote half
+ 	of the toolbar routines.
+
+	* bonobo/gnome-moniker.h: Include bonobo/bonobo.h
+
+	* bonobo/gnome-container.c (gnome_container_class_init): Use
+ 	GTK_RETLOC_BOOL instead of GTK_RETLOC_POINTER.
+
 1999-08-09  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-object.c (gnome_object_add_interface): Fix
 	preconditions here.
 	(gnome_object_instance_init): refernece count is initially 1.
 
-1999-08-07    <miguel@gnu.org>
+1999-08-07  Miguel de Icaza <miguel@gnu.org>
 
 	* bonobo/Makefile.am: Kill -Wstrict-prototypes.  
 

@@ -163,7 +163,7 @@ gnome_object_restore_from_url (const char *goad_id, const char *url)
 	CORBA_exception_init (&ev);
 	/*
 	 * 4. try to feed it the file (first by
-	 * PersistFile, then by PersistStream
+	 * PersistFile, then by PersistStream)
 	 */
 	persist = (GNOME_PersistFile) GNOME_Unknown_query_interface (
 		rtn, "IDL:GNOME/PersistFile:1.0", &ev);
