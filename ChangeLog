@@ -1,3 +1,13 @@
+2004-09-28  Mark McLoughlin  <mark@skynet.ie>
+
+	Fixes problem with running epiphany immediately after
+	install it - bug #145169.
+
+	* activation-server/object-directory-corba.c:
+	(od_register_runtime_server_info): re-scan the server info
+	directories when registering a server rather than only
+	when activating a server.
+
 2004-09-13  Mark McLoughlin  <mark@skynet.ie>
 
 	* configure.in: Version 2.8.0.

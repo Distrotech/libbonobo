@@ -782,6 +782,8 @@ od_register_runtime_server_info (ObjectDirectory  *od,
         GSList *parsed_serverinfo = NULL, *l;
         int     i;
 
+        update_registry (od, FALSE);
+
         old_serverinfo = (Bonobo_ServerInfo *) g_hash_table_lookup (od->by_iid, iid);
         if (old_serverinfo)
                 return old_serverinfo;
