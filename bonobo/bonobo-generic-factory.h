@@ -61,7 +61,7 @@ BonoboGenericFactory *bonobo_generic_factory_construct	 (BonoboGenericFactory  *
 							  const char            *oaf_iid,
 							  GClosure              *factory_cb);
 
-#ifdef __BONOBO_UI_MAIN_H__
+#if defined (__BONOBO_UI_MAIN_H__) || defined (LIBBONOBOUI_H)
 #define BONOBO_FACTORY_INIT(descr, version, argcp, argv)                      \
 	if (!bonobo_ui_init (descr, version, argcp, argv))                    \
 		g_error (_("Could not initialize Bonobo"));

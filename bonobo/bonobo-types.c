@@ -440,6 +440,9 @@ bonobo_closure_invoke (GClosure *closure,
 {
 	va_list var_args;
 
+	if (!closure)
+		return;
+
 	va_start (var_args, first_type);
 	
 	bonobo_closure_invoke_va_list (
@@ -460,6 +463,9 @@ GClosure *
 bonobo_closure_store (GClosure        *closure,
 		      GClosureMarshal  default_marshal)
 {
+	if (!closure)
+		return NULL;
+
 	g_closure_ref (closure);
 	g_closure_sink (closure);
 	if (G_CLOSURE_NEEDS_MARSHAL (closure))

@@ -1,5 +1,14 @@
 2001-08-08  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-types.c (bonobo_closure_store),
+	(bonobo_closure_invoke): tolerate a NULL closure - as
+	a noop.
+
+	* bonobo/bonobo-generic-factory.h: do a UI init if we
+	have LIBBONOBOUI_H defined.
+
+2001-08-08  Michael Meeks  <michael@ximian.com>
+
 	* configure.in: add samples/echo
 
 	* message-of-doom: ameliorate.
