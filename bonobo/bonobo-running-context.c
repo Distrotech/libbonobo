@@ -206,6 +206,26 @@ bonobo_running_context_ignore_object (CORBA_Object object)
 }
 #endif
 
+static void
+_running_context_list_objects (gpointer key,
+			       gpointer value,
+			       gpointer user_data)
+{
+	CORBA_Object object = (CORBA_Object) value;
+	CORBA_char *type_id;
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+	type_id = ORBit_small_get_type_id (object, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION)
+		type_id = CORBA_string_dup (
+			"<error determining object type id!>");
+	CORBA_exception_free (&ev);
+
+	bonobo_debug_print ("Alive: ", "[%p]: %s", object, type_id);
+	CORBA_free (type_id);
+}
+
 void          
 bonobo_running_context_trace_objects_T (CORBA_Object object,
 					const char  *fn,
@@ -239,10 +259,12 @@ bonobo_running_context_trace_objects_T (CORBA_Object object,
 		}
 
 #ifdef G_ENABLE_DEBUG
-		if(_bonobo_debug_flags & BONOBO_DEBUG_RUNNING)
+		if(_bonobo_debug_flags & BONOBO_DEBUG_RUNNING) {
 			bonobo_debug_print (cmode [mode], 
 					    "[%p]:CORBA_Object %d running objects at %s:%d",
 					    object, g_hash_table_size (ri->objects), fn, line);
+			g_hash_table_foreach (ri->objects, _running_context_list_objects, NULL);
+		}
 #endif /* G_ENABLE_DEBUG */
 	}
 }
