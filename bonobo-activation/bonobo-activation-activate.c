@@ -39,7 +39,7 @@ static gboolean test_components_enabled = FALSE;
  * @val: if TRUE, enable test components. If FALSE, disable them.
  * 
  *
- * FIXME: add doc for this. 
+ * FIXME bugzilla.eazel.com 4658: add doc for this. 
  */
 void
 oaf_set_test_components_enabled (gboolean val)

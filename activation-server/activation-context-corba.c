@@ -940,7 +940,8 @@ ac_aid_to_query_string (OAF_ActivationID aid)
         char *domain_requirement;
 	OAFActivationInfo *ainfo;
 
-        /* FIXME: this is completely broken. we activate by AID, not IID. */
+        /* FIXME bugzilla.eazel.com 4659: this is completely broken.
+		   We activate by AID, not IID. */
         if (strncmp ("OAFIID:", aid, 7) == 0) {
                 tmp_aid = g_strconcat ("OAFAID:[", aid, "]", NULL);
                 ainfo = oaf_actid_parse (tmp_aid);
