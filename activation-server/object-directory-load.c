@@ -333,6 +333,8 @@ od_load_directory (const char *directory,
                     od_filename_has_extension (pathname, ".oafinfo")) {
                         od_load_file (pathname, entries, host, domain);
                 }
+
+		g_free (pathname);
         }
 
         closedir (directory_handle);
