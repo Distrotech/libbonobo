@@ -251,6 +251,29 @@ bonobo_corba_any_get_type (void)
 }
 
 static gpointer
+corba_typecode_copy (gpointer typecode)
+{
+	CORBA_Object_duplicate ((CORBA_Object) typecode, NULL);
+	return typecode;
+}
+
+static void
+corba_typecode_free (gpointer typecode)
+{
+	CORBA_Object_release ((CORBA_Object) typecode, NULL);
+}
+
+GType
+bonobo_corba_typecode_get_type (void)
+{
+	static GType type = 0;
+	if (!type)
+		type = g_boxed_type_register_static ("BonoboCorbaTypecode", NULL,
+						     corba_typecode_copy, corba_typecode_free, TRUE);
+	return type;
+}
+
+static gpointer
 CORBA_exception__freekids (gpointer mem, gpointer dat)
 {
 	CORBA_Environment *env;
@@ -306,7 +329,7 @@ bonobo_corba_exception_get_type (void)
 }
 
 Bonobo_Unknown
-bonobo_value_get_unknown (GValue *value)
+bonobo_value_get_unknown (const GValue *value)
 {
 	g_return_val_if_fail (
 		BONOBO_VALUE_HOLDS_UNKNOWN (value),
@@ -316,7 +339,7 @@ bonobo_value_get_unknown (GValue *value)
 }
 
 BonoboArg *
-bonobo_value_get_corba_any (GValue *value)
+bonobo_value_get_corba_any (const GValue *value)
 {
 	g_return_val_if_fail (
 		BONOBO_VALUE_HOLDS_CORBA_ANY (value),
@@ -326,7 +349,7 @@ bonobo_value_get_corba_any (GValue *value)
 }
 
 CORBA_Object
-bonobo_value_get_corba_object (GValue *value)
+bonobo_value_get_corba_object (const GValue *value)
 {
 	g_return_val_if_fail (
 		BONOBO_VALUE_HOLDS_CORBA_OBJECT (value),
@@ -335,8 +358,18 @@ bonobo_value_get_corba_object (GValue *value)
 	return CORBA_Object_duplicate (value->data[0].v_pointer, NULL);
 }
 
+CORBA_TypeCode
+bonobo_value_get_corba_typecode (const GValue *value)
+{
+	g_return_val_if_fail (
+		BONOBO_VALUE_HOLDS_CORBA_TYPECODE (value),
+		CORBA_OBJECT_NIL);
+
+	return (CORBA_TypeCode) CORBA_Object_duplicate (value->data[0].v_pointer, NULL);
+}
+
 CORBA_Environment *
-bonobo_value_get_corba_exception (GValue *value)
+bonobo_value_get_corba_exception (const GValue *value)
 {
 	g_return_val_if_fail (
 		BONOBO_VALUE_HOLDS_CORBA_EXCEPTION (value),

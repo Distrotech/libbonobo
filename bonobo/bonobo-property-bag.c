@@ -155,6 +155,7 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 	BonoboPropertyBag *pb = BAG_FROM_SERVANT (servant);
 	BonoboProperty          *prop;
 	BonoboArg               *arg;
+	GValue			 retval;
 
 	prop = g_hash_table_lookup (pb->priv->prop_hash, key);
 
@@ -163,14 +164,19 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 		return NULL;
 	}
 
-	arg = bonobo_arg_new (prop->type);
+	retval.g_type = 0;
+	g_value_init (&retval, BONOBO_TYPE_CORBA_ANY);
 
 	bonobo_closure_invoke (prop->priv->get_prop,
-			       NULL,
-			       BONOBO_PROPERTY_BAG_TYPE, pb,
-			       BONOBO_TYPE_CORBA_ANY,    arg,
-			       G_TYPE_UINT,              prop->idx,
-			       G_TYPE_POINTER,           ev, 0);
+			       &retval,
+			       BONOBO_PROPERTY_BAG_TYPE,   pb,
+			       BONOBO_TYPE_CORBA_TYPECODE, prop->type,
+			       G_TYPE_UINT,                prop->idx,
+			       G_TYPE_POINTER,             ev, 0);
+
+	arg = bonobo_value_get_corba_any (&retval);
+	g_value_unset (&retval);
+
 	return arg;
 }
 
@@ -200,18 +206,23 @@ impl_Bonobo_PropertyBag_getValues (PortableServer_Servant  servant,
 	for (curr = props; curr != NULL; curr = curr->next) {
 		BonoboProperty *prop = curr->data;
 		BonoboArg *arg;
+		GValue retval;
 
 		set->_buffer [set->_length].name =  
 			CORBA_string_dup (prop->name);
 
-		arg = bonobo_arg_new (prop->type);
+		retval.g_type = 0;
+		g_value_init (&retval, BONOBO_TYPE_CORBA_ANY);
 
 		bonobo_closure_invoke (prop->priv->get_prop,
-				       NULL,
-				       BONOBO_PROPERTY_BAG_TYPE, pb,
-				       BONOBO_TYPE_CORBA_ANY,    arg,
-				       G_TYPE_UINT,              prop->idx,
-				       G_TYPE_POINTER,           ev, 0);
+				       &retval,
+				       BONOBO_PROPERTY_BAG_TYPE,   pb,
+				       BONOBO_TYPE_CORBA_TYPECODE, prop->type,
+				       G_TYPE_UINT,                prop->idx,
+				       G_TYPE_POINTER,             ev, 0);
+
+		arg = bonobo_value_get_corba_any (&retval);
+		g_value_unset (&retval);
 
 		set->_buffer [set->_length].value = *arg;
 
@@ -378,6 +389,50 @@ impl_Bonobo_PropertyBag_getFlags (PortableServer_Servant  servant,
  * BonoboPropertyBag construction/deconstruction functions. 
  */
 
+static void
+bonobo_marshal_ANY__TYPECODE_UINT_POINTER (GClosure     *closure,
+					   GValue       *return_value,
+					   guint         n_param_values,
+					   const GValue *param_values,
+					   gpointer      invocation_hint,
+					   gpointer      marshal_data)
+{
+	typedef void (*GMarshalFunc_VOID__BOXED_UINT_POINTER) (gpointer     data1,
+							       gpointer     arg_1,
+							       guint        arg_2,
+							       gpointer     arg_3,
+							       gpointer     data2);
+	register GMarshalFunc_VOID__BOXED_UINT_POINTER callback;
+	register GCClosure *cc = (GCClosure*) closure;
+	register gpointer data1, data2;
+	CORBA_TypeCode tc;
+	BonoboArg *any;
+
+	g_return_if_fail (n_param_values == 4);
+
+	if (G_CCLOSURE_SWAP_DATA (closure)) {
+		data1 = closure->data;
+		data2 = g_value_peek_pointer (param_values + 0);
+	} else {
+		data1 = g_value_peek_pointer (param_values + 0);
+		data2 = closure->data;
+	}
+	callback = (GMarshalFunc_VOID__BOXED_UINT_POINTER) (marshal_data ? marshal_data : cc->callback);
+
+	tc = bonobo_value_get_corba_typecode (param_values + 1);
+	any = bonobo_arg_new (tc);
+	CORBA_Object_release ((CORBA_Object) tc, NULL);
+
+	callback (data1,
+		  any,
+		  g_value_get_uint (param_values + 2),
+		  g_value_get_pointer (param_values + 3),
+		  data2);
+
+	g_value_set_boxed_take_ownership (return_value, any);
+}
+
+
 /**
  * bonobo_property_bag_construct:
  * @pb: #BonoboPropertyBag to construct
@@ -400,7 +455,7 @@ bonobo_property_bag_construct (BonoboPropertyBag *pb,
 			       BonoboEventSource *es)
 {
 	pb->es             = es;
-	pb->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
+	pb->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_ANY__TYPECODE_UINT_POINTER);
 	pb->priv->set_prop = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
 
 	bonobo_object_add_interface (BONOBO_OBJECT (pb), BONOBO_OBJECT (es));

@@ -1,3 +1,16 @@
+2001-08-08  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-types.h (bonobo_value_get_*): Constify the arg.
+	(BONOBO_TYPE_CORBA_TYPECODE): New type.
+
+	* bonobo/bonobo-property-bag.c
+	(bonobo_marshal_ANY__TYPECODE_UINT_POINTER): New static function.
+	This is a custom marshaller for the Bonobo::PropertyBag's `get_prop'
+	method - it takes a CORBA_TypeCode instead of the CORBA_any and
+	returns a CORBA_any.
+	(impl_Bonobo_PropertyBag_getValue): The closure now takes a
+	CORBA_TypeCode and returns a CORBA_any.
+
 2001-08-08  Cody Russell  <bratsche@gnome.org>
 
 	* bonobo/*.[h]: Ensured that all _get_type () functions are
