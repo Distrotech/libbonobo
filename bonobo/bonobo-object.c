@@ -951,12 +951,10 @@ bonobo_object_instance_init (GObject    *g_object,
 	object->servant_signature = BONOBO_SERVANT_SIGNATURE;
 
 #ifdef G_ENABLE_DEBUG
-	if (_bonobo_debug_flags) {
-		if (!CORBA_Object_is_a (BONOBO_OBJREF (object),
-					"IDL:Bonobo/Unknown:1.0", NULL))
-			g_error ("Attempt to instantiate non-Bonobo/Unknown "
-				 "derived object via. BonoboObject");
-	}
+	if (!CORBA_Object_is_a (BONOBO_OBJREF (object),
+				"IDL:Bonobo/Unknown:1.0", NULL))
+		g_error ("Attempt to instantiate non-Bonobo/Unknown "
+			 "derived object via. BonoboObject");
 #endif
 }
 
