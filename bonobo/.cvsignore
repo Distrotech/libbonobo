@@ -9,6 +9,7 @@ _libs
 .libs-no-undefined
 so_locations
 libbonobo-2.0.pc
+libbonobo-2.0-uninstalled.pc
 Bonobo-common.c
 Bonobo-skels.c
 Bonobo-stubs.c

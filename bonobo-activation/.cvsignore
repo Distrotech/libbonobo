@@ -16,3 +16,4 @@ Bonobo_Activation_types.h
 Bonobo_ObjectDirectory.h
 *-imodule.c
 bonobo-activation-2.0.pc
+bonobo-activation-2.0-uninstalled.pc
