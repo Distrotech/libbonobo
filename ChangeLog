@@ -1,3 +1,7 @@
+2004-03-16  Gareth Owen  <gowen72@yahoo.com>
+
+	* configure.in: Added en_GB to ALL_LINGUAS
+
 2004-03-15  Julio M. Merino Vidal  <jmmv@menta.net>
 
 	* bonobo-activation/bonobo-activation-get-language-list.c
