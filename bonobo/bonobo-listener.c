@@ -83,7 +83,7 @@ bonobo_listener_finalize (GObject *object)
 
 	if (listener->priv) {
 		g_free (listener->priv);
-		listener->priv = 0;
+		listener->priv = NULL;
 	}
 
 	bonobo_listener_parent_class->finalize (object);
@@ -121,7 +121,7 @@ bonobo_listener_init (GObject *object)
 
 	listener = BONOBO_LISTENER(object);
 	listener->priv = g_new (BonoboListenerPrivate, 1);
-	listener->priv->event_callback = 0;
+	listener->priv->event_callback = NULL;
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboListener, 

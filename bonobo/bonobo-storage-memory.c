@@ -745,7 +745,7 @@ BONOBO_TYPE_FUNC_FULL (BonoboStorageMem,
 		       bonobo_storage_mem)
 
 BonoboObject *
-bonobo_storage_mem_create ()
+bonobo_storage_mem_create (void)
 {
 	BonoboStorageMem *smem;
 

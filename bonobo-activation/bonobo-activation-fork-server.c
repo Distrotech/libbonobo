@@ -397,7 +397,7 @@ bonobo_activation_server_by_forking (
 
 		memset (&sa, 0, sizeof (sa));
 		sa.sa_handler = SIG_IGN;
-		sigaction (SIGPIPE, &sa, 0);
+		sigaction (SIGPIPE, &sa, NULL);
 
                 if (set_process_group) {
                         if (setpgid (getpid (), parent_pid) < 0) {

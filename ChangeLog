@@ -1,3 +1,25 @@
+2004-08-11  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/client.c: (add_load_path), (remove_load_path),
+	(register_activate_server), (do_query_server_info),
+	(do_activating): Correctly use ANSI argument list.
+	* bonobo-activation/bonobo-activation-base-service.c:
+	(bonobo_activation_registration_iterate): Same..
+	* bonobo-activation/bonobo-activation-fork-server.c:
+	(bonobo_activation_server_by_forking): Use NULL in place of 0
+	* bonobo/bonobo-debug.c: (bonobo_debug_init): ANSI arguments
+	* bonobo/bonobo-generic-factory.c:
+	(bonobo_generic_factory_destroy): NULL vs 0
+	* bonobo/bonobo-item-handler.c: (bonobo_item_handler_finalize):
+	* bonobo/bonobo-listener.c: (bonobo_listener_finalize),
+	(bonobo_listener_init): NULL vs 0
+	* bonobo/bonobo-persist-client.c: (bonobo_object_save_to_stream),
+	(bonobo_object_from_stream): NULL vs 0
+	* bonobo/bonobo-persist.c: (bonobo_persist_finalize): NULL vs 0
+	* bonobo/bonobo-storage-memory.c: (bonobo_storage_mem_create):
+	NULL vs 0.
+	* configure.in: Added nb to ALL_LINGUAS.
+
 2004-08-10  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/test-activation/Makefile.am (TESTS_ENVIRONMENT): Add

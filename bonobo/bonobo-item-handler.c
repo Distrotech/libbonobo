@@ -169,7 +169,7 @@ bonobo_item_handler_finalize (GObject *object)
 			g_closure_unref (handler->priv->get_object);
 
 		g_free (handler->priv);
-		handler->priv = 0;
+		handler->priv = NULL;
 	}
 
 	bonobo_item_handler_parent_class->finalize (object);

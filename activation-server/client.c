@@ -104,7 +104,7 @@ od_dump_list (Bonobo_ServerInfoList * list)
 }
 
 static void
-add_load_path ()
+add_load_path (void)
 {
 	Bonobo_DynamicPathLoadResult  res;
 
@@ -127,7 +127,7 @@ add_load_path ()
 }
 
 static void
-remove_load_path ()
+remove_load_path (void)
 {
 	Bonobo_DynamicPathLoadResult  res;
 
@@ -150,7 +150,7 @@ remove_load_path ()
 }
 
 static int
-register_activate_server()
+register_activate_server(void)
 {
 	Bonobo_RegistrationResult res;
 	CORBA_Object r_obj = CORBA_OBJECT_NIL;
@@ -171,7 +171,7 @@ register_activate_server()
 }
 
 static void
-do_query_server_info()
+do_query_server_info(void)
 {
 	Bonobo_ActivationContext ac;
 	Bonobo_ServerInfoList *slist;
@@ -217,7 +217,7 @@ do_query_server_info()
 }
 
 static int
-do_activating()
+do_activating(void)
 {
 	Bonobo_ActivationEnvironment environment;
 	Bonobo_ActivationResult *a_res;

@@ -241,7 +241,7 @@ bonobo_generic_factory_destroy (BonoboObject *object)
 					  (NULL, factory->priv->last_unref_timeout_id));
 		
 		g_free (factory->priv);
-		factory->priv = 0;
+		factory->priv = NULL;
 	}
 		
 	BONOBO_OBJECT_CLASS (bonobo_generic_factory_parent_class)->destroy (object);

@@ -68,7 +68,7 @@ bonobo_persist_finalize (GObject *object)
 	{
 		g_free (persist->priv->iid);
 		g_free (persist->priv);
-		persist->priv = 0;
+		persist->priv = NULL;
 	}
 	
 	bonobo_persist_parent_class->finalize (object);
