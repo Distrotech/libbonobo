@@ -1,3 +1,12 @@
+2000-11-26  Vladimir Vukicevic  <vladimir@helixcode.com>
+
+	* monikers/Makefile.am: correct spelling of moniker_test_SOURCE
+	to moniker_test_SOURCES (why isn't automake complaining?)
+
+	* monikers/moniker-test.c: add all previously unimplemented bits,
+	and also a workaround for unknown popt breakage that was causing
+	segfaults.
+
 2000-11-26  Maciej Stachowiak  <mjs@eazel.com>
 
 	* monikers/Makefile.am: Remove -lgtkhtml from moniker_test_LDADD,

@@ -74,7 +74,7 @@ bonobo_moniker_http_LDADD =		\
 #moniker_control_test_LDADD =		\
 #	$(moniker_ldadd) -lgtkhtml
 
-moniker_test_SOURCE =			\
+moniker_test_SOURCES =			\
 	moniker-test.c
 
 moniker_test_LDADD =			\
