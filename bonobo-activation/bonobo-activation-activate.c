@@ -286,7 +286,7 @@ oaf_activate_from_id (const OAF_ActivationID aid,
         ac = oaf_internal_activation_context_get_extended ((flags & OAF_FLAG_EXISTING_ONLY) != 0, ev);
 
         if (ac == CORBA_OBJECT_NIL)
-                return CORBA_OBJECT_NIL;
+                goto out;
 
 	ai = oaf_actid_parse (aid);
 
