@@ -354,7 +354,7 @@ bonobo_stream_mem_construct (BonoboStreamMem *stream_mem,
  *
  * Returns: the constructed BonoboStream object
  **/
-BonoboStream *
+BonoboObject *
 bonobo_stream_mem_create (const char *buffer, size_t size,
 			  gboolean read_only, gboolean resizable)
 {
@@ -366,7 +366,7 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 	if (!stream_mem)
 		return NULL;
 
-	return BONOBO_STREAM (bonobo_stream_mem_construct (
+	return BONOBO_OBJECT (bonobo_stream_mem_construct (
 		stream_mem, buffer, size,
 		read_only, resizable));
 }
