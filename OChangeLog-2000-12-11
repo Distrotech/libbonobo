@@ -1,3 +1,23 @@
+2000-12-04  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-control.c (process_events): only work through the event queue
+	if we are not using the local socket / plug case.
+	(impl_Bonobo_Control_realize, impl_Bonobo_Control_unrealize): upd. to suit.
+
+	* configure.in (orbit_version): Check for ORBit >= 0.5.5 - garentees DynamicAny.
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_get_field_any):
+	add missing return NULL in error condition.
+
+	* samples/controls/sample-control-container.c (container_create):
+	calm some warnings.
+
+	* bonobo/bonobo-widget.c (bonobo_widget_launch_component): use
+	monikers to activate, add interface param.
+	(bonobo_widget_construct_control): upd.
+	(bonobo_widget_create_subdoc_object): upd.
+	s/goad/oaf/ & update all docs.
+
 2000-12-04  Joe Shaw  <joe@helixcode.com>
 
 	* samples/compound-doc/sample-canvas-item.c: Use BonoboGenericFactory

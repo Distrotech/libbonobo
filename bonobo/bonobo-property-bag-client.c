@@ -390,6 +390,7 @@ bonobo_property_bag_client_get_field_any (Bonobo_PropertyBag       pb,
 			g_warning ("prop == NIL");
 			CORBA_exception_free (&tmp_ev);
 		}
+		return NULL;
 	}
 
 	if (field == FIELD_VALUE)
