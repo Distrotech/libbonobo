@@ -1,3 +1,8 @@
+2000-12-21  Lutz Muller <urc8@rz.uni-karlsruhe.de>
+
+	* storage-modules/bonobo-storage-vfs.c (vfs_open_stream): fix bug.
+	(bonobo_storage_vfs_open): invert type check on directories.
+
 2000-12-21  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* bonobo/bonobo-moniker-util.c (query_from_name): return the
