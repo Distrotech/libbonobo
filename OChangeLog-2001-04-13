@@ -1,3 +1,8 @@
+1999-12-20  Martijn van Beers  <martijn@earthling.net>
+	* samples/controls/sample-control-container.c: Changed
+	to work with the new gnome_property_bag_client_(get|set)_value_*
+	functions.
+
 1999-12-20  Nat Friedman  <nat@helixcode.com>
 
 	* idl/gnome-ui-handler.idl (GNOME::UIHandler): Added forward
