@@ -1,5 +1,9 @@
 2001-10-18  Michael Meeks  <michael@ximian.com>
 
+	* tests/test-moniker.c (check_string): test 'equal' as well.
+
+2001-10-18  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-property-bag.c
 	(bonobo_property_bag_add_gtk_args): rename to
 	(bonobo_property_bag_map_params): this & re-hash.

@@ -538,7 +538,7 @@ bonobo_pbclient_get_value  (Bonobo_PropertyBag  bag,
 			CORBA_free (value);
 
 		else if (!CORBA_TypeCode_equivalent (opt_tc, value->_type, my_ev)) {
-			/* FIXME: we can also try to do automatic conversion */
+			/* TODO: we can also try to do automatic conversion */
 			bonobo_exception_set (
 				opt_ev, 
 				ex_Bonobo_PropertyBag_InvalidType);

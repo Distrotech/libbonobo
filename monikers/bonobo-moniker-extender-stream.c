@@ -25,7 +25,7 @@ get_stream_type (Bonobo_Stream stream, CORBA_Environment *ev)
 
 	info = Bonobo_Stream_getInfo (stream, Bonobo_FIELD_CONTENT_TYPE, ev);
 	
-	if (BONOBO_EX (ev)) /* FIXME: we could try and do it ourselfs here */
+	if (BONOBO_EX (ev))
 		return NULL;
 
 	type = g_strdup (info->content_type);

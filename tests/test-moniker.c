@@ -11,6 +11,8 @@ check_string (const char *prefix, const char *escaped, const char *unescaped)
 	const char    *const_str;
 	char          *str;
 	char          *s, *name;
+	CORBA_Environment ev;
+	CORBA_long        equal;
 
 	moniker = bonobo_moniker_construct (
 		g_object_new (bonobo_moniker_get_type (), NULL), prefix);
@@ -22,6 +24,11 @@ check_string (const char *prefix, const char *escaped, const char *unescaped)
 	fprintf (stderr, "'%s' == '%s'\n", unescaped, const_str);
 	g_assert (!strcmp (const_str, unescaped));
 
+	CORBA_exception_init (&ev);
+	equal = Bonobo_Moniker_equal (BONOBO_OBJREF (moniker), name, &ev);
+	g_assert (!BONOBO_EX (&ev));
+	g_assert (equal);
+	CORBA_exception_free (&ev);
 
 	s = g_strconcat (prefix, escaped, NULL);
 	str = bonobo_moniker_get_name_escaped (moniker);

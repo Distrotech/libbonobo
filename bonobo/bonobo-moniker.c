@@ -332,7 +332,6 @@ bonobo_moniker_default_equal (BonoboMoniker     *moniker,
 
 	name = bonobo_moniker_get_name_escaped (moniker);
 
-	/* FIXME: this has not been tested with moniker lists  */
 /*	g_warning ("Compare %d chars of '%s' to '%s' - case sensitive ?%c",
 	i, name, p, moniker->priv->sensitive?'y':'n');*/
 
