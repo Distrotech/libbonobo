@@ -1,5 +1,55 @@
 2001-02-06  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-listener.c (bonobo_listener_get_epv): move into
+	(bonobo_listener_class_init): here and upd.
+	(init_listener_corba_class): kill.
+	(bonobo_listener_corba_object_create): kill.
+	(bonobo_listener_get_type): upd.
+	(bonobo_listener_construct): kill.
+	(bonobo_listener_new): upd.
+
+	* bonobo/bonobo-event-source.c (bonobo_event_source_get_epv):  move into
+	(bonobo_event_source_class_init): here & upd.
+	(bonobo_event_source_get_type): upd.
+	(init_event_source_corba_class): kill.
+	(bonobo_event_source_corba_object_create): kill.
+	(bonobo_event_source_construct): kill.
+	(bonobo_event_source_new): upd.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_get_epv): move to
+	(bonobo_client_site_class_init): here & upd.
+	(init_client_site_corba_class): kill.
+	(bonobo_client_site_corba_object_create): kill.
+	(bonobo_client_site_get_type): upd.
+	(bonobo_client_site_new): upd.
+	(bonobo_client_site_construct): upd.
+
+	* bonobo/bonobo-zoomable.c (impl_Bonobo_Zoomable__get_preferredLevels):
+	kill tedious warning.
+
+	* bonobo/bonobo-persist-stream.c (bonobo_persist_stream_get_epv): 
+	move to
+	(bonobo_persist_stream_class_init): here.
+	(init_persist_stream_corba_class): kill.
+	(bonobo_persist_stream_get_type): upd.
+	(bonobo_persist_stream_construct): upd.
+	(create_bonobo_persist_stream): kill.
+	(bonobo_persist_stream_new): upd.
+
+	* bonobo/bonobo-persist-file.c (init_persist_file_corba_class): kill.
+	(bonobo_persist_file_get_epv): move to
+	(bonobo_persist_file_class_init): here & upd.
+	(bonobo_persist_file_get_type): upd.
+	(create_bonobo_persist_file): kill.
+	(bonobo_persist_file_new): upd.
+
+	* bonobo/bonobo-persist.c (bonobo_persist_construct): kill.
+	(bonobo_persist_class_init): upd.
+	(bonobo_persist_get_epv): kill.
+	(bonobo_persist_get_type): upd.
+
+2001-02-06  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-control.c (bonobo_control_destroy): chain to
 	parent destroy method correctly.
 

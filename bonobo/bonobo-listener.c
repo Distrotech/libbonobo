@@ -14,8 +14,9 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-listener.h>
 
-static BonoboObjectClass *bonobo_listener_parent_class;
-POA_Bonobo_Listener__vepv bonobo_listener_vepv;
+#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+
+static GtkObjectClass *bonobo_listener_parent_class;
 
 struct _BonoboListenerPrivate {
 	BonoboListenerCallbackFn event_callback;
@@ -50,31 +51,6 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 			 event_name, args, ev);
 }
 
-/**
- * bonobo_listener_get_epv:
- *
- * Returns: The EPV for the default BonoboListener implementation.  
- */
-POA_Bonobo_Listener__epv *
-bonobo_listener_get_epv (void)
-{
-	POA_Bonobo_Listener__epv *epv;
-
-	epv = g_new0 (POA_Bonobo_Listener__epv, 1);
-
-	epv->event = impl_Bonobo_Listener_event;
-
-	return epv;
-}
-
-static void
-init_listener_corba_class (void)
-{
-	/* The VEPV */
-	bonobo_listener_vepv.Bonobo_Unknown_epv  = bonobo_object_get_epv ();
-	bonobo_listener_vepv.Bonobo_Listener_epv = bonobo_listener_get_epv ();
-}
-
 static void
 bonobo_listener_finalize (GtkObject *object)
 {
@@ -83,7 +59,7 @@ bonobo_listener_finalize (GtkObject *object)
 	listener = BONOBO_LISTENER (object);
 	g_free (listener->priv);
 
-	GTK_OBJECT_CLASS (bonobo_listener_parent_class)->finalize (object);
+	bonobo_listener_parent_class->finalize (object);
 }
 
 static void
@@ -101,9 +77,9 @@ static void
 bonobo_listener_class_init (BonoboListenerClass *klass)
 {
 	GtkObjectClass *oclass = (GtkObjectClass *)klass;
+	POA_Bonobo_Listener__epv *epv = &klass->epv;
 
-	bonobo_listener_parent_class = 
-		gtk_type_class (bonobo_object_get_type ());
+	bonobo_listener_parent_class = gtk_type_class (PARENT_TYPE);
 
 	oclass->finalize = bonobo_listener_finalize;
 
@@ -115,7 +91,7 @@ bonobo_listener_class_init (BonoboListenerClass *klass)
 
 	gtk_object_class_add_signals (oclass, signals, LAST_SIGNAL);
 
-	init_listener_corba_class ();
+	epv->event = impl_Bonobo_Listener_event;
 }
 
 /**
@@ -140,65 +116,15 @@ bonobo_listener_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = bonobo_x_type_unique (
+			PARENT_TYPE,
+			POA_Bonobo_Listener__init,
+			NULL,
+			GTK_STRUCT_OFFSET (BonoboListenerClass, epv),
+			&info);
 	}
 
 	return type;
-}
-
-/**
- * bonobo_listener_corba_object_create:
- * @object: BonoboObject to initialize
- *
- * This is just a construction utility for BonoboListener objects.
- *
- * Returns: A Bonobo_Listener CORBA Object reference
- */
-Bonobo_Listener
-bonobo_listener_corba_object_create (BonoboObject *object)
-{
-	POA_Bonobo_Listener *servant;
-	CORBA_Environment ev;
-
-	servant = (POA_Bonobo_Listener *) g_new0 (BonoboObjectServant, 1);
-	servant->vepv = &bonobo_listener_vepv;
-
-	CORBA_exception_init (&ev);
-
-	POA_Bonobo_Listener__init ((PortableServer_Servant) servant, &ev);
-	if (BONOBO_EX (&ev)){
-                g_free (servant);
-		CORBA_exception_free (&ev);
-                return CORBA_OBJECT_NIL;
-        }
-
-	CORBA_exception_free (&ev);
-
-	return bonobo_object_activate_servant (object, servant);
-}
-
-/**
- * bonobo_listener_construct:
- * @listener: BonoboListener object.
- * @corba_listener: CORBA servant to be bound to @listener
- *
- * This method is used to allow subclassing of the BonoboListener
- * implementation
- *
- * Returns: NULL on failure;  or the constructed BonoboListener object
- */
-BonoboListener *
-bonobo_listener_construct (BonoboListener  *listener, 
-			   Bonobo_Listener  corba_listener) 
-{
-        g_return_val_if_fail (listener != NULL, NULL);
-        g_return_val_if_fail (BONOBO_IS_LISTENER (listener), NULL);
-        g_return_val_if_fail (corba_listener != NULL, NULL);
-
-        bonobo_object_construct (BONOBO_OBJECT (listener), 
-				 corba_listener);
-
-        return listener;
 }
 
 /**
@@ -230,22 +156,13 @@ bonobo_listener_new (BonoboListenerCallbackFn event_callback,
 		     gpointer                 user_data)
 {
 	BonoboListener *listener;
-	Bonobo_Listener corba_listener;
 
 	listener = gtk_type_new (BONOBO_LISTENER_TYPE);
-
-	corba_listener = bonobo_listener_corba_object_create (
-		BONOBO_OBJECT (listener));
-
-	if (corba_listener == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (listener));
-		return NULL;
-	}
 	
 	listener->priv->event_callback = event_callback;
 	listener->priv->user_data = user_data;
 
-	return bonobo_listener_construct (listener, corba_listener);
+	return listener;
 }
 
 
