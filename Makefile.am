@@ -7,4 +7,5 @@ libinclude_HEADERS = \
 EXTRA_DIST = message-of-doom \
 	xml-i18n-extract.in  \
 	xml-i18n-merge.in    \
-	xml-i18n-update.in
+	xml-i18n-update.in   \
+	changes.txt
