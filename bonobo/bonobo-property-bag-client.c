@@ -13,6 +13,46 @@
 #include <bonobo/bonobo-property-bag-client.h>
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-exception.h>
+#include <bonobo/bonobo-moniker-util.h>
+
+/* fixme: use something more useful like "gconf:" */
+#define BONOBO_PBCLIENT_DEFAULT_BAG "xmldb:/tmp/test.xmldb"
+
+G_LOCK_DEFINE_STATIC (default_bag_lock);
+
+static Bonobo_PropertyBag default_bag = CORBA_OBJECT_NIL;
+
+static void
+unref_default_bag (void)
+{
+	G_LOCK(default_bag_lock);
+
+	if (default_bag !=  CORBA_OBJECT_NIL)
+		bonobo_object_release_unref (default_bag, NULL);
+
+	G_UNLOCK(default_bag_lock);
+}
+
+static Bonobo_PropertyBag
+get_default_bag (CORBA_Environment  *ev)
+{
+	G_LOCK(default_bag_lock);
+
+	if (default_bag ==  CORBA_OBJECT_NIL) {
+		default_bag = bonobo_get_object (BONOBO_PBCLIENT_DEFAULT_BAG, 
+		        "IDL:Bonobo/PropertyBag:1.0", ev);
+
+		if (default_bag !=  CORBA_OBJECT_NIL)
+			g_atexit (unref_default_bag);
+	}
+
+	if (default_bag ==  CORBA_OBJECT_NIL)
+		g_warning ("unable to get default property bag\n") ;
+
+	G_UNLOCK(default_bag_lock);
+
+	return default_bag;
+}
 
 char *
 bonobo_pbclient_get_doc_title (Bonobo_PropertyBag  bag,
@@ -22,7 +62,6 @@ bonobo_pbclient_get_doc_title (Bonobo_PropertyBag  bag,
 	CORBA_Environment ev, *my_ev;
 	char *retval;
 
-	bonobo_return_val_if_fail (bag != CORBA_OBJECT_NIL, NULL, opt_ev);
 	bonobo_return_val_if_fail (key != NULL, NULL, opt_ev);
 
 	if (!opt_ev) {
@@ -30,8 +69,17 @@ bonobo_pbclient_get_doc_title (Bonobo_PropertyBag  bag,
 		my_ev = &ev;
 	} else
 		my_ev = opt_ev;
+
+	if (bag == CORBA_OBJECT_NIL)
+		bag = get_default_bag (my_ev);
+
+	if (BONOBO_EX (my_ev) || bag == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return NULL;
+	}
 	
-	retval = Bonobo_PropertyBag_getDoc (bag, key, my_ev);
+	retval = Bonobo_PropertyBag_getDocTitle (bag, key, my_ev);
 
 	if (BONOBO_EX (my_ev)) {
 		if (!opt_ev) {
@@ -40,7 +88,7 @@ bonobo_pbclient_get_doc_title (Bonobo_PropertyBag  bag,
 			
 			CORBA_exception_free (&ev);
 		}
-		return 0;
+		return NULL;
 	}
 
 	if (!opt_ev)
@@ -57,7 +105,6 @@ bonobo_pbclient_get_doc (Bonobo_PropertyBag  bag,
 	CORBA_Environment ev, *my_ev;
 	char *retval;
 
-	bonobo_return_val_if_fail (bag != CORBA_OBJECT_NIL, NULL, opt_ev);
 	bonobo_return_val_if_fail (key != NULL, NULL, opt_ev);
 
 	if (!opt_ev) {
@@ -66,6 +113,15 @@ bonobo_pbclient_get_doc (Bonobo_PropertyBag  bag,
 	} else
 		my_ev = opt_ev;
 	
+	if (bag == CORBA_OBJECT_NIL)
+		bag = get_default_bag (my_ev);
+
+	if (BONOBO_EX (my_ev) || bag == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return NULL;
+	}
+
 	retval = Bonobo_PropertyBag_getDoc (bag, key, my_ev);
 
 	if (BONOBO_EX (my_ev)) {
@@ -75,7 +131,7 @@ bonobo_pbclient_get_doc (Bonobo_PropertyBag  bag,
 			
 			CORBA_exception_free (&ev);
 		}
-		return 0;
+		return NULL;
 	}
 
 	if (!opt_ev)
@@ -92,7 +148,6 @@ bonobo_pbclient_get_flags (Bonobo_PropertyBag  bag,
 	CORBA_Environment ev, *my_ev;
 	Bonobo_PropertyFlags retval;
 
-	bonobo_return_val_if_fail (bag != CORBA_OBJECT_NIL, 0, opt_ev);
 	bonobo_return_val_if_fail (key != NULL, 0, opt_ev);
 
 	if (!opt_ev) {
@@ -101,6 +156,15 @@ bonobo_pbclient_get_flags (Bonobo_PropertyBag  bag,
 	} else
 		my_ev = opt_ev;
 	
+	if (bag == CORBA_OBJECT_NIL)
+		bag = get_default_bag (my_ev);
+
+	if (BONOBO_EX (my_ev) || bag == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return 0;
+	}
+
 	retval = Bonobo_PropertyBag_getFlags (bag, key, my_ev);
 
 	if (BONOBO_EX (my_ev)) {
@@ -127,7 +191,6 @@ bonobo_pbclient_get_type (Bonobo_PropertyBag  bag,
 	CORBA_Environment ev, *my_ev;
 	CORBA_TypeCode retval;
 
-	bonobo_return_val_if_fail (bag != CORBA_OBJECT_NIL, NULL, opt_ev);
 	bonobo_return_val_if_fail (key != NULL, NULL, opt_ev);
 
 	if (!opt_ev) {
@@ -136,6 +199,15 @@ bonobo_pbclient_get_type (Bonobo_PropertyBag  bag,
 	} else
 		my_ev = opt_ev;
 	
+	if (bag == CORBA_OBJECT_NIL)
+		bag = get_default_bag (my_ev);
+
+	if (BONOBO_EX (my_ev) || bag == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return NULL;
+	}
+
 	retval = Bonobo_PropertyBag_getType (bag, key, my_ev);
 
 	if (BONOBO_EX (my_ev)) {
@@ -163,13 +235,20 @@ bonobo_pbclient_get_keys (Bonobo_PropertyBag  bag,
 	GList *l = NULL;
 	int i;
 
-	bonobo_return_val_if_fail (bag != CORBA_OBJECT_NIL, NULL, opt_ev);
-
 	if (!opt_ev) {
 		CORBA_exception_init (&ev);
 		my_ev = &ev;
 	} else
 		my_ev = opt_ev;
+
+	if (bag == CORBA_OBJECT_NIL)
+		bag = get_default_bag (my_ev);
+
+	if (BONOBO_EX (my_ev) || bag == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return NULL;
+	}
 
 	key_list = Bonobo_PropertyBag_getKeys (bag, "", my_ev);
 	if (BONOBO_EX (my_ev) || !key_list) {
@@ -422,7 +501,6 @@ bonobo_pbclient_get_value  (Bonobo_PropertyBag  bag,
 	CORBA_Environment ev, *my_ev;
 	CORBA_any *retval;
 
-	bonobo_return_val_if_fail (bag != CORBA_OBJECT_NIL, NULL, opt_ev);
 	bonobo_return_val_if_fail (key != NULL, NULL, opt_ev);
 
 	if (!opt_ev) {
@@ -431,6 +509,14 @@ bonobo_pbclient_get_value  (Bonobo_PropertyBag  bag,
 	} else
 		my_ev = opt_ev;
 	
+	if (bag == CORBA_OBJECT_NIL)
+		bag = get_default_bag (my_ev);
+
+	if (BONOBO_EX (my_ev) || bag == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return NULL;
+	}
 
 	retval = Bonobo_PropertyBag_getValue (bag, key, my_ev);
 
@@ -486,7 +572,6 @@ bonobo_pbclient_get_default_value  (Bonobo_PropertyBag  bag,
 	CORBA_Environment ev, *my_ev;
 	CORBA_any *retval;
 
-	bonobo_return_val_if_fail (bag != CORBA_OBJECT_NIL, NULL, opt_ev);
 	bonobo_return_val_if_fail (key != NULL, NULL, opt_ev);
 
 	if (!opt_ev) {
@@ -495,6 +580,14 @@ bonobo_pbclient_get_default_value  (Bonobo_PropertyBag  bag,
 	} else
 		my_ev = opt_ev;
 	
+	if (bag == CORBA_OBJECT_NIL)
+		bag = get_default_bag (my_ev);
+
+	if (BONOBO_EX (my_ev) || bag == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return NULL;
+	}
 
 	retval = Bonobo_PropertyBag_getDefault (bag, key, my_ev);
 
@@ -537,8 +630,6 @@ void bonobo_pbclient_set_##name (Bonobo_PropertyBag  bag,                     \
 			         CORBA_Environment  *opt_ev)                  \
 {                                                                             \
 	CORBA_any *any;                                                       \
-	bonobo_return_if_fail (bag != CORBA_OBJECT_NIL, opt_ev);              \
-	bonobo_return_if_fail (key != NULL, opt_ev);                          \
 	any = bonobo_arg_new (corba_tc);                                      \
 	*((c_type *)(any->_value)) = value;                                   \
 	bonobo_pbclient_set_value (bag, key, any, opt_ev);                    \
@@ -642,8 +733,6 @@ bonobo_pbclient_set_string (Bonobo_PropertyBag  bag,
 {
 	CORBA_any *any;
 
-	bonobo_return_if_fail (bag != CORBA_OBJECT_NIL, opt_ev);
-	bonobo_return_if_fail (key != NULL, opt_ev);
 	bonobo_return_if_fail (value != NULL, opt_ev);
 
 	any = bonobo_arg_new (TC_string);
@@ -672,7 +761,6 @@ bonobo_pbclient_set_value  (Bonobo_PropertyBag  bag,
 {
 	CORBA_Environment ev, *my_ev;
 
-	bonobo_return_if_fail (bag != CORBA_OBJECT_NIL, opt_ev);
 	bonobo_return_if_fail (key != NULL, opt_ev);
 	bonobo_return_if_fail (value != NULL, opt_ev);
 
@@ -682,6 +770,15 @@ bonobo_pbclient_set_value  (Bonobo_PropertyBag  bag,
 	} else
 		my_ev = opt_ev;
 	
+	if (bag == CORBA_OBJECT_NIL)
+		bag = get_default_bag (my_ev);
+
+	if (BONOBO_EX (my_ev) || bag == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return;
+	}
+
 	Bonobo_PropertyBag_setValue (bag, key, value, my_ev);
 	
 	if (!opt_ev)
@@ -717,8 +814,6 @@ bonobo_pbclient_setv (Bonobo_PropertyBag       bag,
 	const char *arg_name;
 
 	g_return_val_if_fail (first_arg != NULL, g_strdup ("No arg"));
-	g_return_val_if_fail (bag != CORBA_OBJECT_NIL, 
-			      g_strdup ("No property bag"));
 
 	arg_name = first_arg;
 	while (arg_name) {
@@ -788,8 +883,6 @@ bonobo_pbclient_getv (Bonobo_PropertyBag bag,
 	const char *arg_name;
 
 	g_return_val_if_fail (first_arg != NULL, g_strdup ("No arg"));
-	g_return_val_if_fail (bag != CORBA_OBJECT_NIL, 
-			      g_strdup ("No property bag"));
 
 	arg_name = first_arg;
 	while (arg_name) {

@@ -1,3 +1,14 @@
+2001-05-30  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-property-bag-client.c (unref_default_bag): added a
+	mutex to make it thread save.
+
+2001-05-28  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-property-bag-client.c (get_default_bag): impl.
+	we can pass CORBA_OBJECT_NIL to all bonobo_pbclient_* functions
+	(and we use the default property bag in that case).
+
 2001-05-19  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-generic-factory.h
