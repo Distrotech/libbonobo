@@ -1,3 +1,9 @@
+2000-07-24  Peter Williams  <peterw@helixcode.com>
+
+	* bonobo/bonobo-socket.c (bonobo_socket_focus_out_event): Fix
+	"BadMatch Bug of Death (TM)" -- we were sometimes setting the
+	focus to an unmapped parent window, which is a no-no.
+
 2000-07-24  Dan Winship  <danw@helixcode.com>
 
 	* components/text-plain/bonobo-text-plain.c (pstream_load): The
