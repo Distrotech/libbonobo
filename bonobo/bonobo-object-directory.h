@@ -27,8 +27,10 @@ typedef enum {
 CORBA_ORB            od_get_orb                     (void);
 
 ODServerInfo        *od_server_info_new             (const gchar       *iid,
+						     const gchar       *name,
                                                      const gchar       *desc);
 const gchar         *od_server_info_get_id          (ODServerInfo      *info);
+const gchar         *od_server_info_get_name        (ODServerInfo      *info);
 const gchar         *od_server_info_get_description (ODServerInfo      *info);
 void                 od_server_info_ref             (ODServerInfo      *info);
 void                 od_server_info_unref           (ODServerInfo      *info);

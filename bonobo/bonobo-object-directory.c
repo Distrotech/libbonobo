@@ -5,11 +5,12 @@
 struct _ODServerInfo {
         guint refcount;
         gchar* iid;
+	gchar* name;
         gchar* desc;
 };
 
 ODServerInfo*
-od_server_info_new(const gchar* iid, const gchar* desc)
+od_server_info_new(const gchar* iid, const gchar* name, const gchar* desc)
 {
         ODServerInfo *info;
 
@@ -17,6 +18,7 @@ od_server_info_new(const gchar* iid, const gchar* desc)
 
         info->refcount = 1;
         info->iid = iid ? g_strdup(iid) : NULL;
+	info->name = name ? g_strdup(name) : NULL;
         info->desc = desc ? g_strdup(desc) : NULL;
 
         return info;
@@ -28,6 +30,12 @@ od_server_info_get_id          (ODServerInfo      *info)
         return info->iid;
 }
 
+const gchar*
+od_server_info_get_name (ODServerInfo     *info)
+{
+	return info->name;
+}
+			 
 const gchar*
 od_server_info_get_description (ODServerInfo      *info)
 {
@@ -50,6 +58,7 @@ od_server_info_unref           (ODServerInfo      *info)
 
         if (info->refcount == 0) {
                 g_free(info->iid);
+		g_free(info->name);
                 g_free(info->desc);
                 g_free(info);
         }
