@@ -3,6 +3,8 @@
 #include "od-utils.h"
 #include <tree.h> /* gnome-xml */
 #include <parser.h> /* gnome-xml */
+#include <malloc.h>
+#include <xmlmemory.h> /* guess what ? gnome-xml !! */
 #include <glib.h>
 
 #define OAF_CONFIG_FILE "/oaf/oaf-config.xml"
