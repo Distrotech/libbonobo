@@ -1,3 +1,7 @@
+2001-04-20  Martin Baulig  <baulig@suse.de>
+
+	* configure.in, Makefile.am: Added idl/ directory.
+
 2001-04-20  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am: add bonobo-config-database.[ch]
