@@ -1,13 +1,13 @@
 # libbonobo fr.po
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Christophe Merlet (RedFox) <redfox@eikonex.org>, 2001.
-# Vasif İsmayılo�~_lu MD <azerb_linux@hotmail.com>, 2001
+# Vasif İsmayılo�_lu MD <azerb_linux@hotmail.com>, 2001
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.96.0\n"
 "POT-Creation-Date: 2001-06-07 17:21+0200\n"
-"PO-Revision-Date: 2001-06-02 00:20GMT +0200\n"
+"PO-Revision-Date: 2000-06-19 20:30GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,7 @@ msgstr "Xəta yoxlaması xətası; xüsusi hal yoxdur"
 
 #: bonobo/bonobo-generic-factory.h:94 bonobo/bonobo-generic-factory.h:98
 msgid "Could not initialize Bonobo"
-msgstr ""
+msgstr "Bonobonu başlada bilmədim"
 
 #: bonobo/bonobo-object-directory.c:223
 msgid "No filename"
