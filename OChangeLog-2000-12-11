@@ -1,5 +1,6 @@
 Wed Jul 28 13:34:13 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 	
+	* configure.in: added checks for libefs.
 	* bonobo/gnome-storage-repo.[ch]: Removed.
 	* bonobo/gnome-stream-repo.[ch]: Removed.
 	* bonobo/test-storage.c: New File.
