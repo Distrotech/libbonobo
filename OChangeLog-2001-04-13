@@ -1,5 +1,9 @@
 2001-04-09  Michael Meeks  <michael@ximian.com>
 
+	* Version 1.0.0
+	
+2001-04-09  Michael Meeks  <michael@ximian.com>
+
 	* doc/dia/Makefile.am: add.
 
 	* doc/Makefile.am: add dia subdir

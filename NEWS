@@ -46,7 +46,6 @@ Bonobo 1.0.0
 
 	* idl-grep, a new tool for groking IDL (Paolo Molaro)
 
-
 Bonobo 0.37
 
 	* Fix Bonobo Zoomable (Michael Engber)
