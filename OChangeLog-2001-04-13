@@ -1,3 +1,8 @@
+2000-12-11  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo.spec.in: Removed bonobo-moniker-config since it is no
+	longer built.
+
 2000-12-11  Iain Holmes  <iain@helixcode.com>
 
 	* bonobo/bonobo-property-control.[ch]: Added 
