@@ -14,15 +14,9 @@
 
 static GnomeObjectClass *gnome_container_parent_class;
 
-POA_GNOME_Container__epv gnome_container_epv = {
-	NULL,
-};
+POA_GNOME_Container__epv gnome_container_epv = { NULL, };
 	
-POA_GNOME_Container__vepv gnome_container_vepv = {
-	&gnome_obj_base_epv,
-	&gnome_obj_epv,
-	&gnome_container_epv
-};
+POA_GNOME_Container__vepv gnome_container_vepv;
 
 static CORBA_Object
 create_gnome_container (GnomeObject *object)
@@ -68,6 +62,18 @@ gnome_container_destroy (GtkObject *object)
 }
 
 static void
+corba_container_class_init (void)
+{
+	/* Init the epv */
+	    /* nothing just yet */
+	
+	/* Init the vepv */
+	gnome_container_vepv._base_epv     = &gnome_obj_base_epv;
+	gnome_container_vepv.GNOME_obj_epv = &gnome_obj_epv;
+	gnome_container_vepv.GNOME_Container_epv = &gnome_container_epv;
+}
+
+static void
 gnome_container_class_init (GnomeContainerClass *container_class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) container_class;
@@ -75,6 +81,8 @@ gnome_container_class_init (GnomeContainerClass *container_class)
 	gnome_container_parent_class = gtk_type_class (gtk_object_get_type ());
 
 	object_class->destroy = gnome_container_destroy;
+
+	corba_container_class_init ();
 }
 
 static void
