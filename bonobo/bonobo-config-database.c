@@ -95,6 +95,7 @@ get_default (BonoboConfigDatabase   *cd,
 
 	}
 
+	bonobo_exception_set (ev, ex_Bonobo_ConfigDatabase_NotFound);
 	return NULL;
 }
 
@@ -110,8 +111,10 @@ impl_Bonobo_ConfigDatabase_getValue (PortableServer_Servant  servant,
 	if (CLASS (cd)->get_value)
 		value = CLASS (cd)->get_value (cd, key, locale, ev);
 
-	if (value)
+	if (!BONOBO_EX (ev) && value)
 		return value;
+
+	CORBA_exception_init (ev);
 
 	return get_default (cd, key, locale, ev);
 }
