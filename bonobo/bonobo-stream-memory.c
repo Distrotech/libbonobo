@@ -40,7 +40,7 @@ mem_truncate (GnomeStream *stream,
 
 static CORBA_long
 mem_write (GnomeStream *stream, long count,
-	   const CORBA_char *buffer,
+	   GNOME_Stream_iobuf *buffer,
 	   CORBA_Environment *ev)
 {
 	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
@@ -66,7 +66,7 @@ mem_write (GnomeStream *stream, long count,
 
 static CORBA_long
 mem_read (GnomeStream *stream, long count,
-	  CORBA_char **buffer,
+	  GNOME_Stream_iobuf ** buffer,
 	  CORBA_Environment *ev)
 {
 	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
@@ -75,8 +75,11 @@ mem_read (GnomeStream *stream, long count,
 	if (smem->pos + count > smem->size)
 		count = smem->size - smem->pos;
 	    
-	*buffer = g_malloc (count);
-	memcpy (*buffer, smem->buffer, count);
+	*buffer = GNOME_Stream_iobuf__alloc ();
+	(*buffer)->_buffer = CORBA_sequence_CORBA_octet_allocbuf (count);
+	(*buffer)->length = count;
+	
+	memcpy (*buffer->_buffer, smem->buffer, count);
 
 	smem->pos += count;
 	

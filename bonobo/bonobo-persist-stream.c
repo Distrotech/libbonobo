@@ -36,7 +36,7 @@ impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
 
 static void
 impl_load (PortableServer_Servant servant,
-	   const GNOME_Stream stream,
+	   GNOME_Stream stream,
 	   CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -58,7 +58,7 @@ impl_load (PortableServer_Servant servant,
 
 static void
 impl_save (PortableServer_Servant servant,
-	   const GNOME_Stream stream,
+	   GNOME_Stream stream,
 	   CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -107,7 +107,7 @@ init_persist_stream_corba_class (void)
 }
 
 static int
-gnome_persist_stream_nop (GnomePersistStream *ps, const GNOME_Stream stream)
+gnome_persist_stream_nop (GnomePersistStream *ps, GNOME_Stream stream)
 {
 	/* Nothing: just return success */
 	return 0;

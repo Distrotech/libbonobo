@@ -35,8 +35,8 @@ typedef struct {
 	/*
 	 * methods
 	 */
-	int        (*load)(GnomePersistStream *ps, const GNOME_Stream stream);
-	int        (*save)(GnomePersistStream *ps, const GNOME_Stream stream);
+	int        (*load)(GnomePersistStream *ps, GNOME_Stream stream);
+	int        (*save)(GnomePersistStream *ps, GNOME_Stream stream);
 	CORBA_long (*get_size_max) (GnomePersistStream *ps);
 } GnomePersistStreamClass;
 

@@ -1,3 +1,25 @@
+1999-04-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* idl/gnome-storage.idl: Use sequences of octets, not strings for
+	the buffers. 
+
+	* bonobo/test-container.c: Improved to have a sample call to
+	PersistStream_load
+	
+	* bonobo/gnome-stream-fs.c (fs_read): Implement this function
+
+	* bonobo/gnome-stream-memory.c (mem_read): Use
+	CORBA_octet_allocbuf here instead of malloc.
+
+	* bonobo/gnome-stream-fs.c (gnome_stream_fs_get_type): List the
+	class initialization routine.
+
+	* bonobo/gnome-persist-stream.c (gnome_persist_stream_new): Do not
+	use const for the streams.
+
+	* components/image-x-png/bonobo-image-x-png.c (stream_read):
+	Implement using CORBA streams instead of the hardcoded values. 
+
 1999-04-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-component.c (gnome_component_class_init): Register

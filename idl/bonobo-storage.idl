@@ -16,12 +16,14 @@
 module GNOME {
 
 	interface Stream : object {
+		typedef sequence<octet> iobuf;
+
 		/**
 		 * read:
 		 * @count:  number of bytes to read.
 		 * @buffer: the buffer where the data is returned.
 		 */
-		long read     (in long count, out string buffer);
+		long read     (in long count, out iobuf buffer);
 	
 		/**
 		 * write:
@@ -30,7 +32,7 @@ module GNOME {
 		 *
 		 * writes the buffer to this stream.
 		 */
-		long write    (in long count, in string buffer);
+		long write    (in long count, in iobuf buffer);
 
 		/**
 		 * seek:

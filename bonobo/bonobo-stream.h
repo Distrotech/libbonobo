@@ -29,10 +29,10 @@ typedef struct {
 	 * virtual methods
 	 */
 	CORBA_long (*write)    (GnomeStream *stream, long count,
-			        const CORBA_char *buffer,
+			        const GNOME_Stream_iobuf *buffer,
 			        CORBA_Environment *ev);
 	CORBA_long (*read)     (GnomeStream *stream, long count,
-			        CORBA_char **buffer,
+				GNOME_Stream_iobuf **buffer,
 			        CORBA_Environment *ev);
 	void       (*seek)     (GnomeStream *stream,
 			        CORBA_long offset, CORBA_long whence,
