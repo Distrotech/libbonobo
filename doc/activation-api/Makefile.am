@@ -59,11 +59,12 @@ GTKDOC_LIBS =
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
 
-dist-hook-local:
-	mkdir $(distdir)/TEXT;          \
-	for f in $(srcdir)/TEXT/* ; do  \
-	  test -f $$f && cp -p $$f $(distdir)/TEXT; \
-	done
+# FIXME: what is this?  -- jacob
+#dist-hook-local:
+#	mkdir $(distdir)/TEXT;          \
+#	for f in $(srcdir)/TEXT/* ; do  \
+#	  test -f $$f && cp -p $$f $(distdir)/TEXT; \
+#	done
 
 
 ####################################
