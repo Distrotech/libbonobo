@@ -1,3 +1,8 @@
+2000-06-30  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo-idl/main.c: More work.  The only issue left now is how to
+	integrate the user provided code in the .c and the .h files.
+
 2000-06-30  Martijn van Beers  <martijn@earthling.net>
 
 	* bonobo/*.h: remove all remaining extern declarations of _epv
