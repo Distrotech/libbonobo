@@ -288,10 +288,15 @@ od_load_file (const char *file,
                 return;
         }
         
-        if (g_ascii_strcasecmp (document->xmlRootNode->name, "oaf_info") == 0) {
-                node = document->xmlRootNode->xmlChildrenNode;
-        } else {
-                node = document->xmlRootNode;
+	node = document->xmlRootNode;
+	if (node == NULL) {
+                /* FIXME: syslog the error */
+                xmlFreeDoc (document);
+		return;
+	}
+
+        if (g_ascii_strcasecmp (node->name, "oaf_info") == 0) {
+                node = node->xmlChildrenNode;
         }
         
         while (node != NULL) {

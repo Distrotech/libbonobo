@@ -65,10 +65,10 @@ object_directory_load_config_file (void)
 
         doc = object_directory_load_xml_file ();
 
-        if (!doc)
-                return NULL;
-
-        search_node = doc->xmlRootNode->xmlChildrenNode;
+        if (doc == NULL || doc->xmlRootNode == NULL)
+		search_node = NULL;
+	else
+		search_node = doc->xmlRootNode->xmlChildrenNode;
         result = g_strdup ("");
         while (search_node != NULL) {
                 if (strcmp (search_node->name, "searchpath") == 0) {

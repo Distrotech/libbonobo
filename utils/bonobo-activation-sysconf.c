@@ -82,6 +82,16 @@ display_config_path (void)
         g_free (config_file);
 }
 
+static xmlNodePtr
+get_root_first_child (xmlDocPtr doc)
+{
+	if (doc == NULL)
+		return NULL;
+	if (doc->xmlRootNode == NULL)
+		return NULL;
+	return doc->xmlRootNode->xmlChildrenNode;
+}
+
 static void
 add_directory (const char *directory)
 {
@@ -94,7 +104,7 @@ add_directory (const char *directory)
 
         /* make sure the directory we want to add is not already
            in the config file */
-        search_node = doc->xmlRootNode->xmlChildrenNode;
+        search_node = get_root_first_child (doc);
         while (search_node != NULL) {
                 if (strcmp (search_node->name, "searchpath") == 0) {
                         xmlNodePtr item_node;
@@ -118,19 +128,24 @@ add_directory (const char *directory)
         }
 
 
-        if (is_already_there == FALSE) {
+        if (!is_already_there) {
                 xmlNodePtr new_node;
 
                 /* add the directory to the config file */
-                search_node = doc->xmlRootNode->xmlChildrenNode;
-                /* go to the first searchpath node */
-                while (strcmp (search_node->name, "searchpath") != 0) {
-                        search_node = search_node->next;                        
-                }
-                new_node = xmlNewDocNode (doc, NULL, "item", directory);
-                xmlAddChild (search_node, new_node);
-                
-                save_file (doc);
+                search_node = get_root_first_child (doc);
+
+                if (search_node == NULL)
+			g_print (_("there is not a properly structured configuration file\n"));
+		else {
+			/* go to the first searchpath node */
+			while (strcmp (search_node->name, "searchpath") != 0) {
+				search_node = search_node->next;                        
+			}
+			new_node = xmlNewDocNode (doc, NULL, "item", directory);
+			xmlAddChild (search_node, new_node);
+			
+			save_file (doc);
+		}
         }
         
         xmlFreeDoc (doc);
@@ -144,7 +159,7 @@ remove_directory (const char *directory)
 
         doc = open_file ();
 
-        search_node = doc->xmlRootNode->xmlChildrenNode;
+        search_node = get_root_first_child (doc);
         while (search_node != NULL) {
                 if (strcmp (search_node->name, "searchpath") == 0) {
                         xmlNodePtr item_node;
@@ -185,7 +200,7 @@ display_directories (void)
 
         g_print (_("Bonobo-activation configuration file contains:\n"));
 
-        search_node = doc->xmlRootNode->xmlChildrenNode;
+	search_node = get_root_first_child (doc);
         while (search_node != NULL) {
                 if (strcmp (search_node->name, "searchpath") == 0) {
                         xmlNodePtr item_node;
