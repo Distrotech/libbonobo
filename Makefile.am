@@ -1,7 +1,7 @@
 SUBDIRS = \
 	idl bonobo-activation bonobo \
 	activation-server monikers \
-	samples tests doc po
+	utils samples tests doc po
 
 libincludedir = $(includedir)/libbonobo-2.0
 libinclude_HEADERS = \

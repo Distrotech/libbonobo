@@ -33,7 +33,7 @@
 
 #include <bonobo-activation/bonobo-activation.h>
 #include "bonobo-activation/bonobo-activation-i18n.h"
-#include "server/object-directory-config-file.h"
+#include "activation-server/object-directory-config-file.h"
 
 static xmlDocPtr
 open_file (void)

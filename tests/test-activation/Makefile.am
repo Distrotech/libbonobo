@@ -91,6 +91,6 @@ serverfiles=empty.server broken.server plugin.server
 emptydatadir=$(libdir)/bonobo/servers
 emptydata_DATA=$(serverfiles)
 
-EXTRA_DIST= test.shempty.idl plugin.idl $(serverfiles)
+EXTRA_DIST= test.sh empty.idl plugin.idl $(serverfiles)
 
 TESTS= test.sh bonobo-activation-test-async

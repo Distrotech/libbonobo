@@ -1,3 +1,26 @@
+libbonobo 2.3.1
+
+	* Features
+		+ lots more API & other doc work (Gustavo)
+		+ selectable BonoboObject POAs (Michael, Gustavo)
+		+ re-factored activation server (Michael)
+		+ merged bonobo-activation (Michael)
+		+ unknown app registration (Gustavo)
+		+ cygwin build fixes (Masahiro Sakai)
+		+ BonoboForeignObject - for bindings (Gustavo, James H)
+	* Bugs fixed
+		+ BonoboArg improvements (Gustavo)
+		+ make check doesn't trash /tmp (Michael)
+		+ remove .so library suffix (Michael)
+		+ trailing ; fixes (Padraig O'Briain)
+		+ C++ BonoboArg bits (Martin Kretzchmar)
+		+ gettext fixes (Hidetoshi Tajima)
+		+ build fixes (Thomas VS, James H, Carlos Marin)
+	* Translations
+		+ am - Daniel Yacob, de, fa, mk, nl - Pablo Saratxaga
+		+ ro - Marius Andreiana, mn, id, eo, sr - Christian Rose
+		+ ml - Guntupalli Karunakar
+
 libbonobo 2.2.0
 
 	* Features
