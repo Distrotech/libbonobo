@@ -318,30 +318,6 @@ bonobo_generic_factory_get_type (void)
 	return type;
 }
 
-#if 0
-/**
- * bonobo_generic_factory_set:
- * @factory: The BonoboGenericFactory object whose callback will be set.
- * @factory_cb: A callback routine which is used to create new object instances.
- * @user_data: The closure data to be passed to the @factory callback.
- *
- * Sets the callback and callback closure for @factory to
- * @factory_cb and @user_data, respectively.
- */
-void
-bonobo_generic_factory_set (BonoboGenericFactory  *factory,
-			    BonoboFactoryCallback  factory_cb,
-			    gpointer               user_data)
-{
-	g_return_if_fail (factory != NULL);
-	g_return_if_fail (BONOBO_IS_GENERIC_FACTORY (factory));
-	g_return_if_fail (factory_cb != NULL);
-
-	factory->priv->factory_cb = factory;
-	factory->priv->factory_closure = user_data;
-}
-#endif
-
 /**
  * bonobo_generic_factory_get_epv:
  *
