@@ -1,3 +1,8 @@
+2003-06-04  Michael Meeks  <michael@ximian.com>
+
+	* activation-server/server.h: turn off
+	BONOBO_ACTIVATION_DEBUG - it's spewing reams of cruft.
+
 2003-06-02  Shailesh Mittal  <shailesh.mittal@wipro.com>
 
 	* configure.in: Added checks for getaddrinfo().
