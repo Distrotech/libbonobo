@@ -7,6 +7,11 @@ empty-skels.c
 empty-stubs.c
 empty.h
 empty_built
+plugin-common.c
+plugin-skels.c
+plugin-stubs.c
+plugin.h
+plugin_built
 bonobo-activation-empty-server
 bonobo-activation-test-async
 bonobo-activation-run-query

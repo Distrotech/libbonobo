@@ -6,8 +6,9 @@
 #include <bonobo-activation/bonobo-activation.h>
 
 #include "empty.h"
+#include "plugin.h"
 
-#define TOTAL_TEST_SCORE 13
+#define TOTAL_TEST_SCORE 14
 
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
@@ -74,6 +75,21 @@ test_object (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 }
 
 static int
+test_plugin (CORBA_Object obj, CORBA_Environment *ev, const char *type)
+{
+	Plugin_doPluginTest (obj, ev);
+
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+		g_warning ("Call failed: %s\n",
+			   bonobo_activation_exception_id (ev));
+		return 0;
+	} else {
+		fprintf (stderr, "Test %s succeeded\n", type);
+		return 1;
+	}
+}
+
+static int
 test_empty (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 {
         Empty_doNothing (obj, ev);
@@ -118,6 +134,10 @@ main (int argc, char *argv[])
                 passed += test_empty (obj, &ev, "from aid");
         }
 
+	obj = bonobo_activation_activate_from_id ("OAFAID:[OAFIID:Plugin:20010713]",  0, NULL, &ev);
+	if (test_object (obj, &ev, "from aid")) {
+		passed += test_plugin (obj, &ev, "from aid");
+	}
 
         fprintf (stderr, "Broken link test ");
         obj = bonobo_activation_activate_from_id ("OAFIID:Bogus:20000526", 0, NULL, &ev);
