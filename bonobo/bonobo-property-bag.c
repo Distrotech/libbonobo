@@ -985,6 +985,17 @@ gnome_property_bag_any_to_value (GnomePropertyBag *pb, const char *type,
 /*
  * Standard type marshalers.
  */
+
+/* Gross macros to get around ORBit incompleteness. */
+#define CORBA_short__alloc() (CORBA_short *) CORBA_octet_allocbuf (sizeof (CORBA_short))
+#define CORBA_unsigned_short__alloc() (CORBA_unsigned_short *) CORBA_octet_allocbuf (sizeof (CORBA_unsigned_short))
+#define CORBA_long__alloc() (CORBA_long *) CORBA_octet_allocbuf (sizeof (CORBA_long))
+#define CORBA_unsigned_long__alloc() (CORBA_unsigned_long *) CORBA_octet_allocbuf (sizeof (CORBA_unsigned_long))
+#define CORBA_string__alloc() (CORBA_char **) CORBA_octet_allocbuf (sizeof (CORBA_char *))
+#define CORBA_float__alloc() (CORBA_float *) CORBA_octet_allocbuf (sizeof (CORBA_float))
+#define CORBA_double__alloc() (CORBA_double *) CORBA_octet_allocbuf (sizeof (CORBA_double))
+#define CORBA_boolean__alloc() (CORBA_boolean *) CORBA_octet_allocbuf (sizeof (CORBA_boolean))
+
 static CORBA_any *
 gnome_property_bag_marshal_boolean (GnomePropertyBag *pb, const char *type,
 				    const gpointer value)
@@ -993,8 +1004,8 @@ gnome_property_bag_marshal_boolean (GnomePropertyBag *pb, const char *type,
 	CORBA_boolean *b;
 
 
-	b = g_new0 (CORBA_boolean, 1);
-	*b = (CORBA_boolean *) value;
+	b = CORBA_boolean__alloc();
+	*b = *(CORBA_boolean *) value;
 	
 	any = CORBA_any__alloc ();
 	any->_type = (CORBA_TypeCode) TC_boolean;
@@ -1017,7 +1028,7 @@ gnome_property_bag_marshal_string (GnomePropertyBag *pb, const char *type,
 	else
 		string_value = (const char *) value;
 
-	str = g_new0 (CORBA_char *, 1);
+	str = CORBA_string__alloc();
 	*str = CORBA_string_dup (string_value);
 	
 	any = CORBA_any__alloc ();
@@ -1035,7 +1046,7 @@ gnome_property_bag_marshal_short (GnomePropertyBag *pb, const char *type,
 	CORBA_any *any;
 	CORBA_short *s;
 
-	s = g_new0 (CORBA_short, 1);
+	s = CORBA_short__alloc();
 	*s = *((CORBA_short *)value);
 
 	any = CORBA_any__alloc ();
@@ -1052,7 +1063,7 @@ gnome_property_bag_marshal_ushort (GnomePropertyBag *pb, const char *type,
 	CORBA_any *any;
 	CORBA_unsigned_short *s;
 
-	s = g_new0 (CORBA_unsigned_short, 1);
+	s = CORBA_unsigned_short__alloc();
 	*s = *((CORBA_unsigned_short *)value);
 
 	any = CORBA_any__alloc ();
@@ -1070,7 +1081,7 @@ gnome_property_bag_marshal_long (GnomePropertyBag *pb, const char *type,
 	CORBA_any *any;
 	CORBA_long *l;
 
-	l = g_new0 (CORBA_long, 1);
+	l = CORBA_long__alloc();
 	*l = *((CORBA_long *) value);
 
 	any = CORBA_any__alloc ();
@@ -1088,7 +1099,7 @@ gnome_property_bag_marshal_ulong (GnomePropertyBag *pb, const char *type,
 	CORBA_any *any;
 	CORBA_unsigned_long *l;
 
-	l = g_new0 (CORBA_unsigned_long, 1);
+	l = CORBA_unsigned_long__alloc();
 	*l = *((CORBA_unsigned_long *) value);
 
 	any = CORBA_any__alloc ();
@@ -1106,7 +1117,7 @@ gnome_property_bag_marshal_float (GnomePropertyBag *pb, const char *type,
 	CORBA_any *any;
 	CORBA_float *f;
 
-	f = g_new0 (CORBA_float, 1);
+	f = CORBA_float__alloc();
 	*f = *((CORBA_float *) value);
 
 	any = CORBA_any__alloc ();
@@ -1124,7 +1135,7 @@ gnome_property_bag_marshal_double (GnomePropertyBag *pb, const char *type,
 	CORBA_any *any;
 	CORBA_double *d;
 
-	d = g_new0 (CORBA_double, 1);
+	d = CORBA_double__alloc();
 	*d = *((CORBA_double *) value);
 
 	any = CORBA_any__alloc ();
