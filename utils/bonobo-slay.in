@@ -10,13 +10,19 @@
 # Return code of 0 indicates no bonobo processes were
 #   running when script was run.
 #
-use             Getopt::Std;
+use 		Getopt::Long;
+
+Getopt::Long::Configure( "no_auto_abbrev" );	
+Getopt::Long::Configure( "bundling" );
 
 $usage_error = 0;
+$opt_h = 0, $opt_i = 0, $opt_l = 0, $opt_s = 0; 
 
-# Handle input arguments
-#
-$rc = getopts('lsh');
+$rc = GetOptions("help" => \$usage_error, 
+		 "h"  => \$opt_h, 
+		 "i"  => \$opt_i, 
+		 "l"  => \$opt_l, 
+		 "s"  => \$opt_s);
 
 # Usage errors
 #
@@ -38,7 +44,8 @@ if ($usage_error == 1 || $opt_h) {
 	print "\n";
 	print "Usage : bonobo-slay [-hls] [regexp]\n";
 	print "\tKill Bonobo processes still running.\n";
-	print "\t -h Print this help message.\n";
+	print "\t -h,--help Print this help message.\n";
+	print "\t -i Ask before killing the processes.\n";
 	print "\t -l List processes running, but do not kill them.  Not valid with -s\n";
 	print "\t -s Silent.  Kill processes quietly\n";
 	print "\t [regexp] only kill proccesses matching this\n";
@@ -184,10 +191,18 @@ do {
 			print "\n";
 		}
 
-		# Kill if the -l argument is specified.
+		# Kill if the -l argument is not specified.
 		#
 		if(!$opt_l) {
-			$killall = "/bin/kill";
+		        if($opt_i) {
+		    	        print "Do you really want to continue (y/N) ? ";			
+		    	        $_=<STDIN>;
+		    	        chomp;
+		    	        if(not /^[Yy]$/) {
+				        exit(-1);
+		    	        }
+			}
+                        $killall = "/bin/kill";
 			$kill_params = ' -9 ';
 			foreach $proc (@process_pids) {
 				chomp $proc;
