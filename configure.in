@@ -2,7 +2,7 @@ AC_PREREQ(2.52)
 AC_INIT(message-of-doom)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(libbonobo2, 1.101.0)
+AM_INIT_AUTOMAKE(libbonobo2, 1.101.1)
 
 AM_MAINTAINER_MODE
 
@@ -62,7 +62,7 @@ AC_DEFINE(HAVE_DLADDR,$have_dladdr)
 #
 # Start of pkg-config checks
 #
-PKG_CHECK_MODULES(LIBBONOBO, ORBit-2.0 >= 2.3.91 ORBit-CosNaming-2.0 >= 2.3.91 glib-2.0 >= 1.3.1 gobject-2.0 >= 1.3.1 gthread-2.0 >= 1.3.1 bonobo-activation-2.0 >= 0.7.0)
+PKG_CHECK_MODULES(LIBBONOBO, ORBit-2.0 >= 2.3.93 ORBit-CosNaming-2.0 >= 2.3.91 glib-2.0 >= 1.3.1 gobject-2.0 >= 1.3.1 gthread-2.0 >= 1.3.1 bonobo-activation-2.0 >= 0.7.0)
 AC_SUBST(LIBBONOBO_CFLAGS)
 AC_SUBST(LIBBONOBO_LIBS)
 

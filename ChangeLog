@@ -1,5 +1,16 @@
 2001-08-07  Michael Meeks  <michael@ximian.com>
 
+	* configure.in: depend on ORBit2 >= 2.3.93 for
+	CORBA_TypeCode_equivalent
+
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_pbclient_get_value): use CORBA_TypeCode_equivalent so
+	we ignore tedious alias problems.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_remove):
+	impl - breaks API freeze, but c'est la vie - important
+	method to have around.
+
 	* bonobo/Makefile.am: really fixup dependencies, build
 	the other things afterwards.
 
@@ -23,7 +34,6 @@
 	from CORBA_Object_is_a and treat an exception as a FALSE
 	return.
 
->>>>>>> 1.133
 2001-08-05  Michael Meeks  <michael@ximian.com>
 
 	* Makefile.am: distribute changes.txt

@@ -594,6 +594,28 @@ bonobo_property_bag_add_full (BonoboPropertyBag    *pb,
 	g_hash_table_insert (pb->priv->prop_hash, prop->name, prop);
 }
 
+/**
+ * bonobo_property_bag_remove:
+ * @pb: the property bag
+ * @name: name of property to remove.
+ * 
+ * removes the property with @name from @b.
+ **/
+void
+bonobo_property_bag_remove (BonoboPropertyBag *pb,
+			    const char        *name)
+{
+	gpointer key, value;
+
+	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
+	g_return_if_fail (pb->priv != NULL);
+	g_return_if_fail (pb->priv->prop_hash != NULL);
+
+	if (g_hash_table_lookup_extended (pb->priv->prop_hash,
+					  name, &key, &value))
+		bonobo_property_bag_foreach_remove_prop (key, value, NULL);
+}
+
 static Bonobo_PropertyFlags
 flags_gtk_to_bonobo (guint flags)
 {

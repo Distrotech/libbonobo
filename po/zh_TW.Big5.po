@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ammonite\n"
-"POT-Creation-Date: 2001-08-01 08:10+0100\n"
+"POT-Creation-Date: 2001-08-07 15:33-0400\n"
 "PO-Revision-Date: 2001-05-30 11:55+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: chinese <zh@li.org>\n"
@@ -126,6 +126,10 @@ msgstr "檢查錯誤時發生錯誤；沒有列外處理"
 msgid "General activation error with no description"
 msgstr "物件描述內有語法錯誤"
 
+#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+msgid "Could not initialize Bonobo"
+msgstr "無法初始化 Bonobo"
+
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP 命名器"
@@ -153,9 +157,6 @@ msgstr "一般的項目命名器"
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "資料流命名延伸器"
-
-#~ msgid "Could not initialize Bonobo"
-#~ msgstr "無法初始化 Bonobo"
 
 #~ msgid "Visible"
 #~ msgstr "可見"

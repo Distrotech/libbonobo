@@ -116,6 +116,10 @@ bonobo_property_bag_add_full      (BonoboPropertyBag    *pb,
 				   GClosure             *set_prop);
 
 void
+bonobo_property_bag_remove        (BonoboPropertyBag    *pb,
+				   const char           *name);
+
+void
 bonobo_property_bag_add_gtk_args  (BonoboPropertyBag   *pb,
 				   GObject             *object);
 
