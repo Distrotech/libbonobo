@@ -113,8 +113,7 @@ impl_list_contents (PortableServer_Servant servant,
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 
-	CLASS (storage)->list_contents (storage, path, ev);
-	return CORBA_OBJECT_NIL;
+	return CLASS (storage)->list_contents (storage, path, ev);
 }
 
 static void
