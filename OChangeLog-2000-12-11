@@ -1,3 +1,17 @@
+2000-09-02  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-view.c (bonobo_view_popup_verbs),
+	(bonobo_view_verb_selected_cb): disable; LXR says unused.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_popup_verbs): ditto.
+
+	* samples/controls/bonobo-calculator-control.c (bonobo_calculator_factory):
+	remove control menu creation.
+
+	* configure.in: define USE_UI_HANDLER
+
+	* bonobo/bonobo-ui-compat.[ch]: create.
+
 2000-09-01  JP Rosevear  <jpr@helixcode.com>
 
 	* bonobo/bonobo.h: Remove deleted file
