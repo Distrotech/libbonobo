@@ -1,3 +1,20 @@
+1999-12-29  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-ui-handler.c (impl_toolbar_item_set_data): implement.
+	(impl_toolbar_item_get_data): stub.
+	(toolbar_item_toplevel_set_pixmap_internal): implement.
+	(toolbar_item_toplevel_set_pixmap): implement.
+	(gnome_ui_handler_toolbar_item_set_pixmap): implement.
+	(impl_toolbar_item_set_attributes): use toolbar_item_set_sens.
+	(toolbar_item_toplevel_set_sensitivity_internal): create.
+	(toolbar_toplevel_get_widget): inline.
+	(impl_toolbar_set_attributes): implement.
+	(impl_toolbar_get_attributes): stub.
+	(toolbar_toplevel_set_sensitivity): fix.
+	Some sed's to fix some of my naming idiocies.
+
+	* bonobo/gnome-ui-handler.h: Update misc. prototypes.
+
 1999-12-27  Nat Friedman  <nat@helixcode.com>
 
 	* bonobo/gnome-object.h: Removed old externs for gnome_object_epv
