@@ -13,6 +13,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_SIMPLE_DATA_SOURCE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_SIMPLE_DATA_SOURCE_TYPE))
 
 typedef struct _GnomeSimpleDataSource GnomeSimpleDataSource;
+typedef struct _GnomeSimpleDataSourcePrivate GnomeSimpleDataSourcePrivate;
 
 /* Callback typedefs. */
 typedef int (*GnomeSimpleDataSourcePopDataFn)			(GnomeSimpleDataSource *ssource,
@@ -35,6 +36,8 @@ struct _GnomeSimpleDataSource {
 	GnomeSimpleDataSourceRemainingDataFn remaining_data_fn;
 
 	void *closure;
+
+	GnomeSimpleDataSourcePrivate *priv;
 };
 
 typedef struct {

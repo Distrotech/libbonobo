@@ -13,6 +13,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_PERSIST_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_STREAM_TYPE))
 
 typedef struct _GnomePersistStream GnomePersistStream;
+typedef struct _GnomePersistStreamPrivate GnomePersistStreamPrivate;
 
 
 typedef int (*GnomePersistStreamIOFn)(GnomePersistStream *ps, const GNOME_Stream stream, void *closure);
@@ -32,6 +33,8 @@ struct _GnomePersistStream {
 	GnomePersistStreamMaxFn get_size_max_fn;
 	
 	void *closure;
+
+	GnomePersistStreamPrivate *priv;
 };
 
 typedef struct {

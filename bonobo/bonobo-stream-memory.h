@@ -8,6 +8,7 @@ BEGIN_GNOME_DECLS
 
 struct _GnomeStreamMem;
 typedef struct _GnomeStreamMem GnomeStreamMem;
+typedef struct _GnomeStreamMemPrivate GnomeStreamMemPrivate;
 
 #ifndef _GNOME_STORAGE_MEM_H_
 struct _GnomeStorageMem;
@@ -27,6 +28,8 @@ struct _GnomeStreamMem {
 	size_t       size;
 	long         pos;
 	gboolean     read_only;
+
+	GnomeStreamMemPrivate *priv
 };
 
 typedef struct {

@@ -13,6 +13,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_PROGRESSIVE_DATA_SINK_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PROGRESSIVE_DATA_SINK_TYPE))
 
 typedef struct _GnomeProgressiveDataSink GnomeProgressiveDataSink;
+typedef struct _GnomeProgressiveDataSinkPrivate GnomeProgressiveDataSinkPrivate;
 
 /* Callback typedefs. */
 typedef int (*GnomeProgressiveDataSinkStartFn)   (GnomeProgressiveDataSink *psink,
@@ -40,6 +41,8 @@ struct _GnomeProgressiveDataSink {
 	GnomeProgressiveDataSinkSetSizeFn set_size_fn;
 
 	void *closure;
+
+	GnomeProgressiveDataSinkPrivate *priv;
 };
 
 typedef struct {

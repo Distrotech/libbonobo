@@ -13,8 +13,12 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_STORAGE(o)       (GTK_CHECK_TYPE ((o), GNOME_STORAGE_TYPE))
 #define GNOME_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STORAGE_TYPE))
 
+typedef struct _GnomeStoragePrivate GnomeStoragePrivate;
+
 typedef struct {
         GnomeObject object;
+
+	GnomeStoragePrivate *priv;
 } GnomeStorage;
 
 typedef struct {

@@ -12,10 +12,14 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_PERSIST(o)       (GTK_CHECK_TYPE ((o), GNOME_PERSIST_TYPE))
 #define GNOME_IS_PERSIST_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_TYPE))
 
+typedef struct _GnomePersist GnomePersistPrivate;
+
 typedef struct {
 	GnomeObject object;
 
 	char  *goad_id;
+
+	GnomePersistPrivate *priv;
 } GnomePersist;
 
 typedef struct {

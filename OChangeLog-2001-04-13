@@ -1,3 +1,50 @@
+1999-09-01  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-view-frame.h (GnomeViewFrame): Added private field
+	for future growth.
+
+	* bonobo/gnome-ui-handler.h (GnomeUIHandler): Added private field
+	for future growth.
+
+	* bonobo/gnome-stream-memory.h (GnomeStreamMem): Added private
+	field for future growth.
+
+	* bonobo/gnome-storage.h (GnomeStorage): Added private field for
+	future growth.
+
+	* bonobo/gnome-simple-source.h (GnomeSimpleDataSource):  Added
+	private field for future growth.
+
+	* bonobo/gnome-progressive.h (GnomeProgressiveDataSink): Added
+	private field for future growth.
+
+	* bonobo/gnome-persist.h (GnomePersist): Added private field for
+	future growth.
+
+	* bonobo/gnome-persist-stream.h (GnomePersistStream); Added
+	private field for future growth.
+
+	* bonobo/gnome-persist-file.h (GnomePersistFile): Added private
+	field for future growth.
+
+	* bonobo/gnome-moniker.h (GnomeMoniker): Added private field for
+	future growth.
+
+	* bonobo/gnome-embeddable-factory.h (GnomeEmbeddableFactory):
+	Added private field for future growth.
+
+	* bonobo/gnome-container.h (GnomeContainer): Added private field
+	for future growth.
+
+	* bonobo/gnome-client-site.h (GnomeClientSite): Added private
+	field for future growth.
+
+	* bonobo/gnome-view.h (GnomeView): Added private field
+	for future growth.
+
+	* bonobo/gnome-embeddable.h (GnomeEmbeddable): Added private field
+	for future growth.
+
 1999-08-30  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-bonobo-selector.c (select_row): Transparent handler

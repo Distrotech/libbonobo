@@ -13,6 +13,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_PERSIST_FILE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_PERSIST_FILE_TYPE))
 
 typedef struct _GnomePersistFile GnomePersistFile;
+typedef struct _GnomePersistFilePrivate GnomePersistFilePrivate;
 
 
 typedef int (*GnomePersistFileIOFn)(GnomePersistFile *pf, const CORBA_char *filename, void *closure);
@@ -30,6 +31,8 @@ struct _GnomePersistFile {
 	GnomePersistFileIOFn  save_fn;
 	GnomePersistFileIOFn  load_fn;
 	void *closure;
+
+	GnomePersistFilePrivate *priv;
 };
 
 typedef struct {

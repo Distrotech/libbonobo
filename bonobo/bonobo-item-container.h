@@ -25,12 +25,16 @@ BEGIN_GNOME_DECLS
 
 typedef GList GnomeClientSiteList;
 
+typedef struct _GnomeContainerPrivate GnomeContainerPrivate;
+
 typedef struct {
 	GnomeObject base;
 
 	GnomeClientSiteList *client_sites;
 	
 	GnomeMoniker *moniker;
+
+	GnomeContainerPrivate *priv;
 } GnomeContainer;
 
 typedef struct {

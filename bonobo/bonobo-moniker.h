@@ -16,11 +16,15 @@ BEGIN_GNOME_DECLS
 
 struct _GnomeMoniker;
 typedef struct _GnomeMoniker GnomeMoniker;
+struct _GnomeMonikerPrivate;
+typedef struct _GnomeMonikerPrivate GnomeMonikerPrivate;
 
 struct _GnomeMoniker {
 	GtkObject parent;
+
 	char *goadid, *url;
 	GList *items;
+	GnomeMonikerPrivate *priv
 };
 
 typedef struct {

@@ -220,8 +220,18 @@ interface Embeddable : GNOME::Unknown {
 	 * 
 	 * BonoboObjects should be able to produce as many views
 	 * of the same data as requested.
+	 *
+	 * That being said: a common task is to wrap a widget
+	 * and export it trough Bonobo.  In such case, you might
+	 * want to support only one view of the data (so the 
+	 * exception MultiViewNotSupported is emmited).
+	 *
+	 * Due to the lack of a property database, we are currently
+	 * asking developers to not list their single-view objects
+	 * with the Embeddable attribute in their GOAD files.
 	 */
-	View new_view (in ViewFrame frame);
+	View new_view (in ViewFrame frame) 
+		raises (MultiViewNotSupported);
 
 };
 
