@@ -1,3 +1,10 @@
+2001-09-20  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-moniker-util.c
+	(bonobo_moniker_util_unescape): fix bug escaping literal
+	'\\' mis-counting as 2 escapes, where there is only a
+	single escaped '\'
+
 2001-09-20  Frank Belew  <frb@ximian.com>
 
 	* configure.in: Removed AM_CONDITIONAL(FALSE...)

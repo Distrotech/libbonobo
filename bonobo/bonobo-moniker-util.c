@@ -379,8 +379,11 @@ bonobo_moniker_util_unescape (const char *string, int num_chars)
 	for (i = 0; i < num_chars; i++) {
 		if (string [i] == '\0')
 			break;
-		else if (string [i] == '\\')
+		else if (string [i] == '\\') {
+			if (string [i + 1] == '\\')
+				i++;
 			backslashes ++;
+		}
 	}
 
 	if (!backslashes)
