@@ -18,8 +18,6 @@ CORBA_any or BonoboArg:
    <example>
      <title>Converting Any to XML</title>
      <programlisting>
-#include <bonobo.h>
-
 char *
 convert_arg_to_xml (BonoboArg *bonobo_arg)
 {
@@ -49,8 +47,6 @@ Here is the converse sample to produce a BonoboArg from an XML string:
    <example>
      <title>Converting XML to an Any</title>
      <programlisting>
-#include <bonobo.h>
-
 BonoboArg *
 convert_xml_to_arg (const char *xml)
 {

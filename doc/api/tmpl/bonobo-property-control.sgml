@@ -132,3 +132,10 @@ an interface for exposing property editors as controls
 @Returns: 
 
 
+<!-- ##### MACRO BONOBO_PROPERTY_CONTROL_CHANGED ##### -->
+<para>
+
+</para>
+
+
+

@@ -8,7 +8,10 @@ Base object for wrapping Bonobo::Unknown derived objects.
 
 <para>
   BonoboObject is the base object in Bonobo for wrapping CORBA servers
-  as Gtk+ objects.  
+  as Gtk+ objects. HOWEVER, since it's use is complicated, it is left
+  in bonobo for the benefit of Nautilus' binary compatibility. It is
+  strongly recommended that BonoboXObject be used for all new CORBA
+  server implementations.
 </para>
 
 <para>

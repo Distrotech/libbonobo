@@ -373,6 +373,21 @@ bonobo_x_type_setup (GtkType            type,
 	return TRUE;
 }
 
+/**
+ * bonobo_x_type_unique:
+ * @parent_type: the parent Gtk Type
+ * @init_fn: a POA initialization function
+ * @fini_fn: a POA finialization function or NULL
+ * @epv_struct_offset: the offset into the struct that the epv
+ * commences at, or 0 if we are inheriting a plain Gtk Object
+ * from a BonoboXObject, adding no new CORBA interfaces
+ * @info: the standard GtkTypeInfo.
+ * 
+ * This function is the main entry point for deriving bonobo
+ * server interfaces.
+ * 
+ * Return value: the constructed Gtk Type.
+ **/
 GtkType
 bonobo_x_type_unique (GtkType            parent_type,
 		      BonoboXObjectPOAFn init_fn,
@@ -402,6 +417,17 @@ bonobo_x_type_unique (GtkType            parent_type,
 		return 0;
 }
 
+/**
+ * bonobo_x_object:
+ * @p: a pointer to something
+ * 
+ * This function can be passed a BonoboXObject * or a
+ * PortableServer_Servant, and it will return a BonoboXObject *
+ * It also can convert a CORBA_Object to a BonoboXObject in
+ * some circumstances, but this behavior is broken conceptualy.
+ * 
+ * Return value: a BonoboXObject or NULL.
+ **/
 BonoboXObject *
 bonobo_x_object (gpointer p)
 {

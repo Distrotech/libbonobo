@@ -99,22 +99,22 @@ CORBA_Object          bonobo_generic_factory_corba_object_create (
 	gpointer      shlib_id);
 
 BonoboGenericFactory *bonobo_generic_factory_new (
-	const char            *component_id,
+	const char            *oaf_iid,
 	BonoboGenericFactoryFn factory,
 	gpointer               user_data);
 
 BonoboGenericFactory *bonobo_generic_factory_new_multi (
-	const char            *component_id,
+	const char            *oaf_iid,
 	GnomeFactoryCallback   factory_cb,
 	gpointer               data);
 
 BonoboGenericFactory *bonobo_generic_factory_construct (
-	const char            *component_id,
+	const char            *oaf_iid,
 	BonoboGenericFactory  *c_factory,
 	CORBA_Object           corba_factory,
 	BonoboGenericFactoryFn factory,
 	GnomeFactoryCallback   factory_cb,
-	void                  *data);
+	gpointer               user_data);
 
 void bonobo_generic_factory_set (
 	BonoboGenericFactory  *c_factory,

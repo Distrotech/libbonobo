@@ -1,5 +1,9 @@
 2001-02-21  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-xobject.c: Fully API document.
+
+	* bonobo/bonobo-property-bag-client.c: Fully API document.
+
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_translate_ui),
 	(bonobo_ui_util_new_ui): fix tedious warning.
 

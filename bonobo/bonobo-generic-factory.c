@@ -93,6 +93,7 @@ bonobo_generic_factory_corba_object_create (BonoboObject *object,
  * Bonobo::GenericFactory interface and which will be used to
  * construct this BonoboGenericFactory Gtk object.
  * @factory: A callback which is used to create new GnomeGeneric object instances.
+ * @factory_cb: A Multi object factory callback.
  * @user_data: The closure data to be passed to the @factory callback routine.
  *
  * Initializes @c_factory with the command-line arguments and registers

@@ -152,11 +152,12 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI
 
 </para>
 
-@component_id: 
+@oaf_iid: 
 @factory: 
 @user_data: 
 @Returns: 
 <!-- # Unused Parameters # -->
+@component_id: 
 @data: 
 @goad_id: 
 
@@ -166,11 +167,12 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI
 
 </para>
 
-@component_id: 
+@oaf_iid: 
 @factory_cb: 
 @data: 
 @Returns: 
 <!-- # Unused Parameters # -->
+@component_id: 
 @goad_id: 
 
 
@@ -179,14 +181,16 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI
 
 </para>
 
-@component_id: 
+@oaf_iid: 
 @c_factory: 
 @corba_factory: 
 @factory: 
 @factory_cb: 
-@data: 
+@user_data: 
 @Returns: 
 <!-- # Unused Parameters # -->
+@component_id: 
+@data: 
 @goad_id: 
 
 

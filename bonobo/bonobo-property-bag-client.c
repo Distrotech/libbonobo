@@ -16,14 +16,15 @@
  * bonobo_property_bag_client_get_properties:
  * @pb: A #Bonobo_PropertyBag      which is bound to a remote
  * #Bonobo_PropertyBag.
+ * @ev: optional CORBA exception environment or NULL
  *
  * Returns: A #GList filled with #Bonobo_Property CORBA object
  * references for all of the properties stored in the remote
  * #BonoboPropertyBag.
  */
 GList *
-bonobo_property_bag_client_get_properties (Bonobo_PropertyBag       pb,
-					   CORBA_Environment       *ev)
+bonobo_property_bag_client_get_properties (Bonobo_PropertyBag pb,
+					   CORBA_Environment *ev)
 {
 	Bonobo_PropertyList  *props;
 	GList		    *prop_list;
@@ -126,6 +127,7 @@ bonobo_property_bag_client_free_properties (GList *list)
  * bonobo_property_bag_client_get_property_names:
  * @pb: A #Bonobo_PropertyBag      which is bound to a remote
  * #Bonobo_PropertyBag.
+ * @ev: optional CORBA exception environment or NULL
  *
  * This function exists as a convenience, so that you don't have to
  * iterate through all of the #Bonobo_Property objects in order to get
@@ -137,8 +139,8 @@ bonobo_property_bag_client_free_properties (GList *list)
  * the properties stored in the remote #BonoboPropertyBag.
  */
 GList *
-bonobo_property_bag_client_get_property_names (Bonobo_PropertyBag       pb,
-					       CORBA_Environment       *ev)
+bonobo_property_bag_client_get_property_names (Bonobo_PropertyBag pb,
+					       CORBA_Environment *ev)
 {
 	Bonobo_PropertyNames  *names;
 	GList		     *name_list;
@@ -185,6 +187,7 @@ bonobo_property_bag_client_get_property_names (Bonobo_PropertyBag       pb,
  * BonoboPropertyBag.
  * @name: A string containing the name of the property which is to
  * be fetched.
+ * @ev: optional CORBA exception environment or NULL
  *
  * Returns: A #Bonobo_Property CORBA object reference for the
  *
@@ -227,6 +230,7 @@ bonobo_property_bag_client_get_property (Bonobo_PropertyBag       pb,
  * @pb: A #Bonobo_PropertyBag      object which is bound to a remote
  * #Bonobo_PropertyBag server.
  * @stream: A #BonoboStream into which the data in @pb will be written.
+ * @ev: optional CORBA exception environment or NULL
  *
  * Reads the property data stored in the #Bonobo_Property_bag to which
  * @pb is bound and streams it into @stream.  The typical use for
@@ -267,7 +271,14 @@ bonobo_property_bag_client_persist (Bonobo_PropertyBag       pb,
 
 /**
  * bonobo_property_bag_client_depersist:
- */
+ * @pb: the property bag to persist
+ * @stream: the stream to persist to
+ * @ev: optional CORBA exception environment or NULL
+ * 
+ *  Serializes the property bag @pb to the @stream,
+ * using the PersistStream interface associated with the
+ * PropertyBAg.
+ **/
 void
 bonobo_property_bag_client_depersist (Bonobo_PropertyBag       pb,
 				      Bonobo_Stream            stream,
@@ -308,7 +319,14 @@ bonobo_property_bag_client_depersist (Bonobo_PropertyBag       pb,
 
 /**
  * bonobo_property_bag_client_get_property_type:
- */
+ * @pb: the property bag
+ * @propname: the property name
+ * @ev: optional CORBA exception environment or NULL
+ * 
+ * Finds the typecode associated with the property in @pb of name @propname
+ * 
+ * Return value: the TypeCode for property @name or CORBA_OBJECT_NIL
+ **/
 CORBA_TypeCode
 bonobo_property_bag_client_get_property_type (Bonobo_PropertyBag       pb,
 					      const char              *propname,
@@ -520,6 +538,17 @@ MAKE_BONOBO_PROPERTY_BAG_CLIENT_PAIR(any,      BonoboArg *);
 /*
  * Setting property values.
  */
+
+/**
+ * bonobo_property_bag_client_set_value_any:
+ * @pb: the property bag
+ * @propname: name of property to set
+ * @value: value to set it to.
+ * @ev: optional CORBA exception environment or NULL
+ * 
+ * This function sets the value of the property with name
+ * @propname in @pb to @value.
+ **/
 void
 bonobo_property_bag_client_set_value_any (Bonobo_PropertyBag       pb,
 					  const char              *propname,
@@ -607,6 +636,18 @@ bonobo_property_bag_client_set_value_string (Bonobo_PropertyBag       pb,
 /*
  * Querying other fields and flags.
  */
+
+/**
+ * bonobo_property_bag_client_get_docstring:
+ * @pb: the property bag
+ * @propname: the property name
+ * @ev: optional CORBA exception environment or NULL
+ * 
+ * This function retrieves the documentation string associated
+ * with the property.
+ * 
+ * Return value: the doc string.
+ **/
 char *
 bonobo_property_bag_client_get_docstring (Bonobo_PropertyBag       pb,
 					  const char              *propname,
@@ -653,6 +694,14 @@ bonobo_property_bag_client_get_docstring (Bonobo_PropertyBag       pb,
 	return (char *) docstr;
 }
 
+/**
+ * bonobo_property_bag_client_get_flags:
+ * @pb: the property bag
+ * @propname: the property's name
+ * @ev: optional CORBA exception environment or NULL
+ * 
+ * Return value: the flags associated with this property
+ **/
 BonoboPropertyFlags
 bonobo_property_bag_client_get_flags (Bonobo_PropertyBag       pb,
 				      const char              *propname,
@@ -700,6 +749,20 @@ bonobo_property_bag_client_get_flags (Bonobo_PropertyBag       pb,
 		bonobo_property_bag_client_set_value##gt (pb, name, (CORBA##corbat) va_arg (args, ##ansip), ev);\
 		break;
 
+/**
+ * bonobo_property_bag_client_setv:
+ * @pb: the property bag
+ * @ev: optional CORBA exception environment or NULL
+ * @first_arg: first argument name
+ * @var_args: list of subsequent name / value pairs
+ * 
+ * This function uses the TypeCode data extracted from the
+ * @pb to determine how it walks its stack. This function
+ * provides the grunt implementation for other var-arg
+ * functions like bonobo_widget_set_property
+ * 
+ * Return value: an error string on error or NULL on success.
+ **/
 char *
 bonobo_property_bag_client_setv (Bonobo_PropertyBag       pb,
 				 CORBA_Environment       *ev,
@@ -754,6 +817,20 @@ bonobo_property_bag_client_setv (Bonobo_PropertyBag       pb,
 		    bonobo_property_bag_client_get_value##gt (pb, name, ev);	\
 		break;
 
+/**
+ * bonobo_property_bag_client_getv:
+ * @pb: the property bag
+ * @ev: optional CORBA exception environment or NULL
+ * @first_arg: first argument name
+ * @var_args: list of subsequent name / value pairs
+ * 
+ * This function uses the TypeCode data extracted from the
+ * @pb to determine how it walks its stack. This function
+ * provides the grunt implementation for other var-arg
+ * functions like bonobo_widget_get_property.
+ * 
+ * Return value: an error string on error or NULL on success.
+ **/
 char *
 bonobo_property_bag_client_getv (Bonobo_PropertyBag pb,
 				 CORBA_Environment *ev,
