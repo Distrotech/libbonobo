@@ -74,10 +74,9 @@ get_full_interface_name (const char *ifname)
 	    ifname [3] == ':')
 		a += 4;
 
-	for (had_ver = 0; *a; a++, b++) {
+	for (had_ver = 0; (*b = *a); a++, b++) {
 		if (*a == ':')
 			had_ver = 1;
-		*b = *a;
 	}
 
 	if (!had_ver)

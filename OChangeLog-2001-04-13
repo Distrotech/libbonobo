@@ -1,3 +1,8 @@
+2000-12-16  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* bonobo/bonobo-moniker-util.c (get_full_interface_name): fixed a
+	small bug.
+
 Fri Dec 15 16:53:30 2000  George Lebl <jirka@5z.com>
 
 	* bonobo/bonobo-arg.c, bonobo/bonobo-ui-component.c:  Swap order
