@@ -23,6 +23,8 @@ typedef struct {
 
 GtkType             bonobo_object_client_get_type        (void);
 
+BonoboObjectClient *bonobo_object_client_from_corba      (Bonobo_Unknown o);
+
 BonoboObjectClient *bonobo_object_client_construct       (BonoboObjectClient *object_client,
 							  CORBA_Object corba_object);
 
@@ -36,7 +38,6 @@ BonoboObjectClient *bonobo_object_activate_with_oaf_id   (const char *oaf_id,
 							  gint flags);
 Bonobo_Unknown      bonobo_object_restore_from_url       (const char *goad_id,
 							  const char *url);
-BonoboObjectClient *bonobo_object_client_from_corba      (Bonobo_Unknown o);
 
 /* Convenience Bonobo_Unknown wrappers */
 gboolean           bonobo_object_client_has_interface    (BonoboObjectClient *object,

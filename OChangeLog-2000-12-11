@@ -1,5 +1,9 @@
 2000-05-01  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-object-client.h: re-order.
+
+2000-05-01  Michael Meeks  <michael@helixcode.com>
+
 	* components/Makefile.am: kill x-png.
 
 	* components/image-x-png: Kill.
