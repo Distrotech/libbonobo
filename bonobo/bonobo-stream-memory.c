@@ -39,8 +39,8 @@ mem_truncate (GnomeStream *stream,
 }
 
 static CORBA_long
-mem_write (GnomeStream *stream, long count,
-	   GNOME_Stream_iobuf *buffer,
+mem_write (GnomeStream *stream, CORBA_long count,
+	   const GNOME_Stream_iobuf *buffer,
 	   CORBA_Environment *ev)
 {
 	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
@@ -65,7 +65,7 @@ mem_write (GnomeStream *stream, long count,
 }
 
 static CORBA_long
-mem_read (GnomeStream *stream, long count,
+mem_read (GnomeStream *stream, CORBA_long count,
 	  GNOME_Stream_iobuf ** buffer,
 	  CORBA_Environment *ev)
 {

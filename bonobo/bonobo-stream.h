@@ -11,16 +11,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_STREAM(o)       (GTK_CHECK_TYPE ((o), GNOME_STREAM_TYPE))
 #define GNOME_IS_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STREAM_TYPE))
 
-#ifndef _GNOME_STORAGE_H_
-struct _GnomeStream;
-struct _GnomeStorage;
-typedef struct _GnomeStream GnomeStream;
-typedef struct _GnomeStorage GnomeStorage;
-#endif
-
-struct _GnomeStream {
-	GnomeObject object;
-};
+typedef struct {
+        GnomeObject object;
+} GnomeStream;
 
 typedef struct {
 	GnomeObjectClass parent_class;
@@ -28,10 +21,10 @@ typedef struct {
 	/*
 	 * virtual methods
 	 */
-	CORBA_long (*write)    (GnomeStream *stream, long count,
+	CORBA_long (*write)    (GnomeStream *stream, CORBA_long count,
 			        const GNOME_Stream_iobuf *buffer,
 			        CORBA_Environment *ev);
-	CORBA_long (*read)     (GnomeStream *stream, long count,
+	CORBA_long (*read)     (GnomeStream *stream, CORBA_long count,
 				GNOME_Stream_iobuf **buffer,
 			        CORBA_Environment *ev);
 	void       (*seek)     (GnomeStream *stream,

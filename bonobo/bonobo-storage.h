@@ -2,11 +2,7 @@
 #define _GNOME_STORAGE_H_
 
 #include <bonobo/gnome-object.h>
-
-struct _GnomeStream;
-struct _GnomeStorage;
-typedef struct _GnomeStream GnomeStream;
-typedef struct _GnomeStorage GnomeStorage;
+#include <bonobo/gnome-stream.h>
 
 BEGIN_GNOME_DECLS
 
@@ -16,9 +12,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_STORAGE(o)       (GTK_CHECK_TYPE ((o), GNOME_STORAGE_TYPE))
 #define GNOME_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STORAGE_TYPE))
 
-struct _GnomeStorage {
-	GnomeObject object;
-};
+typedef struct {
+        GnomeObject object;
+} GnomeStorage;
 
 typedef struct {
 	GnomeObjectClass parent_class;
