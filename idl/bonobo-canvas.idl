@@ -7,6 +7,11 @@
  * Copyright (C) 1999, 2000 Helix Code, Inc.
  */
 
+#ifndef BONOBO_CANVAS_IDL
+#define BONOBO_CANVAS_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 
 module Gdk {
@@ -237,3 +242,4 @@ module Canvas {
 
 };
 
+#endif /* BONOBO_CANVAS_IDL */

@@ -7,6 +7,11 @@
  *	Miguel de Icaza (miguel@helixcode.com)
  */
 
+#ifndef BONOBO_ITEM_CONTAIER_IDL
+#define BONOBO_ITEM_CONTAIER_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 
 	interface ItemContainer : Unknown {
@@ -45,3 +50,5 @@ module Bonobo {
 			raises (SyntaxError, NotFound);
 	};
 };
+
+#endif /* BONOBO_ITEM_CONTAIER_IDL */

@@ -7,6 +7,11 @@
  *	Michael Meeks (michael@helixcode.com)
  */
 
+#ifndef BONOBO_UI_IDL
+#define BONOBO_UI_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 	interface UIContainer;
 
@@ -80,3 +85,5 @@ module Bonobo {
 			raises (InvalidPath);
 	};
 };
+
+#endif /* BONOBO_UI_IDL */

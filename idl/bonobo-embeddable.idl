@@ -13,6 +13,15 @@
  *	Nat Friedman    (nat@helixcode.com)
  */
 
+#ifndef BONOBO_EMBEDDABLE_IDL
+#define BONOBO_EMBEDDABLE_IDL
+
+#include "bonobo-control.idl"
+#include "bonobo-unknown.idl"
+#include "bonobo-canvas.idl"
+#include "bonobo-client-site.idl"
+#include "bonobo-advise.idl"
+
 module Bonobo {
 
 interface View : Control {

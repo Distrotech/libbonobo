@@ -8,6 +8,11 @@
  *	Michael Meeks (michael@helixcode.com)
  */
 
+#ifndef BONOBO_LISTENER_IDL
+#define BONOBO_LISTENER_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
   
 	interface Listener : Bonobo::Unknown {
@@ -52,3 +57,6 @@ module Bonobo {
   			raises (UnknownListener);
   	};
 };
+
+#endif /* BONOBO_LISTENER_IDL */
+

@@ -7,6 +7,11 @@
  *   Miguel de Icaza (miguel@kernel.org)
  */
 
+#ifndef BONOBO_DESKTOP_IDL
+#define BONOBO_DESKTOP_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 
 module Desktop {
@@ -29,3 +34,5 @@ interface Window : Bonobo::Unknown {
 };
 
 };
+
+#endif /* BONOBO_DESKTOP_IDL */

@@ -8,6 +8,12 @@
  *    Dan Winship     (danw@helixcode.com)
  */
 
+#ifndef BONOBO_PERSIST_IDL
+#define BONOBO_PERSIST_IDL
+
+#include "bonobo-unknown.idl"
+#include "bonobo-storage.idl"
+
 module Bonobo {
 	exception NotSupported {};
 
@@ -181,3 +187,5 @@ module Bonobo {
 	};
 
 };
+
+#endif /* BONOBO_PERSIST_IDL */

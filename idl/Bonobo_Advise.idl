@@ -7,6 +7,11 @@
  *	Miguel de Icaza (miguel@helixcode.com)
  */
 
+#ifndef BONOBO_ADVISE_IDL
+#define BONOBO_ADVISE_IDL
+
+#include "bonobo-unknown.idl"
+
 /*
  *  This interface is deprecated, use the BonoboListener
  * interface instead.
@@ -24,7 +29,7 @@ module Bonobo {
 		void notify (in long notify_type);
 		
 		/**
-		 * on_rename:
+		 * notifyRename:
 		 * @new_full_name: New name of the server
 		 * document.
 		 *
@@ -35,3 +40,5 @@ module Bonobo {
 		void notifyRename (in string new_full_name);
 	};
 };
+
+#endif /* BONOBO_ADVISE_IDL */

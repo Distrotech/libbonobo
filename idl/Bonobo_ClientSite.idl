@@ -12,6 +12,13 @@
  *    Miguel de Icaza (miguel@gnu.org)
  */
 
+#ifndef BONOBO_CLIENT_SITE_IDL
+#define BONOBO_CLIENT_SITE_IDL
+
+#include "bonobo-unknown.idl"
+#include "bonobo-persist.idl"
+#include "bonobo-item-container.idl"
+
 module Bonobo {
 
 interface ClientSite : Bonobo::Unknown {
@@ -33,7 +40,7 @@ interface ClientSite : Bonobo::Unknown {
 	 *
 	 */
 	void showWindow (in boolean shown);
-
+	
 	/**
 	 * saveObject:
 	 * 
@@ -45,3 +52,7 @@ interface ClientSite : Bonobo::Unknown {
 };
 
 };
+
+
+#endif /* BONOBO_CLIENT_SITE_IDL */
+

@@ -14,6 +14,11 @@
   * on suggestions from Chuck Jazdzewski <cjazdzewski@inprise.com>.
   */
 
+#ifndef BONOBO_PROPERTY_IDL
+#define BONOBO_PROPERTY_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 
 interface PropertyListener : Bonobo::Unknown {
@@ -185,4 +190,4 @@ interface PropertyBag : Bonobo::Unknown {
 
 };
 
-
+#endif /* BONOBO_PROPERTY_IDL */

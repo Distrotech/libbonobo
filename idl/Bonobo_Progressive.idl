@@ -14,6 +14,11 @@
  *
  */
 
+#ifndef BONOBO_PROGRESSIVE_IDL
+#define BONOBO_PROGRESSIVE_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 
 	interface ProgressiveDataSink : Unknown {
@@ -57,3 +62,5 @@ module Bonobo {
 
 	};
 };
+
+#endif /* BONOBO_PROGRESSIVE_IDL */

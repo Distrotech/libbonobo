@@ -22,6 +22,11 @@
  *           Martin Baulig <baulig@suse.de>
  */
 
+#ifndef BONOBO_ZOOMABLE_IDL
+#define BONOBO_ZOOMABLE_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 
 typedef float ZoomLevel;
@@ -111,3 +116,5 @@ interface Zoomable : Bonobo::Unknown {
 	void setFrame (in ZoomableFrame zoomable_frame);
 };
 };
+
+#endif /* BONOBO_ZOOMABLE_IDL */

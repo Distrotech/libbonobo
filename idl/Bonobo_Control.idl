@@ -8,6 +8,12 @@
  *   Miguel de Icaza <miguel@gnu.org>
  */
 
+#ifndef BONOBO_CONTROL_IDL
+#define BONOBO_CONTROL_IDL
+
+#include "bonobo-unknown.idl"
+#include "bonobo-property.idl"
+
 module Bonobo {
 
 interface ControlFrame : Bonobo::Unknown {
@@ -149,3 +155,5 @@ interface PropertyControl : Bonobo::Unknown {
 };
 
 };
+
+#endif

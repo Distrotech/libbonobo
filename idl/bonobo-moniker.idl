@@ -8,6 +8,11 @@
  *	Ettore Perazzoli (ettore@helixcode.com)
  */
 
+#ifndef BONOBO_MONIKER_IDL
+#define BONOBO_MONIKER_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 
 	typedef long ResolveFlag;
@@ -66,3 +71,4 @@ module Bonobo {
 	};
 };
 
+#endif /* BONOBO_MONIKER_IDL */

@@ -1,3 +1,27 @@
+2000-11-23  Mathieu Lacage  <mathieu@eazel.com>
+
+	Add necessary magic to make each of those file 
+	compile separatly.
+	* idl/bonobo-advise.idl:
+	* idl/bonobo-canvas.idl:
+	* idl/bonobo-client-site.idl:
+	* idl/bonobo-control.idl:
+	* idl/bonobo-desktop.idl:
+	* idl/bonobo-embeddable.idl:
+	* idl/bonobo-item-container.idl:
+	* idl/bonobo-listener.idl:
+	* idl/bonobo-moniker.idl:
+	* idl/bonobo-persist.idl:
+	* idl/bonobo-print.idl:
+	* idl/bonobo-progressive.idl:
+	* idl/bonobo-property.idl:
+	* idl/bonobo-storage.idl:
+	* idl/bonobo-ui.idl:
+	* idl/bonobo-unknown.idl:
+	* idl/bonobo-zoomable.idl:
+	
+	* idl/bonobo.idl: remove.
+
 2000-11-27  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-property-bag-xml.c (encode_value): update to fix

@@ -7,6 +7,11 @@
  * Copyright (C) 2000 Helix Code, Inc.
  */
 
+#ifndef BONOBO_PRINT_IDL
+#define BONOBO_PRINT_IDL
+
+#include "bonobo-unknown.idl"
+
 module Bonobo {
 
 	typedef sequence<char> PrintData;
@@ -35,3 +40,4 @@ module Bonobo {
 	};
 };
 
+#endif /* BONOBO_PRINT_IDL */

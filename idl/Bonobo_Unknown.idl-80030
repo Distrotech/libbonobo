@@ -1,5 +1,3 @@
-#ifndef __BONOBO_UNKNOWN_IDL__
-#define __BONOBO_UNKNOWN_IDL__
 /*
  * bonobo-unknown.idl: The base Bonobo Object
  *
@@ -12,6 +10,9 @@
  * Author:
  *	Miguel de Icaza (miguel@helixcode.com)
  */
+
+#ifndef __BONOBO_UNKNOWN_IDL__
+#define __BONOBO_UNKNOWN_IDL__
 
 module Bonobo {
 	interface Unknown {
