@@ -169,6 +169,8 @@ OAF_RegistrationResult oaf_active_server_register (const char *iid,
 						   CORBA_Object obj);
 void oaf_active_server_unregister (const char *iid, CORBA_Object obj);
 
+char *oaf_make_registration_id (const char *iid, const char *display);
+
 /* oaf-util.c */
 OAF_Property *oaf_server_info_prop_find (OAF_ServerInfo * server,
                                          const char *prop_name);

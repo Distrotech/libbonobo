@@ -275,8 +275,26 @@ oaf_strsignal (int sig)
 }
 #endif
 
+
+static 
+void oaf_setenv (const char *name, const char *value) 
+{
+#if HAVE_SETENV
+        setenv (name, value, 1);
+#else
+        char *tmp;
+                
+        tmp = g_strconcat (name, "=", value, NULL);
+        
+        putenv (tmp);
+#endif
+}
+
 CORBA_Object
-oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
+oaf_server_by_forking (const char **cmd, 
+                       int fd_arg, 
+                       const char *display, 
+                       CORBA_Environment * ev)
 {
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
@@ -387,6 +405,11 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 	} else if ((childpid = fork ())) {
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
+                if (display != NULL) {
+                        oaf_setenv ("DISPLAY", display);
+                }
+                
+
 		close (iopipes[0]);
                 
                 if (fd_arg != 0) {

@@ -30,6 +30,7 @@
 #include "oaf-i18n.h"
 #include "liboaf/liboaf.h"
 #include "ac-query-expr.h"
+#include "oafd-corba-extensions.h"
 
 #define OAF_LINK_TIME_TO_LIVE 256
 
@@ -183,6 +184,19 @@ child_od_info_free (ChildODInfo * child, CORBA_Environment * ev)
 	CORBA_free (child->domain);
 	g_free (child);
 }
+
+
+static char *
+ac_CORBA_Context_get_value (CORBA_Context         ctx, 
+                            const char           *propname,
+                            CORBA_Environment    *ev)
+{
+        return oafd_CORBA_Context_get_value (ctx, 
+                                             propname,
+                                             ex_OAF_ActivationContext_IncompleteContext,
+                                             ev);
+}
+
 
 /*** App-specific servant structures ***/
 
@@ -521,40 +535,6 @@ ac_do_activation (impl_POA_OAF_ActivationContext * servant,
 	}
 }
 
-static char *
-ctx_get_value (CORBA_Context ctx, const char *propname,
-	       CORBA_Environment * ev)
-{
-	CORBA_NVList *nvout;
-	char *retval;
-
-	/* Figure out what the host the 
-         * activating client is running on (for
-	 * purposes of fun & pleasure) 
-         */
-	CORBA_Context_get_values (ctx, NULL, 0, (char *) propname, &nvout,
-				  ev);
-	if (ev->_major == CORBA_NO_EXCEPTION) {
-		if (nvout->list->len > 0) {
-			CORBA_NamedValue *nv;
-
-			nv = &g_array_index (nvout->list, CORBA_NamedValue, 0);
-			retval = g_strdup (*(char **) nv->argument._value);
-		} else
-			retval = NULL;
-
-		CORBA_NVList_free (nvout, ev);
-	} else
-        {                
-                CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-                                     ex_OAF_ActivationContext_IncompleteContext,
-                                     NULL);
-                
-		retval = NULL;
-        }
-
-	return retval;
-}
 
 static OAF_ActivationResult *
 impl_OAF_ActivationContext_activate (impl_POA_OAF_ActivationContext * servant,
@@ -569,7 +549,7 @@ impl_OAF_ActivationContext_activate (impl_POA_OAF_ActivationContext * servant,
 	int i;
 	char *hostname;
 
-	hostname = ctx_get_value (ctx, "hostname", ev);
+	hostname = ac_CORBA_Context_get_value (ctx, "hostname", ev);
 	ac_update_lists (servant, ev);
 
 	servant->refs++;
@@ -923,9 +903,9 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
          * really wrong here or CORBA_Context is broken in ORBit 
          */
 
-        context_username = ctx_get_value (ctx, "username", ev);
-        context_hostname = ctx_get_value (ctx, "hostname", ev);
-        context_domain = ctx_get_value (ctx, "domain", ev);
+        context_username = ac_CORBA_Context_get_value (ctx, "username", ev);
+        context_hostname = ac_CORBA_Context_get_value (ctx, "hostname", ev);
+        context_domain = ac_CORBA_Context_get_value (ctx, "domain", ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
         {
@@ -993,7 +973,7 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 	if (!si)
 		goto out;
 
-	hostname = ctx_get_value (ctx, "hostname", ev);
+	hostname = ac_CORBA_Context_get_value (ctx, "hostname", ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
         {
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,

@@ -144,6 +144,7 @@ oaf_hostname_get (void)
 	return hostname;
 }
 
+
 CORBA_Context
 oaf_context_get (void)
 {
@@ -300,7 +301,7 @@ local_activator (const OAFRegistrationCategory * regcat, const char **cmd,
 		|| STRMATCH (regcat->hostname, oaf_hostname_get ()))
 	    && (!regcat->domain
 		|| STRMATCH (regcat->domain, oaf_domain_get ()))) {
-		return oaf_server_by_forking (cmd, fd_arg, ev);
+		return oaf_server_by_forking (cmd, fd_arg, NULL, ev);
 	}
 
 	return CORBA_OBJECT_NIL;
@@ -418,6 +419,7 @@ oaf_orb_init (int *argc, char **argv)
 {
 	CORBA_Environment ev;
 	const char *hostname;
+        char *display;
 
 #ifndef ORBIT_USES_GLIB_MAIN_LOOP
 	IIOPAddConnectionHandler = orb_add_connection;
@@ -439,6 +441,14 @@ oaf_orb_init (int *argc, char **argv)
 	CORBA_Context_set_one_value (oaf_context, "domain", "user", &ev);
 	CORBA_Context_set_one_value (oaf_context, "username",
 				     g_get_user_name (), &ev);
+        
+        
+        display =  g_getenv ("DISPLAY");
+        
+        if (display != NULL) {
+                CORBA_Context_set_one_value (oaf_context, "display",
+                                             display, &ev);
+        }
 
 	CORBA_exception_free (&ev);
 

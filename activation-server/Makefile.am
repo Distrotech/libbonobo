@@ -15,22 +15,24 @@ INCLUDES=					\
 	-DOAF_CONFDIR=\"$(sysconfdir)\"		\
 	$(NULL)
 
-oafd_SOURCES=			\
-	qsort_ex.c              \
-	qsort_ex.h              \
-	oaf-skels.c		\
-	ac-query-lex.c		\
-	ac-query-parse.c	\
-	ac-query-parse.h	\
-	ac-query-expr.h		\
-	ac-corba.c		\
-	ac-query-expr.c		\
-	od-corba.c		\
-	od-load.c		\
-	od-utils.c		\
-	od-activate.c		\
-	main.c			\
-	od-utils.h		\
+oafd_SOURCES=					\
+	oafd-corba-extensions.c			\
+	oafd-corba-extensions.h			\
+	qsort_ex.c				\
+	qsort_ex.h				\
+	oaf-skels.c				\
+	ac-query-lex.c				\
+	ac-query-parse.c			\
+	ac-query-parse.h			\
+	ac-query-expr.h				\
+	ac-corba.c				\
+	ac-query-expr.c				\
+	od-corba.c				\
+	od-load.c				\
+	od-utils.c				\
+	od-activate.c				\
+	main.c					\
+	od-utils.h				\
 	oafd.h
 
 LDADD=../liboaf/liboaf.la \

@@ -65,7 +65,7 @@ oaf_timeout_reg_check (gpointer data)
  * Return value: status of the registration.
  */
 OAF_RegistrationResult
-oaf_active_server_register (const char *iid, CORBA_Object obj)
+oaf_active_server_register (const char *registration_id, CORBA_Object obj)
 {
 	OAF_ObjectDirectory od;
 	OAFRegistrationCategory regcat = { "IDL:OAF/ObjectDirectory:1.0" };
@@ -73,12 +73,21 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
 	CORBA_Environment ev;
 	OAF_RegistrationResult retval;
 	const char *actid;
+        const char *iid;
+
+        iid = strrchr (registration_id, ',');
+
+        if (iid == NULL) {
+                iid = registration_id;
+        } else {
+                iid++;
+        }
 
 	CORBA_exception_init (&ev);
 
 	actid = oaf_activation_iid_get ();
 
-	if (actid && !strcmp (actid, iid) && need_ior_printout) {
+	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
 		char *iorstr;
 		FILE *fh;
 		int iorfd = oaf_ior_fd_get ();
@@ -112,7 +121,7 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
         }
 #endif
 
-        if (actid && !strcmp(actid, iid) && oaf_private)
+        if (actid && strcmp (actid, iid) == 0 && oaf_private)
                 return OAF_REG_SUCCESS;
 
 	regcat.session_name = oaf_session_name_get ();
@@ -139,7 +148,7 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
 	}
 
 	retval =
-		OAF_ObjectDirectory_register_new (od, (char *) iid, obj, &ev);
+		OAF_ObjectDirectory_register_new (od, (char *) registration_id, obj, &ev);
 	CORBA_exception_free (&ev);
 
 	return retval;
@@ -180,4 +189,15 @@ oaf_active_server_unregister (const char *iid, CORBA_Object obj)
 	OAF_ObjectDirectory_unregister (od, (char *) iid, obj,
 					OAF_ObjectDirectory_UNREGISTER_NORMAL, &ev);
 	CORBA_exception_free (&ev);
+}
+
+
+char *
+oaf_make_registration_id (const char *iid, const char *display)
+{
+        if (display == NULL) {
+                return g_strdup (iid);
+        } else {
+                return g_strconcat (display, ",", iid, NULL);
+        }
 }

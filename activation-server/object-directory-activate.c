@@ -37,6 +37,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include "oafd-corba-extensions.h"
+
 CORBA_Object od_server_activate_factory (OAF_ServerInfo * si,
 					 ODActivationInfo * actinfo,
 					 CORBA_Environment * ev);
@@ -76,7 +78,7 @@ od_server_activate_factory (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 							((actinfo->flags |
 							  OAF_FLAG_NO_LOCAL) &
 							 (~OAF_FLAG_PRIVATE)),
-							oaf_context_get (),
+							actinfo->ctx,
 							ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
@@ -118,6 +120,8 @@ od_server_activate_exe (OAF_ServerInfo * si, ODActivationInfo * actinfo,
         int fd_arg;
 	int i;
         char *iorstr;
+        char *display;
+        CORBA_Object retval;
 
 	/* Munge the args */
 	args = oaf_alloca (36 * sizeof (char *));
@@ -175,5 +179,13 @@ od_server_activate_exe (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 
 	args[i] = NULL;
 
-	return oaf_server_by_forking ((const char **) args, fd_arg, ev);
+        display = oafd_CORBA_Context_get_value (actinfo->ctx, "display", NULL, ev);
+
+	retval = oaf_server_by_forking ((const char **) args, fd_arg, display, ev);
+        
+        g_free (display);
+
+        return retval;
 }
+
+

@@ -126,7 +126,7 @@ module OAF {
                 readonly attribute string username, hostname, domain;
 
                 Object activate (in ImplementationID iid, in ActivationContext ac, in ActivationFlags flags)
-                        context ("username", "hostname", "domain");
+                        context ("username", "hostname", "domain", "display");
                 
                 /* Ensures consistency for activations of publicly advertised objects */
                 void lock();
@@ -154,7 +154,7 @@ module OAF {
                                            in GNOME::stringlist selection_order,
                                            in ActivationFlags flags)
                         raises (ParseFailed, IncompleteContext, GeneralError)
-                        context ("username", "hostname", "domain");
+                        context ("username", "hostname", "domain", "display");
 
                 readonly attribute ServerInfoList servers;
                 ServerInfoList query (in string requirements,
@@ -164,6 +164,6 @@ module OAF {
 
                 ActivationResult activate_from_id (in ActivationID aid, in ActivationFlags flags)
                         raises (ParseFailed, IncompleteContext, GeneralError)
-                        context ("username", "hostname", "domain");
+                        context ("username", "hostname", "domain", "display");
         };
 };
