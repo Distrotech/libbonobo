@@ -5,7 +5,7 @@ INCLUDES=@ORBIT_CFLAGS@
 LDADD=@ORBIT_LIBS@
 
 liboafincludedir = $(includedir)/liboaf
-liboafinclude_HEADERS=oaf.h
+liboafinclude_HEADERS=oaf.h liboaf.h
 
 liboaf_la_SOURCES=oaf-stubs.c oaf-common.c
 

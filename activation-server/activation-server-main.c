@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
   PortableServer_POA root_poa;
   CORBA_Environment ev;
   OAF_ObjectDirectory od;
+  OAF_ActivationContext ac;
   poptContext ctx;
 
   CORBA_exception_init(&ev);
@@ -34,6 +35,8 @@ int main(int argc, char *argv[])
   orb = CORBA_ORB_init(&argc, argv, "orbit-local-orb", &ev);
   root_poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
   od = OAF_ObjectDirectory_create(root_poa, "user", od_source_dir, &ev);
+  ac = OAF_ActivationContext_create(root_poa, &ev);
+  OAF_ActivationContext_add_directory(ac, od, &ev);
 
   if(ac_evaluate) {
     err = qexp_parse(ac_evaluate, &exp);

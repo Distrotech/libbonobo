@@ -62,6 +62,7 @@ QueryExpr *qexp_id_new(char *name);
 QueryExpr *qexp_constant_new(QueryExprConst setme);
 
 const char *qexp_parse( const char *_code, QueryExpr **retme ); /* Return value is a string describing any errors */
+void qexp_free(QueryExpr *qexp);
 
 /* For debugging purposes */
 void qexp_dump(QueryExpr *exp);
@@ -69,12 +70,14 @@ void qexp_constant_dump(QueryExprConst *c);
 
 typedef struct {
   OAF_ServerInfo **sil;
+
   int nservers;
+
   CORBA_Context cctx;
 } QueryContext;
 
 QueryExprConst qexp_evaluate(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
 gboolean qexp_matches(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
-void qexp_sort(OAF_ServerInfoList **servers, int nservers, QueryExpr **sexps, int nexps, QueryContext *qctx);
+void qexp_sort(OAF_ServerInfo **servers, int nservers, QueryExpr **sexps, int nexps, QueryContext *qctx);
 
 #endif

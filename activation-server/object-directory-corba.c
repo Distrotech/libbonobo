@@ -1,5 +1,6 @@
 #include "oafd.h"
 #include "oaf.h"
+#include <time.h>
 
 /*** App-specific servant structures ***/
 
@@ -7,6 +8,7 @@ typedef struct {
   POA_OAF_ObjectDirectory servant;
   PortableServer_POA poa;
   OAF_ServerInfoList attr_servers;
+  OAF_CacheTime time_list_changed;
 
   GHashTable *by_iid;
 
@@ -131,23 +133,27 @@ OAF_ObjectDirectory_create(PortableServer_POA poa,
    newservant->by_iid = NULL;
    newservant->attr_servers._buffer = OAF_ServerInfo_load(source_directory, &newservant->attr_servers._length,
 							  &newservant->by_iid);
+   newservant->time_list_changed = time(NULL);
 
    od_dump_list(newservant);
 
    return retval;
 }
 
-static OAF_ServerInfoList *
+static OAF_ServerInfoListCache *
 impl_OAF_ObjectDirectory__get_servers(impl_POA_OAF_ObjectDirectory * servant,
+				      OAF_CacheTime only_if_newer,
 				      CORBA_Environment * ev)
 {
-   OAF_ServerInfoList *retval;
+   OAF_ServerInfoListCache *retval;
 
-   retval = OAF_ServerInfoList__alloc();
+   retval = OAF_ServerInfoListCache__alloc();
 
-   *retval = servant->attr_servers;
-
-   CORBA_sequence_set_release(retval, CORBA_FALSE);
+   retval->_d = (only_if_newer < servant->time_list_changed)
+   if(retval->_d {
+     retval->_u.server_list = servant->attr_servers;
+     CORBA_sequence_set_release(&retval->_u.server_list, CORBA_FALSE);
+   }
 
    return retval;
 }

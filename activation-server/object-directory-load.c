@@ -73,7 +73,7 @@ od_entry_read_attrs(OAF_ServerInfo *ent, xmlNodePtr node)
       }
 
       curattr->v._u.value_stringv._length = o;
-      curattr->v._u.value_stringv._buffer = CORBA_sequence_CORBA_string_allocbuf(o);
+      curattr->v._u.value_stringv._buffer = OAF_StringList_allocbuf(o);
 
       for(j = 0, sub2 = sub->childs; j < o; sub2 = sub2->next, j++) {
 	valuestr = xmlGetProp(sub2, "value");
@@ -194,10 +194,12 @@ OAF_ServerInfo_load(const char *source_directory, CORBA_unsigned_long *nservers,
 
   retval = CORBA_sequence_OAF_ServerInfo_allocbuf(n);
 
+  g_hash_table_freeze(*by_iid);
   for(i = 0, cur = entries; i < n; i++, cur = cur->next) {
     memcpy(&retval[i], cur->data, sizeof(OAF_ServerInfo));
     g_hash_table_insert(*by_iid, retval[i].iid, &retval[i]);
   }
+  g_hash_table_thaw(*by_iid);
 
   return retval;
 }

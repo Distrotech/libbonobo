@@ -2,6 +2,8 @@ module OAF {
 	typedef string ImplementationID;
 	typedef string ActivationID;
 
+	typedef sequence<string> StringList;
+
 	/* ActivationResult */
 	enum ActivationResultType { RESULT_OBJECT, RESULT_SHLIB };
 
@@ -22,7 +24,7 @@ module OAF {
 	case A_BOOLEAN:
 		boolean value_boolean;
 	case A_STRINGV:
-		sequence<string> value_stringv;
+		StringList value_stringv;
 	};
 	struct Attribute {
 		string name;
@@ -40,10 +42,17 @@ module OAF {
 	};
 	typedef sequence<ServerInfo> ServerInfoList;
 
+	typedef long long CacheTime;
+
+	union ServerInfoListCache switch(boolean) {
+	case TRUE:
+	  ServerInfoList server_list;
+	};
+
 	/* Interfaces */
 	interface ObjectDirectory {
-	  readonly attribute ServerInfoList servers;
-	  readonly attribute string domain, hostID;
+	  ServerInfoListCache get_servers(in CacheTime only_if_newer);
+	  readonly attribute string domain, hostname, username;
 
 	  Object activate(in ImplementationID iid);
 
@@ -55,15 +64,24 @@ module OAF {
 	typedef sequence<ObjectDirectory> ObjectDirectoryList;
 
 	interface ActivationContext {
-	  readonly attribute ObjectDirectoryList directories;
-	  void add_directory(in ObjectDirectory dir);
-	  void remove_directory(in ObjectDirectory dir);
+	  exception NotListed {};
+	  exception AlreadyListed {};
+	  exception ParseFailed { string description; }
 
-	  ActivationResult activate(in string requirements, in string selection_order)
-	    context("hostname", "domain", "username");
+	  readonly attribute ObjectDirectoryList directories;
+	  void add_directory(in ObjectDirectory dir) raises(AlreadyListed);
+	  void remove_directory(in ObjectDirectory dir) raises(NotListed);
+
+	  ActivationResult activate(in string requirements,
+				    in StringList selection_order)
+	    context("hostname", "domain", "username")
+	    raises(ParseFailed);
 
 	  readonly attribute ServerInfoList servers;
-	  ServerInfoList query(in string requirements);
+	  ServerInfoList query(in string requirements,
+			       in StringList selection_order)
+	    context("hostname", "domain", "username")
+	    raises(ParseFailed);
 
 	  ActivationResult activate_from_id(in ActivationID aid)
 	    context("hostname", "domain", "username");
