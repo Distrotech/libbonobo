@@ -1,3 +1,9 @@
+2001-11-26  Michael Meeks  <michael@ximian.com>
+
+	* Version 1.107.0
+
+	* configure.in: bump reqs.
+
 2001-11-23  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-main.c (bonobo_init_full): cope with

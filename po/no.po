@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 0.1\n"
-"POT-Creation-Date: 2001-11-11 14:07+0100\n"
+"POT-Creation-Date: 2001-11-26 13:13+1100\n"
 "PO-Revision-Date: 2001-11-11 14:07+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -149,7 +149,7 @@ msgstr "Feil i feilsjekking; ingen unntak"
 msgid "General activation error with no description"
 msgstr "Generell feil under aktivering uten beskrivelse"
 
-#: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initialisere Bonobo"
 

@@ -1,3 +1,18 @@
+libbonobo 1.107.0
+
+	* Featurlets
+		+ BONOBO_BOILERPLATE macros (Darin)
+		+ Control IDL updates (Me)
+		+ UI exception added (Me)
+		+ accelerated object instantiation (Me, Mark)
+		+ IDL spelling fixes (Darin)
+		+ memory storage tests updates (Gero Erdi)
+
+	* Bugs fixed
+		+ glib fixage (Owen, Miles Lane)
+		+ moniker finalize chain (Me)
+		+ bonobo-storage-memory fixage (Gero Erdi)
+
 libbonobo 1.106.0
 
 	* Bonobo_Control IDL re-write (Me)

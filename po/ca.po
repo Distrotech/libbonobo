@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.102.0\n"
-"POT-Creation-Date: 2001-11-02 15:36+1100\n"
+"POT-Creation-Date: 2001-11-26 13:13+1100\n"
 "PO-Revision-Date: 2001-09-20 15:13+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -91,62 +91,66 @@ msgid "invalid path to XML user interface element"
 msgstr "camí invalid cap a l'element de la interfície d'usuari XML"
 
 #: bonobo/bonobo-exception.c:216
+msgid "the requested UI attribute didn't exist"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
 msgstr "Ordre o verb desconegut"
 
-#: bonobo/bonobo-exception.c:219
+#: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
 msgstr "L'ordre no és sensible"
 
-#: bonobo/bonobo-exception.c:223
+#: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
 msgstr "tipus de dades incorrecte"
 
-#: bonobo/bonobo-exception.c:226
+#: bonobo/bonobo-exception.c:229
 msgid "stream not found"
 msgstr "no s'ha trobat el flux"
 
-#: bonobo/bonobo-exception.c:230
+#: bonobo/bonobo-exception.c:233
 msgid "property not found"
 msgstr "no s'ha trobat la propietat"
 
-#: bonobo/bonobo-exception.c:233
+#: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
 msgstr "la propietat té un tipus no válid"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:239
 msgid "property is read only"
 msgstr "la propietat és només de lectura"
 
-#: bonobo/bonobo-exception.c:239
+#: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
 msgstr "el 'backend' de la base de dades de configuració ha fallat "
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
 msgstr "No es pot trobar la interfície del moniker"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
 msgstr "L'activació del moniker ha excedit el temps"
 
-#: bonobo/bonobo-exception.c:249
+#: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
 msgstr "Error de sintaxi dins del moniker"
 
-#: bonobo/bonobo-exception.c:252
+#: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
 msgstr "El moniker té un prefix del moniker desconegut"
 
-#: bonobo/bonobo-exception.c:276
+#: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
 msgstr "Error en comprovar l'error; cap excepció"
 
-#: bonobo/bonobo-exception.c:285
+#: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
 msgstr "Error general d'activació sense descripció"
 
-#: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "No s'ha pogut inicialitzar el Bonobo"
 

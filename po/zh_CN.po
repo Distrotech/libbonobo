@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-11-02 15:36+1100\n"
+"POT-Creation-Date: 2001-11-26 13:13+1100\n"
 "PO-Revision-Date: 2001-09-22 15:44+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -90,62 +90,66 @@ msgid "invalid path to XML user interface element"
 msgstr "无效的到 XML 用户界面元素的路径"
 
 #: bonobo/bonobo-exception.c:216
+msgid "the requested UI attribute didn't exist"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
 msgstr "未知的命令或动词"
 
-#: bonobo/bonobo-exception.c:219
+#: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:223
+#: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
 msgstr "不正确的数据类型"
 
-#: bonobo/bonobo-exception.c:226
+#: bonobo/bonobo-exception.c:229
 msgid "stream not found"
 msgstr "未找到流"
 
-#: bonobo/bonobo-exception.c:230
+#: bonobo/bonobo-exception.c:233
 msgid "property not found"
 msgstr "未找到属性"
 
-#: bonobo/bonobo-exception.c:233
+#: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
 msgstr "属性的类型无效"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:239
 msgid "property is read only"
 msgstr "属性是只读的"
 
-#: bonobo/bonobo-exception.c:239
+#: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
 msgstr "配置数据库后端错误"
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
 msgstr "无法找到 Moniker 接口"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
 msgstr "Moniker 激活超时"
 
-#: bonobo/bonobo-exception.c:249
+#: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
 msgstr "在 Moniker 中语法错误"
 
-#: bonobo/bonobo-exception.c:252
+#: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker 有一个未知的 moniker 前缀"
 
-#: bonobo/bonobo-exception.c:276
+#: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
 msgstr "检测错误时发生错误；没有异常"
 
-#: bonobo/bonobo-exception.c:285
+#: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
 msgstr "常规的无描述的激活错误"
 
-#: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "无法初始化 Bonobo"
 

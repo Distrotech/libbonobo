@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2\n"
-"POT-Creation-Date: 2001-11-02 15:36+1100\n"
+"POT-Creation-Date: 2001-11-26 13:13+1100\n"
 "PO-Revision-Date: 2001-07-07 12:45+02:00\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -90,65 +90,69 @@ msgid "invalid path to XML user interface element"
 msgstr "percorso all'elemento XML dell'interfaccia utente non valido"
 
 #: bonobo/bonobo-exception.c:216
-msgid "Unknown command or verb"
+msgid "the requested UI attribute didn't exist"
 msgstr ""
 
 #: bonobo/bonobo-exception.c:219
+msgid "Unknown command or verb"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:223
+#: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
 msgstr "tipo di dato non corretto"
 
-#: bonobo/bonobo-exception.c:226
+#: bonobo/bonobo-exception.c:229
 msgid "stream not found"
 msgstr "stream non trovato"
 
-#: bonobo/bonobo-exception.c:230
-msgid "property not found"
-msgstr "proprietà non trovata"
-
 #: bonobo/bonobo-exception.c:233
-#, fuzzy
-msgid "property has invalid type"
+msgid "property not found"
 msgstr "proprietà non trovata"
 
 #: bonobo/bonobo-exception.c:236
 #, fuzzy
-msgid "property is read only"
+msgid "property has invalid type"
 msgstr "proprietà non trovata"
 
 #: bonobo/bonobo-exception.c:239
+#, fuzzy
+msgid "property is read only"
+msgstr "proprietà non trovata"
+
+#: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
 msgstr ""
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
 msgstr "Non è stata trovata l'interfaccia Moniker"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
 msgstr "Attivazione Moniker scaduta"
 
-#: bonobo/bonobo-exception.c:249
+#: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
 msgstr "Errore di sintassi nel moniker"
 
-#: bonobo/bonobo-exception.c:252
+#: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Il moniker ha un prefisso moniker sconosciuto"
 
-#: bonobo/bonobo-exception.c:276
+#: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
 msgstr "Errore nel controllo di errore; nessun eccezione"
 
-#: bonobo/bonobo-exception.c:285
+#: bonobo/bonobo-exception.c:288
 #, fuzzy
 msgid "General activation error with no description"
 msgstr "Errori di sintassi nella descrizione dell'oggetto"
 
-#: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "Impossibile inizializzare Bonobo"
 

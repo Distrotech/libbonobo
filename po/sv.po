@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-11-02 15:36+1100\n"
+"POT-Creation-Date: 2001-11-26 13:13+1100\n"
 "PO-Revision-Date: 2001-07-06 20:34+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -92,65 +92,69 @@ msgid "invalid path to XML user interface element"
 msgstr "ogiltig sökväg till XML-användargränssnittselement"
 
 #: bonobo/bonobo-exception.c:216
-msgid "Unknown command or verb"
+msgid "the requested UI attribute didn't exist"
 msgstr ""
 
 #: bonobo/bonobo-exception.c:219
+msgid "Unknown command or verb"
+msgstr ""
+
+#: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:223
+#: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
 msgstr "ogiltig datatyp"
 
-#: bonobo/bonobo-exception.c:226
+#: bonobo/bonobo-exception.c:229
 msgid "stream not found"
 msgstr "flödet kunde inte hittas"
 
-#: bonobo/bonobo-exception.c:230
-msgid "property not found"
-msgstr "egenskapen kunde inte hittas"
-
 #: bonobo/bonobo-exception.c:233
-#, fuzzy
-msgid "property has invalid type"
+msgid "property not found"
 msgstr "egenskapen kunde inte hittas"
 
 #: bonobo/bonobo-exception.c:236
 #, fuzzy
-msgid "property is read only"
+msgid "property has invalid type"
 msgstr "egenskapen kunde inte hittas"
 
 #: bonobo/bonobo-exception.c:239
+#, fuzzy
+msgid "property is read only"
+msgstr "egenskapen kunde inte hittas"
+
+#: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
 msgstr ""
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
 msgstr "Moniker-gränssnittet kunde inte hittas"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
 msgstr "Moniker-aktiveringens tidsgräns överskreds"
 
-#: bonobo/bonobo-exception.c:249
+#: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
 msgstr "Syntaxfel inuti moniker"
 
-#: bonobo/bonobo-exception.c:252
+#: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker har ett okänt moniker-prefix"
 
-#: bonobo/bonobo-exception.c:276
+#: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
 msgstr "Fel vid kontroll av fel; inget undantag"
 
-#: bonobo/bonobo-exception.c:285
+#: bonobo/bonobo-exception.c:288
 #, fuzzy
 msgid "General activation error with no description"
 msgstr "Syntaxfel i objektbeskrivning"
 
-#: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr ""
 
