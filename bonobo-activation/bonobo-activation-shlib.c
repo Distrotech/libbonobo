@@ -44,7 +44,6 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 
 	/* The location info is at the end to of the string list */
 	filename = sh->res._u.res_shlib._buffer[sh->res._u.res_shlib._length - 1];
-	g_message ("%s", filename);
 	if (living_by_filename)
 		local_plugin_info =
 			g_hash_table_lookup (living_by_filename, filename);
