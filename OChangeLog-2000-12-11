@@ -1,3 +1,9 @@
+2000-12-04  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-embeddable.c (impl_Bonobo_Embeddable_createView): 
+	check that the view_factory is not NULL and return CORBA_OBJECT_NIL
+	in this case; fix from Mike Kestner.
+
 2000-12-04  Miguel de Icaza  <miguel@helixcode.com>
 
 	* bonobo/*.h: Made the typedef struct usage consistent. 
