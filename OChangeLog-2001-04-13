@@ -1,3 +1,58 @@
+2001-01-29  Federico Mena Quintero  <federico@ximian.com>
+
+	* bonobo/Makefile.am: Removed effectively-duplicate target for
+	Bonobo.h.
+
+	* idl/Bonobo_Control.idl (FocusDirection): New enum for the focus
+	direction types.
+	(Control::focus): New method used to mimic GtkContainer:;focus().
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_focus): New
+	function to proxy the GtkContainer::focus() request.  This should
+	only be used by the BonoboSocket code.
+
+	* bonobo/bonobo-control.c (impl_Bonobo_Control_focus):
+	Implementation of our ::focus() method.
+
+	* bonobo/bonobo-socket.c (bonobo_socket_focus): Call
+	bonobo_control_frame_focus() instead of sending a synthetic key
+	press event.
+	(bonobo_socket_init): Set GTK_CAN_FOCUS on the socket.  Since from
+	this client's point of view it is a terminal, focusable container,
+	it should be CAN_FOCUS.
+	(bonobo_socket_focus_in_event): Set GTK_HAS_FOCUS.  If we had
+	previously given the focus to the child, give it again; this
+	handles the case where the toplevel window loses focus and gains
+	it again, and we must re-set the X input focus on our child.
+	(bonobo_socket_focus_out_event): Unset GTK_HAS_FOCUS.
+	(focus_child_window): Renamed from bonobo_socket_claim_focus().
+	Now we just give the focus to the child window.  We are
+	essentially acting like a little window manager on behalf of the
+	child.
+	(focus_toplevel_window): New function; claims the focus for our
+	toplevel window.
+	(bonobo_socket_focus): Proxy the focus request to the child by
+	using bonobo_control_frame_focus().  Transfer the X input focus as
+	appropriate after issuing that request.
+	(bonobo_socket_filter_func): Consistently handle the focus as per
+	the functions above.
+
+	* bonobo/bonobo-plug.c (BonoboPlugPrivate): Moved the BonoboPlug's
+	fields to a private structure; modified all the functions to
+	reflect this.
+	(BonoboPlugPrivate): Added a has_focus flag.  We cannot simply use
+	the GTK_HAS_FOCUS widget flag because we are not a GTK_CAN_FOCUS
+	widget and it would make GtkContainer::focus() skip us immediately
+	when trying to change the focus within the plug's children.
+	(bonobo_plug_key_press_event): Do not ignore the return value from
+	gtk_widget_activate().  Also mimic the
+	GtkWindow::key_press_event() behavior as closely as possible.
+	(bonobo_plug_key_press_event): Use priv->has_focus instead of
+	GTK_WIDGET_HAS_FOCUS() on ourselves.
+	(bonobo_plug_focus_in_event): Likewise.
+	(bonobo_plug_focus_out_event): Likewise.
+	(bonobo_plug_set_focus): Likewise.
+
 2001-01-26  Michael Meeks  <michael@helixcode.com>
 
 	* tests/test-moniker.c: check equality.

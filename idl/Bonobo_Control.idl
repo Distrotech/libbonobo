@@ -144,6 +144,19 @@ interface Control : Bonobo::Unknown {
 	 */
 	void realize   ();
 	void unrealize ();
+
+	/* GTK+ focus direction equivalents */
+	enum FocusDirection {
+		TAB_FORWARD,
+		TAB_BACKWARD,
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT
+	};
+
+	/* Control proxy for GtkContainer::focus() */
+	boolean focus (in FocusDirection direction);
 };
 
 interface PropertyControl : Bonobo::Unknown {
