@@ -29,7 +29,7 @@ POA_Bonobo_Unknown__vepv bonobo_object_vepv;
  * NB. for a quicker debugging experience simply
  * #define BONOBO_REF_HOOKS
  */
-/* #define BONOBO_REF_HOOKS */
+#define BONOBO_REF_HOOKS
 
 #ifdef BONOBO_REF_HOOKS
 typedef struct {
@@ -162,10 +162,26 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
 	for (l = ao->objs; l; l = l->next) {
 		GtkObject *o = GTK_OBJECT (l->data);
 
-		if (!o || !o->klass || !o->klass->finalize)
-			g_warning ("Serious bonobo object corruption");
-		else
-			o->klass->finalize (o);
+		if (!o)
+			g_error ("Serious bonobo object corruption");
+		else {
+			g_assert (BONOBO_OBJECT (o)->priv->ao != NULL);
+#ifdef BONOBO_REF_HOOKS
+			g_assert (BONOBO_OBJECT (o)->priv->ao->destroyed);
+#endif
+
+			/*
+			 * Disconnect the GTK+ object from the aggregate object
+			 * and unref it so that it is possibly finalized ---
+			 * other parts of GTK+ may still have references to it.
+			 *
+			 * The GTK+ object was already destroy()ed in
+			 * bonobo_object_destroy().
+			 */
+
+			BONOBO_OBJECT (o)->priv->ao = NULL;
+			gtk_object_unref (o);
+		}
 	}
 
 	g_list_free (ao->objs);
@@ -555,6 +571,8 @@ bonobo_object_finalize_real (GtkObject *object)
 	void *servant = bonobo_object->servant;
 	CORBA_Environment ev;
 
+	g_assert (bonobo_object->priv->ao == NULL);
+
 	CORBA_exception_init (&ev);
 
 	if (bonobo_object->corba_objref != CORBA_OBJECT_NIL) {
@@ -573,16 +591,6 @@ bonobo_object_finalize_real (GtkObject *object)
 	}
 	CORBA_exception_free (&ev);
 
-	/*
-	 * Check for idiots using gtk_object fns
-	 */
-#ifdef BONOBO_REF_HOOKS
-	if (!bonobo_object->priv->ao->destroyed)
-		g_error ("Serious error finalizing only part "
-			 "of a bonobo aggregate object");
-#endif
-
-	bonobo_object->priv->ao = NULL;
 	g_free (bonobo_object->priv);
 
 	bonobo_object_parent_class->finalize (object);

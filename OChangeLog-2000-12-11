@@ -1,3 +1,18 @@
+2000-08-07  Federico Mena Quintero  <federico@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_finalize): This function
+	has ABSOLUTELY no reason to call o->klass->finalize(o).  That is
+	GtkObject's business.  Leave it to that or it will come back and
+	bite your head off with extreme prejudice.  The right thing to do
+	here is to 1. Nullify o->priv->ao to unlink the sub-object from
+	the aggregate object; 2. do gtk_object_unref(o).  This way we make
+	sure the object is finalized.  Also, for good measure, assert that
+	the ->ao exists on the aggregate objects and that ->ao->destroyed
+	is true; the object should already have been destroy()ed in
+	bonobo_object_destroy().
+	(bonobo_object_finalize_real): Ensure that the ->ao does not
+	exist, and do not check ->ao->destroyed.
+
 2000-08-04  Michael Meeks  <michael@helixcode.com>
 
 	* tests/test-properties-server.c: Update for oaf.
