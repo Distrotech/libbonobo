@@ -1,5 +1,26 @@
 2000-10-05  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-win.c (bonobo_win_add_popup): set dirty bit
+	and re-generate widgets on registration; re-locate.
+	(update_dockitem): update to new bonobo-ui-toolbar look
+	enumeration. (update_widgets): s/popup/popups/
+	(menu_item_set_label): set label-less menu widgets insensitive
+	for separators (John).
+	(update_popups): impl. (update_widgets): hook it.
+
+	* bonobo/bonobo-ui-component.h: Make the default verb
+	macros type safe, this will churn warnings all over people
+	should do an s/BONOBO_UI_VERB/BONOBO_UI_UNSAFE_VERB/ if they
+	don't like warnings.
+
+	* bonobo/app.c (cb_do_dump, cb_do_quit, cb_do_popup): remove
+	erroneous signatures.
+
+	* bonobo/bonobo-control-frame.c s/uih/uic/ and update prototype
+	to UIContainer.
+
+2000-10-05  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c s/app/win/ for Darin.
 
 2000-10-04  Michael Meeks  <michael@helixcode.com>
