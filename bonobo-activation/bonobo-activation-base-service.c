@@ -27,9 +27,9 @@
    hold of a running metaserver and such */
 
 
-#include <bonobo-activation/bonobo-activation-base-service.h>
 #include <bonobo-activation/bonobo-activation-i18n.h>
 #include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/bonobo-activation-base-service.h>
 #include <bonobo-activation/bonobo-activation-private.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 #include <bonobo-activation/bonobo-activation-client.h>
@@ -56,35 +56,31 @@
 
 static GSList *registries = NULL;
 
-typedef struct
-{
+typedef struct {
 	int priority;
 	const BonoboActivationBaseServiceRegistry *registry;
 	gpointer user_data;
-}
-RegistryInfo;
+} RegistryInfo;
 
-typedef struct
-{
+typedef struct {
 	int priority;
 	BonoboActivationBaseServiceActivator activator;
-}
-ActivatorInfo;
+} ActivatorInfo;
 
 static gint
 ri_compare (gconstpointer a, gconstpointer b)
 {
-	const RegistryInfo *ra, *rb;
-
-	ra = a;
-	rb = b;
+        RegistryInfo *ra = (RegistryInfo *) a;
+        RegistryInfo *rb = (RegistryInfo *) b;
 
 	return (rb->priority - ra->priority);
 }
 
 void
-bonobo_activation_base_service_registry_add (const BonoboActivationBaseServiceRegistry *registry,
-                                             int priority, gpointer user_data)
+bonobo_activation_base_service_registry_add
+                      (const BonoboActivationBaseServiceRegistry *registry,
+                       int                                        priority,
+                       gpointer                                   user_data)
 {
 	RegistryInfo *new_ri;
 
@@ -100,7 +96,7 @@ bonobo_activation_base_service_registry_add (const BonoboActivationBaseServiceRe
 
 CORBA_Object
 bonobo_activation_base_service_check (const BonoboActivationBaseService *base_service,
-                                      CORBA_Environment *ev)
+                                      CORBA_Environment                 *ev)
 {
 	GSList *link;
 	CORBA_Object retval = CORBA_OBJECT_NIL;

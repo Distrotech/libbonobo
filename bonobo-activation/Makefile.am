@@ -8,6 +8,7 @@ INCLUDES=					\
 	-DBONOBO_ACTIVATION_LOCALEDIR=\""$(datadir)/locale"\"	\
 	$(BONOBO_ACTIVATION_CFLAGS)		\
 	-DVERSION=\"$(VERSION)\"		\
+	-DG_DISABLE_DEPRECATED			\
 	$(NULL)
 
 LDFLAGS=					\

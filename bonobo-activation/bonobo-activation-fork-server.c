@@ -128,7 +128,7 @@ scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
                         continue;
 
                 /* We run the loop too ... */
-                g_main_run (ai->mloop);
+                g_main_loop_run (ai->mloop);
 
                 if (!strcmp (seek_ai->act_iid, ai->act_iid)) {
 #ifdef BONOBO_ACTIVATION_DEBUG
@@ -187,7 +187,7 @@ handle_exepipe (GIOChannel * source,
 #endif
 
 	if (!retval)
-		g_main_quit (data->mloop);
+		g_main_loop_quit (data->mloop);
 
 	return retval;
 }
@@ -322,7 +322,7 @@ bonobo_activation_server_by_forking (
 		ai.fh = iorfh = fdopen (iopipes[0], "r");
                 
 		ai.iorbuf[0] = '\0';
-		ai.mloop = g_main_new (FALSE);
+		ai.mloop = g_main_loop_new (NULL, FALSE);
 
                 running_activations = g_slist_prepend (running_activations, &ai);
 
@@ -332,8 +332,8 @@ bonobo_activation_server_by_forking (
                                           G_IO_ERR, (GIOFunc) & handle_exepipe,
                                           &ai);
 		g_io_channel_unref (gioc);
-		g_main_run (ai.mloop);
-		g_main_destroy (ai.mloop);
+		g_main_loop_run (ai.mloop);
+		g_main_loop_unref (ai.mloop);
 		fclose (iorfh);
 
                 running_activations = g_slist_remove (running_activations, &ai);

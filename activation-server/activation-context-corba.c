@@ -129,13 +129,11 @@ child_od_update_active (ChildODInfo * child, CORBA_Environment * ev)
 		child->time_active_pulled = time (NULL);
 		child->active_servers =
 			g_hash_table_new (g_str_hash, g_str_equal);
-		g_hash_table_freeze (child->active_servers);
 		for (i = 0; i < cache->_u.active_servers._length; i++)
 			g_hash_table_insert (child->active_servers,
 					     cache->_u.
 					     active_servers._buffer[i],
 					     GINT_TO_POINTER (1));
-		g_hash_table_thaw (child->active_servers);
 	} else
 		CORBA_free (cache);
 }
@@ -213,12 +211,10 @@ child_od_update_list (ChildODInfo *child, CORBA_Environment *ev)
 
 		child->time_list_pulled = time (NULL);
 		child->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
-		g_hash_table_freeze (child->by_iid);
 		for (i = 0; i < child->list->_length; i++)
 			g_hash_table_insert (child->by_iid,
 					     child->list->_buffer[i].iid,
 					     &(child->list->_buffer[i]));
-		g_hash_table_thaw (child->by_iid);
 	}
 
 	CORBA_free (cache);

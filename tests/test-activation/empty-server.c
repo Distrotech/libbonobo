@@ -76,7 +76,7 @@ main (int argc, char *argv[])
 	PortableServer_POAManager_activate
 		(PortableServer_POA__get_the_POAManager (poa, &ev), &ev);
 	while (1)
-		g_main_iteration (TRUE);
+		g_main_context_iteration (NULL, TRUE);
 
 	bonobo_activation_active_server_unregister ("OAFIID:Empty:19991025", empty_client);
 	bonobo_activation_active_server_unregister ("OAFIID:Empty2:19991025", empty_client);

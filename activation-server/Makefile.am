@@ -11,6 +11,7 @@ INCLUDES=					\
 	-DSERVER_LOCALEDIR=\""$(datadir)/locale"\" \
 	$(SERVER_CFLAGS)			\
 	-DSERVER_CONFDIR=\"$(sysconfdir)\"	\
+	-DG_DISABLE_DEPRECATED			\
 	$(NULL)
 
 bonobo_activation_server_SOURCES=				\

@@ -608,16 +608,12 @@ Bonobo_ServerInfo_load (char **directories,
 	servers->_buffer = CORBA_sequence_Bonobo_ServerInfo_allocbuf (length);
         servers->_length = length;
 
-	g_hash_table_freeze (*iid_to_server_info_map);
-
 	for (j = 0, p = entries; j < length; j++, p = p->next) {
 		memcpy (&servers->_buffer[j], p->data, sizeof (Bonobo_ServerInfo));
 		g_hash_table_insert (*iid_to_server_info_map,
                                      servers->_buffer[j].iid,
                                      &servers->_buffer[j]);
 	}
-
-	g_hash_table_thaw (*iid_to_server_info_map);
 
         g_slist_foreach (entries, (GFunc) g_free, NULL);
         g_slist_free (entries);

@@ -60,7 +60,7 @@ test_activate (char *requirements)
 #endif
 
         while (data.callback_called == FALSE) {
-                g_main_iteration (FALSE);
+                g_main_context_iteration (NULL, FALSE);
 #if DEBUG_TIME
                 if (time (NULL) > (beg_time + DEBUG_TIMEOUT)) {
                         return -1;
@@ -97,7 +97,7 @@ test_activate_from_id (char *aid)
 #endif
 
         while (data.callback_called == FALSE) {
-                g_main_iteration (FALSE);
+                g_main_context_iteration (NULL, FALSE);
 #if DEBUG_TIME
                 if (time (NULL) > (beg_time + DEBUG_TIMEOUT)) {
                         return -1;
@@ -180,6 +180,3 @@ main (int argc, char *argv[])
                 return 1;
         }
 }
-
-
-

@@ -150,7 +150,6 @@ get_lang_list (void)
         const char *tmp;
         char *tmp2, *lang, *lang_with_locale, *equal_char;
         GString *str;
-        int len = 0, cur = 0;
         gboolean add_comma = FALSE;
         
         lang_with_locale = NULL;

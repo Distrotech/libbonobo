@@ -23,16 +23,21 @@
  *
  */
 /* The  folowing API is not intended for application use.
-   It is intended only for people who want to extend OAF bootstraping system.
-   I have no idea why we have all this tralala but Eliot knows and he _tried_
-   to explain it in docs/bonobo-activation-base-service.txt
-*/
+ * It is intended only for people who want to extend OAF bootstraping system.
+ * I have no idea why we have all this tralala but Eliot knows and he _tried_
+ * to explain it in docs/bonobo-activation-base-service.txt
+ */
+
+/*
+ * DO NOT USE this API, it is deprecated and crufty.
+ */
 
 #ifndef BONOBO_ACTIVATION_BASE_SERVICE_H
 #define BONOBO_ACTIVATION_BASE_SERVICE_H
 
 #ifndef BONOBO_DISABLE_DEPRECATED
 
+#include <glib.h>
 #include <orbit/orbit.h>
 
 G_BEGIN_DECLS
@@ -46,6 +51,7 @@ typedef struct {
 } BonoboActivationBaseService;
 
 typedef struct _BonoboActivationBaseServiceRegistry BonoboActivationBaseServiceRegistry;
+
 struct _BonoboActivationBaseServiceRegistry {
 	void   (*lock)         (const BonoboActivationBaseServiceRegistry *registry,
                                 gpointer                                   user_data);
@@ -65,34 +71,40 @@ struct _BonoboActivationBaseServiceRegistry {
                                 gpointer                      user_data);
 };
 
-typedef CORBA_Object (*BonoboActivationBaseServiceActivator) (const BonoboActivationBaseService *base_service,
-                                                              const char          **command,
-                                                              int                   ior_fd,
-                                                              CORBA_Environment    *ev);
+typedef CORBA_Object (*BonoboActivationBaseServiceActivator) (
+                                const BonoboActivationBaseService *base_service,
+                                const char                       **command,
+                                int                                ior_fd,
+                                CORBA_Environment                 *ev);
 
 
+void         bonobo_activation_base_service_registry_add
+                               (const BonoboActivationBaseServiceRegistry *registry,
+                                int                                        priority, 
+                                gpointer                                   user_data);
 
+CORBA_Object bonobo_activation_base_service_check
+                               (const BonoboActivationBaseService *base_service,
+                                CORBA_Environment                 *ev);
 
-
-void         bonobo_activation_base_service_registry_add  (const BonoboActivationBaseServiceRegistry *registry,
-                                                           int                           priority, 
-                                                           gpointer                      user_data);
-CORBA_Object bonobo_activation_base_service_check         (const BonoboActivationBaseService         *base_service,
-                                                           CORBA_Environment            *ev);
-void         bonobo_activation_base_service_set           (const BonoboActivationBaseService         *base_service,
-                                                           CORBA_Object                  obj, 
-                                                           CORBA_Environment            *ev);
-void         bonobo_activation_base_service_unset         (const BonoboActivationBaseService         *base_service,
-                                                           CORBA_Object                  obj, 
-                                                           CORBA_Environment            *ev);
-
+void         bonobo_activation_base_service_set
+                               (const BonoboActivationBaseService         *base_service,
+                                CORBA_Object                               obj, 
+                                CORBA_Environment                         *ev);
+void         bonobo_activation_base_service_unset
+                               (const BonoboActivationBaseService         *base_service,
+                                CORBA_Object                               obj, 
+                                CORBA_Environment                         *ev);
 
 /* Do not release() the returned value */
-CORBA_Object bonobo_activation_service_get                (const BonoboActivationBaseService         *base_service);
+CORBA_Object bonobo_activation_service_get
+                               (const BonoboActivationBaseService         *base_service);
 
-void         bonobo_activation_base_service_activator_add (BonoboActivationBaseServiceActivator       activator,
-                                                           int                           priority);
-void         bonobo_activation_base_service_debug_shutdown (CORBA_Environment            *ev);
+void         bonobo_activation_base_service_activator_add
+                               (BonoboActivationBaseServiceActivator       activator,
+                                int                                        priority);
+void         bonobo_activation_base_service_debug_shutdown
+                               (CORBA_Environment                         *ev);
 
 G_END_DECLS
 

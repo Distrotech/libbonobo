@@ -163,7 +163,7 @@ main (int argc, char *argv[])
         }
 
 	orb = bonobo_activation_init (argc, argv);
-	ml = g_main_new (FALSE);
+	ml = g_main_loop_new (NULL, FALSE);
 
         add_initial_locales ();
         
@@ -262,7 +262,7 @@ main (int argc, char *argv[])
 
 	PortableServer_POAManager_activate
 		(PortableServer_POA__get_the_POAManager (root_poa, &ev), &ev);
-	g_main_run (ml);
+	g_main_loop_run (ml);
 
 	return 0;
 }

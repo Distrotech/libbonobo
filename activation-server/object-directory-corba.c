@@ -466,7 +466,7 @@ impl_Bonobo_ObjectDirectory_lock (impl_POA_Bonobo_ObjectDirectory * servant,
 			       CORBA_Environment * ev)
 {
 	while (servant->is_locked)
-		g_main_iteration (TRUE);
+		g_main_context_iteration (NULL, TRUE);
 
 	servant->is_locked = TRUE;
 }

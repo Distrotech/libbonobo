@@ -97,30 +97,31 @@ struct BonoboActivationBaseServiceRegistry {
 <USER_FUNCTION>
 <NAME>BonoboActivationBaseServiceActivator</NAME>
 <RETURNS>CORBA_Object </RETURNS>
-const BonoboActivationBaseService *base_service,
-                                                              const char          **command,
-                                                              int                   ior_fd,
-                                                              CORBA_Environment    *ev
+
+                                const BonoboActivationBaseService *base_service,
+                                const char                       **command,
+                                int                                ior_fd,
+                                CORBA_Environment                 *ev
 </USER_FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_base_service_registry_add</NAME>
 <RETURNS>void  </RETURNS>
-const BonoboActivationBaseServiceRegistry *registry,int                           priority,gpointer                      user_data
+const BonoboActivationBaseServiceRegistry *registry,int                                        priority,gpointer                                   user_data
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_base_service_check</NAME>
 <RETURNS>CORBA_Object  </RETURNS>
-const BonoboActivationBaseService         *base_service,CORBA_Environment            *ev
+const BonoboActivationBaseService *base_service,CORBA_Environment                 *ev
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_base_service_set</NAME>
 <RETURNS>void  </RETURNS>
-const BonoboActivationBaseService         *base_service,CORBA_Object                  obj,CORBA_Environment            *ev
+const BonoboActivationBaseService         *base_service,CORBA_Object                               obj,CORBA_Environment                         *ev
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_base_service_unset</NAME>
 <RETURNS>void  </RETURNS>
-const BonoboActivationBaseService         *base_service,CORBA_Object                  obj,CORBA_Environment            *ev
+const BonoboActivationBaseService         *base_service,CORBA_Object                               obj,CORBA_Environment                         *ev
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_service_get</NAME>
@@ -130,12 +131,12 @@ const BonoboActivationBaseService         *base_service
 <FUNCTION>
 <NAME>bonobo_activation_base_service_activator_add</NAME>
 <RETURNS>void  </RETURNS>
-BonoboActivationBaseServiceActivator       activator,int                           priority
+BonoboActivationBaseServiceActivator       activator,int                                        priority
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_base_service_debug_shutdown</NAME>
 <RETURNS>void  </RETURNS>
-CORBA_Environment            *ev
+CORBA_Environment                         *ev
 </FUNCTION>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
@@ -796,7 +797,7 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
-#define BONOBO_ACTIVATION_MICRO_VERSION (6)
+#define BONOBO_ACTIVATION_MICRO_VERSION (7)
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
