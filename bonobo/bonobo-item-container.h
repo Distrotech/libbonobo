@@ -40,23 +40,22 @@ typedef struct {
 typedef struct {
 	BonoboObjectClass parent_class;
 
-	Bonobo_Unknown (*get_object) (BonoboContainer *item_container,
-				      CORBA_char *item_name,
-				      CORBA_boolean *only_if_exists,
+	Bonobo_Unknown (*get_object) (BonoboContainer   *item_container,
+				      CORBA_char        *item_name,
+				      CORBA_boolean      only_if_exists,
 				      CORBA_Environment *ev);
 } BonoboContainerClass;
 
 GtkType          bonobo_container_get_type    (void);
-BonoboContainer  *bonobo_container_new         (void);
-BonoboContainer  *bonobo_container_construct   (BonoboContainer *container,
-						Bonobo_Container container_corba);
-BonoboMoniker    *bonobo_container_get_moniker (BonoboContainer *container);
+BonoboContainer *bonobo_container_new         (void);
+BonoboContainer *bonobo_container_construct   (BonoboContainer *container,
+					       Bonobo_Container container_corba);
+BonoboMoniker   *bonobo_container_get_moniker (BonoboContainer *container);
 
 void             bonobo_container_add         (BonoboContainer *container,
 					       BonoboObject    *object);
-
-void             bonobo_container_remove       (BonoboContainer *container,
-						BonoboObject    *object);
+void             bonobo_container_remove      (BonoboContainer *container,
+					       BonoboObject    *object);
 
 POA_Bonobo_Container__epv *bonobo_container_get_epv (void);
 

@@ -16,10 +16,15 @@ typedef CORBA_TypeCode BonoboArgType;
 #define BONOBO_ARG_DOUBLE  TC_double
 #define BONOBO_ARG_STRING  TC_string
 
-#define BONOBO_ARG_GET_GENERAL(a,t)   (g_assert ((a)->_type->kind == CORBA_tk##t),	\
-				       *((CORBA##t *)(a->_value)))
-#define BONOBO_ARG_SET_GENERAL(a,v,t) (g_assert ((a)->_type->kind == CORBA_tk##t),	\
-				       *((CORBA##t *)(a->_value)) = (CORBA##t)(v))
+#ifdef __GNUC__
+#	define BONOBO_ARG_GET_GENERAL(a,t)   (g_assert ((a)->_type->kind == CORBA_tk##t),\
+					       *((CORBA##t *)(a->_value)))
+#	define BONOBO_ARG_SET_GENERAL(a,v,t) (g_assert ((a)->_type->kind == CORBA_tk##t),\
+					       *((CORBA##t *)(a->_value)) = (CORBA##t)(v))
+#else
+#	define BONOBO_ARG_GET_GENERAL(a,t)   (*((CORBA##t *)(a->_value)))
+#	define BONOBO_ARG_SET_GENERAL(a,v,t) (*((CORBA##t *)(a->_value)) = (CORBA##t)(v))
+#endif
 
 #define BONOBO_ARG_GET_BOOLEAN(a)   (BONOBO_ARG_GET_GENERAL (a, _boolean))
 #define BONOBO_ARG_SET_BOOLEAN(a,v) (BONOBO_ARG_SET_GENERAL (a, v, _boolean))

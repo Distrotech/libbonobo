@@ -1,3 +1,47 @@
+2000-07-24  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-print-client.c (bonobo_print_data_render): remove
+	red debugging border round print bbox.
+
+2000-07-24  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-control.c (bonobo_control_destroy): if the control
+	is active, deactivate before destroying ourselvs.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_get_container):
+	implement.
+
+2000-07-23  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-client-site.c (create_client_site): rename to
+	(bonobo_client_site_corba_object_create): this & publicized.
+
+	* bonobo/bonobo-container.h: correct get_object prototype,
+	only_if_exists not passed by reference.
+
+2000-07-20  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo-idl/Makefile.am: Try to auto-build the test.
+
+2000-07-19  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo-idl/Makefile.am (man_MANS): install the nice man file.
+
+	* idl/bonobo-app.idl: create.
+
+	* bonobo/bonobo-stream-memory.c (mem_get_size, bonobo_stream_mem_class_init),
+	(bonobo_stream_mem_get_size): Implement
+
+	* bonobo/bonobo-arg.h: constrain g_assert type checks in arg assignment
+	macros to __GNUC__
+
+	* bonobo/bonobo-stream-fs.h: prune ugly, redundant conditional typedef crud.
+
+	* storage-modules/bonobo-stream-vfs.h: remove ugly redundant typedefs.
+
+	* bonobo/bonobo-socket.c (bonobo_socket_grab_focus): implement.
+	(bonobo_socket_class_init): hook up.
+
 2000-07-24  Peter Williams  <peterw@helixcode.com>
 
 	* bonobo/bonobo-socket.c (bonobo_socket_focus_out_event): Fix
@@ -22,6 +66,11 @@
 	Fixed build breakage that was caused by big changes to gnome-vfs.
 
 2000-07-18  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_create): split code into
+	(bonobo_stream_mem_construct): here. (bonobo_stream_mem_get_buffer): update.
+	(bonobo_stream_mem_class_init): Make get_buffer a virtual method.
+	(mem_get_buffer): implement.
 
 	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_construct):
 	add a ref on the poor property bag we are swallowing, so when we are unreffed

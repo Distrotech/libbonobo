@@ -66,6 +66,13 @@ interface ControlFrame : Bonobo::Unknown {
 };
 
 interface Control : Bonobo::Unknown {
+	/*
+	 * This is a ':' delimited string
+	 *   under X11 the first entry ( before a ':' ) contains
+	 *  window ID as an integer. Other fields are reserved for
+	 *  future use.
+	 * See also bonobo-control.c (window_id_demangle)
+	 */
 	typedef string windowid;
 
 	/**

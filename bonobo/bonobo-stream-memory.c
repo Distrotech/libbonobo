@@ -185,6 +185,22 @@ mem_destroy (GtkObject *object)
 	GTK_OBJECT_CLASS (bonobo_stream_mem_parent_class)->destroy (object);
 }
 
+static char *
+mem_get_buffer (BonoboStreamMem *stream_mem)
+{
+	g_return_val_if_fail (BONOBO_IS_STREAM_MEM (stream_mem), NULL);
+
+	return stream_mem->buffer;
+}
+
+static size_t
+mem_get_size (BonoboStreamMem *stream_mem)
+{
+	g_return_val_if_fail (BONOBO_IS_STREAM_MEM (stream_mem), NULL);
+
+	return stream_mem->size;
+}
+
 static void
 bonobo_stream_mem_class_init (BonoboStreamMemClass *klass)
 {
@@ -195,12 +211,15 @@ bonobo_stream_mem_class_init (BonoboStreamMemClass *klass)
 
 	object_class->destroy = mem_destroy;
 	
-	sclass->write    = mem_write;
-	sclass->read     = mem_read;
-	sclass->seek     = mem_seek;
-	sclass->truncate = mem_truncate;
-	sclass->copy_to  = mem_copy_to;
-	sclass->commit   = mem_commit;
+	sclass->write     = mem_write;
+	sclass->read      = mem_read;
+	sclass->seek      = mem_seek;
+	sclass->truncate  = mem_truncate;
+	sclass->copy_to   = mem_copy_to;
+	sclass->commit    = mem_commit;
+
+	klass->get_buffer = mem_get_buffer;
+	klass->get_size   = mem_get_size;
 }
 
 /**
@@ -229,6 +248,34 @@ bonobo_stream_mem_get_type (void)
 	}
 
 	return type;
+}
+
+BonoboStreamMem *
+bonobo_stream_mem_construct (BonoboStreamMem *stream_mem,
+			     Bonobo_Stream    corba_stream,
+			     const char      *buffer,
+			     size_t           size,
+			     gboolean         read_only,
+			     gboolean         resizable)
+{
+	g_return_val_if_fail (buffer != NULL, NULL);
+	g_return_val_if_fail (corba_stream != CORBA_OBJECT_NIL, NULL);
+	g_return_val_if_fail (BONOBO_IS_STREAM_MEM (stream_mem), NULL);
+
+	if (buffer == NULL) {
+		stream_mem->buffer = g_malloc (size);
+		memset (stream_mem->buffer, 0, size);
+	} else
+		stream_mem->buffer = g_memdup (buffer, size);
+
+	stream_mem->size = size;
+	stream_mem->pos = 0;
+	stream_mem->read_only = read_only;
+	stream_mem->resizable = resizable;
+
+	return BONOBO_STREAM_MEM (
+		bonobo_object_construct (BONOBO_OBJECT (stream_mem),
+					 corba_stream));
 }
 
 /**
@@ -264,16 +311,6 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 	if (stream_mem == NULL)
 		return NULL;
 
-	if (buffer == NULL) {
-		stream_mem->buffer = g_malloc (size);
-		memset (stream_mem->buffer, 0, size);
-	} else
-		stream_mem->buffer = g_memdup (buffer, size);
-
-	stream_mem->size = size;
-	stream_mem->pos = 0;
-	stream_mem->read_only = read_only;
-	stream_mem->resizable = resizable;
 
 	corba_stream = bonobo_stream_corba_object_create (
 		BONOBO_OBJECT (stream_mem));
@@ -283,8 +320,9 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 		return NULL;
 	}
 
-	bonobo_object_construct (BONOBO_OBJECT (stream_mem), corba_stream);
-	return BONOBO_STREAM (stream_mem);
+	return BONOBO_STREAM (bonobo_stream_mem_construct (
+		stream_mem, corba_stream, buffer, size,
+		read_only, resizable));
 }
 
 /**
@@ -301,5 +339,22 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 const char *
 bonobo_stream_mem_get_buffer (BonoboStreamMem *stream_mem)
 {
-	return stream_mem->buffer;
+	return BONOBO_STREAM_MEM_CLASS(
+		GTK_OBJECT(stream_mem)->klass)->get_buffer (stream_mem);
+}
+
+/**
+ * bonobo_stream_mem_get_size:
+ * @stream_mem: a BonoboStreamMem
+ *
+ * Returns the size of the data associated with a BonoboStreamMem
+ * see bonobo_stream_mem_get_buffer
+ *
+ * Return value: the size.
+ **/
+size_t
+bonobo_stream_mem_get_size (BonoboStreamMem *stream_mem)
+{
+	return BONOBO_STREAM_MEM_CLASS(
+		GTK_OBJECT(stream_mem)->klass)->get_size (stream_mem);
 }
