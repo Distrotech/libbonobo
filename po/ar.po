@@ -1,28 +1,30 @@
+# translation of libbonobo.HEAD.ar.po to 
 # Arabic translation of 1.
 # Copyright (C) 2003 THE 1'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the 1 package.
 # Mohammed Gamal <f2c2001@yahoo.com>, 2002.
 # Ammer Alsabbagh <whollyboss@yahoo.com>, 2002.
 # Isam Bayazidi <bayazidi@arabeyes.org>, 2003.
+#  <lumina@silverpen.de>, 2004.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: 1\n"
-"POT-Creation-Date: 2004-01-09 15:27+0000\n"
-"PO-Revision-Date: 2003-12-20 12:34+0100\n"
+"Project-Id-Version: libbonobo.HEAD.ar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-22 20:39+0100\n"
+"PO-Revision-Date: 2004-01-09 17:36+0100\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"Content-Transfer-Encoding: 8bit"
 
-#: activation-server/activation-context-corba.c:470
+#: activation-server/activation-context-corba.c:473
 msgid "Couldn't find which child the server was listed in"
-msgstr "لم يمكن التعرف في أي الابناء ضمن الخادم"
+msgstr "لم يمكن التعرف في أي الابناء ادرج النادل"
 
-#: activation-server/activation-context-corba.c:748
+#: activation-server/activation-context-corba.c:751
 msgid "Not a valid Activation ID"
 msgstr "هوية تنشيط غير سليمة"
 
@@ -64,13 +66,12 @@ msgid "Name service"
 msgstr "خدمة الأسماء"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "خدمة الأسماء"
+msgstr "خدمة التلبيغ"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "خدمة التبليغ للتنشيط"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -81,8 +82,7 @@ msgstr "إننا لا نعالج حاليا تنشيط أجسام shlib في ع�
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr ""
-"لم يقرأ ملف إعداد Bonobo Activation بنجاح. الرجاء, التأكد من صحته في: %s"
+msgstr "لم يقرأ ملف إعداد Bonobo Activation بنجاح. الرجاء, التأكد من صحته في: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -91,7 +91,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1167
+#: activation-server/object-directory-corba.c:1130
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "حالة التسابق عند تغعيل النادل '%s'"
@@ -194,11 +194,11 @@ msgstr "أرجع المصنع `%s' NIL لـ `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' لم يحوي `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:336
 msgid "Name"
 msgstr "الاسم"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:336
 msgid "Application unique name"
 msgstr "اسم التطبيق الوحيد"
 
@@ -236,15 +236,15 @@ msgstr "لا يمكن تنشيط الكائن من المصنع"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "لا يوجد إذن للنفوذ إلى التيار"
+msgstr "لا يوجد إذن للنفوذ إلى تيار البيانات"
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "تمت محاولة إجراء عمل تيار غير مدعوم"
+msgstr "تمت محاولة إجراء عمل تيار بيانات غير مدعوم"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "خطأ إدخال/إخراج عند التيار"
+msgstr "خطأ إدخال/إخراج عند تيار البيانات"
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
@@ -391,7 +391,7 @@ msgstr "moniker  عام للبحث عن Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "moniker مصنع moniker جديد"
+msgstr "د"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
@@ -399,15 +399,15 @@ msgstr "moniker عنصر عام"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr "تيار MonikerExtender"
+msgstr "تيار بيانات MonikerExtender"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "مصنع خادم صدى بونوبو "
+msgstr "مصنع نادل صدى بونوبو"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "مثال برنامج لخادم صدى بونوبو"
+msgstr "برنامج مثالي لنادل صدى بونوبو"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
@@ -415,11 +415,11 @@ msgstr "مكون صدى"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr "مصنع مكونات صدى"
+msgstr "مصنع لمكون الصدى"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr "لم يمكن تفعيل بونوبو"
+msgstr "لم أتمكن من تفعيل بونوبو"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
@@ -432,16 +432,16 @@ msgstr "حصل استثناء '%s'"
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr "لم يمكن حفظ ملف الإعداد.\n"
+msgstr "لم يمكن حفظ ملف الإعدادات.\n"
 
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "رجاء، تأكد من أن لديك الإذونات للكتابة الى '%s'.\n"
+msgstr "الرجاء التأكد من أن لديك الإذونات للكتابة على '%s'.\n"
 
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
-msgstr "كتب ملف الإعداد بنجاح.\n"
+msgstr "كتب ملف الإعدادات بنجاح.\n"
 
 #: utils/bonobo-activation-sysconf.c:80
 #, c-format
@@ -449,25 +449,25 @@ msgid ""
 "configuration file is:\n"
 "    %s\n"
 msgstr ""
-"ملف الإعداد هو:\n"
+"ملف الإعدادات هو:\n"
 "    %s\n"
 
 #: utils/bonobo-activation-sysconf.c:118
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr "%s موجود مسبقا في ملف الإعداد\n"
+msgstr "%s موجود مسبقا في ملف الإعدادات\n"
 
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr "ليس هناك ملف إعداد مركب بشكل صحيح\n"
+msgstr "ليس هناك ملف إعدادات مركب بشكل صحيح\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "ملف إعداد Bonobo-activation على يحتوي:\n"
+msgstr "ملف إعدادات Bonobo-activation يحوي:\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr "الدليل المطلوب ازالته من ملف الإعداد"
+msgstr "الدليل للازالة من ملف الإعدادات"
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
@@ -475,15 +475,15 @@ msgstr "مسار الدليل"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr "الدليل المطلوب اضافته الى ملف الإعداد"
+msgstr "الدليل للاضافته الى ملف الإعدادات"
 
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
-msgstr "عرض الدلائل في ملف الإعداد"
+msgstr "عرض الدلائل في ملف الإعدادات"
 
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr "عرض المسار الى ملف الإعداد"
+msgstr "عرض المسار الى ملف الإعدادات"
 
 #~ msgid "No server corresponding to your query"
 #~ msgstr "لا خادم مقابل لاستعلامك"
