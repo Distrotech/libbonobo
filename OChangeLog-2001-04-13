@@ -1,3 +1,12 @@
+2000-09-23  Jody Goldberg <jgoldberg@home.com>
+
+	* bonobo/bonobo-ui-toolbar.c (impl_set_orientation) :
+	  When the style changes update the children.
+	(impl_get_arg) : new function.
+	(impl_set_arg) : new function.
+	(class_init) : register get/set arg.
+	  add the 'orientation' and 'is_floating' arguments.
+
 2000-09-23  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-ui-handler.c: Don't #include
