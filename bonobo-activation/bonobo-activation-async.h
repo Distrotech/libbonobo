@@ -28,6 +28,8 @@
 
 #include <bonobo-activation/Bonobo_Activation_types.h>
 
+G_BEGIN_DECLS
+
 /* activated_object is CORBA_OBJECT_NIL if the activation 
    failed somehow. If this is the case, error_reason contains
    a valid string which describes the pb encountered.
@@ -52,7 +54,7 @@ void bonobo_activation_activate_from_id_async (const Bonobo_ActivationID aid,
                                                gpointer user_data,
                                                CORBA_Environment * ev);
 
-
+G_END_DECLS
 
 #endif /* BONOBO_ACTIVATION_ASYNC_H */
 

@@ -26,10 +26,6 @@
 #ifndef BONOBO_ACTIVATION_H
 #define BONOBO_ACTIVATION_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <bonobo-activation/Bonobo_Unknown.h>
 #include <bonobo-activation/Bonobo_GenericFactory.h>
 
@@ -58,9 +54,4 @@ extern const guint bonobo_activation_major_version,
 	bonobo_activation_minor_version, bonobo_activation_micro_version;
 extern const char bonobo_activation_version[];
 
-#ifdef __cplusplus
-}
-#endif
-
 #endif /* BONOBO_ACTIVATION_H */
-

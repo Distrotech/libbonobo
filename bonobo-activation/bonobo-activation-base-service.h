@@ -33,6 +33,8 @@
 
 #include <orbit/orbit.h>
 
+G_BEGIN_DECLS
+
 typedef struct {
 	const char *name;
 	const char *session_name;
@@ -88,5 +90,7 @@ CORBA_Object bonobo_activation_service_get                (const BonoboActivatio
 
 void         bonobo_activation_base_service_activator_add (BonoboActivationBaseServiceActivator       activator,
                                                            int                           priority);
+
+G_END_DECLS
 
 #endif /* BONOBO_ACTIVATION_BASE_SERVICE_H */

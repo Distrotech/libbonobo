@@ -29,6 +29,8 @@
 #include <orbit/orbit.h>
 #include <bonobo-activation/Bonobo_Activation_types.h>
 
+G_BEGIN_DECLS
+
 Bonobo_RegistrationResult bonobo_activation_active_server_register (const char  *iid,
                                                                  CORBA_Object obj);
 void        bonobo_activation_active_server_unregister (const char  *iid, 
@@ -40,6 +42,6 @@ char       *bonobo_activation_make_registration_id     (const char *iid,
 
 const char *bonobo_activation_iid_get       (void);
 
+G_END_DECLS
 
 #endif /* BONOBO_ACTIVATION_REGISTER_H */
-

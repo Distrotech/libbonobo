@@ -28,6 +28,8 @@
 
 #include <bonobo-activation/Bonobo_Activation_types.h>
 
+G_BEGIN_DECLS
+
 /* If you wish to manipulate the internals of this structure, please
    use g_malloc/g_free to allocate memory. */
 typedef struct
@@ -46,5 +48,6 @@ BonoboActivationInfo  *bonobo_activation_id_parse            (const Bonobo_Activ
 BonoboActivationInfo  *bonobo_activation_info_new            (void);
 void                   bonobo_activation_info_free           (BonoboActivationInfo       *actinfo);
 
+G_END_DECLS
 
 #endif /* BONOBO_ACTIVATION_ID_H */

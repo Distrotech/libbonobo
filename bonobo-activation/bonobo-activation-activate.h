@@ -28,6 +28,7 @@
 
 #include <bonobo-activation/Bonobo_Activation_types.h>
 
+G_BEGIN_DECLS
 
 CORBA_Object bonobo_activation_name_service_get (CORBA_Environment * ev);
 
@@ -51,7 +52,7 @@ CORBA_Object bonobo_activation_activate_from_id  (const Bonobo_ActivationID aid,
 void         bonobo_activation_set_test_components_enabled (gboolean val);
 gboolean     bonobo_activation_get_test_components_enabled (void);
 
-
+G_END_DECLS
 
 #endif /* BONOBO_ACTIVATION_ACTIVATE_H */
 

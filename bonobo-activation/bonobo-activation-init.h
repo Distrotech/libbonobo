@@ -29,6 +29,8 @@
 #include <orbit/orbit.h>
 #include <popt.h>
 
+G_BEGIN_DECLS
+
 CORBA_ORB      bonobo_activation_orb_init   (int   *argc, 
                                              char **argv);
 CORBA_ORB      bonobo_activation_orb_get    (void);
@@ -51,6 +53,8 @@ const char    *bonobo_activation_domain_get       (void);
 char          *bonobo_activation_get_popt_table_name (void);
 
 extern struct poptOption bonobo_activation_popt_options[];
+
+G_END_DECLS
 
 #endif /* BONOBO_ACTIVATION_INIT_H */
 

@@ -28,6 +28,8 @@
 
 #include <bonobo-activation/Bonobo_Activation_types.h>
 
+G_BEGIN_DECLS
+
 Bonobo_ActivationProperty *bonobo_server_info_prop_find        (Bonobo_ServerInfo                      *server,
                                                                 const char                             *prop_name);
 const char                *bonobo_server_info_prop_lookup      (Bonobo_ServerInfo                      *server,
@@ -42,6 +44,8 @@ void                       CORBA_sequence_Bonobo_ActivationProperty_copy (CORBA_
 void                       Bonobo_ServerInfo_copy              (Bonobo_ServerInfo                      *copy, 
                                                                 const Bonobo_ServerInfo                *original);
 Bonobo_ServerInfo         *Bonobo_ServerInfo_duplicate         (const Bonobo_ServerInfo                *original);
+
+G_END_DECLS
 
 #endif /* BONOBO_ACTIVATION_SERVER_INFO_H */
 

@@ -24,14 +24,15 @@
  */
 #include <config.h>
 #include <bonobo-activation/bonobo-activation-shlib.h>
-#include <bonobo-activation/bonobo-activation-private.h>
-#include <bonobo-activation/bonobo-activation-init.h>
 
+#include <bonobo-activation/Bonobo_GenericFactory.h>
+#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/bonobo-activation-private.h>
 #include <gmodule.h>
+
 /* ORBit-specific hack */
 #include <orbit/poa/poa.h>
-
-#include <bonobo-activation/bonobo-activation-i18n.h>
 
 typedef struct
 {
