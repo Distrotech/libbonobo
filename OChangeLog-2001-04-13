@@ -1,5 +1,10 @@
 2000-10-05  Michael Meeks  <michael@helixcode.com>
 
+	* configure.in: bump configure version to 0.20 to simplify other
+	people's builds.
+
+2000-10-05  Michael Meeks  <michael@helixcode.com>
+
 	* Update everything to new bonobo_ui_component API.
 	
 	* bonobo/bonobo-ui-container.c (blank_win): s/app/win/
