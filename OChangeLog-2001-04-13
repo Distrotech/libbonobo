@@ -1,3 +1,6 @@
+July 28, 1999 Elliot Lee <sopwith@redhat.com>
+	Include libefs as a virtual module.
+
 Wed Jul 28 13:34:13 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 	
 	* configure.in: added checks for libefs.
