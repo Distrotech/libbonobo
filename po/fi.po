@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-06-16 21:09+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -139,13 +139,13 @@ msgstr "Lapsiprosessi vastaanotti signaalin %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Tuntematon ei-lopetusvirhe (tila on %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "bonobo-aktivointi ei onnistunut asettamaan komennon %s prosessiryhmää: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Ohjelman %s käynnistys epäonnistui: %d (%s)\n"
@@ -191,11 +191,11 @@ msgstr "Tehdas \"%s\" palautti arvon NIL iid:lle \"%s\""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Jaettu kirjasto \"%s\" ei sisältänyt iid:tä \"%s\""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Mukautettu CORBA POA"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-05-31 16:24+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
@@ -136,12 +136,12 @@ msgstr "Derbynnodd blentyn arwydd %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Gwall anhysbys (nid yw'n defynnol, %u yw'r statws)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "methodd bonobo-activation osod grŵp proses %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Methu gweithredu %s: %d (%s)\n"
@@ -188,11 +188,11 @@ msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Nid oeddd y shlib `%s' yn cynnwys `%s'"
 
 # EFALLAI
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "POA CORBA Addasiedig"
 

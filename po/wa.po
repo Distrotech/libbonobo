@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bonobo-activation\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-01-12 15:28+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -131,14 +131,14 @@ msgstr "L' efant a rçuvou li signå %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "bonobo-activation n' a nén savou mete li groupe li groupe do process di %s: %"
 "s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, fuzzy, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "L' enondaedje di %s a fwait berwete: %d (%s)\n"
@@ -186,11 +186,11 @@ msgstr ""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Li pårteye livreye «%s» n' a nén «%s» å dvins"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

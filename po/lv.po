@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-01-01 18:00+0200\n"
 "Last-Translator: Artis Trops <hornet@navigator.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
@@ -131,12 +131,12 @@ msgstr "Pakārtotais saņēma signālu %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Nezināma bez-iziešanas kļūda (statuss ir %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation nespēja uzstādīt procesu grupu %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Nespēja palaist %s: %d (%s)\n"
@@ -182,11 +182,11 @@ msgstr "Ražotne `%s' atgrieza NIL `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' nesatur `%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

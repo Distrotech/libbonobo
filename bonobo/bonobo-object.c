@@ -747,11 +747,11 @@ static void
 do_corba_setup_T (BonoboObject *object)
 {
 	CORBA_Object obj;
-	CORBA_Environment ev;
+	CORBA_Environment ev[1];
 	BonoboObjectClass *xklass;
 	BonoboObjectClass *klass = BONOBO_OBJECT_GET_CLASS (object);
 
-	CORBA_exception_init (&ev);
+	CORBA_exception_init (ev);
 
 	/* Setup the servant structure */
 	object->servant._private = NULL;
@@ -771,10 +771,10 @@ do_corba_setup_T (BonoboObject *object)
 				   G_OBJECT_CLASS_NAME (klass));
 			return;
 		}
-		xklass->poa_init_fn ((PortableServer_Servant) &object->servant, &ev);
-		if (BONOBO_EX (&ev)) {
+		xklass->poa_init_fn ((PortableServer_Servant) &object->servant, ev);
+		if (BONOBO_EX (ev)) {
 			g_warning ("Exception initializing servant '%s'",
-				   bonobo_exception_get_text (&ev));
+				   bonobo_exception_get_text (ev));
 			return;
 		}
 	}
@@ -782,18 +782,24 @@ do_corba_setup_T (BonoboObject *object)
 	/*  Instantiate a CORBA_Object reference for the servant
 	 * assumes the bonobo POA supports implicit activation */
 	obj = PortableServer_POA_servant_to_reference (
-		bonobo_object_get_poa (object), &object->servant, &ev);
+		bonobo_object_get_poa (object), &object->servant, ev);
 
-	if (BONOBO_EX (&ev)) {
+	if (BONOBO_EX (ev)) {
 		g_warning ("Exception '%s' getting reference for servant",
-			   bonobo_exception_get_text (&ev));
+			   bonobo_exception_get_text (ev));
 		return;
 	}
 
 	object->corba_objref = obj;
 	bonobo_running_context_add_object_T (obj);
 
-	CORBA_exception_free (&ev);
+#ifdef G_ENABLE_DEBUG
+	if (!CORBA_Object_is_a (obj, "IDL:Bonobo/Unknown:1.0", ev))
+		g_error ("Attempt to instantiate non-Bonobo/Unknown "
+			 "derived object via. BonoboObject");
+#endif
+
+	CORBA_exception_free (ev);
 }
 
 static GObject *
@@ -949,13 +955,6 @@ bonobo_object_instance_init (GObject    *g_object,
 	/* Setup signatures */
 	object->object_signature  = BONOBO_OBJECT_SIGNATURE;
 	object->servant_signature = BONOBO_SERVANT_SIGNATURE;
-
-#ifdef G_ENABLE_DEBUG
-	if (!CORBA_Object_is_a (BONOBO_OBJREF (object),
-				"IDL:Bonobo/Unknown:1.0", NULL))
-		g_error ("Attempt to instantiate non-Bonobo/Unknown "
-			 "derived object via. BonoboObject");
-#endif
 }
 
 /**

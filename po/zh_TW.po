@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.1\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-05-28 00:11+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -130,12 +130,12 @@ msgstr "副進程接收到訊號 %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "不明的非嚴重錯誤 (狀況為 %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation 在指定 %s 的進程群組時發生錯誤：%s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "無法執行 %s：%d (%s)\n"
@@ -181,11 +181,11 @@ msgstr "元件工廠‘%s’回傳 NIL 給‘%s’"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib‘%s’沒有包含‘%s’"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "自選 CORBA POA"
 

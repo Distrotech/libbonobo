@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-02-10 18:40+0200\n"
 "Last-Translator: Arman Aksoy (Armish) <armish@linux-sevenler.de>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -136,12 +136,12 @@ msgstr "Alt süreç %u sinyali aldı (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Bilinmeyen çıkış engelleme hatası (durum %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "Bonobo-etkinleştirme %s süreç grubunu belirleyemedi: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Çalıştırılamadı: %s: %d (%s)\n"
@@ -187,11 +187,11 @@ msgstr "`%s' `%s' için NIL ile döndü"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' `%s' içermiyor"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

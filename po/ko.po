@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.0\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-05-01 21:24+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -133,13 +133,13 @@ msgstr "자식이 %u (%s) 시그날을 받았습니다"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "알 수 없는 non-exit 오류 (상태는 %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "보노보 액티베이션이 %s의 프로세스 그룹을 설정하는 데 실패했습니다: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s을(를) 실행하는 데 실패했습니다: %d (%s)\n"
@@ -185,11 +185,11 @@ msgstr "`%s' 팩토리가 `%s'에 대해 NIL을 리턴했습니다"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "`%s' 공유라이브러리에 `%s'이(가) 들어 있지 않습니다"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "사용자 지정 CORBA POA"
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.be\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-05-19 09:13+0300\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -139,14 +139,14 @@ msgstr "Нашчадак атрымаў сыгнал %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Невядомая, нейснуючая памылка (стан - гэта %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "bonobo-activation: невыправімая памылка пры спробе ўсталяваць GID для "
 "працэсу %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Памылка пры спробе выканаць %s: %d (%s)\n"
@@ -192,11 +192,11 @@ msgstr "Вытворчасьць `%s' вярнла NIL для `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' не зьмяшчае `%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Карыстальніцкае CORBA POA"
 

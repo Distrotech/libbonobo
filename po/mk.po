@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mk\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-06-15 20:50+0000\n"
 "Last-Translator: Vladislav Bidikov <bidikovi@mail.com.mk>\n"
 "Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
@@ -140,12 +140,12 @@ msgstr "Детето прими сигнал %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Непозната непостоечка грешка (статусот е %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation неуспеа да постави група на процеси %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Грешка при извршување %s: %d (%s)\n"
@@ -192,11 +192,11 @@ msgstr "Фабричкиот `%s' враќа NIL за `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' не содржи `%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "CORBA POA по желба"
 

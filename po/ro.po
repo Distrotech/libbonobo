@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.1.1\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-01-20 20:19+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -135,12 +135,12 @@ msgstr "Copilul a primit semnalul %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Eroare necunoscută (statusul este %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, fuzzy, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Nu am reuşit să activez '%s'"
@@ -187,11 +187,11 @@ msgstr ""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

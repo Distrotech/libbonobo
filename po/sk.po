@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-05-06 09:02+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -132,12 +132,12 @@ msgstr "Potomok zachytil signál %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Neznáma nenávratová chyba (stav je %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation zlyhal pri nastavení skupiny procesu %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Nepodarilo sa vykonať %s: %d (%s)\n"
@@ -185,11 +185,11 @@ msgstr "Vytváracie rozhranie `%s' vrátilo pre `%s' hodnotu NIL"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' neobsahovalo `%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Vlastné CORBA POA"
 

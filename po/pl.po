@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-06-27 21:40--100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -142,12 +142,12 @@ msgstr "Potomek otrzymał sygnał %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Nieznany błąd procesu (kod stanu %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation: nie można ustawić grupy procesu %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Nie można wykonać %s: %d (%s)\n"
@@ -195,11 +195,11 @@ msgstr "Generator \"%s\" zwrócił NIL dla \"%s\""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Biblioteka dzielona \"%s\" nie zawiera \"%s\""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Dowolne CORBA POA"
 

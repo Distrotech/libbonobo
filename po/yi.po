@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-03-19\n"
 "Last-Translator: Raphael Finkel <raphael@cs.uky.edu>\n"
 "Language-Team: Yiddish <raphael@cs.uky.edu>\n"
@@ -133,12 +133,12 @@ msgstr "קינד האָט באַקומען מעלדונג %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "אומבאַקאַנטער ניט־שטערבלעקער דורכפֿאַל (סטאַטוס איז %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "באָנאָבאָ־אַקטיװירונג האָט ניט געקענט באַשטעטיקן פּראָצעס־גרופּע %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "ניט געקענט באַאַרבעטן %s: %d (%s)\n"
@@ -184,11 +184,11 @@ msgstr "פֿאַבריק %s האָט צוריקגעגעבן NIL פֿאַר %s"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib %s האָט ניט באַהאַלטן %s"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

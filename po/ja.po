@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo CVS-20030311\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-05-06 22:10+0900\n"
 "Last-Translator: KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -136,12 +136,12 @@ msgstr "子プロセスがシグナル %u (%s) を受け取りました。"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "不明な未終了エラー (状態は %u です)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation が %s のプロセスグループの設定に失敗: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s の実行に失敗: %d (%s)\n"
@@ -189,11 +189,11 @@ msgstr "ファクトリ '%s' が '%s' に NIL を返しました。"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' は '%s' を含んでいませんでした。"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "カスタム CORBA POA"
 

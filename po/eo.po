@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.4\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-07-01 15:54-0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -132,12 +132,12 @@ msgstr "Procezio ricevis signalon %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Nekonata nefina eraro (stato estas %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation-o malsukcesis meti procezaron de %s : %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Malsukcesis lanĉi %s : %d (%s)\n"
@@ -183,11 +183,11 @@ msgstr "Fabrikejo '%s' revenis NULON por '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib-o '%s' ne enhavis '%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Propra CORBA POA"
 

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.es\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-07-13 19:26+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@arrakis.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -143,13 +143,13 @@ msgstr "El proceso hijo recibió la señal %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Error de salida desconocido (el estado es %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "bonobo-activation no ha podido establecer el grupo del proceso de %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "No se ha podido ejecutar %s: %d (%s)\n"
@@ -195,11 +195,11 @@ msgstr "La fábrica '%s' ha devuelto NULO para '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' no contenía '%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "CORBA POA personalizado"
 

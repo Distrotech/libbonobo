@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-06-05 10:21+0100\n"
 "Last-Translator: Mathieu van Woerkom <mathieu@brabants.org>\n"
 "Language-Team: Limburgish\n"
@@ -134,12 +134,12 @@ msgstr "Dochter óntvóng sinjaal %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Ónbekènde, non-exit gerelateerde, faeler (sjtatus is %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation kós de prosesgróp van %s neet insjtèlle: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Oetveure van %s mislök: %d (%s)\n"
@@ -186,11 +186,11 @@ msgstr "Febrik '%s' goof NIL trök veur '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Bibeleteek '%s' hauw gein '%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Eige CORBA POA"
 

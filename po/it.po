@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-25 04:41+0200\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-07-25 08:09+0200\n"
 "Last-Translator: Alessio Frusciante <algol@firenze.linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
@@ -190,11 +190,11 @@ msgstr "La fabbrica '%s' ha restituito NIL per '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "La shlib '%s' non contiene '%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "POA CORBA personalizzato"
 

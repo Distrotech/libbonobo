@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-06-14 12:00+0100\n"
 "Last-Translator: Huib Kleinhout <huib@stack.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"
@@ -140,12 +140,12 @@ msgstr "Dochter ontving signaal %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Onbekende, non-exit gerelateerde, fout (status is %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation kon de procesgroep van %s niet instellen: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Uitvoeren van %s mislukt: %d (%s)\n"
@@ -193,11 +193,11 @@ msgstr "Fabriek '%s' retourneerde NIL voor '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Bibliotheek '%s' bevatte geen '%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Aangepaste CORBA POA"
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:linbbonobo.gnome-2.2\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-5-12 1:58+0600\n"
 "Last-Translator: Muhammad Mahmudur Rahman Khan  <mrk_ju@yahoo.con>\n"
 "Language-Team: Bengali <gnome-translation@bengalinux.org>\n"
@@ -130,12 +130,12 @@ msgstr ""
 msgid "Unknown non-exit error (status is %u)"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s সক্রিয় করতে ব্যর্থ: %d (%s)\n"
@@ -181,11 +181,11 @@ msgstr ""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

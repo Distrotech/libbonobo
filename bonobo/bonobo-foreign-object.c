@@ -44,35 +44,27 @@ BonoboObject *
 bonobo_foreign_object_new (CORBA_Object corba_objref)
 {
 	BonoboObject *object;
-#if 0
-	CORBA_Environment ev;
-#endif
+	CORBA_Environment ev[1];
 
 	g_return_val_if_fail (corba_objref != CORBA_OBJECT_NIL, NULL);
 
-	  /* The following type check is deactivated because
-	   * CORBA_Object_is_a doesn't seem to work correctly,
-	   * considering that it returns TRUE only if the object is
-	   * exactly of type Bonobo::Unknown, and FALSE if it is of a
-	   * derived type, while the CORBA spec says it should return
-	   * TRUE in both cases.  Perhaps there is a bug in ORBit?.. */
-#if 0
-	CORBA_exception_init (&ev);
-	if (!CORBA_Object_is_a (corba_objref, "IDL:Bonobo/Unknown:1.0", &ev)) {
-		if (ev._major != CORBA_NO_EXCEPTION)
+	CORBA_exception_init (ev);
+	if (!CORBA_Object_is_a (corba_objref, "IDL:Bonobo/Unknown:1.0", ev)) {
+		if (ev->_major != CORBA_NO_EXCEPTION)
 			g_warning ("CORBA_Object_is_a: %s",
-				   bonobo_exception_get_text (&ev));
+				   bonobo_exception_get_text (ev));
 		else
 			g_warning ("bonobo_foreign_object_new: corba_objref"
 				   " doesn't have interface Bonobo::Unknown");
-		CORBA_exception_free (&ev);
-		return NULL;
+		object = NULL;
+
+	} else {
+		object = BONOBO_OBJECT (g_object_new (BONOBO_TYPE_FOREIGN_OBJECT, NULL));
+		object->corba_objref = CORBA_Object_duplicate (corba_objref, NULL);
+		bonobo_running_context_add_object_T (object->corba_objref);
 	}
-	CORBA_exception_free (&ev);
-#endif
-	object = BONOBO_OBJECT (g_object_new (BONOBO_TYPE_FOREIGN_OBJECT, NULL));
-	object->corba_objref = CORBA_Object_duplicate (corba_objref, NULL);
-	bonobo_running_context_add_object_T (object->corba_objref);
+	CORBA_exception_free (ev);
+
 	return object;
 }
 

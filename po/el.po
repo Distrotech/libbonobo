@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.1.0\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-01-28 13:15+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -141,13 +141,13 @@ msgstr "Η θυγατρική διεργασία έλαβε το σινιάλο 
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Άγνωστο μη μοιραίο σφάλμα (η κατάσταση είναι %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "το bonobo-activation απέτυχε να θέσει την ομάδα διεργασίας του %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Αποτυχία εκτέλεσης %s: %d (%s)\n"
@@ -193,11 +193,11 @@ msgstr "Το εργοστάσιο `%s' επέστρεψε NIL για `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Η διαμοιραζόμενη βιβλιοθήκη `%s' δεν περιέχει `%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

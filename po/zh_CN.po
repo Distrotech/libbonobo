@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2002-07-24 11:51+0100\n"
 "Last-Translator: Sun G11n <gnome_int_l10n@ireland.sun.com>\n"
 "Language-Team: Sun G11n <gnome_int_l10n@ireland.sun.com>\n"
@@ -146,12 +146,12 @@ msgstr "子进程接收到信号 %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "未知的无法退出的错误（状态为 %u）"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation 无法设置 %s 的进程组：%s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "无法执行 %s：%d (%s)\n"
@@ -202,11 +202,11 @@ msgstr "车间“%s”对于“%s”返回空值"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib“%s”不包含“%s”"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

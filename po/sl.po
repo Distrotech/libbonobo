@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2002-02-26 00:23+0100\n"
 "Last-Translator: Andraž Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: slovenian <sl@li.org>\n"
@@ -132,12 +132,12 @@ msgstr "Otrok je dobil signal %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Neznana ne-izhodna napaka (stanje je %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation ni uspel nastaviti procesne skupine %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Izvedba %s ni uspela: %d (%s)\n"
@@ -183,11 +183,11 @@ msgstr "Tovarna `%s' je za `%s' vrnila NIL'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' ni vseboval `%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Poljuben CORBA POA"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mn\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-01-16 21:05+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: mongolian <mn@li.org>\n"
@@ -133,12 +133,12 @@ msgstr "Хүү процесс %u сигналыг хүлээн авлаа (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Тодорхойгүй non-exit Алдаа (Төлөв нь %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation %s -н процесс группыг суулгаж чадсангүй: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s ажилласангүй: %d (%s)\n"
@@ -187,11 +187,11 @@ msgstr "»%s« үйлдвэр »%s« NIL -г буцаав"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "»%s« Shlib »%s« -г агуулаагүй байна"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 

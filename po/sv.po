@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-02-29 09:41+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -139,13 +139,13 @@ msgstr "Barnet tog emot signalen %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Okänt icke avslutandefel (status är %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "bonobo-activation misslyckades med att ställa in processgrupp för %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Misslyckades med att köra %s: %d (%s)\n"
@@ -193,12 +193,12 @@ msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib \"%s\" innehöll inte \"%s\""
 
 # Osäker
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
 # Osäker
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Anpassad CORBA-POA"
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo cvs\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-07-09 13:37+0200\n"
 "Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -135,13 +135,13 @@ msgstr "A gyermek %u (%s) jelzést kapott"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Ismeretlen nem kilépési hiba (az állapot %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "A bonobo-activation nem tudta beállítani a(z) %s folyamatcsoporját: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Nem sikerült végrehajtani %s-t: %d (%s)\n"
@@ -187,11 +187,11 @@ msgstr "A(z) `%s' factory NIL-t adott vissza erre: `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "A(z) `%s' shlib nem tartalmazta a következőt: `%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Egyéni CORBA POA"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-07-15 10:45+0100\n"
+"POT-Creation-Date: 2003-07-31 13:11+0100\n"
 "PO-Revision-Date: 2003-01-01 21:24+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Bahasa Melayu <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -133,12 +133,12 @@ msgstr "Anak menerima isyarat %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Rakat non-exit tidak diketahu (status  ialah %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation gagal menetapkan kumpulan proses bagi %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Gagal melaksanakan %s: %d (%s)\n"
@@ -185,11 +185,11 @@ msgstr "Kilang `%s' memberikan NIL untuk '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' tidak mengandungi `%s'"
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:913
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr ""
 
