@@ -1,3 +1,8 @@
+2004-05-14  Michael Meeks  <michael@ximian.com>
+
+	* bonobo-activation/bonobo-activation-init.c:
+	move sys/types.h include upwards for bsd.
+
 2004-05-06  Michael Wilson  <Michael.Wilson@bull.net>
 
 	* bonobo/bonobo-application.c (message_desc_copy) 
