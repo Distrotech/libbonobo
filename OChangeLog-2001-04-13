@@ -1,7 +1,36 @@
 1999-06-22  Matt Loper  <matt@gnome-support.com>
 
-	* bonobo/gnome-dot.h: old file removed.
+	* bonobo/gnome-component-factory.c: Rename BonoboObjectFactory to
+	ComponentFactory, and make it useful to _anyone_ that wants
+	convenience functions for implementing/exposing a factory that
+	creates components.
+	(gnome_component_factory_new_bonobo_object): Removed `name', as
+	there's no use for create_path anymore.
 
+	* bonobo/gnome-component-factory.h: likewise. Remove path from
+	GnomeComponentFactoryFn.
+
+	* bonobo/sample-server.c (bonobo_object_factory): Changed to
+	return a GnomeObject.
+	(init_server_factory): Changed to make a GnomeComponentFactory.
+
+	* components/text-plain/bonobo-text-plain.c
+	(bonobo_object_factory): Return GnomeObject.
+	(init_bonobo_text_plain_factory): Call
+	gnome_component_factory_new, as per name change.
+
+	* components/image-x-png/bonobo-image-x-png.c
+	(bonobo_object_factory): Return GnomeObject.
+	(init_bonobo_image_x_png_factory): Call
+	gnome_component_factory_new, as per name change.
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c (component_factory):
+	No need for path. Return GnomeObject.
+	(init_bonobo_audio_ulaw_factory): call
+	gnome_component_factory_new, as per name change.	
+
+	* bonobo/gnome-dot.h: old file removed.
+	
 1999-06-14  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* bonobo/bonobo-stream-fs.c (fs_copy_to): implemented.

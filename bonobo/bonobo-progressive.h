@@ -15,16 +15,16 @@ typedef struct _GnomeProgressiveDataSink GnomeProgressiveDataSink;
 
 /* Callback typedefs. */
 typedef int (*GnomeProgressiveDataSinkStartFn)   (GnomeProgressiveDataSink *psink,
-						    void *closure);
+						  void *closure);
 
 typedef int (*GnomeProgressiveDataSinkEndFn)     (GnomeProgressiveDataSink *psink, void *closure);
 
 typedef int (*GnomeProgressiveDataSinkAddDataFn) (GnomeProgressiveDataSink *psink,
-						    const GNOME_ProgressiveDataSink_iobuf *buffer,
-						    void *closure);
+						  const GNOME_ProgressiveDataSink_iobuf *buffer,
+						  void *closure);
 
 typedef int (*GnomeProgressiveDataSinkSetSizeFn) (GnomeProgressiveDataSink *psink,
-						    const CORBA_long count, void *closure);
+						  const CORBA_long count, void *closure);
 
 struct _GnomeProgressiveDataSink {
 	GnomeObject object;
