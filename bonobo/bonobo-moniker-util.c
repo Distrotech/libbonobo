@@ -235,7 +235,6 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 		return CORBA_OBJECT_NIL;
 	
 	if (object == CORBA_OBJECT_NIL) {
-		g_warning ("Object is NIL");
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_Bonobo_Moniker_InterfaceNotFound, NULL);
 		return CORBA_OBJECT_NIL;
