@@ -62,6 +62,12 @@ help_browser/
 * Bonobo/			miguel@helixcode.com, michael@helixcode.com
 	Moniker/
 	Sample/
+		Audio
+		Calculator
+		CanvasItem	sample-canvas-item
+		Clock
+		Echo		bonobo-echo
+		Mines		bonobo-mines
 		Hello		bonobo-hello
-		Gnomines	bonobo-mines
+		Paint		paint-component-simple
 		Text		bonobo-text-plain
