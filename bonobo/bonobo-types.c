@@ -13,7 +13,6 @@
 typedef struct {
 	GType            type;
 	CORBA_TypeCode   tc;
-	gboolean         is_bonobo_unknown;
 } CorbaObjectProxy;
 
 static GQuark corba_object_proxy_id = 0; 
@@ -53,10 +52,7 @@ corba_object_proxy_value_free (GValue *value)
 		proxy = corba_object_proxy_get (G_VALUE_TYPE (value));
 		
 		CORBA_exception_init (&ev);
-		if (proxy->is_bonobo_unknown)
-			bonobo_object_release_unref (value->data[0].v_pointer, &ev);
-		else
-			CORBA_Object_release (value->data[0].v_pointer, &ev);
+		CORBA_Object_release (value->data[0].v_pointer, &ev);
 		CORBA_exception_free (&ev);
 	}
 }
@@ -67,18 +63,11 @@ corba_object_proxy_value_copy (const GValue *src_value,
 {
 	if (src_value->data[0].v_pointer) {
 		CorbaObjectProxy *proxy;
-		CORBA_Environment ev;
 
 		proxy = corba_object_proxy_get (G_VALUE_TYPE (src_value));
 		
-		CORBA_exception_init (&ev);
-		if (proxy->is_bonobo_unknown)
-			dest_value->data[0].v_pointer = bonobo_object_dup_ref (
-				src_value->data[0].v_pointer, &ev);
-		else
-			dest_value->data[0].v_pointer = CORBA_Object_duplicate (
-				src_value->data[0].v_pointer, &ev);
-		CORBA_exception_free (&ev);
+		dest_value->data[0].v_pointer = CORBA_Object_duplicate (
+			src_value->data[0].v_pointer, NULL);
 	} else
 		dest_value->data[0].v_pointer = NULL;
 }
@@ -107,13 +96,10 @@ corba_object_proxy_collect_value (GValue      *value,
 
 		CORBA_exception_init (&ev);
 		if (!CORBA_Object_is_a (corba_objref, proxy->tc->repo_id, &ev))
-		    return g_strdup_printf ("CORBA Object %p is not a `%s'.",
-					    corba_objref, proxy->tc->repo_id);
+			return g_strdup_printf ("CORBA Object %p is not a `%s'.",
+						corba_objref, proxy->tc->repo_id);
 
-		if (proxy->is_bonobo_unknown)
-			value->data[0].v_pointer = bonobo_object_dup_ref (corba_objref, &ev);
-		else
-			value->data[0].v_pointer = CORBA_Object_duplicate (corba_objref, &ev);
+		value->data[0].v_pointer = CORBA_Object_duplicate (corba_objref, &ev);
 		CORBA_exception_free (&ev);
 	}
 
@@ -138,19 +124,13 @@ corba_object_proxy_lcopy_value (const GValue *value,
 		*corba_p = value->data[0].v_pointer;
 	else {
 		CorbaObjectProxy *proxy;
-		CORBA_Environment ev;
 
 		proxy = corba_object_proxy_get (G_VALUE_TYPE (value));;
 
-		CORBA_exception_init (&ev);
-		if (proxy->is_bonobo_unknown)
-			*corba_p = bonobo_object_dup_ref (value->data[0].v_pointer, &ev);
-		else
-			*corba_p = CORBA_Object_duplicate (value->data[0].v_pointer, &ev);
-		CORBA_exception_free (&ev);
+		*corba_p = CORBA_Object_duplicate (value->data[0].v_pointer, NULL);
 	}
 
-  return NULL;
+	return NULL;
 }
 
 GType
@@ -190,14 +170,11 @@ bonobo_corba_object_type_register_static (const gchar *name, const CORBA_TypeCod
 	/* install proxy functions upon successfull registration */
 	if (type) {
 		CorbaObjectProxy *proxy;
-		CORBA_Environment ev;
 
 		proxy = g_new (CorbaObjectProxy, 1);
 		proxy->type = type;
-		CORBA_exception_init (&ev);
-		proxy->tc = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) tc, &ev);
-		CORBA_exception_init (&ev);
-		proxy->is_bonobo_unknown = is_bonobo_unknown;
+		proxy->tc = (CORBA_TypeCode)
+			CORBA_Object_duplicate ((CORBA_Object) tc, NULL);
 		corba_object_proxy_set (type, proxy);
 	}
 	
@@ -221,7 +198,6 @@ BONOBO_TYPE_CORBA_OBJECT_IMPL (unknown, "BonoboUnknown", TC_Bonobo_Unknown, TRUE
 static gpointer
 corba_any_copy (gpointer any)
 {
-	g_warning (G_STRLOC);
 	return bonobo_arg_copy (any);
 }
 
@@ -504,21 +480,20 @@ bonobo_closure_invoke (GClosure *closure,
 
 	if (rtype != G_TYPE_NONE) {
 		gchar *error;
-		
-		/* We use G_VALUE_NOCOPY_CONTENTS here so that the caller
-		 * takes ownership of the return value; thus we must not
-		 * g_value_unset() it here.
-		 */
 
-		G_VALUE_LCOPY (&return_value, var_args,
-			       G_VALUE_NOCOPY_CONTENTS,
-			       &error);
+		/*
+		 * FIXME: performance here sucks, so we need a
+		 * g_value_steal_contents type method
+		 */
+		G_VALUE_LCOPY (&return_value, var_args, 0, &error);
 
 		if (error) {
 			g_warning ("%s: %s", G_STRLOC, error);
 			g_free (error);
 			return;
 		}
+
+		g_value_unset (&return_value);
 	}
 
 	va_end (var_args);

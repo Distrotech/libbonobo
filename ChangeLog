@@ -1,3 +1,22 @@
+2002-03-05  Michael Meeks  <michael@ximian.com>
+
+	* doc/api/tmpl/bonobo-macros.sgml: mend.
+
+	* bonobo/bonobo-types.c
+	(bonobo_corba_object_type_register_static):
+	ignore is_bonobo_unknown, we don't use this
+	information and trust the user to do the Bonobo
+	referencing right, or we're going to get lots
+	of inefficiency from the way GValue works,
+	particularly we need a 'take ownership' semantic
+	for return values.
+	Update throught to follow this convention.
+	Assume CORBA_Object_duplicate is sane.
+	(bonobo_closure_invoke): fix leak with return
+	type - by using g_value_unset and a full copy.
+	(corba_any_copy): remove debug, yes this
+	inefficiency sucks - we never called this before.
+
 2002-02-27  Mark McLoughlin  <mark@skynet.ie>
 
 	* idl/Bonobo_Listener.idl: kill unused ListenerId

@@ -11830,7 +11830,7 @@ BonoboStreamMem  *stream_mem,const char       *buffer,size_t            size,gbo
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_stream_mem_create</NAME>
-<RETURNS>BonoboStream     *</RETURNS>
+<RETURNS>BonoboObject     *</RETURNS>
 const char       *buffer,size_t            size,gboolean          read_only,gboolean          resizable
 </FUNCTION>
 <FUNCTION>
