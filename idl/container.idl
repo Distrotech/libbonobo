@@ -1,6 +1,0 @@
-module GNOME {
-
-	interface Container : GNOME::object {
-
-	};
-};
