@@ -1,3 +1,8 @@
+2000-09-19  Jesse Pavel <jpavel@helixcode.com>
+
+	* storage-modules/gnome-stream-efs.c: fixed a few syntax errors
+	that were caused by changes in libefs.
+
 2000-09-18  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (set_cmd_state): prune firing events on
