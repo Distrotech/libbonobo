@@ -1,3 +1,40 @@
+2001-01-24  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-listener.c (bonobo_listener_destroy): rename to
+	finalize. (bonobo_listener_class_init): upd.
+
+2001-01-22  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_set_value_any): 
+	only churn debug if we have no environment.
+
+	* bonobo/bonobo-widget.c (bonobo_widget_get_objref): impl.
+
+	* bonobo/bonobo-stream-memory.c (mem_set_info): fire an exception
+	correctly. (mem_get_info): impl.
+
+	* bonobo/bonobo-print-client.c (bonobo_print_client_render): 
+	re-order to fix bug & convert to the Stream code.
+	(bonobo_print_client_render): update.
+
+	* bonobo/bonobo-stream-client.c (bonobo_stream_client_get_length),
+	(bonobo_stream_client_read): impl. helper functions.
+
+	* bonobo/bonobo-print.c (impl_render): return a stream.
+	
+2001-01-20  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_full): 
+	define the meaning of 0 to be RW, sad but true.
+
+	* tests/test-properties-client.c (create_bag_client): 
+	release property bag, and gtk_main_quit.
+
+	* tests/test-properties-server.c (main): add automatic quitting.
+
+	* samples/controls/bonobo-clock-control.c (bonobo_clock_control_new):
+	add a default boolean value.
+
 2001-01-23  Iain Holmes  <iain@ximian.com>
 
 	* bonobo/bonobo-ui-engine-config.c 

@@ -76,6 +76,11 @@ module Bonobo {
 		 *  Currently the object should be a Bonobo::Control interface
 		 * but this should be probably be changed to a Moniker interface
 		 * in due course.
+		 * 
+		 *   The control's property bag will have the following
+		 * properties set on it in various circumstances:
+		 *
+		 *  bonobo:ui:vertical	boolean
 		 */
 		void            setObject   (in string path,
 					     in Bonobo::Unknown control)

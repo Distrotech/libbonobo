@@ -407,6 +407,11 @@ bonobo_property_bag_add_full (BonoboPropertyBag  *pb,
 	g_return_if_fail (name != NULL);
 	g_return_if_fail (type != NULL);
 	g_return_if_fail (g_hash_table_lookup (pb->priv->props, name) == NULL);
+
+	if (flags == 0) { /* Compatibility hack */
+		flags = BONOBO_PROPERTY_READABLE |
+			BONOBO_PROPERTY_WRITEABLE;
+	}
 			    
 	if (((flags & BONOBO_PROPERTY_READABLE)  && !get_prop) ||
 	    ((flags & BONOBO_PROPERTY_WRITEABLE) && !set_prop)) {
@@ -757,6 +762,7 @@ bonobo_property_bag_get_default (BonoboPropertyBag *pb,
 	if (prop->default_value)
 		return bonobo_arg_copy (prop->default_value);
 	else {
+		/* FIXME: we shoult use DynamicAny here ! */
 		BonoboArg *a = bonobo_arg_new (prop->type);
 		bonobo_arg_init_default (a);
 		return a;

@@ -10,11 +10,9 @@
 #ifndef BONOBO_PRINT_IDL
 #define BONOBO_PRINT_IDL
 
-#include "bonobo-unknown.idl"
+#include "bonobo-stream.idl"
 
 module Bonobo {
-
-	typedef sequence<char> PrintData;
 
 	struct PrintScissor {
 		double width_first_page,  width_per_page;
@@ -35,8 +33,8 @@ module Bonobo {
 		 * it at what points it will be split across pages so it can
 		 * adjust its rendering if required.
 		 **/
-		PrintData render (in PrintDimensions pd,
-				  in PrintScissor    scissor);
+		Stream render (in PrintDimensions pd,
+		               in PrintScissor    scissor);
 	};
 };
 

@@ -117,6 +117,8 @@ module Bonobo {
 		 * Copies @bytes bytes (or until EOF if @bytes is -1) starting
 		 * at the current read/write pointer to the component in @dest
 		 * inside the Storage.
+		 * -- This API is badly broken and deprecated; expect
+		 * NotSupported
 		 */
 		void copyTo (in string dest, in long bytes, 
 			      out long read, out long written)

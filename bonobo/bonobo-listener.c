@@ -76,13 +76,14 @@ init_listener_corba_class (void)
 }
 
 static void
-bonobo_listener_destroy (GtkObject *object)
+bonobo_listener_finalize (GtkObject *object)
 {
 	BonoboListener *listener;
 
 	listener = BONOBO_LISTENER (object);
 	g_free (listener->priv);
-	GTK_OBJECT_CLASS (bonobo_listener_parent_class)->destroy (object);
+
+	GTK_OBJECT_CLASS (bonobo_listener_parent_class)->finalize (object);
 }
 
 static void
@@ -104,7 +105,7 @@ bonobo_listener_class_init (BonoboListenerClass *klass)
 	bonobo_listener_parent_class = 
 		gtk_type_class (bonobo_object_get_type ());
 
-	oclass->destroy = bonobo_listener_destroy;
+	oclass->finalize = bonobo_listener_finalize;
 
 	signals [EVENT_NOTIFY] = gtk_signal_new (
 		"event_notify", GTK_RUN_LAST, oclass->type,
