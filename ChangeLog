@@ -1,3 +1,8 @@
+2001-05-01  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am: improve IDL compilation dependency
+	code.
+
 2001-05-01  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/Makefile.am (libbonobo_2_la_SOURCES): Added

@@ -108,9 +108,7 @@ noinst_HEADERS =			\
 	bonobo-activation-context.h	\
 	bonobo-running-context.h
 
-libbonobo_2_la_SOURCES =		\
-	$(libbonoboinclude_HEADERS)	\
-	$(CORBA_SOURCE)			\
+libbonobo_src =				\
 	bonobo-marshal-main.c		\
 	bonobo-activation-context.c	\
 	bonobo-arg.c			\
@@ -146,6 +144,13 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-property-bag.c		\
 	bonobo-property-bag-client.c	\
 	bonobo-running-context.c
+
+$(libbonobo_src) : $(CORBA_SOURCE)
+
+libbonobo_2_la_SOURCES = \
+	$(libbonoboinclude_HEADERS)	\
+	$(libbonobo_src)		\
+	$(CORBA_SOURCE)
 
 BUILT_SOURCES = \
 	bonobo-marshal.c		\
