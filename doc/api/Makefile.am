@@ -35,7 +35,7 @@ HTML_IMAGES = figures/persist.png figures/persist-file.png\
               figures/stream.png figures/storage.png
 
 # Extra SGML files that are included by $(DOC_MAIN_SGML_FILE).
-content_files =
+content_files = faq.xml debugging.xml properties.xml refcounting.xml
 
 # Other files to distribute.
 extra_files =

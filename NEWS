@@ -1,3 +1,14 @@
+libbonobo 2.2.0
+
+	* Features
+		+ large pretty new docs; lots of work
+		    (Gustavo J.A.M. Carneiro)
+
+	* Bugs fixed
+		+ translation fix (Abel Cheung)
+		+ portability fixes (James H.)
+		+ build fixage (Julio Merino, Frederic Crozat)
+
 libbonobo 2.1.0
 
 	* Featurelets
