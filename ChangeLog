@@ -1,3 +1,11 @@
+2001-04-18  Martin Baulig  <baulig@suse.de>
+
+	* configure.in: Depend on ORBit-CosNaming-2 and include it in
+	the ORBit check.
+
+	* bonobo/libbonobo-2.0.pc.in: Added ORBit-CosNaming-2 to the
+	dependency list.
+
 2001-04-17  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am (libbonobo_2_la_SOURCES): add
