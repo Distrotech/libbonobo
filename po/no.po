@@ -432,7 +432,7 @@ msgstr "Kunne ikke initialisere Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "Kunne ikke opprette en instans av ekko-eksempelkomponenten"
+msgstr "Kunne ikke opprette en instans av eksempelkomponenten for ekko"
 
 #: samples/echo/echo-client.c:45
 #, c-format
