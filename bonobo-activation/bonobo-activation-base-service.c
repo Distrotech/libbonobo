@@ -34,7 +34,6 @@
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 #include <bonobo-activation/bonobo-activation-client.h>
 
-
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
@@ -49,6 +48,11 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <fcntl.h>
+
+/* If you have a strange unix, you get odd hard coded limits */
+#ifndef PATH_MAX
+#  define PATH_MAX 1024
+#endif
 
 static GSList *registries = NULL;
 
@@ -661,7 +665,8 @@ rloc_file_unregister (const BonoboActivationBaseServiceRegistry *registry,
 	fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s-%s",
                               uname,
                               namecopy,
-                              base_service->session_name ? base_service->session_name : "local");
+                              base_service->session_name ?
+                              base_service->session_name : "local");
 	unlink (fn);
 
 	fn2 = g_strdup_printf ("/tmp/orbit-%s/reg.%s", uname, namecopy);
