@@ -1,11 +1,11 @@
-2001-09-10  Martin Baulig  <baulig@suse.de>
+2001-09-10  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-types.c
 	(bonobo_corba_any_get_type): Don't provide a `boxed_init' function.
 	(bonobo_corba_exception_get_type): Likewise.
 	(corba_any_init, corba_exception_init): Removed.
 
-2001-09-10  Martin Baulig  <baulig@suse.de>
+2001-09-10  Martin Baulig  <martin@gnome.org>
 
 	* tests/test-moniker.c: The expected result of "a:!b:" is "!b:",
 	not "b:" - see my ChangeLog entry for bonobo/bonobo-moniker-util.c
@@ -32,7 +32,7 @@
 
 	* bonobo/libbonobo-2.0.pc.in (Cflags): Likewise.
 
-2001-09-04  Martin Baulig  <baulig@suse.de>
+2001-09-04  Martin Baulig  <martin@gnome.org>
 
 	This big closures / types patch:
 
@@ -252,7 +252,7 @@
 	(bonobo_exception_repoid_to_text): filled out the
 	PropertyBag exceptions.
 
-2001-08-11  Martin Baulig  <baulig@suse.de>
+2001-08-11  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-exception.h (BONOBO_RET_EX, BONOBO_RET_VAL_EX):
 	Make the G_STMT_START/END actually work.
@@ -302,7 +302,7 @@
 	* bonobo/Makefile.am: make dependency fix more portable
 	with Peter Wainwright's solution.
 
-2001-08-08  Martin Baulig  <baulig@suse.de>
+2001-08-08  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_parse_name):
 	Return "!" for the item moniker.
@@ -310,7 +310,7 @@
 	* bonobo/bonobo-item-handler.c (impl_enum_objects): Fixed closure.
 	(impl_get_objects): Ditto.
 
-2001-08-08  Martin Baulig  <baulig@suse.de>
+2001-08-08  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-types.h (bonobo_value_get_*): Constify the arg.
 	(BONOBO_TYPE_CORBA_TYPECODE): New type.
@@ -444,7 +444,7 @@
 
 	* configure.in: use bonobo-activation.
 
-2001-08-01  Martin Baulig  <baulig@suse.de>
+2001-08-01  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_qi_return): Only
 	throw an exception if the object is nil, but don't emit a g_warning().
@@ -454,7 +454,7 @@
 	* tests/test-moniker.c (test_real_monikers): add a test from Martin
 	(main): use it.
 
-2001-08-01  Martin Baulig  <baulig@suse.de>
+2001-08-01  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_construct):
 	Use bonobo_marshal_POINTER__STRING, not g_cclosure_marshal_VOID__STRING
@@ -472,7 +472,7 @@
 	bonobo_marshal_BOXED__POINTER_STRING_BOXED, not
 	bonobo_marshal_BOXED__POINTER_STRING_POINTER.
 
-2001-08-01  Martin Baulig  <baulig@suse.de>
+2001-08-01  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-types.c (bonobo_corba_exception_get_type): We need to use
 	a custom boxed type for BONOBO_TYPE_CORBA_ENVIRONMENT since it's not a
@@ -766,12 +766,12 @@
 	* bonobo/bonobo-storage-memory.[ch]: New in-memory Bonobo::Storage
 	implementation
 
-2001-07-24  Martin Baulig  <baulig@suse.de>
+2001-07-24  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/Makefile.am: Compile Bonobo_imodule.c into
 	Bonobo_module.la and install it into $(prefix)/lib/orbit/.
 
-2001-07-23  Martin Baulig  <baulig@suse.de>
+2001-07-23  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-moniker-util.c (url_to_name): Implemented
 	this for ORBit2.
@@ -833,7 +833,7 @@
 	* bonobo/Makefile.am (libbonoboinclude_HEADERS): don't install /
 	build bonobo-object-directory - it's horribly stale and old.
 
-2001-07-18  Martin Baulig  <baulig@suse.de>
+2001-07-18  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-types.[ch]: New files.
 
@@ -861,7 +861,7 @@
 	(bonobo_object_finalize_servant): impl.
 	(bonobo_object_slist_unref_all): actualy impl.
 
-2001-07-14  Martin Baulig  <baulig@suse.de>
+2001-07-14  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/libbonobo-2.0.pc.in (idldir): New variable.
 
@@ -881,12 +881,12 @@
 	(bonobo_generic_factory_class_init): here, setup the
 	_base_epv.
 
-2001-07-12  Martin Baulig  <baulig@suse.de>
+2001-07-12  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-marshal.list: Added `VOID:POINTER,STRING' and
 	`VOID:STRING,INT,STRING'.
 
-2001-07-11  Martin Baulig  <baulig@suse.de>
+2001-07-11  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-generic-factory.c (init_generic_factory_corba_class):
 	Initialize `bonobo_generic_factory_vepv._base_epv'.
@@ -1125,7 +1125,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 	we can pass CORBA_OBJECT_NIL to all bonobo_pbclient_* functions
 	(and we use the default property bag in that case).
 
-2001-05-19  Martin Baulig  <baulig@suse.de>
+2001-05-19  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-generic-factory.h
 	(BONOBO_OAF_FACTORY, BONOBO_OAF_FACTORY_MULTI): Make this actually work.
@@ -1133,7 +1133,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 	* bonobo/bonobo-main.c (bonobo_init_full): Call oaf_init(), not
 	oaf_orb_init() so that oaf gets the command line arguments.
 
-2001-05-15  Martin Baulig  <baulig@suse.de>
+2001-05-15  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/Makefile.am (ORBIT_IDL): Use @ORBIT_IDL@ rather than
 	hardcoding `orbit-idl'.
@@ -1204,7 +1204,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 	* bonobo/Makefile.am: improve IDL compilation dependency
 	code.
 
-2001-05-01  Martin Baulig  <baulig@suse.de>
+2001-05-01  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/Makefile.am (libbonobo_2_la_SOURCES): Added
 	bonobo-object-directory.c.
@@ -1218,12 +1218,12 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 	* bonobo/bonobo-generic-factory.h: Remove redundant
 	environments
 
-2001-04-24  Martin Baulig  <baulig@suse.de>
+2001-04-24  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-marshal.list: Added `VOID:STRING,BOOLEAN' and
 	`VOID:POINTER,INT,POINTER' (for libbonoboui).
 
-2001-04-23  Martin Baulig  <baulig@suse.de>
+2001-04-23  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-generic-factory.h (BonoboGenericFactory):
 	Added `GNOME_ObjectFactory corba_objref'.
@@ -1236,7 +1236,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 	* bonobo/bonobo-generic-factory.c: Make this actually work.
 	* bonobo/bonobo-shlib-factory.c: Likewise.
 
-2001-04-20  Martin Baulig  <baulig@suse.de>
+2001-04-20  Martin Baulig  <martin@gnome.org>
 
 	* configure.in, Makefile.am: Added idl/ directory.
 
@@ -1294,7 +1294,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 	* bonobo/bonobo-transient.c (bonobo_transient_get_type): use
 	sizeof (BonoboTransientClass) for the class data.
 
-2001-04-18  Martin Baulig  <baulig@suse.de>
+2001-04-18  Martin Baulig  <martin@gnome.org>
 
 	* configure.in: Removed one of the two GNOME_COMPILE_WARNINGS
 	macros; we only need it once.
@@ -1318,7 +1318,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 	* tests/test-storage.c (stream_copy_tests): prune copyTo
 	test.
 
-2001-04-18  Martin Baulig  <baulig@suse.de>
+2001-04-18  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/*.[ch]: Use <bonobo/bonobo-defs.h> and
 	<bonobo/bonobo-i18n.h> instead of the libgnomebase ones.
@@ -1332,7 +1332,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* configure.in: Don't depend on libgnomebase.
 
-2001-04-18  Martin Baulig  <baulig@suse.de>
+2001-04-18  Martin Baulig  <martin@gnome.org>
 
 	* configure.in: Depend on ORBit-CosNaming-2 and include it in
 	the ORBit check.
@@ -1357,7 +1357,7 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* tests/*: fixup.
 
-2001-04-18  Martin Baulig  <baulig@suse.de>
+2001-04-18  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/bonobo-item-container.[ch]: Ported to GObject.
 
@@ -1408,11 +1408,11 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* message-of-doom: make more explicit and doomful.
 
-2001-04-17  Martin Baulig  <baulig@suse.de>
+2001-04-17  Martin Baulig  <martin@gnome.org>
 
 	* tests/Makefile.am: New file; this is almost empty at the moment.
 
-2001-04-17  Martin Baulig  <baulig@suse.de>
+2001-04-17  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/*.[ch]: Ported to GObject.
 
@@ -1432,22 +1432,22 @@ Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
 
 	* bonobo/bonobo-main.c (bonobo_main_quit): New function.
 
-2001-04-17  Martin Baulig  <baulig@suse.de>
+2001-04-17  Martin Baulig  <martin@gnome.org>
 
 	* configure.in: Check for gobject and gthread.
 
-2001-04-15  Martin Baulig  <baulig@suse.de>
+2001-04-15  Martin Baulig  <martin@gnome.org>
 
 	* configure.in: Added check for dladdr() from bonobo/configure.in
 	and require libgnomebase.
 
-2001-04-13  Martin Baulig  <baulig@suse.de>
+2001-04-13  Martin Baulig  <martin@gnome.org>
 
 	* bonobo/Makefile.am: Added simple Makefile.am.
 
 	* bonobo/libbonobo-2.0.pc.in: New file.
 
-2001-04-13  Martin Baulig  <baulig@suse.de>
+2001-04-13  Martin Baulig  <martin@gnome.org>
 
 	* AUTHORS, DEPENDS, HACKING, MAINTAINERS, NEWS, COPYING.LIB,
 	README, TODO, TRANSLATABLE_FILES, USERS, OChangeLog-2000-12-11:
