@@ -265,7 +265,7 @@ bonobo_stream_mem_get_type (void)
 		type = bonobo_type_unique (
 			BONOBO_OBJECT_TYPE,
 			POA_Bonobo_Stream__init, NULL,
-			GTK_STRUCT_OFFSET (BonoboStreamMemClass, epv),
+			G_STRUCT_OFFSET (BonoboStreamMemClass, epv),
 			&info, "BonoboStreamMem");
 	}
 
