@@ -1,3 +1,9 @@
+2003-09-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-arg.c (MAKE_FROM_GVALUE, MAKE_TO_GVALUE): Revert
+	the changes of 2003-04-22, since they introduce memory leaks.  It
+	turns out I misunderstood the API.
+
 2003-09-19  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-running-context.c:

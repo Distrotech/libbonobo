@@ -194,9 +194,6 @@ bonobo_arg_type_to_gtype (BonoboArgType id)
 
 #define MAKE_FROM_GVALUE(gtype,gtypename,tcid,unionid,corbatype,corbakind)	\
 	case G_TYPE_##gtype:							\
-		a->_value = ORBit_alloc_tcval(tcid, 1);				\
-		a->_type = tcid;						\
-		a->_release = CORBA_TRUE;					\
 		*((corbatype *)a->_value) = (corbatype)g_value_get_##gtypename (value);	\
 		break;
 
@@ -263,7 +260,6 @@ bonobo_arg_from_gvalue (BonoboArg *a, const GValue *value)
 
 #define MAKE_TO_GVALUE(gtype,gtypename,tcid,unionid,corbatype,corbakind)	\
 	case corbakind:								\
-		g_value_init (value, G_TYPE_##gtype);				\
 		g_value_set_##gtypename (value, *((corbatype *)arg->_value));	\
 		break;
 
