@@ -1,3 +1,13 @@
+1999-08-10  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-container.c (gnome_container_class_init): Set the
+	function offset to zero, to not execute our default handler ever.
+	(gnome_container_class_init): remove default_get_object from
+	here. 
+
+	* bonobo/gnome-object-client.c (parse_moniker_string): Do not
+	create an empty item moniker if the string is empty here.
+
 1999-08-10  Federico Mena Quintero  <federico@redhat.com>
 
 	* doc/Bonobo.sgml: Made it valid DocBook.  Spell-checked it.

@@ -106,7 +106,7 @@ gnome_object_ref (GnomeObject *object)
 {
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_OBJECT (object));
-	g_return_if_fail (object->priv->ao->ref_count == 0);
+	g_return_if_fail (object->priv->ao->ref_count != 0);
 
 	object->priv->ao->ref_count++;
 }

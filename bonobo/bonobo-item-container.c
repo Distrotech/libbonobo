@@ -111,15 +111,6 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 static GNOME_Unknown
-default_get_object (GnomeContainer *item_container,
-		    CORBA_char *item_name,
-		    CORBA_boolean *only_if_exists,
-		    CORBA_Environment *ev)
-{
-	return CORBA_OBJECT_NIL;
-}
-
-static GNOME_Unknown
 impl_get_object (PortableServer_Servant servant,
 		 CORBA_char *item_name,
 		 CORBA_boolean only_if_exists,
@@ -178,10 +169,10 @@ gnome_marshal_POINTER__POINTER_BOOL_POINTER (GtkObject * object,
 					     GtkArg * args)
 {
 	GnomeSignal_POINTER__POINTER_BOOL_POINTER rfunc;
-	gboolean *return_val;
-	return_val = GTK_RETLOC_BOOL (args[3]);
+	void **return_val;
+	return_val = GTK_RETLOC_POINTER (args[3]);
 	rfunc = (GnomeSignal_POINTER__POINTER_BOOL_POINTER) func;
-	*return_val = (*rfunc) (object,
+	*return_val = (*rfunc) (GNOME_CONTAINER (object),
 				GTK_VALUE_POINTER (args[0]),
 				GTK_VALUE_BOOL (args[1]),
 				GTK_VALUE_POINTER (args[2]),
@@ -198,14 +189,13 @@ gnome_container_class_init (GnomeContainerClass *container_class)
 	gnome_container_parent_class = gtk_type_class (gnome_object_get_type ());
 
 	object_class->destroy = gnome_container_destroy;
-	container_class->get_object = default_get_object;
 
 	signals [GET_OBJECT] =
 		gtk_signal_new  (
 			"get_object",
 			GTK_RUN_LAST,
 			object_class->type,
-			GTK_SIGNAL_OFFSET (GnomeContainerClass, get_object),
+			0,
 			gnome_marshal_POINTER__POINTER_BOOL_POINTER,
 			GTK_TYPE_POINTER,
 			3,

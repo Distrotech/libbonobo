@@ -126,7 +126,9 @@ parse_moniker_string (const char *desc)
 		} else
 			g_string_append_c (s, *p);
 	}
-	res = g_list_append (res, g_strdup (s->str));
+	if (*s->str)
+		res = g_list_append (res, g_strdup (s->str));
+	
 	g_string_free (s, TRUE);
 
 	return res;
