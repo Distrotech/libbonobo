@@ -129,11 +129,13 @@ child_od_update_list(ChildODInfo *child, CORBA_Environment *ev)
 
   if(cache->_d)
     {
-
       if(child->by_iid)
 	g_hash_table_destroy(child->by_iid);
+      if(child->list)
+	CORBA_sequence_set_release(child->list, TRUE);
       CORBA_free(child->list); child->list = NULL;
 
+      CORBA_sequence_set_release(&(cache->_u.server_list), FALSE);
       child->list = OAF_ServerInfoList__alloc();
       *(child->list) = cache->_u.server_list;
 
