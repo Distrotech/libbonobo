@@ -6,123 +6,59 @@
  */
 
 enum {
-	DO_VERB,
-	SET_HOST_NAME,
-	CLOSE,
+	TEST,
 	LAST_SIGNAL
 };
 
-static guint gnome_object_signals [ITEM_LAST_SIGNAL];
+static guint gnome_object_signals [LAST_SIGNAL];
 static GtkObjectClass *gnome_object_parent_class;
 
-void
-gnome_object_advise_notify (GnomeObject *object, int status)
-{
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
-
-	if (object->advise_sink == CORBA_OBJECT_NIL)
-		return;
-
-	GNOME_AdviseSink_notify (object->advise_sink, status, &ev);
-}
-
-void
-gnome_object_set_verb_list (GnomeObject *object, GList *VerbInfo_list)
-{
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
-
-	object->VerbInfo_list = VerbInfo_list;
-}
-
-void
-gnome_object_set_view_factory (GnomeObject *object, GnomeObjectViewFactory *factory)
-{
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
-
-	object->view_factory = factory;
-}
-
-void
-gnome_object_set_save_in_storage (GnomeObject *object,
-				  GnomeObjectSaveInStorage *storage_save)
-{
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
-
-	object->storage_save = storage_save;
-}
-
-void
-gnome_object_set_save_in_file (GnomeObject *object,
-			       GnomeObjectSaveInFile *file_save)
-{
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
-
-	object->save_in_file = file_save;
-}
-
-/*
- * GnomeObject::do_verb default handler
- */
 static void
-default_do_verb (GnomeObject *object, int verb, char *name)
+default_test (GnomeObject *object)
 {
-	/* nothing */
 }
 
 static void
-default_set_host_name (GnomeObject *object, char *title, char *container_app_name)
+unref_interface (gpointer key, gpointer value, gpointer user_data)
 {
-	if (object->window_title)
-		g_free (object->window_title);
-	object->window_title = g_strdup (title);
-
-	if (object->container_name)
-		g_free (object->container_name);
-	object->container_app_name = g_strdup (container_app_name);
+	gtk_object_unref (GTK_OBJECT (value));
 }
 
 static void
-object_class_init (GnomeObjectClass *class)
+gnome_object_destroy (GnomeObject *object)
+{
+	g_hash_table_foreach (object->interfaces, unref_interface, object);
+	
+	g_hash_table_destroy (object->interfaces);
+	
+	gnome_object_parent_class->destroy (object);
+}
+
+static void
+gnome_object_class_init (GnomeObjectClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
 	gnome_object_parent_class = gtk_type_class (gtk_object_get_type ());
 
-	gnome_object_signals [DO_VERB] =
-		gtk_signal_new ("do_verb",
+	gnome_object_signals [TEST] =
+		gtk_signal_new ("test",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeObject), do_verb,
-				gtk_marshall_NONE__INT_POINTER,
-				GTK_TYPE_NONE, 2,
-				GTK_TYPE_INT,
-				GTK_TYPE_STRING);
-	gnome_object_signals [SET_HOST_NAME] =
-		gtk_signal_new ("set_host_name",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeObject), set_host_name,
-				gtk_marshall_NONE__POINTER_POINTER,
-				GTK_TYPE_NONE, 2
-				GTK_TYPE_STRING,
-				GTK_TYPE_STRING);
+				GTK_SIGNAL_OFFSET(GnomeObject), test,
+				gtk_marshall_NONE__NONE,
+				GTK_TYPE_NONE, 0); 
 	gtk_object_class_add_signals (object_class, gnome_object_signals, LAST_SIGNAL);
 
-	class->set_host_name = default_set_host_name;
-	class->do_verb = default_do_verb;
-	class->save_in_storage = default_save_in_storage;
-	class->save_in_file = default_save_in_file;
+	object_class->destroy = gnome_object_destroy;
+	
+	class->test = default_test;
 }
 
 static void
-object_init (GnomeObject *object)
+gnome_object_init (GnomeObject *object)
 {
-	CORBA_exception_init (&object->ev);
+	object->interfaces = g_hash_table_new (g_direct_hash, g_direct_equal);
 }
 
 GtkType
@@ -135,8 +71,8 @@ gnome_object_get_type (void)
 			"GnomeObject",
 			sizeof (GnomeObject),
 			sizeof (GnomeObjectClass),
-			(GtkClassInitFunc) object_class_init,
-			(GtkObjectInitFunc) object_init,
+			(GtkClassInitFunc) gnome_object_class_init,
+			(GtkObjectInitFunc) gnome_object_init,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
@@ -155,7 +91,41 @@ gnome_object_new (void)
 
 	object = gtk_type_new (gnome_object_get_type ());
 
-	component->
 	return object;
 }
 
+void
+gnome_object_add_interface_1 (GnomeObject *object, GtkObject *interface)
+{
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (interface != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (GTK_IS_OBJECT (interface));
+	
+	g_hash_table_insert (object->interfaces, interface->type, interface);
+}
+
+void
+gnome_object_add_interface (GnomeObject *object, GnomeObject *interface)
+{
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (interface != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (GNOME_IS_OBJECT (interface));
+
+	gnome_object_add_interface_1 (object, GTK_OBJECT (interface));
+	gnome_object_add_interface_1 (interface, GTK_OBJECT (object));
+}
+
+GtkObject *
+gnome_object_query_interface (GnomeObject *object, GtkType type)
+{
+	GtkObject *object;
+	
+	g_return_val_if_fail (object != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
+	
+	object = g_hash_table_lookup (object->interfaces, type);
+
+	return object;
+}
