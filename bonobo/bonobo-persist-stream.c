@@ -121,8 +121,6 @@ gnome_persist_stream_zero (GnomePersistStream *ps)
 static void
 gnome_persist_stream_class_init (GnomePersistStreamClass *class)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
-
 	gnome_persist_stream_parent_class = gtk_type_class (gnome_persist_get_type ());
 
 	/*

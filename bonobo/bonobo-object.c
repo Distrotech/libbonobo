@@ -117,8 +117,8 @@ impl_GNOME_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 
 static CORBA_Object
 impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
-				const CORBA_char *repoid,
-				CORBA_Environment *ev)
+				    CORBA_char *repoid,
+				    CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	GnomeObject *object;

@@ -32,7 +32,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 
 	CORBA_exception_init (&ev);
 
-	if (CORBA_Object_is_nil(orb, &ev))
+	if (orb == CORBA_OBJECT_NIL)
 		orb = gnome_CORBA_ORB();
 	
 	if (CORBA_Object_is_nil((CORBA_Object)poa, &ev)){

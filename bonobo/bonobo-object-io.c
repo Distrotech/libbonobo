@@ -146,7 +146,7 @@ gnome_persiststream_save_to_stream (GNOME_PersistStream pstream, GNOME_Stream ta
 GnomeIOStatus
 gnome_object_save_to_stream (GnomeObject *object, GNOME_Stream stream)
 {
-	GNOME_PersistStream *pstream;
+	GNOME_PersistStream pstream;
 	
 	g_return_val_if_fail (object != NULL, GNOME_IOERR_GENERAL);
 	g_return_val_if_fail (GNOME_IS_OBJECT (object), GNOME_IOERR_GENERAL);

@@ -276,7 +276,6 @@ static GNOME_ProgressiveDataSink
 create_gnome_progressive_data_sink (GnomeObject *object)
 {
 	POA_GNOME_ProgressiveDataSink *servant;
-	CORBA_Object o;
 
 	servant = (POA_GNOME_ProgressiveDataSink *)g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_progressive_data_sink_vepv;

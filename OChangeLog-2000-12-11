@@ -1,3 +1,22 @@
+1999-07-30  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-item-moniker.c: Implemented bind operation here.
+
+	* idl/gnome-container.idl: Eliminated the ItemContainer interface.
+	And put everything into the Container interface.  There is little
+	need for all of those other interfaces.
+
+1999-07-29  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-moniker.c (gnome_moniker_create_corba_object):
+	Export this CORBA creation routine, as it is used all over the
+	place verbatim.
+
+	* bonobo/gnome-item-moniker.c: Started implementing.
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_destroy): Chain
+	to parent destructor.
+
 1999-07-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* configure.in (ALL_LINGUAS): Added es to the list of languages.
@@ -72,7 +91,7 @@ Wed Jul 28 13:34:13 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 	* bonobo/gnome-bind-context.c: Include bonobo/bonobo.h.
 
 1999-07-21  Miguel de Icaza  <miguel@gnu.org>
-
+                                                 
 	* bonobo/gnome-item-container.c: New file.  Implements the
 	GnomeItemContainer.
 

@@ -18,7 +18,8 @@ struct _GnomeMoniker;
 typedef struct _GnomeMoniker GnomeMoniker;
 
 typedef CORBA_Object (*GnomeMonikerBindFn)(GnomeMoniker *moniker,
-					   const GNOME_BindOptions *bind_options,
+					   GNOME_BindOptions bind_options,
+					   GNOME_Moniker left_moniker,
 					   void *closure);
 
 struct _GnomeMoniker {
@@ -47,6 +48,8 @@ GnomeMoniker     *gnome_parse_display_name (GnomeBindContext *bind,
 					    int *chars_parsed);
 
 CORBA_Object      find_moniker_in_naming_service (gchar *name, gchar *kind);
+
+CORBA_Object      gnome_moniker_create_corba_object (GnomeMoniker *object);
 
 
 /* The CORBA vepv for the class */

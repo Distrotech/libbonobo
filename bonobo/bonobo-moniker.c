@@ -22,18 +22,18 @@ POA_GNOME_Moniker__vepv gnome_moniker_vepv;
 
 static CORBA_Object
 impl_bind_to_object (PortableServer_Servant servant,
-		     const GNOME_BindOptions *bind_context,
+		     const GNOME_BindOptions bind_context,
 		     const GNOME_Moniker left_moniker,
 		     const CORBA_char *requested_interface,
 		     CORBA_Environment *ev)
 {
-	GnomeMonikerClass *class;
 	GnomeMoniker *moniker;
-	CORBA_Object bound_object_rtn;
 	
 	moniker = GNOME_MONIKER (gnome_object_from_servant (servant));
 
-	return (*moniker->bind_function)(moniker, bind_context, moniker->bind_function_closure);
+	return (*moniker->bind_function)(
+		moniker, bind_context, left_moniker,
+		moniker->bind_function_closure);
 }
 
 
@@ -95,12 +95,12 @@ static void
 init_moniker_corba_class (void)
 {
 	/* Setup the GNOME::Moniker methods */
-	gnome_moniker_epv.bind_to_object = impl_bind_to_object;
-	gnome_moniker_epv.bind_to_storage = impl_bind_to_storage;
-	gnome_moniker_epv.compose_with = impl_compose_with;
-	gnome_moniker_epv.enum_pieces = impl_enum_pieces;
-	gnome_moniker_epv.get_display_name = impl_get_display_name;
-	gnome_moniker_epv.parse_display_name = impl_parse_display_name;
+	gnome_moniker_epv.bind_to_object     = &impl_bind_to_object;
+	gnome_moniker_epv.bind_to_storage    = &impl_bind_to_storage;
+	gnome_moniker_epv.compose_with       = &impl_compose_with;
+	gnome_moniker_epv.enum_pieces        = &impl_enum_pieces;
+	gnome_moniker_epv.get_display_name   = &impl_get_display_name;
+	gnome_moniker_epv.parse_display_name = &impl_parse_display_name;
 		
 	/* Now the Vepv */
 	gnome_moniker_vepv.GNOME_Unknown_epv = &gnome_object_epv;
@@ -120,10 +120,27 @@ gnome_moniker_class_init (GnomeMonikerClass *class)
 	init_moniker_corba_class ();
 }
 
-static CORBA_Object
-create_gnome_moniker (GnomeObject *object)
+/**
+ * gnome_moniker_create_corba_object:
+ * @moniker: the GnomeMoniker moniker object to bind the servant to
+ *
+ * Creates and activates a CORBA object for the type GNOME::Moniker
+ * this object will be bound to the @moniker GnomeMoniker code.
+ *
+ * This routine is used by Moniker implementations.
+ *
+ * Returns: The created CORBA object.
+ */
+CORBA_Object
+gnome_moniker_create_corba_object (GnomeMoniker *moniker)
 {
 	POA_GNOME_Moniker *servant;
+	GnomeObject *object;
+	
+	g_return_val_if_fail (moniker != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (GNOME_IS_MONIKER (moniker), CORBA_OBJECT_NIL);
+
+	object = GNOME_OBJECT (moniker);
 	
 	servant = (POA_GNOME_Moniker *)g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_moniker_vepv;
@@ -195,15 +212,15 @@ gnome_moniker_new (const char *moniker_goad_id,
 	g_return_val_if_fail (bind_function != NULL, NULL);
 
 	moniker = gtk_type_new (gnome_moniker_get_type ());
-	corba_moniker = create_gnome_moniker (GNOME_OBJECT (moniker));
+	corba_moniker = gnome_moniker_create_corba_object (GNOME_OBJECT (moniker));
 	if (corba_moniker == CORBA_OBJECT_NIL) {
 		gtk_object_destroy (GTK_OBJECT (moniker));
 		return NULL;
 	}
 
 	return gnome_moniker_construct (
-		moniker, moniker_goad_id,
-		corba_moniker, bind_function, bind_function_closure);
+		moniker, corba_moniker, moniker_goad_id,
+		bind_function, bind_function_closure);
 }
 
 static void

@@ -28,7 +28,11 @@ typedef struct {
 
 typedef struct {
 	GnomeObjectClass parent_class;
-	
+
+	GNOME_Unknown (*get_object) (GnomeContainer *item_container,
+				     CORBA_char *item_name,
+				     CORBA_boolean *only_if_exists,
+				     CORBA_Environment *ev);
 } GnomeContainerClass;
 
 GtkType       gnome_container_get_type    (void);

@@ -113,6 +113,7 @@ init_persist_file_corba_class (void)
 	 */
 	gnome_persist_file_epv.load = impl_load;
 	gnome_persist_file_epv.save = impl_save;
+	gnome_persist_file_epv.is_dirty = impl_is_dirty;
 	gnome_persist_file_epv.get_current_file = impl_get_current_file;
 
 	gnome_persist_file_vepv.GNOME_Unknown_epv = &gnome_object_epv;
@@ -203,7 +204,7 @@ gnome_persist_file_construct (GnomePersistFile *pf,
 	g_return_val_if_fail (GNOME_IS_PERSIST_FILE (pf), NULL);
 	g_return_val_if_fail (corba_pf != CORBA_OBJECT_NIL, NULL);
 
-	gnome_persist_construct (GNOME_PERSIST (pf), goad_id, corba_pf);
+	gnome_persist_construct (GNOME_PERSIST (pf), corba_pf, goad_id);
 	
 	pf->load_fn = load_fn;
 	pf->save_fn = save_fn;

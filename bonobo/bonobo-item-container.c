@@ -21,10 +21,17 @@
 #include <bonobo/gnome-container.h>
 #include <bonobo/gnome-client-site.h>
 
+enum {
+	GET_OBJECT,
+	LAST_SIGNAL
+};
+
+static guint signals [LAST_SIGNAL] = { 0, };
+
 static GnomeObjectClass *gnome_container_parent_class;
 
+POA_GNOME_ParseDisplayName__epv gnome_parse_display_name_epv = { NULL, };
 POA_GNOME_Container__epv gnome_container_epv = { NULL, };
-	
 POA_GNOME_Container__vepv gnome_container_vepv;
 
 static CORBA_Object
@@ -58,8 +65,6 @@ create_gnome_container (GnomeObject *object)
 static void
 gnome_container_destroy (GtkObject *object)
 {
-	GnomeContainer *container = GNOME_CONTAINER (object);
-
 	GTK_OBJECT_CLASS (gnome_container_parent_class)->destroy (object);
 }
 
@@ -105,6 +110,41 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 	return return_list;
 }
 
+static GNOME_Unknown
+default_get_object (GnomeContainer *item_container,
+		    CORBA_char *item_name,
+		    CORBA_boolean *only_if_exists,
+		    CORBA_Environment *ev)
+{
+	return CORBA_OBJECT_NIL;
+}
+
+static GNOME_Unknown
+impl_get_object (PortableServer_Servant servant,
+		 CORBA_char *item_name,
+		 CORBA_boolean only_if_exists,
+		 CORBA_Environment * ev)
+{
+	GNOME_Unknown ret;
+	
+	gtk_signal_emit (
+		GTK_OBJECT (gnome_object_from_servant (servant)),
+		GET_OBJECT, item_name, only_if_exists, ev, &ret);
+
+	return ret;
+}
+
+static GNOME_Moniker
+impl_parse_display_name (PortableServer_Servant servant,
+			 GNOME_BindOptions *bind_context,
+			 GNOME_Moniker left,
+			 CORBA_char *display_name,
+			 CORBA_short *display_name_bytes_parsed,
+			 CORBA_Environment *ev)
+{
+	return CORBA_OBJECT_NIL;
+}
+
 /*
  * GnomeContainer CORBA vector-class initialization routine
  */
@@ -113,13 +153,40 @@ corba_container_class_init (void)
 {
 	/* Init the epv */
 	gnome_container_epv.enum_objects = impl_enum_objects;
+	gnome_container_epv.get_object = impl_get_object;
+
+	gnome_parse_display_name_epv.parse_display_name = &impl_parse_display_name;
 	
 	/* Init the vepv */
 	gnome_container_vepv._base_epv     = &gnome_object_base_epv;
 	gnome_container_vepv.GNOME_Unknown_epv = &gnome_object_epv;
+	gnome_container_vepv.GNOME_ParseDisplayName_epv = &gnome_parse_display_name_epv;
 	gnome_container_vepv.GNOME_Container_epv = &gnome_container_epv;
 }
 
+typedef GNOME_Unknown (*GnomeSignal_POINTER__POINTER_BOOL_POINTER) (
+	GnomeContainer *item_container,
+	CORBA_char *item_name,
+	CORBA_boolean only_if_exists,
+	CORBA_Environment *ev,
+	gpointer func_data);
+
+static void 
+gnome_marshal_POINTER__POINTER_BOOL_POINTER (GtkObject * object,
+					     GtkSignalFunc func,
+					     gpointer func_data,
+					     GtkArg * args)
+{
+	GnomeSignal_POINTER__POINTER_BOOL_POINTER rfunc;
+	gboolean *return_val;
+	return_val = GTK_RETLOC_POINTER (args[3]);
+	rfunc = (GnomeSignal_POINTER__POINTER_BOOL_POINTER) func;
+	*return_val = (*rfunc) (object,
+				GTK_VALUE_POINTER (args[0]),
+				GTK_VALUE_BOOL (args[1]),
+				GTK_VALUE_POINTER (args[2]),
+				func_data);
+}
 /*
  * GnomeContainer class initialization routine
  */
@@ -131,6 +198,19 @@ gnome_container_class_init (GnomeContainerClass *container_class)
 	gnome_container_parent_class = gtk_type_class (gnome_object_get_type ());
 
 	object_class->destroy = gnome_container_destroy;
+	container_class->get_object = default_get_object;
+
+	signals [GET_OBJECT] =
+		gtk_signal_new  (
+			"get_object",
+			GTK_RUN_LAST,
+			object_class->type,
+			GTK_SIGNAL_OFFSET (GnomeContainerClass, get_object),
+			gnome_marshal_POINTER__POINTER_BOOL_POINTER,
+			GTK_TYPE_POINTER,
+			3,
+			GTK_TYPE_POINTER, GTK_TYPE_BOOL, GTK_TYPE_POINTER);
+	gtk_object_class_add_signals (object_class, signals, LAST_SIGNAL);
 
 	corba_container_class_init ();
 }

@@ -1,7 +1,6 @@
 module GNOME {
 
 	interface ParseDisplayName : Unknown {
-
 		/**
 		 * SyntaxError{}:
 		 *
@@ -25,9 +24,7 @@ module GNOME {
 		 * Returns: a list of the objects contained by this container
 		 */
 		ObjectList enum_objects ();
-	};
 
-	interface ItemContainer : Container {
 		/**
 		 * NotFound{}:
 		 * 
