@@ -3,7 +3,7 @@
  * GNOME::SimpleDataSource
  *
  * Author:
- *   Nat Friedman (nat@gnome-support.com)
+ *   Nat Friedman (nat@nat.org)
  *
  * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */

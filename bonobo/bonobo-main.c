@@ -4,7 +4,7 @@
  *
  * Author:
  *    Miguel de Icaza (miguel@gnu.org)
- *    Nat Friedman (nat@gnome-support.com)
+ *    Nat Friedman (nat@nat.org)
  *
  * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
@@ -32,7 +32,8 @@ bonobo_x_error_handler (Display *display, XErrorEvent *error)
 	 * X-server-induced errors.  Keeping a list of windows for
 	 * which we will ignore BadDrawables would be a good idea.
 	 */
-	if (error->error_code == BadDrawable)
+	if (error->error_code == BadDrawable ||
+	    error->error_code == BadWindow)
 		return 0;
 
 	/*

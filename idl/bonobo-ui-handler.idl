@@ -92,7 +92,7 @@ module GNOME {
 				  in unsigned long accelerator_key, in long modifier);
 
 		/**
-		 * menu_item_remove:
+		 * menu_remove:
 		 */
 		exception MenuItemNotFound {};
        		void menu_remove (in UIHandler containee_uih, in string path)

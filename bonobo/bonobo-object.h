@@ -42,7 +42,6 @@ typedef struct {
 	 * signals.  
 	 */
 	void  (*query_interface) (GnomeObject *object, const char *repo_id, CORBA_Object *retval);
-	void  (*user_exception)  (GnomeObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 	void  (*system_exception)(GnomeObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 	void  (*object_gone)     (GnomeObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 } GnomeObjectClass;

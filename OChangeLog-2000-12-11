@@ -1,3 +1,69 @@
+1999-08-19  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/gnome-view.h (GnomeView): Added the GnomeUIHandler field.
+
+	* bonobo/gnome-view.c (impl_GNOME_View_reactivate_and_undo):
+ 	Removed CORBA_boolean argument.
+	(plug_destroy_cb): Cleaned this function up.
+	(impl_GNOME_View_size_query): Use -1,-1 as the default, not
+ 	10,10!
+	(gnome_view_destroy): Disconnect from the plug destroy signal when
+ 	we kill the plug.
+	(gnome_view_class_init): Add the "size_query" signal.  Changed from
+	"size_request" to "size_query" to avoid conflicting.
+	(gnome_view_set_ui_handler): New function.  Components can use
+ 	this to keep track of the GnomeUIHandler for this view.
+	(gnome_view_get_ui_handler): New function.
+	(gnome_view_get_remote_ui_handler): The old
+ 	gnome_view_get_ui_handler was renamed to this.
+
+	* bonobo/gnome-ui-handler.c (uih_toplevel_unregister_containee):
+ 	Sort the removal list in descending order of path length to ensure
+	that children appear before their parents in the list.
+ 	(menu_toplevel_prune_compare_function): New function to help sort
+ 	the removal list.
+	(menu_local_remove_item): Store the new list in the hash table if
+ 	there are still local items matching this path.
+	(menu_toplevel_remove_item_internal): Don't try to remove the
+ 	widgets of a radiogroup.
+	(toolbar_free_data): New function.
+	(toolbar_free): Likewise.
+	(toolbar_toplevel_get_item_for_containee): Likewise.
+	(toolbar_toplevel_item_is_head): Likewise.
+	(gnome_ui_handler_toolbar_new_separator): Likewise.
+	(gnome_ui_handler_toolbar_new_radiogroup): Likewise.
+	(gnome_ui_handler_toolbar_new_radioitem): Likewise.
+	(gnome_ui_handler_toolbar_new_toggleitem): Likewise.
+	(toolbar_local_remove_item): Likewise.
+	(toolbar_toplevel_item_reinstate_notify): Likewise.
+	(impl_toolbar_reinstated): Likewise.
+	(toolbar_toplevel_item_remove_notify): Likewise.
+	(impl_toolbar_removed): Likewise.
+	(toolbar_toplevel_item_remove_data): Likewise.
+	(toolbar_toplevel_remove_item_internal): Likewise.
+	(toolbar_toplevel_remove_item): Likewise.
+	(toolbar_remote_remove_item): Likewise.
+	(impl_toolbar_remove_item): Likewise.
+
+	* bonobo/gnome-object.h (GnomeObjectClass): Removed
+ 	user_exception.
+
+	* bonobo/gnome-object.c: Removed USER_EXCEPTION.
+	(gnome_object_check_env): Better documentation.
+
+	* bonobo/gnome-main.c (bonobo_x_error_handler): Ignore BadWindow
+ 	and BadDrawable.
+
+	* bonobo/gnome-embeddable.c (gnome_embeddable_view_destroy_cb):
+ 	New function.  When all views are destroyed, this function pings
+ 	the remote GnomeClientSite to see if it is still alive.  If it
+ 	isn't, this object self-destructs.  Pinging seems to be
+ 	non-functional at the moment, however.
+	(impl_GNOME_Embeddable_new_view): Connect to the "destroy" signal
+ 	on the new view.
+	(gnome_embeddable_destroy): Destroy all the embeddable's views.
+  	Properly free the verbs.
+
 1999-08-20  Michael Meeks  <michael@imaginator.com>
 
 	* doc/debugging.txt: Added some advice on debugging components.

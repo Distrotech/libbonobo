@@ -22,12 +22,12 @@ interface View : GNOME::Unknown {
 	void size_allocate (in short width, in short height);
 
 	/**
-	 * size_request:
+	 * size_query:
 	 * @desired_width: In this value you should return the desired width you want.
 	 * @desired_height: In this value you should return the desired height you want.
 	 *
 	 */
-	void size_request (out short desired_width, out short desired_height);
+	void size_query (out short desired_width, out short desired_height);
 
 	/**
 	 * set_window:

@@ -27,7 +27,6 @@ struct _GnomeObjectPrivate {
 
 enum {
 	QUERY_INTERFACE,
-	USER_EXCEPTION,
 	SYSTEM_EXCEPTION,
 	OBJECT_GONE,
 	LAST_SIGNAL
@@ -312,13 +311,6 @@ gnome_object_class_init (GnomeObjectClass *class)
 				GTK_SIGNAL_OFFSET(GnomeObjectClass,system_exception),
 				gtk_marshal_NONE__POINTER,
 				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
-	gnome_object_signals [USER_EXCEPTION] =
-		gtk_signal_new ("user_exception",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeObjectClass,user_exception),
-				gtk_marshal_NONE__POINTER,
-				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
 	gnome_object_signals [OBJECT_GONE] =
 		gtk_signal_new ("object_gone",
 				GTK_RUN_LAST,
@@ -528,9 +520,12 @@ gnome_object_corba_objref (GnomeObject *object)
  * @object: The object on which we operate
  * @ev: CORBA Environment to check
  *
- * This routine verifies the @ev environment for any possible
- * exceptions and emits signals depending on the values of it
- *
+ * This routine verifies the @ev environment for any fatal system
+ * exceptions.  If a system exception occurs, the object raises a
+ * "system_exception" signal.  The idea is that GtkObjects which are
+ * used to wrap a CORBA interface can use this function to notify
+ * the user if a fatal exception has occurred, causing the object
+ * to become defunct.
  */
 void
 gnome_object_check_env (GnomeObject *object, CORBA_Object obj, CORBA_Environment *ev)
@@ -541,11 +536,6 @@ gnome_object_check_env (GnomeObject *object, CORBA_Object obj, CORBA_Environment
 
 	if (ev->_major == CORBA_NO_EXCEPTION)
 		return;
-
-	if (ev->_major == CORBA_USER_EXCEPTION){
-		gtk_signal_emit (
-			GTK_OBJECT (object), gnome_object_signals [USER_EXCEPTION], obj, ev);
-	}
 
 	if (ev->_major == CORBA_SYSTEM_EXCEPTION){
 		gtk_signal_emit (
