@@ -48,6 +48,14 @@ gnome_plugin_unload (gpointer data, gpointer user_data)
 	g_free (api);
 }
 
+
+/**
+ * oaf_server_activate_shlib:
+ * @sh:
+ * @ev:
+ *
+ * Return value: 
+ */
 CORBA_Object
 oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 {

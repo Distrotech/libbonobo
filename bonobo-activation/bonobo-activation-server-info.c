@@ -25,6 +25,16 @@
 
 #include "liboaf.h"
 
+/**
+ * oaf_server_info_prop_find:
+ * @server: the server where to seek the data.
+ * @propname: the data to seek in teh server.
+ *
+ * Tries to find a server with the given property. Returns
+ * NULL if not found.
+ *
+ * Return value: a pointer to the %OAF_Property structure.
+ */
 OAF_Property *
 oaf_server_info_prop_find (OAF_ServerInfo * server, const char *prop_name)
 {
@@ -38,6 +48,15 @@ oaf_server_info_prop_find (OAF_ServerInfo * server, const char *prop_name)
 	return NULL;
 }
 
+/**
+ * oaf_server_info_prop_lookup:
+ * @server: 
+ * @propname:
+ * @i18n_languages:
+ *
+ *
+ * Return value: 
+ */
 const char *
 oaf_server_info_prop_lookup (OAF_ServerInfo * server, const char *prop_name,
 			     GSList * i18n_languages)
@@ -151,6 +170,15 @@ OAF_ServerInfo_copy (OAF_ServerInfo *copy, const OAF_ServerInfo *original)
 	CORBA_sequence_OAF_Property_copy (&copy->props, &original->props);
 }
 
+
+/**
+ * OAF_ServerInfo_duplicate:
+ * @original: %ServerInfo to copy.
+ *
+ * The return value should befreed with CORBA_free (). 
+ *
+ * Return value: a newly allocated copy of @original.
+ */
 OAF_ServerInfo *
 OAF_ServerInfo_duplicate (const OAF_ServerInfo *original)
 {

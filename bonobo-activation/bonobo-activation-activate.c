@@ -27,6 +27,20 @@
 
 extern CORBA_Object oaf_server_activate_shlib (OAF_ActivationResult * sh,
 					       CORBA_Environment * ev);
+/**
+ * oaf_query: 
+ * @requirements: query string.
+ * @selection_order: sort criterion for returned list.
+ * @ev: a %CORBA_Environment structure which will contain 
+ *      the CORBA exception status of the operation.
+ *
+ * Executes the @requirements query on the OAF daemon.
+ * The result is sorted according to @selection_order. 
+ * @selection_order can safely be NULL.
+ * The returned list has to be freed with CORBA_free.
+ *
+ * Return value: the list of servers matching the requirements.
+ */
 
 OAF_ServerInfoList *
 oaf_query (const char *requirements, char *const *selection_order,
@@ -68,6 +82,22 @@ oaf_query (const char *requirements, char *const *selection_order,
 	return res;
 }
 
+
+/**
+ * oaf_activate:
+ * @requirements: query string.
+ * @selection_order: sort criterion for returned list.
+ * @flags: how to activate the object.
+ * @ret_aid: AID of the activated object.
+ * @ev: %CORBA_Environment structure which will contain 
+ *      the CORBA exception status of the operation. 
+ *
+ * Activates a given object. @ret_aid can be safely NULLed.
+ *
+ * Return value: the CORBA object reference of the activated object.
+ * This value can be CORBA_OBJECT_NIL: you are supposed to check @ev 
+ * for success.
+ */
 CORBA_Object
 oaf_activate (const char *requirements, char *const *selection_order,
 	      OAF_ActivationFlags flags, OAF_ActivationID * ret_aid,
@@ -131,6 +161,19 @@ oaf_activate (const char *requirements, char *const *selection_order,
 
 	return retval;
 }
+
+/**
+ * oaf_activate_from_id
+ * @aid: AID or IID of the object to activate.
+ * @flags: activation flag.
+ * @ret_aid: AID of the activated server.
+ * @ev: %CORBA_Environment structure which will contain 
+ *      the CORBA exception status of the operation. 
+ *
+ * Activates the server corresponding to @aid. @ret_aid can be safely NULLed.
+ *
+ * Return value: a CORBA object reference to the newly activated server.
+ */
 
 CORBA_Object
 oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
@@ -202,6 +245,16 @@ oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
 	return retval;
 }
 
+/**
+ * oaf_name_service_get:
+ * @ev: %CORBA_Environment structure which will contain 
+ *      the CORBA exception status of the operation. 
+ *
+ * Returns the name server used by OAF. This name server 
+ * should be used by all applications.
+ *
+ * Return value: the name server used by OAF.
+ */
 CORBA_Object oaf_name_service_get (CORBA_Environment * ev)
 {
 

@@ -101,6 +101,14 @@ static gboolean is_initialized = FALSE;
 /* prevent registering with OAF when oaf_active_server_register() */
 gboolean oaf_private = FALSE;
 
+
+/**
+ * oaf_orb_get:
+ *
+ * Returns the ORB used by OAF.
+ *
+ * Return value: the ORB used by OAF.
+ */
 CORBA_ORB
 oaf_orb_get (void)
 {
@@ -338,12 +346,32 @@ do_barrier (int signum)
 }
 #endif
 
+/**
+ * oaf_is_initialized:
+ *
+ * Tells you if OAF is initialized.
+ *
+ * Return value: whether OAF is initialized or not.
+ */
 gboolean
 oaf_is_initialized (void)
 {
 	return is_initialized;
 }
 
+
+
+/**
+ * oaf_init:
+ * @argc: number of command-line arguments passed to the program.
+ * @argv: array of strings containing the command-line 
+ *        arguments of the program.
+ *
+ * Initializes liboaf. Should be called before any other call to 
+ * the library.
+ *
+ * Return value: the ORB used by OAF.
+ */
 CORBA_ORB
 oaf_init (int argc, char **argv)
 {

@@ -54,6 +54,16 @@ oaf_timeout_reg_check (gpointer data)
         return FALSE;
 }
 
+
+/**
+ * oaf_active_server_register:
+ * @iid: IID of the server to register.
+ * @obj: CORBA::Object to register.
+ *
+ * Registers @obj with @iid in the local OAF daemon.
+ *
+ * Return value: status of the registration.
+ */
 OAF_RegistrationResult
 oaf_active_server_register (const char *iid, CORBA_Object obj)
 {
@@ -135,6 +145,16 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
 	return retval;
 }
 
+
+/**
+ * oaf_active_server_unregister:
+ * @iid: IID of the server to unregister.
+ * @obj: CORBA::Object to unregister.
+ *
+ * Unregisters @obj with @iid in the local OAF daemon.
+ *
+ * Return value: none.
+ */
 void
 oaf_active_server_unregister (const char *iid, CORBA_Object obj)
 {

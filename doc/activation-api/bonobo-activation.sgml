@@ -1,0 +1,62 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<!entity init SYSTEM "sgml/init.sgml">
+<!entity registration SYSTEM "sgml/registration.sgml">
+<!entity activation SYSTEM "sgml/activation.sgml">
+<!entity utils SYSTEM "sgml/utils.sgml">
+<!entity compiling SYSTEM "compiling.sgml">
+<!entity configuring SYSTEM "configuring.sgml">
+<!entity query-langage SYSTEM "query-langage.sgml">
+<!entity architecture SYSTEM "architecture.sgml">
+<!entity oafinfo-ref SYSTEM "oafinfo-ref.sgml">
+<!entity tutorial SYSTEM "tutorial.sgml">
+<!entity migrating SYSTEM "migrating.sgml">
+]>
+
+<book>
+  <bookinfo>
+    <title>The liboaf Library</title>
+
+    <authorgroup>
+      <author>
+	<firstname>Mathieu</firstname>
+	<surname>Lacage</surname>
+	<affiliation>
+	  <address>
+	    <email>mathieu@gnu.org</email>
+	  </address>
+	</affiliation>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2000</year>
+      <holder>The Free Software Foundation</holder>
+    </copyright>
+  </bookinfo>
+
+  <reference id="api-reference">
+    <title>API Reference</title>
+    <partintro>
+      <para>
+	This part presents the function reference for the
+	liboaf library.
+      </para>
+      </partintro>
+
+    &init;
+    &activation;
+    &utils;
+    &registration;
+
+  </reference>
+
+  &configuring;
+  &architecture;
+  &query-langage;
+  &oafinfo-ref;
+  &tutorial;
+  &migrating;
+
+
+
+</book>

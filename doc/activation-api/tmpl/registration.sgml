@@ -1,0 +1,41 @@
+<!-- ##### SECTION Title ##### -->
+registration
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM OAF_RegistrationResult ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION oaf_active_server_register ##### -->
+<para>
+
+</para>
+
+@iid: 
+@obj: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oaf_active_server_unregister ##### -->
+<para>
+
+</para>
+
+@iid: 
+@obj: 
+
+

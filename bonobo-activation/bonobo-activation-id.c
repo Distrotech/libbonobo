@@ -27,11 +27,31 @@
 
 #include "liboaf-private.h"
 
+
+/**
+ * oaf_actinfo_new:
+ *
+ * This function allocates a %OAFActicationInfo structure and returns it.
+ * Should NOT be called from outside of this code.
+ *
+ * Return value: a newly allocated non-initialized %OAFActicationInfo structure.
+ */
 OAFActivationInfo *
 oaf_actinfo_new (void)
 {
         return g_new0 (OAFActivationInfo, 1);
 }
+
+/**
+ * oaf_servinfo_to_actinfo:
+ * @servinfo: An array of %OAF_ServerInfo structures.
+ *
+ * This function converts a %OAF_ServerInfo structure to a
+ * %OAFActivationInfo structure. The returned structure should
+ * be freed with oaf_actinfo_free.
+ *
+ * Return value: a newly allocated initialized %OAFActivationInfo structure.
+ */
 
 OAFActivationInfo *
 oaf_servinfo_to_actinfo (const OAF_ServerInfo * servinfo)
@@ -46,6 +66,15 @@ oaf_servinfo_to_actinfo (const OAF_ServerInfo * servinfo)
 	return retval;
 }
 
+/**
+ * oaf_actinfo_free:
+ * @actinfo: the %OAFActivationInfo structure to free.
+ *
+ * Frees @actinfo.
+ *
+ * Return value: none.
+ */
+
 void
 oaf_actinfo_free (OAFActivationInfo * actinfo)
 {
@@ -55,6 +84,18 @@ oaf_actinfo_free (OAFActivationInfo * actinfo)
 	g_free (actinfo->domain);
 	g_free (actinfo);
 }
+
+
+/**
+ * oaf_actid_parse:
+ * @actid: the activation id structure.
+ *
+ * Returns a pointer to a newly allocated %OAFActivationInfo
+ * structure (to be freed with oaf_actinfo_free) initialized 
+ * with the data of @actid.
+ *
+ * Return value: the %OAFActivationInfo corresponding to @actid.
+ */
 
 OAFActivationInfo *
 oaf_actid_parse (const OAF_ActivationID actid)
@@ -115,6 +156,15 @@ oaf_actid_parse (const OAF_ActivationID actid)
 	return retval;
 }
 
+
+/**
+ * oaf_actinfo_stringify:
+ * @actinfo: the %OAFActivationInfo to flatten.
+ *
+ * Serializes @actinfo into a char *. Should be freed with g_free ().
+ *
+ * Return value: the serialized version of @actinfo.
+ */
 char *
 oaf_actinfo_stringify (const OAFActivationInfo * actinfo)
 {
@@ -130,3 +180,6 @@ oaf_actinfo_stringify (const OAFActivationInfo * actinfo)
 			    actinfo->domain ? actinfo->domain : "",
 			    "]", NULL);
 }
+
+
+
