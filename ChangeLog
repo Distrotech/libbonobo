@@ -1,3 +1,9 @@
+2002-02-04  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag.h
+	(BONOBO_PROPERTY_WRITABLE): add for people who like
+	sueing other people.
+
 2002-02-01  Tomasz K³oczko  <kloczek@pld.org.pl>
 
 	* monikers/Makefile.am: small fix for automake 1.5.
