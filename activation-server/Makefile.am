@@ -10,7 +10,7 @@ INCLUDES=					\
 	-I$(top_builddir)/bonobo-activation	\
 	-I$(top_srcdir)/bonobo-activation	\
 	-DSERVERINFODIR=\"$(libdir)/bonobo/servers\" \
-	-DSERVER_LOCALEDIR=\""$(datadir)/locale"\" \
+        -SERVER_LOCALEDIR=\""${prefix}/${DATADIRNAME}/locale"\" \
 	$(SERVER_CFLAGS)			\
 	-DSERVER_CONFDIR=\"$(sysconfdir)\"	\
 	-DG_DISABLE_DEPRECATED			\

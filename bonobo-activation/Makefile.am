@@ -5,7 +5,7 @@ lib_LTLIBRARIES=libbonobo-activation.la
 INCLUDES=					\
 	-I$(top_srcdir)				\
 	-I$(top_builddir)			\
-	-DBONOBO_ACTIVATION_LOCALEDIR=\""$(datadir)/locale"\"	\
+        -DBONOBO_ACTIVATION_LOCALEDIR=\""${prefix}/${DATADIRNAME}/locale"\" \
 	$(BONOBO_ACTIVATION_CFLAGS)		\
 	-DVERSION=\"$(VERSION)\"		\
 	-DG_DISABLE_DEPRECATED			\
