@@ -9,13 +9,9 @@
  * Copyright 1999,2001 Ximian, Inc.
  */
 
-#define _GNU_SOURCE   /* for dladdr */
-
 #include <config.h>
-#ifdef HAVE_DLADDR
-#include <dlfcn.h>
-#endif
 #include <stdio.h>
+#include <string.h>
 #include <gobject/gsignal.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/bonobo-exception.h>
@@ -30,6 +26,9 @@
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_REF_HOOKS
 #endif
+
+/* Define to debug user aggregate merging code */
+#undef BONOBO_AGGREGATE_DEBUG
 
 /* NB. for a quicker debugging experience define this */
 /* # define BONOBO_REF_HOOKS */
@@ -534,7 +533,6 @@ bonobo_object_query_local_interface (BonoboObject *object,
 	CORBA_Environment  ev;
 	BonoboObjectClass *klass;
 	CORBA_Object       corba_retval = CORBA_OBJECT_NIL;
-	GType              type;
 	GList             *l;
 
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
@@ -559,23 +557,18 @@ bonobo_object_query_local_interface (BonoboObject *object,
 		return local_interface;
 	}
 
-	type = g_type_from_name (repo_id);
-
 	/* Try looking at the gtk types */
 	for (l = object->priv->ao->objs; l; l = l->next){
 		BonoboObject *tryme = l->data;
 
-		if ((type && g_type_is_a (G_OBJECT_TYPE (tryme), type)) ||
-#ifdef ORBIT_IMPLEMENTS_IS_A
-		    CORBA_Object_is_a (tryme->corba_objref, (char *) repo_id, &ev)
-#else
-		    !strcmp (tryme->corba_objref->object_id, repo_id)
-#endif
-			) {
-			if (BONOBO_EX (&ev))
+		if (CORBA_Object_is_a (tryme->corba_objref, (char *) repo_id, &ev)) {
+			if (BONOBO_EX (&ev)) {
+				CORBA_exception_free (&ev);
 				continue;
+			}
 			
 			bonobo_object_ref (object);
+
 			return tryme;
 		}
 	}
@@ -882,51 +875,6 @@ bonobo_object_init (void)
 	g_atexit (bonobo_object_tracking_shutdown);
 }
 
-#ifdef HAVE_DLADDR
-#ifdef __USE_GNU
-static void G_GNUC_UNUSED
-bonobo_track_shlib_objects (BonoboObject *object, gpointer shlib_id)
-{
-	static GHashTable *factory_hash = NULL;
-	static gpointer bonobo_lib_dli_fbase = NULL;
-
-	gpointer dli_fbase = NULL;
-	Dl_info info;
-	BonoboShlibFactory *factory;
-
-	if (!factory_hash) { 
-
-		factory_hash = g_hash_table_new (NULL, NULL);
-
-		if (dladdr ("SHLIB_ID", &info))
-			bonobo_lib_dli_fbase = info.dli_fbase;
-	}
-	
-	if (dladdr (shlib_id, &info))
-		dli_fbase = info.dli_fbase;
-	
-	if (dli_fbase && bonobo_lib_dli_fbase &&
-	    (dli_fbase != bonobo_lib_dli_fbase)) {
-		
-		if (BONOBO_IS_SHLIB_FACTORY (object)) {
-			if (g_hash_table_lookup (factory_hash, dli_fbase)) {
-				/* two factories in the same shared library */
-				g_hash_table_remove (factory_hash, dli_fbase);
-			}
-			g_hash_table_insert (factory_hash, dli_fbase, object);
-		} else {
-			if ((factory = g_hash_table_lookup (factory_hash, 
-							    dli_fbase))) {
-			       
-				bonobo_shlib_factory_track_object (factory,
-								   object);
-			}
-		}	
-	}
-}
-#endif
-#endif
-
 /**
  * bonobo_object_add_interface:
  * @object: The BonoboObject to which an interface is going to be added.
@@ -958,8 +906,6 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 	*   Bonobo Objects should not be assembled after they have been
 	*   exposed, or we would be breaking the contract we have with
 	*   the other side.
-	*
-	*   This check is not perfect, but might help some people.
 	*/
 
        ao = object->priv->ao;
@@ -980,13 +926,39 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        for (l = oldao->objs; l; l = l->next) {
 	       BonoboObject *new_if = l->data;
 
-	       /* FIXME: we prolly also want to check for duplicate interfaces */
-               if (!g_list_find (ao->objs, new_if)) {
-                       ao->objs = g_list_prepend (ao->objs, new_if);
+#ifdef BONOBO_AGGREGATE_DEBUG
+	       GList *i;
+	       CORBA_Environment ev;
+	       CORBA_char *new_id;
 
-		       new_if->priv->ao = ao;
-               } else
-		       g_warning ("attempting to merge identical interfaces [%p]", new_if);
+	       CORBA_exception_init (&ev);
+
+	       new_id = ORBit_small_get_type_id (new_if->corba_objref, &ev);
+
+	       for (i = ao->objs; i; i = i->next) {
+		       BonoboObject *old_if = i->data;
+
+		       if (old_if == new_if)
+			       g_error ("attempting to merge identical "
+					"interfaces [%p]", new_if);
+		       else {
+			       CORBA_char *old_id;
+
+			       old_id = ORBit_small_get_type_id (old_if->corba_objref, &ev);
+			       
+			       if (!strcmp (new_id, old_id))
+				       g_error ("Aggregating two BonoboObject that implement "
+						"the same interface '%s' [%p]", new_id, new_if);
+			       CORBA_free (old_id);
+		       }
+	       }
+
+	       CORBA_free (new_id);
+	       CORBA_exception_free (&ev);
+#endif
+
+	       ao->objs = g_list_prepend (ao->objs, new_if);
+	       new_if->priv->ao = ao;
        }
 
        g_assert (newobj->priv->ao == ao);

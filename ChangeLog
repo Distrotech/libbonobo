@@ -1,5 +1,12 @@
 2001-10-18  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.c (bonobo_object_query_local_interface): 
+	remove GType fiddling, just use CORBA_Object_is_a
+	(bonobo_object_add_interface): Add some more powerful, but
+	optional debug to catch people aggregating two instances of
+	the same interface together, or the same two objects etc.
+	(bonobo_track_shlib_objects): remove mess.
+
 	* bonobo/bonobo-moniker-util.c (async_parse_cb): fix
 	the callback; setName has no return value !
 
