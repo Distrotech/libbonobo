@@ -3,9 +3,11 @@
 OAF_Attribute *
 oaf_server_info_attr_find(OAF_ServerInfo *server, const char *attr_name)
 {
+	int i;
+
   for(i = 0; i < server->attrs._length; i++) {
-    if(!strcmp(servant->attrs._buffer[i].name, attr_name))
-      return &servant->attrs._buffer[i];
+    if(!strcmp(server->attrs._buffer[i].name, attr_name))
+      return &server->attrs._buffer[i];
   }
 
   return NULL;
