@@ -1,3 +1,23 @@
+2000-05-01  Darin Adler  <darin@eazel.com>
+
+        * bonobo/bonobo-uih-menu.c (menu_toplevel_remove_radio_menu_item),
+        (menu_toplevel_remove_widgets): Added code to properly handle the case
+	where a radio menu item is going away. We have to keep our list head up
+	to date, since the item might be the first one in the list.
+	(menu_toplevel_remove_data): Removed a related FIXME.
+	
+        * bonobo/bonobo-uih-private.h: Fixed a comment and removed the unused
+	radio_items field from the toolbar struct.
+	
+        * bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_remove_data):
+	Removed copied code inherited from the menu code that made no sense
+	for the toolbar case.
+	
+        * gshell/gshell.c (edit_menu_preferences_cb): Fixed a warning.
+        * tools/bonobrowser/register-new-object.c (register_object),
+        (delete_clist_item): Fixed warnings.
+        * tools/bonobrowser/utils.c (contains_whitespace): Fixed warnings.
+
 2000-05-01  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-object-client.h: re-order.
