@@ -1,5 +1,9 @@
 2001-01-18  Michael Meeks  <michael@helixcode.com>
 
+	* monikers/bonobo-moniker-std.c: Fix rename of factory IID, grr!
+
+2001-01-18  Michael Meeks  <michael@helixcode.com>
+
 	* Version 0.32
 	
 2001-01-18  Michael Meeks  <michael@helixcode.com>
