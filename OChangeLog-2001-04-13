@@ -1,3 +1,9 @@
+2000-12-12  Michael Meeks  <michael@helixcode.com>
+
+	* idl/Makefile.am: Sort IDL.
+
+	* bonobo/Makefile.am (idls): sort and add missing IDL.
+
 2000-12-12  Dietmar Maurer <dietmar@maurer-it.com>
 
 	* bonobo/bonobo-property-bag.[ch]: use BonoboTransient.

@@ -4,24 +4,24 @@ idldir = $(datadir)/idl
 
 idl_DATA =				\
 	Bonobo.idl			\
-	bonobo-unknown.idl		\
 	bonobo-advise.idl		\
-	bonobo-ui.idl			\
-	bonobo-listener.idl		\
-	bonobo-zoomable.idl		\
+	bonobo-desktop.idl		\
 	bonobo-canvas.idl		\
+	bonobo-client-site.idl		\
 	bonobo-context.idl		\
 	bonobo-control.idl		\
-	bonobo-client-site.idl		\
 	bonobo-embeddable.idl		\
 	bonobo-item-container.idl	\
+	bonobo-listener.idl		\
+	bonobo-moniker.idl		\
 	bonobo-persist.idl		\
-	bonobo-storage.idl		\
+	bonobo-print.idl		\
 	bonobo-progressive.idl		\
 	bonobo-property.idl		\
-	bonobo-desktop.idl		\
-	bonobo-print.idl		\
-	bonobo-moniker.idl		\
+	bonobo-storage.idl		\
+	bonobo-ui.idl			\
+	bonobo-unknown.idl		\
+	bonobo-zoomable.idl		\
 	$(NULL)
 
 EXTRA_DIST = $(idl_DATA)
