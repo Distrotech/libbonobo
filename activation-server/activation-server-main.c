@@ -253,6 +253,11 @@ main (int argc, char *argv[])
         Bonobo_ObjectDirectory_register_new 
                 (od, NAMING_CONTEXT_IID, naming_service, ev);
 
+        if (ior_fd < 0 && !server_ac)
+                g_error ("\n\n-- \nThe bonobo-activation-server must be forked by\n"
+                         "libbonobo-activation, and cannot be run itself.\n"
+                         "This is due to us doing client side locking.\n-- \n");
+
         /*
          *     It is no longer useful at all to be a pure
          * ObjectDirectory we have binned that mode of
