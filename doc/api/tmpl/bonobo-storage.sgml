@@ -58,45 +58,6 @@ container_save (SampleApp         *app,
 #BonoboPersist #BonoboPersistStream
 </para>
 
-<!-- ##### MACRO BONOBO_STORAGE_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_STORAGE ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_STORAGE_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
-<!-- ##### MACRO BONOBO_IS_STORAGE ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_IS_STORAGE_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
 <!-- ##### TYPEDEF BonoboStorage ##### -->
 <para>
 

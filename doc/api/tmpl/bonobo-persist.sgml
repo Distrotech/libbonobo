@@ -16,45 +16,6 @@ use by the derived #BonoboPersistStream interface.
 #BonoboPersistStream, #BonoboPersistFile
 </para>
 
-<!-- ##### MACRO BONOBO_PERSIST_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_PERSIST ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_PERSIST_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
-<!-- ##### MACRO BONOBO_IS_PERSIST ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_IS_PERSIST_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
 <!-- ##### TYPEDEF BonoboPersist ##### -->
 <para>
 

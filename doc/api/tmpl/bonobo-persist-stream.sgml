@@ -92,45 +92,6 @@ eog_image_data_construct (EogImageData *image_data)
 
 </para>
 
-<!-- ##### MACRO BONOBO_PERSIST_STREAM_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_PERSIST_STREAM ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_PERSIST_STREAM_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
-<!-- ##### MACRO BONOBO_IS_PERSIST_STREAM ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_IS_PERSIST_STREAM_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
 <!-- ##### STRUCT BonoboPersistStream ##### -->
 <para>
 

@@ -52,46 +52,6 @@ of the helpful wrappers first.
 
 
 
-<!-- ##### MACRO BONOBO_STREAM_TYPE ##### -->
-<para>
-  Returns the GtkType associated with the
-  <classname>BonoboStream</classname> object
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_STREAM ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_STREAM_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
-<!-- ##### MACRO BONOBO_IS_STREAM ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_IS_STREAM_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
 <!-- ##### TYPEDEF BonoboStream ##### -->
 <para>
 

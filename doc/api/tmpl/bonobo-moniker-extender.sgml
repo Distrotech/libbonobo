@@ -96,6 +96,18 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 
 </para>
 
+<!-- ##### STRUCT BonoboMonikerExtender ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF BonoboMonikerExtenderClass ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### USER_FUNCTION BonoboMonikerExtenderFn ##### -->
 <para>
 

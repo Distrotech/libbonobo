@@ -1254,6 +1254,135 @@ GnomeWrapper
 gtk-interfaces
 
 
+<!-- ##### MACRO BONOBO_CANVAS_COMPONENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_CANVAS_COMPONENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_CANVAS_COMPONENT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_CANVAS_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_CANVAS_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_CLIENT_SITE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_CLIENT_SITE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_CLIENT_SITE_TYPE ##### -->
+<para>
+  Returns the GtkType associated with the
+  <classname>BonoboClientSite</classname> object. 
+</para>
+
+
+<!-- ##### MACRO BONOBO_CONTROL ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_CONTROL_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_CONTROL_FRAME ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_CONTROL_FRAME_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_CONTROL_FRAME_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_CONTROL_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_DESKTOP_WINDOW ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_DESKTOP_WINDOW_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_DESKTOP_WINDOW_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_EMBEDDABLE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_EMBEDDABLE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
 <!-- ##### MACRO BONOBO_EMBEDDABLE_FACTORY ##### -->
 <para>
 
@@ -1274,6 +1403,103 @@ gtk-interfaces
 </para>
 
 
+<!-- ##### MACRO BONOBO_EMBEDDABLE_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_IS_CANVAS_COMPONENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_CANVAS_COMPONENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_CANVAS_ITEM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_CLIENT_SITE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_CLIENT_SITE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_CONTROL ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_CONTROL_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_CONTROL_FRAME ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_CONTROL_FRAME_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_DESKTOP_WINDOW ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_DESKTOP_WINDOW_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_EMBEDDABLE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_EMBEDDABLE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
 <!-- ##### MACRO BONOBO_IS_EMBEDDABLE_FACTORY ##### -->
 <para>
 
@@ -1288,6 +1514,419 @@ gtk-interfaces
 
 @k: 
 
+<!-- ##### MACRO BONOBO_IS_ITEM_CONTAINER ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_ITEM_CONTAINER_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_ITEM_HANDLER ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_ITEM_HANDLER_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_MONIKER ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_MONIKER_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_OBJECT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_OBJECT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_OBJECT_CLIENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_OBJECT_CLIENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_PERSIST ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_PERSIST_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_PERSIST_FILE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_PERSIST_FILE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_PERSIST_STREAM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_PERSIST_STREAM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_PLUG ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_PRINT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_PRINT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_PRINT_CLIENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_PRINT_CLIENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_PROGRESSIVE_DATA_SINK ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_PROGRESSIVE_DATA_SINK_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_PROPERTY_BAG ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_PROPERTY_BAG_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_PROPERTY_CONTROL ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_PROPERTY_CONTROL_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_SELECTOR ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_SOCKET ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_STORAGE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_STORAGE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_STREAM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_STREAM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_STREAM_MEM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_STREAM_MEM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_TRANSIENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_TRANSIENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_UI_COMPONENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_UI_COMPONENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_UI_CONTAINER ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_UI_CONTAINER_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_UI_ENGINE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_UI_ENGINE_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_IS_UI_TOOLBAR_BUTTON_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_UI_TOOLBAR_BUTTON_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_IS_UI_TOOLBAR_ICON ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_UI_TOOLBAR_ICON_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_IS_UI_TOOLBAR_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_UI_TOOLBAR_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_IS_UI_TOOLBAR_TOGGLE_BUTTON_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_UI_TOOLBAR_TOGGLE_BUTTON_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_IS_UI_XML ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_UI_XML_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_VIEW ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_VIEW_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_VIEW_FRAME ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_VIEW_FRAME_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_WIDGET ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_WIDGET_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
 <!-- ##### MACRO BONOBO_IS_WIN ##### -->
 <para>
 
@@ -1295,12 +1934,370 @@ gtk-interfaces
 
 @o: 
 
+<!-- ##### MACRO BONOBO_IS_WINDOW ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_WINDOW_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
 <!-- ##### MACRO BONOBO_IS_WIN_CLASS ##### -->
 <para>
 
 </para>
 
 @k: 
+
+<!-- ##### MACRO BONOBO_IS_WRAPPER ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_IS_WRAPPER_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_IS_ZOOMABLE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_ZOOMABLE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_IS_ZOOMABLE_FRAME ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_IS_ZOOMABLE_FRAME_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_ITEM_CONTAINER ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_ITEM_CONTAINER_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_ITEM_CONTAINER_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_ITEM_HANDLER ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_ITEM_HANDLER_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_ITEM_HANDLER_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_MONIKER ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_MONIKER_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_MONIKER_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_OBJECT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_OBJECT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_OBJECT_CLIENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_OBJECT_CLIENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_OBJECT_CLIENT_TYPE ##### -->
+<para>
+Returns the #GtkType for the BonoboObjectClient object.
+</para>
+
+
+<!-- ##### MACRO BONOBO_OBJECT_TYPE ##### -->
+<para>
+Returns the #GtkType for the BonoboObject object.
+</para>
+
+
+<!-- ##### MACRO BONOBO_PERSIST ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_PERSIST_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_PERSIST_FILE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_PERSIST_FILE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_PERSIST_FILE_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_PERSIST_STREAM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_PERSIST_STREAM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_PERSIST_STREAM_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_PERSIST_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_PLUG ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_PLUG_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_PRINT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_PRINT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_PRINT_CLIENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_PRINT_CLIENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_PRINT_CLIENT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_PRINT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_PROGRESSIVE_DATA_SINK ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_PROGRESSIVE_DATA_SINK_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_PROGRESSIVE_DATA_SINK_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_PROPERTY_BAG ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_PROPERTY_BAG_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_PROPERTY_BAG_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_PROPERTY_CONTROL ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_PROPERTY_CONTROL_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_PROPERTY_CONTROL_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_SELECTOR ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_SELECTOR_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_SOCKET ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_SOCKET_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
 
 <!-- ##### MACRO BONOBO_SS_CREATE ##### -->
 <para>
@@ -1327,6 +2324,408 @@ gtk-interfaces
 
 
 <!-- ##### MACRO BONOBO_SS_WRITE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_STORAGE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_STORAGE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_STORAGE_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_STREAM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_STREAM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_STREAM_MEM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_STREAM_MEM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_STREAM_MEM_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_STREAM_TYPE ##### -->
+<para>
+  Returns the GtkType associated with the
+  <classname>BonoboStream</classname> object
+</para>
+
+
+<!-- ##### MACRO BONOBO_TRANSIENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_TRANSIENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_TRANSIENT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_UI_ENGINE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_UI_TOOLBAR_BUTTON_ITEM ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_UI_TOOLBAR_ICON ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_UI_TOOLBAR_ITEM ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_UI_TOOLBAR_TOGGLE_BUTTON_ITEM ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_TYPE_WINDOW ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_UI_COMPONENT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_UI_COMPONENT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_UI_COMPONENT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_UI_CONTAINER ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_UI_CONTAINER_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_UI_CONTAINER_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_UI_ENGINE ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_UI_ENGINE_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_BUTTON_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_BUTTON_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_ICON ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_ICON_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_ICON_GET_CLASS ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_TOGGLE_BUTTON_ITEM ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_UI_TOOLBAR_TOGGLE_BUTTON_ITEM_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_UI_XML ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_UI_XML_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_UI_XML_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_VIEW ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_VIEW_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_VIEW_FRAME ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_VIEW_FRAME_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_VIEW_FRAME_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_VIEW_TYPE ##### -->
+<para>
+   Returns the GtkType associated with the #BonoboView object.
+</para>
+
+
+<!-- ##### MACRO BONOBO_WIDGET ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_WIDGET_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_WIDGET_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_WINDOW ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_WINDOW_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_WRAPPER ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+<!-- ##### MACRO BONOBO_WRAPPER_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+<!-- ##### MACRO BONOBO_X_OBJECT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_X_OBJECT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_X_OBJECT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_ZOOMABLE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_ZOOMABLE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_ZOOMABLE_FRAME ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO BONOBO_ZOOMABLE_FRAME_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### MACRO BONOBO_ZOOMABLE_FRAME_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_ZOOMABLE_TYPE ##### -->
 <para>
 
 </para>
@@ -1454,6 +2853,12 @@ gtk-interfaces
 
 @handle: 
 @user_data: 
+
+<!-- ##### STRUCT BonoboMonikerPrivate ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### SIGNAL BonoboObject::object-gone ##### -->
 <para>
@@ -2930,6 +4335,12 @@ Returns the #GtkType for the GnomeObject object.
 @buffer: 
 @ev: 
 @Returns: 
+
+<!-- ##### MACRO GNOME_TYPE_WRAPPER ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### FUNCTION GNOME_UIHandler_MenuItemNotFound__alloc ##### -->
 <para>

@@ -134,45 +134,6 @@ stop_animations (BrowserHTML html)
 #GtkObject
 </para>
 
-<!-- ##### MACRO BONOBO_OBJECT_TYPE ##### -->
-<para>
-Returns the #GtkType for the BonoboObject object.
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_OBJECT ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_OBJECT_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
-<!-- ##### MACRO BONOBO_IS_OBJECT ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_IS_OBJECT_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
 <!-- ##### TYPEDEF BonoboObjectServant ##### -->
 <para>
   This structure defines the type for BonoboObject-based CORBA servants.

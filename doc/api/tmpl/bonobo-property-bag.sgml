@@ -194,45 +194,6 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 </para>
 
 
-<!-- ##### MACRO BONOBO_PROPERTY_BAG_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_PROPERTY_BAG ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_PROPERTY_BAG_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
-<!-- ##### MACRO BONOBO_IS_PROPERTY_BAG ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_IS_PROPERTY_BAG_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
 <!-- ##### FUNCTION bonobo_property_bag_get_type ##### -->
 <para>
 

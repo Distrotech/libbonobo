@@ -124,29 +124,6 @@ bonobo_control_class_init (BonoboControlClass *klass)
 
 </para>
 
-<!-- ##### MACRO BONOBO_X_OBJECT_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_X_OBJECT ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_X_OBJECT_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
 <!-- ##### MACRO BONOBO_IS_X_OBJECT ##### -->
 <para>
 
