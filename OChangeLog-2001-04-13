@@ -1,5 +1,12 @@
 2000-10-11  Martin Baulig  <baulig@suse.de>
 
+	[FIXME: The test-container doesn't work yet because we transformed
+	the components into Controls.]
+
+	* tests/test-container.c: Use the new UI handler code.
+
+2000-10-11  Martin Baulig  <baulig@suse.de>
+
 	* components/audio-ulaw/bonobo-audio-ulaw.c: Transformed this
 	from a BonoboEmbeddable into a BonoboControl.
 
