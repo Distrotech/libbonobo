@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-11-02 15:36+1100\n"
-"PO-Revision-Date: 2001-08-18 14:29+0200\n"
+"POT-Creation-Date: 2001-11-13 09:27+0100\n"
+"PO-Revision-Date: 2001-11-13 09:34+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -90,93 +90,97 @@ msgid "invalid path to XML user interface element"
 msgstr "neplatná cesta k prvku XML pou¾ívateµského rozhrania"
 
 #: bonobo/bonobo-exception.c:216
+msgid "the requested UI attribute didn't exist"
+msgstr "po¾adovaná vlastnos» UI neexistuje"
+
+#: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
 msgstr "Neznámy príkaz alebo výraz"
 
-#: bonobo/bonobo-exception.c:219
+#: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
 msgstr "Príkaz je necitlivý"
 
-#: bonobo/bonobo-exception.c:223
+#: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
 msgstr "nesprávny typ dát"
 
-#: bonobo/bonobo-exception.c:226
+#: bonobo/bonobo-exception.c:229
 msgid "stream not found"
 msgstr "prúd nenájdený"
 
-#: bonobo/bonobo-exception.c:230
+#: bonobo/bonobo-exception.c:233
 msgid "property not found"
 msgstr "vlastnos» nenájdená"
 
-#: bonobo/bonobo-exception.c:233
+#: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
 msgstr "vlastnos» je neplatného typu"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:239
 msgid "property is read only"
 msgstr "vlastnos» je len na èítanie"
 
-#: bonobo/bonobo-exception.c:239
+#: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
 msgstr "komunikácia s konfiguraènou databázou zlyhala "
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
 msgstr "Rozhranie monikera nemô¾e by» nájdené"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
 msgstr "Èasový limit aktivácie monikera vypr¹al"
 
-#: bonobo/bonobo-exception.c:249
+#: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
 msgstr "Chyba syntaxe v monikeri"
 
-#: bonobo/bonobo-exception.c:252
+#: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker má neznámu predponu"
 
-#: bonobo/bonobo-exception.c:276
+#: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
 msgstr "Chyba pri kontrole chyby; bez výnimky"
 
-#: bonobo/bonobo-exception.c:285
+#: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
 msgstr "V¹eobecná chyba aktivácie bez popisu"
 
 #: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
 msgid "Could not initialize Bonobo"
-msgstr ""
+msgstr "Nemô¾em inicializova» Bonobo"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr ""
+msgstr "HTTP moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "ORB IOR ovládací moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "©tandardná továreò monikera"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "v¹eobecný aktivaèný moniker Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "v¹eobecný dotazovací moniker Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "v¹eobecný moniker továrne 'new'"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr ""
+msgstr "v¹eobecný moniker polo¾iek"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "prúd MonikerExtender"
