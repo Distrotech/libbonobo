@@ -1,15 +1,15 @@
 # traditional Chinese translation for libbonobo.
-# Copyright (C) 2001, 02, 03 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001-2002.
 # Ben Wu <hpwu@redhat.com>, 2002
 # Abel Cheung <maddog@linux.org.hk>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.3.0\n"
-"POT-Creation-Date: 2003-05-06 13:19+0100\n"
-"PO-Revision-Date: 2003-04-29 18:13+0800\n"
-"Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
+"Project-Id-Version: libbonobo 2.3.1\n"
+"POT-Creation-Date: 2003-05-27 23:40+0800\n"
+"PO-Revision-Date: 2003-05-28 00:11+0800\n"
+"Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr ".server 檔案所在的目錄"
 
 #: activation-server/activation-server-main.c:66
 msgid "DIRECTORY"
-msgstr "DIRECTORY (目錄)"
+msgstr "目錄"
 
 #: activation-server/activation-server-main.c:69
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
@@ -46,11 +46,11 @@ msgstr "FD"
 
 #: activation-server/activation-server-main.c:81
 msgid "Query expression to evaluate"
-msgstr "需要作出處理的查詢詞句"
+msgstr "需要進行查詢的表示式"
 
 #: activation-server/activation-server-main.c:81
 msgid "EXPRESSION"
-msgstr "EXPRESSION (詞句)"
+msgstr "表示式"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -62,7 +62,7 @@ msgstr "名稱服務"
 
 #: activation-server/object-directory-activate.c:185
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "仍未可以處理於遠端行程內啟動 shlib 物件的情況"
+msgstr "目前仍然未可以處理在遠端進程內啟動 shlib 物件的情況"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
@@ -78,64 +78,64 @@ msgstr "無法正確讀取 Bonobo Activation 組態檔。請查核該檔案是�
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:891
+#: activation-server/object-directory-corba.c:889
 #, c-format
 msgid "Race condition activating server '%s'"
-msgstr "啟動伺服器‘%s’發生衝突狀態"
+msgstr "啟動伺服器‘%s’時出現衝突狀態"
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr "NULL (空) iid 是不合法的"
+msgstr "NULL 的 iid 是不合法的"
 
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr "iid %s 具有一個 NULL (空)的類別"
+msgstr "iid %s 的類型是 NULL"
 
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr "iid %s 具有一個 NULL (空)的位置"
+msgstr "iid %s 的位置是 NULL"
 
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "iid‘%2$s’具有不合法的字元‘%1$c’"
+msgstr "iid‘%2$s’出現不合法的字元‘%1$c’"
 
 #: activation-server/object-directory-load.c:306
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "屬性‘%s’沒有數值"
+msgstr "屬性‘%s’沒有設定值"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "副行程沒有傳回錯誤訊息，發生了不明的錯誤"
+msgstr "副進程沒有傳回錯誤訊息，發生了不明的錯誤"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "讀取副行程失敗：%s\n"
+msgstr "讀取副進程失敗：%s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:296
 msgid "Couldn't fork a new process"
-msgstr "無法衍生新的行程"
+msgstr "無法衍生新的進程"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:319
 #, c-format
 msgid "Child received signal %u (%s)"
-msgstr "副行程接收到訊號 %u (%s)"
+msgstr "副進程接收到訊號 %u (%s)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:324
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
 msgstr "不明的非嚴重錯誤 (狀況為 %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:387
+#: bonobo-activation/bonobo-activation-fork-server.c:408
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-activation 在設定行程群組 %s 時發生錯誤：%s\n"
+msgstr "bonobo-activation 在指定 %s 的進程群組時發生錯誤：%s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:399
+#: bonobo-activation/bonobo-activation-fork-server.c:420
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "無法執行 %s：%d (%s)\n"
@@ -191,7 +191,7 @@ msgstr "自選 CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
-msgstr "嘗試執行不支援的動作"
+msgstr "嘗試執行不支援的操作程序"
 
 #: bonobo/bonobo-exception.c:157
 msgid "IO Error"
@@ -295,11 +295,11 @@ msgstr "不合規格的屬性類別"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr "只是唯讀的屬性"
+msgstr "屬性是唯讀的"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr "設定資料庫模組失敗"
+msgstr "設定資料庫背景模組失敗"
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
@@ -315,7 +315,7 @@ msgstr "命名器內含有語法錯誤"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "命名器具有不明的前置字"
+msgstr "命名器具有不明的前置字串"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
@@ -329,7 +329,7 @@ msgstr "沒有說明的一般啟動錯誤"
 msgid "Could not initialize Bonobo"
 msgstr "無法初始化 Bonobo"
 
-# If I know more about CORBA stuff..... -- Abel
+# FIXME: Wish if I knew more about CORBA stuff..... -- Abel
 #: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
@@ -359,7 +359,7 @@ msgstr "ORB IOR 命名器處理"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "標準命名器的元件工廠"
+msgstr "標準命名器元件工廠"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
@@ -403,7 +403,7 @@ msgstr "無法初始化 Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "無法為範例 echo 元件建立行程"
+msgstr "無法產生 echo 範例元件的進程"
 
 #: samples/echo/echo-client.c:45
 #, c-format
@@ -412,16 +412,16 @@ msgstr "發生例外處理情況：‘%s’"
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr "無法儲存設定檔。\n"
+msgstr "無法儲存組態檔。\n"
 
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "請確定閣下有足夠權限寫入‘%s’。\n"
+msgstr "請確定您有足夠權限寫入‘%s’。\n"
 
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
-msgstr "完成寫入設定檔。\n"
+msgstr "完成寫入組態檔。\n"
 
 #: utils/bonobo-activation-sysconf.c:80
 #, c-format
@@ -429,7 +429,7 @@ msgid ""
 "configuration file is:\n"
 "    %s\n"
 msgstr ""
-"設定檔是：\n"
+"組態檔是：\n"
 "    %s\n"
 
 #: utils/bonobo-activation-sysconf.c:118
@@ -447,7 +447,7 @@ msgstr "Bonobo-activation 組態檔內包含：\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr "從設定檔內移除的目錄"
+msgstr "從組態檔內移除的目錄"
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
@@ -455,33 +455,15 @@ msgstr "目錄路徑"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr "新增至設定檔內的目錄"
+msgstr "準備新增至組態檔的目錄"
 
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
-msgstr "顯示設定檔內的目錄"
+msgstr "顯示組態檔中的目錄"
 
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr "顯示設定檔的路徑"
-
-#~ msgid "No server corresponding to your query"
-#~ msgstr "無法為閣下的查詢找到相對應的伺服器"
-
-#~ msgid "Query failed: "
-#~ msgstr "查詢失敗："
-
-#~ msgid "Activation failed: "
-#~ msgstr "啟動失敗："
-
-#~ msgid "Could not parse context: "
-#~ msgstr "無法解析文本："
+msgstr "顯示組態檔的路徑"
 
 #~ msgid "Could not activate server: "
 #~ msgstr "無法啟動伺服程式："
-
-#~ msgid "Domain of ObjectDirectory"
-#~ msgstr "物件目錄的範圍"
-
-#~ msgid "Object directory to use when registering servers"
-#~ msgstr "登記伺服器時所使用的物件目錄"
