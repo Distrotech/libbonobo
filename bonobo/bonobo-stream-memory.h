@@ -18,11 +18,6 @@ struct _BonoboStreamMem;
 typedef struct _BonoboStreamMem BonoboStreamMem;
 typedef struct _BonoboStreamMemPrivate BonoboStreamMemPrivate;
 
-#ifndef _BONOBO_STORAGE_MEM_H_
-struct _BonoboStorageMem;
-typedef struct _BonoboStorageMem BonoboStorageMem;
-#endif
-
 #define BONOBO_STREAM_MEM_TYPE        (bonobo_stream_mem_get_type ())
 #define BONOBO_STREAM_MEM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_STREAM_MEM_TYPE, BonoboStreamMem))
 #define BONOBO_STREAM_MEM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_STREAM_MEM_TYPE, BonoboStreamMemClass))

@@ -4,7 +4,8 @@ noinst_PROGRAMS =		\
 	test-properties-client	\
 	test-event-source	\
 	test-object		\
-	test-stream-mem
+	test-stream-mem		\
+	test-storage-mem
 
 INCLUDES =	\
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
@@ -29,6 +30,8 @@ test_object_SOURCES = test-object.c
 test_event_source_SOURCES = test-event-source.c
 
 test_stream_mem_SOURCES = test-stream-mem.c
+
+test_storage_mem_SOURCES = test-storage-mem.c
 
 TESTS_ENVIRONMENT =					\
 	LD_LIBRARY_PATH=$(top_builddir)/bonobo/.libs/	\

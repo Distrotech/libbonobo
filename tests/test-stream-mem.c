@@ -78,6 +78,6 @@ int main (int argc, char *argv [])
 	else
 		printf ("Failed\n");
 	bonobo_object_unref (memstream);	
-	
+
 	return 0;
 }

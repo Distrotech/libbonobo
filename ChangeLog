@@ -1,3 +1,15 @@
+2001-07-25  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* bonobo/bonobo-stream-memory.h: Removed #define BonoboStorageMem
+	that makes no sense now that we have a real thing
+
+2001-07-24  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* tests/test-storage-mem.c: Regression test for BonoboStorageMem
+
+	* bonobo/bonobo-storage-memory.[ch]: New in-memory Bonobo::Storage
+	implementation
+
 2001-07-24  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/Makefile.am: Compile Bonobo_imodule.c into
