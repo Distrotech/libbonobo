@@ -168,7 +168,7 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 		ListenerDesc *desc = (ListenerDesc *) l->data;
 
 		if (desc->event_mask == NULL || 
-		    strstr (desc->event_mask, event_name))
+		    strstr (event_name, desc->event_mask))
 			notify = g_slist_prepend (notify, desc->listener);
 	}
 

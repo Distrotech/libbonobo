@@ -1,3 +1,10 @@
+2001-03-19  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_notify_listeners): we must do
+	strstr(event_name, desc->event_mask), and not
+	strstr(desc->event_mask, event_name). 
+
 2001-03-16  Dietmar Maurer  <dietmar@ximian.com>
 
 	* monikers/bonobo-moniker-extender-file.c
