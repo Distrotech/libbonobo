@@ -1,5 +1,12 @@
 2001-01-26  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-object.c (bonobo_track_shlib_objects): guard
+	with #ifdef HAVE_DLADDR.
+
+	* configure.in (orbit_version): add test for dladdr
+
+2001-01-26  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-sync-toolbar.c (create_dockitem): add missing
 	bracket !
 

@@ -8,10 +8,13 @@
  *
  * Copyright 1999,2000 Helix Code, Inc.
  */
+
 #define _GNU_SOURCE   /* for dladdr */
 
 #include <config.h>
+#ifdef HAVE_DLADDR
 #include <dlfcn.h>
+#endif
 #include <stdio.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
@@ -803,6 +806,7 @@ bonobo_object_init (void)
 	g_atexit (bonobo_object_shutdown);
 }
 
+#ifdef HAVE_DLADDR
 #ifdef __USE_GNU
 static void
 bonobo_track_shlib_objects (BonoboObject *object, gpointer shlib_id)
@@ -845,6 +849,7 @@ bonobo_track_shlib_objects (BonoboObject *object, gpointer shlib_id)
 		}	
 	}
 }
+#endif
 #endif
 
 /* this only works if servant->vepv is not dynamically allocated, which should
