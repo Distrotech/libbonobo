@@ -459,8 +459,13 @@ bonobo_activation_registration_env_free (GSList *reg_env)
 {
 	GSList *l;
 
-	for (l = reg_env; l; l = l->next)
-		g_free (l->data);
+	for (l = reg_env; l; l = l->next) {
+                RegistrationEnvValue *env_value = l->data;
+
+                g_free (env_value->name);
+                g_free (env_value->value);
+                g_free (env_value);
+        }
 
 	g_slist_free (reg_env);
 }
