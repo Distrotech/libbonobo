@@ -1,3 +1,7 @@
+Bonobo 0.25
+
+	* UI related bonobo-control-frame fix (Martin)
+
 Bonobo 0.24
 
 	* cleanup of storage / stream plugins (Dietmar)
@@ -5,6 +9,8 @@ Bonobo 0.24
 	* toolbar control view update by orientation (Jon K Hellan
 
 	* toolbar look update by orientation (Me)
+
+	* verb / listener remove functions (Me)
 
 Bonobo 0.23
 
