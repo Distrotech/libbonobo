@@ -1,3 +1,8 @@
+2002-10-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo/bonobo-exception.c (bonobo_exception_general_error_set):
+	Plug a leak. Fixes #95359.
+	
 2002-09-30  Stanislav Brabec  <sbrabec@suse.cz>
 
 	* configure.in: Added cs to ALL_LINGUAS.

@@ -334,6 +334,7 @@ bonobo_exception_general_error_set (CORBA_Environment *ev,
 
 	err = ORBit_small_alloc (type);
 	err->description = CORBA_string_dup (str);
+	g_free(str);
 
 	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 			     ex_Bonobo_GeneralError, err);
