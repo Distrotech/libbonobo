@@ -1,3 +1,12 @@
+2001-06-15  Dietmar Maurer  <dietmar@ximian.com>
+
+	* monikers/bonobo-stream-cache.c (cache_setInfo): return void
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add): return void
+
+	* bonobo/bonobo-moniker.c (impl_set_parent): don't return a value,
+	because function is void.
+
 2001-06-13  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
 
 	* configure.in: added "sk" for Slovak to $ALL_LINGUAS

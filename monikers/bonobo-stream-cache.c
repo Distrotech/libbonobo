@@ -204,7 +204,7 @@ cache_setInfo (PortableServer_Servant          servant,
 	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (
 		bonobo_object (servant));
 	
-	return Bonobo_Stream_setInfo (stream_cache->priv->cs, info, mask, ev);
+	Bonobo_Stream_setInfo (stream_cache->priv->cs, info, mask, ev);
 }
 
 static void
