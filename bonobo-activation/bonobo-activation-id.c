@@ -8,6 +8,19 @@ oaf_actinfo_new(void)
   return g_new0(OAFActivationInfo, 1);
 }
 
+OAFActivationInfo *
+oaf_servinfo_to_actinfo(const OAF_ServerInfo *servinfo)
+{
+  OAFActivationInfo *retval = oaf_actinfo_new();
+
+  retval->iid = g_strdup(servinfo->iid);
+  retval->user = g_strdup(servinfo->username);
+  retval->host = g_strdup(servinfo->hostname);
+  retval->domain = g_strdup(servinfo->domain);
+
+  return retval;
+}
+
 void
 oaf_actinfo_free(OAFActivationInfo *actinfo)
 {

@@ -17,6 +17,7 @@ typedef struct {
 } OAFActivationInfo;
 
 OAF_ActivationID oaf_actinfo_stringify(const OAFActivationInfo *actinfo);
+OAFActivationInfo *oaf_servinfo_to_actinfo(const OAF_ServerInfo *servinfo);
 OAFActivationInfo *oaf_actid_parse(const OAF_ActivationID actid);
 OAFActivationInfo *oaf_actinfo_new(void);
 void oaf_actinfo_free(OAFActivationInfo *actinfo);
