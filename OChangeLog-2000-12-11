@@ -1,3 +1,9 @@
+2000-10-14  Cody Russell  <bratsche@gnome.org>
+
+	* bonobo/bonobo-ui-toolbar-button-item.c: Leave the icon item's
+	alpha threshold at default rather than setting to 0.  Changing it
+	to 0 was causing an ugly clipping problem on pixmap themes.
+
 2000-10-14  Martin Baulig  <baulig@suse.de>
 
 	* gshell/ui.xml: Renamed this to gshell-ui.xml.
