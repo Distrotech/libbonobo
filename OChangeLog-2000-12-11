@@ -1,5 +1,32 @@
 2000-09-13  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-win.c (update_status): Make the control a custom
+	widget so it doesn't get trashed.
+
+	* bonobo/bonobo-ui-xml.c (override_node_with): Add special case
+	to allow a merge that doesn't update the associated ID; for
+	read / modify / write of attributes.
+
+	* bonobo/bonobo-win.c (win_component_cmp_name): return NULL for
+	blank names.
+
+	* bonobo/bonobo-win.c (bonobo_win_register_component),
+	(bonobo_win_object_get, bonobo_win_object_set): tolerate
+	NULL objects.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_toolbar_item_set_pixmap):
+	fix variously.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_set_prop),
+	(bonobo_ui_component_get_prop): implement.
+	(bonobo_ui_component_set): tolerate NULL components.
+
+	* bonobo/app.c (cb_set_state): add to test it (main): update.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_menu_get_label): stub.
+
+2000-09-13  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_build_path_v),
 	(bonobo_ui_handler_build_path): cut and paste for nautilus.
 	(path_escape_forward_slashes): cripple; faults on '/'s in paths.
