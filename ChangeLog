@@ -1,3 +1,11 @@
+2003-12-24  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/test-uniqapp.c (message_cb, main): Add a string argument
+	to the test message.
+
+	* bonobo/bonobo-arg.c (bonobo_arg_from_gvalue_alloc): Add missing
+	initialization of arg->_type and arg->_value for the G_TYPE_STRING case.
+
 2003-12-18  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* activation-server/object-directory-corba.c

@@ -484,6 +484,8 @@ case G_TYPE_##gtype:									\
 #undef FROM_GVALUE_FN
 
 	case G_TYPE_STRING:
+		arg->_type = TC_CORBA_string;
+		arg->_value = ORBit_alloc_tcval (TC_CORBA_string, 1);
 		*((CORBA_char **)arg->_value) =
 			CORBA_string_dup (g_value_get_string (value));
 		arg->_release = CORBA_TRUE;
