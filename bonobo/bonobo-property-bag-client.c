@@ -13,6 +13,17 @@ static BonoboPropertyBagClient *
 bonobo_property_bag_client_construct (BonoboPropertyBagClient *pbc,
 				      Bonobo_PropertyBag corba_pb)
 {
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+	Bonobo_Unknown_ref (corba_pb, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		bonobo_object_unref (BONOBO_OBJECT (pbc));
+		CORBA_exception_free (&ev);
+		return NULL;
+	}
+	CORBA_exception_free (&ev);
+	
 	pbc->corba_pb = corba_pb;
 
 	return BONOBO_PROPERTY_BAG_CLIENT (

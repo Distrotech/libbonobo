@@ -1,5 +1,11 @@
 2000-07-18  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_construct):
+	add a ref on the poor property bag we are swallowing, so when we are unreffed
+	we are back to where we started.
+
+2000-07-18  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-plug.c (bonobo_plug_key_press_event): Forward unhandled
 	events on to socket.
 
