@@ -1,3 +1,13 @@
+2003-02-05  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/api/libbonobo-docs.sgml: Include monikers-overview.xml. This
+	file is a simple conversion of doc/Monikers from bonobo-1.x
+	distribution. It was written quite some time ago, but most of it
+	still applies and provides fascinating insight on bonobo moniker
+	architecture.
+
+	* doc/api/Makefile.am (content_files): Added monikers-overview.xml.
+
 2003-02-03  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* doc/api/libbonobo.hierarchy: Removed from version control, since
