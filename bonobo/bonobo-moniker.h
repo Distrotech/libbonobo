@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 typedef struct _BonoboMonikerPrivate BonoboMonikerPrivate;
 
@@ -88,6 +88,6 @@ void                     bonobo_moniker_set_case_sensitive  (BonoboMoniker     *
 							     gboolean           sensitive);
 gboolean                 bonobo_moniker_get_case_sensitive  (BonoboMoniker     *moniker);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_MONIKER_H_ */

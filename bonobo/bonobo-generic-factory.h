@@ -10,13 +10,13 @@
 #ifndef _BONOBO_GENERIC_FACTORY_H_
 #define _BONOBO_GENERIC_FACTORY_H_
 
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 #include <gobject/gobject.h>
 #include <bonobo/bonobo-object.h>
 #include <liboaf/oaf.h>
 #include <liboaf/liboaf.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
  
 #define BONOBO_GENERIC_FACTORY_TYPE        (bonobo_generic_factory_get_type ())
 #define BONOBO_GENERIC_FACTORY(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_GENERIC_FACTORY_TYPE, BonoboGenericFactory))
@@ -121,6 +121,6 @@ int main (int argc, char *argv [])                                            \
 	return 0;                                                             \
 }                                                                             
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif

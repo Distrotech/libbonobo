@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-moniker.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #define BONOBO_MONIKER_SIMPLE_TYPE        (bonobo_moniker_simple_get_type ())
 #define BONOBO_MONIKER_SIMPLE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_MONIKER_SIMPLE_TYPE, BonoboMonikerSimple))
@@ -49,7 +49,7 @@ BonoboMoniker *bonobo_moniker_simple_new       (const char                  *nam
 						BonoboMonikerSimpleResolveFn resolve_fn);
 
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_MONIKER_SIMPLE_H_ */
 

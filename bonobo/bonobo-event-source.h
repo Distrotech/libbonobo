@@ -13,7 +13,7 @@
 #include <bonobo/bonobo-xobject.h>
 #include <bonobo/bonobo-listener.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #define BONOBO_EVENT_SOURCE_TYPE        (bonobo_event_source_get_type ())
 #define BONOBO_EVENT_SOURCE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_EVENT_SOURCE_TYPE, BonoboEventSource))
@@ -62,7 +62,7 @@ bonobo_event_source_client_add_listener                 (Bonobo_Unknown         
 /* You don't want this routine */
 void               bonobo_event_source_ignore_listeners (BonoboEventSource *event_source);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_EVENT_SOURCE_H_ */
 

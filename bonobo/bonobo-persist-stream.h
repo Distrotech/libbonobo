@@ -13,7 +13,7 @@
 
 #include <bonobo/bonobo-persist.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #define BONOBO_PERSIST_STREAM_TYPE        (bonobo_persist_stream_get_type ())
 #define BONOBO_PERSIST_STREAM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_STREAM_TYPE, BonoboPersistStream))
@@ -95,6 +95,6 @@ BonoboPersistStream *bonobo_persist_stream_construct (BonoboPersistStream       
 						      BonoboPersistStreamTypesFn types_fn,
 						      void                      *closure);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_PERSIST_STREAM_H_ */

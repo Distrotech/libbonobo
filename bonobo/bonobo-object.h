@@ -11,11 +11,11 @@
 #ifndef _BONOBO_OBJECT_H_
 #define _BONOBO_OBJECT_H_
 
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 #include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #undef BONOBO_OBJECT_DEBUG
  
@@ -143,6 +143,6 @@ gboolean       bonobo_type_setup  (GType             type,
 				   int               epv_struct_offset);
 						
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif

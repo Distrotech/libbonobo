@@ -14,9 +14,9 @@
 
 #include "config.h"
 #include <glib.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnome/bonobo-defs.h>
 #define GNOME_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
-#include <libgnome/gnome-i18n.h>
+#include <libgnome/bonobo-i18n.h>
 #include <libgnome/gnome-mime.h>
 #include "bonobo-object-directory.h"
 #include <liboaf/liboaf.h>

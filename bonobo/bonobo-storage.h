@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 /* Constants to make it easier to safely select drivers */
 #define BONOBO_IO_DRIVER_FS  "fs"
@@ -112,7 +112,7 @@ BonoboStream *bonobo_stream_open (const char *driver,
 				  CORBA_Environment *opt_ev);
 
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_STORAGE_H_ */
 

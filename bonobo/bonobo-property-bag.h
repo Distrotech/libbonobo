@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 typedef struct _BonoboPropertyBagPrivate BonoboPropertyBagPrivate;
 typedef struct _BonoboPropertyBag        BonoboPropertyBag;
@@ -131,6 +131,6 @@ void                      bonobo_property_bag_notify_listeners (BonoboPropertyBa
 /* A private function, only to be used by persistence implementations. */
 GList                    *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* ! __BONOBO_PROPERTY_BAG_H__ */

@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-moniker.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #define BONOBO_MONIKER_EXTENDER_TYPE        (bonobo_moniker_extender_get_type ())
 #define BONOBO_MONIKER_EXTENDER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_MONIKER_EXTENDER_TYPE, BonoboMonikerExtender))
@@ -56,6 +56,6 @@ Bonobo_Unknown         bonobo_moniker_use_extender      (const gchar            
 							 const CORBA_char            *requested_interface,
 							 CORBA_Environment           *ev);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_MONIKER_EXTENDER_H_ */

@@ -23,17 +23,10 @@
   @NOTATION@
  */
 
-#ifndef LIBBONOBOINIT_H
-#define LIBBONOBOINIT_H
-
-#include <libgnomebase/gnome-defs.h>
-#include <libgnomebase/gnome-program.h>
-
-BEGIN_GNOME_DECLS
-
-extern GnomeModuleInfo gnome_oaf_module_info;
-extern GnomeModuleInfo libbonobo_module_info;
-
-END_GNOME_DECLS
-
-#endif /* LIBGNOMEINIT_H */
+#ifdef __cplusplus 
+#define BEGIN_BONOBO_DECLS extern "C" {
+#define END_BONOBO_DECLS }
+#else
+#define BEGIN_BONOBO_DECLS
+#define END_BONOBO_DECLS
+#endif

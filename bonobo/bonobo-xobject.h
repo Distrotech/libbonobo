@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-object.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 /* Compatibility code */
 #define BONOBO_X_OBJECT_TYPE        BONOBO_OBJECT_TYPE
@@ -92,6 +92,6 @@ prefix##_get_type (void)                                                      \
 	return type;                                                          \
 }
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif

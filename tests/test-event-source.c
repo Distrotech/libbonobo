@@ -1,5 +1,6 @@
 #include <config.h>
-#include <libbonobo.h>
+#include <stdio.h>
+#include <bonobo/libbonobo.h>
 
 static int idle_id, em_count, ev_count;
 
@@ -31,7 +32,7 @@ run_tests ()
 
 	CORBA_exception_init (&ev);
 
-	gtk_idle_remove (idle_id);
+	g_source_remove (idle_id);
 
 	value = bonobo_arg_new (BONOBO_ARG_LONG);
 
@@ -73,7 +74,7 @@ run_tests ()
 	bonobo_event_source_notify_listeners (es, "a/test1:xyz", value, &ev); 
 	CHECK_RESULT (&ev, 8, 2);
 
-	gtk_main_quit ();
+	bonobo_main_quit ();
 }
 
 int
@@ -83,7 +84,7 @@ main (int argc, char **argv)
 
 	CORBA_exception_init (&ev);
 
-	gnome_init ("test-event-source", "0.0", argc, argv);
+	g_type_init (G_TYPE_DEBUG_NONE);
 
 	if ((oaf_init (argc, argv)) == NULL)
 		g_error ("Cannot init oaf");
@@ -91,7 +92,7 @@ main (int argc, char **argv)
 	if (bonobo_init (NULL, NULL, NULL) == FALSE)
 		g_error ("Cannot init bonobo");
 	
-	idle_id = gtk_idle_add ((GtkFunction) run_tests, NULL);
+	idle_id = g_idle_add ((GSourceFunc) run_tests, NULL);
 
 	bonobo_main ();
 

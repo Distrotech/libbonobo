@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 typedef struct _BonoboRunningContextPrivate BonoboRunningContextPrivate;
 
@@ -53,7 +53,7 @@ void        bonobo_running_context_at_exit_unref   (CORBA_Object object);
 #	define           bonobo_running_context_ignore_object(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,2);}G_STMT_END
 #endif
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_RUNNING_CONTEXT_H_ */
 

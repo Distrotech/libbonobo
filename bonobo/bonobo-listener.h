@@ -14,7 +14,7 @@
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #define BONOBO_LISTENER_TYPE        (bonobo_listener_get_type ())
 #define BONOBO_LISTENER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_LISTENER_TYPE, BonoboListener))
@@ -63,7 +63,7 @@ char           *bonobo_event_subtype      (const char *event_name);
 char           *bonobo_event_kind         (const char *event_name);
 char           *bonobo_event_idl_path     (const char *event_name);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_LISTENER_H_ */
 

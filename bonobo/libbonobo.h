@@ -12,9 +12,9 @@
 #ifndef LIBBONOBO_H
 #define LIBBONOBO_H 1
 
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-moniker.h>
@@ -48,6 +48,6 @@ BEGIN_GNOME_DECLS
 
 #include <bonobo/bonobo-storage.h>
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* BONOBO_H */

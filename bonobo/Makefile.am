@@ -12,7 +12,6 @@ INCLUDES = \
 	$(GLIB_CFLAGS)					\
 	$(ORBIT_CFLAGS)					\
 	$(OAF_CFLAGS)					\
-	$(LIBGNOMEBASE_CFLAGS)				\
 	-DPLUGIN_DIR=\""$(PLUGIN_DIR)"\"		\
         -DBONOBO_LIBDIR=\""$(libdir)"\" 		\
         -DBONOBO_DATADIR=\""$(datadir)"\" 		\
@@ -59,7 +58,7 @@ $(CORBA_SOURCE): $(idls)
 lib_LTLIBRARIES = libbonobo-2.la
 
 libbonobo_2_la_LIBADD = \
-	$(GLIB_LIBS) $(ORBIT_LIBS) $(OAF_LIBS) $(LIBGNOMEBASE_LIBS)
+	$(GLIB_LIBS) $(ORBIT_LIBS) $(OAF_LIBS)
 
 libbonoboincludedir = $(includedir)/gnome/2/bonobo
 
@@ -102,10 +101,10 @@ libbonoboinclude_HEADERS =		\
 	bonobo-stream-memory.h		\
 	bonobo-transient.h		\
 	bonobo-xobject.h		\
-	libbonobo-init.h		\
+	bonobo-defs.h			\
+	bonobo-i18n.h			\
 	libbonobo.h			\
-	bonobo-marshal.h		\
-	libbonobo-init.h
+	bonobo-marshal.h
 
 libbonobo_2_la_SOURCES =		\
 	$(libbonoboinclude_HEADERS)	\
@@ -142,8 +141,7 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-property.c		\
 	bonobo-property-bag.c		\
 	bonobo-property-bag-client.c	\
-	bonobo-running-context.c	\
-	libbonobo-init.c
+	bonobo-running-context.c
 
 BUILT_SOURCES = \
 	bonobo-marshal.c		\

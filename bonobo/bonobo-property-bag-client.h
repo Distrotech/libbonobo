@@ -10,13 +10,13 @@
 #define __BONOBO_PROPERTY_BAG_CLIENT_H__
 
 #include <stdarg.h>
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-stream.h>
 #include <bonobo/bonobo-property-bag.h>
 #include <bonobo/bonobo-object-client.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 GList			*bonobo_property_bag_client_get_properties     (Bonobo_PropertyBag       pb,
 									CORBA_Environment       *ev);
@@ -142,6 +142,6 @@ BonoboPropertyFlags	 bonobo_property_bag_client_get_flags	         (Bonobo_Prope
 									  const char              *propname,
 									  CORBA_Environment       *ev);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* ! ___BONOBO_PROPERTY_BAG_CLIENT_H__ */

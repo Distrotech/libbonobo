@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-storage.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 struct _BonoboStreamMem;
 typedef struct _BonoboStreamMem BonoboStreamMem;
@@ -65,6 +65,6 @@ BonoboStream    *bonobo_stream_mem_create     (const char       *buffer,
 const char      *bonobo_stream_mem_get_buffer (BonoboStreamMem  *stream_mem);
 size_t           bonobo_stream_mem_get_size   (BonoboStreamMem  *stream_mem);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_STREAM_MEM_H_ */

@@ -13,9 +13,9 @@
 
 #include <glib.h>
 #include <orbit/orbit.h>
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 typedef enum {
 	BONOBO_ASYNC_IN  = 0x1,
@@ -54,7 +54,7 @@ void bonobo_async_invoke    (const BonoboAsyncMethod *method,
 
 GIOPRecvBuffer *bonobo_async_handle_get_recv (BonoboAsyncReply *reply);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_ASYNC_H_ */
 

@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #define BONOBO_PROGRESSIVE_DATA_SINK_TYPE        (bonobo_progressive_data_sink_get_type ())
 #define BONOBO_PROGRESSIVE_DATA_SINK(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PROGRESSIVE_DATA_SINK_TYPE, BonoboProgressiveDataSink))
@@ -83,7 +83,7 @@ BonoboProgressiveDataSink *bonobo_progressive_data_sink_construct       (BonoboP
 									 BonoboProgressiveDataSinkSetSizeFn set_size_fn,
 									 void                              *closure);
 							       
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_PROGRESSIVE_DATA_SINK_H_ */
 

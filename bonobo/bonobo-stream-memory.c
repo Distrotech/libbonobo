@@ -10,7 +10,7 @@
 #include <config.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 #include <bonobo/bonobo-stream-memory.h>
 #include <errno.h>
 

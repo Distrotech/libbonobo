@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 #define BONOBO_PERSIST_TYPE        (bonobo_persist_get_type ())
 #define BONOBO_PERSIST(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_TYPE, BonoboPersist))
@@ -43,6 +43,6 @@ GType                         bonobo_persist_get_type               (void);
 Bonobo_Persist_ContentTypeList *bonobo_persist_generate_content_types (int num,
 								       ...);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_PERSIST_H_ */

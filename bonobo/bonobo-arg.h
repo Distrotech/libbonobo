@@ -13,10 +13,10 @@
 #define __BONOBO_ARG_H__
 
 #include <bonobo/Bonobo.h>
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 #include <gobject/gtype.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 typedef CORBA_any      BonoboArg;
 typedef CORBA_TypeCode BonoboArgType;
@@ -88,6 +88,6 @@ gboolean      bonobo_arg_type_is_equal (BonoboArgType      a,
 					BonoboArgType      b,
 					CORBA_Environment *opt_ev);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* ! __BONOBO_ARG_H__ */

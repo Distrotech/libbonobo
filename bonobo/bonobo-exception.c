@@ -8,9 +8,9 @@
  */
 #include <config.h>
 #include <glib.h>
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 #define GNOME_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
-#include <libgnomebase/gnome-i18n.h>
+#include <bonobo/bonobo-i18n.h>
 #include <bonobo/bonobo-exception.h>
 
 typedef enum {

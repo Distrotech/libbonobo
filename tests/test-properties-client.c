@@ -166,7 +166,7 @@ create_bag_client (void)
 
 	bonobo_object_release_unref (pb, NULL);
 
-	gtk_main_quit ();
+	bonobo_main_quit ();
 
 	return FALSE;
 }
@@ -182,19 +182,9 @@ main (int argc, char **argv)
 
 	CORBA_exception_init (&ev);
 
-#if USING_OAF
-        gnome_init_with_popt_table(
-		"test property client", "0.0", argc, argv,
-		oaf_popt_options, 0, NULL);
+	g_type_init (G_TYPE_DEBUG_NONE);
 
 	orb = oaf_init (argc, argv);
-#else
-	gnome_CORBA_init_with_popt_table (
-		"test property client", "0.0", &argc, argv,
-		NULL, 0, NULL, 0, &ev);
-
-	orb = gnome_CORBA_ORB ();
-#endif
 
 	if (!bonobo_init (orb, NULL, NULL))
 		g_error ("Could not initialize Bonobo");
@@ -206,7 +196,7 @@ main (int argc, char **argv)
 		return 1;
 	}
 
-	gtk_idle_add ((GtkFunction) create_bag_client, NULL);
+	g_idle_add ((GSourceFunc) create_bag_client, NULL);
 
 	bonobo_main ();
 

@@ -1,7 +1,7 @@
 #include <config.h>
 #include <stdio.h>
-#include <gtk/gtk.h>
-#include <libbonobo.h>
+#include <gobject/gsignal.h>
+#include <bonobo/libbonobo.h>
 
 CORBA_ORB	    orb;
 BonoboPropertyBag  *pb;
@@ -262,9 +262,9 @@ print_props (void)
 }
 
 static void
-quit_main (GtkObject *object, gpointer dummy)
+quit_main (GObject *object)
 {
-	gtk_main_quit ();
+	bonobo_main_quit ();
 }
 
 int
@@ -272,19 +272,9 @@ main (int argc, char **argv)
 {
 	CORBA_exception_init (&ev);
 
-#if USING_OAF
-        gnome_init_with_popt_table(
-		"test property server", "0.0", argc, argv,
-		oaf_popt_options, 0, NULL);
+	g_type_init (G_TYPE_DEBUG_NONE);
 
 	orb = oaf_init (argc, argv);
-#else
-	gnome_CORBA_init_with_popt_table (
-		"test property server", "0.0", &argc, argv,
-		NULL, 0, NULL, GNORBA_INIT_SERVER_FUNC, &ev);
-
-	orb = gnome_CORBA_ORB ();
-#endif
 
 	if (!bonobo_init (orb, NULL, NULL))
 		g_error ("Could not initialize Bonobo");
@@ -293,8 +283,9 @@ main (int argc, char **argv)
 
 	print_props ();
 
-	gtk_signal_connect (GTK_OBJECT (bonobo_context_running_get ()),
-			    "last_unref", GTK_SIGNAL_FUNC (quit_main), NULL);
+	g_signal_connect_data (G_OBJECT (bonobo_context_running_get ()),
+			       "last_unref", G_CALLBACK (quit_main), NULL,
+			       NULL, FALSE, FALSE);
 
 	bonobo_main ();
 

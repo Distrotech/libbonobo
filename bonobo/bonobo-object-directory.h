@@ -14,11 +14,11 @@
 #define __BONOBO_OBJECT_DIRECTORY_H__
 
 #include <glib.h>
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 #include <orbit/orbit.h>
 #include <ORBitservices/CosNaming.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 /*
  * This file used to provide a compatibility abstraction for the
@@ -63,7 +63,7 @@ char                *bonobo_directory_find_for_file (const char  *fname,
 						     const char **required_ids,
 						     char       **error);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* __BONOBO_OBJECT_DIRECTORY_H__ */
 

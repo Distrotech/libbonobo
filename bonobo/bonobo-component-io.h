@@ -5,7 +5,7 @@
 #include <bonobo/bonobo-embeddable.h>
 #include <bonobo/bonobo-storage.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 BonoboEmbeddable *bonobo_embeddable_load             (BonoboStorage *storage,
 							 const char *interface,
@@ -23,6 +23,6 @@ int                bonobo_embeddable_save_to_stream   (BonoboEmbeddable *bonobo_
 
 char              *gnome_get_class_id_from_file         (const char *filename);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_EMBEDDABLE_IO_H_ */

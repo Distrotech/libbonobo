@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 typedef struct _BonoboActivationContextPrivate BonoboActivationContextPrivate;
 
@@ -30,7 +30,7 @@ typedef struct {
 
 BonoboObject *bonobo_activation_context_new (void);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_ACTIVATION_CONTEXT_H_ */
 

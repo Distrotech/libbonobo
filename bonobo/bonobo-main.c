@@ -22,7 +22,9 @@
 #include <gmain.h>
 #include <liboaf/liboaf.h>
 
+#if 0
 #include <X11/Xlib.h>
+#endif
 
 CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;
@@ -68,6 +70,7 @@ bonobo_poa_manager (void)
 	return __bonobo_poa_manager;
 }
 
+#if 0
 static int (*gdk_x_error) (Display *, XErrorEvent *);
 
 static int
@@ -124,6 +127,7 @@ bonobo_setup_x_error_handler (void)
 
 	gdk_x_error = XSetErrorHandler (bonobo_x_error_handler);
 }
+#endif
 
 /**
  * bonobo_init:

@@ -14,7 +14,7 @@
 
 #define BONOBO_STORAGE_VERSION "1.0"
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
 
 typedef struct          _StoragePlugin         StoragePlugin;
 typedef gint           (*StoragePluginInitFn) (StoragePlugin *plugin);
@@ -47,6 +47,6 @@ extern gint init_storage_plugin (StoragePlugin *plugin);
 void           bonobo_storage_load_plugins (void);
 StoragePlugin *bonobo_storage_plugin_find  (const gchar *name);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif /* _BONOBO_STORAGE_PLUGIN_H_ */

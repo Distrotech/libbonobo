@@ -1,5 +1,19 @@
 2001-04-18  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/*.[ch]: Use <bonobo/bonobo-defs.h> and
+	<bonobo/bonobo-i18n.h> instead of the libgnomebase ones.
+
+	* bonobo/bonobo-main.c (bonobo_setup_x_error_handler):
+	#ifdef'ed this out.
+
+	* bonobo/bonobo-defs.h, bonobo/bonobo-i18n.h: New files.
+
+	* bonobo/libbonobo-init.[ch]: Removed.
+
+	* configure.in: Don't depend on libgnomebase.
+
+2001-04-18  Martin Baulig  <baulig@suse.de>
+
 	* configure.in: Depend on ORBit-CosNaming-2 and include it in
 	the ORBit check.
 

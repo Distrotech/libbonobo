@@ -12,11 +12,11 @@
 #ifndef _BONOBO_ITEM_HANDLER_H_
 #define _BONOBO_ITEM_HANDLER_H_
 
-#include <libgnomebase/gnome-defs.h>
+#include <bonobo/bonobo-defs.h>
 #include <gobject/gobject.h>
 #include <bonobo/bonobo-xobject.h>
 
-BEGIN_GNOME_DECLS
+BEGIN_BONOBO_DECLS
  
 #define BONOBO_ITEM_HANDLER_TYPE        (bonobo_item_handler_get_type ())
 #define BONOBO_ITEM_HANDLER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_ITEM_HANDLER_TYPE, BonoboItemHandler))
@@ -71,7 +71,7 @@ typedef struct {
 GSList *bonobo_item_option_parse (const char *option_string);
 void    bonobo_item_options_free (GSList *options);
 
-END_GNOME_DECLS
+END_BONOBO_DECLS
 
 #endif
 
