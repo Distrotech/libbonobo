@@ -1,3 +1,8 @@
+2000-08-11  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/Makefile.am: Install bonobo-moniker-util.h to avoid
+	breaking build of bonobo-using apps.
+
 2000-08-12  Michael Meeks  <michael@helixcode.com>
 
 	* Every instance of #if USING_OAF removed
