@@ -1,5 +1,15 @@
 2001-02-09  Michael Meeks  <michael@ximian.com>
 
+	* Version 0.36
+	
+2001-02-09  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: kill bonobo-idl
+
+	* Makefile.am: kill bonobo-idl
+	
+2001-02-09  Michael Meeks  <michael@ximian.com>
+
 	* s/BONOBO_GTK_TYPE_FUNC/BONOBO_X_TYPE_FUNC/
 	
 2001-02-09  Michael Meeks  <michael@ximian.com>

@@ -1,8 +1,10 @@
-Bonobo 0.37
+Bonobo 0.36
 
 	* Convert print to BonoboXObject (Me) - forgot it.
 
 	* Fix flicker issue (Me)
+
+	* Remove bonobo-idl (Me)
 
 	* Use nice type creation macro (Dietmar)
 
