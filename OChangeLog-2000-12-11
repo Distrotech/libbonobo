@@ -1,5 +1,9 @@
 2000-10-11  Martin Baulig  <baulig@suse.de>
 
+	* gshell/controls.c: Add support for PersistStream.
+
+2000-10-11  Martin Baulig  <baulig@suse.de>
+
 	[FIXME: The test-container doesn't work yet because we transformed
 	the components into Controls.]
 
