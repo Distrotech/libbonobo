@@ -2,7 +2,9 @@
 # Makefile for the sample Echo server/client Bonobo components.
 #
 
-Bonobo_Sample_Echo.server.in: Bonobo_Sample_Echo.server.in.in
+server_dot_in=Bonobo_Sample_Echo.server.in
+
+$(server_dot_in): $(server_dot_in).in
 	sed -e "s|\@prefix\@|$(prefix)|" $< > $@
 
 samplesdir = $(prefix)/lib/bonobo-2.0/samples
@@ -41,7 +43,7 @@ $(ECHO_CORBA_GENERATED): Bonobo_Sample_Echo.idl $(ORBIT_IDL)
 	$(ORBIT_IDL) -I$(top_srcdir)/idl -I $(BONOBO_ACTIVATION_IDL_DIR) $(srcdir)/Bonobo_Sample_Echo.idl
 
 serverdir = $(libdir)/bonobo/servers
-server_in_files = Bonobo_Sample_Echo.server.in
+server_in_files = $(server_dot_in)
 server_DATA = $(server_in_files:.server.in=.server)
 
 @INTLTOOL_SERVER_RULE@
@@ -49,7 +51,7 @@ server_DATA = $(server_in_files:.server.in=.server)
 idldir    = $(datadir)/idl/bonobo-2.0
 idl_DATA  = Bonobo_Sample_Echo.idl
 
-EXTRA_DIST = $(server_in_files) $(server_DATA) $(idl_DATA)
+EXTRA_DIST = $(server_DATA) $(idl_DATA) $(server_dot_in)
 
 INCLUDES = 						\
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \

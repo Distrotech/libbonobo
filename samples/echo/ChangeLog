@@ -1,3 +1,7 @@
+2001-12-10  jacob berkman  <jacob@ximian.com>
+
+	* Makefile.am: dist the .server.in.in file
+
 2001-10-29  jacob berkman  <jacob@ximian.com>
 
 	* Makefile.am: s/XML_I18N_TOOLS/INTLTOOL/
