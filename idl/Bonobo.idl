@@ -5,7 +5,7 @@
  *     Miguel de Icaza (miguel@gnu.org)
  *
  */
-
+#include <gnome-factory.idl>
 #include "gnome-object.idl"
 
 #include "base.idl"

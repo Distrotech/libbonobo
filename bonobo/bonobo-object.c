@@ -144,7 +144,8 @@ static void
 gnome_object_destroy (GtkObject *object)
 {
 	GnomeObject *gnome_object = GNOME_OBJECT (object);
-	
+
+	gnome_object_drop_binding (gnome_object);
 	if (gnome_object->object != CORBA_OBJECT_NIL)
 		CORBA_Object_release (gnome_object->object, &gnome_object->ev);
 	CORBA_exception_free (&gnome_object->ev);
