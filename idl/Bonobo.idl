@@ -6,8 +6,7 @@
  *
  */
 
-module GNOME {
-};
+#include "gnome-object.idl"
 
 module GNOME {
 

@@ -14,7 +14,7 @@
  *
  */
 
-interface Stream {
+interface Stream : GNOME::Object {
 	/**
 	 * read:
 	 * @count:  number of bytes to read
@@ -78,7 +78,7 @@ interface Stream {
 	 */
 };
 
-interface Storage {
+interface Storage : GNOME::Object {
 
 	typedef long OpenMode;
 	const OpenMode READ  = 1;

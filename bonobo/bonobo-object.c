@@ -4,6 +4,10 @@
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  */
+#include <config.h>
+#include <gtk/gtksignal.h>
+#include <gtk/gtkmarshal.h>
+#include "gnome-object.h"
 
 enum {
 	TEST,
@@ -13,24 +17,91 @@ enum {
 static guint gnome_object_signals [LAST_SIGNAL];
 static GtkObjectClass *gnome_object_parent_class;
 
+typedef struct {
+	GnomeObject        *gnome_object;
+	PortableServer_POA  poa;
+
+	/* We return the following address */
+	POA_GNOME_object object;
+} PiggyBack;
+
+void *
+gnome_object_servant_new (int size)
+{
+	return 0;
+}
+
+GnomeObject *
+gnome_object_from_servant (POA_GNOME_object *servant)
+{
+}
+
+static void
+impl_GNOME_object__destroy (POA_GNOME_object *servant, CORBA_Environment *ev)
+{
+	POA_GNOME_object__fini((PortableServer_Servant) servant, ev);
+	g_free (servant);
+}
+
+static void
+impl_GNOME_object_ref (POA_GNOME_object *servant, CORBA_Environment *ev)
+{
+	GnomeObject *object;
+
+	object = gnome_object_from_servant (servant);
+	gtk_object_ref (GTK_OBJECT (object));
+}
+
+static void
+impl_GNOME_object_unref (POA_GNOME_object *servant, CORBA_Environment *ev)
+{
+	GnomeObject *object;
+
+	object = gnome_object_from_servant (servant);
+	gtk_object_unref (GTK_OBJECT (object));
+}
+
+static CORBA_Object
+impl_GNOME_object_query_interface (POA_GNOME_object *servant,
+				   CORBA_char *repoid,
+				   CORBA_Environment *ev)
+{
+	CORBA_Object retval;
+	GnomeObject *object;
+
+	object = gnome_object_from_servant (servant);
+
+	return retval;
+}
+
+PortableServer_ServantBase__epv gnome_object_base_epv =
+{
+	NULL,			/* _private data */
+	&impl_GNOME_object__destroy,	/* finalize routine */
+	NULL,			/* default_POA routine */
+};
+
+POA_GNOME_object__epv gnome_object_epv =
+{
+	NULL,			/* _private */
+	&impl_GNOME_object_ref,
+	&impl_GNOME_object_unref,
+	&impl_GNOME_object_query_interface,
+};
+
+POA_GNOME_object__vepv gnome_object_vepv = {
+	&gnome_object_base_epv,
+	&gnome_object_epv
+};
+
 static void
 default_test (GnomeObject *object)
 {
 }
 
 static void
-unref_interface (gpointer key, gpointer value, gpointer user_data)
+gnome_object_destroy (GtkObject *object)
 {
-	gtk_object_unref (GTK_OBJECT (value));
-}
-
-static void
-gnome_object_destroy (GnomeObject *object)
-{
-	g_hash_table_foreach (object->interfaces, unref_interface, object);
-	
-	g_hash_table_destroy (object->interfaces);
-	
 	gnome_object_parent_class->destroy (object);
 }
 
@@ -45,8 +116,8 @@ gnome_object_class_init (GnomeObjectClass *class)
 		gtk_signal_new ("test",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET(GnomeObject), test,
-				gtk_marshall_NONE__NONE,
+				GTK_SIGNAL_OFFSET(GnomeObjectClass,test), 
+				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0); 
 	gtk_object_class_add_signals (object_class, gnome_object_signals, LAST_SIGNAL);
 
@@ -58,7 +129,6 @@ gnome_object_class_init (GnomeObjectClass *class)
 static void
 gnome_object_init (GnomeObject *object)
 {
-	object->interfaces = g_hash_table_new (g_direct_hash, g_direct_equal);
 }
 
 GtkType
@@ -68,7 +138,7 @@ gnome_object_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"GnomeObject",
+			"IDL:GNOME/object:1.0",
 			sizeof (GnomeObject),
 			sizeof (GnomeObjectClass),
 			(GtkClassInitFunc) gnome_object_class_init,
@@ -84,48 +154,3 @@ gnome_object_get_type (void)
 	return type;
 }
 
-GnomeObject *
-gnome_object_new (void)
-{
-	GnomeObject *object;
-
-	object = gtk_type_new (gnome_object_get_type ());
-
-	return object;
-}
-
-void
-gnome_object_add_interface_1 (GnomeObject *object, GtkObject *interface)
-{
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (interface != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
-	g_return_if_fail (GTK_IS_OBJECT (interface));
-	
-	g_hash_table_insert (object->interfaces, interface->type, interface);
-}
-
-void
-gnome_object_add_interface (GnomeObject *object, GnomeObject *interface)
-{
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (interface != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
-	g_return_if_fail (GNOME_IS_OBJECT (interface));
-
-	gnome_object_add_interface_1 (object, GTK_OBJECT (interface));
-	gnome_object_add_interface_1 (interface, GTK_OBJECT (object));
-}
-
-GtkObject *
-gnome_object_query_interface (GnomeObject *object, GtkType type)
-{
-	GtkObject *object;
-	
-	g_return_val_if_fail (object != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
-	
-	object = g_hash_table_lookup (object->interfaces, type);
-
-	return object;
-}

@@ -39,12 +39,12 @@ interface InPlaceSite {
 	void ui_state_notify (in boolean status);
 
 	/**
-	 * desactivate_and_undo:
+	 * deactivate_and_undo:
 	 *
 	 * This is called by the active object if it has just been activated
 	 * and the undo operation has been called
 	 */
-	void desactivate_and_undo ();
+	void deactivate_and_undo ();
 
 	/** 
 	 * request_resize:
@@ -59,8 +59,26 @@ interface InPlaceSite {
 	boolean request_resize (in short new_width, in short new_height);
 };
 
-interface InPlaceFrame {
+interface InPlaceFrame : InPlaceUIWindow {
 	typedef string Menu;
+
+        /**
+	 * set_active_object:
+	 * @object: points to the object being activated
+	 * @active: TRUE if the object is being activated, false otherwise
+	 *
+	 * Called when an in-place object is being activated to notify
+	 * that menus are about to be merged, toolbars merged, space
+	 * requested.
+	 */
+        void set_active_object (in InPlaceDotObject object, boolean active);
+
+	/** 
+	 * dock:
+	 *
+	 * Dock control.  Add new dockable widgets here
+	 */
+	void dock ();
 
 	/**
 	 * attach_menu:

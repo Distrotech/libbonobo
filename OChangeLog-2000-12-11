@@ -1,0 +1,5 @@
+1999-02-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* src/gtk-interfaces.c, src/gtk-interfaces.h: New files.
+	Implements gtk-interfaces.
+

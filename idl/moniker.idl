@@ -1,4 +1,4 @@
-interface Moniker {
+interface Moniker : GNOME::Object {
 
 	enum MonikerWhich {
 		CONTAINER,	// Return the Container's moniker.

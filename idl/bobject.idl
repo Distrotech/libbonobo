@@ -7,7 +7,7 @@
  * Bonobo Objects are also refered as servers.
  */
 
-interface View {
+interface View : GNOME::object {
 	typedef unsigned long windowid;
 
 	/**
@@ -27,7 +27,8 @@ interface View {
 
 };
 
-interface Component : base {
+/* Equivalent to IOleObject */
+interface DotObject : GNOME::object {
 
 	typedef long Verb;
 	const Verb PRIMARY = 0; // Action invoked when user double clicks on
@@ -168,22 +169,31 @@ interface Component : base {
 
 };
 
-interface InplaceComponent : Component {
+interface InPlaceObject : DotObject {
 	/**
 	 * deactivate:
+	 *
+	 * deactivates the object and discards the object's undo state.
+	 * if UI is still active, the object should call its own
+	 * ui_deactivate.
+	 */
+        void deactivate ();
+
+	/**
+	 * ui_deactivate:
 	 *
 	 * Deactivates the object and removes the GUI components
 	 * for this object (this is done in the containee by calling 
 	 * InPlaceSite::ui_state_notify (FALSE).
 	 */
-	void deactivate ();
+	void ui_deactivate ();
 
 	/**
-	 * activate:
+	 * reactivate_and_undo:
 	 * 
-	 * Activates the object
+	 * Activates the object and undoes the last operation.
 	 */
-	void activate ();
+	void reactivate_and_undo ();
 
 	/**
 	 * status_notify
@@ -198,3 +208,16 @@ interface InplaceComponent : Component {
 	void status_notify (in Status status);
 };
 
+interface InPlaceActiveObject : GNOME::object {
+	/**
+	 * frame_window_activate_notify:
+	 * @state: TRUE if frame window has been activated.
+	 */
+        void frame_window_activate_notify (in boolean state);
+
+	/**
+	 * doc_window_activated_notify:
+	 * @state: TRUE if the document window has been activated
+	 */
+	void doc_window_activated_notify (in boolean state);
+};

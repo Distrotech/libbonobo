@@ -5,7 +5,7 @@
  *    Miguel de Icaza (miguel@gnu.org)
  */
 
-interface Persist {
+interface Persist : GNOME::Object {
 	enum Status {
 		SAVE_OK,
 		SAVE_CANCEL,
@@ -50,3 +50,10 @@ interface PersistStream : Persist {
 	void load (in Stream stream);
 	void save (in Stream stream);
 };
+
+
+
+
+
+
+
