@@ -1,5 +1,7 @@
 2001-08-13  Michael Meeks  <michael@ximian.com>
 
+	* configure.in: bump to 1.101.2
+
 	* tests/test-object.c: kill some warnings.
 
 	* idl/Bonobo_UI.idl: add 'execVerb', 'uiEvent' for
