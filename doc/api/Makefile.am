@@ -184,7 +184,7 @@ dist-hook: dist-check-gtkdoc dist-hook-local
 	mkdir $(distdir)/xml
 	mkdir $(distdir)/html
 	-cp $(srcdir)/tmpl/*.sgml $(distdir)/tmpl
-	-cp $(srcdir)/sgml/*.xml $(distdir)/xml
+	-cp $(srcdir)/xml/*.xml $(distdir)/xml
 	-cp $(srcdir)/html/* $(distdir)/html
 
 .PHONY : dist-hook-local
