@@ -1,5 +1,11 @@
 2000-10-20  Darin Adler  <darin@eazel.com>
 
+	* bonobo/extract.c: (find_strings), (print_line_and_free),
+	(seek_translatable_strings):
+	Oops. Checked in wrong version of the tool before.
+
+2000-10-20  Darin Adler  <darin@eazel.com>
+
 	* bonobo/Makefile.am:
 	* bonobo/extract.c: (find_strings), (print_line),
 	(seek_translatable_strings), (main):
