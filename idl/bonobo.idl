@@ -26,11 +26,11 @@
 #include <gnome-advise.idl>
 
 /* Control stuff. */
+#include <gnome-ui-handler.idl>
 #include <gnome-property.idl>
 #include <gnome-control.idl>
 
 /* Subdocument stuff. */
-#include <gnome-ui-handler.idl>
 #include <gnome-container.idl>
 #include <gnome-client-site.idl>
 #include <gnome-canvas.idl>

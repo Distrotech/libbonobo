@@ -60,14 +60,6 @@ interface ViewFrame : ControlFrame {
 	ClientSite get_client_site ();
 
 	/**
-	 * get_ui_handler:
-	 *
-	 * Returns: The GNOME::UIHandler interface to be used for
-	 * menu/toolbar item merging.
-	 */
-	UIHandler get_ui_handler ();
-
-	/**
 	 * deactivate_and_undo:
 	 *
 	 * This is called by the active object if it has just been activated
