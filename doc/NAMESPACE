@@ -15,6 +15,7 @@ subdomains:
 	DB/			Gnome-db	rodrigo@linuxave.net
 	Database/		libgda		rodrigo@linuxave.net
 	Development/		gnome-debug,	jpr@helixcode.com, dave@helixcode.com
+	DevHelp/                DevHelp         micke@codefactory.se
 	Dia/			Dia		james@daa.com.au
 	EOG/			EOG		federico@helixcode.com
 	Encompass/		Encompass	dobey@free.fr
@@ -28,7 +29,7 @@ subdomains:
 	GtkHTML/		GtkHTML		rodo@helixcode.com
 	Guppi/			guppi3		trow@gnu.org
 	Media/			gnome-media	peter@ximian.com
-	MrProject/		mr-project	richard.hult@codefactory.se
+	MrProject/		mrproject	richard.hult@codefactory.se
 	Nautilus/		Nautilus	darin@eazel.com
 	Pilot/			gnome-pilot	eskil@eazel.com
 	PonG/			pong	  	jirka@5z.com
