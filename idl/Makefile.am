@@ -5,6 +5,7 @@ idl_DATA =			\
 	gnome-advise.idl	\
 	gnome-canvas.idl	\
 	gnome-container.idl	\
+	gnome-control.idl	\
 	gnome-client-site.idl	\
 	gnome-embeddable.idl	\
 	gnome-container.idl	\
