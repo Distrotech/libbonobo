@@ -993,10 +993,6 @@ ac_context_to_string_array (CORBA_Context context, char **sort_criteria, CORBA_E
 	char *context_hostname;
 	char *context_domain;
 
-        /* FIXME bugzilla.eazel.com 2730: either I am doing something
-         * really wrong here or CORBA_Context is broken in ORBit 
-         */
-
         context_username = ac_CORBA_Context_get_value (context, "username", ev);
         context_hostname = ac_CORBA_Context_get_value (context, "hostname", ev);
         context_domain = ac_CORBA_Context_get_value (context, "domain", ev);
