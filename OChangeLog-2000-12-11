@@ -1,3 +1,9 @@
+2000-11-02  Radek Doulik  <rodo@helixcode.com>
+
+	* bonobo/bonobo-arg.c (MAKE_FROM_GTK_CASE): removed a =
+	bonobo_arg_new (tcid); as we don't want reassign parameter a
+	(MAKE_TO_GTK_CASE): likewise
+
 2000-11-02  Michael Meeks <michael@helixcode.com>
 
 	* The big api rename ...

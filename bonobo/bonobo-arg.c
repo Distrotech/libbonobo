@@ -96,7 +96,6 @@ bonobo_arg_type_from_gtk (GtkType id)
 
 #define MAKE_FROM_GTK_CASE(gtktype,tcid,unionid,corbatype,corbakind)			\
 	case GTK_TYPE_##gtktype:							\
-		a = bonobo_arg_new (tcid);						\
 		*((corbatype *)a->_value) = (corbatype)GTK_VALUE_##gtktype(*arg);	\
 		break;
 
@@ -163,7 +162,6 @@ bonobo_arg_from_gtk (BonoboArg *a, const GtkArg *arg)
 
 #define MAKE_TO_GTK_CASE(gtktype,tcid,unionid,corbatype,corbakind)		\
 	case corbakind:								\
-		a = gtk_arg_new (GTK_TYPE_##gtktype);				\
 		GTK_VALUE_##gtktype(*a) = *((corbatype *)arg->_value);		\
 		break;
 
