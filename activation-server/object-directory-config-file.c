@@ -1,11 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 
+#include "config.h"
 #include "od-utils.h"
 #include <tree.h> /* gnome-xml */
 #include <parser.h> /* gnome-xml */
-#include <malloc.h>
 #include <xmlmemory.h> /* guess what ? gnome-xml !! */
 #include <glib.h>
+
 
 #define OAF_CONFIG_FILE "/oaf/oaf-config.xml"
 #define OAF_CONFIG_DEBUG 0
