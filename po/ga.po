@@ -1,13 +1,14 @@
 # Irish language translation of oaf
-# Copyright (C) 2000 Free Software Foundation, Inc.
+# Copyright (C) 2000,2004 Free Software Foundation, Inc.
 # Alastair McKinstry <mckinstry@computer.org>, 2000.
 msgid ""
 msgstr ""
-"Project-Id-Version: oaf CVS\n"
-"POT-Creation-Date: 2004-03-08 11:00+0000\n"
-"PO-Revision-Date: 2000-08-24 20:00-0000\n"
+"Project-Id-Version: libbonobo HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-03-11 20:41+0100\n"
+"PO-Revision-Date: 2004-03-16 20:00-0000\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
-"Language-Team: Irish <ga@li.org>\n"
+"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +27,7 @@ msgstr ""
 
 #: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
-msgstr ""
+msgstr "FILLTEÁN"
 
 #: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
@@ -51,11 +52,11 @@ msgstr ""
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr ""
+msgstr "Serbhís CosNaming do CORBA."
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
-msgstr ""
+msgstr "Seirbhís Ainmithe"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
 msgid "Notification service"
@@ -105,12 +106,12 @@ msgstr ""
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr ""
+msgstr "caractar neabhailí '%c' san iid '%s'"
 
 #: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
-msgstr ""
+msgstr "Níl aon luach san caillíocht '%s'"
 
 #: activation-server/object-directory-load.c:588
 #, c-format
@@ -129,7 +130,7 @@ msgstr ""
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr ""
+msgstr "Teip ag leámh as an procéis leanbh: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
@@ -153,7 +154,7 @@ msgstr ""
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
-msgstr ""
+msgstr "Teip ag rith %s: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
@@ -198,7 +199,7 @@ msgstr ""
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "Ainm"
 
 #: bonobo/bonobo-application.c:352
 msgid "Application unique name"
@@ -206,11 +207,11 @@ msgstr ""
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "CORBA POA Féindheanamh"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -218,7 +219,7 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:157
 msgid "IO Error"
-msgstr ""
+msgstr "Earraidh IO"
 
 #: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
@@ -471,7 +472,7 @@ msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
-msgstr ""
+msgstr "slí fillteán"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
@@ -483,7 +484,7 @@ msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr ""
+msgstr "Taispeán slí do comhad cumraíocht"
 
 #~ msgid "Exec failed: %d (%s)\n"
 #~ msgstr "Teip ar 'Exec': %d (%s)\n"
