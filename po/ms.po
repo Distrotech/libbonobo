@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-24 10:32+0000\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2002-01-09 23:47+0800\n"
 "Last-Translator: Mohamad Afifi Omar (App) <mr_mohd_afifi@yahoo.com>\n"
 "Language-Team: Bahasa Melayu <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -160,7 +160,7 @@ msgstr "Gagal menjanakan Bonobo"
 msgid "Failed to resolve, or extend '%s"
 msgstr "Gagal resolv atau menlanjutkan '%s'"
 
-#: bonobo/bonobo-moniker-util.c:245
+#: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
 msgstr "Harap maaf tuan, gagal menghidupkan objek dari kilang"
 

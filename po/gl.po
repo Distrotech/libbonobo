@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-01-24 10:32+0000\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2001-12-27 01:21+0100\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -163,7 +163,7 @@ msgstr "Non se puido inicializar Bonobo"
 msgid "Failed to resolve, or extend '%s"
 msgstr ""
 
-#: bonobo/bonobo-moniker-util.c:245
+#: bonobo/bonobo-moniker-util.c:246
 #, fuzzy
 msgid "Failed to activate object"
 msgstr "Non se pode activar obxecto de fábrica"

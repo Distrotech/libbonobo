@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.96.0\n"
-"POT-Creation-Date: 2002-01-24 10:32+0000\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2001-09-28 18:45-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -158,7 +158,7 @@ msgstr "¦À¡§É¡§À¡Å¢ı ¦¾¡¼ì¸Á¾¢ôÀÇ¢ì¸ ÓÊÂÅ¢ø¨Ä"
 msgid "Failed to resolve, or extend '%s"
 msgstr ""
 
-#: bonobo/bonobo-moniker-util.c:245
+#: bonobo/bonobo-moniker-util.c:246
 #, fuzzy
 msgid "Failed to activate object"
 msgstr "¦¾¡Æ¢üº¡¨ÄÂ¢ø ¦ÀüÈ ­Äì¨¸ ¦ºÂüÀ¼ ÓÊÂÅ¢ø¨Ä"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-01-24 10:32+0000\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2002-01-27 03:53+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -160,7 +160,7 @@ msgstr "Kunde inte initiera Bonobo"
 msgid "Failed to resolve, or extend '%s"
 msgstr "Misslyckades med att lösa upp eller utöka \"%s"
 
-#: bonobo/bonobo-moniker-util.c:245
+#: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
 msgstr "Misslyckades med att aktivera objekt"
 

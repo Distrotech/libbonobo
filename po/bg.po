@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2002-01-24 10:32+0000\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2002-01-25 15:44+2000\n"
 "Last-Translator: Alexander Shopov <al_shopov@web.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -159,7 +159,7 @@ msgstr "Не можах да активирам Бонобо"
 msgid "Failed to resolve, or extend '%s"
 msgstr ""
 
-#: bonobo/bonobo-moniker-util.c:245
+#: bonobo/bonobo-moniker-util.c:246
 #, fuzzy
 msgid "Failed to activate object"
 msgstr "Не мога да активирам обекта от фабриката"

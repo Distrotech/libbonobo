@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.0cvs\n"
-"POT-Creation-Date: 2002-01-24 10:32+0000\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2002-01-18 01:02+0900\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -159,7 +159,7 @@ msgstr "Bonoboを初期化できません"
 msgid "Failed to resolve, or extend '%s"
 msgstr "'%s' の解決、あるいは拡張に失敗しました"
 
-#: bonobo/bonobo-moniker-util.c:245
+#: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
 msgstr "オブジェクトの活性化に失敗しました"
 

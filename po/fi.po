@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
-"POT-Creation-Date: 2002-01-29 23:19+0200\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2002-01-26 14:21+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@saunalahti.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -165,7 +165,7 @@ msgstr "Ei voinut alustaa Bonoboa"
 msgid "Failed to resolve, or extend '%s"
 msgstr "\"%s\":n selvittäminen tai laajentaminen epäonnistui"
 
-#: bonobo/bonobo-moniker-util.c:245
+#: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
 msgstr "Olion aktivointi epäonnistui"
 

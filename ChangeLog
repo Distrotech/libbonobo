@@ -1,5 +1,9 @@
 2002-02-11  Michael Meeks  <michael@ximian.com>
 
+	* Version 1.111.0
+
+2002-02-11  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-storage.h: 
 	* bonobo/bonobo-xobject.h: 
 	* bonobo/bonobo-persist-file.h: 
