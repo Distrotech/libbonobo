@@ -2,5 +2,6 @@
 <oaf_attribute name="repo_ids" type="stringv">
 <item value="IDL:GNOME/Unknown:1.0"/>
 </oaf_attribute>
-This server is a test of OAF.
+<oaf_attribute name="description" type="string" value="This server is a test of OAF"/>
+<oaf_attribute name="description-fr" type="string" value="Le server est un test d'OAF"/>
 </oaf_server>
