@@ -1,3 +1,11 @@
+1999-06-01  Elliot Lee <sopwith@redhat.com>
+
+	* bonobo/gnome-object.[ch]: Removed servant_to_object hash table.
+  	Now all servants store a gnome_object pointer for
+ 	servant->GnomeObject translation.
+
+	* bonobo/*.[ch]: Changes to match above.
+
 1999-06-01  Richard Hestilow  <hestgray@ionet.net>
 
 	* bonobo/gnome-bonobo-selector.[ch]: New widget, a dialog

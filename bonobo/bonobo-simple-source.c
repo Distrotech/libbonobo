@@ -168,7 +168,7 @@ create_gnome_simple_data_source (GnomeObject *object)
 	POA_GNOME_SimpleDataSource *servant;
 	CORBA_Object o;
 
-	servant = g_new0 (POA_GNOME_SimpleDataSource, 1);
+	servant = (POA_GNOME_SimpleDataSource *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_simple_data_source_vepv;
 	POA_GNOME_SimpleDataSource__init ((PortableServer_Servant) servant, &object->ev);
 	if (object->ev._major != CORBA_NO_EXCEPTION){

@@ -13,6 +13,14 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_OBJECT(o)       (GTK_CHECK_TYPE ((o), GNOME_OBJECT_TYPE))
 #define GNOME_IS_OBJECT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_OBJECT_TYPE))
 
+/* If you're using a custom servant for your CORBA objects, just make
+   sure that the second element is a 'gpointer' to hold the GnomeObject
+   pointer for servant->GnomeObject translation */
+typedef struct {
+	POA_GNOME_obj servant_placeholder;
+	gpointer gnome_object;
+} GnomeObjectServant;
+
 typedef struct {
 	GtkObject base;
 
@@ -36,12 +44,8 @@ void         gnome_object_bind_to_servant  (GnomeObject *object,
 GnomeObject *gnome_object_construct        (GnomeObject *object,
 					    CORBA_Object corba_object);
 
-void  gnome_object_drop_binding_by_servant (void *servant);
-void  gnome_object_drop_binding            (GnomeObject *obj);
-
 /*
- * Activates a newly created servant.  Just an utility function.
- */
+ * Activates a newly created servant.  Just an utility function.  */
 CORBA_Object gnome_object_activate_servant (GnomeObject *object,
 					    void *servant);
 

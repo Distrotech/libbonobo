@@ -21,17 +21,14 @@ enum {
 static guint gnome_object_signals [LAST_SIGNAL];
 static GtkObjectClass *gnome_object_parent_class;
 
-static GHashTable *servant_to_object;
+/* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
 
 GnomeObject *
 gnome_object_from_servant (PortableServer_Servant servant)
 {
 	g_return_val_if_fail (servant != NULL, NULL);
 
-	if (!servant_to_object)
-		return NULL;
-	
-	return g_hash_table_lookup (servant_to_object, servant);
+	return GNOME_OBJECT(((GnomeObjectServant *)servant)->gnome_object);
 }
 
 void
@@ -41,41 +38,14 @@ gnome_object_bind_to_servant (GnomeObject *object, void *servant)
 	g_return_if_fail (servant != NULL);
 	g_return_if_fail (GNOME_IS_OBJECT (object));
 
-	if (!servant_to_object){
-		servant_to_object = g_hash_table_new (g_direct_hash, g_direct_equal);
-	}
-	
-	g_hash_table_insert (servant_to_object, servant, object);
 	object->servant = servant;
-}
-
-void
-gnome_object_drop_binding_by_servant (void *servant)
-{
-	void *object;
-	g_return_if_fail (servant != NULL);
-
-	object = g_hash_table_lookup (servant_to_object, servant);
-	g_hash_table_remove (servant_to_object, servant);
-}
-
-void
-gnome_object_drop_binding (GnomeObject *object)
-{
-	void *servant;
-	
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_OBJECT (object));
-
-	servant = object->servant;
-	g_hash_table_remove (servant_to_object, servant);
+	((GnomeObjectServant *)servant)->gnome_object = object;
 }
 
 static void
 impl_GNOME_obj__destroy (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	POA_GNOME_obj__fini ((POA_GNOME_obj *)servant, ev);
-	gnome_object_drop_binding_by_servant (servant);
 	g_free (servant);
 }
 
@@ -86,6 +56,7 @@ impl_GNOME_obj_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 
 	object = gnome_object_from_servant (servant);
 	gtk_object_ref (GTK_OBJECT (object));
+	gtk_object_sink (GTK_OBJECT (object));
 }
 
 static void
@@ -163,7 +134,6 @@ gnome_object_destroy (GtkObject *object)
 	GnomeObject *gnome_object = GNOME_OBJECT (object);
 	void *servant = gnome_object->servant;
 	
-	gnome_object_drop_binding (gnome_object);
 	if (gnome_object->object != CORBA_OBJECT_NIL){
 		PortableServer_POA_deactivate_object (
 			bonobo_poa (), servant, &gnome_object->ev);

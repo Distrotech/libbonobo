@@ -24,7 +24,7 @@ create_gnome_container (GnomeObject *object)
 	POA_GNOME_Container *servant;
 	CORBA_Object o;
 	
-	servant = g_new0 (POA_GNOME_Container, 1);
+	servant = (POA_GNOME_Container *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_container_vepv;
 
 	POA_GNOME_Container__init ((PortableServer_Servant) servant, &object->ev);
