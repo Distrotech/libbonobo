@@ -1,5 +1,23 @@
+2001-02-09  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_sync_realize): 
+	fix warning text.
+
+	* bonobo/bonobo-print.c (bonobo_print_new): upd.
+
 2001-02-08  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-print.c (impl_render): fix serious
+	brokenness in GtkType / Class usage.
+	(bonobo_print_get_epv): move into
+	(bonobo_print_class_init): here & upd.
+	(init_print_corba_class): kill.
+	(bonobo_print_get_type): upd.
+	(bonobo_print_corba_object_create): kill.
+	(bonobo_print_construct): upd.
+
+2001-02-08  Michael Meeks  <michael@ximian.com>
+	
 	* bonobo/bonobo-ui-sync-toolbar.c (create_dockitem): revert Cody's
 	style changes stuff.
 	(toolbar_style_changed): kill.

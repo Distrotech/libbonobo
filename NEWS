@@ -1,3 +1,13 @@
+Bonobo 0.37
+
+	* Convert print to BonoboXObject (Me) - forgot it.
+
+	* Fix flicker issue (Me)
+
+	* Use nice type creation macro (Dietmar)
+
+	* Toolbar control leak fix (Maciej)
+
 Bonobo 0.35
 
 	* BonoboXObject (Me)
