@@ -41,7 +41,7 @@ msgstr ""
 #: activation-server/activation-server-main.c:73
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
-msgstr ""
+msgstr "FD"
 
 #: activation-server/activation-server-main.c:81
 msgid "Query expression to evaluate"
@@ -85,17 +85,17 @@ msgstr ""
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr ""
+msgstr "NULL iid പാടില്ല"
 
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr ""
+msgstr "iid %s ല്  NULഥ ഉണ്ട്"
 
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr ""
+msgstr "iid %s ല്  NULL സ്ഥാനം ഉണ്ട്"
 
 #: activation-server/object-directory-load.c:111
 #, fuzzy, c-format
