@@ -11,6 +11,7 @@
 #ifndef _BONOBO_MONIKER_UTIL_H
 #define _BONOBO_MONIKER_UTIL_H
 
+#include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-async.h>
 
 /* Useful client functions */

@@ -3,10 +3,11 @@
  *
  * A simple cache for streams (direct mapped, write back)
  *
- * Author:
- *	Dietmar Maurer (dietmar@helixcode.com)
+ * Authors:
+ *	Dietmar Maurer (dietmar@ximian.com)
+ *      Michael Meeks  (michael@ximian.com)
  *
- * Copyright 2000 Helix Code, Inc.
+ * Copyright 2000, 2001 Ximian, Inc.
  */
 
 #include <config.h>
@@ -172,21 +173,8 @@ bonobo_stream_cache_read (BonoboStreamCache *stream,
 	return bytes_read;
 }
 
-static BonoboStream *
-create_stream_cache_server (const BonoboStreamCache *stream_cache)
-{
-	Bonobo_Stream corba_stream;
-
-	corba_stream = bonobo_stream_corba_object_create (
-		BONOBO_OBJECT (stream_cache));
-
-	return BONOBO_STREAM (
-		bonobo_object_construct (BONOBO_OBJECT (stream_cache), 
-					 corba_stream));
-}
-
 static void
-bonobo_stream_cache_destroy (GtkObject *object)
+bonobo_stream_cache_destroy (BonoboObject *object)
 {
 	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (object);
 
@@ -197,32 +185,35 @@ bonobo_stream_cache_destroy (GtkObject *object)
 }
 
 static Bonobo_StorageInfo*
-impl_Bonobo_Stream_getInfo (BonoboStream                   *stream, 
-			    const Bonobo_StorageInfoFields  mask,
-			    CORBA_Environment              *ev)
+cache_getInfo (PortableServer_Servant          servant, 
+	       const Bonobo_StorageInfoFields  mask,
+	       CORBA_Environment              *ev)
 {
-	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (stream);
+	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (
+		bonobo_object (servant));
 	
 	return Bonobo_Stream_getInfo (stream_cache->priv->cs, mask, ev);
 }
 
 static void
-impl_Bonobo_Stream_setInfo (BonoboStream                   *stream, 
-			    const Bonobo_StorageInfo       *info,
-			    const Bonobo_StorageInfoFields  mask, 
-			    CORBA_Environment              *ev)
+cache_setInfo (PortableServer_Servant          servant, 
+	       const Bonobo_StorageInfo       *info,
+	       const Bonobo_StorageInfoFields  mask, 
+	       CORBA_Environment              *ev)
 {
-	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (stream);
+	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (
+		bonobo_object (servant));
 	
 	return Bonobo_Stream_setInfo (stream_cache->priv->cs, info, mask, ev);
 }
 
 static void
-impl_Bonobo_Stream_write (BonoboStream              *bonobo_stream, 
-			  const Bonobo_Stream_iobuf *buffer,
-			  CORBA_Environment         *ev)
+cache_write (PortableServer_Servant     servant, 
+	     const Bonobo_Stream_iobuf *buffer,
+	     CORBA_Environment         *ev)
 {
-	BonoboStreamCache *stream = BONOBO_STREAM_CACHE (bonobo_stream);
+	BonoboStreamCache *stream = BONOBO_STREAM_CACHE (
+		bonobo_object (servant));
 	long tag, bytes_written = 0;
 	int index, offset, bc;
 	
@@ -250,12 +241,13 @@ impl_Bonobo_Stream_write (BonoboStream              *bonobo_stream,
 }
 
 static void
-impl_Bonobo_Stream_read (BonoboStream         *stream, 
-			 CORBA_long            count,
-			 Bonobo_Stream_iobuf **buffer, 
-			 CORBA_Environment    *ev)
+cache_read (PortableServer_Servant servant, 
+	    CORBA_long             count,
+	    Bonobo_Stream_iobuf  **buffer, 
+	    CORBA_Environment     *ev)
 {
-	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (stream);
+	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (
+		bonobo_object (servant));
 	CORBA_octet *data;
 
 	if (count < 0) {
@@ -272,12 +264,13 @@ impl_Bonobo_Stream_read (BonoboStream         *stream,
 }
 
 static CORBA_long
-impl_Bonobo_Stream_seek (BonoboStream           *stream, 
-			 CORBA_long              offset, 
-			 Bonobo_Stream_SeekType  whence, 
-			 CORBA_Environment      *ev)
+cache_seek (PortableServer_Servant servant, 
+	    CORBA_long             offset, 
+	    Bonobo_Stream_SeekType whence, 
+	    CORBA_Environment     *ev)
 {
-	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (stream);
+	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (
+		bonobo_object (servant));
 	
 	stream_cache->priv->pos = Bonobo_Stream_seek (stream_cache->priv->cs, 
 						      offset, whence, ev);
@@ -286,11 +279,12 @@ impl_Bonobo_Stream_seek (BonoboStream           *stream,
 }
 
 static void
-impl_Bonobo_Stream_truncate (BonoboStream      *stream, 
-			     const CORBA_long   new_size, 
-			     CORBA_Environment *ev)
+cache_truncate (PortableServer_Servant servant, 
+		const CORBA_long       new_size, 
+		CORBA_Environment     *ev)
 {
-	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (stream);
+	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (
+		bonobo_object (servant));
 	
 	bonobo_stream_cache_invalidate (stream_cache, new_size);
 	
@@ -300,24 +294,11 @@ impl_Bonobo_Stream_truncate (BonoboStream      *stream,
 }
 
 static void
-impl_Bonobo_Stream_copyTo (BonoboStream      *stream, 
-			   const CORBA_char  *dest,
-			   const CORBA_long   bytes, 
-			   CORBA_long        *read_bytes,
-			   CORBA_long        *written_bytes, 
-			   CORBA_Environment *ev)
+cache_commit (PortableServer_Servant servant, 
+	      CORBA_Environment     *ev)
 {
-	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (stream);
-
-	Bonobo_Stream_copyTo (stream_cache->priv->cs, dest, bytes, read_bytes,
-			      written_bytes, ev);
-}
-
-static void
-impl_Bonobo_Stream_commit (BonoboStream      *stream, 
-			   CORBA_Environment *ev)
-{
-	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (stream);
+	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (
+		bonobo_object (servant));
 
 	bonobo_stream_cache_flush (stream_cache, -1, ev);
 	 
@@ -325,10 +306,11 @@ impl_Bonobo_Stream_commit (BonoboStream      *stream,
 }
 
 static void
-impl_Bonobo_Stream_revert (BonoboStream      *stream, 
-			   CORBA_Environment *ev)
+cache_revert (PortableServer_Servant servant, 
+	      CORBA_Environment     *ev)
 {
-	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (stream);
+	BonoboStreamCache *stream_cache = BONOBO_STREAM_CACHE (
+		bonobo_object (servant));
 
 	bonobo_stream_cache_invalidate (stream_cache, 0);
 
@@ -342,42 +324,46 @@ bonobo_stream_cache_init (BonoboStreamCache *stream)
 }
 
 static void
-bonobo_stream_cache_class_init (BonoboStreamCacheClass *class)
+bonobo_stream_cache_class_init (BonoboStreamCacheClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
-	BonoboStreamClass *sclass = BONOBO_STREAM_CLASS (class);
-	
-	sclass->get_info = impl_Bonobo_Stream_getInfo;
-	sclass->set_info = impl_Bonobo_Stream_setInfo;
-	sclass->write    = impl_Bonobo_Stream_write;
-	sclass->read     = impl_Bonobo_Stream_read;
-	sclass->seek     = impl_Bonobo_Stream_seek;
-	sclass->truncate = impl_Bonobo_Stream_truncate;
-	sclass->copy_to  = impl_Bonobo_Stream_copyTo;
-	sclass->commit   = impl_Bonobo_Stream_commit;
-	sclass->revert   = impl_Bonobo_Stream_revert;
+	BonoboObjectClass *object_class = (BonoboObjectClass *) klass;
+	POA_Bonobo_Stream__epv *epv = &klass->epv;
+
+	epv->getInfo  = cache_getInfo;
+	epv->setInfo  = cache_setInfo;
+	epv->write    = cache_write;
+	epv->read     = cache_read;
+	epv->seek     = cache_seek;
+	epv->truncate = cache_truncate;
+	epv->commit   = cache_commit;
+	epv->revert   = cache_revert;
 
 	object_class->destroy = bonobo_stream_cache_destroy;
 }
 
-GtkType
+GType
 bonobo_stream_cache_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboStreamCache",
-			sizeof (BonoboStreamCache),
+		GTypeInfo info = {
 			sizeof (BonoboStreamCacheClass),
-			(GtkClassInitFunc) bonobo_stream_cache_class_init,
-			(GtkObjectInitFunc) bonobo_stream_cache_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_stream_cache_class_init,
+			(GClassFinalizeFunc) NULL,
+			NULL, /* class_data */
+			sizeof (BonoboStreamCache),
+			0,
+			(GInstanceInitFunc) bonobo_stream_cache_init
 		};
 		
-		type = gtk_type_unique (bonobo_stream_get_type (), &info);
+		type = bonobo_type_unique (
+			BONOBO_OBJECT_TYPE,
+			POA_Bonobo_Stream__init, NULL,
+			G_STRUCT_OFFSET (BonoboStreamCacheClass, epv),
+			&info, "BonoboStreamCache");
 	}
   
 	return type;
@@ -390,7 +376,7 @@ bonobo_stream_cache_get_type (void)
  *
  * Returns a new BonoboStream object
  */
-BonoboStream *
+BonoboObject *
 bonobo_stream_cache_create (Bonobo_Stream      cs,
 			    CORBA_Environment *opt_ev)
 {
@@ -399,8 +385,9 @@ bonobo_stream_cache_create (Bonobo_Stream      cs,
 
 	bonobo_return_val_if_fail (cs != NULL, NULL, opt_ev);
 
-	if (!(stream = gtk_type_new (bonobo_stream_cache_get_type ()))) {
-		bonobo_exception_set (opt_ev, ex_Bonobo_Storage_IOError);
+	if (!(stream = g_object_new (bonobo_stream_cache_get_type (), NULL))) {
+		if (opt_ev)
+			bonobo_exception_set (opt_ev, ex_Bonobo_Storage_IOError);
 		return NULL;
 	}
 	
@@ -422,12 +409,5 @@ bonobo_stream_cache_create (Bonobo_Stream      cs,
 	if (!opt_ev)
 		CORBA_exception_free (&ev);
 
-	if (!create_stream_cache_server (stream)) {
-		bonobo_object_unref (BONOBO_OBJECT (stream));
-		bonobo_exception_set (opt_ev, ex_Bonobo_Storage_IOError);
-		return NULL;
-	}
-
-	return BONOBO_STREAM (stream);
+	return (BonoboObject *) stream;
 }
-

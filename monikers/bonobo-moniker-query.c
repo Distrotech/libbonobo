@@ -107,8 +107,8 @@ bonobo_moniker_query_class_init (BonoboMonikerQueryClass *klass)
 {
 	BonoboMonikerClass *mclass = (BonoboMonikerClass *) klass;
 	
-	bonobo_moniker_query_parent_class = gtk_type_class (
-		bonobo_moniker_get_type ());
+	bonobo_moniker_query_parent_class = 
+		g_type_class_peek_parent (klass);
 
 	mclass->parse_display_name = query_parse_display_name;
 	mclass->resolve            = query_resolve;
@@ -117,26 +117,30 @@ bonobo_moniker_query_class_init (BonoboMonikerQueryClass *klass)
 /**
  * bonobo_moniker_query_get_type:
  *
- * Returns the GtkType for the BonoboMonikerQuery class.
+ * Returns the GType for the BonoboMonikerQuery class.
  */
-GtkType
+GType
 bonobo_moniker_query_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
-		GtkTypeInfo info = {
-			"BonoboMonikerQuery",
-			sizeof (BonoboMonikerQuery),
+		GTypeInfo info = {
 			sizeof (BonoboMonikerQueryClass),
-			(GtkClassInitFunc) bonobo_moniker_query_class_init,
-			(GtkObjectInitFunc) NULL,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) NULL,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) bonobo_moniker_query_class_init,
+			(GClassFinalizeFunc) NULL,
+			NULL, /* class_data */
+			sizeof (BonoboMonikerQuery),
+			0,
+			(GInstanceInitFunc) NULL
 		};
-
-		type = gtk_type_unique (bonobo_moniker_get_type (), &info);
+		
+		type = bonobo_type_unique (
+			bonobo_moniker_get_type (),
+			NULL, NULL, 0,
+			&info, "BonoboMonikerQuery");
 	}
 
 	return type;
@@ -146,5 +150,6 @@ BonoboMoniker *
 bonobo_moniker_query_new (void)
 {
 	return bonobo_moniker_construct (
-		gtk_type_new (bonobo_moniker_query_get_type ()), "query:(");
+		g_object_new (bonobo_moniker_query_get_type (), NULL),
+		"query:(");
 }

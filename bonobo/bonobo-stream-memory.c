@@ -249,9 +249,9 @@ bonobo_stream_mem_get_type (void)
 {
 	static GType type = 0;
 
-	if (!type){
+	if (!type) {
 		GTypeInfo info = {
-			sizeof (BonoboStreamMem),
+			sizeof (BonoboStreamMemClass),
 			(GBaseInitFunc) NULL,
 			(GBaseFinalizeFunc) NULL,
 			(GClassInitFunc) bonobo_stream_mem_class_init,
