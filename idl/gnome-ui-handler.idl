@@ -15,6 +15,7 @@
 module GNOME {
 
        	interface UIHandler : GNOME::Unknown {
+		typedef sequence<octet> iobuf;
        
        		enum MenuType {
 			MenuTypeBlah
