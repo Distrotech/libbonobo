@@ -1,5 +1,13 @@
 2000-06-23  Michael Meeks  <michael@helixcode.com>
 
+	* storage-modules/bonobo-storage-vfs.c (fs_list_contents): implement.
+	(bonobo_storage_vfs_open): implement.
+	(bonobo_storage_driver_open): init the vfs.
+
+	* storage-modules/gnome-storage-fs.c (bonobo_storage_fs_open): fix leak.
+
+2000-06-23  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/Makefile.am: remove bonobo-stream-fs.[ch] they move to
 
 	* storage-modules/bonobo-stream-fs.[ch]: here.
