@@ -1,3 +1,10 @@
+2000-10-18  Michael Meeks  <michael@helixcode.com>
+
+	* doc/ui-faq.txt (practice): remove show all comment; has been fixed.
+
+	* bonobo/Makefile.am: Sort out headers; don't install ones we want to
+	hide.
+
 2000-10-18  Eskil Heyn Olsen  <eskil@eazel.com>
 
 	* bonobo.spec.in:
@@ -7,6 +14,10 @@
 
 	* doc/ui-faq.txt: Added a Q/A pair about how to avoid
 	flashiness and tear-off menus breakage.
+
+2000-10-17  Michael Meeks  <michael@helixcode.com>
+
+	* Version 0.23
 
 2000-10-17  Michael Meeks  <michael@helixcode.com>
 

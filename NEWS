@@ -1,7 +1,22 @@
+Bonobo 0.24
+
+Bonobo 0.23
+
+	* fix pernicious UI widget parenting problem (Me)
+
+	* nail translation problem finaly (Me)
+
+	* fix licensing cockup GPL -> LGPL (Ettore)
+
+	* update docs on accelerators (John)
+
+	* impl toolbar control class (Jon K Hellan)
+
+	* gdk_rgb_init fix for icons (Jody)
+
 Bonobo 0.22
 
 	* Several automake fixes (Martin)
-
 
 Bonobo 0.21
 
