@@ -1,13 +1,17 @@
-
 #include <config.h>
 #include <gnome.h>
 #include <libgnorba/gnorba.h>
+#if USING_OAF
+#include <liboaf/liboaf.h>
+#else
+#include <libgnorba/gnorba.h>
+#endif
 #include <bonobo.h>
 #include <stdio.h>
 
-CORBA_ORB		orb;
-Bonobo_PropertyBag	pb;
-CORBA_Environment	ev;
+CORBA_ORB		 orb;
+Bonobo_PropertyBag	 pb;
+CORBA_Environment	 ev;
 BonoboPropertyBagClient *pbc;
 
 static char *
@@ -190,16 +194,25 @@ main (int argc, char **argv)
 
 	CORBA_exception_init (&ev);
 
+#if USING_OAF
+        gnome_init_with_popt_table(
+		"test property client", "0.0", argc, argv,
+		oaf_popt_options, 0, NULL);
+
+	orb = oaf_init (argc, argv);
+#else
 	gnome_CORBA_init_with_popt_table (
 		"test property client", "0.0", &argc, argv,
 		NULL, 0, NULL, 0, &ev);
 
 	orb = gnome_CORBA_ORB ();
+#endif
 
-	if (! bonobo_init (orb, NULL, NULL))
+	if (!bonobo_init (orb, NULL, NULL))
 		g_error ("Could not initialize Bonobo");
 
 	pb = CORBA_ORB_string_to_object (orb, argv [1], &ev);
+
 	if (pb == CORBA_OBJECT_NIL) {
 		g_error ("Could not bind to PropertyBag object");
 		return 1;

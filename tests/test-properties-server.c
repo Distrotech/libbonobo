@@ -1,13 +1,17 @@
-
 #include <config.h>
 #include <gnome.h>
 #include <libgnorba/gnorba.h>
 #include <bonobo.h>
+#if USING_OAF
+#include <liboaf/liboaf.h>
+#else
+#include <libgnorba/gnorba.h>
+#endif
 #include <stdio.h>
 
-CORBA_ORB	   orb;
+CORBA_ORB	    orb;
 BonoboPropertyBag  *pb;
-CORBA_Environment  ev;
+CORBA_Environment   ev;
 
 enum {
 	PROP_BOOLEAN_TEST,
@@ -265,13 +269,21 @@ main (int argc, char **argv)
 {
 	CORBA_exception_init (&ev);
 
+#if USING_OAF
+        gnome_init_with_popt_table(
+		"test property server", "0.0", argc, argv,
+		oaf_popt_options, 0, NULL);
+
+	orb = oaf_init (argc, argv);
+#else
 	gnome_CORBA_init_with_popt_table (
 		"test property server", "0.0", &argc, argv,
 		NULL, 0, NULL, GNORBA_INIT_SERVER_FUNC, &ev);
 
 	orb = gnome_CORBA_ORB ();
+#endif
 
-	if (! bonobo_init (orb, NULL, NULL))
+	if (!bonobo_init (orb, NULL, NULL))
 		g_error ("Could not initialize Bonobo");
 
 	create_bag ();

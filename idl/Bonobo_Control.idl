@@ -147,4 +147,8 @@ interface Control : Bonobo::Unknown {
 	void set_state (in Control::State state);
 };
 
+interface PropertyControl : Bonobo::Unknown {
+	Control get_control ();
+};
+
 };

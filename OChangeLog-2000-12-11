@@ -1,3 +1,27 @@
+2000-08-04  Michael Meeks  <michael@helixcode.com>
+
+	* tests/test-properties-server.c: Update for oaf.
+
+	* tests/test-properties-client.c: Update for oaf.
+
+	* bonobo/Makefile.am: remove all tests.
+
+	* tests/Makefile.am: don't install test programs; add autoconf for
+	misc tests moved here.
+
+	* samples/controls/sample-control-container.c (app_delete_cb):
+	implement. (app_destroy_cb): impl. (container_create): hook them in.
+	(populate_property_list): remove pbc get. (container_create): put it here.
+
+2000-08-03  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-widget.c (bonobo_widget_construct_control_from_objref):
+	use a dup_ref.
+
+	* bonobo/bonobo-object.c (bonobo_object_trace_refs): always
+	compile this so if you built with debugging you don't have to
+	re-build if bonobo is built without it.
+
 2000-08-03  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-object.h: undef BONOBO_OBJECT_DEBUG; doh.

@@ -234,13 +234,13 @@ bonobo_object_unref (BonoboObject *object)
 }
 #endif /* bonobo_object_unref */
 
-#ifdef BONOBO_REF_HOOKS
 void
 bonobo_object_trace_refs (BonoboObject *object,
 			  const char   *fn,
 			  int           line,
 			  gboolean      ref)
 {
+#ifdef BONOBO_REF_HOOKS
 	char *indent;
 	BonoboAggregateObject *ao;
 	BonoboDebugRefData *descr;
@@ -303,8 +303,13 @@ bonobo_object_trace_refs (BonoboObject *object,
 			g_free (indent);
 		}
 	}
-}
+#else
+	if (ref)
+		bonobo_object_ref (object);
+	else
+		bonobo_object_unref (object);
 #endif
+}
 
 static void
 impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)

@@ -137,4 +137,6 @@ must do:
 	return CORBA_Object_duplicate (
 		bonobo_object_corba_objref (BONOBO_OBJECT (myobject)));
 
-This is a special case.
+The mirror of this is that if you want to hand a ref to an impl
+you will need to CORBA_Object_duplicate the value before inserting
+it into a BonoboObjectClient.
