@@ -380,7 +380,7 @@ PortableServer_POA bonobo_poa_get_threaded (BonoboThreadHint hint)
 
        if (ev._major == CORBA_NO_EXCEPTION) {
                ORBit_ObjectAdaptor_set_thread_hint ((ORBit_ObjectAdaptor) poa,
-                                                    ORBIT_THREAD_HINT_ALL_AT_IDLE);
+						    thread_hint);
        } else {
                if (strcmp (CORBA_exception_id (&ev),
                            ex_PortableServer_POA_AdapterAlreadyExists) == 0)
