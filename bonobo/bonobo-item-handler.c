@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * bonobo-item-resolver.c: a generic Item Container resolver (implements ItemContainer)
+ * bonobo-item-handler.c: a generic Item Container resolver (implements ItemContainer)
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
@@ -204,3 +204,108 @@ bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
 		enum_objects, get_object, user_data);
 }
 
+/**
+ * bonobo_parse_item_options:
+ * @option_string: a string with a list of options
+ *
+ * The bonobo_parse_item_options() routine parses the
+ * @option_string which is a semi-colon separated list
+ * of arguments.
+ *
+ * Each argument is of the form value[=key].  The entire
+ * option string is defined by:
+ *
+ * option_string := keydef
+ *                | keydef ; option_string
+ *
+ * keydef := value [=key]
+ *
+ * The key can be literal values, values with spaces, and the
+ * \ character is used as an escape sequence.  To include a
+ * literal ";" in a value you can use \;.
+ *
+ * Returns: A GSList that contains structures of type BonoboItemOption
+ * each BonoboItemOption
+ */
+GSList *
+bonobo_item_option_parse (const char *option_string)
+{
+	GSList *list = NULL;
+	GString *key = NULL;
+	BonoboItemOption *option = NULL;
+	const char *p;
+	
+	for (p = option_string; *p; p++){
+		if (*p == '=' ){
+			GString *value = NULL;
+			if (!key)
+				return list;
+			
+			option = g_new0 (BonoboItemOption, 1);
+			option->key = key->str;
+			g_string_free (value, FALSE);
+			key = NULL;
+
+			for (; *p; p++){
+				if (*p == ';')
+					goto next;
+				if (!value)
+					value = g_string_new ("");
+
+				if (*p == '\\'){
+					p++;
+					if (*p == 0)
+						break;
+					g_string_append_c (value, *p);
+					continue;
+				}
+				g_string_append_c (value, *p);
+			}
+		next:
+			if (value){
+				option->value = value->str;
+				g_string_free (value, FALSE);
+			}
+			list = g_slist_append (list, option);
+			if (*p == 0)
+				break;
+		} else {
+			if (key == NULL)
+				key = g_string_new ("");
+			g_string_append_c (key, *p);
+		}
+	}
+
+	if (key){
+		BonoboItemOption *option = g_new (BonoboItemOption, 1);
+		
+		option->key = key->str;
+		g_string_free (key, FALSE);
+		
+		list = g_slist_append (list, option);
+	}
+	
+	return list;
+}
+
+/** 
+ * bonobo_item_options_free:
+ * @options: a GSList of BonoboItemOption structures that was returned by bonobo_item_option_parse()
+ *
+ * Use this to release a list returned by bonobo_item_option_parse()
+ */
+void
+bonobo_item_options_free (GSList *options)
+{
+	GSList *l;
+
+	for (l = options; l; l = l->next){
+		BonoboItemOption *option = l->data;
+
+		g_free (option->key);
+		if (option->value)
+			g_free (option->value);
+	}
+
+	g_slist_free (options);
+}

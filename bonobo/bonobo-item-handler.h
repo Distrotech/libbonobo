@@ -60,6 +60,17 @@ BonoboItemHandler   *bonobo_item_handler_construct   (BonoboItemHandler *handler
 
 POA_Bonobo_ItemContainer__epv *bonobo_item_handler_get_epv (void);
 
+/*
+ * Utility functions that can be used by getObject routines
+ */
+typedef struct {
+	char *key;
+	char *value;
+} BonoboItemOption;
+
+GSList *bonobo_item_option_parse (const char *option_string);
+void    bonobo_item_options_free (GSList *options);
+
 END_GNOME_DECLS
 
 #endif
