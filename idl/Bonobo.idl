@@ -5,6 +5,13 @@
  *     Miguel de Icaza (miguel@gnu.org)
  *
  */
+#if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
+%{
+#pragma include_defs bonobo/bonobo.h
+%}
+#pragma inhibit push
+#endif
+
 #include <gnome-factory.idl>
 #include <gnome-unknown.idl>
 
@@ -23,3 +30,6 @@
 
 #include "gnome-progressive.idl"
 
+#if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
+#pragma inhibit pop
+#endif
