@@ -11,6 +11,7 @@
 #include <bonobo/gnome-object.h>
 #include <libgnorba/gnorba.h>
 #include "bonobo.h"
+#include "gtk-interfaces.h"
 
 enum {
 	TEST,

@@ -1,3 +1,13 @@
+1999-04-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* bonobo/gnome-object.c: #include "gtk-interfaces.h"
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_new): Declare
+	gfm_corba as "GNOME_Moniker gfm_corba", not "GNOME_Moniker *gfm_corba".
+
+	* bonobo/gnome-client-site.c (impl_GNOME_client_site_save_object):
+	Made static.
+
 1999-04-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-client-site.c (gnome_client_site_destroy): Unref
