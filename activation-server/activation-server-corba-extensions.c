@@ -55,7 +55,6 @@ oafd_CORBA_Context_get_value (CORBA_Context         ctx,
 			nv = &g_array_index (nvout->list, CORBA_NamedValue, 0);
 
 			retval = g_strdup (*(char **) nv->argument._value);
-                        printf ("XXX - propname: \"%s\", NamedValue name: \"%s\", value: \"%s\"\n", propname, nv->name, retval);
 		} 
 
 		CORBA_NVList_free (nvout, &local_ev);

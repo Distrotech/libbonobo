@@ -246,8 +246,6 @@ update_registry (impl_POA_OAF_ObjectDirectory *servant)
         }
 
         if (must_load) {
-                puts ("reload");
-
                 servant->attr_servers._buffer =
                         OAF_ServerInfo_load (servant->registry_source_directories,
                                              &servant->attr_servers._length,
