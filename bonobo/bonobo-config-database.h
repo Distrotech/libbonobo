@@ -42,6 +42,7 @@ typedef struct {
 
 	CORBA_any      *(*get_value)    (BonoboConfigDatabase *db,
 					 const CORBA_char     *key, 
+					 const CORBA_char     *locale,
 					 CORBA_Environment    *ev);
 
 	void            (*set_value)    (BonoboConfigDatabase *db,

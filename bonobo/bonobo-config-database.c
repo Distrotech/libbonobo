@@ -75,6 +75,7 @@ merge_keylists (Bonobo_KeyList *cur_list,
 static CORBA_any *
 get_default (BonoboConfigDatabase   *cd,
 	     const CORBA_char       *key, 
+	     const CORBA_char       *locale,
 	     CORBA_Environment      *ev)
 {
 	CORBA_any *value = NULL;
@@ -84,7 +85,8 @@ get_default (BonoboConfigDatabase   *cd,
 	for (l = cd->priv->db_list; l != NULL; l = l->next) {
 		info = (DataBaseInfo *)l->data;
 
-		value = Bonobo_ConfigDatabase_getValue (info->db, key, ev);
+		value = Bonobo_ConfigDatabase_getValue (info->db, key, locale,
+							ev);
 		if (BONOBO_EX (ev))
 			return NULL;
 
@@ -99,18 +101,19 @@ get_default (BonoboConfigDatabase   *cd,
 static CORBA_any *
 impl_Bonobo_ConfigDatabase_getValue (PortableServer_Servant  servant,
 				     const CORBA_char       *key, 
+				     const CORBA_char       *locale,
 				     CORBA_Environment      *ev)
 {
 	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
 	CORBA_any *value = NULL;
 
 	if (CLASS (cd)->get_value)
-		value = CLASS (cd)->get_value (cd, key, ev);
+		value = CLASS (cd)->get_value (cd, key, locale, ev);
 
 	if (value)
 		return value;
 
-	return get_default (cd, key, ev);
+	return get_default (cd, key, locale, ev);
 }
 
 static void 
@@ -128,11 +131,12 @@ impl_Bonobo_ConfigDatabase_setValue (PortableServer_Servant  servant,
 static CORBA_any *
 impl_Bonobo_ConfigDatabase_getDefault (PortableServer_Servant  servant,
 				       const CORBA_char       *key, 
+				       const CORBA_char       *locale,
 				       CORBA_Environment      *ev)
 {
 	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
 
-	return get_default (cd, key, ev);
+	return get_default (cd, key, locale, ev);
 }
 
 static Bonobo_KeyList *
@@ -559,6 +563,7 @@ bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
 {
 	CORBA_Environment ev, *my_ev;
 	CORBA_any *retval;
+	char *locale;
 
 	bonobo_return_val_if_fail (db != CORBA_OBJECT_NIL, NULL, opt_ev);
 	bonobo_return_val_if_fail (key != NULL, NULL, opt_ev);
@@ -568,9 +573,12 @@ bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
 		my_ev = &ev;
 	} else
 		my_ev = opt_ev;
-
-	retval = Bonobo_ConfigDatabase_getValue (db, key, my_ev);
 	
+	if (!(locale = g_getenv ("LANG")))
+		locale = "";
+
+	retval = Bonobo_ConfigDatabase_getValue (db, key, locale, my_ev);
+
 	if (BONOBO_EX (my_ev) && !opt_ev)
 		g_warning ("Cannot get value: %s\n", 
 			   bonobo_exception_get_text (my_ev));

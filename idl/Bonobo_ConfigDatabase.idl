@@ -49,13 +49,13 @@ module Bonobo {
 
 		readonly attribute boolean writeable;
 
-		any          getValue    (in string key)
+		any          getValue    (in string key, in string locale)
 			raises (BackendFailed);
 
 		void         setValue    (in string key, in any value)
 			raises (BackendFailed);
 
-		any          getDefault  (in string key)
+		any          getDefault  (in string key, in string locale)
 			raises (BackendFailed);
 
 		KeyList      listDirs    (in string dir)
