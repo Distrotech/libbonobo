@@ -331,7 +331,7 @@ bonobo_application_class_init (BonoboApplicationClass *klass)
 		"new-instance", BONOBO_TYPE_APPLICATION, G_SIGNAL_RUN_LAST,
 		G_STRUCT_OFFSET (BonoboApplicationClass, new_instance),
 		NULL, NULL,	/* accumulator and accumulator data */
-		bonobo_marshal_INT__INT_POINTER,
+		bonobo_marshal_INT__INT_BOXED,
 		G_TYPE_INT, 2, /* return_type, nparams */
 		G_TYPE_INT, BONOBO_TYPE_APPLICATION_ARGV);
 

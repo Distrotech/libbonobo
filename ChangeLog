@@ -1,9 +1,9 @@
 2003-12-25  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
-	* bonobo/bonobo-application.c (bonobo_application_class_init):
-	Changed new-instance signal argv type to
-	BONOBO_TYPE_APPLICATION_ARGV instead of G_TYPE_POINTER, to make it
-	easiear to wrap in language bindings.
+	* bonobo/bonobo-marshal.list, bonobo/bonobo-application.c
+	(bonobo_application_class_init): Changed new-instance signal argv
+	type to BONOBO_TYPE_APPLICATION_ARGV instead of G_TYPE_POINTER, to
+	make it easiear to wrap in language bindings.
 
 	* bonobo/bonobo-application.h, bonobo/bonobo-application.c: Define
 	a BONOBO_TYPE_APPLICATION_ARGV boxed type for a NULL-terminated
