@@ -1,5 +1,11 @@
 2000-01-25  Nat Friedman  <nat@helixcode.com>
 
+	* bonobo/bonobo/gnome-view.c (gnome_view_destroy): Don't destroy
+ 	the UIHandler here.
+	
+	* bonobo/bonobo/gnome-control.c (gnome_control_destroy): Destroy
+ 	the UIH here if we have one.
+	
 	* bonobo/components/text-plain/bonobo-text-plain.c
  	(view_activate_cb): Use gnome_view_activate_notify instead of
  	using the CORBA method directly.
