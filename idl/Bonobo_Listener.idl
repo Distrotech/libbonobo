@@ -6,7 +6,7 @@
 
 module Bonobo {
 
-	typedef sequence<Any> ListenerArgs;
+	typedef sequence<any> ListenerArgs;
 
 	interface Listener : Bonobo::Unknown {
 		exception UnknownEvent {};
@@ -40,6 +40,6 @@ module Bonobo {
 		void remove_listener (in Listener l)
 			raises (UnknownListener);
 	};
-}
+};
 
 

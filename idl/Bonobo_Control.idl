@@ -53,15 +53,6 @@ interface ControlFrame : Bonobo::Unknown {
 	 * Returns: The interface to be used for menu/toolbar item merging.
 	 */
 	Bonobo::Unknown get_ui_handler ();
-
-	/**
-	 * deactivate_and_undo:
-	 *
-	 * This is called by the active object if it has just been activated
-	 * and the undo operation has been called
-	 */
-	void deactivate_and_undo ();
-
 };
 
 interface Control : Bonobo::Unknown {
@@ -80,13 +71,6 @@ interface Control : Bonobo::Unknown {
 	 * Activates or deactivates this Control.
 	 */
 	void activate (in boolean activate);
-
-	/**
-	 * reactivate_and_undo:
-	 * 
-	 * Activates the object and undoes the last operation.
-	 */
-	void reactivate_and_undo ();
 
 	/**
 	 * set_frame:
@@ -155,6 +139,10 @@ interface Control : Bonobo::Unknown {
 };
 
 interface PropertyControl : Bonobo::Unknown {
+	/**
+	 *   An interface for allowing a customization interface
+	 * in addition / instead of a property bag; rather immature.
+	 */
 	Control get_control ();
 };
 

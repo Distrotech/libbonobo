@@ -26,9 +26,11 @@
 #include <bonobo-advise.idl>
 
 /* Control stuff. */
-#include <bonobo-app.idl>
+/* #include <bonobo-listener.idl> */
+#include <bonobo-ui.idl>
 #include <bonobo-property.idl>
 #include <bonobo-control.idl>
+#include <bonobo-zoomable.idl>
 
 /* Subdocument stuff. */
 #include <bonobo-item-container.idl>

@@ -1,5 +1,29 @@
 2000-10-08  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-control.c (impl_Bonobo_Control_reactivate_and_undo),
+	(bonobo_control_get_epv): remove impl & hook.
+
+	* bonobo/bonobo-control-frame.c (impl_Bonobo_ControlFrame_deactivate_and_undo),
+	(bonobo_control_frame_get_epv): ditto.
+
+	* idl/Bonobo.idl: add bonobo-listener.idl, bonobo-zoomable.idl and
+	rename bonobo-app.idl to bonobo-ui.idl.
+
+	* bonobo/Makefile.am: ditto.
+
+	* idl/Makefile.am: ditto.
+
+	* bonobo/Makefile.am: ditto.
+
+	* bonobo/bonobo.h: ditto.
+
+	* configure.in: remove dire API instability warnings.
+
+2000-10-08  Michael Meeks  <michael@helixcode.com>
+
+	* idl/bonobo-control.idl (Control): Remove reactivate_and_undo.
+	(ControlFrame): remove deactivate_and_undo.
+
 	* idl/bonobo-zoomable.idl: Zoomable interface taken from nautilus
 	and adapted by Martin Baulig to bonoboness.
 
