@@ -2,18 +2,19 @@
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libbonobo package.
 # Dafydd Harries <daf@parnassus.ath.cx>, 2003.
+# Rhys Jones <rhys@sucs.org>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
-"PO-Revision-Date: 2003-05-31 16:24+0100\n"
-"Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-16 14:44+0000\n"
+"PO-Revision-Date: 2004-01-16 14:43+0000\n"
+"Last-Translator: Rhys Jones <rhys@sucs.org>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -63,17 +64,16 @@ msgid "Name service"
 msgstr "Gwasanaeth enw"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Gwasanaeth enw"
+msgstr "Gwasanaeth hysbysu"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Gwasanaeth hysbysu er mwyn cychwyn"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Dydym ni ddim yn ymdrin a gwrthrychau shlib mewn proses bell eto"
+msgstr "Dydyn ni ddim yn ymdrin a gwrthrychau shlib mewn proses bell eto"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
@@ -94,7 +94,7 @@ msgstr ""
 #: activation-server/object-directory-corba.c:1167
 #, c-format
 msgid "Race condition activating server '%s'"
-msgstr "Amod râs tran's gweitredu gweinydd '%s'"
+msgstr "Amod râs tra'n gweithredu gweinydd '%s'"
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
@@ -113,7 +113,7 @@ msgstr "mae gan yr iid %s lleoliad NULL"
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "nod annilyd '%c' yn yr iid '%s'"
+msgstr "nod annilys '%c' yn yr iid '%s'"
 
 #: activation-server/object-directory-load.c:305
 #, c-format
@@ -123,16 +123,16 @@ msgstr "Does dim gwerth gan y priodoledd '%s'"
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Methwyd gramadegu dogfen XML %s sydd wedi cam-ffurfio"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Yn ceisio'r cyfeiriadur %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Ni roddod y proses plentyn neges gwall, digwyddodd methiant anhysbys"
+msgstr "Ni roddodd y proses plentyn neges gwall, digwyddodd methiant anhysbys"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
@@ -147,13 +147,13 @@ msgstr "Methu forcio proses newydd"
 #: bonobo-activation/bonobo-activation-fork-server.c:318
 #, c-format
 msgid "Child received signal %u (%s)"
-msgstr "Derbynnodd blentyn arwydd %u (%s)"
+msgstr "Derbyniodd blentyn arwydd %u (%s)"
 
 # EFALLAI
 #: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr "Gwall anhysbys (nid yw'n defynnol, %u yw'r statws)"
+msgstr "Gwall anhysbys (nid yw'n derfynnol, %u yw'r statws)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
@@ -188,13 +188,13 @@ msgstr "Opsiynnau gweithredu Bonobo"
 #: bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr "methwyd g_module_open efo `%s' gyda `%s'"
+msgstr "methodd g_module_open agor `%s' gyda'r gwall `%s'"
 
 #: bonobo-activation/bonobo-activation-shlib.c:126
 #: bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr "Mechu canfod y symbol Bonobo_Plugin_info yn `%s'"
+msgstr "Methu canfod y symbol Bonobo_Plugin_info yn `%s'"
 
 #: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
@@ -204,15 +204,15 @@ msgstr "Dychwelodd y ffatri `%s' NIL ar gyfer `%s'"
 #: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr "Nid oeddd y shlib `%s' yn cynnwys `%s'"
+msgstr "Nid oedd y shlib `%s' yn cynnwys `%s'"
 
 #: bonobo/bonobo-application.c:341
 msgid "Name"
-msgstr ""
+msgstr "Enw"
 
 #: bonobo/bonobo-application.c:341
 msgid "Application unique name"
-msgstr ""
+msgstr "Enw unigryw rhaglen"
 
 # EFALLAI
 #: bonobo/bonobo-object.c:919
