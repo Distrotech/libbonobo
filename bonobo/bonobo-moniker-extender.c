@@ -87,7 +87,7 @@ bonobo_moniker_extender_init (GtkObject *object)
 	/* nothing to do */
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboMonikerExtender, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboMonikerExtender, 
 			   Bonobo_MonikerExtender,
 			   PARENT_TYPE,
 			   bonobo_moniker_extender);

@@ -60,7 +60,7 @@ bonobo_persist_init (GtkObject *object)
 	/* nothing to do */
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboPersist, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboPersist, 
 			   Bonobo_Persist,
 			   PARENT_TYPE,
 			   bonobo_persist);

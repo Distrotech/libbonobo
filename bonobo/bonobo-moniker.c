@@ -436,7 +436,7 @@ bonobo_moniker_init (GtkObject *object)
 	moniker->priv->name   = NULL;
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboMoniker, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboMoniker, 
 			   Bonobo_Moniker,
 			   PARENT_TYPE,
 			   bonobo_moniker);

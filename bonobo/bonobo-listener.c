@@ -94,7 +94,7 @@ bonobo_listener_init (GtkObject *object)
 	listener->priv->user_data = NULL;
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboListener, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboListener, 
 			   Bonobo_Listener,
 			   PARENT_TYPE,
 			   bonobo_listener);

@@ -802,7 +802,7 @@ bonobo_property_bag_init (BonoboPropertyBag *pb)
 	pb->priv->props = g_hash_table_new (g_str_hash, g_str_equal);
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboPropertyBag, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboPropertyBag, 
 			   Bonobo_PropertyBag,
 			   PARENT_TYPE,
 			   bonobo_property_bag);

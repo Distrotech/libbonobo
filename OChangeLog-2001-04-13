@@ -1,5 +1,9 @@
 2001-02-09  Michael Meeks  <michael@ximian.com>
 
+	* s/BONOBO_GTK_TYPE_FUNC/BONOBO_X_TYPE_FUNC/
+	
+2001-02-09  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-control-frame.c (bonobo_control_frame_sync_realize): 
 	fix warning text.
 

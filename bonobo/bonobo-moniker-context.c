@@ -72,7 +72,7 @@ bonobo_activation_context_init (GtkObject *object)
 }
 
 static
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboActivationContext,
+BONOBO_X_TYPE_FUNC_FULL (BonoboActivationContext,
 			   Bonobo_ActivationContext,
 			   PARENT_TYPE,
 			   bonobo_activation_context);

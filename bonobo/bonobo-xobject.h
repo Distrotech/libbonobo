@@ -95,7 +95,7 @@ GtkType        bonobo_x_type_unique            (GtkType            parent_type,
 						const GtkTypeInfo *info);
 
 
-#define BONOBO_GTK_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)     \
+#define BONOBO_X_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)     \
 GtkType                                                                       \
 prefix##_get_type (void)                                                      \
 {                                                                             \
@@ -120,7 +120,7 @@ prefix##_get_type (void)                                                      \
 	return type;                                                          \
 }
  
-#define BONOBO_GTK_TYPE_FUNC(class_name, parent, prefix)                      \
+#define BONOBO_X_TYPE_FUNC(class_name, parent, prefix)                      \
 GtkType                                                                       \
 prefix##_get_type (void)                                                      \
 {                                                                             \

@@ -169,7 +169,7 @@ bonobo_storage_init (GtkObject *object)
 	/* nothing to do */
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboStorage, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboStorage, 
 			   Bonobo_Storage,
 			   PARENT_TYPE,
 			   bonobo_storage);

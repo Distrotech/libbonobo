@@ -40,7 +40,7 @@ bonobo_moniker_simple_init (GtkObject *object)
 	/* nothing to do */
 }
 
-BONOBO_GTK_TYPE_FUNC (BonoboMonikerSimple, 
+BONOBO_X_TYPE_FUNC (BonoboMonikerSimple, 
 		      bonobo_moniker_get_type (),
 		      bonobo_moniker_simple);
 

@@ -194,7 +194,7 @@ bonobo_item_container_init (BonoboItemContainer *container)
 		g_str_hash, g_str_equal);
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboItemContainer, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboItemContainer, 
 			   Bonobo_ItemContainer,
 			   PARENT_TYPE,
 			   bonobo_item_container);

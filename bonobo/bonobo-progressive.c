@@ -159,7 +159,7 @@ bonobo_progressive_data_sink_init (GtkObject *object)
 	/* nothing to do */
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboProgressiveDataSink, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboProgressiveDataSink, 
 			   Bonobo_ProgressiveDataSink,
 			   PARENT_TYPE,
 			   bonobo_progressive_data_sink);

@@ -240,7 +240,7 @@ bonobo_event_source_init (GtkObject *object)
 	event_source->priv->listeners = NULL;
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboEventSource, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboEventSource, 
 			   Bonobo_EventSource,
 			   PARENT_TYPE,
 			   bonobo_event_source);

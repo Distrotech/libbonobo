@@ -65,7 +65,7 @@ bonobo_item_handler_init (GtkObject *object)
 	/* nothing to do */
 }
 
-BONOBO_GTK_TYPE_FUNC_FULL (BonoboItemHandler, 
+BONOBO_X_TYPE_FUNC_FULL (BonoboItemHandler, 
 			   Bonobo_ItemContainer,
 			   PARENT_TYPE,
 			   bonobo_item_handler);
