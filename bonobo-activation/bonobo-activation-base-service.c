@@ -397,6 +397,7 @@ existing_set(const OAFRegistrationCategory *regcat, struct SysServer *ss, CORBA_
       ssi->username = regcat->username?g_strdup(regcat->username):NULL;
       ssi->hostname = regcat->hostname?g_strdup(regcat->hostname):NULL;
       ssi->domain = regcat->domain?g_strdup(regcat->domain):NULL;
+      ss->instances = g_slist_prepend(ss->instances, ssi);
     }
   else
     {
