@@ -527,6 +527,7 @@ bonobo_debug_print
 bonobo_debug_shutdown
 bonobo_main
 bonobo_main_quit
+bonobo_main_level
 bonobo_activate
 bonobo_setup_x_error_handler
 bonobo_orb

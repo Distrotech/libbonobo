@@ -301,6 +301,21 @@ bonobo_main (void)
 }
 
 /**
+ * bonobo_main_level:
+ *
+ * Determines the number of times the bonobo main loop has been entered (minus
+ * the number of exits from the main loop).
+ *
+ * Returns: The number of main loops currently running (0 if no main loops are
+ * running).
+ */
+guint
+bonobo_main_level (void)
+{
+	return bonobo_main_loop_level;
+}
+
+/**
  * bonobo_main_quit:
  * 
  * Quits the main event loop.

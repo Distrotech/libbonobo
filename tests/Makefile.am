@@ -10,6 +10,7 @@ check_PROGRAMS =		\
 	test-stream-mem		\
 	test-storage-mem	\
 	test-generic-factory	\
+	test-main-loop		\
 	generic-factory
 
 INCLUDES =	\
@@ -38,6 +39,8 @@ test_stream_mem_SOURCES = test-stream-mem.c
 
 test_storage_mem_SOURCES = test-storage-mem.c
 
+test_main_loop_SOURCES = test-main-loop.c
+
 TESTS_ENVIRONMENT =					\
 	LD_LIBRARY_PATH="$(top_builddir)/bonobo/.libs:$$LD_LIBRARY_PATH"	\
 	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"\
@@ -46,6 +49,6 @@ TESTS_ENVIRONMENT =					\
 
 TESTS = test-moniker test-event-source test-object \
 	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem \
-	test-generic-factory.sh
+	test-generic-factory.sh test-main-loop
 check_SCRIPTS = test-properties.sh test-generic-factory.sh
 EXTRA_DIST=$(check_SCRIPTS) Test_Generic_Factory.server

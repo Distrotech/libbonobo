@@ -1,3 +1,11 @@
+2003-11-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* bonobo/bonobo-main.c (bonobo_main_level): Implement.
+
+	* tests/test-main-loop.c, tests/Makefile.am: Test the above.
+
+	* doc/api/libbonobo-sections.txt: Document it.
+
 2003-10-31  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.4.2
