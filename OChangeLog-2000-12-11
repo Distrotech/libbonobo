@@ -1,5 +1,23 @@
 2000-09-11  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-xml.c (do_set_id): don't tolerate '#' in a path
+	either.
+
+	* bonobo/bonobo-win.c (update_menus): remove set of info->widget
+	to priv->menu. (remove_fn): only destroy non-root widgets.
+	(destroy_priv): destroy popups.
+	(bonobo_win_add_popup, popup_destroy, bonobo_win_remove_popup),
+	(popup_remove): implement.
+	(build_control): implement. (build_menu_widget): split from here.
+	(container_destroy_siblings): update for custom items.
+	(container_destroy_siblings): fix moronic bug.
+	(info_dump_fn): dump the object reference too.
+	(build_toolbar_control): implement.
+	(update_dockitem): use container_destroy_siblings
+	(update_status): ditto.
+
+2000-09-11  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_new): use getpid to make
 	the name system unique.
 
@@ -12,7 +30,8 @@
 	warnings.
 
 	* bonobo/Makefile.am: Update s/bonobo-app/bonobo-win/
-	s/bonobo-app-item/bonobo-ui-item/ s/bonobo-app-toolbar/bonobo-ui-toolbar/
+	s/bonobo-app-item/bonobo-ui-item/
+	s/bonobo-app-toolbar/bonobo-ui-toolbar/
 
 	* bonobo/*: Add missing Author / Copyright / description headers.
 
