@@ -1,410 +1,240 @@
-# translation of libbonoboui.gnome-2-2.ar.po to Arabic
+# translation of libbonobo.po to Arabic
+# translation of libbonobo.po to
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Ammer Alsabbagh <whollyboss@yahoo.com>, 2002.
+# Isam Bayazidi <bayazidi@arabeyes.org>, 2002
 # Arafat Medini <lumina@silverpen.de>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonoboui.gnome-2-2.ar\n"
-"POT-Creation-Date: 2003-06-16 12:34+0200"
-"PO-Revision-Date: 2003-06-16 16:56+0200\n"
+"Project-Id-Version: libbonobo\n"
+"POT-Creation-Date: 2003-04-27 20:12+0200\n"
+"PO-Revision-Date: 2003-04-29 13:44+0200\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
-"MIME-Version: 1.0"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.1\n"
 
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Arafat Medini  <lumina@silverpen.de>, 2003.
-#
-#: bonobo/bonobo-canvas-item.c:647
-msgid "corba factory"
-msgstr "معمل كوربا"
-
-#: bonobo/bonobo-canvas-item.c:648
-msgid "The factory pointer"
-msgstr "مؤشر المعمل"
-
-#: bonobo/bonobo-canvas-item.c:657
-msgid "corba UI container"
-msgstr "حاوي واجهة مستخدم كوربا"
-
-#: bonobo/bonobo-canvas-item.c:658
-msgid "The User interface container"
-msgstr "حاوي واجهة المستخدم"
-
-#: bonobo/bonobo-dock-item-grip.c:236
-msgid "Dock the toolbar"
-msgstr "ادمج شريط الأدوات"
-
-#: bonobo/bonobo-dock-item-grip.c:237
-msgid "Un dock the toolbar"
-msgstr "افصل شريط الأدوات"
-
-#: bonobo/bonobo-dock-item.c:291 bonobo/bonobo-dock-item.c:292
-msgid "Shadow type"
-msgstr "نوع الظل"
-
-#: bonobo/bonobo-dock-item.c:302 bonobo/bonobo-dock-item.c:303
-#: bonobo/bonobo-ui-toolbar.c:1106 bonobo/bonobo-ui-toolbar.c:1107
-msgid "Orientation"
-msgstr "الاتجاه"
-
-#: bonobo/bonobo-dock-item.c:313 bonobo/bonobo-dock-item.c:314
-#: bonobo/bonobo-ui-toolbar.c:1125 bonobo/bonobo-ui-toolbar.c:1126
-msgid "Preferred width"
-msgstr "العرض المفضل"
-
-#: bonobo/bonobo-dock-item.c:322 bonobo/bonobo-dock-item.c:323
-#: bonobo/bonobo-ui-toolbar.c:1134 bonobo/bonobo-ui-toolbar.c:1135
-msgid "Preferred height"
-msgstr "الارتفاع المفضل"
-
-#: bonobo/bonobo-file-selector-util.c:383
-msgid "Select a file to open"
-msgstr "اختر ملفاً ليتم فتحه"
-
-#: bonobo/bonobo-file-selector-util.c:411
-msgid "Select files to open"
-msgstr "اختر ملفات ليتم فتحها"
-
-#: bonobo/bonobo-file-selector-util.c:440
-msgid "Select a filename to save"
-msgstr "اختر اسم ملف للتخزين"
-
-#: bonobo/bonobo-plug.c:372
-msgid "Event Forwarding"
-msgstr "تحويل الحدث"
-
-#: bonobo/bonobo-plug.c:373
-msgid "Whether X events should be forwarded"
-msgstr "فيما إذا كانت أحداث X سوف يتم تحويلها"
-
-#: bonobo/bonobo-selector-widget.c:300 bonobo/bonobo-window.c:415
-msgid "Name"
-msgstr "الاسم"
-
-#: bonobo/bonobo-selector-widget.c:322
-msgid "Description"
-msgstr "الشرح"
-
-#: bonobo/bonobo-selector.c:345
-msgid "Interfaces required"
-msgstr "الواجهات·المطلوبة"
-
-#: bonobo/bonobo-selector.c:346
-msgid ""
-"A NULL_terminated array of interfaces which a server must support in order "
-"to be listed in the selector.  Defaults to \"IDL:Bonobo/Embeddable:1.0\" if "
-"no interfaces are listed"
-msgstr ""
-"صف واجهات ذي نهاية م_صفرة يجب ان يدعمه النادل لكي يساق في المختار. "
-" الإفتراضات إلى \"IDL:Bonobo/Embeddable:1.0\" إذا لم تعلن اي واجهة"
-
-#: bonobo/bonobo-selector.c:348
-msgid "Interface required entry"
-msgstr "خانة·الواجهة·المطلوبة"
-
-#: bonobo/bonobo-selector.c:349
-msgid "One of the interfaces that's required"
-msgstr "واحدة·من·الواجهات·المطلوبة"
-
-#: bonobo/bonobo-ui-config-widget.c:267
-msgid "Visible"
-msgstr "ظاهر"
-
-#: bonobo/bonobo-ui-config-widget.c:274
-msgid "_Show"
-msgstr "عرض"
-
-#: bonobo/bonobo-ui-config-widget.c:281
-msgid "_Hide"
-msgstr "إخفاء"
-
-#: bonobo/bonobo-ui-config-widget.c:287
-msgid "_View tooltips"
-msgstr "ظهور أفكار الأدوات"
-
-#: bonobo/bonobo-ui-config-widget.c:292
-msgid "Toolbars"
-msgstr "أشرطة الأدوات"
-
-#: bonobo/bonobo-ui-config-widget.c:302
-msgid "toolbars"
-msgstr "أشرطة الأدوات"
-
-#: bonobo/bonobo-ui-config-widget.c:313 bonobo/bonobo-ui-sync-toolbar.c:552
-msgid "Look"
-msgstr "المظهر"
-
-#: bonobo/bonobo-ui-config-widget.c:322 bonobo/bonobo-ui-sync-toolbar.c:552
-msgid "_Icon"
-msgstr "رمز رسومي"
-
-#: bonobo/bonobo-ui-config-widget.c:328
-msgid "_Text and Icon"
-msgstr "نص ورمز رسومي"
-
-#: bonobo/bonobo-ui-config-widget.c:334
-msgid "Text only"
-msgstr "نص فقط"
-
-#: bonobo/bonobo-ui-config-widget.c:340
-msgid "_Priority text only"
-msgstr "الأولوية فقط نصاً"
-
-#: bonobo/bonobo-ui-engine.c:90
-msgid "Debug"
-msgstr "تنقيح"
-
-#: bonobo/bonobo-ui-engine.c:90
-msgid "_Dump XML"
-msgstr "_"
-
-#: bonobo/bonobo-ui-engine.c:91
-msgid "Dump the entire UI's XML description to the console"
-msgstr "اسقاط كامل وصف XML لواجهة المشتخدم الى الشاشة الطرفية"
-
-#: bonobo/bonobo-ui-engine-config.c:521
-msgid "Configure UI"
-msgstr "اضبط واجهة المستخدم"
-
-#: bonobo/bonobo-ui-init-gtk.c:113
-msgid "Gdk debugging flags to set"
-msgstr "خيارات معالج أخطاء Gdk المراد اختيارها"
-
-#: bonobo/bonobo-ui-init-gtk.c:113 bonobo/bonobo-ui-init-gtk.c:116
-#: bonobo/bonobo-ui-init-gtk.c:162 bonobo/bonobo-ui-init-gtk.c:165
-msgid "FLAGS"
-msgstr "خيارات"
-
-#: bonobo/bonobo-ui-init-gtk.c:116
-msgid "Gdk debugging flags to unset"
-msgstr "خيارات معالج أخطاء Gdk المراد إزالة الاختيار عنها"
-
-#: bonobo/bonobo-ui-init-gtk.c:120
-msgid "X display to use"
-msgstr "شاشة إظهار X المراد استعمالها"
-
-#: bonobo/bonobo-ui-init-gtk.c:120
-msgid "DISPLAY"
-msgstr "شاشة"
-
-#: bonobo/bonobo-ui-init-gtk.c:125
-msgid "X screen to use"
-msgstr "شاشة X للاستعمال"
-
-#: bonobo/bonobo-ui-init-gtk.c:125
-msgid "SCREEN"
-msgstr "شاشة"
-
-#: bonobo/bonobo-ui-init-gtk.c:129
-msgid "Make X calls synchronous"
-msgstr "إجعل طلبات X متزامنة"
-
-#: bonobo/bonobo-ui-init-gtk.c:135
-msgid "Don't use X shared memory extension"
-msgstr "لا تستخدم البرمجية الإضافية الخاصة بمشاركة ذاكرة X"
-
-#: bonobo/bonobo-ui-init-gtk.c:139
-msgid "Program name as used by the window manager"
-msgstr "اسم البرنامج كما سيتم استخدامه من قبل مدير النوافذ"
-
-#: bonobo/bonobo-ui-init-gtk.c:139
-msgid "NAME"
-msgstr "الاسم"
-
-#: bonobo/bonobo-ui-init-gtk.c:142
-msgid "Program class as used by the window manager"
-msgstr "صنف البرنامج كما سيتم استعماله من قبل مدير النوافذ"
-
-#: bonobo/bonobo-ui-init-gtk.c:142
-msgid "CLASS"
-msgstr "النوع"
-
-#: bonobo/bonobo-ui-init-gtk.c:146
-msgid "HOST"
-msgstr "المضيف"
-
-#: bonobo/bonobo-ui-init-gtk.c:150
-msgid "PORT"
-msgstr "البوابة"
-
-#: bonobo/bonobo-ui-init-gtk.c:155 bonobo/bonobo-ui-init-gtk.c:158
-msgid "STYLE"
-msgstr "نمط"
-
-#: bonobo/bonobo-ui-init-gtk.c:162
-msgid "Gtk+ debugging flags to set"
-msgstr "خيارات معالج أخطاء Gtk+ المراد اختيارها"
-
-#: bonobo/bonobo-ui-init-gtk.c:165
-msgid "Gtk+ debugging flags to unset"
-msgstr "خيارات معالج أخطاء Gtk+ المراد إزالة الاختيار عنها"
-
-#: bonobo/bonobo-ui-init-gtk.c:168
-msgid "Make all warnings fatal"
-msgstr "اجعل جميع التحذيرات أخطاء موقفة"
-
-#: bonobo/bonobo-ui-init-gtk.c:171
-msgid "Load an additional Gtk module"
-msgstr "حمل وحدة Gtk إضافية"
-
-#: bonobo/bonobo-ui-init-gtk.c:171
-msgid "MODULE"
-msgstr "الوحدة"
-
-#: bonobo/bonobo-ui-init-gtk.c:180
-msgid "GTK+"
-msgstr "GTK+"
-
-#: bonobo/bonobo-ui-main.c:188
-msgid "Bonobo GUI support"
-msgstr "دعم Bonobo لواجهة المستخدم"
-
-#: bonobo/bonobo-ui-sync-toolbar.c:552
-msgid "B_oth"
-msgstr "كلاهما"
-
-#: bonobo/bonobo-ui-sync-toolbar.c:552
-msgid "T_ext"
-msgstr "نص"
-
-#: bonobo/bonobo-ui-sync-toolbar.c:553
-msgid "Hide t_ips"
-msgstr "أخف الأفكار"
-
-#: bonobo/bonobo-ui-sync-toolbar.c:553
-msgid "Show t_ips"
-msgstr "أظهر الأفكار"
-
-#: bonobo/bonobo-ui-sync-toolbar.c:554
-msgid "_Hide toolbar"
-msgstr "أخف شريط الأدوات"
-
-#: bonobo/bonobo-ui-sync-toolbar.c:554
-msgid "Customi_ze"
-msgstr "تفصيل حسب الطلب"
-
-#: bonobo/bonobo-ui-sync-toolbar.c:555
-msgid "Customize the toolbar"
-msgstr "تفصيل شريط الأدوات حسب الطلب"
-
-#: bonobo/bonobo-ui-toolbar.c:1116
-msgid "is floating"
-msgstr "يطفو"
-
-#: bonobo/bonobo-ui-toolbar.c:1117
-msgid "whether the toolbar is floating"
-msgstr "فيما إذا كان شريط الأدوات يطفو"
-
-#: bonobo/bonobo-ui-util.c:623
-msgid "_Contents"
-msgstr "_محتويات"
-
-#: bonobo/bonobo-ui-util.c:624
-msgid "View help for this application"
-msgstr "عرض المساعدة حول هذا البرنامج"
-
-#: bonobo/bonobo-window.c:416
-msgid "Name of the window - used for configuration serialization."
-msgstr "اسم النافذة المستعملة لتجزأة الإعدادات."
-
-#: bonobo/bonobo-zoomable.c:326
-msgid "Zoom level"
-msgstr "مستوى التكبير/التصغير"
-
-#: bonobo/bonobo-zoomable.c:327
-msgid "The degree of enlargment"
-msgstr "درجة التكبير"
-
-#: bonobo/bonobo-zoomable.c:335
-msgid "Minimum Zoom level"
-msgstr "المستوى الأصغري للتكبير/التصغير"
-
-#: bonobo/bonobo-zoomable.c:336
-msgid "The minimum degree of enlargment"
-msgstr "الدرجة الدنيا للتكبير"
-
-#: bonobo/bonobo-zoomable.c:344
-msgid "Maximum Zoom level"
-msgstr "المستوى الأعلى للتكبير/التصغير"
-
-#: bonobo/bonobo-zoomable.c:345
-msgid "The maximum degree of enlargment"
-msgstr "الدرجة العظمى للتكبير"
-
-#: bonobo/bonobo-zoomable.c:353
-msgid "Has a minimum Zoom level"
-msgstr "له مستوى أصغري للتكبير/التصغير"
-
-#: bonobo/bonobo-zoomable.c:354
-msgid "Whether we have a valid minimum zoom level"
-msgstr "فيما إذا كان لدينا مستوى أصغري صحيح للتكبير/التصغير"
-
-#: bonobo/bonobo-zoomable.c:361
-msgid "Has a maximum Zoom level"
-msgstr "له مستوى أعظمي للتكبير/التصغير"
-
-#: bonobo/bonobo-zoomable.c:362
-msgid "Whether we have a valid maximum zoom level"
-msgstr "فيما إذا كان لدينا حد أعظمي صالح للتكبير/التصغير"
-
-#: bonobo/bonobo-zoomable.c:369
-msgid "Is continuous"
-msgstr "مستمر"
-
-#: bonobo/bonobo-zoomable.c:370
-msgid "Whether we zoom continuously (as opposed to jumps)"
-msgstr "فيما إذا كنا سنكبر/نصغر بشكل مستمر (عكس القفز)"
-
-#: samples/bonoboui/Bonobo_Sample_Hello.xml.h:1
-msgid "About this application"
-msgstr "حول هذا البرنامج"
-
-#: samples/bonoboui/Bonobo_Sample_Hello.xml.h:2
-msgid "Select"
-msgstr "اختر"
-
-#: samples/bonoboui/Bonobo_Sample_Hello.xml.h:3
-msgid "_About..."
-msgstr "حول"
-
-#: samples/bonoboui/Bonobo_Sample_Hello.xml.h:4
-msgid "_Edit"
-msgstr "تحرير"
-
-#: samples/bonoboui/Bonobo_Sample_Hello.xml.h:5
-msgid "_File"
-msgstr "ملف"
-
-#: samples/bonoboui/Bonobo_Sample_Hello.xml.h:6
-msgid "_Select"
-msgstr "اختر"
-
-#: samples/bonoboui/hello.c:63
-msgid "This does nothing; it is only a demonstration."
-msgstr "هذا لا يفعل شيئاً، إنه فقط للعرض"
-
-#: samples/bonoboui/hello.c:145
-msgid "BonoboUI-Hello."
-msgstr "BonoboUI-Hello."
-
-#: samples/bonoboui/hello.c:217
-msgid "Gnome Hello"
-msgstr "Gnome Hello"
-
-#. Create Label and put it in the Button:
-#: samples/bonoboui/hello.c:272
-msgid "Hello, World!"
-msgstr "Hello, World!"
-
-#: samples/bonoboui/hello.c:312
-msgid "Cannot init libbonoboui code"
-msgstr "لم يتم التمكن من ابتداء شيفرة libbonoboui "
-
-#: samples/controls/bonobo-sample-controls.c:133
-msgid "Could not initialize Bonobo UI"
-msgstr "لم يتم التمكن من ابتداء واجهة مستخدم Bonobo "
+#: bonobo/bonobo-exception.c:154
+msgid "An unsupported action was attempted"
+msgstr "تمت محاولة إجراء عمل غير مدعوم"
+
+#: bonobo/bonobo-exception.c:157
+msgid "IO Error"
+msgstr "خطأ في الإدخال/الإخراج"
+
+#: bonobo/bonobo-exception.c:160
+msgid "Invalid argument value"
+msgstr "قيمة متغيّر غير صالحة"
+
+#: bonobo/bonobo-exception.c:164
+msgid "Object not found"
+msgstr "لم يوجد الجسم"
+
+#: bonobo/bonobo-exception.c:167
+msgid "Syntax error in object description"
+msgstr "خطأ صياغي في شرح الجسم"
+
+#: bonobo/bonobo-exception.c:172
+msgid "Cannot activate object from factory"
+msgstr "لا أستطيع تغعيل الجسم من المعاين"
+
+#: bonobo/bonobo-exception.c:177
+msgid "No permission to access stream"
+msgstr "لا إذن للنفوذ إلى التيار"
+
+#: bonobo/bonobo-exception.c:180
+msgid "An unsupported stream action was attempted"
+msgstr "تمت محاولة إجراء عمل تياري غير مدعوم"
+
+#: bonobo/bonobo-exception.c:183
+msgid "IO Error on stream"
+msgstr "خطأ في إدخال/إخراج التيار"
+
+#: bonobo/bonobo-exception.c:187
+msgid "IO Error on storage"
+msgstr "خطأ إخراج/إدخال عند التخزين"
+
+#: bonobo/bonobo-exception.c:190
+msgid "Name already exists in storage"
+msgstr "الاسم موجود مسبقاً في المخزن"
+
+#: bonobo/bonobo-exception.c:193
+msgid "Object not found in storage"
+msgstr "الجسم غير موجود في المخزن"
+
+#: bonobo/bonobo-exception.c:196
+msgid "No permission to do operation on storage"
+msgstr "لا إذن لتنفيذ العمل على المخزن"
+
+#: bonobo/bonobo-exception.c:198
+msgid "An unsupported storage action was attempted"
+msgstr "تمت محاولة إجراء عمل تخزيني غير مدعوم"
+
+#: bonobo/bonobo-exception.c:200
+msgid "Object is not a stream"
+msgstr "الجسم ليس تياراً"
+
+#: bonobo/bonobo-exception.c:203
+msgid "Object is not a storage"
+msgstr "الجسم ليس مخزناً"
+
+#: bonobo/bonobo-exception.c:206
+msgid "Storage is not empty"
+msgstr "المخزن غير خال"
+
+#: bonobo/bonobo-exception.c:210
+msgid "malformed user interface XML description"
+msgstr "شرح XML مشوّه لواجهة المستخدم"
+
+#: bonobo/bonobo-exception.c:213
+msgid "invalid path to XML user interface element"
+msgstr "مسار غير صالح إلى عنصر XML  لواجهة المستخدم"
+
+#: bonobo/bonobo-exception.c:216
+msgid "the requested UI attribute didn't exist"
+msgstr " مواصفة UI المطلوبة غير موجودة في واجهة المستخدم"
+
+#: bonobo/bonobo-exception.c:219
+msgid "Unknown command or verb"
+msgstr "فعل أو أمر غير معروف"
+
+#: bonobo/bonobo-exception.c:222
+msgid "Command is insensitive"
+msgstr "الأمر غير حساس"
+
+#: bonobo/bonobo-exception.c:226
+msgid "incorrect data type"
+msgstr "نوع بيانات غير صحيح"
+
+#: bonobo/bonobo-exception.c:229
+msgid "stream not found"
+msgstr "لم يتم العثور على التيّار"
+
+#: bonobo/bonobo-exception.c:233
+msgid "property not found"
+msgstr "لم يتم العثور على الصفة"
+
+#: bonobo/bonobo-exception.c:236
+msgid "property has invalid type"
+msgstr "الصفة ذات نوع غير صالح"
+
+#: bonobo/bonobo-exception.c:239
+msgid "property is read only"
+msgstr "الصفة للقراءة فقط"
+
+#: bonobo/bonobo-exception.c:242
+msgid "config database backend failed "
+msgstr "فشل ضبط الواجهة الخلفية لقاعدة البيانات"
+
+#: bonobo/bonobo-exception.c:246
+msgid "Moniker interface cannot be found"
+msgstr "لم يتم العثور على واجهة Moniker"
+
+#: bonobo/bonobo-exception.c:249
+msgid "Moniker activation timed out"
+msgstr "أنتهاء الفرصة الزمنية لتفعيل Moniker"
+
+#: bonobo/bonobo-exception.c:252
+msgid "Syntax error within moniker"
+msgstr "خطأ صياغي داخل moniker"
+
+#: bonobo/bonobo-exception.c:255
+msgid "Moniker has an unknown moniker prefix"
+msgstr "يوجد مقدمة moniker غير معروفة في Moniker"
+
+#: bonobo/bonobo-exception.c:279
+msgid "Error checking error; no exception"
+msgstr "خطأ تفحص الخطأ، بلا استثناء"
+
+#: bonobo/bonobo-exception.c:288
+msgid "General activation error with no description"
+msgstr "خطأ تفعيل عام بدون شرح"
+
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
+msgid "Could not initialize Bonobo"
+msgstr "لم يتم تفعيل بونوبو"
+
+#: bonobo/bonobo-moniker.c:353
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr "فشل حل أو توسعة '%s"
+
+#: bonobo/bonobo-moniker-util.c:246
+msgid "Failed to activate object"
+msgstr "فشل تفعيل الجسم"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
+msgid "HTTP Moniker"
+msgstr "HTTP Moniker"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "ORB IOR handling moniker"
+msgstr "ORB IOR handling moniker"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "Standard Moniker factory"
+msgstr "معاين Moniker القياسي "
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Oaf activation moniker"
+msgstr "generic Oaf activation moniker"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
+msgid "generic Oaf query moniker"
+msgstr "generic Oaf query moniker"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
+msgid "generic factory 'new' moniker"
+msgstr "generic factory 'new' moniker"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
+msgid "generic item moniker"
+msgstr "عنصر moniker عام"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:8
+msgid "stream MonikerExtender"
+msgstr "MonikerExtender تيّار"
+
+#: monikers/bonobo-moniker-oaf.c:53
+#, c-format
+msgid "Exception activating '%s'"
+msgstr "استثناء عند تفعيل '%s'"
+
+#: monikers/bonobo-moniker-oaf.c:62
+#, c-format
+msgid "Failed to activate '%s'"
+msgstr "فشل تغعيل '%s'"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+msgid "Bonobo Echo server factory"
+msgstr "معاين نادل بونوبو للصدى"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+msgid "Bonobo Echo server sample program"
+msgstr "تطبيق مثال لخادم بونوبو الصدى"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+msgid "Echo component"
+msgstr "مكون الصدى"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+msgid "Echo component factory"
+msgstr "معاين مكونات الصدى"
+
+#: samples/echo/echo-client.c:22
+msgid "I could not initialize Bonobo"
+msgstr "لم اتمكن من تفعيل بونوبو"
+
+#: samples/echo/echo-client.c:33
+msgid "Could not create an instance of the sample echo component"
+msgstr "لم اتمكن من إنشاء حالة من نموذج مكوّن الصدى"
+
+#: samples/echo/echo-client.c:45
+#, c-format
+msgid "An exception occured '%s'"
+msgstr "حصل استثناء '%s'"
 
