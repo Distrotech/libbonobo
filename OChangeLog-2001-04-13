@@ -1,3 +1,10 @@
+2001-01-08  Robin * Slomkowski  <rslomkow@eazel.com>
+
+	reviewed by: Jirka Lebl <jirka@5z.com>
+
+	* monikers/Makefile.am: added missing Bonobo_Moniker_cache.oaf.in
+	to EXTRA_DISTS
+
 2001-01-05  Maciej Stachowiak  <mjs@eazel.com>
 
 	xml-i18n-toolize
