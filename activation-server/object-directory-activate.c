@@ -166,6 +166,9 @@ od_server_activate (Bonobo_ServerInfo *si,
 		    CORBA_Object       od_obj,
                     CORBA_Environment *ev)
 {
+        g_return_val_if_fail (ev->_major == CORBA_NO_EXCEPTION,
+                              CORBA_OBJECT_NIL);
+
 	if (!strcmp (si->server_type, "exe"))
 		return od_server_activate_exe (si, actinfo, od_obj, ev);
 
