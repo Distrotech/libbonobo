@@ -9,19 +9,29 @@
 
 module Bonobo {
 
-/*
- * The C API needs a user_data pointer.
- */
 	typedef sequence<char> PrintData;
 
-	struct PrintContext {
-		/*
-		 * FIXME: banding / scissoring ? done at client / server end ?
-		 */
-		double x, y, width, height;
+	struct PrintScissor {
+		double width_first_page,  width_per_page;
+		double height_first_page, height_per_page;
+	};
+
+	struct PrintDimensions {
+		double width, height;
 	};
 
 	interface Print : Bonobo::Unknown {
-		PrintData render (in PrintContext pc);
+		/**
+		 * render:
+		 *
+		 *   This returns a gnome-print Meta stream of the object
+		 * rendered into an infinite page at the origin with size
+		 * determined by the PrintDimensions. The PrintScissor tells
+		 * it at what points it will be split across pages so it can
+		 * adjust its rendering if required.
+		 **/
+		PrintData render (in PrintDimensions pd,
+				  in PrintScissor    scissor);
 	};
 };
+

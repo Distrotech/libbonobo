@@ -1,3 +1,13 @@
+2000-04-13  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-print-client.c: Total API re-write.
+
+	* bonobo/bonobo-print.c (impl_render): update & kill leak, add copy.
+
+	* samples/compound-doc/paint-component-simple.c (render_fn): update.
+
+	* samples/compound-doc/sample-container.c (container_print_preview_cmd): ditto.
+
 2000-04-11  Gene Z. Ragan  <gzr@eazel.com>
 
 	Added support for rgb pixbufs to ui handlers.  This entailed linking
