@@ -94,6 +94,13 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_UIHandler_NotToplevelHandler))
 		return g_strdup (_("internal menu or toolbar exception"));
+
+	/* Bonobo::UIContainer */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_UIContainer_MalFormedXML))
+		return g_strdup (_("malformed user interface XML description"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_UIContainer_InvalidPath))
+		return g_strdup (_("invalid path to XML user interface element"));
 		
 	/* Bonobo::Persist */
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_Persist_WrongDataType))

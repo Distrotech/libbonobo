@@ -1,3 +1,32 @@
+2000-09-15  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_accel_set),
+	(bonobo_ui_util_accel_get): implement.
+	(bonobo_ui_util_build_accel): re-write.
+
+	* bonobo/bonobo-win.c (menu_item_set_global_accels),
+	(update_keybindings): use them.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_menu_new): add
+	accelerator set.
+	(compat_menu_parse_uiinfo_one_with_data): upd.
+
+	* bonobo/bonobo-main.c (bonobo_exception_get_text): update to
+	new exceptions.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_container_path_exists):
+	implement.
+
+	* bonobo/bonobo-win.c (update_dockitem): add "hidden" property on
+	dockitem.
+
+	* bonobo/bonobo-ui-compat.c (do_set_pixmap): split out from
+	(bonobo_ui_handler_toolbar_item_set_pixmap): update.
+	(bonobo_ui_handler_menu_set_pixmap): impl.
+
+	* bonobo/bonobo-win.c (bonobo_win_get_name): tolerate NULL.
+	(bonobo_win_set_name): ditto.
+
 2000-09-14  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_get_ui_fname): Search the
