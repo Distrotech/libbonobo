@@ -1,3 +1,13 @@
+2001-01-26  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-sync-toolbar.c (create_dockitem): add missing
+	bracket !
+
+2001-01-25  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: Depend on oaf >= 0.6.2 so that people can actualy
+	load .oaf files.
+
 2001-01-25  Federico Mena Quintero  <federico@ximian.com>
 
 	* bonobo/bonobo-ui-sync-toolbar.c (create_dockitem): Follow the
