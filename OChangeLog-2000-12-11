@@ -1,3 +1,14 @@
+1999-08-03  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-object-client.c (gnome_object_activate): Simplistic
+	file,item moniker implementation.  
+	(gnome_object_restore_from_url): New routine for implementing
+	moniker loading from an url.  We need an async version of this as
+	well.  Probably we need async versions of all of these routines.
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_bind): Remove
+	double free here.
+
 1999-07-31  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/test-storage.c (main): Improved error checking;  Use a

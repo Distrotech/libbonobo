@@ -8,6 +8,11 @@
  */
 #include <bonobo/gnome-object-client.h>
 
+/* These are for the Moniker activation */
+#include <bonobo/gnome-stream.h>
+#include <bonobo/gnome-moniker-client.h>
+#include <bonobo/gnome-stream-fs.h>
+
 static GnomeObjectClass *gnome_object_client_parent_class;
 
 /**
@@ -54,6 +59,8 @@ gnome_object_activate_with_repo_id (GoadServerList *list,
 	CORBA_Object corba_object;
 	GnomeObjectClient *object;
 
+	g_warning ("Activating objects by repo_id is a bad idea, try using the goad_id instead");
+	
 	corba_object = goad_server_activate_with_repo_id (NULL, repo_id, 0, NULL);
 	if (corba_object == CORBA_OBJECT_NIL)
 		return NULL;
@@ -96,6 +103,204 @@ gnome_object_activate_with_goad_id (GoadServerList *list,
 	return object;
 }
 
+static GList *
+parse_moniker_string (const char *desc)
+{
+	GList *res = NULL;
+	GString *s;
+	const char *p;
+	
+	/* Compute number of elements */
+	s = g_string_new ("");
+	for (p = desc; *p; p++){
+		if (*p == '\\'){
+			p++;
+			if (!*p)
+				break;
+			g_string_append_c (s, *p);
+			continue;
+		}
+		if (*p == ','){
+			res = g_list_append (res, g_strdup (s->str));
+			g_string_assign (s, "");
+		} else
+			g_string_append_c (s, *p);
+	}
+	res = g_list_append (res, g_strdup (s->str));
+	g_string_free (s, TRUE);
+
+	return res;
+}
+
+GNOME_Unknown
+gnome_object_restore_from_url (const char *goad_id, const char *url)
+{
+#define gnome_object_restore_from_url_defined_here
+	CORBA_Object rtn = CORBA_OBJECT_NIL;
+	GNOME_PersistFile persist;
+	gchar *name;
+	CORBA_Environment ev;
+	
+	name = g_strdup_printf ("url_moniker!%s", url);
+	
+	/* 1. Check the naming service to see if we're already available */
+	rtn = gnome_moniker_find_in_naming_service (name, goad_id);
+	
+	/* 2. fire up that object specified by the goad_id  */
+	rtn = goad_server_activate_with_id (
+		NULL,		/* name_server list */
+		goad_id,	/* server to activate */
+		0,		/* GoadActivationFlags */
+		0);		/* params for activation */
+
+	g_free (name);
+	
+	if (!rtn) /* bail */
+		return CORBA_OBJECT_NIL;
+
+	CORBA_exception_init (&ev);
+	/*
+	 * 4. try to feed it the file (first by
+	 * PersistFile, then by PersistStream
+	 */
+	persist = (GNOME_PersistFile) GNOME_Unknown_query_interface (
+		rtn, "IDL:GNOME/PersistFile:1.0", &ev);
+
+	if (persist) {
+		gboolean success = FALSE;
+		
+		GNOME_PersistFile_load (persist, url, &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION)
+			success = FALSE;
+		
+		GNOME_Unknown_unref (persist, &ev);
+		CORBA_Object_release (persist, &ev);
+
+		if (!success){
+			GNOME_Unknown_unref (rtn, &ev);
+			CORBA_Object_release (rtn, &ev);
+			rtn = CORBA_OBJECT_NIL;
+		}
+	}
+	else
+	{
+		/* doesn't have PersistFile; try with PersistStream */
+		GnomeStream *stream;
+		
+		persist = GNOME_Unknown_query_interface (
+			rtn, "IDL:GNOME/PersistStream:1.0", &ev);
+
+		CORBA_exception_free (&ev);
+		
+		if (!persist)
+			rtn = CORBA_OBJECT_NIL;
+		else {
+			stream = gnome_stream_fs_open (
+				url, GNOME_Storage_READ);
+			if (!stream)
+				rtn = CORBA_OBJECT_NIL;
+			else {
+				GNOME_PersistStream_load (
+					(GNOME_PersistStream) persist,
+					gnome_object_corba_objref (GNOME_OBJECT (stream)),
+					&ev);
+				
+				if (ev._major != CORBA_NO_EXCEPTION)
+					rtn = CORBA_OBJECT_NIL;
+
+				GNOME_Unknown_unref (persist, &ev);
+				CORBA_Object_release (persist, &ev);
+
+
+			}
+		}
+	}
+	
+	CORBA_exception_free (&ev);
+	return (GNOME_Unknown) rtn;
+}
+
+static void
+moniker_info_list_destroy (GList *moniker_info_list)
+{
+	g_list_foreach (moniker_info_list, (GFunc) g_free, NULL);
+	g_list_free (moniker_info_list);
+}
+
+/**
+ * gnome_object_activate:
+ * @object_desc: An object moniker.
+ * @flags: activation flags
+ *
+ * Returns: An object created.
+ */
+GnomeObjectClient *
+gnome_object_activate (const char *object_desc, GoadActivationFlags flags)
+{
+	CORBA_Environment ev;
+	GNOME_Unknown obj, last;
+	GnomeObjectClient *object;
+	GList *moniker_info, *item;
+	
+	g_return_val_if_fail (object_desc != NULL, NULL);
+
+	if (strncmp (object_desc, "moniker:", 8) != 0)
+		return gnome_object_activate_with_goad_id (NULL, object_desc, flags, NULL);
+
+	moniker_info = parse_moniker_string (object_desc + 8);
+	if (g_list_length (moniker_info) < 2){
+		moniker_info_list_destroy (moniker_info);
+		return NULL;
+	}
+
+	/*
+	 * Bind the file
+	 */
+	obj = gnome_object_restore_from_url (moniker_info->data, moniker_info->next->data);
+
+	if (obj == CORBA_OBJECT_NIL){
+		moniker_info_list_destroy (moniker_info);
+		return NULL;
+	}
+
+	last = obj;
+	CORBA_exception_init (&ev);
+	for (item = moniker_info->next->next; item; item = item->next){
+		GNOME_Container container;
+		GNOME_Unknown new_object;
+		const char *item_name = item->data;
+
+		container = (GNOME_Container) GNOME_Unknown_query_interface (
+			last, "IDL:GNOME/Container:1.0", &ev);
+		if (container == CORBA_OBJECT_NIL){
+			moniker_info_list_destroy (moniker_info);
+			GNOME_Unknown_unref (obj, &ev);
+			CORBA_exception_free (&ev);
+			return NULL;
+		}
+
+		new_object = GNOME_Container_get_object (
+			container, item_name, TRUE, &ev);
+
+		GNOME_Unknown_unref ((GNOME_Unknown) container, &ev);
+		if (new_object == CORBA_OBJECT_NIL){
+			moniker_info_list_destroy (moniker_info);
+			GNOME_Unknown_unref (obj, &ev);
+			CORBA_exception_free (&ev);
+			return NULL;
+		}
+		last = new_object;
+	}
+	moniker_info_list_destroy (moniker_info);
+	CORBA_exception_free (&ev);
+
+	object = gtk_type_new (gnome_object_client_get_type ());
+	gnome_object_client_construct (object, (CORBA_Object) last);
+	
+	return object;
+}
+	
 static void
 gnome_object_client_destroy (GtkObject *object)
 {
@@ -142,3 +347,7 @@ gnome_object_client_get_type (void)
 
 	return type;
 }
+
+#ifndef gnome_object_restore_from_url_defined_here
+#error You might want to remove all the headers included here to get this file here.
+#endif

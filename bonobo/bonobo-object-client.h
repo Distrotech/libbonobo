@@ -32,6 +32,8 @@ GtkType            gnome_object_client_get_type       (void);
 GnomeObjectClient *gnome_object_client_construct      (GnomeObjectClient *object_client,
 						       CORBA_Object corba_object);
 
+GnomeObjectClient *gnome_object_activate              (const char *object_desc,
+						       GoadActivationFlags flags);
 GnomeObjectClient *gnome_object_activate_with_repo_id (GoadServerList *list,
 						       const char *repo_id,
 						       GoadActivationFlags flags,
@@ -40,4 +42,7 @@ GnomeObjectClient *gnome_object_activate_with_goad_id (GoadServerList *list,
 						       const char *goad_id,
 						       GoadActivationFlags flags,
 						       const char **params);
+GNOME_Unknown      gnome_object_restore_from_url      (const char *goad_id,
+						       const char *url);
+
 #endif /* _GNOME_OBJECT_CLIENT_H_ */
