@@ -2,6 +2,13 @@
 
 # Warning: this test requires bonobo-activation-server to not be running.
 
+if test "z$ORBIT_TMPDIR" = "z"; then
+	ORBIT_TMPDIR="/tmp/orbit-$USER/tst"
+	rm -Rf $ORBIT_TMPDIR
+	mkdir -p $ORBIT_TMPDIR
+fi
+TMPDIR=$ORBIT_TMPDIR;
+export TMPDIR;
 
 BONOBO_ACTIVATION_SERVER="../activation-server/bonobo-activation-server";
 BONOBO_ACTIVATION_PATH=".:$BONOBO_ACTIVATION_PATH";
@@ -9,10 +16,6 @@ PATH=".:$PATH";
 LD_LIBRARY_PATH="./.libs:$LD_LIBRARY_PATH";
 
 export BONOBO_ACTIVATION_SERVER BONOBO_ACTIVATION_PATH PATH LD_LIBRARY_PATH
-
-#if test ! -z "$(ps x | grep bonobo-activation-server)"; then
-#    echo "WARNING: there seems to be already a bonobo-activation-server running, therefore this test might fail";
-#fi
 
 # job control must be active
 set -m

@@ -1,5 +1,8 @@
 2003-07-15  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* tests/test-generic-factory.sh: Set TMPDIR to a private
+	directory, to force a private b-a-s.
+
 	* tests/models/generic-factory.output: Reference model changed a bit.
 
 	* tests/Makefile.am: Added back a simplified version of the
