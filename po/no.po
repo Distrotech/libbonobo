@@ -1,12 +1,12 @@
 # Norwegian translation of libbonobo (bokmål dialect).
-# Copyright (C) 1999-2003 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 1999-2003.
+# Copyright (C) 1999-2004 Free Software Foundation, Inc.
+# Kjartan Maraas <kmaraas@gnome.org>, 1999-2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-14 11:21+0100\n"
+"POT-Creation-Date: 2004-01-06 19:54+0100\n"
 "PO-Revision-Date: 2003-12-14 11:21+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: activation-server/activation-context-corba.c:473
+#: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
 msgstr "Kunne ikke finne ut hvilket barn tjeneren var listet i"
 
-#: activation-server/activation-context-corba.c:751
+#: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
 msgstr "Ikke en gyldig aktiverings-ID"
 
@@ -90,7 +90,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1128
+#: activation-server/object-directory-corba.c:1167
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "«Race condition» under aktivering av tjener «%s»"
@@ -193,11 +193,11 @@ msgstr "Fabrikk «%s» returnerte NULL for «%s»"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib «%s» inneholdt ikke «%s»"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
 msgstr "Navn"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
 msgstr "Unikt navn for applikasjonen"
 
