@@ -386,7 +386,7 @@ impl_OAF_ActivationContext__get_directories (impl_POA_OAF_ActivationContext *
 	retval->_buffer =
 		CORBA_sequence_OAF_ObjectDirectory_allocbuf (retval->_length);
 
-	for (i = 0, cur = servant->dirs; cur; cur = cur->next) {
+	for (i = 0, cur = servant->dirs; cur; cur = cur->next, i++) {
 		ChildODInfo *child;
 		child = cur->data;
 		retval->_buffer[i] = CORBA_Object_duplicate (child->obj, ev);
