@@ -15,8 +15,10 @@
 #include "bonobo-storage.idl"
 
 module Bonobo {
-	exception NotSupported {};
 
+	exception NotSupported {};
+	exception IOError {};
+	
 	interface Persist : Unknown {
 		enum Status {
 			SAVE_OK,
@@ -26,6 +28,7 @@ module Bonobo {
 
 		exception WrongDataType {};
 		exception FileNotFound {};
+	
 
 		typedef string                ContentType;
 		typedef sequence<ContentType> ContentTypeList;
@@ -61,7 +64,8 @@ module Bonobo {
 		 * pointed in by @path
 		 */
 		void load (in string path)
-			raises (WrongDataType, FileNotFound);
+			raises (IOError, NotSupported,
+				WrongDataType, FileNotFound);
 
 		/**
 		 * save:
@@ -69,7 +73,8 @@ module Bonobo {
 		 * saves the document object to the file 
 		 * pointed in by @path
 		 */
-		void save (in string path);
+		void save (in string path)
+			raises (IOError, NotSupported);
 	
 		/**
 		 * isDirty:
@@ -112,7 +117,8 @@ module Bonobo {
 		 * @storage provided
 		 */
 		void load (in Bonobo::Storage storage)
-			raises (WrongDataType, NotSupported);
+			raises (IOError, NotSupported,
+				WrongDataType);
 
 		/**
 		 * save:
@@ -125,7 +131,7 @@ module Bonobo {
 		 */
 		void save (in Bonobo::Storage storage,
 			   in boolean same_as_loaded)
-			raises (NotSupported);
+			raises (IOError, NotSupported);
 	
 		/**
 		 * initNew:
@@ -159,7 +165,8 @@ module Bonobo {
 		 * Loads the status of the object from @stream
 		 */
 		void load (in Bonobo::Stream stream, in ContentType type)
-			raises (WrongDataType, NotSupported);
+			raises (IOError, NotSupported,
+				WrongDataType);
 
 		/**
 		 * save:
@@ -175,7 +182,8 @@ module Bonobo {
 		 * Saves the state of the object to the @stream
 		 */
 		void save (in Bonobo::Stream stream, in ContentType type)
-			raises (WrongDataType, NotSupported);
+			raises (IOError, NotSupported,
+				WrongDataType);
 
 		/**
 		 * getMaxSize:

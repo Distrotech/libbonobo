@@ -67,13 +67,21 @@ impl_load (PortableServer_Servant servant,
 	else {
 		GtkObjectClass *oc = GTK_OBJECT (pf)->klass;
 		BonoboPersistFileClass *class = BONOBO_PERSIST_FILE_CLASS (oc);
-		
-		result = (*class->load)(pf, filename, ev);
+
+		if (class->load)
+			result = (*class->load)(pf, filename, ev);
+		else {
+			CORBA_exception_set (
+				ev, CORBA_USER_EXCEPTION,
+				ex_Bonobo_NotSupported, NULL);
+			return;
+		}
+			
 	}
 	if (result != 0) {
 		CORBA_exception_set (
 			ev, CORBA_USER_EXCEPTION,
-			ex_Bonobo_Persist_FileNotFound, NULL);
+			ex_Bonobo_IOError, NULL);
 	}
 }
 
@@ -91,8 +99,15 @@ impl_save (PortableServer_Servant servant,
 	else {
 		GtkObjectClass *oc = GTK_OBJECT (pf)->klass;
 		BonoboPersistFileClass *class = BONOBO_PERSIST_FILE_CLASS (oc);
-		
-		result = (*class->save)(pf, filename, ev);
+
+		if (class->save)
+			result = (*class->save)(pf, filename, ev);
+		else {
+			CORBA_exception_set (
+				ev, CORBA_USER_EXCEPTION,
+				ex_Bonobo_NotSupported, NULL);
+			return;
+		}
 	}
 	
 	if (result != 0){
@@ -131,14 +146,6 @@ init_persist_file_corba_class (void)
 	bonobo_persist_file_vepv.Bonobo_PersistFile_epv = bonobo_persist_file_get_epv ();
 }
 
-static int
-bonobo_persist_file_nop (BonoboPersistFile *pf,
-			 const CORBA_char  *filename,
-			 CORBA_Environment *ev)
-{
-	return -1;
-}
-
 static CORBA_char *
 bonobo_persist_file_get_current_file (BonoboPersistFile *pf,
 				      CORBA_Environment *ev)
@@ -157,8 +164,8 @@ bonobo_persist_file_class_init (BonoboPersistFileClass *klass)
 	 * Override and initialize methods
 	 */
 
-	klass->save = bonobo_persist_file_nop;
-	klass->load = bonobo_persist_file_nop;
+	klass->save = NULL;
+	klass->load = NULL;
 	klass->get_current_file = bonobo_persist_file_get_current_file;
 	
 	init_persist_file_corba_class ();
