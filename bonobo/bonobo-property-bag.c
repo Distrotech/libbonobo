@@ -422,18 +422,10 @@ impl_GNOME_PropertyBag_get_property (PortableServer_Servant servant,
 	GNOME_Property		 prop;
 
 	if (g_hash_table_lookup (pb->priv->props, name) == NULL) {
-		GNOME_PropertyBag_PropertyNotFound *exception;
-
-		exception = g_new0 (GNOME_PropertyBag_PropertyNotFound, 1);
-		if (exception == NULL) {
-			CORBA_exception_set_system (ev, ex_CORBA_NO_MEMORY,
-						    CORBA_COMPLETED_NO);
-			return CORBA_OBJECT_NIL;
-		}
 
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_GNOME_PropertyBag_PropertyNotFound,
-				     exception);
+				     NULL);
 
 		return CORBA_OBJECT_NIL;
 	}

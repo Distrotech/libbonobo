@@ -1,5 +1,29 @@
 1999-12-10  Nat Friedman  <nat@helixcode.com>
 
+	* storage-modules/gnome-storage-efs.c (real_list_contents):
+ 	Parenthesis around assignment used as comparison to eliminate
+ 	warning.
+	(gnome_storage_efs_open): Cast sefs to GNOME_OBJECT instead of
+ 	GTK_OBJECT when calling gnome_object_destroy.
+
+	* bonobo/gnome-property-bag.c
+ 	(impl_GNOME_PropertyBag_get_property): The exception structure is
+ 	empty, so there's no need to allocate it.
+
+	* bonobo/gnome-persist-file.c (impl_get_current_file): Do not use
+ 	g_new to allocate the exception.  Dup the string that we stuff in
+ 	the exception.
+
+	* bonobo/gnome-object.c (impl_GNOME_Unknown_query_interface):
+ 	Fixed the formatting here.
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_bind): Use
+ 	CORBA_Object_is_nil to check if the returned server is NIL instead
+ 	of comparing the pointer to NULL.
+	
+	* bonobo/gnome-object-client.c (gnome_object_restore_from_url):
+ 	Likewise.
+
 	* HACKING: Added a note saying that all patches must be approved.
 
 	* Reverted Elliot's previous patch.

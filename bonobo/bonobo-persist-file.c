@@ -30,15 +30,9 @@ impl_get_current_file (PortableServer_Servant servant, CORBA_Environment *ev)
 	{
 		/* otherwise, raise a `NoCurrentName' exception */
 		GNOME_PersistFile_NoCurrentName *exception;
-		exception = g_new (GNOME_PersistFile_NoCurrentName, 1);
-		if (exception == NULL) {
-			CORBA_exception_set_system (ev, ex_CORBA_NO_MEMORY,
-						    CORBA_COMPLETED_NO);
-
-			return NULL;
-		}
+		exception = GNOME_PersistFile_NoCurrentName__alloc ();
 		
-		exception->extension = "";
+		exception->extension = CORBA_string_dup ("");
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_GNOME_PersistFile_NoCurrentName,
 				     exception);

@@ -228,18 +228,18 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 	for (l = object->priv->ao->objs; l; l = l->next){
 		GnomeObject *tryme = l->data;
 		
-		if ((type && gtk_type_is_a(GTK_OBJECT(tryme)->klass->type, type)) ||
+		if ((type && gtk_type_is_a (GTK_OBJECT (tryme)->klass->type, type)) ||
 #ifdef ORBIT_IMPLEMENTS_IS_A
-		    CORBA_Object_is_a(tryme->corba_objref, repoid, ev)
+		    CORBA_Object_is_a (tryme->corba_objref, (char *) repoid, ev)
 #else
-		    !strcmp(tryme->corba_objref->object_id, repoid)
+		    !strcmp (tryme->corba_objref->object_id, repoid)
 #endif
 			){
 			retval = CORBA_Object_duplicate (tryme->corba_objref, ev);
 			break;
 		}
 	}
-	if (!CORBA_Object_is_nil (retval, ev))
+	if (! CORBA_Object_is_nil (retval, ev))
 		object->priv->ao->ref_count++;
 	
 	return retval;

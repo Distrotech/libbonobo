@@ -150,7 +150,7 @@ gnome_object_restore_from_url (const char *goad_id, const char *url)
 	/* 1. Check the naming service to see if we're already available */
 	rtn = gnome_moniker_find_in_naming_service (name, goad_id);
 
-	if (!rtn){
+	if (!rtn) {
 		/* 2. fire up that object specified by the goad_id  */
 		rtn = goad_server_activate_with_id (
 			NULL,		/* name_server list */
@@ -159,9 +159,16 @@ gnome_object_restore_from_url (const char *goad_id, const char *url)
 			0);		/* params for activation */
 		
 		g_free (name);
-		
-		if (!rtn) /* bail */
+
+		CORBA_exception_init (&ev);
+
+		if (CORBA_Object_is_nil (rtn, &ev)) /* bail */ {
+
+			CORBA_exception_free (&ev);
 			return CORBA_OBJECT_NIL;
+		}
+
+		CORBA_exception_free (&ev);
 	}
 	
 	CORBA_exception_init (&ev);

@@ -52,3 +52,8 @@ to Bonobo:
   that developers be able to track the changes that occur.
   For this reason, please provide ChangeLog entries for any
   modifications you make to Bonobo.
+
+* Be honest with your code.  If something's broken, write FIXME in a
+  comment near it.  We use "FIXME" in Bonobo, not XXX or !!! or any of
+  that crap.
+

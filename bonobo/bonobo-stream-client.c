@@ -29,7 +29,7 @@ gnome_stream_client_write (GNOME_Stream stream, void *buffer, size_t size, CORBA
 	GNOME_Stream_iobuf *buf;
 	
 	buf = GNOME_Stream_iobuf__alloc ();
-	if (!buf){
+	if (!buf) {
 		CORBA_exception_set_system (ev, ex_CORBA_NO_MEMORY, CORBA_COMPLETED_NO);
 		return -1;
 	}
