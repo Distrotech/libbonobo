@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<!-- OAF DTD - this is the DTD for OAF server records (.oaf files) -->
+
+<!ELEMENT oaf_info (oaf_server+)>
+
+<!ELEMENT oaf_server (oaf_attribute*) >
+<!ATTLIST oaf_server iid CDATA #REQUIRED
+                     type (exe|shlib|factory) #REQUIRED
+                     location CDATA #REQUIRED >
+
+<!ELEMENT oaf_attribute (item*) >
+<!ATTLIST oaf_attribute name CDATA #REQUIRED
+                        value CDATA #OPTIONAL>
+
+<!ELEMENT item (EMPTY)>
+<!ATTLIST item value CDATA #REQUIRED>

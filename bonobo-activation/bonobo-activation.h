@@ -45,11 +45,7 @@ extern "C" {
 #include <liboaf/oaf-registration.h>
 
 
-
-/* Optional stuff for libgnome to use */
-#ifdef HAVE_POPT_H
 #include <popt.h>
-#endif
 
 #ifdef POPT_AUTOHELP
 extern struct poptOption oaf_popt_options[];
