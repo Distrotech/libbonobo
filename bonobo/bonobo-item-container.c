@@ -300,6 +300,19 @@ gnome_container_new (void)
 }
 
 /**
+ * gnome_container_get_moniker:
+ * @container: A GnomeContainer object.
+ */
+GnomeMoniker *
+gnome_container_get_moniker (GnomeContainer *container)
+{
+	g_return_val_if_fail (container != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_CONTAINER (container), NULL);
+
+	return container->moniker;
+}
+
+/**
  * gnome_container_add:
  * @container: The object to operate on.
  * @client_site: The client site to add to the container

@@ -8,15 +8,24 @@
  *
  * Author:
  *    Nat Friedman (nat@gnome-support.com)
- *
  */
 
 
 module GNOME {
 
        	interface UIHandler : GNOME::Unknown {
+		typedef sequence<string> StringSeq;
 		typedef sequence<octet> iobuf;
-       
+
+		enum PixmapType {
+			PixmapTypeNone,
+			PixmapTypeStock,
+			PixmapTypeFilename,
+			PixmapTypeXPMData,
+			PixmapTypeRGBData,
+			PixmapTypeRGBAData
+		};
+
        		enum MenuType {
 			MenuTypeEnd,
 			MenuTypeItem,
@@ -24,7 +33,6 @@ module GNOME {
 			MenuTypeRadioItem,
 			MenuTypeRadioGroup,
 			MenuTypeToggleItem,
-			MenuTypeDynlist,
 			MenuTypeSeparator
        		};
        
@@ -56,6 +64,11 @@ module GNOME {
        		 * The container will then
 		 */
        		void unregister_containee (in UIHandler uih);
+
+		/**
+		 *
+		 */
+		UIHandler get_toplevel ();
        
        		/*
        		 *
@@ -64,62 +77,66 @@ module GNOME {
 		 * These routines are for the creation and
 		 * manipulation of menu items.
 		 *
-		 * FIXME: Missing routine to get parent's children.
-       		 *
 		 */
-       		void menu_item_create (in string path, in MenuType type, in string label,
-				       in string hint, in iobuf pixmap_data,
-				       in unsigned long accelerator_key, in long modifier,
-				       in long pos, in UIHandler uih);
-       		void menu_item_remove (in string path);
-       		void menu_item_fetch (in string path, out MenuType type, out string label,
-				      out string hint, out iobuf pixmap_data,
-				      out unsigned long accelerator_key, out long modifier, out long pos);
-		
-       		long menu_item_get_pos (in string path);
-       
-       		void menu_item_set_sensitivity (in string path, in boolean sensitivity);
-       		boolean menu_item_get_sensitivity ();
 
-		/*
-		  
-       		void menu_item_set_hidden (in string path, in boolean hidden);
-       		boolean menu_item_get_hidden (in string path);
-		*/
-       
-       		void menu_item_set_label (in string path, in string label);
-       		string menu_item_get_label (in string path);
+		/**
+		 * menu_create:
+		 */
+       		void menu_create (in UIHandler uih, in string path, in MenuType type, in string label,
+				  in string hint, in long pos, in PixmapType pixmap_type, in iobuf pixmap_data,
+				  in unsigned long accelerator_key, in long modifier);
 
-       		void menu_item_set_hint (in string path, in string hint);
-       		string menu_item_get_hint (in string path);
-       
-       		void menu_item_set_pixmap (in string path, in iobuf data);
-       		void menu_item_get_pixmap (in string path, out iobuf data);
-       
-       		void menu_item_set_accel (in string path, in unsigned long accelerator_key, in long ac_mods);
-       		void menu_item_get_accel (in string path, out unsigned long accelerator_key, out long ac_mods);
-       
-       		void menu_item_toggle_set_state (in string path, in boolean state);
-       		boolean menu_item_toggle_get_state (in string path);
-       
-       		void menu_item_radio_set_state (in string path, in boolean state);
-       		boolean menu_item_radio_get_state (in string path);
+		/**
+		 * menu_item_remove:
+		 */
+		exception MenuItemNotFound {};
+       		void menu_remove (in UIHandler containee_uih, in string path)
+			raises (MenuItemNotFound);
 
-       		/*
-       		 * These methods are for the creation and manipulation of
-       		 * dynamic menu items.
-       		 *
-       		 * FIXME This needs to be rethought.
-       		 *
-       		 */
-       		void menu_item_dynlist_set_maxsize (in string path, in long maxsize);
-       		long menu_item_dynlist_get_maxsize (in string path);
+		/**
+		 * menuna_fetch:
+		 */
+       		boolean menu_fetch (in string path, out MenuType type, out string label,
+				    out string hint, out long pos, out PixmapType pixmap_type,
+				    out iobuf pixmap_data, out unsigned long accelerator_key,
+				    out long modifier);
+
+		/**
+		 * menu_get_children:
+		 */
+		boolean menu_get_children (in string path, out StringSeq children);
+
+		/**
+		 * menu_item_get_pos:
+		 * FIXME: set pos?
+		 */
+       		long menu_get_pos (in string path);
+		void menu_set_pos (in UIHandler containee, in long pos);
+
+		/**
+		 * menu_item_set_sensitivity:
+		 */
+       		void menu_set_sensitivity (in UIHandler containee, in string path, in boolean sensitivity);
+       		boolean menu_get_sensitivity (in string path);
+
+		void menu_set_label (in UIHandler containee, in string path, in string label);		
+		string menu_get_label (in string path);
+
+		void menu_set_hint (in UIHandler containee, in string path, in string hint);		
+		string menu_get_hint (in string path);
+
+		void menu_set_pixmap (in UIHandler containee, in string path,
+				      in PixmapType pixmap_type, in iobuf pixmap_data);
+		void menu_get_pixmap (in string path, out PixmapType pixmap_type, out iobuf pixmap_data);
+
+		void menu_set_accel (in UIHandler containee, in string path,
+				     in long accelerator_key, in long ac_mods);
+		void menu_get_accel (in string path, out long accelerator_key, out long ac_mods);
+
+       		void menu_set_toggle_state (in UIHandler containee, in string path, in boolean state);
+       		boolean menu_get_toggle_state (in string path);
        
-       		string menu_item_dynlist_generate_new_path (in string dynlist_path);
-       
-       		void menu_item_dynlist_append_item (in string dynlist_path, in string item_path);
-       		void menu_item_dynlist_prepend_item (in string dynlist_path, in string item_path);
-       
+
        		/*
        		 *
 		 * Toolbars.
@@ -166,7 +183,6 @@ module GNOME {
        		long group_create ();
        		void group_destroy (in long gid);
 
-		typedef sequence<string> StringSeq;
 
        		void group_add_menu_items (in long gid, in StringSeq paths);
        		void group_add_toolbar_items (in long gid, in StringSeq paths);
@@ -186,12 +202,15 @@ module GNOME {
        		 * overriden.
        		 */
        
-       		void menu_item_activated (in string path);
-       		void menu_item_overriden (in string path);
+       		void menu_activated (in string path);
+       		void menu_removed   (in string path);
+       		void menu_overriden (in string path);
+       		void menu_reinstated (in string path);
 
-       		void toolbar_item_activated (in string path);
-       		void toolbar_item_overriden (in string path);
-       
+       		void toolbar_activated (in string path);
+       		void toolbar_removed   (in string path);
+       		void toolbar_overriden (in string path);
+       		void toolbar_reinstated (in string path);
        	};
        
 } ;

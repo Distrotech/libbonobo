@@ -28,6 +28,13 @@ interface View : GNOME::Unknown {
 	void set_window (in windowid id);
 
 	/**
+	 * activate:
+	 *
+	 * Activates or deactivates this in-place View.
+	 */
+	void activate (in boolean activated);
+
+	/**
 	 * Some standard verbs in Bonobo:
 	 * "bonobo_primary":
 	 *     Action invoked when user double clicks on
@@ -164,7 +171,13 @@ interface Embeddable : GNOME::Unknown {
 	 *
 	 */
 
-	typedef sequence<string> verb_list;
+	struct GnomeVerb {
+		string name;
+		string label;
+		string hint;
+	};
+
+	typedef sequence<GnomeVerb> verb_list;
 
 	/**
 	 * get_verb_list:

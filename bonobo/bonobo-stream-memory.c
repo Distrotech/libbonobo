@@ -148,7 +148,7 @@ mem_destroy (GtkObject *object)
 }
 
 static void
-gnome_stream_fs_class_init (GnomeStreamMemClass *class)
+gnome_stream_mem_class_init (GnomeStreamMemClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 	GnomeStreamClass *sclass = GNOME_STREAM_CLASS (class);
@@ -180,7 +180,7 @@ gnome_stream_mem_get_type (void)
 			"IDL:GNOME/StreamMem:1.0",
 			sizeof (GnomeStreamMem),
 			sizeof (GnomeStreamMemClass),
-			(GtkClassInitFunc) NULL,
+			(GtkClassInitFunc) gnome_stream_mem_class_init,
 			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */

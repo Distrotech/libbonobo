@@ -24,7 +24,7 @@ gnome_stream_from_servant (PortableServer_Servant servant)
 
 static CORBA_long
 impl_read (PortableServer_Servant servant,
-	   const CORBA_long count,
+	   CORBA_long count,
 	   GNOME_Stream_iobuf ** buffer,
 	   CORBA_Environment * ev)
 {
@@ -35,7 +35,7 @@ impl_read (PortableServer_Servant servant,
 
 static CORBA_long
 impl_write (PortableServer_Servant servant,
-	    const GNOME_Stream_iobuf *buffer,
+	    GNOME_Stream_iobuf *buffer,
 	    CORBA_Environment *ev)
 {
 	GnomeStream *stream = gnome_stream_from_servant (servant);
@@ -45,8 +45,8 @@ impl_write (PortableServer_Servant servant,
 
 static CORBA_long
 impl_seek (PortableServer_Servant servant,
-	   const CORBA_long offset,
-	   const CORBA_long whence,
+	   CORBA_long offset,
+	   CORBA_long whence,
 	   CORBA_Environment *ev)
 {
 	GnomeStream *stream = gnome_stream_from_servant (servant);
@@ -56,7 +56,7 @@ impl_seek (PortableServer_Servant servant,
 
 static void
 impl_truncate (PortableServer_Servant servant,
-	       const CORBA_long length,
+	       CORBA_long length,
 	       CORBA_Environment *ev)
 {
 	GnomeStream *stream = gnome_stream_from_servant (servant);
@@ -66,8 +66,8 @@ impl_truncate (PortableServer_Servant servant,
 
 static void
 impl_copy_to (PortableServer_Servant servant,
-	      const CORBA_char *dest,
-	      const CORBA_long bytes,
+	      CORBA_char *dest,
+	      CORBA_long bytes,
 	      CORBA_long *read,
 	      CORBA_long *written,
 	      CORBA_Environment *ev)
@@ -132,8 +132,6 @@ init_stream_corba_class (void)
 static void
 gnome_stream_class_init (GnomeStreamClass *class)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
-
 	gnome_stream_parent_class = gtk_type_class (gnome_object_get_type ());
 
 	init_stream_corba_class ();

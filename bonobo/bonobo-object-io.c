@@ -153,7 +153,7 @@ gnome_object_save_to_stream (GnomeObject *object, GNOME_Stream stream)
 	g_return_val_if_fail (stream != CORBA_OBJECT_NIL, GNOME_IOERR_GENERAL);
 
 	pstream = gnome_object_query_interface (
-		GTK_OBJECT (object), "IDL:GNOME/PersistStream:1.0");
+		GNOME_OBJECT (object), "IDL:GNOME/PersistStream:1.0");
 	
 	if (pstream != CORBA_OBJECT_NIL)
 		return GNOME_IOERR_PERSIST_NOT_SUPPORTED;

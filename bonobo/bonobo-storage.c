@@ -85,7 +85,7 @@ impl_open_storage (PortableServer_Servant servant,
 
 static void
 impl_copy_to (PortableServer_Servant servant,
-	      const GNOME_Storage target,
+	      GNOME_Storage target,
 	      CORBA_Environment *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);

@@ -138,8 +138,6 @@ gnome_persist_file_get_current_file (GnomePersistFile *pf)
 static void
 gnome_persist_file_class_init (GnomePersistFileClass *class)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
-
 	gnome_persist_file_parent_class = gtk_type_class (gnome_persist_get_type ());
 
 	/*
