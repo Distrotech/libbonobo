@@ -10,7 +10,7 @@ msgstr ""
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: bonobo/bonobo-exception.c:154
@@ -149,8 +149,7 @@ msgstr "Помилка перевірки на помилку; без вийня
 msgid "General activation error with no description"
 msgstr "Загальна помилка активації без опису"
 
-#: bonobo/bonobo-generic-factory.h:74
-#: bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "Не вдалося ініціалізувати Bonobo"
 
@@ -233,4 +232,3 @@ msgstr "Не вдалося створити екземпляр зразка к�
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Сталася виключна ситуація \"%s\""
-
