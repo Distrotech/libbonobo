@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.4\n"
-"POT-Creation-Date: 2004-03-08 11:00+0000\n"
-"PO-Revision-Date: 2003-08-18 18:05+0000\n"
-"Last-Translator: Richard Allen <ra@ra.is>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-04-07 00:23+0000\n"
+"PO-Revision-Date: 2004-03-13 08:58-0000\n"
+"Last-Translator: helgi <helgi@trance.is>\n"
 "Language-Team: is <is@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,9 +62,8 @@ msgid "Name service"
 msgstr "Nafnaþjónusta"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Nafnaþjónusta"
+msgstr ""
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
@@ -126,7 +126,7 @@ msgstr ""
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Reyni möppu %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -161,7 +161,7 @@ msgstr "Ræsing bonobo gat ekki búið til ferlahópinn %s: %s\n"
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Gat ekki keyrt %s: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:87
+#: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "Of mörg stig samheita í staðfærslunni. Gæti verið lykkja"
 
@@ -204,7 +204,7 @@ msgstr "Shlib `%s' innihélt ekki `%s'"
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "Nafn"
 
 #: bonobo/bonobo-application.c:352
 msgid "Application unique name"
