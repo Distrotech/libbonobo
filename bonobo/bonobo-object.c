@@ -237,6 +237,7 @@ bonobo_object_finalize_servant (PortableServer_Servant servant,
 				CORBA_Environment *ev)
 {
 	BonoboObject *object = bonobo_object(servant);
+	BonoboObjectClass *klass = BONOBO_OBJECT_GET_CLASS(object);
 
 #ifdef G_ENABLE_DEBUG
 	if(_bonobo_debug_flags & BONOBO_DEBUG_LIFECYCLE)
@@ -244,6 +245,11 @@ bonobo_object_finalize_servant (PortableServer_Servant servant,
 				    "BonoboObject Servant finalize %p",
 				    object);
 #endif /* G_ENABLE_DEBUG */
+
+	if (klass->poa_fini_fn)
+		klass->poa_fini_fn (servant, ev);
+	else /* Actually quicker and nicer */
+		PortableServer_ServantBase__fini (servant, ev);
 
 	g_object_unref (G_OBJECT (object));
 }

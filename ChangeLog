@@ -1,3 +1,8 @@
+2004-08-13  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-object.c (bonobo_object_finalize_servant): Call
+	object's poa_fini_fn.  Patch by Michael Meeks.  Fixes #118117.
+
 2004-08-12  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/test-activation/Makefile.am (TESTS_ENVIRONMENT): Set
