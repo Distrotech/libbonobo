@@ -88,7 +88,6 @@
 
 2000-10-27  Michael Meeks  <michael@helixcode.com>
 
->>>>>>> 1.702
 	* api-convert.pl: flesh out.
 
 	* api-convert.diff: Add.
@@ -166,7 +165,6 @@ Thu Oct 26 20:54:27 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* bonobo/bonobo-persist-file.c: Add exceptions where needed.
 
->>>>>>> 1.698
 2000-10-25  Miguel de Icaza  <miguel@helixcode.com>
 
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_create_poa):
