@@ -1,3 +1,41 @@
+2000-10-11  Michael Meeks  <michael@helixcode.com>
+
+	* samples/compound-doc/paint-component-simple.c (view_create_menus): 
+	use set_translate.
+
+	* components/text-plain/bonobo-text-plain.c (destroy_control_menus):
+	in-line. (destroy_control): no need to unset container; done in control
+	destroy anyway.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_set_translate): impl
+	helper fn.
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_new_menu),
+	(bonobo_ui_util_new_std_toolbar, bonobo_ui_util_new_toggle_toolbar):
+	encode strings.
+
+	* bonobo/bonobo-ui-compat.c (compat_menu_parse_uiinfo_one_with_data),
+	(compat_toolbar_parse_uiinfo_one_with_data): update to encode strings.
+
+	* bonobo/app.c (component_translate_and_set): impl.
+	(main): use it.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_set_prop),
+	(bonobo_ui_component_get_prop): Hack for translation problems.
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_build_help_menu):
+	encode label.
+
+	* bonobo/bonobo-win.c (de_accelerate_string): remove; the wrong
+	approach anyway. (toolbar_sync_state): use decode_str instead.
+	(menu_sync_state): decode the label.
+	(put_hint_in_statusbar): do a decode.
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_decode_str),
+	(bonobo_ui_util_encode_str): impl.
+
+	* bonobo/app.c (main): add test cases.
+
 2000-10-11  Cody Russell  <bratsche@gnome.org>
 
 	* bonobo/bonobo-ui-toolbar-separator-item.c: Separator items'
@@ -47,6 +85,14 @@
 	* bonobo/bonobo-win.c: (radio_group_add): Fix bug where all radio
 	menu items would look active.
 
+2000-10-10  Michael Meeks  <michael@helixcode.com>
+
+	* doc/std-ui.xml: moved accelerator label stuff to menus, leaving a
+	better 'label' description.
+
+	* bonobo/app.c (main): update warnings to make std-ui.xml positioning
+	more explicit, show the window even if we can't find the file.
+
 2000-10-08  Miguel de Icaza  <miguel@helixcode.com>
 
 	* bonobo/*ui.h: use GNOME_BEGIN_DECLS/GNOME_END_DECLS instead of
@@ -62,7 +108,13 @@
 	* bonobo/bonobo-ui-util.c: (bonobo_ui_util_xml_get_icon_pixbuf):
 	fix segfault in certain cases.
 
+2000-10-10  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-win.c: (radio_group_add): Fix bug where all radio
+	menu items would look active.
+
 	* bonobo/bonobo-view.h: Remove headers for deleted functions.
+
 	* bonobo/bonobo-view.c: Remove unused private fields.
 	
 2000-10-10  Larry Ewing  <lewing@helixcode.com>
@@ -90,6 +142,10 @@
 
 2000-10-10  Michael Meeks  <michael@helixcode.com>
 
+	* Version 0.20
+
+2000-10-10  Michael Meeks  <michael@helixcode.com>
+	
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_get_icon_pixbuf): 
 	remove double free on text.
 
