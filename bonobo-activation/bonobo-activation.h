@@ -24,7 +24,6 @@ void oaf_actinfo_free(OAFActivationInfo *actinfo);
 CORBA_ORB oaf_init(int argc, char **argv);
 CORBA_ORB oaf_orb_get(void);
 CORBA_Context oaf_context_get(void); /* Just makes getting hold of the default context a bit easier */
-CORBA_Object oaf_activation_context_get(void); /* Internal use, remove me from header file */
 
 #define oaf_username_get() g_get_user_name()
 const char *oaf_hostname_get(void);

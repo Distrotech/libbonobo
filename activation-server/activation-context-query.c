@@ -737,6 +737,7 @@ qexp_evaluate_id(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 
   if (si)
     {
+      retval.value_known = TRUE;
       retval.type = CONST_STRING;
       if (!strcasecmp(e->u.id_value, "location_info"))
 	retval.u.v_string = si->location_info;
@@ -758,6 +759,8 @@ qexp_evaluate_id(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 	      if (!strcmp(e->u.id_value, si->attrs._buffer[i].name))
 		break;
 	    }
+
+	  retval.value_known = FALSE;
 
 	  if (i < si->attrs._length)
 	    {

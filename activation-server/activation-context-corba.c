@@ -534,13 +534,13 @@ impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
       ac_do_activation(servant, curitem, retval, flags, hostname, ctx, ev);
     }
 
+  if(retval->res._d == OAF_RESULT_NONE)
+    retval->aid = CORBA_string_dup("");
+
  out:
   g_free(hostname);
   
   servant->refs--;
-
-  if(retval->res._d == OAF_RESULT_NONE)
-    retval->aid = CORBA_string_dup("");
   
   return retval;
 }
@@ -674,9 +674,9 @@ ac_query_run(impl_POA_OAF_ActivationContext * servant,
   errstr = (char *)qexp_parse(requirements, &qexp_requirements);
   if(errstr)
     {
+      g_strstrip(errstr);
       ex = OAF_ActivationContext_ParseFailed__alloc();
       ex->description = CORBA_string_dup(errstr);
-      g_free(errstr);
       CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
 			  ex_OAF_ActivationContext_ParseFailed, ex);
       return;
@@ -693,9 +693,9 @@ ac_query_run(impl_POA_OAF_ActivationContext * servant,
 	  for(i--; i >= 0; i--)
 	    qexp_free(qexp_sort_items[i]);
 
+	  g_strstrip(errstr);
 	  ex = OAF_ActivationContext_ParseFailed__alloc();
 	  ex->description = CORBA_string_dup(errstr);
-	  g_free(errstr);
 
 	  CORBA_exception_set(ev, CORBA_USER_EXCEPTION,
 			      ex_OAF_ActivationContext_ParseFailed, ex);
