@@ -30,7 +30,7 @@ AC_PATH_PROGS(PATH_TO_XRDB, "xrdb")
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
-ALL_LINGUAS="az es fr it nn no sk sv ta zh_TW.Big5"
+ALL_LINGUAS="az es fr it nn no sk sv ta tr zh_TW.Big5"
 AM_GLIB_GNU_GETTEXT
 
 AC_SUBST(CFLAGS)
