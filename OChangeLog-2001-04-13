@@ -1,5 +1,12 @@
 2000-10-08  Martin Baulig  <baulig@suse.de>
 
+	* gshell/menu.[ch]: Removed.
+
+	* gshell/ui.c (set_ui_state): Renamed to frame_set_sensitive().
+	* gshell/gshell.c (frame_create): Initially set the frame insensitive.
+
+2000-10-08  Martin Baulig  <baulig@suse.de>
+
 	* gshell/inout.c (verb_FileLoad): Added verb "FileLoad" to load a
 	file into the current component.
 
