@@ -91,9 +91,12 @@ query_from_name (const char *name)
 	int   len;
 
 	for (len = 0; name [len]; len++) {
-		if (name [len] == ':')
+		if (name [len] == ':') {
+			len++;
 			break;
+		}
 	}
+
 
 	prefix = g_strndup (name, len);
 		

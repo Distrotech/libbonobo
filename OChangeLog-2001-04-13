@@ -1,3 +1,8 @@
+2000-12-21  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* bonobo/bonobo-moniker-util.c (query_from_name): return the
+	prefix including the colon.
+
 2000-12-21  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/Makefile.am: Add bonobo-moniker-stream-extender again.
