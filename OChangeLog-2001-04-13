@@ -1,5 +1,13 @@
 2001-01-19  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-sync-menu.c (node_is_popup): impl.
+	(add_tearoff): Only put tearoffs in non-popups, unless
+	explicitely asked for.
+	(impl_bonobo_ui_sync_menu_build),
+	(bonobo_ui_sync_menu_add_popup): pass popup_init.
+
+2001-01-19  Michael Meeks  <michael@helixcode.com>
+
 	* configure.in: Add checks for libIDL version and setup
 	CFLAGS / LIBS.
 
