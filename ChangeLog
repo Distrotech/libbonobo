@@ -1,3 +1,7 @@
+2001-09-25  Mark McLoughlin  <mark@skynet.ie>
+
+	* samples/echo/Makefile.am: s/orbit-idl/$(ORBIT_IDL).
+
 2001-09-25  Michael Meeks  <michael@ximian.com>
 
 	* tests/Makefile.am: hook test-properties up to run
