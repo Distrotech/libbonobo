@@ -442,7 +442,7 @@ OAFIID:GNOME_Panel_Applet_yetanotherclock:
 	and add a UUID generated from the uuidgen application at the
 end to garentee uniqueness.
 
-@Q: What should I call my oaf file ?
+@Q: What should I call my oaf / UI / IDL file ?
 
 	The name of your oaf file should be based on your portion
 of the namespace, eg.

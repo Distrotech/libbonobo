@@ -1,5 +1,7 @@
 2001-02-19  Michael Meeks  <michael@ximian.com>
 
+	* doc/FAQ: update slightly.
+
 	* doc/api/bonobo-api.sgml: remove dup. of bonobo-moniker.
 
 	* doc/api/bonobo-sections.txt: slay *_get_epv *_corba_object_create
