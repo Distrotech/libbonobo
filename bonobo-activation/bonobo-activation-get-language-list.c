@@ -71,6 +71,7 @@ unalias_lang (char *lang)
   int i;
   if (!alias_table)
     {
+      read_aliases (BONOBO_ACTIVATION_LOCALEDIR "/locale.alias");
       read_aliases ("/usr/share/locale/locale.alias");
       read_aliases ("/usr/local/share/locale/locale.alias");
       read_aliases ("/usr/lib/X11/locale/locale.alias");

@@ -1,3 +1,8 @@
+2004-03-15  Julio M. Merino Vidal  <jmmv@menta.net>
+
+	* bonobo-activation/bonobo-activation-get-language-list.c
+	(unalias_lang): read aliases from the prefix first (NetBSD)
+
 2004-03-08  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.6.0
