@@ -11,7 +11,7 @@
 #ifndef BONOBO_CONTROL_IDL
 #define BONOBO_CONTROL_IDL
 
-#include "Bonobo_Unknown.idl"
+#include "Bonobo_UI.idl"
 #include "Bonobo_Gdk.idl"
 #include "Bonobo_Property.idl"
 
@@ -36,11 +36,11 @@ interface ControlFrame : Bonobo::Unknown {
 	PropertyBag getAmbientProperties ();
 
 	/**
-	 * getUIHandler:
+	 * getUIContainer:
 	 *
 	 * Returns: The interface to be used for menu/toolbar item merging.
 	 */
-	Bonobo::Unknown getUIHandler ();
+	UIContainer getUIContainer ();
 
 	/* --- Notifications --- */
 
@@ -77,9 +77,11 @@ interface ControlFrame : Bonobo::Unknown {
 	/**
 	 * unImplemented:
 	 *
-	 * a placeholder for future expansion.
+	 * placeholders for future expansion.
 	 */
 	void unImplemented ();
+	void unImplemented2 ();
+	void unImplemented3 ();
 };
 
 interface Control : Bonobo::Unknown {
@@ -107,6 +109,21 @@ interface Control : Bonobo::Unknown {
 	Bonobo::Unknown getAccessible ();
 
 	/**
+	 * getWindowId:
+	 *
+	 * Returns: the windowId of the plug's window
+	 */
+	Gdk::WindowId getWindowId (in string cookie)
+		raises (NoContents);
+
+	/**
+	 * getPopupContainer:
+	 *
+	 * Returns: A UIContainer for a parent to push popup items into
+	 */
+	UIContainer getPopupContainer ();
+
+	/**
 	 * setFrame:
 	 * @frame: A Bonobo_ControlFrame.
 	 *
@@ -114,8 +131,7 @@ interface Control : Bonobo::Unknown {
 	 *
 	 * Returns: The windowId of the plug
 	 */
-	Gdk::WindowId setFrame (in ControlFrame frame)
-		raises (NoContents);
+	oneway void setFrame (in ControlFrame frame);
 
 	/**
 	 * setSize:
@@ -153,9 +169,11 @@ interface Control : Bonobo::Unknown {
 	/**
 	 * unImplemented:
 	 *
-	 * a placeholder for future expansion.
+	 * placeholders for future expansion.
 	 */
-	void unImplemented ();
+	void unImplemented  ();
+	void unImplemented2 ();
+	void unImplemented3 ();
 };
 
 interface PropertyControl : Bonobo::Unknown {

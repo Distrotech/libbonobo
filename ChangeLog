@@ -1,5 +1,12 @@
 2001-11-14  Michael Meeks  <michael@ximian.com>
 
+	* idl/Bonobo_Control.idl: include Bonobo_UI.idl
+	rename getUIHandler to getUIContainer.
+	add getWindowId, update setFrame, add
+	add unImplemented placeholders.
+
+2001-11-14  Michael Meeks  <michael@ximian.com>
+
 	* libbonobo.h: include bonobo-macros.h
 
 	* bonobo/bonobo-object.h: move new macros into
