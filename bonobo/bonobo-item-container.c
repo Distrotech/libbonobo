@@ -46,6 +46,12 @@ create_gnome_container (GnomeObject *object)
 		return CORBA_OBJECT_NIL;
 }
 
+/**
+ * gnome_container_get_moniker:
+ * @container: A GnomeContainer object whose moniker is being requested.
+ *
+ * Returns: The GnomeMoniker associated with @container.
+ */
 GnomeMoniker *
 gnome_container_get_moniker (GnomeContainer *container)
 {

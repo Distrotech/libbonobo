@@ -58,7 +58,6 @@ module GNOME {
 		 */
        		void unregister_containee (in UIHandler uih);
        
-       
        		/*
        		 *
 		 * Menu.
@@ -69,7 +68,7 @@ module GNOME {
 		 */
        		boolean menu_item_create (in string path, in MenuType type, in string label,
        					       in PixmapType pixmap_type, in iobuf pixmap_data,
-       					       in long accelerator_key, in ModifierType modifier,
+       					       in unsigned long accelerator_key, in ModifierType modifier,
 					       in long pos);
        		boolean menu_item_remove (in string path);
        		boolean menu_item_fetch (in string path, out MenuType type, out string label,
@@ -81,9 +80,12 @@ module GNOME {
        
        		void menu_item_set_sensitivity (in string path, in boolean sensitivity);
        		boolean menu_item_get_sensitivity ();
-       
+
+		/*
+		  
        		void menu_item_set_hidden (in string path, in boolean hidden);
        		boolean menu_item_get_hidden (in string path);
+		*/
        
        		void menu_item_set_label (in string path, in string label);
        		string menu_item_get_label (in string path);

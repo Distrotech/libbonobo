@@ -79,7 +79,21 @@ interface View : GNOME::Unknown {
 interface ViewFrame : GNOME::Unknown {
 	typedef sequence<octet> pixbuf;
 
+	/**
+	 * get_client_site:
+	 *
+	 * Returns: The GNOME::ClientSite interface associated
+	 * with this ViewFrame.
+	 */
 	ClientSite get_client_site ();
+
+	/**
+	 * get_ui_handler:
+	 *
+	 * Returns: The GNOME::UIHandler interface to be used for
+	 * menu/toolbar item merging.
+	 */
+	UIHandler get_ui_handler ();
 
 	/**
 	 * view_activated:

@@ -1,4 +1,4 @@
-/**
+/*
  * GNOME Moniker
  *
  * Author:
@@ -244,7 +244,7 @@ gnome_moniker_new (GnomeMonikerBindFn bind_function,
 	g_return_val_if_fail (bind_function != NULL, NULL);
 
 	moniker = gtk_type_new (gnome_moniker_get_type ());
-	corba_moniker = create_gnome_moniker (GNOME_MONIKER (moniker));
+	corba_moniker = create_gnome_moniker (GNOME_OBJECT (moniker));
 	if (corba_moniker == CORBA_OBJECT_NIL) {
 		gtk_object_destroy (GTK_OBJECT (moniker));
 		return NULL;

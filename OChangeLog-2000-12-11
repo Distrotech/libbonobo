@@ -1,3 +1,36 @@
+1999-07-13  Nat Friedman  <nat@gnome-support.com>
+
+	* idl/gnome-embeddable.idl (GNOME::ViewFrame): Documented
+ 	get_client_site.  Added get_ui_handler.
+
+	* bonobo/gnome-view-frame.c (impl_GNOME_ViewFrame_get_ui_handler):
+ 	New function to implement the new GNOME::ViewFrame.get_ui_handler
+ 	method.
+	(gnome_view_frame_set_ui_handler): New function to set a
+ 	ViewFrame's GnomeUIHandler object.
+	(gnome_view_frame_get_ui_handler): New function to get a
+ 	ViewFrame's GnomeUIHandler object.
+
+	* bonobo/gnome-ui-handler.c: Massive updates.  Local menu stuff is
+ 	now functional.  More work to come.
+
+	* bonobo/gnome-moniker.h: Added prototype for gnome_moniker_new.
+
+	* bonobo/gnome-moniker.c (gnome_moniker_new): Cast to GNOME_OBJECT
+ 	when calling create_gnome_moniker, not GNOME_MONIKER.
+
+	* bonobo/gnome-container.c (gnome_container_get_moniker):
+ 	Documented.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_new): Fixed up
+ 	docs.
+	(gnome_client_site_bind_embeddable): Renamed
+ 	gnome_client_site_bind_bonobo_object to this.
+
+	* bonobo/gnome-bind-context.c (gnome_bind_context_new):
+ 	Documented.
+	(gnome_bind_context_get_type): Likewise.
+
 1999-07-11  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* bonobo/gnome-file-moniker.c (MAP_FILE): 
