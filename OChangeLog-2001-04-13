@@ -1,3 +1,14 @@
+2000-10-08  Martin Baulig  <baulig@suse.de>
+
+	* gshell/gshell.c (buffer_create_zoomable_frame): New static function.
+	(verb_Zoom_cb): New static function.
+	(gshell_verbs): Added new verbs "ZoomIn", "ZoomOut", "ZoomToFit" and
+	"ZoomToDefault".
+
+	* gshell/gshell.h (Buffer): Added `BonoboZoomableFrame *zoomable_frame'.
+
+	* gshell/ui.xml: Added menu entries for the newly added verbs.
+
 2000-10-08  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-control.c (impl_Bonobo_Control_reactivate_and_undo),
