@@ -166,6 +166,15 @@ create_bag_client (void)
 	bonobo_pbclient_set_string  (pb, "string-test",
 				     "life is a wonderful gift", NULL);
 
+	bonobo_pbclient_set (
+		pb, NULL,
+		"boolean-test", TC_CORBA_boolean, FALSE,
+		"long-test", TC_CORBA_long, 3,
+		"float-test", TC_CORBA_float, 0.00001,
+		"double-test", TC_CORBA_double, 2.0001,
+		"string-test", TC_CORBA_string, "you are a precious flower",
+		NULL);
+
 	bonobo_object_release_unref (pb, NULL);
 
 	bonobo_main_quit ();

@@ -216,15 +216,25 @@ Bonobo_PropertyFlags
 bonobo_pbclient_get_flags                (Bonobo_PropertyBag  bag,
 					  const char         *key,
 					  CORBA_Environment  *opt_ev);
+void
+bonobo_pbclient_set                      (Bonobo_PropertyBag  bag,
+					  CORBA_Environment  *opt_ev,
+					  const char         *first_prop,
+					  ...);
+void
+bonobo_pbclient_get                      (Bonobo_PropertyBag  bag,
+					  CORBA_Environment  *opt_ev,
+					  const char         *first_prop,
+					  ...);
 char *
 bonobo_pbclient_setv                     (Bonobo_PropertyBag  bag,
 					  CORBA_Environment  *ev,
-					  const char         *first_arg,
+					  const char         *first_prop,
 					  va_list             var_args);
 char *
 bonobo_pbclient_getv                     (Bonobo_PropertyBag  bag,
 					  CORBA_Environment  *ev,
-					  const char         *first_arg,
+					  const char         *first_prop,
 					  va_list             var_args);
 
 /* just to be compatible */

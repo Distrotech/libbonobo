@@ -1,3 +1,14 @@
+2001-07-06  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-properties-client.c (create_bag_client): add call to
+	bonobo_pbclient_set.
+
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_pbclient_set, bonobo_pbclient_get): impl.
+	(bonobo_pbclient_getv): update to take typesafe name / type / value
+	triplets instead of unsafe name / value pairs.
+	(bonobo_pbclient_setv): ditto & bail when we hit an exception.
+
 2001-07-06  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added sv to ALL_LINGUAS.

@@ -818,10 +818,7 @@ bonobo_pbclient_setv (Bonobo_PropertyBag       bag,
 	while (arg_name) {
 		CORBA_TypeCode type;
 
-		type = bonobo_pbclient_get_type (bag, arg_name, ev);
-
-		if (type == TC_null)
-			return g_strdup_printf ("No such arg '%s'", arg_name);
+		type = va_arg (var_args, CORBA_TypeCode);
 
 		switch (type->kind) {
 			SEND (bag, arg_name, var_args, _boolean, int);
@@ -847,6 +844,9 @@ bonobo_pbclient_setv (Bonobo_PropertyBag       bag,
 		}
 
 		arg_name = va_arg (var_args, char *);
+
+		if (BONOBO_EX (ev))
+			return bonobo_exception_get_text (ev);
 	}
 
 	return NULL;
@@ -864,7 +864,7 @@ bonobo_pbclient_setv (Bonobo_PropertyBag       bag,
  * @bag: the property bag
  * @ev: optional CORBA exception environment or NULL
  * @first_arg: first argument name
- * @var_args: list of subsequent name / value pairs
+ * @var_args: list of subsequent name / type / value triplets
  * 
  * This function uses the TypeCode data extracted from the
  * @pb to determine how it walks its stack. This function
@@ -887,11 +887,8 @@ bonobo_pbclient_getv (Bonobo_PropertyBag bag,
 	while (arg_name) {
 		CORBA_TypeCode type;
 
-		type = bonobo_pbclient_get_type (bag, arg_name, ev);
-
-		if (type == TC_null)
-			return g_strdup_printf ("No such arg '%s'", arg_name);
-
+		type = va_arg (var_args, CORBA_TypeCode);
+		
 		switch (type->kind) {
 
 			RECEIVE (bag, arg_name, var_args, _boolean, int);
@@ -916,9 +913,75 @@ bonobo_pbclient_getv (Bonobo_PropertyBag bag,
 		}
 
 		arg_name = va_arg (var_args, char *);
+
+		if (BONOBO_EX (ev))
+			return bonobo_exception_get_text (ev);
 	}
 
 	return NULL;
 }
 #undef RECEIVE
 
+void
+bonobo_pbclient_set (Bonobo_PropertyBag   pb,
+		     CORBA_Environment   *opt_ev,
+		     const char          *first_prop,
+		     ...)
+{
+	char               *err;
+	CORBA_Environment  *ev, temp_ev;
+	va_list             args;
+
+	g_return_if_fail (first_prop != NULL);
+	g_return_if_fail (pb != CORBA_OBJECT_NIL);
+
+	va_start (args, first_prop);
+
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
+
+	if ((err = bonobo_property_bag_client_setv (pb, ev, first_prop, args))) {
+		g_warning ("Error '%s'", err);
+		g_free (err);
+	}
+
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
+
+	va_end (args);
+}
+
+void
+bonobo_pbclient_get (Bonobo_PropertyBag   pb,
+		     CORBA_Environment   *opt_ev,
+		     const char          *first_prop,
+		     ...)
+{
+	char               *err;
+	CORBA_Environment  *ev, temp_ev;
+	va_list             args;
+
+	g_return_if_fail (first_prop != NULL);
+	g_return_if_fail (pb != CORBA_OBJECT_NIL);
+
+	va_start (args, first_prop);
+
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
+
+	if ((err = bonobo_property_bag_client_getv (pb, ev, first_prop, args))) {
+		g_warning ("Error '%s'", err);
+		g_free (err);
+	}
+
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
+
+	va_end (args);
+}

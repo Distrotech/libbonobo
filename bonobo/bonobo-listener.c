@@ -9,8 +9,8 @@
  * Copyright (C) 2000, Helix Code, Inc.
  */
 #include <config.h>
+#include <string.h>
 #include <gobject/gsignal.h>
-
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-listener.h>
 #include <bonobo/bonobo-marshal.h>

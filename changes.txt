@@ -51,6 +51,10 @@ bonobo-progressive.[ch]:
 bonobo-property-bag-client.[ch]
 	Added more functions to access property bag data. The new functions are
 	named bonobo_bpclient_* instead of bonobo_property_bag_client_*
+	Add a bonobo_pbclient_set / bonobo_pbclient_get nice vararg wrapper
+	to make it easier to set properties.
+	Change the way varrag wrappers work, to be name / type / value
+	triplets instead of type-unsafe name / value pairs.
 
 IDL:
 
