@@ -17,7 +17,7 @@ module GNOME {
 	};
 
 	interface Container : ParseDisplayName {
-		typedef sequence<string> ObjectList;
+		typedef sequence<Unknown> ObjectList;
 
 		/**
 		 * enum_objects:
@@ -44,13 +44,5 @@ module GNOME {
 		 */
 		Unknown get_object (in string item_name, in boolean only_if_exists)
 			raises (SyntaxError, NotFound);
-	       
-		/** 
-		 * is_running:
-		 * @item_name: Item name that we want to query
-		 *
-		 * Returns: True if the item specified by @item_name is running
-		 */
-		boolean is_running (in string item_name);
 	};
 };

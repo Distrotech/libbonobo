@@ -1,3 +1,11 @@
+1999-07-21  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-item-container.c: New file.  Implements the
+	GnomeItemContainer.
+
+	* bonobo/gnome-container.c (impl_enum_objects): Implemented object
+	enumeration in GnomeContainer.
+
 1999-07-20  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-moniker-client.c (gnome_moniker_unregister,

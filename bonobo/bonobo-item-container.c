@@ -12,6 +12,7 @@
 #include <bonobo/gnome-main.h>
 #include <bonobo/gnome-object.h>
 #include <bonobo/gnome-container.h>
+#include <bonobo/gnome-client-site.h>
 
 static GnomeObjectClass *gnome_container_parent_class;
 
@@ -64,7 +65,9 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeContainer *container = GNOME_CONTAINER (object);
 	GNOME_Container_ObjectList *return_list;
+	GList *l;
 	int items;
+	int i;
 	
 	return_list = GNOME_Container_ObjectList__alloc ();
 	if (return_list == NULL)
@@ -89,7 +92,7 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 		GnomeObject *bound_object = client_site->bound_object;
 		
 		return_list->_buffer [i] = CORBA_Object_duplicate (
-			gnome_object_corba_objref (bound_object));
+			gnome_object_corba_objref (bound_object), ev);
 	}
 
 	return return_list;
