@@ -1,3 +1,17 @@
+2000-02-28  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_store_data):
+	Do not initialize the `active' member anymore.
+	(toolbar_toplevel_item_set_toggle_state_internal): Likewise.
+	(toolbar_toplevel_item_get_toggle_state_internal): Likewise.
+	(toolbar_toplevel_create_item): Always initialize the item to be
+	inactive.
+	(toolbar_toplevel_item_get_toggle_state): Retrieve the widget and
+	get the toggle state from it.
+
+	* bonobo/bonobo-uih-private.h: Removed member `active' in
+	`ToolbarItemInternal'.
+
 2000-02-28  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_getv),
