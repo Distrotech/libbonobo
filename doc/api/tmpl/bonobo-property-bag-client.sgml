@@ -477,6 +477,17 @@ It is difficult to know how to solve this problem.
 @opt_ev: 
 
 
+<!-- ##### FUNCTION bonobo_pbclient_set_value_async ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
 <!-- ##### FUNCTION bonobo_pbclient_get_doc_title ##### -->
 <para>
 

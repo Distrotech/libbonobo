@@ -100,6 +100,41 @@ bonobo-types
 
 
 
+<!-- ##### MACRO BONOBO_TYPE_STATIC_CORBA_EXCEPTION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_TYPE_STATIC_UNKNOWN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_TYPE_STATIC_CORBA_ANY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_TYPE_STATIC_CORBA_OBJECT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_TYPE_STATIC_CORBA_TYPECODE ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO BONOBO_VALUE_HOLDS_UNKNOWN ##### -->
 <para>
 
@@ -201,6 +236,15 @@ bonobo-types
 
 @value: 
 @any: 
+
+
+<!-- ##### FUNCTION bonobo_value_set_corba_object ##### -->
+<para>
+
+</para>
+
+@value: 
+@object: 
 
 
 <!-- ##### FUNCTION bonobo_value_set_corba_typecode ##### -->

@@ -158,6 +158,13 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 
 
 
+<!-- ##### MACRO BONOBO_PROPERTY_WRITABLE ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### MACRO BONOBO_PROPERTY_NO_LISTENING ##### -->
 <para>
 

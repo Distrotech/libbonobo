@@ -9,6 +9,7 @@ bonobo_event_source_notify_listeners
 bonobo_event_source_notify_listeners_full
 bonobo_event_source_client_remove_listener
 bonobo_event_source_client_add_listener
+bonobo_event_source_has_listener
 bonobo_event_source_client_add_listener_closure
 bonobo_event_source_client_add_listener_full
 bonobo_event_source_ignore_listeners
@@ -189,6 +190,7 @@ BonoboObjectClass
 bonobo_object_add_interface
 bonobo_object_query_local_interface
 bonobo_object_query_interface
+bonobo_object_query_remote
 bonobo_object_corba_objref
 bonobo_object_dup_ref
 bonobo_object_release_unref
@@ -207,6 +209,7 @@ bonobo_object
 bonobo_object_fast
 bonobo_object_from_servant
 bonobo_object_get_servant
+bonobo_object_get_poa
 bonobo_type_unique
 bonobo_type_setup
 BONOBO_TYPE_FUNC_FULL
@@ -219,7 +222,22 @@ bonobo_object_get_type
 BONOBO_OBJECT_CLASS
 BONOBO_IS_OBJECT_CLASS
 BONOBO_OBJECT_GET_CLASS
+
+
+<SUBSECTION Private>
+BONOBO_FOREIGN_OBJECT_GET_CLASS
+bonobo_foreign_object_new
+BONOBO_IS_FOREIGN_OBJECT
+BonoboForeignObject
+BonoboForeignObjectClass
+BONOBO_FOREIGN_OBJECT
+BONOBO_TYPE_FOREIGN_OBJECT
+bonobo_foreign_object_get_type
+BONOBO_IS_FOREIGN_OBJECT_CLASS
+BONOBO_FOREIGN_OBJECT_CLASS
+
 </SECTION>
+
 
 <SECTION>
 <FILE>bonobo-persist-file</FILE>
@@ -280,6 +298,7 @@ BONOBO_IS_PERSIST_CLASS
 <FILE>bonobo-property-bag</FILE>
 BONOBO_PROPERTY_READABLE
 BONOBO_PROPERTY_WRITEABLE
+BONOBO_PROPERTY_WRITABLE
 BONOBO_PROPERTY_NO_LISTENING
 BONOBO_PROPERTY_NO_AUTONOTIFY
 BonoboPropertyBagPrivate
@@ -503,6 +522,7 @@ gettext
 dgettext
 dcgettext
 bindtextdomain
+bind_textdomain_codeset
 </SECTION>
 
 <SECTION>
@@ -519,9 +539,13 @@ BONOBO_REGISTER_TYPE_FULL
 <SECTION>
 <FILE>bonobo-main</FILE>
 BonoboThreadHint
+BonoboDebugFlags
+
 bonobo_is_initialized
 bonobo_init
 bonobo_init_full
+bonobo_debug_init
+bonobo_debug_print
 bonobo_debug_shutdown
 bonobo_main
 bonobo_main_quit
@@ -612,6 +636,7 @@ bonobo_pbclient_set_double
 bonobo_pbclient_set_boolean
 bonobo_pbclient_set_char
 bonobo_pbclient_set_value
+bonobo_pbclient_set_value_async
 bonobo_pbclient_get_doc_title
 bonobo_pbclient_get_doc
 bonobo_pbclient_get_keys
@@ -712,6 +737,11 @@ BONOBO_TYPE_CORBA_ANY
 BONOBO_TYPE_CORBA_OBJECT
 BONOBO_TYPE_CORBA_TYPECODE
 BONOBO_TYPE_CORBA_EXCEPTION
+BONOBO_TYPE_STATIC_CORBA_EXCEPTION
+BONOBO_TYPE_STATIC_UNKNOWN
+BONOBO_TYPE_STATIC_CORBA_ANY
+BONOBO_TYPE_STATIC_CORBA_OBJECT
+BONOBO_TYPE_STATIC_CORBA_TYPECODE
 BONOBO_VALUE_HOLDS_UNKNOWN
 BONOBO_VALUE_HOLDS_CORBA_ANY
 BONOBO_VALUE_HOLDS_CORBA_OBJECT
@@ -724,6 +754,7 @@ bonobo_value_get_corba_typecode
 bonobo_value_get_corba_exception
 bonobo_value_set_unknown
 bonobo_value_set_corba_any
+bonobo_value_set_corba_object
 bonobo_value_set_corba_typecode
 bonobo_value_set_corba_environment
 bonobo_closure_invoke_va_list

@@ -179,6 +179,16 @@ suffix.
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_event_source_has_listener ##### -->
+<para>
+
+</para>
+
+@event_source: 
+@event_name: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_event_source_client_add_listener_closure ##### -->
 <para>
 

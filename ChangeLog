@@ -1,5 +1,11 @@
 2003-04-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* doc/api/Makefile.am (IGNORE_HFILES): Ignore Bonobo.h and
+	bonobo-marshal.h.
+
+	* doc/api/libbonobo-sections.txt: Added missing symbols from
+	libbonobo-unused.txt.
+
 	* bonobo/bonobo-arg.c, bonobo/bonobo-generic-factory.h,
 	* bonobo/bonobo-item-handler.c, bonobo/bonobo-listener.c,
 	* bonobo/bonobo-main.c, bonobo/bonobo-main.h,

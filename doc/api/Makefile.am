@@ -28,7 +28,7 @@ HFILE_GLOB=
 CFILE_GLOB=
 
 # Header files to ignore when scanning.
-IGNORE_HFILES=
+IGNORE_HFILES= Bonobo.h bonobo-marshal.h
 
 # Images to copy into HTML directory.
 HTML_IMAGES = figures/persist.png figures/persist-file.png\

@@ -244,6 +244,17 @@ Returns the #GtkType for the BonoboObject object.
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_object_query_remote ##### -->
+<para>
+
+</para>
+
+@unknown: 
+@repo_id: 
+@opt_ev: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_object_corba_objref ##### -->
 <para>
 
@@ -425,6 +436,15 @@ Returns the #GtkType for the BonoboObject object.
 @Returns: 
 <!-- # Unused Parameters # -->
 @object: 
+
+
+<!-- ##### FUNCTION bonobo_object_get_poa ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_type_unique ##### -->
