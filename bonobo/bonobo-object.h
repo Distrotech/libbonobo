@@ -56,9 +56,9 @@ GnomeObject *gnome_object_activate_with_goad_id (GoadServerList *list,
 #endif
 
 /* CORBA defaults we provide */
-PortableServer_ServantBase__epv gnome_object_base_epv;
-POA_GNOME_object__epv gnome_object_epv;
-POA_GNOME_object__vepv gnome_object_vepv;
+extern PortableServer_ServantBase__epv gnome_object_base_epv;
+extern POA_GNOME_object__epv           gnome_object_epv;
+extern POA_GNOME_object__vepv          gnome_object_vepv;
 
 END_GNOME_DECLS
 
