@@ -59,6 +59,6 @@ moniker_control_test_SOURCES =		\
 	moniker-control-test.c
 
 moniker_control_test_LDADD =		\
-	$(moniker_ldadd) -lgtkhtml
+	$(moniker_ldadd)
 
 EXTRA_DIST=std-moniker.oafinfo bonobo-moniker-gunzip.oafinfo bonobo-moniker-http.oafinfo
