@@ -17,7 +17,7 @@
 
 #include "gnome-container.idl"
 #include "gnome-client-site.idl"
-#include "gnome-component.idl"
+#include "gnome-embeddable.idl"
 #include "gnome-inplace.idl"
 
 #include "gnome-progressive.idl"
