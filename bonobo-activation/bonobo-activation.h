@@ -102,7 +102,7 @@ void oaf_active_server_unregister(const char *iid, CORBA_Object obj);
 #endif
 
 #ifdef POPT_AUTOHELP
-extern struct poptOptions oaf_popt_options[];
+extern struct poptOption oaf_popt_options[];
 #endif
 
 CORBA_ORB oaf_orb_init(int *argc, char **argv);
