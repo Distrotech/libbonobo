@@ -103,6 +103,14 @@ bonobo_running_context_remove_object (CORBA_Object object)
 	check_empty ();
 }
 
+void
+bonobo_running_context_ignore_object (CORBA_Object object)
+{
+	BonoboRunningInfo *ri = get_running_info ();
+
+	g_hash_table_remove (ri->objects, object);
+}
+
 static void
 impl_Bonobo_RunningContext_addObject (PortableServer_Servant servant,
 				      const CORBA_Object     object,
@@ -184,12 +192,16 @@ init_running_context_corba_class (void)
 static void
 bonobo_running_context_class_init (BonoboObjectClass *klass)
 {
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+
 	init_running_context_corba_class ();
 
 	signals [LAST_REF] = gtk_signal_new (
-		"last_ref", GTK_RUN_FIRST, GTK_OBJECT_CLASS (klass)->type,
+		"last_ref", GTK_RUN_FIRST, object_class->type,
 		GTK_SIGNAL_OFFSET (BonoboRunningContextClass, last_ref),
 		gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
+
+	gtk_object_class_add_signals (object_class, signals, LAST_SIGNAL);
 }
 
 static GtkType

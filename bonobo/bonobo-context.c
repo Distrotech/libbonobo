@@ -74,7 +74,7 @@ context_add (BonoboObject *object, const char *name)
 	bonobo_context_add (name, ref);
 
 	/* Don't count it as a running object; we always have it */
-	bonobo_running_context_remove_object (ref);
+	bonobo_running_context_ignore_object (ref);
 
 	bonobo_object_unref (object);
 }

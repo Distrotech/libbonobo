@@ -36,6 +36,7 @@ BonoboObject *bonobo_running_context_new (void);
  */
 void          bonobo_running_context_add_object    (CORBA_Object object);
 void          bonobo_running_context_remove_object (CORBA_Object object);
+void          bonobo_running_context_ignore_object (CORBA_Object object);
 
 END_GNOME_DECLS
 

@@ -37,6 +37,7 @@ Bonobo 0.29
 	* Misc
 		* CORBA_any * <-> XML serialization (Me)
 		* generic listener / event interface re-written (Alex Graveley)
+		* Created component selector control (Me)
 		* listener fixes (Iain Holmes)
 		* BonoboPropertyControl implemented & honed (Iain)
 		* Make each IDL file parse individualy (Mathieu Lacage)

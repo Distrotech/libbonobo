@@ -1,5 +1,22 @@
 2000-12-12  Michael Meeks  <michael@helixcode.com>
 
+	* components/selector/bonobo-selector.c (generic_factory): 
+	create and init a selector-widget.
+
+	* bonobo/bonobo-selector.c (bonobo_selector_destroy): upd.
+
+	* bonobo/bonobo-selector.h (BONOBO_IS_SELECTOR): rename macro.
+
+	* bonobo/Makefile.am: add bonobo-selector-widget.[ch]
+
+	* bonobo/bonobo-selector-widget.[ch]: split from bonobo-selector.
+
+	* bonobo/bonobo-running-context.c
+	(bonobo_running_context_class_init): add signals.
+	(bonobo_running_context_ignore_object): impl.
+
+2000-12-12  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-running-context.c (check_empty): kill fatal bug.
 
 	* components/selector/*: impl. a component selector control.
