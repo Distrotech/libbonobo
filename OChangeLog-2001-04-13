@@ -1,3 +1,13 @@
+2000-04-30  Mathieu Lacage <mathieu@gnu.org>
+
+	* bonobo/bonobo-wrapper.c: fixes a size negociation 
+	patch which tried to allocate 65xxx width and height
+	to the widget underlying the wrapper. this happened
+	because width and height are guint16 in GtkAllocation.
+	Also, code cleanups. Removed the old gc used to paint
+	on children and not around. This widget is nearing 
+	perfection ;)
+
 2000-04-29  Mathieu Lacage <mathieu@gnu.org>
 
 	* samples/compound-doc/sample-container.c: I am being
