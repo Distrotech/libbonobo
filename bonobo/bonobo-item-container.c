@@ -179,7 +179,7 @@ gnome_marshal_POINTER__POINTER_BOOL_POINTER (GtkObject * object,
 {
 	GnomeSignal_POINTER__POINTER_BOOL_POINTER rfunc;
 	gboolean *return_val;
-	return_val = GTK_RETLOC_POINTER (args[3]);
+	return_val = GTK_RETLOC_BOOL (args[3]);
 	rfunc = (GnomeSignal_POINTER__POINTER_BOOL_POINTER) func;
 	*return_val = (*rfunc) (object,
 				GTK_VALUE_POINTER (args[0]),
