@@ -1,3 +1,8 @@
+2003-04-16  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: add activation debug flags, and the
+	crucial flex / LEX check ( thanks to Ali Akcaagac)
+
 2003-04-15  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/test-object.c (main): A very lame excuse of a test of
