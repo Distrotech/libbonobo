@@ -1,3 +1,9 @@
+2000-10-03  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (popup_item_toggled_cb): Removed
+	debugging message.
+	(create_popup_window): Likewise.
+
 2000-10-03  Zach Frey <zfrey@lanich.com>
 
 	* bonobo.spec: comment out gshell
