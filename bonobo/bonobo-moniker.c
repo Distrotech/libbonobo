@@ -21,6 +21,8 @@ struct _BonoboMonikerPrivate {
 	char          *prefix;
 
 	char          *name;
+
+	gboolean       sensitive;
 };
 
 static GtkObjectClass *bonobo_moniker_parent_class;
@@ -267,6 +269,45 @@ bonobo_moniker_default_parse_display_name (BonoboMoniker     *moniker,
 						       &name [i], ev);	
 }
 
+static CORBA_long
+bonobo_moniker_default_equal (BonoboMoniker     *moniker,
+			      const CORBA_char  *display_name,
+			      CORBA_Environment *ev)
+{
+	int         i;
+	CORBA_long  offset;
+	const char *p;
+	char       *name;
+	
+	if (moniker->priv->parent != CORBA_OBJECT_NIL) {
+		offset = Bonobo_Moniker_equal (
+			moniker->priv->parent, display_name, ev);
+		if (BONOBO_EX (ev) || offset == 0)
+			return 0;
+	} else
+		offset = 0;
+
+	p = &display_name [offset];
+
+	i = bonobo_moniker_util_seek_std_separator (p, moniker->priv->prefix_len);
+
+	name = bonobo_moniker_get_name_escaped (moniker);
+
+	g_warning ("Compare %d chars of '%s' to '%s' - case sensitive ?%c",
+		   i, name, p, moniker->priv->sensitive?'y':'n');
+
+	if (( moniker->priv->sensitive && !strncmp       (name, p, i)) ||
+	    (!moniker->priv->sensitive && !g_strncasecmp (name, p, i))) {
+		g_warning ("Matching moniker - equal");
+		return i + offset;
+	} else {
+		g_warning ("No match");
+		return 0;
+	}
+
+	g_free (name);
+}
+
 static CORBA_char *
 impl_get_display_name (PortableServer_Servant servant,
 		       CORBA_Environment     *ev)
@@ -331,6 +372,16 @@ impl_resolve (PortableServer_Servant       servant,
 	return retval;
 }
 
+static CORBA_long
+impl_equal (PortableServer_Servant servant,
+	    const CORBA_char      *displayName,
+	    CORBA_Environment     *ev)
+{
+	BonoboMoniker *moniker = bonobo_moniker_from_servant (servant);
+
+	return CLASS (moniker)->equal (moniker, displayName, ev);
+}
+
 /**
  * bonobo_moniker_get_epv:
  *
@@ -348,6 +399,7 @@ bonobo_moniker_get_epv (void)
 	epv->getDisplayName   = impl_get_display_name;
 	epv->parseDisplayName = impl_parse_display_name;
 	epv->resolve          = impl_resolve;
+	epv->equal            = impl_equal;
 
 	return epv;
 }
@@ -399,6 +451,7 @@ bonobo_moniker_class_init (BonoboMonikerClass *klass)
 	klass->set_parent = bonobo_moniker_set_parent;
 	klass->get_display_name = bonobo_moniker_default_get_display_name;
 	klass->parse_display_name = bonobo_moniker_default_parse_display_name;
+	klass->equal = bonobo_moniker_default_equal;
 
 	klass->set_name   = impl_bonobo_moniker_set_name;
 	klass->get_name   = impl_bonobo_moniker_get_name;
@@ -501,9 +554,40 @@ bonobo_moniker_construct (BonoboMoniker *moniker,
 		moniker->priv->prefix_len = strlen (prefix);
 	}
 
+	moniker->priv->sensitive = TRUE;
+
 	retval = BONOBO_MONIKER (bonobo_object_construct (
 		BONOBO_OBJECT (moniker), corba_moniker));
 
 	return retval;
 }
 
+/**
+ * bonobo_moniker_set_case_sensitive:
+ * @moniker: the moniker
+ * @sensitive: whether to see case on equality compare
+ * 
+ * Sets up whether we use case sensitivity for the default equal impl.
+ **/
+void
+bonobo_moniker_set_case_sensitive (BonoboMoniker *moniker,
+				   gboolean       sensitive)
+{
+	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
+
+	moniker->priv->sensitive = sensitive;
+}
+
+/**
+ * bonobo_moniker_get_case_sensitive:
+ * @moniker: the moniker
+ *
+ * Return value: whether we use case sensitivity for the default equal impl.
+ **/
+gboolean
+bonobo_moniker_get_case_sensitive (BonoboMoniker *moniker)
+{
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), FALSE);
+
+	return moniker->priv->sensitive;
+}

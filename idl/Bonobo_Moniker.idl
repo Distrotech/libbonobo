@@ -68,6 +68,16 @@ module Bonobo {
 		Unknown resolve            (in ResolveOptions options,
 					    in string         requestedInterface)
 			raises (InterfaceNotFound, TimeOut);
+
+		/**
+		 * equal:
+		 * @displayName: the display name of another moniker
+		 *
+		 *  Compares the full moniker with this @displayName,
+		 * returns 0 if not equal, else the number of chars swallowed
+		 * by the compare.
+		 */
+		long    equal              (in string         displayName);
 	};
 
         interface MonikerExtender : Bonobo::Unknown {

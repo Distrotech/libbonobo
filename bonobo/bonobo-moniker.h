@@ -49,11 +49,15 @@ typedef struct {
 					      const Bonobo_ResolveOptions *options,
 					      const CORBA_char            *requested_interface,
 					      CORBA_Environment           *ev);
+	CORBA_long     (*equal)              (BonoboMoniker               *moniker,
+					      const CORBA_char            *display_name,
+					      CORBA_Environment           *ev);
 
 	void           (*set_name)           (BonoboMoniker               *moniker,
 					      const char                  *unescaped_name);
 	const char    *(*get_name)           (BonoboMoniker               *moniker);
 
+	gpointer        dummy;
 } BonoboMonikerClass;
 
 GtkType                  bonobo_moniker_get_type            (void);
@@ -64,7 +68,7 @@ Bonobo_Moniker           bonobo_moniker_corba_object_create (BonoboObject      *
 BonoboMoniker           *bonobo_moniker_construct           (BonoboMoniker *monike,
 							     Bonobo_Moniker corba_moniker,
 							     const char    *prefix,
-							     gpointer shlib_id);
+							     gpointer       shlib_id);
 
 Bonobo_Moniker           bonobo_moniker_get_parent          (BonoboMoniker     *moniker,
 							     CORBA_Environment *ev);
@@ -82,6 +86,10 @@ void                     bonobo_moniker_set_name            (BonoboMoniker     *
 							     int                num_chars);
 
 const char              *bonobo_moniker_get_prefix          (BonoboMoniker     *moniker);
+
+void                     bonobo_moniker_set_case_sensitive  (BonoboMoniker     *moniker,
+							     gboolean           sensitive);
+gboolean                 bonobo_moniker_get_case_sensitive  (BonoboMoniker     *moniker);
 
 END_GNOME_DECLS
 

@@ -1,5 +1,16 @@
 2001-01-26  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-desktop-window.h: fix guard - thanks morten.
+
+	* bonobo/bonobo-moniker.c (impl_equal): impl.
+	(bonobo_moniker_set_case_sensitive),
+	(bonobo_moniker_get_case_sensitive): impl.
+	(bonobo_moniker_default_equal): impl.
+
+	* idl/Bonobo_Moniker.idl: add equal method.
+
+2001-01-26  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-object.c (bonobo_track_shlib_objects): guard
 	with #ifdef HAVE_DLADDR.
 
