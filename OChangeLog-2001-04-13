@@ -1,3 +1,14 @@
+2001-01-03  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-ui-engine.h:
+	* bonobo/bonobo-ui-sync-keys.h:
+	* bonobo/bonobo-ui-sync-menu.h:
+	* bonobo/bonobo-ui-sync-status.h:
+	* bonobo/bonobo-ui-sync-toolbar.h:
+	* bonobo/bonobo-ui-sync.h:
+	* bonobo/bonobo-ui-toolbar-item.h:
+	Added missing END_GNOME_DECLS.
+
 2001-01-03  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* configure.in: Bump version to 0.32
