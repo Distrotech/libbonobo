@@ -188,12 +188,6 @@ main (int argc, char *argv[])
 	struct sigaction sa;
         GString *src_dir;
 
-	if (chdir ("/")) {
-		g_print ("Couldn't chdir() to '/' (why ?!!). Exiting.\n");
-		exit (EXIT_FAILURE);
-	}
-
-
         /*
          *    Become process group leader, detach from controlling
          * terminal, etc.
