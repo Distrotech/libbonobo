@@ -1,5 +1,9 @@
 2001-07-30  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-exception.c (bonobo_exception_get_text):
+	re-instate nice oaf exception reporting, should be a hashed handler
+	though.
+
 	* bonobo/bonobo-types.c
 	(bonobo_value_get_corba_exception, bonobo_value_get_corba_object),
 	(bonobo_value_get_corba_any, bonobo_value_get_unknown): impl.
