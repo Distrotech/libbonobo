@@ -216,7 +216,7 @@ bonobo_shlib_factory_get_type (void)
 
 	if (!type) {
 		GTypeInfo info = {
-			sizeof (BonoboShlibFactory),
+			sizeof (BonoboShlibFactoryClass),
 			(GBaseInitFunc) NULL,
 			(GBaseFinalizeFunc) NULL,
 			(GClassInitFunc) bonobo_shlib_factory_class_init,
@@ -250,7 +250,7 @@ bonobo_shlib_factory_dec_live_cb (BonoboShlibFactory *factory)
 	factory->live_objects--;
 
 	if (factory->live_objects <= 0)
-		bonobo_object_unref (BONOBO_OBJECT (factory));
+		g_object_unref (G_OBJECT (factory));
 
 	return FALSE;
 }

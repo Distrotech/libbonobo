@@ -38,6 +38,9 @@ struct _BonoboGenericFactory {
 	GnomeFactoryCallback   factory_cb;
 	gpointer               factory_closure;
 
+	/* The CORBA Object */
+	GNOME_ObjectFactory    corba_objref;
+
 	/* The component_id for this generic factory */
 	char *oaf_iid;
 };
@@ -52,7 +55,10 @@ typedef struct {
 
 GType                 bonobo_generic_factory_get_type  (void);
 
-CORBA_Object          bonobo_generic_factory_corba_object_create (
+GNOME_ObjectFactory   bonobo_generic_factory_corba_objref (
+	BonoboGenericFactory *object);
+
+GNOME_ObjectFactory   bonobo_generic_factory_corba_object_create (
 	BonoboGenericFactory *object, 
 	gpointer              shlib_id);
 
@@ -69,7 +75,7 @@ BonoboGenericFactory *bonobo_generic_factory_new_multi (
 BonoboGenericFactory *bonobo_generic_factory_construct (
 	const char            *oaf_iid,
 	BonoboGenericFactory  *c_factory,
-	CORBA_Object           corba_factory,
+	GNOME_ObjectFactory    corba_factory,
 	BonoboGenericFactoryFn factory,
 	GnomeFactoryCallback   factory_cb,
 	gpointer               user_data);

@@ -34,7 +34,7 @@ make_factory (PortableServer_POA poa, const char *iid, gpointer impl_ptr,     \
 	BonoboShlibFactory *f;                                                \
         CORBA_Object object_ref;                                              \
 	f = bonobo_shlib_factory_new_multi (oafiid, poa, impl_ptr, fn, data); \
-        object_ref = bonobo_object_corba_objref (BONOBO_OBJECT (f));          \
+        object_ref = bonobo_generic_factory_corba_objref (BONOBO_GENERIC_FACTORY (f)); \
         if (BONOBO_EX (ev) || !object_ref) {                                  \
 		g_warning ("cannot get objref: '%s'",                         \
 			   bonobo_exception_get_text (ev));                   \
@@ -53,7 +53,7 @@ make_factory (PortableServer_POA poa, const char *iid, gpointer impl_ptr,     \
 	BonoboShlibFactory *f;                                                \
         CORBA_Object object_ref;                                              \
 	f = bonobo_shlib_factory_new (oafiid, poa, impl_ptr, fn, data);       \
-        object_ref = bonobo_object_corba_objref (BONOBO_OBJECT (f));          \
+        object_ref = bonobo_generic_factory_corba_objref (BONOBO_GENERIC_FACTORY (f)); \
         if (BONOBO_EX (ev) || !object_ref) {                                  \
 		g_warning ("cannot get objref: '%s'",                         \
 			   bonobo_exception_get_text (ev));                   \
