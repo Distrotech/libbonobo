@@ -1,3 +1,23 @@
+2000-12-01  Iain Holmes  <iain@helixcode.com>
+
+	* bonobo/bonobo-listener.c (bonobo_listener_destroy): Correct the
+	parent chaining.
+
+	* bonobo/bonobo-property-control.c (bonobo_property_control_changed):
+	Create the CORBA_any var correctly.
+
+	* bonobo/bonobo-event-source.c (bonobo_event_source_destroy): Correct
+	the parent chaining.
+	(impl_Bonobo_EventSource_addListenerWithMask): Prepend the listener
+	onto the correct list.
+
+2000-11-30  Iain Holmes  <iain@helixcode.com>
+
+	* bonobo/bonobo-property-control.c: Implemented the new idl methods.
+
+	* idl/bonobo-control.idl: Added a pageCount attribute and a page number
+	to the other methods.
+
 2000-12-02  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/bonobo-moniker-http.c: upd.

@@ -4,6 +4,7 @@
  *
  * Author:
  *	Alex Graveley (alex@helixcode.com)
+ *	Iain Holmes   (iain@helixcode.com)
  *
  * Copyright (C) 2000, Helix Code, Inc.
  */
@@ -48,14 +49,13 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 					     CORBA_Environment     *ev)
 {
 	BonoboEventSource *event_source;
-	GSList            *listeners;
+	GSList            *list;
 	CORBA_char        *mask_copy = NULL;
 	ListenerDesc      *desc;
 
 	g_return_if_fail (!CORBA_Object_is_nil (l, ev));
 
 	event_source = bonobo_event_source_from_servant (servant);
-	listeners = event_source->priv->listeners;
 
 	if (event_mask)
 		mask_copy = CORBA_string_dup (event_mask);
@@ -64,23 +64,21 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 	 * Check if listener is already registered, and if so modify 
 	 * event_mask to recieve masked events.
 	 */
-	while (listeners) {
-		desc = (ListenerDesc *) listeners->data;
+	for (list = event_source->priv->listeners; list; list = list->next) {
+		desc = (ListenerDesc *) list->data;
 
 		if (CORBA_Object_is_equivalent (l, desc->listener, ev)) {
 			CORBA_free (desc->event_mask);
 			desc->event_mask = mask_copy;
 			return;
 		}
-
-		listeners = listeners->next;
 	}
 
 	desc = g_new0 (ListenerDesc, 1);
 	desc->listener = bonobo_object_dup_ref (l, ev);
 	desc->event_mask = mask_copy;
 
-	listeners = g_slist_prepend (listeners, desc);
+	event_source->priv->listeners = g_slist_prepend (event_source->priv->listeners, desc);
 }
 
 static void
@@ -97,15 +95,14 @@ impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
 					CORBA_Environment     *ev)
 {
 	BonoboEventSource *event_source;
-	GSList *listeners;
+	GSList *list;
 
 	g_return_if_fail (!CORBA_Object_is_nil (l, ev));
 
 	event_source = bonobo_event_source_from_servant (servant);
-	listeners = event_source->priv->listeners;
 
-	while (listeners) {
-		ListenerDesc *desc = (ListenerDesc *) listeners->data;
+	for (list = event_source->priv->listeners; list; list = list->next) {
+		ListenerDesc *desc = (ListenerDesc *) list->data;
 
 		if (CORBA_Object_is_equivalent (l, desc->listener, ev)) {
 			event_source->priv->listeners = 
@@ -114,8 +111,6 @@ impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
 			desc_free (desc, ev);
 			return;
 		}
-
-		listeners = listeners->next;
 	}
 
 	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -129,10 +124,8 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 				      CORBA_any         *value,
 				      CORBA_Environment *opt_ev)
 {
-	GSList *listeners;
+	GSList *list;
 	CORBA_Environment ev, *my_ev;
-
-	listeners = event_source->priv->listeners;
 
 	if (!opt_ev) {
 		CORBA_exception_init (&ev);
@@ -140,15 +133,13 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 	} else
 		my_ev = opt_ev;
 
-	while (listeners) {
-		ListenerDesc *desc = (ListenerDesc *) listeners->data;
+	for (list = event_source->priv->listeners; list; list = list->next) {
+		ListenerDesc *desc = (ListenerDesc *) list->data;
 
 		if (desc->event_mask == NULL || 
 		    strstr (desc->event_mask, event_name))
 			Bonobo_Listener_event (desc->listener, 
 					       event_name, value, my_ev);
-
-		listeners = listeners->next;
 	}
 	
 	if (!opt_ev)
@@ -200,7 +191,7 @@ bonobo_event_source_destroy (GtkObject *object)
 	g_slist_free (event_source->priv->listeners);
 	g_free (event_source->priv);
 
-	GTK_OBJECT_CLASS (object->klass)->destroy (object);
+	GTK_OBJECT_CLASS (bonobo_event_source_parent_class)->destroy (object);
 }
 
 static void

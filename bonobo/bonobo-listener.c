@@ -74,7 +74,7 @@ init_listener_corba_class (void)
 static void
 bonobo_listener_destroy (GtkObject *object)
 {
-	GTK_OBJECT_CLASS (object->klass)->destroy (object);
+	GTK_OBJECT_CLASS (bonobo_listener_parent_class)->destroy (object);
 }
 
 static void
