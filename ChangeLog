@@ -1,3 +1,10 @@
+2001-11-05  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-storage-mem.c (main): fixup remaining
+	tests, reflow, some seds, check all passed.
+
+	* tests/Makefile.am (TESTS): add test-storage-mem.
+
 2001-11-02  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.106.0
