@@ -15,7 +15,7 @@ subdomains:
 	DB/			Gnome-db	rodrigo@linuxave.net
 	Dia/			Dia		james@daa.com.au
 	Development/		gnome-debug,	jpr@helixcode.com, dave@helixcode.com
-	Encompass/		Encmompass	dobey@free.fr
+	Encompass/		Encompass	dobey@free.fr
 	EOG/			EOG		federico@helixcode.com
 	Evolution/		Evolution	ettore@helixcode.com
 	Config/			GConf		hp@redhat.com
