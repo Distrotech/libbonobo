@@ -1,3 +1,13 @@
+2001-01-19  Dietmar Maurer  <dietmar@ximian.com>
+
+	* monikers/Bonobo_Moniker_std.oaf.in.in: changed the oaf IIDs to
+	OAFIID:Bonobo_Moniker_std_Factory
+
+	* bonobo/bonobo-generic-factory.h: make an
+	additional parameter for the BONOBO_OAF_FACTORY macros for the
+	VERSION, and also #include the required files. Cleaned up all
+	factories inside bonobo to only #include the necessary files.
+
 2001-01-19  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-engine.c (make_updates_for_command): build

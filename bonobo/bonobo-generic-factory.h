@@ -14,7 +14,9 @@
 #include <gtk/gtkobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
+#include <gnome.h>
 #include <liboaf/oaf.h>
+#include <liboaf/liboaf.h>
 
 BEGIN_GNOME_DECLS
  
@@ -24,7 +26,7 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_GENERIC_FACTORY(o)       (GTK_CHECK_TYPE ((o), BONOBO_GENERIC_FACTORY_TYPE))
 #define BONOBO_IS_GENERIC_FACTORY_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_GENERIC_FACTORY_TYPE))
 
-#define BONOBO_OAF_FACTORY(oafiid, descr, fn, data)                           \
+#define BONOBO_OAF_FACTORY(oafiid, descr, version, fn, data)                  \
 int main (int argc, char *argv [])                                            \
 {                                                                             \
 	BonoboGenericFactory *factory;                                        \
@@ -32,7 +34,7 @@ int main (int argc, char *argv [])                                            \
 	CORBA_ORB orb;                                                        \
                                                                               \
 	CORBA_exception_init (&ev);                                           \
-	gnome_init_with_popt_table (descr, VERSION, argc, argv,               \
+	gnome_init_with_popt_table (descr, version, argc, argv,               \
 				    oaf_popt_options, 0, NULL);               \
         orb = oaf_init (argc, argv);                                          \
 	if (!bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL))           \
@@ -44,7 +46,7 @@ int main (int argc, char *argv [])                                            \
 	return 0;                                                             \
 }                                                                             
 
-#define BONOBO_OAF_FACTORY_MULTI(oafiid, descr, fn, data)                     \
+#define BONOBO_OAF_FACTORY_MULTI(oafiid, descr, version, fn, data)            \
 int main (int argc, char *argv [])                                            \
 {                                                                             \
 	BonoboGenericFactory *factory;                                        \
@@ -52,7 +54,7 @@ int main (int argc, char *argv [])                                            \
 	CORBA_ORB orb;                                                        \
                                                                               \
 	CORBA_exception_init (&ev);                                           \
-	gnome_init_with_popt_table (descr, VERSION, argc, argv,               \
+	gnome_init_with_popt_table (descr, version, argc, argv,               \
 				    oaf_popt_options, 0, NULL);               \
         orb = oaf_init (argc, argv);                                          \
 	if (!bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL))           \

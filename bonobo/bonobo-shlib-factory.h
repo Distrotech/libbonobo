@@ -16,6 +16,7 @@
 #include <bonobo/bonobo-object.h>
 #include <liboaf/oaf.h>
 #include <bonobo/bonobo-generic-factory.h>
+#include <bonobo/bonobo-exception.h>
 
 BEGIN_GNOME_DECLS
  
