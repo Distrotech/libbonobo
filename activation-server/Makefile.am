@@ -3,6 +3,7 @@ bin_PROGRAMS=oafd oaf-client
 INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\" @ORBIT_CFLAGS@ @XML_CFLAGS@ @GLIB_CFLAGS@
 
 oafd_SOURCES=			\
+	qsort_ex.c              \
 	oaf-skels.c		\
 	ac-query-lex.c		\
 	ac-query-parse.c	\
