@@ -714,6 +714,7 @@ bonobo_activation_init_activation_env (void)
 		{ "SESSION_MANAGER", NULL }, /* XSMP session manager */
 		{ "AUDIODEV",        NULL }, /* Audio device on Sun systems */
 		{ "LANG",            NULL }, /* Fallback locale name */
+                { "XAUTHORITY",      NULL },
 		{ NULL,              NULL }
 	};
 

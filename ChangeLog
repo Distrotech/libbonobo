@@ -1,5 +1,12 @@
 2003-10-31  Michael Meeks  <michael@ximian.com>
 
+	* bonobo-activation/bonobo-activation-activate.c
+	(bonobo_activation_init_activation_env): add XAUTHORITY
+	to the list of uniqueness keys - causing grief for
+	many: #124707
+
+2003-10-31  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-context.c (bonobo_context_shutdown): check
 	that people didn't shut down the ORB before we got called.
 
