@@ -1,3 +1,19 @@
+1999-09-18  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* components/image-generic: Create; #defined out for now: nasty
+	hack with temp files :-)
+
+1999-09-17  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* components/image-x-png/bonobo-image-x-png.c (stream_read): Add init
+	/ free corba exception. (bonobo_object_factory): setup 'image'.
+
+	* components/bonobo.keys: Add new keys.
+
+	* components/Makefile.am: add image-generic.
+
+	* configure.in: Added image-generic.
+
 1999-09-17  Kjartan Maraas  <kmaraas@online.no>
 
 	* configure.in: Added "da" to ALL_LINGUAS.
