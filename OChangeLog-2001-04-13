@@ -1,3 +1,11 @@
+1999-05-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-view.c (impl_GNOME_View_size_allocate): Pass the
+	size on the component to the actual widget.
+
+	* bonobo/gnome-component-client.c (size_allocate): Propagage size
+	changes to the client.
+
 1999-05-27  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
 	* idl/gnome-component.idl: change a "Baboon" -> "Bonobo"
