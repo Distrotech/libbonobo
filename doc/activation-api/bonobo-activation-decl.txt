@@ -797,7 +797,7 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
-#define BONOBO_ACTIVATION_MICRO_VERSION (8)
+#define BONOBO_ACTIVATION_MICRO_VERSION (9)
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
@@ -1005,11 +1005,11 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_CORBA_string_allocbuf</NAME>
-#define CORBA_sequence_CORBA_string_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l))
+#define CORBA_sequence_CORBA_string_allocbuf(l) ((CORBA_string*)ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l)))
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_CORBA_string_allocbuf</NAME>
-#define CORBA_sequence_CORBA_string_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l))
+#define CORBA_sequence_CORBA_string_allocbuf(l) ((CORBA_string*)ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l)))
 </MACRO>
 <TYPEDEF>
 <NAME>Bonobo_StringList</NAME>
@@ -1129,7 +1129,7 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>Bonobo_StringList_allocbuf</NAME>
-#define Bonobo_StringList_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l))
+#define Bonobo_StringList_allocbuf(l) ((CORBA_string*)ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l)))
 </MACRO>
 <MACRO>
 <NAME>ex_Bonobo_GeneralError</NAME>
@@ -2862,11 +2862,11 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_Bonobo_ActivationProperty_allocbuf</NAME>
-#define CORBA_sequence_Bonobo_ActivationProperty_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ActivationProperty, (l))
+#define CORBA_sequence_Bonobo_ActivationProperty_allocbuf(l) ((Bonobo_ActivationProperty*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ActivationProperty, (l)))
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_Bonobo_ActivationProperty_allocbuf</NAME>
-#define CORBA_sequence_Bonobo_ActivationProperty_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ActivationProperty, (l))
+#define CORBA_sequence_Bonobo_ActivationProperty_allocbuf(l) ((Bonobo_ActivationProperty*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ActivationProperty, (l)))
 </MACRO>
 <MACRO>
 <NAME>TC_IMPL_TC_Bonobo_ServerInfo_0</NAME>
@@ -3174,11 +3174,11 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_Bonobo_ServerInfo_allocbuf</NAME>
-#define CORBA_sequence_Bonobo_ServerInfo_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ServerInfo, (l))
+#define CORBA_sequence_Bonobo_ServerInfo_allocbuf(l) ((Bonobo_ServerInfo*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ServerInfo, (l)))
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_Bonobo_ServerInfo_allocbuf</NAME>
-#define CORBA_sequence_Bonobo_ServerInfo_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ServerInfo, (l))
+#define CORBA_sequence_Bonobo_ServerInfo_allocbuf(l) ((Bonobo_ServerInfo*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ServerInfo, (l)))
 </MACRO>
 <TYPEDEF>
 <NAME>Bonobo_ServerInfoList</NAME>
@@ -3298,7 +3298,7 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>Bonobo_ServerInfoList_allocbuf</NAME>
-#define Bonobo_ServerInfoList_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ServerInfo, (l))
+#define Bonobo_ServerInfoList_allocbuf(l) ((Bonobo_ServerInfo*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ServerInfo, (l)))
 </MACRO>
 <ENUM>
 <NAME>Bonobo_RegistrationResult</NAME>
@@ -4661,11 +4661,11 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_CORBA_string_allocbuf</NAME>
-#define CORBA_sequence_CORBA_string_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l))
+#define CORBA_sequence_CORBA_string_allocbuf(l) ((CORBA_string*)ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l)))
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_CORBA_string_allocbuf</NAME>
-#define CORBA_sequence_CORBA_string_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l))
+#define CORBA_sequence_CORBA_string_allocbuf(l) ((CORBA_string*)ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_string, (l)))
 </MACRO>
 <MACRO>
 <NAME>ORBIT_DECL_CORBA_sequence_Bonobo_ImplementationID</NAME>
@@ -6513,11 +6513,11 @@ Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_CORBA_Object_allocbuf</NAME>
-#define CORBA_sequence_CORBA_Object_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_Object, (l))
+#define CORBA_sequence_CORBA_Object_allocbuf(l) ((CORBA_Object*)ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_Object, (l)))
 </MACRO>
 <MACRO>
 <NAME>CORBA_sequence_CORBA_Object_allocbuf</NAME>
-#define CORBA_sequence_CORBA_Object_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_Object, (l))
+#define CORBA_sequence_CORBA_Object_allocbuf(l) ((CORBA_Object*)ORBit_small_allocbuf (TC_CORBA_sequence_CORBA_Object, (l)))
 </MACRO>
 <MACRO>
 <NAME>ORBIT_DECL_CORBA_sequence_Bonobo_ObjectDirectory</NAME>
@@ -6865,7 +6865,7 @@ Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_
 </MACRO>
 <MACRO>
 <NAME>Bonobo_ObjectDirectoryList_allocbuf</NAME>
-#define Bonobo_ObjectDirectoryList_allocbuf(l) ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ObjectDirectory, (l))
+#define Bonobo_ObjectDirectoryList_allocbuf(l) ((Bonobo_ObjectDirectory*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ObjectDirectory, (l)))
 </MACRO>
 <MACRO>
 <NAME>ORBIT_DECL_Bonobo_ActivationContext</NAME>

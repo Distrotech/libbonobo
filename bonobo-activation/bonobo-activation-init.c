@@ -213,7 +213,7 @@ bonobo_activation_object_directory_get (const char *username,
 }
 
 static char *bonobo_activation_od_ior = NULL;
-static int bonobo_activation_ior_fd = 1;
+static int   bonobo_activation_ior_fd = 1;
 static char *bonobo_activation_activate_iid = NULL;
 
 struct poptOption bonobo_activation_popt_options[] = {
@@ -469,7 +469,8 @@ bonobo_activation_init (int argc, char **argv)
 	for (i = 1; i < argc; i++) {
 		if (!strncmp
 		    ("--oaf-od-ior=", argv[i], strlen ("--oaf-od-ior="))) {
-			bonobo_activation_od_ior = argv[i] + strlen ("--oaf-od-ior=");
+			bonobo_activation_od_ior =
+                                g_strdup (argv[i] + strlen ("--oaf-od-ior="));
 		} else if (!strncmp
                            ("--oaf-ior-fd=", argv[i],
                             strlen ("--oaf-ior-fd="))) {
@@ -481,7 +482,7 @@ bonobo_activation_init (int argc, char **argv)
                            ("--oaf-activate-iid=", argv[i],
                             strlen ("--oaf-activate-iid="))) {
 			bonobo_activation_activate_iid =
-				argv[i] + strlen ("--oaf-activate-iid=");
+				g_strdup (argv[i] + strlen ("--oaf-activate-iid="));
                 } else if (!strcmp
                            ("--oaf-private", argv[i])) {
                         bonobo_activation_private = TRUE;
