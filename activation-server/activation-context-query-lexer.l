@@ -39,7 +39,7 @@ DIGIT	[0-9]
 "OR"  { return P_OR; }
 "~"   { return P_NOT; }
 "NOT" { return P_NOT; }
-"^"   { return P_XOR; }
+"^^"  { return P_XOR; }
 "XOR" { return P_XOR; }
 
 "/"   { return P_DIVIDE; }

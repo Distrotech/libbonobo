@@ -38,8 +38,10 @@ Internally, 'field.funcname(other-arguments...)' is translated to be
 exactly the same as 'funcname(field, other-arguments)', so
 'priority.max()' is exactly the same as 'max(priority)'. The following functions are available:
 
-has_field(string)
-   Returns a boolean value that indicates whether the current record has a particular field.
+defined(expression)
+   Returns a boolean value that indicates whether the given expression is defined for the current
+   record. For example, using a field name would indicate whether that field is defined for the
+   record.
 
 has_one(stringv1, stringv2)
    Returns a boolean value that indicates whether any of the strings
@@ -63,6 +65,36 @@ min(expr)
 Function names are case insensitive.
 
 	Operators:
+
+Binary relational operators 
+
+==    equal
+!=    not equal
+<     less than
+>     greater than
+<=    less than or equal
+>=    greater than or equal
+
+Binary boolean operators
+
+&&, AND   and
+||, OR    or
+^^, XOR   exclusive or
+
+Unary boolean operators
+
+~, NOT    not
+
+Binary arithmetic operators
+
+/   divided by
++   plus
+-   minus
+*   times
+
+Unary arithmetic operators
+
+-   negate
 
 
 	Example queries:
