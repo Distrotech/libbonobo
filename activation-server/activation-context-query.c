@@ -31,7 +31,6 @@
 
 #include "activation-context-query.h"
 #include "activation-context-query-parser.h"
-#include "qsort_ex.h"
 
 static QueryExpr *
 qexp_new (void)
@@ -1152,17 +1151,19 @@ typedef struct
 QexpSortData;
 
 
-static gboolean
-qexp_sort_compare (Bonobo_ServerInfo ** x, Bonobo_ServerInfo ** y,
-		   QexpSortData * sort_data)
+static int
+qexp_sort_compare (gconstpointer a, gconstpointer b, gpointer user_data)
 {
+	Bonobo_ServerInfo *x = * (Bonobo_ServerInfo **) a;
+	Bonobo_ServerInfo *y = * (Bonobo_ServerInfo **) b;
+	QexpSortData * sort_data = user_data;
 	int i;
 
-	if (*x == NULL) {
+	if (x == NULL) {
 		return 1;
 	}
 
-	if (*y == NULL) {
+	if (y == NULL) {
 		return -1;
 	}
 
@@ -1170,8 +1171,8 @@ qexp_sort_compare (Bonobo_ServerInfo ** x, Bonobo_ServerInfo ** y,
 		QueryExprConst cx, cy;
 		int res;
 
-		cx = qexp_evaluate (*x, sort_data->sexps[i], sort_data->qctx);
-		cy = qexp_evaluate (*y, sort_data->sexps[i], sort_data->qctx);
+		cx = qexp_evaluate (x, sort_data->sexps[i], sort_data->qctx);
+		cy = qexp_evaluate (y, sort_data->sexps[i], sort_data->qctx);
 
 		res = qexp_constant_compare (&cx, &cy);
 
@@ -1197,6 +1198,6 @@ qexp_sort (Bonobo_ServerInfo ** servers, int nservers, QueryExpr ** sexps,
 	sort_data.nexps = nexps;
 	sort_data.qctx = qctx;
 
-	qsort_ex (servers, nservers, sizeof (Bonobo_ServerInfo *),
-		  (compar_ex_fn_t)qexp_sort_compare, &sort_data);
+	g_qsort_with_data (servers, nservers, sizeof (Bonobo_ServerInfo *),
+	                   qexp_sort_compare, &sort_data);
 }

@@ -18,8 +18,6 @@ bonobo_activation_server_SOURCES=				\
 	activation-server-corba-extensions.h			\
 	activation-context-query.h				\
 	activation-context-query.c				\
-	qsort_ex.c						\
-	qsort_ex.h						\
 	activation-context-query-lexer.c			\
 	activation-context-query-parser.c			\
 	activation-context-query-parser.h			\
