@@ -1,5 +1,10 @@
 2003-06-06  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-main.c (bonobo_poa_new_from): impl.
+	helper for creating new poas.
+
+2003-06-06  Michael Meeks  <michael@ximian.com>
+
 	* bonobo-activation/bonobo-activation-fork-server.c
 	(bonobo_activation_server_by_forking): use
 	g_main_context_default not erroneous NULL thing.

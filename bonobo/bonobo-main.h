@@ -42,7 +42,11 @@ void			    bonobo_setup_x_error_handler (void);
 CORBA_ORB		    bonobo_orb			 (void);
 PortableServer_POA	    bonobo_poa			 (void);
 PortableServer_POAManager   bonobo_poa_manager		 (void);
-PortableServer_POA          bonobo_poa_get_threaded      (BonoboThreadHint hint);
+PortableServer_POA          bonobo_poa_get_threaded      (BonoboThreadHint        hint);
+PortableServer_POA          bonobo_poa_new_from          (PortableServer_POA      template,
+							  const char             *name,
+							  const CORBA_PolicyList *opt_policies,
+							  CORBA_Environment      *opt_ev);
 
 G_END_DECLS
 

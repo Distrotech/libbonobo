@@ -399,3 +399,26 @@ PortableServer_POA bonobo_poa_get_threaded (BonoboThreadHint hint)
                g_warning ("Could not create/get poa '%s'", poa_name);
        return poa;
 }
+
+PortableServer_POA
+bonobo_poa_new_from (PortableServer_POA      template,
+		     const char             *name,
+		     const CORBA_PolicyList *opt_policies,
+		     CORBA_Environment      *opt_ev)
+{
+	PortableServer_POA poa;
+	CORBA_Environment real_ev[1], *ev;
+
+	if (!opt_ev)
+		CORBA_exception_init ((ev = real_ev));
+	else
+		ev = opt_ev;
+
+	poa = ORBit_POA_new_from (bonobo_orb(),
+				  template, name, opt_policies, ev);
+
+	if (!opt_ev)
+		CORBA_exception_free (real_ev);
+
+	return poa;
+}
