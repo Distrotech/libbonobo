@@ -24,7 +24,9 @@ typedef struct _BonoboConfigDatabasePrivate BonoboConfigDatabasePrivate;
 typedef struct _BonoboConfigDatabase        BonoboConfigDatabase;
 
 struct _BonoboConfigDatabase {
-	BonoboXObject       base;
+	BonoboXObject base;
+
+	gboolean writeable;
 
 	BonoboConfigDatabasePrivate *priv;
 };

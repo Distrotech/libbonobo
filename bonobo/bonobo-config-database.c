@@ -324,6 +324,15 @@ impl_Bonobo_ConfigDatabase_sync (PortableServer_Servant  servant,
 		CLASS (cd)->sync (cd, ev);
 }
 
+static CORBA_boolean
+impl_Bonobo_ConfigDatabase__get_writeable (PortableServer_Servant  servant,
+					   CORBA_Environment      *ev)
+{
+	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
+
+	return cd->writeable;
+}
+
 static void
 bonobo_config_database_destroy (GtkObject *object)
 {
@@ -365,15 +374,18 @@ bonobo_config_database_class_init (BonoboConfigDatabaseClass *class)
 
 	epv = &class->epv;
 
-	epv->getValue    = impl_Bonobo_ConfigDatabase_getValue;
-	epv->setValue    = impl_Bonobo_ConfigDatabase_setValue;
-	epv->getDefault  = impl_Bonobo_ConfigDatabase_getDefault;
-	epv->listDirs    = impl_Bonobo_ConfigDatabase_listDirs;
-	epv->listKeys    = impl_Bonobo_ConfigDatabase_listKeys;
-	epv->dirExists   = impl_Bonobo_ConfigDatabase_dirExists;
-	epv->remove      = impl_Bonobo_ConfigDatabase_remove;
-	epv->addDatabase = impl_Bonobo_ConfigDatabase_addDatabase;
-	epv->sync        = impl_Bonobo_ConfigDatabase_sync;
+	epv->getValue       = impl_Bonobo_ConfigDatabase_getValue;
+	epv->setValue       = impl_Bonobo_ConfigDatabase_setValue;
+	epv->getDefault     = impl_Bonobo_ConfigDatabase_getDefault;
+	epv->listDirs       = impl_Bonobo_ConfigDatabase_listDirs;
+	epv->listKeys       = impl_Bonobo_ConfigDatabase_listKeys;
+	epv->dirExists      = impl_Bonobo_ConfigDatabase_dirExists;
+	epv->remove         = impl_Bonobo_ConfigDatabase_remove;
+	epv->addDatabase    = impl_Bonobo_ConfigDatabase_addDatabase;
+	epv->sync           = impl_Bonobo_ConfigDatabase_sync;
+
+
+	epv->_get_writeable = impl_Bonobo_ConfigDatabase__get_writeable;
 }
 
 static void

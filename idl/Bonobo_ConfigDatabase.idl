@@ -44,6 +44,8 @@ module Bonobo {
 	 */
 	interface ConfigDatabase : Unknown {
 
+		readonly attribute boolean writeable;
+
 		any          getValue    (in string key);
 
 		void         setValue    (in string key, in any value);
