@@ -1,3 +1,35 @@
+2000-08-11  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object-client.c (bonobo_object_restore_from_url):
+	comment out totaly; needs killing properly.
+
+2000-08-10  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/: Create a load of sample standard moniker implementations
+	and a moniker resolution daemon; whether this should stay here long
+	term or not is undecided. Perhaps better off as shared components in
+	libbonobo.
+
+	* bonobo/bonobo-moniker.[ch]: Complete re-write
+
+	* bonobo/bonobo-moniker-util.[ch]: New module for helper and client
+	code.
+
+	* bonobo/bonobo-moniker-client.[ch]: removed.
+
+2000-08-10  Michael Meeks  <michael@helixcode.com>
+	
+	* configure.in (Configuration): hack out oaf stuff.
+
+	* tests/test-container.c (add_gnumeric_cmd, add_cmd_moniker),
+	(launch_server_moniker): sane environment passing + update.
+	(add_gnumeric_cmd): update.
+
+2000-08-09  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-main.c (bonobo_exception_get_text): rename to
+	be sane.
+
 2000-08-10  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* idl/bonobo-ui-handler.idl: Changed the {menu,toolbar}_activated,
