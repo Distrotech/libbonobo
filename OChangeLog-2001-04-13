@@ -1,3 +1,45 @@
+
+2000-10-27  Zach Frey <zfrey@bright.net>
+
+	* bonobo/doc/api/bonobo.types: remove the deprecated 
+	bonobo_stream_fs_get_type and bonobo_ui_handler_get_type.
+
+	* bonobo/doc/api/Makefile.am: remove bonobo-stream-fs.h
+	since it's no longer in bonobo/bonobo and it's not installed.
+
+	* bonobo/doc/api/Makefile.am: add the following headers 
+	to the scan target:
+
+	- bonobo/bonobo-canvas-component.h
+	- bonobo/bonobo-canvas-item.h
+	- bonobo/bonobo-client-site.h 
+	- bonobo/bonobo-component-io.h
+	- bonobo/bonobo-desktop-window.h
+	- bonobo/bonobo-object-directory.h
+	- bonobo/bonobo-persist-file.h 
+	- bonobo/bonobo-plug.h 
+	- bonobo/bonobo-property-bag.h 
+	- bonobo/bonobo-property-types.h 
+	- bonobo/bonobo-property.h 
+	- bonobo/bonobo-socket.h 
+	- bonobo/bonobo-storage-plugin.h 
+	- bonobo/bonobo-stream-memory.h 
+	- bonobo/bonobo-transient.h 
+	- bonobo/bonobo-ui-node.h 
+	- bonobo/bonobo-ui-toolbar-button-item.h 
+	- bonobo/bonobo-ui-toolbar-icon.h 
+	- bonobo/bonobo-ui-toolbar-item.h 
+	- bonobo/bonobo-ui-toolbar-toggle-button-item.h 
+	- bonobo/bonobo-view-frame.h 
+	- bonobo/bonobo-wrapper.h 
+	- bonobo/bonobo-zoomable-frame.h 
+	- bonobo/bonobo-zoomable.h 
+
+	* doc/api/bonobo.types: add in new types from new header files.
+
+	* bonobo/bonobo-ui-toolbar-item.h: change enum definition to
+	be stylistically compatible with gtk-doc.
+
 2000-10-27  Michael Meeks  <michael@helixcode.com>
 
 	* gshell/gshell.c: clean USING_OAF crud out, clean stylistic problems.
@@ -46,6 +88,7 @@
 
 2000-10-27  Michael Meeks  <michael@helixcode.com>
 
+>>>>>>> 1.702
 	* api-convert.pl: flesh out.
 
 	* api-convert.diff: Add.
@@ -123,6 +166,7 @@ Thu Oct 26 20:54:27 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* bonobo/bonobo-persist-file.c: Add exceptions where needed.
 
+>>>>>>> 1.698
 2000-10-25  Miguel de Icaza  <miguel@helixcode.com>
 
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_create_poa):
