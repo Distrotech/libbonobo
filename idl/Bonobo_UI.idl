@@ -60,5 +60,8 @@ module Bonobo {
 
 		Bonobo::Unknown object_get   (in string path)
 			raises (InvalidPath);
+
+		oneway void     freeze       ();
+		oneway void     thaw         ();
 	};
 };

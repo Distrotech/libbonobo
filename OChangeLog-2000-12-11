@@ -1,3 +1,18 @@
+2000-09-13  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_build_path_v),
+	(bonobo_ui_handler_build_path): cut and paste for nautilus.
+	(path_escape_forward_slashes): cripple; faults on '/'s in paths.
+
+	* bonobo/bonobo-win.c (bonobo_win_freeze, bonobo_win_thaw): impl.
+	(update_widgets): do nothing if frozen.
+
+	* bonobo/bonobo-ui-container.c (bonobo_ui_container_get_epv): upd.
+	(impl_freeze, impl_thaw): impl.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_container_freeze),
+	(bonobo_ui_container_thaw): implement.
+
 2000-09-12  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-component.c (impl_exec_verb): lookup verbs in the
