@@ -18,20 +18,25 @@
 #include <gnome-factory.idl>
 #include <gnome-unknown.idl>
 
+/* Storage stuff. */
 #include <gnome-storage.idl>
 #include <gnome-persist.idl>
+#include <gnome-progressive.idl>
 
 #include <gnome-advise.idl>
 
+/* Control stuff. */
+#include <gnome-property.idl>
+#include <gnome-control.idl>
+
+/* Subdocument stuff. */
+#include <gnome-ui-handler.idl>
 #include <gnome-container.idl>
 #include <gnome-client-site.idl>
-#include <gnome-ui-handler.idl>
 #include <gnome-canvas.idl>
-#include <gnome-control.idl>
 #include <gnome-embeddable.idl>
 
-#include <gnome-progressive.idl>
-
+/* Misc. Stuff. */
 #include <gnome-desktop.idl>
 
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)

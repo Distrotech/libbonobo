@@ -10,12 +10,13 @@
 module GNOME {
 
 interface View : Control {
+
 	/**
 	 * activate:
 	 *
-	 * Activates or deactivates this in-place View.
+	 * Activates or deactivates this View.
 	 */
-	void activate (in boolean activated);
+	void view_activate (in boolean activate);
 
 	/**
 	 * reactivate_and_undo:
@@ -25,6 +26,14 @@ interface View : Control {
 	void reactivate_and_undo ();
 
 	/**
+	 * set_zoom_factor:
+	 * @zoom: zoom factor
+	 *
+	 * Requests that the view be running at zoom factor
+	 */
+	void set_zoom_factor (in double zoom);
+
+	/**
 	 * do_verb:
 	 * @verb_name: string that identifies the verb.
 	 *
@@ -32,17 +41,16 @@ interface View : Control {
 	 * Performs the @verb.
 	 */
 	void do_verb (in string verb_name);
-
-	/**
-	 * set_zoom_factor:
-	 * @zoom: zoom factor
-	 *
-	 * Requests that the view be running at zoom factor
-	 */
-	void set_zoom_factor (in double zoom);
 };
 
 interface ViewFrame : ControlFrame {
+	/**
+	 * view_activated:
+	 * @state: TRUE if the associated view has been activated,
+	 * FALSE if it just became inactive.
+	 */
+	void view_activated (in boolean state);
+
 	/**
 	 * get_client_site:
 	 *
@@ -60,13 +68,6 @@ interface ViewFrame : ControlFrame {
 	UIHandler get_ui_handler ();
 
 	/**
-	 * view_activated:
-	 * @state: TRUE if the view has been activated, FALSE if
-	 * it just became inactive.
-	 */
-	void view_activated (in boolean state);
-
-	/**
 	 * deactivate_and_undo:
 	 *
 	 * This is called by the active object if it has just been activated
@@ -76,7 +77,7 @@ interface ViewFrame : ControlFrame {
 
 };
 
-/* Equivalent to IOleObject */
+/* Similar to IOleObject */
 interface Embeddable : GNOME::Unknown {
 
 	/**
@@ -181,8 +182,7 @@ interface Embeddable : GNOME::Unknown {
 	 * new_view:
 	 * @frame: the View frame containing this view.
 	 *
-	 * This returns a new window-id to provide a view of the
-	 * object.
+	 * This returns a new View object.
 	 * 
 	 * BonoboObjects should be able to produce as many views
 	 * of the same data as requested.
