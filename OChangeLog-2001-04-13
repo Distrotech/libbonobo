@@ -1,3 +1,10 @@
+2001-01-25  Federico Mena Quintero  <federico@ximian.com>
+
+	* bonobo/bonobo-ui-sync-toolbar.c (create_dockitem): Follow the
+	gnome_preferences for the shadow style of the toolbar.  This is
+	also known as:  if I don't want it to look like my butt, let me
+	configure it that way.
+
 2001-01-25  Ettore Perazzoli  <ettore@ximian.com>
 
 	* bonobo/bonobo-ui-toolbar.c (item_set_want_label_cb): Call
