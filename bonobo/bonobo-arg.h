@@ -62,7 +62,7 @@ typedef CORBA_TypeCode BonoboArgType;
 #else
 #define BONOBO_ARG_GET_STRING(a)    (*((CORBA_char **)(a->_value)))
 #define BONOBO_ARG_SET_STRING(a,v)  (CORBA_free (*(char **)a->_value),\
-*((CORBA_char **)(a->_value)) = CORBA_string_dup ((v)?(v):""))
+				     *((CORBA_char **)(a->_value)) = CORBA_string_dup ((v)?(v):""))
 #endif
 
 BonoboArg    *bonobo_arg_new           (BonoboArgType  t);
