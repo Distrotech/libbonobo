@@ -94,7 +94,14 @@ bonobo_item_handler_finalize (GObject *object)
 {
 	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
 
-	g_free (handler->priv);
+	if (handler->priv)
+	{
+		g_closure_unref (handler->priv->enum_objects);
+		g_closure_unref (handler->priv->get_object);
+
+		g_free (handler->priv);
+		handler->priv = 0;
+	}
 
 	bonobo_item_handler_parent_class->finalize (object);
 
