@@ -34,46 +34,51 @@ my_sgml_files = 			\
 	configuring.sgml		\
 	query-langage.sgml		\
 	architecture.sgml		\
+	liboaf.sgml			\
 	fdl.sgml			\
 	$(NULL)
 
 EXTRA_DIST = 			\
 	$(my_sgml_files)	\
+	oaf.png			\
 	liboaf-decl.txt		\
 	liboaf-sections.txt	\
 	$(NULL)
 
 if ENABLE_GTK_DOC
-liboaf.html: html/book1.html
-else
 liboaf.html:
+	if test ! -d $(top_builddir)/api-docs/tmpl; then			\
+		mkdir $(top_builddir)/api-docs/tmpl; 				\
+		cp $(srcdir)/tmpl/*.sgml $(top_builddir)/api-docs/tmpl/; 	\
+		cp $(srcdir)/*.sgml $(srcdir)/*.txt  $(top_builddir)/api-docs/; \
+	fi
+	cd $(top_builddir)/api-docs/ \
+	&& gtkdoc-mkdb --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR)
+	if test ! -d $(top_builddir)/api-docs/html; then	\
+		mkdir $(top_builddir)/api-docs/html;		\
+	fi
+	-cd $(top_builddir)/api-docs/html && \
+	gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MAIN_SGML_FILE)
+	-cd $(top_builddir)/api-docs/ && \
+	cp $(srcdir)/oaf.png $(top_builddir)/api-docs/html
+
+else
+
+liboaf.html:
+
 endif
 
-html/book1.html: sgml/liboaf-doc.bottom $(content_files) $(my_sgml_files)
-	$(MAKE) html
 
-sgml/liboaf-doc.bottom: $(tmpl_sources)
-	$(MAKE) sgml
-
-tmpl: templates
 
 templates:
 	cd $(srcdir) && gtkdoc-mktmpl --module=$(DOC_MODULE)
 
-sgml:
-	cd $(srcdir) \
-	&& gtkdoc-mkdb --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR)
-
-html:
-	test -d $(srcdir)/html || mkdir $(srcdir)/html
-	-cd $(srcdir)/html && gtkdoc-mkhtml $(DOC_MODULE) ../$(DOC_MAIN_SGML_FILE)
-	cp oaf.png $(top_builddir)/api-docs/html
 
 clean-local:
 	rm -f *~ *.bak *.signals *-unused.txt
 
 maintainer-clean-local: clean
-	cd $(srcdir) && rm -rf sgml html $(DOC_MODULE)-decl-list.txt $(DOC_MODULE)-decl.txt
+	cd $(top_builddir)/api-docs/ && rm -rf sgml html $(DOC_MODULE)-decl-list.txt $(DOC_MODULE)-decl.txt
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(TARGET_DIR)
@@ -93,12 +98,9 @@ install-data-local:
 
 dist-hook: sgml html
 	mkdir $(distdir)/html
-	mkdir $(distdir)/sgml
 	mkdir $(distdir)/tmpl
 	-cp $(srcdir)/html/* $(distdir)/html
 	-cp $(srcdir)/tmpl/*.sgml $(distdir)/tmpl
-	-cp $(srcdir)/sgml/* $(distdir)/sgml
-	-cp $(srcdir)/sgml/*.bottom $(srcdir)/sgml/*.top $(distdir)/sgml
 
 .PHONY : html sgml templates scan
 
