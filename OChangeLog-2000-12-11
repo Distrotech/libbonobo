@@ -1,3 +1,30 @@
+1999-12-20  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-ui-handler.c (toolbar_orientation_to_corba): implement.
+	(toolbar_corba_to_orientation): implement.
+	(toolbar_style_to_corba, toolbar_corba_to_style): implement.
+	(relief_style_to_corba, relief_corba_to_style): implement.
+	(toolbar_remote_attribute_data_get, toolbar_remote_attribute_data_set):
+	add sensitive. (toolbar_toplevel_create_item): rename stuff to _item_
+
+	* samples/compound-doc/sample-container.c (component_view_frame_system_exception_cb): 
+	kill warning.
+
+1999-12-19  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-ui-handler.c (toolbar_remote_attribute_data_get),
+	(toolbar_remote_attribute_data_free, toolbar_remote_attribute_data_set): 
+	implement. Further massive cleans.
+	(impl_toolbar_item_set_attributes),
+	(impl_toolbar_item_get_attributes): implement. 
+	(impl_toolbar_set_sensitivity): kill.
+	(impl_toolbar_get_sensitivity): kill.
+
+	* bonobo/gnome-ui-handler.h: itemize the API.
+
+	* idl/gnome-ui-handler.idl: kill old toolbar_item_ bits.
+	kill group_ stuff.
+
 1999-12-20  Martijn van Beers  <martijn@earthling.net>
 	* samples/controls/sample-control-container.c: Changed
 	to work with the new gnome_property_bag_client_(get|set)_value_*

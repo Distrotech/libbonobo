@@ -6,8 +6,9 @@
  * level container and embedded BonoboObjects to
  * manipulate the application's menu and toolbar items.
  *
- * Author:
- *    Nat Friedman (nat@nat.org)
+ * Authors:
+ *    Nat Friedman  (nat@nat.org)
+ *    Michael Meeks (mmeeks@gnu.org)
  */
 
 
@@ -37,16 +38,6 @@ module GNOME {
 			MenuTypeRadioGroup,
 			MenuTypeToggleItem,
 			MenuTypeSeparator
-       		};
-       
-       		enum ToolbarType {
-			ToolbarTypeEnd,
-			ToolbarTypeItem,
-			ToolbarTypeRadioItem,
-			ToolbarTypeRadioGroup,
-			ToolbarTypeToggleItem,
-			ToolbarTypeSeparator,
-			ToolbarTypeControl
        		};
        
        		/*
@@ -169,41 +160,66 @@ module GNOME {
 		boolean toolbar_get_children (in string path, out StringSeq children);
 
 		enum ToolbarOrientation {
-			TOOLBAR_ORIENTATION_HORIZONTAL,
-			TOOLBAR_ORIENTATION_VERTICAL
+			ToolbarOrientationHorizontal,
+			ToolbarOrientationVertical
+		};
+
+       		enum ToolbarType {
+			ToolbarTypeEnd,
+			ToolbarTypeItem,
+			ToolbarTypeRadioItem,
+			ToolbarTypeRadioGroup,
+			ToolbarTypeToggleItem,
+			ToolbarTypeSeparator,
+			ToolbarTypeControl
+       		};
+
+		enum ToolbarStyle {
+			ToolbarStyleIcons,
+			ToolbarStyleText,
+			ToolbarStyleBoth
+		};
+
+		enum ToolbarSpaceStyle {
+			ToolbarSpaceEmpty,
+			ToolbarSpageLine
+		};
+
+		enum ReliefStyle {
+			ReliefNormal,
+			ReliefHalf,
+			ReliefNone
 		};
 
 		/**
-		 * menu_set_attributes: small data entries.
+		 * toolbar_set_attributes: toolbar attribute passing.
 		 */
 		void toolbar_set_attributes (in  UIHandler containee, in string path,
-					     in  ToolbarOrientation orientation,
-					     in  boolean sensitivity,
-					     in  long pos,
-					     in  long style,
-					     in  string label,
-					     in  string hint,
-					     in  long accelerator_key, in  long ac_mods,
-					     in  boolean toggle_state);
+					     in  ToolbarOrientation  orientation,
+					     in  ToolbarStyle        style,
+					     in  ToolbarSpaceStyle   space_style,
+					     in  ReliefStyle         relief_style,
+					     in  long                space_size,
+					     in  boolean             sensitive);
 
 		/**
-		 * menu_get_attributes: small data entries.
+		 * toolbar_get_attributes: toolbar attribute passing.
 		 */
 		void toolbar_get_attributes (in  UIHandler containee, in string path,
-					     out ToolbarOrientation orientation,
-					     out boolean sensitivity,
-					     out long pos,
-					     out long style,
-					     out string label,
-					     out string hint,
-					     out long accelerator_key, out long ac_mods,
-					     out boolean toggle_state);
+					     out ToolbarOrientation  orientation,
+					     out ToolbarStyle        style,
+					     out ToolbarSpaceStyle   space_style,
+					     out ReliefStyle         relief_style,
+					     out long                space_size,
+					     out boolean             sensitive);
 
-		void toolbar_set_orientation (in UIHandler containee, in string name, in ToolbarOrientation orientation);
-		ToolbarOrientation toolbar_get_orientation (in string name);
-
-		void toolbar_set_style (in UIHandler containee, in string name, in long style);
-		long toolbar_get_style (in string name);
+		/*
+		 * TODO: what needs doing;
+		 * 
+		 * stuff needs renaming: toolbar_ to toolbar_item,
+		 * a few bits need setting for toolbar's that don't apply to toolbar_items,,
+		 * the toolbar_item stuff needs cleaning.
+		 */
 
 		/*
 		 * Toolbar items.
@@ -222,70 +238,32 @@ module GNOME {
 					    out iobuf pixmap_data, out unsigned long accelerator_key,
 					    out long modifier);
 
-		void toolbar_set_sensitivity (in UIHandler containee, in string path, in boolean sensitivity);
+		/**
+		 * toolbar_item_set_attributes: small data entries.
+		 */
+		void toolbar_item_set_attributes (in  UIHandler containee, in string path,
+						  in  boolean sensitive,
+						  in  boolean active,
+						  in  long    pos,
+						  in  string  label,
+						  in  string  hint,
+						  in  long    accelerator_key,
+						  in  long    ac_mods,
+						  in  boolean toggle_state);
 
-		boolean toolbar_get_sensitivity (in string path);
+		/**
+		 * toolbar_item_get_attributes: small data entries.
+		 */
+		void toolbar_item_get_attributes (in  UIHandler containee, in string path,
+						  out boolean sensitive,
+						  out boolean active,
+						  out long    pos,
+						  out string  label,
+						  out string  hint,
+						  out long    accelerator_key,
+						  out long    ac_mods,
+						  out boolean toggle_state);
 
-		void toolbar_set_label (in UIHandler containee, in string path, in string label);
-		string toolbar_get_label (in string path);
-
-		void toolbar_set_pixmap (in UIHandler containee, in string path,
-					 in PixmapType pixmap_type, in iobuf pixmap_data);
-		void toolbar_get_pixmap (in string path, out PixmapType pixmap_type, out iobuf pixmap_data);
-
-		void toolbar_set_accel (in UIHandler containee, in string path,
-					in long accelerator_key, in long ac_mods);
-		void toolbar_get_accel (in string path, out long accelerator_key, out long ac_mods);
-
-		void toolbar_set_toggle_state (in UIHandler containee, in string path, in boolean state);
-		boolean toolbar_get_toggle_state (in UIHandler containee, in string path);
-
-		long toolbar_get_pos (in string path);
-		void toolbar_set_pos (in UIHandler containee, in long pos);
-		
-       
-/*
- * These are unimplemented & probably redundant.
- *
-       		long toolbar_item_get_pos (in string path);
-       
-       		void toolbar_item_set_sensitivity (in string path, in boolean sensitivity);
-       		boolean toolbar_item_get_sensitivity ();
-       
-       		void toolbar_item_set_hidden (in string path, in boolean hidden);
-       		boolean toolbar_item_get_hidden (in string path);
-       
-       		void toolbar_item_set_label (in string path, in string label);
-       		string toolbar_item_get_label (in string path);
-       
-       		void toolbar_item_set_pixmap (in string path, in iobuf data);
-       		void toolbar_item_get_pixmap (in string path, out iobuf data);
-       
-       		void toolbar_item_set_accel (in string path, in unsigned long accelerator_key, in long ac_mods);
-       		void toolbar_item_get_accel (in string path, out unsigned long accelerator_key, out long ac_mods);
-       
-       		void toolbar_item_toggle_set_state (in string path, in boolean state);
-       		boolean toolbar_item_toggle_get_state (in string path);
-       
-       		void toolbar_item_radio_set_state (in string path, in boolean state);
-       		boolean toolbar_item_radio_get_state (in string path);*/
-       
-       		/*
-       		 * These methods allow embedded components to create UI groups
-       		 * and manipulate them.
-       		 */
-       		long group_create ();
-       		void group_destroy (in long gid);
-
-
-       		void group_add_menu_items (in long gid, in StringSeq paths);
-       		void group_add_toolbar_items (in long gid, in StringSeq paths);
-       
-       		void group_get_members (in long gid, out StringSeq paths);
-       
-       		void group_set_sensitivity (in long gid, in boolean sensitivity);
-       		void group_set_hidden (in long gid, in boolean sensitivity);
-       
        		/*
        		 * Container ==> Containee
        		 */

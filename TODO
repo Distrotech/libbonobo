@@ -31,7 +31,6 @@ Controls etc
 * free values when pb is destroyed.  ReleaserFn
 * Fix g_slist_frees in gnome-ui-handler.c -- added FIXMEs.  Don't
   understand the problem currently.
-* Fix gpdf
 * doc new control/control frame functions
 * From gnome-client-site.c: 	CORBA_free (list);	/* FIXME: This does not make any sense at all to me */
 * system exception should be on gnome object client. sigh.
