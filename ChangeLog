@@ -1,3 +1,9 @@
+2003-06-10  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_destroy): Cancel any pending timeouts,
+	just in case.
+
 2003-06-10  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-property-bag-client.c

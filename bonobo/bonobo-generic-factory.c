@@ -215,6 +215,15 @@ bonobo_generic_factory_destroy (BonoboObject *object)
 
 		if (factory->priv->factory_closure)
 			g_closure_unref (factory->priv->factory_closure);
+
+		  /* Cancel the startup timeout, if active. */
+		if (factory->priv->startup_timeout_id)
+			g_source_destroy (g_main_context_find_source_by_id
+					  (NULL, factory->priv->startup_timeout_id));
+		  /* Cancel the last unref timeout, if active. */
+		if (factory->priv->last_unref_timeout_id)
+			g_source_destroy (g_main_context_find_source_by_id
+					  (NULL, factory->priv->last_unref_timeout_id));
 		
 		g_free (factory->priv);
 		factory->priv = 0;
