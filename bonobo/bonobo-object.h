@@ -97,15 +97,15 @@ Bonobo_Unknown           bonobo_object_dup_ref                (Bonobo_Unknown   
 							       CORBA_Environment      *opt_ev);
 Bonobo_Unknown           bonobo_object_release_unref          (Bonobo_Unknown          object,
 							       CORBA_Environment      *opt_ev);
-gpointer                 bonobo_object_ref                    (BonoboObject           *object);
-void                     bonobo_object_idle_unref             (BonoboObject           *object);
-gpointer                 bonobo_object_unref                  (BonoboObject           *object);
+gpointer                 bonobo_object_ref                    (gpointer                obj);
+void                     bonobo_object_idle_unref             (gpointer                obj);
+gpointer                 bonobo_object_unref                  (gpointer                obj);
 void                     bonobo_object_set_immortal           (BonoboObject           *object,
 							       gboolean                immortal);
-gpointer                 bonobo_object_trace_refs             (BonoboObject *object,
-							       const char   *fn,
-							       int           line,
-							       gboolean      ref);
+gpointer                 bonobo_object_trace_refs             (gpointer                obj,
+							       const char             *fn,
+							       int                     line,
+							       gboolean                ref);
 
 #ifdef BONOBO_OBJECT_DEBUG
 #	define           bonobo_object_ref(o)   G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);}G_STMT_END

@@ -1,3 +1,12 @@
+2002-02-14  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c
+	(bonobo_object_unref, bonobo_object_idle_unref),
+	(bonobo_object_trace_refs, bonobo_object_ref):
+	take a gpointer instead of a BonoboObject, to
+	follow glib - reduces type casting without any
+	checking relaxation.
+
 2002-02-11  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-stream-memory.c

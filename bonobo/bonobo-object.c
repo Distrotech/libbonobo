@@ -246,8 +246,10 @@ bonobo_object_finalize_servant (PortableServer_Servant servant,
  * Increments the reference count for the aggregate BonoboObject.
  */
 gpointer
-bonobo_object_ref (BonoboObject *object)
+bonobo_object_ref (gpointer obj)
 {
+	BonoboObject *object = obj;
+
 	if (!object)
 		return object;
 
@@ -276,10 +278,11 @@ bonobo_object_ref (BonoboObject *object)
  * Decrements the reference count for the aggregate BonoboObject.
  */
 gpointer
-bonobo_object_unref (BonoboObject *object)
+bonobo_object_unref (gpointer obj)
 {
 #ifndef BONOBO_REF_HOOKS
 	BonoboAggregateObject *ao;
+	BonoboObject *object = obj;
 
 	if (!object)
 		return NULL;
@@ -302,18 +305,19 @@ bonobo_object_unref (BonoboObject *object)
 	}
 	return NULL;
 #else
-	return bonobo_object_trace_refs (object, "local", 0, FALSE);
+	return bonobo_object_trace_refs (obj, "local", 0, FALSE);
 #endif /* BONOBO_REF_HOOKS */
 }
 #endif /* bonobo_object_unref */
 
 gpointer
-bonobo_object_trace_refs (BonoboObject *object,
-			  const char   *fn,
-			  int           line,
-			  gboolean      ref)
+bonobo_object_trace_refs (gpointer    obj,
+			  const char *fn,
+			  int         line,
+			  gboolean    ref)
 {
 #ifdef BONOBO_REF_HOOKS
+	BonoboObject *object = obj;
 	BonoboAggregateObject *ao;
 	BonoboDebugRefData *descr;
 
@@ -389,9 +393,9 @@ bonobo_object_trace_refs (BonoboObject *object,
 	}
 #else
 	if (ref)
-		return bonobo_object_ref (object);
+		return bonobo_object_ref (obj);
 	else {
-		bonobo_object_unref (object);
+		bonobo_object_unref (obj);
 		return NULL;
 	}
 #endif
@@ -1162,8 +1166,10 @@ idle_unref_fn (BonoboObject *object)
 }
 
 void
-bonobo_object_idle_unref (BonoboObject *object)
+bonobo_object_idle_unref (gpointer object)
 {
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
+
 	g_idle_add ((GSourceFunc) idle_unref_fn, object);
 }
 
