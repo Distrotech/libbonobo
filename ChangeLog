@@ -1,3 +1,10 @@
+2004-07-21  Antonio Xu  <antonio.xu@sun.com>
+
+	* activation-server/object-directory-corba.c
+	(remove_active_server): add judgement to make sure the count
+	of active server is right.
+	Fix for bug #148071, Reviewed by Michael Meeks.
+
 2004-05-26  Arvind Samptur  <arvind.samptur@wipro.com>
 
 	* activation-server/object-directroy.h : Add

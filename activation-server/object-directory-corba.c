@@ -763,7 +763,8 @@ remove_active_server (ObjectDirectory *od,
 			break;
 		}
 
-	od->n_active_servers--;
+	if (removed)
+		od->n_active_servers--;
 
 	if (servers->n_servers == 0)
 		g_hash_table_remove (od->active_server_lists, iid);
