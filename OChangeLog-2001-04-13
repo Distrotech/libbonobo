@@ -1,3 +1,6 @@
+2000-06-27 J SHane Culpepper <pepper@eazel.com>
+	*Makefile.am: addiing missing \ to subdirs.
+
 2000-06-27  Miguel de Icaza  <miguel@helixcode.com>
 
 	* idl/bonobo-factory.idl: rename goad_id to goadid to avoid the
