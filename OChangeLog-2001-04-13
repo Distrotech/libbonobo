@@ -1,3 +1,6 @@
+2000-02-10  Elliot Lee <sopwith@redhat.com>
+	* bonobo/bonobo-ui-handler.c: Handle a NULL 'hint' and 'label' for menu items.
+
 2000-02-09  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-main.h (bonobo_poa_manager): ansi clean.
