@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "POT-Creation-Date: 2003-05-19 13:01+0200\n"
-"PO-Revision-Date: 2003-05-19 18:05+0100\n"
+"PO-Revision-Date: 2003-05-31 16:24+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
@@ -372,7 +372,7 @@ msgstr "moniker trin IOR ORB"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "ffatri Moniker Safonnol"
+msgstr "Ffatri Moniker safonol"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 # EFALLAI (generig?)
