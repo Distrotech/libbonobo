@@ -4,8 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 1.101.1\n"
-"POT-Creation-Date: 2001-09-10 03:24+0200\n"
+"Project-Id-Version: libbonobo 1.102.0\n"
+"POT-Creation-Date: 2001-09-23 01:16+0200\n"
 "PO-Revision-Date: 2001-08-14 14:22+0200\n"
 "Last-Translator: Ömer Fadýl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -91,7 +91,7 @@ msgstr "XML kullanýcý arayüzü öðesi için geçersiz yol tanýmlamasý"
 
 #: bonobo/bonobo-exception.c:215
 msgid "Unknown command or verb"
-msgstr ""
+msgstr "Bilinmeyen komut veya fiil"
 
 #: bonobo/bonobo-exception.c:218
 msgid "Command is insensitive"
@@ -162,14 +162,12 @@ msgid "Standard Moniker factory"
 msgstr "Moniker Fabrika standardý"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
-#, fuzzy
 msgid "generic Oaf activation moniker"
-msgstr "Moniker genel kaba aktifleþtirmesi"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
-#, fuzzy
 msgid "generic Oaf query moniker"
-msgstr "Moniker genel kaba sorgusu"
+msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
