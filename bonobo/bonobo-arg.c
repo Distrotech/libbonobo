@@ -123,7 +123,7 @@ bonobo_arg_copy (const BonoboArg *arg)
  * Return value: the mapped type or NULL on failure.
  **/
 BonoboArgType
-bonobo_arg_type_from_gtk (GType id)
+bonobo_arg_type_from_gtype (GType id)
 {
 	switch (id) {
 	case G_TYPE_CHAR:   return TC_CORBA_char;
@@ -145,7 +145,7 @@ bonobo_arg_type_from_gtk (GType id)
 }
 
 /**
- * bonobo_arg_type_to_gtk:
+ * bonobo_arg_type_to_gtype:
  * @id: the BonoboArgType
  * 
  * This maps a BonoboArgType to a GType
@@ -153,7 +153,7 @@ bonobo_arg_type_from_gtk (GType id)
  * Return value: the mapped type or 0 on failure
  **/
 GType
-bonobo_arg_type_to_gtk (BonoboArgType id)
+bonobo_arg_type_to_gtype (BonoboArgType id)
 {
 	CORBA_Environment ev;
 	GType g_type = G_TYPE_NONE;
@@ -192,7 +192,7 @@ bonobo_arg_type_to_gtk (BonoboArgType id)
 		break;
 
 /**
- * bonobo_arg_from_gtk:
+ * bonobo_arg_from_gvalue:
  * @a: pointer to blank BonoboArg
  * @arg: GValue to copy
  * 
@@ -201,7 +201,7 @@ bonobo_arg_type_to_gtk (BonoboArgType id)
  * eg. such as returned by bonobo_arg_new
  **/
 void
-bonobo_arg_from_gtk (BonoboArg *a, const GValue *value)
+bonobo_arg_from_gvalue (BonoboArg *a, const GValue *value)
 {
 	int        id;
 
@@ -214,7 +214,7 @@ bonobo_arg_from_gtk (BonoboArg *a, const GValue *value)
 
 	case G_TYPE_INVALID:
 	case G_TYPE_NONE:
-		g_warning ("Strange gtk arg type %d", id);
+		g_warning ("Strange GValue type %s", g_type_name (id));
 		break;
 		
 		MAKE_FROM_GVALUE (CHAR,    char,    TC_CORBA_char,     char_data, CORBA_char,           CORBA_tk_char);
@@ -228,7 +228,6 @@ bonobo_arg_from_gtk (BonoboArg *a, const GValue *value)
 		MAKE_FROM_GVALUE (DOUBLE,  double,  TC_CORBA_double, double_data, CORBA_double,         CORBA_tk_double);
 
 	case G_TYPE_STRING:
-		/* Orbit really doesn't like NULL string's in anys: why ? ... */
 		if (G_VALUE_HOLDS_STRING (value))
 			*((CORBA_char **)a->_value) = CORBA_string_dup (g_value_get_string (value));
 		else
@@ -236,7 +235,7 @@ bonobo_arg_from_gtk (BonoboArg *a, const GValue *value)
 		break;
 
 	case G_TYPE_POINTER:
-		g_warning ("FIXME: we can map user data callbacks locally");
+		g_warning ("We can map user data callbacks locally");
 		break;
 
 	case G_TYPE_OBJECT:
@@ -259,7 +258,7 @@ bonobo_arg_from_gtk (BonoboArg *a, const GValue *value)
 		break;
 
 /**
- * bonobo_arg_to_gtk:
+ * bonobo_arg_to_gvalue:
  * @a: pointer to a blank GtkArk
  * @arg: the BonoboArg to copy
  * 
@@ -267,7 +266,7 @@ bonobo_arg_from_gtk (BonoboArg *a, const GValue *value)
  * to a blank GtkArg.
  **/
 void
-bonobo_arg_to_gtk (GValue *value, const BonoboArg *arg)
+bonobo_arg_to_gvalue (GValue *value, const BonoboArg *arg)
 {
 	int     id;
 

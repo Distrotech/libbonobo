@@ -121,8 +121,10 @@ bonobo_property_bag_remove        (BonoboPropertyBag    *pb,
 				   const char           *name);
 
 void
-bonobo_property_bag_add_gtk_args  (BonoboPropertyBag   *pb,
-				   GObject             *object);
+bonobo_property_bag_map_params    (BonoboPropertyBag   *pb,
+				   GObject             *on_instance,
+				   GParamSpec         **pspecs,
+				   guint                n_params);
 
 GList *
 bonobo_property_bag_get_prop_list (BonoboPropertyBag *pb);

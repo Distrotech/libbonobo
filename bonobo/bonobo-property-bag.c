@@ -667,7 +667,7 @@ bonobo_property_bag_remove (BonoboPropertyBag *pb,
 }
 
 static Bonobo_PropertyFlags
-flags_gtk_to_bonobo (guint flags)
+flags_gparam_to_bonobo (guint flags)
 {
 	Bonobo_PropertyFlags f = 0;
 
@@ -705,7 +705,7 @@ get_prop (BonoboPropertyBag *bag,
 	g_value_init (&new, G_PARAM_SPEC_VALUE_TYPE (pspec));
 	g_object_get_property (obj, pspec->name, &new);
 
-	bonobo_arg_from_gtk (arg, &new);
+	bonobo_arg_from_gvalue (arg, &new);
 
 	g_value_unset (&new);
 }
@@ -730,7 +730,7 @@ set_prop (BonoboPropertyBag *bag,
 
 	g_value_init (&new, G_PARAM_SPEC_VALUE_TYPE (pspec));
 
-	bonobo_arg_to_gtk (&new, arg);
+	bonobo_arg_to_gvalue (&new, arg);
 	g_object_set_property (obj, pspec->name, &new);
 
 	g_value_unset (&new);
@@ -739,43 +739,36 @@ set_prop (BonoboPropertyBag *bag,
 /**
  * bonobo_property_bag_add_gtk_args:
  * @pb: destination property bag
- * @object: a generic GObject
+ * @on_instance: the instance to associate the properties with
+ * @pspecs: a list of the parameters to map
+ * @n_params: the size of the list.
  * 
- * Transfers GtkArgs from the object to the property bag,
- * and maps between the two objects property systems.
+ * Transfers @params from the @on_instance to the property bag,
+ * setting up a mapping between the two objects property systems.
  **/
 void
-bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
-				  GObject            *object)
+bonobo_property_bag_map_params    (BonoboPropertyBag   *pb,
+				   GObject             *on_instance,
+				   GParamSpec         **pspecs,
+				   guint                n_params)
 {
-	GParamSpec **pspecs;
 	int          i;
-	guint	     nargs = 0;
 
-	g_return_if_fail (pb != NULL);
+	g_return_if_fail (G_IS_OBJECT (on_instance));
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (G_IS_OBJECT (object));
+
+	if (!n_params)
+		return;
+	g_return_if_fail (pspecs != NULL);
 
 	if (g_object_get_qdata (G_OBJECT (pb), quark_gobject_map)) {
-		g_warning ("Cannot proxy two gtk objects in the same bag yet");
+		g_warning ("Cannot proxy two GObjects in the same bag yet");
 		return;
 	}
-
-	g_object_set_qdata (G_OBJECT (pb), quark_gobject_map, object);
-
-	/*
-	 * FIXME: we should do this on a per class basis perhaps.
-	 */
-	pspecs = g_object_class_list_properties (G_OBJECT_GET_CLASS (object), &nargs);
-
-	if (!nargs) {
-		g_warning ("Strange, no GRuntime arguments to map to Bonobo");
-		return;
-	}
+	g_object_set_qdata (G_OBJECT (pb), quark_gobject_map, on_instance);
 
 	/* Setup types, and names */
-	for (i = 0; i < nargs; i++) {
+	for (i = 0; i < n_params; i++) {
 		GParamSpec          *pspec;
 		GType                value_type;
 		Bonobo_PropertyFlags flags;
@@ -785,14 +778,14 @@ bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 		pspec = pspecs [i];
 		value_type = G_PARAM_SPEC_VALUE_TYPE (pspec);
 
-		type = bonobo_arg_type_from_gtk (value_type);
+		type = bonobo_arg_type_from_gtype (value_type);
 		if (!type) {
 			g_warning ("Can't handle type '%s' on arg '%s'",
 				   g_type_name (value_type), pspec->name);
 			continue;
 		}
 
-		flags = flags_gtk_to_bonobo (pspec->flags);
+		flags = flags_gparam_to_bonobo (pspec->flags);
 
 		desc = g_strconcat (pspec->name, " is a ",
 				    g_type_name (value_type), NULL);
@@ -807,8 +800,6 @@ bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 	}
 
 	g_free (pspecs);
-/* FIXME: leaks like a privatised water company */
-/*	g_free (args);*/
 }
 
 /**

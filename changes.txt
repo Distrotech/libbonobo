@@ -96,6 +96,10 @@ bonobo-property-bag-client.[ch]
 	Change the way varrag wrappers work, to be name / type / value
 	triplets instead of type-unsafe name / value pairs.
 
+bonobo-property-bag.[ch]:
+	bonobo_property_bag_add_gtk_args is now called
+	bonobo_property_bag_map_params and changed sig.
+
 bonobo-object-directory.[ch]:
 	bonobo_directory_*: remove, deprecated by oaf,
 	use the liboaf functions instead.
@@ -104,6 +108,11 @@ bonobo-print.[ch],
 bonobo-print-client.[ch]:
 	These now live in libgnomeprint-bonobo.h and have been renamed
 	to the GnomePrintBonobo namespace.
+
+bonobo-arg.[ch]:
+	bonobo_arg_from/to_gtk -> bonobo_arg_from/to_gvalue
+	bonobo_arg_type_to/from_gtk -> bonobo_arg_type_to/from_gtype
+
 
 
 IDL:

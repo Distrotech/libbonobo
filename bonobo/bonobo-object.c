@@ -557,7 +557,6 @@ bonobo_object_query_local_interface (BonoboObject *object,
 		return local_interface;
 	}
 
-	/* Try looking at the gtk types */
 	for (l = object->priv->ao->objs; l; l = l->next){
 		BonoboObject *tryme = l->data;
 

@@ -1,5 +1,18 @@
 2001-10-18  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-property-bag.c
+	(bonobo_property_bag_add_gtk_args): rename to
+	(bonobo_property_bag_map_params): this & re-hash.
+
+	* bonobo/bonobo-arg.c *gtk* rename to *gvalue* & clean.
+
+	* bonobo/bonobo-types.c (corba_object_proxy_value_init): impl.
+
+	* bonobo/bonobo-stream-client.c (bonobo_stream_client_read): 
+	kill FIXME.
+
+2001-10-18  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-object.c (bonobo_object_query_local_interface): 
 	remove GType fiddling, just use CORBA_Object_is_a
 	(bonobo_object_add_interface): Add some more powerful, but

@@ -45,11 +45,7 @@ corba_object_proxy_get (GType type)
 static void
 corba_object_proxy_value_init (GValue *value)
 {
-	CorbaObjectProxy *proxy;
-
-	proxy = corba_object_proxy_get (G_VALUE_TYPE (value));
-
-	/* [FIXME!] value->data[0].v_pointer = proxy->init ? proxy->init () : NULL; */
+	value->data[0].v_pointer = CORBA_OBJECT_NIL;
 }
 
 static void

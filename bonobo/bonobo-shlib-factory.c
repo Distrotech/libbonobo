@@ -144,7 +144,7 @@ bonobo_shlib_factory_finalize (GObject *object)
 	 * This is achieved by an idle unref handler.
 	 */
 
-	/* we dont unload it because of a problem with the gtk type system */
+	/* we dont unload it because of a problem with the GType system */
 	/* oaf_plugin_unuse (c_factory->oaf_impl_ptr); */
 
 	g_free (factory->priv);

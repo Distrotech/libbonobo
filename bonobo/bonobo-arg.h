@@ -74,31 +74,31 @@ typedef CORBA_TypeCode BonoboArgType;
 				     *((CORBA_char **)(a->_value)) = CORBA_string_dup ((v)?(v):""))
 #endif
 
-BonoboArg    *bonobo_arg_new           (BonoboArgType      t);
+BonoboArg    *bonobo_arg_new             (BonoboArgType      t);
 
-BonoboArg    *bonobo_arg_new_from      (BonoboArgType      t,
-					gconstpointer      data);
+BonoboArg    *bonobo_arg_new_from        (BonoboArgType      t,
+					  gconstpointer      data);
 
-void          bonobo_arg_release       (BonoboArg         *arg);
+void          bonobo_arg_release         (BonoboArg         *arg);
 
-BonoboArg    *bonobo_arg_copy          (const BonoboArg   *arg);
+BonoboArg    *bonobo_arg_copy            (const BonoboArg   *arg);
 
-void          bonobo_arg_from_gtk      (BonoboArg         *a, 
-					const GValue      *value);
-BonoboArgType bonobo_arg_type_from_gtk (GType              t);
+void          bonobo_arg_from_gvalue     (BonoboArg         *a, 
+					   const GValue      *value);
+BonoboArgType bonobo_arg_type_from_gtype (GType              t);
 
-void          bonobo_arg_to_gtk        (GValue            *value, 
-					const BonoboArg   *arg);
+void          bonobo_arg_to_gvalue       (GValue            *value, 
+					  const BonoboArg   *arg);
 
-GType         bonobo_arg_type_to_gtk   (BonoboArgType      id);
+GType         bonobo_arg_type_to_gtype   (BonoboArgType      id);
 
-gboolean      bonobo_arg_is_equal      (const BonoboArg   *a, 
-					const BonoboArg   *b, 
-					CORBA_Environment *opt_ev);
+gboolean      bonobo_arg_is_equal        (const BonoboArg   *a, 
+					  const BonoboArg   *b, 
+					  CORBA_Environment *opt_ev);
 
-gboolean      bonobo_arg_type_is_equal (BonoboArgType      a, 
-					BonoboArgType      b,
-					CORBA_Environment *opt_ev);
+gboolean      bonobo_arg_type_is_equal   (BonoboArgType      a, 
+					  BonoboArgType      b,
+					  CORBA_Environment *opt_ev);
 
 G_END_DECLS
 
