@@ -16,7 +16,8 @@
 #include <bonobo/bonobo-persist-stream.h>
 #include <bonobo/bonobo-transient.h>
 
-POA_Bonobo_PropertyBag__vepv bonobo_property_bag_vepv;
+#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+
 static GtkObjectClass *parent_class = NULL;
          
 
@@ -34,10 +35,7 @@ struct _BonoboPropertyBagPrivate {
 };
 
 
-/*
- * BonoboPropertyBag CORBA methods.
- */
-
+/* BonoboPropertyBag CORBA methods.*/
 static void
 bonobo_property_bag_foreach_create_list (gpointer key, 
 					 gpointer value,
@@ -232,8 +230,6 @@ bonobo_property_bag_construct (BonoboPropertyBag   *pb,
 			       BonoboEventSource   *es,
 			       gpointer             user_data)
 {
-	CORBA_Object      corba_pb;
-
 	pb->es              = es;
 	pb->priv->set_prop  = set_prop;
 	pb->priv->get_prop  = get_prop;
@@ -241,43 +237,12 @@ bonobo_property_bag_construct (BonoboPropertyBag   *pb,
 
 	bonobo_object_add_interface (BONOBO_OBJECT (pb), BONOBO_OBJECT (es));
 
-	corba_pb = bonobo_property_bag_create_corba_object (BONOBO_OBJECT (pb));
-	if (corba_pb == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (pb));
-		return NULL;
-	}
-
-	bonobo_object_construct (BONOBO_OBJECT (pb), corba_pb);
-
 	if (!(pb->priv->transient = bonobo_transient_new (NULL, bonobo_property_servant_new, bonobo_property_servant_destroy, pb))) {
 		bonobo_object_unref (BONOBO_OBJECT (pb));
 		return NULL;
 	}
 	
 	return pb;
-}
-
-CORBA_Object
-bonobo_property_bag_create_corba_object (BonoboObject *object)
-{
-	POA_Bonobo_PropertyBag *servant;
-	CORBA_Environment      ev;
-
-	servant = (POA_Bonobo_PropertyBag *)g_new0 (BonoboObjectServant, 1);
-	servant->vepv = &bonobo_property_bag_vepv;
-
-	CORBA_exception_init (&ev);
-
-	POA_Bonobo_PropertyBag__init ( (PortableServer_Servant) servant, &ev);
-	if (BONOBO_EX (&ev)){
-		CORBA_exception_free (&ev);
-		g_free (servant);
-		return CORBA_OBJECT_NIL;
-	}
-
-	CORBA_exception_free (&ev);
-
-	return bonobo_object_activate_servant (object, servant);
 }
 
 /**
@@ -360,28 +325,6 @@ bonobo_property_bag_destroy (GtkObject *object)
 
 	parent_class->destroy (object);
 }
-
-/**
- * bonobo_property_bag_get_epv:
- *
- * Returns: The EPV for the default BonoboPropertyBag implementation.
- * You will most likely want to provide your implementation.
- */
-POA_Bonobo_PropertyBag__epv *
-bonobo_property_bag_get_epv (void)
-{
-	POA_Bonobo_PropertyBag__epv *epv;
-
-	epv = g_new0 (POA_Bonobo_PropertyBag__epv, 1);
-
-	epv->getProperties        = impl_Bonobo_PropertyBag_getProperties;
-	epv->getPropertyByName    = impl_Bonobo_PropertyBag_getPropertyByName;
-	epv->getPropertyNames     = impl_Bonobo_PropertyBag_getPropertyNames;
-	epv->getEventSource       = impl_Bonobo_PropertyBag_getEventSource;
-
-	return epv;
-}
-
 
 
 /*
@@ -833,27 +776,22 @@ bonobo_property_bag_get_flags (BonoboPropertyBag *pb,
 }
 
 
-/*
- * Class/object initialization functions.
- */
+/* Class/object initialization functions. */
 
 static void
-bonobo_property_bag_init_corba_class (void)
+bonobo_property_bag_class_init (BonoboPropertyBagClass *klass)
 {
-	bonobo_property_bag_vepv.Bonobo_Unknown_epv     = bonobo_object_get_epv ();
-	bonobo_property_bag_vepv.Bonobo_PropertyBag_epv = bonobo_property_bag_get_epv ();
-}
+	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	POA_Bonobo_PropertyBag__epv *epv = &klass->epv;
 
-static void
-bonobo_property_bag_class_init (BonoboPropertyBagClass *class)
-{
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
-
-	parent_class = gtk_type_class (BONOBO_OBJECT_TYPE);
+	parent_class = gtk_type_class (PARENT_TYPE);
 
 	object_class->destroy = bonobo_property_bag_destroy;
 
-	bonobo_property_bag_init_corba_class ();
+	epv->getProperties        = impl_Bonobo_PropertyBag_getProperties;
+	epv->getPropertyByName    = impl_Bonobo_PropertyBag_getPropertyByName;
+	epv->getPropertyNames     = impl_Bonobo_PropertyBag_getPropertyNames;
+	epv->getEventSource       = impl_Bonobo_PropertyBag_getEventSource;
 }
 
 static void
@@ -886,7 +824,11 @@ bonobo_property_bag_get_gtk_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = bonobo_x_type_unique (
+			PARENT_TYPE,
+			POA_Bonobo_PropertyBag__init, NULL,
+			GTK_STRUCT_OFFSET (BonoboPropertyBagClass, epv),
+			&info);
 	}
 
 	return type;

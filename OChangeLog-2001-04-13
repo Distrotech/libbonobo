@@ -1,5 +1,22 @@
 2001-02-07  Michael Meeks  <michael@ximian.com>
 
+	* Makefile.am: Fix for recent xml-i18n-tools.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_get_epv): move into
+	(bonobo_property_bag_class_init): here& upd.
+	(bonobo_property_bag_init_corba_class): kill.
+	(bonobo_property_bag_construct): upd.
+	(bonobo_property_bag_get_gtk_type): upd.
+	(bonobo_property_bag_create_corba_object): kill.
+
+	* bonobo/bonobo-storage.c (bonobo_storage_get_epv): move into
+	(bonobo_storage_class_init): here & upd.
+	(init_storage_corba_class): kill.
+	(bonobo_storage_construct): kill.
+	(bonobo_storage_corba_object_create): kill.
+	(bonobo_storage_get_type): upd.
+	(bonobo_storage_init): kill.
+
 	* bonobo/bonobo-property-control.c (corba_class_init): kill.
 	(bonobo_property_control_get_epv): move to
 	(bonobo_property_control_class_init): here & upd.

@@ -10,7 +10,7 @@
 #ifndef __BONOBO_PROPERTY_BAG_H__
 #define __BONOBO_PROPERTY_BAG_H__
 
-#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-xobject.h>
 
 BEGIN_GNOME_DECLS
 
@@ -43,13 +43,15 @@ typedef void (*BonoboPropertySetFn) (BonoboPropertyBag *bag,
 #include <bonobo/bonobo-event-source.h>
 
 struct _BonoboPropertyBag {
-	BonoboObject              parent;
+	BonoboXObject             parent;
 	BonoboPropertyBagPrivate *priv;
 	BonoboEventSource        *es;
 };
 
 typedef struct {
-	BonoboObjectClass   parent;
+	BonoboXObjectClass        parent;
+
+	POA_Bonobo_PropertyBag__epv epv;
 } BonoboPropertyBagClass;
 
 #define BONOBO_PROPERTY_BAG_TYPE                (bonobo_property_bag_get_gtk_type ())
@@ -128,10 +130,6 @@ void                      bonobo_property_bag_notify_listeners (BonoboPropertyBa
 
 /* A private function, only to be used by persistence implementations. */
 GList                    *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);
-
-/* For implementation inheritance. */
-POA_Bonobo_PropertyBag__epv *bonobo_property_bag_get_epv       (void);
-CORBA_Object bonobo_property_bag_create_corba_object           (BonoboObject *object);
 
 END_GNOME_DECLS
 
