@@ -1,2 +1,12 @@
 Makefile
 Makefile.in
+.deps
+.libs
+empty-common.c
+empty-skels.c
+empty-stubs.c
+empty.h
+empty_built
+oaf-empty-server
+oaf-run-query
+oaf-test-client
