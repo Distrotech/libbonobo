@@ -1,3 +1,31 @@
+2000-07-15  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_construct): don't
+	make the gtk_hbox homogeneous; doh, this was making the local case
+	optimization break for toolbar merging etc.
+
+2000-07-14  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_construct),
+	inherit from bonobo-object-client; people expect it.
+	(bonobo_property_bag_client_init): kill.
+	(bonobo_property_bag_client_class_init): kill.
+	(bonobo_property_bag_client_get_type): derive from object_client.
+
+	* idl/bonobo-ui-handler.idl: remove toolbar_fetch_item, no longer neccesary.
+
+	* bonobo/bonobo-uih-toolbar.c (impl_Bonobo_UIHandler_toolbar_remove),
+	(toolbar_toplevel_toolbar_remove): implement.
+	(bonobo_ui_handler_toolbar_item_get_pos): implement.
+	(impl_Bonobo_UIHandler_toolbar_item_get_attributes): obey containee rules
+	implement fully.
+
+	* bonobo/bonobo-print.c (bonobo_print_class_init): init class render fn.
+	(impl_render): fall back to the class method to allow derivation.
+	(bonobo_print_construct): split construction here.
+	(bonobo_print_corba_object_create): publicise.
+	(bonobo_print_construct): publicize.
+
 2000-07-14  Mathieu Lacage <mathieu@eazel.com>
 
 	* bonobo/Makefile.am, 

@@ -80,7 +80,7 @@ bonobo_persist_init (BonoboPersist *persist)
 
 BonoboPersist *
 bonobo_persist_construct (BonoboPersist *persist,
-			 Bonobo_Persist corba_persist)
+			  Bonobo_Persist corba_persist)
 {
 	g_return_val_if_fail (persist != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_PERSIST (persist), NULL);

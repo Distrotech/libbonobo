@@ -250,12 +250,6 @@ module Bonobo {
 		void toolbar_remove_item (in UIHandler containee, in string path)
 			raises (NotToplevelHandler, PathNotFound);
 
-		void toolbar_fetch_item (in string path, out ToolbarType type, out string label,
-					 out string hint, out long pos, out PixmapType pixmap_type,
-					 out iobuf pixmap_data, out unsigned long accelerator_key,
-					 out long modifier)
-			raises (NotToplevelHandler, PathNotFound);
-
 		/**
 		 * toolbar_item_set_attributes: small data entries.
 		 */

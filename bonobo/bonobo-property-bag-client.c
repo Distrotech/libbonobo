@@ -11,11 +11,13 @@
 
 static BonoboPropertyBagClient *
 bonobo_property_bag_client_construct (BonoboPropertyBagClient *pbc,
-				     Bonobo_PropertyBag corba_pb)
+				      Bonobo_PropertyBag corba_pb)
 {
 	pbc->corba_pb = corba_pb;
 
-	return pbc;
+	return BONOBO_PROPERTY_BAG_CLIENT (
+		bonobo_object_client_construct (
+			BONOBO_OBJECT_CLIENT (pbc), corba_pb));
 }
 
 /**
@@ -674,21 +676,6 @@ bonobo_property_bag_client_get_flags (BonoboPropertyBagClient *pbc,
 	return 0;
 }
 
-/*
- * GtkObject crap.
- */
-
-static void
-bonobo_property_bag_client_class_init (BonoboPropertyBagClientClass *class)
-{
-/*	GtkObjectClass *object_class = (GtkObjectClass *) class; */
-}
-
-static void
-bonobo_property_bag_client_init (BonoboPropertyBagClient *pbc)
-{
-}
-
 /**
  * bonobo_property_bag_client_get_type:
  *
@@ -705,14 +692,14 @@ bonobo_property_bag_client_get_type (void)
 			"BonoboPropertyBagClient",
 			sizeof (BonoboPropertyBagClient),
 			sizeof (BonoboPropertyBagClientClass),
-			(GtkClassInitFunc) bonobo_property_bag_client_class_init,
-			(GtkObjectInitFunc) bonobo_property_bag_client_init,
+			(GtkClassInitFunc) NULL,
+			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gtk_object_get_type (), &info);
+		type = gtk_type_unique (bonobo_object_client_get_type (), &info);
 	}
 
 	return type;

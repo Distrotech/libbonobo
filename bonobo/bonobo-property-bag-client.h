@@ -6,16 +6,17 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-stream.h>
 #include <bonobo/bonobo-property-bag.h>
+#include <bonobo/bonobo-object-client.h>
 
 BEGIN_GNOME_DECLS
 
 typedef struct {
-	GtkObject		        parent;
-	Bonobo_PropertyBag		corba_pb;
+	BonoboObjectClient      parent;
+	Bonobo_PropertyBag      corba_pb;
 } BonoboPropertyBagClient;
 
 typedef struct {
-	GtkObjectClass			parent;
+	BonoboObjectClientClass parent;
 } BonoboPropertyBagClientClass;
 
 /* Property bag proxy routines */
