@@ -15,8 +15,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
 
-/* fixme: use something more useful like "gconf:" */
-#define BONOBO_PBCLIENT_DEFAULT_BAG "xmldb:/tmp/test.xmldb"
+#define BONOBO_PBCLIENT_DEFAULT_BAG "config:"
 
 G_LOCK_DEFINE_STATIC (default_bag_lock);
 
