@@ -24,11 +24,9 @@
 #include <config.h>
 #include <stdlib.h>
 #include <string.h>
-#include "qsort_ex.h"
+#include <glib/galloca.h>
 
-#if HAVE_ALLOCA
-#include <alloca.h>
-#endif
+#include "qsort_ex.h"
 
 /* Byte-wise swap two items of size SIZE. */
 #define SWAP(a, b, size)						      \
@@ -95,7 +93,7 @@ qsort_ex (void *const pbase,
 
 	/* Allocating SIZE bytes for a pivot buffer facilitates a better
 	 * algorithm below since we can do comparisons directly on the pivot. */
-	char *pivot_buffer = (char *) alloca (size);
+	char *pivot_buffer = (char *) g_alloca (size);
 	const size_t max_thresh = MAX_THRESH * size;
 
 	if (total_elems == 0)
