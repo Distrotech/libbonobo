@@ -1,3 +1,8 @@
+2001-09-29  Iain Holmes  <iain@ximian.com>
+
+	* bonobo/bonobo-listener.c (bonobo_listener_new): Check if the callback
+	function is NULL, and if so, don't create a GClosure.
+
 2001-10-05  Abel Cheung  <maddog@linux.org.hk>
 
 	* monikers/Bonobo_Moniker_std.server.in.in: Havoc's patch

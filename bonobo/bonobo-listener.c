@@ -180,8 +180,14 @@ BonoboListener *
 bonobo_listener_new (BonoboListenerCallbackFn event_cb,
 		     gpointer                 user_data)
 {
-	return bonobo_listener_new_closure (
-		g_cclosure_new (G_CALLBACK (event_cb), user_data, NULL));
+	GClosure *closure;
+
+	if (event_cb)
+		closure = g_cclosure_new (G_CALLBACK (event_cb), user_data, NULL);
+	else
+		closure = NULL;
+
+	return bonobo_listener_new_closure (closure);
 }
 
 /**
