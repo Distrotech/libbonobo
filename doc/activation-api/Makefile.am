@@ -6,7 +6,7 @@ NULL=
 DOC_MODULE=bonobo-activation
 
 # The top-level SGML file.
-DOC_MAIN_SGML_FILE=bonobo-activation.sgml
+DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.sgml
 
 # The directory containing the source code. Relative to $(srcdir)
 DOC_SOURCE_DIR=../bonobo-activation
