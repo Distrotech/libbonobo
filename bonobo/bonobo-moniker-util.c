@@ -649,22 +649,21 @@ async_activation_cb (CORBA_Object activated_object,
 			ctx->cb (CORBA_OBJECT_NIL, &ev, ctx->user_data);
 			parse_async_ctx_free (ctx);
 		} else {
-			static const CORBA_TypeCode args [] = {
-				TC_Object,
-				TC_string,
+			static const BonoboAsyncArg arguments [] = {
+				{ TC_Object, BONOBO_ASYNC_IN },
+				{ TC_string, BONOBO_ASYNC_IN },
+				{ NULL }
 			};
 			static const CORBA_TypeCode exceptions [] = {
 				TC_Bonobo_Moniker_InvalidSyntax,
 				TC_Bonobo_Moniker_UnknownPrefix,
 				NULL
 			};
-			static const BonoboAsyncFlags flags [] = {
-				BONOBO_ASYNC_IN,
-				BONOBO_ASYNC_IN
-			};
 			static const BonoboAsyncMethod method = {
-				"parseDisplayName", TC_Object, args, 2,
-				exceptions, flags
+				"parseDisplayName", 
+				TC_Object, 
+				arguments,
+				exceptions
 			};
 			CORBA_Object obj = CORBA_OBJECT_NIL;
 			gpointer arg_values [2] = { &obj, &ctx->name };
@@ -784,22 +783,21 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 			      BonoboMonikerAsyncFn   cb,
 			      gpointer               user_data)
 {
-	static const CORBA_TypeCode args [] = {
-		TC_Bonobo_ResolveOptions,
-		TC_string,
+	static const BonoboAsyncArg arguments [] = {
+		{ TC_Bonobo_ResolveOptions, BONOBO_ASYNC_IN },
+		{ TC_string,                BONOBO_ASYNC_IN },
+		{ NULL }
 	};
 	static const CORBA_TypeCode exceptions [] = {
 		TC_Bonobo_Moniker_InterfaceNotFound,
 		TC_Bonobo_Moniker_UnknownPrefix,
 		NULL
 	};
-	static const BonoboAsyncFlags flags [] = {
-		BONOBO_ASYNC_IN,
-		BONOBO_ASYNC_IN
-	};
 	static const BonoboAsyncMethod method = {
-		"resolve", TC_Object, args, 2,
-		exceptions, flags
+		"resolve", 
+		TC_Object, 
+		arguments,
+		exceptions
 	};
 	gpointer arg_values [2] = { &options, &interface_name };
 	resolve_async_ctx_t *ctx;
