@@ -8,7 +8,9 @@
  */
 #include <config.h>
 
-#include "bonobo/bonobo-exception.h"
+#include <bonobo/bonobo-exception.h>
+#include <bonobo/bonobo-arg.h>
+
 #include "bonobo-config-database.h"
 
 
@@ -410,4 +412,268 @@ BONOBO_X_TYPE_FUNC_FULL (BonoboConfigDatabase,
 			 Bonobo_ConfigDatabase,
 			 PARENT_TYPE,
 			 bonobo_config_database);
+
+char *
+bonobo_config_get_string (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_any *value;
+	char *retval;
+
+	if (!(value = bonobo_config_get_value (db, key, TC_string, opt_ev)))
+		return NULL;
+
+	retval = g_strdup (BONOBO_ARG_GET_STRING (value));
+
+	CORBA_free (value);
+
+	return retval;
+}
+
+gint32
+bonobo_config_get_long   (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_any *value;
+	gint32 retval;
+
+	if (!(value = bonobo_config_get_value (db, key, TC_long, opt_ev)))
+		return 0;
+
+	retval = BONOBO_ARG_GET_LONG (value);
+
+	CORBA_free (value);
+
+	return retval;
+}
+
+gfloat
+bonobo_config_get_float   (Bonobo_ConfigDatabase  db,
+			   const char            *key,
+			   CORBA_Environment     *opt_ev)
+{
+	CORBA_any *value;
+	gfloat retval;
+
+	if (!(value = bonobo_config_get_value (db, key, TC_float, opt_ev)))
+		return 0.0;
+
+	retval = BONOBO_ARG_GET_FLOAT (value);
+
+	CORBA_free (value);
+
+	return retval;
+}
+
+gdouble 
+bonobo_config_get_double  (Bonobo_ConfigDatabase  db,
+			   const char            *key,
+			   CORBA_Environment     *opt_ev)
+{
+	CORBA_any *value;
+	gdouble retval;
+
+	if (!(value = bonobo_config_get_value (db, key, TC_double, opt_ev)))
+		return 0.0;
+
+	retval = BONOBO_ARG_GET_DOUBLE (value);
+
+	CORBA_free (value);
+
+	return retval;
+}
+
+gboolean
+bonobo_config_get_bool   (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_any *value;
+	gboolean retval;
+
+	if (!(value = bonobo_config_get_value (db, key, TC_boolean, opt_ev)))
+		return FALSE;
+
+	retval = BONOBO_ARG_GET_BOOLEAN (value);
+
+	CORBA_free (value);
+
+	return retval;
+}
+
+CORBA_any *
+bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_TypeCode         opt_tc,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_Environment ev, *my_ev;
+	CORBA_any *retval;
+
+	bonobo_return_val_if_fail (db != CORBA_OBJECT_NIL, NULL, opt_ev);
+	bonobo_return_val_if_fail (key != NULL, NULL, opt_ev);
+
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	retval = Bonobo_ConfigDatabase_getValue (db, key, my_ev);
+	
+	if (BONOBO_EX (my_ev) && !opt_ev)
+		g_warning ("Cannot get value: %s\n", 
+			   bonobo_exception_get_text (my_ev));
+
+	if (opt_tc != CORBA_OBJECT_NIL) {
+
+		/* fixme: we can also try to do automatic type conversions */
+
+		if (!CORBA_TypeCode_equal (opt_tc, retval->_type, my_ev)) {
+			CORBA_free (retval);
+			if (!opt_ev)
+				CORBA_exception_free (&ev);
+			/* fixme: we need an InvalidType exception */
+			bonobo_exception_set (opt_ev, ex_Bonobo_BadArg);
+			return NULL;
+		}
+
+	}
+
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
+
+	return retval;
+}
+
+void
+bonobo_config_set_string (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  const char            *value,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_any *any;
+
+	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
+	bonobo_return_if_fail (key != NULL, opt_ev);
+	bonobo_return_if_fail (value != NULL, opt_ev);
+
+	any = bonobo_arg_new (TC_string);
+
+	BONOBO_ARG_SET_STRING (any, value);
+
+	bonobo_config_set_value (db, key, any, opt_ev);
+
+	bonobo_arg_release (any);
+}
+
+void
+bonobo_config_set_long   (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  gint32                 value,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_any *any;
+
+	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
+	bonobo_return_if_fail (key != NULL, opt_ev);
+
+	any = bonobo_arg_new (TC_long);
+
+	BONOBO_ARG_SET_LONG (any, value);
+
+	bonobo_config_set_value (db, key, any, opt_ev);
+
+	bonobo_arg_release (any);
+}
+
+void
+bonobo_config_set_float  (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  gfloat                 value,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_any *any;
+
+	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
+	bonobo_return_if_fail (key != NULL, opt_ev);
+
+	any = bonobo_arg_new (TC_float);
+
+	BONOBO_ARG_SET_FLOAT (any, value);
+
+	bonobo_config_set_value (db, key, any, opt_ev);
+
+	bonobo_arg_release (any);
+}
+
+void
+bonobo_config_set_double (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  gdouble                value,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_any *any;
+
+	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
+	bonobo_return_if_fail (key != NULL, opt_ev);
+
+	any = bonobo_arg_new (TC_double);
+
+	BONOBO_ARG_SET_DOUBLE (any, value);
+
+	bonobo_config_set_value (db, key, any, opt_ev);
+
+	bonobo_arg_release (any);
+}
+
+void
+bonobo_config_set_bool   (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  gboolean               value,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_any *any;
+
+	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
+	bonobo_return_if_fail (key != NULL, opt_ev);
+
+	any = bonobo_arg_new (TC_boolean);
+
+	BONOBO_ARG_SET_BOOLEAN (any, value);
+
+	bonobo_config_set_value (db, key, any, opt_ev);
+
+	bonobo_arg_release (any);
+}
+
+void
+bonobo_config_set_value  (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_any             *value,
+			  CORBA_Environment     *opt_ev)
+{
+	CORBA_Environment ev, *my_ev;
+
+	bonobo_return_if_fail (db != CORBA_OBJECT_NIL, opt_ev);
+	bonobo_return_if_fail (key != NULL, opt_ev);
+	bonobo_return_if_fail (value != NULL, opt_ev);
+
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+	
+	Bonobo_ConfigDatabase_setValue (db, key, value, my_ev);
+	
+	if (BONOBO_EX (my_ev) && !opt_ev)
+		g_warning ("Cannot set value: %s\n", 
+			   bonobo_exception_get_text (my_ev));
+
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
+}
 

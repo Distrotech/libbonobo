@@ -78,6 +78,73 @@ typedef struct {
 GtkType		      
 bonobo_config_database_get_type  (void);
 
+
+char *
+bonobo_config_get_string (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_Environment     *opt_ev);
+gint32 
+bonobo_config_get_long   (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_Environment     *opt_ev);
+
+gfloat 
+bonobo_config_get_float  (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_Environment     *opt_ev);
+
+gdouble 
+bonobo_config_get_double (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_Environment     *opt_ev);
+
+gboolean
+bonobo_config_get_bool   (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_Environment     *opt_ev);
+
+CORBA_any *
+bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_TypeCode         opt_tc,
+			  CORBA_Environment     *opt_ev);
+
+void
+bonobo_config_set_string (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  const char            *value,
+			  CORBA_Environment     *opt_ev);
+
+void
+bonobo_config_set_long   (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  gint32                 value,
+			  CORBA_Environment     *opt_ev);
+
+void
+bonobo_config_set_float  (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  gfloat                 value,
+			  CORBA_Environment     *opt_ev);
+
+void
+bonobo_config_set_double (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  gdouble                value,
+			  CORBA_Environment     *opt_ev);
+
+void
+bonobo_config_set_bool   (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  gboolean               value,
+			  CORBA_Environment     *opt_ev);
+
+void
+bonobo_config_set_value  (Bonobo_ConfigDatabase  db,
+			  const char            *key,
+			  CORBA_any             *value,
+			  CORBA_Environment     *opt_ev);
+
 END_GNOME_DECLS
 
 #endif /* ! __BONOBO_CONFIG_DATABASE_H__ */
