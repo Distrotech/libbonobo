@@ -33,21 +33,23 @@ module Bonobo {
 		attribute Moniker parent;
 
 		/**
-		 * get_display_name:
+		 * getDisplayName:
 		 * 
 		 * Returns a human readable representation of the Moniker
 		 */
-		string  get_display_name ()
+		string  getDisplayName ()
 			raises (InvalidSyntax);
 
 		/**
-		 * parse_display_name:
+		 * parseDisplayName:
+		 * @parent: the parent of this moniker
+		 * @name: the display name fragment to parse
 		 *
 		 * Generates a moniker from the string representation,
 		 * it builds a list returning the root node in a
 		 * similar way to g_list_append ();
 		 */
-		Moniker parse_display_name (in Moniker parent, in string name)
+		Moniker parseDisplayName (in Moniker parent, in string name)
 			raises (InvalidSyntax, UnknownPrefix);
 		
 		/**

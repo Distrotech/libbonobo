@@ -34,7 +34,7 @@ interface Property {
 	exception ReadOnlyProperty {};
 
 	/**
-	 * get_name:
+	 * getName:
 	 * 
 	 * Returns the name of the property.
 	 *
@@ -44,36 +44,37 @@ interface Property {
 	 * identify a property.  See get_docstring() for more
 	 * information about human-readable property descriptors.
 	 */
-	string get_name ();
+	string getName ();
 
 	/**
-	 * get_type:
+	 * getType:
 	 * 
 	 * Returns this Property's type.
 	 */
 #if defined(__ORBIT_IDL__)
 	/* Bug filed */
-	TypeCode get_type ();
+	TypeCode getType ();
 #else
-	CORBA::TypeCode get_type ();
+	CORBA::TypeCode getType ();
 #endif
 	/**
-	 * get_value:
+	 * getValue:
 	 *
 	 * Returns the current value for this property.  The value
 	 * is returned
 	 */
-	any get_value ();
+	any getValue ();
 
 	/**
-	 * set_value:
+	 * setValue:
 	 * 
 	 * Sets the value for this object to @value
 	 */
-	void set_value (in any value) raises (InvalidValue, ReadOnlyProperty);
+	void setValue (in any value)
+		raises (InvalidValue, ReadOnlyProperty);
 
 	/**
-	 * get_default:
+	 * getDefault:
 	 *
 	 * Returns the default value for this property.
 	 *
@@ -82,17 +83,17 @@ interface Property {
 	 * default" mechanism.
 	 *
 	 */
-	any get_default ();
+	any getDefault ();
 
 	/**
-	 * get_doc_string:
+	 * getDocString:
 	 *
 	 * Returns a string describing this property.
 	 */
-	string get_doc_string ();
+	string getDocString ();
 
 	/** 
-	 * get_flags:
+	 * getFlags:
 	 * 
 	 * Returns this property's flags,
 	 * see bonobo-property-bag.h
@@ -104,7 +105,7 @@ interface Property {
 	 * BONOBO_PROPERTY_NO_LISTENING    = 16
 	 * 
 	 */
-	long get_flags ();
+	long getFlags ();
 
 };
 
@@ -119,25 +120,25 @@ typedef sequence<Pair>     PropertySet;
 
 interface PropertyBag : Bonobo::Unknown {
 	/**
-	 * get_properties:
+	 * getProperties:
 	 *
 	 * Returns: All of the properties in this property bag.
 	 */
-	PropertyList get_properties ();
+	PropertyList getProperties ();
 
 	/**
-	 * get_property:
+	 * getPropertyByName:
 	 * @name: A string which uniquely identifies a given property.
 	 *
 	 * Returns: The single property in this PropertyBag identified
 	 * by @name.
 	 */
 	exception NotFound {};
-	Property get_property (in string name)
+	Property getPropertyByName (in string name)
 		raises (NotFound);
 
 	/**
-	 * get_property_names:
+	 * getPropertyNames:
 	 *
 	 * Returns: The names of the properties available in this
 	 * PropertyBag.
@@ -148,11 +149,11 @@ interface PropertyBag : Bonobo::Unknown {
 	 * properties, and that will cause the Property servants to be
 	 * incarnated, which is not very resource-conscious.
 	 */
-	PropertyNames get_property_names ();
+	PropertyNames getPropertyNames ();
 
 	exception NoListening {};
 	/**
-	 * add_change_listener:
+	 * addChangeListener:
 	 * @name: Property name.  Use empty string ("") to listen to all
 	 * properties in the bag.
 	 * @listener: PropertyListener Interface to notify when changes occur.
@@ -160,25 +161,26 @@ interface PropertyBag : Bonobo::Unknown {
 	 * This method attaches a listener for changes to any property in 
 	 * the bag. 
 	 */
-	void add_change_listener (in string name,
-				  in PropertyListener listener)
+	void addChangeListener (in string name,
+				in PropertyListener listener)
 		raises (NotFound, NoListening);
 
 	/**
-	 * remove_change_listener:
+	 * removeChangeListener:
 	 * @name: Property name.  Use empty string ("") to remove a general
 	 * bag listener.
 	 * @listener: Listener Interface to be removed.
 	 *
 	 * This method removes a bag listener from the bag. 
 	 */
-	void remove_change_listener (in string name,
-				     in PropertyListener listener)
+	void removeChangeListener (in string name,
+				   in PropertyListener listener)
 		raises (NotFound);
 
-	void set_values (in PropertySet set) raises (Bonobo::Property::InvalidValue, Bonobo::Property::ReadOnlyProperty);
+	void setValues (in PropertySet set)
+		raises (Bonobo::Property::InvalidValue, Bonobo::Property::ReadOnlyProperty);
 
-	PropertySet get_values ();
+	PropertySet getValues ();
 };
 
 };

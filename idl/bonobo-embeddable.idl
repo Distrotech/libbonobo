@@ -18,23 +18,23 @@ module Bonobo {
 interface View : Control {
 
 	/**
-	 * set_zoom_factor:
+	 * setZoomFactor:
 	 * @zoom: zoom factor
 	 *
 	 * Requests that the view be running at zoom factor
 	 */
-	void set_zoom_factor (in double zoom);
+	void setZoomFactor (in double zoom);
 };
 
 interface ViewFrame : ControlFrame {
 
 	/**
-	 * get_client_site:
+	 * getClientSite:
 	 *
 	 * Returns: The Bonobo::ClientSite interface associated
 	 * with this ViewFrame.
 	 */
-	ClientSite get_client_site ();
+	ClientSite getClientSite ();
 
 };
 
@@ -42,35 +42,35 @@ interface ViewFrame : ControlFrame {
 interface Embeddable : Bonobo::Unknown {
 
 	/**
-	 * set_client_site:
+	 * setClientSite:
 	 * @client_site: the client site for this Object
 	 *
 	 * Sets the client site for this object
 	 */
-	void set_client_site (in ClientSite client_site);
+	void setClientSite (in ClientSite clientSite);
 
 	/**
-	 * get_client_site:
+	 * getClientSite:
 	 * 
 	 * Returns the current client site
 	 */
-	ClientSite get_client_site ();
+	ClientSite getClientSite ();
 
 	/**
-	 * set_host_name:
+	 * setHostName:
 	 * @name: Text
 	 * @appname: name of the container application
 	 *
 	 * Sets the text that should be displayed on the window title
 	 * when this object is opened in a separate window for editing
 	 */
-	void set_host_name (in string name, in string appname);
+	void setHostName (in string name, in string appname);
 
 	/**
-	 * set_uri:
+	 * setURI:
 	 * @uri: the uri that this component represents.
 	 */
-	void set_uri (in string uri);
+	void setURI (in string uri);
 
 	/**
 	 * close:
@@ -88,16 +88,6 @@ interface Embeddable : Bonobo::Unknown {
 
 	void close (in CloseMode mode)
 		raises (UserCancelledSave);
-	
-	/**
-	 * set_moniker:
-	 * @moniker: Moniker to set
-	 * @which:   Which moniker is this
-	 *
-	 * Informs the application its moniker name
-	 * or its container moniker's name.
-	 *	void set_moniker (in Moniker mon, in Moniker::type which);
-	 */
 
 	/**
 	 * advise:
@@ -119,13 +109,13 @@ interface Embeddable : Bonobo::Unknown {
 	void unadvise ();
 
 	/**
-	 * get_misc_status:
+	 * getMiscStatus:
 	 * @type: type
 	 */
-	long get_misc_status (in long type);
+	long getMiscStatus (in long type);
 
 	/**
-	 * new_view:
+	 * createView:
 	 * @frame: the View frame containing this view.
 	 *
 	 * This returns a new View object.
@@ -133,10 +123,10 @@ interface Embeddable : Bonobo::Unknown {
 	 * BonoboObjects should be able to produce as many views
 	 * of the same data as requested.
 	 */
-	View new_view (in ViewFrame frame) ;
+	View createView (in ViewFrame frame) ;
 
 	/**
-	 * new_canvas_item:
+	 * createCanvasItem:
 	 * @aa: Whether the item should be an AA-item or not
 	 * @proxy: The Proxy used to notify of requested updates.
 	 *
@@ -144,7 +134,7 @@ interface Embeddable : Bonobo::Unknown {
 	 * CORBA_OBJECT_NIL if this object does not support the
 	 * Canvas::Component interface.
 	 */
-	Canvas::Component new_canvas_item (in boolean                aa,
-					   in Canvas::ComponentProxy proxy);
+	Canvas::Component createCanvasItem (in boolean                aa,
+					    in Canvas::ComponentProxy proxy);
 };
 };

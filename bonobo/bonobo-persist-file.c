@@ -112,10 +112,10 @@ bonobo_persist_file_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_PersistFile__epv, 1);
 
-	epv->load		= impl_load;
-	epv->save		= impl_save;
-	epv->is_dirty		= impl_is_dirty;
-	epv->get_current_file   = impl_get_current_file;
+	epv->load           = impl_load;
+	epv->save           = impl_save;
+	epv->isDirty        = impl_is_dirty;
+	epv->getCurrentFile = impl_get_current_file;
 
 	return epv;
 }

@@ -18,7 +18,7 @@ typedef struct {
 } BonoboPropertyServant;
 
 static CORBA_char *
-impl_Bonobo_Property_get_name (PortableServer_Servant servant,
+impl_Bonobo_Property_getName (PortableServer_Servant servant,
 			       CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
@@ -27,7 +27,7 @@ impl_Bonobo_Property_get_name (PortableServer_Servant servant,
 }
 
 static CORBA_TypeCode
-impl_Bonobo_Property_get_type (PortableServer_Servant servant,
+impl_Bonobo_Property_getType (PortableServer_Servant servant,
 			       CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
@@ -40,7 +40,7 @@ impl_Bonobo_Property_get_type (PortableServer_Servant servant,
 }
 
 static CORBA_any *
-impl_Bonobo_Property_get_value (PortableServer_Servant servant,
+impl_Bonobo_Property_getValue (PortableServer_Servant servant,
 				CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
@@ -49,7 +49,7 @@ impl_Bonobo_Property_get_value (PortableServer_Servant servant,
 }
 
 static void
-impl_Bonobo_Property_set_value (PortableServer_Servant servant,
+impl_Bonobo_Property_setValue (PortableServer_Servant servant,
 				const CORBA_any       *any,
 				CORBA_Environment     *ev)
 {
@@ -59,7 +59,7 @@ impl_Bonobo_Property_set_value (PortableServer_Servant servant,
 }
 
 static CORBA_any *
-impl_Bonobo_Property_get_default (PortableServer_Servant servant,
+impl_Bonobo_Property_getDefault (PortableServer_Servant servant,
 				  CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
@@ -68,7 +68,7 @@ impl_Bonobo_Property_get_default (PortableServer_Servant servant,
 }
 
 static CORBA_char *
-impl_Bonobo_Property_get_doc_string (PortableServer_Servant servant,
+impl_Bonobo_Property_getDocString (PortableServer_Servant servant,
 				     CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
@@ -78,7 +78,7 @@ impl_Bonobo_Property_get_doc_string (PortableServer_Servant servant,
 
 
 static CORBA_long
-impl_Bonobo_Property_get_flags (PortableServer_Servant servant,
+impl_Bonobo_Property_getFlags (PortableServer_Servant servant,
 				CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
@@ -96,13 +96,13 @@ bonobo_property_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Property__epv, 1);
 
-	epv->get_name       = impl_Bonobo_Property_get_name;
-	epv->get_type       = impl_Bonobo_Property_get_type;
-	epv->get_value      = impl_Bonobo_Property_get_value;
-	epv->set_value      = impl_Bonobo_Property_set_value;
-	epv->get_default    = impl_Bonobo_Property_get_default;
-	epv->get_doc_string = impl_Bonobo_Property_get_doc_string;
-	epv->get_flags      = impl_Bonobo_Property_get_flags;
+	epv->getName      = impl_Bonobo_Property_getName;
+	epv->getType      = impl_Bonobo_Property_getType;
+	epv->getValue     = impl_Bonobo_Property_getValue;
+	epv->setValue     = impl_Bonobo_Property_setValue;
+	epv->getDefault   = impl_Bonobo_Property_getDefault;
+	epv->getDocString = impl_Bonobo_Property_getDocString;
+	epv->getFlags     = impl_Bonobo_Property_getFlags;
 
 	return epv;
 }

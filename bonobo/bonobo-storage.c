@@ -150,16 +150,16 @@ bonobo_storage_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Storage__epv, 1);
 
-	epv->get_info	        = impl_get_info;
-	epv->set_info	        = impl_set_info;
-	epv->open_stream	= impl_open_stream;
-	epv->open_storage	= impl_open_storage;
-	epv->copy_to		= impl_copy_to;
-	epv->rename		= impl_rename;
-	epv->commit		= impl_commit;
-	epv->revert		= impl_revert;
-	epv->list_contents	= impl_list_contents;
-	epv->erase		= impl_erase;
+	epv->getInfo      = impl_get_info;
+	epv->setInfo      = impl_set_info;
+	epv->openStream	  = impl_open_stream;
+	epv->openStorage  = impl_open_storage;
+	epv->copyTo       = impl_copy_to;
+	epv->rename       = impl_rename;
+	epv->commit       = impl_commit;
+	epv->revert       = impl_revert;
+	epv->listContents = impl_list_contents;
+	epv->erase        = impl_erase;
 
 	return epv;
 }

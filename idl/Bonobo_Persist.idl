@@ -25,13 +25,13 @@ module Bonobo {
 		typedef sequence<ContentType> ContentTypeList;
 		
 		/**
-		 * get_types:
+		 * getContentTypes:
 		 *
 		 *  Gets a list of supported mime types that this
 		 * persistor can save its data in. The default /
 		 * preferred type being the first element.
 		 */
-		ContentTypeList get_content_types ();
+		ContentTypeList getContentTypes ();
 	};
 	
 	/*
@@ -54,7 +54,8 @@ module Bonobo {
 		 * Loads the document object from the file
 		 * pointed in by @path
 		 */
-		void load (in string path) raises (WrongDataType, FileNotFound);
+		void load (in string path)
+			raises (WrongDataType, FileNotFound);
 
 		/**
 		 * save:
@@ -65,19 +66,20 @@ module Bonobo {
 		void save (in string path);
 	
 		/**
-		 * is_dirty:
+		 * isDirty:
 		 * 
 		 * returns whether the document needs to be
 		 * saved
 		 */
-		boolean is_dirty ();
+		boolean isDirty ();
 	
 		/**
-		 * get_current_file:
+		 * getCurrentFile:
 		 * 
 		 * Returns the name of the current file. 
 		 */
-		string get_current_file () raises (NoCurrentName);
+		string getCurrentFile ()
+			raises (NoCurrentName);
 	};
 
 	/*
@@ -89,12 +91,12 @@ module Bonobo {
 	interface PersistStorage : Persist {
 		
 		/**
-		 * is_dirty:
+		 * isDirty:
 		 * 
 		 * returns whether the document needs to be
 		 * saved
 		 */
-		boolean is_dirty ();
+		boolean isDirty ();
 	
 		/**
 		 * load:
@@ -103,7 +105,8 @@ module Bonobo {
 		 * The bonobo_object should load its state from the
 		 * @storage provided
 		 */
-		void load (in Bonobo::Storage storage) raises (WrongDataType, NotSupported);
+		void load (in Bonobo::Storage storage)
+			raises (WrongDataType, NotSupported);
 
 		/**
 		 * save:
@@ -115,17 +118,18 @@ module Bonobo {
 		 * BonoboObjects should save their sate in the @storage
 		 */
 		void save (in Bonobo::Storage storage,
-			   in boolean same_as_loaded) raises (NotSupported);
+			   in boolean same_as_loaded)
+			raises (NotSupported);
 	
 		/**
-		 * init_new:
+		 * initNew:
 		 * @storage: A storage that is provided for this object
 		 *
 		 * BonoboObjects do have access to a valid storage through
 		 * their entire life.  This is a chance given to initialize such 
 		 * storage and keep it around (users should addref it).
 		 */
-		void init_new (in Bonobo::Storage storage);
+		void initNew (in Bonobo::Storage storage);
 	};
 	
 	/*
@@ -137,9 +141,8 @@ module Bonobo {
 	 * during these calls (ie, you should not incref these
 	 * and used them after this).
 	 */
-
 	interface PersistStream : Persist {
-		boolean is_dirty ();
+		boolean isDirty ();
 		
 		/**
 		 * load:
@@ -169,12 +172,12 @@ module Bonobo {
 			raises (WrongDataType, NotSupported);
 
 		/**
-		 * get_size_max:
+		 * getMaxSize:
 		 *
 		 * Should return the number of bytes requested to save
 		 * this object, or -1 if it is not known.
 		 */
-		long get_size_max ();
+		long getMaxSize ();
 	};
 
 };

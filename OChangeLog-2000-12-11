@@ -1,3 +1,7 @@
+2000-11-02  Michael Meeks <michael@helixcode.com>
+
+	* The big api rename ...
+
 2000-11-01  Joe Shaw  <joe@helixcode.com>
 
 	* monikers/bonobo-moniker-http.c (http_parse_display_name): Added a

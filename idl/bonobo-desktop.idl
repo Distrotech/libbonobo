@@ -20,10 +20,10 @@ interface Window : Bonobo::Unknown {
 
 	attribute string title;
 
-	Geometry get_geometry ();
-	void set_geometry (in Geometry geo);
+	Geometry getGeometry ();
+	void     setGeometry (in Geometry geo);
 
-	unsigned long get_window_id ();
+	unsigned long getWindowId ();
 };
 
 };

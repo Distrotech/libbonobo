@@ -193,7 +193,7 @@ bonobo_object_client_query_interface (BonoboObjectClient *object,
 		CORBA_exception_init (ev);
 	}
 
-	interface = Bonobo_Unknown_query_interface (
+	interface = Bonobo_Unknown_queryInterface (
 						   bonobo_object_corba_objref (BONOBO_OBJECT (object)),
 						   interface_desc, ev);
 	

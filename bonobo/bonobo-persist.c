@@ -24,8 +24,8 @@ bonobo_persist_from_servant (PortableServer_Servant servant)
 }
 
 static Bonobo_Persist_ContentTypeList *
-impl_get_content_types (PortableServer_Servant	servant,
-			CORBA_Environment	*ev)
+impl_Bonobo_Persist_getContentTypes (PortableServer_Servant servant,
+				     CORBA_Environment     *ev)
 {
 	BonoboPersist *persist = bonobo_persist_from_servant (servant);
 
@@ -42,7 +42,7 @@ bonobo_persist_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Persist__epv, 1);
 
-	epv->get_content_types = impl_get_content_types;
+	epv->getContentTypes = impl_Bonobo_Persist_getContentTypes;
 
 	return epv;
 }

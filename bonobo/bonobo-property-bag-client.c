@@ -38,7 +38,7 @@ bonobo_property_bag_client_get_properties (Bonobo_PropertyBag       pb,
 		real_ev = &tmp_ev;
 	}
 
-	props = Bonobo_PropertyBag_get_properties (pb, real_ev);
+	props = Bonobo_PropertyBag_getProperties (pb, real_ev);
 	if (real_ev->_major != CORBA_NO_EXCEPTION) {
 		if (!ev)
 			CORBA_exception_free (&tmp_ev);
@@ -153,7 +153,7 @@ bonobo_property_bag_client_get_property_names (Bonobo_PropertyBag       pb,
 		real_ev = &tmp_ev;
 	}
 
-	names = Bonobo_PropertyBag_get_property_names (pb, real_ev);
+	names = Bonobo_PropertyBag_getPropertyNames (pb, real_ev);
 
 	if (real_ev->_major != CORBA_NO_EXCEPTION) {
 		if (!ev)
@@ -205,7 +205,7 @@ bonobo_property_bag_client_get_property (Bonobo_PropertyBag       pb,
 
 	g_return_val_if_fail (pb != CORBA_OBJECT_NIL, NULL);
 
-	prop = Bonobo_PropertyBag_get_property (pb, property_name, ev);
+	prop = Bonobo_PropertyBag_getPropertyByName (pb, property_name, ev);
 
 	if (real_ev->_major != CORBA_NO_EXCEPTION)
 		prop = CORBA_OBJECT_NIL;
@@ -244,7 +244,7 @@ bonobo_property_bag_client_persist (Bonobo_PropertyBag       pb,
 	g_return_if_fail (stream != NULL);
 	g_return_if_fail (BONOBO_IS_STREAM (stream));
 
-	persist = Bonobo_Unknown_query_interface (pb, "IDL:Bonobo/PersistStream:1.0", ev);
+	persist = Bonobo_Unknown_queryInterface (pb, "IDL:Bonobo/PersistStream:1.0", ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION ||
 	    persist   == CORBA_OBJECT_NIL) {
@@ -279,7 +279,7 @@ bonobo_property_bag_client_depersist (Bonobo_PropertyBag       pb,
 	g_return_if_fail (stream != NULL);
 	g_return_if_fail (BONOBO_IS_STREAM (stream));
 
-	persist = Bonobo_Unknown_query_interface (
+	persist = Bonobo_Unknown_queryInterface (
 		pb, "IDL:Bonobo/PersistStream:1.0", ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION ||
@@ -336,7 +336,7 @@ bonobo_property_bag_client_get_property_type (Bonobo_PropertyBag       pb,
 		}
 	}
 
-	tc = Bonobo_Property_get_type (prop, real_ev);
+	tc = Bonobo_Property_getType (prop, real_ev);
 
 	if (real_ev->_major != CORBA_NO_EXCEPTION) {
 		g_warning ("bonobo_property_bag_client_get_property_type: Exception getting TypeCode!");
@@ -393,9 +393,9 @@ bonobo_property_bag_client_get_field_any (Bonobo_PropertyBag       pb,
 	}
 
 	if (field == FIELD_VALUE)
-		any = Bonobo_Property_get_value (prop, real_ev);
+		any = Bonobo_Property_getValue (prop, real_ev);
 	else
-		any = Bonobo_Property_get_default (prop, real_ev);
+		any = Bonobo_Property_getDefault (prop, real_ev);
 
 	if (real_ev->_major != CORBA_NO_EXCEPTION) {
 		g_warning ("bonobo_property_bag_client_get_field_any: Exception getting property value!");
@@ -533,7 +533,7 @@ bonobo_property_bag_client_set_value_any (Bonobo_PropertyBag       pb,
 	prop = bonobo_property_bag_client_get_property (pb, propname, real_ev);
 	g_return_if_fail (prop != CORBA_OBJECT_NIL);
 
-	Bonobo_Property_set_value (prop, value, real_ev);
+	Bonobo_Property_setValue (prop, value, real_ev);
 
 	if (real_ev->_major != CORBA_NO_EXCEPTION)
 		g_warning ("bonobo_property_bag_client_set_value_any: Exception setting property!");
@@ -626,7 +626,7 @@ bonobo_property_bag_client_get_docstring (Bonobo_PropertyBag       pb,
 		return NULL;
 	}
 
-	docstr = Bonobo_Property_get_doc_string (prop, real_ev);
+	docstr = Bonobo_Property_getDocString (prop, real_ev);
 
 	if (real_ev->_major != CORBA_NO_EXCEPTION) {
 		if (!ev)
@@ -672,7 +672,7 @@ bonobo_property_bag_client_get_flags (Bonobo_PropertyBag       pb,
 		return 0;
 	}
 
-	flags = Bonobo_Property_get_flags (prop, real_ev);
+	flags = Bonobo_Property_getFlags (prop, real_ev);
 
 	if (real_ev->_major != CORBA_NO_EXCEPTION)
 		flags = 0;

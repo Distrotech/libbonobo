@@ -30,17 +30,17 @@ module Bonobo {
 		exception UnknownListener {};
 
 		/**
-		 * add_listener: Adds a listener to events happening
+		 * addListener: Adds a listener to events happening
 		 * on this object.
 		 * @l: the listener implementation.
 		 */
-		void add_listener    (in Listener l);
+		void addListener    (in Listener l);
 		
 		/**
-		 * remove_listener: Removes a listener
+		 * removeListener: Removes a listener
 		 * @l: the listener
 		 */
-		void remove_listener (in Listener l)
+		void removeListener (in Listener l)
 			raises (UnknownListener);
 	};
 };

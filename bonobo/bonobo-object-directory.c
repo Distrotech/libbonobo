@@ -24,7 +24,7 @@ struct _ODServerInfo {
 };
 
 ODServerInfo*
-od_server_info_new (const gchar* iid, const gchar* name, const gchar* desc)
+bonobo_directory_new_server_info (const gchar* iid, const gchar* name, const gchar* desc)
 {
         ODServerInfo *info;
 
@@ -39,31 +39,31 @@ od_server_info_new (const gchar* iid, const gchar* name, const gchar* desc)
 }
 
 const gchar*
-od_server_info_get_id          (ODServerInfo      *info)
+bonobo_directory_get_server_info_id          (ODServerInfo      *info)
 {
         return info->iid;
 }
 
 const gchar*
-od_server_info_get_name (ODServerInfo     *info)
+bonobo_directory_get_server_info_name (ODServerInfo     *info)
 {
 	return info->name;
 }
 			 
 const gchar*
-od_server_info_get_description (ODServerInfo      *info)
+bonobo_directory_get_server_info_description (ODServerInfo      *info)
 {
         return info->desc;
 }
 
 void
-od_server_info_ref             (ODServerInfo      *info)
+bonobo_directory_server_info_ref             (ODServerInfo      *info)
 {
         info->refcount += 1;
 }
 
 void
-od_server_info_unref           (ODServerInfo      *info)
+bonobo_directory_server_info_unref           (ODServerInfo      *info)
 {
         g_return_if_fail(info != NULL);
         g_return_if_fail(info->refcount > 0);
@@ -79,14 +79,14 @@ od_server_info_unref           (ODServerInfo      *info)
 }
 
 void
-od_server_list_free            (GList             *list)
+bonobo_directory_free_server_list            (GList             *list)
 {
         GList *iter;
 
         iter = list;
 
         while (iter != NULL) {
-                od_server_info_unref (iter->data);
+                bonobo_directory_server_info_unref (iter->data);
                 
                 iter = g_list_next (iter);
         }
@@ -96,7 +96,7 @@ od_server_list_free            (GList             *list)
 
 
 CORBA_ORB
-od_get_orb (void)
+bonobo_directory_get_orb (void)
 {
 	return oaf_orb_get();
 }
@@ -140,7 +140,7 @@ build_id_query_fragment (const char **required_ids)
 }
 
 GList*
-od_get_server_list (const gchar **required_ids)
+bonobo_directory_get_server_list (const gchar **required_ids)
 {
         GList *retval = NULL;
         gchar *query;
@@ -193,7 +193,7 @@ od_get_server_list (const gchar **required_ids)
 		if (!desc)
 			desc = name;
 		
-                info = od_server_info_new (oafinfo->iid,
+                info = bonobo_directory_new_server_info (oafinfo->iid,
 					   name,
 					   desc);
 
@@ -289,7 +289,7 @@ od_server_activate_with_id     (const gchar       *iid,
 }
 
 ODRegistrationResult
-od_server_register             (CORBA_Object       objref,
+bonobo_directory_register_server             (CORBA_Object       objref,
                                 const gchar       *iid)
 {
         OAF_RegistrationResult result;
@@ -318,7 +318,7 @@ od_server_register             (CORBA_Object       objref,
 }
 
 ODRegistrationResult
-od_server_unregister           (CORBA_Object       objref,
+bonobo_directory_unregister_server           (CORBA_Object       objref,
                                 const gchar       *iid)
 {
         oaf_active_server_unregister(iid, objref);
@@ -327,7 +327,7 @@ od_server_unregister           (CORBA_Object       objref,
 }
 
 CORBA_Object
-od_name_service_get (CORBA_Environment *ev)
+bonobo_directory_get_name_service (CORBA_Environment *ev)
 {
 	return oaf_name_service_get (ev);
 }

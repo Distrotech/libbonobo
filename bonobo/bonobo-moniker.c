@@ -175,11 +175,11 @@ bonobo_moniker_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Moniker__epv, 1);
 
-	epv->_get_parent        = impl_get_parent;
-	epv->_set_parent        = impl_set_parent;
-	epv->get_display_name   = impl_get_display_name;
-	epv->parse_display_name = impl_parse_display_name;
-	epv->resolve            = impl_resolve;
+	epv->_get_parent      = impl_get_parent;
+	epv->_set_parent      = impl_set_parent;
+	epv->getDisplayName   = impl_get_display_name;
+	epv->parseDisplayName = impl_parse_display_name;
+	epv->resolve          = impl_resolve;
 
 	return epv;
 }

@@ -7,9 +7,20 @@
  *	Miguel de Icaza (miguel@helixcode.com)
  */
 
+/*
+ *  This interface is deprecated, use the BonoboListener
+ * interface instead.
+ */
+
 module Bonobo {
 
 	interface AdviseSink : Bonobo::Unknown {
+		/**
+		 * notify:
+		 * @notify_type: an ordinal associated with an event type
+		 *
+		 * Notifies that some sort of event has occured.
+		 */
 		void notify (in long notify_type);
 		
 		/**
@@ -21,12 +32,6 @@ module Bonobo {
 		 * container that now its contents are being
 		 * stored in @new_full_name
 		 */
-		void on_rename (in string new_full_name);
-
-		/**
-		 * on_save:
-		 *
-		 * Notifies that the object has been saved
-		 */
+		void notifyRename (in string new_full_name);
 	};
 };

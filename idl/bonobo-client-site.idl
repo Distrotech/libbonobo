@@ -17,14 +17,14 @@ module Bonobo {
 interface ClientSite : Bonobo::Unknown {
 
 	/**
-	 * get_container:
+	 * getContainer:
 	 *
 	 * Returns a pointer to the Container instance.
 	 */
-	ItemContainer get_container ();
+	ItemContainer getContainer ();
 	
 	/**
-	 * show_window:
+	 * showWindow:
 	 * @show: boolean value, reports whether the
 	 * containee is showing its own separate editing window.
 	 *
@@ -32,25 +32,16 @@ interface ClientSite : Bonobo::Unknown {
 	 * when it shows its own separate editing window.
 	 *
 	 */
-	void show_window (in boolean shown);
-	
-	/**
-	 * get_moniker:
-	 * @which: Which kind of moniker is requested
-	 *
-	 * FIXME: Rethink this.
-	 * Moniker get_moniker (in Moniker::type which);
-	 */
-
+	void showWindow (in boolean shown);
 
 	/**
-	 * save_object:
+	 * saveObject:
 	 * 
 	 * Saves the object that is attached to this client site.
 	 * This operation is syncronous and will be done by the time
 	 * the function returns.
 	 */
-	Persist::Status save_object ();
+	Persist::Status saveObject ();
 };
 
 };

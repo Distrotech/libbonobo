@@ -21,7 +21,7 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_PERSIST_FILE(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_FILE_TYPE))
 #define BONOBO_IS_PERSIST_FILE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_FILE_TYPE))
 
-typedef struct _BonoboPersistFile BonoboPersistFile;
+typedef struct _BonoboPersistFile        BonoboPersistFile;
 typedef struct _BonoboPersistFilePrivate BonoboPersistFilePrivate;
 
 

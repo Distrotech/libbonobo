@@ -127,15 +127,15 @@ bonobo_stream_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Stream__epv, 1);
 
-	epv->get_info	= impl_get_info;
-	epv->set_info	= impl_set_info;
-	epv->read	= impl_read;
-	epv->write	= impl_write;
-	epv->seek	= impl_seek;
-	epv->truncate	= impl_truncate;
-	epv->copy_to	= impl_copy_to;
-	epv->commit     = impl_commit;
-	epv->revert     = impl_revert;
+	epv->getInfo  = impl_get_info;
+	epv->setInfo  = impl_set_info;
+	epv->read     = impl_read;
+	epv->write    = impl_write;
+	epv->seek     = impl_seek;
+	epv->truncate = impl_truncate;
+	epv->copyTo   = impl_copy_to;
+	epv->commit   = impl_commit;
+	epv->revert   = impl_revert;
 
 	return epv;
 }

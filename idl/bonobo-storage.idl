@@ -51,19 +51,19 @@ module Bonobo {
 		};
 
 		/**
-		 * get_info:
+		 * getInfo:
 		 *
 		 * Returns a StorageInfo structure which contains
 		 * the name, content_type and size info.
 		 */
-		StorageInfo get_info (in StorageInfoFields mask)
+		StorageInfo getInfo (in StorageInfoFields mask)
 			raises (IOError, NoPermission);
 		
 		/**	
-		 * set_info:
+		 * setInfo:
 		 *
 		 */
-		void set_info (in StorageInfo info, in StorageInfoFields mask)
+		void setInfo (in StorageInfo info, in StorageInfoFields mask)
 			raises (IOError, NoPermission);
 
 		/**
@@ -103,7 +103,7 @@ module Bonobo {
 			raises (IOError, NoPermission, NotSupported);
 	
 		/**
-		 * copy_to:
+		 * copyTo:
 		 * @path: destination file.
 		 * @bytes: number of bytes to copy, or -1 to copy until eof
 		 * @read: output, how many bytes were read.
@@ -113,7 +113,7 @@ module Bonobo {
 		 * at the current read/write pointer to the component in @dest
 		 * inside the Storage.
 		 */
-		void copy_to (in string dest, in long bytes, 
+		void copyTo (in string dest, in long bytes, 
 			      out long read, out long written)
 			raises (IOError, NoPermission);
 
@@ -157,61 +157,61 @@ module Bonobo {
 		exception NotEmpty {};
 
 		/**
-		 * get_info:
+		 * getInfo:
 		 *
 		 * Returns a StorageInfo structure which contains
 		 * the name, content_type and size info.
 		 */
-		StorageInfo get_info (in string path, 
+		StorageInfo getInfo (in string path, 
 				      in StorageInfoFields mask)
 			raises (IOError, NoPermission, NotFound);
 		
 		/**	
-		 * set_info:
+		 * setInfo:
 		 *
 		 */
-		void set_info (in string path, in StorageInfo info, 
+		void setInfo (in string path, in StorageInfo info, 
 			       in StorageInfoFields mask)
 			raises (IOError, NoPermission, NotFound);
 
 		/**
-		 * open_stream:
+		 * openStream:
 		 * @path: path of the stream to open
 		 * @mode: open flags
 		 *
 		 * Opens a Stream whose name is @path.
 		 */
-		Stream open_stream (in string path, in OpenMode mode)
+		Stream openStream (in string path, in OpenMode mode)
 			raises (IOError, NotFound, NoPermission, NotStream);
 
 		/**
-		 * open_storage:
+		 * openStorage:
 		 * @path: path of the storage to open.
 		 * @mode: open mode.
 		 * 
 		 * Returns a storage object for @path.
 		 */
-		Storage open_storage (in string path, in OpenMode mode)
+		Storage openStorage (in string path, in OpenMode mode)
 			raises (IOError, NotFound, NoPermission, NotStorage);
 
 		/** 
-		 * copy_to:
+		 * copyTo:
 		 * @target: where to copy this storage to.
 		 *
 		 * Copies this storages contents to the @target storage
 		 */
-		void copy_to (in Storage target)
+		void copyTo (in Storage target)
 			raises (IOError, NoPermission);
 
 		/**
-		 * list_contents:
+		 * listContents:
 		 * @path: path that we want to examine.
 		 *
 		 * Returns a list of all the Storage and Streams available
 		 * at @path.
 		 */
-		DirectoryList list_contents (in string path, 
-					     in StorageInfoFields mask)
+		DirectoryList listContents (in string path, 
+					    in StorageInfoFields mask)
 			raises (IOError, NotStorage, NotFound);
 	
 		/**

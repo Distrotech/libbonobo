@@ -407,8 +407,8 @@ bonobo_property_bag_create_objref (BonoboPropertyBag  *pb,
 }
 
 static Bonobo_PropertyList *
-impl_Bonobo_PropertyBag_get_properties (PortableServer_Servant  servant,
-					CORBA_Environment      *ev)
+impl_Bonobo_PropertyBag_getProperties (PortableServer_Servant  servant,
+				       CORBA_Environment      *ev)
 {
 	BonoboPropertyBag   *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
 	Bonobo_PropertyList *prop_list;
@@ -462,9 +462,9 @@ impl_Bonobo_PropertyBag_get_properties (PortableServer_Servant  servant,
 }
 
 static Bonobo_Property
-impl_Bonobo_PropertyBag_get_property (PortableServer_Servant servant,
-				      const CORBA_char *name,
-				      CORBA_Environment *ev)
+impl_Bonobo_PropertyBag_getPropertyByName (PortableServer_Servant servant,
+					   const CORBA_char      *name,
+					   CORBA_Environment     *ev)
 {
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
 	Bonobo_Property    prop;
@@ -484,8 +484,8 @@ impl_Bonobo_PropertyBag_get_property (PortableServer_Servant servant,
 }
 
 static Bonobo_PropertyNames *
-impl_Bonobo_PropertyBag_get_property_names (PortableServer_Servant servant,
-					    CORBA_Environment *ev)
+impl_Bonobo_PropertyBag_getPropertyNames (PortableServer_Servant servant,
+					  CORBA_Environment     *ev)
 {
 	BonoboPropertyBag        *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
 	Bonobo_PropertyNames	*name_list;
@@ -527,10 +527,10 @@ impl_Bonobo_PropertyBag_get_property_names (PortableServer_Servant servant,
 }
 
 static void
-impl_Bonobo_PropertyBag_add_listener (PortableServer_Servant        servant,
-				      const CORBA_char             *name,
-				      const Bonobo_PropertyListener listener,
-				      CORBA_Environment            *ev)
+impl_Bonobo_PropertyBag_addChangeListener (PortableServer_Servant        servant,
+					   const CORBA_char             *name,
+					   const Bonobo_PropertyListener listener,
+					   CORBA_Environment            *ev)
 {
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (
 		bonobo_object_from_servant (servant));
@@ -539,10 +539,10 @@ impl_Bonobo_PropertyBag_add_listener (PortableServer_Servant        servant,
 }
 						     
 static void
-impl_Bonobo_PropertyBag_remove_listener (PortableServer_Servant        servant,
-				         const CORBA_char             *name,
-					 const Bonobo_PropertyListener listener,
-					 CORBA_Environment            *ev)
+impl_Bonobo_PropertyBag_removeChangeListener (PortableServer_Servant        servant,
+					      const CORBA_char             *name,
+					      const Bonobo_PropertyListener listener,
+					      CORBA_Environment            *ev)
 {
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (
 		bonobo_object_from_servant (servant));
@@ -695,11 +695,11 @@ bonobo_property_bag_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_PropertyBag__epv, 1);
 
-	epv->get_properties		= impl_Bonobo_PropertyBag_get_properties;
-	epv->get_property        	= impl_Bonobo_PropertyBag_get_property;
-	epv->get_property_names  	= impl_Bonobo_PropertyBag_get_property_names;
-	epv->add_change_listener 	= impl_Bonobo_PropertyBag_add_listener;
-	epv->remove_change_listener 	= impl_Bonobo_PropertyBag_remove_listener;
+	epv->getProperties        = impl_Bonobo_PropertyBag_getProperties;
+	epv->getPropertyByName    = impl_Bonobo_PropertyBag_getPropertyByName;
+	epv->getPropertyNames     = impl_Bonobo_PropertyBag_getPropertyNames;
+	epv->addChangeListener    = impl_Bonobo_PropertyBag_addChangeListener;
+	epv->removeChangeListener = impl_Bonobo_PropertyBag_removeChangeListener;
 
 	return epv;
 }

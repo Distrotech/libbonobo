@@ -66,12 +66,12 @@ module Gdk {
 	};
 
 	struct KeyEvent {
-		KeyType type;
+		KeyType   type;
 		Gdk::Time time;
-		short	state;
-		short	keyval;
-		short	length;
-		string  str;
+		short	  state;
+		short	  keyval;
+		short	  length;
+		string    str;
 	};
 
 	struct CrossingEvent {
@@ -207,20 +207,22 @@ module Canvas {
 		boolean event (in Canvas::State state, 
 			       in Bonobo::Gdk::Event event);
 
-		/*
+		/**
+		 * setCanvasSize:
+		 *
 		 * Notifies this item about the size of the Canvas size on the 
 		 * canvas
 		 */
-		void canvas_size_set (in short x, in short y, in short width, in short height);
+		void setCanvasSize (in short x, in short y, in short width, in short height);
 
 		/**
-		 * set_bounds:
+		 * setBounds:
 		 * @bbox: the requested bounding box.
 		 *
 		 * Sets the bounding box of the item to (x1,y1)-(x2,y2)
 		 *
 		 */
-		void set_bounds (in DRect bbox);
+		void setBounds (in DRect bbox);
 	};
 
 	/*
@@ -229,7 +231,7 @@ module Canvas {
 	 */
 	
 	interface ComponentProxy {
-		void request_update (in ArtUTA uta);
+		void updateArea (in ArtUTA uta);
 	};
 };
 

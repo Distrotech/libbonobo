@@ -526,7 +526,7 @@ bonobo_object_query_local_interface (BonoboObject *object,
 }
 
 static CORBA_Object
-impl_Bonobo_Unknown_query_interface (PortableServer_Servant  servant,
+impl_Bonobo_Unknown_queryInterface (PortableServer_Servant  servant,
 				     const CORBA_char       *repoid,
 				     CORBA_Environment      *ev)
 {
@@ -554,9 +554,9 @@ bonobo_object_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Unknown__epv, 1);
 
-	epv->ref             = impl_Bonobo_Unknown_ref;
-	epv->unref           = impl_Bonobo_Unknown_unref;
-	epv->query_interface = impl_Bonobo_Unknown_query_interface;
+	epv->ref            = impl_Bonobo_Unknown_ref;
+	epv->unref          = impl_Bonobo_Unknown_unref;
+	epv->queryInterface = impl_Bonobo_Unknown_queryInterface;
 
 	return epv;
 }
@@ -898,7 +898,7 @@ bonobo_object_query_interface (BonoboObject *object, const char *repo_id)
        CORBA_Object retval;
 
        CORBA_exception_init(&ev);
-       retval = Bonobo_Unknown_query_interface (object->corba_objref, (CORBA_char *)repo_id, &ev);
+       retval = Bonobo_Unknown_queryInterface (object->corba_objref, (CORBA_char *)repo_id, &ev);
        if (ev._major != CORBA_NO_EXCEPTION)
                retval = CORBA_OBJECT_NIL;
        CORBA_exception_free (&ev);

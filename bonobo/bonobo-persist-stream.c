@@ -94,10 +94,10 @@ bonobo_persist_stream_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_PersistStream__epv, 1);
 
-	epv->load		= impl_load;
-	epv->save		= impl_save;
-	epv->get_size_max	= impl_get_size_max;
-	epv->is_dirty		= impl_is_dirty;
+	epv->load       = impl_load;
+	epv->save       = impl_save;
+	epv->getMaxSize = impl_get_size_max;
+	epv->isDirty    = impl_is_dirty;
 
 	return epv;
 }

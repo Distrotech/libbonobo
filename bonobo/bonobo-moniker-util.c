@@ -101,7 +101,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 		}
 	}
 
-	toplevel = Bonobo_Unknown_query_interface (
+	toplevel = Bonobo_Unknown_queryInterface (
 		object, "IDL:Bonobo/Moniker:1.0", ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
@@ -113,7 +113,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 		return CORBA_OBJECT_NIL;
 	}
 
-	moniker = Bonobo_Moniker_parse_display_name (toplevel, parent,
+	moniker = Bonobo_Moniker_parseDisplayName (toplevel, parent,
 						     name, ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		return CORBA_OBJECT_NIL;
@@ -141,7 +141,7 @@ bonobo_moniker_util_get_parent_name (Bonobo_Moniker     moniker,
 	    parent == CORBA_OBJECT_NIL)
 		return NULL;
 	
-	name = Bonobo_Moniker_get_display_name (parent, ev);
+	name = Bonobo_Moniker_getDisplayName (parent, ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		name = NULL;
@@ -168,7 +168,7 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 		return CORBA_OBJECT_NIL;
 	}
 
-	retval = Bonobo_Unknown_query_interface (
+	retval = Bonobo_Unknown_queryInterface (
 		object, requested_interface, ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
@@ -236,7 +236,7 @@ bonobo_moniker_client_get_name (Bonobo_Moniker     moniker,
 	g_return_val_if_fail (ev != NULL, NULL);
 	g_return_val_if_fail (moniker != CORBA_OBJECT_NIL, NULL);
 
-	name = Bonobo_Moniker_get_display_name (moniker, ev);
+	name = Bonobo_Moniker_getDisplayName (moniker, ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		return NULL;

@@ -35,29 +35,29 @@ typedef enum {
         OD_REG_ERROR
 } ODRegistrationResult;
 
-CORBA_ORB            od_get_orb                     (void);
+CORBA_ORB            bonobo_directory_get_orb                     (void);
 
-ODServerInfo        *od_server_info_new             (const gchar       *iid,
+ODServerInfo        *bonobo_directory_new_server_info             (const gchar       *iid,
 						     const gchar       *name,
                                                      const gchar       *desc);
-const gchar         *od_server_info_get_id          (ODServerInfo      *info);
-const gchar         *od_server_info_get_name        (ODServerInfo      *info);
-const gchar         *od_server_info_get_description (ODServerInfo      *info);
-void                 od_server_info_ref             (ODServerInfo      *info);
-void                 od_server_info_unref           (ODServerInfo      *info);
+const gchar         *bonobo_directory_get_server_info_id          (ODServerInfo      *info);
+const gchar         *bonobo_directory_get_server_info_name        (ODServerInfo      *info);
+const gchar         *bonobo_directory_get_server_info_description (ODServerInfo      *info);
+void                 bonobo_directory_server_info_ref             (ODServerInfo      *info);
+void                 bonobo_directory_server_info_unref           (ODServerInfo      *info);
 
 /* returns list of ODServerInfo */
-GList               *od_get_server_list             (const gchar      **required_ids);
-void                 od_server_list_free            (GList             *list);
+GList               *bonobo_directory_get_server_list             (const gchar      **required_ids);
+void                 bonobo_directory_free_server_list            (GList             *list);
 CORBA_Object         od_server_activate_with_id     (const gchar       *iid,
 						     gint               flags,
                                                      CORBA_Environment *ev);
-ODRegistrationResult od_server_register             (CORBA_Object       objref,
+ODRegistrationResult bonobo_directory_register_server             (CORBA_Object       objref,
                                                      const gchar       *iid);
-ODRegistrationResult od_server_unregister           (CORBA_Object       objref,
+ODRegistrationResult bonobo_directory_unregister_server           (CORBA_Object       objref,
 						     const gchar       *iid);
 
-CORBA_Object         od_name_service_get            (CORBA_Environment *ev);
+CORBA_Object         bonobo_directory_get_name_service            (CORBA_Environment *ev);
 
 char                *bonobo_directory_find_for_file (const char  *fname,
 						     const char **required_ids,

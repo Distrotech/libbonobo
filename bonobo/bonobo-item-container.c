@@ -92,7 +92,8 @@ bonobo_item_container_destroy (GtkObject *object)
  * Returns a list of the objects in this container
  */
 static Bonobo_ItemContainer_ObjectList *
-impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
+impl_Bonobo_ItemContainer_enumObjects (PortableServer_Servant servant,
+				       CORBA_Environment *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboItemContainer *container = BONOBO_ITEM_CONTAINER (object);
@@ -131,10 +132,10 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 static Bonobo_Unknown
-impl_get_object (PortableServer_Servant servant,
-		 const CORBA_char      *item_name,
-		 CORBA_boolean          only_if_exists,
-		 CORBA_Environment     *ev)
+impl_Bonobo_ItemContainer_getObjectByName (PortableServer_Servant servant,
+					   const CORBA_char      *item_name,
+					   CORBA_boolean          only_if_exists,
+					   CORBA_Environment     *ev)
 {
 	Bonobo_Unknown ret;
 	
@@ -160,8 +161,8 @@ bonobo_item_container_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_ItemContainer__epv, 1);
 
-	epv->enum_objects = impl_enum_objects;
-	epv->get_object   = impl_get_object;
+	epv->enumObjects     = impl_Bonobo_ItemContainer_enumObjects;
+	epv->getObjectByName = impl_Bonobo_ItemContainer_getObjectByName;
 
 	return epv;
 }

@@ -80,7 +80,7 @@ item_resolve (BonoboMoniker               *moniker,
 		goto return_unref_parent;
 	}
 
-	containee = Bonobo_ItemContainer_get_object (
+	containee = Bonobo_ItemContainer_getObjectByName (
 		container, bonobo_moniker_get_name (moniker, PREFIX_LEN),
 		TRUE, ev);
 

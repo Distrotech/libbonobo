@@ -19,7 +19,7 @@ static BonoboObjectClass *bonobo_progressive_data_sink_parent_class;
 POA_Bonobo_ProgressiveDataSink__vepv bonobo_progressive_data_sink_vepv;
 
 static void
-impl_start (PortableServer_Servant servant,
+impl_Bonobo_ProgressiveDataSink_start (PortableServer_Servant servant,
 	    CORBA_Environment *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
@@ -41,10 +41,10 @@ impl_start (PortableServer_Servant servant,
 		g_warning ("FIXME: should report an exception");
 	}
 	
-} /* impl_start */
+} /* impl_Bonobo_ProgressiveDataSink_start */
 
 static void
-impl_end (PortableServer_Servant servant,
+impl_Bonobo_ProgressiveDataSink_end (PortableServer_Servant servant,
 	  CORBA_Environment *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
@@ -66,12 +66,12 @@ impl_end (PortableServer_Servant servant,
 		g_warning ("FIXME: should report an exception");
 	}
 	
-} /* impl_end */
+} /* impl_Bonobo_ProgressiveDataSink_end */
 
 static void
-impl_add_data (PortableServer_Servant                 servant,
-	       const Bonobo_ProgressiveDataSink_iobuf *buffer,
-	       CORBA_Environment                     *ev)
+impl_Bonobo_ProgressiveDataSink_addData (PortableServer_Servant                 servant,
+					 const Bonobo_ProgressiveDataSink_iobuf *buffer,
+					 CORBA_Environment                      *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboProgressiveDataSink *psink = BONOBO_PROGRESSIVE_DATA_SINK (object);
@@ -81,8 +81,7 @@ impl_add_data (PortableServer_Servant                 servant,
 		result = (*psink->add_data_fn) (psink,
 						buffer,
 						psink->closure);
-	else
-	{
+	else {
 		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
 		BonoboProgressiveDataSinkClass *class =
 			BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
@@ -91,16 +90,14 @@ impl_add_data (PortableServer_Servant                 servant,
 	}
 
 	if (result != 0)
-	{
 		g_warning ("FIXME: should report an exception");
-	}
 	
-} /* impl_add_data */
+} /* impl_Bonobo_ProgressiveDataSink_add_data */
 
 static void
-impl_set_size (PortableServer_Servant servant,
-	       CORBA_long count,
-	       CORBA_Environment *ev)
+impl_Bonobo_ProgressiveDataSink_setSize (PortableServer_Servant servant,
+					 CORBA_long             count,
+					 CORBA_Environment     *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboProgressiveDataSink *psink = BONOBO_PROGRESSIVE_DATA_SINK (object);
@@ -110,8 +107,7 @@ impl_set_size (PortableServer_Servant servant,
 		result = (*psink->set_size_fn) (psink,
 						count,
 						psink->closure);
-	else
-	{
+	else {
 		GtkObjectClass *oc = GTK_OBJECT (psink)->klass;
 		BonoboProgressiveDataSinkClass *class =
 			BONOBO_PROGRESSIVE_DATA_SINK_CLASS (oc);
@@ -120,11 +116,8 @@ impl_set_size (PortableServer_Servant servant,
 	}
 
 	if (result != 0)
-	{
 		g_warning ("FIXME: should report an exception");
-	}
-	
-} /* impl_set_size */
+} /* impl_Bonobo_ProgressiveDataSink_set_size */
 
 /**
  * bonobo_progressive_get_epv:
@@ -136,10 +129,10 @@ bonobo_progressive_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_ProgressiveDataSink__epv, 1);
 
-	epv->start	= impl_start;
-	epv->end	= impl_end;
-	epv->add_data	= impl_add_data;
-	epv->set_size	= impl_set_size;
+	epv->start   = impl_Bonobo_ProgressiveDataSink_start;
+	epv->end     = impl_Bonobo_ProgressiveDataSink_end;
+	epv->addData = impl_Bonobo_ProgressiveDataSink_addData;
+	epv->setSize = impl_Bonobo_ProgressiveDataSink_setSize;
 
 	return epv;
 }

@@ -30,14 +30,14 @@ module Bonobo {
 		void unref ();
 
 		/**
-		 * query_interface:
+		 * queryInterface:
 		 * @repoid: A string identifying an interface.
 		 *
 		 * Returns: A CORBA object exposing the interface
 		 * specified by @repoid, or a nil object if the
 		 * interface cannot be queried.
 		 */
-		Unknown query_interface (in string repoid);
+		Unknown queryInterface (in string repoid);
 	};
 };
 

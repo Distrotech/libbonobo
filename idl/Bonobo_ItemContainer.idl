@@ -13,11 +13,11 @@ module Bonobo {
 		typedef sequence<Unknown> ObjectList;
 
 		/**
-		 * enum_objects:
+		 * enumObjects:
 		 *
 		 * Returns: a list of the objects contained by this container
 		 */
-		ObjectList enum_objects ();
+		ObjectList enumObjects ();
 
 		/**
 		 * NotFound{}:
@@ -36,12 +36,12 @@ module Bonobo {
 		exception SyntaxError {};
 
 		/**
-		 * get_object:
+		 * getObjectByName:
 		 * @item_name: Item name to bind to
 		 * @only_if_exists: if TRUE, only bind if this object currently exists
 		 * otherwise, it will try to create the server for it.
 		 */
-		Unknown get_object (in string item_name, in boolean only_if_exists)
+		Unknown getObjectByName (in string item_name, in boolean only_if_exists)
 			raises (SyntaxError, NotFound);
 	};
 };
