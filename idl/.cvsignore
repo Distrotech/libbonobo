@@ -3,3 +3,5 @@ Makefile
 Bonobo.h
 Bonobo-imodule.c
 Bonobo-common.c
+.deps
+.libs
