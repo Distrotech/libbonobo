@@ -178,8 +178,9 @@ bonobo_generic_factory_finalize (GObject *object)
 	BonoboGenericFactory *factory G_GNUC_UNUSED = BONOBO_GENERIC_FACTORY (object);
 
 	if (factory->priv) {
-		bonobo_activation_active_server_unregister (
-			factory->priv->act_iid, BONOBO_OBJREF (factory));
+		if (factory->priv->act_iid)
+			bonobo_activation_active_server_unregister (
+				factory->priv->act_iid, BONOBO_OBJREF (factory));
 
 		g_free (factory->priv->act_iid);
 		g_closure_unref (factory->priv->factory_closure);
