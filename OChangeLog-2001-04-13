@@ -1,3 +1,8 @@
+2000-09-16  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_get_ui_fname): Add a
+	component prefix.
+
 2000-09-15  Mike Kestner <mkestner@ameritech.net>
 
 	*bonobo/bonobo-property-bag.c (impl_Bonobo_PropertyBag_add_listener):
