@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-08-01 08:10+0100\n"
+"POT-Creation-Date: 2001-08-05 13:13+0200\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -122,9 +122,12 @@ msgid "Error checking error; no exception"
 msgstr "Error al comprobar el error; no hay excepción"
 
 #: bonobo/bonobo-exception.c:269
-#, fuzzy
 msgid "General activation error with no description"
-msgstr "Error de sintaxis en la descripción del objeto"
+msgstr "Error de activación general sin descripción"
+
+#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+msgid "Could not initialize Bonobo"
+msgstr "No pude inicializar Bonobo"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
@@ -153,27 +156,3 @@ msgstr "moniker genérico de elemento"
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "flujo de datos MonikerExtender"
-
-#~ msgid "The User canceled the save"
-#~ msgstr "El usuario ha cancelado la acción de guardar"
-
-#~ msgid "Could not initialize Bonobo"
-#~ msgstr "No pude inicializar Bonobo"
-
-#~ msgid "No filename"
-#~ msgstr "No hay nombre de archivo"
-
-#~ msgid "unknown mime type for '%s'"
-#~ msgstr "tipo mime desconocido para '%s'"
-
-#~ msgid "no handlers for mime type '%s'"
-#~ msgstr "no hay manejadores para el tipo mime '%s'"
-
-#~ msgid "file MonikerExtender"
-#~ msgstr "archivo MonikerExtender"
-
-#~ msgid "generic file moniker"
-#~ msgstr "moniker generico de archivo"
-
-#~ msgid "Can not bonobo_init"
-#~ msgstr "No pude ejecutar bonobo_init"
