@@ -339,6 +339,19 @@ gnome_object_client_from_corba (GNOME_Unknown o)
 }
 
 
+/**
+ * gnome_object_client_query_interface:
+ * @object: object to query interface of
+ * @interface_desc: interface description
+ * @opt_ev: optional exception environment, or NULL
+ * 
+ * Queries the object to see if it implements the interface
+ * described by @interface_desc. Basicaly a thin
+ * GNOME_Unknown::query_interface wrapper.
+ * 
+ * Return value: A valid GNOME_Unknown reference or
+ *               CORBA_OBJECT_NIL if anything untoward happens.
+ **/
 GNOME_Unknown
 gnome_object_client_query_interface (GnomeObjectClient *object,
 				     const char *interface_desc,
