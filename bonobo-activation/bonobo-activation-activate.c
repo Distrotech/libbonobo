@@ -181,6 +181,6 @@ oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
 CORBA_Object oaf_name_service_get (CORBA_Environment * ev)
 {
 
-	return oaf_activate_from_id (""OAFIID:oaf_naming_service:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
+	return oaf_activate_from_id ("OAFIID:oaf_naming_service:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
 				     0, NULL, ev);
 }
