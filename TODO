@@ -14,8 +14,6 @@ Miguel's list
 * container-side verb-popup-menu construction helper function
 * Moniker sample code
 * Compile with zero warnings
-* Document sizing:
-	request_resize, size_allocate, size_request
 * Document signals, undo setup.
 * all interfaces (PersistStream, etc) documented with paragragraphs describing their purpose
 * Printing
