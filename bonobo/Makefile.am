@@ -152,3 +152,4 @@ dist-hook:
 	for file in $(DONT_DIST_SOURCE) ; do \
 	    rm -f $(distdir)/$$file ; \
 	done
+

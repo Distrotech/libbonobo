@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-07-24 11:50+0100\n"
+"POT-Creation-Date: 2002-10-18 12:13+0100\n"
 "PO-Revision-Date: 2002-07-24 11:51+0100\n"
 "Last-Translator: Sun G11n <gnome_int_l10n@ireland.sun.com>\n"
 "Language-Team: Sun G11n <gnome_int_l10n@ireland.sun.com>\n"
@@ -33,11 +33,10 @@ msgstr "未找到对象"
 msgid "Syntax error in object description"
 msgstr "对象描述中有语法错误"
 
-#: bonobo/bonobo-exception.c:172
 # SUN CHANGED MESSAGE
+#: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
 msgstr "无法从车间中激活对象"
-
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -172,11 +171,10 @@ msgstr "HTTP Moniker"
 msgid "ORB IOR handling moniker"
 msgstr "ORB IOR 处理 moniker"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:3
 # SUN CHANGED MESSAGE
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
 msgstr "标准 Moniker 车间"
-
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
@@ -186,11 +184,10 @@ msgstr "通用 Oaf 激活 moniker"
 msgid "generic Oaf query moniker"
 msgstr "通用 Oaf 查询 moniker"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 # SUN CHANGED MESSAGE
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
 msgstr "通用车间“新”moniker"
-
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
@@ -222,11 +219,10 @@ msgstr "Bonobo Echo server 示例程序"
 msgid "Echo component"
 msgstr "Echo 部件"
 
-#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 # SUN CHANGED MESSAGE
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
 msgstr "Echo 部件车间"
-
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"

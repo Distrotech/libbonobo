@@ -1,3 +1,15 @@
+libbonobo 2.0.1
+
+	* Bugs fixed
+		+ leak fix (Kjartan Maraas)
+		+ 64bit GType cleans (hhetter)
+		+ init/shutdown count (Padraig O'Briain)
+		+ -pthread LIBS fix (Michael)
+		+ build clean fixes (Padraig O'Briain)
+	* i18n
+		+ pt_BR, lv Gustavo Noronha Silva, Peteris Krisjanis
+		+ el, cs Simos Xenitellis, Stanislav Brabec
+
 libbonobo 2.0.0
 
 	* Featurelets

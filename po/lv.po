@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-08-26 05:07+0200\n"
+"POT-Creation-Date: 2002-10-18 12:13+0100\n"
 "PO-Revision-Date: 2002-08-30 13:59+0300\n"
 "Last-Translator: Peteris Krisjanis <peteris.krisjanis@os.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
@@ -234,4 +234,3 @@ msgstr "Es nespēju izveidot instanci parauga echo komponentam"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Parādījies izņēmums '%s'"
-

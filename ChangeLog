@@ -1,3 +1,7 @@
+2002-10-18  Michael Meeks  <michael@ximian.com>
+
+	* Version 2.0.1
+
 2002-10-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-exception.c (bonobo_exception_general_error_set):

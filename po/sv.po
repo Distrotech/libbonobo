@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-08-03 02:59+0200\n"
+"POT-Creation-Date: 2002-10-18 12:13+0100\n"
 "PO-Revision-Date: 2002-08-03 02:59+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
