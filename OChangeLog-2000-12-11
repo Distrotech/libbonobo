@@ -1,3 +1,11 @@
+1999-08-07    <miguel@gnu.org>
+
+	* bonobo/Makefile.am: Kill -Wstrict-prototypes.  
+
+	If you feel like today is a good day to add a warning to the
+	Makefile.am do *PUT* a ChangeLog entry.  And no, it was not
+	correct. 
+
 1999-08-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* bonobo/gnome-moniker-client.[ch]: added some #includes to
