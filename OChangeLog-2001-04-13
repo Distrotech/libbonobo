@@ -1,12 +1,12 @@
 2000-01-30  Martijn van Beers  <martijn@earthling.net>
 
 	Re-commit my 2000-01-25 patch:
-	* bonobo/idl/gnome-ui-handler.idl: replace MenuItemNotFound and
+	* bonobo/idl/bonobo-ui-handler.idl: replace MenuItemNotFound and
 	ToolbarItemNotFound exceptions by a more generic PathNotFound
 	exception. Also added a NotToplevelHandler exception, and made
 	all the applicable (almost all of them) use these exceptions.
 
-	* bonobo/bonobo/gnome-ui-handler.c: Make all the CORBA method
+	* bonobo/bonobo/bonobo-ui-handler.c: Make all the CORBA method
 	implementations emit the exceptions they can throw when needed
 
 2000-01-30  Ettore Perazzoli  <ettore@helixcode.com>
