@@ -1,3 +1,14 @@
+2005-02-03  Mark McLoughlin  <mark@skynet.ie>
+
+	Fix problem with locale env variables getting cocked up.
+	Based on patch from Ryan Lortie <desrt@desrt.ca> in
+	bug #164303
+
+	* bonobo-activation/bonobo-activation-activate.c:
+	(bonobo_activation_init_activation_env): treat LC_* just
+	the same as all other environment variables rather than
+	trying to be clever with selocale().
+
 2005-02-02  Hans Petter Jansson  <hpj@novell.com>
 
 	* configure.in: Add checks for Apple Darwin's way of getting
