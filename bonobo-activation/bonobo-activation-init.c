@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 #include "config.h"
 
 #include "liboaf/liboaf-private.h"
@@ -27,42 +28,42 @@ static int oaf_corba_prio = G_PRIORITY_LOW;
 #ifndef ORBIT_USES_GLIB_MAIN_LOOP
 
 static gboolean
-orb_handle_connection(GIOChannel *source, GIOCondition cond,
-		      GIOPConnection *cnx)
+orb_handle_connection (GIOChannel * source, GIOCondition cond,
+		       GIOPConnection * cnx)
 {
 	/* The best way to know about an fd exception is if select()/poll()
 	 * tells you about it, so we just relay that information on to ORBit
 	 * if possible
 	 */
-	
-	if(cond & (G_IO_HUP|G_IO_NVAL|G_IO_ERR))
-		giop_main_handle_connection_exception(cnx);
+
+	if (cond & (G_IO_HUP | G_IO_NVAL | G_IO_ERR))
+		giop_main_handle_connection_exception (cnx);
 	else
-		giop_main_handle_connection(cnx);
-	
+		giop_main_handle_connection (cnx);
+
 	return TRUE;
 }
 
 static void
-orb_add_connection(GIOPConnection *cnx)
+orb_add_connection (GIOPConnection * cnx)
 {
 	int tag;
 	GIOChannel *channel;
-	
-	channel = g_io_channel_unix_new(GIOP_CONNECTION_GET_FD(cnx));
-	tag = g_io_add_watch_full   (channel, oaf_corba_prio,
-				     G_IO_IN|G_IO_ERR|G_IO_HUP|G_IO_NVAL, 
-				     (GIOFunc)orb_handle_connection,
-				     cnx, NULL);
+
+	channel = g_io_channel_unix_new (GIOP_CONNECTION_GET_FD (cnx));
+	tag = g_io_add_watch_full (channel, oaf_corba_prio,
+				   G_IO_IN | G_IO_ERR | G_IO_HUP | G_IO_NVAL,
+				   (GIOFunc) orb_handle_connection,
+				   cnx, NULL);
 	g_io_channel_unref (channel);
-	
+
 	cnx->user_data = GUINT_TO_POINTER (tag);
 }
 
 static void
-orb_remove_connection(GIOPConnection *cnx)
+orb_remove_connection (GIOPConnection * cnx)
 {
-	g_source_remove(GPOINTER_TO_UINT (cnx->user_data));
+	g_source_remove (GPOINTER_TO_UINT (cnx->user_data));
 	cnx->user_data = GINT_TO_POINTER (-1);
 }
 
@@ -74,67 +75,70 @@ static CORBA_Context oaf_context;
 static gboolean is_initialized = FALSE;
 
 CORBA_ORB
-oaf_orb_get(void)
+oaf_orb_get (void)
 {
-  return oaf_orb;
+	return oaf_orb;
 }
 
 const char *
-oaf_hostname_get(void)
+oaf_hostname_get (void)
 {
-  static char *hostname = NULL;
-  char hn_tmp[65];
-  struct hostent *hent, *hent2;
+	static char *hostname = NULL;
+	char hn_tmp[65];
+	struct hostent *hent, *hent2;
 
-  if(!hostname)
-    {
-      gethostname(hn_tmp, sizeof(hn_tmp) - 1);
-      
-      hent = gethostbyname(hn_tmp);
-      if(hent) {
-	hent2 = gethostbyaddr(hent->h_addr, 4, AF_INET);
-	if(hent2)
-	  hostname = g_strdup(hent2->h_name);
-	else
-	  hostname = g_strdup(inet_ntoa(*((struct in_addr *)hent->h_addr)));
-      } else
-	hostname = g_strdup(hn_tmp);
-    }
+	if (!hostname) {
+		gethostname (hn_tmp, sizeof (hn_tmp) - 1);
 
-  return hostname;
+		hent = gethostbyname (hn_tmp);
+		if (hent) {
+			hent2 = gethostbyaddr (hent->h_addr, 4, AF_INET);
+			if (hent2)
+				hostname = g_strdup (hent2->h_name);
+			else
+				hostname =
+					g_strdup (inet_ntoa
+						  (*
+						   ((struct in_addr *)
+						    hent->h_addr)));
+		} else
+			hostname = g_strdup (hn_tmp);
+	}
+
+	return hostname;
 }
 
 CORBA_Context
-oaf_context_get(void)
+oaf_context_get (void)
 {
-  return oaf_context;
+	return oaf_context;
 }
 
 const char *
-oaf_session_name_get(void)
+oaf_session_name_get (void)
 {
-  const char *dumbptr = "local";
+	const char *dumbptr = "local";
 
-  return dumbptr;
+	return dumbptr;
 }
 
 const char *
-oaf_domain_get(void)
+oaf_domain_get (void)
 {
-  return "session";
+	return "session";
 }
 
 CORBA_Object
-oaf_activation_context_get(void)
+oaf_activation_context_get (void)
 {
-  OAFRegistrationCategory regcat;
+	OAFRegistrationCategory regcat;
 
-  memset(&regcat, 0, sizeof(regcat));
-  regcat.name = "IDL:OAF/ActivationContext:1.0";
-  regcat.session_name = oaf_session_name_get();
-  regcat.domain = "session";
+	memset (&regcat, 0, sizeof (regcat));
+	regcat.name = "IDL:OAF/ActivationContext:1.0";
+	regcat.session_name = oaf_session_name_get ();
+	regcat.domain = "session";
 
-  return oaf_service_get(&regcat);
+	return oaf_service_get (&regcat);
 }
 
 static char *oaf_od_ior = NULL;
@@ -142,233 +146,247 @@ static int oaf_ior_fd = 1;
 static char *oaf_activate_iid = NULL;
 
 struct poptOption oaf_popt_options[] = {
-  {"oaf-od-ior", '\0', POPT_ARG_STRING, &oaf_od_ior, 0, "Object directory to use when registering servers", "IOR"},
-  {"oaf-ior-fd", '\0', POPT_ARG_INT, &oaf_ior_fd, 0, "File descriptor to print IOR on", "FD"},
-  {"oaf-activate-iid", '\0', POPT_ARG_STRING, &oaf_activate_iid, 0, "IID to activate", "IID"},
-  {NULL}
+
+	{"oaf-od-ior", '\0', POPT_ARG_STRING, &oaf_od_ior, 0,
+	 "Object directory to use when registering servers", "IOR"},
+	{"oaf-ior-fd", '\0', POPT_ARG_INT, &oaf_ior_fd, 0,
+	 "File descriptor to print IOR on", "FD"},
+	{"oaf-activate-iid", '\0', POPT_ARG_STRING, &oaf_activate_iid, 0,
+	 "IID to activate", "IID"},
+	{NULL}
 };
 
 const char *
-oaf_activation_iid_get(void)
+oaf_activation_iid_get (void)
 {
-  return oaf_activate_iid;
+	return oaf_activate_iid;
 }
 
 int
-oaf_ior_fd_get(void)
+oaf_ior_fd_get (void)
 {
-  return oaf_ior_fd;
+	return oaf_ior_fd;
 }
 
 /* If it is specified on the command line, it overrides everything else */
 static char *
-cmdline_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCategory *regcat,
-	      int *ret_distance, gpointer user_data)
+cmdline_check (const OAFRegistrationLocation * regloc,
+	       const OAFRegistrationCategory * regcat, int *ret_distance,
+	       gpointer user_data)
 {
-  if(!strcmp(regcat->name, "IDL:OAF/ObjectDirectory:1.0"))
-     {
-       *ret_distance = 0;
-       return g_strdup(oaf_od_ior);
-     }
+	if (!strcmp (regcat->name, "IDL:OAF/ObjectDirectory:1.0")) {
+		*ret_distance = 0;
+		return g_strdup (oaf_od_ior);
+	}
 
-  return NULL;
+	return NULL;
 }
 
 static OAFRegistrationLocation cmdline_regloc = {
-  NULL,
-  NULL,
-  cmdline_check,
-  NULL,
-  NULL
+	NULL,
+	NULL,
+	cmdline_check,
+	NULL,
+	NULL
 };
 
 /* If it is specified on the command line, it overrides everything else */
 static char *
-ac_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCategory *regcat,
-	 int *ret_distance, gpointer user_data)
+ac_check (const OAFRegistrationLocation * regloc,
+	  const OAFRegistrationCategory * regcat, int *ret_distance,
+	  gpointer user_data)
 {
-  if(!strcmp(regcat->name, "IDL:OAF/ObjectDirectory:1.0"))
-     {
-       OAF_ActivationContext ac;
-       OAF_ObjectDirectoryList *od;
-       CORBA_Environment ev;
-       char *retval, *str_ior;
+	if (!strcmp (regcat->name, "IDL:OAF/ObjectDirectory:1.0")) {
+		OAF_ActivationContext ac;
+		OAF_ObjectDirectoryList *od;
+		CORBA_Environment ev;
+		char *retval, *str_ior;
 
-       ac = oaf_activation_context_get();
+		ac = oaf_activation_context_get ();
 
-       CORBA_exception_init(&ev);
-       if(CORBA_Object_is_nil(ac, &ev))
-	 return NULL;
+		CORBA_exception_init (&ev);
+		if (CORBA_Object_is_nil (ac, &ev))
+			return NULL;
 
-       od = OAF_ActivationContext__get_directories(ac, &ev);
-       if(ev._major != CORBA_NO_EXCEPTION)
-	 {
-	   CORBA_exception_free(&ev);
-	   return NULL;
-	 }
+		od = OAF_ActivationContext__get_directories (ac, &ev);
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			CORBA_exception_free (&ev);
+			return NULL;
+		}
 
-       if(od->_length < 1)
-	 {
-	   CORBA_free(od);
-	   CORBA_exception_free(&ev);
-	   return NULL;
-	 }
+		if (od->_length < 1) {
+			CORBA_free (od);
+			CORBA_exception_free (&ev);
+			return NULL;
+		}
 
-       str_ior = CORBA_ORB_object_to_string(oaf_orb_get(), od->_buffer[0], &ev);
-       if(ev._major != CORBA_NO_EXCEPTION)
-	 {
-	   CORBA_free(od);
-	   CORBA_exception_free(&ev);
-	   return NULL;
-	 }
-       retval = g_strdup(str_ior);
-       CORBA_free(str_ior);
+		str_ior =
+			CORBA_ORB_object_to_string (oaf_orb_get (),
+						    od->_buffer[0], &ev);
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			CORBA_free (od);
+			CORBA_exception_free (&ev);
+			return NULL;
+		}
+		retval = g_strdup (str_ior);
+		CORBA_free (str_ior);
 
-       *ret_distance = 1;
+		*ret_distance = 1;
 
-       CORBA_free(od);
-       
-       return retval;
-     }
+		CORBA_free (od);
 
-  return NULL;
+		return retval;
+	}
+
+	return NULL;
 }
 
 static OAFRegistrationLocation ac_regloc = {
-  NULL,
-  NULL,
-  ac_check,
-  NULL,
-  NULL
+	NULL,
+	NULL,
+	ac_check,
+	NULL,
+	NULL
 };
 
 #define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
 
 static CORBA_Object
-local_activator(const OAFRegistrationCategory *regcat, const char **cmd,
-		int ior_fd, CORBA_Environment *ev)
+local_activator (const OAFRegistrationCategory * regcat, const char **cmd,
+		 int ior_fd, CORBA_Environment * ev)
 {
-  if((!regcat->username || STRMATCH(regcat->username, g_get_user_name()))
-     && (!regcat->hostname || STRMATCH(regcat->hostname, oaf_hostname_get()))
-     && (!regcat->domain || STRMATCH(regcat->domain, oaf_domain_get())))
-    {
-      return oaf_server_by_forking(cmd, ior_fd, ev);
-    }
+	if (
+	    (!regcat->username
+	     || STRMATCH (regcat->username, g_get_user_name ()))
+	    && (!regcat->hostname
+		|| STRMATCH (regcat->hostname, oaf_hostname_get ()))
+	    && (!regcat->domain
+		|| STRMATCH (regcat->domain, oaf_domain_get ()))) {
+		return oaf_server_by_forking (cmd, ior_fd, ev);
+	}
 
-  return CORBA_OBJECT_NIL;
+	return CORBA_OBJECT_NIL;
 }
 
 void
-oaf_preinit(gpointer app, gpointer mod_info)
+oaf_preinit (gpointer app, gpointer mod_info)
 {
 }
 
 void
-oaf_postinit(gpointer app, gpointer mod_info)
+oaf_postinit (gpointer app, gpointer mod_info)
 {
-  oaf_registration_activator_add(local_activator, 0);
+	oaf_registration_activator_add (local_activator, 0);
 
-  oaf_registration_location_add(&ac_regloc, -500, NULL);
+	oaf_registration_location_add (&ac_regloc, -500, NULL);
 
-  oaf_rloc_file_register();
+	oaf_rloc_file_register ();
 
-  if(oaf_ior_fd > 2)
-    fcntl(oaf_ior_fd, F_SETFD, FD_CLOEXEC);
+	if (oaf_ior_fd > 2)
+		fcntl (oaf_ior_fd, F_SETFD, FD_CLOEXEC);
 
-  if(oaf_od_ior)
-    oaf_registration_location_add(&cmdline_regloc, -1000, NULL);
+	if (oaf_od_ior)
+		oaf_registration_location_add (&cmdline_regloc, -1000, NULL);
 
-  is_initialized = TRUE;
+	is_initialized = TRUE;
 }
 
 static void
-do_barrier(int signum)
+do_barrier (int signum)
 {
-  volatile int barrier = 1;
+	volatile int barrier = 1;
 
-  while(barrier);
+	while (barrier);
 }
 
 gboolean
-oaf_is_initialized(void)
+oaf_is_initialized (void)
 {
-  return is_initialized;
+	return is_initialized;
 }
 
 CORBA_ORB
-oaf_init(int argc, char **argv)
+oaf_init (int argc, char **argv)
 {
-  CORBA_ORB retval;
-  int i;
+	CORBA_ORB retval;
+	int i;
 
-  g_return_val_if_fail(is_initialized == FALSE, oaf_orb);
-  
-  oaf_preinit(NULL, NULL);
+	g_return_val_if_fail (is_initialized == FALSE, oaf_orb);
 
-  retval = oaf_orb_init(&argc, argv);
+	oaf_preinit (NULL, NULL);
 
-  /* Handle non-popt case */
-  for(i = 1; i < argc; i++)
-    {
-      if(!strncmp("--oaf-od-ior=", argv[i], strlen("--oaf-od-ior="))) {
-	oaf_od_ior = argv[i] + strlen("--oaf-od-ior=");
-      } else if(!strncmp("--oaf-ior-fd=", argv[i], strlen("--oaf-ior-fd="))) {
-	oaf_ior_fd = atoi(argv[i] + strlen("--oaf-ior-fd="));
-	if(!oaf_ior_fd)
-	  oaf_ior_fd = 1;
-      } else if(!strncmp("--oaf-activate-iid=", argv[i], strlen("--oaf-activate-iid="))) {
-	oaf_activate_iid = argv[i] + strlen("--oaf-activate-iid=");
-      }
-    }
+	retval = oaf_orb_init (&argc, argv);
 
-  oaf_postinit(NULL, NULL);  
-  
-  return retval;
+	/* Handle non-popt case */
+	for (i = 1; i < argc; i++) {
+		if (!strncmp
+		    ("--oaf-od-ior=", argv[i], strlen ("--oaf-od-ior="))) {
+			oaf_od_ior = argv[i] + strlen ("--oaf-od-ior=");
+		} else
+			if (!strncmp
+			    ("--oaf-ior-fd=", argv[i],
+			     strlen ("--oaf-ior-fd="))) {
+			oaf_ior_fd =
+				atoi (argv[i] + strlen ("--oaf-ior-fd="));
+			if (!oaf_ior_fd)
+				oaf_ior_fd = 1;
+		} else
+			if (!strncmp
+			    ("--oaf-activate-iid=", argv[i],
+			     strlen ("--oaf-activate-iid="))) {
+			oaf_activate_iid =
+				argv[i] + strlen ("--oaf-activate-iid=");
+		}
+	}
+
+	oaf_postinit (NULL, NULL);
+
+	return retval;
 }
 
 CORBA_ORB
-oaf_orb_init(int *argc, char **argv)
+oaf_orb_init (int *argc, char **argv)
 {
-  CORBA_Environment ev;
-  const char *hostname;
+	CORBA_Environment ev;
+	const char *hostname;
 
 #ifndef ORBIT_USES_GLIB_MAIN_LOOP
-  IIOPAddConnectionHandler = orb_add_connection;
-  IIOPRemoveConnectionHandler = orb_remove_connection;
+	IIOPAddConnectionHandler = orb_add_connection;
+	IIOPRemoveConnectionHandler = orb_remove_connection;
 #endif /* !ORBIT_USES_GLIB_MAIN_LOOP */
 
-  CORBA_exception_init(&ev);
+	CORBA_exception_init (&ev);
 
-  oaf_orb = CORBA_ORB_init(argc, argv, "orbit-local-orb", &ev);
-  g_assert(ev._major == CORBA_NO_EXCEPTION);
+	oaf_orb = CORBA_ORB_init (argc, argv, "orbit-local-orb", &ev);
+	g_assert (ev._major == CORBA_NO_EXCEPTION);
 
-  /* Set values in default context */
-  CORBA_ORB_get_default_context(oaf_orb, &oaf_context, &ev);
-  g_assert(ev._major == CORBA_NO_EXCEPTION);
+	/* Set values in default context */
+	CORBA_ORB_get_default_context (oaf_orb, &oaf_context, &ev);
+	g_assert (ev._major == CORBA_NO_EXCEPTION);
 
-  hostname = oaf_hostname_get();
-  CORBA_Context_set_one_value(oaf_context, "hostname", (char *)hostname, &ev);
-  CORBA_Context_set_one_value(oaf_context, "domain", "user", &ev);
-  CORBA_Context_set_one_value(oaf_context, "username", g_get_user_name(), &ev);
+	hostname = oaf_hostname_get ();
+	CORBA_Context_set_one_value (oaf_context, "hostname",
+				     (char *) hostname, &ev);
+	CORBA_Context_set_one_value (oaf_context, "domain", "user", &ev);
+	CORBA_Context_set_one_value (oaf_context, "username",
+				     g_get_user_name (), &ev);
 
-  CORBA_exception_free(&ev);
+	CORBA_exception_free (&ev);
 
 #ifdef OAF_DEBUG
-  if(getenv("OAF_TRAP_SEGV"))
-    {
-      struct sigaction sa;
-      sa.sa_handler = do_barrier;
-      sigaction(SIGSEGV, &sa, NULL);
-      sigaction(SIGPIPE, &sa, NULL);
-    }
-  if(getenv("OAF_BARRIER_INIT"))
-    {
-      volatile int barrier=1;
-      while(barrier);
-    }
+	if (getenv ("OAF_TRAP_SEGV")) {
+		struct sigaction sa;
+		sa.sa_handler = do_barrier;
+		sigaction (SIGSEGV, &sa, NULL);
+		sigaction (SIGPIPE, &sa, NULL);
+	}
+	if (getenv ("OAF_BARRIER_INIT")) {
+		volatile int barrier = 1;
+		while (barrier);
+	}
 #endif
 
-  return oaf_orb;
+	return oaf_orb;
 }
 
 #else
@@ -379,5 +397,5 @@ oaf_orb_init(int *argc, char **argv)
 
 const char liboaf_version[] = VERSION;
 const guint liboaf_major_version = OAF_MAJOR_VERSION,
-  liboaf_minor_version = OAF_MINOR_VERSION,
-  liboaf_micro_version = OAF_MICRO_VERSION;
+	liboaf_minor_version = OAF_MINOR_VERSION,
+	liboaf_micro_version = OAF_MICRO_VERSION;

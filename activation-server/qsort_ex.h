@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* qsrt_ex.h: version of qsort() that allows a user data arg to the
    compare function.
  
@@ -23,9 +24,10 @@
 #ifndef QSORT_EX_H
 #define QSORT_EX_H
 
-typedef int (*compar_ex_fn_t) (const void *a, const void *b, const void *user_data);
+typedef int (*compar_ex_fn_t) (const void *a, const void *b,
+			       const void *user_data);
 
-extern void qsort_ex (void *const pbase, size_t total_elems, size_t size, compar_ex_fn_t cmp, void *user_data);
+extern void qsort_ex (void *const pbase, size_t total_elems, size_t size,
+		      compar_ex_fn_t cmp, void *user_data);
 
 #endif
-

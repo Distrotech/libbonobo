@@ -1,126 +1,140 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 #include "liboaf-private.h"
 
 #include <gmodule.h>
 /* ORBit-specific hack */
 #include <orb/orbit_poa.h>
 
-typedef struct {
-  GModule *loaded;
-  int refcount;
-  char filename[1];
-} ActivePluginInfo;
+typedef struct
+{
+	GModule *loaded;
+	int refcount;
+	char filename[1];
+}
+ActivePluginInfo;
 
 static GHashTable *living_by_filename = NULL;
 
 static void
-gnome_plugin_unload(gpointer data, gpointer user_data)
+gnome_plugin_unload (gpointer data, gpointer user_data)
 {
-  ActivePluginInfo *api = user_data;
-  g_module_close(api->loaded);
-  g_hash_table_remove(living_by_filename, api->filename);
-  g_free(api);
+	ActivePluginInfo *api = user_data;
+	g_module_close (api->loaded);
+	g_hash_table_remove (living_by_filename, api->filename);
+	g_free (api);
 }
 
 CORBA_Object
-oaf_server_activate_shlib(OAF_ActivationResult *sh,
-			  CORBA_Environment *ev)
+oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 {
-  CORBA_Object retval;
-  const OAFPlugin *plugin;
-  ActivePluginInfo *local_plugin_info = NULL;
-  const OAFPluginObject *pobj;
-  int i;
-  PortableServer_POA poa;
-  CORBA_ORB orb;
-  char *filename;
-  const char *iid;
+	CORBA_Object retval;
+	const OAFPlugin *plugin;
+	ActivePluginInfo *local_plugin_info = NULL;
+	const OAFPluginObject *pobj;
+	int i;
+	PortableServer_POA poa;
+	CORBA_ORB orb;
+	char *filename;
+	const char *iid;
 
-  g_return_val_if_fail(sh->res._d == OAF_RESULT_SHLIB, CORBA_OBJECT_NIL);
-  g_return_val_if_fail(sh->res._u.res_shlib._length < 1, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (sh->res._d == OAF_RESULT_SHLIB,
+			      CORBA_OBJECT_NIL);
+	g_return_val_if_fail (sh->res._u.res_shlib._length < 1,
+			      CORBA_OBJECT_NIL);
 
-  i = sh->res._u.res_shlib._length - 1;
-  filename = sh->res._u.res_shlib._buffer[i];
-  if (living_by_filename)
-    local_plugin_info = g_hash_table_lookup(living_by_filename, filename);
+	i = sh->res._u.res_shlib._length - 1;
+	filename = sh->res._u.res_shlib._buffer[i];
+	if (living_by_filename)
+		local_plugin_info =
+			g_hash_table_lookup (living_by_filename, filename);
 
-  if(!local_plugin_info)
-    {
-      /* We have to load the thing from scratch */
-      GModule *gmod;
-      gboolean success;
-      OAFPlugin *plugin;
+	if (!local_plugin_info) {
+		/* We have to load the thing from scratch */
+		GModule *gmod;
+		gboolean success;
+		OAFPlugin *plugin;
 
-      gmod = g_module_open(filename, G_MODULE_BIND_LAZY);
+		gmod = g_module_open (filename, G_MODULE_BIND_LAZY);
 
-      if(!gmod)
-	return CORBA_OBJECT_NIL; /* Couldn't load it */
+		if (!gmod)
+			return CORBA_OBJECT_NIL;	/* Couldn't load it */
 
-      success = g_module_symbol(gmod, "OAF_Plugin_info",
-				(gpointer *)&plugin);
-      if(!success)
-	{
-	  g_module_close(gmod);
-	  return CORBA_OBJECT_NIL;
+		success = g_module_symbol (gmod, "OAF_Plugin_info",
+					   (gpointer *) & plugin);
+		if (!success) {
+			g_module_close (gmod);
+			return CORBA_OBJECT_NIL;
+		}
+
+		local_plugin_info =
+			g_malloc (sizeof (ActivePluginInfo) +
+				  strlen (filename) + 1);
+
+		local_plugin_info->refcount = 0;
+		local_plugin_info->loaded = gmod;
+		strcpy (local_plugin_info->filename, filename);
+
+		if (!living_by_filename)
+			living_by_filename =
+				g_hash_table_new (g_str_hash, g_str_equal);
+
+		g_hash_table_insert (living_by_filename,
+				     local_plugin_info->filename,
+				     local_plugin_info);
+	} else {
+		int success;
+
+		success =
+			g_module_symbol (local_plugin_info->loaded,
+					 "OAF_Plugin_info",
+					 (gpointer *) & plugin);
+		if (!success)
+			return CORBA_OBJECT_NIL;
 	}
 
-      local_plugin_info = g_malloc(sizeof(ActivePluginInfo) + strlen(filename) + 1);
-
-      local_plugin_info->refcount = 0;
-      local_plugin_info->loaded = gmod;
-      strcpy(local_plugin_info->filename, filename);
-
-      if(!living_by_filename)
-	living_by_filename = g_hash_table_new(g_str_hash, g_str_equal);
-
-      g_hash_table_insert(living_by_filename, local_plugin_info->filename, local_plugin_info);
-    }
-  else
-    {
-      int success;
-
-      success = g_module_symbol(local_plugin_info->loaded, "OAF_Plugin_info",
-				(gpointer *)&plugin);
-      if(!success)
-	return CORBA_OBJECT_NIL;
-    }
-
-  retval = CORBA_OBJECT_NIL;
-
-  orb = oaf_orb_get();
-  poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", ev);
-    
-  i = sh->res._u.res_shlib._length - 2;
-  iid = sh->res._u.res_shlib._buffer[i];
-  for (pobj = plugin->plugin_object_list; pobj->iid; pobj++)
-    {
-      if (!strcmp (iid, pobj->iid))
-	break;
-    }
-  
-  if (pobj->iid)
-    {
-      retval = pobj->activate(poa, pobj->iid, local_plugin_info, ev);
-    
-      if(ev->_major != CORBA_NO_EXCEPTION)
 	retval = CORBA_OBJECT_NIL;
 
-      for(i--; i >= 0 && !CORBA_Object_is_nil(retval, ev); i--)
-	{
-	  CORBA_Object new_retval;
-	  GNOME_stringlist dummy = {0};
+	orb = oaf_orb_get ();
+	poa = (PortableServer_POA)
+		CORBA_ORB_resolve_initial_references (orb, "RootPOA", ev);
 
-	  iid = sh->res._u.res_shlib._buffer[i];
-
-	  new_retval = GNOME_GenericFactory_create_object(retval, (char *)iid, &dummy, ev);
-	  if(ev->_major != CORBA_NO_EXCEPTION || CORBA_Object_is_nil(new_retval, ev))
-	    new_retval = CORBA_OBJECT_NIL;
-
-	  CORBA_Object_release(retval, ev);
-	  retval = new_retval;
+	i = sh->res._u.res_shlib._length - 2;
+	iid = sh->res._u.res_shlib._buffer[i];
+	for (pobj = plugin->plugin_object_list; pobj->iid; pobj++) {
+		if (!strcmp (iid, pobj->iid))
+			break;
 	}
-    }
 
-  return retval;
+	if (pobj->iid) {
+		retval =
+			pobj->activate (poa, pobj->iid, local_plugin_info,
+					ev);
+
+		if (ev->_major != CORBA_NO_EXCEPTION)
+			retval = CORBA_OBJECT_NIL;
+
+		for (i--; i >= 0 && !CORBA_Object_is_nil (retval, ev); i--) {
+			CORBA_Object new_retval;
+			GNOME_stringlist dummy = { 0 };
+
+			iid = sh->res._u.res_shlib._buffer[i];
+
+			new_retval =
+				GNOME_GenericFactory_create_object (retval,
+								    (char *)
+								    iid,
+								    &dummy,
+								    ev);
+			if (ev->_major != CORBA_NO_EXCEPTION
+			    || CORBA_Object_is_nil (new_retval, ev))
+				new_retval = CORBA_OBJECT_NIL;
+
+			CORBA_Object_release (retval, ev);
+			retval = new_retval;
+		}
+	}
+
+	return retval;
 }
 
 /**
@@ -139,14 +153,15 @@ oaf_server_activate_shlib(OAF_ActivationResult *sh,
  * an OAFPluginObject struct, otherwise Bad Things Will Happen.
  */
 void
-oaf_plugin_use(PortableServer_Servant servant, gpointer impl_ptr)
+oaf_plugin_use (PortableServer_Servant servant, gpointer impl_ptr)
 {
-  ActivePluginInfo *local_plugin_info = impl_ptr;
+	ActivePluginInfo *local_plugin_info = impl_ptr;
 
-  local_plugin_info->refcount++;
+	local_plugin_info->refcount++;
 
 #if 0
-  ORBit_servant_set_deathwatch(servant, &(local_plugin_info->refcount), gnome_plugin_unload, local_plugin_info);
+	ORBit_servant_set_deathwatch (servant, &(local_plugin_info->refcount),
+				      gnome_plugin_unload, local_plugin_info);
 #endif
 }
 
@@ -162,16 +177,16 @@ oaf_plugin_use(PortableServer_Servant servant, gpointer impl_ptr)
  * shared library is unloaded as needed.
  */
 void
-oaf_plugin_unuse(gpointer impl_ptr)
+oaf_plugin_unuse (gpointer impl_ptr)
 {
-  ActivePluginInfo *api;
+	ActivePluginInfo *api;
 
-  g_return_if_fail(impl_ptr);
+	g_return_if_fail (impl_ptr);
 
-  api = impl_ptr;
+	api = impl_ptr;
 
-  api->refcount--;
+	api->refcount--;
 
-  if(api->refcount <= 0)
-    gnome_plugin_unload(&(api->refcount), api);
+	if (api->refcount <= 0)
+		gnome_plugin_unload (&(api->refcount), api);
 }
