@@ -33,11 +33,11 @@ BonoboObjectClient *bonobo_moniker_client_resolve_client_default (Bonobo_Moniker
 								  const char        *interface_name,
 								  CORBA_Environment *ev);
 
-/* ASync equivalents */
+/* Async equivalents */
 void                bonobo_moniker_client_new_from_name_async    (const CORBA_char        *name,
 								  CORBA_Environment       *ev,
 								  guint                    timeout_usec,
-								  BonoboASyncCallback      cb,
+								  BonoboAsyncCallback      cb,
 								  gpointer                 user_data);
 
 void                bonobo_moniker_resolve_async                 (Bonobo_Moniker           moniker,
@@ -45,14 +45,14 @@ void                bonobo_moniker_resolve_async                 (Bonobo_Moniker
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
 								  guint                    timeout_usec,
-								  BonoboASyncCallback      cb,
+								  BonoboAsyncCallback      cb,
 								  gpointer                 user_data);
 
 void                bonobo_moniker_resolve_async_default         (Bonobo_Moniker           moniker,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
 								  guint                    timeout_usec,
-								  BonoboASyncCallback      cb,
+								  BonoboAsyncCallback      cb,
 								  gpointer                 user_data);
 
 /* Useful moniker implementation helper functions */

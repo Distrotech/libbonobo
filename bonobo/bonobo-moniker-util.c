@@ -314,7 +314,7 @@ void
 bonobo_moniker_client_new_from_name_async (const CORBA_char   *name,
 					   CORBA_Environment  *ev,
 					   guint               timeout_usec,
-					   BonoboASyncCallback cb,
+					   BonoboAsyncCallback cb,
 					   gpointer            user_data)
 {
 /*	static const CORBA_TypeCode args [] = {
@@ -326,11 +326,11 @@ bonobo_moniker_client_new_from_name_async (const CORBA_char   *name,
 		TC_Bonobo_Moniker_UnknownPrefix,
 		NULL
 	};
-	static const BonoboASyncFlags flags [] = {
+	static const BonoboAsyncFlags flags [] = {
 		BONOBO_ASYNC_IN,
 		BONOBO_ASYNC_IN
 	};
-	static const BonoboASyncMethod method = {
+	static const BonoboAsyncMethod method = {
 		"parseDisplayName", TC_Object, args, 2,
 		exceptions, flags
 	};
@@ -352,7 +352,7 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 			      const char            *interface_name,
 			      CORBA_Environment     *ev,
 			      guint                  timeout_usec,
-			      BonoboASyncCallback    cb,
+			      BonoboAsyncCallback    cb,
 			      gpointer               user_data)
 {
 	static const CORBA_TypeCode args [] = {
@@ -364,11 +364,11 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 		TC_Bonobo_Moniker_UnknownPrefix,
 		NULL
 	};
-	static const BonoboASyncFlags flags [] = {
+	static const BonoboAsyncFlags flags [] = {
 		BONOBO_ASYNC_IN,
 		BONOBO_ASYNC_IN
 	};
-	static const BonoboASyncMethod method = {
+	static const BonoboAsyncMethod method = {
 		"resolve", TC_Object, args, 2,
 		exceptions, flags
 	};
@@ -389,7 +389,7 @@ bonobo_moniker_resolve_async_default (Bonobo_Moniker      moniker,
 				      const char         *interface_name,
 				      CORBA_Environment  *ev,
 				      guint               timeout_usec,
-				      BonoboASyncCallback cb,
+				      BonoboAsyncCallback cb,
 				      gpointer            user_data)
 {
 	Bonobo_ResolveOptions options;

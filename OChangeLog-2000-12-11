@@ -1,3 +1,9 @@
+2000-12-08  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-async.[ch]: s/ASync/Async/
+	
+	* bonobo/bonobo-moniker-util.h: ditto.
+
 2000-12-07  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-async.[ch]: Implement.

@@ -1,15 +1,15 @@
 #include <bonobo/bonobo-async.h>
 
-struct _BonoboASyncReply {
+struct _BonoboAsyncReply {
 	CORBA_Object        object;
 	gpointer           *args;
 
-	const BonoboASyncMethod *method;
+	const BonoboAsyncMethod *method;
 
 	CORBA_Environment   ev;
 	CORBA_Environment  *cur_ev;
 
-	BonoboASyncCallback cb;
+	BonoboAsyncCallback cb;
 	gpointer            user_data;
 
 	GIOPConnection     *request_cnx;
@@ -20,16 +20,16 @@ struct _BonoboASyncReply {
 	GIOPRecvBuffer     *recv_buffer;
 };
 
-static BonoboASyncReply *
-handle_new (const BonoboASyncMethod *method,
-	    BonoboASyncCallback      cb,
+static BonoboAsyncReply *
+handle_new (const BonoboAsyncMethod *method,
+	    BonoboAsyncCallback      cb,
 	    gpointer                 user_data,
 	    guint                    timeout_usec,
 	    CORBA_Object             object,
 	    gpointer                *args,
 	    CORBA_Environment       *ev)
 {
-	BonoboASyncReply *handle = g_new0 (BonoboASyncReply, 1);
+	BonoboAsyncReply *handle = g_new0 (BonoboAsyncReply, 1);
 	int             i;
 	gpointer       *src;
 
@@ -64,13 +64,13 @@ handle_new (const BonoboASyncMethod *method,
 }
 
 static void
-got_reply (BonoboASyncReply *handle)
+got_reply (BonoboAsyncReply *handle)
 {
 	g_source_remove_by_user_data (handle);
 }
 
 static void
-handle_free (BonoboASyncReply *handle)
+handle_free (BonoboAsyncReply *handle)
 {
 	int i;
 	CORBA_Environment ev;
@@ -97,7 +97,7 @@ handle_free (BonoboASyncReply *handle)
  * de-marshallers, use a fully generic mechanism instead.
  */
 static void
-demarshal_exception (BonoboASyncReply         *handle,
+demarshal_exception (BonoboAsyncReply         *handle,
 		     GIOPRecvBuffer *rb)
 {
 	CORBA_ORB              orb = handle->object->orb;
@@ -171,11 +171,11 @@ demarshal_exception (BonoboASyncReply         *handle,
 	};
 }
 
-static void bonobo_async_marshal (BonoboASyncReply *handle);
+static void bonobo_async_marshal (BonoboAsyncReply *handle);
 
 static void
 handle_wire_data (GIOPRecvBuffer   *recv_buffer,
-		  BonoboASyncReply *handle)
+		  BonoboAsyncReply *handle)
 {
 	got_reply (handle);
 
@@ -204,7 +204,7 @@ handle_wire_data (GIOPRecvBuffer   *recv_buffer,
 }
 
 static void
-timeout_fn (BonoboASyncReply *handle)
+timeout_fn (BonoboAsyncReply *handle)
 {
 	got_reply (handle);
 
@@ -218,7 +218,7 @@ timeout_fn (BonoboASyncReply *handle)
 }
 
 static gboolean
-idle_fn (BonoboASyncReply *handle)
+idle_fn (BonoboAsyncReply *handle)
 {
 	GIOPRecvBuffer *recv_buffer;
 
@@ -243,7 +243,7 @@ typedef struct {
 } OpData;
 
 static void
-bonobo_async_marshal (BonoboASyncReply *handle)
+bonobo_async_marshal (BonoboAsyncReply *handle)
 {
 	int             namelen, i;
 	OpData         *data;
@@ -302,7 +302,7 @@ bonobo_async_marshal (BonoboASyncReply *handle)
 }
 
 void
-bonobo_async_demarshal (BonoboASyncReply *handle,
+bonobo_async_demarshal (BonoboAsyncReply *handle,
 			gpointer          retval,
 			gpointer         *out_args)
 {
@@ -348,15 +348,15 @@ bonobo_async_demarshal (BonoboASyncReply *handle,
 }
 
 void
-bonobo_async_invoke (const BonoboASyncMethod *method,
-		     BonoboASyncCallback      cb,
+bonobo_async_invoke (const BonoboAsyncMethod *method,
+		     BonoboAsyncCallback      cb,
 		     gpointer                 user_data,
 		     guint                    timout_usec,
 		     CORBA_Object             object,
 		     gpointer                *args,
 		     CORBA_Environment       *ev)
 {
-	BonoboASyncReply *handle = handle_new (method, cb, user_data,
+	BonoboAsyncReply *handle = handle_new (method, cb, user_data,
 					       timout_usec,
 					       object, args, ev);
 
@@ -364,7 +364,7 @@ bonobo_async_invoke (const BonoboASyncMethod *method,
 }
 
 GIOPRecvBuffer *
-bonobo_async_handle_get_recv (BonoboASyncReply *handle)
+bonobo_async_handle_get_recv (BonoboAsyncReply *handle)
 {
 	g_return_val_if_fail (handle != NULL, NULL);
 

@@ -20,7 +20,7 @@ BEGIN_GNOME_DECLS
 typedef enum {
 	BONOBO_ASYNC_IN  = 0x1,
 	BONOBO_ASYNC_OUT = 0x2
-} BonoboASyncFlags;
+} BonoboAsyncFlags;
 
 typedef struct {
 	const char           *name;
@@ -28,28 +28,28 @@ typedef struct {
 	const CORBA_TypeCode *arg_types;
 	int                   num_args;
 	const CORBA_TypeCode *exceptions;
-	BonoboASyncFlags     *flags;
-} BonoboASyncMethod;
+	BonoboAsyncFlags     *flags;
+} BonoboAsyncMethod;
 
-typedef struct _BonoboASyncReply BonoboASyncReply;
+typedef struct _BonoboAsyncReply BonoboAsyncReply;
 
-typedef void (*BonoboASyncCallback) (BonoboASyncReply  *reply,
+typedef void (*BonoboAsyncCallback) (BonoboAsyncReply  *reply,
 				     CORBA_Environment *ev,
 				     gpointer           user_data);
 
-void bonobo_async_demarshal (BonoboASyncReply        *reply,
+void bonobo_async_demarshal (BonoboAsyncReply        *reply,
 			     gpointer                 retval,
 			     gpointer                *out_args);
 
-void bonobo_async_invoke    (const BonoboASyncMethod *method,
-			     BonoboASyncCallback      cb,
+void bonobo_async_invoke    (const BonoboAsyncMethod *method,
+			     BonoboAsyncCallback      cb,
 			     gpointer                 user_data,
 			     guint                    timeout_usec,
 			     CORBA_Object             object,
 			     gpointer                *args,
 			     CORBA_Environment       *ev);
 
-GIOPRecvBuffer *bonobo_async_handle_get_recv (BonoboASyncReply *reply);
+GIOPRecvBuffer *bonobo_async_handle_get_recv (BonoboAsyncReply *reply);
 
 END_GNOME_DECLS
 
