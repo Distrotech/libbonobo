@@ -31,10 +31,6 @@ typedef struct _BonoboItemContainerPrivate BonoboItemContainerPrivate;
 typedef struct {
 	BonoboObject base;
 
-	BonoboClientSiteList *client_sites;
-	
-	BonoboMoniker *moniker;
-
 	BonoboItemContainerPrivate *priv;
 } BonoboItemContainer;
 
@@ -51,12 +47,13 @@ GtkType              bonobo_item_container_get_type    (void);
 BonoboItemContainer *bonobo_item_container_new         (void);
 BonoboItemContainer *bonobo_item_container_construct   (BonoboItemContainer *container,
 							Bonobo_ItemContainer container_corba);
-BonoboMoniker       *bonobo_item_container_get_moniker (BonoboItemContainer *container);
 
 void                 bonobo_item_container_add         (BonoboItemContainer *container,
-							BonoboObject    *object);
-void                 bonobo_item_container_remove      (BonoboItemContainer *container,
-							BonoboObject    *object);
+							const char          *name, 
+							BonoboObject        *object);
+
+void                 bonobo_item_container_remove_by_name (BonoboItemContainer *container,
+							   const char          *name);
 
 POA_Bonobo_ItemContainer__epv *bonobo_item_container_get_epv (void);
 

@@ -56,13 +56,16 @@ create_bonobo_item_handler (BonoboObject *object)
 /*
  * Returns a list of the objects in this container
  */
-static Bonobo_ItemContainer_ObjectList *
+static Bonobo_ItemContainer_ObjectNames *
 impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
 
-	return (*handler->enum_objects) (handler, handler->user_data, ev);
+	if (handler->enum_objects)
+		return handler->enum_objects (handler, handler->user_data, ev);
+	else
+		return Bonobo_ItemContainer_ObjectNames__alloc ();
 }
 
 static Bonobo_Unknown
@@ -74,7 +77,12 @@ impl_get_object (PortableServer_Servant servant,
 	BonoboObject *object = bonobo_object_from_servant (servant);
 	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
 
-	return (*handler->get_object) (handler, item_name, only_if_exists, handler->user_data, ev);
+	if (handler->get_object)
+		return handler->get_object (handler, item_name,
+					    only_if_exists,
+					    handler->user_data, ev);
+	else
+		return CORBA_OBJECT_NIL;
 }
 
 /*
@@ -93,8 +101,8 @@ bonobo_item_handler_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_ItemContainer__epv, 1);
 
-	epv->enumObjects = impl_enum_objects;
-	epv->getObjectByName   = impl_get_object;
+	epv->enumObjects     = impl_enum_objects;
+	epv->getObjectByName = impl_get_object;
 
 	return epv;
 }
@@ -139,9 +147,9 @@ bonobo_item_handler_construct (BonoboItemHandler  *handler,
 	
 	bonobo_object_construct (BONOBO_OBJECT (handler), (CORBA_Object) corba_handler);
 
-	handler->get_object = get_object;
+	handler->get_object   = get_object;
 	handler->enum_objects = enum_objects;
-	handler->user_data = user_data;
+	handler->user_data    = user_data;
 	
 	return handler;
 }
@@ -156,7 +164,7 @@ bonobo_item_handler_get_type (void)
 {
 	static GtkType type = 0;
 
-	if (!type){
+	if (!type) {
 		GtkTypeInfo info = {
 			"BonoboItemHandler",
 			sizeof (BonoboItemHandler),
@@ -184,8 +192,8 @@ bonobo_item_handler_get_type (void)
  */
 BonoboItemHandler *
 bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
-			 BonoboItemHandlerGetObjectFn get_object,
-			 gpointer user_data)
+			 BonoboItemHandlerGetObjectFn   get_object,
+			 gpointer                       user_data)
 
 {
 	BonoboItemHandler *handler;
@@ -235,8 +243,8 @@ bonobo_item_option_parse (const char *option_string)
 	BonoboItemOption *option = NULL;
 	const char *p;
 	
-	for (p = option_string; *p; p++){
-		if (*p == '=' ){
+	for (p = option_string; *p; p++) {
+		if (*p == '=' ) {
 			GString *value = NULL;
 			if (!key)
 				return list;
@@ -246,13 +254,13 @@ bonobo_item_option_parse (const char *option_string)
 			g_string_free (key, FALSE);
 			key = NULL;
 
-			for (p++; *p; p++){
+			for (p++; *p; p++) {
 				if (*p == ';')
 					goto next;
 				if (!value)
 					value = g_string_new ("");
 
-				if (*p == '\\'){
+				if (*p == '\\') {
 					p++;
 					if (*p == 0)
 						break;
@@ -262,7 +270,7 @@ bonobo_item_option_parse (const char *option_string)
 				g_string_append_c (value, *p);
 			}
 		next:
-			if (value){
+			if (value) {
 				option->value = value->str;
 				g_string_free (value, FALSE);
 			}
@@ -276,7 +284,7 @@ bonobo_item_option_parse (const char *option_string)
 		}
 	}
 
-	if (key){
+	if (key) {
 		BonoboItemOption *option = g_new (BonoboItemOption, 1);
 		
 		option->key = key->str;
@@ -299,7 +307,7 @@ bonobo_item_options_free (GSList *options)
 {
 	GSList *l;
 
-	for (l = options; l; l = l->next){
+	for (l = options; l; l = l->next) {
 		BonoboItemOption *option = l->data;
 
 		g_free (option->key);

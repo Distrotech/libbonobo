@@ -27,7 +27,7 @@ BEGIN_GNOME_DECLS
 typedef struct _BonoboItemHandlerPrivate BonoboItemHandlerPrivate;
 typedef struct _BonoboItemHandler        BonoboItemHandler;
 
-typedef Bonobo_ItemContainer_ObjectList *(*BonoboItemHandlerEnumObjectsFn)
+typedef Bonobo_ItemContainer_ObjectNames *(*BonoboItemHandlerEnumObjectsFn)
 	(BonoboItemHandler *h, gpointer data, CORBA_Environment *);
 
 typedef Bonobo_Unknown (*BonoboItemHandlerGetObjectFn)
@@ -39,8 +39,9 @@ struct _BonoboItemHandler {
 
 	BonoboItemHandlerEnumObjectsFn enum_objects;
 	BonoboItemHandlerGetObjectFn   get_object;
-	BonoboItemHandlerPrivate *priv;
-	gpointer user_data;
+	gpointer                       user_data;
+
+	BonoboItemHandlerPrivate      *priv;
 };
 
 typedef struct {
@@ -49,14 +50,14 @@ typedef struct {
 
 GtkType              bonobo_item_handler_get_type    (void);
 BonoboItemHandler   *bonobo_item_handler_new         (BonoboItemHandlerEnumObjectsFn enum_objects,
-						      BonoboItemHandlerGetObjectFn get_object,
-						      gpointer user_data);
+						      BonoboItemHandlerGetObjectFn   get_object,
+						      gpointer                       user_data);
 
-BonoboItemHandler   *bonobo_item_handler_construct   (BonoboItemHandler *handler,
-						      Bonobo_ItemContainer corba_handler,
+BonoboItemHandler   *bonobo_item_handler_construct   (BonoboItemHandler             *handler,
+						      Bonobo_ItemContainer           corba_handler,
 						      BonoboItemHandlerEnumObjectsFn enum_objects,
-						      BonoboItemHandlerGetObjectFn get_object,
-						      gpointer user_data);
+						      BonoboItemHandlerGetObjectFn   get_object,
+						      gpointer                       user_data);
 
 POA_Bonobo_ItemContainer__epv *bonobo_item_handler_get_epv (void);
 

@@ -34,6 +34,10 @@ static guint signals [LAST_SIGNAL] = { 0, };
 
 static BonoboObjectClass *bonobo_item_container_parent_class;
 
+struct _BonoboItemContainerPrivate {
+	GHashTable *objects;
+};
+
 POA_Bonobo_ItemContainer__vepv bonobo_item_container_vepv;
 
 static CORBA_Object
@@ -71,65 +75,80 @@ create_bonobo_item_container (BonoboObject *object)
 	}
 }
 
+static gboolean
+remove_object (gpointer key,
+	       gpointer value,
+	       gpointer user_data)
+{
+	g_free (key);
+	bonobo_object_unref (value);
+
+	return TRUE;
+}
+
 static void
 bonobo_item_container_destroy (GtkObject *object)
 {
 	BonoboItemContainer *container = BONOBO_ITEM_CONTAINER (object);
 
-	/*
-	 * Destroy all the ClientSites.
-	 */
-	while (container->client_sites) {
-		BonoboClientSite *client_site =
-			BONOBO_CLIENT_SITE (container->client_sites->data);
-
-		bonobo_object_unref (BONOBO_OBJECT (client_site));
-	}
+	/* Destroy all the ClientSites. */
+	g_hash_table_foreach_remove (container->priv->objects,
+				     remove_object, NULL);
 	
 	GTK_OBJECT_CLASS (bonobo_item_container_parent_class)->destroy (object);
+}
+
+static void
+get_object_names (gpointer key, gpointer value, gpointer user_data)
+{
+	GSList **l = user_data;
+
+	*l = g_slist_prepend (*l, CORBA_string_dup (key));
 }
 
 /*
  * Returns a list of the objects in this container
  */
-static Bonobo_ItemContainer_ObjectList *
+static Bonobo_ItemContainer_ObjectNames *
 impl_Bonobo_ItemContainer_enumObjects (PortableServer_Servant servant,
-				       CORBA_Environment *ev)
+				       CORBA_Environment     *ev)
 {
-	BonoboObject *object = bonobo_object_from_servant (servant);
-	BonoboItemContainer *container = BONOBO_ITEM_CONTAINER (object);
-	Bonobo_ItemContainer_ObjectList *return_list;
-	int items;
-	GList *l;
-	int i;
-	
-	return_list = Bonobo_ItemContainer_ObjectList__alloc ();
-	if (return_list == NULL)
+	Bonobo_ItemContainer_ObjectNames *list;
+	BonoboItemContainer              *container;
+	GSList                           *objects, *l;
+	int                               i;
+
+	container = BONOBO_ITEM_CONTAINER (
+		bonobo_object_from_servant (servant));
+	g_return_val_if_fail (container != NULL, NULL);
+
+	list = Bonobo_ItemContainer_ObjectNames__alloc ();
+	if (!list)
 		return NULL;
 
-	items = g_list_length (container->client_sites);
+	objects = NULL;
+	g_hash_table_foreach (container->priv->objects,
+			      get_object_names, &objects);
+
+	list->_length = list->_maximum = g_slist_length (objects);
 	
-	return_list->_buffer = CORBA_sequence_Bonobo_Unknown_allocbuf (items);
-	if (return_list->_buffer == NULL){
-		CORBA_free (return_list);
+	list->_buffer = CORBA_sequence_CORBA_string_allocbuf (list->_length);
+	if (!list->_buffer) {
+		GSList *l;
+		CORBA_free (list);
+		for (l = objects; l; l = l->next)
+			CORBA_free (l->data);
+		g_slist_free (objects);
 		return NULL;
 	}
 	
-	return_list->_length = items;
-	return_list->_maximum = items;
+	/* Assemble the list of objects */
+	for (i = 0, l = objects; l; l = l->next)
+		list->_buffer [i++] = l->data;
 
-	/*
-	 * Assemble the list of objects
-	 */
-	for (i = 0, l = container->client_sites; l; l = l->next, i++) {
-		BonoboObjectClient *embeddable =
-			bonobo_client_site_get_embeddable (l->data);
+	g_slist_free (objects);
 
-		return_list->_buffer [i] = CORBA_Object_duplicate (
-			bonobo_object_corba_objref (BONOBO_OBJECT (embeddable)), ev);
-	}
-
-	return return_list;
+	return list;
 }
 
 static Bonobo_Unknown
@@ -233,6 +252,9 @@ bonobo_item_container_class_init (BonoboItemContainerClass *container_class)
 static void
 bonobo_item_container_init (BonoboItemContainer *container)
 {
+	container->priv = g_new0 (BonoboItemContainerPrivate, 1);
+	container->priv->objects = g_hash_table_new (
+		g_str_hash, g_str_equal);
 }
 
 /**
@@ -268,7 +290,7 @@ bonobo_item_container_get_type (void)
 {
 	static GtkType type = 0;
 
-	if (!type){
+	if (!type) {
 		GtkTypeInfo info = {
 			"BonoboItemContainer",
 			sizeof (BonoboItemContainer),
@@ -312,66 +334,56 @@ bonobo_item_container_new (void)
 }
 
 /**
- * bonobo_item_container_get_moniker:
- * @container: A BonoboItemContainer object.
- */
-BonoboMoniker *
-bonobo_item_container_get_moniker (BonoboItemContainer *container)
-{
-	g_return_val_if_fail (container != NULL, NULL);
-	g_return_val_if_fail (BONOBO_IS_ITEM_CONTAINER (container), NULL);
-
-	return container->moniker;
-}
-
-static void
-bonobo_item_container_client_site_destroy_cb (BonoboClientSite *client_site, gpointer data)
-{
-	BonoboItemContainer *container = BONOBO_ITEM_CONTAINER (data);
-
-	/*
-	 * Remove this client site from our list.
-	 */
-	container->client_sites = g_list_remove (container->client_sites, client_site);
-}
-
-/**
  * bonobo_item_container_add:
  * @container: The object to operate on.
- * @client_site: The client site to add to the container
+ * @name: The name of the object
+ * @object: The object to add to the container
  *
- * Adds the @client_site to the list of client-sites managed by this
+ * Adds the @object to the list of objects managed by this
  * container
  */
 void
-bonobo_item_container_add (BonoboItemContainer *container, BonoboObject *client_site)
+bonobo_item_container_add (BonoboItemContainer *container,
+			   const char          *name,
+			   BonoboObject        *object)
 {
-	g_return_if_fail (container != NULL);
-	g_return_if_fail (client_site != NULL);
-	g_return_if_fail (BONOBO_IS_OBJECT (client_site));
+	g_return_if_fail (name != NULL);
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (BONOBO_IS_ITEM_CONTAINER (container));
 
-	container->client_sites = g_list_prepend (container->client_sites, client_site);
-
-	gtk_signal_connect (GTK_OBJECT (client_site), "destroy",
-			    GTK_SIGNAL_FUNC (bonobo_item_container_client_site_destroy_cb), container);
+	if (g_hash_table_lookup (container->priv->objects, name)) {
+		g_warning ("Object of name '%s' already exists", name);
+	} else {
+		bonobo_object_ref (object);
+		g_hash_table_insert (container->priv->objects,
+				     g_strdup (name),
+				     object);
+	}
 }
 
 /**
- * bonobo_item_container_remove:
+ * bonobo_item_container_remove_by_name:
  * @container: The object to operate on.
- * @client_site: The client site to remove from the container
+ * @name: The name of the object to remove from the container
  *
- * Removes the @client_site from the @container
+ * Removes the named object from the @container
  */
 void
-bonobo_item_container_remove (BonoboItemContainer *container, BonoboObject *client_site)
+bonobo_item_container_remove_by_name (BonoboItemContainer *container,
+				      const char          *name)
 {
-	g_return_if_fail (container != NULL);
-	g_return_if_fail (client_site != NULL);
-	g_return_if_fail (BONOBO_IS_OBJECT (client_site));
+	gpointer key, value;
+
+	g_return_if_fail (name != NULL);
 	g_return_if_fail (BONOBO_IS_ITEM_CONTAINER (container));
 
-	container->client_sites = g_list_remove (container->client_sites, client_site);
+	if (!g_hash_table_lookup_extended (container->priv->objects, name,
+					   &key, &value))
+		g_warning ("Removing '%s' but not in container", name);
+	else {
+		g_free (key);
+		bonobo_object_unref (value);
+		g_hash_table_remove (container->priv->objects, name);
+	}
 }
 

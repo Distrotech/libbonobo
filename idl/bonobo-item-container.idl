@@ -15,14 +15,14 @@
 module Bonobo {
 
 	interface ItemContainer : Unknown {
-		typedef sequence<Unknown> ObjectList;
+		typedef sequence<string> ObjectNames;
 
 		/**
 		 * enumObjects:
 		 *
-		 * Returns: a list of the objects contained by this container
+		 * Returns: a list of names of contained objects
 		 */
-		ObjectList enumObjects ();
+		ObjectNames enumObjects ();
 
 		/**
 		 * NotFound{}:
@@ -46,7 +46,8 @@ module Bonobo {
 		 * @only_if_exists: if TRUE, only bind if this object currently exists
 		 * otherwise, it will try to create the server for it.
 		 */
-		Unknown getObjectByName (in string item_name, in boolean only_if_exists)
+		Unknown getObjectByName (in string  item_name,
+					 in boolean only_if_exists)
 			raises (SyntaxError, NotFound);
 	};
 };

@@ -1,3 +1,39 @@
+2001-01-17  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-item-handler.c (impl_enum_objects): if no enum_objects
+	handler return a blank sequence.
+	(impl_get_object): ditto.
+
+	* tests/test-container.c (launch_server, launch_server_moniker): update
+	item-container code.
+
+	* samples/compound-doc/paint-component-simple.c (view_create_menus):
+	prune cruft, add listeners.
+	(view_color_select_cb): remove. (color_listener_cb): upd.
+
+	* bonobo/bonobo-item-container.c (bonobo_item_container_get_moniker): 
+	remove: unusable.
+	(get_object_names, remove_object): impl
+	(bonobo_item_container_destroy): upd.
+	(impl_Bonobo_ItemContainer_enumObjects): re-implement.
+	(bonobo_item_container_remove): rename to
+	(bonobo_item_container_remove_by_name): and re-implement.
+	(bonobo_item_container_add): re-write, remove dodgy destroy
+	notification nonsense.
+	(bonobo_item_container_client_site_destroy_cb): kill.
+
+	* bonobo/bonobo-item-handler.c (impl_enum_objects): fixup for
+	ObjectNames.
+
+	* bonobo/bonobo-widget.c (bonobo_widget_create_subdoc_object):
+	don't add stuff redundantly to the item container.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_construct): 
+	remove redundant bonobo_item_container_add.
+	(bonobo_client_site_destroy): remove redundant remove.
+
+	* idl/bonobo-item-container.idl: enumerate objects by name.
+
 2001-01-16  Michael Meeks  <michael@helixcode.com>
 
 	* monikers/Makefile.am: Sort out the mess.
