@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.101.2\n"
-"POT-Creation-Date: 2001-09-10 03:24+0200\n"
+"POT-Creation-Date: 2001-08-18 11:31+0200\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -91,11 +91,11 @@ msgstr "ruta erronea al elemento de la interfaz de usurio XML"
 
 #: bonobo/bonobo-exception.c:215
 msgid "Unknown command or verb"
-msgstr ""
+msgstr "Comando desconocido"
 
 #: bonobo/bonobo-exception.c:218
 msgid "Command is insensitive"
-msgstr ""
+msgstr "Command es insensitivo"
 
 #: bonobo/bonobo-exception.c:222
 msgid "incorrect data type"
@@ -111,16 +111,15 @@ msgstr "propiedad no encontrada"
 
 #: bonobo/bonobo-exception.c:232
 msgid "property has invalid type"
-msgstr ""
+msgstr "propiedad con tipo inválido"
 
 #: bonobo/bonobo-exception.c:235
-#, fuzzy
 msgid "property is read only"
-msgstr "propiedad no encontrada"
+msgstr "propiedad de solo lectura"
 
 #: bonobo/bonobo-exception.c:238
 msgid "config database backend failed "
-msgstr ""
+msgstr "el manejador de la base de datos ha fallado "
 
 #: bonobo/bonobo-exception.c:242
 msgid "Moniker interface cannot be found"
@@ -150,36 +149,3 @@ msgstr "Error de activación general sin descripción"
 msgid "Could not initialize Bonobo"
 msgstr "No pude inicializar Bonobo"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:1
-msgid "HTTP Moniker"
-msgstr "Moniker HTTP"
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:2
-msgid "ORB IOR handling moniker"
-msgstr ""
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:3
-msgid "Standard Moniker factory"
-msgstr "Factoría estandar de Moniker"
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:4
-#, fuzzy
-msgid "generic Oaf activation moniker"
-msgstr "moniker genérico de activación Server"
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:5
-#, fuzzy
-msgid "generic Oaf query moniker"
-msgstr "moniker genérico de pregunta Server"
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:6
-msgid "generic factory 'new' moniker"
-msgstr "moniker genérico de factoría 'new'"
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:7
-msgid "generic item moniker"
-msgstr "moniker genérico de elemento"
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:8
-msgid "stream MonikerExtender"
-msgstr "flujo de datos MonikerExtender"
