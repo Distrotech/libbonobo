@@ -273,7 +273,7 @@ encode_value (BonoboUINode      *parent,
  * #BonoboUINode XML abstraction. @ev is used for flagging
  * any non-fatal exceptions during the process. On exception
  * NULL will be returned. opt_parent should be NULL, and is
- * used internaly for recursive tree construction.
+ * used internally for recursive tree construction.
  *
  * Both type and content data are dumped in a non-standard, but
  * trivial format.
@@ -666,8 +666,8 @@ decode_value (BonoboUINode      *node,
  * @node: the parsed XML representation of an any
  * @ev: a corba exception environment
  * 
- * This routine is the converse of bonobo_property_bag_xml_encode_any
- * it hydrates a serialized CORBA_any.
+ * This routine is the converse of bonobo_property_bag_xml_encode_any.
+ * It hydrates a serialized CORBA_any.
  * 
  * Return value: the CORBA_any or NULL on error
  **/

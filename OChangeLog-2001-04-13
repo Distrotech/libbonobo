@@ -1,3 +1,32 @@
+2001-02-21  John R. Sheets  <dusk@ravendusk.org>
+
+	* bonobo/bonobo-stream-client.c, bonobo/bonobo-persist-stream.c,
+	bonobo/bonobo-listener.c, bonobo/bonobo-event-source.c,
+	bonobo/bonobo-transient.c, bonobo/bonobo-property-bag-xml.c,
+	bonobo/bonobo-arg.c, bonobo/bonobo-property-bag-client.c,
+	bonobo/bonobo-exception.c, bonobo/bonobo-object-client.c,
+	bonobo/bonobo-main.c, bonobo/bonobo-xobject.c,
+	bonobo/bonobo-object.c,
+	doc/api/tmpl/bonobo-event-source.sgml,
+	doc/api/tmpl/bonobo-property-bag-xml.sgml,
+	doc/api/tmpl/bonobo-property-bag-client.sgml,
+	doc/api/tmpl/bonobo-property-bag.sgml,
+	doc/api/tmpl/bonobo-exception.sgml,
+	doc/api/tmpl/bonobo-generic-factory.sgml,
+	doc/api/tmpl/bonobo-xobject.sgml,
+	doc/api/tmpl/bonobo-listener.sgml: Minor spelling/grammar tweaks
+	to inline comments.
+
+	* doc/api/tmpl/bonobo-transient.sgml: Changed invalid <variable>
+	tag to <parameter>.
+
+	* doc/api/tmpl/bonobo-property-bag-xml.sgml,
+	doc/api/tmpl/bonobo-xobject.sgml,
+	doc/api/tmpl/bonobo-moniker-util.sgml: Use "&amp;" instead of "&".
+
+	* doc/api/tmpl/bonobo-context.sgml: Changed an errant </a> to
+	</title>.  Added <para> tags around <listitem> contents.
+
 Thu Feb 22 19:46:02 CET 2001 Paolo Molaro <lupus@ximian.com>
 
 	* doc/bonobo.dtd: Added first version of the BonoboUI DTD

@@ -135,7 +135,7 @@ impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
 /**
  * bonobo_event_source_notify_listeners:
  * @event_source: the Event Source that will emit the event.
- * @event_name: Name of the event being emmited
+ * @event_name: Name of the event being emitted
  * @value: A CORBA_any value that contains the data that is passed to interested clients
  * @opt_ev: A CORBA_Environment where a failure code can be returned, can be NULL.
  *

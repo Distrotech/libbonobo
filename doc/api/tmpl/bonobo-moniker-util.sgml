@@ -6,7 +6,7 @@ Object activation and construction through monikers.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-The moniker utility functions provide two sets of functions
+The moniker utility functions provide two sets of functions:
   <itemizedlist>
     <listitem>
       <para>
@@ -42,7 +42,7 @@ moniker_resolve_demo (void)
 	Bonobo_Control control;
 	CORBA_Environment ev;
 
-	CORBA_exception_init (&ev);
+	CORBA_exception_init (&amp;ev);
 
 	control = bonobo_get_object ("file:/demo/a.jpeg",
                                      "Bonobo/Control", NULL);

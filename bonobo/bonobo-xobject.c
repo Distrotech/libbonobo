@@ -89,7 +89,7 @@ corba_cleanup (BonoboXObject *x_object)
 			
 	if (klass->poa_fini_fn)
 		klass->poa_fini_fn (servant, &ev);
-	else /* Actualy quicker and nicer */
+	else /* Actually quicker and nicer */
 		PortableServer_ServantBase__fini (servant, &ev);
 			
 	CORBA_free (oid);
@@ -422,9 +422,9 @@ bonobo_x_type_unique (GtkType            parent_type,
  * @p: a pointer to something
  * 
  * This function can be passed a BonoboXObject * or a
- * PortableServer_Servant, and it will return a BonoboXObject *
+ * PortableServer_Servant, and it will return a BonoboXObject *.
  * It also can convert a CORBA_Object to a BonoboXObject in
- * some circumstances, but this behavior is broken conceptualy.
+ * some circumstances, but this behavior is broken conceptually.
  * 
  * Return value: a BonoboXObject or NULL.
  **/

@@ -12,12 +12,12 @@ is so that language bindings can get away with wrapping
 a single function, and yet have access to the whole
 Bonobo service framework. Two examples of this are the
 MonikerContext and the RunningContext ( see
-Bonobo_Context.idl )
+Bonobo_Context.idl ).
 </para>
 
 <para>
   <example>
-     <title>Getting and using the moniker context</a>
+     <title>Getting and using the moniker context</title>
      <programlisting>
 Bonobo_MonikerContext context;
 Bonobo_Unknown        object;
@@ -39,8 +39,14 @@ The list of contexts is open and may be expanded in the future,
 currently there are the following:
   <itemizedlist>
     <listitem>
-      Activation - Bonobo/MonikerContext
-      Running - Bonobo/RunningContext
+      <para>
+        Activation - Bonobo/MonikerContext
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Running - Bonobo/RunningContext
+      </para>
     </listitem>
   </itemizedlist>
 </para>
@@ -50,6 +56,8 @@ The running context is particularly useful for ensuring that
 server processes exit cleanly when all their objects and
 derived objects are dead. To do this we can simply do the
 following:
+</para>
+<para>
   <example>
     <title>How to get a factory to quit when it is idle</title>
     <programlisting>
@@ -73,7 +81,8 @@ int main (int argc, char **argv)
 }
     </programlisting>
   </example>
-
+</para>
+<para>
   Since this is a commonly used thing there is a helper to make this
 easier:
   <example>
@@ -82,7 +91,6 @@ easier:
 bonobo_running_context_auto_exit_unref (factory) 
     </programlisting>
   </example>
-
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

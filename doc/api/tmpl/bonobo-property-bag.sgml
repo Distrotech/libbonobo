@@ -24,7 +24,7 @@ bag's listeners that it has changed with a call to
 </para>
 
 <para>
-Here is a simple example use of the property bag
+Here is a simple example use of the property bag:
   <example>
      <title>Callbacks</title>
      <programlisting>
@@ -89,6 +89,8 @@ set_prop (BonoboPropertyBag *bag,
 }
      </programlisting>
   </example>
+</para>
+<para>
 Then to instantiate the property bag interface and associate it with
 a control perhaps we do:
   <example>
@@ -112,7 +114,7 @@ a control perhaps we do:
 	bonobo_object_unref (BONOBO_OBJECT (pb));
      </programlisting>
   </example>
-And finaly we need to notify listeners of changes in various properties
+And finally we need to notify listeners of changes in various properties
 so we could perhaps do:
   <example>
      <title></title>

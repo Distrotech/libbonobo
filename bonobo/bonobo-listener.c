@@ -145,8 +145,8 @@ bonobo_listener_new (BonoboListenerCallbackFn event_callback,
  * @kind: the kind of the event
  * @subtype: an optional subtype
  *
- * Creates an event name. Event names consists of three part. The @idl_path is
- * mainly to create an unique namespace, and should identify the interface 
+ * Creates an event name. Event names consist of three parts. The @idl_path is
+ * mainly to create a unique namespace, and should identify the interface 
  * which triggered the event, for example "Bonobo/Property". The @kind denotes
  * what happened, for example "change". Finally you can use the optional 
  * @subtype to make events more specific. All three parts of the name are 

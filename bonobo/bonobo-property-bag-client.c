@@ -183,13 +183,14 @@ bonobo_property_bag_client_get_property_names (Bonobo_PropertyBag pb,
 
 /**
  * bonobo_property_bag_client_get_property:
- * @pb: A Bonobo_PropertyBag      which is associated with a remote
+ * @pb: A Bonobo_PropertyBag which is associated with a remote
  * BonoboPropertyBag.
  * @name: A string containing the name of the property which is to
  * be fetched.
  * @ev: optional CORBA exception environment or NULL
  *
- * Returns: A #Bonobo_Property CORBA object reference for the
+ * Returns: A #Bonobo_Property CORBA object reference corresponding
+ * to the requested property.
  *
  */
 Bonobo_Property
@@ -227,12 +228,12 @@ bonobo_property_bag_client_get_property (Bonobo_PropertyBag       pb,
 
 /**
  * bonobo_property_bag_client_persist:
- * @pb: A #Bonobo_PropertyBag      object which is bound to a remote
+ * @pb: A #Bonobo_PropertyBag object which is bound to a remote
  * #Bonobo_PropertyBag server.
  * @stream: A #BonoboStream into which the data in @pb will be written.
  * @ev: optional CORBA exception environment or NULL
  *
- * Reads the property data stored in the #Bonobo_Property_bag to which
+ * Reads the property data stored in the #Bonobo_PropertyBag to which
  * @pb is bound and streams it into @stream.  The typical use for
  * this function is to save the property data for a given Bonobo
  * Control into a persistent store to which @stream is attached.
@@ -277,7 +278,7 @@ bonobo_property_bag_client_persist (Bonobo_PropertyBag       pb,
  * 
  *  Serializes the property bag @pb to the @stream,
  * using the PersistStream interface associated with the
- * PropertyBAg.
+ * PropertyBag.
  **/
 void
 bonobo_property_bag_client_depersist (Bonobo_PropertyBag       pb,

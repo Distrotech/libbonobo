@@ -255,11 +255,13 @@ bonobo_exception_repoid_to_text  (const char *repo_id)
  * bonobo_exception_get_text:
  * @ev: the corba environment.
  * 
- * Returns a user readable description of the exception, busks
- * something convincing if it is not know.
+ * Returns a user readable description of the exception.  First
+ * checks @ev against builtin Bonobo exceptions, then falls back to
+ * exception names added through bonobo_exception_add_handler_str
+ * or bonobo_exception_add_handler_fn.
  * 
- * Return value: a g_malloc'd description; needs freeing as,
- * and when. NULL is never returned.
+ * Return value: A g_malloc'd description, which the caller must free.
+ * NULL is never returned.
  **/
 char *
 bonobo_exception_get_text (CORBA_Environment *ev)

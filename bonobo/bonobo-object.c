@@ -235,7 +235,7 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
  * bonobo_object_ref:
  * @object: A BonoboObject you want to ref-count
  *
- * increments the reference count for the aggregate BonoboObject.
+ * Increments the reference count for the aggregate BonoboObject.
  */
 void
 bonobo_object_ref (BonoboObject *object)
@@ -257,7 +257,7 @@ bonobo_object_ref (BonoboObject *object)
  * bonobo_object_unref:
  * @object: A BonoboObject you want to unref.
  *
- * decrements the reference count for the aggregate BonoboObject.
+ * Decrements the reference count for the aggregate BonoboObject.
  */
 void
 bonobo_object_unref (BonoboObject *object)
@@ -378,7 +378,7 @@ impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
  *   This function returns a duplicated CORBA Object reference;
  * it also bumps the ref count on the object. This is ideal to
  * use in any method returning a Bonobo_Object in a CORBA impl.
- * if object is CORBA_OBJECT_NIL it is returned unaffected.
+ * If object is CORBA_OBJECT_NIL it is returned unaffected.
  * 
  * Return value: duplicated & ref'd corba object reference.
  **/
@@ -416,7 +416,7 @@ bonobo_object_dup_ref (Bonobo_Unknown     object,
  *   This function releases a CORBA Object reference;
  * it also decrements the ref count on the bonobo object.
  * This is the converse of bonobo_object_dup_ref. We
- * tolerate object == CORBA_OBJECT_NIL silently
+ * tolerate object == CORBA_OBJECT_NIL silently.
  **/
 void
 bonobo_object_release_unref (Bonobo_Unknown     object,
@@ -1174,8 +1174,8 @@ unref_list (GSList *l)
  * bonobo_object_list_unref_all:
  * @list: A list of BonoboObjects *s
  * 
- *  This routine unrefs all the objects listed in
- * the list and then removes them from @list: if
+ *  This routine unrefs all valid objects in
+ * the list and then removes them from @list if
  * they have not already been so removed.
  **/
 void

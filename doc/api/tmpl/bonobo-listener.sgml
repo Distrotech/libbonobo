@@ -7,7 +7,7 @@ An Event Listener (an implementation of Bonobo::Listener)
 <!-- ##### SECTION Long_Description ##### -->
 <para>
    The BonoboListener object is a CORBA server used to receive events
-   emmited by a remote Bonobo::EventSource server.  The combination
+   emitted by a remote Bonobo::EventSource server.  The combination
    EventSource/Listener is used to notify one or more client
    applications of events that happen in a component.    Think of the
    EventSource/Listener as a notification/callback system that allows
@@ -36,7 +36,6 @@ An Event Listener (an implementation of Bonobo::Listener)
 
     <informalexample>
       <programlisting>
-
 BonoboListener *keyboard_listener;
 
 my_listener_function (BonoboListener *l, char *event_name,
@@ -136,7 +135,7 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 </para>
 
 @listener: a pointer to the BonoboListener.
-@event_name: the event name that was emmited.
+@event_name: the event name that was emitted.
 @any: The value (A CORBA Any) that was passed by the EventSource.
 @ev: Environment for returning CORBA errors.
 @user_data: the data pointer specified when you called bonobo_listener_new

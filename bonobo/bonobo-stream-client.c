@@ -24,7 +24,7 @@
  * @size: number of bytes to write
  * @ev: a CORBA environment to return status information.
  *
- * This is a helper routine to write @size bytes from @buffer to the @stream
+ * This is a helper routine to write @size bytes from @buffer to the @stream.
  * It will continue to write bytes until a fatal error occurs.
  *
  */

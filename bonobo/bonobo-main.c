@@ -93,10 +93,10 @@ bonobo_x_error_handler (Display *display, XErrorEvent *error)
  *
  * To do graphical embedding in the X window system, Bonobo
  * uses the classic foreign-window-reparenting trick.  The
- * GtkPlug/GtkSocket widgets are used for thise purpose.  However,
+ * GtkPlug/GtkSocket widgets are used for this purpose.  However,
  * serious robustness problems arise if the GtkSocket end of the
  * connection unexpectedly dies.  The X server sends out DestroyNotify
- * events for the descendents of the GtkPlug (i.e., your embedded
+ * events for the descendants of the GtkPlug (i.e., your embedded
  * component's windows) in effectively random order.  Furthermore, if
  * you happened to be drawing on any of those windows when the
  * GtkSocket was destroyed (a common state of affairs), an X error
@@ -233,7 +233,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 /**
  * bonobo_activate:
  *
- * Activates the Bonobo POA manager registered by bonobo_init
+ * Activates the Bonobo POA manager registered by bonobo_init.
  * This should be called at the end of application initialization.
  * You do not need to call this function if you use bonobo_main().
  * 

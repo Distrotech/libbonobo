@@ -117,7 +117,7 @@ query_from_name (const char *name)
  *  This routine is used to continue building up the chain
  * that forms a multi-part moniker. The parent is referenced
  * as the parent and passed onto the next stage of parsing
- * the 'name'. We eventualy return a moniker handle which
+ * the 'name'. We eventually return a moniker handle which
  * represents the end of a linked list of monikers each
  * pointing to their parent:
  *

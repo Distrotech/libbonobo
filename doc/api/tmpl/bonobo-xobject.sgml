@@ -7,9 +7,9 @@ a simplified CORBA server object wrapper
 <!-- ##### SECTION Long_Description ##### -->
 <para>
 The BonoboXObject provides a backwards compatible, but easy to
-use way of writing CORBA servers. It drasticaly simplifies the
+use way of writing CORBA servers. It drastically simplifies the
 issues of epv and vepv construction by automating these, and
-automaticaly instantiates a CORBA_Object on gtk_type_new. This
+automatically instantiates a CORBA_Object on gtk_type_new. This
 removes clutter from construction time.
 </para>
 
@@ -41,7 +41,7 @@ typedef struct {
 </para>
 
 <para>
-Then we setup the type using the <function>bonobo_x_type_unique</function>
+Then we set up the type using the <function>bonobo_x_type_unique</function>
 function instead of gtk_type_unique ( but otherwise in the standard Gtk+
 fashion ).
   <example>
@@ -66,7 +66,7 @@ bonobo_control_get_type (void)
 		type = bonobo_x_type_unique (ptype,
 			POA_Bonobo_Control__init, NULL,
 			GTK_STRUCT_OFFSET (BonoboControlClass, epv),
-			&info);
+			&amp;info);
 	}
 	return type;
 }
@@ -82,16 +82,17 @@ BONOBO_X_TYPE_FUNC_FULL (BonoboControl, Bonobo_Control,
      </programlisting>
   </example>
 
-  The POA_Bonobo_Control__init is used to construct the CORBA object
+  The POA_Bonobo_Control__init function is used to construct the CORBA object
 and the GTK_STRUCT_OFFSET tells Bonobo where your epv structure is
 in the Class data, so it can build your epv for you.
-  The fini_fn is not used in ORBit, so it is faster to use NULL here.
+  The fini_fn function is not used in ORBit, so it is faster to use NULL here.
 </para>
 <para>
-Having registered the type in the class initialization function it
-is neccessary to fill out the epv with our entry points. NB. it may
-also be neccessary to override the parent's epv's, this can be done
-by accessing the class's parent's epv pointer.
+After registering the type in the class initialization function, we
+must fill out the epv with our entry points, similar to the way we
+hook up virtual class functions. It may also be necessary to override
+the parent's epv's; this can be done by accessing the epv pointer for
+the parent class.
   <example>
      <title>Setting up the class' methods</title>
      <programlisting>
@@ -99,7 +100,7 @@ static void
 bonobo_control_class_init (BonoboControlClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *)klass;
-	POA_Bonobo_Control__epv *epv = &klass->epv;
+	POA_Bonobo_Control__epv *epv = &amp;klass->epv;
 
 	bonobo_control_parent_class = gtk_type_class (PARENT_TYPE);
 

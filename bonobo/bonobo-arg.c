@@ -19,7 +19,7 @@
  * @t: the BonoboArgType eg. TC_long
  * 
  * Create a new BonoboArg with the specified type
- * the value of the BonoboArg is initialy empty.
+ * the value of the BonoboArg is initially empty.
  * 
  * Return value: 
  **/
@@ -224,7 +224,7 @@ bonobo_arg_type_to_gtk (BonoboArgType id)
  * @a: pointer to blank BonoboArg
  * @arg: GtkArg to copy
  * 
- * This maps a GtkArg @arg to a BonoboArg @a,
+ * This maps a GtkArg @arg to a BonoboArg @a;
  * @a must point to a freshly allocated BonoboArg
  * eg. such as returned by bonobo_arg_new
  **/
@@ -299,7 +299,7 @@ bonobo_arg_from_gtk (BonoboArg *a, const GtkArg *arg)
  * @a: pointer to a blank GtkArk
  * @arg: the BonoboArg to copy
  * 
- * Maps a BonoboArg to a GtkArg, @a must point
+ * Maps a BonoboArg to a GtkArg; @a must point
  * to a blank GtkArg.
  **/
 void
@@ -358,8 +358,8 @@ bonobo_arg_to_gtk (GtkArg *a, const BonoboArg *arg)
  * @b: a type code
  * @opt_ev: optional exception environment or NULL.
  * 
- * This compares two BonoboArgType's in @a and @b,
- * the @opt_ev is an optional CORBA_Environment for
+ * This compares two BonoboArgType's in @a and @b.
+ * The @opt_ev is an optional CORBA_Environment for
  * exceptions, or NULL. This function is commutative.
  * 
  * Return value: TRUE if equal, FALSE if different
@@ -390,7 +390,7 @@ bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b, CORBA_Environment *o
  * @b: another bonobo arg
  * @opt_ev: optional exception environment or NULL.
  * 
- * Compares two BonoboArgs for equivalence, will return TRUE
+ * Compares two BonoboArgs for equivalence; will return TRUE
  * if equivalent for all simple cases. For Object references
  * CORBA sometimes denies 2 object references are equivalent
  * even if they are [ this is a feature_not_bug ].

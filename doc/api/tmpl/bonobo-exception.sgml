@@ -9,12 +9,12 @@ maps CORBA exceptions to user readable text, + helper macros
 This module contains some useful helper functions
 that can be used to set various exceptions inside your
 CORBA methods. It also contains code to map between
-complex CORBA_Environment exception's and helpful
+complex CORBA_Environment exceptions and helpful
 strings suitable for display to the user.
 </para>
 
 <para>
-Typicaly to test for exceptions the BONOBO_EX macro
+Typically to test for exceptions the BONOBO_EX macro
 is used thus:
   <example>
      <title>Bonobo exception trapping and reporting</title>

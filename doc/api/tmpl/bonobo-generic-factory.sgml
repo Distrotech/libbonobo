@@ -9,14 +9,14 @@ The basic, generic Bonobo object factory implementation
 The vast majority of Bonobo objects are created by the
 #BonoboGenericFactory implementation. This provides a
 very simple C sugar wrapper of the GNOME::ObjectFactory
-IDL interface, used by Oaf to instantiate new objects.
+IDL interface, used by OAF to instantiate new objects.
 </para>
 
 <para>
 Most applications when they start up will register their
-Bonobo object factory with oaf, this can be done like this:
+Bonobo object factory with OAF, this can be done like this:
   <example>
-    <title>How to register a factory with Oaf</title>
+    <title>How to register a factory with OAF</title>
     <programlisting>
 BonoboGenericFactory *factory;
 
@@ -26,7 +26,7 @@ factory = bonobo_generic_factory_new_multi (
 bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));
     </programlisting>
   </example>
-  This registers the factory with Oaf, associated with your
+  This registers the factory with OAF, associated with your
 factory's OAFIID ( as specified in the installed .oaf file ).
 The running_context_auto_exit_unref function is used to ensure
 that the program exits the gtk main loop when all of the factory's
@@ -34,7 +34,7 @@ that the program exits the gtk main loop when all of the factory's
 </para>
 <para>
 When an object that is created by your factory is demanded from
-oaf the my_factory_function will be called:
+OAF the my_factory_function will be called:
   <example>
     <title>A simple factory</title>
     <programlisting>
@@ -50,22 +50,22 @@ my_factory_fn (BonoboGenericFactory *this,
 	if (!strcmp (object_id, "OAFIID:Bonobo_Sample_Clock"))
 		object = bonobo_clock_control_new ();
 	else
-		g_warning ("Unknown OAFIID");
+		g_warning ("Unknown OAFIID '%s'", object_id);
 
 	return object;
 }
      </programlisting>
   </example>
-  This will return the newly constructed object via Oaf to
+  This will return the newly constructed object via OAF to
 the Object requestor.
 </para>
 
 <para>
 The generic factory works in two modes, multi and plain,
-it is reccommended that the multi mode be used. Also, there
+it is recommended that the multi mode be used. Also, there
 is a macro that can be used for simple components to remove
 the burden of writing the main function and getting the
-initialization correct, see #BONOBO_OAF_FACTORY_MULTI
+initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
