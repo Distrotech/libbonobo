@@ -51,10 +51,16 @@ oafd_CORBA_Context_get_value (CORBA_Context         ctx,
 	if (local_ev._major == CORBA_NO_EXCEPTION) {
 		if (nvout->list->len > 0) {
 			CORBA_NamedValue *nv;
+                        int i;
 
-			nv = &g_array_index (nvout->list, CORBA_NamedValue, 0);
+                        for (i = 0; i < nvout->list->len; i++) {
+                                nv = &g_array_index (nvout->list, 
+                                                     CORBA_NamedValue, i);
+                                if (!strcmp (nv->name, propname)) break;
+                        }
 
-			retval = g_strdup (*(char **) nv->argument._value);
+                        if (i < nvout->list->len)
+                                retval = g_strdup (*(char **) nv->argument._value);
 		} 
 
 		CORBA_NVList_free (nvout, &local_ev);
