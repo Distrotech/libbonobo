@@ -12,14 +12,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
-"POT-Creation-Date: 2004-05-29 11:19+0100\n"
-"PO-Revision-Date: 2004-02-01 02:05+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-18 23:07+0300\n"
+"PO-Revision-Date: 2004-08-19 02:02+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -31,11 +31,11 @@ msgstr "Epäkelpo aktivointi-ID"
 
 #: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
-msgstr "Hakemisto, josta .server-tiedostot luetaan"
+msgstr "Kansio, josta .server-tiedostot luetaan"
 
 #: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
-msgstr "HAKEMISTO"
+msgstr "KANSIO"
 
 #: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
@@ -94,7 +94,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1148
+#: activation-server/object-directory-corba.c:1149
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Kilpatilanne palvelimen \"%s\" aktivoituessa"
@@ -131,7 +131,7 @@ msgstr "Virheellisen muotoisen XML-tiedoston jäsennys epäonnistui: %s"
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr "Kokeillaan hakemistoa %s"
+msgstr "Kokeillaan kansiota %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -157,18 +157,18 @@ msgstr "Lapsiprosessi vastaanotti signaalin %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Tuntematon ei-lopetusvirhe (tila on %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:403
+#: bonobo-activation/bonobo-activation-fork-server.c:404
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "bonobo-aktivointi ei onnistunut asettamaan komennon %s prosessiryhmää: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:415
+#: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Ohjelman %s käynnistys epäonnistui: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:88
+#: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "Maa-asetustolla on liian monta alias-tasoa, mikä voi merkitä silmukkaa"
 
@@ -217,11 +217,11 @@ msgstr "Nimi"
 msgid "Application unique name"
 msgstr "Sovelluksen ainutkertainen nimi"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "Custom CORBA POA"
 msgstr "Mukautettu CORBA POA"
 
@@ -483,19 +483,19 @@ msgstr "Bonobo-aktivoinnin asetustiedosto sisältää:\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr "Hakemisto, joka poistetaan asetustiedostosta"
+msgstr "Kansio, joka poistetaan asetustiedostosta"
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
-msgstr "hakemisto"
+msgstr "kansion polku"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr "Hakemisto, joka lisätään asetustiedostoon"
+msgstr "Kansio, joka lisätään asetustiedostoon"
 
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
-msgstr "Näytä asetustiedostossa olevat hakemistot"
+msgstr "Näytä asetustiedostossa olevat kansiot"
 
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
