@@ -1,3 +1,8 @@
+2001-08-08  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am: make dependency fix more portable
+	with Peter Wainwright's solution.
+
 2001-08-08  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-types.h (bonobo_value_get_*): Constify the arg.
