@@ -172,7 +172,7 @@ od_dump_list (impl_POA_Bonobo_ObjectDirectory * od)
 			Bonobo_Property *prop =
 				&(od->attr_servers._buffer[i].
 				  props._buffer[j]);
-                        if (strstr (prop->name, "-")) /* Translated, likely to
+                        if (strchr (prop->name, '-') != NULL) /* Translated, likely to
                                                          be annoying garbage value */
                                 continue;
 

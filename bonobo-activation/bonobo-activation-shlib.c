@@ -99,7 +99,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
                         Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
 
                         error_string = g_strdup_printf (
-                                _("g_module_open of '%s' failed with '%s'"),
+                                _("g_module_open of `%s' failed with `%s'"),
                                 filename, g_module_error ());
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -117,7 +117,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
 			g_module_close (gmod);
 
                         error_string = g_strdup_printf (
-                                _("Can't find symbol Bonobo_Plugin_info in '%s'"),
+                                _("Can't find symbol Bonobo_Plugin_info in `%s'"),
                                 filename);
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -153,7 +153,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
                         Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
 
                         error_string = g_strdup_printf (
-                                _("Can't find symbol Bonobo_Plugin_info in '%s'"),
+                                _("Can't find symbol Bonobo_Plugin_info in `%s'"),
                                 filename);
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -201,7 +201,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
                                 if (ev->_major == CORBA_NO_EXCEPTION) {
                                         Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
                                         char *error_string = g_strdup_printf (
-                                                _("Factory '%s' returned NIL for '%s'"),
+                                                _("Factory `%s' returned NIL for `%s'"),
                                                 pobj->iid, iid);
                                         error->description = CORBA_string_dup (error_string);
                                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -218,7 +218,7 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
 	} else {
                 Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
                 char *error_string = g_strdup_printf (
-                        _("Shlib '%s' didn't contain '%s'"),
+                        _("Shlib `%s' didn't contain `%s'"),
                         filename, iid);
                 error->description = CORBA_string_dup (error_string);
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
