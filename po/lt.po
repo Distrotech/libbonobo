@@ -5,8 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-12-08 23:52+0000\n"
-"PO-Revision-Date: 2003-09-23 19:04+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-31 11:32+0200\n"
+"PO-Revision-Date: 2003-12-29 20:50+0200\n"
 "Last-Translator: Tomas Kuliavas <tokul@users.sourceforge.net>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -61,13 +62,12 @@ msgid "Name service"
 msgstr "Vardų paslauga"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Vardų paslauga"
+msgstr "Informavimo paslauga"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Informavimo apie aktyvavimą paslauga"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -89,7 +89,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1128
+#: activation-server/object-directory-corba.c:1130
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Konfliktinė situacija paleidžiant serverį '%s'"
@@ -192,13 +192,13 @@ msgstr "'%s' gamykla grąžino NIL skirtą `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' neturėjo `%s'"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
-msgstr ""
+msgstr "Vardas"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
-msgstr ""
+msgstr "Programos unikalus vardas"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
