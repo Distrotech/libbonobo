@@ -512,6 +512,8 @@ qexp_evaluate_function (Bonobo_ServerInfo * si, QueryExpr * e,
 
 	fi = &qexp_func_impls[i];
 	if (!fi->name) {
+                retval.value_known = FALSE;
+                retval.needs_free = FALSE;
 		g_warning ("Invalid function name '%s'", func_name);
 		return retval;
 	}
