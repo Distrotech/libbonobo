@@ -11,6 +11,7 @@ INCLUDES=					\
 	-I$(top_builddir) 			\
 	-I$(top_builddir)/bonobo-activation	\
 	-I$(top_srcdir)/bonobo-activation	\
+	-DPREFIX=\""$(prefix)"\"		\
 	-DSERVERINFODIR=\"$(libdir)/bonobo/servers\" \
         -DSERVER_LOCALEDIR=\""${prefix}/${DATADIRNAME}/locale"\" \
 	$(SERVER_CFLAGS)			\

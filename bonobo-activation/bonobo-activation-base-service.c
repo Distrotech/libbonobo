@@ -720,9 +720,25 @@ void
 bonobo_activation_base_service_init (void)
 {
         const char *override_cmd;
+#ifndef G_OS_WIN32
         static const char *bonobo_activation_ac_cmd[] =
                 { SERVER_LIBEXECDIR "/bonobo-activation-server",
                   "--ac-activate", "--ior-output-fd=%d", NULL };
+#else
+        static const char *bonobo_activation_ac_cmd[] =
+                { NULL,
+                  "--ac-activate", "--ior-output-fd=%d", NULL };
+        static gboolean beenhere = FALSE;
+        extern char *_server_libexecdir; /* In bonobo-activation-init.c */
+
+        if (!beenhere) {
+                bonobo_activation_ac_cmd[0] =
+                        g_strconcat (_server_libexecdir,
+                                     "/bonobo-activation-server",
+                                     NULL);
+                beenhere = TRUE;
+        }
+#endif
 
 	bonobo_activation_base_service_activator_add (local_activator, 0);
 

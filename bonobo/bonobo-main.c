@@ -31,6 +31,67 @@ PortableServer_POAManager __bonobo_poa_manager = CORBA_OBJECT_NIL;
 static guint              bonobo_main_loop_level = 0;
 static GSList *           bonobo_main_loops = NULL;
 
+#ifdef G_OS_WIN32
+
+#ifndef PIC
+#error Must build as a DLL
+#endif
+
+#include <windows.h>
+#include <mbstring.h>
+
+static char *bonobo_localedir;
+
+static char *
+replace_prefix (const char *runtime_prefix,
+		const char *configure_time_path)
+{
+  if (strncmp (configure_time_path, PREFIX "/", strlen (PREFIX) + 1) == 0) {
+          return g_strconcat (runtime_prefix,
+                              configure_time_path + strlen (PREFIX),
+                              NULL);
+  } else
+          return g_strdup (configure_time_path);
+}
+
+/* DllMain function needed to fetch the DLL name and deduce the
+ * installation directory from that, and then form the pathnames for
+ * various directories relative to the installation directory.
+ */
+BOOL WINAPI
+DllMain (HINSTANCE hinstDLL,
+	 DWORD     fdwReason,
+	 LPVOID    lpvReserved)
+{
+  char cpbfr[1000];
+  
+  switch (fdwReason) {
+  case DLL_PROCESS_ATTACH:
+          if (GetModuleFileNameA ((HMODULE) hinstDLL,
+                                  cpbfr, G_N_ELEMENTS (cpbfr))) {
+		  gchar *p = _mbsrchr (cpbfr, '\\');
+		  
+		  if (p != NULL)
+			  *p = '\0';
+                  
+		  p = _mbsrchr (cpbfr, '\\');
+		  if (p && (g_ascii_strcasecmp (p + 1, "bin") == 0 ||
+			    g_ascii_strcasecmp (p + 1, "lib") == 0))
+			  *p = '\0';
+	  } else {
+		  cpbfr[0] = '\0';
+	  }
+
+          bonobo_localedir = replace_prefix (cpbfr, BONOBO_LOCALEDIR);
+  }
+  return TRUE;
+}
+
+#undef BONOBO_LOCALEDIR
+#define BONOBO_LOCALEDIR bonobo_localedir
+
+#endif
+
 /**
  * bonobo_orb:
  *

@@ -32,6 +32,12 @@
 #include "bonobo-activation/bonobo-activation-i18n.h"
 #include "object-directory-config-file.h"
 
+#ifdef G_OS_WIN32
+extern const char *_server_confdir;
+#undef SERVER_CONFDIR
+#define SERVER_CONFDIR _server_confdir
+#endif
+
 static xmlDocPtr
 object_directory_load_xml_file (void)
 {
@@ -81,7 +87,7 @@ object_directory_load_config_file (void)
 
                                         directory = xmlNodeGetContent (item_node);
                                         if (directory) {
-                                                result = g_strconcat (old_result, ":", directory, NULL);
+                                                result = g_strconcat (old_result, G_SEARCHPATH_SEPARATOR_S, directory, NULL);
                                                 xmlFree (directory);
                                                 g_free (old_result);
                                         }

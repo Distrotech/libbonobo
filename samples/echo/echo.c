@@ -48,8 +48,19 @@ impl_demo_echo_echo (PortableServer_Servant  servant,
 {
 	Echo *echo = ECHO (bonobo_object (servant));
 									 
-	printf ("Echo message received: %s (echo instance data: %s)\n",
-		string, echo->instance_data);
+	/* activation-server-main.c redirects fd 2 to the bit bucket
+	 * 2, so we need to freopen stdout if we want the below output
+	 * to show up. Try the controlling terminal.
+	 */
+	if (freopen (
+#ifdef G_OS_WIN32
+		     "CONOUT$",
+#else
+		     "/dev/tty",
+#endif
+		     "w", stdout))
+	    printf ("Echo message received: %s (echo instance data: %s)\n",
+		    string, echo->instance_data);
 }
 
 static void

@@ -116,11 +116,18 @@ unalias_lang (char *lang)
   int i;
   if (!alias_table)
     {
+#ifdef G_OS_WIN32
+      extern char *_bonobo_activation_localedir;
+      char *aliases = g_strconcat (_bonobo_activation_localedir, "/locale.alias", NULL);
+      read_aliases (aliases);
+      g_free (aliases);
+#else
       read_aliases (BONOBO_ACTIVATION_LOCALEDIR "/locale.alias");
       read_aliases ("/usr/share/locale/locale.alias");
       read_aliases ("/usr/local/share/locale/locale.alias");
       read_aliases ("/usr/lib/X11/locale/locale.alias");
       read_aliases ("/usr/openwin/lib/locale/locale.alias");
+#endif
     }
   i = 0;
   while ((p=g_hash_table_lookup(alias_table,lang)) && strcmp(p, lang))

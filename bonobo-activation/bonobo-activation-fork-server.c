@@ -242,6 +242,10 @@ bonobo_activation_server_by_forking (
         ai.re_check = re_check;
         ai.user_data = user_data;
 
+#ifdef BONOBO_ACTIVATION_DEBUG
+        ai.do_srv_output = getenv ("BONOBO_ACTIVATION_DEBUG_EXERUN");
+#endif
+                
         if (!use_new_loop &&
             (retval = scan_list (running_activations, &ai, ev)) != CORBA_OBJECT_NIL)
                 return retval;
@@ -249,7 +253,8 @@ bonobo_activation_server_by_forking (
      	pipe (iopipes);
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        fprintf (stderr, " SPAWNING: '%s' for '%s'\n", cmd[0], act_iid);
+        if (ai.do_srv_output)
+                fprintf (stderr, " SPAWNING: '%s' for '%s'\n", cmd[0], act_iid);
 #endif
 
 #ifdef G_OS_WIN32
@@ -356,10 +361,6 @@ bonobo_activation_server_by_forking (
 		return CORBA_OBJECT_NIL;
 	}
 
-#ifdef BONOBO_ACTIVATION_DEBUG
-        ai.do_srv_output = getenv ("BONOBO_ACTIVATION_DEBUG_EXERUN");
-#endif
-                
         close (iopipes[1]);
 
         if (newenv) {

@@ -1,3 +1,69 @@
+2005-02-25  Tor Lillqvist  <tml@novell.com>
+
+	Further improvements to Windows port. Make it independent of
+	installation location, i.e. don't use any hardcoded paths in the
+	binaries.
+
+	* configure.in: Set SEARCHPATHSEP to ";" on Win32, ":" on
+	Unix. AC_SUBST it.
+
+	* libbonobo-zip.in: Refinements.
+
+	* activation-server/Makefile.am
+	* bonobo/Makefile.am
+	* bonobo-activation/Makefile.am: Pass the configure-time
+	installation prefix to the compilations.
+
+	* */*.c: Use G_SEARCHPATH_SEPARATOR instead of hardcoded colon.
+
+	* activation-server/activation-server-main.c
+	(server_win32_replace_prefix, whereami): New functions. Look up
+	the executable's pathname at runtime, deduce end-user installation
+	prefix from that, form run-time strings corresponding to
+	SERVERINFODIR, SERVER_LOCALEDIR and SERVER_CONFDIR from that.
+	(main): Call whereami().
+
+	* activation-server/object-directory-load.c (parse_oaf_server_attrs):
+	If the prefix of the pathname to an exe or shlib file matches our
+	configure-time prefix, replace it with the actual end-user
+	installation prefix, so that .server files don't have to be edited
+	at end-user installation time.
+
+	* activation-server/server.h: Declare server_win32_replace_prefix().
+
+	* activation-server/test-performance.c
+	(server_win32_replace_prefix): Dummy implementation. This function
+	is needed in test-performance, too, but as test-performance isn't
+	installed, we cannot know the run-time prefix. On the other hand,
+	this is a test program that will be run only on the build machine
+	anyway, so we can use the configure-time paths.
+
+	* bonobo/bonobo-main.c (replace_prefix, DllMain): New
+	functions. Automatically deduce installation location on end-user
+	machine. Form run-time BONOBO_LOCALEDIR.
+
+	* bonobo-activation/bonobo-activation-base-service.c
+	(bonobo_activation_base_service_init): Use run-time
+	SERVER_LIBEXECDIR.
+
+	* bonobo-activation/bonobo-activation-fork-server.c: Print debug
+	message only if BONOBO_ACTIVATION_DEBUG_EXERUN.
+
+	* bonobo-activation/bonobo-activation-get-language-list.c
+	(unalias_lang): Use run-time path to locale.alias on
+	Windows. Don't use Unix-specific fixed pathnames.
+
+	* bonobo-activation/bonobo-activation-init.c (replace_prefix,
+	DllMain): As above.
+
+	* samples/echo/echo.c (impl_demo_echo_echo): freopen stdout to the
+	controlling terminal as the activation server has redirected it to
+	/dev/null.
+
+	* tests/Makefile.am
+	* tests/test-activation/Makefile.am: Use SEARCHPATHSEP when
+	setting BONOBO_ACTIVATION_PATH.
+	
 2005-02-22  Tor Lillqvist  <tml@novell.com>
 
 	Port to Windows:

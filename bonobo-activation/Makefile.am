@@ -5,6 +5,7 @@ lib_LTLIBRARIES=libbonobo-activation.la
 INCLUDES=					\
 	-I$(top_srcdir)				\
 	-I$(top_builddir)			\
+	-DPREFIX=\""$(prefix)\""		\
 	-DSERVER_LIBEXECDIR=\""$(libexecdir)\"" \
         -DBONOBO_ACTIVATION_LOCALEDIR=\""${prefix}/${DATADIRNAME}/locale"\" \
 	$(LIBBONOBO_CFLAGS)			\

@@ -93,4 +93,4 @@ dist-hook:
 
 TESTS_ENVIRONMENT = \
 	BONOBO_ACTIVATION_DEBUG=1 \
-	BONOBO_ACTIVATION_PATH="$(srcdir):$(top_builddir)/activation-server:$$BONOBO_ACTIVATION_PATH"
+	BONOBO_ACTIVATION_PATH="$(srcdir)$(SEARCHPATHSEP)$(top_builddir)/activation-server$(SEARCHPATHSEP)$$BONOBO_ACTIVATION_PATH"

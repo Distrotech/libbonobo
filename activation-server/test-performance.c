@@ -7,6 +7,22 @@
 
 static GTimer *timer;
 
+#ifdef G_OS_WIN32
+
+/* On Win32, as test-performance isn't installed, we cannot deduce the
+ * "real" installation directory, and must assume that the
+ * configure-time paths are valid. But running test-performance on the
+ * build machine only is the intention anyway.
+ */
+
+const char *
+server_win32_replace_prefix (const char *configure_time_path)
+{
+  return g_strdup (configure_time_path);
+}
+
+#endif
+
 static void
 test_server_info_load (void)
 {

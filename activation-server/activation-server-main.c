@@ -51,6 +51,11 @@
 
 #include <libxml/parser.h>
 
+#ifdef G_OS_WIN32
+#include <windows.h>
+#include <mbstring.h>
+#endif
+
 #ifdef BONOBO_ACTIVATION_DEBUG
 static void debug_queries (void);
 #endif
@@ -85,10 +90,69 @@ static struct poptOption options[] = {
 	 N_("Query expression to evaluate"), N_("EXPRESSION")},
 #endif
 
-	POPT_AUTOHELP {NULL}
+	POPT_AUTOHELP
+        {NULL}
 };
 
 GMainLoop *main_loop = NULL;
+
+#ifdef G_OS_WIN32
+
+static const char *runtime_prefix;
+static const char *serverinfodir;
+static const char *server_localedir;
+const char *_server_confdir;
+
+const char *
+server_win32_replace_prefix (const char *configure_time_path)
+{
+  if (strncmp (configure_time_path, PREFIX "/", strlen (PREFIX) + 1) == 0) {
+          return g_strconcat (runtime_prefix,
+                              configure_time_path + strlen (PREFIX),
+                              NULL);
+  } else
+          return g_strdup (configure_time_path);
+}
+
+/* Fetch the executable's full path and deduce the installation
+ * directory from that, and then form the pathnames for various
+ * directories relative to the installation directory.
+ */
+static void 
+whereami (void)
+{
+  char cpbfr[1000];
+  
+  if (GetModuleFileNameA (NULL, cpbfr, G_N_ELEMENTS (cpbfr))) {
+          gchar *p = _mbsrchr (cpbfr, '\\');
+          
+          if (p != NULL)
+                  *p = '\0';
+          
+          p = _mbsrchr (cpbfr, '\\');
+          if (p && g_ascii_strcasecmp (p + 1, "libexec") == 0)
+                  *p = '\0';
+  } else {
+          cpbfr[0] = '\0';
+  }
+  
+  runtime_prefix = g_strdup (cpbfr);
+  
+  serverinfodir = server_win32_replace_prefix (SERVERINFODIR);
+  server_localedir = server_win32_replace_prefix (SERVER_LOCALEDIR);
+  _server_confdir = server_win32_replace_prefix (SERVER_CONFDIR);
+}
+
+#undef SERVERINFODIR
+#define SERVERINFODIR serverinfodir
+
+#undef SERVER_LOCALEDIR
+#define SERVER_LOCALEDIR server_localedir
+
+#undef SERVER_CONFDIR
+#define SERVER_CONFDIR _server_confdir
+
+#endif
 
 static GString *
 build_src_dir (void)
@@ -108,35 +172,35 @@ build_src_dir (void)
 
         if (od_source_dir) {
                 g_string_append (real_od_source_dir, od_source_dir);
-                g_string_append_c (real_od_source_dir, ':');
+                g_string_append_c (real_od_source_dir, G_SEARCHPATH_SEPARATOR);
         }
 
         if (env_od_source_dir) {
                 g_string_append (real_od_source_dir,
                                  env_od_source_dir);
-                g_string_append_c (real_od_source_dir, ':');
+                g_string_append_c (real_od_source_dir, G_SEARCHPATH_SEPARATOR);
         }
 
         if (config_file_od_source_dir) {
                 g_string_append (real_od_source_dir,
                                  config_file_od_source_dir);
                 g_free (config_file_od_source_dir);
-                g_string_append_c (real_od_source_dir, ':');
+                g_string_append_c (real_od_source_dir, G_SEARCHPATH_SEPARATOR);
         }
 
         if (gnome_env_od_source_dir) {
-                gnome_dirs = g_strsplit (gnome_env_od_source_dir, ":", -1);
+                gnome_dirs = g_strsplit (gnome_env_od_source_dir, G_SEARCHPATH_SEPARATOR_S, -1);
                 gnome_od_source_dir = g_string_new("");
                 for (i=0; gnome_dirs[i]; i++) {
                         g_string_append (gnome_od_source_dir,
                                          gnome_dirs[i]);
                         g_string_append (gnome_od_source_dir,
-                                         "/lib/bonobo/servers:");
+                                         "/lib/bonobo/servers" G_SEARCHPATH_SEPARATOR_S);
                 }
                 g_strfreev (gnome_dirs);
                 g_string_append (real_od_source_dir,
                                  gnome_od_source_dir->str);
-                g_string_append_c (real_od_source_dir, ':');
+                g_string_append_c (real_od_source_dir, G_SEARCHPATH_SEPARATOR);
         }
 
         g_string_append (real_od_source_dir, SERVERINFODIR);
@@ -297,6 +361,10 @@ main (int argc, char *argv[])
 	gchar                        *syslog_ident;
 #endif
 	const gchar                  *debug_output_env;
+
+#ifdef G_OS_WIN32
+        whereami ();
+#endif
 
 #ifdef HAVE_SETSID
         /*

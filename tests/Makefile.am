@@ -48,7 +48,7 @@ TESTS_ENVIRONMENT =					\
 	LD_LIBRARY_PATH="$(top_builddir)/bonobo/.libs:$$LD_LIBRARY_PATH"	\
 	PATH="$(top_builddir)/bonobo/.libs:$$PATH"	\
 	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"\
-	BONOBO_ACTIVATION_PATH="$(srcdir):$$BONOBO_ACTIVATION_PATH"\
+	BONOBO_ACTIVATION_PATH="$(srcdir)$(SEARCHPATHSEP)$$BONOBO_ACTIVATION_PATH"\
 	MODELS_DIR="$(srcdir)/models"
 
 TESTS = test-moniker$(EXEEXT) test-event-source$(EXEEXT) test-object$(EXEEXT) \

@@ -58,4 +58,3 @@ extern struct poptOption bonobo_activation_popt_options[];
 G_END_DECLS
 
 #endif /* BONOBO_ACTIVATION_INIT_H */
-

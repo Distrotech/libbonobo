@@ -157,6 +157,14 @@ parse_oaf_server_attrs (ParseInfo      *info,
                 return;
         }
 
+#ifdef G_OS_WIN32
+        /* Possibly replace configure-time shlib or exe location
+         * with the actual installed one.
+         */
+        if (!strcmp (type, "exe") || !strcmp (type, "shlib"))
+                location = server_win32_replace_prefix (location);
+#endif
+
         /* Now create the ServerInfo object */
         info->cur_server = g_new0 (Bonobo_ServerInfo, 1);
 
@@ -166,6 +174,11 @@ parse_oaf_server_attrs (ParseInfo      *info,
         info->cur_server->hostname = CORBA_string_dup (info->host);
         info->cur_server->username = CORBA_string_dup (g_get_user_name ());
         info->cur_server->domain = CORBA_string_dup ("unused");
+
+#ifdef G_OS_WIN32
+        if (!strcmp (type, "exe") || !strcmp (type, "shlib"))
+                g_free ((char *) location);
+#endif
 }
 
 static GHashTable *interesting_locales = NULL;

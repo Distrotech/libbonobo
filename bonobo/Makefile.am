@@ -4,6 +4,7 @@ INCLUDES = \
 	-I$(top_builddir) 				\
 	$(WARN_CFLAGS)					\
 	$(LIBBONOBO_CFLAGS)				\
+	-DPREFIX=\""$(prefix)"\"			\
         -DBONOBO_LIBDIR=\""$(libdir)"\" 		\
         -DBONOBO_DATADIR=\""$(datadir)"\" 		\
         -DBONOBO_PIXMAPDIR=\""$(datadir)/pixmaps"\"	\

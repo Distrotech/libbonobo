@@ -212,7 +212,7 @@ split_path_unique (const char *colon_delimited_path)
 
         g_return_val_if_fail (colon_delimited_path != NULL, NULL);
 
-        wrk = g_strsplit (colon_delimited_path, ":", -1);
+        wrk = g_strsplit (colon_delimited_path, G_SEARCHPATH_SEPARATOR_S, -1);
 
         g_return_val_if_fail (wrk != NULL, NULL);
 
