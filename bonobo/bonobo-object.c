@@ -16,6 +16,7 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include "Bonobo.h"
+#include "bonobo-running-context.h"
 #include "bonobo-object-directory.h"
 
 /* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
@@ -513,7 +514,7 @@ bonobo_object_query_local_interface (BonoboObject *object,
 #else
 		    !strcmp (tryme->corba_objref->object_id, repo_id)
 #endif
-			){
+			) {
 			retval = tryme;
 			break;
 		}
@@ -581,6 +582,7 @@ bonobo_object_finalize_real (GtkObject *object)
 	CORBA_exception_init (&ev);
 
 	if (bonobo_object->corba_objref != CORBA_OBJECT_NIL) {
+		bonobo_running_context_remove_object (bonobo_object->corba_objref);
 		CORBA_Object_release (bonobo_object->corba_objref, &ev);
 		bonobo_object->corba_objref = CORBA_OBJECT_NIL;
 	}
@@ -798,6 +800,7 @@ bonobo_object_activate_servant (BonoboObject *object, void *servant)
 	if (o) {
 		object->corba_objref = o;
 		bonobo_object_bind_to_servant (object, servant);
+		bonobo_running_context_add_object (o);
 		return o;
 	} else
 		return CORBA_OBJECT_NIL;
@@ -836,7 +839,9 @@ bonobo_object_construct (BonoboObject *object, CORBA_Object corba_object)
  *
  * Adds the interfaces supported by @newobj to the list of interfaces
  * for @object.  This function adds the interfaces supported by
- * @newobj to the list of interfaces support by @object.
+ * @newobj to the list of interfaces support by @object. It should never
+ * be used when the object has been exposed to the world. This is a firm
+ * part of the contract.
  */
 void
 bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)

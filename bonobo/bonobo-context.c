@@ -11,6 +11,7 @@
 
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
+#include <bonobo/bonobo-running-context.h>
 #include <bonobo/bonobo-activation-context.h>
 
 static GHashTable *bonobo_contexts = NULL;
@@ -63,6 +64,21 @@ bonobo_context_get (const CORBA_char  *context_name,
 		return CORBA_OBJECT_NIL;
 }
 
+static void
+context_add (BonoboObject *object, const char *name)
+{
+	CORBA_Object ref;
+
+	ref = bonobo_object_corba_objref (object);
+
+	bonobo_context_add (name, ref);
+
+	/* Don't count it as a running object; we always have it */
+	bonobo_running_context_remove_object (ref);
+
+	bonobo_object_unref (object);
+}
+
 /**
  * bonobo_context_init:
  * @void: 
@@ -72,12 +88,8 @@ bonobo_context_get (const CORBA_char  *context_name,
 void
 bonobo_context_init (void)
 {
-	BonoboObject *object;
-
-	object = bonobo_activation_context_new ();
-	bonobo_context_add ("Activation", 
-			    bonobo_object_corba_objref (object));
-	bonobo_object_unref (object);
+	context_add (bonobo_activation_context_new (), "Activation");
+	context_add (bonobo_running_context_new (),    "Running");
 }
 
 static gboolean

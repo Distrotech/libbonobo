@@ -5,9 +5,6 @@ the GNOME/ and Bonobo/ toplevel namespaces; the following spaces have
 been registered to the following projects, and are controlled by the
 following people [ subject to any pending complaints ]:
 
-* Bonobo/
-	[ reserved for component infastructure ]
-
 * GNOME/			michael@helixcode.com, jirka@5z.com
 
 subdomains:
@@ -27,8 +24,9 @@ subdomains:
 	Guppi/			guppi3		trow@gnu.org
 	MrProject/		mr-project	richard.hult@codefactory.se
 	Nautilus/		Nautilus	darin@eazel.com
-	Print/			gnome-print	chema@celorio.com
+	Pilot/			gnome-pilot	eskil@eazel.com
 	PonG/			pong	  	jirka@5z.com
+	Print/			gnome-print	chema@celorio.com
 	SodiPodi/		sodipodi	lauris@helixcode.com
 	Spell/			gtkhtml		rodo@helixcode.com
 	Terminal/		gnome-core	jirka@5z.com, jacob@helixcode.com	
@@ -58,3 +56,12 @@ Desktop/
 
 help_browser/
 	simple_browser		gnome-core
+
+[ reserved for component infastructure ]
+
+* Bonobo/			miguel@helixcode.com, michael@helixcode.com
+	Moniker/
+	Sample/
+		Hello		bonobo-hello
+		Gnomines	bonobo-mines
+		Text		bonobo-text-plain

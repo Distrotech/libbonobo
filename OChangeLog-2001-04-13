@@ -1,5 +1,27 @@
 2000-12-12  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-bind-context.[ch]: clean out cruft.
+
+	* bonobo-component-directory.[ch]: ditto.
+	
+	* bonobo/bonobo-object.c (bonobo_object_finalize_real):
+	remove object from running context.
+	(bonobo_object_activate_servant): add object to context.
+
+	* bonobo/bonobo-context.c (bonobo_context_init):
+	add the 'Running' context.
+	(context_add): split from (bonobo_context_init): here.
+
+	* bonobo/Makefile.am: don't install internal context stuff,
+	should be used via. the CORBA interface anyway by everyone.
+	add bonobo-running-context stuff.
+
+	* bonobo/bonobo-running-context.[ch]: impl.
+
+	* idl/bonobo-context.idl: flesh out running context.
+
+2000-12-12  Michael Meeks  <michael@helixcode.com>
+
 	* tests/test-any.c (main): add gtk_type_init.
 
 2000-12-11  Michael Meeks  <michael@helixcode.com>
