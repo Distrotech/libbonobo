@@ -1,5 +1,9 @@
 1999-04-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* bonobo/test-container.c,sample-server.c,
+	components/image-x-png/bonobo-image-x-png:  Simplify by using the
+	gnome-bonobo.h header file.
+
 	* bonobo/gnome-stream-memory.c (mem_read): Typo fix.  And use the
 	auto-release feature for sequences from Elliot.
 

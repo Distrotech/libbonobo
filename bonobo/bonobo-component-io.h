@@ -2,6 +2,7 @@
 #define _GNOME_COMPONENT_IO_H_
 
 #include <bonobo/gnome-component.h>
+#include <bonobo/gnome-storage.h>
 
 BEGIN_GNOME_DECLS
 
