@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-20 12:09+0100\n"
+"POT-Creation-Date: 2004-03-08 11:00+0000\n"
 "PO-Revision-Date: 2004-02-20 12:10+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -33,7 +33,8 @@ msgstr "DIRECTORY"
 
 #: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "Sjellje si ActivationContext (e prezgjedhur është vetëm ObjectDirectory)"
+msgstr ""
+"Sjellje si ActivationContext (e prezgjedhur është vetëm ObjectDirectory)"
 
 #: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
@@ -70,7 +71,8 @@ msgstr "Shërbimi i njoftimeve për aktivimin"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Aktivimi i objekteve shlib në një proçes remot nuk mund të kryhet akoma"
+msgstr ""
+"Aktivimi i objekteve shlib në një proçes remot nuk mund të kryhet akoma"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
@@ -155,7 +157,8 @@ msgstr "Gabim i jo-daljes i panjohur (gjëndja është %u)"
 #: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-activation dështoi gjatë caktimit të grupit të proçesit %s: %s\n"
+msgstr ""
+"bonobo-activation dështoi gjatë caktimit të grupit të proçesit %s: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
@@ -293,7 +296,8 @@ msgstr "përshkrim i keqformuar XML i interfaqes së përdoruesit"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "pozicioni për tek elementi XML i interfaqes së përdoruesit nuk është i saktë "
+msgstr ""
+"pozicioni për tek elementi XML i interfaqes së përdoruesit nuk është i saktë "
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -493,4 +497,3 @@ msgstr "Shfaq directories tek file i konfigurimit"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Shfaq pozicionin e file të konfigurimit"
-

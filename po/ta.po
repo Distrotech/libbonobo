@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil Libbonobo 1.9.7\n"
-"POT-Creation-Date: 2004-02-21 20:37+0100\n"
+"POT-Creation-Date: 2004-03-08 11:00+0000\n"
 "PO-Revision-Date: 2004-02-21 18:48-0600\n"
 "Last-Translator: Dinesh Nadarajah <dinesh_list@sbcglobal.net>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -83,8 +83,11 @@ msgstr "தற்போது தொலை செயலகத்தினால�
 # server/object-directory-config-file.c:47
 #: activation-server/object-directory-config-file.c:47
 #, c-format
-msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
-msgstr "போனபோ தூண்டு செய்யும் அமைப்பு கோப்பு சரியாக வாசிக்க வில்லை. இதனில் சரிபார்க்கவும்: %s"
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"போனபோ தூண்டு செய்யும் அமைப்பு கோப்பு சரியாக வாசிக்க வில்லை. இதனில் சரிபார்க்கவும்: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -379,8 +382,7 @@ msgstr "பிழைபார்க்கும்போது பிழை; வ
 msgid "General activation error with no description"
 msgstr "விவரணம் இல்லாமல் பொதுத் தொடங்கல் பிழை"
 
-#: bonobo/bonobo-generic-factory.h:79
-#: bonobo/bonobo-generic-factory.h:83
+#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "பொனோபோவின் தொடக்கமதிப்பளிக்க முடியவில்லை"
 
@@ -512,8 +514,7 @@ msgid "Directory to remove from configuration file"
 msgstr "அமை வடிவக கோப்பில் இருந்து நீக்க வேண்டிய அடைவு"
 
 # utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
-#: utils/bonobo-activation-sysconf.c:233
-#: utils/bonobo-activation-sysconf.c:236
+#: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
 msgstr "அடைவு பாதை"
 
@@ -531,4 +532,3 @@ msgstr "அமை வடிவக கோப்பில் உல்ல அட�
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "அமை வடிவக கோப்பின் பாதையைக் காண்பி"
-

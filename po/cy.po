@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-02-02 14:30+0000\n"
+"POT-Creation-Date: 2004-03-08 11:00+0000\n"
 "PO-Revision-Date: 2004-01-16 14:43+0000\n"
 "Last-Translator: Rhys Jones <rhys@sucs.org>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"

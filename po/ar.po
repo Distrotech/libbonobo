@@ -11,14 +11,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.ar\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-16 21:17+0100\n"
+"POT-Creation-Date: 2004-03-08 11:00+0000\n"
 "PO-Revision-Date: 2004-01-31 17:50+0100\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -180,7 +180,7 @@ msgstr "IID لالتنشيط"
 msgid "Prevent registering of server with OAF"
 msgstr "منع تسجيل النادل مع OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "خيارات تنشيط بونوبو"
 
@@ -205,11 +205,11 @@ msgstr "أرجع المصنع `%s' NIL لـ `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' لم يحوي `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "الاسم"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "اسم التطبيق الوحيد"
 

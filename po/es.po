@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"POT-Creation-Date: 2004-02-02 14:30+0000\n"
+"POT-Creation-Date: 2004-03-08 11:00+0000\n"
 "PO-Revision-Date: 2004-03-06 19:36+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -163,7 +163,8 @@ msgstr "Error de salida desconocido (el estado es %u)"
 #: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-activation no ha podido establecer el grupo del proceso de %s: %s\n"
+msgstr ""
+"bonobo-activation no ha podido establecer el grupo del proceso de %s: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
@@ -501,4 +502,3 @@ msgstr "Mostrar los directorios del archivo de configuración"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Mostrar la ruta del archivo de configuración"
-
