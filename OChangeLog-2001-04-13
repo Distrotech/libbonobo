@@ -1,3 +1,28 @@
+2000-10-13  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (build_control): kill redundant parent
+	arg; update every call.
+	(update_status): fix a very stupid bug for John.
+	(main_status_null): impl.
+	(status_build_item): hook in.
+
+	* bonobo/app.c (main): fix leak, add tooltips to all items.
+
+	* bonobo/bonobo-win.c (menu_build_item),
+	(move_dirt_cmd_to_widget): fix leak.
+	(menu_sync_state): fix leak.
+
+	* bonobo/bonobo-ui-toolbar.c (impl_destroy): free priv.
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_build_help_menu):
+	nail leak.
+
+	* configure.in: remove bonobo-idl.
+
+2000-10-12  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/app.c (main): make it more obvious what to do.
+
 2000-10-12  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar.c (impl_remove): Duh.  Remove the item
