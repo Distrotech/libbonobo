@@ -39,9 +39,6 @@
 /* Printing stuff */
 #include <Bonobo_Print.idl>
 
-/* Clipboard */
-#include <Bonobo_Clipboard.idl>
-
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif

@@ -47,8 +47,7 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_UI.idl			\
 	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
 	$(top_srcdir)/idl/Bonobo_Zoomable.idl		\
-	$(top_srcdir)/idl/Bonobo_Exception.idl		\
-	$(top_srcdir)/idl/Bonobo_Clipboard.idl
+	$(top_srcdir)/idl/Bonobo_Exception.idl
 
 idl_flags = -I$(top_srcdir)/idl -I $(OAF_IDL_DIR) -D__BONOBO_COMPILATION
 
