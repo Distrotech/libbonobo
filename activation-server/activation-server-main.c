@@ -83,10 +83,13 @@ main (int argc, char *argv[])
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 	{
 		char *env_od_source_dir;
+		char *gnome_env_od_source_dir;
 		GString *real_od_source_dir;
 
 		real_od_source_dir = g_string_new (OAFINFODIR);
-		env_od_source_dir = getenv ("OAF_INFO_PATH");
+		env_od_source_dir = g_getenv ("OAF_INFO_PATH");
+		gnome_env_od_source_dir = g_getenv ("GNOME_PATH");
+                gnome_env_od_source_dir = (char *) g_strconcat (gnome_env_od_source_dir, "/share/oaf");
 
 		if (od_source_dir) {
 			g_string_append_c (real_od_source_dir, ':');
@@ -96,6 +99,11 @@ main (int argc, char *argv[])
 			g_string_append_c (real_od_source_dir, ':');
 			g_string_append (real_od_source_dir,
 					 env_od_source_dir);
+		}
+		if (gnome_env_od_source_dir) {
+			g_string_append_c (real_od_source_dir, ':');
+			g_string_append (real_od_source_dir,
+					 gnome_env_od_source_dir);
 		}
 
 		od = OAF_ObjectDirectory_create (root_poa, od_domain,
