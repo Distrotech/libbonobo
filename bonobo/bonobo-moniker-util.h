@@ -17,18 +17,18 @@
 /* Useful client functions */
 Bonobo_Unknown      bonobo_get_object                            (const CORBA_char        *name,      
 								  const char              *interface_name,
-								  CORBA_Environment       *ev);
+								  CORBA_Environment       *opt_ev);
 
 
 Bonobo_Moniker      bonobo_moniker_client_new_from_name          (const CORBA_char        *name,
-								  CORBA_Environment       *ev);
+								  CORBA_Environment       *opt_ev);
 
 CORBA_char         *bonobo_moniker_client_get_name               (Bonobo_Moniker     moniker,
-								  CORBA_Environment *ev);
+								  CORBA_Environment *opt_ev);
 
 Bonobo_Unknown      bonobo_moniker_client_resolve_default        (Bonobo_Moniker     moniker,
 								  const char        *interface_name,
-								  CORBA_Environment *ev);
+								  CORBA_Environment *opt_ev);
 
 gboolean            bonobo_moniker_client_equal                  (Bonobo_Moniker     moniker,
 								  const CORBA_char  *name,
@@ -68,14 +68,13 @@ void                bonobo_moniker_resolve_async_default         (Bonobo_Moniker
 								  gpointer                 user_data);
 
 /* Useful moniker implementation helper functions */
-Bonobo_Moniker bonobo_moniker_util_new_from_name_full   (Bonobo_Moniker     parent,
-							 const CORBA_char  *name,
-							 CORBA_Environment *ev);
 CORBA_char    *bonobo_moniker_util_get_parent_name      (Bonobo_Moniker     moniker,
-							 CORBA_Environment *ev);
+							 CORBA_Environment *opt_ev);
 Bonobo_Unknown bonobo_moniker_util_qi_return            (Bonobo_Unknown     object,
 							 const CORBA_char  *requested_interface,
 							 CORBA_Environment *ev);
+const char    *bonobo_moniker_util_parse_name           (const char        *name, 
+							 int               *plen);
 int            bonobo_moniker_util_seek_std_separator   (const CORBA_char  *str,
 							 int                min_idx);
 char          *bonobo_moniker_util_escape               (const char        *string,

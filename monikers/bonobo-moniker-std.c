@@ -3,7 +3,6 @@
 
 #include <bonobo/bonobo-shlib-factory.h>
 #include "bonobo-moniker-std.h"
-#include "bonobo-moniker-query.h"
 
 static BonoboObject *
 bonobo_std_moniker_factory (BonoboGenericFactory *this,
@@ -34,8 +33,9 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 
  	else if (!strcmp (object_id, "OAFIID:Bonobo_Moniker_Query"))
  		
- 		return BONOBO_OBJECT (bonobo_moniker_query_new ());
-
+		return BONOBO_OBJECT (bonobo_moniker_simple_new (
+			"query:(", bonobo_moniker_query_resolve));
+ 
 	else if (!strcmp (object_id, "OAFIID:Bonobo_MonikerExtender_stream"))
 		
 		return BONOBO_OBJECT (bonobo_moniker_extender_new (

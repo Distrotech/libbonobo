@@ -30,33 +30,38 @@ module Bonobo {
 		exception UnknownPrefix     {};
 
 		/**
-		 * parent:
+		 * getParent:
 		 *
-		 * A moniker can be composed of a chain of monikers
-		 * which can be collectively resolved, displayed etc.
+		 * get the parent moniker.
 		 */
-		attribute Moniker parent;
+		Moniker getParent ();
 
 		/**
-		 * getDisplayName:
+		 * setParent:
+		 * @parent: parent moniker
+		 * 
+		 * sets the parent moniker.
+		 */
+		void setParent (in Moniker parent);
+
+		/**
+		 * getName:
 		 * 
 		 * Returns a human readable representation of the Moniker
 		 */
-		string  getDisplayName ()
+		string  getName ()
 			raises (InvalidSyntax);
 
-		/**
-		 * parseDisplayName:
-		 * @parent: the parent of this moniker
-		 * @name: the display name fragment to parse
-		 *
-		 * Generates a moniker from the string representation,
-		 * it builds a list returning the root node in a
-		 * similar way to g_list_append ();
-		 */
-		Moniker parseDisplayName (in Moniker parent, in string name)
+ 		/**
+ 		 * setName:
+ 		 * @name: the display name
+ 		 *
+ 		 * set the name of the moniker. This method parses the whole
+		 * name and constructs the moniker chain.
+ 		 */
+ 		void setName (in string name)
 			raises (InvalidSyntax, UnknownPrefix);
-		
+ 		
 		/**
 		 * resolve:
 		 * @options: resolution options
@@ -71,13 +76,13 @@ module Bonobo {
 
 		/**
 		 * equal:
-		 * @displayName: the display name of another moniker
+		 * @name: the name of another moniker
 		 *
-		 *  Compares the full moniker with this @displayName,
+		 *  Compares the full moniker with this @name,
 		 * returns 0 if not equal, else the number of chars swallowed
 		 * by the compare.
 		 */
-		long    equal              (in string         displayName);
+		long    equal              (in string name);
 	};
 
         interface MonikerExtender : Bonobo::Unknown {
@@ -85,7 +90,7 @@ module Bonobo {
 		 * resolve:
 		 * @m: the moniker we are about to extend
 		 * @options: resolve options
-		 * @display_name: the display name of 'm' by itself eg. 'file:/tmp/a'
+		 * @name: the name of 'm' by itself eg. 'file:/tmp/a'
 		 * @requested_interface: the interface we want to get back
 		 *
 		 *  The interface for a later extension to a moniker that allows it
@@ -95,7 +100,7 @@ module Bonobo {
 		 */
                 Unknown resolve (in Moniker        m,
 				 in ResolveOptions options,
-                                 in string         displayName,
+                                 in string         name,
                                  in string         requestedInterface)
 			raises (Moniker::InterfaceNotFound, Moniker::TimeOut);
         };

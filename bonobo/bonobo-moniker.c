@@ -48,19 +48,19 @@ impl_get_parent (PortableServer_Servant servant,
 
 static void
 impl_set_parent (PortableServer_Servant servant,
-		 const Bonobo_Moniker   value,
-		 CORBA_Environment     *ev)
+ 		 const Bonobo_Moniker   value,
+ 		 CORBA_Environment     *ev)
 {
-	BonoboMoniker *moniker = bonobo_moniker_from_servant (servant);
+ 	BonoboMoniker *moniker = bonobo_moniker_from_servant (servant);
 
-	CLASS (moniker)->set_parent (moniker, value, ev);
+ 	CLASS (moniker)->set_parent (moniker, value, ev);
 }
-
+ 
 /**
  * bonobo_moniker_set_parent:
  * @moniker: the moniker
  * @parent: the parent
- * @ev: a corba exception environment
+ * @opt_ev: an optional corba exception environment
  * 
  *  This sets the monikers parent; a moniker is really a long chain
  * of hierarchical monikers; referenced by the most local moniker.
@@ -68,19 +68,32 @@ impl_set_parent (PortableServer_Servant servant,
  **/
 void
 bonobo_moniker_set_parent (BonoboMoniker     *moniker,
-			   Bonobo_Moniker     parent,
-			   CORBA_Environment *ev)
+ 			   Bonobo_Moniker     parent,
+			   CORBA_Environment *opt_ev)
 {
-	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
-	
-	bonobo_object_release_unref (moniker->priv->parent, ev);
-	moniker->priv->parent = bonobo_object_dup_ref (parent, ev);
-}
+	CORBA_Environment ev, *my_ev;
 
+ 	bonobo_return_if_fail (BONOBO_IS_MONIKER (moniker), opt_ev);
+
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+	
+	if (moniker->priv->parent != CORBA_OBJECT_NIL) {
+		Bonobo_Moniker_setParent (moniker->priv->parent, parent, my_ev);
+	} else
+		moniker->priv->parent = bonobo_object_dup_ref (parent, my_ev);
+	
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
+}
+ 
 /**
  * bonobo_moniker_get_parent:
  * @moniker: the moniker
- * @ev: a corba exception environment
+ * @opt_ev: an optional corba exception environment
  * 
  * See bonobo_moniker_set_parent;
  *
@@ -88,15 +101,29 @@ bonobo_moniker_set_parent (BonoboMoniker     *moniker,
  **/
 Bonobo_Moniker
 bonobo_moniker_get_parent (BonoboMoniker     *moniker,
-			   CORBA_Environment *ev)
+			   CORBA_Environment *opt_ev)
 {
-	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker),
-			      CORBA_OBJECT_NIL);
+	CORBA_Environment ev, *my_ev;
+	Bonobo_Moniker rval;
+
+	bonobo_return_val_if_fail (BONOBO_IS_MONIKER (moniker),
+				   CORBA_OBJECT_NIL, opt_ev);
 	
 	if (moniker->priv->parent == CORBA_OBJECT_NIL)
 		return CORBA_OBJECT_NIL;
-	
-	return bonobo_object_dup_ref (moniker->priv->parent, ev);
+
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	rval = bonobo_object_dup_ref (moniker->priv->parent, opt_ev);
+
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
+
+	return rval;
 }
 
 /**
@@ -115,7 +142,7 @@ bonobo_moniker_get_name (BonoboMoniker *moniker)
 
 	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
 
-	str = CLASS (moniker)->get_name (moniker);
+	str = CLASS (moniker)->get_internal_name (moniker);
 
 	if (str)
 		return str + moniker->priv->prefix_len;
@@ -127,7 +154,7 @@ bonobo_moniker_get_name (BonoboMoniker *moniker)
  * bonobo_moniker_get_name_full:
  * @moniker: the moniker
  * 
- * gets the full unescaped display name of the moniker eg.
+ * gets the full unescaped name of the moniker eg.
  * file:/tmp/hash\#.gz returns file:/tmp/hash#.gz
  * 
  * Return value: the string
@@ -137,14 +164,14 @@ bonobo_moniker_get_name_full (BonoboMoniker *moniker)
 {	
 	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
 
-	return CLASS (moniker)->get_name (moniker);
+	return CLASS (moniker)->get_internal_name (moniker);
 }
 
 /**
  * bonobo_moniker_get_name_escaped:
  * @moniker: a moniker
  * 
- * Get the full, escaped display name of the moniker eg.
+ * Get the full, escaped name of the moniker eg.
  * file:/tmp/hash\#.gz returns file:/tmp/hash\#.gz
  * 
  * Return value: the dynamically allocated string.  
@@ -156,7 +183,7 @@ bonobo_moniker_get_name_escaped (BonoboMoniker *moniker)
 	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
 
 	return bonobo_moniker_util_escape (
-		CLASS (moniker)->get_name (moniker), 0);
+		CLASS (moniker)->get_internal_name (moniker), 0);
 }
 
 /**
@@ -169,16 +196,15 @@ bonobo_moniker_get_name_escaped (BonoboMoniker *moniker)
  */
 void
 bonobo_moniker_set_name (BonoboMoniker *moniker,
-			 const char    *name,
-			 int            num_chars)
+			 const char    *name)
 {
 	char *str;
 
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
 
-	str = bonobo_moniker_util_unescape (name, num_chars);
+	str = bonobo_moniker_util_unescape (name, strlen (name));
 
-	CLASS (moniker)->set_name (moniker, str);
+	CLASS (moniker)->set_internal_name (moniker, str);
 
 	g_free (str);
 }
@@ -199,18 +225,18 @@ bonobo_moniker_get_prefix (BonoboMoniker *moniker)
 }
 
 static void
-impl_bonobo_moniker_set_name (BonoboMoniker *moniker,
-			      const char    *unescaped_name)
+impl_bonobo_moniker_set_internal_name (BonoboMoniker *moniker,
+				       const char    *unescaped_name)
 {
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
 	g_return_if_fail (strlen (unescaped_name) >= moniker->priv->prefix_len);
-
+	printf ("SETNAME %s\n", unescaped_name);
 	g_free (moniker->priv->name);
 	moniker->priv->name = g_strdup (unescaped_name);
 }
 
 static const char *
-impl_bonobo_moniker_get_name (BonoboMoniker *moniker)
+impl_bonobo_moniker_get_internal_name (BonoboMoniker *moniker)
 {
 	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
 
@@ -218,14 +244,13 @@ impl_bonobo_moniker_get_name (BonoboMoniker *moniker)
 }
 
 static CORBA_char *
-bonobo_moniker_default_get_display_name (BonoboMoniker     *moniker,
+bonobo_moniker_default_get_name (BonoboMoniker     *moniker,
 					 CORBA_Environment *ev)
 {
 	CORBA_char *ans, *parent_name;
 	char       *tmp;
 	
-	parent_name = bonobo_moniker_util_get_parent_name (
-		BONOBO_OBJREF (moniker), ev);
+	parent_name = Bonobo_Moniker_getName (moniker->priv->parent, ev);
 
 	if (BONOBO_EX (ev))
 		return NULL;
@@ -248,31 +273,43 @@ bonobo_moniker_default_get_display_name (BonoboMoniker     *moniker,
 	return ans;
 }
 
-static Bonobo_Moniker
-bonobo_moniker_default_parse_display_name (BonoboMoniker     *moniker,
-					   Bonobo_Moniker     parent,
-					   const CORBA_char  *name,
-					   CORBA_Environment *ev)
+static void
+bonobo_moniker_default_set_name (BonoboMoniker     *moniker,
+				 const CORBA_char  *name,
+				 CORBA_Environment *ev)
 {
-	int i;
-	
-	g_return_val_if_fail (moniker != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (moniker->priv != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (strlen (name) >= moniker->priv->prefix_len, CORBA_OBJECT_NIL);
+	const char *mname;
+	int plen;
+	Bonobo_Moniker parent;
 
-	bonobo_moniker_set_parent (moniker, parent, ev);
+	g_return_if_fail (moniker != NULL);
+	g_return_if_fail (moniker->priv != NULL);
+	g_return_if_fail (strlen (name) >= moniker->priv->prefix_len);
 
-	i = bonobo_moniker_util_seek_std_separator (name, moniker->priv->prefix_len);
+	mname = bonobo_moniker_util_parse_name (name, &plen);
 
-	bonobo_moniker_set_name (moniker, name, i);
+	if (plen) {
+		char *pname;
 
-	return bonobo_moniker_util_new_from_name_full (BONOBO_OBJREF (moniker),
-						       &name [i], ev);	
+		pname = g_strndup (name, plen);
+
+		parent = bonobo_moniker_client_new_from_name (pname, ev);
+		
+		g_free (pname);
+
+		if (BONOBO_EX (ev))
+			return;
+
+		bonobo_object_release_unref (moniker->priv->parent, NULL);
+		moniker->priv->parent = bonobo_object_dup_ref (parent, ev);
+	}
+
+	bonobo_moniker_set_name (moniker, mname);
 }
 
 static CORBA_long
 bonobo_moniker_default_equal (BonoboMoniker     *moniker,
-			      const CORBA_char  *display_name,
+			      const CORBA_char  *moniker_name,
 			      CORBA_Environment *ev)
 {
 	int         i;
@@ -282,13 +319,13 @@ bonobo_moniker_default_equal (BonoboMoniker     *moniker,
 	
 	if (moniker->priv->parent != CORBA_OBJECT_NIL) {
 		offset = Bonobo_Moniker_equal (
-			moniker->priv->parent, display_name, ev);
+			moniker->priv->parent, moniker_name, ev);
 		if (BONOBO_EX (ev) || offset == 0)
 			return 0;
 	} else
 		offset = 0;
 
-	p = &display_name [offset];
+	p = &moniker_name [offset];
 
 	i = bonobo_moniker_util_seek_std_separator (p, moniker->priv->prefix_len);
 
@@ -311,23 +348,22 @@ bonobo_moniker_default_equal (BonoboMoniker     *moniker,
 }
 
 static CORBA_char *
-impl_get_display_name (PortableServer_Servant servant,
-		       CORBA_Environment     *ev)
+impl_get_name (PortableServer_Servant servant,
+	       CORBA_Environment     *ev)
 {
 	BonoboMoniker *moniker = bonobo_moniker_from_servant (servant);
 	
-	return CLASS (moniker)->get_display_name (moniker, ev);
+	return CLASS (moniker)->get_name (moniker, ev);
 }
 
-static Bonobo_Moniker
-impl_parse_display_name (PortableServer_Servant servant,
-			 Bonobo_Moniker         parent,
-			 const CORBA_char      *name,
-			 CORBA_Environment     *ev)
+static void
+impl_set_name (PortableServer_Servant servant,
+	       const CORBA_char      *name,
+	       CORBA_Environment     *ev)
 {
 	BonoboMoniker *moniker = bonobo_moniker_from_servant (servant);
 
-	return CLASS (moniker)->parse_display_name (moniker, parent, name, ev);
+	return CLASS (moniker)->set_name (moniker, name, ev);
 }
 
 static Bonobo_Unknown
@@ -376,12 +412,12 @@ impl_resolve (PortableServer_Servant       servant,
 
 static CORBA_long
 impl_equal (PortableServer_Servant servant,
-	    const CORBA_char      *displayName,
+	    const CORBA_char      *name,
 	    CORBA_Environment     *ev)
 {
 	BonoboMoniker *moniker = bonobo_moniker_from_servant (servant);
 
-	return CLASS (moniker)->equal (moniker, displayName, ev);
+	return CLASS (moniker)->equal (moniker, name, ev);
 }
 
 static void
@@ -409,21 +445,21 @@ bonobo_moniker_class_init (BonoboMonikerClass *klass)
 
 	oclass->finalize = bonobo_moniker_finalize;
 
-	klass->get_parent = bonobo_moniker_get_parent;
-	klass->set_parent = bonobo_moniker_set_parent;
-	klass->get_display_name = bonobo_moniker_default_get_display_name;
-	klass->parse_display_name = bonobo_moniker_default_parse_display_name;
-	klass->equal = bonobo_moniker_default_equal;
+	klass->get_parent       = bonobo_moniker_get_parent;
+	klass->set_parent       = bonobo_moniker_set_parent;
+	klass->get_name         = bonobo_moniker_default_get_name;
+	klass->set_name         = bonobo_moniker_default_set_name;
+	klass->equal            = bonobo_moniker_default_equal;
 
-	klass->set_name   = impl_bonobo_moniker_set_name;
-	klass->get_name   = impl_bonobo_moniker_get_name;
+	klass->set_internal_name = impl_bonobo_moniker_set_internal_name;
+	klass->get_internal_name = impl_bonobo_moniker_get_internal_name;
 
-	epv->_get_parent      = impl_get_parent;
-	epv->_set_parent      = impl_set_parent;
-	epv->getDisplayName   = impl_get_display_name;
-	epv->parseDisplayName = impl_parse_display_name;
-	epv->resolve          = impl_resolve;
-	epv->equal            = impl_equal;
+	epv->getParent           = impl_get_parent;
+	epv->setParent           = impl_set_parent;
+	epv->getName             = impl_get_name;
+	epv->setName             = impl_set_name;
+	epv->resolve             = impl_resolve;
+	epv->equal               = impl_equal;
 }
 
 static void
@@ -439,9 +475,9 @@ bonobo_moniker_init (GObject *object)
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboMoniker, 
-			   Bonobo_Moniker,
-			   PARENT_TYPE,
-			   bonobo_moniker);
+		       Bonobo_Moniker,
+		       PARENT_TYPE,
+		       bonobo_moniker);
 
 /**
  * bonobo_moniker_construct:

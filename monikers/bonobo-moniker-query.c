@@ -12,67 +12,13 @@
 #include <bonobo/bonobo-moniker-util.h>
 #include <liboaf/liboaf.h>
 
-#include "bonobo-moniker-query.h"
+#include "bonobo-moniker-std.h"
 
-#define PREFIX_LEN (sizeof ("query:") - 1)
-
-static BonoboMonikerClass *bonobo_moniker_query_parent_class;
-
-static Bonobo_Moniker 
-query_parse_display_name (BonoboMoniker     *moniker,
-			  Bonobo_Moniker     parent,
-			  const CORBA_char  *name,
-			  CORBA_Environment *ev)
-{
-	BonoboMonikerQuery *m_query = BONOBO_MONIKER_QUERY (moniker);
-	int      i, brackets;
-	gboolean in_string;
-
-	g_return_val_if_fail (m_query != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (strlen (name) >= PREFIX_LEN, CORBA_OBJECT_NIL);
-
-	bonobo_moniker_set_parent (moniker, parent, ev);
-
-	brackets = 0;
-	in_string = FALSE;
-	for (i = PREFIX_LEN; name [i]; i++) {
-		switch (name [i]) {
-		case '(':
-			if (!in_string)
-				brackets++;
-			break;
-		case ')':
-			if (!in_string)
-				brackets--;
-			break;
-		case '\'':
-			if (name [i - 1] != '\\')
-				in_string = !in_string;
-			break;
-		}
-		if (brackets == 0) {
-			i++;
-			break;
-		}
-	}
-	
-	if (in_string || brackets != 0) {
-		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_Bonobo_Moniker_InvalidSyntax, NULL);
-		return CORBA_OBJECT_NIL;
-	}
-	
-	bonobo_moniker_set_name (moniker, name, i);
-
-	return bonobo_moniker_util_new_from_name_full (BONOBO_OBJREF (m_query),
-						       &name [i], ev);
-}
-
-static Bonobo_Unknown
-query_resolve (BonoboMoniker               *moniker,
-	      const Bonobo_ResolveOptions *options,
-	      const CORBA_char            *requested_interface,
-	      CORBA_Environment           *ev)
+Bonobo_Unknown
+bonobo_moniker_query_resolve (BonoboMoniker               *moniker,
+			      const Bonobo_ResolveOptions *options,
+			      const CORBA_char            *requested_interface,
+			      CORBA_Environment           *ev)
 {
 	Bonobo_Moniker       parent;
 	Bonobo_Unknown       object;
@@ -101,56 +47,4 @@ query_resolve (BonoboMoniker               *moniker,
 	g_free (query);
 
 	return bonobo_moniker_util_qi_return (object, requested_interface, ev);
-}
-
-static void
-bonobo_moniker_query_class_init (BonoboMonikerQueryClass *klass)
-{
-	BonoboMonikerClass *mclass = (BonoboMonikerClass *) klass;
-	
-	bonobo_moniker_query_parent_class = 
-		g_type_class_peek_parent (klass);
-
-	mclass->parse_display_name = query_parse_display_name;
-	mclass->resolve            = query_resolve;
-}
-
-/**
- * bonobo_moniker_query_get_type:
- *
- * Returns the GType for the BonoboMonikerQuery class.
- */
-GType
-bonobo_moniker_query_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		GTypeInfo info = {
-			sizeof (BonoboMonikerQueryClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) bonobo_moniker_query_class_init,
-			(GClassFinalizeFunc) NULL,
-			NULL, /* class_data */
-			sizeof (BonoboMonikerQuery),
-			0,
-			(GInstanceInitFunc) NULL
-		};
-		
-		type = bonobo_type_unique (
-			bonobo_moniker_get_type (),
-			NULL, NULL, 0,
-			&info, "BonoboMonikerQuery");
-	}
-
-	return type;
-}
-
-BonoboMoniker *
-bonobo_moniker_query_new (void)
-{
-	return bonobo_moniker_construct (
-		g_object_new (bonobo_moniker_query_get_type (), NULL),
-		"query:(");
 }

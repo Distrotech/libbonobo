@@ -29,6 +29,63 @@ struct {
 	{ NULL, NULL }
 };
 
+/**
+ * bonobo_moniker_util_parse_name:
+ * @name: a moniker name
+ * @plen: an optional pointer to store the parent length
+ * 
+ *  This routine finds the rightmost moniker name. For example
+ * it will return "cache:" if you pass in "file:/tmp.txt#cache:". It will 
+ * also store the length of the parent string in @plen (13 for the above 
+ * example)
+ * 
+ * Return value: the name of the rightmost moniker
+ **/
+const char *
+bonobo_moniker_util_parse_name (const char *name, int *plen)
+{
+	int i, c, l;
+	const char *rval;
+
+	g_return_val_if_fail (name != NULL, NULL);
+
+	l = strlen (name);
+
+	for (i = l - 1; i >= 0; i--) {
+
+		if (name [i] == '!' || name [i] == '#') {
+
+			rval = &name [i + 1];
+
+			if (!i || (name [i-1] == '!' || name [i-1] == '#')) {
+				*plen = i;
+				return rval;
+			}
+
+			if (i)
+				--i;
+
+			c = 0;
+			while (i && name [i] == '\\') {
+				c++;
+				i--;
+			}
+			
+			printf ("FOUND %s %s %d %d %d\n",name, rval, l ,i,c);
+			if (plen)
+				*plen = i + c + 1;
+
+			if (!(c % 2)) 
+				return rval;
+		}
+	}
+
+	if (plen)
+		*plen = 0;
+
+	return name;
+}
+
 static char *
 moniker_id_from_nickname (const CORBA_char *name)
 {
@@ -110,131 +167,50 @@ query_from_name (const char *name)
 }
 
 /**
- * bonobo_moniker_util_new_from_name_full:
- * @parent: A parent moniker to chain to or CORBA_OBJECT_NIL
- * @name: the display name
- * @ev: corba environment
- * 
- *  This routine is used to continue building up the chain
- * that forms a multi-part moniker. The parent is referenced
- * as the parent and passed onto the next stage of parsing
- * the 'name'. We eventually return a moniker handle which
- * represents the end of a linked list of monikers each
- * pointing to their parent:
- *
- * file:/tmp/a.tar.gz <-- gzip: <-- tar: <-- [ this is returned ]
- * 
- * Return value: The end node of a list of monikers representing @name
- **/
-Bonobo_Moniker
-bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
-					const CORBA_char  *name,
-					CORBA_Environment *ev)
-{
-	Bonobo_Unknown   object;
-	Bonobo_Moniker   toplevel, moniker;
-	const char       *iid;
-
-	g_return_val_if_fail (ev != NULL, NULL);
-	g_return_val_if_fail (name != NULL, NULL);
-
-	if (!name [0])
-		return bonobo_object_dup_ref (parent, ev);
-
-	if (name [0] == '#')
-		name++;
-
-	if (!(iid = moniker_id_from_nickname (name))) {
-		char *query;
-
-		query = query_from_name (name);
-
-		object = oaf_activate (query, NULL, 0, NULL, ev);
-
-		g_free (query);
-		
-		if (BONOBO_EX (ev))
-			return CORBA_OBJECT_NIL;
-
-		if (object == CORBA_OBJECT_NIL) {
-			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-					     ex_Bonobo_Moniker_UnknownPrefix, NULL);
-			return CORBA_OBJECT_NIL;
-		}
-	} else {
-		object = oaf_activate_from_id ((gchar *) iid, 0, NULL, ev);
-
-		if (BONOBO_EX (ev))
-			return CORBA_OBJECT_NIL;
-		
-		if (object == CORBA_OBJECT_NIL) {
-			g_warning ("Activating '%s' returned nothing", iid);
-			return CORBA_OBJECT_NIL;
-		}
-	}
-
-	toplevel = Bonobo_Unknown_queryInterface (
-		object, "IDL:Bonobo/Moniker:1.0", ev);
-
-	if (BONOBO_EX (ev)) {
-		bonobo_object_release_unref (object, ev);
-		return CORBA_OBJECT_NIL;
-	}
-
-	bonobo_object_release_unref (object, ev);
-
-	if (toplevel == CORBA_OBJECT_NIL) {
-		g_warning ("Moniker object '%s' doesn't implement "
-			   "the Moniker interface", iid);
-		return CORBA_OBJECT_NIL;
-	}
-
-	moniker = Bonobo_Moniker_parseDisplayName (toplevel, parent,
-						   name, ev);
-	if (BONOBO_EX (ev))
-		return CORBA_OBJECT_NIL;
-
-	bonobo_object_release_unref (toplevel, ev);
-
-	if (BONOBO_EX (ev))
-		return CORBA_OBJECT_NIL;
-
-	return moniker;
-}
-
-/**
  * bonobo_moniker_util_get_parent_name:
  * @moniker: the moniker
- * @ev: a corba exception environment
+ * @opt_ev: an optional corba exception environment
  * 
- *  This gets the display name of the parent moniker ( recursively
+ *  This gets the name of the parent moniker ( recursively
  * all of the parents of this moniker ).
  * 
- * Return value: the display name; use CORBA_free to release it.
+ * Return value: the name; use CORBA_free to release it.
  **/
 CORBA_char *
 bonobo_moniker_util_get_parent_name (Bonobo_Moniker     moniker,
-				     CORBA_Environment *ev)
+				     CORBA_Environment *opt_ev)
 {
+	CORBA_Environment ev, *my_ev;
 	Bonobo_Moniker parent;
 	CORBA_char    *name;
 
-	g_return_val_if_fail (ev != NULL, NULL);
-	g_return_val_if_fail (moniker != CORBA_OBJECT_NIL, NULL);
+	bonobo_return_val_if_fail (moniker != CORBA_OBJECT_NIL, NULL, opt_ev);
 
-	parent = Bonobo_Moniker__get_parent (moniker, ev);
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
 
-	if (BONOBO_EX (ev) ||
-	    parent == CORBA_OBJECT_NIL)
+	parent = Bonobo_Moniker_getParent (moniker, my_ev);
+
+	if (BONOBO_EX (my_ev) ||
+	    parent == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
 		return NULL;
-	
-	name = Bonobo_Moniker_getDisplayName (parent, ev);
+	}
 
-	if (BONOBO_EX (ev))
+	name = Bonobo_Moniker_getName (parent, my_ev);
+
+	if (BONOBO_EX (my_ev))
 		name = NULL;
 
-	bonobo_object_release_unref (parent, ev);
+	bonobo_object_release_unref (parent, NULL);
 
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
+	
 	return name;
 }
 
@@ -293,13 +269,11 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
  * @str: the string to scan
  * @min_idx: the minimum offset at which a separator can be found.
  * 
- *  This looks for a standard separator in a moniker's
- * display name string. Most monikers will want to use
- * standard separators.
+ *  This looks for a moniker separator in a moniker's name string.
  *
  *  See also bonobo_moniker_util_escape
  * 
- * Return value: the position of the standard separator, or a
+ * Return value: the position of the separator, or a
  * pointer to the end of the string.
  **/
 int
@@ -427,8 +401,8 @@ bonobo_moniker_util_unescape (const char *string, int num_chars)
 
 /**
  * bonobo_moniker_client_new_from_name:
- * @name: the display name of a moniker
- * @ev: a corba exception environment 
+ * @name: the name of a moniker
+ * @opt_ev: an optional corba exception environment 
  * 
  *  This routine tries to parse a Moniker in string form
  *
@@ -441,33 +415,124 @@ bonobo_moniker_util_unescape (const char *string, int num_chars)
  **/
 Bonobo_Moniker
 bonobo_moniker_client_new_from_name (const CORBA_char  *name,
-				     CORBA_Environment *ev)
+				     CORBA_Environment *opt_ev)
 {
-	return bonobo_moniker_util_new_from_name_full (
-		CORBA_OBJECT_NIL, name, ev);
+	CORBA_Environment ev, *my_ev;
+	const char *mname;
+	const char *iid;
+	Bonobo_Unknown object;
+	Bonobo_Moniker moniker;
+
+	bonobo_return_val_if_fail (name != NULL || name [0], CORBA_OBJECT_NIL,
+				   opt_ev);
+
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	mname = bonobo_moniker_util_parse_name (name, NULL);
+
+	if (!(iid = moniker_id_from_nickname (mname))) {
+		char *query;
+
+		query = query_from_name (mname);
+
+		object = oaf_activate (query, NULL, 0, NULL, my_ev);
+
+		g_free (query);
+		
+		if (BONOBO_EX (my_ev)) {
+			if (!opt_ev)
+				CORBA_exception_free (&ev);
+			return CORBA_OBJECT_NIL;
+		}
+
+		if (object == CORBA_OBJECT_NIL) {
+			bonobo_exception_set (opt_ev, 
+					      ex_Bonobo_Moniker_UnknownPrefix);
+			if (!opt_ev)
+				CORBA_exception_free (&ev);
+
+			return CORBA_OBJECT_NIL;
+		}
+	} else {
+		object = oaf_activate_from_id ((gchar *) iid, 0, NULL, my_ev);
+
+		if (BONOBO_EX (my_ev)) {
+			if (!opt_ev)
+				CORBA_exception_free (&ev);
+
+			return CORBA_OBJECT_NIL;
+		}
+
+		if (object == CORBA_OBJECT_NIL) {
+			g_warning ("Activating '%s' returned nothing", iid);
+			if (!opt_ev)
+				CORBA_exception_free (&ev);
+			return CORBA_OBJECT_NIL;
+		}
+	}
+
+	moniker = Bonobo_Unknown_queryInterface (object, 
+						 "IDL:Bonobo/Moniker:1.0", 
+						 my_ev);
+
+	if (BONOBO_EX (my_ev) || moniker == CORBA_OBJECT_NIL) {
+		bonobo_object_release_unref (object, NULL);
+		if (moniker == CORBA_OBJECT_NIL)
+			g_warning ("Moniker object '%s' doesn't implement "
+				   "the Moniker interface", iid);
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return CORBA_OBJECT_NIL;
+	}
+
+	bonobo_object_release_unref (object, NULL);
+
+	Bonobo_Moniker_setName (moniker, name, my_ev);
+
+	if (BONOBO_EX (my_ev)) {
+		bonobo_object_release_unref (moniker, NULL);	
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
+		return CORBA_OBJECT_NIL;
+	}
+
+	return moniker;
 }
 
 /**
  * bonobo_moniker_client_get_name:
  * @moniker: a moniker handle
- * @ev: a corba exception environment 
+ * @opt_ev: a corba exception environment 
  * 
- * Return value: the display name of the moniker.
+ * Return value: the name of the moniker.
  **/
 CORBA_char *
 bonobo_moniker_client_get_name (Bonobo_Moniker     moniker,
-				CORBA_Environment *ev)
+				CORBA_Environment *opt_ev)
 {
+	CORBA_Environment ev, *my_ev;
 	CORBA_char *name;
 
-	g_return_val_if_fail (ev != NULL, NULL);
-	g_return_val_if_fail (moniker != CORBA_OBJECT_NIL, NULL);
+	bonobo_return_val_if_fail (moniker != CORBA_OBJECT_NIL, NULL, opt_ev);
 
-	name = Bonobo_Moniker_getDisplayName (moniker, ev);
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
 
-	if (BONOBO_EX (ev))
-		return NULL;
+	name = Bonobo_Moniker_getName (moniker, my_ev);
 
+	if (BONOBO_EX (my_ev))
+		name = NULL;
+
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
+	
 	return name;
 }
 
@@ -482,7 +547,7 @@ init_default_resolve_options (Bonobo_ResolveOptions *options)
  * bonobo_moniker_client_resolve_default:
  * @moniker: a moniker
  * @interface_name: the name of the interface we want returned as the result 
- * @ev: a corba exception environment 
+ * @opt_ev: an optional corba exception environment 
  * 
  *  This resolves the moniker object against the given interface,
  * with a default set of resolve options.
@@ -492,8 +557,9 @@ init_default_resolve_options (Bonobo_ResolveOptions *options)
 Bonobo_Unknown
 bonobo_moniker_client_resolve_default (Bonobo_Moniker     moniker,
 				       const char        *interface_name,
-				       CORBA_Environment *ev)
+				       CORBA_Environment *opt_ev)
 {
+	CORBA_Environment ev, *my_ev;
 	Bonobo_ResolveOptions options;
 	Bonobo_Unknown        retval;
 	char                 *real_if;
@@ -505,7 +571,16 @@ bonobo_moniker_client_resolve_default (Bonobo_Moniker     moniker,
 
 	init_default_resolve_options (&options);
 
-	retval = Bonobo_Moniker_resolve (moniker, &options, real_if, ev);
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	retval = Bonobo_Moniker_resolve (moniker, &options, real_if, my_ev);
+	
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
 
 	g_free (real_if);
 
@@ -514,9 +589,9 @@ bonobo_moniker_client_resolve_default (Bonobo_Moniker     moniker,
 
 /**
  * bonobo_get_object:
- * @name: the display name of a moniker
+ * @name: the name of a moniker
  * @interface_name: the name of the interface we want returned as the result 
- * @ev: a corba exception environment 
+ * @opt_ev: an optional corba exception environment 
  * 
  *  This encapsulates both the parse stage and resolve process of using
  * a moniker, providing a simple VisualBasic like mechanism for using the
@@ -527,24 +602,44 @@ bonobo_moniker_client_resolve_default (Bonobo_Moniker     moniker,
 Bonobo_Unknown
 bonobo_get_object (const CORBA_char *name,
 		   const char        *interface_name,
-		   CORBA_Environment *ev)
+		   CORBA_Environment *opt_ev)
 {
+	CORBA_Environment ev, *my_ev;
 	Bonobo_Moniker moniker;
 	Bonobo_Unknown retval;
 
-	moniker = bonobo_moniker_client_new_from_name (name, ev);
+	bonobo_return_val_if_fail (name != NULL, CORBA_OBJECT_NIL, opt_ev);
+	bonobo_return_val_if_fail (interface_name != NULL, CORBA_OBJECT_NIL, 
+				   opt_ev);
 
-	if (BONOBO_EX (ev))
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	moniker = bonobo_moniker_client_new_from_name (name, my_ev);
+
+	if (BONOBO_EX (my_ev) || moniker == CORBA_OBJECT_NIL) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
+	}
 
 	retval = bonobo_moniker_client_resolve_default (
-		moniker, interface_name, ev);
+		moniker, interface_name, my_ev);
 
-	bonobo_object_release_unref (moniker, ev);
+	bonobo_object_release_unref (moniker, NULL);
 
-	if (BONOBO_EX (ev))
+	if (BONOBO_EX (my_ev)) {
+		if (!opt_ev)
+			CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
-	
+	}
+
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
+
 	return retval;
 }
 
@@ -911,7 +1006,7 @@ bonobo_get_object_async (const CORBA_char    *name,
 /**
  * bonobo_moniker_client_equal:
  * @moniker: The moniker
- * @name: a display name eg. file:/demo/a.jpeg
+ * @name: a moniker name eg. file:/demo/a.jpeg
  * @opt_ev: optional CORBA_Environment or NULL.
  * 
  * Compare a full @moniker with the given @name
@@ -1134,6 +1229,7 @@ bonobo_url_register (char              *oafiid,
 	CosNaming_NamingContext  ctx = NULL;
 	CosNaming_Name          *cn;
 
+	bonobo_return_if_fail (ev != NULL, NULL);
 	bonobo_return_if_fail (oafiid != NULL, ev);
 	bonobo_return_if_fail (url != NULL, ev);
 	bonobo_return_if_fail (object != CORBA_OBJECT_NIL, ev);
@@ -1160,6 +1256,7 @@ bonobo_url_unregister (char              *oafiid,
 	CosNaming_NamingContext  ctx = NULL;
 	CosNaming_Name          *cn;
 
+	bonobo_return_if_fail (ev != NULL, NULL);
 	bonobo_return_if_fail (oafiid != NULL, ev);
 	bonobo_return_if_fail (url != NULL, ev);
 
@@ -1186,6 +1283,7 @@ bonobo_url_lookup (char              *oafiid,
 	CosNaming_Name          *cn;
 	Bonobo_Unknown           retval;
 
+	bonobo_return_val_if_fail (ev != NULL, CORBA_OBJECT_NIL, NULL);
 	bonobo_return_val_if_fail (oafiid != NULL, CORBA_OBJECT_NIL, ev);
 	bonobo_return_val_if_fail (url != NULL, CORBA_OBJECT_NIL, ev);
 

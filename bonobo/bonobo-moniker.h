@@ -38,15 +38,14 @@ typedef struct {
 	 */
 	Bonobo_Moniker (*get_parent)         (BonoboMoniker               *moniker,
 					      CORBA_Environment           *ev);
-	void           (*set_parent)         (BonoboMoniker               *moniker,
+ 	void           (*set_parent)         (BonoboMoniker               *moniker,
 					      const Bonobo_Moniker         parent,
+ 					      CORBA_Environment           *ev);
+	CORBA_char    *(*get_name)           (BonoboMoniker               *moniker,
 					      CORBA_Environment           *ev);
-	CORBA_char    *(*get_display_name)   (BonoboMoniker               *moniker,
-					      CORBA_Environment           *ev);
-	Bonobo_Moniker (*parse_display_name) (BonoboMoniker               *moniker,
-					      Bonobo_Moniker               parent,
-					      const CORBA_char            *name,
-					      CORBA_Environment           *ev);
+ 	void           (*set_name)           (BonoboMoniker               *moniker,
+ 					      const CORBA_char            *name,
+ 					      CORBA_Environment           *ev);
 	Bonobo_Unknown (*resolve)            (BonoboMoniker               *moniker,
 					      const Bonobo_ResolveOptions *options,
 					      const CORBA_char            *requested_interface,
@@ -55,9 +54,9 @@ typedef struct {
 					      const CORBA_char            *display_name,
 					      CORBA_Environment           *ev);
 
-	void           (*set_name)           (BonoboMoniker               *moniker,
+	void           (*set_internal_name)  (BonoboMoniker               *moniker,
 					      const char                  *unescaped_name);
-	const char    *(*get_name)           (BonoboMoniker               *moniker);
+	const char    *(*get_internal_name)  (BonoboMoniker               *moniker);
 
 	gpointer        dummy;
 } BonoboMonikerClass;
@@ -68,10 +67,11 @@ BonoboMoniker *bonobo_moniker_construct          (BonoboMoniker     *moniker,
 						  const char        *prefix);
 
 Bonobo_Moniker bonobo_moniker_get_parent         (BonoboMoniker     *moniker,
-						  CORBA_Environment *ev);
+						  CORBA_Environment *opt_ev);
+
 void           bonobo_moniker_set_parent         (BonoboMoniker     *moniker,
 						  Bonobo_Moniker     parent,
-						  CORBA_Environment *ev);
+						  CORBA_Environment *opt_ev);
 
 const char    *bonobo_moniker_get_name           (BonoboMoniker     *moniker);
 
@@ -79,8 +79,7 @@ const char    *bonobo_moniker_get_name_full      (BonoboMoniker     *moniker);
 char          *bonobo_moniker_get_name_escaped   (BonoboMoniker     *moniker);
 
 void           bonobo_moniker_set_name           (BonoboMoniker     *moniker,
-						  const char        *unescaped_name,
-						  int                num_chars);
+						  const char        *unescaped_name);
 
 const char    *bonobo_moniker_get_prefix         (BonoboMoniker     *moniker);
 

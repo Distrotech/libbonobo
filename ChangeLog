@@ -1,3 +1,42 @@
+2001-07-30  Dietmar Maurer  <dietmar@ximian.com>
+
+	* tests/test-moniker.c (check_parse_name): impl.
+	(main): added more tests.
+
+	* monikers/bonobo-moniker-query.c: this is now a simple moniker,
+	since we have fixed moniker separators # and ! (no customisation
+	possible) 
+
+	* idl/Bonobo_Moniker.idl: renamed getDisplayName to getName,
+	renamed parseDisplayName to setName, added getParent/setParent
+	instead of a parent attribute.
+
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_parse_name): impl.
+	(bonobo_moniker_util_get_parent_name): ev is now optional
+	(bonobo_moniker_client_new_from_name): implemented right to left
+	moniker name parsing. This ensures the correct loading of shlib
+	style monikers.
+	(bonobo_moniker_client_get_name): ev is now optional
+	(bonobo_moniker_client_resolve_default):  ev is now optional
+	(bonobo_get_object): ev is now optional
+	(bonobo_url_register): added check for ev != NULL
+	(bonobo_url_unregister):  added check for ev != NULL
+	(bonobo_url_lookup): added check for ev != NULL
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_set_parent): ev is now
+	optional 
+	(bonobo_moniker_get_parent): ev is now optional 
+	(bonobo_moniker_default_set_name): impl.
+
+	* bonobo_moniker_util_new_from_name_full: removed, use
+	bonobo_moniker_client_new_from_name instead.
+
+	* bonobo/bonobo-activation-context.c
+	(impl_Bonobo_ActivationContext_createFromName): removed
+	createWithParent 
+
+	* idl/Bonobo_Context.idl: removed createWithParent
+
 2001-07-30  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-types.c (bonobo_closure_invoke_va_list):
@@ -45,6 +84,7 @@
 	* bonobo/bonobo-stream-client.c (bonobo_stream_client_get_length):
 	update to make exception environment optional.
 
+>>>>>>> 1.105
 2001-07-29  Maciej Stachowiak  <mjs@noisehavoc.org>
 
 	* bonobo/Makefile.am: Remove references to Bonobo_Clipboard.idl

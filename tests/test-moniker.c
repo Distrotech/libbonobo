@@ -16,7 +16,7 @@ check_string (const char *prefix, const char *escaped, const char *unescaped)
 		g_object_new (bonobo_moniker_get_type (), NULL), prefix);
 	
 	name = g_strconcat (prefix, escaped, NULL);
-	bonobo_moniker_set_name (moniker, name, strlen (name));
+	bonobo_moniker_set_name (moniker, name);
 
 	const_str = bonobo_moniker_get_name (moniker);
 	fprintf (stderr, "'%s' == '%s'\n", unescaped, const_str);
@@ -38,6 +38,20 @@ check_string (const char *prefix, const char *escaped, const char *unescaped)
 	g_free (name);
 }
 
+static void
+check_parse_name (const char *name, const char *res, int plen)
+{
+	const char *mname;
+	int l;
+
+	mname = bonobo_moniker_util_parse_name (name, &l);
+
+	fprintf (stderr, "result %s %s %d\n", name, mname, l);
+
+	g_assert (!strcmp (res, mname));
+	g_assert (plen == l);
+}
+
 int
 main (int argc, char *argv [])
 {
@@ -55,6 +69,26 @@ main (int argc, char *argv [])
 	check_string ("a:",
 		      "1\\!\\#\\!\\!\\#\\\\",
 		      "1!#!!#\\");
+
+	check_parse_name ("#b:", "b:", 0);
+
+	check_parse_name ("a:#b:", "b:", 2);
+
+	check_parse_name ("a:!b:", "b:", 2);
+
+	check_parse_name ("a:3456789#b:", "b:", 9);
+
+	check_parse_name ("a:\\##b:", "b:", 4);
+
+	check_parse_name ("a:\\#c:", "a:\\#c:", 0);
+
+	check_parse_name ("a:\\\\##c:", "c:", 5);
+
+	check_parse_name ("a:\\\\#b:#c:", "c:", 7);
+
+	check_parse_name ("a:\\\\#b:\\#c:", "b:\\#c:", 4);
+
+	check_parse_name ("a:\\\\\\#b:\\#c:", "a:\\\\\\#b:\\#c:", 0);
 
 	return 0;
 }

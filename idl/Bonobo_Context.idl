@@ -35,16 +35,6 @@ module Bonobo {
 		Moniker createFromName   (in string name);
 
 		/**
-		 * createWithParent:
-		 * @optParent: Optional parent moniker
-		 * @name: name to create moniker from
-		 *
-		 * Used in moniker construction
-		 */
-		Moniker createWithParent (in Moniker optParent,
-					  in string  name);
-
-		/**
 		 * getExtender:
 		 * @monikerName: the name of the moniker to extend eg. 'file'
 		 * @interface: the interface we want to resolve against

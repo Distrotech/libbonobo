@@ -18,22 +18,11 @@
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static Bonobo_Moniker
-impl_Bonobo_ActivationContext_createWithParent (PortableServer_Servant servant,
-						Bonobo_Moniker         optParent,
-						const CORBA_char      *name,
-						CORBA_Environment     *ev)
-{
-	return bonobo_moniker_util_new_from_name_full (
-		optParent, name, ev);
-}
-
-static Bonobo_Moniker
 impl_Bonobo_ActivationContext_createFromName (PortableServer_Servant servant,
 					      const CORBA_char      *name,
 					      CORBA_Environment     *ev)
 {
-	return impl_Bonobo_ActivationContext_createWithParent (
-		servant, CORBA_OBJECT_NIL, name, ev);
+	return bonobo_moniker_client_new_from_name (name, ev);
 }
 
 static Bonobo_Unknown
@@ -61,7 +50,6 @@ bonobo_activation_context_class_init (BonoboActivationContextClass *klass)
 
 	epv->getObject        = impl_Bonobo_ActivationContext_getObject;
 	epv->createFromName   = impl_Bonobo_ActivationContext_createFromName;
-	epv->createWithParent = impl_Bonobo_ActivationContext_createWithParent;
 	epv->getExtender      = impl_Bonobo_ActivationContext_getExtender;
 }
 
