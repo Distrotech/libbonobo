@@ -1,3 +1,54 @@
+Bonobo 0.21
+
+	* UI handler changes (Me)
+
+		+ cleaned XML spec.
+		+ fixed evil translation problems
+		+ sexy toolbar sizing (Ettore)
+		+ expandable toolbar items (Ettore)
+		+ more sophisticated toolbar layout (Andy)
+		+ nicer looking separators (Cody Russell)
+		+ all samples! converted to new UI handler (Martin)
+		+ bug fixes (Larry, Andy, Darin, John)
+
+	* Moniker fixes (Miguel)
+
+	* Batch Property interface (Miguel)
+
+	* More Zoomable work (Martin)
+
+	* Big components clean (Martin)
+
+	* Storage modules rename (Dietmar)
+
+Bonobo 0.20
+
+	* gshell fixes (Martin)
+
+	* UI handler changes (Me)
+
+		+ cleaning
+		+ large UI API update
+		+ UI flicker killed
+		+ Improve cmd / widget separation
+		+ full toolbar behavoir (John Sullivan)
+		+ menue show / hide fix (Mathieu)
+
+	* Update to LGPL 21. (Martin)
+
+	* Socket fixes (Maciej)
+
+	* Header cleans (Darin)
+
+	* More cunning toolbar item sizing fixes (Andy)
+
+	* Zoom interface imported from Nautilus (Martin)
+	  Recieved with thanks from Eazel.
+
+	* Skeleton generic listener interface (Me)
+
+
+
 Bonobo 0.19
 
 Main bits:
