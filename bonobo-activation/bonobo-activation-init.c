@@ -176,7 +176,7 @@ bonobo_activation_internal_activation_context_get_extended (gboolean           e
 {
 	BonoboActivationBaseService base_service = {};
 
-	base_service.name = "IDL:OAF/ActivationContext:1.0";
+	base_service.name = "IDL:Bonobo/ActivationContext:1.0";
 	base_service.session_name = bonobo_activation_session_name_get ();
 	base_service.domain = "session";
 
@@ -189,7 +189,7 @@ bonobo_activation_activation_context_get (void)
 {
 	BonoboActivationBaseService base_service = {};
 
-	base_service.name = "IDL:OAF/ActivationContext:1.0";
+	base_service.name = "IDL:Bonobo/ActivationContext:1.0";
 	base_service.session_name = bonobo_activation_session_name_get ();
 	base_service.domain = "session";
 
@@ -203,7 +203,7 @@ bonobo_activation_object_directory_get (const char *username,
 {
         BonoboActivationBaseService base_service = {};
 
-        base_service.name = "IDL:OAF/ObjectDirectory:1.0";
+        base_service.name = "IDL:Bonobo/ObjectDirectory:1.0";
         base_service.session_name = bonobo_activation_session_name_get ();
         base_service.username = username;
         base_service.hostname = hostname;
@@ -258,7 +258,7 @@ cmdline_check (const BonoboActivationBaseServiceRegistry *registry,
                int *distance,
 	       gpointer user_data)
 {
-	if (!strcmp (base_service->name, "IDL:OAF/ObjectDirectory:1.0")) {
+	if (!strcmp (base_service->name, "IDL:Bonobo/ObjectDirectory:1.0")) {
 		*distance = 0;
 		return g_strdup (bonobo_activation_od_ior?bonobo_activation_od_ior:getenv("BONOBO_ACTIVATION_OD_IOR"));
 	}
@@ -281,7 +281,7 @@ ac_check (const BonoboActivationBaseServiceRegistry *registry,
           int *ret_distance,
 	  gpointer user_data)
 {
-	if (!strcmp (base_service->name, "IDL:OAF/ObjectDirectory:1.0")) {
+	if (!strcmp (base_service->name, "IDL:Bonobo/ObjectDirectory:1.0")) {
 		Bonobo_ActivationContext ac;
 		Bonobo_ObjectDirectoryList *od;
 		CORBA_Environment ev;
@@ -386,7 +386,7 @@ bonobo_activation_postinit (gpointer app, gpointer mod_info)
 	is_initialized = TRUE;
 }
 
-#ifdef Bonobo_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 static void
 do_barrier (int signum)
 {
@@ -509,7 +509,7 @@ bonobo_activation_orb_init (int *argc, char **argv)
 				     (char *) g_get_user_name (), &ev);
         
         
-        display =  g_getenv ("DISPLAY");
+        display = g_getenv ("DISPLAY");
         
         if (display != NULL) {
                 CORBA_Context_set_one_value (bonobo_activation_context, "display",
@@ -518,14 +518,14 @@ bonobo_activation_orb_init (int *argc, char **argv)
 
 	CORBA_exception_free (&ev);
 
-#ifdef Bonobo_DEBUG
-	if (getenv ("Bonobo_TRAP_SEGV")) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+	if (getenv ("BONOBO_ACTIVATION_TRAP_SEGV")) {
 		struct sigaction sa;
 		sa.sa_handler = do_barrier;
 		sigaction (SIGSEGV, &sa, NULL);
 		sigaction (SIGPIPE, &sa, NULL);
 	}
-	if (getenv ("Bonobo_BARRIER_INIT")) {
+	if (getenv ("BONOBO_ACTIVATION_BARRIER_INIT")) {
 		volatile int barrier = 1;
 		while (barrier);
 	}

@@ -152,10 +152,7 @@ main (int argc, char *argv[])
 				g_print
 					("User exception \"%s\" resulted from query\n",
 					 id);
-				if (!strcmp
-				    (id,
-				     "IDL:OAF/ActivationContext/ParseFailed:1.0"))
-				{
+				if (!strcmp (id, "IDL:Bonobo/ActivationContext/ParseFailed:1.0")) {
 					Bonobo_ActivationContext_ParseFailed
 						* exdata =
 						CORBA_exception_value (&ev);
@@ -210,10 +207,7 @@ main (int argc, char *argv[])
 				g_print
 					("User exception \"%s\" resulted from query\n",
 					 id);
-				if (!strcmp
-				    (id,
-				     "IDL:OAF/ActivationContext/ParseFailed:1.0"))
-				{
+				if (!strcmp (id,"IDL:Bonobo/ActivationContext/ParseFailed:1.0")) {
 					Bonobo_ActivationContext_ParseFailed
 						* exdata =
 						CORBA_exception_value (&ev);

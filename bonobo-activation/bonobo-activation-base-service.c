@@ -350,8 +350,8 @@ bonobo_activation_activators_use (const BonoboActivationBaseService *base_servic
 
 static CORBA_Object
 bonobo_activation_service_get_internal (const BonoboActivationBaseService *base_service,
-                          gboolean              existing_only,
-                          CORBA_Environment    *ev)
+                                        gboolean              existing_only,
+                                        CORBA_Environment    *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	int i;
