@@ -1,3 +1,13 @@
+2000-12-14  Michael Meeks  <michael@helixcode.com>
+
+	* Version 0.30
+
+2000-12-14  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in (orbit_version): downgrade dependency to
+	ORBit-0.5.5, NB. try marshaling a CORBA_any containing an Object
+	reference with this version.
+
 2000-12-13  Federico Mena Quintero  <federico@helixcode.com>
 
 	* bonobo/bonobo-transient.c (bonobo_transient_construct): Disable
@@ -15,6 +25,10 @@
 	* bonobo/bonobo-property-bag.c: removed the poa member from
 	_BonoboPropertyBagPrivate (replaced by transient)
 
+2000-12-13  Michael Meeks  <michael@helixcode.com>
+
+	* Version 0.29
+	
 2000-12-13  Michael Meeks  <michael@helixcode.com>
 
 	* configure.in (orbit_version): Depend on the as yet unreleased
