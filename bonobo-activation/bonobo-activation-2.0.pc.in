@@ -1,7 +1,7 @@
 prefix=@prefix@
 exec_prefix=@exec_prefix@
 libdir=@libdir@
-includedir=@includedir@/oaf-2.0
+includedir=@includedir@/bonobo-activation-2.0
 datadir=@datadir@
 idldir=@datadir@/idl
 
