@@ -1,3 +1,10 @@
+2000-12-04  Darin Adler  <darin@eazel.com>
+
+	* bonobo/Makefile.am: Add bonobo-item-handler.h so the
+	the tarball includes it.
+	* bonobo/bonobo.h: Remove include of obsolete
+	bonobo-embeddable-factory.h file.
+
 2000-12-04  John Sullivan  <sullivan@eazel.com>
 
 	* bonobo/bonobo-widget.c: (bonobo_widget_launch_component):
@@ -6,7 +13,7 @@
 	compile and link, though it still gives a warning so I'm
 	pretty sure this function isn't correct.
 
-	Added #inculde for bonobo/bonobo-exception.h so BONOBO_EX
+	Added #include for bonobo/bonobo-exception.h so BONOBO_EX
 	is found; added #include for bonobo/bonobo-moniker-util.h
 	so bonobo_get_object () is found; removed unfinished var
 	declaration "Bonobo_Unknown *".
