@@ -1,5 +1,5 @@
 /**
- * GNOME view object
+ * GNOME container object
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
