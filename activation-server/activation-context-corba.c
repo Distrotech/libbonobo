@@ -811,7 +811,7 @@ impl_Bonobo_ActivationContext_query (PortableServer_Servant _servant,
 }
 
 static char *
-ac_aid_to_query_string (Bonobo_ActivationID aid)
+ac_aid_to_query_string (const CORBA_char *aid)
 {
         char *tmp_aid;
         char *requirements;
@@ -897,7 +897,7 @@ ac_context_to_string_array (CORBA_Context context, char **sort_criteria,
 
 static Bonobo_ActivationResult *
 impl_Bonobo_ActivationContext_activate_from_id (PortableServer_Servant _servant,
-                                                Bonobo_ActivationID aid,
+                                                const CORBA_char *aid,
                                                 Bonobo_ActivationFlags flags,
                                                 CORBA_Context ctx,
                                                 CORBA_Environment * ev)
@@ -951,7 +951,7 @@ impl_Bonobo_ActivationContext_activate_from_id (PortableServer_Servant _servant,
 static void
 impl_Bonobo_ActivationContext_activate_from_id_async (
         PortableServer_Servant    _servant,
-        Bonobo_ActivationID       aid,
+        const CORBA_char          *aid,
         Bonobo_ActivationFlags    flags, 
         Bonobo_ActivationCallback callback_object,
         CORBA_Context             ctx, 

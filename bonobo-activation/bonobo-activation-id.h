@@ -44,7 +44,7 @@ BonoboActivationInfo;
 
 Bonobo_ActivationID    bonobo_activation_info_stringify      (const BonoboActivationInfo *actinfo);
 BonoboActivationInfo  *bonobo_activation_servinfo_to_actinfo (const Bonobo_ServerInfo    *servinfo);
-BonoboActivationInfo  *bonobo_activation_id_parse            (const Bonobo_ActivationID   actid);
+BonoboActivationInfo  *bonobo_activation_id_parse            (const CORBA_char           *actid);
 BonoboActivationInfo  *bonobo_activation_info_new            (void);
 void                   bonobo_activation_info_free           (BonoboActivationInfo       *actinfo);
 
