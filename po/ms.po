@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-03-08 11:00+0000\n"
+"POT-Creation-Date: 2004-05-26 14:30+0100\n"
 "PO-Revision-Date: 2003-01-01 21:24+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@my-penguin.org>\n"
 "Language-Team: Bahasa Melayu <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -89,7 +89,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1167
+#: activation-server/object-directory-corba.c:1151
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Keadaan race mengaktifkan pelaran '%s'"
@@ -162,7 +162,7 @@ msgstr "bonobo-activation gagal menetapkan kumpulan proses bagi %s: %s\n"
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Gagal melaksanakan %s: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:87
+#: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 "Terlalu banyak aras alias untuk satu lokaliti, mungkin ia menunjukkan gelung"

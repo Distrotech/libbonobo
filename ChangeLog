@@ -1,3 +1,7 @@
+2004-05-26  Michael Meeks  <michael@ximian.com>
+
+	* Version 2.6.1
+
 2004-05-26  Arvind Samptur  <arvind.samptur@wipro.com>
 
 	* activation-server/object-directroy.h : Add

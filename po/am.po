@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo VERSION\n"
-"POT-Creation-Date: 2004-03-08 11:00+0000\n"
+"POT-Creation-Date: 2004-05-26 14:30+0100\n"
 "PO-Revision-Date: 2003-01-16 08:39+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
@@ -86,7 +86,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1167
+#: activation-server/object-directory-corba.c:1151
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr ""
@@ -158,7 +158,7 @@ msgstr ""
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:87
+#: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 

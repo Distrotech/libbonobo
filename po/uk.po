@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-10 18:39+0200\n"
+"POT-Creation-Date: 2004-05-26 14:30+0100\n"
 "PO-Revision-Date: 2004-03-10 18:45+0200\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -70,7 +70,9 @@ msgstr "Служба сповіщення для активації"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Активація об'єктів спільних бібліотек у віддалених процесах поки-що не підтримується"
+msgstr ""
+"Активація об'єктів спільних бібліотек у віддалених процесах поки-що не "
+"підтримується"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
@@ -78,8 +80,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"Не вдається прочитати файл конфігурації активації Bonobo. Переконайтесь, "
-"що файл \"%s\" вказано правильно"
+"Не вдається прочитати файл конфігурації активації Bonobo. Переконайтесь, що "
+"файл \"%s\" вказано правильно"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -88,10 +90,11 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1167
+#: activation-server/object-directory-corba.c:1151
 #, c-format
 msgid "Race condition activating server '%s'"
-msgstr "Відбулась спроба одночасної активації сервера \"%s\" кількома процесами"
+msgstr ""
+"Відбулась спроба одночасної активації сервера \"%s\" кількома процесами"
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
@@ -121,7 +124,8 @@ msgstr "Властивості \"%s\" не задане значення"
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr ""
-"Не вдається проаналізувати неправильно сформований документ формату XML \"%s\""
+"Не вдається проаналізувати неправильно сформований документ формату XML \"%s"
+"\""
 
 #: activation-server/object-directory-load.c:641
 #, c-format
@@ -131,7 +135,8 @@ msgstr "Спроба відкрити каталог %s"
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
-"Спадкоємний процес не видав повідомлення про помилку, виникла невідома помилка"
+"Спадкоємний процес не видав повідомлення про помилку, виникла невідома "
+"помилка"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
@@ -150,7 +155,8 @@ msgstr "Нащадок отримав сигнал %u (%s)"
 #: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr "Невідома помилка, що не призводить до завершення роботи (код стану - %u)"
+msgstr ""
+"Невідома помилка, що не призводить до завершення роботи (код стану - %u)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
@@ -162,7 +168,7 @@ msgstr "bonobo-activation не вдається встановити групу 
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Помилка виконання %s: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:87
+#: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 "Надто багато рівнів псевдонімів для локалі, це може свідчити про циклічні "

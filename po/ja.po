@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-08 23:48+0900\n"
+"POT-Creation-Date: 2004-05-26 14:30+0100\n"
 "PO-Revision-Date: 2004-03-08 23:47+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -92,7 +92,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1167
+#: activation-server/object-directory-corba.c:1151
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "サーバ '%s' を活性化する際に競合発生"
@@ -165,7 +165,7 @@ msgstr "bonobo-activation が %s のプロセスグループの設定に失敗: 
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s の実行に失敗: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:87
+#: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 "ロケールに対するエイリアスのレベルが多すぎます (検出でループしている可能性あ"

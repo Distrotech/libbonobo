@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.4\n"
-"POT-Creation-Date: 2004-03-08 11:00+0000\n"
+"POT-Creation-Date: 2004-05-26 14:30+0100\n"
 "PO-Revision-Date: 2003-07-01 15:54-0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -89,7 +89,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1167
+#: activation-server/object-directory-corba.c:1151
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Kurada stato dum aktivado servilo '%s'"
@@ -161,7 +161,7 @@ msgstr "bonobo-activation-o malsukcesis meti procezaron de %s : %s\n"
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Malsukcesis lanĉi %s : %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:87
+#: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "Tro multaj alinomaj niveloj por lokaĵo, ĉi tio eble indikas ripeto"
 
