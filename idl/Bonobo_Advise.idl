@@ -1,6 +1,6 @@
-module GNOME {
+module Bonobo {
 
-	interface AdviseSink : GNOME::Unknown {
+	interface AdviseSink : Bonobo::Unknown {
 		void notify (in long notify_type);
 		
 		/**

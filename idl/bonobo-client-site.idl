@@ -10,9 +10,9 @@
  *    Miguel de Icaza (miguel@gnu.org)
  */
 
-module GNOME {
+module Bonobo {
 
-interface ClientSite : GNOME::Unknown {
+interface ClientSite : Bonobo::Unknown {
 
 	/**
 	 * get_container:

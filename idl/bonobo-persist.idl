@@ -5,7 +5,7 @@
  *    Miguel de Icaza (miguel@gnu.org)
  */
 
-module GNOME {
+module Bonobo {
 
 	interface Persist : Unknown {
 		enum Status {

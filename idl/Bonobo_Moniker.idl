@@ -1,4 +1,4 @@
-module GNOME {
+module Bonobo {
 
 	typedef long BindFlag;
 	const BindFlag user_interaction_allowed = 1;
@@ -55,7 +55,7 @@ module GNOME {
 		 * @bind_context: binding context
 		 * @left_moniker: parent moniker (left side)
 		 * @persistent_interface_name: the name of the persistent
-		 * object (GNOME::Storage, GNOME::Stream, GNOME::Lockbytes).
+		 * object (GNOME::Storage, Bonobo::Stream, GNOME::Lockbytes).
 		 */
 		Object bind_to_storage (in BindOptions bind_context,
 					in Moniker left_moniker,

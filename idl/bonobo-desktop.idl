@@ -5,11 +5,11 @@
  *   Miguel de Icaza (miguel@kernel.org)
  */
 
-module GNOME {
+module Bonobo {
 
 module Desktop {
 
-interface Window : GNOME::Unknown {
+interface Window : Bonobo::Unknown {
 
 	struct Geometry {
 		short x, y;

@@ -15,29 +15,29 @@
 #pragma inhibit push
 #endif
 
-#include <gnome-factory.idl>
-#include <gnome-unknown.idl>
+#include <bonobo-factory.idl>
+#include <bonobo-unknown.idl>
 
 /* Storage stuff. */
-#include <gnome-storage.idl>
-#include <gnome-persist.idl>
-#include <gnome-progressive.idl>
+#include <bonobo-storage.idl>
+#include <bonobo-persist.idl>
+#include <bonobo-progressive.idl>
 
-#include <gnome-advise.idl>
+#include <bonobo-advise.idl>
 
 /* Control stuff. */
-#include <gnome-ui-handler.idl>
-#include <gnome-property.idl>
-#include <gnome-control.idl>
+#include <bonobo-ui-handler.idl>
+#include <bonobo-property.idl>
+#include <bonobo-control.idl>
 
 /* Subdocument stuff. */
-#include <gnome-container.idl>
-#include <gnome-client-site.idl>
-#include <gnome-canvas.idl>
-#include <gnome-embeddable.idl>
+#include <bonobo-container.idl>
+#include <bonobo-client-site.idl>
+#include <bonobo-canvas.idl>
+#include <bonobo-embeddable.idl>
 
 /* Misc. Stuff. */
-#include <gnome-desktop.idl>
+#include <bonobo-desktop.idl>
 
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop

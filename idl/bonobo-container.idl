@@ -1,4 +1,4 @@
-module GNOME {
+module Bonobo {
 
 	interface Container : Unknown {
 		typedef sequence<Unknown> ObjectList;

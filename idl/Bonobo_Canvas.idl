@@ -4,10 +4,10 @@
  * Author:
  *    Miguel de Icaza (miguel@kernel.org)
  *
- * (C) 1999 International GNOME Support
+ * Copyright (C) 1999, 2000 Helix Code, Inc.
  */
 
-module GNOME {
+module Bonobo {
 
 module Gdk {
 	/*
@@ -159,7 +159,7 @@ module Canvas {
 		long   xoffset, yoffset;
 	};
 
-	interface Item : GNOME::Unknown {
+	interface Component : Bonobo::Unknown {
 
 		/** 
 		 * update:
@@ -205,7 +205,7 @@ module Canvas {
 			     out double y1, out double y2);
 
 		boolean event (in State state, 
-			       in GNOME::Gdk::Event event);
+			       in Bonobo::Gdk::Event event);
 
 		/*
 		 * Notifies this item about the size of the Canvas size on the 
@@ -228,7 +228,7 @@ module Canvas {
 	 * events to the real containing canvas and the item
 	 */
 	
-	interface ItemProxy {
+	interface ComponentProxy {
 		void request_update (in ArtUTA uta);
 	};
 };

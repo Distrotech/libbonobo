@@ -7,7 +7,7 @@
  * Bonobo Objects are also referred to as servers.
  */
 
-module GNOME {
+module Bonobo {
 
 interface View : Control {
 
@@ -34,7 +34,7 @@ interface ViewFrame : ControlFrame {
 	/**
 	 * get_client_site:
 	 *
-	 * Returns: The GNOME::ClientSite interface associated
+	 * Returns: The Bonobo::ClientSite interface associated
 	 * with this ViewFrame.
 	 */
 	ClientSite get_client_site ();
@@ -42,7 +42,7 @@ interface ViewFrame : ControlFrame {
 };
 
 /* Similar to IOleObject */
-interface Embeddable : GNOME::Unknown {
+interface Embeddable : Bonobo::Unknown {
 
 	/**
 	 * set_client_site:
@@ -158,14 +158,16 @@ interface Embeddable : GNOME::Unknown {
 	 * @aa: Whether the item should be an AA-item or not
 	 * @proxy: The Proxy used to notify of requested updates.
 	 *
-	 * Returns a GNOME::Canvas::Item interface, or CORBA_OBJECT_NIL
-	 * if this object does not support the Item interface
+	 * Returns a Bonobo::Canvas::Component interface, or
+	 * CORBA_OBJECT_NIL if this object does not support the
+	 * Canvas::Component interface.
 	 */
-	Canvas::Item new_canvas_item (in boolean aa, in Canvas::ItemProxy proxy);
+	Canvas::Component new_canvas_item (in boolean                aa,
+					   in Canvas::ComponentProxy proxy);
 };
 
 
-interface EmbeddableFactory : GNOME::GenericFactory {
+interface EmbeddableFactory : Bonobo::GenericFactory {
 	Embeddable create_path (in string path);
 };
 

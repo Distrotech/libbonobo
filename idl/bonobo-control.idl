@@ -6,9 +6,9 @@
  *   Miguel de Icaza <miguel@gnu.org>
  */
 
-module GNOME {
+module Bonobo {
 
-interface ControlFrame : GNOME::Unknown {
+interface ControlFrame : Bonobo::Unknown {
 
 	/**
 	 * activated:
@@ -50,7 +50,7 @@ interface ControlFrame : GNOME::Unknown {
 	/**
 	 * get_ui_handler:
 	 *
-	 * Returns: The GNOME::UIHandler interface to be used for
+	 * Returns: The Bonobo::UIHandler interface to be used for
 	 * menu/toolbar item merging.
 	 */
 	UIHandler get_ui_handler ();
@@ -65,7 +65,7 @@ interface ControlFrame : GNOME::Unknown {
 
 };
 
-interface Control : GNOME::Unknown {
+interface Control : Bonobo::Unknown {
 	typedef string windowid;
 
 	/**
@@ -84,7 +84,7 @@ interface Control : GNOME::Unknown {
 
 	/**
 	 * set_frame:
-	 * @frame: A GNOME_ControlFrame.
+	 * @frame: A Bonobo_ControlFrame.
 	 *
 	 * Gives the Control a handle to its ControlFrame.
 	 */

@@ -11,7 +11,7 @@
   * on suggestions from Chuck Jazdzewski <cjazdzewski@inprise.com>.
  */
 
-module GNOME {
+module Bonobo {
 
 interface Property {
 	/**
@@ -82,7 +82,7 @@ interface Property {
 typedef sequence<string> PropertyNames;
 typedef sequence<Property> PropertyList;
 
-interface PropertyBag : GNOME::Unknown {
+interface PropertyBag : Bonobo::Unknown {
 	/**
 	 * get_properties:
 	 *

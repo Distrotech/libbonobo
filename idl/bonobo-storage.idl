@@ -13,7 +13,7 @@
  *
  */
 
-module GNOME {
+module Bonobo {
 
 	interface Stream : Unknown {
 		typedef sequence<octet> iobuf;

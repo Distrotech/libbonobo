@@ -13,7 +13,7 @@
  *
  */
 
-module GNOME {
+module Bonobo {
 
 	interface ProgressiveDataSink : Unknown {
 		typedef sequence<octet> iobuf;
