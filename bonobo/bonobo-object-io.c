@@ -106,24 +106,17 @@ gnome_persist_stream_load_goad_id (GNOME_Stream source)
  * if @object does not support the IDL:GNOME/PersistStream:1.0 interface
  */
 GnomeIOStatus
-gnome_persiststream_save_to_stream (GNOME_PersistStream pstream, GNOME_Stream target)
+gnome_persiststream_save_to_stream (GNOME_PersistStream pstream, GNOME_Stream target,
+				    const char *goad_id)
 {
 	CORBA_Environment ev;
-	CORBA_char *goad_id;
 	
 	g_return_val_if_fail (pstream != CORBA_OBJECT_NIL, GNOME_IOERR_GENERAL);
 	g_return_val_if_fail (target != CORBA_OBJECT_NIL, GNOME_IOERR_GENERAL);
 	
 	CORBA_exception_init (&ev);
 
-	goad_id = GNOME_PersistStream_get_goad_id (pstream, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
-		CORBA_exception_free (&ev);
-		return GNOME_IOERR_GENERAL;
-	}
-
 	gnome_persist_stream_save_goad_id (target, goad_id, &ev);
-	CORBA_free (goad_id);
 
 	GNOME_PersistStream_save (pstream, target, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
@@ -145,7 +138,8 @@ gnome_persiststream_save_to_stream (GNOME_PersistStream pstream, GNOME_Stream ta
  * if @object does not support the IDL:GNOME/PersistStream:1.0 interface
  */
 GnomeIOStatus
-gnome_object_save_to_stream (GnomeObject *object, GNOME_Stream stream)
+gnome_object_save_to_stream (GnomeObject *object, GNOME_Stream stream,
+			     const char *goad_id)
 {
 	GNOME_PersistStream pstream;
 	
@@ -159,7 +153,7 @@ gnome_object_save_to_stream (GnomeObject *object, GNOME_Stream stream)
 	if (pstream != CORBA_OBJECT_NIL)
 		return GNOME_IOERR_PERSIST_NOT_SUPPORTED;
 
-	return gnome_persiststream_save_to_stream (pstream, stream);
+	return gnome_persiststream_save_to_stream (pstream, stream, goad_id);
 	
 	return GNOME_IO_OK;
 }

@@ -3,8 +3,10 @@
 #define __GNOME_PROPERTY_H__
 
 /*
- * Every function and data structure in this file is private and should never be accessed
- * directly by a PropertyBag user.  So stop peeking.
+ * Every function and data structure in this file is private and
+ * should never be accessed directly by a PropertyBag user, unless
+ * he is implementing his own persistence mechanism.  Otherwise,
+ * no peeking.
  */
 
 #include <bonobo/gnome-property-bag.h>
@@ -21,6 +23,5 @@ typedef struct {
 	char			*docstring;
 	GnomePropertyFlags	 flags;
 } GnomeProperty;
-
 
 #endif /* ! __GNOME_PROPERTY_H__ */

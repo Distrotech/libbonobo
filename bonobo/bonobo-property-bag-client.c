@@ -6,6 +6,7 @@
  */
 #include <config.h>
 #include <bonobo/gnome-property-bag-client.h>
+#include <bonobo/gnome-property-types.h>
 
 static GnomePropertyBagClient *
 gnome_property_bag_client_construct (GnomePropertyBagClient *pbc,
@@ -50,7 +51,7 @@ gnome_property_bag_client_new (GNOME_PropertyBag corba_property_bag)
 GList *
 gnome_property_bag_client_get_properties (GnomePropertyBagClient *pbc)
 {
-	GNOME_PropertyList *props;
+	GNOME_PropertyList  *props;
 	GList		    *prop_list;
 	int		     i;
 	CORBA_Environment    ev;
@@ -103,6 +104,44 @@ gnome_property_bag_client_get_properties (GnomePropertyBagClient *pbc)
 }
 
 /**
+ * gnome_property_bag_client_free_properties:
+ * @list: A #GList containing GNOME_Property corba objrefs (as
+ * produced by gnome_property_bag_client_get_properties(), for
+ * example).
+ *
+ * Releases the CORBA Objrefs stored in @list and frees the list.
+ */
+void
+gnome_property_bag_client_free_properties (GList *list)
+{
+	GList *l;
+
+	if (list == NULL)
+		return;
+
+	for (l = list; l != NULL; l = l->next) {
+		CORBA_Environment ev;
+		GNOME_Property    prop;
+
+		prop = (GNOME_Property) l->data;
+
+		CORBA_exception_init (&ev);
+
+		CORBA_Object_release (prop, &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("gnome_property_bag_client_free_properties: Exception releasing objref!");
+			CORBA_exception_free (&ev);
+			return;
+		}
+
+		CORBA_exception_free (&ev);
+	}
+
+	g_list_free (list);
+}
+
+/**
  * gnome_property_bag_client_get_property_names:
  * @pbc: A #GnomePropertyBagClient which is bound to a remote
  * #GNOME_PropertyBag.
@@ -119,7 +158,7 @@ gnome_property_bag_client_get_properties (GnomePropertyBagClient *pbc)
 GList *
 gnome_property_bag_client_get_property_names (GnomePropertyBagClient *pbc)
 {
-	GNOME_PropertyNames *names;
+	GNOME_PropertyNames  *names;
 	GList		     *name_list;
 	int		      i;
 	CORBA_Environment     ev;
@@ -162,10 +201,10 @@ gnome_property_bag_client_get_property_names (GnomePropertyBagClient *pbc)
  */
 GNOME_Property
 gnome_property_bag_client_get_property (GnomePropertyBagClient *pbc,
-					 char *property_name)
+					const char *property_name)
 {
 	CORBA_Environment ev;
-	GNOME_Property   prop;
+	GNOME_Property    prop;
 
 	g_return_val_if_fail (pbc != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), NULL);
@@ -189,7 +228,7 @@ gnome_property_bag_client_get_property (GnomePropertyBagClient *pbc,
  */
 
 /**
- * gnome_property_bag_client_write_to_stream:
+ * gnome_property_bag_client_persist:
  * @pbc: A #GnomePropertyBagClient object which is bound to a remote
  * #GNOME_PropertyBag server.
  * @stream: A #GnomeStream into which the data in @pbc will be written.
@@ -200,37 +239,805 @@ gnome_property_bag_client_get_property (GnomePropertyBagClient *pbc,
  * Control into a persistent store to which @stream is attached.
  */
 void
-gnome_property_bag_client_write_to_stream (GnomePropertyBagClient *pbc,
-					    GnomeStream *stream)
+gnome_property_bag_client_persist (GnomePropertyBagClient *pbc,
+				   GNOME_Stream stream)
 {
+	GNOME_PersistStream persist;
+	CORBA_Environment   ev;
+
 	g_return_if_fail (pbc != NULL);
 	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (stream != NULL);
 	g_return_if_fail (GNOME_IS_STREAM (stream));
 
-	g_warning ("gnome_property_bag_client_write_to_stream: Unimplemented.\n");
+	CORBA_exception_init (&ev);
+
+	persist = GNOME_Unknown_query_interface (pbc->corba_pb, "IDL:GNOME/PersistStream:1.0", &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION ||
+	    persist   == CORBA_OBJECT_NIL) {
+		g_warning ("GnomePropertyBagClient: No PersistStream interface "
+			   "found on remote PropertyBag!\n");
+		CORBA_exception_free (&ev);
+		return;
+	}
+
+	GNOME_PersistStream_save (persist, stream, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("GnomePropertyBagClient: Exception caught while persisting "
+			   "remote PropertyBag!\n");
+		CORBA_exception_free (&ev);
+		return;
+	}
+
+	GNOME_Unknown_unref  (persist, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("GnomePropertyBagClient: Exception caught while unrefing PersistStream!\n");
+		CORBA_exception_free (&ev);
+		CORBA_exception_init (&ev);
+	}
+
+	CORBA_Object_release (persist, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("GnomePropertyBagClient: Exception caught while releasing "
+			   "PersistStream objref!\n");
+	}
+
+	CORBA_exception_free (&ev);
 }
 
 /**
- * gnome_property_bag_client_read_from_stream:
+ * gnome_property_bag_client_depersist:
  */
 void
-gnome_property_bag_client_read_from_stream (GnomePropertyBagClient *pbc,
-					     GnomeStream *stream)
+gnome_property_bag_client_depersist (GnomePropertyBagClient *pbc,
+				     GNOME_Stream stream)
 {
+	GNOME_PersistStream persist;
+	CORBA_Environment   ev;
+
 	g_return_if_fail (pbc != NULL);
 	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (stream != NULL);
 	g_return_if_fail (GNOME_IS_STREAM (stream));
 
-	g_warning ("gnome_property_bag_client_read_from_stream: Unimplemented.\n");
+	CORBA_exception_init (&ev);
+
+	persist = GNOME_Unknown_query_interface (pbc->corba_pb, "IDL:GNOME/PersistStream:1.0", &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION ||
+	    persist   == CORBA_OBJECT_NIL) {
+		g_warning ("GnomePropertyBagClient: No PersistStream interface "
+			   "found on remote PropertyBag!\n");
+		CORBA_exception_free (&ev);
+		return;
+	}
+
+	GNOME_PersistStream_load (persist, stream, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("GnomePropertyBagClient: Exception caught while persisting "
+			   "remote PropertyBag!\n");
+		CORBA_exception_free (&ev);
+		return;
+	}
+
+	GNOME_Unknown_unref  (persist, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("GnomePropertyBagClient: Exception caught while unrefing PersistStream!\n");
+		CORBA_exception_free (&ev);
+		CORBA_exception_init (&ev);
+	}
+
+	CORBA_Object_release (persist, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("GnomePropertyBagClient: Exception caught while releasing "
+			   "PersistStream objref!\n");
+	}
+
+	CORBA_exception_free (&ev);
 }
+
+
+/*
+ * Property convenience functions.
+ */
+
+/**
+ * gnome_property_bag_client_get_property_type:
+ */
+CORBA_TypeCode
+gnome_property_bag_client_get_property_type (GnomePropertyBagClient *pbc,
+					     const char *propname)
+{
+	CORBA_Environment ev;
+	GNOME_Property prop;
+	CORBA_TypeCode tc;
+
+	g_return_val_if_fail (pbc != NULL, (CORBA_TypeCode) TC_null);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), (CORBA_TypeCode) TC_null);
+	g_return_val_if_fail (propname != NULL, (CORBA_TypeCode) TC_null);
+
+	prop = gnome_property_bag_client_get_property (pbc, propname);
+	g_return_val_if_fail (prop != CORBA_OBJECT_NIL, (CORBA_TypeCode) TC_null);
+
+	CORBA_exception_init (&ev);
+
+	tc = GNOME_Property_get_type (prop, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("gnome_property_bag_client_get_property_type: Exception getting TypeCode!");
+
+		CORBA_exception_free (&ev);
+		CORBA_exception_init (&ev);
+
+		CORBA_Object_release (prop, &ev);
+		CORBA_exception_free (&ev);
+
+		return (CORBA_TypeCode) TC_null;
+	}
+
+	CORBA_Object_release (prop, &ev);
+	CORBA_exception_free (&ev);
+
+	return tc;
+}
+
+typedef enum {
+	FIELD_VALUE,
+	FIELD_DEFAULT
+} PropUtilFieldType;
+
+static CORBA_any *
+gnome_property_bag_client_get_field_any (GnomePropertyBagClient *pbc,
+					 const char *propname,
+					 PropUtilFieldType field)
+
+{
+	GNOME_Property     prop;
+	CORBA_Environment  ev;
+	CORBA_any         *any;
+
+	g_return_val_if_fail (pbc != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), NULL);
+	g_return_val_if_fail (propname != NULL, NULL);
+
+	prop = gnome_property_bag_client_get_property (pbc, propname);
+	g_return_val_if_fail (prop != CORBA_OBJECT_NIL, NULL);
+
+	CORBA_exception_init (&ev);
+
+	if (field == FIELD_VALUE)
+		any = GNOME_Property_get_value (prop, &ev);
+	else
+		any = GNOME_Property_get_default (prop, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("gnome_property_bag_client_get_field_any: Exception getting property value!");
+
+		CORBA_exception_free (&ev);
+		CORBA_exception_init (&ev);
+
+		CORBA_Object_release (prop, &ev);
+		CORBA_exception_free (&ev);
+
+		return NULL;
+	}
+
+	CORBA_Object_release (prop, &ev);
+	CORBA_exception_free (&ev);
+
+	return any;
+}
+
+static gboolean
+gnome_property_bag_client_get_field_boolean (GnomePropertyBagClient *pbc,
+					     const char *propname,
+					     PropUtilFieldType field)
+{
+	CORBA_any *any;
+	gboolean   b;
+
+	g_return_val_if_fail (pbc != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), FALSE);
+	g_return_val_if_fail (propname != NULL, FALSE);
+
+	any = gnome_property_bag_client_get_field_any (pbc, propname, field);
+
+	if (any == NULL)
+		return FALSE;
+
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_boolean, 0);
+
+	b = *(gboolean *) any->_value;
+
+	CORBA_any__free (any, NULL, TRUE);
+
+	return b;
+}
+
+static gshort
+gnome_property_bag_client_get_field_short (GnomePropertyBagClient *pbc,
+					   const char *propname,
+					   PropUtilFieldType field)
+{
+	CORBA_any *any;
+	gshort     s;
+
+	g_return_val_if_fail (pbc != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), 0);
+	g_return_val_if_fail (propname != NULL, 0);
+
+	any = gnome_property_bag_client_get_field_any (pbc, propname, field);
+
+	if (any == NULL)
+		return 0;
+
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_short, 0);
+
+	s = *(gshort *) any->_value;
+
+	CORBA_any__free (any, NULL, TRUE);
+
+	return s;
+}
+
+static gushort
+gnome_property_bag_client_get_field_ushort (GnomePropertyBagClient *pbc,
+					    const char *propname,
+					    PropUtilFieldType field)
+{
+	CORBA_any *any;
+	gushort    s;
+
+	g_return_val_if_fail (pbc != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), 0);
+	g_return_val_if_fail (propname != NULL, 0);
+
+	any = gnome_property_bag_client_get_field_any (pbc, propname, field);
+
+	if (any == NULL)
+		return 0.0;
+
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_ushort, 0);
+
+	s = *(gushort *) any->_value;
+
+	CORBA_any__free (any, NULL, TRUE);
+
+	return s;
+}
+
+static glong
+gnome_property_bag_client_get_field_long (GnomePropertyBagClient *pbc,
+					  const char *propname,
+					  PropUtilFieldType field)
+{
+	CORBA_any *any;
+	glong      l;
+
+	g_return_val_if_fail (pbc != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), 0);
+	g_return_val_if_fail (propname != NULL, 0);
+
+	any = gnome_property_bag_client_get_field_any (pbc, propname, field);
+
+	if (any == NULL)
+		return 0.0;
+
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_long, 0);
+
+	l = *(glong *) any->_value;
+
+	CORBA_any__free (any, NULL, TRUE);
+
+	return l;
+}
+
+static gulong
+gnome_property_bag_client_get_field_ulong (GnomePropertyBagClient *pbc,
+					   const char *propname,
+					   PropUtilFieldType field)
+{
+	CORBA_any *any;
+	gulong     l;
+
+	g_return_val_if_fail (pbc != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), 0);
+	g_return_val_if_fail (propname != NULL, 0);
+
+	any = gnome_property_bag_client_get_field_any (pbc, propname, field);
+
+	if (any == NULL)
+		return 0.0;
+
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_ulong, 0);
+
+	l = *(gulong *) any->_value;
+
+	CORBA_any__free (any, NULL, TRUE);
+
+	return l;
+}
+
+static gfloat
+gnome_property_bag_client_get_field_float (GnomePropertyBagClient *pbc,
+					   const char *propname,
+					   PropUtilFieldType field)
+{
+	CORBA_any *any;
+	gfloat     f;
+
+	g_return_val_if_fail (pbc != NULL, 0.0);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), 0.0);
+	g_return_val_if_fail (propname != NULL, 0.0);
+
+	any = gnome_property_bag_client_get_field_any (pbc, propname, field);
+
+	if (any == NULL)
+		return 0.0;
+
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_float, 0.0);
+
+	f = *(gfloat *) any->_value;
+
+	CORBA_any__free (any, NULL, TRUE);
+
+	return f;
+}
+
+static gdouble
+gnome_property_bag_client_get_field_double (GnomePropertyBagClient *pbc,
+					    const char *propname,
+					    PropUtilFieldType field)
+{
+	CORBA_any *any;
+	gdouble    d;
+
+	g_return_val_if_fail (pbc != NULL, 0.0);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), 0.0);
+	g_return_val_if_fail (propname != NULL, 0.0);
+
+	any = gnome_property_bag_client_get_field_any (pbc, propname, field);
+
+	if (any == NULL)
+		return 0.0;
+
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_double, 0.0);
+
+	d = *(gdouble *) any->_value;
+
+	CORBA_any__free (any, NULL, TRUE);
+
+	return d;
+}
+
+static char *
+gnome_property_bag_client_get_field_string (GnomePropertyBagClient *pbc,
+					    const char *propname,
+					    PropUtilFieldType field)
+{
+	CORBA_any *any;
+	char      *str;
+
+	g_return_val_if_fail (pbc != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), NULL);
+	g_return_val_if_fail (propname != NULL, NULL);
+
+	any = gnome_property_bag_client_get_field_any (pbc, propname, field);
+
+	if (any == NULL)
+		return NULL;
+
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_string, NULL);
+
+	str = g_strdup (*(char **) any->_value);
+
+	CORBA_any__free (any, NULL, TRUE);
+
+	return str;
+}
+
+/*
+ * Querying property values.
+ */
+gboolean
+gnome_property_bag_client_get_value_boolean (GnomePropertyBagClient *pbc,
+					     const char *propname)
+{
+	return gnome_property_bag_client_get_field_boolean (pbc, propname, FIELD_VALUE);
+}
+
+gshort
+gnome_property_bag_client_get_value_short (GnomePropertyBagClient *pbc,
+					   const char *propname)
+{
+	return gnome_property_bag_client_get_field_short (pbc, propname, FIELD_VALUE);
+}
+
+gushort
+gnome_property_bag_client_get_value_ushort (GnomePropertyBagClient *pbc,
+					    const char *propname)
+{
+	return gnome_property_bag_client_get_field_ushort (pbc, propname, FIELD_VALUE);
+}
+
+glong
+gnome_property_bag_client_get_value_long (GnomePropertyBagClient *pbc,
+					  const char *propname)
+{
+	return gnome_property_bag_client_get_field_long (pbc, propname, FIELD_VALUE);
+}
+
+gulong
+gnome_property_bag_client_get_value_ulong (GnomePropertyBagClient *pbc,
+					   const char *propname)
+{
+	return gnome_property_bag_client_get_field_ulong (pbc, propname, FIELD_VALUE);
+}
+
+gfloat
+gnome_property_bag_client_get_value_float (GnomePropertyBagClient *pbc,
+					   const char *propname)
+{
+	return gnome_property_bag_client_get_field_float (pbc, propname, FIELD_VALUE);
+}
+
+gdouble
+gnome_property_bag_client_get_value_double (GnomePropertyBagClient *pbc,
+					    const char *propname)
+{
+	return gnome_property_bag_client_get_field_double (pbc, propname, FIELD_VALUE);
+}
+
+char *
+gnome_property_bag_client_get_value_string (GnomePropertyBagClient *pbc,
+					    const char *propname)
+{
+	return gnome_property_bag_client_get_field_string (pbc, propname, FIELD_VALUE);
+}
+
+CORBA_any *
+gnome_property_bag_client_get_value_any (GnomePropertyBagClient *pbc,
+					 const char *propname)
+{
+	return gnome_property_bag_client_get_field_any (pbc, propname, FIELD_VALUE);
+}
+
+
+/*
+ * Querying property default values.
+ */
+gboolean
+gnome_property_bag_client_get_default_boolean (GnomePropertyBagClient *pbc,
+					       const char *propname)
+{
+	return gnome_property_bag_client_get_field_boolean (pbc, propname, FIELD_DEFAULT);
+}
+
+gshort
+gnome_property_bag_client_get_default_short (GnomePropertyBagClient *pbc,
+					     const char *propname)
+{
+	return gnome_property_bag_client_get_field_short (pbc, propname, FIELD_DEFAULT);
+}
+
+gushort
+gnome_property_bag_client_get_default_ushort (GnomePropertyBagClient *pbc,
+					      const char *propname)
+{
+	return gnome_property_bag_client_get_field_ushort (pbc, propname, FIELD_DEFAULT);
+}
+
+
+glong
+gnome_property_bag_client_get_default_long (GnomePropertyBagClient *pbc,
+					    const char *propname)
+{
+	return gnome_property_bag_client_get_field_long (pbc, propname, FIELD_DEFAULT);
+}
+
+gulong
+gnome_property_bag_client_get_default_ulong (GnomePropertyBagClient *pbc,
+					     const char *propname)
+{
+	return gnome_property_bag_client_get_field_ulong (pbc, propname, FIELD_DEFAULT);
+}
+
+gfloat
+gnome_property_bag_client_get_default_float (GnomePropertyBagClient *pbc,
+					     const char *propname)
+{
+	return gnome_property_bag_client_get_field_float (pbc, propname, FIELD_DEFAULT);
+}
+
+gdouble
+gnome_property_bag_client_get_default_double (GnomePropertyBagClient *pbc,
+					      const char *propname)
+{
+	return gnome_property_bag_client_get_field_double (pbc, propname, FIELD_DEFAULT);
+}
+
+char *
+gnome_property_bag_client_get_default_string (GnomePropertyBagClient *pbc,
+					      const char *propname)
+{
+	return gnome_property_bag_client_get_field_string (pbc, propname, FIELD_DEFAULT);
+}
+
+CORBA_any *
+gnome_property_bag_client_get_default_any (GnomePropertyBagClient *pbc,
+					   const char *propname)
+{
+	return gnome_property_bag_client_get_field_any (pbc, propname, FIELD_DEFAULT);
+}
+
+/* Setting property values. */
+
+void
+gnome_property_bag_client_set_value_any (GnomePropertyBagClient *pbc,
+					 const char *propname,
+					 CORBA_any *value)
+{
+	GNOME_Property    prop;
+	CORBA_Environment ev;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+	g_return_if_fail (value != NULL);
+
+	prop = gnome_property_bag_client_get_property (pbc, propname);
+	g_return_if_fail (prop != CORBA_OBJECT_NIL);
+
+	CORBA_exception_init (&ev);
+
+	GNOME_Property_set_value (prop, value, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("gnome_property_bag_client_set_value_any: Exception setting property!");
+		CORBA_exception_free (&ev);
+		CORBA_exception_init (&ev);
+	}
+
+	CORBA_Object_release (prop, &ev);
+	CORBA_exception_free (&ev);
+
+	return;
+}
+
+void
+gnome_property_bag_client_set_value_boolean (GnomePropertyBagClient *pbc,
+					     const char *propname,
+					     gboolean value)
+{
+	CORBA_any      *any;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+
+	any = gnome_property_marshal_boolean ("boolean", (const gpointer) &value, NULL);
+	g_return_if_fail (any != NULL);
+
+	gnome_property_bag_client_set_value_any (pbc, propname, any);
+
+	CORBA_any__free (any, NULL, TRUE);
+}
+
+void
+gnome_property_bag_client_set_value_short (GnomePropertyBagClient *pbc,
+					   const char *propname,
+					   gshort value)
+{
+	CORBA_any      *any;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+
+	any = gnome_property_marshal_short ("short", (const gpointer) &value, NULL);
+	g_return_if_fail (any != NULL);
+
+	gnome_property_bag_client_set_value_any (pbc, propname, any);
+
+	CORBA_any__free (any, NULL, TRUE);
+}
+
+void
+gnome_property_bag_client_set_value_ushort (GnomePropertyBagClient *pbc,
+					    const char *propname,
+					    gushort value)
+{
+	CORBA_any      *any;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+
+	any = gnome_property_marshal_ushort ("ushort", (const gpointer) &value, NULL);
+	g_return_if_fail (any != NULL);
+
+	gnome_property_bag_client_set_value_any (pbc, propname, any);
+
+	CORBA_any__free (any, NULL, TRUE);
+}
+
+void
+gnome_property_bag_client_set_value_long (GnomePropertyBagClient *pbc,
+					  const char *propname,
+					  glong value)
+{
+	CORBA_any      *any;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+
+	any = gnome_property_marshal_long ("long", (const gpointer) &value, NULL);
+	g_return_if_fail (any != NULL);
+
+	gnome_property_bag_client_set_value_any (pbc, propname, any);
+
+	CORBA_any__free (any, NULL, TRUE);
+}
+
+void
+gnome_property_bag_client_set_value_ulong (GnomePropertyBagClient *pbc,
+					   const char *propname,
+					   gulong value)
+{
+	CORBA_any      *any;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+
+	any = gnome_property_marshal_ulong ("ulong", (const gpointer) &value, NULL);
+	g_return_if_fail (any != NULL);
+
+	gnome_property_bag_client_set_value_any (pbc, propname, any);
+
+	CORBA_any__free (any, NULL, TRUE);
+}
+
+void
+gnome_property_bag_client_set_value_float (GnomePropertyBagClient *pbc,
+					   const char *propname,
+					   gfloat value)
+{
+	CORBA_any      *any;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+
+	any = gnome_property_marshal_float ("float", (const gpointer) &value, NULL);
+	g_return_if_fail (any != NULL);
+
+	gnome_property_bag_client_set_value_any (pbc, propname, any);
+
+	CORBA_any__free (any, NULL, TRUE);
+}
+
+void
+gnome_property_bag_client_set_value_double (GnomePropertyBagClient *pbc,
+					    const char *propname,
+					    gdouble value)
+{
+	CORBA_any      *any;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+
+	any = gnome_property_marshal_double ("double", (const gpointer) &value, NULL);
+	g_return_if_fail (any != NULL);
+
+	gnome_property_bag_client_set_value_any (pbc, propname, any);
+
+	CORBA_any__free (any, NULL, TRUE);
+}
+
+void
+gnome_property_bag_client_set_value_string (GnomePropertyBagClient *pbc,
+					    const char *propname,
+					    char *value)
+{
+	CORBA_any      *any;
+
+	g_return_if_fail (pbc != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc));
+	g_return_if_fail (propname != NULL);
+
+	any = gnome_property_marshal_string ("string", (const gpointer) value, NULL);
+	g_return_if_fail (any != NULL);
+
+	gnome_property_bag_client_set_value_any (pbc, propname, any);
+
+	CORBA_any__free (any, NULL, TRUE);
+}
+
+/*
+ * Querying other fields and flags.
+ */
+char *
+gnome_property_bag_client_get_docstring (GnomePropertyBagClient *pbc,
+					 const char *propname)
+{
+	CORBA_Environment  ev;
+	GNOME_Property     prop;
+	CORBA_char        *docstr;
+
+	g_return_val_if_fail (pbc != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), NULL);
+	g_return_val_if_fail (propname != NULL, NULL);
+
+	prop = gnome_property_bag_client_get_property (pbc, propname);
+	g_return_val_if_fail (prop != CORBA_OBJECT_NIL, NULL);
+
+	CORBA_exception_init (&ev);
+
+	docstr = GNOME_Property_get_doc_string (prop, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		g_warning ("gnome_property_bag_client_get_doc_string: Exception getting doc string!");
+
+		CORBA_exception_free (&ev);
+		CORBA_exception_init (&ev);
+
+		CORBA_Object_release (prop, &ev);
+		CORBA_exception_free (&ev);
+
+		return NULL;
+	}
+
+	CORBA_exception_free (&ev);
+
+	return (char *) docstr;
+}
+
+GnomePropertyFlags
+gnome_property_bag_client_get_flags (GnomePropertyBagClient *pbc,
+				     const char *propname)
+{
+	GnomePropertyFlags flags;
+	GNOME_Property     prop;
+	CORBA_Environment  ev;
+	gboolean           is_read_only;
+
+	g_return_val_if_fail (pbc != NULL, 0);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG_CLIENT (pbc), 0);
+	g_return_val_if_fail (propname != NULL, 0);
+
+	prop = gnome_property_bag_client_get_property (pbc, propname);
+	g_return_val_if_fail (prop != CORBA_OBJECT_NIL, 0);
+
+	CORBA_exception_init (&ev);
+
+	is_read_only = GNOME_Property_is_read_only (prop, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION)
+		goto flags_error;
+
+	flags = (is_read_only    ? GNOME_PROPERTY_READ_ONLY       : 0);
+
+	return flags;
+
+ flags_error:
+	CORBA_exception_free (&ev);
+	CORBA_exception_init (&ev);
+
+	CORBA_Object_release (prop, &ev);
+	CORBA_exception_free (&ev);
+
+	return 0;
+}
+
 
 
 /*
  * GtkObject crap.
  */
-
 
 static void
 gnome_property_bag_client_class_init (GnomePropertyBagClientClass *class)

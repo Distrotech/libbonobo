@@ -1,3 +1,205 @@
+1999-12-13  Nat Friedman  <nat@helixcode.com>
+
+	* components/image-x-png/bonobo-image-x-png.c
+ 	(bonobo_object_factory): Don't pass the goad id to
+ 	persist_stream_new.
+
+	* components/text-plain/bonobo-text-plain.c (embeddable_factory): Likewise.
+
+	* tests: Rough draft of a test suite.  Ignore this for now.
+
+	* configure.in (AC_OUTPUT): Create tests/Makefile.
+
+	* Makefile.am (SUBDIRS): Added tests.
+
+	* samples/controls/sample-control-container.c (edit_property):
+ 	Free the new any when we're done.  This needs to be rewritten to
+ 	use the new PropertyBagClient API.
+
+	* samples/controls/bonobo-clock-control.c
+ 	(bonobo_clock_control_prop_value_changed_cb): Use gboolean for b,
+ 	not CORBA_boolean.
+	(bonobo_clock_factory): Likewise for running.
+
+	* idl/gnome-property.idl (GNOME::Property:get_default): Removed
+ 	comment about persistence since we no longer persist properties
+ 	from the client.
+	(GNOME::Property:use_default_optimization): Removed for the above
+ 	reason.
+	(GNOME::Property:is_stored): Likewise.
+	
+
+	* idl/gnome-persist.idl (GNOME::Persist): Removed get_goad_id
+ 	method.
+
+	* bonobo/gnome-wrapper.c (gnome_wrapper_destroy): New function to
+ 	clean up some memory leaks :-).
+	(gnome_wrapper_class_init): Override the destroy method.
+	(gnome_wrapper_unrealize): Set the GCs to NULL after destroying
+ 	them.  Likewise with the cover.
+	(gnome_wrapper_set_covered): Removed unnecessary calls to
+ 	gnome_wrapper_paint, since this gets triggered by
+ 	gtk_widget_queue_resize.
+	(gnome_wrapper_set_visibility): Queue a resize if the visibility
+ 	changes.
+	(gnome_wrapper_get_visibility): Removed incorrect FIXME.
+
+	* bonobo/gnome-view.h: Reformatted.
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_construct): Put the
+ 	control frame widget -- the GtkSocket -- into the wrapper.
+
+	* bonobo/gnome-stream-client.c (gnome_stream_client_write): Allow
+ 	the user to specify a NULL CORBA_environment.
+	(gnome_stream_client_write_string): New function.
+	(gnome_stream_client_printf): Likewise.
+	(gnome_stream_client_read_string): Likewise.
+
+	* bonobo/gnome-property.c (impl_GNOME_Property_get_type):
+ 	Duplicate the typecode and free the any.  Remove the warning, as
+ 	this function should now be working properly, without mem leaks.
+	(impl_GNOME_Property_set_value): const CORBA_any
+	(impl_GNOME_Property_use_default_optimization): Removed.  The
+ 	client no longer needs to know about these things since it does
+ 	not handle property persistence.
+	(impl_GNOME_Property_is_stored): Likewise.
+	(gnome_property_get_epv): Removed _is_stored and
+ 	_use_default_optimization from the epv.
+
+	* bonobo/gnome-property-bag.c (_GnomePropertyBagPrivate): Added
+ 	the persister/depersister data.
+	(GnomePropertyTypeDefinition): Renamed to GnomePropertyType.
+	(GnomePropertyType): Added comparer function and closure.
+	(gnome_property_bag_get_prop_list): New convenience function to
+ 	return a list of GnomeProperty functions.  Not really intended to
+ 	be used externally, except by streaming implementations.
+	(gnome_property_bag_foreach_create_list): Helper function for
+ 	above.
+	(gnome_property_bag_foreach_create_objrefs): Removed.
+	(impl_GNOME_PropertyBag_get_properties): Modified to use
+ 	gnome_property_bag_foreach_create_list.
+	(gnome_property_bag_foreach_create_names): Removed.
+	(impl_GNOME_PropertyBag_get_property_names): Modified to use
+ 	gnome_property_bag_foreach_create_list.
+	(gnome_property_bag_set_persister): New API function.
+	(gnome_property_bag_persist_save): New function to dispatch to the
+ 	persistence function.
+	(gnome_property_bag_persist_load): New function to dispatch to the
+ 	depersistence function.
+	(gnome_property_bag_construct): Add a PersistStream interface for
+ 	persisting/depersisting the PropertyBag's properties.
+	(gnome_property_bag_foreach_remove_prop): Pass the type closure to
+ 	the releasers.
+	(gnome_property_bag_set_prop_type): The type parameter is now
+ 	const.
+	(gnome_property_bag_set_value): Pass the type closure to the
+ 	releaser.
+	(gnome_property_bag_set_default): The name parameter is now const.
+	(gnome_property_bag_set_docstring): Likewise.
+	(gnome_property_bag_set_flags): Likewise.
+	(gnome_property_bag_create_type): Added the comparer, releaser,
+ 	and closure parameters.
+	(gnome_property_bag_value_to_any): Pass the type closure to the
+ 	property type marshaler.
+	(gnome_property_bag_any_to_value): Pass the type closure to the
+ 	property type demarshaler.
+	(gnome_property_bag_marshal_*): Removed, moved to
+ 	gnome-property-types.c
+	(gnome_property_bag_demarshal_*): Likewise.
+	(gnome_property_bag_compare_values): New function to dispatch to
+ 	the type comparator.
+	(gnome_property_bag_init): Specify the comparers and closures when
+ 	we create the default types.
+
+	* bonobo/gnome-property-bag-client.c
+ 	(gnome_property_bag_client_free_properties): New function to free
+ 	a list of properties and release the CORBA objrefs stored in it.
+	(gnome_property_bag_client_write_to_stream): Removed.
+  	Persisting/depersisting is now done on the server side.
+	(gnome_property_bag_client_read_from_stream): Likewise.
+	(gnome_property_bag_client_persist): New function to persist a
+ 	remote property bag into the specified stream.
+	(gnome_property_bag_client_depersist): New function to depersist a
+ 	remote property bag from the specified stream.
+	(gnome_property_bag_client_get_property_type): New convenience
+ 	function which returns the CORBA_TypeCode for the specified
+ 	property.
+	(gnome_property_bag_client_get_field_any): New convenience
+ 	function which returns a CORBA_any containing the value of the
+ 	specified property.
+	(gnome_property_bag_client_get_field_boolean): Likewise.
+	(gnome_property_bag_client_get_field_short): Likewise.
+	(gnome_property_bag_client_get_field_ushort): Likewise.
+	(gnome_property_bag_client_get_field_long): Likewise.
+	(gnome_property_bag_client_get_field_ulong): Likewise.
+	(gnome_property_bag_client_get_field_float): Likewise.
+	(gnome_property_bag_client_get_field_double): Likewise.
+	(gnome_property_bag_client_get_field_string): Likewise.
+	(gnome_property_bag_client_get_value_boolean): Likewise.
+	(gnome_property_bag_client_get_value_short): Likewise.
+	(gnome_property_bag_client_get_value_ushort): Likewise.
+	(gnome_property_bag_client_get_value_long): Likewise.
+	(gnome_property_bag_client_get_value_ulong): Likewise.
+	(gnome_property_bag_client_get_value_float): Likewise.
+	(gnome_property_bag_client_get_value_double): Likewise.
+	(gnome_property_bag_client_get_value_string): Likewise.
+	(gnome_property_bag_client_get_value_any): Likewise.
+	(gnome_property_bag_client_get_default_boolean): Likewise.
+	(gnome_property_bag_client_get_default_short): Likewise.
+	(gnome_property_bag_client_get_default_ushort): Likewise.
+	(gnome_property_bag_client_get_default_long): Likewise.
+	(gnome_property_bag_client_get_default_ulong): Likewise.
+	(gnome_property_bag_client_get_default_float): Likewise.
+	(gnome_property_bag_client_get_default_double): Likewise.
+	(gnome_property_bag_client_get_default_string): Likewise.
+	(gnome_property_bag_client_get_default_any): Likewise.
+	(gnome_property_bag_client_set_value_any): New convenience
+ 	function to set the value of a property.
+	(gnome_property_bag_client_set_value_boolean): Likewise.
+	(gnome_property_bag_client_set_value_short): Likewise.
+	(gnome_property_bag_client_set_value_ushort): Likewise.
+	(gnome_property_bag_client_set_value_long): Likewise.
+	(gnome_property_bag_client_set_value_ulong): Likewise.
+	(gnome_property_bag_client_set_value_float): Likewise.
+	(gnome_property_bag_client_set_value_double): Likewise.
+	(gnome_property_bag_client_set_value_string): Likewise.
+	(gnome_property_bag_client_get_docstring): New convenience
+ 	function.
+	(gnome_property_bag_client_get_flags): Likewise.
+
+	* bonobo/gnome-persist.h (GnomePersist): Removed the goad id field.
+
+	* bonobo/gnome-persist-file.c (gnome_persist_file_construct):
+ 	Removed the goad id from the construct function, since we do not
+ 	necessarily know our own goad id.
+	(gnome_persist_file_new): Likewise.
+
+	* bonobo/gnome-persist-stream.c (gnome_persist_stream_construct):
+ 	Removed the goad id param.
+	(gnome_persist_stream_new): Likewise.
+	
+	* bonobo/gnome-persist.c (impl_get_goad_id): Removed.
+	(gnome_persist_get_epv): The epv is now empty.  Perhaps
+ 	GnomePersist needs to be rethought.
+	(gnome_persist_construct): Removed the goad id parameter.
+
+	* bonobo/gnome-object-io.c (gnome_object_save_to_stream): Added a
+ 	goad_id parameter.  This stuff *all* needs to be rethought.  We
+ 	cannot count on being able to ask a component what its goad id is.
+	(gnome_persiststream_save_to_stream): Pass the goad id to
+ 	gnome_persist_stream_save_goad_id.
+
+	* bonobo/gnome-client-site.c: Don't include gtksocket.h.
+	(set_remove_window): Removed as the control now handles all of
+ 	this.
+	(gnome_client_site_new_view_full): Do not create the socket.
+	(destroy_view_frame): Renamed to gnomef_client_site_view_frame_destroy.
+
+	* bonobo/Makefile.am: Added libbonobo-xml for the XML-based
+ 	property streaming.
+	(libbonobo_la_SOURCES): Added gnome-property-types.c
+	(libbonoboinclude_HEADERS): Added gnome-property-types.h
+
 1999-12-11  Michael Meeks  <mmeeks@gnu.org>
 
 	* components/audio-ulaw/bonobo-audio-ulaw.c (destroy_view),
@@ -117,6 +319,14 @@
 	* idl/gnome-control.idl: string up the windowid
 
 	* idl/gnome-ui-handler.idl: fix typo 'toiolbar_get_accel'
+
+1999-12-04  Nat Friedman  <nat@helixcode.com>
+
+	* samples/Makefile.am: Fixed for the new directory layout.
+
+	* samples/compound-doc/Makefile.am: New file.  Moved the
+	appropriate stuff from samples/Makefile.am.
+
 
 1999-12-03  Michael Meeks  <mmeeks@gnu.org>
 

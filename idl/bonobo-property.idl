@@ -60,33 +60,8 @@ interface Property {
 	 * editors can use it to implement a "set property value to
 	 * default" mechanism.
 	 *
-	 * Second, the value returned by this method can be used to
-	 * optimize streaming this property to disk.  If this
-	 * property's value matches the default value, then there is
-	 * no need to stream it to disk.  However, this optimization
-	 * will only be performed if this property supports it.  See
-	 * use_default_optimization().
 	 */
 	any get_default ();
-
-	/**
-	 * use_default_optimization:
-	 *
-	 * Returns a boolean indicating whether or not the default
-	 * value can be used to optimize streaming this property to
-	 * disk.  If this function returns %TRUE, then a streaming
-	 * implementation can choose not to write this property to
-	 * disk if the property's value matches its default value.
-	 *
-	 * Think carefully before you choose whether or not to set
-	 * this flag on your properties.  If you do, that means that
-	 * you are establishing a contract with the users of the
-	 * control which says "I will not change the default value of
-	 * my properties."  Changing the default values after you've
-	 * set this flag (and released your control and people have
-	 * started using it) will result in unpredictable behavior.
-	 */
-	boolean use_default_optimization ();
 
 	/**
 	 * get_doc_string:
@@ -94,19 +69,6 @@ interface Property {
 	 * Returns a string describing this property.
 	 */
 	string get_doc_string ();
-
-	/**
-	 * is_stored:
-	 * 
-	 * Returns %TRUE if the property should be stored when the
-	 * property list is streamed to a persistent store.
-	 *
-	 * The idea is that you can use this method to distinguish
-	 * between properties which are permanent characteristics of a
-	 * component (is_stored == TRUE) and those which are just
-	 * transient (is_stored == FALSE).
-	 */
-	boolean is_stored ();
 
 	/** 
 	 * is_read_only:

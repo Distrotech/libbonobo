@@ -6,14 +6,31 @@ getting done.
 
 Nat Friedman (nat@nat.org)
 
+Major Unfinished Items
+======================
+
+* Compound document printing
+
+* Compound document storage
+    . Libefs
+    . XML-based
+
+
+Things to finish
+================
+
+Bugs to fix
+===========
+
+General Cleanup
+===============
+
 Controls etc
 ------------
 * Add Prop CList to Control sample container.
 * free values when pb is destroyed.  ReleaserFn
 * Fix g_slist_frees in gnome-ui-handler.c -- added FIXMEs.  Don't
   understand the problem currently.
-* Fix GnomeUIHandler crashing problem -- unknown.
-* Fix gill
 * Fix gpdf
 * doc new control/control frame functions
 * From gnome-client-site.c: 	CORBA_free (list);	/* FIXME: This does not make any sense at all to me */
@@ -23,16 +40,13 @@ Controls etc
 * out-of-place -- add embeddable routine, one per
 * Toolbar controls -- test
 
-
 Bonobo-endemic issues
 ---------------------
-* check for proper unref/destruction handling/mem leaks.
+* Check for proper unref/destruction handling/mem leaks.
 * Compile with zero warnings.
 * Base64 encoding for storages streams (provide an XML-based storage)
 * Hunt down and kill all FIXMEs.
 * _full methods for creating perl/python/scheme bindings
-* Controls deployed
-* Properties deployed
 * Simple File IO that takes care of all the repetitive code we add everywhre
 
 Bonobo Core (files in bonobo/)
@@ -44,7 +58,6 @@ Bonobo Core (files in bonobo/)
 * UIHandler toolbar code finished (Nat)
 * UIHandler documented (Nat)
 * Move all test code out of bonobo/bonobo.
-* Implement GnomeBonoboWidget. (Nat)
 * Make sure HACKING is up-to-date.
 
 Issues

@@ -1,0 +1,6 @@
+string-test [string] Testing 1 2 3 Default string ReadWrite
+boolean-test [boolean] True True ReadWrite
+ushort-test [ushort] 234 0 ReadWrite
+long-test [long] 43243 26 ReadWrite
+float-test [float] 3.141593 2.718282 ReadWrite
+short-test [short] 5 532 ReadWrite

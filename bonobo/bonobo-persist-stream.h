@@ -52,13 +52,11 @@ GtkType             gnome_persist_stream_get_type  (void);
 void                gnome_persist_stream_set_dirty (GnomePersistStream *ps,
 						    gboolean dirty);
 
-GnomePersistStream *gnome_persist_stream_new       (const char *goad_id,
-						    GnomePersistStreamIOFn load_fn,
+GnomePersistStream *gnome_persist_stream_new       (GnomePersistStreamIOFn load_fn,
 						    GnomePersistStreamIOFn save_fn,
 						    void *closure);
 GnomePersistStream *gnome_persist_stream_construct (GnomePersistStream *ps,
 						    GNOME_PersistStream corba_ps,
-						    const char *goad_id,
 						    GnomePersistStreamIOFn load_fn,
 						    GnomePersistStreamIOFn save_fn,
 						    void *closure);

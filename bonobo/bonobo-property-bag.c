@@ -8,6 +8,8 @@
 #include <bonobo/gnome-main.h>
 #include <bonobo/gnome-property-bag.h>
 #include <bonobo/gnome-property.h>
+#include <bonobo/gnome-property-types.h>
+#include <bonobo/gnome-persist-stream.h>
 
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
@@ -21,17 +23,27 @@ static guint gnome_property_bag_signals [LAST_SIGNAL];
 
 POA_GNOME_PropertyBag__vepv gnome_property_bag_vepv;
 
+
+/*
+ * Internal data structures.
+ */
 struct _GnomePropertyBagPrivate {
-	PortableServer_POA	 poa;
-	GHashTable		*props;
-	GHashTable		*types;
+	PortableServer_POA	      poa;
+	GHashTable		     *props;
+	GHashTable		     *types;
+
+	GnomePropertyBagPersisterFn   persister;
+	GnomePropertyBagDepersisterFn depersister;
+	gpointer		      persister_closure;
 };
 
 typedef struct {
 	GnomePropertyBagValueMarshalerFn   marshaler;
 	GnomePropertyBagValueDemarshalerFn demarshaler;
 	GnomePropertyBagValueReleaserFn    releaser;
-} GnomePropertyTypeDefinition;
+	GnomePropertyBagValueComparerFn    comparer;
+	gpointer                           user_data;
+} GnomePropertyType;
 
 
 
@@ -175,8 +187,8 @@ static gboolean
 gnome_property_bag_create_poa (GnomePropertyBag *pb)
 {
 	static PortableServer_POA	   property_poa = NULL;
-	CORBA_PolicyList		  *policies;     /* The list of policies used to create the GnomeProperty POA. */
-	GnomePropertyBagServantManager   *sm;		 /* Our special servant manager. */
+	CORBA_PolicyList		  *policies;
+	GnomePropertyBagServantManager    *sm;
 	CORBA_Environment		   ev;
 	char				  *poa_name;
 
@@ -336,6 +348,43 @@ gnome_property_bag_create_poa (GnomePropertyBag *pb)
 /*
  * GnomePropertyBag CORBA methods.
  */
+
+static void
+gnome_property_bag_foreach_create_list (gpointer key, gpointer value,
+					gpointer data)
+{
+	GList **l = (GList **) data;
+
+	*l = g_list_prepend (*l, value);
+}
+
+
+/**
+ * gnome_property_bag_get_prop_list:
+ * @pb: A #GnomePropertyBag.
+ *
+ * Returns a #GList of #GnomeProperty structures.  This function is
+ * private and should only be used internally, or in a PropertyBag
+ * persistence implementation.  You should not touch the
+ * #GnomeProperty structure unless you know what you're doing.
+ */
+GList *
+gnome_property_bag_get_prop_list (GnomePropertyBag *pb)
+{
+	GList *l;
+
+	g_return_val_if_fail (pb != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG (pb), NULL);
+
+	l = NULL;
+
+	g_hash_table_foreach (pb->priv->props,
+			      gnome_property_bag_foreach_create_list,
+			      &l);
+
+	return l;
+}
+
 static GNOME_Property
 gnome_property_bag_create_objref (GnomePropertyBag *pb, char *name,
 				  GNOME_Property *obj, CORBA_Environment *ev)
@@ -350,37 +399,16 @@ gnome_property_bag_create_objref (GnomePropertyBag *pb, char *name,
 	return *obj;
 }
 
-struct pb_objref_closure {
-	GnomePropertyBag *pb;
-	GNOME_PropertyList *prop_list;
-	int curr_index;
-	CORBA_Environment *ev;
-};
-
-static void
-gnome_property_bag_foreach_create_objrefs (gpointer key, gpointer value,
-					   gpointer data)
-{
-	struct pb_objref_closure *closure = data;
-	char			 *name = key;
-	GNOME_Property		  prop;
-
-	
-	prop = gnome_property_bag_create_objref (closure->pb, name,
-				  & (closure->prop_list->_buffer [closure->curr_index]),
-						  closure->ev);
-
-	closure->curr_index ++;
-}
-
 static GNOME_PropertyList *
 impl_GNOME_PropertyBag_get_properties (PortableServer_Servant servant,
 				       CORBA_Environment *ev)
 {
-	GnomePropertyBag *pb = GNOME_PROPERTY_BAG (gnome_object_from_servant (servant));
+	GnomePropertyBag   *pb = GNOME_PROPERTY_BAG (gnome_object_from_servant (servant));
 	GNOME_PropertyList *prop_list;
-	struct pb_objref_closure *closure;
-	int len;
+	GList		   *props;
+	GList		   *curr;
+	int		    len;
+	int		    i;
 
 	/*
 	 * Create the PropertyList and allocate space for the
@@ -399,16 +427,29 @@ impl_GNOME_PropertyBag_get_properties (PortableServer_Servant servant,
 	/*
 	 * Create a list of Object references for the properties.
 	 */
-	closure = g_new0 (struct pb_objref_closure, 1);
-	closure->pb = pb;
-	closure->prop_list = prop_list;
-	closure->ev = ev;
+	props = gnome_property_bag_get_prop_list (pb);
 
-	g_hash_table_foreach (pb->priv->props,
-			      gnome_property_bag_foreach_create_objrefs,
-			      closure);
+	i = 0;
+	for (curr = props; curr != NULL; curr = curr->next) {
+		GnomeProperty *prop = curr->data;
+		GNOME_Property objref;
 
-	g_free (closure);
+		objref = gnome_property_bag_create_objref (
+			pb, prop->name,
+			& (prop_list->_buffer [i]), ev);
+
+		if (ev->_major != CORBA_NO_EXCEPTION) {
+			g_warning ("GnomePropertyBag: Could not create property objref!\n");
+			g_list_free (props);
+			CORBA_free (prop_list);
+			return CORBA_OBJECT_NIL;
+		}
+
+		i++;
+		
+	}
+
+	g_list_free (props);
 
 	return prop_list;
 }
@@ -418,8 +459,8 @@ impl_GNOME_PropertyBag_get_property (PortableServer_Servant servant,
 				     CORBA_char *name,
 				     CORBA_Environment *ev)
 {
-	GnomePropertyBag	*pb = GNOME_PROPERTY_BAG (gnome_object_from_servant (servant));
-	GNOME_Property		 prop;
+	GnomePropertyBag *pb = GNOME_PROPERTY_BAG (gnome_object_from_servant (servant));
+	GNOME_Property    prop;
 
 	if (g_hash_table_lookup (pb->priv->props, name) == NULL) {
 
@@ -435,30 +476,16 @@ impl_GNOME_PropertyBag_get_property (PortableServer_Servant servant,
 	return prop;
 }
 
-struct pb_names_closure {
-	GNOME_PropertyNames *name_list;
-	int curr_index;
-};
-
-static void
-gnome_property_bag_foreach_create_names (gpointer key, gpointer value,
-					 gpointer data)
-{
-	struct pb_names_closure  *closure = data;
-	char			 *name = key;
-
-	closure->name_list->_buffer [closure->curr_index] = CORBA_string_dup (name);
-	closure->curr_index ++;
-}
-
 static GNOME_PropertyNames *
 impl_GNOME_PropertyBag_get_property_names (PortableServer_Servant servant,
 					   CORBA_Environment *ev)
 {
-	GnomePropertyBag *pb = GNOME_PROPERTY_BAG (gnome_object_from_servant (servant));
-	GNOME_PropertyNames *name_list;
-	struct pb_names_closure *closure;
-	int len;
+	GnomePropertyBag        *pb = GNOME_PROPERTY_BAG (gnome_object_from_servant (servant));
+	GNOME_PropertyNames	*name_list;
+	GList			*props;
+	GList			*curr;
+	int                      len;
+	int			 i;
 
 	/*
 	 * Create the PropertyNames list and allocate space for the
@@ -477,33 +504,103 @@ impl_GNOME_PropertyBag_get_property_names (PortableServer_Servant servant,
 	/*
 	 * Create the list of property names.
 	 */
-	closure = g_new0 (struct pb_names_closure, 1);
-	closure->name_list = name_list;
+	props = gnome_property_bag_get_prop_list (pb);
 
-	g_hash_table_foreach (pb->priv->props,
-			      gnome_property_bag_foreach_create_names,
-			      closure);
+	i = 0;
+	for (curr = props; curr != NULL; curr = curr->next) {
+		GnomeProperty *prop = curr->data;
 
-	g_free (closure);
+		name_list->_buffer [i] = CORBA_string_dup (prop->name);
+		i ++;
+	}
+
+	g_list_free (props);
 
 	return name_list;
 }
 
 
 /*
+ * Property streaming hooks.
+ */
+void
+gnome_property_bag_set_persister (GnomePropertyBag              *pb,
+				  GnomePropertyBagPersisterFn    persister,
+				  GnomePropertyBagDepersisterFn  depersister,
+				  gpointer			 user_data)
+{
+	g_return_if_fail (pb != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BAG (pb));
+
+	pb->priv->persister         = persister;
+	pb->priv->depersister       = depersister;
+	pb->priv->persister_closure = user_data;
+}
+
+static int
+gnome_property_bag_persist_save (GnomePersistStream *ps,
+				 const GNOME_Stream stream,
+				 void *closure)
+{
+	GnomePropertyBag *pb = closure;
+
+	if (pb->priv->persister != NULL) {
+		if (! (pb->priv->persister) (pb, stream,
+					     pb->priv->persister_closure))
+			return FALSE;
+		else
+			return TRUE;
+	}
+
+	return TRUE;
+}
+
+static int
+gnome_property_bag_persist_load (GnomePersistStream *ps,
+				 const GNOME_Stream stream,
+				 void *closure)
+{
+	GnomePropertyBag *pb = closure;
+
+	if (pb->priv->depersister != NULL) {
+		if (! (pb->priv->depersister) (pb, stream,
+					       pb->priv->persister_closure))
+			return FALSE;
+		else
+			return TRUE;
+	}
+
+	return TRUE;
+}
+
+
+
+/*
  * GnomePropertyBag construction/deconstruction functions. 
  */
-
 static GnomePropertyBag *
 gnome_property_bag_construct (GnomePropertyBag *pb,
 			      CORBA_Object corba_pb)
 {
+	GnomePersistStream *pstream;
+
 	gnome_object_construct (GNOME_OBJECT (pb), corba_pb);
 
 	if (! gnome_property_bag_create_poa (pb)) {
 		g_free (pb);
 		return NULL;
 	}
+
+	/*
+	 * Create the stream which we use to persist/depersist properties.
+	 */
+	pstream = gnome_persist_stream_new (gnome_property_bag_persist_load,
+					    gnome_property_bag_persist_save,
+					    pb);
+
+	gnome_object_add_interface (GNOME_OBJECT (pb),
+				    GNOME_OBJECT (pstream));
+
 
 	return pb;
 }
@@ -512,7 +609,7 @@ static CORBA_Object
 gnome_property_bag_create_corba_object (GnomeObject *object)
 {
 	POA_GNOME_PropertyBag *servant;
-	CORBA_Environment ev;
+	CORBA_Environment      ev;
 
 	servant = (POA_GNOME_PropertyBag *)g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_property_bag_vepv;
@@ -540,7 +637,7 @@ GnomePropertyBag *
 gnome_property_bag_new (void)
 {
 	GnomePropertyBag *pb;
-	CORBA_Object corba_pb;
+	CORBA_Object      corba_pb;
 
 
 	pb = gtk_type_new (gnome_property_bag_get_type ());
@@ -558,8 +655,8 @@ static gboolean
 gnome_property_bag_foreach_remove_type (gpointer key, gpointer value,
 					gpointer user_data)
 {
-	GnomePropertyTypeDefinition *type = value;
-	char *type_name = key;
+	GnomePropertyType *type = value;
+	char              *type_name = key;
 
 	g_free (type);
 	g_free (type_name);
@@ -571,16 +668,16 @@ static gboolean
 gnome_property_bag_foreach_remove_prop (gpointer key, gpointer value,
 					gpointer user_data)
 {
-	GnomePropertyBag *pb = user_data;
-	GnomePropertyTypeDefinition *type;
-	GnomeProperty *prop = value;
-	char *prop_name = key;
+	GnomePropertyBag  *pb        = user_data;
+	GnomeProperty     *prop      = value;
+	GnomePropertyType *type;
+	char              *prop_name = key;
 
 	type = g_hash_table_lookup (pb->priv->types, prop->type);
 	g_return_val_if_fail (type != NULL, TRUE);
 
-	(type->releaser) (pb, prop->type, prop->value);
-	(type->releaser) (pb, prop->type, prop->default_value);
+	(type->releaser) (prop->type, prop->value, type->user_data);
+	(type->releaser) (prop->type, prop->default_value, type->user_data);
 
 	g_free (prop_name);
 	g_free (prop->docstring);
@@ -647,7 +744,7 @@ gnome_property_bag_get_epv (void)
 
 static gboolean
 gnome_property_bag_set_prop_type (GnomePropertyBag *pb, GnomeProperty *prop,
-				   char *type)
+				  const char *type)
 {
 	if (g_hash_table_lookup (pb->priv->types, type) == NULL) {
 		g_warning ("gnome_property_bag_set_prop_type: Type \"%s\" not found\n", type);
@@ -663,10 +760,8 @@ gnome_property_bag_set_prop_type (GnomePropertyBag *pb, GnomeProperty *prop,
  * gnome_property_bag_add:
  */
 void
-gnome_property_bag_add (GnomePropertyBag *pb, char *name,
-			char *type, gpointer value,
-			gpointer default_value, char *docstring,
-			GnomePropertyFlags flags)
+gnome_property_bag_add (GnomePropertyBag *pb, const char *name, const char *type, gpointer value,
+			gpointer default_value, const char *docstring, GnomePropertyFlags flags)
 {
 	GnomeProperty *prop;
 
@@ -708,12 +803,12 @@ gnome_property_bag_add (GnomePropertyBag *pb, char *name,
  * gnome_property_bag_set_value:
  */
 void
-gnome_property_bag_set_value (GnomePropertyBag *pb, char *name,
+gnome_property_bag_set_value (GnomePropertyBag *pb, const char *name,
 			      gpointer value)
 {
-	GnomePropertyTypeDefinition *ptype;
-	GnomeProperty *prop;
-	gpointer old_value;
+	GnomePropertyType *ptype;
+	GnomeProperty     *prop;
+	gpointer           old_value;
 
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (name != NULL);
@@ -733,14 +828,14 @@ gnome_property_bag_set_value (GnomePropertyBag *pb, char *name,
 	ptype = g_hash_table_lookup (pb->priv->types, prop->type);
 	g_return_if_fail (ptype != NULL);
 
-	(ptype->releaser) (pb, prop->type, old_value);
+	(ptype->releaser) (prop->type, old_value, ptype->user_data);
 }
 
 /**
  * gnome_property_bag_set_default:
  */
 void
-gnome_property_bag_set_default (GnomePropertyBag *pb, char *name,
+gnome_property_bag_set_default (GnomePropertyBag *pb, const char *name,
 				gpointer default_value)
 {
 	GnomeProperty *prop;
@@ -758,7 +853,7 @@ gnome_property_bag_set_default (GnomePropertyBag *pb, char *name,
  * gnome_property_bag_set_docstring:
  */
 void
-gnome_property_bag_set_docstring (GnomePropertyBag *pb, char *name,
+gnome_property_bag_set_docstring (GnomePropertyBag *pb, const char *name,
 				  char *docstring)
 {
 	GnomeProperty *prop;
@@ -778,7 +873,7 @@ gnome_property_bag_set_docstring (GnomePropertyBag *pb, char *name,
  * gnome_property_bag_set_flags:
  */
 void
-gnome_property_bag_set_flags (GnomePropertyBag *pb, char *name,
+gnome_property_bag_set_flags (GnomePropertyBag *pb, const char *name,
 			      GnomePropertyFlags flags)
 {
 	GnomeProperty *prop;
@@ -894,15 +989,21 @@ gnome_property_bag_has_property (GnomePropertyBag *pb, const char *name)
 }
 
 /*
- * Properties and the marshaling/demarshaling engine.
+ * Property types.
+ */
+
+/**
+ * gnome_property_bag_create_type:
  */
 void
 gnome_property_bag_create_type (GnomePropertyBag *pb, char *type_name,
 				GnomePropertyBagValueMarshalerFn   marshaler,
 				GnomePropertyBagValueDemarshalerFn demarshaler,
-				GnomePropertyBagValueReleaserFn    releaser)
+				GnomePropertyBagValueComparerFn    comparer,
+				GnomePropertyBagValueReleaserFn    releaser,
+				gpointer                           user_data)
 {
-	GnomePropertyTypeDefinition *ptype;
+	GnomePropertyType *ptype;
 
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (GNOME_IS_PROPERTY_BAG (pb));
@@ -913,10 +1014,12 @@ gnome_property_bag_create_type (GnomePropertyBag *pb, char *type_name,
 	/* Make sure this type doesn't already exist. */
 	g_return_if_fail (g_hash_table_lookup (pb->priv->types, type_name) == NULL);
 
-	ptype = g_new0 (GnomePropertyTypeDefinition, 1);
+	ptype = g_new0 (GnomePropertyType, 1);
 	ptype->marshaler   = marshaler;
 	ptype->demarshaler = demarshaler;
 	ptype->releaser    = releaser;
+	ptype->comparer	   = comparer;
+	ptype->user_data   = user_data;
 
 	g_hash_table_insert (pb->priv->types, type_name, ptype);
 }
@@ -928,9 +1031,9 @@ CORBA_any *
 gnome_property_bag_value_to_any (GnomePropertyBag *pb, const char *type,
 				 const gpointer value)
 {
-	GnomePropertyBagValueMarshalerFn value_marshaler;
-	GnomePropertyTypeDefinition *ptype;
-	CORBA_any *any;
+	GnomePropertyBagValueMarshalerFn  value_marshaler;
+	GnomePropertyType                *ptype;
+	CORBA_any                        *any;
 
 	g_return_val_if_fail (pb != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG (pb), NULL);
@@ -942,7 +1045,7 @@ gnome_property_bag_value_to_any (GnomePropertyBag *pb, const char *type,
 	value_marshaler = ptype->marshaler;
 	g_return_val_if_fail (value_marshaler != NULL, NULL);
 
-	any = (value_marshaler) (pb, type, value);
+	any = (value_marshaler) (type, value, ptype->user_data);
 
 	return any;
 }
@@ -954,9 +1057,9 @@ gpointer
 gnome_property_bag_any_to_value (GnomePropertyBag *pb, const char *type,
 				 const CORBA_any *any)
 {
-	GnomePropertyBagValueDemarshalerFn value_demarshaler;
-	GnomePropertyTypeDefinition *ptype;
-	gpointer value;
+	GnomePropertyBagValueDemarshalerFn  value_demarshaler;
+	GnomePropertyType                  *ptype;
+	gpointer                            value;
 
 	g_return_val_if_fail (pb != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG (pb), NULL);
@@ -968,308 +1071,38 @@ gnome_property_bag_any_to_value (GnomePropertyBag *pb, const char *type,
 	value_demarshaler = ptype->demarshaler;
 	g_return_val_if_fail (value_demarshaler != NULL, NULL);
 
-	value = (value_demarshaler) (pb, type, any);
+	value = (value_demarshaler) (type, any, ptype->user_data);
 
 	return value;
 }
 
-
-/*
- * Standard type marshalers.
+/**
+ * gnome_property_bag_compare_values:
  */
-
-/* Gross macros to get around ORBit incompleteness. */
-#define CORBA_short__alloc() (CORBA_short *) CORBA_octet_allocbuf (sizeof (CORBA_short))
-#define CORBA_unsigned_short__alloc() (CORBA_unsigned_short *) CORBA_octet_allocbuf (sizeof (CORBA_unsigned_short))
-#define CORBA_long__alloc() (CORBA_long *) CORBA_octet_allocbuf (sizeof (CORBA_long))
-#define CORBA_unsigned_long__alloc() (CORBA_unsigned_long *) CORBA_octet_allocbuf (sizeof (CORBA_unsigned_long))
-#define CORBA_string__alloc() (CORBA_char **)ORBit_alloc(sizeof(gpointer), CORBA_string__free, GUINT_TO_POINTER(1)) 
-#define CORBA_float__alloc() (CORBA_float *) CORBA_octet_allocbuf (sizeof (CORBA_float))
-#define CORBA_double__alloc() (CORBA_double *) CORBA_octet_allocbuf (sizeof (CORBA_double))
-#define CORBA_boolean__alloc() (CORBA_boolean *) CORBA_octet_allocbuf (sizeof (CORBA_boolean))
-
-
-static CORBA_any *
-gnome_property_bag_marshal_boolean (GnomePropertyBag *pb, const char *type,
-				    const gpointer value)
+gboolean
+gnome_property_bag_compare_values (GnomePropertyBag *pb, const char *type,
+				   gpointer value1, gpointer value2)
 {
-	CORBA_any *any;
-	CORBA_boolean *b;
+	GnomePropertyBagValueComparerFn  value_comparer;
+	GnomePropertyType		*ptype;
 
+	g_return_val_if_fail (pb != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_PROPERTY_BAG (pb), FALSE);
+	g_return_val_if_fail (type != NULL, FALSE);
 
-	b = CORBA_boolean__alloc();
-	*b = *(CORBA_boolean *) value;
-	
-	any = CORBA_any__alloc ();
-	any->_type = (CORBA_TypeCode) TC_boolean;
-	any->_value = b;
-	CORBA_any_set_release (any, TRUE);
+	ptype = g_hash_table_lookup (pb->priv->types, type);
+	g_return_val_if_fail (ptype != NULL, FALSE);
 
-	return any;
-}
+	value_comparer = ptype->comparer;
+	g_return_val_if_fail (value_comparer != NULL, FALSE);
 
-static CORBA_any *
-gnome_property_bag_marshal_string (GnomePropertyBag *pb, const char *type,
-				   const gpointer value)
-{
-	CORBA_any *any;
-	CORBA_char **str;
-	const char *string_value;
-
-	if (value == NULL)
-		string_value = "";
-	else
-		string_value = (const char *) value;
-
-	str = CORBA_string__alloc();
-	*str = CORBA_string_dup (string_value);
-	
-	any = CORBA_any__alloc ();
-	any->_type = (CORBA_TypeCode) TC_string;
-	any->_value = str;
-	CORBA_any_set_release (any, TRUE);
-
-	return any;
-}
-
-static CORBA_any *
-gnome_property_bag_marshal_short (GnomePropertyBag *pb, const char *type,
-				  const gpointer value)
-{
-	CORBA_any *any;
-	CORBA_short *s;
-
-	s = CORBA_short__alloc();
-	*s = *((CORBA_short *)value);
-
-	any = CORBA_any__alloc ();
-	any->_type = (CORBA_TypeCode) TC_short;
-	any->_value = s;
-
-	return any;
-}
-
-static CORBA_any *
-gnome_property_bag_marshal_ushort (GnomePropertyBag *pb, const char *type,
-				   const gpointer value)
-{
-	CORBA_any *any;
-	CORBA_unsigned_short *s;
-
-	s = CORBA_unsigned_short__alloc();
-	*s = *((CORBA_unsigned_short *)value);
-
-	any = CORBA_any__alloc ();
-	any->_type = (CORBA_TypeCode) TC_ushort;
-	any->_value = s;
-	CORBA_any_set_release (any, TRUE);
-
-	return any;
-}
-
-static CORBA_any *
-gnome_property_bag_marshal_long (GnomePropertyBag *pb, const char *type,
-				 const gpointer value)
-{
-	CORBA_any *any;
-	CORBA_long *l;
-
-	l = CORBA_long__alloc();
-	*l = *((CORBA_long *) value);
-
-	any = CORBA_any__alloc ();
-	any->_type = (CORBA_TypeCode) TC_long;
-	any->_value = l;
-	CORBA_any_set_release (any, TRUE);
-
-	return any;
-}
-
-static CORBA_any *
-gnome_property_bag_marshal_ulong (GnomePropertyBag *pb, const char *type,
-				  const gpointer value)
-{
-	CORBA_any *any;
-	CORBA_unsigned_long *l;
-
-	l = CORBA_unsigned_long__alloc();
-	*l = *((CORBA_unsigned_long *) value);
-
-	any = CORBA_any__alloc ();
-	any->_type = (CORBA_TypeCode) TC_ulong;
-	any->_value = l;
-	CORBA_any_set_release (any, TRUE);
-
-	return any;
-}
-
-static CORBA_any *
-gnome_property_bag_marshal_float (GnomePropertyBag *pb, const char *type,
-				  const gpointer value)
-{
-	CORBA_any *any;
-	CORBA_float *f;
-
-	f = CORBA_float__alloc();
-	*f = *((CORBA_float *) value);
-
-	any = CORBA_any__alloc ();
-	any->_type = (CORBA_TypeCode) TC_float;
-	any->_value = f;
-	CORBA_any_set_release (any, TRUE);
-
-	return any;
-}
-
-static CORBA_any *
-gnome_property_bag_marshal_double (GnomePropertyBag *pb, const char *type,
-				   const gpointer value)
-{
-	CORBA_any *any;
-	CORBA_double *d;
-
-	d = CORBA_double__alloc();
-	*d = *((CORBA_double *) value);
-
-	any = CORBA_any__alloc ();
-	any->_type = (CORBA_TypeCode) TC_double;
-	any->_value = d;
-	CORBA_any_set_release (any, TRUE);
-
-	return any;
-}
-
-/*
- * Standard type demarshalers.
- */
-static gpointer
-gnome_property_bag_demarshal_boolean (GnomePropertyBag *pb, const char *type,
-				      const CORBA_any *any)
-{
-	CORBA_boolean *b;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_boolean, NULL);
-
-	b = g_new0 (CORBA_boolean, 1);
-	*b = *((CORBA_boolean *) any->_value);
-
-	return (gpointer) b;
-}
-
-static gpointer
-gnome_property_bag_demarshal_string (GnomePropertyBag *pb, const char *type,
-				     const CORBA_any *any)
-{
-	char *s;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_string, NULL);
-
-	s = g_strdup (any->_value);
-
-	return (gpointer) s;
-}
-
-static gpointer
-gnome_property_bag_demarshal_short (GnomePropertyBag *pb, const char *type,
-				    const CORBA_any *any)
-{
-	CORBA_short *s;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_short, NULL);
-
-	s = g_new0 (CORBA_short, 1);
-	*s = *((CORBA_short *)any->_value);
-
-	return (gpointer) s;
-}
-
-static gpointer
-gnome_property_bag_demarshal_ushort (GnomePropertyBag *pb, const char *type,
-				     const CORBA_any *any)
-{
-	CORBA_unsigned_short *s;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_ushort, NULL);
-
-	s = g_new0 (CORBA_unsigned_short, 1);
-	*s = *((CORBA_unsigned_short *)any->_value);
-
-	return (gpointer) s;
-}
-
-static gpointer
-gnome_property_bag_demarshal_long (GnomePropertyBag *pb, const char *type,
-				   const CORBA_any *any)
-{
-	CORBA_long *l;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_long, NULL);
-
-	l = g_new0 (CORBA_long, 1);
-	*l = *((CORBA_long *)any->_value);
-
-	return (gpointer) l;
-}
-
-static gpointer
-gnome_property_bag_demarshal_ulong (GnomePropertyBag *pb, const char *type,
-				    const CORBA_any *any)
-{
-	CORBA_unsigned_long *l;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_ulong, NULL);
-
-	l = g_new0 (CORBA_unsigned_long, 1);
-	*l = *((CORBA_unsigned_long *)any->_value);
-
-	return (gpointer) l;
-}
-
-static gpointer
-gnome_property_bag_demarshal_float (GnomePropertyBag *pb, const char *type,
-				    const CORBA_any *any)
-{
-	CORBA_float *f;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_float, NULL);
-
-	f = g_new0 (CORBA_float, 1);
-	*f = *((CORBA_float *)any->_value);
-
-	return (gpointer) f;
-}
-
-static gpointer
-gnome_property_bag_demarshal_double (GnomePropertyBag *pb, const char *type,
-				     const CORBA_any *any)
-{
-	CORBA_double *d;
-
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_double, NULL);
-
-	d = g_new0 (CORBA_double, 1);
-	*d = *((CORBA_double *)any->_value);
-
-	return (gpointer) d;
-}
-
-static void
-gnome_property_bag_generic_releaser (GnomePropertyBag *pb, const char *type,
-				     gpointer value)
-{
-	g_free (value);
+	return (value_comparer) (type, value1, value2, ptype->user_data);
 }
 
 
 /*
  * Class/object initialization functions.
  */
-static void
-gnome_property_bag_init_corba_class (void)
-{
-	gnome_property_bag_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
-	gnome_property_bag_vepv.GNOME_PropertyBag_epv = gnome_property_bag_get_epv ();
-}
 
 typedef void (*GtkSignal_NONE__POINTER_POINTER_POINTER_POINTER) (GtkObject * object,
 								 gpointer arg1,
@@ -1293,7 +1126,13 @@ gtk_marshal_NONE__POINTER_POINTER_POINTER_POINTER (GtkObject *object,
 		  GTK_VALUE_POINTER (args[2]),
 		  GTK_VALUE_POINTER (args[3]),
 		  func_data);
+}
 
+static void
+gnome_property_bag_init_corba_class (void)
+{
+	gnome_property_bag_vepv.GNOME_Unknown_epv     = gnome_object_get_epv ();
+	gnome_property_bag_vepv.GNOME_PropertyBag_epv = gnome_property_bag_get_epv ();
 }
 
 static void
@@ -1337,37 +1176,53 @@ gnome_property_bag_init (GnomePropertyBag *pb)
 
 	/* Prime the table with some default types. */
 	gnome_property_bag_create_type (pb, "boolean",
-					gnome_property_bag_marshal_boolean,
-					gnome_property_bag_demarshal_boolean,
-					gnome_property_bag_generic_releaser);
+					gnome_property_marshal_boolean,
+					gnome_property_demarshal_boolean,
+					gnome_property_compare_boolean,
+					gnome_property_generic_releaser,
+					NULL);
 	gnome_property_bag_create_type (pb, "string",
-					gnome_property_bag_marshal_string,
-					gnome_property_bag_demarshal_string,
-					gnome_property_bag_generic_releaser);
+					gnome_property_marshal_string,
+					gnome_property_demarshal_string,
+					gnome_property_compare_string,
+					gnome_property_generic_releaser,
+					NULL);
 	gnome_property_bag_create_type (pb, "short",
-					gnome_property_bag_marshal_short,
-					gnome_property_bag_demarshal_short,
-					gnome_property_bag_generic_releaser);
+					gnome_property_marshal_short,
+					gnome_property_demarshal_short,
+					gnome_property_compare_short,
+					gnome_property_generic_releaser,
+					NULL);
 	gnome_property_bag_create_type (pb, "ushort",
-					gnome_property_bag_marshal_ushort,
-					gnome_property_bag_demarshal_ushort,
-					gnome_property_bag_generic_releaser);
+					gnome_property_marshal_ushort,
+					gnome_property_demarshal_ushort,
+					gnome_property_compare_ushort,
+					gnome_property_generic_releaser,
+					NULL);
 	gnome_property_bag_create_type (pb, "long",
-					gnome_property_bag_marshal_long,
-					gnome_property_bag_demarshal_long,
-					gnome_property_bag_generic_releaser);
+					gnome_property_marshal_long,
+					gnome_property_demarshal_long,
+					gnome_property_compare_long,
+					gnome_property_generic_releaser,
+					NULL);
 	gnome_property_bag_create_type (pb, "ulong",
-					gnome_property_bag_marshal_ulong,
-					gnome_property_bag_demarshal_ulong,
-					gnome_property_bag_generic_releaser);
+					gnome_property_marshal_ulong,
+					gnome_property_demarshal_ulong,
+					gnome_property_compare_ulong,
+					gnome_property_generic_releaser,
+					NULL);
 	gnome_property_bag_create_type (pb, "float",
-					gnome_property_bag_marshal_float,
-					gnome_property_bag_demarshal_float,
-					gnome_property_bag_generic_releaser);
+					gnome_property_marshal_float,
+					gnome_property_demarshal_float,
+					gnome_property_compare_float,
+					gnome_property_generic_releaser,
+					NULL);
 	gnome_property_bag_create_type (pb, "double",
-					gnome_property_bag_marshal_double,
-					gnome_property_bag_demarshal_double,
-					gnome_property_bag_generic_releaser);
+					gnome_property_marshal_double,
+					gnome_property_demarshal_double,
+					gnome_property_compare_double,
+					gnome_property_generic_releaser,
+					NULL);
 }
 
 /**
@@ -1380,7 +1235,7 @@ gnome_property_bag_get_type (void)
 {
 	static GtkType type = 0;
 
-	if (!type){
+	if (! type) {
 		GtkTypeInfo info = {
 			"GnomePropertyBag",
 			sizeof (GnomePropertyBag),

@@ -14,8 +14,6 @@ module GNOME {
 			SAVE_FAILED
 		};
 
-		string get_goad_id ();
-		
 		exception WrongDataType {};
 		exception FileNotFound {};
 	};

@@ -181,7 +181,6 @@ gnome_persist_stream_get_type (void)
 /**
  * gnome_persist_stream_construct:
  * @ps: A GnomerPersistStream object
- * @goad_id: the GOAD ID that this object will implement.
  * @load_fn: Loading routine
  * @save_fn: Saving routine
  * @closure: Data passed to IO routines.
@@ -198,7 +197,6 @@ gnome_persist_stream_get_type (void)
 GnomePersistStream *
 gnome_persist_stream_construct (GnomePersistStream *ps,
 				GNOME_PersistStream corba_ps,
-				const char *goad_id,
 				GnomePersistStreamIOFn load_fn,
 				GnomePersistStreamIOFn save_fn,
 				void *closure)
@@ -207,7 +205,7 @@ gnome_persist_stream_construct (GnomePersistStream *ps,
 	g_return_val_if_fail (GNOME_IS_PERSIST_STREAM (ps), NULL);
 	g_return_val_if_fail (corba_ps != CORBA_OBJECT_NIL, NULL);
 
-	gnome_persist_construct (GNOME_PERSIST (ps), corba_ps, goad_id);
+	gnome_persist_construct (GNOME_PERSIST (ps), corba_ps);
 	
 	ps->load_fn = load_fn;
 	ps->save_fn = save_fn;
@@ -241,7 +239,6 @@ create_gnome_persist_stream (GnomeObject *object)
 
 /**
  * gnome_persist_stream_new:
- * @goad_id: the GOAD ID that this object will implement.
  * @load_fn: Loading routine
  * @save_fn: Saving routine
  * @closure: Data passed to IO routines.
@@ -256,8 +253,7 @@ create_gnome_persist_stream (GnomeObject *object)
  * Returns: the newly-created GnomePersistStream object.
  */
 GnomePersistStream *
-gnome_persist_stream_new (const char *goad_id,
-			  GnomePersistStreamIOFn load_fn,
+gnome_persist_stream_new (GnomePersistStreamIOFn load_fn,
 			  GnomePersistStreamIOFn save_fn,
 			  void *closure)
 {
@@ -272,7 +268,7 @@ gnome_persist_stream_new (const char *goad_id,
 		return NULL;
 	}
 
-	gnome_persist_stream_construct (ps, corba_ps, goad_id, load_fn, save_fn, closure);
+	gnome_persist_stream_construct (ps, corba_ps, load_fn, save_fn, closure);
 
 	return ps;
 }
