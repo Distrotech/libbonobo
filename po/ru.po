@@ -1,13 +1,13 @@
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Valek Filippov <frob@df.ru>, 2001.
+# Copyright (C) 2001-2002 Free Software Foundation, Inc.
+# Valek Filippov <frob@df.ru>, 2001-2002.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-02-11 10:21+0000\n"
-"PO-Revision-Date: 2001-10-13 20:08+0400\n"
+"POT-Creation-Date: 2002-03-07 16:54+0300\n"
+"PO-Revision-Date: 2002-03-07 16:59+0300\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -34,7 +34,7 @@ msgstr "Синтаксическая ошибка в описании объекта"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr ""
+msgstr "Невозможно активировать объект из фабрики"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -90,7 +90,7 @@ msgstr "недопустимый путь к XML-элементу пользовательского интерфейса"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr ""
+msgstr "Запрошенный атрибут интерфейса пользователя не существовал"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
@@ -134,11 +134,11 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr ""
+msgstr "Синтаксическая ошибка в моникере"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr ""
+msgstr "Моникер имеет неизвестный префикс"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
@@ -159,11 +159,11 @@ msgstr ""
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr ""
+msgstr "Сбой при активации объекта"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr ""
+msgstr "Моникер HTTP"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
@@ -171,15 +171,15 @@ msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "Фабрика стандартного моникера"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "обычный моникер активации Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "обычный моникер запроса Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
@@ -187,7 +187,7 @@ msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr ""
+msgstr "моникер обычного элемента"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
@@ -201,34 +201,33 @@ msgstr ""
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
 msgid "Failed to activate '%s"
-msgstr ""
+msgstr "Сбой при активации \"%s\""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Фабрика эхо-сервера Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Образец программы эхо-сервера Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "Компонент Эхо"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Фабрика компонента Эхо"
 
 #: samples/echo/echo-client.c:22
-#, fuzzy
 msgid "I could not initialize Bonobo"
 msgstr "Не удалось инициализировать Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "Не удалось создать экземпляр образца компонента эхо"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr ""
+msgstr "Возникло исключение \"%s\""
