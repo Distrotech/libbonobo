@@ -1,5 +1,10 @@
 2001-07-10  Michael Meeks  <michael@ximian.com>
 
+	* configure.in: always define ENABLE_ORBIT2
+	bump version to 1.97.0, require ORBit2 - from CVS.
+
+2001-07-10  Michael Meeks  <michael@ximian.com>
+
 	* tests/Makefile.am: remove test-storage - it's inside
 	libgnome now.
 
