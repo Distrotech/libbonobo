@@ -1,3 +1,9 @@
+2004-08-11  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* activation-server/object-directory-corba.c
+	(od_register_runtime_server_info): We should be returning
+	new_serverinfo instead of old_serverinfo.
+
 2004-08-11  Alexander Larsson  <alexl@redhat.com>
 
 	* bonobo-activation/bonobo-activation-get-language-list.c (read_aliases):

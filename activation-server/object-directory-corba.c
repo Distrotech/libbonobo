@@ -822,7 +822,7 @@ od_register_runtime_server_info (ObjectDirectory  *od,
                                       od->attr_servers->_buffer + i);
          od->time_list_changed = time (NULL);
          activation_clients_cache_notify ();
-         return old_serverinfo;
+         return new_serverinfo;
 }
 
 static Bonobo_RegistrationResult
