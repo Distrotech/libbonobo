@@ -1,3 +1,8 @@
+2000-12-07  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_destroy): fix henious
+	chaining bug.
+
 2000-12-07  Federico Mena Quintero  <federico@helixcode.com>
 
 	* bonobo/bonobo-property-bag.c

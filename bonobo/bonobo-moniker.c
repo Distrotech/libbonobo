@@ -17,7 +17,7 @@ struct _BonoboMonikerPrivate {
 	char          *name;
 };
 
-static BonoboObjectClass *bonobo_moniker_parent_class;
+static GtkObjectClass *bonobo_moniker_parent_class;
 
 POA_Bonobo_Moniker__vepv bonobo_moniker_vepv;
 
@@ -214,7 +214,7 @@ bonobo_moniker_destroy (GtkObject *object)
 
 	g_free (moniker->priv);
 
-	GTK_OBJECT_CLASS (GTK_OBJECT (moniker)->klass)->destroy (object);
+	GTK_OBJECT_CLASS (bonobo_moniker_parent_class)->destroy (object);
 }
 
 static void
