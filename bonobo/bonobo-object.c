@@ -190,6 +190,9 @@ bonobo_object_finalize_internal_T (BonoboAggregateObject *ao)
 			BONOBO_OBJECT (o)->priv->ao = NULL;
 			if (!g_type_is_a (G_OBJECT_TYPE(o), BONOBO_TYPE_FOREIGN_OBJECT))
 				bonobo_object_corba_deactivate_T (BONOBO_OBJECT (o));
+			else	/* (is foreign object) */
+				bonobo_running_context_remove_object_T
+					(BONOBO_OBJECT (o)->corba_objref);
 
 			BONOBO_UNLOCK ();
 			g_object_unref (o);

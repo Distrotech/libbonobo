@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #include <bonobo/bonobo-foreign-object.h>
 #include <bonobo/bonobo-exception.h>
+#include <bonobo/bonobo-running-context.h>
 
 static void
 bonobo_foreign_object_class_init (BonoboForeignObjectClass *klass)
@@ -69,8 +70,9 @@ bonobo_foreign_object_new (CORBA_Object corba_objref)
 	}
 	CORBA_exception_free (&ev);
 #endif
-	object = BONOBO_OBJECT (g_type_create_instance (BONOBO_TYPE_FOREIGN_OBJECT));
+	object = BONOBO_OBJECT (g_object_new (BONOBO_TYPE_FOREIGN_OBJECT, NULL));
 	object->corba_objref = CORBA_Object_duplicate (corba_objref, NULL);
+	bonobo_running_context_add_object_T (object->corba_objref);
 	return object;
 }
 

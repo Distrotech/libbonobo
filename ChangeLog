@@ -1,5 +1,16 @@
 2003-07-13  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* bonobo/bonobo-object.c (bonobo_object_finalize_internal_T): Call
+	bonobo_running_context_remove_object_T if it is foreign object,
+	since bonobo_object_corba_deactivate_T isn't called in such case.
+
+	* bonobo/bonobo-foreign-object.c (bonobo_foreign_object_new): Call
+	bonobo_running_context_add_object_T() here, since do_corba_setup()
+	is never called for foreign objects.
+	(bonobo_foreign_object_new): Instantiate with g_object_new instead
+	of g_type_create_instance, otherwise bonobo_object_constructor
+	never gets called and the object isn't completely initialized.
+
 	* bonobo/bonobo-generic-factory.c (startup_timeout)
 	(last_unref_timeout): Clear timeout handle IDs before
 	returning FALSE from the callbacks.
