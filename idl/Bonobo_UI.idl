@@ -46,7 +46,7 @@ module Bonobo {
 	};
 
 	interface UIContainer : Bonobo::Unknown {
-		exception MalFormedXML    {};
+		exception MalformedXML    {};
 		exception InvalidPath     {};
 		exception NonExistentAttr {};
 		exception Insensitive     {};
@@ -68,7 +68,7 @@ module Bonobo {
 
 		void    setNode             (in string path, in string xml,
 					     in string component_name)
-			raises (MalFormedXML, InvalidPath);
+			raises (MalformedXML, InvalidPath);
 
 		string  getNode             (in string path,
 					     in boolean nodeOnly)

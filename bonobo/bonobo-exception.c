@@ -206,11 +206,14 @@ bonobo_exception_repoid_to_text  (const char *repo_id)
 		return g_strdup (_("Storage is not empty"));
 
 	/* Bonobo::UIContainer */
-	else if (!strcmp (repo_id, ex_Bonobo_UIContainer_MalFormedXML))
+	else if (!strcmp (repo_id, ex_Bonobo_UIContainer_MalformedXML))
 		return g_strdup (_("malformed user interface XML description"));
 
 	else if (!strcmp (repo_id, ex_Bonobo_UIContainer_InvalidPath))
 		return g_strdup (_("invalid path to XML user interface element"));
+
+	else if (!strcmp (repo_id, ex_Bonobo_UIContainer_NonExistentAttr))
+		return g_strdup (_("the requested UI attribute didn't exist"));
 
 	else if (!strcmp (repo_id, ex_Bonobo_UIContainer_Unknown))
 		return g_strdup (_("Unknown command or verb"));

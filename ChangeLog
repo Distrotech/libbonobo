@@ -1,5 +1,12 @@
 2001-11-08  Michael Meeks  <michael@ximian.com>
 
+	* idl/Bonobo_UI.idl: more spelling fixage from Darin.
+
+	* bonobo/bonobo-exception.c
+	(bonobo_exception_repoid_to_text): upd.
+
+2001-11-08  Michael Meeks  <michael@ximian.com>
+
 	* idl/Bonobo_UI.idl: spelling fix from Darin.
 
 2001-11-06  Michael Meeks  <michael@ximian.com>
