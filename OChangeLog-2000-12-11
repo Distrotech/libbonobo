@@ -1,3 +1,8 @@
+2000-05-20  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/Makefile.am (libbonobo_la_SOURCES): move CORBA_SOURCE back
+	to top where it belongs.
+
 2000-05-19  Dan Winship  <danw@helixcode.com>
 
 	* configure.in: Check for ORBit 0.5.1
