@@ -50,6 +50,7 @@ impl_Bonobo_ObjectFactory_createObject (PortableServer_Servant   servant,
 
 	class = BONOBO_GENERIC_FACTORY_CLASS (G_OBJECT_GET_CLASS (factory));
 	object = (*class->new_generic) (factory, obj_act_iid);
+	factory = NULL; /* unreffed by new_generic in the shlib case */
 
 	if (!object)
 		return CORBA_OBJECT_NIL;

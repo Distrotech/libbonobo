@@ -73,6 +73,8 @@ run_tests (void)
 	bonobo_event_source_notify_listeners (es, "a/test1:xyz", value, &ev); 
 	CHECK_RESULT (&ev, 8, 2);
 
+	bonobo_object_unref (BONOBO_OBJECT (es));
+
 	bonobo_main_quit ();
 }
 

@@ -259,6 +259,8 @@ quit_main (GObject *object)
 int
 main (int argc, char **argv)
 {
+	BonoboObject *context;
+
 	if (!bonobo_init (&argc, argv))
 		g_error ("Could not initialize Bonobo");
 
@@ -268,9 +270,13 @@ main (int argc, char **argv)
 
 	print_props ();
 
-	g_signal_connect_data (G_OBJECT (bonobo_context_running_get ()),
-			       "last_unref", G_CALLBACK (quit_main), NULL,
-			       NULL, 0);
+	/* FIXME: this is unusual, with a factory you normally
+	 * want to use bonobo_running_context_auto_exit_unref */
+	context = bonobo_context_running_get ();
+	g_signal_connect_data (
+		G_OBJECT (context), "last_unref",
+		G_CALLBACK (quit_main), NULL, NULL, 0);
+	bonobo_object_unref (context);
 
 	bonobo_main ();
 

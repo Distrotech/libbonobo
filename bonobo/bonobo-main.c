@@ -114,6 +114,16 @@ bonobo_shutdown (void)
 		bonobo_object_shutdown ();
 		bonobo_exception_shutdown ();
 
+		if (__bonobo_poa != CORBA_OBJECT_NIL)
+			CORBA_Object_release (
+				(CORBA_Object) __bonobo_poa, &ev);
+		__bonobo_poa = CORBA_OBJECT_NIL;
+
+		if (__bonobo_poa_manager != CORBA_OBJECT_NIL)
+			CORBA_Object_release (
+				(CORBA_Object) __bonobo_poa_manager, &ev);
+		__bonobo_poa_manager = CORBA_OBJECT_NIL;
+	
 		if (__bonobo_orb != CORBA_OBJECT_NIL)
 			CORBA_ORB_destroy (__bonobo_orb, &ev);
 		__bonobo_orb = CORBA_OBJECT_NIL;

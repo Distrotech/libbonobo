@@ -63,14 +63,14 @@ static void
 test_real_monikers (void)
 {
 	CORBA_Environment *ev, real_ev;
-	Bonobo_Unknown     retval;
+	Bonobo_Unknown     object;
 
 	CORBA_exception_init ((ev = &real_ev));
 
 	/* Try an impossible moniker resolve */
-	retval = bonobo_get_object ("OAFIID:Bonobo_Moniker_Oaf",
+	object = bonobo_get_object ("OAFIID:Bonobo_Moniker_Oaf",
 				    "IDL:Bonobo/PropertyBag:1.0", ev);
-	g_assert (retval == CORBA_OBJECT_NIL);
+	g_assert (object == CORBA_OBJECT_NIL);
 	if (BONOBO_EX (ev))
 		printf ("%s\n", bonobo_exception_get_text (ev));
 
@@ -116,6 +116,9 @@ main (int argc, char *argv [])
 	check_parse_name ("a:\\\\\\#b:\\#c:", "a:\\\\\\#b:\\#c:", 0);
 
 	test_real_monikers ();
+
+	while (g_main_pending ())
+		g_main_iteration (TRUE);
 
 	return bonobo_shutdown ();
 }

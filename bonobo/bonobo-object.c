@@ -24,6 +24,10 @@
 #include <bonobo/bonobo-types.h>
 #include <bonobo/bonobo-shutdown.h>
 
+/* Some simple tracking - always on */
+static GMutex *bonobo_total_aggregates_lock = NULL;
+static glong   bonobo_total_aggregates      = 0;
+
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_REF_HOOKS
 #endif
@@ -215,6 +219,11 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 #endif
 
 	g_free (ao);
+
+	/* Some simple debugging - count aggregate free */
+	LINC_MUTEX_LOCK   (bonobo_total_aggregates_lock);
+	bonobo_total_aggregates--;
+	LINC_MUTEX_UNLOCK (bonobo_total_aggregates_lock);
 }
 
 
@@ -741,6 +750,10 @@ bonobo_object_instance_init (GObject    *g_object,
 		   G_OBJECT_TYPE_NAME (g_object),
 		   G_OBJECT_CLASS_NAME (klass), object);
 #endif
+	/* Some simple debugging - count aggregate allocate */
+	LINC_MUTEX_LOCK   (bonobo_total_aggregates_lock);
+	bonobo_total_aggregates++;
+	LINC_MUTEX_UNLOCK (bonobo_total_aggregates_lock);
 
 	/* Setup aggregate */
 	ao            = g_new0 (BonoboAggregateObject, 1);
@@ -867,11 +880,15 @@ bonobo_object_shutdown (void)
 	bonobo_debug_print ("shutdown-end", 
 		"-------------------------------------------------");
 #endif
+	if (bonobo_total_aggregates > 0)
+		g_warning ("Leaked %ld bonobo objects total",
+			   bonobo_total_aggregates);
 }
 
 void
 bonobo_object_init (void)
 {
+	bonobo_total_aggregates_lock = linc_mutex_new ();
 }
 
 /**
@@ -970,6 +987,11 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 
        g_list_free (oldao->objs);
        g_free (oldao);
+
+       /* Some simple debugging - count aggregate free */
+       LINC_MUTEX_LOCK   (bonobo_total_aggregates_lock);
+       bonobo_total_aggregates--;
+       LINC_MUTEX_UNLOCK (bonobo_total_aggregates_lock);
 }
 
 /**

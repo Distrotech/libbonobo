@@ -1,5 +1,41 @@
 2001-10-26  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.c (bonobo_object_instance_init).
+	(bonobo_object_finalize_internal): keep track of total
+	number of aggregate objects.
+	(bonobo_object_init): setup the mutex.
+	(bonobo_object_shutdown): always warn if we leaked.
+
+	* tests/test-event-source.c (run_tests): fix ref. leak.
+
+	* tests/test-properties-server.c (main): fix leaking
+	context.
+
+	* bonobo/bonobo-shlib-factory.c
+	(bonobo_shlib_factory_new_generic): unref ourself after
+	object creation, so we don't leave cruft lying around.
+	(bonobo_shlib_factory_get_type): kill, replace with
+	macro that does correct inheritance.
+	(bonobo_shlib_factory_inc_live),
+	(bonobo_shlib_factory_dec_live_cb),
+	(bonobo_shlib_factory_dec_live),
+	(bonobo_shlib_factory_track_object): kill.
+
+	* bonobo/bonobo-generic-factory.c
+	(impl_Bonobo_ObjectFactory_createObject): protect the
+	maintainer.
+
+2001-10-26  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-storage-memory.c: use NULL not 0 for
+	pointers.
+	(smem_open_stream): fix fatal bug.
+
+	* bonobo/bonobo-main.c (bonobo_shutdown): release the
+	poa_manager and the poa.
+
+2001-10-26  Michael Meeks  <michael@ximian.com>
+
 	* idl/Makefile.am (orbittypelibdir): move type library
 	into the orbit-2.0 prefix.
 

@@ -114,10 +114,10 @@ smem_get_parent (BonoboStorageMem       *storage,
 		g_free (path_tail);
 
 		if (filename)
-			*filename = 0;
+			*filename = NULL;
 
 		if (ret_entry)
-			*ret_entry = 0;
+			*ret_entry = NULL;
 		
 		return NULL;
 	}
@@ -158,7 +158,7 @@ smem_get_last_storage (BonoboStorageMem  *storage,
 
 	if (!strcmp (path, "/") || !strcmp (path, "")) {
 		if (last_path)
-			*last_path = 0;
+			*last_path = NULL;
 		return storage;
 	}
 	
@@ -173,7 +173,7 @@ smem_get_last_storage (BonoboStorageMem  *storage,
 			g_free (path_tail);
 
 			if (last_path)
-				*last_path = 0;
+				*last_path = NULL;
 			return NULL;
 		} else {
 			if (last_path)
@@ -188,7 +188,7 @@ smem_get_last_storage (BonoboStorageMem  *storage,
 			g_free (path_head);
 
 			if (last_path)
-				*last_path = 0;
+				*last_path = NULL;
 			
 			return BONOBO_STORAGE_MEM (entry->child);
 		} else {
@@ -212,7 +212,7 @@ smem_get_last_storage (BonoboStorageMem  *storage,
 	g_free (path_head);
 
 	if (last_path)
-		*last_path = 0;
+		*last_path = NULL;
 	
 	return NULL;
 }
@@ -255,15 +255,14 @@ smem_open_stream (BonoboStorageMem        *storage,
 	BonoboStorageMem       *last_storage;
 	BonoboStorageMemEntry  *entry;
 	gchar                  *path_last;
-	BonoboObject           *stream = 0;
+	BonoboObject           *stream = NULL;
 
 	last_storage = smem_get_last_storage (storage, path, &path_last);
 	
-	if (!last_storage) {
+	if (!last_storage || !path_last) {
 		bonobo_exception_set (ev, ex_Bonobo_Storage_NotFound);
 		goto ex_out;
 	}
-
 	
 	entry = g_hash_table_lookup (last_storage->priv->entries, path_last);
 
@@ -317,8 +316,8 @@ smem_open_storage (BonoboStorageMem        *storage,
 {
 	BonoboStorageMem       *parent_storage;
 	BonoboStorageMemEntry  *entry;
-	BonoboObject           *ret = 0;
-	gchar                  *path_last = 0;
+	BonoboObject           *ret = NULL;
+	gchar                  *path_last = NULL;
 	
 	parent_storage = smem_get_last_storage (storage, path, &path_last);
 	
@@ -376,10 +375,10 @@ smem_get_info (BonoboStorageMem               *storage,
 	       const Bonobo_StorageInfoFields  mask,
 	       CORBA_Environment              *ev)
 {
-	Bonobo_StorageInfo     *ret_val = 0;
-	BonoboStorageMem       *parent_storage = 0;
-	BonoboStorageMemEntry  *entry = 0;
-	gchar                  *filename = 0;
+	Bonobo_StorageInfo     *ret_val = NULL;
+	BonoboStorageMem       *parent_storage = NULL;
+	BonoboStorageMemEntry  *entry = NULL;
+	gchar                  *filename = NULL;
 
 	parent_storage = smem_get_parent (storage, path, &filename, &entry);
 
@@ -431,7 +430,7 @@ smem_set_info (BonoboStorageMem               *storage,
 	       CORBA_Environment              *ev)
 {
 	BonoboStorageMem      *parent_storage;
-	BonoboStorageMemEntry *entry = 0;
+	BonoboStorageMemEntry *entry = NULL;
 	gchar                 *filename;
 
 	parent_storage = smem_get_parent (storage, path, &filename, &entry);
@@ -509,7 +508,7 @@ smem_list_contents (BonoboStorageMem               *storage,
 		    const Bonobo_StorageInfoFields  mask,
 		    CORBA_Environment              *ev)
 {
-	Bonobo_Storage_DirectoryList *ret_val = 0;
+	Bonobo_Storage_DirectoryList *ret_val = NULL;
 	Bonobo_StorageInfo           *info;
 	BonoboStorageMem             *last_storage;
 	gchar                        *path_last;
@@ -533,7 +532,7 @@ smem_list_contents (BonoboStorageMem               *storage,
 		goto out;
 	}
 
-	cb_data.list = 0;
+	cb_data.list = NULL;
 	cb_data.mask = mask;
 
 	g_hash_table_foreach (last_storage->priv->entries,
@@ -567,9 +566,9 @@ smem_erase (BonoboStorageMem  *storage,
 	    const CORBA_char  *path,
 	    CORBA_Environment *ev)
 {
-	BonoboStorageMemEntry  *entry = 0;
+	BonoboStorageMemEntry  *entry = NULL;
 	BonoboStorageMem       *parent_storage;
-	gchar                  *filename = 0;
+	gchar                  *filename = NULL;
 			
 	parent_storage = smem_get_parent (storage, path, &filename, &entry);
 	if (!parent_storage) {
@@ -648,7 +647,7 @@ smem_rename (BonoboStorageMem  *storage,
 
 	tmp_entry = bonobo_storage_mem_entry_dup (entry);
 	g_hash_table_remove (parent_storage->priv->entries, filename);
-	entry = 0;
+	entry = NULL;
 	
 	/* If target does not exists, new_filename will be non-NULL */
 	if (new_filename)

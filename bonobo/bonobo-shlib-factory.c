@@ -127,24 +127,17 @@ bonobo_shlib_factory_new (const char           *component_id,
 		g_cclosure_new (G_CALLBACK (factory_cb), user_data, NULL));
 }
 
+/*
+ * FIXME: at some time in the future we should look into trying
+ * to unload the shlib's we have linked in with
+ * bonobo_activation_plugin_unuse - this is dangerous though; we
+ * need to be sure no code is using the shlib first.
+ */
 static void
 bonobo_shlib_factory_finalize (GObject *object)
 {
 	BonoboShlibFactory *factory = BONOBO_SHLIB_FACTORY (object);
 
-	/* FIXME: should we be unloading these modules now ?
-	 * look at how bonobo-activation deals with modules, is
-	 * this efficient and workable ? */
-
-	/*
-	 * We pray this happens only when we have released our
-	 * last ref and no one is holding pointers into the soon
-	 * to be unloaded shlib, particularly the stack.
-	 *
-	 * This is achieved by an idle unref handler.
-	 */
-
-	/* we dont unload it because of a problem with the GType system */
 	/* act_plugin_unuse (c_factory->act_impl_ptr); */
 
 	g_free (factory->priv);
@@ -160,6 +153,9 @@ bonobo_shlib_factory_new_generic (BonoboGenericFactory *factory,
 
 	retval = BONOBO_GENERIC_FACTORY_CLASS (
 		bonobo_shlib_factory_parent_class)->new_generic (factory, act_iid);
+
+	/* The factory reference doesn't persist inside bonobo-activation */
+	bonobo_object_unref (BONOBO_OBJECT (factory));
 
 	return retval;
 }
@@ -184,86 +180,14 @@ bonobo_shlib_factory_init (GObject *object)
 	factory->priv = g_new0 (BonoboShlibFactoryPrivate, 1);
 }
 
-
 /**
  * bonobo_shlib_factory_get_type:
  *
  * Returns: The GType of the BonoboShlibFactory class.
  */
-GType
-bonobo_shlib_factory_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		GTypeInfo info = {
-			sizeof (BonoboShlibFactoryClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) bonobo_shlib_factory_class_init,
-			NULL, /* class_finalize */
-			NULL, /* class_data */
-			sizeof (BonoboShlibFactory),
-			0, /* n_preallocs */
-			(GInstanceInitFunc) bonobo_shlib_factory_init
-		};
-
-		type = g_type_register_static (
-			bonobo_generic_factory_get_type (),
-			"BonoboShlibFactory", &info, 0);
-	}
-
-	return type;
-}
-
-void
-bonobo_shlib_factory_inc_live (BonoboShlibFactory *factory)
-{
-	g_return_if_fail (BONOBO_IS_SHLIB_FACTORY (factory));
-
-	factory->priv->live_objects++;
-}
-
-
-static gboolean
-bonobo_shlib_factory_dec_live_cb (BonoboShlibFactory *factory)
-{
-	factory->priv->live_objects--;
-
-	if (factory->priv->live_objects <= 0)
-		g_object_unref (G_OBJECT (factory));
-
-	return FALSE;
-}
-
-void
-bonobo_shlib_factory_dec_live (BonoboShlibFactory *factory)
-{
-	g_return_if_fail (BONOBO_IS_SHLIB_FACTORY (factory));
-
-	g_idle_add ((GSourceFunc) bonobo_shlib_factory_dec_live_cb, factory);
-}
-
-static void
-destroy_handler (GObject *object, BonoboShlibFactory *factory)
-{
-	bonobo_shlib_factory_dec_live (factory);
-}
-
-void
-bonobo_shlib_factory_track_object (BonoboShlibFactory *factory,
-				   BonoboObject       *object)
-{
-	g_return_if_fail (BONOBO_IS_OBJECT (object));
-	g_return_if_fail (BONOBO_IS_SHLIB_FACTORY (factory));
-
-	bonobo_shlib_factory_inc_live (factory);
-
-	g_signal_connect (G_OBJECT (object), "destroy",
-			  G_CALLBACK (destroy_handler),
-			  factory);
-}
-
+BONOBO_TYPE_FUNC (BonoboShlibFactory, 
+		  BONOBO_GENERIC_FACTORY_TYPE,
+		  bonobo_shlib_factory);
 
 /**
  * bonobo_shlib_factory_std:
@@ -296,3 +220,4 @@ bonobo_shlib_factory_std (const char            *component_id,
 
         return CORBA_Object_duplicate (BONOBO_OBJREF (f), ev);
 }
+
