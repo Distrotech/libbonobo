@@ -72,7 +72,6 @@ oaf_servinfo_to_actinfo (const OAF_ServerInfo * servinfo)
  *
  * Frees @actinfo.
  *
- * Return value: none.
  */
 
 void
