@@ -1,3 +1,7 @@
+2000-06-28  Michael Meeks  <michael@helixcode.com>
+
+	* Makefile.am (SUBDIRS): remove bonobo-idl for now.
+
 2000-06-28  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo-idl/main.c: (search_interface): Fix random compile
