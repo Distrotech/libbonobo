@@ -1,3 +1,9 @@
+2004-01-08  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag.c
+	(flags_gparam_to_bonobo): fix logic bug, thanks
+	to Dave Jones
+
 2004-01-06  Michael Meeks  <michael@ximian.com>
 
 	* configure.in: require a decent/recent ORBit2.

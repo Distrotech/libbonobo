@@ -677,10 +677,10 @@ flags_gparam_to_bonobo (guint flags)
 {
 	Bonobo_PropertyFlags f = 0;
 
-	if (!flags & G_PARAM_READABLE)
+	if (!(flags & G_PARAM_READABLE))
 		f |= Bonobo_PROPERTY_READABLE;
 
-	if (!flags & G_PARAM_WRITABLE)
+	if (!(flags & G_PARAM_WRITABLE))
 		f |= Bonobo_PROPERTY_WRITEABLE;
 
 	return f;
