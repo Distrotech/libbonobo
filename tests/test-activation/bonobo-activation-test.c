@@ -13,7 +13,7 @@ oaf_exception_id (CORBA_Environment *ev)
 {
         if (ev->_major == CORBA_USER_EXCEPTION) {
                 if (!strcmp (ev->_id, "IDL:OAF/GeneralError:1.0")) {
-                        OAF_GeneralError *err = ev->_any._value;
+                        OAF_GeneralError *err = CORBA_exception_value (ev);
                         
                         if (!err || !err->description) {
                                 return "No general exception error message";
