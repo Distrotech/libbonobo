@@ -10,6 +10,7 @@ module GNOME {
 		exception SyntaxError {};
 
 		Moniker parse_display_name (in BindOptions bind_context,
+					    in Moniker left,
 					    in string display_name,
 					    out short display_name_bytes_parsed)
 			raises (SyntaxError);

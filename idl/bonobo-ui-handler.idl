@@ -37,7 +37,12 @@ module GNOME {
        		};
        
        		enum ToolbarType {
-			ToolbarTypeBlah
+			ToolbarTypeEnd,
+			ToolbarTypeItem,
+			ToolbarTypeRadioItem,
+			ToolbarTypeRadioGroup,
+			ToolbarTypeToggleItem,
+			ToolbarTypeSeparator
        		};
        
        		/*
@@ -82,7 +87,7 @@ module GNOME {
 		/**
 		 * menu_create:
 		 */
-       		void menu_create (in UIHandler uih, in string path, in MenuType type, in string label,
+       		void menu_create (in UIHandler containee, in string path, in MenuType type, in string label,
 				  in string hint, in long pos, in PixmapType pixmap_type, in iobuf pixmap_data,
 				  in unsigned long accelerator_key, in long modifier);
 
@@ -94,7 +99,7 @@ module GNOME {
 			raises (MenuItemNotFound);
 
 		/**
-		 * menuna_fetch:
+		 * menu_fetch:
 		 */
        		boolean menu_fetch (in string path, out MenuType type, out string label,
 				    out string hint, out long pos, out PixmapType pixmap_type,
@@ -145,13 +150,64 @@ module GNOME {
 		 * manipulation of toolbar items.
        		 *
 		 */
-       		boolean toolbar_item_create_full (in string path, in ToolbarType type, in string label,
-						  in iobuf pixmap_data, in unsigned long accelerator_key,
-						  in long modifier, in long pos);
-       		boolean toolbar_item_remove (in string path);
-       		boolean toolbar_item_fetch (in string path, out ToolbarType type, out string label,
+
+		/*
+		 * Toolbars.
+		 */
+		void toolbar_create (in UIHandler containee, in string name);
+
+		void toolbar_remove (in UIHandler containee, in string name);
+
+		boolean toolbar_get_children (in string path, out StringSeq children);
+
+		enum ToolbarOrientation {
+			TOOLBAR_ORIENTATION_HORIZONTAL,
+			TOOLBAR_ORIENTATION_VERTICAL
+		};
+
+		void toolbar_set_orientation (in UIHandler containee, in string name, in ToolbarOrientation orientation);
+		ToolbarOrientation toolbar_get_orientation (in string name);
+
+		void toolbar_set_style (in UIHandler containee, in string name, in long style);
+		long toolbar_get_style (in string name);
+
+		/*
+		 * Toolbar items.
+		 */
+		void toolbar_create_item (in UIHandler containee, in string path, in ToolbarType type,
+					  in string label, in string hint, in long pos, in PixmapType pixmap_type,
+					  in iobuf pixmap_data, in unsigned long accelerator_key, in long modifier);
+
+		exception ToolbarItemNotFound {};
+		void toolbar_remove_item (in UIHandler containee, in string path)
+			raises (ToolbarItemNotFound);
+
+		boolean toolbar_fetch_item (in string path, out ToolbarType type, out string label,
+					    out string hint, out long pos, out PixmapType pixmap_type,
 					    out iobuf pixmap_data, out unsigned long accelerator_key,
-					    out long modifier, out long pos);
+					    out long modifier);
+
+		void toolbar_set_sensitivity (in UIHandler containee, in string path, in boolean sensitivity);
+
+		boolean toolbar_get_sensitivity (in string path);
+
+		void toolbar_set_label (in UIHandler containee, in string path, in string label);
+		string toolbar_get_label (in string path);
+
+		void toolbar_set_pixmap (in UIHandler containee, in string path,
+					 in PixmapType pixmap_type, in iobuf pixmap_data);
+		void toolbar_get_pixmap (in string path, out PixmapType pixmap_type, out iobuf pixmap_data);
+
+		void toolbar_set_accel (in UIHandler containee, in string path,
+					in long accelerator_key, in long ac_mods);
+		void toiolbar_get_accel (in string path, out long accelerator_key, out long ac_mods);
+
+		void toolbar_set_toggle_state (in UIHandler containee, in string path, in boolean state);
+		boolean toolbar_get_toggle_state (in UIHandler containee, in string path);
+
+		long toolbar_get_pos (in string path);
+		void toolbar_set_pos (in UIHandler containee, in long pos);
+		
        
        		long toolbar_item_get_pos (in string path);
        
