@@ -1,3 +1,7 @@
+1999-10-30  Michael Meeks  <mmeeks@gnu.org>
+
+	* components/bonobo.keys: Add text/html.
+
 1999-10-24  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-embeddable.c (impl_GNOME_Embeddable_new_view): Add
