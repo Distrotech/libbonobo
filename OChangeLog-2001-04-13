@@ -1,3 +1,7 @@
+1999-05-28  Matt Loper  <matthew@loper.org>
+
+	* bonobo/test-container-autoload.c: New file.
+
 1999-05-27  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
 	* doc/.cvsignore: added file
