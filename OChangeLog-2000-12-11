@@ -1,5 +1,10 @@
 2000-12-03  Miguel de Icaza  <miguel@helixcode.com>
 
+	* doc/api/tmpl/bonobo-canvas-component.sgml: Add documentation,
+	example. 
+	
+	* doc/api/tmpl/bonobo-canvas-item.sgml: Add documentation.
+
 	* bonobo/bonobo-socket.c (bonobo_socket_realize): Added inline
 	documentation. 
 	* bonobo/bonobo-plug.c: Added inline documentation.
