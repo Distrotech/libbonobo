@@ -74,10 +74,10 @@ bonobo_moniker_http_LDADD =		\
 #moniker_control_test_LDADD =		\
 #	$(moniker_ldadd) -lgtkhtml
 
-moniker_test_SOURCSE =			\
+moniker_test_SOURCE =			\
 	moniker-test.c
 
 moniker_test_LDADD =			\
-	$(moniker_ldadd) -lgtkhtml
+	$(moniker_ldadd)
 
 EXTRA_DIST=std-moniker.oafinfo bonobo-moniker-gunzip.oafinfo bonobo-moniker-http.oafinfo

@@ -1,5 +1,10 @@
 2000-11-26  Maciej Stachowiak  <mjs@eazel.com>
 
+	* monikers/Makefile.am: Remove -lgtkhtml from moniker_test_LDADD,
+	and correct spelling of moniker_test_SOURCES.
+
+2000-11-26  Maciej Stachowiak  <mjs@eazel.com>
+
 	* monikers/Makefile.am: Add -I$(top_srcdir)/bonobo to INCLUDES so
 	moniker-test.c builds even if Bonobo is not already
 	installed. Comment out moniker-control-test.c from the build to
