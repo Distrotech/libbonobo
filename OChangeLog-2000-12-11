@@ -1,3 +1,8 @@
+2000-05-23  Michael Meeks  <michael@helixcode.com>
+
+	* idl/bonobo-factory.idl: update manufactures' param name to 'goad_id'
+	to please my friend Ettore.
+
 2000-05-20  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/Makefile.am (libbonobo_la_SOURCES): move CORBA_SOURCE back

@@ -11,8 +11,9 @@ module Bonobo {
 
 	interface GenericFactory {
 		exception CannotActivate { };
+
 		/* 'supports' is reserved */
-		boolean manufactures (in string obj_goad_id); 
+		boolean manufactures (in string goad_id); 
 
 		Object create_object (in string goad_id, in stringlist params)
 			raises (CannotActivate);
