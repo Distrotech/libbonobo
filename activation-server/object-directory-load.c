@@ -576,10 +576,10 @@ od_load_directory (const char *directory,
 
 
 void
-Bonobo_ServerInfo_load (char **directories,
-                        Bonobo_ServerInfoList   *servers,
-                        GHashTable **iid_to_server_info_map,
-                        const char *host, const char *domain)
+bonobo_server_info_load (char **directories,
+                         Bonobo_ServerInfoList   *servers,
+                         GHashTable **iid_to_server_info_map,
+                         const char *host, const char *domain)
 {
 	GSList *entries;
         int length;
@@ -598,9 +598,8 @@ Bonobo_ServerInfo_load (char **directories,
 	*iid_to_server_info_map = g_hash_table_new (g_str_hash, g_str_equal);
 
         /* Load each directory */
-	for (i = 0; directories[i] != NULL; i++) {
+	for (i = 0; directories[i] != NULL; i++)
                 od_load_directory (directories[i], &entries, host, domain);
-	}
 
 	/* Now convert 'entries' into something that the server can store and pass back */
 	length = g_slist_length (entries);

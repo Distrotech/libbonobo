@@ -1,6 +1,5 @@
 <oaf_info>
-
-	<oaf_server iid="OAFIID:oaf_naming_service:7e2b90ef-eaf0-4239-bb7c-812606fcd80d"
+	<oaf_server iid="OAFIID:Bonobo_CosNaming_NamingContext"
         	    type="exe" location="bonobo-activation-server">
 		<oaf_attribute name="repo_ids" type="stringv">
 			<item value="IDL:CosNaming/NamingContext:1.0"/>
@@ -8,5 +7,4 @@
 		<oaf_attribute name="name" type="string" _value="Name service"/>
 		<oaf_attribute name="description" type="string" _value="CORBA CosNaming service."/>
 	</oaf_server>
-
 </oaf_info>

@@ -34,20 +34,20 @@ bonobo_activation_exception_id (CORBA_Environment *ev)
 }
 
 static gboolean
-test_oafd (CORBA_Environment *ev, const char *type)
+test_bonobo_activation_server (CORBA_Environment *ev, const char *type)
 {
         CORBA_Object ns;
 
         ns = bonobo_activation_name_service_get (ev);
         if (ev->_major != CORBA_NO_EXCEPTION) {
-                g_warning ("Exception '%s' (%s) finding oafd %s",
+                g_warning ("Exception '%s' (%s) finding bonobo_activation_server %s",
                            bonobo_activation_exception_id (ev), ev->_id, type);
                 return FALSE;
         }
 
         if (name_service != CORBA_OBJECT_NIL &&
             name_service != ns) {
-                g_warning ("oafd crashed %s", type);
+                g_warning ("bonobo_activation_server crashed %s", type);
                 return FALSE;
         }
 
@@ -68,7 +68,7 @@ test_object (CORBA_Object obj, CORBA_Environment *ev, const char *type)
                 return TRUE;
         }
 
-        if (!test_oafd (ev, type)) {
+        if (!test_bonobo_activation_server (ev, type)) {
                 return FALSE;
         }
 
@@ -264,7 +264,7 @@ main (int argc, char *argv[])
                 CORBA_exception_free (&ev);
                 passed++;
         }
-        if (test_oafd (&ev, "with broken factory link")) {
+        if (test_bonobo_activation_server (&ev, "with broken factory link")) {
                 fprintf (stderr, ", passed 2");
                 passed++;
         } else {
@@ -281,7 +281,7 @@ main (int argc, char *argv[])
                 CORBA_exception_free (&ev);
                 passed++;
         }
-        if (test_oafd (&ev, "with broken factory link")) {
+        if (test_bonobo_activation_server (&ev, "with broken factory link")) {
                 fprintf (stderr, ", passed 2");
                 passed++;
         } else {
@@ -299,7 +299,7 @@ main (int argc, char *argv[])
                 CORBA_exception_free (&ev);
                 passed++;
         }
-        if (test_oafd (&ev, "with broken factory link")) {
+        if (test_bonobo_activation_server (&ev, "with broken factory link")) {
                 fprintf (stderr, ", passed 2");
                 passed++;
         } else {
@@ -317,7 +317,7 @@ main (int argc, char *argv[])
                 CORBA_exception_free (&ev);
                 passed++;
         }
-        if (test_oafd (&ev, "with non-registering server")) {
+        if (test_bonobo_activation_server (&ev, "with non-registering server")) {
                 fprintf (stderr, ", passed 2");
                 passed++;
         } else {
@@ -336,7 +336,7 @@ main (int argc, char *argv[])
                 fprintf (stderr, "passed 1");
                 passed++;
         }
-        if (test_oafd (&ev, "with no-type/loc server")) {
+        if (test_bonobo_activation_server (&ev, "with no-type/loc server")) {
                 fprintf (stderr, ", passed 2");
                 passed++;
         } else {
@@ -353,7 +353,7 @@ main (int argc, char *argv[])
                          "into ${prefix}/share/bonobo-activation/, this must be done "
                          "by hand to avoid problems with normal operation.\n");
 		fprintf (stderr, "Another possibility is that you failed to kill "
-			 "oafd before running make check; try running bonobo-slay.\n");
+			 "bonobo_activation_server before running make check; try running bonobo-slay.\n");
         }
 
 	CORBA_exception_free (&ev);

@@ -58,7 +58,7 @@ static char *od_source_dir = NULL;
 static char *ac_evaluate = NULL;
 #endif
 static char *od_domain = "session";
-static int server_ac = 0, ior_fd = -1, server_ns = 1;
+static int server_ac = 0, ior_fd = -1;
 
 static struct poptOption options[] = {
 
@@ -84,34 +84,124 @@ static struct poptOption options[] = {
 	POPT_AUTOHELP {NULL}
 };
 
+GMainLoop *main_loop = NULL;
+
+static GString *
+build_src_dir (void)
+{
+        const char *env_od_source_dir;
+        const char *gnome_env_od_source_dir;
+        char *config_file_od_source_dir;
+        GString *gnome_od_source_dir;
+        char **gnome_dirs;
+        GString *real_od_source_dir;
+        int i;
+
+        real_od_source_dir = g_string_new (SERVERINFODIR);
+        env_od_source_dir = g_getenv ("BONOBO_ACTIVATION_PATH");
+        gnome_env_od_source_dir = g_getenv ("GNOME2_PATH");
+        config_file_od_source_dir = object_directory_load_config_file ();
+
+        if (od_source_dir) {
+                g_string_append_c (real_od_source_dir, ':');
+                g_string_append (real_od_source_dir, od_source_dir);
+        }
+
+        if (env_od_source_dir) {
+                g_string_append_c (real_od_source_dir, ':');
+                g_string_append (real_od_source_dir,
+                                 env_od_source_dir);
+        }
+
+        if (config_file_od_source_dir) {
+                g_string_append_c (real_od_source_dir, ':');
+                g_string_append (real_od_source_dir,
+                                 config_file_od_source_dir);
+                g_free (config_file_od_source_dir);
+        }
+
+        if (gnome_env_od_source_dir) {
+                gnome_dirs = g_strsplit (gnome_env_od_source_dir, ":", -1);
+                gnome_od_source_dir = g_string_new("");
+                for (i=0; gnome_dirs[i]; i++) {
+                        g_string_append (gnome_od_source_dir,
+                                         gnome_dirs[i]);
+                        g_string_append (gnome_od_source_dir,
+                                         "/lib/bonobo/servers:");
+                }
+                g_strfreev (gnome_dirs);
+                g_string_append_c (real_od_source_dir, ':');
+                g_string_append (real_od_source_dir,
+                                 gnome_od_source_dir->str);
+        }
+
+        return real_od_source_dir;
+}
+
+static int
+redirect_output (int ior_fd)
+{
+        int dev_null_fd;
+        const char *debug_output;
+
+        debug_output = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
+
+        dev_null_fd = -1;
+        if (debug_output == NULL || strlen (debug_output) == 0) {
+                dev_null_fd = open ("/dev/null", O_RDWR);
+		if (ior_fd != 0)
+                        dup2 (dev_null_fd, 0);
+		if (ior_fd != 1)
+                        dup2 (dev_null_fd, 1);
+		if (ior_fd != 2)
+                        dup2 (dev_null_fd, 2);
+        }
+
+        return dev_null_fd;
+}
+
+static void
+nameserver_destroy (PortableServer_POA  poa,
+                    const CORBA_Object  reference,
+                    CORBA_Environment  *ev)
+{
+        PortableServer_ObjectId *oid;
+
+        oid = PortableServer_POA_reference_to_id (poa, reference, ev);
+	PortableServer_POA_deactivate_object (poa, oid, ev);
+	CORBA_free (oid);
+}
+
 int
 main (int argc, char *argv[])
 {
-	GMainLoop *ml;
 	CORBA_ORB orb;
 	PortableServer_POA root_poa;
-	CORBA_Environment ev;
+	PortableServer_POAManager poa_manager;
+	CORBA_Environment real_ev, *ev;
+        CORBA_Object naming_service;
 	Bonobo_ObjectDirectory od;
-	Bonobo_ActivationContext ac;
-	CORBA_Object primary_server;
 	poptContext ctx;
+        int dev_null_fd;
 	char *ior;
 	FILE *fh;
 	struct sigaction sa;
-        const char *oaf_debug_output;
-        int dev_null_fd;
-        
+        GString *src_dir;
+
 	if (chdir ("/")) {
 		g_print ("Couldn't chdir() to '/' (why ?!!). Exiting.\n");
 		exit (EXIT_FAILURE);
 	}
 
-        /* Become process group leader, detach from controlling terminal,
-         * etc.
+
+        /*
+         *    Become process group leader, detach from controlling
+         * terminal, etc.
          */
         setsid ();
         
-        /* This is needed because otherwise, if oafd persists across X
+        /*
+         * This is needed because otherwise, if oafd persists across X
          * sessions, spawned processes will inherit an invalid value of
          * SESSION_MANAGER and be very very slow while attempting to 
          * connect to it.
@@ -122,26 +212,22 @@ main (int argc, char *argv[])
         putenv ("SESSION_MANAGER=");
 #endif
 
-	setlocale(LC_ALL, "");
-
 	/* internationalization. */
+	setlocale (LC_ALL, "");
         bindtextdomain (PACKAGE, SERVER_LOCALEDIR);
         textdomain (PACKAGE);
 
+        /* Ignore sig-pipe - as normal */
 	memset (&sa, 0, sizeof (sa));
 	sa.sa_handler = SIG_IGN;
 	sigaction (SIGPIPE, &sa, NULL);
 
-	CORBA_exception_init (&ev);
 
 	ctx = poptGetContext ("oafd", argc, (const char **)argv, options, 0);
-	while (poptGetNextOpt (ctx) >= 0) {
-        }
-
+	while (poptGetNextOpt (ctx) >= 0) ;
 	poptFreeContext (ctx);
 
         LIBXML_TEST_VERSION;
-
 	xmlKeepBlanksDefault(0);
 
 #if 0
@@ -149,96 +235,40 @@ main (int argc, char *argv[])
                 sleep (1);
 #endif
 
-        oaf_debug_output = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
-
-        dev_null_fd = -1;
-        if (oaf_debug_output == NULL || strlen (oaf_debug_output) == 0) {
-                dev_null_fd = open ("/dev/null", O_RDWR);
-		if(ior_fd != 0)
-		  dup2 (dev_null_fd, 0);
-		if(ior_fd != 1)
-		  dup2 (dev_null_fd, 1);
-		if(ior_fd != 2)
-		  dup2 (dev_null_fd, 2);
-        }
+        dev_null_fd = redirect_output (ior_fd);
 
 	orb = bonobo_activation_init (argc, argv);
-	ml = g_main_loop_new (NULL, FALSE);
+	main_loop = g_main_loop_new (NULL, FALSE);
 
         add_initial_locales ();
         
+	CORBA_exception_init ((ev = &real_ev));
+
 	root_poa = (PortableServer_POA)
-		CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
-	{
-		const char *env_od_source_dir;
-		const char *gnome_env_od_source_dir;
-                char *config_file_od_source_dir;
-		GString *gnome_od_source_dir;
-                char **gnome_dirs;
-		GString *real_od_source_dir;
-                int i;
+		CORBA_ORB_resolve_initial_references (orb, "RootPOA", ev);
 
-		real_od_source_dir = g_string_new (SERVERINFODIR);
-		env_od_source_dir = g_getenv ("BONOBO_ACTIVATION_PATH");
-		gnome_env_od_source_dir = g_getenv ("GNOME2_PATH");
-                config_file_od_source_dir = object_directory_load_config_file ();
+        src_dir = build_src_dir ();
+        bonobo_object_directory_init (root_poa, od_domain, src_dir->str, ev);
+        g_string_free (src_dir, TRUE);
 
-		if (od_source_dir) {
-			g_string_append_c (real_od_source_dir, ':');
-			g_string_append (real_od_source_dir, od_source_dir);
-		}
-		if (env_od_source_dir) {
-			g_string_append_c (real_od_source_dir, ':');
-			g_string_append (real_od_source_dir,
-					 env_od_source_dir);
-		}
-                if (config_file_od_source_dir) {
-			g_string_append_c (real_od_source_dir, ':');
-			g_string_append (real_od_source_dir,
-					 config_file_od_source_dir);
-			g_free (config_file_od_source_dir);
-                }
-		if (gnome_env_od_source_dir) {
-                        gnome_dirs = g_strsplit (gnome_env_od_source_dir, ":", -1);
-                        gnome_od_source_dir = g_string_new("");
-                        for (i=0; gnome_dirs[i]; i++) {
-                                g_string_append (gnome_od_source_dir,
-                                                 gnome_dirs[i]);
-                                g_string_append (gnome_od_source_dir,
-                                                 "/lib/bonobo/servers:");
-                        }
-                        g_strfreev (gnome_dirs);
-			g_string_append_c (real_od_source_dir, ':');
-			g_string_append (real_od_source_dir,
-					 gnome_od_source_dir->str);
-		}
+        od = bonobo_object_directory_get ();
 
-		od = Bonobo_ObjectDirectory_create (root_poa, od_domain,
-                                                 real_od_source_dir->str,
-                                                 &ev);
-		if (server_ns) {
-			CORBA_Object naming_service;
+        naming_service = impl_CosNaming_NamingContext__create (root_poa, ev);
+        if (naming_service == NULL)
+                g_warning ("Failed to create naming service");
+        Bonobo_ObjectDirectory_register_new 
+                (od, NAMING_CONTEXT_IID, naming_service, ev);
 
-			naming_service =
-				impl_CosNaming_NamingContext__create
-				(root_poa, &ev);
-			Bonobo_ObjectDirectory_register_new 
-                                (od,
-                                 "OAFIID:Bonobo_CosNaming_NamingContext:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
-                                 naming_service,
-                                 &ev);
-		}
+        /*
+         *     It is no longer useful at all to be a pure
+         * ObjectDirectory we have binned that mode of
+         * operation, as a bad, racy and inefficient job.
+         */
+        g_assert (server_ac);
+        
+        activation_context_init (root_poa, od, ev);
 
-		g_string_free (real_od_source_dir, TRUE);
-	}
-	if (server_ac) {
-		primary_server = ac =
-			Bonobo_ActivationContext_create (root_poa, &ev);
-		Bonobo_ActivationContext_add_directory (ac, od, &ev);
-	} else
-		primary_server = od;
-
-	ior = CORBA_ORB_object_to_string (orb, primary_server, &ev);
+	ior = CORBA_ORB_object_to_string (orb, activation_context_get (), ev);
 
 	fh = NULL;
 	if (ior_fd >= 0)
@@ -246,8 +276,8 @@ main (int argc, char *argv[])
 	if (fh) {
 		fprintf (fh, "%s\n", ior);
 		fclose (fh);
-		if(ior_fd <= 2)
-		  dup2 (dev_null_fd, ior_fd);
+		if (ior_fd <= 2)
+                        dup2 (dev_null_fd, ior_fd);
 	} else {
 		printf ("%s\n", ior);
 		fflush (stdout);
@@ -260,11 +290,20 @@ main (int argc, char *argv[])
 	debug_queries ();
 #endif
 
-	PortableServer_POAManager_activate
-		(PortableServer_POA__get_the_POAManager (root_poa, &ev), &ev);
-	g_main_loop_run (ml);
+        poa_manager = PortableServer_POA__get_the_POAManager (root_poa, ev);
+	PortableServer_POAManager_activate (poa_manager, ev);
+	g_main_loop_run (main_loop);
 
-	return 0;
+        nameserver_destroy (root_poa, naming_service, ev);
+        CORBA_Object_release (naming_service, ev);
+
+        bonobo_object_directory_shutdown (root_poa, ev);
+        activation_context_shutdown (root_poa, ev);
+
+        CORBA_Object_release ((CORBA_Object) poa_manager, ev);
+        CORBA_Object_release ((CORBA_Object) root_poa, ev);
+
+	return !bonobo_activation_debug_shutdown ();
 }
 
 #ifdef BONOBO_ACTIVATION_DEBUG

@@ -60,24 +60,23 @@ module Bonobo {
         };
 
         interface ObjectDirectory : Bonobo :: Unknown {
-		enum UnregisterType {
-			UNREGISTER_NORMAL,
-			UNREGISTER_NOTIFY_UNUSED /* For factories to use */
-		};
-                ServerInfoListCache get_servers (in CacheTime only_if_newer);
-                ServerStateCache get_active_servers (in CacheTime only_if_newer);
+                exception NotRegistered {};
+
+                ServerInfoListCache get_servers        (in CacheTime only_if_newer);
+                ServerStateCache    get_active_servers (in CacheTime only_if_newer);
                 
                 readonly attribute string username, hostname, domain;
 
-                Object activate (in ImplementationID iid, in ActivationContext ac, in ActivationFlags flags)
+                Object activate (in ImplementationID  iid,
+                                 in ActivationContext ac,
+                                 in ActivationFlags   flags)
                         context ("username", "hostname", "domain", "display");
 
-                /* Ensures consistency for activations of publicly advertised objects */
-                void lock();
-                oneway void unlock();
-
-                RegistrationResult register_new (in ImplementationID iid, in Object obj);
-                void unregister (in ImplementationID iid, in Object obj, in UnregisterType notify);
+                RegistrationResult register_new (in ImplementationID iid,
+                                                 in Object           obj);
+                void               unregister   (in ImplementationID iid,
+                                                 in Object           obj)
+                        raises (NotRegistered);
         };
 
 };

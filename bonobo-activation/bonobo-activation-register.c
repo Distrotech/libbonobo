@@ -114,7 +114,7 @@ bonobo_activation_active_server_register (const char  *registration_id,
         }
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_warning ("registration of '%s' returns %d", registartion_id, retval);
+        g_warning ("registration of '%s' returns %d", registration_id, retval);
 #endif
 	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
 		char *iorstr;
@@ -186,12 +186,11 @@ bonobo_activation_active_server_unregister (const char *iid, CORBA_Object obj)
                                        NULL);
 
 	CORBA_exception_init (&ev);
-	if (CORBA_Object_is_nil (od, &ev)) {
+	if (CORBA_Object_is_nil (od, &ev))
 		return;
-        }
 
-	Bonobo_ObjectDirectory_unregister (od, (char *) iid, obj,
-					Bonobo_ObjectDirectory_UNREGISTER_NORMAL, &ev);
+	Bonobo_ObjectDirectory_unregister (od, (char *) iid, obj, &ev);
+
 	CORBA_exception_free (&ev);
 }
 

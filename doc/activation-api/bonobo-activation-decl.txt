@@ -797,7 +797,7 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
-#define BONOBO_ACTIVATION_MICRO_VERSION (7)
+#define BONOBO_ACTIVATION_MICRO_VERSION (8)
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
@@ -5083,106 +5083,109 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 <NAME>TC_Bonobo_ObjectDirectory</NAME>
 #define TC_Bonobo_ObjectDirectory ((CORBA_TypeCode)&TC_Bonobo_ObjectDirectory_struct)
 </MACRO>
-<ENUM>
-<NAME>Bonobo_ObjectDirectory_UnregisterType</NAME>
-   typedef enum
-   {
-      Bonobo_ObjectDirectory_UNREGISTER_NORMAL,
-      Bonobo_ObjectDirectory_UNREGISTER_NOTIFY_UNUSED
-   }
-   Bonobo_ObjectDirectory_UnregisterType;
-</ENUM>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_0</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_0 'B'
+<NAME>ex_Bonobo_ObjectDirectory_NotRegistered</NAME>
+#define ex_Bonobo_ObjectDirectory_NotRegistered "IDL:Bonobo/ObjectDirectory/NotRegistered:1.0"
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_1</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_1 'o'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_0</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_0 'B'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_2</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_2 'n'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_1</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_1 'o'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_3</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_3 'o'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_2</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_2 'n'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_4</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_4 'b'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_3</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_3 'o'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_5</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_5 'o'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_4</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_4 'b'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_6</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_6 '_'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_5</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_5 'o'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_7</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_7 'O'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_6</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_6 '_'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_8</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_8 'b'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_7</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_7 'O'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_9</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_9 'j'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_8</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_8 'b'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_10</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_10 'e'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_9</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_9 'j'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_11</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_11 'c'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_10</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_10 'e'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_12</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_12 't'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_11</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_11 'c'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_13</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_13 'D'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_12</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_12 't'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_14</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_14 'i'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_13</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_13 'D'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_15</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_15 'r'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_14</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_14 'i'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_16</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_16 'e'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_15</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_15 'r'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_17</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_17 'c'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_16</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_16 'e'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_18</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_18 't'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_17</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_17 'c'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_19</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_19 'o'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_18</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_18 't'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_20</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_20 'r'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_19</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_19 'o'
 </MACRO>
 <MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_21</NAME>
-#define TC_IMPL_TC_Bonobo_ObjectDirectory_UnregisterType_21 'y'
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_20</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_20 'r'
 </MACRO>
 <MACRO>
-<NAME>TC_Bonobo_ObjectDirectory_UnregisterType</NAME>
-#define TC_Bonobo_ObjectDirectory_UnregisterType ((CORBA_TypeCode)&TC_Bonobo_ObjectDirectory_UnregisterType_struct)
+<NAME>TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_21</NAME>
+#define TC_IMPL_TC_Bonobo_ObjectDirectory_NotRegistered_21 'y'
+</MACRO>
+<MACRO>
+<NAME>TC_Bonobo_ObjectDirectory_NotRegistered</NAME>
+#define TC_Bonobo_ObjectDirectory_NotRegistered ((CORBA_TypeCode)&TC_Bonobo_ObjectDirectory_NotRegistered_struct)
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ObjectDirectory_NotRegistered__alloc</NAME>
+#define Bonobo_ObjectDirectory_NotRegistered__alloc() ((Bonobo_ObjectDirectory_NotRegistered *)ORBit_small_alloc (TC_Bonobo_ObjectDirectory_NotRegistered))
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ObjectDirectory_NotRegistered__freekids</NAME>
+#define Bonobo_ObjectDirectory_NotRegistered__freekids(m,d) ORBit_small_freekids (TC_Bonobo_ObjectDirectory_NotRegistered,(m),(d))
 </MACRO>
 <FUNCTION>
 <NAME>POA_Bonobo_ObjectDirectory__init</NAME>
@@ -5227,16 +5230,6 @@ Bonobo_ObjectDirectory_obj,CORBA_Environment * ev
 Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const Bonobo_ActivationContextac,const Bonobo_ActivationFlagsflags, CORBA_Context _ctx,CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
-<NAME>Bonobo_ObjectDirectory_lock</NAME>
-<RETURNS>void  </RETURNS>
-Bonobo_ObjectDirectory _obj,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>Bonobo_ObjectDirectory_unlock</NAME>
-<RETURNS>void  </RETURNS>
-Bonobo_ObjectDirectory _obj,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
 <NAME>Bonobo_ObjectDirectory_register_new</NAME>
 <RETURNS>Bonobo_RegistrationResult</RETURNS>
 Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_Environment * ev
@@ -5244,7 +5237,7 @@ Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_
 <FUNCTION>
 <NAME>Bonobo_ObjectDirectory_unregister</NAME>
 <RETURNS>void  </RETURNS>
-Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,constBonobo_ObjectDirectory_UnregisterTypenotify, CORBA_Environment * ev
+Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_Environment * ev
 </FUNCTION>
 <MACRO>
 <NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_0</NAME>
@@ -5956,7 +5949,7 @@ Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,constB
 </VARIABLE>
 <MACRO>
 <NAME>Bonobo_ObjectDirectory_IMETHODS_LEN</NAME>
-#define Bonobo_ObjectDirectory_IMETHODS_LEN 10
+#define Bonobo_ObjectDirectory_IMETHODS_LEN 8
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>

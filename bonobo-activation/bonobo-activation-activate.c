@@ -519,6 +519,5 @@ CORBA_Object
 bonobo_activation_name_service_get (CORBA_Environment * ev)
 {
 	return bonobo_activation_activate_from_id (
-                "OAFIID:Bonobo_CosNaming_NamingContext:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
-                0, NULL, ev);
+                "OAFIID:Bonobo_CosNaming_NamingContext", 0, NULL, ev);
 }

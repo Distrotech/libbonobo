@@ -42,7 +42,7 @@
  */
 Bonobo_ActivationProperty *
 bonobo_server_info_prop_find (Bonobo_ServerInfo *server,
-                           const char *prop_name)
+                              const char        *prop_name)
 {
 	int i;
 
@@ -64,8 +64,9 @@ bonobo_server_info_prop_find (Bonobo_ServerInfo *server,
  * Return value: 
  */
 const char *
-bonobo_server_info_prop_lookup (Bonobo_ServerInfo * server, const char *prop_name,
-			     GSList * i18n_languages)
+bonobo_server_info_prop_lookup (Bonobo_ServerInfo *server,
+                                const char        *prop_name,
+                                GSList            *i18n_languages)
 {
 	GSList *cur;
 	Bonobo_ActivationProperty *prop;
@@ -102,7 +103,8 @@ bonobo_server_info_prop_lookup (Bonobo_ServerInfo * server, const char *prop_nam
 }
 
 static void
-CORBA_sequence_CORBA_string_copy (CORBA_sequence_CORBA_string *copy, const CORBA_sequence_CORBA_string *original)
+CORBA_sequence_CORBA_string_copy (CORBA_sequence_CORBA_string       *copy,
+                                  const CORBA_sequence_CORBA_string *original)
 {
 	int i;
 
@@ -118,7 +120,8 @@ CORBA_sequence_CORBA_string_copy (CORBA_sequence_CORBA_string *copy, const CORBA
 }
 
 void
-Bonobo_ActivationPropertyValue_copy (Bonobo_ActivationPropertyValue *copy, const Bonobo_ActivationPropertyValue *original)
+Bonobo_ActivationPropertyValue_copy (Bonobo_ActivationPropertyValue       *copy,
+                                     const Bonobo_ActivationPropertyValue *original)
 {
 	copy->_d = original->_d;
 	switch (original->_d) {
@@ -142,14 +145,17 @@ Bonobo_ActivationPropertyValue_copy (Bonobo_ActivationPropertyValue *copy, const
 }
 
 void
-Bonobo_ActivationProperty_copy (Bonobo_ActivationProperty *copy, const Bonobo_ActivationProperty *original)
+Bonobo_ActivationProperty_copy (Bonobo_ActivationProperty       *copy,
+                                const Bonobo_ActivationProperty *original)
 {
 	copy->name = CORBA_string_dup (original->name);
 	Bonobo_ActivationPropertyValue_copy (&copy->v, &original->v);
 }
 
 void
-CORBA_sequence_Bonobo_ActivationProperty_copy (CORBA_sequence_Bonobo_ActivationProperty *copy, const CORBA_sequence_Bonobo_ActivationProperty *original)
+CORBA_sequence_Bonobo_ActivationProperty_copy (
+        CORBA_sequence_Bonobo_ActivationProperty       *copy,
+        const CORBA_sequence_Bonobo_ActivationProperty *original)
 {
 	int i;
 
