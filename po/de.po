@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 0.1\n"
-"POT-Creation-Date: 2002-03-01 01:38+0100\n"
+"POT-Creation-Date: 2002-03-12 00:42+0100\n"
 "PO-Revision-Date: 2002-03-01 01:36+0100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -101,9 +101,10 @@ msgstr "Das angeforderte UI-Attribut existiert nicht"
 msgid "Unknown command or verb"
 msgstr "Unbekannter Befehl oder Verb"
 
+# CHECK!!
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr ""
+msgstr "Befehl ist unempfindlich"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
