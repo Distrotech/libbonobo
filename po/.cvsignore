@@ -8,3 +8,4 @@ cat-id-tbl.c
 libbonobo2.pot
 stamp-cat-id
 messages
+po2tbl.sed

@@ -1,22 +1,16 @@
+2001-08-06  Darin Adler  <darin@bentspoon.com>
+
+	* .cvsignore: New generated file.
+
 2001-08-05  Héctor García Álvarez  <hector@scouts-es.org>
 
         * es.po: Updated Spanish translation.
 	
-2001-08-03  gettextize  <bug-gnu-utils@gnu.org>
-
-	* Makefile.in.in: Upgrade to gettext-0.10.39.
-	* cat-id-tbl.c: Remove file.
-	* stamp-cat-id: Remove file.
-
 2001-07-31  Abel Cheung  <maddog@linux.org.hk>
 
 	* zh_TW.Big5.po: New traditional Chinese translation by
 	  Joe Man <trmetal@yahoo.com.hk>.
 	* ChangeLog: Remove a bunch of useless gettextize messages.
-
-2001-07-28  gettextize  <bug-gnu-utils@gnu.org>
-
-	* Makefile.in.in: Upgrade to gettext-0.10.38.
 
 2001-07-19  Michael Meeks  <michael@ximian.com>
 
