@@ -92,7 +92,7 @@ msgstr "ruta erronea al elemento de la interfaz de usurio XML"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr ""
+msgstr "el atributo pedido de la UI no existe"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
@@ -169,7 +169,7 @@ msgstr "Moniker HTTP"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "moniker para el manejo de ORB IOR"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
@@ -177,15 +177,15 @@ msgstr "Fábrica de moniker estándar"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "moniker generico de activacion de OAF"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "moniker generico de query de OAF"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "Fábrica de moniker generico"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
@@ -193,7 +193,7 @@ msgstr "Item de moniker genérico"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "stream MonikerExtender"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
