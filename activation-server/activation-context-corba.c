@@ -460,8 +460,8 @@ activation_clients_cache_notify (void)
         }
 }
 
-void
-activation_clients_check (void)
+gboolean
+activation_clients_is_empty_scan (void)
 {
         GList *l, *next;
 
@@ -473,6 +473,8 @@ activation_clients_check (void)
                         clients = g_list_delete_link (clients, l);
                 }
         }
+
+        return clients == NULL;
 }
 
 void
@@ -530,15 +532,30 @@ is_locale_interesting (const char *locale)
 }
 
 static void
+active_client_cnx_broken (ORBitConnection *cnx,
+                          gpointer         dummy)
+{
+        if (activation_clients_is_empty_scan ()) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                g_warning ("All clients dead");
+#endif
+                check_quit ();
+        }
+
+}
+
+static void
 impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
                                          const Bonobo_ActivationClient client,
                                          const CORBA_char             *locales,
                                          CORBA_Environment            *ev)
 {
-        char **localev;
-        gboolean new_locale = FALSE;
         int i;
-        
+        char **localev;
+        GList *l;
+        ORBitConnection *cnx;
+        gboolean new_locale = FALSE;
+
         localev = g_strsplit (locales, ",", 0);
 
         for (i = 0; localev[i]; i++) {
@@ -554,7 +571,21 @@ impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
         }
         g_strfreev (localev);
         
-        clients = g_list_prepend (clients, CORBA_Object_duplicate (client, ev));
+        cnx = ORBit_small_get_connection (client);
+        for (l = clients; l; l = l->next)
+                if (cnx == ORBit_small_get_connection (l->data))
+                        break;
+        
+        clients = g_list_prepend (
+                clients, CORBA_Object_duplicate (client, ev));
+
+        if (!l) {
+                g_signal_connect (
+                        cnx, "broken",
+                        G_CALLBACK (active_client_cnx_broken),
+                        NULL);
+                check_quit ();
+        }
 
         if (new_locale)
                 bonobo_object_directory_reload ();

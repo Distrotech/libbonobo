@@ -6,6 +6,12 @@
 #include "bonobo-activation/Bonobo_ActivationContext.h"
 
 /*
+ *    Define, and export BONOBO_ACTIVATION_DEBUG_OUTPUT
+ * for a smoother, closer debugging experience.
+ */
+#undef BONOBO_ACTIVATION_DEBUG
+
+/*
  *    Time delay after all servers are de-registered / dead
  * before quitting the server. (ms)
  */
@@ -27,6 +33,7 @@ CORBA_Object           bonobo_object_directory_re_check_fn (const char          
                                                             CORBA_Environment     *ev);
 void                   bonobo_object_directory_reload      (void);
 void                   reload_object_directory             (void);
+void                   check_quit                          (void);
 
 /* object-directory-load.c */
 void                   bonobo_server_info_load             (char                 **dirs,
@@ -57,8 +64,7 @@ void                     activation_context_shutdown     (PortableServer_POA    
 Bonobo_ActivationContext activation_context_get          (void);
 
 void                     activation_clients_cache_notify (void);
-void                     activation_clients_check        (void);
-
+gboolean                 activation_clients_is_empty_scan(void);
 void                     add_initial_locales             (void);
 
 gboolean                 is_locale_interesting           (const char *locale);

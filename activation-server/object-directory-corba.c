@@ -80,6 +80,7 @@ static impl_POA_Bonobo_ObjectDirectory *main_dir = NULL;
 static void
 od_dump_list (impl_POA_Bonobo_ObjectDirectory * od)
 {
+#if 0
 	int i, j, k;
 
 	for (i = 0; i < od->attr_servers._length; i++) {
@@ -127,6 +128,7 @@ od_dump_list (impl_POA_Bonobo_ObjectDirectory * od)
 			}
 		}
 	}
+#endif
 }
 #endif
 
@@ -468,7 +470,8 @@ quit_server_timeout (gpointer user_data)
 #endif
 
         if (!main_dir ||
-            g_hash_table_size (main_dir->active_servers) > RESIDUAL_SERVERS)
+            g_hash_table_size (main_dir->active_servers) > RESIDUAL_SERVERS ||
+            !activation_clients_is_empty_scan ())
                 g_warning ("Serious error handling server count, not quitting");
         else
                 g_main_loop_quit (main_loop);
@@ -478,15 +481,18 @@ quit_server_timeout (gpointer user_data)
         return FALSE;
 }
 
-static void
-check_quit (impl_POA_Bonobo_ObjectDirectory *servant)
+void
+check_quit (void)
 {
+        impl_POA_Bonobo_ObjectDirectory *servant = main_dir;
+
         /* We had some activity - so push out the shutdown timeout */
         if (servant->no_servers_timeout != 0)
                 g_source_remove (servant->no_servers_timeout);
         servant->no_servers_timeout = 0;
 
-        if (g_hash_table_size (servant->active_servers) <= RESIDUAL_SERVERS)
+        if (g_hash_table_size (servant->active_servers) <= RESIDUAL_SERVERS &&
+            activation_clients_is_empty_scan ())
                 servant->no_servers_timeout = g_timeout_add (
                         SERVER_IDLE_QUIT_TIMEOUT, quit_server_timeout, NULL);
 
@@ -531,9 +537,7 @@ active_server_cnx_broken (ORBitConnection *cnx,
                            servant->active_servers) - RESIDUAL_SERVERS);
 #endif
 
-        activation_clients_check ();
-
-        check_quit (servant);
+        check_quit ();
 }
 
 static void
@@ -562,7 +566,7 @@ add_active_server (impl_POA_Bonobo_ObjectDirectory *servant,
                               CORBA_Object_duplicate (object, NULL));
 
         if (cnx)
-                check_quit (servant);
+                check_quit ();
 }
 
 static void
@@ -578,7 +582,7 @@ remove_active_server (impl_POA_Bonobo_ObjectDirectory *servant,
 {
 	g_hash_table_remove (servant->active_servers, iid);
 
-        check_quit (servant);
+        check_quit ();
 }
 
 static Bonobo_RegistrationResult
