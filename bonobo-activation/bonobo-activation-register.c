@@ -195,17 +195,14 @@ registration_result_to_string (Bonobo_RegistrationResult result)
  * activated.
  *
  * So, for example, you can ensure that a seperate instance
- * of the component is activated for each distint X display
+ * of the component is activated for each distinct X display
  * (and screen) by:
  *
  * <informalexample><programlisting>
  *   display_name = gdk_display_get_name (gdk_display_get_default());
- *
  *   reg_env = bonobo_activation_registration_env_set (
  *                              reg_env, "DISPLAY", display_name);
- *  
  *   bonobo_activation_register_active_server (iid, active_server, reg_env);
- *
  *   bonobo_activation_registration_env_free (reg_env);
  * </programlisting></informalexample>
  *
@@ -311,7 +308,7 @@ bonobo_activation_register_active_server (const char   *iid,
 
 /**
  * bonobo_activation_active_server_register:
- * @iid: IID of the server to register.
+ * @registration_id: IID of the server to register.
  * @obj: CORBA::Object to register.
  *
  * Registers @obj with @iid with the local bonobo-activation-server
@@ -532,12 +529,9 @@ bonobo_activation_registration_env_set_global (GSList   *reg_env,
  * 
  * <informalexample><programlisting>
  *   display_name = gdk_display_get_name (gdk_display_get_default());
- *
  *   reg_env = bonobo_activation_registration_env_set (
  *                              reg_env, "DISPLAY", display_name);
- *  
  *   bonobo_activation_register_active_server (iid, active_server, reg_env);
- *
  *   bonobo_activation_registration_env_free (reg_env);
  * </programlisting></informalexample>
  *

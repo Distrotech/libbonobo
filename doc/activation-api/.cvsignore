@@ -3,8 +3,12 @@ sgml
 html
 Makefile
 Makefile.in
-liboaf.hml
 bonobo-activation-unused.txt
 bonobo-activation-undocumented.txt
-tmpl/bonobo-activation-unused.sgml
+bonobo-activation-decl-list.txt
+bonobo-activation.args
+bonobo-activation.hierarchy
+bonobo-activation.signals
+bonobo-activation-decl.txt
+bonobo-activation-docs.sgml
 *.stamp

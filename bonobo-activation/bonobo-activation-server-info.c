@@ -57,7 +57,7 @@ bonobo_server_info_prop_find (Bonobo_ServerInfo *server,
 /**
  * bonobo_server_info_prop_lookup:
  * @server: 
- * @propname:
+ * @prop_name:
  * @i18n_languages:
  *
  *
