@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo VERSION\n"
-"POT-Creation-Date: 2003-08-26 14:07+0100\n"
-"PO-Revision-Date: 2003-01-10 22:11+0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-28 12:29+0200\n"
+"PO-Revision-Date: 2003-10-02 10:06+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -184,11 +185,11 @@ msgstr "Shlib `%s' không chứa `%s'"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "CORBA POA Tự chọn"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
