@@ -27,7 +27,7 @@
 
 #include <tree.h> /* gnome-xml */
 
-#define SERVER_CONFIG_FILE "/bonobo/bonobo-activation-config.xml"
+#define SERVER_CONFIG_FILE "/bonobo-activation/bonobo-activation-config.xml"
 
 /* loads the information from oaf configuration file
    in $sysconfdir/oaf/oaf-conf.xml.
