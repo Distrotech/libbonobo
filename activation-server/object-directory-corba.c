@@ -864,8 +864,7 @@ bonobo_object_directory_re_check_fn (const Bonobo_ActivationEnvironment *environ
 				     gpointer                            user_data,
 				     CORBA_Environment                  *ev)
 {
-        ODActivationInfo *info = user_data;
-        CORBA_Object      retval;
+        CORBA_Object retval;
 
         retval = od_get_active_server (
                 main_dir, (Bonobo_ImplementationID) act_iid, environment);

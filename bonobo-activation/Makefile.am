@@ -39,6 +39,7 @@ bonobo_activationinclude_HEADERS=		\
 
 libbonobo_activation_la_SOURCES=		\
 	$(BUILT_SOURCES)			\
+	bonobo-activation-get-language-list.c	\
 	bonobo-activation-client.c		\
 	bonobo-activation-client.h		\
 	bonobo-activation-id.c			\

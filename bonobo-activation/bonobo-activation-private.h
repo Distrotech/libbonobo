@@ -75,6 +75,7 @@ void Bonobo_ActivationEnvValue_set  (Bonobo_ActivationEnvValue *env,
 void Bonobo_ActivationEnvValue_copy (Bonobo_ActivationEnvValue *dest,
 				     Bonobo_ActivationEnvValue *src);
 
+const GList *bonobo_activation_i18n_get_language_list (const gchar *category_name);
 
 #endif /* BONOBO_ACTIVATION_PRIVATE_H */
 

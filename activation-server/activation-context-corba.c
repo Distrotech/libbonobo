@@ -861,7 +861,6 @@ impl_Bonobo_ActivationContext_query (PortableServer_Servant _servant,
 static char *
 ac_aid_to_query_string (const CORBA_char *aid)
 {
-        char *tmp_aid;
         char *requirements;
         char *iid_requirement;
         char *username_requirement;

@@ -370,7 +370,6 @@ void
 bonobo_activation_unregister_active_server (const char   *iid,
 					    CORBA_Object  obj)
 {
-	Bonobo_ActivationEnvironment  environment;
 	Bonobo_ObjectDirectory        od;
 	CORBA_Environment             ev;
 	const char                   *actid;

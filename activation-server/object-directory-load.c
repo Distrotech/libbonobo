@@ -37,6 +37,7 @@
 #include <libxml/xmlmemory.h>
 
 #include "bonobo-activation/bonobo-activation-i18n.h"
+#include "bonobo-activation/bonobo-activation-private.h"
 #include "server.h"
 
 /* SAX Parser */
@@ -173,56 +174,17 @@ static GHashTable *interesting_locales = NULL;
 void
 add_initial_locales (void)
 {
-        const char *tmp;
-        char *tmp2, *lang, *lang_with_locale, *equal_char;
+        const GList *l;
 
-        if (!interesting_locales) {
+        if (!interesting_locales)
                 interesting_locales = g_hash_table_new (
                         g_str_hash, g_str_equal);
-        }
-        lang_with_locale = NULL;
-        
-        tmp = g_getenv ("LANGUAGE");
 
-        if (!tmp)
-                tmp = g_getenv ("LANG");
-        
-        lang = g_strdup (tmp);
-        tmp2 = lang;
-
-        if (lang) {
-                /* envs can be in NAME=VALUE form */
-		equal_char = strchr (lang, '=');
-		if (equal_char)
-			lang = equal_char + 1;
-
-                /* check if the locale has a _ */
-                equal_char = strchr (lang, '_');
-                if (equal_char != NULL) {
-                        lang_with_locale = g_strdup (lang);
-                        *equal_char = 0;
-                }
-
-                if (lang_with_locale && strcmp (lang_with_locale, "")) {
-                        g_hash_table_insert (interesting_locales,
-                                             lang_with_locale,
-                                             GUINT_TO_POINTER (1));
-#ifdef LOCALE_DEBUG
-                        g_warning ("Init lang '%s'", lang_with_locale);
-#endif
-                }
-
-                if (lang && strcmp (lang, "")) {
-                        g_hash_table_insert (interesting_locales,
-                                             g_strdup (lang),
-                                             GUINT_TO_POINTER (1));
-#ifdef LOCALE_DEBUG
-                        g_warning ("Init lang(2) '%s'", lang);
-#endif
-                }
-        }
-
-        g_free (tmp2);
+	for (l = bonobo_activation_i18n_get_language_list (NULL);
+             l; l = l->next)
+		g_hash_table_insert (interesting_locales,
+                                     g_strdup ((char *) l->data),
+                                     GUINT_TO_POINTER (1));
 }
 
 gboolean
