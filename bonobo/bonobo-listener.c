@@ -206,11 +206,11 @@ bonobo_listener_construct (BonoboListener  *listener,
  *
  * <informalexample>
  * <programlisting>
- *	void some_callback (GtkObject *, 
+ *      void some_callback (BonoboListener *listener,
  *                          char *event_name, 
- *                          BonoboArg *event_data, 
- *                          CORBA_Environment *ev, 
- *                          gpointer user_data);
+ *			    CORBA_any *any,
+ *			    CORBA_Environment *ev,
+ *			    gpointer user_data);
  * </programlisting>
  * </informalexample>
  *

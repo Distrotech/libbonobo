@@ -11,6 +11,7 @@
 #define _BONOBO_EVENT_SOURCE_H_
 
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-listener.h>
 
 BEGIN_GNOME_DECLS
 
@@ -46,6 +47,18 @@ void          bonobo_event_source_notify_listeners_full (BonoboEventSource *even
 							 const char        *subtype,
 							 const CORBA_any   *value,                          
 							 CORBA_Environment *opt_ev);
+
+void        bonobo_event_source_client_remove_listener  (Bonobo_Unknown  object,
+							 Bonobo_EventSource_ListenerId id,
+							 CORBA_Environment *opt_ev);
+
+Bonobo_EventSource_ListenerId 
+bonobo_event_source_client_add_listener                 (Bonobo_Unknown           object,
+							 BonoboListenerCallbackFn event_callback,
+							 const char               *opt_mask,
+							 CORBA_Environment        *opt_ev,
+							 gpointer                 user_data); 
+
 
 POA_Bonobo_EventSource__epv *bonobo_event_source_get_epv   (void);
 Bonobo_EventSource bonobo_event_source_corba_object_create (BonoboObject *object);

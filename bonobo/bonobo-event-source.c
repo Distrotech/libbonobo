@@ -396,3 +396,104 @@ bonobo_event_source_ignore_listeners (BonoboEventSource *event_source)
 
 	event_source->priv->ignore = TRUE;
 }
+
+void
+bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
+					    Bonobo_EventSource_ListenerId id,
+					    CORBA_Environment *opt_ev)
+{
+	CORBA_Environment ev, *my_ev;
+	Bonobo_Unknown es;
+
+	g_return_if_fail (object != CORBA_OBJECT_NIL);
+	g_return_if_fail (id != 0);
+
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	es = Bonobo_Unknown_queryInterface (object, 
+		"IDL:Bonobo/EventSource:1.0", my_ev);
+
+	if (BONOBO_EX(my_ev) || !es)
+		goto remove_listener_end;
+
+	Bonobo_EventSource_removeListener (es, id, my_ev);
+
+	if (BONOBO_EX(my_ev))
+		goto remove_listener_end;
+
+	Bonobo_Unknown_unref (es, my_ev);
+
+ remove_listener_end:
+
+	if (!opt_ev) {
+		if (BONOBO_EX (my_ev))
+			g_warning ("bonobo_stream_open failed '%s'",
+				   bonobo_exception_get_text (my_ev));
+		CORBA_exception_free (&ev);
+	}
+}
+
+Bonobo_EventSource_ListenerId
+bonobo_event_source_client_add_listener (Bonobo_Unknown object,
+					 BonoboListenerCallbackFn event_callback,
+					 const char *opt_mask,
+					 CORBA_Environment *opt_ev,
+					 gpointer user_data)
+{
+	CORBA_Environment ev, *my_ev;
+	BonoboListener *listener = NULL;
+	Bonobo_Listener corba_listener;
+	Bonobo_EventSource_ListenerId id = 0;
+	Bonobo_Unknown es;
+
+	g_return_val_if_fail (object != CORBA_OBJECT_NIL, 0);
+	g_return_val_if_fail (event_callback != NULL, 0);
+	
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	es = Bonobo_Unknown_queryInterface (object, 
+		"IDL:Bonobo/EventSource:1.0", my_ev);
+
+	if (BONOBO_EX(my_ev) || !es)
+		goto add_listener_end;
+
+	if (!(listener = bonobo_listener_new (event_callback, user_data)))
+		goto add_listener_end;
+
+	corba_listener = bonobo_object_corba_objref (BONOBO_OBJECT (listener));
+	
+	if (opt_mask)
+		id = Bonobo_EventSource_addListenerWithMask (es, 
+							     corba_listener, 
+							     opt_mask, my_ev);
+	else 
+		id = Bonobo_EventSource_addListener (es, corba_listener, 
+						     my_ev);
+
+	if (BONOBO_EX(my_ev))
+		goto add_listener_end;
+
+	Bonobo_Unknown_unref (es, my_ev);
+
+	bonobo_object_unref (BONOBO_OBJECT (listener));
+
+ add_listener_end:
+
+	if (!opt_ev) {
+		if (BONOBO_EX (my_ev))
+			g_warning ("bonobo_stream_open failed '%s'",
+				   bonobo_exception_get_text (my_ev));
+		CORBA_exception_free (&ev);
+	}
+
+	return id;
+} 
+

@@ -1,3 +1,15 @@
+2001-01-03  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* configure.in: Bump version to 0.32
+ 
+	* bonobo/bonobo-listener.c (bonobo_listener_new): docu upd.
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_remove_listener): impl.
+	(bonobo_event_source_add_listener): impl.
+
+	* samples/controls/sample-control-container.c: use the new methods.
+
 2001-01-03  Michael Meeks  <michael@helixcode.com>
 
 	* tests/Makefile.am: move them here.
