@@ -1,3 +1,13 @@
+libbonobo 1.110.0
+
+	* Bugs fixed
+		+ kill bogus shlib factory unregister
+		+ setAttr needs a component_name
+		+ fix aggregate ref count debug
+		+ docs updates (Rodrigo Moya)
+		+ update moniker linkage (Johan Dahlin)
+		+ standardize conditional IDL compiles (Johan, Darin)
+
 libbonobo 1.109.0
 
 	* Features
