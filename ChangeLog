@@ -1,5 +1,12 @@
 2001-08-08  Michael Meeks  <michael@ximian.com>
 
+	* idl/Makefile.am: move typelib stuff here, add whacked out
+	defines to get bonobo-activation code included in-line.
+
+	* bonobo/Makefile.am: kill typelib building.
+
+2001-08-08  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/Makefile.am: make dependency fix more portable
 	with Peter Wainwright's solution.
 

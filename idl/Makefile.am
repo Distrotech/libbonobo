@@ -22,3 +22,36 @@ idl_DATA =				\
 	$(NULL)
 
 EXTRA_DIST = $(idl_DATA)
+
+orbittypelib_LTLIBRARIES = Bonobo_module.la
+orbittypelibdir = $(libdir)/orbit
+
+IMODULE_SOURCE =	\
+	Bonobo.h	\
+	Bonobo-common.c	\
+	Bonobo-imodule.c
+
+idl_flags = \
+	-I$(top_srcdir)/idl \
+	-I $(BONOBO_ACTIVATION_IDL_DIR) \
+	-D__BONOBO_COMPILATION \
+	-D__BONOBO_UNKNOWN_COMPILATION \
+	-D__BONOBO_GENERIC_FACTORY_COMPILATION
+
+INCLUDES =  \
+	-I. \
+	$(LIBBONOBO_CFLAGS)
+
+Bonobo_module_la_SOURCES = \
+	Bonobo-imodule.c
+
+Bonobo_module_la_LIBADD = \
+	$(LIBBONOBO_LIBS)
+
+Bonobo_module_la_LDFLAGS = \
+	-export-dynamic -module
+
+Bonobo-imodule.c : $(idls) $(ORBIT_IDL)
+	$(ORBIT_IDL) $(idl_flags) --imodule $(top_srcdir)/idl/Bonobo.idl
+
+

@@ -1,7 +1,6 @@
 ORBIT_IDL = @ORBIT_IDL@
 
 PLUGIN_DIR = $(libdir)/bonobo/plugin
-orbittypelibdir = $(libdir)/orbit
 
 INCLUDES = \
 	-I. 						\
@@ -28,10 +27,6 @@ CORBA_SOURCE =			\
 	Bonobo-stubs.c		\
 	Bonobo-skels.c
 
-CORBA_ALL_SOURCE =		\
-	$(CORBA_SOURCE)		\
-	Bonobo-imethod.c
-
 idls =							\
 	$(top_srcdir)/idl/Bonobo.idl			\
 	$(top_srcdir)/idl/Bonobo_Canvas.idl		\
@@ -55,12 +50,7 @@ idl_flags = -I$(top_srcdir)/idl -I $(BONOBO_ACTIVATION_IDL_DIR) -D__BONOBO_COMPI
 $(CORBA_SOURCE): $(idls) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo.idl
 
-Bonobo-imodule.c : $(idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(idl_flags) --imodule $(top_srcdir)/idl/Bonobo.idl
-
 lib_LTLIBRARIES = libbonobo-2.la
-
-orbittypelib_LTLIBRARIES = Bonobo_module.la
 
 libbonobo_2_la_LIBADD = \
 	$(LIBBONOBO_LIBS)
@@ -143,15 +133,6 @@ libbonobo_2_la_SOURCES =		\
 	$(libbonobo_src)		\
 	$(CORBA_SOURCE)
 
-Bonobo_module_la_SOURCES = \
-	Bonobo-imodule.c
-
-Bonobo_module_la_LIBADD = \
-	$(LIBBONOBO_LIBS)
-
-Bonobo_module_la_LDFLAGS = \
-	-export-dynamic -module
-
 marshal_sources = \
 	bonobo-marshal.c \
 	bonobo-marshal.h
@@ -174,7 +155,7 @@ MAINTAINERCLEANFILES = $(marshal_sources)
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libbonobo-2.0.pc
 
-DONT_DIST_SOURCE = $(CORBA_ALL_SOURCE) $(marshal_sources)
+DONT_DIST_SOURCE = $(CORBA_SOURCE) $(marshal_sources)
 
 dist-hook:
 	for file in $(DONT_DIST_SOURCE) ; do \
