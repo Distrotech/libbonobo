@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo CVS-20030311\n"
-"POT-Creation-Date: 2003-05-05 18:49+0900\n"
-"PO-Revision-Date: 2003-05-05 10:34+0900\n"
+"POT-Creation-Date: 2003-05-06 22:05+0900\n"
+"PO-Revision-Date: 2003-05-06 22:10+0900\n"
 "Last-Translator: KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -113,9 +113,7 @@ msgstr "プロパティ '%s' には値がありません。"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr ""
-"子プロセスがエラー・メッセージを出力しませんでした。不明なエラーが発生しまし"
-"た。"
+msgstr "子プロセスがエラーメッセージを出力しませんでした。不明なエラーが発生しました。"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
@@ -134,7 +132,7 @@ msgstr "子プロセスがシグナル %u (%s) を受け取りました。"
 #: bonobo-activation/bonobo-activation-fork-server.c:324
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr "不明な未終了エラー (状態 = %u)"
+msgstr "不明な未終了エラー (状態は %u です)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:387
 #, c-format
@@ -148,9 +146,7 @@ msgstr "%s の実行に失敗: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr ""
-"ロケールに対するエイリアス・レベルが多すぎます。検出でループしている可能性が"
-"あります。"
+msgstr "ロケールに対するエイリアスレベルが多すぎます。検出でループしている可能性があります。"
 
 #: bonobo-activation/bonobo-activation-init.c:255
 msgid "File descriptor to print IOR on"
@@ -166,7 +162,7 @@ msgstr "OAF でサーバ登録の禁止"
 
 #: bonobo-activation/bonobo-activation-init.c:344
 msgid "Bonobo activation options"
-msgstr "Bonobo activation オプション"
+msgstr "Bonobo 活性化オプション"
 
 #: bonobo-activation/bonobo-activation-shlib.c:101
 #, c-format
@@ -182,7 +178,7 @@ msgstr "'%s' でシンボル Bonobo_Plugin_info を発見できません。"
 #: bonobo-activation/bonobo-activation-shlib.c:203
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr "Factory '%s' が '%s' に NIL を返しました。"
+msgstr "ファクトリ '%s' が '%s' に NIL を返しました。"
 
 #: bonobo-activation/bonobo-activation-shlib.c:220
 #, c-format
@@ -207,7 +203,7 @@ msgstr "I/O エラー"
 
 #: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "おかしな引数の値です"
+msgstr "無効な引数の値です"
 
 #: bonobo/bonobo-exception.c:164
 msgid "Object not found"
@@ -271,7 +267,7 @@ msgstr "ユーザインターフェイスを記述した XML が壊れていま�
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "XML のユーザーインターフェイス要素へのパスがおかしいです"
+msgstr "XML のユーザーインターフェイス要素へのパスが無効です"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -299,7 +295,7 @@ msgstr "プロパティが見つかりません"
 
 #: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr "プロパティがおかしな型です"
+msgstr "プロパティが無効な型です"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
@@ -323,11 +319,11 @@ msgstr "モニカに文法エラー"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "モニカに不明なモニカ・プリフィックスがあります"
+msgstr "モニカに不明なモニカプリフィックスがあります"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "エラーチェックでエラー: 例外ではありません"
+msgstr "エラーチェックでエラー: 例外は発生していません"
 
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
@@ -349,7 +345,7 @@ msgstr "オブジェクトの活性化に失敗しました"
 #: monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
-msgstr "'%s' の活性化で例外発生"
+msgstr "'%s' 活性化での例外"
 
 #: monikers/bonobo-moniker-oaf.c:62
 #, c-format
