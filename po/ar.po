@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1\n"
-"POT-Creation-Date: 2002-05-24 17:01-0500\n"
+"POT-Creation-Date: 2002-05-26 17:57-0500\n"
 "PO-Revision-Date: 2002-05-15 13:22-0300\n"
 "Last-Translator: Isam Bayazidi <bayazidi@arabeyes.org>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -153,7 +153,7 @@ msgstr "خطأ تفعيل عام بدون شرح"
 
 #: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
-msgstr "لم يتم التمكن من تغعيل Bonobo"
+msgstr "لم يتم التمكن من تفعيل بونوبو"
 
 #: bonobo/bonobo-moniker.c:353
 #, c-format
@@ -162,7 +162,7 @@ msgstr "فشل حل أو توسعة '%s"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr "فشل تغعيل الكائن"
+msgstr "فشل تفعيل الكائن"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -178,23 +178,23 @@ msgstr "مصنع قياسي للروابط"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "generic Oaf activation moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "generic Oaf query moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "generic factory 'new' moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr ""
+msgstr "عنصر مونيكر عام"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "MonikerExtender انسيابي"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
@@ -208,11 +208,11 @@ msgstr "فشل تغعيل '%s"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "مصنع خادم Bonobo للرد/الصدى"
+msgstr "مصنع خادم بونوبو للرد/الصدى"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "تطبيق مثال لخادم Bonobo للرد/الصدى"
+msgstr "تطبيق مثال لخادم بونوبو للرد/الصدى"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
@@ -224,7 +224,7 @@ msgstr "معمل مكونات رد/صدى"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr "لم يتم التمكن من ابتداء Bonobo"
+msgstr "لم يتم التمكن من ابتداء بونوبو"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
