@@ -1,3 +1,27 @@
+2001-01-11  Michael Meeks  <michael@helixcode.com>
+
+	* doc/std-ui.xml: upd.
+
+	* bonobo/Makefile.am: add ui-config-widget.h
+
+	* bonobo/bonobo-ui-config-widget.[ch]: add.
+
+2001-01-10  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-engine-config.c (impl_destroy): impl.
+	(class_init): upd.
+	(populate_list, dialog_new, null_dialog): impl.
+	(bonobo_ui_engine_config_configure): impl.
+
+	* bonobo/bonobo-ui-engine.c (impl_emit_verb_on): add builtin
+	verbs.
+
+	* doc/ui-xml.txt: document builtins.
+
+	* bonobo/bonobo-ui-sync-menu.c (impl_bonobo_ui_sync_menu_build): add
+	tearoff attribute. (add_tearoff): split out.
+	(bonobo_ui_sync_menu_add_popup): add tearoff.
+
 2001-01-10  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_new_from_name_full): 
