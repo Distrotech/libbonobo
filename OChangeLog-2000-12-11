@@ -1,5 +1,18 @@
 2000-06-23  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/Makefile.am: remove bonobo-stream-fs.[ch] they move to
+
+	* storage-modules/bonobo-stream-fs.[ch]: here.
+
+	* storage-modules/Makefile.am: update.
+
+	* storage-modules/gnome-storage-vfs.c (bonobo_storage_vfs_open): 
+
+	* storage-modules/gnome-storage-fs.c (do_bonobo_storage_fs_create),
+	(bonobo_storage_fs_open): fix serious type confusion.
+
+2000-06-23  Michael Meeks  <michael@helixcode.com>
+	
 	* storage-modules/gnome-storage-vfs.[ch]: Add.
 
 	* configure.in: add checks for gnome vfs.
