@@ -160,8 +160,8 @@ min(expr)
 	<table frame="all">
 	<title>Binary relational operators.</title>
 	<tgroup cols="2">
-	<colspec colwidth="*" colnum="1" align="left">
-	<colspec colwidth="2*" colnum="2" align="left">
+	<colspec colwidth="*" colnum="1" align="left"/>
+	<colspec colwidth="2*" colnum="2" align="left"/>
 	<thead>
 		<row>
 		<entry>Operator</entry>
@@ -200,8 +200,8 @@ min(expr)
 	<table frame="all">
 	<title>Binary boolean operators.</title>
 	<tgroup cols="2">
-	<colspec colwidth="*" colnum="1" align="left">
-	<colspec colwidth="2*" colnum="2" align="left">
+	<colspec colwidth="*" colnum="1" align="left"/>
+	<colspec colwidth="2*" colnum="2" align="left"/>
 	<thead>
 		<row>
 		<entry>Operator</entry>
@@ -210,7 +210,7 @@ min(expr)
 	</thead>
 		<tbody>
 		  <row>
-		    <entry>&& or AND</entry>
+		    <entry>&amp;&amp; or AND</entry>
 		    <entry>and</entry>
 		  </row>
 		  <row>
@@ -228,8 +228,8 @@ min(expr)
 	<table frame="all">
 	<title>Unary boolean operators.</title>
 	<tgroup cols="2">
-	<colspec colwidth="*" colnum="1" align="left">
-	<colspec colwidth="2*" colnum="2" align="left">
+	<colspec colwidth="*" colnum="1" align="left"/>
+	<colspec colwidth="2*" colnum="2" align="left"/>
 	<thead>
 		<row>
 		<entry>Operator</entry>
@@ -248,8 +248,8 @@ min(expr)
 	<table frame="all">
 	<title>Binary arithmetic operators.</title>
 	<tgroup cols="2">
-	<colspec colwidth="*" colnum="1" align="left">
-	<colspec colwidth="2*" colnum="2" align="left">
+	<colspec colwidth="*" colnum="1" align="left"/>
+	<colspec colwidth="2*" colnum="2" align="left"/>
 	<thead>
 		<row>
 		<entry>Operator</entry>
@@ -280,8 +280,8 @@ min(expr)
 	<table frame="all">
 	<title>Unary arithmetic operators.</title>
 	<tgroup cols="2">
-	<colspec colwidth="*" colnum="1" align="left">
-	<colspec colwidth="2*" colnum="2" align="left">
+	<colspec colwidth="*" colnum="1" align="left"/>
+	<colspec colwidth="2*" colnum="2" align="left"/>
 	<thead>
 		<row>
 		<entry>Operator</entry>

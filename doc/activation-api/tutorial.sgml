@@ -49,9 +49,9 @@
 
       <para>
       Bonobo Activation was designed to address these issues. The remote issue is completely solved
-      by the Bonobo Activation daemon (see <xref linkend="architecture">), the evil hacks regarding X are
+      by the Bonobo Activation daemon (see <xref linkend="architecture"/>), the evil hacks regarding X are
       part of our past and the grand <emphasis>OAF query langage</emphasis> (see 
-      <xref linkend="query-langage">) gives you the ability to perform arbitrary queries
+      <xref linkend="query-langage"/>) gives you the ability to perform arbitrary queries
       on the database of CORBA servers.
       </para>
 
@@ -84,7 +84,7 @@ CORBA_Object o = bonobo_activation_activate ("repo_ids.has ('IDL:GNOME/Graph/Lay
       Here follows a very simple-stupid example of what you can do with Bonobo Activation.
       The complete API description of bonobo activation, the OAF query langage reference and the
       <filename>.server</filename> file format reference are included in this 
-      document and are recommended readings. Reading <xref linkend="architecture"> is
+      document and are recommended readings. Reading <xref linkend="architecture"/> is
       also a good idea.
       </para>  
 

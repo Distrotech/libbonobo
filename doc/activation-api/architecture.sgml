@@ -77,10 +77,22 @@ the <classname>ActivationContext</classname> deals with AIDs since it can associ
 As a result of this architecture, activation requests should go to the 
 <classname>ActivationContext</classname> and
 registrations to the <classname>ObjectDirectory</classname>.
-	<figure>
-	<title>OAF architecture</title>
-	<graphic fileref="oaf.png" scale="50"></graphic>
-      </figure>
+
+<figure id="architecture-diagram">
+    <title>The Bonobo Activation architecture</title>
+    <mediaobject>
+	<imageobject>
+	    <imagedata fileref="bonobo-activation.png"
+		       format="PNG"/>
+	</imageobject>
+    </mediaobject>
+</figure>
+
+<!-- 	<figure> -->
+<!-- 	<title>OAF architecture</title> -->
+<!-- 	<graphic fileref="oaf.png" scale="50"></graphic> -->
+<!--       </figure> -->
+
 The idea behind this is that when you make a request on the ActivationContext (like query),
 it will:
 <itemizedlist>

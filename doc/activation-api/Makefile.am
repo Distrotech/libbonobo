@@ -12,10 +12,10 @@ DOC_MAIN_SGML_FILE=bonobo-activation.sgml
 DOC_SOURCE_DIR=../bonobo-activation
 
 # Extra options to supply to gtkdoc-scan
-SCAN_OPTIONS=
+SCAN_OPTIONS=--deprecated-guards="BONOBO_DISABLE_DEPRECATED"
 
 # Extra options to supply to gtkdoc-mkdb
-MKDB_OPTIONS=--sgml-mode
+MKDB_OPTIONS=--sgml-mode --output-format=xml
 
 # Extra options to supply to gtkdoc-fixref
 FIXXREF_OPTIONS=
@@ -48,7 +48,6 @@ content_files =				\
 	configuring.sgml		\
 	query-langage.sgml		\
 	architecture.sgml		\
-	bonobo-activation.sgml		\
 	fdl.sgml			\
 	$(NULL)
 
@@ -70,6 +69,11 @@ GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
 #	for f in $(srcdir)/TEXT/* ; do  \
 #	  test -f $$f && cp -p $$f $(distdir)/TEXT; \
 #	done
+
+# If you need to override some of the declarations, place them in the
+# $(DOC_MODULE)-overrides.txt file and uncomment the second line here.
+DOC_OVERRIDES =
+#DOC_OVERRIDES = $(DOC_MODULE)-overrides.txt
 
 
 ####################################
@@ -100,6 +104,8 @@ DOC_STAMPS=scan-build.stamp tmpl-build.stamp sgml-build.stamp html-build.stamp \
 SCANOBJ_FILES = 		\
 	$(DOC_MODULE).args 	\
 	$(DOC_MODULE).hierarchy \
+	$(DOC_MODULE).interfaces \
+	$(DOC_MODULE).prerequisites \
 	$(DOC_MODULE).signals
 
 if ENABLE_GTK_DOC
@@ -164,7 +170,7 @@ clean-local:
 	rm -f *~ *.bak $(SCANOBJ_FILES) *-unused.txt $(DOC_STAMPS)
 
 maintainer-clean-local: clean
-	cd $(srcdir) && rm -rf sgml html $(DOC_MODULE)-decl-list.txt $(DOC_MODULE)-decl.txt
+	cd $(srcdir) && rm -rf xml html $(DOC_MODULE)-decl-list.txt $(DOC_MODULE)-decl.txt
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(TARGET_DIR)
@@ -193,10 +199,10 @@ endif
 
 dist-hook: dist-check-gtkdoc dist-hook-local
 	mkdir $(distdir)/tmpl
-	mkdir $(distdir)/sgml
+	mkdir $(distdir)/xml
 	mkdir $(distdir)/html
 	-cp $(srcdir)/tmpl/*.sgml $(distdir)/tmpl
-	-cp $(srcdir)/sgml/*.sgml $(distdir)/sgml
+	-cp $(srcdir)/xml/*.xml $(distdir)/xml
 	-cp $(srcdir)/html/* $(distdir)/html
 
 .PHONY : dist-hook-local

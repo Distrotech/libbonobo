@@ -85,7 +85,7 @@ An example is worth all words.
 </programlisting>
 Each oaf_server entry defines a set of attributes. 
 Each attribute has a given name, type and value. The types of the attributes are those defined in the 
-OAF query langage reference (<xref linkend="oaf-query-ref-types">). Type name should
+OAF query langage reference (<xref linkend="oaf-query-ref-types"/>). Type name should
 be non-caps.
 </para>
 
@@ -107,10 +107,10 @@ Their list follows.
 	<table frame="all">
 	<title>Normalized attributes</title>
 	<tgroup cols="4">
-	<colspec colwidth="3*" colnum="1" align="left">
-	<colspec colwidth="*" colnum="2" align="left">
-	<colspec colwidth="10*" colnum="3" align="left">
-	<colspec colwidth="*" colnum="4" align="left">
+	<colspec colwidth="3*" colnum="1" align="left"/>
+	<colspec colwidth="*" colnum="2" align="left"/>
+	<colspec colwidth="10*" colnum="3" align="left"/>
+	<colspec colwidth="*" colnum="4" align="left"/>
 	<thead>
 		<row>
 		<entry>Attribute name</entry>

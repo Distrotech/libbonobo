@@ -12,3 +12,6 @@ bonobo-activation.signals
 bonobo-activation-decl.txt
 bonobo-activation-docs.sgml
 *.stamp
+bonobo-activation.interfaces
+bonobo-activation.prerequisites
+xml
