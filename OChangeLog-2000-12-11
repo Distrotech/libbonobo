@@ -1,3 +1,7 @@
+Changes July 16, 1999 by Elliot:
+	bonobo/*.[ch]:
+		Add an emacs indent format line to the top of each file.
+
 Changes July 1[456], 1999 by Elliot:
 	bonobo/gnome-main.c: Make it work with CORBA_OBJECT_NIL for all
 			     params.

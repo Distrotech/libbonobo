@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #ifndef _GNOME_PROGRESSIVE_DATA_SINK_H_
 #define _GNOME_PROGRESSIVE_DATA_SINK_H_
 
