@@ -51,15 +51,15 @@ GnomeObject *gnome_object_construct        (GnomeObject *object,
 
 GnomeObject *gnome_object_from_servant     (PortableServer_Servant servant);
 void         gnome_object_bind_to_servant  (GnomeObject *object,
-					     void *servant);
+					    void *servant);
 PortableServer_Servant
              gnome_object_get_servant      (GnomeObject *object);
 
 CORBA_Object gnome_object_activate_servant (GnomeObject *object,
-					     void *servant);
+					    void *servant);
 
 void         gnome_object_add_interface    (GnomeObject *object,
-					     GnomeObject *newobj);
+					    GnomeObject *newobj);
 CORBA_Object gnome_object_query_interface  (GnomeObject *object,
 					    const char *repo_id);
 CORBA_Object gnome_object_corba_objref     (GnomeObject *object);

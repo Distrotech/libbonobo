@@ -1,3 +1,9 @@
+1999-09-29  Miguel de Icaza  <miguel@gnu.org>
+
+	* idl/gnome-desktop.idl, bonobo/gnome-desktop-window.c: New files,
+	used to control a toplevel GtkWindow and export its properties
+	trough corba.
+
 1999-09-29  Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br>
 
 	* configure.in: add pt_BR to ALL_LINGUAS

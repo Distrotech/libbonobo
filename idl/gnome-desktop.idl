@@ -1,0 +1,29 @@
+/*
+ * Interfaces for desktop elements
+ *
+ * Author:
+ *   Miguel de Icaza (miguel@kernel.org)
+ */
+
+module GNOME {
+
+module Desktop {
+
+interface Window : GNOME::Unknown {
+
+	struct Geometry {
+		short x, y;
+		short width, height;
+	};
+
+	attribute string title;
+
+	Geometry get_geometry ();
+	void set_geometry (in Geometry geo);
+
+	unsigned long get_window_id ();
+};
+
+};
+
+};

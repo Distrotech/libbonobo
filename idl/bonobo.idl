@@ -28,6 +28,8 @@
 
 #include "gnome-progressive.idl"
 
+#include "gnome-desktop.idl"
+
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif
