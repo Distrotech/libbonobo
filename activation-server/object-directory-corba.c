@@ -778,8 +778,10 @@ od_register_runtime_server_info (ObjectDirectory  *od,
         int     i;
 
         old_serverinfo = (Bonobo_ServerInfo *) g_hash_table_lookup (od->by_iid, iid);
-        if (!(*description)) /* empty description? */
+        if (old_serverinfo)
                 return old_serverinfo;
+        if (!(*description)) /* empty description? */
+                return NULL;
 
           /* parse description */
          bonobo_parse_server_info_memory (description, &parsed_serverinfo,
@@ -801,43 +803,18 @@ od_register_runtime_server_info (ObjectDirectory  *od,
          new_serverinfo = (Bonobo_ServerInfo *) parsed_serverinfo->data;
          g_slist_free (parsed_serverinfo);
 
-         if (old_serverinfo) {
-                 Bonobo_ServerInfo *old_runtime_serverinfo;
-                   /* find and replace new serverinfo in attr_runtime_servers */
-                 for (i = 0; i < od->attr_runtime_servers->len; i++) {
-                         old_runtime_serverinfo = g_ptr_array_index (od->attr_runtime_servers, i);
-                         if (strcmp (old_runtime_serverinfo->iid, iid) == 0) {
-                                 Bonobo_ServerInfo__freekids (old_runtime_serverinfo, NULL);
-                                 g_free (old_runtime_serverinfo);
-                                 g_ptr_array_index (od->attr_runtime_servers, i) = new_serverinfo;
-                                 break;
-                         }
-                 }
-                 if (i == od->attr_runtime_servers->len) {
-                         g_warning ("Inconsistency between od->attr_servers "
-                                    "and od->attr_runtime_servers");
-                           /* something must be wrong, but we try to remedy as we can */
-                         g_ptr_array_add (od->attr_runtime_servers, new_serverinfo);
-                 }
-                   /* replace old for new serverinfo in attr_servers */
-                 g_hash_table_remove (od->by_iid, old_serverinfo->iid);
-                 Bonobo_ServerInfo__freekids (old_serverinfo, NULL);
-                 Bonobo_ServerInfo_copy (old_serverinfo, new_serverinfo);
-                 g_hash_table_insert (od->by_iid, old_serverinfo->iid, old_serverinfo);
-         } else {
-                 g_ptr_array_add (od->attr_runtime_servers, new_serverinfo);
-                 ORBit_sequence_append (od->attr_servers, new_serverinfo);
-                   /* rebuild od->by_iid hash table, because
-                    * ORBit_sequence_append reallocs _buffer, and that
-                    * sometimes changes the addresses of the
-                    * serverinfo items */
-                 g_hash_table_destroy (od->by_iid);
-                 od->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
-                 for (i = 0; i < od->attr_servers->_length; ++i)
-                         g_hash_table_insert (od->by_iid,
-                                              od->attr_servers->_buffer[i].iid,
-                                              od->attr_servers->_buffer + i);
-         }
+         g_ptr_array_add (od->attr_runtime_servers, new_serverinfo);
+         ORBit_sequence_append (od->attr_servers, new_serverinfo);
+           /* rebuild od->by_iid hash table, because
+            * ORBit_sequence_append reallocs _buffer, and that
+            * sometimes changes the addresses of the
+            * serverinfo items */
+         g_hash_table_destroy (od->by_iid);
+         od->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
+         for (i = 0; i < od->attr_servers->_length; ++i)
+                 g_hash_table_insert (od->by_iid,
+                                      od->attr_servers->_buffer[i].iid,
+                                      od->attr_servers->_buffer + i);
          od->time_list_changed = time (NULL);
          activation_clients_cache_notify ();
          return old_serverinfo;

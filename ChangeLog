@@ -1,6 +1,15 @@
+2004-04-15  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* activation-server/object-directory-corba.c
+	(od_register_runtime_server_info): Do not ever try to update a
+	ServerInfo if there's already another ServerInfo registered for
+	the given IID.  This both improves performance and avoids a
+	possible memory error that I have been unable to track down after
+	much debugging.
+
 2004-04-09  Guntupalli Karunakar  <karunakar@freedomink.org>
 
-        * configure.in: Added "gu" (Gujarati) to ALL_LINGUAS.
+	* configure.in: Added "gu" (Gujarati) to ALL_LINGUAS.
 
 2004-04-06  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
