@@ -1,3 +1,7 @@
+2000-05-29  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in (have_oaf): give a helpful error message if you don't have oaf.
+
 2000-05-27  Michael Meeks  <michael@helixcode.com>
 
 	* configure.in: bump version, set oaf as the default.
