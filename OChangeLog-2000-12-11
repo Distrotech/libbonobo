@@ -1,3 +1,10 @@
+2000-10-26  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (impl_destroy): free the priv->items list.
+
+	* bonobo/bonobo-ui-xml.c (override_node_with): make flow more
+	lucid and fix leak.
+
 2000-10-26  Darin Adler  <darin@eazel.com>
 
 	* monikers/bonobo-moniker-http.c:
