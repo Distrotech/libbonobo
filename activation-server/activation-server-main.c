@@ -102,6 +102,11 @@ main (int argc, char *argv[])
 		exit (EXIT_FAILURE);
 	}
 
+        /* Become process group leader, detach from controlling terminal,
+         * etc.
+         */
+        setsid ();
+        
         /* This is needed because otherwise, if oafd persists across X
          * sessions, spawned processes will inherit an invalid value of
          * SESSION_MANAGER and be very very slow while attempting to 
