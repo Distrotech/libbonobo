@@ -206,7 +206,7 @@ bonobo_ ## name ## _get_type (void)						\
 	static GType type = 0;							\
 	if (!type)								\
 		type = bonobo_corba_object_type_register_static (		\
-			## typename, ## tc, is_bonobo_unknown);			\
+			## typename, ## tc, ## is_bonobo_unknown);		\
 	return type;								\
 }
 
