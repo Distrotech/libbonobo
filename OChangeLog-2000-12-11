@@ -1,5 +1,18 @@
 2000-10-12  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-win.c (sync_generic_widgets): remove a hack
+	breaking placeholder's separators: apologies.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_get_tree),
+	(bonobo_ui_component_set_translate): fix leaks.
+
+	* bonobo/bonobo-ui-xml.c (dump_internals): fixup printf.
+
+	* bonobo/bonobo-ui-toolbar-popup-item.c: add missing comma
+	causing string concat and IPR.
+
+2000-10-12  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (info_dump_fn): use the node; check the
 	widget's associated node for parity, beef up debugging power.
 	(widget_set_node): make more clear & efficient.
