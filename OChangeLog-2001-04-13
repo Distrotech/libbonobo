@@ -1,3 +1,16 @@
+2000-10-21  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/app.c (main): add verb removal test.
+
+	* bonobo/bonobo-ui-component.c (remove_verb): impl.
+	(bonobo_ui_component_remove_verb_by_data),
+	(bonobo_ui_component_remove_verb_by_func), 
+	(bonobo_ui_component_remove_verb): impl.
+	(bonobo_ui_component_remove_listener)
+	(bonobo_ui_component_remove_listener_by_func),
+	(bonobo_ui_component_remove_listener_by_data), 
+	(remove_listener): impl.
+
 2000-10-20  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	* bonobo.spec.in:references to non-existent documentation
