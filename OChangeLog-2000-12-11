@@ -1,5 +1,8 @@
 1999-07-31  Miguel de Icaza  <miguel@gnu.org>
 
+	* bonobo/test-storage.c (main): Improved error checking;  Use a
+	named file on the command line.
+
 	* storage-modules/gnome-storage-fs.c (gnome_storage_fs_open): Use
 	storage flags here too.
 

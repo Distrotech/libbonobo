@@ -235,9 +235,10 @@ load_storage_driver (const char *driver_name)
 		return NULL;
 	}
 	
-	driver = (driver_open_t) g_module_symbol (m, "gnome_storage_driver_open", NULL);
-
-	return driver;
+	if (g_module_symbol (m, "gnome_storage_driver_open", &driver))
+		return driver;
+	else
+		return NULL;
 }
 
 /**
@@ -263,11 +264,11 @@ gnome_storage_open (const char *driver, const char *path, gint flags, gint mode)
 	
 	if (strcmp (driver, "fs") == 0){
 		if (fs_driver == NULL)
-			fs_driver = load_storage_driver ("storagefs");
+			fs_driver = load_storage_driver ("storage_fs");
 		driver_ptr = &fs_driver;
 	} else if (strcmp (driver, "efs") == 0){
 		if (efs_driver == NULL)
-			efs_driver = load_storage_driver ("storageefs");
+			efs_driver = load_storage_driver ("storage_efs");
 		driver_ptr = &efs_driver;
 	} else {
 		g_warning ("Unknown driver `%s' specified", driver);
