@@ -1,3 +1,17 @@
+2002-09-24  Padraig O'Briain <padraig.obriain@sun.com>
+
+	* bonobo/bonobo-main.c: 
+	Change bonobo_inited from boolean to int.
+	(bonobo_is_initialized): Update to take account that bonobo_inited
+	is not an int.
+	(bonobo_debug_shutdown): Do shutdown only if bonobo_inited is 1
+	(bonobo_init_full): Increment bonobo_inited each time the function
+	is called.
+
+	These changes allow bonobo_init() to be called many times and objects
+	will be destroyed only after the same number of calls to 
+	bonobo_debug_shutdown() are made. This fixes bug 92864.
+	
 2002-09-23  Michael Meeks  <michael@ximian.com>
 
 	* tests/Makefile.am (LDADD): add LIBBONOBO_LIBS.

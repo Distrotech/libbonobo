@@ -65,7 +65,7 @@ bonobo_poa_manager (void)
 	return __bonobo_poa_manager;
 }
 
-static gboolean bonobo_inited = FALSE;
+static gint bonobo_inited = 0;
 
 /**
  * bonobo_is_initialized:
@@ -79,7 +79,7 @@ static gboolean bonobo_inited = FALSE;
 gboolean
 bonobo_is_initialized (void)
 {
-	return bonobo_inited;
+	return (bonobo_inited > 0);
 }
 
 /**
@@ -97,10 +97,10 @@ bonobo_debug_shutdown (void)
 {
 	int retval = 0;
 
-	if (bonobo_inited) {
+	if (bonobo_inited == 1) {
 		CORBA_Environment ev;
 
-		bonobo_inited = FALSE;
+		bonobo_inited--;
 
 		CORBA_exception_init (&ev);
 
@@ -125,7 +125,8 @@ bonobo_debug_shutdown (void)
 			retval = 1;
 
 		__bonobo_orb = CORBA_OBJECT_NIL;
-		
+	} else if (bonobo_inited > 1) {
+		bonobo_inited--;		
 	} else /* shutdown when we didn't need to error */
 		retval = 1;
 
@@ -153,10 +154,9 @@ bonobo_init_full (int *argc, char **argv,
 {
 	CORBA_Environment ev;
 
-	if (bonobo_inited)
+	bonobo_inited++;
+	if (bonobo_inited > 1)
 		return TRUE;
-	else
-		bonobo_inited = TRUE;
 
 	/* Init neccessary bits */
 	g_type_init_with_debug_flags (0);
