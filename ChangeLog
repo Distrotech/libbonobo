@@ -1,3 +1,8 @@
+2003-04-07  Carlos Perelló Marín <carlos@gome.org>
+
+	* configure.in (ALL_LINGUAS): Added ga, hi, wa and yi from
+	bonobo-activation.
+
 2003-04-07  Michael Meeks  <michael@ximian.com>
 
 	* Makefile.am: install / carry b-a-config.xml
