@@ -1,3 +1,13 @@
+2000-04-29  Kjartan Maraas  <kmaraas@online.no>
+
+	* bonobo/bonobo-uih-menu.c: Added #include <config.h>
+	* bonobo/bonobo-uih-toolbar.c: Same here. This makes the menus
+	and toolbars i18n'able.
+	* gshell/gshell.c: Same here too.
+	* gshell/inout.c: Likewise.
+	* gshell/menu.c: Likewise.
+	* tools/bonobrowser/*.c: Marked strings for translation.
+				
 2000-04-27  Mathieu Lacage <mathieu@gnu.org>
 
 	* bonobo/bonobo-wrapper.c: bonobo_wrapper_realize.
