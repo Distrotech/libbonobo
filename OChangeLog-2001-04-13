@@ -1,3 +1,16 @@
+2000-12-04  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-widget.c: (bonobo_widget_launch_component):
+	Michael checked in an uncompilable copy of this with his
+	last changes, perhaps accidentally. I changed it enough to
+	compile and link, though it still gives a warning so I'm
+	pretty sure this function isn't correct.
+
+	Added #inculde for bonobo/bonobo-exception.h so BONOBO_EX
+	is found; added #include for bonobo/bonobo-moniker-util.h
+	so bonobo_get_object () is found; removed unfinished var
+	declaration "Bonobo_Unknown *".
+
 2000-12-04  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-embeddable.c (impl_Bonobo_Embeddable_createView): 
