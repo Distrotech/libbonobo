@@ -1,3 +1,14 @@
+2001-07-09  Michael Meeks  <michael@ximian.com>
+
+	* monikers/Makefile.am (libmoniker_std_la_SOURCES): remove
+	bonobo-moniker-extender-file, bonobo-moniker-file: now in
+	libgnome where they have a gnome-vfs dependency.
+
+	* monikers/bonobo-moniker-std.c (bonobo_std_moniker_factory):
+	remove file bits & re-enable query moniker.
+
+	* monikers/bonobo-moniker-std.h: ditto.
+
 2001-07-06  Michael Meeks  <michael@ximian.com>
 
 	* tests/test-properties-client.c (create_bag_client): add call to

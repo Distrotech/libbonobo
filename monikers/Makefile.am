@@ -33,9 +33,7 @@ monikerdir = $(libdir)/bonobo/monikers
 moniker_LTLIBRARIES = libmoniker_std.la
 
 libmoniker_std_la_SOURCES =			\
-	bonobo-moniker-extender-file.c  	\
 	bonobo-moniker-extender-stream.c  	\
-	bonobo-moniker-file.c			\
 	bonobo-moniker-item.c			\
 	bonobo-moniker-new.c			\
 	bonobo-moniker-oaf.c			\
