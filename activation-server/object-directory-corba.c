@@ -98,16 +98,16 @@ static PortableServer_ServantBase__epv impl_OAF_ObjectDirectory_base_epv = {
 };
 static POA_OAF_ObjectDirectory__epv impl_OAF_ObjectDirectory_epv = {
 	NULL,			/* _private */
-	&impl_OAF_ObjectDirectory__get_servers,
-	&impl_OAF_ObjectDirectory_get_active_servers,
-	&impl_OAF_ObjectDirectory__get_username,
-	&impl_OAF_ObjectDirectory__get_hostID,
-	&impl_OAF_ObjectDirectory__get_domain,
-	&impl_OAF_ObjectDirectory_activate,
-	&impl_OAF_ObjectDirectory_lock,
-	&impl_OAF_ObjectDirectory_unlock,
-	&impl_OAF_ObjectDirectory_register,
-	&impl_OAF_ObjectDirectory_unregister
+	(gpointer) &impl_OAF_ObjectDirectory__get_servers,
+	(gpointer) &impl_OAF_ObjectDirectory_get_active_servers,
+	(gpointer) &impl_OAF_ObjectDirectory__get_username,
+	(gpointer) &impl_OAF_ObjectDirectory__get_hostID,
+	(gpointer) &impl_OAF_ObjectDirectory__get_domain,
+	(gpointer) &impl_OAF_ObjectDirectory_activate,
+	(gpointer) &impl_OAF_ObjectDirectory_lock,
+	(gpointer) &impl_OAF_ObjectDirectory_unlock,
+	(gpointer) &impl_OAF_ObjectDirectory_register,
+	(gpointer) &impl_OAF_ObjectDirectory_unregister
 };
 
 /*** vepv structures ***/
@@ -230,7 +230,7 @@ update_registry (impl_POA_OAF_ObjectDirectory *servant)
                                              servant->attr_domain);
                 servant->time_list_changed = time (NULL);
 
-#if defined(OAF_DEBUG) && 0
+#if defined(OAF_DEBUG)
                 od_dump_list (servant);
 #endif
         }

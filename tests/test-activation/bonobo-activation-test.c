@@ -6,7 +6,7 @@
 
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
-char *
+static char *
 oaf_exception_id (CORBA_Environment *ev)
 {
         if (ev->_major == CORBA_USER_EXCEPTION) {
@@ -23,7 +23,7 @@ oaf_exception_id (CORBA_Environment *ev)
                 return CORBA_exception_id (ev);
 }
 
-gboolean
+static gboolean
 test_oafd (CORBA_Environment *ev, const char *type)
 {
         CORBA_Object ns;
@@ -46,7 +46,7 @@ test_oafd (CORBA_Environment *ev, const char *type)
         return TRUE;
 }
 
-gboolean
+static gboolean
 test_object (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 {
 	if (CORBA_Object_is_nil (obj, ev)) {
@@ -64,7 +64,7 @@ test_object (CORBA_Object obj, CORBA_Environment *ev, const char *type)
         return FALSE;
 }
 
-void
+static void
 test_empty (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 {
         Empty_doNothing (obj, ev);

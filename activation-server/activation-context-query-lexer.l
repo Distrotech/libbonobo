@@ -20,6 +20,8 @@ the beginning.
 static char* putSymbol( char *_name );
 static char* putString( char *_name );
 static int yywrap(void);
+int yylex (void);
+void initFlex( const char *_code );
 
 %}
 

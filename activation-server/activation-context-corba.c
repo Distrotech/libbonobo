@@ -253,13 +253,13 @@ static PortableServer_ServantBase__epv impl_OAF_ActivationContext_base_epv = {
 };
 static POA_OAF_ActivationContext__epv impl_OAF_ActivationContext_epv = {
 	NULL,			/* _private */
-	&impl_OAF_ActivationContext__get_directories,
-	&impl_OAF_ActivationContext_add_directory,
-	&impl_OAF_ActivationContext_remove_directory,
-	&impl_OAF_ActivationContext_activate,
-	&impl_OAF_ActivationContext__get_servers,
-	&impl_OAF_ActivationContext_query,
-	&impl_OAF_ActivationContext_activate_from_id
+	(gpointer) &impl_OAF_ActivationContext__get_directories,
+	(gpointer) &impl_OAF_ActivationContext_add_directory,
+	(gpointer) &impl_OAF_ActivationContext_remove_directory,
+	(gpointer) &impl_OAF_ActivationContext_activate,
+	(gpointer) &impl_OAF_ActivationContext__get_servers,
+	(gpointer) &impl_OAF_ActivationContext_query,
+	(gpointer) &impl_OAF_ActivationContext_activate_from_id
 };
 
 /*** vepv structures ***/
@@ -822,10 +822,7 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 					     CORBA_Environment * ev)
 {
 	OAF_ActivationResult *retval;
-	GSList *cur;
 	OAFActivationInfo *ainfo;
-	ChildODInfo *child = NULL;
-	OAF_ServerInfo *si;
 	char *context_username;
 	char *context_hostname;
 	char *context_domain;
@@ -844,7 +841,6 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 
 	retval = OAF_ActivationResult__alloc ();
 	retval->res._d = OAF_RESULT_NONE;
-
 
         if (strncmp ("OAFIID:", aid, 7) == 0) {
                 tmp_aid = g_strconcat ("OAFAID:[", aid, "]", NULL);

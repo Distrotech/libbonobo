@@ -60,6 +60,10 @@ OAFPlugin;
 void oaf_plugin_use (PortableServer_Servant servant, gpointer impl_ptr);
 void oaf_plugin_unuse (gpointer impl_ptr);
 
+CORBA_Object oaf_server_activate_shlib (OAF_ActivationResult * sh, 
+                                        CORBA_Environment * ev);
+
+
 OAF_ServerInfoList *oaf_query (const char *requirements,
 			       char *const *selection_order,
 			       CORBA_Environment * ev);

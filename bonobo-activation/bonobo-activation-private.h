@@ -22,3 +22,4 @@ int oaf_ior_fd_get (void);
 CORBA_Object oaf_activation_context_get (void);
 
 #endif
+
