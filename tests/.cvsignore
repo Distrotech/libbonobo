@@ -20,4 +20,8 @@ Test_Generic_Factory.server
 generic-factory
 test-generic-factory
 test-generic-factory.sh
-
+clean-warnings.sed
+generic-factory.output
+test-main-loop
+test-thread
+test-uniqapp

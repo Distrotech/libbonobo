@@ -1179,9 +1179,8 @@ bonobo_object_directory_re_check_fn (const Bonobo_ActivationEnvironment *environ
 void
 bonobo_object_directory_reload (void)
 {
-#ifdef BONOBO_ACTIVATION_DEBUG
-        g_print ("reloading our object directory!\n");
-#endif
+        g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, "reloading our object directory!");
+
         update_registry (main_dir, TRUE);
 }
 

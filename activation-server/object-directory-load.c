@@ -150,8 +150,7 @@ parse_oaf_server_attrs (ParseInfo      *info,
         error = od_validate (iid, type, location);
         
         if (error != NULL) {
-                /* FIXME: should syslog */
-                g_print ("%s\n", error);
+                g_warning ("%s", error);
                 
                 g_free (error);
 
@@ -279,9 +278,9 @@ parse_oaf_attribute (ParseInfo     *info,
                 return;
         
         if (name[0] == '_')
-                g_error ("%s is an invalid property name "
-                         "- property names beginning with '_' are reserved",
-                         name);
+                g_critical ("%s is an invalid property name "
+                            "- property names beginning with '_' are reserved",
+                            name);
         
         info->cur_prop = ORBit_small_alloc (TC_Bonobo_ActivationProperty);
         info->cur_prop->name = CORBA_string_dup (name);
@@ -586,7 +585,7 @@ od_load_context (xmlParserCtxt *ctxt,
         parse_info_free (info);
 
         if (ret < 0) {
-                /* FIXME: syslog the error */
+                g_warning (_("Could not parse badly formed XML document %s"), ctxt->input->filename);
                 return;
         }
 }
@@ -639,9 +638,7 @@ od_load_directory (const char *directory,
 	struct dirent *directory_entry;
         char *pathname;
 
-        
-        /* FIXME: Should be a syslog message. */
-        /* g_print (_("Trying dir %s\n"), directory); */
+        g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, _("Trying dir %s"), directory);
 
         directory_handle = opendir (directory);
 

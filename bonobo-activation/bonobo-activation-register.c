@@ -51,7 +51,8 @@ bonobo_activation_timeout_reg_check_set (gboolean on)
 gboolean
 bonobo_activation_timeout_reg_check (gpointer data)
 {
-        if (!check_registration)
+        if (!check_registration ||
+            g_getenv ("BONOBO_ACTIVATION_NO_TIMEOUT"))
                 return FALSE;
 
         if (need_ior_printout) {

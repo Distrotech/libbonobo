@@ -16,6 +16,7 @@ INCLUDES=					\
 	$(SERVER_CFLAGS)			\
 	-DSERVER_CONFDIR=\"$(sysconfdir)\"	\
 	-DG_DISABLE_DEPRECATED			\
+	-DG_LOG_DOMAIN=\"Bonobo-Activation-Server\" \
 	$(NULL)
 
 bonobo_activation_server_SOURCES=				\

@@ -15,3 +15,4 @@ bonobo-activation-server
 stamp-parser
 y.output
 *-imodule.c
+test-performance

@@ -1,3 +1,28 @@
+2004-01-15  Michael Meeks  <michael@ximian.com>
+
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_timeout_reg_check): add env. check for
+	BONOBO_ACTIVATION_NO_TIMEOUT to disable the timeout.
+
+2004-01-12  Michael Terry  <mterry@fastmail.fm>
+
+	* activation-server/Makefile.am: Define G_LOG_DOMAIN.
+
+	* activation-server/activation-server-main.c (log_handler): New
+	function to handle g_log family calls which sends the message to
+	syslog.  Inspired by Havoc Pennington's GEdit debug code.
+	(redirect_output): Change to use new output_debug global setting.
+	(main): Setup syslog and g_log handler.  Initialize output_debug
+	based on environment variable BONOBO_ACTIVATION_DEBUG_OUTPUT.  Parts
+	of bug 131045.
+
+	* activation-server/object-directory-corba.c
+	(bonobo_object_directory_reload): Fix a debug output to use g_log.
+
+	* activation-server/object-directory-load.c (parse_oaf_server_attrs),
+	(parse_oaf_attribute), (od_load_context), (od_load_directory): Fix up
+	some output calls to use g_log family correctly.
+
 2004-01-14  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/generic-factory.c (generic_factory_cb): take some
@@ -7,7 +32,7 @@
 	BONOBO_ACTIVATION_DEBUG_OUTPUT env var to suppress b-a-s errors,
 	instead of filtering the factory output through grep.
 
-2004-01-14  The Written Word  <bugzilla-gnome@thewrittenword.com>
+2004-01-14  Albert Chin-A-Young  <china@thewrittenword.com>
 
 	* bonobo/bonobo-moniker-util.c (async_activation_cb) 
 	(bonobo_moniker_resolve_async): fix for AIX.

@@ -45,6 +45,7 @@
 #include <unistd.h>
 #include <locale.h>
 #include <string.h>
+#include <syslog.h>
 
 #include <libxml/parser.h>
 
@@ -57,6 +58,7 @@ static char *od_source_dir = NULL;
 #ifdef BONOBO_ACTIVATION_DEBUG
 static char *ac_evaluate = NULL;
 static gboolean server_reg = FALSE;
+static gboolean output_debug = FALSE;
 #endif
 static int server_ac = 0, ior_fd = -1;
 
@@ -138,24 +140,70 @@ build_src_dir (void)
         return real_od_source_dir;
 }
 
+static void
+log_handler (const gchar *log_domain,
+             GLogLevelFlags log_level,
+             const gchar *message,
+             gpointer user_data)
+{
+	int syslog_priority;
+	gchar *converted_message;
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+	if (log_level & G_LOG_LEVEL_DEBUG && !output_debug)
+		return;
+#else
+	if (log_level & G_LOG_LEVEL_DEBUG)
+		return;
+#endif
+
+	/* syslog uses reversed meaning of LEVEL_ERROR and LEVEL_CRITICAL */
+	if (log_level & G_LOG_LEVEL_ERROR)
+		syslog_priority = LOG_CRIT;
+	else if (log_level & G_LOG_LEVEL_CRITICAL)
+		syslog_priority = LOG_ERR;
+	else if (log_level & G_LOG_LEVEL_WARNING)
+		syslog_priority = LOG_WARNING;
+	else if (log_level & G_LOG_LEVEL_MESSAGE)
+		syslog_priority = LOG_NOTICE;
+	else if (log_level & G_LOG_LEVEL_INFO)
+		syslog_priority = LOG_INFO;
+	else if (log_level & G_LOG_LEVEL_DEBUG)
+		syslog_priority = LOG_DEBUG;
+	else
+		syslog_priority = LOG_NOTICE;
+
+	converted_message = g_locale_from_utf8 (message, -1, NULL, NULL, NULL);
+	if (converted_message)
+		message = converted_message;
+
+	syslog (syslog_priority, "%s", message);
+
+	if (log_level & G_LOG_FLAG_FATAL) {
+		fprintf (stderr, "%s", message);
+		_exit (1);
+	}
+
+	g_free (converted_message);
+}
+
 static int
 redirect_output (int ior_fd)
 {
-        int dev_null_fd;
-        const char *debug_output;
+        int dev_null_fd = -1;
 
-        debug_output = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
+#ifdef BONOBO_ACTIVATION_DEBUG
+	if (output_debug)
+		return dev_null_fd;
+#endif
 
-        dev_null_fd = -1;
-        if (debug_output == NULL || strlen (debug_output) == 0) {
-                dev_null_fd = open ("/dev/null", O_RDWR);
-		if (ior_fd != 0)
-                        dup2 (dev_null_fd, 0);
-		if (ior_fd != 1)
-                        dup2 (dev_null_fd, 1);
-		if (ior_fd != 2)
-                        dup2 (dev_null_fd, 2);
-        }
+	dev_null_fd = open ("/dev/null", O_RDWR);
+	if (ior_fd != 0)
+		dup2 (dev_null_fd, 0);
+	if (ior_fd != 1)
+		dup2 (dev_null_fd, 1);
+	if (ior_fd != 2)
+		dup2 (dev_null_fd, 2);
 
         return dev_null_fd;
 }
@@ -226,6 +274,8 @@ main (int argc, char *argv[])
         int                           dev_null_fd;
         struct sigaction              sa;
         GString                      *src_dir;
+	gchar                        *syslog_ident;
+	gchar                        *debug_output_env;
 
         /*
          *    Become process group leader, detach from controlling
@@ -253,6 +303,23 @@ main (int argc, char *argv[])
 #if 0
         while (!g_file_test ("/tmp/orbit-go", G_FILE_TEST_EXISTS))
                 sleep (1);
+#endif
+
+	syslog_ident = g_strdup_printf ("bonobo-activation-server (%s-%u)", g_get_user_name (), (guint) getpid ());
+
+	/* openlog does not copy ident string, so we free it on shutdown */
+	openlog (syslog_ident, 0, LOG_USER);
+
+	g_log_set_fatal_mask (G_LOG_DOMAIN, G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL);
+	g_log_set_handler (G_LOG_DOMAIN,
+                           G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION,
+                           log_handler,
+                           NULL);
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+	debug_output_env = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
+	if (debug_output_env && debug_output_env[0] != '\0')
+		output_debug = TRUE;
 #endif
 
         dev_null_fd = redirect_output (ior_fd);
@@ -304,9 +371,9 @@ main (int argc, char *argv[])
 		CORBA_Object_release (existing, NULL);
 
         if (ior_fd < 0 && !server_ac)
-                g_error ("\n\n-- \nThe bonobo-activation-server must be forked by\n"
-                         "libbonobo-activation, and cannot be run itself.\n"
-                         "This is due to us doing client side locking.\n-- \n");
+                g_critical ("\n\n-- \nThe bonobo-activation-server must be forked by\n"
+                            "libbonobo-activation, and cannot be run itself.\n"
+                            "This is due to us doing client side locking.\n-- \n");
 
         /*
          *     It is no longer useful at all to be a pure
@@ -329,6 +396,9 @@ main (int argc, char *argv[])
 
         CORBA_Object_release ((CORBA_Object) poa_manager, ev);
         CORBA_Object_release ((CORBA_Object) root_poa, ev);
+
+	closelog ();
+	g_free (syslog_ident);
 
 	return !bonobo_debug_shutdown ();
 }
