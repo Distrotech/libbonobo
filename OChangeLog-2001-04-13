@@ -1,5 +1,8 @@
 2000-12-17  Miguel de Icaza  <miguel@helixcode.com>
 
+	* bonobo/bonobo-moniker-util.c: Sync the name with the actual
+	OAFIDD of the HTTP moniker.
+
 	* monikers/Makefile.am (bin_PROGRAMS): Install moniker test.
 
 2000-12-16  Dietmar Maurer  <dietmar@maurer-it.com>

@@ -22,7 +22,7 @@ struct {
 	{ "OAFIID:", "OAFIID:Bonobo_Moniker_Oaf"   },
 	{ "OAFAID:", "OAFIID:Bonobo_Moniker_Oaf"   },
 	{ "new:",    "OAFIID:Bonobo_Moniker_New"   },
-	{ "http:",   "OAFIID:Bonobo_Moniker_HTTP"  },
+	{ "http:",   "OAFIID:Bonobo_Moniker_http"  },
 /*
 	{ "queue:", "" },
 */
