@@ -29,24 +29,16 @@ static GObjectClass *parent_class = NULL;
 /*
  * Internal data structures.
  */
+struct _BonoboPropertyPrivate {
+	GClosure             *get_prop;
+	GClosure             *set_prop;	
+};
+	
 struct _BonoboPropertyBagPrivate {
 	GHashTable *prop_hash;
 
 	GClosure   *get_prop;
 	GClosure   *set_prop;
-};
-
-struct _BonoboProperty {
-	char		     *name;
-	int                   idx;
-	BonoboArgType         type;
-	BonoboArg            *default_value;
-	char		     *doctitle;
-	char		     *docstring;
-	Bonobo_PropertyFlags  flags;
-
-	GClosure             *get_prop;
-	GClosure             *set_prop;	
 };
 
 static void
@@ -166,14 +158,14 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 
 	prop = g_hash_table_lookup (pb->priv->prop_hash, key);
 
-	if (!prop || !prop->get_prop) {
+	if (!prop || !prop->priv->get_prop) {
 		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
 		return NULL;
 	}
 
 	arg = bonobo_arg_new (prop->type);
 
-	bonobo_closure_invoke (prop->get_prop,
+	bonobo_closure_invoke (prop->priv->get_prop,
 			       NULL,
 			       BONOBO_PROPERTY_BAG_TYPE, pb,
 			       BONOBO_TYPE_CORBA_ANY,    arg,
@@ -214,7 +206,7 @@ impl_Bonobo_PropertyBag_getValues (PortableServer_Servant  servant,
 
 		arg = bonobo_arg_new (prop->type);
 
-		bonobo_closure_invoke (prop->get_prop,
+		bonobo_closure_invoke (prop->priv->get_prop,
 				       NULL,
 				       BONOBO_PROPERTY_BAG_TYPE, pb,
 				       BONOBO_TYPE_CORBA_ANY,    arg,
@@ -242,7 +234,7 @@ impl_Bonobo_PropertyBag_setValue (PortableServer_Servant  servant,
 
 	prop = g_hash_table_lookup (pb->priv->prop_hash, key);
 
-	if (!prop || !prop->set_prop) {
+	if (!prop || !prop->priv->set_prop) {
 		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
 		return;
 	}
@@ -252,7 +244,7 @@ impl_Bonobo_PropertyBag_setValue (PortableServer_Servant  servant,
 		return;
 	}
 
-	bonobo_closure_invoke (prop->set_prop,
+	bonobo_closure_invoke (prop->priv->set_prop,
 			       NULL,
 			       BONOBO_PROPERTY_BAG_TYPE, pb,
 			       BONOBO_TYPE_CORBA_ANY,    value,
@@ -276,7 +268,7 @@ impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
 		prop = g_hash_table_lookup (pb->priv->prop_hash, 
 					    set->_buffer [i].name);
 		
-		if (!prop || !prop->set_prop) {
+		if (!prop || !prop->priv->set_prop) {
 			bonobo_exception_set (ev, 
 			        ex_Bonobo_PropertyBag_NotFound);
 			return;
@@ -295,7 +287,7 @@ impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
 		prop = g_hash_table_lookup (pb->priv->prop_hash, 
 					    set->_buffer [i].name);
 		
-		bonobo_closure_invoke (prop->set_prop,
+		bonobo_closure_invoke (prop->priv->set_prop,
 				       NULL,
 				       BONOBO_PROPERTY_BAG_TYPE, pb,
 				       BONOBO_TYPE_CORBA_ANY,   &set->_buffer [i].value,
@@ -498,9 +490,10 @@ bonobo_property_bag_foreach_remove_prop (gpointer key,
 	if (prop->doctitle)
 		g_free (prop->doctitle);
 
-	g_closure_unref (prop->get_prop);
-	g_closure_unref (prop->set_prop);
-	
+	g_closure_unref (prop->priv->get_prop);
+	g_closure_unref (prop->priv->set_prop);
+
+	g_free (prop->priv);
 	g_free (prop);
 
 	return TRUE;
@@ -584,15 +577,17 @@ bonobo_property_bag_add_full (BonoboPropertyBag    *pb,
 	
 	prop = g_new0 (BonoboProperty, 1);
 
-	prop->name          = g_strdup (name);
-	prop->idx           = idx;
-	prop->type          = type;
-	prop->flags         = flags;
-	prop->get_prop      = bonobo_closure_store (get_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
-	prop->set_prop      = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
-	prop->docstring     = g_strdup (docstring);
-	prop->doctitle      = g_strdup (doctitle);
-		
+	prop->name           = g_strdup (name);
+	prop->idx            = idx;
+	prop->type           = type;
+	prop->flags          = flags;
+	prop->docstring      = g_strdup (docstring);
+	prop->doctitle       = g_strdup (doctitle);
+
+	prop->priv = g_new0 (BonoboPropertyPrivate, 1);
+	prop->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
+	prop->priv->set_prop = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
+
 	if (default_value)
 		prop->default_value = bonobo_arg_copy (default_value);
 

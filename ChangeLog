@@ -1,5 +1,10 @@
 2001-07-30  ERDI Gergo  <cactus@cactus.rulez.org>
 
+	* bonobo/bonobo-property-bag.h: Made some BonoboProperty fields
+	public again
+
+	* tests/test-properties-server.c: updated
+
 	* configure.in: Bumped version number because of new GClosure APIs
 
 	* bonobo/bonoob-item-handler.c: finalization fixes

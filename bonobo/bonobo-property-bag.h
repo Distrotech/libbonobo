@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * bonobo-property-bag.h: property bag object implementation.
  *
@@ -27,6 +28,7 @@ typedef struct _BonoboPropertyBagPrivate BonoboPropertyBagPrivate;
 typedef struct _BonoboPropertyBag        BonoboPropertyBag;
 
 typedef struct _BonoboProperty           BonoboProperty;
+typedef struct _BonoboPropertyPrivate    BonoboPropertyPrivate;
 
 typedef void (*BonoboPropertyGetFn) (BonoboPropertyBag *bag,
 				     BonoboArg         *arg,
@@ -38,6 +40,18 @@ typedef void (*BonoboPropertySetFn) (BonoboPropertyBag *bag,
 				     guint              arg_id,
 				     CORBA_Environment *ev,
 				     gpointer           user_data);
+
+struct _BonoboProperty {
+	char		      *name;
+	int                    idx;
+	BonoboArgType          type;
+	BonoboArg             *default_value;
+	char		      *doctitle;
+	char		      *docstring;
+	Bonobo_PropertyFlags   flags;
+
+	BonoboPropertyPrivate *priv;
+};
 
 struct _BonoboPropertyBag {
 	BonoboObject             parent;

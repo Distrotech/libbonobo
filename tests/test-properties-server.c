@@ -185,8 +185,7 @@ create_bag (void)
 	pd->s = "Hello world";
 
 	/* Create the property bag. */
-	pb = bonobo_property_bag_new (g_cclosure_new (G_CALLBACK (get_prop), pd, NULL),
-				      g_cclosure_new (G_CALLBACK (set_prop), pd, NULL));
+	pb = bonobo_property_bag_new (get_prop, set_prop, pd);
 
 	dstr = "Testing 1 2 3";
 	/* Add properties */
