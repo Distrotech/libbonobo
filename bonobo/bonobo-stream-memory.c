@@ -70,7 +70,6 @@ mem_read (GnomeStream *stream, CORBA_long count,
 	  CORBA_Environment *ev)
 {
 	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
-	long len;
 
 	if (smem->pos + count > smem->size)
 		count = smem->size - smem->pos;
@@ -192,7 +191,6 @@ static GNOME_Stream
 create_gnome_stream_mem (GnomeObject *object)
 {
 	POA_GNOME_Stream *servant;
-	CORBA_Object o;
 
 	servant = (POA_GNOME_Stream *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_stream_vepv;

@@ -90,7 +90,7 @@ interface ViewFrame : GNOME::Unknown {
 };
 
 /* Equivalent to IOleObject */
-interface BonoboObject : GNOME::Unknown {
+interface Embeddable : GNOME::Unknown {
 
 	/**
 	 * set_client_site:
@@ -198,7 +198,7 @@ interface BonoboObject : GNOME::Unknown {
 
 };
 
-interface InPlaceBonoboObject : BonoboObject {
+interface InPlaceEmbeddable : Embeddable {
 	/**
 	 * deactivate:
 	 *
@@ -250,8 +250,8 @@ interface InPlaceBonoboObject : BonoboObject {
 
 };
 
-interface BonoboObjectFactory : GNOME::GenericFactory {
-	BonoboObject create_path (in string path);
+interface EmbeddableFactory : GNOME::GenericFactory {
+	Embeddable create_path (in string path);
 };
 
 };

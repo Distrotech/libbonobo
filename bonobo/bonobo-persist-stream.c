@@ -205,7 +205,6 @@ static GNOME_PersistStream
 create_gnome_persist_stream (GnomeObject *object)
 {
 	POA_GNOME_PersistStream *servant;
-	CORBA_Object o;
 
 	servant = (POA_GNOME_PersistStream *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_persist_stream_vepv;

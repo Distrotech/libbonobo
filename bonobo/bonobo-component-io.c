@@ -14,7 +14,7 @@ gnome_embeddable_load (GnomeStorage *storage, const char *interface, GnomeClient
 	 */
 
 	/*
-	 * 3. Call BonoboObject::SetClientSite to inform about the client
+	 * 3. Call Embeddable::SetClientSite to inform about the client
 	 * site
 	 */
 

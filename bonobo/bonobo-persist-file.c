@@ -222,7 +222,6 @@ static GNOME_PersistFile
 create_gnome_persist_file (GnomeObject *object)
 {
 	POA_GNOME_PersistFile *servant;
-	CORBA_Object o;
 
 	servant = (POA_GNOME_PersistFile *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_persist_file_vepv;
