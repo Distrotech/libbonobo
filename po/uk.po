@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "POT-Creation-Date: 2002-10-18 12:13+0100\n"
-"PO-Revision-Date: 2002-06-03 09:47+0200\n"
+"PO-Revision-Date: 2002-11-06 08:50--500\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -149,8 +149,8 @@ msgstr "Помилка перевірки на помилку; без вийня
 msgid "General activation error with no description"
 msgstr "Загальна помилка активації без опису"
 
-#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
-#, fuzzy
+#: bonobo/bonobo-generic-factory.h:74
+#: bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "Не вдалося ініціалізувати Bonobo"
 
@@ -233,3 +233,4 @@ msgstr "Не вдалося створити екземпляр зразка к�
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Сталася виключна ситуація \"%s\""
+
