@@ -201,7 +201,6 @@ bonobo_property_bag_client_get_property (Bonobo_PropertyBag       pb,
 		real_ev = &tmp_ev;
 	}
 
-	g_return_val_if_fail (ev != NULL, NULL);
 	g_return_val_if_fail (pb != CORBA_OBJECT_NIL, NULL);
 
 	prop = Bonobo_PropertyBag_get_property (pb, property_name, ev);
@@ -581,7 +580,6 @@ bonobo_property_bag_client_set_value_string (Bonobo_PropertyBag       pb,
 {
 	BonoboArg *arg;
 
-	g_return_if_fail (ev != NULL);
 	g_return_if_fail (propname != NULL);
 	g_return_if_fail (pb != CORBA_OBJECT_NIL);
 
@@ -604,22 +602,41 @@ bonobo_property_bag_client_get_docstring (Bonobo_PropertyBag       pb,
 {
 	Bonobo_Property prop;
 	CORBA_char     *docstr;
+	CORBA_Environment *real_ev, tmp_ev;
 
-	g_return_val_if_fail (ev != NULL, NULL);
 	g_return_val_if_fail (propname != NULL, NULL);
 	g_return_val_if_fail (pb != CORBA_OBJECT_NIL, NULL);
 
-	prop = bonobo_property_bag_client_get_property (pb, propname, ev);
-	g_return_val_if_fail (prop != CORBA_OBJECT_NIL, NULL);
+	if (ev)
+		real_ev = ev;
+	else {
+		CORBA_exception_init (&tmp_ev);
+		real_ev = &tmp_ev;
+	}
 
-	docstr = Bonobo_Property_get_doc_string (prop, ev);
+	prop = bonobo_property_bag_client_get_property (pb, propname, real_ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION) {
-		g_warning ("bonobo_property_bag_client_get_doc_string: Exception getting doc string!");
-
-		CORBA_Object_release (prop, ev);
+	if (prop == CORBA_OBJECT_NIL) {
+		if (!ev) {
+			CORBA_exception_free (&tmp_ev);
+			g_warning ("prop == NIL");
+		}
 		return NULL;
 	}
+
+	docstr = Bonobo_Property_get_doc_string (prop, real_ev);
+
+	if (real_ev->_major != CORBA_NO_EXCEPTION) {
+		if (!ev)
+			g_warning ("bonobo_property_bag_client_get_doc_string: "
+				   "Exception getting doc string!");
+		docstr = NULL;
+	}
+
+	CORBA_Object_release (prop, real_ev);
+
+	if (!ev)
+		CORBA_exception_free (&tmp_ev);
 
 	return (char *) docstr;
 }
@@ -631,24 +648,39 @@ bonobo_property_bag_client_get_flags (Bonobo_PropertyBag       pb,
 {
 	BonoboPropertyFlags flags;
 	Bonobo_Property     prop;
+	CORBA_Environment *real_ev, tmp_ev;
 
-	g_return_val_if_fail (ev != NULL, 0);
 	g_return_val_if_fail (pb != CORBA_OBJECT_NIL, 0);
 	g_return_val_if_fail (propname != NULL, 0);
 
-	prop = bonobo_property_bag_client_get_property (pb, propname, ev);
-	g_return_val_if_fail (prop != CORBA_OBJECT_NIL, 0);
+	if (ev)
+		real_ev = ev;
+	else {
+		CORBA_exception_init (&tmp_ev);
+		real_ev = &tmp_ev;
+	}
 
-	flags = Bonobo_Property_get_flags (prop, ev);
-	if (ev->_major != CORBA_NO_EXCEPTION)
-		goto flags_error;
+	prop = bonobo_property_bag_client_get_property (pb, propname, real_ev);
+
+	if (prop == CORBA_OBJECT_NIL) {
+		if (!ev) {
+			CORBA_exception_free (&tmp_ev);
+			g_warning ("prop == NIL");
+		}
+		return 0;
+	}
+
+	flags = Bonobo_Property_get_flags (prop, real_ev);
+
+	if (real_ev->_major != CORBA_NO_EXCEPTION)
+		flags = 0;
+
+	CORBA_Object_release (prop, real_ev);
+
+	if (!ev)
+		CORBA_exception_free (&tmp_ev);
 
 	return flags;
-
- flags_error:
-	CORBA_Object_release (prop, ev);
-
-	return 0;
 }
 
 #define SEND(pb,name,args,corbat,gt,ansip)									\

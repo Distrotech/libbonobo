@@ -1,5 +1,11 @@
 2000-08-12  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_set_value_string),
+	(bonobo_property_bag_client_get_property): remove spurious ev checks.
+	(bonobo_property_bag_client_get_docstring): fix leak, allow NULL ev for slackers.
+
+2000-08-12  Michael Meeks  <michael@helixcode.com>
+
 	* Makefile.am (SUBDIRS): add monikers duh;
 
 	* monikers/std-moniker.c (bonobo_moniker_factory): remove the 'query:'
