@@ -182,6 +182,9 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 	BonoboPropertyBagServantManager    *sm;
 	CORBA_Environment		   ev;
 	char				  *poa_name;
+	gboolean			   retval;
+
+	retval = FALSE;
 
 	CORBA_exception_init (&ev);
 
@@ -238,10 +241,8 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 	
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("Could not create request processing policy for BonoboProperty POA");
-		g_free (policies->_buffer);
-		g_free (policies);
 		CORBA_exception_free (&ev);
-		return FALSE;
+		goto out;
 	}
 
 	/*
@@ -272,10 +273,8 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 	
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("Could not create servant retention policy for BonoboProperty POA");
-		g_free (policies->_buffer);
-		g_free (policies);
 		CORBA_exception_free (&ev);
-		return FALSE;
+		goto out;
 	}
 
 	/*
@@ -291,11 +290,9 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 	
 	if (ev._major != CORBA_NO_EXCEPTION){
 		g_warning ("Could not create threading policy for BonoboProperty POA");
-		g_free (policies->_buffer);
-		g_free (policies);
 		CORBA_exception_free (&ev);
-		return FALSE;
-	}   
+		goto out;
+	}
 
 	/*
 	 * Create the BonoboProperty POA as a child of the root
@@ -309,15 +306,11 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 					       policies,
 					       &ev);
 	g_free (poa_name);
-	
-	
-	g_free (policies->_buffer);
-	g_free (policies);
-	
+
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboPropertyBag: Could not create BonoboPropertyBag POA");
 		CORBA_exception_free (&ev);
-		return FALSE;
+		goto out;
 	}
 	
 	property_poa = pb->priv->poa;
@@ -335,7 +328,7 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 		g_warning ("BonoboPropertyBag: Could not initialize ServantLocator");
 		CORBA_exception_free (&ev);
 		g_free (sm);
-		return FALSE;
+		goto out;
 		
 	}
 
@@ -344,10 +337,50 @@ bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
 		g_warning ("BonoboPropertyBag: Could not set POA servant manager");
 		CORBA_exception_free (&ev);
 		g_free (sm);
-		return FALSE;
+		goto out;
 	}
 
-	return TRUE;
+	retval = TRUE;
+
+ out:
+
+	if (policies->_buffer[0] != NULL) {
+		CORBA_Policy_destroy (policies->_buffer[0], &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("bonobo_property_bag_create_poa(): could not destroy the "
+				   "request processing policy");
+			CORBA_exception_free (&ev);
+			retval = FALSE;
+		}
+	}
+
+	if (policies->_buffer[1] != NULL) {
+		CORBA_Policy_destroy (policies->_buffer[1], &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("bonobo_property_bag_create_poa(): could not destroy the "
+				   "servant retention policy");
+			CORBA_exception_free (&ev);
+			retval = FALSE;
+		}
+	}
+
+	if (policies->_buffer[2] != NULL) {
+		CORBA_Policy_destroy (policies->_buffer[2], &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("bonobo_property_bag_create_poa(): could not destroy the "
+				   "threading policy");
+			CORBA_exception_free (&ev);
+			retval = FALSE;
+		}
+	}
+
+	g_free (policies->_buffer);
+	g_free (policies);
+
+	return retval;
 }
 
 

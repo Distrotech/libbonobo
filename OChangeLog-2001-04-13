@@ -1,3 +1,17 @@
+2000-12-08  Federico Mena Quintero  <federico@helixcode.com>
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_create_poa):
+	Destroy the policies after we are done with them.  
+
+	* bonobo/bonobo-transient.c (bonobo_transient_construct):
+	Likewise.
+
+	YOU REQUIRE THE LATEST STABLE ORBIT FROM CVS FOR THIS TO WORK!
+	THERE WAS A BUG IN ORBIT THAT WILL MAKE THE CODE CRASH IF YOU USE
+	AN OLDER VERSION.
+
+	SHOUT SHOUT SHOUT SCREAM SCREAM SCREAM.
+
 2000-12-09  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* monikers/Makefile.am: removed the config moniker (the config

@@ -178,8 +178,11 @@ bonobo_transient_construct (BonoboTransient          *transient,
 {
 	CORBA_PolicyList		*policies;
 	BonoboTransientServantManager   *sm;
-	CORBA_Environment		ev;
+	CORBA_Environment		 ev;
 	char				*poa_name;
+	gboolean			 success;
+
+	success = FALSE;
 
 	transient->priv->new_servant = new_servant;
 	transient->priv->destroy_servant = destroy_servant;
@@ -245,10 +248,8 @@ bonobo_transient_construct (BonoboTransient          *transient,
 	
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("Could not create request processing policy for BonoboTransient POA");
-		g_free (policies->_buffer);
-		g_free (policies);
 		CORBA_exception_free (&ev);
-		return NULL;
+		goto out;
 	}
 	
 	/*
@@ -279,10 +280,8 @@ bonobo_transient_construct (BonoboTransient          *transient,
 	
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("Could not create servant retention policy for BonoboTransient POA");
-		g_free (policies->_buffer);
-		g_free (policies);
 		CORBA_exception_free (&ev);
-		return NULL;
+		goto out;
 	}
 	
 	/*
@@ -298,11 +297,9 @@ bonobo_transient_construct (BonoboTransient          *transient,
 	
 	if (ev._major != CORBA_NO_EXCEPTION){
 		g_warning ("Could not create threading policy for BonoboTransient POA");
-		g_free (policies->_buffer);
-		g_free (policies);
 		CORBA_exception_free (&ev);
-		return FALSE;
-	}   
+		goto out;
+	}
 
 	/*
 	 * Create the BonoboProperty POA as a child of the root
@@ -312,17 +309,12 @@ bonobo_transient_construct (BonoboTransient          *transient,
 	transient->priv->poa = PortableServer_POA_create_POA (
 		bonobo_poa (), poa_name, bonobo_poa_manager (),
 		policies, &ev);
-	
 	g_free (poa_name);
-	
-	
-	g_free (policies->_buffer);
-	g_free (policies);
-	
+
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboTransient: Could not create BonoboTransient POA");
 		CORBA_exception_free (&ev);
-		return NULL;
+		goto out;
 	}
 	
 	/*
@@ -338,8 +330,7 @@ bonobo_transient_construct (BonoboTransient          *transient,
 		g_warning ("BonoboTransient: Could not initialize ServantLocator");
 		CORBA_exception_free (&ev);
 		g_free (sm);
-		return NULL;
-		
+		goto out;
 	}
 
 	PortableServer_POA_set_servant_manager (
@@ -350,10 +341,52 @@ bonobo_transient_construct (BonoboTransient          *transient,
 		g_warning ("BonoboTransient: Could not set POA servant manager");
 		CORBA_exception_free (&ev);
 		g_free (sm);
-		return NULL;
+		goto out;
 	}
 
-	return transient;
+	success = TRUE;
+
+ out:
+	if (policies->_buffer[0] != NULL) {
+		CORBA_Policy_destroy (policies->_buffer[0], &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("bonobo_transient_construct(): could not destroy the "
+				   "request processing policy");
+			CORBA_exception_free (&ev);
+			success = FALSE;
+		}
+	}
+
+	if (policies->_buffer[1] != NULL) {
+		CORBA_Policy_destroy (policies->_buffer[1], &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("bonobo_transient_construct(): could not destroy the "
+				   "servant retention policy");
+			CORBA_exception_free (&ev);
+			success = FALSE;
+		}
+	}
+
+	if (policies->_buffer[2] != NULL) {
+		CORBA_Policy_destroy (policies->_buffer[2], &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("bonobo_transient_construct(): could not destroy the "
+				   "threading policy policy");
+			CORBA_exception_free (&ev);
+			success = FALSE;
+		}
+	}
+
+	g_free (policies->_buffer);
+	g_free (policies);
+
+	if (success)
+		return transient;
+	else
+		return NULL;
 }
 
 static void
