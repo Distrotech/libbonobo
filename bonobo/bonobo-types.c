@@ -1,6 +1,5 @@
 #include <config.h>
 #include <string.h>
-#include <gobject/gbsearcharray.h>
 #include <gobject/gvalue.h>
 #include <gobject/gvaluearray.h>
 #include <gobject/gvaluecollector.h>
@@ -22,40 +21,48 @@ typedef struct {
 	gboolean         is_bonobo_unknown;
 } CorbaObjectProxy;
 
-static gint corba_object_proxy_cmp (gconstpointer p1, gconstpointer p2);
+static GQuark corba_object_proxy_id = 0; 
 
-static GBSearchArray corba_object_proxy_bsa = G_STATIC_BSEARCH_ARRAY_INIT (sizeof (CorbaObjectProxy), corba_object_proxy_cmp, 0);
-
-static gint
-corba_object_proxy_cmp (gconstpointer p1, gconstpointer p2)
+static void
+corba_object_proxy_set (GType             type,
+			CorbaObjectProxy *proxy)
 {
-	const CorbaObjectProxy *node1 = p1, *node2 = p2;
+	if (!corba_object_proxy_id)
+		corba_object_proxy_id = g_quark_from_static_string ("bonobo-object-proxy");
 
-	return G_BSEARCH_ARRAY_CMP (node1->type, node2->type);
+	g_type_set_qdata (type, corba_object_proxy_id, proxy);
+}
+
+static CorbaObjectProxy *
+corba_object_proxy_get (GType type)
+{
+	if (!corba_object_proxy_id)
+		corba_object_proxy_id = g_quark_from_static_string ("bonobo-object-proxy");
+
+	return g_type_get_qdata (type, corba_object_proxy_id);
 }
 
 static void
 corba_object_proxy_value_init (GValue *value)
 {
-	CorbaObjectProxy key, *node;
+	CorbaObjectProxy *proxy;
 
-	key.type = G_VALUE_TYPE (value);
-	node = g_bsearch_array_lookup (&corba_object_proxy_bsa, &key);
-	/* [FIXME!] value->data[0].v_pointer = node->init ? node->init () : NULL; */
+	proxy = corba_object_proxy_get (G_VALUE_TYPE (value));
+
+	/* [FIXME!] value->data[0].v_pointer = proxy->init ? proxy->init () : NULL; */
 }
 
 static void
 corba_object_proxy_value_free (GValue *value)
 {
 	if (value->data[0].v_pointer) {
-		CorbaObjectProxy key, *node;
+		CorbaObjectProxy *proxy;
 		CORBA_Environment ev;
 
-		key.type = G_VALUE_TYPE (value);
-		node = g_bsearch_array_lookup (&corba_object_proxy_bsa, &key);
-
+		proxy = corba_object_proxy_get (G_VALUE_TYPE (value));
+		
 		CORBA_exception_init (&ev);
-		if (node->is_bonobo_unknown)
+		if (proxy->is_bonobo_unknown)
 			bonobo_object_release_unref (value->data[0].v_pointer, &ev);
 		else
 			CORBA_Object_release (value->data[0].v_pointer, &ev);
@@ -68,14 +75,13 @@ corba_object_proxy_value_copy (const GValue *src_value,
 			       GValue       *dest_value)
 {
 	if (src_value->data[0].v_pointer) {
-		CorbaObjectProxy key, *node;
+		CorbaObjectProxy *proxy;
 		CORBA_Environment ev;
 
-		key.type = G_VALUE_TYPE (src_value);
-		node = g_bsearch_array_lookup (&corba_object_proxy_bsa, &key);
-
+		proxy = corba_object_proxy_get (G_VALUE_TYPE (src_value));
+		
 		CORBA_exception_init (&ev);
-		if (node->is_bonobo_unknown)
+		if (proxy->is_bonobo_unknown)
 			dest_value->data[0].v_pointer = bonobo_object_dup_ref (
 				src_value->data[0].v_pointer, &ev);
 		else
@@ -98,25 +104,22 @@ corba_object_proxy_collect_value (GValue      *value,
 				  GTypeCValue *collect_values,
 				  guint        collect_flags)
 {
-	CorbaObjectProxy key, *node;
-
-	key.type = G_VALUE_TYPE (value);
-	node = g_bsearch_array_lookup (&corba_object_proxy_bsa, &key);
-
 	if (!collect_values[0].v_pointer)
 		value->data[0].v_pointer = NULL;
 	else {
 		CORBA_Environment ev;
 		CORBA_Object corba_objref;
+		CorbaObjectProxy *proxy;
 
+		proxy = corba_object_proxy_get (G_VALUE_TYPE (value));;
 		corba_objref = collect_values[0].v_pointer;
 
 		CORBA_exception_init (&ev);
-		if (!CORBA_Object_is_a (corba_objref, node->tc->repo_id, &ev))
+		if (!CORBA_Object_is_a (corba_objref, proxy->tc->repo_id, &ev))
 		    return g_strdup_printf ("CORBA Object %p is not a `%s'.",
-					    corba_objref, node->tc->repo_id);
+					    corba_objref, proxy->tc->repo_id);
 
-		if (node->is_bonobo_unknown)
+		if (proxy->is_bonobo_unknown)
 			value->data[0].v_pointer = bonobo_object_dup_ref (corba_objref, &ev);
 		else
 			value->data[0].v_pointer = CORBA_Object_duplicate (corba_objref, &ev);
@@ -140,14 +143,13 @@ corba_object_proxy_lcopy_value (const GValue *value,
 	if (!value->data[0].v_pointer)
 		*corba_p = NULL;
 	else {
-		CorbaObjectProxy key, *node;
+		CorbaObjectProxy *proxy;
 		CORBA_Environment ev;
 
-		key.type = G_VALUE_TYPE (value);
-		node = g_bsearch_array_lookup (&corba_object_proxy_bsa, &key);
+		proxy = corba_object_proxy_get (G_VALUE_TYPE (value));;
 
 		CORBA_exception_init (&ev);
-		if (node->is_bonobo_unknown)
+		if (proxy->is_bonobo_unknown)
 			*corba_p = bonobo_object_dup_ref (value->data[0].v_pointer, &ev);
 		else
 			*corba_p = CORBA_Object_duplicate (value->data[0].v_pointer, &ev);
@@ -193,16 +195,16 @@ bonobo_corba_object_type_register_static (const gchar *name, const CORBA_TypeCod
 
 	/* install proxy functions upon successfull registration */
 	if (type) {
-		CorbaObjectProxy key;
+		CorbaObjectProxy *proxy;
 		CORBA_Environment ev;
 
-		key.type = type;
+		proxy = g_new (CorbaObjectProxy, 1);
+		proxy->type = type;
 		CORBA_exception_init (&ev);
-		key.tc = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) tc, &ev);
+		proxy->tc = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) tc, &ev);
 		CORBA_exception_init (&ev);
-		key.is_bonobo_unknown = is_bonobo_unknown;
-		g_bsearch_array_insert (&corba_object_proxy_bsa, &key, TRUE);
-		CORBA_exception_free (&ev);
+		proxy->is_bonobo_unknown = is_bonobo_unknown;
+		corba_object_proxy_set (type, proxy);
 	}
 	
 	return type;
