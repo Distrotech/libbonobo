@@ -1,3 +1,11 @@
+2000-07-22  J Shane Culpepper  <pepper@eazel.com>
+
+	* storage-modules/bonobo-storage-vfs.c: (fs_list_contents),
+	(bonobo_storage_vfs_open):
+	* storage-modules/bonobo-stream-vfs.c: (fs_length):
+
+	Fixed build breakage that was caused by big changes to gnome-vfs.
+
 2000-07-18  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_construct):
