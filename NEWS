@@ -1,3 +1,9 @@
+libbonobo 2.6.0
+
+	+ featurelets
+		+ uninstalled pkg-config files (Glynn Foster)
+		+ configure cleanup (Tomasz Kloczko)
+
 libbonobo 2.5.4
 
 	+ bugs fixed
