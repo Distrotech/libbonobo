@@ -38,12 +38,6 @@
 #include "activation-server-corba-extensions.h"
 
 /*
- *    Time delay after all servers are de-registered / dead
- * before quitting the server.
- */
-#define IDLE_QUIT_TIMEOUT 1000
-
-/*
  *    We always have the local NamingContext in the
  * registry at exit, so quit if only 1 left.
  */
@@ -494,7 +488,7 @@ check_quit (impl_POA_Bonobo_ObjectDirectory *servant)
 
         if (g_hash_table_size (servant->active_servers) <= RESIDUAL_SERVERS)
                 servant->no_servers_timeout = g_timeout_add (
-                        IDLE_QUIT_TIMEOUT, quit_server_timeout, NULL);
+                        SERVER_IDLE_QUIT_TIMEOUT, quit_server_timeout, NULL);
 
 	servant->time_active_changed = time (NULL);
 }
@@ -567,7 +561,8 @@ add_active_server (impl_POA_Bonobo_ObjectDirectory *servant,
                               g_strdup (iid),
                               CORBA_Object_duplicate (object, NULL));
 
-        check_quit (servant);
+        if (cnx)
+                check_quit (servant);
 }
 
 static void

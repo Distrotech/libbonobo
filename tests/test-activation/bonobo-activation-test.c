@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #include <bonobo-activation/bonobo-activation.h>
 #include <bonobo-activation/bonobo-activation-private.h>
+#include "../server/server.h"
 
 #include "empty.h"
 #include "plugin.h"
@@ -174,6 +176,7 @@ main (int argc, char *argv[])
 	CORBA_Object obj;
 	CORBA_Environment ev;
         Bonobo_ServerInfoList *info;
+        CORBA_Object ac;
         char *sort_by[4];
         char *query;
         int   i;
@@ -187,7 +190,6 @@ main (int argc, char *argv[])
 /*      putenv("Bonobo_BARRIER_INIT=1"); */
 
         race_base_init ();
-        race_empty (&ev);
 
         sort_by[0] = "prefer_by_list_order(iid, ["
                 "'OAFIID:nautilus_file_manager_icon_view:42681b21-d5ca-4837-87d2-394d88ecc058',"
@@ -219,6 +221,8 @@ main (int argc, char *argv[])
                 "'OAFIID:nautilus_file_manager_list_view:521e489d-0662-4ad7-ac3a-832deabe111c'], iid)) ) AND "
                 "(NOT test_only.defined() OR NOT test_only)";
 
+        ac = bonobo_activation_activation_context_get ();
+
         g_timer_start (timer);
 
         info = bonobo_activation_query (query, sort_by, &ev);
@@ -241,10 +245,22 @@ main (int argc, char *argv[])
         }
         g_timer_stop (timer);
 
-        g_warning ("Time to query '%g'", g_timer_elapsed (timer, NULL));
+        fprintf (stderr, "Time to query '%g'\n", g_timer_elapsed (timer, NULL));
         if (ev._major == CORBA_NO_EXCEPTION) {
                 passed++;
         }
+
+        /*
+         *    We wait to see if the server (sever)
+         * timeout is mis-behaving [ at this stage we
+         * havn't registered anything with the server ]
+         */
+        fprintf (stderr, "Waiting to see if the server erroneously quits\n");
+        sleep (SERVER_IDLE_QUIT_TIMEOUT * 2 / 1000);
+        g_assert (ORBit_small_get_connection_status (ac) ==
+                  ORBIT_CONNECTION_CONNECTED);
+
+        race_empty (&ev);
 
 	obj = bonobo_activation_activate_from_id ("OAFIID:Empty:19991025", 0, NULL, &ev);
         if (test_object (obj, &ev, "from id")) {
