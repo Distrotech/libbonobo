@@ -1,3 +1,8 @@
+2001-07-24  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/Makefile.am: Compile Bonobo_imodule.c into
+	Bonobo_module.la and install it into $(prefix)/lib/orbit/.
+
 2001-07-23  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-moniker-util.c (url_to_name): Implemented
