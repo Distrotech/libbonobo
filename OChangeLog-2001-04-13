@@ -1,3 +1,8 @@
+2001-01-07  Mike Kestner  <mkestner@ameritech.net>
+
+	* bonobo/bonobo-canvas-item.h - Cleaned up a couple old gnome_bonobo_*
+	references.
+
 2001-01-06  Mike Kestner  <mkestner@ameritech.net>
 
 	* bonobo/bonobo-canvas-component.c - Added EVENT signal. Moved orig_root
