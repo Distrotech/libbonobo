@@ -1,3 +1,11 @@
+2000-05-26  Mike Kestner  <mkestner@ameritech.net>
+
+	* bonobo/bonobo-ui-handler.h,
+	* bonobo/bonobo-uih-toolbar.c 
+	(bonobo_ui_handler_toolbar_new_toggleitem):
+	(bonobo_ui_handler_toolbar_new_radioitem): 
+	Added pixmap type and pixmap data parameters.
+	
 2000-05-26  Dan Winship  <danw@helixcode.com>
 
 	* idl/bonobo-persist.idl: rename StreamType and StreamTypeList to
