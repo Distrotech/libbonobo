@@ -1,3 +1,39 @@
+2001-02-03  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_class_init):
+	strip out object_gone - un-fired, and unused.
+
+	* bonobo/bonobo-object.h: replaced 'object_gone' with an
+	expansion gpointer in BonoboObjectClass.
+
+2001-01-30  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_destroy): 
+	use bonobo_object_list_unref to free the view_frames.
+
+	* bonobo/bonobo-embeddable.c (bonobo_embeddable_destroy): 
+	ditto.
+
+	* bonobo/bonobo-ui-engine-config.c (bonobo_ui_engine_config_get_engine):
+	fix precondition.
+
+	* bonobo/bonobo-ui-engine.c (bonobo_ui_engine_node_get_widget):
+	add precondition.
+
+2001-01-30  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object.c (gnome_unknown_ping): rename to
+	(bonobo_unknown_ping): this.
+
+2001-01-29  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-engine-config.c
+	(bonobo_ui_engine_config_get_engine): impl.
+
+	* bonobo/bonobo-ui-sync-toolbar.c (get_look):
+	impl. to handle v/h look.
+	(do_config_popup): upd.
+
 2001-02-02  Federico Mena Quintero  <federico@ximian.com>
 
 	* bonobo/bonobo-control.c (impl_Bonobo_Control_focus): I'm a big

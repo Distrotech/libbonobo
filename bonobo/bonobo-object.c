@@ -68,7 +68,6 @@ struct _BonoboObjectPrivate {
 enum {
 	QUERY_INTERFACE,
 	SYSTEM_EXCEPTION,
-	OBJECT_GONE,
 	LAST_SIGNAL
 };
 
@@ -654,14 +653,6 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 				GTK_SIGNAL_OFFSET(BonoboObjectClass,system_exception),
 				gtk_marshal_NONE__POINTER_POINTER,
 				GTK_TYPE_NONE, 2, GTK_TYPE_POINTER, GTK_TYPE_POINTER);
-	bonobo_object_signals [OBJECT_GONE] =
-		gtk_signal_new ("object_gone",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET(BonoboObjectClass,object_gone),
-				gtk_marshal_NONE__POINTER,
-				GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
-
 
 	gtk_object_class_add_signals (object_class, bonobo_object_signals, LAST_SIGNAL);
 
@@ -1072,7 +1063,7 @@ bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environme
 }
 
 /**
- * gnome_unknown_ping:
+ * bonobo_unknown_ping:
  * @object: a CORBA object reference of type Bonobo::Unknown
  *
  * Pings the object @object using the ref/unref methods from Bonobo::Unknown.
@@ -1081,7 +1072,7 @@ bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environme
  * Returns: %TRUE if the Bonobo::Unknown @object is alive.
  */
 gboolean
-gnome_unknown_ping (Bonobo_Unknown object)
+bonobo_unknown_ping (Bonobo_Unknown object)
 {
 	CORBA_Environment ev;
 	gboolean alive;
@@ -1162,4 +1153,46 @@ bonobo_object_idle_unref (BonoboObject *object)
 	g_idle_add ((GSourceFunc) idle_unref_fn, object);
 }
 
+static void
+unref_list (GSList *l)
+{
+	for (; l; l = l->next)
+		bonobo_object_unref (l->data);
+}
 
+/**
+ * bonobo_object_list_unref_all:
+ * @list: A list of BonoboObjects *s
+ * 
+ *  This routine unrefs all the objects listed in
+ * the list and then removes them from @list: if
+ * they have not already been so removed.
+ **/
+void
+bonobo_object_list_unref_all (GList **list)
+{
+	GList *l;
+	GSList *unrefs = NULL, *u;
+
+	g_return_if_fail (list != NULL);
+
+	for (l = *list; l; l = l->next) {
+		if (l->data && !BONOBO_IS_OBJECT (l->data))
+			g_warning ("Non object in unref list");
+		else if (l->data)
+			unrefs = g_slist_prepend (unrefs, l->data);
+	}
+
+	unref_list (unrefs);
+
+	for (u = unrefs; u; u = u->next)
+		*list = g_list_remove (*list, u->data);
+
+	g_slist_free (unrefs);
+}
+
+void
+bonobo_object_slist_unref_all (GSList **list)
+{
+	g_warning ("Dummy - cut and paste above");
+}

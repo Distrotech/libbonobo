@@ -55,7 +55,7 @@ typedef struct {
 	 */
 	void  (*query_interface) (BonoboObject *object, const char *repo_id,  CORBA_Object      *retval);
 	void  (*system_exception)(BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
-	void  (*object_gone)     (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
+	gpointer expansion;
 } BonoboObjectClass;
 
 GtkType                  bonobo_object_get_type               (void);
@@ -108,7 +108,7 @@ void                     bonobo_object_check_env              (BonoboObject     
 							       CORBA_Object            corba_object,
 							       CORBA_Environment      *ev);
 
-#define BONOBO_OBJECT_CHECK(o,c,e)	\
+#define BONOBO_OBJECT_CHECK(o,c,e)				\
 			G_STMT_START {				\
 			if ((e)->_major != CORBA_NO_EXCEPTION)	\
 				bonobo_object_check_env(o,c,e);	\
@@ -117,7 +117,9 @@ void                     bonobo_object_check_env              (BonoboObject     
 /*
  * Others
  */
-gboolean  gnome_unknown_ping (Bonobo_Unknown object);
+gboolean  bonobo_unknown_ping           (Bonobo_Unknown object);
+void      bonobo_object_list_unref_all  (GList        **list);
+void      bonobo_object_slist_unref_all (GSList       **list);
 
 END_GNOME_DECLS
 
