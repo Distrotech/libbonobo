@@ -92,7 +92,7 @@ extern POA_GNOME_Storage__epv gnome_storage_epv;
 /*
  * Signature for Storage drivers
  */
-GnomeStorage gnome_storage_driver_open  (const char *path, gint flags, gint mode);
+GnomeStorage *gnome_storage_driver_open  (const char *path, gint flags, gint mode);
 
 END_GNOME_DECLS
 
