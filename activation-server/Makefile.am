@@ -4,6 +4,7 @@ man_MANS = bonobo-activation-server.1
 
 bin_PROGRAMS=activation-client
 libexec_PROGRAMS=bonobo-activation-server
+noinst_PROGRAMS=test-performance
 
 INCLUDES=					\
 	-I$(top_srcdir) 			\
@@ -39,11 +40,16 @@ LDADD=../bonobo-activation/libbonobo-activation.la \
 
 activation_client_SOURCES=client.c
 
-serverinfodir=$(libdir)/bonobo/servers
+test_performance_SOURCES =	\
+	test-performance.c	\
+	object-directory-load.c	\
+	server.h
 
+TESTS=test-performance
+
+serverinfodir=$(libdir)/bonobo/servers
 $(server_in_file): $(server_in_file).in
 	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
-
 server_in_file = Bonobo_CosNaming_NamingContext.server.in
 serverinfo_DATA = $(server_in_file:.server.in=.server)
 

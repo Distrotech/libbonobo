@@ -9,7 +9,7 @@
  *    Define, and export BONOBO_ACTIVATION_DEBUG_OUTPUT
  * for a smoother, closer debugging experience.
  */
-#undef BONOBO_ACTIVATION_DEBUG
+#define BONOBO_ACTIVATION_DEBUG
 
 /*
  *    Time delay after all servers are de-registered / dead
@@ -66,7 +66,6 @@ Bonobo_ActivationContext activation_context_get          (void);
 void                     activation_clients_cache_notify (void);
 gboolean                 activation_clients_is_empty_scan(void);
 void                     add_initial_locales             (void);
-
-gboolean                 is_locale_interesting           (const char *locale);
+gboolean                 register_interest_in_locales    (const char            *locales);
 
 #endif /* SERVER_H */

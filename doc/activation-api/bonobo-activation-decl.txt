@@ -243,10 +243,6 @@ Bonobo_Unknown _obj, CORBA_Environment * ev
 <RETURNS>Bonobo_Unknown  </RETURNS>
 Bonobo_Unknown _obj,const CORBA_char * repoid,CORBA_Environment * ev
 </FUNCTION>
-<VARIABLE>
-<NAME>Bonobo_Unknown__iinterface</NAME>
-   extern ORBit_IInterface Bonobo_Unknown__iinterface;
-</VARIABLE>
 <MACRO>
 <NAME>Bonobo_Unknown_IMETHODS_LEN</NAME>
 #define Bonobo_Unknown_IMETHODS_LEN 3
@@ -781,10 +777,6 @@ PortableServer_Servant servant,CORBA_Environment * ev
 <RETURNS>CORBA_Object  </RETURNS>
 Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </FUNCTION>
-<VARIABLE>
-<NAME>Bonobo_GenericFactory__iinterface</NAME>
-   extern ORBit_IInterface Bonobo_GenericFactory__iinterface;
-</VARIABLE>
 <MACRO>
 <NAME>Bonobo_GenericFactory_IMETHODS_LEN</NAME>
 #define Bonobo_GenericFactory_IMETHODS_LEN 1
@@ -799,7 +791,7 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 </MACRO>
 <MACRO>
 <NAME>BONOBO_ACTIVATION_MICRO_VERSION</NAME>
-#define BONOBO_ACTIVATION_MICRO_VERSION (2)
+#define BONOBO_ACTIVATION_MICRO_VERSION (3)
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
@@ -5945,10 +5937,6 @@ Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_
 <NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_21</NAME>
 #define MARSHAL_IMPL_Bonobo_ServerStateCache_21 'y'
 </MACRO>
-<VARIABLE>
-<NAME>Bonobo_ObjectDirectory__iinterface</NAME>
-   extern ORBit_IInterface Bonobo_ObjectDirectory__iinterface;
-</VARIABLE>
 <MACRO>
 <NAME>Bonobo_ObjectDirectory_IMETHODS_LEN</NAME>
 #define Bonobo_ObjectDirectory_IMETHODS_LEN 8
@@ -7945,26 +7933,14 @@ Bonobo_ActivationContext_obj,const CORBA_char * aid,constBonobo_ActivationFlagsf
 <NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_23</NAME>
 #define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_23 't'
 </MACRO>
-<VARIABLE>
-<NAME>Bonobo_ActivationClient__iinterface</NAME>
-   extern ORBit_IInterface Bonobo_ActivationClient__iinterface;
-</VARIABLE>
 <MACRO>
 <NAME>Bonobo_ActivationClient_IMETHODS_LEN</NAME>
 #define Bonobo_ActivationClient_IMETHODS_LEN 1
 </MACRO>
-<VARIABLE>
-<NAME>Bonobo_ActivationCallback__iinterface</NAME>
-   extern ORBit_IInterface Bonobo_ActivationCallback__iinterface;
-</VARIABLE>
 <MACRO>
 <NAME>Bonobo_ActivationCallback_IMETHODS_LEN</NAME>
 #define Bonobo_ActivationCallback_IMETHODS_LEN 2
 </MACRO>
-<VARIABLE>
-<NAME>Bonobo_ActivationContext__iinterface</NAME>
-   extern ORBit_IInterface Bonobo_ActivationContext__iinterface;
-</VARIABLE>
 <MACRO>
 <NAME>Bonobo_ActivationContext_IMETHODS_LEN</NAME>
 #define Bonobo_ActivationContext_IMETHODS_LEN 10

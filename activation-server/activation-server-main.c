@@ -56,6 +56,7 @@ static void debug_queries (void);
 static char *od_source_dir = NULL;
 #ifdef BONOBO_ACTIVATION_DEBUG
 static char *ac_evaluate = NULL;
+static gboolean server_reg = FALSE;
 #endif
 static char *od_domain = "session";
 static int server_ac = 0, ior_fd = -1;
@@ -64,6 +65,7 @@ static struct poptOption options[] = {
 
 	{"od-source-dir", '\0', POPT_ARG_STRING, &od_source_dir, 0,
 	 N_("Directory to read .server files from"), N_("DIRECTORY")},
+
 	{"od-domain", '\0', POPT_ARG_STRING, &od_domain, 0,
 	 N_("Domain of ObjectDirectory"), N_("DOMAIN")},
 
@@ -71,11 +73,13 @@ static struct poptOption options[] = {
 	 N_("Serve as an ActivationContext (default is as an ObjectDirectory only)"),
 	 NULL},
 
-
 	{"ior-output-fd", '\0', POPT_ARG_INT, &ior_fd, 0,
 	 N_("File descriptor to write IOR to"), N_("FD")},
 
 #ifdef BONOBO_ACTIVATION_DEBUG
+        {"register-server", '0', POPT_ARG_NONE, &server_reg, 0,
+	 "Register as the users' activation server without locking [!]",
+	 NULL},
 
 	{"evaluate", '\0', POPT_ARG_STRING, &ac_evaluate, 0,
 	 N_("Query expression to evaluate"), N_("EXPRESSION")},
@@ -283,14 +287,26 @@ main (int argc, char *argv[])
 	}
         if (dev_null_fd != -1)
                 close (dev_null_fd);
-	CORBA_free (ior);
 
 #ifdef BONOBO_ACTIVATION_DEBUG
 	debug_queries ();
+        if (server_reg) {
+                char *fname;
+                fname = g_strconcat (linc_get_tmpdir (),
+                                     "/bonobo-activation-server-ior", NULL);
+                fh = fopen (fname, "w+");
+		fprintf (fh, "%s\n", ior);
+		fclose (fh);
+                g_free (fname);
+        }
 #endif
+
+	CORBA_free (ior);
 
         poa_manager = PortableServer_POA__get_the_POAManager (root_poa, ev);
 	PortableServer_POAManager_activate (poa_manager, ev);
+
+	sleep (10000);
 	g_main_loop_run (main_loop);
 
         nameserver_destroy (root_poa, naming_service, ev);

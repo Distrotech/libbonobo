@@ -39,14 +39,6 @@
 #include "bonobo-activation/bonobo-activation-i18n.h"
 #include "server.h"
 
-static gboolean od_string_to_boolean      (const char *str);
-static gboolean od_filename_has_extension (const char *filename,
-                                           const char *extension);
-static char *   od_validate               (const char *iid,
-                                           const char *type,
-                                           const char *location);
-
-
 /* SAX Parser */
 typedef enum {
         STATE_START,
@@ -91,6 +83,37 @@ static void
 parse_info_free (ParseInfo *info)
 {
         g_free (info);
+}
+
+static char *
+od_validate (const char *iid, const char *type, const char *location)
+{
+        int i;
+
+        if (iid == NULL) {
+                return g_strdup (_("a NULL iid is not valid"));
+        }
+
+        if (type == NULL) {
+                return g_strdup_printf (_("iid %s has a NULL type"), iid);
+        }
+
+        if (location == NULL) {
+                return g_strdup_printf (_("iid %s has a NULL location"), iid);
+        }
+
+        for (i = 0; iid && iid [i]; i++) {
+                char c = iid [i];
+
+                if (c == ',' || c == '[' || c == ']' ||
+                    /* Reserved for future expansion */
+                    c == '!' || c == '#' || c == '|') {
+                        return g_strdup_printf (_("invalid character '%c' in iid '%s'"),
+                                                c, iid);
+                }
+        }
+
+        return NULL;
 }
 
 static void
@@ -146,16 +169,124 @@ parse_oaf_server_attrs (ParseInfo      *info,
         info->cur_server->username = CORBA_string_dup (g_get_user_name ());
 }
 
+static GHashTable *interesting_locales = NULL;
+
+void
+add_initial_locales (void)
+{
+        const char *tmp;
+        char *tmp2, *lang, *lang_with_locale, *equal_char;
+
+        if (!interesting_locales) {
+                interesting_locales = g_hash_table_new (
+                        g_str_hash, g_str_equal);
+        }
+        lang_with_locale = NULL;
+        
+        tmp = g_getenv ("LANGUAGE");
+
+        if (!tmp)
+                tmp = g_getenv ("LANG");
+        
+        lang = g_strdup (tmp);
+        tmp2 = lang;
+
+        if (lang) {
+                /* envs can be in NAME=VALUE form */
+		equal_char = strchr (lang, '=');
+		if (equal_char)
+			lang = equal_char + 1;
+
+                /* check if the locale has a _ */
+                equal_char = strchr (lang, '_');
+                if (equal_char != NULL) {
+                        lang_with_locale = g_strdup (lang);
+                        *equal_char = 0;
+                }
+
+                if (lang_with_locale && strcmp (lang_with_locale, "")) {
+                        g_hash_table_insert (interesting_locales,
+                                             lang_with_locale,
+                                             GUINT_TO_POINTER (1));
+#ifdef LOCALE_DEBUG
+                        g_warning ("Init lang '%s'", lang_with_locale);
+#endif
+                }
+
+                if (lang && strcmp (lang, "")) {
+                        g_hash_table_insert (interesting_locales,
+                                             g_strdup (lang),
+                                             GUINT_TO_POINTER (1));
+#ifdef LOCALE_DEBUG
+                        g_warning ("Init lang(2) '%s'", lang);
+#endif
+                }
+        }
+
+        g_free (tmp2);
+}
+
+gboolean
+register_interest_in_locales (const char *locales)
+{
+        int i;
+        char **localev;
+        gboolean new_locale = FALSE;
+
+        localev = g_strsplit (locales, ",", 0);
+
+        for (i = 0; localev[i]; i++) {
+                if (!g_hash_table_lookup (interesting_locales, localev[i])) {
+#ifdef LOCALE_DEBUG
+                        g_warning ("New locale '%s' (%d)!",
+                                   localev[i], g_list_length (locale_list));
+#endif
+                        g_hash_table_insert (interesting_locales,
+                                             g_strdup (localev[i]),
+                                             GUINT_TO_POINTER (1));
+                        new_locale = TRUE;
+                }
+        }
+        g_strfreev (localev);
+
+        return new_locale;
+}
+
+static gboolean
+is_locale_interesting (const char *name_with_locale)
+{
+        const char *locale;
+
+        if (!name_with_locale)
+                return FALSE;
+
+        if (!(locale = strchr (name_with_locale, '-')))
+                return TRUE;
+        locale++;
+
+        return g_hash_table_lookup (interesting_locales, locale) != NULL;
+}
+
+static gboolean 
+od_string_to_boolean (const char *str)
+{
+	if (!g_ascii_strcasecmp (str, "true") ||
+            !g_ascii_strcasecmp (str, "yes") ||
+	    !strcmp (str, "1"))
+		return TRUE;
+	else
+		return FALSE;
+}
+
 static void
 parse_oaf_attribute (ParseInfo     *info,
                      const xmlChar **attrs)
 {
+        int i = 0;
         const char *type = NULL;
         const char *name = NULL;
         const char *value = NULL;
-        char *locale = NULL, *equal_char;
         const char *att, *val;
-        int i = 0;
         
         g_assert (info->cur_server);
 
@@ -169,14 +300,18 @@ parse_oaf_attribute (ParseInfo     *info,
                 val = attrs[i++];
                 
                 if (att && val) {
-                        if (!type && !strcmp (att, "type"))
+                        if (!strcmp (att, "type"))
                                 type = val;
-                        else if (!name && !strcmp (att, "name"))
+
+                        else if (!strcmp (att, "name")) {
                                 name = val;
-                        else if (!value && !strcmp (att, "value"))
+                                if (!is_locale_interesting (name))
+                                        return;
+                                
+                        } else if (!strcmp (att, "value"))
                                 value = val;
                 }
-                
+
         } while (att && val);
 
         if (!type || !name)
@@ -186,15 +321,6 @@ parse_oaf_attribute (ParseInfo     *info,
                 g_error ("%s is an invalid property name "
                          "- property names beginning with '_' are reserved",
                          name);
-
-        equal_char = strchr (name, '-');
-        if (equal_char) {
-                locale = equal_char + 1;
-
-                /* Don't add the localized property if we aren't interested in it */
-                if (!is_locale_interesting (locale))
-                        return;
-        }
         
         info->cur_prop = g_new0 (Bonobo_ActivationProperty, 1);
         info->cur_prop->name = CORBA_string_dup (name);
@@ -463,37 +589,6 @@ static xmlSAXHandler od_SAXParser = {
 	(fatalErrorSAXFunc) od_FatalError, /* fatalError */
 };
 
-static char *
-od_validate (const char *iid, const char *type, const char *location)
-{
-        int i;
-
-        if (iid == NULL) {
-                return g_strdup (_("a NULL iid is not valid"));
-        }
-
-        if (type == NULL) {
-                return g_strdup_printf (_("iid %s has a NULL type"), iid);
-        }
-
-        if (location == NULL) {
-                return g_strdup_printf (_("iid %s has a NULL location"), iid);
-        }
-
-        for (i = 0; iid && iid [i]; i++) {
-                char c = iid [i];
-
-                if (c == ',' || c == '[' || c == ']' ||
-                    /* Reserved for future expansion */
-                    c == '!' || c == '#' || c == '|') {
-                        return g_strdup_printf (_("invalid character '%c' in iid '%s'"),
-                                                c, iid);
-                }
-        }
-
-        return NULL;
-}
-
 static void
 od_load_file (const char *file,
               GSList    **entries,
@@ -536,6 +631,17 @@ od_load_file (const char *file,
                 /* FIXME: syslog the error */
                 return;
         }
+}
+
+static gboolean
+od_filename_has_extension (const char *filename,
+                           const char *extension)
+{
+        char *last_dot;
+        
+        last_dot = strrchr (filename, '.');
+
+        return last_dot != NULL && strcmp (last_dot, extension) == 0;
 }
 
 static void
@@ -616,26 +722,4 @@ bonobo_server_info_load (char **directories,
 
         g_slist_foreach (entries, (GFunc) g_free, NULL);
         g_slist_free (entries);
-}
-
-static gboolean 
-od_string_to_boolean (const char *str)
-{
-	if (!g_ascii_strcasecmp (str, "true") ||
-            !g_ascii_strcasecmp (str, "yes") ||
-	    !strcmp (str, "1"))
-		return TRUE;
-	else
-		return FALSE;
-}
-
-static gboolean
-od_filename_has_extension (const char *filename,
-                           const char *extension)
-{
-        char *last_dot;
-        
-        last_dot = strrchr (filename, '.');
-
-        return last_dot != NULL && strcmp (last_dot, extension) == 0;
 }

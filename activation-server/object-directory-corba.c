@@ -813,6 +813,8 @@ bonobo_object_directory_re_check_fn (const char        *display,
 void
 bonobo_object_directory_reload (void)
 {
+#ifdef BONOBO_ACTIVATION_DEBUG
         g_print ("reloading our object directory!\n");
+#endif
         update_registry (main_dir, TRUE);
 }

@@ -436,7 +436,6 @@ ac_update_lists (impl_POA_Bonobo_ActivationContext *servant,
 #define GET_SERVANT(s) ((impl_POA_Bonobo_ActivationContext *)(s))
 
 static GList *clients = NULL;
-static GList *locale_list = NULL;
 
 void
 activation_clients_cache_notify (void)
@@ -477,60 +476,6 @@ activation_clients_is_empty_scan (void)
         return clients == NULL;
 }
 
-void
-add_initial_locales (void)
-{
-        const char *tmp;
-        char *tmp2, *lang, *lang_with_locale, *equal_char;
-        
-        lang_with_locale = NULL;
-        
-        tmp = g_getenv ("LANGUAGE");
-
-        if (!tmp)
-                tmp = g_getenv ("LANG");
-        
-        lang = g_strdup (tmp);
-        tmp2 = lang;
-
-        if (lang) {
-                /* envs can be in NAME=VALUE form */
-		equal_char = strchr (lang, '=');
-		if (equal_char)
-			lang = equal_char + 1;
-
-                /* check if the locale has a _ */
-                equal_char = strchr (lang, '_');
-                if (equal_char != NULL) {
-                        lang_with_locale = g_strdup (lang);
-                        *equal_char = 0;
-                }
-
-                if (lang_with_locale && strcmp (lang_with_locale, "")) {
-                        locale_list = g_list_prepend (locale_list, lang_with_locale);
-#ifdef LOCALE_DEBUG
-                        g_warning ("Init lang '%s'", lang_with_locale);
-#endif
-                }
-
-                if (lang && strcmp (lang, "")) {
-                        locale_list = g_list_prepend (locale_list, g_strdup (lang));
-#ifdef LOCALE_DEBUG
-                        g_warning ("Init lang(2) '%s'", lang);
-#endif
-                }
-        }
-
-        g_free (tmp2);
-}
-
-gboolean
-is_locale_interesting (const char *locale)
-{
-        return (g_list_find_custom (locale_list, locale,
-                                    (GCompareFunc)strcmp) != NULL);
-}
-
 static void
 active_client_cnx_broken (ORBitConnection *cnx,
                           gpointer         dummy)
@@ -550,27 +495,12 @@ impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
                                          const CORBA_char             *locales,
                                          CORBA_Environment            *ev)
 {
-        int i;
-        char **localev;
         GList *l;
+        gboolean new_locale;
         ORBitConnection *cnx;
-        gboolean new_locale = FALSE;
 
-        localev = g_strsplit (locales, ",", 0);
+        new_locale = register_interest_in_locales (locales);
 
-        for (i = 0; localev[i]; i++) {
-                if (!g_list_find_custom (locale_list, localev[i],
-                                         (GCompareFunc)strcmp)) {
-#ifdef LOCALE_DEBUG
-                        g_warning ("New locale '%s' (%d)!",
-                                   localev[i], g_list_length (locale_list));
-#endif
-                        locale_list = g_list_prepend (locale_list, g_strdup (localev[i]));
-                        new_locale = TRUE;
-                }
-        }
-        g_strfreev (localev);
-        
         cnx = ORBit_small_get_connection (client);
         for (l = clients; l; l = l->next)
                 if (cnx == ORBit_small_get_connection (l->data))
@@ -782,6 +712,11 @@ ac_do_activation (impl_POA_Bonobo_ActivationContext *servant,
 				    activatable->domain);
 			out->aid = CORBA_string_dup (tbuf);
 		}
+#ifdef BONOBO_ACTIVATION_DEBUG
+                else
+                        g_warning ("Activation of '%s' failed with exception '%s'",
+                                   activatable->iid, ev->_id);
+#endif
 	}
 }
 
