@@ -42,5 +42,7 @@ void          gnome_container_add         (GnomeContainer *container,
 void         gnome_container_remove       (GnomeContainer *container,
 					   GnomeObject    *object);
 
+END_GNOME_DECLS
+
 #endif
 

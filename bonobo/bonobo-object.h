@@ -56,5 +56,6 @@ PortableServer_ServantBase__epv gnome_object_base_epv;
 POA_GNOME_object__epv gnome_object_epv;
 POA_GNOME_object__vepv gnome_object_vepv;
 
+END_GNOME_DECLS
 
 #endif

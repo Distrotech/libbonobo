@@ -1,3 +1,18 @@
+1999-04-21  Havoc Pennington  <hp@pobox.com>
+
+	* bonobo/gnome-client-site.h
+	bonobo/gnome-component-factory.h
+	bonobo/gnome-component.h
+	bonobo/gnome-container.h
+	bonobo/gnome-dot.h
+	bonobo/gnome-inplace-component.h
+	bonobo/gnome-inplace-site.h
+	bonobo/gnome-object.h
+	bonobo/gnome-view.h
+	bonobo/gtk-interfaces.h:
+	Match BEGIN_GNOME_DECLS with END_GNOME_DECLS in these
+	headers.
+
 1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-component.c (gnome_component_new_view): Use a
