@@ -1,5 +1,12 @@
 1999-07-07  Nat Friedman  <nat@gnome-support.com>
 
+	* bonobo/gnome-moniker.h: Added the bind_function_closure field.
+
+	* bonobo/gnome-moniker.c (gnome_moniker_new): New function to create a moniker.
+	(impl_bind_to_object): Pass the closure to bind_function.
+	(gnome_moniker_construct): Documented.
+	(gnome_moniker_get_type): Documented.
+
 	* bonobo/gnome-embeddable-factory.c
  	(gnome_embeddable_factory_construct): Documented.
 	(gnome_embeddable_factory_set): Documented.  Fixed to set the

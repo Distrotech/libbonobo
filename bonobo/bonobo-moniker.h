@@ -23,6 +23,7 @@ typedef CORBA_Object (*GnomeMonikerBindFn)(GnomeMoniker *moniker,
 struct _GnomeMoniker {
 	GnomePersistStream persist_stream;
 	GnomeMonikerBindFn bind_function;
+	void *bind_function_closure;
 };
 
 typedef struct {
@@ -32,7 +33,8 @@ typedef struct {
 GtkType           gnome_moniker_get_type   (void);
 GnomeMoniker     *gnome_moniker_construct  (GnomeMoniker *moniker,
 					    GNOME_Moniker corba_moniker,
-					    GnomeMonikerBindFn bind_function);
+					    GnomeMonikerBindFn bind_function,
+					    void *bind_function_closure);
 
 GnomeBindContext *gnome_bind_context_new   (void);
 GnomeMoniker     *gnome_parse_display_name (GnomeBindContext *bind,
