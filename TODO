@@ -10,7 +10,12 @@ Bonobo-endemic issues
 ---------------------
 * check for proper unref/destruction handling/mem leaks.
 * Compile with zero warnings.
+* Base64 encoding for storages streams (provide an XML-based storage)
 * Hunt down and kill all FIXMEs.
+* _full methods for creating perl/python/scheme bindings
+* Controls deployed
+* Properties deployed
+* Simple File IO that takes care of all the repetitive code we add everywhre
 
 Bonobo Core (files in bonobo/)
 ------------------------------
@@ -48,3 +53,5 @@ Sample code (the code in samples/)
 * Write moniker sample code.
 * Write up description of paint component. (Nat)
 * Reference component in samples/, using gtk-object method (Nat).
+
+
