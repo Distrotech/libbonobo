@@ -37,7 +37,11 @@ my_sgml_files = 			\
 	fdl.sgml			\
 	$(NULL)
 
-EXTRA_DIST = $(my_sgml_files)
+EXTRA_DIST = 			\
+	$(my_sgml_files)	\
+	liboaf-decl.txt		\
+	liboaf-sections.txt	\
+	$(NULL)
 
 if ENABLE_GTK_DOC
 liboaf.html: html/book1.html
