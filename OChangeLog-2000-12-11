@@ -1,3 +1,9 @@
+Sun Oct 22 05:28:54 2000  George Lebl <jirka@5z.com>
+
+	* bonobo/bonobo-win.c (toolbar_sync_state):  return from
+	  cmd_get_attr needs to be freed with bonobo_ui_node_free_string,
+	  just like everywhere else, lest glib with memchecking segs
+
 2000-10-22  Michael Meeks  <michael@helixcode.com>
 
 	* Version 0.25
