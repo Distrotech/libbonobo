@@ -90,7 +90,7 @@ AC_CHECK_FUNCS(usleep nanosleep)
 #
 # Start of pkg-config checks
 #
-ORBIT_VERSION=2.4.0
+ORBIT_VERSION=2.7.1
 GLIB_VERSION=2.0.1
 
 PKG_CHECK_MODULES(LIBBONOBO, \
