@@ -1,5 +1,25 @@
 2000-09-04  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/extract.c: A program for extracting translatable strings from
+	xml ui descriptions.
+
+	* bonobo/ui.xml: A simple example ui description.
+
+	* samples/controls/sample-control-container.c (main): strip out old
+	USING_OAF crud. (app_destroy_cb): kill debug.
+
+	* gshell/Makefile.am: Disable for new UI handler.
+
+	* tests/test-container.c (application_new): update for new UI code.
+
+	* samples/controls/sample-control-container.c (container_create): 
+	fit for new UI handler code.
+
+	* samples/controls/bonobo-calculator-control.c (bonobo_calculator_clear): 
+	remove: unused.
+
+2000-09-04  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-view-frame.c (bonobo_view_frame_wrapper_button_press_cb): 
 	ref / unref around signal emission.
 	(bonobo_view_frame_key_press_cb): ditto.
