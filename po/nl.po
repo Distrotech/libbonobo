@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2003-08-26 14:07+0100\n"
+"POT-Creation-Date: 2003-10-10 17:18+0100\n"
 "PO-Revision-Date: 2003-06-14 12:00+0100\n"
 "Last-Translator: Huib Kleinhout <huib@stack.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"

@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-26 14:07+0100\n"
+"POT-Creation-Date: 2003-10-10 17:18+0100\n"
 "PO-Revision-Date: 2003-05-31 16:24+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
@@ -72,8 +72,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"Ni ddarllenwyd ffeil cyfluniad Gweithrediad Bonobo yn llwyddianus. "
-"Os gwelwch yn dda, gwiriwch ei fod yn ddilys yn: %s"
+"Ni ddarllenwyd ffeil cyfluniad Gweithrediad Bonobo yn llwyddianus. Os "
+"gwelwch yn dda, gwiriwch ei fod yn ddilys yn: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
