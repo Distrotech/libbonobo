@@ -102,7 +102,6 @@ oaf_active_server_register (const char *registration_id,
                                                            obj, &ev);
         }
 
-
 	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
 		char *iorstr;
 		FILE *fh;
@@ -126,10 +125,11 @@ oaf_active_server_register (const char *registration_id,
 			CORBA_free (iorstr);
 		}
 
-		if (fh != stdout)
+		if (fh != stdout) {
 			fclose (fh);
-		else if (iorfd > 2)
+		} else if (iorfd > 2) {
 			close (iorfd);
+                }
 	}
 #ifdef OAF_DEBUG
         else if (actid && need_ior_printout) {
