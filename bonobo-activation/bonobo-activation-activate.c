@@ -249,7 +249,7 @@ query_cache_insert (const char   *query,
 	entry->sort_criteria = g_strdupv ((char **) sort_criteria);
 	entry->list = Bonobo_ServerInfoList_duplicate (list);
 
-	g_hash_table_insert (query_cache, entry, entry);
+	g_hash_table_replace (query_cache, entry, entry);
 
 #ifdef QUERY_CACHE_DEBUG
 	g_warning ("Query cache size now %d",
