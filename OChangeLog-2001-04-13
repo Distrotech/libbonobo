@@ -1,3 +1,14 @@
+2000-10-11  Darin Adler  <darin@eazel.com>
+
+	* po/POTFILES.in:
+	* po/XMLFILES.in:
+	Building of gshell is turned off, so RPM builds will fail unless
+	we turn off translating of gshell files too.
+
+	* bonobo/.cvsignore:
+	* monikers/.cvsignore:
+	Mention a few more generated files.
+	
 2000-10-11  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar.c (containee_destroy_cb): Use correct
