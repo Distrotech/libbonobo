@@ -12,6 +12,11 @@
 		<oaf_attribute name="repo_ids" type="stringv">
 			<item value="IDL:Empty2:1.0"/>
 		</oaf_attribute>
+		<oaf_attribute name="verb" type="verbatim">
+			<this_is_a_tag>
+				<item name="Foo"/>
+			</this_is_a_tag>
+		</oaf_attribute>
 	</oaf_server>
 
 </oaf_info>
