@@ -121,7 +121,9 @@ libbonobo_src =				\
 	bonobo-stream-memory.c		\
 	bonobo-storage-memory.c		\
 	bonobo-running-context.c	\
-	bonobo-types.c
+	bonobo-types.c			\
+	bonobo-debug.c			\
+	bonobo-debug.h
 
 $(libbonobo_2_la_OBJECTS): Bonobo.h $(marshal_sources)
 

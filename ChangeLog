@@ -1,3 +1,14 @@
+2002-05-13  Jaka Mocnik  <jaka@gnu.org>
+
+	* bonobo/bonobo-debug.[ch]: debugging print function and parsing of
+	environment variables BONOBO_DEBUG_FLAGS and BONOBO_DEBUG_DIR in
+	order to determine the desired debugging output.
+	* bonobo/Makefile.am: compile the new source file.
+	* bonobo/bonobo-object.c, bonobo/bonobo-running-context.c:
+	instead of conditionally compiling the debugging code, compile
+	it always, but only execute it if the appropriate debugging flags
+	are set.
+
 2002-05-10  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* configure.in: Added Vietnamese (vi) to ALL_LINGUAS

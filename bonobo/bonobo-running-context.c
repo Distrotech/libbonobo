@@ -19,22 +19,14 @@
 #include <bonobo/bonobo-running-context.h>
 #include <bonobo/bonobo-shutdown.h>
 #include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-debug.h>
 
 #define PARENT_TYPE BONOBO_TYPE_OBJECT
 
+/* you may debug by adding item "running" to BONOBO_DEBUG_FLAGS
+   environment variable. */
+
 static BonoboObjectClass *bonobo_running_context_parent_class = NULL;
-
-#ifdef BONOBO_OBJECT_DEBUG
-#	define BONOBO_RUNNING_HOOKS
-#endif
-
-/*
- * NB. for a quicker debugging experience simply
- * #define BONOBO_RUNNING_HOOKS
- */
-#if 0
-#	define BONOBO_RUNNING_HOOKS
-#endif
 
 typedef struct {
 	gboolean    emitted_last_unref;
@@ -59,21 +51,6 @@ key_free (gpointer name, gpointer dummy1, gpointer user_data)
 	g_free (name);
 }
 
-#ifdef BONOBO_RUNNING_HOOKS
-static void
-bonobo_debug_print (char *name, char *fmt, ...)
-{
-	va_list args;
-           
-	va_start (args, fmt);
-	
-	printf ("[%06d]:%-15s ", getpid (), name); 
-	vprintf (fmt, args);
-	printf ("\n"); 
-
-	va_end (args);
-}
-
 static void
 bonobo_ri_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 {
@@ -82,7 +59,6 @@ bonobo_ri_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 	bonobo_debug_print ("", "[%p]:CORBA_Object still running", o);
 		
 }
-#endif
 
 void
 bonobo_running_context_shutdown (void)
@@ -91,17 +67,19 @@ bonobo_running_context_shutdown (void)
 
 		BonoboRunningInfo *ri = bonobo_running_info;
 
-#ifdef BONOBO_RUNNING_HOOKS
-		bonobo_debug_print ("rinfo-start", 
-			  "-------------------------------------------------");
-
-		bonobo_debug_print ("running-objects", "%d running objects", 
-				    g_hash_table_size (ri->objects));
-		g_hash_table_foreach (ri->objects,
-				      bonobo_ri_debug_foreach, NULL);
-		bonobo_debug_print ("rinfo-end", 
-			  "-------------------------------------------------");
-#endif
+#ifdef G_ENABLE_DEBUG
+		if(_bonobo_debug_flags & BONOBO_DEBUG_RUNNING) {
+			bonobo_debug_print ("rinfo-start", 
+					    "-------------------------------------------------");
+			
+			bonobo_debug_print ("running-objects", "%d running objects", 
+					    g_hash_table_size (ri->objects));
+			g_hash_table_foreach (ri->objects,
+					      bonobo_ri_debug_foreach, NULL);
+			bonobo_debug_print ("rinfo-end", 
+					    "-------------------------------------------------");
+		}
+#endif /* G_ENABLE_DEBUG */
 		if (ri->objects)
 			g_hash_table_destroy (ri->objects);
 		ri->objects = NULL;
@@ -168,13 +146,16 @@ check_empty (void)
 void
 bonobo_running_context_add_object (CORBA_Object object)
 {
-#ifdef BONOBO_RUNNING_HOOKS
-	bonobo_running_context_trace_objects (object, "local", 0, 0);
-#else 
-	BonoboRunningInfo *ri = get_running_info (TRUE);
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_RUNNING)
+		bonobo_running_context_trace_objects (object, "local", 0, 0);
+	else
+#endif /* G_ENABLE_DEBUG */
+	{
+		BonoboRunningInfo *ri = get_running_info (TRUE);
 
-	g_hash_table_insert (ri->objects, object, object);
-#endif
+		g_hash_table_insert (ri->objects, object, object);
+	}
 }
 #endif
 
@@ -183,17 +164,20 @@ bonobo_running_context_add_object (CORBA_Object object)
 void
 bonobo_running_context_remove_object (CORBA_Object object)
 {
-#ifdef BONOBO_RUNNING_HOOKS
-	bonobo_running_context_trace_objects (object, "local", 0, 1);
-#else 
-	BonoboRunningInfo *ri = get_running_info (FALSE);
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_RUNNING)
+		bonobo_running_context_trace_objects (object, "local", 0, 1);
+	else
+#endif /* G_ENABLE_DEBUG */
+	{
+		BonoboRunningInfo *ri = get_running_info (FALSE);
 
-	if (ri) {
-		g_hash_table_remove (ri->objects, object);
+		if (ri) {
+			g_hash_table_remove (ri->objects, object);
 
-		check_empty ();
+			check_empty ();
+		}
 	}
-#endif
 }
 #endif
 
@@ -201,15 +185,18 @@ bonobo_running_context_remove_object (CORBA_Object object)
 void
 bonobo_running_context_ignore_object (CORBA_Object object)
 {
-#ifdef BONOBO_RUNNING_HOOKS
-	bonobo_running_context_trace_objects (object, "local", 0, 2);
-#else 
-	BonoboRunningInfo *ri = get_running_info (FALSE);
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_RUNNING)
+		bonobo_running_context_trace_objects (object, "local", 0, 2);
+	else
+#endif /* G_ENABLE_DEBUG */
+	{
+		BonoboRunningInfo *ri = get_running_info (FALSE);
 
-	if (ri) {
-		g_hash_table_remove (ri->objects, object);
+		if (ri) {
+			g_hash_table_remove (ri->objects, object);
+		}
 	}
-#endif
 }
 #endif
 
@@ -220,13 +207,12 @@ bonobo_running_context_trace_objects (CORBA_Object object,
 				      int          mode)
 {
 	BonoboRunningInfo *ri = get_running_info (mode == 0);
-#ifdef BONOBO_RUNNING_HOOKS
-	char *cmode[] = {
+	static char *cmode[] = {
 		"add_object",
 		"remove_object",
 		"ignore_object"		
 	};
-#endif
+
 	if (ri) {
 		switch (mode) {
 		case 0:
@@ -241,11 +227,13 @@ bonobo_running_context_trace_objects (CORBA_Object object,
 			g_hash_table_remove (ri->objects, object);
 			break;
 		}
-#ifdef BONOBO_RUNNING_HOOKS
-		bonobo_debug_print (cmode [mode], 
-		        "[%p]:CORBA_Object %d running objects at %s:%d",
-			object, g_hash_table_size (ri->objects), fn, line);
-#endif
+
+#ifdef G_ENABLE_DEBUG
+		if(_bonobo_debug_flags & BONOBO_DEBUG_RUNNING)
+			bonobo_debug_print (cmode [mode], 
+					    "[%p]:CORBA_Object %d running objects at %s:%d",
+					    object, g_hash_table_size (ri->objects), fn, line);
+#endif /* G_ENABLE_DEBUG */
 	}
 }
 

@@ -12,6 +12,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include <glib-object.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/Bonobo.h>
@@ -23,41 +24,31 @@
 #include <bonobo/bonobo-marshal.h>
 #include <bonobo/bonobo-types.h>
 #include <bonobo/bonobo-shutdown.h>
+#include <bonobo/bonobo-debug.h>
 
 /* Some simple tracking - always on */
 static GMutex *bonobo_total_aggregates_lock = NULL;
 static glong   bonobo_total_aggregates      = 0;
 static glong   bonobo_total_aggregate_refs  = 0;
 
-#ifdef BONOBO_OBJECT_DEBUG
-#	define BONOBO_REF_HOOKS
-#endif
+/* you may debug by setting BONOBO_DEBUG_FLAGS environment variable to
+   a colon separated list of a subset of {refs,aggregate,lifecycle} */
 
-/* Define to debug user aggregate merging code */
-#undef BONOBO_AGGREGATE_DEBUG
-
-/* NB. for a quicker debugging experience define this */
-#undef BONOBO_REF_HOOKS 
-
-/* You almost certainly don't want this */
-#undef BONOBO_LIFECYCLE_DEBUG
-
-#ifdef BONOBO_REF_HOOKS
 typedef struct {
 	const char *fn;
 	gboolean    ref;
 	int         line;
 } BonoboDebugRefData;
-#endif
 
 typedef struct {
 	int      ref_count;
 	gboolean immortal;
 	GList   *objs;
-#ifdef BONOBO_REF_HOOKS
+#ifdef G_ENABLE_DEBUG
+	/* the following is required for reference debugging */
 	GList   *refs;
 	int      destroyed;
-#endif
+#endif /* G_ENABLE_DEBUG */
 } BonoboAggregateObject;
 
 struct _BonoboObjectPrivate {
@@ -73,24 +64,9 @@ enum {
 static guint bonobo_object_signals [LAST_SIGNAL];
 static GObjectClass *bonobo_object_parent_class;
 
-#ifdef BONOBO_REF_HOOKS
-
+#ifdef G_ENABLE_DEBUG
 static GHashTable *living_ao_ht = NULL;
-
-static void
-bonobo_debug_print (char *name, char *fmt, ...)
-{
-	va_list args;
-           
-	va_start (args, fmt);
-	
-	printf ("[%06d]:%-15s ", getpid (), name); 
-	vprintf (fmt, args);
-	printf ("\n"); 
-
-	va_end (args);
-}
-#endif /* BONOBO_REF_HOOKS */
+#endif /* G_ENABLE_DEBUG */
 
 /* Do not use this function, it is not what you want; see unref */
 static void
@@ -110,9 +86,10 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 		} else
 			g_warning ("Serious ref-counting error [%p]", o);
 	}
-#ifdef BONOBO_REF_HOOKS
-	ao->destroyed = TRUE;
-#endif
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) 
+		ao->destroyed = TRUE;
+#endif /* G_ENABLE_DEBUG */
 }
 
 static void
@@ -121,9 +98,11 @@ bonobo_object_corba_deactivate (BonoboObject *object)
 	CORBA_Environment        ev;
 	PortableServer_ObjectId *oid;
 
-#ifdef BONOBO_LIFECYCLE_DEBUG
-	g_warning ("BonoboObject corba deactivate %p", object);
-#endif
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_LIFECYCLE)
+		bonobo_debug_print("deactivate",
+				   "BonoboObject corba deactivate %p", object);
+#endif /* G_ENABLE_DEBUG */
 
 	g_assert (object->priv->ao == NULL);
 
@@ -167,16 +146,18 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 			g_error ("Serious bonobo object corruption");
 		else {
 			g_assert (BONOBO_OBJECT (o)->priv->ao != NULL);
-#ifdef BONOBO_REF_HOOKS
-			g_assert (BONOBO_OBJECT (o)->priv->ao->destroyed);
+#ifdef G_ENABLE_DEBUG
+			if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+				g_assert (BONOBO_OBJECT (o)->priv->ao->destroyed);
 
-			bonobo_debug_print ("finalize", 
-					    "[%p] %-20s corba_objref=[%p]"
-					    " g_ref_count=%d", o,
-					    G_OBJECT_TYPE_NAME (o),
-					    BONOBO_OBJECT (o)->corba_objref,
-					    G_OBJECT (o)->ref_count);
-#endif
+				bonobo_debug_print ("finalize", 
+						    "[%p] %-20s corba_objref=[%p]"
+						    " g_ref_count=%d", o,
+						    G_OBJECT_TYPE_NAME (o),
+						    BONOBO_OBJECT (o)->corba_objref,
+						    G_OBJECT (o)->ref_count);
+			}
+#endif /* G_ENABLE_DEBUG */
 
 			/*
 			 * Disconnect the GObject from the aggregate object
@@ -192,19 +173,24 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 			bonobo_object_corba_deactivate (BONOBO_OBJECT (o));
 
 			g_object_unref (o);
-#ifdef BONOBO_LIFECYCLE_DEBUG
-			g_warning ("Done finalize internal on %p", o);
-#endif
+#ifdef G_ENABLE_DEBUG
+			if(_bonobo_debug_flags & BONOBO_DEBUG_LIFECYCLE)
+				bonobo_debug_print ("finalize",
+						    "Done finalize internal on %p",
+						    o);
+#endif /* G_ENABLE_DEBUG */
 		}
 	}
 
 	g_list_free (ao->objs);
 	ao->objs = NULL;
 
-#ifdef BONOBO_REF_HOOKS
-	for (l = ao->refs; l; l = l->next)
-		g_free (l->data);
-	g_list_free (ao->refs);
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+		for (l = ao->refs; l; l = l->next)
+			g_free (l->data);
+		g_list_free (ao->refs);
+	}
 #endif
 
 	g_free (ao);
@@ -231,9 +217,12 @@ bonobo_object_finalize_servant (PortableServer_Servant servant,
 {
 	BonoboObject *object = bonobo_object(servant);
 
-#ifdef BONOBO_LIFECYCLE_DEBUG
-	g_warning ("BonoboObject Servant finalize %p", object);
-#endif
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_LIFECYCLE)
+		bonobo_debug_print ("finalize",
+				    "BonoboObject Servant finalize %p",
+				    object);
+#endif /* G_ENABLE_DEBUG */
 
 	g_object_unref (G_OBJECT (object));
 }
@@ -256,14 +245,16 @@ bonobo_object_ref (gpointer obj)
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), object);
 	g_return_val_if_fail (object->priv->ao->ref_count > 0, object);
 
-#ifdef BONOBO_REF_HOOKS
-	bonobo_object_trace_refs (object, "local", 0, TRUE);
-#else
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+		bonobo_object_trace_refs (object, "local", 0, TRUE);
+	}
+	else
+#endif /* G_ENABLE_DEBUG */
 	if (!object->priv->ao->immortal) {
 		object->priv->ao->ref_count++;
 		bonobo_total_aggregate_refs++;
 	}
-#endif
 
 	return object;
 }
@@ -280,33 +271,37 @@ bonobo_object_ref (gpointer obj)
 gpointer
 bonobo_object_unref (gpointer obj)
 {
-#ifndef BONOBO_REF_HOOKS
-	BonoboAggregateObject *ao;
-	BonoboObject *object = obj;
+#ifdef G_ENABLE_DEBUG
+	if(!(_bonobo_debug_flags & BONOBO_DEBUG_REFS)) {
+#endif /* G_ENABLE_DEBUG */
+		BonoboAggregateObject *ao;
+		BonoboObject *object = obj;
 
-	if (!object)
-		return NULL;
+		if (!object)
+			return NULL;
 
-	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
+		g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
-	ao = object->priv->ao;
-	g_return_val_if_fail (ao != NULL, NULL);
-	g_return_val_if_fail (ao->ref_count > 0, NULL);
+		ao = object->priv->ao;
+		g_return_val_if_fail (ao != NULL, NULL);
+		g_return_val_if_fail (ao->ref_count > 0, NULL);
 
-	if (!ao->immortal) {
-		if (ao->ref_count == 1)
-			bonobo_object_destroy (ao);
-
-		ao->ref_count--;
-		bonobo_total_aggregate_refs--;
+		if (!ao->immortal) {
+			if (ao->ref_count == 1)
+				bonobo_object_destroy (ao);
+			
+			ao->ref_count--;
+			bonobo_total_aggregate_refs--;
 		
-		if (ao->ref_count == 0)
-			bonobo_object_finalize_internal (ao);
+			if (ao->ref_count == 0)
+				bonobo_object_finalize_internal (ao);
+		}
+		return NULL;
+#ifdef G_ENABLE_DEBUG
 	}
-	return NULL;
-#else
-	return bonobo_object_trace_refs (obj, "local", 0, FALSE);
-#endif /* BONOBO_REF_HOOKS */
+	else
+		return bonobo_object_trace_refs (obj, "local", 0, FALSE);
+#endif /* G_ENABLE_DEBUG */
 }
 #endif /* bonobo_object_unref */
 
@@ -316,89 +311,90 @@ bonobo_object_trace_refs (gpointer    obj,
 			  int         line,
 			  gboolean    ref)
 {
-#ifdef BONOBO_REF_HOOKS
-	BonoboObject *object = obj;
-	BonoboAggregateObject *ao;
-	BonoboDebugRefData *descr;
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+		BonoboObject *object = obj;
+		BonoboAggregateObject *ao;
+		BonoboDebugRefData *descr;
 
-	if (!object)
-		return NULL;
+		if (!object)
+			return NULL;
 	
-	g_return_val_if_fail (BONOBO_IS_OBJECT (object), ref ? object : NULL);
-	ao = object->priv->ao;
-	g_return_val_if_fail (ao != NULL, ref ? object : NULL);
-
-	descr  = g_new (BonoboDebugRefData, 1);
-	ao->refs = g_list_prepend (ao->refs, descr);
-	descr->fn = fn;
-	descr->ref = ref;
-	descr->line = line;
-
-	if (ref) {
-		g_return_val_if_fail (ao->ref_count > 0, object);
-
-		if (!object->priv->ao->immortal) {
-			object->priv->ao->ref_count++;
-			bonobo_total_aggregate_refs++;
-		}
+		g_return_val_if_fail (BONOBO_IS_OBJECT (object), ref ? object : NULL);
+		ao = object->priv->ao;
+		g_return_val_if_fail (ao != NULL, ref ? object : NULL);
 		
-		bonobo_debug_print ("ref", "[%p]:[%p]:%s to %d at %s:%d", 
-			object, ao,
-		        G_OBJECT_TYPE_NAME (object),
-			ao->ref_count, fn, line);
+		descr  = g_new (BonoboDebugRefData, 1);
+		ao->refs = g_list_prepend (ao->refs, descr);
+		descr->fn = fn;
+		descr->ref = ref;
+		descr->line = line;
 
-		return object;
+		if (ref) {
+			g_return_val_if_fail (ao->ref_count > 0, object);
 
-	} else { /* unref */
-		bonobo_debug_print ("unref", "[%p]:[%p]:%s from %d at %s:%d", 
-			object, ao,
-			G_OBJECT_TYPE_NAME (object),
-			ao->ref_count, fn, line);
+			if (!object->priv->ao->immortal) {
+				object->priv->ao->ref_count++;
+				bonobo_total_aggregate_refs++;
+			}
+		
+			bonobo_debug_print ("ref", "[%p]:[%p]:%s to %d at %s:%d", 
+					    object, ao,
+					    G_OBJECT_TYPE_NAME (object),
+					    ao->ref_count, fn, line);
 
-		g_return_val_if_fail (ao->ref_count > 0, NULL);
+			return object;
+		} else { /* unref */
+			bonobo_debug_print ("unref", "[%p]:[%p]:%s from %d at %s:%d", 
+					    object, ao,
+					    G_OBJECT_TYPE_NAME (object),
+					    ao->ref_count, fn, line);
 
-		if (ao->immortal)
-			bonobo_debug_print ("unusual", "immortal object");
-		else {
-			if (ao->ref_count == 1) {
-				bonobo_object_destroy (ao);
+			g_return_val_if_fail (ao->ref_count > 0, NULL);
+
+			if (ao->immortal)
+				bonobo_debug_print ("unusual", "immortal object");
+			else {
+				if (ao->ref_count == 1) {
+					bonobo_object_destroy (ao);
+					
+					g_return_val_if_fail (ao->ref_count > 0, NULL);
+				}
 				
-				g_return_val_if_fail (ao->ref_count > 0, NULL);
+				/*
+				 * If this blows it is likely some loony used
+				 * g_object_unref somewhere instead of
+				 * bonobo_object_unref, send them my regards.
+				 */
+				g_assert (object->priv->ao == ao);
+				
+				ao->ref_count--;
+				bonobo_total_aggregate_refs--;
+				
+				if (ao->ref_count == 0) {
+					
+					g_assert (g_hash_table_lookup (living_ao_ht, ao) == ao);
+					g_hash_table_remove (living_ao_ht, ao);
+					
+					bonobo_object_finalize_internal (ao);
+					
+				} else if (ao->ref_count < 0) {
+					bonobo_debug_print ("unusual", 
+							    "[%p] already finalized", ao);
+				}
 			}
 			
-			/*
-			 * If this blows it is likely some loony used
-			 * g_object_unref somewhere instead of
-			 * bonobo_object_unref, send them my regards.
-			 */
-			g_assert (object->priv->ao == ao);
-			
-			ao->ref_count--;
-			bonobo_total_aggregate_refs--;
-			
-			if (ao->ref_count == 0) {
-				
-				g_assert (g_hash_table_lookup (living_ao_ht, ao) == ao);
-				g_hash_table_remove (living_ao_ht, ao);
-				
-				bonobo_object_finalize_internal (ao);
-				
-			} else if (ao->ref_count < 0) {
-				bonobo_debug_print ("unusual", 
-						    "[%p] already finalized", ao);
-			}
+			return NULL;
 		}
-
-		return NULL;
 	}
-#else
+	else
+#endif /* G_ENABLE_DEBUG */
 	if (ref)
 		return bonobo_object_ref (obj);
 	else {
 		bonobo_object_unref (obj);
 		return NULL;
 	}
-#endif
 }
 
 static void
@@ -408,11 +404,17 @@ impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 
 	object = bonobo_object_from_servant (servant);
 
-#if defined(BONOBO_REF_HOOKS) && !defined(bonobo_object_ref)
-	bonobo_object_trace_refs (object, "remote", 0, TRUE);
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+#ifndef bonobo_object_ref
+		bonobo_object_trace_refs (object, "remote", 0, TRUE);
 #else
-	bonobo_object_ref (object);
+		bonobo_object_ref (object);
 #endif
+	}
+	else
+#endif /* G_ENABLE_DEBUG */
+		bonobo_object_ref (object);
 }
 
 void
@@ -508,11 +510,17 @@ impl_Bonobo_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev
 
 	object = bonobo_object_from_servant (servant);
 
-#if defined(BONOBO_REF_HOOKS) && !defined(bonobo_object_unref)
-	bonobo_object_trace_refs (object, "remote", 0, FALSE);
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+#ifndef bonobo_object_unref
+		bonobo_object_trace_refs (object, "remote", 0, FALSE);
 #else
-	bonobo_object_unref (object);
+		bonobo_object_unref (object);
 #endif
+	}
+	else
+#endif /* G_ENABLE_DEBUG */
+		bonobo_object_unref (object);
 }
 
 /**
@@ -569,13 +577,15 @@ impl_Bonobo_Unknown_queryInterface (PortableServer_Servant  servant,
 	local_interface = bonobo_object_query_local_interface (
 		object, repoid);
 
-#ifdef BONOBO_REF_HOOKS
-	bonobo_debug_print ("query-interface", 
-			    "[%p]:[%p]:%s repoid=%s", 
-			    object, object->priv->ao,
-			    G_OBJECT_TYPE_NAME (object),
-			    repoid);
-#endif
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+		bonobo_debug_print ("query-interface", 
+				    "[%p]:[%p]:%s repoid=%s", 
+				    object, object->priv->ao,
+				    G_OBJECT_TYPE_NAME (object),
+				    repoid);
+	}
+#endif /* G_ENABLE_DEBUG */
 
 	if (local_interface == NULL)
 		return CORBA_OBJECT_NIL;
@@ -596,9 +606,13 @@ bonobo_object_finalize_gobject (GObject *gobject)
 {
 	BonoboObject *object = (BonoboObject *) gobject;
 
-#ifdef BONOBO_LIFECYCLE_DEBUG
-	g_warning ("Bonobo Object finalize GObject %p", gobject);
-#endif
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_LIFECYCLE)
+		bonobo_debug_print ("finalize",
+				    "Bonobo Object finalize GObject %p",
+				    gobject);
+#endif /* G_ENABLE_DEBUG */
+
 	if (object->priv->ao != NULL)
 		g_error ("g_object_unreffing a bonobo_object that "
 			 "still has %d refs", object->priv->ao->ref_count);
@@ -745,11 +759,15 @@ bonobo_object_instance_init (GObject    *g_object,
 	BonoboObject *object = BONOBO_OBJECT (g_object);
 	BonoboAggregateObject *ao;
 
-#ifdef BONOBO_OBJECT_DEBUG
-	g_warning ("bonobo_object_instance init '%s' '%s' -> %p",
-		   G_OBJECT_TYPE_NAME (g_object),
-		   G_OBJECT_CLASS_NAME (klass), object);
-#endif
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_OBJECT) {
+		bonobo_debug_print ("object",
+				    "bonobo_object_instance init '%s' '%s' -> %p",
+				    G_OBJECT_TYPE_NAME (g_object),
+				    G_OBJECT_CLASS_NAME (klass), object);
+	}
+#endif /* G_ENABLE_DEBUG */
+
 	/* Some simple debugging - count aggregate allocate */
 	LINC_MUTEX_LOCK   (bonobo_total_aggregates_lock);
 	bonobo_total_aggregates++;
@@ -776,8 +794,8 @@ bonobo_object_instance_init (GObject    *g_object,
 	   bonobo_object_finalize_servant: is invoked */
 	g_object_ref (g_object);
 
-#ifdef BONOBO_REF_HOOKS
-	{
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
 		bonobo_debug_print ("create", "[%p]:[%p]:%s to %d", object, ao,
 				    g_type_name (G_TYPE_FROM_CLASS (klass)),
 				    ao->ref_count);
@@ -785,7 +803,7 @@ bonobo_object_instance_init (GObject    *g_object,
 		g_assert (g_hash_table_lookup (living_ao_ht, ao) == NULL);
 		g_hash_table_insert (living_ao_ht, ao, ao);
 	}
-#endif
+#endif /* G_ENABLE_DEBUG */
 
 	do_corba_setup (object, BONOBO_OBJECT_CLASS (klass));
 }
@@ -813,18 +831,19 @@ bonobo_object_get_type (void)
 			(GInstanceInitFunc) bonobo_object_instance_init
 		};
 		
+#ifdef G_ENABLE_DEBUG
+		bonobo_debug_init();
+		if(_bonobo_debug_flags & BONOBO_DEBUG_REFS)
+			living_ao_ht = g_hash_table_new (NULL, NULL);
+#endif /* G_ENABLE_DEBUG */
 		type = g_type_register_static (G_TYPE_OBJECT, "BonoboObject",
 					       &info, 0);
-
-#ifdef BONOBO_REF_HOOKS
-		living_ao_ht = g_hash_table_new (NULL, NULL);
-#endif
 	}
 
 	return type;
 }
 
-#ifdef BONOBO_REF_HOOKS
+#ifdef G_ENABLE_DEBUG
 static void
 bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 {
@@ -860,27 +879,29 @@ bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 				    descr->fn, descr->line);
 	}
 }
-#endif
+#endif /* G_ENABLE_DEBUG */
 
 int
 bonobo_object_shutdown (void)
 {
-#ifdef BONOBO_REF_HOOKS
-	
-	bonobo_debug_print ("shutdown-start", 
-		"-------------------------------------------------");
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {	
+		bonobo_debug_print ("shutdown-start", 
+				    "-------------------------------------------------");
 
-	if (living_ao_ht)
-		g_hash_table_foreach (living_ao_ht,
-				      bonobo_ao_debug_foreach, NULL);
+		if (living_ao_ht)
+			g_hash_table_foreach (living_ao_ht,
+					      bonobo_ao_debug_foreach, NULL);
+		
+		bonobo_debug_print ("living-objects",
+				    "living bonobo objects count = %d",
+				    g_hash_table_size (living_ao_ht));
+		
+		bonobo_debug_print ("shutdown-end", 
+				    "-------------------------------------------------");
+	}
+#endif /* G_ENABLE_DEBUG */
 
-	bonobo_debug_print ("living-objects",
-			    "living bonobo objects count = %d",
-			    g_hash_table_size (living_ao_ht));
-
-	bonobo_debug_print ("shutdown-end", 
-		"-------------------------------------------------");
-#endif
 	if (bonobo_total_aggregates > 0) {
 		g_warning ("Leaked a total of %ld refs to %ld bonobo object(s)",
 			   bonobo_total_aggregate_refs,
@@ -935,50 +956,54 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        ao->ref_count = ao->ref_count + oldao->ref_count - 1;
        bonobo_total_aggregate_refs--;
 
-#ifdef BONOBO_REF_HOOKS		
-       bonobo_debug_print ("add_interface", 
-			   "[%p]:[%p]:%s to [%p]:[%p]:%s ref_count=%d", 
-			   object, object->priv->ao,
-			   G_OBJECT_TYPE_NAME (object),
-			   newobj, newobj->priv->ao,
-			   G_OBJECT_TYPE_NAME (newobj),
-			   ao->ref_count);
-#endif
+#ifdef G_ENABLE_DEBUG
+       if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+	       bonobo_debug_print ("add_interface", 
+				   "[%p]:[%p]:%s to [%p]:[%p]:%s ref_count=%d", 
+				   object, object->priv->ao,
+				   G_OBJECT_TYPE_NAME (object),
+				   newobj, newobj->priv->ao,
+				   G_OBJECT_TYPE_NAME (newobj),
+				   ao->ref_count);
+       }
+#endif /* G_ENABLE_DEBUG */
 
        /* Merge the two AggregateObject lists */
        for (l = oldao->objs; l; l = l->next) {
 	       BonoboObject *new_if = l->data;
 
-#ifdef BONOBO_AGGREGATE_DEBUG
-	       GList *i;
-	       CORBA_Environment ev;
-	       CORBA_char *new_id;
+#ifdef G_ENABLE_DEBUG
+	       if(_bonobo_debug_flags & BONOBO_DEBUG_AGGREGATE) {
+		       GList *i;
+		       CORBA_Environment ev;
+		       CORBA_char *new_id;
+		       
+		       CORBA_exception_init (&ev);
 
-	       CORBA_exception_init (&ev);
+		       new_id = ORBit_small_get_type_id (new_if->corba_objref, &ev);
 
-	       new_id = ORBit_small_get_type_id (new_if->corba_objref, &ev);
+		       for (i = ao->objs; i; i = i->next) {
+			       BonoboObject *old_if = i->data;
 
-	       for (i = ao->objs; i; i = i->next) {
-		       BonoboObject *old_if = i->data;
-
-		       if (old_if == new_if)
-			       g_error ("attempting to merge identical "
-					"interfaces [%p]", new_if);
-		       else {
-			       CORBA_char *old_id;
-
-			       old_id = ORBit_small_get_type_id (old_if->corba_objref, &ev);
-			       
-			       if (!strcmp (new_id, old_id))
-				       g_error ("Aggregating two BonoboObject that implement "
-						"the same interface '%s' [%p]", new_id, new_if);
-			       CORBA_free (old_id);
+			       if (old_if == new_if)
+				       g_error ("attempting to merge identical "
+						"interfaces [%p]", new_if);
+			       else {
+				       CORBA_char *old_id;
+				       
+				       old_id = ORBit_small_get_type_id (old_if->corba_objref, &ev);
+				       
+				       if (!strcmp (new_id, old_id))
+					       g_error ("Aggregating two BonoboObject that implement "
+							"the same interface '%s' [%p]", new_id, new_if);
+				       CORBA_free (old_id);
+			       }
 		       }
+		       
+		       CORBA_free (new_id);
+		       CORBA_exception_free (&ev);
 	       }
-
-	       CORBA_free (new_id);
-	       CORBA_exception_free (&ev);
-#endif
+#endif /* G_ENABLE_DEBUG */
 
 	       ao->objs = g_list_prepend (ao->objs, new_if);
 	       new_if->priv->ao = ao;
@@ -986,11 +1011,13 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 
        g_assert (newobj->priv->ao == ao);
 
-#ifdef BONOBO_REF_HOOKS
-       g_assert (g_hash_table_lookup (living_ao_ht, oldao) == oldao);
-       g_hash_table_remove (living_ao_ht, oldao);
-       ao->refs = g_list_concat (ao->refs, oldao->refs);
-#endif
+#ifdef G_ENABLE_DEBUG
+       if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+	       g_assert (g_hash_table_lookup (living_ao_ht, oldao) == oldao);
+	       g_hash_table_remove (living_ao_ht, oldao);
+	       ao->refs = g_list_concat (ao->refs, oldao->refs);
+       }
+#endif /* G_ENABLE_DEBUG */
 
        g_list_free (oldao->objs);
        g_free (oldao);
@@ -1321,10 +1348,12 @@ bonobo_type_setup (GType             type,
 		return FALSE;
 	}
 
-#ifdef BONOBO_OBJECT_DEBUG
-	g_warning ("We are at depth %d with type '%s'",
-		   depth, g_type_name (type));
-#endif
+#ifdef G_ENABLE_DEBUG
+	if(_bonobo_debug_flags & BONOBO_DEBUG_OBJECT) {
+		bonobo_debug_print ("object", "We are at depth %d with type '%s'",
+				    depth, g_type_name (type));
+	}
+#endif /* G_ENABLE_DEBUG */
 
 	/* Setup the Unknown epv */
 	bonobo_object_epv_init (&klass->epv);

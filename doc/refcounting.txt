@@ -47,16 +47,14 @@ object. This is a very bad move indeed.
 * Reference leaks
 
 Catching reference leaks is evily difficult. The first approach is to
-re-build bonobo with BONOBO_OBJECT_DEBUG defined in bonobo-object.h.
-This combined with a call to bonobo_shutdown () before exiting your
-program should provide a dump of all object references floating in
-your code. Having re-build bonobo you will need to re-build your
-application, otherwise you will get link errors moaning about not
-being able to find 'bonobo_object_ref / unref'.
-
-A simpler but less verbose way to get ref count debugging without
-re-compiling everything is to simply define BONOBO_REF_HOOKS at the
-top of bonobo-object.c
+set environment variable BONOBO_DEBUG_FLAGS to a colon separated list
+of a subset of {object,running,aggregate,lifecycle,refs}. This will
+enable debugging output in certain parts of libbonobo. The output will
+be written to stdout or, alternatively, if you set BONOBO_DEBUG_DIR to
+a directory path, to a file named "bonobo-debug-<pid>" in that
+directory. This combined with a call to bonobo_shutdown () before
+exiting your program should provide a dump of all object references
+floating in your code.
 
 Another good way of catching leaks, having guessed which object is not
 getting freed is to fire up container and component in gdb, break in
