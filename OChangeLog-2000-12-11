@@ -1,5 +1,23 @@
 2000-12-07  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-async.[ch]: Implement.
+
+	* bonobo/bonobo-moniker-util.c: Remove a lot of ugliness, inc.
+	hand modified ORBit stubs, gack.
+
+2000-12-02  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-context.c (bonobo_context_add): document the
+	burgeoning API.
+
+2000-12-01  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_resolve_async): upd.
+	(resolve_demarshal): kill.
+	(unhook_io_channel), (bonobo_moniker_async_handle*): kill.
+
+2000-12-07  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-moniker.c (bonobo_moniker_destroy): fix henious
 	chaining bug.
 

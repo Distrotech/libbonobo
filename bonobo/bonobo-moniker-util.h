@@ -11,6 +11,7 @@
 #ifndef _BONOBO_MONIKER_UTIL_H
 #define _BONOBO_MONIKER_UTIL_H
 
+#include <bonobo/bonobo-async.h>
 #include <bonobo/bonobo-object-client.h>
 
 /* Useful client functions */
@@ -31,33 +32,27 @@ Bonobo_Unknown      bonobo_moniker_client_resolve_default        (Bonobo_Moniker
 BonoboObjectClient *bonobo_moniker_client_resolve_client_default (Bonobo_Moniker     moniker,
 								  const char        *interface_name,
 								  CORBA_Environment *ev);
-/* The same client interface, but asynchronous */
-typedef struct _BonoboMonikerASyncHandle BonoboMonikerASyncHandle;
 
-Bonobo_Moniker      bonobo_moniker_async_handle_get_moniker     (BonoboMonikerASyncHandle *handle);
-Bonobo_Unknown      bonobo_moniker_async_handle_get_object      (BonoboMonikerASyncHandle *handle);
-CORBA_Environment  *bonobo_moniker_async_handle_get_environment (BonoboMonikerASyncHandle *handle);
-void                bonobo_moniker_async_handle_release         (BonoboMonikerASyncHandle *handle);
-
-typedef void      (*BonoboMonikerCallback)                      (BonoboMonikerASyncHandle *handle,
-								 gpointer                  user_data);
-
+/* ASync equivalents */
 void                bonobo_moniker_client_new_from_name_async    (const CORBA_char        *name,
 								  CORBA_Environment       *ev,
-								  BonoboMonikerCallback    cb,
+								  guint                    timeout_usec,
+								  BonoboASyncCallback      cb,
 								  gpointer                 user_data);
 
 void                bonobo_moniker_resolve_async                 (Bonobo_Moniker           moniker,
 								  Bonobo_ResolveOptions   *options,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
-								  BonoboMonikerCallback    cb,
+								  guint                    timeout_usec,
+								  BonoboASyncCallback      cb,
 								  gpointer                 user_data);
 
 void                bonobo_moniker_resolve_async_default         (Bonobo_Moniker           moniker,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
-								  BonoboMonikerCallback    cb,
+								  guint                    timeout_usec,
+								  BonoboASyncCallback      cb,
 								  gpointer                 user_data);
 
 /* Useful moniker implementation helper functions */
