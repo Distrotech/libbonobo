@@ -1,5 +1,12 @@
 2000-10-12  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/bonobo-zoomable.c (bonobo_zoomable_set_zoom_parameters):
+	Added `zoom_level' argument and API documentation for this function.
+	(bonobo_zoomable_report_zoom_level_changed): Added API documentation.
+	(bonobo_zoomable_report_zoom_parameters_changed): Likewise.
+
+2000-10-12  Martin Baulig  <baulig@suse.de>
+
 	* bonobo/bonobo-zoomable.c (bonobo_zoomable_class_init): Added
 	"set_frame" signal and emit it in impl_Bonobo_Zoomable_set_frame().
 	* bonobo/bonobo-zoomable-frame.c (bonobo_zoomable_frame_class_init):
