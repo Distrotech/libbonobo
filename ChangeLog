@@ -1,3 +1,20 @@
+2003-04-15  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/test-object.c (main): A very lame excuse of a test of
+	BonoboForeignObject.
+
+	* bonobo/bonobo-foreign-object.h, bonobo/bonobo-foreign-object.c:
+	Implement BonoboForeignObject, which GObject-derives from
+	BonoboObject, and allows one to wrap an existing plain
+	CORBA_Object as a BonoboObject, as long as that object implements
+	the interface Bonobo::Unknown.
+
+	* bonobo/bonobo-object.c (bonobo_object_finalize_internal): Don't
+	call bonobo_object_corba_deactivate for BonoboForeignObject
+	instances.
+	(bonobo_object_instance_init): Don't call do_corba_setup for
+	BonoboForeignObject instances.
+
 2003-04-14  Michael Meeks  <michael@ximian.com>
 
 	* idl/Makefile.am (idl_flags): fix.

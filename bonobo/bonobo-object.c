@@ -19,6 +19,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-foreign-object.h>
 #include <bonobo/bonobo-shlib-factory.h>
 #include <bonobo/bonobo-running-context.h>
 #include <bonobo/bonobo-marshal.h>
@@ -169,8 +170,8 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 			 */
 
 			BONOBO_OBJECT (o)->priv->ao = NULL;
-
-			bonobo_object_corba_deactivate (BONOBO_OBJECT (o));
+			if (!g_type_is_a (G_OBJECT_TYPE(o), BONOBO_TYPE_OBJECT))
+				bonobo_object_corba_deactivate (BONOBO_OBJECT (o));
 
 			g_object_unref (o);
 #ifdef G_ENABLE_DEBUG
@@ -834,8 +835,8 @@ bonobo_object_instance_init (GObject    *g_object,
 		g_hash_table_insert (living_ao_ht, ao, ao);
 	}
 #endif /* G_ENABLE_DEBUG */
-
-	do_corba_setup (object, BONOBO_OBJECT_CLASS (klass));
+	if (!g_type_is_a (G_TYPE_FROM_CLASS(klass), BONOBO_TYPE_FOREIGN_OBJECT))
+		do_corba_setup (object, BONOBO_OBJECT_CLASS (klass));
 }
 
 /**
