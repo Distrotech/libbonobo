@@ -14,7 +14,10 @@ static GnomeObjectClass *gnome_object_client_parent_class;
  * @object_client: The GnomeObjectClient object to construct
  * @corba_object: The remote CORBA object this object_client refers to
  *
- * Constructs @object_client
+ * Initializes @object_client with the CORBA object for the
+ * GNOME_ObjectClient interface provided in @corba_object.
+ *
+ * Returns: the initialized GnomeObjectClient object.
  */
 GnomeObjectClient *
 gnome_object_client_construct (GnomeObjectClient *object_client, CORBA_Object corba_object)
@@ -112,6 +115,11 @@ gnome_object_client_class_init (GnomeObjectClientClass *class)
 	object_class->destroy = gnome_object_client_destroy;
 }
 
+/**
+ * gnome_object_client_get_type:
+ *
+ * Returns: the GtkType for the GnomeObjectClient class.
+ */
 GtkType
 gnome_object_client_get_type (void)
 {

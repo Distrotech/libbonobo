@@ -56,6 +56,11 @@ gnome_persist_construct (GnomePersist *persist, GNOME_Persist corba_persist)
 	return persist;
 }
 
+/**
+ * gnome_persist_get_type:
+ *
+ * Returns: the GtkType for the GnomePersist class.
+ */
 GtkType
 gnome_persist_get_type (void)
 {

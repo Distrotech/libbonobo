@@ -32,5 +32,11 @@ to Bonobo:
 		module.
 
 	. All Bonobo interface methods and API routines must be
-	  documented.
+	  documented.  The documentation should be placed in-line
+	  in the C file or the IDL file using the GtkDoc system.
+	  Please see the doc/authors.txt file in the gtk-doc CVS
+	  module.
 
+	. All C and IDL source files must have a comment at the
+	  beginning which briefly describes the purpose and function
+	  of the code in the file.

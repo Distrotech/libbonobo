@@ -261,7 +261,7 @@ gnome_moniker_init (GnomeObject *object)
 /**
  * gnome_moniker_get_type:
  *
- * Returns: The GtkType of the GnomeMoniker object.
+ * Returns: The GtkType of the GnomeMoniker class.
  */
 GtkType
 gnome_moniker_get_type (void)

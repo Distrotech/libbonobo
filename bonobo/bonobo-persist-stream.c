@@ -147,6 +147,11 @@ gnome_persist_stream_init (GnomePersistStream *ps)
 {
 }
 
+/**
+ * gnome_persist_stream_get_type:
+ *
+ * Returns: The GtkType for the GnomePersistStream class.
+ */
 GtkType
 gnome_persist_stream_get_type (void)
 {
@@ -177,9 +182,14 @@ gnome_persist_stream_get_type (void)
  * @save_fn: Saving routine
  * @closure: Data passed to IO routines.
  *
- * Initializes the GnomePersistStream object.  The @load_fn and @save_fn
- * parameters might be NULL.  If this is the case, the load and save 
- * operations are performed by the class load and save methods
+ * Initializes the GnomePersistStream object.  The load and save
+ * operations for the object are performed by the provided @load_fn
+ * and @save_fn callback functions, which are passed @closure when
+ * they are invoked.  If either @load_fn or @save_fn is %NULL, the
+ * corresponding operation is performed by the class load and save
+ * routines.
+ *
+ * Returns: The initialized GnomePersistStream object.
  */
 GnomePersistStream *
 gnome_persist_stream_construct (GnomePersistStream *ps,
@@ -223,9 +233,14 @@ create_gnome_persist_stream (GnomeObject *object)
  * @save_fn: Saving routine
  * @closure: Data passed to IO routines.
  *
- * Creates a GnomePersistStream object.  The @load_fn and @save_fn
- * parameters might be NULL.  If this is the case, the load and save 
- * operations are performed by the class load and save methods
+ * Creates a new GnomePersistStream object.  The load and save
+ * operations for the object are performed by the provided @load_fn
+ * and @save_fn callback functions, which are passed @closure when
+ * they are invoked.  If either @load_fn or @save_fn is %NULL, the
+ * corresponding operation is performed by the class load and save
+ * routines.
+ *
+ * Returns: the newly-created GnomePersistStream object.
  */
 GnomePersistStream *
 gnome_persist_stream_new (GnomePersistStreamIOFn load_fn,

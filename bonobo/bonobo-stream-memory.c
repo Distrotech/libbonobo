@@ -164,6 +164,11 @@ gnome_stream_fs_class_init (GnomeStreamMemClass *class)
 	sclass->commit   = mem_commit;
 }
 
+/**
+ * gnome_stream_mem_get_type:
+ *
+ * Returns: the GtkType of the GnomeStreamMem class.
+ */
 GtkType
 gnome_stream_mem_get_type (void)
 {
@@ -203,6 +208,20 @@ create_gnome_stream_mem (GnomeObject *object)
 	return (GNOME_Stream) gnome_object_activate_servant (object, servant);
 }
 
+/**
+ * gnome_stream_mem_create:
+ * @buffer: The memory buffer for which a GnomeStreamMem object is to be created.
+ * @size: The size in bytes of @buffer.
+ * @read_only: Specifies whether or not the returned GnomeStreamMem
+ * object should allow write() operations.
+ *
+ * Creates a new GnomeStreamMem object which is bound to
+ * the provided memory buffer @buffer.  When data is read
+ * out of or written into the returned GnomeStream object,
+ * the read() and write() operations operate on @buffer.
+ *
+ * Returns: the constructed GnomeStream object which operates on the specified memory buffer.
+ */
 GnomeStream *
 gnome_stream_mem_create (char *buffer, size_t size, gboolean read_only)
 {

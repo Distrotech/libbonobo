@@ -192,6 +192,11 @@ gnome_progressive_data_sink_init (GnomeProgressiveDataSink *psink)
 {
 } /* gnome_progressive_data_sink_init */
 
+/**
+ * gnome_progressive_data_sink_get_type:
+ *
+ * Returns: The GtkType for the GnomeProgressiveDataSink class type.
+ */
 GtkType
 gnome_progressive_data_sink_get_type (void)
 {
@@ -215,6 +220,32 @@ gnome_progressive_data_sink_get_type (void)
 	return type;
 } /* gnome_progressive_data_sink_get_type */
 
+/**
+ * gnome_progressive_data_sink_construct:
+ * @psink: The #GnomeProgressiveDataSink object to initialize.
+ * @corba_psink: The CORBA object for the #GNOME_ProgressiveDataSink interface.
+ * @start_fn: A callback which is invoked when the #start method is
+ * called on the interface.  The #start method is used to indicate that
+ * a new set of data is being loaded into the #GNOME_ProgressiveDataSink interface.
+ * @end_fn: A callback which is invoked when the #end method is called
+ * on the interface.  The #end method is called after the entire data transmission
+ * is complete.
+ * @add_data_fn: A callback which is invoked when the #add_data method is called
+ * on the interface.  This method is called whenever new data is available for
+ * the current transmission.  The new data is passed as an argument to the method
+ * @set_size_fn: A callback which is invoked when the #set_size method is called
+ * on the interface.  The #set_size method is used by the caller to specify
+ * the total size of the current transmission.  This method may be used
+ * at any point after #start has been called.  Objects implementing #GNOME_ProgressiveDataSink
+ * may want to use this to know what percentage of the data has been received.
+ * @closure: A closure which pis passed to all the callback functions.
+ *
+ * This function initializes @psink with the CORBA interface
+ * provided in @corba_psink and the callback functions
+ * specified by @start_fn, @end_fn, @add_data_fn and @set_size_fn.
+ * 
+ * Returns: the initialized GnomeProgressiveDataSink object.
+ */
 GnomeProgressiveDataSink *
 gnome_progressive_data_sink_construct (GnomeProgressiveDataSink *psink,
 				       GNOME_ProgressiveDataSink corba_psink,
@@ -257,6 +288,31 @@ create_gnome_progressive_data_sink (GnomeObject *object)
 	return (GNOME_ProgressiveDataSink) gnome_object_activate_servant (object, servant);
 } /* create_gnome_progressive_data_sink */
 
+/**
+ * gnome_progressive_data_sink_new:
+ * @start_fn: A callback which is invoked when the #start method is
+ * called on the interface.  The #start method is used to indicate that
+ * a new set of data is being loaded into the #GNOME_ProgressiveDataSink interface.
+ * @end_fn: A callback which is invoked when the #end method is called
+ * on the interface.  The #end method is called after the entire data transmission
+ * is complete.
+ * @add_data_fn: A callback which is invoked when the #add_data method is called
+ * on the interface.  This method is called whenever new data is available for
+ * the current transmission.  The new data is passed as an argument to the method
+ * @set_size_fn: A callback which is invoked when the #set_size method is called
+ * on the interface.  The #set_size method is used by the caller to specify
+ * the total size of the current transmission.  This method may be used
+ * at any point after #start has been called.  Objects implementing #GNOME_ProgressiveDataSink
+ * may want to use this to know what percentage of the data has been received.
+ * @closure: A closure which pis passed to all the callback functions.
+ *
+ * This function creates a new GnomeProgressiveDataSink object and the
+ * corresponding CORBA interface object.  The new object is
+ * initialized with the callback functionss specified by @start_fn,
+ * @end_fn, @add_data_fn and @set_size_fn.
+ * 
+ * Returns: the newly-constructed GnomeProgressiveDataSink object.
+ */
 GnomeProgressiveDataSink *
 gnome_progressive_data_sink_new (GnomeProgressiveDataSinkStartFn start_fn,
 				 GnomeProgressiveDataSinkEndFn end_fn,

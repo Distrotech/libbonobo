@@ -16,14 +16,21 @@ module GNOME {
 
        	interface UIHandler : GNOME::Unknown {
        
-       		enum {
-       		} MenuType;
+       		enum MenuType {
+			MenuTypeBlah
+       		};
        
-       		enum {
-       		} PixmapType;
+       		enum ToolbarType {
+			ToolbarTypeBlah
+       		};
        
-       		enum {
-       		} ModifierType;
+       		enum PixmapType {
+			PixmapTypeBlah
+       		};
+       
+       		enum ModifierType {
+			ModifierTypeBlah
+       		};
        
        		/*
        		 * Containee ==> Container
@@ -59,17 +66,17 @@ module GNOME {
 		 * manipulation of menu items.
        		 *
 		 */
-       		boolean menu_item_create_full (in string path, in MenuType type, in string label,
+       		boolean menu_item_create (in string path, in MenuType type, in string label,
        					       in PixmapType pixmap_type, in iobuf pixmap_data,
-       					       in unsigned int accelerator_key, in Modifier modifier,
-					       in boolean sensitivity, in boolean hidden, in int pos);
+       					       in long accelerator_key, in ModifierType modifier,
+					       in long pos);
        		boolean menu_item_remove (in string path);
        		boolean menu_item_fetch (in string path, out MenuType type, out string label,
        					 out PixmapType pixmap_type, out iobuf pixmap_data,
-       					 out unsigned int accelerator_key, out Modifier modifier,
-					 out boolean sensitivity, out boolean hidden, out int pos);
+       					 out unsigned long accelerator_key, out ModifierType modifier,
+					 out long pos);
        
-       		int menu_item_get_pos (in string path);
+       		long menu_item_get_pos (in string path);
        
        		void menu_item_set_sensitivity (in string path, in boolean sensitivity);
        		boolean menu_item_get_sensitivity ();
@@ -79,12 +86,15 @@ module GNOME {
        
        		void menu_item_set_label (in string path, in string label);
        		string menu_item_get_label (in string path);
+
+       		void menu_item_set_hint (in string path, in string hint);
+       		string menu_item_get_hint (in string path);
        
        		void menu_item_set_pixmap (in string path, in PixmapType type, in iobuf data);
        		void menu_item_get_pixmap (in string path, out PixmapType type, out iobuf data);
        
-       		void menu_item_set_accel (in string path, in unsigned int accelerator_key, in ModifierType ac_mods);
-       		void menu_item_get_accel (in string path, out unsigned int accelerator_key, out ModifierType ac_mods);
+       		void menu_item_set_accel (in string path, in unsigned long accelerator_key, in ModifierType ac_mods);
+       		void menu_item_get_accel (in string path, out unsigned long accelerator_key, out ModifierType ac_mods);
        
        		void menu_item_toggle_set_state (in string path, in boolean state);
        		boolean menu_item_toggle_get_state (in string path);
@@ -99,8 +109,8 @@ module GNOME {
        		 * FIXME This needs to be rethought.
        		 *
        		 */
-       		void menu_item_dynlist_set_maxsize (in string path, in int maxsize);
-       		int menu_item_dynlist_set_maxsize (in string path);
+       		void menu_item_dynlist_set_maxsize (in string path, in long maxsize);
+       		long menu_item_dynlist_get_maxsize (in string path);
        
        		string menu_item_dynlist_generate_new_path (in string dynlist_path);
        
@@ -117,15 +127,15 @@ module GNOME {
 		 */
        		boolean toolbar_item_create_full (in string path, in ToolbarType type, in string label,
        					       in PixmapType pixmap_type, in iobuf pixmap_data,
-       					       in unsigned int accelerator_key, in Modifier modifier,
-       					       in int pos);
+       					       in unsigned long accelerator_key, in ModifierType modifier,
+       					       in long pos);
        		boolean toolbar_item_remove (in string path);
        		boolean toolbar_item_fetch (in string path, out ToolbarType type, out string label,
        					 out PixmapType pixmap_type, out iobuf pixmap_data,
-       					 out unsigned int accelerator_key, out Modifier modifier,
-       					 out int pos);
+       					 out unsigned long accelerator_key, out ModifierType modifier,
+       					 out long pos);
        
-       		int toolbar_item_get_pos (in string path);
+       		long toolbar_item_get_pos (in string path);
        
        		void toolbar_item_set_sensitivity (in string path, in boolean sensitivity);
        		boolean toolbar_item_get_sensitivity ();
@@ -139,8 +149,8 @@ module GNOME {
        		void toolbar_item_set_pixmap (in string path, in PixmapType type, in iobuf data);
        		void toolbar_item_get_pixmap (in string path, out PixmapType type, out iobuf data);
        
-       		void toolbar_item_set_accel (in string path, in unsigned int accelerator_key, in ModifierType ac_mods);
-       		void toolbar_item_get_accel (in string path, out unsigned int accelerator_key, out ModifierType ac_mods);
+       		void toolbar_item_set_accel (in string path, in unsigned long accelerator_key, in ModifierType ac_mods);
+       		void toolbar_item_get_accel (in string path, out unsigned long accelerator_key, out ModifierType ac_mods);
        
        		void toolbar_item_toggle_set_state (in string path, in boolean state);
        		boolean toolbar_item_toggle_get_state (in string path);
@@ -152,16 +162,18 @@ module GNOME {
        		 * These methods allow embedded components to create UI groups
        		 * and manipulate them.
        		 */
-       		int group_create ();
-       		void group_destroy (in int gid);
+       		long group_create ();
+       		void group_destroy (in long gid);
+
+		typedef sequence<string> StringSeq;
+
+       		void group_add_menu_items (in long gid, in StringSeq paths);
+       		void group_add_toolbar_items (in long gid, in StringSeq paths);
        
-       		void group_add_menu_items (in int gid, in sequence<string> paths);
-       		void group_add_toolbar_items (in int gid, in sequence<string> paths);
+       		void group_get_members (in long gid, out StringSeq paths);
        
-       		void group_get_members (in int gid, out sequence<string> paths);
-       
-       		void group_set_sensitivity (in int gid, in boolean sensitivity);
-       		voud group_set_hidden (in int gid, in boolean sensitivity);
+       		void group_set_sensitivity (in long gid, in boolean sensitivity);
+       		void group_set_hidden (in long gid, in boolean sensitivity);
        
        		/*
        		 * Container ==> Containee

@@ -22,3 +22,4 @@
 
 #include "gnome-progressive.idl"
 
+#include "gnome-ui-handler.idl"

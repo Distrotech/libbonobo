@@ -138,6 +138,11 @@ gnome_stream_class_init (GnomeStreamClass *class)
 	init_stream_corba_class ();
 }
 
+/**
+ * gnome_stream_get_type:
+ *
+ * Returns: the GtkType for a GnomeStream.
+ */
 GtkType
 gnome_stream_get_type (void)
 {

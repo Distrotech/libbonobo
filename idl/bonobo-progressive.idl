@@ -9,7 +9,7 @@
 /*
  * The purpose of this component is to provide an easy way for a
  * sequence of data which is not available all at once to be
- * marshalled across a connection.
+ * marshalled across a connection into an object.
  *
  */
 
@@ -21,16 +21,17 @@ module GNOME {
 		/**
 		 * start:
 		 *
-		 * This method signals that a new stream of data is
-		 * coming in.  It must be called before add_data can
-		 * be used.  */
+		 * This method signals that a new transmission of data
+		 * is coming in.  It must be called before add_data
+		 * can be used.
+		 */
 		void start ();
 
 		/**
 		 * end:
 		 * 
-		 * An interface's 'done' method is called when the data
-		 * has been completely transmitted.
+		 * An interface's 'end' method is called when the data
+		 * in a transmission has been completely transferred.
 		 */
 		void end ();
 
@@ -48,7 +49,8 @@ module GNOME {
 		 *
 		 * This method notifies a component of the total size
 		 * of the incoming data.  It can be called at any
-		 * point, even after the data has started to flow.
+		 * point after #start has been called, even after the
+		 * data has started to flow.
 		 */
 		void set_size (in long count);
 

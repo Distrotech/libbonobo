@@ -116,7 +116,7 @@ gnome_container_construct (GnomeContainer  *container,
 /**
  * gnome_container_get_type:
  *
- * Returns: The GtkType for the GnomeContainer object
+ * Returns: The GtkType for the GnomeContainer class.
  */
 GtkType
 gnome_container_get_type (void)

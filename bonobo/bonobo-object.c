@@ -31,13 +31,15 @@ static GtkObjectClass *gnome_object_parent_class;
  * @servant: Your servant.
  *
  * CORBA method implementations receive a parameter of type
- * PortableServer_Servant which is a pointer to the servant that was
- * used to create this specific CORBA object instance
+ * #PortableServer_Servant which is a pointer to the servant that was
+ * used to create this specific CORBA object instance.
  *
- * This routine allows the user to get the GnomeObject (ie, Gtk object
- * wrapper) from the servant.
+ * This routine allows the user to get the #GnomeObject (ie, Gtk
+ * object wrapper) from the servant.  This #GnomeObject is the Gtk
+ * object wrapper associated with the CORBA object instance whose
+ * method is being invoked.
  * 
- * Returns: the GnomeObject wrapper associated to this servant.
+ * Returns: the #GnomeObject wrapper associated with @servant.
  */
 GnomeObject *
 gnome_object_from_servant (PortableServer_Servant servant)
@@ -48,16 +50,32 @@ gnome_object_from_servant (PortableServer_Servant servant)
 }
 
 /**
+ * gnome_object_get_servant:
+ * @object: A #GnomeObject which is associated with a servant.
+ *
+ * Returns: The servant associated with @object, or %NULL if
+ * no servant is bound to @object.
+ */
+PortableServer_Servant
+gnome_object_get_servant (GnomeObject *object)
+{
+	g_return_val_if_fail (object != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
+
+	return object->servant;
+}
+
+/**
  * gnome_object_bind_to_servant:
  * @object: the GnomeObject to bind to the servant.
- * @servant: A PortableServer_Servant to bind to the GnomeObject
+ * @servant: A PortableServer_Servant to bind to the GnomeObject.
  *
- * This routine binds the @object to the @servant.  It establishes a
- * one to one mapping between the @object and the @servant.  Utility
- * routines are provides to go back and forth.
+ * This routine binds @object to @servant.  It establishes a one to
+ * one mapping between the @object and the @servant.  Utility routines
+ * are provided to go back and forth.  See gnome_object_from_servant()
+ * and gnome_object_get_servant().
  *
- * This routine is used internally by the
- * gnome_object_activate_servant().
+ * This routine is used internally by gnome_object_activate_servant().
  */
 void
 gnome_object_bind_to_servant (GnomeObject *object, void *servant)
@@ -212,7 +230,7 @@ gnome_object_instance_init (GtkObject *gtk_object)
 /**
  * gnome_object_get_type:
  *
- * Returns the GtkType associated for the base GnomeObject type
+ * Returns: the GtkType associated with the base GnomeObject class type.
  */
 GtkType
 gnome_object_get_type (void)
@@ -274,16 +292,14 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 
 /**
  * gnome_object_construct:
- * @object; The GTK object server wrapper for the CORBA service.
+ * @object: The GTK object server wrapper for the CORBA service.
  * @corba_object: the reference to the real CORBA object.
  *
- * Constructs a GnomeObject. This method is usually invoked from the
- * construct method for other Gtk-based CORBA wrappers that derive
- * from the GNOME::obj interface
+ * Initializes the provided GnomeObject @object. This method is
+ * usually invoked from the construct method for other Gtk-based CORBA
+ * wrappers that derive from the GNOME::obj interface
  *
- *
- * This returns a constructed GnomeObject. 
- *
+ * Returns: the initialized GnomeObject.
  */
 GnomeObject *
 gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
@@ -292,7 +308,7 @@ gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
 	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
 	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 
-	
+
 /* * This routine assumes ownership of the corba_object that is passed in. */
 #if 0
 	object->corba_objref = CORBA_Object_duplicate (corba_object, &object->ev);
@@ -303,6 +319,15 @@ gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
 	return object;
 }
 
+/**
+ * gnome_object_add_interface:
+ * @object: The GnomeObject to which an interface is going to be added.
+ * @newobj: The GnomeObject containing the new interface to be added.
+ *
+ * Adds the interfaces supported by @newobj to the list of interfaces
+ * for @object.  This function adds the interfaces supported by
+ * @newobj to the list of interfaces support by @object.
+ */
 void
 gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
 {
@@ -326,6 +351,13 @@ gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
        g_free (oldao);
 }
 
+/**
+ * gnome_object_query_interface:
+ * @object: A GnomeObject to be queried for a given interface.
+ * @repo_id: The name of the interface to be queried.
+ *
+ * Returns: The CORBA interface named @repo_id for @object.
+ */
 CORBA_Object
 gnome_object_query_interface (GnomeObject *object, const char *repo_id)
 {
@@ -340,6 +372,12 @@ gnome_object_query_interface (GnomeObject *object, const char *repo_id)
        return retval;
 }
 
+/**
+ * gnome_object_corba_objref:
+ * @object: A GnomeObject whose CORBA object is requested.
+ *
+ * Returns: The CORBA interface object for which @object is a wrapper.
+ */
 CORBA_Object
 gnome_object_corba_objref (GnomeObject *object)
 {

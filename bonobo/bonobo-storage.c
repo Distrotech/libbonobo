@@ -186,6 +186,11 @@ gnome_storage_init (GnomeObject *object)
 {
 }
 
+/**
+ * gnome_storage_get_type:
+ *
+ * Returns: The GtkType for the GnomeStorage class.
+ */
 GtkType
 gnome_storage_get_type (void)
 {
@@ -209,6 +214,16 @@ gnome_storage_get_type (void)
 	return type;
 }
 
+/**
+ * gnome_storage_construct:
+ * @storage: The GnomeStorage object to be initialized
+ * @corba_storage: The CORBA object for the GNOME_Storage interface.
+ *
+ * Initializes @storage using the CORBA interface object specified
+ * by @corba_storage.
+ *
+ * Returns: the initialized GnomeStorage object @storage.
+ */
 GnomeStorage *
 gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage)
 {
