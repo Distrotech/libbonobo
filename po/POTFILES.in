@@ -1,0 +1,5 @@
+bonobo/bonobo-exception.c
+bonobo/bonobo-generic-factory.h
+bonobo/bonobo-object-directory.c
+monikers/Bonobo_Moniker_std.oaf.in.in
+tests/test-storage.c
