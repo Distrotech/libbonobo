@@ -1,3 +1,10 @@
+2000-09-27  Martin Baulig  <martin@home-of-linux.org>
+
+	* components/text-plain/bonobo-text-plain.c: Ported to the new UI handler.
+	(view_data_t): Store the BonoboUIComponent and the Bonobo_UIContainer here.
+	(destroy_view): Call destroy_view_menus().
+	(clear_text_cb): Renamed to verb_ClearText_cb().
+
 2000-09-27  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-control.c (bonobo_control_finalize): Use
