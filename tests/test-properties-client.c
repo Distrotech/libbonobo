@@ -2,13 +2,13 @@
 #include <config.h>
 #include <gnome.h>
 #include <libgnorba/gnorba.h>
-#include <bonobo/gnome-bonobo.h>
+#include <bonobo.h>
 #include <stdio.h>
 
 CORBA_ORB		orb;
-GNOME_PropertyBag	pb;
+Bonobo_PropertyBag	pb;
 CORBA_Environment	ev;
-GnomePropertyBagClient *pbc;
+BonoboPropertyBagClient *pbc;
 
 static char *
 simple_print_type (CORBA_TypeCode tc)
@@ -56,36 +56,36 @@ simple_print_value (char *name, CORBA_TypeCode tc)
 	switch (tc->kind) {
 	case CORBA_tk_boolean:
 		g_snprintf (s, sizeof (s), "%s",
-		    gnome_property_bag_client_get_value_boolean (pbc, name) ?
+		    bonobo_property_bag_client_get_value_boolean (pbc, name) ?
 			"True" : "False");
 		break;
 	case CORBA_tk_short:
 		g_snprintf (s, sizeof (s), "%d",
-		    gnome_property_bag_client_get_value_short (pbc, name));
+		    bonobo_property_bag_client_get_value_short (pbc, name));
 		break;
 	case CORBA_tk_ushort:
 		g_snprintf (s, sizeof (s), "%d",
-		    gnome_property_bag_client_get_value_ushort (pbc, name));
+		    bonobo_property_bag_client_get_value_ushort (pbc, name));
 		break;
 	case CORBA_tk_long:
 		g_snprintf (s, sizeof (s), "%ld",
-		    gnome_property_bag_client_get_value_long (pbc, name));
+		    bonobo_property_bag_client_get_value_long (pbc, name));
 		break;
 	case CORBA_tk_ulong:
 		g_snprintf (s, sizeof (s), "%ld",
-		    gnome_property_bag_client_get_value_ulong (pbc, name));
+		    bonobo_property_bag_client_get_value_ulong (pbc, name));
 		break;
 	case CORBA_tk_float:
 		g_snprintf (s, sizeof (s), "%f",
-		    gnome_property_bag_client_get_value_float (pbc, name));
+		    bonobo_property_bag_client_get_value_float (pbc, name));
 		break;
 	case CORBA_tk_double:
 		g_snprintf (s, sizeof (s), "%f",
-		    gnome_property_bag_client_get_value_double (pbc, name));
+		    bonobo_property_bag_client_get_value_double (pbc, name));
 		break;
 	case CORBA_tk_string:
 		g_snprintf (s, sizeof (s), "%s",
-		    gnome_property_bag_client_get_value_string (pbc, name));
+		    bonobo_property_bag_client_get_value_string (pbc, name));
 		break;
 	default:
 		g_snprintf (s, sizeof (s), "Unknown");
@@ -104,36 +104,36 @@ simple_print_default_value (char *name, CORBA_TypeCode tc)
 	switch (tc->kind) {
 	case CORBA_tk_boolean:
 		g_snprintf (s, sizeof (s), "%s",
-		    gnome_property_bag_client_get_default_boolean (pbc, name) ?
+		    bonobo_property_bag_client_get_default_boolean (pbc, name) ?
 			"True" : "False");
 		break;
 	case CORBA_tk_short:
 		g_snprintf (s, sizeof (s), "%d",
-		    gnome_property_bag_client_get_default_short (pbc, name));
+		    bonobo_property_bag_client_get_default_short (pbc, name));
 		break;
 	case CORBA_tk_ushort:
 		g_snprintf (s, sizeof (s), "%d",
-		    gnome_property_bag_client_get_default_ushort (pbc, name));
+		    bonobo_property_bag_client_get_default_ushort (pbc, name));
 		break;
 	case CORBA_tk_long:
 		g_snprintf (s, sizeof (s), "%ld",
-		    gnome_property_bag_client_get_default_long (pbc, name));
+		    bonobo_property_bag_client_get_default_long (pbc, name));
 		break;
 	case CORBA_tk_ulong:
 		g_snprintf (s, sizeof (s), "%ld",
-		    gnome_property_bag_client_get_default_ulong (pbc, name));
+		    bonobo_property_bag_client_get_default_ulong (pbc, name));
 		break;
 	case CORBA_tk_float:
 		g_snprintf (s, sizeof (s), "%f",
-		    gnome_property_bag_client_get_default_float (pbc, name));
+		    bonobo_property_bag_client_get_default_float (pbc, name));
 		break;
 	case CORBA_tk_double:
 		g_snprintf (s, sizeof (s), "%f",
-		    gnome_property_bag_client_get_default_double (pbc, name));
+		    bonobo_property_bag_client_get_default_double (pbc, name));
 		break;
 	case CORBA_tk_string:
 		g_snprintf (s, sizeof (s), "%s",
-		    gnome_property_bag_client_get_default_string (pbc, name));
+		    bonobo_property_bag_client_get_default_string (pbc, name));
 		break;
 	default:
 		g_snprintf (s, sizeof (s), "Unknown");
@@ -146,11 +146,11 @@ simple_print_default_value (char *name, CORBA_TypeCode tc)
 static char *
 simple_print_read_only (char *name)
 {
-	GnomePropertyFlags flags;
+	BonoboPropertyFlags flags;
 
-	flags = gnome_property_bag_client_get_flags (pbc, name);
+	flags = bonobo_property_bag_client_get_flags (pbc, name);
 
-	return (flags & GNOME_PROPERTY_READ_ONLY) ?
+	return (flags & BONOBO_PROPERTY_READ_ONLY) ?
 		"ReadOnly" : "ReadWrite";
 }
 
@@ -160,13 +160,13 @@ print_props (void)
 	GList *props;
 	GList *l;
 
-	props = gnome_property_bag_client_get_property_names (pbc);
+	props = bonobo_property_bag_client_get_property_names (pbc);
 
 	for (l = props; l != NULL; l = l->next) {
 		CORBA_TypeCode tc;
 		char *name = l->data;
 
-		tc = gnome_property_bag_client_get_property_type (pbc, name);
+		tc = bonobo_property_bag_client_get_property_type (pbc, name);
 
 		g_print ("%s [%s] %s %s %s\n",
 			 name,
@@ -182,7 +182,7 @@ print_props (void)
 static guint
 create_bag_client (void)
 {
-	pbc = gnome_property_bag_client_new (pb);
+	pbc = bonobo_property_bag_client_new (pb);
 
 	if (pbc == NULL) {
 		g_error ("Could not create PropertyBagClient!\n");
@@ -191,9 +191,9 @@ create_bag_client (void)
 
 	print_props ();
 
-	gnome_property_bag_client_set_value_boolean (pbc, "boolean-test", FALSE);
-	gnome_property_bag_client_set_value_short (pbc, "short-test", (gshort) 3);
-	gnome_property_bag_client_set_value_string (pbc, "string-test", "life is pain");
+	bonobo_property_bag_client_set_value_boolean (pbc, "boolean-test", FALSE);
+	bonobo_property_bag_client_set_value_short (pbc, "short-test", (gshort) 3);
+	bonobo_property_bag_client_set_value_string (pbc, "string-test", "life is pain");
 
 	exit (0);
 

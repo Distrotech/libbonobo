@@ -2,11 +2,11 @@
 #include <config.h>
 #include <gnome.h>
 #include <libgnorba/gnorba.h>
-#include <bonobo/gnome-bonobo.h>
+#include <bonobo.h>
 #include <stdio.h>
 
 CORBA_ORB	   orb;
-GnomePropertyBag  *pb;
+BonoboPropertyBag  *pb;
 CORBA_Environment  ev;
 
 static char *
@@ -41,7 +41,7 @@ simple_prop_to_string (char *type, gpointer v)
 }
 
 static void
-value_changed_cb (GnomePropertyBag *pb, char *name, char *type,
+value_changed_cb (BonoboPropertyBag *pb, char *name, char *type,
 		  gpointer old_value, gpointer new_value,
 		  gpointer user_data)
 {
@@ -74,32 +74,32 @@ create_bag (void)
 	char		  *ior;
 
 	/* Create the property bag. */
-	pb = gnome_property_bag_new ();
+	pb = bonobo_property_bag_new ();
 
 	/* Add properties */
 	*(s = g_new0 (gshort, 1)) = 5;
 	*(ds = g_new0 (gshort, 1)) = 532;
-	gnome_property_bag_add (pb, "short-test", "short", s, ds, NULL, 0);
+	bonobo_property_bag_add (pb, "short-test", "short", s, ds, NULL, 0);
 
 	str = g_strdup ("Testing 1 2 3");
 	dstr = g_strdup ("Default string");
-	gnome_property_bag_add (pb, "string-test", "string", str, dstr, NULL, 0);
+	bonobo_property_bag_add (pb, "string-test", "string", str, dstr, NULL, 0);
 	
 	*(l = g_new0 (glong, 1)) = 43243;
 	*(dl = g_new0 (glong, 1)) = 26;
-	gnome_property_bag_add (pb, "long-test", "long", l, dl, NULL, 0);
+	bonobo_property_bag_add (pb, "long-test", "long", l, dl, NULL, 0);
 
 	*(b = g_new0 (gboolean, 1)) = TRUE;
 	*(db = g_new0 (gboolean, 1)) = FALSE;
-	gnome_property_bag_add (pb, "boolean-test", "boolean", b, db, NULL, 0);
+	bonobo_property_bag_add (pb, "boolean-test", "boolean", b, db, NULL, 0);
 
 	*(f = g_new0 (gfloat, 1)) = 3.14159265358979323;
 	*(df = g_new0 (gfloat, 1)) = 2.718281828;
-	gnome_property_bag_add (pb, "float-test", "float", f, df, NULL, 0);
+	bonobo_property_bag_add (pb, "float-test", "float", f, df, NULL, 0);
 
 	*(u = g_new0 (gushort, 1)) = 234;
 	*(du = g_new0 (gushort, 1)) = 0;
-	gnome_property_bag_add (pb, "ushort-test", "ushort", u, du, NULL, 0);
+	bonobo_property_bag_add (pb, "ushort-test", "ushort", u, du, NULL, 0);
 
 	/* Connect to the signal */
 	gtk_signal_connect (GTK_OBJECT (pb), "value_changed",
@@ -107,7 +107,7 @@ create_bag (void)
 
 	/* Print out the IOR for this object. */
 	ior = CORBA_ORB_object_to_string (
-		orb, gnome_object_corba_objref (GNOME_OBJECT (pb)), &ev);
+		orb, bonobo_object_corba_objref (BONOBO_OBJECT (pb)), &ev);
 
 	g_print ("%s\n", ior);
 	fflush (stdout);
@@ -122,10 +122,10 @@ print_props (void)
 	GList *l;
 
 	/* This is a private function; we're just using it for testing. */
-	props = gnome_property_bag_get_prop_list (pb);
+	props = bonobo_property_bag_get_prop_list (pb);
 
 	for (l = props; l != NULL; l = l->next) {
-		GnomeProperty *prop = l->data;
+		BonoboProperty *prop = l->data;
 		char *s1, *s2;
 
 		s1 = g_strdup (simple_prop_to_string (prop->type, prop->value));
@@ -135,9 +135,9 @@ print_props (void)
 			 prop->name, prop->type,
 			 s1, s2,
 			 prop->docstring,
-			 prop->flags & GNOME_PROPERTY_UNSTORED        ? "Unstored"         : "Stored",
-			 prop->flags & GNOME_PROPERTY_READ_ONLY       ? "ReadOnly"         : "ReadWrite",
-			 prop->flags & GNOME_PROPERTY_USE_DEFAULT_OPT ? "DefaultOptimized" : "NotDefaultOptimized");
+			 prop->flags & BONOBO_PROPERTY_UNSTORED        ? "Unstored"         : "Stored",
+			 prop->flags & BONOBO_PROPERTY_READ_ONLY       ? "ReadOnly"         : "ReadWrite",
+			 prop->flags & BONOBO_PROPERTY_USE_DEFAULT_OPT ? "DefaultOptimized" : "NotDefaultOptimized");
 
 		g_free (s1);
 		g_free (s2);
