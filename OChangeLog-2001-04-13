@@ -1,3 +1,12 @@
+1999-10-12  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-bonobo-widget.c (gnome_bonobo_widget_size_allocate):
+	comment out gdk_window_move_resize, it caused a loop shrinking the
+	widget.
+
+	* bonobo/test-bw.c (button_clicked_cb): update (main): Allow component
+	specification on the cmdline.
+
 1999-10-10  Michael Meeks  <mmeeks@gnu.org>
 
 	* samples/paint-component-simple.c (main): Make factory global, add
