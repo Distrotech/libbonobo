@@ -1,5 +1,8 @@
 Bonobo release task list:
 -------------------------
+
+Miguel's list
+-------------
 * exception handling trick deployed everywhere				
 * All existing components updated to make sense
 * all existing components fully documented
@@ -7,15 +10,18 @@ Bonobo release task list:
 * check for proper unref/destruction handling/mem leaks
 * size negotiation working for gnome views
 * in-place methods moved to GnomeView
+* missing embeddable methods implemented
 * container-side verb-popup-menu construction helper function
 * Moniker sample code
 * Compile with zero warnings
+* all interfaces (PersistStream, etc) documented with paragragraphs describing their purpose
 
-Things Nat will do:
+Nat's list
+----------
 * Write README file.
 * Make sure HACKING is up-to-date.
 * UIHandler toolbar code finished
 * UIHandler documented
-* all interfaces (PersistStream, etc) documented with paragragraphs describing their purpose
 * reference container in a samples/, using both methods
 * reference components in samples/
+* One paragraph descriptions of every file.
