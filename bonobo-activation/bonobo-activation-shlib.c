@@ -226,6 +226,8 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
                 g_free (error_string);
         }
 
+        CORBA_Object_release ((CORBA_Object) poa, ev);
+
 	return retval;
 }
 
