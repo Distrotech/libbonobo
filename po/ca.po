@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.0\n"
-"POT-Creation-Date: 2003-11-03 15:41+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-11-13 14:47+0100\n"
 "PO-Revision-Date: 2003-04-29 11:26+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -62,7 +63,7 @@ msgstr "Servei de noms"
 
 #: activation-server/object-directory-activate.c:185
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Encara no tractem l'activació de objectes shlib en un procés remot"
+msgstr "Encara no tractem l'activació d'objectes shlib en un procés remot"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
@@ -94,12 +95,12 @@ msgstr "Una iid NULL no és vàlida"
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr "La iid %s te tipus NULL"
+msgstr "La iid %s té tipus NULL"
 
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr "La iid %s te una localització NULL"
+msgstr "La iid %s té una localització NULL"
 
 #: activation-server/object-directory-load.c:111
 #, c-format
@@ -109,7 +110,7 @@ msgstr "caràcter «%c» invàlid en iid «%s»"
 #: activation-server/object-directory-load.c:306
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "La propietat «%s» no te valor"
+msgstr "La propietat «%s» no té valor"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -268,7 +269,7 @@ msgstr "descripció XML incorrecta de la interfície d'usuari"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "camí invalid cap a l'element de la interfície d'usuari XML"
+msgstr "camí invàlid cap a l'element de la interfície d'usuari XML"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
