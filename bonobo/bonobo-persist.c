@@ -15,7 +15,7 @@
 
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
 
-/* Parent GTK object class */
+/* Parent object class */
 static GObjectClass *bonobo_persist_parent_class;
 
 #define CLASS(o) BONOBO_PERSIST_CLASS(G_OBJECT_GET_CLASS (o))
@@ -98,9 +98,9 @@ bonobo_persist_init (GObject *object)
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboPersist, 
-			   Bonobo_Persist,
-			   PARENT_TYPE,
-			   bonobo_persist);
+		       Bonobo_Persist,
+		       PARENT_TYPE,
+		       bonobo_persist);
 
 /**
  * bonobo_persist_generate_content_types:

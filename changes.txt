@@ -98,6 +98,11 @@ bonobo-object-directory.[ch]:
 	bonobo_directory_*: remove, deprecated by oaf,
 	use the liboaf functions instead.
 
+bonobo-print.[ch],
+bonobo-print-client.[ch]:
+	These now live in libgnomeprint-bonobo.h and have been renamed
+	to the GnomePrintBonobo namespace.
+
 
 IDL:
 

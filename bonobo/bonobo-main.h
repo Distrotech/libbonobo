@@ -10,8 +10,8 @@
  * Copyright 1999 Helix Code, Inc.
  */
 
-#ifndef __GNOME_MAIN_H__
-#define __GNOME_MAIN_H__ 1
+#ifndef __LIBBONOBO_MAIN_H__
+#define __LIBBONOBO_MAIN_H__
 
 #include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
@@ -34,4 +34,4 @@ CORBA_ORB		    bonobo_orb			 (void);
 PortableServer_POA	    bonobo_poa			 (void);
 PortableServer_POAManager   bonobo_poa_manager		 (void);
 
-#endif /* __GNOME_MAIN_H__ */
+#endif /* __LIBBONOBO_MAIN_H__ */

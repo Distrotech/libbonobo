@@ -1,3 +1,7 @@
+2001-08-01  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-main.h: fix broken include guards.
+
 2001-07-31  Abel Cheung  <maddog@linux.org.hk>
 
 	* configure.in: Added zh_TW.Big5 (traditional Chinese) to ALL_LINGUAS.
