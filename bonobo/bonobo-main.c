@@ -6,11 +6,11 @@
  *    Miguel de Icaza  (miguel@gnu.org)
  *    Nat Friedman     (nat@nat.org)
  *    Peter Wainwright (prw@wainpr.demo.co.uk)
+ *    Michael Meeks    (michael@ximian.com)
  *
- * Copyright 1999,2001 Ximian, Inc.
+ * Copyright 1999,2003 Ximian, Inc.
  */
 #include <config.h>
-
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
@@ -322,82 +322,64 @@ bonobo_main_quit (void)
  * 
  * Return value: the requested POA.
  **/
-PortableServer_POA bonobo_poa_get_threaded (BonoboThreadHint hint)
+PortableServer_POA bonobo_poa_get_threaded (ORBitThreadHint hint)
 {
-       PortableServer_POA  poa;
-       CORBA_Environment   ev;
-       CORBA_PolicyList   *policies;
-       const char         *poa_name = NULL;
-       ORBitThreadHint     thread_hint = ORBIT_THREAD_HINT_NONE;
+	PortableServer_POA  poa;
+	CORBA_Environment   ev[1];
+	CORBA_PolicyList    policies;
+	CORBA_Object        policy_vals[1];
+	const char         *poa_name = NULL;
 
-       switch (hint)
-       {
-       case BONOBO_POA_ALL_AT_IDLE:
-	       poa_name = "BonoboPOAAllAtIdle";
-	       thread_hint = ORBIT_THREAD_HINT_ALL_AT_IDLE;
-	       break;
-       case BONOBO_POA_ONEWAY_AT_IDLE:
-	       poa_name = "BonoboPOAOnewayAtIdle";
-	       thread_hint = ORBIT_THREAD_HINT_ONEWAY_AT_IDLE;
-	       break;
-       case BONOBO_POA_THREAD_PER_REQUEST:
-	       poa_name = "BonoboPOAThreadPerRequest";
-	       thread_hint = ORBIT_THREAD_HINT_PER_REQUEST;
-	       break;
-       default:
-	       g_assert_not_reached();
-       }
+#define MAP(a,b) \
+	case ORBIT_THREAD_HINT_##a: \
+		poa_name = b; \
+		break
 
-       CORBA_exception_init (&ev);
+	switch (hint) {
+		MAP (NONE,           "BonoboPOAHintNone");
+		MAP (PER_OBJECT,     "BonoboPOAHintPerObject");
+		MAP (PER_REQUEST,    "BonoboPOAHintPerRequest");
+		MAP (PER_POA,        "BonoboPOAHintPerPOA");
+		MAP (PER_CONNECTION, "BonoboPOAHintPerConnection");
+		MAP (ONEWAY_AT_IDLE, "BonoboPOAHintOnewayAtIdle");
+		MAP (ALL_AT_IDLE,    "BonoboPOAHintAllAtIdle");
+#undef MAP
+	default:
+		g_assert_not_reached();
+	}
 
-       /* (Copy-paste from ORBit2/test/poa/poatest-basic08.c) */
+	CORBA_exception_init (ev);
 
-       /*
-        * Create child POA with MULTIPLE_ID Object Id Uniqueness policy and
-        * IMLICIT_ACTIVATION Implicit Activation policy.
-        */
-       policies           = CORBA_PolicyList__alloc ();
-       policies->_maximum = 3;
-       policies->_length  = 3;
-       policies->_buffer  = CORBA_PolicyList_allocbuf (3);
-       CORBA_sequence_set_release (policies, CORBA_TRUE);
-       policies->_buffer[0] = (CORBA_Policy)
-               PortableServer_POA_create_id_uniqueness_policy (
-                       bonobo_poa (),
-                       PortableServer_MULTIPLE_ID,
-                       &ev);
-       policies->_buffer[1] = (CORBA_Policy)
-               PortableServer_POA_create_implicit_activation_policy (
-                       bonobo_poa (),
-                       PortableServer_IMPLICIT_ACTIVATION,
-                       &ev);
-       policies->_buffer[2] = (CORBA_Policy)
-               PortableServer_POA_create_thread_policy (
-                       bonobo_poa (),
-                       PortableServer_ORB_CTRL_MODEL,
-                       &ev);
+	/* (Copy-paste from ORBit2/test/poa/poatest-basic08.c) */
 
-       poa = PortableServer_POA_create_POA (bonobo_poa (), poa_name,
-                                            bonobo_poa_manager (), policies, &ev);
-       CORBA_free (policies);
+	policies._length = 1;
+	policies._buffer = policy_vals;
+	policies._buffer[0] = (CORBA_Object)
+		PortableServer_POA_create_thread_policy
+			(bonobo_poa (),
+			 PortableServer_ORB_CTRL_MODEL,
+			 ev);
 
-       if (ev._major == CORBA_NO_EXCEPTION) {
-               ORBit_ObjectAdaptor_set_thread_hint ((ORBit_ObjectAdaptor) poa,
-						    thread_hint);
-       } else {
-               if (strcmp (CORBA_exception_id (&ev),
-                           ex_PortableServer_POA_AdapterAlreadyExists) == 0)
-               {
-                       CORBA_exception_free (&ev);
-                       poa = PortableServer_POA_find_POA (bonobo_poa (),
-                                                          poa_name,
-                                                          CORBA_FALSE, &ev);
-               }
-       }
-       CORBA_exception_free (&ev);
-       if (!poa)
-               g_warning ("Could not create/get poa '%s'", poa_name);
-       return poa;
+	poa = bonobo_poa_new_from (__bonobo_poa,
+				   poa_name, &policies, ev);
+
+	if (ev->_major == CORBA_NO_EXCEPTION)
+		ORBit_ObjectAdaptor_set_thread_hint ((ORBit_ObjectAdaptor) poa, hint);
+
+	else {
+		if (strcmp (CORBA_exception_id (ev),
+			    ex_PortableServer_POA_AdapterAlreadyExists) == 0) {
+			CORBA_exception_free (ev);
+			poa = PortableServer_POA_find_POA (bonobo_poa (),
+							   poa_name,
+							   CORBA_FALSE, ev);
+		}
+	}
+	CORBA_exception_free (ev);
+	if (!poa)
+		g_warning ("Could not create/get poa '%s'", poa_name);
+
+	return poa;
 }
 
 PortableServer_POA

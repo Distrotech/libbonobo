@@ -1,8 +1,12 @@
 2003-06-06  Michael Meeks  <michael@ximian.com>
 
+	* tests/test-thread.c (main): upd.
+
 	* bonobo/bonobo-main.c (bonobo_poa_new_from): impl.
 	helper for creating new poas.
-
+	(bonobo_poa_get_threaded): use ORBitThreadHint
+	instead & re-hash.
+	
 2003-06-06  Michael Meeks  <michael@ximian.com>
 
 	* bonobo-activation/bonobo-activation-fork-server.c

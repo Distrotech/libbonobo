@@ -125,7 +125,7 @@ main (int argc, char *argv [])
 	main_thread = g_thread_self ();
 
 	{
-		poa = bonobo_poa_get_threaded (BONOBO_POA_THREAD_PER_REQUEST);
+		poa = bonobo_poa_get_threaded (ORBIT_THREAD_HINT_PER_REQUEST);
 		pb = g_object_new (BONOBO_TYPE_PROPERTY_BAG,
 				   "poa", poa, NULL);
 		bonobo_property_bag_construct
