@@ -471,7 +471,7 @@ MAKE_GET_WITH_DEFAULT (gchar, char, );
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (gboolean, FALSE, boolean, TC_CORBA_boolean, 
-		 (*(gboolean *)value->_value));
+		 (*(CORBA_boolean *)value->_value));
 
 MAKE_GET_DEFAULT (gboolean, FALSE, boolean, TC_CORBA_boolean, 
 		  (*(CORBA_boolean *)value->_value));
