@@ -1,3 +1,8 @@
+2001-02-19  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-property-bag-xml.c (decode_type): set the ref
+	count for type codes to 1.
+
 2001-02-17  John R. Sheets  <dusk@ravendusk.org>
 
 	* doc/dia/bonobo-widget.dia: New diagram of BonoboWidget.

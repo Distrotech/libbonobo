@@ -383,6 +383,8 @@ decode_type (BonoboUINode      *node,
 	ORBit_RootObject_set_interface ((ORBit_RootObject) tc,
 					(ORBit_RootObject_Interface *) &ORBit_TypeCode_epv,
 					NULL);
+	/* set refs to 1 */
+	CORBA_Object_duplicate ((CORBA_Object)tc, NULL);
 
 	if ((txt = bonobo_ui_node_get_attr (node, "name"))) {
 		tc->name = g_strdup (txt);
@@ -674,6 +676,7 @@ bonobo_property_bag_xml_decode_any (BonoboUINode      *node,
 	}
 
 	tc = decode_type (type, ev);
+
 	g_return_val_if_fail (tc != NULL, NULL);
 
 	block_size = ORBit_gather_alloc_info (tc);
@@ -688,7 +691,7 @@ bonobo_property_bag_xml_decode_any (BonoboUINode      *node,
 			(ORBit_free_childvals) ORBit_free_via_TypeCode,
 			GINT_TO_POINTER (1), sizeof(CORBA_TypeCode));
 		*(CORBA_TypeCode *)((char *) retval - sizeof (ORBit_mem_info) -
-				    sizeof (CORBA_TypeCode)) = (CORBA_TypeCode) CORBA_Object_duplicate((CORBA_Object)tc, NULL);
+				    sizeof (CORBA_TypeCode)) = tc;
 	} else
 		retval = NULL;
 
