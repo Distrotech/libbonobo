@@ -73,10 +73,16 @@ GtkType                 bonobo_stream_get_type            (void);
 POA_Bonobo_Stream__epv *bonobo_stream_get_epv             (void);
 Bonobo_Stream           bonobo_stream_corba_object_create (BonoboObject *object);
 
-BonoboStream *bonobo_stream_open     (const char *driver,
-				      const char *path,
-				      gint flags,
-				      gint mode);
+BonoboStream           *bonobo_stream_open                (const char *driver,
+							   const char *path,
+							   gint flags,
+							   gint mode);
+
+BonoboStream           *bonobo_stream_open_full           (const char *driver,
+							   const char *path,
+							   gint flags,
+							   gint mode,
+							   CORBA_Environment *opt_ev);
 
 END_GNOME_DECLS
 

@@ -8,7 +8,9 @@
  * Copyright 1999, 2000 Helix Code, Inc.
  */
 #include <config.h>
+
 #include <bonobo/bonobo-stream.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-storage-plugin.h>
 
 static BonoboObjectClass *bonobo_stream_parent_class;
@@ -196,19 +198,43 @@ bonobo_stream_get_type (void)
  * Returns: a created BonoboStream object.
  */
 BonoboStream *
-bonobo_stream_open (const char *driver, const char *path, gint flags, 
-		    gint mode)
+bonobo_stream_open_full (const char *driver, const char *path, gint flags, 
+			 gint mode, CORBA_Environment *opt_ev)
 {
+	BonoboStream  *stream = NULL;
 	StoragePlugin *p;
+	CORBA_Environment ev, *my_ev;
+	
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
 
-	g_return_val_if_fail (driver != NULL, NULL);
-	g_return_val_if_fail (path != NULL, NULL);
+	if (!driver || !path)
+		CORBA_exception_set (my_ev, CORBA_USER_EXCEPTION, 
+				     ex_Bonobo_Storage_IOError, NULL);
+	else if (!(p = bonobo_storage_plugin_find (driver)) ||
+		 !p->stream_open)
+		CORBA_exception_set (my_ev, CORBA_USER_EXCEPTION, 
+				     ex_Bonobo_Storage_NotSupported, NULL);
+	else 
+		stream = p->stream_open (path, flags, mode, my_ev);
 
-	if (!(p = bonobo_storage_plugin_find (driver))) return NULL;
+	if (!opt_ev) {
+		g_warning ("bonobo_stream_open failed '%s'",
+			   bonobo_exception_get_text (my_ev));
+		CORBA_exception_free (&ev);
+	}
 
-	if (p->stream_open) return p->stream_open (path, flags, mode);
+	return stream;
+}
 
-	return NULL;
+BonoboStream *
+bonobo_stream_open (const char *driver, const char *path,
+		    gint flags, gint mode)
+{
+	return bonobo_stream_open_full (driver, path, flags, mode, NULL);
 }
 
 /**

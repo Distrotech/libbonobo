@@ -9,7 +9,9 @@
  */
 #include <config.h>
 #include <gmodule.h>
+
 #include <bonobo/bonobo-storage.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-storage-plugin.h>
 
 static BonoboObjectClass *bonobo_storage_parent_class;
@@ -49,9 +51,9 @@ impl_set_info (PortableServer_Servant servant,
 
 static Bonobo_Stream
 impl_open_stream (PortableServer_Servant servant,
-		  const CORBA_char      *path,
+		  const CORBA_char       *path,
 		  Bonobo_Storage_OpenMode mode,
-		  CORBA_Environment     *ev)
+		  CORBA_Environment      *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	BonoboStream *stream;
@@ -64,10 +66,10 @@ impl_open_stream (PortableServer_Servant servant,
 }
 
 static Bonobo_Storage
-impl_open_storage (PortableServer_Servant servant,
-		   const CORBA_char      *path,
+impl_open_storage (PortableServer_Servant  servant,
+		   const CORBA_char       *path,
 		   Bonobo_Storage_OpenMode mode,
-		   CORBA_Environment     *ev)
+		   CORBA_Environment      *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	BonoboStorage *open_storage;
@@ -250,19 +252,45 @@ bonobo_storage_construct (BonoboStorage *storage, Bonobo_Storage corba_storage)
  * Returns: a created BonoboStorage object.
  */
 BonoboStorage *
+bonobo_storage_open_full (const char *driver, const char *path,
+			  gint flags, gint mode,
+			  CORBA_Environment *opt_ev)
+{
+	BonoboStorage *storage = NULL;
+	StoragePlugin *p;
+	CORBA_Environment ev, *my_ev;
+	
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	if (!driver || !path)
+		CORBA_exception_set (my_ev, CORBA_USER_EXCEPTION, 
+				     ex_Bonobo_Storage_IOError, NULL);
+
+	else if (!(p = bonobo_storage_plugin_find (driver)) ||
+		 !p->storage_open)
+		CORBA_exception_set (my_ev, CORBA_USER_EXCEPTION, 
+				     ex_Bonobo_Storage_NotSupported, NULL);
+	else
+		storage = p->storage_open (path, flags, mode, my_ev);
+
+	if (!opt_ev) {
+		g_warning ("bonobo_storage_open failed '%s'",
+			   bonobo_exception_get_text (my_ev));
+		CORBA_exception_free (&ev);
+	}
+
+	return storage;
+}
+
+BonoboStorage *
 bonobo_storage_open (const char *driver, const char *path, gint flags, 
 		     gint mode)
 {
-	StoragePlugin *p;
-
-	g_return_val_if_fail (driver != NULL, NULL);
-	g_return_val_if_fail (path != NULL, NULL);
-
-	if (!(p = bonobo_storage_plugin_find (driver))) return NULL;
-
-	if (p->storage_open) return p->storage_open (path, flags, mode);
-
-	return NULL;
+	return bonobo_storage_open_full (driver, path, flags, mode, NULL);
 }
 
 /**
@@ -296,4 +324,3 @@ bonobo_storage_corba_object_create (BonoboObject *object)
         CORBA_exception_free (&ev);
         return (Bonobo_Storage) bonobo_object_activate_servant (object, servant);
 }
-

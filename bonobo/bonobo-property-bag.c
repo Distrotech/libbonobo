@@ -986,15 +986,15 @@ bonobo_property_bag_notify_listeners (BonoboPropertyBag *pb,
 	g_return_if_fail (bonobo_arg_type_is_equal (prop->type, new_value->_type, opt_ev));
 
 	if (!opt_ev) {
-	    CORBA_exception_init (&ev);
-	    my_ev = &ev;
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
 	} else
-	    my_ev = opt_ev;
+		my_ev = opt_ev;
 
 	notify_listeners (pb, prop, new_value, my_ev);
 
 	if (!opt_ev)
-	    CORBA_exception_free (&ev);
+		CORBA_exception_free (&ev);
 }
 
 void
@@ -1019,15 +1019,15 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb,
 	prop->set_prop (pb, value, prop->idx, prop->user_data);
 
 	if (!opt_ev) {
-	    CORBA_exception_init (&ev);
-	    my_ev = &ev;
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
 	} else
-	    my_ev = opt_ev;
+		my_ev = opt_ev;
 
 	notify_listeners (pb, prop, value, my_ev);
 
 	if (!opt_ev)
-	    CORBA_exception_free (&ev);
+		CORBA_exception_free (&ev);
 }
 
 /**

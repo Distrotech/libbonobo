@@ -16,10 +16,14 @@ BEGIN_GNOME_DECLS
 
 typedef struct          _StoragePlugin         StoragePlugin;
 typedef gint           (*StoragePluginInitFn) (StoragePlugin *plugin);
-typedef BonoboStorage *(*BonoboStorageOpenFn) (const char *path, gint flags, 
-					       gint mode);
-typedef BonoboStream  *(*BonoboStreamOpenFn)  (const char *path, gint flags, 
-					       gint mode);
+typedef BonoboStorage *(*BonoboStorageOpenFn) (const char *path, 
+					       gint flags, 
+					       gint mode, 
+					       CORBA_Environment *ev);
+typedef BonoboStream  *(*BonoboStreamOpenFn)  (const char *path, 
+					       gint flags, 
+					       gint mode,
+					       CORBA_Environment *ev);
 
 struct _StoragePlugin {
 	/* public, read only */

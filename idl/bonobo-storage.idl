@@ -154,6 +154,7 @@ module Bonobo {
 		exception NotSupported {};
 		exception NotStream {};
 		exception NotStorage {};
+		exception NotEmpty {};
 
 		/**
 		 * get_info:
@@ -221,7 +222,7 @@ module Bonobo {
 		 * can be a Storage or a Stream.
 		 */
 		void erase (in string path)
-                       raises (IOError, NoPermission, NotFound);
+                       raises (IOError, NoPermission, NotFound, NotEmpty);
 
 		/** 
 		 * rename:

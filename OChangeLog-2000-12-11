@@ -1,3 +1,34 @@
+2000-10-30  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/Makefile.am (bin_PROGRAMS): kill bonobo-ui-extract.
+
+	* gshell/Makefile.am: remove bonobo-ui-extract style
+	translation of xml files.
+
+	* Makefile.am: re-enable gshell.
+
+	* configure.in: ditto.
+
+2000-10-30  Dietmar Maurer <dietmar@maurer-it.com>
+
+	* idl/bonobo-storage.idl: erase raises NotEmpty.
+	
+	* bonobo/bonobo-storage.c (bonobo_storage_open_full),
+	(bonobo_storage_open): add exception handling.
+
+	* bonobo/bonobo-stream.c (bonobo_stream_open_full),
+	(bonobo_stream_open): add exception handling.
+
+	* bonobo/bonobo-storage-plugin.h: Update
+
+	* storage-modules/bonobo-storage-efs.[ch]: Update
+
+	* storage-modules/bonobo-stream-efs.[ch]: Update
+
+	* storage-modules/bonobo-storage-fs.[ch]: Update
+
+	* storage-modules/bonobo-stream-fs.[ch]: Update
+	
 2000-10-28  Eskil Heyn Olsen  <eskil@eazel.com>
 
 	* components/application-x-gnomine/Makefile.am:
