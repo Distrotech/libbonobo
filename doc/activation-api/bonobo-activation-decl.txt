@@ -256,13 +256,13 @@ OAF_ActivationID * ret_aid,
 CORBA_Environment * ev
 </FUNCTION>
 
-<STRUCT>
+<TYPEDEF>
 <NAME>OAFActivationCallback</NAME>
 typedef void (*OAFActivationCallback) (CORBA_Object   activated_object, 
 				       const char    *error_reason, 
 				       gpointer       user_data);
 
-</STRUCT>
+</TYPEDEF>
 
 <FUNCTION>
 <RETURNS>void</RETURNS>
