@@ -32,7 +32,7 @@ corba_object_proxy_value_init (GValue *value)
 
 	key.type = G_VALUE_TYPE (value);
 	node = g_bsearch_array_lookup (&corba_object_proxy_bsa, &key);
-	// value->data[0].v_pointer = node->init ? node->init () : NULL;
+	/* [FIXME!] value->data[0].v_pointer = node->init ? node->init () : NULL; */
 }
 
 static void
