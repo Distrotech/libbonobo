@@ -96,47 +96,45 @@ bonobo_app_client_new (Bonobo_Application app_server)
 }
 
 
+/**
+ * bonobo_app_client_msg_send_argv:
+ * @app_client: client
+ * @message: message name
+ * @argv: %NULL-terminated vector of pointers to GValue, the arguments
+ * to pass with the message.
+ * 
+ * Like bonobo_app_client_msg_send(), except that it receives a single
+ * argument vector instead of a variable number of arguments.
+ * 
+ * Return value: the message return value
+ **/
 GValue *
-bonobo_app_client_msg_send_valist (BonoboAppClient *app_client,
-				   const char      *message,
-				   va_list          var_args)
+bonobo_app_client_msg_send_argv (BonoboAppClient *app_client,
+				 const char      *message,
+				 const GValue    *argv[])
 {
 	CORBA_any                  *ret;
 	Bonobo_Application_ArgList *args;
-	GValue                     *value, *rv;
-	GPtrArray                  *argv;
-	GType                       type;
-	gchar                      *err;
+	GValue                     *rv;
 	CORBA_Environment           ev;
-	int                         i;
+	int                         i, argv_len;
 
 	g_return_val_if_fail (app_client, NULL);
 	g_return_val_if_fail (BONOBO_IS_APP_CLIENT (app_client), NULL);
 
-	argv = g_ptr_array_new ();
-	while ((type = va_arg (var_args, GType)) != G_TYPE_NONE)
-	{
-		value = g_new0 (GValue, 1);
-		g_value_init (value, type);
-		G_VALUE_COLLECT(value, var_args, 0, &err);
-		if (err) g_error("error collecting value: %s", err);
-		g_ptr_array_add (argv, value);
-	}
+	for (argv_len = -1; argv[++argv_len];);
+
 	args = Bonobo_Application_ArgList__alloc ();
-	args->_length = argv->len;
-	args->_buffer = Bonobo_Application_ArgList_allocbuf (argv->len);
-	for (i = 0; i < argv->len; ++i) {
-		value = g_ptr_array_index (argv, i);
-		if (!bonobo_arg_from_gvalue_alloc (&args->_buffer[i], value)) {
+	args->_length = argv_len;
+	args->_buffer = Bonobo_Application_ArgList_allocbuf (argv_len);
+	for (i = 0; i < argv_len; ++i) {
+		if (!bonobo_arg_from_gvalue_alloc (&args->_buffer[i], argv[i])) {
 			g_warning ("Failed to convert type '%s' to CORBA::any",
-				   g_type_name (G_VALUE_TYPE (value)));
+				   g_type_name (G_VALUE_TYPE (argv[i])));
 			args->_buffer[i]._type = TC_void;
 		}
-		g_value_unset (value);
-		g_free (value);
 	}
 	CORBA_sequence_set_release (args, CORBA_TRUE);
-	g_ptr_array_free (argv, TRUE);
 
 	CORBA_exception_init (&ev);
 	ret = Bonobo_Application_message (app_client->app_server, message, args, &ev);
@@ -159,9 +157,50 @@ bonobo_app_client_msg_send_valist (BonoboAppClient *app_client,
 }
 
 
+GValue *
+bonobo_app_client_msg_send_valist (BonoboAppClient *app_client,
+				   const char      *message,
+				   va_list          var_args)
+{
+	GValue                     *value, *rv;
+	GPtrArray                  *argv;
+	GType                       type;
+	gchar                      *err;
+	int                         i;
+
+	g_return_val_if_fail (app_client, NULL);
+	g_return_val_if_fail (BONOBO_IS_APP_CLIENT (app_client), NULL);
+
+	argv = g_ptr_array_new ();
+	while ((type = va_arg (var_args, GType)) != G_TYPE_NONE)
+	{
+		value = g_new0 (GValue, 1);
+		g_value_init (value, type);
+		G_VALUE_COLLECT(value, var_args, 0, &err);
+		if (err) g_error("error collecting value: %s", err);
+		g_ptr_array_add (argv, value);
+	}
+	g_ptr_array_add (argv, NULL);
+
+	rv = bonobo_app_client_msg_send_argv (app_client, message,
+					      (const GValue **) argv->pdata);
+
+	for (i = 0; i < argv->len - 1; ++i) {
+		value = g_ptr_array_index (argv, i);
+		g_value_unset (value);
+		g_free (value);
+	}
+	g_ptr_array_free (argv, TRUE);
+
+	return rv;
+}
+
 /**
  * bonobo_app_client_msg_send:
+ * @app_client: the client interface associated with the application
+ * to which we wish to send a message
  * @message: message name
+ * @...: arguments
  * 
  * Send a message to the application server. Takes a variable length
  * argument list of GType, value pairs, terminated with

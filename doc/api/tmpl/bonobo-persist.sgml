@@ -22,11 +22,14 @@ use by the derived #BonoboPersistStream interface.
 </para>
 
 
-<!-- ##### TYPEDEF BonoboPersistClass ##### -->
+<!-- ##### STRUCT BonoboPersistClass ##### -->
 <para>
 
 </para>
 
+@parent_class: 
+@epv: 
+@get_content_types: 
 
 <!-- ##### FUNCTION bonobo_persist_generate_content_types ##### -->
 <para>

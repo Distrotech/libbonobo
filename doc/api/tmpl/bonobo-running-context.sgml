@@ -49,11 +49,21 @@ the running context data
 </para>
 
 
-<!-- ##### TYPEDEF BonoboRunningContextClass ##### -->
+<!-- ##### SIGNAL BonoboRunningContext::last-unref ##### -->
+<para>
+
+</para>
+
+@bonoborunningcontext: the object which received the signal.
+
+<!-- ##### STRUCT BonoboRunningContextClass ##### -->
 <para>
 the running context class
 </para>
 
+@parent: 
+@epv: 
+@last_unref: 
 
 <!-- ##### FUNCTION bonobo_running_context_new ##### -->
 <para>
@@ -78,11 +88,4 @@ the running context class
 
 @object: 
 
-
-<!-- ##### SIGNAL BonoboRunningContext::last-unref ##### -->
-<para>
-
-</para>
-
-@bonoborunningcontext: the object which received the signal.
 

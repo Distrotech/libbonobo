@@ -399,33 +399,30 @@ _gtype_to_typecode (GType gtype)
 }
 
 void
-bonobo_application_register_message_va (BonoboApplication *app,
+bonobo_application_register_message_v (BonoboApplication *app,
 					const gchar       *name,
 					const gchar       *description,
 					GClosure          *opt_closure,
 					GType              return_type,
-					GType              first_arg_type,
-					va_list            var_args)
+					GType const        arg_types[])
 {
 	Bonobo_Application_MessageDesc *msgdesc;
-	GType                           gtype;
-	GPtrArray                      *tmparray;
+	int i, arg_types_len;
 
-	msgdesc = Bonobo_Application_MessageDesc__alloc();
-	msgdesc->return_type = _gtype_to_typecode(return_type);
+	for (arg_types_len = -1; arg_types[++arg_types_len] != G_TYPE_NONE;);
+
+	msgdesc = Bonobo_Application_MessageDesc__alloc ();
+
+	msgdesc->return_type = _gtype_to_typecode (return_type);
 	msgdesc->name        = CORBA_string_dup (name);
 	msgdesc->description = CORBA_string_dup (description);
 
-	tmparray = g_ptr_array_new ();
-	if (first_arg_type != G_TYPE_NONE) {
-		g_ptr_array_add (tmparray, _gtype_to_typecode (first_arg_type));
-		while ((gtype = va_arg (var_args, GType)) != G_TYPE_NONE)
-			g_ptr_array_add (tmparray, _gtype_to_typecode (gtype));
-	}
-	msgdesc->types._length = msgdesc->types._maximum = tmparray->len;
-	msgdesc->types._buffer = CORBA_sequence_CORBA_TypeCode_allocbuf (tmparray->len);
-	memcpy(msgdesc->types._buffer, tmparray->pdata, sizeof(gpointer)*tmparray->len);
-	g_ptr_array_free (tmparray, TRUE);
+	msgdesc->types._length = msgdesc->types._maximum = arg_types_len;
+	msgdesc->types._buffer =
+		CORBA_sequence_CORBA_TypeCode_allocbuf (arg_types_len);
+
+	for (i = 0; arg_types[i] != G_TYPE_NONE; ++i)
+		msgdesc->types._buffer[i] = _gtype_to_typecode (arg_types[i]);
 
 	app->message_list = g_slist_prepend (app->message_list, msgdesc);
 
@@ -439,6 +436,33 @@ bonobo_application_register_message_va (BonoboApplication *app,
 	}
 }
 
+
+void
+bonobo_application_register_message_va (BonoboApplication *app,
+					const gchar       *name,
+					const gchar       *description,
+					GClosure          *opt_closure,
+					GType              return_type,
+					GType              first_arg_type,
+					va_list            var_args)
+{
+	GArray *arg_types;
+	GType   gtype;
+
+	arg_types = g_array_new (FALSE, FALSE, sizeof(GType));
+	if (first_arg_type != G_TYPE_NONE) {
+		g_array_append_val (arg_types, first_arg_type);
+		while ((gtype = va_arg (var_args, GType)) != G_TYPE_NONE)
+			g_array_append_val (arg_types, gtype);
+	}
+	gtype = G_TYPE_NONE; g_array_append_val (arg_types, gtype);
+
+	bonobo_application_register_message_v (app, name, description,
+					       opt_closure, return_type,
+					       (const GType *) arg_types->data);
+
+	g_array_free (arg_types, TRUE);
+}
 
 void
 bonobo_application_register_message (BonoboApplication *app,

@@ -62,6 +62,12 @@ void               bonobo_application_register_message_va (BonoboApplication *ap
 							   GType              return_type,
 							   GType              first_arg_type,
 							   va_list            var_args);
+void               bonobo_application_register_message_v  (BonoboApplication *app,
+							   const gchar       *name,
+							   const gchar       *description,
+							   GClosure          *opt_closure,
+							   GType              return_type,
+							   GType const        arg_types[]);
 BonoboAppClient*   bonobo_application_register_unique     (BonoboApplication *app);
 void               bonobo_application_add_hook            (BonoboAppHookFunc  func,
 							   gpointer           data);
@@ -70,6 +76,7 @@ void               bonobo_application_remove_hook         (BonoboAppHookFunc  fu
 gint               bonobo_application_new_instance        (BonoboApplication *app,
 							   gint               argc,
 							   gchar             *argv[]);
+
 
 
 G_END_DECLS

@@ -83,11 +83,24 @@ Implementents Bonobo::Listener.
 </para>
 
 
-<!-- ##### TYPEDEF BonoboListenerClass ##### -->
+<!-- ##### SIGNAL BonoboListener::event-notify ##### -->
+<para>
+
+</para>
+
+@bonobolistener: the object which received the signal.
+@arg1: 
+@arg2: 
+@arg3: 
+
+<!-- ##### STRUCT BonoboListenerClass ##### -->
 <para>
 #BonoboListener's class
 </para>
 
+@parent_class: 
+@epv: 
+@event_notify: 
 
 <!-- ##### USER_FUNCTION BonoboListenerCallbackFn ##### -->
 <para>

@@ -102,11 +102,14 @@ Implements a moniker extender: Bonobo::MonikerExtender.
 </para>
 
 
-<!-- ##### TYPEDEF BonoboMonikerExtenderClass ##### -->
+<!-- ##### STRUCT BonoboMonikerExtenderClass ##### -->
 <para>
 BonoboMonikerExtender's class.
 </para>
 
+@parent_class: 
+@epv: 
+@resolve: 
 
 <!-- ##### USER_FUNCTION BonoboMonikerExtenderFn ##### -->
 <para>

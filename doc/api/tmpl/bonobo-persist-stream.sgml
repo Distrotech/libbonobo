@@ -98,11 +98,16 @@ eog_image_data_construct (EogImageData *image_data)
 </para>
 
 
-<!-- ##### TYPEDEF BonoboPersistStreamClass ##### -->
+<!-- ##### STRUCT BonoboPersistStreamClass ##### -->
 <para>
 
 </para>
 
+@parent_class: 
+@epv: 
+@load: 
+@save: 
+@get_content_types: 
 
 <!-- ##### USER_FUNCTION BonoboPersistStreamIOFn ##### -->
 <para>

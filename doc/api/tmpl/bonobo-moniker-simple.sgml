@@ -85,11 +85,12 @@ A simplified #BonoboMoniker.
 </para>
 
 
-<!-- ##### TYPEDEF BonoboMonikerSimpleClass ##### -->
+<!-- ##### STRUCT BonoboMonikerSimpleClass ##### -->
 <para>
 BonoboMonikerSimple's class.
 </para>
 
+@parent_class: 
 
 <!-- ##### USER_FUNCTION BonoboMonikerSimpleResolveFn ##### -->
 <para>

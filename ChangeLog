@@ -1,3 +1,19 @@
+2003-12-07  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-application.c, bonobo/bonobo-application.h
+	(bonobo_application_register_message_v): new function, like
+	bonobo_application_register_message_va, but takes a vector of
+	GType's instead of va_list, useful for language bindings.
+	(bonobo_application_register_message_va): Calls
+	bonobo_application_register_message_v after collecting arguments.
+
+	* bonobo/bonobo-app-client.c, bonobo/bonobo-app-client.h
+	(bonobo_app_client_msg_send_argv): New message sending function
+	that receives a GValue* vector.  This is mainly for language
+	bindings.
+	(bonobo_app_client_msg_send_valist): Now calls
+	bonobo_app_client_msg_send_argv after collecting values.
+
 2003-12-01  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo-activation/bonobo-activation-client.c

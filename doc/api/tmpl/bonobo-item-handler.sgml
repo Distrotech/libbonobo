@@ -98,11 +98,13 @@ Bonobo::ItemHandler implementation
 </para>
 
 
-<!-- ##### TYPEDEF BonoboItemHandlerClass ##### -->
+<!-- ##### STRUCT BonoboItemHandlerClass ##### -->
 <para>
 BonoboItemHandler class
 </para>
 
+@parent_class: 
+@epv: 
 
 <!-- ##### FUNCTION bonobo_item_handler_new ##### -->
 <para>
@@ -139,11 +141,13 @@ BonoboItemHandler class
 @corba_handler: 
 
 
-<!-- ##### TYPEDEF BonoboItemOption ##### -->
+<!-- ##### STRUCT BonoboItemOption ##### -->
 <para>
 A key-value pair.
 </para>
 
+@key: 
+@value: 
 
 <!-- ##### FUNCTION bonobo_item_option_parse ##### -->
 <para>

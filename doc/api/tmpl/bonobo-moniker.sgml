@@ -36,11 +36,17 @@ Implements Bonobo::Moniker
 </para>
 
 
-<!-- ##### TYPEDEF BonoboMonikerClass ##### -->
+<!-- ##### STRUCT BonoboMonikerClass ##### -->
 <para>
 BonoboMoniker's class
 </para>
 
+@parent_class: 
+@epv: 
+@resolve: 
+@set_internal_name: 
+@get_internal_name: 
+@dummy: 
 
 <!-- ##### FUNCTION bonobo_moniker_construct ##### -->
 <para>

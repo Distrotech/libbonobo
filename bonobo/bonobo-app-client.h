@@ -49,6 +49,9 @@ struct _BonoboAppClientClass
 
 GType	         bonobo_app_client_get_type        (void) G_GNUC_CONST;
 BonoboAppClient* bonobo_app_client_new             (Bonobo_Application  app_server);
+GValue *         bonobo_app_client_msg_send_argv   (BonoboAppClient    *app_client,
+						    const char         *message,
+						    const GValue       *argv[]);
 GValue*          bonobo_app_client_msg_send_valist (BonoboAppClient    *app_client,
 						    const char         *message,
 						    va_list             var_args);

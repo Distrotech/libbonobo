@@ -20,11 +20,12 @@ bonobo-shlib-factory
 </para>
 
 
-<!-- ##### TYPEDEF BonoboShlibFactoryClass ##### -->
+<!-- ##### STRUCT BonoboShlibFactoryClass ##### -->
 <para>
 
 </para>
 
+@parent_class: 
 
 <!-- ##### FUNCTION bonobo_shlib_factory_construct ##### -->
 <para>
