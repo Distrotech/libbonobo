@@ -1,3 +1,15 @@
+2000-09-06  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-compat.c (compat_sync): fix bug.
+	
+	* bonobo/bonobo-ui-util.c (read_byte): fix deadly bad bug.
+
+	* configure.in (BONOBOX_PRINT_LIBS): add 'print'
+	(BONOBO_LIBS): remove 'print'.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_menu_add_one): don't
+	strip parent path.
+
 2000-09-06  Radek Doulik  <rodo@helixcode.com>
 
 	* doc/Monikers (Note): fixed typo (s/auto_save_state/value,s/x/value)
