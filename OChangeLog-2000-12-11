@@ -1,5 +1,10 @@
 2000-08-12  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-object.c (bonobo_object_dump_interfaces): helper function for
+	Ettore's debugging
+
+2000-08-12  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_set_value_string),
 	(bonobo_property_bag_client_get_property): remove spurious ev checks.
 	(bonobo_property_bag_client_get_docstring): fix leak, allow NULL ev for slackers.

@@ -9,6 +9,7 @@
  * Copyright 1999,2000 Helix Code, Inc.
  */
 #include <config.h>
+#include <stdio.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
 #include <gtk/gtktypeutils.h>
@@ -998,4 +999,27 @@ bonobo_object_new_from_servant (void *servant)
 	bonobo_object_construct (object, corba_object);
 
 	return object;
+}
+
+void
+bonobo_object_dump_interfaces (BonoboObject *object)
+{
+	BonoboAggregateObject *ao;
+	GList                 *l;
+
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
+
+	ao = object->priv->ao;
+	
+	fprintf (stderr, "references %d\n", ao->ref_count);
+	for (l = ao->objs; l; l = l->next) {
+		BonoboObject *o = l->data;
+		
+		g_return_if_fail (BONOBO_IS_OBJECT (o));
+
+		if (o->corba_objref && o->corba_objref->object_id)
+			fprintf (stderr, "I/F: '%s'\n", o->corba_objref->object_id);
+		else
+			fprintf (stderr, "I/F: NIL error\n");
+	}
 }
