@@ -1,3 +1,16 @@
+2000-09-05  Maciej Stachowiak  <mjs@eazel.com>
+
+	* components/text-plain/Makefile.am: Install text-plain.oafinfo
+	again (someone accidentally made it stop installing).
+	
+	* components/text-plain/text-plain.oafinfo: Replace
+	special/webdav-directory with x-directory/webdav (this mime type
+	has been renamed in gnome-vfs). Also, add "text/plain" to
+	supported mime types. Even though this is redundant with "text/*",
+	it's still useful to have it in to make sure this component is
+	preferred as a handler for plain text to ones that merely support
+	"text/*".
+
 2000-09-05  Michael Meeks  <michael@helixcode.com>
 
 	* components/text-plain/bonobo-text-plain.c (create_view_menus): fix
