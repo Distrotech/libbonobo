@@ -1,3 +1,18 @@
+1999-09-04  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-ui-handler.c (gnome_ui_handler_create_toolbar): Add docs.
+	Added precondition on name.
+	Added several unimplemented warnings.
+	(menu_toplevel_item_activated): Remove cast.
+	(toolbar_toplevel_item_activated): Implemented.
+	(impl_toolbar_activated): Implemented.
+	(init_ui_handler_corba_class): Inserted missing impl assignments, moved to eof
+	to save using innumerable forward static definitions !
+	struct _ToolbarItemLocalInternal: update callback to GnomeUIHandlerCallbackFunc.
+
+	* components/image-x-png/bonobo-image-x-png.c (bonobo_object_factory):
+	Clean redundant assignment.
+
 1999-09-04  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
 	* samples/sample-container.c (component_add_view): fix typo
