@@ -28,8 +28,6 @@ module Bonobo {
   	};
   
   	interface EventSource : Bonobo::Unknown {
-  		typedef unsigned long ListenerId;
-
 		exception UnknownListener {};
   
   		/**
@@ -59,7 +57,7 @@ module Bonobo {
  
  		/**
   		 * removeListener: Removes a listener
-  		 * @id: the listener Id
+  		 * @l: the listener implementation
   		 */
  		void removeListener (in Listener l)
   			raises (UnknownListener);

@@ -1,3 +1,10 @@
+2002-02-27  Mark McLoughlin  <mark@skynet.ie>
+
+	* idl/Bonobo_Listener.idl: kill unused ListenerId
+	typedef.
+
+	* doc/debugging.txt: update ORBit2 debugging blurb.
+
 2002-02-22  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-moniker-simple.c: make the parent_class

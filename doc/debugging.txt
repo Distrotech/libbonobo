@@ -74,11 +74,10 @@ write a small 'libtool gdb' wrapper script eg. 'libtool gdb $@'
 
 	There is beautiful built in ORBit2 method tracing facility
 that will show you all CORBA invocations, their objects, arguments,
-microsecond timestamps etc. To use it you need to build ORBit2
-yourself, and then edit ORBit2/src/orb/orb-core/orbit-debug.h and
-define TRACE_DEBUG in that header ( instead of an undef ). If you
-then do a 'make inst-lib' in ORBit2/src/orb/ it will only install
-libraries - thus obviating the need to re-build any other apps.
+microsecond timestamps etc. To use it you need to configure ORBit2
+with the --enable-debug switch and then either define the environment
+variable ORBIT2_DEBUG or use the ORBDebugFlags command line option or
+orbitrc flag. See the ORBit2 FAQ for more info.
 
 
 * Order of execution
