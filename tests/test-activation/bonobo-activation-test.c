@@ -15,7 +15,7 @@ static char *
 bonobo_activation_exception_id (CORBA_Environment *ev)
 {
         if (ev->_major == CORBA_USER_EXCEPTION) {
-                if (!strcmp (ev->_id, "IDL:OAF/GeneralError:1.0")) {
+                if (!strcmp (ev->_id, "IDL:Bonobo/GeneralError:1.0")) {
                         Bonobo_GeneralError *err = CORBA_exception_value (ev);
                         
                         if (!err || !err->description) {

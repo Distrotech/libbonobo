@@ -5,7 +5,7 @@ includedir=@includedir@/bonobo-activation-2.0
 datadir=@datadir@
 idldir=@datadir@/idl
 
-Name: OAF
+Name: Bonobo Activation
 Version: @VERSION@
 Description: Object activation framework for GNOME
 Requires: glib-2.0 gmodule-2.0 ORBit-2.0 libxml-2.0

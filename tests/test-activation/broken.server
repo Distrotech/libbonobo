@@ -1,6 +1,7 @@
 <oaf_info>
 
-<oaf_server iid="OAFIID:NotInServer:20000717" type="exe" location="./oaf-empty-server">
+<oaf_server iid="OAFIID:NotInServer:20000717" type="exe"
+	location="./bonobo-activation-empty-server">
 </oaf_server>
 
 <oaf_server iid="OAFIID:Bogus:20000526" type="factory"
