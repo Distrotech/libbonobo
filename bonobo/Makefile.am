@@ -127,6 +127,8 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-moniker-extender.c	\
 	bonobo-moniker-simple.c		\
 	bonobo-moniker-util.c		\
+	bonobo-node.c			\
+	bonobo-node.h			\
 	bonobo-object.c			\
 	bonobo-object-client.c		\
 	bonobo-object-io.c		\

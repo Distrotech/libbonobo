@@ -10,7 +10,7 @@
 #ifndef __BONOBO_PROPERTY_BAG_XML_H__
 #define __BONOBO_PROPERTY_BAG_XML_H__
 
-#include <bonobo/bonobo-ui-node.h>
+#include <bonobo/bonobo-node.h>
 #include <bonobo/bonobo-property-bag.h>
 
 BEGIN_GNOME_DECLS

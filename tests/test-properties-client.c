@@ -1,13 +1,7 @@
 #include <config.h>
-#include <gnome.h>
-#include <libgnorba/gnorba.h>
-#if USING_OAF
-#include <liboaf/liboaf.h>
-#else
-#include <libgnorba/gnorba.h>
-#endif
-#include <bonobo.h>
 #include <stdio.h>
+#include <liboaf/liboaf.h>
+#include <bonobo.h>
 
 CORBA_ORB		 orb;
 Bonobo_PropertyBag	 pb;

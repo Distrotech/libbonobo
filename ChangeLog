@@ -1,3 +1,13 @@
+2001-04-17  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag-xml.h: include bonobo-node.h
+
+	* bonobo/bonobo-node.[ch]: create from bonobo-ui-node,
+	renaming to suit.
+	(do_strip): Adapt for libxml2.
+
+	* tests/*: fixup.
+
 2001-04-18  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-item-container.[ch]: Ported to GObject.

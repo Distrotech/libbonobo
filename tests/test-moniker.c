@@ -1,10 +1,5 @@
 #include <config.h>
-#include <gnome.h>
 #include <liboaf/liboaf.h>
-
-#include <gdk/gdkprivate.h>
-#include <gdk/gdkx.h>
-#include <orb/orbit.h>
 #include <bonobo/bonobo.h>
 
 static void
