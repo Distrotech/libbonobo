@@ -1,3 +1,7 @@
+2001-12-27  Jesus Bravo Alvarez  <jba@pobox.com>
+
+	* configure.in: Added gl (Galician) to ALL_LINGUAS.
+
 2001-12-23  Takayuki KUSANO  <AE5T-KSN@asahi-net.or.jp>
 
 	* configure.in: Added "ja" to ALL_LINGUAS.
