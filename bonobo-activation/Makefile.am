@@ -10,6 +10,7 @@ INCLUDES=					\
 	$(LIBBONOBO_CFLAGS)			\
 	-DVERSION=\"$(VERSION)\"		\
 	-DG_DISABLE_DEPRECATED			\
+	-DG_LOG_DOMAIN=\"Bonobo-Activation\"	\
 	$(NULL)
 
 AM_LDFLAGS=					\

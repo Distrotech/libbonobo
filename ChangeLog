@@ -1,5 +1,8 @@
 2004-08-08  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* bonobo-activation/Makefile.am (INCLUDES): Define
+	G_LOG_DOMAIN=Bonobo-Activation.
+
 	* bonobo-activation/bonobo-activation-activate.c,
 	* bonobo-activation/bonobo-activation-base-service.c,
 	* bonobo-activation/bonobo-activation-client.c,
