@@ -142,9 +142,9 @@ main (int argc, char *argv[])
                 close (dev_null_fd);
         }
 
+	orb = oaf_init (argc, argv);
 	ml = g_main_new (FALSE);
 
-	orb = oaf_init (argc, argv);
 	root_poa = (PortableServer_POA)
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 	{

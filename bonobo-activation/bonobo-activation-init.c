@@ -49,7 +49,7 @@
 
 #include <orbit/orbit.h>
 
-#if ORBIT_MAJOR_VERSION >= 2
+#ifdef ORBIT2
 #  define ORBIT_USES_GLIB_MAIN_LOOP 1
 #endif
 
