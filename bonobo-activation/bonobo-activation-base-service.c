@@ -288,13 +288,20 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
         int status;
         guint watchid;
         struct sigaction sa;
+        sigset_t mask, omask;
                 
      	pipe (iopipes);
+
+        /* Block SIGCHLD so no one else can wait() on the child before us. */
+        sigemptyset (&mask);
+        sigaddset (&mask, SIGCHLD);
+        sigprocmask (SIG_BLOCK, &mask, &omask);
 
 	/* fork & get the IOR from the magic pipe */
 	childpid = fork ();
 
 	if (childpid < 0) {
+                sigprocmask (SIG_SETMASK, &omask, NULL);
 		errval = OAF_GeneralError__alloc ();
 		errval->description = CORBA_string_dup (_("Couldn't fork a new process"));
 
@@ -304,7 +311,10 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 	}
 
 	if (childpid) {
-		waitpid (childpid, &status, 0);	/* de-zombify */
+                /* de-zombify */
+                while (waitpid (childpid, &status, 0) == -1 && errno == EINTR)
+                        ;
+                sigprocmask (SIG_SETMASK, &omask, NULL);
                 
 		if (!WIFEXITED (status)) {
 			OAF_GeneralError *errval;
