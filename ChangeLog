@@ -1,3 +1,8 @@
+2003-10-31  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-context.c (bonobo_context_shutdown): check
+	that people didn't shut down the ORB before we got called.
+
 2003-10-29  Sebastien Bacher  <seb128@debian.org>
 
 	* utils/bonobo-slay.in: Add --help support, so 'bonobo-slay --help'
