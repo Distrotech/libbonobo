@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * GNOME container object.
+ * Bonobo container object.
  *
  * The BonoboContainer object represents a document which may have one
  * or more embedded document objects.  To embed an object in the

@@ -1,3 +1,21 @@
+2000-04-27  Mathieu Lacage <mathieu@gnu.org>
+
+	* bonobo/bonobo-wrapper.c: fixes the good old bug which left
+	a GdkWindow lying in your containers whenever you used the 
+	Wrapper. See mail 
+	http://mail.gnome.org/pipermail/gnome-components-list/2000-April/000048.html
+	* bonobo/bonobo-canvas-component.c: fixes some function 
+	documention.
+	* bonobo/bonobo-client-site.c: idem.
+	* bonobo/bonobo-container.c: idem.
+	* bonobo/bonobo-control.c: idem
+	* bonobo/bonobo-control-frame.c: idem
+	* bonobo/bonobo-desktop-window.c: idem	
+	* bonobo/bonobo-embeddable.c: idem
+	* bonobo/bonobo-generic-factory.c: idem	
+	* bonobo/bonobo-object.c: idem
+	* bonobo/bonobo-object-client.c: idem
+
 2000-04-27  Maciej Stachowiak  <mjs@eazel.com>
 
 	* doc/standard-attributes.txt: Added a pointer to the attributes

@@ -1,9 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * GNOME GenericFactory object.
+ * Bonobo GenericFactory object.
  *
  * The BonoboGenericFactory object is used to instantiate new
- * GnomeGeneric objects.  It acts as a wrapper for the
+ * Bonobo::GenericFactory objects.  It acts as a wrapper for the
  * Bonobo::GenericFactory CORBA interface, and dispatches to
  * a user-specified factory function whenever its create_object()
  * method is invoked.

@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gnome-object-client.c:
- *   This handles the client-view of a remote GNOME object.
+ * bonobo-object-client.c:
+ *   This handles the client-view of a remote Bonobo object.
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
@@ -24,7 +24,7 @@ static BonoboObjectClass *bonobo_object_client_parent_class;
  * @corba_object: The remote CORBA object this object_client refers to
  *
  * Initializes @object_client with the CORBA object for the
- * GNOME_ObjectClient interface provided in @corba_object.
+ * Bonobo::Unknown interface provided in @corba_object.
  *
  * Returns: the initialized BonoboObjectClient object.
  */
@@ -64,7 +64,7 @@ bonobo_object_activate_with_either_id(const gchar* iid,
  * @params: parameters passed to the factory
  *
  * Activates the service represented by goad_id.
- * The service activated should support the GNOME::object interface.
+ * The service activated should support the Bonobo::Unknown interface.
  *
  * This routine used goad_server_activate_with_repo_id() routine from
  * libgnorba.
@@ -88,7 +88,7 @@ bonobo_object_activate_with_goad_id (gpointer dummy,
  * @params: parameters passed to the factory
  *
  * Activates the service represented by @oaf_id.
- * The service activated should support the GNOME::object interface.
+ * The service activated should support the Bonobo::Unknown interface.
  *
  */
 BonoboObjectClient *

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * GNOME Unknown interface base implementation
+ * Bonobo Unknown interface base implementation
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
@@ -485,7 +485,7 @@ bonobo_object_activate_servant (BonoboObject *object, void *servant)
  *
  * Initializes the provided BonoboObject @object. This method is
  * usually invoked from the construct method for other Gtk-based CORBA
- * wrappers that derive from the GNOME::obj interface
+ * wrappers that derive from the Bonobo::Unknown interface
  *
  * Returns: the initialized BonoboObject.
  */
@@ -616,7 +616,7 @@ bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environme
  * Pings the object @object using the ref/unref methods from Bonobo::Unknown.
  * You can use this one to see if a remote object has gone away.
  *
- * Returns: %TRUE if the GNOME::Unkonwn @object is alive.
+ * Returns: %TRUE if the Bonobo::Unknown @object is alive.
  */
 gboolean
 gnome_unknown_ping (Bonobo_Unknown object)
