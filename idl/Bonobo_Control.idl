@@ -118,6 +118,8 @@ interface Control : Bonobo::Unknown {
 
 	/**
 	 * getWindowId:
+	 * @cookie: ',' delimited string, format:
+	 *                'screen' = <int> [, [ <reserved for expansion> ] ]
 	 *
 	 * Returns: the windowId of the plug's window
 	 */
