@@ -766,6 +766,11 @@ impl_Bonobo_ActivationContext_activate (
 	g_free (hostname);
 
  out:
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+                CORBA_free (retval);
+                retval = NULL;
+        }
+
 	servant->refs--;
 
 	return retval;

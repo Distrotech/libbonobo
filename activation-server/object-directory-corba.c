@@ -176,7 +176,7 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant, gboolean force_reload
         doing_reload = TRUE;
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_warning ("Update registry");
+        g_warning ("Update registry %p", servant->by_iid);
 #endif
 
         /* get first time init right */
