@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 #include <liboaf/liboaf.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "empty.h"
 
@@ -8,7 +9,6 @@ main (int argc, char *argv[])
 {
 	OAF_ServerInfoList *result;
 	CORBA_Environment ev;
-	OAF_ActivationID aid;
 	char *query;
 	char **sort_criteria;
 	int i;
@@ -44,10 +44,10 @@ main (int argc, char *argv[])
 		query = "repo_ids.has('IDL:Empty:1.0')";
 	}
 
-	// putenv("OAF_BARRIER_INIT=1");
+	/* putenv("OAF_BARRIER_INIT=1"); */
 	result = oaf_query (query, sort_criteria, &ev);
 
-	// result = oaf_query ("iid == 'OAFIID:Empty:19991025'", NULL, &ev);
+	/* result = oaf_query ("iid == 'OAFIID:Empty:19991025'", NULL, &ev); */
 
 	if (result == NULL) {
 		puts ("query failed");

@@ -7,6 +7,7 @@
 
 #include "ac-query-expr.h"
 #include "ac-query-parse.h"
+#include "qsort_ex.h"
 
 static QueryExpr *
 qexp_new (void)
@@ -634,8 +635,6 @@ static QueryExprConst
 qexp_func_defined (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval, v1;
-	char **check_one, *check_two;
-	int i;
 
 	v1 = qexp_evaluate (si, e->u.function_value.arguments->data, qctx);
 
@@ -1113,8 +1112,6 @@ void
 qexp_sort (OAF_ServerInfo ** servers, int nservers, QueryExpr ** sexps,
 	   int nexps, QueryContext * qctx)
 {
-	int n, h, i, j;
-	OAF_ServerInfo *t;
 	QexpSortData sort_data;
 
 	sort_data.sexps = sexps;
@@ -1122,5 +1119,5 @@ qexp_sort (OAF_ServerInfo ** servers, int nservers, QueryExpr ** sexps,
 	sort_data.qctx = qctx;
 
 	qsort_ex (servers, nservers, sizeof (OAF_ServerInfo *),
-		  qexp_sort_compare, &sort_data);
+		  (compar_ex_fn_t)qexp_sort_compare, &sort_data);
 }

@@ -67,7 +67,7 @@ main (int argc, char *argv[])
 
 	CORBA_exception_init (&ev);
 
-	ctx = poptGetContext ("oafd", argc, argv, options, 0);
+	ctx = poptGetContext ("oafd", argc, (const char **)argv, options, 0);
 	while (poptGetNextOpt (ctx) >= 0)
 		/**/;
 
@@ -80,7 +80,6 @@ main (int argc, char *argv[])
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 	{
 		char *env_od_source_dir;
-		char *gnome_env_od_source_dir;
 		GString *real_od_source_dir;
 
 		real_od_source_dir = g_string_new (OAFINFODIR);

@@ -79,7 +79,7 @@ main (int argc, char *argv[])
 
 	CORBA_exception_init (&ev);
 
-	ctx = poptGetContext ("oaf-client", argc, argv, options, 0);
+	ctx = poptGetContext ("oaf-client", argc, (const char **)argv, options, 0);
 	while (poptGetNextOpt (ctx) >= 0)
 		/**/;
 

@@ -1,8 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
+#include <stdio.h>
+#include <time.h>
+
 #include "oafd.h"
 #include "liboaf/liboaf.h"
 #include "ac-query-expr.h"
-#include <time.h>
 
 static void
 OAF_ServerInfo__copy (OAF_ServerInfo * new, const OAF_ServerInfo * old)

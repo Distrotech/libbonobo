@@ -44,9 +44,8 @@ main (int argc, char *argv[])
 	CORBA_exception_init (&ev);
 	orb = oaf_init (argc, argv);
 
-	ctx =
-		poptGetContext ("oaf-empty-server", argc, argv,
-				oaf_popt_options, 0);
+	ctx = poptGetContext ("oaf-empty-server", argc, (const char **)argv,
+                              oaf_popt_options, 0);
 	while (poptGetNextOpt (ctx) >= 0);
 	poptFreeContext (ctx);
 

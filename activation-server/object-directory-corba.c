@@ -1,6 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 #include "config.h"
 
+#include <stdio.h>
+
 #include "oafd.h"
 #include "liboaf/liboaf.h"
 #include <time.h>

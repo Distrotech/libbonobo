@@ -3,7 +3,7 @@ bin_PROGRAMS=oaf-run-query
 
 oaf_test_client_SOURCES=oaf-test-client.c empty-common.c empty.h empty-stubs.c
 
-oaf_test_client_SOURCES=oaf-run-query.c empty-common.c empty.h empty-stubs.c
+oaf_run_query_SOURCES=oaf-run-query.c empty-common.c empty.h empty-stubs.c
 
 oaf_empty_server_SOURCES=empty-server.c empty.h empty-common.c empty-skels.c
 
