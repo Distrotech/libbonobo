@@ -10,6 +10,11 @@
 module GNOME {
 
 module Gdk {
+	/*
+	 * Idea: would it make more sense to 
+	 * not provide our own types and just copy
+	 * the Gdk values instead of converting back and forth?
+	 */
 	enum EventType {
 		FOCUS,
 		KEY,
@@ -44,18 +49,18 @@ module Gdk {
 
 	struct MotionEvent {
 		Time   time;
-		double x, y, root_x, root_y;
+		double x, y, x_root, y_root;
 		double pressure;
 		double xtilt, ytilt;
 		long   state;
-		long   is_hint;
+		boolean is_hint;
 	};
 
 	struct ButtonEvent {
 		ButtonType type;
 		Time       time;
 		
-		double x, y, root_x, root_y;
+		double x, y, x_root, y_root;
 
 		short  button;
 	};
@@ -139,8 +144,16 @@ module Canvas {
 			  
 	typedef sequence<SVPSegment> SVP;
       
-	interface Item {
-		void update  (in affine aff, in SVP clip_path, in long flags);
+	interface Item : GNOME::Unknown {
+
+		/** 
+		 * update:
+		 * 
+		 * Returns true if the ITEM_UPDATE flag needs to be set and the 
+		 * x1, y1, x2, y2 arguments contain the bounding box for the item.
+		 */
+		boolean update  (in affine aff, in SVP clip_path, in long flags,
+				 out double x1, out double y1, out double x2, out double y2);
 		void realize ();
 		void unrealize ();
 		void map ();
@@ -154,6 +167,14 @@ module Canvas {
 		void bounds (out double x1, out double x2, out double y1, out double y2);
 
 		boolean event (in GNOME::Gdk::Event event);
+	};
+
+	/*
+	 * This interface is used on the container side to forward
+	 * events to the real containing canvas and the item
+	 */
+	interface ItemProxy {
+		void request_update (void);
 	};
 };
 

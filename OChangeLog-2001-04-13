@@ -1,3 +1,53 @@
+1999-09-09  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-client-site.c: New routine for requesting a
+	GnomeCanvasItem from a View.  I am not sure if I like this setup.
+	Needs discussion with Nat.
+
+	* bonobo/Makefile.am: Ship item.gnorba;  Add Bonobo-item support. 
+
+	* idl/gnome-canvas.idl: Canvas::Item update method should return
+	its boudning box and the update flag status.
+	
+1999-09-08  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/sample-server.c (main): Invoke bonobo_main here.
+
+	* bonobo/sample-item.c: new file, implements an item server.
+
+	* bonobo/gnome-view.c: Moved various private members into our
+	private data structure.
+	(make_component): Creates the component if we are missing one by
+	calling the view-item-provider routine.
+	(impl_GNOME_View_set_window): Returns the canvas for the item if
+	we are requested a window.
+	(impl_GNOME_View_get_canvas_item): New routine.
+	(gnome_view_construct): modify to accept an item_creator callback
+	routine. 
+	(gnome_view_new_canvas): New routine to create a GnomeView server
+	that will respond to get_canvas_item requests.
+
+	* bonobo/sample-server.c: fixed to use bonobo_main().
+
+	* bonobo/sample-item.c: Sample item server.
+
+	* bonobo/test-container.c: New test for bonobo canvas items.
+
+	* idl/gnome-canvas.idl: Make Item derived from GNOME_Unkown.
+	
+	* bonobo/gnome-canvas-component.c: New file.  the other end of a
+	GnomeBonoboItem. 
+
+1999-09-07  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-canvas-item.c: Implements a server for
+	GNOME::Canvas::Item interface for a real item.
+	
+	* bonobo/gnome-view.c (gnome_view_popup_verbs): Constify.
+
+	* bonobo/gnome-bonobo-item.c (gdk_event_to_bonobo_event): Finished
+	event marshalling here.
+
 1999-09-08  Michael Meeks  <michael@nuclecu.unam.mx>
 
 	* components/bonobo.keys: Update text/plain: doh.

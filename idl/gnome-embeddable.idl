@@ -70,11 +70,12 @@ interface View : GNOME::Unknown {
 
 	/**
 	 * get_canvas_item:
+	 * @aa: Whether the item should be an AA-item or not
 	 *
 	 * Returns a GNOME::Canvas::Item interface, or CORBA_OBJECT_NIL
 	 * if this object does not support the Item interface
 	 */
-	Canvas::Item get_canvas_item ();
+	Canvas::Item get_canvas_item (in boolean aa);
 };
 
 interface ViewFrame : GNOME::Unknown {
