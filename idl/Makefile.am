@@ -3,13 +3,11 @@ idldir = $(datadir)/idl
 idl_DATA =			\
 	bonobo.idl		\
 	gnome-advise.idl	\
-	gnome-base.idl		\
 	gnome-client-site.idl	\
 	gnome-component.idl	\
 	gnome-container.idl	\
 	gnome-inplace.idl	\
 	gnome-moniker.idl	\
-	gnome-object.idl	\
 	gnome-persist.idl	\
 	gnome-storage.idl	
 

@@ -1,3 +1,10 @@
+1999-05-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* idl/Makefile.am (idl_DATA): Removed gnome-base.idl and
+	gnome-object.idl from the list of files.
+
+	* bonobo/Makefile.am (idls): Likewise.
+
 1999-05-26    <sopwith@moebius.labs.redhat.com>
 
 	* idl/bonobo.idl: Use GnomeObject.idl (from gnome-libs) instead of
