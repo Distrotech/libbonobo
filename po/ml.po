@@ -5,20 +5,20 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo-2.2.x\n"
-"POT-Creation-Date: 2003-06-09 17:26+0100\n"
-"PO-Revision-Date: 2003-03-05 10:29+0530\n"
+"Project-Id-Version:libbonobo.HEAD\n"
+"POT-Creation-Date: 2003-06-06 04:53+0200\n"
+"PO-Revision-Date: 2003-07-05 10:29+0530\n"
 "Last-Translator: FSF-India <locale@gnu.org.in>\n"
 "Language-Team: Malayalam <locale@gnu.org.in>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:472
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr ""
 
-#: activation-server/activation-context-corba.c:763
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -35,12 +35,11 @@ msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 
 #: activation-server/activation-server-main.c:73
-#, fuzzy
 msgid "File descriptor to write IOR to"
-msgstr "അച്ചടിക്കുവാനുള്ള രചനയുടെ പേര‍്"
+msgstr ""
 
 #: activation-server/activation-server-main.c:73
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:286
 msgid "FD"
 msgstr ""
 
@@ -53,9 +52,8 @@ msgid "EXPRESSION"
 msgstr ""
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
-#, fuzzy
 msgid "CORBA CosNaming service."
-msgstr "വെബ് സേവനങ്ങള്‌"
+msgstr ""
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 #, fuzzy
@@ -81,9 +79,9 @@ msgstr ""
 #. * servers are registered.
 #.
 #: activation-server/object-directory-corba.c:889
-#, fuzzy, c-format
+#, c-format
 msgid "Race condition activating server '%s'"
-msgstr "%s ചിത്രം നിറയ്‌ക്കുന്നതില്‌ പരാജയം : %s"
+msgstr ""
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
@@ -147,51 +145,50 @@ msgstr "%s കൊണ്ട് വരാന് കഴിഞ്ഞില്ല: %s
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:286
 #, fuzzy
 msgid "File descriptor to print IOR on"
 msgstr "അച്ചടിക്കുവാനുള്ള രചനയുടെ പേര‍്"
 
-#: bonobo-activation/bonobo-activation-init.c:195
+#: bonobo-activation/bonobo-activation-init.c:288
 #, fuzzy
 msgid "IID to activate"
 msgstr "അചേതനമായ"
 
-#: bonobo-activation/bonobo-activation-init.c:197
+#: bonobo-activation/bonobo-activation-init.c:290
 msgid "Prevent registering of server with OAF"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-init.c:282
-#, fuzzy
+#: bonobo-activation/bonobo-activation-init.c:375
 msgid "Bonobo activation options"
-msgstr "ബന്ധസമയം അധികരിച്ചു"
+msgstr ""
 
-#: bonobo-activation/bonobo-activation-shlib.c:107
+#: bonobo-activation/bonobo-activation-shlib.c:101
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-shlib.c:126
-#: bonobo-activation/bonobo-activation-shlib.c:163
+#: bonobo-activation/bonobo-activation-shlib.c:119
+#: bonobo-activation/bonobo-activation-shlib.c:155
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-shlib.c:212
+#: bonobo-activation/bonobo-activation-shlib.c:203
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-shlib.c:229
+#: bonobo-activation/bonobo-activation-shlib.c:220
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr ""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:886
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:886
 msgid "Custom CORBA POA"
 msgstr ""
 
@@ -343,7 +340,7 @@ msgstr ""
 msgid "General activation error with no description"
 msgstr ""
 
-#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 #, fuzzy
 msgid "Could not initialize Bonobo"
 msgstr "നിറം സംസ്ഥാപിക്കാന്‌ കഴിയുന്നില്ല"
@@ -444,9 +441,8 @@ msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:66
-#, fuzzy
 msgid "Successfully wrote configuration file.\n"
-msgstr "%s എന്ന രചന സംരക്ഷിക്കാന്‌ കഴിയുന്നില്ല."
+msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:80
 #, fuzzy, c-format
@@ -461,19 +457,16 @@ msgid "%s already in configuration file\n"
 msgstr "വിന്യാസ രചനകള്"
 
 #: utils/bonobo-activation-sysconf.c:138
-#, fuzzy
 msgid "there is not a properly structured configuration file\n"
-msgstr "വിന്യാസ രചനകള്"
+msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:201
-#, fuzzy
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "%s എന്ന രചന സംരക്ഷിക്കാന്‌ കഴിയുന്നില്ല."
+msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:233
-#, fuzzy
 msgid "Directory to remove from configuration file"
-msgstr "ഛായാചിത്രസഞ്ചരണ രചനയിലേക്കുള്ള വഴി"
+msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 #, fuzzy
@@ -481,14 +474,12 @@ msgid "directory path"
 msgstr "കൂട്"
 
 #: utils/bonobo-activation-sysconf.c:236
-#, fuzzy
 msgid "Directory to add to configuration file"
-msgstr "ഛായാചിത്രസഞ്ചരണ രചനയിലേക്കുള്ള വഴി"
+msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:239
-#, fuzzy
 msgid "Display directories in configuration file"
-msgstr "ഛായാചിത്രസഞ്ചരണ രചനയിലേക്കുള്ള വഴി"
+msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:242
 #, fuzzy
