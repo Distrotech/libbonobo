@@ -18,13 +18,11 @@
     <!ENTITY libbonobo-bonobo-storage-memory SYSTEM "xml/bonobo-storage-memory.xml">
     <!ENTITY libbonobo-bonobo-stream-memory SYSTEM "xml/bonobo-stream-memory.xml">
     <!ENTITY libbonobo-bonobo-transient SYSTEM "xml/bonobo-transient.xml">
-    <!ENTITY libbonobo-bonobo-xobject SYSTEM "xml/bonobo-xobject.xml">
     <!ENTITY libbonobo-bonobo-arg SYSTEM "xml/bonobo-arg.xml">
     <!ENTITY libbonobo-bonobo-config-database SYSTEM "xml/bonobo-config-database.xml">
     <!ENTITY libbonobo-bonobo-context SYSTEM "xml/bonobo-context.xml">
     <!ENTITY libbonobo-bonobo-exception SYSTEM "xml/bonobo-exception.xml">
     <!ENTITY libbonobo-bonobo-i18n SYSTEM "xml/bonobo-i18n.xml">
-    <!ENTITY libbonobo-bonobo-macros SYSTEM "xml/bonobo-macros.xml">
     <!ENTITY libbonobo-bonobo-main SYSTEM "xml/bonobo-main.xml">
     <!ENTITY libbonobo-bonobo-moniker-context SYSTEM "xml/bonobo-moniker-context.xml">
     <!ENTITY libbonobo-bonobo-moniker-util SYSTEM "xml/bonobo-moniker-util.xml">
@@ -56,7 +54,6 @@
 	&libbonobo-bonobo-running-context;
 	&libbonobo-bonobo-shutdown;
 	&libbonobo-bonobo-i18n;
-	&libbonobo-bonobo-macros;
 	&libbonobo-bonobo-types;
 	&libbonobo-bonobo-context;
 	&libbonobo-bonobo-exception;
@@ -65,7 +62,6 @@
     <chapter id="factories">
 	<title>Objects, Factories, Reference Counting</title>
 	&libbonobo-bonobo-object;
-	&libbonobo-bonobo-xobject;
 	&libbonobo-bonobo-generic-factory;
 	&libbonobo-bonobo-shlib-factory;
 	&libbonobo-refcounting;

@@ -92,31 +92,6 @@ suffix.
   #BonoboListener #BonoboArg
 </para>
 
-<!-- ##### MACRO BONOBO_EVENT_SOURCE_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### STRUCT BonoboEventSourcePrivate ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### STRUCT BonoboEventSource ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### TYPEDEF BonoboEventSourceClass ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### FUNCTION bonobo_event_source_new ##### -->
 <para>
 

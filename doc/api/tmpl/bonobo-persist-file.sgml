@@ -139,19 +139,6 @@ save_to_file (BonoboPersistFile *pf,
 #BonoboPersistStream, #BonoboPersist
 </para>
 
-<!-- ##### MACRO BONOBO_PERSIST_FILE_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### STRUCT BonoboPersistFilePrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### STRUCT BonoboPersistFile ##### -->
 <para>
 

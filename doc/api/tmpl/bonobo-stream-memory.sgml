@@ -52,19 +52,6 @@ BonoboStream *make_bonobo_stream_on_string (char *string)
 </para>
 
 
-<!-- ##### STRUCT BonoboStreamMemPrivate ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### MACRO BONOBO_STREAM_MEM_TYPE ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### TYPEDEF BonoboStreamMemClass ##### -->
 <para>
 

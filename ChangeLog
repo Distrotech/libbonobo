@@ -1,3 +1,54 @@
+2003-06-02  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-item-container.h: Removed the no longer used
+	BonoboClientSiteList typedef.
+
+	* doc/api/libbonobo-docs.sgml: Removed the bonobo-macros and
+	bonobo-xobject sections.
+
+	* doc/api/tmpl/bonobo-macros.sgml,
+	* doc/api/tmpl/bonobo-unused.sgml,
+	* doc/api/tmpl/libbonobo-unused.sgml,
+	* doc/api/tmpl/bonobo-async.sgml,
+	* doc/api/tmpl/bonobo-audio-ulaw.sgml,
+	* doc/api/tmpl/bonobo-object-client.sgml,
+	* doc/api/tmpl/bonobo-selector.sgml,
+	* doc/api/tmpl/bonobo-property-bag-xml.sgml,
+	* doc/api/tmpl/bonobo-wrapper.sgml,
+	* doc/api/tmpl/bonobo-x-object.sgml: removed.
+
+	* doc/api/Makefile.am: ignore bonobo-macros.h, bonobo-x-object.h
+	and bonobo-stream.h.
+
+	* doc/api/libbonobo-docs.sgml,
+	* doc/api/libbonobo-sections.txt,
+	* doc/api/tmpl/bonobo-arg.sgml,
+	* doc/api/tmpl/bonobo-event-source.sgml,
+	* doc/api/tmpl/bonobo-exception.sgml,
+	* doc/api/tmpl/bonobo-generic-factory.sgml,
+	* doc/api/tmpl/bonobo-item-container.sgml,
+	* doc/api/tmpl/bonobo-item-handler.sgml,
+	* doc/api/tmpl/bonobo-listener.sgml,
+	* doc/api/tmpl/bonobo-main.sgml,
+	* doc/api/tmpl/bonobo-moniker-context.sgml,
+	* doc/api/tmpl/bonobo-moniker-extender.sgml,
+	* doc/api/tmpl/bonobo-moniker-simple.sgml,
+	* doc/api/tmpl/bonobo-moniker-util.sgml,
+	* doc/api/tmpl/bonobo-moniker.sgml,
+	* doc/api/tmpl/bonobo-object.sgml,
+	* doc/api/tmpl/bonobo-persist-file.sgml,
+	* doc/api/tmpl/bonobo-persist-stream.sgml,
+	* doc/api/tmpl/bonobo-persist.sgml,
+	* doc/api/tmpl/bonobo-property-bag-client.sgml,
+	* doc/api/tmpl/bonobo-property-bag.sgml,
+	* doc/api/tmpl/bonobo-running-context.sgml,
+	* doc/api/tmpl/bonobo-shlib-factory.sgml,
+	* doc/api/tmpl/bonobo-storage-memory.sgml,
+	* doc/api/tmpl/bonobo-storage.sgml,
+	* doc/api/tmpl/bonobo-stream-memory.sgml,
+	* doc/api/tmpl/bonobo-stream.sgml,
+	* doc/api/tmpl/bonobo-types.sgml: documention update and cleanup.
+
 2003-05-30  Michael Meeks  <michael@ximian.com>
 
 	* activation-server/object-directory.h: add

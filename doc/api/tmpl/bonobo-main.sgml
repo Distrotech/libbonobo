@@ -23,18 +23,6 @@ Bonobo initialization.
 @BONOBO_POA_ONEWAY_AT_IDLE: 
 @BONOBO_POA_THREAD_PER_REQUEST: 
 
-<!-- ##### ENUM BonoboDebugFlags ##### -->
-<para>
-
-</para>
-
-@BONOBO_DEBUG_NONE: 
-@BONOBO_DEBUG_REFS: 
-@BONOBO_DEBUG_AGGREGATE: 
-@BONOBO_DEBUG_LIFECYCLE: 
-@BONOBO_DEBUG_RUNNING: 
-@BONOBO_DEBUG_OBJECT: 
-
 <!-- ##### FUNCTION bonobo_is_initialized ##### -->
 <para>
 

@@ -26,17 +26,6 @@ It is difficult to know how to solve this problem.
    #BonoboPropertyBag, #BonoboProperty, #BonoboPropertyControl
 </para>
 
-<!-- ##### FUNCTION bonobo_pbclient_get_type ##### -->
-<para>
-
-</para>
-
-@bag: 
-@key: 
-@opt_ev: 
-@Returns: 
-
-
 <!-- ##### FUNCTION bonobo_pbclient_get_string ##### -->
 <para>
 

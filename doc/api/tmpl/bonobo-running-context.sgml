@@ -14,32 +14,6 @@ bonobo-running-context
 
 </para>
 
-<!-- ##### STRUCT BonoboRunningContextPrivate ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### STRUCT BonoboRunningContext ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### TYPEDEF BonoboRunningContextClass ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION bonobo_running_context_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
 <!-- ##### FUNCTION bonobo_running_context_new ##### -->
 <para>
 

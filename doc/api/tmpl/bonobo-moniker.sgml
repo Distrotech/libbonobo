@@ -30,28 +30,15 @@ powerful feature set. Most people use #BonoboMonikerSimple.
 #bonobo-moniker-util #BonoboMonikerSimple
 </para>
 
-<!-- ##### STRUCT BonoboMonikerPrivate ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### MACRO BONOBO_MONIKER_TYPE ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### STRUCT BonoboMoniker ##### -->
 <para>
-
+Implements Bonobo::Moniker
 </para>
 
 
 <!-- ##### TYPEDEF BonoboMonikerClass ##### -->
 <para>
-
+BonoboMoniker's class
 </para>
 
 

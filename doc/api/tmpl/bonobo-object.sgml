@@ -153,64 +153,30 @@ Returns the #GtkType for the BonoboObject object.
 
 <!-- ##### MACRO BONOBO_OBJREF ##### -->
 <para>
-
+    This macro returns the CORBA object reference inside a #BonoboObject.
 </para>
 
-@o: 
+@o: a #BonoboObject
 
 
 <!-- ##### USER_FUNCTION BonoboObjectPOAFn ##### -->
 <para>
-
+Signature of POA initialization and finalization functions
 </para>
 
-@servant: 
-@ev: 
-
-
-<!-- ##### STRUCT BonoboObjectPrivate ##### -->
-<para>
-   Private information kept by the BonoboObject.  This should not be
-   used by BonoboObject users.
-</para>
-
-
-<!-- ##### TYPEDEF BonoboObjectHeader ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### MACRO BONOBO_OBJECT_HEADER_SIZE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_OBJECT_SIGNATURE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_SERVANT_SIGNATURE ##### -->
-<para>
-
-</para>
-
+@servant: the object's servant
+@ev: CORBA environment
 
 
 <!-- ##### STRUCT BonoboObject ##### -->
 <para>
-
+Implements Bonobo::Unknown.
 </para>
 
 
 <!-- ##### TYPEDEF BonoboObjectClass ##### -->
 <para>
-
+BonoboObject's class.
 </para>
 
 
@@ -475,18 +441,22 @@ Returns the #GtkType for the BonoboObject object.
 
 <!-- ##### MACRO BONOBO_TYPE_FUNC_FULL ##### -->
 <para>
-
+    Macro that includes all the boilerplate code need to register a
+    new BonoboObject-derived class.  The programmer has to define two
+    functions only: @prefix_init and @prefix_class_init.  As a result
+    of the macro expansion, a function named @prefix_get_type() is
+    defined.
 </para>
 
-@class_name: 
-@corba_name: 
-@parent: 
-@prefix: 
+@class_name: Name of the GObject class, LikeThis
+@corba_name: Name of the CORBA interface, with IDL-to-C mapping, Like_This
+@parent: GType of the parent class, LIKE_TYPE_THIS
+@prefix: prefix of the implementation functions
 
 
 <!-- ##### MACRO BONOBO_TYPE_FUNC ##### -->
 <para>
-
+    Like #BONOBO_TYPE_FUNC, but doesn't set POA ini and fini functions.
 </para>
 
 @class_name: 
@@ -496,23 +466,24 @@ Returns the #GtkType for the BonoboObject object.
 
 <!-- ##### SIGNAL BonoboObject::destroy ##### -->
 <para>
-
+    Signal emitted when the last reference of a BonoboObject has been
+    lost and the object is being destroyed / finalized / deactivated.
 </para>
 
 @bonoboobject: the object which received the signal.
 
 <!-- ##### SIGNAL BonoboObject::system-exception ##### -->
 <para>
-
+    Signal emitted from bonobo_object_check_env if a system exception is identified.
 </para>
 
-@bonoboobject: the object which received the signal.
-@arg1: 
-@arg2: 
+@bonoboobject: the #BonoboObject which received the signal.
+@arg1: the CORBA_Object contained in @bonoboobject.
+@arg2: the exception that has just occurred.
 
 <!-- ##### ARG BonoboObject:poa ##### -->
 <para>
-  Pass this property during construction to specify a custom POA for the BonoboObject. Example:
+    Pass this property during construction to specify a custom POA for a BonoboObject. Example:
     <informalexample>
 	<programlisting>
 BonoboObject * my_bonobo_object_new (void)

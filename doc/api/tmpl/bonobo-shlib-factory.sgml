@@ -14,19 +14,6 @@ bonobo-shlib-factory
 
 </para>
 
-<!-- ##### MACRO BONOBO_SHLIB_FACTORY_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### STRUCT BonoboShlibFactoryPrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### STRUCT BonoboShlibFactory ##### -->
 <para>
 
@@ -97,7 +84,7 @@ bonobo-shlib-factory
 
 <!-- ##### MACRO BONOBO_OAF_SHLIB_FACTORY ##### -->
 <para>
-
+Deprecated.  See BONOBO_ACTIVATION_SHLIB_FACTORY().
 </para>
 
 @oafiid: 
@@ -108,7 +95,7 @@ bonobo-shlib-factory
 
 <!-- ##### MACRO BONOBO_OAF_SHLIB_FACTORY_MULTI ##### -->
 <para>
-
+Deprecated.  See BONOBO_ACTIVATION_SHLIB_FACTORY().
 </para>
 
 @oafiid: 
@@ -119,12 +106,13 @@ bonobo-shlib-factory
 
 <!-- ##### MACRO BONOBO_ACTIVATION_SHLIB_FACTORY ##### -->
 <para>
-
+  Macro that includes all boiler-plate code necessary to create an shlib
+  type factory.
 </para>
 
-@oafiid: 
-@descr: 
-@fn: 
-@data: 
+@oafiid: The factory's OAFIID
+@descr: Description of the factory
+@fn: Function (#BonoboFactoryCallback) responsible for intantiating components
+@data: Additional data to be passed to the callback
 
 

@@ -16,19 +16,6 @@ use by the derived #BonoboPersistStream interface.
 #BonoboPersistStream, #BonoboPersistFile
 </para>
 
-<!-- ##### MACRO BONOBO_PERSIST_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### STRUCT BonoboPersistPrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### STRUCT BonoboPersist ##### -->
 <para>
 

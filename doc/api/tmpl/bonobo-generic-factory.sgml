@@ -61,52 +61,24 @@ the Object requestor.
 </para>
 
 <para>
-The generic factory works in two modes, multi and plain,
-it is recommended that the multi mode be used. Also, there
-is a macro that can be used for simple components to remove
-the burden of writing the main function and getting the
-initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
-</para>
+There is a macro that can be used for simple components to remove the
+burden of writing the main function and getting the initialization
+correct, see #BONOBO_ACTIVATION_FACTORY.  </para>
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
 
-<!-- ##### MACRO BONOBO_GENERIC_FACTORY_TYPE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### STRUCT BonoboGenericFactoryPrivate ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### STRUCT BonoboGenericFactory ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### USER_FUNCTION BonoboFactoryCallback ##### -->
 <para>
-
+Type of function that is called when it's time for the factory to create a new instance.
 </para>
 
-@factory: 
-@component_id: 
-@closure: 
-@Returns: 
-
-
-<!-- ##### TYPEDEF BonoboGenericFactoryClass ##### -->
-<para>
-
-</para>
+@factory: the factory that invoked this callback
+@component_id: OAFIID of the component that should be activated
+@closure: user data
+@Returns: the newly created #BonoboObject
 
 
 <!-- ##### FUNCTION bonobo_generic_factory_new ##### -->
@@ -168,18 +140,18 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 
 <!-- ##### MACRO BONOBO_FACTORY_INIT ##### -->
 <para>
-
+Macro that expands to the code need to initialize an exe factory.  Should be placed at the beginning of the main() function.
 </para>
 
-@descr: 
-@version: 
-@argcp: 
-@argv: 
+@descr: factory description string
+@version: version string
+@argcp: pointer to main()'s argc
+@argv: main()'s argv
 
 
 <!-- ##### MACRO BONOBO_OAF_FACTORY ##### -->
 <para>
-
+Deprecated; see BONOBO_ACTIVATION_FACTORY().
 </para>
 
 @oafiid: 
@@ -187,13 +159,11 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 @version: 
 @callback: 
 @data: 
-<!-- # Unused Parameters # -->
-@fn: 
 
 
 <!-- ##### MACRO BONOBO_OAF_FACTORY_MULTI ##### -->
 <para>
-
+Deprecated; see BONOBO_ACTIVATION_FACTORY().
 </para>
 
 @oafiid: 
@@ -201,19 +171,19 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 @version: 
 @callback: 
 @data: 
-<!-- # Unused Parameters # -->
-@fn: 
 
 
 <!-- ##### MACRO BONOBO_ACTIVATION_FACTORY ##### -->
-<para>
 
+<para>
+  Macro that includes all boiler-plate code necessary to create an exe
+  type factory, including a main() function and a generic factory.
 </para>
 
-@oafiid: 
-@descr: 
-@version: 
-@callback: 
-@data: 
+@oafiid: The factory's OAFIID
+@descr: Description of the factory
+@version: Version string of the factory program
+@callback: Function (#BonoboFactoryCallback) responsible for intantiating components
+@data: Additional data to be passed to the callback
 
 
