@@ -16,6 +16,7 @@
 
 #include <signal.h>
 #include <gnome.h>
+#include <liboaf/oaf.h>
 
 #include <X11/Xlib.h>
 
@@ -64,7 +65,7 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 		return g_strdup (_("The User canceled the save"));
 
 	/* Bonobo::GenericFactory */
-	else if (!strcmp (ev->_repo_id, ex_Bonobo_GenericFactory_CannotActivate))
+	else if (!strcmp (ev->_repo_id, ex_GNOME_ObjectFactory_CannotActivate))
 		return g_strdup (_("Cannot activate object from factory"));
 
 	/* Bonobo::Stream */
@@ -100,6 +101,19 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_Persist_FileNotFound))
 		return g_strdup (_("stream not found"));
+
+	/* Bonobo::Moniker */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Moniker_InterfaceNotFound))
+		return g_strdup (_("Moniker interface cannot be found"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Moniker_TimeOut))
+		return g_strdup (_("Moniker activation timed out"));
+		
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Moniker_InvalidSyntax))
+		return g_strdup (_("Syntax error within moniker"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_Moniker_UnknownPrefix))
+		return g_strdup (_("Moniker has an unknown moniker prefix"));
 
 	else
 		return g_strdup_printf ("Unknown CORBA exception id: '%s'", ev->_repo_id);

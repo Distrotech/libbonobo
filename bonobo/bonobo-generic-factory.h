@@ -14,6 +14,7 @@
 #include <gtk/gtkobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
+#include <liboaf/oaf.h>
 
 BEGIN_GNOME_DECLS
  
@@ -80,7 +81,7 @@ void bonobo_generic_factory_set (
 	BonoboGenericFactoryFn factory,
 	void *data);
 
-POA_Bonobo_GenericFactory__epv *bonobo_generic_factory_get_epv (void);
+POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 
 END_GNOME_DECLS
 
