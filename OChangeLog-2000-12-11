@@ -1,5 +1,7 @@
 1999-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* bonobo.spec.in (Obsoletes): Include *Conf.sh files in distribution.
+
 	* bonobo/Makefile.am (EXTRA_DIST): Include corba_DATA in
 	distirbution. 
 
