@@ -6,34 +6,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bonobo 0.32\n"
 "POT-Creation-Date: 2001-08-07 15:33-0400\n"
-"PO-Revision-Date: 2000-09-07 20:17+02:00\n"
-"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
-"Language-Team: Norwegian (Nynorsk)\n"
+"PO-Revision-Date: 2001-08-22 05:06GMT\n"
+"Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
+"Language-Team: nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: bonobo/bonobo-exception.c:153
 msgid "An unsupported action was attempted"
-msgstr ""
+msgstr "Ei ustøtta handling vart forsøkt"
 
 #: bonobo/bonobo-exception.c:156
-#, fuzzy
 msgid "IO Error"
-msgstr "Feil pÃ¥ tenar: %1"
+msgstr "IU-feil"
 
 #: bonobo/bonobo-exception.c:159
 msgid "Invalid argument value"
-msgstr ""
+msgstr "Ugyldig argument verdi"
 
 #: bonobo/bonobo-exception.c:163
 msgid "Object not found"
 msgstr "Fann ikkje objekt"
 
 #: bonobo/bonobo-exception.c:166
-#, fuzzy
 msgid "Syntax error in object description"
-msgstr "Syntaksfeil i objektbeskrivelsa"
+msgstr "Syntaksfeil i objektskildringa"
 
 #: bonobo/bonobo-exception.c:171
 msgid "Cannot activate object from factory"
@@ -45,479 +44,117 @@ msgstr "Ikkje løyve til å aksessera strøm"
 
 #: bonobo/bonobo-exception.c:179
 msgid "An unsupported stream action was attempted"
-msgstr ""
+msgstr "Ei ustøtta straumhandling vart forsøkt"
 
 #: bonobo/bonobo-exception.c:182
-#, fuzzy
 msgid "IO Error on stream"
-msgstr "Feil pÃ¥ tenar: %1"
+msgstr "IU feil på straum"
 
 #: bonobo/bonobo-exception.c:186
-#, fuzzy
 msgid "IO Error on storage"
-msgstr "Feil pÃ¥ tenar: %1"
+msgstr "IO feil på lager"
 
 #: bonobo/bonobo-exception.c:189
-#, fuzzy
 msgid "Name already exists in storage"
-msgstr "Fila finst alt"
+msgstr "Namnet finnest allereide i lageret"
 
 #: bonobo/bonobo-exception.c:192
-#, fuzzy
 msgid "Object not found in storage"
-msgstr "Fann ikkje objekt"
+msgstr "Objektet ikkje funne i lageret"
 
 #: bonobo/bonobo-exception.c:195
-#, fuzzy
 msgid "No permission to do operation on storage"
-msgstr "Ikkje lÃ¸yve til Ã¥ skriva til %1"
+msgstr "Ikkje løyve til å gjere operasjonar på lager"
 
 #: bonobo/bonobo-exception.c:197
 msgid "An unsupported storage action was attempted"
-msgstr ""
+msgstr "Ei ustøtta handling vart forsøkt"
 
 #: bonobo/bonobo-exception.c:199
 msgid "Object is not a stream"
-msgstr ""
+msgstr "Objektet er ikkje ein straum"
 
 #: bonobo/bonobo-exception.c:202
-#, fuzzy
 msgid "Object is not a storage"
-msgstr "Fann ikkje objekt"
+msgstr "Objektet er ikkje eit lager"
 
 #: bonobo/bonobo-exception.c:205
-#, fuzzy
 msgid "Storage is not empty"
-msgstr "OmrÃ¥deteksten er tom."
+msgstr "Lageret er ikkje tomt"
 
 #: bonobo/bonobo-exception.c:209
-#, fuzzy
 msgid "malformed user interface XML description"
-msgstr "Detaljert signalskildring"
+msgstr "feil forma brukargrensesnitt XML skildring"
 
 #: bonobo/bonobo-exception.c:212
 msgid "invalid path to XML user interface element"
-msgstr ""
+msgstr "ugyldig sti til XML grensesnitt element"
 
 #: bonobo/bonobo-exception.c:216
-#, fuzzy
 msgid "incorrect data type"
-msgstr "Feil URL-type"
+msgstr "ugyldig datatype"
 
 #: bonobo/bonobo-exception.c:219
-#, fuzzy
 msgid "stream not found"
-msgstr "Fann ikkje vert"
+msgstr "fann ikkje straum"
 
 #: bonobo/bonobo-exception.c:223
-#, fuzzy
 msgid "property not found"
-msgstr "Mellombels ikkje funne"
+msgstr "eigenskap ikkje funne"
 
 #: bonobo/bonobo-exception.c:227
 msgid "Moniker interface cannot be found"
-msgstr ""
+msgstr "Moniker grensesnitten vart ikkje funne"
 
 #: bonobo/bonobo-exception.c:230
-#, fuzzy
 msgid "Moniker activation timed out"
-msgstr "Sambandet vart tidsutkopla."
+msgstr "Monikeraktiveringa vart kopla ut på tid"
 
 #: bonobo/bonobo-exception.c:233
-#, fuzzy
 msgid "Syntax error within moniker"
-msgstr "Syntaksfeil i mÃ¸nster"
+msgstr "Syntaksfeil i Moniker"
 
 #: bonobo/bonobo-exception.c:236
 msgid "Moniker has an unknown moniker prefix"
-msgstr ""
+msgstr "Moniker har eit ukjent moniker prefiks"
 
 #: bonobo/bonobo-exception.c:260
-#, fuzzy
 msgid "Error checking error; no exception"
 msgstr "Feil under sjekking av feil; ingen unntak"
 
 #: bonobo/bonobo-exception.c:269
-#, fuzzy
 msgid "General activation error with no description"
-msgstr "Syntaksfeil i objektbeskrivelsa"
+msgstr "Generelle aktiviseringsfeil utan skildring"
 
 #: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
-#, fuzzy
 msgid "Could not initialize Bonobo"
-msgstr "Fann ikkje bilete %1"
+msgstr "Kunne ikkje initialisere Bonobo"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr ""
+msgstr "HTTP Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "Standard moniker fabrikk"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "generic Server activation moniker"
-msgstr ""
+msgstr "vanleg tenar aktiviserings moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Server query moniker"
-msgstr ""
+msgstr "vanleg tenar spørrings moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "vanleg fabrikk 'ny' moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic item moniker"
-msgstr ""
+msgstr "vanleg oppørings moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "straum Moniker utvidar"
 
-#, fuzzy
-#~ msgid "The User canceled the save"
-#~ msgstr "Igen endringar for lagring."
-
-#, fuzzy
-#~ msgid "No filename"
-#~ msgstr "Ingen filnamn"
-
-#, fuzzy
-#~ msgid "unknown mime type for '%s'"
-#~ msgstr "Ukjend mediatype"
-
-#~ msgid "Name"
-#~ msgstr "Namn"
-
-#~ msgid "Description"
-#~ msgstr "Skildring"
-
-#, fuzzy
-#~ msgid "bonobo GnoMines object factory"
-#~ msgstr "Kan ikkje laga katalog "
-
-#, fuzzy
-#~ msgid "Load a saved game"
-#~ msgstr "Opna spel."
-
-#~ msgid "New game"
-#~ msgstr "Nytt spel"
-
-#, fuzzy
-#~ msgid "Open game"
-#~ msgstr "Opna spel."
-
-#, fuzzy
-#~ msgid "Start a new game"
-#~ msgstr "Startar nytt spel ..."
-
-#, fuzzy
-#~ msgid "_Game"
-#~ msgstr "S&pel"
-
-#, fuzzy
-#~ msgid "Could not initialize Bonobo!"
-#~ msgstr "Fann ikkje bilete %1"
-
-#, fuzzy
-#~ msgid "audio/ulaw bonobo object"
-#~ msgstr "Kunne ikkje starta %1"
-
-#, fuzzy
-#~ msgid "audio/ulaw bonobo object factory"
-#~ msgstr "Kunne ikkje starta %1"
-
-#, fuzzy
-#~ msgid "text/plain component"
-#~ msgstr "SÃ¸ker etter valt tekst i hjelpetekstane"
-
-#, fuzzy
-#~ msgid "_Clear Text"
-#~ msgstr "Skriv tekst"
-
-#, fuzzy
-#~ msgid "Clears the text in the component"
-#~ msgstr "SÃ¸ker etter valt tekst i hjelpetekstane"
-
-#, fuzzy
-#~ msgid ""
-#~ "An exception occured while trying to load data into the component with "
-#~ "PersistFile"
-#~ msgstr "Feil under opning av dette dokumentet"
-
-#, fuzzy
-#~ msgid "Could not open file %s"
-#~ msgstr "Kunne ikkje opna fila %1"
-
-#, fuzzy
-#~ msgid ""
-#~ "An exception occured while trying to load data into the component with "
-#~ "PersistStream"
-#~ msgstr "Feil under opning av dette dokumentet"
-
-#, fuzzy
-#~ msgid "About this application"
-#~ msgstr "Avsluttar programmet"
-
-#, fuzzy
-#~ msgid "Close the current window"
-#~ msgstr "Lukkar prosjektet"
-
-#, fuzzy
-#~ msgid "Configure the application"
-#~ msgstr "Avsluttar programmet"
-
-#, fuzzy
-#~ msgid "Create New _Window"
-#~ msgstr "Name=Nytt vindauge"
-
-#, fuzzy
-#~ msgid "Create a new window"
-#~ msgstr "Lag nytt ikon"
-
-#, fuzzy
-#~ msgid "Displays only one window"
-#~ msgstr "Name=Vis i rotvindauget"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Avslutt"
-
-#, fuzzy
-#~ msgid "Exit the program"
-#~ msgstr "Avsluttar programmet"
-
-#, fuzzy
-#~ msgid "Kill the current buffer"
-#~ msgstr "Slettar mappa"
-
-#, fuzzy
-#~ msgid "Launches a new Embeddable component"
-#~ msgstr "Inkluderbar HTML-komponent"
-
-#, fuzzy
-#~ msgid "Loads a file into the current component"
-#~ msgstr "Set inn ei fil ved den gjeldande posisjonen"
-
-#~ msgid "Open a file"
-#~ msgstr "Opna ei fil"
-
-#, fuzzy
-#~ msgid "Print S_etup..."
-#~ msgstr "Utskriftsoppsett ..."
-
-#, fuzzy
-#~ msgid "Print the current file"
-#~ msgstr "Skriv ut dokumentet"
-
-#, fuzzy
-#~ msgid "Save _As..."
-#~ msgstr "Lagra &som ..."
-
-#, fuzzy
-#~ msgid "Save the current file"
-#~ msgstr "DÃ¸yp om denne profilen"
-
-#, fuzzy
-#~ msgid "Save the current file with a different name"
-#~ msgstr "Viser fileigenskapane"
-
-#, fuzzy
-#~ msgid "Setup the page settings for your current printer"
-#~ msgstr "Sett opp generelle prosjektval her."
-
-#, fuzzy
-#~ msgid "Splits the current window"
-#~ msgstr "Del ved gjeldande posisjon"
-
-#, fuzzy
-#~ msgid "Zoom ..."
-#~ msgstr "&ForstÃ¸rring ..."
-
-#, fuzzy
-#~ msgid "Zoom _in"
-#~ msgstr "ForstÃ¸rr"
-
-#, fuzzy
-#~ msgid "Zoom _out"
-#~ msgstr "Forminsk"
-
-#, fuzzy
-#~ msgid "Zoom to _default"
-#~ msgstr "Gjenopprett standardinnstillingar"
-
-#, fuzzy
-#~ msgid "Zoom to _fit"
-#~ msgstr "ForstÃ¸rr"
-
-#, fuzzy
-#~ msgid "_About..."
-#~ msgstr "Om ..."
-
-#, fuzzy
-#~ msgid "_Buffers"
-#~ msgstr "Bufferar"
-
-#, fuzzy
-#~ msgid "_Close This Window"
-#~ msgstr "Lu&kk vindauge"
-
-#, fuzzy
-#~ msgid "_File"
-#~ msgstr "Fil"
-
-#, fuzzy
-#~ msgid "_Help"
-#~ msgstr "Hjelp"
-
-#, fuzzy
-#~ msgid "_Kill"
-#~ msgstr "Drep"
-
-#, fuzzy
-#~ msgid "_Load..."
-#~ msgstr "Hent ..."
-
-#, fuzzy
-#~ msgid "_One Window"
-#~ msgstr "Nytt vindauge"
-
-#, fuzzy
-#~ msgid "_Open..."
-#~ msgstr "Opna ..."
-
-#, fuzzy
-#~ msgid "_Preferences..."
-#~ msgstr "Innstillingar ..."
-
-#, fuzzy
-#~ msgid "_Print"
-#~ msgstr "Skriv ut"
-
-#, fuzzy
-#~ msgid "_Save"
-#~ msgstr "Lagra"
-
-#, fuzzy
-#~ msgid "_Settings"
-#~ msgstr "Innstillingar"
-
-#, fuzzy
-#~ msgid "_Split Window"
-#~ msgstr "&Dupliser vindauge"
-
-#, fuzzy
-#~ msgid "_Window"
-#~ msgstr "Vindauge"
-
-#, fuzzy
-#~ msgid "_Zoom"
-#~ msgstr "ForstÃ¸rring"
-
-#, fuzzy
-#~ msgid "Set zoom level:"
-#~ msgstr "&Neste nivÃ¥"
-
-#, fuzzy
-#~ msgid ""
-#~ "An exception occured while trying to save data from the component with "
-#~ "PersistFile"
-#~ msgstr "Feil ved opning av fil."
-
-#, fuzzy
-#~ msgid "Could not save file %s"
-#~ msgstr "Kunne ikkje lagra fil"
-
-#~ msgid "Open"
-#~ msgstr "Opna"
-
-#~ msgid "Load"
-#~ msgstr "Last inn"
-
-#~ msgid "Save As"
-#~ msgstr "Lagra som"
-
-#, fuzzy
-#~ msgid "Component has no editable properties"
-#~ msgstr "Comment=Avanserte vindaugseigenskapar"
-
-#~ msgid "Select file"
-#~ msgstr "Vel fil"
-
-#, fuzzy
-#~ msgid "Could not launch Embeddable %s!"
-#~ msgstr "Kunne ikkje lasta bilete %1"
-
-#~ msgid "Could not initialize Bonobo!\n"
-#~ msgstr "Kunne ikkje starta Bonobo!\n"
-
-#, fuzzy
-#~ msgid ""
-#~ "An exception occured while trying to load data into the component with "
-#~ "PersistStorage"
-#~ msgstr ""
-#~ "Feil ved opning av fil:\n"
-#~ " %1"
-
-#, fuzzy
-#~ msgid ""
-#~ "An exception occured while trying to save data from the component with "
-#~ "PersistStorage"
-#~ msgstr ""
-#~ "Feil ved opning av fil:\n"
-#~ " %1"
-
-#, fuzzy
-#~ msgid "Select drawing color..."
-#~ msgstr "Vel bakgrunnsfarge ..."
-
-#, fuzzy
-#~ msgid "Set the current drawing color"
-#~ msgstr "Slettar diagrammet"
-
-#, fuzzy
-#~ msgid "White"
-#~ msgstr "Plystring"
-
-#, fuzzy
-#~ msgid "Set the current drawing color to white"
-#~ msgstr "Slettar klasseattributten"
-
-#~ msgid "Red"
-#~ msgstr "Raud"
-
-#, fuzzy
-#~ msgid "Set the current drawing color to red"
-#~ msgstr "Slettar klassemetoden"
-
-#~ msgid "Green"
-#~ msgstr "GrÃ¸n"
-
-#, fuzzy
-#~ msgid "Select an object"
-#~ msgstr "Vel ein film"
-
-#, fuzzy
-#~ msgid "Can not activate object_server"
-#~ msgstr "Kommando ikkje stÃ¸tta pÃ¥ tenar"
-
-#, fuzzy
-#~ msgid "Can not activate server"
-#~ msgstr "Kommando ikkje stÃ¸tta pÃ¥ tenar"
-
-#, fuzzy
-#~ msgid "Could not launch bonobo object."
-#~ msgstr "Kunne ikkje starta %1"
-
-#, fuzzy
-#~ msgid "Could not launch Embeddable."
-#~ msgstr "Kunne ikkje lasta fil."
-
-#, fuzzy
-#~ msgid "Could not launch Control."
-#~ msgstr "Kunne ikkje starta %1"
-
-#, fuzzy
-#~ msgid "no listening to this property"
-#~ msgstr "Legg ei fil til prosjektet"
