@@ -222,7 +222,7 @@ bonobo_moniker_default_get_display_name (BonoboMoniker     *moniker,
 	char       *tmp;
 	
 	parent_name = bonobo_moniker_util_get_parent_name (
-		bonobo_object_corba_objref (BONOBO_OBJECT (moniker)), ev);
+		BONOBO_OBJREF (moniker), ev);
 
 	if (BONOBO_EX (ev))
 		return NULL;
@@ -263,9 +263,8 @@ bonobo_moniker_default_parse_display_name (BonoboMoniker     *moniker,
 
 	bonobo_moniker_set_name (moniker, name, i);
 
-	return bonobo_moniker_util_new_from_name_full (
-		bonobo_object_corba_objref (BONOBO_OBJECT (moniker)),
-		&name [i], ev);	
+	return bonobo_moniker_util_new_from_name_full (BONOBO_OBJREF (moniker),
+						       &name [i], ev);	
 }
 
 static CORBA_char *
@@ -316,8 +315,7 @@ impl_resolve (PortableServer_Servant       servant,
 
 		else if (extender != CORBA_OBJECT_NIL) {
 			retval = Bonobo_MonikerExtender_resolve (
-				extender,
-				bonobo_object_corba_objref (BONOBO_OBJECT (moniker)),
+				extender, BONOBO_OBJREF (moniker),
 				options, moniker->priv->name,
 				requested_interface, ev);
 

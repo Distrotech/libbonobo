@@ -80,11 +80,8 @@ impl_Bonobo_PropertyBag_getEventSource (PortableServer_Servant servant,
 					CORBA_Environment      *ev)
 {
 	BonoboPropertyBag   *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
-	CORBA_Object  corba_es;
 
-	corba_es = bonobo_object_corba_objref (BONOBO_OBJECT (pb->es));
-
-	return bonobo_object_dup_ref (corba_es, ev);
+	return bonobo_object_dup_ref (BONOBO_OBJREF (pb->es), ev);
 }
 
 static Bonobo_PropertyList *

@@ -25,6 +25,8 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_OBJECT(o)       (GTK_CHECK_TYPE ((o), BONOBO_OBJECT_TYPE))
 #define BONOBO_IS_OBJECT_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_OBJECT_TYPE))
 
+#define BONOBO_OBJREF(o)          (bonobo_object_corba_objref(BONOBO_OBJECT(o)))
+
 /*
  * If you're using a custom servant for your CORBA objects, just make
  * sure that the second element is a 'gpointer' to hold the BonoboObject

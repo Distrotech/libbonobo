@@ -468,8 +468,7 @@ bonobo_event_source_client_add_listener (Bonobo_Unknown object,
 						      user_data)))
 			goto add_listener_end;
 	      
-		corba_listener = 
-			bonobo_object_corba_objref (BONOBO_OBJECT (listener));
+		corba_listener = BONOBO_OBJREF (listener);
 
 		id = Bonobo_Property_addListener (object, corba_listener, 
 						  my_ev);
@@ -487,8 +486,7 @@ bonobo_event_source_client_add_listener (Bonobo_Unknown object,
 						      user_data)))
 			goto add_listener_end;
 
-		corba_listener = 
-			bonobo_object_corba_objref (BONOBO_OBJECT (listener));
+		corba_listener = BONOBO_OBJREF (listener);
 	
 		if (opt_mask)
 			id = Bonobo_EventSource_addListenerWithMask (es, 

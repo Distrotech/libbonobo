@@ -99,7 +99,7 @@ impl_Bonobo_Property_addListener (PortableServer_Servant servant,
 	Bonobo_EventSource_ListenerId id = 0;
 	char *mask;
 
-	corba_es = bonobo_object_corba_objref (BONOBO_OBJECT (ps->pb->es));
+	corba_es = BONOBO_OBJREF (ps->pb->es);
 
 	mask = g_strdup_printf ("Bonobo/Property:change:%s", 
 				ps->property_name);
@@ -119,7 +119,7 @@ impl_Bonobo_Property_removeListener (PortableServer_Servant servant,
 	BonoboPropertyServant *ps = (BonoboPropertyServant *) servant;
 	Bonobo_Unknown corba_es;
 
-	corba_es = bonobo_object_corba_objref (BONOBO_OBJECT (ps->pb->es));
+	corba_es = BONOBO_OBJREF (ps->pb->es);
 
 	return Bonobo_EventSource_removeListener (corba_es, id, ev); 
 }

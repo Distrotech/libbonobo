@@ -219,8 +219,7 @@ create_bag (void)
 				 BONOBO_ARG_DOUBLE, NULL, dstr, 0);
 
 	/* Print out the IOR for this object. */
-	ior = CORBA_ORB_object_to_string (
-		orb, bonobo_object_corba_objref (BONOBO_OBJECT (pb)), &ev);
+	ior = CORBA_ORB_object_to_string (orb, BONOBO_OBJREF (pb), &ev);
 
 	/* So we can tee the output to compare */
 	fprintf (stderr, "%s\n", ior);

@@ -442,16 +442,16 @@ OAFIID:GNOME_Panel_Applet_yetanotherclock:
 	and add a UUID generated from the uuidgen application at the
 end to garentee uniqueness.
 
-@Q: What should I call my oafinfo file ?
+@Q: What should I call my oaf file ?
 
-	The name of your oafinfo file should be based on your portion
+	The name of your oaf file should be based on your portion
 of the namespace, eg.
 
-	GNOME_Evolution_Calendar.oafinfo
-	Com_MyCompany_MyProduct.oafinfo
+	GNOME_Evolution_Calendar.oaf
+	Com_MyCompany_MyProduct.oaf
 
 	This ensures that there will be no conflicts installing
-oafinfo files into a common directory.
+oaf files into a common directory.
 
 @Q: How should I name my CORBA methods ?
 

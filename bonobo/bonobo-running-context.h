@@ -29,21 +29,19 @@ typedef struct {
 } BonoboRunningContextClass;
 
 BonoboObject *bonobo_running_context_new             (void);
-BonoboObject *bonobo_context_running_get             (void);
-void          bonobo_running_context_at_exit_unref   (BonoboObject *object);
-void          bonobo_running_context_auto_exit_unref (BonoboObject *object);
 
 /*
  *   This interface is private, and purely for speed
  * of impl. of the context.
  */
-void          bonobo_running_context_add_object    (CORBA_Object object);
-void          bonobo_running_context_remove_object (CORBA_Object object);
-void          bonobo_running_context_ignore_object (CORBA_Object object);
-void          bonobo_running_context_trace_objects (CORBA_Object object,
+void        bonobo_running_context_add_object      (CORBA_Object object);
+void        bonobo_running_context_remove_object   (CORBA_Object object);
+void        bonobo_running_context_ignore_object   (CORBA_Object object);
+void        bonobo_running_context_trace_objects   (CORBA_Object object,
 						    const char  *fn,
 						    int          line,
 						    int          mode);
+void        bonobo_running_context_at_exit_unref   (CORBA_Object object);
 
 #ifdef BONOBO_OBJECT_DEBUG
 #	define           bonobo_running_context_add_object(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,0);}G_STMT_END

@@ -282,10 +282,9 @@ bonobo_moniker_use_extender (const gchar                 *extender_oafiid,
 	if (BONOBO_EX (ev) || extender == CORBA_OBJECT_NIL)
 		return CORBA_OBJECT_NIL;
 
-	retval = Bonobo_MonikerExtender_resolve (
-		extender,
-		bonobo_object_corba_objref (BONOBO_OBJECT (moniker)),
-		options, bonobo_moniker_get_name_full (moniker),
+	retval = Bonobo_MonikerExtender_resolve (extender, 
+	        BONOBO_OBJREF (moniker), options, 
+		bonobo_moniker_get_name_full (moniker),
 		requested_interface, ev);
 
 	bonobo_object_release_unref (extender, ev);

@@ -1,3 +1,60 @@
+2001-01-18  Dietmar Maurer  <dietmar@ximian.com>
+
+	* samples/controls/sample-control-factory.c: use the new factory
+	macros  
+
+	* samples/compound-doc/sample-canvas-item.c: use the new factory
+	macros  
+
+	* samples/compound-doc/paint-component-simple.c: use the new
+	factory macros 
+
+	* samples/compound-doc/Bonobo_Sample_CanvasItem.oaf.in: changed
+	the oaf IIDs to OAFIID:Bonobo_Sample_CanvasItem_Factory and
+	OAFIID:Bonobo_Sample_CanvasItem_Factory
+
+	* monikers/bonobo-moniker-untar.c:  use the new factory macros
+
+	* monikers/bonobo-moniker-http.c: use the new factory macros
+
+	* monikers/bonobo-moniker-gunzip.c: use the new factory macros
+
+	* monikers/Bonobo_Moniker_http.oaf.in: changed the oaf IIDs to
+	Bonobo_Moniker_http_Factory and OAFIID:Bonobo_Moniker_http
+
+	* monikers/Bonobo_Moniker_gzip.oaf.in: changed the oaf IIDs to
+	OAFIID:Bonobo_Moniker_gzip_Factory and OAFIID:Bonobo_Moniker_gzip
+
+	* monikers/Bonobo_Moniker_cache.oaf.in:  changed the oaf IIDs to
+	OAFIID:Bonobo_Moniker_cache_Factory and OAFIID:Bonobo_Moniker_cache
+
+	* idl/bonobo-context.idl: new atExitUnref method.
+
+	* doc/FAQ: s/oafinfo/oaf/ 
+
+	* components/text-plain/bonobo-text-plain.c: use the new factory macros
+
+	* components/text-plain/Bonobo_Sample_Text.oaf.in: changed the oaf
+	IIDs to OAFIID:Bonobo_Sample_Text_Factory and OAFIID:Bonobo_Sample_Text
+
+	* components/selector/bonobo-selector.c: use the new factory macros
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c: use the new factory macros
+
+	* components/audio-ulaw/Bonobo_Sample_Audio.oaf.in: changed the oaf
+	IIDs to OAFIID:Bonobo_Sample_Audio_ulaw_Factory and
+	OAFIID:Bonobo_Sample_Audio_ulaw.
+
+	* bonobo/bonobo-running-context.c
+	(impl_Bonobo_RunningContext_atExitUnref): impl. 
+	(bonobo_running_context_at_exit_unref): ignore the object
+	(bonobo_running_context_auto_exit_unref): ignore the object
+
+	* bonobo/bonobo-object.h (BONOBO_OBJREF): new macro to get the
+	corba_objref from a BonoboObject.
+
+	* *.c: use the new BONOBO_OBJREF macro everywhere
+
 2001-01-18  Miguel de Icaza  <miguel@gnu.org>
 
 	* Re-enable bonobo-idl.

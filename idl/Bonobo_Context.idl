@@ -95,6 +95,8 @@ module Bonobo {
 		 * Removes a stringified reference from tracking
 		 */
 		void removeKey   (in string key);
+
+		void atExitUnref (in Object object);
 	};
 
 #if 0
