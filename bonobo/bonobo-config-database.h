@@ -10,7 +10,7 @@
 #define __BONOBO_CONFIG_DATABASE_H__
 
 #include <bonobo/bonobo-xobject.h>
-#include "Bonobo_Config.h"
+#include <bonobo-conf/Bonobo_Config.h>
 
 BEGIN_GNOME_DECLS
 
