@@ -1,3 +1,14 @@
+1999-05-31  Nat Friedman  <nat@gnome-support.com>
+
+	* components/text-plain/bonobo-text-plain.c (SHOW_PROGRESS_INFO):
+ 	Define this for kicks.
+	(bonobo_object_data_t): Added total_size field.
+	(progressive_set_size): New function.
+	(progressive_end): Likewise.
+	(bonobo_object_factory): Hook up the callbacks for progressive_end
+ 	and progressive_set_size.
+	(progressive_update): Update the progress meter.
+
 1999-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-component-client.c (gnome_bonobo_object_get_verbs):
