@@ -1,3 +1,21 @@
+2000-10-09  Michael Meeks  <michael@helixcode.com>
+
+	* doc/ui-faq.txt: add guff to the FAQ.
+
+	* bonobo/bonobo-win.c (cmd_get_menu_pixmap): fix stupid typo.
+
+	* bonobo/bonobo-control.c: include gtkmain.h so we don't get
+	warnings about gtk_idle. (idle_destroy_socket): make type safe.
+
+	* bonobo/bonobo-win.c (cmd_get_toolbar_pixbuf, cmd_get_menu_pixmap):
+	impl.
+
+	* doc/std-ui.xml: s/Menu_//
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_get_icon_pixbuf): 
+	prepend 'Menu_' to some stocks.
+	(bonobo_ui_util_xml_get_icon_pixmap_widget): pass it through.
+
 2000-10-09  Martin Baulig  <baulig@suse.de>
 
 	* COPYING.LIB: Replaced this with version 2.1 of the
