@@ -11,6 +11,11 @@ dnl blocks, this macro needs to be right at the beggining.
 dnl
 AC_PROG_INTLTOOL
 
+dnl with higher autotools, we can set ACLOCAL_AMFLAGS to make Makefile's
+dnl aware of our aclocal include dirs; but this works for automake-1.4
+dnl gnome-autogen.sh sets ACLOCAL_FLAGS properly
+ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
+
 LT_VERSION_INFO='-version-info 0:0:1'
 
 AC_ISC_POSIX
