@@ -1,3 +1,13 @@
+2003-04-17  Michael Meeks  <michael@ximian.com>
+
+	* doc/activation-api/server-xml-reference.sgml:
+	update docs.
+
+	* tests/test-activation/plugin.server: ditto.
+
+	* monikers/Bonobo_Moniker_std.server.in.in: bin the
+	.so library suffix.
+
 2003-04-17  Masahiro Sakai  <sakai@tom.sfc.keio.ac.jp>
 
 	* configure.in: call AC_LIBTOOL_WIN32_DLL.

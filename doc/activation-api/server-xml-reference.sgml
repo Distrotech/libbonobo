@@ -47,7 +47,8 @@ component, OAF will first check it is a factory, make sure the corresponding fac
 
 <para>
 If the <emphasis>type</emphasis> is <emphasis>shlib</emphasis>, <emphasis>location</emphasis> is the
-name of the library the code is in: <filename>libgmf.so</filename> for example.
+name of the library the code is in: <filename>libgmf</filename> for example. NB. don't include the '.so'
+suffix common on Linux systems.
 </para>
 
 </sect1>
