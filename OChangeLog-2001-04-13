@@ -1,3 +1,8 @@
+1999-08-14  Michael Meeks  <michael@imaginator.com>
+
+	* components/image-x-png/bonobo-image-x-png.c (bonobo_object_factory):
+	Remove unused variable.
+
 1999-08-13  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-object.h (GnomeObjectClass): Added "user_exception"
