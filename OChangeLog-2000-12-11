@@ -1,3 +1,14 @@
+1999-06-02  Nat Friedman  <nat@gnome-support.com>
+
+	* components/image-x-png/doc/C/image_x_png.sgml: Rewrote the
+ 	summary.  Changed some of the section titles.
+
+	* components/image-x-png/bonobo-image-x-png.c (save_image): New
+ 	function implementing GNOME::PersistStream.save.
+	(stream_write): New function.  Helper for save_image.
+	(bonobo_object_factory): Setup callback to save_image for
+ 	GNOME::PersistStream.save.
+
 1999-06-01  Chris Lahey  <clahey@umich.edu>
 
 	* configure.in, components/Makefile.am: Added audio-ulaw subdirectory.
