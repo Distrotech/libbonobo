@@ -60,9 +60,6 @@ main (int argc, char *argv [])
 	{
 		object = BONOBO_OBJECT (g_object_new (
 			bonobo_moniker_get_type (), NULL));
-	
-		g_assert (bonobo_object (object) == object);
-		g_assert (bonobo_object (&object->servant) == object);
 
 		g_assert (bonobo_object_ref (object) == object);
 		g_assert (bonobo_object_unref (BONOBO_OBJECT (object)) == NULL);
@@ -158,25 +155,47 @@ main (int argc, char *argv [])
 		bonobo_object_unref (object);
 	}
 
+	fprintf (stderr, "Servant mapping...\n");
+	{
+		PortableServer_Servant servant;
+
+		object = BONOBO_OBJECT (g_object_new (
+			bonobo_moniker_get_type (), NULL));
+
+		servant = (PortableServer_Servant) &object->servant;
+
+		g_assert (bonobo_object (object) == object);
+		g_assert (bonobo_object (&object->servant) == object);
+		g_assert (bonobo_object_get_servant (object) == servant);
+		g_assert (bonobo_object_from_servant (servant) == object);
+		g_assert (bonobo_object_fast (object) == object);
+		g_assert (bonobo_object_fast (servant) == object);
+
+		bonobo_object_unref (object);
+	}
+
 	fprintf (stderr, "Ret-ex tests...\n");
+	{
+		g_assert (!ret_ex_test (ev));
+		ex_test (ev);
 
-	g_assert (!ret_ex_test (ev));
-	ex_test (ev);
-
-	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-			     ex_Bonobo_PropertyBag_NotFound, NULL);
-	g_assert (ret_ex_test (ev));
-
-	CORBA_exception_free (ev);
+		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+				     ex_Bonobo_PropertyBag_NotFound, NULL);
+		g_assert (ret_ex_test (ev));
+		
+		CORBA_exception_free (ev);
+	}
 
 	fprintf (stderr, "General error tests...\n");
+	{
+		bonobo_exception_general_error_set (
+			ev, NULL, "a%s exception occured", "n exceptional");
+		g_assert (BONOBO_EX (ev));
+		g_assert (!strcmp (BONOBO_EX_REPOID (ev), ex_Bonobo_GeneralError));
+		g_assert (!strcmp (bonobo_exception_get_text (ev),
+				   "an exceptional exception occured"));
+	}
 
-	bonobo_exception_general_error_set (
-		ev, NULL, "a%s exception occured", "n exceptional");
-	g_assert (BONOBO_EX (ev));
-	g_assert (!strcmp (BONOBO_EX_REPOID (ev), ex_Bonobo_GeneralError));
-	g_assert (!strcmp (bonobo_exception_get_text (ev),
-			   "an exceptional exception occured"));
 	fprintf (stderr, "All tests passed\n");
 
 	return bonobo_debug_shutdown ();

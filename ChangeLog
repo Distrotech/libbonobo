@@ -1,5 +1,11 @@
 2001-11-01  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.h (bonobo_object_fast): impl. ultra
+	fast method for casting an unknown servant / object to an
+	BonoboObject. Make bonobo_object_from_servant faster too.
+
+2001-11-01  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-moniker.c: big picture: remove double
 	virtualization of lots of things.
 	(impl_get_parent, impl_set_parent): upd.

@@ -89,9 +89,6 @@ Bonobo_Unknown           bonobo_object_query_interface        (BonoboObject     
 							       const char             *repo_id,
 							       CORBA_Environment      *opt_ev);
 Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject           *object);
-/* Compat */
-#define                  bonobo_object_from_servant(s)        (bonobo_object (s))
-#define                  bonobo_object_get_servant(o)         ((PortableServer_Servant)((guchar *)(o) + BONOBO_OBJECT_HEADER_SIZE))
 
 /*
  * Gnome Object Life Cycle
@@ -141,6 +138,16 @@ void      bonobo_object_slist_unref_all (GSList           **list);
 
 /* Detects the pointer type and returns the object reference - magic. */
 BonoboObject *bonobo_object (gpointer p);
+/* The same thing but faster - has a double evaluate */
+#define       bonobo_object_fast(o) \
+	((((BonoboObjectHeader *)(o))->object_signature == BONOBO_OBJECT_SIGNATURE) ? \
+	 (BonoboObject *)(o) : (BonoboObject *)(((guchar *) (o)) - BONOBO_OBJECT_HEADER_SIZE))
+
+/* Compat */
+#define       bonobo_object_from_servant(s) ((BonoboObject *)(((guchar *) (s)) - BONOBO_OBJECT_HEADER_SIZE))
+#define       bonobo_object_get_servant(o)  ((PortableServer_Servant)((guchar *)(o) + BONOBO_OBJECT_HEADER_SIZE))
+
+
 /* Use G_STRUCT_OFFSET to calc. epv_struct_offset */
 GType          bonobo_type_unique (GType             parent_type,
 				   BonoboObjectPOAFn init_fn,
