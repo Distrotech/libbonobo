@@ -3417,6 +3417,742 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 #define TC_Bonobo_RegistrationResult ((CORBA_TypeCode)&TC_Bonobo_RegistrationResult_struct)
 </MACRO>
 <MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_17 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_19 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_20 'p'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_22</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_22 's'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_17 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_19 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_20 'p'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_22</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_22 's'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_17 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_19 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_20 'p'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_22</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_22 's'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_17 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_19 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_20 'p'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_22 's'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_17 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_19 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_20 'p'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_22 's'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_17 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_19 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_20 'p'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_22 's'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_17 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_19 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_20 'p'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_22 's'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_17 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_19 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_20 'p'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_22 's'
+</MACRO>
+<MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
 #define ORBIT_IDL_SERIAL 19
 </MACRO>
@@ -4512,6 +5248,710 @@ Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_
 <RETURNS>void  </RETURNS>
 Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_Environment * ev
 </FUNCTION>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_7 'O'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_8 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_9 'j'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_10 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_11 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_12 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_13 'D'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_15 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_16 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_17 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_19 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_20 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_21 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_7 'O'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_8 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_9 'j'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_10 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_11 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_12 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_13 'D'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_15 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_16 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_17 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_19 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_20 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_21 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_7 'O'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_8 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_9 'j'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_10 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_11 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_12 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_13 'D'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_15 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_16 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_17 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_19 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_20 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_21 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_7 'O'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_8 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_9 'j'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_10 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_11 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_12 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_13 'D'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_15 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_16 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_17 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_19 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_20 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_21 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_7 'O'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_8 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_9 'j'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_10 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_11 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_12 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_13 'D'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_15 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_16 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_17 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_19 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_20 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_21 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_7 'O'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_8 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_9 'j'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_10 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_11 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_12 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_13 'D'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_15 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_16 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_17 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_19 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_20 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfoListCache_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfoListCache_21 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_7 'O'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_8 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_9 'j'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_10 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_11 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_12 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_13 'D'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_15 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_16 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_17 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_19 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_20 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_21 'y'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_7 'O'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_8 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_9 'j'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_10 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_11 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_12 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_13 'D'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_15 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_16 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_17 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_18 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_19 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_20 'r'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerStateCache_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerStateCache_21 'y'
+</MACRO>
 <MACRO>
 <NAME>Bonobo_ObjectDirectory_IMETHODS_LEN</NAME>
 #define Bonobo_ObjectDirectory_IMETHODS_LEN 8
@@ -5644,6 +7084,870 @@ Bonobo_ActivationContext _obj,const CORBA_char *requirements,const Bonobo_String
 <RETURNS>void</RETURNS>
 Bonobo_ActivationContext_obj,const CORBA_char * aid,constBonobo_ActivationFlagsflags,constBonobo_ActivationCallbackcallback_object,CORBA_Context _ctx,CORBA_Environment * ev
 </FUNCTION>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_22</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_CORBA_string_23</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_CORBA_string_23 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_22</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_23</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ObjectDirectory_23 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_22</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_23</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ServerInfo_23 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_0</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_1</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_2</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_3</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_4</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_5</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_6</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_7</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_8</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_9</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_10</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_11</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_12</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_13</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_14</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_15</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_16</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_17</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_18</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_19</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_20</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_21</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_22</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_23</NAME>
+#define MARSHAL_IMPL_CORBA_sequence_Bonobo_ActivationProperty_23 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResult_23</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResult_23 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ServerInfo_23</NAME>
+#define MARSHAL_IMPL_Bonobo_ServerInfo_23 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationProperty_23</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationProperty_23 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationResultData_23</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationResultData_23 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_0</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_0 'B'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_1</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_1 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_2</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_2 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_3</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_3 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_4</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_4 'b'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_5</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_5 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_6</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_6 '_'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_7</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_7 'A'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_8</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_8 'c'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_9</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_9 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_10</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_10 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_11</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_11 'v'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_12</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_12 'a'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_13</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_13 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_14</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_14 'i'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_15</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_15 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_16</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_16 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_17</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_17 'C'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_18</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_18 'o'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_19</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_19 'n'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_20</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_20 't'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_21</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_21 'e'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_22</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_22 'x'
+</MACRO>
+<MACRO>
+<NAME>MARSHAL_IMPL_Bonobo_ActivationPropertyValue_23</NAME>
+#define MARSHAL_IMPL_Bonobo_ActivationPropertyValue_23 't'
+</MACRO>
 <MACRO>
 <NAME>Bonobo_ActivationClient_IMETHODS_LEN</NAME>
 #define Bonobo_ActivationClient_IMETHODS_LEN 1
