@@ -41,15 +41,6 @@
 
 #include <bonobo-activation/bonobo-activation-async.h>
 
-/* Optional stuff for libgnome to use */
-#ifdef HAVE_POPT_H
-#include <popt.h>
-#endif
-
-#ifdef POPT_AUTOHELP
-extern struct poptOption bonobo_activation_popt_options[];
-#endif
-
 extern const guint bonobo_activation_major_version,
 	bonobo_activation_minor_version, bonobo_activation_micro_version;
 extern const char bonobo_activation_version[];
