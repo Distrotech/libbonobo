@@ -15,18 +15,23 @@
 #endif
 
 #include <Bonobo_Unknown.idl>
+#include <Bonobo_Activation_types.idl>
 
 module Bonobo {
-	typedef sequence<string> StringList;
-        
-        exception GeneralError { 
-                string description; 
-        };
-
 	interface GenericFactory : Bonobo::Unknown {
 		exception CannotActivate { };
 
-		Object createObject (in string oaf_id)
+
+		/**
+		 * queryInterface:
+		 * @iid: A string identifying an implementation.
+		 *
+		 * Returns: A newly created CORBA object of the
+                 * specified type, or raises the CannotActivate
+                 * exception.
+                 * 
+		 */
+		Object createObject (in string iid)
 			raises (CannotActivate);
 
 	};

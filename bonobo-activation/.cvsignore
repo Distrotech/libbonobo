@@ -12,4 +12,6 @@ stamp*idl
 Bonobo_Unknown.h
 Bonobo_GenericFactory.h
 Bonobo_ActivationContext.h
+Bonobo_Activation_types.h
+Bonobo_ObjectDirectory.h
 *-imodule.c

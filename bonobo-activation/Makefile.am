@@ -22,7 +22,7 @@ bonobo_activationincludedir = $(includedir)/bonobo-activation-2.0/bonobo-activat
 bonobo_activationinclude_HEADERS=		\
 	Bonobo_Unknown.h			\
 	Bonobo_GenericFactory.h			\
-	Bonobo_ActivationContext.h		\
+	Bonobo_Activation_types.h		\
 	bonobo-activation.h			\
 	bonobo-activation-async.h		\
 	bonobo-activation-base-service.h	\
@@ -51,6 +51,20 @@ bonobo_generic_factory_sources =		\
 	Bonobo_GenericFactory-skels.c		\
 	$(NULL)
 
+bonobo_activation_types_sources =		\
+	Bonobo_Activation_types.h		\
+	Bonobo_Activation_types-common.c	\
+	Bonobo_Activation_types-stubs.c	\
+	Bonobo_Activation_types-skels.c	\
+	$(NULL)
+
+bonobo_object_directory_sources =		\
+	Bonobo_ObjectDirectory.h		\
+	Bonobo_ObjectDirectory-common.c		\
+	Bonobo_ObjectDirectory-stubs.c		\
+	Bonobo_ObjectDirectory-skels.c		\
+	$(NULL)
+
 bonobo_activation_context_sources =		\
 	Bonobo_ActivationContext.h		\
 	Bonobo_ActivationContext-common.c	\
@@ -58,9 +72,12 @@ bonobo_activation_context_sources =		\
 	Bonobo_ActivationContext-skels.c	\
 	$(NULL)
 
+
 BUILT_SOURCES=					\
 	$(bonobo_unknown_sources)		\
 	$(bonobo_generic_factory_sources)	\
+	$(bonobo_activation_types_sources)	\
+	$(bonobo_object_directory_sources)	\
 	$(bonobo_activation_context_sources)	\
 	$(NULL)
 
@@ -84,36 +101,51 @@ libbonobo_activation_la_SOURCES=		\
 	$(NULL)
 
 
-
 bonobo_unknown_idls =				\
 	$(top_srcdir)/idl/Bonobo_Unknown.idl	\
 	$(NULL)
-
 bonobo_unknown_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_UNKNOWN_COMPILATION
-
 $(bonobo_unknown_sources): $(bonobo_unknown_idls) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(bonobo_unknown_idl_flags) $(top_srcdir)/idl/Bonobo_Unknown.idl
 
 
 bonobo_generic_factory_idls =				\
 	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
+	$(top_srcdir)/idl/Bonobo_Activation_types.idl	\
 	$(top_srcdir)/idl/Bonobo_GenericFactory.idl	\
 	$(NULL)
-
 bonobo_generic_factory_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_GENERIC_FACTORY_COMPILATION
-
 $(bonobo_generic_factory_sources): $(bonobo_generic_factory_idls) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(bonobo_generic_factory_idl_flags) $(top_srcdir)/idl/Bonobo_GenericFactory.idl
 
 
+bonobo_activation_types_idls =			\
+	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
+	$(top_srcdir)/idl/Bonobo_Activation_types.idl	\
+	$(top_srcdir)/idl/Bonobo_ObjectDirectory.idl	\
+	$(NULL)
+bonobo_activation_types_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_ACTIVATION_TYPES_COMPILATION
+$(bonobo_activation_types_sources): $(bonobo_activation_types_idls) $(ORBIT_IDL)
+	$(ORBIT_IDL) $(bonobo_activation_types_idl_flags) $(top_srcdir)/idl/Bonobo_Activation_types.idl
+
+
+bonobo_object_directory_idls =			\
+	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
+	$(top_srcdir)/idl/Bonobo_Activation_types.idl	\
+	$(top_srcdir)/idl/Bonobo_ObjectDirectory.idl	\
+	$(NULL)
+bonobo_object_directory_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_OBJECT_DIRECTORY_COMPILATION
+$(bonobo_object_directory_sources): $(bonobo_object_directory_idls) $(ORBIT_IDL)
+	$(ORBIT_IDL) $(bonobo_object_directory_idl_flags) $(top_srcdir)/idl/Bonobo_ObjectDirectory.idl
+
+
 bonobo_activation_context_idls =			\
 	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
-	$(top_srcdir)/idl/Bonobo_GenericFactory.idl	\
+	$(top_srcdir)/idl/Bonobo_Activation_types.idl	\
+	$(top_srcdir)/idl/Bonobo_ObjectDirectory.idl	\
 	$(top_srcdir)/idl/Bonobo_ActivationContext.idl	\
 	$(NULL)
-
 bonobo_activation_context_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_ACTIVATION_CONTEXT_COMPILATION
-
 $(bonobo_activation_context_sources): $(bonobo_activation_context_idls) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(bonobo_activation_context_idl_flags) $(top_srcdir)/idl/Bonobo_ActivationContext.idl
 
