@@ -7,11 +7,11 @@
 BEGIN_GNOME_DECLS
 
 typedef struct _BonoboPropertyBagPrivate BonoboPropertyBagPrivate;
-typedef struct _BonoboPropertyBag	BonoboPropertyBag;
+typedef struct _BonoboPropertyBag	 BonoboPropertyBag;
 
 
 typedef enum {
-	BONOBO_PROPERTY_UNSTORED	       = 1,
+	BONOBO_PROPERTY_UNSTORED        = 1,
 	BONOBO_PROPERTY_READ_ONLY       = 2,
 	BONOBO_PROPERTY_USE_DEFAULT_OPT = 4
 } BonoboPropertyFlags;
@@ -19,7 +19,7 @@ typedef enum {
 #include <bonobo/bonobo-property.h>
 
 struct _BonoboPropertyBag {
-	BonoboObject               parent;
+	BonoboObject              parent;
 	BonoboPropertyBagPrivate *priv;
 };
 
@@ -110,7 +110,7 @@ GList			 *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);
 /* For implementation inheritance. */
 POA_Bonobo_PropertyBag__epv *bonobo_property_bag_get_epv	      (void);
 
-#define BONOBO_PROPERTY_BAG_TYPE			(bonobo_property_bag_get_type ())
+#define BONOBO_PROPERTY_BAG_TYPE                (bonobo_property_bag_get_type ())
 #define BONOBO_PROPERTY_BAG(o)		        (GTK_CHECK_CAST ((o), BONOBO_PROPERTY_BAG_TYPE, BonoboPropertyBag))
 #define BONOBO_PROPERTY_BAG_CLASS(k)		(GTK_CHECK_CLASS_CAST((k), BONOBO_PROPERTY_BAG_TYPE, BonoboPropertyBagClass))
 #define BONOBO_IS_PROPERTY_BAG(o)		(GTK_CHECK_TYPE ((o), BONOBO_PROPERTY_BAG_TYPE))

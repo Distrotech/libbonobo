@@ -363,7 +363,7 @@ bonobo_object_get_type (void)
 {
 	static GtkType type = 0;
 
-	if (!type){
+	if (!type) {
 		GtkTypeInfo info = {
 			"BonoboObject",
 			sizeof (BonoboObject),
@@ -477,8 +477,8 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        oldao = newobj->priv->ao;
 
        /* Merge the two AggregateObject lists */
-       for (l = newobj->priv->ao->objs; l; l = l->next){
-               if (!g_list_find (object->priv->ao->objs, l->data)){
+       for (l = newobj->priv->ao->objs; l; l = l->next) {
+               if (!g_list_find (object->priv->ao->objs, l->data)) {
                        object->priv->ao->objs = g_list_prepend (object->priv->ao->objs, l->data);
                        ((BonoboObject *)l->data)->priv->ao = object->priv->ao;
                }
@@ -572,7 +572,7 @@ gnome_unknown_ping (Bonobo_Unknown object)
 	alive = FALSE;
 	CORBA_exception_init (&ev);
 	Bonobo_Unknown_ref (object, &ev);
-	if (ev._major == CORBA_NO_EXCEPTION){
+	if (ev._major == CORBA_NO_EXCEPTION) {
 		Bonobo_Unknown_unref (object, &ev);
 		if (ev._major == CORBA_NO_EXCEPTION)
 			alive = TRUE;

@@ -1,3 +1,9 @@
+2000-02-09  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-main.h (bonobo_poa_manager): ansi clean.
+
+	* bonobo/bonobo-object-io.h: ditto on enum.
+
 2000-02-07  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo/bonobo-property-bag.c, bonobo/bonobo-property-bag.h,

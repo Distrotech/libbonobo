@@ -8,7 +8,7 @@ typedef enum {
 	GNOME_IOERR_GENERAL,
 
 	/* PersistStorage interface not supported by object */
-	GNOME_IOERR_PERSIST_NOT_SUPPORTED,
+	GNOME_IOERR_PERSIST_NOT_SUPPORTED
 	
 } GnomeIOStatus;
 
