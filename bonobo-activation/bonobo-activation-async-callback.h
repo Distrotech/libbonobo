@@ -23,18 +23,17 @@
  */
 
 
-#ifndef OAF_ASYNC_CORBA_H
-#define OAF_ASYNC_CORBA_H
+#ifndef BONOBO_ACTIVATION_ASYNC_CORBA_H
+#define BONOBO_ACTIVATION_ASYNC_CORBA_H
 
-#include "oaf.h"
-
-
+#include <bonobo-activation/Bonobo_ActivationContext.h>
+#include <bonobo-activation/bonobo-activation-async.h>
 
 CORBA_Object 
-oaf_async_corba_callback_new (OAFActivationCallback callback,
-                              gpointer user_data,
-                              CORBA_Environment * ev);
+bonobo_activation_async_corba_callback_new (BonoboActivationCallback callback,
+                                            gpointer user_data,
+                                            CORBA_Environment * ev);
 
 
 
-#endif /* OAF_ASYNC_CORBA_H */
+#endif /* BONOBO_ACTIVATION_ASYNC_CORBA_H */

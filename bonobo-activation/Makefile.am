@@ -22,20 +22,17 @@ bonobo_activationincludedir = $(includedir)/bonobo-activation-2.0/bonobo-activat
 bonobo_activationinclude_HEADERS=		\
 	Bonobo_Unknown.h			\
 	Bonobo_GenericFactory.h			\
-	Bonobo_ActivationContext.h		\
-	liboaf.h				\
-	oaf-async.h				\
+	bonobo-activation-async.h		\
 	bonobo-activation-base-service.h	\
 	bonobo-activation-id.h			\
-	oaf-activate.h				\
-	oaf-mainloop.h				\
-	oaf-plugin.h				\
-	oaf-servreg.h				\
-	oaf-util.h				\
-	oaf-async.h				\
-	oaf-factory.h				\
+	bonobo-activation-activate.h		\
+	bonobo-activation-init.h		\
+	bonobo-activation-shlib.h		\
+	bonobo-activation-register.h		\
+	bonobo-activation-server-info.h		\
+	bonobo-activation-async.h		\
 	bonobo-factory-suppress.h		\
-	liboaf-version.h			\
+	bonobo-activation-version.h		\
 	$(NULL)
 
 
@@ -52,6 +49,7 @@ bonobo_generic_factory_sources =		\
 	Bonobo_GenericFactory-stubs.c		\
 	Bonobo_GenericFactory-skels.c		\
 	$(NULL)
+
 bonobo_activation_context_sources =		\
 	Bonobo_ActivationContext.h		\
 	Bonobo_ActivationContext-common.c	\
@@ -71,16 +69,16 @@ libbonobo_activation_la_SOURCES=		\
 	bonobo-activation-id.c			\
 	bonobo-activation-private.h		\
 	bonobo-activation-shlib.c		\
-	oaf-activate.c				\
-	oaf-activate-private.h			\
-	oaf-registration.c			\
-	oaf-servreg.c				\
-	oaf-util.c				\
-	oaf-i18n.h				\
-	oaf-async.c				\
-	oaf-async-corba.h			\
-	oaf-async-corba.c			\
-	oaf-fork-server.c			\
+	bonobo-activation-activate.c		\
+	bonobo-activation-activate-private.h	\
+	bonobo-activation-base-service.c	\
+	bonobo-activation-register.c		\
+	bonobo-activation-server-info.c		\
+	bonobo-activation-i18n.h		\
+	bonobo-activation-async.c		\
+	bonobo-activation-async-callback.h	\
+	bonobo-activation-async-callback.c	\
+	bonobo-activation-fork-server.c		\
 	$(NULL)
 
 

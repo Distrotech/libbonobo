@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
  *  liboaf: A library for accessing oafd in a nice way.
- *
+*
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 2000 Eazel, Inc.
  *
@@ -23,38 +23,37 @@
  *
  */
 
-#ifndef OAF_ACTIVATE_H
-#define OAF_ACTIVATE_H
+#ifndef BONOBO_ACTIVATION_ACTIVATE_H
+#define BONOBO_ACTIVATION_ACTIVATE_H
 
-#include <orbit/orbit.h>
-#include <liboaf/oaf.h>
-
-CORBA_Object oaf_name_service_get (CORBA_Environment * ev);
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 
 
-OAF_ServerInfoList *oaf_query (const char *requirements,
-			       char *const *selection_order,
-			       CORBA_Environment * ev);
-CORBA_Object oaf_activate (const char *requirements,
-			   char *const *selection_order,
-			   OAF_ActivationFlags flags,
-			   OAF_ActivationID * ret_aid,
-			   CORBA_Environment * ev);
-CORBA_Object oaf_activate_from_id (const OAF_ActivationID aid,
-				   OAF_ActivationFlags flags,
-				   OAF_ActivationID * ret_aid,
-				   CORBA_Environment * ev);
+CORBA_Object bonobo_activation_name_service_get (CORBA_Environment * ev);
 
+
+Bonobo_ServerInfoList *bonobo_activation_query   (const char *requirements,
+                                                  char *const *selection_order,
+                                                  CORBA_Environment * ev);
+CORBA_Object bonobo_activation_activate          (const char *requirements,
+                                                  char *const *selection_order,
+                                                  Bonobo_ActivationFlags flags,
+                                                  Bonobo_ActivationID * ret_aid,
+                                                  CORBA_Environment * ev);
+CORBA_Object bonobo_activation_activate_from_id  (const Bonobo_ActivationID aid,
+                                                  Bonobo_ActivationFlags flags,
+                                                  Bonobo_ActivationID * ret_aid,
+                                                  CORBA_Environment * ev);
 
 
 
 /* debugging functions. */
-void         oaf_set_test_components_enabled (gboolean val);
-gboolean     oaf_get_test_components_enabled (void);
+void         bonobo_activation_set_test_components_enabled (gboolean val);
+gboolean     bonobo_activation_get_test_components_enabled (void);
 
 
 
-#endif /* OAF_ACTIVATE_H */
+#endif /* BONOBO_ACTIVATION_ACTIVATE_H */
 
 
 

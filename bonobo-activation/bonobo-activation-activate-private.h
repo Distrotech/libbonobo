@@ -23,13 +23,14 @@
  *
  */
 
-#ifndef OAF_ACTIVATE_PRIVATE_H
-#define OAF_ACTIVATE_PRIVATE_H
+#ifndef BONOBO_ACTIVATION_ACTIVATE_PRIVATE_H
+#define BONOBO_ACTIVATION_ACTIVATE_PRIVATE_H
 
-char              *oaf_maybe_add_test_requirements            (const char *requirements);
-void               oaf_copy_string_array_to_GNOME_stringlist  (char *const *selection_order, 
-                                                               GNOME_stringlist *ret_val);
+#include <bonobo-activation/Bonobo_GenericFactory.h>
+
+char              *bonobo_activation_maybe_add_test_requirements             (const char *requirements);
+void               bonobo_activation_copy_string_array_to_Bonobo_stringlist  (char *const *selection_order, 
+                                                                              Bonobo_stringlist *ret_val);
 
 
-
-#endif /* OAF_ACTIVATE_PRIVATE_H */
+#endif /* BONOBO_ACTIVATION_ACTIVATE_PRIVATE_H */

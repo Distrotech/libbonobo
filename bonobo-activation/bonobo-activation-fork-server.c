@@ -23,13 +23,19 @@
  *
  */
 
+#include <config.h>
+
+#include <bonobo-activation/bonobo-activation-private.h>
+#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/Bonobo_ActivationContext.h>
+
+#include <orbit/orbit.h>
+
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
-#include <config.h>
 #include <string.h>
-#include "liboaf-private.h"
-#include "oaf-i18n.h"
 #include <limits.h>
 #include <errno.h>
 #include <unistd.h>
@@ -50,7 +56,7 @@ typedef struct
 {
 	GMainLoop *mloop;
 	char iorbuf[IORBUFSIZE];
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 	char *do_srv_output;
 #endif
 	FILE *fh;
@@ -87,7 +93,7 @@ handle_exepipe (GIOChannel * source,
 	if (retval && !strncmp (data->iorbuf, "IOR:", 4))
 		retval = FALSE;
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 	if (data->do_srv_output)
 		g_message ("srv output[%d]: '%s'", retval, data->iorbuf);
 #endif
@@ -98,7 +104,7 @@ handle_exepipe (GIOChannel * source,
 	return retval;
 }
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 static void
 print_exit_status (int status)
 {
@@ -111,7 +117,7 @@ print_exit_status (int status)
 #endif
 
 static 
-void oaf_setenv (const char *name, const char *value) 
+void bonobo_activation_setenv (const char *name, const char *value) 
 {
 #if HAVE_SETENV
         setenv (name, value, 1);
@@ -125,19 +131,19 @@ void oaf_setenv (const char *name, const char *value)
 }
 
 CORBA_Object
-oaf_server_by_forking (const char **cmd, 
+bonobo_activation_server_by_forking (const char **cmd, 
                        int fd_arg, 
                        const char *display,
 		       const char *od_iorstr,
                        CORBA_Environment * ev)
 {
-        return oaf_internal_server_by_forking_extended (cmd, FALSE, fd_arg,
+        return bonobo_activation_internal_server_by_forking_extended (cmd, FALSE, fd_arg,
                                                         display, od_iorstr,
                                                         ev);
 }
 
 CORBA_Object
-oaf_internal_server_by_forking_extended (const char **cmd,
+bonobo_activation_internal_server_by_forking_extended (const char **cmd,
                                          gboolean set_process_group,
                                          int fd_arg, 
                                          const char *display,
@@ -146,7 +152,7 @@ oaf_internal_server_by_forking_extended (const char **cmd,
 {
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-	OAF_GeneralError *errval;
+	Bonobo_GeneralError *errval;
         FILE *iorfh;
         EXEActivateInfo ai;
         GIOChannel *gioc;
@@ -171,11 +177,11 @@ oaf_internal_server_by_forking_extended (const char **cmd,
 
 	if (childpid < 0) {
                 sigprocmask (SIG_SETMASK, &omask, NULL);
-		errval = OAF_GeneralError__alloc ();
+		errval = Bonobo_GeneralError__alloc ();
 		errval->description = CORBA_string_dup (_("Couldn't fork a new process"));
 
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_OAF_GeneralError, errval);
+				     ex_Bonobo_GeneralError, errval);
 		return CORBA_OBJECT_NIL;
 	}
 
@@ -186,10 +192,10 @@ oaf_internal_server_by_forking_extended (const char **cmd,
                 sigprocmask (SIG_SETMASK, &omask, NULL);
                 
 		if (!WIFEXITED (status)) {
-			OAF_GeneralError *errval;
+			Bonobo_GeneralError *errval;
 			char cbuf[512];
                         
-			errval = OAF_GeneralError__alloc ();
+			errval = Bonobo_GeneralError__alloc ();
 
 			if (WIFSIGNALED (status))
 				g_snprintf (cbuf, sizeof (cbuf),
@@ -204,11 +210,11 @@ oaf_internal_server_by_forking_extended (const char **cmd,
                         errval->description = CORBA_string_dup (cbuf);
 
 			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-					     ex_OAF_GeneralError, errval);
+					     ex_Bonobo_GeneralError, errval);
 			return CORBA_OBJECT_NIL;
 		}
-#ifdef OAF_DEBUG
-		ai.do_srv_output = getenv ("OAF_DEBUG_EXERUN");
+#ifdef BONOBO_ACTIVATION_DEBUG
+		ai.do_srv_output = getenv ("BONOBO_ACTIVATION_DEBUG_EXERUN");
                 
 		if (ai.do_srv_output)
 			print_exit_status (status);
@@ -231,11 +237,11 @@ oaf_internal_server_by_forking_extended (const char **cmd,
 
 		g_strstrip (ai.iorbuf);
 		if (!strncmp (ai.iorbuf, "IOR:", 4)) {
-			retval = CORBA_ORB_string_to_object (oaf_orb_get (),
+			retval = CORBA_ORB_string_to_object (bonobo_activation_orb_get (),
                                                              ai.iorbuf, ev);
 			if (ev->_major != CORBA_NO_EXCEPTION)
 				retval = CORBA_OBJECT_NIL;
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 			if (ai.do_srv_output)
 				g_message ("Did string_to_object on %s = '%p' (%s)",
 					   ai.iorbuf, retval,
@@ -243,14 +249,14 @@ oaf_internal_server_by_forking_extended (const char **cmd,
                                            "no-exception" : ev->_id);
 #endif
 		} else {
-			OAF_GeneralError *errval;
+			Bonobo_GeneralError *errval;
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 			if (ai.do_srv_output)
 				g_message ("string doesn't match IOR:");
 #endif
 
-			errval = OAF_GeneralError__alloc ();
+			errval = Bonobo_GeneralError__alloc ();
 
                         if (*ai.iorbuf == '\0')
                                 errval->description =
@@ -258,16 +264,16 @@ oaf_internal_server_by_forking_extended (const char **cmd,
                         else
                                 errval->description = CORBA_string_dup (ai.iorbuf);
 			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-					     ex_OAF_GeneralError, errval);
+					     ex_Bonobo_GeneralError, errval);
 			retval = CORBA_OBJECT_NIL;
 		}
 	} else if ((childpid = fork ())) {
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
                 if (display)
-		  oaf_setenv ("DISPLAY", display);
+		  bonobo_activation_setenv ("DISPLAY", display);
 		if (od_iorstr)
-		  oaf_setenv ("OAF_OD_IOR", od_iorstr);
+		  bonobo_activation_setenv ("BONOBO_ACTIVATION_OD_IOR", od_iorstr);
                 
 
 		close (iopipes[0]);
@@ -282,7 +288,7 @@ oaf_internal_server_by_forking_extended (const char **cmd,
 
                 if (set_process_group) {
                         if (setpgid (getpid (), parent_pid) < 0) {
-                                g_print (_("OAF failed to set process group of %s: %s\n"),
+                                g_print (_("bonobo-activation failed to set process group of %s: %s\n"),
                                          cmd[0], g_strerror (errno));
                                 _exit (1);
                         }

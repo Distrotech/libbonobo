@@ -1,5 +1,5 @@
 /*
- *  oaf-i18n.h: internationalization support for OAF.
+ *  bonobo-activation-i18n.h: internationalization support for bonobo-activation.
  *
  *  Shamelessly stolen from gnome-libs or somewhere else.
  *  Cannot remmeber exactly where.

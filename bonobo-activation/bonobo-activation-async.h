@@ -23,38 +23,35 @@
  */
 
 
-#ifndef OAF_ASYNC_H
-#define OAF_ASYNC_H
+#ifndef BONOBO_ACTIVATION_ASYNC_H
+#define BONOBO_ACTIVATION_ASYNC_H
 
-#include <liboaf/liboaf-version.h>
-#include <liboaf/oaf.h>
-
-
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 /* activated_object is CORBA_OBJECT_NIL if the activation 
    failed somehow. If this is the case, error_reason contains
    a valid string which describes the pb encountered.
    If this is not the case, error_reason is not defined.
    activated_object should be CORBA_Object_release'd by the user
 */
-typedef void (*OAFActivationCallback) (CORBA_Object   activated_object, 
-				       const char    *error_reason, 
-				       gpointer       user_data);
+typedef void (*BonoboActivationCallback) (CORBA_Object   activated_object, 
+                                          const char    *error_reason, 
+                                          gpointer       user_data);
 
 
-void oaf_activate_async (const char *requirements,
-			 char *const *selection_order,
-			 OAF_ActivationFlags flags,
-			 OAFActivationCallback callback,
-			 gpointer user_data,
-			 CORBA_Environment * ev);
+void bonobo_activation_activate_async (const char *requirements,
+                                       char *const *selection_order,
+                                       Bonobo_ActivationFlags flags,
+                                       BonoboActivationCallback callback,
+                                       gpointer user_data,
+                                       CORBA_Environment * ev);
 
-void oaf_activate_from_id_async (const OAF_ActivationID aid,
-				 OAF_ActivationFlags flags,
-				 OAFActivationCallback callback,
-				 gpointer user_data,
-				 CORBA_Environment * ev);
+void bonobo_activation_activate_from_id_async (const Bonobo_ActivationID aid,
+                                               Bonobo_ActivationFlags flags,
+                                               BonoboActivationCallback callback,
+                                               gpointer user_data,
+                                               CORBA_Environment * ev);
 
 
 
-#endif /* OAF_ASYNC_H */
+#endif /* BONOBO_ACTIVATION_ASYNC_H */
 

@@ -23,11 +23,17 @@
  *
  */
 
-#include "liboaf/liboaf-private.h"
-#include "liboaf/oaf-activate.h"
-#include "liboaf/oaf-activate-private.h"
+#include <config.h>
 
-extern CORBA_Object oaf_server_activate_shlib (OAF_ActivationResult * sh,
+#include <bonobo-activation/bonobo-activation-activate.h>
+#include <bonobo-activation/bonobo-activation-activate-private.h>
+#include <bonobo-activation/bonobo-activation-private.h>
+#include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/bonobo-activation-id.h>
+
+#include <string.h>
+
+extern CORBA_Object bonobo_activation_server_activate_shlib (Bonobo_ActivationResult * sh,
 					       CORBA_Environment * ev);
 
 
@@ -35,36 +41,36 @@ static gboolean test_components_enabled = FALSE;
 
 
 /**
- * oaf_set_test_components_enabled:
+ * bonobo_activation_set_test_components_enabled:
  * @val: if TRUE, enable test components. If FALSE, disable them.
  * 
  * Enable test components.
  */
 void
-oaf_set_test_components_enabled (gboolean val)
+bonobo_activation_set_test_components_enabled (gboolean val)
 {
         test_components_enabled = val;
 }
 
 /**
- * oaf_get_test_components_enabled:
+ * bonobo_activation_get_test_components_enabled:
  * 
  * Return value: returns whether or not the 
  *               test components are enabled.
  */
 gboolean
-oaf_get_test_components_enabled (void)
+bonobo_activation_get_test_components_enabled (void)
 {
         return test_components_enabled;
 }
 
 /* internal function.*/
 char *
-oaf_maybe_add_test_requirements (const char *requirements) 
+bonobo_activation_maybe_add_test_requirements (const char *requirements) 
 {
         char *ext_requirements;
 
-        if (!oaf_get_test_components_enabled ()) {
+        if (!bonobo_activation_get_test_components_enabled ()) {
                 ext_requirements = g_strconcat ("( ", requirements,
                                                 " ) AND (NOT test_only.defined() OR NOT test_only)",
                                                 NULL);
@@ -78,7 +84,7 @@ oaf_maybe_add_test_requirements (const char *requirements)
 
 /* internal funtion */
 void 
-oaf_copy_string_array_to_GNOME_stringlist (char *const *selection_order, GNOME_stringlist *ret_val)
+bonobo_activation_copy_string_array_to_Bonobo_stringlist (char *const *selection_order, Bonobo_stringlist *ret_val)
 {
         int i;
 
@@ -95,13 +101,13 @@ oaf_copy_string_array_to_GNOME_stringlist (char *const *selection_order, GNOME_s
 }
 
 /**
- * oaf_query: 
+ * bonobo_activation_query: 
  * @requirements: query string.
  * @selection_order: sort criterion for returned list.
  * @ev: a %CORBA_Environment structure which will contain 
  *      the CORBA exception status of the operation.
  *
- * Executes the @requirements query on the OAF daemon.
+ * Executes the @requirements query on the bonobo-activation-server.
  * The result is sorted according to @selection_order. 
  * @selection_order can safely be NULL as well as @ev.
  * The returned list has to be freed with CORBA_free.
@@ -109,36 +115,36 @@ oaf_copy_string_array_to_GNOME_stringlist (char *const *selection_order, GNOME_s
  * Return value: the list of servers matching the requirements.
  */
 
-OAF_ServerInfoList *
-oaf_query (const char *requirements, char *const *selection_order,
+Bonobo_ServerInfoList *
+bonobo_activation_query (const char *requirements, char *const *selection_order,
 	   CORBA_Environment * ev)
 {
-	GNOME_stringlist selorder;
-	OAF_ServerInfoList *res;
+	Bonobo_stringlist selorder;
+	Bonobo_ServerInfoList *res;
 	CORBA_Environment myev;
-	OAF_ActivationContext ac;
+	Bonobo_ActivationContext ac;
         char *ext_requirements;
 
 
 	g_return_val_if_fail (requirements, CORBA_OBJECT_NIL);
-	ac = oaf_activation_context_get ();
+	ac = bonobo_activation_activation_context_get ();
 	g_return_val_if_fail (ac, CORBA_OBJECT_NIL);
 
-        ext_requirements = oaf_maybe_add_test_requirements (requirements);
+        ext_requirements = bonobo_activation_maybe_add_test_requirements (requirements);
 
 	if (!ev) {
 		ev = &myev;
 		CORBA_exception_init (&myev);
 	}
 
-        oaf_copy_string_array_to_GNOME_stringlist (selection_order, &selorder);
+        bonobo_activation_copy_string_array_to_Bonobo_stringlist (selection_order, &selorder);
 
         if (ext_requirements == NULL) {
-                res = OAF_ActivationContext_query (ac, (char *) requirements,
-                                                   &selorder, oaf_context_get (), ev);
+                res = Bonobo_ActivationContext_query (ac, (char *) requirements,
+                                                      &selorder, bonobo_activation_context_get (), ev);
         } else {
-                res = OAF_ActivationContext_query (ac, (char *) ext_requirements,
-                                                   &selorder, oaf_context_get (), ev);
+                res = Bonobo_ActivationContext_query (ac, (char *) ext_requirements,
+                                                      &selorder, bonobo_activation_context_get (), ev);
         }
 
         if (ext_requirements != NULL) {
@@ -156,7 +162,7 @@ oaf_query (const char *requirements, char *const *selection_order,
 
 
 /**
- * oaf_activate:
+ * bonobo_activation_activate:
  * @requirements: query string.
  * @selection_order: sort criterion for returned list.
  * @flags: how to activate the object.
@@ -173,40 +179,40 @@ oaf_query (const char *requirements, char *const *selection_order,
  *               to check @ev for success.
  */
 CORBA_Object
-oaf_activate (const char *requirements, char *const *selection_order,
-	      OAF_ActivationFlags flags, OAF_ActivationID * ret_aid,
+bonobo_activation_activate (const char *requirements, char *const *selection_order,
+	      Bonobo_ActivationFlags flags, Bonobo_ActivationID * ret_aid,
 	      CORBA_Environment * ev)
 {
-	GNOME_stringlist selorder;
+	Bonobo_stringlist selorder;
 	CORBA_Object retval;
-	OAF_ActivationResult *res;
+	Bonobo_ActivationResult *res;
 	CORBA_Environment myev;
-	OAF_ActivationContext ac;
+	Bonobo_ActivationContext ac;
         char *ext_requirements;
 
         retval = CORBA_OBJECT_NIL;
 
 	g_return_val_if_fail (requirements, CORBA_OBJECT_NIL);
-	ac = oaf_activation_context_get ();
+	ac = bonobo_activation_activation_context_get ();
 	g_return_val_if_fail (ac, CORBA_OBJECT_NIL);
 
-        ext_requirements = oaf_maybe_add_test_requirements (requirements);
+        ext_requirements = bonobo_activation_maybe_add_test_requirements (requirements);
 
 	if (!ev) {
 		ev = &myev;
 		CORBA_exception_init (&myev);
 	}
 
-        oaf_copy_string_array_to_GNOME_stringlist (selection_order, &selorder);
+        bonobo_activation_copy_string_array_to_Bonobo_stringlist (selection_order, &selorder);
 
         if (ext_requirements == NULL) {
-                res = OAF_ActivationContext_activate (ac, (char *) requirements,
+                res = Bonobo_ActivationContext_activate (ac, (char *) requirements,
                                                       &selorder, flags,
-                                                      oaf_context_get (), ev);
+                                                      bonobo_activation_context_get (), ev);
         } else {
-                res = OAF_ActivationContext_activate (ac, (char *) ext_requirements,
+                res = Bonobo_ActivationContext_activate (ac, (char *) ext_requirements,
                                                       &selorder, flags,
-                                                      oaf_context_get (), ev);
+                                                      bonobo_activation_context_get (), ev);
         }
 
         if (ext_requirements != NULL) {
@@ -223,13 +229,13 @@ oaf_activate (const char *requirements, char *const *selection_order,
 
 
 	switch (res->res._d) {
-	case OAF_RESULT_SHLIB:
-		retval = oaf_server_activate_shlib (res, ev);
+	case Bonobo_RESULT_SHLIB:
+		retval = bonobo_activation_server_activate_shlib (res, ev);
 		break;
-	case OAF_RESULT_OBJECT:
+	case Bonobo_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (res->res._u.res_object, ev);
 		break;
-	case OAF_RESULT_NONE:
+	case Bonobo_RESULT_NONE:
 	default:
 		break;
 	}
@@ -249,7 +255,7 @@ oaf_activate (const char *requirements, char *const *selection_order,
 }
 
 /**
- * oaf_activate_from_id
+ * bonobo_activation_activate_from_id
  * @aid: AID or IID of the object to activate.
  * @flags: activation flag.
  * @ret_aid: AID of the activated server.
@@ -265,16 +271,16 @@ oaf_activate (const char *requirements, char *const *selection_order,
  */
 
 CORBA_Object
-oaf_activate_from_id (const OAF_ActivationID aid, 
-                      OAF_ActivationFlags flags,
-		      OAF_ActivationID *ret_aid,
+bonobo_activation_activate_from_id (const Bonobo_ActivationID aid, 
+                      Bonobo_ActivationFlags flags,
+		      Bonobo_ActivationID *ret_aid,
                       CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-	OAF_ActivationResult *res;
+	Bonobo_ActivationResult *res;
 	CORBA_Environment myev;
-	OAF_ActivationContext ac;
-	OAFActivationInfo *ai;
+	Bonobo_ActivationContext ac;
+	BonoboActivationInfo *ai;
 
 	g_return_val_if_fail (aid, CORBA_OBJECT_NIL);
 
@@ -283,34 +289,34 @@ oaf_activate_from_id (const OAF_ActivationID aid,
 		CORBA_exception_init (&myev);
 	}
 
-        ac = oaf_internal_activation_context_get_extended ((flags & OAF_FLAG_EXISTING_ONLY) != 0, ev);
+        ac = bonobo_activation_internal_activation_context_get_extended ((flags & Bonobo_FLAG_EXISTING_ONLY) != 0, ev);
 
         if (ac == CORBA_OBJECT_NIL)
                 goto out;
 
-	ai = oaf_actid_parse (aid);
+	ai = bonobo_activation_id_parse (aid);
 
  	if (ai != NULL) {		
                 /* This is so that using an AID in an unactivated OD will work nicely */
-                oaf_object_directory_get (ai->user, ai->host, ai->domain);
+                bonobo_activation_object_directory_get (ai->user, ai->host, ai->domain);
 
-		oaf_actinfo_free (ai);
+		bonobo_activation_info_free (ai);
 	}
 
-	res = OAF_ActivationContext_activate_from_id (ac, aid, flags,
-                                                      oaf_context_get (),
+	res = Bonobo_ActivationContext_activate_from_id (ac, aid, flags,
+                                                      bonobo_activation_context_get (),
                                                       ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
 
 	switch (res->res._d) {
-	case OAF_RESULT_SHLIB:
-                retval = oaf_server_activate_shlib (res, ev);
+	case Bonobo_RESULT_SHLIB:
+                retval = bonobo_activation_server_activate_shlib (res, ev);
 		break;
-	case OAF_RESULT_OBJECT:
+	case Bonobo_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (res->res._u.res_object, ev);
 		break;
-	case OAF_RESULT_NONE:
+	case Bonobo_RESULT_NONE:
 	default:
 		break;
 	}
@@ -331,17 +337,16 @@ oaf_activate_from_id (const OAF_ActivationID aid,
 }
 
 /**
- * oaf_name_service_get:
+ * bonobo_activation_name_service_get:
  * @ev: %CORBA_Environment structure which will contain 
  *      the CORBA exception status of the operation. 
  *
- * Returns the name server of OAF. @ev can be NULL.
+ * Returns the name server of bonobo-activation. @ev can be NULL.
  *
- * Return value: the name server of OAF.
+ * Return value: the name server of bonobo-activation.
  */
-CORBA_Object oaf_name_service_get (CORBA_Environment * ev)
+CORBA_Object bonobo_activation_name_service_get (CORBA_Environment * ev)
 {
-
-	return oaf_activate_from_id ("OAFIID:oaf_naming_service:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
-				     0, NULL, ev);
+	return bonobo_activation_activate_from_id ("OAFIID:bonobo_activation_naming_service:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
+                                                   0, NULL, ev);
 }

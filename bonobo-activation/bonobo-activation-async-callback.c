@@ -22,28 +22,27 @@
  *
  */
 
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
 
-#include "oaf.h"
-#include "liboaf.h"
-#include "oaf-async.h"
-#include "oaf-async-corba.h"
-#include "oaf-i18n.h"
+#include <bonobo-activation/bonobo-activation-async.h>
+#include <bonobo-activation/bonobo-activation-async-callback.h>
+#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/bonobo-activation-shlib.h>
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 
 /*** App-specific servant structures ***/
 typedef struct {
 
-   POA_OAF_ActivationCallback servant;
+   POA_Bonobo_ActivationCallback servant;
    PortableServer_POA poa;
-   OAFActivationCallback callback;
+   BonoboActivationCallback callback;
    gpointer user_data;
 
-} impl_POA_OAF_ActivationCallback;
+} impl_POA_Bonobo_ActivationCallback;
 
 void
-impl_OAF_ActivationCallback__destroy(impl_POA_OAF_ActivationCallback *servant, 
+impl_Bonobo_ActivationCallback__destroy(impl_POA_Bonobo_ActivationCallback *servant, 
 				     CORBA_Environment *ev);
 
 
@@ -51,66 +50,66 @@ impl_OAF_ActivationCallback__destroy(impl_POA_OAF_ActivationCallback *servant,
 /*** Implementation stub prototypes ***/
 
 static void
-impl_OAF_ActivationCallback_report_activation_failed
-           (impl_POA_OAF_ActivationCallback * servant, 
+impl_Bonobo_ActivationCallback_report_activation_failed
+           (impl_POA_Bonobo_ActivationCallback * servant, 
 	    CORBA_char * reason,
 	    CORBA_Environment * ev);
 
 static void
-impl_OAF_ActivationCallback_report_activation_succeeded
-           (impl_POA_OAF_ActivationCallback * servant, 
-	    OAF_ActivationResult * result,
+impl_Bonobo_ActivationCallback_report_activation_succeeded
+           (impl_POA_Bonobo_ActivationCallback * servant, 
+	    Bonobo_ActivationResult * result,
 	    CORBA_Environment * ev);
 
 /*** epv structures ***/
 
-static PortableServer_ServantBase__epv impl_OAF_ActivationCallback_base_epv = {
+static PortableServer_ServantBase__epv impl_Bonobo_ActivationCallback_base_epv = {
    NULL,			/* _private data */
    NULL,			/* finalize routine */
    NULL,			/* default_POA routine */
 };
-static POA_OAF_ActivationCallback__epv impl_OAF_ActivationCallback_epv = {
+static POA_Bonobo_ActivationCallback__epv impl_Bonobo_ActivationCallback_epv = {
    NULL,			/* _private */
-   (gpointer) & impl_OAF_ActivationCallback_report_activation_failed,
+   (gpointer) &impl_Bonobo_ActivationCallback_report_activation_failed,
 
-   (gpointer) & impl_OAF_ActivationCallback_report_activation_succeeded,
+   (gpointer) &impl_Bonobo_ActivationCallback_report_activation_succeeded,
 
 };
 
 /*** vepv structures ***/
 
-static POA_OAF_ActivationCallback__vepv impl_OAF_ActivationCallback_vepv = {
-   &impl_OAF_ActivationCallback_base_epv,
-   &impl_OAF_ActivationCallback_epv,
+static POA_Bonobo_ActivationCallback__vepv impl_Bonobo_ActivationCallback_vepv = {
+        (gpointer) &impl_Bonobo_ActivationCallback_base_epv,
+        (gpointer) &impl_Bonobo_ActivationCallback_epv,
 };
 
 /*** Stub implementations ***/
 
 CORBA_Object
-oaf_async_corba_callback_new (OAFActivationCallback callback,
-                              gpointer user_data,
-                              CORBA_Environment * ev)
+bonobo_activation_async_corba_callback_new (BonoboActivationCallback callback,
+                                            gpointer user_data,
+                                            CORBA_Environment * ev)
 {
    CORBA_Object retval;
-   impl_POA_OAF_ActivationCallback *newservant;
+   impl_POA_Bonobo_ActivationCallback *newservant;
    PortableServer_ObjectId *objid;
    PortableServer_POA poa;
    PortableServer_POAManager manager;
    CORBA_ORB orb;
 
-   orb = oaf_orb_get ();
+   orb = bonobo_activation_orb_get ();
 
    poa =  (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", ev);
    manager = PortableServer_POA__get_the_POAManager (poa, ev);
    PortableServer_POAManager_activate (manager, ev);
 
-   newservant = g_new0(impl_POA_OAF_ActivationCallback, 1);
-   newservant->servant.vepv = &impl_OAF_ActivationCallback_vepv;
+   newservant = g_new0(impl_POA_Bonobo_ActivationCallback, 1);
+   newservant->servant.vepv = &impl_Bonobo_ActivationCallback_vepv;
    newservant->poa = poa;
    newservant->callback = callback;
    newservant->user_data = user_data;
 
-   POA_OAF_ActivationCallback__init((PortableServer_Servant) newservant, ev);
+   POA_Bonobo_ActivationCallback__init((PortableServer_Servant) newservant, ev);
    objid = PortableServer_POA_activate_object(poa, newservant, ev);
    CORBA_free(objid);
    retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
@@ -119,7 +118,7 @@ oaf_async_corba_callback_new (OAFActivationCallback callback,
 }
 
 void
-impl_OAF_ActivationCallback__destroy(impl_POA_OAF_ActivationCallback *servant, 
+impl_Bonobo_ActivationCallback__destroy(impl_POA_Bonobo_ActivationCallback *servant, 
 				     CORBA_Environment * ev)
 {
    PortableServer_ObjectId *objid;
@@ -128,13 +127,13 @@ impl_OAF_ActivationCallback__destroy(impl_POA_OAF_ActivationCallback *servant,
    PortableServer_POA_deactivate_object(servant->poa, objid, ev);
    CORBA_free(objid);
 
-   POA_OAF_ActivationCallback__fini((PortableServer_Servant) servant, ev);
+   POA_Bonobo_ActivationCallback__fini((PortableServer_Servant) servant, ev);
    g_free(servant);
 }
 
 static void
-impl_OAF_ActivationCallback_report_activation_failed
-   (impl_POA_OAF_ActivationCallback * servant, 
+impl_Bonobo_ActivationCallback_report_activation_failed
+   (impl_POA_Bonobo_ActivationCallback * servant, 
     CORBA_char * reason,
     CORBA_Environment * ev)
 {
@@ -149,13 +148,13 @@ impl_OAF_ActivationCallback_report_activation_failed
         g_free (message);
 
         /* destroy this object */
-        impl_OAF_ActivationCallback__destroy (servant, ev);
+        impl_Bonobo_ActivationCallback__destroy (servant, ev);
 }
 
 static void
-impl_OAF_ActivationCallback_report_activation_succeeded
-   (impl_POA_OAF_ActivationCallback * servant, 
-    OAF_ActivationResult * result,
+impl_Bonobo_ActivationCallback_report_activation_succeeded
+   (impl_POA_Bonobo_ActivationCallback * servant, 
+    Bonobo_ActivationResult * result,
     CORBA_Environment * ev)
 {
         CORBA_Object retval;
@@ -167,13 +166,13 @@ impl_OAF_ActivationCallback_report_activation_succeeded
         }
 
 	switch (result->res._d) {
-	case OAF_RESULT_SHLIB:
-                retval = oaf_server_activate_shlib (result, ev);
+	case Bonobo_RESULT_SHLIB:
+                retval = bonobo_activation_activate_shlib_server (result, ev);
 		break;
-	case OAF_RESULT_OBJECT:
+	case Bonobo_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (result->res._u.res_object, ev);
 		break;
-	case OAF_RESULT_NONE:
+	case Bonobo_RESULT_NONE:
                 retval = CORBA_OBJECT_NIL;
                 break;
 	default:
@@ -190,5 +189,5 @@ impl_OAF_ActivationCallback_report_activation_succeeded
         }
 
         /* destroy this object */
-        impl_OAF_ActivationCallback__destroy (servant, ev);
+        impl_Bonobo_ActivationCallback__destroy (servant, ev);
 }

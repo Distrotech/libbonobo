@@ -23,23 +23,23 @@
  *
  */
 
-#ifndef OAF_SERVREG_H
-#define OAF_SERVREG_H
+#ifndef BONOBO_ACTIVATION_REGISTER_H
+#define BONOBO_ACTIVATION_REGISTER_H
 
 #include <orbit/orbit.h>
-#include <liboaf/oaf.h>
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 
-OAF_RegistrationResult oaf_active_server_register (const char  *iid,
-						   CORBA_Object obj);
-void        oaf_active_server_unregister (const char  *iid, 
-					  CORBA_Object obj);
+Bonobo_RegistrationResult bonobo_activation_active_server_register (const char  *iid,
+                                                                 CORBA_Object obj);
+void        bonobo_activation_active_server_unregister (const char  *iid, 
+                                                        CORBA_Object obj);
 
-char       *oaf_make_registration_id     (const char *iid, 
-					  const char *display);
-
-
-const char *oaf_activation_iid_get       (void);
+char       *bonobo_activation_make_registration_id     (const char *iid, 
+                                                        const char *display);
 
 
-#endif /* OAF_SERVREG_H */
+const char *bonobo_activation_iid_get       (void);
+
+
+#endif /* BONOBO_ACTIVATION_REGISTER_H */
 

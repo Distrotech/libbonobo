@@ -31,6 +31,8 @@
 #ifndef BONOBO_ACTIVATION_BASE_SERVICE_H
 #define BONOBO_ACTIVATION_BASE_SERVICE_H
 
+#include <orbit/orbit.h>
+
 typedef struct {
 	const char *name;
 	const char *session_name;
@@ -60,9 +62,9 @@ struct _BonoboActivationBaseServiceRegistry {
 };
 
 typedef CORBA_Object (*BonoboActivationBaseServiceActivator) (const BonoboActivationBaseService *base_service,
-                                                 const char          **command,
-                                                 int                   ior_fd,
-                                                 CORBA_Environment    *ev);
+                                                              const char          **command,
+                                                              int                   ior_fd,
+                                                              CORBA_Environment    *ev);
 
 
 

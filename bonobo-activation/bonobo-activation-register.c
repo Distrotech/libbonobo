@@ -23,9 +23,12 @@
  *
  */
 
-#include "config.h"
+#include <config.h>
 
-#include "liboaf/liboaf-private.h"
+#include <bonobo-activation/bonobo-activation-register.h>
+#include <bonobo-activation/bonobo-activation-private.h>
+#include <bonobo-activation/bonobo-activation-init.h>
+
 #include <stdio.h>
 #include <unistd.h>
 
@@ -33,13 +36,13 @@ static gboolean check_registration = TRUE;
 static gboolean need_ior_printout  = TRUE;
 
 void
-oaf_timeout_reg_check_set (gboolean on)
+bonobo_activation_timeout_reg_check_set (gboolean on)
 {
         check_registration = on;
 }
 
 gboolean
-oaf_timeout_reg_check (gpointer data)
+bonobo_activation_timeout_reg_check (gpointer data)
 {
         if (!check_registration)
                 return FALSE;
@@ -48,8 +51,8 @@ oaf_timeout_reg_check (gpointer data)
                 g_error ("This process has not registered the required OafIID "
                          "your source code should register '%s'. If your code is "
                          "performing delayed registration and this message is trapped "
-                         "in error, see oaf_idle_reg_check_set.",
-                         oaf_activation_iid_get ());
+                         "in error, see bonobo_activation_idle_reg_check_set.",
+                         bonobo_activation_iid_get ());
         }
 
         return FALSE;
@@ -57,7 +60,7 @@ oaf_timeout_reg_check (gpointer data)
 
 
 /**
- * oaf_active_server_register:
+ * bonobo_activation_active_server_register:
  * @iid: IID of the server to register.
  * @obj: CORBA::Object to register.
  *
@@ -65,13 +68,13 @@ oaf_timeout_reg_check (gpointer data)
  *
  * Return value: status of the registration.
  */
-OAF_RegistrationResult
-oaf_active_server_register (const char *registration_id, 
+Bonobo_RegistrationResult
+bonobo_activation_active_server_register (const char *registration_id, 
                             CORBA_Object obj)
 {
-	OAF_ObjectDirectory od;
+	Bonobo_ObjectDirectory od;
 	CORBA_Environment ev;
-	OAF_RegistrationResult retval;
+	Bonobo_RegistrationResult retval;
 	const char *actid;
         const char *iid;
 
@@ -85,20 +88,20 @@ oaf_active_server_register (const char *registration_id,
 
 	CORBA_exception_init (&ev);
 
-	actid = oaf_activation_iid_get ();
+	actid = bonobo_activation_iid_get ();
 
-        if (actid && strcmp (actid, iid) == 0 && oaf_private) {
-                retval = OAF_REG_SUCCESS;
+        if (actid && strcmp (actid, iid) == 0 && bonobo_activation_private) {
+                retval = Bonobo_REG_SUCCESS;
         } else {
-                od = oaf_object_directory_get (oaf_username_get (),
-                                               oaf_hostname_get (),
-                                               NULL);
+                od = bonobo_activation_object_directory_get (bonobo_activation_username_get (),
+                                                             bonobo_activation_hostname_get (),
+                                                             NULL);
                 
                 if (CORBA_Object_is_nil (od, &ev)) {
-                        return OAF_REG_ERROR;
+                        return Bonobo_REG_ERROR;
                 }
                 
-                retval = OAF_ObjectDirectory_register_new (od, 
+                retval = Bonobo_ObjectDirectory_register_new (od, 
                                                            (char *) registration_id, 
                                                            obj, &ev);
         }
@@ -106,7 +109,7 @@ oaf_active_server_register (const char *registration_id,
 	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
 		char *iorstr;
 		FILE *fh;
-		int iorfd = oaf_ior_fd_get ();
+		int iorfd = bonobo_activation_ior_fd_get ();
 
 		need_ior_printout = FALSE;
 
@@ -119,7 +122,7 @@ oaf_active_server_register (const char *registration_id,
 		}
 
 		iorstr =
-			CORBA_ORB_object_to_string (oaf_orb_get (), obj, &ev);
+			CORBA_ORB_object_to_string (bonobo_activation_orb_get (), obj, &ev);
 
 		if (ev._major == CORBA_NO_EXCEPTION) {
 			fprintf (fh, "%s\n", iorstr);
@@ -132,7 +135,7 @@ oaf_active_server_register (const char *registration_id,
 			close (iorfd);
                 }
 	}
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
         else if (actid && need_ior_printout) {
                 g_message ("Unusual '%s' was activated, but "
                            "'%s' is needed", iid, actid);
@@ -141,7 +144,7 @@ oaf_active_server_register (const char *registration_id,
 
 	CORBA_exception_free (&ev);
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
         g_message ("Successfully registered `%s'", registration_id);
 #endif
 
@@ -150,26 +153,26 @@ oaf_active_server_register (const char *registration_id,
 
 
 /**
- * oaf_active_server_unregister:
+ * bonobo_activation_active_server_unregister:
  * @iid: IID of the server to unregister.
  * @obj: CORBA::Object to unregister.
  *
  * Unregisters @obj with @iid in the local OAF daemon.
  */
 void
-oaf_active_server_unregister (const char *iid, CORBA_Object obj)
+bonobo_activation_active_server_unregister (const char *iid, CORBA_Object obj)
 {
-	OAF_ObjectDirectory od;
+	Bonobo_ObjectDirectory od;
 	CORBA_Environment ev;
 	const char *actid;
 
-	actid = oaf_activation_iid_get ();
-	if(actid && strcmp (actid, iid) == 0 && oaf_private) {
+	actid = bonobo_activation_iid_get ();
+	if(actid && strcmp (actid, iid) == 0 && bonobo_activation_private) {
 		return;
         }
 
-	od = oaf_object_directory_get (oaf_username_get (), 
-                                       oaf_hostname_get (),
+	od = bonobo_activation_object_directory_get (bonobo_activation_username_get (), 
+                                       bonobo_activation_hostname_get (),
                                        NULL);
 
 	CORBA_exception_init (&ev);
@@ -177,14 +180,14 @@ oaf_active_server_unregister (const char *iid, CORBA_Object obj)
 		return;
         }
 
-	OAF_ObjectDirectory_unregister (od, (char *) iid, obj,
-					OAF_ObjectDirectory_UNREGISTER_NORMAL, &ev);
+	Bonobo_ObjectDirectory_unregister (od, (char *) iid, obj,
+					Bonobo_ObjectDirectory_UNREGISTER_NORMAL, &ev);
 	CORBA_exception_free (&ev);
 }
 
 
 char *
-oaf_make_registration_id (const char *iid, const char *display)
+bonobo_activation_make_registration_id (const char *iid, const char *display)
 {
         if (display == NULL) {
                 return g_strdup (iid);

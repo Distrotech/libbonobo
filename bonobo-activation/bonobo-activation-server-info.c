@@ -24,21 +24,25 @@
  */
 
 
-#include "oaf-util.h"
+#include <config.h>
+
+#include <bonobo-activation/bonobo-activation-server-info.h>
+
 #include <string.h>
 
 /**
- * oaf_server_info_prop_find:
+ * bonobo_server_info_prop_find:
  * @server: the server where to seek the data.
  * @prop_name: the data to seek in the server.
  *
  * Tries to find a server with the given property. Returns
  * NULL if not found.
  *
- * Return value: a pointer to the %OAF_Property structure.
+ * Return value: a pointer to the %Bonobo_Property structure.
  */
-OAF_Property *
-oaf_server_info_prop_find (OAF_ServerInfo * server, const char *prop_name)
+Bonobo_Property *
+bonobo_server_info_prop_find (Bonobo_ServerInfo *server,
+                           const char *prop_name)
 {
 	int i;
 
@@ -51,7 +55,7 @@ oaf_server_info_prop_find (OAF_ServerInfo * server, const char *prop_name)
 }
 
 /**
- * oaf_server_info_prop_lookup:
+ * bonobo_server_info_prop_lookup:
  * @server: 
  * @propname:
  * @i18n_languages:
@@ -60,11 +64,11 @@ oaf_server_info_prop_find (OAF_ServerInfo * server, const char *prop_name)
  * Return value: 
  */
 const char *
-oaf_server_info_prop_lookup (OAF_ServerInfo * server, const char *prop_name,
+bonobo_server_info_prop_lookup (Bonobo_ServerInfo * server, const char *prop_name,
 			     GSList * i18n_languages)
 {
 	GSList *cur;
-	OAF_Property *prop;
+	Bonobo_Property *prop;
         const char *retval;
         char *prop_name_buf;
         char short_lang[3];
@@ -73,14 +77,14 @@ oaf_server_info_prop_lookup (OAF_ServerInfo * server, const char *prop_name,
 		for (cur = i18n_languages; cur; cur = cur->next) {
                         prop_name_buf = g_strdup_printf ("%s-%s", prop_name, (char *) cur->data);
 
-			retval = oaf_server_info_prop_lookup (server, prop_name_buf, NULL);
+			retval = bonobo_server_info_prop_lookup (server, prop_name_buf, NULL);
                         g_free (prop_name_buf);
 
                         if (!retval) {
                                 if (strlen ((char *) cur->data) > 2) {
                                         strncpy (short_lang, (char *) cur->data, 2);
                                         prop_name_buf = g_strdup_printf ("%s-%s", prop_name, short_lang);
-                                        retval = oaf_server_info_prop_lookup (server, prop_name_buf, NULL);
+                                        retval = bonobo_server_info_prop_lookup (server, prop_name_buf, NULL);
                                         g_free (prop_name_buf);
                                 }
                         }
@@ -90,8 +94,8 @@ oaf_server_info_prop_lookup (OAF_ServerInfo * server, const char *prop_name,
 		}
 	} 
 
-        prop = oaf_server_info_prop_find (server, prop_name);
-        if (prop != NULL && prop->v._d == OAF_P_STRING)
+        prop = bonobo_server_info_prop_find (server, prop_name);
+        if (prop != NULL && prop->v._d == Bonobo_P_STRING)
                 return prop->v._u.value_string;
 
 	return NULL;
@@ -114,20 +118,20 @@ CORBA_sequence_CORBA_string_copy (CORBA_sequence_CORBA_string *copy, const CORBA
 }
 
 void
-OAF_PropertyValue_copy (OAF_PropertyValue *copy, const OAF_PropertyValue *original)
+Bonobo_PropertyValue_copy (Bonobo_PropertyValue *copy, const Bonobo_PropertyValue *original)
 {
 	copy->_d = original->_d;
 	switch (original->_d) {
-	case OAF_P_STRING:
+	case Bonobo_P_STRING:
 		copy->_u.value_string =	CORBA_string_dup (original->_u.value_string);
 		break;
-	case OAF_P_NUMBER:
+	case Bonobo_P_NUMBER:
 		copy->_u.value_number =	original->_u.value_number;
 		break;
-	case OAF_P_BOOLEAN:
+	case Bonobo_P_BOOLEAN:
 		copy->_u.value_boolean = original->_u.value_boolean;
 		break;
-	case OAF_P_STRINGV:
+	case Bonobo_P_STRINGV:
 		CORBA_sequence_CORBA_string_copy
 			(&copy->_u.value_stringv,
 			 &original->_u.value_stringv);
@@ -138,30 +142,30 @@ OAF_PropertyValue_copy (OAF_PropertyValue *copy, const OAF_PropertyValue *origin
 }
 
 void
-OAF_Property_copy (OAF_Property *copy, const OAF_Property *original)
+Bonobo_Property_copy (Bonobo_Property *copy, const Bonobo_Property *original)
 {
 	copy->name = CORBA_string_dup (original->name);
-	OAF_PropertyValue_copy (&copy->v, &original->v);
+	Bonobo_PropertyValue_copy (&copy->v, &original->v);
 }
 
 void
-CORBA_sequence_OAF_Property_copy (CORBA_sequence_OAF_Property *copy, const CORBA_sequence_OAF_Property *original)
+CORBA_sequence_Bonobo_Property_copy (CORBA_sequence_Bonobo_Property *copy, const CORBA_sequence_Bonobo_Property *original)
 {
 	int i;
 
 	copy->_maximum = original->_length;
 	copy->_length = original->_length;
-	copy->_buffer = CORBA_sequence_OAF_Property_allocbuf (original->_length);
+	copy->_buffer = CORBA_sequence_Bonobo_Property_allocbuf (original->_length);
 
 	for (i = 0; i < original->_length; i++) {
-		OAF_Property_copy (&copy->_buffer[i], &original->_buffer[i]);
+		Bonobo_Property_copy (&copy->_buffer[i], &original->_buffer[i]);
 	}
 
 	CORBA_sequence_set_release (copy, TRUE);
 }
 
 void
-OAF_ServerInfo_copy (OAF_ServerInfo *copy, const OAF_ServerInfo *original)
+Bonobo_ServerInfo_copy (Bonobo_ServerInfo *copy, const Bonobo_ServerInfo *original)
 {
 	copy->iid = CORBA_string_dup (original->iid);
 	copy->server_type = CORBA_string_dup (original->server_type);
@@ -169,25 +173,25 @@ OAF_ServerInfo_copy (OAF_ServerInfo *copy, const OAF_ServerInfo *original)
 	copy->username = CORBA_string_dup (original->username);
 	copy->hostname = CORBA_string_dup (original->hostname);
 	copy->domain = CORBA_string_dup (original->domain);
-	CORBA_sequence_OAF_Property_copy (&copy->props, &original->props);
+	CORBA_sequence_Bonobo_Property_copy (&copy->props, &original->props);
 }
 
 
 /**
- * OAF_ServerInfo_duplicate:
+ * Bonobo_ServerInfo_duplicate:
  * @original: %ServerInfo to copy.
  *
  * The return value should befreed with CORBA_free (). 
  *
  * Return value: a newly allocated copy of @original.
  */
-OAF_ServerInfo *
-OAF_ServerInfo_duplicate (const OAF_ServerInfo *original)
+Bonobo_ServerInfo *
+Bonobo_ServerInfo_duplicate (const Bonobo_ServerInfo *original)
 {
-	OAF_ServerInfo *copy;
+	Bonobo_ServerInfo *copy;
 
-	copy = OAF_ServerInfo__alloc ();
-	OAF_ServerInfo_copy (copy, original);
+	copy = Bonobo_ServerInfo__alloc ();
+	Bonobo_ServerInfo_copy (copy, original);
 	
 	return copy;
 }

@@ -26,13 +26,17 @@
 /* This is part of the per-app CORBA bootstrapping - we use this to get 
    hold of a running metaserver and such */
 
+
+#include <bonobo-activation/bonobo-activation-base-service.h>
+#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/bonobo-activation-private.h>
+
+
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
 #include <string.h>
-
-#include "liboaf-private.h"
-#include "oaf-i18n.h"
 #include <limits.h>
 #include <errno.h>
 #include <unistd.h>
@@ -49,7 +53,7 @@ static GSList *registries = NULL;
 typedef struct
 {
 	int priority;
-	const OAFBaseServiceRegistry *registry;
+	const BonoboActivationBaseServiceRegistry *registry;
 	gpointer user_data;
 }
 RegistryInfo;
@@ -57,7 +61,7 @@ RegistryInfo;
 typedef struct
 {
 	int priority;
-	OAFBaseServiceActivator activator;
+	BonoboActivationBaseServiceActivator activator;
 }
 ActivatorInfo;
 
@@ -73,8 +77,8 @@ ri_compare (gconstpointer a, gconstpointer b)
 }
 
 void
-oaf_registration_location_add (const OAFBaseServiceRegistry *registry,
-			       int priority, gpointer user_data)
+bonobo_activation_base_service_registry_add (const BonoboActivationBaseServiceRegistry *registry,
+                                             int priority, gpointer user_data)
 {
 	RegistryInfo *new_ri;
 
@@ -89,8 +93,8 @@ oaf_registration_location_add (const OAFBaseServiceRegistry *registry,
 }
 
 CORBA_Object
-oaf_registration_check (const OAFBaseService *base_service,
-			CORBA_Environment *ev)
+bonobo_activation_base_service_check (const BonoboActivationBaseService *base_service,
+                                      CORBA_Environment *ev)
 {
 	GSList *link;
 	CORBA_Object retval = CORBA_OBJECT_NIL;
@@ -118,7 +122,7 @@ oaf_registration_check (const OAFBaseService *base_service,
 	}
 
 	if (ior) {
-		retval = CORBA_ORB_string_to_object (oaf_orb_get (), ior, ev);
+		retval = CORBA_ORB_string_to_object (bonobo_activation_orb_get (), ior, ev);
 		if (ev->_major != CORBA_NO_EXCEPTION)
 			retval = CORBA_OBJECT_NIL;
 
@@ -130,7 +134,7 @@ oaf_registration_check (const OAFBaseService *base_service,
 
 /*dumb marshalling hack */
 static void
-oaf_registration_iterate (const OAFBaseService *base_service,
+bonobo_activation_registration_iterate (const BonoboActivationBaseService *base_service,
 			  CORBA_Object obj, CORBA_Environment *ev,
 			  gulong offset, int nargs)
 {
@@ -138,7 +142,7 @@ oaf_registration_iterate (const OAFBaseService *base_service,
 	char *ior = NULL;
 
 	if (nargs == 4)
-		ior = CORBA_ORB_object_to_string (oaf_orb_get (), obj, ev);
+		ior = CORBA_ORB_object_to_string (bonobo_activation_orb_get (), obj, ev);
 
 	for (link = registries; link; link = link->next) {
 		RegistryInfo *ri;
@@ -168,52 +172,53 @@ oaf_registration_iterate (const OAFBaseService *base_service,
 static int lock_count = 0;
 
 static void
-oaf_registries_lock (CORBA_Environment *ev)
+bonobo_activation_registries_lock (CORBA_Environment *ev)
 {
 	if (lock_count == 0)
-		oaf_registration_iterate (NULL, CORBA_OBJECT_NIL, ev,
+		bonobo_activation_registration_iterate (NULL, CORBA_OBJECT_NIL, ev,
 					  G_STRUCT_OFFSET
-					  (OAFBaseServiceRegistry, lock), 2);
+					  (BonoboActivationBaseServiceRegistry, lock), 2);
 	lock_count++;
 }
 
 static void
-oaf_registries_unlock (CORBA_Environment *ev)
+bonobo_activation_registries_unlock (CORBA_Environment *ev)
 {
 	lock_count--;
 	if (lock_count == 0)
-		oaf_registration_iterate (NULL, CORBA_OBJECT_NIL, ev,
+		bonobo_activation_registration_iterate (NULL, CORBA_OBJECT_NIL, ev,
 					  G_STRUCT_OFFSET
-					  (OAFBaseServiceRegistry, unlock),
+					  (BonoboActivationBaseServiceRegistry, unlock),
 					  2);
 }
 
 void
-oaf_registration_unset (const OAFBaseService *base_service,
+bonobo_activation_base_service_unset (const BonoboActivationBaseService *base_service,
 			CORBA_Object obj, CORBA_Environment *ev)
 {
-	oaf_registries_lock (ev);
-	oaf_registration_iterate (base_service, obj, ev,
-				  G_STRUCT_OFFSET (OAFBaseServiceRegistry,
+	bonobo_activation_registries_lock (ev);
+	bonobo_activation_registration_iterate (base_service, obj, ev,
+				  G_STRUCT_OFFSET (BonoboActivationBaseServiceRegistry,
 						   unregister), 4);
-	oaf_registries_unlock (ev);
+	bonobo_activation_registries_unlock (ev);
 }
 
 void
-oaf_registration_set (const OAFBaseService *base_service,
+bonobo_activation_base_service_set (const BonoboActivationBaseService *base_service,
 		      CORBA_Object obj, CORBA_Environment *ev)
 {
-	oaf_registries_lock (ev);
-	oaf_registration_iterate (base_service, obj, ev,
-				  G_STRUCT_OFFSET (OAFBaseServiceRegistry,
+	bonobo_activation_registries_lock (ev);
+	bonobo_activation_registration_iterate (base_service, obj, ev,
+				  G_STRUCT_OFFSET (BonoboActivationBaseServiceRegistry,
 						   register_new), 4);
-	oaf_registries_unlock (ev);
+	bonobo_activation_registries_unlock (ev);
 }
 
 
-const char *oaf_ac_cmd[] =
-	{ "oafd", "--ac-activate", "--ior-output-fd=%d", NULL };
-const char *oaf_od_cmd[] = { "oafd", "--ior-output-fd=%d", NULL };
+const char *bonobo_activation_ac_cmd[] =
+	{ "bonobo-activation-server", "--ac-activate", "--ior-output-fd=%d", NULL };
+const char *bonobo_activation_od_cmd[] = 
+        { "bonobo-activation-server", "--ior-output-fd=%d", NULL };
 
 struct SysServerInstance
 {
@@ -230,16 +235,16 @@ struct SysServer
 }
 activatable_servers[] =
 {
-	{"IDL:OAF/ActivationContext:1.0", (const char **) oaf_ac_cmd,
+	{"IDL:Bonobo/ActivationContext:1.0", (const char **) bonobo_activation_ac_cmd,
          2, CORBA_OBJECT_NIL}, 
-        {"IDL:OAF/ObjectDirectory:1.0", (const char **) oaf_od_cmd,
+        {"IDL:Bonobo/ObjectDirectory:1.0", (const char **) bonobo_activation_od_cmd,
          1, CORBA_OBJECT_NIL},
 	{ NULL}
 };
 
 #define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
 static CORBA_Object
-existing_check (const OAFBaseService *base_service, struct SysServer *ss)
+existing_check (const BonoboActivationBaseService *base_service, struct SysServer *ss)
 {
 	GSList *link;
 
@@ -264,7 +269,7 @@ existing_check (const OAFBaseService *base_service, struct SysServer *ss)
 }
 
 static void
-oaf_existing_set (const OAFBaseService *base_service, struct SysServer *ss,
+bonobo_activation_existing_set (const BonoboActivationBaseService *base_service, struct SysServer *ss,
 	          CORBA_Object obj, CORBA_Environment *ev)
 {
 	GSList *link;
@@ -313,7 +318,7 @@ ai_compare (gconstpointer a, gconstpointer b)
 }
 
 void
-oaf_registration_activator_add (OAFBaseServiceActivator activator, 
+bonobo_activation_base_service_activator_add (BonoboActivationBaseServiceActivator activator, 
                                 int priority)
 {
 	ActivatorInfo *new_act;
@@ -326,7 +331,7 @@ oaf_registration_activator_add (OAFBaseServiceActivator activator,
 }
 
 static CORBA_Object
-oaf_activators_use (const OAFBaseService *base_service, const char **cmd,
+bonobo_activation_activators_use (const BonoboActivationBaseService *base_service, const char **cmd,
 		    int fd_arg, CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
@@ -344,7 +349,7 @@ oaf_activators_use (const OAFBaseService *base_service, const char **cmd,
 }
 
 static CORBA_Object
-oaf_service_get_internal (const OAFBaseService *base_service,
+bonobo_activation_service_get_internal (const BonoboActivationBaseService *base_service,
                           gboolean              existing_only,
                           CORBA_Environment    *ev)
 {
@@ -370,9 +375,9 @@ oaf_service_get_internal (const OAFBaseService *base_service,
 	if (!CORBA_Object_non_existent (retval, ev))
 		goto out;
 
-	oaf_registries_lock (ev);
+	bonobo_activation_registries_lock (ev);
 
-	retval = oaf_registration_check (base_service, &myev);
+	retval = bonobo_activation_base_service_check (base_service, &myev);
 	ne = CORBA_Object_non_existent (retval, &myev);
 	if (ne && !existing_only) {
 		CORBA_Object race_condition;
@@ -380,25 +385,25 @@ oaf_service_get_internal (const OAFBaseService *base_service,
 		CORBA_Object_release (retval, &myev);
                 
 		retval =
-			oaf_activators_use (base_service,
+			bonobo_activation_activators_use (base_service,
 					    activatable_servers[i].cmd,
 					    activatable_servers[i].fd_arg,
 					    &important_error_ev);
 
-		race_condition = oaf_registration_check (base_service, &myev);
+		race_condition = bonobo_activation_base_service_check (base_service, &myev);
 
 		if (!CORBA_Object_non_existent (race_condition, &myev)) {
 			CORBA_Object_release (retval, &myev);
 			retval = race_condition;
 		} else if (!CORBA_Object_is_nil (retval, &myev)) {
-			oaf_registration_set (base_service, retval, &myev);
+			bonobo_activation_base_service_set (base_service, retval, &myev);
                 }
 	}
 
-	oaf_registries_unlock (ev);
+	bonobo_activation_registries_unlock (ev);
 
 	if (!CORBA_Object_non_existent (retval, ev))
-		oaf_existing_set (base_service, &activatable_servers[i], retval, ev);
+		bonobo_activation_existing_set (base_service, &activatable_servers[i], retval, ev);
 
       out:
         /* If we overwrote ev with some stupid junk, replace
@@ -416,14 +421,14 @@ oaf_service_get_internal (const OAFBaseService *base_service,
 }
 
 CORBA_Object
-oaf_service_get (const OAFBaseService *base_service)
+bonobo_activation_service_get (const BonoboActivationBaseService *base_service)
 {
         CORBA_Environment ev;
         CORBA_Object obj;
         
         CORBA_exception_init (&ev);
         
-        obj = oaf_service_get_internal (base_service, FALSE, &ev);
+        obj = bonobo_activation_service_get_internal (base_service, FALSE, &ev);
 
         CORBA_exception_free (&ev);
 
@@ -431,11 +436,11 @@ oaf_service_get (const OAFBaseService *base_service)
 }
 
 CORBA_Object
-oaf_internal_service_get_extended (const OAFBaseService *base_service,
+bonobo_activation_internal_service_get_extended (const BonoboActivationBaseService *base_service,
                                    gboolean              existing_only,
                                    CORBA_Environment    *ev)
 {
-        return oaf_service_get_internal (base_service, existing_only, ev);
+        return bonobo_activation_service_get_internal (base_service, existing_only, ev);
 }
 
 
@@ -443,7 +448,7 @@ oaf_internal_service_get_extended (const OAFBaseService *base_service,
 static int lock_fd = -1;
 
 static void
-rloc_file_lock (const OAFBaseServiceRegistry *registry, 
+rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry, 
                 gpointer user_data)
 {
 	char *fn;
@@ -486,7 +491,7 @@ rloc_file_lock (const OAFBaseServiceRegistry *registry,
 }
 
 static void
-rloc_file_unlock (const OAFBaseServiceRegistry *registry, 
+rloc_file_unlock (const BonoboActivationBaseServiceRegistry *registry, 
                   gpointer user_data)
 {
         struct flock lock;
@@ -494,7 +499,7 @@ rloc_file_unlock (const OAFBaseServiceRegistry *registry,
 	char *fn;
 
 
-	fn = oaf_alloca (sizeof ("/tmp/orbit-%s/oaf-register.lock") + 32);
+	fn = bonobo_activation_alloca (sizeof ("/tmp/orbit-%s/oaf-register.lock") + 32);
 	sprintf (fn, "/tmp/orbit-%s/oaf-register.lock", g_get_user_name ());
 
 	unlink (fn);
@@ -524,8 +529,8 @@ filename_fixup (char *fn)
 }
 
 static char *
-rloc_file_check (const OAFBaseServiceRegistry *registry,
-		 const OAFBaseService *base_service, int *ret_distance,
+rloc_file_check (const BonoboActivationBaseServiceRegistry *registry,
+		 const BonoboActivationBaseService *base_service, int *ret_distance,
 		 gpointer user_data)
 {
 	FILE *fh;
@@ -578,8 +583,8 @@ rloc_file_check (const OAFBaseServiceRegistry *registry,
 }
 
 static void
-rloc_file_register (const OAFBaseServiceRegistry *registry, const char *ior,
-		    const OAFBaseService *base_service,
+rloc_file_register (const BonoboActivationBaseServiceRegistry *registry, const char *ior,
+		    const BonoboActivationBaseService *base_service,
 		    gpointer user_data)
 {
 	char *fn, *fn2, *namecopy;
@@ -612,9 +617,9 @@ rloc_file_register (const OAFBaseServiceRegistry *registry, const char *ior,
 }
 
 static void
-rloc_file_unregister (const OAFBaseServiceRegistry *registry, 
+rloc_file_unregister (const BonoboActivationBaseServiceRegistry *registry, 
                       const char *ior,
-		      const OAFBaseService *base_service,
+		      const BonoboActivationBaseService *base_service,
 		      gpointer user_data)
 {
 	char *fn, *fn2;
@@ -649,7 +654,7 @@ rloc_file_unregister (const OAFBaseServiceRegistry *registry,
         }
 }
 
-static const OAFBaseServiceRegistry rloc_file = {
+static const BonoboActivationBaseServiceRegistry rloc_file = {
 	rloc_file_lock,
 	rloc_file_unlock,
 	rloc_file_check,
@@ -658,9 +663,9 @@ static const OAFBaseServiceRegistry rloc_file = {
 };
 
 void
-oaf_rloc_file_register (void)
+bonobo_activation_rloc_file_register (void)
 {
-	oaf_registration_location_add (&rloc_file, 0, NULL);
+	bonobo_activation_base_service_registry_add (&rloc_file, 0, NULL);
 }
 
 
