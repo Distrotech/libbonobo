@@ -72,9 +72,12 @@ BUILT_SOURCES= $(IDL_HEADER_FILES) $(IDL_COMMONS) $(IDL_SKELS) $(IDL_STUBS) \
 	$(NULL)
 
 
-%.h %-stubs.c %-skels.c %-common.c %-imodule.c %-skelimpl.c: $(IDL_DIR)/%.idl $(ORBIT_IDL)
+%.h %-stubs.c %-skels.c %-common.c %-imodule.c %-skelimpl.c: $(IDL_DIR)%.idl $(ORBIT_IDL)
+	echo "top_srcdir: $(top_srcdir)"
+	echo "IDL_DIR: $(IDL_DIR)"
+	echo "IDL file: $<"
 	-(rm -f $(*).h $(*)-stubs.c $(*)-skels.c $(*)-common.c $(*)-imodule.c $(*)-skelimpl.c || true) > /dev/null
-	$(ORBIT_IDL) $(IDL_FLAGS) "-D__$(*)_COMPILATION" --deps .deps/$*.idl.P $<
+	$(ORBIT_IDL) $(IDL_FLAGS) "-D__$(*)_COMPILATION" --deps $(*D)/.deps/$(*F).idl.P $<
 
 
 if MAINTAINER_MODE

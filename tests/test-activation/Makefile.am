@@ -1,12 +1,12 @@
 NULL=
 
 noinst_PROGRAMS=			\
-	bonobo-activation-empty-server 	\
 	bonobo-activation-test		\
 	bonobo-activation-test-async	\
 	$(NULL)
 
 bin_PROGRAMS=				\
+	bonobo-activation-empty-server 	\
 	bonobo-activation-run-query	\
 	$(NULL)
 
@@ -54,12 +54,12 @@ INCLUDES=-I$(top_srcdir) -I$(top_builddir) $(UTILS_CFLAGS)
 
 LDADD=../bonobo-activation/libbonobo-activation.la $(UTILS_LIBS)
 
-serverfiles=empty.server
+serverfiles=empty.server broken.server
 
 emptydatadir=$(libdir)/bonobo/servers
 emptydata_DATA=$(serverfiles)
 
-EXTRA_DIST=empty.idl $(serverfiles) broken.server
+EXTRA_DIST=empty.idl $(serverfiles)
 
 check:
 	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test:$$BONOBO_ACTIVATION_PATH" PATH="$(top_builddir)/test:$$PATH" $(top_builddir)/test/bonobo-activation-test
