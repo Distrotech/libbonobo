@@ -1,13 +1,13 @@
 #!@PERL_PATH@
 # 
-# oaf-slay
+# bonobo-slay
 # 
-# Kills OAF processes
+# Kills bonobo processes
 #
 # Return code of -1 (255) returned if usage error.
-# Return code of 1 indicates oaf processes were running
+# Return code of 1 indicates bonobo processes were running
 #   when script was run.  
-# Return code of 0 indicates no oaf processes were
+# Return code of 0 indicates no bonobo processes were
 #   running when script was run.
 #
 use             Getopt::Std;
@@ -28,15 +28,18 @@ if ($opt_l && $opt_s) {
    $usage_error = 1;
 }
 
+$regexp = $ARGV[0];
+
 # Print usage if necessary.
 #
 if ($usage_error == 1 || $opt_h) {
 	print "\n";
-	print "Usage : oaf-slay [-hls]\n";
-	print "\tKill OAF processes still running.\n";
+	print "Usage : bonobo-slay [-hls] [regexp]\n";
+	print "\tKill Bonobo processes still running.\n";
 	print "\t -h Print this help message.\n";
 	print "\t -l List processes running, but do not kill them.  Not valid with -s\n";
 	print "\t -s Silent.  Kill processes quietly\n";
+	print "\t [regexp] only kill proccesses matching this\n";
 	print "\n";
 	exit(-1);
 }
@@ -49,23 +52,23 @@ chomp($username);
 @IF_POSIX_PS@ $ps_cmd = "@PS_PATH@ -U $username -opid,args";
 @IF_BSD_PS@   $ps_cmd = "@PS_PATH@ -U $username -xww -opid,command";
 
-# get OAF files
+# get Bonobo files
 #
-@oaf_dirs = ( "@prefix@/lib/bonobo/servers" );
-foreach $dir (split(':', $ENV{'OAF_INFO_PATH'})) {
+@bonobo_dirs = ( "@prefix@/lib/bonobo/servers" );
+foreach $dir (split(':', $ENV{'BONOBO_ACTIVATION_INFO_PATH'})) {
 	if (-d $dir) {
-		push @oaf_dirs, $dir;
+		push @bonobo_dirs, $dir;
 	}
 }
-foreach $dir (split(':', $ENV{'GNOME_PATH'})) {
+foreach $dir (split(':', $ENV{'GNOME2_PATH'})) {
 	if (-d "$dir/lib/bonobo/servers") {
-		push @oaf_dirs, "$dir/lib/bonobo/servers";
+		push @bonobo_dirs, "$dir/lib/bonobo/servers";
 	}
 }
 
-foreach $dir (@oaf_dirs) {
+foreach $dir (@bonobo_dirs) {
 	opendir(DIR, $dir) || die "\nCan not open directory $dir\n\t$!\n\n";
-	push @oaf_files, map ("$dir/$_", readdir(DIR));
+	push @bonobo_files, map ("$dir/$_", readdir(DIR));
 	closedir DIR;
 }
 
@@ -75,13 +78,13 @@ $process_exists = 0;
 $first_time     = 1;
 
 # Loop until no more processes are found.  This typically loops only once,
-# but if an OAF process is launched while this script is running an OAF
+# but if an Bonobo process is launched while this script is running an Bonobo
 # process can be left behind and be caught on the second loop, etc.
 #
 do {
 	# Initialize variables.
 	#
-	@files        = @oaf_files;
+	@files        = @bonobo_files;
 	@list_array   = ();
 	@process_pids = ();
 	@file_process = ();
@@ -91,7 +94,7 @@ do {
 	#
 	@ps_result    = `$ps_cmd`;
 
-	# Loop through files, and see if any OAF processes are running.  If
+	# Loop through files, and see if any Bonobo processes are running.  If
 	# so, then build the @list_array and @process_pids arrays.
 	# @list_array contains the process names
 	# @process_pids contains the process IDs
@@ -114,7 +117,8 @@ do {
 
 					# bonobo-activation-server needs to be last.
 					#
-					if ($line ne "bonobo-activation-server") {
+					if ($line ne "bonobo-activation-server" and
+					    $regexp && $line =~m/$regexp/) {
 						push @file_process, $line;
 					}
 				} #end while(<FILE>)
@@ -123,13 +127,15 @@ do {
 		}
 	}
 
-	# Add bonobo-activation-server so that it is last.
-	#
- 	push @file_process, "bonobo-activation-server"; 
+	#   Add bonobo-activation-server so that it is last,
+	# but only if we're killing without a regexp
+	if (!$regexp) {
+	 	push @file_process, "bonobo-activation-server";
+	}
 
 	foreach $filep (@file_process) {
 
-		if (not($filep =~m/^OAFIID:/)) {
+		if (not($filep =~m/^BonoboIID:/)) {
 
 			# Search through @ps_result and look for matches
 			#
@@ -161,7 +167,7 @@ do {
 
 					print "\n";
 					print "NOTE:  Killing these processes may affect other applications\n";
-					print "on the system that use OAF and bonobo.\n"; 
+					print "on the system that use bonobo.\n"; 
 				}
 				print "\n";
 				$first_time = 0;
