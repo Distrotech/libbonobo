@@ -1,3 +1,8 @@
+2004-08-11  Alexander Larsson  <alexl@redhat.com>
+
+	* bonobo-activation/bonobo-activation-get-language-list.c (read_aliases):
+	Use less memory for alias tables.
+
 2004-08-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* activation-server/client.c: (add_load_path), (remove_load_path),

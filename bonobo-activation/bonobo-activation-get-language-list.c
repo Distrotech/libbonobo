@@ -47,18 +47,34 @@ read_aliases (char *file)
     return;
   while (fgets (buf,256,fp))
     {
-      char *p;
+      char *p, *shared_p, *key, *val;
 	g_strstrip(buf);
 	if (buf[0]=='#' || buf[0]=='\0')
 		continue;
 	p = strtok (buf,"\t ");
 	if (!p)
-	continue;
+	  continue;
 	p = strtok (NULL,"\t ");
 	if(!p)
-	continue;
-	if (!g_hash_table_lookup (alias_table, buf))
-	g_hash_table_insert (alias_table, g_strdup(buf), g_strdup(p));
+	  continue;
+	/* To save memory we only store each locale string once in the
+	 * hash-table (as a key). The value when you look up this key is
+	 * the same string as the key for the hashtable entry with that
+	 * string. If the value is NULL the key has no alias.
+	 */
+	val = NULL;
+	if (!g_hash_table_lookup_extended (alias_table, buf, NULL, (gpointer *)&val)) {
+	  g_hash_table_insert (alias_table, g_strdup(buf), NULL);
+	}
+	if (val == NULL) {
+	  /* There was no existing alias value for this locale */
+	  
+	  if (!g_hash_table_lookup_extended (alias_table, p, (gpointer *)&shared_p, NULL)) {
+	    shared_p = g_strdup(p);
+	    g_hash_table_insert (alias_table, shared_p, NULL);
+	  }
+	  g_hash_table_insert (alias_table, buf, shared_p);
+	}
     }
 	fclose (fp);
 }
