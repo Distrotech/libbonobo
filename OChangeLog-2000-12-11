@@ -1,3 +1,7 @@
+1999-09-17  Kjartan Maraas  <kmaraas@online.no>
+
+	* configure.in: Added "da" to ALL_LINGUAS.
+	
 1999-09-16  Michael Meeks  <michael@nuclecu.unam.mx>
 
 	* bonobo/gnome-canvas-component.c: include stdio.h
