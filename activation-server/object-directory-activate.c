@@ -126,7 +126,7 @@ od_server_activate_exe (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 	/* Munge the args */
 	args = oaf_alloca (36 * sizeof (char *));
 	for (i = 0, ctmp = ctmp2 = si->location_info; i < 32; i++) {
-		while (*ctmp2 && !isspace (*ctmp2))
+		while (*ctmp2 && !isspace ((guchar) *ctmp2))
 			ctmp2++;
 		if (!*ctmp2)
 			break;
@@ -136,13 +136,13 @@ od_server_activate_exe (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 		args[i][ctmp2 - ctmp] = '\0';
 
 		ctmp = ctmp2;
-		while (*ctmp2 && isspace (*ctmp2))
+		while (*ctmp2 && isspace ((guchar) *ctmp2))
 			ctmp2++;
 		if (!*ctmp2)
 			break;
 		ctmp = ctmp2;
 	}
-	if (!isspace (*ctmp) && i < 32)
+	if (!isspace ((guchar) *ctmp) && i < 32)
 		args[i++] = ctmp;
 
 	extra_arg =

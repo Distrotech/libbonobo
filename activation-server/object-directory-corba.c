@@ -247,16 +247,15 @@ update_registry (impl_POA_OAF_ObjectDirectory *servant)
         }
 
         if (must_load) {
-                servant->attr_servers._buffer =
-                        OAF_ServerInfo_load (servant->registry_source_directories,
-                                             &servant->attr_servers._length,
-                                             &servant->by_iid,
-                                             g_get_user_name (),
-                                             servant->attr_hostID,
-                                             servant->attr_domain);
+                OAF_ServerInfo_load (servant->registry_source_directories,
+                                     &servant->attr_servers,
+                                     &servant->by_iid,
+                                     servant->attr_hostID,
+                                     servant->attr_domain);
+
                 servant->time_list_changed = time (NULL);
 
-#if defined(OAF_DEBUG)
+#ifdef OAF_DEBUG
                 od_dump_list (servant);
 #endif
         }

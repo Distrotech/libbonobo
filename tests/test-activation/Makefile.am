@@ -61,10 +61,7 @@ emptydata_DATA=$(oaffiles)
 
 bin_SCRIPTS=oaf-slay
 
-oaf-slay: $(srcdir)/oaf-slay.tmpl
-	sed 's|@oafdir@|'$(pkgdatadir)'|g' < $< > $@
-
-EXTRA_DIST=empty.idl oaf-slay.tmpl $(oaffiles) broken.oafinfo
+EXTRA_DIST=empty.idl $(oaffiles) broken.oafinfo oaf-slay
 
 check:
 	OAF_INFO_PATH="$(top_srcdir)/test:$$OAF_INFO_PATH" PATH="$(top_builddir)/test:$$PATH" $(top_builddir)/test/oaf-test-client

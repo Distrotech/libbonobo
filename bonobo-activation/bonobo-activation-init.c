@@ -173,14 +173,29 @@ oaf_domain_get (void)
 CORBA_Object
 oaf_activation_context_get (void)
 {
-	OAFRegistrationCategory regcat;
+	OAFBaseService base_service = {};
 
-	memset (&regcat, 0, sizeof (regcat));
-	regcat.name = "IDL:OAF/ActivationContext:1.0";
-	regcat.session_name = oaf_session_name_get ();
-	regcat.domain = "session";
+	base_service.name = "IDL:OAF/ActivationContext:1.0";
+	base_service.session_name = oaf_session_name_get ();
+	base_service.domain = "session";
 
-	return oaf_service_get (&regcat);
+	return oaf_service_get (&base_service);
+}
+
+CORBA_Object
+oaf_object_directory_get (const char *username,
+                          const char *hostname,
+                          const char *domain)
+{
+        OAFBaseService base_service = {};
+
+        base_service.name = "IDL:OAF/ObjectDirectory:1.0";
+        base_service.session_name = oaf_session_name_get ();
+        base_service.username = username;
+        base_service.hostname = hostname;
+        base_service.domain = domain;
+        
+        return oaf_service_get (&base_service);
 }
 
 static char *oaf_od_ior = NULL;
@@ -188,6 +203,7 @@ static int oaf_ior_fd = 1;
 static char *oaf_activate_iid = NULL;
 
 struct poptOption oaf_popt_options[] = {
+  {NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
   {"oaf-od-ior", '\0', POPT_ARG_STRING, &oaf_od_ior, 0,
    N_("Object directory to use when registering servers"), "IOR"},
   {"oaf-ior-fd", '\0', POPT_ARG_INT, &oaf_ior_fd, 0,
@@ -213,19 +229,20 @@ oaf_ior_fd_get (void)
 
 /* If it is specified on the command line, it overrides everything else */
 static char *
-cmdline_check (const OAFRegistrationLocation * regloc,
-	       const OAFRegistrationCategory * regcat, int *ret_distance,
+cmdline_check (const OAFBaseServiceRegistry *registry,
+	       const OAFBaseService *base_service,
+               int *distance,
 	       gpointer user_data)
 {
-	if (!strcmp (regcat->name, "IDL:OAF/ObjectDirectory:1.0")) {
-		*ret_distance = 0;
+	if (!strcmp (base_service->name, "IDL:OAF/ObjectDirectory:1.0")) {
+		*distance = 0;
 		return g_strdup (oaf_od_ior?oaf_od_ior:getenv("OAF_OD_IOR"));
 	}
 
 	return NULL;
 }
 
-static OAFRegistrationLocation cmdline_regloc = {
+static OAFBaseServiceRegistry cmdline_registry = {
 	NULL,
 	NULL,
 	cmdline_check,
@@ -235,11 +252,12 @@ static OAFRegistrationLocation cmdline_regloc = {
 
 /* If it is specified on the command line, it overrides everything else */
 static char *
-ac_check (const OAFRegistrationLocation * regloc,
-	  const OAFRegistrationCategory * regcat, int *ret_distance,
+ac_check (const OAFBaseServiceRegistry *registry,
+	  const OAFBaseService *base_service, 
+          int *ret_distance,
 	  gpointer user_data)
 {
-	if (!strcmp (regcat->name, "IDL:OAF/ObjectDirectory:1.0")) {
+	if (!strcmp (base_service->name, "IDL:OAF/ObjectDirectory:1.0")) {
 		OAF_ActivationContext ac;
 		OAF_ObjectDirectoryList *od;
 		CORBA_Environment ev;
@@ -284,7 +302,7 @@ ac_check (const OAFRegistrationLocation * regloc,
 	return NULL;
 }
 
-static OAFRegistrationLocation ac_regloc = {
+static OAFBaseServiceRegistry ac_registry = {
 	NULL,
 	NULL,
 	ac_check,
@@ -295,16 +313,18 @@ static OAFRegistrationLocation ac_regloc = {
 #define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
 
 static CORBA_Object
-local_activator (const OAFRegistrationCategory * regcat, const char **cmd,
-		 int fd_arg, CORBA_Environment * ev)
+local_activator (const OAFBaseService *base_service,
+                 const char **cmd,
+		 int fd_arg, 
+                 CORBA_Environment *ev)
 {
 	if (
-	    (!regcat->username
-	     || STRMATCH (regcat->username, g_get_user_name ()))
-	    && (!regcat->hostname
-		|| STRMATCH (regcat->hostname, oaf_hostname_get ()))
-	    && (!regcat->domain
-		|| STRMATCH (regcat->domain, oaf_domain_get ()))) {
+	    (!base_service->username
+	     || STRMATCH (base_service->username, g_get_user_name ()))
+	    && (!base_service->hostname
+		|| STRMATCH (base_service->hostname, oaf_hostname_get ()))
+	    && (!base_service->domain
+		|| STRMATCH (base_service->domain, oaf_domain_get ()))) {
 		return oaf_server_by_forking (cmd, fd_arg, NULL, NULL, ev);
 	}
 
@@ -321,7 +341,7 @@ oaf_postinit (gpointer app, gpointer mod_info)
 {
 	oaf_registration_activator_add (local_activator, 0);
 
-	oaf_registration_location_add (&ac_regloc, -500, NULL);
+	oaf_registration_location_add (&ac_registry, -500, NULL);
 
 	oaf_rloc_file_register ();
 
@@ -329,7 +349,7 @@ oaf_postinit (gpointer app, gpointer mod_info)
 		fcntl (oaf_ior_fd, F_SETFD, FD_CLOEXEC);
 
 	if (oaf_od_ior)
-		oaf_registration_location_add (&cmdline_regloc, -1000, NULL);
+		oaf_registration_location_add (&cmdline_registry, -1000, NULL);
 
         if (oaf_activate_iid)
                 g_timeout_add_full (G_PRIORITY_LOW,
@@ -366,6 +386,22 @@ oaf_is_initialized (void)
 }
 
 
+/**
+ * oaf_init:
+ *
+ * Get the table name to use for the oaf popt options table when
+ * registering with libgnome
+ * 
+ * Return value: A localized copy of the string "OAF options"
+ */
+
+char *
+oaf_get_popt_table_name ()
+{
+        bindtextdomain (PACKAGE, OAF_LOCALEDIR);
+        return _("OAF options");
+}
+
 
 /**
  * oaf_init:
@@ -385,6 +421,8 @@ oaf_init (int argc, char **argv)
 	int i;
 
 	g_return_val_if_fail (is_initialized == FALSE, oaf_orb);
+
+        bindtextdomain (PACKAGE, OAF_LOCALEDIR);
 
 	oaf_preinit (NULL, NULL);
 

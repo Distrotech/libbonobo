@@ -54,8 +54,13 @@ CORBA_Object oaf_server_by_forking      (const char **cmd,
 void         oaf_rloc_file_register     (void);
 int          oaf_ior_fd_get             (void);
 CORBA_Object oaf_activation_context_get (void);
+CORBA_Object oaf_object_directory_get   (const char *username,
+                                         const char *hostname,
+                                         const char *domain);
 
 extern gboolean oaf_private;
+
+#define OAF_STR_NULL_OR_MATCH(x, y) ((x == NULL) || (x != NULL && y != NULL && strcmp (x, y) != 0))
 
 #endif
 

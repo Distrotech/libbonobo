@@ -44,9 +44,15 @@ LDADD=../liboaf/liboaf-2.la \
 oaf_client_SOURCES=client.c
 
 oafinfodir=$(pkgdatadir)
-oafinfo_DATA=oafd.oafinfo
 
-EXTRA_DIST=ac-query-lex.l ac-query-parse.y oafd.oafinfo
+oaf_in_files = OAF_naming-service.oaf.in
+oafinfo_DATA = $(oaf_in_files:.oaf.in=.oaf)
+
+@XML_I18N_MERGE_OAF_RULE@
+
+EXTRA_DIST=ac-query-lex.l ac-query-parse.y $(oaf_in_files) $(oafinfo_DATA)
+
+
 
 YFLAGS                  = -d -v
 
@@ -71,6 +77,5 @@ CLEANFILES=stamp-parser stamp-idl
 oaf-skels.c: $(top_srcdir)/idl/oaf.idl
 	$(ORBIT_IDL) --noheaders $(top_srcdir)/idl/oaf.idl
 
-
-
-
+dist-hook:
+	cd $(distdir) ; rm -f $(CLEANFILES)

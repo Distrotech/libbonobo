@@ -65,11 +65,10 @@ oaf_timeout_reg_check (gpointer data)
  * Return value: status of the registration.
  */
 OAF_RegistrationResult
-oaf_active_server_register (const char *registration_id, CORBA_Object obj)
+oaf_active_server_register (const char *registration_id, 
+                            CORBA_Object obj)
 {
 	OAF_ObjectDirectory od;
-	OAFRegistrationCategory regcat = { "IDL:OAF/ObjectDirectory:1.0" };
-	OAFRegistrationCategory ac_regcat;
 	CORBA_Environment ev;
 	OAF_RegistrationResult retval;
 	const char *actid;
@@ -86,6 +85,22 @@ oaf_active_server_register (const char *registration_id, CORBA_Object obj)
 	CORBA_exception_init (&ev);
 
 	actid = oaf_activation_iid_get ();
+
+        if (actid && strcmp (actid, iid) == 0 && oaf_private) {
+                retval = OAF_REG_SUCCESS;
+        } else {
+                od = oaf_object_directory_get (oaf_username_get (),
+                                               oaf_hostname_get (),
+                                               NULL);
+                
+                if (CORBA_Object_is_nil (od, &ev)) {
+                        return OAF_REG_ERROR;
+                }
+                
+                retval = OAF_ObjectDirectory_register_new (od, 
+                                                           (char *) registration_id, 
+                                                           obj, &ev);
+        }
 
 	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
 		char *iorstr;
@@ -104,15 +119,17 @@ oaf_active_server_register (const char *registration_id, CORBA_Object obj)
 
 		iorstr =
 			CORBA_ORB_object_to_string (oaf_orb_get (), obj, &ev);
+
 		if (ev._major == CORBA_NO_EXCEPTION) {
 			fprintf (fh, "%s\n", iorstr);
 			CORBA_free (iorstr);
 		}
 
-		if (fh != stdout)
+		if (fh != stdout) {
 			fclose (fh);
-		else if (iorfd > 2)
+		} else if (iorfd > 2) {
 			close (iorfd);
+                }
 	}
 #ifdef OAF_DEBUG
         else if (actid && need_ior_printout) {
@@ -121,34 +138,6 @@ oaf_active_server_register (const char *registration_id, CORBA_Object obj)
         }
 #endif
 
-        if (actid && strcmp (actid, iid) == 0 && oaf_private)
-                return OAF_REG_SUCCESS;
-
-	regcat.session_name = oaf_session_name_get ();
-	regcat.username = oaf_username_get ();
-	regcat.hostname = oaf_hostname_get ();
-
-	od = oaf_service_get (&regcat);
-
-	if (CORBA_Object_is_nil (od, &ev)) {
-		CORBA_Object ac;
-
-		/* If we can't get an object directory, get an 
-                 * activation context (in case oafd needs starting)
-		 * and then try again 
-                 */
-		ac_regcat = regcat;
-		ac_regcat.name = "IDL:OAF/ActivationContext:1.0";
-		ac = oaf_service_get (&ac_regcat);
-		if (CORBA_Object_is_nil (ac, &ev))
-			return OAF_REG_ERROR;
-		od = oaf_service_get (&regcat);
-		if (CORBA_Object_is_nil (od, &ev))
-			return OAF_REG_ERROR;
-	}
-
-	retval =
-		OAF_ObjectDirectory_register_new (od, (char *) registration_id, obj, &ev);
 	CORBA_exception_free (&ev);
 
 	return retval;
@@ -166,23 +155,22 @@ void
 oaf_active_server_unregister (const char *iid, CORBA_Object obj)
 {
 	OAF_ObjectDirectory od;
-	OAFRegistrationCategory regcat = { "IDL:OAF/ObjectDirectory:1.0" };
 	CORBA_Environment ev;
 	const char *actid;
 
-	actid = oaf_activation_iid_get();
-	if(actid && !strcmp(actid, iid) && oaf_private)
+	actid = oaf_activation_iid_get ();
+	if(actid && strcmp (actid, iid) == 0 && oaf_private) {
 		return;
+        }
 
-	regcat.session_name = oaf_session_name_get ();
-	regcat.username = oaf_username_get ();
-	regcat.hostname = oaf_hostname_get ();
-
-	od = oaf_service_get (&regcat);
+	od = oaf_object_directory_get (oaf_username_get (), 
+                                       oaf_hostname_get (),
+                                       NULL);
 
 	CORBA_exception_init (&ev);
-	if (CORBA_Object_is_nil (od, &ev))
+	if (CORBA_Object_is_nil (od, &ev)) {
 		return;
+        }
 
 	OAF_ObjectDirectory_unregister (od, (char *) iid, obj,
 					OAF_ObjectDirectory_UNREGISTER_NORMAL, &ev);

@@ -4,7 +4,7 @@
 <sect1>
 <title>The OAF query langage</title>
 <para>
-OAF has a query langage used to request components with
+OAF has a query language used to request components with
 specific properties from the OAF daemon.
 The API call <function>oaf_activate</function> takes a
 <emphasis>requirements</emphasis> parameter which is
@@ -31,7 +31,7 @@ with either 'Control' or 'Embeddable' as long as they supported the
 </para>
 </sect1>
 
-<sect1>
+<sect1 id="query-syntax">
 <title>Syntax</title>
 
 <sect2 id="oaf-query-ref-types">
@@ -122,6 +122,15 @@ has_all(stringv1, stringv2) :
 <listitem><para>
 has(stringv, string)
    Returns a boolean value that indicates whether 'string' is contained in the 'stringv' array.
+</para></listitem>
+
+<listitem><para>
+prefer_by_list_order(string, stringv) 
+   This function is intended to use as a sort condition when you have a prioritized list of 
+   preferred values. It returns -1 if the 'string' is not in the 'stringv' array, otherwise 
+   it's position measured from the end of 'stringv'. The result is that the first item is 
+   most preferred, items after that are next most preferred, and items not in the list are 
+   lowest priority.
 </para></listitem>
 
 <listitem><para>
