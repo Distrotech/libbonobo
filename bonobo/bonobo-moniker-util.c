@@ -53,10 +53,14 @@ bonobo_moniker_util_parse_name (const char *name, int *plen)
 
 		if (name [i] == '!' || name [i] == '#') {
 
-			rval = &name [i + 1];
+			if (name [i] == '!')
+				rval = &name [i];
+			else
+				rval = &name [i + 1];
 
 			if (!i || (name [i-1] == '!' || name [i-1] == '#')) {
-				*plen = i;
+				if (plen)
+					*plen = i;
 				return rval;
 			}
 

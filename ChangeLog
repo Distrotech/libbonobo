@@ -1,3 +1,9 @@
+2001-08-11  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_parse_name):
+	For the item moniker, the "!" is the first character or the
+	return value.
+
 2001-08-10  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-arg.h: bracket protect arg in GET/SET macros.
