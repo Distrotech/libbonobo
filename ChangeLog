@@ -1,3 +1,10 @@
+2003-03-07  Bill Haneman <bill.haneman@sun.com>
+	
+	* idl/Bonobo_Property.idl:
+	* idl/Bonobo.idl:
+	Replaced #if !defined(FOO) with #ifndef(FOO), etc. for
+	better compatibility with IDL parsers like idlj.
+
 2003-03-04  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-arg.h: update macros.
