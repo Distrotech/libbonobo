@@ -1,3 +1,12 @@
+2003-03-11  Martin Kretzschmar  <m_kretzschmar@gmx.net>
+
+	* bonobo/bonobo-macros.h (BONOBO_BOILERPLATE): insert explicit
+	casts in class_init_trampoline for C++ compatibility
+
+	* bonobo/bonobo-arg.h (BONOBO_ARG_GET_STRING)
+	(BONOBO_ARG_SET_STRING): disable typechecks for
+	__STRICT_ANSI__ and C++
+
 2003-03-08  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "eo" to ALL_LINGUAS.
