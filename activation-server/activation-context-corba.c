@@ -750,7 +750,7 @@ ac_query_run(impl_POA_OAF_ActivationContext * servant,
   for(i = 0; i < item_count; i++)
     {
       if(!qexp_matches(items[i], qexp_requirements, &qctx))
-	items[i] = NULL;
+	  items[i] = NULL;
     }
 
   qexp_sort(items, item_count, qexp_sort_items, selection_order->_length, &qctx);

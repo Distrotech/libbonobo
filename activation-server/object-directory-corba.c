@@ -320,7 +320,7 @@ impl_OAF_ObjectDirectory_register(impl_POA_OAF_ObjectDirectory * servant,
 {
   CORBA_Object oldobj;
 
-  oldobj = g_hash_table_lookup(servant->active_servers, iid);
+  oldobj = g_hash_table_lookup (servant->active_servers, iid);
 
   if(!CORBA_Object_is_nil(oldobj, ev))
     {
