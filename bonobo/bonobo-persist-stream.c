@@ -84,10 +84,15 @@ static CORBA_long
 impl_get_size_max (PortableServer_Servant servant, CORBA_Environment * ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
+	GnomePersistStream *ps = GNOME_PERSIST_STREAM (object);
 	GtkObjectClass *oc = GTK_OBJECT (object)->klass;
 	GnomePersistStreamClass *class = GNOME_PERSIST_STREAM_CLASS (oc);
 
-	return ((*class->get_size_max)(GNOME_PERSIST_STREAM (object)));
+
+	if (ps->get_size_max_fn != NULL)
+		return (*ps->get_size_max_fn)(ps, ps->closure);
+
+	return (*class->get_size_max)(GNOME_PERSIST_STREAM (object));
 }
 
 static void

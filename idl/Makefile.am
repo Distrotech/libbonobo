@@ -9,6 +9,7 @@ idl_DATA =			\
 	gnome-inplace.idl	\
 	gnome-moniker.idl	\
 	gnome-persist.idl	\
-	gnome-storage.idl	
+	gnome-storage.idl	\
+	gnome-progressive.idl
 
 EXTRA_DIST = $(idl_DATA)

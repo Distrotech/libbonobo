@@ -148,6 +148,7 @@ module GNOME {
 		 */
 		long get_size_max ();
 	};
+
 };
 	
 

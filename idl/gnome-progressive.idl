@@ -1,0 +1,75 @@
+/*
+ * Bonobo::ProgressiveDataSink interface.
+ *
+ * Author:
+ *    Nat Friedman (nat@gnome-support.com)
+ *
+ */
+
+/*
+ * The purpose of this component is to provide an easy way for a
+ * sequence of data which is not available all at once to be
+ * marshalled across a connection.
+ *
+ */
+
+module GNOME {
+
+	interface SimpleDataSource : obj {
+		typedef sequence<octet> iobuf;
+
+		/**
+		 * pop_data:
+		 *
+		 * Grab data out of the SimpleDataSource.  The data is
+		 * then no longer available to be read.
+		 */
+		void pop_data (in long count, out iobuf buffer);
+
+		/**
+		 * remaining_data:
+		 *
+		 * Query how much remaining data is in the
+		 * SimpleDataSource.
+		 */
+
+		long remaining_data ();
+	};
+
+	interface ProgressiveDataSink : obj {
+
+		/**
+		 * start:
+		 *
+		 * This method signals that a new stream of data is
+		 * coming in.  It must be called before add_data can
+		 * be used.  */
+		void start ();
+
+		/**
+		 * end:
+		 * 
+		 * An interface's 'done' method is called when the data
+		 * has been completely transmitted.
+		 */
+		void end ();
+
+		/**
+		 * add_data:
+		 *
+		 * As each chunk of data comes in, this method is
+		 * called with the data and the size.
+		 */
+		void add_data (in long count, in SimpleDataSource source);
+
+		/**
+		 * set_size:
+		 *
+		 * This method notifies a component of the total size
+		 * of the incoming data.  It can be called at any
+		 * point, even after the data has started to flow.
+		 */
+		void set_size (in long count);
+
+	};
+};

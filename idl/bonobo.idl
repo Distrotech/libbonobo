@@ -20,3 +20,5 @@
 #include "gnome-component.idl"
 #include "gnome-inplace.idl"
 
+#include "gnome-progressive.idl"
+

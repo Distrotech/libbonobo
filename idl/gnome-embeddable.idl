@@ -4,7 +4,7 @@
  * A Bonobo object is an object that can be embedded into
  * a container application.
  *
- * Bonobo Objects are also refered as servers.
+ * Bonobo Objects are also referred to as servers.
  */
 
 module GNOME {

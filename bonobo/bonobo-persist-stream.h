@@ -13,7 +13,9 @@ BEGIN_GNOME_DECLS
 
 typedef struct _GnomePersistStream GnomePersistStream;
 
+
 typedef int (*GnomePersistStreamIOFn)(GnomePersistStream *ps, const GNOME_Stream stream, void *closure);
+typedef CORBA_long (*GnomePersistStreamMaxFn)(GnomePersistStream *ps, void *closure);
 
 struct _GnomePersistStream {
 	GnomePersist persist;
@@ -24,8 +26,9 @@ struct _GnomePersistStream {
 	 * For the sample routines, NULL if we use the ::save and ::load
 	 * methods from the class
 	 */
-	GnomePersistStreamIOFn save_fn;
-	GnomePersistStreamIOFn load_fn;
+	GnomePersistStreamIOFn  save_fn;
+	GnomePersistStreamIOFn  load_fn;
+	GnomePersistStreamMaxFn get_size_max_fn;
 	void *closure;
 };
 

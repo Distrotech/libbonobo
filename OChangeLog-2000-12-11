@@ -1,4 +1,78 @@
-1999-05-28  Matt Loper  <matthew@loper.org>
+1999-05-28  Nat Friedman  <nat@gnome-support.com>
+
+	* Makefile.am (SUBDIRS): Added components.
+
+	* bonobo/gnome-simple-source.c: New file which implements the
+	GNOME::SimpleDataSource interface.
+	* bonobo/gnome-simple-source.h: New file.
+
+	* bonobo/gnome-progressive.c: New file which implements the
+	GNOME::ProgressiveDataSink interface.
+	* bonobo/gnome-progressive.h: New file.
+
+	* idl/gnome-progressive.idl: New file which defines the interfaces
+	for GNOME::ProgressiveDataSink and GNOME::SimpleDataSource, which
+	work together to provide an interface for progressive loading of
+	slow data streams to components.
+
+	* idl/gnome-component.idl: Fixed comment.
+
+	* idl/Makefile.am (idl_DATA): Added gnome-progressive.idl.
+
+	* components/text-plain/bonobo-text-plain.c (free_text): Set
+	component_data->text to NULL after freeing it.
+	(blank_all_views): Don't blank blank views.
+	(update_all_views): New function to perform non-progressive
+	display updating, as occurs after new data is loaded through the
+	PersistStream interface.
+	(progressive_update): Renamed progressive_update_all_views to
+	this.  It also updates the component data and is modified to take
+	a char * buffer and a byte count.
+	(stream_read): Don't call CORBA_exception_free, since we have a
+	global exception.  Don't progressively update the display as we
+	read data; stream_read is only used as a helper function for the
+	PersistStream interface now.  Return -1 on error and 0 on success.
+	(pstream_load): Renamed load_text_from_stream to this.  Modified
+	to only update the display after the entire stream has been
+	loaded.
+	(pstream_save): New function to implement
+	GNOME::PersistStream:save.
+	(progressive_start): New function to implement
+	GNOME::ProgressiveDataSink:start.
+	(progressive_add_data): New function to implement
+	GNOME::ProgressiveDataSink:add_data.
+	(component_factory): Add the GNOME::ProgressiveDataSink interface.
+
+	* bonobo/test-container.c: Added struct progressive_timeout to
+	hold the closure data that needs to be sent to the timeout.
+	(ssource_pop_data): New function.  Implements the
+	GNOME::SimpleDataSource:pop_data method for progressive loading.
+	(timeout_next_line): New function.  Timeout callback to send new
+	data to the text/plain BonoboObject using the ProgressiveDataSink
+	interface.
+	(send_text_cmd): Modified to use ProgressiveDataSink.
+	(container_file_menu): New accelerators.
+	(ssource_remaining_data): New function to implement the
+	GNOME::SimpleDataSource:remaining_data method.
+
+	* bonobo/gnome-persist-stream.h: Added get_size_max_fn to
+	GnomePersistStream.
+
+	* bonobo/gnome-persist-stream.c (impl_get_size_max): Try to call
+	the user-provided get_size_max function if it is available.
+
+	* bonobo/gnome-bonobo.h: Include gnome-stream.h,
+	gnome-stream-fs.h, gnome-progressive.h and gnome-simple-source.h
+
+	* bonobo/Makefile.am (libbonobo_la_SOURCES): Added
+	gnome-progressive.c and gnome-simple-source.c.
+	(libbonobo_la_SOURCES): Added gnome-progressive.h and
+	gnome-simple-source.h
+
+	* bonobo/Makefile.am (idls): Added gnome-progresive.idl to idls
+	list.
+
+1999-05-28  Matt Loper  <matt@gnome-support.com>
 
 	* bonobo/test-container-autoload.c: New file.
 
