@@ -50,9 +50,6 @@ libbonobo_activation_la_SOURCES=		\
 	bonobo-activation-register.c		\
 	bonobo-activation-server-info.c		\
 	bonobo-activation-i18n.h		\
-	bonobo-activation-async.c		\
-	bonobo-activation-async-callback.h	\
-	bonobo-activation-async-callback.c	\
 	bonobo-activation-fork-server.c		\
 	bonobo-activation-init.c		\
 	$(NULL)

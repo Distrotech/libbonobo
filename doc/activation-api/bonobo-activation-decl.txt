@@ -29,6 +29,11 @@ const char *requirements,char *const *selection_order,Bonobo_ActivationFlags fla
 const Bonobo_ActivationID aid,Bonobo_ActivationFlags flags,Bonobo_ActivationID * ret_aid,CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
+<NAME>bonobo_activation_set_activation_env_value</NAME>
+<RETURNS>void  </RETURNS>
+const char *name,const char *value
+</FUNCTION>
+<FUNCTION>
 <NAME>bonobo_activation_set_test_components_enabled</NAME>
 <RETURNS>void  </RETURNS>
 gboolean val
@@ -37,11 +42,6 @@ gboolean val
 <NAME>bonobo_activation_get_test_components_enabled</NAME>
 <RETURNS>gboolean  </RETURNS>
 void
-</FUNCTION>
-<FUNCTION>
-<NAME>bonobo_activation_async_corba_callback_new</NAME>
-<RETURNS>CORBA_Object</RETURNS>
-BonoboActivationCallback callback,gpointer user_data,CORBA_Environment * ev
 </FUNCTION>
 <USER_FUNCTION>
 <NAME>BonoboActivationCallback</NAME>
@@ -67,7 +67,7 @@ typedef struct {
 	const char *session_name;
 	const char *username;
         const char *hostname;
-        const char *domain;
+        const char *domain; /* FIXME: unused - remove ? */
 } BonoboActivationBaseService;
 </TYPEDEF>
 <STRUCT>
@@ -299,15 +299,15 @@ gpointer           data
 <USER_FUNCTION>
 <NAME>BonoboForkReCheckFn</NAME>
 <RETURNS>CORBA_Object </RETURNS>
-const char        *display,
-                                                       const char        *act_iid,
-                                                       gpointer           user_data,
-                                                       CORBA_Environment *ev
+const Bonobo_ActivationEnvironment *environemnt,
+                                                  const char                         *act_iid,
+                                                  gpointer                            user_data,
+                                                  CORBA_Environment                  *ev
 </USER_FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_server_by_forking</NAME>
 <RETURNS>CORBA_Object  </RETURNS>
-const char       **cmd,gboolean           set_process_group,int                fd_arg,CORBA_Context      ctx,const char        *od_iorstr,const char        *act_iid,BonoboForkReCheckFn re_check,gpointer            user_data,CORBA_Environment *ev
+const char                        **cmd,gboolean                            set_process_group,int                                 fd_arg,const Bonobo_ActivationEnvironment *environemnt,const char                         *od_iorstr,const char                         *act_iid,BonoboForkReCheckFn                 re_check,gpointer                            user_data,CORBA_Environment                  *ev
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_base_service_init</NAME>
@@ -327,7 +327,12 @@ void
 <FUNCTION>
 <NAME>bonobo_activation_object_directory_get</NAME>
 <RETURNS>CORBA_Object  </RETURNS>
-const char        *username,const char        *hostname,const char        *domain
+const char        *username,const char        *hostname
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_activation_init_activation_env</NAME>
+<RETURNS>void  </RETURNS>
+void
 </FUNCTION>
 <VARIABLE>
 <NAME>bonobo_activation_private</NAME>
@@ -344,14 +349,59 @@ gboolean           existing_only,CORBA_Environment *ev
 const BonoboActivationBaseService *base_service,gboolean           existing_only,CORBA_Environment *ev
 </FUNCTION>
 <FUNCTION>
+<NAME>Bonobo_ActivationEnvironment_match</NAME>
+<RETURNS>gboolean  </RETURNS>
+const Bonobo_ActivationEnvironment *a,const Bonobo_ActivationEnvironment *b
+</FUNCTION>
+<FUNCTION>
+<NAME>Bonobo_ActivationEnvValue_set</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_ActivationEnvValue *env,const char                *name,const char                *value
+</FUNCTION>
+<FUNCTION>
+<NAME>Bonobo_ActivationEnvValue_copy</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_ActivationEnvValue *dest,Bonobo_ActivationEnvValue *src
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_activation_register_active_server</NAME>
+<RETURNS>Bonobo_RegistrationResult</RETURNS>
+const char   *iid,CORBA_Object  obj,GSList       *reg_env
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_activation_unregister_active_server</NAME>
+<RETURNS>void  </RETURNS>
+const char   *iid,CORBA_Object  obj
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_activation_registration_env_set</NAME>
+<RETURNS>GSList  *</RETURNS>
+GSList       *reg_env,const char   *name,const char   *value
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_activation_registration_env_free</NAME>
+<RETURNS>void  </RETURNS>
+GSList       *reg_env
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_activation_registration_env_set_global</NAME>
+<RETURNS>void  </RETURNS>
+GSList       *reg_env,gboolean      append_if_existing
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_activation_registration_env_get_global</NAME>
+<RETURNS>GSList  *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
 <NAME>bonobo_activation_active_server_register</NAME>
-<RETURNS>Bonobo_RegistrationResult  </RETURNS>
-const char  *iid,CORBA_Object obj
+<RETURNS>Bonobo_RegistrationResult</RETURNS>
+const char   *registration_id,CORBA_Object  obj
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_active_server_unregister</NAME>
 <RETURNS>void  </RETURNS>
-const char  *iid,CORBA_Object obj
+const char   *iid,CORBA_Object  obj
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_activation_make_registration_id</NAME>
@@ -2039,6 +2089,434 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 <MACRO>
 <NAME>Bonobo_ACTIVATION_FLAG_EXISTING_ONLY</NAME>
 #define Bonobo_ACTIVATION_FLAG_EXISTING_ONLY 4
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_0</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_0 'B'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_1</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_1 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_2</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_2 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_3</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_3 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_4</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_4 'b'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_5</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_5 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_6</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_6 '_'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_7</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_7 'A'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_8</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_8 'c'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_9</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_9 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_10</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_10 'i'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_11</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_11 'v'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_12</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_12 'a'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_13</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_13 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_14</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_14 'i'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_15</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_15 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_16</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_16 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_17</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_17 '_'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_18</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_18 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_19</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_19 'y'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_20</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_20 'p'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_21</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_21 'e'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvValue_22</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvValue_22 's'
+</MACRO>
+<MACRO>
+<NAME>TC_Bonobo_ActivationEnvValue</NAME>
+#define TC_Bonobo_ActivationEnvValue ((CORBA_TypeCode)&TC_Bonobo_ActivationEnvValue_struct)
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ActivationEnvValue__alloc</NAME>
+#define Bonobo_ActivationEnvValue__alloc() ((Bonobo_ActivationEnvValue *)ORBit_small_alloc (TC_Bonobo_ActivationEnvValue))
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ActivationEnvValue__freekids</NAME>
+#define Bonobo_ActivationEnvValue__freekids(m,d) ORBit_small_freekids (TC_Bonobo_ActivationEnvValue,(m),(d))
+</MACRO>
+<MACRO>
+<NAME>ORBIT_DECL_CORBA_sequence_Bonobo_ActivationEnvValue</NAME>
+#define ORBIT_DECL_CORBA_sequence_Bonobo_ActivationEnvValue 1
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_0</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_0 'B'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_1</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_1 'o'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_2</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_2 'n'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_3</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_3 'o'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_4</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_4 'b'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_5</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_5 'o'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_6</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_6 '_'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_7</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_7 'A'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_8</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_8 'c'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_9</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_9 't'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_10</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_10 'i'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_11</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_11 'v'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_12</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_12 'a'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_13</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_13 't'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_14</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_14 'i'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_15</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_15 'o'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_16</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_16 'n'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_17</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_17 '_'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_18</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_18 't'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_19</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_19 'y'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_20</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_20 'p'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_21</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_21 'e'
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_22</NAME>
+#define ORBIT_IMPL_CORBA_sequence_Bonobo_ActivationEnvValue_22 's'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_0</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_0 'B'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_1</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_1 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_2</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_2 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_3</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_3 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_4</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_4 'b'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_5</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_5 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_6</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_6 '_'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_7</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_7 'A'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_8</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_8 'c'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_9</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_9 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_10</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_10 'i'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_11</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_11 'v'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_12</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_12 'a'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_13</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_13 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_14</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_14 'i'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_15</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_15 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_16</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_16 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_17</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_17 '_'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_18</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_18 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_19</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_19 'y'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_20</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_20 'p'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_21</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_21 'e'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_22</NAME>
+#define TC_IMPL_TC_CORBA_sequence_Bonobo_ActivationEnvValue_22 's'
+</MACRO>
+<MACRO>
+<NAME>TC_CORBA_sequence_Bonobo_ActivationEnvValue</NAME>
+#define TC_CORBA_sequence_Bonobo_ActivationEnvValue ((CORBA_TypeCode)&TC_CORBA_sequence_Bonobo_ActivationEnvValue_struct)
+</MACRO>
+<MACRO>
+<NAME>CORBA_sequence_Bonobo_ActivationEnvValue__alloc</NAME>
+#define CORBA_sequence_Bonobo_ActivationEnvValue__alloc() ((CORBA_sequence_Bonobo_ActivationEnvValue *)ORBit_small_alloc (TC_CORBA_sequence_Bonobo_ActivationEnvValue))
+</MACRO>
+<MACRO>
+<NAME>CORBA_sequence_Bonobo_ActivationEnvValue__freekids</NAME>
+#define CORBA_sequence_Bonobo_ActivationEnvValue__freekids(m,d) ORBit_small_freekids (TC_CORBA_sequence_Bonobo_ActivationEnvValue,(m),(d))
+</MACRO>
+<MACRO>
+<NAME>CORBA_sequence_Bonobo_ActivationEnvValue_allocbuf</NAME>
+#define CORBA_sequence_Bonobo_ActivationEnvValue_allocbuf(l) ((Bonobo_ActivationEnvValue*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ActivationEnvValue, (l)))
+</MACRO>
+<MACRO>
+<NAME>CORBA_sequence_Bonobo_ActivationEnvValue_allocbuf</NAME>
+#define CORBA_sequence_Bonobo_ActivationEnvValue_allocbuf(l) ((Bonobo_ActivationEnvValue*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ActivationEnvValue, (l)))
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ActivationEnvironment_marshal</NAME>
+#define Bonobo_ActivationEnvironment_marshal(x,y,z) CORBA_sequence_Bonobo_ActivationEnvValue_marshal((x),(y),(z))
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ActivationEnvironment_demarshal</NAME>
+#define Bonobo_ActivationEnvironment_demarshal(x,y,z,i) CORBA_sequence_Bonobo_ActivationEnvValue_demarshal((x),(y),(z),(i))
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_0</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_0 'B'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_1</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_1 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_2</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_2 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_3</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_3 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_4</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_4 'b'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_5</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_5 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_6</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_6 '_'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_7</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_7 'A'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_8</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_8 'c'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_9</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_9 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_10</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_10 'i'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_11</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_11 'v'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_12</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_12 'a'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_13</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_13 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_14</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_14 'i'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_15</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_15 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_16</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_16 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_17</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_17 '_'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_18</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_18 't'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_19</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_19 'y'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_20</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_20 'p'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_21</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_21 'e'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_ActivationEnvironment_22</NAME>
+#define TC_IMPL_TC_Bonobo_ActivationEnvironment_22 's'
+</MACRO>
+<MACRO>
+<NAME>TC_Bonobo_ActivationEnvironment</NAME>
+#define TC_Bonobo_ActivationEnvironment ((CORBA_TypeCode)&TC_Bonobo_ActivationEnvironment_struct)
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ActivationEnvironment__alloc</NAME>
+#define Bonobo_ActivationEnvironment__alloc() ((Bonobo_ActivationEnvironment *)ORBit_small_alloc (TC_CORBA_sequence_Bonobo_ActivationEnvValue))
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ActivationEnvironment__freekids</NAME>
+#define Bonobo_ActivationEnvironment__freekids(m,d) ORBit_small_freekids (TC_CORBA_sequence_Bonobo_ActivationEnvValue,(m),(d))
+</MACRO>
+<MACRO>
+<NAME>Bonobo_ActivationEnvironment_allocbuf</NAME>
+#define Bonobo_ActivationEnvironment_allocbuf(l) ((Bonobo_ActivationEnvValue*)ORBit_small_allocbuf (TC_CORBA_sequence_Bonobo_ActivationEnvValue, (l)))
 </MACRO>
 <ENUM>
 <NAME>Bonobo_ActivationResultType</NAME>
@@ -4493,19 +4971,14 @@ Bonobo_ObjectDirectory_obj,CORBA_Environment * ev
 Bonobo_ObjectDirectory_obj,CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
-<NAME>Bonobo_ObjectDirectory__get_domain</NAME>
-<RETURNS>CORBA_string  </RETURNS>
-Bonobo_ObjectDirectory_obj,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
 <NAME>Bonobo_ObjectDirectory_activate</NAME>
 <RETURNS>CORBA_Object  </RETURNS>
-Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const Bonobo_ActivationContextac,const Bonobo_ActivationFlagsflags, CORBA_Context _ctx,CORBA_Environment * ev
+Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const Bonobo_ActivationContextac,constBonobo_ActivationEnvironment *environment,const Bonobo_ActivationFlagsflags, CORBA_Context _ctx,CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
 <NAME>Bonobo_ObjectDirectory_register_new</NAME>
 <RETURNS>Bonobo_RegistrationResult</RETURNS>
-Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_Environment * ev
+Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const Bonobo_ActivationEnvironment *environment, const CORBA_Object obj,CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
 <NAME>Bonobo_ObjectDirectory_unregister</NAME>
@@ -4514,7 +4987,7 @@ Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_
 </FUNCTION>
 <MACRO>
 <NAME>Bonobo_ObjectDirectory_IMETHODS_LEN</NAME>
-#define Bonobo_ObjectDirectory_IMETHODS_LEN 8
+#define Bonobo_ObjectDirectory_IMETHODS_LEN 7
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
@@ -4751,122 +5224,6 @@ Bonobo_ObjectDirectory _obj,const CORBA_char * iid,const CORBA_Object obj,CORBA_
 <MACRO>
 <NAME>TC_Bonobo_ActivationClient</NAME>
 #define TC_Bonobo_ActivationClient ((CORBA_TypeCode)&TC_Bonobo_ActivationClient_struct)
-</MACRO>
-<MACRO>
-<NAME>ORBIT_DECL_Bonobo_ActivationCallback</NAME>
-#define ORBIT_DECL_Bonobo_ActivationCallback 1
-</MACRO>
-<MACRO>
-<NAME>Bonobo_ActivationCallback__freekids</NAME>
-#define Bonobo_ActivationCallback__freekids CORBA_Object__freekids
-</MACRO>
-<TYPEDEF>
-<NAME>Bonobo_ActivationCallback</NAME>
-   typedef CORBA_Object Bonobo_ActivationCallback;
-</TYPEDEF>
-<VARIABLE>
-<NAME>Bonobo_ActivationCallback__classid</NAME>
-   extern CORBA_unsigned_long Bonobo_ActivationCallback__classid;
-</VARIABLE>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_0</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_0 'B'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_1</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_1 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_2</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_2 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_3</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_3 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_4</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_4 'b'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_5</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_5 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_6</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_6 '_'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_7</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_7 'A'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_8</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_8 'c'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_9</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_9 't'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_10</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_10 'i'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_11</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_11 'v'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_12</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_12 'a'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_13</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_13 't'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_14</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_14 'i'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_15</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_15 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_16</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_16 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_17</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_17 'C'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_18</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_18 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_19</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_19 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_20</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_20 't'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_21</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_21 'e'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_22</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_22 'x'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_ActivationCallback_23</NAME>
-#define TC_IMPL_TC_Bonobo_ActivationCallback_23 't'
-</MACRO>
-<MACRO>
-<NAME>TC_Bonobo_ActivationCallback</NAME>
-#define TC_Bonobo_ActivationCallback ((CORBA_TypeCode)&TC_Bonobo_ActivationCallback_struct)
 </MACRO>
 <MACRO>
 <NAME>ORBIT_DECL_CORBA_sequence_CORBA_Object</NAME>
@@ -5559,16 +5916,6 @@ PortableServer_Servantservant,CORBA_Environment * ev
 PortableServer_Servantservant,CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
-<NAME>POA_Bonobo_ActivationCallback__init</NAME>
-<RETURNS>void  </RETURNS>
-PortableServer_Servantservant,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>POA_Bonobo_ActivationCallback__fini</NAME>
-<RETURNS>void  </RETURNS>
-PortableServer_Servantservant,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
 <NAME>POA_Bonobo_ActivationContext__init</NAME>
 <RETURNS>void  </RETURNS>
 PortableServer_Servantservant,CORBA_Environment * ev
@@ -5596,18 +5943,6 @@ PortableServer_Servantservant,CORBA_Environment * ev
 Bonobo_ActivationClient _obj,CORBA_Environment * ev
 </FUNCTION>
 <MACRO>
-<NAME>Bonobo_ActivationCallback_ref</NAME>
-#define Bonobo_ActivationCallback_ref Bonobo_Unknown_ref
-</MACRO>
-<MACRO>
-<NAME>Bonobo_ActivationCallback_unref</NAME>
-#define Bonobo_ActivationCallback_unref Bonobo_Unknown_unref
-</MACRO>
-<MACRO>
-<NAME>Bonobo_ActivationCallback_queryInterface</NAME>
-#define Bonobo_ActivationCallback_queryInterface Bonobo_Unknown_queryInterface
-</MACRO>
-<MACRO>
 <NAME>Bonobo_ActivationContext_ref</NAME>
 #define Bonobo_ActivationContext_ref Bonobo_Unknown_ref
 </MACRO>
@@ -5625,34 +5960,20 @@ Bonobo_ActivationClient _obj,CORBA_Environment * ev
 Bonobo_ActivationContext _obj,const Bonobo_ActivationClientclient, const CORBA_char * locales,CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
-<NAME>Bonobo_ActivationContext_add_directory</NAME>
+<NAME>Bonobo_ActivationContext_addDirectory</NAME>
 <RETURNS>void  </RETURNS>
 Bonobo_ActivationContext _obj,const Bonobo_ObjectDirectorydir, CORBA_Environment * ev
 </FUNCTION>
 <FUNCTION>
-<NAME>Bonobo_ActivationContext_remove_directory</NAME>
+<NAME>Bonobo_ActivationContext_removeDirectory</NAME>
 <RETURNS>void  </RETURNS>
-Bonobo_ActivationContext_obj,const Bonobo_ObjectDirectorydir,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>Bonobo_ActivationContext_activate_async</NAME>
-<RETURNS>void  </RETURNS>
-Bonobo_ActivationContext _obj,const CORBA_char *requirements,const Bonobo_StringList *selection_order,const Bonobo_ActivationFlagsflags,constBonobo_ActivationCallbackcallback_object,CORBA_Context _ctx,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>Bonobo_ActivationContext_activate_from_id_async</NAME>
-<RETURNS>void</RETURNS>
-Bonobo_ActivationContext_obj,const CORBA_char * aid,constBonobo_ActivationFlagsflags,constBonobo_ActivationCallbackcallback_object,CORBA_Context _ctx,CORBA_Environment * ev
+Bonobo_ActivationContext_obj,const Bonobo_ObjectDirectorydir, CORBA_Environment * ev
 </FUNCTION>
 <MACRO>
 <NAME>Bonobo_ActivationClient_IMETHODS_LEN</NAME>
 #define Bonobo_ActivationClient_IMETHODS_LEN 1
 </MACRO>
 <MACRO>
-<NAME>Bonobo_ActivationCallback_IMETHODS_LEN</NAME>
-#define Bonobo_ActivationCallback_IMETHODS_LEN 2
-</MACRO>
-<MACRO>
 <NAME>Bonobo_ActivationContext_IMETHODS_LEN</NAME>
-#define Bonobo_ActivationContext_IMETHODS_LEN 10
+#define Bonobo_ActivationContext_IMETHODS_LEN 8
 </MACRO>

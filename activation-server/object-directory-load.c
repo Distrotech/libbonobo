@@ -56,7 +56,6 @@ typedef struct {
         int unknown_depth;
         
         const char *host;
-        const char *domain;
         GSList **entries;
         
         Bonobo_ServerInfo *cur_server;
@@ -165,8 +164,8 @@ parse_oaf_server_attrs (ParseInfo      *info,
         info->cur_server->server_type = CORBA_string_dup (type);
         info->cur_server->location_info = CORBA_string_dup (location);
         info->cur_server->hostname = CORBA_string_dup (info->host);
-        info->cur_server->domain = CORBA_string_dup (info->domain);
         info->cur_server->username = CORBA_string_dup (g_get_user_name ());
+        info->cur_server->domain = CORBA_string_dup ("unused");
 }
 
 static GHashTable *interesting_locales = NULL;
@@ -592,8 +591,7 @@ static xmlSAXHandler od_SAXParser = {
 static void
 od_load_file (const char *file,
               GSList    **entries,
-              const char *host, 
-              const char *domain)
+              const char *host)
 {
         ParseInfo *info;
 	xmlSAXHandlerPtr oldsax;
@@ -602,7 +600,6 @@ od_load_file (const char *file,
         
         info = parse_info_new ();
         info->host = host;
-        info->domain = domain;
         info->entries = entries;
 
         ctxt = xmlCreateFileParserCtxt (file);
@@ -647,8 +644,7 @@ od_filename_has_extension (const char *filename,
 static void
 od_load_directory (const char *directory,
                    GSList    **entries,
-                   const char *host, 
-                   const char *domain)
+                   const char *host)
 {
 	DIR *directory_handle;
 	struct dirent *directory_entry;
@@ -671,7 +667,7 @@ od_load_directory (const char *directory,
                 pathname = g_strdup_printf ("%s/%s", directory, directory_entry->d_name);
 
                 if (od_filename_has_extension (pathname, ".server")) {
-                        od_load_file (pathname, entries, host, domain);
+                        od_load_file (pathname, entries, host);
                 }
 
 		g_free (pathname);
@@ -685,7 +681,7 @@ void
 bonobo_server_info_load (char **directories,
                          Bonobo_ServerInfoList   *servers,
                          GHashTable **iid_to_server_info_map,
-                         const char *host, const char *domain)
+                         const char *host)
 {
 	GSList *entries;
         int length;
@@ -705,7 +701,7 @@ bonobo_server_info_load (char **directories,
 
         /* Load each directory */
 	for (i = 0; directories[i] != NULL; i++)
-                od_load_directory (directories[i], &entries, host, domain);
+                od_load_directory (directories[i], &entries, host);
 
 	/* Now convert 'entries' into something that the server can store and pass back */
 	length = g_slist_length (entries);

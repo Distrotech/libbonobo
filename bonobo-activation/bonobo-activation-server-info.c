@@ -173,12 +173,13 @@ CORBA_sequence_Bonobo_ActivationProperty_copy (
 void
 Bonobo_ServerInfo_copy (Bonobo_ServerInfo *copy, const Bonobo_ServerInfo *original)
 {
-	copy->iid = CORBA_string_dup (original->iid);
-	copy->server_type = CORBA_string_dup (original->server_type);
+	copy->iid           = CORBA_string_dup (original->iid);
+	copy->server_type   = CORBA_string_dup (original->server_type);
 	copy->location_info = CORBA_string_dup (original->location_info);
-	copy->username = CORBA_string_dup (original->username);
-	copy->hostname = CORBA_string_dup (original->hostname);
-	copy->domain = CORBA_string_dup (original->domain);
+	copy->username      = CORBA_string_dup (original->username);
+	copy->hostname      = CORBA_string_dup (original->hostname);
+	copy->domain        = CORBA_string_dup (original->domain);
+
 	CORBA_sequence_Bonobo_ActivationProperty_copy (&copy->props, &original->props);
 }
 

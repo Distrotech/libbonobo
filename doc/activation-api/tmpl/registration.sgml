@@ -31,9 +31,11 @@ to Bonobo Activation once it is created.
 
 </para>
 
-@iid: 
+@registration_id: 
 @obj: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@iid: 
 
 
 <!-- ##### FUNCTION bonobo_activation_active_server_unregister ##### -->
