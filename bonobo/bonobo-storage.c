@@ -10,6 +10,7 @@
 #include <config.h>
 #include <gmodule.h>
 #include <bonobo/bonobo-storage.h>
+#include <bonobo/bonobo-storage-plugin.h>
 
 static BonoboObjectClass *bonobo_storage_parent_class;
 
@@ -232,72 +233,33 @@ bonobo_storage_construct (BonoboStorage *storage, Bonobo_Storage corba_storage)
 	return storage;
 }
 
-typedef BonoboStorage * (*driver_open_t)(const char *path, gint flags, gint mode);
-
-static driver_open_t
-load_storage_driver (const char *driver_name)
-{
-	GModule *m;
-	char *path;
-	gpointer driver;
-	
-	path = g_module_build_path (STORAGE_LIB, driver_name);
-	m = g_module_open (path, G_MODULE_BIND_LAZY);
-	g_free (path);
-	
-	if (m == NULL){
-		g_free (path);
-		return NULL;
-	}
-	
-	if (g_module_symbol (m, "bonobo_storage_driver_open", &driver))
-		return driver;
-	else
-		return NULL;
-}
-
 /**
  * bonobo_storage_open:
  * @driver: driver to use for opening.
  * @path: path where the base file resides
- * @flags: Unix open(2) flags
+ * @flags: Bonobo Storage OpenMode
  * @mode: Unix open(2) mode
  *
  * Opens or creates the file named at @path with the stream driver @driver.
  *
- * @driver is one of: "efs" or "fs" for now.
+ * @driver is one of: "efs", "vfs" or "fs" for now.
  *
  * Returns: a created BonoboStorage object.
  */
 BonoboStorage *
-bonobo_storage_open (const char *driver, const char *path, gint flags, gint mode)
+bonobo_storage_open (const char *driver, const char *path, gint flags, 
+		     gint mode)
 {
-	static driver_open_t fs_driver, efs_driver, vfs_driver;
-	driver_open_t *driver_ptr = NULL;
-	
+	StoragePlugin *p;
+
+	g_return_val_if_fail (driver != NULL, NULL);
 	g_return_val_if_fail (path != NULL, NULL);
-	
-	if (strcmp (driver, "fs") == 0){
-		if (fs_driver == NULL)
-			fs_driver = load_storage_driver ("storage_fs");
-		driver_ptr = &fs_driver;
-	} else if (strcmp (driver, "efs") == 0){
-		if (efs_driver == NULL)
-			efs_driver = load_storage_driver ("storage_efs");
-		driver_ptr = &efs_driver;
-	} else if (strcmp (driver, "vfs") == 0) {
-		if (vfs_driver == NULL)
-			vfs_driver = load_storage_driver ("storage_vfs");
-		driver_ptr = &vfs_driver;
-	} else {
-		g_warning ("Unknown driver `%s' specified", driver);
-		return NULL;
-	}
 
-	if (*driver_ptr == NULL)
-		return NULL;
+	if (!(p = bonobo_storage_plugin_find (driver))) return NULL;
 
-	return (*driver_ptr) (path, flags, mode);
+	if (p->storage_open) return p->storage_open (path, flags, mode);
+
+	return NULL;
 }
 
 /**

@@ -130,8 +130,9 @@ module Bonobo {
 		typedef long OpenMode;
 		const OpenMode READ  = 1;
 		const OpenMode WRITE = 2;
-		const OpenMode DENY_READ = 4;
-		const OpenMode DENY_WRITE = 8;
+		const OpenMode CREATE = 4;
+		const OpenMode FAILIFEXIST = 8;
+		const OpenMode COMPRESSED = 16;
 
 		exception NameExists {};
 

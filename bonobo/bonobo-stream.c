@@ -9,6 +9,7 @@
  */
 #include <config.h>
 #include <bonobo/bonobo-stream.h>
+#include <bonobo/bonobo-storage-plugin.h>
 
 static BonoboObjectClass *bonobo_stream_parent_class;
 
@@ -174,6 +175,35 @@ bonobo_stream_get_type (void)
 	}
 
 	return type;
+}
+
+/**
+ * bonobo_stream_open:
+ * @driver: driver to use for opening.
+ * @path: path where the base file resides
+ * @flags: Bonobo Storage OpenMode
+ * @mode: Unix open(2) mode
+ *
+ * Opens or creates the file named at @path with the stream driver @driver.
+ *
+ * @driver is one of: "fs" or "vfs" for now.
+ *
+ * Returns: a created BonoboStream object.
+ */
+BonoboStream *
+bonobo_stream_open (const char *driver, const char *path, gint flags, 
+		    gint mode)
+{
+	StoragePlugin *p;
+
+	g_return_val_if_fail (driver != NULL, NULL);
+	g_return_val_if_fail (path != NULL, NULL);
+
+	if (!(p = bonobo_storage_plugin_find (driver))) return NULL;
+
+	if (p->stream_open) return p->stream_open (path, flags, mode);
+
+	return NULL;
 }
 
 /**
