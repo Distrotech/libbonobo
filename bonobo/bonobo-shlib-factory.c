@@ -164,7 +164,7 @@ BonoboShlibFactory *bonobo_shlib_factory_new_multi (
 static void
 bonobo_shlib_factory_finalize (GtkObject *object)
 {
-	BonoboShlibFactory *c_factory = BONOBO_SHLIB_FACTORY (object);
+/*	BonoboShlibFactory *c_factory = BONOBO_SHLIB_FACTORY (object);*/
 
 	/*
 	 * We pray this happens only when we have released our

@@ -15,7 +15,7 @@
 #include <bonobo/bonobo-moniker-extender.h>
 #include <bonobo/bonobo-activation-context.h>
 
-POA_Bonobo_ActivationContext__vepv bonobo_activation_context_vepv;
+#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
 static Bonobo_Moniker
 impl_Bonobo_ActivationContext_createWithParent (PortableServer_Servant servant,
@@ -54,38 +54,15 @@ impl_Bonobo_ActivationContext_getExtender (PortableServer_Servant servant,
 	return bonobo_moniker_find_extender (monikerPrefix, interfaceId, ev);
 }
 
-/**
- * bonobo_activation_context_get_epv:
- *
- * Returns: The EPV for the default BonoboActivationContext implementation. 
- */
-static POA_Bonobo_ActivationContext__epv *
-bonobo_activation_context_get_epv (void)
+static void
+bonobo_activation_context_class_init (BonoboActivationContextClass *klass)
 {
-	POA_Bonobo_ActivationContext__epv *epv;
-
-	epv = g_new0 (POA_Bonobo_ActivationContext__epv, 1);
+	POA_Bonobo_ActivationContext__epv *epv = &klass->epv;
 
 	epv->getObject        = impl_Bonobo_ActivationContext_getObject;
 	epv->createFromName   = impl_Bonobo_ActivationContext_createFromName;
 	epv->createWithParent = impl_Bonobo_ActivationContext_createWithParent;
 	epv->getExtender      = impl_Bonobo_ActivationContext_getExtender;
-
-	return epv;
-}
-
-static void
-init_activation_context_corba_class (void)
-{
-	/* The VEPV */
-	bonobo_activation_context_vepv.Bonobo_Unknown_epv           = bonobo_object_get_epv ();
-	bonobo_activation_context_vepv.Bonobo_ActivationContext_epv = bonobo_activation_context_get_epv ();
-}
-
-static void
-bonobo_activation_context_class_init (BonoboObjectClass *klass)
-{
-	init_activation_context_corba_class ();
 }
 
 static GtkType
@@ -97,7 +74,7 @@ bonobo_activation_context_get_type (void)
                 GtkTypeInfo info = {
                         "BonoboActivationContext",
                         sizeof (BonoboActivationContext),
-                        sizeof (BonoboObjectClass),
+                        sizeof (BonoboActivationContextClass),
                         (GtkClassInitFunc) bonobo_activation_context_class_init,
                         (GtkObjectInitFunc) NULL,
                         NULL, /* reserved 1 */
@@ -105,50 +82,19 @@ bonobo_activation_context_get_type (void)
                         (GtkClassInitFunc) NULL
                 };
 
-                type = gtk_type_unique (bonobo_object_get_type (), &info);
+                type = bonobo_x_type_unique (
+			PARENT_TYPE,
+			POA_Bonobo_ActivationContext__init, NULL,
+			GTK_STRUCT_OFFSET (BonoboActivationContextClass, epv),
+			&info);
         }
 
         return type;
 }
 
-static Bonobo_ActivationContext
-bonobo_activation_context_corba_object_create (BonoboObject *object)
-{
-        POA_Bonobo_ActivationContext *servant;
-        CORBA_Environment ev;
-
-        servant = (POA_Bonobo_ActivationContext *) g_new0 (BonoboObjectServant, 1);
-        servant->vepv = &bonobo_activation_context_vepv;
-
-        CORBA_exception_init (&ev);
-
-        POA_Bonobo_ActivationContext__init ((PortableServer_Servant) servant, &ev);
-        if (BONOBO_EX (&ev)) {
-                g_free (servant);
-                CORBA_exception_free (&ev);
-                return CORBA_OBJECT_NIL;
-        }
-
-        CORBA_exception_free (&ev);
-
-        return bonobo_object_activate_servant (object, servant);
-}
-
 BonoboObject *
 bonobo_activation_context_new (void)
 {
-	BonoboObject *object;
-	Bonobo_ActivationContext corba_activation_context;
-
-	object = gtk_type_new (bonobo_activation_context_get_type ());
-
-	corba_activation_context =
-		bonobo_activation_context_corba_object_create (object);
-
-	if (corba_activation_context == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (object));
-		return NULL;
-	}
-
-        return bonobo_object_construct (object, corba_activation_context);
+        return BONOBO_OBJECT (gtk_type_new (
+		bonobo_activation_context_get_type ()));
 }

@@ -1,5 +1,35 @@
 2001-02-06  Michael Meeks  <michael@ximian.com>
 
+	* monikers/bonobo-moniker-query.c (bonobo_moniker_query_new): upd.
+
+	* bonobo/bonobo-shlib-factory.c (bonobo_shlib_factory_finalize): kill warning.
+
+	* bonobo/bonobo-moniker-simple.c (bonobo_moniker_simple_construct): upd.
+	(bonobo_moniker_simple_new): upd.
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_get_type): upd.
+	(bonobo_moniker_get_epv): move to
+	(bonobo_moniker_class_init): here & upd.
+	(init_moniker_corba_class): kill.
+	(bonobo_moniker_corba_object_create): kill.
+	(bonobo_moniker_construct): upd.
+
+	* bonobo/bonobo-running-context.c (bonobo_running_context_get_epv): move to
+	(bonobo_running_context_class_init): here & upd.
+	(init_running_context_corba_class): kill.
+	(bonobo_running_context_corba_object_create): kill.
+	(bonobo_running_context_get_type): upd.
+	(bonobo_running_context_new): upd.
+
+	* bonobo/bonobo-activation-context.c (bonobo_activation_context_get_type): upd.
+	(bonobo_activation_context_get_epv): move to
+	(bonobo_activation_context_class_init): here & upd.
+	(init_activation_context_corba_class): kill.
+	(bonobo_activation_context_corba_object_create): kill.
+	(bonobo_activation_context_new): upd.
+
+2001-02-06  Michael Meeks  <michael@ximian.com>
+
 	* configure.in: bump version to 0.35
 
 	* bonobo/bonobo-item-container.c (bonobo_item_container_destroy): 

@@ -25,9 +25,9 @@ struct _BonoboMonikerPrivate {
 	gboolean       sensitive;
 };
 
-static GtkObjectClass *bonobo_moniker_parent_class;
+#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-POA_Bonobo_Moniker__vepv bonobo_moniker_vepv;
+static GtkObjectClass *bonobo_moniker_parent_class;
 
 #define CLASS(o) BONOBO_MONIKER_CLASS (GTK_OBJECT (o)->klass)
 
@@ -383,36 +383,6 @@ impl_equal (PortableServer_Servant servant,
 	return CLASS (moniker)->equal (moniker, displayName, ev);
 }
 
-/**
- * bonobo_moniker_get_epv:
- *
- * Returns: The EPV for the default Bonobo Moniker implementation.
- */
-POA_Bonobo_Moniker__epv *
-bonobo_moniker_get_epv (void)
-{
-	POA_Bonobo_Moniker__epv *epv;
-
-	epv = g_new0 (POA_Bonobo_Moniker__epv, 1);
-
-	epv->_get_parent      = impl_get_parent;
-	epv->_set_parent      = impl_set_parent;
-	epv->getDisplayName   = impl_get_display_name;
-	epv->parseDisplayName = impl_parse_display_name;
-	epv->resolve          = impl_resolve;
-	epv->equal            = impl_equal;
-
-	return epv;
-}
-
-static void
-init_moniker_corba_class (void)
-{
-	/* The VEPV */
-	bonobo_moniker_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
-	bonobo_moniker_vepv.Bonobo_Moniker_epv = bonobo_moniker_get_epv ();
-}
-
 static void
 bonobo_moniker_destroy (GtkObject *object)
 {
@@ -425,7 +395,7 @@ bonobo_moniker_destroy (GtkObject *object)
 	g_free (moniker->priv->name);
 	g_free (moniker->priv);
 
-	GTK_OBJECT_CLASS (bonobo_moniker_parent_class)->destroy (object);
+	bonobo_moniker_parent_class->destroy (object);
 }
 
 static void
@@ -443,8 +413,9 @@ static void
 bonobo_moniker_class_init (BonoboMonikerClass *klass)
 {
 	GtkObjectClass *oclass = (GtkObjectClass *)klass;
+	POA_Bonobo_Moniker__epv *epv = &klass->epv;
 
-	bonobo_moniker_parent_class = gtk_type_class (bonobo_object_get_type ());
+	bonobo_moniker_parent_class = gtk_type_class (PARENT_TYPE);
 
 	oclass->destroy = bonobo_moniker_destroy;
 
@@ -457,7 +428,12 @@ bonobo_moniker_class_init (BonoboMonikerClass *klass)
 	klass->set_name   = impl_bonobo_moniker_set_name;
 	klass->get_name   = impl_bonobo_moniker_get_name;
 
-	init_moniker_corba_class ();
+	epv->_get_parent      = impl_get_parent;
+	epv->_set_parent      = impl_set_parent;
+	epv->getDisplayName   = impl_get_display_name;
+	epv->parseDisplayName = impl_parse_display_name;
+	epv->resolve          = impl_resolve;
+	epv->equal            = impl_equal;
 }
 
 /**
@@ -482,43 +458,14 @@ bonobo_moniker_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_object_get_type (), &info);
+		type = bonobo_x_type_unique (
+			PARENT_TYPE,
+			POA_Bonobo_Moniker__init, NULL,
+			GTK_STRUCT_OFFSET (BonoboMonikerClass, epv),
+			&info);
 	}
 
 	return type;
-}
-
-/**
- * bonobo_moniker_corba_object_create:
- * @object: the GtkObject that will wrap the CORBA object
- *
- * Creates and activates the CORBA object that is wrapped by the
- * @object BonoboObject.
- *
- * Returns: An activated object reference to the created object
- * or %CORBA_OBJECT_NIL in case of failure.
- */
-Bonobo_Moniker
-bonobo_moniker_corba_object_create (BonoboObject *object, gpointer shlib_id)
-{
-	POA_Bonobo_Moniker *servant;
-	CORBA_Environment ev;
-
-	servant = (POA_Bonobo_Moniker *) g_new0 (BonoboObjectServant, 1);
-	servant->vepv = &bonobo_moniker_vepv;
-
-	CORBA_exception_init (&ev);
-
-	POA_Bonobo_Moniker__init ((PortableServer_Servant) servant, &ev);
-	if (BONOBO_EX (&ev)){
-                g_free (servant);
-		CORBA_exception_free (&ev);
-                return CORBA_OBJECT_NIL;
-        }
-
-	CORBA_exception_free (&ev);
-
-	return bonobo_object_activate_servant_full (object, servant, shlib_id);
 }
 
 /**
@@ -534,22 +481,8 @@ bonobo_moniker_corba_object_create (BonoboObject *object, gpointer shlib_id)
  **/
 BonoboMoniker *
 bonobo_moniker_construct (BonoboMoniker *moniker,
-			  Bonobo_Moniker corba_moniker,
-			  const char    *prefix,
-			  gpointer       shlib_id)
+			  const char    *prefix)
 {
-	BonoboMoniker *retval;
-
-	if (!corba_moniker) {
-		corba_moniker = bonobo_moniker_corba_object_create (
-			BONOBO_OBJECT (moniker), shlib_id);
-
-		if (corba_moniker == CORBA_OBJECT_NIL) {
-			bonobo_object_unref (BONOBO_OBJECT (moniker));
-			return NULL;
-		}
-	}
-
 	if (prefix) {
 		moniker->priv->prefix = g_strdup (prefix);
 		moniker->priv->prefix_len = strlen (prefix);
@@ -557,10 +490,7 @@ bonobo_moniker_construct (BonoboMoniker *moniker,
 
 	moniker->priv->sensitive = TRUE;
 
-	retval = BONOBO_MONIKER (bonobo_object_construct (
-		BONOBO_OBJECT (moniker), corba_moniker));
-
-	return retval;
+	return moniker;
 }
 
 /**

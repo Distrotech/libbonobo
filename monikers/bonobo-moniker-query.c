@@ -146,6 +146,5 @@ BonoboMoniker *
 bonobo_moniker_query_new (void)
 {
 	return bonobo_moniker_construct (
-		gtk_type_new (bonobo_moniker_query_get_type ()),
-		CORBA_OBJECT_NIL, "query:(", "SHLIB_ID");
+		gtk_type_new (bonobo_moniker_query_get_type ()), "query:(");
 }

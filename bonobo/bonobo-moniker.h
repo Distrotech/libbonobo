@@ -10,7 +10,7 @@
 #ifndef _BONOBO_MONIKER_H_
 #define _BONOBO_MONIKER_H_
 
-#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-xobject.h>
 
 BEGIN_GNOME_DECLS
 
@@ -23,13 +23,15 @@ typedef struct _BonoboMonikerPrivate BonoboMonikerPrivate;
 #define BONOBO_IS_MONIKER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_TYPE))
 
 typedef struct {
-        BonoboObject          object;
+        BonoboXObject         object;
 	
 	BonoboMonikerPrivate *priv;
 } BonoboMoniker;
 
 typedef struct {
-	BonoboObjectClass parent_class;
+	BonoboXObjectClass      parent_class;
+
+	POA_Bonobo_Moniker__epv epv;
 
 	/*
 	 * virtual methods
@@ -61,14 +63,9 @@ typedef struct {
 } BonoboMonikerClass;
 
 GtkType                  bonobo_moniker_get_type            (void);
-POA_Bonobo_Moniker__epv *bonobo_moniker_get_epv             (void);
-Bonobo_Moniker           bonobo_moniker_corba_object_create (BonoboObject      *object, 
-							     gpointer shlib_id);
 
-BonoboMoniker           *bonobo_moniker_construct           (BonoboMoniker *monike,
-							     Bonobo_Moniker corba_moniker,
-							     const char    *prefix,
-							     gpointer       shlib_id);
+BonoboMoniker           *bonobo_moniker_construct           (BonoboMoniker     *moniker,
+							     const char        *prefix);
 
 Bonobo_Moniker           bonobo_moniker_get_parent          (BonoboMoniker     *moniker,
 							     CORBA_Environment *ev);
@@ -94,4 +91,3 @@ gboolean                 bonobo_moniker_get_case_sensitive  (BonoboMoniker     *
 END_GNOME_DECLS
 
 #endif /* _BONOBO_MONIKER_H_ */
-

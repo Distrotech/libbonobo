@@ -18,6 +18,8 @@
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-running-context.h>
 
+#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_RUNNING_HOOKS
 #endif
@@ -29,8 +31,6 @@
 #if 0
 #	define BONOBO_RUNNING_HOOKS
 #endif
-
-POA_Bonobo_RunningContext__vepv bonobo_running_context_vepv;
 
 typedef struct {
 	gboolean    emitted_last_unref;
@@ -312,41 +312,11 @@ impl_Bonobo_RunningContext_atExitUnref (PortableServer_Servant servant,
 	bonobo_running_context_at_exit_unref (object);
 }
 
-/**
- * bonobo_running_context_get_epv:
- *
- * Returns: The EPV for the default BonoboRunningContext implementation. 
- */
-static POA_Bonobo_RunningContext__epv *
-bonobo_running_context_get_epv (void)
-{
-	POA_Bonobo_RunningContext__epv *epv;
-
-	epv = g_new0 (POA_Bonobo_RunningContext__epv, 1);
-
-	epv->addObject     = impl_Bonobo_RunningContext_addObject;
-	epv->removeObject  = impl_Bonobo_RunningContext_removeObject;
-	epv->addKey        = impl_Bonobo_RunningContext_addKey;
-	epv->removeKey     = impl_Bonobo_RunningContext_removeKey;
-	epv->atExitUnref   = impl_Bonobo_RunningContext_atExitUnref;
-
-	return epv;
-}
-
 static void
-init_running_context_corba_class (void)
-{
-	/* The VEPV */
-	bonobo_running_context_vepv.Bonobo_Unknown_epv        = bonobo_object_get_epv ();
-	bonobo_running_context_vepv.Bonobo_RunningContext_epv = bonobo_running_context_get_epv ();
-}
-
-static void
-bonobo_running_context_class_init (BonoboObjectClass *klass)
+bonobo_running_context_class_init (BonoboRunningContextClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
-
-	init_running_context_corba_class ();
+	POA_Bonobo_RunningContext__epv *epv = &klass->epv;
 
 	((BonoboRunningContextClass *)klass)->last_unref = NULL;
 
@@ -356,6 +326,13 @@ bonobo_running_context_class_init (BonoboObjectClass *klass)
 		gtk_marshal_NONE__NONE, GTK_TYPE_NONE, 0);
 
 	gtk_object_class_add_signals (object_class, signals, LAST_SIGNAL);
+
+	epv->addObject     = impl_Bonobo_RunningContext_addObject;
+	epv->removeObject  = impl_Bonobo_RunningContext_removeObject;
+	epv->addKey        = impl_Bonobo_RunningContext_addKey;
+	epv->removeKey     = impl_Bonobo_RunningContext_removeKey;
+	epv->atExitUnref   = impl_Bonobo_RunningContext_atExitUnref;
+
 }
 
 static GtkType
@@ -375,58 +352,25 @@ bonobo_running_context_get_type (void)
                         (GtkClassInitFunc) NULL
                 };
 
-                type = gtk_type_unique (bonobo_object_get_type (), &info);
+                type = bonobo_x_type_unique (
+			PARENT_TYPE,
+			POA_Bonobo_RunningContext__init, NULL,
+			GTK_STRUCT_OFFSET (BonoboRunningContextClass, epv),
+			&info);
         }
 
         return type;
 }
 
-static Bonobo_RunningContext
-bonobo_running_context_corba_object_create (BonoboObject *object)
-{
-        POA_Bonobo_RunningContext *servant;
-        CORBA_Environment ev;
-
-        servant = (POA_Bonobo_RunningContext *) g_new0 (BonoboObjectServant, 1);
-        servant->vepv = &bonobo_running_context_vepv;
-
-        CORBA_exception_init (&ev);
-
-        POA_Bonobo_RunningContext__init ((PortableServer_Servant) servant, &ev);
-        if (BONOBO_EX (&ev)) {
-                g_free (servant);
-                CORBA_exception_free (&ev);
-                return CORBA_OBJECT_NIL;
-        }
-
-        CORBA_exception_free (&ev);
-
-        return bonobo_object_activate_servant (object, servant);
-}
-
 BonoboObject *
 bonobo_running_context_new (void)
 {
-	BonoboObject *object;
-	Bonobo_RunningContext corba_running_context;
-
 	if (bonobo_running_context) {
 		bonobo_object_ref (bonobo_running_context);
 		return bonobo_running_context;
 	}
 
-	object = gtk_type_new (bonobo_running_context_get_type ());
-
-	corba_running_context =
-		bonobo_running_context_corba_object_create (object);
-
-	if (corba_running_context == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (object));
-		return NULL;
-	}
-
-        bonobo_running_context =
-		bonobo_object_construct (object, corba_running_context);
+	bonobo_running_context = gtk_type_new (bonobo_running_context_get_type ());
 
 	bonobo_running_event_source = bonobo_event_source_new ();
 	bonobo_running_context_ignore_object (

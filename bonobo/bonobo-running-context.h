@@ -10,20 +10,22 @@
 #ifndef _BONOBO_RUNNING_CONTEXT_H_
 #define _BONOBO_RUNNING_CONTEXT_H_
 
-#include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-xobject.h>
 
 BEGIN_GNOME_DECLS
 
 typedef struct _BonoboRunningContextPrivate BonoboRunningContextPrivate;
 
 typedef struct {
-	BonoboObject parent;
+	BonoboXObject parent;
 
 	BonoboRunningContextPrivate *priv;
 } BonoboRunningContext;
 
 typedef struct {
-	BonoboObjectClass parent;
+	BonoboXObjectClass parent;
+
+	POA_Bonobo_RunningContext__epv epv;
 
 	void (*last_unref) (void);
 } BonoboRunningContextClass;

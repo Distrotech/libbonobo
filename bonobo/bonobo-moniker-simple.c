@@ -56,7 +56,10 @@ bonobo_moniker_simple_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (bonobo_moniker_get_type (), &info);
+		type = bonobo_x_type_unique (
+			bonobo_moniker_get_type (),
+			NULL, NULL, 0,
+			&info);
 	}
 
 	return type;
@@ -75,7 +78,6 @@ bonobo_moniker_simple_get_type (void)
  **/
 BonoboMoniker *
 bonobo_moniker_simple_construct (BonoboMonikerSimple         *moniker,
-				 Bonobo_Moniker               corba_moniker,
 				 const char                  *name,
 				 BonoboMonikerSimpleResolveFn resolve_fn)
 {
@@ -84,7 +86,7 @@ bonobo_moniker_simple_construct (BonoboMonikerSimple         *moniker,
 	moniker->resolve_fn = resolve_fn;
 
 	return bonobo_moniker_construct (
-		BONOBO_MONIKER (moniker), corba_moniker, name, resolve_fn);
+		BONOBO_MONIKER (moniker), name);
 }
 
 /**
@@ -105,7 +107,7 @@ bonobo_moniker_simple_new (const char                  *name,
 	moniker = gtk_type_new (bonobo_moniker_simple_get_type ());
 
 	return bonobo_moniker_simple_construct (
-		BONOBO_MONIKER_SIMPLE (moniker), CORBA_OBJECT_NIL,
+		BONOBO_MONIKER_SIMPLE (moniker),
 		name, resolve_fn);
 }
 
