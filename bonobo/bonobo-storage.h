@@ -56,31 +56,31 @@ typedef struct {
                                         CORBA_Environment *ev);
 } BonoboStorageClass;
 
-GtkType         bonobo_storage_get_type     (void);
+GtkType          bonobo_storage_get_type     (void);
 BonoboStorage   *bonobo_storage_construct    (BonoboStorage *storage,
-					    Bonobo_Storage corba_storage);
+					      Bonobo_Storage corba_storage);
 
 BonoboStorage   *bonobo_storage_open         (const char *driver,
-					    const char *path,
-					    gint flags,
-					    gint mode);
+					      const char *path,
+					      gint flags,
+					      gint mode);
 
 /*
  * Functions to open storages and streams from and existing.
  * Storage
  */
 BonoboStorage   *bonobo_storage_storage_open (BonoboStorage *storage,
-					    const char *path,
-					    const char *open_mode);
+					      const char *path,
+					      const char *open_mode);
 BonoboStream    *bonobo_stream_storage_open (BonoboStorage *storage,
-					    const char *path,
-					    const char *open_mode);
+					     const char *path,
+					     const char *open_mode);
 
-void bonobo_storage_write_class_id (BonoboStorage *storage,
-				   char *class_id);
+void             bonobo_storage_write_class_id (BonoboStorage *storage,
+						char *class_id);
 
-void bonobo_stream_write_class_id  (BonoboStream *stream,
-				   char *class_id);
+void             bonobo_stream_write_class_id  (BonoboStream *stream,
+						char *class_id);
 
 POA_Bonobo_Storage__epv *bonobo_storage_get_epv (void);
 

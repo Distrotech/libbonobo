@@ -1,3 +1,13 @@
+2000-05-08  Michael Meeks  <michael@helixcode.com>
+
+	* gshell/Makefile.am (gshell_SOURCES): add properties.h
+
+	* components/audio-ulaw/Makefile.am (EXTRA_DIST): correct case.
+
+	* samples/compound-doc/Makefile.am (EXTRA_DIST): ditto.
+
+	* components/text-plain/Makefile.am: correct case of EXTRA_DIST.
+
 2000-05-05  Michael Meeks  <michael@helixcode.com>
 
 	* idl/bonobo-persist.idl: comment out accidentaly committed methods.
