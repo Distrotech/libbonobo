@@ -1,3 +1,16 @@
+2001-01-18  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add): 
+	tolerate a NULL pb.
+
+	* bonobo/bonobo-transient.c (bonobo_transient_construct): 
+	Set NO_IMPLICIT_ACTIVATION policy; ORBit changed under us.
+	(bonobo_transient_destroy): tolerate failed POA instantiation
+
+2001-01-17  Michael Meeks  <michael@helixcode.com>
+
+	* NEWS: updated.
+
 2001-01-18  Dietmar Maurer  <dietmar@ximian.com>
 
 	* samples/controls/sample-control-factory.c: use the new factory
@@ -516,6 +529,7 @@
 	(real_emit_ui_event): ditto.
 
 	* bonobo/bonobo-win.c (bonobo_window_set_config_path): remove.
+
 2001-01-04  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_add_interface): compute a

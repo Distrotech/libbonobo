@@ -1,3 +1,48 @@
+Bonobo 0.32
+
+	* Monikers
+		* Virtualized more of BonoboMoniker (Me)
+		* Item container re-written (Me)
+		* Item handler implemented (Miguel)
+
+	* UI stuff (Me)
+		* Substantialy re-factored
+		* Acceleration (with Pavel)
+		* Configuration engine
+		* Toolbar customization dialog
+		* Ignore Gtk+ keybinding assignment
+		* Hide lots of internals
+		* Docs updated
+		* honour more GNOME prefs (Jacob)
+
+	* Property Bag (Dietmar)
+		* Improved exception handling
+		* Reference leaks fixed
+		* new Property listener methods
+		* Property is an Unknown
+
+	* Canvas Items (Mike Kestner)
+		* Add event signal
+		* Add grab / ungrab
+		* Fix UI merging code
+		* Update proxy creation
+
+	* Fixed reference handling on addInterface (Dietmar)
+
+	* Event Source updated (Dietmar)
+
+	* Several reference leaks nailed (Dietmar)
+
+	* Improved running context ref tracking (Dietmar)
+
+	* Macros to reduce code complexity (Dietmar)
+
+	* Header include cleanups (Jason Leach)
+
+	* Conversion to xml-i18n-tools (Maciej)
+
+	* Misc. bugs fixed (Darin, Eskil Olsen, Robin Slomkowski)
+
 Bonobo 0.31
 
 	* Serious bugs fixed
