@@ -34,7 +34,6 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_ClientSite.idl		\
 	$(top_srcdir)/idl/Bonobo_Context.idl		\
 	$(top_srcdir)/idl/Bonobo_Control.idl		\
-	$(top_srcdir)/idl/Bonobo_ConfigDatabase.idl	\
 	$(top_srcdir)/idl/Bonobo_Embeddable.idl		\
 	$(top_srcdir)/idl/Bonobo_ItemContainer.idl	\
 	$(top_srcdir)/idl/Bonobo_Listener.idl		\
@@ -65,7 +64,6 @@ libbonoboinclude_HEADERS =		\
 	bonobo-arg.h			\
 	bonobo-async.h			\
 	bonobo-context.h		\
-	bonobo-config-database.h	\
 	bonobo-event-source.h		\
 	bonobo-exception.h		\
 	bonobo-generic-factory.h	\
@@ -83,9 +81,8 @@ libbonoboinclude_HEADERS =		\
 	bonobo-persist-file.h		\
 	bonobo-persist-stream.h		\
 	bonobo-persist.h		\
-	bonobo-property-bag-client.h	\
 	bonobo-property-bag.h		\
-	bonobo-property.h		\
+	bonobo-property-bag-client.h	\
 	bonobo-shlib-factory.h		\
 	bonobo-simple-source.h		\
 	bonobo-storage-plugin.h		\
@@ -108,7 +105,6 @@ libbonobo_src =				\
 	bonobo-arg.c			\
 	bonobo-async.c			\
 	bonobo-context.c		\
-	bonobo-config-database.c	\
 	bonobo-event-source.c		\
 	bonobo-exception.c		\
 	bonobo-generic-factory.c	\
@@ -125,15 +121,14 @@ libbonobo_src =				\
 	bonobo-persist-file.c		\
 	bonobo-persist-stream.c		\
 	bonobo-persist.c		\
+	bonobo-property-bag.c		\
+	bonobo-property-bag-client.c	\
 	bonobo-shlib-factory.c		\
 	bonobo-storage-plugin.c		\
 	bonobo-storage.c		\
 	bonobo-stream-client.c		\
 	bonobo-stream-memory.c		\
 	bonobo-transient.c		\
-	bonobo-property.c		\
-	bonobo-property-bag.c		\
-	bonobo-property-bag-client.c	\
 	bonobo-running-context.c
 
 $(libbonobo_src) : $(CORBA_SOURCE)

@@ -332,24 +332,15 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
 	} else
 		my_ev = opt_ev;
 
-	if (CORBA_Object_is_a (object, "IDL:Bonobo/Property:1.0", my_ev)) {
+	es = Bonobo_Unknown_queryInterface (object, 
+		"IDL:Bonobo/EventSource:1.0", my_ev);
 
-		Bonobo_Property_removeListener (object, id, my_ev);
-
-	} else { 
-
-		es = Bonobo_Unknown_queryInterface (object, 
-		       "IDL:Bonobo/EventSource:1.0", my_ev);
-
-		if (BONOBO_EX(my_ev) || !es)
-			goto remove_listener_end;
-
+	if (!BONOBO_EX (my_ev) && es) {
+		
 		Bonobo_EventSource_removeListener (es, id, my_ev);
 
 		Bonobo_Unknown_unref (es, my_ev);
 	}
-
- remove_listener_end:
 
 	if (!opt_ev) {
 		if (BONOBO_EX (my_ev))
@@ -381,41 +372,26 @@ bonobo_event_source_client_add_listener (Bonobo_Unknown object,
 	} else
 		my_ev = opt_ev;
 
-	if (CORBA_Object_is_a (object, "IDL:Bonobo/Property:1.0", my_ev)) {
-		if (!(listener = bonobo_listener_new (event_callback, 
-						      user_data)))
-			goto add_listener_end;
-	      
-		corba_listener = BONOBO_OBJREF (listener);
+	es = Bonobo_Unknown_queryInterface (object, 
+		"IDL:Bonobo/EventSource:1.0", my_ev);
 
-		id = Bonobo_Property_addListener (object, corba_listener, 
-						  my_ev);
+	if (BONOBO_EX (my_ev) || !es)
+		goto add_listener_end;
 
-		bonobo_object_unref (BONOBO_OBJECT (listener));
+	if (!(listener = bonobo_listener_new (event_callback, user_data)))
+		goto add_listener_end;
 
-	} else {
-		es = Bonobo_Unknown_queryInterface (object, 
-		        "IDL:Bonobo/EventSource:1.0", my_ev);
-
-		if (BONOBO_EX(my_ev) || !es)
-			goto add_listener_end;
-
-		if (!(listener = bonobo_listener_new (event_callback, 
-						      user_data)))
-			goto add_listener_end;
-
-		corba_listener = BONOBO_OBJREF (listener);
+	corba_listener = BONOBO_OBJREF (listener);
 	
-		if (opt_mask)
-			id = Bonobo_EventSource_addListenerWithMask (es, 
-			        corba_listener, opt_mask, my_ev);
-		else 
-			id = Bonobo_EventSource_addListener (es, 
-				corba_listener, my_ev);
+	if (opt_mask)
+		id = Bonobo_EventSource_addListenerWithMask (es, 
+			corba_listener, opt_mask, my_ev);
+	else 
+		id = Bonobo_EventSource_addListener (es, corba_listener, 
+						     my_ev);
 
-		bonobo_object_unref (BONOBO_OBJECT (listener));
-		Bonobo_Unknown_unref (es, my_ev);
-	}
+	bonobo_object_unref (BONOBO_OBJECT (listener));
+	Bonobo_Unknown_unref (es, my_ev);
 
  add_listener_end:
 

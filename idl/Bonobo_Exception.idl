@@ -13,6 +13,7 @@
 module Bonobo {
 
 	exception NotSupported {};
+	exception NotImplemented {};
         exception IOError {};
         exception BadArg {};
 

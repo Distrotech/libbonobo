@@ -53,24 +53,24 @@ simple_print_value (char *name, CORBA_TypeCode tc)
 	switch (tc->kind) {
 	case CORBA_tk_boolean:
 		g_snprintf (s, sizeof (s), "%s",
-		    bonobo_property_bag_client_get_value_gboolean (pb, name, NULL) ?
+		    bonobo_pbclient_get_boolean (pb, name, NULL) ?
 			"True" : "False");
 		break;
 	case CORBA_tk_long:
-		g_snprintf (s, sizeof (s), "%ld",
-		    bonobo_property_bag_client_get_value_glong (pb, name, NULL));
+		g_snprintf (s, sizeof (s), "%d",
+		    bonobo_pbclient_get_long (pb, name, NULL));
 		break;
 	case CORBA_tk_float:
 		g_snprintf (s, sizeof (s), "%f",
-		    bonobo_property_bag_client_get_value_gfloat (pb, name, NULL));
+		    bonobo_pbclient_get_float (pb, name, NULL));
 		break;
 	case CORBA_tk_double:
 		g_snprintf (s, sizeof (s), "%f",
-		    bonobo_property_bag_client_get_value_gdouble (pb, name, NULL));
+		    bonobo_pbclient_get_double (pb, name, NULL));
 		break;
 	case CORBA_tk_string:
 		g_snprintf (s, sizeof (s), "%s",
-		    bonobo_property_bag_client_get_value_string (pb, name, NULL));
+		    bonobo_pbclient_get_string (pb, name, NULL));
 		break;
 	default:
 		g_snprintf (s, sizeof (s), "Unknown");
@@ -89,24 +89,24 @@ simple_print_default_value (char *name, CORBA_TypeCode tc)
 	switch (tc->kind) {
 	case CORBA_tk_boolean:
 		g_snprintf (s, sizeof (s), "%s",
-		    bonobo_property_bag_client_get_default_gboolean (pb, name, NULL) ?
+		    bonobo_pbclient_get_default_boolean (pb, name, NULL) ?
 			"True" : "False");
 		break;
 	case CORBA_tk_long:
-		g_snprintf (s, sizeof (s), "%ld",
-		    bonobo_property_bag_client_get_default_glong (pb, name, NULL));
+		g_snprintf (s, sizeof (s), "%d",
+		    bonobo_pbclient_get_default_long (pb, name, NULL));
 		break;
 	case CORBA_tk_float:
 		g_snprintf (s, sizeof (s), "%f",
-		    bonobo_property_bag_client_get_default_gfloat (pb, name, NULL));
+		    bonobo_pbclient_get_default_float (pb, name, NULL));
 		break;
 	case CORBA_tk_double:
 		g_snprintf (s, sizeof (s), "%f",
-		    bonobo_property_bag_client_get_default_gdouble (pb, name, NULL));
+		    bonobo_pbclient_get_default_double (pb, name, NULL));
 		break;
 	case CORBA_tk_string:
 		g_snprintf (s, sizeof (s), "%s",
-		    bonobo_property_bag_client_get_default_string (pb, name, NULL));
+		    bonobo_pbclient_get_default_string (pb, name, NULL));
 		break;
 	default:
 		g_snprintf (s, sizeof (s), "Unknown");
@@ -116,14 +116,15 @@ simple_print_default_value (char *name, CORBA_TypeCode tc)
 	return s;
 }
 
+
 static char *
 simple_print_read_only (char *name)
 {
-	BonoboPropertyFlags flags;
+	Bonobo_PropertyFlags flags;
 
-	flags = bonobo_property_bag_client_get_flags (pb, name, NULL);
+	flags = bonobo_pbclient_get_flags (pb, name, NULL);
 
-	return (flags & BONOBO_PROPERTY_READABLE) ?
+	return (flags & Bonobo_PROPERTY_READABLE) ?
 		"ReadOnly" : "ReadWrite";
 }
 
@@ -133,13 +134,13 @@ print_props (void)
 	GList *props;
 	GList *l;
 
-	props = bonobo_property_bag_client_get_property_names (pb, NULL);
+	props = bonobo_pbclient_get_keys (pb, NULL);
 
 	for (l = props; l != NULL; l = l->next) {
 		CORBA_TypeCode tc;
 		char *name = l->data;
 
-		tc = bonobo_property_bag_client_get_property_type (pb, name, NULL);
+		tc = bonobo_pbclient_get_type (pb, name, NULL);
 
 		g_print ("%s [%s] %s %s %s\n",
 			 name,
@@ -149,20 +150,21 @@ print_props (void)
 			 simple_print_read_only (name));
 	}
 
-	g_list_free (props);
+	bonobo_pbclient_free_keys (props);
 }
+
 
 static guint
 create_bag_client (void)
 {
 	print_props ();
 
-	bonobo_property_bag_client_set_value_gboolean (pb, "boolean-test", FALSE, NULL);
-	bonobo_property_bag_client_set_value_gint     (pb, "long-test", 3, NULL);
-	bonobo_property_bag_client_set_value_gfloat   (pb, "float-test", 0.00001, NULL);
-	bonobo_property_bag_client_set_value_gdouble  (pb, "double-test", 2.0001, NULL);
-	bonobo_property_bag_client_set_value_string   (pb, "string-test",
-						       "life is a wonderful gift", NULL);
+	bonobo_pbclient_set_boolean (pb, "boolean-test", FALSE, NULL);
+	bonobo_pbclient_set_long    (pb, "long-test", 3, NULL);
+	bonobo_pbclient_set_float   (pb, "float-test", 0.00001, NULL);
+	bonobo_pbclient_set_double  (pb, "double-test", 2.0001, NULL);
+	bonobo_pbclient_set_string  (pb, "string-test",
+				     "life is a wonderful gift", NULL);
 
 	bonobo_object_release_unref (pb, NULL);
 

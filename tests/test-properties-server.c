@@ -196,9 +196,9 @@ create_bag (void)
 	BONOBO_ARG_SET_STRING (def, "a default string");
 
 	bonobo_property_bag_add (pb, "string-test", PROP_STRING_TEST,
-				 BONOBO_ARG_STRING, def, dstr,
-				 BONOBO_PROPERTY_READABLE |
-				 BONOBO_PROPERTY_WRITEABLE);
+				 BONOBO_ARG_STRING, def, dstr, 
+				 Bonobo_PROPERTY_READABLE |
+				 Bonobo_PROPERTY_WRITEABLE);
 
 	bonobo_property_bag_add (pb, "long-test", PROP_LONG_TEST,
 				 BONOBO_ARG_LONG, NULL, dstr, 0);
@@ -234,24 +234,26 @@ print_props (void)
 	props = bonobo_property_bag_get_prop_list (pb);
 
 	for (l = props; l != NULL; l = l->next) {
+		BonoboArg *arg;
 		BonoboProperty *prop = l->data;
-		BonoboArg      *arg;
 		char           *s1, *s2;
 
-		arg = bonobo_property_bag_get_value (pb, prop->name, NULL);
+		arg = bonobo_pbclient_get_value (BONOBO_OBJREF(pb), prop->name,
+						NULL, NULL);
+
 		s1  = simple_prop_to_string (arg);
+
 		bonobo_arg_release (arg);
 
 		s2  = simple_prop_to_string (prop->default_value);
 
-		g_print ("Prop %12s [%2d] %s %s %s %s %s %s %s\n",
+		g_print ("Prop %12s [%2d] %s %s %s %s %s %s\n",
 			 prop->name, prop->type->kind,
 			 s1, s2,
-			 prop->docstring,
-			 prop->flags & BONOBO_PROPERTY_UNSTORED        ? "Unstored"         : "Stored",
-			 prop->flags & BONOBO_PROPERTY_READABLE        ? "Readable"         : "NotReadable",
-			 prop->flags & BONOBO_PROPERTY_WRITEABLE       ? "Writeable"        : "NotWriteable",
-			 prop->flags & BONOBO_PROPERTY_USE_DEFAULT_OPT ? "DefaultOptimized" : "NotDefaultOptimized");
+			 prop->doctitle,
+			 prop->flags & Bonobo_PROPERTY_READABLE        ? "Readable"         : "NotReadable",
+			 prop->flags & Bonobo_PROPERTY_WRITEABLE       ? "Writeable"        : "NotWriteable",
+			 prop->flags & Bonobo_PROPERTY_NO_LISTENING    ? "NoListening" : "Listeners-enabled");
 
 		g_free (s1);
 		g_free (s2);

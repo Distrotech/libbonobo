@@ -48,7 +48,15 @@ bonobo-moniker-util.[ch]:
 bonobo-progressive.[ch]:
 	Removed entirely - unused & stale.
 
+bonobo-property-bag-client.[ch]
+	Added more functions to access property bag data. The new functions are
+	named bonobo_bpclient_* instead of bonobo_property_bag_client_*
+
 IDL:
+
+Bonobo_Property.idl:
+	remove the Property interface and extended the PropertyBag interface
+	instead. included the ConfigDatabase interface.
 
 Bonobo_Storage.idl:
 	remove copyTo

@@ -37,9 +37,6 @@
 #include <Bonobo_Canvas.idl>
 #include <Bonobo_Embeddable.idl>
 
-/* Configuration bits */
-#include <Bonobo_ConfigDatabase.idl>
-
 /* Printing stuff */
 #include <Bonobo_Print.idl>
 

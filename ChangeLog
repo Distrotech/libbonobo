@@ -1,3 +1,19 @@
+2001-05-03  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-property-bag-client.[ch]: complete new code.
+
+	* idl/Bonobo_Property.idl: rewrote the idl. 
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_client_remove_listener): we dont have
+	Property object anymore - removed that code.
+	(bonobo_event_source_client_add_listener): removed Property code.
+
+	* bonobo/bonobo-property-bag.[ch]: new implementation. 
+
+	* idl/Bonobo_ConfigDatabase.idl: removed, we use the new
+	PropertyBag instead
+
 2001-05-03  Michael Meeks  <michael@ximian.com>
 
 	* monikers/bonobo-stream-cache.[ch]: port to HEAD.
