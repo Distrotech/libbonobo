@@ -43,23 +43,22 @@ typedef struct {
 
 typedef struct _OAFBaseServiceRegistry OAFBaseServiceRegistry;
 struct _OAFBaseServiceRegistry {
-	void (*lock)         (const OAFBaseServiceRegistry *registry,
-                              gpointer                      user_data);
-	void (*unlock)       (const OAFBaseServiceRegistry *registry,
-                              gpointer                      user_data);
-	char *(*check)       (const OAFBaseServiceRegistry *registry,
-                              const OAFBaseService         *base_service,
-                              int                          *distance, 
-                              gpointer                      user_data);
-
-	void (*register_new) (const OAFBaseServiceRegistry *registry,
-			      const char                   *ior,
-			      const OAFBaseService         *base_service,
-			      gpointer                      user_data);
-	void (*unregister)   (const OAFBaseServiceRegistry *registry,
-                              const char                   *ior,
-                              const OAFBaseService         *base_service,
-                              gpointer                      user_data);
+	void   (*lock)         (const OAFBaseServiceRegistry *registry,
+                                gpointer                      user_data);
+	void   (*unlock)       (const OAFBaseServiceRegistry *registry,
+                                gpointer                      user_data);
+	char * (*check)        (const OAFBaseServiceRegistry *registry,
+                                const OAFBaseService         *base_service,
+                                int                          *ret_distance, 
+                                gpointer                      user_data);
+	void   (*register_new) (const OAFBaseServiceRegistry *registry,
+                                const char                   *ior,
+                                const OAFBaseService         *base_service, 
+                                gpointer                      user_data);
+	void   (*unregister)   (const OAFBaseServiceRegistry *registry,
+                                const char                   *ior,
+                                const OAFBaseService         *base_service,
+                                gpointer                      user_data);
 };
 
 typedef CORBA_Object (*OAFBaseServiceActivator) (const OAFBaseService *base_service,
@@ -85,13 +84,11 @@ void         oaf_registration_unset         (const OAFBaseService         *base_
                                              CORBA_Environment            *ev);
 
 
-
 /* Do not release() the returned value */
 CORBA_Object oaf_service_get                (const OAFBaseService         *base_service);
 
 void         oaf_registration_activator_add (OAFBaseServiceActivator       activator,
                                              int                           priority);
-
 /* For compatibility */
 typedef OAFBaseService          OAFRegistrationCategory;
 typedef OAFBaseServiceActivator OAFServiceActivator;

@@ -265,8 +265,10 @@ oaf_activate (const char *requirements, char *const *selection_order,
  */
 
 CORBA_Object
-oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
-		      OAF_ActivationID * ret_aid, CORBA_Environment * ev)
+oaf_activate_from_id (const OAF_ActivationID aid, 
+                      OAF_ActivationFlags flags,
+		      OAF_ActivationID *ret_aid,
+                      CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	OAF_ActivationResult *res;
@@ -280,18 +282,9 @@ oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
 
 	ai = oaf_actid_parse (aid);
 
-	if (ai) {		
+ 	if (ai != NULL) {		
                 /* This is so that using an AID in an unactivated OD will work nicely */
-                OAFBaseService base_service; 
-
-		memset (&base_service, 0, sizeof (base_service));
-		base_service.name = "IDL:OAF/ObjectDirectory:1.0";
-		base_service.session_name = oaf_session_name_get ();
-		base_service.username = ai->user;
-		base_service.hostname = ai->host;
-		base_service.domain = ai->domain;
-
-		oaf_service_get (&base_service);
+                oaf_object_directory_get (ai->user, ai->host, ai->domain);
 
 		oaf_actinfo_free (ai);
 	}

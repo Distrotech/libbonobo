@@ -3,7 +3,7 @@
  *  liboaf: A library for accessing oafd in a nice way.
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
- *  Copyright (C) 2000 Eazel, Inc.
+ *  Copyright (C) 2000, 2001 Eazel, Inc.
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public
@@ -92,17 +92,17 @@ CORBA_Object
 oaf_registration_check (const OAFBaseService *base_service,
 			CORBA_Environment *ev)
 {
-	GSList *cur;
+	GSList *link;
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	int dist = INT_MAX;
 	char *ior = NULL;
 
-	for (cur = registries; cur; cur = cur->next) {
+	for (link = registries; link; link = link->next) {
 		RegistryInfo *ri;
 		char *new_ior;
 		int new_dist = dist;
 
-		ri = cur->data;
+		ri = link->data;
 
 		if (!ri->registry->check)
 			continue;
@@ -134,17 +134,17 @@ oaf_registration_iterate (const OAFBaseService *base_service,
 			  CORBA_Object obj, CORBA_Environment *ev,
 			  gulong offset, int nargs)
 {
-	GSList *cur;
+	GSList *link;
 	char *ior = NULL;
 
 	if (nargs == 4)
 		ior = CORBA_ORB_object_to_string (oaf_orb_get (), obj, ev);
 
-	for (cur = registries; cur; cur = cur->next) {
+	for (link = registries; link; link = link->next) {
 		RegistryInfo *ri;
 		void (*func_ptr) ();
 
-		ri = cur->data;
+		ri = link->data;
 
 		func_ptr = *(gpointer *) ((guchar *) ri->registry + offset);
 
@@ -241,12 +241,12 @@ activatable_servers[] =
 static CORBA_Object
 existing_check (const OAFBaseService *base_service, struct SysServer *ss)
 {
-	GSList *cur;
+	GSList *link;
 
-	for (cur = ss->instances; cur; cur = cur->next) {
+	for (link = ss->instances; link; link = link->next) {
 		struct SysServerInstance *ssi;
 
-		ssi = cur->data;
+		ssi = link->data;
 		if (
 		    (!ssi->username
 		     || STRMATCH (ssi->username, base_service->username))
@@ -267,13 +267,13 @@ static void
 oaf_existing_set (const OAFBaseService *base_service, struct SysServer *ss,
 	          CORBA_Object obj, CORBA_Environment *ev)
 {
-	GSList *cur;
+	GSList *link;
 	struct SysServerInstance *ssi;
 
         ssi = NULL;
 
-	for (cur = ss->instances; cur; cur = cur->next) {
-		ssi = cur->data;
+	for (link = ss->instances; link; link = link->next) {
+		ssi = link->data;
 		if (
 		    (!ssi->username
 		     || STRMATCH (ssi->username, base_service->username))
@@ -283,7 +283,7 @@ oaf_existing_set (const OAFBaseService *base_service, struct SysServer *ss,
 			|| STRMATCH (ssi->domain, base_service->domain))) break;
 	}
 
-	if (cur == NULL) {
+	if (link == NULL) {
 		ssi = g_new0 (struct SysServerInstance, 1);
 		ssi->already_running = obj;
 		ssi->username =
@@ -330,12 +330,12 @@ oaf_activators_use (const OAFBaseService *base_service, const char **cmd,
 		    int fd_arg, CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-	GSList *cur;
+	GSList *link;
 
-	for (cur = activator_list; CORBA_Object_is_nil (retval, ev) && cur;
-	     cur = cur->next) {
+	for (link = activator_list; CORBA_Object_is_nil (retval, ev) && link;
+	     link = link->next) {
 		ActivatorInfo *actinfo;
-		actinfo = cur->data;
+		actinfo = link->data;
 
 		retval = actinfo->activator (base_service, cmd, fd_arg, ev);
 	}

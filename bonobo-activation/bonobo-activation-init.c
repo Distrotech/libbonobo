@@ -171,14 +171,29 @@ oaf_domain_get (void)
 CORBA_Object
 oaf_activation_context_get (void)
 {
-	OAFBaseService base_service;
+	OAFBaseService base_service = {};
 
-	memset (&base_service, 0, sizeof (base_service));
 	base_service.name = "IDL:OAF/ActivationContext:1.0";
 	base_service.session_name = oaf_session_name_get ();
 	base_service.domain = "session";
 
 	return oaf_service_get (&base_service);
+}
+
+CORBA_Object
+oaf_object_directory_get (const char *username,
+                          const char *hostname,
+                          const char *domain)
+{
+        OAFBaseService base_service = {};
+
+        base_service.name = "IDL:OAF/ObjectDirectory:1.0";
+        base_service.session_name = oaf_session_name_get ();
+        base_service.username = username;
+        base_service.hostname = hostname;
+        base_service.domain = domain;
+        
+        return oaf_service_get (&base_service);
 }
 
 static char *oaf_od_ior = NULL;
