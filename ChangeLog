@@ -1,3 +1,11 @@
+2001-10-29  Seth Nickell  <snickell@stanford.edu>
+
+	* monikers/bonobo-moniker-query.h:
+	* monikers/bonobo-stream-cache.c: (bonobo_stream_cache_get_type):
+	* monikers/bonobo-stream-cache.h:
+
+	Run the magic scripts in the monikers directly too :-)
+	
 2001-10-28  Seth Nickell  <snickell@stanford.edu>
 
 	* bonobo/bonobo-event-source.c: (bonobo_event_source_new):

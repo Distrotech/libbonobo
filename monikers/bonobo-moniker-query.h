@@ -4,11 +4,12 @@
 
 G_BEGIN_DECLS
 
-#define BONOBO_MONIKER_QUERY_TYPE        (bonobo_moniker_query_get_type ())
-#define BONOBO_MONIKER_QUERY(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_MONIKER_QUERY_TYPE, BonoboMonikerQuery))
-#define BONOBO_MONIKER_QUERY_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_MONIKER_QUERY_TYPE, BonoboMonikerQueryClass))
-#define BONOBO_IS_MONIKER_QUERY(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_MONIKER_QUERY_TYPE))
-#define BONOBO_IS_MONIKER_QUERY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_QUERY_TYPE))
+#define BONOBO_TYPE_MONIKER_QUERY        (bonobo_moniker_query_get_type ())
+#define BONOBO_MONIKER_QUERY_TYPE        BONOBO_TYPE_MONIKER_QUERY // deprecated, you should use BONOBO_TYPE_MONIKER_QUERY
+#define BONOBO_MONIKER_QUERY(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_MONIKER_QUERY, BonoboMonikerQuery))
+#define BONOBO_MONIKER_QUERY_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_MONIKER_QUERY, BonoboMonikerQueryClass))
+#define BONOBO_IS_MONIKER_QUERY(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_MONIKER_QUERY))
+#define BONOBO_IS_MONIKER_QUERY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_MONIKER_QUERY))
 
 typedef struct _BonoboMonikerQuery        BonoboMonikerQuery;
 typedef struct _BonoboMonikerQueryPrivate BonoboMonikerQueryPrivate;

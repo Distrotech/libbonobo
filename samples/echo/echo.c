@@ -23,7 +23,7 @@
 /*
  * Our parent Gtk object type
  */ 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_TYPE_X_OBJECT
 
 /*
  * A pointer to our parent object class
@@ -82,5 +82,5 @@ echo_init (Echo *echo)
 BONOBO_TYPE_FUNC_FULL(
 	Echo,                /* Glib class name */
 	Bonobo_Sample_Echo,  /* CORBA interface name */
-	BONOBO_OBJECT_TYPE,  /* parent type */
+	BONOBO_TYPE_OBJECT,  /* parent type */
 	echo);               /* local prefix ie. 'echo'_class_init */

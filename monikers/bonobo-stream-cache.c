@@ -360,7 +360,7 @@ bonobo_stream_cache_get_type (void)
 		};
 		
 		type = bonobo_type_unique (
-			BONOBO_OBJECT_TYPE,
+			BONOBO_TYPE_OBJECT,
 			POA_Bonobo_Stream__init, NULL,
 			G_STRUCT_OFFSET (BonoboStreamCacheClass, epv),
 			&info, "BonoboStreamCache");
