@@ -136,6 +136,8 @@ oaf_activate_from_id(const OAF_ActivationID aid, OAF_ActivationFlags flags, OAF_
       regcat.domain = ai->domain;
 
       oaf_service_get(&regcat);
+
+      oaf_actinfo_free(ai);
     }
 
   if(!ev) 
