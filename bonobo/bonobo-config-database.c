@@ -582,9 +582,16 @@ bonobo_config_get_value  (Bonobo_ConfigDatabase  db,
 
 	retval = Bonobo_ConfigDatabase_getValue (db, key, locale, my_ev);
 
-	if (BONOBO_EX (my_ev) && !opt_ev)
-		g_warning ("Cannot get value: %s\n", 
-			   bonobo_exception_get_text (my_ev));
+	if (BONOBO_EX (my_ev)) {
+		if (!opt_ev) {
+			g_warning ("Cannot get value: %s\n", 
+				   bonobo_exception_get_text (my_ev));
+			
+			CORBA_exception_free (&ev);
+		}
+		return NULL;
+	}
+
 
 	if (retval && opt_tc != CORBA_OBJECT_NIL) {
 
