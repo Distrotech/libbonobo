@@ -57,13 +57,15 @@ module Bonobo {
 
 		boolean      dirExists   (in string dir);
 		
-		void         remove      (in string path);
+		void         removeValue (in string key);
+
+		void         removeDir   (in string dir);
 
 		void         addDatabase (in ConfigDatabase ddb, 
 					  in string filter_path,
 					  in string append_path);
-		void         sync        ();
 
+		void         sync        ();
 	};
 
 };

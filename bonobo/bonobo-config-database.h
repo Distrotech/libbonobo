@@ -61,8 +61,12 @@ typedef struct {
 					 const CORBA_char     *dir,
 					 CORBA_Environment    *ev);
 
-	void            (*remove)       (BonoboConfigDatabase *db,
-					 const CORBA_char     *path, 
+	void            (*remove_value) (BonoboConfigDatabase *db,
+					 const CORBA_char     *key, 
+					 CORBA_Environment    *ev);
+
+	void            (*remove_dir)   (BonoboConfigDatabase *db,
+					 const CORBA_char     *dir, 
 					 CORBA_Environment    *ev);
 
 	void            (*sync)         (BonoboConfigDatabase *db, 

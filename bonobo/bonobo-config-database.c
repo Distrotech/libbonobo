@@ -279,14 +279,25 @@ impl_Bonobo_ConfigDatabase_dirExists (PortableServer_Servant  servant,
 }
 
 static void 
-impl_Bonobo_ConfigDatabase_remove (PortableServer_Servant  servant,
-				   const CORBA_char       *path,
-				   CORBA_Environment      *ev)
+impl_Bonobo_ConfigDatabase_removeValue (PortableServer_Servant  servant,
+					const CORBA_char       *key,
+					CORBA_Environment      *ev)
 {
 	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
 
-	if (CLASS (cd)->remove)
-		CLASS (cd)->remove (cd, path, ev);
+	if (CLASS (cd)->remove_value)
+		CLASS (cd)->remove_value (cd, key, ev);
+}
+
+static void 
+impl_Bonobo_ConfigDatabase_removeDir (PortableServer_Servant  servant,
+				      const CORBA_char       *dir,
+				      CORBA_Environment      *ev)
+{
+	BonoboConfigDatabase *cd = DATABASE_FROM_SERVANT (servant);
+
+	if (CLASS (cd)->remove_dir)
+		CLASS (cd)->remove_dir (cd, dir, ev);
 }
 
 static void 
@@ -380,7 +391,8 @@ bonobo_config_database_class_init (BonoboConfigDatabaseClass *class)
 	epv->listDirs       = impl_Bonobo_ConfigDatabase_listDirs;
 	epv->listKeys       = impl_Bonobo_ConfigDatabase_listKeys;
 	epv->dirExists      = impl_Bonobo_ConfigDatabase_dirExists;
-	epv->remove         = impl_Bonobo_ConfigDatabase_remove;
+	epv->removeValue    = impl_Bonobo_ConfigDatabase_removeValue;
+	epv->removeDir      = impl_Bonobo_ConfigDatabase_removeDir;
 	epv->addDatabase    = impl_Bonobo_ConfigDatabase_addDatabase;
 	epv->sync           = impl_Bonobo_ConfigDatabase_sync;
 
