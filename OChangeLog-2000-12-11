@@ -1,5 +1,11 @@
 2000-09-16  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-win.c (update_dockitem): reduce flicker in re-build
+	(update_status): hide status before destroy.
+	(update_menus): hide / show around menu build.
+
+2000-09-16  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-component.c (bonobo_ui_container_path_exists),
 	(bonobo_ui_container_thaw, bonobo_ui_container_freeze): add
 	preconditions.
