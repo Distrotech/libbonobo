@@ -1,3 +1,19 @@
+2000-05-01  Michael Meeks  <michael@helixcode.com>
+
+	* samples/compound-doc/Makefile.am: hack out sample container.
+
+	* samples/compound-doc/container: Add Gergo's bonobo-hello, renamed
+	and fiddled a little.
+
+	* samples/compound-doc/bonobo-hello: Add Gergo's nice sample bonobo
+	component.
+
+	* configure.in: Kill print and add temporary oaf message.
+
+2000-04-27  Michael Meeks  <michael@helixcode.com>
+
+	* MAINTAINERS (Email): Nat steps down as maintainer.
+
 2000-05-01  Anders Carlsson  <andersca@gnu.org>
 
 	* bonobo/bonobo-object-directory-oaf.c (od_get_server_list): Try to get

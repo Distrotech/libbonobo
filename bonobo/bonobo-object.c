@@ -562,9 +562,10 @@ bonobo_object_query_interface (BonoboObject *object, const char *repo_id)
 
        CORBA_exception_init(&ev);
        retval = Bonobo_Unknown_query_interface (object->corba_objref, (CORBA_char *)repo_id, &ev);
-       if(ev._major != CORBA_NO_EXCEPTION)
+       if (ev._major != CORBA_NO_EXCEPTION)
                retval = CORBA_OBJECT_NIL;
        CORBA_exception_free (&ev);
+
        return retval;
 }
 
