@@ -12,6 +12,16 @@ documents.
 Bonobo interfaces, enabling developers to create reusable components
 and applications that can be used to form more complex documents.
 
+* Licensing
+
+   Bonobo libraries are released under the terms of the GNU Lesser
+General Public License (GNU LGPL).  While components and programs
+included with this release are licensed under the terms of the GNU
+General Public License (GNU GPL).
+
+   You can find copies of the licenses in the files COPYING.LIB and
+COPYING for the libraries and the code respectively.
+
 * What you will need
 
    You will need a working GNOME 1.0 system with the development tools
