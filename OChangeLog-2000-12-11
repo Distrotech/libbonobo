@@ -1,5 +1,24 @@
 2000-10-21  Martin Baulig  <baulig@suse.de>
 
+	* gshell/gshell.c (bonobo_object_has_interface): Removed; use
+	bonobo_object_client_has_interface() instead.
+	(buffer_create, buffer_create_for_control): Rewrote and improved
+	them; check whether we have a Control or an Embeddable and create
+	the Buffer accordingly.
+
+	* gshell/controls.c (destroy_view): Correctly destroy and unref
+	everything here.
+	(view_factory): bonobo_object_release_unref() the corba_control.
+	(gshell_control_wrapper): Return a BonoboObjectClient instead of
+	a BonoboEmbeddable.
+
+	* gshell/inout.c: Reflect latest storage API changes; use
+	bonobo_object_client_has_interface() instead of our own
+	bonobo_object_has_interface().
+	* gshell/controls.c (do_load_ps): Likewise.
+
+2000-10-21  Martin Baulig  <baulig@suse.de>
+
 	* bonobo/bonobo-zoomable-frame.c (bonobo_zoomable_frame_destroy): New
 	static function; release Bonobo::Zoomable object here.
 	(bonobo_zoomable_frame_finalize): New static function.
