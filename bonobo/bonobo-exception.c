@@ -10,7 +10,7 @@
 #include <glib.h>
 #include <string.h>
 
-#define GNOME_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
+#define GNOME_EXPLICIT_TRANSLATION_DOMAIN GETTEXT_PACKAGE
 #include <bonobo/bonobo-i18n.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-shutdown.h>

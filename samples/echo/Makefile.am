@@ -38,7 +38,7 @@ serverdir = $(libdir)/bonobo/servers
 server_in_files = Bonobo_Sample_Echo.server.in
 server_DATA = $(server_in_files:.server.in=.server)
 
-@XML_I18N_MERGE_SERVER_RULE@
+@INTLTOOL_SERVER_RULE@
 
 idldir    = $(datadir)/idl/bonobo-2.0
 idl_DATA  = Bonobo_Sample_Echo.idl

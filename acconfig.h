@@ -6,3 +6,4 @@
 #undef HAVE_STPCPY
 #undef HAVE_DLADDR
 #undef ENABLE_ORBIT2
+#undef GETTEXT_PACKAGE

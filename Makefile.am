@@ -5,7 +5,7 @@ libinclude_HEADERS = \
 	libbonobo.h
 
 EXTRA_DIST = message-of-doom \
-	xml-i18n-extract.in  \
-	xml-i18n-merge.in    \
-	xml-i18n-update.in   \
+	intltool-extract.in  \
+	intltool-merge.in    \
+	intltool-update.in   \
 	changes.txt

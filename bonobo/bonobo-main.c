@@ -231,7 +231,7 @@ bonobo_init_full (int *argc, char **argv,
 	bonobo_object_init ();
 	bonobo_context_init ();
 
-	bindtextdomain (PACKAGE, BONOBO_LOCALEDIR);
+	bindtextdomain (GETTEXT_PACKAGE, BONOBO_LOCALEDIR);
 
 	return TRUE;
 }
