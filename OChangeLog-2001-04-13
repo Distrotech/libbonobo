@@ -1,3 +1,7 @@
+2000-12-28  Arturo Tena <arturo@directmail.org>
+
+	* bonobo-idl/Makefile.am: Update CFLAGS / bonobo_idl_libs
+
 2000-12-27  Richard Hult  <rhult@codefactory.se>
 
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_get_ui_fname): 
