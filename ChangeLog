@@ -1,3 +1,27 @@
+2001-08-01  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_construct):
+	Use bonobo_marshal_POINTER__STRING, not g_cclosure_marshal_VOID__STRING
+	as closure marshaller.
+	(bonobo_generic_factory_new_generic): Use G_TYPE_POINTER as return value
+	for the closure.
+
+	* bonobo/bonobo-marshal.list: Changed BOXED:POINTER,STRING,POINTER to
+	BOXED:POINTER,STRING,BOXED and added OBJECT:STRING.
+
+	* bonobo/bonobo-moniker-simple.c (simple_moniker): Initialize the static
+	GValue before calling g_value_init() on it or you'll get a core dump.
+
+	* bonobo/bonobo-moniker-simple.c (bonobo_moniker_simple_construct): Use
+	bonobo_marshal_BOXED__POINTER_STRING_BOXED, not
+	bonobo_marshal_BOXED__POINTER_STRING_POINTER.
+
+2001-08-01  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-types.c (bonobo_corba_exception_get_type): We need to use
+	a custom boxed type for BONOBO_TYPE_CORBA_ENVIRONMENT since it's not a
+	CORBA::Object.
+
 2001-08-01  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-main.h: fix broken include guards.

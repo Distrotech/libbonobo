@@ -21,6 +21,7 @@
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-types.h>
+#include <bonobo/bonobo-marshal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-running-context.h>
@@ -170,7 +171,7 @@ bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
 	g_return_val_if_fail (corba_factory != CORBA_OBJECT_NIL, NULL);
 	
 	factory->priv->factory_closure =
-		bonobo_closure_store (factory_closure, g_cclosure_marshal_VOID__STRING);
+		bonobo_closure_store (factory_closure, bonobo_marshal_POINTER__STRING);
 	factory->priv->oaf_iid    = g_strdup (oaf_iid);
 
 	CORBA_exception_init (&ev);
@@ -289,14 +290,14 @@ bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 
-	g_value_init (&ret_val, BONOBO_OBJECT_TYPE);
+	g_value_init (&ret_val, G_TYPE_POINTER);
 	
 	bonobo_closure_invoke (factory->priv->factory_closure,
 			       &ret_val,
 			       BONOBO_GENERIC_FACTORY_TYPE, factory,
 			       G_TYPE_STRING, oaf_iid, 0);
 
-	ret = g_value_get_object (&ret_val);
+	ret = g_value_peek_pointer (&ret_val);
 	g_value_unset (&ret_val);
 
 	return ret;

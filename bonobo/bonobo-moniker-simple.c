@@ -26,7 +26,7 @@ simple_resolve (BonoboMoniker               *moniker,
 		CORBA_Environment           *ev)
 {
 	BonoboMonikerSimple *simple;
-	GValue               value;
+	GValue               value = { 0, };
 	Bonobo_Unknown       ret;
 
 	g_return_val_if_fail (BONOBO_IS_MONIKER_SIMPLE (moniker),
@@ -104,7 +104,7 @@ bonobo_moniker_simple_construct (BonoboMonikerSimple *moniker,
 	g_return_val_if_fail (resolve_closure != NULL, NULL);
 
 	moniker->priv->resolve_closure =
-		bonobo_closure_store (resolve_closure, bonobo_marshal_BOXED__POINTER_STRING_POINTER);
+		bonobo_closure_store (resolve_closure, bonobo_marshal_BOXED__POINTER_STRING_BOXED);
 	
 	return bonobo_moniker_construct (
 		BONOBO_MONIKER (moniker), name);

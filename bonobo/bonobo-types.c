@@ -212,7 +212,6 @@ bonobo_ ## name ## _get_type (void)						\
 }
 
 BONOBO_TYPE_CORBA_OBJECT_IMPL (corba_object, "CorbaObject", TC_CORBA_Object, FALSE);
-BONOBO_TYPE_CORBA_OBJECT_IMPL (corba_exception, "CorbaException", TC_CORBA_exception_type, FALSE);
 BONOBO_TYPE_CORBA_OBJECT_IMPL (unknown, "BonoboUnknown", TC_Bonobo_Unknown, TRUE);
 
 static gpointer
@@ -240,6 +239,61 @@ bonobo_corba_any_get_type (void)
 	if (!type)
 		type = g_boxed_type_register_static ("BonoboCorbaAny", corba_any_init,
 						     corba_any_copy, corba_any_free, TRUE);
+	return type;
+}
+
+static gpointer
+CORBA_exception__freekids (gpointer mem, gpointer dat)
+{
+	CORBA_Environment *env;
+	env = mem;
+	CORBA_exception_free (env);
+	return env + 1;
+}
+
+static CORBA_Environment *
+CORBA_exception__alloc (void)
+{
+	CORBA_Environment *retval = ORBit_alloc (sizeof (CORBA_Environment), 1, 
+						 &CORBA_exception__freekids);
+	CORBA_exception_init (retval);
+	return retval;
+}
+
+static gpointer
+corba_exception_init (void)
+{
+	return CORBA_exception__alloc ();
+}
+
+static gpointer
+corba_exception_copy (gpointer any)
+{
+	CORBA_Environment *src, *dest;
+
+	src = any;
+	dest = CORBA_exception__alloc ();
+	if (src->_major != CORBA_NO_EXCEPTION) {
+	    *dest = *src;
+	    CORBA_any__copy (&dest->_any, &src->_any);
+	}
+
+	return dest;
+}
+
+static void
+corba_exception_free (gpointer env)
+{
+	CORBA_free (env);
+}
+
+GType
+bonobo_corba_exception_get_type (void)
+{
+	static GType type = 0;
+	if (!type)
+		type = g_boxed_type_register_static ("BonoboCorbaException", corba_exception_init,
+						     corba_exception_copy, corba_exception_free, TRUE);
 	return type;
 }
 
