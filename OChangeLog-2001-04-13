@@ -1,3 +1,8 @@
+Fri Nov 26 08:15:53 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* components/bonobo.keys: use embeddable:text-plain as default
+	viewer for text/* 
+
 Thu Nov 25 12:51:09 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gshell/gshell.c (frame_create_toolbar): add toolbar support
