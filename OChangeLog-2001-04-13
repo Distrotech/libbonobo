@@ -1,3 +1,17 @@
+2000-01-30  Nat Friedman  <nat@helixcode.com>
+
+	* bonobo/bonobo-control.c: Added SET_FRAME to the signal
+ 	enum.
+	(bonobo_control_class_init): Setup the set_frame signal.
+	(bonobo_control_set_control_frame): Emit the set_frame signal.
+
+	* bonobo/bonobo-control.h: Reformatted the prototypes.
+	(BonoboControlClass): Added the set_frame signal.
+
+	* bonobo/bonobo-control.c (bonobo_control_get_remote_ui_handler):
+ 	Added a precondition to test if we have an objref to the control
+ 	frame.
+
 2000-01-26  Miguel de Icaza  <miguel@gnu.org>
 
 	* samples/controls/bonobo-clock-control.c (bonobo_clock_factory):
