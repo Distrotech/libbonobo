@@ -14,6 +14,8 @@
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-object.h>
 
+#include <gobject/gclosure.h>
+
 G_BEGIN_DECLS
 
 #define BONOBO_LISTENER_TYPE        (bonobo_listener_get_type ())
@@ -49,10 +51,11 @@ typedef void (*BonoboListenerCallbackFn)  (BonoboListener    *listener,
 					   CORBA_Environment *ev,
 					   gpointer           user_data);
 
-GType         bonobo_listener_get_type  (void);
+GType           bonobo_listener_get_type  (void);
 
-BonoboListener *bonobo_listener_new       (BonoboListenerCallbackFn event_callback, 
+BonoboListener *bonobo_listener_new       (BonoboListenerCallbackFn event_callback,
 					   gpointer                 user_data);
+BonoboListener *bonobo_listener_new_gc    (GClosure                *event_callback);
 
 char           *bonobo_event_make_name    (const char *idl_path, 
 					   const char *kind,

@@ -13,6 +13,7 @@
 
 
 #include <gobject/gobject.h>
+#include <gobject/gclosure.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-i18n.h>
 #include <liboaf/oaf.h>
@@ -29,7 +30,9 @@ G_BEGIN_DECLS
 typedef struct _BonoboGenericFactoryPrivate BonoboGenericFactoryPrivate;
 typedef struct _BonoboGenericFactory        BonoboGenericFactory;
 
-typedef BonoboObject * (*BonoboFactoryCallback) (BonoboGenericFactory *factory, const char *component_id, gpointer closure);
+typedef BonoboObject * (*BonoboFactoryCallback) (BonoboGenericFactory *factory,
+						 const char           *component_id,
+						 gpointer              closure);
 					
 struct _BonoboGenericFactory {
 	GObject                      base;
@@ -56,11 +59,13 @@ BonoboGenericFactory *bonobo_generic_factory_new (const char            *oaf_iid
 						  BonoboFactoryCallback  factory_cb,
 						  gpointer               user_data);
 
+BonoboGenericFactory *bonobo_generic_factory_new_gc (const char            *oaf_iid,
+						     GClosure              *factory_cb);
+
 BonoboGenericFactory *bonobo_generic_factory_construct (BonoboGenericFactory  *factory,
 							GNOME_ObjectFactory    corba_factory,
 							const char            *oaf_iid,
-							BonoboFactoryCallback  factory_cb,
-							gpointer               user_data);
+							GClosure              *factory_cb);
 
 POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 
@@ -74,15 +79,16 @@ POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 		g_error (_("Could not initialize Bonobo"));
 #endif
 
-#define BONOBO_OAF_FACTORY(oafiid, descr, version, callback, data)            \
-int main (int argc, char *argv [])                                            \
-{                                                                             \
-	BonoboGenericFactory *factory;                                        \
-                                                                              \
-	BONOBO_FACTORY_INIT (descr, version, &argc, argv);                    \
-	factory = bonobo_generic_factory_new (oafiid, callback, data);        \
-	bonobo_main ();                                                       \
-	return 0;                                                             \
+#define BONOBO_OAF_FACTORY(oafiid, descr, version, callback, data)		\
+int main (int argc, char *argv [])						\
+{										\
+	BonoboGenericFactory *factory;						\
+										\
+	BONOBO_FACTORY_INIT (descr, version, &argc, argv);			\
+										\
+	factory = bonobo_generic_factory_new (oafiid, callback, data);		\
+	bonobo_main ();								\
+	return 0;								\
 }                                                                             
 
 #define BONOBO_OAF_FACTORY_MULTI(oafiid, descr, version, callback, data)      \

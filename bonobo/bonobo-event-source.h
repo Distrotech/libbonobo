@@ -13,6 +13,8 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-listener.h>
 
+#include <gobject/gclosure.h>
+
 G_BEGIN_DECLS
 
 #define BONOBO_EVENT_SOURCE_TYPE        (bonobo_event_source_get_type ())
@@ -55,9 +57,15 @@ void        bonobo_event_source_client_remove_listener  (Bonobo_Unknown     obje
 Bonobo_EventSource_ListenerId 
 bonobo_event_source_client_add_listener                 (Bonobo_Unknown           object,
 							 BonoboListenerCallbackFn event_callback,
-							 const char               *opt_mask,
-							 CORBA_Environment        *opt_ev,
-							 gpointer                 user_data); 
+							 const char              *opt_mask,
+							 CORBA_Environment       *opt_ev,
+							 gpointer                 user_data);
+
+Bonobo_EventSource_ListenerId 
+bonobo_event_source_client_add_listener_gc              (Bonobo_Unknown     object,
+							 GClosure          *callback,
+							 const char        *opt_mask,
+							 CORBA_Environment *opt_ev);
 
 /* You don't want this routine */
 void               bonobo_event_source_ignore_listeners (BonoboEventSource *event_source);

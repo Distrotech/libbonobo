@@ -356,11 +356,10 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
 }
 
 Bonobo_EventSource_ListenerId
-bonobo_event_source_client_add_listener (Bonobo_Unknown object,
-					 BonoboListenerCallbackFn event_callback,
-					 const char *opt_mask,
-					 CORBA_Environment *opt_ev,
-					 gpointer user_data)
+bonobo_event_source_client_add_listener_gc (Bonobo_Unknown     object,
+					    GClosure          *event_callback,
+					    const char        *opt_mask,
+					    CORBA_Environment *opt_ev)
 {
 	CORBA_Environment ev, *my_ev;
 	BonoboListener *listener = NULL;
@@ -368,7 +367,6 @@ bonobo_event_source_client_add_listener (Bonobo_Unknown object,
 	Bonobo_EventSource_ListenerId id = 0;
 	Bonobo_Unknown es;
 
-	g_return_val_if_fail (object != CORBA_OBJECT_NIL, 0);
 	g_return_val_if_fail (event_callback != NULL, 0);
 	
 	if (!opt_ev) {
@@ -383,7 +381,7 @@ bonobo_event_source_client_add_listener (Bonobo_Unknown object,
 	if (BONOBO_EX (my_ev) || !es)
 		goto add_listener_end;
 
-	if (!(listener = bonobo_listener_new (event_callback, user_data)))
+	if (!(listener = bonobo_listener_new_gc (event_callback)))
 		goto add_listener_end;
 
 	corba_listener = BONOBO_OBJREF (listener);
@@ -409,4 +407,16 @@ bonobo_event_source_client_add_listener (Bonobo_Unknown object,
 
 	return id;
 } 
+
+Bonobo_EventSource_ListenerId 
+bonobo_event_source_client_add_listener (Bonobo_Unknown           object,
+					 BonoboListenerCallbackFn event_callback,
+					 const char              *opt_mask,
+					 CORBA_Environment       *opt_ev,
+					 gpointer                 user_data)
+{
+	return bonobo_event_source_client_add_listener_gc (
+		object, g_cclosure_new (G_CALLBACK (event_callback), user_data, NULL),
+		opt_mask, opt_ev);
+}
 

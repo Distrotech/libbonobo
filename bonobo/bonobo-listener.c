@@ -10,18 +10,21 @@
  */
 #include <config.h>
 #include <string.h>
+
 #include <gobject/gsignal.h>
+#include <gobject/gvaluetypes.h>
+
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-listener.h>
 #include <bonobo/bonobo-marshal.h>
+#include <bonobo/bonobo-types.h>
 
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static GObjectClass *bonobo_listener_parent_class;
 
 struct _BonoboListenerPrivate {
-	BonoboListenerCallbackFn event_callback;
-	gpointer                 user_data;
+	GClosure *event_callback;
 };
 
 enum SIGNALS {
@@ -41,15 +44,19 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 	listener = BONOBO_LISTENER (bonobo_object_from_servant (servant));
 
 	bonobo_object_ref (BONOBO_OBJECT (listener));
-	if (listener->priv->event_callback) 
-		listener->priv->event_callback (
-			listener, (CORBA_char *) event_name, 
-			(CORBA_any *) args, ev,
-			listener->priv->user_data);
 
+	if (listener->priv->event_callback)
+		bonobo_closure_invoke (listener->priv->event_callback,
+				       NULL,
+				       BONOBO_LISTENER_TYPE, listener,
+				       G_TYPE_STRING, event_name,
+				       BONOBO_TYPE_CORBA_ANY, args,
+				       G_TYPE_POINTER, ev);
+		
 	g_signal_emit (G_OBJECT (listener),
 		       signals [EVENT_NOTIFY], 0,
 		       event_name, args, ev);
+
 	bonobo_object_unref (BONOBO_OBJECT (listener));
 }
 
@@ -59,7 +66,13 @@ bonobo_listener_finalize (GObject *object)
 	BonoboListener *listener;
 
 	listener = BONOBO_LISTENER (object);
-	g_free (listener->priv);
+
+	if (listener->priv)
+	{
+		g_closure_unref (listener->priv->event_callback);
+		g_free (listener->priv);
+		listener->priv = 0;
+	}
 
 	bonobo_listener_parent_class->finalize (object);
 }
@@ -92,14 +105,13 @@ bonobo_listener_init (GObject *object)
 
 	listener = BONOBO_LISTENER(object);
 	listener->priv = g_new (BonoboListenerPrivate, 1);
-	listener->priv->event_callback = NULL;
-	listener->priv->user_data = NULL;
+	listener->priv->event_callback = 0;
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboListener, 
-			   Bonobo_Listener,
-			   PARENT_TYPE,
-			   bonobo_listener);
+		       Bonobo_Listener,
+		       PARENT_TYPE,
+		       bonobo_listener);
 
 /**
  * bonobo_listener_new:
@@ -126,19 +138,54 @@ BONOBO_TYPE_FUNC_FULL (BonoboListener,
  * Returns: A BonoboListener object.
  */
 BonoboListener*
-bonobo_listener_new (BonoboListenerCallbackFn event_callback, 
-		     gpointer                 user_data)
+bonobo_listener_new_gc (GClosure *event_cb)
 {
 	BonoboListener *listener;
 
 	listener = g_object_new (BONOBO_LISTENER_TYPE, NULL);
 	
-	listener->priv->event_callback = event_callback;
-	listener->priv->user_data = user_data;
+	g_closure_ref (event_cb);
+	g_closure_sink (event_cb);
+	if (G_CLOSURE_NEEDS_MARSHAL (event_cb))
+		g_closure_set_marshal (event_cb,
+				       bonobo_marshal_VOID__STRING_BOXED_POINTER);
+
+	listener->priv->event_callback = event_cb;
 
 	return listener;
 }
 
+/**
+ * bonobo_listener_new:
+ * @event_callback: function to be invoked when an event is emitted by the EventSource.
+ * @user_data: data passed to the functioned pointed by @event_call.
+ *
+ * Creates a generic event listener.  The listener calls the @event_callback 
+ * function and emits an "event_notify" signal when notified of an event.  
+ * The signal callback should be of the form:
+ *
+ * <informalexample>
+ * <programlisting>
+ *      void some_callback (BonoboListener *listener,
+ *                          char *event_name, 
+ *			    CORBA_any *any,
+ *			    CORBA_Environment *ev,
+ *			    gpointer user_data);
+ * </programlisting>
+ * </informalexample>
+ *
+ * You will typically pass the CORBA_Object reference in the return value
+ * to an EventSource (by invoking EventSource::addListener).
+ *
+ * Returns: A BonoboListener object.
+ */
+BonoboListener *
+bonobo_listener_new (BonoboListenerCallbackFn event_callback,
+		     gpointer                 user_data)
+{
+	return bonobo_listener_new_gc (
+		g_cclosure_new (G_CALLBACK (event_callback), user_data, NULL));
+}
 
 /**
  * bonobo_event_make_name:
