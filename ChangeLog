@@ -1,3 +1,8 @@
+2003-01-20  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* configure.in: Added German (de), Farsi (fa),
+	Macedonian (mk) and Dutch (nl) to ALL_LINGUAS
+
 2003-01-16  Daniel Yacob <locales@geez.org>
 
 	* configure.in: added am to ALL_LINGUAS
