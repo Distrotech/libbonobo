@@ -1,19 +1,19 @@
 # translation of libbonobo.HEAD.he.po to Hebrew
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002
+# Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002,2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.he\n"
-"POT-Creation-Date: 2002-11-22 05:08+0100\n"
-"PO-Revision-Date: 2002-11-22 14:15+0200\n"
+"POT-Creation-Date: 2003-01-03 06:01+0100\n"
+"PO-Revision-Date: 2003-01-03 14:59+0200\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0beta2\n"
+"X-Generator: KBabel 1.0\n"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -101,7 +101,7 @@ msgstr "פקודה או פועל לא ידועים"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr ""
+msgstr "הפקודה אינה תלוית רשיות"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -158,7 +158,7 @@ msgstr "לא ניתן לאתחל את Bonobo"
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "נכשל בפיענוח, או הרחבת '%s"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
@@ -198,13 +198,13 @@ msgstr ""
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
-msgid "Exception activating '%s"
-msgstr "חריגה בהפעלת '%s"
+msgid "Exception activating '%s'"
+msgstr "חריגה בהפעלת '%s'"
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
-msgid "Failed to activate '%s"
-msgstr "נכשל בהפעלת '%s"
+msgid "Failed to activate '%s'"
+msgstr "נכשל בהפעלת '%s'"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
@@ -212,11 +212,11 @@ msgstr ""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "תוכנית דוגמה של Bonobo שרת הד"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "רכיב הד"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
@@ -228,7 +228,7 @@ msgstr "לא הצלחתי לאתחל את Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "לא הצלחתי ליצור עותק של רכיב ההד לדוגמה"
 
 #: samples/echo/echo-client.c:45
 #, c-format
