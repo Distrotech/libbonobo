@@ -1,3 +1,8 @@
+2000-10-06  Ramiro Estrugo  <ramiro@eazel.com>
+
+	* bonobo.spec.in:
+	Remove gshell which apparently is not built anymore.
+	
 2000-10-05  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-ui-component.h: Move BEGIN_GNOME_DECLS after the
