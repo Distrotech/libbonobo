@@ -1,5 +1,8 @@
 2000-12-24  ERDI Gergo  <cactus@cactus.rulez.org>
 
+	* bonobo/bonobo-persist-stream.c: allow missong save/load
+	implementations and raise NotSupported exceptions accordingly
+
 	* bonobo/bonobo-persist-file.c: allow missing save/load
 	implementations and raise NotSupported exceptions accordingly
 

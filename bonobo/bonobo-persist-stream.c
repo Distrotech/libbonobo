@@ -43,8 +43,13 @@ impl_load (PortableServer_Servant servant,
 	else {
 		GtkObjectClass *oc = GTK_OBJECT (ps)->klass;
 		BonoboPersistStreamClass *class = BONOBO_PERSIST_STREAM_CLASS (oc);
-		
-		(*class->load)(ps, stream, type, ev);
+
+		if (class->load)
+			(*class->load)(ps, stream, type, ev);
+		else
+			CORBA_exception_set (
+				ev, CORBA_USER_EXCEPTION,
+				ex_Bonobo_NotSupported, NULL);
 	}
 }
 
@@ -62,8 +67,13 @@ impl_save (PortableServer_Servant servant,
 	else {
 		GtkObjectClass *oc = GTK_OBJECT (ps)->klass;
 		BonoboPersistStreamClass *class = BONOBO_PERSIST_STREAM_CLASS (oc);
-		
-		(*class->save)(ps, stream, type, ev);
+
+		if (class->save)
+			(*class->save)(ps, stream, type, ev);
+		else
+			CORBA_exception_set (
+				ev, CORBA_USER_EXCEPTION,
+				ex_Bonobo_NotSupported, NULL);
 	}
 
 	ps->is_dirty = FALSE;
@@ -112,14 +122,6 @@ init_persist_stream_corba_class (void)
 	bonobo_persist_stream_vepv.Bonobo_PersistStream_epv = bonobo_persist_stream_get_epv ();
 }
 
-static void
-bonobo_persist_stream_nop (BonoboPersistStream *ps, Bonobo_Stream stream,
-			   Bonobo_Persist_ContentType type,
-			   CORBA_Environment *ev)
-{
-	/* Nothing */
-}
-
 static CORBA_long
 bonobo_persist_stream_size_unknown (BonoboPersistStream *ps,
 				    CORBA_Environment *ev)
@@ -149,8 +151,8 @@ bonobo_persist_stream_class_init (BonoboPersistStreamClass *klass)
 	 * Override and initialize methods
 	 */
 
-	klass->save = bonobo_persist_stream_nop;
-	klass->load = bonobo_persist_stream_nop;
+	klass->save = NULL;
+	klass->load = NULL;
 	klass->get_size_max = bonobo_persist_stream_size_unknown;
 
 	persist_class->get_content_types = get_content_types;
