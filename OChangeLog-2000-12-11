@@ -1,3 +1,8 @@
+2000-10-20  John Gotts  <jgotts@linuxsavvy.com>
+
+	* bonobo.spec.in: Added some missing files.  lib/*.so should probably
+	be moved to -devel, but maybe somebody else knows better.
+
 2000-10-20  Darin Adler  <darin@eazel.com>
 
 	* bonobo/extract.c: (find_strings), (print_line_and_free),
