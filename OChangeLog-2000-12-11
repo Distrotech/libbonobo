@@ -1,5 +1,15 @@
 2000-10-08  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/bonobo-zoomable-frame.c: Renamed `_servant' to `servant'.
+	(CLASS): Removed this unused #define.
+	(impl_Bonobo_ZoomableFrame_report_zoom_level_changed): Added.
+	(impl_Bonobo_ZoomableFrame_report_zoom_parameters_changed): Added.
+
+	* bonobo/bonobo-zoomable.c: Renamed `_servant' to `servant'.
+	(impl_get_arg): Renamed to bonobo_zoomable_get_arg().
+
+2000-10-08  Martin Baulig  <baulig@suse.de>
+
 	* idl/bonobo-zoomable.idl: Added correct copyright header, added Maciej
 	Stachowiak as author and Eazel as copyright holder and use the name
 	`GNU Lesser General Public License' for the LGPL.
