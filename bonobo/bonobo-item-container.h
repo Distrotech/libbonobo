@@ -43,6 +43,12 @@ void          gnome_container_add         (GnomeContainer *container,
 void         gnome_container_remove       (GnomeContainer *container,
 					   GnomeObject    *object);
 
+/*
+ * Exported vectors
+ */
+extern POA_GNOME_Container__epv gnome_container_epv;
+extern POA_GNOME_Container__vepv gnome_container_vepv;
+
 END_GNOME_DECLS
 
 #endif

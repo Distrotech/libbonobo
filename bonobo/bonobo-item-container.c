@@ -47,19 +47,6 @@ create_gnome_container (GnomeObject *object)
 		return CORBA_OBJECT_NIL;
 }
 
-/**
- * gnome_container_get_moniker:
- * @container: A GnomeContainer object whose moniker is being requested.
- *
- * Returns: The GnomeMoniker associated with @container.
- */
-GnomeMoniker *
-gnome_container_get_moniker (GnomeContainer *container)
-{
-	g_error ("Implement me");
-	return NULL;
-}
-
 static void
 gnome_container_destroy (GtkObject *object)
 {
@@ -68,11 +55,54 @@ gnome_container_destroy (GtkObject *object)
 	GTK_OBJECT_CLASS (gnome_container_parent_class)->destroy (object);
 }
 
+/*
+ * Returns a list of the objects in this container
+ */
+static GNOME_Container_ObjectList *
+impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
+{
+	GnomeObject *object = gnome_object_from_servant (servant);
+	GnomeContainer *container = GNOME_CONTAINER (object);
+	GNOME_Container_ObjectList *return_list;
+	int items;
+	
+	return_list = GNOME_Container_ObjectList__alloc ();
+	if (return_list == NULL)
+		return NULL;
+
+	items = g_list_length (container->client_sites);
+	
+	return_list->_buffer = CORBA_sequence_GNOME_Unknown_allocbuf (items);
+	if (return_list->_buffer == NULL){
+		CORBA_free (return_list);
+		return NULL;
+	}
+	
+	return_list->_length = items;
+	return_list->_maximum = items;
+
+	/*
+	 * Assemble the list of objects
+	 */
+	for (i = 0, l = container->client_sites; l; l = l->next, i++){
+		GnomeClientSite *client_site = GNOME_CLIENT_SITE (l->data);
+		GnomeObject *bound_object = client_site->bound_object;
+		
+		return_list->_buffer [i] = CORBA_Object_duplicate (
+			gnome_object_corba_objref (bound_object));
+	}
+
+	return return_list;
+}
+
+/*
+ * GnomeContainer CORBA vector-class initialization routine
+ */
 static void
 corba_container_class_init (void)
 {
 	/* Init the epv */
-	    /* nothing just yet */
+	gnome_container_epv.enum_objects = impl_enum_objects;
 	
 	/* Init the vepv */
 	gnome_container_vepv._base_epv     = &gnome_object_base_epv;
@@ -80,6 +110,9 @@ corba_container_class_init (void)
 	gnome_container_vepv.GNOME_Container_epv = &gnome_container_epv;
 }
 
+/*
+ * GnomeContainer class initialization routine
+ */
 static void
 gnome_container_class_init (GnomeContainerClass *container_class)
 {
@@ -92,6 +125,9 @@ gnome_container_class_init (GnomeContainerClass *container_class)
 	corba_container_class_init ();
 }
 
+/*
+ * GnomeContainer instance initialization routine
+ */
 static void
 gnome_container_init (GnomeContainer *container)
 {
