@@ -147,11 +147,26 @@ interface Control : Bonobo::Unknown {
 };
 
 interface PropertyControl : Bonobo::Unknown {
+
+	enum Action {
+		APPLY,
+		HELP
+	};
+	
 	/**
 	 *   An interface for allowing a customization interface
 	 * in addition / instead of a property bag; rather immature.
 	 */
 	Control getControl ();
+
+	/**
+	 * notifyAction:
+	 * @action: The action that should be performed on the settings.
+	 *
+	 * Tell the client what it should do with the settings in the
+	 * PropertyControl.
+	 */
+	void notifyAction (in Action action);
 };
 
 };

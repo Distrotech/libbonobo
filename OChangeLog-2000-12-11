@@ -1,3 +1,21 @@
+2000-11-28  Iain Holmes  <iain@helixcode.com>
+
+	* storage-modules/bonobo-storage-fs.c (fs_list_contents): Don't
+	include `.' and `..' in the listing.
+	
+	* bonobo/bonobo-property-control.[ch]: Implement the 
+	Bonobo::PropertyControl interface.
+
+	* bonobo/bonobo.h: Add bonobo-property-control.h
+
+	* idl/bonobo-control.idl: Add the Action enum and a notifyAction
+	method to the Bonobo::PropertyControl interface.
+
+2000-11-28  Iain Holmes  <iain@helixcode.com>
+
+	* bonobo/bonobo-selector.c (bonobo_selector_init): Set the 
+	column titles passive.
+
 2000-11-28  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-main.c (bonobo_activate): add context_init
