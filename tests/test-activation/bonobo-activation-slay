@@ -11,6 +11,7 @@
 #   running when script was run.
 #
 use             Getopt::Std;
+use             POSIX;
 
 $usage_error = 0;
 
@@ -43,10 +44,8 @@ if ($usage_error == 1 || $opt_h) {
 
 # Build ps command.
 #
-$username = $ENV{'USER'};
-
-chomp($username);
-$ps_cmd = "/bin/ps -e -opid,user,args | /bin/grep ".$username;
+$uid = getuid();
+$ps_cmd = "/bin/ps -U $uid -opid,args";
 
 # get OAF files
 #
