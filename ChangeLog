@@ -1,3 +1,17 @@
+2001-07-10  Michael Meeks  <michael@ximian.com>
+
+	* tests/Makefile.am: remove test-storage - it's inside
+	libgnome now.
+
+	* bonobo/Makefile.am: remove bonobo-storage-plugin.[ch]
+
+	* bonobo/bonobo-storage.h: horribly savage.
+
+	* bonobo/bonobo-storage.c: remove all deprecated crud,
+	except std. bonobo_storage_copy_to impl.
+
+	* changes.txt: document the fun.
+
 2001-07-09  Michael Meeks  <michael@ximian.com>
 
 	* monikers/Makefile.am (libmoniker_std_la_SOURCES): remove

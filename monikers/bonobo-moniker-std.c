@@ -3,6 +3,7 @@
 
 #include <bonobo/bonobo-shlib-factory.h>
 #include "bonobo-moniker-std.h"
+#include "bonobo-moniker-query.h"
 
 static BonoboObject *
 bonobo_std_moniker_factory (BonoboGenericFactory *this,

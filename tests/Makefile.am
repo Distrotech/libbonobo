@@ -2,7 +2,6 @@ noinst_PROGRAMS =		\
 	test-moniker		\
 	test-properties-server	\
 	test-properties-client	\
-	test-storage		\
 	test-event-source	\
 	test-object
 
@@ -25,8 +24,6 @@ test_properties_server_SOURCES =			\
 test_properties_client_SOURCES =			\
 	test-properties-client.c
 
-test_storage_SOURCES = test-storage.c
-
 test_moniker_SOURCES = test-moniker.c
 
 test_object_SOURCES = test-object.c
@@ -37,5 +34,4 @@ TESTS_ENVIRONMENT =					\
 	LD_LIBRARY_PATH=$(top_builddir)/bonobo/.libs/	\
 	BONOBO_PLUGIN_PATH=$(top_builddir)/storage-modules/.libs
 
-# test-storage
 TESTS = test-moniker test-event-source test-object

@@ -15,6 +15,21 @@ bonobo-stream.[ch]:
 	renamed bonobo_stream_open_full to bonobo_stream_open
 	moved bonobo_stream_open into bonobo_storage
 
+bonobo-storage-plugin.[ch]:
+	Removed - we use monikers instead now for all storage and stream
+	naming and access.
+
+bonobo-storage.[ch]:
+	removed bonobo_stream_open
+	removed bonobo_storage_open
+	removed bonobo_storage_open_full
+	Use monikers (bonobo_get_object) instead.
+	Remove this nasty chunk of 'wrapper' code obsoleted by
+	BonoboObject. Whole API dead - use BonoboObject. Only API
+	left is bonobo_storage_copy_to - the only impl. in there.
+	NB. return values from openStream, openStorage need their
+	own CORBA_Object_duplicate on return.
+
 bonobo-object.[ch]:
 	Deprecate in favour of BonoboXObject
 		removed bonobo_object_get_epv
@@ -55,6 +70,8 @@ bonobo-property-bag-client.[ch]
 	to make it easier to set properties.
 	Change the way varrag wrappers work, to be name / type / value
 	triplets instead of type-unsafe name / value pairs.
+
+
 
 IDL:
 
