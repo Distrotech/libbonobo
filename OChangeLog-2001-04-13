@@ -1,3 +1,7 @@
+2001-01-18  Miguel de Icaza  <miguel@gnu.org>
+
+	* Re-enable bonobo-idl.
+
 2001-01-17  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-item-handler.c (impl_enum_objects): if no enum_objects
