@@ -304,7 +304,7 @@ bonobo_value_get_unknown (GValue *value)
 		BONOBO_VALUE_HOLDS_UNKNOWN (value),
 		CORBA_OBJECT_NIL);
 
-	return value->data[0].v_pointer;
+	return bonobo_unknown_dup_ref (value->data[0].v_pointer);
 }
 
 BonoboArg *
@@ -314,7 +314,7 @@ bonobo_value_get_corba_any (GValue *value)
 		BONOBO_VALUE_HOLDS_CORBA_ANY (value),
 		NULL);
 
-	return value->data[0].v_pointer;
+	return bonobo_arg_copy (value->data[0].v_pointer);
 }
 
 CORBA_Object
@@ -324,7 +324,7 @@ bonobo_value_get_corba_object (GValue *value)
 		BONOBO_VALUE_HOLDS_CORBA_OBJECT (value),
 		CORBA_OBJECT_NIL);
 
-	return value->data[0].v_pointer;
+	return CORBA_Object_duplicate (value->data[0].v_pointer, NULL);
 }
 
 CORBA_Environment *
@@ -334,6 +334,9 @@ bonobo_value_get_corba_exception (GValue *value)
 		BONOBO_VALUE_HOLDS_CORBA_EXCEPTION (value),
 		NULL);
 
+	g_warning ("Broken codepath");
+	/* We need to dup this - and allocate a CORBA_Environment *ev */
+	/* FIXME: this is _UTTERLY_ broken */
 	return value->data[0].v_pointer;
 }
 

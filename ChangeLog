@@ -1,5 +1,12 @@
 2001-08-01  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-types.c (bonobo_value_get_unknown): ref.
+	(bonobo_value_get_corba_object): ref the thing
+	(bonobo_value_get_corba_any): copy more inefficiency.
+	(bonobo_value_get_corba_exception): knobble - just too broken.
+
+2001-08-01  Michael Meeks  <michael@ximian.com>
+
 	* monikers/bonobo-moniker-oaf.c: upd.
 
 	* monikers/bonobo-moniker-query.c: upd.
