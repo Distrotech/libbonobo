@@ -1,5 +1,13 @@
 2000-10-08  Martin Baulig  <baulig@suse.de>
 
+	* idl/bonobo-zoomable.idl: Added correct copyright header, added Maciej
+	Stachowiak as author and Eazel as copyright holder and use the name
+	`GNU Lesser General Public License' for the LGPL.
+	* bonobo/bonobo-zoomable.[ch]: Likewise.
+	* bonobo/bonobo-zoomable-frame.[ch]: Likewise.
+
+2000-10-08  Martin Baulig  <baulig@suse.de>
+
 	* gshell/gshell.c (buffer_create_zoomable_frame): New static function.
 	(verb_Zoom_cb): New static function.
 	(gshell_verbs): Added new verbs "ZoomIn", "ZoomOut", "ZoomToFit" and
