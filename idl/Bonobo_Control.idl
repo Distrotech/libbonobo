@@ -62,6 +62,7 @@ interface ControlFrame : Bonobo::Unknown {
 	 * and the undo operation has been called
 	 */
 	void deactivate_and_undo ();
+
 };
 
 interface Control : Bonobo::Unknown {
@@ -144,10 +145,6 @@ interface Control : Bonobo::Unknown {
 	 * Set the control's activity state.
 	 */
 	void set_state (in Control::State state);
-
-       
-	void realize   ();
-	void unrealize ();
 };
 
 interface PropertyControl : Bonobo::Unknown {
