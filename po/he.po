@@ -6,22 +6,22 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.he\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
-"PO-Revision-Date: 2003-01-03 14:59+0200\n"
+"POT-Creation-Date: 2003-04-29 13:33+0200\n"
+"PO-Revision-Date: 2003-04-29 17:41+0300\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0\n"
+"X-Generator: KBabel 1.0.1\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "לא יכול למצוא איזה ילד היה רשום אצל השרת"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
-msgstr ""
+msgstr "זיהוי ישום לא תקני"
 
 #: activation-server/activation-server-main.c:66
 msgid "Directory to read .server files from"
@@ -69,8 +69,7 @@ msgstr "איננו מטפלים בהפעלת אובייקטי shlib בתהליך
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr ""
-"קובץ ההגדרות של Bonobo Activation לא נקרא בהצלחה. אנא, בדוק אם הוא תקין ב: %s"
+msgstr "קובץ ההגדרות של Bonobo Activation לא נקרא בהצלחה. אנא, בדוק אם הוא תקין ב: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -79,10 +78,10 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
-#, fuzzy, c-format
+#: activation-server/object-directory-corba.c:891
+#, c-format
 msgid "Race condition activating server '%s'"
-msgstr "חריגה בהפעלת '%s'"
+msgstr ""
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
@@ -182,6 +181,14 @@ msgstr "'%s' החזיר NIL עבור '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' לא כללה `%s'"
 
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr "POA"
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr "CORBA POA מותאם אישית"
+
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
 msgstr "ניסיון לביצוע פעולה לא נתמכת"
@@ -204,7 +211,7 @@ msgstr "שגיאת תחביר בתיאור האובייקט"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr ""
+msgstr "לא ניתן להפעיל אובייקט מהיצרן"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -300,7 +307,7 @@ msgstr "ממשק Moniker לא נמצא"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr ""
+msgstr "תם הזמן להפעלת Moniker"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
@@ -322,7 +329,7 @@ msgstr "שגיאת הפעלה כללית ללא תיאור"
 msgid "Could not initialize Bonobo"
 msgstr "לא ניתן לאתחל את Bonobo"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "נכשל בפיענוח, או הרחבת '%s"
@@ -351,23 +358,23 @@ msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "יצרן Moniker רגיל"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "Oaf activation moniker כללי"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "Oaf query moniker כללי"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "יצרן כללי ל moniker 'חדש'"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr ""
+msgstr "פריט moniker כללי"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
@@ -375,7 +382,7 @@ msgstr ""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "יצרן שרת Bonobo Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
@@ -387,7 +394,7 @@ msgstr "רכיב הד"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "יצרן רכיב Echo"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
@@ -480,3 +487,4 @@ msgstr "הצג נתיב לקובץ ההגדרות"
 
 #~ msgid "DOMAIN"
 #~ msgstr "תחום"
+
