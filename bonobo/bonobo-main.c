@@ -21,12 +21,13 @@ gboolean
 bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager manager)
 {
 	CORBA_Environment ev;
-	
-	g_return_val_if_fail (orb != CORBA_OBJECT_NIL, FALSE);
 
 	CORBA_exception_init (&ev);
+
+	if (CORBA_Object_is_nil(orb, &ev))
+	  orb = gnome_CORBA_ORB();
 	
-	if (poa == CORBA_OBJECT_NIL){
+	if (CORBA_Object_is_nil(poa, &ev)){
 		poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 		if (ev._major != CORBA_NO_EXCEPTION){
 			g_warning ("Can not resolve initial reference to RootPOA");
@@ -34,14 +35,15 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 			return FALSE;
 		}
 		
-		if (manager == CORBA_OBJECT_NIL){
-			manager = PortableServer_POA__get_the_POAManager (poa, &ev);
-			if (ev._major != CORBA_NO_EXCEPTION){
-				g_warning ("Can not get the POA manager");
-				CORBA_exception_free (&ev);
-				return FALSE;
-			}
-		}
+	}
+
+	if (CORBA_Object_is_nil(manager, &ev)){
+	  manager = PortableServer_POA__get_the_POAManager (poa, &ev);
+	  if (ev._major != CORBA_NO_EXCEPTION){
+	    g_warning ("Can not get the POA manager");
+	    CORBA_exception_free (&ev);
+	    return FALSE;
+	  }
 	}
 
 	PortableServer_POAManager_activate (manager, &ev);
