@@ -19,19 +19,21 @@ typedef struct _ActivationContext        ActivationContext;
 typedef struct _ActivationContextPrivate ActivationContextPrivate;
 
 #define ACTIVATION_TYPE_CONTEXT        (activation_context_get_type ())
-#define ACTIVATION_CONTEXT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), ACTIVATION_TYPE_CONTEXT, ActivationContext))
+#define ACTIVATION_CONTEXT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((bonobo_object (o)), ACTIVATION_TYPE_CONTEXT, ActivationContext))
 #define ACTIVATION_CONTEXT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), ACTIVATION_TYPE_CONTEXT, ActivationContextClass))
 #define ACTIVATION_IS_CONTEXT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), ACTIVATION_TYPE_CONTEXT))
 #define ACTIVATION_IS_CONTEXT_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), ACTIVATION_TYPE_CONTEXT))
 
+typedef struct _ChildODInfo ChildODInfo;
+
 struct _ActivationContext {
 	BonoboObject parent;
 
-	int total_servers;
-	GSList *dirs;
+	int          total_servers;
 
-	gint refs;		/* This is a use count, so we don't accidentally go
-				 * updating our server list and invalidating memory */
+	ChildODInfo *dir;  /* a hack for now */
+
+	gint         refs; /* nasty re-enterancy guard */
 };
 
 typedef struct {

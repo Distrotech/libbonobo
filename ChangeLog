@@ -1,5 +1,13 @@
 2003-04-07  Michael Meeks  <michael@ximian.com>
 
+	* Makefile.am: install / carry b-a-config.xml
+
+	* activation-server/activation-context-corba.c
+	(activation_context_finalize): trash the multi-directory
+	capability - a horrificly complex non-working feature.
+
+2003-04-07  Michael Meeks  <michael@ximian.com>
+
 	* activation-server/activation-server-main.c
 	(main): upd.
 
