@@ -19,6 +19,10 @@
 module Bonobo {
 	typedef sequence<string> StringList;
         
+        exception GeneralError { 
+                string description; 
+        };
+
 	interface GenericFactory : Bonobo::Unknown {
 		exception CannotActivate { };
 

@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!@PERL_PATH@
 # 
 # oaf-slay
 # 
@@ -11,7 +11,6 @@
 #   running when script was run.
 #
 use             Getopt::Std;
-use             POSIX;
 
 $usage_error = 0;
 
@@ -44,26 +43,31 @@ if ($usage_error == 1 || $opt_h) {
 
 # Build ps command.
 #
-$uid = getuid();
-$ps_cmd = "/bin/ps -U $uid -opid,args";
+$username = $ENV{'USER'};
+chomp($username);
+
+@IF_POSIX_PS@ $ps_cmd = "@PS_PATH@ -U $username -opid,args";
+@IF_BSD_PS@   $ps_cmd = "@PS_PATH@ -U $username -xww -opid,command";
 
 # get OAF files
 #
-@path = split(':', $ENV{'PATH'});
-
-foreach $dir (@path) {
-	if (-f "$dir/oafd") {
-		$ins_dir  = `/usr/bin/dirname $dir`;
-		chomp $ins_dir;
-		$oaf_dir  = $ins_dir . "/share/oaf";
-		last;
+@oaf_dirs = ( "@prefix@/share/oaf" );
+foreach $dir (split(':', $ENV{'OAF_INFO_PATH'})) {
+	if (-d $dir) {
+		push @oaf_dirs, $dir;
+	}
+}
+foreach $dir (split(':', $ENV{'GNOME_PATH'})) {
+	if (-d "$dir/share/oaf") {
+		push @oaf_dirs, "$dir/share/oaf";
 	}
 }
 
-chdir($oaf_dir);
-opendir(DIR, $oaf_dir) || die "\nCan not open directory $oaf_dir\n\t$!\n\n";
-@oaf_files = readdir(DIR);
-closedir DIR;
+foreach $dir (@oaf_dirs) {
+	opendir(DIR, $dir) || die "\nCan not open directory $dir\n\t$!\n\n";
+	push @oaf_files, map ("$dir/$_", readdir(DIR));
+	closedir DIR;
+}
 
 # Initialize variables
 #
@@ -108,9 +112,9 @@ do {
 					chomp($line);
 					$line =~s/\.\///;
 
-					# oafd needs to be last.
+					# bonobo-activation-server needs to be last.
 					#
-					if ($line ne "oafd") {
+					if ($line ne "bonobo-activation-server") {
 						push @file_process, $line;
 					}
 				} #end while(<FILE>)
@@ -119,9 +123,9 @@ do {
 		}
 	}
 
-	# Add oafd so that it is last.
+	# Add bonobo-activation-server so that it is last.
 	#
- 	push @file_process, "oafd"; 
+ 	push @file_process, "bonobo-activation-server"; 
 
 	foreach $filep (@file_process) {
 
@@ -133,7 +137,7 @@ do {
 				chomp $el;
 				if ($el =~m/$filep/ ) {
 					@ps_array = split(' ', $el);
-					$list_array[$index]=$ps_array[0]."\t".$ps_array[2]."\n";
+					$list_array[$index]=$ps_array[0]."\t".$ps_array[1]."\n";
 					$process_pids[$index]=$ps_array[0]."\n";
 					$index++;
 					}

@@ -59,9 +59,7 @@ serverfiles=empty.server
 emptydatadir=$(datadir)/bonobo-activation
 emptydata_DATA=$(serverfiles)
 
-bin_SCRIPTS=bonobo-activation-slay
-
-EXTRA_DIST=empty.idl $(serverfiles) broken.server bonobo-activation-slay
+EXTRA_DIST=empty.idl $(serverfiles) broken.server
 
 check:
 	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test:$$BONOBO_ACTIVATION_PATH" PATH="$(top_builddir)/test:$$PATH" $(top_builddir)/test/bonobo-activation-test

@@ -98,7 +98,8 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
                         Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
 
                         error_string = g_strdup_printf (
-                                _("g_module_open of '%s' failed"), filename);
+                                _("g_module_open of '%s' failed with '%s'"),
+                                filename, g_module_error ());
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                              ex_Bonobo_GeneralError, error);

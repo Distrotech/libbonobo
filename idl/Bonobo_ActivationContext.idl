@@ -36,10 +36,6 @@
 #include <Bonobo_GenericFactory.idl>
 
 module Bonobo {
-        exception GeneralError { 
-                string description; 
-        };
-
         typedef string ImplementationID;
         typedef string ActivationID;
         interface ActivationContext;
