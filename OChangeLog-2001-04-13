@@ -1,3 +1,14 @@
+1999-08-30  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-bonobo-selector.c (select_row): Transparent handler
+	except for double clicks.
+	(gnome_bonobo_selector_init): Add double click support.
+
+1999-08-29  Michael Meeks  <michael@imaginator.com>
+
+	* components/text-plain/bonobo-text-plain.c (bonobo_object_destroy_cb):
+	Same bug fixed again.
+
 1999-08-29  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-view.c (plug_destroy_cb): Added debug.
