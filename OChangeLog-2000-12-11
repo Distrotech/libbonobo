@@ -1,3 +1,57 @@
+2000-09-18  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (set_cmd_state): prune firing events on
+	redundant sets to avoid loop conditions.
+
+	* bonobo/bonobo-ui-xml.c (set_node_dirty): Impl, important that we
+	propagate up placeholders to get dirtyness.
+	(override_node_with): use set_node_dirty.
+	(reinstate_old_node, merge): ditto.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_set): dump path
+	too.
+
+	* bonobo/bonobo-ui-container.c (impl_node_set): beef up exceptions.
+
+	* bonobo/bonobo-win.c (update_status): set padding on the statusbar.
+	(update_status): allow hiding of statusbar.
+	(update_menus): re-create the tearoff if we destroyed it.
+	(node_get_parent_widget): don't tolerate node->parent == NULL.
+
+	* bonobo/bonobo-ui-compat.c (compat_add_verb): add notify.
+	(free_closure): update. (VerbClosure): add destroy_fn.
+	(bonobo_ui_handler_menu_remove): implement.
+	(add_accel_verb): merge instead of add child.
+	(bonobo_ui_handler_menu_new): ditto.
+	(bonobo_ui_handler_toolbar_new): ditto.
+	(compat_menu_parse_uiinfo_one_with_data): remove add_accel_verb
+	(add_accel_verb): re-impl to (add_accel): change semantics
+	Change everywhere to use new accel fns.
+	(compat_set_tree, compat_set): impl.
+	(compat_sync): kill.
+	(bonobo_ui_handler_create_toolbar): upd.
+	(bonobo_ui_handler_menu_new): ditto.
+	(compat_set_siblings): impl.
+	(bonobo_ui_handler_menu_add_one): upd.
+	(BonoboUIHandlerPrivate): remove BonoboUIXml ui member.
+	(priv_destroy): upd.
+	(setup_priv): upd.
+	(bonobo_ui_handler_menu_new): upd.
+	(bonobo_ui_handler_toolbar_new): upd.
+
+	(bonobo_ui_handler_create_menubar): upd.
+
+	* bonobo/bonobo-ui-component.c s/BonoboUIVerb/UIVerb/
+	s/Listener/UIListener/
+	(listener_destroy, verb_destroy): add destroy notify.
+	(bonobo_ui_component_add_verb_full): impl,
+	(bonobo_ui_component_add_verb): chain.
+	(bonobo_ui_component_add_listener_full): impl.
+	(bonobo_ui_component_add_listener): chain.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_menu_set_callback): 
+	remove churning debug.
+
 2000-09-16  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (update_dockitem): reduce flicker in re-build
