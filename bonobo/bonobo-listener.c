@@ -62,15 +62,26 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 }
 
 static void
+bonobo_listener_destroy (BonoboObject *object)
+{
+	BonoboListener *listener = (BonoboListener *) object;
+
+	if (listener->priv->event_callback) {
+		g_closure_unref (listener->priv->event_callback);
+		listener->priv->event_callback = NULL;
+	}
+	
+	((BonoboObjectClass *)bonobo_listener_parent_class)->destroy (object);
+}
+
+static void
 bonobo_listener_finalize (GObject *object)
 {
 	BonoboListener *listener;
 
 	listener = BONOBO_LISTENER (object);
 
-	if (listener->priv)
-	{
-		g_closure_unref (listener->priv->event_callback);
+	if (listener->priv) {
 		g_free (listener->priv);
 		listener->priv = 0;
 	}
@@ -81,12 +92,14 @@ bonobo_listener_finalize (GObject *object)
 static void
 bonobo_listener_class_init (BonoboListenerClass *klass)
 {
-	GObjectClass *oclass = (GObjectClass *)klass;
+	GObjectClass *oclass = (GObjectClass *) klass;
+	BonoboObjectClass *boclass = (BonoboObjectClass *) klass;
 	POA_Bonobo_Listener__epv *epv = &klass->epv;
 
 	bonobo_listener_parent_class = g_type_class_peek_parent (klass);
 
 	oclass->finalize = bonobo_listener_finalize;
+	boclass->destroy = bonobo_listener_destroy;
 
 	signals [EVENT_NOTIFY] = g_signal_new (
 		"event_notify", G_TYPE_FROM_CLASS (oclass), G_SIGNAL_RUN_LAST,

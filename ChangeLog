@@ -1,5 +1,17 @@
 2002-05-20  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_finalize): prune code and move it
+	(bonobo_event_source_destroy): here, tear down the
+	listeners earlier.
+
+	* bonobo/bonobo-listener.c
+	(bonobo_listener_destroy): impl. so we don't fire
+	events after destroy.
+	(bonobo_listener_class_init): upd.
+
+2002-05-20  Michael Meeks  <michael@ximian.com>
+
 	* Version 1.117.0
 
 	* configure.in: remove message-of-doom

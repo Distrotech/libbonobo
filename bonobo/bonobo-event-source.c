@@ -264,25 +264,35 @@ bonobo_event_source_notify_listeners_full (BonoboEventSource *event_source,
 }
 
 static void
-bonobo_event_source_finalize (GObject *object)
+bonobo_event_source_destroy (BonoboObject *object)
 {
 	CORBA_Environment         ev;
+	BonoboEventSourcePrivate *priv = BONOBO_EVENT_SOURCE (object)->priv;
+	
+	CORBA_exception_init (&ev);
+
+	while (priv->listeners) {
+		ListenerDesc *d = priv->listeners->data;
+
+		priv->listeners = g_slist_remove (priv->listeners, d);
+
+		desc_free (d, &ev);
+	}
+	
+	CORBA_exception_free (&ev);
+
+	((BonoboObjectClass *)bonobo_event_source_parent_class)->destroy (object);
+}
+
+static void
+bonobo_event_source_finalize (GObject *object)
+{
 	BonoboEventSourcePrivate *priv;
 	
 	priv = BONOBO_EVENT_SOURCE (object)->priv;
 
-	CORBA_exception_init (&ev);
-	
-	while (priv->listeners) {
-		ListenerDesc *d = priv->listeners->data;
-
-		priv->listeners = g_slist_remove (
-			priv->listeners, d);
-
-		desc_free (d, &ev);
-	}
-
-	CORBA_exception_free (&ev);
+	/* in case of strange re-enterancy */
+	bonobo_event_source_destroy (BONOBO_OBJECT (object));
 
 	g_free (priv);
 
@@ -293,11 +303,13 @@ static void
 bonobo_event_source_class_init (BonoboEventSourceClass *klass)
 {
 	GObjectClass *oclass = (GObjectClass *) klass;
+	BonoboObjectClass *boclass = (BonoboObjectClass *) klass;
 	POA_Bonobo_EventSource__epv *epv = &klass->epv;
 
 	bonobo_event_source_parent_class = g_type_class_peek_parent (klass);
 
 	oclass->finalize = bonobo_event_source_finalize;
+	boclass->destroy = bonobo_event_source_destroy;
 
 	epv->addListener         = impl_Bonobo_EventSource_addListener;
 	epv->addListenerWithMask = impl_Bonobo_EventSource_addListenerWithMask;
