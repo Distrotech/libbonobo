@@ -60,6 +60,13 @@ GtkType          bonobo_storage_get_type     (void);
 BonoboStorage   *bonobo_storage_construct    (BonoboStorage *storage,
 					      Bonobo_Storage corba_storage);
 
+/* Open modes [ flags ] */
+#define BONOBO_SS_READ   1
+#define BONOBO_SS_WRITE  2
+#define BONOBO_SS_RDWR   3
+#define BONOBO_SS_CREATE 4
+#define BONOBO_SS_EXCL   8
+
 BonoboStorage   *bonobo_storage_open         (const char *driver,
 					      const char *path,
 					      gint flags,
@@ -85,14 +92,6 @@ void             bonobo_stream_write_class_id  (BonoboStream *stream,
 						char *class_id);
 
 POA_Bonobo_Storage__epv *bonobo_storage_get_epv (void);
-
-/* Open modes */
-
-#define BONOBO_SS_READ   1
-#define BONOBO_SS_WRITE  2
-#define BONOBO_SS_RDWR   3
-#define BONOBO_SS_CREATE 4
-#define BONOBO_SS_EXCL   8
 
 /*
  * Signature for Storage drivers

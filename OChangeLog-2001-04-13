@@ -1,3 +1,23 @@
+2000-07-05  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-client-site.h: fix terminal logic bug; using single
+	bit field with int.
+
+	* bonobo/bonobo-stream-client.c (bonobo_stream_client_write): change
+	semantics, force use of CORBA_Environment, continue writing until
+	fatal error, remove sluggish unneccessary malloc/copy/free code.
+	(bonobo_stream_client_write_string): simplify and update.
+	(bonobo_stream_client_read_string): cut down read size to 1; I clearly
+	had a mental block the other day.
+
+	* bonobo/bonobo-storage.c (bonobo_storage_corba_object_create): do a
+	POA_Bonobo_Storage__init not a POA_Bonobo_Stream__init; dumbfounded
+	that this ever worked!
+
+	* idl/bonobo-persist.idl: add Bonobo::NotSupported exception
+	(PersistStorage::load, PersistStorage::save, PersistStream::load),
+	(PersistStream::save): add NotSupported exception.
+
 2000-07-03  Michael Meeks  <michael@helixcode.com>
 
 	* components/audio-ulaw/bonobo-audio-ulaw.c (stream_read): kill leak,

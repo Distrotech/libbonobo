@@ -321,7 +321,7 @@ bonobo_storage_corba_object_create (BonoboObject *object)
 
         CORBA_exception_init (&ev);
 
-        POA_Bonobo_Stream__init ((PortableServer_Servant) servant, &ev);
+        POA_Bonobo_Storage__init ((PortableServer_Servant) servant, &ev);
         if (ev._major != CORBA_NO_EXCEPTION){
                 g_free (servant);
                 CORBA_exception_free (&ev);

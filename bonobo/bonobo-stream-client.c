@@ -14,77 +14,68 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo-stream-client.h>
 
+#define CORBA_BLOCK_SIZE 65536
+
 /**
  * bonobo_stream_client_write:
  * @stream: A CORBA Object reference to a Bonobo_Stream
  * @buffer: the buffer to write
  * @size: number of bytes to write
- * @ev: a CORBA environment to return status information.  If this item
- * is NULL, no status information will be returned.
+ * @ev: a CORBA environment to return status information.
  *
  * This is a helper routine to write @size bytes from @buffer to the @stream
+ * It will continue to write bytes until a fatal error occurs.
  *
- * Returns: The number of bytes written, or -1 if an error occurs.  In
- * the event of an error, @ev will be filled with the details of the
- * error, unless it is NULL, of course.
  */
-CORBA_long
+void
 bonobo_stream_client_write (const Bonobo_Stream stream,
 			    const void *buffer, const size_t size,
 			    CORBA_Environment *ev)
 {
-	CORBA_long          v;
 	Bonobo_Stream_iobuf *buf;
-	CORBA_Environment  *local_ev;
+	size_t               pos;
+	guint8              *mem = (guint8 *)buffer;
 
 	if (size == 0)
-		return 0;
+		return;
 
-	g_return_val_if_fail (buffer != NULL, -1);
-	g_return_val_if_fail (stream != CORBA_OBJECT_NIL, -1);
-
-	if (!ev) {
-		local_ev = g_new (CORBA_Environment, 1);
-		CORBA_exception_init (local_ev);
-	} else
-		local_ev = ev;
+	g_return_if_fail (ev != NULL);
+	
+	if (buffer == NULL || stream == CORBA_OBJECT_NIL)
+		goto bad_param;
 
 	buf = Bonobo_Stream_iobuf__alloc ();
-
 	if (!buf)
-		goto stream_error;
+		goto alloc_error;
 
-	buf->_buffer = CORBA_sequence_CORBA_octet_allocbuf (size);
-	if (buf->_buffer == NULL)
-		goto stream_error_buffer;
+	for (pos = 0; pos < size;) {
+		CORBA_long v;
 
-	buf->_length = size;
-	buf->_maximum = size;
-	memcpy (buf->_buffer, buffer, size);
+		buf->_buffer = (mem + pos);
+		buf->_length = (pos + CORBA_BLOCK_SIZE < size) ?
+			CORBA_BLOCK_SIZE : size - pos;
+		buf->_maximum = buf->_length;
 
-	v = Bonobo_Stream_write (stream, buf, ev);
-
-	CORBA_free (buf);
-
-	if (!ev) {
-		CORBA_exception_free (local_ev);
-		g_free (local_ev);
-	}
-	
-	return v;
-
-stream_error_buffer:
-	CORBA_free (buf);
-
-stream_error:
-	CORBA_exception_set_system (local_ev, ex_CORBA_NO_MEMORY, CORBA_COMPLETED_NO);
-
-	if (!ev) {
-		CORBA_exception_free (local_ev);
-		g_free (local_ev);
+		v = Bonobo_Stream_write (stream, buf, ev);
+		if (ev->_major != CORBA_NO_EXCEPTION) {
+			CORBA_free (buf);
+			return;
+		}
+		pos += v;
 	}
 
-	return -1;
+	CORBA_free (buf);
+	return;
+
+ alloc_error:
+	CORBA_exception_set_system (ev, ex_CORBA_NO_MEMORY,
+				    CORBA_COMPLETED_NO);
+	return;
+
+ bad_param:
+	CORBA_exception_set_system (ev, ex_CORBA_BAD_PARAM,
+				    CORBA_COMPLETED_NO);
+	return;
 }
 
 /**
@@ -93,48 +84,28 @@ stream_error:
  * @str: A string.
  * @terminate: Whether or not to write the \0 at the end of the
  * string.
- * @ev: A pointer to a #CORBA_Environment, optionally NULL.
+ * @ev: A pointer to a #CORBA_Environment
  *
  * This is a helper routine to write the string in @str to @stream.
  * If @terminate is TRUE, a NULL character will be written out at the
  * end of the string.  This function will not return until the entire
  * string has been written out, unless an exception is raised.  See
- * also bonobo_stream_client_write().
+ * also bonobo_stream_client_write(). Continues writing until finished
+ * or a fatal exception occurs.
  *
- * Returns: The number of bytes written, or -1 if an error
- * occurs.  In the event of an error, @ev will be filled with
- * the details of the error, unless it is NULL.
  */
-CORBA_long
+void
 bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
 				   gboolean terminate, CORBA_Environment *ev)
 {
 	size_t total_length;
-	size_t bytes_written;
 
-	if (str == NULL)
-		return 0;
-
-	g_return_val_if_fail (stream != CORBA_OBJECT_NIL, -1);
+	g_return_if_fail (ev != NULL);
+	g_return_if_fail (str != NULL);
 
 	total_length = strlen (str) + (terminate ? 1 : 0);
-	bytes_written = 0;
 
-	while (bytes_written < total_length) {
-
-		bytes_written +=
-			bonobo_stream_client_write (stream,
-						    str + bytes_written,
-						    total_length - bytes_written,
-						    ev);
-
-		if (ev->_major != CORBA_NO_EXCEPTION) {
-			g_warning ("BonoboStreamClient: Exception writing to stream!");
-			return bytes_written;
-		}
-	}
-
-	return bytes_written;
+	bonobo_stream_client_write (stream, str, total_length, ev);
 }
 
 /**
@@ -142,7 +113,7 @@ bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
  * @stream: A CORBA object reference to a #Bonobo_Stream.
  * @terminate: Whether or not to null-terminate the string when it is
  * written out to the stream.
- * @ev: A CORBA_Environment pointer, optionally NULL.
+ * @ev: A CORBA_Environment pointer.
  * @fmt: The printf format string.
  *
  * Processes @fmt and the arguments which follow it to produce a
@@ -151,25 +122,22 @@ bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
  * is raised.  See also bonobo_stream_client_write_string() and
  * bonobo_stream_client_write().
  */
-CORBA_long
+void
 bonobo_stream_client_printf (const Bonobo_Stream stream, const gboolean terminate,
 			     CORBA_Environment *ev, const char *fmt, ...)
 {
 	va_list      args;
 	char        *str;
-	CORBA_long   retval;
 
-	g_return_val_if_fail (fmt != NULL, -1);
+	g_return_if_fail (fmt != NULL);
 
 	va_start (args, fmt);
 	str = g_strdup_vprintf (fmt, args);
 	va_end (args);
 
-	retval = bonobo_stream_client_write_string (stream, str, terminate, ev);
+	bonobo_stream_client_write_string (stream, str, terminate, ev);
 
 	g_free (str);
-
-	return retval;
 }
 
 /**
@@ -196,24 +164,18 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 
 	for (all = FALSE; !all; ) {
 
-		/* 128 == a sensible size ? */
-		Bonobo_Stream_read (stream, 128,
+		Bonobo_Stream_read (stream, 1,
 				    &buffer, ev);
 
-		if (ev->_major != CORBA_NO_EXCEPTION ||
-		    buffer->_length == 0)
+		if (ev->_major != CORBA_NO_EXCEPTION)
+			break;
+
+		else if (buffer->_length == 0 ||
+			 buffer->_buffer [0] == '\0')
 			all = TRUE;
-
+		
 		else {
-			int i;
-
-			for (i = 0; i < buffer->_length; i++) {
-				if (buffer->_buffer [i] == '\0') {
-					all = TRUE;
-					break;
-				} else
-					g_string_append_c (gstr, buffer->_buffer [i]);
-			}
+			g_string_append_c (gstr, buffer->_buffer [0]);
 			CORBA_free (buffer);
 		}
 	}
@@ -221,6 +183,7 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 	if (ev->_major != CORBA_NO_EXCEPTION) {
 		*str = NULL;
 		g_string_free (gstr, TRUE);
+
 		return -1;
 	} else {
 		CORBA_long l;
