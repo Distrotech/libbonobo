@@ -20,16 +20,12 @@ struct {
 	char *prefix;
 	char *oafiid;
 } fast_prefix [] = {
-	{ "file:",   "OAFIID:Bonobo_Moniker_File"  },
-	{ "query:(", "OAFIID:Bonobo_Moniker_Query" },
 	{ "!",       "OAFIID:Bonobo_Moniker_Item"  },
 	{ "OAFIID:", "OAFIID:Bonobo_Moniker_Oaf"   },
 	{ "OAFAID:", "OAFIID:Bonobo_Moniker_Oaf"   },
+	{ "cache:",  "OAFIID:Bonobo_Moniker_Cache" },
+	{ "query:(", "OAFIID:Bonobo_Moniker_Query" },
 	{ "new:",    "OAFIID:Bonobo_Moniker_New"   },
-	{ "http:",   "OAFIID:Bonobo_Moniker_http"  },
-/*
-	{ "queue:", "" },
-*/
 	{ NULL, NULL }
 };
 
