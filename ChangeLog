@@ -1,3 +1,9 @@
+2002-01-02  Jens Finke  <jens@triq.net>
+
+	* bonobo/bonobo-item-container.c
+	(bonobo_item_container_class_init): Set struct offset with
+	G_STRUCT_OFFSET, use bonobo_unknown_get_type as return value type.
+	
 2001-12-27  Duarte Loreto <happyguy_pt@hotmail.com>
 
         * configure.in: Added portuguese to ALL_LINGUAS
