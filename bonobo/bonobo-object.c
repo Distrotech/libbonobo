@@ -693,6 +693,10 @@ do_corba_setup (BonoboObject      *object,
 		for (xklass = klass; xklass && !xklass->poa_init_fn;)
 			xklass = g_type_class_peek_parent (xklass);
 		if (!xklass || !xklass->epv_struct_offset) {
+			/*   Also, people using BONOBO_TYPE_FUNC instead of
+			 * BONOBO_TYPE_FUNC_FULL might see this; you need
+			 * to tell it about the CORBA interface you're
+			 * implementing - of course */
 			g_warning ("It looks like you used g_type_unique "
 				   "instead of b_type_unique on type '%s'",
 				   G_OBJECT_CLASS_NAME (klass));

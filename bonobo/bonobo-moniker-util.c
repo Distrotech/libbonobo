@@ -689,11 +689,9 @@ async_parse_cb (CORBA_Object          object,
 	if (BONOBO_EX (ev))
 		ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
 	else {
-		Bonobo_Moniker retval;
+		ORBit_small_demarshal_async (aqe, NULL, NULL, ev);
 
-		ORBit_small_demarshal_async (aqe, &retval, NULL, ev);
-
-		ctx->cb (retval, ev, ctx->user_data);
+		ctx->cb (ctx->moniker, ev, ctx->user_data);
 	}
 
 	bonobo_object_release_unref (ctx->moniker, ev);
@@ -771,6 +769,7 @@ bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 {
 	parse_async_ctx_t *ctx;
 	const char        *iid;
+	const char        *mname;
 
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (cb != NULL);
@@ -781,8 +780,7 @@ bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 		return;
 	}
 
-	if (name [0] == '#')
-		name++;
+	mname = bonobo_moniker_util_parse_name (name, NULL);
 
 	ctx = g_new0 (parse_async_ctx_t, 1);
 	ctx->name         = g_strdup (name);
@@ -790,10 +788,10 @@ bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 	ctx->user_data    = user_data;
 	ctx->moniker      = CORBA_OBJECT_NIL;
 
-	if (!(iid = moniker_id_from_nickname (name))) {
+	if (!(iid = moniker_id_from_nickname (mname))) {
 		char *query;
 
-		query = query_from_name (name);
+		query = query_from_name (mname);
 
 		bonobo_activation_activate_async (query, NULL, 0,
 				    async_activation_cb, ctx, ev);
