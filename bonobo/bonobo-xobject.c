@@ -1,12 +1,11 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * b-object.c: B Unknown interface base implementation
+ * bonobo-xobject.c: B Unknown interface base implementation
  *
  * Authors:
- *   Miguel de Icaza (miguel@kernel.org)
- *   Michael Meeks (michael@helixcode.com)
+ *   Michael Meeks (michael@ximian.com)
  *
- * Copyright 1999,2000 Helix Code, Inc.
+ * Copyright 2000 Ximian, Inc.
  */
 
 #include <config.h>

@@ -1,3 +1,9 @@
+2001-02-16  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-item-container.c
+	(bonobo_item_container_destroy): split into
+	(bonobo_item_container_finalize): here and free priv.
+
 2001-02-15  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-ui-node.c: Fully API documented.
