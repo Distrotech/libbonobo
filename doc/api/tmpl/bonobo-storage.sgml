@@ -14,15 +14,193 @@ bonobo-storage
 
 </para>
 
-<!-- ##### STRUCT StorageHandle ##### -->
+<!-- ##### MACRO BONOBO_STORAGE_TYPE ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT StorageDriver ##### -->
+
+<!-- ##### MACRO BONOBO_STORAGE ##### -->
 <para>
 
 </para>
+
+@o: 
+
+
+<!-- ##### MACRO BONOBO_STORAGE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+
+<!-- ##### MACRO BONOBO_IS_STORAGE ##### -->
+<para>
+
+</para>
+
+@o: 
+
+
+<!-- ##### MACRO BONOBO_IS_STORAGE_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+
+<!-- ##### STRUCT BonoboStoragePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboStorage ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboStorageClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bonobo_storage_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_storage_construct ##### -->
+<para>
+
+</para>
+
+@storage: 
+@corba_storage: 
+@Returns: 
+
+
+<!-- ##### MACRO BONOBO_SS_READ ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_SS_WRITE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_SS_RDWR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_SS_CREATE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_SS_EXCL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION bonobo_storage_open ##### -->
+<para>
+
+</para>
+
+@driver: 
+@path: 
+@flags: 
+@mode: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_storage_corba_object_create ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_storage_storage_open ##### -->
+<para>
+
+</para>
+
+@storage: 
+@path: 
+@open_mode: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_stream_storage_open ##### -->
+<para>
+
+</para>
+
+@storage: 
+@path: 
+@open_mode: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_storage_write_class_id ##### -->
+<para>
+
+</para>
+
+@storage: 
+@class_id: 
+
+
+<!-- ##### FUNCTION bonobo_stream_write_class_id ##### -->
+<para>
+
+</para>
+
+@stream: 
+@class_id: 
+
+
+<!-- ##### FUNCTION bonobo_storage_get_epv ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_storage_driver_open ##### -->
+<para>
+
+</para>
+
+@path: 
+@flags: 
+@mode: 
+@Returns: 
 
 
