@@ -1,5 +1,25 @@
 2001-01-08  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-engine-config.c (bonobo_ui_engine_config_get_path),
+	(bonobo_ui_engine_config_set_path): impl.
+
+	* bonobo/bonobo-ui-engine.c (bonobo_ui_engine_get_config_path),
+	(bonobo_ui_engine_set_config_path): upd.
+	(impl_destroy): free config.
+	(bonobo_ui_engine_construct): Create it here.
+
+	* bonobo/bonobo-ui-engine-private.h: add.
+
+	* bonobo/bonobo-ui-engine.c (bonobo_ui_engine_get_xml): impl.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_new): add user_data
+	pointer (merge): pass it on.
+	(is_watched_node): impl.
+	(watch_add_node, watch_update): impl.
+	(bonobo_ui_xml_add_watch, bonobo_ui_xml_set_watch_fn): impl.
+
+2001-01-08  Michael Meeks  <michael@helixcode.com>
+
 	* monikers/moniker-test.c (display_as_control): update to use
 	a BonoboWindow so we can test components more trivialy.
 
