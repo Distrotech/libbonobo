@@ -1,3 +1,10 @@
+2000-02-16  Jacob Berkman  <jacob@helixcode.com>
+
+	* configure.in: fix uuid and libIDL tests to allow conditional
+	bonobrowser compilation
+
+	* tools/Makefile.am (SUBDIRS): contitionally build bonobrowser
+
 2000-02-15  Nat Friedman  <nat@helixcode.com>
 
 	* samples/compound-doc/sample-container.c (component_add_view):
