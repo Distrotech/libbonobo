@@ -16,6 +16,10 @@
 /*
  * Useful client functions
  */
+Bonobo_Unknown      bonobo_get_object                            (const CORBA_char  *name,
+								  const char        *interface_name,
+								  CORBA_Environment *ev);
+
 Bonobo_Moniker      bonobo_moniker_client_new_from_name          (const CORBA_char  *name,
 								  CORBA_Environment *ev);
 CORBA_char         *bonobo_moniker_client_get_name               (Bonobo_Moniker     moniker,

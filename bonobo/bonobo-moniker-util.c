@@ -258,3 +258,27 @@ bonobo_moniker_client_resolve_client_default (Bonobo_Moniker     moniker,
 
 	return bonobo_object_client_from_corba (unknown);
 }
+
+Bonobo_Unknown
+bonobo_get_object (const CORBA_char *name,
+		   const char        *interface_name,
+		   CORBA_Environment *ev)
+{
+	Bonobo_Moniker moniker;
+	Bonobo_Unknown retval;
+
+	moniker = bonobo_moniker_client_new_from_name (name, ev);
+
+	if (ev->_major != CORBA_NO_EXCEPTION)
+		return CORBA_OBJECT_NIL;
+
+	retval = bonobo_moniker_client_resolve_default (
+		moniker, interface_name, ev);
+
+	bonobo_object_release_unref (moniker, ev);
+
+	if (ev->_major != CORBA_NO_EXCEPTION)
+		return CORBA_OBJECT_NIL;
+	
+	return retval;
+}
