@@ -268,3 +268,59 @@ bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b, CORBA_Environment *o
 
 	return retval;
 }
+
+void
+bonobo_any_get_as_blob (CORBA_any *any,
+			guint8   **data,
+			gulong    *length)
+{
+/* One big evil untested hack.
+	GIOPSendBuffer *buf;
+	IIOPConnection *dummy;
+
+	g_return_if_fail (data != NULL);
+	*data = NULL;
+	g_return_if_fail (any != NULL);
+	g_return_if_fail (length != NULL);
+
+	dummy = iiop_connection_server ();
+	dummy->giop_connection.is_valid = TRUE;
+
+	buf = giop_send_reply_buffer_use (
+		(GIOPConnection *) dummy, NULL, 0, 0);
+
+	ORBit_marshal_any (buf, any);
+
+	g_warning ("Marshaled!");
+	
+	dummy->giop_connection.is_valid = FALSE;
+	giop_send_buffer_unuse (buf);*/
+}
+
+CORBA_any *
+bonobo_any_get_from_blob (guint8 *data,
+			  gulong  length)
+{
+/* This needs more thought!
+	GIOPSendBuffer *buf;
+	IIOPConnection *dummy;
+
+	g_return_if_fail (data != NULL);
+	*data = NULL;
+	g_return_if_fail (any != NULL);
+	g_return_if_fail (length != NULL);
+
+	dummy = iiop_connection_server ();
+	dummy->giop_connection.is_valid = TRUE;
+
+	buf = giop_recv_reply_buffer_use (0, 0);
+
+	ORBit_demarshal_any (buf, any);
+
+	g_warning ("Marshaled!");
+	
+	dummy->giop_connection.is_valid = FALSE;
+	giop_send_buffer_unuse (buf);
+*/
+	return NULL;
+}

@@ -419,6 +419,16 @@ interface MyInterface {
 and contractions we capitalize the first letter eg. setDoc setId.
 cf. http://java.sun.com/docs/books/jls/html/6.doc.html#11186
 
+@Q: Why when I do a gtk_widget_show_all does my Control not show up ?
+
+	The gtk_widget_show_all should not propagate over the plug /
+socket boundary, you need to ensure that you do a gtk_widget_show on
+your control. You can of course do shows / hides on the BonoboWidget
+( the server side ) to show or hide the control.
+
+	This also means that as a component author, you are protected
+from people messing with your internal show / hide logic.
+
 @Q: Support Transactions?
 @Q: A GUI for defining component properties?
 

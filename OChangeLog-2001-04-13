@@ -1,14 +1,40 @@
-2000-11-15  Martin Baulig  <baulig@suse.de>
+2000-11-15  Michael Meeks  <michael@helixcode.com>
 
-	reviewed by: Maciej Stachowiak  <mjs@eazel.com>
+	* bonobo/bonobo-win.c (find_widgets_for_command): impl.
+	(update_cmd_state): re-impl.
+	(set_cmd_attr): do the bonobo_ui_node_set_attr before the
+	widget_set_state.
+	(menu_sync_state): move the widget_set_state to the end &
+	convert to widget_queue state so we avoid re-enterancy pain.
+	(toolbar_sync_state): ditto.
+	(widget_set_state): re-order.
+	(state_update_new): impl.
+	(state_update_destroy): impl.
+	(state_update_exec): impl.
+	(process_state_updates): impl.
+	(update_widgets): hook it in.
+	(widget_queue_state): impl.
+	(menu_toggle_emit_ui_event): make safe.
+	(win_item_emit_ui_event): ditto.
+
+	(menu_sync_state, toolbar_sync_state): Don't use cmd_node, use
+	node with set_cmd_attr
+
+2000-11-14  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-container.c (bonobo_ui_container_set_win):
+	add cast.
+
+	* doc/FAQ (Makefile): explain show_all not propagating over
+	the socket.
+
+2000-11-15  Martin Baulig  <baulig@suse.de>
 
 	* bonobo-win.c (bonobo_window_deregister_dead_components):
 	Don't return a value in this void function; fixes a compiler
 	warning.
 
 2000-11-14  Maciej Stachowiak  <mjs@eazel.com>
-
-	reviewed by: Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.h, bonobo/bonobo-win.c: Reformatted header to
 	line up types and arguments and such.
