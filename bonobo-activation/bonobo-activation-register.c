@@ -156,7 +156,7 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
  * Return value: none.
  */
 void
-oaf_active_server_unregister (const char *iid, CORBA_Object obj, OAF_ObjectDirectory_UnregisterType notify)
+oaf_active_server_unregister (const char *iid, CORBA_Object obj)
 {
 	OAF_ObjectDirectory od;
 	OAFRegistrationCategory regcat = { "IDL:OAF/ObjectDirectory:1.0" };
@@ -177,18 +177,7 @@ oaf_active_server_unregister (const char *iid, CORBA_Object obj, OAF_ObjectDirec
 	if (CORBA_Object_is_nil (od, &ev))
 		return;
 
-	OAF_ObjectDirectory_unregister (od, (char *) iid, obj, notify, &ev);
+	OAF_ObjectDirectory_unregister (od, (char *) iid, obj,
+					OAF_ObjectDirectory_UNREGISTER_NORMAL, &ev);
 	CORBA_exception_free (&ev);
 }
-
-
-
-
-
-
-
-
-
-
-
-

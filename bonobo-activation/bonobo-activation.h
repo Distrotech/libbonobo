@@ -164,7 +164,7 @@ void oaf_registration_activator_add (OAFServiceActivator act_func,
 /* oaf-servreg.c */
 OAF_RegistrationResult oaf_active_server_register (const char *iid,
 						   CORBA_Object obj);
-void oaf_active_server_unregister (const char *iid, CORBA_Object obj, OAF_ObjectDirectory_UnregisterType notify);
+void oaf_active_server_unregister (const char *iid, CORBA_Object obj);
 
 /* oaf-util.c */
 OAF_Property *oaf_server_info_prop_find (OAF_ServerInfo * server,
