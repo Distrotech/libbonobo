@@ -1,7 +1,8 @@
 # Galician translation of libbonobo.
-# Copyright (C) 2001-2002 Jesús Bravo Álvarez.
+# Copyright (C) 2001-2004 Jesús Bravo Álvarez
+# Copyright (C) 2001-2002 Manuel A. Fernández Montecelo
+# Jesús Bravo Álvarez <suso@trasno.net>, 2001-2004
 # Manuel A. Fernández Montecelo <manuel@sindominio.net>, 2001-2002.
-# Jesús Bravo Álvarez <jba@pobox.com>, 2001.
 #
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en http://www.trasno.net
@@ -9,13 +10,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-05-29 11:19+0100\n"
-"PO-Revision-Date: 2002-06-07 01:59+0200\n"
-"Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-06-19 04:18+0200\n"
+"PO-Revision-Date: 2004-06-19 17:50+0200\n"
+"Last-Translator: Jesús Bravo Álvarez <suso@trasno.net>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1)\n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -24,11 +27,11 @@ msgstr ""
 
 #: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
-msgstr ""
+msgstr "Non é un ID de activación válido"
 
 #: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
-msgstr "Directorio do que ler os ficheiros .server"
+msgstr "Directorio onde ler os ficheiros .server"
 
 #: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
@@ -41,7 +44,7 @@ msgstr ""
 
 #: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
-msgstr "Descritor do ficheiro no que escribir o IOR"
+msgstr "Descritor do ficheiro onde escribir o IOR"
 
 #: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:200
@@ -50,7 +53,7 @@ msgstr "DF"
 
 #: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
-msgstr "Expresión da consulta a evaluar"
+msgstr "Expresión da consulta para evaluar"
 
 #: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
@@ -58,20 +61,19 @@ msgstr "EXPRESIÓN"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr "Servicio CORBA CosNaming."
+msgstr "Servizo CORBA CosNaming."
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
-msgstr "Servicio de nomes"
+msgstr "Servizo de nomes"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Servicio de nomes"
+msgstr "Servizo de notificación"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Servizo de notificación para activación"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -84,8 +86,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"O ficheiro de configuración de activación de Bonobo non se leu "
-"correctamente. Verifique que é válido en: %s"
+"O ficheiro de configuración de Bonobo Activation non se leu correctamente. "
+"Comprobe que é válido en: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -121,31 +123,32 @@ msgstr "carácter '%c' non válido no iid '%s'"
 #: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "A propiedade '%s' non ten valor"
+msgstr "A propiedade '%s' non ten ningún valor"
 
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Non se puido analizar o documento XML mal formado %s"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Probando o directorio %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
-"O proceso fillo non deu unha mensaxe de erro, ocorreu un fallo descoñecido"
+"O proceso fillo non deu ningunha mensaxe de erro, ocorreu unha falla "
+"descoñecida"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Fallo ao ler do proceso fillo: %s\n"
+msgstr "Falla ao ler do proceso fillo: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
-msgstr "Non foi posible crear un novo proceso (fork)"
+msgstr "Non se puido crear (fork) un novo proceso"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:318
 #, c-format
@@ -165,19 +168,19 @@ msgstr "bonobo-activation fallou ao establecer o grupo de proceso de %s: %s\n"
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Fallo ao executar %s: %d (%s)\n"
+msgstr "Falla ao executar %s: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:88
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr ""
+msgstr "Demasiados niveis de alias para un locale, pode haber un ciclo"
 
 #: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
-msgstr "Descritor de ficheiro no que escribir o IOR"
+msgstr "Descritor de ficheiro onde que escribir o IOR"
 
 #: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
-msgstr "IID a activar"
+msgstr "IID para activar"
 
 #: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
@@ -210,19 +213,19 @@ msgstr "A shlib `%s' non contén `%s'"
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr ""
+msgstr "Nome único da aplicación"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "POA de CORBA personalizado"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -246,15 +249,15 @@ msgstr "Erro de sintaxe na descrición do obxecto"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Non se pode activar obxecto de fábrica"
+msgstr "Non se pode activar un obxecto da fábrica"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "Non se ten permiso para acceder ao fluxo"
+msgstr "Non hai permisos para acceder ao fluxo"
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "Tentouse levar a cabo unha acción non soportada sobre fluxo"
+msgstr "Tentouse facer unha acción sobre fluxo non soportada"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
@@ -274,12 +277,11 @@ msgstr "Obxecto non atopado no medio de almacenamento"
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "Non se ten permiso para facer a operación no medio de almacenamento"
+msgstr "Non hai permisos para facer a operación no medio de almacenamento"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr ""
-"Tentouse levar a cabo unha acción non soportada sobre medio de almacenamento"
+msgstr "Tentouse facer unha acción sobre medio de almacenamento non soportada"
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
@@ -299,11 +301,11 @@ msgstr "descrición XML de interface de usuario mal formada"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "camiño non válido a elemento de interface de usuario XML"
+msgstr "camiño non válido a un elemento de interface de usuario XML"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr "o atributo de IU pedido non existía"
+msgstr "o atributo de IU pedido non existe"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
@@ -327,7 +329,7 @@ msgstr "propiedade non atopada"
 
 #: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr "a propiedade é de tipo non válido"
+msgstr "a propiedade é dun tipo non válido"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
@@ -339,19 +341,19 @@ msgstr "fallou o 'backend' da base de datos da configuración"
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Non se pode atopar a interface do alias (moniker)"
+msgstr "Non se pode atopar a interface do moniker"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr "Esgotouse o tempo de activación do alias (moniker)"
+msgstr "Esgotouse o tempo de activación do moniker"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr "Erro de sintaxe interno do alias (moniker)"
+msgstr "Erro de sintaxe interno no moniker"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "O alias (moniker) ten un prefixo de alias (moniker) descoñecido"
+msgstr "O moniker ten un prefixo descoñecido"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
@@ -375,42 +377,42 @@ msgid "Failed to activate object"
 msgstr "Fallo ao activar obxecto"
 
 #: monikers/bonobo-moniker-oaf.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Exception activating '%s'"
-msgstr "Excepción activando '%s'"
+msgstr "Excepción ao activar '%s'"
 
 #: monikers/bonobo-moniker-oaf.c:62
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to activate '%s'"
-msgstr "Fallo ao activar '%s'"
+msgstr "Falla ao activar '%s'"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr "Alias (moniker) HTTP"
+msgstr "Moniker HTTP"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr "Alias (moniker) de manexo ORB IOR"
+msgstr "Moniker de manexo ORB IOR"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "Alias (moniker) estándar de fábrica"
+msgstr "Fábrica de moniker estándar"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr "alias (moniker) xenérico de activación OAF"
+msgstr "moniker xenérico de activación OAF"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr "alias (moniker) xenérico de petición OAF"
+msgstr "moniker xenérico de petición OAF"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "'novo' alias (moniker) xenérico de fábrica"
+msgstr "'novo' moniker xenérico de fábrica"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr "alias (moniker) de obxecto xenérico"
+msgstr "moniker de obxecto xenérico"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
@@ -418,11 +420,11 @@ msgstr "fluxo MonikerExtender"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "Servidor Bonobo de Eco de fábrica"
+msgstr "Fábrica de servidor de eco de Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "Mostra de programa servidor Bonobo de Eco"
+msgstr "Programa de exemplo do servidor de eco de Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
@@ -430,7 +432,7 @@ msgstr "Compoñente de eco"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr "Compoñente de eco de fábrica"
+msgstr "Fábrica de compoñente de eco"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
@@ -438,7 +440,7 @@ msgstr "Non se puido inicializar Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "Non se puido crear unha instancia da compoñente de eco de mostra"
+msgstr "Non se puido crear unha instancia da compoñente de eco de exemplo"
 
 #: samples/echo/echo-client.c:45
 #, c-format
@@ -452,7 +454,7 @@ msgstr "Non foi posible gardar o ficheiro de configuración.\n"
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "Verifique que ten permisos para escribir en '%s'.\n"
+msgstr "Comprobe que ten permisos para escribir en '%s'.\n"
 
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
@@ -478,7 +480,7 @@ msgstr "non hai un ficheiro de configuración estructurado apropiadamente\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "O ficheiro de configuración de activación de Bonobo contén:\n"
+msgstr "O ficheiro de configuración de Bonobo-activation contén:\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
@@ -499,30 +501,3 @@ msgstr "Mostrar os directorios do ficheiro de configuración"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Mostrar o camiño ao ficheiro de configuración"
-
-#~ msgid "No server corresponding to your query"
-#~ msgstr "Ningún servidor corresponde coa consulta"
-
-#~ msgid "Query failed: "
-#~ msgstr "A consulta fallou: "
-
-#~ msgid "Activation failed: "
-#~ msgstr "A activación fallou: "
-
-#~ msgid "Could not parse AID"
-#~ msgstr "Non foi posible analizar o AID"
-
-#~ msgid "Could not parse context: "
-#~ msgstr "Non foi posible analizar o contexto: "
-
-#~ msgid "Could not activate server: "
-#~ msgstr "Non foi posible activar o servidor: "
-
-#~ msgid "Domain of ObjectDirectory"
-#~ msgstr "Dominio de ObjectDirectory"
-
-#~ msgid "DOMAIN"
-#~ msgstr "DOMINIO"
-
-#~ msgid "Object directory to use when registering servers"
-#~ msgstr "Directorio de obxectos usado ao rexistrar os servidores"
