@@ -28,14 +28,19 @@ module Bonobo {
   	};
   
   	interface EventSource : Bonobo::Unknown {
-  		exception UnknownListener {};
+  		typedef unsigned long ListenerId;
+
+		exception UnknownListener {};
   
   		/**
  		 * add_listener: Adds a listener to all events being
  		 * emitted by this object.
   		 * @l: the listener implementation.
+		 *
+		 * Returns: The ListenerId which can be passed to the 
+		 * remove method
   		 */
- 		void addListener (in Listener l);
+ 		ListenerId addListener (in Listener l);
   		
   		/**
  		 * add_listener: Adds a listener to certain events
@@ -45,15 +50,18 @@ module Bonobo {
 		 * is interested in recieving. If this listener is already 
  		 * receiving events from this EventSource, only the 
  		 * events listed here will be delivered.
+		 *
+		 * Returns: The ListenerId which can be passed to the 
+		 * remove method
  		 */
- 		void addListenerWithMask (in Listener l,
-					  in string   event_mask);
+ 		ListenerId addListenerWithMask (in Listener l,
+						in string   event_mask);
  
  		/**
   		 * remove_listener: Removes a listener
-  		 * @l: the listener
+  		 * @id: the listener Id
   		 */
- 		void removeListener (in Listener l)
+ 		void removeListener (in ListenerId id)
   			raises (UnknownListener);
   	};
 };

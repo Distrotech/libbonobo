@@ -74,6 +74,8 @@ bonobo_cache_factory (BonoboGenericFactory *this,
 {
 	BonoboMoniker *cache_moniker = bonobo_moniker_cache_new ();
 
+	running_objects++;
+
 	gtk_signal_connect (GTK_OBJECT (cache_moniker), "destroy",
 			    GTK_SIGNAL_FUNC (moniker_cache_destroy_cb), NULL);
 	

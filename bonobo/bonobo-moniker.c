@@ -173,7 +173,7 @@ bonobo_moniker_set_name (BonoboMoniker *moniker,
 			 int            num_chars)
 {
 	g_return_if_fail (BONOBO_IS_MONIKER (moniker));
-	g_return_if_fail (strlen (name) > moniker->priv->prefix_len);
+	g_return_if_fail (strlen (name) >= moniker->priv->prefix_len);
 
 	g_free (moniker->priv->name);
 	moniker->priv->name = bonobo_moniker_util_unescape (

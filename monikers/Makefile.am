@@ -15,11 +15,11 @@ OAF_FILES =					\
 	Bonobo_Moniker_Extender_file.oafinfo
 
 Bonobo_Moniker_cache.oafinfo : Bonobo_Moniker_cache.oafinfo.in 
-	sed -e "s|\@\@monikerdir\@\@|$(monikerdir)|" \
+	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" \
 	Bonobo_Moniker_cache.oafinfo.in > Bonobo_Moniker_cache.oafinfo 
 
 Bonobo_Moniker_Extender_file.oafinfo : Bonobo_Moniker_Extender_file.oafinfo.in 
-	sed -e "s|\@\@monikerdir\@\@|$(monikerdir)|"  \
+	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|"  \
 	Bonobo_Moniker_Extender_file.oafinfo.in \
 	> Bonobo_Moniker_Extender_file.oafinfo
 

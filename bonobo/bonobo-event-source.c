@@ -14,6 +14,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-running-context.h>
+#include <time.h>
 
 static BonoboObjectClass    *bonobo_event_source_parent_class;
 POA_Bonobo_EventSource__vepv bonobo_event_source_vepv;
@@ -22,13 +23,32 @@ POA_Bonobo_EventSource__vepv bonobo_event_source_vepv;
 struct _BonoboEventSourcePrivate {
 	GSList  *listeners;  /* CONTAINS: ListenerDesc* */
 	gboolean ignore;
+	gint     counter;    /* to create unique listener Ids */
 };
 
 typedef struct {
 	Bonobo_Listener listener;
+	Bonobo_EventSource_ListenerId id;
 	CORBA_char *event_mask; /* send all events if NULL */
 } ListenerDesc;
 
+/*
+ * tries to make a unique connection Id. Adding the time make an
+ * accidental remove of a listener more unlikely.
+ */
+static Bonobo_EventSource_ListenerId
+create_listener_id (BonoboEventSource *source)
+{
+	guint32 id;
+
+	source->priv->counter = source->priv->counter++ & 0x0000ffff;
+
+	if (!source->priv->counter) source->priv->counter++;
+
+	id = source->priv->counter | (time(NULL) << 16);
+
+	return id;
+}
 
 static inline BonoboEventSource * 
 bonobo_event_source_from_servant (PortableServer_Servant servant)
@@ -46,18 +66,17 @@ desc_free (ListenerDesc *desc, CORBA_Environment *ev)
 	}
 }
 
-static void
+static Bonobo_EventSource_ListenerId
 impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 					     const Bonobo_Listener  l,
 					     const CORBA_char      *event_mask,
 					     CORBA_Environment     *ev)
 {
 	BonoboEventSource *event_source;
-	GSList            *list;
 	CORBA_char        *mask_copy = NULL;
 	ListenerDesc      *desc;
 
-	g_return_if_fail (!CORBA_Object_is_nil (l, ev));
+	g_return_val_if_fail (!CORBA_Object_is_nil (l, ev), 0);
 
 	event_source = bonobo_event_source_from_servant (servant);
 
@@ -67,51 +86,38 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 	if (event_source->priv->ignore) /* Hook for running context */
 		bonobo_running_context_ignore_object (l);
 
-	/* 
-	 * Check if listener is already registered, and if so modify 
-	 * event_mask to recieve masked events.
-	 */
-	for (list = event_source->priv->listeners; list; list = list->next) {
-		desc = (ListenerDesc *) list->data;
-
-		if (CORBA_Object_is_equivalent (l, desc->listener, ev)) {
-			CORBA_free (desc->event_mask);
-			desc->event_mask = mask_copy;
-			return;
-		}
-	}
-
 	desc = g_new0 (ListenerDesc, 1);
 	desc->listener = bonobo_object_dup_ref (l, ev);
+	desc->id = create_listener_id (event_source);
 	desc->event_mask = mask_copy;
 
 	event_source->priv->listeners = g_slist_prepend (event_source->priv->listeners, desc);
+
+	return desc->id;
 }
 
-static void
+static Bonobo_EventSource_ListenerId
 impl_Bonobo_EventSource_addListener (PortableServer_Servant servant,
 				     const Bonobo_Listener  l,
 				     CORBA_Environment     *ev)
 {
-	impl_Bonobo_EventSource_addListenerWithMask (servant, l, NULL, ev);
+	return impl_Bonobo_EventSource_addListenerWithMask (servant, l, NULL, ev);
 }
 
 static void
 impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
-					const Bonobo_Listener  l,
+					const Bonobo_EventSource_ListenerId id,
 					CORBA_Environment     *ev)
 {
 	BonoboEventSource *event_source;
 	GSList *list;
-
-	g_return_if_fail (!CORBA_Object_is_nil (l, ev));
 
 	event_source = bonobo_event_source_from_servant (servant);
 
 	for (list = event_source->priv->listeners; list; list = list->next) {
 		ListenerDesc *desc = (ListenerDesc *) list->data;
 
-		if (CORBA_Object_is_equivalent (l, desc->listener, ev)) {
+		if (desc->id == id) {
 			event_source->priv->listeners = 
 				g_slist_remove (event_source->priv->listeners,
 						desc);

@@ -1,3 +1,17 @@
+2000-12-19  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* monikers/bonobo-moniker-cache.c (bonobo_cache_factory): count
+	the running object.
+
+	* monikers/Makefile.am: small bug fix
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_set_name): allow the
+	moniker name to be the same as the prefix.
+
+	* idl/bonobo-listener.idl: addListener returns an Id.
+
+	* bonobo/bonobo-event-source.c: see above.
+
 2000-12-19  Michael Meeks  <michael@helixcode.com>
 
 	* configure.in: Bump version to 0.31
