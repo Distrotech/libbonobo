@@ -29,7 +29,7 @@ struct _GnomeStreamMem {
 	long         pos;
 	gboolean     read_only;
 
-	GnomeStreamMemPrivate *priv
+	GnomeStreamMemPrivate *priv;
 };
 
 typedef struct {

@@ -10,6 +10,7 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
+#include <gtk/gtktypeutils.h>
 #include <libgnorba/gnorba.h>
 #include <bonobo/gnome-main.h>
 #include <bonobo/gnome-object.h>

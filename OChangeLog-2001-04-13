@@ -1,3 +1,36 @@
+1999-09-02  Michael Meeks  <michael@imaginator.com>
+
+	* doc/debugging.txt: Updated.
+
+	* components/image-x-png/bonobo-image-x-png.c (main): Add bonobo_main() !
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c (main): ditto.
+
+	* components/text-plain/bonobo-text-plain.c (main): Use bonobo_main();
+
+	* components/image-x-png/bonobo-image-x-png.c (bonobo_object_factory),
+	(init_bonobo_image_x_png_factory): Update to embeddable:image-x-png.
+
+	* components/image-x-png/image-x-png.gnorba (location_info):
+	the component make lives inside the factory. Remove loop in location_info.
+
+	* bonobo/gnome-object.c: include gtktypeutils for gtk_type_is_a
+
+	* bonobo/gnome-embeddable.c (gnome_embeddable_get_uri): Return NULL
+	on preconditions. (impl_GNOME_Embeddable_set_uri): remove const.
+
+	* bonobo/gnome-embeddable.h (GNOME_VIEW_FACTORY): Add helper macro.
+
+	* bonobo/gnome-view.h (GNOME_VIEW_VERB_FUNC): Add helper macro.
+
+	* samples/sample-container.c: Considerably simplify by moving
+	all redundant gpointer data casts into the function prototype.
+
+	* samples/paint-component-simple.c (view_size_allocate_cb): 
+	ditto: s/gpointer data/embeddable_data_t *embeddable_data/ &
+	s/gpointer data/view_data_t *view_data/. Saving scads of lines.
+	(view_factory, view_create_menus): Add function cast macros.
+
 1999-09-01  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-embeddable.h: host_name_changed signature now

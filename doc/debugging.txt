@@ -71,19 +71,32 @@ If all else fails try removing the gnome-name-service,
 cleaning any installed binaries and removing
 etc/CORBA/servers/bonobo-my-component.gnorba and trying again.
 
-9. Getting more information
+9. Nothing seems to happen, the code just locks
+
+Check that you are doing either a bonobo_main() or a bonobo_activate()
+followed by gtk_main(). Failure to do this will cause strange lockups.
+NB. must be done in both container and component.
+
+10. Getting more information
 
 If you are doing serious development consider compiling gtk+, glib and
 bonobo with debugging symbols:
 
-	export CFLAGS='-g' ; ./configure
+       export CFLAGS='-g' ; ./configure
 
-10. The last resort.
+If you suspect the name server of causing problems use type:
+
+       export GOAD_DEBUG_EXERUN=1
+
+to get debug to the console, simply adding a breakpoint in g_log will
+help get at the innards of the goad activation process.
+
+11. The last resort.
 
 And finally when the handfuls of hair are coming out thick and fast,
 consider reading the source, it only looks scary, it won't bite.
 
-11. Talk to the experts.
+12. Talk to the experts.
 
 Try reading the mailing list archive available at:
 
