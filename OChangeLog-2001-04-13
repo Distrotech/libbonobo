@@ -1,3 +1,11 @@
+2001-02-08  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-ui-sync-toolbar.c (create_dockitem): revert Cody's
+	style changes stuff.
+	(toolbar_style_changed): kill.
+
+	* bonobo/bonobo-ui-container.h: prune crud.
+
 2001-02-08  Dietmar Maurer  <dietmar@ximian.com>
 	
 	* bonobo/bonobo-property-bag.h: renamed
