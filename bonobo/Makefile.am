@@ -137,9 +137,10 @@ libbonobo_src =				\
 	bonobo-types.c
 
 libbonobo_2_la_SOURCES = \
+	$(CORBA_SOURCE)			\
+	$(marshal_sources)		\
 	$(libbonoboinclude_HEADERS)	\
-	$(libbonobo_src)		\
-	$(CORBA_SOURCE)
+	$(libbonobo_src)
 
 Bonobo_module_la_SOURCES = \
 	Bonobo-imodule.c

@@ -1,3 +1,8 @@
+2001-08-07  Rodrigo Moya <rodrigo@ximian.com>
+
+	* bonobo/Makefile.am: build $CORBA_SOURCES and $marshal_sources before
+	the other source files
+
 2001-08-07  Mark McLoughlin <mark@skynet.ie>
 
 	* bonobo/bonobo-event-source.c,
