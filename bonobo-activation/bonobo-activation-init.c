@@ -283,10 +283,25 @@ CORBA_ORB
 oaf_init(int argc, char **argv)
 {
   CORBA_ORB retval;
+  int i;
 
   oaf_preinit(NULL, NULL);
 
   retval = oaf_orb_init(&argc, argv);
+
+  /* Handle non-popt case */
+  for(i = 1; i < argc; i++)
+    {
+      if(!strncmp("--oaf-od-ior=", argv[i], strlen("--oaf-od-ior="))) {
+	oaf_od_ior = argv[i] + strlen("--oaf-od-ior=");
+      } else if(!strncmp("--oaf-ior-fd=", argv[i], strlen("--oaf-ior-fd="))) {
+	oaf_ior_fd = atoi(argv[i] + strlen("--oaf-ior-fd="));
+	if(!oaf_ior_fd)
+	  oaf_ior_fd = 1;
+      } else if(!strncmp("--oaf-activate-iid=", argv[i], strlen("--oaf-activate-iid="))) {
+	oaf_activate_iid = argv[i] + strlen("--oaf-activate-iid=");
+      }
+    }
 
   oaf_postinit(NULL, NULL);
 

@@ -35,11 +35,11 @@ oaf_server_activate_shlib(OAF_ActivationResult *sh,
   char *filename;
   const char *iid;
 
-  g_return_val_if_fail(sh->_d == OAF_RESULT_SHLIB, CORBA_OBJECT_NIL);
-  g_return_val_if_fail(sh->_u.res_shlib._length < 1, CORBA_OBJECT_NIL);
+  g_return_val_if_fail(sh->res._d == OAF_RESULT_SHLIB, CORBA_OBJECT_NIL);
+  g_return_val_if_fail(sh->res._u.res_shlib._length < 1, CORBA_OBJECT_NIL);
 
-  i = sh->_u.res_shlib._length - 1;
-  filename = sh->_u.res_shlib._buffer[i];
+  i = sh->res._u.res_shlib._length - 1;
+  filename = sh->res._u.res_shlib._buffer[i];
   if (living_by_filename)
     local_plugin_info = g_hash_table_lookup(living_by_filename, filename);
 
@@ -89,8 +89,8 @@ oaf_server_activate_shlib(OAF_ActivationResult *sh,
   orb = oaf_orb_get();
   poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", ev);
     
-  i = sh->_u.res_shlib._length - 2;
-  iid = sh->_u.res_shlib._buffer[i];
+  i = sh->res._u.res_shlib._length - 2;
+  iid = sh->res._u.res_shlib._buffer[i];
   for (pobj = plugin->plugin_object_list; pobj->iid; pobj++)
     {
       if (!strcmp (iid, pobj->iid))
@@ -109,7 +109,7 @@ oaf_server_activate_shlib(OAF_ActivationResult *sh,
 	  CORBA_Object new_retval;
 	  GNOME_stringlist dummy = {0};
 
-	  iid = sh->_u.res_shlib._buffer[i];
+	  iid = sh->res._u.res_shlib._buffer[i];
 
 	  new_retval = GNOME_GenericFactory_create_object(retval, (char *)iid, &dummy, ev);
 	  if(ev->_major != CORBA_NO_EXCEPTION || CORBA_Object_is_nil(new_retval, ev))

@@ -44,7 +44,8 @@ oaf_query(const char *requirements, const char **selection_order, CORBA_Environm
 }
 
 CORBA_Object
-oaf_activate(const char *requirements, const char **selection_order, OAF_ActivationFlags flags, CORBA_Environment *ev)
+oaf_activate(const char *requirements, const char **selection_order, OAF_ActivationFlags flags,
+	     OAF_ActivationID *ret_aid, CORBA_Environment *ev)
 {
   GNOME_stringlist selorder;
   CORBA_Object retval = CORBA_OBJECT_NIL;
@@ -79,17 +80,24 @@ oaf_activate(const char *requirements, const char **selection_order, OAF_Activat
   if(ev->_major != CORBA_NO_EXCEPTION)
     goto out;
 
-  switch(res->_d)
+  switch(res->res._d)
     {
     case OAF_RESULT_SHLIB:
       retval = oaf_server_activate_shlib(res, ev);
       break;
     case OAF_RESULT_OBJECT:
-      retval = CORBA_Object_duplicate(res->_u.res_object, ev);
+      retval = CORBA_Object_duplicate(res->res._u.res_object, ev);
       break;
     case OAF_RESULT_NONE:
     default:
       break;
+    }
+
+  if(ret_aid)
+    {
+      *ret_aid = NULL;
+      if(*res->aid)
+	*ret_aid = g_strdup(res->aid);
     }
 
   CORBA_free(res);
@@ -102,7 +110,7 @@ oaf_activate(const char *requirements, const char **selection_order, OAF_Activat
 }
 
 CORBA_Object
-oaf_activate_from_id(const OAF_ActivationID aid, OAF_ActivationFlags flags, CORBA_Environment *ev)
+oaf_activate_from_id(const OAF_ActivationID aid, OAF_ActivationFlags flags, OAF_ActivationID *ret_aid, CORBA_Environment *ev)
 {
   CORBA_Object retval = CORBA_OBJECT_NIL;
   OAF_ActivationResult *res;
@@ -140,17 +148,24 @@ oaf_activate_from_id(const OAF_ActivationID aid, OAF_ActivationFlags flags, CORB
   if(ev->_major != CORBA_NO_EXCEPTION)
     goto out;
 
-  switch(res->_d)
+  switch(res->res._d)
     {
     case OAF_RESULT_SHLIB:
       retval = oaf_server_activate_shlib(res, ev);
       break;
     case OAF_RESULT_OBJECT:
-      retval = CORBA_Object_duplicate(res->_u.res_object, ev);
+      retval = CORBA_Object_duplicate(res->res._u.res_object, ev);
       break;
     case OAF_RESULT_NONE:
     default:
       break;
+    }
+
+  if(ret_aid)
+    {
+      *ret_aid = NULL;
+      if(*res->aid)
+	*ret_aid = g_strdup(res->aid);
     }
 
   CORBA_free(res);

@@ -425,18 +425,26 @@ ac_do_activation(impl_POA_OAF_ActivationContext *servant,
      && (hostname && !strcmp(activatable->hostname, hostname)))
     {
       int j;
+      char tbuf[512];
 
-      out->_d = OAF_RESULT_SHLIB;
-      out->_u.res_shlib._length = num_layers + 1;
-      out->_u.res_shlib._buffer = CORBA_sequence_CORBA_string_allocbuf(num_layers);
+      out->res._d = OAF_RESULT_SHLIB;
+      out->res._u.res_shlib._length = num_layers + 1;
+      out->res._u.res_shlib._buffer = CORBA_sequence_CORBA_string_allocbuf(num_layers);
 
       for(j = 0, activatable = server; activatable && !strcmp(activatable->server_type, "factory"); j++)
 	{
-	  out->_u.res_shlib._buffer[j] = CORBA_string_dup(activatable->iid);
+	  out->res._u.res_shlib._buffer[j] = CORBA_string_dup(activatable->iid);
 	  activatable = g_hash_table_lookup(child->by_iid, activatable->location_info);
 	}
 
-      out->_u.res_shlib._buffer[j] = CORBA_string_dup(activatable->iid);
+      out->res._u.res_shlib._buffer[j] = CORBA_string_dup(activatable->iid);
+
+      g_snprintf(tbuf, sizeof(tbuf), "OAFAID:[%s,%s,%s,%s]",
+		 activatable->iid,
+		 activatable->username,
+		 activatable->hostname,
+		 activatable->domain);
+      out->aid = CORBA_string_dup(tbuf);
     }
   else
     {
@@ -445,8 +453,15 @@ ac_do_activation(impl_POA_OAF_ActivationContext *servant,
       retval = OAF_ObjectDirectory_activate(child->obj, server->iid, servant->me, flags, ctx, ev);
       if(ev->_major == CORBA_NO_EXCEPTION)
 	{
-	  out->_d = OAF_RESULT_OBJECT;
-	  out->_u.res_object = retval;
+	  char tbuf[512];
+	  out->res._d = OAF_RESULT_OBJECT;
+	  out->res._u.res_object = retval;
+	  g_snprintf(tbuf, sizeof(tbuf), "OAFAID:[%s,%s,%s,%s]",
+		     activatable->iid,
+		     activatable->username,
+		     activatable->hostname,
+		     activatable->domain);
+	  out->aid = CORBA_string_dup(tbuf);
 	}
     }
 }
@@ -505,9 +520,9 @@ impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
     goto out;
 
   retval = OAF_ActivationResult__alloc();
-  retval->_d = OAF_RESULT_NONE;
+  retval->res._d = OAF_RESULT_NONE;
 
-  for(i = 0; (retval->_d == OAF_RESULT_NONE) && items[i] && (i < servant->total_servers); i++)
+  for(i = 0; (retval->res._d == OAF_RESULT_NONE) && items[i] && (i < servant->total_servers); i++)
     {
       curitem = items[i];
 
@@ -518,6 +533,9 @@ impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
   g_free(hostname);
   
   servant->refs--;
+
+  if(retval->res._d == OAF_RESULT_NONE)
+    retval->aid = CORBA_string_dup("");
   
   return retval;
 }
@@ -785,7 +803,7 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
   servant->refs++;
 
   retval = OAF_ActivationResult__alloc();
-  retval->_d = OAF_RESULT_NONE;
+  retval->res._d = OAF_RESULT_NONE;
 
   ainfo = oaf_actid_parse(aid);
 
@@ -820,6 +838,9 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
  out:
   servant->refs--;
   oaf_actinfo_free(ainfo);
+
+  if(retval->res._d == OAF_RESULT_NONE)
+    retval->aid = CORBA_string_dup("");
 
   return retval;
 }

@@ -45,13 +45,13 @@ od_server_activate_factory(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_
   if(ev->_major != CORBA_NO_EXCEPTION)
     goto out;
 
-  switch(res->_d) {
+  switch(res->res._d) {
   case OAF_RESULT_NONE:
     CORBA_free(res);
     goto out;
     break;
   case OAF_RESULT_OBJECT:
-    factory = res->_u.res_object;
+    factory = res->res._u.res_object;
     break;
   default:
     g_assert_not_reached();

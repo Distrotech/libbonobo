@@ -15,7 +15,7 @@ typedef struct {
   GHashTable *by_iid;
 
   CORBA_char *attr_domain;
-  CORBA_char *attr_hostID;
+  const char *attr_hostID;
 
   guchar is_locked;
 
@@ -335,7 +335,7 @@ impl_OAF_ObjectDirectory_unregister(impl_POA_OAF_ObjectDirectory * servant,
   char *orig_iid;
   CORBA_Object orig_obj;
 
-  if(!g_hash_table_lookup_extended(servant->active_servers, iid, &orig_iid, &orig_obj)
+  if(!g_hash_table_lookup_extended(servant->active_servers, iid, (gpointer *)&orig_iid, (gpointer *)&orig_obj)
      || !CORBA_Object_is_equivalent(orig_obj, obj, ev))
     return;
 

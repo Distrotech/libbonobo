@@ -12,11 +12,15 @@ module OAF {
   /* ActivationResult */
   enum ActivationResultType { RESULT_OBJECT, RESULT_SHLIB, RESULT_NONE };
 
-  union ActivationResult switch(ActivationResultType) {
+  union ActivationResultData switch(ActivationResultType) {
   case RESULT_OBJECT:
     Object res_object;
   case RESULT_SHLIB:
     GNOME::stringlist res_shlib;
+  };
+  struct ActivationResult {
+    string aid;
+    ActivationResultData res;
   };
 
   /* Attribute */
