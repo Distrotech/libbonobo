@@ -1,3 +1,8 @@
+Thu Feb 22 19:46:02 CET 2001 Paolo Molaro <lupus@ximian.com>
+
+	* doc/bonobo.dtd: Added first version of the BonoboUI DTD
+	(needs proofreading).
+
 2001-02-21  Michael Meeks  <michael@ximian.com>
 
 	* samples/controls/bonobo-clock-control.c
