@@ -348,22 +348,20 @@ bonobo_activation_server_by_forking (
 
 		if (linc_get_threaded ()) {
                         GSource *source;
-                        GMainContext *ctx;
 
                         /* The calling code needs to be multi-threaded */
                         g_warning ("FIXME: re-factor this for efficiency\n");
                         g_warning ("FIXME: we can't use this path to activate "
                                    "b-a-s first time - it's a re-enterancy hazard\n");
-                        ctx = g_main_loop_get_context (NULL);
 
                         source = g_io_create_watch
                                 (gioc, G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR);
                         g_source_set_callback (source, (GSourceFunc) handle_exepipe, &ai, NULL);
-                        g_source_attach (source, ctx);
+                        g_source_attach (source, NULL); /* The mainloop */
 
                         /* We have to be able to process incoming CORBA calls here */
                         while (!ai.done)
-                                g_main_context_iteration (ctx, TRUE);
+                                g_main_context_iteration (NULL, TRUE);
 
                         g_source_destroy (source);
                         g_source_unref (source);
