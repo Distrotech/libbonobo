@@ -25,8 +25,7 @@ simple_resolve (BonoboMoniker               *moniker,
 
 	simple = BONOBO_MONIKER_SIMPLE (moniker);
 
-	return simple->resolve_fn (
-		moniker, options, requested_interface, ev);
+	return simple->resolve_fn (moniker, options, requested_interface, ev);
 }
 
 static void
@@ -85,7 +84,7 @@ bonobo_moniker_simple_construct (BonoboMonikerSimple         *moniker,
 	moniker->resolve_fn = resolve_fn;
 
 	return bonobo_moniker_construct (
-		BONOBO_MONIKER (moniker), corba_moniker, name);
+		BONOBO_MONIKER (moniker), corba_moniker, name, resolve_fn);
 }
 
 /**

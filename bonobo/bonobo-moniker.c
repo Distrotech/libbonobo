@@ -445,7 +445,7 @@ bonobo_moniker_get_type (void)
  * or %CORBA_OBJECT_NIL in case of failure.
  */
 Bonobo_Moniker
-bonobo_moniker_corba_object_create (BonoboObject *object)
+bonobo_moniker_corba_object_create (BonoboObject *object, gpointer shlib_id)
 {
 	POA_Bonobo_Moniker *servant;
 	CORBA_Environment ev;
@@ -464,7 +464,7 @@ bonobo_moniker_corba_object_create (BonoboObject *object)
 
 	CORBA_exception_free (&ev);
 
-	return bonobo_object_activate_servant (object, servant);
+	return bonobo_object_activate_servant_full (object, servant, shlib_id);
 }
 
 /**
@@ -481,13 +481,14 @@ bonobo_moniker_corba_object_create (BonoboObject *object)
 BonoboMoniker *
 bonobo_moniker_construct (BonoboMoniker *moniker,
 			  Bonobo_Moniker corba_moniker,
-			  const char    *prefix)
+			  const char    *prefix,
+			  gpointer       shlib_id)
 {
 	BonoboMoniker *retval;
 
 	if (!corba_moniker) {
 		corba_moniker = bonobo_moniker_corba_object_create (
-			BONOBO_OBJECT (moniker));
+			BONOBO_OBJECT (moniker), shlib_id);
 
 		if (corba_moniker == CORBA_OBJECT_NIL) {
 			bonobo_object_unref (BONOBO_OBJECT (moniker));

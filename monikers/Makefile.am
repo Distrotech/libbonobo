@@ -49,6 +49,8 @@ libmoniker_std_la_SOURCES =			\
 	bonobo-moniker-new.c			\
 	bonobo-moniker-oaf.c			\
 	bonobo-moniker-cache.c			\
+	bonobo-stream-cache.h			\
+	bonobo-stream-cache.c			\
 	bonobo-moniker-query.c			\
 	bonobo-moniker-query.h			\
 	bonobo-moniker-std.h            	\

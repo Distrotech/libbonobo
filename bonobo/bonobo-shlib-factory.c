@@ -102,7 +102,7 @@ bonobo_shlib_factory_new (const char            *oaf_iid,
 	c_factory = gtk_type_new (bonobo_shlib_factory_get_type ());
 
 	corba_factory = bonobo_generic_factory_corba_object_create (
-		BONOBO_OBJECT (c_factory));
+		BONOBO_OBJECT (c_factory), factory);
 
 	if (corba_factory == CORBA_OBJECT_NIL) {
 		bonobo_object_unref (BONOBO_OBJECT (c_factory));
@@ -149,7 +149,7 @@ BonoboShlibFactory *bonobo_shlib_factory_new_multi (
 	c_factory = gtk_type_new (bonobo_shlib_factory_get_type ());
 
 	corba_factory = bonobo_generic_factory_corba_object_create (
-		BONOBO_OBJECT (c_factory));
+		BONOBO_OBJECT (c_factory), factory_cb);
 
 	if (corba_factory == CORBA_OBJECT_NIL) {
 		bonobo_object_unref (BONOBO_OBJECT (c_factory));
@@ -186,9 +186,6 @@ bonobo_shlib_factory_new_generic (BonoboGenericFactory *factory,
 
 	retval = BONOBO_GENERIC_FACTORY_CLASS (
 		bonobo_shlib_factory_parent_class)->new_generic (factory, oaf_iid);
-	
-	bonobo_shlib_factory_track_object (
-		BONOBO_SHLIB_FACTORY (factory), retval);
 
 	return retval;
 }
@@ -243,15 +240,24 @@ bonobo_shlib_factory_inc_live (BonoboShlibFactory *factory)
 	factory->live_objects++;
 }
 
+
+static gboolean
+bonobo_shlib_factory_dec_live_cb (BonoboShlibFactory *factory)
+{
+	factory->live_objects--;
+
+	if (factory->live_objects <= 0)
+		bonobo_object_unref (BONOBO_OBJECT (factory));
+
+	return FALSE;
+}
+
 void
 bonobo_shlib_factory_dec_live (BonoboShlibFactory *factory)
 {
 	g_return_if_fail (BONOBO_IS_SHLIB_FACTORY (factory));
 
-	factory->live_objects--;
-
-	if (factory->live_objects <= 0)
-		bonobo_object_idle_unref (BONOBO_OBJECT (factory));
+	g_idle_add ((GSourceFunc) bonobo_shlib_factory_dec_live_cb, factory);
 }
 
 static void

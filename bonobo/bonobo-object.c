@@ -8,7 +8,10 @@
  *
  * Copyright 1999,2000 Helix Code, Inc.
  */
+#define _GNU_SOURCE   /* for dladdr */
+
 #include <config.h>
+#include <dlfcn.h>
 #include <stdio.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
@@ -16,6 +19,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-shlib-factory.h>
 #include "Bonobo.h"
 #include "bonobo-running-context.h"
 #include "bonobo-object-directory.h"
@@ -799,10 +803,67 @@ bonobo_object_init (void)
 	g_atexit (bonobo_object_shutdown);
 }
 
+#ifdef __USE_GNU
+static void
+bonobo_track_shlib_objects (BonoboObject *object, gpointer shlib_id)
+{
+	static GHashTable *factory_hash = NULL;
+	static gpointer bonobo_lib_dli_fbase = NULL;
+
+	gpointer dli_fbase = NULL;
+	Dl_info info;
+	BonoboShlibFactory *factory;
+
+	if (!factory_hash) { 
+
+		factory_hash = g_hash_table_new (NULL, NULL);
+
+		if (dladdr ("SHLIB_ID", &info))
+			bonobo_lib_dli_fbase = info.dli_fbase;
+	}
+	
+	if (dladdr (shlib_id, &info))
+		dli_fbase = info.dli_fbase;
+	
+	if (dli_fbase && bonobo_lib_dli_fbase &&
+	    (dli_fbase != bonobo_lib_dli_fbase)) {
+		
+		if (BONOBO_IS_SHLIB_FACTORY (object)) {
+			if (g_hash_table_lookup (factory_hash, dli_fbase)) {
+				g_warning ("detected two factories in the "
+					   "same shared library");
+				g_hash_table_remove (factory_hash, dli_fbase);
+			}
+			g_hash_table_insert (factory_hash, dli_fbase, object);
+		} else {
+			if ((factory = BONOBO_SHLIB_FACTORY (
+			        g_hash_table_lookup (factory_hash, 
+						     dli_fbase)))) {
+			       
+				bonobo_shlib_factory_track_object (factory,
+								   object);
+			}
+		}	
+	}
+}
+#endif
+
+/* this only works if servant->vepv is not dynamically allocated, which should
+ * be true. 
+ */
+Bonobo_Unknown
+bonobo_object_activate_servant (BonoboObject *object, 
+				void         *servant)
+{
+	gpointer vepv = ((POA_Bonobo_Unknown *)servant)->vepv; 
+	return bonobo_object_activate_servant_full (object, servant, vepv);
+}
+
 /**
- * bonobo_object_activate_servant:
+ * bonobo_object_activate_servant_full:
  * @object: a BonoboObject
  * @servant: The servant to activate.
+ * @shlib_id: an address to identify the shared library
  *
  * This routine activates the @servant which is wrapped inside the
  * @object on the bonobo_poa (which is the default POA).
@@ -810,8 +871,10 @@ bonobo_object_init (void)
  * Returns: The CORBA_Object that is wrapped by @object and whose
  * servant is @servant.  Might return CORBA_OBJECT_NIL on failure.
  */
-CORBA_Object
-bonobo_object_activate_servant (BonoboObject *object, void *servant)
+Bonobo_Unknown
+bonobo_object_activate_servant_full (BonoboObject *object, 
+				     void *servant,
+				     gpointer shlib_id)
 {
 	CORBA_Environment ev;
 	Bonobo_Unknown o;
@@ -819,6 +882,9 @@ bonobo_object_activate_servant (BonoboObject *object, void *servant)
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), CORBA_OBJECT_NIL);
 	g_return_val_if_fail (servant != NULL, CORBA_OBJECT_NIL);
 
+#ifdef __USE_GNU
+		bonobo_track_shlib_objects (object, shlib_id);
+#endif
 	CORBA_exception_init (&ev);
 
 	CORBA_free (PortableServer_POA_activate_object (

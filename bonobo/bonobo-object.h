@@ -27,6 +27,10 @@ BEGIN_GNOME_DECLS
 
 #define BONOBO_OBJREF(o)          (bonobo_object_corba_objref(BONOBO_OBJECT(o)))
 
+#if 0
+#define bonobo_object_activate_servant(object, servant)  bonobo_object_activate_servant_full (object, servant, "SHLIB_ID")
+#endif
+
 /*
  * If you're using a custom servant for your CORBA objects, just make
  * sure that the second element is a 'gpointer' to hold the BonoboObject
@@ -66,6 +70,9 @@ BonoboObject            *bonobo_object_from_servant           (PortableServer_Se
 void                     bonobo_object_bind_to_servant        (BonoboObject           *object,
 							       void                   *servant);
 PortableServer_Servant   bonobo_object_get_servant            (BonoboObject           *object);
+Bonobo_Unknown           bonobo_object_activate_servant_full  (BonoboObject           *object,
+							       void                   *servant,
+							       gpointer shlib_id);
 Bonobo_Unknown           bonobo_object_activate_servant       (BonoboObject           *object,
 							       void                   *servant);
 void                     bonobo_object_add_interface          (BonoboObject           *object,

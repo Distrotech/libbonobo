@@ -95,7 +95,8 @@ typedef struct {
 GtkType               bonobo_generic_factory_get_type  (void);
 
 CORBA_Object          bonobo_generic_factory_corba_object_create (
-	BonoboObject *object);
+	BonoboObject *object,
+	gpointer      shlib_id);
 
 BonoboGenericFactory *bonobo_generic_factory_new (
 	const char            *component_id,

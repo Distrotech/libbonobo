@@ -1,3 +1,33 @@
+2001-01-25  Dietmar Maurer  <dietmar@ximian.com>
+
+	* monikers/bonobo-stream-cache.[ch]: a stream cache implementation
+	for the cache moniker.
+
+	* monikers/moniker-test.c (display_as_stream): free the allocated
+	iobuf. 
+
+	* monikers/bonobo-moniker-cache.c (bonobo_moniker_cache_resolve):
+	a first implementation.
+
+	* monikers/Bonobo_Moniker_std.oaf.in.in: s/_cache/_Cache/
+
+	* bonobo/bonobo-shlib-factory.c
+	(bonobo_shlib_factory_dec_live_cb): use a idle callback to
+	decrement live_objects instead of bonobo_idle_unref().
+
+	* bonobo/bonobo-object.c (bonobo_track_shlib_objects): impl.
+	(bonobo_object_activate_servant_full): impl.
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_corba_object_create): added a new
+	parameter to identify the calling shared library.
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_corba_object_create):
+	added a new parameter to identify the calling shared library. 
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_construct): added a new
+	parameter to identify the calling shared library.
+
 Wed Jan 24 21:50:08 2001  George Lebl <jirka@5z.com>
 
 	* bonobo/bonobo-control.c (bonobo_control_plug_destroy_event_cb):

@@ -58,11 +58,13 @@ typedef struct {
 
 GtkType                  bonobo_moniker_get_type            (void);
 POA_Bonobo_Moniker__epv *bonobo_moniker_get_epv             (void);
-Bonobo_Moniker           bonobo_moniker_corba_object_create (BonoboObject      *object);
+Bonobo_Moniker           bonobo_moniker_corba_object_create (BonoboObject      *object, 
+							     gpointer shlib_id);
 
 BonoboMoniker           *bonobo_moniker_construct           (BonoboMoniker *monike,
 							     Bonobo_Moniker corba_moniker,
-							     const char    *prefix);
+							     const char    *prefix,
+							     gpointer shlib_id);
 
 Bonobo_Moniker           bonobo_moniker_get_parent          (BonoboMoniker     *moniker,
 							     CORBA_Environment *ev);
