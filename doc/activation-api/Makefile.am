@@ -22,10 +22,12 @@ tmpl_sources =				\
 	$(NULL)
 
 
+if ENABLE_GTK_DOC
 liboaf_docdir = $(HTML_DIR)
 liboaf_doc_DATA =			\
 	liboaf.html			\
 	$(NULL)
+endif
 
 
 my_sgml_files = 			\
