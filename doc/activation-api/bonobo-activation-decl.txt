@@ -9,7 +9,7 @@ typedef struct
 } OAFActivationInfo;
 </STRUCT>
 
-<STRUCT>
+<ENUM>
 <NAME>OAF_PropertyType</NAME>
    typedef enum
    {
@@ -19,7 +19,7 @@ typedef struct
       OAF_P_STRINGV
    }
    OAF_PropertyType;
-</STRUCT>
+</ENUM>
 
 <STRUCT>
 <NAME>OAF_Property</NAME>
