@@ -1,5 +1,27 @@
 2000-10-08  Michael Meeks  <michael@helixcode.com>
 
+	* idl/bonobo-zoomable.idl: Zoomable interface taken from nautilus
+	and adapted by Martin Baulig to bonoboness.
+
+	* bonobo/bonobo-zoomable*.[ch]: the code.
+
+	Date: Thu, 05 Oct 2000 12:48:49 -0700
+	From: Darin Adler <darin@eazel.com>
+	To: Michael Meeks <michael@helixcode.com>
+	Cc: Bud Tribble <bud@eazel.com>, Maciej Stachowiak <mjs@eazel.com>,
+	Martin Baulig <martin@home-of-linux.org>
+	Subject: Nautilus:Zoomable interface license
+
+	As we discussed, the Nautilus:Zoomable interface is currently under the GPL,
+	but we (copyright holders, Eazel) give you permission to make an LGPL
+	version of it for inclusion in Bonobo.
+
+	    -- Darin
+
+	Recieved with thanks.
+	
+2000-10-08  Michael Meeks  <michael@helixcode.com>
+
 	* idl/bonobo-listener.idl: add.
 
 2000-10-07  Michael Meeks  <michael@helixcode.com>

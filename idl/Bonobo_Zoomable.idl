@@ -1,0 +1,84 @@
+module Bonobo {
+
+typedef float ZoomLevel;
+typedef sequence<ZoomLevel> ZoomLevelList;
+	
+/* A zoomable has the responsibility to look for this
+ * interface on its Bonobo control frame and call
+ * zoom_level_changed whenever it changes the zoom level (on
+ * its own or due to calls from the zoomable interface).
+*/
+interface ZoomableFrame : ::Bonobo::Unknown {
+	/**
+	 *
+	 * report_zoom_level_changed:
+	 * @zoom_level: The new zoom level.
+	 *
+	 * Informs the ZoomableFrame that the zoom level has changed.
+	 * The Zoomable should call this each time it successfully
+	 * completed a zooming operation.
+	 */
+	oneway void report_zoom_level_changed (in float zoom_level);
+
+	/**
+	 *
+	 * report_zoom_parameters_changed:
+	 *
+	 * Informs the ZoomableFrame that some of the zoom parameters
+	 * such as min/max zoom level has changed, for instance after
+	 * loading a new file into the component.
+	 */
+	oneway void report_zoom_parameters_changed ();
+};
+
+interface Zoomable : Bonobo::Unknown {
+	/*
+	 * This is a read-only value and indicates the actual current
+	 * zoom level of the component. It is changed by the component
+	 * after successfully completing a zooming operation before
+	 * calling the `report_zoom_level_changed' method on its
+	 * ZoomableFrame.
+	 *
+	 */
+	readonly attribute float zoom_level;
+
+	/* Information about the type of zooming that's supported. */
+	readonly attribute float min_zoom_level;
+	readonly attribute float max_zoom_level;
+	readonly attribute boolean has_min_zoom_level;
+	readonly attribute boolean has_max_zoom_level;
+	readonly attribute boolean is_continuous;
+	readonly attribute ZoomLevelList preferred_zoom_levels;
+		
+	/* High level operations.
+	 * These can cause a change in the zoom level.
+	 * The zoomable itself must decide what the concepts
+	 * "one level in", "one level out", and "to fit" mean.
+	 */
+	oneway void zoom_in ();
+	oneway void zoom_out ();
+	oneway void zoom_to_fit ();
+	oneway void zoom_to_default ();
+
+	/**
+	 *
+	 * set_zoom_level:
+	 * @zoom_level: The new zoom level.
+	 *
+	 * Tells the component to zoom to @zoom_level.
+	 *
+	 * If the component only supports fixed zoom levels,
+	 * then the actual zoom level will be set to whatever
+	 * is closes possible to @zoom_level.
+	 */
+	void set_zoom_level (in float zoom_level);
+
+	/**
+	 * set_frame:
+	 * @zoomable_frame: A Bonobo_ZoomableFrame.
+	 *
+	 * Gives the Zoomable a handle to its ZoomableFrame.
+	 */
+	void set_frame (in ZoomableFrame zoomable_frame);
+};
+};
