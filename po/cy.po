@@ -1,11 +1,12 @@
-# GNOME yn Gymraeg.
+# libbonobo yn Gymraeg.
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libbonobo package.
-# Dafydd Harries <daf@parnassus.ath.cx>, 2003
+# Dafydd Harries <daf@parnassus.ath.cx>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2003-08-26 14:07+0100\n"
 "PO-Revision-Date: 2003-05-31 16:24+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
@@ -18,7 +19,6 @@ msgstr ""
 msgid "Couldn't find which child the server was listed in"
 msgstr "Methu canfod pa blentyn rhestrwyd y gweinydd ynddi"
 
-# EFALLAI (gweithredu?)
 #: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
 msgstr "Nid yw'n ID Gweithredu dilys"
@@ -72,8 +72,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"Ni ddarllenwyd y ffeil ffurfweddi Gweithrediad Bonobo yn llwyddianus. "
-"Gwiriwch ei fod yn ddilys yn %s os gwelwch yn dda"
+"Ni ddarllenwyd ffeil cyfluniad Gweithrediad Bonobo yn llwyddianus. "
+"Os gwelwch yn dda, gwiriwch ei fod yn ddilys yn: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -428,7 +428,7 @@ msgstr "Digwyddodd eithriad '%s'"
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr "Methu cadw y ffeil ffurfweddiad.\n"
+msgstr "Methwyd cadw y ffeil cyflunaid.\n"
 
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
@@ -437,7 +437,7 @@ msgstr "Os gwelwch yn dda, gwiriwch fod gennych ganiatad ysgrifennu at '%s'\n"
 
 #: utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
-msgstr "Ysgrifennwyd y ffeil ffurfweddiad yn llwyddiannus.\n"
+msgstr "Ysgrifennwyd y ffeil cyfluniad yn llwyddiannus.\n"
 
 #: utils/bonobo-activation-sysconf.c:80
 #, c-format
@@ -445,25 +445,25 @@ msgid ""
 "configuration file is:\n"
 "    %s\n"
 msgstr ""
-"y ffeil ffurfweddiad yw:\n"
+"y ffeil cyfluniad yw:\n"
 "    %s\n"
 
 #: utils/bonobo-activation-sysconf.c:118
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr "mae %s yn y ffeil ffurfweddiad yn barod\n"
+msgstr "mae %s yn y ffeil cyfluniad eisioes\n"
 
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr "nid oes ffeil ffurfeddiad wedi ei strwythuro'n gywir\n"
+msgstr "nid oes ffeil cyfluniad wedi ei strwythuro'n gywir\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "Mae'r ffeil ffurfweddiad bonobo-actication yn cynnwys:\n"
+msgstr "Mae ffeil cyfluniad bonobo-actication yn cynnwys:\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr "Cyfeiriadur i'w dynnu o'r ffeil ffurfweddiad"
+msgstr "Cyfeiriadur i'w dynnu o'r ffeil cyfluniad"
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
@@ -471,12 +471,12 @@ msgstr "llwybr cyfeiriadur"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr "Cyfeiriadur i'w ychwannegu i'r ffeil ffurfweddiad"
+msgstr "Cyfeiriadur i'w ychwannegu i'r ffeil cyfluniad"
 
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
-msgstr "Dangos cyfeiriaduron yn y ffeil ffurfweddiad"
+msgstr "Dangos cyfeiriaduron yn y ffeil cyfluniad"
 
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
-msgstr "Dangos y llwybr i'r ffeil ffurfweddiad"
+msgstr "Dangos y llwybr i'r ffeil cyfluniad"
