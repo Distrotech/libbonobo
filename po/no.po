@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 0.1\n"
-"POT-Creation-Date: 2001-08-07 15:33-0400\n"
+"POT-Creation-Date: 2001-09-26 08:33+0200\n"
 "PO-Revision-Date: 2001-09-19 17:54+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -89,39 +89,59 @@ msgstr "feilutformet XML-beskrivelse av brukergrensesnitt"
 msgid "invalid path to XML user interface element"
 msgstr "ugyldig sti til XML-element for brukergrensesnitt"
 
-#: bonobo/bonobo-exception.c:216
+#: bonobo/bonobo-exception.c:215
+msgid "Unknown command or verb"
+msgstr "Ukjent kommando eller verb"
+
+#: bonobo/bonobo-exception.c:218
+msgid "Command is insensitive"
+msgstr "Kommandoen er ufølsom"
+
+#: bonobo/bonobo-exception.c:222
 msgid "incorrect data type"
 msgstr "inkorrekt datatype"
 
-#: bonobo/bonobo-exception.c:219
+#: bonobo/bonobo-exception.c:225
 msgid "stream not found"
 msgstr "stream ikke funnet"
 
-#: bonobo/bonobo-exception.c:223
+#: bonobo/bonobo-exception.c:229
 msgid "property not found"
 msgstr "egenskap ikke funnet"
 
-#: bonobo/bonobo-exception.c:227
+#: bonobo/bonobo-exception.c:232
+msgid "property has invalid type"
+msgstr "egenskapen har en ugyldig type"
+
+#: bonobo/bonobo-exception.c:235
+msgid "property is read only"
+msgstr "egenskapen er skrivebeskyttet"
+
+#: bonobo/bonobo-exception.c:238
+msgid "config database backend failed "
+msgstr "feil i undersystemet for konfigurasjonsdatabasen"
+
+#: bonobo/bonobo-exception.c:242
 msgid "Moniker interface cannot be found"
 msgstr "Moniker-grensesnitt kan ikke finnes"
 
-#: bonobo/bonobo-exception.c:230
+#: bonobo/bonobo-exception.c:245
 msgid "Moniker activation timed out"
 msgstr "Tidsavbrudd for moniker-aktivering"
 
-#: bonobo/bonobo-exception.c:233
+#: bonobo/bonobo-exception.c:248
 msgid "Syntax error within moniker"
 msgstr "Syntaksfeil i moniker"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:251
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker har ukjent moniker-prefiks"
 
-#: bonobo/bonobo-exception.c:260
+#: bonobo/bonobo-exception.c:275
 msgid "Error checking error; no exception"
 msgstr "Feil i feilsjekking; ingen unntak"
 
-#: bonobo/bonobo-exception.c:269
+#: bonobo/bonobo-exception.c:284
 msgid "General activation error with no description"
 msgstr "Generell feil under aktivering uten beskrivelse"
 
@@ -129,51 +149,37 @@ msgstr "Generell feil under aktivering uten beskrivelse"
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initialisere Bonobo"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP-moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "ORB IOR handling moniker"
+msgstr "Moniker for ORB IOR-håndtering"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
 msgstr "Standard moniker factory"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
 msgstr "vanlig aktiviseringsmoniker for Oaf"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
 msgstr "vanlig spørringsmoniker for Oaf"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
 msgstr "vanlig factory 'new' moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
 msgstr "vanlig oppføringsmoniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+#: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "strøm MonikerExtender"
-
-#~ msgid "Unknown command or verb"
-#~ msgstr "Ukjent kommando eller verb"
-
-#~ msgid "Command is insensitive"
-#~ msgstr "Kommandoen er ufølsom"
-
-#~ msgid "property has invalid type"
-#~ msgstr "egenskapen har en ugyldig type"
-
-#~ msgid "property is read only"
-#~ msgstr "egenskapen er skrivebeskyttet"
-
-#~ msgid "config database backend failed "
-#~ msgstr "feil i undersystemet for konfigurasjonsdatabasen"
-
-#~ msgid "ORB IOR handling moniker"
-#~ msgstr "Moniker for ORB IOR-håndtering"
 
 #~ msgid "The User canceled the save"
 #~ msgstr "Lagring avbrutt av bruker"
