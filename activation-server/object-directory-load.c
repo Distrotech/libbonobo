@@ -31,8 +31,8 @@
 #include <parser.h>      /* gnome-xml */
 #include <xmlmemory.h>   /* gnome-xml */
 
+#include "bonobo-activation/bonobo-activation-i18n.h"
 #include "server.h"
-#include "bonobo-activation/bonobo-activation.h"
 
 static gboolean od_string_to_boolean      (const char *str);
 static gboolean od_filename_has_extension (const char *filename,
@@ -40,11 +40,11 @@ static gboolean od_filename_has_extension (const char *filename,
 
 
 static void
-od_entry_read_props (OAF_ServerInfo *server, xmlNodePtr node)
+od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 {
 	int i, n;
 	xmlNodePtr sub;
-	OAF_Property *curprop;
+	Bonobo_Property *curprop;
 
 	for (n = 0, sub = node->xmlChildrenNode; sub; sub = sub->next) {
 		if (sub->type != XML_ELEMENT_NODE) {
@@ -60,7 +60,7 @@ od_entry_read_props (OAF_ServerInfo *server, xmlNodePtr node)
 	}
 
 	server->props._length = n;
-	server->props._buffer = g_new0 (OAF_Property, n);
+	server->props._buffer = g_new0 (Bonobo_Property, n);
 
         curprop = server->props._buffer;
 
@@ -89,7 +89,7 @@ od_entry_read_props (OAF_ServerInfo *server, xmlNodePtr node)
 			int j, o;
 			xmlNodePtr sub2;
 
-			curprop->v._d = OAF_P_STRINGV;
+			curprop->v._d = Bonobo_P_STRINGV;
 
 			for (o = 0, sub2 = sub->xmlChildrenNode; sub2;
 			     sub2 = sub2->next) {
@@ -129,20 +129,20 @@ od_entry_read_props (OAF_ServerInfo *server, xmlNodePtr node)
 		} else if (strcasecmp (type, "number") == 0) {
 			valuestr = xmlGetProp (sub, "value");
 
-			curprop->v._d = OAF_P_NUMBER;
+			curprop->v._d = Bonobo_P_NUMBER;
 			curprop->v._u.value_number = atof (valuestr);
 
 			xmlFree (valuestr);
 		} else if (strcasecmp (type, "boolean") == 0) {
 			valuestr = xmlGetProp (sub, "value");
-			curprop->v._d = OAF_P_BOOLEAN;
+			curprop->v._d = Bonobo_P_BOOLEAN;
 			curprop->v._u.value_boolean =
 				od_string_to_boolean (valuestr);
 			xmlFree (valuestr);
 		} else {
 			valuestr = xmlGetProp (sub, "value");
 			/* Assume string */
-			curprop->v._d = OAF_P_STRING;
+			curprop->v._d = Bonobo_P_STRING;
 			if (valuestr != NULL) {
 				curprop->v._u.value_string =
 					CORBA_string_dup (valuestr);
@@ -202,7 +202,7 @@ od_process_server_xml_node (xmlNodePtr node,
                             const char *domain)
 {
         GSList *cur;
-        OAF_ServerInfo *server;
+        Bonobo_ServerInfo *server;
         char *iid, *type, *location, *error;
         gboolean already_there;
         
@@ -244,14 +244,14 @@ od_process_server_xml_node (xmlNodePtr node,
         already_there = FALSE;
         
         for (cur = *entries; cur != NULL; cur = cur->next) {
-                if (strcmp (((OAF_ServerInfo *) cur->data)->iid, iid) == 0) {
+                if (strcmp (((Bonobo_ServerInfo *) cur->data)->iid, iid) == 0) {
                         already_there = TRUE;
                         break;
                 }
         }
         
         if (already_there == FALSE) {
-                server = g_new0 (OAF_ServerInfo, 1);
+                server = g_new0 (Bonobo_ServerInfo, 1);
                 
                 server->iid = CORBA_string_dup (iid);
                 server->server_type = CORBA_string_dup (type);
@@ -341,8 +341,8 @@ od_load_directory (const char *directory,
 
 
 void
-OAF_ServerInfo_load (char **directories,
-                     OAF_ServerInfoList   *servers,
+Bonobo_ServerInfo_load (char **directories,
+                     Bonobo_ServerInfoList   *servers,
 		     GHashTable **iid_to_server_info_map,
 		     const char *host, const char *domain)
 {
@@ -370,13 +370,13 @@ OAF_ServerInfo_load (char **directories,
 	/* Now convert 'entries' into something that the server can store and pass back */
 	length = g_slist_length (entries);
 
-	servers->_buffer = CORBA_sequence_OAF_ServerInfo_allocbuf (length);
+	servers->_buffer = CORBA_sequence_Bonobo_ServerInfo_allocbuf (length);
         servers->_length = length;
 
 	g_hash_table_freeze (*iid_to_server_info_map);
 
 	for (j = 0, p = entries; j < length; j++, p = p->next) {
-		memcpy (&servers->_buffer[j], p->data, sizeof (OAF_ServerInfo));
+		memcpy (&servers->_buffer[j], p->data, sizeof (Bonobo_ServerInfo));
 		g_hash_table_insert (*iid_to_server_info_map, servers->_buffer[j].iid, &servers->_buffer[j]);
 	}
 

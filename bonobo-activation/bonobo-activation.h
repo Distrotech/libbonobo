@@ -23,28 +23,25 @@
  *
  */
 
-#ifndef LIBOAF_H
-#define LIBOAF_H 1
+#ifndef BONOBO_ACTIVATION_H
+#define BONOBO_ACTIVATION_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <liboaf/liboaf-version.h>
-#include <liboaf/oaf.h>
+#include <bonobo-activation/Bonobo_Unknown.h>
+#include <bonobo-activation/Bonobo_GenericFactory.h>
 
-/* Need to conditionalize this */
-#include <orbit/orbit.h>
+#include <bonobo-activation/bonobo-activation-version.h>
 
-#include <liboaf/oaf-activate.h>
-#include <liboaf/oaf-servreg.h>
-#include <liboaf/oaf-util.h>
-#include <liboaf/oaf-actid.h>
-#include <liboaf/oaf-plugin.h>
-#include <liboaf/oaf-mainloop.h>
-#include <liboaf/oaf-registration.h>
-
-
+#include <bonobo-activation/bonobo-activation-activate.h>
+#include <bonobo-activation/bonobo-activation-server-info.h>
+#include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/bonobo-activation-base-service.h>
+#include <bonobo-activation/bonobo-activation-id.h>
+#include <bonobo-activation/bonobo-activation-shlib.h>
+#include <bonobo-activation/bonobo-activation-register.h>
 
 /* Optional stuff for libgnome to use */
 #ifdef HAVE_POPT_H
@@ -52,16 +49,16 @@ extern "C" {
 #endif
 
 #ifdef POPT_AUTOHELP
-extern struct poptOption oaf_popt_options[];
+extern struct poptOption bonobo_activation_popt_options[];
 #endif
 
-extern const guint liboaf_major_version,
-	liboaf_minor_version, liboaf_micro_version;
-extern const char liboaf_version[];
+extern const guint bonobo_activation_major_version,
+	bonobo_activation_minor_version, bonobo_activation_micro_version;
+extern const char bonobo_activation_version[];
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* LIBOAF_H */
+#endif /* BONOBO_ACTIVATION_H */
 

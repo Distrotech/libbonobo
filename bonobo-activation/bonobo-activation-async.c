@@ -63,7 +63,7 @@ void bonobo_activation_activate_async (const char *requirements,
 {
         CORBA_Object callback_object;
         CORBA_Environment myev;
-        Bonobo_stringlist sel_order;
+        Bonobo_StringList sel_order;
 	Bonobo_ActivationContext activation_context;
         char *ext_requirements;
 
@@ -89,7 +89,7 @@ void bonobo_activation_activate_async (const char *requirements,
 
         ext_requirements = bonobo_activation_maybe_add_test_requirements (requirements);
 
-        bonobo_activation_copy_string_array_to_Bonobo_stringlist (selection_order, &sel_order);
+        bonobo_activation_copy_string_array_to_Bonobo_StringList (selection_order, &sel_order);
 
         /* create the CORBA callback for this call It will destroy itelf later */
         callback_object = bonobo_activation_async_corba_callback_new (callback, user_data, ev);

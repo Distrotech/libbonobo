@@ -60,7 +60,7 @@ module Bonobo {
         case RESULT_OBJECT:
                 Object res_object;
         case RESULT_SHLIB:
-                Bonobo::stringlist res_shlib;
+                Bonobo::StringList res_shlib;
         };
 
         struct ActivationResult {
@@ -84,7 +84,7 @@ module Bonobo {
         case P_BOOLEAN:
                 boolean value_boolean;
         case P_STRINGV:
-                Bonobo::stringlist value_stringv;
+                Bonobo::StringList value_stringv;
         };
 
         struct Property {
@@ -166,13 +166,13 @@ module Bonobo {
                 void remove_directory (in ObjectDirectory dir) raises (NotListed);
 
                 ActivationResult activate (in string requirements,
-                                           in Bonobo::stringlist selection_order,
+                                           in Bonobo::StringList selection_order,
                                            in ActivationFlags flags)
                         raises (ParseFailed, IncompleteContext, GeneralError)
                         context ("username", "hostname", "domain", "display");
 
                 oneway void activate_async (in string requirements,
-                                            in Bonobo::stringlist selection_order,
+                                            in Bonobo::StringList selection_order,
                                             in ActivationFlags flags,
                                             in ActivationCallback callback_object)
                         context ("username", "hostname", "domain", "display");
@@ -181,7 +181,7 @@ module Bonobo {
 
                 readonly attribute ServerInfoList servers;
                 ServerInfoList query (in string requirements,
-                                      in Bonobo::stringlist selection_order)
+                                      in Bonobo::StringList selection_order)
                         raises (ParseFailed, IncompleteContext)
                         context ("username", "hostname", "domain");
 

@@ -3,6 +3,7 @@
 #define SERVER_H
 
 #include "Bonobo_ActivationContext.h"
+#include <bonobo-activation/bonobo-activation.h>
 
 /* od-corba.c */
 Bonobo_ObjectDirectory Bonobo_ObjectDirectory_create (PortableServer_POA poa,

@@ -23,21 +23,22 @@
  */
 
 #include "config.h"
-#include "od-utils.h"
-#include "oaf-i18n.h"
 #include <string.h>
 #include <tree.h> /* gnome-xml */
 #include <parser.h> /* gnome-xml */
 #include <xmlmemory.h> /* guess what ? gnome-xml !! */
 #include <glib.h>
 
-xmlDocPtr
-od_utils_load_xml_file (void)
+#include "bonobo-activation/bonobo-activation-i18n.h"
+
+static xmlDocPtr
+object_directory_utils_load_xml_file (void)
 {
         xmlDocPtr doc;
         char *oaf_config_file;
 
-        oaf_config_file = g_strconcat (OAF_CONFDIR, OAF_CONFIG_FILE, NULL);
+        oaf_config_file = g_strconcat (SERVER_CONFDIR, 
+                                       SERVER_CONFIG_FILE, NULL);
         doc = xmlParseFile (oaf_config_file);
 
        /* check if the document was read successfully. */
@@ -55,7 +56,7 @@ od_utils_load_xml_file (void)
 
 
 char *
-od_utils_load_config_file (void)
+object_directory_utils_load_config_file (void)
 {
         char *result;
         xmlDocPtr doc;

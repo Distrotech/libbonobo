@@ -7,30 +7,29 @@ INCLUDES=					\
 	-I$(top_builddir) 			\
 	-I$(top_builddir)/bonobo-activation	\
 	-I$(top_srcdir)/bonobo-activation	\
-	-DOAFINFODIR=\"$(pkgdatadir)\" 		\
-	-DOAF_LOCALEDIR=\""$(datadir)/locale"\" \
+	-DSERVERINFODIR=\"$(pkgdatadir)\" 	\
+	-DSERVER_LOCALEDIR=\""$(datadir)/locale"\" \
 	$(SERVER_CFLAGS)			\
-	-DOAF_CONFDIR=\"$(sysconfdir)\"		\
+	-DSERVER_CONFDIR=\"$(sysconfdir)\"	\
 	$(NULL)
 
 bonobo_activation_server_SOURCES=				\
 	activation-server-corba-extensions.c			\
 	activation-server-corba-extensions.h			\
+	activation-context-query.h				\
+	activation-context-query.c				\
 	qsort_ex.c						\
 	qsort_ex.h						\
 	Bonobo_ActivationContext-skels.c			\
 	activation-context-query-lexer.c			\
 	activation-context-query-parser.c			\
 	activation-context-query-parser.h			\
-	activation-context-query-expr.h				\
 	activation-context-corba.c				\
-	activation-context-query-expr.c				\
 	object-directory-corba.c				\
 	object-directory-load.c					\
-	object-directory-utils.c				\
 	object-directory-activate.c				\
-	main.c							\
-	object-directory-utils.h				\
+	object-directory-config-file.c				\
+	activation-server-main.c				\
 	server.h
 
 LDADD=../bonobo-activation/libbonobo-activation.la \
@@ -65,6 +64,11 @@ activation-context-query-parser.h: stamp-parser
 
 BUILT_SOURCES= activation-context-query-lexer.c activation-context-query-parser.c \
 	activation-context-query-parser.h Bonobo_ActivationContext-skels.c Bonobo_CosNaming_NamingContext.server
+
+idl_deps = \
+	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
+	$(top_srcdir)/idl/Bonobo_GenericFactory.idl	\
+	$(top_srcdir)/idl/Bonobo_ActivationContext.idl
 
 Bonobo_ActivationContext-skels.c : $(top_srcdir)/idl/Bonobo_ActivationContext.idl $(ORBIT_IDL)
 	$(ORBIT_IDL) --noheaders $(top_srcdir)/idl/Bonobo_ActivationContext.idl

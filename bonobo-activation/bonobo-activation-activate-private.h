@@ -28,9 +28,9 @@
 
 #include <bonobo-activation/Bonobo_GenericFactory.h>
 
-char              *bonobo_activation_maybe_add_test_requirements             (const char *requirements);
-void               bonobo_activation_copy_string_array_to_Bonobo_stringlist  (char *const *selection_order, 
-                                                                              Bonobo_stringlist *ret_val);
+char *bonobo_activation_maybe_add_test_requirements            (const char *requirements);
+void  bonobo_activation_copy_string_array_to_Bonobo_StringList (char *const *selection_order, 
+                                                                Bonobo_StringList *ret_val);
 
 
 #endif /* BONOBO_ACTIVATION_ACTIVATE_PRIVATE_H */

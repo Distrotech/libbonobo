@@ -187,16 +187,14 @@ bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh,
 		i =  sh->res._u.res_shlib._length - 2;
 		for (i--; i >= 0 && !CORBA_Object_is_nil (retval, ev); i--) {
 			CORBA_Object new_retval;
-			Bonobo_stringlist dummy = { 0 };
+			Bonobo_StringList dummy = { 0 };
 
 			iid = sh->res._u.res_shlib._buffer[i];
 
 			new_retval =
-				Bonobo_GenericFactory_create_object (retval,
-                                                                     (char *)
-                                                                     iid,
-                                                                     &dummy,
-                                                                     ev);
+				Bonobo_GenericFactory_createObject (
+                                        retval, (char *) iid, &dummy, ev);
+
 			if (ev->_major != CORBA_NO_EXCEPTION
 			    || CORBA_Object_is_nil (new_retval, ev)) {
                                 if (ev->_major == CORBA_NO_EXCEPTION) {

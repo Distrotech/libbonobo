@@ -7,7 +7,7 @@ INCLUDES=					\
 	-I$(top_builddir)			\
 	-I$(top_srcdir)/bbonobo-activation	\
 	-I$(top_builddir)/bonobo-activation	\
-	-DOAF_LOCALEDIR=\""$(datadir)/locale"\"	\
+	-DBONOBO_ACTIVATION_LOCALEDIR=\""$(datadir)/locale"\"	\
 	$(BONOBO_ACTIVATION_CFLAGS)		\
 	-DVERSION=\"$(VERSION)\"		\
 	$(NULL)
@@ -79,6 +79,7 @@ libbonobo_activation_la_SOURCES=		\
 	bonobo-activation-async-callback.h	\
 	bonobo-activation-async-callback.c	\
 	bonobo-activation-fork-server.c		\
+	bonobo-activation-init.c		\
 	$(NULL)
 
 

@@ -26,10 +26,9 @@
 #include <config.h>
 
 #include "server.h"
-#include "bonobo-activation/bonobo-activation.h"
+#include "bonobo-activation/bonobo-activation-i18n.h"
 
-#include "ac-query-expr.h"
-#include "od-utils.h"
+#include "activation-context-query.h"
 
 #include <ORBitservices/CosNaming.h>
 #include <ORBitservices/CosNaming_impl.h>
@@ -46,13 +45,13 @@
 
 #include <libxml/parser.h>
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 static void debug_queries (void);
 #endif
 
 /* Option values */
 static char *od_source_dir = NULL;
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 static char *ac_evaluate = NULL;
 #endif
 static char *od_domain = "session";
@@ -73,7 +72,7 @@ static struct poptOption options[] = {
 	{"ior-output-fd", '\0', POPT_ARG_INT, &ior_fd, 0,
 	 N_("File descriptor to write IOR to"), N_("FD")},
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 
 	{"evaluate", '\0', POPT_ARG_STRING, &ac_evaluate, 0,
 	 N_("Query expression to evaluate"), N_("EXPRESSION")},
@@ -89,8 +88,8 @@ main (int argc, char *argv[])
 	CORBA_ORB orb;
 	PortableServer_POA root_poa;
 	CORBA_Environment ev;
-	OAF_ObjectDirectory od;
-	OAF_ActivationContext ac;
+	Bonobo_ObjectDirectory od;
+	Bonobo_ActivationContext ac;
 	CORBA_Object primary_server;
 	poptContext ctx;
 	char *ior;
@@ -123,7 +122,7 @@ main (int argc, char *argv[])
 	setlocale(LC_ALL, "");
 
 	/* internationalization. */
-        bindtextdomain (PACKAGE, OAF_LOCALEDIR);
+        bindtextdomain (PACKAGE, SERVER_LOCALEDIR);
         textdomain (PACKAGE);
 
 	memset (&sa, 0, sizeof (sa));
@@ -142,7 +141,7 @@ main (int argc, char *argv[])
 
 	xmlKeepBlanksDefault(0);
 
-        oaf_debug_output = g_getenv ("OAF_DEBUG_OUTPUT");
+        oaf_debug_output = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
 
         dev_null_fd = -1;
         if (oaf_debug_output == NULL || strlen (oaf_debug_output) == 0) {
@@ -155,7 +154,7 @@ main (int argc, char *argv[])
 		  dup2 (dev_null_fd, 2);
         }
 
-	orb = oaf_init (argc, argv);
+	orb = bonobo_activation_init (argc, argv);
 	ml = g_main_new (FALSE);
 
 	root_poa = (PortableServer_POA)
@@ -169,10 +168,10 @@ main (int argc, char *argv[])
 		GString *real_od_source_dir;
                 int i;
 
-		real_od_source_dir = g_string_new (OAFINFODIR);
-		env_od_source_dir = g_getenv ("OAF_INFO_PATH");
+		real_od_source_dir = g_string_new (SERVERINFODIR);
+		env_od_source_dir = g_getenv ("SERVER_INFO_PATH");
 		gnome_env_od_source_dir = g_getenv ("GNOME_PATH");
-                config_file_od_source_dir = od_utils_load_config_file ();
+                config_file_od_source_dir = object_directory_utils_load_config_file ();
 
 		if (od_source_dir) {
 			g_string_append_c (real_od_source_dir, ':');
@@ -204,7 +203,7 @@ main (int argc, char *argv[])
 					 gnome_od_source_dir->str);
 		}
 
-		od = OAF_ObjectDirectory_create (root_poa, od_domain,
+		od = Bonobo_ObjectDirectory_create (root_poa, od_domain,
                                                  real_od_source_dir->str,
                                                  &ev);
 		if (server_ns) {
@@ -213,7 +212,7 @@ main (int argc, char *argv[])
 			naming_service =
 				impl_CosNaming_NamingContext__create
 				(root_poa, &ev);
-			OAF_ObjectDirectory_register_new 
+			Bonobo_ObjectDirectory_register_new 
                                 (od,
                                  "OAFIID:oaf_naming_service:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
                                  naming_service,
@@ -224,8 +223,8 @@ main (int argc, char *argv[])
 	}
 	if (server_ac) {
 		primary_server = ac =
-			OAF_ActivationContext_create (root_poa, &ev);
-		OAF_ActivationContext_add_directory (ac, od, &ev);
+			Bonobo_ActivationContext_create (root_poa, &ev);
+		Bonobo_ActivationContext_add_directory (ac, od, &ev);
 	} else
 		primary_server = od;
 
@@ -247,7 +246,7 @@ main (int argc, char *argv[])
                 close (dev_null_fd);
 	CORBA_free (ior);
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 	debug_queries ();
 #endif
 
@@ -258,7 +257,7 @@ main (int argc, char *argv[])
 	return 0;
 }
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 static void
 debug_queries (void)
 {

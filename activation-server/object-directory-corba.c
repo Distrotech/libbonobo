@@ -33,18 +33,17 @@
 #include <string.h>
 
 #include "server.h"
-#include "bonobo-activation/bonobo-activation.h"
 
-#include "oafd-corba-extensions.h"
+#include "activation-server-corba-extensions.h"
 
 /*** App-specific servant structures ***/
 
 typedef struct
 {
-	POA_OAF_ObjectDirectory servant;
+	POA_Bonobo_ObjectDirectory servant;
 	PortableServer_POA poa;
-	OAF_ServerInfoList attr_servers;
-	OAF_CacheTime time_list_changed;
+	Bonobo_ServerInfoList attr_servers;
+	Bonobo_CacheTime time_list_changed;
 
 	GHashTable *by_iid;
 
@@ -54,7 +53,7 @@ typedef struct
 	guchar is_locked;
 
 	GHashTable *active_servers;
-	OAF_CacheTime time_active_changed;
+	Bonobo_CacheTime time_active_changed;
 
         char **registry_source_directories;
         time_t time_did_stat;
@@ -62,94 +61,104 @@ typedef struct
 
 	CORBA_Object self;
 }
-impl_POA_OAF_ObjectDirectory;
+impl_POA_Bonobo_ObjectDirectory;
 
 /*** Implementation stub prototypes ***/
 
-static OAF_ServerInfoListCache
+static Bonobo_ServerInfoListCache
 	*
-impl_OAF_ObjectDirectory__get_servers (impl_POA_OAF_ObjectDirectory * servant,
-				       OAF_CacheTime only_if_newer,
+impl_Bonobo_ObjectDirectory__get_servers (impl_POA_Bonobo_ObjectDirectory * servant,
+				       Bonobo_CacheTime only_if_newer,
 				       CORBA_Environment * ev);
 
-static OAF_ServerStateCache
-	* impl_OAF_ObjectDirectory_get_active_servers
-	(impl_POA_OAF_ObjectDirectory * servant, OAF_CacheTime only_if_newer,
+static Bonobo_ServerStateCache
+	* impl_Bonobo_ObjectDirectory_get_active_servers
+	(impl_POA_Bonobo_ObjectDirectory * servant, Bonobo_CacheTime only_if_newer,
 	 CORBA_Environment * ev);
 
 static CORBA_char
-	* impl_OAF_ObjectDirectory__get_domain (impl_POA_OAF_ObjectDirectory *
+	* impl_Bonobo_ObjectDirectory__get_domain (impl_POA_Bonobo_ObjectDirectory *
 						servant,
 						CORBA_Environment * ev);
 static CORBA_char
-	* impl_OAF_ObjectDirectory__get_hostID (impl_POA_OAF_ObjectDirectory *
+	* impl_Bonobo_ObjectDirectory__get_hostID (impl_POA_Bonobo_ObjectDirectory *
 						servant,
 						CORBA_Environment * ev);
 static CORBA_char
-	* impl_OAF_ObjectDirectory__get_username (impl_POA_OAF_ObjectDirectory
+	* impl_Bonobo_ObjectDirectory__get_username (impl_POA_Bonobo_ObjectDirectory
 						  * servant,
 						  CORBA_Environment * ev);
 
 static CORBA_Object
-impl_OAF_ObjectDirectory_activate (impl_POA_OAF_ObjectDirectory * servant,
-				   OAF_ImplementationID iid,
-				   OAF_ActivationContext ac,
-				   OAF_ActivationFlags flags,
+impl_Bonobo_ObjectDirectory_activate (impl_POA_Bonobo_ObjectDirectory * servant,
+				   Bonobo_ImplementationID iid,
+				   Bonobo_ActivationContext ac,
+				   Bonobo_ActivationFlags flags,
 				   CORBA_Context ctx, CORBA_Environment * ev);
 
 static void
-impl_OAF_ObjectDirectory_lock (impl_POA_OAF_ObjectDirectory * servant,
+impl_Bonobo_ObjectDirectory_lock (impl_POA_Bonobo_ObjectDirectory * servant,
 			       CORBA_Environment * ev);
 
 static void
-impl_OAF_ObjectDirectory_unlock (impl_POA_OAF_ObjectDirectory * servant,
+impl_Bonobo_ObjectDirectory_unlock (impl_POA_Bonobo_ObjectDirectory * servant,
 				 CORBA_Environment * ev);
 
-static OAF_RegistrationResult
-impl_OAF_ObjectDirectory_register_new (impl_POA_OAF_ObjectDirectory * servant,
-                                       OAF_ImplementationID iid,
+static Bonobo_RegistrationResult
+impl_Bonobo_ObjectDirectory_register_new (impl_POA_Bonobo_ObjectDirectory * servant,
+                                       Bonobo_ImplementationID iid,
                                        CORBA_Object obj, CORBA_Environment * ev);
 
 static void
-impl_OAF_ObjectDirectory_unregister (impl_POA_OAF_ObjectDirectory * servant,
-				     OAF_ImplementationID iid,
+impl_Bonobo_ObjectDirectory_unregister (impl_POA_Bonobo_ObjectDirectory * servant,
+				     Bonobo_ImplementationID iid,
 				     CORBA_Object obj,
-				     OAF_ObjectDirectory_UnregisterType notify,
+				     Bonobo_ObjectDirectory_UnregisterType notify,
 				     CORBA_Environment * ev);
 
 /*** epv structures ***/
 
-static PortableServer_ServantBase__epv impl_OAF_ObjectDirectory_base_epv = {
+static PortableServer_ServantBase__epv impl_Bonobo_ObjectDirectory_base_epv = {
 	NULL,			/* _private data */
 	NULL,			/* finalize routine */
 	NULL			/* default_POA routine */
 };
-static POA_OAF_ObjectDirectory__epv impl_OAF_ObjectDirectory_epv = {
+
+/* FIXME: fill me in / deal with me globaly */
+static POA_Bonobo_Unknown__epv impl_Bonobo_Unknown_epv = {
+	NULL,			/* _private data */
+	NULL,
+	NULL,
+        NULL
+};
+
+static POA_Bonobo_ObjectDirectory__epv impl_Bonobo_ObjectDirectory_epv = {
 	NULL,			/* _private */
-	(gpointer) &impl_OAF_ObjectDirectory__get_servers,
-	(gpointer) &impl_OAF_ObjectDirectory_get_active_servers,
-	(gpointer) &impl_OAF_ObjectDirectory__get_username,
-	(gpointer) &impl_OAF_ObjectDirectory__get_hostID,
-	(gpointer) &impl_OAF_ObjectDirectory__get_domain,
-	(gpointer) &impl_OAF_ObjectDirectory_activate,
-	(gpointer) &impl_OAF_ObjectDirectory_lock,
-	(gpointer) &impl_OAF_ObjectDirectory_unlock,
-	(gpointer) &impl_OAF_ObjectDirectory_register_new,
-	(gpointer) &impl_OAF_ObjectDirectory_unregister
+	(gpointer) &impl_Bonobo_ObjectDirectory__get_servers,
+	(gpointer) &impl_Bonobo_ObjectDirectory_get_active_servers,
+	(gpointer) &impl_Bonobo_ObjectDirectory__get_username,
+	(gpointer) &impl_Bonobo_ObjectDirectory__get_hostID,
+	(gpointer) &impl_Bonobo_ObjectDirectory__get_domain,
+	(gpointer) &impl_Bonobo_ObjectDirectory_activate,
+	(gpointer) &impl_Bonobo_ObjectDirectory_lock,
+	(gpointer) &impl_Bonobo_ObjectDirectory_unlock,
+	(gpointer) &impl_Bonobo_ObjectDirectory_register_new,
+	(gpointer) &impl_Bonobo_ObjectDirectory_unregister
 };
 
 /*** vepv structures ***/
 
-static POA_OAF_ObjectDirectory__vepv impl_OAF_ObjectDirectory_vepv = {
-	&impl_OAF_ObjectDirectory_base_epv,
-	&impl_OAF_ObjectDirectory_epv
+static POA_Bonobo_ObjectDirectory__vepv impl_Bonobo_ObjectDirectory_vepv = {
+	&impl_Bonobo_ObjectDirectory_base_epv,
+	&impl_Bonobo_Unknown_epv,
+	&impl_Bonobo_ObjectDirectory_epv
 };
 
 /*** Stub implementations ***/
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
 static void
-od_dump_list (impl_POA_OAF_ObjectDirectory * od)
+od_dump_list (impl_POA_Bonobo_ObjectDirectory * od)
 {
 	int i, j, k;
 
@@ -160,7 +169,7 @@ od_dump_list (impl_POA_OAF_ObjectDirectory * od)
 			 od->attr_servers._buffer[i].location_info);
 		for (j = 0; j < od->attr_servers._buffer[i].props._length;
 		     j++) {
-			OAF_Property *prop =
+			Bonobo_Property *prop =
 				&(od->attr_servers._buffer[i].
 				  props._buffer[j]);
                         if (strstr (prop->name, "-")) /* Translated, likely to
@@ -169,18 +178,18 @@ od_dump_list (impl_POA_OAF_ObjectDirectory * od)
 
 			g_print ("    %s = ", prop->name);
 			switch (prop->v._d) {
-			case OAF_P_STRING:
+			case Bonobo_P_STRING:
 				g_print ("\"%s\"\n", prop->v._u.value_string);
 				break;
-			case OAF_P_NUMBER:
+			case Bonobo_P_NUMBER:
 				g_print ("%f\n", prop->v._u.value_number);
 				break;
-			case OAF_P_BOOLEAN:
+			case Bonobo_P_BOOLEAN:
 				g_print ("%s\n",
 					 prop->v.
 					 _u.value_boolean ? "TRUE" : "FALSE");
 				break;
-			case OAF_P_STRINGV:
+			case Bonobo_P_STRINGV:
 				g_print ("[");
 				for (k = 0;
 				     k < prop->v._u.value_stringv._length;
@@ -202,7 +211,7 @@ od_dump_list (impl_POA_OAF_ObjectDirectory * od)
 #endif
 
 static gboolean
-registry_directory_needs_update (impl_POA_OAF_ObjectDirectory *servant,
+registry_directory_needs_update (impl_POA_Bonobo_ObjectDirectory *servant,
                                  const char *directory)
 {
         struct stat statbuf;
@@ -223,7 +232,7 @@ registry_directory_needs_update (impl_POA_OAF_ObjectDirectory *servant,
 }
 
 static void
-update_registry (impl_POA_OAF_ObjectDirectory *servant)
+update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
 {
         gboolean must_load;
         int i;
@@ -251,7 +260,7 @@ update_registry (impl_POA_OAF_ObjectDirectory *servant)
         }
 
         if (must_load) {
-                OAF_ServerInfo_load (servant->registry_source_directories,
+                Bonobo_ServerInfo_load (servant->registry_source_directories,
                                      &servant->attr_servers,
                                      &servant->by_iid,
                                      servant->attr_hostID,
@@ -259,26 +268,26 @@ update_registry (impl_POA_OAF_ObjectDirectory *servant)
 
                 servant->time_list_changed = time (NULL);
 
-#ifdef OAF_DEBUG
+#ifdef BONOBO_ACTIVATION_DEBUG
                 od_dump_list (servant);
 #endif
         }
 }
 
-OAF_ObjectDirectory
-OAF_ObjectDirectory_create (PortableServer_POA poa,
+Bonobo_ObjectDirectory
+Bonobo_ObjectDirectory_create (PortableServer_POA poa,
 			    const char *domain,
 			    const char *registry_path,
 			    CORBA_Environment * ev)
 {
-	OAF_ObjectDirectory retval;
-	impl_POA_OAF_ObjectDirectory *newservant;
+	Bonobo_ObjectDirectory retval;
+	impl_POA_Bonobo_ObjectDirectory *newservant;
 	PortableServer_ObjectId *objid;
 
-	newservant = g_new0 (impl_POA_OAF_ObjectDirectory, 1);
-	newservant->servant.vepv = &impl_OAF_ObjectDirectory_vepv;
+	newservant = g_new0 (impl_POA_Bonobo_ObjectDirectory, 1);
+	newservant->servant.vepv = &impl_Bonobo_ObjectDirectory_vepv;
 	newservant->poa = poa;
-	POA_OAF_ObjectDirectory__init ((PortableServer_Servant) newservant,
+	POA_Bonobo_ObjectDirectory__init ((PortableServer_Servant) newservant,
 				       ev);
 	objid = PortableServer_POA_activate_object (poa, newservant, ev);
 	CORBA_free (objid);
@@ -286,7 +295,7 @@ OAF_ObjectDirectory_create (PortableServer_POA poa,
 		PortableServer_POA_servant_to_reference (poa, newservant, ev);
 
 	newservant->attr_domain = g_strdup (domain);
-	newservant->attr_hostID = oaf_hostname_get ();
+	newservant->attr_hostID = bonobo_activation_hostname_get ();
 	newservant->by_iid = NULL;
 
         newservant->registry_source_directories = g_strsplit (registry_path, ":", -1);
@@ -300,16 +309,16 @@ OAF_ObjectDirectory_create (PortableServer_POA poa,
 	return CORBA_Object_duplicate (retval, ev);
 }
 
-static OAF_ServerInfoListCache *
-impl_OAF_ObjectDirectory__get_servers (impl_POA_OAF_ObjectDirectory * servant,
-				       OAF_CacheTime only_if_newer,
+static Bonobo_ServerInfoListCache *
+impl_Bonobo_ObjectDirectory__get_servers (impl_POA_Bonobo_ObjectDirectory * servant,
+				       Bonobo_CacheTime only_if_newer,
 				       CORBA_Environment * ev)
 {
-	OAF_ServerInfoListCache *retval;
+	Bonobo_ServerInfoListCache *retval;
 
         update_registry (servant);
 
-	retval = OAF_ServerInfoListCache__alloc ();
+	retval = Bonobo_ServerInfoListCache__alloc ();
 
 	retval->_d = (only_if_newer < servant->time_list_changed);
 	if (retval->_d) {
@@ -323,7 +332,7 @@ impl_OAF_ObjectDirectory__get_servers (impl_POA_OAF_ObjectDirectory * servant,
 
 typedef struct
 {
-	OAF_ImplementationID *seq;
+	Bonobo_ImplementationID *seq;
 	int last_used;
 }
 StateCollectionInfo;
@@ -334,15 +343,15 @@ add_active_server (char *key, gpointer value, StateCollectionInfo * sci)
 	sci->seq[(sci->last_used)++] = CORBA_string_dup (key);
 }
 
-static OAF_ServerStateCache *
-impl_OAF_ObjectDirectory_get_active_servers (impl_POA_OAF_ObjectDirectory *
+static Bonobo_ServerStateCache *
+impl_Bonobo_ObjectDirectory_get_active_servers (impl_POA_Bonobo_ObjectDirectory *
 					     servant,
-					     OAF_CacheTime only_if_newer,
+					     Bonobo_CacheTime only_if_newer,
 					     CORBA_Environment * ev)
 {
-	OAF_ServerStateCache *retval;
+	Bonobo_ServerStateCache *retval;
 
-	retval = OAF_ServerStateCache__alloc ();
+	retval = Bonobo_ServerStateCache__alloc ();
 
 	retval->_d = (only_if_newer < servant->time_active_changed);
 	if (retval->_d) {
@@ -351,7 +360,7 @@ impl_OAF_ObjectDirectory_get_active_servers (impl_POA_OAF_ObjectDirectory *
 		retval->_u.active_servers._length =
 			g_hash_table_size (servant->active_servers);
 		retval->_u.active_servers._buffer = sci.seq =
-			CORBA_sequence_OAF_ImplementationID_allocbuf
+			CORBA_sequence_Bonobo_ImplementationID_allocbuf
 			(retval->_u.active_servers._length);
 		sci.last_used = 0;
 
@@ -365,21 +374,21 @@ impl_OAF_ObjectDirectory_get_active_servers (impl_POA_OAF_ObjectDirectory *
 }
 
 static CORBA_char *
-impl_OAF_ObjectDirectory__get_domain (impl_POA_OAF_ObjectDirectory * servant,
+impl_Bonobo_ObjectDirectory__get_domain (impl_POA_Bonobo_ObjectDirectory * servant,
 				      CORBA_Environment * ev)
 {
 	return CORBA_string_dup (servant->attr_domain);
 }
 
 static CORBA_char *
-impl_OAF_ObjectDirectory__get_hostID (impl_POA_OAF_ObjectDirectory * servant,
+impl_Bonobo_ObjectDirectory__get_hostID (impl_POA_Bonobo_ObjectDirectory * servant,
 				      CORBA_Environment * ev)
 {
 	return CORBA_string_dup (servant->attr_hostID);
 }
 
 static CORBA_char *
-impl_OAF_ObjectDirectory__get_username (impl_POA_OAF_ObjectDirectory *
+impl_Bonobo_ObjectDirectory__get_username (impl_POA_Bonobo_ObjectDirectory *
 					servant, CORBA_Environment * ev)
 {
 	return CORBA_string_dup (g_get_user_name ());
@@ -388,15 +397,15 @@ impl_OAF_ObjectDirectory__get_username (impl_POA_OAF_ObjectDirectory *
 
 
 static CORBA_Object 
-od_get_active_server (impl_POA_OAF_ObjectDirectory * servant,
-                       OAF_ImplementationID iid,
+od_get_active_server (impl_POA_Bonobo_ObjectDirectory * servant,
+                       Bonobo_ImplementationID iid,
                        CORBA_Context ctx, CORBA_Environment * ev)
 {
 	CORBA_Object retval;
         char *display;
         char *display_iid;
 
-        display = oafd_CORBA_Context_get_value (ctx, "display", NULL, ev);
+        display = activation_server_CORBA_Context_get_value (ctx, "display", NULL, ev);
         
         if (display != NULL) {
                 display_iid = g_strconcat (display, ",", iid, NULL);
@@ -423,21 +432,21 @@ od_get_active_server (impl_POA_OAF_ObjectDirectory * servant,
 }
 
 static CORBA_Object
-impl_OAF_ObjectDirectory_activate (impl_POA_OAF_ObjectDirectory * servant,
-				   OAF_ImplementationID iid,
-				   OAF_ActivationContext ac,
-				   OAF_ActivationFlags flags,
+impl_Bonobo_ObjectDirectory_activate (impl_POA_Bonobo_ObjectDirectory * servant,
+				   Bonobo_ImplementationID iid,
+				   Bonobo_ActivationContext ac,
+				   Bonobo_ActivationFlags flags,
 				   CORBA_Context ctx, CORBA_Environment * ev)
 {
 	CORBA_Object retval;
-	OAF_ServerInfo *si;
+	Bonobo_ServerInfo *si;
 	ODActivationInfo ai;
 
 	retval = CORBA_OBJECT_NIL;
 
         update_registry (servant);
 
-        if (!(flags & OAF_FLAG_PRIVATE)) {
+        if (!(flags & Bonobo_FLAG_PRIVATE)) {
                 retval = od_get_active_server (servant, iid, ctx, ev);
 
                 if (retval != CORBA_OBJECT_NIL) {
@@ -445,7 +454,7 @@ impl_OAF_ObjectDirectory_activate (impl_POA_OAF_ObjectDirectory * servant,
                 }
         }
 
-	if (flags & OAF_FLAG_EXISTING_ONLY) {
+	if (flags & Bonobo_FLAG_EXISTING_ONLY) {
 		return CORBA_OBJECT_NIL;
         }
 
@@ -463,7 +472,7 @@ impl_OAF_ObjectDirectory_activate (impl_POA_OAF_ObjectDirectory * servant,
 }
 
 static void
-impl_OAF_ObjectDirectory_lock (impl_POA_OAF_ObjectDirectory * servant,
+impl_Bonobo_ObjectDirectory_lock (impl_POA_Bonobo_ObjectDirectory * servant,
 			       CORBA_Environment * ev)
 {
 	while (servant->is_locked)
@@ -473,7 +482,7 @@ impl_OAF_ObjectDirectory_lock (impl_POA_OAF_ObjectDirectory * servant,
 }
 
 static void
-impl_OAF_ObjectDirectory_unlock (impl_POA_OAF_ObjectDirectory * servant,
+impl_Bonobo_ObjectDirectory_unlock (impl_POA_Bonobo_ObjectDirectory * servant,
 				 CORBA_Environment * ev)
 {
 	g_return_if_fail (servant->is_locked);
@@ -481,13 +490,13 @@ impl_OAF_ObjectDirectory_unlock (impl_POA_OAF_ObjectDirectory * servant,
 	servant->is_locked = FALSE;
 }
 
-static OAF_RegistrationResult
-impl_OAF_ObjectDirectory_register_new (impl_POA_OAF_ObjectDirectory * servant,
-                                       OAF_ImplementationID iid,
+static Bonobo_RegistrationResult
+impl_Bonobo_ObjectDirectory_register_new (impl_POA_Bonobo_ObjectDirectory * servant,
+                                       Bonobo_ImplementationID iid,
                                        CORBA_Object obj, CORBA_Environment * ev)
 {
 	CORBA_Object oldobj;
-        OAF_ImplementationID actual_iid;
+        Bonobo_ImplementationID actual_iid;
 
         actual_iid = strrchr (iid, ',');
 
@@ -502,28 +511,28 @@ impl_OAF_ObjectDirectory_register_new (impl_POA_OAF_ObjectDirectory * servant,
 
 	if (!CORBA_Object_is_nil (oldobj, ev)) {
 		if (!CORBA_Object_non_existent (oldobj, ev))
-			return OAF_REG_ALREADY_ACTIVE;
+			return Bonobo_REG_ALREADY_ACTIVE;
 		else
 			CORBA_Object_release (oldobj, ev);
 	}
 
 
 	if (!g_hash_table_lookup (servant->by_iid, actual_iid))
-		return OAF_REG_NOT_LISTED;
+		return Bonobo_REG_NOT_LISTED;
 
 	g_hash_table_insert (servant->active_servers,
 			     oldobj ? iid : g_strdup (iid),
 			     CORBA_Object_duplicate (obj, ev));
 	servant->time_active_changed = time (NULL);
 
-	return OAF_REG_SUCCESS;
+	return Bonobo_REG_SUCCESS;
 }
 
 static void
-impl_OAF_ObjectDirectory_unregister (impl_POA_OAF_ObjectDirectory * servant,
-				     OAF_ImplementationID iid,
+impl_Bonobo_ObjectDirectory_unregister (impl_POA_Bonobo_ObjectDirectory * servant,
+				     Bonobo_ImplementationID iid,
 				     CORBA_Object obj,
-				     OAF_ObjectDirectory_UnregisterType notify,
+				     Bonobo_ObjectDirectory_UnregisterType notify,
 				     CORBA_Environment * ev)
 {
 	char *orig_iid;

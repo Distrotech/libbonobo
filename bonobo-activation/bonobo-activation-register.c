@@ -70,7 +70,7 @@ bonobo_activation_timeout_reg_check (gpointer data)
  */
 Bonobo_RegistrationResult
 bonobo_activation_active_server_register (const char *registration_id, 
-                            CORBA_Object obj)
+                                          CORBA_Object obj)
 {
 	Bonobo_ObjectDirectory od;
 	CORBA_Environment ev;

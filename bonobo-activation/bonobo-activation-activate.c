@@ -84,7 +84,7 @@ bonobo_activation_maybe_add_test_requirements (const char *requirements)
 
 /* internal funtion */
 void 
-bonobo_activation_copy_string_array_to_Bonobo_stringlist (char *const *selection_order, Bonobo_stringlist *ret_val)
+bonobo_activation_copy_string_array_to_Bonobo_StringList (char *const *selection_order, Bonobo_StringList *ret_val)
 {
         int i;
 
@@ -119,7 +119,7 @@ Bonobo_ServerInfoList *
 bonobo_activation_query (const char *requirements, char *const *selection_order,
 	   CORBA_Environment * ev)
 {
-	Bonobo_stringlist selorder;
+	Bonobo_StringList selorder;
 	Bonobo_ServerInfoList *res;
 	CORBA_Environment myev;
 	Bonobo_ActivationContext ac;
@@ -137,7 +137,7 @@ bonobo_activation_query (const char *requirements, char *const *selection_order,
 		CORBA_exception_init (&myev);
 	}
 
-        bonobo_activation_copy_string_array_to_Bonobo_stringlist (selection_order, &selorder);
+        bonobo_activation_copy_string_array_to_Bonobo_StringList (selection_order, &selorder);
 
         if (ext_requirements == NULL) {
                 res = Bonobo_ActivationContext_query (ac, (char *) requirements,
@@ -183,7 +183,7 @@ bonobo_activation_activate (const char *requirements, char *const *selection_ord
 	      Bonobo_ActivationFlags flags, Bonobo_ActivationID * ret_aid,
 	      CORBA_Environment * ev)
 {
-	Bonobo_stringlist selorder;
+	Bonobo_StringList selorder;
 	CORBA_Object retval;
 	Bonobo_ActivationResult *res;
 	CORBA_Environment myev;
@@ -203,7 +203,7 @@ bonobo_activation_activate (const char *requirements, char *const *selection_ord
 		CORBA_exception_init (&myev);
 	}
 
-        bonobo_activation_copy_string_array_to_Bonobo_stringlist (selection_order, &selorder);
+        bonobo_activation_copy_string_array_to_Bonobo_StringList (selection_order, &selorder);
 
         if (ext_requirements == NULL) {
                 res = Bonobo_ActivationContext_activate (ac, (char *) requirements,

@@ -29,8 +29,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "ac-query-expr.h"
-#include "ac-query-parse.h"
+#include "activation-context-query.h"
+#include "activation-context-query-parser.h"
 #include "qsort_ex.h"
 
 static QueryExpr *
@@ -455,7 +455,7 @@ qexp_constant_free (const QueryExprConst * c)
 /******* handling functions *********/
 
 
-typedef QueryExprConst (*QueryExprEvalFunc) (OAF_ServerInfo * si,
+typedef QueryExprConst (*QueryExprEvalFunc) (Bonobo_ServerInfo * si,
 					     QueryExpr * e,
 					     QueryContext * qctx);
 /* A table of the functions that can be used in queries */
@@ -467,21 +467,21 @@ typedef struct
 }
 QueryExprFuncInfo;
 
-static QueryExprConst qexp_func_has_one (OAF_ServerInfo * si, QueryExpr * e,
+static QueryExprConst qexp_func_has_one (Bonobo_ServerInfo * si, QueryExpr * e,
 					 QueryContext * qctx);
-static QueryExprConst qexp_func_has_all (OAF_ServerInfo * si, QueryExpr * e,
+static QueryExprConst qexp_func_has_all (Bonobo_ServerInfo * si, QueryExpr * e,
 					 QueryContext * qctx);
-static QueryExprConst qexp_func_has (OAF_ServerInfo * si, QueryExpr * e,
+static QueryExprConst qexp_func_has (Bonobo_ServerInfo * si, QueryExpr * e,
 				     QueryContext * qctx);
 
-static QueryExprConst qexp_func_prefer_by_list_order (OAF_ServerInfo * si, QueryExpr * e,
+static QueryExprConst qexp_func_prefer_by_list_order (Bonobo_ServerInfo * si, QueryExpr * e,
                                                       QueryContext * qctx);
 
-static QueryExprConst qexp_func_defined (OAF_ServerInfo * si, QueryExpr * e,
+static QueryExprConst qexp_func_defined (Bonobo_ServerInfo * si, QueryExpr * e,
 					 QueryContext * qctx);
-static QueryExprConst qexp_func_max (OAF_ServerInfo * si, QueryExpr * e,
+static QueryExprConst qexp_func_max (Bonobo_ServerInfo * si, QueryExpr * e,
 				     QueryContext * qctx);
-static QueryExprConst qexp_func_min (OAF_ServerInfo * si, QueryExpr * e,
+static QueryExprConst qexp_func_min (Bonobo_ServerInfo * si, QueryExpr * e,
 				     QueryContext * qctx);
 
 static const QueryExprFuncInfo qexp_func_impls[] = {
@@ -496,7 +496,7 @@ static const QueryExprFuncInfo qexp_func_impls[] = {
 };
 
 static QueryExprConst
-qexp_evaluate_function (OAF_ServerInfo * si, QueryExpr * e,
+qexp_evaluate_function (Bonobo_ServerInfo * si, QueryExpr * e,
 			QueryContext * qctx)
 {
 	QueryExprConst retval;
@@ -533,7 +533,7 @@ qexp_evaluate_function (OAF_ServerInfo * si, QueryExpr * e,
 }
 
 static QueryExprConst
-qexp_func_has_one (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_func_has_one (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval, v1, v2;
 	int i, j;
@@ -579,7 +579,7 @@ qexp_func_has_one (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 }
 
 static QueryExprConst
-qexp_func_has_all (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_func_has_all (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval, v1, v2;
 	int i, j;
@@ -621,7 +621,7 @@ qexp_func_has_all (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 }
 
 static QueryExprConst
-qexp_func_has (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_func_has (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval, v1, v2;
 	char **check_one, *check_two;
@@ -663,7 +663,7 @@ qexp_func_has (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 
 
 static QueryExprConst
-qexp_func_prefer_by_list_order (OAF_ServerInfo *si, 
+qexp_func_prefer_by_list_order (Bonobo_ServerInfo *si, 
                                 QueryExpr *e, 
                                 QueryContext *qctx)
 {
@@ -713,7 +713,7 @@ qexp_func_prefer_by_list_order (OAF_ServerInfo *si,
 
 
 static QueryExprConst
-qexp_func_defined (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_func_defined (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval, v1;
 
@@ -734,7 +734,7 @@ qexp_func_defined (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 
 
 static QueryExprConst
-qexp_func_max (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_func_max (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	int i;
 	QueryExprConst max_val_so_far;
@@ -759,7 +759,7 @@ qexp_func_max (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 }
 
 static QueryExprConst
-qexp_func_min (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_func_min (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	int i;
 	QueryExprConst min_val_so_far;
@@ -786,7 +786,7 @@ qexp_func_min (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 /********** Variables *******/
 
 static QueryExprConst
-qexp_evaluate_variable (OAF_ServerInfo * si, QueryExpr * e,
+qexp_evaluate_variable (Bonobo_ServerInfo * si, QueryExpr * e,
 			QueryContext * qctx)
 {
 	QueryExprConst retval;
@@ -833,7 +833,7 @@ qexp_evaluate_variable (OAF_ServerInfo * si, QueryExpr * e,
 
 /********* fields ***********/
 static QueryExprConst
-qexp_evaluate_id (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_evaluate_id (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval;
 
@@ -865,27 +865,27 @@ qexp_evaluate_id (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 			retval.value_known = FALSE;
 
 			if (i < si->props._length) {
-				OAF_PropertyValue *av;
+				Bonobo_PropertyValue *av;
 
 				av = &si->props._buffer[i].v;
 
 				switch (av->_d) {
-				case OAF_P_STRING:
+				case Bonobo_P_STRING:
 					retval.type = CONST_STRING;
 					retval.u.v_string =
 						av->_u.value_string;
 					break;
-				case OAF_P_NUMBER:
+				case Bonobo_P_NUMBER:
 					retval.type = CONST_NUMBER;
 					retval.u.v_number =
 						av->_u.value_number;
 					break;
-				case OAF_P_BOOLEAN:
+				case Bonobo_P_BOOLEAN:
 					retval.type = CONST_BOOLEAN;
 					retval.u.v_boolean =
 						av->_u.value_boolean;
 					break;
-				case OAF_P_STRINGV:
+				case Bonobo_P_STRINGV:
 					{
 						/* FIXME bugzilla.eazel.com 2729: it would be nice to replace the
 						 * NULL-terminated string arrays with
@@ -932,7 +932,7 @@ qexp_evaluate_id (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 /********* binary operators *********/
 
 static QueryExprConst
-qexp_evaluate_binop (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_evaluate_binop (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval, v1, v2;
 	gboolean negate_result = FALSE;
@@ -1053,7 +1053,7 @@ qexp_evaluate_binop (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 
 /********** unary operators **********/
 static QueryExprConst
-qexp_evaluate_unop (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_evaluate_unop (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval, v1;
 
@@ -1082,7 +1082,7 @@ qexp_evaluate_unop (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 
 /********** constants ************/
 static QueryExprConst
-qexp_evaluate_constant (OAF_ServerInfo * si, QueryExpr * e,
+qexp_evaluate_constant (Bonobo_ServerInfo * si, QueryExpr * e,
 			QueryContext * qctx)
 {
 	return e->u.constant_value;
@@ -1090,7 +1090,7 @@ qexp_evaluate_constant (OAF_ServerInfo * si, QueryExpr * e,
 
 /***** The grand poobah of functions *****/
 QueryExprConst
-qexp_evaluate (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_evaluate (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst retval;
 
@@ -1129,7 +1129,7 @@ qexp_evaluate (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 }
 
 gboolean
-qexp_matches (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
+qexp_matches (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
 	QueryExprConst res;
 	gboolean retval;
@@ -1153,7 +1153,7 @@ QexpSortData;
 
 
 static gboolean
-qexp_sort_compare (OAF_ServerInfo ** x, OAF_ServerInfo ** y,
+qexp_sort_compare (Bonobo_ServerInfo ** x, Bonobo_ServerInfo ** y,
 		   QexpSortData * sort_data)
 {
 	int i;
@@ -1188,7 +1188,7 @@ qexp_sort_compare (OAF_ServerInfo ** x, OAF_ServerInfo ** y,
 }
 
 void
-qexp_sort (OAF_ServerInfo ** servers, int nservers, QueryExpr ** sexps,
+qexp_sort (Bonobo_ServerInfo ** servers, int nservers, QueryExpr ** sexps,
 	   int nexps, QueryContext * qctx)
 {
 	QexpSortData sort_data;
@@ -1197,6 +1197,6 @@ qexp_sort (OAF_ServerInfo ** servers, int nservers, QueryExpr ** sexps,
 	sort_data.nexps = nexps;
 	sort_data.qctx = qctx;
 
-	qsort_ex (servers, nservers, sizeof (OAF_ServerInfo *),
+	qsort_ex (servers, nservers, sizeof (Bonobo_ServerInfo *),
 		  (compar_ex_fn_t)qexp_sort_compare, &sort_data);
 }
