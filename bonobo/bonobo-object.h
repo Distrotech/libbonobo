@@ -84,7 +84,8 @@ void                     bonobo_object_add_interface          (BonoboObject     
 BonoboObject            *bonobo_object_query_local_interface  (BonoboObject           *object,
 							       const char             *repo_id);
 Bonobo_Unknown           bonobo_object_query_interface        (BonoboObject           *object,
-							       const char             *repo_id);
+							       const char             *repo_id,
+							       CORBA_Environment      *opt_ev);
 Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject           *object);
 /* Compat */
 #define                  bonobo_object_from_servant(s)        (bonobo_object (s))
@@ -94,9 +95,9 @@ Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject     
  * Gnome Object Life Cycle
  */
 Bonobo_Unknown           bonobo_object_dup_ref                (Bonobo_Unknown          object,
-							       CORBA_Environment      *ev);
+							       CORBA_Environment      *opt_ev);
 void                     bonobo_object_release_unref          (Bonobo_Unknown          object,
-							       CORBA_Environment      *ev);
+							       CORBA_Environment      *opt_ev);
 void                     bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_idle_unref             (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
@@ -130,9 +131,11 @@ void                     bonobo_object_check_env              (BonoboObject     
 /*
  * Others
  */
-gboolean  bonobo_unknown_ping           (Bonobo_Unknown object);
-void      bonobo_object_list_unref_all  (GList        **list);
-void      bonobo_object_slist_unref_all (GSList       **list);
+
+gboolean  bonobo_unknown_ping           (Bonobo_Unknown     object,
+					 CORBA_Environment *opt_ev);
+void      bonobo_object_list_unref_all  (GList            **list);
+void      bonobo_object_slist_unref_all (GSList           **list);
 
 
 /* Detects the pointer type and returns the object reference - magic. */

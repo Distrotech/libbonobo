@@ -118,7 +118,7 @@ bonobo_moniker_extender_new (BonoboMonikerExtenderFn resolve, gpointer data)
  * bonobo_moniker_find_extender:
  * @name: the name of the moniker we want to extend eg. 'file:'
  * @interface: the interface we want to resolve to
- * @ev: a corba exception environment.
+ * @opt_ev: an optional corba exception environment.
  * 
  *  This routine tries to locate an extender for our moniker
  * by examining a registry of extenders that map new interfaces
@@ -127,13 +127,20 @@ bonobo_moniker_extender_new (BonoboMonikerExtenderFn resolve, gpointer data)
  * Return value: an appropriate extender or CORBA_OBJECT_NIL.
  **/
 Bonobo_MonikerExtender
-bonobo_moniker_find_extender (const gchar *name, 
-			      const gchar *interface, 
-			      CORBA_Environment *ev)
+bonobo_moniker_find_extender (const gchar       *name, 
+			      const gchar       *interface, 
+			      CORBA_Environment *opt_ev)
 {
 	gchar            *query;
 	OAF_ActivationID  ret_id;
 	Bonobo_Unknown    extender;
+	CORBA_Environment  *ev, temp_ev;
+
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
 
 	query = g_strdup_printf (
 		"repo_ids.has ('IDL:Bonobo/MonikerExtender:1.0') AND "
@@ -144,6 +151,9 @@ bonobo_moniker_find_extender (const gchar *name,
 
 	g_free (query);
 
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
+
 	return extender;
 }
 
@@ -153,7 +163,7 @@ bonobo_moniker_find_extender (const gchar *name,
  * @moniker: the moniker to extend
  * @options: resolve options
  * @requested_interface: the requested interface
- * @ev: corba environment
+ * @opt_ev: optional corba environment
  * 
  *  Locates a known extender via. OAFIID; eg.
  * OAFIID:Bonobo_Moniker_Extender_file
@@ -165,10 +175,17 @@ bonobo_moniker_use_extender (const gchar                 *extender_oafiid,
 			     BonoboMoniker               *moniker,
 			     const Bonobo_ResolveOptions *options,
 			     const CORBA_char            *requested_interface,
-			     CORBA_Environment           *ev)
+			     CORBA_Environment           *opt_ev)
 {
 	Bonobo_MonikerExtender extender;
 	Bonobo_Unknown         retval;
+	CORBA_Environment  *ev, temp_ev;
+
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
 
 	g_return_val_if_fail (ev != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (options != NULL, CORBA_OBJECT_NIL);
@@ -188,6 +205,9 @@ bonobo_moniker_use_extender (const gchar                 *extender_oafiid,
 		requested_interface, ev);
 
 	bonobo_object_release_unref (extender, ev);
+
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
 
 	return retval;
 }

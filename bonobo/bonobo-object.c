@@ -411,7 +411,7 @@ bonobo_object_set_imortal (BonoboObject *object,
 /**
  * bonobo_object_dup_ref:
  * @object: a Bonobo_Unknown corba object
- * @ev: Corba_Environment
+ * @opt_ev: an optional exception environment
  * 
  *   This function returns a duplicated CORBA Object reference;
  * it also bumps the ref count on the object. This is ideal to
@@ -422,26 +422,25 @@ bonobo_object_set_imortal (BonoboObject *object,
  **/
 Bonobo_Unknown
 bonobo_object_dup_ref (Bonobo_Unknown     object,
-		       CORBA_Environment *ev)
+		       CORBA_Environment *opt_ev)
 {
-	CORBA_Environment tmpev, *rev;
 	Bonobo_Unknown    ans;
+	CORBA_Environment  *ev, temp_ev;
+       
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
 
 	if (object == CORBA_OBJECT_NIL)
 		return CORBA_OBJECT_NIL;
 
-	if (ev)
-		rev = ev;
-	else {
-		rev = &tmpev;
-		CORBA_exception_init (rev);
-	}
+	Bonobo_Unknown_ref (object, ev);
+	ans = CORBA_Object_duplicate (object, ev);
 
-	Bonobo_Unknown_ref (object, rev);
-	ans = CORBA_Object_duplicate (object, rev);
-
-	if (!ev)
-		CORBA_exception_free (&tmpev);
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
 
 	return ans;
 }
@@ -449,7 +448,7 @@ bonobo_object_dup_ref (Bonobo_Unknown     object,
 /**
  * bonobo_object_release_unref:
  * @object: a Bonobo_Unknown corba object
- * @ev: Corba_Environment, optional
+ * @opt_ev: an optional exception environment
  * 
  *   This function releases a CORBA Object reference;
  * it also decrements the ref count on the bonobo object.
@@ -458,25 +457,24 @@ bonobo_object_dup_ref (Bonobo_Unknown     object,
  **/
 void
 bonobo_object_release_unref (Bonobo_Unknown     object,
-			     CORBA_Environment *ev)
+			     CORBA_Environment *opt_ev)
 {
-	CORBA_Environment tmpev, *rev;
+	CORBA_Environment  *ev, temp_ev;
 
 	if (object == CORBA_OBJECT_NIL)
 		return;
 
-	if (ev)
-		rev = ev;
-	else {
-		rev = &tmpev;
-		CORBA_exception_init (rev);
-	}
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
 
-	Bonobo_Unknown_unref (object, rev);
-	CORBA_Object_release (object, rev);
+	Bonobo_Unknown_unref (object, ev);
+	CORBA_Object_release (object, ev);
 
-	if (!ev)
-		CORBA_exception_free (&tmpev);
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
 }
 
 static void
@@ -1006,22 +1004,34 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
  * bonobo_object_query_interface:
  * @object: A BonoboObject to be queried for a given interface.
  * @repo_id: The name of the interface to be queried.
+ * @opt_ev: optional exception environment
  *
  * Returns: The CORBA interface named @repo_id for @object.
  */
 CORBA_Object
-bonobo_object_query_interface (BonoboObject *object, const char *repo_id)
+bonobo_object_query_interface (BonoboObject      *object,
+			       const char        *repo_id,
+			       CORBA_Environment *opt_ev)
 {
-       CORBA_Environment ev;
-       CORBA_Object retval;
+	CORBA_Object retval;
+	CORBA_Environment  *ev, temp_ev;
+       
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
 
-       CORBA_exception_init(&ev);
-       retval = Bonobo_Unknown_queryInterface (object->corba_objref, (CORBA_char *)repo_id, &ev);
-       if (BONOBO_EX (&ev))
-               retval = CORBA_OBJECT_NIL;
-       CORBA_exception_free (&ev);
+	retval = Bonobo_Unknown_queryInterface (
+		object->corba_objref, repo_id, ev);
 
-       return retval;
+	if (BONOBO_EX (ev))
+		retval = CORBA_OBJECT_NIL;
+
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
+
+	return retval;
 }
 
 /**
@@ -1051,7 +1061,9 @@ bonobo_object_corba_objref (BonoboObject *object)
  * to become defunct.
  */
 void
-bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environment *ev)
+bonobo_object_check_env (BonoboObject      *object,
+			 CORBA_Object       obj,
+			 CORBA_Environment *ev)
 {
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
@@ -1069,6 +1081,7 @@ bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environme
 /**
  * bonobo_unknown_ping:
  * @object: a CORBA object reference of type Bonobo::Unknown
+ * @opt_ev: optional exception environment
  *
  * Pings the object @object using the ref/unref methods from Bonobo::Unknown.
  * You can use this one to see if a remote object has gone away.
@@ -1076,22 +1089,31 @@ bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environme
  * Returns: %TRUE if the Bonobo::Unknown @object is alive.
  */
 gboolean
-bonobo_unknown_ping (Bonobo_Unknown object)
+bonobo_unknown_ping (Bonobo_Unknown     object,
+		     CORBA_Environment *opt_ev)
 {
-	CORBA_Environment ev;
 	gboolean alive;
-
+	CORBA_Environment  *ev, temp_ev;
+       
 	g_return_val_if_fail (object != NULL, FALSE);
 
+	if (!opt_ev) {
+		CORBA_exception_init (&temp_ev);
+		ev = &temp_ev;
+	} else
+		ev = opt_ev;
+
 	alive = FALSE;
-	CORBA_exception_init (&ev);
-	Bonobo_Unknown_ref (object, &ev);
-	if (!BONOBO_EX (&ev)) {
-		Bonobo_Unknown_unref (object, &ev);
-		if (!BONOBO_EX (&ev))
+
+	Bonobo_Unknown_ref (object, ev);
+	if (!BONOBO_EX (ev)) {
+		Bonobo_Unknown_unref (object, ev);
+		if (!BONOBO_EX (ev))
 			alive = TRUE;
 	}
-	CORBA_exception_free (&ev);
+
+	if (!opt_ev)
+		CORBA_exception_free (&temp_ev);
 
 	return alive;
 }

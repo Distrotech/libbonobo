@@ -48,13 +48,13 @@ BonoboMonikerExtender *bonobo_moniker_extender_new      (BonoboMonikerExtenderFn
  
 Bonobo_MonikerExtender bonobo_moniker_find_extender     (const gchar                 *name,
 							 const gchar                 *interface,
-							 CORBA_Environment           *ev);
+							 CORBA_Environment           *opt_ev);
 
 Bonobo_Unknown         bonobo_moniker_use_extender      (const gchar                 *extender_oafiid,
 							 BonoboMoniker               *moniker,
 							 const Bonobo_ResolveOptions *options,
 							 const CORBA_char            *requested_interface,
-							 CORBA_Environment           *ev);
+							 CORBA_Environment           *opt_ev);
 
 G_END_DECLS
 

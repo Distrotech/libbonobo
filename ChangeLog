@@ -1,3 +1,16 @@
+2001-07-28  Jamil <geor@ihug.co.nz>
+
+	* bonobo/bonobo-object.c (bonobo_object_query_interface), 
+	(bonobo_unknown_ping): add opt_evs
+	(bonobo_object_dup_ref): document opt ev as optional.
+	(bonobo_object_release_unref): ditto.
+
+	* bonobo/bonobo-moniker-extender.c (bonobo_moniker_find_extender): 
+	make ev optional.
+	(bonobo_moniker_use_extender): ditto.
+
+	* changes.txt: update.
+
 2001-07-28  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-object.c
