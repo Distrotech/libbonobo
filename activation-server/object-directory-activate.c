@@ -158,7 +158,7 @@ od_server_activate_exe (Bonobo_ServerInfo                  *si,
          */
 	retval = bonobo_activation_server_by_forking (
                 (const char **) args, TRUE, fd_arg, environment, iorstr,
-                si->iid, bonobo_object_directory_re_check_fn, actinfo, ev);
+                si->iid, FALSE, bonobo_object_directory_re_check_fn, actinfo, ev);
         
 	CORBA_free (iorstr);
 

@@ -1,3 +1,28 @@
+2003-05-30  Michael Meeks  <michael@ximian.com>
+
+	* activation-server/object-directory.h: add
+	headers for time_t.
+
+	* activation-server/object-directory-activate.c
+	(od_server_activate_exe): use the glib mainloop to
+	poll through.
+
+	* bonobo-activation/bonobo-activation-base-service.c
+	(get_tmpdir): use ORBit_get_temp_dir, and fail noisly
+	if we can't get a secure place to poke.
+	(local_activator): force a local loop.
+
+	* bonobo/bonobo-object.c: add linc locking dummies.
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_by_forking): add 'use_new_loop'
+	argument; create either an inferior loop, or use the
+	glib mainloop - as suits. Only scan with the mainloop.
+	(scan_list): use the mainloop here too.
+	
+	* tests/test-activation/bonobo-activation-test.c
+	(race_empty): use g_main_iteration.
+
 2003-05-29  Michael Meeks  <michael@ximian.com>
 
 	* tests/test-thread.c (test_threads): add a

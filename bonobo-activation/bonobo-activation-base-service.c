@@ -455,22 +455,16 @@ bonobo_activation_service_get (const BonoboActivationBaseService *base_service)
 /*****Implementation of the IOR registration system via plain files ******/
 static int lock_fd = -1;
 
-/*
- * The linc-tmpdir might not be what we expect,
- * requires linc >= 0.5.1
- */
 static const char *
 get_tmpdir (void)
 {
-        static char *tmpdir = NULL;
+        static const char *tmpdir = NULL;
 
         if (!tmpdir)
-                tmpdir = linc_get_tmpdir ();
+                tmpdir = ORBit_get_safe_tmp ();
 
-        if (!tmpdir) {
-                g_warning ("very odd tmpdir problem");
-                tmpdir = g_strdup_printf ("/tmp/orbit-%s", g_get_user_name ());
-        }
+        if (!tmpdir)
+                g_error ("No secure tmpdir found");
 
         return tmpdir;
 }
@@ -667,7 +661,7 @@ local_activator (const BonoboActivationBaseService *base_service,
 
 		return bonobo_activation_server_by_forking (
                         cmd, FALSE, fd_arg, NULL, NULL, base_service->name,
-                        local_re_check_fn, (gpointer)base_service, ev);
+                        TRUE, local_re_check_fn, (gpointer)base_service, ev);
 	}
 
 	return CORBA_OBJECT_NIL;

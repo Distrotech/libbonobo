@@ -10,6 +10,9 @@
 #ifndef _OBJECT_DIRECTORY_H_
 #define _OBJECT_DIRECTORY_H_
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo-activation/Bonobo_ObjectDirectory.h>
 

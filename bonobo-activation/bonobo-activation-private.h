@@ -44,6 +44,7 @@ CORBA_Object bonobo_activation_server_by_forking (const char                    
 						  const Bonobo_ActivationEnvironment *environemnt,
 						  const char                         *od_iorstr,
 						  const char                         *act_iid,
+                                                  gboolean                            use_new_loop,
 						  BonoboForkReCheckFn                 re_check,
 						  gpointer                            user_data,
 						  CORBA_Environment                  *ev);

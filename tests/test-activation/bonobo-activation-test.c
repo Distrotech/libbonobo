@@ -178,7 +178,7 @@ race_empty (CORBA_Environment *ev)
         g_assert (ev->_major == CORBA_NO_EXCEPTION);
 
         while (async_done < 2)
-                linc_main_iteration (TRUE);
+                g_main_context_iteration (NULL, TRUE);
 }
 
 int

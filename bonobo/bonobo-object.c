@@ -30,6 +30,11 @@
 /* We need decent ORB cnx. flushing on shutdown to make this work */
 #undef ASYNC_UNREFS
 
+#warning FIXME: add back locking support
+#define linc_mutex_new() NULL
+#define LINC_MUTEX_LOCK(lk) 
+#define LINC_MUTEX_UNLOCK(lk) 
+
 /* Some simple tracking - always on */
 static GMutex *bonobo_total_aggregates_lock = NULL;
 static glong   bonobo_total_aggregates      = 0;

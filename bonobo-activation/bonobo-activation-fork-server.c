@@ -131,7 +131,7 @@ scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
 
                 /* We run the loop too ... */
                 while (!ai->done)
-                        linc_main_iteration (TRUE);
+                        g_main_context_iteration (NULL, TRUE);
 
                 if (!strcmp (seek_ai->act_iid, ai->act_iid)) {
 #ifdef BONOBO_ACTIVATION_DEBUG
@@ -243,6 +243,7 @@ bonobo_activation_server_by_forking (
 	const Bonobo_ActivationEnvironment  *environment,
 	const char                          *od_iorstr,
 	const char                          *act_iid,
+        gboolean                             use_new_loop,
 	BonoboForkReCheckFn                  re_check,
 	gpointer                             user_data,
 	CORBA_Environment                   *ev)
@@ -250,14 +251,13 @@ bonobo_activation_server_by_forking (
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
         FILE *iorfh;
-        EXEActivateInfo ai;
-        GIOChannel *gioc;
         int childpid;
         int status;
         struct sigaction sa;
         sigset_t mask, omask;
         int parent_pid;
         static GSList *running_activations = NULL;
+        EXEActivateInfo ai;
 
         g_return_val_if_fail (cmd != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (cmd [0] != NULL, CORBA_OBJECT_NIL);
@@ -269,7 +269,8 @@ bonobo_activation_server_by_forking (
         ai.re_check = re_check;
         ai.user_data = user_data;
 
-        if ((retval = scan_list (running_activations, &ai, ev)) != CORBA_OBJECT_NIL)
+        if (!use_new_loop &&
+            (retval = scan_list (running_activations, &ai, ev)) != CORBA_OBJECT_NIL)
                 return retval;
         
      	pipe (iopipes);
@@ -301,8 +302,6 @@ bonobo_activation_server_by_forking (
 	}
 
 	if (childpid != 0) {
-                LincWatch *watch;
-
                 /* de-zombify */
                 while (waitpid (childpid, &status, 0) == -1 && errno == EINTR)
                         ;
@@ -344,39 +343,32 @@ bonobo_activation_server_by_forking (
 
                 running_activations = g_slist_prepend (running_activations, &ai);
 
-		gioc = g_io_channel_unix_new (iopipes[0]);
-
-		if (linc_get_threaded ()) {
+                {
                         GSource *source;
+                        GIOChannel *gioc;
+                        GMainContext *context;
 
-                        /* The calling code needs to be multi-threaded */
-                        g_warning ("FIXME: re-factor this for efficiency\n");
-                        g_warning ("FIXME: we can't use this path to activate "
-                                   "b-a-s first time - it's a re-enterancy hazard\n");
+                        gioc = g_io_channel_unix_new (iopipes[0]);
 
                         source = g_io_create_watch
                                 (gioc, G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR);
                         g_source_set_callback (source, (GSourceFunc) handle_exepipe, &ai, NULL);
-                        g_source_attach (source, NULL); /* The mainloop */
+                        g_source_set_can_recurse (source, TRUE);
 
-                        /* We have to be able to process incoming CORBA calls here */
+                        if (use_new_loop)
+                                context = g_main_context_new ();
+                        else
+                                context = g_main_loop_get_context (NULL);
+                        g_source_attach (source, context);
+
                         while (!ai.done)
-                                g_main_context_iteration (NULL, TRUE);
+                                g_main_context_iteration (context, TRUE);
 
                         g_source_destroy (source);
                         g_source_unref (source);
-                } else {
-                        watch = linc_io_add_watch
-                                (gioc, 
-                                 G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR,
-                                 (GIOFunc) & handle_exepipe, &ai);
 
-                        while (!ai.done)
-                                linc_main_iteration (TRUE);
-
-                        linc_io_remove_watch (watch);
+                        g_io_channel_unref (gioc);
                 }
-		g_io_channel_unref (gioc);
 		fclose (iorfh);
 
                 running_activations = g_slist_remove (running_activations, &ai);
