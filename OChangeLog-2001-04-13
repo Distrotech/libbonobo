@@ -1,3 +1,9 @@
+2000-11-03  Darin Adler  <darin@eazel.com>
+
+	* api-convert.pl: Fixed a tiny mistake in the API rename script
+	that causes it to eat the character after BONOBO_WIN. This probably
+	comes too late, since people have all used the script already.
+
 2000-11-02  Michael Meeks <michael@helixcode.com>
 
 	* Version 0.28
