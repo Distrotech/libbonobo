@@ -1156,7 +1156,7 @@ gnome_property_bag_demarshal_boolean (GnomePropertyBag *pb, const char *type,
 {
 	CORBA_boolean *b;
 
-	g_return_val_if_fail (any->_type->kind == CORBA_tk_string, NULL);
+	g_return_val_if_fail (any->_type->kind == CORBA_tk_boolean, NULL);
 
 	b = g_new0 (CORBA_boolean, 1);
 	*b = *((CORBA_boolean *) any->_value);
