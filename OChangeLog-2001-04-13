@@ -1,3 +1,7 @@
+2000-11-30  Michael Meeks  <michael@helixcode.com>
+
+	* storage-modules/bonobo-stream-vfs.c (vfs_copy_to): fix huge leak.
+
 2000-11-30  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-control.c (impl_Bonobo_Control_getDesiredSize):
@@ -15,6 +19,7 @@ Thu Nov 30 11:03:10 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 	* storage-modules/*.c: see above.
 
 2000-11-30  Cody Russell  <bratsche@gnome.org>
+
 	* bonobo/bonobo-ui-toolbar-icon.c:  When the theme makes use of bg_pixmap,
 	and when mode == BONOBO_UI_TOOLBAR_ICON_COLOR, do full 8-bit alpha
 	compositing of icons over backgrounds.
@@ -32,7 +37,6 @@ Wed Nov 29 19:56:59 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 	CORBA struct with NULL strings.
 
 	* storage-modules/bonobo-stream-efs.c (real_get_info): see above
-
 
 2000-11-29  Martin Baulig  <baulig@suse.de>
 
