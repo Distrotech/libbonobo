@@ -1,3 +1,8 @@
+2001-06-28  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-property-bag-client.c: bug fix: cast to
+	CORBA_boolean intead of gboolean.
+
 2001-06-28  Michael Meeks  <michael@ximian.com>
 	[ also by Laszlo PETER <Laszlo.Peter@ireland.sun.com> ]
 
