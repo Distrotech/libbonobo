@@ -1,5 +1,15 @@
 2000-05-01  Michael Meeks  <michael@helixcode.com>
 
+	* components/Makefile.am: kill x-png.
+
+	* components/image-x-png: Kill.
+
+	* components/bonobo.keys: update; this is doomed to die soon anyway.
+
+	* configure.in: kill image-x-png.
+
+2000-05-01  Michael Meeks  <michael@helixcode.com>
+
 	* samples/compound-doc/Makefile.am: hack out sample container.
 
 	* samples/compound-doc/container: Add Gergo's bonobo-hello, renamed
