@@ -2,11 +2,11 @@
 #ifndef _BONOBO_MONIKER_H_
 #define _BONOBO_MONIKER_H_
 
-#include <libgnome/gnome-defs.h>
-#include <gtk/gtkobject.h>
-#include <bonobo/Bonobo.h>
+#include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
+
+typedef struct _BonoboMonikerPrivate BonoboMonikerPrivate;
 
 #define BONOBO_MONIKER_TYPE        (bonobo_moniker_get_type ())
 #define BONOBO_MONIKER(o)          (GTK_CHECK_CAST ((o), BONOBO_MONIKER_TYPE, BonoboMoniker))
@@ -14,33 +14,55 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_MONIKER(o)       (GTK_CHECK_TYPE ((o), BONOBO_MONIKER_TYPE))
 #define BONOBO_IS_MONIKER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_TYPE))
 
-struct _BonoboMoniker;
-typedef struct _BonoboMoniker BonoboMoniker;
-struct _BonoboMonikerPrivate;
-typedef struct _BonoboMonikerPrivate BonoboMonikerPrivate;
-
-struct _BonoboMoniker {
-	GtkObject parent;
-
-	char *goadid, *url;
-	GList *items;
+typedef struct {
+        BonoboObject          object;
+	
 	BonoboMonikerPrivate *priv;
-};
+} BonoboMoniker;
 
 typedef struct {
-	GtkObjectClass parent_class;
+	BonoboObjectClass parent_class;
+
+	/*
+	 * virtual methods
+	 */
+	Bonobo_Moniker (*get_parent)         (BonoboMoniker               *moniker,
+					      CORBA_Environment           *ev);
+	void           (*set_parent)         (BonoboMoniker               *moniker,
+					      const Bonobo_Moniker         parent,
+					      CORBA_Environment           *ev);
+	CORBA_char    *(*get_display_name)   (BonoboMoniker               *moniker,
+					      CORBA_Environment           *ev);
+	Bonobo_Moniker (*parse_display_name) (BonoboMoniker               *moniker,
+					      Bonobo_Moniker               parent,
+					      const CORBA_char            *name,
+					      CORBA_Environment           *ev);
+	Bonobo_Unknown (*resolve)            (BonoboMoniker               *moniker,
+					      const Bonobo_ResolveOptions *options,
+					      const CORBA_char            *requested_interface,
+					      CORBA_Environment           *ev);
 } BonoboMonikerClass;
 
-GtkType           bonobo_moniker_get_type         (void);
-BonoboMoniker	 *bonobo_moniker_new              (void);
-void              bonobo_moniker_set_server       (BonoboMoniker *moniker,
-					          const char *goad_id,
-					          const char *filename);
-void              bonobo_moniker_append_item_name (BonoboMoniker *moniker,
-						  const char *item_name);
-char             *bonobo_moniker_get_as_string    (BonoboMoniker *moniker);
+GtkType                  bonobo_moniker_get_type            (void);
+POA_Bonobo_Moniker__epv *bonobo_moniker_get_epv             (void);
+Bonobo_Moniker           bonobo_moniker_corba_object_create (BonoboObject      *object);
 
+Bonobo_Moniker           bonobo_moniker_get_parent          (BonoboMoniker     *moniker,
+							     CORBA_Environment *ev);
+void                     bonobo_moniker_set_parent          (BonoboMoniker     *moniker,
+							     Bonobo_Moniker     parent,
+							     CORBA_Environment *ev);
+
+/*
+ * Common case convenience functions
+ */
+const char              *bonobo_moniker_get_name            (BonoboMoniker     *moniker,
+							     int                char_offset);
+void                     bonobo_moniker_set_name            (BonoboMoniker     *moniker,
+							     const char        *name,
+							     int                num_chars);
 
 END_GNOME_DECLS
 
-#endif
+#endif /* _BONOBO_MONIKER_H_ */
+

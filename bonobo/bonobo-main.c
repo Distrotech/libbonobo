@@ -24,7 +24,7 @@ PortableServer_POA        __bonobo_poa;
 PortableServer_POAManager __bonobo_poa_manager = NULL;
 
 /**
- * bonobo_exception_get_txt:
+ * bonobo_exception_get_text:
  * @ev: the corba environment.
  * 
  * Returns a user readable description of the exception, busks
@@ -34,7 +34,7 @@ PortableServer_POAManager __bonobo_poa_manager = NULL;
  * and when. NULL is never returned.
  **/
 char *
-bonobo_exception_get_txt (CORBA_Environment *ev)
+bonobo_exception_get_text (CORBA_Environment *ev)
 {
 	g_return_val_if_fail (ev != NULL, NULL);
 

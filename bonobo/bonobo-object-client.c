@@ -132,6 +132,8 @@ parse_moniker_string (const char *desc)
 Bonobo_Unknown
 bonobo_object_restore_from_url (const char *iid, const char *url)
 {
+#warning Commented all this out
+#if 0
 #define bonobo_object_restore_from_url_defined_here
 	CORBA_Object rtn = CORBA_OBJECT_NIL;
 	Bonobo_PersistFile persist;
@@ -232,6 +234,8 @@ bonobo_object_restore_from_url (const char *iid, const char *url)
 	
 	CORBA_exception_free (&ev);
 	return (Bonobo_Unknown) rtn;
+#endif
+	return NULL;
 }
 
 static void
@@ -263,7 +267,7 @@ bonobo_object_activate (const char *object_desc, gint flags)
 		return bonobo_object_activate_with_either_id (object_desc, flags);
 
 	moniker_info = parse_moniker_string (object_desc + 12);
-	if (g_list_length (moniker_info) < 2){
+	if (g_list_length (moniker_info) < 2) {
 		moniker_info_list_destroy (moniker_info);
 		return NULL;
 	}
@@ -558,6 +562,8 @@ bonobo_object_client_get_type (void)
 	return type;
 }
 
+#if 0
 #ifndef bonobo_object_restore_from_url_defined_here
 #error You might want to remove all the headers included here to get this file here.
+#endif
 #endif
