@@ -10,7 +10,6 @@
 #if !defined(__BONOBO_GENERIC_FACTORY_COMPILATION) && defined(__ORBIT_IDL__)
 %{
 #pragma include_defs bonobo-activation/Bonobo_GenericFactory.h
-#pragma include_defs bonobo-activation/bonobo-factory-suppress.h
 %}
 #pragma inhibit push
 #endif

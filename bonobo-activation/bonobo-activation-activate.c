@@ -30,12 +30,9 @@
 #include <bonobo-activation/bonobo-activation-private.h>
 #include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/bonobo-activation-id.h>
+#include <bonobo-activation/bonobo-activation-shlib.h>
 
 #include <string.h>
-
-extern CORBA_Object bonobo_activation_server_activate_shlib (Bonobo_ActivationResult * sh,
-					       CORBA_Environment * ev);
-
 
 static gboolean test_components_enabled = FALSE;
 
@@ -230,7 +227,7 @@ bonobo_activation_activate (const char *requirements, char *const *selection_ord
 
 	switch (res->res._d) {
 	case Bonobo_RESULT_SHLIB:
-		retval = bonobo_activation_server_activate_shlib (res, ev);
+		retval = bonobo_activation_activate_shlib_server (res, ev);
 		break;
 	case Bonobo_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (res->res._u.res_object, ev);
@@ -311,7 +308,7 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
 
 	switch (res->res._d) {
 	case Bonobo_RESULT_SHLIB:
-                retval = bonobo_activation_server_activate_shlib (res, ev);
+                retval = bonobo_activation_activate_shlib_server (res, ev);
 		break;
 	case Bonobo_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (res->res._u.res_object, ev);

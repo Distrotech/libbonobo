@@ -1,9 +1,9 @@
 NULL = 
 
-bin_PROGRAMS = oaf-sysconf
+bin_PROGRAMS = bonobo-activation-sysconf
 
-oaf_sysconf_SOURCES = 			\
-	oaf-sysconf.c			\
+bonobo_activation_sysconf_SOURCES =	\
+	bonobo-activation-sysconf.c	\
 	$(NULL)
 
 INCLUDES = 					\
@@ -11,11 +11,11 @@ INCLUDES = 					\
 	-I$(top_srcdir)				\
 	-I$(top_srcdir)/oafd/			\
 	-I$(top_srcdir)/liboaf/			\
-	-DOAF_LOCALEDIR=\""$(datadir)/locale"\"	\
-	-DOAF_CONFDIR=\"$(sysconfdir)\"		\
+	-DSERVER_LOCALEDIR=\""$(datadir)/locale"\"	\
+	-DSERVER_CONFDIR=\"$(sysconfdir)\"		\
 	$(NULL)
 
-oaf_sysconf_LDADD =			\
+bonobo_activation_sysconf_LDADD =	\
 	$(UTILS_LIBS)			\
 	$(INTLLIBS)			\
 	$(NULL)

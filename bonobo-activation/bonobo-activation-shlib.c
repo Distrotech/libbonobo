@@ -54,7 +54,7 @@ gnome_plugin_unload (gpointer data, gpointer user_data)
 
 
 /**
- * bonobo_activation_server_activate_shlib:
+ * bonobo_activation_activate_shlib_server:
  * @sh:
  * @ev:
  *

@@ -54,6 +54,7 @@ typedef struct {
 
 void  bonobo_activation_plugin_use    (PortableServer_Servant servant, 
                                        gpointer impl_ptr);
+
 void  bonobo_activation_plugin_unuse  (gpointer impl_ptr);
 
 

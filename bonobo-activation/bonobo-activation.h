@@ -43,6 +43,8 @@ extern "C" {
 #include <bonobo-activation/bonobo-activation-shlib.h>
 #include <bonobo-activation/bonobo-activation-register.h>
 
+#include <bonobo-activation/bonobo-activation-async.h>
+
 /* Optional stuff for libgnome to use */
 #ifdef HAVE_POPT_H
 #include <popt.h>

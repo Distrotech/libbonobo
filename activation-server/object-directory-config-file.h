@@ -22,21 +22,16 @@
  *
  */
 
-#ifndef ODUTILS_H
-#define ODUTILS_H
-
+#ifndef OBJECT_DIRECTORY_CONFIG_FILE_H
+#define OBJECT_DIRECTORY_CONFIG_FILE_H
 
 #include <tree.h> /* gnome-xml */
 
-#define OAF_CONFIG_FILE "/oaf/oaf-config.xml"
+#define SERVER_CONFIG_FILE "/bonobo/bonobo-activation-config.xml"
 
 /* loads the information from oaf configuration file
    in $sysconfdir/oaf/oaf-conf.xml.
 */
-char *od_utils_load_config_file (void);
+char *object_directory_load_config_file (void);
 
-/* helper function */
-xmlDocPtr od_utils_load_xml_file (void);
-
-
-#endif /* ODUTILS_H */
+#endif /* OBJECT_DIRECTORY_CONFIG_FILE_H */

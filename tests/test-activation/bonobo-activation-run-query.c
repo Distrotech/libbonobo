@@ -1,20 +1,20 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-#include <liboaf/liboaf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "empty.h"
+#include <bonobo-activation/bonobo-activation.h>
 
 int
 main (int argc, char *argv[])
 {
-	OAF_ServerInfoList *result;
+	Bonobo_ServerInfoList *result;
 	CORBA_Environment ev;
 	char *query;
 	char **sort_criteria;
 	int i;
 
 	CORBA_exception_init (&ev);
-	oaf_init (argc, argv);
+	bonobo_activation_init (argc, argv);
 
 	sort_criteria = NULL;
 
@@ -44,10 +44,10 @@ main (int argc, char *argv[])
 		query = "repo_ids.has('IDL:Empty:1.0')";
 	}
 
-	/* putenv("OAF_BARRIER_INIT=1"); */
-	result = oaf_query (query, sort_criteria, &ev);
+	/* putenv("Bonobo_BARRIER_INIT=1"); */
+	result = bonobo_activation_query (query, sort_criteria, &ev);
 
-	/* result = oaf_query ("iid == 'OAFIID:Empty:19991025'", NULL, &ev); */
+	/* result = bonobo_activation_query ("iid == 'OAFIID:Empty:19991025'", NULL, &ev); */
 
 	if (result == NULL) {
 		puts ("query failed");

@@ -25,10 +25,11 @@
 
 #include "config.h"
 
-#include "liboaf/liboaf-private.h"
-#include "oafd.h"
 #include <stdio.h>
 #include <popt.h>
+#include <string.h>
+
+#include <bonobo-activation/bonobo-activation.h>
 
 static char *acior = NULL, *specs = NULL;
 static int do_query;
@@ -45,7 +46,7 @@ static struct poptOption options[] = {
 };
 
 static void
-od_dump_list (OAF_ServerInfoList * list)
+od_dump_list (Bonobo_ServerInfoList * list)
 {
 	int i, j, k;
 
@@ -55,22 +56,22 @@ od_dump_list (OAF_ServerInfoList * list)
 			 list->_buffer[i].server_type,
 			 list->_buffer[i].location_info);
 		for (j = 0; j < list->_buffer[i].props._length; j++) {
-			OAF_Property *prop =
+			Bonobo_Property *prop =
 				&(list->_buffer[i].props._buffer[j]);
 			g_print ("    %s = ", prop->name);
 			switch (prop->v._d) {
-			case OAF_P_STRING:
+			case Bonobo_P_STRING:
 				g_print ("\"%s\"\n", prop->v._u.value_string);
 				break;
-			case OAF_P_NUMBER:
+			case Bonobo_P_NUMBER:
 				g_print ("%f\n", prop->v._u.value_number);
 				break;
-			case OAF_P_BOOLEAN:
+			case Bonobo_P_BOOLEAN:
 				g_print ("%s\n",
 					 prop->v.
 					 _u.value_boolean ? "TRUE" : "FALSE");
 				break;
-			case OAF_P_STRINGV:
+			case Bonobo_P_STRINGV:
 				g_print ("[");
 				for (k = 0;
 				     k < prop->v._u.value_stringv._length;
@@ -94,12 +95,12 @@ int
 main (int argc, char *argv[])
 {
 	CORBA_Environment ev;
-	OAF_ActivationContext ac;
+	Bonobo_ActivationContext ac;
 	poptContext ctx;
 	gboolean do_usage_exit = FALSE;
-	OAF_ServerInfoList *slist;
+	Bonobo_ServerInfoList *slist;
 	CORBA_ORB orb;
-	GNOME_stringlist reqs = { 0 };
+	Bonobo_StringList reqs = { 0 };
 
 	CORBA_exception_init (&ev);
 
@@ -107,7 +108,7 @@ main (int argc, char *argv[])
 	while (poptGetNextOpt (ctx) >= 0)
 		/**/;
 
-	orb = oaf_init (argc, argv);
+	orb = bonobo_activation_init (argc, argv);
 
 	if (!specs) {
 		g_print ("You must specify an operation to perform.\n");
@@ -126,7 +127,7 @@ main (int argc, char *argv[])
 			do_usage_exit = TRUE;
 		}
 	} else
-		ac = oaf_activation_context_get ();
+		ac = bonobo_activation_context_get ();
 
 	poptFreeContext (ctx);
 
@@ -135,8 +136,9 @@ main (int argc, char *argv[])
 	if (do_query) {
 
 		slist =
-			OAF_ActivationContext_query (ac, specs, &reqs,
-						     oaf_context_get (), &ev);
+			Bonobo_ActivationContext_query (
+                                ac, specs, &reqs,
+                                bonobo_activation_context_get (), &ev);
 		switch (ev._major) {
 		case CORBA_NO_EXCEPTION:
 			od_dump_list (slist);
@@ -153,7 +155,7 @@ main (int argc, char *argv[])
 				    (id,
 				     "IDL:OAF/ActivationContext/ParseFailed:1.0"))
 				{
-					OAF_ActivationContext_ParseFailed
+					Bonobo_ActivationContext_ParseFailed
 						* exdata =
 						CORBA_exception_value (&ev);
 
@@ -174,17 +176,16 @@ main (int argc, char *argv[])
 			break;
 		}
 	} else {
-		OAF_ActivationResult *res;
+		Bonobo_ActivationResult *res;
 
-		res =
-			OAF_ActivationContext_activate (ac, specs, &reqs, 0,
-							oaf_context_get (),
-							&ev);
+		res = Bonobo_ActivationContext_activate (
+                        ac, specs, &reqs, 0,
+                        bonobo_activation_context_get (), &ev);
 		switch (ev._major) {
 		case CORBA_NO_EXCEPTION:
 			g_print ("Activation ID \"%s\" ", res->aid);
 			switch (res->res._d) {
-			case OAF_RESULT_OBJECT:
+			case Bonobo_RESULT_OBJECT:
 				g_print ("RESULT_OBJECT\n");
 				acior =
 					CORBA_ORB_object_to_string (orb,
@@ -193,10 +194,10 @@ main (int argc, char *argv[])
 								    &ev);
 				g_print ("%s\n", acior);
 				break;
-			case OAF_RESULT_SHLIB:
+			case Bonobo_RESULT_SHLIB:
 				g_print ("RESULT_SHLIB\n");
 				break;
-			case OAF_RESULT_NONE:
+			case Bonobo_RESULT_NONE:
 				g_print ("RESULT_NONE\n");
 				break;
 			}
@@ -212,7 +213,7 @@ main (int argc, char *argv[])
 				    (id,
 				     "IDL:OAF/ActivationContext/ParseFailed:1.0"))
 				{
-					OAF_ActivationContext_ParseFailed
+					Bonobo_ActivationContext_ParseFailed
 						* exdata =
 						CORBA_exception_value (&ev);
 

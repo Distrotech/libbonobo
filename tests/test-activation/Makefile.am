@@ -1,45 +1,45 @@
 NULL=
 
-noinst_PROGRAMS=		\
-	oaf-empty-server 	\
-	oaf-test-client		\
-	oaf-test-async		\
+noinst_PROGRAMS=			\
+	bonobo-activation-empty-server 	\
+	bonobo-activation-test		\
+	bonobo-activation-test-async	\
 	$(NULL)
 
-bin_PROGRAMS=			\
-	oaf-run-query		\
+bin_PROGRAMS=				\
+	bonobo-activation-run-query	\
 	$(NULL)
 
-oaf_test_async_SOURCES=		\
-	oaf-test-async.c 	\
+bonobo_activation_test_async_SOURCES=	\
+	bonobo-activation-test-async.c 	\
 	$(NULL)
 
-oaf_test_client_SOURCES=	\
-	oaf-test-client.c 	\
-	empty-common.c 		\
-	empty.h 		\
-	empty-stubs.c		\
+bonobo_activation_test_SOURCES=		\
+	bonobo-activation-test.c	\
+	empty-common.c			\
+	empty.h				\
+	empty-stubs.c			\
 	$(NULL)
 
-oaf_run_query_SOURCES=		\
-	oaf-run-query.c 	\
-	empty-common.c 		\
-	empty.h 		\
-	empty-stubs.c		\
+bonobo_activation_run_query_SOURCES=	\
+	bonobo-activation-run-query.c 	\
+	empty-common.c			\
+	empty.h				\
+	empty-stubs.c			\
 	$(NULL)
 
-oaf_empty_server_SOURCES=	\
-	empty-server.c 		\
-	empty.h 		\
-	empty-common.c 		\
-	empty-skels.c		\
+bonobo_activation_empty_server_SOURCES=	\
+	empty-server.c			\
+	empty.h				\
+	empty-common.c			\
+	empty-skels.c			\
 	$(NULL)
 
-BUILT_SOURCES=			\
-	empty.h 		\
-	empty-common.c 		\
-	empty-stubs.c 		\
-	empty-skels.c		\
+BUILT_SOURCES=				\
+	empty.h				\
+	empty-common.c			\
+	empty-stubs.c			\
+	empty-skels.c			\
 	$(NULL)
 
 empty.h empty-common.c empty-stubs.c empty-skels.c: empty_built
@@ -50,18 +50,18 @@ empty_built: empty.idl $(ORBIT_IDL)
 
 CLEANFILES=empty_built
 
-INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\" \
-	$(UTILS_CFLAGS)
-LDADD=../liboaf/liboaf-2.la $(UTILS_LIBS)
+INCLUDES=-I$(top_srcdir) -I$(top_builddir) $(UTILS_CFLAGS)
 
-oaffiles=empty.oafinfo
+LDADD=../bonobo-activation/libbonobo-activation.la $(UTILS_LIBS)
+
+serverfiles=empty.server
 
 emptydatadir=$(datadir)/oaf
-emptydata_DATA=$(oaffiles)
+emptydata_DATA=$(serverfiles)
 
-bin_SCRIPTS=oaf-slay
+bin_SCRIPTS=bonobo-activation-slay
 
-EXTRA_DIST=empty.idl $(oaffiles) broken.oafinfo oaf-slay
+EXTRA_DIST=empty.idl $(serverfiles) broken.server bonobo-activation-slay
 
 check:
-	OAF_INFO_PATH="$(top_srcdir)/test:$$OAF_INFO_PATH" PATH="$(top_builddir)/test:$$PATH" $(top_builddir)/test/oaf-test-client
+	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test:$$BONOBO_ACTIVATION_PATH" PATH="$(top_builddir)/test:$$PATH" $(top_builddir)/test/bonobo-activation-test

@@ -1,9 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-#include <liboaf/liboaf.h>
-#include <liboaf/oaf-async.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#include <bonobo-activation/bonobo-activation.h>
 
 #define DEBUG_TIME 0
 
@@ -46,7 +46,7 @@ test_activate (char *requirements)
         CORBA_exception_init (&ev);
 
         data.callback_called = FALSE;
-        oaf_activate_async (requirements, NULL, 0, test_callback, &data, &ev);
+        bonobo_activation_activate_async (requirements, NULL, 0, test_callback, &data, &ev);
 
 #if DEBUG_TIME
         beg_time = time (NULL);
@@ -83,7 +83,7 @@ test_activate_from_id (char *aid)
         CORBA_exception_init (&ev);
 
         data.callback_called = FALSE;
-        oaf_activate_from_id_async (aid, 0, test_callback, &data, &ev);
+        bonobo_activation_activate_from_id_async (aid, 0, test_callback, &data, &ev);
 
 #if DEBUG_TIME
         beg_time = time (NULL);
@@ -116,7 +116,7 @@ main (int argc, char *argv[])
 
         test_passed = 0;
 
-	oaf_init (argc, argv);
+	bonobo_activation_init (argc, argv);
         printf ("testing async interfaces\n");
 
         printf ("testing activate_async... ");

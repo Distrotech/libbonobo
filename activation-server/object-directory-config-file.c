@@ -30,15 +30,16 @@
 #include <glib.h>
 
 #include "bonobo-activation/bonobo-activation-i18n.h"
+#include "object-directory-config-file.h"
 
 static xmlDocPtr
-object_directory_utils_load_xml_file (void)
+object_directory_load_xml_file (void)
 {
         xmlDocPtr doc;
         char *oaf_config_file;
 
-        oaf_config_file = g_strconcat (SERVER_CONFDIR, 
-                                       SERVER_CONFIG_FILE, NULL);
+        oaf_config_file = g_strconcat (
+                SERVER_CONFDIR, SERVER_CONFIG_FILE, NULL);
         doc = xmlParseFile (oaf_config_file);
 
        /* check if the document was read successfully. */
@@ -56,13 +57,13 @@ object_directory_utils_load_xml_file (void)
 
 
 char *
-object_directory_utils_load_config_file (void)
+object_directory_load_config_file (void)
 {
         char *result;
         xmlDocPtr doc;
         xmlNodePtr search_node;
 
-        doc = od_utils_load_xml_file ();
+        doc = object_directory_load_xml_file ();
 
         search_node = doc->xmlRootNode->xmlChildrenNode;
         result = g_strdup ("");

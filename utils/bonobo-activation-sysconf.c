@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  oaf-sysconf: a simple utility to manipulate OAF configuration files.
+ *  bonobo-activation-sysconf: a simple utility to manipulate
+ *                             activation configuration files.
  *
  *  Copyright (C) 2000 Eazel, Inc.
  *
@@ -23,31 +24,25 @@
  */
 
 #include "config.h"
-#include "oaf-i18n.h"
-#include <glib.h>
 #include <string.h>
+#include <glib.h>
 #include <tree.h>        /* gnome-xml */
 #include <parser.h>      /* gnome-xml */
 #include <xmlmemory.h>   /* gnome-xml */
 #include <popt.h>        /* popt :) */
-#include "od-utils.h"
 
+#include <bonobo-activation/bonobo-activation.h>
+#include "bonobo-activation/bonobo-activation-i18n.h"
+#include "server/object-directory-config-file.h"
 
-
-static void add_directory (const char *directory);
-static void remove_directory (const char *directory);
-static void display_directories (void);
-static void display_config_path (void);
-static void save_file (xmlDocPtr doc);
-static xmlDocPtr open_file (void);
-
-
-static xmlDocPtr open_file (void)
+static xmlDocPtr
+open_file (void)
 {
         char *config_file;
         xmlDocPtr doc;
 
-        config_file = g_strconcat (OAF_CONFDIR, OAF_CONFIG_FILE, NULL);
+        config_file = g_strconcat (
+                SERVER_CONFDIR, SERVER_CONFIG_FILE, NULL);
         
         doc = xmlParseFile (config_file);
 
@@ -55,35 +50,40 @@ static xmlDocPtr open_file (void)
 }
 
 
-static void save_file (xmlDocPtr doc)
+static void 
+save_file (xmlDocPtr doc)
 {
         char *config_file;
         
 
-        config_file = g_strconcat (OAF_CONFDIR, OAF_CONFIG_FILE, NULL);
+        config_file = g_strconcat (
+                SERVER_CONFDIR, SERVER_CONFIG_FILE, NULL);
         if (xmlSaveFile (config_file, doc) == -1) {
-                g_print (_("Could not save OAF configuration file.\n"));
+                g_print (_("Could not save configuration file.\n"));
                 g_print (_("Please, make sure you have permissions to write "
-                           "OAF configuration file.\n"));
+                           "to '%s'.\n"), config_file);
         } else {
-                g_print (_("Successfully wrote OAF configuration file.\n"));
+                g_print (_("Successfully wrote configuration file.\n"));
         }
         g_free (config_file);
 
 }
 
-static void display_config_path (void)
+static void
+display_config_path (void)
 {
         char *config_file;
 
-        config_file = g_strconcat (OAF_CONFDIR, OAF_CONFIG_FILE, NULL);
+        config_file = g_strconcat (
+                SERVER_CONFDIR, SERVER_CONFIG_FILE, NULL);
 
-        g_print (_("OAF configuration file is:\n    %s\n"), config_file);
+        g_print (_("configuration file is:\n    %s\n"), config_file);
         
         g_free (config_file);
 }
 
-static void add_directory (const char *directory)
+static void
+add_directory (const char *directory)
 {
         xmlDocPtr doc;
         xmlNodePtr search_node;
@@ -105,7 +105,7 @@ static void add_directory (const char *directory)
                                         dir_path = xmlNodeGetContent (item_node);
                                         if (strcmp (dir_path, directory) == 0) {
                                                 is_already_there = TRUE;
-                                                g_print (_("%s already in OAF configuration file\n"), 
+                                                g_print (_("%s already in configuration file\n"), 
                                                          directory);
                                                 
                                         }
@@ -136,7 +136,8 @@ static void add_directory (const char *directory)
         xmlFreeDoc (doc);
 }
 
-static void remove_directory (const char *directory)
+static void
+remove_directory (const char *directory)
 {
         xmlDocPtr doc;
         xmlNodePtr search_node;
@@ -174,14 +175,15 @@ static void remove_directory (const char *directory)
         xmlFreeDoc (doc);                                                
 }
 
-static void display_directories (void)
+static void
+display_directories (void)
 {
         xmlDocPtr doc;
         xmlNodePtr search_node;
 
         doc = open_file ();
 
-        g_print (_("OAF configuration file contains:\n"));
+        g_print (_("Bonobo-activation configuration file contains:\n"));
 
         search_node = doc->xmlRootNode->xmlChildrenNode;
         while (search_node != NULL) {
@@ -213,16 +215,16 @@ static void display_directories (void)
 struct poptOption oaf_sysconf_popt_options[] = {
         {"remove-directory", '\0', POPT_ARG_STRING, NULL, 
          REMOVE_DIRECTORY_OPERATION,
-         N_("Directory to remove from OAF configuration file"), N_("directory path")},
+         N_("Directory to remove from configuration file"), N_("directory path")},
         {"add-directory", '\0', POPT_ARG_STRING, NULL, 
          ADD_DIRECTORY_OPERATION,
-         N_("Directory to add to OAF configuration file"), N_("directory path")},
+         N_("Directory to add to configuration file"), N_("directory path")},
         {"display-directories", '\0', POPT_ARG_NONE, NULL, 
          DISPLAY_DIRECTORIES_OPERATION,
-         N_("Display directories in OAF configuration file"), NULL},
+         N_("Display directories in configuration file"), NULL},
         {"config-file-path", '\0', POPT_ARG_NONE, NULL, 
          DISPLAY_CONFIG_PATH_OPERATION,
-         N_("Display path to OAF configuration file"), NULL},
+         N_("Display path to configuration file"), NULL},
         POPT_AUTOHELP
         {NULL}
 };
@@ -233,8 +235,7 @@ int main (int argc, char **argv)
         int popt_option;
 
         /* init nls */
-        /*        setlocale (LC_ALL, ""); */
-        bindtextdomain (PACKAGE, OAF_LOCALEDIR);
+        bindtextdomain (PACKAGE, SERVER_LOCALEDIR);
         textdomain (PACKAGE);
 
         /* init popt */

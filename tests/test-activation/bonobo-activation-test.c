@@ -1,8 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
-#include <liboaf/liboaf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include <bonobo-activation/bonobo-activation.h>
+
 #include "empty.h"
 
 #define TOTAL_TEST_SCORE 13
@@ -10,11 +12,11 @@
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
 static char *
-oaf_exception_id (CORBA_Environment *ev)
+bonobo_activation_exception_id (CORBA_Environment *ev)
 {
         if (ev->_major == CORBA_USER_EXCEPTION) {
                 if (!strcmp (ev->_id, "IDL:OAF/GeneralError:1.0")) {
-                        OAF_GeneralError *err = CORBA_exception_value (ev);
+                        Bonobo_GeneralError *err = CORBA_exception_value (ev);
                         
                         if (!err || !err->description) {
                                 return "No general exception error message";
@@ -34,10 +36,10 @@ test_oafd (CORBA_Environment *ev, const char *type)
 {
         CORBA_Object ns;
 
-        ns = oaf_name_service_get (ev);
+        ns = bonobo_activation_name_service_get (ev);
         if (ev->_major != CORBA_NO_EXCEPTION) {
                 g_warning ("Exception '%s' (%s) finding oafd %s",
-                           oaf_exception_id (ev), ev->_id, type);
+                           bonobo_activation_exception_id (ev), ev->_id, type);
                 return FALSE;
         }
 
@@ -60,7 +62,7 @@ test_object (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 
 	} else if (ev->_major != CORBA_NO_EXCEPTION) {
 		g_warning ("Activation %s failed: %s\n", type,
-			   oaf_exception_id (ev));
+			   bonobo_activation_exception_id (ev));
 	} else {
                 return TRUE;
         }
@@ -79,7 +81,7 @@ test_empty (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 
         if (ev->_major != CORBA_NO_EXCEPTION) {
                 g_warning ("Call failed: %s\n",
-                           oaf_exception_id (ev));
+                           bonobo_activation_exception_id (ev));
                 return 0;
         } else {
                 fprintf (stderr, "Test %s succeeded\n", type);
@@ -95,35 +97,35 @@ main (int argc, char *argv[])
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
-	oaf_init (argc, argv);
+	bonobo_activation_init (argc, argv);
 
-/*      putenv("OAF_BARRIER_INIT=1"); */
+/*      putenv("Bonobo_BARRIER_INIT=1"); */
 
-	obj = oaf_activate ("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL,
+	obj = bonobo_activation_activate ("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL,
                             &ev);
         if (test_object (obj, &ev, "by query")) {
                 passed += test_empty (obj, &ev, "by query");
         }
 
 
-	obj = oaf_activate_from_id ("OAFIID:Empty:19991025", 0, NULL, &ev);
+	obj = bonobo_activation_activate_from_id ("OAFIID:Empty:19991025", 0, NULL, &ev);
         if (test_object (obj, &ev, "from id")) {
                 passed += test_empty (obj, &ev, "from id");
         }
 
 
-	obj = oaf_activate_from_id ("OAFAID:[OAFIID:Empty:19991025]", 0, NULL, &ev);
+	obj = bonobo_activation_activate_from_id ("OAFAID:[OAFIID:Empty:19991025]", 0, NULL, &ev);
         if (test_object (obj, &ev, "from aid")) {
                 passed += test_empty (obj, &ev, "from aid");
         }
 
 
         fprintf (stderr, "Broken link test ");
-        obj = oaf_activate_from_id ("OAFIID:Bogus:20000526", 0, NULL, &ev);
+        obj = bonobo_activation_activate_from_id ("OAFIID:Bogus:20000526", 0, NULL, &ev);
         if (ev._major == CORBA_NO_EXCEPTION) {
                 fprintf (stderr, "failed 1");
         } else {
-                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                fprintf (stderr, "passed 1 ('%s')", bonobo_activation_exception_id (&ev));
                 CORBA_exception_free (&ev);
                 passed++;
         }
@@ -137,11 +139,11 @@ main (int argc, char *argv[])
 
 
         fprintf (stderr, "Broken exe test ");
-        obj = oaf_activate_from_id ("OAFIID:Broken:20000530", 0, NULL, &ev);
+        obj = bonobo_activation_activate_from_id ("OAFIID:Broken:20000530", 0, NULL, &ev);
         if (ev._major == CORBA_NO_EXCEPTION) {
                 fprintf (stderr, "failed 1");
         } else {
-                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                fprintf (stderr, "passed 1 ('%s')", bonobo_activation_exception_id (&ev));
                 CORBA_exception_free (&ev);
                 passed++;
         }
@@ -155,11 +157,11 @@ main (int argc, char *argv[])
 
 
         fprintf (stderr, "Circular link test ");
-        obj = oaf_activate_from_id ("OAFIID:Circular:20000530", 0, NULL, &ev);
+        obj = bonobo_activation_activate_from_id ("OAFIID:Circular:20000530", 0, NULL, &ev);
         if (ev._major == CORBA_NO_EXCEPTION)
                 fprintf (stderr, "failed 1");
         else {
-                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                fprintf (stderr, "passed 1 ('%s')", bonobo_activation_exception_id (&ev));
                 CORBA_exception_free (&ev);
                 passed++;
         }
@@ -173,11 +175,11 @@ main (int argc, char *argv[])
 
 
         fprintf (stderr, "Server that doesn't register IID test ");
-        obj = oaf_activate_from_id ("OAFIID:NotInServer:20000717", 0, NULL, &ev);
+        obj = bonobo_activation_activate_from_id ("OAFIID:NotInServer:20000717", 0, NULL, &ev);
         if (ev._major == CORBA_NO_EXCEPTION) {
                 fprintf (stderr, "failed 1");
         } else {
-                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                fprintf (stderr, "passed 1 ('%s')", bonobo_activation_exception_id (&ev));
                 CORBA_exception_free (&ev);
                 passed++;
         }
@@ -190,14 +192,14 @@ main (int argc, char *argv[])
         fprintf (stderr, "\n");
 
         fprintf (stderr, "Server with IID but no type or location ");
-        obj = oaf_activate_from_id ("OAFIID:BrokenNoType:20000808", 0, NULL, &ev);
+        obj = bonobo_activation_activate_from_id ("OAFIID:BrokenNoType:20000808", 0, NULL, &ev);
         if (ev._major != CORBA_NO_EXCEPTION) {
                 fprintf (stderr, "failed (except) 1");
                 CORBA_exception_free (&ev);
         } else if (obj) {
                 fprintf (stderr, "failed (obj) 1");
         } else {
-                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                fprintf (stderr, "passed 1 ('%s')", bonobo_activation_exception_id (&ev));
                 passed++;
         }
         if (test_oafd (&ev, "with no-type/loc server")) {

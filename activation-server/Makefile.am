@@ -29,6 +29,7 @@ bonobo_activation_server_SOURCES=				\
 	object-directory-load.c					\
 	object-directory-activate.c				\
 	object-directory-config-file.c				\
+	object-directory-config-file.h				\
 	activation-server-main.c				\
 	server.h
 
