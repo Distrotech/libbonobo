@@ -1,3 +1,16 @@
+1999-09-14  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-canvas-component.c (gcc_render): If the is_buf is
+	FALSE, then allocate our buffer
+
+	* bonobo/gnome-bonobo-item.c (gbi_render): Do not queue an
+	update.  Thanks Federico!
+	(gbi_render): Optimization.  if is_buf is FALSE, then we do not
+	transfer the buffer across.
+
+	* bonobo/test-container.c (add_canvas_cmd): Make a bigger canvas.  
+	(item_event_handler): fix logic.
+	
 1999-09-11  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-object.c (gnome_object_object_destroy): Only

@@ -115,7 +115,7 @@ module Canvas {
 	};
 
 	const short IS_BG  = 1;
-	const short IS_BUF = 1;
+	const short IS_BUF = 2;
 
 	typedef double affine [6];
 
@@ -166,8 +166,25 @@ module Canvas {
 		void unmap ();
 
 		void draw   (in window_id drawable, in short x, in short y, in short width, in short height);
+
+		/**
+		 * render:
+		 * @buf: The render control buffer.
+		 * 
+		 * This version of render has buf->flags & IS_BUF == FALSE, 
+		 * so we avoid sending the buffer out, we just return it.
+		 *
+		 */
 		void render (inout Buf buf);
 
+		/**
+		 * contains:
+		 * @x: x coordinate 
+		 * @y: y coordinate
+		 *
+		 * Returns true if the point at @x, @y is contained inside
+		 * the item
+		 */
 		boolean contains (in double x, in double y);
 
 		void bounds (out double x1, out double x2, out double y1, out double y2);
