@@ -1,3 +1,12 @@
+2000-10-27  Ian Peters  <itp@helixcode.com>
+
+	* configure.in: set and AC_SUBST BONOBO_CURRENT, BONOBO_REVISION,
+	and BONOBO_AGE, to control the .so numbering of bonobo
+
+	* bonobo/Makefile.am: set -version-info in the LDFLAGS for bonobo,
+	bonobox, and bonobo-print, using the above, so that we can start
+	bumping this number when we break interface.
+
 2000-10-27  Joe Shaw  <joe@helixcode.com>
 
 	* monikers/bonobo-moniker-http.c (http_resolve): Use the "http"
