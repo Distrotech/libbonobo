@@ -13,9 +13,9 @@ module Bonobo {
 		exception CannotActivate { };
 
 		/* 'supports' is reserved */
-		boolean manufactures (in string goad_id); 
+		boolean manufactures (in string goadid); 
 
-		Object create_object (in string goad_id, in stringlist params)
+		Object create_object (in string goadid, in stringlist params)
 			raises (CannotActivate);
 	};
 };

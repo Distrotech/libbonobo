@@ -1,3 +1,15 @@
+2000-06-27  Miguel de Icaza  <miguel@helixcode.com>
+
+	* idl/bonobo-factory.idl: rename goad_id to goadid to avoid the
+	warning that ORBit is nicely generating.
+
+	* bonobo-idl/: New directory, contains my bonobo-idl compiler to
+	simplify the creation of Bonobo servers.
+
+2000-06-26  Miguel de Icaza  <miguel@helixcode.com>
+
+	* Makefile.am (SUBDIRS): Add Bonobo-idl to the compilation process
+
 2000-06-27  Michael Meeks  <michael@helixcode.com>
 
 	* storage-modules/Makefile.am (INCLUDES): add VFS_CFLAGS.
