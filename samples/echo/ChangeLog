@@ -1,3 +1,9 @@
+2001-10-05  Abel Cheung  <maddog@linux.org.hk>
+
+	* Bonobo_Sample_Echo.server.in: Rename bonobo-echo -> bonobo-echo-2 
+	  and echo-client -> echo-client-2 to avoid conflict with bonobo 1.0.x
+	* Makefile.am: Ditto.
+
 2001-08-31  Gustavo J A M Carneiro <ee96090@fe.up.pt>
 
 	* echo.c (echo_get_type): fixup GTypeInfo structure.

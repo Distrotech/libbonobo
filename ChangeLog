@@ -1,3 +1,10 @@
+2001-10-05  Abel Cheung  <maddog@linux.org.hk>
+
+	* monikers/Bonobo_Moniker_std.server.in.in: Havoc's patch
+	  to rename libmoniker_std.so -> libmoniker_std_2.so,
+	  avoiding conflict with bonobo 1.0.x .
+	* monikers/Makefile.am: Ditto.
+
 2001-09-27  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.103

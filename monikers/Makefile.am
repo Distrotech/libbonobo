@@ -23,9 +23,9 @@ server_DATA = Bonobo_Moniker_std.server
 @XML_I18N_MERGE_SERVER_RULE@
 
 monikerdir = $(libdir)/bonobo/monikers
-moniker_LTLIBRARIES = libmoniker_std.la
+moniker_LTLIBRARIES = libmoniker_std_2.la
 
-libmoniker_std_la_SOURCES =			\
+libmoniker_std_2_la_SOURCES =			\
 	bonobo-moniker-extender-stream.c  	\
 	bonobo-moniker-item.c			\
 	bonobo-moniker-new.c			\
@@ -38,5 +38,7 @@ libmoniker_std_la_SOURCES =			\
 	bonobo-moniker-query.h			\
 	bonobo-moniker-std.h            	\
 	bonobo-moniker-std.c			
+
+libmoniker_std_2_la_LDFLAGS = -module -avoid-version 
 
 EXTRA_DIST = Bonobo_Moniker_std.server.in.in

@@ -2,21 +2,22 @@
 # Makefile for the sample Echo server/client Bonobo components.
 #
 
-bin_PROGRAMS     = bonobo-echo echo-client
+bin_PROGRAMS     = bonobo-echo-2 echo-client-2
 noinst_LIBRARIES = libEcho.a
 
-bonobo_echo_SOURCES =		\
+bonobo_echo_2_SOURCES =		\
 	main.c			\
 	echo.c			\
 	echo.h
 
-bonobo_echo_LDADD =				\
+bonobo_echo_2_LDADD =				\
 	$(top_builddir)/bonobo/libbonobo-2.la	\
 	$(LIBBONOBO_LIBS)			\
 	libEcho.a				\
 	$(INTLLIBS)
 
-echo_client_LDADD =				\
+echo_client_2_SOURCES = echo-client.c
+echo_client_2_LDADD =				\
 	$(top_builddir)/bonobo/libbonobo-2.la	\
 	$(LIBBONOBO_LIBS)			\
 	libEcho.a				\
