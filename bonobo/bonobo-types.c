@@ -225,12 +225,6 @@ BONOBO_TYPE_CORBA_OBJECT_IMPL (corba_object, "CorbaObject", TC_CORBA_Object, FAL
 BONOBO_TYPE_CORBA_OBJECT_IMPL (unknown, "BonoboUnknown", TC_Bonobo_Unknown, TRUE);
 
 static gpointer
-corba_any_init (void)
-{
-	return CORBA_any__alloc ();
-}
-
-static gpointer
 corba_any_copy (gpointer any)
 {
 	g_warning (G_STRLOC);
@@ -248,7 +242,7 @@ bonobo_corba_any_get_type (void)
 {
 	static GType type = 0;
 	if (!type)
-		type = g_boxed_type_register_static ("BonoboCorbaAny", corba_any_init,
+		type = g_boxed_type_register_static ("BonoboCorbaAny", NULL,
 						     corba_any_copy, corba_any_free, FALSE);
 	return type;
 }
@@ -297,12 +291,6 @@ CORBA_exception__alloc (void)
 }
 
 static gpointer
-corba_exception_init (void)
-{
-	return CORBA_exception__alloc ();
-}
-
-static gpointer
 corba_exception_copy (gpointer any)
 {
 	CORBA_Environment *src, *dest;
@@ -330,7 +318,7 @@ bonobo_corba_exception_get_type (void)
 {
 	static GType type = 0;
 	if (!type)
-		type = g_boxed_type_register_static ("BonoboCorbaException", corba_exception_init,
+		type = g_boxed_type_register_static ("BonoboCorbaException", NULL,
 						     corba_exception_copy, corba_exception_free, FALSE);
 	return type;
 }

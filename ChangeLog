@@ -1,5 +1,12 @@
 2001-09-10  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/bonobo-types.c
+	(bonobo_corba_any_get_type): Don't provide a `boxed_init' function.
+	(bonobo_corba_exception_get_type): Likewise.
+	(corba_any_init, corba_exception_init): Removed.
+
+2001-09-10  Martin Baulig  <baulig@suse.de>
+
 	* tests/test-moniker.c: The expected result of "a:!b:" is "!b:",
 	not "b:" - see my ChangeLog entry for bonobo/bonobo-moniker-util.c
 	(bonobo_moniker_util_parse_name) from 2001-08-11.
