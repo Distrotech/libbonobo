@@ -47,11 +47,11 @@ msgstr "Posku¹eno je bilo nepodprto dejanje toka"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "V/I napaka na toku"
+msgstr "Napaka V/I na toku"
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "V/I napaka na shrambi"
+msgstr "Napaka V/I na shrambi"
 
 #: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
