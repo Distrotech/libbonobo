@@ -1,3 +1,63 @@
+1999-09-03  Nat Friedman  <nat@gnome-support.com>
+
+	* samples/paint-component-simple.c (view_button_press_cb): New
+ 	function to pop up a component-side verb menu.
+	(view_factory): Connect to the button_press_event on the drawing
+ 	area.
+	(container_exit_cmd): Destroy the GnomeContainer object on exit.
+	(component_shutdown): New function.
+	(component_view_frame_system_exception_cb): New function.
+	(component_add_view): Connect to the system_exception signal on
+ 	the view frame.
+	(component_client_site_system_exception_cb): New function.
+	(container_activate_component): Connect to the system_exception
+ 	signal on the client site.
+	(container_container_system_exception_cb): New function.
+	(container_create): Connect to the system_exception signal on the
+ 	GnomeContainer.
+
+	* components/text-plain/bonobo-text-plain.c (destroy_view): Don't
+ 	unref the widgets.
+
+	* bonobo/gnome-view.c
+	(gnome_view_execute_verb): New function.
+ 	(impl_GNOME_View_do_verb): Call gnome_view_execute_verb.
+	(gnome_view_construct): Moved bonobo_setup_x_error_handler call
+ 	here.
+	(gnome_view_popup_verbs): New function.
+
+	* bonobo/gnome-ui-handler.c
+ 	(toolbar_toplevel_item_remove_widgets_recursive): New function.
+	(toolbar_toplevel_toolbar_override_notify_recursive): Ditto.
+	(impl_toolbar_overridden): Filled in.
+	(toolbar_toplevel_create_item): Added a call to
+ 	set_sensitivity_internal and set_toggle/radio_state_internal upon
+ 	toolbar widget creation.
+	(gnome_ui_handler_toolbar_free_list): Implemented.
+	(gnome_ui_handler_toolbar_free_tree): Implemented.
+	(gnome_ui_handler_toolbar_get_pos): Implemented.
+	(gnome_ui_handler_toolbar_set_sensitivity): Implemented.
+	(gnome_ui_handler_toolbar_get_sensitivity): Implemented.
+
+	* bonobo/gnome-persist-stream.c (init_persist_stream_corba_class):
+ 	Hook up the implementation for is_dirty.
+
+	* bonobo/gnome-main.c (bonobo_init): Add a note about EPIPE.
+
+	* bonobo/gnome-embeddable.c (gnome_embeddable_view_destroy_cb):
+ 	Disable ping again.
+	(gnome_embeddable_get_verbs): New function.
+
+	* bonobo/gnome-container.c (gnome_container_add): Pass the
+ 	container as the closure on the ClientSite destroy signal.
+
+	* bonobo/gnome-bonobo.h: Include gnome-bonobo-widget.h
+
+	* bonobo/gnome-bonobo-widget.c: Now overrides size_allocate and
+ 	size_request.
+
+	* bonobo/Makefile.am: Added test-bw and gnome-bonobo-widget.
+
 1999-09-02  Michael Meeks  <michael@imaginator.com>
 
 	* doc/debugging.txt: Updated.
