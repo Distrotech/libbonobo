@@ -229,7 +229,7 @@ od_process_server_xml_node (xmlNodePtr node,
 
         if (error != NULL) {
                 /* FIXME: should syslog */
-                g_print ("%s", error);
+                g_print ("%s\n", error);
                         
                 g_free (error);
                 xmlFree (iid);
