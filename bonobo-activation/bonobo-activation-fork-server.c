@@ -346,15 +346,38 @@ bonobo_activation_server_by_forking (
 
 		gioc = g_io_channel_unix_new (iopipes[0]);
 
-                watch = linc_io_add_watch (
-                        gioc, 
-                        G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR,
-                        (GIOFunc) & handle_exepipe, &ai);
+		if (linc_get_threaded ()) {
+                        GSource *source;
+                        GMainContext *ctx;
 
-                while (!ai.done)
-                        linc_main_iteration (TRUE);
+                        /* The calling code needs to be multi-threaded */
+                        g_warning ("FIXME: re-factor this for efficiency\n");
+                        g_warning ("FIXME: we can't use this path to activate "
+                                   "b-a-s first time - it's a re-enterancy hazard\n");
+                        ctx = g_main_loop_get_context (NULL);
 
-                linc_io_remove_watch (watch);
+                        source = g_io_create_watch
+                                (gioc, G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR);
+                        g_source_set_callback (source, (GSourceFunc) handle_exepipe, &ai, NULL);
+                        g_source_attach (source, ctx);
+
+                        /* We have to be able to process incoming CORBA calls here */
+                        while (!ai.done)
+                                g_main_context_iteration (ctx, TRUE);
+
+                        g_source_destroy (source);
+                        g_source_unref (source);
+                } else {
+                        watch = linc_io_add_watch
+                                (gioc, 
+                                 G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR,
+                                 (GIOFunc) & handle_exepipe, &ai);
+
+                        while (!ai.done)
+                                linc_main_iteration (TRUE);
+
+                        linc_io_remove_watch (watch);
+                }
 		g_io_channel_unref (gioc);
 		fclose (iorfh);
 
