@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2003-06-09 17:26+0100\n"
-"PO-Revision-Date: 2003-01-13 14:37+0100\n"
+"POT-Creation-Date: 2003-06-13 04:43+0200\n"
+"PO-Revision-Date: 2003-06-14 12:00+0100\n"
 "Last-Translator: Huib Kleinhout <huib@stack.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -195,11 +195,11 @@ msgstr "Bibliotheek '%s' bevatte geen '%s'"
 
 #: bonobo/bonobo-object.c:910
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Aangepaste CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
