@@ -245,10 +245,10 @@ gnome_object_activate (const char *object_desc, GoadActivationFlags flags)
 	
 	g_return_val_if_fail (object_desc != NULL, NULL);
 
-	if (strncmp (object_desc, "moniker:", 8) != 0)
+	if (strncmp (object_desc, "moniker_url:", 12) != 0)
 		return gnome_object_activate_with_goad_id (NULL, object_desc, flags, NULL);
 
-	moniker_info = parse_moniker_string (object_desc + 8);
+	moniker_info = parse_moniker_string (object_desc + 12);
 	if (g_list_length (moniker_info) < 2){
 		moniker_info_list_destroy (moniker_info);
 		return NULL;

@@ -2,9 +2,8 @@
 #ifndef _GNOME_MONIKER_H_
 #define _GNOME_MONIKER_H_
 
-#include <bonobo/gnome-bind-context.h>
-#include <bonobo/gnome-persist-stream.h>
-#include <libgnorba/gnorba.h>
+#include <libgnome/gnome-defs.h>
+#include <gtk/gtkobject.h>
 
 BEGIN_GNOME_DECLS
 
@@ -17,43 +16,24 @@ BEGIN_GNOME_DECLS
 struct _GnomeMoniker;
 typedef struct _GnomeMoniker GnomeMoniker;
 
-typedef CORBA_Object (*GnomeMonikerBindFn)(GnomeMoniker *moniker,
-					   GNOME_BindOptions bind_options,
-					   GNOME_Moniker left_moniker,
-					   void *closure);
-
 struct _GnomeMoniker {
-	GnomePersistStream persist_stream;
-	GnomeMonikerBindFn bind_function;
-	void *bind_function_closure;
+	char *goadid, *url;
+	GList *items;
 };
 
 typedef struct {
-	GnomePersistStreamClass parent_class;
+	GtkObjectClass parent_class;
 } GnomeMonikerClass;
 
-GtkType           gnome_moniker_get_type   (void);
-GnomeMoniker	 *gnome_moniker_new        (const char *moniker_goad_id,
-					    GnomeMonikerBindFn bind_function,
-					    void *bind_function_closure);
-GnomeMoniker     *gnome_moniker_construct  (GnomeMoniker *moniker,
-					    GNOME_Moniker corba_moniker,
-					    const char *moniker_goad_id,
-					    GnomeMonikerBindFn bind_function,
-					    void *bind_function_closure);
+GtkType           gnome_moniker_get_type         (void);
+GnomeMoniker	 *gnome_moniker_new              (void);
+void              gnome_moniker_set_server       (GnomeMoniker *moniker,
+					          const char *goad_id,
+					          const char *filename);
+void              gnome_moniker_append_item_name (GnomeMoniker *moniker,
+						  const char *item_name);
+char             *gnome_moniker_get_as_string    (GnomeMoniker *moniker);
 
-GnomeBindContext *gnome_bind_context_new   (void);
-GnomeMoniker     *gnome_parse_display_name (GnomeBindContext *bind,
-					    const char *display_name,
-					    int *chars_parsed);
-
-CORBA_Object      find_moniker_in_naming_service (gchar *name, gchar *kind);
-
-CORBA_Object      gnome_moniker_create_corba_object (GnomeMoniker *object);
-
-
-/* The CORBA vepv for the class */
-extern POA_GNOME_Moniker__vepv gnome_moniker_vepv;
 
 END_GNOME_DECLS
 

@@ -2,230 +2,188 @@
 /*
  * GNOME Moniker
  *
- * Authors:
- *   Miguel de Icaza (miguel@kernel.org)
- *   Nat Friedman (nat@gnome-support.com)
+ * Author:
+ *   Miguel de Icaza (miguel@gnu.org)
+ *
+ * (C) 1999 International GNOME Support.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
 #include <bonobo/gnome-moniker.h>
+#include <strings.h>
 
-/* Parent GTK object class */
-static GnomePersistStreamClass *gnome_moniker_parent_class;
-
-/* The CORBA entry point vectors */
-static POA_GNOME_Moniker__epv gnome_moniker_epv;
-
-/* The CORBA vepv for the class */
-POA_GNOME_Moniker__vepv gnome_moniker_vepv;
-
-static CORBA_Object
-impl_bind_to_object (PortableServer_Servant servant,
-		     const GNOME_BindOptions bind_context,
-		     const GNOME_Moniker left_moniker,
-		     const CORBA_char *requested_interface,
-		     CORBA_Environment *ev)
-{
-	GnomeMoniker *moniker;
-	
-	moniker = GNOME_MONIKER (gnome_object_from_servant (servant));
-
-	return (*moniker->bind_function)(
-		moniker, bind_context, left_moniker,
-		moniker->bind_function_closure);
-}
-
-
-static CORBA_Object
-impl_bind_to_storage (PortableServer_Servant servant,
-		      const GNOME_BindOptions *bind_context,
-		      const GNOME_Moniker left_moniker,
-		      const CORBA_char *persistent_interface_name,
-		      CORBA_Environment *ev)
-{
-	g_error ("not implemented");
-	return CORBA_OBJECT_NIL;
-}
-
-
-static GNOME_Moniker
-impl_compose_with (PortableServer_Servant servant,
-		   const GNOME_Moniker right,
-		   const CORBA_boolean only_if_exists,
-		   CORBA_Environment *ev)
-{
-	g_error ("not implemented");
-	return CORBA_OBJECT_NIL;
-}
-
-static GNOME_Moniker_MonikerList *
-impl_enum_pieces (PortableServer_Servant servant,
-		  const GNOME_Moniker composite_moniker,
-		  CORBA_Environment *ev)
-{
-	g_error ("not implemented");
-	return CORBA_OBJECT_NIL;
-}
-
-
-static CORBA_char *
-impl_get_display_name (PortableServer_Servant servant,
-		       const GNOME_BindOptions *bind_context,
-		       const GNOME_Moniker left,
-		       CORBA_Environment *ev)
-{
-	g_error ("not implemented");
-	return CORBA_OBJECT_NIL;
-}
-
-static GNOME_Moniker
-impl_parse_display_name (PortableServer_Servant servant,
-			 const GNOME_BindOptions *bind_context,
-			 const GNOME_Moniker left,
-			 const CORBA_char *display_name,
-			 CORBA_short * display_name_bytes_parsed,
-			 CORBA_Environment *ev)
-{
-	g_error ("not implemented");
-	return CORBA_OBJECT_NIL;
-}
-
-static void
-init_moniker_corba_class (void)
-{
-	/* Setup the GNOME::Moniker methods */
-	gnome_moniker_epv.bind_to_object     = &impl_bind_to_object;
-	gnome_moniker_epv.bind_to_storage    = &impl_bind_to_storage;
-	gnome_moniker_epv.compose_with       = &impl_compose_with;
-	gnome_moniker_epv.enum_pieces        = &impl_enum_pieces;
-	gnome_moniker_epv.get_display_name   = &impl_get_display_name;
-	gnome_moniker_epv.parse_display_name = &impl_parse_display_name;
-		
-	/* Now the Vepv */
-	gnome_moniker_vepv.GNOME_Unknown_epv = &gnome_object_epv;
-	gnome_moniker_vepv.GNOME_Persist_epv = &gnome_persist_epv;
-	gnome_moniker_vepv.GNOME_PersistStream_epv = &gnome_persist_stream_epv;
-	gnome_moniker_vepv.GNOME_Moniker_epv = &gnome_moniker_epv;
-}
-
-static void
-gnome_moniker_class_init (GnomeMonikerClass *class)
-{
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
-	GnomePersistStreamClass *ps_class = (GnomePersistStreamClass *) class;
-	
-	gnome_moniker_parent_class = gtk_type_class (gnome_persist_stream_get_type ());
-
-	init_moniker_corba_class ();
-}
-
+GtkObject *gnome_moniker_parent_class;
 /**
- * gnome_moniker_create_corba_object:
- * @moniker: the GnomeMoniker moniker object to bind the servant to
- *
- * Creates and activates a CORBA object for the type GNOME::Moniker
- * this object will be bound to the @moniker GnomeMoniker code.
- *
- * This routine is used by Moniker implementations.
- *
- * Returns: The created CORBA object.
+ * gnome_moniker_set_server:
+ * @moniker: the moniker on which we act.
+ * @goadid: a GOAD ID for the server
+ * @filename: the url on which this
  */
-CORBA_Object
-gnome_moniker_create_corba_object (GnomeMoniker *moniker)
+void
+gnome_moniker_set_server (GnomeMoniker *moniker, const char *goadid, const char *url)
 {
-	POA_GNOME_Moniker *servant;
-	GnomeObject *object;
-	
-	g_return_val_if_fail (moniker != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (GNOME_IS_MONIKER (moniker), CORBA_OBJECT_NIL);
+	g_return_if_fail (moniker != NULL);
+	g_return_if_fail (GNOME_IS_MONIKER (moniker));
+	g_return_if_fail (goadid != NULL);
+	g_return_if_fail (url != NULL);
 
-	object = GNOME_OBJECT (moniker);
-	
-	servant = (POA_GNOME_Moniker *)g_new0 (GnomeObjectServant, 1);
-	servant->vepv = &gnome_moniker_vepv;
+	if (moniker->goadid)
+		g_free (moniker->goadid);
+	moniker->goadid = g_strdup (goadid);
 
-	POA_GNOME_Moniker__init ((PortableServer_Servant) servant, &object->ev);
-	if (object->ev._major != CORBA_NO_EXCEPTION) {
-		g_free (servant);
-		return CORBA_OBJECT_NIL;
+	if (moniker->url)
+		g_free (moniker->url);
+	moniker->url = g_strdup (url);
+}
+	
+/**
+ * gnome_moniker_append_item_name:
+ * @moniker: the moniker on which we act.
+ * @item_name: a string describing the item to append.
+ */
+void
+gnome_moniker_append_item_name (GnomeMoniker *moniker, const char *item_name)
+{
+	g_return_if_fail (moniker != NULL);
+	g_return_if_fail (GNOME_IS_MONIKER (moniker));
+	g_return_if_fail (item_name != NULL);
+
+	moniker->items = g_list_prepend (moniker->items, g_strdup (item_name));
+}
+
+/*
+ * Escapes a strings for use in a moniker
+ */
+static char *
+escape (const char *str)
+{
+	const char *p;
+	char *q, *res;
+	int len = 0;
+
+	for (p = str; *p; p++){
+		if (*p == ',' || *p == '\\')
+			len++;
+		len++;
+	}
+	len++;
+	
+	res = q = g_malloc (len);
+
+	if (!res)
+		return NULL;
+		
+	for (p = str; *p; p++){
+		if (*p == ',' || *p == '\\')
+			*q++ = '\\';
+		*q++ = *p;
 	}
 
-	return gnome_object_activate_servant (object, servant);
+	return res;
 }
 
 /**
- * gnome_moniker_construct:
- * @moniker: The GnomeMoniker object to be initialized.
- * @corba_moniker: The CORBA object supporting GNOME::Moniker.
- * @bind_function: The function which is called when the
- * bind_to_object() method is invoked on the #GnomeMoniker object.
- * @bind_function_closure: The closure pointer passed to @bind_function.
+ * gnome_moniker_get_as_string:
+ * @moniker: the moniker object we operate on.
  *
- * Initializes the @moniker GnomeMoniker object with the specified
- * @bind_function and CORBA object @corba_moniker.  The @corba_moniker
- * object must support the GNOME_Moniker interface.
- *
- * Returns: The initialized GnomeMoniker object.
+ * Returns a textual representation of the moniker @moniker.  A %NULL
+ * is returned on any errors encountered.
  */
-GnomeMoniker *
-gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker,
-			 const char *moniker_goad_id,
-			 GnomeMonikerBindFn bind_function,
-			 void *bind_function_closure)
+char *
+gnome_moniker_get_as_string (GnomeMoniker *moniker)
 {
+	int n, i;
+	GList *l;
+	char *res;
+	char **array;
+	int len;
+	
 	g_return_val_if_fail (moniker != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MONIKER (moniker), NULL);
-	g_return_val_if_fail (corba_moniker != CORBA_OBJECT_NIL, NULL);
-	g_return_val_if_fail (bind_function != NULL, NULL);
-	
-	gnome_persist_stream_construct (GNOME_PERSIST_STREAM (moniker),
-					(GNOME_Moniker) corba_moniker,
-					moniker_goad_id,
-					NULL, NULL, NULL);
 
-	moniker->bind_function = bind_function;
-	moniker->bind_function_closure = bind_function_closure;
+	if (moniker->goadid == NULL)
+		return NULL;
+
+	if (moniker->url == NULL)
+		return NULL;
 	
-	return moniker;
+	n = 2 + g_list_length (moniker->items);
+
+	array = g_new (char *, n);
+	if (array == NULL)
+		return NULL;
+
+	array [0] = escape (moniker->goadid);
+	array [1] = escape (moniker->url);
+
+	for (i = 0, l = moniker->items; l; l = l->next)
+		array [i+2] = escape (l->data);
+
+	len = sizeof (sizeof ("moniker_url:"));
+	for (i = 0; i < n; i++)
+		len = strlen (array [i]) + 1;
+
+	res = g_malloc (len);
+	if (res != NULL){
+		strcpy (res, "moniker_url:");
+		for (i = 0; i < n; i++){
+			strcat (res, array [i]);
+			strcat (res, ",");
+		}
+	}
+	for (i = 0; i < n; i++)
+		g_free (array [i]);
+	g_free (array);
+
+	return res;
 }
 
 /**
  * gnome_moniker_new:
- * @moniker_goad_id: The GOAD ID registered by this moniker.
- * @bind_function: The routine which is invoked for the bind_to_object() interface method.
- * @bind_function_closure: The closure data passed to @bind_function when it is called.
  *
- * Creates a new GnomeMoniker object and the corresponding CORBA interface using the specified
- * bind_to_object() callback, @bind_function.
+ * Creates a new GnomeMoniker object
  *
  * Returns: The newly-constructed GnomeMoniker object.
  */
+
+/* The parent class for GnomeMoniker */
+static GtkObjectClass *parent_class;
+
 GnomeMoniker *
-gnome_moniker_new (const char *moniker_goad_id,
-		   GnomeMonikerBindFn bind_function,
-		   void *bind_function_closure)
+gnome_moniker_new (void)
 {
-	GNOME_Moniker corba_moniker;
 	GnomeMoniker *moniker;
 
-	g_return_val_if_fail (bind_function != NULL, NULL);
-
 	moniker = gtk_type_new (gnome_moniker_get_type ());
-	corba_moniker = gnome_moniker_create_corba_object (GNOME_OBJECT (moniker));
-	if (corba_moniker == CORBA_OBJECT_NIL) {
-		gtk_object_destroy (GTK_OBJECT (moniker));
-		return NULL;
-	}
 
-	return gnome_moniker_construct (
-		moniker, corba_moniker, moniker_goad_id,
-		bind_function, bind_function_closure);
+	return moniker;
 }
 
 static void
-gnome_moniker_init (GnomeObject *object)
+gnome_moniker_destroy (GtkObject *object)
 {
+	GnomeMoniker *moniker = (GnomeMoniker *) object;
+	GList *l;
+	
+	if (moniker->goadid)
+		g_free (moniker->goadid);
+	if (moniker->url)
+		g_free (moniker->url);
+
+	for (l = moniker->items; l; l = l->next){
+		char *string = l->data;
+
+		g_free (string);
+	}
+	g_list_free (moniker->items);
+	(*parent_class->destroy)(object);
+}
+
+static void
+gnome_moniker_class_init (GtkObjectClass *object_class)
+{
+	gnome_moniker_parent_class = gtk_type_class (gtk_object_get_type ());
+	
+	object_class->destroy = gnome_moniker_destroy;
 }
 
 /**
@@ -240,17 +198,17 @@ gnome_moniker_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/Moniker:1.0",
+			"GnomeMoniker",
 			sizeof (GnomeMoniker),
 			sizeof (GnomeMonikerClass),
 			(GtkClassInitFunc) gnome_moniker_class_init,
-			(GtkObjectInitFunc) gnome_moniker_init,
+			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved 1 */
 			NULL, /* reserved 2 */
 			(GtkClassInitFunc) NULL
 		};
 
-		type = gtk_type_unique (gnome_persist_stream_get_type (), &info);
+		type = gtk_type_unique (gtk_object_get_type (), &info);
 	}
 
 	return type;

@@ -1,3 +1,11 @@
+1999-08-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-object-client.c (gnome_object_activate): Use
+	"moniker_url:" instead of "moniker:"
+
+	* bonobo/gnome-moniker.c: new implementation of this file.
+	Simple creation of monikers and rendering them as strings.
+
 1999-08-03  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-object.c (gnome_object_destroy): Do not release the
