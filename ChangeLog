@@ -1,3 +1,25 @@
+2003-02-03  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/api/libbonobo.hierarchy: Removed from version control, since
+	it is a purely generated file.
+
+	* doc/api/libbonobo.signals: Removed from version control, since
+	it is a purely generated file.
+
+	* doc/api/tmpl/bonobo-object.sgml: Removed the comment "if you are
+	looking to implement a CORBA interface you want to see
+	#BonoboXObject"; It doesn't make much sense since libbonobo 2.0.
+
+	* doc/api/libbonobo-sections.txt: Removed the 'bonobo-transient'
+	section.
+
+	* doc/api/Makefile.am (HTML_IMAGES): Added unknown.png.
+
+	* doc/api/tmpl/bonobo-object.sgml: Include figure with the
+	Bonobo::Unknown interface.
+
+	* doc/api/figures/Makefile.am (diagrams): Added unknown.dia.
+
 2003-01-23  Thomas Vander Stichele <thomas@apestaart.org>
 
  	* configure.in: fix aclocal maintainer mode 

@@ -32,7 +32,7 @@ IGNORE_HFILES=
 # Images to copy into HTML directory.
 HTML_IMAGES = figures/persist.png figures/persist-file.png\
 	      figures/persist-storage.png figures/persist-stream.png\
-              figures/stream.png figures/storage.png
+              figures/stream.png figures/storage.png figures/unknown.png
 
 # Extra SGML files that are included by $(DOC_MAIN_SGML_FILE).
 content_files = faq.xml debugging.xml properties.xml refcounting.xml
