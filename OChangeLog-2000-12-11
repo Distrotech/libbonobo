@@ -1,3 +1,17 @@
+2000-11-17  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-ui-util.c (find_pixmap_in_path): New static
+	function. If the filename is already a full path name, return
+	it. Otherwise, check gnome_pixmap_file(). If we still don't have
+	a pixmap, search it in the GNOME_PATH.
+	(bonobo_ui_util_xml_get_icon_pixbuf): Use find_pixmap_in_path()
+	for "filename" type icons.
+
+	* bonobo/bonobo-ui-utils.c (bonobo_ui_util_fixup_icons): New static
+	function. This walks over the XML tree and replaces
+	`pixtype="filename" pixname="foo"' with the encoded pixbuf data.
+	(bonobo_ui_util_new_ui): Call bonobo_ui_util_fixup_icons() here.
+
 2000-11-16  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-win.c: (menu_sync_state): Need to set state of
