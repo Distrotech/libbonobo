@@ -5,3 +5,6 @@ API issues
 	  a construct time property ?
 
 UI stuff - need a CORBA_Object bonobo_widget_query_interface () method.
+publicize bonobo_socket_add_id.
+
+	+ hide / deprecate BonoboUINode
