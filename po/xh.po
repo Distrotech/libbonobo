@@ -9,28 +9,24 @@ msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-14 04:32+0100\n"
-"PO-Revision-Date: 2005-01-30 21:18+0200\n"
+"PO-Revision-Date: 2005-02-17 09:50+0200\n"
 "Last-Translator: Canonical Ltd <translations@canonical.com>\n"
 "Language-Team: Xhosa <xh-translate@ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# Akufumanekanga
 #: activation-server/activation-context-corba.c:470
-#, fuzzy
 msgid "Couldn't find which child the server was listed in"
-msgstr "Fumananga mntwana iseva edweliswe kuye"
+msgstr "Akufumanekanga mntwana i-server edweliswe kuye"
 
 #: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
 msgstr "Asiyo-ID yokusebenza elungileyo"
 
-# .server should remain untranslated
 #: activation-server/activation-server-main.c:68
-#, fuzzy
 msgid "Directory to read .server files from"
-msgstr "Uvimba weefayili ' iseva'"
+msgstr "Uvimba weefayili .server"
 
 #: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
@@ -44,12 +40,10 @@ msgstr "Isebenza njenge-ActivationContext (okumiselweyo kunjenge-ObjectDirectory
 msgid "File descriptor to write IOR to"
 msgstr "Ifayili echazayo ishicilele i-IOR"
 
-# I-FD
 #: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:200
-#, fuzzy
 msgid "FD"
-msgstr "i-FD"
+msgstr "I-FD"
 
 #: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
@@ -90,28 +84,24 @@ msgstr "Ifayili yokumiselwa kwenkqubo yokwenza ukuba iBonobo isebenze ayifundwan
 msgid "Race condition activating server '%s'"
 msgstr "Iseva yemeko i-Race yokwenza ukuba isebenze '%s'"
 
-# i-NULL
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
 msgstr "I-NULL iid ayilunganga"
 
-# i-iid
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "I-iid %s inohlobo oluyi-NULL"
 
-# i-iid
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "I-iid %s inendawo eyi-NULL"
 
-# uphawu
 #: activation-server/object-directory-load.c:111
 #, fuzyy, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "Uphawu olungalunganga '%c' in iid '%s'"
+msgstr "uphawu olungalunganga '%c' in iid '%s'"
 
 #: activation-server/object-directory-load.c:305
 #, c-format
@@ -181,11 +171,10 @@ msgstr "Inqanda ukubhalisa kweseva nge-OAF"
 msgid "Bonobo activation options"
 msgstr "Iindlela ekukhethwa kuzo zokusebenza ze-Bonobo"
 
-# i-g_module. looks untranslated
 #: bonobo-activation/bonobo-activation-shlib.c:107
-#, fuzzy, c-format
+#, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr "I-g_module_open of `%s' failed with `%s'"
+msgstr "i-g_module_open nge `%s' ayiphumelelanga nge `%s'"
 
 #: bonobo-activation/bonobo-activation-shlib.c:126
 #: bonobo-activation/bonobo-activation-shlib.c:163
@@ -227,17 +216,13 @@ msgstr "Isenzo esingaxhaswanga besizanyiwe"
 msgid "IO Error"
 msgstr "Impazamo ye-IO"
 
-# lesoluli-nkcazo
 #: bonobo/bonobo-exception.c:160
-#, fuzzy
 msgid "Invalid argument value"
-msgstr "Ixabiso lesoluli nkcazo esingalunganga"
+msgstr "Ixabiso lesoluli-nkcazo esingalunganga"
 
-# Akufumanekanga nto
 #: bonobo/bonobo-exception.c:164
-#, fuzzy
 msgid "Object not found"
-msgstr "Ayifumanekanga"
+msgstr "Akufumanekanga nto"
 
 #: bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
@@ -291,21 +276,17 @@ msgstr "Into ayiyondawo yokugcina"
 msgid "Storage is not empty"
 msgstr "Indawo yokugcina iqulathile"
 
-# inkcazelo
 #: bonobo/bonobo-exception.c:210
-#, fuzzy
 msgid "malformed user interface XML description"
-msgstr "Inkcazelo yomdibaniso wemida i-XML yomsebenzisi engenziwanga kakuhle"
+msgstr "inkcazelo yomdibaniso wemida i-XML yomsebenzisi engenziwanga kakuhle"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
 msgstr "indlela engalunganga eya kwinto yomdibaniso wemida ye-XML yomsebenzisi"
 
-# Untranslated
 #: bonobo/bonobo-exception.c:216
-#, fuzzy
 msgid "the requested UI attribute didn't exist"
-msgstr "the requested UI attribute didn't exist"
+msgstr "uphawu lwe-UI oluceliweyo alukhange lubekho"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
@@ -315,17 +296,13 @@ msgstr "Umyalelo okanye isenzi esingaziwayo"
 msgid "Command is insensitive"
 msgstr "Umyalelo awuchaphazeleki"
 
-# uhlobo
 #: bonobo/bonobo-exception.c:226
-#, fuzzy
 msgid "incorrect data type"
-msgstr "Uhlobo lweenkcukacha olungalunganga"
+msgstr "uhlobo lweenkcukacha olungalunganga"
 
-# uvimba
 #: bonobo/bonobo-exception.c:229
-#, fuzzy
 msgid "stream not found"
-msgstr "Uvimba akafumaneki"
+msgstr "uvimba akafumaneki"
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
@@ -339,11 +316,9 @@ msgstr "uphawu lunohlobo olungalunganga"
 msgid "property is read only"
 msgstr "uphawu lelokufundwa kuphela"
 
-# Capitalisation
 #: bonobo/bonobo-exception.c:242
-#, fuzzy
 msgid "config database backend failed "
-msgstr "Isigcini solwazi sokumiselwa kwenkqubo ekupheleni akuphumelelanga"
+msgstr "isigcini solwazi sokumiselwa kwenkqubo ekupheleni akuphumelelanga"
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
@@ -377,7 +352,7 @@ msgstr "Akukwazekanga ukwazisa amaxabiso eenkcukacha zeBonobo"
 #: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "Ayiphumelelanga ukusombulula, okanye ukwandisa i-%s"
+msgstr "Ayiphumelelanga ukusombulula, okanye ukwandisa i-'%s"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
@@ -405,35 +380,25 @@ msgstr "I-moniker ephathaphatha i-ORB IOR"
 msgid "Standard Moniker factory"
 msgstr "Ifektri ye-Moniker eqhelekileyo"
 
-# i-moniker
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
-#, fuzzy
 msgid "generic Oaf activation moniker"
-msgstr "I-moniker yohlobo oluthile lwe-Oaf eyenza isebenze"
+msgstr "i-moniker yohlobo oluthile lwe-Oaf eyenza isebenze"
 
-# i-moniker
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
-#, fuzzy
 msgid "generic Oaf query moniker"
-msgstr "I-moniker yohlobo oluthile lwe-Oaf yombuzo"
+msgstr "i-moniker yohlobo oluthile lwe-Oaf yombuzo"
 
-# i-moniker
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
-#, fuzzy
 msgid "generic factory 'new' moniker"
-msgstr "I-moniker 'entsha' yohlobo oluthile yefektri"
+msgstr "i-moniker 'entsha' yohlobo oluthile yefektri"
 
-# i-moniker
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
-#, fuzzy
 msgid "generic item moniker"
-msgstr "I-moniker yento yohlobo oluthile"
+msgstr "i-moniker yento yohlobo oluthile"
 
-# i-moniker
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
-#, fuzzy
 msgid "stream MonikerExtender"
-msgstr "I-MonikerExtender kavimba"
+msgstr "i-MonikerExtender kavimba"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
@@ -460,9 +425,9 @@ msgid "Could not create an instance of the sample echo component"
 msgstr "Andikwazanga ukwenza imo yelungu lomzekelo wentlokoma"
 
 #: samples/echo/echo-client.c:45
-#, fuzzy, c-format
+#, c-format
 msgid "An exception occured '%s'"
-msgstr "Kwenzeke inkqubo esebenzana neempazamo '%s'"
+msgstr "Kwenzeke into enxaxhileyo '%s'"
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
@@ -495,11 +460,9 @@ msgstr "%s sele ikwifayili yokumiselwa kwenkqubo\n"
 msgid "there is not a properly structured configuration file\n"
 msgstr "akukho fayili eyi yokumiselwa kwenkqubo eyakheke kakuhle\n"
 
-# Capitalisation
 #: utils/bonobo-activation-sysconf.c:201
-#, fuzzy
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "ifayili yokumiselwa kwenkqubo yokwenza isebenze eyi-Bonobo iqulethe:\n"
+msgstr "Ifayili yokumiselwa kwenkqubo yokwenza isebenze eyi-Bonobo iqulethe:\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
