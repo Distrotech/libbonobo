@@ -31,7 +31,7 @@ do_exit (int arg)
 int
 main (int argc, char *argv[])
 {
-	PortableServer_ObjectId objid = { 0, sizeof ("myFoo"), "myFoo" };
+	PortableServer_ObjectId *objid;
 	PortableServer_POA poa;
 	poptContext ctx;
 
@@ -53,8 +53,7 @@ main (int argc, char *argv[])
 
 	poa = (PortableServer_POA)
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
-	PortableServer_POA_activate_object_with_id (poa, &objid,
-						    &poa_empty_servant, &ev);
+	objid = PortableServer_POA_activate_object (poa, &poa_empty_servant, &ev);
 
 	empty_client = PortableServer_POA_servant_to_reference (poa,
 								&poa_empty_servant,
@@ -73,7 +72,7 @@ main (int argc, char *argv[])
 
 	oaf_active_server_unregister ("OAFIID:Empty:19991025", empty_client);
 
-	PortableServer_POA_deactivate_object (poa, &objid, &ev);
+	PortableServer_POA_deactivate_object (poa, objid, &ev);
 
 	return 0;
 }
