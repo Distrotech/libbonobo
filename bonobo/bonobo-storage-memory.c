@@ -7,8 +7,10 @@
  *
  * Copyright 2001 Gergõ Érdi
  *
- * TODO: Make it implement PersistStream so you can flatten a
- * StorageMem into a Stream
+ * TODO:
+ *  * Make it implement PersistStream so you can flatten a
+ *    StorageMem into a Stream
+ *  * Create a subclass that supports commit/revert
  */
 #include <config.h>
 
@@ -86,7 +88,7 @@ smem_get_parent (BonoboStorageMem       *storage,
 {
 	BonoboStorageMem      *ret;
 	BonoboStorageMemEntry *entry;
-	gchar *path_head, *path_tail;
+	gchar                 *path_head, *path_tail;
 
 	if (!strcmp (path, "/") || !strcmp (path, "")) {
 		if (filename)
@@ -244,17 +246,15 @@ smem_get_stream_info (BonoboObject                   *stream,
 }
 
 static Bonobo_Stream
-smem_open_stream (PortableServer_Servant   servant,
+smem_open_stream (BonoboStorageMem        *storage,
 		  const CORBA_char        *path,
 		  Bonobo_Storage_OpenMode  mode,
 		  CORBA_Environment       *ev)
 {
-	BonoboStorageMem       *storage, *last_storage;
+	BonoboStorageMem       *last_storage;
 	BonoboStorageMemEntry  *entry;
 	gchar                  *path_last;
 	BonoboObject           *stream = 0;
-	
-	storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
 
 	last_storage = smem_get_last_storage (storage, path, &path_last);
 	
@@ -309,18 +309,16 @@ smem_open_stream (PortableServer_Servant   servant,
 }
 
 static Bonobo_Storage
-smem_open_storage (PortableServer_Servant   servant,
+smem_open_storage (BonoboStorageMem        *storage,
 		   const CORBA_char        *path,
 		   Bonobo_Storage_OpenMode  mode,
 		   CORBA_Environment       *ev)
 {
-	BonoboStorageMem       *storage, *parent_storage;
+	BonoboStorageMem       *parent_storage;
 	BonoboStorageMemEntry  *entry;
 	BonoboObject           *ret = 0;
 	gchar                  *path_last = 0;
 	
-	storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
-
 	parent_storage = smem_get_last_storage (storage, path, &path_last);
 	
 	if (!parent_storage) {
@@ -372,17 +370,15 @@ smem_open_storage (PortableServer_Servant   servant,
 }
 
 static Bonobo_StorageInfo*
-smem_get_info (PortableServer_Servant          servant,
+smem_get_info (BonoboStorageMem               *storage,
 	       const CORBA_char               *path,
 	       const Bonobo_StorageInfoFields  mask,
 	       CORBA_Environment              *ev)
 {
 	Bonobo_StorageInfo     *ret_val = 0;
-	BonoboStorageMem       *storage, *parent_storage = 0;
+	BonoboStorageMem       *parent_storage = 0;
 	BonoboStorageMemEntry  *entry = 0;
 	gchar                  *filename = 0;
-
-	storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
 
 	parent_storage = smem_get_parent (storage, path, &filename, &entry);
 
@@ -427,17 +423,15 @@ smem_get_info (PortableServer_Servant          servant,
 }
 
 static void
-smem_set_info (PortableServer_Servant          servant,
+smem_set_info (BonoboStorageMem               *storage,
 	       const CORBA_char               *path,
 	       const Bonobo_StorageInfo       *info,
 	       const Bonobo_StorageInfoFields  mask,
 	       CORBA_Environment              *ev)
 {
-	BonoboStorageMem      *storage, *parent_storage;
+	BonoboStorageMem      *parent_storage;
 	BonoboStorageMemEntry *entry = 0;
 	gchar                 *filename;
-
-	storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
 
 	parent_storage = smem_get_parent (storage, path, &filename, &entry);
 
@@ -509,21 +503,19 @@ smem_dir_hash_cb (gpointer key,
 }
 
 static Bonobo_Storage_DirectoryList *
-smem_get_dir (PortableServer_Servant          servant,
-	      const CORBA_char               *path,
-	      const Bonobo_StorageInfoFields  mask,
-	      CORBA_Environment              *ev)
+smem_list_contents (BonoboStorageMem               *storage,
+		    const CORBA_char               *path,
+		    const Bonobo_StorageInfoFields  mask,
+		    CORBA_Environment              *ev)
 {
 	Bonobo_Storage_DirectoryList *ret_val = 0;
 	Bonobo_StorageInfo           *info;
-	BonoboStorageMem             *storage, *last_storage;
+	BonoboStorageMem             *last_storage;
 	gchar                        *path_last;
 	GList                        *list;
 	DirCBData                     cb_data;
 	int                           i;
 	
-	storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
-
 	last_storage = smem_get_last_storage (storage, path, &path_last);
 
 	if (!last_storage) {
@@ -570,17 +562,14 @@ smem_get_dir (PortableServer_Servant          servant,
 }
 
 static void
-smem_erase (PortableServer_Servant  servant,
-	    const CORBA_char       *path,
-	    CORBA_Environment      *ev)
+smem_erase (BonoboStorageMem  *storage,
+	    const CORBA_char  *path,
+	    CORBA_Environment *ev)
 {
 	BonoboStorageMemEntry  *entry = 0;
-	BonoboStorageMem       *storage, *parent_storage;
+	BonoboStorageMem       *parent_storage;
 	gchar                  *filename = 0;
 			
-
-	storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
-	
 	parent_storage = smem_get_parent (storage, path, &filename, &entry);
 	if (!parent_storage) {
 		bonobo_exception_set (ev, ex_Bonobo_Storage_NotFound);
@@ -615,28 +604,25 @@ smem_erase (PortableServer_Servant  servant,
 }
 
 static void
-smem_copy (PortableServer_Servant  servant,
-	   Bonobo_Storage          dest,
-	   CORBA_Environment      *ev)
+smem_copy_to (BonoboStorageMem     *storage,
+	      const Bonobo_Storage  target,
+	      CORBA_Environment    *ev)
 {
-	BonoboObject *storage = bonobo_object_from_servant (servant);
-
-	bonobo_storage_copy_to (bonobo_object_corba_objref (storage),
-				dest, ev);
+	bonobo_storage_copy_to (
+		bonobo_object_corba_objref (BONOBO_OBJECT (storage)),
+		target, ev);
 }
 
 static void
-smem_rename (PortableServer_Servant  servant,
-	     const CORBA_char       *path,
-	     const CORBA_char       *new_path,
-	     CORBA_Environment      *ev)
+smem_rename (BonoboStorageMem  *storage,
+	     const CORBA_char  *path,
+	     const CORBA_char  *new_path,
+	     CORBA_Environment *ev)
 {
-	BonoboStorageMem      *storage, *parent_storage, *target_storage;
+	BonoboStorageMem      *parent_storage, *target_storage;
 	BonoboStorageMemEntry *entry;
 	gchar                 *filename, *new_filename;
 	BonoboStorageMemEntry *tmp_entry;
-	
-	storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
 
 	if (!strcmp (path, "/") || !strcmp (path, "")) {
 		bonobo_exception_set (ev, ex_Bonobo_Storage_IOError);
@@ -677,10 +663,135 @@ smem_rename (PortableServer_Servant  servant,
 }
 
 static void
-smem_unimplemented (PortableServer_Servant  servant,
-		    CORBA_Environment      *ev)
+smem_unimplemented (BonoboStorageMem  *storage,
+		    CORBA_Environment *ev)
 {
 	bonobo_exception_set (ev, ex_Bonobo_Storage_NotSupported);
+}
+
+static Bonobo_StorageInfo*
+smem_get_info_impl (PortableServer_Servant          servant,
+		    const CORBA_char               *path,
+		    const Bonobo_StorageInfoFields  mask,
+		    CORBA_Environment              *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	return storage_class->get_info (storage, path, mask, ev);
+}
+
+static void
+smem_set_info_impl (PortableServer_Servant    servant,
+		    const CORBA_char         *path,
+		    const Bonobo_StorageInfo *info,
+		    Bonobo_StorageInfoFields  mask,
+		    CORBA_Environment        *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	storage_class->set_info (storage, path, info, mask, ev);
+}
+
+static Bonobo_Stream
+smem_open_stream_impl (PortableServer_Servant   servant,
+		       const CORBA_char        *path,
+		       Bonobo_Storage_OpenMode  mode,
+		       CORBA_Environment       *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	return storage_class->open_stream (storage, path, mode, ev);
+}
+
+static Bonobo_Storage
+smem_open_storage_impl (PortableServer_Servant   servant,
+			const CORBA_char        *path,
+			Bonobo_Storage_OpenMode  mode,
+			CORBA_Environment       *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	return storage_class->open_storage (storage, path, mode, ev);
+}
+
+static void
+smem_copy_to_impl (PortableServer_Servant  servant,
+		   const Bonobo_Storage    target,
+		   CORBA_Environment      *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	storage_class->copy_to (storage, target, ev);
+}
+
+static Bonobo_Storage_DirectoryList *
+smem_list_contents_impl (PortableServer_Servant          servant,
+			 const CORBA_char               *path,
+			 const Bonobo_StorageInfoFields  mask,
+			 CORBA_Environment              *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	return storage_class->list_contents (storage, path, mask, ev);	
+}
+
+static void
+smem_erase_impl (PortableServer_Servant  servant,
+		 const CORBA_char       *path,
+		 CORBA_Environment      *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	storage_class->erase (storage, path, ev);	
+}
+
+static void
+smem_rename_impl (PortableServer_Servant  servant,
+		  const CORBA_char       *path,
+		  const CORBA_char       *new_path,
+		  CORBA_Environment      *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	storage_class->rename (storage, path, new_path, ev);	
+}
+
+static void
+smem_commit_impl (PortableServer_Servant  servant,
+		  CORBA_Environment      *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	storage_class->commit (storage, ev);
+}
+
+static void
+smem_revert_impl (PortableServer_Servant  servant,
+		  CORBA_Environment      *ev)
+{
+	BonoboStorageMem *storage = BONOBO_STORAGE_MEM (bonobo_object_from_servant (servant));
+	BonoboStorageMemClass *storage_class =
+		BONOBO_STORAGE_MEM_CLASS (G_OBJECT_GET_CLASS (storage));
+	
+	storage_class->revert (storage, ev);
 }
 
 static void
@@ -718,19 +829,27 @@ bonobo_storage_mem_class_init (BonoboStorageMemClass *klass)
 
 	object_class->finalize = bonobo_storage_mem_finalize;
 
-	epv->getInfo  = smem_get_info;
-	epv->setInfo  = smem_set_info;
-	epv->listContents = smem_get_dir;
+	epv->getInfo  = smem_get_info_impl;
+	epv->setInfo  = smem_set_info_impl;
+	epv->listContents = smem_list_contents_impl;
+	epv->openStream = smem_open_stream_impl;
+	epv->openStorage = smem_open_storage_impl;
+	epv->copyTo = smem_copy_to_impl;
+	epv->erase = smem_erase_impl;
+	epv->rename = smem_rename_impl;
+	epv->commit = smem_commit_impl;
+	epv->revert = smem_revert_impl;
 
-	epv->openStream = smem_open_stream;
-	epv->openStorage = smem_open_storage;
-
-	epv->copyTo = smem_copy;
-	epv->erase = smem_erase;
-	epv->rename = smem_rename;
-	
-	epv->commit = smem_unimplemented;
-	epv->revert = smem_unimplemented;
+	klass->get_info = smem_get_info;
+	klass->set_info = smem_set_info;
+	klass->list_contents = smem_list_contents;
+	klass->open_stream = smem_open_stream;
+	klass->open_storage = smem_open_storage;
+	klass->copy_to = smem_copy_to;
+	klass->erase = smem_erase;
+	klass->rename = smem_rename;
+	klass->commit = smem_unimplemented;
+	klass->revert = smem_unimplemented;
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboStorageMem, 

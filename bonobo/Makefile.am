@@ -87,6 +87,7 @@ libbonoboinclude_HEADERS =		\
 	bonobo-persist-file.h		\
 	bonobo-persist-stream.h		\
 	bonobo-persist.h		\
+	bonobo-persist-client.h		\
 	bonobo-property-bag.h		\
 	bonobo-property-bag-client.h	\
 	bonobo-shlib-factory.h		\
@@ -125,6 +126,7 @@ libbonobo_src =				\
 	bonobo-persist-file.c		\
 	bonobo-persist-stream.c		\
 	bonobo-persist.c		\
+	bonobo-persist-client.c		\
 	bonobo-property-bag.c		\
 	bonobo-property-bag-client.c	\
 	bonobo-shlib-factory.c		\

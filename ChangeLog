@@ -1,3 +1,11 @@
+2001-07-26  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* bonobo/bonobo-storage-memory.h: Virtualized implementations to
+	make subclassing possible
+
+	* bonobo/bonobo-persist-client.h: Client-side utility functions
+	dealing with persistancy
+
 2001-07-26  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am (libbonobo_2_la_SOURCES): update for
