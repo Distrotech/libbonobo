@@ -1,3 +1,22 @@
+2000-10-05  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-selector.h: Remove unneeded include of
+	<gtk/gtk.h>.
+	* bonobo/bonobo-ui-compat.h: Add includes needed to use
+	GnomeUIInfo.
+	* bonobo/bonobo-ui-container.h: Remove unneeded include of
+	<gnome.h>.
+	* bonobo/bonobo-ui-util.h: Remove unneeded include of <gtk/gtk.h>
+	added needed include of <bonbo/bonobo-ui-xml.h>.
+	* bonobo/bonobo-ui-xml.h: Remove unneeded include of <gtk/gtk.h>.
+	* bonobo/bonobo-win.h: Remove unneeded include of <gnome.h>.
+
+	* bonobo/bonobo-ui-xml.c: Added include needed since we removed
+	some unneeded ones from the headers.
+	
+	* components/text-plain/bonobo-text-plain.c: Added forward
+	declaration to avoid warning compiling this.
+
 2000-10-05  Michael Meeks  <michael@helixcode.com>
 
 	* idl/Makefile.am (idl_DATA): remove bonobo-listener.idl.
