@@ -766,11 +766,11 @@ qexp_evaluate_id (OAF_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 		else if (!strcasecmp (e->u.id_value, "iid"))
 			retval.u.v_string = si->iid;
 		else if (!strcasecmp (e->u.id_value, "username"))
-			retval.u.v_string = si->iid;
+			retval.u.v_string = si->username;
 		else if (!strcasecmp (e->u.id_value, "hostname"))
-			retval.u.v_string = si->iid;
+			retval.u.v_string = si->hostname;
 		else if (!strcasecmp (e->u.id_value, "domain"))
-			retval.u.v_string = si->iid;
+			retval.u.v_string = si->domain;
 		else {
 			int i;
 			for (i = 0; i < si->attrs._length; i++) {
