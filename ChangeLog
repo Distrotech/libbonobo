@@ -1,3 +1,8 @@
+2003-10-25  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-main.c (bonobo_poa_get_threadedv): Add support for
+	ORBIT_THREAD_HINT_ON_CONTEXT.
+
 2003-10-10  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.4.1

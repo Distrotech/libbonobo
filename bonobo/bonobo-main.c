@@ -347,6 +347,7 @@ bonobo_poa_get_threadedv (ORBitThreadHint hint,
 		MAP (PER_CONNECTION, "BonoboPOAHintPerConnection");
 		MAP (ONEWAY_AT_IDLE, "BonoboPOAHintOnewayAtIdle");
 		MAP (ALL_AT_IDLE,    "BonoboPOAHintAllAtIdle");
+		MAP (ON_CONTEXT,     "BonoboPOAHintOnContext");
 #undef MAP
 	default:
 		g_assert_not_reached();
