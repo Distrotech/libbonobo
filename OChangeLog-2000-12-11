@@ -1,4 +1,18 @@
+1999-12-01  Nat Friedman  <nat@helixcode.com>
+
+	* samples/controls/sample-control-container.c (edit_property): New
+ 	function to allow you to change property values, largely courtesy
+ 	of Martijn van Beers.
+
+	* idl/gnome-property.idl: Corrected the spelling of my name.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_new_view_full):
+ 	New function to please Dietmar :-).
+	
 1999-11-30  Nat Friedman  <nat@helixcode.com>
+
+	* bonobo/gnome-view.c (gnome_view_destroy): Destroy the
+ 	GnomeUIHandler when we die.
 
 	* samples/controls/sample-control-container.c
  	(populate_property_list): Hacked to display all of the CORBA types
