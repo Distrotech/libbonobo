@@ -1,5 +1,11 @@
 2000-09-06  Michael Meeks  <michael@helixcode.com>
 
+	* Makefile.am (SUBDIRS): disable gshell for now.
+
+	* configure.in (BONOBOX_LIBS): Add xml.
+
+2000-09-06  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-compat.c (compat_sync): fix bug.
 	
 	* bonobo/bonobo-ui-util.c (read_byte): fix deadly bad bug.
