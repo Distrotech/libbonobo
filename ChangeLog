@@ -1,5 +1,23 @@
 2001-11-01  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-moniker.c: big picture: remove double
+	virtualization of lots of things.
+	(impl_get_parent, impl_set_parent): upd.
+	(bonobo_moniker_default_get_name): fold into
+	(impl_get_name): here.
+	(bonobo_moniker_default_set_name): fold into
+	(impl_set_name): here.
+	(bonobo_moniker_default_equal): fold into
+	(impl_equal): here.
+	(impl_bonobo_moniker_set_internal_name): remove debug.
+
+	* bonobo/bonobo-storage-memory.c: radicaly re-organize.
+
+	* bonobo/bonobo-storage-memory.h: remove bogus & inefficient
+	double virtualization.
+
+2001-11-01  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-object.c (bonobo_object_ref): tolerate
 	NULL silently.
 	(bonobo_object_unref): ditto & return NULL.

@@ -79,6 +79,12 @@ bonobo-object-client.[ch]:
 	totaly removed, was a terrible idea - use the CORBA handle
 	directly instead.
 
+bonobo-moniker.[ch]:
+	remove specious virtualization of get_parent, set_parent,
+	get_name, set_name, resolve, equal. If you need to override
+	these then do it by overriding the CORBA method on your
+	inherited epv.
+
 bonobo-moniker-util.[ch]:
 	Removed bonobo_moniker_client_resolve_client_default: it used
 	BonoboObjectClient, use bonobo_moniker_client_resolve_default intead.

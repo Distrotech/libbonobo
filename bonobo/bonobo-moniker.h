@@ -34,25 +34,10 @@ typedef struct {
 
 	POA_Bonobo_Moniker__epv epv;
 
-	/*
-	 * virtual methods
-	 */
-	Bonobo_Moniker (*get_parent)         (BonoboMoniker               *moniker,
-					      CORBA_Environment           *ev);
- 	void           (*set_parent)         (BonoboMoniker               *moniker,
-					      const Bonobo_Moniker         parent,
- 					      CORBA_Environment           *ev);
-	CORBA_char    *(*get_name)           (BonoboMoniker               *moniker,
-					      CORBA_Environment           *ev);
- 	void           (*set_name)           (BonoboMoniker               *moniker,
- 					      const CORBA_char            *name,
- 					      CORBA_Environment           *ev);
+	/* virtual methods */
 	Bonobo_Unknown (*resolve)            (BonoboMoniker               *moniker,
 					      const Bonobo_ResolveOptions *options,
 					      const CORBA_char            *requested_interface,
-					      CORBA_Environment           *ev);
-	CORBA_long     (*equal)              (BonoboMoniker               *moniker,
-					      const CORBA_char            *display_name,
 					      CORBA_Environment           *ev);
 
 	void           (*set_internal_name)  (BonoboMoniker               *moniker,

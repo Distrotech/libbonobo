@@ -33,52 +33,6 @@ typedef struct {
 	BonoboObjectClass parent_class;
 
 	POA_Bonobo_Storage__epv epv;
-
-	Bonobo_StorageInfo * (*get_info) (BonoboStorageMem         *storage,
-					  const CORBA_char         *path,
-					  Bonobo_StorageInfoFields  mask,
-					  CORBA_Environment
-					  *ev);
-	void (*set_info) (BonoboStorageMem         *storage,
-			  const CORBA_char         *path,
-			  const Bonobo_StorageInfo *info,
-			  Bonobo_StorageInfoFields  mask,
-			  CORBA_Environment        *ev);
-
-	Bonobo_Stream (*open_stream) (BonoboStorageMem       *storage,
-				      const CORBA_char       *path,
-				      Bonobo_Storage_OpenMode mode,
-				      CORBA_Environment      *ev);
-
-	Bonobo_Storage (*open_storage) (BonoboStorageMem         *storage,
-					const CORBA_char         *path,
-					Bonobo_Storage_OpenMode   mode,
-					CORBA_Environment        *ev);
-
-	void (*copy_to) (BonoboStorageMem     *storage,
-			 const Bonobo_Storage  target,
-			 CORBA_Environment    *ev);
-	
-	Bonobo_Storage_DirectoryList * (*list_contents) (BonoboStorageMem         *storage,
-							 const CORBA_char         *path,
-							 Bonobo_StorageInfoFields  mask,
-							 CORBA_Environment        *ev);
-	
-	void (*erase) (BonoboStorageMem  *storage,
-		       const CORBA_char  *path,
-		       CORBA_Environment *ev);
-
-	void (*rename) (BonoboStorageMem  *storage,
-			const CORBA_char  *path,
-			const CORBA_char  *new_path,
-			CORBA_Environment *ev);
-
-	void (*commit) (BonoboStorageMem  *storage,
-			CORBA_Environment *ev);
-
-	void (*revert) (BonoboStorageMem  *storage,
-			CORBA_Environment *ev);
-
 } BonoboStorageMemClass;
 
 GType             bonobo_storage_mem_get_type   (void) G_GNUC_CONST;
