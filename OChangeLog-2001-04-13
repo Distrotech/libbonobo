@@ -1,3 +1,20 @@
+2001-04-11  Darin Adler  <darin@eazel.com>
+
+	* components/bonobo.keys: Remove this.
+	* components/Makefile.am: No longer include .keys file.
+	* bonobo.spec.in: No longer install .keys file.
+	
+	* bonobo/bonobo-control-frame.c: Remove unused vepv.
+	* bonobo/bonobo-control.c: Remove unused vepv.
+	* bonobo/bonobo-object.c: (bonobo_object_class_init): Remove
+	unused vepv.
+	* bonobo/bonobo-ui-container.c: Remove unused vepv.
+	* bonobo/bonobo-view-frame.c: Remove unused vepv.
+	* bonobo/bonobo-view.c: Remove unused vepv.
+	
+	* doc/dia/.cvsignore: Ignore generated files.
+	* tests/.cvsignore: Update for changes in test programs.
+
 2001-04-09  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.0.1

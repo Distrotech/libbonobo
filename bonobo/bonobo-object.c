@@ -33,8 +33,6 @@ extern void bonobo_object_epv_init (POA_Bonobo_Unknown__epv *epv);
 
 /* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
 
-POA_Bonobo_Unknown__vepv bonobo_object_vepv;
-
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_REF_HOOKS
 #endif
@@ -607,12 +605,6 @@ bonobo_object_get_epv (void)
 }
 
 static void
-init_object_corba_class (void)
-{
-	bonobo_object_vepv.Bonobo_Unknown_epv = bonobo_object_get_epv ();
-}
-
-static void
 bonobo_object_finalize_real (GtkObject *object)
 {
 	BonoboObject *bonobo_object = BONOBO_OBJECT (object);
@@ -670,8 +662,6 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 	gtk_object_class_add_signals (object_class, bonobo_object_signals, LAST_SIGNAL);
 
 	object_class->finalize = bonobo_object_finalize_real;
-
-	init_object_corba_class ();
 }
 
 static void
