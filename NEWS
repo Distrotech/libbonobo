@@ -1,3 +1,9 @@
+libbonobo 1.117.0
+
+	* Featurelets
+		+ env var debugging conditionals (Jaka Mocnik)
+			BONOBO_DEBUG=regs:aggregate:lifecycle:running:object
+
 libbonobo 1.115.0
 
 	* Bugs fixed

@@ -1,3 +1,13 @@
+2002-05-20  Michael Meeks  <michael@ximian.com>
+
+	* Version 1.117.0
+
+	* configure.in: remove message-of-doom
+
+	* bonobo/bonobo-debug.c (bonobo_debug_init): change
+	env. var to BONOBO_DEBUG, to be consistant with GOBJECT, 
+	ORBIT2 etc.
+
 2002-05-16  Michael Meeks  <michael@ximian.com>
 
 	* doc/NAMESPACE: add GNOME_AbiWord

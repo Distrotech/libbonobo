@@ -27,7 +27,7 @@ bonobo_debug_init()
 	const char *env_string;
 
 	_bonobo_debug_flags = BONOBO_DEBUG_NONE;
-	env_string = g_getenv ("BONOBO_DEBUG_FLAGS");
+	env_string = g_getenv ("BONOBO_DEBUG");
 	if (env_string)
 	  _bonobo_debug_flags |=
 			  g_parse_debug_string (env_string,

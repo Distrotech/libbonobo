@@ -4,7 +4,7 @@ libincludedir = $(includedir)/libbonobo-2.0
 libinclude_HEADERS = \
 	libbonobo.h
 
-EXTRA_DIST = message-of-doom \
+EXTRA_DIST = \
 	intltool-extract.in  \
 	intltool-merge.in    \
 	intltool-update.in   \
