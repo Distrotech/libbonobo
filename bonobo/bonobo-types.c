@@ -415,34 +415,16 @@ bonobo_value_set_corba_environment (GValue *value, const CORBA_Environment *ev)
 
 void
 bonobo_closure_invoke_va_list (GClosure *closure,
-			       GType     return_type,
+			       GValue   *return_value,
 			       va_list   var_args)
 {
-	GArray   *params;
-	GValue    return_value = { 0, };
-	GType     type, rtype;
-	int       i;
+	int     i;
+	GType   type;
+	GArray *params;
   
 	g_return_if_fail (closure != NULL);
 
 	params = g_array_sized_new (FALSE, TRUE, sizeof (GValue), 6);
-
-	rtype = return_type & ~G_SIGNAL_TYPE_STATIC_SCOPE;
-	if (rtype != G_TYPE_NONE) {
-		gchar *error;
-
-		g_value_init (&return_value, rtype);
-
-		/* Initialize return value */
-		G_VALUE_LCOPY (&return_value, var_args,
-			       G_VALUE_NOCOPY_CONTENTS, &error);
-
-		if (error) {
-			g_warning ("%s: %s", G_STRLOC, error);
-			g_free (error);
-			return;
-		}
-	}
 
 	while ((type = va_arg (var_args, GType)) != 0) {
 		gboolean static_scope = type & G_SIGNAL_TYPE_STATIC_SCOPE;
@@ -465,29 +447,10 @@ bonobo_closure_invoke_va_list (GClosure *closure,
 	}
 
 	g_closure_invoke (closure,
-			  &return_value,
+			  return_value,
 			  params->len,
 			  (GValue *)params->data,
 			  NULL);
-
-	if (rtype != G_TYPE_NONE) {
-		gchar *error;
-		
-		/* We use G_VALUE_NOCOPY_CONTENTS here so that the caller
-		 * takes ownership of the return value; thus we must not
-		 * g_value_unset() it here.
-		 */
-
-		G_VALUE_LCOPY (&return_value, var_args,
-			       G_VALUE_NOCOPY_CONTENTS,
-			       &error);
-
-		if (error) {
-			g_warning ("%s: %s", G_STRLOC, error);
-			g_free (error);
-			return;
-		}
-	}
 
 	for (i = 0; i < params->len; i++)
 		g_value_unset (&g_array_index (params, GValue, i));
@@ -514,15 +477,57 @@ bonobo_closure_invoke (GClosure *closure,
 		       GType     return_type,
 		       ...)
 {
+	GType   rtype;
+	GValue  return_value = { 0, };
 	va_list var_args;
 
 	if (!closure)
 		return;
 
  	va_start (var_args, return_type);
+
+	rtype = return_type & ~G_SIGNAL_TYPE_STATIC_SCOPE;
+	if (rtype != G_TYPE_NONE) {
+		gchar *error;
+
+		g_value_init (&return_value, rtype);
+
+		/* Initialize return value */
+		G_VALUE_LCOPY (&return_value, var_args,
+			       G_VALUE_NOCOPY_CONTENTS, &error);
+
+		if (error) {
+			g_warning ("%s: %s", G_STRLOC, error);
+			g_free (error);
+			return;
+		}
+	}
 	
 	bonobo_closure_invoke_va_list (
-		closure, return_type, var_args);
+		closure, &return_value, var_args);
+
+	va_end (var_args);
+
+ 	va_start (var_args, return_type);
+
+	if (rtype != G_TYPE_NONE) {
+		gchar *error;
+		
+		/* We use G_VALUE_NOCOPY_CONTENTS here so that the caller
+		 * takes ownership of the return value; thus we must not
+		 * g_value_unset() it here.
+		 */
+
+		G_VALUE_LCOPY (&return_value, var_args,
+			       G_VALUE_NOCOPY_CONTENTS,
+			       &error);
+
+		if (error) {
+			g_warning ("%s: %s", G_STRLOC, error);
+			g_free (error);
+			return;
+		}
+	}
 
 	va_end (var_args);
 }

@@ -632,8 +632,7 @@ void bonobo_pbclient_set_##name (Bonobo_PropertyBag  bag,                     \
 			         CORBA_Environment  *opt_ev)                  \
 {                                                                             \
 	CORBA_any *any;                                                       \
-	any = bonobo_arg_new (corba_tc);                                      \
-	*((c_type *)(any->_value)) = value;                                   \
+	any = bonobo_arg_new_from (corba_tc, &value);			      \
 	bonobo_pbclient_set_value (bag, key, any, opt_ev);                    \
 	bonobo_arg_release (any);                                             \
 }

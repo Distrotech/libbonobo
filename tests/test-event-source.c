@@ -9,22 +9,22 @@ static int idle_id, em_count, ev_count;
 
 static void
 event_cb (BonoboListener    *listener,
-	  char              *event_name, 
-	  CORBA_any         *any,
+	  const char        *event_name, 
+	  const CORBA_any   *any,
 	  CORBA_Environment *ev,
 	  gpointer           user_data)
 {
-	if (!strcmp(event_name, user_data)) {
+	if (!strcmp (event_name, user_data))
 		em_count++;
-	}
 	ev_count++;
 
-	printf ("Got Event %s %s %d %d\n", event_name, (char *)user_data, 
+	printf ("Got Event %s %s %d %d\n",
+		event_name, (char *)user_data, 
 		ev_count, em_count);
 }
 
 static void
-run_tests ()
+run_tests (void)
 {
 	BonoboEventSource *es;
 	CORBA_Environment ev;

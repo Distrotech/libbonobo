@@ -67,7 +67,7 @@ void bonobo_value_set_corba_environment  (GValue                      *value,
                                           const CORBA_Environment     *ev);
 
 void       bonobo_closure_invoke_va_list            (GClosure            *closure,
-						     GType                return_type,
+						     GValue              *return_value,
 						     va_list              var_args);
 
 void       bonobo_closure_invoke		    (GClosure            *closure,
