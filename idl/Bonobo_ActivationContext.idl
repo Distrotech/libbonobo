@@ -47,6 +47,10 @@ module Bonobo {
 #include <Bonobo_ObjectDirectory.idl>
 
 module Bonobo {
+        interface ActivationClient : Bonobo::Unknown {
+                oneway void resetCache ();
+        };
+
         interface ActivationCallback : Bonobo::Unknown {
                 oneway void report_activation_failed (in string reason);
                 oneway void report_activation_succeeded (in ActivationResult result);
@@ -55,6 +59,7 @@ module Bonobo {
         typedef sequence<ObjectDirectory> ObjectDirectoryList;
 
         interface ActivationContext : Bonobo::Unknown {
+                oneway void addClient (in ActivationClient client, in string locales);
                 readonly attribute ObjectDirectoryList directories;
                 void add_directory (in ObjectDirectory dir) raises (Bonobo::Activation::AlreadyListed);
                 void remove_directory (in ObjectDirectory dir) raises (Bonobo::Activation::NotListed);

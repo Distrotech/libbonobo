@@ -37,6 +37,8 @@ bonobo_activationinclude_HEADERS=		\
 
 libbonobo_activation_la_SOURCES=		\
 	$(BUILT_SOURCES)			\
+	bonobo-activation-client.c		\
+	bonobo-activation-client.h		\
 	bonobo-activation-id.c			\
 	bonobo-activation-private.h		\
 	bonobo-activation-shlib.c		\

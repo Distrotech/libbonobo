@@ -22,11 +22,12 @@
  *  Author: Elliot Lee <sopwith@redhat.com>
  */
 #ifndef BONOBO_ACTIVATION_PRIVATE_H
-#define BONOBO_ACTIVATION_PRIVATE_H 1
+#define BONOBO_ACTIVATION_PRIVATE_H
 
 #include <config.h>
 #include <string.h>
 #include <bonobo-activation/bonobo-activation-base-service.h>
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 
 #define BONOBO_ACTIVATION_FACTORY_TIMEOUT 1000
 
@@ -47,14 +48,14 @@ CORBA_Object bonobo_activation_object_directory_get   (const char        *userna
 
 extern gboolean bonobo_activation_private;
 
-#define BONOBO_ACTIVATION_STR_NULL_OR_MATCH(x, y) ((x == NULL) || (x != NULL && y != NULL && strcmp (x, y) != 0))
+CORBA_Object bonobo_activation_internal_activation_context_get_extended (
+                                                       gboolean           existing_only,
+                                                       CORBA_Environment *ev);
 
-CORBA_Object bonobo_activation_internal_activation_context_get_extended (gboolean           existing_only,
-                                                                         CORBA_Environment *ev);
+CORBA_Object bonobo_activation_internal_service_get_extended (
+                                                       const BonoboActivationBaseService *base_service,
+                                                       gboolean           existing_only,
+                                                       CORBA_Environment *ev);
 
-CORBA_Object bonobo_activation_internal_service_get_extended (const BonoboActivationBaseService *base_service,
-                                                              gboolean              existing_only,
-                                                              CORBA_Environment    *ev);
-
-#endif
+#endif /* BONOBO_ACTIVATION_PRIVATE_H */
 

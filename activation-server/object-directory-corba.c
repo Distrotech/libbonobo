@@ -234,13 +234,17 @@ registry_directory_needs_update (impl_POA_Bonobo_ObjectDirectory *servant,
 static void
 update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
 {
-        gboolean must_load;
         int i;
+        gboolean must_load;
+        static int reload_recurse_depth = 0;
 
         /* FIXME bugzilla.eazel.com 2727: we should only reload those directories that have
          * actually changed instead of reloading all when any has
          * changed. 
          */
+
+        if (reload_recurse_depth++)
+                return;
 
         must_load = FALSE;
 
@@ -248,30 +252,35 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
            could be too slow. This works even on the first read
            because then `time_did_stat is 0' */
         if (time (NULL) - 5 > servant->time_did_stat) {
+                servant->time_did_stat = time (NULL);
+
                 for (i = 0; servant->registry_source_directories[i] != NULL; i++) {
                         if (registry_directory_needs_update 
                             (servant, servant->registry_source_directories[i])) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                                g_warning ("Directory '%s' changed", servant->registry_source_directories[i]);
+#endif
                                 must_load = TRUE;
                                 break;
                         }
                 }
-
-                servant->time_did_stat = time (NULL);
         }
 
         if (must_load) {
                 Bonobo_ServerInfo_load (servant->registry_source_directories,
-                                     &servant->attr_servers,
-                                     &servant->by_iid,
-                                     servant->attr_hostID,
-                                     servant->attr_domain);
-
+                                        &servant->attr_servers,
+                                        &servant->by_iid,
+                                        servant->attr_hostID,
+                                        servant->attr_domain);
                 servant->time_list_changed = time (NULL);
 
 #ifdef BONOBO_ACTIVATION_DEBUG
                 od_dump_list (servant);
 #endif
+                notify_clients_cache_reset ();
         }
+
+        reload_recurse_depth--;
 }
 
 static gchar **

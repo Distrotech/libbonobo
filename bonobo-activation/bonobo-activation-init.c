@@ -24,6 +24,7 @@
 
 #include <config.h>
 #include "bonobo-activation-init.h"
+#include "bonobo-activation-client.h"
 
 #include "Bonobo_ActivationContext.h"
 #include "bonobo-activation-i18n.h"
@@ -482,6 +483,7 @@ bonobo_activation_init (int argc, char **argv)
 CORBA_ORB
 bonobo_activation_orb_init (int *argc, char **argv)
 {
+        CORBA_Context def_ctx;
 	CORBA_Environment ev;
 	const char *hostname;
         const char *display;
@@ -497,7 +499,10 @@ bonobo_activation_orb_init (int *argc, char **argv)
 	g_assert (ev._major == CORBA_NO_EXCEPTION);
 
 	/* Set values in default context */
-	CORBA_ORB_get_default_context (bonobo_activation_orb, &bonobo_activation_context, &ev);
+	CORBA_ORB_get_default_context (bonobo_activation_orb, &def_ctx, &ev);
+        CORBA_Context_create_child (def_ctx, "activation", &bonobo_activation_context, &ev);
+	g_assert (ev._major == CORBA_NO_EXCEPTION);
+        CORBA_Object_release ((CORBA_Object) def_ctx, &ev);
 	g_assert (ev._major == CORBA_NO_EXCEPTION);
 
 	hostname = bonobo_activation_hostname_get ();
@@ -561,6 +566,8 @@ bonobo_activation_debug_shutdown (void)
                                 (CORBA_Object) bonobo_activation_context, &ev);
                         bonobo_activation_context = CORBA_OBJECT_NIL;
                 }
+
+                bonobo_activation_release_corba_client ();
 
                 if (bonobo_activation_orb != CORBA_OBJECT_NIL) {
                         CORBA_ORB_destroy (bonobo_activation_orb, &ev);

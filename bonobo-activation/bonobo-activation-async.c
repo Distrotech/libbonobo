@@ -27,6 +27,7 @@
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 #include <bonobo-activation/bonobo-activation-activate-private.h>
 #include <bonobo-activation/bonobo-activation-activate.h>
+#include <bonobo-activation/bonobo-activation-shlib.h>
 #include <bonobo-activation/bonobo-activation-async-callback.h>
 #include <bonobo-activation/bonobo-activation-id.h>
 #include <bonobo-activation/bonobo-activation-init.h>
@@ -153,11 +154,12 @@ void bonobo_activation_activate_async (const char *requirements,
  * @flags can be 0 if you do not know what to set it to and 
  * @ev can be safely set to NULL.
  */
-void bonobo_activation_activate_from_id_async (const Bonobo_ActivationID aid,
-				 Bonobo_ActivationFlags flags,
-				 BonoboActivationCallback callback,
-				 gpointer user_data,
-				 CORBA_Environment * ev)
+void
+bonobo_activation_activate_from_id_async (const Bonobo_ActivationID aid,
+                                          Bonobo_ActivationFlags flags,
+                                          BonoboActivationCallback callback,
+                                          gpointer user_data,
+                                          CORBA_Environment * ev)
 {
         CORBA_Object callback_object;
         CORBA_Environment myev;
@@ -193,6 +195,7 @@ void bonobo_activation_activate_from_id_async (const Bonobo_ActivationID aid,
 		bonobo_activation_info_free (ai);
 	}
 
+
         /* create the CORBA callback for this call It will destroy itelf later */
         callback_object = bonobo_activation_async_corba_callback_new (callback, user_data, ev);
         if (ev->_major != CORBA_NO_EXCEPTION
@@ -214,5 +217,4 @@ void bonobo_activation_activate_from_id_async (const Bonobo_ActivationID aid,
                 callback (CORBA_OBJECT_NIL, message, user_data );
                 g_free (message);
         }
-            
 }

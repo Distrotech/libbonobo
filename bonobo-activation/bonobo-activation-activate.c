@@ -27,8 +27,10 @@
 #include <bonobo-activation/bonobo-activation-activate-private.h>
 #include <bonobo-activation/bonobo-activation-id.h>
 #include <bonobo-activation/bonobo-activation-init.h>
+#include <bonobo-activation/bonobo-activation-server-info.h>
 #include <bonobo-activation/bonobo-activation-private.h>
 #include <bonobo-activation/bonobo-activation-shlib.h>
+#include <bonobo-activation/bonobo-activation-client.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 
 #include <string.h>
@@ -96,12 +98,171 @@ bonobo_activation_copy_string_array_to_Bonobo_StringList (char *const *selection
         }
 }
 
+/* Limit of the number of cached queries */
+#define QUERY_CACHE_MAX 32
+#undef QUERY_CACHE_DEBUG
+
+static GHashTable *query_cache = NULL;
+
+typedef struct {
+	char  *query;
+	char **sort_criteria;
+
+	Bonobo_ServerInfoList *list;
+} QueryCacheEntry;
+
+static void
+query_cache_entry_free (gpointer data)
+{
+        QueryCacheEntry *entry = data;
+
+#ifdef QUERY_CACHE_DEBUG
+        g_warning ("Blowing item %p", entry);
+#endif /* QUERY_CACHE_DEBUG */
+
+        g_free (entry->query);
+        g_strfreev (entry->sort_criteria);
+        CORBA_free (entry->list);
+        g_free (entry);
+}
+
+static gboolean
+cache_clean_half (gpointer  key,
+                  gpointer  value,
+                  gpointer  user_data)
+{
+        int *a = user_data;
+        /* Blow half the elements */
+        return (*a)++ % 2;
+}
+
+static gboolean
+query_cache_equal (gconstpointer a, gconstpointer b)
+{
+	int i;
+	char **strsa, **strsb;
+	const QueryCacheEntry *entrya = a;
+	const QueryCacheEntry *entryb = b;
+
+	if (strcmp (entrya->query, entryb->query))
+		return FALSE;
+
+	strsa = entrya->sort_criteria;
+	strsb = entryb->sort_criteria;
+
+	if (!strsa && !strsb)
+		return TRUE;
+
+	if (!strsa || !strsb)
+		return FALSE;
+
+	for (i = 0; strsa [i] && strsb [i]; i++)
+		if (strcmp (strsa [i], strsb [i]))
+			return FALSE;
+
+	if (strsa [i] || strsb [i])
+		return FALSE;
+
+	return TRUE;
+}
+
+static guint
+query_cache_hash (gconstpointer a)
+{
+	guint hash, i;
+	char **strs;
+	const QueryCacheEntry *entry = a;
+	
+	hash = g_str_hash (entry->query);
+	strs = entry->sort_criteria;
+
+	for (i = 0; strs && strs [i]; i++)
+		hash ^= g_str_hash (strs [i]);
+
+	return hash;
+}
+
+static void
+query_cache_reset (void)
+{
+        if (query_cache) {
+                g_hash_table_destroy (query_cache);
+                query_cache = NULL;
+        }
+}
+
+static void
+create_query_cache (void)
+{
+        query_cache = g_hash_table_new_full (
+                query_cache_hash,
+                query_cache_equal,
+                query_cache_entry_free,
+                NULL);
+        bonobo_activation_add_reset_notify (query_cache_reset);
+}
+
+static Bonobo_ServerInfoList *
+query_cache_lookup (char         *query,
+		    char * const *sort_criteria)
+{
+	QueryCacheEntry  fake;
+	QueryCacheEntry *entry;
+
+	if (!query_cache) {
+                create_query_cache ();
+		return NULL;
+	}
+
+	fake.query = query;
+	fake.sort_criteria = (char **) sort_criteria;
+	if ((entry = g_hash_table_lookup (query_cache, &fake))) {
+#ifdef QUERY_CACHE_DEBUG
+		g_warning ("\n\n ---  Hit (%p)  ---\n\n\n", entry->list);
+#endif /* QUERY_CACHE_DEBUG */
+		return Bonobo_ServerInfoList_duplicate (entry->list);
+	} else {
+#ifdef QUERY_CACHE_DEBUG
+		g_warning ("Miss");
+#endif /* QUERY_CACHE_DEBUG */
+		return NULL;
+	}
+}
+
+static void
+query_cache_insert (const char   *query,
+		    char * const *sort_criteria,
+		    Bonobo_ServerInfoList *list)
+{
+        int idx = 0;
+	QueryCacheEntry *entry = g_new (QueryCacheEntry, 1);
+
+        if (!query_cache) {
+                create_query_cache ();
+        
+        } else if (g_hash_table_size (query_cache) > QUERY_CACHE_MAX) {
+                g_hash_table_foreach_remove (
+                        query_cache, cache_clean_half, &idx);
+        }
+
+	entry->query = g_strdup (query);
+	entry->sort_criteria = g_strdupv ((char **) sort_criteria);
+	entry->list = Bonobo_ServerInfoList_duplicate (list);
+
+	g_hash_table_insert (query_cache, entry, entry);
+
+#ifdef QUERY_CACHE_DEBUG
+	g_warning ("Query cache size now %d",
+                g_hash_table_size (query_cache));
+#endif /* QUERY_CACHE_DEBUG */
+}
+
 /**
  * bonobo_activation_query: 
  * @requirements: query string.
  * @selection_order: sort criterion for returned list.
  * @ev: a %CORBA_Environment structure which will contain 
- *      the CORBA exception status of the operation.
+ *      the CORBA exception status of the operation, or NULL
  *
  * Executes the @requirements query on the bonobo-activation-server.
  * The result is sorted according to @selection_order. 
@@ -110,17 +271,17 @@ bonobo_activation_copy_string_array_to_Bonobo_StringList (char *const *selection
  *
  * Return value: the list of servers matching the requirements.
  */
-
 Bonobo_ServerInfoList *
-bonobo_activation_query (const char *requirements, char *const *selection_order,
-	   CORBA_Environment * ev)
+bonobo_activation_query (const char   *requirements,
+                         char * const *selection_order,
+                         CORBA_Environment *ev)
 {
 	Bonobo_StringList selorder;
 	Bonobo_ServerInfoList *res;
 	CORBA_Environment myev;
 	Bonobo_ActivationContext ac;
         char *ext_requirements;
-
+        char *query_requirements;
 
 	g_return_val_if_fail (requirements, CORBA_OBJECT_NIL);
 	ac = bonobo_activation_activation_context_get ();
@@ -128,30 +289,40 @@ bonobo_activation_query (const char *requirements, char *const *selection_order,
 
         ext_requirements = bonobo_activation_maybe_add_test_requirements (requirements);
 
+        if (ext_requirements == NULL) {
+                query_requirements = (char *) requirements;
+        } else {
+                query_requirements = (char *) ext_requirements;
+        } 
+
 	if (!ev) {
 		ev = &myev;
 		CORBA_exception_init (&myev);
 	}
 
-        bonobo_activation_copy_string_array_to_Bonobo_StringList (selection_order, &selorder);
+	res = query_cache_lookup (query_requirements, selection_order);
 
-        if (ext_requirements == NULL) {
-                res = Bonobo_ActivationContext_query (ac, (char *) requirements,
-                                                      &selorder, bonobo_activation_context_get (), ev);
-        } else {
-                res = Bonobo_ActivationContext_query (ac, (char *) ext_requirements,
-                                                      &selorder, bonobo_activation_context_get (), ev);
+        if (!res) {
+                bonobo_activation_copy_string_array_to_Bonobo_StringList (selection_order, &selorder);
+
+                res = Bonobo_ActivationContext_query (
+                        ac, query_requirements,
+                        &selorder, bonobo_activation_context_get (), ev);
+
+                if (ev->_major != CORBA_NO_EXCEPTION) {
+                        res = NULL;
+                }
+
+                query_cache_insert (query_requirements, selection_order, res);
         }
 
         if (ext_requirements != NULL) {
                 g_free (ext_requirements);
         }
 
-	if (ev->_major != CORBA_NO_EXCEPTION)
-		res = NULL;
-
-	if (ev == &myev)
+	if (ev == &myev) {
 		CORBA_exception_free (&myev);
+        }
 
 	return res;
 }
@@ -176,8 +347,8 @@ bonobo_activation_query (const char *requirements, char *const *selection_order,
  */
 CORBA_Object
 bonobo_activation_activate (const char *requirements, char *const *selection_order,
-	      Bonobo_ActivationFlags flags, Bonobo_ActivationID * ret_aid,
-	      CORBA_Environment * ev)
+                            Bonobo_ActivationFlags flags, Bonobo_ActivationID * ret_aid,
+                            CORBA_Environment * ev)
 {
 	Bonobo_StringList selorder;
 	CORBA_Object retval;
@@ -247,6 +418,7 @@ bonobo_activation_activate (const char *requirements, char *const *selection_ord
 	if (ev == &myev)
 		CORBA_exception_free (&myev);
 
+
 	return retval;
 }
 
@@ -268,12 +440,12 @@ bonobo_activation_activate (const char *requirements, char *const *selection_ord
 
 CORBA_Object
 bonobo_activation_activate_from_id (const Bonobo_ActivationID aid, 
-                      Bonobo_ActivationFlags flags,
-		      Bonobo_ActivationID *ret_aid,
-                      CORBA_Environment *ev)
+                                    Bonobo_ActivationFlags    flags,
+                                    Bonobo_ActivationID      *ret_aid,
+                                    CORBA_Environment        *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-	Bonobo_ActivationResult *res;
+        Bonobo_ActivationResult *res;
 	CORBA_Environment myev;
 	Bonobo_ActivationContext ac;
 	BonoboActivationInfo *ai;
@@ -300,15 +472,16 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
 		bonobo_activation_info_free (ai);
 	}
 
-	res = Bonobo_ActivationContext_activate_from_id (ac, aid, flags,
-                                                      bonobo_activation_context_get (),
-                                                      ev);
+        res = Bonobo_ActivationContext_activate_from_id (
+                ac, aid, flags, bonobo_activation_context_get (), ev);
+        
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
 
 	switch (res->res._d) {
 	case Bonobo_ACTIVATION_RESULT_SHLIB:
-                retval = bonobo_activation_activate_shlib_server (res, ev);
+                retval = bonobo_activation_activate_shlib_server (
+                        (Bonobo_ActivationResult *) res, ev);
 		break;
 	case Bonobo_ACTIVATION_RESULT_OBJECT:
 		retval = CORBA_Object_duplicate (res->res._u.res_object, ev);
@@ -324,7 +497,7 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
 			*ret_aid = g_strdup (res->aid);
 	}
 
-	CORBA_free (res);
+        CORBA_free (res);
 
       out:
 	if (ev == &myev)

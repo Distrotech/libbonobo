@@ -35,4 +35,7 @@ CORBA_Object od_server_activate (Bonobo_ServerInfo * si,
 Bonobo_ActivationContext
 Bonobo_ActivationContext_create (PortableServer_POA poa, CORBA_Environment * ev);
 
+void notify_clients_cache_reset (void);
+
+
 #endif /* SERVER_H */

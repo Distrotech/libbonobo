@@ -411,6 +411,40 @@ ac_update_lists (impl_POA_Bonobo_ActivationContext * servant,
 
 #define GET_SERVANT(s) ((impl_POA_Bonobo_ActivationContext *)(s))
 
+static GList *clients = NULL;
+
+void
+notify_clients_cache_reset (void)
+{
+        GList *l;
+        GSList *notify = NULL, *l2;
+        CORBA_Environment ev;
+
+        CORBA_exception_init (&ev);
+
+        for (l = clients; l; l = l->next) {
+                notify = g_slist_prepend (notify, CORBA_Object_duplicate (l->data, &ev));
+        }
+
+        for (l2 = notify; l2; l2 = l2->next) {
+                Bonobo_ActivationClient_resetCache (l2->data, &ev);
+                if (ev._major != CORBA_NO_EXCEPTION) {
+                        clients = g_list_remove (clients, l2->data);
+                }
+                CORBA_Object_release (l2->data, &ev);
+                CORBA_exception_free (&ev);
+        }
+}
+
+static void
+impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
+                                         const Bonobo_ActivationClient client,
+                                         const CORBA_char             *locales,
+                                         CORBA_Environment            *ev)
+{
+        clients = g_list_prepend (clients, CORBA_Object_duplicate (client, ev));
+}
+
 static Bonobo_ObjectDirectoryList *
 impl_Bonobo_ActivationContext__get_directories (PortableServer_Servant _servant,
                                                 CORBA_Environment     *ev)
@@ -1041,6 +1075,7 @@ static POA_Bonobo_Unknown__epv impl_Bonobo_Unknown_epv = {
 
 static POA_Bonobo_ActivationContext__epv impl_Bonobo_ActivationContext_epv = {
 	NULL,			/* _private */
+	impl_Bonobo_ActivationContext_addClient,
 	impl_Bonobo_ActivationContext__get_directories,
 	impl_Bonobo_ActivationContext_add_directory,
 	impl_Bonobo_ActivationContext_remove_directory,

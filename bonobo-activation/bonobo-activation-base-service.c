@@ -31,6 +31,8 @@
 #include <bonobo-activation/bonobo-activation-i18n.h>
 #include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/bonobo-activation-private.h>
+#include <bonobo-activation/Bonobo_ActivationContext.h>
+#include <bonobo-activation/bonobo-activation-client.h>
 
 
 #ifndef _GNU_SOURCE
@@ -295,7 +297,7 @@ bonobo_activation_base_service_debug_shutdown (CORBA_Environment *ev)
 
 static void
 bonobo_activation_existing_set (const BonoboActivationBaseService *base_service, struct SysServer *ss,
-	          CORBA_Object obj, CORBA_Environment *ev)
+                                CORBA_Object obj, CORBA_Environment *ev)
 {
 	GSList *link;
 	struct SysServerInstance *ssi;
@@ -327,6 +329,11 @@ bonobo_activation_existing_set (const BonoboActivationBaseService *base_service,
 		CORBA_Object_release (ssi->already_running, ev);
 		ssi->already_running = obj;
 	}
+
+        /* FIXME: all this code is unneccesarily abstract & buggy with it */
+        if (!strcmp (base_service->name, "IDL:Bonobo/ActivationContext:1.0")) {
+                bonobo_activation_register_client (obj, ev);
+        }
 }
 
 static GSList *activator_list = NULL;
@@ -357,7 +364,7 @@ bonobo_activation_base_service_activator_add (BonoboActivationBaseServiceActivat
 
 static CORBA_Object
 bonobo_activation_activators_use (const BonoboActivationBaseService *base_service, const char **cmd,
-		    int fd_arg, CORBA_Environment *ev)
+                                  int fd_arg, CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	GSList *link;
