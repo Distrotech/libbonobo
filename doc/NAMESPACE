@@ -19,6 +19,7 @@ subdomains:
 	EOG/			EOG		federico@helixcode.com
 	Encompass/		Encompass	dobey@free.fr
 	Evolution/		Evolution	ettore@helixcode.com
+	FileSelector/		file-sel	jacob@ximian.com
 	GDA/			libgda		rodrigo@gnome-db.org
 	GGV/			ggv		jaka@gnu.org
 	Galeon/			galeon		marco@it.gnome.org
