@@ -219,12 +219,12 @@ gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage)
 
 typedef GnomeStorage * (*driver_open_t)(const char *path, gint flags, gint mode);
 
-driver_open_t *
+static driver_open_t
 load_storage_driver (const char *driver_name)
 {
 	GModule *m;
 	char *path;
-	driver_open_t *driver;
+	driver_open_t driver;
 	
 	path = g_module_build_path (STORAGE_LIB, driver_name);
 	m = g_module_open (path, G_MODULE_BIND_LAZY);
@@ -235,7 +235,7 @@ load_storage_driver (const char *driver_name)
 		return NULL;
 	}
 	
-	driver = g_module_symbol (m, "gnome_storage_driver_open", NULL);
+	driver = (driver_open_t) g_module_symbol (m, "gnome_storage_driver_open", NULL);
 
 	return driver;
 }
@@ -257,7 +257,7 @@ GnomeStorage *
 gnome_storage_open (const char *driver, const char *path, gint flags, gint mode)
 {
 	static driver_open_t fs_driver, efs_driver;
-	driver_open_t *driver_ptr;
+	driver_open_t *driver_ptr = NULL;
 	
 	g_return_val_if_fail (path != NULL, NULL);
 	
@@ -269,6 +269,9 @@ gnome_storage_open (const char *driver, const char *path, gint flags, gint mode)
 		if (efs_driver == NULL)
 			efs_driver = load_storage_driver ("storageefs");
 		driver_ptr = &efs_driver;
+	} else {
+		g_warning ("Unknown driver `%s' specified", driver);
+		return NULL;
 	}
 
 	if (*driver_ptr == NULL)

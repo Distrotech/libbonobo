@@ -81,6 +81,14 @@ void gnome_stream_write_class_id  (GnomeStream *stream,
 extern POA_GNOME_Storage__vepv gnome_storage_vepv;
 extern POA_GNOME_Storage__epv gnome_storage_epv;
 
+/* Open modes */
+
+#define GNOME_SS_READ   1
+#define GNOME_SS_WRITE  2
+#define GNOME_SS_RDWR   3
+#define GNOME_SS_CREATE 4
+#define GNOME_SS_EXCL   8
+
 /*
  * Signature for Storage drivers
  */

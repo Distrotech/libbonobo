@@ -1,5 +1,14 @@
 1999-07-31  Miguel de Icaza  <miguel@gnu.org>
 
+	* storage-modules/gnome-storage-fs.c (gnome_storage_fs_open): Use
+	storage flags here too.
+
+	* storage-modules/gnome-storage-efs.c (gnome_storage_driver_open):
+	Use storage flags here.
+
+	* bonobo/gnome-stream-fs.c (gnome_stream_fs_open): Does not longer
+	take a GnomeStorageFS as an argument.
+
 	* bonobo/gnome-storage.c (gnome_storage_open): New function for
 	opening storages, uses a driver argument.
 	
