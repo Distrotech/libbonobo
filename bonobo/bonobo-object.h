@@ -213,6 +213,30 @@ prefix##_get_type (void)                                                      \
 	return type;                                                          \
 }
 
+#define BONOBO_CLASS_BOILERPLATE(type, type_as_function,		\
+				 parent_type, parent_type_macro)	\
+	GNOME_BOILERPLATE(type, type_as_function, type,			\
+			  parent_type, parent_type_macro,		\
+			  BONOBO_REGISTER_TYPE)
+#define BONOBO_REGISTER_TYPE(type, type_as_function, corba_type,	\
+			     parent_type, parent_type_macro)		\
+	bonobo_type_unique (parent_type_macro, NULL, NULL, 0,		\
+			    &object_info, #type)
+
+#define BONOBO_CLASS_BOILERPLATE_FULL(type, type_as_function,		\
+				      corba_type,			\
+				      parent_type, parent_type_macro)	\
+	GNOME_BOILERPLATE(type, type_as_function, corba_type,		\
+			  parent_type, parent_type_macro,		\
+			  BONOBO_REGISTER_TYPE_FULL)
+#define BONOBO_REGISTER_TYPE_FULL(type, type_as_function, corba_type,	\
+				  parent_type, parent_type_macro)	\
+	bonobo_type_unique (parent_type_macro,				\
+			    POA_##corba_type##__init,			\
+			    POA_##corba_type##__fini,			\
+			    G_STRUCT_OFFSET (type##Class, epv),		\
+			    &object_info, #type)
+
 G_END_DECLS
 
 #endif

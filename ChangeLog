@@ -1,3 +1,9 @@
+2001-11-12  Darin Adler  <darin@bentspoon.com>
+
+	* bonobo/bonobo-object.h: Add BONOBO_CLASS_BOILERPLATE and
+	BONOBO_CLASS_BOILERPLATE_FULL, which are Bonobo versions of
+	GNOME_CLASS_BOILERPLATE.
+
 2001-11-09  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_finalize_gobject):
