@@ -1,3 +1,16 @@
+2000-01-26  Miguel de Icaza  <miguel@gnu.org>
+
+	* samples/controls/bonobo-clock-control.c (bonobo_clock_factory):
+	release memory when the control dies;  Use CORBA_boolean instead
+	of gboolean
+
+	* bonobo/bonobo-property-bag.c
+	(bonobo_property_bag_foreach_remove_prop): Only release if a
+	relaser has been defined for the type.
+	(bonobo_property_bag_set_value): ditto.
+	(bonobo_property_bag_init): Set the releaser as NULL for our
+	built-in data types.
+
 2000-01-28  Michael Meeks  <michael@mejm2.dow.cam.ac.uk>
 
 	* gshell/gshell.c: include libgnorba; kill warnings.
@@ -103,6 +116,7 @@
 
 2000-01-26  Martijn van Beers  <martijn@earthling.net>
 
+>>>>>>> 1.278
 	* bonobo/bonobo/.cvsignore: s/bonobo/Bonobo/;
 	* bonobo/components/*/Makefile.am: added -I$(top_srcdir)/bonobo to
 	$INCLUDES, so it will compile without the lib headers installed
@@ -120,7 +134,6 @@
 
 	* configure.in: Bump up number.
 
->>>>>>> 1.276
 2000-01-25  Nat Friedman  <nat@helixcode.com>
 
 	* All files: Renames
@@ -236,7 +249,6 @@
 	* bonobo/bonobo/gnome-storage-private.h moved to           bonobo/bonobo/bonobo-storage-private.h
 	* bonobo/bonobo/gnome-bonobo.h moved to                    bonobo/bonobo/bonobo.h
 
->>>>>>> 1.273
 2000-01-25  Martijn van Beers  <martijn@earthling.net>
 
 	* bonobo/idl/gnome-ui-handler.idl: replace MenuItemNotFound and

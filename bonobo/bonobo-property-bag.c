@@ -28,13 +28,13 @@ POA_Bonobo_PropertyBag__vepv bonobo_property_bag_vepv;
  * Internal data structures.
  */
 struct _BonoboPropertyBagPrivate {
-	PortableServer_POA	      poa;
-	GHashTable		     *props;
-	GHashTable		     *types;
+	PortableServer_POA	       poa;
+	GHashTable		      *props;
+	GHashTable		      *types;
 
 	BonoboPropertyBagPersisterFn   persister;
 	BonoboPropertyBagDepersisterFn depersister;
-	gpointer		      persister_closure;
+	gpointer		       persister_closure;
 };
 
 typedef struct {
@@ -42,7 +42,7 @@ typedef struct {
 	BonoboPropertyBagValueDemarshalerFn demarshaler;
 	BonoboPropertyBagValueReleaserFn    releaser;
 	BonoboPropertyBagValueComparerFn    comparer;
-	gpointer                           user_data;
+	gpointer                            user_data;
 } BonoboPropertyType;
 
 
@@ -63,11 +63,11 @@ typedef struct {
  */
 static PortableServer_Servant
 bonobo_property_servant_locator_preinvoke (PortableServer_Servant servant_manager,
-					  PortableServer_ObjectId *oid,
-					  PortableServer_POA adapter,
-					  CORBA_Identifier op_name,
-					  PortableServer_ServantLocator_Cookie *cookie,
-					  CORBA_Environment *ev)
+					   PortableServer_ObjectId *oid,
+					   PortableServer_POA adapter,
+					   CORBA_Identifier op_name,
+					   PortableServer_ServantLocator_Cookie *cookie,
+					   CORBA_Environment *ev)
 {
 	BonoboPropertyBagServantManager *sm;
 	PortableServer_Servant servant;
@@ -115,12 +115,12 @@ bonobo_property_servant_locator_preinvoke (PortableServer_Servant servant_manage
  */
 static void
 bonobo_property_servant_locator_postinvoke (PortableServer_Servant servant_manager,
-					   PortableServer_ObjectId *oid,
-					   PortableServer_POA adapter,
-					   CORBA_Identifier op_name,
-					   PortableServer_ServantLocator_Cookie cookie,
-					   PortableServer_Servant servant,
-					   CORBA_Environment *ev)
+					    PortableServer_ObjectId *oid,
+					    PortableServer_POA adapter,
+					    CORBA_Identifier op_name,
+					    PortableServer_ServantLocator_Cookie cookie,
+					    PortableServer_Servant servant,
+					    CORBA_Environment *ev)
 {
 	bonobo_property_servant_destroy (servant);
 }
@@ -383,9 +383,9 @@ bonobo_property_bag_get_prop_list (BonoboPropertyBag *pb)
 
 static Bonobo_Property
 bonobo_property_bag_create_objref (BonoboPropertyBag  *pb,
-				  const char        *name,
-				  Bonobo_Property    *obj,
-				  CORBA_Environment *ev)
+				   const char        *name,
+				   Bonobo_Property    *obj,
+				   CORBA_Environment *ev)
 {
 	PortableServer_ObjectId *oid;
 
@@ -399,7 +399,7 @@ bonobo_property_bag_create_objref (BonoboPropertyBag  *pb,
 
 static Bonobo_PropertyList *
 impl_Bonobo_PropertyBag_get_properties (PortableServer_Servant  servant,
-				       CORBA_Environment      *ev)
+					CORBA_Environment      *ev)
 {
 	BonoboPropertyBag   *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
 	Bonobo_PropertyList *prop_list;
@@ -454,8 +454,8 @@ impl_Bonobo_PropertyBag_get_properties (PortableServer_Servant  servant,
 
 static Bonobo_Property
 impl_Bonobo_PropertyBag_get_property (PortableServer_Servant servant,
-				     const CORBA_char *name,
-				     CORBA_Environment *ev)
+				      const CORBA_char *name,
+				      CORBA_Environment *ev)
 {
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
 	Bonobo_Property    prop;
@@ -476,7 +476,7 @@ impl_Bonobo_PropertyBag_get_property (PortableServer_Servant servant,
 
 static Bonobo_PropertyNames *
 impl_Bonobo_PropertyBag_get_property_names (PortableServer_Servant servant,
-					   CORBA_Environment *ev)
+					    CORBA_Environment *ev)
 {
 	BonoboPropertyBag        *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
 	Bonobo_PropertyNames	*name_list;
@@ -523,9 +523,9 @@ impl_Bonobo_PropertyBag_get_property_names (PortableServer_Servant servant,
  */
 void
 bonobo_property_bag_set_persister (BonoboPropertyBag              *pb,
-				  BonoboPropertyBagPersisterFn    persister,
-				  BonoboPropertyBagDepersisterFn  depersister,
-				  gpointer			 user_data)
+				   BonoboPropertyBagPersisterFn    persister,
+				   BonoboPropertyBagDepersisterFn  depersister,
+				   gpointer			   user_data)
 {
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
@@ -537,8 +537,8 @@ bonobo_property_bag_set_persister (BonoboPropertyBag              *pb,
 
 static int
 bonobo_property_bag_persist_save (BonoboPersistStream *ps,
-				 const Bonobo_Stream stream,
-				 void *closure)
+				  const Bonobo_Stream stream,
+				  void *closure)
 {
 	BonoboPropertyBag *pb = closure;
 
@@ -555,8 +555,8 @@ bonobo_property_bag_persist_save (BonoboPersistStream *ps,
 
 static int
 bonobo_property_bag_persist_load (BonoboPersistStream *ps,
-				 const Bonobo_Stream stream,
-				 void *closure)
+				  const Bonobo_Stream stream,
+				  void *closure)
 {
 	BonoboPropertyBag *pb = closure;
 
@@ -578,7 +578,7 @@ bonobo_property_bag_persist_load (BonoboPersistStream *ps,
  */
 static BonoboPropertyBag *
 bonobo_property_bag_construct (BonoboPropertyBag *pb,
-			      CORBA_Object corba_pb)
+			       CORBA_Object corba_pb)
 {
 	BonoboPersistStream *pstream;
 
@@ -651,7 +651,7 @@ bonobo_property_bag_new (void)
 
 static gboolean
 bonobo_property_bag_foreach_remove_type (gpointer key, gpointer value,
-					gpointer user_data)
+					 gpointer user_data)
 {
 	BonoboPropertyType *type = value;
 	char              *type_name = key;
@@ -664,7 +664,7 @@ bonobo_property_bag_foreach_remove_type (gpointer key, gpointer value,
 
 static gboolean
 bonobo_property_bag_foreach_remove_prop (gpointer key, gpointer value,
-					gpointer user_data)
+					 gpointer user_data)
 {
 	BonoboPropertyBag  *pb        = user_data;
 	BonoboProperty     *prop      = value;
@@ -674,9 +674,11 @@ bonobo_property_bag_foreach_remove_prop (gpointer key, gpointer value,
 	type = g_hash_table_lookup (pb->priv->types, prop->type);
 	g_return_val_if_fail (type != NULL, TRUE);
 
-	(type->releaser) (prop->type, prop->value, type->user_data);
-	(type->releaser) (prop->type, prop->default_value, type->user_data);
-
+	if (type->releaser){
+		(type->releaser) (prop->type, prop->value, type->user_data);
+		(type->releaser) (prop->type, prop->default_value, type->user_data);
+	}
+	
 	g_free (prop_name);
 	g_free (prop->docstring);
 	g_free (prop->type);
@@ -742,7 +744,7 @@ bonobo_property_bag_get_epv (void)
 
 static gboolean
 bonobo_property_bag_set_prop_type (BonoboPropertyBag *pb, BonoboProperty *prop,
-				  const char *type)
+				   const char *type)
 {
 	if (g_hash_table_lookup (pb->priv->types, type) == NULL) {
 		g_warning ("bonobo_property_bag_set_prop_type: Type \"%s\" not found\n", type);
@@ -759,7 +761,7 @@ bonobo_property_bag_set_prop_type (BonoboPropertyBag *pb, BonoboProperty *prop,
  */
 void
 bonobo_property_bag_add (BonoboPropertyBag *pb, const char *name, const char *type, gpointer value,
-			gpointer default_value, const char *docstring, BonoboPropertyFlags flags)
+			 gpointer default_value, const char *docstring, BonoboPropertyFlags flags)
 {
 	BonoboProperty *prop;
 
@@ -802,7 +804,7 @@ bonobo_property_bag_add (BonoboPropertyBag *pb, const char *name, const char *ty
  */
 void
 bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
-			      gpointer value)
+			       gpointer value)
 {
 	BonoboPropertyType *ptype;
 	BonoboProperty     *prop;
@@ -826,7 +828,8 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
 	ptype = g_hash_table_lookup (pb->priv->types, prop->type);
 	g_return_if_fail (ptype != NULL);
 
-	(ptype->releaser) (prop->type, old_value, ptype->user_data);
+	if (ptype->releaser)
+		(ptype->releaser) (prop->type, old_value, ptype->user_data);
 }
 
 /**
@@ -834,7 +837,7 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
  */
 void
 bonobo_property_bag_set_default (BonoboPropertyBag *pb, const char *name,
-				gpointer default_value)
+				 gpointer default_value)
 {
 	BonoboProperty *prop;
 
@@ -852,7 +855,7 @@ bonobo_property_bag_set_default (BonoboPropertyBag *pb, const char *name,
  */
 void
 bonobo_property_bag_set_docstring (BonoboPropertyBag *pb, const char *name,
-				  char *docstring)
+				   char *docstring)
 {
 	BonoboProperty *prop;
 
@@ -872,7 +875,7 @@ bonobo_property_bag_set_docstring (BonoboPropertyBag *pb, const char *name,
  */
 void
 bonobo_property_bag_set_flags (BonoboPropertyBag *pb, const char *name,
-			      BonoboPropertyFlags flags)
+			       BonoboPropertyFlags flags)
 {
 	BonoboProperty *prop;
 
@@ -995,11 +998,11 @@ bonobo_property_bag_has_property (BonoboPropertyBag *pb, const char *name)
  */
 void
 bonobo_property_bag_create_type (BonoboPropertyBag *pb, char *type_name,
-				BonoboPropertyBagValueMarshalerFn   marshaler,
-				BonoboPropertyBagValueDemarshalerFn demarshaler,
-				BonoboPropertyBagValueComparerFn    comparer,
-				BonoboPropertyBagValueReleaserFn    releaser,
-				gpointer                           user_data)
+				 BonoboPropertyBagValueMarshalerFn   marshaler,
+				 BonoboPropertyBagValueDemarshalerFn demarshaler,
+				 BonoboPropertyBagValueComparerFn    comparer,
+				 BonoboPropertyBagValueReleaserFn    releaser,
+				 gpointer                            user_data)
 {
 	BonoboPropertyType *ptype;
 
@@ -1027,7 +1030,7 @@ bonobo_property_bag_create_type (BonoboPropertyBag *pb, char *type_name,
  */
 CORBA_any *
 bonobo_property_bag_value_to_any (BonoboPropertyBag *pb, const char *type,
-				 const gpointer value)
+				  const gpointer value)
 {
 	BonoboPropertyBagValueMarshalerFn  value_marshaler;
 	BonoboPropertyType                *ptype;
@@ -1053,7 +1056,7 @@ bonobo_property_bag_value_to_any (BonoboPropertyBag *pb, const char *type,
  */
 gpointer
 bonobo_property_bag_any_to_value (BonoboPropertyBag *pb, const char *type,
-				 const CORBA_any *any)
+				  const CORBA_any *any)
 {
 	BonoboPropertyBagValueDemarshalerFn  value_demarshaler;
 	BonoboPropertyType                  *ptype;
@@ -1079,7 +1082,7 @@ bonobo_property_bag_any_to_value (BonoboPropertyBag *pb, const char *type,
  */
 gboolean
 bonobo_property_bag_compare_values (BonoboPropertyBag *pb, const char *type,
-				   gpointer value1, gpointer value2)
+				    gpointer value1, gpointer value2)
 {
 	BonoboPropertyBagValueComparerFn  value_comparer;
 	BonoboPropertyType		*ptype;
@@ -1174,53 +1177,45 @@ bonobo_property_bag_init (BonoboPropertyBag *pb)
 
 	/* Prime the table with some default types. */
 	bonobo_property_bag_create_type (pb, "boolean",
-					bonobo_property_marshal_boolean,
-					bonobo_property_demarshal_boolean,
-					bonobo_property_compare_boolean,
-					bonobo_property_generic_releaser,
-					NULL);
+					 bonobo_property_marshal_boolean,
+					 bonobo_property_demarshal_boolean,
+					 bonobo_property_compare_boolean,
+					 NULL, NULL);
 	bonobo_property_bag_create_type (pb, "string",
-					bonobo_property_marshal_string,
-					bonobo_property_demarshal_string,
-					bonobo_property_compare_string,
-					bonobo_property_generic_releaser,
-					NULL);
+					 bonobo_property_marshal_string,
+					 bonobo_property_demarshal_string,
+					 bonobo_property_compare_string,
+					 NULL, NULL);
 	bonobo_property_bag_create_type (pb, "short",
-					bonobo_property_marshal_short,
-					bonobo_property_demarshal_short,
-					bonobo_property_compare_short,
-					bonobo_property_generic_releaser,
-					NULL);
+					 bonobo_property_marshal_short,
+					 bonobo_property_demarshal_short,
+					 bonobo_property_compare_short,
+					 NULL, NULL);
 	bonobo_property_bag_create_type (pb, "ushort",
-					bonobo_property_marshal_ushort,
-					bonobo_property_demarshal_ushort,
-					bonobo_property_compare_ushort,
-					bonobo_property_generic_releaser,
-					NULL);
+					 bonobo_property_marshal_ushort,
+					 bonobo_property_demarshal_ushort,
+					 bonobo_property_compare_ushort,
+					 NULL, NULL);
 	bonobo_property_bag_create_type (pb, "long",
-					bonobo_property_marshal_long,
-					bonobo_property_demarshal_long,
-					bonobo_property_compare_long,
-					bonobo_property_generic_releaser,
-					NULL);
+					 bonobo_property_marshal_long,
+					 bonobo_property_demarshal_long,
+					 bonobo_property_compare_long,
+					 NULL, NULL);
 	bonobo_property_bag_create_type (pb, "ulong",
-					bonobo_property_marshal_ulong,
-					bonobo_property_demarshal_ulong,
-					bonobo_property_compare_ulong,
-					bonobo_property_generic_releaser,
-					NULL);
+					 bonobo_property_marshal_ulong,
+					 bonobo_property_demarshal_ulong,
+					 bonobo_property_compare_ulong,
+					 NULL, NULL);
 	bonobo_property_bag_create_type (pb, "float",
-					bonobo_property_marshal_float,
-					bonobo_property_demarshal_float,
-					bonobo_property_compare_float,
-					bonobo_property_generic_releaser,
-					NULL);
+					 bonobo_property_marshal_float,
+					 bonobo_property_demarshal_float,
+					 bonobo_property_compare_float,
+					 NULL, NULL);
 	bonobo_property_bag_create_type (pb, "double",
-					bonobo_property_marshal_double,
-					bonobo_property_demarshal_double,
-					bonobo_property_compare_double,
-					bonobo_property_generic_releaser,
-					NULL);
+					 bonobo_property_marshal_double,
+					 bonobo_property_demarshal_double,
+					 bonobo_property_compare_double,
+					 NULL, NULL);
 }
 
 /**
