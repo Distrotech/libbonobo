@@ -17,6 +17,7 @@ typedef struct {
 	GtkObject base;
 
 	CORBA_Object object;
+	CORBA_environment ev;
 } GnomeObject;
 
 typedef struct {
@@ -28,9 +29,16 @@ GtkType      gnome_object_get_type         (void);
 
 GnomeObject *gnome_object_from_servant     (POA_GNOME_object *servant);
 
+void         gnome_object_bind_to_servant  (GnomeObject *object,
+					    void *servant);
+void         gnome_object_drop_binding     (void *servant);
+
+
+
 /* CORBA defaults we provide */
 PortableServer_ServantBase__epv gnome_object_base_epv;
 POA_GNOME_object__epv gnome_object_epv;
 POA_GNOME_object__vepv gnome_object_vepv;
+
 
 #endif
