@@ -7,8 +7,7 @@ oaf_sysconf_SOURCES = 			\
 	$(NULL)
 
 INCLUDES = 					\
-	$(XML_CFLAGS)				\
-	$(GLIB_CFLAGS)				\
+	$(UTIL_CFLAGS)				\
 	-I$(top_srcdir)				\
 	-I$(top_srcdir)/oafd/			\
 	-I$(top_srcdir)/liboaf/			\
@@ -17,7 +16,6 @@ INCLUDES = 					\
 	$(NULL)
 
 oaf_sysconf_LDADD =			\
-	$(XML_LIBS)			\
-	$(GLIB_LIBS)			\
+	$(UTILS_LIBS)			\
 	$(INTLLIBS)			\
 	$(NULL)

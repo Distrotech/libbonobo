@@ -9,9 +9,7 @@ INCLUDES=					\
 	-I$(top_srcdir)/liboaf			\
 	-DOAFINFODIR=\"$(pkgdatadir)\" 		\
 	-DOAF_LOCALEDIR=\""$(datadir)/locale"\" \
-	@ORBIT_CFLAGS@ 				\
-	@XML_CFLAGS@ 				\
-	@GLIB_CFLAGS@				\
+	$(OAFD_CFLAGS)				\
 	-DOAF_CONFDIR=\"$(sysconfdir)\"		\
 	$(NULL)
 
@@ -36,10 +34,7 @@ oafd_SOURCES=					\
 	oafd.h
 
 LDADD=../liboaf/liboaf-2.la \
-	@ORBIT_LIBS@ -lORBitCosNaming-2 -lname-server \
-	@XML_LIBS@ \
-	@INTLLIBS@ \
-	@GLIB_LIBS@
+	$(OAFD_LIBS) -lname-server @INTLLIBS@
 
 oaf_client_SOURCES=client.c
 

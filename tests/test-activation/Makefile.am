@@ -51,8 +51,8 @@ empty_built: empty.idl $(ORBIT_IDL)
 CLEANFILES=empty_built
 
 INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\" \
-	@ORBIT_CFLAGS@ @XML_CFLAGS@ @GLIB_CFLAGS@
-LDADD=../liboaf/liboaf-2.la @ORBIT_LIBS@ @GLIB_LIBS@
+	$(UTILS_CFLAGS)
+LDADD=../liboaf/liboaf-2.la $(UTILS_LIBS)
 
 oaffiles=empty.oafinfo
 
