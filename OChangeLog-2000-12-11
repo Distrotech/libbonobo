@@ -1,3 +1,9 @@
+2000-02-04  Chris Blizzard  <blizzard@redhat.com>
+
+	* bonobo/bonobo-selector.c (get_filtered_objects): Make sure to
+ 	return the list of valid servers instead of always returning NULL.
+  	This should get the selector working again.
+	
 2000-02-03  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo/bonobo/bonobo-control-frame.c, bonobo-control.c: Instead
