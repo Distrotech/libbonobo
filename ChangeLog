@@ -1,3 +1,9 @@
+2004-07-21  Antonio Xu  <antonio.xu@sun.com>
+
+	* activation-server/object-directory-corba.c
+	(remove_active_server): add judgement to make sure the count
+	of active server is right.
+
 2004-07-09  Tommi Komulainen  <tommi.komulainen@iki.fi>
 
 	* bonobo/bonobo-app-client.c
