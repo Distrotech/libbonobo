@@ -1,5 +1,8 @@
 2000-10-11  Martin Baulig  <baulig@suse.de>
 
+	* components/audio-ulaw/bonobo-audio-ulaw.c: Transformed this
+	from a BonoboEmbeddable into a BonoboControl.
+
 	* components/text-plain/bonobo-text-plain.c: Transformed this
 	from a BonoboEmbeddable into a BonoboControl.
 
