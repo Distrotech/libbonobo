@@ -1,5 +1,13 @@
 2001-01-25  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-sync-toolbar.c (config_verb_fn): do a
+	bonobo_ui_engine_configure on Customize
+	(do_config_popup): Setup the customize item
+	(impl_bonobo_ui_sync_toolbar_state): setup priority on
+	toolbar items.
+
+2001-01-25  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-sync-menu.c (str_uscore_equal, label_same): impl.
 	(impl_bonobo_ui_sync_menu_state): use it to avoid re-creating
 	the menu widget.
