@@ -216,12 +216,6 @@ bonobo_activation_base_service_set (const BonoboActivationBaseService *base_serv
 	bonobo_activation_registries_unlock (ev);
 }
 
-
-const char *bonobo_activation_ac_cmd[] =
-	{ SERVER_LIBEXECDIR "/bonobo-activation-server", "--ac-activate", "--ior-output-fd=%d", NULL };
-const char *bonobo_activation_od_cmd[] = 
-        { SERVER_LIBEXECDIR "/bonobo-activation-server", "--ior-output-fd=%d", NULL };
-
 struct SysServerInstance
 {
 	CORBA_Object already_running;
@@ -237,8 +231,8 @@ struct SysServer
 }
 activatable_servers[] =
 {
-	{"IDL:Bonobo/ActivationContext:1.0", (const char **) bonobo_activation_ac_cmd,
-         2, CORBA_OBJECT_NIL}, 
+                                /* cmd filled in at runtime */
+	{"IDL:Bonobo/ActivationContext:1.0", NULL, 2, CORBA_OBJECT_NIL}, 
 	{ NULL}
 };
 
@@ -339,7 +333,7 @@ ai_compare (gconstpointer a, gconstpointer b)
 
 void
 bonobo_activation_base_service_activator_add (BonoboActivationBaseServiceActivator activator, 
-                                int priority)
+                                              int priority)
 {
 	ActivatorInfo *new_act;
 
@@ -670,6 +664,7 @@ local_activator (const BonoboActivationBaseService *base_service,
 	     || STRMATCH (base_service->username, g_get_user_name ()))
 	    && (!base_service->hostname
 		|| STRMATCH (base_service->hostname, bonobo_activation_hostname_get ()))) {
+
 		return bonobo_activation_server_by_forking (
                         cmd, FALSE, fd_arg, NULL, NULL, base_service->name,
                         local_re_check_fn, (gpointer)base_service, ev);
@@ -681,7 +676,18 @@ local_activator (const BonoboActivationBaseService *base_service,
 void
 bonobo_activation_base_service_init (void)
 {
+        const char *override_cmd;
+        static const char *bonobo_activation_ac_cmd[] =
+                { SERVER_LIBEXECDIR "/bonobo-activation-server",
+                  "--ac-activate", "--ior-output-fd=%d", NULL };
+
 	bonobo_activation_base_service_activator_add (local_activator, 0);
 
 	bonobo_activation_base_service_registry_add (&rloc_file, 0, NULL);
+
+        if ((override_cmd = g_getenv ("BONOBO_ACTIVATION_SERVER")) &&
+            (override_cmd[0] != '\0'))
+                bonobo_activation_ac_cmd [0] = override_cmd;
+
+        activatable_servers[0].cmd = bonobo_activation_ac_cmd;
 }

@@ -11,6 +11,7 @@ fi
 TMPDIR=$ORBIT_TMPDIR;
 export TMPDIR;
 
+export BONOBO_ACTIVATION_SERVER='../../activation-server/bonobo-activation-server';
 export BONOBO_ACTIVATION_DEBUG_OUTPUT='1';
 export BONOBO_ACTIVATION_PATH=".:$BONOBO_ACTIVATION_PATH";
 export PATH=".:$PATH";

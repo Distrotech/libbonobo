@@ -21,6 +21,7 @@ INCLUDES=					\
 bonobo_activation_server_SOURCES=				\
 	activation-server-corba-extensions.c			\
 	activation-server-corba-extensions.h			\
+	activation-context.h					\
 	activation-context-query.h				\
 	activation-context-query.c				\
 	activation-context-query-lexer.c			\

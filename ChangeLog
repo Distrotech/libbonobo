@@ -1,5 +1,19 @@
 2003-05-06  Michael Meeks  <michael@ximian.com>
 
+	* tests/test-properties.sh: remove the iorfile before run.
+
+	* tests/test-properties-client.c (main): set the orb
+	before using it.
+
+	* tests/test-activation/test.sh: set BONOBO_ACTIVATION_SERVER.
+
+	* bonobo-activation/bonobo-activation-base-service.c: bin od_cmd.
+	(bonobo_activation_base_service_init): clobber the activation
+	server exe, so the tests can run on a non-installed b-a-s.
+
+	* activation-server/Makefile.am
+	(bonobo_activation_server_SOURCES): add activation-context.h
+
 	* Makefile.am (SUBDIRS): add 'util'
 
 	* utils/bonobo-activation-sysconf.c: fixup.
