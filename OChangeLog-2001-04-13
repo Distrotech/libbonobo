@@ -1,3 +1,8 @@
+Mon Mar 12 23:55:17 CET 2001 Paolo Molaro <lupus@ximian.com>
+
+	* tools/idl-grep.c, tools/Makefile.am: add idl-grep tool
+	to grep for repo ids in idl files.
+
 2001-03-12  Paolo Molaro <lupus@ximian.com>
 
 	* idl/Bonobo_Print.idl: include Bonobo_Storage.idl not the
