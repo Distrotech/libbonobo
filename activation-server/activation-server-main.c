@@ -103,11 +103,9 @@ main (int argc, char *argv[])
 	}
 
         /* This is needed because otherwise, if oafd persists across X
-         * sessions, spawned processes will inherit an invalid value
-         * and be very very slow while attempting to connect to the
-         * old, dead session manager.
-         * FIXME: do spawned processes need this info? If so, we're
-         * in trouble.
+         * sessions, spawned processes will inherit an invalid value of
+         * SESSION_MANAGER and be very very slow while attempting to 
+         * connect to it.
          */
         unsetenv ("SESSION_MANAGER");
 
