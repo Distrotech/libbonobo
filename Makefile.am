@@ -9,3 +9,6 @@ EXTRA_DIST = \
 	intltool-merge.in    \
 	intltool-update.in   \
 	changes.txt
+
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
+
