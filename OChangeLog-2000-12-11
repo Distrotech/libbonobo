@@ -1,3 +1,21 @@
+1999-05-28  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* configure.in (AC_OUTPUT): Remove 'sed .. POTFILES' expression.
+	(AM_GNOME_GETTEXT): Use instead of AM_GNU_GETTEXT.
+	(BONOBO_INCLUDEDIR): Use $GNOME_CONFIG instead of calling
+	gnome-config directly.
+	(BONOBO_LIBS): Likewise.
+
+	* bonobo/Makefile.am (idl_flags): Use $(GNOME_CONFIG) instead of
+	calling `gnome-config' directly.
+	($(CORBA_SOURCE)): Use $(ORBIT_IDL) instead of calling `orbit-idl'
+	directly. 
+
+	* components/text-plain/Makefile.am (bonobo_text_plain_LDADD): 
+	Use $(top_builddir) not $(top_srcdir).
+	* components/image-x-png/Makefile.am (bonobo_image_x_png_LDADD): 
+	Likewise.
+	
 1999-05-28  Nat Friedman  <nat@gnome-support.com>
 
 	* Makefile.am (SUBDIRS): Added components.
