@@ -97,7 +97,7 @@ bonobo_activation_info_free (BonoboActivationInfo * actinfo)
  */
 
 BonoboActivationInfo *
-bonobo_activation_id_parse (const Bonobo_ActivationID actid)
+bonobo_activation_id_parse (const CORBA_char *actid)
 {
 	BonoboActivationInfo *retval;
 	char *splitme, *ctmp, *ctmp2;
