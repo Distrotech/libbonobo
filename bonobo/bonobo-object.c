@@ -73,7 +73,6 @@ bonobo_object_from_servant (PortableServer_Servant servant)
 PortableServer_Servant
 bonobo_object_get_servant (BonoboObject *object)
 {
-	g_return_val_if_fail (object != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
 	return object->servant;
@@ -94,9 +93,8 @@ bonobo_object_get_servant (BonoboObject *object)
 void
 bonobo_object_bind_to_servant (BonoboObject *object, void *servant)
 {
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (servant != NULL);
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
+	g_return_if_fail (servant != NULL);
 
 	object->servant = servant;
 	((BonoboObjectServant *)servant)->bonobo_object = object;
@@ -111,7 +109,6 @@ bonobo_object_bind_to_servant (BonoboObject *object, void *servant)
 void
 bonobo_object_ref (BonoboObject *object)
 {
-	g_return_if_fail (object != NULL);
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
@@ -127,31 +124,23 @@ bonobo_object_ref (BonoboObject *object)
 void
 bonobo_object_unref (BonoboObject *object)
 {
-	g_return_if_fail (object != NULL);
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
-	object->priv->ao->ref_count--;
-
-	if (object->priv->ao->ref_count == 0){
-		GnomeAggregateObject *ao = object->priv->ao;
-		GList *l;
-
-		for (l = ao->objs; l; l = l->next){
-			BonoboObject *o = l->data;
-
-			gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
-			gtk_object_destroy (GTK_OBJECT (o));
-		}
-
-		g_list_free (ao->objs);
-		g_free (ao);
+	if (object->priv->ao->ref_count == 1) {
+		bonobo_object_destroy (object);
+	} else {
+		object->priv->ao->ref_count--;
 	}
 }
 
 /**
  * bonobo_object_destroy
  * @object: A BonoboObject you want to destroy.
+ *
+ * This function is deprecated. Use bonobo_object_unref instead.
+ * This is *not* like gtk_object_destroy, which can be done independently
+ * of gtk_object_unref and has no effect on the ref count.
  *
  * Destroys an object.  Ignores all reference count.  Used when you want
  * to force the destruction of the composite object (use only if you know
@@ -163,12 +152,12 @@ bonobo_object_destroy (BonoboObject *object)
 	GnomeAggregateObject *ao;
 	GList *l;
 
-	g_return_if_fail (object != NULL);
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
 	ao = object->priv->ao;
 
+	ao->ref_count = 0;
 	for (l = ao->objs; l; l = l->next){
 		BonoboObject *o = l->data;
 
@@ -215,7 +204,6 @@ bonobo_object_get_local_interface_from_objref (BonoboObject *object,
 
 		if (CORBA_Object_is_equivalent (interface, tryme->corba_objref, &ev)) {
 			CORBA_exception_free (&ev);
-
 			return tryme;
 		}
 
@@ -248,7 +236,6 @@ bonobo_object_query_local_interface (BonoboObject *object,
 	GtkType            type;
 	GList             *l;
 
-	g_return_val_if_fail (object != NULL,            NULL);
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
 	retval       = NULL;
@@ -469,7 +456,6 @@ bonobo_object_activate_servant (BonoboObject *object, void *servant)
 	CORBA_Environment ev;
 	CORBA_Object o;
 
-	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), CORBA_OBJECT_NIL);
 	g_return_val_if_fail (servant != NULL, CORBA_OBJECT_NIL);
 
@@ -506,7 +492,6 @@ bonobo_object_activate_servant (BonoboObject *object, void *servant)
 BonoboObject *
 bonobo_object_construct (BonoboObject *object, CORBA_Object corba_object)
 {
-	g_return_val_if_fail (object != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 
@@ -589,7 +574,6 @@ bonobo_object_query_interface (BonoboObject *object, const char *repo_id)
 CORBA_Object
 bonobo_object_corba_objref (BonoboObject *object)
 {
-	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
 	return object->corba_objref;
@@ -610,9 +594,8 @@ bonobo_object_corba_objref (BonoboObject *object)
 void
 bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environment *ev)
 {
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (ev != NULL);
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
+	g_return_if_fail (ev != NULL);
 
 	if (ev->_major == CORBA_NO_EXCEPTION)
 		return;
