@@ -1,3 +1,9 @@
+2000-04-13   Nat Friedman, Dan Winship <nat,danw@helixcode.com>
+
+	* bonobo/bonobo-persist-stream.c
+	(bonobo_persist_stream_minus_one): The correct value for not
+	supported was documented as minus one.  
+
 2000-04-13  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-print-client.c: Total API re-write.
