@@ -63,13 +63,6 @@ Bonobo_Unknown      bonobo_shlib_factory_std          (const char            *co
 						       gpointer               user_data,
 						       CORBA_Environment     *ev);
 
-void                bonobo_shlib_factory_track_object (BonoboShlibFactory    *factory,
-						       BonoboObject          *object);
-
-void                bonobo_shlib_factory_inc_live     (BonoboShlibFactory    *factory);
-
-void                bonobo_shlib_factory_dec_live     (BonoboShlibFactory    *factory);
-
 #define BONOBO_OAF_SHLIB_FACTORY(oafiid, descr, fn, data)                     \
 	BONOBO_ACTIVATION_SHLIB_FACTORY(oafiid, descr, fn, data)
 #define BONOBO_OAF_SHLIB_FACTORY_MULTI(oafiid, descr, fn, data)               \
