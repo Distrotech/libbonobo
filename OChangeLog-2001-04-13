@@ -1,3 +1,8 @@
+2000-05-25  Iain Holmes  <ih@csd.abdn.ac.uk>
+
+	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_set_pixmap_internal):
+	fix to allow labelless toolbar items.
+
 2000-05-23  Mike Kestner  <mkestner@ameritech.net>
 
 	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_create_widgets): 
