@@ -1,25 +1,25 @@
 # Korean messages for libbonobo
 # Chideok Hwang <hwang@mizi.co.kr>, 2000.
-# Changwoo Ryu <cwryu@debian.org>, 2002.
+# Changwoo Ryu <cwryu@debian.org>, 2002-2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.0.0\n"
-"POT-Creation-Date: 2003-04-07 20:13+0200\n"
-"PO-Revision-Date: 2002-08-06 07:45+0900\n"
-"Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
+"Project-Id-Version: libbonobo 2.3.0\n"
+"POT-Creation-Date: 2003-05-01 21:07+0900\n"
+"PO-Revision-Date: 2003-05-01 21:24+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:549
+#: activation-server/activation-context-corba.c:471
 msgid "Couldn't find which child the server was listed in"
 msgstr "서버가 열거되어있는 자식 프로세스를 발견할 수가 없습니다"
 
-#: activation-server/activation-context-corba.c:844
+#: activation-server/activation-context-corba.c:762
 msgid "Not a valid Activation ID"
-msgstr ""
+msgstr "올바른 액티베이션 ID가 아닙니다"
 
 #: activation-server/activation-server-main.c:66
 msgid "Directory to read .server files from"
@@ -61,7 +61,7 @@ msgstr "네임 서비스"
 
 #: activation-server/object-directory-activate.c:185
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "아직 별도의 프로세스에 있는 shlib object를 활성화 시킬수는 없습니다"
+msgstr "아직 별도의 프로세스에 있는 shlib object를 활성화 시킬 수는 없습니다"
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
@@ -79,7 +79,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:886
+#: activation-server/object-directory-corba.c:891
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "서버 '%s'을(를) 활성화하는 데 경쟁 조건 발생"
@@ -131,7 +131,7 @@ msgstr "자식이 %u (%s) 시그날을 받았습니다"
 #: bonobo-activation/bonobo-activation-fork-server.c:324
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr "알수없는 non-exit 오류 (상태는 %u)"
+msgstr "알 수 없는 non-exit 오류 (상태는 %u)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:387
 #, c-format
@@ -146,7 +146,7 @@ msgstr "%s을(를) 실행하는 데 실패했습니다: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr ""
+msgstr "한 로케일에 대해 alias가 너무 많습니다.  루프일 지도 모릅니다."
 
 #: bonobo-activation/bonobo-activation-init.c:255
 msgid "File descriptor to print IOR on"
@@ -184,6 +184,14 @@ msgstr "`%s' 팩토리가 `%s'에 대해 NIL을 리턴했습니다"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "`%s' 공유라이브러리에 `%s'이(가) 들어 있지 않습니다"
+
+#: bonobo/bonobo-object.c:881
+msgid "POA"
+msgstr "POA"
+
+#: bonobo/bonobo-object.c:881
+msgid "Custom CORBA POA"
+msgstr "사용자 지정 CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -325,7 +333,7 @@ msgstr "설명 없는 일반 활성화 오류"
 msgid "Could not initialize Bonobo"
 msgstr "보노보를 초기화할 수 없습니다"
 
-#: bonobo/bonobo-moniker.c:353
+#: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "'%s' 이름을 확인, 혹은 확장할 수 없습니다"
@@ -335,12 +343,12 @@ msgid "Failed to activate object"
 msgstr "개체를 활성화하는 데 실패했습니다"
 
 #: monikers/bonobo-moniker-oaf.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Exception activating '%s'"
 msgstr "'%s' 활성화에 예외가 발생했습니다"
 
 #: monikers/bonobo-moniker-oaf.c:62
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to activate '%s'"
 msgstr "'%s' 활성화에 실패했습니다"
 
@@ -442,7 +450,7 @@ msgstr "보노보 액티베이션 설정파일은 다음을 포함하고 있습�
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr "설정 파일에서 제거할 디렉토리"
+msgstr "설정 파일에서 지울 디렉토리"
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
@@ -450,7 +458,7 @@ msgstr "디렉토리 경로"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr "설정 파일에 추가할 디렉토리"
+msgstr "설정 파일에 더할 디렉토리"
 
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
@@ -459,27 +467,3 @@ msgstr "설정 파일에 있는 디렉토리를 보여주기"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "설정 파일에 대한 경로를 보여주기"
-
-#~ msgid "No server corresponding to your query"
-#~ msgstr "쿼리에 대응하는 서버가 없습니다"
-
-#~ msgid "Query failed: "
-#~ msgstr "쿼리 실패: "
-
-#~ msgid "Activation failed: "
-#~ msgstr "활성화 실패: "
-
-#~ msgid "Could not parse AID"
-#~ msgstr "AID를 구문 분석할 수 없습니다"
-
-#~ msgid "Could not parse context: "
-#~ msgstr "컨텍스트를 구문 분석할 수 없습니다: "
-
-#~ msgid "Could not activate server: "
-#~ msgstr "서버를 활성화할 수 없습니다: "
-
-#~ msgid "Domain of ObjectDirectory"
-#~ msgstr "ObjectDirectory의 도메인"
-
-#~ msgid "DOMAIN"
-#~ msgstr "<도메인>"
