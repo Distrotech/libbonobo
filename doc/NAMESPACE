@@ -18,7 +18,7 @@ subdomains:
 	Config/			GConf		hp@redhat.com
 	Gnumeric/		Gnumeric	jody@helixcode.com
 	GtkHtml/		GtkHtml		rodo@helixcode.com
-	Guppi3/			guppi3		jon@emccta.com
+	Guppi/			guppi3		trow@gnu.org
 	Nautilus/		Nautilus	darin@eazel.com
 	Print/			gnome-print	chema@celorio.com
 	SodiPodi/		sodipodi	lauris@helixcode.com
