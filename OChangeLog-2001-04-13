@@ -1,3 +1,7 @@
+2000-08-08  Robin * Slomkowski  <rslomkow@eazel.com>
+
+	* Makefile.am: some fixes so it passes make distcheck
+
 2000-08-07  Federico Mena Quintero  <federico@helixcode.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_finalize): This function
