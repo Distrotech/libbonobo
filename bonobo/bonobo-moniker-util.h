@@ -12,7 +12,6 @@
 #define _BONOBO_MONIKER_UTIL_H
 
 #include <bonobo/Bonobo.h>
-#include <bonobo/bonobo-async.h>
 
 /* Useful client functions */
 Bonobo_Unknown      bonobo_get_object                            (const CORBA_char        *name,      
@@ -42,13 +41,11 @@ typedef void (*BonoboMonikerAsyncFn) (Bonobo_Unknown     object,
 void                bonobo_get_object_async                      (const CORBA_char        *name,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
-								  guint                    timeout_msec,
 								  BonoboMonikerAsyncFn     cb,
 								  gpointer                 user_data);
 
 void                bonobo_moniker_client_new_from_name_async    (const CORBA_char        *name,
 								  CORBA_Environment       *ev,
-								  guint                    timeout_msec,
 								  BonoboMonikerAsyncFn     cb,
 								  gpointer                 user_data);
 
@@ -56,14 +53,12 @@ void                bonobo_moniker_resolve_async                 (Bonobo_Moniker
 								  Bonobo_ResolveOptions   *options,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
-								  guint                    timeout_msec,
 								  BonoboMonikerAsyncFn     cb,
 								  gpointer                 user_data);
 
 void                bonobo_moniker_resolve_async_default         (Bonobo_Moniker           moniker,
 								  const char              *interface_name,
 								  CORBA_Environment       *ev,
-								  guint                    timeout_msec,
 								  BonoboMonikerAsyncFn     cb,
 								  gpointer                 user_data);
 

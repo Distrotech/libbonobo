@@ -1,3 +1,12 @@
+2001-10-13  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-moniker-util.c: kill all the ENABLE_ORBIT2 bits.
+
+	* bonobo/bonobo-moniker-util.h: don't include bonobo-async.h
+
+	* bonobo/Makefile.am (libbonobo_src): remove bonobo-async.[ch],
+	dead - see ORBit2/src/orb/orb-core/orbit-small *Async*
+
 2001-09-29  Iain Holmes  <iain@ximian.com>
 
 	* bonobo/bonobo-listener.c (bonobo_listener_new): Check if the callback

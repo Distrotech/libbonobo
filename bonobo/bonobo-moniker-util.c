@@ -648,14 +648,25 @@ bonobo_get_object (const CORBA_char *name,
 	return retval;
 }
 
-#ifdef ENABLE_ORBIT2
-#warning Async monikers disabled
-#else
+static ORBit_IMethod *set_name_method = NULL;
+static ORBit_IMethod *resolve_method = NULL;
+
+static void
+setup_methods (void)
+{
+	set_name_method = &Bonobo_Moniker__iinterface.methods._buffer[3];
+	resolve_method  = &Bonobo_Moniker__iinterface.methods._buffer[4];
+
+	/* If these blow the IDL changed order, and the above
+	   indexes need updating */
+	g_assert (!strcmp (set_name_method->name, "setName"));
+	g_assert (!strcmp (resolve_method->name, "resolve"));
+}
+
 typedef struct {
 	char                *name;
 	BonoboMonikerAsyncFn cb;
 	gpointer             user_data;
-	guint                timeout_msec;
 	Bonobo_Unknown       moniker;
 } parse_async_ctx_t;
 
@@ -669,9 +680,11 @@ parse_async_ctx_free (parse_async_ctx_t *ctx)
 }
 
 static void
-async_parse_cb (BonoboAsyncReply  *reply,
-		CORBA_Environment *ev,
-		gpointer           user_data)
+async_parse_cb (CORBA_Object          object,
+		ORBit_IMethod        *m_data,
+		ORBitAsyncQueueEntry *aqe,
+		gpointer              user_data, 
+		CORBA_Environment    *ev)
 {
 	parse_async_ctx_t *ctx = user_data;
 
@@ -680,12 +693,13 @@ async_parse_cb (BonoboAsyncReply  *reply,
 	else {
 		Bonobo_Moniker retval;
 
-		bonobo_async_demarshal (reply, &retval, NULL);
+		ORBit_small_demarshal_async (aqe, &retval, NULL, ev);
 
 		ctx->cb (retval, ev, ctx->user_data);
 	}
 
 	bonobo_object_release_unref (ctx->moniker, ev);
+
 	parse_async_ctx_free (ctx);
 }
 
@@ -719,29 +733,16 @@ async_activation_cb (CORBA_Object activated_object,
 					     ex_Bonobo_Moniker_InterfaceNotFound, NULL);
 			ctx->cb (CORBA_OBJECT_NIL, &ev, ctx->user_data);
 			parse_async_ctx_free (ctx);
+
 		} else {
-			static const BonoboAsyncArg arguments [] = {
-				{ TC_CORBA_Object, BONOBO_ASYNC_IN },
-				{ TC_CORBA_string, BONOBO_ASYNC_IN },
-				{ NULL }
-			};
-			static const CORBA_TypeCode exceptions [] = {
-				TC_Bonobo_Moniker_InvalidSyntax,
-				TC_Bonobo_Moniker_UnknownPrefix,
-				NULL
-			};
-			static const BonoboAsyncMethod method = {
-				"parseDisplayName", 
-				TC_CORBA_Object, 
-				arguments,
-				exceptions
-			};
-			CORBA_Object obj = CORBA_OBJECT_NIL;
-			gpointer arg_values [2] = { &obj, &ctx->name };
+			gpointer args [] = { &ctx->name };
 	
-			bonobo_async_invoke (&method, async_parse_cb, ctx,
-					     ctx->timeout_msec,
-					     ctx->moniker, arg_values, &ev);
+			if (!set_name_method)
+				setup_methods ();
+				
+			ORBit_small_invoke_async (
+				ctx->moniker, set_name_method,
+				async_parse_cb, ctx, args, NULL, &ev);
 			
 			if (BONOBO_EX (&ev)) {
 				ctx->cb (CORBA_OBJECT_NIL, &ev, ctx->user_data);
@@ -759,7 +760,6 @@ async_activation_cb (CORBA_Object activated_object,
  * bonobo_moniker_client_new_from_name_async:
  * @name: the name
  * @ev: a corba exception environment 
- * @timeout_msec: the timeout in milliseconds 
  * @cb: the async callback that gets the response
  * @user_data: user context data to pass to that callback
  * 
@@ -768,7 +768,6 @@ async_activation_cb (CORBA_Object activated_object,
 void
 bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 					   CORBA_Environment   *ev,
-					   guint                timeout_msec,
 					   BonoboMonikerAsyncFn cb,
 					   gpointer             user_data)
 {
@@ -791,7 +790,6 @@ bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 	ctx->name         = g_strdup (name);
 	ctx->cb           = cb;
 	ctx->user_data    = user_data;
-	ctx->timeout_msec = timeout_msec;
 	ctx->moniker      = CORBA_OBJECT_NIL;
 
 	if (!(iid = moniker_id_from_nickname (name))) {
@@ -815,9 +813,11 @@ typedef struct {
 } resolve_async_ctx_t;
 
 static void
-resolve_async_cb (BonoboAsyncReply  *handle,
-		  CORBA_Environment *ev,
-		  gpointer           user_data)
+resolve_async_cb (CORBA_Object          object,
+		  ORBit_IMethod        *m_data,
+		  ORBitAsyncQueueEntry *aqe,
+		  gpointer              user_data, 
+		  CORBA_Environment    *ev)
 {
 	resolve_async_ctx_t *ctx = user_data;
 
@@ -825,7 +825,12 @@ resolve_async_cb (BonoboAsyncReply  *handle,
 		ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
 	else {
 		Bonobo_Unknown object;
-		bonobo_async_demarshal (handle, &object, NULL);
+
+		ORBit_small_demarshal_async (aqe, &object, NULL, ev);
+
+		if (BONOBO_EX (ev))
+			object = CORBA_OBJECT_NIL;
+
 		ctx->cb (object, ev, ctx->user_data);
 	}
 
@@ -839,7 +844,6 @@ resolve_async_cb (BonoboAsyncReply  *handle,
  * @options: resolve options
  * @interface_name: the name of the interface we want returned as the result 
  * @ev: a corba exception environment 
- * @timeout_msec: the timeout in milliseconds 
  * @cb: the async callback that gets the response 
  * @user_data: user context data to pass to that callback 
  * 
@@ -850,28 +854,11 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 			      Bonobo_ResolveOptions *options,
 			      const char            *interface_name,
 			      CORBA_Environment     *ev,
-			      guint                  timeout_msec,
 			      BonoboMonikerAsyncFn   cb,
 			      gpointer               user_data)
 {
-	static const BonoboAsyncArg arguments [] = {
-		{ TC_Bonobo_ResolveOptions, BONOBO_ASYNC_IN },
-		{ TC_CORBA_string,                BONOBO_ASYNC_IN },
-		{ NULL }
-	};
-	static const CORBA_TypeCode exceptions [] = {
-		TC_Bonobo_Moniker_InterfaceNotFound,
-		TC_Bonobo_Moniker_UnknownPrefix,
-		NULL
-	};
-	static const BonoboAsyncMethod method = {
-		"resolve", 
-		TC_CORBA_Object, 
-		arguments,
-		exceptions
-	};
-	gpointer arg_values [2] = { &options, &interface_name };
 	resolve_async_ctx_t *ctx;
+	gpointer args [] = { &options, &interface_name };
 	
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (cb != NULL);
@@ -883,9 +870,13 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 	ctx->cb = cb;
 	ctx->user_data = user_data;
 	ctx->moniker = bonobo_object_dup_ref (moniker, ev);
-
-	bonobo_async_invoke (&method, resolve_async_cb, ctx,
-			     timeout_msec, ctx->moniker, arg_values, ev);
+	
+	if (!resolve_method)
+		setup_methods ();
+				
+	ORBit_small_invoke_async (
+		ctx->moniker, resolve_method,
+		resolve_async_cb, ctx, args, NULL, ev);
 }
 
 /**
@@ -893,7 +884,6 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
  * @moniker: 
  * @interface_name: the name of the interface we want returned as the result 
  * @ev: a corba exception environment 
- * @timeout_msec: the timeout in milliseconds 
  * @cb: the async callback that gets the response 
  * @user_data: user context data to pass to that callback 
  * 
@@ -903,7 +893,6 @@ void
 bonobo_moniker_resolve_async_default (Bonobo_Moniker       moniker,
 				      const char          *interface_name,
 				      CORBA_Environment   *ev,
-				      guint                timeout_msec,
 				      BonoboMonikerAsyncFn cb,
 				      gpointer             user_data)
 {
@@ -916,13 +905,13 @@ bonobo_moniker_resolve_async_default (Bonobo_Moniker       moniker,
 
 	init_default_resolve_options (&options);
 
-	bonobo_moniker_resolve_async (moniker, &options, interface_name,
-				      ev, timeout_msec, cb, user_data);
+	bonobo_moniker_resolve_async (moniker, &options,
+				      interface_name,
+				      ev, cb, user_data);
 }
 
 
 typedef struct {
-	guint                timeout_msec;
 	char                *interface_name;
 	BonoboMonikerAsyncFn cb;
 	gpointer             user_data;
@@ -962,7 +951,7 @@ get_async1_cb (Bonobo_Unknown     object,
 	} else {
                 bonobo_moniker_resolve_async_default (
 			object, ctx->interface_name, ev,
-			ctx->timeout_msec, get_async2_cb, ctx);
+			get_async2_cb, ctx);
 
 		if (BONOBO_EX (ev)) {
 			ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
@@ -976,7 +965,6 @@ get_async1_cb (Bonobo_Unknown     object,
  * @name: 
  * @interface_name: the name of the interface we want returned as the result 
  * @ev: a corba exception environment 
- * @timeout_msec: the timeout in milliseconds 
  * @cb: the async callback that gets the response 
  * @user_data: user context data to pass to that callback 
  * 
@@ -986,7 +974,6 @@ void
 bonobo_get_object_async (const CORBA_char    *name,
 			 const char          *interface_name,
 			 CORBA_Environment   *ev,
-			 guint                timeout_msec,
 			 BonoboMonikerAsyncFn cb,
 			 gpointer             user_data)
 {
@@ -1001,12 +988,10 @@ bonobo_get_object_async (const CORBA_char    *name,
 	ctx->cb = cb;
 	ctx->user_data = user_data;
 	ctx->interface_name = get_full_interface_name (interface_name);
-	ctx->timeout_msec = timeout_msec;
 
 	bonobo_moniker_client_new_from_name_async (
-		name, ev, timeout_msec, get_async1_cb, ctx);
+		name, ev, get_async1_cb, ctx);
 }
-#endif
 
 /**
  * bonobo_moniker_client_equal:
@@ -1047,92 +1032,85 @@ bonobo_moniker_client_equal (Bonobo_Moniker     moniker,
 	return l != 0;
 }
 
-#ifdef ENABLE_ORBIT2
 /* A product of dire API design ...  */
 static CosNaming_Name*
 bonobo_string_to_CosNaming_Name (const CORBA_char *string,
 				 CORBA_Environment * ev)
 {
-  CosNaming_Name *retval = CosNaming_Name__alloc ();
-  GPtrArray *ids = g_ptr_array_new ();
-  GPtrArray *kinds = g_ptr_array_new ();
-  gint pos = 0, i, len;
-  gboolean used = FALSE;
-  GPtrArray *append_to;
+	CosNaming_Name *retval = CosNaming_Name__alloc ();
+	GPtrArray *ids = g_ptr_array_new ();
+	GPtrArray *kinds = g_ptr_array_new ();
+	gint pos = 0, i, len;
+	gboolean used = FALSE;
+	GPtrArray *append_to;
 
-  g_ptr_array_add (ids, g_string_new (""));
-  g_ptr_array_add (kinds, g_string_new (""));
+	g_ptr_array_add (ids, g_string_new (""));
+	g_ptr_array_add (kinds, g_string_new (""));
 
-  append_to = ids;
+	append_to = ids;
 
-  while (*string)
-    {
-      gchar append;
-      switch (*string)
-	{
-	case '.':
-	  used = TRUE;
-	  g_return_val_if_fail (append_to != kinds, NULL);  
-	  append_to = kinds;
-	  append = '\0';
-	  break;
-	case '/':
-	  if (used)
-	    {
-	      pos++;
-	      g_ptr_array_add (ids, g_string_new (""));
-	      g_ptr_array_add (kinds, g_string_new (""));
-	      g_assert (ids->len == pos + 1 && kinds->len == pos + 1);
-	    }
-	  used = FALSE;
-	  append_to = ids;
-	  append = '\0';
-	  break;
-	case '\\':
-	  string++;
-	  g_return_val_if_fail (*string == '.' || 
-				*string == '/' || *string == '\\', NULL);  
-	  append = *string;
-	  break;
-	default:
-	  append = *string;
-	  used = TRUE;
-	  break;
+	while (*string) {
+		gchar append;
+		switch (*string) {
+		case '.':
+			used = TRUE;
+			g_return_val_if_fail (append_to != kinds, NULL);  
+			append_to = kinds;
+			append = '\0';
+			break;
+		case '/':
+			if (used) {
+				pos++;
+				g_ptr_array_add (ids, g_string_new (""));
+				g_ptr_array_add (kinds, g_string_new (""));
+				g_assert (ids->len == pos + 1 && kinds->len == pos + 1);
+			}
+			used = FALSE;
+			append_to = ids;
+			append = '\0';
+			break;
+		case '\\':
+			string++;
+			g_return_val_if_fail (*string == '.' || 
+					      *string == '/' || *string == '\\', NULL);  
+			append = *string;
+			break;
+		default:
+			append = *string;
+			used = TRUE;
+			break;
+		}
+
+		if (append)
+			g_string_append_c (g_ptr_array_index (append_to, pos), append);
+
+		string++;
 	}
 
-      if (append)
-	g_string_append_c (g_ptr_array_index (append_to, pos), append);
+	len = used ? pos + 1 : pos;
 
-      string++;
-    }
+	retval->_buffer = CORBA_sequence_CosNaming_NameComponent_allocbuf (len);
+	retval->_length = len;
+	retval->_maximum = len;
 
-  len = used ? pos + 1 : pos;
-
-  retval->_buffer = CORBA_sequence_CosNaming_NameComponent_allocbuf (len);
-  retval->_length = len;
-  retval->_maximum = len;
-
-  for (i = 0; i < len; i++)
-    {  
-      GString *id = g_ptr_array_index (ids, i);
-      GString *kind = g_ptr_array_index (kinds, i);
+	for (i = 0; i < len; i++) {  
+		GString *id = g_ptr_array_index (ids, i);
+		GString *kind = g_ptr_array_index (kinds, i);
       
-      retval->_buffer[i].id = CORBA_string_dup (id->str);
-      retval->_buffer[i].kind = CORBA_string_dup (kind->str);
-    }
+		retval->_buffer[i].id = CORBA_string_dup (id->str);
+		retval->_buffer[i].kind = CORBA_string_dup (kind->str);
+	}
   
-  for (i = 0; i <= pos; i++)
-    {  
-      g_string_free (g_ptr_array_index (ids, i), TRUE);
-      g_string_free (g_ptr_array_index (kinds, i), TRUE);
-    }
+	for (i = 0; i <= pos; i++) {  
+		g_string_free (g_ptr_array_index (ids, i), TRUE);
+		g_string_free (g_ptr_array_index (kinds, i), TRUE);
+	}
 
-  g_ptr_array_free (ids, TRUE);
-  g_ptr_array_free (kinds, TRUE);
+	g_ptr_array_free (ids, TRUE);
+	g_ptr_array_free (kinds, TRUE);
 
-  return retval;
+	return retval;
 }
-#endif
 
 static CosNaming_NamingContext
 lookup_naming_context (GList *path,
@@ -1154,11 +1132,7 @@ lookup_naming_context (GList *path,
 
 	for (l = path; l != NULL; l = l->next) {
 
-#ifdef ENABLE_ORBIT2
 		cn = bonobo_string_to_CosNaming_Name (l->data, ev);
-#else
-		cn = ORBit_string_to_CosNaming_Name (l->data, ev);
-#endif
 
 		if (BONOBO_EX (ev) || !cn)
 			break;

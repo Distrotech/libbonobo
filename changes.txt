@@ -82,6 +82,8 @@ bonobo-object-client.[ch]:
 bonobo-moniker-util.[ch]:
 	Removed bonobo_moniker_client_resolve_client_default: it used
 	BonoboObjectClient, use bonobo_moniker_client_resolve_default intead.
+	The async methods no longer take a timeout - since we can detect when
+	a connection dies, and there's no point.
 
 bonobo-progressive.[ch]:
 	Removed entirely - unused & stale.

@@ -55,7 +55,6 @@ libbonoboincludedir = $(includedir)/gnome-2.0/bonobo
 libbonoboinclude_HEADERS =		\
 	Bonobo.h			\
 	bonobo-arg.h			\
-	bonobo-async.h			\
 	bonobo-context.h		\
 	bonobo-event-source.h		\
 	bonobo-exception.h		\
@@ -93,7 +92,6 @@ noinst_HEADERS =			\
 libbonobo_src =				\
 	bonobo-moniker-context.c	\
 	bonobo-arg.c			\
-	bonobo-async.c			\
 	bonobo-context.c		\
 	bonobo-event-source.c		\
 	bonobo-exception.c		\
