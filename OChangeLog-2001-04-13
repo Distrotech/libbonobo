@@ -1,3 +1,15 @@
+2001-03-08  Darin Adler  <darin@eazel.com>
+
+	Fix bug where the control screws up if the control frame goes
+	away before the control does (because someone else ref'd the
+	control).
+
+	* bonobo/bonobo-control-frame.c: (bonobo_control_frame_destroy):
+	Call setFrame on the control to tell it we're going away.
+	* bonobo/bonobo-control.c: (bonobo_control_destroy): Don't try
+	to make calls on the control frame if it's gone.
+	(bonobo_control_set_control_frame): Allow NIL.
+
 2001-03-07  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo-idl/bonobo-idl.1: Fix typo that made the manpage
