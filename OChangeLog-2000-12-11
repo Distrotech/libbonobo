@@ -1,3 +1,22 @@
+2000-05-10  John Sullivan  <sullivan@eazel.com>
+
+	Fixed and improved path-building routines, one of which wasn't
+	implemented and the other of which was bug-ridden, obviously
+	never executed, and conceptually incomplete.
+
+	* bonobo/bonobo-ui-handler.h,
+	* bonobo/bonobo-ui-handler.c: 
+	(bonobo_ui_handler_build_path): Fixed bugs where g_strconcat was always
+	called with an illegal non-trailing NULL, and never with the required
+	trailing NULL. (This caused the function to previously always return
+	NULL and spew out some error messages) Also changed API so that the 
+	first piece is taken intact, so that it can be a partial path. This is
+	necesssary for components to merge with submenu items without using
+	inside knowledge of the mergee's path or the separator character.
+	(bonobo_ui_handler_build_path_v): Implemented this previously-missing
+	function by stealing the guts of build_path and making build_path
+	call this one.
+
 2000-05-10  Joe Shaw <joe@helixcode.com>
 
 	* bonobo/bonobo-property-bag-client.c (SEND/RECIEVE): Added a new
