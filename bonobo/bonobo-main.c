@@ -162,7 +162,7 @@ bonobo_init_full (int *argc, char **argv,
 	g_type_init_with_debug_flags (G_TYPE_DEBUG_OBJECTS);
 
 	if (!bonobo_activation_is_initialized ())
-		bonobo_activation_init (*argc, argv);
+		bonobo_activation_init (argc ? *argc : 0, argv);
 
 	CORBA_exception_init (&ev);
 

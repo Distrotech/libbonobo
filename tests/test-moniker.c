@@ -82,7 +82,7 @@ main (int argc, char *argv [])
 {
 	free (malloc (8));
 
-	if (!bonobo_init (&argc, argv))
+	if (!bonobo_init (NULL, NULL))
 		g_error ("Can not bonobo_init");
 
 	check_string ("a:", "\\\\", "\\");

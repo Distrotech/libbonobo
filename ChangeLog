@@ -1,3 +1,10 @@
+2001-11-23  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-main.c (bonobo_init_full): cope with
+	NULL argc.
+
+	* tests/test-moniker.c (main): regression test.
+
 2001-11-19  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-object.c (do_corba_setup): prune
