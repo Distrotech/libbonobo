@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-08-07 15:33-0400\n"
-"PO-Revision-Date: 2001-06-10 21:18+0200\n"
+"POT-Creation-Date: 2001-08-07 08:29+0200\n"
+"PO-Revision-Date: 2001-08-08 08:28+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -122,53 +122,33 @@ msgid "Error checking error; no exception"
 msgstr "Chyba pri kontrole chyby; bez výnimky"
 
 #: bonobo/bonobo-exception.c:269
-#, fuzzy
 msgid "General activation error with no description"
-msgstr "Chyba syntaxe v popise objektu"
-
-#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
-msgid "Could not initialize Bonobo"
-msgstr ""
+msgstr "V¹eobecná chyba aktivácie bez popisu"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
-msgstr ""
+msgstr "HTTP moniker"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "©tandardný moniker vytváracieho rozhrania"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "v¹eobecný moniker aktivácie Oaf"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "v¹eobecný moniker dotazu Oaf"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "v¹eobecný moniker vytváracieho rozhrania 'new'"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
 msgid "generic item moniker"
-msgstr ""
+msgstr "v¹eobecný moniker polo¾ky"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
-msgstr ""
-
-#~ msgid "The User canceled the save"
-#~ msgstr "Pou¾ívateµ stornoval ukladanie"
-
-#~ msgid "No filename"
-#~ msgstr "Bez názvu súboru"
-
-#~ msgid "unknown mime type for '%s'"
-#~ msgstr "neznámy typ mime pre '%s'"
-
-#~ msgid "no handlers for mime type '%s'"
-#~ msgstr "nie sú obslu¾né programy pre typ mime '%s'"
-
-#~ msgid "Can not bonobo_init"
-#~ msgstr "Nemô¾em bonobo_init"
+msgstr "prúd MonikerExtender"
