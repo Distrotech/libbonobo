@@ -6,7 +6,7 @@
 
 #include <bonobo-activation/bonobo-activation.h>
 #include <bonobo-activation/bonobo-activation-private.h>
-#include "../server/server.h"
+#include "activation-server/server.h"
 
 #include "empty.h"
 #include "plugin.h"

@@ -1,5 +1,11 @@
 2003-04-07  Michael Meeks  <michael@ximian.com>
 
+	* tests/test-activation/Makefile.am
+	(TESTS_ENVIRONMENT): run tests in an isolated (by TMPDIR)
+	environment, update path for b-a-s activation.
+
+2003-04-07  Michael Meeks  <michael@ximian.com>
+
 	* Makefile.am: disable doc until we can work with a
 	newer automake that can do conditionals inside an include.
 

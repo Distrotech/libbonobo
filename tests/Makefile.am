@@ -1,3 +1,5 @@
+SUBDIRS = test-activation
+
 noinst_PROGRAMS =		\
 	test-moniker		\
 	test-properties-server	\

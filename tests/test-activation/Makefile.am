@@ -81,7 +81,7 @@ INCLUDES= \
 	-I$(top_builddir)		\
 	-DG_DISABLE_DEPRECATED $(LIBBONOBO_CFLAGS)
 
-LDADD=../bonobo-activation/libbonobo-activation.la $(LIBBONOBO_LIBS)
+LDADD=../../bonobo-activation/libbonobo-activation.la $(LIBBONOBO_LIBS)
 
 serverfiles=empty.server broken.server plugin.server
 
@@ -91,8 +91,10 @@ emptydata_DATA=$(serverfiles)
 EXTRA_DIST=empty.idl plugin.idl $(serverfiles)
 
 TESTS_ENVIRONMENT = \
+	TMPDIR="/tmp/orbit-$$USER/tst" \
+	BONOBO_ACTIVATION_DEBUG_OUTPUT="1" \
 	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test:$$BONOBO_ACTIVATION_PATH" \
-	PATH="$(top_builddir)/test:$$PATH" \
+	PATH="$(top_builddir)/test:$(top_builddir)/activation-server:$$PATH" \
 	LD_LIBRARY_PATH="$(top_builddir)/test/.libs:$$LD_LIBRARY_PATH"
 
 TESTS = bonobo-activation-test bonobo-activation-test-async
