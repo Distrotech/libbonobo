@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2\n"
 "POT-Creation-Date: 2004-02-02 14:30+0000\n"
-"PO-Revision-Date: 2003-07-25 08:09+0200\n"
+"PO-Revision-Date: 2004-02-12 22:00+0100\n"
 "Last-Translator: Alessio Frusciante <algol@firenze.linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -64,13 +64,12 @@ msgid "Name service"
 msgstr "Servizio Nomi"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Servizio Nomi"
+msgstr "Servizio di notifica"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Servizio di notifica per l'attivazione"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -125,12 +124,12 @@ msgstr "La proprietà '%s' non ha un valore"
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Impossibile analizzzare il documento mal formato %s"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Prova della directory %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -211,11 +210,11 @@ msgstr "La shlib '%s' non contiene '%s'"
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr ""
+msgstr "Nome univoco dell'applicazione"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
