@@ -243,10 +243,10 @@ bonobo_item_option_parse (const char *option_string)
 			
 			option = g_new0 (BonoboItemOption, 1);
 			option->key = key->str;
-			g_string_free (value, FALSE);
+			g_string_free (key, FALSE);
 			key = NULL;
 
-			for (; *p; p++){
+			for (p++; *p; p++){
 				if (*p == ';')
 					goto next;
 				if (!value)

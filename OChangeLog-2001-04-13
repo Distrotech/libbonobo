@@ -1,3 +1,7 @@
+2001-01-12  Miguel de Icaza  <miguel@ximian.com>
+
+	* bonobo/bonobo-item-handler.c (bonobo_item_option_parse): Bug fix.
+
 2001-01-11  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* bonobo/bonobo-moniker-util.c
