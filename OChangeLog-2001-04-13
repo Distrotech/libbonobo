@@ -1,3 +1,37 @@
+1999-08-24  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/gnome-bonobo-widget.c: Just a start.  Written during
+ 	Miguel's O'Reilly talk, as he described this widget on stage.
+
+	* samples/sample-container.c (component_add_view): Perform the
+ 	size negotiation here, manually.
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c (embeddable_factory):
+ 	Use gnome_object_unref, not gtk_object_unref.
+	(embeddable_factory): Cast the embeddable to GNOME_OBJECT, not
+ 	GTK_OBJECT.
+
+	* bonobo/gnome-ui-handler.c (menu_copy_item): Use the COPY_STRING
+ 	macro instead of g_strdup() so we can copy NULL strings.
+	(toolbar_toplevel_remove_item): Add a g_return_if_fail here to
+ 	check if the specified toolbar item exists.
+	(toolbar_uiinfo_type_to_uih): Updated to print some more warning
+ 	messages.
+
+	* bonobo/gnome-main.c (bonobo_init): Ignore SIGPIPE.  Please see
+ 	the in-line comment for an explanation.
+
+	* bonobo/gnome-embeddable.c (gnome_embeddable_view_destroy_cb):
+ 	Re-enable gnome_unknown_ping.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_new_view): Remove
+ 	the automatic size_request proxying.
+
+1999-08-22  Nat Friedman  <nat@gnome-support.com>
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c: Updated to use
+ 	gnome_object_add_interface.
+
 1999-08-23  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-ui-handler.c (toolbar_remote_create_item): remove

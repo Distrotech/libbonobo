@@ -20,24 +20,20 @@ Miguel's list
 
 Nat's list
 ----------
-* Write README file.
-* Make sure HACKING is up-to-date.
+* Update my gdk patch.
+* Fix robustness issues
+	- SIGSEGV on unfinished corba method invocation
 * UIHandler toolbar code finished
 * UIHandler documented
 * reference container in a samples/
 * write up description of paint component
-* reference components in samples/, using gtk-object method
-* One paragraph descriptions of every file.
-* Pinging of the client site when all views disappear!!
+* reference component in samples/, using gtk-object method
 * clean up text/plain
-* When view emits system_exception, what do we do?
-  - from embeddable perspective (nothing; wait for a destroy on the embeddable)
-  - from container perspective
+* Make sample-container support system_exception
 * FIXMEs
 * Put system_exception checks into sample-container.
-* Wainwright patch -- update components/containers to match
-* Update my gdk patch.
 * Move all test code out of bonobo/bonobo
-* Remove inplace component/container
-* Remove gtk-interfaces (stale)
 * Update components to do size negotiation
+* GnomeBonoboWidget
+* Write README file.
+* Make sure HACKING is up-to-date.

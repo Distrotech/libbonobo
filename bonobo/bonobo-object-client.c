@@ -242,7 +242,8 @@ moniker_info_list_destroy (GList *moniker_info_list)
 
 /**
  * gnome_object_activate:
- * @object_desc: An object moniker.
+ * @object_desc: Either a string representation of an object moniker
+ * or an object goad id.
  * @flags: activation flags
  *
  * Returns: An object created.

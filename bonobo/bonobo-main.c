@@ -12,6 +12,7 @@
 #include <config.h>
 #include <bonobo/gnome-main.h>
 #include <libgnorba/gnorba.h>
+#include <signal.h>
 
 #include <X11/Xlib.h>
 
@@ -138,6 +139,45 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 
 	CORBA_exception_init (&ev);
 
+	/*
+	 * In Bonobo, components and containers must not crash if the
+	 * remote end crashes.  If a remote server crashes and then we
+	 * try to make a CORBA call on it, we may get a SIGPIPE.  So,
+	 * for lack of a better solution, we ignore SIGPIPE here.  This
+	 * is open for reconsideration in the future.
+	 *
+	 * Possibilities are the MSG_PEEK trick, where you test if the
+	 * connection is dead right before doing the writev().  That
+	 * approach has two problems:
+	 *
+	 *   1. There is the possibility of a race condition, where
+	 *      the remote end calls right after the test, and right
+	 *      before the writev().
+	 * 
+	 *   2. An extra system call per write might be regarded by
+	 *      some as a performance hit.
+	 *
+
+	 * Another possibility is to surround the call to writev() in
+	 * ORBit (giop-msg-buffer.c:197 or so) with something like
+	 * this:
+	 *
+	 *		orbit_ignore_sigpipe = 1;
+	 *
+	 *		result = writev ( ... );
+	 *
+	 *		orbit_ignore_sigpipe = 0;
+	 *
+	 * The SIGPIPE signal handler will check the global
+	 * orbit_ignore_sigpipe variable and ignore the signal if it
+	 * is 1.  If it is 0, it can proxy to the user's original
+	 * signal handler.  This is a real possibility.
+	 */
+	signal (SIGPIPE, SIG_IGN);
+
+	/*
+	 * Create the POA.
+	 */
 	if (orb == CORBA_OBJECT_NIL)
 		orb = gnome_CORBA_ORB();
 	
@@ -151,6 +191,9 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 		
 	}
 
+	/*
+	 * Create the POA Manager.
+	 */
 	if (CORBA_Object_is_nil ((CORBA_Object)manager, &ev)){
 		manager = PortableServer_POA__get_the_POAManager (poa, &ev);
 		if (ev._major != CORBA_NO_EXCEPTION){
@@ -159,10 +202,11 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 			return FALSE;
 		}
 	}
-	
-	/* If we do this, embedded components may try to process incoming
-	   requests before they are properly initialized - PRW */
-	/* PortableServer_POAManager_activate (manager, &ev); */
+
+	/*
+	 * Store global copies of these which can be retrieved with
+	 * bonobo_orb()/bonobo_poa()/bonobo_poa_manager().
+	 */
 	__bonobo_orb = orb;
 	__bonobo_poa = poa;
 	__bonobo_poa_manager = manager;
