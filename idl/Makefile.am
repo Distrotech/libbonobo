@@ -1,6 +1,7 @@
 idldir = $(datadir)/idl
 
 idl_DATA =			\
+	bonobo.idl		\
 	Bonobo.idl		\
 	bonobo-unknown.idl	\
 	bonobo-factory.idl	\

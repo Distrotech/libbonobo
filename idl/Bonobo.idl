@@ -10,7 +10,7 @@
 
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 %{
-#pragma include_defs bonobo/bonobo.h
+#pragma include_defs bonobo/Bonobo.h
 %}
 #pragma inhibit push
 #endif
