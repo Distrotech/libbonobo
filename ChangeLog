@@ -1,3 +1,7 @@
+2003-05-20  Telsa Gwymme  <hobbit@aloss.ukuu.org.uk>
+
+	* configure.on: Added cy (Welsh) to ALL_LINGUAS.
+
 2003-05-19  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.2.2
