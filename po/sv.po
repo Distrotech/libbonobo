@@ -1,23 +1,23 @@
 # Swedish messages for libbonobo.
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Christian Rose <menthos@menthos.com>, 2001.
+# Copyright (C) 2001, 2002 Free Software Foundation, Inc.
+# Christian Rose <menthos@menthos.com>, 2001, 2002.
 #
 # $Id$
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-01-10 10:58+0000\n"
-"PO-Revision-Date: 2001-12-04 01:53+0100\n"
+"POT-Creation-Date: 2002-01-27 03:53+0100\n"
+"PO-Revision-Date: 2002-01-27 03:53+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
-msgstr "Ett fˆrsˆk gjordes med en Âtg‰rd som inte stˆds"
+msgstr "Ett f√∂rs√∂k gjordes med en √•tg√§rd som inte st√∂ds"
 
 #: bonobo/bonobo-exception.c:157
 msgid "IO Error"
@@ -25,7 +25,7 @@ msgstr "IO-fel"
 
 #: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "Ogiltigt argumentv‰rde"
+msgstr "Ogiltigt argumentv√§rde"
 
 #: bonobo/bonobo-exception.c:164
 msgid "Object not found"
@@ -37,23 +37,23 @@ msgstr "Syntaxfel i objektbeskrivning"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Kan inte aktivera objektet frÂn fabriken"
+msgstr "Kan inte aktivera objektet fr√•n fabriken"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "Ingen tillÂtelse att komma Ât flˆdet"
+msgstr "Ingen till√•telse att komma √•t fl√∂det"
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "Ett fˆrsˆk gjordes med en flˆdesÂtg‰rd som inte stˆds"
+msgstr "Ett f√∂rs√∂k gjordes med en fl√∂des√•tg√§rd som inte st√∂ds"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "IO-fel pÂ flˆde"
+msgstr "IO-fel p√• fl√∂de"
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "IO-fel pÂ lagringsutrymme"
+msgstr "IO-fel p√• lagringsutrymme"
 
 #: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
@@ -65,43 +65,43 @@ msgstr "Objektet kunde inte hittas i lagringsutrymmet"
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "Ingen tillÂtelse att utfˆra Âtg‰rd pÂ lagringsutrymmet"
+msgstr "Ingen till√•telse att utf√∂ra √•tg√§rd p√• lagringsutrymmet"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr "Ett fˆrsˆk gjordes med en lagringsÂtg‰rd som inte stˆds"
+msgstr "Ett f√∂rs√∂k gjordes med en lagrings√•tg√§rd som inte st√∂ds"
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr "Objektet ‰r inget flˆde"
+msgstr "Objektet √§r inget fl√∂de"
 
 #: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr "Objektet ‰r inget lagringsutrymme"
+msgstr "Objektet √§r inget lagringsutrymme"
 
 #: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr "Lagringsutrymmet ‰r inte tomt"
+msgstr "Lagringsutrymmet √§r inte tomt"
 
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "felaktig XML-anv‰ndargr‰nssnittsbeskrivning"
+msgstr "felaktig XML-anv√§ndargr√§nssnittsbeskrivning"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "ogiltig sˆkv‰g till XML-anv‰ndargr‰nssnittselement"
+msgstr "ogiltig s√∂kv√§g till XML-anv√§ndargr√§nssnittselement"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr "det beg‰rda anv‰ndargr‰nssnittsattributet finns inte"
+msgstr "det beg√§rda anv√§ndargr√§nssnittsattributet finns inte"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "Ok‰nt kommando eller verb"
+msgstr "Ok√§nt kommando eller verb"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "Kommandot ‰r ok‰nsligt"
+msgstr "Kommandot √§r ok√§nsligt"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -109,7 +109,7 @@ msgstr "ogiltig datatyp"
 
 #: bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr "flˆdet kunde inte hittas"
+msgstr "fl√∂det kunde inte hittas"
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
@@ -121,7 +121,7 @@ msgstr "egenskapen har ogiltig typ"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr "egenskapen ‰r skrivskyddad"
+msgstr "egenskapen √§r skrivskyddad"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
@@ -129,11 +129,11 @@ msgstr "konfigurationsdatabasbackenden misslyckades "
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Moniker-gr‰nssnittet kunde inte hittas"
+msgstr "Moniker-gr√§nssnittet kunde inte hittas"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr "Moniker-aktiveringens tidsgr‰ns ˆverskreds"
+msgstr "Moniker-aktiveringens tidsgr√§ns √∂verskreds"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
@@ -141,7 +141,7 @@ msgstr "Syntaxfel inuti moniker"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "Moniker har ett ok‰nt moniker-prefix"
+msgstr "Moniker har ett ok√§nt moniker-prefix"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
@@ -149,7 +149,7 @@ msgstr "Fel vid kontroll av fel; inget undantag"
 
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr "Allm‰nt aktiveringsfel utan beskrivning"
+msgstr "Allm√§nt aktiveringsfel utan beskrivning"
 
 #: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
@@ -158,12 +158,11 @@ msgstr "Kunde inte initiera Bonobo"
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "Misslyckades med att l√∂sa upp eller ut√∂ka \"%s"
 
 #: bonobo/bonobo-moniker-util.c:245
-#, fuzzy
 msgid "Failed to activate object"
-msgstr "Kan inte aktivera objektet frÂn fabriken"
+msgstr "Misslyckades med att aktivera objekt"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -179,51 +178,83 @@ msgstr "Standardmonikerfabrik"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr "allm‰n Oaf-aktiveringsmoniker"
+msgstr "allm√§n Oaf-aktiveringsmoniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr "allm‰n Oaf-frÂgemoniker"
+msgstr "allm√§n Oaf-fr√•gemoniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "allm‰n ny fabrikmoniker"
+msgstr "allm√§n ny fabrikmoniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr "allm‰n objektmoniker"
+msgstr "allm√§n objektmoniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr "strˆmmonikerutˆkare"
+msgstr "str√∂mmonikerut√∂kare"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
 msgid "Exception activating '%s"
-msgstr ""
+msgstr "Undantag vid aktivering av \"%s"
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
 msgid "Failed to activate '%s"
-msgstr ""
+msgstr "Misslyckades med att aktivera \"%s"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+msgid "Bonobo Echo server factory"
+msgstr "Fabrik f√∂r Bonobo-ekoserver"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+msgid "Bonobo Echo server sample program"
+msgstr "Testprogram f√∂r Bonobo-ekoserver"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+msgid "Echo component"
+msgstr "Ekokomponent"
+
+#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+msgid "Echo component factory"
+msgstr "Ekokomponentfabrik"
+
+#: samples/echo/echo-client.c:22
+msgid "I could not initialize Bonobo"
+msgstr "Jag kunde inte initiera Bonobo"
+
+#: samples/echo/echo-client.c:33
+msgid "Could not create an instance of the sample echo component"
+msgstr "Kunde inte skapa en instans av testekokomponenten"
+
+#: samples/echo/echo-client.c:45
+#, c-format
+msgid "An exception occured '%s'"
+msgstr "Ett undantag intr√§ffade \"%s\""
+
+#~ msgid "Failed to resolve, or extend '%s'"
+#~ msgstr "Misslyckades med att l√∂sa upp eller ut√∂ka \"%s\""
 
 #~ msgid "The User canceled the save"
-#~ msgstr "Anv‰ndaren avbrˆt sparandet"
+#~ msgstr "Anv√§ndaren avbr√∂t sparandet"
 
 #~ msgid "No filename"
 #~ msgstr "Inget filnamn"
 
 #~ msgid "unknown mime type for '%s'"
-#~ msgstr "ok‰nd mime-typ fˆr \"%s\""
+#~ msgstr "ok√§nd mime-typ f√∂r \"%s\""
 
 #~ msgid "no handlers for mime type '%s'"
-#~ msgstr "inga hanterare fˆr mime-typen \"%s\""
+#~ msgstr "inga hanterare f√∂r mime-typen \"%s\""
 
 #~ msgid "file MonikerExtender"
-#~ msgstr "filmonikerutˆkare"
+#~ msgstr "filmonikerut√∂kare"
 
 #~ msgid "generic file moniker"
-#~ msgstr "allm‰n filmoniker"
+#~ msgstr "allm√§n filmoniker"
 
 #~ msgid "Can not bonobo_init"
-#~ msgstr "Kan inte utfˆra bonobo_init"
+#~ msgstr "Kan inte utf√∂ra bonobo_init"
