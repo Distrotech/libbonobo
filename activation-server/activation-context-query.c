@@ -1003,7 +1003,16 @@ qexp_evaluate(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 gboolean
 qexp_matches(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 {
-  return FALSE;
+  QueryExprConst res;
+  gboolean retval;
+
+  res = qexp_evaluate(si, e, qctx);
+
+  retval = qexp_constant_bool(&res);
+
+  qexp_constant_unuse(res);
+
+  return retval;
 }
 
 /* This is going to be one hairy function */

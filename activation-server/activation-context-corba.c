@@ -83,7 +83,7 @@ static POA_OAF_ActivationContext__vepv impl_OAF_ActivationContext_vepv =
 
 OAF_ActivationContext
 OAF_ActivationContext_create(PortableServer_POA poa,
-			     CORBA_Environment *ev);
+			     CORBA_Environment *ev)
 {
    OAF_ActivationContext retval;
    impl_POA_OAF_ActivationContext *newservant;

@@ -1,18 +1,22 @@
 bin_PROGRAMS=oafd
 
-INCLUDES=@ORBIT_CFLAGS@ -I$(top_builddir) -I$(top_builddir)/liboaf
+INCLUDES=@ORBIT_CFLAGS@ @XML_CFLAGS@ -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\"
 
 oafd_SOURCES=			\
+	oaf-skels.c		\
 	ac-query-lex.c		\
 	ac-query-parse.c	\
 	ac-query-parse.h	\
 	ac-query-expr.h		\
-	main.c			\
+	ac-corba.c		\
 	ac-query-expr.c		\
-	oaf-skels.c		\
+	od-corba.c		\
+	od-load.c		\
+	od-activate.c		\
+	main.c			\
 	oafd.h
 
-oafd_LDADD=../liboaf/liboaf.la @ORBIT_LIBS@
+oafd_LDADD=../liboaf/liboaf.la @ORBIT_LIBS@ @XML_LIBS@
 
 EXTRA_DIST=ac-query-lex.l ac-query-parse.y
 

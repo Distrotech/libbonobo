@@ -1,3 +1,4 @@
+#include "oafd.h"
 #include "oaf.h"
 
 /*** App-specific servant structures ***/
@@ -6,6 +7,8 @@ typedef struct {
   POA_OAF_ObjectDirectory servant;
   PortableServer_POA poa;
   OAF_ServerInfoList attr_servers;
+
+  GHashTable *by_iid;
 
   CORBA_char *attr_domain;
   CORBA_char *attr_hostID;
@@ -68,11 +71,47 @@ static POA_OAF_ObjectDirectory__vepv impl_OAF_ObjectDirectory_vepv =
 
 /*** Stub implementations ***/
 
+static void
+od_dump_list(impl_POA_OAF_ObjectDirectory *od)
+{
+  int i, j, k;
+
+  for(i = 0; i < od->attr_servers._length; i++) {
+    g_print("IID %s, type %s, location %s\n",
+	    od->attr_servers._buffer[i].iid,
+	    od->attr_servers._buffer[i].server_type,
+	    od->attr_servers._buffer[i].location_info);
+    for(j = 0; j < od->attr_servers._buffer[i].attrs._length; j++) {
+      OAF_Attribute *attr = &(od->attr_servers._buffer[i].attrs._buffer[j]);
+      g_print("    %s = ", attr->name);
+      switch(attr->v._d) {
+      case OAF_A_STRING:
+	g_print("\"%s\"\n", attr->v._u.value_string);
+	break;
+      case OAF_A_NUMBER:
+	g_print("%f\n", attr->v._u.value_number);
+	break;
+      case OAF_A_BOOLEAN:
+	g_print("%s\n", attr->v._u.value_boolean?"TRUE":"FALSE");
+	break;
+      case OAF_A_STRINGV:
+	g_print("[");
+	for(k = 0; k < attr->v._u.value_stringv._length; k++) {
+	  g_print("\"%s\"", attr->v._u.value_stringv._buffer[k]);
+	  if(k < (attr->v._u.value_stringv._length - 1))
+	    g_print(", ");
+	}
+	g_print("]\n");
+	break;
+      }
+    }
+  }
+}
+
 OAF_ObjectDirectory
 OAF_ObjectDirectory_create(PortableServer_POA poa,
 			   const char *domain,
-			   const char *hostname,
-			   const char **source_directories,
+			   const char *source_directory,
 			   CORBA_Environment *ev)
 {
    OAF_ObjectDirectory retval;
@@ -87,20 +126,15 @@ OAF_ObjectDirectory_create(PortableServer_POA poa,
    CORBA_free(objid);
    retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
 
+   newservant->attr_domain = g_strdup(domain);
+   newservant->attr_hostID = g_strdup("localhost");
+   newservant->by_iid = NULL;
+   newservant->attr_servers._buffer = OAF_ServerInfo_load(source_directory, &newservant->attr_servers._length,
+							  &newservant->by_iid);
+
+   od_dump_list(newservant);
+
    return retval;
-}
-
-static void
-impl_OAF_ObjectDirectory__destroy(impl_POA_OAF_ObjectDirectory * servant, CORBA_Environment * ev)
-{
-   PortableServer_ObjectId *objid;
-
-   objid = PortableServer_POA_servant_to_id(servant->poa, servant, ev);
-   PortableServer_POA_deactivate_object(servant->poa, objid, ev);
-   CORBA_free(objid);
-
-   POA_OAF_ObjectDirectory__fini((PortableServer_Servant) servant, ev);
-   g_free(servant);
 }
 
 static OAF_ServerInfoList *
@@ -109,6 +143,12 @@ impl_OAF_ObjectDirectory__get_servers(impl_POA_OAF_ObjectDirectory * servant,
 {
    OAF_ServerInfoList *retval;
 
+   retval = OAF_ServerInfoList__alloc();
+
+   *retval = servant->attr_servers;
+
+   CORBA_sequence_set_release(retval, CORBA_FALSE);
+
    return retval;
 }
 
@@ -116,18 +156,14 @@ static CORBA_char *
 impl_OAF_ObjectDirectory__get_domain(impl_POA_OAF_ObjectDirectory * servant,
 				     CORBA_Environment * ev)
 {
-   CORBA_char *retval;
-
-   return retval;
+   return CORBA_string_dup(servant->attr_domain);
 }
 
 static CORBA_char *
 impl_OAF_ObjectDirectory__get_hostID(impl_POA_OAF_ObjectDirectory * servant,
 				     CORBA_Environment * ev)
 {
-   CORBA_char *retval;
-
-   return retval;
+   return CORBA_string_dup(servant->attr_hostID);
 }
 
 static CORBA_Object
@@ -135,19 +171,32 @@ impl_OAF_ObjectDirectory_activate(impl_POA_OAF_ObjectDirectory * servant,
 				  OAF_ImplementationID iid,
 				  CORBA_Environment * ev)
 {
-   CORBA_Object retval;
+  CORBA_Object retval;
+  OAF_ServerInfo *si;
 
-   return retval;
+  if(/* XXX !server_is_running(si) */ 1)
+    retval = od_server_activate(si);
+  else
+    retval = CORBA_OBJECT_NIL;
+
+  return retval;
 }
 
 static void
 impl_OAF_ObjectDirectory_lock(impl_POA_OAF_ObjectDirectory * servant,
 			      CORBA_Environment * ev)
 {
+  while(servant->is_locked)
+    g_main_iteration(TRUE);
+
+  servant->is_locked = TRUE;
 }
 
 static void
 impl_OAF_ObjectDirectory_unlock(impl_POA_OAF_ObjectDirectory * servant,
 				CORBA_Environment * ev)
 {
+  g_return_if_fail(servant->is_locked);
+
+  servant->is_locked = FALSE;
 }

@@ -59,11 +59,13 @@ module OAF {
 	  void add_directory(in ObjectDirectory dir);
 	  void remove_directory(in ObjectDirectory dir);
 
-	  ActivationResult activate(in string requirements, in string selection_order) context("hostID", "domain");
+	  ActivationResult activate(in string requirements, in string selection_order)
+	    context("hostname", "domain", "username");
 
 	  readonly attribute ServerInfoList servers;
 	  ServerInfoList query(in string requirements);
 
-	  ActivationResult activate_from_id(in ActivationID aid) context("hostID", "domain");
+	  ActivationResult activate_from_id(in ActivationID aid)
+	    context("hostname", "domain", "username");
 	};
 };
