@@ -40,7 +40,7 @@ typedef struct {
 	/*
 	 * signals.  
 	 */
-	void  (*query_interface) (BonoboObject *object, const char *repo_id, CORBA_Object *retval);
+	void  (*query_interface) (BonoboObject *object, const char *repo_id,  CORBA_Object      *retval);
 	void  (*system_exception)(BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 	void  (*object_gone)     (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);
 } BonoboObjectClass;

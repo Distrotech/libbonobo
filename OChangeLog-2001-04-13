@@ -1,3 +1,8 @@
+2000-05-13  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_query_local_interface): fix
+	repo_id for ancient ORBits
+
 2000-05-13  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* samples/compound-doc/container/container.c: (sample_app_exit):

@@ -269,7 +269,7 @@ bonobo_object_query_local_interface (BonoboObject *object,
 #ifdef ORBIT_IMPLEMENTS_IS_A
 		    CORBA_Object_is_a (tryme->corba_objref, (char *) repo_id, &ev)
 #else
-		    !strcmp (tryme->corba_objref->object_id, repoid)
+		    !strcmp (tryme->corba_objref->object_id, repo_id)
 #endif
 			){
 			retval = tryme;
