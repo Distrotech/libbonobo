@@ -19,6 +19,11 @@ Major Unfinished Items
 Things to finish
 ================
 
+   Split bonobo in pieces:
+
+	1. bonobo "basic", for the basic component system (bonobo.h, -lbonobo)
+	2. bonobo "GUI", for compound documents, controls (bonoboui.h, -lbonoboui)
+
 Bugs to fix
 ===========
 
