@@ -1,5 +1,8 @@
 2001-07-17  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-main.c (bonobo_x_error_handler): kill,
+	(bonobo_setup_x_error_handler): kill - in libbonoboui now.
+
 	* bonobo/bonobo-object.c:
 	s/bonobo_object_finalize_real/bonobo_object_finalize_gobject/
 	s/bonobo_object_finalize/bonobo_object_finalize_internal/

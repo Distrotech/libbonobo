@@ -31,8 +31,7 @@ impl_pop_data (PortableServer_Servant servant,
 
 	if (ssource->pop_data_fn != NULL)
 		result = (*ssource->pop_data_fn) (ssource, count, buffer, ssource->closure);
-	else
-	{
+	else {
 		GtkObjectClass *oc = GTK_OBJECT (ssource)->klass;
 		GnomeSimpleDataSourceClass *class = GNOME_SIMPLE_DATA_SOURCE_CLASS (oc);
 
@@ -40,9 +39,7 @@ impl_pop_data (PortableServer_Servant servant,
 	}
 
 	if (result != 0)
-	{
 		g_warning ("FIXME: should report an exception");
-	}
 	
 } /* impl_pop_data */
 
