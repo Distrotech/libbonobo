@@ -122,7 +122,12 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
                        GnomeObject *tryme = l->data;
 
                        if ((type && gtk_type_is_a(GTK_OBJECT(tryme)->klass->type, type)) ||
-			   !strcmp(tryme->corba_objref->object_id, repoid)){
+#ifdef ORBIT_IMPLEMENTS_IS_A
+			   CORBA_Object_is_a(tryme, repoid, ev)
+#else
+			   !strcmp(tryme->corba_objref->object_id, repoid)
+#endif
+				){
                                retval = CORBA_Object_duplicate (tryme->corba_objref, ev);
                                break;
                        }
@@ -255,6 +260,7 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 		bonobo_poa(), servant, &object->ev);
 
 	if (o){
+		object->corba_objref = o;
 		gnome_object_bind_to_servant (object, servant);
 		return o;
 	} else
@@ -284,7 +290,11 @@ gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
 
 	
 /* * This routine assumes ownership of the corba_object that is passed in. */
+#if 0
 	object->corba_objref = CORBA_Object_duplicate (corba_object, &object->ev);
+#else
+	object->corba_objref = corba_object;
+#endif
 
 	return object;
 }

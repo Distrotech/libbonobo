@@ -57,7 +57,7 @@ CORBA_Object gnome_object_query_interface  (GnomeObject *object,
 CORBA_Object gnome_object_corba_objref     (GnomeObject *object);
 
 /* CORBA default vector methods we provide */
-extern PortableServer_ServantBase__epv gnome_object_base_epv;
+extern PortableServer_ServantBase__epv  gnome_object_base_epv;
 extern POA_GNOME_Unknown__epv           gnome_object_epv;
 extern POA_GNOME_Unknown__vepv          gnome_object_vepv;
 
