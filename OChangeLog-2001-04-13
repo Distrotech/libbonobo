@@ -1,3 +1,10 @@
+2000-12-11  Iain Holmes  <iain@helixcode.com>
+
+	* bonobo/bonobo-property-control.[ch]: Added 
+	bonobo_property_control_new_full to use an already created 
+	BonoboEventSource. Added a function to retrieve this event source.
+	Namespaced the property_changed event name.
+
 2000-12-11  Michael Meeks  <michael@helixcode.com>
 
 	* doc/NAMESPACE: add ref to FAQ.
