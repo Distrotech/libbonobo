@@ -1,3 +1,5 @@
+NULL=
+
 idldir = $(datadir)/idl
 
 idl_DATA =			\
@@ -18,6 +20,9 @@ idl_DATA =			\
 	bonobo-ui-handler.idl	\
 	bonobo-property.idl	\
 	bonobo-desktop.idl	\
-	bonobo-print.idl
+	bonobo-print.idl	\
+	bonobo-moniker.idl	\
+	bonobo-sizeable.idl	\
+	$(NULL)
 
 EXTRA_DIST = $(idl_DATA)

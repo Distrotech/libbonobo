@@ -1,6 +1,8 @@
 2000-08-08  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	* Makefile.am: some fixes so it passes make distcheck
+	* idl/Makefile.am: two forgotten idl filesbonobo-moniker.idl
+	bonobo-sizeable.idl
 
 2000-08-07  Federico Mena Quintero  <federico@helixcode.com>
 
