@@ -6,14 +6,16 @@
 #
 # Konventioner:
 #
+#   child -> under-
 #   moniker -> protokolhåndtering
 #   storage -> lager
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 0.1\n"
-"POT-Creation-Date: 2003-06-09 17:26+0100\n"
-"PO-Revision-Date: 2003-01-01 18:51+0100\n"
+"Project-Id-Version: libbonobo\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-18 18:50+0200\n"
+"PO-Revision-Date: 2003-06-18 18:51+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +24,7 @@ msgstr ""
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
-msgstr "Kunne ikke finde ud af hvilket afkom serveren var opført hos"
+msgstr "Kunne ikke finde ud af hvilken underproces serveren var opført hos"
 
 #: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
@@ -117,12 +119,12 @@ msgstr "Egenskaben '%s' har ingen værdi"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Afkomsproces gav ikke en fejlbesked, ukendt fejl opstod"
+msgstr "Underproces gav ikke en fejlbesked, ukendt fejl er opstået"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Det mislykkedes at læse fra afkomsproces: %s\n"
+msgstr "Det mislykkedes at læse fra underproces: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
@@ -131,7 +133,7 @@ msgstr "Kunne ikke fraspalte en ny proces"
 #: bonobo-activation/bonobo-activation-fork-server.c:318
 #, c-format
 msgid "Child received signal %u (%s)"
-msgstr "Afkom modtog signal %u (%s)"
+msgstr "Underproces modtog signal %u (%s)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
@@ -192,11 +194,11 @@ msgstr "Delt bibliotek '%s' indeholdt ikke '%s'"
 
 #: bonobo/bonobo-object.c:910
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Brugerdefinerett CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
