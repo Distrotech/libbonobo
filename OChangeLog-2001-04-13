@@ -1,3 +1,15 @@
+1999-08-19  Michael Meeks  <michael@imaginator.com>
+
+	* doc/storage.txt: Re-hash: downgrade librepro, mention libefs.
+
+	* README: typo.
+
+	* README-gdk-patch: kill duplicate line & typo.
+
+	* doc/Bonobo.sgml: re-phrasing in places.
+
+	* doc/interfaces.txt: typos.
+	
 1999-08-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* doc/api/bonobo.types: Updated to reflect the new data types.

@@ -4,7 +4,7 @@ document system for the GNU system.
 
 * What is Bonobo
 
-   Bonobo is a set of language and system independante CORBA
+   Bonobo is a set of language and system independant CORBA
 interfaces for creating reusable components and creating compound
 documents.
 
