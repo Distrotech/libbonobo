@@ -1,0 +1,59 @@
+module OAF {
+	typedef string ImplementationID;
+	typedef string ActivationID;
+
+	/* ActivationResult */
+	enum ActivationResultType { RESULT_OBJECT, RESULT_SHLIB };
+
+	union ActivationResult switch(ActivationResultType) {
+	case RESULT_OBJECT:
+		Object res_object;
+	case RESULT_SHLIB:
+		string res_shlib;
+	};
+
+	/* Attribute */
+	enum AttributeType { A_STRING, A_NUMBER, A_BOOLEAN };
+	union AttributeValue switch(AttributeType) {
+	case A_STRING:
+		string value_string;
+	case A_NUMBER:
+		double value_number;
+	case A_BOOLEAN:
+		boolean value_boolean;
+	};
+	struct Attribute {
+		string name;
+		AttributeValue v;
+	};
+
+	/* Server */
+	struct Server {
+		ImplementationID iid;
+		sequence<Attribute> attrs;
+	};
+	typedef sequence<Server> ServerList;
+
+	/* Interfaces */
+	interface ObjectActivator {
+	  readonly attribute ServerList servers;
+	  readonly attribute string domain, hostID;
+
+	  Object activate(in ImplementationID iid);
+
+	  /* Ensures consistency for activations of publicly advertised objects */
+	  void lock();
+	  oneway void unlock();
+	};
+
+	typedef sequence<ObjectDirectory> ObjectDirectoryList;
+
+	interface ActivationContext {
+	  readonly attribute ObjectDirectoryList directories;
+	  void add_directory(in ObjectDirectory dir);
+	  void remove_directory(in ObjectDirectory dir);
+
+	  ActivationResult activate(in string requirements, in string selection_order) context("hostID", "domain");
+	  ActivationResult activate_from_id(in ActivationID aid);
+	};
+};
