@@ -1,3 +1,52 @@
+2000-09-07  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_strip, do_strip): Process all
+	siblings too. (set_id, do_set_id): ditto.
+
+	* bonobo/bonobo-app.c (exec_verb_cb): re-order + add debug.
+
+	* bonobo/bonobo-app-item.c (bonobo_app_item_new_item, proxy_click),
+	(bonobo_app_item_new_toggle): implement verbs on toolbar items; doh.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_container_object_set),
+	(bonobo_ui_container_object_get): Implement.
+
+2000-09-07  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (merge): fix bug, double free on [ab]_name
+
+	* bonobo/bonobo-ui-util.c (bonobo_help_display_cb): update.
+
+	* bonobo/bonobo-ui-component.c (impl_exec_verb): update invocation.
+
+	* bonobo/bonobo-ui-compat.c (verb_to_cb): re-order.
+
+	* bonobo/bonobo-ui-component.h: Re-order the Verb's arguments to match
+	an old gnome-app's.
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_get_ui_fname): make it
+	unconditional so we can at least see what the problem is.
+
+	* bonobo/bonobo-app.c (impl_node_get): update to stop libxml dumping
+	the peers of the root doc node.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_merge): furkled debug.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_menu_new): make toggle items
+	work properly. (bonobo_ui_handler_new_for_app): make the component as well
+	as the app look like a UIHandler; yuck.
+
+	* bonobo/Makefile.am: Install bonobo-ui-extract.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_compat_get_component): implement.
+	(bonobo_ui_compat_get_app, bonobo_ui_get_container): ditto.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_add_verb_list_with_data),
+	(bonobo_ui_component_add_verb_list): impl helper functions.
+
+	* bonobo/bonobo-app.c (node_get_id): make an empty verb signify
+	falling back to the name. (exec_verb_cb): use node_get_id
+
 2000-09-06  Michael Meeks  <michael@helixcode.com>
 
 	* Makefile.am (SUBDIRS): disable gshell for now.
