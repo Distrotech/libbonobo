@@ -1,3 +1,9 @@
+2000-12-05  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-win.c: (process_state_updates): Remove state
+	updates from the list before processing them. This prevents a
+	problem where a state update is destroyed twice when we re-enter.
+
 2000-12-05  John Sullivan  <sullivan@eazel.com>
 
 	* bonobo/bonobo-win.c: (parse_look):
