@@ -5,9 +5,9 @@
 
 2001-04-13  Martin Baulig  <baulig@suse.de>
 
-	* libbonobo/Makefile.am: Added simple Makefile.am.
+	* bonobo/Makefile.am: Added simple Makefile.am.
 
-	* libbonobo/libbonobo-2.0.pc.in: New file.
+	* bonobo/libbonobo-2.0.pc.in: New file.
 
 2001-04-13  Martin Baulig  <baulig@suse.de>
 
