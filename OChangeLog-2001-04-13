@@ -1,4 +1,13 @@
-2000-09-30    <michael@helixcode.com>
+2000-09-30  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (bonobo_win_object_set): set the node dirty
+	that we put an object into and add an update_widgets.
+	(seek_dirty): use bonobo_ui_xml_clean.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_set_dirty): rename to
+	(bonobo_ui_xml_clean): this s/set_node_dirty/bonobo_ui_xml_set_dirty/
+
+2000-09-30  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar-button-item.c (impl_set_tooltip): impl.
 
