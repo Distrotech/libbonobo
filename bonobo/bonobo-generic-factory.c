@@ -75,8 +75,9 @@ bonobo_generic_factory_construct_noreg (BonoboGenericFactory   *factory,
 	
 	factory->priv->act_iid = g_strdup (act_iid);
 
-	factory->priv->factory_closure =
-		bonobo_closure_store (factory_closure, bonobo_marshal_OBJECT__STRING);
+	if (factory_closure)
+		factory->priv->factory_closure =
+			bonobo_closure_store (factory_closure, bonobo_marshal_OBJECT__STRING);
 }
 
 /**
@@ -173,9 +174,9 @@ bonobo_generic_factory_new (const char           *act_iid,
 }
 
 static void
-bonobo_generic_factory_finalize (GObject *object)
+bonobo_generic_factory_destroy (BonoboObject *object)
 {
-	BonoboGenericFactory *factory G_GNUC_UNUSED = BONOBO_GENERIC_FACTORY (object);
+	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (object);
 
 	if (factory->priv) {
 		if (factory->priv->act_iid)
@@ -183,13 +184,15 @@ bonobo_generic_factory_finalize (GObject *object)
 				factory->priv->act_iid, BONOBO_OBJREF (factory));
 
 		g_free (factory->priv->act_iid);
-		g_closure_unref (factory->priv->factory_closure);
+
+		if (factory->priv->factory_closure)
+			g_closure_unref (factory->priv->factory_closure);
 		
 		g_free (factory->priv);
 		factory->priv = 0;
 	}
 		
-	G_OBJECT_CLASS (bonobo_generic_factory_parent_class)->finalize (object);
+	BONOBO_OBJECT_CLASS (bonobo_generic_factory_parent_class)->destroy (object);
 }
 
 static BonoboObject *
@@ -212,12 +215,12 @@ bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
 static void
 bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 {
-	GObjectClass *object_class = (GObjectClass *) klass;
+	BonoboObjectClass *bonobo_object_class = (BonoboObjectClass *) klass;
 	POA_Bonobo_GenericFactory__epv *epv = &klass->epv;
 
 	epv->createObject = impl_Bonobo_ObjectFactory_createObject;
 
-	object_class->finalize = bonobo_generic_factory_finalize;
+	bonobo_object_class->destroy = bonobo_generic_factory_destroy;
 
 	klass->new_generic = bonobo_generic_factory_new_generic;
 

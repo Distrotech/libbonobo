@@ -1,3 +1,17 @@
+2002-02-03  Anders Carlsson  <andersca@gnu.org>
+
+	* bonobo/bonobo-generic-factory.c 
+	(bonobo_generic_factory_construct_noreg): 
+	Allow a NULL factory_closure argument.
+	(bonobo_generic_factory_destroy): Unregister the
+	server in destroy instead of finalize since the CORBA Object has
+	been destroyed in the finalize handler.
+
+2001-12-30  Anders Carlsson  <andersca@gnu.org>
+
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_finalize):
+	Don't unref the factory_closure if it hasn't been created.
+
 2002-01-03  jacob berkman  <jacob@ximian.com>
 
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_map_params):
