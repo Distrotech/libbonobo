@@ -5,13 +5,13 @@ INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -I$(top_srcd
 LDFLAGS=@ORBIT_LIBS@ @GLIB_LIBS@
 
 liboafincludedir = $(includedir)/liboaf
-liboafinclude_HEADERS=oaf.h liboaf.h gnome-factory.h
+liboafinclude_HEADERS=oaf.h liboaf.h gnome-factory.h liboaf-version.h
 
 liboaf_la_SOURCES=oaf-stubs.c oaf-common.c oaf-mainloop.c oaf-actid.c liboaf-private.h \
 	gnome-factory-stubs.c gnome-factory-common.c oaf-plugin.c oaf-activate.c \
 	oaf-registration.c oaf-servreg.c
 
-BUILT_SOURCES=oaf-stubs.c oaf.h oaf-common.c gnome-factory-stubs.c gnome-factory.h gnome-factory-common.c
+BUILT_SOURCES=oaf-stubs.c oaf.h oaf-common.c gnome-factory-stubs.c gnome-factory.h gnome-factory-common.c liboaf-version.h
 
 oaf-stubs.c oaf.h oaf-common.c: stamp-idl
 
