@@ -23,7 +23,7 @@ module Bonobo {
 
 
 		/**
-		 * queryInterface:
+		 * createObject:
 		 * @iid: A string identifying an implementation.
 		 *
 		 * Returns: A newly created CORBA object of the
