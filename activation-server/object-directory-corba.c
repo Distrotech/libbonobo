@@ -284,6 +284,9 @@ impl_OAF_ObjectDirectory_activate(impl_POA_OAF_ObjectDirectory * servant,
   if(!CORBA_Object_is_nil(retval, ev) && !CORBA_Object_non_existent(retval, ev) && !(flags & OAF_FLAG_IGNORE_EXISTING))
     return CORBA_Object_duplicate(retval, ev);
 
+  if (flags & OAF_FLAG_EXISTING_ONLY)
+    return CORBA_OBJECT_NIL;
+  
   if(si)
     retval = od_server_activate(si, &ai, servant->self, ev);
 

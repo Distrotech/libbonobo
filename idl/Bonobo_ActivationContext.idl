@@ -9,7 +9,8 @@ module OAF {
   typedef long ActivationFlags;
   const ActivationFlags FLAG_NO_LOCAL = 1<<0; // No shared libraries
   const ActivationFlags FLAG_IGNORE_EXISTING = 1<<1;
-
+  const ActivationFlags FLAG_EXISTING_ONLY = 1<<2; // don't start the server if not started
+  
   /* ActivationResult */
   enum ActivationResultType { RESULT_OBJECT, RESULT_SHLIB, RESULT_NONE };
 
