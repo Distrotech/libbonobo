@@ -26,6 +26,11 @@ oaffiles=empty.oafinfo broken.oafinfo
 emptydatadir=$(datadir)/oaf
 emptydata_DATA=$(oaffiles)
 
+bin_SCRIPTS=oaf-slay
+
+oaf-slay: oaf-slay.tmpl
+	sed 's|@oafdir@|'$(pkgdatadir)'|g' < $< > $@
+
 EXTRA_DIST=empty.idl $(oaffiles)
 
 TESTS=oaf-test-client
