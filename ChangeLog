@@ -1,8 +1,14 @@
+2003-06-10  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_pbclient_set_boolean): un-roll & sync.
+	with prototype.
+
 2003-06-09  Dan Winship  <danw@ximian.com>
 
 	* bonobo/bonobo-property-bag-client.c
-	(bonobo_pbclient_set_boolean): another gboolean vs CORBA_boolean
-	bug.
+	(bonobo_pbclient_set_boolean): another gboolean
+	vs CORBA_boolean bug.
 
 2003-06-09  Michael Meeks  <michael@ximian.com>
 
