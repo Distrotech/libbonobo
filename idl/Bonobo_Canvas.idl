@@ -1,0 +1,161 @@
+/*
+ * Canvas-based rendering of views
+ *
+ * Author:
+ *    Miguel de Icaza (miguel@kernel.org)
+ *
+ * (C) 1999 International GNOME Support
+ */
+
+module GNOME {
+
+module Gdk {
+	enum EventType {
+		FOCUS,
+		KEY,
+		MOTION,
+		BUTTON,
+		CROSSING
+	};
+
+	enum ButtonType {
+		BUTTON_PRESS,
+		BUTTON_2_PRESS,
+		BUTTON_3_PRESS,
+		BUTTON_RELEASE
+	};
+
+	enum KeyType {
+		KEY_PRESS,
+		KEY_RELEASE
+	};
+
+	enum CrossType {
+		ENTER, LEAVE
+	};
+
+	enum CrossMode {
+		NORMAL,
+		GRAB,
+		UNGRAB
+	};
+
+	typedef long Time;
+
+	struct MotionEvent {
+		Time   time;
+		double x, y, root_x, root_y;
+		double pressure;
+		double xtilt, ytilt;
+		long   state;
+		long   is_hint;
+	};
+
+	struct ButtonEvent {
+		ButtonType type;
+		Time       time;
+		
+		double x, y, root_x, root_y;
+
+		short  button;
+	};
+
+	struct KeyEvent {
+		KeyType type;
+		Time    time;
+		short	state;
+		short	keyval;
+		short	length;
+		string  str;
+	};
+
+	struct CrossingEvent {
+		CrossType    type;
+		Time         time;
+		double	     x, y, x_root, y_root;
+		CrossMode    mode;
+		boolean      focus;
+		short        state;
+	};
+
+	struct FocusEvent {
+		boolean      inside;
+	};
+
+	/*
+	 * Only the lists of events supported by the Canvas
+	 */
+	union Event switch (EventType) {
+		case FOCUS:    FocusEvent focus;
+		case KEY:      KeyEvent key;
+		case MOTION:   MotionEvent motion;
+		case BUTTON:   ButtonEvent button;
+		case CROSSING: CrossingEvent crossing;
+	};
+};
+
+module Canvas {
+	typedef sequence<octet> pixbuf;
+	typedef unsigned long window_id;
+
+	/* At least 32 bits */
+	typedef long int32;
+
+	struct IRect {
+		long x0, y0, x1, y1;
+	};
+
+	struct DRect {
+		double x0, y0, x1, y1;
+	};
+
+	const short IS_BG  = 1;
+	const short IS_BUF = 1;
+
+	typedef double affine [6];
+
+	/*
+	 * See gnome-canvas.h:GnomeCanvasBuf for an explanation
+	 */
+	struct Buf {
+		pixbuf rgb_buf;
+		long   row_stride;
+		IRect  rect;
+		int32  bg_color;
+		short  flags;
+	};
+
+	struct Point {
+		double x, y;
+	};
+
+	typedef sequence<Point> Points;
+
+	struct SVPSegment {
+		boolean up;     /* up or down */
+	        DRect   bbox;
+		Points  points;
+	};
+			  
+	typedef sequence<SVPSegment> SVP;
+      
+	interface Item {
+		void update  (in affine aff, in SVP clip_path, in long flags);
+		void realize ();
+		void unrealize ();
+		void map ();
+		void unmap ();
+
+		void draw   (in window_id drawable, in short x, in short y, in short width, in short height);
+		void render (in Buf buf);
+
+		boolean contains (in double x, in double y);
+
+		void bounds (out double x1, out double x2, out double y1, out double y2);
+
+		boolean event (in GNOME::Gdk::Event event);
+	};
+};
+
+};
+
