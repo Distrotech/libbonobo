@@ -15,6 +15,13 @@
 
 static GHashTable *bonobo_contexts = NULL;
 
+/**
+ * bonobo_context_add:
+ * @context_name: the name to refer to the context by
+ * @context: The Bonobo_Unknown; a ref. is taken on this.
+ * 
+ * This function adds a new context to the context system
+ **/
 void
 bonobo_context_add (const CORBA_char *context_name,
 		    Bonobo_Unknown    context)
@@ -32,6 +39,16 @@ bonobo_context_add (const CORBA_char *context_name,
 			     bonobo_object_dup_ref (context, NULL));
 }
 
+/**
+ * bonobo_context_get:
+ * @context_name: the name of the context
+ * @opt_ev: optional Environment, or NULL
+ * 
+ *  The most useful context is named 'Activation' and returns
+ * the IDL:Bonobo/ActivationContext:1.0 interface.
+ * 
+ * Return value: a new reference to a global Bonobo context or CORBA_OBJECT_NIL
+ **/
 Bonobo_Unknown
 bonobo_context_get (const CORBA_char  *context_name,
 		    CORBA_Environment *opt_ev)
@@ -46,6 +63,12 @@ bonobo_context_get (const CORBA_char  *context_name,
 		return CORBA_OBJECT_NIL;
 }
 
+/**
+ * bonobo_context_init:
+ * @void: 
+ * 
+ * Sets up the context system, internal use only.
+ **/
 void
 bonobo_context_init (void)
 {
@@ -65,6 +88,12 @@ context_destroy (char *key, Bonobo_Unknown handle, gpointer dummy)
 	return TRUE;
 }
 
+/**
+ * bonobo_context_shutdown:
+ * @void: 
+ * 
+ * Shuts down the context system, internal use only
+ **/
 void
 bonobo_context_shutdown (void)
 {
