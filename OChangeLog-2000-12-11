@@ -1,5 +1,13 @@
 1999-07-08  Nat Friedman  <nat@gnome-support.com>
 
+	* bonobo/Makefile.am: Don't compile gnome-ui-handler yet.
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_construct):
+ 	Added missing closure argument to gnome_moniker_construct.
+
+	* bonobo/gnome-object.h: Added missing semicolon to end of
+ 	prototype.
+
 	* idl/gnome-ui-handler.idl (GNOME::UIHandler): Added iobuf
  	typedef.
 

@@ -44,7 +44,7 @@ GnomeObject *gnome_object_construct       (GnomeObject *object,
 					     CORBA_Object corba_object);
 
 GnomeObject *gnome_object_from_servant    (PortableServer_Servant servant);
-PortableServer_Servant gnome_object_get_servant (GnomeObject *object)
+PortableServer_Servant gnome_object_get_servant (GnomeObject *object);
 void         gnome_object_bind_to_servant  (GnomeObject *object,
 					     void *servant);
 
