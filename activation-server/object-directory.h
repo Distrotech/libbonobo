@@ -79,6 +79,7 @@ void                   bonobo_object_directory_reload      (void);
 void                   reload_object_directory             (void);
 void                   check_quit                          (void);
 
+void                   od_finished_internal_registration   (void);    
 G_END_DECLS
 
 #endif /* _OBJECT_DIRECTORY_H_ */
