@@ -1,3 +1,7 @@
+Sat Nov 27 09:20:51 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* gshell/gshell.c: new menus
+
 Fri Nov 26 08:15:53 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gshell/inout.c (file_open_cb): use g_file_test instead of stat.
