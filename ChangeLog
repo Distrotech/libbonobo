@@ -1,5 +1,11 @@
 2001-12-14  Mark McLoughlin  <mark@skynet.ie>
 
+	* bonobo/bonobo-item-handler.c: (bonobo_item_handler_finalize),
+	  (bonobo_item_handler_construct), (bonobo_item_handler_new):
+	tolerate NULL get_object and enum_objects callbacks/closures.
+
+2001-12-14  Mark McLoughlin  <mark@skynet.ie>
+
 	* bonobo/bonobo-event-source.h,
 	  bonobo/bonobo-generic-factory.h,
 	  bonobo/bonobo-item-container.h,

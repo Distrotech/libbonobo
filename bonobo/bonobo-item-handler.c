@@ -161,10 +161,12 @@ bonobo_item_handler_finalize (GObject *object)
 {
 	BonoboItemHandler *handler = BONOBO_ITEM_HANDLER (object);
 
-	if (handler->priv)
-	{
-		g_closure_unref (handler->priv->enum_objects);
-		g_closure_unref (handler->priv->get_object);
+	if (handler->priv) {
+		if (handler->priv->enum_objects)
+			g_closure_unref (handler->priv->enum_objects);
+
+		if (handler->priv->enum_objects)
+			g_closure_unref (handler->priv->get_object);
 
 		g_free (handler->priv);
 		handler->priv = 0;
@@ -220,11 +222,13 @@ bonobo_item_handler_construct (BonoboItemHandler *handler,
 {
 	g_return_val_if_fail (handler != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_ITEM_HANDLER (handler), NULL);
-	
-	handler->priv->enum_objects = bonobo_closure_store
-		(enum_objects, bonobo_marshal_POINTER__DUMMY_BOXED);
-	handler->priv->get_object   = bonobo_closure_store
-		(get_object, bonobo_marshal_BOXED__STRING_BOOLEAN_DUMMY_BOXED);
+
+	if (enum_objects)
+		handler->priv->enum_objects = bonobo_closure_store
+			(enum_objects, bonobo_marshal_POINTER__DUMMY_BOXED);
+	if (get_object)
+		handler->priv->get_object = bonobo_closure_store
+			(get_object, bonobo_marshal_BOXED__STRING_BOOLEAN_DUMMY_BOXED);
 	
 	return handler;
 }
@@ -242,9 +246,18 @@ bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
 			 BonoboItemHandlerGetObjectFn   get_object,
 			 gpointer                       user_data)
 {
-	return bonobo_item_handler_new_closure (
-		g_cclosure_new (G_CALLBACK (enum_objects), user_data, NULL),
-		g_cclosure_new (G_CALLBACK (get_object), user_data, NULL));
+	GClosure *enum_objects_closure = NULL;
+	GClosure *get_object_closure = NULL;
+
+	if (enum_objects)
+		enum_objects_closure =
+			g_cclosure_new (G_CALLBACK (enum_objects), user_data, NULL);
+
+	if (get_object)
+		get_object_closure =
+			g_cclosure_new (G_CALLBACK (get_object), user_data, NULL);
+
+	return bonobo_item_handler_new_closure (enum_objects_closure, get_object_closure);
 }
 
 /**
