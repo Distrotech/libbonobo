@@ -1,3 +1,31 @@
+Bonobo 0.19
+
+Main bits:
+
+	* UI handler totaly re-implemented (Myself)
+
+		+ New shinier Toolbar widget (Ettore, Jody)
+		+ XML UI description
+		+ XML node abstraction (Havoc)
+
+	* Property bag Listener interface (Mike)
+
+	* libefs updates (Dietmar)
+
+	* New 'new:' moniker (Myself)
+
+Bugs fixed:
+
+	* UI leak fixes (Darin)
+
+	* Text/Plain component sorted out (Maciej)
+	
+
+Bonobo 0.18
+
+Paper bag release.
+
+
 Bonobo 0.17
 
 Main bits:

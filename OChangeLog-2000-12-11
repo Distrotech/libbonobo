@@ -1,3 +1,17 @@
+2000-10-05  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c s/app/win/ for Darin.
+
+2000-10-04  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.h: Remove 'new' keyword in header.
+
+2000-10-04  Michael Meeks  <michael@helixcode.com>
+
+	* Version 0.19
+
+	* NEWS: update
+
 2000-10-04  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (update_status): don't re-build status if not
