@@ -1,3 +1,5 @@
+### comment: moved this documentation to api/tmpl/bonobo-item-handler.sgml
+
 * Simple Moniker Arguments
 
 	Sometimes you want to pass "arguments" to a component.

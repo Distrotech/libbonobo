@@ -9,3 +9,9 @@ html-build.stamp
 html
 Makefile.in
 Makefile
+xml
+libbonobo-decl-list.txt
+libbonobo-decl.txt
+libbonobo-undocumented.txt
+libbonobo-unused.txt
+
