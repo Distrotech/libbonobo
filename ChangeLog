@@ -101,7 +101,6 @@
 	BONOBO_PROPERTY_BAG_TYPE, BONOBO_TYPE_CORBA_ANY, G_TYPE_UINT,
 	BONOBO_TYPE_CORBA_EXCEPTION.
 
->>>>>>> 1.171
 2001-08-31  Abel Cheung  <maddog@linux.org.hk>
 
 	* configure.in (ALL_LINGUAS): zh_TW.Big5 -> zh_TW
