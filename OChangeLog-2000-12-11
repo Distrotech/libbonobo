@@ -1,3 +1,8 @@
+Mon Sep  6 01:22:10 1999 Timur Bakeyev <timur@gnu.org>
+
+	* storage-modules/Makefile.am: Remove in libstorage_efs_la_LDFLAGS
+	$(shell pwd) and src/.libs - libtool takes care about paths.
+
 1999-09-04  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-ui-handler.c (gnome_ui_handler_create_toolbar): Add docs.
