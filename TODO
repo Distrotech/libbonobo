@@ -1,3 +1,5 @@
 API issues
 	+ need a dispose on the bonobo_listener
 	+ need a bonobo_object_query_remote
+	+ need to allow custom POAs for object construction,
+	  a construct time property ?
