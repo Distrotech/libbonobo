@@ -13,6 +13,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-util.h>
 #include "bonobo-storage-plugin.h"
 
 #define PLUGIN_PREFIX "libstorage_"
@@ -89,8 +91,7 @@ bonobo_storage_load_plugins (void)
 			    strncmp (de->d_name, PLUGIN_PREFIX, 
 				     strlen (PLUGIN_PREFIX)) == 0 &&
 			    strncmp (de->d_name + len - 3, ".so", 3) == 0) {
-				plugin_name=g_strconcat (path, "/", 
-							 de->d_name, NULL);
+				plugin_name = g_concat_dir_and_file (path, de->d_name);
 				plugin_load (plugin_name);
 				g_free (plugin_name);
 			}

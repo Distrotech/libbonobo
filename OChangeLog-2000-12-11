@@ -1,5 +1,12 @@
 2000-11-14  Michael Meeks  <michael@helixcode.com>
 
+	* tests/Makefile.am (BONOBO_PLUGIN_PATH): remove appended '/'
+
+	* bonobo/bonobo-storage-plugin.c (bonobo_storage_load_plugins): 
+	use g_concat_dir_and_file.
+
+2000-11-14  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-object.c (bonobo_object_class_init): make
 	system_exception correctly marshal the ev as specified.
 
