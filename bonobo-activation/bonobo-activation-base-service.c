@@ -471,33 +471,77 @@ bonobo_activation_service_get (const BonoboActivationBaseService *base_service)
 /*****Implementation of the IOR registration system via plain files ******/
 static int lock_fd = -1;
 
+/*
+ * The linc-tmpdir might not be what we expect,
+ * requires linc >= 0.5.1
+ */
+static const char *
+get_tmpdir (void)
+{
+        static char *tmpdir = NULL;
+
+        if (!tmpdir)
+                tmpdir = linc_get_tmpdir ();
+
+        if (!tmpdir) {
+                g_warning ("very odd tmpdir problem");
+                tmpdir = g_strdup_printf ("/tmp/orbit-%s", g_get_user_name ());
+        }
+
+        return tmpdir;
+}
+
+static char *
+get_lock_fname (void)
+{
+        return g_strconcat (get_tmpdir (), "/bonobo-activation-register.lock", NULL);
+}
+
+static char *
+get_ior_fname (void)
+{
+        return g_strconcat (get_tmpdir (), "/bonobo-activation-server-ior", NULL);
+}
+
+static void
+wait_for_lock (void)
+{
+#ifdef HAVE_USLEEP
+        usleep (10000);
+
+#elif defined(HAVE_NANOSLEEP)
+        struct timespec timewait;
+        timewait.tv_sec = 0;
+        timewait.tv_nsec = 1000000;
+        nanosleep (&timewait, NULL);
+
+#else
+#warning You will have bad performance without usleep
+        sleep (1);
+#endif
+        access ("bonobo-activation lock wait", 0);
+}
+
 static void
 rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry, 
-                gpointer user_data)
+                gpointer                                   user_data)
 {
 	char *fn;
 	struct flock lock;
         int retval;
         char *err;
 
-        fn = g_strdup_printf ("/tmp/orbit-%s/bonobo-activation-register.lock", g_get_user_name ());
+        fn = get_lock_fname ();
 
 	while ((lock_fd = open (fn, O_CREAT | O_RDWR, 0700)) < 0) {
-		if (errno == EEXIST) {
-#ifdef HAVE_USLEEP
-			usleep (10000);
-#elif defined(HAVE_NANOSLEEP)
-			{
-				struct timespec timewait;
-				timewait.tv_sec = 0;
-				timewait.tv_nsec = 1000000;
-				nanosleep (&timewait, NULL);
-			}
-#else
-			sleep (1);
-#endif
-		} else
+
+                if (errno == EEXIST)
+                        wait_for_lock ();
+
+		else {
+                        g_warning ("%s locking '%s'", g_strerror (errno), fn);
 			break;
+                }
 	}
 
 	fcntl (lock_fd, F_SETFD, FD_CLOEXEC);
@@ -524,7 +568,7 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
 
 static void
 rloc_file_unlock (const BonoboActivationBaseServiceRegistry *registry, 
-                  gpointer user_data)
+                  gpointer                                   user_data)
 {
         struct flock lock;
 
@@ -542,15 +586,6 @@ rloc_file_unlock (const BonoboActivationBaseServiceRegistry *registry,
 	}
 }
 
-static void
-filename_fixup (char *fn)
-{
-	while (*(fn++)) {
-		if (*fn == '/')
-			*fn = '_';
-	}
-}
-
 static char *
 rloc_file_check (const BonoboActivationBaseServiceRegistry *registry,
 		 const BonoboActivationBaseService *base_service, int *ret_distance,
@@ -558,32 +593,10 @@ rloc_file_check (const BonoboActivationBaseServiceRegistry *registry,
 {
 	FILE *fh;
 	char *fn;
-	const char *uname;
-	char *namecopy;
 
-	namecopy = g_strdup (base_service->name);
-	filename_fixup (namecopy);
-
-	uname = g_get_user_name ();
-
-	fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s-%s",
-                              uname,
-                              namecopy,
-                              base_service->session_name ? base_service->session_name : "local");
-        
+        fn = get_ior_fname ();
 	fh = fopen (fn, "r");
         g_free (fn);
-
-        if (fh == NULL) {
-                fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s",
-                                      uname,
-                                      namecopy);
-                
-                fh = fopen (fn, "r");
-                g_free (fn);
-        }
-
-        g_free (namecopy);
 
 	if (fh != NULL) {
 		char iorbuf[8192];
@@ -610,23 +623,10 @@ rloc_file_register (const BonoboActivationBaseServiceRegistry *registry, const c
 		    const BonoboActivationBaseService *base_service,
 		    gpointer user_data)
 {
-	char *fn, *fn2, *namecopy;
+	char *fn;
 	FILE *fh;
-	const char *uname;
 
-	namecopy = g_strdup (base_service->name);
-	filename_fixup (namecopy);
-
-	uname = g_get_user_name ();
-
-	fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s-%s",
-                              uname,
-                              namecopy,
-                              base_service->session_name ? base_service->session_name : "local");
-
-	fn2 = g_strdup_printf ("/tmp/orbit-%s/reg.%s", uname, namecopy);
-        g_free (namecopy);
-
+        fn = get_ior_fname ();
 	fh = fopen (fn, "w");
 
         if (fh != NULL) {
@@ -634,48 +634,19 @@ rloc_file_register (const BonoboActivationBaseServiceRegistry *registry, const c
                 fclose (fh);
         }       
 
-        symlink (fn, fn2);
         g_free (fn);
-        g_free (fn2);
 }
 
 static void
 rloc_file_unregister (const BonoboActivationBaseServiceRegistry *registry, 
-                      const char *ior,
-		      const BonoboActivationBaseService *base_service,
-		      gpointer user_data)
+                      const char                                *ior,
+		      const BonoboActivationBaseService         *base_service,
+		      gpointer                                   user_data)
 {
-	char *fn, *fn2;
-        char fn3[PATH_MAX + 1];
-	const char *uname;
-	char *namecopy;
-        int link_length;
+	char *fn;
 
-	namecopy = g_strdup (base_service->name);
-	filename_fixup (namecopy);
-
-	uname = g_get_user_name ();
-
-	fn = g_strdup_printf ("/tmp/orbit-%s/reg.%s-%s",
-                              uname,
-                              namecopy,
-                              base_service->session_name ?
-                              base_service->session_name : "local");
-	unlink (fn);
-
-	fn2 = g_strdup_printf ("/tmp/orbit-%s/reg.%s", uname, namecopy);
-
-	link_length = readlink (fn2, fn3, sizeof (fn3) - 1);
-
-        if (link_length < 0) {
-		return;
-        }
-        
-        fn3[link_length] = 0;
-        
-	if (strcmp (fn3, fn) == 0) {
-		unlink (fn2);
-        }
+	unlink ((fn = get_ior_fname ()));
+        g_free (fn);
 }
 
 static const BonoboActivationBaseServiceRegistry rloc_file = {
