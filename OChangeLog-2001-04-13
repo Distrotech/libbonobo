@@ -1,3 +1,13 @@
+2000-06-26  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-stream-fs.c (bonobo_stream_fs_open): don't allow
+	a directory to be opened.
+
+	* bonobo/bonobo-stream-client.c (bonobo_stream_client_write),
+	(bonobo_stream_client_write_string): clean
+	(bonobo_stream_client_read_string): total re-write for performance and
+	sensible termination.
+
 2000-06-24  Michael Meeks  <michael@helixcode.com>
 
 	* storage-modules/bonobo-storage-vfs.c (bonobo_storage_vfs_open):

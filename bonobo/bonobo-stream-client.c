@@ -1,13 +1,15 @@
 /*
  * gnome-stream-client.c: Helper routines to access a Bonobo_Stream CORBA object
  *
- * Author:
- *   Nat Friedman (nat@nat.org)
+ * Authors:
+ *   Nat Friedman    (nat@nat.org)
  *   Miguel de Icaza (miguel@kernel.org).
+ *   Michael Meekss  (michael@helixcode.com)
  *
- * Copyright 1999 Helix Code, Inc.
+ * Copyright 1999,2000 Helix Code, Inc.
  */
 #include <config.h>
+
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo-stream-client.h>
@@ -28,8 +30,8 @@
  */
 CORBA_long
 bonobo_stream_client_write (const Bonobo_Stream stream,
-			   const void *buffer, const size_t size,
-			   CORBA_Environment *ev)
+			    const void *buffer, const size_t size,
+			    CORBA_Environment *ev)
 {
 	CORBA_long          v;
 	Bonobo_Stream_iobuf *buf;
@@ -38,10 +40,10 @@ bonobo_stream_client_write (const Bonobo_Stream stream,
 	if (size == 0)
 		return 0;
 
-	g_return_val_if_fail (stream != CORBA_OBJECT_NIL, -1);
 	g_return_val_if_fail (buffer != NULL, -1);
+	g_return_val_if_fail (stream != CORBA_OBJECT_NIL, -1);
 
-	if (ev == NULL) {
+	if (!ev) {
 		local_ev = g_new (CORBA_Environment, 1);
 		CORBA_exception_init (local_ev);
 	} else
@@ -49,9 +51,8 @@ bonobo_stream_client_write (const Bonobo_Stream stream,
 
 	buf = Bonobo_Stream_iobuf__alloc ();
 
-	if (! buf) {
+	if (!buf)
 		goto stream_error;
-	}
 
 	buf->_buffer = CORBA_sequence_CORBA_octet_allocbuf (size);
 	if (buf->_buffer == NULL)
@@ -65,7 +66,7 @@ bonobo_stream_client_write (const Bonobo_Stream stream,
 
 	CORBA_free (buf);
 
-	if (ev == NULL) {
+	if (!ev) {
 		CORBA_exception_free (local_ev);
 		g_free (local_ev);
 	}
@@ -78,7 +79,7 @@ stream_error_buffer:
 stream_error:
 	CORBA_exception_set_system (local_ev, ex_CORBA_NO_MEMORY, CORBA_COMPLETED_NO);
 
-	if (ev == NULL) {
+	if (!ev) {
 		CORBA_exception_free (local_ev);
 		g_free (local_ev);
 	}
@@ -106,7 +107,7 @@ stream_error:
  */
 CORBA_long
 bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
-				  gboolean terminate, CORBA_Environment *ev)
+				   gboolean terminate, CORBA_Environment *ev)
 {
 	size_t total_length;
 	size_t bytes_written;
@@ -115,7 +116,6 @@ bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
 		return 0;
 
 	g_return_val_if_fail (stream != CORBA_OBJECT_NIL, -1);
-	g_return_val_if_fail (str != NULL, -1);
 
 	total_length = strlen (str) + (terminate ? 1 : 0);
 	bytes_written = 0;
@@ -124,9 +124,9 @@ bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
 
 		bytes_written +=
 			bonobo_stream_client_write (stream,
-						   str + bytes_written,
-						   total_length - bytes_written,
-						   ev);
+						    str + bytes_written,
+						    total_length - bytes_written,
+						    ev);
 
 		if (ev->_major != CORBA_NO_EXCEPTION) {
 			g_warning ("BonoboStreamClient: Exception writing to stream!");
@@ -153,7 +153,7 @@ bonobo_stream_client_write_string (const Bonobo_Stream stream, const char *str,
  */
 CORBA_long
 bonobo_stream_client_printf (const Bonobo_Stream stream, const gboolean terminate,
-			    CORBA_Environment *ev, const char *fmt, ...)
+			     CORBA_Environment *ev, const char *fmt, ...)
 {
 	va_list      args;
 	char        *str;
@@ -186,38 +186,49 @@ bonobo_stream_client_printf (const Bonobo_Stream stream, const gboolean terminat
  */
 CORBA_long
 bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
-				 CORBA_Environment *ev)
+				  CORBA_Environment *ev)
 {
 	Bonobo_Stream_iobuf *buffer;
-	CORBA_long	    bytes_read;
-	CORBA_long	    strsz;
+	GString             *gstr;
+	gboolean             all;
 
-	bytes_read = 0;
-	strsz	   = 0;
-	*str       = NULL;
-	while (TRUE) {
-		bytes_read = Bonobo_Stream_read (stream, 1, &buffer, ev);
+	gstr = g_string_sized_new (16);
 
-		if (ev->_major != CORBA_NO_EXCEPTION) {
-			g_free (*str);
-			g_warning ("BonoboStreamClient: Exception while reading string!");
-			return -1;
-		}
+	for (all = FALSE; !all; ) {
+		CORBA_long len;
 
-		if (bytes_read > 0) {
-			gboolean got_null = FALSE;
+		/* 128 == a sensible size ? */
+		len = Bonobo_Stream_read (stream, 128,
+					  &buffer, ev);
 
-			*str = g_realloc (*str, bytes_read);
-			(*str) [strsz] = buffer->_buffer [0];
-			strsz ++;
+		if (len == 0 || ev->_major != CORBA_NO_EXCEPTION)
+			all = TRUE;
 
-			if (buffer->_buffer [0] == '\0')
-				got_null = TRUE;
+		else {
+			int i;
 
+			for (i = 0; i < len && i < buffer->_length; i++) {
+				if (buffer->_buffer [i] == '\0') {
+					all = TRUE;
+					break;
+				} else
+					g_string_append_c (gstr, buffer->_buffer [i]);
+			}
 			CORBA_free (buffer);
-
-			if (got_null)
-				return strsz;
 		}
+	}
+
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+		*str = NULL;
+		g_string_free (gstr, TRUE);
+		return -1;
+	} else {
+		CORBA_long l;
+
+		l    = gstr->len;
+		*str = gstr->str;
+		g_string_free (gstr, FALSE);
+
+		return l;
 	}
 }
