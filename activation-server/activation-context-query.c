@@ -506,7 +506,7 @@ qexp_evaluate_function (Bonobo_ServerInfo * si, QueryExpr * e,
 	func_name = e->u.function_value.func_name;
 
 	for (i = 0; qexp_func_impls[i].name; i++) {
-		if (!strcasecmp (func_name, qexp_func_impls[i].name))
+		if (!g_ascii_strcasecmp (func_name, qexp_func_impls[i].name))
 			break;
 	}
 
@@ -841,17 +841,17 @@ qexp_evaluate_id (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 	if (si) {
 		retval.value_known = TRUE;
 		retval.type = CONST_STRING;
-		if (!strcasecmp (e->u.id_value, "location_info"))
+		if (!g_ascii_strcasecmp (e->u.id_value, "location_info"))
 			retval.u.v_string = si->location_info;
-		else if (!strcasecmp (e->u.id_value, "server_type"))
+		else if (!g_ascii_strcasecmp (e->u.id_value, "server_type"))
 			retval.u.v_string = si->server_type;
-		else if (!strcasecmp (e->u.id_value, "iid"))
+		else if (!g_ascii_strcasecmp (e->u.id_value, "iid"))
 			retval.u.v_string = si->iid;
-		else if (!strcasecmp (e->u.id_value, "username"))
+		else if (!g_ascii_strcasecmp (e->u.id_value, "username"))
 			retval.u.v_string = si->username;
-		else if (!strcasecmp (e->u.id_value, "hostname"))
+		else if (!g_ascii_strcasecmp (e->u.id_value, "hostname"))
 			retval.u.v_string = si->hostname;
-		else if (!strcasecmp (e->u.id_value, "domain"))
+		else if (!g_ascii_strcasecmp (e->u.id_value, "domain"))
 			retval.u.v_string = si->domain;
 		else {
 			int i;

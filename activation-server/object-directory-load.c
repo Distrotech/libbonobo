@@ -51,8 +51,8 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 			continue;
                 }
 
-		if (strcasecmp (sub->name, "oaf_attribute") != 0 &&
-                    strcasecmp (sub->name, "oaf_property") != 0) {
+		if (g_ascii_strcasecmp (sub->name, "oaf_attribute") != 0 &&
+                    g_ascii_strcasecmp (sub->name, "oaf_property") != 0) {
 			continue;
                 }
                 
@@ -85,7 +85,7 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 		curprop->name = CORBA_string_dup (valuestr);
 		free (valuestr);
 
-		if (strcasecmp (type, "stringv") == 0) {
+		if (g_ascii_strcasecmp (type, "stringv") == 0) {
 			int j, o;
 			xmlNodePtr sub2;
 
@@ -96,7 +96,7 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 				if (sub2->type != XML_ELEMENT_NODE) {
 					continue;
                                 }
-				if (strcasecmp (sub2->name, "item") != 0) {
+				if (g_ascii_strcasecmp (sub2->name, "item") != 0) {
 					continue;
                                 }
 
@@ -126,14 +126,14 @@ od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
 				xmlFree (valuestr);
 			}
 
-		} else if (strcasecmp (type, "number") == 0) {
+		} else if (g_ascii_strcasecmp (type, "number") == 0) {
 			valuestr = xmlGetProp (sub, "value");
 
 			curprop->v._d = Bonobo_ACTIVATION_P_NUMBER;
 			curprop->v._u.value_number = atof (valuestr);
 
 			xmlFree (valuestr);
-		} else if (strcasecmp (type, "boolean") == 0) {
+		} else if (g_ascii_strcasecmp (type, "boolean") == 0) {
 			valuestr = xmlGetProp (sub, "value");
 			curprop->v._d = Bonobo_ACTIVATION_P_BOOLEAN;
 			curprop->v._u.value_boolean =
@@ -216,7 +216,7 @@ od_process_server_xml_node (xmlNodePtr node,
          * and even more complicated stuff to use. 
          */
         
-        if (strcasecmp (node->name, "oaf_server")) {
+        if (g_ascii_strcasecmp (node->name, "oaf_server")) {
                 /* FIXME: syslog the error */
                 return;
         }
@@ -288,7 +288,7 @@ od_load_file (const char *file,
                 return;
         }
         
-        if (strcasecmp (document->xmlRootNode->name, "oaf_info") == 0) {
+        if (g_ascii_strcasecmp (document->xmlRootNode->name, "oaf_info") == 0) {
                 node = document->xmlRootNode->xmlChildrenNode;
         } else {
                 node = document->xmlRootNode;
@@ -393,8 +393,8 @@ Bonobo_ServerInfo_load (char **directories,
 static gboolean 
 od_string_to_boolean (const char *str)
 {
-	if (strcasecmp (str, "true") == 0
-	    || strcasecmp (str, "yes") == 0
+	if (g_ascii_strcasecmp (str, "true") == 0
+	    || g_ascii_strcasecmp (str, "yes") == 0
 	    || strcmp (str, "1") == 0) {
 		return TRUE;
 	} else {
