@@ -170,6 +170,9 @@ gnome_object_restore_from_url (const char *goad_id, const char *url)
 	persist = (GNOME_PersistFile) GNOME_Unknown_query_interface (
 		rtn, "IDL:GNOME/PersistFile:1.0", &ev);
 
+	if (ev._major != CORBA_NO_EXCEPTION)
+		persist = NULL;
+
 	if (persist) {
 		gboolean success = FALSE;
 		
@@ -194,6 +197,9 @@ gnome_object_restore_from_url (const char *goad_id, const char *url)
 		
 		persist = GNOME_Unknown_query_interface (
 			rtn, "IDL:GNOME/PersistStream:1.0", &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION)
+			persist = NULL;
 
 		CORBA_exception_free (&ev);
 		

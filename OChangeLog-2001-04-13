@@ -1,5 +1,10 @@
 1999-08-17  Nat Friedman  <nat@gnome-support.com>
 
+	* bonobo/gnome-object-client.c (gnome_object_restore_from_url):
+ 	Set persist to NULL if an exception occurs in query_interface.
+  	Thanks to Peter Wainwright <prw@wainpr.demon.co.uk> for spotting
+ 	this!
+
 	* bonobo/gnome-view.h (GnomeView): Added an 'embeddable' field.
 
 	* bonobo/gnome-view.c (gnome_view_set_embeddable): New function.
