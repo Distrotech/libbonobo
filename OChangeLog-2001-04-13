@@ -1,3 +1,9 @@
+2000-05-23  Mike Kestner  <mkestner@ameritech.net>
+
+	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_create_widgets): 
+	  Merged the ITEM and TOGGLEITEM cases to allow pixmaps for 
+	  toggle items.
+
 2000-05-23  Michael Meeks  <michael@helixcode.com>
 
 	* idl/bonobo-factory.idl: update manufactures' param name to 'goad_id'
