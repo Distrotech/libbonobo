@@ -1,3 +1,11 @@
+2000-10-26  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_to_pixbuf),
+	(bonobo_ui_util_build_help_menu): use unsigned char.
+
+	* bonobo-idl/util.c (lowercase, uppercase): use unsigned char.
+	Thanks to Morten.
+
 2000-10-26  Joe Shaw  <joe@helixcode.com>
 
 	* bonobo/bonobo-moniker-util.c: Add the http moniker to the fast
