@@ -1,3 +1,10 @@
+2001-04-07  Vladimir Vukicevic  <vladimir@ximian.com>
+
+	* storage-modules/bonobo-storage-fs.c (fs_get_info,
+	fs_list_contents): Try lstat if stat fails so we don't
+	abort on dangling symlinks -- also don't abort list_contents
+	if a file disappears before we stat it.
+
 2001-04-03  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-ui-config-widget.c: use
