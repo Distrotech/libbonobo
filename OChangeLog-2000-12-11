@@ -1,10 +1,12 @@
-1999-06-09    <matt@gnome-support.com>
+1999-06-09  Matt Loper <matt@gnome-support.com>
 
 	* bonobo/test-container.c (add_image_cmd): Released `persist' properly.
 	(add_text_cmd): likewise.
 
-	* bonobo/test-container-autoload.c (hydrate_object_from_file):
-	likewise. Also some minor commenting.
+	* bonobo/test-container-autoload.c: Include
+	bonobo/gnome-stream-fs.h rather than a local version.
+	(hydrate_object_from_file): Release `persist' properly. Also some
+	minor commenting.
 
 1999-06-08  Nat Friedman  <nat@gnome-support.com>
 
