@@ -1,5 +1,12 @@
 2000-10-16  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/Makefile.am (test_app_LDADD, test_toolbar_LDADD): Don't use
+	`$(top_builddir)/bonobo/*.la' for things which are in the current
+	directory, but just `*.la'; this is required to let automake get the
+	dependencies right to make a `make -j' work.
+
+2000-10-16  Martin Baulig  <baulig@suse.de>
+
 	* configure.in (XML_LIBS): Separately check for libxml and AC_SUBST
 	this; we link bonobo-ui-extract only against libxml, but none of the
 	other GNOME libraries.
