@@ -1,5 +1,8 @@
 2001-01-25  Dietmar Maurer  <dietmar@ximian.com>
 
+	* bonobo/bonobo-object.c (bonobo_track_shlib_objects): removed an
+	unnecessary type check.
+
 	* monikers/bonobo-stream-cache.[ch]: a stream cache implementation
 	for the cache moniker.
 

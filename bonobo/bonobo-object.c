@@ -836,9 +836,8 @@ bonobo_track_shlib_objects (BonoboObject *object, gpointer shlib_id)
 			}
 			g_hash_table_insert (factory_hash, dli_fbase, object);
 		} else {
-			if ((factory = BONOBO_SHLIB_FACTORY (
-			        g_hash_table_lookup (factory_hash, 
-						     dli_fbase)))) {
+			if ((factory = g_hash_table_lookup (factory_hash, 
+							    dli_fbase))) {
 			       
 				bonobo_shlib_factory_track_object (factory,
 								   object);
@@ -883,7 +882,7 @@ bonobo_object_activate_servant_full (BonoboObject *object,
 	g_return_val_if_fail (servant != NULL, CORBA_OBJECT_NIL);
 
 #ifdef __USE_GNU
-		bonobo_track_shlib_objects (object, shlib_id);
+	bonobo_track_shlib_objects (object, shlib_id);
 #endif
 	CORBA_exception_init (&ev);
 
