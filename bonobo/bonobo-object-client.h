@@ -40,12 +40,16 @@ Bonobo_Unknown      bonobo_object_restore_from_url       (const char *goad_id,
 							  const char *url);
 
 /* Convenience Bonobo_Unknown wrappers */
-gboolean           bonobo_object_client_has_interface    (BonoboObjectClient *object,
+gboolean            bonobo_object_client_has_interface   (BonoboObjectClient *object,
 							  const char *interface_desc,
-							  CORBA_Environment *opt_ev);
+							   CORBA_Environment *opt_ev);
 Bonobo_Unknown      bonobo_object_client_query_interface (BonoboObjectClient *object,
 							  const char *interface_desc,
 							  CORBA_Environment *opt_ev);
+void                bonobo_object_client_ref             (BonoboObjectClient *object_client,
+							  BonoboObject       *opt_exception_obj);
+void                bonobo_object_client_unref           (BonoboObjectClient *object_client,
+							  BonoboObject       *opt_exception_obj);
 
 #endif /* _BONOBO_OBJECT_CLIENT_H_ */
 

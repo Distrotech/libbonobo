@@ -118,12 +118,12 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 	/*
 	 * Assemble the list of objects
 	 */
-	for (i = 0, l = container->client_sites; l; l = l->next, i++){
-		BonoboClientSite *client_site = BONOBO_CLIENT_SITE (l->data);
-		BonoboObject *bound_object = BONOBO_OBJECT (client_site->bound_object);
+	for (i = 0, l = container->client_sites; l; l = l->next, i++) {
+		BonoboObjectClient *embeddable =
+			bonobo_client_site_get_embeddable (l->data);
 
 		return_list->_buffer [i] = CORBA_Object_duplicate (
-			bonobo_object_corba_objref (bound_object), ev);
+			bonobo_object_corba_objref (embeddable), ev);
 	}
 
 	return return_list;

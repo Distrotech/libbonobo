@@ -1,5 +1,20 @@
 2000-06-21  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-container.c (impl_enum_objects): simplify, removing
+	deref and using accessor function.
+
+	* bonobo/bonobo-client-site.c: s/bound_object/bound_embeddable/ to
+	highlight which interface is primary.
+	(bonobo_client_site_bind_embeddable): re-order to clean & store the
+	embeddable interface only. (bonobo_client_site_destroy): destroy the
+	embeddable object client. (bonobo_client_site_new_view_full): use the
+	bound embeddable straight. (bonobo_client_site_get_verbs): ditto.
+
+	* bonobo/bonobo-object-client.c (bonobo_object_client_ref),
+	(bonobo_object_client_unref): implement.
+
+2000-06-21  Michael Meeks  <michael@helixcode.com>
+
 	* idl/bonobo-unknown.idl (query_interface): return an Unknown
 
 	* bonobo/bonobo-object.c (bonobo_object_activate_servant): update to

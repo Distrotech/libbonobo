@@ -456,6 +456,54 @@ bonobo_object_client_has_interface (BonoboObjectClient *object,
 		return FALSE;
 }
 
+void
+bonobo_object_client_ref (BonoboObjectClient *object_client,
+			  BonoboObject       *opt_exception_obj)
+{
+	CORBA_Environment ev;
+	BonoboObject     *object;
+
+	g_return_if_fail (BONOBO_IS_OBJECT (object_client));
+
+	object = BONOBO_OBJECT (object_client);
+
+	CORBA_exception_init (&ev);
+
+	Bonobo_Unknown_ref (object->corba_objref, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		CORBA_exception_free (&ev);
+		bonobo_object_check_env (opt_exception_obj?opt_exception_obj:object,
+					 object->corba_objref, &ev);
+	}
+
+	CORBA_exception_free (&ev);
+}
+
+void
+bonobo_object_client_unref (BonoboObjectClient *object_client,
+			    BonoboObject       *opt_exception_obj)
+{
+	CORBA_Environment ev;
+	BonoboObject     *object;
+
+	g_return_if_fail (BONOBO_IS_OBJECT (object_client));
+
+	object = BONOBO_OBJECT (object_client);
+
+	CORBA_exception_init (&ev);
+
+	Bonobo_Unknown_unref (object->corba_objref, &ev);
+
+	if (ev._major != CORBA_NO_EXCEPTION) {
+		CORBA_exception_free (&ev);
+		bonobo_object_check_env (opt_exception_obj?opt_exception_obj:object,
+					 object->corba_objref, &ev);
+	}
+
+	CORBA_exception_free (&ev);
+}
+
 static void
 bonobo_object_client_destroy (GtkObject *object)
 {
