@@ -9,6 +9,7 @@ oaf_sysconf_SOURCES = 			\
 INCLUDES = 					\
 	$(XML_CFLAGS)				\
 	$(GLIB_CFLAGS)				\
+	-I$(top_srcdir)				\
 	-I$(top_srcdir)/oafd/			\
 	-I$(top_srcdir)/liboaf/			\
 	-DOAF_LOCALEDIR=\""$(datadir)/locale"\"	\
