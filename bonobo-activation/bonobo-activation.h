@@ -98,6 +98,9 @@ CORBA_Object oaf_server_activate_shlib (OAF_ActivationResult * sh,
                                         CORBA_Environment * ev);
 
 
+void         oaf_set_test_components_enabled (gboolean val);
+gboolean     oaf_get_test_components_enabled (void);
+
 OAF_ServerInfoList *oaf_query (const char *requirements,
 			       char *const *selection_order,
 			       CORBA_Environment * ev);

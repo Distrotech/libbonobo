@@ -27,6 +27,24 @@
 
 extern CORBA_Object oaf_server_activate_shlib (OAF_ActivationResult * sh,
 					       CORBA_Environment * ev);
+
+
+static gboolean test_components_enabled = FALSE;
+
+void
+oaf_set_test_components_enabled (gboolean val)
+{
+        test_components_enabled = val;
+}
+
+
+gboolean
+oaf_get_test_components_enabled ()
+{
+        return test_components_enabled;
+}
+
+
 /**
  * oaf_query: 
  * @requirements: query string.
@@ -51,10 +69,20 @@ oaf_query (const char *requirements, char *const *selection_order,
 	int i;
 	CORBA_Environment myev;
 	OAF_ActivationContext ac;
+        char *ext_requirements;
+
 
 	g_return_val_if_fail (requirements, CORBA_OBJECT_NIL);
 	ac = oaf_activation_context_get ();
 	g_return_val_if_fail (ac, CORBA_OBJECT_NIL);
+
+        if (!oaf_get_test_components_enabled ()) {
+                ext_requirements = g_strconcat ("( ", requirements,
+                                                " ) AND (NOT test_only.defined() OR NOT test_only)",
+                                                NULL);
+        } else {
+                ext_requirements = NULL;
+        }
 
 	if (!ev) {
 		ev = &myev;
@@ -71,8 +99,13 @@ oaf_query (const char *requirements, char *const *selection_order,
 	} else
 		memset (&selorder, 0, sizeof (selorder));
 
-	res = OAF_ActivationContext_query (ac, (char *) requirements,
+	res = OAF_ActivationContext_query (ac, (char *) (ext_requirements ? ext_requirements : requirements),
 					   &selorder, oaf_context_get (), ev);
+
+        if (ext_requirements != NULL) {
+                g_free (ext_requirements);
+        }
+
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		res = NULL;
 
@@ -109,10 +142,19 @@ oaf_activate (const char *requirements, char *const *selection_order,
 	int i;
 	CORBA_Environment myev;
 	OAF_ActivationContext ac;
+        char *ext_requirements;
 
 	g_return_val_if_fail (requirements, CORBA_OBJECT_NIL);
 	ac = oaf_activation_context_get ();
 	g_return_val_if_fail (ac, CORBA_OBJECT_NIL);
+
+        if (!oaf_get_test_components_enabled ()) {
+                ext_requirements = g_strconcat ("( ", requirements,
+                                                " ) AND (NOT test_only.defined() OR NOT test_only)",
+                                                NULL);
+        } else {
+                ext_requirements = NULL;
+        }
 
 	if (!ev) {
 		ev = &myev;
@@ -129,9 +171,14 @@ oaf_activate (const char *requirements, char *const *selection_order,
 	} else
 		memset (&selorder, 0, sizeof (selorder));
 
-	res = OAF_ActivationContext_activate (ac, (char *) requirements,
+	res = OAF_ActivationContext_activate (ac, (char *) (ext_requirements ? ext_requirements : requirements),
 					      &selorder, flags,
 					      oaf_context_get (), ev);
+
+        if (ext_requirements != NULL) {
+                g_free (ext_requirements);
+        }
+
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
 
