@@ -333,7 +333,7 @@ bonobo_application_class_init (BonoboApplicationClass *klass)
 		NULL, NULL,	/* accumulator and accumulator data */
 		bonobo_marshal_INT__INT_POINTER,
 		G_TYPE_INT, 2, /* return_type, nparams */
-		G_TYPE_INT, G_TYPE_POINTER);
+		G_TYPE_INT, BONOBO_TYPE_APPLICATION_ARGV);
 
 	g_object_class_install_property
 		(object_class, PROP_NAME,
