@@ -203,6 +203,74 @@ impl_Bonobo_PropertyBag_getPropertyNames (PortableServer_Servant servant,
 	return name_list;
 }
 
+static Bonobo_PropertySet *
+impl_Bonobo_PropertyBag_getValues (PortableServer_Servant  servant,
+				   CORBA_Environment      *ev)
+{
+	BonoboPropertyBag   *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
+	Bonobo_PropertySet *set;
+	GList		   *props;
+	GList		   *curr;
+	int		    len;
+	int		    i;
+
+	/*
+	 * Create the PropertyList and allocate space for the
+	 * properties.
+	 */
+	len = g_hash_table_size (pb->priv->props);
+
+	set = Bonobo_PropertySet__alloc ();
+	set->_length = len;
+
+	if (len == 0)
+		return set;
+
+	set->_buffer = CORBA_sequence_Bonobo_Pair_allocbuf (len);
+	CORBA_sequence_set_release (set, TRUE);
+
+	/*
+	 * Create a list of Object references for the properties.
+	 */
+	props = bonobo_property_bag_get_prop_list (pb);
+
+	i = 0;
+	for (curr = props; curr != NULL; curr = curr->next) {
+		BonoboProperty *prop = curr->data;
+		BonoboArg *arg;
+
+		set->_buffer [i].name =  CORBA_string_dup (prop->name);
+
+		arg = bonobo_arg_new (prop->type);
+	
+		prop->get_prop (pb, arg, prop->idx, ev, 
+				prop->user_data);
+
+		set->_buffer [i].value = *arg;
+
+		i++;		
+	}
+
+	g_list_free (props);
+
+	return set;
+}
+
+static void
+impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
+				   const Bonobo_PropertySet *set,
+				   CORBA_Environment        *ev)
+{
+	BonoboPropertyBag   *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
+	int i;
+
+	for (i = 0; i < set->_length; i++) {
+
+		bonobo_property_bag_set_value (pb, set->_buffer [i].name,
+					       &set->_buffer [i].value, ev);
+	}
+}
+
 
 /*
  * BonoboPropertyBag construction/deconstruction functions. 
@@ -889,6 +957,8 @@ bonobo_property_bag_class_init (BonoboPropertyBagClass *klass)
 	epv->getPropertyByName    = impl_Bonobo_PropertyBag_getPropertyByName;
 	epv->getPropertyNames     = impl_Bonobo_PropertyBag_getPropertyNames;
 	epv->getEventSource       = impl_Bonobo_PropertyBag_getEventSource;
+	epv->getValues            = impl_Bonobo_PropertyBag_getValues;
+	epv->setValues            = impl_Bonobo_PropertyBag_setValues;
 }
 
 static void
@@ -900,6 +970,6 @@ bonobo_property_bag_init (BonoboPropertyBag *pb)
 }
 
 BONOBO_X_TYPE_FUNC_FULL (BonoboPropertyBag, 
-			   Bonobo_PropertyBag,
-			   PARENT_TYPE,
-			   bonobo_property_bag);
+			 Bonobo_PropertyBag,
+			 PARENT_TYPE,
+			 bonobo_property_bag);
