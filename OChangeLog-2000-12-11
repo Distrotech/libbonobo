@@ -1,5 +1,9 @@
 2000-10-21  Michael Meeks  <michael@helixcode.com>
 
+	* Version 0.24
+	
+2000-10-21  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/app.c (main): add verb removal test.
 
 	* bonobo/bonobo-ui-component.c (remove_verb): impl.
