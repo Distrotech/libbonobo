@@ -1,6 +1,11 @@
-2000-12-05  Joe Shaw  <joe@helixcode.com>
+2000-12-04  Joe Shaw  <joe@helixcode.com>
 
-	* bonobo/samples/compound-doc/simple-canvas-item.c: Fix the build
+	* samples/compound-doc/sample-canvas-item.c: Use BonoboGenericFactory
+	instead.
+
+2000-12-04  Joe Shaw  <joe@helixcode.com>
+
+	* samples/compound-doc/sample-canvas-item.c: Fix the build
 	by including bonobo/bonobo-embeddable-factory.h since it was
 	removed from bonobo.h. This should be changed to use the generic
 	factory.
