@@ -1,5 +1,8 @@
 2003-01-07  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* doc/api/figures/*.png: Added the dia generated png files for
+	those who don't have dia installed.
+
 	* doc/api/figures/Makefile.am (%.png): Don't fail if dia is not
 	installed.
 
