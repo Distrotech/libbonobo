@@ -1,3 +1,7 @@
+2001-08-22  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* bonobo/bonobo-arg.h: added GET/SET macros for more CORBA types
+
 2001-08-21 Dirk-Jan C. Binnema <djcb@djcbsoftware.nl>
 	
 	* bonobo/bonobo-main.c (bonobo_init_full): remove SIGPIPE handler;
