@@ -648,7 +648,6 @@ bonobo_property_bag_client_get_flags (BonoboPropertyBagClient *pbc,
 	BonoboPropertyFlags flags;
 	Bonobo_Property     prop;
 	CORBA_Environment  ev;
-	gboolean           is_read_only;
 
 	g_return_val_if_fail (pbc != NULL, 0);
 	g_return_val_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc), 0);
@@ -659,11 +658,9 @@ bonobo_property_bag_client_get_flags (BonoboPropertyBagClient *pbc,
 
 	CORBA_exception_init (&ev);
 
-	is_read_only = Bonobo_Property_is_read_only (prop, &ev);
+	flags = Bonobo_Property_get_flags (prop, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION)
 		goto flags_error;
-
-	flags = (is_read_only ? 0: BONOBO_PROPERTY_WRITEABLE);
 
 	return flags;
 

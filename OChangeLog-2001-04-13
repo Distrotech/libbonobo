@@ -1,3 +1,25 @@
+2000-04-10  Michael Meeks  <michael@helixcode.com>
+
+	* samples/compound-doc/sample-container.c (container_create): init components.
+	(Container): Add list of  (container_activate_component): manage list.
+	(component_shutdown): ditto. (container_print_preview_cmd): use the list.
+
+	* bonobo/bonobo-print.c (impl_render): kill erroneous showpage.
+
+	* samples/compound-doc/sample-container.c (container_print_preview_cmd): 
+	add showpage + fix preview placement.
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_get_flags): 
+	pass all flags not just readonly.
+
+	* idl/bonobo-property.idl: use get_flags not is_read_only.
+
+	* bonobo/bonobo-property.c (bonobo_property_get_epv): change names
+	(impl_Bonobo_Property_is_read_only): renamed to
+	(impl_Bonobo_Property_get_flags): pass flags on.
+
+	* bonobo/bonobo-arg.h (BONOBO_ARG_SET_STRING): add check for NULL.
+
 2000-04-09  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/Makefile.am: kill gprint conditional.

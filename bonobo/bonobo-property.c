@@ -77,17 +77,13 @@ impl_Bonobo_Property_get_doc_string (PortableServer_Servant servant,
 }
 
 
-static CORBA_boolean
-impl_Bonobo_Property_is_read_only (PortableServer_Servant servant,
-				   CORBA_Environment *ev)
+static CORBA_long
+impl_Bonobo_Property_get_flags (PortableServer_Servant servant,
+				CORBA_Environment *ev)
 {
 	BonoboPropertyServant *pservant = (BonoboPropertyServant *) servant;
-	BonoboPropertyFlags flags;
 
-	flags = bonobo_property_bag_get_flags (pservant->pb, pservant->property_name);
-
-	return (CORBA_boolean) ((flags & BONOBO_PROPERTY_READABLE) == 0);
-
+	return bonobo_property_bag_get_flags (pservant->pb, pservant->property_name);
 }
 
 static POA_Bonobo_Property__epv *
@@ -106,7 +102,7 @@ bonobo_property_get_epv (void)
 	epv->set_value      = impl_Bonobo_Property_set_value;
 	epv->get_default    = impl_Bonobo_Property_get_default;
 	epv->get_doc_string = impl_Bonobo_Property_get_doc_string;
-	epv->is_read_only   = impl_Bonobo_Property_is_read_only;
+	epv->get_flags      = impl_Bonobo_Property_get_flags;
 
 	return epv;
 }

@@ -37,12 +37,8 @@ typedef CORBA_TypeCode BonoboArgType;
 
 #define BONOBO_ARG_GET_STRING(a)    (g_assert ((a)->_type->kind == CORBA_tk_string),	\
 				     *((CORBA_char **)(a->_value)))
-/*
- *   Passing a NULL pointer to this macro is _such_ a bad idea, should we have
- * a NULL check here ?
- */
 #define BONOBO_ARG_SET_STRING(a,v)  (g_assert ((a)->_type->kind == CORBA_tk_string),	\
-				     *((CORBA_char **)(a->_value)) = CORBA_string_dup (v))
+				     *((CORBA_char **)(a->_value)) = CORBA_string_dup ((v)?(v):""))
 
 BonoboArg    *bonobo_arg_new           (BonoboArgType t);
 void          bonobo_arg_init_default  (BonoboArg    *arg);

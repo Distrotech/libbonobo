@@ -75,12 +75,11 @@ interface Property {
 	string get_doc_string ();
 
 	/** 
-	 * is_read_only:
+	 * get_flags:
 	 * 
-	 * Returns whether this property is read-only.
+	 * Returns this property's flags
 	 */
-	boolean is_read_only ();
-	
+	long get_flags ();
 };
 
 typedef sequence<string> PropertyNames;
