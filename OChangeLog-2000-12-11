@@ -1,3 +1,9 @@
+2000-10-22  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_construct),
+	(bonobo_control_frame_destroy): update.
+	(bonobo_control_frame_set_ui_container): implement
+
 2000-10-21  Martin Baulig  <baulig@suse.de>
 
 	* gshell/gshell.c (bonobo_object_has_interface): Removed; use
