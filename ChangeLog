@@ -1,3 +1,10 @@
+2004-12-13  Padraig O'Briain <padraig.obriain@sun.com>
+
+	* activation-server/object-directory-corba.c (od_get_active_server):
+	Add break call to avoid further searcing when server if found.
+
+	Bug #150538.
+
 2004-09-28  Mark McLoughlin  <mark@skynet.ie>
 
 	Fixes problem with running epiphany immediately after

@@ -331,6 +331,7 @@ od_get_active_server (ObjectDirectory    *od,
 				&servers->servers [i].environment,
 				environment)) {
 			retval = servers->servers [i].server;
+			break;
 		}
         }
 	if (retval != CORBA_OBJECT_NIL &&
