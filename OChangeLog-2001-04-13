@@ -1,3 +1,8 @@
+1999-08-19  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-view.c (impl_GNOME_View_set_zoom_factor):
+	Implemente method.
+
 1999-08-20  Nat Friedman  <nat@gnome-support.com>
 
 	* samples/sample-container.c: Sample container.  New file.
