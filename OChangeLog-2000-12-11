@@ -1,5 +1,9 @@
 2000-10-20  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-object.c (BONOBO_REF_HOOKS): turn off reference debugging; doh.
+
+2000-10-20  Michael Meeks  <michael@helixcode.com>
+
 	* samples/compound-doc/paint-component-simple.c (view_color_select_cb):
 	remove BonoboUIHandler reference.
 
