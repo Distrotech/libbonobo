@@ -1,3 +1,11 @@
+2000-01-26  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/bonobo-control.c, bonobo/bonobo-control-frame.c: Detect
+	when the control is in the same process as the frame; in that
+	case, reduce to a simple containement relationship instead of
+	using GtkPlug/GtkSocket, to avoid bugs in GtkPlug/GtkSocket in the
+	same-application case.
+
 2000-01-26  Havoc Pennington  <hp@pobox.com>
 
 	* samples/compound-doc/paint-component-simple.c: include gnorba header
@@ -91,6 +99,7 @@
 
 	* configure.in: Bump up number.
 
+>>>>>>> 1.276
 2000-01-25  Nat Friedman  <nat@helixcode.com>
 
 	* All files: Renames
@@ -206,6 +215,7 @@
 	* bonobo/bonobo/gnome-storage-private.h moved to           bonobo/bonobo/bonobo-storage-private.h
 	* bonobo/bonobo/gnome-bonobo.h moved to                    bonobo/bonobo/bonobo.h
 
+>>>>>>> 1.273
 2000-01-25  Martijn van Beers  <martijn@earthling.net>
 
 	* bonobo/idl/gnome-ui-handler.idl: replace MenuItemNotFound and
