@@ -12,8 +12,8 @@ static char *
 oaf_exception_id (CORBA_Environment *ev)
 {
         if (ev->_major == CORBA_USER_EXCEPTION) {
-                if (!strcmp (ev->_repo_id, "IDL:OAF/GeneralError:1.0")) {
-                        OAF_GeneralError *err = ev->_params;
+                if (!strcmp (ev->_id, "IDL:OAF/GeneralError:1.0")) {
+                        OAF_GeneralError *err = ev->_any._value;
                         
                         if (!err || !err->description) {
                                 return "No general exception error message";
@@ -21,7 +21,7 @@ oaf_exception_id (CORBA_Environment *ev)
                                 return err->description;
                         }
                 } else {
-                        return ev->_repo_id;
+                        return ev->_id;
                 }
         } else {
                 return CORBA_exception_id (ev);
@@ -36,7 +36,7 @@ test_oafd (CORBA_Environment *ev, const char *type)
         ns = oaf_name_service_get (ev);
         if (ev->_major != CORBA_NO_EXCEPTION) {
                 g_warning ("Exception '%s' (%s) finding oafd %s",
-                           oaf_exception_id (ev), ev->_repo_id, type);
+                           oaf_exception_id (ev), ev->_id, type);
                 return FALSE;
         }
 

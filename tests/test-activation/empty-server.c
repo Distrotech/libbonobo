@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
-#include <orb/orbit.h>
+#include <orbit/orbit.h>
 #include <popt.h>
 #include "empty.h"
 #include "liboaf/liboaf.h"
