@@ -155,7 +155,7 @@ gint bonobo_application_new_instance (BonoboApplication *app,
 	memcpy (new_argv, argv, argc * sizeof(gchar *));
 	new_argv[argc] = NULL;
 	g_signal_emit (app, signals [NEW_INSTANCE], 0,
-		       argc, argv, &rv);
+		       argc, new_argv, &rv);
 	g_free (new_argv);
 	return rv;
 }
