@@ -1,5 +1,10 @@
 1999-08-14  Michael Meeks  <michael@imaginator.com>
 
+	* bonobo/gnome-stream-fs.c (fs_eos): Implemented.
+	(fs_close): Implemented.
+
+1999-08-14  Michael Meeks  <michael@imaginator.com>
+
 	* components/image-x-png/bonobo-image-x-png.c (bonobo_object_factory):
 	Remove unused variable.
 
