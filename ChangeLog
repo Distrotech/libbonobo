@@ -1,7 +1,15 @@
 2001-10-20  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-arg.c (bonobo_arg_type_to_gtype),
+	(bonobo_arg_type_from_gtype): quiet debug.
+
 	* bonobo/bonobo-property-bag.c
 	(bonobo_property_bag_new): tolerate NULL callbacks.
+	(bonobo_property_bag_map_params): don't free pspecs we
+	don't own.
+	(bonobo_property_bag_foreach_remove_prop): only unref if
+	callbacks're not NULL.
+	(bonobo_property_bag_finalize): ditto.
 
 2001-10-18  Michael Meeks  <michael@ximian.com>
 

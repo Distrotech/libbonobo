@@ -123,7 +123,7 @@ bonobo_property_bag_remove        (BonoboPropertyBag    *pb,
 void
 bonobo_property_bag_map_params    (BonoboPropertyBag   *pb,
 				   GObject             *on_instance,
-				   GParamSpec         **pspecs,
+				   const GParamSpec   **pspecs,
 				   guint                n_params);
 
 GList *

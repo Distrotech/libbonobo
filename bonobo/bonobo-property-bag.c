@@ -541,8 +541,10 @@ bonobo_property_bag_foreach_remove_prop (gpointer key,
 	if (prop->doctitle)
 		g_free (prop->doctitle);
 
-	g_closure_unref (prop->priv->get_prop);
-	g_closure_unref (prop->priv->set_prop);
+	if (prop->priv->get_prop)
+		g_closure_unref (prop->priv->get_prop);
+	if (prop->priv->set_prop)
+		g_closure_unref (prop->priv->set_prop);
 
 	g_free (prop->priv);
 	g_free (prop);
@@ -562,8 +564,10 @@ bonobo_property_bag_finalize (GObject *object)
 
 	g_hash_table_destroy (pb->priv->prop_hash);
 
-	g_closure_unref (pb->priv->get_prop);
-	g_closure_unref (pb->priv->set_prop);
+	if (pb->priv->get_prop)
+		g_closure_unref (pb->priv->get_prop);
+	if (pb->priv->set_prop)
+		g_closure_unref (pb->priv->set_prop);
 	
 	g_free (pb->priv);
 
@@ -738,6 +742,8 @@ set_prop (BonoboPropertyBag *bag,
 	g_value_unset (&new);
 }
 
+#undef MAPPING_DEBUG
+
 /**
  * bonobo_property_bag_add_gtk_args:
  * @pb: destination property bag
@@ -749,10 +755,10 @@ set_prop (BonoboPropertyBag *bag,
  * setting up a mapping between the two objects property systems.
  **/
 void
-bonobo_property_bag_map_params    (BonoboPropertyBag   *pb,
-				   GObject             *on_instance,
-				   GParamSpec         **pspecs,
-				   guint                n_params)
+bonobo_property_bag_map_params (BonoboPropertyBag *pb,
+				GObject           *on_instance,
+				const GParamSpec **pspecs,
+				guint              n_params)
 {
 	int          i;
 
@@ -771,7 +777,7 @@ bonobo_property_bag_map_params    (BonoboPropertyBag   *pb,
 
 	/* Setup types, and names */
 	for (i = 0; i < n_params; i++) {
-		GParamSpec          *pspec;
+		const GParamSpec    *pspec;
 		GType                value_type;
 		Bonobo_PropertyFlags flags;
 		BonoboArgType        type;
@@ -782,8 +788,10 @@ bonobo_property_bag_map_params    (BonoboPropertyBag   *pb,
 
 		type = bonobo_arg_type_from_gtype (value_type);
 		if (!type) {
+#ifdef MAPPING_DEBUG
 			g_warning ("Can't handle type '%s' on arg '%s'",
 				   g_type_name (value_type), pspec->name);
+#endif
 			continue;
 		}
 
@@ -792,16 +800,16 @@ bonobo_property_bag_map_params    (BonoboPropertyBag   *pb,
 		desc = g_strconcat (pspec->name, " is a ",
 				    g_type_name (value_type), NULL);
 
+#ifdef MAPPING_DEBUG
 		g_warning ("Mapping '%s'", desc);
+#endif
 		bonobo_property_bag_add_full
 			(pb, pspec->name, i, type,
 			 NULL, desc, NULL, flags,
-			 g_cclosure_new (G_CALLBACK (get_prop), pspec, NULL),
-			 g_cclosure_new (G_CALLBACK (set_prop), pspec, NULL));
+			 g_cclosure_new (G_CALLBACK (get_prop), (gpointer) pspec, NULL),
+			 g_cclosure_new (G_CALLBACK (set_prop), (gpointer) pspec, NULL));
 		g_free (desc);
 	}
-
-	g_free (pspecs);
 }
 
 /**

@@ -114,6 +114,8 @@ bonobo_arg_copy (const BonoboArg *arg)
 	return copy;
 }
 
+#undef MAPPING_DEBUG
+
 /**
  * bonobo_arg_type_from_gruntime:
  * @id: the GType id.
@@ -137,7 +139,9 @@ bonobo_arg_type_from_gtype (GType id)
 	case G_TYPE_DOUBLE: return TC_CORBA_double;
 	case G_TYPE_STRING: return TC_CORBA_string;
 	default:
+#ifdef MAPPING_DEBUG
 		g_warning ("Unmapped arg type '%d'", id);
+#endif
 		break;
 	}
 
@@ -178,8 +182,10 @@ bonobo_arg_type_to_gtype (BonoboArgType id)
 		g_type = G_TYPE_DOUBLE;
 	else if (bonobo_arg_type_is_equal (TC_CORBA_string,  id, &ev))
 		g_type = G_TYPE_STRING;
+#ifdef MAPPING_DEBUG
 	else
 		g_warning ("Unmapped bonobo arg type");
+#endif
 
 	CORBA_exception_free (&ev);
 
