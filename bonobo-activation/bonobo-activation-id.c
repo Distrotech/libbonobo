@@ -75,7 +75,7 @@ oaf_actid_parse(const OAF_ActivationID actid)
       }
       break;
      case ',':
-      if(bracket_count == 0) {
+      if(bracket_count == 1) {
 	*ctmp = '\0';
 	if(*ctmp2)
 	  *parts[partnum++] = g_strdup(ctmp2);
