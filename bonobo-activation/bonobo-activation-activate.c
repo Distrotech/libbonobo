@@ -185,6 +185,8 @@ query_cache_lookup (const char   *query,
 
         BONOBO_ACTIVATION_LOCK ();
 
+        *active = FALSE;
+
 	if (!query_cache) {
                 create_query_cache ();
                 BONOBO_ACTIVATION_UNLOCK ();
@@ -195,7 +197,6 @@ query_cache_lookup (const char   *query,
                 *active = TRUE;
                 return NULL;
         }
-        *active = FALSE;
 
 	fake.query = (char *) query;
 	fake.sort_criteria = (char **) sort_criteria;
