@@ -50,4 +50,33 @@ void oaf_plugin_unuse(gpointer impl_ptr);
 CORBA_Object oaf_activate(const char *requirements, const char **selection_order,
 			  OAF_ActivationFlags flags, CORBA_Environment *ev);
 
+/* oaf-registration.c - not intended for application use */
+typedef struct {
+  const char *name;
+
+  const char *session_name;
+} OAFRegistrationCategory;
+
+typedef struct _OAFRegistrationLocation OAFRegistrationLocation;
+struct _OAFRegistrationLocation {
+  void   (*lock)       (const OAFRegistrationLocation *regloc, gpointer user_data);
+  void   (*unlock)     (const OAFRegistrationLocation *regloc, gpointer user_data);
+  char * (*check)      (const OAFRegistrationLocation *regloc, const OAFRegistrationCategory *regcat,
+			int *ret_distance, gpointer user_data);
+
+  void   (*register_new)(const OAFRegistrationLocation *regloc, const char *ior,
+			 const OAFRegistrationCategory *regcat, gpointer user_data);
+  void   (*unregister) (const OAFRegistrationLocation *regloc, const char *ior,
+			const OAFRegistrationCategory *regcat, gpointer user_data);
+};
+
+void oaf_registration_location_add(const OAFRegistrationLocation *regloc, int priority, gpointer user_data);
+
+CORBA_Object oaf_registration_check(const OAFRegistrationCategory *regcat, CORBA_Environment *ev);
+void oaf_registration_set(const OAFRegistrationCategory *regcat, CORBA_Object obj, CORBA_Environment *ev);
+void oaf_registration_unset(const OAFRegistrationCategory *regcat, CORBA_Object obj, CORBA_Environment *ev);
+
+/* Do not release() the returned value */
+CORBA_Object oaf_service_get(const OAFRegistrationCategory *regcat);
+
 #endif

@@ -19,6 +19,8 @@ typedef struct {
 
   GHashTable *active_servers;
   OAF_CacheTime time_active_changed;
+
+  CORBA_Object self;
 } impl_POA_OAF_ObjectDirectory;
 
 /*** Implementation stub prototypes ***/
@@ -90,6 +92,7 @@ static POA_OAF_ObjectDirectory__vepv impl_OAF_ObjectDirectory_vepv =
 
 /*** Stub implementations ***/
 
+#ifdef OAF_DEBUG
 static void
 od_dump_list(impl_POA_OAF_ObjectDirectory *od)
 {
@@ -126,6 +129,7 @@ od_dump_list(impl_POA_OAF_ObjectDirectory *od)
     }
   }
 }
+#endif
 
 /* Internal liboaf function */
 extern char *liboaf_hostname_get();
@@ -146,7 +150,7 @@ OAF_ObjectDirectory_create(PortableServer_POA poa,
    POA_OAF_ObjectDirectory__init((PortableServer_Servant) newservant, ev);
    objid = PortableServer_POA_activate_object(poa, newservant, ev);
    CORBA_free(objid);
-   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+   newservant->self = retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
 
    newservant->attr_domain = g_strdup(domain);
    newservant->attr_hostID = liboaf_hostname_get();
@@ -161,9 +165,11 @@ OAF_ObjectDirectory_create(PortableServer_POA poa,
    newservant->active_servers = g_hash_table_new(g_str_hash, g_str_equal);
    newservant->time_list_changed = time(NULL);
 
+#ifdef OAF_DEBUG
    od_dump_list(newservant);
+#endif
 
-   return retval;
+   return CORBA_Object_duplicate(retval, ev);
 }
 
 static OAF_ServerInfoListCache *
@@ -256,11 +262,12 @@ impl_OAF_ObjectDirectory_activate(impl_POA_OAF_ObjectDirectory * servant,
   ai.ac = ac;
   ai.flags = flags;
   ai.ctx = ctx;
+  retval = CORBA_OBJECT_NIL;
 
-  if(/* XXX !server_is_running(si) */ 1)
+  si = g_hash_table_lookup(servant->by_iid, iid);
+
+  if(si && /* XXX !server_is_running(si) */ 1)
     retval = od_server_activate(si, &ai, ev);
-  else
-    retval = CORBA_OBJECT_NIL;
 
   return retval;
 }

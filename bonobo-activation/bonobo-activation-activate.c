@@ -6,7 +6,7 @@ CORBA_Object
 oaf_activate(const char *requirements, const char **selection_order, OAF_ActivationFlags flags, CORBA_Environment *ev)
 {
   GNOME_stringlist selorder;
-  CORBA_Object retval;
+  CORBA_Object retval = CORBA_OBJECT_NIL;
   OAF_ActivationResult *res;
   int i;
   CORBA_Environment myev;
@@ -40,14 +40,14 @@ oaf_activate(const char *requirements, const char **selection_order, OAF_Activat
 
   switch(res->_d)
     {
-    case OAF_RESULT_NONE:
-      retval = CORBA_OBJECT_NIL;
-      break;
     case OAF_RESULT_SHLIB:
       retval = oaf_server_activate_shlib(res, ev);
       break;
     case OAF_RESULT_OBJECT:
       retval = CORBA_Object_duplicate(res->_u.res_object, ev);
+      break;
+    case OAF_RESULT_NONE:
+    default:
       break;
     }
 

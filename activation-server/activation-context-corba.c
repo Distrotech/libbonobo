@@ -459,7 +459,7 @@ ctx_get_value(CORBA_Context ctx, const char *propname, CORBA_Environment *ev)
 
   /* Figure out what the host the activating client is running on (for
      purposes of fun & pleasure) */
-  CORBA_Context_get_values(ctx, NULL, 0, propname, &nvout, ev);
+  CORBA_Context_get_values(ctx, NULL, 0, (char *)propname, &nvout, ev);
   if (ev->_major == CORBA_NO_EXCEPTION)
     {
       if (nvout->list->len > 0)
@@ -579,12 +579,12 @@ ac_find_child_for_server(impl_POA_OAF_ActivationContext *servant,
 
   for(cur = servant->dirs; cur; cur = cur->next)
     {
-      ChildODInfo *child;
+      ChildODInfo *child = cur->data;
 
       if(CORBA_Object_is_nil(child->obj, ev) || !child->list)
 	continue;
 
-      if((server > child->list->_buffer)
+      if((server >= child->list->_buffer)
 	 && (server < (child->list->_buffer + child->list->_length)))
 	return child;
     }

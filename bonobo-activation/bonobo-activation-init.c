@@ -106,111 +106,21 @@ oaf_context_get(void)
   return oaf_context;
 }
 
-/* Whacked directly from gnome-libs/libgnorba/orbit.ns */
-static CORBA_Object
-name_server_by_forking (CORBA_Environment *ev)
+const char *
+oaf_session_name_get(void)
 {
-  CORBA_Object name_service = CORBA_OBJECT_NIL;
-  int iopipes[2];
-  pid_t pid;
-	
-  /*
-   * Since we're pretty sure no name server is running,
-   * we start it ourself and tell the (GNOME session)
-   * world about it
-   */
-	
-  /* fork & get the ior from orbit-name-service stdout */
-  pipe(iopipes);
-
-  pid = fork ();
-  if (pid == -1)
-    return name_service;
-	
-  if (pid)
-    {
-      FILE *iorfh;
-      int status;
-      char iorbuf[2048];
-
-      /* Parent */
-      waitpid(pid, &status, 0); /* de-zombify */
-
-      close(iopipes[1]);
-
-      iorfh = fdopen(iopipes[0], "r");
-
-      iorbuf[0] = '\0';
-      while(fgets(iorbuf, sizeof(iorbuf), iorfh))
-	{
-#ifdef OAF_DEBUG
-	  if(getenv("OAF_DEBUG_EXERUN"))
-	    g_print("Got line \"%s\"\n", iorbuf);
-#endif
-	  if(!strncmp(iorbuf, "IOR:", 4))
-	    break;
-	}
-
-      iorbuf[strlen(iorbuf)-1] = '\0';
-      g_strchug(iorbuf);
-
-      if (strncmp(iorbuf, "IOR:", 4))
-	goto out;
-
-      name_service = CORBA_ORB_string_to_object((CORBA_ORB)oaf_orb_get(), iorbuf, ev);
-      if(ev->_major != CORBA_NO_EXCEPTION)
-	name_service = CORBA_OBJECT_NIL;
-
-    out:
-      fclose(iorfh);
-
-    }
-  else if (fork ())
-    {
-      /* de-zombifier process, just exit */
-      _exit(0);
-    }
-  else
-    {
-      /* Child of a child. We run the naming service */
-      struct sigaction sa;
-      int i, open_max;
-
-      setsid();
-		
-      open_max = sysconf(_SC_OPEN_MAX);
-      for (i = 3; i < open_max; i++)
-	fcntl(i, F_SETFD, FD_CLOEXEC);
-
-      sa.sa_handler = SIG_IGN;
-      sigaction(SIGPIPE, &sa, 0);
-      close(0);
-      close(iopipes[0]);
-      dup2(iopipes[1], 1);
-      dup2(iopipes[1], 2);
-      close(iopipes[1]);
-		
-      execlp("oafd", "oafd", NULL);
-      _exit(1);
-    }
-
-  return name_service;
+  return "local";
 }
 
 CORBA_Object
 oaf_activation_context_get(void)
 {
-  static CORBA_Object ac = CORBA_OBJECT_NIL;
-  CORBA_Environment ev;
+  OAFRegistrationCategory regcat;
 
-  if(CORBA_Object_is_nil(ac, &ev))
-    {
-      CORBA_exception_init(&ev);
-      ac = name_server_by_forking(&ev);
-      CORBA_exception_free(&ev);
-    }
+  regcat.name = "IDL:OAF/ActivationContext:1.0";
+  regcat.session_name = oaf_session_name_get();
 
-  return ac;
+  return oaf_service_get(&regcat);
 }
 
 static char *oaf_od_ior = NULL;

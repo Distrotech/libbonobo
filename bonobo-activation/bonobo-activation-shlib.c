@@ -32,7 +32,6 @@ oaf_server_activate_shlib(OAF_ActivationResult *sh,
   int i;
   PortableServer_POA poa;
   CORBA_ORB orb;
-  gpointer servant_ptr;
   char *filename;
   const char *iid;
 
@@ -74,6 +73,15 @@ oaf_server_activate_shlib(OAF_ActivationResult *sh,
 	living_by_filename = g_hash_table_new(g_str_hash, g_str_equal);
 
       g_hash_table_insert(living_by_filename, local_plugin_info->filename, local_plugin_info);
+    }
+  else
+    {
+      int success;
+
+      success = g_module_symbol(local_plugin_info->loaded, "OAF_Plugin_info",
+				(gpointer *)&plugin);
+      if(!success)
+	return CORBA_OBJECT_NIL;
     }
 
   retval = CORBA_OBJECT_NIL;

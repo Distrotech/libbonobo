@@ -14,4 +14,6 @@
 #endif
 #endif
 
+CORBA_Object oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev);
+
 #endif

@@ -112,6 +112,7 @@ qexp_binop_new(QueryExpr *op1, int operand, QueryExpr *op2)
       break;
     default:
       g_assert_not_reached();
+      optype = 0;
       break;
     }
 
@@ -141,6 +142,7 @@ qexp_unop_new(int operand, QueryExpr *op)
       break;
     default:
       g_assert_not_reached();
+      optype = 0;
       break;
     }
 
@@ -281,6 +283,9 @@ qexp_dump(QueryExpr *exp)
 	    break;
 	  case OP_XOR:
 	    opc = "^";
+	    break;
+	  default:
+	    opc = NULL;
 	    break;
 	  }
 	g_print(" %s (", opc);
@@ -565,7 +570,7 @@ qexp_func_has_all(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
       check_one = v1.u.v_stringv;
       check_two = v2.u.v_stringv;
 
-      for (j = 0; check_two[j] && check_one[i]; j++)
+      for (i = j = 0; check_two[j] && check_one[i]; j++)
 	{
 	  for (i = 0; check_one[i]; i++)
 	    {
