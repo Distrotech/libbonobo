@@ -1,5 +1,15 @@
 2000-12-12  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-running-context.c (check_empty): kill fatal bug.
+
+	* components/selector/*: impl. a component selector control.
+	
+	* components/Makefile.am: add selector
+
+	* configure.in: add selector.
+
+2000-12-12  Michael Meeks  <michael@helixcode.com>
+
 	* idl/Makefile.am: Sort IDL.
 
 	* bonobo/Makefile.am (idls): sort and add missing IDL.

@@ -79,10 +79,10 @@ check_empty (void)
 	if (!bonobo_running_context)
 		return;
 
-	if ((g_hash_table_size (ri->objects) == 0) &&
+/*	if ((g_hash_table_size (ri->objects) == 0) &&
 	    (g_hash_table_size (ri->keys) == 0))
 		gtk_signal_emit (GTK_OBJECT (bonobo_running_context),
-				 signals [LAST_REF], NULL);
+		signals [LAST_REF], NULL);*/
 }
 
 void
