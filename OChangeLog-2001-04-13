@@ -1,5 +1,9 @@
 2001-01-18  Michael Meeks  <michael@helixcode.com>
 
+	* Version 0.32
+	
+2001-01-18  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add): 
 	tolerate a NULL pb.
 
