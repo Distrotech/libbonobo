@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2\n"
-"POT-Creation-Date: 2002-02-11 10:21+0000\n"
-"PO-Revision-Date: 2001-07-07 12:45+02:00\n"
+"POT-Creation-Date: 2002-03-03 16:16+0100\n"
+"PO-Revision-Date: 2002-03-03 16:20+0100\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -91,15 +91,15 @@ msgstr "percorso all'elemento XML dell'interfaccia utente non valido"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr ""
+msgstr "attribuito UI richiesto non esiste"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr ""
+msgstr "Comando o verbo sconosciuto"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr ""
+msgstr "Comando non è sensibile"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -114,18 +114,16 @@ msgid "property not found"
 msgstr "proprietà non trovata"
 
 #: bonobo/bonobo-exception.c:236
-#, fuzzy
 msgid "property has invalid type"
-msgstr "proprietà non trovata"
+msgstr "proprietà non possiede tipo valido"
 
 #: bonobo/bonobo-exception.c:239
-#, fuzzy
 msgid "property is read only"
-msgstr "proprietà non trovata"
+msgstr "proprietà in sola lettura"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr ""
+msgstr "Backend database di configurazione fallito "
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
@@ -148,9 +146,8 @@ msgid "Error checking error; no exception"
 msgstr "Errore nel controllo di errore; nessun eccezione"
 
 #: bonobo/bonobo-exception.c:288
-#, fuzzy
 msgid "General activation error with no description"
-msgstr "Errori di sintassi nella descrizione dell'oggetto"
+msgstr "Errore di attivazione generale senza descrizione dettagliata"
 
 #: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
@@ -159,12 +156,11 @@ msgstr "Impossibile inizializzare Bonobo"
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "Impossibile risolvere o estendere '%s"
 
 #: bonobo/bonobo-moniker-util.c:246
-#, fuzzy
 msgid "Failed to activate object"
-msgstr "Impossibile attivare l'oggetto dal factory"
+msgstr "Impossibile attivare l'oggetto"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -172,21 +168,19 @@ msgstr "Moniker HTTP"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "moniker di gestione IOR ORB"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
 msgstr "Factory standard per Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
-#, fuzzy
 msgid "generic Oaf activation moniker"
-msgstr "Moniker generico per l'attivazione Server"
+msgstr "Moniker generico per l'attivazione Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
-#, fuzzy
 msgid "generic Oaf query moniker"
-msgstr "Moniker generico per interrogazioni Server"
+msgstr "Moniker generico per interrogazioni Oaf"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
@@ -203,60 +197,39 @@ msgstr "MonikerExtender stream"
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
 msgid "Exception activating '%s"
-msgstr ""
+msgstr "Eccezione attiva '%s"
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
 msgid "Failed to activate '%s"
-msgstr ""
+msgstr "Impossibile attivare '%s"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Fabbrica per il server bonobo Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Programma di esempio per il server Bonobo Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "Componente Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Fabbrica componente Echo"
 
 #: samples/echo/echo-client.c:22
-#, fuzzy
 msgid "I could not initialize Bonobo"
 msgstr "Impossibile inizializzare Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "Impossibile creare una istanza per il componente di esempio Echo"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr ""
+msgstr "Si è verificare una eccezione '%s'"
 
-#~ msgid "The User canceled the save"
-#~ msgstr "L'utente ha annullato il salvataggio"
-
-#~ msgid "No filename"
-#~ msgstr "Nessun nome file"
-
-#~ msgid "unknown mime type for '%s'"
-#~ msgstr "tipo mime sconosciuto per '%s'"
-
-#~ msgid "no handlers for mime type '%s'"
-#~ msgstr "nessun gestore per il tipo mime '%s'"
-
-#~ msgid "file MonikerExtender"
-#~ msgstr "MonikerExtender file"
-
-#~ msgid "generic file moniker"
-#~ msgstr "moniker generico per file"
-
-#~ msgid "Can not bonobo_init"
-#~ msgstr "Impossibile bonobo_init"
