@@ -1,3 +1,9 @@
+2000-04-27  Mathieu Lacage <mathieu@gnu.org>
+
+	* bonobo/bonobo-wrapper.c: bonobo_wrapper_realize.
+	set the event mask to receive expose events. Thanks to
+	George Lebl <jirka@eazel.com> who gave me the fix.
+
 2000-04-28  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-uih-menu.c (menu_toplevel_create_widgets):
