@@ -78,7 +78,7 @@ activation-context-query-parser.h: stamp-parser
 BUILT_SOURCES= activation-context-query-lexer.c activation-context-query-parser.c \
 	activation-context-query-parser.h Bonobo_CosNaming_NamingContext.server
 
-CLEANFILES=stamp-parser 
+CLEANFILES=stamp-parser  $(server_in_file) $(serverinfo_DATA)
 
 dist-hook:
 	cd $(distdir) ; rm -f $(CLEANFILES)

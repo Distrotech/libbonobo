@@ -139,6 +139,7 @@ bonobo_activation_release_corba_client (void)
         reset_caches ();
 
         CORBA_exception_free (&ev);
+        client = CORBA_OBJECT_NIL;
 }
 
 
