@@ -41,7 +41,7 @@ interface ControlFrame : Bonobo::Unknown {
 	 * Control::setSize ()
 	 *
 	 */
-	void queueResize ();
+	oneway void queueResize ();
 
 	/**
 	 * activateURI:
@@ -54,7 +54,7 @@ interface ControlFrame : Bonobo::Unknown {
 	 *
 	 * The user has requested that the uri be loaded
 	 */
-	void activateURI (in string uri, in boolean relative);
+	oneway void activateURI (in string uri, in boolean relative);
 
 	/**
 	 * getUIHandler:

@@ -485,38 +485,6 @@ impl_Bonobo_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev
 #endif
 }
 
-static BonoboObject *
-bonobo_object_get_local_interface_from_objref (BonoboObject *object,
-					       CORBA_Object  interface)
-{
-	CORBA_Environment  ev;
-	GList             *l;
-
-	if (interface == CORBA_OBJECT_NIL)
-		return NULL;
-
-	CORBA_exception_init (&ev);
-
-	for (l = object->priv->ao->objs; l; l = l->next) {
-		BonoboObject *tryme = l->data;
-
-		if (CORBA_Object_is_equivalent (interface, tryme->corba_objref, &ev)) {
-			CORBA_exception_free (&ev);
-			return tryme;
-		}
-
-		if (BONOBO_EX (&ev)) {
-			CORBA_exception_free (&ev);
-			return NULL;
-		}
-
-	}
-
-	CORBA_exception_free (&ev);
-
-	return NULL;
-}
-
 /**
  * bonobo_object_query_local_interface:
  * @object: A #BonoboObject which is the aggregate of multiple objects.
@@ -528,37 +496,22 @@ BonoboObject *
 bonobo_object_query_local_interface (BonoboObject *object,
 				     const char   *repo_id)
 {
-	CORBA_Environment  ev;
-	BonoboObjectClass *klass;
-	CORBA_Object       corba_retval = CORBA_OBJECT_NIL;
 	GList             *l;
+	CORBA_Object       corba_retval = CORBA_OBJECT_NIL;
+	CORBA_Environment  ev;
 
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
 	corba_retval = CORBA_OBJECT_NIL;
 
-	klass = BONOBO_OBJECT_GET_CLASS (object);
-	if (klass->query_interface)
-		corba_retval = klass->query_interface (object, repo_id);
-
 	CORBA_exception_init (&ev);
-
-	if (corba_retval != CORBA_OBJECT_NIL) {
-		BonoboObject *local_interface;
-
-		local_interface = bonobo_object_get_local_interface_from_objref (
-			object, corba_retval);
-
-		if (local_interface != NULL)
-			bonobo_object_ref (object);
-
-		return local_interface;
-	}
 
 	for (l = object->priv->ao->objs; l; l = l->next){
 		BonoboObject *tryme = l->data;
 
-		if (CORBA_Object_is_a (tryme->corba_objref, (char *) repo_id, &ev)) {
+		if (CORBA_Object_is_a (
+			tryme->corba_objref, (char *) repo_id, &ev)) {
+
 			if (BONOBO_EX (&ev)) {
 				CORBA_exception_free (&ev);
 				continue;

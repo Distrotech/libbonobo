@@ -61,9 +61,6 @@ typedef struct {
 typedef struct {
 	GObjectClass parent_class;
 
-	/* virtual methods. */
-	CORBA_Object (*query_interface)  (BonoboObject *object, const char *repo_id);
-
 	/* signals. */
 	void         (*destroy)          (BonoboObject *object);
 	void         (*system_exception) (BonoboObject *object, CORBA_Object cobject, CORBA_Environment *ev);

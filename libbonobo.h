@@ -33,6 +33,7 @@ G_BEGIN_DECLS
 #include <bonobo/bonobo-main.h>
 
 #include <bonobo/bonobo-stream.h>
+#include <bonobo/bonobo-stream-memory.h>
 #include <bonobo/bonobo-stream-client.h>
 
 #include <bonobo/bonobo-persist.h>
@@ -40,6 +41,7 @@ G_BEGIN_DECLS
 #include <bonobo/bonobo-persist-stream.h>
 
 #include <bonobo/bonobo-storage.h>
+#include <bonobo/bonobo-storage-memory.h>
 
 G_END_DECLS
 

@@ -56,6 +56,59 @@ main (int argc, char *argv [])
 		bonobo_object_release_unref (ref, NULL);
 	}
 
+	fprintf (stderr, "Query interface\n");
+	{
+		BonoboObject *a, *b;
+
+		a = BONOBO_OBJECT (g_object_new (
+			bonobo_moniker_get_type (), NULL));
+		b = BONOBO_OBJECT (g_object_new (
+			bonobo_stream_mem_get_type (), NULL));
+
+		bonobo_object_add_interface (a, b);
+
+		fprintf (stderr, "  invalid interface\n");
+		object = bonobo_object_query_local_interface (
+			a, "IDL:This/Is/Not/There:1.0");
+		g_assert (object == CORBA_OBJECT_NIL);
+
+		fprintf (stderr, "  symmetry\n");
+		object = bonobo_object_query_local_interface (
+			a, "IDL:Bonobo/Stream:1.0");
+		g_assert (object == b);
+		bonobo_object_unref (object);
+
+		object = bonobo_object_query_local_interface (
+			b, "IDL:Bonobo/Stream:1.0");
+		g_assert (object == b);
+		bonobo_object_unref (object);
+
+		object = bonobo_object_query_local_interface (
+			a, "IDL:Bonobo/Moniker:1.0");
+		g_assert (object == a);
+		bonobo_object_unref (object);
+
+		object = bonobo_object_query_local_interface (
+			b, "IDL:Bonobo/Moniker:1.0");
+		g_assert (object == a);
+		bonobo_object_unref (object);
+
+		fprintf (stderr, "  remote\n");
+		ref = Bonobo_Unknown_queryInterface (
+			BONOBO_OBJREF (a), "IDL:Broken/1.0", ev);
+		g_assert (!BONOBO_EX (ev));
+		g_assert (ref == CORBA_OBJECT_NIL);
+
+		ref = Bonobo_Unknown_queryInterface (
+			BONOBO_OBJREF (a), "IDL:Bonobo/Stream:1.0", ev);
+		g_assert (!BONOBO_EX (ev));
+		g_assert (ref == BONOBO_OBJREF (b));
+		bonobo_object_release_unref (ref, ev);
+		g_assert (!BONOBO_EX (ev));
+
+		bonobo_object_unref (a);
+	}
+
 #ifdef CAN_POKE_ORB_INTERNALS
 	fprintf (stderr, "Out of proc lifecycle\n");
 	{

@@ -1,3 +1,18 @@
+2001-10-30  Michael Meeks  <michael@ximian.com>
+
+	* libbonobo.h: add bonobo-stream-mem.h, bonobo-storage-memory.h
+
+	* bonobo/bonobo-object.c (bonobo_object_query_local_interface):
+	no point in a virtual query_interface, we have that with the
+	epv overriding, kill wierd mess.
+	(bonobo_object_get_local_interface_from_objref): kill
+	convoluted mess.
+
+2001-10-27  Michael Meeks  <michael@ximian.com>
+
+	* idl/Bonobo_Control.idl: make activateURI and queueResize
+	oneway methods.
+
 2001-10-27 Dirk-Jan C. Binnema <djcb@djcbsoftware.nl>
 
 	* bonobo/bonobo-moniker.c (bonobo_moniker_default_equal):
