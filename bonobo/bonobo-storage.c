@@ -24,7 +24,7 @@ gnome_storage_from_servant (PortableServer_Servant servant)
 }
 
 static GNOME_Stream
-impl_create_stream (PortableServer_Servant servant, CORBA_char *path, CORBA_Environment *ev)
+impl_create_stream (PortableServer_Servant servant, const CORBA_char *path, CORBA_Environment *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
 	GnomeStream *stream;
@@ -38,7 +38,7 @@ impl_create_stream (PortableServer_Servant servant, CORBA_char *path, CORBA_Envi
 
 static GNOME_Stream
 impl_open_stream (PortableServer_Servant servant,
-		  CORBA_char *path,
+		  const CORBA_char *path,
 		  GNOME_Storage_OpenMode mode,
 		  CORBA_Environment *ev)
 {
@@ -54,7 +54,7 @@ impl_open_stream (PortableServer_Servant servant,
 
 static GNOME_Storage 
 impl_create_storage (PortableServer_Servant servant,
-		     CORBA_char *path,
+		     const CORBA_char *path,
 		     CORBA_Environment *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
@@ -69,7 +69,7 @@ impl_create_storage (PortableServer_Servant servant,
 
 static GNOME_Storage
 impl_open_storage (PortableServer_Servant servant,
-		   CORBA_char *path,
+		   const CORBA_char *path,
 		   GNOME_Storage_OpenMode mode,
 		   CORBA_Environment *ev)
 {
@@ -95,8 +95,8 @@ impl_copy_to (PortableServer_Servant servant,
 
 static void
 impl_rename (PortableServer_Servant servant,
-	     CORBA_char *path_name,
-	     CORBA_char *new_path_name,
+	     const CORBA_char *path_name,
+	     const CORBA_char *new_path_name,
 	     CORBA_Environment *ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
@@ -114,7 +114,7 @@ impl_commit (PortableServer_Servant servant, CORBA_Environment * ev)
 
 static GNOME_Storage_directory_list *
 impl_list_contents (PortableServer_Servant servant,
-		    CORBA_char * path,
+		    const CORBA_char * path,
 		    CORBA_Environment * ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
@@ -124,7 +124,7 @@ impl_list_contents (PortableServer_Servant servant,
 
 static void
 impl_erase (PortableServer_Servant servant, 
-            CORBA_char *path,
+            const CORBA_char *path,
             CORBA_Environment * ev)
 {
 	GnomeStorage *storage = gnome_storage_from_servant (servant);
@@ -224,7 +224,7 @@ load_storage_driver (const char *driver_name)
 {
 	GModule *m;
 	char *path;
-	driver_open_t driver;
+	gpointer driver;
 	
 	path = g_module_build_path (STORAGE_LIB, driver_name);
 	m = g_module_open (path, G_MODULE_BIND_LAZY);

@@ -1,5 +1,12 @@
 1999-08-16  Michael Meeks  <michael@imaginator.com>
 
+	* bonobo/gnome-storage.c (load_storage_driver): Change
+	driver_open_t to gpointer to make glib happy.
+	Add 'const' to scads of CORBA_char *path things to make
+	compile clean.
+
+1999-08-16  Michael Meeks  <michael@imaginator.com>
+
 	* bonobo/gnome-stream-fs.c (fs_seek): Update to
 	new seek type.
 
