@@ -1,3 +1,21 @@
+2000-09-11  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_new): use getpid to make
+	the name system unique.
+
+	* bonobo/bonobo-ui-xml.c (do_strip): remove comment nodes before they
+	go any further.
+
+	* bonobo/extract.c: remove daft, unused headers.
+
+	* bonobo/bonobo-ui-xml.c (do_set_id): fix silly inefficiency spewing
+	warnings.
+
+	* bonobo/Makefile.am: Update s/bonobo-app/bonobo-win/
+	s/bonobo-app-item/bonobo-ui-item/ s/bonobo-app-toolbar/bonobo-ui-toolbar/
+
+	* bonobo/*: Add missing Author / Copyright / description headers.
+
 2000-09-09  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-app.c (build_menu_widget): make menu controls work
