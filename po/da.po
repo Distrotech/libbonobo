@@ -1,8 +1,8 @@
 # Danish translation of libbonobo.
-# Copyright (C) 1999, 2000, 01, 02, 03 Free Software Foundation, Inc.
+# Copyright (C) 1999, 2000, 01, 02, 03, 04 Free Software Foundation, Inc.
 # Keld Simonsen <keld@dkuug.dk>, 2001.
 # Kjartan Maraas <kmaraas@gnome.org>, 1999-2001.
-# Ole Laursen <olau@hardworking.dk>, 2002, 03.
+# Ole Laursen <olau@hardworking.dk>, 2002, 03, 04.
 #
 # Konventioner:
 #
@@ -13,14 +13,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-02-02 14:30+0000\n"
-"PO-Revision-Date: 2003-06-18 18:51+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-18 00:18+0100\n"
+"PO-Revision-Date: 2004-02-18 00:19+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -68,13 +68,12 @@ msgid "Name service"
 msgstr "Navnetjeneste"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Navnetjeneste"
+msgstr "Bekendtgørelsestjeneste"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Bekendtgørelsestjeneste for aktivering"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -129,12 +128,12 @@ msgstr "Egenskaben '%s' har ingen værdi"
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Kunne ikke fortolke ugyldig udformet XML-dokument %s"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Forsøger mappe %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -213,11 +212,11 @@ msgstr "Delt bibliotek '%s' indeholdt ikke '%s'"
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #: bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr ""
+msgstr "Program-unikt navn"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
@@ -225,7 +224,7 @@ msgstr "POA"
 
 #: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
-msgstr "Brugerdefinerett CORBA POA"
+msgstr "Brugerdefineret CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
