@@ -48,6 +48,9 @@
  * given a human-readable string containing a description of the 
  * error. In case of sucess, the error string value is undefined.
  *
+ * @selection_order can be safely NULLed as well as @ev and 
+ * @user_data. @flags can be set to 0 if you do not know what to 
+ * use.
  */
 void oaf_activate_async (const char *requirements,
 			 char *const *selection_order,
@@ -136,7 +139,9 @@ void oaf_activate_async (const char *requirements,
  * activation fails. If the activation fails, the callback will be 
  * given a human-readable string containing a description of the 
  * error. In case of sucess, the error string value is undefined.
- * 
+ *
+ * @flags can be 0 if you do not know what to set it to and 
+ * @ev can be safely set to NULL.
  */
 void oaf_activate_from_id_async (const OAF_ActivationID aid,
 				 OAF_ActivationFlags flags,

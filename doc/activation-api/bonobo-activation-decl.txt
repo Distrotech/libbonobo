@@ -233,27 +233,27 @@ gpointer impl_ptr
 <RETURNS>OAF_ServerInfoList *</RETURNS>
 <NAME>oaf_query</NAME>
 const char *requirements,
-			       char *const *selection_order,
-			       CORBA_Environment * ev
+char *const *selection_order,
+CORBA_Environment * ev
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>CORBA_Object</RETURNS>
 <NAME>oaf_activate_from_id</NAME>
 const OAF_ActivationID aid,
-				   OAF_ActivationFlags flags,
-				   OAF_ActivationID * ret_aid,
-				   CORBA_Environment * ev
+OAF_ActivationFlags flags,
+OAF_ActivationID * ret_aid,
+CORBA_Environment * ev
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>CORBA_Object</RETURNS>
 <NAME>oaf_activate</NAME>
 const char *requirements,
-			   char *const *selection_order,
-			   OAF_ActivationFlags flags,
-			   OAF_ActivationID * ret_aid,
-			   CORBA_Environment * ev
+char *const *selection_order,
+OAF_ActivationFlags flags,
+OAF_ActivationID * ret_aid,
+CORBA_Environment * ev
 </FUNCTION>
 
 <STRUCT>
@@ -268,21 +268,21 @@ typedef void (*OAFActivationCallback) (CORBA_Object   activated_object,
 <RETURNS>void</RETURNS>
 <NAME>oaf_activate_async</NAME>
 const char *requirements,
-			 char *const *selection_order,
-			 OAF_ActivationFlags flags,
-			 OAFActivationCallback callback,
-			 gpointer user_data,
-			 CORBA_Environment * ev
+char *const *selection_order,
+OAF_ActivationFlags flags,
+OAFActivationCallback callback,
+gpointer user_data,
+CORBA_Environment * ev
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>void</RETURNS>
 <NAME>oaf_activate_from_id_async</NAME>
-				 const OAF_ActivationID aid,
-				 OAF_ActivationFlags flags,
-				 OAFActivationCallback callback,
-				 gpointer user_data,
-				 CORBA_Environment * ev
+const OAF_ActivationID aid,
+OAF_ActivationFlags flags,
+OAFActivationCallback callback,
+gpointer user_data,
+CORBA_Environment * ev
 </FUNCTION>
 
 
@@ -304,15 +304,15 @@ const char *iid,
 <RETURNS>const char *</RETURNS>
 <NAME>oaf_server_info_prop_lookup</NAME>
 OAF_ServerInfo * server,
-					 const char *prop_name,
-					 GSList * i18n_languages
+const char *prop_name,
+GSList * i18n_languages
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>OAF_Property *</RETURNS>
 <NAME>oaf_server_info_prop_find</NAME>
 OAF_ServerInfo * server,
-                                         const char *prop_name
+const char *prop_name
 </FUNCTION>
 
 <FUNCTION>

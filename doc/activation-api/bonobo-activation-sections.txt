@@ -2,6 +2,7 @@
 
 <SECTION>
 <FILE>utilities</FILE>
+<TITLE>Utilities</TITLE>
 OAF_Property
 OAF_PropertyValue
 OAF_PropertyType
@@ -15,7 +16,8 @@ OAF_ServerInfo_duplicate
 </SECTION>
 
 <SECTION>
-<FILE>query and activation</FILE>
+<FILE>query</FILE>
+<TITLE>Query and Activation</TITLE>
 OAF_ImplementationID
 OAF_ActivationID
 OAF_ServerInfo
@@ -30,13 +32,20 @@ oaf_activate_from_id_async
 
 <SECTION>
 <FILE>registration</FILE>
+<TITLE>Registration</TITLE>
 OAF_RegistrationResult
 oaf_active_server_register
 oaf_active_server_unregister
+
+OAFPlugin
+OAFPluginObject
+oaf_plugin_use
+oaf_plugin_unuse
 </SECTION>
 
 <SECTION>
 <FILE>initialization</FILE>
+<TITLE>Initialization</TITLE>
 oaf_is_initialized
 oaf_init
 oaf_orb_get

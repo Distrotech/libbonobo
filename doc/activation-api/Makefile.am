@@ -16,7 +16,7 @@ TARGET_DIR=$(HTML_DIR)/$(DOC_MODULE)
 tmpl_sources =				\
 	tmpl/utilities.sgml		\
 	tmpl/initialization.sgml	\
-	tmpl/query_and_activation.sgml	\
+	tmpl/query.sgml			\
 	tmpl/registration.sgml		\
 	$(NULL)
 

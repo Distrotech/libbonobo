@@ -161,8 +161,6 @@ oaf_active_server_register (const char *registration_id, CORBA_Object obj)
  * @obj: CORBA::Object to unregister.
  *
  * Unregisters @obj with @iid in the local OAF daemon.
- *
- * Return value: none.
  */
 void
 oaf_active_server_unregister (const char *iid, CORBA_Object obj)

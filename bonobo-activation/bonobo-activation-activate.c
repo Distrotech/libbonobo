@@ -107,7 +107,7 @@ oaf_copy_string_array_to_GNOME_stringlist (char *const *selection_order, GNOME_s
  *
  * Executes the @requirements query on the OAF daemon.
  * The result is sorted according to @selection_order. 
- * @selection_order can safely be NULL.
+ * @selection_order can safely be NULL as well as @ev.
  * The returned list has to be freed with CORBA_free.
  *
  * Return value: the list of servers matching the requirements.
@@ -168,11 +168,13 @@ oaf_query (const char *requirements, char *const *selection_order,
  * @ev: %CORBA_Environment structure which will contain 
  *      the CORBA exception status of the operation. 
  *
- * Activates a given object. @ret_aid can be safely NULLed.
+ * Activates a given object. @ret_aid can be safely NULLed as well
+ * as @ev and @selection_order. @flags can be set to zero if you do 
+ * not what to use.
  *
  * Return value: the CORBA object reference of the activated object.
- * This value can be CORBA_OBJECT_NIL: you are supposed to check @ev 
- * for success.
+ *               This value can be CORBA_OBJECT_NIL: you are supposed 
+ *               to check @ev for success.
  */
 CORBA_Object
 oaf_activate (const char *requirements, char *const *selection_order,
@@ -258,9 +260,12 @@ oaf_activate (const char *requirements, char *const *selection_order,
  * @ev: %CORBA_Environment structure which will contain 
  *      the CORBA exception status of the operation. 
  *
- * Activates the server corresponding to @aid. @ret_aid can be safely NULLed.
+ * Activates the server corresponding to @aid. @ret_aid can be safely 
+ * NULLed as well as @ev. @flags can be zero if you do not know what 
+ * to do.
  *
- * Return value: a CORBA object reference to the newly activated server.
+ * Return value: a CORBA object reference to the newly activated 
+ *               server. Do not forget to check @ev for failure!!
  */
 
 CORBA_Object
@@ -338,7 +343,7 @@ oaf_activate_from_id (const OAF_ActivationID aid, OAF_ActivationFlags flags,
  * @ev: %CORBA_Environment structure which will contain 
  *      the CORBA exception status of the operation. 
  *
- * Returns the name server of OAF.
+ * Returns the name server of OAF. @ev can be NULL.
  *
  * Return value: the name server of OAF.
  */

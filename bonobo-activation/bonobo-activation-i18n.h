@@ -1,7 +1,8 @@
 /*
  *  oaf-i18n.h: internationalization support for OAF.
  *
- *  Copyright (C) 2000 Eazel, Inc.
+ *  Shamelessly stolen from gnome-libs or somewhere else.
+ *  Cannot remmeber exactly where.
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
@@ -17,9 +18,9 @@
  *  along with this library; if not, write to the Free Software
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- *  Authors: Mathieu Lacage <mathieu@eazel.com>
- *
  */
+
+#include <config.h>
 
 #ifdef ENABLE_NLS
 #    include <libintl.h>

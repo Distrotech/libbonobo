@@ -56,6 +56,8 @@ gnome_plugin_unload (gpointer data, gpointer user_data)
  * @sh:
  * @ev:
  *
+ * Private function.
+ *
  * Return value: 
  */
 CORBA_Object
@@ -175,19 +177,13 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 }
 
 /**
- * oaf_plugin_unuse:
+ * oaf_plugin_use:
  * @servant: The servant that was created
  * @impl_ptr: The impl_ptr that was passed to the original activation routine
  *
- * Side effects: May arrange for the shared library that the
- * implementation is in to be unloaded.
- *
- * When a shlib plugin for a CORBA object is destroying an
- * implementation, it should call this function to make sure that the
- * shared library is unloaded as needed.
- *
- * Calling this routine is mandatory for activate() routines listed in
- * an OAFPluginObject struct, otherwise Bad Things Will Happen.
+ * You should call this routine to activate a shared library-based 
+ * CORBA Object. It will be called by OAF if the component exports 
+ * correctly an %OAFPlugin structure named "OAF_Plugin_info".
  */
 void
 oaf_plugin_use (PortableServer_Servant servant, gpointer impl_ptr)
