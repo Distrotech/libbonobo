@@ -15,6 +15,7 @@ static GnomePersistClass *gnome_persist_stream_parent_class;
 /* The CORBA entry point vectors */
 static POA_GNOME_Persist__epv gnome_persist_epv;
 POA_GNOME_PersistStream__epv gnome_persist_stream_epv;
+POA_GNOME_PersistStream__vepv gnome_persist_stream_vepv;
 
 static CORBA_char *
 impl_get_class_id (PortableServer_Servant servant, CORBA_Environment * ev)
@@ -100,6 +101,9 @@ init_persist_stream_corba_class (void)
 	gnome_persist_stream_epv.load = impl_load;
 	gnome_persist_stream_epv.save = impl_save;
 	gnome_persist_stream_epv.get_size_max = impl_get_size_max;
+
+	gnome_persist_stream_vepv.GNOME_object_epv = &gnome_object_epv;
+	gnome_persist_stream_vepv.GNOME_PersistStream_epv = &gnome_persist_stream_epv;
 }
 
 static int
@@ -191,6 +195,23 @@ gnome_persist_stream_construct (GnomePersistStream *ps,
 	return ps;
 }
 
+static GNOME_PersistStream
+create_gnome_persist_stream (GnomeObject *object)
+{
+	POA_GNOME_PersistStream *servant;
+	CORBA_Object o;
+
+	servant = g_new0 (POA_GNOME_PersistStream, 1);
+	servant->vepv = &gnome_persist_stream_vepv;
+	POA_GNOME_PersistStream__init ((PortableServer_Servant) servant, &object->ev);
+	if (object->ev._major != CORBA_NO_EXCEPTION){
+		g_free (servant);
+		return CORBA_OBJECT_NIL;
+	}
+	return (GNOME_PersistStream) gnome_object_activate_servant (object, servant);
+}
+
+
 /**
  * gnome_persist_stream_new:
  * @load_fn: Loading routine
@@ -209,8 +230,6 @@ gnome_persist_stream_new (GnomePersistStreamIOFn load_fn,
 	GnomePersistStream *ps;
 	GNOME_PersistStream corba_ps;
 
-	g_error ("This is an abstract class");
-#if 0
 	ps = gtk_type_new (gnome_persist_stream_get_type ());
 	corba_ps = create_gnome_persist_stream (
 		GNOME_OBJECT (ps));
@@ -219,8 +238,8 @@ gnome_persist_stream_new (GnomePersistStreamIOFn load_fn,
 		return NULL;
 	}
 
-	gnome_persist_stream_construct (ps, load_fn, save_fn, closure);
-#endif
+	gnome_persist_stream_construct (ps, corba_ps, load_fn, save_fn, closure);
+
 	return ps;
 }
 

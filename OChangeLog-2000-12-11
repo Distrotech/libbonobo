@@ -1,3 +1,18 @@
+1999-04-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* components/image-x-png: It loads PNG files now, draws them,
+	works.  Hardcoded value currently.  Will fix in a second.
+	
+	* bonobo/gnome-object.c (gnome_object_activate_with_goad_id):
+	Implement activation by goad-id.
+
+	* bonobo/test-container.c (main): Argument line allows you to
+	specify the goad id to activate.
+	(launch_server): Activate by goad id instead of repo id.
+
+	* bonobo/gnome-persist-stream.c (gnome_persist_stream_new): Finish
+	implementing. 
+
 1999-04-21  Havoc Pennington  <hp@pobox.com>
 
 	* bonobo/gnome-client-site.h

@@ -49,6 +49,10 @@ GnomeObject *gnome_object_activate_with_repo_id (GoadServerList *list,
 						 const char *repo_id,
 						 GoadActivationFlags flags,
 						 const char **params);
+GnomeObject *gnome_object_activate_with_goad_id (GoadServerList *list,
+						 const char *goad_id,
+						 GoadActivationFlags flags,
+						 const char **params);
 #endif
 
 /* CORBA defaults we provide */
