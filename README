@@ -5,7 +5,7 @@ document system for the GNU system.
 * What is Bonobo
 
    Bonobo is a set of language and system independant CORBA interfaces
-   for creating reusable components (controls) and creating compound
+   for creating reusable components, controls and creating compound
    documents.
 
    The Bonobo distribution includes a Gtk+ based implementation of the
@@ -25,8 +25,10 @@ document system for the GNU system.
 
 * What you will need
 
-   You will need a working GNOME 1.0 system with the development tools
+   You will need a working GNOME 1.x system with the development tools
    to compile and install Bonobo.
+
+   You also need OAF, the Object Activation Framework.
 
 * Mailing lists
 
