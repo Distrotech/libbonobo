@@ -23,7 +23,7 @@ module GNOME {
 
 		boolean manufactures (in string obj_oaf_id);
 
-		Object create_object (in string oaf_id)
+		Object create_object (in string oaf_id, in stringlist params)
 			raises (CannotActivate);
 
 		void ref();
