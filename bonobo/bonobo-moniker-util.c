@@ -1004,8 +1004,10 @@ lookup_naming_context (GList *path,
 			CORBA_exception_init (ev);
 			new_ctx = CosNaming_NamingContext_bind_new_context (
 				ctx, cn, ev);
-			if (BONOBO_EX (ev) || new_ctx == CORBA_OBJECT_NIL)
+			if (BONOBO_EX (ev) || new_ctx == CORBA_OBJECT_NIL) {
+				CORBA_free (cn);
 				break;
+			}
 		}
 
 		CORBA_free (cn);

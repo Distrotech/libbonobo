@@ -1,3 +1,8 @@
+2001-03-13  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-moniker-util.c (lookup_naming_context): fix a
+	memory leak.
+
 2001-03-13  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am: remove bonobo-component-io.c
