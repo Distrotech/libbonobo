@@ -17,6 +17,13 @@
 	* samples/echo/Makefile.am (bonobo_echo_2_LDADD, echo_client_2_LDADD):
 	move libEcho.a to the first. because it depends on other libraries.
 
+2003-04-16  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-object.c (bonobo_object_finalize_internal): Fix
+	stupid bug: compare object type with BONOBO_TYPE_FOREIGN_OBJECT
+	instead of BONOBO_TYPE_OBJECT when deciding if we should call
+	bonobo_object_corba_deactivate.
+
 2003-04-16  Michael Meeks  <michael@ximian.com>
 
 	* configure.in: add activation debug flags, and the

@@ -170,7 +170,7 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 			 */
 
 			BONOBO_OBJECT (o)->priv->ao = NULL;
-			if (!g_type_is_a (G_OBJECT_TYPE(o), BONOBO_TYPE_OBJECT))
+			if (!g_type_is_a (G_OBJECT_TYPE(o), BONOBO_TYPE_FOREIGN_OBJECT))
 				bonobo_object_corba_deactivate (BONOBO_OBJECT (o));
 
 			g_object_unref (o);
