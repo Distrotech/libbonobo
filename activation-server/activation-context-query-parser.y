@@ -84,15 +84,15 @@ binop: P_MULTIPLY { $$ = P_MULTIPLY; }
 
 expr_binop: expr_obvious binop expr { $$ = qexp_binop_new($1, $2, $3); };
 
-expr_unop: P_NOT expr_obvious { $$ = $2; }
-	P_SUBTRACT expr_obvious %prec P_NEGATE { $$ = $2; };
+expr_unop: P_NOT expr_obvious { $$ = qexp_unop_new(P_NOT, $2); }
+| P_SUBTRACT expr_obvious %prec P_NEGATE { $$ = qexp_unop_new(P_NEGATE, $2); };
 
 expr_constant: P_CONST_STRING {
 	  QueryExprConst qctmp;
 	  qctmp.type = CONST_STRING;
 	  qctmp.u.v_string = $1;
 	  $$ = qexp_constant_new(qctmp);
-}
+        }
 	| P_CONST_NUMBER {
 	  QueryExprConst qctmp;
 	  qctmp.type = CONST_NUMBER;
