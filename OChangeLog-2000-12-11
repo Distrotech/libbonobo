@@ -1,3 +1,8 @@
+1999-05-26    <sopwith@moebius.labs.redhat.com>
+
+	* idl/bonobo.idl: Use GnomeObject.idl (from gnome-libs) instead of
+	gnome-object.idl and gnome-base.idl
+
 1999-05-26  Nat Friedman  <nat@nat.org>
 
 	* components/text-plain/bonobo-text-plain.c (blank_all_views): New
