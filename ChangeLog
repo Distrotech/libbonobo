@@ -1,3 +1,8 @@
+2001-07-12  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-marshal.list: Added `VOID:POINTER,STRING' and
+	`VOID:STRING,INT,STRING'.
+
 2001-07-11  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-generic-factory.c (init_generic_factory_corba_class):
