@@ -1,3 +1,9 @@
+2000-10-22  Mathieu Lacage  <mathieu@eazel.com>
+
+	* bonobo/Makefile.am: fix the build: remove the new files
+	bonobo-item-handler.{h,c} from the build: they cannot possibly 
+	compile.
+
 2000-10-22  Miguel de Icaza  <miguel@helixcode.com>
 
 	* doc/Monikers: Updated the Moniker document.
