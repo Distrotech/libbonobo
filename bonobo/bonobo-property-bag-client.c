@@ -718,9 +718,9 @@ bonobo_property_bag_client_get_type (void)
 	return type;
 }
 
-#define SEND(pbc,name,args,corbat,gt)									\
+#define SEND(pbc,name,args,corbat,gt,ansip)									\
 	case CORBA_tk##corbat:										\
-		bonobo_property_bag_client_set_value##gt (pbc, name, va_arg (args, CORBA##corbat));	\
+		bonobo_property_bag_client_set_value##gt (pbc, name, (CORBA##corbat) va_arg (args, ##ansip));	\
 		break;
 
 char *
@@ -743,11 +743,10 @@ bonobo_property_bag_client_setv (BonoboPropertyBagClient *pbc,
 			return g_strdup_printf ("No such arg '%s'", arg_name);
 
 		switch (type->kind) {
-
-			SEND (pbc, arg_name, var_args, _boolean, _gboolean);
-			SEND (pbc, arg_name, var_args, _long,    _glong);
-			SEND (pbc, arg_name, var_args, _float,   _gfloat);
-			SEND (pbc, arg_name, var_args, _double,  _gdouble);
+			SEND (pbc, arg_name, var_args, _boolean, _gboolean, int);
+			SEND (pbc, arg_name, var_args, _long,    _glong,    int);
+			SEND (pbc, arg_name, var_args, _float,   _gfloat,   double);
+			SEND (pbc, arg_name, var_args, _double,  _gdouble,  double);
 
 		case CORBA_tk_string:
 			bonobo_property_bag_client_set_value_string (pbc, arg_name,
@@ -771,9 +770,9 @@ bonobo_property_bag_client_setv (BonoboPropertyBagClient *pbc,
 }
 #undef SEND
 
-#define RECIEVE(pbc,name,args,corbat,gt) \
+#define RECEIVE(pbc,name,args,corbat,gt,ansip) \
 	case CORBA_tk##corbat: \
-		*((CORBA##corbat *)va_arg (args, CORBA##corbat *)) = \
+		*((CORBA##corbat *)va_arg (args, ##ansip *)) = \
 		    bonobo_property_bag_client_get_value##gt (pbc, name); \
 		break;
 
@@ -798,10 +797,10 @@ bonobo_property_bag_client_getv (BonoboPropertyBagClient *pbc,
 
 		switch (type->kind) {
 
-			RECIEVE (pbc, arg_name, var_args, _boolean, _gboolean);
-			RECIEVE (pbc, arg_name, var_args, _long,    _glong);
-			RECIEVE (pbc, arg_name, var_args, _float,   _gfloat);
-			RECIEVE (pbc, arg_name, var_args, _double,  _gdouble);
+			RECEIVE (pbc, arg_name, var_args, _boolean, _gboolean, int);
+			RECEIVE (pbc, arg_name, var_args, _long,    _glong,    int);
+			RECEIVE (pbc, arg_name, var_args, _float,   _gfloat,   double);
+			RECEIVE (pbc, arg_name, var_args, _double,  _gdouble,  double);
 
 		case CORBA_tk_string:
 			*((CORBA_char **)(va_arg (var_args, CORBA_char **))) =
@@ -823,6 +822,6 @@ bonobo_property_bag_client_getv (BonoboPropertyBagClient *pbc,
 
 	return NULL;
 }
-#undef RECIEVE
+#undef RECEIVE
 
 
