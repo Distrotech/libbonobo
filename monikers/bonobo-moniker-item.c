@@ -7,6 +7,7 @@
  *	Michael Meeks (michael@helixcode.com)
  */
 #include <config.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
 
 #include "bonobo-moniker-std.h"
@@ -24,7 +25,7 @@ bonobo_moniker_item_resolve (BonoboMoniker               *moniker,
 	
 	parent = bonobo_moniker_get_parent (moniker, ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION)
+	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 	
 	if (parent == CORBA_OBJECT_NIL) {
@@ -37,7 +38,7 @@ bonobo_moniker_item_resolve (BonoboMoniker               *moniker,
 	container = Bonobo_Moniker_resolve (parent, options,
 					    "IDL:Bonobo/ItemContainer:1.0", ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION)
+	if (BONOBO_EX (ev))
 		goto return_unref_parent;
 
 	if (container == CORBA_OBJECT_NIL) {

@@ -34,6 +34,7 @@ libmoniker_std_la_SOURCES =			\
 	bonobo-moniker-extender-stream.c  	\
 	bonobo-moniker-item.c			\
 	bonobo-moniker-new.c			\
+	bonobo-moniker-ior.c			\
 	bonobo-moniker-oaf.c			\
 	bonobo-moniker-cache.c			\
 	bonobo-stream-cache.h			\

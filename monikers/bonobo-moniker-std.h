@@ -9,6 +9,10 @@ Bonobo_Unknown bonobo_moniker_item_resolve    (BonoboMoniker               *moni
 					       const CORBA_char            *requested_interface,
 					       CORBA_Environment           *ev);
 
+Bonobo_Unknown bonobo_moniker_ior_resolve     (BonoboMoniker               *moniker,
+					       const Bonobo_ResolveOptions *options,
+					       const CORBA_char            *requested_interface,
+					       CORBA_Environment           *ev);
 Bonobo_Unknown bonobo_moniker_oaf_resolve     (BonoboMoniker               *moniker,
 					       const Bonobo_ResolveOptions *options,
 					       const CORBA_char            *requested_interface,

@@ -21,6 +21,18 @@
 	</oaf_attribute>
 </oaf_server>
 
+<oaf_server iid="OAFIID:Bonobo_Moniker_IOR" type="factory"
+	location="OAFIID:Bonobo_Moniker_std_Factory">
+	<oaf_attribute name="repo_ids" type="stringv">
+		<item value="IDL:Bonobo/Moniker:1.0"/>
+		<item value="IDL:Bonobo/Unknown:1.0"/>
+	</oaf_attribute>
+	<oaf_attribute name="name" type="string" _value="ORB IOR handling moniker"/>
+	<oaf_attribute name="bonobo:moniker" type="stringv">
+		<item value="IOR"/>
+	</oaf_attribute>
+</oaf_server>
+
 <oaf_server iid="OAFIID:Bonobo_Moniker_Cache" type="factory"
 	location="OAFIID:Bonobo_Moniker_std_Factory">
 	<oaf_attribute name="repo_ids" type="stringv">

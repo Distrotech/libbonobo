@@ -1,5 +1,16 @@
 2001-08-14  Michael Meeks  <michael@ximian.com>
 
+	* monikers/bonobo-moniker-ior.c
+	(bonobo_moniker_ior_resolve): impl - sweet.
+
+	* monikers/Makefile.am: upd.
+
+	* bonobo/bonobo-moniker-util.c
+	(bonobo_moniker_util_qi_return): comment - looks like we
+	have a redudant CORBA_Object_duplicate to me.
+
+2001-08-14  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-property-bag-client.c
 	(bonobo_pbclient_get_value): remove redundant cleanout: label
 

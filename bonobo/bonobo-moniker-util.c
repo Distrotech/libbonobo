@@ -259,6 +259,7 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
  release_unref_object:	
 	bonobo_object_release_unref (object, ev);
 
+	/* FIXME: this CORBA_Object_duplicate looks broken to me */
 	if (retval != CORBA_OBJECT_NIL)
 		return CORBA_Object_duplicate (retval, ev);
 	else

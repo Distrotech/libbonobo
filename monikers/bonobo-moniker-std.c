@@ -16,6 +16,11 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 		return BONOBO_OBJECT (bonobo_moniker_simple_new (
 			"!", bonobo_moniker_item_resolve));
 	
+	else if (!strcmp (object_id, "OAFIID:Bonobo_Moniker_IOR"))
+
+		return BONOBO_OBJECT (bonobo_moniker_simple_new (
+			"IOR:", bonobo_moniker_ior_resolve));
+
 	else if (!strcmp (object_id, "OAFIID:Bonobo_Moniker_Oaf"))
 
 		return BONOBO_OBJECT (bonobo_moniker_simple_new (
