@@ -60,10 +60,8 @@ gnome-vfs can handle).
 
   If neither "bonobo:supported_uri_schemes" nor
 "bonobo:supported_mime_types" is specified, it is assumed the
-component can handle any protocol and mime type assuming if it
-provides some data or location oriented interface, i.e. one of
-Bonobo::PersistStream, Bonobo::PersistFile,
-Bonobo::ProgressiveDataSink or Nautilus::View
+component cannot handle any data at all in a general way and should
+never be generically selected for such purposes.
 
 Nautilus - Content Views
 
@@ -161,11 +159,6 @@ Nautilus-specific open questions
 * Should the user level of a component be an attribute? That lets just
   any component author set the user level instead of centralizing it.
 
-* What queries and sorting criteria should we use? Proposal to come
-  later.
-
-* How do user preferences relate to this? I am intentially
-  sidestepping this issue for now.
 
 ==================
 
