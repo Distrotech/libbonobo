@@ -1,5 +1,10 @@
 2000-11-16  Darin Adler  <darin@eazel.com>
 
+	* bonobo/bonobo-win.c: (menu_sync_state): Need to set state of
+	menu_widget, not widget, to handle submenus properly.
+
+2000-11-16  Darin Adler  <darin@eazel.com>
+
 	Make "hidden" attribute on placeholder hide all the items inside
 	the placeholder too. Change the definition of "empty" for a
 	placeholder to include placeholders containing only hidden items.
