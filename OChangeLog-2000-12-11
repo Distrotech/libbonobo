@@ -1,3 +1,18 @@
+2000-10-19  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar-control-item.c (impl_set_orientation):
+	hide both in the display_none case.
+
+	* bonobo/bonobo-ui-toolbar.c (init): upd.
+	(bonobo_ui_toolbar_set_hv_styles): impl.
+	s/set_style/style_changed/ signal.
+	(impl_style_changed): update.
+	(bonobo_ui_toolbar_set_orientation): signal STYLE_CHANGED.
+	(bonobo_ui_toolbar_set_style): remove.
+
+	* bonobo/bonobo-win.c (parse_look): impl.
+	(update_dockitem): use it; add "hlook", "vlook"
+
 2000-10-19  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-object-client.c:
