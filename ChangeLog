@@ -1,5 +1,9 @@
 2002-02-14  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.h (bonobo_object_ref):
+	kill bogus G_STMT_START/END in the OBJECT_DEBUG
+	bits.
+
 	* bonobo/bonobo-object.c
 	(bonobo_object_unref, bonobo_object_idle_unref),
 	(bonobo_object_trace_refs, bonobo_object_ref):
