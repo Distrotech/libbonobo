@@ -1,3 +1,9 @@
+2000-08-10  Dan Winship  <danw@helixcode.com>
+
+	* bonobo/bonobo-widget.c (bonobo_widget_create_subdoc_object):
+	fail if the component turns out to not be an Embeddable, rather
+	than returning a BonoboWidget containing no component.
+
 2000-08-09  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	* bonobo.spec.in: changed the includes to include all
