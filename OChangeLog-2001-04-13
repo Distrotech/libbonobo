@@ -1,3 +1,12 @@
+2001-01-25  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-sync-menu.c (str_uscore_equal, label_same): impl.
+	(impl_bonobo_ui_sync_menu_state): use it to avoid re-creating
+	the menu widget.
+
+	* bonobo/bonobo-ui-sync.c (bonobo_ui_sync_can_handle): remove
+	gtk type check, we do too many of these for a type check.
+
 2001-01-24  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-listener.c (bonobo_listener_destroy): rename to
