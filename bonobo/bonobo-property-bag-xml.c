@@ -104,7 +104,7 @@ bonobo_property_bag_xml_string_to_value (BonoboPropertyBagXMLPersister *persiste
 
 static gboolean
 bonobo_property_bag_xml_stream_buffer (xmlChar *docbuff, size_t docsz,
-				      const Bonobo_Stream stream)
+				       const Bonobo_Stream stream)
 {
 	CORBA_Environment  ev;
 	size_t		   pos;
@@ -224,7 +224,7 @@ bonobo_property_bag_xml_persist (BonoboPropertyBag *pb, const Bonobo_Stream stre
 
 static gboolean
 bonobo_property_bag_xml_unstream_buffer (const Bonobo_Stream stream,
-					xmlChar **docbuff, size_t *docsize)
+					 xmlChar **docbuff, size_t *docsize)
 {
 	CORBA_Environment  ev;
 	char		  *szstr;
