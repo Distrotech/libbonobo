@@ -50,7 +50,7 @@ serverinfo_DATA = $(server_in_file:.server.in=.server)
 @INTLTOOL_SERVER_RULE@
 
 EXTRA_DIST=activation-context-query-lexer.l activation-context-query-parser.y \
-	$(server_in_file) $(serverinfo_DATA)	\
+	$(server_in_file).in $(serverinfo_DATA)	\
 	$(man_MANS)
 
 YFLAGS = -d -v
