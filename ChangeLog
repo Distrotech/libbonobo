@@ -1,5 +1,8 @@
 2001-10-27  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.c (bonobo_object_corba_deactivate): 
+	remove stale code.
+
 	* bonobo/bonobo-main.c (bonobo_shutdown): unref the
 	ORB after the destroy.
 	(bonobo_shutdown): release bonobo-activation's context,

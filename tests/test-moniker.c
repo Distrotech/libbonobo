@@ -117,8 +117,5 @@ main (int argc, char *argv [])
 
 	test_real_monikers ();
 
-	while (g_main_pending ())
-		g_main_iteration (TRUE);
-
 	return bonobo_shutdown ();
 }

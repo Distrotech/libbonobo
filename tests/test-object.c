@@ -30,7 +30,6 @@ main (int argc, char *argv [])
 
 	if (bonobo_init (&argc, argv) == FALSE)
 		g_error ("Can not bonobo_init");
-#if 0
 	bonobo_activate ();
 
 	ev = &real_ev;
@@ -94,7 +93,6 @@ main (int argc, char *argv [])
 	g_assert (!strcmp (BONOBO_EX_REPOID (ev), ex_Bonobo_GeneralError));
 	g_assert (!strcmp (bonobo_exception_get_text (ev),
 			   "an exceptional exception occured"));
-#endif
 	fprintf (stderr, "All tests passed\n");
 
 	return bonobo_shutdown ();

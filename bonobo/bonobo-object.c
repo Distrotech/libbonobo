@@ -137,18 +137,6 @@ bonobo_object_corba_deactivate (BonoboObject *object)
 	oid = PortableServer_POA_servant_to_id (
 		bonobo_poa(), &object->servant, &ev);
 	PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
-
-#if 0
-	{ /* Used to do this, probably not correct in fact */
-		BonoboObjectClass       *klass;
-		klass = (BonoboObjectClass *) G_OBJECT_GET_CLASS (object);
-		
-		if (klass->poa_fini_fn)
-			klass->poa_fini_fn (&object->servant, &ev);
-		else /* Actually quicker and nicer */
-			PortableServer_ServantBase__fini (&object->servant, &ev);
-	}
-#endif
 	
 	CORBA_free (oid);
 	CORBA_exception_free (&ev);
