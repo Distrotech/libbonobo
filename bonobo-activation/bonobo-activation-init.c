@@ -123,59 +123,12 @@ bonobo_activation_orb_get (void)
 const char *
 bonobo_activation_hostname_get (void)
 {
-	static char *hostname = NULL;
-	char hn_tmp[65];
+	static char hostname[256] = "";
 
-	if (!hostname) {
-		if (!gethostname (hn_tmp, sizeof (hn_tmp) - 1))
-                        hostname = g_strdup (hn_tmp);
-                else
-                        hostname = g_strdup ("localhost");
-                /*
-                 * This was some part of the distributed component foo
-                 * but ends up chewing huge chunks of time on machines
-                 * with badly configured DNS.
-                 *
-                {
-#if defined(HAVE_GETADDRINFO)
-                        struct addrinfo hints, *result = NULL;
-                        int status;
-#else
-                        char ha_tmp[4];
-                        struct hostent *hent;
-#endif
-
-#if defined(HAVE_GETADDRINFO)
-                        memset (&hints, 0, sizeof (hints));
-                        hints.ai_socktype = SOCK_STREAM;
-                        hints.ai_flags = AI_CANONNAME;
-                        
-                        status = getaddrinfo (hn_tmp, NULL, &hints, &result);
-                        if (status == 0)
-                                hostname = g_strdup (result->ai_canonname);
-                        else
-                                hostname = g_strdup (hn_tmp);
-                        
-                        freeaddrinfo (result);
-#else
-                        hent = gethostbyname (hn_tmp);
-                        if (hent) {
-                                memcpy (ha_tmp, hent->h_addr, 4);
-                                hent = gethostbyaddr (ha_tmp, 4, AF_INET);
-                                if (hent)
-                                        hostname = g_strdup (hent->h_name);
-                                else
-                                        hostname =
-                                                g_strdup (inet_ntoa
-                                                          (*
-                                                           ((struct in_addr *)
-                                                            ha_tmp)));
-                        } else
-                                hostname = g_strdup (hn_tmp);
-#endif
-                }
-                */
-	}
+	if (hostname[0] == '\0') {
+		if (gethostname (hostname, sizeof (hostname) - 1))
+                        strcpy (hostname, "localhost");
+        }
 
 	return hostname;
 }

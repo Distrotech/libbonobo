@@ -358,7 +358,7 @@ bonobo_activation_server_by_forking (
                         if (use_new_loop)
                                 context = g_main_context_new ();
                         else
-                                context = g_main_loop_get_context (NULL);
+                                context = g_main_context_default ();
                         g_source_attach (source, context);
 
                         while (!ai.done)

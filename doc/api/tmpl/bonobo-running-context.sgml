@@ -106,3 +106,10 @@ the running context class
 @object: 
 
 
+<!-- ##### SIGNAL BonoboRunningContext::last-unref ##### -->
+<para>
+
+</para>
+
+@bonoborunningcontext: the object which received the signal.
+
