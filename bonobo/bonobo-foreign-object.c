@@ -2,22 +2,16 @@
 #include <bonobo/bonobo-foreign-object.h>
 #include <bonobo/bonobo-exception.h>
 
-
-
 static void
 bonobo_foreign_object_class_init (BonoboForeignObjectClass *klass)
 {
-
 }
-
 
 static void
 bonobo_foreign_object_instance_init (GObject    *g_object,
 				     GTypeClass *klass)
 {
-
 }
-
 
 GType
 bonobo_foreign_object_get_type (void)
@@ -45,10 +39,13 @@ bonobo_foreign_object_get_type (void)
 }
 
 
-BonoboObject* bonobo_foreign_object_new (CORBA_Object corba_objref)
+BonoboObject *
+bonobo_foreign_object_new (CORBA_Object corba_objref)
 {
 	BonoboObject *object;
+#if 0
 	CORBA_Environment ev;
+#endif
 
 	g_return_val_if_fail (corba_objref != CORBA_OBJECT_NIL, NULL);
 

@@ -1,5 +1,17 @@
 2003-04-17  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.c (bonobo_object_get_property) 
+	(bonobo_object_set_property): impl.
+	(bonobo_object_instance_init): chop out do_corba_setup
+	bits and move them into
+	(bonobo_object_constructor): here, where we are sure that
+	we have the poa property in hand.
+	(bonobo_object_get_poa): impl.
+	(bonobo_object_corba_deactivate, do_corba_setup): use it.
+	(bonobo_object_finalize_internal): fix deactivation issue.
+
+2003-04-17  Michael Meeks  <michael@ximian.com>
+
 	* doc/activation-api/server-xml-reference.sgml:
 	update docs.
 

@@ -27,10 +27,18 @@
 #include <bonobo/bonobo-shutdown.h>
 #include <bonobo/bonobo-debug.h>
 
+/* We need decent ORB cnx. flushing on shutdown to make this work */
+#undef ASYNC_UNREFS
+
 /* Some simple tracking - always on */
 static GMutex *bonobo_total_aggregates_lock = NULL;
 static glong   bonobo_total_aggregates      = 0;
 static glong   bonobo_total_aggregate_refs  = 0;
+
+enum {
+  PROP_0,
+  PROP_POA
+};
 
 /* you may debug by setting BONOBO_DEBUG_FLAGS environment variable to
    a colon separated list of a subset of {refs,aggregate,lifecycle} */
@@ -54,6 +62,7 @@ typedef struct {
 
 struct _BonoboObjectPrivate {
 	BonoboAggregateObject *ao;
+	PortableServer_POA     poa;
 };
 
 enum {
@@ -98,6 +107,7 @@ bonobo_object_corba_deactivate (BonoboObject *object)
 {
 	CORBA_Environment        ev;
 	PortableServer_ObjectId *oid;
+	PortableServer_POA       poa;
 
 #ifdef G_ENABLE_DEBUG
 	if(_bonobo_debug_flags & BONOBO_DEBUG_LIFECYCLE)
@@ -115,9 +125,9 @@ bonobo_object_corba_deactivate (BonoboObject *object)
 		object->corba_objref = CORBA_OBJECT_NIL;
 	}
 
-	oid = PortableServer_POA_servant_to_id (
-		bonobo_poa(), &object->servant, &ev);
-	PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
+	poa = bonobo_object_get_poa (object);
+	oid = PortableServer_POA_servant_to_id (poa, &object->servant, &ev);
+	PortableServer_POA_deactivate_object (poa, oid, &ev);
 	
 	CORBA_free (oid);
 	CORBA_exception_free (&ev);
@@ -470,6 +480,7 @@ bonobo_object_dup_ref (Bonobo_Unknown     object,
 	return ans;
 }
 
+#ifdef ASYNC_UNREFS
 static ORBit_IMethod *
 get_unknown_unref_imethod (void)
 {
@@ -491,6 +502,7 @@ get_unknown_unref_imethod (void)
 
 	return imethod;
 }
+#endif
 
 /**
  * bonobo_object_release_unref:
@@ -518,13 +530,14 @@ bonobo_object_release_unref (Bonobo_Unknown     object,
 		ev = opt_ev;
 
 	Bonobo_Unknown_unref (object, ev);
-/*	Asynchronous unrefs need ORB 'shutdown' work.
+#ifdef ASYNC_UNREFS
 	if (ORBit_small_get_servant (object))
 		Bonobo_Unknown_unref (object, ev);
 	else
 		ORBit_small_invoke_async
 			(object, get_unknown_unref_imethod (),
 			NULL, NULL, NULL, NULL, ev);*/
+#endif
 	
 	CORBA_Object_release (object, ev);
 
@@ -659,6 +672,132 @@ bonobo_object_dummy_destroy (BonoboObject *object)
 	/* Just to make chaining possibly cleaner */
 }
 
+static void
+bonobo_object_set_property (GObject         *g_object,
+			    guint            prop_id,
+			    const GValue    *value,
+			    GParamSpec      *pspec)
+{
+	BonoboObject *object = (BonoboObject *) g_object;
+
+	switch (prop_id) {
+	case PROP_POA:
+		object->priv->poa = g_value_get_pointer (value);
+		break;
+	default:
+		break;
+	}
+}
+
+static void
+bonobo_object_get_property (GObject         *g_object,
+			    guint            prop_id,
+			    GValue          *value,
+			    GParamSpec      *pspec)
+{
+	BonoboObject *object = (BonoboObject *) g_object;
+
+	switch (prop_id) {
+	case PROP_POA:
+		g_value_set_pointer (value, object->priv->poa);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		break;
+	}
+}
+
+static void
+do_corba_setup (BonoboObject *object)
+{
+	CORBA_Object obj;
+	CORBA_Environment ev;
+	BonoboObjectClass *xklass;
+	BonoboObjectClass *klass = BONOBO_OBJECT_GET_CLASS (object);
+
+	CORBA_exception_init (&ev);
+
+	/* Setup the servant structure */
+	object->servant._private = NULL;
+	object->servant.vepv     = klass->vepv;
+
+	/* Initialize the servant structure with our POA__init fn */
+	{
+		for (xklass = klass; xklass && !xklass->poa_init_fn;)
+			xklass = g_type_class_peek_parent (xklass);
+		if (!xklass || !xklass->epv_struct_offset) {
+			/*   Also, people using BONOBO_TYPE_FUNC instead of
+			 * BONOBO_TYPE_FUNC_FULL might see this; you need
+			 * to tell it about the CORBA interface you're
+			 * implementing - of course */
+			g_warning ("It looks like you used g_type_unique "
+				   "instead of b_type_unique on type '%s'",
+				   G_OBJECT_CLASS_NAME (klass));
+			return;
+		}
+		xklass->poa_init_fn ((PortableServer_Servant) &object->servant, &ev);
+		if (BONOBO_EX (&ev)) {
+			g_warning ("Exception initializing servant '%s'",
+				   bonobo_exception_get_text (&ev));
+			return;
+		}
+	}
+
+	/*  Instantiate a CORBA_Object reference for the servant
+	 * assumes the bonobo POA supports implicit activation */
+	obj = PortableServer_POA_servant_to_reference (
+		bonobo_object_get_poa (object), &object->servant, &ev);
+
+	if (BONOBO_EX (&ev)) {
+		g_warning ("Exception '%s' getting reference for servant",
+			   bonobo_exception_get_text (&ev));
+		return;
+	}
+
+	object->corba_objref = obj;
+	bonobo_running_context_add_object (obj);
+
+	CORBA_exception_free (&ev);
+}
+
+static GObject *
+bonobo_object_constructor (GType                  type,
+			   guint                  n_construct_properties,
+			   GObjectConstructParam *construct_properties)
+{
+	GObject *g_object;
+	BonoboObject *object;
+
+	g_object = bonobo_object_parent_class->constructor
+		(type, n_construct_properties, construct_properties);
+	if (g_object) {
+		object = (BonoboObject *) g_object;
+
+		/* Though this make look strange, destruction of this object
+		   can only occur when the servant is deactivated by the poa.
+		   The poa maintains its own ref count over method invocations
+		   and delays finalization which happens only after:
+		   bonobo_object_finalize_servant: is invoked */
+		g_object_ref (g_object);
+
+#ifdef G_ENABLE_DEBUG
+		if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+			BonoboAggregateObject *ao = object->priv->ao;
+
+			bonobo_debug_print ("create", "[%p]:[%p]:%s to %d on poa %p", object, ao,
+					    g_type_name (type), ao->ref_count, object->priv->poa);
+
+			g_assert (g_hash_table_lookup (living_ao_ht, ao) == NULL);
+			g_hash_table_insert (living_ao_ht, ao, ao);
+		}
+#endif /* G_ENABLE_DEBUG */
+		if (!g_type_is_a (type, BONOBO_TYPE_FOREIGN_OBJECT))
+			do_corba_setup (object);
+	}
+	
+	return g_object;
+}
+
 /* VOID:CORBA_OBJECT,BOXED */
 static void
 bonobo_marshal_VOID__CORBA_BOXED (GClosure     *closure,
@@ -705,6 +844,12 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 
 	bonobo_object_parent_class = g_type_class_peek_parent (klass);
 
+	object_class->set_property = bonobo_object_set_property;
+	object_class->get_property = bonobo_object_get_property;
+	object_class->constructor  = bonobo_object_constructor;
+	object_class->finalize     = bonobo_object_finalize_gobject;
+	klass->destroy = bonobo_object_dummy_destroy;
+
 	bonobo_object_signals [DESTROY] =
 		g_signal_new ("destroy",
 			      G_TYPE_FROM_CLASS (object_class),
@@ -724,63 +869,11 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 			      BONOBO_TYPE_STATIC_CORBA_OBJECT,
 			      BONOBO_TYPE_STATIC_CORBA_EXCEPTION);
 
-	klass->destroy = bonobo_object_dummy_destroy;
-
-	object_class->finalize = bonobo_object_finalize_gobject;
-}
-
-
-static void
-do_corba_setup (BonoboObject      *object,
-		BonoboObjectClass *klass)
-{
-	CORBA_Object obj;
-	CORBA_Environment ev;
-	BonoboObjectClass *xklass;
-
-	CORBA_exception_init (&ev);
-
-	/* Setup the servant structure */
-	object->servant._private = NULL;
-	object->servant.vepv     = klass->vepv;
-
-	/* Initialize the servant structure with our POA__init fn */
-	{
-		for (xklass = klass; xklass && !xklass->poa_init_fn;)
-			xklass = g_type_class_peek_parent (xklass);
-		if (!xklass || !xklass->epv_struct_offset) {
-			/*   Also, people using BONOBO_TYPE_FUNC instead of
-			 * BONOBO_TYPE_FUNC_FULL might see this; you need
-			 * to tell it about the CORBA interface you're
-			 * implementing - of course */
-			g_warning ("It looks like you used g_type_unique "
-				   "instead of b_type_unique on type '%s'",
-				   G_OBJECT_CLASS_NAME (klass));
-			return;
-		}
-		xklass->poa_init_fn ((PortableServer_Servant) &object->servant, &ev);
-		if (BONOBO_EX (&ev)) {
-			g_warning ("Exception initializing servant '%s'",
-				   bonobo_exception_get_text (&ev));
-			return;
-		}
-	}
-
-	/*  Instantiate a CORBA_Object reference for the servant
-	 * assumes the bonobo POA supports implicit activation */
-	obj = PortableServer_POA_servant_to_reference (
-		bonobo_poa (), &object->servant, &ev);
-
-	if (BONOBO_EX (&ev)) {
-		g_warning ("Exception '%s' getting reference for servant",
-			   bonobo_exception_get_text (&ev));
-		return;
-	}
-
-	object->corba_objref = obj;
-	bonobo_running_context_add_object (obj);
-
-	CORBA_exception_free (&ev);
+	g_object_class_install_property
+		(object_class, PROP_POA,
+		 g_param_spec_pointer
+			("poa", _("POA"), _("Custom CORBA POA"),
+			 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
 static void
@@ -813,30 +906,11 @@ bonobo_object_instance_init (GObject    *g_object,
 	/* Setup Private fields */
 	object->priv = g_new (BonoboObjectPrivate, 1);
 	object->priv->ao = ao;
+	object->priv->poa = NULL;
 
 	/* Setup signatures */
 	object->object_signature  = BONOBO_OBJECT_SIGNATURE;
 	object->servant_signature = BONOBO_SERVANT_SIGNATURE;
-
-	/* Though this make look strange, destruction of this object
-	   can only occur when the servant is deactivated by the poa.
-	   The poa maintains its own ref count over method invocations
-	   and delays finalization which happens only after:
-	   bonobo_object_finalize_servant: is invoked */
-	g_object_ref (g_object);
-
-#ifdef G_ENABLE_DEBUG
-	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
-		bonobo_debug_print ("create", "[%p]:[%p]:%s to %d", object, ao,
-				    g_type_name (G_TYPE_FROM_CLASS (klass)),
-				    ao->ref_count);
-
-		g_assert (g_hash_table_lookup (living_ao_ht, ao) == NULL);
-		g_hash_table_insert (living_ao_ht, ao, ao);
-	}
-#endif /* G_ENABLE_DEBUG */
-	if (!g_type_is_a (G_TYPE_FROM_CLASS(klass), BONOBO_TYPE_FOREIGN_OBJECT))
-		do_corba_setup (object, BONOBO_OBJECT_CLASS (klass));
 }
 
 /**
@@ -1505,3 +1579,22 @@ bonobo_object_query_remote (Bonobo_Unknown     unknown,
 	return new_if;
 }
 
+/**
+ * bonobo_object_get_poa:
+ * @object: the object associated with an interface
+ * 
+ * Gets the POA associated with this part of the
+ * BonoboObject aggregate it is possible to have
+ * different POAs per interface.
+ * 
+ * Return value: the poa, never NIL.
+ **/
+PortableServer_POA
+bonobo_object_get_poa (BonoboObject *object)
+{
+	g_return_val_if_fail (object != CORBA_OBJECT_NIL, bonobo_poa ());
+	if (object->priv->poa)
+		return object->priv->poa;
+	else
+		return bonobo_poa ();
+}

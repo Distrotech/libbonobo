@@ -154,6 +154,8 @@ BonoboObject *bonobo_object (gpointer p);
 #define       bonobo_object_get_servant(o)  ((PortableServer_Servant)((guchar *)(o) + BONOBO_OBJECT_HEADER_SIZE))
 
 
+PortableServer_POA bonobo_object_get_poa (BonoboObject *object);
+
 /* Use G_STRUCT_OFFSET to calc. epv_struct_offset */
 GType          bonobo_type_unique (GType             parent_type,
 				   BonoboObjectPOAFn init_fn,
