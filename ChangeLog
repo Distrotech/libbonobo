@@ -1,3 +1,7 @@
+2003-06-16  Taneem Ahmed  <taneem@eyetap.org>
+
+	* configure.in: Added "bn" to ALL_LINGUAS.
+
 2003-06-12  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
 	* bonobo/bonobo-main.c: (bonobo_poa_new_from):
