@@ -9,7 +9,8 @@ oafd_SOURCES=			\
 	ac-query-expr.h		\
 	main.c			\
 	ac-query-expr.c		\
-	oaf-skels.c		
+	oaf-skels.c		\
+	oafd.h
 
 oafd_LDADD=../liboaf/liboaf.la @ORBIT_LIBS@
 
