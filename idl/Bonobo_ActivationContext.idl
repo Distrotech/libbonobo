@@ -197,7 +197,7 @@ module OAF {
         };
 };
 
-#if !defined(OAF_COMPILATION && defined(__ORBIT_IDL__)
+#if !defined(OAF_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif
 
