@@ -171,6 +171,20 @@ oaf_domain_get (void)
 }
 
 CORBA_Object
+oaf_internal_activation_context_get_extended (gboolean           existing_only,
+                                               CORBA_Environment *ev)
+{
+	OAFBaseService base_service = {};
+
+	base_service.name = "IDL:OAF/ActivationContext:1.0";
+	base_service.session_name = oaf_session_name_get ();
+	base_service.domain = "session";
+
+	return oaf_internal_service_get_extended (&base_service, existing_only,
+                                                   ev);
+}
+
+CORBA_Object
 oaf_activation_context_get (void)
 {
 	OAFBaseService base_service = {};

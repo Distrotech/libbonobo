@@ -44,10 +44,12 @@
 
 /* Whacked from gnome-libs/libgnorba/orbitns.c */
 
+#define IORBUFSIZE 2048
+
 typedef struct
 {
 	GMainLoop *mloop;
-	char iorbuf[2048];
+	char iorbuf[IORBUFSIZE];
 #ifdef OAF_DEBUG
 	char *do_srv_output;
 #endif
@@ -62,10 +64,25 @@ handle_exepipe (GIOChannel * source,
 {
 	gboolean retval = TRUE;
 
-	*data->iorbuf = '\0';
-	if (!(condition & G_IO_IN)
-	    || !fgets (data->iorbuf, sizeof (data->iorbuf), data->fh))
-		retval = FALSE;
+        /* The expected thing is to get this callback maybe twice,
+         * once with G_IO_IN and once G_IO_HUP, of course we need to handle
+         * other cases.
+         */
+        
+        if (data->iorbuf[0] == '\0' &&
+            (condition & G_IO_IN)) {
+                if (!fgets (data->iorbuf, sizeof (data->iorbuf), data->fh)) {
+                        g_snprintf (data->iorbuf, IORBUFSIZE,
+                                    _("Failed to read from child process: %s\n"),
+                                    strerror (errno));
+
+                        retval = FALSE;
+                } else {
+                        retval = TRUE;
+                }
+        } else {                
+                retval = FALSE;
+        }
 
 	if (retval && !strncmp (data->iorbuf, "IOR:", 4))
 		retval = FALSE;
@@ -168,7 +185,8 @@ oaf_server_by_forking (const char **cmd,
 				g_snprintf (cbuf, sizeof (cbuf),
 					    _("Unknown non-exit error (status is %u)"),
 					    status);
-			errval->description = CORBA_string_dup (cbuf);
+                        errval->description = CORBA_string_dup (cbuf);
+
 			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 					     ex_OAF_GeneralError, errval);
 			return CORBA_OBJECT_NIL;
@@ -215,7 +233,12 @@ oaf_server_by_forking (const char **cmd,
 #endif
 
 			errval = OAF_GeneralError__alloc ();
-			errval->description = CORBA_string_dup (ai.iorbuf);
+
+                        if (*ai.iorbuf == '\0')
+                                errval->description =
+                                        CORBA_string_dup (_("Child process did not give an error message, unknown failure occurred"));
+                        else
+                                errval->description = CORBA_string_dup (ai.iorbuf);
 			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 					     ex_OAF_GeneralError, errval);
 			retval = CORBA_OBJECT_NIL;
@@ -243,8 +266,9 @@ oaf_server_by_forking (const char **cmd,
 		execvp (cmd[0], (char **) cmd);
 		if (iopipes[1] != 1)
 			dup2 (iopipes[1], 1);
-		g_print (_("Exec failed: %d (%s)\n"), errno,
-			 g_strerror (errno));
+		g_print (_("Failed to execute %s: %d (%s)\n"),
+                         cmd[0],
+                         errno, g_strerror (errno));
 		_exit (1);
 	}
 

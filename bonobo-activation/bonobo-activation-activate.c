@@ -277,8 +277,11 @@ oaf_activate_from_id (const OAF_ActivationID aid,
 	OAFActivationInfo *ai;
 
 	g_return_val_if_fail (aid, CORBA_OBJECT_NIL);
-	ac = oaf_activation_context_get ();
-	g_return_val_if_fail (ac, CORBA_OBJECT_NIL);
+
+        ac = oaf_internal_activation_context_get_extended ((flags & OAF_FLAG_EXISTING_ONLY) != 0, ev);
+
+        if (ac == CORBA_OBJECT_NIL)
+                return CORBA_OBJECT_NIL;
 
 	ai = oaf_actid_parse (aid);
 
