@@ -8,14 +8,17 @@
 #ifndef _BONOBO_IDL_INCLUDED_
 #define _BONOBO_IDL_INCLUDED_
 
+#if defined(__ORBIT_IDL__)
+%{
+#pragma include_defs "libgnorba/gnome-factory.h"
+%}
+
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 %{
-#pragma include_defs bonobo/Bonobo.h
+#pragma include_defs "bonobo/Bonobo.h"
 %}
 #pragma inhibit push
 #endif
-
-#include <gnome-factory.idl>
 
 #include <bonobo-factory.idl>
 #include <bonobo-unknown.idl>
