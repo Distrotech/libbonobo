@@ -1,5 +1,18 @@
 2000-09-30    <michael@helixcode.com>
 
+	* doc/ui-xml.txt: Add description of the XML for the UI descriptions
+	
+	* bonobo/bonobo-win.c (get_dock_item): impl helper.
+	(update_dockitem): use it.
+	(remove_fn): remove empty dock items; special case.
+
+	* bonobo/bonobo-ui-toolbar.c (impl_forall): Do the popup item as well;
+	fixes nasty redraw bug with popup item and evil sizing problem.
+	(bonobo_ui_toolbar_clean): impl. so we can purge the toolbar of all
+	but the popup_item.
+
+	* bonobo/bonobo-win.c (update_dockitem): add a queue_resize.
+
 	* bonobo/bonobo-ui-toolbar.c (hide_not_fitting_items): make more
 	successful for large widgets.
 
