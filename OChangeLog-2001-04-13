@@ -1,3 +1,13 @@
+2001-01-19  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-engine.c (make_updates_for_command): build
+	a full list.
+	(update_cmd_state): rename to
+	(execute_state_updates): this.
+	(set_cmd_attr): upd call.
+	(update_commands_state): build complete list of updates before
+	executing them.
+
 2001-01-18  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-engine.c (remove_fn): remove all children
