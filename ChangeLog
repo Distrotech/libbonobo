@@ -1,3 +1,17 @@
+2003-07-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/test-activation/Makefile.am (TESTS_ENVIRONMENT): Define
+	BONOBO_ACTIVATION_PATH here instead, dependent on $(srcdir).
+
+	* tests/test-activation/test.sh (BONOBO_ACTIVATION_PATH): Don't
+	define here.
+
+	* tests/test-activation/Makefile.am: s/noinst_PROGRAMS/check_PROGRAMS/
+
+	* tests/Makefile.am: s/noinst_SCRIPTS/check_SCRIPTS/;
+	s/noinst_PROGRAMS/check_PROGRAMS/; Add check_SCRIPTS to
+	EXTRA_DIST.
+
 2003-07-17  Michael Meeks  <michael@ximian.com>
 
 	* bonobo-activation/bonobo-activation-fork-server.c

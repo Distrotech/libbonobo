@@ -1,6 +1,6 @@
 SUBDIRS = test-activation
 
-noinst_PROGRAMS =		\
+check_PROGRAMS =		\
 	test-thread		\
 	test-moniker		\
 	test-properties-server	\
@@ -47,4 +47,5 @@ TESTS_ENVIRONMENT =					\
 TESTS = test-moniker test-event-source test-object \
 	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem \
 	test-generic-factory.sh
-noinst_SCRIPTS = test-properties.sh test-generic-factory.sh
+check_SCRIPTS = test-properties.sh test-generic-factory.sh
+EXTRA_DIST=$(check_SCRIPTS)

@@ -1,4 +1,4 @@
-noinst_PROGRAMS=			\
+check_PROGRAMS=			\
 	bonobo-activation-test		\
 	bonobo-activation-test-async	\
 	bonobo-activation-empty-server
@@ -90,3 +90,6 @@ TESTS= test.sh
 
 dist-hook:
 	cd $(distdir); rm -f $(CLEANFILES)
+
+TESTS_ENVIRONMENT = \
+	BONOBO_ACTIVATION_PATH="$(srcdir):$$BONOBO_ACTIVATION_PATH"
