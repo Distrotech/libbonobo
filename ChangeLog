@@ -1,0 +1,8 @@
+2001-04-13  Martin Baulig  <baulig@suse.de>
+
+	* AUTHORS, DEPENDS, HACKING, MAINTAINERS, NEWS, COPYING.LIB,
+	README, TODO, TRANSLATABLE_FILES, USERS, OChangeLog-2000-12-11:
+	Copied here from bonobo.
+
+	* OChangeLog-2001-04-13: Copied here from bonobo/ChangeLog.
+
