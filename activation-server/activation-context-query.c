@@ -498,6 +498,7 @@ qexp_func_has_one(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 {
   QueryExprConst retval, v1, v2;
   int i, j;
+  gboolean found;
   char **check_one, **check_two;
 
   v1 = qexp_evaluate(si, e->u.function_value.arguments->data, qctx);
@@ -518,21 +519,22 @@ qexp_func_has_one(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
     }
   else
     {
+      found = FALSE;
 
       check_one = v1.u.v_stringv;
       check_two = v2.u.v_stringv;
 
-      for (i = j = 0; check_one[i] && !check_two[j]; i++)
-	{
-	  for (j = 0; check_two[j]; j++)
-	    {
-	      if (!strcmp(check_one[i], check_two[j]))
-		break;
-	    }
+      for (i = j = 0; check_one[i]; i++) {
+	for (j = 0; check_two[j]; j++) {
+	  if (!strcmp(check_one[i], check_two[j])) {
+	    found = TRUE;
+	    break;
+	  }
 	}
-
+      }
+      
       retval.type = CONST_BOOLEAN;
-      retval.u.v_boolean = check_two[j]?TRUE:FALSE;
+      retval.u.v_boolean = found;
     }
 
   retval.needs_free = FALSE;
