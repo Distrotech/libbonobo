@@ -1097,36 +1097,17 @@ lookup_naming_context (GList *path,
 static CosNaming_Name *
 url_to_name (char *url, char *opt_kind)
 {
-#ifdef ENABLE_ORBIT2
-#warning LName code totaly broken in ORBit2
-	return NULL;
-#else
-	LName ln;
-	LNameComponent lnc;
 	CosNaming_Name *retval;
-	CORBA_Environment ev;
 
 	g_return_val_if_fail (url != NULL, NULL);
 
-	CORBA_exception_init (&ev);
-
-	lnc = create_lname_component ();
-	LNameComponent_set_id (lnc, url, &ev);
-	
-	if (opt_kind)
-		LNameComponent_set_kind (lnc, opt_kind, &ev);
-
-	ln = create_lname ();
-	LName_insert_component (ln, 1, lnc, &ev);
-
-	retval = LName_to_idl_form (ln, &ev);
-
-	LName_destroy (ln, &ev);
-
-	CORBA_exception_free (&ev);
+	retval = CosNaming_Name__alloc ();
+	retval->_length = retval->_maximum = 1;
+	retval->_buffer = CORBA_sequence_CosNaming_NameComponent_allocbuf (1);
+	retval->_buffer[0].id = CORBA_string_dup (url);
+	retval->_buffer[0].kind = CORBA_string_dup (opt_kind ? opt_kind : "");
 
 	return retval;
-#endif
 }
 
 static CosNaming_NamingContext

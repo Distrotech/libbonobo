@@ -1,3 +1,8 @@
+2001-07-23  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-moniker-util.c (url_to_name): Implemented
+	this for ORBit2.
+
 2001-07-09  Lutz Müller  <urc8@rz.uni-karlsruhe.de>
 
         * bonobo/bonobo-stream-memory.[c,h]: Make mem_[get,set]_info
