@@ -1,8 +1,6 @@
 2001-08-18  Darin Adler  <darin@bentspoon.com>
 
-	reviewed by: <delete if not using a buddy>
-
-	* Makefile.am:
+	* Makefile.am: Remove extra -I directives.
 
 2001-08-14  Michael Meeks  <michael@ximian.com>
 
