@@ -7,9 +7,9 @@
 #ifndef __GNOME_FACTORY_IDL__
 #define __GNOME_FACTORY_IDL__
 
-#if !defined(GNOME_FACTORY_COMPILATION) && defined(__ORBIT_IDL__)
+#if defined(GNOME_FACTORY_COMPILATION) && defined(__ORBIT_IDL__)
 %{
-#pragma include_defs "liboaf/oaf-factory.h"
+#define ORBIT_DEF_CORBA_sequence_CORBA_string 1
 %}
 #pragma inhibit push
 #endif
