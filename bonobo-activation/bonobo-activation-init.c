@@ -112,7 +112,9 @@ oaf_context_get(void)
 const char *
 oaf_session_name_get(void)
 {
-  return "local";
+  const char *dumbptr = "local";
+
+  return dumbptr;
 }
 
 const char *

@@ -761,6 +761,7 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
   servant->refs++;
 
   items = oaf_alloca(servant->total_servers * sizeof(OAF_ServerInfo *));
+  item_count = servant->total_servers;
 
   ac_query_run(servant, requirements, selection_order, ctx, items, ev);
 
@@ -805,6 +806,8 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
   OAF_ServerInfo *si;
   char *hostname;
 
+  ac_update_lists(servant, ev);
+
   servant->refs++;
 
   retval = OAF_ActivationResult__alloc();
@@ -821,10 +824,13 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
 
       curchild = cur->data;
 
-      if(!strcmp(ainfo->user, curchild->username)
-	 && !strcmp(ainfo->host, curchild->hostname)
-	 && !strcmp(ainfo->domain, curchild->domain))
-	child = curchild;
+      if(ainfo->user && (!curchild->username || strcmp(ainfo->user, curchild->username)))
+	continue;
+      if(ainfo->host && (!curchild->hostname || strcmp(ainfo->host, curchild->hostname)))
+	continue;
+      if(ainfo->domain && (!curchild->domain || strcmp(ainfo->domain, curchild->domain)))
+	continue;
+      child = curchild;
     }
 
   if(!child)

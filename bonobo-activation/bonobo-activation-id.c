@@ -33,7 +33,7 @@ oaf_actid_parse(const OAF_ActivationID actid)
 
   retval = oaf_actinfo_new();
 
-  splitme = oaf_alloca(strlen(ctmp));
+  splitme = oaf_alloca(strlen(ctmp) + 1);
   strcpy(splitme, ctmp);
 
   parts[0] = &(retval->iid);
@@ -45,11 +45,13 @@ oaf_actid_parse(const OAF_ActivationID actid)
 
     switch(*ctmp) {
     case '[':
+      if(bracket_count <= 0)
+	ctmp2 = ctmp + 1;
       bracket_count++;
       break;
     case ']':
       bracket_count--;
-      if(bracket_count < 0) {
+      if(bracket_count <= 0) {
 	*ctmp = '\0';
 	if(*ctmp2)
 	  *parts[partnum++] = g_strdup(ctmp2);
