@@ -1,3 +1,8 @@
+2000-02-02  Michael Meeks  <mmeeks@gnu.org>
+	
+	* components/text-plain/bonobo-text-plain.c (view_factory): fix
+	view_activate.
+
 2000-01-30  Martijn van Beers  <martijn@earthling.net>
 
 	Re-commit my 2000-01-25 patch:
