@@ -71,14 +71,6 @@ GtkType       bonobo_arg_type_to_gtk   (BonoboArgType id);
 gboolean      bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b,
 					CORBA_Environment *opt_ev);
 
-
-void          bonobo_any_get_as_blob   (CORBA_any    *any,
-					guint8      **data,
-					gulong       *length);
-
-CORBA_any    *bonobo_any_get_from_blob (guint8       *data,
-					gulong        length);
-
 END_GNOME_DECLS
 
 #endif /* ! __BONOBO_ARG_H__ */

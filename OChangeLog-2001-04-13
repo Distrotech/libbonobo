@@ -1,3 +1,11 @@
+2000-11-27  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-property-bag-xml.c (bonobo_property_bag_xml_encode_any),
+	(encode_value, encode_type): impl.
+	(bonobo_property_bag_xml_decode_any): stub. & Rip all the rest out.
+
+	* bonobo/Makefile.am: Add bonobo-property-bag-xml.[ch] again.
+
 Mon Nov 27 11:05:42 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/bonobo-storage-fs.c (bonobo_storage_fs_open):

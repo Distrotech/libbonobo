@@ -6,7 +6,7 @@ following people [ subject to any pending complaints ]:
 * Bonobo/
 	[ reserved for component infastructure ]
 
-* GNOME/			:-)		A committe of 37 members
+* GNOME/			michael@helixcode.com, jirka@5z.com
 
 subdomains:
 	Achtung/		achtung		mkestner@ameritech.net
@@ -14,18 +14,20 @@ subdomains:
 	Crescendo/		creschendo	will@lashell.net
 	DB/			Gnome-db	rodrigo@linuxave.net
 	Dia/			Dia		james@daa.com.au
+	Development/		gnome-debug,	jpr@helixcode.com, dave@helixcode.com
 	EOG/			EOG		federico@helixcode.com
 	Evolution/		Evolution	ettore@helixcode.com
 	Config/			GConf		hp@redhat.com
 	GDA/			libgda		rodrigo@gnome-db.org
 	Gnumeric/		Gnumeric	jgoldberg@home.com
 	Grapevine/		grapevine	jirka@5z.com
-	GtkHtml/		GtkHtml		rodo@helixcode.com
+	GtkHTML/		GtkHTML		rodo@helixcode.com
 	Guppi/			guppi3		trow@gnu.org
 	Nautilus/		Nautilus	darin@eazel.com
 	Print/			gnome-print	chema@celorio.com
 	PonG/			pong	  	jirka@5z.com
 	SodiPodi/		sodipodi	lauris@helixcode.com
+	Spell/			gtkhtml		rodo@helixcode.com
 	Terminal/		gnome-core	jirka@5z.com, jacob@helixcode.com	
 	Vertigo/		Panel 2.0	jirka@5z.com, jacob@helixcode.com	
 	VFS/			gnome-vfs	pavel@eazel.com
