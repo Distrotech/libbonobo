@@ -120,7 +120,7 @@ module Bonobo {
 		 */
 		void copyTo (in string dest, in long bytes, 
 			      out long read, out long written)
-			raises (IOError, NoPermission);
+			raises (IOError, NoPermission, NotSupported);
 
 		/**
 		 * commit:

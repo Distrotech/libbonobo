@@ -1,3 +1,12 @@
+2000-12-28  Michael Meeks  <michael@helixcode.com>
+
+	* idl/bonobo-storage.idl: add NotSupported exception to
+	Stream::copyTo; this API is deadly broken.
+
+	* bonobo/bonobo-ui-toolbar-icon.c (paint_with_pixbuf): if
+	we hit a GDK_PARENT_RELATIVE pixmap we fall through to the
+	pants rendering method.
+
 2000-12-28  Vedat Hallac <mvhallac@crosswinds.net>
 
 	* monikers/Makefile.am (Bonobo_Moniker_std.oafinfo): fix for
