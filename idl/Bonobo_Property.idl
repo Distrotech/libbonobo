@@ -141,6 +141,11 @@ interface PropertyBag : Bonobo::Unknown {
 	 */
 	PropertyFlags   getFlags    (in string key)
 		raises (NotFound, BackendFailed);
+
+	void unImplemented1 ();
+	void unImplemented2 ();
+	void unImplemented3 ();
+	void unImplemented4 ();
 };
 
 interface ConfigDatabase : PropertyBag {
@@ -206,6 +211,11 @@ interface ConfigDatabase : PropertyBag {
 	 */
 	void            sync        ()
 		raises (BackendFailed);
+
+	void unImplemented5 ();
+	void unImplemented6 ();
+	void unImplemented7 ();
+	void unImplemented8 ();
 };
 
 };

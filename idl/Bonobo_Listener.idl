@@ -25,6 +25,9 @@ module Bonobo {
  		 * @args: A CORBA Any argument.
   		 */
  		oneway void event (in string event_name, in any args);
+
+		void unImplemented  ();
+		void unImplemented2 ();
   	};
   
   	interface EventSource : Bonobo::Unknown {
@@ -61,6 +64,9 @@ module Bonobo {
   		 */
  		void removeListener (in Listener l)
   			raises (UnknownListener);
+
+		void unImplemented  ();
+		void unImplemented2 ();
   	};
 };
 

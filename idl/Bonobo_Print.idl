@@ -35,6 +35,11 @@ module Bonobo {
 		 **/
 		Stream render (in PrintDimensions pd,
 		               in PrintScissor    scissor);
+
+		void unImplemented1 ();
+		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};
 };
 

@@ -1,12 +1,9 @@
 
-PLUGIN_DIR = $(libdir)/bonobo/plugin
-
 INCLUDES = \
 	-I$(top_srcdir) 				\
 	-I$(top_builddir) 				\
 	$(WARN_CFLAGS)					\
 	$(LIBBONOBO_CFLAGS)				\
-	-DPLUGIN_DIR=\""$(PLUGIN_DIR)"\"		\
         -DBONOBO_LIBDIR=\""$(libdir)"\" 		\
         -DBONOBO_DATADIR=\""$(datadir)"\" 		\
         -DBONOBO_PIXMAPDIR=\""$(datadir)/pixmaps"\"	\
@@ -16,6 +13,8 @@ INCLUDES = \
 	-DG_DISABLE_DEPRECATED				\
 	-DG_LOG_DOMAIN=\"Bonobo\"			\
 	-DVERSION=\"$(VERSION)\"
+
+LDFLAGS=@LT_VERSION_INFO@
 
 CORBA_SOURCE =			\
 	Bonobo.h		\

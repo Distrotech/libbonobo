@@ -228,6 +228,9 @@ interface PropertyControl : Bonobo::Unknown {
 	 */
 	void notifyAction (in long pagenumber, in Action action)
 		raises (NoPage);
+
+	void unImplemented  ();
+	void unImplemented2 ();
 };
 
 };

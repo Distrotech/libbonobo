@@ -45,6 +45,13 @@ module Bonobo {
 		 */
 		MonikerExtender getExtender (in string monikerPrefix,
 					     in string interfaceId);
+
+		void unImplemented1 ();
+		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
+		void unImplemented5 ();
+		void unImplemented6 ();
 	};
 
 	/*
@@ -87,6 +94,9 @@ module Bonobo {
 		void removeKey   (in string key);
 
 		void atExitUnref (in Object obj);
+
+		void unImplemented1 ();
+		void unImplemented2 ();
 	};
 
 #if 0

@@ -1,3 +1,19 @@
+2002-06-01  Michael Meeks  <michael@ximian.com>
+
+	* Version 2.0.0
+
+2002-06-01  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: upd, require ORBit2-2.4.0,
+	bonobo-activation-1.0.
+
+	* bonobo/Makefile.am: kill PLUGIN_DIR
+	add LDFLAGS bits.
+
+	* bonobo/bonobo-object.h: add dummy padding.
+
+	* idl/*.idl: add dummy padding.
+
 2002-05-27  Gustavo Giráldez  <gustavo.giraldez@gmx.net>
 
 	* configure.in: add a --enable-debug parameter to compile the

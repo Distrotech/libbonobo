@@ -56,6 +56,11 @@ module Bonobo {
 		 * moniker is already ref'd.
 		 */		
 		Moniker link ();
+
+		void unImplemented1 ();
+		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};	
 
 	interface ClipboardStore : Unknown {
@@ -72,8 +77,12 @@ module Bonobo {
 		 */
 		void fetchStorage (in PersistStorage source,
 				   in Moniker        linking_moniker);
+
+		void unImplemented1 ();
+		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};
-	
 };
 
 #endif /* !BONOBO_CLIPBOARD_IDL */

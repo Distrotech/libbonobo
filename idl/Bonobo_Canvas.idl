@@ -139,6 +139,11 @@ module Canvas {
 		 * Sets the bounding box of the item to (x1,y1)-(x2,y2)
 		 */
 		void setBounds (in DRect bbox);
+
+		void unImplemented1 ();
+		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};
 
 	/*
@@ -180,6 +185,11 @@ module Canvas {
 	 	 * Returns: an associated UI component or NIL.
 		 */
 		UIContainer getUIContainer ();
+
+		void unImplemented1 ();
+		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};
 };
 

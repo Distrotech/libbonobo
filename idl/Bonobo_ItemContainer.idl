@@ -49,6 +49,11 @@ module Bonobo {
 		Unknown getObjectByName (in string  item_name,
 					 in boolean only_if_exists)
 			raises (SyntaxError, NotFound);
+
+		void unImplemented1 ();
+		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};
 };
 

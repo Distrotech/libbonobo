@@ -56,6 +56,8 @@ module Bonobo {
 		 */
 		boolean isDirty ();
 	
+		void unImplemented1 ();
+		void unImplemented2 ();
 	};
 	
 	/*
@@ -98,6 +100,9 @@ module Bonobo {
 		 */
 		string getCurrentFile ()
 			raises (NoCurrentName);
+
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};
 
 	/*
@@ -172,8 +177,10 @@ module Bonobo {
 		void save (in Bonobo::Stream stream, in ContentType type)
 			raises (IOError, NotSupported,
 				WrongDataType);
-	};
 
+		void unImplemented3 ();
+		void unImplemented4 ();
+	};
 };
 
 #endif /* BONOBO_PERSIST_IDL */

@@ -126,6 +126,8 @@ module Bonobo {
 		void revert ()
 			raises (IOError, NoPermission, NotSupported);
 
+		void unImplemented1 ();
+		void unImplemented2 ();
 	};
 
 	interface Storage : Unknown {
@@ -253,6 +255,8 @@ module Bonobo {
 		void revert ()
 			raises (IOError, NoPermission, NotSupported);
 
+		void unImplemented1 ();
+		void unImplemented2 ();
 	};
 };
 

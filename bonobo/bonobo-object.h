@@ -78,6 +78,8 @@ typedef struct {
 
 	PortableServer_ServantBase__epv base_epv;
 	POA_Bonobo_Unknown__epv         epv;
+
+	gpointer                        dummy[4];
 } BonoboObjectClass;
 
 GType                    bonobo_object_get_type               (void) G_GNUC_CONST;

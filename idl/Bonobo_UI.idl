@@ -51,6 +51,8 @@ module Bonobo {
 		 */
 		void unImplemented  ();
 		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};
 
 	interface UIContainer : Bonobo::Unknown {
@@ -121,6 +123,8 @@ module Bonobo {
 		 */
 		void unImplemented  ();
 		void unImplemented2 ();
+		void unImplemented3 ();
+		void unImplemented4 ();
 	};
 };
 

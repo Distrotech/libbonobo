@@ -1,7 +1,7 @@
 AC_INIT(bonobo/bonobo-moniker.h)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(libbonobo, 1.117.1)
+AM_INIT_AUTOMAKE(libbonobo, 2.0.0)
 
 AM_MAINTAINER_MODE
 
@@ -10,6 +10,8 @@ dnl Due to the sed scripts being split on 90 line
 dnl blocks, this macro needs to be right at the beggining.
 dnl
 AC_PROG_INTLTOOL
+
+LT_VERSION_INFO='-version-info 0:0:1'
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -54,7 +56,7 @@ AC_DEFINE(HAVE_DLADDR,$have_dladdr)
 #
 # Start of pkg-config checks
 #
-ORBIT_VERSION=2.3.108
+ORBIT_VERSION=2.4.0
 GLIB_VERSION=2.0.1
 
 PKG_CHECK_MODULES(LIBBONOBO, \
@@ -63,7 +65,7 @@ PKG_CHECK_MODULES(LIBBONOBO, \
 	glib-2.0 >= $GLIB_VERSION \
 	gobject-2.0 >= $GLIB_VERSION \
 	gthread-2.0 >= $GLIB_VERSION \
-	bonobo-activation-2.0 >= 0.9.8)
+	bonobo-activation-2.0 >= 1.0.0)
 AC_SUBST(LIBBONOBO_CFLAGS)
 AC_SUBST(LIBBONOBO_LIBS)
 

@@ -18,6 +18,7 @@ Bonobo_Unknown bonobo_context_get (const CORBA_char  *context_name,
 void           bonobo_context_add (const CORBA_char  *context_name,
 				   Bonobo_Unknown     context);
 
+/* emits a 'last_unref' signal */
 BonoboObject  *bonobo_context_running_get (void);
 
 void           bonobo_running_context_auto_exit_unref (BonoboObject *object);

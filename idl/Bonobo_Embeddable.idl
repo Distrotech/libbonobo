@@ -34,6 +34,9 @@ interface ControlFactory : Bonobo::Unknown {
 	 * for a given Component.
 	 */
 	Control	createControl (in ControlFrame frame, in UIContainer uic);
+
+	void unImplemented1 ();
+	void unImplemented2 ();
 };
 
 interface CanvasComponentFactory : Bonobo::Unknown {
@@ -51,6 +54,9 @@ interface CanvasComponentFactory : Bonobo::Unknown {
 	Canvas::Component createCanvasComponent (
 					in boolean aa,
 					in Canvas::ComponentProxy proxy);
+
+	void unImplemented1 ();
+	void unImplemented2 ();
 };
 
 interface Embeddable : Bonobo::Unknown {
@@ -60,6 +66,15 @@ interface Embeddable : Bonobo::Unknown {
 	 * 
 	 * double ZoomFactor;
 	 */
+
+	void unImplemented1 ();
+	void unImplemented2 ();
+	void unImplemented3 ();
+	void unImplemented4 ();
+	void unImplemented5 ();
+	void unImplemented6 ();
+	void unImplemented7 ();
+	void unImplemented8 ();
 };
 };
 

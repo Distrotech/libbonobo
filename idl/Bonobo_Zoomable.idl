@@ -59,6 +59,11 @@ interface ZoomableFrame : ::Bonobo::Unknown {
 	 * loading a new file into the component.
 	 */
 	oneway void onParametersChanged ();
+
+	void unImplemented1 ();
+	void unImplemented2 ();
+	void unImplemented3 ();
+	void unImplemented4 ();
 };
 
 interface Zoomable : Bonobo::Unknown {
@@ -109,6 +114,11 @@ interface Zoomable : Bonobo::Unknown {
 	 * Gives the Zoomable a handle to its ZoomableFrame.
 	 */
 	void setFrame (in ZoomableFrame zoomable_frame);
+
+	void unImplemented1 ();
+	void unImplemented2 ();
+	void unImplemented3 ();
+	void unImplemented4 ();
 };
 };
 

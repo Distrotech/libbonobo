@@ -1,3 +1,9 @@
+libbonobo 2.0.0
+
+	* Featurelets
+		+ add BonoboObject padding (Michael)
+		+ add --enable-debug config option (Gustavo Giráldez)
+
 libbonobo 1.117.1
 
 	* Bugs fixed
