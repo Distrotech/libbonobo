@@ -29,23 +29,30 @@ module Bonobo {
 	interface UIContainer : Bonobo::Unknown {
 		exception MalFormedXML {};
 
-		void    node_set    (in string path, in string xml,
-				     in Bonobo::UIComponent listener)
+		void    register_component   (in string component_name,
+					      in Bonobo::UIComponent component);
+
+		void    deregister_component (in string component_name);
+
+		void    node_set             (in string path, in string xml,
+					      in string component_name)
 			raises (MalFormedXML);
 
-		string  node_get    (in string path,
-				     in boolean nodeOnly);
-		void    node_remove (in string path,
-				     in Bonobo::UIComponent by_listener);
-		boolean node_exists (in string path);
+		string  node_get             (in string path,
+					      in boolean nodeOnly);
+
+		void    node_remove          (in string path,
+					      in string by_component_name);
+
+		boolean node_exists          (in string path);
 
 		/*
 		 *  Currently the object should be a Bonobo::Control interface
 		 * but this should be probably be changed to a Moniker interface
 		 * in due course.
 		 */
-		void            object_set (in string path,
-					     in Bonobo::Unknown control);
-		Bonobo::Unknown object_get (in string path);
+		void            object_set   (in string path,
+					      in Bonobo::Unknown control);
+		Bonobo::Unknown object_get   (in string path);
 	};
 };
