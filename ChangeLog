@@ -1,6 +1,11 @@
+2003-10-01  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-generic-factory.c: include
+	bonobo-debug.h; thanks to Paolo Maggi.
+
 2003-09-28  Gediminas Paulauskas  <menesis@delfi.lt>
 
-    * configure.in: Added lt to ALL_LINGUAS.
+	* configure.in: Added lt to ALL_LINGUAS.
 
 2003-09-24  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 

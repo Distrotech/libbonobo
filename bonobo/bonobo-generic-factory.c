@@ -25,7 +25,7 @@
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-context.h>
 #include <bonobo/bonobo-running-context.h>
-
+#include <bonobo/bonobo-debug.h>
 #include <bonobo/bonobo-types.h>
 
 #define DEFAULT_LAST_UNREF_TIMEOUT 	2000
