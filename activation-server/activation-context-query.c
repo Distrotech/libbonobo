@@ -1101,13 +1101,13 @@ qexp_sort_compare(OAF_ServerInfo **x, OAF_ServerInfo **y, QexpSortData *sort_dat
     qexp_constant_unuse(cx);
     qexp_constant_unuse(cy);
 
-    if(res > 0)
-      return TRUE;
-    else if(res < 0)
-      return FALSE;
+    if (res > 0)
+      return 1;
+    else if (res < 0)
+      return -1;
   }
 
-  return FALSE;
+  return 0;
 }
 
 void
