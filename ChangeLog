@@ -1,3 +1,14 @@
+2003-06-02  Shailesh Mittal  <shailesh.mittal@wipro.com>
+
+	* configure.in: Added checks for getaddrinfo().
+
+	* acconfig.h: Added HAVE_GETADDRINFO.
+
+	* bonobo-activation/bonobo-activation-init.c
+	(bonobo_activation_hostname_get): If getaddrinfo is defined on
+	the system, it is used for hostname resolution, otherwise old
+	gethostbyname is used for the purpose.
+
 2003-06-02  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-item-container.h: Removed the no longer used

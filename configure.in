@@ -114,6 +114,22 @@ AC_SUBST(SERVER_CFLAGS)
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
 AC_SUBST(ORBIT_IDL)
 
+# checks for getaddrinfo()
+
+have_getaddrinfo=no
+AC_CHECK_FUNC(getaddrinfo, have_getaddrinfo=yes)
+if test $have_getaddrinfo != yes; then
+# getaddrinfo is not in the default libraries. See if it is in some other.
+  for lib in bsd socket inet; do
+    AC_CHECK_LIB($lib, getaddrinfo, [LIBS="$LIBS -l$lib";have_getaddrinfo=yes;break])
+  done
+fi
+if test $have_getaddrinfo = yes; then
+  AC_DEFINE(HAVE_GETADDRINFO)
+fi
+
+#end checks for getaddrinfo
+
 # glib-genmarshal
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
