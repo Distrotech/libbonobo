@@ -53,8 +53,6 @@ following:
   <example>
     <title>How to get a factory to quit when it is idle</title>
     <programlisting>
-
-static void
 static void
 last_unref_exit_cb (gpointer      context,
 		    BonoboObject *factory)

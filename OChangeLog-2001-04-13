@@ -1,5 +1,10 @@
 2001-02-21  Michael Meeks  <michael@ximian.com>
 
+	* samples/controls/bonobo-clock-control.c
+	(bonobo_clock_control_new): re-order to clean.
+
+	* bonobo/bonobo-property-bag.c: Full API documentation.
+
 	* bonobo/bonobo-exception.c: Full API documentation.
 
 	* doc/api/tmpl/bonobo-context.sgml: fill out.

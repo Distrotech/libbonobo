@@ -6,7 +6,10 @@ An Event Source where clients can connect to listen to events.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+An event source object is responsible for channeling the emmission
+of signals on an object to the appropriate attached listeners.
+The API is extremely simple and allows implementations to notify
+their listeners of a new event occuring.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

@@ -12,6 +12,36 @@ like binding for them. The bonobo-arg code also provides
 mappings between Gtk Args and CORBA_anys.
 </para>
 
+<para>
+A typical use of the BonoboArg macros would be in 
+  <example>
+     <title>Property bag implementation</title>
+     <programlisting>
+static void
+get_prop (BonoboPropertyBag *bag,
+	  BonoboArg         *arg,
+	  guint              arg_id,
+	  CORBA_Environment *ev,
+	  gpointer           user_data)
+{
+	GtkObject *clock = user_data;
+
+	switch (arg_id) {
+
+	case PROP_RUNNING: {
+		BONOBO_ARG_SET_BOOLEAN (arg, is_it_running);
+		break;
+	}
+
+	default:
+		bonobo_exception_set (ev, ex_Bonobo_PropertyBag_NotFound);
+		break;
+	}
+}
+     </programlisting>
+  </example>
+</para>
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 

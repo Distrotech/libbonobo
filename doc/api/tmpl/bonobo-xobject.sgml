@@ -95,7 +95,6 @@ by accessing the class's parent's epv pointer.
   <example>
      <title>Setting up the class' methods</title>
      <programlisting>
-
 static void
 bonobo_control_class_init (BonoboControlClass *klass)
 {

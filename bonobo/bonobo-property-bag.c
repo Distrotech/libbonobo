@@ -207,13 +207,14 @@ impl_Bonobo_PropertyBag_getPropertyNames (PortableServer_Servant servant,
 /*
  * BonoboPropertyBag construction/deconstruction functions. 
  */
+
 /**
  * bonobo_property_bag_construct:
  * @pb: #BonoboPropertyBag to construct
- * @get_prop:
- * @set_prop:
- * @es:
- * @user_data:
+ * @get_prop: the property get callback
+ * @set_prop: the property set callback
+ * @es: an event source to aggregate
+ * @user_data: user data for the callbacks
  * 
  * Constructor, only for use in wrappers and object derivation, please
  * refer to the #bonobo_property_bag_new for normal use.
@@ -222,7 +223,7 @@ impl_Bonobo_PropertyBag_getPropertyNames (PortableServer_Servant servant,
  * the passed in @pb is unrefed.
  *
  * Returns:  #BonoboPropertyBag pointer or %NULL.
- **/
+ */
 BonoboPropertyBag *
 bonobo_property_bag_construct (BonoboPropertyBag   *pb,
 			       BonoboPropertyGetFn  get_prop,
@@ -247,6 +248,12 @@ bonobo_property_bag_construct (BonoboPropertyBag   *pb,
 
 /**
  * bonobo_property_bag_new_full:
+ * @get_prop: the property get callback
+ * @set_prop: the property set callback
+ * @es: an event source to aggregate
+ * @user_data: user data for the callbacks
+ *
+ * Creates a new property bag with the specified callbacks.
  *
  * Returns: A new #BonoboPropertyBag object.
  */
@@ -268,6 +275,11 @@ bonobo_property_bag_new_full (BonoboPropertyGetFn  get_prop,
 
 /**
  * bonobo_property_bag_new:
+ * @get_prop: the property get callback
+ * @set_prop: the property set callback
+ * @user_data: user data for the callbacks
+ *
+ * Creates a new property bag with the specified callbacks.
  *
  * Returns: A new #BonoboPropertyBag object.
  */
@@ -331,6 +343,21 @@ bonobo_property_bag_destroy (GtkObject *object)
  * BonoboPropertyBag property manipulation API.
  */
 
+/**
+ * bonobo_property_bag_add_full:
+ * @pb: property bag to add to
+ * @name: name of new property
+ * @idx: integer index for fast callback switch statement
+ * @type: the CORBA type eg. TC_long
+ * @default_value: the default value or NULL
+ * @docstring: the translated documentation string
+ * @flags: various flags
+ * @get_prop: a per property get callback
+ * @set_prop: a per property set callback
+ * @user_data: user data for the callbacks
+ * 
+ * This adds a property to @pb at the full tilt of complexity.
+ **/
 void
 bonobo_property_bag_add_full (BonoboPropertyBag  *pb,
 			      const char         *name,
@@ -456,6 +483,14 @@ set_prop (BonoboPropertyBag *bag,
 	gtk_object_setv (obj, 1, &new);
 }
 
+/**
+ * bonobo_property_bag_add_gtk_args:
+ * @pb: destination property bag
+ * @object: a generic Gtk Object
+ * 
+ * Transfers GtkArgs from the object to the property bag,
+ * and maps between the two objects property systems.
+ **/
 void
 bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 				  GtkObject          *object)
@@ -521,6 +556,18 @@ bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
 	g_free (arg_flags);
 }
 
+/**
+ * bonobo_property_bag_add:
+ * @pb: property bag to add to
+ * @name: name of new property
+ * @idx: integer index for fast callback switch statement
+ * @type: the CORBA type eg. TC_long
+ * @default_value: the default value or NULL
+ * @docstring: the translated documentation string
+ * @flags: various flags
+ * 
+ *  Adds a property to the property bag.
+ **/
 void
 bonobo_property_bag_add (BonoboPropertyBag  *pb,
 			 const char         *name,
@@ -554,6 +601,18 @@ notify_listeners (BonoboPropertyBag *pb,
 						   new_value, opt_ev);
 }
 
+/**
+ * bonobo_property_bag_notify_listeners:
+ * @pb: the property bag
+ * @name: the name of the property that changed value
+ * @new_value: the new value
+ * @opt_ev: optional CORBA exception environment or NULL
+ * 
+ * This function is used by the implementation of the property
+ * proper, to signal to the property bag that the value of the
+ * property has changed.
+ * NB. There is no need to call this when you do a set_value.
+ **/
 void
 bonobo_property_bag_notify_listeners (BonoboPropertyBag *pb,
 				      const char        *name,
@@ -581,6 +640,16 @@ bonobo_property_bag_notify_listeners (BonoboPropertyBag *pb,
 	notify_listeners (pb, prop, new_value, opt_ev);
 }
 
+/**
+ * bonobo_property_bag_set_value:
+ * @pb: the property bag
+ * @name: the name of the property
+ * @value: the new value to set to 
+ * @opt_ev: optional CORBA exception environment or NULL
+ * 
+ * This method sets the value of the property with @name
+ * to @value.
+ **/
 void
 bonobo_property_bag_set_value (BonoboPropertyBag *pb,
 			       const char        *name,
@@ -625,7 +694,13 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb,
 
 /**
  * bonobo_property_bag_get_value:
- */
+ * @pb: the property bag
+ * @name: the name of the property
+ * @opt_ev: optional CORBA exception environment or NULL
+ * 
+ * Return value: the value of the property with name @name or NULL
+ * on exception.
+ **/
 BonoboArg *
 bonobo_property_bag_get_value (BonoboPropertyBag *pb, 
 			       const char        *name,
@@ -663,6 +738,14 @@ bonobo_property_bag_get_value (BonoboPropertyBag *pb,
 	return arg;
 }
 
+/**
+ * bonobo_property_bag_get_property_type:
+ * @pb: the property bag
+ * @name: the name of the property
+ * @opt_ev: optional CORBA exception environment or NULL
+ * 
+ * Return value: the type of the property with name @name
+ **/
 BonoboArgType
 bonobo_property_bag_get_property_type (BonoboPropertyBag *pb, 
 				       const char        *name,
@@ -685,7 +768,12 @@ bonobo_property_bag_get_property_type (BonoboPropertyBag *pb,
 
 /**
  * bonobo_property_bag_get_default:
- */
+ * @pb: the property bag
+ * @name: the name of the property
+ * @opt_ev: optional CORBA exception environment or NULL
+ * 
+ * Return value: the default value of the property with name @name
+ **/
 BonoboArg *
 bonobo_property_bag_get_default (BonoboPropertyBag *pb, 
 				 const char        *name,
@@ -712,8 +800,12 @@ bonobo_property_bag_get_default (BonoboPropertyBag *pb,
 }
 
 /**
- * bonobo_property_bag_has_property:
- */
+ * bonobo_property_bag_get_default:
+ * @pb: the property bag
+ * @name: the name of the property
+ * 
+ * Return value: TRUE if the bag has a property of this name
+ **/
 gboolean
 bonobo_property_bag_has_property (BonoboPropertyBag *pb, 
 				  const char        *name)
@@ -731,7 +823,12 @@ bonobo_property_bag_has_property (BonoboPropertyBag *pb,
 
 /**
  * bonobo_property_bag_get_docstring:
- */
+ * @pb: the property bag
+ * @name: the name of the property
+ * @opt_ev: optional CORBA exception environment or NULL
+ * 
+ * Return value: the documentation string for this property.
+ **/
 const char *
 bonobo_property_bag_get_docstring (BonoboPropertyBag *pb, 
 				   const char        *name,
