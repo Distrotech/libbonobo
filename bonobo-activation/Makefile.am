@@ -22,7 +22,7 @@ liboafincludedir = $(includedir)/liboaf
 liboafinclude_HEADERS=		\
 	oaf.h 			\
 	liboaf.h 		\
-	gnome-factory.h 	\
+	oaf-factory.h 		\
 	liboaf-version.h	\
 	$(NULL)
 
@@ -32,8 +32,8 @@ liboaf_la_SOURCES=		\
 	oaf-mainloop.c 		\
 	oaf-actid.c 		\
 	liboaf-private.h 	\
-	gnome-factory-stubs.c 	\
-	gnome-factory-common.c 	\
+	oaf-factory-stubs.c 	\
+	oaf-factory-common.c 	\
 	oaf-plugin.c 		\
 	oaf-activate.c 		\
 	oaf-registration.c 	\
@@ -45,27 +45,27 @@ liboaf_la_SOURCES=		\
 BUILT_SOURCES=			\
 	oaf-stubs.c 		\
 	oaf-common.c 		\
-	gnome-factory-stubs.c 	\
-	gnome-factory-common.c 	\
+	oaf-factory-stubs.c 	\
+	oaf-factory-common.c 	\
 	oaf.h 			\
-	gnome-factory.h		\
+	oaf-factory.h		\
 	$(NULL)
 
 oaf-stubs.c oaf.h oaf-common.c: stamp-idl
 
-gnome-factory-stubs.c gnome-factory.h gnome-factory-common.c: stamp-factory-idl
+oaf-factory-stubs.c oaf-factory.h oaf-factory-common.c: stamp-factory-idl
 
 # Work around automake brokenness.
 ../liboaf/oaf.h: stamp-idl
 # And again.
-../liboaf/gnome-factory.h: stamp-factory-idl
+../liboaf/oaf-factory.h: stamp-factory-idl
 
 stamp-idl: $(top_srcdir)/idl/oaf.idl
 	$(ORBIT_IDL) --noskels -I$(top_srcdir)/idl --define=OAF_COMPILATION $(top_srcdir)/idl/oaf.idl
 	touch stamp-idl
 
-gnome-factory.h stamp-factory-idl: $(top_srcdir)/idl/gnome-factory.idl
-	$(ORBIT_IDL) --noskels -I$(top_srcdir)/idl --define=GNOME_FACTORY_COMPILATION $(top_srcdir)/idl/gnome-factory.idl
+oaf-factory.h stamp-factory-idl: $(top_srcdir)/idl/oaf-factory.idl
+	$(ORBIT_IDL) --noskels -I$(top_srcdir)/idl --define=GNOME_FACTORY_COMPILATION $(top_srcdir)/idl/oaf-factory.idl
 	touch stamp-factory-idl
 
 CLEANFILES=			\

@@ -23,7 +23,7 @@
  *
  */
 
-#include "gnome-factory.idl"
+#include "oaf-factory.idl"
 
 module OAF {
         exception GeneralError { 
