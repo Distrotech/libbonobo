@@ -218,9 +218,9 @@ bonobo_activation_base_service_set (const BonoboActivationBaseService *base_serv
 
 
 const char *bonobo_activation_ac_cmd[] =
-	{ "bonobo-activation-server", "--ac-activate", "--ior-output-fd=%d", NULL };
+	{ SERVER_LIBEXECDIR "/bonobo-activation-server", "--ac-activate", "--ior-output-fd=%d", NULL };
 const char *bonobo_activation_od_cmd[] = 
-        { "bonobo-activation-server", "--ior-output-fd=%d", NULL };
+        { SERVER_LIBEXECDIR "/bonobo-activation-server", "--ior-output-fd=%d", NULL };
 
 struct SysServerInstance
 {

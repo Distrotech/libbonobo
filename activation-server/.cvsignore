@@ -8,6 +8,7 @@ Makefile.in
 activation-context-query-parser.h
 activation-context-query-parser.c
 Bonobo_CosNaming_NamingContext.server
+Bonobo_CosNaming_NamingContext.server.in
 activation-client
 activation-context-query-lexer.c
 bonobo-activation-server

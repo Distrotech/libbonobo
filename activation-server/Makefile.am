@@ -2,7 +2,8 @@
 NULL=
 man_MANS = bonobo-activation-server.1
 
-bin_PROGRAMS=bonobo-activation-server activation-client
+bin_PROGRAMS=activation-client
+libexec_PROGRAMS=bonobo-activation-server
 
 INCLUDES=					\
 	-I$(top_srcdir) 			\
@@ -39,13 +40,17 @@ LDADD=../bonobo-activation/libbonobo-activation.la \
 activation_client_SOURCES=client.c
 
 serverinfodir=$(libdir)/bonobo/servers
-server_in_files = Bonobo_CosNaming_NamingContext.server.in
-serverinfo_DATA = $(server_in_files:.server.in=.server)
+
+$(server_in_file): $(server_in_file).in
+	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
+
+server_in_file = Bonobo_CosNaming_NamingContext.server.in
+serverinfo_DATA = $(server_in_file:.server.in=.server)
 
 @INTLTOOL_SERVER_RULE@
 
 EXTRA_DIST=activation-context-query-lexer.l activation-context-query-parser.y \
-	$(server_in_files) $(serverinfo_DATA)	\
+	$(server_in_file) $(serverinfo_DATA)	\
 	$(man_MANS)
 
 YFLAGS = -d -v
