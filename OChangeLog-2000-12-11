@@ -1,5 +1,13 @@
 1999-07-07  Nat Friedman  <nat@gnome-support.com>
 
+	* bonobo/gnome-embeddable-factory.c
+ 	(gnome_embeddable_factory_construct): Documented.
+	(gnome_embeddable_factory_set): Documented.  Fixed to set the
+ 	callback closure.
+	* bonobo/gnome-emeddable-client.c: Reworded inline docs.
+
+1999-07-07  Nat Friedman  <nat@gnome-support.com>
+
 	* bonobo/gnome-stream-fs.c (fs_copy_to): Re-indented this
  	function.
 	(gnome_stream_fs_create): Added API documentation for

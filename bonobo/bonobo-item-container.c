@@ -95,7 +95,10 @@ gnome_container_init (GnomeContainer *container)
  * @container: The container object to construct
  * @corba_container: The CORBA object that implements GNOME::Container
  *
- * Constructs the @container objet.
+ * Constructs the @container Gtk object using the provided CORBA
+ * object.
+ *
+ * Returns: The constructed GnomeContainer object.
  */
 GnomeObject *
 gnome_container_construct (GnomeContainer  *container,
