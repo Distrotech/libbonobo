@@ -1,3 +1,7 @@
+1999-11-11  Jesus Bravo Alvarez  <jba@pobox.com>
+
+	* configure.in: Added Galician (gl) to ALL_LINGUAS
+
 1999-11-09  Alexander Werner Skwar <askwar@digitalprojects.com>
 
 	* bonobo.spec.in: Add sysconfdir.
