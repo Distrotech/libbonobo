@@ -103,8 +103,8 @@ void                     bonobo_object_release_unref          (Bonobo_Unknown   
 void                     bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_idle_unref             (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
-void                     bonobo_object_set_imortal            (BonoboObject           *object,
-							       gboolean                imortal);
+void                     bonobo_object_set_immortal           (BonoboObject           *object,
+							       gboolean                immortal);
 void                     bonobo_object_init                   (void);
 void                     bonobo_object_trace_refs             (BonoboObject *object,
 							       const char   *fn,

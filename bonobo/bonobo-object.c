@@ -47,7 +47,7 @@ typedef struct {
 
 typedef struct {
 	int      ref_count;
-	gboolean imortal;
+	gboolean immortal;
 	GList   *objs;
 #ifdef BONOBO_REF_HOOKS
 	GList   *refs;
@@ -283,7 +283,7 @@ bonobo_object_unref (BonoboObject *object)
 	g_return_if_fail (ao != NULL);
 	g_return_if_fail (ao->ref_count > 0);
 
-	if (ao->imortal)
+	if (ao->immortal)
 		ao->ref_count--;
 	else {
 		if (ao->ref_count == 1)
@@ -336,9 +336,9 @@ bonobo_object_trace_refs (BonoboObject *object,
 
 		g_return_if_fail (ao->ref_count > 0);
 
-		if (ao->imortal) {
+		if (ao->immortal) {
 			ao->ref_count--;
-			bonobo_debug_print ("unusual", "imortal object");
+			bonobo_debug_print ("unusual", "immortal object");
 		} else {
 			if (ao->ref_count == 1) {
 				bonobo_object_destroy (ao);
@@ -391,8 +391,8 @@ impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 void
-bonobo_object_set_imortal (BonoboObject *object,
-			   gboolean      imortal)
+bonobo_object_set_immortal (BonoboObject *object,
+			    gboolean      immortal)
 {
 	BonoboAggregateObject *ao;
 
@@ -402,7 +402,7 @@ bonobo_object_set_imortal (BonoboObject *object,
 
 	ao = object->priv->ao;
 
-	ao->imortal = imortal;
+	ao->immortal = immortal;
 }
 
 /**

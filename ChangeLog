@@ -1,3 +1,7 @@
+2001-08-27  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* bonobo/bonobo-object.c (bonobo_object_set_immortal): s/imortal/immortal/
+
 2001-08-22  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* bonobo/bonobo-arg.c (bonobo_arg_new_from): new function to create
