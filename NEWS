@@ -1,3 +1,13 @@
+Bonobo 0.29
+
+	* X / CORBA synchronisation issues fixed (Me)
+
+	* Generic Listener interface re-written (Alex Graveley)
+
+	* Local FS Stream / Storage impl. completed (Dietmar)
+
+	* Efs stream / storage polished up (Dietmar)
+
 Bonobo 0.28
 
 	* Fixes to XML translation to fix seperate build dir (Me)

@@ -283,7 +283,7 @@ Makefile:
 
 	We do not believe that Bonobo is tied to ORBit in any aspect,
 	and there is even an implementation of Bonobo written in Java
-	by Cactus (FIXME: full name) called Monkeybeans that uses the
+	by Cactus (Gergo Erdi) called Monkeybeans that uses the
 	Java ORB.
 
 @Q: What is a Moniker?
@@ -349,6 +349,9 @@ Makefile:
 
 	FIXME: where are these patches available from?
 
+	The next version of ORBit (ORBit2) will use OpenSSL to provide
+	encryption services.
+
 @Q: If communications are not encrypted, why do you support them?
 
 	We guaranttee that communications on the destkop are going to
@@ -358,7 +361,63 @@ Makefile:
 
 @Q: What is the problem with the standard C++ CORBA binding?
 
-	
+@Q: What naming scheme should I use for my CORBA interfaces ?
+
+	Each module should be named mixed caps in the Gtk+ style
+using the OMG name scoping eg.
+
+	module com {
+
+		module mycompany {
+
+			module MyProduct {
+
+				interface MyInterface {
+				};
+			};
+		};
+	};
+
+	Exceptions to this are the Bonobo/ and GNOME/ namespaces
+which are reserved for the Bonobo component model, and approved
+GNOME applications.
+
+@Q: How should I name my CORBA methods ?
+
+	CORBA methods should be named using mixed caps, following a
+convention similar to that of Java convention. ie. method names should
+be verbs or verb phrases in mixed case with the first leter lowercase
+and the first letter of any further words capitalized.
+
+interface MyInterface {
+
+	long  getLength ();
+	void  setLength (in long l);
+
+	/* the ByName qualifier is a useful disambiguator */
+	long  getValueByName (in string name);
+
+	/* Factory methods should be named createWhatever */
+	Bonobo::Unknown createObject ();
+
+	/* Methods that test boolean conditions */
+	boolean isDirty ();
+	boolean hasLongLegs ();
+
+	/* Mutator methods */	
+	string toString ();
+	double toDouble ();
+
+	/* Signals */
+	oneway void notifyRename ();
+
+	/* Calculate a number of types */
+	long countObjects (in Type t);
+};
+
+	With acroyms we fully capitalize eg. getURI, with abbreviations
+and contractions we capitalize the first letter eg. setDoc setId.
+cf. http://java.sun.com/docs/books/jls/html/6.doc.html#11186
 
 @Q: Support Transactions?
 @Q: A GUI for defining component properties?

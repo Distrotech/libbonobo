@@ -1,3 +1,13 @@
+2000-11-08  Alex Graveley  <alex@helixcode.com>
+
+	* bonobo/bonobo-event-source.[ch]: Implement.
+
+	* bonobo/bonobo-listener.[ch]: rewrite extensively.
+
+	* idl/Bonobo.idl: re-enable bonobo-listener.idl
+
+	* idl/bonobo-listener.idl: re-structure.
+
 2000-11-08  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-event-source.c:
@@ -8,6 +18,10 @@
 	there's no ChangeLog for it for some reason.
 
 2000-11-07  Michael Meeks  <michael@helixcode.com>
+
+	* doc/FAQ: specify the studly standard.
+
+	* doc/Makefile.am (text_files): add FAQ.
 
 	* configure.in: bump version.
 

@@ -2,14 +2,11 @@
 /*
  * bonobo-event-source.c: Generic event emitter.
  *
- * Copyright (C) 2000,  Helix Code, Inc.
- *
  * Author:
  *	Alex Graveley (alex@helixcode.com)
+ *
+ * Copyright (C) 2000, Helix Code, Inc.
  */
-
-#if 0 /* turn this off until we are compiling bonobo-listener.idl */
-
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <bonobo/bonobo-event-source.h>
@@ -307,5 +304,3 @@ bonobo_event_source_new (void)
 	return bonobo_event_source_construct (
 		event_source, corba_event_source);
 }
-
-#endif

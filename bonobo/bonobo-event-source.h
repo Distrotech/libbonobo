@@ -1,4 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * bonobo-event-source.h: Generic event emitter.
+ *
+ * Author:
+ *	Alex Graveley (alex@helixcode.com)
+ *
+ * Copyright (C) 2000, Helix Code, Inc.
+ */
 #ifndef _BONOBO_EVENT_SOURCE_H_
 #define _BONOBO_EVENT_SOURCE_H_
 

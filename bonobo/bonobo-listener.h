@@ -1,4 +1,13 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * bonobo-listener.h: Generic listener interface for callbacks.
+ *
+ * Authors:
+ *	Alex Graveley (alex@helixcode.com)
+ *	Mike Kestner  (mkestner@ameritech.net)
+ *
+ * Copyright (C) 2000, Helix Code, Inc.
+ */
 #ifndef _BONOBO_LISTENER_H_
 #define _BONOBO_LISTENER_H_
 
