@@ -1,3 +1,11 @@
+1999-12-27  Nat Friedman  <nat@helixcode.com>
+
+	* bonobo/gnome-object.h: Removed old externs for gnome_object_epv
+ 	and gnome_object_base_epv.
+
+	* bonobo/gnome-embeddable.h: Removed extern for
+ 	gnome_embeddable_epv.
+
 1999-12-20  Michael Meeks  <mmeeks@gnu.org>
 
 	* bonobo/gnome-ui-handler.c (toolbar_orientation_to_corba): implement.
