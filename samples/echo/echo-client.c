@@ -9,60 +9,46 @@
 #include <libbonobo.h>
 #include "Bonobo_Sample_Echo.h"
 
-static void
-init_bonobo (int argc, char *argv [])
+int 
+main (int argc, char *argv [])
 {
+	Bonobo_Sample_Echo echo_server;
+	CORBA_Environment  ev;
+
+	/*
+	 * Initialize bonobo.
+	 */
 	if (!bonobo_init (&argc, argv))
 		g_error (_("I could not initialize Bonobo"));
-
+	
 	/*
 	 * Enable CORBA/Bonobo to start processing requests
 	 */
 	bonobo_activate ();
-}
 
-static void
-usage (void)
-{
-	fprintf (stderr, "To use this program run oaf-slay, then type\n"
-		 "bonobo-echo & # to register the echoing server\n"
-		 "then run echo-client to see the echo\n");
-}
+	echo_server = bonobo_get_object ("OAFIID:Bonobo_Sample_Echo",
+					 "Bonobo/Sample/Echo", NULL);
 
-int 
-main (int argc, char *argv [])
-{
-	BonoboObjectClient *server;
-	Bonobo_Sample_Echo           echo_server;
-	CORBA_Environment   ev;
-	char               *obj_id;
+	if (echo_server == CORBA_OBJECT_NIL)
+		g_error (_("Could not create an instance of the sample echo component"));
 
-	init_bonobo (argc, argv);
 
-	obj_id = "OAFIID:Bonobo_Sample_Echo";
-
-	server = bonobo_object_activate (obj_id, 0);
-
-	if (!server) {
-		printf ("Could not create an instance of the %s component", obj_id);
-		return 1;
-	}
+	/* Send a message */
 
 	CORBA_exception_init (&ev);
 
-	/*
-	 * Get the CORBA Object reference from the BonoboObjectClient
-	 */
-	echo_server = BONOBO_OBJREF (server);
-
-	/* Send a message */
 	Bonobo_Sample_Echo_echo (echo_server, "This is the message from the client\n", &ev);
-	if (BONOBO_EX (&ev))
-		usage ();
+
+	/* Check for exceptions */
+	if (BONOBO_EX (&ev)) {
+		char *err = bonobo_exception_get_text (&ev);
+		g_warning (_("An exception occured '%s'"), err);
+		g_free (err);
+	}
 
 	CORBA_exception_free (&ev);
 
-	bonobo_object_unref (BONOBO_OBJECT (server));
+	bonobo_object_release_unref (echo_server, NULL);
 	
 	return 0;
 }

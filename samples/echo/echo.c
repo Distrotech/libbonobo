@@ -2,13 +2,13 @@
  * echo.c: Implements a Bonobo Echo server
  *
  * Author:
- *   Miguel de Icaza (miguel@helixcode.com)
+ *   Miguel de Icaza (miguel@ximian.com)
  *
  * This file is here to show what are the basic steps
  * neccessary to create a Bonobo Component.
  */
 #include <config.h>
-#include <bonobo.h>
+#include <libbonobo.h>
 
 /*
  * This pulls the CORBA definitions for the Demo::Echo server
@@ -28,19 +28,20 @@
 /*
  * A pointer to our parent object class
  */
-static GtkObjectClass *echo_parent_class;
+static GObjectClass *echo_parent_class;
 
 /*
- * Implemented GtkObject::destroy
+ * Implemented GObject::finalize
  */
 static void
-echo_object_destroy (GtkObject *object)
+echo_object_finalize (GObject *object)
 {
 	Echo *echo = ECHO (object);
 
 	g_free (echo->instance_data);
+	echo->instance_data = NULL;
 	
-	echo_parent_class->destroy (object);
+	echo_parent_class->finalize (object);
 }
 
 /*
@@ -51,21 +52,21 @@ impl_demo_echo_echo (PortableServer_Servant  servant,
 		     const CORBA_char       *string,
 		     CORBA_Environment      *ev)
 {
-	Echo *echo = ECHO (bonobo_object_from_servant (servant));
+	Echo *echo = ECHO (bonobo_object (servant));
 									 
-	printf ("Echo message received: %s (echo instance data: %s)\n", string,
-		echo->instance_data);
+	printf ("Echo message received: %s (echo instance data: %s)\n",
+		string, echo->instance_data);
 }
 
 static void
 echo_class_init (EchoClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 	POA_Bonobo_Sample_Echo__epv *epv = &klass->epv;
 
-	echo_parent_class = gtk_type_class (PARENT_TYPE);
+	echo_parent_class = g_type_class_peek_parent (klass);
 
-	object_class->destroy = echo_object_destroy;
+	object_class->finalize = echo_object_finalize;
 
 	epv->echo = impl_demo_echo_echo;
 }
@@ -78,40 +79,30 @@ echo_init (Echo *echo)
 	echo->instance_data = g_strdup_printf ("Hello %d!", i++);
 }
 
-GtkType
+GType
 echo_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
-		GtkTypeInfo info = {
-			"Echo",
-			sizeof (Echo),
+		GTypeInfo info = {
 			sizeof (EchoClass),
-			(GtkClassInitFunc) echo_class_init,
-			(GtkObjectInitFunc) echo_init,
-			NULL, /* reserved 1 */
-			NULL, /* reserved 2 */
-			(GtkClassInitFunc) NULL
+			(GBaseInitFunc) echo_init,
+			(GBaseFinalizeFunc) NULL,
+			(GClassInitFunc) echo_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (Echo),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) NULL
 		};
-		/*
-		 *   Here we use bonobo_x_type_unique instead of
-		 * gtk_type_unique, this auto-generates a load of
-		 * CORBA structures for us. All derived types must
-		 * use bonobo_x_type_unique.
-		 */
-		type = bonobo_x_type_unique (
-			PARENT_TYPE,
+
+		type = bonobo_type_unique (
+			BONOBO_OBJECT_TYPE,
 			POA_Bonobo_Sample_Echo__init, NULL,
-			GTK_STRUCT_OFFSET (EchoClass, epv),
-			&info);
+			G_STRUCT_OFFSET (EchoClass, epv),
+			&info, "Echo");
 	}
 
 	return type;
-}
-
-Echo *
-echo_new (void)
-{
-	return gtk_type_new (echo_get_type ());
 }

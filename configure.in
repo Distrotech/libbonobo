@@ -84,6 +84,8 @@ idl/Makefile
 bonobo/Makefile
 bonobo/libbonobo-2.0.pc
 monikers/Makefile
+samples/Makefile
+samples/echo/Makefile
 tests/Makefile
 ])
 

@@ -11,15 +11,14 @@ bonobo_echo_SOURCES =		\
 	echo.h
 
 bonobo_echo_LDADD =				\
-	$(top_builddir)/bonobo/libbonobo.la	\
-	$(top_builddir)/bonobo/libbonobox.la	\
-	$(BONOBOUI_LIBS)			\
+	$(top_builddir)/bonobo/libbonobo-2.la	\
+	$(LIBBONOBO_LIBS)			\
 	libEcho.a				\
 	$(INTLLIBS)
 
 echo_client_LDADD =				\
-	$(top_builddir)/bonobo/libbonobo.la	\
-	$(BONOBOUI_LIBS)			\
+	$(top_builddir)/bonobo/libbonobo-2.la	\
+	$(LIBBONOBO_LIBS)			\
 	libEcho.a				\
 	$(INTLLIBS)
 
@@ -32,9 +31,7 @@ ECHO_CORBA_GENERATED =				\
 libEcho_a_SOURCES = $(ECHO_CORBA_GENERATED)
 
 $(ECHO_CORBA_GENERATED): Bonobo_Sample_Echo.idl 
-	orbit-idl -I$(top_srcdir)/idl -I`$(GNOME_CONFIG) --datadir`/idl $(srcdir)/Bonobo_Sample_Echo.idl
-	touch my_echo_idl
-
+	orbit-idl -I$(top_srcdir)/idl -I $(BONOBO_ACTIVATION_IDL_DIR) $(srcdir)/Bonobo_Sample_Echo.idl
 
 oafdir = $(datadir)/oaf
 oaf_in_files = Bonobo_Sample_Echo.oaf.in
@@ -54,6 +51,4 @@ INCLUDES = 						\
 	-I$(srcdir) -I$(top_srcdir) 			\
 	-I$(top_builddir)				\
         -I$(includedir)                                 \
-	$(BONOBOUI_CFLAGS)
-
-MYHACKAROUNDAUTOMAKE=$(shell echo $(ECHO_CORBA_GENERATED))
+	$(LIBBONOBO_CFLAGS)
