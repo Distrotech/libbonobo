@@ -273,7 +273,7 @@ bonobo_event_source_init (GObject *object)
 	BonoboEventSource *event_source;
 
 	event_source = BONOBO_EVENT_SOURCE (object);
-	event_source->priv = g_new (BonoboEventSourcePrivate, 1);
+	event_source->priv = g_new0 (BonoboEventSourcePrivate, 1);
 	event_source->priv->listeners = NULL;
 }
 
