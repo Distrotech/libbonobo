@@ -429,13 +429,14 @@ bonobo_property_bag_add_full (BonoboPropertyBag  *pb,
 	prop->name          = g_strdup (name);
 	prop->idx           = idx;
 	prop->type          = type;
-	prop->default_value = default_value;
 	prop->docstring     = g_strdup (docstring);
 	prop->flags         = flags;
-
 	prop->get_prop      = get_prop;
 	prop->set_prop      = set_prop;
 	prop->user_data     = user_data;
+
+	if (default_value)
+		prop->default_value = bonobo_arg_copy (default_value);
 
 	g_hash_table_insert (pb->priv->props, prop->name, prop);
 }

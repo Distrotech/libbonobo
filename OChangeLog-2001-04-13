@@ -1,5 +1,8 @@
 2001-01-30  Dietmar Maurer  <dietmar@ximian.com>
 
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_full):
+	store a copy of the default_value.
+
 	* bonobo/bonobo-shlib-factory.c (bonobo_shlib_factory_finalize):
 	disable shared library unloading
 
