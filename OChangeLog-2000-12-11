@@ -1,3 +1,12 @@
+1999-05-14  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* bonobo/gnome-stream-fs.c (fs_write): small fix 
+	(gnome_stream_fs_create): added O_RDWR to open flags
+	* bonobo/gnome-storage-fs.c 
+	(gnome_storage_fs_create): small fix 
+	* bonobo/gnome-storage-repo.[hc]: new files (librepo interface) 
+	* bonobo/gnome-stream-repo.[hc]: new files (librepo interface)
+
 1999-05-12  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* bonobo/gnome-storage.[hc]: added destroy function
