@@ -32,7 +32,8 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
-#include <libxml/parser.h> 
+#include <libxml/parser.h>
+#include <libxml/parserInternals.h>
 #include <libxml/xmlmemory.h>
 
 #include "bonobo-activation/bonobo-activation-i18n.h"
@@ -41,135 +42,407 @@
 static gboolean od_string_to_boolean      (const char *str);
 static gboolean od_filename_has_extension (const char *filename,
                                            const char *extension);
+static char *   od_validate               (const char *iid,
+                                           const char *type,
+                                           const char *location);
 
+
+/* SAX Parser */
+typedef enum {
+        STATE_START,
+        STATE_OAF_INFO,
+        STATE_OAF_SERVER,
+        STATE_OAF_ATTRIBUTE,
+        STATE_ITEM,
+        STATE_UNKNOWN,
+        STATE_ERROR
+} ParseState;
+
+typedef struct {
+        ParseState state;
+        ParseState prev_state;
+        int unknown_depth;
+        
+        const char *host;
+        const char *domain;
+        GSList **entries;
+        
+        Bonobo_ServerInfo *cur_server;
+        Bonobo_ActivationProperty *cur_prop;
+        GList *cur_props;
+        GList *cur_items;
+        
+} ParseInfo;
+
+#define IS_ELEMENT(x) (!strcmp (name, x))
+
+static ParseInfo *
+parse_info_new (void)
+{
+        ParseInfo *info = g_new0 (ParseInfo, 1);
+
+        info->prev_state = STATE_UNKNOWN;
+        info->state = STATE_START;
+        
+        return info;
+}
 
 static void
-od_entry_read_props (Bonobo_ServerInfo *server, xmlNodePtr node)
+parse_info_free (ParseInfo *info)
 {
-	int i, max;
-	xmlNodePtr sub;
-	Bonobo_ActivationProperty *curprop;
-
-	for (max = 0, sub = node->xmlChildrenNode; sub; sub = sub->next) {
-		if (sub->type != XML_ELEMENT_NODE || sub->name == NULL) {
-			continue;
-                }
-
-		if (sub->name[0] != 'o' && sub->name [0] != 'O') {
-                        continue;
-                }
-                
-		max++;
-	}
-
-	server->props._buffer = g_new0 (Bonobo_ActivationProperty, max);
-
-        curprop = server->props._buffer;
-
-	for (i = 0, sub = node->xmlChildrenNode; sub != NULL && (i < max);
-             sub = sub->next) {
-		char *type, *valuestr;
-
-		if (sub->type != XML_ELEMENT_NODE || sub->name == NULL) {
-                        continue;
-                }
-
-		type = xmlGetProp (sub, "type");
-		if (type == NULL) {
-			continue;
-                }
-
-		valuestr = xmlGetProp (sub, "name");
-		if (valuestr == NULL) {
-			free (type);
-			continue;
-		}
-		if(valuestr[0] == '_') {
-			g_error("%s is an invalid property name "
-				"- property names beginning with '_' are reserved",
-				valuestr);
-                }
-		curprop->name = CORBA_string_dup (valuestr);
-		free (valuestr);
-
-		if (g_ascii_strcasecmp (type, "stringv") == 0) {
-			int j, o;
-			xmlNodePtr sub2;
-
-			curprop->v._d = Bonobo_ACTIVATION_P_STRINGV;
-
-			for (o = 0, sub2 = sub->xmlChildrenNode; sub2;
-			     sub2 = sub2->next) {
-				if (sub2->type != XML_ELEMENT_NODE) {
-					continue;
-                                }
-				if (g_ascii_strcasecmp (sub2->name, "item") != 0) {
-					continue;
-                                }
-
-				o++;
-			}
-
-			curprop->v._u.value_stringv._length = o;
-			curprop->v._u.value_stringv._buffer =
-				CORBA_sequence_CORBA_string_allocbuf (o);
-
-			for (j = 0, sub2 = sub->xmlChildrenNode; 
-                             j < o;
-			     sub2 = sub2->next, j++) {
-				valuestr = xmlGetProp (sub2, "value");
-				if (valuestr) {
-					curprop->v._u.
-						value_stringv._buffer[j] =
-						CORBA_string_dup (valuestr);
-				} else {
-					g_warning
-						(_("Property '%s' has no value"),
-						 curprop->name);
-					curprop->v._u.
-						value_stringv._buffer[j] =
-						CORBA_string_dup ("");
-				}
-				xmlFree (valuestr);
-			}
-
-		} else if (g_ascii_strcasecmp (type, "number") == 0) {
-			valuestr = xmlGetProp (sub, "value");
-
-			curprop->v._d = Bonobo_ACTIVATION_P_NUMBER;
-			curprop->v._u.value_number = atof (valuestr);
-
-			xmlFree (valuestr);
-		} else if (g_ascii_strcasecmp (type, "boolean") == 0) {
-			valuestr = xmlGetProp (sub, "value");
-			curprop->v._d = Bonobo_ACTIVATION_P_BOOLEAN;
-			curprop->v._u.value_boolean =
-				od_string_to_boolean (valuestr);
-			xmlFree (valuestr);
-		} else {
-			valuestr = xmlGetProp (sub, "value");
-			/* Assume string */
-			curprop->v._d = Bonobo_ACTIVATION_P_STRING;
-			if (valuestr != NULL) {
-				curprop->v._u.value_string =
-					CORBA_string_dup (valuestr);
-			} else {
-                                g_warning (_("Property '%s' has no value"),
-					   curprop->name);
-				curprop->v._u.value_string =
-					CORBA_string_dup ("");
-			}
-			xmlFree (valuestr);
-		}
-                
-		free (type);
-                
-                i++;
-		curprop++;
-	}
-
-	server->props._length = i;
+        g_free (info);
 }
+
+static void
+parse_oaf_server_attrs (ParseInfo      *info,
+                        const xmlChar **attrs)
+{
+        char *iid = NULL, *type = NULL, *location = NULL;
+        const char *att, *val;
+        char *error;
+        int i = 0;
+
+        info->state = STATE_OAF_SERVER;
+        
+        if (!attrs)
+                return;
+
+        do {
+                att = attrs[i++];
+                val = attrs[i++];
+
+                if (att && val) {
+                        if (!iid && !strcmp (att, "iid"))
+                                iid = val;
+                        else if (!type && !strcmp (att, "type"))
+                                type = val;
+                        else if (!location && !strcmp (att, "location"))
+                                location = val;
+                }
+                
+        } while (att && val);
+
+        error = od_validate (iid, type, location);
+        
+        if (error != NULL) {
+                /* FIXME: should syslog */
+                g_print ("%s\n", error);
+                
+                g_free (error);
+
+                return;
+        }
+
+        /* Now create the ServerInfo object */
+        info->cur_server = g_new0 (Bonobo_ServerInfo, 1);
+
+        info->cur_server->iid = CORBA_string_dup (iid);
+        info->cur_server->server_type = CORBA_string_dup (type);
+        info->cur_server->location_info = CORBA_string_dup (location);
+        info->cur_server->hostname = CORBA_string_dup (info->host);
+        info->cur_server->domain = CORBA_string_dup (info->domain);
+        info->cur_server->username = CORBA_string_dup (g_get_user_name ());
+}
+
+static void
+parse_oaf_attribute (ParseInfo     *info,
+                     const xmlChar **attrs)
+{
+        char *type = NULL, *name = NULL;
+        char *value = NULL;
+        char *locale = NULL, *equal_char;
+        const char *att, *val;
+        int i = 0;
+        
+        g_assert (info->cur_server);
+
+        info->state = STATE_OAF_ATTRIBUTE;
+        
+        if (!attrs)
+                return;
+
+        do {
+                att = attrs[i++];
+                val = attrs[i++];
+                
+                if (att && val) {
+                        if (!type && !strcmp (att, "type"))
+                                type = val;
+                        else if (!name && !strcmp (att, "name"))
+                                name = val;
+                        else if (!value && !strcmp (att, "value"))
+                                value = val;
+                }
+                
+        } while (att && val);
+
+        if (!type || !name) {
+                return;
+        }
+        
+        if(name[0] == '_') 
+                g_error("%s is an invalid property name "
+                        "- property names beginning with '_' are reserved",
+                        name);
+
+        equal_char = strchr (name, '-');
+        if (equal_char) {
+                locale = equal_char + 1;
+
+                /* Don't add the localized property if we aren't interested in it */
+                if (!is_locale_interesting (locale)) {
+                return;
+                }
+        }
+        
+        info->cur_prop = g_new0 (Bonobo_ActivationProperty, 1);
+        info->cur_prop->name = CORBA_string_dup (name);
+
+        if (g_ascii_strcasecmp (type, "stringv") == 0) {
+                info->cur_prop->v._d = Bonobo_ACTIVATION_P_STRINGV;
+        } else if (g_ascii_strcasecmp (type, "number") == 0) {
+                info->cur_prop->v._d = Bonobo_ACTIVATION_P_NUMBER;
+                info->cur_prop->v._u.value_number = atof (value);
+        } else if (g_ascii_strcasecmp (type, "boolean") == 0) {
+                info->cur_prop->v._d = Bonobo_ACTIVATION_P_BOOLEAN;
+                info->cur_prop->v._u.value_boolean = od_string_to_boolean (value);
+        } else {
+                /* Assume string */
+                info->cur_prop->v._d = Bonobo_ACTIVATION_P_STRING;
+                if (value != NULL) {
+                        info->cur_prop->v._u.value_string = CORBA_string_dup (value);
+                } else {
+                        g_warning (_("Property '%s' has no value"),
+                                   info->cur_prop->name);
+                        info->cur_prop->v._u.value_string =
+                                CORBA_string_dup ("");
+                }
+        }
+}
+
+static void
+parse_stringv_item (ParseInfo     *info,
+                    const xmlChar **attrs)
+{
+        char *value = NULL;
+        const char *att, *val;
+        int i = 0;
+
+        if (!attrs)
+                return;
+
+        do {
+                att = attrs[i++];
+                val = attrs[i++];
+                
+                if (att && val) {
+                        if (!value && !strcmp (att, "value")) {
+                                value = val;
+                                break;
+                        }
+
+                }
+                
+        } while (att && val);
+
+        if (value) 
+                info->cur_items = g_list_prepend (info->cur_items, CORBA_string_dup (value));
+
+        info->state = STATE_ITEM;
+        
+}
+
+static void
+od_StartElement (ParseInfo     *info,
+                 const xmlChar *name,
+                 const xmlChar **attrs)
+{
+        switch (info->state) {
+        case STATE_START:
+                if (IS_ELEMENT ("oaf_info")) 
+                        info->state = STATE_OAF_INFO;
+                else {
+                        info->prev_state = info->state;
+                        info->state = STATE_UNKNOWN;
+                        info->unknown_depth++;
+                }
+                break;
+        case STATE_OAF_INFO:
+                if (IS_ELEMENT ("oaf_server")) 
+                        parse_oaf_server_attrs (info, attrs);
+                else {
+                        info->prev_state = info->state;
+                        info->state = STATE_UNKNOWN;
+                        info->unknown_depth++;
+                }
+                break;
+        case STATE_OAF_SERVER:
+                if (IS_ELEMENT ("oaf_attribute")) 
+                        parse_oaf_attribute (info, attrs);
+                else {
+                        info->prev_state = info->state;
+                        info->state = STATE_UNKNOWN;
+                        info->unknown_depth++;
+                }
+                break;
+        case STATE_OAF_ATTRIBUTE:
+                if (IS_ELEMENT ("item"))
+                        parse_stringv_item (info, attrs);
+                else {
+                        info->prev_state = info->state;
+                        info->state = STATE_UNKNOWN;
+                        info->unknown_depth++;
+                }
+                break;
+        case STATE_UNKNOWN:
+		info->unknown_depth++;
+		break;
+        case STATE_ERROR:
+                break;
+                break;
+        default:
+                g_error ("start element, unknown state: %d", info->state);
+        }
+}
+
+static void
+od_EndElement (ParseInfo     *info,
+               const xmlChar *name)
+{
+
+        switch (info->state) {
+        case STATE_ITEM:
+                info->state = STATE_OAF_ATTRIBUTE;
+                break;
+        case STATE_OAF_ATTRIBUTE: {
+                if (info->cur_prop && info->cur_prop->v._d == Bonobo_ACTIVATION_P_STRINGV) {
+                        gint i, len;
+                        GList *p;
+                        
+                        len = g_list_length (info->cur_items);
+
+                        info->cur_prop->v._u.value_stringv._length = len;
+                        info->cur_prop->v._u.value_stringv._buffer =
+                                CORBA_sequence_CORBA_string_allocbuf (len);
+                        
+                        for (i = 0, p = g_list_reverse (info->cur_items); p; p = p->next, i++)
+                                info->cur_prop->v._u.
+                                        value_stringv._buffer[i] = p->data;
+                        g_list_free (info->cur_items);
+                        info->cur_items = NULL;
+                }
+
+                if (info->cur_prop) {
+                        info->cur_props = g_list_prepend (info->cur_props, info->cur_prop);
+                        info->cur_prop = NULL;
+                }
+                
+                info->state = STATE_OAF_SERVER;
+                break;
+        }
+        case STATE_OAF_SERVER: {
+                if (info->cur_server) {
+                        GList *p;
+                        gint len, i;
+
+                        len = g_list_length (info->cur_props);
+
+                        info->cur_server->props._length = len;
+                        info->cur_server->props._buffer = g_new0 (Bonobo_ActivationProperty, len);
+
+                        for (i = 0, p = g_list_reverse (info->cur_props); p; p = p->next, i++) {
+                                info->cur_server->props._buffer[i] = *((Bonobo_ActivationProperty *)p->data);
+                                g_free (p->data);
+                        }
+                        g_list_free (info->cur_props);
+                        info->cur_props = NULL;
+                        
+                        *(info->entries) = g_slist_prepend (*(info->entries), info->cur_server);
+                        info->cur_server = NULL;
+                }
+                info->state = STATE_OAF_INFO;
+                break;
+        }
+        case STATE_OAF_INFO: {
+                info->state = STATE_START;
+                break;
+        }
+        case STATE_UNKNOWN:
+		info->unknown_depth--;
+		if (info->unknown_depth == 0)
+			info->state = info->prev_state;
+		break;
+        case STATE_START:
+                break;
+        default:
+                g_error ("end element, unknown state: %d", info->state);
+        }
+}
+
+static xmlEntityPtr
+od_GetEntity (ParseState *ps, const xmlChar *name)
+{
+	return xmlGetPredefinedEntity (name);
+}
+
+static void
+od_Warning (ParseInfo *ps,
+            const char *msg,
+            ...)
+{
+	va_list args;
+
+	va_start (args, msg);
+	g_logv   ("XML", G_LOG_LEVEL_WARNING, msg, args);
+	va_end   (args);
+}
+
+static void
+od_Error (ParseInfo *ps, const char *msg, ...)
+{
+	va_list args;
+
+	va_start (args, msg);
+	g_logv   ("XML", G_LOG_LEVEL_CRITICAL, msg, args);
+	va_end   (args);
+}
+
+static void
+od_FatalError (ParseInfo *ps, const char *msg, ...)
+{
+	va_list args;
+
+	va_start (args, msg);
+	g_logv   ("XML", G_LOG_LEVEL_ERROR, msg, args);
+	va_end   (args);
+}
+
+static xmlSAXHandler od_SAXParser = {
+	NULL, /* internalSubset */
+	NULL, /* isStandalone */
+	NULL, /* hasInternalSubset */
+	NULL, /* hasExternalSubset */
+	NULL, /* resolveEntity */
+        (getEntitySAXFunc) od_GetEntity, /* getEntity */
+	NULL, /* entityDecl */
+	NULL, /* notationDecl */
+	NULL, /* attributeDecl */
+	NULL, /* elementDecl */
+	NULL, /* unparsedEntityDecl */
+	NULL, /* setDocumentLocator */
+	NULL, /* startDocument */
+	(endDocumentSAXFunc) NULL, /* endDocument */
+	(startElementSAXFunc) od_StartElement, /* startElement */
+	(endElementSAXFunc) od_EndElement, /* endElement */
+	NULL, /* reference */
+	NULL, /* characters */
+	NULL, /* ignorableWhitespace */
+	NULL, /* processingInstruction */
+	NULL, /* comment */
+	(warningSAXFunc) od_Warning, /* warning */
+	(errorSAXFunc) od_Error, /* error */
+	(fatalErrorSAXFunc) od_FatalError, /* fatalError */
+};
 
 static char *
 od_validate (const char *iid, const char *type, const char *location)
@@ -202,119 +475,48 @@ od_validate (const char *iid, const char *type, const char *location)
         return NULL;
 }
 
-
-
-
-static void
-od_process_server_xml_node (xmlNodePtr node,
-                            GSList    **entries,
-                            const char *host, 
-                            const char *domain)
-{
-        GSList *cur;
-        Bonobo_ServerInfo *server;
-        char *iid, *type, *location, *error;
-        gboolean already_there;
-        
-        if (node->type != XML_ELEMENT_NODE) {
-                /* syslog error */
-                return;
-        }
-        
-        /* I'd love to use XML namespaces, but unfortunately they appear
-         * to require putting complicated stuff into the .oaf file, 
-         * and even more complicated stuff to use. 
-         */
-        
-        if (g_ascii_strcasecmp (node->name, "oaf_server")) {
-                /* FIXME: syslog the error */
-                return;
-        }
-                
-        iid = xmlGetProp (node, "iid");
-        type = xmlGetProp (node, "type");
-        location = xmlGetProp (node, "location");
-        
-        error = od_validate (iid, type, location);
-
-        if (error != NULL) {
-                /* FIXME: should syslog */
-                g_print ("%s\n", error);
-                        
-                g_free (error);
-                xmlFree (iid);
-                xmlFree (type);
-                xmlFree (location);
-
-                return;
-        }
-                
-        /* make sure the component has not been already read. If so,
-           do not add this entry to the entries list */
-        already_there = FALSE;
-        
-        for (cur = *entries; cur != NULL; cur = cur->next) {
-                if (strcmp (((Bonobo_ServerInfo *) cur->data)->iid, iid) == 0) {
-                        already_there = TRUE;
-                        break;
-                }
-        }
-        
-        if (already_there == FALSE) {
-                server = g_new0 (Bonobo_ServerInfo, 1);
-                
-                server->iid = CORBA_string_dup (iid);
-                server->server_type = CORBA_string_dup (type);
-                server->location_info = CORBA_string_dup (location);
-                server->hostname = CORBA_string_dup (host);
-                server->domain = CORBA_string_dup (domain);
-                server->username = CORBA_string_dup (g_get_user_name ());
-                
-                od_entry_read_props (server, node);
-                
-                *entries = g_slist_prepend (*entries, server);
-        }
-                
-        xmlFree (iid);
-        xmlFree (type);
-        xmlFree (location);
-}
-
-
-
 static void
 od_load_file (const char *file,
               GSList    **entries,
               const char *host, 
               const char *domain)
 {
-        xmlNodePtr node;
-        xmlDocPtr document;
-       
-        document = xmlParseFile (file);
+        ParseInfo *info;
+	xmlSAXHandlerPtr oldsax;
+        xmlParserCtxt *ctxt;
+        int ret = 0;
         
-        if (document == NULL) {
+        info = parse_info_new ();
+        info->host = host;
+        info->domain = domain;
+        info->entries = entries;
+
+        ctxt = xmlCreateFileParserCtxt (file);
+        oldsax = ctxt->sax;
+        ctxt->sax = &od_SAXParser;
+        ctxt->userData = info;
+        /* Magic to make entities work as expected */
+	ctxt->replaceEntities = TRUE;
+
+        xmlParseDocument (ctxt);
+
+        if (ctxt->wellFormed)
+                ret = 0;
+        else {
+                if (ctxt->errNo != 0)
+                        ret = ctxt->errNo;
+                else
+                        ret = -1;
+        }
+        ctxt->sax = oldsax;
+        xmlFreeParserCtxt (ctxt);
+
+        parse_info_free (info);
+
+        if (ret < 0) {
                 /* FIXME: syslog the error */
                 return;
         }
-        
-	node = document->xmlRootNode;
-	if (node == NULL) {
-                /* FIXME: syslog the error */
-                xmlFreeDoc (document);
-		return;
-	}
-
-        if (g_ascii_strcasecmp (node->name, "oaf_info") == 0) {
-                node = node->xmlChildrenNode;
-        }
-        
-        while (node != NULL) {
-                od_process_server_xml_node (node, entries, host, domain);
-                node = node->next;
-        }
-        
-        xmlFreeDoc (document);
 }
 
 static void
@@ -358,15 +560,15 @@ od_load_directory (const char *directory,
 
 void
 Bonobo_ServerInfo_load (char **directories,
-                     Bonobo_ServerInfoList   *servers,
-		     GHashTable **iid_to_server_info_map,
-		     const char *host, const char *domain)
+                        Bonobo_ServerInfoList   *servers,
+                        GHashTable **iid_to_server_info_map,
+                        const char *host, const char *domain)
 {
 	GSList *entries;
         int length;
         GSList *p;
 	int i, j; 
-
+        
 	g_return_if_fail (directories);
 	g_return_if_fail (iid_to_server_info_map);
 

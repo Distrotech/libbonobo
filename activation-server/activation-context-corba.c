@@ -419,6 +419,7 @@ ac_update_lists (impl_POA_Bonobo_ActivationContext *servant,
 #define GET_SERVANT(s) ((impl_POA_Bonobo_ActivationContext *)(s))
 
 static GList *clients = NULL;
+static GList *locale_list = NULL;
 
 void
 notify_clients_cache_reset (void)
@@ -443,13 +444,76 @@ notify_clients_cache_reset (void)
         }
 }
 
+void
+add_initial_locales (void)
+{
+        const char *tmp;
+        char *tmp2, *lang, *lang_with_locale, *equal_char;
+        
+        lang_with_locale = NULL;
+        
+        tmp = g_getenv ("LANGUAGE");
+
+        if (!tmp)
+                tmp = g_getenv ("LANG");
+        
+        lang = g_strdup (tmp);
+        tmp2 = lang;
+
+        if (lang) {
+                /* envs can be in NAME=VALUE form */
+		equal_char = strchr (lang, '=');
+		if (equal_char)
+			lang = equal_char + 1;
+
+                /* check if the locale has a _ */
+                equal_char = strchr (lang, '_');
+                if (equal_char != NULL) {
+                        lang_with_locale = g_strdup (lang);
+                        *equal_char = 0;
+                }
+
+                if (lang_with_locale && strcmp (lang_with_locale, "")) 
+                        locale_list = g_list_prepend (locale_list, lang_with_locale);
+                if (lang && strcmp (lang, "")) 
+                        locale_list = g_list_prepend (locale_list, lang);
+        }
+
+        g_free (tmp2);
+}
+
+gboolean
+is_locale_interesting (const char *locale)
+{
+        return (g_list_find_custom (locale_list, locale,
+                                    (GCompareFunc)strcmp) != NULL);
+}
+
 static void
 impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
                                          const Bonobo_ActivationClient client,
                                          const CORBA_char             *locales,
                                          CORBA_Environment            *ev)
 {
+        char **localev;
+        gboolean new_locale = FALSE;
+        int i;
+        
+        localev = g_strsplit (locales, ",", 0);
+
+        for (i = 0; localev[i]; i++) {
+                if (!g_list_find_custom (locale_list, localev[i],
+                                         (GCompareFunc)strcmp)) {
+                        locale_list = g_list_prepend (locale_list, g_strdup (localev[i]));
+                        new_locale = TRUE;
+                }
+        }
+        g_strfreev (localev);
+        
         clients = g_list_prepend (clients, CORBA_Object_duplicate (client, ev));
+
+        if (new_locale)
+                reload_object_directory ();
 }
 
 static Bonobo_ObjectDirectoryList *

@@ -141,6 +141,66 @@ bonobo_activation_release_corba_client (void)
         CORBA_exception_free (&ev);
 }
 
+
+static char *
+get_lang_list (void)
+{
+        static char *result = NULL;
+        static gboolean result_set = FALSE;
+        const char *tmp;
+        char *tmp2, *lang, *lang_with_locale, *equal_char;
+        GString *str;
+        int len = 0, cur = 0;
+        gboolean add_comma = FALSE;
+        
+        lang_with_locale = NULL;
+        
+        if (result_set)
+                return result;
+        
+        tmp = g_getenv ("LANGUAGE");
+
+        if (!tmp)
+                tmp = g_getenv ("LANG");
+        
+        lang = g_strdup (tmp);
+        tmp2 = lang;
+
+        str = g_string_new (NULL);
+        
+        if (lang) {
+                /* envs can be in NAME=VALUE form */
+		equal_char = strchr (lang, '=');
+		if (equal_char)
+			lang = equal_char + 1;
+
+                /* check if the locale has a _ */
+                equal_char = strchr (lang, '_');
+                if (equal_char != NULL) {
+                        lang_with_locale = g_strdup (lang);
+                        *equal_char = 0;
+                }
+
+                if (lang_with_locale && strcmp (lang_with_locale, "")) {
+                        g_string_append (str, lang_with_locale);
+                        add_comma = TRUE;
+                }
+                if (lang && strcmp (lang, "")) {
+                        if (add_comma)
+                                g_string_append (str, ",");
+                        g_string_append (str, lang);
+                }
+
+        }
+        result_set = TRUE;
+        g_free (tmp2);
+        
+        result = str->str ? str->str : "";
+        g_string_free (str, FALSE);
+        
+        return result;
+}
+
 void
 bonobo_activation_register_client (Bonobo_ActivationContext context,
                                    CORBA_Environment       *ev)
@@ -149,6 +209,5 @@ bonobo_activation_register_client (Bonobo_ActivationContext context,
                 client = bonobo_activation_corba_client_new ();
         }
 
-        /* FIXME: extract the locales we're interested in here */
-        Bonobo_ActivationContext_addClient (context, client, "", ev);
+        Bonobo_ActivationContext_addClient (context, client, get_lang_list (), ev);
 }

@@ -150,7 +150,7 @@ registry_directory_needs_update (impl_POA_Bonobo_ObjectDirectory *servant,
 }
 
 static void
-update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
+update_registry (impl_POA_Bonobo_ObjectDirectory *servant, gboolean force_reload)
 {
         int i;
         time_t cur_time;
@@ -166,7 +166,7 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
                 return;
 
         must_load = FALSE;
-
+        
         /* Don't stat more than once every 5 seconds or activation
            could be too slow. This works even on the first read
            because then `time_did_stat is 0' */
@@ -181,8 +181,8 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
                         }
                 }
         }
-
-        if (must_load) {
+        
+        if (must_load || force_reload) {
                 Bonobo_ServerInfo_load (servant->registry_source_directories,
                                         &servant->attr_servers,
                                         &servant->by_iid,
@@ -193,7 +193,8 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
 #ifdef BONOBO_ACTIVATION_DEBUG
                 od_dump_list (servant);
 #endif
-                notify_clients_cache_reset ();
+                if (must_load)
+                        notify_clients_cache_reset ();
         }
 
         reload_recurse_depth--;
@@ -251,7 +252,7 @@ impl_Bonobo_ObjectDirectory__get_servers (impl_POA_Bonobo_ObjectDirectory * serv
 {
 	Bonobo_ServerInfoListCache *retval;
 
-        update_registry (servant);
+        update_registry (servant, FALSE);
 
 	retval = Bonobo_ServerInfoListCache__alloc ();
 
@@ -385,7 +386,7 @@ impl_Bonobo_ObjectDirectory_activate (impl_POA_Bonobo_ObjectDirectory *servant,
 
 	retval = CORBA_OBJECT_NIL;
 
-        update_registry (servant);
+        update_registry (servant, FALSE);
 
         if (!(flags & Bonobo_ACTIVATION_FLAG_PRIVATE)) {
                 retval = od_get_active_server (servant, iid, ctx, ev);
@@ -656,10 +657,17 @@ Bonobo_ObjectDirectory_create (PortableServer_POA poa,
         newservant->registry_source_directories = split_path_unique (registry_path);
         newservant->registry_directory_mtimes = g_hash_table_new (g_str_hash, g_str_equal);
 
-        update_registry (newservant);
+        update_registry (newservant, FALSE);
 
         newservant->active_servers =
                 g_hash_table_new (g_str_hash, g_str_equal);
 
 	return CORBA_Object_duplicate (retval, ev);
+}
+
+void
+reload_object_directory (void)
+{
+        g_print ("reloading our object directory!\n");
+        update_registry (main_dir, TRUE);
 }

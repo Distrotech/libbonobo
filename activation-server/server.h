@@ -14,6 +14,7 @@ CORBA_Object         bonobo_object_directory_re_check_fn (const char            
                                                           const char            *od_iorstr,
                                                           gpointer               user_data,
                                                           CORBA_Environment     *ev);
+void                     reload_object_directory         (void);
 
 /* object-directory-load.c */
 void                     Bonobo_ServerInfo_load          (char                 **dirs,
@@ -41,5 +42,8 @@ Bonobo_ActivationContext Bonobo_ActivationContext_create (PortableServer_POA poa
 
 void                     notify_clients_cache_reset      (void);
 
+void                     add_initial_locales             (void);
+
+gboolean                 is_locale_interesting           (const char *locale);
 
 #endif /* SERVER_H */

@@ -165,6 +165,8 @@ main (int argc, char *argv[])
 	orb = bonobo_activation_init (argc, argv);
 	ml = g_main_new (FALSE);
 
+        add_initial_locales ();
+        
 	root_poa = (PortableServer_POA)
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 	{
