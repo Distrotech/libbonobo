@@ -1,3 +1,9 @@
+001-01-10  Miguel de Icaza  <miguel@helixcode.com>
+
+	* bonobo/bonobo-item-handler.c (bonobo_item_options_free): Implement.
+	(bonobo_item_option_parse): New utility function to parse option
+	strings in item monikers.
+
 2001-01-11  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-engine.c (impl_destroy): free hash table.
