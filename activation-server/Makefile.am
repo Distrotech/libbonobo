@@ -28,6 +28,7 @@ oafd_SOURCES=			\
 	od-utils.c		\
 	od-activate.c		\
 	main.c			\
+	od-utils.h		\
 	oafd.h
 
 LDADD=../liboaf/liboaf.la \
