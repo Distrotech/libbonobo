@@ -87,14 +87,15 @@ echo_get_type (void)
 	if (!type) {
 		GTypeInfo info = {
 			sizeof (EchoClass),
-			(GBaseInitFunc) echo_init,
+			(GBaseInitFunc) NULL,
 			(GBaseFinalizeFunc) NULL,
 			(GClassInitFunc) echo_class_init,
 			NULL, /* class_finalize */
 			NULL, /* class_data */
 			sizeof (Echo),
 			0, /* n_preallocs */
-			(GInstanceInitFunc) NULL
+			(GInstanceInitFunc)  echo_init,
+			NULL
 		};
 
 		type = bonobo_type_unique (

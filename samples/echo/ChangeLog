@@ -1,3 +1,7 @@
+2001-08-31  Gustavo J A M Carneiro <ee96090@fe.up.pt>
+
+	* echo.c (echo_get_type): fixup GTypeInfo structure.
+
 2001-08-18  Darin Adler  <darin@bentspoon.com>
 
 	* Makefile.am: Remove extra -I directives.
