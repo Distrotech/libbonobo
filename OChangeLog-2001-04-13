@@ -1,5 +1,11 @@
 2000-04-21  Ettore Perazzoli  <ettore@helixcode.com>
 
+	* configure.in: Prepend `BONOBO_INCLUDEDIR' with `-I{$includedir}'
+	so that if Bonobo is installed under a prefix that is different
+	from the default GNOME one, things still work.
+
+2000-04-21  Ettore Perazzoli  <ettore@helixcode.com>
+
 	* samples/compound-doc/Makefile.am
 	(paint_component_simple_LDADD): You don't want to use
 	`BONOBO_LIBS' here as bonobo is not yet installed when you get
