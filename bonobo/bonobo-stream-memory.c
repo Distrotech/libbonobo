@@ -1,0 +1,246 @@
+/*
+ * gnome-stream-mem.c: Memory based stream
+ *
+ * Author:
+ *   Miguel de Icaza (miguel@gnu.org)
+ */
+#include <config.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-util.h>
+#include <bonobo/gnome-stream-memory.h>
+#include <errno.h>
+
+static GnomeStreamClass *gnome_stream_mem_parent_class;
+
+static void
+mem_truncate (GnomeStream *stream,
+	      const CORBA_long new_size, 
+	      CORBA_Environment *ev)
+{
+	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+	void *newp;
+	
+	if (smem->read_only)
+		return;
+
+	newp = g_realloc (smem->buffer, new_size);
+	if (newp == NULL){
+		g_warning ("Signal exception");
+		return;
+	}
+
+	smem->buffer = newp;
+	smem->size = new_size;
+
+	if (smem->pos > new_size)
+		smem->pos = new_size;
+}
+
+static CORBA_long
+mem_write (GnomeStream *stream, long count,
+	   const CORBA_char *buffer,
+	   CORBA_Environment *ev)
+{
+	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+
+	if (smem->read_only){
+		g_warning ("Should signal an exception here");
+		return 0;
+	}
+
+	if (smem->pos + count > smem->size){
+		mem_truncate (stream, smem->pos + count, ev);
+		g_warning ("Should check for an exception here");
+	}
+
+	if (smem->pos + count > smem->size)
+		count = smem->size - smem->pos;
+	
+	memcpy (smem->buffer, buffer, count);
+	smem->pos += count;
+		
+	return count;
+}
+
+static CORBA_long
+mem_read (GnomeStream *stream, long count,
+	  CORBA_char **buffer,
+	  CORBA_Environment *ev)
+{
+	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+	long len;
+
+	if (smem->pos + count > smem->size)
+		count = smem->size - smem->pos;
+	    
+	*buffer = g_malloc (count);
+	memcpy (*buffer, smem->buffer, count);
+
+	smem->pos += count;
+	
+	return count;
+}
+
+static void
+mem_seek (GnomeStream *stream,
+	  CORBA_long offset, CORBA_long whence,
+	  CORBA_Environment *ev)
+{
+	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+	int pos = 0;
+	
+	switch (whence){
+	case 0:
+		pos = offset;
+		break;
+
+	case 1:
+		pos = smem->pos + offset;
+		break;
+
+	case 2:
+		pos = smem->size + offset;
+		break;
+
+	default:
+		g_warning ("Signal exception");
+	}
+
+	if (pos > smem->size){
+		mem_truncate (stream, pos, ev);
+	}
+	smem->pos = pos;
+	return;
+}
+
+static void
+mem_copy_to  (GnomeStream *stream,
+	      const CORBA_char *dest,
+	      const CORBA_long bytes,
+	      CORBA_long *read,
+	      CORBA_long *written,
+	      CORBA_Environment *ev)
+{
+	g_warning ("Implement me");
+}
+
+static void
+mem_commit   (GnomeStream *stream,
+	      CORBA_Environment *ev)
+{
+}
+
+static void
+mem_destroy (GtkObject *object)
+{
+	GnomeStreamMem *smem = GNOME_STREAM_MEM (object);
+	
+	if (smem->buffer)
+		g_free (smem->buffer);
+	
+	GTK_OBJECT_CLASS (gnome_stream_mem_parent_class)->destroy (object);
+}
+
+static void
+gnome_stream_fs_class_init (GnomeStreamMemClass *class)
+{
+	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GnomeStreamClass *sclass = GNOME_STREAM_CLASS (class);
+	
+	gnome_stream_mem_parent_class = gtk_type_class (gnome_stream_get_type ());
+
+	object_class->destroy = mem_destroy;
+	
+	sclass->write    = mem_write;
+	sclass->read     = mem_read;
+	sclass->seek     = mem_seek;
+	sclass->truncate = mem_truncate;
+	sclass->copy_to  = mem_copy_to;
+	sclass->commit   = mem_commit;
+}
+
+GtkType
+gnome_stream_mem_get_type (void)
+{
+	static GtkType type = 0;
+
+	if (!type){
+		GtkTypeInfo info = {
+			"IDL:GNOME/StreamMem:1.0",
+			sizeof (GnomeStreamMem),
+			sizeof (GnomeStreamMemClass),
+			(GtkClassInitFunc) NULL,
+			(GtkObjectInitFunc) NULL,
+			NULL, /* reserved 1 */
+			NULL, /* reserved 2 */
+			(GtkClassInitFunc) NULL
+		};
+
+		type = gtk_type_unique (gnome_stream_get_type (), &info);
+	}
+
+	return type;
+}
+
+static GNOME_Stream
+create_gnome_stream_mem (GnomeObject *object)
+{
+	POA_GNOME_Stream *servant;
+	CORBA_Object o;
+
+	servant = g_new0 (POA_GNOME_Stream, 1);
+	servant->vepv = &gnome_stream_vepv;
+	POA_GNOME_Stream__init ((PortableServer_Servant) servant, &object->ev);
+	if (object->ev._major != CORBA_NO_EXCEPTION){
+                g_free (servant);
+                return CORBA_OBJECT_NIL;
+        }
+
+	return (GNOME_Stream) gnome_object_activate_servant (object, servant);
+}
+
+GnomeStream *
+gnome_stream_mem_create (char *buffer, size_t size, gboolean read_only)
+{
+	GnomeStreamMem *stream_mem;
+	GNOME_Stream corba_stream;
+	char *copy;
+	
+	g_return_val_if_fail (buffer != NULL, NULL);
+
+	if (read_only)
+		copy = buffer;
+	else {
+		copy = g_malloc (size);
+		if (!copy)
+			return NULL;
+	}
+	
+	stream_mem = gtk_type_new (gnome_stream_mem_get_type ());
+	if (stream_mem == NULL){
+		g_free (copy);
+		return NULL;
+	}
+
+	stream_mem->buffer = copy;
+	stream_mem->size = size;
+	stream_mem->pos = 0;
+	stream_mem->read_only = read_only;
+	
+	corba_stream = create_gnome_stream_mem (
+		GNOME_OBJECT (stream_mem));
+
+	if (corba_stream == CORBA_OBJECT_NIL){
+		gtk_object_destroy (GTK_OBJECT (stream_mem));
+		return NULL;
+	}
+
+	gnome_object_construct (
+		GNOME_OBJECT (stream_mem), corba_stream);
+	return GNOME_STREAM (stream_mem);
+}
+
+
+

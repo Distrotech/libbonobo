@@ -7,9 +7,9 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
+#include <libgnorba/gnorba.h>
 #include <bonobo/gnome-main.h>
 #include <bonobo/gnome-object.h>
-#include <libgnorba/gnorba.h>
 #include "bonobo.h"
 #include "gtk-interfaces.h"
 
@@ -165,10 +165,14 @@ static void
 gnome_object_destroy (GtkObject *object)
 {
 	GnomeObject *gnome_object = GNOME_OBJECT (object);
-
+	void *servant = g_hash_table_lookup (object_to_servant, object);
+	
 	gnome_object_drop_binding (gnome_object);
-	if (gnome_object->object != CORBA_OBJECT_NIL)
+	if (gnome_object->object != CORBA_OBJECT_NIL){
+		PortableServer_POA_deactivate_object (
+			bonobo_poa (), servant, &gnome_object->ev);
 		CORBA_Object_release (gnome_object->object, &gnome_object->ev);
+	}
 	CORBA_exception_free (&gnome_object->ev);
 	gnome_object_parent_class->destroy (object);
 }
