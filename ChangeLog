@@ -1,3 +1,8 @@
+2001-04-15  Martin Baulig  <baulig@suse.de>
+
+	* configure.in: Added check for dladdr() from bonobo/configure.in
+	and require libgnomebase.
+
 2001-04-13  Martin Baulig  <baulig@suse.de>
 
 	* libbonobo/Makefile.am: Added simple Makefile.am.

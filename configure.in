@@ -39,6 +39,46 @@ GNOME_COMPILE_WARNINGS(maximum)
 dnl Utility conditional
 AM_CONDITIONAL(FALSE, test x = y)
 
+dnl Test for dladdr
+AC_MSG_CHECKING(for dladdr)
+have_dladdr=false
+AC_TRY_COMPILE([
+#define _GNU_SOURCE
+#include <dlfcn.h>], [
+{
+	Dl_info info;
+	int     a;
+	a = dladdr ("SHLIB_ID", &info);
+}], have_dladdr=true)
+
+if $have_dladdr; then
+	AC_MSG_RESULT(found)
+else
+	AC_MSG_RESULT(not found - no auto shlib factory unloads)
+fi
+
+AC_DEFINE(HAVE_DLADDR,$have_dladdr)
+
+dnl
+dnl Start of pkg-config checks
+dnl
+GNOME_PKGCONFIG_CHECK_MODULES(ORBIT, ORBit-2.0:2.3.90)
+AC_PATH_PROG(ORBIT_IDL, orbit-idl, no)
+AC_SUBST(ORBIT_CFLAGS)
+AC_SUBST(ORBIT_LIBS)
+
+GNOME_PKGCONFIG_CHECK_MODULES(GLIB, glib-2.0:1.3.1)
+AC_SUBST(GLIB_CFLAGS)
+AC_SUBST(GLIB_LIBS)
+
+GNOME_PKGCONFIG_CHECK_MODULES(OAF, oaf-2.0)
+AC_SUBST(OAF_CFLAGS)
+AC_SUBST(OAF_LIBS)
+
+GNOME_PKGCONFIG_CHECK_MODULES(LIBGNOMEBASE, libgnomebase-2.0:1.96.0)
+AC_SUBST(LIBGNOMEBASE_CFLAGS)
+AC_SUBST(LIBGNOMEBASE_LIBS)
+
 AC_OUTPUT([
 Makefile
 po/Makefile.in
