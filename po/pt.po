@@ -1,14 +1,14 @@
 # libbonobo's Portuguese Translation
-# Copyright © 2001, 2004 libbonobo.
+# Copyright © 2001, 2002, 2003, 2004, 2005 libbonobo.
 # Distributed under the same licence as the libbonobo package
-# Duarte Loreto <happyguy_pt@hotmail.com>, 2001, 2004.
+# Duarte Loreto <happyguy_pt@hotmail.com>, 2001, 2002, 2003, 2004, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.6\n"
+"Project-Id-Version: 2.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-05 14:40+0000\n"
-"PO-Revision-Date: 2004-02-01 16:35+0000\n"
+"POT-Creation-Date: 2005-02-23 01:00+0000\n"
+"PO-Revision-Date: 2005-02-23 01:05+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -23,32 +23,32 @@ msgstr "Incapaz de encontrar em que filho o servidor estava listado"
 msgid "Not a valid Activation ID"
 msgstr "Não é um ID de Activação válido"
 
-#: activation-server/activation-server-main.c:68
+#: activation-server/activation-server-main.c:70
 msgid "Directory to read .server files from"
 msgstr "Directório de onde ler ficheiros .server"
 
-#: activation-server/activation-server-main.c:68
+#: activation-server/activation-server-main.c:70
 msgid "DIRECTORY"
 msgstr "DIRECTÓRIO"
 
-#: activation-server/activation-server-main.c:71
+#: activation-server/activation-server-main.c:73
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Servir de ActivationContext (por omissão é apenas um ObjectDirectory)"
 
-#: activation-server/activation-server-main.c:75
+#: activation-server/activation-server-main.c:77
 msgid "File descriptor to write IOR to"
 msgstr "Descritor de ficheiro para onde escrever IOR"
 
-#: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:200
+#: activation-server/activation-server-main.c:77
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:83
+#: activation-server/activation-server-main.c:85
 msgid "Query expression to evaluate"
 msgstr "Expressão de consulta a avaliar"
 
-#: activation-server/activation-server-main.c:83
+#: activation-server/activation-server-main.c:85
 msgid "EXPRESSION"
 msgstr "EXPRESSÃO"
 
@@ -68,7 +68,7 @@ msgstr "Serviço de notificação"
 msgid "Notification service for activation"
 msgstr "Serviço de notificação para activação"
 
-#: activation-server/object-directory-activate.c:187
+#: activation-server/object-directory-activate.c:186
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Ainda não são geridas activações de objectos shlib num processo remoto"
 
@@ -127,54 +127,38 @@ msgstr "Incapaz de parsear documento XML mal formado %s"
 msgid "Trying dir %s"
 msgstr "A tentar directório %s"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:102
+#: bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
 "Processo filho não indicou mensagem de erro, ocorreu uma falha desconhecida"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:174
+#: bonobo-activation/bonobo-activation-fork-server.c:177
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Falha ao ler do processo filho: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:297
-msgid "Couldn't fork a new process"
-msgstr "Incapaz de efectuar fork de um novo processo"
+#: bonobo-activation/bonobo-activation-fork-server.c:184
+msgid "EOF from child process\n"
+msgstr "EOF no processo filho\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:318
-#, c-format
-msgid "Child received signal %u (%s)"
-msgstr "Filho recebeu sinal %u (%s)"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:323
-#, c-format
-msgid "Unknown non-exit error (status is %u)"
-msgstr "Erro não-terminal desconhecido (estado é %u)"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:404
-#, c-format
-msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-activation falhou ao definir grupo de processo de %s: %s\n"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:416
-#, c-format
-msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Falha ao executar %s: %d (%s)\n"
+#: bonobo-activation/bonobo-activation-fork-server.c:332
+msgid "Couldn't spawn a new process"
+msgstr "Incapaz de iniciar um novo processo"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 "Demasiados níveis de equivalências para um local, poderá indicar um ciclo"
 
-#: bonobo-activation/bonobo-activation-init.c:200
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "File descriptor to print IOR on"
 msgstr "Descritor de ficheiro onde imprimir IOR"
 
-#: bonobo-activation/bonobo-activation-init.c:202
+#: bonobo-activation/bonobo-activation-init.c:197
 msgid "IID to activate"
 msgstr "IID a activar"
 
-#: bonobo-activation/bonobo-activation-init.c:204
+#: bonobo-activation/bonobo-activation-init.c:199
 msgid "Prevent registering of server with OAF"
 msgstr "Impedir registo de servidor com OAF"
 
@@ -493,6 +477,18 @@ msgstr "Apresentar directórios no ficheiro de configuração"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Apresentar caminho para ficheiro de configuração"
+
+#~ msgid "Child received signal %u (%s)"
+#~ msgstr "Filho recebeu sinal %u (%s)"
+
+#~ msgid "Unknown non-exit error (status is %u)"
+#~ msgstr "Erro não-terminal desconhecido (estado é %u)"
+
+#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
+#~ msgstr "bonobo-activation falhou ao definir grupo de processo de %s: %s\n"
+
+#~ msgid "Failed to execute %s: %d (%s)\n"
+#~ msgstr "Falha ao executar %s: %d (%s)\n"
 
 #~ msgid "No server corresponding to your query"
 #~ msgstr "Nenhum servidor corresponde à sua consulta"
