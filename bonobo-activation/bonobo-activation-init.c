@@ -186,6 +186,7 @@ static int oaf_ior_fd = 1;
 static char *oaf_activate_iid = NULL;
 
 struct poptOption oaf_popt_options[] = {
+  {NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
   {"oaf-od-ior", '\0', POPT_ARG_STRING, &oaf_od_ior, 0,
    N_("Object directory to use when registering servers"), "IOR"},
   {"oaf-ior-fd", '\0', POPT_ARG_INT, &oaf_ior_fd, 0,
