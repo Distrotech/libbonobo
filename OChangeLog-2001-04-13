@@ -1,4 +1,46 @@
+2001-02-07  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-view-frame.c (init_view_frame_corba_class): kill.
+	(bonobo_view_frame_get_epv): move to
+	(bonobo_view_frame_class_init): here & upd.
+	(bonobo_view_frame_get_type): upd.
+	(bonobo_view_frame_new): upd.
+	(create_bonobo_view_frame): kill.
+
+	* bonobo/bonobo-embeddable.c (bonobo_embeddable_get_epv): move into
+	(bonobo_embeddable_class_init): here & upd.
+	(bonobo_embeddable_corba_class_init): kill.
+	(bonobo_embeddable_corba_object_create): kill.
+	(bonobo_embeddable_get_type): upd.
+	(bonobo_embeddable_new_canvas_item): upd.
+	(bonobo_embeddable_new): upd.
+	(bonobo_embeddable_construct): upd.
+	(bonobo_embeddable_construct_full): upd.
+
 2001-02-06  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-desktop-window.c (bonobo_desktop_window_get_epv): move to
+	(bonobo_desktop_window_class_init): here & upd.
+	(init_desktop_window_corba_class): kill.
+	(bonobo_desktop_window_init): remove.
+	(bonobo_desktop_window_get_type): upd.
+	(bonobo_desktop_window_corba_object_create): kill.
+	(bonobo_desktop_window_construct): upd.
+	(bonobo_desktop_window_new): upd.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_get_epv): move to
+	(bonobo_control_frame_class_init): here & upd.
+	(init_control_frame_corba_class): kill.
+	(bonobo_control_frame_get_type): upd.
+	(bonobo_control_frame_construct): upd.
+	(bonobo_control_frame_new): upd.
+
+	* bonobo/bonobo-canvas-component.c (gcc_class_init): upd.
+	(gcc_corba_class_init): kill.
+	(bonobo_canvas_component_get_type): upd.
+	(bonobo_canvas_component_object_create): kill.
+	(bonobo_canvas_component_construct): upd.
+	(bonobo_canvas_component_new): upd.
 
 	* tests/test-moniker.c (check_string): upd.
 
