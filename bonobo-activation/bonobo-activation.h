@@ -2,6 +2,10 @@
 #ifndef LIBOAF_H
 #define LIBOAF_H 1
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <liboaf/liboaf-version.h>
 #include <liboaf/oaf.h>
 
@@ -169,4 +173,9 @@ extern const char liboaf_version[];
 
 CORBA_Object oaf_name_service_get (CORBA_Environment * ev);
 
+#ifdef __cplusplus
+}
 #endif
+
+#endif /* LIBOAF_H */
+
