@@ -1,3 +1,7 @@
+2000-10-05  Darin Adler  <darin@eazel.com>
+
+	* doc/ui-xml.txt: Doc says "Main" code says "main".
+
 2000-10-05  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (update_status): don't return after
