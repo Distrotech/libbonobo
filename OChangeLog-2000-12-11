@@ -1,3 +1,16 @@
+2000-01-25  Nat Friedman  <nat@helixcode.com>
+
+	* bonobo/gnome-view.h (GnomeView): Removed the uih field.
+
+	* bonobo/gnome-control.c (GnomeControlPrivate): Added a uih field.
+	(gnome_control_set_ui_handler): New function.
+	(gnome_control_get_ui_handler): New function.
+	(gnome_control_set_property_bag): Documented.
+
+	* bonobo/gnome-view.c (gnome_view_set_ui_handler): Defer to the
+ 	GnomeControl method.
+	(gnome_view_get_ui_handler): Likewise
+
 2000-01-24  Nat Friedman  <nat@helixcode.com>
 
 	* samples/compound-doc/sample-container.c (component_add_view):
