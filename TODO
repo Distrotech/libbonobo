@@ -9,8 +9,6 @@ Nat Friedman (nat@nat.org)
 Major Unfinished Items
 ======================
 
-* Compound document printing
-
 * Compound document storage
     . Libefs
     . XML-based
@@ -33,16 +31,14 @@ General Cleanup
 Controls etc
 ------------
 * Add Prop CList to Control sample container.
-* free values when pb is destroyed.  ReleaserFn
 * Fix g_slist_frees in gnome-ui-handler.c -- added FIXMEs.  Don't
   understand the problem currently.
 * doc new control/control frame functions
 * From gnome-client-site.c: 	CORBA_free (list);	/* FIXME: This does not make any sense at all to me */
 * system exception should be on gnome object client. sigh.
 * Doc GnomeBonoboWidget functions
-* out-of-place views are fucked -- show_window does not make sense in client_site.
+* out-of-place views are broken -- show_window does not make sense in client_site.
 * out-of-place -- add embeddable routine, one per
-* Toolbar controls -- test
 
 Bonobo-endemic issues
 ---------------------
@@ -62,18 +58,11 @@ Bonobo Core (files in bonobo/)
 ------------------------------
 * Missing embeddable methods implemented.
 * Document signals and undo setup.
-* Implement printing. (Miguel)
 * Fix CORBA robustness issues (SIGSEGV on unfinished corba method invocation)
 * UIHandler toolbar code finished (Nat)
 * UIHandler documented (Nat)
 * Move all test code out of bonobo/bonobo.
 * Make sure HACKING is up-to-date.
-
-Issues
-------
-
-* Sample applications should provide stream/store facilities
-  entirely.  we cant just ship with "will do later" stuff
 
 Interfaces (files in idl/)
 --------------------------
@@ -84,11 +73,8 @@ Components
 ----------
 * Updated to use the new semantics.
 * Fully documented.
-* Clean up text/plain (Nat)
-* Update to do size negotiation.
 
 Sample code (the code in samples/)
 ----------------------------------
 * Write moniker sample code.
 * Write up description of paint component. (Nat)
-* Reference component in samples/, using gtk-object method (Nat).

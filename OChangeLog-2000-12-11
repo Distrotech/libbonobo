@@ -1,3 +1,31 @@
+2000-05-03  Michael Meeks  <michael@helixcode.com>
+
+	* samples/compound-doc/item.gnorba: move here.
+
+	* samples/compound-doc/item.oafinfo: move here
+
+	* samples/compound-doc/Makefile.am: setup sample-canvas-item.
+
+	* bonobo/Makefile.am: update.
+
+	* bonobo/sample.idl: kill
+
+	* bonobo/sample.oafinfo: kill
+
+	* bonobo/sample.gnorba: kill.
+	
+	* bonobo/sample-item.c: move.
+	
+	* bonobo/sample-server.c: kill.
+
+	* bonobo/item.*: move.
+
+	* bonobo/test-bw.c: kill
+
+	* HACKING: update.
+
+	* TODO: ditto.
+
 2000-05-02  Michael Meeks  <michael@helixcode.com>
 
 	* components/text-plain/bonobo-text-plain.c (init_server_factory):

@@ -6,7 +6,7 @@ Nat Friedman (nat@nat.org)
 committed.  Mail your patch (created using diff -u) along with a
 *detailed* ChangeLog and a description of the changes (if they are
 non-trivial) to gnome-components-list@gnome.org, and do not apply it
-until it is approved by either myself or Miguel.
+until it is approved by either Michael or Miguel.
 
     Bonobo will serve as the foundation for component-based
 application development in GNOME.  Modern GNOME applications will
@@ -56,4 +56,3 @@ to Bonobo:
 * Be honest with your code.  If something's broken, write FIXME in a
   comment near it.  We use "FIXME" in Bonobo, not XXX or !!! or any of
   that crap.
-
