@@ -1,3 +1,16 @@
+2000-10-14  Eskil Heyn Olsen  <eskil@eazel.com>
+
+	* components/application-x-gnomine/Makefile.am:
+	I've removed bonobo-application-x-mines-ui.xml.h
+	from make dist (uncommented BUILT_SOURCES), as 
+	bonobo-ui-extract does not exist at make dist
+	time (on a clean checkout), and having it in
+	BUILT_SOURCES therefore causes make dist
+	to fail
+
+	* po/POTFILES.in:
+	bonobo-application-x-mines-ui.xml.h removed
+
 2000-10-14  Michael Meeks  <michael@helixcode.com>
 
 	* Version 0.21
