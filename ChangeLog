@@ -1,3 +1,10 @@
+2001-12-17  Mark McLoughlin  <mark@skynet.ie>
+
+	* bonobo/bonobo-item-handler.c:
+	(bonobo_marshal_POINTER__DUMMY_BOXED),
+	(bonobo_marshal_BOXED__STRING_BOOLEAN_DUMMY_BOXED):
+	actually pass the user_data argument to the callback.
+
 2001-12-14  Mark McLoughlin  <mark@skynet.ie>
 
 	* bonobo/bonobo-item-handler.c:

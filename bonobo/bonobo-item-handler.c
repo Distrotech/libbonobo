@@ -58,7 +58,7 @@ bonobo_marshal_POINTER__DUMMY_BOXED (GClosure     *closure,
 	callback = (GMarshalFunc_POINTER__POINTER_BOXED) (marshal_data ? marshal_data : cc->callback);
 
 	v_return = callback (data1,
-			     NULL,
+			     data2,
 			     g_value_get_boxed (param_values + 1),
 			     data2);
 
@@ -99,7 +99,7 @@ bonobo_marshal_BOXED__STRING_BOOLEAN_DUMMY_BOXED (GClosure     *closure,
 	v_return = callback (data1,
 			     (char*) g_value_get_string (param_values + 1),
 			     g_value_get_boolean (param_values + 2),
-			     NULL,
+			     data2,
 			     g_value_get_boxed (param_values + 3),
 			     data2);
 
