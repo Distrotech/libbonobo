@@ -78,4 +78,4 @@ oaf-skels.c: $(top_srcdir)/idl/oaf.idl
 	$(ORBIT_IDL) --noheaders $(top_srcdir)/idl/oaf.idl
 
 dist-hook:
-	cd $(distdir) ; rm -f $(BUILT_SOURCES)
+	cd $(distdir) ; rm -f $(CLEANFILES)
