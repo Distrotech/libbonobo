@@ -1,3 +1,9 @@
+2002-03-31  Havoc Pennington  <hp@pobox.com>
+
+	* tests/test-stream-mem.c (test_read_write): trivial fix for
+	non-buildage introduced by Murray's previous change. Bad Murray!
+	(s/BONOBO_SEEK_CUR/SeekCur/)
+	
 2002-03-31  Murray Cumming  <murrayc@usa.net>
 
 	* idl/Bonobo_Storage.idl:
