@@ -1,4 +1,12 @@
+2001-09-10  Alex Larsson <alexl@redhat.com>
+
+	* bonobo/bonobo-types.c (bonobo_corba_any_get_type),
+	(bonobo_corba_typecode_get_type),
+	(bonobo_corba_exception_get_type): fix for recent glib
+	breakage - you need HEAD glib.
+
 2001-09-10  Frank Belew  <frb@ximian.com>
+
 	* bonobo/bonobo-moniker.c 
 	(impl_set_name): don't return in a void function
 

@@ -242,8 +242,9 @@ bonobo_corba_any_get_type (void)
 {
 	static GType type = 0;
 	if (!type)
-		type = g_boxed_type_register_static ("BonoboCorbaAny", NULL,
-						     corba_any_copy, corba_any_free, FALSE);
+		type = g_boxed_type_register_static (
+			"BonoboCorbaAny",
+			corba_any_copy, corba_any_free);
 	return type;
 }
 
@@ -267,8 +268,10 @@ bonobo_corba_typecode_get_type (void)
 {
 	static GType type = 0;
 	if (!type)
-		type = g_boxed_type_register_static ("BonoboCorbaTypecode", NULL,
-						     corba_typecode_copy, corba_typecode_free, FALSE);
+		type = g_boxed_type_register_static (
+			"BonoboCorbaTypecode",
+			corba_typecode_copy,
+			corba_typecode_free);
 	return type;
 }
 
@@ -318,8 +321,10 @@ bonobo_corba_exception_get_type (void)
 {
 	static GType type = 0;
 	if (!type)
-		type = g_boxed_type_register_static ("BonoboCorbaException", NULL,
-						     corba_exception_copy, corba_exception_free, FALSE);
+		type = g_boxed_type_register_static (
+			"BonoboCorbaException",
+			corba_exception_copy,
+			corba_exception_free);
 	return type;
 }
 
