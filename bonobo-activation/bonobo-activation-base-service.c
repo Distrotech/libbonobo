@@ -499,7 +499,7 @@ oaf_service_get(const OAFRegistrationCategory *regcat)
       oaf_reglocs_unlock(ev); /* The activator may want to do Fancy Stuff, and having the X server grabbed at this time
 				 is Broken (tm) */
       retval = oaf_activators_use(regcat, activatable_servers[i].cmd, activatable_servers[i].ior_fd, ev);
-      oaf_reglocks_lock(ev);
+      oaf_reglocs_lock(ev);
 
       race_condition = oaf_registration_check(regcat, &myev);
 
