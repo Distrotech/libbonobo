@@ -1,3 +1,8 @@
+2000-04-02  Jon K Hellan  <hellan@acm.org>
+
+	* bonobo/bonobo-uih-menu.c (menu_parse_uiinfo_one): Tolerate NULL
+	pixmap in GnomeUIInfo.
+
 2000-04-01  Michael Meeks  <michael@helixcode.com>
 
 	* configure.in: bump version to 0.10
