@@ -57,7 +57,7 @@ od_server_activate (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 
 	else if (!strcmp (si->server_type, "shlib"))
 		g_warning
-			(N_("We don't handle activating shlib objects in a remote process yet"));
+			(_("We don't handle activating shlib objects in a remote process yet"));
 
 	return CORBA_OBJECT_NIL;
 }

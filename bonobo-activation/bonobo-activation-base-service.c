@@ -296,7 +296,7 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 
 	if (childpid < 0) {
 		errval = OAF_GeneralError__alloc ();
-		errval->description = CORBA_string_dup (N_("Couldn't fork a new process"));
+		errval->description = CORBA_string_dup (_("Couldn't fork a new process"));
 
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_OAF_GeneralError, errval);
@@ -314,13 +314,13 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 
 			if (WIFSIGNALED (status))
 				g_snprintf (cbuf, sizeof (cbuf),
-					    N_("Child received signal %u (%s)"),
+					    _("Child received signal %u (%s)"),
 					    WTERMSIG (status),
 					    oaf_strsignal (WTERMSIG
 							   (status)));
 			else
 				g_snprintf (cbuf, sizeof (cbuf),
-					    N_("Unknown non-exit error (status is %u)"),
+					    _("Unknown non-exit error (status is %u)"),
 					    status);
 			errval->description = CORBA_string_dup (cbuf);
 			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -391,7 +391,7 @@ oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 		execvp (cmd[0], (char **) cmd);
 		if (iopipes[1] != 1)
 			dup2 (iopipes[1], 1);
-		g_print (N_("Exec failed: %d (%s)\n"), errno,
+		g_print (_("Exec failed: %d (%s)\n"), errno,
 			 g_strerror (errno));
 		_exit (1);
 	}

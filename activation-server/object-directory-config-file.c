@@ -41,8 +41,8 @@ od_utils_load_xml_file (void)
 
        /* check if the document was read successfully. */
         if (doc == NULL) {
-                g_warning (N_("The OAF configuration file was not read "
-                              "successfully. Please, check it is valid in: %s"),
+                g_warning (_("The OAF configuration file was not read "
+                             "successfully. Please, check it is valid in: %s"),
                            oaf_config_file);
                 return NULL;
         }

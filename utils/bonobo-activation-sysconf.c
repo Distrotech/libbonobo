@@ -61,11 +61,11 @@ static void save_file (xmlDocPtr doc)
 
         config_file = g_strconcat (OAF_CONFDIR, OAF_CONFIG_FILE, NULL);
         if (xmlSaveFile (config_file, doc) == -1) {
-                g_print (N_("Could not save OAF configuration file.\n"));
-                g_print (N_("Please, make sure you have permissions to write "
-                            "OAF configuration file.\n"));
+                g_print (_("Could not save OAF configuration file.\n"));
+                g_print (_("Please, make sure you have permissions to write "
+                           "OAF configuration file.\n"));
         } else {
-                g_print (N_("Successfully wrote OAF configuration file.\n"));
+                g_print (_("Successfully wrote OAF configuration file.\n"));
         }
         g_free (config_file);
 
@@ -77,7 +77,7 @@ static void display_config_path (void)
 
         config_file = g_strconcat (OAF_CONFDIR, OAF_CONFIG_FILE, NULL);
 
-        g_print (N_("OAF configuration file is:\n    %s\n"), config_file);
+        g_print (_("OAF configuration file is:\n    %s\n"), config_file);
         
         g_free (config_file);
 }
@@ -104,7 +104,7 @@ static void add_directory (const char *directory)
                                         dir_path = xmlNodeGetContent (item_node);
                                         if (strcmp (dir_path, directory) == 0) {
                                                 is_already_there = TRUE;
-                                                g_print (N_("%s already in OAF configuration file\n"), 
+                                                g_print (_("%s already in OAF configuration file\n"), 
                                                          directory);
                                                 
                                         }
@@ -180,7 +180,7 @@ static void display_directories (void)
 
         doc = open_file ();
 
-        g_print (N_("OAF configuration file contains:\n"));
+        g_print (_("OAF configuration file contains:\n"));
 
         search_node = doc->root->childs;
         while (search_node != NULL) {

@@ -10,6 +10,7 @@ INCLUDES = 					\
 	$(XML_CFLAGS)				\
 	$(GLIB_CFLAGS)				\
 	-I$(top_srcdir)/oafd/			\
+	-I$(top_srcdir)/liboaf/			\
 	-DOAF_LOCALEDIR=\""$(datadir)/locale"\"	\
 	-DOAF_CONFDIR=\"$(sysconfdir)\"		\
 	$(NULL)

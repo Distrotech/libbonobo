@@ -2,16 +2,17 @@ NULL=
 
 bin_PROGRAMS=oafd oaf-client
 
-INCLUDES=				\
-	-I$(top_srcdir) 		\
-	-I$(top_builddir) 		\
-	-I$(top_builddir)/liboaf	\
-	-DOAFINFODIR=\"$(pkgdatadir)\" 	\
-    -DOAF_LOCALEDIR=\""$(datadir)/locale"\" \
-	@ORBIT_CFLAGS@ 			\
-	@XML_CFLAGS@ 			\
-	@GLIB_CFLAGS@			\
-	-DOAF_CONFDIR=\"$(sysconfdir)\"	\
+INCLUDES=					\
+	-I$(top_srcdir) 			\
+	-I$(top_builddir) 			\
+	-I$(top_builddir)/liboaf		\
+	-I$(top_srcdir)/liboaf			\
+	-DOAFINFODIR=\"$(pkgdatadir)\" 		\
+	-DOAF_LOCALEDIR=\""$(datadir)/locale"\" \
+	@ORBIT_CFLAGS@ 				\
+	@XML_CFLAGS@ 				\
+	@GLIB_CFLAGS@				\
+	-DOAF_CONFDIR=\"$(sysconfdir)\"		\
 	$(NULL)
 
 oafd_SOURCES=			\

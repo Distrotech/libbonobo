@@ -114,7 +114,7 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 						CORBA_string_dup (valuestr);
 				else {
 					g_warning
-						(N_("Attribute '%s' has no value"),
+						(_("Attribute '%s' has no value"),
 						 curattr->name);
 					curattr->v._u.
 						value_stringv._buffer[j] =
@@ -144,7 +144,7 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 				curattr->v._u.value_string =
 					CORBA_string_dup (valuestr);
 			else {
-				g_warning (N_("Attribute '%s' has no value"),
+				g_warning (_("Attribute '%s' has no value"),
 					   curattr->name);
 				curattr->v._u.value_string =
 					CORBA_string_dup ("");
@@ -202,7 +202,7 @@ OAF_ServerInfo_load (char **dirs,
 	*nservers = 0;
 
 	for (dirnum = 0; dirs[dirnum]; dirnum++) {
-		g_print (N_("Trying dir %s\n"), dirs[dirnum]);
+		g_print (_("Trying dir %s\n"), dirs[dirnum]);
 		dirh = opendir (dirs[dirnum]);
 		if (!dirh)
 			continue;
@@ -249,7 +249,7 @@ OAF_ServerInfo_load (char **dirs,
 				iid = xmlGetProp (curnode, "iid");
 
                                 if (!od_validate_iid (iid)) {
-                                        g_print (N_("IID '%s' contains illegal characters; discarding\n"), 
+                                        g_print (_("IID '%s' contains illegal characters; discarding\n"), 
                                                  iid);
                                         free (iid);
                                         continue;

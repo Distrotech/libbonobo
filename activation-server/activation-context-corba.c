@@ -430,7 +430,7 @@ ac_do_activation (impl_POA_OAF_ActivationContext * servant,
 		OAF_GeneralError *errval = OAF_GeneralError__alloc ();
 		errval->description =
 			CORBA_string_dup
-			(N_("Couldn't find which child the server was listed in"));
+			(_("Couldn't find which child the server was listed in"));
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_OAF_GeneralError, errval);
 		return;
