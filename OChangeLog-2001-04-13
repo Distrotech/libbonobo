@@ -1,3 +1,9 @@
+2000-09-06  Darin Adler  <darin@eazel.com>
+
+	* bonobo/.cvsignore: Ignore some new generated files.
+	* bonobo/bonobo-control.c: (bonobo_control_auto_merge),
+	(bonobo_control_destroy): Fix a couple of UI handler leaks.
+
 2000-09-05  Maciej Stachowiak  <mjs@eazel.com>
 
 	* components/text-plain/Makefile.am: Install text-plain.oafinfo
