@@ -23,14 +23,15 @@
  *
  */
 
-#ifndef OAF_PLUGIN_H
-#define OAF_PLUGIN_H
+#ifndef BONOBO_ACTIVATION_SHLIB_H
+#define BONOBO_ACTIVATION_SHLIB_H
 
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 
 typedef struct {
 	const char *iid;
 
-	/* This routine should call oaf_plugin_use(servant, impl_ptr), 
+	/* This routine should call bonobo_activation_plugin_use(servant, impl_ptr), 
          * as should all routines which activate CORBA objects
 	 * implemented by this shared library. This needs to be done 
          * before making any CORBA calls on the object, or
@@ -41,26 +42,26 @@ typedef struct {
         CORBA_Object (*activate) (PortableServer_POA poa,
                                   const char *iid, 
                                   gpointer impl_ptr,	/* This pointer should be stored by the implementation
-                                                         * to be passed to oaf_plugin_unuse() in the 
+                                                         * to be passed to bonobo_activation_plugin_unuse() in the 
                                                          * implementation's destruction routine. */
-				  CORBA_Environment * ev);
-} OAFPluginObject;
+				  CORBA_Environment *ev);
+} BonoboActivationPluginObject;
 
 typedef struct {
-	const OAFPluginObject *plugin_object_list;
+	const BonoboActivationPluginObject *plugin_object_list;
 	const char *description;
-} OAFPlugin;
+} BonoboActivationPlugin;
 
-void  oaf_plugin_use    (PortableServer_Servant servant, 
-			 gpointer impl_ptr);
-void  oaf_plugin_unuse  (gpointer impl_ptr);
-
-
-CORBA_Object oaf_server_activate_shlib (OAF_ActivationResult * sh, 
-                                        CORBA_Environment * ev);
+void  bonobo_activation_plugin_use    (PortableServer_Servant servant, 
+                                       gpointer impl_ptr);
+void  bonobo_activation_plugin_unuse  (gpointer impl_ptr);
 
 
-#endif /* OAF_PLUGIN_H */
+CORBA_Object bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh, 
+                                                      CORBA_Environment    *ev);
+
+
+#endif /* BONOBO_ACTIVATION_SHLIB_H */
 
 
 

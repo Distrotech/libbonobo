@@ -25,13 +25,11 @@
 /* The  folowing API is not intended for application use.
    It is intended only for people who want to extend OAF bootstraping system.
    I have no idea why we have all this tralala but Eliot knows and he _tried_
-   to explain it in docs/oaf-regloc.txt
-   If you can figure out this whole mess, please, mail me: <mathieu@eazel.com>
-   I feel dumb.
+   to explain it in docs/bonobo-activation-base-service.txt
 */
 
-#ifndef OAF_REGISTRATION_H
-#define OAF_REGISTRATION_H
+#ifndef BONOBO_ACTIVATION_BASE_SERVICE_H
+#define BONOBO_ACTIVATION_BASE_SERVICE_H
 
 typedef struct {
 	const char *name;
@@ -39,29 +37,29 @@ typedef struct {
 	const char *username;
         const char *hostname;
         const char *domain;
-} OAFBaseService;
+} BonoboActivationBaseService;
 
-typedef struct _OAFBaseServiceRegistry OAFBaseServiceRegistry;
-struct _OAFBaseServiceRegistry {
-	void   (*lock)         (const OAFBaseServiceRegistry *registry,
+typedef struct _BonoboActivationBaseServiceRegistry BonoboActivationBaseServiceRegistry;
+struct _BonoboActivationBaseServiceRegistry {
+	void   (*lock)         (const BonoboActivationBaseServiceRegistry *registry,
+                                gpointer                                   user_data);
+	void   (*unlock)       (const BonoboActivationBaseServiceRegistry *registry,
                                 gpointer                      user_data);
-	void   (*unlock)       (const OAFBaseServiceRegistry *registry,
-                                gpointer                      user_data);
-	char * (*check)        (const OAFBaseServiceRegistry *registry,
-                                const OAFBaseService         *base_service,
+	char * (*check)        (const BonoboActivationBaseServiceRegistry *registry,
+                                const BonoboActivationBaseService         *base_service,
                                 int                          *ret_distance, 
                                 gpointer                      user_data);
-	void   (*register_new) (const OAFBaseServiceRegistry *registry,
+	void   (*register_new) (const BonoboActivationBaseServiceRegistry *registry,
                                 const char                   *ior,
-                                const OAFBaseService         *base_service, 
+                                const BonoboActivationBaseService         *base_service, 
                                 gpointer                      user_data);
-	void   (*unregister)   (const OAFBaseServiceRegistry *registry,
+	void   (*unregister)   (const BonoboActivationBaseServiceRegistry *registry,
                                 const char                   *ior,
-                                const OAFBaseService         *base_service,
+                                const BonoboActivationBaseService         *base_service,
                                 gpointer                      user_data);
 };
 
-typedef CORBA_Object (*OAFBaseServiceActivator) (const OAFBaseService *base_service,
+typedef CORBA_Object (*BonoboActivationBaseServiceActivator) (const BonoboActivationBaseService *base_service,
                                                  const char          **command,
                                                  int                   ior_fd,
                                                  CORBA_Environment    *ev);
@@ -70,28 +68,23 @@ typedef CORBA_Object (*OAFBaseServiceActivator) (const OAFBaseService *base_serv
 
 
 
-void         oaf_registration_location_add  (const OAFBaseServiceRegistry *registry,
-                                             int                           priority, 
-                                             gpointer                      user_data);
-
-CORBA_Object oaf_registration_check         (const OAFBaseService         *base_service,
-                                             CORBA_Environment            *ev);
-void         oaf_registration_set           (const OAFBaseService         *base_service,
-                                             CORBA_Object                  obj, 
-                                             CORBA_Environment            *ev);
-void         oaf_registration_unset         (const OAFBaseService         *base_service,
-                                             CORBA_Object                  obj, 
-                                             CORBA_Environment            *ev);
+void         bonobo_activation_base_service_registry_add  (const BonoboActivationBaseServiceRegistry *registry,
+                                                           int                           priority, 
+                                                           gpointer                      user_data);
+CORBA_Object bonobo_activation_base_service_check         (const BonoboActivationBaseService         *base_service,
+                                                           CORBA_Environment            *ev);
+void         bonobo_activation_base_service_set           (const BonoboActivationBaseService         *base_service,
+                                                           CORBA_Object                  obj, 
+                                                           CORBA_Environment            *ev);
+void         bonobo_activation_base_service_unset         (const BonoboActivationBaseService         *base_service,
+                                                           CORBA_Object                  obj, 
+                                                           CORBA_Environment            *ev);
 
 
 /* Do not release() the returned value */
-CORBA_Object oaf_service_get                (const OAFBaseService         *base_service);
+CORBA_Object bonobo_activation_service_get                (const BonoboActivationBaseService         *base_service);
 
-void         oaf_registration_activator_add (OAFBaseServiceActivator       activator,
-                                             int                           priority);
-/* For compatibility */
-typedef OAFBaseService          OAFRegistrationCategory;
-typedef OAFBaseServiceActivator OAFServiceActivator;
-typedef OAFBaseServiceRegistry  OAFRegistrationLocation;
+void         bonobo_activation_base_service_activator_add (BonoboActivationBaseServiceActivator       activator,
+                                                           int                           priority);
 
-#endif /* OAF_REGISTRATION_H */
+#endif /* BONOBO_ACTIVATION_BASE_SERVICE_H */

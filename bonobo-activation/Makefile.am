@@ -25,8 +25,8 @@ bonobo_activationinclude_HEADERS=		\
 	Bonobo_ActivationContext.h		\
 	liboaf.h				\
 	oaf-async.h				\
-	oaf-registration.h			\
-	oaf-actid.h				\
+	bonobo-activation-base-service.h	\
+	bonobo-activation-id.h			\
 	oaf-activate.h				\
 	oaf-mainloop.h				\
 	oaf-plugin.h				\
@@ -68,12 +68,9 @@ BUILT_SOURCES=					\
 
 libbonobo_activation_la_SOURCES=		\
 	$(BUILT_SOURCES)			\
-	oaf-actid.c				\
-	liboaf-private.h			\
-	oaf-factory-stubs.c			\
-	oaf-factory-skels.c			\
-	oaf-factory-common.c			\
-	oaf-plugin.c				\
+	bonobo-activation-id.c			\
+	bonobo-activation-private.h		\
+	bonobo-activation-shlib.c		\
 	oaf-activate.c				\
 	oaf-activate-private.h			\
 	oaf-registration.c			\
@@ -95,7 +92,7 @@ bonobo_unknown_idls =				\
 bonobo_unknown_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_UNKNOWN_COMPILATION
 
 $(bonobo_unknown_sources): $(bonobo_unknown_idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo_Unknown.idl
+	$(ORBIT_IDL) $(bonobo_unknown_idl_flags) $(top_srcdir)/idl/Bonobo_Unknown.idl
 
 
 bonobo_generic_factory_idls =				\
@@ -106,7 +103,7 @@ bonobo_generic_factory_idls =				\
 bonobo_generic_factory_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_GENERIC_FACTORY_COMPILATION
 
 $(bonobo_generic_factory_sources): $(bonobo_generic_factory_idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo_GenericFactory.idl
+	$(ORBIT_IDL) $(bonobo_generic_factory_idl_flags) $(top_srcdir)/idl/Bonobo_GenericFactory.idl
 
 
 bonobo_activation_context_idls =			\
@@ -118,7 +115,7 @@ bonobo_activation_context_idls =			\
 bonobo_activation_context_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_ACTIVATION_CONTEXT_COMPILATION
 
 $(bonobo_activation_context_sources): $(bonobo_activation_context_idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo_ActivationContext.idl
+	$(ORBIT_IDL) $(bonobo_activation_context_idl_flags) $(top_srcdir)/idl/Bonobo_ActivationContext.idl
 
 
 CLEANFILES=					\

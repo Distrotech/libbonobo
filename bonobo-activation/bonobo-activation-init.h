@@ -23,33 +23,34 @@
  *
  */
 
-#ifndef OAF_MAINLOOP_H
-#define OAF_MAINLOOP_H
+#ifndef BONOBO_ACTIVATION_INIT_H
+#define BONOBO_ACTIVATION_INIT_H
 
+#include <orbit/orbit.h>
 #include <popt.h>
 
-CORBA_ORB      oaf_orb_init   (int   *argc, 
-			       char **argv);
-CORBA_ORB      oaf_orb_get    (void);
+CORBA_ORB      bonobo_activation_orb_init   (int   *argc, 
+                                             char **argv);
+CORBA_ORB      bonobo_activation_orb_get    (void);
 
-gboolean       oaf_is_initialized   (void);
-CORBA_ORB      oaf_init       (int      argc, 
-			       char   **argv);
-void           oaf_preinit    (gpointer app, 
-			       gpointer mod_info);
-void           oaf_postinit   (gpointer app, 
-			       gpointer mod_info);
+gboolean       bonobo_activation_is_initialized   (void);
+CORBA_ORB      bonobo_activation_init       (int      argc, 
+                                             char   **argv);
+void           bonobo_activation_preinit    (gpointer app, 
+                                             gpointer mod_info);
+void           bonobo_activation_postinit   (gpointer app, 
+                                             gpointer mod_info);
 
-CORBA_Context  oaf_context_get      (void);
+CORBA_Context  bonobo_activation_context_get      (void);
 
-const char    *oaf_hostname_get     (void);
-const char    *oaf_session_name_get (void);
-const char    *oaf_domain_get       (void);
-#define oaf_username_get() g_get_user_name()
+const char    *bonobo_activation_hostname_get     (void);
+const char    *bonobo_activation_session_name_get (void);
+const char    *bonobo_activation_domain_get       (void);
+#define bonobo_activation_username_get() g_get_user_name()
 
-char          *oaf_get_popt_table_name (void);
+char          *bonobo_activation_get_popt_table_name (void);
 
-extern struct poptOption oaf_popt_options[];
+extern struct poptOption bonobo_activation_popt_options[];
 
-#endif /* OAF_MAINLOOP_H */
+#endif /* BONOBO_ACTIVATION_INIT_H */
 

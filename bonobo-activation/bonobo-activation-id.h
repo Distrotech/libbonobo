@@ -23,8 +23,10 @@
  *
  */
 
-#ifndef OAF_ACTID_H
-#define OAF_ACTID_H
+#ifndef BONOBO_ACTIVATION_ID_H
+#define BONOBO_ACTIVATION_ID_H
+
+#include <bonobo-activation/Bonobo_ActivationContext.h>
 
 /* If you wish to manipulate the internals of this structure, please
    use g_malloc/g_free to allocate memory. */
@@ -35,18 +37,14 @@ typedef struct
 	char *host;		/* DNS name or IP address */
 	char *domain;		/* This is not a DNS domain, but an activation domain */
 }
-OAFActivationInfo;
+BonoboActivationInfo;
 
 
-OAF_ActivationID    oaf_actinfo_stringify    (const OAFActivationInfo   *actinfo);
-
-OAFActivationInfo  *oaf_servinfo_to_actinfo  (const OAF_ServerInfo      *servinfo);
-
-OAFActivationInfo  *oaf_actid_parse          (const OAF_ActivationID     actid);
-
-OAFActivationInfo  *oaf_actinfo_new          (void);
-
-void                oaf_actinfo_free         (OAFActivationInfo          *actinfo);
+Bonobo_ActivationID    bonobo_activation_info_stringify      (const BonoboActivationInfo *actinfo);
+BonoboActivationInfo  *bonobo_activation_servinfo_to_actinfo (const Bonobo_ServerInfo    *servinfo);
+BonoboActivationInfo  *bonobo_activation_id_parse            (const Bonobo_ActivationID   actid);
+BonoboActivationInfo  *bonobo_activation_info_new            (void);
+void                   bonobo_activation_info_free           (BonoboActivationInfo       *actinfo);
 
 
-#endif /* OAF_ACTID_H */
+#endif /* BONOBO_ACTIVATION_ID_H */

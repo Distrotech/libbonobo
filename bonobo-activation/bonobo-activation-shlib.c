@@ -22,15 +22,16 @@
  *  Author: Elliot Lee <sopwith@redhat.com>
  *
  */
-#include "config.h"
-#include "liboaf-private.h"
+#include <config.h>
+#include <bonobo-activation/bonobo-activation-shlib.h>
+#include <bonobo-activation/bonobo-activation-private.h>
+#include <bonobo-activation/bonobo-activation-init.h>
 
 #include <gmodule.h>
 /* ORBit-specific hack */
 #include <orbit/poa/poa.h>
 
-#include "oaf-plugin.h"
-#include "oaf-i18n.h"
+#include <bonobo-activation/bonobo-activation-i18n.h>
 
 typedef struct
 {
@@ -53,7 +54,7 @@ gnome_plugin_unload (gpointer data, gpointer user_data)
 
 
 /**
- * oaf_server_activate_shlib:
+ * bonobo_activation_server_activate_shlib:
  * @sh:
  * @ev:
  *
@@ -62,19 +63,20 @@ gnome_plugin_unload (gpointer data, gpointer user_data)
  * Return value: 
  */
 CORBA_Object
-oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
+bonobo_activation_activate_shlib_server (Bonobo_ActivationResult *sh, 
+                                         CORBA_Environment *ev)
 {
 	CORBA_Object retval;
-	const OAFPlugin *plugin;
+	const BonoboActivationPlugin *plugin;
 	ActivePluginInfo *local_plugin_info = NULL;
-	const OAFPluginObject *pobj;
+	const BonoboActivationPluginObject *pobj;
 	int i;
 	PortableServer_POA poa;
 	CORBA_ORB orb;
 	char *filename;
 	const char *iid;
 
-	g_return_val_if_fail (sh->res._d == OAF_RESULT_SHLIB,
+	g_return_val_if_fail (sh->res._d == Bonobo_RESULT_SHLIB,
 			      CORBA_OBJECT_NIL);
 	g_return_val_if_fail (sh->res._u.res_shlib._length > 0,
 			      CORBA_OBJECT_NIL);
@@ -93,31 +95,31 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 		gmod = g_module_open (filename, G_MODULE_BIND_LAZY);
 		if (!gmod) {
                         char *error_string;
-                        OAF_GeneralError *error = OAF_GeneralError__alloc ();
+                        Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
 
                         error_string = g_strdup_printf (
                                 _("g_module_open of '%s' failed"), filename);
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-                                             ex_OAF_GeneralError, error);
+                                             ex_Bonobo_GeneralError, error);
                         g_free (error_string);
 			return CORBA_OBJECT_NIL; /* Couldn't load it */
 		}
 		
-		success = g_module_symbol (gmod, "OAF_Plugin_info",
+		success = g_module_symbol (gmod, "Bonobo_Plugin_info",
 					   (gpointer *) &plugin);
 		if (!success) {
                         char *error_string;
-                        OAF_GeneralError *error = OAF_GeneralError__alloc ();
+                        Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
 
 			g_module_close (gmod);
 
                         error_string = g_strdup_printf (
-                                _("Can't find symbol OAF_Plugin_info in '%s'"),
+                                _("Can't find symbol Bonobo_Plugin_info in '%s'"),
                                 filename);
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-                                             ex_OAF_GeneralError, error);
+                                             ex_Bonobo_GeneralError, error);
                         g_free (error_string);
 			return CORBA_OBJECT_NIL;
 		}
@@ -142,18 +144,18 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 
 		success =
 			g_module_symbol (local_plugin_info->loaded,
-					 "OAF_Plugin_info",
+					 "Bonobo_Plugin_info",
 					 (gpointer *) & plugin);
 		if (!success) {
                         char *error_string;
-                        OAF_GeneralError *error = OAF_GeneralError__alloc ();
+                        Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
 
                         error_string = g_strdup_printf (
-                                _("Can't find symbol OAF_Plugin_info in '%s'"),
+                                _("Can't find symbol Bonobo_Plugin_info in '%s'"),
                                 filename);
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-                                             ex_OAF_GeneralError, error);
+                                             ex_Bonobo_GeneralError, error);
                         g_free (error_string);
 			return CORBA_OBJECT_NIL;
 		}
@@ -161,7 +163,7 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 
 	retval = CORBA_OBJECT_NIL;
 
-	orb = oaf_orb_get ();
+	orb = bonobo_activation_orb_get ();
 	poa = (PortableServer_POA)
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", ev);
 
@@ -185,26 +187,26 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 		i =  sh->res._u.res_shlib._length - 2;
 		for (i--; i >= 0 && !CORBA_Object_is_nil (retval, ev); i--) {
 			CORBA_Object new_retval;
-			GNOME_stringlist dummy = { 0 };
+			Bonobo_stringlist dummy = { 0 };
 
 			iid = sh->res._u.res_shlib._buffer[i];
 
 			new_retval =
-				GNOME_ObjectFactory_create_object (retval,
-								    (char *)
-								    iid,
-								    &dummy,
-								    ev);
+				Bonobo_GenericFactory_create_object (retval,
+                                                                     (char *)
+                                                                     iid,
+                                                                     &dummy,
+                                                                     ev);
 			if (ev->_major != CORBA_NO_EXCEPTION
 			    || CORBA_Object_is_nil (new_retval, ev)) {
                                 if (ev->_major == CORBA_NO_EXCEPTION) {
-                                        OAF_GeneralError *error = OAF_GeneralError__alloc ();
+                                        Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
                                         char *error_string = g_strdup_printf (
                                                 _("Factory '%s' returned NIL for '%s'"),
                                                 pobj->iid, iid);
                                         error->description = CORBA_string_dup (error_string);
                                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-                                                             ex_OAF_GeneralError, error);
+                                                             ex_Bonobo_GeneralError, error);
                                         g_free (error_string);
                                         
                                 }
@@ -215,13 +217,13 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 			retval = new_retval;
 		}
 	} else {
-                OAF_GeneralError *error = OAF_GeneralError__alloc ();
+                Bonobo_GeneralError *error = Bonobo_GeneralError__alloc ();
                 char *error_string = g_strdup_printf (
                         _("Shlib '%s' didn't contain '%s'"),
                         filename, iid);
                 error->description = CORBA_string_dup (error_string);
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-                                     ex_OAF_GeneralError, error);
+                                     ex_Bonobo_GeneralError, error);
                 g_free (error_string);
         }
 
@@ -229,16 +231,16 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 }
 
 /**
- * oaf_plugin_use:
+ * bonobo_activation_plugin_use:
  * @servant: The servant that was created
  * @impl_ptr: The impl_ptr that was passed to the original activation routine
  *
  * You should call this routine to activate a shared library-based 
  * CORBA Object. It will be called by OAF if the component exports 
- * correctly an %OAFPlugin structure named "OAF_Plugin_info".
+ * correctly an %BonoboActivationPlugin structure named "Bonobo_Plugin_info".
  */
 void
-oaf_plugin_use (PortableServer_Servant servant, gpointer impl_ptr)
+bonobo_activation_plugin_use (PortableServer_Servant servant, gpointer impl_ptr)
 {
 	ActivePluginInfo *local_plugin_info = impl_ptr;
 
@@ -251,7 +253,7 @@ oaf_plugin_use (PortableServer_Servant servant, gpointer impl_ptr)
 }
 
 static gboolean
-oaf_plugin_real_unuse (gpointer impl_ptr)
+bonobo_activation_plugin_real_unuse (gpointer impl_ptr)
 {
 	ActivePluginInfo *api;
 
@@ -269,7 +271,7 @@ oaf_plugin_real_unuse (gpointer impl_ptr)
 }
 
 /**
- * oaf_plugin_unuse:
+ * bonobo_activation_plugin_unuse:
  * @impl_ptr: The impl_ptr that was passed to the activation routine
  *
  * Side effects: May arrange for the shared library that the
@@ -280,8 +282,8 @@ oaf_plugin_real_unuse (gpointer impl_ptr)
  * shared library is unloaded as needed.
  */
 void
-oaf_plugin_unuse (gpointer impl_ptr)
+bonobo_activation_plugin_unuse (gpointer impl_ptr)
 {
-        g_idle_add (oaf_plugin_real_unuse, impl_ptr);
+        g_idle_add (bonobo_activation_plugin_real_unuse, impl_ptr);
 }
 

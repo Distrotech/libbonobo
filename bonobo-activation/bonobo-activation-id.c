@@ -23,40 +23,40 @@
  *
  */
 
-#include "config.h"
+#include <config.h>
 
-#include "liboaf-private.h"
-
+#include <bonobo-activation/bonobo-activation-id.h>
+#include <bonobo-activation/bonobo-activation-private.h>
 
 /**
- * oaf_actinfo_new:
+ * bonobo_activation_info_new:
  *
- * This function allocates a %OAFActicationInfo structure and returns it.
+ * This function allocates a %BonoboActicationInfo structure and returns it.
  * Should NOT be called from outside of this code.
  *
- * Return value: a newly allocated non-initialized %OAFActicationInfo structure.
+ * Return value: a newly allocated non-initialized %BonoboActicationInfo structure.
  */
-OAFActivationInfo *
-oaf_actinfo_new (void)
+BonoboActivationInfo *
+bonobo_activation_info_new (void)
 {
-        return g_new0 (OAFActivationInfo, 1);
+        return g_new0 (BonoboActivationInfo, 1);
 }
 
 /**
- * oaf_servinfo_to_actinfo:
- * @servinfo: An array of %OAF_ServerInfo structures.
+ * bonobo_activation_servinfo_to_actinfo:
+ * @servinfo: An array of %Bonobo_ServerInfo structures.
  *
- * This function converts a %OAF_ServerInfo structure to a
- * %OAFActivationInfo structure. The returned structure should
- * be freed with oaf_actinfo_free.
+ * This function converts a %Bonobo_ServerInfo structure to a
+ * %BonoboActivationInfo structure. The returned structure should
+ * be freed with bonobo_activation_info_free.
  *
- * Return value: a newly allocated initialized %OAFActivationInfo structure.
+ * Return value: a newly allocated initialized %BonoboActivationInfo structure.
  */
 
-OAFActivationInfo *
-oaf_servinfo_to_actinfo (const OAF_ServerInfo * servinfo)
+BonoboActivationInfo *
+bonobo_activation_servinfo_to_actinfo (const Bonobo_ServerInfo * servinfo)
 {
-	OAFActivationInfo *retval = oaf_actinfo_new ();
+	BonoboActivationInfo *retval = bonobo_activation_info_new ();
 
 	retval->iid = g_strdup (servinfo->iid);
 	retval->user = g_strdup (servinfo->username);
@@ -67,15 +67,15 @@ oaf_servinfo_to_actinfo (const OAF_ServerInfo * servinfo)
 }
 
 /**
- * oaf_actinfo_free:
- * @actinfo: the %OAFActivationInfo structure to free.
+ * bonobo_activation_info_free:
+ * @actinfo: the %BonoboActivationInfo structure to free.
  *
  * Frees @actinfo.
  *
  */
 
 void
-oaf_actinfo_free (OAFActivationInfo * actinfo)
+bonobo_activation_info_free (BonoboActivationInfo * actinfo)
 {
 	g_free (actinfo->iid);
 	g_free (actinfo->user);
@@ -86,20 +86,20 @@ oaf_actinfo_free (OAFActivationInfo * actinfo)
 
 
 /**
- * oaf_actid_parse:
+ * bonobo_activation_id_parse:
  * @actid: the activation id structure.
  *
- * Returns a pointer to a newly allocated %OAFActivationInfo
- * structure (to be freed with oaf_actinfo_free) initialized 
+ * Returns a pointer to a newly allocated %BonoboActivationInfo
+ * structure (to be freed with bonobo_activation_info_free) initialized 
  * with the data of @actid.
  *
- * Return value: the %OAFActivationInfo corresponding to @actid.
+ * Return value: the %BonoboActivationInfo corresponding to @actid.
  */
 
-OAFActivationInfo *
-oaf_actid_parse (const OAF_ActivationID actid)
+BonoboActivationInfo *
+bonobo_activation_id_parse (const Bonobo_ActivationID actid)
 {
-	OAFActivationInfo *retval;
+	BonoboActivationInfo *retval;
 	char *splitme, *ctmp, *ctmp2;
 	char **parts[4];
 	const int nparts = sizeof (parts) / sizeof (parts[0]);
@@ -113,9 +113,9 @@ oaf_actid_parse (const OAF_ActivationID actid)
 	if (*ctmp != '[')
 		return NULL;
 
-	retval = oaf_actinfo_new ();
+	retval = bonobo_activation_info_new ();
 
-	splitme = oaf_alloca (strlen (ctmp) + 1);
+	splitme = bonobo_activation_alloca (strlen (ctmp) + 1);
 	strcpy (splitme, ctmp);
 
 	parts[0] = &(retval->iid);
@@ -157,15 +157,15 @@ oaf_actid_parse (const OAF_ActivationID actid)
 
 
 /**
- * oaf_actinfo_stringify:
- * @actinfo: the %OAFActivationInfo to flatten.
+ * bonobo_activation_info_stringify:
+ * @actinfo: the %BonoboActivationInfo to flatten.
  *
  * Serializes @actinfo into a char *. Should be freed with g_free ().
  *
  * Return value: the serialized version of @actinfo.
  */
 char *
-oaf_actinfo_stringify (const OAFActivationInfo * actinfo)
+bonobo_activation_info_stringify (const BonoboActivationInfo * actinfo)
 {
 	g_return_val_if_fail (actinfo, NULL);
 
