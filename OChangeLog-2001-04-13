@@ -1,3 +1,9 @@
+2001-01-26  Ettore Perazzoli  <ettore@ximian.com>
+
+	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_qi_return):
+	Don't spit out a stupid warning if we cannot resolve against this
+	interface.
+
 2001-01-26  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-desktop-window.h: fix guard - thanks morten.

@@ -273,7 +273,6 @@ bonobo_moniker_util_qi_return (Bonobo_Unknown     object,
 		goto release_unref_object;
 	
 	if (retval == CORBA_OBJECT_NIL) {
-		g_warning ("No interface '%s' on object", requested_interface);
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_Bonobo_Moniker_InterfaceNotFound, NULL);
 		goto release_unref_object;
