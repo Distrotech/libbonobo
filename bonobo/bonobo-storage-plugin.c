@@ -26,9 +26,17 @@ plugin_load (gchar *path)
 	StoragePluginInitFn init_plugin = NULL;
 
 	if (!path) return;
-	if (!(handle = g_module_open (path, G_MODULE_BIND_LAZY))) return;
-	if (!g_module_symbol (handle, "init_storage_plugin",
-			      (gpointer *) &init_plugin)) return;
+        if (!(handle = g_module_open (path, G_MODULE_BIND_LAZY))) {
+                g_warning ("Can't load storage plugin `%s': %s", path,
+                           g_module_error ());
+                return;
+        }
+        if (!g_module_symbol (handle, "init_storage_plugin",
+                              (gpointer *) &init_plugin)) {
+                g_warning ("Can't initialize storage plugin `%s': %s", path,
+                           g_module_error ());
+                return;
+        }
 
 	plugin = g_new0 (StoragePlugin, 1);
 	plugin->handle = handle;

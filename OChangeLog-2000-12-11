@@ -1,5 +1,8 @@
 Thu Oct 19 09:50:37 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
+	* bonobo/bonobo-storage-plugin.c (plugin_load): use g_module_error
+	(suggestion from martin)
+
 	* monikers/bonobo-moniker-file.c: use bonobo_stream_open instead
 	of bonobo_stream_fs_open 
 
