@@ -1,3 +1,8 @@
+2000-08-01  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-socket.c (bonobo_socket_focus_in_event): Prevent a
+	BadMatch when doing XSetInputFocus on a non-viewable window.
+
 2000-07-30  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* bonobo/bonobo-object-directory-oaf.c: OAF_Attribute -> OAF_Property
