@@ -1,5 +1,8 @@
 2001-07-30  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-types.c (bonobo_closure_invoke_va_list):
+	reset the Value's type to 0.
+
 	* bonobo/bonobo-marshal.list: add STRING,ENUM,STRING.
 
 	* bonobo/bonobo-event-source.c (create_listener_id): kill.

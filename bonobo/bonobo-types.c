@@ -261,7 +261,8 @@ bonobo_closure_invoke_va_list (GClosure *closure,
 		GValue value;
 		gchar *error;
 
-		g_value_init (&value, type);
+		value.g_type = 0;
+		g_value_init  (&value, type);
 
 		G_VALUE_COLLECT (&value, var_args, 0, &error);
 		if (error) {
