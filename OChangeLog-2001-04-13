@@ -1,4 +1,4 @@
-2000-1026  Joe Shaw  <joe@helixcode.com>
+2000-10-26  Joe Shaw  <joe@helixcode.com>
 
 	* bonobo/bonobo-moniker-util.c: Add the http moniker to the fast
 	resolving ones, because doing a lookup through OAF doesn't work yet.
