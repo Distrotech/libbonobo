@@ -1,3 +1,10 @@
+2000-05-11  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-uih-menu.c: (impl_Bonobo_UIHandler_menu_fetch):
+	Finished implementation by filling in pixmap_type and
+	pixmap_data parameters instead of leaving them uninitialized
+	for the caller to choke on.
+
 2000-05-10  Maciej Stachowiak  <mjs@eazel.com>
 
 	* bonobo/Makefile.am: Make sure both object directory
