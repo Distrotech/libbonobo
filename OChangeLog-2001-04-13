@@ -1,5 +1,7 @@
 Thu Nov 25 12:51:09 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
+	* gshell/inout.c (file_open_cmd_cb): add mime type support
+
 	* gshell/gshell.c (update_buffer_menu): implemented the Buffer
 	menu.  
 
