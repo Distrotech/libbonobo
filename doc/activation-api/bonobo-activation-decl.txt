@@ -451,6 +451,119 @@ Bonobo_ActivationResult *sh,CORBA_Environment    *ev
 #define ORBIT_IDL_SERIAL 19
 </MACRO>
 <MACRO>
+<NAME>ORBIT_DECL_Bonobo_Unknown</NAME>
+#define ORBIT_DECL_Bonobo_Unknown 1
+</MACRO>
+<MACRO>
+<NAME>Bonobo_Unknown__freekids</NAME>
+#define Bonobo_Unknown__freekids CORBA_Object__freekids
+</MACRO>
+<TYPEDEF>
+<NAME>Bonobo_Unknown</NAME>
+   typedef CORBA_Object Bonobo_Unknown;
+</TYPEDEF>
+<VARIABLE>
+<NAME>Bonobo_Unknown__classid</NAME>
+   extern CORBA_unsigned_long Bonobo_Unknown__classid;
+</VARIABLE>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_0</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_0 'B'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_1</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_1 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_2</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_2 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_3</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_3 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_4</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_4 'b'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_5</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_5 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_6</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_6 '_'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_7</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_7 'U'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_8</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_8 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_9</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_9 'k'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_10</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_10 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_11</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_11 'o'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_12</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_12 'w'
+</MACRO>
+<MACRO>
+<NAME>TC_IMPL_TC_Bonobo_Unknown_13</NAME>
+#define TC_IMPL_TC_Bonobo_Unknown_13 'n'
+</MACRO>
+<MACRO>
+<NAME>TC_Bonobo_Unknown</NAME>
+#define TC_Bonobo_Unknown ((CORBA_TypeCode)&TC_Bonobo_Unknown_struct)
+</MACRO>
+<FUNCTION>
+<NAME>POA_Bonobo_Unknown__init</NAME>
+<RETURNS>void  </RETURNS>
+PortableServer_Servant servant,CORBA_Environment * ev
+</FUNCTION>
+<FUNCTION>
+<NAME>POA_Bonobo_Unknown__fini</NAME>
+<RETURNS>void  </RETURNS>
+PortableServer_Servant servant,CORBA_Environment * ev
+</FUNCTION>
+<FUNCTION>
+<NAME>Bonobo_Unknown_ref</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Unknown _obj, CORBA_Environment * ev
+</FUNCTION>
+<FUNCTION>
+<NAME>Bonobo_Unknown_unref</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Unknown _obj, CORBA_Environment * ev
+</FUNCTION>
+<FUNCTION>
+<NAME>Bonobo_Unknown_queryInterface</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+Bonobo_Unknown _obj,const CORBA_char * repoid,CORBA_Environment * ev
+</FUNCTION>
+<VARIABLE>
+<NAME>Bonobo_Unknown__iinterface</NAME>
+   extern ORBit_IInterface Bonobo_Unknown__iinterface;
+</VARIABLE>
+<MACRO>
+<NAME>Bonobo_Unknown_IMETHODS_LEN</NAME>
+#define Bonobo_Unknown_IMETHODS_LEN 3
+</MACRO>
+<MACRO>
+<NAME>ORBIT_IDL_SERIAL</NAME>
+#define ORBIT_IDL_SERIAL 19
+</MACRO>
+<MACRO>
 <NAME>ORBIT_DECL_Bonobo_GenericFactory</NAME>
 #define ORBIT_DECL_Bonobo_GenericFactory 1
 </MACRO>
@@ -688,119 +801,6 @@ Bonobo_GenericFactory _obj,const CORBA_char * iid,CORBA_Environment * ev
 <MACRO>
 <NAME>Bonobo_GenericFactory_IMETHODS_LEN</NAME>
 #define Bonobo_GenericFactory_IMETHODS_LEN 1
-</MACRO>
-<MACRO>
-<NAME>ORBIT_IDL_SERIAL</NAME>
-#define ORBIT_IDL_SERIAL 19
-</MACRO>
-<MACRO>
-<NAME>ORBIT_DECL_Bonobo_Unknown</NAME>
-#define ORBIT_DECL_Bonobo_Unknown 1
-</MACRO>
-<MACRO>
-<NAME>Bonobo_Unknown__freekids</NAME>
-#define Bonobo_Unknown__freekids CORBA_Object__freekids
-</MACRO>
-<TYPEDEF>
-<NAME>Bonobo_Unknown</NAME>
-   typedef CORBA_Object Bonobo_Unknown;
-</TYPEDEF>
-<VARIABLE>
-<NAME>Bonobo_Unknown__classid</NAME>
-   extern CORBA_unsigned_long Bonobo_Unknown__classid;
-</VARIABLE>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_0</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_0 'B'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_1</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_1 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_2</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_2 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_3</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_3 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_4</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_4 'b'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_5</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_5 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_6</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_6 '_'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_7</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_7 'U'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_8</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_8 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_9</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_9 'k'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_10</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_10 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_11</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_11 'o'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_12</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_12 'w'
-</MACRO>
-<MACRO>
-<NAME>TC_IMPL_TC_Bonobo_Unknown_13</NAME>
-#define TC_IMPL_TC_Bonobo_Unknown_13 'n'
-</MACRO>
-<MACRO>
-<NAME>TC_Bonobo_Unknown</NAME>
-#define TC_Bonobo_Unknown ((CORBA_TypeCode)&TC_Bonobo_Unknown_struct)
-</MACRO>
-<FUNCTION>
-<NAME>POA_Bonobo_Unknown__init</NAME>
-<RETURNS>void  </RETURNS>
-PortableServer_Servant servant,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>POA_Bonobo_Unknown__fini</NAME>
-<RETURNS>void  </RETURNS>
-PortableServer_Servant servant,CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>Bonobo_Unknown_ref</NAME>
-<RETURNS>void  </RETURNS>
-Bonobo_Unknown _obj, CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>Bonobo_Unknown_unref</NAME>
-<RETURNS>void  </RETURNS>
-Bonobo_Unknown _obj, CORBA_Environment * ev
-</FUNCTION>
-<FUNCTION>
-<NAME>Bonobo_Unknown_queryInterface</NAME>
-<RETURNS>Bonobo_Unknown  </RETURNS>
-Bonobo_Unknown _obj,const CORBA_char * repoid,CORBA_Environment * ev
-</FUNCTION>
-<VARIABLE>
-<NAME>Bonobo_Unknown__iinterface</NAME>
-   extern ORBit_IInterface Bonobo_Unknown__iinterface;
-</VARIABLE>
-<MACRO>
-<NAME>Bonobo_Unknown_IMETHODS_LEN</NAME>
-#define Bonobo_Unknown_IMETHODS_LEN 3
 </MACRO>
 <MACRO>
 <NAME>ORBIT_IDL_SERIAL</NAME>
