@@ -7,3 +7,4 @@ bonobo-activation-sysconf
 *.o
 *.lo
 *.la
+bonobo-slay
