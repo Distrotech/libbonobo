@@ -1,3 +1,7 @@
+2003-03-04  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-arg.h: update macros.
+
 2003-02-19  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* monikers/bonobo-moniker-std.c (bonobo_std_moniker_factory): idem.
