@@ -7,6 +7,7 @@
  *
  */
 #include <config.h>
+#include <gmodule.h>
 #include <bonobo/gnome-storage.h>
 
 static GnomeObjectClass *gnome_storage_parent_class;
@@ -153,8 +154,6 @@ init_storage_corba_class (void)
 static void
 gnome_storage_class_init (GnomeStorageClass *class)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) class;
-
 	gnome_storage_parent_class = gtk_type_class (gnome_object_get_type ());
 
 	init_storage_corba_class ();
@@ -218,27 +217,63 @@ gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage)
 	return storage;
 }
 
-#if 0
-GnomeStorage *
-gnome_storage_file_open (const char *path, const char *open_mode)
-{
-	GnomeStorage *storage;
-	GNOME_Storage corba_storage;
-	
-	g_return_val_if_fail (path != NULL, NULL);
-	g_return_val_if_fail (open_mode != NULL, NULL);
+typedef GnomeStorage * (*driver_open_t)(const char *path, gint flags, gint mode);
 
-	storage = gtk_type_new (gnome_storage_get_type ());
-	storage->driver = gnome_storage_driver_new ("file", path, open_mode);
+driver_open_t *
+load_storage_driver (const char *driver_name)
+{
+	GModule *m;
+	char *path;
+	driver_open_t *driver;
 	
-	corba_storage = create_gnome_storage (
-		GNOME_OBJECT (storage));
-	if (corba_storage == CORBA_OBJECT_NIL){
-		gtk_object_destroy (GTK_OBJECT (storage));
+	path = g_module_build_path (STORAGE_LIB, driver_name);
+	m = g_module_open (path, G_MODULE_BIND_LAZY);
+	g_free (path);
+	
+	if (m == NULL){
+		g_free (path);
 		return NULL;
 	}
+	
+	driver = g_module_symbol (m, "gnome_storage_driver_open", NULL);
 
-	return gnome_storage_construct (storage, corba_storage);
+	return driver;
 }
 
-#endif
+/**
+ * gnome_storage_open:
+ * @driver: driver to use for opening.
+ * @path: path where the base file resides
+ * @flags: Unix open(2) flags
+ * @mode: Unix open(2) mode
+ *
+ * Opens or creates the file named at @path with the stream driver @driver.
+ *
+ * @driver is one of: "efs" or "fs" for now.
+ *
+ * Returns: a created GnomeStorage object.
+ */
+GnomeStorage *
+gnome_storage_open (const char *driver, const char *path, gint flags, gint mode)
+{
+	static driver_open_t fs_driver, efs_driver;
+	driver_open_t *driver_ptr;
+	
+	g_return_val_if_fail (path != NULL, NULL);
+	
+	if (strcmp (driver, "fs") == 0){
+		if (fs_driver == NULL)
+			fs_driver = load_storage_driver ("storagefs");
+		driver_ptr = &fs_driver;
+	} else if (strcmp (driver, "efs") == 0){
+		if (efs_driver == NULL)
+			efs_driver = load_storage_driver ("storageefs");
+		driver_ptr = &efs_driver;
+	}
+
+	if (*driver_ptr == NULL)
+		return NULL;
+
+	return (*driver_ptr) (path, flags, mode);
+}
+

@@ -1,5 +1,17 @@
 1999-07-31  Miguel de Icaza  <miguel@gnu.org>
 
+	* bonobo/gnome-storage.c (gnome_storage_open): New function for
+	opening storages, uses a driver argument.
+	
+	* storage-modules/gnome-storage-efs.c (gnome_storage_driver_open):
+	Added shared library entry point.
+
+	* storage-modules/gnome-storage-fs.c: Killed
+	gnome_storage_fs_create.
+	(gnome_storage_fs_open): Made this routine take the same arguments
+	as open(2).
+	(gnome_storage_driver_open): Added shared library entry point.
+
 	* components/text-plain/Makefile.am (bonobo_text_plain_LDADD):
 	Kill references to efs.
 

@@ -58,7 +58,8 @@ GnomeStorage   *gnome_storage_construct    (GnomeStorage *storage,
 
 GnomeStorage   *gnome_storage_open         (const char *driver,
 					    const char *path,
-					    const char *open_mode);
+					    gint flags,
+					    gint mode);
 
 /*
  * Functions to open storages and streams from and existing.
@@ -79,6 +80,11 @@ void gnome_stream_write_class_id  (GnomeStream *stream,
 
 extern POA_GNOME_Storage__vepv gnome_storage_vepv;
 extern POA_GNOME_Storage__epv gnome_storage_epv;
+
+/*
+ * Signature for Storage drivers
+ */
+GnomeStorage gnome_storage_driver_open  (const char *path, gint flags, gint mode);
 
 END_GNOME_DECLS
 
