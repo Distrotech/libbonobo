@@ -130,31 +130,31 @@ msgstr "Errori di sintassi nella descrizione dell'oggetto"
 msgid "Could not initialize Bonobo"
 msgstr "Impossibile inizializzare Bonobo"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "Moniker HTTP"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "Standard Moniker factory"
 msgstr "Factory standard per Moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
-msgid "generic Oaf activation moniker"
-msgstr "Moniker generico per l'attivazione Oaf"
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "generic Server activation moniker"
+msgstr "Moniker generico per l'attivazione Server"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
-msgid "generic Oaf query moniker"
-msgstr "Moniker generico per interrogazioni Oaf"
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Server query moniker"
+msgstr "Moniker generico per interrogazioni Server"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic factory 'new' moniker"
 msgstr "moniker generico per factory 'new'"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic item moniker"
 msgstr "moniker genericop per oggetti"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "MonikerExtender stream"
 

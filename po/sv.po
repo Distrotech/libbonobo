@@ -132,31 +132,31 @@ msgstr "Syntaxfel i objektbeskrivning"
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP-moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "Standard Moniker factory"
 msgstr "Standardmonikerfabrik"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
-msgid "generic Oaf activation moniker"
-msgstr "allmän Oaf-aktiveringsmoniker"
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "generic Server activation moniker"
+msgstr "allmän Server-aktiveringsmoniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
-msgid "generic Oaf query moniker"
-msgstr "allmän Oaf-frågemoniker"
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Server query moniker"
+msgstr "allmän Server-frågemoniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic factory 'new' moniker"
 msgstr "allmän ny fabrikmoniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic item moniker"
 msgstr "allmän objektmoniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "strömmonikerutökare"
 

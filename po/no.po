@@ -141,31 +141,31 @@ msgstr "Generell feil under aktivering uten beskrivelse"
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initialisere Bonobo"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP-moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "Standard Moniker factory"
 msgstr "Standard moniker factory"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
-msgid "generic Oaf activation moniker"
-msgstr "vanlig Oaf aktiviseringsmoniker"
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "generic Server activation moniker"
+msgstr "vanlig Server aktiviseringsmoniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
-msgid "generic Oaf query moniker"
-msgstr "vanlig Oaf spørringsmoniker"
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Server query moniker"
+msgstr "vanlig Server spørringsmoniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic factory 'new' moniker"
 msgstr "vanlig factory 'new' moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic item moniker"
 msgstr "vanlig oppføringsmoniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "strøm MonikerExtender"
 
@@ -241,8 +241,8 @@ msgstr "strøm MonikerExtender"
 #~ msgid "Customize the toolbar"
 #~ msgstr "Tilpass verktøylinjen"
 
-#~ msgid "Oaf options"
-#~ msgstr "Oaf-alternativer"
+#~ msgid "Server options"
+#~ msgstr "Server-alternativer"
 
 #~ msgid "Could not initialize Bonobo!\n"
 #~ msgstr "Kunne ikke initiere Bonobo!\n"

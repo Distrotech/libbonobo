@@ -131,30 +131,30 @@ msgstr "İzahsız ümumi fəallaşdırma xətası"
 msgid "Could not initialize Bonobo"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP Moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "Standard Moniker factory"
 msgstr "Standart Moniker mərkəzi"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "generic Oaf activation moniker"
 msgstr "sıravi Oaf fəllaşdırma monikeri"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf query moniker"
 msgstr "soravi Oaf istəmə monikeri"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic factory 'new' moniker"
 msgstr "sıravi mərkəz 'yeni' monikeri"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic item moniker"
 msgstr "sıravi üzv monikeri"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "axım MonikerExtender"

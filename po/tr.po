@@ -141,30 +141,30 @@ msgstr "Tanýmlamasýz genel aktifleþtirme hatasý"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo baþlatýlamýyor "
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP Moniker"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "Standard Moniker factory"
 msgstr "Moniker Fabrika standardý"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
-msgid "generic Oaf activation moniker"
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "generic Server activation moniker"
 msgstr "Moniker genel kaba aktifleþtirmesi"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
-msgid "generic Oaf query moniker"
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Server query moniker"
 msgstr "Moniker genel kaba sorgusu"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic factory 'new' moniker"
 msgstr "Moniker genel üretim 'yeni'"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic item moniker"
 msgstr "Moniker genel öðesi"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "Moniker Kapsamýndaki akým"

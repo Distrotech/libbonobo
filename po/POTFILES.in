@@ -1,3 +1,3 @@
 bonobo/bonobo-exception.c
 bonobo/bonobo-generic-factory.h
-monikers/Bonobo_Moniker_std.oaf.in.in
+monikers/Bonobo_Moniker_std.server.in.in
