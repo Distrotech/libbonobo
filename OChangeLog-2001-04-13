@@ -1,3 +1,17 @@
+2001-02-25  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-async.c: Fully API document.
+
+	* bonobo/bonobo-async.[ch]: s/usec/msec/
+
+	* doc/api/bonobo-api.sgml: hack out crud we don't
+	want / need to document.
+
+2001-02-24  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-win.c: Fully API document,
+	where not deprecated.
+
 2001-02-23  John Harper  <jsh@eazel.com>
 
 	* bonobo/bonobo-print-client.c (bonobo_print_client_get_type):

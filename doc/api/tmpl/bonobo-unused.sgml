@@ -2987,6 +2987,18 @@ Returns the #GtkType for the BonoboObject object.
 </para>
 
 
+<!-- ##### TYPEDEF BonoboWindow ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF BonoboWindowClass ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### STRUCT BonoboWindowPrivate ##### -->
 <para>
 
@@ -6914,11 +6926,163 @@ Returns the #GtkType for the GnomeObject object.
 
 @Returns: 
 
+<!-- ##### FUNCTION bonobo_window_component_get ##### -->
+<para>
+
+</para>
+
+@win: 
+@name: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_deregister_component ##### -->
+<para>
+
+</para>
+
+@win: 
+@name: 
+
+<!-- ##### FUNCTION bonobo_window_deregister_component_by_ref ##### -->
+<para>
+
+</para>
+
+@win: 
+@component: 
+
+<!-- ##### FUNCTION bonobo_window_deregister_dead_components ##### -->
+<para>
+
+</para>
+
+@win: 
+
+<!-- ##### FUNCTION bonobo_window_deregister_get_component_names ##### -->
+<para>
+
+</para>
+
+@win: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_dump ##### -->
+<para>
+
+</para>
+
+@win: 
+@msg: 
+
+<!-- ##### FUNCTION bonobo_window_freeze ##### -->
+<para>
+
+</para>
+
+@win: 
+
 <!-- ##### FUNCTION bonobo_window_get_type ##### -->
 <para>
 
 </para>
 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_object_get ##### -->
+<para>
+
+</para>
+
+@win: 
+@path: 
+@object: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_object_set ##### -->
+<para>
+
+</para>
+
+@win: 
+@path: 
+@object: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_register_component ##### -->
+<para>
+
+</para>
+
+@win: 
+@name: 
+@component: 
+
+<!-- ##### FUNCTION bonobo_window_set_ui_container ##### -->
+<para>
+
+</para>
+
+@win: 
+@container: 
+
+<!-- ##### FUNCTION bonobo_window_thaw ##### -->
+<para>
+
+</para>
+
+@win: 
+
+<!-- ##### FUNCTION bonobo_window_xml_get ##### -->
+<para>
+
+</para>
+
+@win: 
+@path: 
+@node_only: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_xml_merge ##### -->
+<para>
+
+</para>
+
+@win: 
+@path: 
+@xml: 
+@component: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_xml_merge_tree ##### -->
+<para>
+
+</para>
+
+@win: 
+@path: 
+@tree: 
+@component: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_xml_node_exists ##### -->
+<para>
+
+</para>
+
+@win: 
+@path: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_window_xml_rm ##### -->
+<para>
+
+</para>
+
+@win: 
+@path: 
+@by_component: 
 @Returns: 
 
 <!-- ##### FUNCTION bonobo_wrapper_get_type ##### -->
