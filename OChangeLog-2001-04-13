@@ -1,5 +1,8 @@
 2000-12-18  Dietmar Maurer  <dietmar@helixcode.com>
 
+	* gshell/gshell.c (verb_HelpAbout_cb): changed the text of the
+	about dialog (removed "for Linux")
+
 	* monikers/bonobo-moniker-extender-file.c: make it a shlib moniker
 
 	* monikers/Bonobo_Moniker_Extender_file.oafinfo.in: new file
