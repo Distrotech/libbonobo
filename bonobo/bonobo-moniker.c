@@ -1,9 +1,11 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/*
+/**
  * bonobo-moniker: Object naming abstraction
  *
  * Author:
  *	Michael Meeks (michael@helixcode.com)
+ *
+ * Copyright 2000, Helix Code, Inc.
  */
 #include <config.h>
 

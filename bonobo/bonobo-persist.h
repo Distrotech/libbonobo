@@ -1,4 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * bonobo-persist.h: a persistance interface
+ *
+ * Author:
+ *   Miguel de Icaza (miguel@kernel.org)
+ *
+ * Copyright 1999 Helix Code, Inc.
+ */
 #ifndef _BONOBO_PERSIST_H_
 #define _BONOBO_PERSIST_H_
 

@@ -1,4 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * Bonobo::ProgressiveDataSink
+ *
+ * Author:
+ *   Nat Friedman (nat@nat.org)
+ *
+ * Copyright 1999 Helix Code, Inc.
+ */
 #ifndef _BONOBO_PROGRESSIVE_DATA_SINK_H_
 #define _BONOBO_PROGRESSIVE_DATA_SINK_H_
 

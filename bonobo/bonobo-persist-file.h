@@ -1,4 +1,13 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * Bonobo PersistFile
+ *
+ * Author:
+ *   Matt Loper (matt@gnome-support.com)
+ *
+ * Copyright 1999, 2000 Helix Code, Inc.
+ */
+
 #ifndef _BONOBO_PERSIST_FILE_H_
 #define _BONOBO_PERSIST_FILE_H_
 

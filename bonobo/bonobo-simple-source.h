@@ -1,4 +1,13 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * bonobo-simple-source.c: a simple data source
+ *
+ * Author:
+ *   Nat Friedman (nat@nat.org)
+ *
+ * Copyright 1999 Helix Code, Inc.
+ */
+
 #ifndef _GNOME_SIMPLE_DATA_SOURCE_H_
 #define _GNOME_SIMPLE_DATA_SOURCE_H_
 

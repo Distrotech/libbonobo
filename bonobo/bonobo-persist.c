@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * GNOME Persist
+ * bonobo-persist.c: a persistance interface
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)

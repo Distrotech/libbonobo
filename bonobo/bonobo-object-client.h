@@ -1,4 +1,13 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * bonobo-object-client.c:
+ *   This handles the client-view of a remote Bonobo object.
+ *
+ * Author:
+ *   Miguel de Icaza (miguel@kernel.org)
+ *
+ * Copyright 1999 Helix Code, Inc.
+ */
 #ifndef _BONOBO_OBJECT_CLIENT_H_
 #define _BONOBO_OBJECT_CLIENT_H_
 

@@ -1,4 +1,12 @@
-
+/**
+ * bonobo-property-bag.h: property bag object implementation.
+ *
+ * Authors:
+ *   Nat Friedman  (nat@helixcode.com)
+ *   Michael Meeks (michael@helixcode.com)
+ *
+ * Copyright 1999, 2000 Helix Code, Inc.
+ */
 #ifndef __BONOBO_PROPERTY_BAG_H__
 #define __BONOBO_PROPERTY_BAG_H__
 

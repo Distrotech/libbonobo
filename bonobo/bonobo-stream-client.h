@@ -1,3 +1,13 @@
+/**
+ * gnome-stream-client.c: Helper routines to access a Bonobo_Stream CORBA object
+ *
+ * Authors:
+ *   Nat Friedman    (nat@nat.org)
+ *   Miguel de Icaza (miguel@kernel.org).
+ *   Michael Meekss  (michael@helixcode.com)
+ *
+ * Copyright 1999,2000 Helix Code, Inc.
+ */
 #ifndef _BONOBO_STREAM_CLIENT_H_
 #define _BONOBO_STREAM_CLIENT_H_
 

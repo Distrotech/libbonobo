@@ -1,5 +1,5 @@
-/*
- * Bonobo property bag object implementation.
+/**
+ * bonobo-property-bag.c: property bag object implementation.
  *
  * Authors:
  *   Nat Friedman  (nat@helixcode.com)

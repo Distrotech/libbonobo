@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * Bonobo Unknown interface base implementation
+ * bonobo-object.c: Bonobo Unknown interface base implementation
  *
  * Authors:
  *   Miguel de Icaza (miguel@kernel.org)

@@ -1,5 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/*
+/**
+ * bonobo-item-container.h: a generic container for monikers.
+ *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  *

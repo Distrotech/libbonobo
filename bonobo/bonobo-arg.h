@@ -1,3 +1,14 @@
+/*
+ * bonobo-arg.h Bonobo argument support:
+ *
+ *  A thin wrapper of CORBA_any's with macros
+ * to assist in handling values safely.
+ *
+ * Author:
+ *    Michael Meeks (michael@helixcode.com)
+ *
+ * Copyright 2000, Helix Code, Inc.
+ */
 #ifndef __BONOBO_ARG_H__
 #define __BONOBO_ARG_H__
 

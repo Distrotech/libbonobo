@@ -1,10 +1,11 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/*
- * bonobo-stream: Stream manipulation, abstract class
+/**
+ * bonobo-stream.c: Stream manipulation, abstract class
  *
  * Author:
  *     Miguel de Icaza (miguel@gnu.org).
  *
+ * Copyright 1999, 2000 Helix Code, Inc.
  */
 #include <config.h>
 #include <bonobo/bonobo-stream.h>

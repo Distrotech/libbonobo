@@ -1,4 +1,14 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * bonobo-main.h: Bonobo Main
+ *
+ * Author:
+ *    Miguel de Icaza  (miguel@gnu.org)
+ *    Nat Friedman     (nat@nat.org)
+ *    Peter Wainwright (prw@wainpr.demo.co.uk)
+ *
+ * Copyright 1999 Helix Code, Inc.
+ */
 
 #ifndef __GNOME_MAIN_H__
 #define __GNOME_MAIN_H__ 1

@@ -1,4 +1,4 @@
-/*
+/**
  * Bonobo transient object implementation.
  *
  * This simplifies the creation of POA managers for transient objects.

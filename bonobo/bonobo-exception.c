@@ -1,3 +1,12 @@
+/**
+ * bonobo-exception.c: a generic exception -> user string converter.
+ *
+ * Authors:
+ *   Michael Meeks (michael@helixcode.com)
+ *
+ * Copyright 2000 Helix Code, Inc.
+ */
+
 #include <config.h>
 #include <gnome.h>
 #include <bonobo/bonobo-exception.h>

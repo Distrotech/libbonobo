@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/*
- * gnome-storage: Storage manipulation.
+/**
+ * gnome-storage.c: Storage manipulation.
  *
  * Author:
  *   Miguel de Icaza (miguel@gnu.org).

@@ -1,3 +1,11 @@
+/**
+ * bonobo-property-bag-client.c: C sugar for property bags.
+ *
+ * Author:
+ *   Nat Friedman (nat@nat.org)
+ *
+ * Copyright 1999, Helix Code, Inc.
+ */
 #ifndef __BONOBO_PROPERTY_BAG_CLIENT_H__
 #define __BONOBO_PROPERTY_BAG_CLIENT_H__
 

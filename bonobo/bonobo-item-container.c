@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * Bonobo Item container object.
+ * bonobo-item-container.h: a generic container for monikers.
  *
  * The BonoboItemContainer object represents a document which may have one
  * or more embedded document objects.  To embed an object in the

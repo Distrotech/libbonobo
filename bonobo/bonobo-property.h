@@ -1,3 +1,11 @@
+/**
+ * Bonobo property object implementation.
+ *
+ * Author:
+ *    Nat Friedman (nat@nat.org)
+ *
+ * Copyright 1999, 2000 Helix Code, Inc.
+ */
 
 #ifndef __BONOBO_PROPERTY_H__
 #define __BONOBO_PROPERTY_H__

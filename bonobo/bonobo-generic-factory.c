@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * Bonobo GenericFactory object.
+ * bonobo-generic-factory.c: a GenericFactory object.
  *
  * The BonoboGenericFactory object is used to instantiate new
  * Bonobo::GenericFactory objects.  It acts as a wrapper for the

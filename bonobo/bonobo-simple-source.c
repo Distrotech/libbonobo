@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * GNOME::SimpleDataSource
+ * bonobo-simple-source.c: a simple data source
  *
  * Author:
  *   Nat Friedman (nat@nat.org)

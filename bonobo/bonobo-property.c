@@ -1,4 +1,4 @@
-/*
+/**
  * Bonobo property object implementation.
  *
  * Author:

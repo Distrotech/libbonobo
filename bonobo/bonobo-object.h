@@ -1,4 +1,13 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * Bonobo Unknown interface base implementation
+ *
+ * Authors:
+ *   Miguel de Icaza (miguel@kernel.org)
+ *   Michael Meeks (michael@helixcode.com)
+ *
+ * Copyright 1999,2000 Helix Code, Inc.
+ */
 #ifndef _BONOBO_OBJECT_H_
 #define _BONOBO_OBJECT_H_
 

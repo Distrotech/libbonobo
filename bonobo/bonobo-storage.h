@@ -1,4 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * gnome-storage.h: Storage manipulation.
+ *
+ * Author:
+ *   Miguel de Icaza (miguel@gnu.org).
+ *
+ * Copyright 1999 Helix Code, Inc.
+ */
 #ifndef _BONOBO_STORAGE_H_
 #define _BONOBO_STORAGE_H_
 

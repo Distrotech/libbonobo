@@ -1,4 +1,4 @@
-/*
+/**
  * bonobo-moniker-util.h
  *
  * Copyright (C) 2000  Helix Code, Inc.

@@ -1,4 +1,15 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 c-set-style: linux -*- */
+/**
+ * bonobo-object-directory.c: abstract the object directory
+ *
+ * Authors:
+ *    Havoc Pennington  (hp@redhat.com)
+ *    Anders Carlsson   (andersca@gnu.org)
+ *    Maciej Stachowiak (mjs@eazel.com)
+ *
+ * Copyright 1999, 2000 Havoc Pennington, Anders Carlsson,
+ *                      Maciej Stachowiak
+ */
 #ifndef __BONOBO_OBJECT_DIRECTORY_H__
 #define __BONOBO_OBJECT_DIRECTORY_H__
 

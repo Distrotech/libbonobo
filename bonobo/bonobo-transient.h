@@ -1,4 +1,19 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * bonobo-transient.h: a transient object implementation.
+ *
+ * This simplifies the creation of POA managers for transient objects.
+ * Objects living in this POA are created on demand and destroyed after use.
+ *
+ * Authors:
+ *   Nat Friedman    (nat@helixcode.com)
+ *   Miguel de Icaza (miguel@helixcode.com)
+ *
+ * I just refactored the code from the original PropertyBag, all the smart hacks
+ * are from Nat -mig.
+ *
+ * (C) 2000 Helix Code, Inc.
+ */
 #ifndef _BONOBO_TRANSIENT_H_
 #define _BONOBO_TRANSIENT_H_
 

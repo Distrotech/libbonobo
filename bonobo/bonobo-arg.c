@@ -1,5 +1,5 @@
 /*
- * Bonobo argument support:
+ * bonobo-arg.c Bonobo argument support:
  *
  *  A thin wrapper of CORBA_any's with macros
  * to assist in handling values safely.

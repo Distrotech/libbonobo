@@ -1,4 +1,6 @@
-/*
+/**
+ * bonobo-property-bag-client.c: C sugar for property bags.
+ *
  * Author:
  *   Nat Friedman (nat@nat.org)
  *

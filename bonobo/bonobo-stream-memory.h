@@ -1,4 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * gnome-stream-mem.c: Memory based stream
+ *
+ * Author:
+ *   Miguel de Icaza (miguel@gnu.org)
+ *
+ * Copyright 1999, 2000 Helix Code, Inc.
+ */
 #ifndef _BONOBO_STREAM_MEM_H_
 #define _BONOBO_STREAM_MEM_H_
 

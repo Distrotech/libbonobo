@@ -1,5 +1,17 @@
 2000-10-17  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/Makefile.am (libbonoboinclude_HEADERS): remove bonobo-ui-item.[ch]
+	What about bonobo-storage-priv[ate].h ?
+	What about bonobo-component-directory*
+
+	* CVS remove: bonobo-file-moniker.[ch], bonobo-item-moniker.[ch],
+	bonobo-moniker-client.[ch] bonobo-composite-moniker.[ch]
+	bonobo-container.[ch] gnome-object.[ch]
+
+	* bonobo/*: Add copyrights to all headers and clean all C files headers.
+
+2000-10-17  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/app.c (main): add status regression test.
 
 	* bonobo/bonobo-win.c (info_dump_fn): update debug.

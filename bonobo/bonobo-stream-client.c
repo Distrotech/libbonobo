@@ -1,4 +1,4 @@
-/*
+/**
  * gnome-stream-client.c: Helper routines to access a Bonobo_Stream CORBA object
  *
  * Authors:

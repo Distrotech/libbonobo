@@ -1,8 +1,10 @@
-/*
+/**
  * gnome-object-io.c: Helper routines for loading and saving of objects
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
+ *
+ * Copyright 1999, Helix Code, Inc.
  */
 #include <config.h>
 #include <bonobo/Bonobo.h>
