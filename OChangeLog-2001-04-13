@@ -1,7 +1,9 @@
-2000-12-11  Maciej Stachowiak  <mjs@eazel.com>
+2000-12-11  Michael Meeks  <michael@helixcode.com>
 
-	* bonobo.spec.in: Removed bonobo-moniker-config since it is no
-	longer built.
+	* bonobo/bonobo-moniker-util.c (resolve_async_cb): 
+	release unref the moniker.
+	(bonobo_moniker_resolve_async): take a ref here.
+	(bonobo_get_object_async): stub.
 
 2000-12-11  Iain Holmes  <iain@helixcode.com>
 

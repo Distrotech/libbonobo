@@ -37,6 +37,14 @@ typedef void (*BonoboMonikerAsyncFn) (Bonobo_Unknown     object,
 				      CORBA_Environment *ev,
 				      gpointer           user_data);
 /* Async equivalents */
+
+void                bonobo_get_object_async                      (const CORBA_char        *name,
+								  const char              *interface_name,
+								  CORBA_Environment       *ev,
+								  guint                    timeout_usec,
+								  BonoboMonikerAsyncFn     cb,
+								  gpointer                 user_data);
+
 void                bonobo_moniker_client_new_from_name_async    (const CORBA_char        *name,
 								  CORBA_Environment       *ev,
 								  guint                    timeout_usec,

@@ -45,7 +45,9 @@ handle_new (const BonoboAsyncMethod *method,
 
 	/*
 	 * We have to copy in case of an evil forwarding
-	 * later and the raving inefficiency this gives us
+	 * later and the raving inefficiency this gives us,
+	 * FIXME: should prolly just keep the marshalled buffer
+	 * instead.
 	 */
 	src = args;
 	for (i = 0; i < method->num_args; i++) {
@@ -97,8 +99,8 @@ handle_free (BonoboAsyncReply *handle)
  * de-marshallers, use a fully generic mechanism instead.
  */
 static void
-demarshal_exception (BonoboAsyncReply         *handle,
-		     GIOPRecvBuffer *rb)
+demarshal_exception (BonoboAsyncReply *handle,
+		     GIOPRecvBuffer   *rb)
 {
 	CORBA_ORB              orb = handle->object->orb;
 	CORBA_SystemException *new;

@@ -16,12 +16,12 @@ Bonobo 0.29
 		* Storage module cleans, and regression testing (Dietmar)
 
 	* Monikers
-		* Asynchronous moniker resolution (untested) (Me)
 		* Bonobo widget switched to use monikers (Me)
 		* Bonobo contexts - moniker context (Me)
 		* tar moniker (Vladimir Vukicevic)
 		* http, gunzip monikers (Joe Shaw)
 		* moniker test code (Joe Shaw)
+		* Asynchronous moniker resolution (Me)
 
 	* New transient CORBA object helper (Miguel)
 

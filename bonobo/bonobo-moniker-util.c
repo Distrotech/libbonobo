@@ -473,6 +473,7 @@ bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 }
 
 typedef struct {
+	Bonobo_Moniker       moniker;
 	BonoboMonikerAsyncFn cb;
 	gpointer             user_data;
 } resolve_async_ctx_t;
@@ -492,6 +493,7 @@ resolve_async_cb (BonoboAsyncReply  *handle,
 		ctx->cb (object, ev, ctx->user_data);
 	}
 
+	bonobo_object_release_unref (ctx->moniker, ev);
 	g_free (ctx);
 }
 
@@ -533,9 +535,10 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 	ctx = g_new0 (resolve_async_ctx_t, 1);
 	ctx->cb = cb;
 	ctx->user_data = user_data;
+	ctx->moniker = bonobo_object_dup_ref (moniker, ev);
 
 	bonobo_async_invoke (&method, resolve_async_cb, ctx,
-			     timeout_usec, moniker, arg_values, ev);
+			     timeout_usec, ctx->moniker, arg_values, ev);
 }
 
 void
@@ -559,3 +562,13 @@ bonobo_moniker_resolve_async_default (Bonobo_Moniker       moniker,
 				      ev, timeout_usec, cb, user_data);
 }
 
+void
+bonobo_get_object_async (const CORBA_char    *name,
+			 const char          *interface_name,
+			 CORBA_Environment   *ev,
+			 guint                timeout_usec,
+			 BonoboMonikerAsyncFn cb,
+			 gpointer             user_data)
+{
+	g_warning ("As yet unimplemented");
+}
