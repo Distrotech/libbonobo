@@ -1,3 +1,17 @@
+2001-08-01  Michael Meeks  <michael@ximian.com>
+
+	* monikers/bonobo-moniker-oaf.c: upd.
+
+	* monikers/bonobo-moniker-query.c: upd.
+
+	* idl/Bonobo.idl: upd.
+
+	* bonobo/bonobo-generic-factory.c: become a BonoboObject; horay.
+
+	* bonobo/bonobo-shlib-factory.h: ditto.
+
+	* configure.in: use bonobo-activation.
+
 2001-08-01  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_qi_return): Only

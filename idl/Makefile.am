@@ -16,7 +16,6 @@ idl_DATA =				\
 	Bonobo_Property.idl		\
 	Bonobo_Storage.idl		\
 	Bonobo_UI.idl			\
-	Bonobo_Unknown.idl		\
 	Bonobo_Zoomable.idl		\
 	Bonobo_Exception.idl		\
 	Bonobo_Clipboard.idl		\

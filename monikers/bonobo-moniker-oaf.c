@@ -35,7 +35,7 @@ bonobo_moniker_oaf_resolve (BonoboMoniker               *moniker,
 		return CORBA_OBJECT_NIL;
 	}
 
-	object = oaf_activate_from_id (
+	object = bonobo_activation_activate_from_id (
 		(char *) bonobo_moniker_get_name_full (moniker), 0, NULL, ev);
 
 	return bonobo_moniker_util_qi_return (object, requested_interface, ev);

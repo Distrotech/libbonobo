@@ -22,12 +22,9 @@
 #include <bonobo/bonobo-shlib-factory.h>
 #include <bonobo/bonobo-running-context.h>
 
-POA_GNOME_ObjectFactory__vepv bonobo_shlib_factory_vepv;
-
 static BonoboObjectClass *bonobo_shlib_factory_parent_class = NULL;
 
-struct _BonoboShlibFactoryPrivate
-{
+struct _BonoboShlibFactoryPrivate {
 	int                  live_objects;
 	gpointer             oaf_impl_ptr;
 };
@@ -50,7 +47,6 @@ struct _BonoboShlibFactoryPrivate
  */
 BonoboShlibFactory *
 bonobo_shlib_factory_construct (BonoboShlibFactory    *factory,
-				CORBA_Object           corba_factory,
 				const char            *oaf_iid,
 				PortableServer_POA     poa,
 				gpointer               oaf_impl_ptr,
@@ -58,18 +54,15 @@ bonobo_shlib_factory_construct (BonoboShlibFactory    *factory,
 {
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_SHLIB_FACTORY (factory), NULL);
-	g_return_val_if_fail (corba_factory != CORBA_OBJECT_NIL, NULL);
 
 	factory->priv->live_objects = 0;
 	factory->priv->oaf_impl_ptr = oaf_impl_ptr;
 
-        oaf_plugin_use (poa, oaf_impl_ptr);
+        bonobo_activation_plugin_use (poa, oaf_impl_ptr);
 
 	return BONOBO_SHLIB_FACTORY (
-		bonobo_generic_factory_construct (BONOBO_GENERIC_FACTORY (factory),
-						  corba_factory,
-						  oaf_iid,
-						  closure));
+		bonobo_generic_factory_construct (
+			BONOBO_GENERIC_FACTORY (factory), oaf_iid, closure));
 }
 
 /**
@@ -97,24 +90,14 @@ bonobo_shlib_factory_new_closure (const char           *oaf_iid,
 				  GClosure             *factory_closure)
 {
 	BonoboShlibFactory *factory;
-	GNOME_ObjectFactory corba_factory;
 
-	g_return_val_if_fail (factory_closure != NULL, NULL);
 	g_return_val_if_fail (oaf_iid != NULL, NULL);
+	g_return_val_if_fail (factory_closure != NULL, NULL);
 	
 	factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
-
-	corba_factory = bonobo_generic_factory_corba_object_create (
-		BONOBO_GENERIC_FACTORY (factory), factory_closure);
-
-	if (corba_factory == CORBA_OBJECT_NIL) {
-		g_object_unref (G_OBJECT (factory));
-		return NULL;
-	}
 	
-	return bonobo_shlib_factory_construct (factory, corba_factory,
-					       oaf_iid, poa, oaf_impl_ptr,
-					       factory_closure);
+	return bonobo_shlib_factory_construct (
+		factory, oaf_iid, poa, oaf_impl_ptr, factory_closure);
 }
 
 /**

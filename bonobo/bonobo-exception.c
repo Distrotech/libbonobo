@@ -262,11 +262,11 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 	if ((rval = bonobo_exception_repoid_to_text (ev->_id)))
 		return rval;
 	
-	else if (!strcmp (ev->_id, "IDL:OAF/GeneralError:1.0")) {
-		OAF_GeneralError *err = ev->_any._value;
+	else if (!strcmp (ev->_id, "IDL:Bonobo/GeneralError:1.0")) {
+		Bonobo_GeneralError *err = ev->_any._value;
 		
 		if (!err || !err->description)
-			return g_strdup (_("General oaf error with no description"));
+			return g_strdup (_("General activation error with no description"));
 		else
 			return g_strdup (err->description);
 

@@ -37,14 +37,13 @@ typedef struct {
 	BonoboGenericFactoryClass parent_class;
 } BonoboShlibFactoryClass;
 
-GType             bonobo_shlib_factory_get_type  (void);
+GType               bonobo_shlib_factory_get_type     (void);
 
-BonoboShlibFactory *bonobo_shlib_factory_construct (BonoboShlibFactory    *factory,
-						    CORBA_Object           corba_factory,
-						    const char            *component_id,
-						    PortableServer_POA     poa,
-						    gpointer               oaf_impl_ptr,
-						    GClosure              *closure);
+BonoboShlibFactory *bonobo_shlib_factory_construct    (BonoboShlibFactory    *factory,
+						       const char            *component_id,
+						       PortableServer_POA     poa,
+						       gpointer               oaf_impl_ptr,
+						       GClosure              *closure);
 
 BonoboShlibFactory *bonobo_shlib_factory_new          (const char            *component_id,
 						       PortableServer_POA     poa,
@@ -70,18 +69,11 @@ make_factory (PortableServer_POA poa, const char *iid, gpointer impl_ptr,     \
 	      CORBA_Environment *ev)                                          \
 {                                                                             \
 	BonoboShlibFactory *f;                                                \
-        CORBA_Object object_ref;                                              \
 	f = bonobo_shlib_factory_new (oafiid, poa, impl_ptr, fn, data);	      \
-        object_ref = bonobo_generic_factory_corba_objref (BONOBO_GENERIC_FACTORY (f)); \
-        if (BONOBO_EX (ev) || !object_ref) {                                  \
-		g_warning ("cannot get objref: '%s'",                         \
-			   bonobo_exception_get_text (ev));                   \
-                return CORBA_OBJECT_NIL;                                      \
-        }                                                                     \
-        return CORBA_Object_duplicate (object_ref, ev);                       \
+        return CORBA_Object_duplicate (BONOBO_OBJREF (f), ev);		      \
 }                                                                             \
-static OAFPluginObject plugin_list[] = {{oafiid, make_factory}, { NULL } };   \
-const OAFPlugin OAF_Plugin_info = { plugin_list, descr };
+static BonoboActivationPluginObject plugin_list[] = {{oafiid, make_factory}, { NULL } };   \
+const  BonoboActivationPlugin Bonobo_Plugin_info = { plugin_list, descr };
 
 #define BONOBO_OAF_SHLIB_FACTORY_MULTI(oafiid, descr, fn, data)               \
 	BONOBO_OAF_SHLIB_FACTORY(oafiid, descr, fn, data)

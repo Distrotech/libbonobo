@@ -41,7 +41,7 @@ bonobo_moniker_query_resolve (BonoboMoniker               *moniker,
 				 bonobo_moniker_get_name (moniker),
 				 requested_interface);
 
-	object = oaf_activate (query, NULL, 0, NULL, ev);
+	object = bonobo_activation_activate (query, NULL, 0, NULL, ev);
 
 	g_free (query);
 

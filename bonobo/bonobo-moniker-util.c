@@ -436,7 +436,7 @@ bonobo_moniker_client_new_from_name (const CORBA_char  *name,
 
 		query = query_from_name (mname);
 
-		object = oaf_activate (query, NULL, 0, NULL, my_ev);
+		object = bonobo_activation_activate (query, NULL, 0, NULL, my_ev);
 
 		g_free (query);
 		
@@ -455,7 +455,7 @@ bonobo_moniker_client_new_from_name (const CORBA_char  *name,
 			return CORBA_OBJECT_NIL;
 		}
 	} else {
-		object = oaf_activate_from_id ((gchar *) iid, 0, NULL, my_ev);
+		object = bonobo_activation_activate_from_id ((gchar *) iid, 0, NULL, my_ev);
 
 		if (BONOBO_EX (my_ev)) {
 			if (!opt_ev)
@@ -791,12 +791,12 @@ bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
 
 		query = query_from_name (name);
 
-		oaf_activate_async (query, NULL, 0,
+		bonobo_activation_activate_async (query, NULL, 0,
 				    async_activation_cb, ctx, ev);
 
 		g_free (query);
 	} else
-		oaf_activate_from_id_async ((gchar *) iid, 0,
+		bonobo_activation_activate_from_id_async ((gchar *) iid, 0,
 					    async_activation_cb, ctx, ev);
 }
 
@@ -1138,7 +1138,7 @@ lookup_naming_context (GList *path,
 	g_return_val_if_fail (path->data != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (ev != NULL, CORBA_OBJECT_NIL);
 
-	ns =  oaf_name_service_get (ev);
+	ns =  bonobo_activation_name_service_get (ev);
 	if (BONOBO_EX (ev) || ns == CORBA_OBJECT_NIL)
 		return CORBA_OBJECT_NIL;
 

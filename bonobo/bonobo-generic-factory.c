@@ -28,49 +28,13 @@
 
 #include <bonobo/bonobo-types.h>
 
-/* FIXME: cut and paste nastiness from old bonobo */
-
-typedef struct {
-	POA_GNOME_ObjectFactory  servant_placeholder;
-
-	BonoboGenericFactory    *c_factory;
-} GenericServant;
-
-struct _BonoboGenericFactoryPrivate
-{	
+struct _BonoboGenericFactoryPrivate {	
 	/* The function factory */
 	GClosure              *factory_closure;
-
-	/* The CORBA Object */
-	GNOME_ObjectFactory    corba_objref;
 
 	/* The component_id for this generic factory */
 	char *oaf_iid;
 };
-
-static GNOME_ObjectFactory
-activate_servant (void *servant, gpointer shlib_id)
-{
-	CORBA_Environment ev;
-	GNOME_ObjectFactory o;
-
-	g_return_val_if_fail (servant != NULL, CORBA_OBJECT_NIL);
-
-	CORBA_exception_init (&ev);
-
-	CORBA_free (PortableServer_POA_activate_object (
-                bonobo_poa (), servant, &ev));
-
-	o = PortableServer_POA_servant_to_reference (
-		bonobo_poa(), servant, &ev);
-
-	CORBA_exception_free (&ev);
-	
-	return o;
-}
-
-PortableServer_ServantBase__epv bonobo_generic_base_epv = { NULL };
-POA_GNOME_ObjectFactory__vepv bonobo_generic_factory_vepv;
 
 static GObjectClass *bonobo_generic_factory_parent_class = NULL;
 
@@ -79,8 +43,9 @@ impl_Bonobo_ObjectFactory_manufactures (PortableServer_Servant  servant,
 					const CORBA_char       *obj_oaf_iid,
 					CORBA_Environment      *ev)
 {
-	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (
-		((GenericServant *) servant)->c_factory);
+	BonoboGenericFactory *factory;
+
+	factory = BONOBO_GENERIC_FACTORY (bonobo_object (servant));
 
 	if (! strcmp (obj_oaf_iid, factory->priv->oaf_iid))
 		return CORBA_TRUE;
@@ -89,16 +54,16 @@ impl_Bonobo_ObjectFactory_manufactures (PortableServer_Servant  servant,
 }
 
 static CORBA_Object
-impl_Bonobo_ObjectFactory_create_object (PortableServer_Servant   servant,
-					 const CORBA_char        *obj_oaf_iid,
-					 const GNOME_stringlist *params,
-					 CORBA_Environment       *ev)
+impl_Bonobo_ObjectFactory_createObject (PortableServer_Servant   servant,
+					const CORBA_char        *obj_oaf_iid,
+					const Bonobo_StringList *params,
+					CORBA_Environment       *ev)
 {
 	BonoboGenericFactoryClass *class;
 	BonoboGenericFactory      *factory;
 	BonoboObject              *object;
 
-	factory = BONOBO_GENERIC_FACTORY (((GenericServant *) servant)->c_factory);
+	factory = BONOBO_GENERIC_FACTORY (bonobo_object (servant));
 
 	class = BONOBO_GENERIC_FACTORY_CLASS (G_OBJECT_GET_CLASS (factory));
 	object = (*class->new_generic) (factory, obj_oaf_iid);
@@ -106,41 +71,7 @@ impl_Bonobo_ObjectFactory_create_object (PortableServer_Servant   servant,
 	if (!object)
 		return CORBA_OBJECT_NIL;
 	
-	return CORBA_Object_duplicate (bonobo_object_corba_objref (BONOBO_OBJECT (object)), ev);
-}
-
-GNOME_ObjectFactory
-bonobo_generic_factory_corba_objref (BonoboGenericFactory *factory)
-{
-	g_return_val_if_fail (factory != NULL, CORBA_OBJECT_NIL);
-	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), CORBA_OBJECT_NIL);
-
-	return factory->priv->corba_objref;
-}
-
-GNOME_ObjectFactory
-bonobo_generic_factory_corba_object_create (BonoboGenericFactory *object, 
-					    gpointer              shlib_id)
-{
-	POA_GNOME_ObjectFactory *servant;
-	CORBA_Environment ev;
-	
-	CORBA_exception_init (&ev);
-
-	servant = (POA_GNOME_ObjectFactory *) g_new0 (GenericServant, 1);
-	((GenericServant *) servant)->c_factory = g_object_ref (G_OBJECT (object));
-	servant->vepv = &bonobo_generic_factory_vepv;
-
-	POA_GNOME_ObjectFactory__init ((PortableServer_Servant) servant, &ev);
-	if (BONOBO_EX (&ev)) {
-		g_free (servant);
-		CORBA_exception_free (&ev);
-		return CORBA_OBJECT_NIL;
-	}
-
-	CORBA_exception_free (&ev);
-	
-	return activate_servant (servant, shlib_id);
+	return CORBA_Object_duplicate (BONOBO_OBJREF (object), ev);
 }
 
 /**
@@ -159,33 +90,22 @@ bonobo_generic_factory_corba_object_create (BonoboGenericFactory *object,
  */
 BonoboGenericFactory *
 bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
-				  GNOME_ObjectFactory     corba_factory,
 				  const char             *oaf_iid,
 				  GClosure               *factory_closure)
 {
-	CORBA_Environment ev;
 	int ret;
 	
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
-	g_return_val_if_fail (corba_factory != CORBA_OBJECT_NIL, NULL);
 	
 	factory->priv->factory_closure =
 		bonobo_closure_store (factory_closure, bonobo_marshal_POINTER__STRING);
 	factory->priv->oaf_iid    = g_strdup (oaf_iid);
-
-	CORBA_exception_init (&ev);
-	factory->priv->corba_objref  = CORBA_Object_duplicate (corba_factory, &ev);
-	CORBA_exception_free (&ev);
 	
-	ret = oaf_active_server_register (oaf_iid, corba_factory);
+	ret = bonobo_activation_active_server_register (oaf_iid, BONOBO_OBJREF (factory));
 
-	if (ret == OAF_REG_ERROR) {
-		CORBA_Environment ev;
-		CORBA_exception_init (&ev);
-		g_object_unref (G_OBJECT (factory));
-		CORBA_Object_release (corba_factory, &ev);
-		CORBA_exception_free (&ev);
+	if (ret == Bonobo_ACTIVATION_REG_ERROR) {
+		bonobo_object_unref (BONOBO_OBJECT (factory));
 		return NULL;
 	}
 
@@ -213,21 +133,14 @@ bonobo_generic_factory_new_closure (const char *oaf_iid,
 				    GClosure   *factory_closure)
 {
 	BonoboGenericFactory *factory;
-	GNOME_ObjectFactory corba_factory;
 
-	g_return_val_if_fail (factory_closure != NULL, NULL);
 	g_return_val_if_fail (oaf_iid != NULL, NULL);
+	g_return_val_if_fail (factory_closure != NULL, NULL);
 	
 	factory = g_object_new (bonobo_generic_factory_get_type (), NULL);
-	
-	corba_factory = bonobo_generic_factory_corba_object_create (factory, factory_closure);
-	if (corba_factory == CORBA_OBJECT_NIL) {
-		g_object_unref (G_OBJECT (factory));
-		return NULL;
-	}
-	
-	return bonobo_generic_factory_construct (factory, corba_factory,
-						 oaf_iid, factory_closure);
+
+	return bonobo_generic_factory_construct (
+		factory, oaf_iid, factory_closure);
 }
 
 
@@ -261,14 +174,10 @@ static void
 bonobo_generic_factory_finalize (GObject *object)
 {
 	BonoboGenericFactory *factory G_GNUC_UNUSED = BONOBO_GENERIC_FACTORY (object);
-	CORBA_Environment ev;
 
 	if (factory->priv) {
-		CORBA_exception_init (&ev);
-		oaf_active_server_unregister (factory->priv->oaf_iid,
-					      factory->priv->corba_objref);
-		CORBA_Object_release (factory->priv->corba_objref, &ev);
-		CORBA_exception_free (&ev);
+		bonobo_activation_active_server_unregister (
+			factory->priv->oaf_iid, BONOBO_OBJREF (factory));
 
 		g_free (factory->priv->oaf_iid);
 		g_closure_unref (factory->priv->factory_closure);
@@ -307,15 +216,16 @@ static void
 bonobo_generic_factory_class_init (BonoboGenericFactoryClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
+	POA_Bonobo_GenericFactory__epv *epv = &klass->epv;
 
-	bonobo_generic_factory_parent_class = g_type_class_peek_parent (klass);
+	epv->manufactures = impl_Bonobo_ObjectFactory_manufactures;
+	epv->createObject = impl_Bonobo_ObjectFactory_createObject;
 
 	object_class->finalize = bonobo_generic_factory_finalize;
 
 	klass->new_generic = bonobo_generic_factory_new_generic;
 
-	bonobo_generic_factory_vepv._base_epv = &bonobo_generic_base_epv;
-	bonobo_generic_factory_vepv.GNOME_ObjectFactory_epv = bonobo_generic_factory_get_epv ();
+	bonobo_generic_factory_parent_class = g_type_class_peek_parent (klass);
 }
 
 static void
@@ -326,51 +236,7 @@ bonobo_generic_factory_init (GObject *object)
 	factory->priv = g_new0 (BonoboGenericFactoryPrivate, 1);
 }
 
-/**
- * bonobo_generic_factory_get_type:
- *
- * Returns: The GType of the BonoboGenericFactory class.
- */
-GType
-bonobo_generic_factory_get_type (void)
-{
-	static GType type = 0;
-
-	if (!type) {
-		GTypeInfo info = {
-			sizeof (BonoboGenericFactoryClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) bonobo_generic_factory_class_init,
-			NULL, /* class_finalize */
-			NULL, /* class_data */
-			sizeof (BonoboGenericFactory),
-			0, /* n_preallocs */
-			(GInstanceInitFunc) bonobo_generic_factory_init
-		};
-
-		type = g_type_register_static (
-			G_TYPE_OBJECT, "BonoboGenericFactory", &info, 0);
-	}
-
-	return type;
-}
-
-/**
- * bonobo_generic_factory_get_epv:
- *
- * Returns: The EPV for the default BonoboGenericFactory implementation.  
- */
-POA_GNOME_ObjectFactory__epv *
-bonobo_generic_factory_get_epv (void)
-{
-	POA_GNOME_ObjectFactory__epv *epv;
-
-	epv = g_new0 (POA_GNOME_ObjectFactory__epv, 1);
-
-	epv->manufactures  = impl_Bonobo_ObjectFactory_manufactures;
-	epv->create_object = impl_Bonobo_ObjectFactory_create_object;
-
-	return epv;
-}
-
+BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory, 
+		       Bonobo_GenericFactory,
+		       BONOBO_OBJECT_TYPE,
+		       bonobo_generic_factory);

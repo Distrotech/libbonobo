@@ -11,7 +11,7 @@
 #ifndef _BONOBO_OBJECT_H_
 #define _BONOBO_OBJECT_H_
 
-#include <liboaf/liboaf.h>
+#include <bonobo-activation/bonobo-activation.h>
 
 #include <glib/gmacros.h>
 #include <gobject/gobject.h>

@@ -15,8 +15,12 @@
 #pragma inhibit push
 #endif
 
-#include <Bonobo_Exception.idl>
+/* From bonobo-activation */
 #include <Bonobo_Unknown.idl>
+#include <Bonobo_GenericFactory.idl>
+
+/* Basics */
+#include <Bonobo_Exception.idl>
 #include <Bonobo_Moniker.idl>
 #include <Bonobo_Context.idl>
 

@@ -131,7 +131,7 @@ bonobo_moniker_find_extender (const gchar       *name,
 			      CORBA_Environment *opt_ev)
 {
 	gchar            *query;
-	OAF_ActivationID  ret_id;
+	Bonobo_ActivationID  ret_id;
 	Bonobo_Unknown    extender;
 	CORBA_Environment  *ev, temp_ev;
 
@@ -146,7 +146,7 @@ bonobo_moniker_find_extender (const gchar       *name,
 		"repo_ids.has ('%s') AND "
 		"bonobo:moniker_extender.has ('%s')", interface, name);
 
-	extender = oaf_activate (query, NULL, 0, &ret_id, ev);
+	extender = bonobo_activation_activate (query, NULL, 0, &ret_id, ev);
 
 	g_free (query);
 
@@ -192,7 +192,7 @@ bonobo_moniker_use_extender (const gchar                 *extender_oafiid,
 	g_return_val_if_fail (extender_oafiid != NULL, CORBA_OBJECT_NIL);
 	g_return_val_if_fail (requested_interface != NULL, CORBA_OBJECT_NIL);
 
-	extender = oaf_activate_from_id (
+	extender = bonobo_activation_activate_from_id (
 		(gchar *) extender_oafiid, 0, NULL, ev);
 
 	if (BONOBO_EX (ev) || extender == CORBA_OBJECT_NIL)

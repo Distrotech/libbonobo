@@ -106,8 +106,8 @@ bonobo_init_full (int *argc, char **argv,
 	{ /* Init neccessary bits */
 		g_type_init ();
 
-		if (!oaf_is_initialized ())
-			oaf_init (*argc, argv);
+		if (!bonobo_activation_is_initialized ())
+			bonobo_activation_init (*argc, argv);
 	}
 
 	CORBA_exception_init (&ev);
@@ -156,7 +156,7 @@ bonobo_init_full (int *argc, char **argv,
 	 * Create the POA.
 	 */
 	if (opt_orb == CORBA_OBJECT_NIL) {
-		opt_orb = oaf_orb_get ();
+		opt_orb = bonobo_activation_orb_get ();
 		if (opt_orb == CORBA_OBJECT_NIL) {
 			g_warning ("Can not resolve initial reference to ORB");
 			CORBA_exception_free (&ev);

@@ -45,12 +45,11 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_Property.idl		\
 	$(top_srcdir)/idl/Bonobo_Storage.idl		\
 	$(top_srcdir)/idl/Bonobo_UI.idl			\
-	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
 	$(top_srcdir)/idl/Bonobo_Zoomable.idl		\
 	$(top_srcdir)/idl/Bonobo_Exception.idl		\
 	$(top_srcdir)/idl/Bonobo_Clipboard.idl
 
-idl_flags = -I$(top_srcdir)/idl -I $(OAF_IDL_DIR) -D__BONOBO_COMPILATION
+idl_flags = -I$(top_srcdir)/idl -I $(BONOBO_ACTIVATION_IDL_DIR) -D__BONOBO_COMPILATION
 
 $(CORBA_ALL_SOURCE): $(idls) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo.idl

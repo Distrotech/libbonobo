@@ -48,7 +48,6 @@ bonobo_stream_extender_resolve (BonoboMonikerExtender       *extender,
 	Bonobo_Unknown object;
 	Bonobo_Unknown stream;
 	Bonobo_Persist persist;
-	OAF_ActivationID ret_id;
 
 	g_warning ("Stream extender: '%s'", display_name);
 
@@ -69,7 +68,7 @@ bonobo_stream_extender_resolve (BonoboMonikerExtender       *extender,
 		"repo_ids.has ('IDL:Bonobo/PersistStream:1.0')",
 		mime_type, requested_interface);
 		
-	object = oaf_activate (oaf_requirements, NULL, 0, &ret_id, ev);
+	object = bonobo_activation_activate (oaf_requirements, NULL, 0, NULL, ev);
 	g_warning ("Attempt activate object satisfying '%s': %p",
 		   oaf_requirements, object);
 	g_free (oaf_requirements);

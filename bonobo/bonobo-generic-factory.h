@@ -33,25 +33,22 @@ typedef BonoboObject * (*BonoboFactoryCallback) (BonoboGenericFactory *factory,
 						 gpointer              closure);
 					
 struct _BonoboGenericFactory {
-	GObject                      base;
+	BonoboObject                 base;
 
 	BonoboGenericFactoryPrivate *priv;
 };
 
 typedef struct {
-	GObjectClass parent_class;
+	BonoboObjectClass            parent_class;
 
-	/* Virtual methods */
+	POA_Bonobo_GenericFactory__epv epv;
+
 	BonoboObject *(*new_generic) (BonoboGenericFactory *factory,
-				      const char           *component_id);
+				      const char           *oaf_iid);
+
 } BonoboGenericFactoryClass;
 
 GType                 bonobo_generic_factory_get_type  (void);
-
-GNOME_ObjectFactory   bonobo_generic_factory_corba_objref (BonoboGenericFactory *object);
-
-GNOME_ObjectFactory   bonobo_generic_factory_corba_object_create (BonoboGenericFactory *object, 
-								  gpointer              shlib_id);
 
 BonoboGenericFactory *bonobo_generic_factory_new	 (const char            *oaf_iid,
 							  BonoboFactoryCallback  factory_cb,
@@ -61,11 +58,8 @@ BonoboGenericFactory *bonobo_generic_factory_new_closure (const char            
 							  GClosure              *factory_closure);
 
 BonoboGenericFactory *bonobo_generic_factory_construct	 (BonoboGenericFactory  *factory,
-							  GNOME_ObjectFactory    corba_factory,
 							  const char            *oaf_iid,
 							  GClosure              *factory_cb);
-
-POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 
 #ifdef __BONOBO_UI_MAIN_H__
 #define BONOBO_FACTORY_INIT(descr, version, argcp, argv)                      \

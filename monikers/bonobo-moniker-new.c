@@ -19,11 +19,11 @@ bonobo_moniker_new_resolve (BonoboMoniker               *moniker,
 			    const CORBA_char            *requested_interface,
 			    CORBA_Environment           *ev)
 {
-	Bonobo_Moniker      parent;
-	GNOME_ObjectFactory factory;
-	Bonobo_Unknown      containee;
-	Bonobo_Unknown      retval = CORBA_OBJECT_NIL;
-	GNOME_stringlist params = { 0 };
+	Bonobo_Moniker        parent;
+	Bonobo_GenericFactory factory;
+	Bonobo_Unknown        containee;
+	Bonobo_Unknown        retval = CORBA_OBJECT_NIL;
+	Bonobo_StringList     params = { 0 };
 	
 	parent = bonobo_moniker_get_parent (moniker, ev);
 
@@ -33,7 +33,7 @@ bonobo_moniker_new_resolve (BonoboMoniker               *moniker,
 	g_assert (parent != CORBA_OBJECT_NIL);
 
 	factory = Bonobo_Moniker_resolve (parent, options,
-					  "IDL:Gnome/ObjectFactory:1.0", ev);
+					  "IDL:Bonobo/GenericFactory:1.0", ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto return_unref_parent;
@@ -45,7 +45,7 @@ bonobo_moniker_new_resolve (BonoboMoniker               *moniker,
 		goto return_unref_parent;
 	}
 
-	containee = GNOME_ObjectFactory_create_object (
+	containee = Bonobo_GenericFactory_createObject (
 		factory, requested_interface, &params, ev);
 
 	bonobo_object_release_unref (factory, ev);
