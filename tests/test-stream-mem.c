@@ -38,9 +38,9 @@ test_read_write (BonoboStream *memstream)
 	CORBA_exception_free (&ev);
 
 	if (!strcmp (read_string, write_string))
-		return FALSE;
-	else
 		return TRUE;
+	else
+		return FALSE;
 }
 
 int main (int argc, char *argv [])
