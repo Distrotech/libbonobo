@@ -2,7 +2,7 @@
 /*
  * GNOME Moniker
  *
- * Author:
+ * Authors:
  *   Miguel de Icaza (miguel@kernel.org)
  *   Nat Friedman (nat@gnome-support.com)
  */
@@ -22,7 +22,7 @@ POA_GNOME_Moniker__vepv gnome_moniker_vepv;
 
 static CORBA_Object
 impl_bind_to_object (PortableServer_Servant servant,
-		     const GNOME_BindOptions * bind_context,
+		     const GNOME_BindOptions *bind_context,
 		     const GNOME_Moniker left_moniker,
 		     const CORBA_char *requested_interface,
 		     CORBA_Environment *ev)
@@ -39,7 +39,7 @@ impl_bind_to_object (PortableServer_Servant servant,
 
 static CORBA_Object
 impl_bind_to_storage (PortableServer_Servant servant,
-		      const GNOME_BindOptions * bind_context,
+		      const GNOME_BindOptions *bind_context,
 		      const GNOME_Moniker left_moniker,
 		      const CORBA_char *persistent_interface_name,
 		      CORBA_Environment *ev)
@@ -53,7 +53,7 @@ static GNOME_Moniker
 impl_compose_with (PortableServer_Servant servant,
 		   const GNOME_Moniker right,
 		   const CORBA_boolean only_if_exists,
-		   CORBA_Environment * ev)
+		   CORBA_Environment *ev)
 {
 	g_error ("not implemented");
 	return CORBA_OBJECT_NIL;
@@ -62,7 +62,7 @@ impl_compose_with (PortableServer_Servant servant,
 static GNOME_Moniker_MonikerList *
 impl_enum_pieces (PortableServer_Servant servant,
 		  const GNOME_Moniker composite_moniker,
-		  CORBA_Environment * ev)
+		  CORBA_Environment *ev)
 {
 	g_error ("not implemented");
 	return CORBA_OBJECT_NIL;
@@ -71,9 +71,9 @@ impl_enum_pieces (PortableServer_Servant servant,
 
 static CORBA_char *
 impl_get_display_name (PortableServer_Servant servant,
-		       const GNOME_BindOptions * bind_context,
+		       const GNOME_BindOptions *bind_context,
 		       const GNOME_Moniker left,
-		       CORBA_Environment * ev)
+		       CORBA_Environment *ev)
 {
 	g_error ("not implemented");
 	return CORBA_OBJECT_NIL;
@@ -81,11 +81,11 @@ impl_get_display_name (PortableServer_Servant servant,
 
 static GNOME_Moniker
 impl_parse_display_name (PortableServer_Servant servant,
-			 const GNOME_BindOptions * bind_context,
+			 const GNOME_BindOptions *bind_context,
 			 const GNOME_Moniker left,
-			 const CORBA_char * display_name,
+			 const CORBA_char *display_name,
 			 CORBA_short * display_name_bytes_parsed,
-			 CORBA_Environment * ev)
+			 CORBA_Environment *ev)
 {
 	g_error ("not implemented");
 	return CORBA_OBJECT_NIL;
@@ -119,60 +119,6 @@ gnome_moniker_class_init (GnomeMonikerClass *class)
 
 	init_moniker_corba_class ();
 }
-
-/*
- * FIXME: This is a helper routine and probably does not belong
- * in this file.  It certainly should not be an exported routine,
- * as it is a namespace pollutant.
- */
-CORBA_Object
-find_moniker_in_naming_service (gchar *name, gchar *kind)
-{
-	CosNaming_NameComponent nc[3] = {{"GNOME", "subcontext"},
-					 {"Monikers", "subcontext"}};
-	CosNaming_Name          nom;
-	CORBA_Object name_server;
-	CORBA_Object object_in_name_server;
-	CORBA_Environment ev;
-
-	g_assert (name);
-	nom._maximum = 0;
-	nom._length = 3;
-	nom._buffer = nc;
-	nom._release = CORBA_FALSE;
-
-	CORBA_exception_init (&ev);
-
-	nc[2].id   = (char *)name;
-	nc[2].kind = (char *)kind;
-
-	name_server = gnome_name_service_get();
-
-	g_assert(name_server != CORBA_OBJECT_NIL);
-
-	object_in_name_server = CosNaming_NamingContext_resolve(name_server, &nom, &ev);
-
-	if(ev._major == CORBA_NO_EXCEPTION
-	   || (ev._major == CORBA_USER_EXCEPTION
-	       && strcmp(CORBA_exception_id(&ev),
-			 ex_CosNaming_NamingContext_NotFound))) {
-
-		/* found it! */
-
-		CORBA_Object_release(name_server, &ev);
-
-		CORBA_exception_free(&ev);
-		return object_in_name_server;
-	}
-
-	/* didn't find it, return nothing */
-	CORBA_Object_release(name_server, &ev);
-	CORBA_exception_free(&ev);
-
-	return CORBA_OBJECT_NIL;
-
-} /* find_moniker_in_naming_service */
-
 
 static CORBA_Object
 create_gnome_moniker (GnomeObject *object)

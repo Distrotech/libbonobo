@@ -1,3 +1,17 @@
+1999-07-20  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-moniker-client.c (gnome_moniker_unregister,
+	gnome_moniker_register, gnome_moniker_find_in_naming_service): New
+	file.  Implement the file moniker registration/unregistration in
+	the name server.
+
+	Moved the finding-in-name-service routine here.
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_bind): Use the
+	goad id from the GnomePersist object.
+	(gnome_file_moniker_bind): Finished implementing.  And cleaned up.
+	(map_file): killed
+
 1999-07-19  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-object-io.c (gnome_persist_stream_load_goad_id,

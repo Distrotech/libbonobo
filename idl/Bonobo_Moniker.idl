@@ -87,14 +87,6 @@ module GNOME {
 					    
 	};
 
-	interface ParseDisplayName : Unknown {
-		Moniker parse_display_name (in BindOptions bind_context,
-					    in string display_name,
-					    out short display_name_bytes_parsed);
-	};
-
-	/* UNUSED: This may be replaced by the
-	 * simpler `BindOptions' struct; we'll see */
 	interface BindContext : Unknown {
 
 		/**
