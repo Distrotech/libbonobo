@@ -293,15 +293,16 @@ bonobo_moniker_default_equal (BonoboMoniker     *moniker,
 
 	name = bonobo_moniker_get_name_escaped (moniker);
 
-	g_warning ("Compare %d chars of '%s' to '%s' - case sensitive ?%c",
-		   i, name, p, moniker->priv->sensitive?'y':'n');
+	/* FIXME: this has not been tested with moniker lists  */
+/*	g_warning ("Compare %d chars of '%s' to '%s' - case sensitive ?%c",
+	i, name, p, moniker->priv->sensitive?'y':'n');*/
 
 	if (( moniker->priv->sensitive && !strncmp       (name, p, i)) ||
 	    (!moniker->priv->sensitive && !g_strncasecmp (name, p, i))) {
-		g_warning ("Matching moniker - equal");
+/*		g_warning ("Matching moniker - equal");*/
 		return i + offset;
 	} else {
-		g_warning ("No match");
+/*		g_warning ("No match");*/
 		return 0;
 	}
 

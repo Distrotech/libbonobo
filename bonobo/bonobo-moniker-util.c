@@ -934,3 +934,42 @@ bonobo_get_object_async (const CORBA_char    *name,
 	bonobo_moniker_client_new_from_name_async (
 		name, ev, timeout_msec, get_async1_cb, ctx);
 }
+
+/**
+ * bonobo_moniker_client_equal:
+ * @moniker: The moniker
+ * @name: a display name eg. file:/demo/a.jpeg
+ * @opt_ev: optional CORBA_Environment or NULL.
+ * 
+ * Compare a full @moniker with the given @name
+ * 
+ * Return value: TRUE if they are the same
+ **/
+gboolean
+bonobo_moniker_client_equal (Bonobo_Moniker     moniker,
+			     const CORBA_char  *name,
+			     CORBA_Environment *opt_ev)
+{
+	CORBA_long l;
+	CORBA_Environment *real_ev, tmp_ev;
+	
+	g_return_val_if_fail (name != NULL, FALSE);
+	g_return_val_if_fail (moniker != CORBA_OBJECT_NIL, FALSE);
+
+	if (opt_ev)
+		real_ev = opt_ev;
+	else {
+		CORBA_exception_init (&tmp_ev);
+		real_ev = &tmp_ev;
+	}
+
+	l = Bonobo_Moniker_equal (moniker, name, real_ev);
+
+	if (BONOBO_EX (real_ev))
+		l = 0;
+
+	if (!opt_ev)
+		CORBA_exception_free (&tmp_ev);
+
+	return l != 0;
+}
