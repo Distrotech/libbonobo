@@ -1,3 +1,8 @@
+2000-10-31  JP Rosevear  <jpr@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_finalize): bonobo_object_unref
+	rather than gtk_object_unref
+
 Tue Oct 31 09:29:17 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/bonobo-stream-efs.c (real_set_info): raise more
