@@ -22,6 +22,8 @@ module Bonobo {
 
 		exception NotSupported {};
 
+		exception IOError {};
+
 		enum SeekType {
 			SEEK_SET,
 			SEEK_CUR,
@@ -33,8 +35,8 @@ module Bonobo {
 		 * @count:  number of bytes to read.
 		 * @buffer: the buffer where the data is returned.
 		 */
-		long read     (in long count, out iobuf buffer)
-			raises (NoPermission);
+		void read     (in long count, out iobuf buffer)
+			raises (NoPermission, IOError);
 	
 		/**
 		 * write:
@@ -52,7 +54,8 @@ module Bonobo {
 		 *
 		 * Sets the read/write pointer to @offset (relative to @whence)
 		 */
-		long seek     (in long offset, in SeekType whence);
+		long seek     (in long offset, in SeekType whence)
+			raises (IOError);
 
 
 		/**

@@ -12,29 +12,29 @@
 #include <bonobo/bonobo-stream-client.h>
 
 /** 
- * bonobo_persist_stream_save_goad_id:
- * @target: A Bonobo_Stream object where the @goad_id will be written
- * @goad_id: the GOAD ID to write to the @target stream
+ * bonobo_persist_stream_save_object_iid:
+ * @target: A Bonobo_Stream object where the @object_iid will be written
+ * @object_iid: the OBJECT ID to write to the @target stream
  * @ev: Error values are returned here
  *
- * This routine saves the @goad_id in the @target stream.
+ * This routine saves the @object_iid in the @target stream.
  */
 void
-bonobo_persist_stream_save_goad_id (Bonobo_Stream target,
-				   const CORBA_char *goad_id,
+bonobo_persist_stream_save_object_iid (Bonobo_Stream target,
+				   const CORBA_char *object_iid,
 				   CORBA_Environment *ev)
 {
 	char *copy;
 	int len, slen;
 	
 	g_return_if_fail (target != CORBA_OBJECT_NIL);
-	g_return_if_fail (goad_id != NULL);
+	g_return_if_fail (object_iid != NULL);
 
-	slen = strlen (goad_id) + 1;
+	slen = strlen (object_iid) + 1;
 	len = sizeof (gint32) + slen;
 	copy = g_malloc (len);
 	((gint32 *) copy) = slen;
-	strcpy (copy + sizeof (gint32), goad_id);
+	strcpy (copy + sizeof (gint32), object_iid);
 		
 	bonobo_stream_client_write (target, copy, len, ev);
 
@@ -45,27 +45,28 @@ bonobo_persist_stream_save_goad_id (Bonobo_Stream target,
 }
 
 /**
- * bonobo_persist_stream_load_goad_id:
- * @source: Stream to load the GOAD ID from.
+ * bonobo_persist_stream_load_object_iid:
+ * @source: Stream to load the OBJECT ID from.
  *
- * Loads a GOAD ID from the @source Bonobo_Stream CORBA object reference.
+ * Loads a OBJECT ID from the @source Bonobo_Stream CORBA object reference.
  *
- * Returns: a pointer to the GOAD ID retrieved from the @source Bonobo_Stream
+ * Returns: a pointer to the OBJECT ID retrieved from the @source Bonobo_Stream
  * object, or %NULL if an error happens.
  */
 char *
-bonobo_persist_stream_load_goad_id (Bonobo_Stream source)
+bonobo_persist_stream_load_object_iid (Bonobo_Stream source)
 {
 	CORBA_Environment ev;
 	Bonobo_Stream_iobuf *buf;
-	CORBA_long bytes, n;
-	char *rval;
+	CORBA_long n;
+	char      *rval;
 	
 	g_return_val_if_fail (source != CORBA_OBJECT_NIL, NULL);
 
 	CORBA_exception_init (&ev);
-	bytes = Bonobo_Stream_read (source, sizeof (gint32), &buf, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION || bytes != sizeof (gint32)){
+	Bonobo_Stream_read (source, sizeof (gint32), &buf, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION ||
+	    buf->_length != sizeof (gint32)){
 		CORBA_exception_free (&ev);
 		return NULL;
 	}
@@ -73,16 +74,17 @@ bonobo_persist_stream_load_goad_id (Bonobo_Stream source)
 	n = *((gint32 *) buf->_buffer);
 	CORBA_free (buf);
 	
-	bytes = Bonobo_Stream_read (source, n, &buf, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION || bytes != n){
+	Bonobo_Stream_read (source, n, &buf, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION ||
+	    buf->_length != n) {
 		CORBA_exception_free (&ev);
 		return NULL;
 	}
 	
 	/*
-	 * Sanity check: the goad-id should be NULL terminated
+	 * Sanity check: the object-id should be NULL terminated
 	 */
-	if (buf->_buffer [n-1] != 0){
+	if (buf->_buffer [n - 1] != 0) {
 		CORBA_free (buf);
 		return NULL;
 	}
@@ -99,7 +101,7 @@ bonobo_persist_stream_load_goad_id (Bonobo_Stream source)
  * @pstream: A Bonobo_PersistStream CORBA reference.
  * @stream: A Bonobo_Stream CORBA reference to save object on
  *
- * Queries the goad_id for the @pstream object, and saves this on  @object in the
+ * Queries the object_iid for the @pstream object, and saves this on  @object in the
  * @stream and then the object in @pstream is saved.
  *
  * Returns: The IO status for the operation.  Might return %GNOME_IOERR_PERSIST_NOT_SUPPORTED
@@ -107,7 +109,7 @@ bonobo_persist_stream_load_goad_id (Bonobo_Stream source)
  */
 GnomeIOStatus
 bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream, Bonobo_Stream target,
-				    const char *goad_id)
+				    const char *object_iid)
 {
 	CORBA_Environment ev;
 	
@@ -116,7 +118,7 @@ bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream, Bonobo_Stream
 	
 	CORBA_exception_init (&ev);
 
-	bonobo_persist_stream_save_goad_id (target, goad_id, &ev);
+	bonobo_persist_stream_save_object_iid (target, object_iid, &ev);
 
 	Bonobo_PersistStream_save (pstream, target, "", &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
@@ -139,7 +141,7 @@ bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream, Bonobo_Stream
  */
 GnomeIOStatus
 bonobo_object_save_to_stream (BonoboObject *object, Bonobo_Stream stream,
-			     const char *goad_id)
+			     const char *object_iid)
 {
 	Bonobo_PersistStream pstream;
 	
@@ -153,8 +155,7 @@ bonobo_object_save_to_stream (BonoboObject *object, Bonobo_Stream stream,
 	if (pstream != CORBA_OBJECT_NIL)
 		return GNOME_IOERR_PERSIST_NOT_SUPPORTED;
 
-	return bonobo_persiststream_save_to_stream (pstream, stream, goad_id);
+	return bonobo_persiststream_save_to_stream (pstream, stream, object_iid);
 	
 	return GNOME_IO_OK;
 }
-

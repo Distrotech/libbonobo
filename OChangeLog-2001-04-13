@@ -1,3 +1,49 @@
+2000-07-03  Michael Meeks  <michael@helixcode.com>
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c (stream_read): kill leak,
+	update.
+
+	* components/text-plain/bonobo-text-plain.c (stream_read): update.
+
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_create): memzero
+	the buffer we allocate not the const pointer.
+
+	* bonobo/bonobo-stream-client.c (bonobo_stream_client_read_string):
+	simplify.
+
+	* bonobo/bonobo-object-io.c (bonobo_persist_stream_load_goad_id):
+	update. s/goad_id/object_iid/
+
+	* storage-modules/gnome-stream-efs.c (real_read): fix.
+	(real_truncate): fire except.
+
+	* storage-modules/bonobo-stream-vfs.c (fs_read): upd & fire except.
+	(fs_truncate, fs_seek): set exceptions (fs_length): set NotImplemented.
+
+	* bonobo/bonobo-stream-memory.c (mem_truncate): fire except.
+	(mem_read): update.
+
+	* bonobo/bonobo-stream-fs.c (fs_truncate): fire the exception.
+	(fs_read): kill leak, fire exception
+
+	* idl/bonobo-storage.idl: remove return value, add IOError exception.
+
+	* bonobo/bonobo-stream.c (impl_read): ditto.
+
+	* bonobo/bonobo-stream.h: read fixes.
+
+2000-07-02  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_bind_to_control):
+	check for NIL control.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_bind_to_view): check
+	for NIL view.
+
+2000-06-30  Michael Meeks  <michael@helixcode.com>
+
+	* doc/debugging.txt: oaf debugging advice.
+
 2000-07-02  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo-idl/bonobo-idl.1: Added man page.
@@ -25,25 +71,33 @@
 
 	* bonobo/bonobo-stream.[ch]
 	  (bonobo_stream_corba_object_create): new function
+
 	* bonobo/bonobo-stream-fs.c
 	  (create_bonobo_stream_fs): moved this functionality to bonobo-stream.c
 	  (bonobo_stream_create): use bonobo_stream_corba_object_create
+
 	* bonobo/bonobo-stream-memory.c: ditto.
+
 	* bonobo/bonobo-storage.[ch]
 	  (bonobo_storage_corba_object_create): new function
+
 	* storage_modules/bonobo-storage-vfs.c
 	  (create_bonobo_storage_vfs): move this functionality to
 	                               bonobo-storage.c
 	  (do_bonobo_storage_vfs_create): use bonobo_storage_corba_object_create
+
 	* storage-modules/gnome-storage-efs.c
 	  (create_storage_efs_server): use bonobo_storage_corba_object_create
+
 	* storage-modules/gnome-storage-fs.c
 	  (create_bonobo_storage_fs): move this functionality to
 	                              bonobo-storage.c
 	  (do_bonobo_storage_fs_create): use bonobo_storage_corba_object_create
+
 	* storage_modules/bonobo-stream-vfs.c
 	  (create_bonobo_stream_vfs): move this functionality to bonobo-stream.c
 	  (bonobo_stream_create): use bonobo_stream_corba_object_create
+
 	* storage-modules/gnome-stream-efs.c
 	  (create_stream_efs_server): use bonobo_stream_corba_object_create
 

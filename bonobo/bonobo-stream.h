@@ -25,7 +25,7 @@ typedef struct {
 	CORBA_long    (*write)    (BonoboStream *stream,
 				   const Bonobo_Stream_iobuf *buffer,
 				   CORBA_Environment *ev);
-	CORBA_long    (*read)     (BonoboStream *stream, CORBA_long count,
+	void          (*read)     (BonoboStream *stream, CORBA_long count,
 				   Bonobo_Stream_iobuf **buffer,
 				   CORBA_Environment *ev);
         CORBA_long    (*seek)     (BonoboStream *stream,

@@ -27,8 +27,9 @@ mem_truncate (BonoboStream *stream,
 		return;
 
 	newp = g_realloc (smem->buffer, new_size);
-	if (newp == NULL){
-		g_warning ("Signal exception");
+	if (!newp) {
+		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+				     ex_Bonobo_Stream_NoPermission, NULL);
 		return;
 	}
 
@@ -70,7 +71,7 @@ mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
 	return len;
 }
 
-static CORBA_long
+static void
 mem_read (BonoboStream *stream, CORBA_long count,
 	  Bonobo_Stream_iobuf ** buffer,
 	  CORBA_Environment *ev)
@@ -88,8 +89,6 @@ mem_read (BonoboStream *stream, CORBA_long count,
 	memcpy ((*buffer)->_buffer, smem->buffer + smem->pos, count);
 
 	smem->pos += count;
-	
-	return count;
 }
 
 static CORBA_long
@@ -147,7 +146,7 @@ mem_copy_to  (BonoboStream *stream,
 	
 	/* create the output file */
 	fd_out = creat(dest, 0666);
-	if(fd_out == -1) {
+	if (fd_out == -1) {
 		g_warning ("unable to create output file");
 		return;
 	}
@@ -267,7 +266,7 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 
 	if (buffer == NULL) {
 		stream_mem->buffer = g_malloc (size);
-		memset (buffer, 0, size);
+		memset (stream_mem->buffer, 0, size);
 	} else
 		stream_mem->buffer = g_memdup (buffer, size);
 

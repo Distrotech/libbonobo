@@ -21,15 +21,15 @@ bonobo_stream_from_servant (PortableServer_Servant servant)
 	return BONOBO_STREAM (bonobo_object_from_servant (servant));
 }
 
-static CORBA_long
+static void
 impl_read (PortableServer_Servant servant,
-	   CORBA_long count,
-	   Bonobo_Stream_iobuf ** buffer,
-	   CORBA_Environment * ev)
+	   CORBA_long             count,
+	   Bonobo_Stream_iobuf  **buffer,
+	   CORBA_Environment     *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
-	return CLASS (stream)->read (stream, count, buffer, ev);
+	CLASS (stream)->read (stream, count, buffer, ev);
 }
 
 static CORBA_long

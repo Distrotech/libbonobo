@@ -76,6 +76,7 @@ NB. don't go fiddling in .libs, you will get burned.
 NNB. it seems that emacs' debug mode doesn't like this; you have to
 write a small 'libtool gdb' wrapper script eg. 'libtool gdb $@'
 
+
 * Order of execution
 
 It is of course important to ensure that the component has registered
@@ -102,6 +103,19 @@ etc/CORBA/servers/bonobo-my-component.gnorba and trying again.
 Check that you are doing either a bonobo_main() or a bonobo_activate()
 followed by gtk_main(). Failure to do this will cause strange lockups.
 NB. must be done in both container and component.
+
+
+* Request create_object, ID -N was rejected by the authentication mechanism!
+
+The most likely cause of this warning message is initializing the goad
+code via. a gnome_CORBA_init when you are using oaf; If using oaf you must
+
+     gnome_init_	     then
+     oaf_init
+
+     instead of
+
+     gnome_CORBA_init
 
 
 * Getting more information

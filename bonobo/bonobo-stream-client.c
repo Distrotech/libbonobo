@@ -195,19 +195,19 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 	gstr = g_string_sized_new (16);
 
 	for (all = FALSE; !all; ) {
-		CORBA_long len;
 
 		/* 128 == a sensible size ? */
-		len = Bonobo_Stream_read (stream, 128,
-					  &buffer, ev);
+		Bonobo_Stream_read (stream, 128,
+				    &buffer, ev);
 
-		if (len == 0 || ev->_major != CORBA_NO_EXCEPTION)
+		if (ev->_major != CORBA_NO_EXCEPTION ||
+		    buffer->_length == 0)
 			all = TRUE;
 
 		else {
 			int i;
 
-			for (i = 0; i < len && i < buffer->_length; i++) {
+			for (i = 0; i < buffer->_length; i++) {
 				if (buffer->_buffer [i] == '\0') {
 					all = TRUE;
 					break;

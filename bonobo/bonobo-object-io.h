@@ -12,15 +12,15 @@ typedef enum {
 	
 } GnomeIOStatus;
 
-void            bonobo_persist_stream_save_goad_id  (Bonobo_Stream target,
-						    const CORBA_char *goad_id,
-						    CORBA_Environment *ev);
-char           *bonobo_persist_stream_load_goad_id  (Bonobo_Stream source);
-GnomeIOStatus   bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream,
-						    Bonobo_Stream target,
-						    const char *goad_id);
-GnomeIOStatus   bonobo_object_save_to_stream        (BonoboObject *object,
-						    Bonobo_Stream stream,
-						    const char *goad_id);
-	
+void            bonobo_persist_stream_save_object_iid  (Bonobo_Stream target,
+							const CORBA_char *object_iid,
+							CORBA_Environment *ev);
+char           *bonobo_persist_stream_load_object_iid  (Bonobo_Stream source);
+GnomeIOStatus   bonobo_persiststream_save_to_stream    (Bonobo_PersistStream pstream,
+							Bonobo_Stream target,
+							const char *object_iid);
+GnomeIOStatus   bonobo_object_save_to_stream           (BonoboObject *object,
+							Bonobo_Stream stream,
+							const char *object_iid);
+
 #endif /* _BONOBO_OBJECT_IO_H_ */
