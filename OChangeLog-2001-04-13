@@ -1,3 +1,22 @@
+2001-01-27  Mike Kestner  <mkestner@ameritech.net>
+
+	* bonobo/bonobo-canvas-component.c (restore_state): Save the affine in
+	  the root item instead of the component item.
+	(invoke_update): Copy of gnome_canvas_item_invoke_update.
+	(impl_Bonobo_Canvas_Component_update): Use invoke update instead of 
+	  directly calling the update method of item. Also call the GCI class
+	  update function to clear flags.
+	(rih_update): Use new ComponentProxy::requestUpdate method.
+
+	* bonobo/bonobo-canvas-item.c - (create_proxy): Replace updateArea with 
+	  requestUpdate method.
+	(impl_Bonobo_Canvas_ComponentProxy_requestUpdate): Renamed from 
+	  updateArea.  Calls gnome_canvas_item_request_update on the BCI. CUTA 
+	  parameter removed.  
+
+	*idl/Bonobo_Canvas.idl (Bonobo::Canvas::ComponentProxy): Rename
+	  updateArea method to requestUpdate and make it parameterless.
+
 2001-01-26  Ettore Perazzoli  <ettore@ximian.com>
 
 	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_qi_return):

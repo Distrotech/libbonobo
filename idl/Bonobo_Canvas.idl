@@ -236,7 +236,12 @@ module Canvas {
 	 */
 	
 	interface ComponentProxy {
-		void updateArea (in ArtUTA uta);
+		/**
+		 * requestUpdate:
+		 *
+		 * Requests an update of the client side canvas.
+		 */
+		void requestUpdate ();
 		
 		/**
 		 * grabFocus:
