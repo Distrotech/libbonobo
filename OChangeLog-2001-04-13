@@ -1,5 +1,13 @@
 2000-09-27  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/bonobo-control.c (bonobo_control_finalize): Use
+	gtk_object_destroy() to destroy the plug, not gtk_object_unref();
+	top-level containers like GtkWindow and GtkWindow subclasses are
+	owned by the top level container list. They unref themselves when they
+	are destroyed.
+
+2000-09-27  Martin Baulig  <baulig@suse.de>
+
 	* gshell/*: Ported to the new UI handler.
 	* gshell/io.[ch]: New files.
 	* gshell/io.xml: New file.
