@@ -1,3 +1,8 @@
+2000-10-28  Eskil Heyn Olsen  <eskil@eazel.com>
+
+	* components/application-x-gnomine/Makefile.am:
+	Added the xml file to make dist. Trying to fix
+	the build.
 
 2000-10-27  Zach Frey <zfrey@bright.net>
 
