@@ -1,3 +1,10 @@
+2000-12-29  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/Bonobo_Moniker_std.oafinfo.in: glup type on same line
+	as location to calm oaf-slay.
+	add File extender.
+	add Stream extender.
+
 2000-12-28  Michael Meeks  <michael@helixcode.com>
 
 	* idl/bonobo-storage.idl: add NotSupported exception to
