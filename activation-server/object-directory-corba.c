@@ -42,9 +42,10 @@
  *    We always have the local NamingContext in the
  * registry at exit, so quit if only 1 left.
  */
-#define RESIDUAL_SERVERS 1
+#define RESIDUAL_SERVERS 0
 
 static GObjectClass *parent_class = NULL;
+static gboolean finished_internal_registration = FALSE;
 
 typedef struct {
 	char *iid;
@@ -545,6 +546,11 @@ quit_server_timeout (gpointer user_data)
         return FALSE;
 }
 
+void od_finished_internal_registration (void)
+{
+	finished_internal_registration = TRUE;
+}
+
 void
 check_quit (void)
 {
@@ -715,7 +721,8 @@ add_active_server (ObjectDirectory    *od,
 		}
 	}
 
-	od->n_active_servers++;
+	if (finished_internal_registration)
+		od->n_active_servers++;
 
         if (cnx)
                 check_quit ();

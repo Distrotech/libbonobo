@@ -1,3 +1,15 @@
+2004-05-26  Arvind Samptur  <arvind.samptur@wipro.com>
+
+	* activation-server/object-directroy.h : Add
+	od_finished_internal_registration () helper function.
+	* activation-server/object-directroy-corba.c
+	(add_active_server): Don't add our internal servers count
+	to n_active_servers.
+	* activation-server/activation-server-main.c (main):  Use
+	od_finished_internal_registration () to indicate that we
+	are done with our internal server registeration.
+	Fixes #139500
+	
 2004-05-14  Michael Meeks  <michael@ximian.com>
 
 	* bonobo-activation/bonobo-activation-init.c:

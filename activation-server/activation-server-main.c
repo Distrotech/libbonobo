@@ -399,6 +399,8 @@ main (int argc, char *argv[])
 
         dump_ior (orb, dev_null_fd, ev);
 
+	od_finished_internal_registration (); 
+
 	g_main_loop_run (main_loop);
 
         nameserver_destroy (root_poa, naming_service, ev);
