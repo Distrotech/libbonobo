@@ -1,3 +1,11 @@
+1999-05-27  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* doc/.cvsignore: added file
+
+	* bonobo/test-container.c (main): fix compiler warnings
+	(should bonobo.h include gnome-stream-fs.h? 
+	if so: remove #include <bonobo/gnome-stream-fs.h> from here)
+	
 1999-05-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-storage-repo.c (gnome_storage_repo_class_init):
