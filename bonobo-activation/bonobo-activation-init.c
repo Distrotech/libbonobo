@@ -260,6 +260,7 @@ cmdline_check (const BonoboActivationBaseServiceRegistry *registry,
 {
 	if (!strcmp (base_service->name, "IDL:Bonobo/ObjectDirectory:1.0")) {
 		*distance = 0;
+                g_error ("This path is totally unsupported / tested");
 		return g_strdup (bonobo_activation_od_ior?bonobo_activation_od_ior:getenv("BONOBO_ACTIVATION_OD_IOR"));
 	}
 
@@ -337,6 +338,16 @@ static BonoboActivationBaseServiceRegistry ac_registry = {
 #define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
 
 static CORBA_Object
+local_re_check_fn (const char        *display,
+                   const char        *act_iid,
+                   gpointer           user_data,
+                   CORBA_Environment *ev)
+{
+        return bonobo_activation_internal_service_get_extended (
+                user_data, TRUE, ev);
+}
+
+static CORBA_Object
 local_activator (const BonoboActivationBaseService *base_service,
                  const char **cmd,
 		 int fd_arg, 
@@ -349,7 +360,9 @@ local_activator (const BonoboActivationBaseService *base_service,
 		|| STRMATCH (base_service->hostname, bonobo_activation_hostname_get ()))
 	    && (!base_service->domain
 		|| STRMATCH (base_service->domain, bonobo_activation_domain_get ()))) {
-		return bonobo_activation_server_by_forking (cmd, FALSE, fd_arg, NULL, NULL, ev);
+		return bonobo_activation_server_by_forking (
+                        cmd, FALSE, fd_arg, NULL, NULL, base_service->name,
+                        local_re_check_fn, (gpointer)base_service, ev);
 	}
 
 	return CORBA_OBJECT_NIL;

@@ -38,34 +38,10 @@
 #include "server.h"
 #include "activation-server-corba-extensions.h"
 
-CORBA_Object od_server_activate_factory (Bonobo_ServerInfo * si,
-					 ODActivationInfo * actinfo,
-					 CORBA_Environment * ev);
-CORBA_Object od_server_activate_exe (Bonobo_ServerInfo * si,
-				     ODActivationInfo * actinfo,
-				     CORBA_Object od_obj,
-				     CORBA_Environment * ev);
-
-CORBA_Object
-od_server_activate (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
-		    CORBA_Object od_obj, CORBA_Environment * ev)
-{
-	if (!strcmp (si->server_type, "exe"))
-		return od_server_activate_exe (si, actinfo, od_obj, ev);
-
-	else if (!strcmp (si->server_type, "factory"))
-		return od_server_activate_factory (si, actinfo, ev);
-
-	else if (!strcmp (si->server_type, "shlib"))
-		g_warning
-			(_("We don't handle activating shlib objects in a remote process yet"));
-
-	return CORBA_OBJECT_NIL;
-}
-
-CORBA_Object
-od_server_activate_factory (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
-			    CORBA_Environment * ev)
+static CORBA_Object
+od_server_activate_factory (Bonobo_ServerInfo *si,
+                            ODActivationInfo  *actinfo,
+			    CORBA_Environment *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL, factory = CORBA_OBJECT_NIL;
 	Bonobo_ActivationResult *res;
@@ -99,15 +75,16 @@ od_server_activate_factory (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
 
 	CORBA_free (res);
 
-      out:
+ out:
 	return retval;
 }
 
-
 /* Copied largely from goad.c, goad_server_activate_exe() */
-CORBA_Object
-od_server_activate_exe (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
-			CORBA_Object od_obj, CORBA_Environment * ev)
+static CORBA_Object
+od_server_activate_exe (Bonobo_ServerInfo *si,
+                        ODActivationInfo  *actinfo,
+			CORBA_Object       od_obj,
+                        CORBA_Environment *ev)
 {
 	char **args;
 	char *extra_arg, *ctmp, *ctmp2;
@@ -165,7 +142,8 @@ od_server_activate_exe (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
 
 	args[i] = NULL;
 
-        display = activation_server_CORBA_Context_get_value (actinfo->ctx, "display", NULL, ev);
+        display = activation_server_CORBA_Context_get_value (
+                actinfo->ctx, "display", NULL, ev);
         
         /*
          * We set the process group of activated servers to our process group;
@@ -173,10 +151,29 @@ od_server_activate_exe (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
          * if necessary
          */
 	retval = bonobo_activation_server_by_forking (
-                (const char **) args, TRUE, fd_arg, display, iorstr, ev);
+                (const char **) args, TRUE, fd_arg, display, iorstr,
+                si->iid, bonobo_object_directory_re_check_fn, actinfo, ev);
         
         g_free (display);
 	CORBA_free (iorstr);
 
         return retval;
+}
+
+CORBA_Object
+od_server_activate (Bonobo_ServerInfo *si,
+                    ODActivationInfo  *actinfo,
+		    CORBA_Object       od_obj,
+                    CORBA_Environment *ev)
+{
+	if (!strcmp (si->server_type, "exe"))
+		return od_server_activate_exe (si, actinfo, od_obj, ev);
+
+	else if (!strcmp (si->server_type, "factory"))
+		return od_server_activate_factory (si, actinfo, ev);
+
+	else if (!strcmp (si->server_type, "shlib"))
+		g_warning (_("We don't handle activating shlib objects in a remote process yet"));
+
+	return CORBA_OBJECT_NIL;
 }

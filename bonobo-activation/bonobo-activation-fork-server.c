@@ -52,16 +52,104 @@
 
 #define IORBUFSIZE 2048
 
-typedef struct
-{
+typedef struct {
 	GMainLoop *mloop;
 	char iorbuf[IORBUFSIZE];
 #ifdef BONOBO_ACTIVATION_DEBUG
 	char *do_srv_output;
 #endif
 	FILE *fh;
+
+        /* For list compares */
+        const char *display;
+        const char *act_iid;
+        const char *exename;
+        BonoboForkReCheckFn re_check;
+        gpointer            user_data;
+} EXEActivateInfo;
+
+static CORBA_Object
+exe_activate_info_to_retval (EXEActivateInfo *ai, CORBA_Environment *ev)
+{
+        CORBA_Object retval;
+
+        g_strstrip (ai->iorbuf);
+        if (!strncmp (ai->iorbuf, "IOR:", 4)) {
+                retval = CORBA_ORB_string_to_object (bonobo_activation_orb_get (),
+                                                     ai->iorbuf, ev);
+                if (ev->_major != CORBA_NO_EXCEPTION)
+                        retval = CORBA_OBJECT_NIL;
+#ifdef BONOBO_ACTIVATION_DEBUG
+                if (ai->do_srv_output)
+                        g_message ("Did string_to_object on %s = '%p' (%s)",
+                                   ai->iorbuf, retval,
+                                   ev->_major == CORBA_NO_EXCEPTION?
+                                   "no-exception" : ev->_id);
+#endif
+        } else {
+                Bonobo_GeneralError *errval;
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+                if (ai->do_srv_output)
+                        g_message ("string doesn't match IOR:");
+#endif
+
+                errval = Bonobo_GeneralError__alloc ();
+
+                if (*ai->iorbuf == '\0')
+                        errval->description =
+                                CORBA_string_dup (_("Child process did not give an error message, unknown failure occurred"));
+                else
+                        errval->description = CORBA_string_dup (ai->iorbuf);
+                CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                     ex_Bonobo_GeneralError, errval);
+                retval = CORBA_OBJECT_NIL;
+        }
+
+        return retval;
 }
-EXEActivateInfo;
+
+static CORBA_Object
+scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
+{
+        CORBA_Object retval = CORBA_OBJECT_NIL;
+
+        for (; l; l = l->next) {
+                EXEActivateInfo *ai = l->data;
+
+                if (strcmp (seek_ai->exename, ai->exename))
+                        continue;
+
+                if (seek_ai->display && ai->display) {
+                        if (strcmp (seek_ai->display, ai->display))
+                                continue;
+
+                } else if (seek_ai->display || ai->display)
+                        continue;
+
+                /* We run the loop too ... */
+                g_main_run (ai->mloop);
+
+                if (!strcmp (seek_ai->act_iid, ai->act_iid)) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                        g_warning ("Hit the jackpot '%s' '%s'",
+                                   seek_ai->act_iid, ai->act_iid);
+#endif
+                        retval = exe_activate_info_to_retval (ai, ev);
+                } else if (seek_ai->re_check) {
+                        /* It might have just registered the IID */
+#ifdef BONOBO_ACTIVATION_DEBUG
+                        g_warning ("Re-check the thing ... '%s' '%s'",
+                                   seek_ai->act_iid, ai->act_iid);
+#endif
+                        retval = seek_ai->re_check (
+                                seek_ai->display, seek_ai->act_iid,
+                                seek_ai->user_data, ev);
+                }
+        }
+
+        return retval;
+}
 
 static gboolean
 handle_exepipe (GIOChannel * source,
@@ -76,7 +164,7 @@ handle_exepipe (GIOChannel * source,
          */
         
         if (data->iorbuf[0] == '\0' &&
-            (condition & G_IO_IN)) {
+            (condition & (G_IO_IN | G_IO_PRI))) {
                 if (!fgets (data->iorbuf, sizeof (data->iorbuf), data->fh)) {
                         g_snprintf (data->iorbuf, IORBUFSIZE,
                                     _("Failed to read from child process: %s\n"),
@@ -137,6 +225,9 @@ bonobo_activation_server_by_forking (
         int                fd_arg, 
         const char        *display,
         const char        *od_iorstr,
+        const char        *act_iid,
+        BonoboForkReCheckFn re_check,
+        gpointer            user_data,
         CORBA_Environment *ev)
 {
 	gint iopipes[2];
@@ -151,6 +242,20 @@ bonobo_activation_server_by_forking (
         struct sigaction sa;
         sigset_t mask, omask;
         int parent_pid;
+        static GSList *running_activations = NULL;
+
+        g_return_val_if_fail (cmd != NULL, CORBA_OBJECT_NIL);
+        g_return_val_if_fail (cmd [0] != NULL, CORBA_OBJECT_NIL);
+        g_return_val_if_fail (act_iid != NULL, CORBA_OBJECT_NIL);
+
+        ai.display = display;
+        ai.act_iid = act_iid;
+        ai.exename = cmd [0];
+        ai.re_check = re_check;
+        ai.user_data = user_data;
+
+        if ((retval = scan_list (running_activations, &ai, ev)) != CORBA_OBJECT_NIL)
+                return retval;
         
      	pipe (iopipes);
 
@@ -160,6 +265,11 @@ bonobo_activation_server_by_forking (
         sigprocmask (SIG_BLOCK, &mask, &omask);
 
         parent_pid = getpid ();
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+        fprintf (stderr, " FORKING: '%s' for '%s' ('%s')\n",
+                 cmd[0], act_iid, display);
+#endif
         
 	/* fork & get the IOR from the magic pipe */
 	childpid = fork ();
@@ -190,8 +300,7 @@ bonobo_activation_server_by_forking (
 				g_snprintf (cbuf, sizeof (cbuf),
 					    _("Child received signal %u (%s)"),
 					    WTERMSIG (status),
-					    g_strsignal (WTERMSIG
-                                                         (status)));
+					    g_strsignal (WTERMSIG (status)));
 			else
 				g_snprintf (cbuf, sizeof (cbuf),
 					    _("Unknown non-exit error (status is %u)"),
@@ -214,9 +323,12 @@ bonobo_activation_server_by_forking (
                 
 		ai.iorbuf[0] = '\0';
 		ai.mloop = g_main_new (FALSE);
+
+                running_activations = g_slist_prepend (running_activations, &ai);
+
 		gioc = g_io_channel_unix_new (iopipes[0]);
 		watchid = g_io_add_watch (gioc,
-                                          G_IO_IN | G_IO_HUP | G_IO_NVAL |
+                                          G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL |
                                           G_IO_ERR, (GIOFunc) & handle_exepipe,
                                           &ai);
 		g_io_channel_unref (gioc);
@@ -224,38 +336,9 @@ bonobo_activation_server_by_forking (
 		g_main_destroy (ai.mloop);
 		fclose (iorfh);
 
-		g_strstrip (ai.iorbuf);
-		if (!strncmp (ai.iorbuf, "IOR:", 4)) {
-			retval = CORBA_ORB_string_to_object (bonobo_activation_orb_get (),
-                                                             ai.iorbuf, ev);
-			if (ev->_major != CORBA_NO_EXCEPTION)
-				retval = CORBA_OBJECT_NIL;
-#ifdef BONOBO_ACTIVATION_DEBUG
-			if (ai.do_srv_output)
-				g_message ("Did string_to_object on %s = '%p' (%s)",
-					   ai.iorbuf, retval,
-                                           ev->_major == CORBA_NO_EXCEPTION?
-                                           "no-exception" : ev->_id);
-#endif
-		} else {
-			Bonobo_GeneralError *errval;
+                running_activations = g_slist_remove (running_activations, &ai);
 
-#ifdef BONOBO_ACTIVATION_DEBUG
-			if (ai.do_srv_output)
-				g_message ("string doesn't match IOR:");
-#endif
-
-			errval = Bonobo_GeneralError__alloc ();
-
-                        if (*ai.iorbuf == '\0')
-                                errval->description =
-                                        CORBA_string_dup (_("Child process did not give an error message, unknown failure occurred"));
-                        else
-                                errval->description = CORBA_string_dup (ai.iorbuf);
-			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-					     ex_Bonobo_GeneralError, errval);
-			retval = CORBA_OBJECT_NIL;
-		}
+                retval = exe_activate_info_to_retval (&ai, ev);
 	} else if ((childpid = fork ())) {
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
@@ -263,6 +346,8 @@ bonobo_activation_server_by_forking (
                         bonobo_activation_setenv ("DISPLAY", display);
                 }
 		if (od_iorstr != NULL) {
+                        /* FIXME: remove this - it is actually not used at all...
+                         * and it's just wasteful having it here */
                         bonobo_activation_setenv ("BONOBO_ACTIVATION_OD_IOR", od_iorstr);
                 }
 

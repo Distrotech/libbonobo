@@ -515,7 +515,8 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
  *
  * Return value: the name server of bonobo-activation.
  */
-CORBA_Object bonobo_activation_name_service_get (CORBA_Environment * ev)
+CORBA_Object
+bonobo_activation_name_service_get (CORBA_Environment * ev)
 {
 	return bonobo_activation_activate_from_id (
                 "OAFIID:Bonobo_CosNaming_NamingContext:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",

@@ -108,9 +108,9 @@ child_od_update_active (ChildODInfo * child, CORBA_Environment * ev)
 	int i;
 	Bonobo_ServerStateCache *cache;
 
-	cache = Bonobo_ObjectDirectory_get_active_servers (child->obj,
-							child->time_active_pulled,
-							ev);
+	cache = Bonobo_ObjectDirectory_get_active_servers (
+                child->obj, child->time_active_pulled, ev);
+
 	if (ev->_major != CORBA_NO_EXCEPTION) {
 		child_od_exception (child, ev);
 		return;
@@ -136,48 +136,6 @@ child_od_update_active (ChildODInfo * child, CORBA_Environment * ev)
 		g_hash_table_thaw (child->active_servers);
 	} else
 		CORBA_free (cache);
-}
-
-static void
-child_od_update_list (ChildODInfo * child, CORBA_Environment * ev)
-{
-	int i;
-	Bonobo_ServerInfoListCache *cache;
-
-	cache = Bonobo_ObjectDirectory_get_servers (child->obj,
-						 child->time_list_pulled, ev);
-	if (ev->_major != CORBA_NO_EXCEPTION) {
-		child->list = NULL;
-		child_od_exception (child, ev);
-		return;
-	}
-
-	if (cache->_d) {
-		if (child->by_iid)
-			g_hash_table_destroy (child->by_iid);
-		if (child->list) {
-			CORBA_sequence_set_release (child->list, CORBA_TRUE);
-			CORBA_free (child->list);
-			child->list = NULL;
-		}
-
-		child->list = Bonobo_ServerInfoList__alloc ();
-		*(child->list) = cache->_u.server_list;
-		CORBA_sequence_set_release (child->list, CORBA_FALSE);
-		CORBA_sequence_set_release (&(cache->_u.server_list),
-					    CORBA_FALSE);
-
-		child->time_list_pulled = time (NULL);
-		child->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
-		g_hash_table_freeze (child->by_iid);
-		for (i = 0; i < child->list->_length; i++)
-			g_hash_table_insert (child->by_iid,
-					     child->list->_buffer[i].iid,
-					     &(child->list->_buffer[i]));
-		g_hash_table_thaw (child->by_iid);
-	}
-
-	CORBA_free (cache);
 }
 
 static void
@@ -222,8 +180,52 @@ impl_POA_Bonobo_ActivationContext;
 /*** Stub implementations ***/
 
 static void
-ac_update_list (impl_POA_Bonobo_ActivationContext * servant,
-		ChildODInfo * child, CORBA_Environment * ev)
+child_od_update_list (ChildODInfo *child, CORBA_Environment *ev)
+{
+	int i;
+	Bonobo_ServerInfoListCache *cache;
+
+	cache = Bonobo_ObjectDirectory_get_servers (
+                child->obj, child->time_list_pulled, ev);
+
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+		child->list = NULL;
+		child_od_exception (child, ev);
+		return;
+	}
+
+	if (cache->_d) {
+		if (child->by_iid)
+			g_hash_table_destroy (child->by_iid);
+		if (child->list) {
+			CORBA_sequence_set_release (child->list, CORBA_TRUE);
+			CORBA_free (child->list);
+			child->list = NULL;
+		}
+
+		child->list = Bonobo_ServerInfoList__alloc ();
+		*(child->list) = cache->_u.server_list;
+		CORBA_sequence_set_release (child->list, CORBA_FALSE);
+		CORBA_sequence_set_release (&(cache->_u.server_list),
+					    CORBA_FALSE);
+
+		child->time_list_pulled = time (NULL);
+		child->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
+		g_hash_table_freeze (child->by_iid);
+		for (i = 0; i < child->list->_length; i++)
+			g_hash_table_insert (child->by_iid,
+					     child->list->_buffer[i].iid,
+					     &(child->list->_buffer[i]));
+		g_hash_table_thaw (child->by_iid);
+	}
+
+	CORBA_free (cache);
+}
+
+static void
+ac_update_list (impl_POA_Bonobo_ActivationContext *servant,
+		ChildODInfo                       *child,
+                CORBA_Environment                 *ev)
 {
 	int prev, new;
 
@@ -246,8 +248,9 @@ ac_update_list (impl_POA_Bonobo_ActivationContext * servant,
 }
 
 static ChildODInfo *
-ac_find_child_for_server (impl_POA_Bonobo_ActivationContext * servant,
-			  Bonobo_ServerInfo * server, CORBA_Environment * ev)
+ac_find_child_for_server (impl_POA_Bonobo_ActivationContext *servant,
+			  Bonobo_ServerInfo                 *server,
+                          CORBA_Environment                 *ev)
 {
 	GSList *cur;
 
@@ -267,7 +270,7 @@ ac_find_child_for_server (impl_POA_Bonobo_ActivationContext * servant,
 }
 
 static QueryExprConst
-ac_query_get_var (Bonobo_ServerInfo * si, const char *id, QueryContext * qctx)
+ac_query_get_var (Bonobo_ServerInfo *si, const char *id, QueryContext *qctx)
 {
 	ChildODInfo *child;
 	QueryExprConst retval;
@@ -303,11 +306,12 @@ ac_query_get_var (Bonobo_ServerInfo * si, const char *id, QueryContext * qctx)
  * impl_Bonobo_ActivationContext_activate - hairy implicit preconditions
  * exist. */
 static void
-ac_query_run (impl_POA_Bonobo_ActivationContext * servant,
-	      const CORBA_char * requirements,
-	      const Bonobo_StringList * selection_order,
-	      CORBA_Context ctx,
-	      Bonobo_ServerInfo ** items, CORBA_Environment * ev)
+ac_query_run (impl_POA_Bonobo_ActivationContext *servant,
+	      const CORBA_char                  *requirements,
+	      const Bonobo_StringList           *selection_order,
+	      CORBA_Context                      ctx,
+	      Bonobo_ServerInfo                **items,
+              CORBA_Environment                 *ev)
 {
 	int total, i;
 	GSList *cur;
@@ -397,13 +401,16 @@ ac_query_run (impl_POA_Bonobo_ActivationContext * servant,
 }
 
 static void
-ac_update_lists (impl_POA_Bonobo_ActivationContext * servant,
-		 CORBA_Environment * ev)
+ac_update_lists (impl_POA_Bonobo_ActivationContext *servant,
+		 CORBA_Environment                 *ev)
 {
 	GSList *cur;
 
-	if (servant->refs > 0)
+	if (servant->refs > 0) {
+                /* FIXME: what happens on re-enterency here ?
+                 * looks like this could get seriously out of date */
 		return;
+        }
 
 	for (cur = servant->dirs; cur; cur = cur->next)
 		ac_update_list (servant, cur->data, ev);
@@ -527,16 +534,17 @@ impl_Bonobo_ActivationContext_remove_directory (PortableServer_Servant _servant,
 }
 
 static void
-ac_do_activation (impl_POA_Bonobo_ActivationContext * servant,
-		  Bonobo_ServerInfo * server,
-		  Bonobo_ActivationResult * out,
-		  Bonobo_ActivationFlags flags,
-		  const char *hostname,
-		  CORBA_Context ctx, CORBA_Environment * ev)
+ac_do_activation (impl_POA_Bonobo_ActivationContext *servant,
+		  Bonobo_ServerInfo                 *server,
+		  Bonobo_ActivationResult           *out,
+		  Bonobo_ActivationFlags             flags,
+		  const char                        *hostname,
+		  CORBA_Context                      ctx,
+                  CORBA_Environment                 *ev)
 {
+	int num_layers;
 	ChildODInfo *child;
 	Bonobo_ServerInfo *activatable;
-	int num_layers;
 
 	/* When doing checks for shlib loadability, we 
          * have to find the info on the factory object in case
@@ -621,10 +629,9 @@ ac_do_activation (impl_POA_Bonobo_ActivationContext * servant,
 	} else {
 		CORBA_Object retval;
 
-		retval =
-			Bonobo_ObjectDirectory_activate (child->obj, server->iid,
-						      servant->me, flags, ctx,
-						      ev);
+		retval = Bonobo_ObjectDirectory_activate (
+                        child->obj, server->iid, servant->me, flags, ctx, ev);
+
 		if (ev->_major == CORBA_NO_EXCEPTION) {
 			char tbuf[512];
 			out->res._d = Bonobo_ACTIVATION_RESULT_OBJECT;
@@ -641,12 +648,13 @@ ac_do_activation (impl_POA_Bonobo_ActivationContext * servant,
 
 
 static Bonobo_ActivationResult *
-impl_Bonobo_ActivationContext_activate (PortableServer_Servant _servant,
-                                        const CORBA_char * requirements,
-                                        const Bonobo_StringList * selection_order,
-                                        const Bonobo_ActivationFlags flags,
-                                        CORBA_Context ctx,
-                                        CORBA_Environment * ev)
+impl_Bonobo_ActivationContext_activate (
+        PortableServer_Servant       _servant,
+        const CORBA_char            *requirements,
+        const Bonobo_StringList     *selection_order,
+        const Bonobo_ActivationFlags flags,
+        CORBA_Context                ctx,
+        CORBA_Environment           *ev)
 {
         impl_POA_Bonobo_ActivationContext *servant = GET_SERVANT (_servant);
 	Bonobo_ActivationResult *retval = NULL;
@@ -654,18 +662,18 @@ impl_Bonobo_ActivationContext_activate (PortableServer_Servant _servant,
 	int i;
 	char *hostname;
 
-	hostname = ac_CORBA_Context_get_value (ctx, "hostname", ev);
 	ac_update_lists (servant, ev);
 
 	servant->refs++;
 
 	items = g_alloca (servant->total_servers *
-			    sizeof (Bonobo_ServerInfo *));
+                          sizeof (Bonobo_ServerInfo *));
 	ac_query_run (servant, requirements, selection_order, ctx, items, ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION) {
+	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
-        }
+
+	hostname = ac_CORBA_Context_get_value (ctx, "hostname", ev);
 
 	retval = Bonobo_ActivationResult__alloc ();
 	retval->res._d = Bonobo_ACTIVATION_RESULT_NONE;
@@ -681,9 +689,9 @@ impl_Bonobo_ActivationContext_activate (PortableServer_Servant _servant,
 	if (retval->res._d == Bonobo_ACTIVATION_RESULT_NONE)
 		retval->aid = CORBA_string_dup ("");
 
-      out:
 	g_free (hostname);
 
+ out:
 	servant->refs--;
 
 	return retval;
@@ -951,7 +959,6 @@ impl_Bonobo_ActivationContext_activate_from_id (PortableServer_Servant _servant,
                 return CORBA_OBJECT_NIL;
         }
 
-
 	servant->refs++;
 
         requirements = ac_aid_to_query_string (aid);
@@ -963,6 +970,7 @@ impl_Bonobo_ActivationContext_activate_from_id (PortableServer_Servant _servant,
         ac_context_to_string_array (ctx, sort_criteria, ev);
         if (ev->_major != CORBA_NO_EXCEPTION) {
                 servant->refs--;
+                g_free (requirements);
                 return CORBA_OBJECT_NIL;
         }
 
@@ -970,11 +978,9 @@ impl_Bonobo_ActivationContext_activate_from_id (PortableServer_Servant _servant,
         selection_order._buffer = sort_criteria;
         CORBA_sequence_set_release (&selection_order, CORBA_FALSE);
 
-        retval = impl_Bonobo_ActivationContext_activate (servant,
-                                                      requirements,
-                                                      &selection_order,
-                                                      flags,
-                                                      ctx, ev);        
+        retval = impl_Bonobo_ActivationContext_activate (
+                servant, requirements, &selection_order, flags, ctx, ev);
+
         g_free (sort_criteria[0]);
         g_free (sort_criteria[1]);
         g_free (sort_criteria[2]);
@@ -988,12 +994,12 @@ impl_Bonobo_ActivationContext_activate_from_id (PortableServer_Servant _servant,
 
 static void
 impl_Bonobo_ActivationContext_activate_from_id_async (
-        PortableServer_Servant    _servant,
+        PortableServer_Servant     _servant,
         const CORBA_char          *aid,
-        Bonobo_ActivationFlags    flags, 
-        Bonobo_ActivationCallback callback_object,
-        CORBA_Context             ctx, 
-        CORBA_Environment        *ev)
+        Bonobo_ActivationFlags     flags, 
+        Bonobo_ActivationCallback  callback_object,
+        CORBA_Context              ctx, 
+        CORBA_Environment         *ev)
 {
         impl_POA_Bonobo_ActivationContext *servant = GET_SERVANT (_servant);
 	Bonobo_ActivationResult *retval;

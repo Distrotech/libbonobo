@@ -64,12 +64,13 @@ bonobo_activation_timeout_reg_check (gpointer data)
  * @iid: IID of the server to register.
  * @obj: CORBA::Object to register.
  *
- * Registers @obj with @iid in the local OAF daemon.
+ * Registers @obj with @iid in the local
+ * bonobo-activation-server daemon.
  *
  * Return value: status of the registration.
  */
 Bonobo_RegistrationResult
-bonobo_activation_active_server_register (const char *registration_id, 
+bonobo_activation_active_server_register (const char  *registration_id, 
                                           CORBA_Object obj)
 {
 	Bonobo_ObjectDirectory od;
@@ -99,19 +100,22 @@ bonobo_activation_active_server_register (const char *registration_id,
         if (actid && strcmp (actid, iid) == 0 && bonobo_activation_private) {
                 retval = Bonobo_ACTIVATION_REG_SUCCESS;
         } else {
-                od = bonobo_activation_object_directory_get (bonobo_activation_username_get (),
-                                                             bonobo_activation_hostname_get (),
-                                                             NULL);
+                od = bonobo_activation_object_directory_get (
+                        bonobo_activation_username_get (),
+                        bonobo_activation_hostname_get (),
+                        NULL);
                 
                 if (CORBA_Object_is_nil (od, &ev)) {
                         return Bonobo_ACTIVATION_REG_ERROR;
                 }
                 
-                retval = Bonobo_ObjectDirectory_register_new (od, 
-                                                           (char *) registration_id, 
-                                                           obj, &ev);
+                retval = Bonobo_ObjectDirectory_register_new (
+                        od, (char *) registration_id, obj, &ev);
         }
 
+#ifdef BONOBO_ACTIVATION_DEBUG
+        g_warning ("registration of '%s' returns %d", registartion_id, retval);
+#endif
 	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
 		char *iorstr;
 		FILE *fh;
@@ -127,8 +131,8 @@ bonobo_activation_active_server_register (const char *registration_id,
 				fh = stdout;
 		}
 
-		iorstr =
-			CORBA_ORB_object_to_string (bonobo_activation_orb_get (), obj, &ev);
+		iorstr = CORBA_ORB_object_to_string (
+                        bonobo_activation_orb_get (), obj, &ev);
 
 		if (ev._major == CORBA_NO_EXCEPTION) {
 			fprintf (fh, "%s\n", iorstr);
@@ -195,6 +199,9 @@ bonobo_activation_active_server_unregister (const char *iid, CORBA_Object obj)
 char *
 bonobo_activation_make_registration_id (const char *iid, const char *display)
 {
+#ifdef BONOBO_ACTIVATION_DEBUG
+        g_warning ("Make registration id from '%s' '%s'", iid, display);
+#endif
         if (display == NULL) {
                 return g_strdup (iid);
         } else {

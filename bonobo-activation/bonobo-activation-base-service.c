@@ -380,10 +380,11 @@ bonobo_activation_activators_use (const BonoboActivationBaseService *base_servic
 	return retval;
 }
 
-static CORBA_Object
-bonobo_activation_service_get_internal (const BonoboActivationBaseService *base_service,
-                                        gboolean              existing_only,
-                                        CORBA_Environment    *ev)
+CORBA_Object
+bonobo_activation_internal_service_get_extended (
+        const BonoboActivationBaseService *base_service,
+        gboolean              existing_only,
+        CORBA_Environment    *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	int i;
@@ -461,21 +462,13 @@ bonobo_activation_service_get (const BonoboActivationBaseService *base_service)
         
         CORBA_exception_init (&ev);
         
-        obj = bonobo_activation_service_get_internal (base_service, FALSE, &ev);
+        obj = bonobo_activation_internal_service_get_extended (
+                base_service, FALSE, &ev);
 
         CORBA_exception_free (&ev);
 
         return obj;
 }
-
-CORBA_Object
-bonobo_activation_internal_service_get_extended (const BonoboActivationBaseService *base_service,
-                                                 gboolean              existing_only,
-                                                 CORBA_Environment    *ev)
-{
-        return bonobo_activation_service_get_internal (base_service, existing_only, ev);
-}
-
 
 /*****Implementation of the IOR registration system via plain files ******/
 static int lock_fd = -1;
@@ -699,8 +692,3 @@ bonobo_activation_rloc_file_register (void)
 {
 	bonobo_activation_base_service_registry_add (&rloc_file, 0, NULL);
 }
-
-
-
-
-

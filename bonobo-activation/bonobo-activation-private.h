@@ -33,11 +33,19 @@
 
 void         bonobo_activation_timeout_reg_check_set  (gboolean           on);
 gboolean     bonobo_activation_timeout_reg_check      (gpointer           data);
+
+typedef CORBA_Object (*BonoboForkReCheckFn)           (const char        *display,
+                                                       const char        *act_iid,
+                                                       gpointer           user_data,
+                                                       CORBA_Environment *ev);
 CORBA_Object bonobo_activation_server_by_forking      (const char       **cmd, 
                                                        gboolean           set_process_group,
                                                        int                fd_arg,
                                                        const char        *display,
                                                        const char        *od_iorstr,
+                                                       const char        *act_iid,
+                                                       BonoboForkReCheckFn re_check,
+                                                       gpointer            user_data,
                                                        CORBA_Environment *ev);
 void         bonobo_activation_rloc_file_register     (void);
 int          bonobo_activation_ior_fd_get             (void);

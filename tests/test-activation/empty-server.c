@@ -65,6 +65,12 @@ main (int argc, char *argv[])
 		return 1;
 	}
 
+        /*
+         * NB. It is imperative to register the server that is being
+         * requested last - or we can still race in the activation daemon.
+         */
+	bonobo_activation_active_server_register ("OAFIID:Empty2:19991025", empty_client);
+        g_usleep (500000); /* 1/2 sec */
 	bonobo_activation_active_server_register ("OAFIID:Empty:19991025", empty_client);
 
 	PortableServer_POAManager_activate
@@ -73,6 +79,7 @@ main (int argc, char *argv[])
 		g_main_iteration (TRUE);
 
 	bonobo_activation_active_server_unregister ("OAFIID:Empty:19991025", empty_client);
+	bonobo_activation_active_server_unregister ("OAFIID:Empty2:19991025", empty_client);
 
 	PortableServer_POA_deactivate_object (poa, objid, &ev);
 
@@ -80,7 +87,7 @@ main (int argc, char *argv[])
 }
 
 static void
-do_Nothing (PortableServer_Servant servant, CORBA_Environment * ev)
+do_Nothing (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	g_print ("doNothing called!");
 }

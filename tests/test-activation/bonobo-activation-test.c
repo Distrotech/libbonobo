@@ -9,7 +9,7 @@
 #include "empty.h"
 #include "plugin.h"
 
-#define TOTAL_TEST_SCORE 15
+#define TOTAL_TEST_SCORE 16
 
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
@@ -107,10 +107,67 @@ test_empty (CORBA_Object obj, CORBA_Environment *ev, const char *type)
         }
 }
 
+static int
+idle_base_activation (gpointer user_data)
+{
+        /* This is a facile test, we always activate the
+         * ActivationContext first and then get the OD from it */
+        bonobo_activation_activation_context_get ();
+
+        return FALSE;
+}
+
+static void
+race_base_init (void)
+{
+        g_idle_add (idle_base_activation, NULL);
+        /* to race with the activation context get in the same process */
+        bonobo_activation_object_directory_get (NULL, NULL, NULL);
+}
+
+int passed = 0;
+int async_done = 0;
+
+static void
+empty_activation_cb (CORBA_Object   obj,
+                     const char    *error_reason, 
+                     gpointer       user_data)
+{
+        CORBA_Environment ev;
+
+        CORBA_exception_init (&ev);
+
+        if (error_reason)
+                g_warning ("Async activation error '%s'", error_reason);
+
+        else if (test_object (obj, &ev, "by async query"))
+                passed += test_empty (obj, &ev, "by async query");
+
+        CORBA_exception_free (&ev);
+
+        async_done++;
+}
+
+static void
+race_empty (CORBA_Environment *ev)
+{
+	bonobo_activation_activate_async (
+                "repo_ids.has('IDL:Empty2:1.0')", NULL,
+                0, empty_activation_cb, NULL, ev);
+        g_assert (ev->_major == CORBA_NO_EXCEPTION);
+
+	bonobo_activation_activate_async (
+                "repo_ids.has('IDL:Empty:1.0')", NULL,
+                0, empty_activation_cb, NULL, ev);
+        g_assert (ev->_major == CORBA_NO_EXCEPTION);
+
+        while (async_done < 2)
+                linc_main_iteration (TRUE);
+}
+
 int
 main (int argc, char *argv[])
 {
-        int passed = 0;
 	CORBA_Object obj;
 	CORBA_Environment ev;
         Bonobo_ServerInfoList *info;
@@ -123,11 +180,9 @@ main (int argc, char *argv[])
 	bonobo_activation_init (argc, argv);
 /*      putenv("Bonobo_BARRIER_INIT=1"); */
 
-	obj = bonobo_activation_activate ("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL,
-                                          &ev);
-        if (test_object (obj, &ev, "by query")) {
-                passed += test_empty (obj, &ev, "by query");
-        }
+        race_base_init ();
+        race_empty (&ev);
+
         sort_by[0] = "prefer_by_list_order(iid, ["
                 "'OAFIID:nautilus_file_manager_icon_view:42681b21-d5ca-4837-87d2-394d88ecc058',"
                 "'OAFIID:nautilus_file_manager_list_view:521e489d-0662-4ad7-ac3a-832deabe111c',"
