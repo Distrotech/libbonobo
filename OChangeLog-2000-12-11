@@ -1,3 +1,21 @@
+1999-12-02  Nat Friedman  <nat@helixcode.com>
+
+	* idl/gnome-property.idl: Added the use_default_optimization
+ 	method to the Property interface.  Read the comments; this is an
+ 	important one.
+
+	* bonobo/gnome-property.c: Reformatted the file.
+	(gnome_property_get_epv): Added use_default_optimization to the
+ 	epv.
+	(impl_GNOME_Property_use_default_optimization): New function.
+
+	* bonobo/gnome-view.c (gnome_view_destroy): Cast the uih before
+ 	destroying it.
+
+	* bonobo/gnome-property-bag.h: Reformatted.
+	(GnomePropertyFlags): Added
+ 	GNOME_PROPERTY_USE_DEFAULT_OPTIMIZATION.
+	
 Thu Dec  2 14:37:03 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gshell/gshell.c (buffer_add_view): use the new

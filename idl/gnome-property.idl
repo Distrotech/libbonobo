@@ -56,17 +56,37 @@ interface Property {
 	 *
 	 * Returns the default value for this property.
 	 *
-	 * While this *can* be used when streaming the properties to
-	 * disk to avoid writing out properties whose current value is
-	 * the default value, this is not recommended.  The reason
-	 * being that the "default value" could change and
-	 * unpredictable behavior could result.
+	 * The purpose of this method is twofold.  First, Property
+	 * editors can use it to implement a "set property value to
+	 * default" mechanism.
 	 *
-	 * The only real use of this method is to provide a default
-	 * value to Property editors, so that a "restore defaults"
-	 * button will work.
+	 * Second, the value returned by this method can be used to
+	 * optimize streaming this property to disk.  If this
+	 * property's value matches the default value, then there is
+	 * no need to stream it to disk.  However, this optimization
+	 * will only be performed if this property supports it.  See
+	 * use_default_optimization().
 	 */
 	any get_default ();
+
+	/**
+	 * use_default_optimization:
+	 *
+	 * Returns a boolean indicating whether or not the default
+	 * value can be used to optimize streaming this property to
+	 * disk.  If this function returns %TRUE, then a streaming
+	 * implementation can choose not to write this property to
+	 * disk if the property's value matches its default value.
+	 *
+	 * Think carefully before you choose whether or not to set
+	 * this flag on your properties.  If you do, that means that
+	 * you are establishing a contract with the users of the
+	 * control which says "I will not change the default value of
+	 * my properties."  Changing the default values after you've
+	 * set this flag (and released your control and people have
+	 * started using it) will result in unpredictable behavior.
+	 */
+	boolean use_default_optimization ();
 
 	/**
 	 * get_doc_string:
@@ -132,7 +152,6 @@ interface PropertyBag : GNOME::Unknown {
 	 * incarnated, which is not very resource-conscious.
 	 */
 	PropertyNames get_property_names ();
-
 };
 
 };
