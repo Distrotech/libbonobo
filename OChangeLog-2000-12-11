@@ -1,3 +1,28 @@
+2000-12-03  Miguel de Icaza  <miguel@helixcode.com>
+
+	* bonobo/bonobo-socket.c (bonobo_socket_realize): Added inline
+	documentation. 
+	* bonobo/bonobo-plug.c: Added inline documentation.
+
+	* doc/api/tmpl/bonobo-plug.sgml: Documented. 
+	* doc/api/tmpl/bonobo-socket.sgml: Documented. 
+
+	* doc/api/tmpl/bonobo-client-site.sgml: Updated documentation. 
+
+2000-12-03  Miguel de Icaza  <miguel@helixcode.com>
+
+	* bonobo/bonobo-widget.c: Added inline docs.
+
+	* bonobo/bonobo-transient.h: Use void * instead of gpointer. 
+
+	* bonobo/bonobo-transient.c (bonobo_transient_construct): Fix
+	documentation. 
+	(bonobo_transient_create_objref): implement.  document.
+	(bonobo_transient_new): document. 
+
+	* doc/api/tmpl/bonobo-transient.sgml: write documentation.
+	* doc/api/tmpl/bonobo-stream.sgml: expand documentation.
+
 2000-12-01  Iain Holmes  <iain@helixcode.com>
 
 	* bonobo/bonobo-listener.c (bonobo_listener_destroy): Correct the

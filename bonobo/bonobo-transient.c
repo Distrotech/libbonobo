@@ -38,8 +38,8 @@ struct _BonoboTransientPriv {
 
 /*
  * This ServantManager method is invoked before a method
- * on a BonoboProperty is called.  It creates the servant
- * for the Property and returns it.
+ * on a BonoboTransient is called.  It creates the servant
+ * for the object and returns it.
  */
 static PortableServer_Servant
 bonobo_transient_servant_locator_preinvoke (PortableServer_Servant servant_manager,
@@ -51,14 +51,14 @@ bonobo_transient_servant_locator_preinvoke (PortableServer_Servant servant_manag
 {
 	BonoboTransientServantManager *sm;
 	PortableServer_Servant servant = NULL;
-	BonoboTransient *bt, **cookie_val;
+	BonoboTransient *transient, **cookie_val;
 	char *object_name;
 
 	/*
 	 * Get the TransientManager out of the servant manager.
 	 */
 	sm = (BonoboTransientServantManager *) servant_manager;
-	bt = sm->bonobo_transient;
+	transient = sm->bonobo_transient;
 
 	/*
 	 * Grab the Property name and the Property Bag.
@@ -73,7 +73,8 @@ bonobo_transient_servant_locator_preinvoke (PortableServer_Servant servant_manag
 	/*
 	 * Create a temporary servant 
 	 */
-	servant = bt->priv->new_servant (adapter, bt, object_name, bt->priv->callback_data);
+	servant = transient->priv->new_servant (
+		adapter, transient, object_name, transient->priv->callback_data);
 	CORBA_free (object_name);
 	if (servant == NULL) {
 		g_warning ("BonoboPropertyBag: Could not create transient Property servant");
@@ -87,7 +88,7 @@ bonobo_transient_servant_locator_preinvoke (PortableServer_Servant servant_manag
 	 * use for it.
 	 */
 	cookie_val = g_new (BonoboTransient *, 1);
-	*cookie_val = bt;
+	*cookie_val = transient;
 	*cookie = cookie_val;
 
 	return servant;
@@ -106,9 +107,9 @@ bonobo_transient_servant_locator_postinvoke (PortableServer_Servant servant_mana
 					     PortableServer_Servant servant,
 					     CORBA_Environment *ev)
 {
-	BonoboTransient *bt = BONOBO_TRANSIENT (cookie);
+	BonoboTransient *transient = BONOBO_TRANSIENT (cookie);
 	
-	bt->priv->destroy_servant (servant, bt->priv->callback_data);
+	transient->priv->destroy_servant (servant, transient->priv->callback_data);
 
 	g_free (cookie);
 }
@@ -168,7 +169,8 @@ bonobo_transient_get_servant_locator_vepv (void)
 }
 
 static BonoboTransient *
-bonobo_transient_construct (BonoboTransient *bt,
+bonobo_transient_construct (BonoboTransient          *transient,
+			    PortableServer_POA        poa,
 			    BonoboTransientServantNew new_servant,
 			    BonoboTransientServantDestroy destroy_servant,
 			    gpointer data)
@@ -178,15 +180,20 @@ bonobo_transient_construct (BonoboTransient *bt,
 	CORBA_Environment		ev;
 	char				*poa_name;
 
-	bt->priv->new_servant = new_servant;
-	bt->priv->destroy_servant = destroy_servant;
-	bt->priv->callback_data = data;
+	transient->priv->new_servant = new_servant;
+	transient->priv->destroy_servant = destroy_servant;
+	transient->priv->callback_data = data;
+
+	if (poa == CORBA_OBJECT_NIL)
+		poa = bonobo_poa ();
+	
+	transient->priv->poa = poa;
 	
 	CORBA_exception_init (&ev);
 	
 	/*
 	 * Create a new custom POA which will manage the
-	 * BonoboProperty objects.  We need a custom POA because there
+	 * BonoboTransient objects.  We need a custom POA because there
 	 * may be many, many properties and we want to avoid
 	 * instantiating a servant for each one of them from the
 	 * outset (which is what the default POA will require).
@@ -300,8 +307,8 @@ bonobo_transient_construct (BonoboTransient *bt,
 	 * Create the BonoboProperty POA as a child of the root
 	 * Bonobo POA.
 	 */
-	poa_name = g_strdup_printf ("BonoboTransient %p", bt);
-	bt->poa = PortableServer_POA_create_POA (
+	poa_name = g_strdup_printf ("BonoboTransient %p", transient);
+	transient->poa = PortableServer_POA_create_POA (
 		bonobo_poa (), poa_name, bonobo_poa_manager (),
 		policies, &ev);
 	
@@ -321,7 +328,7 @@ bonobo_transient_construct (BonoboTransient *bt,
 	 * Create our ServantManager.
 	 */
 	sm = g_new0 (BonoboTransientServantManager, 1);
-	sm->bonobo_transient = bt;
+	sm->bonobo_transient = transient;
 
 	((POA_PortableServer_ServantLocator *) sm)->vepv = bonobo_transient_get_servant_locator_vepv ();
 		
@@ -334,7 +341,10 @@ bonobo_transient_construct (BonoboTransient *bt,
 		
 	}
 
-	PortableServer_POA_set_servant_manager (bt->priv->poa, (PortableServer_ServantManager) sm, &ev);
+	PortableServer_POA_set_servant_manager (
+		transient->priv->poa,
+		(PortableServer_ServantManager) sm, &ev);
+
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboTransient: Could not set POA servant manager");
 		CORBA_exception_free (&ev);
@@ -342,23 +352,23 @@ bonobo_transient_construct (BonoboTransient *bt,
 		return NULL;
 	}
 
-	return bt;
+	return transient;
 }
 
 static void
 bonobo_transient_destroy (GtkObject *object)
 {
-	BonoboTransient *bt = BONOBO_TRANSIENT (object);
+	BonoboTransient *transient = BONOBO_TRANSIENT (object);
 	CORBA_Environment ev;
 	
 	/* Destroy the POA. */
 	CORBA_exception_init (&ev);
-	PortableServer_POA_destroy (bt->poa, TRUE, TRUE, &ev);
+	PortableServer_POA_destroy (transient->poa, TRUE, TRUE, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION)
 		g_warning ("bonobo_transient_destroy: Could not destroy POA.");
 	CORBA_exception_free (&ev);
 
-	g_free (bt->priv);
+	g_free (transient->priv);
 	
 	parent_class->destroy (object);
 }
@@ -374,9 +384,9 @@ bonobo_transient_class_init (BonoboTransientClass *class)
 }
 
 static void
-bonobo_transient_init (BonoboTransient *bt)
+bonobo_transient_init (BonoboTransient *transient)
 {
-	bt->priv = g_new0 (BonoboTransientPriv, 1);
+	transient->priv = g_new0 (BonoboTransientPriv, 1);
 }
 
 /**
@@ -407,16 +417,76 @@ bonobo_transient_get_type (void)
 	return type;
 }
 
+/**
+ * bonobo_transient_new:
+ * @parent_poa: the POA where the object is created, CORBA_OBJECT_NIL for the default Bonobo POA.
+ * @new_servant: A function pointer used to incarnate servants on demand.
+ * @destroy_servant: A function pointer used to destroy the on-demand server.
+ * @data: data passed to the @new_servant and @destroy_servant functions.
+ *
+ * bonobo_transient_new() creates a new CORBA server that creates a
+ * new POA entry (within the @parent_poa POA).  You can construct
+ * arbitrary object names inside this space using
+ * bonobo_transient_create_objref() and return those to
+ * client code.
+ *
+ * The @new_servant function will be invoked by the POA to resolve
+ * object reference to names you have created using
+ * bonobo_transient_create_objref().  The @new_servant function
+ * should return a PortableServer_Servant that will handle the request.
+ *
+ * Once the processing is completed, the @destroy_servant will be invoked
+ * to release any resources allocated during the invocation of @new_servant
+ * or during the execution of the servant that need to be released. 
+ *
+ * Returns: a new BonoboTransient object.
+ */
 BonoboTransient *
-bonobo_transient_new (BonoboTransientServantNew new_servant,
+bonobo_transient_new (PortableServer_POA poa,
+                      BonoboTransientServantNew new_servant,
 		      BonoboTransientServantDestroy destroy_servant,
 		      gpointer data)
 {
-	BonoboTransient *bt;
+	BonoboTransient *transient;
 
-	bt = gtk_type_new (BONOBO_TRANSIENT_TYPE);
-	if (bonobo_transient_construct (bt, new_servant, destroy_servant, data) == NULL)
-		gtk_object_destroy (GTK_OBJECT (bt));
+	transient = gtk_type_new (BONOBO_TRANSIENT_TYPE);
+	if (bonobo_transient_construct (transient, poa, new_servant, destroy_servant, data) == NULL)
+		gtk_object_destroy (GTK_OBJECT (transient));
 
-	return bt;
+	return transient;
 }
+
+/**
+ * bonobo_transient_create_objref:
+ * @transient: The BonoboTransient manager where the object reference is rooted.
+ * @iface_name: The CORBA interface name that the returned object is supposed to implement.
+ * @name: The name of the object inside the @transient POA's name space.
+ * @ev: returns possible errors from the PortableServer_POA_create_reference_with_id() call.
+ *
+ * Returns: a CORBA_Object reference for an object named @name inside
+ * the @transient's POA naming space that implements the @iface_name interface
+ *
+ * The return value can be CORBA_OBJECT_NIL to indicate an error in the
+ * incoming arguments.
+ */
+CORBA_Object
+bonobo_transient_create_objref (BonoboTransient   *transient,
+				const char        *iface_name,
+				const char        *name,
+				CORBA_Environment *ev)
+{
+	PortableServer_ObjectId *oid;
+
+	g_return_val_if_fail (transient != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (BONOBO_IS_TRANSIENT (transient), CORBA_OBJECT_NIL);
+	g_return_val_if_fail (name != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (ev != NULL, CORBA_OBJECT_NIL);
+
+	oid = PortableServer_string_to_ObjectId ((char *) name, ev);
+	if (oid == NULL)
+		return CORBA_OBJECT_NIL;
+
+	return (CORBA_Object) PortableServer_POA_create_reference_with_id (
+		transient->priv->poa, oid, (char *) iface_name, ev);
+}
+

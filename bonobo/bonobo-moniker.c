@@ -91,6 +91,14 @@ bonobo_moniker_get_name (BonoboMoniker *moniker,
 	return "";
 }
 
+/**
+ * bonobo_moniker_set_name:
+ * @moniker: the BonoboMoniker to configure.
+ * @name: new name for this moniker.
+ * @num_chars: number of characters in name to copy.
+ *
+ * This functions sets the moniker name in @moniker to be @name.
+ */
 void
 bonobo_moniker_set_name (BonoboMoniker *moniker,
 			 const char    *name,
@@ -167,6 +175,8 @@ impl_resolve (PortableServer_Servant       servant,
 
 /**
  * bonobo_moniker_get_epv:
+ *
+ * Returns: The EPV for the default Bonobo Moniker implementation.
  */
 POA_Bonobo_Moniker__epv *
 bonobo_moniker_get_epv (void)

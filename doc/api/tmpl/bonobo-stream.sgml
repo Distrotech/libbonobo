@@ -8,7 +8,9 @@ Abstract object for file (stream) access.
 <para>
    This is an abstract class for the various Stream implementations in
    Bonobo.  There are at least: file based streams, memory based
-   streams and structured storage streams.
+   streams and structured storage streams.   The BonoboStream abstract
+   class can be used to implement new servers that implement the
+   IDL:Bonobo/Stream:1.0 interface. 
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

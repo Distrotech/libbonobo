@@ -48,9 +48,12 @@ bonobo_object_client_construct (BonoboObjectClient *object_client, CORBA_Object 
  * @iid: an OAFIID
  * @flags: activation flags
  *
- *   This activates the object from the IID using oaf; you probably
- * don't want to do this; instead do capability based activation
- * using Oaf directly.
+ * This activates the object from the IID using oaf; you probably
+ * don't want to do this, you might want to use bonobo_get_object
+ * which does object activation trough the moniker system.
+ * 
+ * You might also consider doing property-based activation using the 
+ * the OAF-based capabilities. 
  *
  * Returns: An activated object client or NULL on failure.
  */
