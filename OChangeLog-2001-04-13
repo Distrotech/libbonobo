@@ -1,5 +1,10 @@
 Fri Nov 26 08:15:53 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
+	* gshell/inout.c (file_open_cb): use g_file_test instead of stat.
+
+	* gshell/gshell.c (update_buffer_menu): only display the
+	g_basename() of a file in the buffer menu.
+
 	* gshell/inout.c (buffer_save_pf): new save routine.
 	(buffer_save_ps): new save routine.
 
