@@ -24,7 +24,6 @@
 #include <bonobo/bonobo-shlib-factory.h>
 #include "Bonobo.h"
 #include "bonobo-running-context.h"
-#include "bonobo-object-directory.h"
 #include "bonobo-marshal.h"
 #include "bonobo-types.h"
 

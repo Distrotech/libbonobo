@@ -1,3 +1,12 @@
+2001-07-19  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-types.c (BONOBO_TYPE_CORBA_OBJECT_IMPL): fix
+	redundant '##'s.
+
+	* bonobo/bonobo-object.c: remove bonobo-object-directory include
+
+	* bonobo/bonobo-object-directory.[ch]: remove.
+
 2001-07-18  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am (libbonoboinclude_HEADERS): don't install /
