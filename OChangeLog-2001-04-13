@@ -1,3 +1,9 @@
+2000-12-18  Dave Camp  <dave@helixcode.com>
+
+	* monikers/Makefile.am (EXTRA_DIST): 
+	Include Bonobo_Monker_Extender_file.oafinfo.in and 
+	Bonobo_Moniker_cache.oafinfo.in.
+
 2000-12-18  Dietmar Maurer  <dietmar@helixcode.com>
 
 	* gshell/gshell.c (verb_HelpAbout_cb): changed the text of the

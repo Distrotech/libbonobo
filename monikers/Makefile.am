@@ -107,4 +107,6 @@ moniker_test_SOURCES =			\
 moniker_test_LDADD =			\
 	$(moniker_ldadd)
 
-EXTRA_DIST= $(OAF_FILES)
+EXTRA_DIST = $(OAF_FILES)                             \
+	     Bonobo_Moniker_cache.oafinfo.in          \
+	     Bonobo_Moniker_Extender_file.oafinfo.in 
