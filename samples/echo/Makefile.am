@@ -2,7 +2,13 @@
 # Makefile for the sample Echo server/client Bonobo components.
 #
 
-bin_PROGRAMS     = bonobo-echo-2 echo-client-2
+Bonobo_Sample_Echo.server.in: Bonobo_Sample_Echo.server.in.in
+	sed -e "s|\@prefix\@|$(prefix)|" $< > $@
+
+samplesdir = $(prefix)/lib/bonobo-2.0/samples
+samples_PROGRAMS = bonobo-echo-2
+
+bin_PROGRAMS     = echo-client-2
 noinst_LIBRARIES = libEcho.a
 
 bonobo_echo_2_SOURCES =		\

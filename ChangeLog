@@ -1,3 +1,9 @@
+2001-12-07  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* samples/echo/Makefile.am:
+	* samples/echo/Bonobo_Sample_Echo.server.in.in: install components
+	in $(prefix)/lib/bonobo-2.0/samples
+
 2001-12-08  Abel Cheung  <maddog@linux.org.hk>
 
 	* configure.in: Fix typo in GETTEXT_PACKAGE.
