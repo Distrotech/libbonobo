@@ -227,6 +227,8 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 
 	bonobo_context_init ();
 
+	bindtextdomain (PACKAGE, BONOBO_LOCALEDIR);
+
 	return TRUE;
 }
 

@@ -87,9 +87,8 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 	desc->listener = bonobo_object_dup_ref (l, ev);
 	desc->id = create_listener_id (event_source);
 
-	if (event_mask) {
+	if (event_mask)
 		desc->event_masks = g_strsplit (event_mask, ",", 0);
-	}
 
 	event_source->priv->listeners = g_slist_prepend (event_source->priv->listeners, desc);
 

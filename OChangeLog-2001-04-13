@@ -1,3 +1,27 @@
+2001-04-03  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-ui-config-widget.c: use
+	GNOME_EXPLICIT_TRANSLATION_DOMAIN
+
+	* bonobo/bonobo-selector-widget.c: ditto.
+
+	* bonobo/bonobo-exception.c: ditto.
+
+	* bonobo/bonobo-object-directory.c: ditto.
+
+	* bonobo/bonobo-ui-engine-config.c: ditto.
+
+	* configure.in (bonobolocaledir): set this up
+
+	* bonobo/Makefile.am (-DBONOBO_LOCALEDIR): define it.
+
+	* bonobo/bonobo-main.c (bonobo_init): add bindtextdomain
+
+	* tests/test-ui.c (main): set textdomain.
+
+	* bonobo/bonobo-ui-sync-toolbar.c: ditto &
+	(do_config_popup): dynamicaly allocate & encode strings.
+
 2001-04-02  Richard Hult  <rhult@codefactory.se>
 
 	* bonobo/bonobo-event-source.c: Keep a stringv of event masks 
