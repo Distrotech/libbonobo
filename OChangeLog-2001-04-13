@@ -1,3 +1,15 @@
+2000-10-17  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/app.c (main): add status regression test.
+
+	* bonobo/bonobo-win.c (info_dump_fn): update debug.
+	(sync_generic_widgets): decrement the position if we are ignoring
+	an uninitialized control.
+	(sync_generic_widgets): add more debug.
+
+	* bonobo/bonobo-ui-component.c (impl_xml_get): correct polarity
+	of 'recurse', should make things faster and more efficient.
+
 2000-10-16  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-node.c (bonobo_ui_node_transparent): nodes
