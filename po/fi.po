@@ -12,14 +12,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
-"POT-Creation-Date: 2004-02-02 14:30+0000\n"
-"PO-Revision-Date: 2003-06-16 21:09+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-11 00:25+0200\n"
+"PO-Revision-Date: 2004-02-01 02:05+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -67,13 +67,12 @@ msgid "Name service"
 msgstr "Nimipalvelu"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Nimipalvelu"
+msgstr "Huomautuspalvelu"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Huomautuspalvelu aktivointia varten"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -127,12 +126,12 @@ msgstr "Ominaisuudella \"%s\" ei ole arvoa"
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Virheellisen muotoisen XML-tiedoston jäsennys epäonnistui: %s"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Kokeillaan hakemistoa %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -212,11 +211,11 @@ msgstr "Jaettu kirjasto \"%s\" ei sisältänyt iid:tä \"%s\""
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #: bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr ""
+msgstr "Sovelluksen ainutkertainen nimi"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
