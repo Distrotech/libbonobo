@@ -40,7 +40,7 @@ bonobo_arg_new (BonoboArgType t)
 	f = (DynamicAny_DynAnyFactory)
 		CORBA_ORB_resolve_initial_references (
 			bonobo_orb(), "DynAnyFactory", &ev);
-	
+
 	g_return_val_if_fail (!BONOBO_EX (&ev), NULL);
 
 	dyn = DynamicAny_DynAnyFactory_create_dyn_any_from_type_code (

@@ -5,6 +5,20 @@
 #include <orbit/poa/poa.h>
 
 int
+ret_ex_test (CORBA_Environment *ev)
+{
+	BONOBO_RET_VAL_EX (ev, 1);
+
+	return 0;
+}
+
+void
+ex_test (CORBA_Environment *ev)
+{
+	BONOBO_RET_EX (ev);
+}
+
+int
 main (int argc, char *argv [])
 {
 	BonoboObject     *object;
@@ -57,9 +71,18 @@ main (int argc, char *argv [])
 		g_assert (!BONOBO_EX (ev));
 	}
 
-	fprintf (stderr, "All tests passed\n");
+	fprintf (stderr, "Ret-ex tests...\n");
+
+	g_assert (!ret_ex_test (ev));
+	ex_test (ev);
+
+	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+			     ex_Bonobo_PropertyBag_NotFound, NULL);
+	g_assert (ret_ex_test (ev));
 
 	CORBA_exception_free (ev);
+
+	fprintf (stderr, "All tests passed\n");
 
 	return 0;
 }

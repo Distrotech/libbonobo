@@ -498,7 +498,7 @@ bonobo_pbclient_get_value  (Bonobo_PropertyBag  bag,
 			    CORBA_Environment  *opt_ev)
 {
 	CORBA_Environment ev, *my_ev;
-	CORBA_any *retval;
+	CORBA_any *retval, *value;
 
 	bonobo_return_val_if_fail (key != NULL, NULL, opt_ev);
 
@@ -517,7 +517,7 @@ bonobo_pbclient_get_value  (Bonobo_PropertyBag  bag,
 		return NULL;
 	}
 
-	retval = Bonobo_PropertyBag_getValue (bag, key, my_ev);
+	value = Bonobo_PropertyBag_getValue (bag, key, my_ev);
 
 	if (BONOBO_EX (my_ev)) {
 		if (!opt_ev) {
@@ -527,24 +527,28 @@ bonobo_pbclient_get_value  (Bonobo_PropertyBag  bag,
 			CORBA_exception_free (&ev);
 		}
 		return NULL;
-	}
-
-
-	if (retval && opt_tc != CORBA_OBJECT_NIL) {
-
-		/* fixme: we can also try to do automatic type conversions */
-
-		if (!CORBA_TypeCode_equivalent (opt_tc, retval->_type, my_ev)) {
-			CORBA_free (retval);
-			if (!opt_ev)
-				CORBA_exception_free (&ev);
-			bonobo_exception_set (opt_ev, 
-			        ex_Bonobo_PropertyBag_InvalidType);
-			return NULL;
-		}
 
 	}
 
+	if (opt_tc != CORBA_OBJECT_NIL && value) {
+
+		retval = NULL;
+
+		if (value->_type->kind == CORBA_tk_null)
+			CORBA_free (value);
+
+		else if (!CORBA_TypeCode_equivalent (opt_tc, value->_type, my_ev)) {
+			/* FIXME: we can also try to do automatic conversion */
+			bonobo_exception_set (
+				opt_ev, 
+				ex_Bonobo_PropertyBag_InvalidType);
+			CORBA_free (value);
+		} else
+			retval = value;
+	} else
+		retval = value;
+
+ cleanout:
 	if (!opt_ev)
 		CORBA_exception_free (&ev);
 

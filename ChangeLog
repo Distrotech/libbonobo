@@ -1,3 +1,16 @@
+2001-08-11  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_pbclient_get_value): re-write to tolerate nulls
+	silently and map tk_null -> NULL.
+
+	* tests/test-object.c (main): add BONOBO_RET_EX regression
+	tests.
+
+	* bonobo/bonobo-exception.c
+	(bonobo_exception_repoid_to_text): filled out the
+	PropertyBag exceptions.
+
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-exception.h (BONOBO_RET_EX, BONOBO_RET_VAL_EX):

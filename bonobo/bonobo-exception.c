@@ -222,6 +222,15 @@ bonobo_exception_repoid_to_text  (const char *repo_id)
 	else if (!strcmp (repo_id, ex_Bonobo_PropertyBag_NotFound))
 		return g_strdup (_("property not found"));
 
+	else if (!strcmp (repo_id, ex_Bonobo_PropertyBag_InvalidType))
+		return g_strdup (_("property has invalid type"));
+
+	else if (!strcmp (repo_id, ex_Bonobo_PropertyBag_ReadOnly))
+		return g_strdup (_("property is read only"));
+
+	else if (!strcmp (repo_id, ex_Bonobo_PropertyBag_BackendFailed))
+		return g_strdup (_("config database backend failed "));
+
 	/* Bonobo::Moniker */
 	else if (!strcmp (repo_id, ex_Bonobo_Moniker_InterfaceNotFound))
 		return g_strdup (_("Moniker interface cannot be found"));
