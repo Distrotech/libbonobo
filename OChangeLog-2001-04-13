@@ -1,3 +1,8 @@
+Wed Nov 17 10:52:15 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* bonobo/gnome-wrapper.c (gnome_wrapper_init): unset the
+	GTK_NO_WINDOW flag, since we have a window.
+
 1999-11-09  Alexander Werner Skwar <askwar@digitalprojects.com>
 
 	* bonobo.spec.in: More fixes.
