@@ -508,11 +508,16 @@ static void
 bonobo_object_client_destroy (GtkObject *object)
 {
 	BonoboObject *bonobo_object = BONOBO_OBJECT (object);
-	CORBA_Environment ev;
+	Bonobo_Unknown objref;
 
-	CORBA_exception_init (&ev);
-	Bonobo_Unknown_unref (bonobo_object_corba_objref (bonobo_object), &ev);
-	CORBA_exception_free (&ev);
+	objref = bonobo_object_corba_objref (bonobo_object);
+	if (objref != CORBA_OBJECT_NIL) {
+		CORBA_Environment ev;
+
+		CORBA_exception_init (&ev);
+		Bonobo_Unknown_unref (objref, &ev);
+		CORBA_exception_free (&ev);
+	}
 
 	GTK_OBJECT_CLASS (bonobo_object_client_parent_class)->destroy (object);
 }

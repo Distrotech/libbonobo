@@ -1,3 +1,8 @@
+2000-06-22  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-object-client.c (bonobo_object_client_destroy):
+	Don't ::unref if the object reference is nil.
+
 2000-06-21  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-container.c (impl_enum_objects): simplify, removing
