@@ -1,3 +1,16 @@
+2002-10-28  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag-client.c
+
+	* tests/test-properties-client.c
+	(create_bag_client): add test.
+
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_pbclient_set_value_async),
+	(get_set_value_imethod): add from eel impl.
+
+	* Branch for 2.1
+
 2002-10-18  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.0.1
