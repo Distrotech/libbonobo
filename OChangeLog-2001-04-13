@@ -1,3 +1,21 @@
+2000-10-14  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (cmd_get_node): cope with the "/command" node
+	going away properly.
+
+	* bonobo/bonobo-ui-xml.c (reinstate_old_node): issue a RENAME not
+	a REINSTATE.
+	(bonobo_ui_xml_class_init): setup RENAME.
+	(override_node_with): don't emit OVERRIDE on transparent nodes it's
+	very wasteful, emit REPLACE_OVERRIDE instead, we leave the widget
+	untouched, but keep the component id safe in the override.
+	(prune_overrides_by_id): allow NULL id's for pruning.
+
+	* bonobo/bonobo-win.c (replace_override_fn): don't let a useful
+	widget be destroyed.
+	(rename_fn): stub; nothing needs to be done.
+	(construct_priv): hook up the rename.
+
 2000-10-14  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_create_toolbar):
