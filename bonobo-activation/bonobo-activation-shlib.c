@@ -27,7 +27,7 @@
 
 #include <gmodule.h>
 /* ORBit-specific hack */
-#include <orb/orbit_poa.h>
+#include <orbit/poa/poa.h>
 
 #include "oaf-plugin.h"
 

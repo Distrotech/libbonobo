@@ -33,6 +33,7 @@
 #include <glib.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <string.h>
 
 #include "oafd-corba-extensions.h"
 

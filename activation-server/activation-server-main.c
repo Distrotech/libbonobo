@@ -117,8 +117,8 @@ main (int argc, char *argv[])
 	root_poa = (PortableServer_POA)
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 	{
-		char *env_od_source_dir;
-		char *gnome_env_od_source_dir;
+		const char *env_od_source_dir;
+		const char *gnome_env_od_source_dir;
                 char *config_file_od_source_dir;
 		GString *gnome_od_source_dir;
                 char **gnome_dirs;

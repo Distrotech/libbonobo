@@ -34,7 +34,7 @@ extern "C" {
 #include <liboaf/oaf.h>
 
 /* Need to conditionalize this */
-#include <orb/orbit.h>
+#include <orbit/orbit.h>
 
 #include <liboaf/oaf-activate.h>
 #include <liboaf/oaf-servreg.h>

@@ -699,8 +699,8 @@ rloc_file_check (const OAFRegistrationLocation * regloc,
 		 gpointer user_data)
 {
 	FILE *fh;
-	char fn[PATH_MAX], *uname;
-	char *namecopy;
+	char fn[PATH_MAX], *namecopy;
+	const char *uname;
 
 	namecopy = oaf_alloca (strlen (regcat->name) + 1);
 	strcpy (namecopy, regcat->name);
@@ -747,9 +747,9 @@ rloc_file_register (const OAFRegistrationLocation * regloc, const char *ior,
 		    const OAFRegistrationCategory * regcat,
 		    gpointer user_data)
 {
-	char fn[PATH_MAX], fn2[PATH_MAX], *uname;
+	char fn[PATH_MAX], fn2[PATH_MAX], *namecopy;
 	FILE *fh;
-	char *namecopy;
+	const char *uname;
 
 	namecopy = oaf_alloca (strlen (regcat->name) + 1);
 	strcpy (namecopy, regcat->name);
@@ -778,7 +778,7 @@ rloc_file_unregister (const OAFRegistrationLocation * regloc, const char *ior,
 {
 	char fn2[PATH_MAX], fn3[PATH_MAX];
 	char fn[PATH_MAX];
-	char *uname;
+	const char *uname;
 	char *namecopy;
 
 	namecopy = oaf_alloca (strlen (regcat->name) + 1);

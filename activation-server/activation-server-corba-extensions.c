@@ -38,7 +38,7 @@ oafd_CORBA_Context_get_value (CORBA_Context         ctx,
 			      const CORBA_char     *exception_if_fail,
 			      CORBA_Environment    *ev)
 {
-	CORBA_NVList *nvout;
+	CORBA_NVList nvout;
 	char *retval;
         CORBA_Environment local_ev;
 

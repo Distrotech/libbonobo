@@ -27,6 +27,7 @@
    Likely bugs: Forgetting to initialize QueryExprConst.needs_free = crash
 */
 #include <stdio.h>
+#include <string.h>
 
 #include "ac-query-expr.h"
 #include "ac-query-parse.h"
@@ -737,7 +738,7 @@ qexp_evaluate_variable (OAF_ServerInfo * si, QueryExpr * e,
 
 	if (qctx->cctx) {
 		CORBA_Environment ev;
-		CORBA_NVList *nvout;
+		CORBA_NVList nvout;
 
 		CORBA_exception_init (&ev);
 		CORBA_Context_get_values (qctx->cctx, NULL, 0, e->u.var_value,

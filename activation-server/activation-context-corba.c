@@ -25,6 +25,7 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 
 #include "oafd.h"
 #include "oaf-i18n.h"

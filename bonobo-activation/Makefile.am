@@ -1,6 +1,6 @@
 NULL=
 
-lib_LTLIBRARIES=liboaf.la
+lib_LTLIBRARIES=liboaf-2.la
 
 INCLUDES=				\
 	-I$(top_srcdir) 		\
@@ -15,6 +15,7 @@ INCLUDES=				\
 LDFLAGS=		\
 	@ORBIT_LIBS@ 	\
 	@GLIB_LIBS@	\
+	@LT_VERSION_INFO@	\
 	$(NULL)
 
 liboafincludedir = $(includedir)/liboaf
@@ -36,7 +37,7 @@ liboafinclude_HEADERS=		\
 	liboaf-version.h	\
 	$(NULL)
 
-liboaf_la_SOURCES=		\
+liboaf_2_la_SOURCES=		\
 	oaf-stubs.c 		\
 	oaf-skels.c 		\
 	oaf-common.c 		\

@@ -35,7 +35,7 @@ oafd_SOURCES=					\
 	od-utils.h				\
 	oafd.h
 
-LDADD=../liboaf/liboaf.la \
+LDADD=../liboaf/liboaf-2.la \
 	@ORBIT_LIBS@ -lORBitCosNaming -lname-server \
 	@XML_LIBS@ \
 	@INTLLIBS@ \

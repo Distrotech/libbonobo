@@ -40,6 +40,8 @@
 #endif
 #endif
 
+#include <string.h>
+
 #define OAF_FACTORY_TIMEOUT 1000
 
 void         oaf_timeout_reg_check_set  (gboolean on);
