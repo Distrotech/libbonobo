@@ -1,3 +1,18 @@
+2000-07-14  Mathieu Lacage <mathieu@eazel.com>
+
+	* bonobo/Makefile.am, 
+	components/audio-ulaw/Makefile.am,
+	components/application-x-gnomine, 
+	components/text-plain/Makefile.am,
+	gshell/Makefile.am, 
+	samples/bonobo-class/Makefile.am, 
+	samples/compound-doc/bonobo-hello/Makefile.am,
+	samples/compound-doc/Makefile.am, 
+	samples/compound-doc/container/Makefile.a,
+	samples/controls/Makefile.am : add OAF_CFLAGS and 
+	OBJECT_DIRECTORY_LIBS where needed. One more step in my
+	crusade to compile GNOME in strange prefixes...
+
 2000-07-13  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	* bonobo.spec.in: added oaf files
