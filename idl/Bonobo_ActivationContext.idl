@@ -49,9 +49,16 @@ module OAF {
 	  ServerInfoList server_list;
 	};
 
+	union ServerStateCache switch(boolean) {
+	case TRUE:
+	  sequence<ImplementationID> active_servers;
+	};
+
 	/* Interfaces */
 	interface ObjectDirectory {
 	  ServerInfoListCache get_servers(in CacheTime only_if_newer);
+	  ServerStateCache get_active_servers(in CacheTime only_if_newer);
+
 	  readonly attribute string domain, hostname, username;
 
 	  Object activate(in ImplementationID iid);
@@ -66,7 +73,7 @@ module OAF {
 	interface ActivationContext {
 	  exception NotListed {};
 	  exception AlreadyListed {};
-	  exception ParseFailed { string description; }
+	  exception ParseFailed { string description; };
 
 	  readonly attribute ObjectDirectoryList directories;
 	  void add_directory(in ObjectDirectory dir) raises(AlreadyListed);
@@ -74,14 +81,14 @@ module OAF {
 
 	  ActivationResult activate(in string requirements,
 				    in StringList selection_order)
-	    context("hostname", "domain", "username")
-	    raises(ParseFailed);
+	    raises(ParseFailed)
+	    context("hostname", "domain", "username");
 
 	  readonly attribute ServerInfoList servers;
 	  ServerInfoList query(in string requirements,
 			       in StringList selection_order)
-	    context("hostname", "domain", "username")
-	    raises(ParseFailed);
+	    raises(ParseFailed)
+	    context("hostname", "domain", "username");
 
 	  ActivationResult activate_from_id(in ActivationID aid)
 	    context("hostname", "domain", "username");

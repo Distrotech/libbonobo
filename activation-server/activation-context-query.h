@@ -67,14 +67,22 @@ void qexp_free(QueryExpr *qexp);
 /* For debugging purposes */
 void qexp_dump(QueryExpr *exp);
 void qexp_constant_dump(QueryExprConst *c);
+gint qexp_constant_compare(const QueryExprConst *c1, const QueryExprConst *c2);
 
-typedef struct {
+typedef struct _QueryContext QueryContext;
+
+typedef QueryExprConst (*QueryIDEvaluateFunc)(OAF_ServerInfo *si, const char *id, QueryContext *qctx);
+
+struct _QueryContext {
   OAF_ServerInfo **sil;
-
   int nservers;
 
+  QueryIDEvaluateFunc id_evaluator;
+
   CORBA_Context cctx;
-} QueryContext;
+
+  gpointer user_data;
+};
 
 QueryExprConst qexp_evaluate(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);
 gboolean qexp_matches(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx);

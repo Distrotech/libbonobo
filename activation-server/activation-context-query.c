@@ -406,7 +406,7 @@ qexp_constant_compare(const QueryExprConst *c1, const QueryExprConst *c2)
   return 0;
 }
 
-#define qexp_constant_unuse(c) if ((c).needs_free) qexp_constant_free(&(c))
+#define qexp_constant_unuse(c) if ((c).needs_free && (c).value_known) qexp_constant_free(&(c))
 static void qexp_constant_free(const QueryExprConst *c)
 {
   switch (c->type)
@@ -784,7 +784,11 @@ qexp_evaluate_id(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 		  }
 		  break;
 		}
+
+	      retval.value_known = TRUE;
 	    }
+	  else if(qctx->id_evaluator)
+	    retval = qctx->id_evaluator(si, e->u.id_value, qctx);
 	}
     }
 
@@ -1016,7 +1020,70 @@ qexp_matches(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 }
 
 /* This is going to be one hairy function */
-void
-qexp_sort(OAF_ServerInfoList **servers, int nservers, QueryExpr **sexps, int nexps, QueryContext *qctx)
+#define compGT(x, y) x?(y?qexp_sort_compare(x, y, sexps, nexps, qctx):FALSE):TRUE
+
+static gboolean
+qexp_sort_compare(OAF_ServerInfo *x, OAF_ServerInfo *y, QueryExpr **sexps, int nexps, QueryContext *qctx)
 {
+  int i;
+
+  for(i = 0; i < nexps; i++) {
+    QueryExprConst cx, cy;
+    int res;
+
+    cx = qexp_evaluate(x, sexps[i], qctx);
+    cy = qexp_evaluate(y, sexps[i], qctx);
+
+    res = qexp_constant_compare(&cx, &cy);
+
+    qexp_constant_unuse(cx);
+    qexp_constant_unuse(cy);
+
+    if(res > 0)
+      return TRUE;
+    else if(res < 0)
+      return FALSE;
+  }
+
+  return FALSE;
+}
+
+void
+qexp_sort(OAF_ServerInfo **servers, int nservers, QueryExpr **sexps, int nexps, QueryContext *qctx)
+{
+  int n, h, i, j;
+  OAF_ServerInfo *t, **a;
+
+  /* This is a shell sort algorithm from http://members.xoom.com/_XOOM/thomasn/s_shl.txt */
+
+  /**************************
+    *  sort array a[0..nservers]  *
+    **************************/
+
+    /* compute largest increment */
+  n = nservers;
+  h = 1;
+  if (n < 14)
+    h = 1;
+  else {
+    while (h < n) h = 3*h + 1;
+    h /= 3;
+    h /= 3;
+  }
+
+  while (h > 0) {
+
+    /* sort-by-insertion in increments of h */
+    for (i = 0 + h; i < nservers; i++) {
+      t = a[i];
+
+      for (j = i-h; j >= 0 && compGT(a[j], t); j -= h) {
+	a[j+h] = a[j];
+      }
+      a[j+h] = t;
+    }
+
+    /* compute next increment */
+    h /= 3;
+  }
 }

@@ -1,10 +1,19 @@
 #include "config.h"
 
+#include "liboaf/liboaf.h"
+
 #include "oafd.h"
 #include "ac-query-expr.h"
 #include <popt.h>
 
-static char *od_source_dir = OAFINFODIR, *ac_evaluate = NULL;
+#if 0
+/* Production version */
+static char *od_source_dir = OAFINFODIR;
+#else
+static char *od_source_dir = ".";
+#endif
+
+static char *ac_evaluate = NULL;
 
 static struct poptOption options[] = {
   {"od-source-dir", '\0', POPT_ARG_STRING, &od_source_dir, 0, "Directory to read .oafinfo files from", "DIRECTORY"},
@@ -24,6 +33,8 @@ int main(int argc, char *argv[])
   OAF_ObjectDirectory od;
   OAF_ActivationContext ac;
   poptContext ctx;
+  GMainLoop *ml;
+  char *ior;
 
   CORBA_exception_init(&ev);
 
@@ -32,7 +43,9 @@ int main(int argc, char *argv[])
 
   poptFreeContext(ctx);
 
-  orb = CORBA_ORB_init(&argc, argv, "orbit-local-orb", &ev);
+  ml = g_main_new(FALSE);
+
+  orb = oaf_orb_init(&argc, argv);
   root_poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
   od = OAF_ObjectDirectory_create(root_poa, "user", od_source_dir, &ev);
   ac = OAF_ActivationContext_create(root_poa, &ev);
@@ -53,6 +66,14 @@ int main(int argc, char *argv[])
       g_print("\n");
     }
   }
+
+  ior = CORBA_ORB_object_to_string(orb, ac, &ev);
+  fprintf(stdout, "%s\n", ior);
+  fflush(stdout);
+  CORBA_free(ior);
+
+  PortableServer_POAManager_activate(PortableServer_POA__get_the_POAManager(root_poa, &ev), &ev);
+  g_main_run(ml);
   
   return 0;
 }

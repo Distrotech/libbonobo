@@ -1,4 +1,6 @@
-#include "oaf.h"
+#include "oafd.h"
+#include "ac-query-expr.h"
+#include <time.h>
 
 static void
 OAF_ServerInfo__copy(OAF_ServerInfo *new, const OAF_ServerInfo *old)
@@ -18,6 +20,12 @@ typedef struct {
   OAF_ServerInfoList *list;
   OAF_CacheTime time_list_pulled;
   GHashTable *by_iid;
+
+  GHashTable *active_servers;
+  OAF_ServerStateCache *active_server_list;
+  OAF_CacheTime time_active_pulled;
+
+  guchar locked;
 } ChildODInfo;
 
 static ChildODInfo *
@@ -63,34 +71,80 @@ child_od_exception(ChildODInfo *child, CORBA_Environment *ev)
 }
 
 static void
+child_od_update_active(ChildODInfo *child, CORBA_Environment *ev)
+{
+  int i;
+  OAF_ServerStateCache *cache;
+
+  cache = OAF_ObjectDirectory_get_active_servers(child->obj,
+						 child->time_active_pulled,
+						 ev);
+  if(ev->_major != CORBA_NO_EXCEPTION) {
+    child_od_exception(child, ev);
+    return;
+  }
+
+  if(cache->_d) {
+    if(child->active_servers) {
+      g_hash_table_destroy(child->active_servers);
+      CORBA_free(child->active_server_list);
+    }
+
+    child->active_server_list = cache;
+
+    child->time_active_pulled = time(NULL);
+    child->active_servers = g_hash_table_new(g_str_hash, g_str_equal);
+    g_hash_table_freeze(child->active_servers);
+    for(i = 0; i < cache->_u.active_servers._length; i++)
+      g_hash_table_insert(child->active_servers,
+			  cache->_u.active_servers._buffer[i],
+			  GINT_TO_POINTER(1));
+    g_hash_table_thaw(child->active_servers);
+  } else
+    CORBA_free(cache);
+}
+
+static void
 child_od_update_list(ChildODInfo *child, CORBA_Environment *ev)
 {
-  g_hash_table_destroy(child->by_iid);
-  CORBA_free(child->list);
   int i;
+  OAF_ServerInfoListCache *cache;
 
-  child->list = OAF_ObjectDirectory__get_servers(child->obj,
-						 child->time_list_pulled,
-						 ev);
+  cache = OAF_ObjectDirectory_get_servers(child->obj,
+					  child->time_list_pulled,
+					  ev);
   if(ev->_major != CORBA_NO_EXCEPTION) {
     child->list = NULL;
     child_od_exception(child, ev);
+    return;
   }
 
-  child->time_list_pulled = time(NULL);
-  child->by_iid = g_hash_table_new(g_str_hash, g_str_equal);
-  g_hash_table_freeze(child->by_iid);
-  for(i = 0; i < child->list->_length; i++)
-    g_hash_table_insert(child->by_iid,
-			child->list->_buffer[i].iid,
-			&(child->list->_buffer[i]));
-  g_hash_table_thaw(child->by_iid);
+  if(cache->_d) {
+
+    if(child->by_iid)
+      g_hash_table_destroy(child->by_iid);
+    CORBA_free(child->list); child->list = NULL;
+
+    child->list = OAF_ServerInfoList__alloc();
+    *(child->list) = cache->_u.server_list;
+
+    child->time_list_pulled = time(NULL);
+    child->by_iid = g_hash_table_new(g_str_hash, g_str_equal);
+    g_hash_table_freeze(child->by_iid);
+    for(i = 0; i < child->list->_length; i++)
+      g_hash_table_insert(child->by_iid,
+			  child->list->_buffer[i].iid,
+			  &(child->list->_buffer[i]));
+    g_hash_table_thaw(child->by_iid);
+  }
+
+  CORBA_free(cache);
 }
 
 static void
 child_od_info_free(ChildODInfo *child, CORBA_Environment *ev)
 {
-  CORBA_Object_release(child, ev);
+  CORBA_Object_release(child->obj, ev);
   CORBA_free(child->hostname);
   CORBA_free(child->username);
   CORBA_free(child->domain);
@@ -127,7 +181,7 @@ static void
 static OAF_ActivationResult *
  impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
 				     CORBA_char * requirements,
-				     CORBA_char * selection_order,
+				     OAF_StringList * selection_order,
 				     CORBA_Context ctx,
 				     CORBA_Environment * ev);
 
@@ -138,6 +192,8 @@ static OAF_ServerInfoList *
 static OAF_ServerInfoList *
 impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
 				 CORBA_char * requirements,
+				 OAF_StringList * selection_order,
+				 CORBA_Context ctx,
 				 CORBA_Environment * ev);
 
 static OAF_ActivationResult *
@@ -157,13 +213,13 @@ static PortableServer_ServantBase__epv impl_OAF_ActivationContext_base_epv =
 static POA_OAF_ActivationContext__epv impl_OAF_ActivationContext_epv =
 {
   NULL,			/* _private */
-  & impl_OAF_ActivationContext__get_directories,
-  & impl_OAF_ActivationContext_add_directory,
-  & impl_OAF_ActivationContext_remove_directory,
-  & impl_OAF_ActivationContext_activate,
-  & impl_OAF_ActivationContext__get_servers,
-  & impl_OAF_ActivationContext_query,
-  & impl_OAF_ActivationContext_activate_from_id
+  &impl_OAF_ActivationContext__get_directories,
+  &impl_OAF_ActivationContext_add_directory,
+  &impl_OAF_ActivationContext_remove_directory,
+  &impl_OAF_ActivationContext_activate,
+  &impl_OAF_ActivationContext__get_servers,
+  &impl_OAF_ActivationContext_query,
+  &impl_OAF_ActivationContext_activate_from_id
 };
 
 /*** vepv structures ***/
@@ -349,7 +405,7 @@ ac_find_child_for_server(impl_POA_OAF_ActivationContext *servant,
   for(cur = servant->dirs; cur; cur = cur->next) {
     ChildODInfo *child;
 
-    if(CORBA_Object_is_nil(child->obj) || !child->list)
+    if(CORBA_Object_is_nil(child->obj, ev) || !child->list)
       continue;
 
     if((server > child->list->_buffer)
@@ -359,6 +415,49 @@ ac_find_child_for_server(impl_POA_OAF_ActivationContext *servant,
 
   return NULL;
 }
+
+static QueryExprConst
+ac_query_get_var(OAF_ServerInfo *si, const char *id, QueryContext *qctx)
+{
+  ChildODInfo *child;
+  QueryExprConst retval;
+
+  retval.value_known = FALSE;
+  retval.needs_free = FALSE;
+
+  child = ac_find_child_for_server(qctx->user_data, si, NULL);
+  if(!child)
+    goto out;
+
+  if(!strcasecmp(id, "_hostname")) {
+    retval.value_known = TRUE;
+    retval.type = CONST_STRING;
+    retval.u.v_string = child->hostname;
+  } else if (!strcasecmp(id, "_domain")) {
+    retval.value_known = TRUE;
+    retval.type = CONST_STRING;
+    retval.u.v_string = child->domain;
+  } else if (!strcasecmp(id, "_username")) {
+    retval.value_known = TRUE;
+    retval.type = CONST_STRING;
+    retval.u.v_string = child->username;
+  } else if (!strcasecmp(id, "_active")) {
+    CORBA_Environment ev;
+
+    CORBA_exception_init(&ev);
+    child_od_update_active(child, &ev);
+    CORBA_exception_free(&ev);
+
+    retval.value_known = TRUE;
+    retval.type = CONST_BOOLEAN;
+    retval.u.v_boolean = g_hash_table_lookup(child->active_servers, si->iid)?TRUE:FALSE;
+  }
+
+ out:
+
+  return retval;
+}
+
 
 static OAF_ServerInfoList *
 impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
@@ -378,7 +477,7 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
   OAF_ActivationContext_ParseFailed *ex;
 
   QueryExpr *qexp_requirements;
-  QueryExpr **qexp_sort;
+  QueryExpr **qexp_sort_items;
 
   retval = OAF_ServerInfoList__alloc();
   retval->_length = 0;
@@ -386,7 +485,7 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
   CORBA_sequence_set_release(retval, CORBA_TRUE);
 
   /* First, parse the query */
-  errstr = qexp_parse(requirements, &qexp_requirements);
+  errstr = (char *)qexp_parse(requirements, &qexp_requirements);
   if(errstr) {
     ex = OAF_ActivationContext_ParseFailed__alloc();
     ex->description = CORBA_string_dup(errstr);
@@ -396,14 +495,14 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
     return retval;
   }
 
-  qexp_sort = oaf_alloca(selection_order->_length * sizeof(QueryExpr *));
+  qexp_sort_items = oaf_alloca(selection_order->_length * sizeof(QueryExpr *));
   for(i = 0; i < selection_order->_length; i++) {
-    errstr = qexp_parse(selection_order->_buffer[i], qexp_sort + i);
+    errstr = (char *)qexp_parse(selection_order->_buffer[i], &qexp_sort_items[i]);
 
     if(errstr) {
       qexp_free(qexp_requirements);
       for(i--; i >= 0; i--)
-	qexp_free(qexp_sort[i]);
+	qexp_free(qexp_sort_items[i]);
 
       ex = OAF_ActivationContext_ParseFailed__alloc();
       ex->description = CORBA_string_dup(errstr);
@@ -426,7 +525,9 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
     ChildODInfo *child;
     int i;
 
-    if(CORBA_Object_is_nil(child->obj) || !child->list)
+    child = cur->data;
+
+    if(CORBA_Object_is_nil(child->obj, ev) || !child->list)
       continue;
 
     for(i = 0; i < child->list->_length; i++, item_count++)
@@ -438,13 +539,15 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
   qctx.sil = orig_items;
   qctx.nservers = orig_item_count;
   qctx.cctx = ctx;
+  qctx.id_evaluator = ac_query_get_var;
+  qctx.user_data = servant;
 
   for(i = 0; i < item_count; i++) {
     if(!qexp_matches(items[i], qexp_requirements, &qctx))
       items[i] = NULL;
   }
 
-  qexp_sort(items, item_count, qexp_sort, selection_order->_length, &qctx);
+  qexp_sort(items, item_count, qexp_sort_items, selection_order->_length, &qctx);
 
   for(total = i = 0; i < item_count; i++) {
     if(items[i])
@@ -471,10 +574,9 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
 					    CORBA_Context ctx,
 					    CORBA_Environment * ev)
 {
-  GSList *cur;
   OAF_ActivationResult *retval;
 
-  result = OAF_ActivationResult__alloc();
+  retval = OAF_ActivationResult__alloc();
 
   return retval;
 }

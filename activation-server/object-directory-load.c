@@ -73,7 +73,7 @@ od_entry_read_attrs(OAF_ServerInfo *ent, xmlNodePtr node)
       }
 
       curattr->v._u.value_stringv._length = o;
-      curattr->v._u.value_stringv._buffer = OAF_StringList_allocbuf(o);
+      curattr->v._u.value_stringv._buffer = CORBA_sequence_CORBA_string_allocbuf(o);
 
       for(j = 0, sub2 = sub->childs; j < o; sub2 = sub2->next, j++) {
 	valuestr = xmlGetProp(sub2, "value");

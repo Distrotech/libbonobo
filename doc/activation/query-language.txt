@@ -10,7 +10,16 @@ Numbers: Floating point decimals. (aka "whatever atof() accepts" :)
 Booleans: TRUE or FALSE (other common boolean value identifiers also accepted, but not encouraged).
 
 	Field identifiers:
-Names of fields attributes of a ServerInfo record.
+
+Names of fields are attributes of a ServerInfo record. These include
+'type', 'location_info', and 'iid', even though these are explicitly
+stored instead of just other attributes.
+
+A number of pseudo-fields are also available, all prefaced with an underscore:
+	_hostname - The host that an implementation is/would be hosted on (string)
+	_username - The user that an implementation is/would be running as (string)
+	_domain - The activation domain (string)
+	_active - Whether the server is currently running (string)
 
 	Variables:
 

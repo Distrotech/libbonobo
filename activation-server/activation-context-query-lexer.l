@@ -62,7 +62,7 @@ DIGIT	[0-9]
 {DIGIT}+"."{DIGIT}+ { yylval.val_number = atof( yytext ); return P_CONST_NUMBER; }
 {DIGIT}+ { yylval.val_number = atof( yytext ); return P_CONST_NUMBER; }
 
-[a-zA-Z][a-zA-Z0-9_]* { yylval.val_string = putSymbol( yytext ); return P_CONST_ID; }
+[a-zA-Z_][a-zA-Z0-9_]* { yylval.val_string = putSymbol( yytext ); return P_CONST_ID; }
 
 [ \t\n\r]+          /* eat up whitespace */
 

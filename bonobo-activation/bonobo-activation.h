@@ -3,6 +3,9 @@
 
 #include <liboaf/oaf.h>
 
+/* Need to conditionalize this */
+#include <orb/orbit.h>
+
 /* If you wish to manipulate the internals of this structure, please
    use g_malloc/g_free to allocate memory. */
 typedef struct {
@@ -14,7 +17,12 @@ typedef struct {
 
 OAF_ActivationID oaf_actinfo_stringify(OAFActivationInfo *actinfo);
 OAFActivationInfo *oaf_actid_parse(OAF_ActivationID actid);
-OAF_ActivationInfo *oaf_actinfo_new(void);
+OAFActivationInfo *oaf_actinfo_new(void);
 void oaf_actinfo_free(OAFActivationInfo *actinfo);
+
+CORBA_ORB oaf_orb_init(int *argc, char **argv);
+CORBA_ORB oaf_orb_get(void);
+
+CORBA_Context oaf_context_get(void); /* Just makes getting hold of the default context a bit easier */
 
 #endif

@@ -1,9 +1,11 @@
-#include "liboaf.h"
+#include "config.h"
 
-OAF_ActivationInfo *
+#include "liboaf-private.h"
+
+OAFActivationInfo *
 oaf_actinfo_new(void)
 {
-  return g_new0(OAF_ActivationInfo, 1);
+  return g_new0(OAFActivationInfo, 1);
 }
 
 void
@@ -25,7 +27,7 @@ oaf_parse_actid(const char *actid)
   if(strncmp(actid, "OAFAID:", sizeof("OAFAID:") - 1))
     return NULL;
 
-  ctmp = actid + sizeof("OAFAID:") - 1;
+  ctmp = (char *)(actid + sizeof("OAFAID:") - 1);
   if(*ctmp != '[')
     return NULL;
 
@@ -72,7 +74,7 @@ oaf_parse_actid(const char *actid)
 char *
 oaf_stringify_actinfo(OAFActivationInfo *actinfo)
 {
-  g_return_val_if_fail(ainfo, NULL);
+  g_return_val_if_fail(actinfo, NULL);
 
   return g_strconcat("OAFAID:[",
 		     actinfo->iid?actinfo->iid:"",
