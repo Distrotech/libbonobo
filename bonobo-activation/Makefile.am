@@ -23,6 +23,7 @@ liboafinclude_HEADERS=		\
 	oaf.h 			\
 	liboaf.h 		\
 	oaf-factory.h 		\
+	oaf-factory-suppress.h	\
 	liboaf-version.h	\
 	$(NULL)
 
