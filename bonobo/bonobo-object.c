@@ -1610,3 +1610,12 @@ bonobo_object_get_poa (BonoboObject *object)
 	else
 		return bonobo_poa ();
 }
+
+void
+bonobo_object_set_poa (BonoboObject      *object,
+		       PortableServer_POA poa)
+{
+	/* FIXME: implement me */
+	g_warning ("This method is a pain, it needs hooks into "
+		   "bonobo_object_corba_objref");
+}

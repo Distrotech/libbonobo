@@ -1,4 +1,14 @@
+2003-06-09  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-main.c (bonobo_poa_get_threaded):
+	don't leak a policy (thanks to NotZed).
+	(bonobo_poa_get_threaded, bonobo_poa_get_threadedv):
+	add argv arg.
+
 2003-06-06  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c
+	(bonobo_object_set_poa): stub.
 
 	* tests/test-thread.c (main): upd.
 

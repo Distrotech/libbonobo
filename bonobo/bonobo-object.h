@@ -95,6 +95,8 @@ Bonobo_Unknown           bonobo_object_query_interface        (BonoboObject     
 							       const char             *repo_id,
 							       CORBA_Environment      *opt_ev);
 Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject           *object);
+void                     bonobo_object_set_poa                (BonoboObject           *object,
+							       PortableServer_POA      poa);
 
 /*
  * Gnome Object Life Cycle

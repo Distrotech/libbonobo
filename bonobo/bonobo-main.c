@@ -311,10 +311,10 @@ bonobo_main_quit (void)
 	g_main_loop_quit (bonobo_main_loops->data);
 }
 
-
 /**
- * bonobo_poa_get_threaded:
+ * bonobo_poa_get_threadedv:
  * @hint: the desired thread hint
+ * @args: va_args related to that hint
  * 
  * Get a predefined POA for a given threading policy/hint.  The
  * returned POA can be passed as the "poa" constructor property of a
@@ -322,7 +322,9 @@ bonobo_main_quit (void)
  * 
  * Return value: the requested POA.
  **/
-PortableServer_POA bonobo_poa_get_threaded (ORBitThreadHint hint)
+PortableServer_POA
+bonobo_poa_get_threadedv (ORBitThreadHint hint,
+			  va_list         args)
 {
 	PortableServer_POA  poa;
 	CORBA_Environment   ev[1];
@@ -363,8 +365,11 @@ PortableServer_POA bonobo_poa_get_threaded (ORBitThreadHint hint)
 	poa = bonobo_poa_new_from (__bonobo_poa,
 				   poa_name, &policies, ev);
 
+	CORBA_Object_release (policies._buffer[0], NULL);
+
 	if (ev->_major == CORBA_NO_EXCEPTION)
-		ORBit_ObjectAdaptor_set_thread_hint ((ORBit_ObjectAdaptor) poa, hint);
+		ORBit_ObjectAdaptor_set_thread_hintv
+			((ORBit_ObjectAdaptor) poa, hint, args);
 
 	else {
 		if (strcmp (CORBA_exception_id (ev),
@@ -378,6 +383,29 @@ PortableServer_POA bonobo_poa_get_threaded (ORBitThreadHint hint)
 	CORBA_exception_free (ev);
 	if (!poa)
 		g_warning ("Could not create/get poa '%s'", poa_name);
+
+	return poa;
+}
+
+/**
+ * bonobo_poa_get_threaded:
+ * @hint: the desired thread hint
+ * 
+ * Get a predefined POA for a given threading policy/hint.  The
+ * returned POA can be passed as the "poa" constructor property of a
+ * #BonoboOject.
+ * 
+ * Return value: the requested POA.
+ **/
+PortableServer_POA
+bonobo_poa_get_threaded (ORBitThreadHint hint, ...)
+{
+	va_list args;
+	PortableServer_POA poa;
+
+	va_start (args, hint);
+	poa = bonobo_poa_get_threadedv (hint, args);
+	va_end (args);
 
 	return poa;
 }
