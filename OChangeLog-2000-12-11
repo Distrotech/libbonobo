@@ -1,5 +1,26 @@
 2000-09-13  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_menu_new): Handle
+	placeholders with an hack uglier than, well something.
+
+	* bonobo/bonobo-win.c (construct_priv, bonobo_win_construct),
+	(bonobo_win_init): Advance most construction to _init time.
+	(bonobo_win_get_name, bonobo_win_set_name): impl.
+
+	* bonobo/bonobo-ui-xml.c (do_set_id, xml_get_path): fix leaks.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_menu_get_label),
+	(bonobo_ui_handler_menu_set_label, bonobo_ui_handler_menu_set_hint),
+	(bonobo_ui_handler_menu_get_radio_state),
+	(bonobo_ui_handler_menu_set_radio_state),
+	(bonobo_ui_handler_menu_set_toggle_state): implement.
+	(bonobo_ui_handler_menu_get_toggle_state): re-implement.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_container_get_prop),
+	(bonobo_ui_container_set_prop): rename.
+
+2000-09-13  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (update_status): Make the control a custom
 	widget so it doesn't get trashed.
 
