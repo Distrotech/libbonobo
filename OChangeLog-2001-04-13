@@ -1,5 +1,11 @@
 2000-05-29  Michael Meeks  <michael@helixcode.com>
 
+	* Makefile.am: add doc & macros.
+
+	* components/audio-ulaw/Makefile.am: uncomment doc.
+
+	* bonobo.spec: kill image-x-png references.
+
 	* configure.in (have_oaf): give a helpful error message if you don't have oaf.
 
 2000-05-27  Michael Meeks  <michael@helixcode.com>
