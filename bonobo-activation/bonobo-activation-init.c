@@ -365,7 +365,6 @@ oaf_is_initialized (void)
 }
 
 
-
 /**
  * oaf_init:
  * @argc: number of command-line arguments passed to the program.
@@ -384,6 +383,8 @@ oaf_init (int argc, char **argv)
 	int i;
 
 	g_return_val_if_fail (is_initialized == FALSE, oaf_orb);
+
+        bindtextdomain (PACKAGE, OAF_LOCALEDIR);
 
 	oaf_preinit (NULL, NULL);
 
