@@ -1,5 +1,22 @@
 2001-01-11  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-engine.c (impl_destroy): free hash table.
+	(cmd_to_node_clear_hash): free hash node.
+	(cmd_to_node_add_node): impl.
+	(cmd_to_node_remove_node): impl.
+	(cmd_to_node_add_node): impl.
+	(cmd_to_nodes): impl.
+	(make_updates_for_command): re-write to avoid recursion.
+	(update_cmd_state): upd.
+	(dirty_by_cmd): re-write similarly.
+	(move_dirt_cmd_to_widget): upd.
+	-- updates to track cmds vs. nodes.
+	(add_node_fn): register cmd node.
+	(replace_override_fn, override_fn),
+	(remove_fn, reinstate_fn): ditto.
+
+2001-01-11  Michael Meeks  <michael@helixcode.com>
+
 	* doc/std-ui.xml: upd.
 
 	* bonobo/Makefile.am: add ui-config-widget.h
