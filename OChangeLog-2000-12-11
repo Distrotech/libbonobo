@@ -1,3 +1,115 @@
+1999-08-22  Nat Friedman  <nat@gnome-support.com>
+
+	* idl/gnome-inplace.idl: Removed.
+	* bonobo/gnome-inplace-component.c: Likewise.
+	* bonobo/gnome-inplace-component.h: Likewise.
+	* bonobo/gnome-inplace-site.c: Likewise.
+	* bonobo/gnome-inplace-site.h: Likewise.
+	* bonobo/gtk-interfaces.c: Likewise.
+	* bonobo/gtk-interfaces.h: Likewise.
+	
+	* samples/sample-container.c (component_add_view): Use
+ 	gnome_client_site_new_view.
+	(component_create_fs): New function to create a file selection
+ 	dialog.
+	(component_load_pf_ok_cb): Callback for when the user hits 'ok' on
+ 	a PersistFile loading dialog.
+	(component_load_pf_cb): Use component_create_fs.
+	(component_load_ps_cb): Likewise.
+	(component_destroy_cb): Unref the remote object and destroy the
+ 	widget.  Probably I should destroy the local objects too.
+
+	* samples/paint-component-simple.c (main): Updated to reflect the
+ 	new bonobo_main system.
+
+	* idl/gnome-embeddable.idl (GNOME::Embeddable): Removed some stale
+ 	verb documentation.
+
+	* doc/debugging.txt: Fixed some typos.
+
+	* bonobo/gnome-object-client.h (GnomeObjectClient): Removed the
+ 	view_frames member variable from this.  Ugh.
+
+	* bonobo/gnome-main.c (bonobo_orb): New function.  This used to be
+ 	a macro.
+	(bonobo_poa): Likewise.
+	(bonobo_poa_manager): Likewise.
+	(bonobo_main): New function.  Activated the POA manager and then
+ 	runs the main event loop.
+
+	* bonobo/gnome-embeddable.c (impl_GNOME_Embeddable_new_view):
+ 	Deconstified function declaration to avoid a warning.
+
+	* bonobo/gnome-container.c (gnome_container_destroy): Destroy all
+ 	child GnomeClientSites.
+	(gnome_container_client_site_destroy_cb): New function.  Removed a
+ 	ClientSite from the internal list when it is destroyed.
+	(gnome_container_add): Connect to the destroy signal on the client
+ 	site so that we can remove it from our internal list when it dies.
+
+	* bonobo/gnome-client-site.h (GnomeClientSite): Added a
+ 	view_frames list here.  Removed compatibility macros.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_destroy): Destroy
+ 	the view frames.  Use gnome_object_unref to unref a GnomeObject,
+ 	not gtk_object_unref.
+	(destroy_view_frame): Reflect the fact that the view frame list is
+ 	now stored in the client site.
+	(gnome_client_site_new_view): Likewise.
+
+	* bonobo/gnome-bonobo-selector.h: Formatted.
+
+	* bonobo/gnome-bonobo-selector.c: File updated to use the correct
+ 	indentation style.  Please, if you commit to Bonobo, follow the
+ 	GNOME Programming guidelines.
+	(gnome_bonobo_selector_get_type): Documented.
+	(gnome_bonobo_selector_new): Documented.
+	(gnome_bonobo_selector_get_selected_goad_id): Documented.
+	(gnome_bonobo_selector_select_goad_id): Documented.
+	(gnome_bonobo_selector_select_activate): Removed.  It is not the
+ 	job of the selector to perform server activation.  Furthermore,
+ 	the API was broken and did not return a reference to the
+ 	newly-created server.
+	(gnome_bonobo_selector_activate_selected): Likewise.
+	(close_callback): Removed stale code.
+
+	* bonobo/gnome-object.h (GnomeObject): Removed the per-object
+ 	CORBA_Environment, as it can lead to re-entrancy problems.  Now
+ 	you must create your own local CORBA_Environment whenever you need
+ 	one.
+	(GNOME_OBJECT_EV): Removed.
+
+	* bonobo/gnome-bind-context.c: Updated to reflect the fact that we
+ 	no longer have a per-object CORBA_Environment.
+		
+	* bonobo/gnome-view.c): Likewise.
+
+	* bonobo/gnome-view-frame.c: Likewise.
+
+	* bonobo/gnome-ui-handler.c: Likewise.
+
+	* bonobo/gnome-stream-memory.c: Likewise.
+
+	* bonobo/gnome-stream-fs.c: Likewise.
+
+	* bonobo/gnome-simple-source.c: Likewise.
+
+	* bonobo/gnome-progressive.c: Likewise.
+
+	* bonobo/gnome-persist-stream.c: Likewise.
+
+	* bonobo/gnome-persist-file.c: Likewise.
+
+	* bonobo/gnome-object-client.c: Likewise.
+
+	* bonobo/gnome-embeddable.c: Likewise.
+
+	* bonobo/gnome-embeddable-factory.c: Likewise.
+
+	* bonobo/gnome-container.c: Likewise.
+
+	* bonobo/gnome-bonobo-selector.c: Likewise.
+
 1999-08-22  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-embeddable-factory.c

@@ -16,11 +16,6 @@
 
 typedef struct {
 	GnomeObject parent;
-
-	/*
-	 * Some objects might use this, not always used.
-	 */
-	GList *view_frames;		/* List of GnomeViewFrames. */
 } GnomeObjectClient;
 
 typedef struct {

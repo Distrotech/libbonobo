@@ -34,7 +34,7 @@ or just:
 	killall -9 bonobo-my-component
 
 
-4. Wierd stuff
+4. Weird stuff
 
 If you see your components freak out in all manner of interesting
 ways when the container dies read README-gdk-patch and act accordingly.
@@ -56,14 +56,14 @@ And in the second run the container:
 6. Order of execution
 
 It is of course important to ensure that the component has registered
-before executing the container. A good guide is to wait until your hard
-disk has stopped thrashing madly before running the container.
+before executing the container.  A good guide is to wait until your
+hard disk has stopped thrashing madly before running the container.
 
 7. Assertion failure in giop-msg-buffer.c
 
 If you get assertion failures in giop-msg-buffer.c, they may be due to
-the death of the other end of the connection. Make sure you look at both
-ends of the connection.
+the death of the other end of the connection.  Make sure you look at
+both ends of the connection.
 
 8. Desparate mesaures.
 

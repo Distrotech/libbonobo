@@ -31,12 +31,13 @@ Nat's list
 * Pinging of the client site when all views disappear!!
 * clean up text/plain
 * When view emits system_exception, what do we do?
+  - from embeddable perspective (nothing; wait for a destroy on the embeddable)
+  - from container perspective
 * FIXMEs
-* Remove per-object CORBA_Environment
-* Work on debugging.txt
-* Clear up role of GnomeContainer
 * Put system_exception checks into sample-container.
 * Wainwright patch -- update components/containers to match
 * Update my gdk patch.
-* Try Tim Janik's solution.
 * Move all test code out of bonobo/bonobo
+* Remove inplace component/container
+* Remove gtk-interfaces (stale)
+* Update components to do size negotiation

@@ -30,7 +30,6 @@ typedef struct {
 	GtkObject base;
 
 	CORBA_Object          corba_objref;
-	CORBA_Environment     ev;
 	gpointer              servant;
 	GnomeObjectPrivate   *priv;
 } GnomeObject;
@@ -84,7 +83,6 @@ void         gnome_object_check_env        (GnomeObject *object,
                                         if ((e)->_major != CORBA_NO_EXCEPTION) { \
                                         	gnome_object_check_env(o,c,e);     \
 			        } while (0)
-#define GNOME_OBJECT_EV(o) &(GNOME_OBJECT (o)->ev)
 
 /*
  * Others

@@ -52,37 +52,6 @@ interface View : GNOME::Unknown {
 	void reactivate_and_undo ();
 
 	/**
-	 * Some standard verbs in Bonobo:
-	 * "bonobo_primary":
-	 *     Action invoked when user double clicks on
-	 *     this object.  Triggers inplace editing if this
-	 *     object supports it.
-	 *
-	 * "bonobo_show":
-	 *     The object should be shown to the user, for 
-	 *     editing or viewing.  Used during initial editing
-	 *
-	 * "bonobo_open":
-	 *     Edit the object in a separate window.
-	 *
-	 * "bonobo_hide":
-	 *     Hide any open separate windows.
-	 *
-	 * "bonobo_activate_inplace_uia":
-	 *     Activate in place and negotiate toolbars and menus
-	 *
-	 * "bonobo_activate_inplace":	
-	 *     Activate in place but do not merge UI elements.
-	 *
-	 * "bonobo_deactivate"
-	 *     Deactivate, often when another component has been
-	 *     activated.
-	 *
-	 * "bonobo_discardundo"
-	 *     Discard any pending Undo information in this object.
-	 */
-		
-	/**
 	 * do_verb:
 	 * @verb_name: string that identifies the verb.
 	 *

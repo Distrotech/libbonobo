@@ -11,7 +11,7 @@
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
- *   Nat Friedman (nat@nat.org)
+ *   Nat Friedman    (nat@nat.org)
  *
  * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
@@ -41,33 +41,52 @@ static CORBA_Object
 create_gnome_container (GnomeObject *object)
 {
 	POA_GNOME_Container *servant;
+	CORBA_Environment ev;
 	CORBA_Object o;
-	
+
+	CORBA_exception_init (&ev);
+
 	servant = (POA_GNOME_Container *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_container_vepv;
 
-	POA_GNOME_Container__init ((PortableServer_Servant) servant, &object->ev);
-	if (object->ev._major != CORBA_NO_EXCEPTION){
+	POA_GNOME_Container__init ((PortableServer_Servant) servant, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
+		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
 	}
 
 	CORBA_free (PortableServer_POA_activate_object (
-		bonobo_poa (), servant, &object->ev));
+		bonobo_poa (), servant, &ev));
 
 	o = PortableServer_POA_servant_to_reference (
-		bonobo_poa(), servant, &object->ev);
+		bonobo_poa(), servant, &ev);
 
 	if (o){
 		gnome_object_bind_to_servant (object, servant);
+		CORBA_exception_free (&ev);
 		return o;
-	} else
+	} else {
+		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
+	}
 }
 
 static void
 gnome_container_destroy (GtkObject *object)
 {
+	GnomeContainer *container = GNOME_CONTAINER (object);
+	GList *l;
+
+	/*
+	 * Destroy all the ClientSites.
+	 */
+	for (l = container->client_sites; l != NULL; l = l->next) {
+		GnomeClientSite *client_site = GNOME_CLIENT_SITE (l->data);
+
+		gnome_object_destroy (GNOME_OBJECT (client_site));
+	}
+	
 	GTK_OBJECT_CLASS (gnome_container_parent_class)->destroy (object);
 }
 
@@ -292,6 +311,17 @@ gnome_container_get_moniker (GnomeContainer *container)
 	return container->moniker;
 }
 
+static void
+gnome_container_client_site_destroy_cb (GnomeClientSite *client_site, gpointer data)
+{
+	GnomeContainer *container = GNOME_CONTAINER (data);
+
+	/*
+	 * Remove this client site from our list.
+	 */
+	container->client_sites = g_list_remove (container->client_sites, client_site);
+}
+
 /**
  * gnome_container_add:
  * @container: The object to operate on.
@@ -308,8 +338,10 @@ gnome_container_add (GnomeContainer *container, GnomeObject *client_site)
 	g_return_if_fail (GNOME_IS_CONTAINER (container));
 	g_return_if_fail (GNOME_IS_OBJECT (client_site));
 
-	gtk_object_ref (GTK_OBJECT (client_site));
 	container->client_sites = g_list_prepend (container->client_sites, client_site);
+
+	gtk_signal_connect (GTK_OBJECT (client_site), "destroy",
+			    GTK_SIGNAL_FUNC (gnome_container_client_site_destroy_cb), client_site);
 }
 
 /**

@@ -278,15 +278,21 @@ static GNOME_ProgressiveDataSink
 create_gnome_progressive_data_sink (GnomeObject *object)
 {
 	POA_GNOME_ProgressiveDataSink *servant;
+	CORBA_Environment ev;
 
 	servant = (POA_GNOME_ProgressiveDataSink *)g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_progressive_data_sink_vepv;
-	POA_GNOME_ProgressiveDataSink__init ((PortableServer_Servant) servant, &object->ev);
-	if (object->ev._major != CORBA_NO_EXCEPTION){
+
+	CORBA_exception_init (&ev);
+
+	POA_GNOME_ProgressiveDataSink__init ((PortableServer_Servant) servant, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
+		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
 	}
 
+	CORBA_exception_free (&ev);
 	return (GNOME_ProgressiveDataSink) gnome_object_activate_servant (object, servant);
 } 
 

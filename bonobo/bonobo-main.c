@@ -19,6 +19,43 @@ CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;
 PortableServer_POAManager __bonobo_poa_manager = NULL;
 
+/**
+ * bonobo_orb:
+ *
+ * Returns: The ORB used for this Bonobo application.  The ORB
+ * is created in bonobo_init().
+ */
+CORBA_ORB
+bonobo_orb (void)
+{
+	return __bonobo_orb;
+}
+
+/**
+ * bonobo_poa:
+ *
+ * Returns: The POA used for this Bonobo application.  The POA
+ * is created when bonobo_init() is called.
+ */
+PortableServer_POA
+bonobo_poa (void)
+{
+	return __bonobo_poa;
+}
+
+/**
+ * bonobo_poa_manager:
+ *
+ * Returns: The POA Manager used for this Bonobo application.  The POA
+ * Manager is created when bonobo_init() is called, but it is not
+ * activated until bonobo_main() is called.
+ */
+PortableServer_POAManager
+bonobo_poa_manager (void)
+{
+	return __bonobo_poa_manager;
+}
+
 static int
 bonobo_x_error_handler (Display *display, XErrorEvent *error)
 {
@@ -28,16 +65,14 @@ bonobo_x_error_handler (Display *display, XErrorEvent *error)
 		return 0;
 
 	/*
-	 * If we got a Bad Drawable, we ignore it for now.  FIXME: We
-	 * need to somehow distinguish real errors from
-	 * X-server-induced errors.  Keeping a list of windows for
-	 * which we will ignore BadDrawables would be a good idea.
+	 * If we got a BadDrawable or a BadWindow, we ignore it for
+	 * now.  FIXME: We need to somehow distinguish real errors
+	 * from X-server-induced errors.  Keeping a list of windows
+	 * for which we will ignore BadDrawables would be a good idea.
 	 */
-#if 0
 	if (error->error_code == BadDrawable ||
 	    error->error_code == BadWindow)
 		return 0;
-#endif
 
 	/*
 	 * If it wasn't a BadDrawable error, we abort.
@@ -141,6 +176,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
  *
  * Activates the Bonobo POA manager registered by bonobo_init
  * This should be called at the end of application initialization.
+ * You do not need to call this function if you use bonobo_main().
  * 
  * Returns %TRUE on success, or %FALSE on failure.
  */
@@ -167,3 +203,15 @@ bonobo_activate (void)
 	return TRUE;
 }
 
+
+/**
+ * bonobo_main:
+ * 
+ * Activates the Bonobo POA Manager and enters the main event loop.
+ */
+void
+bonobo_main (void)
+{
+	bonobo_activate ();
+	gtk_main ();
+}

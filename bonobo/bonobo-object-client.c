@@ -341,8 +341,12 @@ static void
 gnome_object_client_destroy (GtkObject *object)
 {
 	GnomeObject *gnome_object = GNOME_OBJECT (object);
+	CORBA_Environment ev;
 
-	GNOME_Unknown_unref (gnome_object_corba_objref (gnome_object), &gnome_object->ev);
+	CORBA_exception_init (&ev);
+	GNOME_Unknown_unref (gnome_object_corba_objref (gnome_object), &ev);
+	CORBA_exception_free (&ev);
+
 	GTK_OBJECT_CLASS (gnome_object_client_parent_class)->destroy (object);
 }
 

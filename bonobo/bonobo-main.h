@@ -7,19 +7,15 @@
 #include <gtk/gtkobject.h>
 #include <bonobo/bonobo.h>
 
-gboolean   bonobo_init           (CORBA_ORB orb,
-				  PortableServer_POA poa,
-				  PortableServer_POAManager manager);
-gboolean   bonobo_activate	 (void);
-void	   bonobo_setup_x_error_handler (void);
+gboolean		    bonobo_init			 (CORBA_ORB orb,
+							  PortableServer_POA poa,
+							  PortableServer_POAManager manager);
+void			    bonobo_main			 (void);
+gboolean		    bonobo_activate		 (void);
+void			    bonobo_setup_x_error_handler (void);
 
-
-extern CORBA_ORB                 __bonobo_orb;
-extern PortableServer_POA        __bonobo_poa;
-extern PortableServer_POAManager __bonobo_poa_manager;
-
-#define bonobo_orb() __bonobo_orb
-#define bonobo_poa() __bonobo_poa
-#define bonobo_poa_manager() __bonobo_poa_manager
+CORBA_ORB		    bonobo_orb			 (void);
+PortableServer_POA	    bonobo_poa			 (void);
+PortableServer_POAManager  bonobo_poa_manager		 (void);
 
 #endif  __GNOME_MAIN_H__

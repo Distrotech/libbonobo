@@ -211,14 +211,21 @@ static GNOME_PersistStream
 create_gnome_persist_stream (GnomeObject *object)
 {
 	POA_GNOME_PersistStream *servant;
+	CORBA_Environment ev;
 
 	servant = (POA_GNOME_PersistStream *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_persist_stream_vepv;
-	POA_GNOME_PersistStream__init ((PortableServer_Servant) servant, &object->ev);
-	if (object->ev._major != CORBA_NO_EXCEPTION){
+
+	CORBA_exception_init (&ev);
+
+	POA_GNOME_PersistStream__init ((PortableServer_Servant) servant, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
+		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
 	}
+
+	CORBA_exception_free (&ev);
 	return (GNOME_PersistStream) gnome_object_activate_servant (object, servant);
 }
 

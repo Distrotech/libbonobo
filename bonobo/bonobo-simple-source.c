@@ -170,16 +170,21 @@ static GNOME_SimpleDataSource
 create_gnome_simple_data_source (GnomeObject *object)
 {
 	POA_GNOME_SimpleDataSource *servant;
+	CORBA_Environment ev;
 	CORBA_Object o;
 
 	servant = (POA_GNOME_SimpleDataSource *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_simple_data_source_vepv;
-	POA_GNOME_SimpleDataSource__init ((PortableServer_Servant) servant, &object->ev);
-	if (object->ev._major != CORBA_NO_EXCEPTION){
+
+	CORBA_exception_init (&ev);
+	POA_GNOME_SimpleDataSource__init ((PortableServer_Servant) servant, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
+		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
 	}
 
+	CORBA_exception_free (&ev);
 	return (GNOME_SimpleDataSource) gnome_object_activate_servant (object, servant);
 } /* create_gnome_simple_data_source */
 

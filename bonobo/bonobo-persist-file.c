@@ -26,7 +26,7 @@ impl_get_current_file (PortableServer_Servant servant, CORBA_Environment *ev)
 	GnomePersistFile *pfile = GNOME_PERSIST_FILE (object);
 
 	/* if our persist_file has a filename with any length, return it */
-	if (pfile->filename && strlen(pfile->filename))
+	if (pfile->filename && strlen (pfile->filename))
 		return CORBA_string_dup ((CORBA_char*)pfile->filename);
 	else
 	{
@@ -60,7 +60,7 @@ impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
 
 static void
 impl_load (PortableServer_Servant servant,
-	   const CORBA_char *filename,
+	   CORBA_char *filename,
 	   CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -84,7 +84,7 @@ impl_load (PortableServer_Servant servant,
 
 static void
 impl_save (PortableServer_Servant servant,
-	   const CORBA_char *filename,
+	   CORBA_char *filename,
 	   CORBA_Environment *ev)
 {
 	GnomeObject *object = gnome_object_from_servant (servant);
@@ -219,14 +219,18 @@ static GNOME_PersistFile
 create_gnome_persist_file (GnomeObject *object)
 {
 	POA_GNOME_PersistFile *servant;
+	CORBA_Environment ev;
 
 	servant = (POA_GNOME_PersistFile *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_persist_file_vepv;
-	POA_GNOME_PersistFile__init ((PortableServer_Servant) servant, &object->ev);
-	if (object->ev._major != CORBA_NO_EXCEPTION){
+	POA_GNOME_PersistFile__init ((PortableServer_Servant) servant, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);
+		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;
 	}
+
+	CORBA_exception_free (&ev);
 	return (GNOME_PersistFile) gnome_object_activate_servant (object, servant);
 }
 
