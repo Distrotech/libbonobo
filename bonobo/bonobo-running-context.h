@@ -28,7 +28,10 @@ typedef struct {
 	void (*last_unref) (void);
 } BonoboRunningContextClass;
 
-BonoboObject *bonobo_running_context_new (void);
+BonoboObject *bonobo_running_context_new             (void);
+BonoboObject *bonobo_context_running_get             (void);
+void          bonobo_running_context_at_exit_unref   (BonoboObject *object);
+void          bonobo_running_context_auto_exit_unref (BonoboObject *object);
 
 /*
  *   This interface is private, and purely for speed

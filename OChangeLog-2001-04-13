@@ -1,3 +1,30 @@
+2001-01-16  Dietmar Maurer  <dietmar@ximian.com>
+
+	* samples/controls/bonobo-clock-control.c (get/set_prop): add the
+	missing CORBA_Environment.
+
+	* samples/controls/bonobo-calculator-control.c (get/set_prop): add the
+	missing CORBA_Environment.
+
+	* monikers/moniker-test.c (display_as_control): unref the ui
+	container.
+
+	* components/selector/bonobo-selector.c (get/set_prop): added
+	exceptions.
+
+	* samples/compound-doc/paint-component-simple.c
+	(init_simple_paint_factory): use the new unref code.
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c
+	(init_bonobo_audio_ulaw_factory): use the new unref code.
+	
+	* components/text-plain/bonobo-text-plain.c
+	(init_bonobo_text_plain_factory): use the new unref code.
+
+	* bonobo/bonobo-running-context.c
+	(bonobo_running_context_at_exit_unref): impl.
+	(bonobo_running_context_auto_exit_unref): impl.
+
 2001-01-15  Eskil Heyn Olsen  <eskil@eazel.com>
 
 	* monikers/Makefile.am:

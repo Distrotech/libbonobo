@@ -9,6 +9,7 @@
  */
 #include <config.h>
 #include <stdio.h>
+#include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
 
 #include <bonobo/bonobo-context.h>
@@ -437,4 +438,37 @@ BonoboObject *
 bonobo_context_running_get (void)
 {
 	return bonobo_running_context_new ();
+}
+
+static void
+last_unref_exit_cb (gpointer      context,
+		    BonoboObject *object)
+{
+	bonobo_object_unref (BONOBO_OBJECT (object));
+	gtk_main_quit ();
+}
+
+static void
+last_unref_cb (gpointer      context,
+	       BonoboObject *object)
+{
+	bonobo_object_unref (BONOBO_OBJECT (object));
+}
+
+void 
+bonobo_running_context_at_exit_unref (BonoboObject *object)
+{
+        gtk_signal_connect (GTK_OBJECT (bonobo_context_running_get ()),
+			    "last_unref",
+			    GTK_SIGNAL_FUNC (last_unref_cb),
+			    object);
+}
+
+void 
+bonobo_running_context_auto_exit_unref (BonoboObject *object)
+{
+        gtk_signal_connect (GTK_OBJECT (bonobo_context_running_get ()),
+			    "last_unref",
+			    GTK_SIGNAL_FUNC (last_unref_exit_cb),
+			    object);
 }
