@@ -1,6 +1,5 @@
 #include <config.h>
-#include "bonobo.h"
-#include "gnome-main.h"
+#include <bonobo/gnome-main.h>
 
 CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;
@@ -19,7 +18,7 @@ PortableServer_POAManager __bonobo_poa_manager;
  * Returns %TRUE on success, or %FALSE on failure.
  */
 gboolean
-bonobo_init (CORBA_orb orb, PortableServer_POA poa, PortableServer_POAManager manager)
+bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager manager)
 {
 	CORBA_Environment ev;
 	
@@ -28,7 +27,7 @@ bonobo_init (CORBA_orb orb, PortableServer_POA poa, PortableServer_POAManager ma
 	CORBA_exception_init (&ev);
 	
 	if (poa == CORBA_OBJECT_NIL){
-		poa = CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
+		poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 		if (ev._major != CORBA_NO_EXCEPTION){
 			g_warning ("Can not resolve initial reference to RootPOA");
 			CORBA_exception_free (&ev);
@@ -36,7 +35,7 @@ bonobo_init (CORBA_orb orb, PortableServer_POA poa, PortableServer_POAManager ma
 		}
 		
 		if (manager == CORBA_OBJECT_NIL){
-			manager = PortableServer_POA__get_the_POAManager (&poa, &ev);
+			manager = PortableServer_POA__get_the_POAManager (poa, &ev);
 			if (ev._major != CORBA_NO_EXCEPTION){
 				g_warning ("Can not get the POA manager");
 				CORBA_exception_free (&ev);
@@ -45,7 +44,12 @@ bonobo_init (CORBA_orb orb, PortableServer_POA poa, PortableServer_POAManager ma
 		}
 	}
 
+	PortableServer_POAManager_activate (manager, &ev);
 	__bonobo_orb = orb;
 	__bonobo_poa = poa;
 	__bonobo_poa_manager = manager;
+
+	return TRUE;
 }
+
+

@@ -8,8 +8,6 @@
 
 #include "gnome-object.idl"
 
-module GNOME {
-
 #include "base.idl"
 
 #include "storage.idl"
@@ -23,6 +21,4 @@ module GNOME {
 #include "clientsite.idl"
 
 #include "bobject.idl"
-
-};
 

@@ -7,7 +7,10 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
-#include "gnome-object.h"
+#include <bonobo/gnome-main.h>
+#include <bonobo/gnome-object.h>
+#include <libgnorba/gnorba.h>
+#include "bonobo.h"
 
 enum {
 	TEST,
@@ -17,17 +20,18 @@ enum {
 static guint gnome_object_signals [LAST_SIGNAL];
 static GtkObjectClass *gnome_object_parent_class;
 
-static GHashTable *mapping;
+static GHashTable *object_to_servant;
+static GHashTable *servant_to_object;
 
 GnomeObject *
-gnome_object_from_servant (POA_GNOME_object *servant)
+gnome_object_from_servant (PortableServer_Servant servant)
 {
 	g_return_val_if_fail (servant != NULL, NULL);
 
-	if (!mapping)
+	if (!servant_to_object)
 		return NULL;
 	
-	return g_hash_table_lookup (mapping, servant);
+	return g_hash_table_lookup (servant_to_object, servant);
 }
 
 void
@@ -71,15 +75,15 @@ gnome_object_drop_binding (GnomeObject *object)
 }
 
 static void
-impl_GNOME_object__destroy (POA_GNOME_object *servant, CORBA_Environment *ev)
+impl_GNOME_object__destroy (PortableServer_Servant servant, CORBA_Environment *ev)
 {
-	POA_GNOME_object__fini((PortableServer_Servant) servant, ev);
+	POA_GNOME_object__fini ((POA_GNOME_object *)servant, ev);
 	gnome_object_drop_binding_by_servant (servant);
 	g_free (servant);
 }
 
 static void
-impl_GNOME_object_ref (POA_GNOME_object *servant, CORBA_Environment *ev)
+impl_GNOME_object_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	GnomeObject *object;
 
@@ -88,7 +92,7 @@ impl_GNOME_object_ref (POA_GNOME_object *servant, CORBA_Environment *ev)
 }
 
 static void
-impl_GNOME_object_unref (POA_GNOME_object *servant, CORBA_Environment *ev)
+impl_GNOME_object_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	GnomeObject *object;
 
@@ -97,8 +101,8 @@ impl_GNOME_object_unref (POA_GNOME_object *servant, CORBA_Environment *ev)
 }
 
 static CORBA_Object
-impl_GNOME_object_query_interface (POA_GNOME_object *servant,
-				   CORBA_char *repoid,
+impl_GNOME_object_query_interface (PortableServer_Servant servant,
+				   const CORBA_char *repoid,
 				   CORBA_Environment *ev)
 {
 	CORBA_Object retval;
@@ -139,7 +143,11 @@ default_test (GnomeObject *object)
 static void
 gnome_object_destroy (GtkObject *object)
 {
-	CORBA_exception_free (GNOME_OBJECT (object)->ev);
+	GnomeObject *gnome_object = GNOME_OBJECT (object);
+	
+	if (gnome_object->object != CORBA_OBJECT_NIL)
+		CORBA_Object_release (gnome_object->object, &gnome_object->ev);
+	CORBA_exception_free (&gnome_object->ev);
 	gnome_object_parent_class->destroy (object);
 }
 
@@ -165,8 +173,10 @@ gnome_object_class_init (GnomeObjectClass *class)
 }
 
 static void
-gnome_object_instance_init (GnomeObject *object)
+gnome_object_instance_init (GtkObject *gtk_object)
 {
+	GnomeObject *object = GNOME_OBJECT (gtk_object);
+	
 	CORBA_exception_init (&object->ev);
 }
 
@@ -191,5 +201,47 @@ gnome_object_get_type (void)
 	}
 
 	return type;
+}
+
+CORBA_Object
+gnome_object_activate_servant (GnomeObject *object, void *servant)
+{
+	CORBA_Object o;
+
+	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (GNOME_IS_OBJECT (object), CORBA_OBJECT_NIL);
+	g_return_val_if_fail (servant != NULL, CORBA_OBJECT_NIL);
+	
+	CORBA_free (PortableServer_POA_activate_object (
+		bonobo_poa (), servant, &object->ev));
+
+	o = PortableServer_POA_servant_to_reference (
+		bonobo_poa(), servant, &object->ev);
+
+	if (o){
+		gnome_object_bind_to_servant (object, servant);
+		return o;
+	} else
+		return CORBA_OBJECT_NIL;
+	
+}
+
+GnomeObject *
+gnome_object_activate_with_repo_id (GoadServerList *list,
+				    const char *repo_id,
+				    GoadActivationFlags flags,
+				    const char **params)
+{
+	CORBA_Object corba_object;
+	GnomeObject *object;
+
+	corba_object = goad_server_activate_with_repo_id (NULL, repo_id, 0, NULL);
+	if (corba_object == CORBA_OBJECT_NIL)
+		return NULL;
+	
+	object = gtk_type_new (gnome_object_get_type ());
+	object->object = corba_object;
+
+	return object;
 }
 

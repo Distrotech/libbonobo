@@ -1,3 +1,6 @@
-interface Container : GNOME::object {
-};
+module GNOME {
 
+	interface Container : GNOME::object {
+
+	};
+};

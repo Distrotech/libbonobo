@@ -10,6 +10,8 @@
  *    Miguel de Icaza (miguel@gnu.org)Xs
  */
 
+module GNOME {
+
 interface ClientSite : GNOME::object {
 
 	/**
@@ -55,6 +57,4 @@ interface ClientSite : GNOME::object {
 	Persist::Status save_object ();
 };
 
-
-
-
+};

@@ -5,7 +5,9 @@
  *     Miguel de Icaza (miguel@gnu.org)
  */
 
-interface base {
-	oneway void ref ();
-	oneway void unref ();
+module GNOME {
+	interface base {
+		oneway void ref ();
+		oneway void unref ();
+	};
 };

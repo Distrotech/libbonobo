@@ -1,7 +1,11 @@
 #ifndef __GNOME_MAIN_H__
 #define __GNOME_MAIN_H__ 1
 
-gboolean   bonobo_init      (CORBA_orb orb,
+#include <libgnome/gnome-defs.h>
+#include <gtk/gtkobject.h>
+#include <bonobo/bonobo.h>
+
+gboolean   bonobo_init      (CORBA_ORB orb,
 			     PortableServer_POA poa,
 			     PortableServer_POAManager manager);
 

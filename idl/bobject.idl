@@ -7,6 +7,8 @@
  * Bonobo Objects are also refered as servers.
  */
 
+module GNOME {
+
 interface View : GNOME::object {
 	typedef unsigned long windowid;
 
@@ -28,7 +30,7 @@ interface View : GNOME::object {
 };
 
 /* Equivalent to IOleObject */
-interface DotObject : GNOME::object {
+interface Component : GNOME::object {
 
 	typedef long Verb;
 	const Verb PRIMARY = 0; // Action invoked when user double clicks on
@@ -169,7 +171,7 @@ interface DotObject : GNOME::object {
 
 };
 
-interface InPlaceObject : DotObject {
+interface InPlaceComponent : Component {
 	/**
 	 * deactivate:
 	 *
@@ -208,7 +210,7 @@ interface InPlaceObject : DotObject {
 	void status_notify (in Status status);
 };
 
-interface InPlaceActiveObject : GNOME::object {
+interface InPlaceActiveComponent : Component {
 	/**
 	 * frame_window_activate_notify:
 	 * @state: TRUE if frame window has been activated.
@@ -220,4 +222,6 @@ interface InPlaceActiveObject : GNOME::object {
 	 * @state: TRUE if the document window has been activated
 	 */
 	void doc_window_activated_notify (in boolean state);
+};
+
 };

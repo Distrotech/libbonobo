@@ -14,174 +14,176 @@
  *
  */
 
-interface Stream : GNOME::object {
-	/**
-	 * read:
-	 * @count:  number of bytes to read
-	 * @buffer: the buffer where the data is returned
-	 */
-	long read     (in long count, out string buffer);
+module GNOME {
+
+	interface Stream : object {
+		/**
+		 * read:
+		 * @count:  number of bytes to read
+		 * @buffer: the buffer where the data is returned
+		 */
+		long read     (in long count, out string buffer);
 	
-	/**
-	 * write:
-	 * @buffer: a buffer to write
-	 *
-	 * writes the buffer to this stream
-	 */
-	long write    (in string buffer);
+		/**
+		 * write:
+		 * @buffer: a buffer to write
+		 *
+		 * writes the buffer to this stream
+		 */
+		long write    (in string buffer);
 
-	/**
-	 * seek:
-	 * @offset: offset
-	 * @whence: 
-	 *
-	 * Sets the read/write pointer to @offset (relative to @whence)
-	 */
-	void seek     (in long offset, in long whence);
+		/**
+		 * seek:
+		 * @offset: offset
+		 * @whence: 
+		 *
+		 * Sets the read/write pointer to @offset (relative to @whence)
+		 */
+		void seek     (in long offset, in long whence);
 
-	/**
-	 * truncate:
-	 * @lenght: new size of the stream
-	 *
-	 */
-	void truncate (in long length);
+		/**
+		 * truncate:
+		 * @lenght: new size of the stream
+		 *
+		 */
+		void truncate (in long length);
 	
-	/**
-	 * copy_to:
-	 * @path: destination file.
-	 * @bytes: number of bytes to copy, or -1 to copy until eof
-	 * @read: output, how many bytes were read.
-	 * @write: output, how many bytes were written.
-	 *
-	 * Copies @bytes bytes (or until EOF if @bytes is -1) starting
-	 * at the current read/write pointer to the component in @dest
-	 * inside the Storage.
-	 */
-	void copy_to  (in string dest, in long bytes, 
-		       inout long read, inout long written);
+		/**
+		 * copy_to:
+		 * @path: destination file.
+		 * @bytes: number of bytes to copy, or -1 to copy until eof
+		 * @read: output, how many bytes were read.
+		 * @write: output, how many bytes were written.
+		 *
+		 * Copies @bytes bytes (or until EOF if @bytes is -1) starting
+		 * at the current read/write pointer to the component in @dest
+		 * inside the Storage.
+		 */
+		void copy_to  (in string dest, in long bytes, 
+			       inout long read, inout long written);
 
-	/**
-	 * commit;
-	 *
-	 * Commits any pending changes to the Storage
-	 */
-	void commid ();
+		/**
+		 * commit;
+		 *
+		 * Commits any pending changes to the Storage
+		 */
+		void commid ();
 
-	/**
-	 * lock_region:
-	 * 
-	 */
+		/**
+		 * lock_region:
+		 * 
+		 */
 
-	/**
-	 * unlock_region:
-	 *
-	 */
-};
+		/**
+		 * unlock_region:
+		 *
+		 */
+	};
 
-interface Storage : GNOME::object {
+	interface Storage : GNOME::object {
+		
+		typedef long OpenMode;
+		const OpenMode READ  = 1;
+		const OpenMode WRITE = 2;
+		const OpenMode DENY_READ = 4;
+		const OpenMode DENY_WRITE = 8;
 
-	typedef long OpenMode;
-	const OpenMode READ  = 1;
-	const OpenMode WRITE = 2;
-	const OpenMode DENY_READ = 4;
-	const OpenMode DENY_WRITE = 8;
+		exception NameExists {};
 
-	exception NameExists {};
+		exception NotFound {};
 
-	exception NotFound {};
+		exception NoPermission {};
 
-	exception NoPermission {};
+		typedef sequence<string> directory_list;
 
-	typedef sequence<string> directory_list;
+		/**
+		 * create_stream:
+		 * @path: path of the Stream to create
+		 * @mode: creation flags
+		 *
+		 * Creates a stream inside the Storage.
+		 */
+		Stream create_stream (in string path) 
+			raises (NameExists);
 
-	/**
-	 * create_stream:
-	 * @path: path of the Stream to create
-	 * @mode: creation flags
-	 *
-	 * Creates a stream inside the Storage.
-	 */
-	Stream create_stream (in string path) 
-		raises (NameExists);
+		/**
+		 * open_stream:
+		 * @path: path of the stream to open
+		 * @mode: open flags
+		 *
+		 * Opens a Stream whose name is @path.
+		 */
+		Stream open_stream   (in string path, in OpenMode mode)
+			raises (NotFound, NoPermission);
 
-	/**
-	 * open_stream:
-	 * @path: path of the stream to open
-	 * @mode: open flags
-	 *
-	 * Opens a Stream whose name is @path.
-	 */
-	Stream open_stream   (in string path, in OpenMode mode)
-		raises (NotFound, NoPermission);
-
-	/**
-	 * create_storage:
-	 * @path: path of the storage root directory
-	 * 
-	 * Creates a new storage whose root directory will be
-	 * path.
-	 */
-	Storage create_storage (in string path) 
-		raises (NameExists);
+		/**
+		 * create_storage:
+		 * @path: path of the storage root directory
+		 * 
+		 * Creates a new storage whose root directory will be
+		 * path.
+		 */
+		Storage create_storage (in string path) 
+			raises (NameExists);
 	
-	/**
-	 * open_storage:
-	 * @path: path of the storage to open.
-	 * @mode: open mode.
-	 * 
-	 * Returns a storage object for @path.
-	 */
-	Storage open_storage   (in string path, in OpenMode mode)
-		raises (NotFound, NoPermission);
+		/**
+		 * open_storage:
+		 * @path: path of the storage to open.
+		 * @mode: open mode.
+		 * 
+		 * Returns a storage object for @path.
+		 */
+		Storage open_storage   (in string path, in OpenMode mode)
+			raises (NotFound, NoPermission);
 
-	/** 
-	 * copy_to:
-	 * @target: where to copy this storage to.
-	 *
-	 * Copies this storages contents to the @target storage
-	 */
-	void copy_to (in Storage target);
+		/** 
+		 * copy_to:
+		 * @target: where to copy this storage to.
+		 *
+		 * Copies this storages contents to the @target storage
+		 */
+		void copy_to (in Storage target);
 
-	/** 
-	 * rename:
-	 * @path_name: element name to rename
-	 * @new_path_name: new name we want to use
-	 *
-	 * Renames a Stream or Storage component inside a Storage.
-	 */
-	void rename (in string path_name, in string new_path_name)
-		raises (NameExists, NotFound);
+		/** 
+		 * rename:
+		 * @path_name: element name to rename
+		 * @new_path_name: new name we want to use
+		 *
+		 * Renames a Stream or Storage component inside a Storage.
+		 */
+		void rename (in string path_name, in string new_path_name)
+			raises (NameExists, NotFound);
 
-	/**
-	 * commit:
-	 * 
-	 * Commits any pending changes to the Storage since it was
-	 * opened.  This operation is syncronous.
-	 */
+		/**
+		 * commit:
+		 * 
+		 * Commits any pending changes to the Storage since it was
+		 * opened.  This operation is syncronous.
+		 */
 
-	void commit ();
+		void commit ();
 
-	/**
-	 * list_contents:
-	 * @path: path that we want to examine.
-	 *
-	 * Returns a list of all the Storage and Streams available
-	 * at @path.
-	 */
-	directory_list list_contents (in string path)
-		raises (NotFound);
+		/**
+		 * list_contents:
+		 * @path: path that we want to examine.
+		 *
+		 * Returns a list of all the Storage and Streams available
+		 * at @path.
+		 */
+		directory_list list_contents (in string path)
+			raises (NotFound);
 
 	
-	/**
-	 * destroy:
-	 * @path: path to the element to destroy.
-	 * 
-	 * Destroys the element pointed to by @path.  The element
-	 * can be a Storage or a Stream.
-	 */
-	void destroy (in string path)
-		raises (NotFound);
-
+		/**
+		 * destroy:
+		 * @path: path to the element to destroy.
+		 * 
+		 * Destroys the element pointed to by @path.  The element
+		 * can be a Storage or a Stream.
+		 */
+		void destroy (in string path)
+			raises (NotFound);
+	};
 };
 
 

@@ -5,52 +5,55 @@
  *    Miguel de Icaza (miguel@gnu.org)
  */
 
-interface Persist : GNOME::object {
-	enum Status {
-		SAVE_OK,
-		SAVE_CANCEL,
-		SAVE_FAILED
+module GNOME {
+
+	interface Persist : object {
+		enum Status {
+			SAVE_OK,
+			SAVE_CANCEL,
+			SAVE_FAILED
+		};
+	};
+	
+	/*
+	 * PersistFile interface is usually implemented by containers
+	 * to request a Linked object to save itself or restore itself
+	 * from a file
+	 */
+	interface PersistFile : Persist {
+		void load (in string path);
+		void save (in string path);
+	
+		boolean is_dirty ();
+	
+		string get_current_file ();
+	
+		/* FIXME: Support SaveComplted? */
+	};
+	
+	interface PersistStorage : Persist {
+		
+		boolean is_dirty ();
+	
+		void load (in Storage storage);
+		void save (in Storage storage);
+	
+		/* FIXME: Support HandsOfStorage and SaveCompleted? */
+	};
+	
+	/*
+	 * This interface is used by items whose only needs are
+	 * to store information in a Stream (monikers are the primary
+	 * users of this).
+	 */
+	interface PersistStream : Persist {
+		boolean is_dirty ();
+		
+		void load (in Stream stream);
+		void save (in Stream stream);
 	};
 };
-
-/*
- * PersistFile interface is usually implemented by containers
- * to request a Linked object to save itself or restore itself
- * from a file
- */
-interface PersistFile : Persist {
-	void load (in string path);
-	void save (in string path);
-
-	boolean is_dirty ();
-
-	string get_current_file ();
-
-	/* FIXME: Support SaveComplted? */
-};
-
-interface PersistStorage : Persist {
 	
-	boolean is_dirty ();
-
-	void load (in Storage storage);
-	void save (in Storage storage);
-
-	/* FIXME: Support HandsOfStorage and SaveCompleted? */
-};
-
-/*
- * This interface is used by items whose only needs are
- * to store information in a Stream (monikers are the primary
- * users of this).
- */
-interface PersistStream : Persist {
-	boolean is_dirty ();
-	
-	void load (in Stream stream);
-	void save (in Stream stream);
-};
-
 
 
 

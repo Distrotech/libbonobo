@@ -71,7 +71,7 @@ interface InPlaceFrame : InPlaceUIWindow {
 	 * that menus are about to be merged, toolbars merged, space
 	 * requested.
 	 */
-        void set_active_object (in InPlaceDotObject object, boolean active);
+        void set_active_object (in InPlaceComponent object, boolean active);
 
 	/** 
 	 * dock:
