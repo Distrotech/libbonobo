@@ -1,3 +1,6 @@
+2000-01-28 Elliot Lee <sopwith@redhat.com>
+	* bonobo/bonobo.h: Add multiple include guard.
+
 2000-01-26  Martijn van Beers  <martijn@earthling.net>
 
 	* bonobo/bonobo-control-frame.c: s/control/container/ in the
