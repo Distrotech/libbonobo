@@ -5,11 +5,10 @@
 #
 # Created through msgmerge on the HEAD translation, hence the
 # POT creation date is more recent than the PO revision -- Telsa
-
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-05-20 11:50+0200\n"
+"POT-Creation-Date: 2003-06-12 18:00+0100\n"
 "PO-Revision-Date: 2003-05-19 18:05+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"

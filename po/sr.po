@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-05-19 13:42+0100\n"
+"POT-Creation-Date: 2003-06-12 18:00+0100\n"
 "PO-Revision-Date: 2003-05-02 01:10+0100\n"
 "Last-Translator: Вељко М. Станојевић <veljko@vms.homelinux.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-@nongnu.org>\n"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo VERSION\n"
-"POT-Creation-Date: 2003-05-19 13:42+0100\n"
+"POT-Creation-Date: 2003-06-12 18:00+0100\n"
 "PO-Revision-Date: 2003-01-16 08:39+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
