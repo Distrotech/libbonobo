@@ -132,6 +132,25 @@ impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
 			     NULL);
 }
 
+/*
+ * if the mask ends with a colon, we do exact compares - else we only check 
+ * if the mask is a prefix of name.
+ */
+static gboolean
+event_match (const char *name, const char *mask)
+{
+	int i = 0;
+
+	while (name [i] && mask [i] && name [i] == mask [i])
+		i++;
+
+	if ((mask [i] == '\0' && (!i || mask [i - 1] != ':')) || 
+	    (name [i] == '\0' && mask [i] == ':' && mask [i + 1] == '\0'))
+		return TRUE;
+
+	return FALSE;
+} 
+
 /**
  * bonobo_event_source_notify_listeners:
  * @event_source: the Event Source that will emit the event.
@@ -168,7 +187,7 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 		ListenerDesc *desc = (ListenerDesc *) l->data;
 
 		if (desc->event_mask == NULL || 
-		    strstr (event_name, desc->event_mask))
+		    event_match (event_name, desc->event_mask))
 			notify = g_slist_prepend (notify, desc->listener);
 	}
 

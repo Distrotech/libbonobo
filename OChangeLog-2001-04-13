@@ -1,3 +1,14 @@
+2001-03-20  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-event-source.c
+	(event_match): impl. a new function to compare event names with
+	event masks.
+	
+	(bonobo_event_source_notify_listeners): use the new function
+	instead of strstr().
+
+	* tests/test-event-source.c: impl. regression tests for event sources
+
 2001-03-17  Ravi Pratap  <ravi@che.iitm.ac.in>
 
 	* tests/test-container.c (verb_AddPDF_cb): Commented out g_error;
