@@ -318,7 +318,39 @@ module Bonobo {
        		void toolbar_removed    (in string path);
        		void toolbar_overridden (in string path);
        		void toolbar_reinstated (in string path);
-       	};
+
+		/*
+		 * Contributing to the top-level app's Docks.
+		 */
+ 
+		enum DockPlacement {
+			GnomeDockTop,
+			GnomeDockBottom,
+			GnomeDockRight,
+			GnomeDockLeft,
+			GnomeDockFloating
+		};
+
+		boolean dock_add (in UIHandler      containee,
+				  in string         name,
+				  in Control        control,
+				  in long           behavior,
+				  in DockPlacement  placement,
+				  in long           band_num,
+				  in long           band_position,
+				  in long           offset);
+
+		boolean dock_remove (in UIHandler      containee,
+				     in string         name);
+
+		boolean dock_set_sensitive (in UIHandler  containee,
+					    in string     name,
+					    in boolean    sensitivity);
+					    
+		boolean dock_get_sensitive (in UIHandler  containee,
+					    in string     name);
+
+      	};
        
 } ;
 

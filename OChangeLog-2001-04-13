@@ -1,3 +1,139 @@
+2000-02-15  Nat Friedman  <nat@helixcode.com>
+
+	* samples/compound-doc/sample-container.c (component_add_view):
+ 	Pass the UIHandler to the bonobo_client_site_new_view method.
+	(component_add_view): Removed the set_ui_handler.
+
+	* samples/controls/sample-control-container.c: Removed all the
+ 	table bullshit.
+
+	* samples/controls/bonobo-calculator-control.c: Made it use
+ 	automerging for the menu.
+
+	* idl/bonobo-ui-handler.idl (Bonobo::UIHandler): Added the dock
+ 	functions.
+
+	* idl/bonobo-storage.idl (Bonobo::Stream): Added the NoPermission
+ 	exception and the NotSupported exception.  Made copy_to, truncate,
+ 	read and write raise NoPermission.
+
+	* idl/bonobo-control.idl (Bonobo::Control): Added the State type
+ 	and the set_state method.
+
+	* bonobo/bonobo-widget.c (bonobo_widget_launch_component): Made
+ 	the object_desc arg const.
+	(bonobo_widget_construct_control_from_objref): Added the uih arg.
+  	Turn on autoactivation.
+	(bonobo_widget_construct_control): Added the uih arg.
+	(bonobo_widget_new_control_from_objref): Likewise.
+	(bonobo_widget_new_control): Likewise.
+	(bonobo_widget_create_subdoc_object): Likewise.
+	(bonobo_widget_new_subdoc): Likewise.
+
+	* bonobo/bonobo-view.c (bonobo_view_set_ui_handler): Removed,
+ 	since we now create the BonoboUIHandler when the view is created.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_construct): Added
+ 	the uih argument.
+	(bonobo_view_frame_new): Likewise.
+	(bonobo_view_frame_set_ui_handler): Removed.
+	
+	* bonobo/bonobo-ui-handler.c (uih_toplevel_unregister_containee):
+ 	Remove all the containee's dock items as well.
+
+	* bonobo/bonobo-uih-dock.c: New file.  Implements a Bonobo
+ 	GnomeDock proxy so that controls can embed/remove dock items.
+
+	* bonobo/bonobo-uih-toolbar.c: New file.  Moved all
+ 	bonobo-ui-handler toolbar code here.
+
+	* bonobo/bonobo-uih-menu.c: New file.  Moved all bonobo-ui-handler
+ 	menu code here.
+
+	* bonobo/bonobo-uih-private.h: New file to contain all of the
+ 	shared private data structures and prototypes for all the separate
+ 	BonoboUIHandler files.
+
+	* bonobo/bonobo-control.h: Reformatted.
+
+	* bonobo/bonobo-control.c (BonoboControlPrivate): Removed
+ 	plug_destroy_id.  Added xid_received, automerge, active, menus,
+ 	toolbars, and uih.  xid_received is TRUE if this control has
+ 	already received an XID.  automerge is TRUE if we're supposed to
+ 	automatically merge/unmerge menu/toolbar items when we are
+ 	activated/deactivated.  active is TRUE if we are activated, FALSE
+ 	otherwise.  menus and toolbars are the menu/toolbar trees we
+ 	should merge when we are activated.  uih is a BonoboUIHandler
+ 	which we create when we are activated.
+	(bonobo_control_plug_destroy_event_cb): Renamed from
+ 	bonobo_control_plug_destroy_cb.
+	(bonobo_control_plug_destroy_cb): New function to catch "destroy".
+	(bonobo_control_auto_merge): New function to automatically merge
+ 	menus when we get an activation notification from our container.
+	(bonobo_control_auto_unmerge): New function.
+	(impl_Bonobo_Control_activate): If automerge is on, call
+ 	bonobo_control_auto_merge or bonobo_control_auto_unmerge.
+	(impl_Bonobo_Control_set_window): Moved the non-local case to the
+ 	beginning of the function, to make it easier to read for me.
+  	Connect to the "destroy" signal on the plug.  If we're receiving
+ 	an XID and have already received one in the past, call
+ 	gtk_widget_reparent.
+	(bonobo_control_gtk_state_from_corba): New function.
+	(impl_Bonobo_Control_set_state): Likewise.
+	(bonobo_control_set_automerge): Likewise.
+	(bonobo_control_get_automerge): Likewise.
+	(bonobo_control_set_menus_with_data): Likewise.
+	(bonobo_control_set_menus): Likewise.
+	(bonobo_control_get_menus): Likewise.
+	(bonobo_control_set_toolbars_with_data): Likewise.
+	(bonobo_control_set_toolbars): Likewise.
+	(bonobo_control_get_toolbars): Likewise.
+	(bonobo_control_destroy): Don't disconnect the plug signal.
+	(bonobo_control_get_epv): Setup the set_state method.
+	(bonobo_control_set_ui_handler): Removed, as the control now
+ 	automatically creates its BonoboUIHandler when it is created.
+
+	* bonobo/bonobo-control-frame.h: Reformatted.
+
+	* bonobo/bonobo-control-frame.c (BonoboControlFramePrivate): Added
+ 	the autoactivate and autostate fields.  Changed the uih field to
+ 	an object reference.
+	(impl_Bonobo_ControlFrame_get_ui_handler): Just duplicate the uih
+ 	object reference.
+	(bonobo_control_frame_autoactivate_focus_in): New function to
+ 	automatically activate a control when it gets focus iff
+ 	autoactivation is turned on.
+	(bonobo_control_frame_autoactivate_focus_out): New function to
+ 	automatically deactivate a control when it loses focus iff
+ 	autoactivation is turned off.
+	(bonobo_control_frame_socket_state_changed): New signal handler.
+  	When the widget state of the GtkSocket changes, it proxies the
+ 	state change to the control via CORBA.  It does this only if
+ 	autostate proxying is turned on.
+	(bonobo_control_frame_set_remote_window): Call gdk_flush before
+ 	passing the window ID to the control.
+	(bonobo_control_frame_construct): Added the uih argument.  Connect
+ 	to focus_in_event, focus_out_event and state_changed on the
+ 	socket.
+	(bonobo_control_frame_new): Added the uih argument.
+	(bonobo_control_frame_init): Set autostate to TRUE by default.
+	(bonobo_control_frame_set_autoactivate): New function.
+	(bonobo_control_frame_get_autoactivate): Likewise.
+	(bonobo_control_frame_state_to_corba): Likewise.
+	(bonobo_control_frame_control_set_state): Likewise.
+	(bonobo_control_frame_set_autostate): Likewise.
+	(bonobo_control_frame_get_autostate): Likewise.
+	(bonobo_control_frame_set_ui_handler): Removed.
+
+	* bonobo/bonobo-client-site.h: Reformatted.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_new_view_full):
+ 	Added the uih argument.
+	(bonobo_client_site_new_view): Likewise.
+
+	* bonobo/Makefile.am (libbonobo_la_SOURCES): Added
+ 	bonobo-uih-menu.c, bonobo-uih-toolbar.c, bonobo-uih-dock.c
+
 2000-02-15  Matt Loper  <matt@helixcode.com>
 
 	* tools/: New directory; will hold bonobo-related tools.
@@ -27,6 +163,7 @@
 	* bonobo/bonobo-ui-handler.c: Fix allocation of one-two-few bytes.
 
 2000-02-10  Elliot Lee <sopwith@redhat.com>
+
 	* bonobo/bonobo-ui-handler.c: Handle a NULL 'hint' and 'label' for menu items.
 
 2000-02-09  Michael Meeks  <michael@helixcode.com>

@@ -18,6 +18,10 @@ module Bonobo {
 	interface Stream : Unknown {
 		typedef sequence<octet> iobuf;
 
+		exception NoPermission {};
+
+		exception NotSupported {};
+
 		enum SeekType {
 			SEEK_SET,
 			SEEK_CUR,
@@ -29,7 +33,8 @@ module Bonobo {
 		 * @count:  number of bytes to read.
 		 * @buffer: the buffer where the data is returned.
 		 */
-		long read     (in long count, out iobuf buffer);
+		long read     (in long count, out iobuf buffer)
+			raises (NoPermission);
 	
 		/**
 		 * write:
@@ -38,7 +43,8 @@ module Bonobo {
 		 *
 		 * writes the buffer to this stream.
 		 */
-		long write    (in iobuf buffer);
+		long write    (in iobuf buffer)
+			raises (NoPermission);
 
 		/**
 		 * seek:
@@ -49,12 +55,14 @@ module Bonobo {
 		 */
 		long seek     (in long offset, in SeekType whence);
 
+
 		/**
 		 * truncate:
 		 * @length: new size of the stream
 		 *
 		 */
-		void truncate (in long length);
+		void truncate (in long length)
+			raises (NoPermission);
 	
 		/**
 		 * copy_to:
@@ -68,7 +76,9 @@ module Bonobo {
 		 * inside the Storage.
 		 */
 		void copy_to  (in string dest, in long bytes, 
-			       inout long read, inout long written);
+			       inout long read, inout long written)
+			raises (NoPermission);
+		
 
 		/**
 		 * commit:
@@ -97,8 +107,8 @@ module Bonobo {
 		 *
 		 * Returns the length of the stream
 		 */
-
-		long length ();
+		long length ()
+			raises (NotSupported);
 
 		/**
 		 * lock_region:

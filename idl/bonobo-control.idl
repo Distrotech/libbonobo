@@ -123,6 +123,21 @@ interface Control : Bonobo::Unknown {
 	 */
 	void size_request (out short desired_width, out short desired_height);
 
+	enum State {
+		StateNormal,
+		StateActive,
+		StatePrelight,
+		StateSelected,
+		StateInsensitive
+	};
+
+	/**
+	 * set_state:
+	 * @state: The new state of the control.
+	 *
+	 * Set the control's activity state.
+	 */
+	void set_state (in State state);
 };
 
 };
