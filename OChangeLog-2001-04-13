@@ -1,5 +1,9 @@
 2001-02-20  Michael Meeks  <michael@ximian.com>
 
+	* doc/api/bonobo-api.sgml: remove bonobo-moniker-async.
+
+2001-02-20  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-ui-engine.c: Fully API document.
 
 2001-02-20  Jens Finke <jens@gnome.org>
