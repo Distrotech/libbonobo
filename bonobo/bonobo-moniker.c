@@ -364,7 +364,7 @@ impl_set_name (PortableServer_Servant servant,
 {
 	BonoboMoniker *moniker = bonobo_moniker_from_servant (servant);
 
-	return CLASS (moniker)->set_name (moniker, name, ev);
+	CLASS (moniker)->set_name (moniker, name, ev);
 }
 
 static Bonobo_Unknown
