@@ -31,11 +31,11 @@
 #include "bonobo-activation-private.h"
 #include "bonobo-activation-register.h"
 #include "bonobo-activation-version.h"
+#include <netinet/in.h>
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <glib.h>
 #include <netdb.h>
-#include <netinet/in.h>
 #include <popt.h>
 #include <signal.h>
 #include <stdlib.h>
