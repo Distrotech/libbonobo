@@ -10,7 +10,6 @@
 #include <stdarg.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-property-bag-client.h>
-#include <bonobo/bonobo-property-types.h>
 
 /**
  * bonobo_property_bag_client_get_properties:

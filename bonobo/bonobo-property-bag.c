@@ -13,7 +13,6 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-property-bag.h>
 #include <bonobo/bonobo-property.h>
-#include <bonobo/bonobo-property-types.h>
 #include <bonobo/bonobo-persist-stream.h>
 #include <bonobo/bonobo-transient.h>
 
