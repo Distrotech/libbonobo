@@ -186,19 +186,28 @@ create_bag_client (void)
 int
 main (int argc, char **argv)
 {
-	if (argc < 2) {
-		fprintf (stderr, "Usage: %s <IOR of PropertyBag server>\n", *argv);
-		return 1;
-	}
-
 	CORBA_exception_init (&ev);
 
 	if (!bonobo_init (&argc, argv))
 		g_error ("Could not initialize Bonobo");
 
-	pb = CORBA_ORB_string_to_object (orb, argv [1], &ev);
+	{
+		int   size;
+		char  ior [1024];
+		FILE *infile = fopen ("iorfile","rb");
 
-	if (pb == CORBA_OBJECT_NIL) {
+		if (!infile)
+			g_error ("Start the server before running the client");
+
+		size = fread (ior,1,1024,infile);
+		fclose (infile);
+		ior [size] = '\0';   /* insure that string is terminated correctly */
+
+		pb = CORBA_ORB_string_to_object (orb, ior, &ev);
+		g_assert (ev._major == CORBA_NO_EXCEPTION);
+	}
+	
+	if (pb == CORBA_OBJECT_NIL || CORBA_Object_non_existent (pb, &ev)) {
 		g_error ("Could not bind to PropertyBag object");
 		return 1;
 	}

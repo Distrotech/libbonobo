@@ -1,3 +1,16 @@
+2001-09-25  Michael Meeks  <michael@ximian.com>
+
+	* tests/Makefile.am: hook test-properties up to run
+	automaticaly.
+
+	* tests/test-properties.sh: impl.
+
+	* tests/test-properties-client.c (main): read IOR
+	from 'iorfile'.
+
+	* tests/test-properties-server.c (create_bag): dump
+	the IOR into 'iorfile'
+
 2001-09-24  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-property-bag-client.c (MAKE_SET_SIMPLE):

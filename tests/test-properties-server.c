@@ -1,5 +1,6 @@
 #include <config.h>
 #include <stdio.h>
+#include <string.h>
 #include <gobject/gsignal.h>
 #include <libbonobo.h>
 
@@ -176,6 +177,7 @@ create_bag (void)
 	BonoboArg  *def;
 	char       *dstr;
 	CORBA_char *ior;
+	FILE       *iorfile;
 
 	pd->i = 987654321;
 	pd->l = 123456789;
@@ -214,12 +216,14 @@ create_bag (void)
 	bonobo_property_bag_add (pb, "double-test", PROP_DOUBLE_TEST,
 				 BONOBO_ARG_DOUBLE, NULL, dstr, 0);
 
+	iorfile = fopen ("iorfile", "wb");
+
 	/* Print out the IOR for this object. */
 	ior = CORBA_ORB_object_to_string (orb, BONOBO_OBJREF (pb), &ev);
 
 	/* So we can tee the output to compare */
-	fprintf (stderr, "%s\n", ior);
-	fflush (stderr);
+	fwrite (ior, strlen (ior), 1, iorfile);
+	fclose (iorfile);
 
 	CORBA_free (ior);
 }
