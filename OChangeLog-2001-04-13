@@ -1,3 +1,12 @@
+2000-01-26  Martijn van Beers  <martijn@earthling.net>
+
+	* bonobo/bonobo/.cvsignore: s/bonobo/Bonobo/;
+	* bonobo/components/*/Makefile.am: added -I$(top_srcdir)/bonobo to
+	$INCLUDES, so it will compile without the lib headers installed
+	* bonobo/gshell/Makefile.am: ditto
+	* bonobo/samples/*/Makefile.am: ditto
+	* bonobo/tests/Makefile.am: ditto
+
 2000-01-26  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/bonobo-storage.c: include bonobo-object.h
