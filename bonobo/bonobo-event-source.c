@@ -165,6 +165,8 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 	GSList *l, *notify;
 	CORBA_Environment  *ev, temp_ev;
 	const BonoboArg *my_value;
+
+	g_return_if_fail (BONOBO_IS_EVENT_SOURCE (event_source));
 	
 	if (!opt_ev) {
 		CORBA_exception_init (&temp_ev);

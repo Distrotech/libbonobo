@@ -64,7 +64,7 @@ module Bonobo {
 		void    registerComponent   (in string component_name,
 					      in Bonobo::UIComponent component);
 
-		void    deregisterComponent (in string component_name);
+		oneway void deregisterComponent (in string component_name);
 
 		oneway void     freeze      ();
 		oneway void     thaw        ();

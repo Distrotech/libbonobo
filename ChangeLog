@@ -1,3 +1,12 @@
+2002-01-04  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_notify_listeners): add precondition.
+
+2002-01-02  Michael Meeks  <michael@ximian.com>
+
+	* idl/Bonobo_UI.idl: make deregisterComponent oneway.
+
 2002-01-03 John Fleck <jfleck@inkstain.net>
 
 	* configure.in, Makefile.am, doc/Makefile.am, doc/api/Makefile.am
