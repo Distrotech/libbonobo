@@ -44,7 +44,7 @@ getObject (BonoboItemHandler *h, const char *item_name,
         }
                                                                         
         /* we just return ourselves */
-        return bonobo_object_corba_objref (h);
+        return bonobo_object_dup_ref (bonobo_object_corba_objref (h), NULL);
 }
 	</programlisting>
     </informalexample>

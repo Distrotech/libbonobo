@@ -1,3 +1,26 @@
+2003-02-19  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* monikers/bonobo-moniker-std.c (bonobo_std_moniker_factory): idem.
+
+	* monikers/bonobo-moniker-oaf.c (bonobo_moniker_oaf_resolve): idem.
+
+	* monikers/bonobo-moniker-new.c (bonobo_moniker_new_resolve): idem.
+
+	* monikers/bonobo-moniker-item.c (bonobo_moniker_item_resolve): idem.
+
+	* monikers/bonobo-moniker-query.c (bonobo_moniker_query_resolve): idem.
+
+	* monikers/bonobo-moniker-extender-stream.c (bonobo_stream_extender_resolve):
+	Wrap g_warnings and g_messages in #ifdef G_ENABLE_DEBUG / #endif.
+
+2003-02-18  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/api/tmpl/bonobo-item-handler.sgml: Corrected the
+	BonoboItemHandler example to ref() the object being returned.
+
+	* monikers/bonobo-moniker-extender-stream.c (bonobo_stream_extender_resolve):
+	Replace a couple of invalid uses of g_warning with g_message.
+
 2003-02-06  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "id" to ALL_LINGUAS.
