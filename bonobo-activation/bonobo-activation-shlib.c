@@ -30,6 +30,7 @@
 #include <orbit/poa/poa.h>
 
 #include "oaf-plugin.h"
+#include "oaf-i18n.h"
 
 typedef struct
 {
@@ -94,7 +95,8 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
                         char *error_string;
                         OAF_GeneralError *error = OAF_GeneralError__alloc ();
 
-                        error_string = g_strdup_printf ("g_module_open of '%s' failed", filename);
+                        error_string = g_strdup_printf (
+                                _("g_module_open of '%s' failed"), filename);
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                              ex_OAF_GeneralError, error);
@@ -110,8 +112,9 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 
 			g_module_close (gmod);
 
-                        error_string = g_strdup_printf ("Can't find symbol OAF_Plugin_info "
-                                                        "in '%s'", filename);
+                        error_string = g_strdup_printf (
+                                _("Can't find symbol OAF_Plugin_info in '%s'"),
+                                filename);
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                              ex_OAF_GeneralError, error);
@@ -145,8 +148,9 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
                         char *error_string;
                         OAF_GeneralError *error = OAF_GeneralError__alloc ();
 
-                        error_string = g_strdup_printf ("Can't find symbol OAF_Plugin_info "
-                                                        "in '%s'", filename);
+                        error_string = g_strdup_printf (
+                                _("Can't find symbol OAF_Plugin_info in '%s'"),
+                                filename);
                         error->description = CORBA_string_dup (error_string);
                         CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                              ex_OAF_GeneralError, error);
@@ -198,7 +202,16 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 			CORBA_Object_release (retval, ev);
 			retval = new_retval;
 		}
-	}
+	} else {
+                OAF_GeneralError *error = OAF_GeneralError__alloc ();
+                char *error_string = g_strdup_printf (
+                        _("Shlib '%s' didn't contain '%s'"),
+                        filename, iid);
+                error->description = CORBA_string_dup (error_string);
+                CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                     ex_OAF_GeneralError, error);
+                g_free (error_string);
+        }
 
 	return retval;
 }
