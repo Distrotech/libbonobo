@@ -1,3 +1,29 @@
+1999-12-11  Michael Meeks  <mmeeks@gnu.org>
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c (destroy_view),
+	(update_all_views): rename (update_view_foreach): implement.
+	(update_all_views_callbackm pstream_load, progressive_start): update.
+	(view_factory): setup object_data 'view_data' (stream_read): add
+	exception handling. set widget_usize on canvas. add view_activate
+	(embeddable_factory): add "destroy" + "system_exception" handlers.
+	update id to 'embeddable' to match gnorba (embeddable_destroy_cb):
+	implement. (init_bonobo_audio_ulaw_factory): Update to
+	embeddable-factory so it actually works.
+	Misc. stylistic fixes + localise CORBA_Environment & orb.
+	(view_activate_cb): implement.
+
+	* components/audio-ulaw/item-audio.c (item_audio_class_init): use
+	'ItemAudio::EmbeddableData'.
+
+	* components/audio-ulaw/bonobo-audio-ulaw.h: kill views list.
+
+	* samples/controls/bonobo-calculator-control.[ch]: create.
+
+	* samples/controls/Makefile.am: Add calculator sample.
+
+	* samples/controls/sample-control-factory.c (main): Add calculator
+	factory.
+
 1999-12-10  Nat Friedman  <nat@helixcode.com>
 
 	* storage-modules/gnome-storage-efs.c (real_list_contents):
