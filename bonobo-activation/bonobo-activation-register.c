@@ -88,8 +88,11 @@ bonobo_activation_active_server_register (const char *registration_id,
 
 	CORBA_exception_init (&ev);
 
-        g_message ("Register '%s': %p (existant %d)",
-                   registration_id, obj, !CORBA_Object_non_existent (obj, &ev));
+#ifdef BONOBO_ACTIVATION_DEBUG
+        g_message ("About to register '%s': %p%s",
+                   registration_id, obj,
+                   CORBA_Object_non_existent (obj, &ev) ? " (nonexistent)" : "");
+#endif
 
 	actid = bonobo_activation_iid_get ();
 
