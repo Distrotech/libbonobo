@@ -1,3 +1,16 @@
+2001-02-20  Jens Finke <jens@gnome.org>
+
+	* storage-modules/bonobo-storage-fs.c (fs_get_info): Obtain mime
+	type for regular files.
+	(fs_list_contents): Obtain mime type for regular files, fixed
+	directory list creation bug.
+
+	* storage-modules/bonobo-stream-fs.c: Added private struct to hold
+	the mime type for this stream.
+	(fs_finalize): New function.
+	(bonobo_stream_fs_init): New function.
+	(bonobo_stream_create): Obtain mime type.
+	
 2001-02-19  Michael Meeks  <michael@ximian.com>
 
 	* doc/api/Makefile.am (scan): add bonobo-async,
