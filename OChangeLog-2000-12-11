@@ -5,6 +5,11 @@
 
 2000-10-13  Eskil Heyn Olsen  <eskil@eazel.com>
 
+	* components/application-x-gnomine/Makefile.am:
+	Still buildfixing...
+
+2000-10-13  Eskil Heyn Olsen  <eskil@eazel.com>
+
 	* po/POTFILES.in:
 	Still buildfixing...
 
