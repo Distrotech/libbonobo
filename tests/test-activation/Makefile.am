@@ -91,13 +91,6 @@ serverfiles=empty.server broken.server plugin.server
 emptydatadir=$(libdir)/bonobo/servers
 emptydata_DATA=$(serverfiles)
 
-EXTRA_DIST=empty.idl plugin.idl $(serverfiles)
+EXTRA_DIST= test.shempty.idl plugin.idl $(serverfiles)
 
-TESTS_ENVIRONMENT = \
-	TMPDIR="/tmp/orbit-$$USER/tst" \
-	BONOBO_ACTIVATION_DEBUG_OUTPUT="1" \
-	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test/test-activation:$$BONOBO_ACTIVATION_PATH" \
-	PATH="$(top_builddir)/test:$(top_builddir)/activation-server:$$PATH" \
-	LD_LIBRARY_PATH="$(top_builddir)/test/.libs:$$LD_LIBRARY_PATH"
-
-TESTS = bonobo-activation-test bonobo-activation-test-async
+TESTS= test.sh bonobo-activation-test-async

@@ -45,110 +45,56 @@
 
 static GObjectClass *parent_class = NULL;
 
-struct _ChildODInfo {
-	Bonobo_ObjectDirectory obj;
-
-	char *hostname, *username;
-
-	Bonobo_ServerInfoList *list;
-	Bonobo_CacheTime time_list_pulled;
-	GHashTable *by_iid;
-
-	GHashTable *active_servers;	/* It is assumed that accesses to this
-					 * hash table are atomic - i.e. a CORBA 
-                                         * call cannot come in while
-					 * checking a value in this table */
-	Bonobo_ServerStateCache *active_server_list;
-	Bonobo_CacheTime time_active_pulled;
-
-	guchar locked;
-};
-
-static ChildODInfo *
-child_od_info_new (Bonobo_ObjectDirectory obj, CORBA_Environment * ev)
-{
-	ChildODInfo *retval;
-	char *host, *user;
-
-	host = Bonobo_ObjectDirectory__get_hostname (obj, ev);
-	if (ev->_major != CORBA_NO_EXCEPTION)
-		goto errhost;
-
-	user = Bonobo_ObjectDirectory__get_username (obj, ev);
-	if (ev->_major != CORBA_NO_EXCEPTION)
-		goto erruser;
-
-	retval = g_new0 (ChildODInfo, 1);
-
-	retval->obj = CORBA_Object_duplicate (obj, ev);
-	retval->hostname = host;
-	retval->username = user;
-
-	return retval;
-
-      erruser:
-	CORBA_free (host);
-      errhost:
-	return NULL;
-}
-
 static void
-child_od_info_free (ChildODInfo *child, CORBA_Environment *ev)
+directory_info_free (ActivationContext *actx, CORBA_Environment *ev)
 {
-	CORBA_Object_release (child->obj, ev);
-	CORBA_free (child->hostname);
-	CORBA_free (child->username);
+	CORBA_Object_release (actx->obj, ev);
+        actx->obj = CORBA_OBJECT_NIL;
 
-        if (child->by_iid)
-                g_hash_table_destroy (child->by_iid);
-
-        if (child->list) {
-                CORBA_sequence_set_release (child->list, CORBA_TRUE);
-                CORBA_free (child->list);
+        if (actx->by_iid) {
+                g_hash_table_destroy (actx->by_iid);
+                actx->by_iid = NULL;
         }
 
-        if (child->active_servers)
-                g_hash_table_destroy (child->active_servers);
-        CORBA_free (child->active_server_list);
+        if (actx->list) {
+                CORBA_sequence_set_release (actx->list, CORBA_TRUE);
+                CORBA_free (actx->list);
+                actx->list = NULL;
+        }
 
-        memset (child, 0xaa, sizeof (ChildODInfo));
-	g_free (child);
+        if (actx->active_servers)
+                g_hash_table_destroy (actx->active_servers);
+        CORBA_free (actx->active_server_list);
+        actx->active_server_list = NULL;
 }
 
 static void
-child_od_exception (ChildODInfo * child, CORBA_Environment * ev)
-{
-	CORBA_Object_release (child->obj, ev);
-	child->obj = CORBA_OBJECT_NIL;
-}
-
-static void
-child_od_update_active (ChildODInfo *child, CORBA_Environment *ev)
+ac_update_active (ActivationContext *actx, CORBA_Environment *ev)
 {
 	int i;
 	Bonobo_ServerStateCache *cache;
 
 	cache = Bonobo_ObjectDirectory_get_active_servers (
-                child->obj, child->time_active_pulled, ev);
+                actx->obj, actx->time_active_pulled, ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION) {
-		child_od_exception (child, ev);
-		return;
+                CORBA_Object_release (actx->obj, ev);
+                actx->obj = CORBA_OBJECT_NIL;
 	}
 
 	if (cache->_d) {
-		if (child->active_servers) {
-			g_hash_table_destroy (child->active_servers);
-			CORBA_free (child->active_server_list);
+		if (actx->active_servers) {
+			g_hash_table_destroy (actx->active_servers);
+			CORBA_free (actx->active_server_list);
 		}
 
-		child->active_server_list = cache;
+		actx->active_server_list = cache;
 
-		child->time_active_pulled = time (NULL);
-		child->active_servers =
+		actx->time_active_pulled = time (NULL);
+		actx->active_servers =
 			g_hash_table_new (g_str_hash, g_str_equal);
 		for (i = 0; i < cache->_u.active_servers._length; i++)
-			g_hash_table_insert (child->active_servers,
+			g_hash_table_insert (actx->active_servers,
 					     cache->_u.
 					     active_servers._buffer[i],
 					     GINT_TO_POINTER (1));
@@ -167,94 +113,67 @@ ac_CORBA_Context_get_value (CORBA_Context         ctx,
 }
 
 static void
-child_od_update_list (ChildODInfo *child, CORBA_Environment *ev)
+ac_update_list (ActivationContext *actx, CORBA_Environment *ev)
 {
 	int i;
 	Bonobo_ServerInfoListCache *cache;
 
 	cache = Bonobo_ObjectDirectory_get_servers (
-                child->obj, child->time_list_pulled, ev);
+                actx->obj, actx->time_list_pulled, ev);
 
 	if (ev->_major != CORBA_NO_EXCEPTION) {
-		child->list = NULL;
-		child_od_exception (child, ev);
+		actx->list = NULL;
+                CORBA_Object_release (actx->obj, ev);
+                actx->obj = CORBA_OBJECT_NIL;
 		return;
 	}
 
 	if (cache->_d) {
-		if (child->by_iid)
-			g_hash_table_destroy (child->by_iid);
-		if (child->list) {
-			CORBA_sequence_set_release (child->list, CORBA_TRUE);
-			CORBA_free (child->list);
-			child->list = NULL;
+		if (actx->by_iid)
+			g_hash_table_destroy (actx->by_iid);
+		if (actx->list) {
+			CORBA_sequence_set_release (actx->list, CORBA_TRUE);
+			CORBA_free (actx->list);
+			actx->list = NULL;
 		}
 
-		child->list = Bonobo_ServerInfoList__alloc ();
-		*(child->list) = cache->_u.server_list;
-		CORBA_sequence_set_release (child->list, CORBA_FALSE);
+		actx->list = Bonobo_ServerInfoList__alloc ();
+		*(actx->list) = cache->_u.server_list;
+		CORBA_sequence_set_release (actx->list, CORBA_FALSE);
 		CORBA_sequence_set_release (&(cache->_u.server_list),
 					    CORBA_FALSE);
 
-		child->time_list_pulled = time (NULL);
-		child->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
-		for (i = 0; i < child->list->_length; i++)
-			g_hash_table_insert (child->by_iid,
-					     child->list->_buffer[i].iid,
-					     &(child->list->_buffer[i]));
+		actx->time_list_pulled = time (NULL);
+		actx->by_iid = g_hash_table_new (g_str_hash, g_str_equal);
+		for (i = 0; i < actx->list->_length; i++)
+			g_hash_table_insert (actx->by_iid,
+					     actx->list->_buffer[i].iid,
+					     &(actx->list->_buffer[i]));
 	}
 
 	CORBA_free (cache);
 }
 
-static void
-ac_update_list (ActivationContext *actx,
-		ChildODInfo       *child,
-                CORBA_Environment *ev)
-{
-	int prev, new;
-
-	if (actx->refs > 0)
-		return;
-
-	if (child->list)
-		prev = child->list->_length;
-	else
-		prev = 0;
-
-	child_od_update_list (child, ev);
-
-	if (child->list)
-		new = child->list->_length;
-	else
-		new = 0;
-
-	actx->total_servers += (new - prev);
-}
-
 static QueryExprConst
 ac_query_get_var (Bonobo_ServerInfo *si, const char *id, QueryContext *qctx)
 {
-	ChildODInfo *child;
 	QueryExprConst retval;
         ActivationContext *actx = qctx->user_data;
 
 	retval.value_known = FALSE;
 	retval.needs_free = FALSE;
 
-	child = actx->dir;
-
 	if (!strcasecmp (id, "_active")) {
 		CORBA_Environment ev;
 
 		CORBA_exception_init (&ev);
-		child_od_update_active (child, &ev);
+		ac_update_active (actx, &ev);
 		CORBA_exception_free (&ev);
 
 		retval.value_known = TRUE;
 		retval.type = CONST_BOOLEAN;
 		retval.u.v_boolean =
-			g_hash_table_lookup (child->active_servers,
+			g_hash_table_lookup (actx->active_servers,
 					     si->iid) ? TRUE : FALSE;
 	}
 
@@ -326,14 +245,12 @@ ac_query_run (ActivationContext        *actx,
 
         {
 		int i;
-		ChildODInfo *child;
 
                 item_count = 0;
-		child = actx->dir;
 
-		if (child->obj != CORBA_OBJECT_NIL)
-                        for (i = 0; i < child->list->_length; i++, item_count++)
-                                items[item_count] = &child->list->_buffer[i];
+		if (actx->obj != CORBA_OBJECT_NIL)
+                        for (i = 0; i < actx->list->_length; i++, item_count++)
+                                items[item_count] = &actx->list->_buffer[i];
 	}
 
 	memcpy (orig_items, items, item_count * sizeof (Bonobo_ServerInfo *));
@@ -362,13 +279,27 @@ static void
 ac_update_lists (ActivationContext *actx,
 		 CORBA_Environment *ev)
 {
+	int prev, new;
+
 	if (actx->refs > 0) {
                 /* FIXME: what happens on re-enterency here ?
                  * looks like this could get seriously out of date */
 		return;
         }
 
-        ac_update_list (actx, actx->dir, ev);
+	if (actx->list)
+		prev = actx->list->_length;
+	else
+		prev = 0;
+
+	ac_update_list (actx, ev);
+
+	if (actx->list)
+		new = actx->list->_length;
+	else
+		new = 0;
+
+	actx->total_servers += (new - prev);
 }
 
 static GList *clients = NULL;
@@ -465,11 +396,11 @@ impl_Bonobo_ActivationContext__get_directories (PortableServer_Servant servant,
 	Bonobo_ObjectDirectoryList *retval;
 
 	retval = Bonobo_ObjectDirectoryList__alloc ();
-        if (actx->dir) {
+        if (actx->obj != CORBA_OBJECT_NIL) {
                 retval->_length = 1;
                 retval->_buffer =
                         CORBA_sequence_Bonobo_ObjectDirectory_allocbuf (1);
-		retval->_buffer[0] = CORBA_Object_duplicate (actx->dir->obj, ev);
+		retval->_buffer[0] = CORBA_Object_duplicate (actx->obj, ev);
 	} else {
                 retval->_length = 0;
         }
@@ -485,16 +416,14 @@ impl_Bonobo_ActivationContext_addDirectory (PortableServer_Servant servant,
                                             CORBA_Environment     *ev)
 {
         ActivationContext *actx = ACTIVATION_CONTEXT (servant);
-        ChildODInfo *child = actx->dir;
 
-        if (child && child->obj == dir)
+        if (actx->obj == dir)
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                      ex_Bonobo_Activation_AlreadyListed,
                                      NULL);
 	else {
-                child = child_od_info_new (dir, ev);
-                if (child)
-                        actx->dir = child;
+                CORBA_Object_release (actx->obj, ev);
+                actx->obj = CORBA_Object_duplicate (dir, ev);
         }
 }
 
@@ -504,21 +433,17 @@ impl_Bonobo_ActivationContext_removeDirectory (PortableServer_Servant servant,
                                                CORBA_Environment     *ev)
 {
         ActivationContext *actx = ACTIVATION_CONTEXT (servant);
-        ChildODInfo *child = actx->dir;
 
-        if (!child || dir != child->obj)
+        if (dir != actx->obj)
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_Bonobo_Activation_NotListed,
 				     NULL);
-
         else {
                 if (actx->refs) {
-                        CORBA_Object_release (child->obj, ev);
-                        child->obj = CORBA_OBJECT_NIL;
-                } else {
-                        actx->dir = NULL;
-                        child_od_info_free (child, ev);
-                }
+                        CORBA_Object_release (actx->obj, ev);
+                        actx->obj = CORBA_OBJECT_NIL;
+                } else
+                        directory_info_free (actx, ev);
         }
 }
 
@@ -533,16 +458,13 @@ ac_do_activation (ActivationContext                  *actx,
                   CORBA_Environment                  *ev)
 {
 	int num_layers;
-	ChildODInfo *child;
 	Bonobo_ServerInfo *activatable;
 
 	/* When doing checks for shlib loadability, we 
          * have to find the info on the factory object in case
 	 * a factory is inside a shlib 
          */
-	child = actx->dir;
-
-	if (!child || !child->obj || ev->_major != CORBA_NO_EXCEPTION) {
+	if (!actx->obj || ev->_major != CORBA_NO_EXCEPTION) {
 		Bonobo_GeneralError *errval = Bonobo_GeneralError__alloc ();
 		errval->description =
 			CORBA_string_dup
@@ -557,7 +479,7 @@ ac_do_activation (ActivationContext                  *actx,
                      !strcmp (activatable->server_type, "factory") &&
              num_layers < Bonobo_LINK_TIME_TO_LIVE; num_layers++) {
 
-		activatable = g_hash_table_lookup (child->by_iid, activatable->location_info);
+		activatable = g_hash_table_lookup (actx->by_iid, activatable->location_info);
 	}
 
 	if (activatable == NULL) {		
@@ -601,7 +523,7 @@ ac_do_activation (ActivationContext                  *actx,
 		for (j = 0, activatable = server; activatable
 		     && !strcmp (activatable->server_type, "factory"); j++) {
 			out->res._u.res_shlib._buffer[j] = CORBA_string_dup (activatable->iid);
-			activatable = g_hash_table_lookup (child->by_iid,
+			activatable = g_hash_table_lookup (actx->by_iid,
 						     	   activatable->location_info);
 		}
 
@@ -620,7 +542,7 @@ ac_do_activation (ActivationContext                  *actx,
 		CORBA_Object retval;
 
 		retval = Bonobo_ObjectDirectory_activate (
-                        child->obj, server->iid, BONOBO_OBJREF (actx), environment, flags, ctx, ev);
+                        actx->obj, server->iid, BONOBO_OBJREF (actx), environment, flags, ctx, ev);
 
 		if (ev->_major == CORBA_NO_EXCEPTION) {
 			char tbuf[512];
@@ -717,15 +639,11 @@ impl_Bonobo_ActivationContext__get_servers (PortableServer_Servant servant,
 	CORBA_sequence_set_release (retval, CORBA_TRUE);
 
 	for (i = 0; i < total;) {
-                ChildODInfo *child;
                 int j;
 
-                child = actx->dir;
-                
-                for (j = 0; j < child->list->_length; j++, i++)
+                for (j = 0; j < actx->list->_length; j++, i++)
                         Bonobo_ServerInfo_copy (&retval->_buffer[i],
-                                                &child->
-                                                list->_buffer[j]);
+                                                &actx->list->_buffer[j]);
 	}
 
 	return retval;
@@ -946,8 +864,7 @@ activation_context_finalize (GObject *object)
 
         CORBA_exception_init (ev);
 
-        child_od_info_free (actx->dir, ev);
-        actx->dir = NULL;
+        directory_info_free (actx, ev);
 
         CORBA_exception_free (ev);
 

@@ -1,3 +1,22 @@
+2003-04-22  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-activation/Makefile.am: do most
+	of the tests
+
+	* tests/test-activation/test.sh: from here.
+
+	* activation-server/activation-context-corba.c
+	(child_od_info_new, child_od_info_free): bin
+	hostname/username bits.
+	(child_od_info_new): bin it.
+	(child_od_info_free): rename to
+	(directory_info_free): this.
+	(child_od_exception): bin.
+	(child_od_update_active): rename to
+	(ac_update_active): this.
+	(child_od_update_list): rename to
+	(ac_update_list, ac_update_list): upd.
+
 2003-04-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo-activation/bonobo-activation-register.h,

@@ -29,9 +29,20 @@ typedef struct _ChildODInfo ChildODInfo;
 struct _ActivationContext {
 	BonoboObject parent;
 
-	int          total_servers;
+	Bonobo_ObjectDirectory obj; /* to die in time */
 
-	ChildODInfo *dir;  /* a hack for now */
+	int          total_servers;
+	Bonobo_ServerInfoList *list;
+	Bonobo_CacheTime       time_list_pulled;
+	GHashTable            *by_iid;
+
+	/* It is assumed that accesses to this
+	 * hash table are atomic - i.e. a CORBA 
+	 * call cannot come in while
+	 * checking a value in this table */
+	GHashTable              *active_servers;
+	Bonobo_ServerStateCache *active_server_list;
+	Bonobo_CacheTime         time_active_pulled;
 
 	gint         refs; /* nasty re-enterancy guard */
 };
