@@ -4,8 +4,9 @@
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
+ *   ÉRDI Gergõ (cactus@cactus.rulez.org): cleanup
  *
- * Copyright 1999 Helix Code, Inc.
+ * Copyright 1999 Helix Code, Inc., 2001 Gergõ Érdi
  */
 #ifndef _BONOBO_GENERIC_FACTORY_H_
 #define _BONOBO_GENERIC_FACTORY_H_
@@ -28,63 +29,38 @@ G_BEGIN_DECLS
 typedef struct _BonoboGenericFactoryPrivate BonoboGenericFactoryPrivate;
 typedef struct _BonoboGenericFactory        BonoboGenericFactory;
 
-typedef BonoboObject * (*BonoboGenericFactoryFn)(BonoboGenericFactory *Factory, void *closure);
-typedef BonoboObject * (*GnomeFactoryCallback)(BonoboGenericFactory *factory, const char *component_id, gpointer closure);
+typedef BonoboObject * (*BonoboFactoryCallback) (BonoboGenericFactory *factory, const char *component_id, gpointer closure);
 					
 struct _BonoboGenericFactory {
-	GObject base;
+	GObject                      base;
 
-	/* The function factory */
-	BonoboGenericFactoryFn factory; /* compat reasons only */
-	GnomeFactoryCallback   factory_cb;
-	gpointer               factory_closure;
-
-	/* The CORBA Object */
-	GNOME_ObjectFactory    corba_objref;
-
-	/* The component_id for this generic factory */
-	char *oaf_iid;
+	BonoboGenericFactoryPrivate *priv;
 };
 
 typedef struct {
 	GObjectClass parent_class;
 
 	/* Virtual methods */
-	BonoboObject *(*new_generic) (BonoboGenericFactory *c_factory,
+	BonoboObject *(*new_generic) (BonoboGenericFactory *factory,
 				      const char           *component_id);
 } BonoboGenericFactoryClass;
 
 GType                 bonobo_generic_factory_get_type  (void);
 
-GNOME_ObjectFactory   bonobo_generic_factory_corba_objref (
-	BonoboGenericFactory *object);
+GNOME_ObjectFactory   bonobo_generic_factory_corba_objref (BonoboGenericFactory *object);
 
-GNOME_ObjectFactory   bonobo_generic_factory_corba_object_create (
-	BonoboGenericFactory *object, 
-	gpointer              shlib_id);
+GNOME_ObjectFactory   bonobo_generic_factory_corba_object_create (BonoboGenericFactory *object, 
+								  gpointer              shlib_id);
 
-BonoboGenericFactory *bonobo_generic_factory_new (
-	const char            *oaf_iid,
-	BonoboGenericFactoryFn factory,
-	gpointer               user_data);
+BonoboGenericFactory *bonobo_generic_factory_new (const char            *oaf_iid,
+						  BonoboFactoryCallback  factory_cb,
+						  gpointer               user_data);
 
-BonoboGenericFactory *bonobo_generic_factory_new_multi (
-	const char            *oaf_iid,
-	GnomeFactoryCallback   factory_cb,
-	gpointer               data);
-
-BonoboGenericFactory *bonobo_generic_factory_construct (
-	const char            *oaf_iid,
-	BonoboGenericFactory  *c_factory,
-	GNOME_ObjectFactory    corba_factory,
-	BonoboGenericFactoryFn factory,
-	GnomeFactoryCallback   factory_cb,
-	gpointer               user_data);
-
-void bonobo_generic_factory_set (
-	BonoboGenericFactory  *c_factory,
-	BonoboGenericFactoryFn factory,
-	void                  *data);
+BonoboGenericFactory *bonobo_generic_factory_construct (BonoboGenericFactory  *factory,
+							GNOME_ObjectFactory    corba_factory,
+							const char            *oaf_iid,
+							BonoboFactoryCallback  factory_cb,
+							gpointer               user_data);
 
 POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 
@@ -98,27 +74,19 @@ POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 		g_error (_("Could not initialize Bonobo"));
 #endif
 
-#define BONOBO_OAF_FACTORY(oafiid, descr, version, fn, data)                  \
+#define BONOBO_OAF_FACTORY(oafiid, descr, version, callback, data)            \
 int main (int argc, char *argv [])                                            \
 {                                                                             \
 	BonoboGenericFactory *factory;                                        \
                                                                               \
 	BONOBO_FACTORY_INIT (descr, version, &argc, argv);                    \
-	factory = bonobo_generic_factory_new (oafiid, fn, data);              \
+	factory = bonobo_generic_factory_new (oafiid, callback, data);        \
 	bonobo_main ();                                                       \
 	return 0;                                                             \
 }                                                                             
 
-#define BONOBO_OAF_FACTORY_MULTI(oafiid, descr, version, fn, data)            \
-int main (int argc, char *argv [])                                            \
-{                                                                             \
-	BonoboGenericFactory *factory;                                        \
-                                                                              \
-	BONOBO_FACTORY_INIT (descr, version, &argc, argv);                    \
-	factory = bonobo_generic_factory_new_multi (oafiid, fn, data);        \
-	bonobo_main ();                                                       \
-	return 0;                                                             \
-}                                                                             
+#define BONOBO_OAF_FACTORY_MULTI(oafiid, descr, version, callback, data)      \
+	BONOBO_OAF_FACTORY(oafiid, descr, version, callback, data)
 
 G_END_DECLS
 

@@ -27,15 +27,21 @@ POA_GNOME_ObjectFactory__vepv bonobo_shlib_factory_vepv;
 
 static BonoboObjectClass *bonobo_shlib_factory_parent_class = NULL;
 
+struct _BonoboShlibFactoryPrivate
+{
+	int                  live_objects;
+	gpointer             oaf_impl_ptr;
+};
+
 /**
  * bonobo_shlib_factory_construct:
- * @c_factory: The object to be initialized.
+ * @factory: The object to be initialized.
+ * @corba_factory: The CORBA object which supports the
  * @oaf_iid: The GOAD id that the new factory will implement.
  * @oaf_impl_ptr: Oaf shlib handle
- * @corba_factory: The CORBA object which supports the
  * Bonobo::ShlibFactory interface and which will be used to
  * construct this BonoboShlibFactory Gtk object.
- * @factory: A callback which is used to create new GnomeShlib object instances.
+ * @factory_cb: A callback which is used to create new GnomeShlib object instances.
  * @data: The closure data to be passed to the @factory callback routine.
  *
  * Initializes @c_factory with the command-line arguments and registers
@@ -44,78 +50,32 @@ static BonoboObjectClass *bonobo_shlib_factory_parent_class = NULL;
  * Returns: The initialized BonoboShlibFactory object.
  */
 BonoboShlibFactory *
-bonobo_shlib_factory_construct (BonoboShlibFactory    *c_factory,
+bonobo_shlib_factory_construct (BonoboShlibFactory    *factory,
+				CORBA_Object           corba_factory,
 				const char            *oaf_iid,
 				PortableServer_POA     poa,
 				gpointer               oaf_impl_ptr,
-				CORBA_Object           corba_factory,
-				BonoboGenericFactoryFn factory,
-				GnomeFactoryCallback   factory_cb,
+				BonoboFactoryCallback  factory_cb,
 				gpointer               user_data)
 {
-	g_return_val_if_fail (c_factory != NULL, NULL);
-	g_return_val_if_fail (BONOBO_IS_SHLIB_FACTORY (c_factory), NULL);
+	g_return_val_if_fail (factory != NULL, NULL);
+	g_return_val_if_fail (BONOBO_IS_SHLIB_FACTORY (factory), NULL);
 	g_return_val_if_fail (corba_factory != CORBA_OBJECT_NIL, NULL);
 
-	c_factory->live_objects = 0;
-	c_factory->oaf_impl_ptr = oaf_impl_ptr;
+	factory->priv->live_objects = 0;
+	factory->priv->oaf_impl_ptr = oaf_impl_ptr;
 
         oaf_plugin_use (poa, oaf_impl_ptr);
 
 	return BONOBO_SHLIB_FACTORY (
-		bonobo_generic_factory_construct (
-			oaf_iid, BONOBO_GENERIC_FACTORY (c_factory),
-			corba_factory, factory, factory_cb, user_data));
+		bonobo_generic_factory_construct (BONOBO_GENERIC_FACTORY (factory),
+						  corba_factory,
+						  oaf_iid,
+						  factory_cb, user_data));
 }
 
 /**
  * bonobo_shlib_factory_new:
- * @oaf_iid: The GOAD id that this factory implements
- * @poa: the poa.
- * @oaf_impl_ptr: Oaf shlib handle
- * @factory: A callback which is used to create new BonoboObject instances.
- * @user_data: The closure data to be passed to the @factory callback routine.
- *
- * This is a helper routine that simplifies the creation of factory
- * objects for GNOME objects.  The @factory function will be
- * invoked by the CORBA server when a request arrives to create a new
- * instance of an object supporting the Bonobo::Shlib interface.
- * The factory callback routine is passed the @data pointer to provide
- * the creation function with some state information.
- *
- * Returns: A BonoboShlibFactory object that has an activated
- * Bonobo::ShlibFactory object that has registered with the GNOME
- * name server.
- */
-BonoboShlibFactory *
-bonobo_shlib_factory_new (const char            *oaf_iid,
-			  PortableServer_POA     poa,
-			  gpointer               oaf_impl_ptr,
-			  BonoboGenericFactoryFn factory,
-			  gpointer               user_data)
-{
-	BonoboShlibFactory *c_factory;
-	GNOME_ObjectFactory corba_factory;
-
-	g_return_val_if_fail (factory != NULL, NULL);
-	
-	c_factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
-
-	corba_factory = bonobo_generic_factory_corba_object_create (
-		BONOBO_GENERIC_FACTORY (c_factory), factory);
-
-	if (corba_factory == CORBA_OBJECT_NIL) {
-		g_object_unref (G_OBJECT (c_factory));
-		return NULL;
-	}
-	
-	return bonobo_shlib_factory_construct (
-		c_factory, oaf_iid, poa, oaf_impl_ptr,
-		corba_factory, factory, NULL, user_data);
-}
-
-/**
- * bonobo_shlib_factory_new_multi:
  * @oaf_iid: The GOAD id that this factory implements
  * @poa: the poa.
  * @oaf_impl_ptr: Oaf shlib handle
@@ -133,38 +93,37 @@ bonobo_shlib_factory_new (const char            *oaf_iid,
  * Bonobo::ShlibFactory object that has registered with the GNOME
  * name server.
  */
-BonoboShlibFactory *bonobo_shlib_factory_new_multi (
-	const char          *oaf_iid,
-	PortableServer_POA   poa,
-	gpointer             oaf_impl_ptr,
-	GnomeFactoryCallback factory_cb,
-	gpointer             user_data)
+BonoboShlibFactory *bonobo_shlib_factory_new (const char           *oaf_iid,
+					      PortableServer_POA    poa,
+					      gpointer              oaf_impl_ptr,
+					      BonoboFactoryCallback factory_cb,
+					      gpointer              user_data)
 {
-	BonoboShlibFactory *c_factory;
+	BonoboShlibFactory *factory;
 	GNOME_ObjectFactory corba_factory;
 
 	g_return_val_if_fail (factory_cb != NULL, NULL);
 	g_return_val_if_fail (oaf_iid != NULL, NULL);
 	
-	c_factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
+	factory = g_object_new (bonobo_shlib_factory_get_type (), NULL);
 
 	corba_factory = bonobo_generic_factory_corba_object_create (
-		BONOBO_GENERIC_FACTORY (c_factory), factory_cb);
+		BONOBO_GENERIC_FACTORY (factory), factory_cb);
 
 	if (corba_factory == CORBA_OBJECT_NIL) {
-		g_object_unref (G_OBJECT (c_factory));
+		g_object_unref (G_OBJECT (factory));
 		return NULL;
 	}
 	
-	return bonobo_shlib_factory_construct (
-		c_factory, oaf_iid, poa, oaf_impl_ptr,
-		corba_factory, NULL, factory_cb, user_data);
+	return bonobo_shlib_factory_construct (factory, corba_factory,
+					       oaf_iid, poa, oaf_impl_ptr,
+					       factory_cb, user_data);
 }
 
 static void
 bonobo_shlib_factory_finalize (GObject *object)
 {
-/*	BonoboShlibFactory *c_factory = BONOBO_SHLIB_FACTORY (object);*/
+	BonoboShlibFactory *factory = BONOBO_SHLIB_FACTORY (object);
 
 	/*
 	 * We pray this happens only when we have released our
@@ -177,6 +136,8 @@ bonobo_shlib_factory_finalize (GObject *object)
 	/* we dont unload it because of a problem with the gtk type system */
 	/* oaf_plugin_unuse (c_factory->oaf_impl_ptr); */
 
+	g_free (factory->priv);
+	
 	G_OBJECT_CLASS (bonobo_shlib_factory_parent_class)->finalize (object);
 }
 
@@ -204,6 +165,15 @@ bonobo_shlib_factory_class_init (BonoboGenericFactoryClass *klass)
 	object_class->finalize = bonobo_shlib_factory_finalize;
 }
 
+static void
+bonobo_shlib_factory_init (GObject *object)
+{
+	BonoboShlibFactory *factory = BONOBO_SHLIB_FACTORY (object);
+
+	factory->priv = g_new0 (BonoboShlibFactoryPrivate, 1);
+}
+
+
 /**
  * bonobo_shlib_factory_get_type:
  *
@@ -224,7 +194,7 @@ bonobo_shlib_factory_get_type (void)
 			NULL, /* class_data */
 			sizeof (BonoboShlibFactory),
 			0, /* n_preallocs */
-			(GInstanceInitFunc) NULL
+			(GInstanceInitFunc) bonobo_shlib_factory_init
 		};
 
 		type = g_type_register_static (
@@ -240,16 +210,16 @@ bonobo_shlib_factory_inc_live (BonoboShlibFactory *factory)
 {
 	g_return_if_fail (BONOBO_IS_SHLIB_FACTORY (factory));
 
-	factory->live_objects++;
+	factory->priv->live_objects++;
 }
 
 
 static gboolean
 bonobo_shlib_factory_dec_live_cb (BonoboShlibFactory *factory)
 {
-	factory->live_objects--;
+	factory->priv->live_objects--;
 
-	if (factory->live_objects <= 0)
+	if (factory->priv->live_objects <= 0)
 		g_object_unref (G_OBJECT (factory));
 
 	return FALSE;

@@ -54,6 +54,7 @@ bonobo-shlib-factory.[ch]:
 		easy: just add a const gchar * argument to your
 		factory callback function.
 	Privatization
+	removed bonobo_generic_factory_set
 		
 bonobo-property-bag-xml.[ch]:
 	Removed, use bonobo-conf or soap support code instead

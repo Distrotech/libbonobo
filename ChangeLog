@@ -1,3 +1,19 @@
+2001-07-28  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* monikers/bonobo-moniker-std.c: Changed
+	BONOBO_OAF_SHLIB_FACTORY_MULTI to BONOBO_OAF_SHLIB_FACTORY
+
+	* configure.in: bumped version number because of
+	BonoboGenericFactory API change
+
+	* bonobo/bonobo-generic-factory.[ch]: Removed single/multi factory
+	ambiguity. If you use a single factory, you will have to migrate
+	to the multi factory setting (this should be very easy, just add a
+	const char* argument to your factory callback function).
+	Moved instance data to a private structure for more flexibility.
+
+	* bonobo/bonobo-shlib-factory.[ch]: ditto
+
 2001-07-28  Jamil <geor@ihug.co.nz>
 
 	* bonobo/bonobo-object.c (bonobo_object_query_interface), 
