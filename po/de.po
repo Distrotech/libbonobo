@@ -6,15 +6,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.5.1\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
-"PO-Revision-Date: 2004-01-06 10:00+0100\n"
+"Project-Id-Version: libbonobo 2.5.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-19 18:29+0100\n"
+"PO-Revision-Date: 2004-01-19 18:28+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -128,11 +128,13 @@ msgstr "Attribut »%s« hat keinen Wert"
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr ""
+"Syntax des fehlerhaft formatierten XML-Dokuments %s konnte nicht "
+"interpretiwert werden"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Verz. %s wird versucht"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
