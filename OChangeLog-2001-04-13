@@ -1,4 +1,12 @@
-2000-11-09  Darin Adler  <darin@eazel.com>
+2000-11-13  John Sullivan  <sullivan@eazel.com>
+
+	* bonobo/bonobo-win.c: (popup_destroy):
+	Commented out the g_warning every time this function
+	is called, as it was cramping my debugging. I didn't simply
+	remove it because maybe Michael wants to use it for some
+	debugging of his own, I'm not sure.
+
+2000-11-13  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-win.c:
 	(info_dump_fn): "wierd" -> "weird"
