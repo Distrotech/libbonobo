@@ -1,3 +1,11 @@
+2000-10-10  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-win.c: (radio_group_add): Fix bug where all radio
+	menu items would look active.
+
+	* bonobo/bonobo-view.h: Remove headers for deleted functions.
+	* bonobo/bonobo-view.c: Remove unused private fields.
+	
 2000-10-10  Larry Ewing  <lewing@helixcode.com>
 
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_pixbuf_to_xml): stick to
