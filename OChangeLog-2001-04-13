@@ -1,5 +1,7 @@
 2001-01-30  Dietmar Maurer  <dietmar@ximian.com>
 
+	* bonobo/bonobo-arg.c (bonobo_arg_new): use the DynAny interface.
+
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_full):
 	store a copy of the default_value.
 

@@ -763,9 +763,7 @@ bonobo_property_bag_get_default (BonoboPropertyBag *pb,
 	if (prop->default_value)
 		return bonobo_arg_copy (prop->default_value);
 	else {
-		/* FIXME: we shoult use DynamicAny here ! */
 		BonoboArg *a = bonobo_arg_new (prop->type);
-		bonobo_arg_init_default (a);
 		return a;
 	}
 }
