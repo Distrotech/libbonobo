@@ -1,26 +1,28 @@
 NULL=
 
-lib_LTLIBRARIES=liboaf-2.la
+lib_LTLIBRARIES=libbonobo-activation.la
 
 INCLUDES=					\
-	-I$(top_srcdir) 			\
-	-I$(top_builddir) 			\
-	-I$(top_srcdir)/liboaf 			\
-	-I$(top_builddir)/liboaf 		\
+	-I$(top_srcdir)				\
+	-I$(top_builddir)			\
+	-I$(top_srcdir)/bbonobo-activation	\
+	-I$(top_builddir)/bonobo-activation	\
 	-DOAF_LOCALEDIR=\""$(datadir)/locale"\"	\
-	$(LIBOAF_CFLAGS)			\
+	$(BONOBO_ACTIVATION_CFLAGS)		\
 	-DVERSION=\"$(VERSION)\"		\
 	$(NULL)
 
 LDFLAGS=					\
-	$(LIBOAF_LIBS)				\
+	$(BONOBO_ACTIVATION_LIBS)		\
 	@LT_VERSION_INFO@			\
 	$(NULL)
 
-liboafincludedir = $(includedir)/oaf-2.0/liboaf
+bonobo_activationincludedir = $(includedir)/bonobo-activation-2.0/bonobo-activation
 
-liboafinclude_HEADERS=				\
-	oaf.h					\
+bonobo_activationinclude_HEADERS=		\
+	Bonobo_Unknown.h			\
+	Bonobo_GenericFactory.h			\
+	Bonobo_ActivationContext.h		\
 	liboaf.h				\
 	oaf-async.h				\
 	oaf-registration.h			\
@@ -32,15 +34,40 @@ liboafinclude_HEADERS=				\
 	oaf-util.h				\
 	oaf-async.h				\
 	oaf-factory.h				\
-	oaf-factory-suppress.h			\
+	bonobo-factory-suppress.h		\
 	liboaf-version.h			\
 	$(NULL)
 
-liboaf_2_la_SOURCES=				\
-	oaf-stubs.c				\
-	oaf-skels.c				\
-	oaf-common.c				\
-	oaf-mainloop.c				\
+
+bonobo_unknown_sources =			\
+	Bonobo_Unknown.h			\
+	Bonobo_Unknown-common.c			\
+	Bonobo_Unknown-stubs.c			\
+	Bonobo_Unknown-skels.c			\
+	$(NULL)
+
+bonobo_generic_factory_sources =		\
+	Bonobo_GenericFactory.h			\
+	Bonobo_GenericFactory-common.c		\
+	Bonobo_GenericFactory-stubs.c		\
+	Bonobo_GenericFactory-skels.c		\
+	$(NULL)
+bonobo_activation_context_sources =		\
+	Bonobo_ActivationContext.h		\
+	Bonobo_ActivationContext-common.c	\
+	Bonobo_ActivationContext-stubs.c	\
+	Bonobo_ActivationContext-skels.c	\
+	$(NULL)
+
+BUILT_SOURCES=					\
+	$(bonobo_unknown_sources)		\
+	$(bonobo_generic_factory_sources)	\
+	$(bonobo_activation_context_sources)	\
+	$(NULL)
+
+
+libbonobo_activation_la_SOURCES=		\
+	$(BUILT_SOURCES)			\
 	oaf-actid.c				\
 	liboaf-private.h			\
 	oaf-factory-stubs.c			\
@@ -59,36 +86,42 @@ liboaf_2_la_SOURCES=				\
 	oaf-fork-server.c			\
 	$(NULL)
 
-BUILT_SOURCES=					\
-	oaf-stubs.c				\
-	oaf-skels.c				\
-	oaf-common.c				\
-	oaf-factory-stubs.c			\
-	oaf-factory-skels.c			\
-	oaf-factory-common.c			\
-	oaf.h					\
-	oaf-factory.h				\
+
+
+bonobo_unknown_idls =				\
+	$(top_srcdir)/idl/Bonobo_Unknown.idl	\
 	$(NULL)
 
-oaf-stubs.c oaf-skels.c oaf.h oaf-common.c: stamp-idl stamp-factory-idl
-oaf-factory-stubs.c oaf-factory-skels.c oaf-factory.h oaf-factory-common.c: stamp-idl stamp-factory-idl
+bonobo_unknown_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_UNKNOWN_COMPILATION
 
-# Work around automake brokenness.
-../liboaf/oaf.h: stamp-idl
-# And again.
-../liboaf/oaf-factory.h: stamp-factory-idl
+$(bonobo_unknown_sources): $(bonobo_unknown_idls) $(ORBIT_IDL)
+	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo_Unknown.idl
 
-stamp-idl: $(top_srcdir)/idl/oaf.idl $(ORBIT_IDL)
-	$(ORBIT_IDL) -I$(top_srcdir)/idl --define=OAF_COMPILATION $(top_srcdir)/idl/oaf.idl
-	touch stamp-idl
 
-stamp-factory-idl: $(top_srcdir)/idl/oaf-factory.idl $(ORBIT_IDL)
-	$(ORBIT_IDL) -I$(top_srcdir)/idl --define=GNOME_FACTORY_COMPILATION $(top_srcdir)/idl/oaf-factory.idl
-	touch stamp-factory-idl
+bonobo_generic_factory_idls =				\
+	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
+	$(top_srcdir)/idl/Bonobo_GenericFactory.idl	\
+	$(NULL)
+
+bonobo_generic_factory_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_GENERIC_FACTORY_COMPILATION
+
+$(bonobo_generic_factory_sources): $(bonobo_generic_factory_idls) $(ORBIT_IDL)
+	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo_GenericFactory.idl
+
+
+bonobo_activation_context_idls =			\
+	$(top_srcdir)/idl/Bonobo_Unknown.idl		\
+	$(top_srcdir)/idl/Bonobo_GenericFactory.idl	\
+	$(top_srcdir)/idl/Bonobo_ActivationContext.idl	\
+	$(NULL)
+
+bonobo_activation_context_idl_flags = -I$(top_srcdir)/idl -D__BONOBO_ACTIVATION_CONTEXT_COMPILATION
+
+$(bonobo_activation_context_sources): $(bonobo_activation_context_idls) $(ORBIT_IDL)
+	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo_ActivationContext.idl
+
 
 CLEANFILES=					\
-	stamp-idl				\
-	stamp-factory-idl			\
 	$(BUILT_SOURCES)			\
 	$(NULL)
 

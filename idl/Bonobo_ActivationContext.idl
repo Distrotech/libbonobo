@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  oaf.idl: IDL definition of the OAF daemon CORBA interfaces.
+ *  Bonobo_ActivationContext.idl:
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
  *  Copyright (C) 1999, 2000 Eazel, Inc.
@@ -23,19 +23,19 @@
  *
  */
 
-#ifndef __OAF_IDL__
-#define __OAF_IDL__
+#ifndef __BONOBO_ACTIVATION_CONTEXT_IDL__
+#define __BONOBO_ACTIVATION_CONTEXT_IDL__
 
-#if !defined(OAF_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__BONOBO_ACTIVATION_CONTEXT_COMPILATION) && defined(__BONOBO_ACTIVATION_CONTEXT_IDL__)
 %{
-#pragma include_defs liboaf/oaf.h
+#pragma include_defs bonobo-activation/Bonobo_ActivationContext.h
 %}
 #pragma inhibit push
 #endif
 
-#include "oaf-factory.idl"
+#include <Bonobo_GenericFactory.idl>
 
-module OAF {
+module Bonobo {
         exception GeneralError { 
                 string description; 
         };
@@ -60,7 +60,7 @@ module OAF {
         case RESULT_OBJECT:
                 Object res_object;
         case RESULT_SHLIB:
-                GNOME::stringlist res_shlib;
+                Bonobo::stringlist res_shlib;
         };
 
         struct ActivationResult {
@@ -84,7 +84,7 @@ module OAF {
         case P_BOOLEAN:
                 boolean value_boolean;
         case P_STRINGV:
-                GNOME::stringlist value_stringv;
+                Bonobo::stringlist value_stringv;
         };
 
         struct Property {
@@ -124,13 +124,13 @@ module OAF {
                 REG_ERROR 
         };
 
-        interface ActivationCallback {
+        interface ActivationCallback : Bonobo::Unknown {
                 oneway void report_activation_failed (in string reason);
                 oneway void report_activation_succeeded (in ActivationResult result);
         };
 
         /* Interfaces */
-        interface ObjectDirectory {
+        interface ObjectDirectory : Bonobo :: Unknown {
 		enum UnregisterType {
 			UNREGISTER_NORMAL,
 			UNREGISTER_NOTIFY_UNUSED /* For factories to use */
@@ -153,7 +153,7 @@ module OAF {
 
         typedef sequence<ObjectDirectory> ObjectDirectoryList;
 
-        interface ActivationContext {
+        interface ActivationContext : Bonobo::Unknown {
                 exception NotListed {};
                 exception AlreadyListed {};
                 exception IncompleteContext {};
@@ -166,13 +166,13 @@ module OAF {
                 void remove_directory (in ObjectDirectory dir) raises (NotListed);
 
                 ActivationResult activate (in string requirements,
-                                           in GNOME::stringlist selection_order,
+                                           in Bonobo::stringlist selection_order,
                                            in ActivationFlags flags)
                         raises (ParseFailed, IncompleteContext, GeneralError)
                         context ("username", "hostname", "domain", "display");
 
                 oneway void activate_async (in string requirements,
-                                            in GNOME::stringlist selection_order,
+                                            in Bonobo::stringlist selection_order,
                                             in ActivationFlags flags,
                                             in ActivationCallback callback_object)
                         context ("username", "hostname", "domain", "display");
@@ -181,7 +181,7 @@ module OAF {
 
                 readonly attribute ServerInfoList servers;
                 ServerInfoList query (in string requirements,
-                                      in GNOME::stringlist selection_order)
+                                      in Bonobo::stringlist selection_order)
                         raises (ParseFailed, IncompleteContext)
                         context ("username", "hostname", "domain");
 
@@ -197,7 +197,7 @@ module OAF {
         };
 };
 
-#if !defined(OAF_COMPILATION) && defined(__ORBIT_IDL__)
+#if !defined(__BONOBO_ACTIVATION_CONTEXT_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop
 #endif
 
