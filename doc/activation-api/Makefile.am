@@ -50,7 +50,7 @@ content_files =				\
 	configuring.sgml		\
 	query-langage.sgml		\
 	architecture.sgml		\
-	fdl.sgml			\
+	lgpl.sgml			\
 	$(NULL)
 
 ## extra dist stuff
