@@ -1,3 +1,17 @@
+2000-11-09  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-win.c:
+	(info_dump_fn): "wierd" -> "weird"
+	(sync_generic_widgets): Use g_warning rather than printf for a
+	warning. "wierd" -> "weird"
+	(check_excess_widgets): Use g_warning rather than printf for a
+	warning. Use g_message instead of g_warning for a message.
+	(widget_set_state): "wierd" -> "weird"
+	(exec_verb_cb): "wierd" -> "weird"
+	(menu_sync_state): Fix code that was accidentally executed only
+	the first time it was hit (the warning is first-time only, but
+	the code should not be).
+
 2000-11-12 Dirk-Jan C. Binnema <dirkjan@gnome.org>
 	
 	* bonobo_property_bag.c (bonobo_property_bag_set_value),
