@@ -1,3 +1,11 @@
+2001-01-23  Iain Holmes  <iain@ximian.com>
+
+	* bonobo/bonobo-ui-engine-config.c 
+	(bonobo_ui_engine_config_hydrate): Free the string vector.
+
+	* bonobo/bonobo-listener.c (bonobo_listener_destroy): Free the
+	priv structure.
+
 2001-01-23  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
 
 	* configure.in: Added sk (Slovak) to ALL_LINGUAS.

@@ -38,11 +38,12 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 
 	listener = BONOBO_LISTENER (bonobo_object_from_servant (servant));
 
-	if (listener->priv->event_callback)
+	if (listener->priv->event_callback) 
 		listener->priv->event_callback (
 			listener, (CORBA_char *) event_name, 
 			(CORBA_any *) args, ev,
 			listener->priv->user_data);
+	
 
 	gtk_signal_emit (GTK_OBJECT (listener),
 			 signals [EVENT_NOTIFY],
@@ -77,6 +78,10 @@ init_listener_corba_class (void)
 static void
 bonobo_listener_destroy (GtkObject *object)
 {
+	BonoboListener *listener;
+
+	listener = BONOBO_LISTENER (object);
+	g_free (listener->priv);
 	GTK_OBJECT_CLASS (bonobo_listener_parent_class)->destroy (object);
 }
 
