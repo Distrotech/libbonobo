@@ -20,10 +20,13 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_CONFIG_DATABASE(o)	   (GTK_CHECK_TYPE ((o), BONOBO_CONFIG_DATABASE_TYPE))
 #define BONOBO_IS_CONFIG_DATABASE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_CONFIG_DATABASE_TYPE))
 
+typedef struct _BonoboConfigDatabasePrivate BonoboConfigDatabasePrivate;
 typedef struct _BonoboConfigDatabase        BonoboConfigDatabase;
 
 struct _BonoboConfigDatabase {
 	BonoboXObject       base;
+
+	BonoboConfigDatabasePrivate *priv;
 };
 
 typedef struct {
@@ -58,12 +61,6 @@ typedef struct {
 
 	void            (*remove)       (BonoboConfigDatabase *db,
 					 const CORBA_char     *path, 
-					 CORBA_Environment    *ev);
-
-	void            (*add_database) (BonoboConfigDatabase *db,
-					 const Bonobo_ConfigDatabase ddb,
-					 const CORBA_char     *filter_path,
-					 const CORBA_char     *append_path,
 					 CORBA_Environment    *ev);
 
 	void            (*sync)         (BonoboConfigDatabase *db, 
