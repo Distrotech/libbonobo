@@ -109,7 +109,7 @@ void                      bonobo_property_bag_remove_listener  (BonoboPropertyBa
 void                      bonobo_property_bag_notify_listeners (BonoboPropertyBag      *pb,
 								const char             *name,
 								const BonoboArg        *new_value,
-								CORBA_Environment      *ev);
+								CORBA_Environment      *opt_ev);
 
 /* A private function, only to be used by persistence implementations. */
 GList                    *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);

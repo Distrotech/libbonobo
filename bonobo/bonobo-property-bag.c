@@ -971,9 +971,10 @@ void
 bonobo_property_bag_notify_listeners (BonoboPropertyBag *pb,
 				      const char        *name,
 				      const BonoboArg   *new_value,
-				      CORBA_Environment *ev)
+				      CORBA_Environment *opt_ev)
 {
 	BonoboProperty *prop;
+	CORBA_Environment ev, *my_ev;
 
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (name != NULL);
@@ -982,9 +983,18 @@ bonobo_property_bag_notify_listeners (BonoboPropertyBag *pb,
 	prop = g_hash_table_lookup (pb->priv->props, name);
 
 	g_return_if_fail (prop != NULL);
-/*	g_return_if_fail (prop->type == new_value->_type);*/
+	g_return_if_fail (bonobo_arg_type_is_equal (prop->type, new_value->_type, opt_ev));
 
-	notify_listeners (pb, prop, new_value, ev);
+	if (!opt_ev) {
+	    CORBA_exception_init (&ev);
+	    my_ev = &ev;
+	} else
+	    my_ev = opt_ev;
+
+	notify_listeners (pb, prop, new_value, my_ev);
+
+	if (!opt_ev)
+	    CORBA_exception_free (&ev);
 }
 
 void
@@ -994,6 +1004,7 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb,
 			       CORBA_Environment *opt_ev)
 {
 	BonoboProperty *prop;
+	CORBA_Environment ev, *my_ev;
 
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (name != NULL);
@@ -1003,11 +1014,20 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb,
 
 	g_return_if_fail (prop != NULL);
 	g_return_if_fail (prop->set_prop != NULL);
-/*	g_return_if_fail (prop->type == value->_type);*/
+	g_return_if_fail (bonobo_arg_type_is_equal (prop->type, value->_type, opt_ev));
 
 	prop->set_prop (pb, value, prop->idx, prop->user_data);
 
-	notify_listeners (pb, prop, value, opt_ev);
+	if (!opt_ev) {
+	    CORBA_exception_init (&ev);
+	    my_ev = &ev;
+	} else
+	    my_ev = opt_ev;
+
+	notify_listeners (pb, prop, value, my_ev);
+
+	if (!opt_ev)
+	    CORBA_exception_free (&ev);
 }
 
 /**

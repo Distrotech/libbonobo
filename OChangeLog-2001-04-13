@@ -1,3 +1,21 @@
+2000-10-26  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-arg.h (bonobo_arg_type_is_equal): New function
+	to check two BonoboArgTypes for equality.
+	(BONOBO_ARG_SET_GENERAL, BONOBO_ARG_GET_GENERAL): Added three
+	arguments to this macro: the TypeCode, the Type and an optional
+	CORBA_Environment.
+
+	* bonobo/bonobo-property-bag.h (bonobo_property_bag_notify_listeners):
+	The CORBA_Environment argument is now optional.
+
+	* bonobo/bonobo-property-bag.c
+	(bonobo_property_bag_notify_listeners),
+	(bonobo_property_bag_set_value): Use bonobo_arg_type_is_equal()
+	to check for type equality.
+
+	* bonobo/bonobo-object.c: Include the PID in the debugging output.
+
 2000-10-27  Michael Meeks  <michael@helixcode.com>
 
 	* api-convert.pl: flesh out.

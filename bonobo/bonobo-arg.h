@@ -29,28 +29,28 @@ typedef CORBA_TypeCode BonoboArgType;
 #define BONOBO_ARG_STRING  TC_string
 
 #ifdef __GNUC__
-#	define BONOBO_ARG_GET_GENERAL(a,t)   (g_assert ((a)->_type->kind == CORBA_tk##t),\
-					       *((CORBA##t *)(a->_value)))
-#	define BONOBO_ARG_SET_GENERAL(a,v,t) (g_assert ((a)->_type->kind == CORBA_tk##t),\
-					       *((CORBA##t *)(a->_value)) = (CORBA##t)(v))
+#	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
+					          *((t *)(a->_value)))
+#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
+					          *((t *)(a->_value)) = (t)(v))
 #else
-#	define BONOBO_ARG_GET_GENERAL(a,t)   (*((CORBA##t *)(a->_value)))
-#	define BONOBO_ARG_SET_GENERAL(a,v,t) (*((CORBA##t *)(a->_value)) = (CORBA##t)(v))
+#	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (*((t *)(a->_value)))
+#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (*((t *)(a->_value)) = (t)(v))
 #endif
 
-#define BONOBO_ARG_GET_BOOLEAN(a)   (BONOBO_ARG_GET_GENERAL (a, _boolean))
-#define BONOBO_ARG_SET_BOOLEAN(a,v) (BONOBO_ARG_SET_GENERAL (a, v, _boolean))
+#define BONOBO_ARG_GET_BOOLEAN(a)   (BONOBO_ARG_GET_GENERAL (a, TC_boolean, CORBA_boolean, NULL))
+#define BONOBO_ARG_SET_BOOLEAN(a,v) (BONOBO_ARG_SET_GENERAL (a, v, TC_boolean, CORBA_boolean, NULL))
 
-#define BONOBO_ARG_GET_INT(a)       (BONOBO_ARG_GET_GENERAL (a, _long))
-#define BONOBO_ARG_SET_INT(a,v)     (BONOBO_ARG_SET_GENERAL (a, v, _long))
-#define BONOBO_ARG_GET_LONG(a)      (BONOBO_ARG_GET_GENERAL (a, _long))
-#define BONOBO_ARG_SET_LONG(a,v)    (BONOBO_ARG_SET_GENERAL (a, v, _long))
+#define BONOBO_ARG_GET_INT(a)       (BONOBO_ARG_GET_GENERAL (a, TC_long, CORBA_long, NULL))
+#define BONOBO_ARG_SET_INT(a,v)     (BONOBO_ARG_SET_GENERAL (a, v, TC_long, CORBA_long, NULL))
+#define BONOBO_ARG_GET_LONG(a)      (BONOBO_ARG_GET_GENERAL (a, TC_long, CORBA_long, NULL))
+#define BONOBO_ARG_SET_LONG(a,v)    (BONOBO_ARG_SET_GENERAL (a, v, TC_long, CORBA_long, NULL))
 
-#define BONOBO_ARG_GET_FLOAT(a)     (BONOBO_ARG_GET_GENERAL (a, _float))
-#define BONOBO_ARG_SET_FLOAT(a,v)   (BONOBO_ARG_SET_GENERAL (a, v, _float))
+#define BONOBO_ARG_GET_FLOAT(a)     (BONOBO_ARG_GET_GENERAL (a, TC_float, CORBA_float, NULL))
+#define BONOBO_ARG_SET_FLOAT(a,v)   (BONOBO_ARG_SET_GENERAL (a, v, TC_float, CORBA_float, NULL))
 
-#define BONOBO_ARG_GET_DOUBLE(a)    (BONOBO_ARG_GET_GENERAL (a, _double))
-#define BONOBO_ARG_SET_DOUBLE(a,v)  (BONOBO_ARG_SET_GENERAL (a, v, _double))
+#define BONOBO_ARG_GET_DOUBLE(a)    (BONOBO_ARG_GET_GENERAL (a, TC_double, CORBA_double, NULL))
+#define BONOBO_ARG_SET_DOUBLE(a,v)  (BONOBO_ARG_SET_GENERAL (a, v, TC_double, CORBA_double, NULL))
 
 #define BONOBO_ARG_GET_STRING(a)    (g_assert ((a)->_type->kind == CORBA_tk_string),	\
 				     *((CORBA_char **)(a->_value)))
@@ -65,6 +65,9 @@ BonoboArg    *bonobo_arg_copy          (BonoboArg    *arg);
 void          bonobo_arg_from_gtk      (BonoboArg    *a, const GtkArg       *arg);
 BonoboArgType bonobo_arg_type_from_gtk (GtkType       t);
 void          bonobo_arg_to_gtk        (GtkArg       *a, const BonoboArg    *arg);
+
+gboolean      bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b,
+					CORBA_Environment *opt_ev);
 
 END_GNOME_DECLS
 

@@ -216,3 +216,23 @@ bonobo_arg_to_gtk (GtkArg *a, const BonoboArg *arg)
 		break;
 	}
 }
+
+gboolean
+bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b, CORBA_Environment *opt_ev)
+{
+	CORBA_Environment ev, *my_ev;
+	gboolean retval;
+
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	retval = CORBA_TypeCode_equal (a, b, my_ev);
+
+	if (!opt_ev)
+		CORBA_exception_free (&ev);
+
+	return retval;
+}

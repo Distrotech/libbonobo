@@ -280,14 +280,14 @@ bonobo_object_trace_refs (BonoboObject *object,
 		object->priv->ao->ref_count++;
 		
 		indent = g_strnfill (++ref_indent, ' ');
-		g_printerr ("%sRef %s:[%p] to %d at %s:%d\n", indent,
+		g_printerr ("%s[%d]:Ref %s:[%p] to %d at %s:%d\n", indent, getpid(),
 			    gtk_type_name (GTK_OBJECT (object)->klass->type),
 			    object, ao->ref_count, fn, line);
 
 		g_free (indent);
 	} else { /* unref */
 		indent = g_strnfill (ref_indent--, ' ');
-		g_printerr ("%sUnRef %s:[%p] from %d at %s:%d\n", indent, 
+		g_printerr ("%s[%d]:UnRef %s:[%p] from %d at %s:%d\n", indent, getpid(),
 			    gtk_type_name (GTK_OBJECT (object)->klass->type),
 			    ao, ao->ref_count, fn, line);
 		g_free (indent);
@@ -666,7 +666,7 @@ bonobo_object_instance_init (GtkObject    *gtk_object,
 #ifdef BONOBO_REF_HOOKS
 	{
 		char *indent = g_strnfill (++ref_indent, ' ');
-		g_printerr ("%sCreate %s:[%p] to %d\n", indent,
+		g_printerr ("%s[%d]:Create %s:[%p] to %d\n", indent, getpid(),
 			    gtk_type_name (klass->type),
 			    ao, ao->ref_count);
 		g_free (indent);
