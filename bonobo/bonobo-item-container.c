@@ -2,6 +2,13 @@
 /**
  * GNOME container object.
  *
+ * The GnomeContainer object represents a document which may have one
+ * or more embedded document objects.  To embed an object in the
+ * container, create a GnomeClientSite, add it to the container, and
+ * then create an object supporting GNOME::Embeddable and bind it to
+ * the client site.  The GnomeContainer maintains a list of the client
+ * sites which correspond to the objects embedded in the container.
+ *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
  */
@@ -65,8 +72,8 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 	GnomeObject *object = gnome_object_from_servant (servant);
 	GnomeContainer *container = GNOME_CONTAINER (object);
 	GNOME_Container_ObjectList *return_list;
-	GList *l;
 	int items;
+	GList *l;
 	int i;
 	
 	return_list = GNOME_Container_ObjectList__alloc ();
@@ -89,8 +96,8 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 	 */
 	for (i = 0, l = container->client_sites; l; l = l->next, i++){
 		GnomeClientSite *client_site = GNOME_CLIENT_SITE (l->data);
-		GnomeObject *bound_object = client_site->bound_object;
-		
+		GnomeObject *bound_object = GNOME_OBJECT (client_site->bound_object);
+
 		return_list->_buffer [i] = CORBA_Object_duplicate (
 			gnome_object_corba_objref (bound_object), ev);
 	}

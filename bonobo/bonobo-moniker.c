@@ -163,8 +163,8 @@ gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker,
 	g_return_val_if_fail (bind_function != NULL, NULL);
 	
 	gnome_persist_stream_construct (GNOME_PERSIST_STREAM (moniker),
-					moniker_goad_id,
 					(GNOME_Moniker) corba_moniker,
+					moniker_goad_id,
 					NULL, NULL, NULL);
 
 	moniker->bind_function = bind_function;

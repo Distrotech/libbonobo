@@ -1,4 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * Bonobo Main
+ *
+ * Author:
+ *    Miguel de Icaza (miguel@gnu.org)
+ */
 #include <config.h>
 #include <bonobo/gnome-main.h>
 #include <libgnorba/gnorba.h>

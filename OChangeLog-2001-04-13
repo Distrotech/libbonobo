@@ -1,3 +1,34 @@
+1999-07-24  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/gnome-ui-handler.c: Continued work.
+	
+	* bonobo/gnome-moniker.c (gnome_moniker_construct): Fixed the call
+ 	to gnome_persist_stream_construct so that the arguments are in the
+ 	right order.
+
+	* bonobo/gnome-file-moniker.c: Added description to top of file.
+	Include gnome-moniker-client.h
+	(gnome_file_moniker_bind): Added const to the bind options parameter.
+
+	* bonobo/gnome-embeddable.c: Added comment to top of file.
+
+	* bonobo/gnome-embeddable-factory.c: Added description to top of
+ 	file.
+	(gnome_embeddable_signals): Removed irrelevant cut-n-paste signal code.
+
+	* bonobo/gnome-embeddable-client.c: Added description to top of
+ 	file.
+
+	* bonobo/gnome-container.c: Added description to top of file.
+	(impl_enum_objects): Cast client_site->bound_object to GNOME_OBJECT.
+
+	* bonobo/gnome-client-site.c: Added descrption to top of file.
+	(impl_GNOME_client_site_get_moniker): Pass ev, not &ev.
+
+	* bonobo/gnome-bonobo.h: Include gnome-ui-handler.h.
+
+	* bonobo/gnome-bind-context.c: Include bonobo/bonobo.h.
+
 1999-07-21  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-item-container.c: New file.  Implements the

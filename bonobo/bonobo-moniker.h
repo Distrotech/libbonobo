@@ -18,7 +18,7 @@ struct _GnomeMoniker;
 typedef struct _GnomeMoniker GnomeMoniker;
 
 typedef CORBA_Object (*GnomeMonikerBindFn)(GnomeMoniker *moniker,
-					   GNOME_BindOptions *bind_options,
+					   const GNOME_BindOptions *bind_options,
 					   void *closure);
 
 struct _GnomeMoniker {
