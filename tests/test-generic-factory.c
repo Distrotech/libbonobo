@@ -9,7 +9,7 @@ static Bonobo_Unknown obj1, obj2;
 static gboolean
 timeout4 (gpointer data)
 {
-	printf("timeout4\n");
+	printf ("timeout4\n");
 	bonobo_main_quit ();
 	return FALSE;
 }
@@ -17,7 +17,7 @@ timeout4 (gpointer data)
 static gboolean
 timeout3 (gpointer data)
 {
-	printf("timeout3\n");
+	printf ("timeout3\n");
 	bonobo_object_release_unref (obj2, NULL);
 	g_timeout_add (2500, timeout4, NULL);
 	return FALSE;
@@ -26,11 +26,11 @@ timeout3 (gpointer data)
 static gboolean
 timeout2 (gpointer data)
 {
-	printf("timeout2\n");
-	obj2 = bonobo_get_object ("OAFIID:Test_Generic_Factory",
-				  "IDL:Bonobo/Unknown:1.0", NULL);
+	printf ("timeout2\n");
+	obj2 = bonobo_activation_activate ("iid == 'OAFIID:Test_Generic_Factory'",
+					   NULL, 0, NULL, NULL);
 	g_assert (obj2 != CORBA_OBJECT_NIL);
-	printf("activate 2\n");
+	printf ("activate 2\n");
 
 	g_timeout_add (1500, timeout3, NULL);
 	return FALSE;
@@ -39,7 +39,7 @@ timeout2 (gpointer data)
 static gboolean
 timeout1 (gpointer data)
 {
-	printf("timeout1\n");
+	printf ("timeout1\n");
 	bonobo_object_release_unref (obj1, NULL);
 	g_timeout_add (1000, timeout2, NULL);
 	return FALSE;
@@ -49,10 +49,10 @@ timeout1 (gpointer data)
 static gboolean
 run_tests (gpointer data)
 {
-	obj1 = bonobo_get_object ("OAFIID:Test_Generic_Factory",
-				  "IDL:Bonobo/Unknown:1.0", NULL);
+	obj1 = bonobo_activation_activate ("iid == 'OAFIID:Test_Generic_Factory'",
+					   NULL, 0, NULL, NULL);
 	g_assert (obj1 != CORBA_OBJECT_NIL);
-	printf("activate 1\n");
+	printf ("activate 1\n");
 	g_timeout_add (2000, timeout1, NULL);
 	return FALSE;
 }
