@@ -1,3 +1,9 @@
+2004-08-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* Makefile.am (DISTCLEANFILES): Only clean intltool-* in make
+	distclean, not make clean, since there is no rule to regenerate
+	them from the makefile.  Fixes #144541.
+	
 2004-08-23  Tommi Komulainen  <tommi.komulainen@iki.fi>
 
 	* doc/api/tmpl/bonobo-application.sgml

@@ -19,11 +19,11 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
 install-data-local:
 	-mkdir -p $(DESTDIR)$(sysconfdir)/bonobo-activation
-	if test -f $(DESTDIR)$(sysconfdir)/bonobo-activation/bonobo-activation-config.xml; then		\
+	if test -f $(DESTDIR)$(sysconfdir)/bonobo-activation/bonobo-activation-config.xml; then	\
 		echo "bonobo-activation-config.xml configuration file not changed";		\
 	else											\
 		$(INSTALL_DATA) $(top_srcdir)/bonobo-activation-config.xml			\
-			$(DESTDIR)$(sysconfdir)/bonobo-activation;					\
+			$(DESTDIR)$(sysconfdir)/bonobo-activation;				\
 	fi
 
-CLEANFILES=intltool-extract intltool-merge intltool-update
+DISTCLEANFILES=intltool-extract intltool-merge intltool-update
