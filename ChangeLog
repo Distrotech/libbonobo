@@ -1,3 +1,19 @@
+2003-04-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-arg.c, bonobo/bonobo-generic-factory.h,
+	* bonobo/bonobo-item-handler.c, bonobo/bonobo-listener.c,
+	* bonobo/bonobo-main.c, bonobo/bonobo-main.h,
+	* bonobo/bonobo-moniker.c, bonobo/bonobo-moniker.h,
+	* bonobo/bonobo-object.c, bonobo/bonobo-persist-file.c,
+	* bonobo/bonobo-persist-stream.h, bonobo/bonobo-persist.c,
+	* bonobo/bonobo-property-bag-client.h, bonobo/bonobo-property-bag.c,
+	* bonobo/bonobo-property-bag.h, bonobo/bonobo-shlib-factory.c,
+	* bonobo/bonobo-shlib-factory.h, bonobo/bonobo-stream-client.c,
+	* bonobo/bonobo-types.c, doc/api/libbonobo-sections.txt: Minor
+	changes (documentation comments, mismatch between parameter names
+	in header files and in the C files) to fix most gtk-doc scanning
+	warnings.
+
 2003-04-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* Makefile.am (EXTRA_DIST): Include bonobo-activation-config.xml,

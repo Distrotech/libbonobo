@@ -52,10 +52,14 @@ Bonobo initialization.
 
 @argc: 
 @argv: 
+@opt_orb: 
+@opt_poa: 
+@opt_manager: 
+@Returns: 
+<!-- # Unused Parameters # -->
 @orb: 
 @poa: 
 @manager: 
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_debug_shutdown ##### -->
@@ -97,7 +101,7 @@ Bonobo initialization.
 
 <!-- ##### FUNCTION bonobo_orb ##### -->
 <para>
-   Returns the CORBA_ORB object that is being used by Bonobo.
+
 </para>
 
 @Returns: 
@@ -105,7 +109,7 @@ Bonobo initialization.
 
 <!-- ##### FUNCTION bonobo_poa ##### -->
 <para>
-   Returns the POA object that is being used by Bonobo.
+
 </para>
 
 @Returns: 
@@ -113,7 +117,7 @@ Bonobo initialization.
 
 <!-- ##### FUNCTION bonobo_poa_manager ##### -->
 <para>
-   Returns the POA Manager object that is being used by Bonobo.
+
 </para>
 
 @Returns: 

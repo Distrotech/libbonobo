@@ -58,11 +58,11 @@ BonoboGenericFactory *bonobo_generic_factory_new_closure     (const char        
 
 BonoboGenericFactory *bonobo_generic_factory_construct	     (BonoboGenericFactory *factory,
 							      const char           *act_iid,
-							      GClosure             *factory_cb);
+							      GClosure             *factory_closure);
 
 void                  bonobo_generic_factory_construct_noreg (BonoboGenericFactory *factory,
 							      const char           *act_iid,
-							      GClosure             *factory_cb);
+							      GClosure             *factory_closure);
 
 int                   bonobo_generic_factory_main	     (const char           *act_iid,
 							      BonoboFactoryCallback factory_cb,

@@ -167,7 +167,7 @@ bonobo_listener_new_closure (GClosure *event_closure)
 
 /**
  * bonobo_listener_new:
- * @event_callback: function to be invoked when an event is emitted by the EventSource.
+ * @event_cb: function to be invoked when an event is emitted by the EventSource.
  * @user_data: data passed to the functioned pointed by @event_call.
  *
  * Creates a generic event listener.  The listener calls the @event_callback 

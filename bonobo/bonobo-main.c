@@ -70,7 +70,6 @@ static gint bonobo_inited = 0;
 
 /**
  * bonobo_is_initialized:
- * @void: 
  * 
  *   This allows you to protect against double
  * initialization in your code.
@@ -85,7 +84,6 @@ bonobo_is_initialized (void)
 
 /**
  * bonobo_shutdown:
- * @void: 
  * 
  *   This shuts down the ORB and any other bonobo related
  * resources.

@@ -206,7 +206,7 @@ BONOBO_TYPE_FUNC_FULL (BonoboItemHandler,
 
 /**
  * bonobo_item_handler_construct:
- * @container: The handler object to construct
+ * @handler: The handler object to construct
  * @enum_objects: The closure implementing enumObjects
  * @get_object: The closure implementing getObject
  *
@@ -235,6 +235,9 @@ bonobo_item_handler_construct (BonoboItemHandler *handler,
 
 /**
  * bonobo_item_handler_new:
+ * @enum_objects: callback invoked for Bonobo::ItemContainer::enum_objects
+ * @get_object: callback invoked for Bonobo::ItemContainer::get_objects
+ * @user_data: extra data passed on the callbacks
  *
  * Creates a new BonoboItemHandler object.  These are used to hold
  * client sites.
@@ -262,6 +265,8 @@ bonobo_item_handler_new (BonoboItemHandlerEnumObjectsFn enum_objects,
 
 /**
  * bonobo_item_handler_new_closure:
+ * @enum_objects: closure invoked for Bonobo::ItemContainer::enum_objects
+ * @get_object: closure invoked for Bonobo::ItemContainer::get_objects
  *
  * Creates a new BonoboItemHandler object.  These are used to hold
  * client sites.

@@ -118,12 +118,6 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 @factory_cb: 
 @user_data: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@oaf_iid: 
-@factory: 
-@component_id: 
-@data: 
-@goad_id: 
 
 
 <!-- ##### FUNCTION bonobo_generic_factory_new_closure ##### -->
@@ -143,16 +137,10 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 
 @factory: 
 @act_iid: 
-@factory_cb: 
+@factory_closure: 
 @Returns: 
 <!-- # Unused Parameters # -->
-@oaf_iid: 
-@c_factory: 
-@corba_factory: 
-@user_data: 
-@component_id: 
-@data: 
-@goad_id: 
+@factory_cb: 
 
 
 <!-- ##### FUNCTION bonobo_generic_factory_construct_noreg ##### -->
@@ -162,6 +150,8 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 
 @factory: 
 @act_iid: 
+@factory_closure: 
+<!-- # Unused Parameters # -->
 @factory_cb: 
 
 

@@ -21,7 +21,7 @@
  * Create a new BonoboArg with the specified type
  * the value of the BonoboArg is initially empty.
  * 
- * Return value: 
+ * Returns: the new #BonoboArg
  **/
 BonoboArg *
 bonobo_arg_new (BonoboArgType t)
@@ -63,6 +63,8 @@ bonobo_arg_new (BonoboArgType t)
  * @data: the data for the BonoboArg to be created
  *
  * Create a new BonoboArg with the specified type and data
+ *
+ * Returns: the new #BonoboArg
  */
 BonoboArg * 
 bonobo_arg_new_from (BonoboArgType t, gconstpointer data)
@@ -96,7 +98,7 @@ bonobo_arg_release (BonoboArg *arg)
  * 
  * This function duplicates @a by a deep copy
  * 
- * Return value:a copy of @arg
+ * Returns: a copy of @arg
  **/
 BonoboArg *
 bonobo_arg_copy (const BonoboArg *arg)
@@ -120,7 +122,7 @@ bonobo_arg_copy (const BonoboArg *arg)
  * 
  * This maps a GType to a BonoboArgType
  * 
- * Return value: the mapped type or NULL on failure.
+ * Return value: the mapped type or %NULL on failure.
  **/
 BonoboArgType
 bonobo_arg_type_from_gtype (GType id)
@@ -152,7 +154,7 @@ bonobo_arg_type_from_gtype (GType id)
  * 
  * This maps a BonoboArgType to a GType
  * 
- * Return value: the mapped type or 0 on failure
+ * Return value: the mapped type or %0 on failure
  **/
 GType
 bonobo_arg_type_to_gtype (BonoboArgType id)
@@ -201,7 +203,7 @@ bonobo_arg_type_to_gtype (BonoboArgType id)
 /**
  * bonobo_arg_from_gvalue:
  * @a: pointer to blank BonoboArg
- * @arg: GValue to copy
+ * @value: #GValue to copy
  * 
  * This maps a GValue @value to a BonoboArg @a;
  * @a must point to a freshly allocated BonoboArg
@@ -267,7 +269,7 @@ bonobo_arg_from_gvalue (BonoboArg *a, const GValue *value)
 
 /**
  * bonobo_arg_to_gvalue:
- * @a: pointer to a blank GtkArk
+ * @value: pointer to a blank #GValue
  * @arg: the BonoboArg to copy
  * 
  * Maps a BonoboArg to a GtkArg; @a must point
@@ -329,11 +331,11 @@ bonobo_arg_to_gvalue (GValue *value, const BonoboArg *arg)
  * @b: a type code
  * @opt_ev: optional exception environment or NULL.
  * 
- * This compares two BonoboArgType's in @a and @b.
- * The @opt_ev is an optional CORBA_Environment for
- * exceptions, or NULL. This function is commutative.
+ * This compares two #BonoboArgType's in @a and @b.
+ * The @opt_ev is an optional #CORBA_Environment for
+ * exceptions, or %NULL. This function is commutative.
  * 
- * Return value: TRUE if equal, FALSE if different
+ * Return value: %TRUE if equal, %FALSE if different
  **/
 gboolean
 bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b, CORBA_Environment *opt_ev)
@@ -359,16 +361,16 @@ bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b, CORBA_Environment *o
  * bonobo_arg_is_equal:
  * @a: a bonobo arg
  * @b: another bonobo arg
- * @opt_ev: optional exception environment or NULL.
+ * @opt_ev: optional exception environment or %NULL.
  * 
- * Compares two BonoboArgs for equivalence; will return TRUE
+ * Compares two #BonoboArg's for equivalence; will return %TRUE
  * if equivalent for all simple cases. For Object references
  * CORBA sometimes denies 2 object references are equivalent
  * even if they are [ this is a feature_not_bug ].
  *
  * This function is commutative.
  * 
- * Return value: TRUE if @a == @b
+ * Return value: %TRUE if @a == @b
  **/
 gboolean
 bonobo_arg_is_equal (const BonoboArg *a, const BonoboArg *b, CORBA_Environment *opt_ev)

@@ -122,8 +122,9 @@ powerful feature set. Most people use #BonoboMonikerSimple.
 </para>
 
 @moniker: 
-@unescaped_name: 
+@name: 
 <!-- # Unused Parameters # -->
+@unescaped_name: 
 @num_chars: 
 
 

@@ -275,9 +275,10 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 
 @get_prop: 
 @set_prop: 
-@event_source: 
+@es: 
 @Returns: 
 <!-- # Unused Parameters # -->
+@event_source: 
 @user_data: 
 
 
@@ -289,9 +290,10 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 @pb: 
 @get_prop: 
 @set_prop: 
-@event_source: 
+@es: 
 @Returns: 
 <!-- # Unused Parameters # -->
+@event_source: 
 @user_data: 
 
 

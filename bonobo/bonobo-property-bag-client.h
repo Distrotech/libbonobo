@@ -229,12 +229,12 @@ bonobo_pbclient_get                      (Bonobo_PropertyBag  bag,
 char *
 bonobo_pbclient_setv                     (Bonobo_PropertyBag  bag,
 					  CORBA_Environment  *ev,
-					  const char         *first_prop,
+					  const char         *first_arg,
 					  va_list             var_args);
 char *
 bonobo_pbclient_getv                     (Bonobo_PropertyBag  bag,
 					  CORBA_Environment  *ev,
-					  const char         *first_prop,
+					  const char         *first_arg,
 					  va_list             var_args);
 
 void

@@ -557,9 +557,11 @@ It is difficult to know how to solve this problem.
 
 @bag: 
 @ev: 
-@first_prop: 
+@first_arg: 
 @var_args: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@first_prop: 
 
 
 <!-- ##### FUNCTION bonobo_pbclient_getv ##### -->
@@ -569,9 +571,11 @@ It is difficult to know how to solve this problem.
 
 @bag: 
 @ev: 
-@first_prop: 
+@first_arg: 
 @var_args: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@first_prop: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_setv ##### -->

@@ -142,6 +142,8 @@ bonobo_persist_generate_content_types (int num, ...)
  * method in derived implementations, because a BonoboPersist instance
  * doesn't make a lot of sense, but the iid private field has to be
  * set at construction time.
+ *
+ * Returns: the #BonoboPersist.
  */
 BonoboPersist *
 bonobo_persist_construct (BonoboPersist *persist,

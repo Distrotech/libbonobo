@@ -45,11 +45,13 @@ bonobo-shlib-factory
 </para>
 
 @factory: 
-@component_id: 
+@act_iid: 
 @poa: 
 @act_impl_ptr: 
 @closure: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@component_id: 
 
 
 <!-- ##### FUNCTION bonobo_shlib_factory_new ##### -->
@@ -70,11 +72,13 @@ bonobo-shlib-factory
 
 </para>
 
-@component_id: 
+@act_iid: 
 @poa: 
 @act_impl_ptr: 
 @factory_closure: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@component_id: 
 
 
 <!-- ##### FUNCTION bonobo_shlib_factory_std ##### -->

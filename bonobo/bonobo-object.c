@@ -241,9 +241,11 @@ bonobo_object_finalize_servant (PortableServer_Servant servant,
 #ifndef bonobo_object_ref
 /**
  * bonobo_object_ref:
- * @object: A BonoboObject you want to ref-count
+ * @obj: A BonoboObject you want to ref-count
  *
  * Increments the reference count for the aggregate BonoboObject.
+ *
+ * Returns: @object
  */
 gpointer
 bonobo_object_ref (gpointer obj)
@@ -275,9 +277,11 @@ bonobo_object_ref (gpointer obj)
 #ifndef bonobo_object_unref
 /**
  * bonobo_object_unref:
- * @object: A BonoboObject you want to unref.
+ * @obj: A BonoboObject you want to unref.
  *
  * Decrements the reference count for the aggregate BonoboObject.
+ *
+ * Returns: %NULL.
  */
 gpointer
 bonobo_object_unref (gpointer obj)
@@ -513,6 +517,8 @@ get_unknown_unref_imethod (void)
  * it also decrements the ref count on the bonobo object.
  * This is the converse of bonobo_object_dup_ref. We
  * tolerate object == CORBA_OBJECT_NIL silently.
+ *
+ * Returns: %CORBA_OBJECT_NIL.
  **/
 Bonobo_Unknown
 bonobo_object_release_unref (Bonobo_Unknown     object,
@@ -1504,6 +1510,7 @@ bonobo_type_setup (GType             type,
  * commences at, or 0 if we are inheriting a plain GObject
  * from a BonoboObject, adding no new CORBA interfaces
  * @info: the standard GTypeInfo.
+ * @type_name: the name of the type being registered.
  * 
  * This function is the main entry point for deriving bonobo
  * server interfaces.
