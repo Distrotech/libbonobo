@@ -1,5 +1,18 @@
 2000-09-15  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-xml.c (reinstate_node): add 'else' to
+	prune_overrides' to cure memory corruption.
+
+	* bonobo/bonobo-win.c (menu_item_create): fix incorrect free.
+
+	* bonobo/bonobo-ui-xml.c (override_node_with): add replace_override
+	signal. (bonobo_ui_xml_class_init): add signal.
+
+	* bonobo/bonobo-win.c (replace_override_fn): impl.
+	(construct_priv): connect it.
+
+2000-09-15  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_accel_set),
 	(bonobo_ui_util_accel_get): implement.
 	(bonobo_ui_util_build_accel): re-write.
