@@ -1,5 +1,14 @@
 2000-10-08  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/bonobo-selector.h, bonobo/bonobo-selector.c
+	(bonobo_selector_get_selected_name): New function.
+	(bonobo_selector_get_selected_description): New function.
+
+	* gshell/inout.c (verb_LaunchComponent): Added verb "LaunchComponent"
+	which is used to launch an arbitrary component.
+
+2000-10-08  Martin Baulig  <baulig@suse.de>
+
 	* bonobo/bonobo-zoomable-frame.c: Renamed `_servant' to `servant'.
 	(CLASS): Removed this unused #define.
 	(impl_Bonobo_ZoomableFrame_report_zoom_level_changed): Added.
