@@ -1,3 +1,12 @@
+2002-04-16  Richard Kinder <r_kinder@yahoo.com>
+
+	* bonobo/bonobo-stream-client.c
+	(bonobo_stream_client_read): use g_try_malloc instead.
+
+2002-04-12  Michael Meeks  <michael@ximian.com>
+
+	* Version 1.115.0
+
 2002-03-31  Havoc Pennington  <hp@pobox.com>
 
 	* tests/test-stream-mem.c (test_read_write): trivial fix for

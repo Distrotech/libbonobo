@@ -285,7 +285,7 @@ bonobo_stream_client_read (const Bonobo_Stream stream,
 	if (length == 0)
 		return NULL;
 
-	mem = g_malloc (length);
+	mem = g_try_malloc (length);
 	if (!mem) {
 		CORBA_exception_set_system (ev, ex_CORBA_NO_MEMORY,
 					    CORBA_COMPLETED_NO);

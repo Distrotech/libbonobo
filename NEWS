@@ -1,3 +1,9 @@
+libbonobo 1.115.0
+
+	* Bugs fixed
+		+ SEEK_CUR rename (Murray Cumming)
+		+ event_source fix (Stephane Demurget)
+
 libbonobo 1.113.0
 
 	* Bugs fixed
