@@ -33,14 +33,13 @@ main (int argc, char *argv[])
   poptContext ctx;
 
   CORBA_Environment ev;
-  char *retval;
   CORBA_ORB orb;
 
   signal(SIGINT, do_exit);
   signal(SIGTERM, do_exit);
 
   CORBA_exception_init(&ev);
-  orb = oaf_orb_init(&argc, argv);
+  orb = oaf_init(argc, argv);
 
   ctx = poptGetContext("oaf-empty-server", argc, argv, oaf_popt_options, 0);
   while(poptGetNextOpt(ctx) >= 0);

@@ -8,6 +8,7 @@ oaf_active_server_register(const char *iid, CORBA_Object obj)
 {
   OAF_ObjectDirectory od;
   OAFRegistrationCategory regcat = {"IDL:OAF/ObjectDirectory:1.0"};
+  OAFRegistrationCategory ac_regcat;
   CORBA_Environment ev;
   OAF_RegistrationResult retval;
   const char *actid;
@@ -54,7 +55,20 @@ oaf_active_server_register(const char *iid, CORBA_Object obj)
   od = oaf_service_get(&regcat);
 
   if(CORBA_Object_is_nil(od, &ev))
-    return OAF_REG_ERROR;
+    {
+      CORBA_Object ac;
+
+      /* If we can't get an object directory, get an activation context (in case oafd needs starting)
+	 and then try again */
+      ac_regcat = regcat;
+      ac_regcat.name = "IDL:OAF/ActivationContext:1.0";
+      ac = oaf_service_get(&ac_regcat);
+      if(CORBA_Object_is_nil(ac, &ev))
+	return OAF_REG_ERROR;
+      od = oaf_service_get(&regcat);
+      if(CORBA_Object_is_nil(od, &ev))
+	return OAF_REG_ERROR;
+    }
 
   retval = OAF_ObjectDirectory_register_new(od, (char *)iid, obj, &ev);
   CORBA_exception_free(&ev);
