@@ -88,7 +88,7 @@ bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
 	
 	ret = bonobo_activation_active_server_register (oaf_iid, BONOBO_OBJREF (factory));
 
-	if (ret == Bonobo_ACTIVATION_REG_ERROR) {
+	if (ret != Bonobo_ACTIVATION_REG_SUCCESS) {
 		bonobo_object_unref (BONOBO_OBJECT (factory));
 		return NULL;
 	}

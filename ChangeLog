@@ -1,3 +1,9 @@
+2001-10-21  jacob berkman  <jacob@ximian.com>
+
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_construct): always return NULL if we don't
+	successfully register with bonobo-activation
+
 2001-10-20  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-arg.c (bonobo_arg_type_to_gtype),
