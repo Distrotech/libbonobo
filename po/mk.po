@@ -1,19 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of libbonobo.HEAD.po to Macedonian
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Ivan Stojmirov <stojmir@linux.net.mk>, 2002
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-10-19 05:05+0200\n"
-"PO-Revision-Date: 2002-10-25 17:35GMT\n"
-"Last-Translator: Angov Arangel <ufo@linux.net.mk>\n"
-"Language-Team: Macedonian <main-gnomk@sourceforge.net>\n"
+"Project-Id-Version: libbonobo.HEAD\n"
+"POT-Creation-Date: 2002-12-13 05:57+0100\n"
+"PO-Revision-Date: 2002-12-15 22:55+0100\n"
+"Last-Translator: Ivan Stojmirov <stojmir@linux.net.mk>\n"
+"Language-Team: Macedonian <mk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.0beta2\n"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -113,15 +113,15 @@ msgstr "протокот не е најден"
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
-msgstr ""
+msgstr "не е најдено својство"
 
 #: bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr ""
+msgstr "својството има невалиден тип"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr ""
+msgstr "својството е само за читање"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
@@ -129,7 +129,7 @@ msgstr "конфигурирањето на бекендот на базата �
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr ""
+msgstr "Не може да се најде Moniker интерфејсот"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
@@ -137,11 +137,11 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr ""
+msgstr "Синтаксна грешка во Moniker"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr ""
+msgstr "Moniker има непознат Moniker префикс"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
@@ -170,7 +170,7 @@ msgstr "HTTP Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "Moniker за ракување со ORB IOR"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
@@ -178,11 +178,11 @@ msgstr "Стандардна Moniker фабрика"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "Општ Moniker за Oaf активација"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "Општ Moniker за Oaf прашалник"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
@@ -190,11 +190,11 @@ msgstr ""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr ""
+msgstr "Moniker за општи предмети"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "stream MonikerExtender"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
@@ -234,3 +234,4 @@ msgstr ""
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Се поојави исклучок '%s'"
+
