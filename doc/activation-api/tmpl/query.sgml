@@ -22,31 +22,31 @@ servers are started.
 
 </para>
 
-<!-- ##### TYPEDEF OAF_ImplementationID ##### -->
+<!-- ##### TYPEDEF Bonobo_ImplementationID ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### TYPEDEF OAF_ActivationID ##### -->
+<!-- ##### TYPEDEF Bonobo_ActivationID ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT OAF_ServerInfo ##### -->
+<!-- ##### STRUCT Bonobo_ServerInfo ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### TYPEDEF OAF_ActivationFlags ##### -->
+<!-- ##### TYPEDEF Bonobo_ActivationFlags ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION oaf_query ##### -->
+<!-- ##### FUNCTION bonobo_activation_query ##### -->
 <para>
 
 </para>
@@ -57,7 +57,7 @@ servers are started.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_activate ##### -->
+<!-- ##### FUNCTION bonobo_activation_activate ##### -->
 <para>
 
 </para>
@@ -70,7 +70,7 @@ servers are started.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_activate_from_id ##### -->
+<!-- ##### FUNCTION bonobo_activation_activate_from_id ##### -->
 <para>
 
 </para>
@@ -82,14 +82,14 @@ servers are started.
 @Returns: 
 
 
-<!-- ##### STRUCT OAFActivationCallback ##### -->
+<!-- ##### STRUCT BonoboActivationCallback ##### -->
 <para>
 This is the signature of the function which you must pass
 as a callback to the asynchrounous activation functions.
 </para>
 
 
-<!-- ##### FUNCTION oaf_activate_async ##### -->
+<!-- ##### FUNCTION bonobo_activation_activate_async ##### -->
 <para>
 
 </para>
@@ -102,7 +102,7 @@ as a callback to the asynchrounous activation functions.
 @ev: 
 
 
-<!-- ##### FUNCTION oaf_activate_from_id_async ##### -->
+<!-- ##### FUNCTION bonobo_activation_activate_from_id_async ##### -->
 <para>
 
 </para>

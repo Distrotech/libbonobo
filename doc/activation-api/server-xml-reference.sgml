@@ -1,9 +1,9 @@
 <chapter id="server-xml-reference">
-<title><filename>.oafinfo</filename> file format reference</title>
+<title><filename>.server</filename> file format reference</title>
 
 <para>
-This section describes the format of the .oafinfo files
-used by applications to tell the OAF daemon about the 
+This section describes the format of the .server files
+used by applications to tell the Bonobo Activation daemon about the 
 interfaces they support.
 </para>
 

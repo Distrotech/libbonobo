@@ -1,11 +1,11 @@
 <chapter id="configuring">
-<title>Configuring OAF</title>
+<title>Configuring Bonobo Activation</title>
 
 <sect1>
-<title>.oafinfo search path.</title>
+<title>.server search path.</title>
 <para>
 To know the list of available CORBA servers on your local machine, the OAF daemon
-searches a number of directories for .oafinfo XML files which contain the description
+searches a number of directories for .server XML files which contain the description
 of the services offered by these servers.
 By default, OAF will try to find them in ${prefix}/share/oaf which may be a problem
 if users install other applications using OAF in different prefixes.

@@ -1,194 +1,194 @@
 <STRUCT>
-<NAME>OAFActivationInfo</NAME>
+<NAME>BonoboActivationInfo</NAME>
 typedef struct
 {
 	char *iid;		/* Implementation ID */
 	char *user;		/* You owe this field to boc */
 	char *host;		/* DNS name or IP address */
 	char *domain;		/* This is not a DNS domain, but an activation domain */
-} OAFActivationInfo;
+} BonoboActivationInfo;
 </STRUCT>
 
 <ENUM>
-<NAME>OAF_PropertyType</NAME>
+<NAME>Bonobo_ActivationPropertyType</NAME>
    typedef enum
    {
-      OAF_P_STRING,
-      OAF_P_NUMBER,
-      OAF_P_BOOLEAN,
-      OAF_P_STRINGV
+      Bonobo_ACTIVATION_P_STRING,
+      Bonobo_ACTIVATION_P_NUMBER,
+      Bonobo_ACTIVATION_P_BOOLEAN,
+      Bonobo_ACTIVATION_P_STRINGV
    }
-   OAF_PropertyType;
+   Bonobo_ActivationPropertyType;
 </ENUM>
 
 <STRUCT>
-<NAME>OAF_Property</NAME>
+<NAME>Bonobo_ActivationProperty</NAME>
    typedef struct
    {
-      CORBA_char *name;
-      OAF_PropertyValue v;
+      CORBA_string name;
+      Bonobo_ActivationPropertyValue v;
    }
-   OAF_Property;
+   Bonobo_ActivationProperty;
 </STRUCT>
 
 
 <STRUCT>
-<NAME>OAF_PropertyValue</NAME>
+<NAME>Bonobo_ActivationPropertyValue</NAME>
    typedef struct
    {
-      OAF_PropertyType _d;
+      Bonobo_ActivationPropertyType _d;
       union
       {
-	 CORBA_char *value_string;
+	 CORBA_string value_string;
 	 CORBA_double value_number;
 	 CORBA_boolean value_boolean;
-	 GNOME_stringlist value_stringv;
+	 Bonobo_StringList value_stringv;
       }
       _u;
    }
-   OAF_PropertyValue;
+   Bonobo_ActivationPropertyValue;
 </STRUCT>
 
 <STRUCT>
-<NAME>OAF_ServerInfo</NAME>
+<NAME>Bonobo_ServerInfo</NAME>
    typedef struct
    {
-      OAF_ImplementationID iid;
-      CORBA_char *server_type;
-      CORBA_char *location_info;
-      CORBA_char *username;
-      CORBA_char *hostname;
-      CORBA_char *domain;
-      CORBA_sequence_OAF_Property props;
+      Bonobo_ImplementationID iid;
+      CORBA_string server_type;
+      CORBA_string location_info;
+      CORBA_string username;
+      CORBA_string hostname;
+      CORBA_string domain;
+      CORBA_sequence_Bonobo_ActivationProperty props;
    }
-   OAF_ServerInfo;
+   Bonobo_ServerInfo;
 </STRUCT>
 
 <ENUM>
-<NAME>OAF_RegistrationResult</NAME>
+<NAME>Bonobo_RegistrationResult</NAME>
    typedef enum
    {
-      OAF_REG_SUCCESS,
-      OAF_REG_NOT_LISTED,
-      OAF_REG_ALREADY_ACTIVE,
-      OAF_REG_ERROR
+      Bonobo_ACTIVATION_REG_SUCCESS,
+      Bonobo_ACTIVATION_REG_NOT_LISTED,
+      Bonobo_ACTIVATION_REG_ALREADY_ACTIVE,
+      Bonobo_ACTIVATION_REG_ERROR
    }
-   OAF_RegistrationResult;
+   Bonobo_RegistrationResult;
 </ENUM>
 
 <TYPEDEF>
-<NAME>OAF_ActivationFlags</NAME>
-   typedef CORBA_long OAF_ActivationFlags;
-#define OAF_FLAG_NO_LOCAL 1          /* no shared libraries */
-#define OAF_FLAG_PRIVATE 2           /* start a new server and don't register it */
-#define OAF_FLAG_EXISTING_ONLY 4     /* don't start the server if not started */
+<NAME>Bonobo_ActivationFlags</NAME>
+   typedef CORBA_long Bonobo_ActivationFlags;
+#define Bonobo_ACTIVATION_FLAG_NO_LOCAL 1          /* no shared libraries */
+#define Bonobo_ACTIVATION_FLAG_PRIVATE 2           /* start a new server and don't register it */
+#define Bonobo_ACTIVATION_FLAG_EXISTING_ONLY 4     /* don't start the server if not started */
 </TYPEDEF>
 
 <TYPEDEF>
-<NAME>OAF_ActivationID</NAME>
-   typedef CORBA_char *OAF_ActivationID;
+<NAME>Bonobo_ActivationID</NAME>
+   typedef CORBA_string Bonobo_ActivationID;
 </TYPEDEF>
 
 <TYPEDEF>
-<NAME>OAF_ImplementationID</NAME>
-   typedef CORBA_char *OAF_ImplementationID;
+<NAME>Bonobo_ImplementationID</NAME>
+   typedef CORBA_string Bonobo_ImplementationID;
 </TYPEDEF>
 
 <FUNCTION>
-<NAME>oaf_actinfo_stringify</NAME>
-<RETURNS>char *</RETURNS>
-const OAFActivationInfo * actinfo
+<RETURNS>Bonobo_ActivationID</RETURNS>
+<NAME>bonobo_activation_info_stringify</NAME>
+const BonoboActivationInfo * actinfo
 </FUNCTION>
 
 <FUNCTION>
-<RETURNS>OAFActivationInfo *</RETURNS>
-<NAME>oaf_servinfo_to_actinfo</NAME>
-const OAF_ServerInfo * servinfo
+<RETURNS>BonoboActivationInfo *</RETURNS>
+<NAME>bonobo_activation_servinfo_to_actinfo</NAME>
+const Bonobo_ServerInfo * servinfo
 </FUNCTION>
 
 <FUNCTION>
-<RETURNS>void</RETURNS>
-<NAME>oaf_actinfo_free</NAME>
-OAFActivationInfo * actinfo
+<RETURNS>BonoboActivationInfo *</RETURNS>
+<NAME>bonobo_activation_id_parse</NAME>
+const CORBA_char *actid
 </FUNCTION>
 
 <FUNCTION>
-<RETURNS>OAFActivationInfo *</RETURNS>
-<NAME>oaf_actinfo_new</NAME>
+<RETURNS>BonoboActivationInfo *</RETURNS>
+<NAME>bonobo_activation_info_new</NAME>
 void
 </FUNCTION>
 
 <FUNCTION>
-<RETURNS>OAFActivationInfo *</RETURNS>
-<NAME>oaf_actid_parse</NAME>
-const OAF_ActivationID actid
+<RETURNS>void</RETURNS>
+<NAME>bonobo_activation_info_free</NAME>
+BonoboActivationInfo * actinfo
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>CORBA_Context </RETURNS>
-<NAME>oaf_context_get</NAME>
+<NAME>bonobo_activation_context_get</NAME>
 void
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>CORBA_ORB </RETURNS>
-<NAME>oaf_orb_get</NAME>
+<NAME>bonobo_activation_orb_get</NAME>
 void
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>CORBA_ORB</RETURNS>
-<NAME>oaf_init</NAME>
+<NAME>bonobo_activation_init</NAME>
 int argc, 
 char **argv
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>void</RETURNS>
-<NAME>oaf_set_test_components_enabled</NAME>
+<NAME>bonobo_activation_set_test_components_enabled</NAME>
 gboolean val
 </FUNCTION>
 
 
 <FUNCTION>
 <RETURNS>gboolean</RETURNS>
-<NAME>oaf_get_test_components_enabled</NAME>
+<NAME>bonobo_activation_get_test_components_enabled</NAME>
 void
 </FUNCTION>
 
 
 <FUNCTION>
 <RETURNS>gboolean</RETURNS>
-<NAME>oaf_is_initialized</NAME>
+<NAME>bonobo_activation_is_initialized</NAME>
 void
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>const char *</RETURNS>
-<NAME>oaf_hostname_get</NAME>
+<NAME>bonobo_activation_hostname_get</NAME>
 void
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>const char *</RETURNS>
-<NAME>oaf_domain_get</NAME>
+<NAME>bonobo_activation_domain_get</NAME>
 void
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>const char *</RETURNS>
-<NAME>oaf_session_name_get</NAME>
+<NAME>bonobo_activation_session_name_get</NAME>
 void
 </FUNCTION>
 
 
 <MACRO>
-<NAME>oaf_username_get</NAME>
-#define oaf_username_get() g_get_user_name()
+<NAME>bonobo_activation_username_get</NAME>
+#define bonobo_activation_username_get() g_get_user_name()
 </MACRO>
 
 <STRUCT>
-<NAME>OAFPluginObject</NAME>
+<NAME>BonoboActivationPluginObject</NAME>
 typedef struct
 {
 	const char *iid;
@@ -208,44 +208,44 @@ typedef struct
                                                          * implementation's destruction routine. */
 				    CORBA_Environment * ev);
 }
-OAFPluginObject;
+BonoboActivationPluginObject;
 </STRUCT>
 
 <STRUCT>
-<NAME>OAFPlugin</NAME>
+<NAME>BonoboActivationPlugin</NAME>
 typedef struct
 {
-	const OAFPluginObject *plugin_object_list;
+	const BonoboActivationPluginObject *plugin_object_list;
 	const char *description;
 }
-OAFPlugin;
+BonoboActivationPlugin;
 </STRUCT>
 
 
 
 <FUNCTION>
 <RETURNS>CORBA_Object</RETURNS>
-<NAME>oaf_server_activate_shlib</NAME>
+<NAME>bonobo_activation_activate_shlib_server</NAME>
 OAF_ActivationResult * sh, 
                                         CORBA_Environment * ev
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>void</RETURNS>
-<NAME>oaf_plugin_unuse</NAME>
+<NAME>bonobo_activation_plugin_unuse</NAME>
 gpointer impl_ptr
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>void</RETURNS>
-<NAME>oaf_plugin_use</NAME>
+<NAME>bonobo_activation_plugin_use</NAME>
 PortableServer_Servant servant, 
 gpointer impl_ptr
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>OAF_ServerInfoList *</RETURNS>
-<NAME>oaf_query</NAME>
+<NAME>bonobo_activation_query</NAME>
 const char *requirements,
 char *const *selection_order,
 CORBA_Environment * ev
@@ -253,7 +253,7 @@ CORBA_Environment * ev
 
 <FUNCTION>
 <RETURNS>CORBA_Object</RETURNS>
-<NAME>oaf_activate_from_id</NAME>
+<NAME>bonobo_activation_activate_from_id</NAME>
 const OAF_ActivationID aid,
 OAF_ActivationFlags flags,
 OAF_ActivationID * ret_aid,
@@ -262,7 +262,7 @@ CORBA_Environment * ev
 
 <FUNCTION>
 <RETURNS>CORBA_Object</RETURNS>
-<NAME>oaf_activate</NAME>
+<NAME>bonobo_activation_activate</NAME>
 const char *requirements,
 char *const *selection_order,
 OAF_ActivationFlags flags,
@@ -271,16 +271,16 @@ CORBA_Environment * ev
 </FUNCTION>
 
 <TYPEDEF>
-<NAME>OAFActivationCallback</NAME>
-typedef void (*OAFActivationCallback) (CORBA_Object   activated_object, 
-				       const char    *error_reason, 
-				       gpointer       user_data);
+<NAME>BonoboActivationCallback</NAME>
+typedef void (*BonoboActivationCallback) (CORBA_Object   activated_object, 
+                                          const char    *error_reason, 
+				          gpointer       user_data);
 
 </TYPEDEF>
 
 <FUNCTION>
 <RETURNS>void</RETURNS>
-<NAME>oaf_activate_async</NAME>
+<NAME>bonobo_activation_activate_async</NAME>
 const char *requirements,
 char *const *selection_order,
 OAF_ActivationFlags flags,
@@ -291,7 +291,7 @@ CORBA_Environment * ev
 
 <FUNCTION>
 <RETURNS>void</RETURNS>
-<NAME>oaf_activate_from_id_async</NAME>
+<NAME>bonobo_activation_activate_from_id_async</NAME>
 const OAF_ActivationID aid,
 OAF_ActivationFlags flags,
 OAFActivationCallback callback,
@@ -301,7 +301,7 @@ CORBA_Environment * ev
 
 
 <FUNCTION>
-<NAME>oaf_active_server_unregister</NAME>
+<NAME>bonobo_activation_active_server_unregister</NAME>
 <RETURNS>void</RETURNS>
 const char *iid, 
 CORBA_Object obj
@@ -309,40 +309,40 @@ CORBA_Object obj
 
 <FUNCTION>
 <RETURNS>OAF_RegistrationResult</RETURNS>
-<NAME>oaf_active_server_register</NAME>
+<NAME>bonobo_activation_active_server_register</NAME>
 const char *iid,
 						   CORBA_Object obj
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>const char *</RETURNS>
-<NAME>oaf_server_info_prop_lookup</NAME>
-OAF_ServerInfo * server,
+<NAME>bonobo_server_info_prop_lookup</NAME>
+Bonobo_ServerInfo * server,
 const char *prop_name,
 GSList * i18n_languages
 </FUNCTION>
 
 <FUNCTION>
-<RETURNS>OAF_Property *</RETURNS>
-<NAME>oaf_server_info_prop_find</NAME>
-OAF_ServerInfo * server,
+<RETURNS>Bonobo_ActivationProperty *</RETURNS>
+<NAME>bonobo_server_info_prop_find</NAME>
+Bonobo_ServerInfo * server,
 const char *prop_name
 </FUNCTION>
 
 <FUNCTION>
-<RETURNS>OAF_ServerInfo *</RETURNS>
-<NAME>OAF_ServerInfo_duplicate</NAME>
-const OAF_ServerInfo *original
+<RETURNS>Bonobo_ServerInfo *</RETURNS>
+<NAME>Bonobo_ServerInfo_duplicate</NAME>
+const Bonobo_ServerInfo *original
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>CORBA_Object</RETURNS>
-<NAME>oaf_name_service_get</NAME>
+<NAME>bonobo_activation_name_service_get</NAME>
 CORBA_Environment * ev
 </FUNCTION>
 
 <FUNCTION>
 <RETURNS>const char *</RETURNS>
-<NAME>oaf_activation_iid_get</NAME>
+<NAME>bonobo_activation_activation_iid_get</NAME>
 void
 </FUNCTION>

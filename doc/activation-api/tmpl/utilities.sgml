@@ -2,7 +2,7 @@
 Utilities
 
 <!-- ##### SECTION Short_Description ##### -->
-Random misc utilities to manipulate OAF_ServerInfo structures.
+Random misc utilities to manipulate Bonobo_ServerInfo structures.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -14,25 +14,25 @@ Random misc utilities to manipulate OAF_ServerInfo structures.
 
 </para>
 
-<!-- ##### STRUCT OAF_Property ##### -->
+<!-- ##### STRUCT BonoboActivation_Property ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT OAF_PropertyValue ##### -->
+<!-- ##### STRUCT BonoboActivation_PropertyValue ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### ENUM OAF_PropertyType ##### -->
+<!-- ##### ENUM BonoboActivation_PropertyType ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION oaf_server_info_prop_find ##### -->
+<!-- ##### FUNCTION bonobo_server_info_prop_find ##### -->
 <para>
 
 </para>
@@ -48,7 +48,7 @@ Random misc utilities to manipulate OAF_ServerInfo structures.
 </para>
 
 
-<!-- ##### FUNCTION oaf_actinfo_stringify ##### -->
+<!-- ##### FUNCTION bonobo_activation_info_stringify ##### -->
 <para>
 
 </para>
@@ -57,7 +57,7 @@ Random misc utilities to manipulate OAF_ServerInfo structures.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_servinfo_to_actinfo ##### -->
+<!-- ##### FUNCTION bonobo_activation_servinfo_to_actinfo ##### -->
 <para>
 
 </para>
@@ -66,7 +66,7 @@ Random misc utilities to manipulate OAF_ServerInfo structures.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_actid_parse ##### -->
+<!-- ##### FUNCTION bonobo_activation_id_parse ##### -->
 <para>
 
 </para>
@@ -75,7 +75,15 @@ Random misc utilities to manipulate OAF_ServerInfo structures.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_actinfo_free ##### -->
+<!-- ##### FUNCTION bonobo_activation_info_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_activation_info_free ##### -->
 <para>
 
 </para>
@@ -83,7 +91,7 @@ Random misc utilities to manipulate OAF_ServerInfo structures.
 @actinfo: 
 
 
-<!-- ##### FUNCTION OAF_ServerInfo_duplicate ##### -->
+<!-- ##### FUNCTION Bonobo_ServerInfo_duplicate ##### -->
 <para>
 
 </para>

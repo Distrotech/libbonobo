@@ -1,11 +1,11 @@
 <chapter id="tutorial">
-<title>OAF tutorial</title>
+<title>Bonobo Activation tutorial</title>
 
    <sect1>
-   <title>What is OAF ?</title>
+   <title>What is Bonobo Activation ?</title>
 
    <para>
-   OAF was designed as a replacement for the limited libgnorba library used
+   Bonobo Activation was designed as a replacement for the limited libgnorba library used
    in GNOME. libgnorba is responsible on GNOME 1.0.x and 1.2.x systems for
    the activation of CORBA objects. libgnorba allows you to browse the available
    CORBA servers on your system (running or not). It keeps track of the running 
@@ -48,26 +48,26 @@
       </para>
 
       <para>
-      OAF was designed to address these issues. The remote issue is completely solved
-      by the oaf daemon (see <xref linkend="architecture">), the evil hacks regarding X are
+      Bonobo Activation was designed to address these issues. The remote issue is completely solved
+      by the Bonobo Activation daemon (see <xref linkend="architecture">), the evil hacks regarding X are
       part of our past and the grand <emphasis>OAF query langage</emphasis> (see 
       <xref linkend="query-langage">) gives you the ability to perform arbitrary queries
       on the database of CORBA servers.
       </para>
 
       <para>
-      Basically, OAF keeps track of all the CORBA servers installed on your machine and
-      can track any other machine's CORBA servers provided you set up OAF correctly and 
+      Basically, Bonobo Activation keeps track of all the CORBA servers installed on your machine and
+      can track any other machine's CORBA servers provided you set up Bonobo Activation correctly and 
       allows you to perform queries on the properties of these servers.
       The following very simple example will make things rather clear:
 
       <programlisting>
-CORBA_Object o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
-                               NULL, 0, NULL, &amp;ev);
+CORBA_Object o = bonobo_activation_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
+                                             NULL, 0, NULL, &amp;ev);
       </programlisting>
 
       This will ask for a component which supports the GNOME/Graph/Layout:1.0 interface.
-      You can also do much more complicated things. OAF will find one whcih matches the 
+      You can also do much more complicated things. Bonobo Activation will find one whcih matches the 
       query and will take all the necessary measures required to get the server running
       (if it is a shared library progam, it will load the relevant library in memory.
       If you need a Factory, it will launch the factory and request the factory to create
@@ -81,9 +81,9 @@ CORBA_Object o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
       <title>Getting started</title>
 
       <para>
-      Here follows a very simple-stupid example of what you can do with OAF.
-      The complete API description of liboaf, the OAF query langage reference and the
-      <filename>.oafinfo</filename> file format reference are included in this 
+      Here follows a very simple-stupid example of what you can do with Bonobo Activation.
+      The complete API description of bonobo activation, the OAF query langage reference and the
+      <filename>.server</filename> file format reference are included in this 
       document and are recommended readings. Reading <xref linkend="architecture"> is
       also a good idea.
       </para>  
@@ -96,7 +96,7 @@ CORBA_Object o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
    <title>Checklist</title>
 
    <para>
-   If you plan to use OAF for your own CORBA servers, you should use the following simple 
+   If you plan to use Bonobo Activation for your own CORBA servers, you should use the following simple 
    checklist.
    <itemizedlist>
 
@@ -111,25 +111,26 @@ CORBA_Object o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
 
    <listitem>
    <para>
-   Create a proper <filename>.oafinfo</filename> file for your server describing its
+   Create a proper <filename>.server</filename> file for your server describing its
    IDL interfaces, its main properties and the way it is to be activated.
    </para>
    </listitem>
 
    <listitem>
    <para>
-   Call <function>oaf_init</function> (make sure you do not initialize twice by calling 
-   <function>oaf_is_initialized</function>). Then, call <function>oaf_active_server_register</function>
-   to register yourself as running to the OAF daemon.
+   Call <function>bonobo_activation_init</function> (make sure you do not initialize twice by calling 
+   <function>bonobo_activation_is_initialized</function>). Then, call
+   <function>bonobo_activation_active_server_register</function>
+   to register yourself as running to the Bonobo Activation daemon.
    </para>
    </listitem>
 
    </itemizedlist>
 
    If you are a client willing to activate a few servers, it is a little simpler: you 
-   just must make sure you call the <function>oaf_init</function> function and you can then
-   call <function>oaf_query</function> or <function>oaf_activate</function> or 
-   <function>oaf_activate_from_id</function>.
+   just must make sure you call the <function>bonobo_activation_init</function> function and you can then
+   call <function>bonobo_activation_query</function> or <function>bonobo_activation_activate</function> or 
+   <function>bonobo_activation_activate_from_id</function>.
    </para>
 
    <para>

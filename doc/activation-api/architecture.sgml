@@ -1,19 +1,19 @@
 <chapter id="architecture">
-<title>OAF Architecture</title>
+<title>Bonobo Activation Architecture</title>
 
 <sect1 id="oaf-daemon">
-<title>The OAF daemon</title>
+<title>The Bonobo Activation daemon</title>
 <para>
-OAF is nothing but a daemon implementing a set of CORBA interfaces.
-These CORBA interfaces implement a Name service for the set of CORBA 
-servers installed on your system. Basically, OAF knows about all the 
-CORBA servers of your system, running or not. The OAF daemon 
-will activate those servers if you ask for them.
+Bonobo Activation is nothing but a daemon implementing a set of 
+CORBA interfaces. These CORBA interfaces implement a Name service 
+for the set of CORBA servers installed on your system. Basically, 
+OAF knows about all the CORBA servers of your system, running or not. 
+The OAF daemon will activate those servers if you ask for them.
 </para>
 
 <para>
-The OAF daemon features a powerful query langage which allows you to 
-ask for certain services rather than for certain applications.
+The Bonobo Activation daemon features a powerful query langage which 
+allows you to ask for certain services rather than for certain applications.
 </para>
 
 <para>
@@ -37,7 +37,7 @@ and you can add inside other distant ObjectDirectories.
 </para>
 
 <para>
-Each server is described by its .oafinfo file which contains among others
+Each server is described by its .server file which contains among others
 the IDL interfaces this server implements, some specific properties and 
 an <emphasis>IID</emphasis> (Implementation ID). Each IID has to be unique.
 Its format is pretty simple:
@@ -122,7 +122,8 @@ module OAF {
 
 <para>
 Of course, liboaf provides comvenient wrappers for those CORBA functions. Those are named
-<function>oaf_activate_async</function> and <function>oaf_activate_from_id_async</function>.
+<function>bonobo_activation_activate_async</function> and 
+<function>bonobo_activation_activate_from_id_async</function>.
 </para>
 
 </sect1>

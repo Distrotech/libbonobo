@@ -16,7 +16,7 @@
 
 <book>
   <bookinfo>
-    <title>The liboaf Library</title>
+    <title>Bonobo Activation API Reference Manual</title>
 
     <authorgroup>
       <author>
@@ -37,7 +37,7 @@
       under the terms of the GNU Free Documentation License, Version 1.1
       or any later version published by the Free Software Foundation;
       with the Invariant Sections being Tutorial, Configuring, Architecture,
-      Query Langage, .oafinfo reference, Migrating and API reference with no
+      Query Langage, .servver reference, Migrating and API reference with no
       Front-Cover Texts, and with no Back-Cover Texts.
       A copy of the license is included in the section entitled "GNU
       Free Documentation License".
@@ -64,7 +64,7 @@
     <title>API Reference</title>
       <para>
 	This part presents the function reference for the
-	liboaf library.
+	bonobo activation library.
       </para>
 
     &init;

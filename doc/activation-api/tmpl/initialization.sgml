@@ -2,12 +2,12 @@
 Initialization
 
 <!-- ##### SECTION Short_Description ##### -->
-Initializing OAF and its ORB.
+Initializing Bonobo Activation and its ORB.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-These functions allow you to initialize OAF and the ORB
-it is using. Initializing OAF launches the OAF daemon if
+These functions allow you to initialize Bonobo Activation and the ORB
+it is using. Initializing Bonobo Activation launches the Bonobo Activation daemon if
 it is not started.
 </para>
 
@@ -16,7 +16,7 @@ it is not started.
 
 </para>
 
-<!-- ##### FUNCTION oaf_is_initialized ##### -->
+<!-- ##### FUNCTION bonobo_activation_is_initialized ##### -->
 <para>
 
 </para>
@@ -24,7 +24,7 @@ it is not started.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_init ##### -->
+<!-- ##### FUNCTION bonobo_activation_init ##### -->
 <para>
 
 </para>
@@ -34,7 +34,7 @@ it is not started.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_orb_get ##### -->
+<!-- ##### FUNCTION bonobo_activation_orb_get ##### -->
 <para>
 
 </para>
@@ -42,7 +42,7 @@ it is not started.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_name_service_get ##### -->
+<!-- ##### FUNCTION bonobo_activation_name_service_get ##### -->
 <para>
 
 </para>

@@ -2,13 +2,13 @@
 Registration
 
 <!-- ##### SECTION Short_Description ##### -->
-Registering CORBA objects to OAF.
+Registering CORBA objects to Bonobo Activation.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
 When writing a component which can be activated through
-OAF by clients, you need to be register your component
-to OAF once it is created.
+Bonobo Activation by clients, you need to be register your component
+to Bonobo Activation once it is created.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -16,13 +16,13 @@ to OAF once it is created.
 
 </para>
 
-<!-- ##### ENUM OAF_RegistrationResult ##### -->
+<!-- ##### ENUM Bonobo_RegistrationResult ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION oaf_active_server_register ##### -->
+<!-- ##### FUNCTION bonobo_activation_active_server_register ##### -->
 <para>
 
 </para>
@@ -32,7 +32,7 @@ to OAF once it is created.
 @Returns: 
 
 
-<!-- ##### FUNCTION oaf_active_server_unregister ##### -->
+<!-- ##### FUNCTION bonobo_activation_active_server_unregister ##### -->
 <para>
 
 </para>
@@ -41,11 +41,11 @@ to OAF once it is created.
 @obj: 
 
 
-<!-- ##### STRUCT OAFPlugin ##### -->
+<!-- ##### STRUCT BonoboActivationPlugin ##### -->
 <para>
 Components which want to be activated as 
-shared libraries must export an OAFPlugin
-structure of name <structname>OAF_Plugin_info</structname>.
+shared libraries must export an BonoboActivationPlugin
+structure of name <structname>BonoboActivation_Plugin_info</structname>.
 An exmaple of how to use it folows:
 <programlisting>
 static CORBA_Object
@@ -63,12 +63,12 @@ hi_shlib_make_object (PortableServer_POA poa,
                 return CORBA_OBJECT_NIL;
         }
 
-        oaf_plugin_use (poa, impl_ptr);
+        bonobo_activation_plugin_use (poa, impl_ptr);
 
         return object_ref;
 }
 
-static const OAFPluginObject hi_plugin_list[] = {
+static const BonoboActivationPluginObject hi_plugin_list[] = {
         {
                 "OAFIID:Hi:20000923",
                 hi_shlib_make_object
@@ -78,7 +78,7 @@ static const OAFPluginObject hi_plugin_list[] = {
   	}
 };
 
-const OAFPlugin OAF_Plugin_info = {
+const BonoboActivationPlugin BonoboActivation_Plugin_info = {
         hi_plugin_list,
         "Hi example"
 };
@@ -86,13 +86,13 @@ const OAFPlugin OAF_Plugin_info = {
 </para>
 
 
-<!-- ##### STRUCT OAFPluginObject ##### -->
+<!-- ##### STRUCT BonoboActivationPluginObject ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION oaf_plugin_use ##### -->
+<!-- ##### FUNCTION bonobo_activation_plugin_use ##### -->
 <para>
 
 </para>
@@ -101,7 +101,7 @@ const OAFPlugin OAF_Plugin_info = {
 @impl_ptr: 
 
 
-<!-- ##### FUNCTION oaf_plugin_unuse ##### -->
+<!-- ##### FUNCTION bonobo_activation_plugin_unuse ##### -->
 <para>
 
 </para>
