@@ -85,9 +85,6 @@ make_factory (PortableServer_POA poa, const char *iid, gpointer impl_ptr,     \
 static BonoboActivationPluginObject plugin_list[] = {{oafiid, make_factory}, { NULL } };   \
 const  BonoboActivationPlugin Bonobo_Plugin_info = { plugin_list, descr };
 
-#define BONOBO_OAF_SHLIB_FACTORY_MULTI(oafiid, descr, fn, data)               \
-	BONOBO_OAF_SHLIB_FACTORY(oafiid, descr, fn, data)
-
 G_END_DECLS
 
 #endif
