@@ -48,7 +48,7 @@ bonobo_activation_timeout_reg_check (gpointer data)
                 return FALSE;
 
         if (need_ior_printout) {
-                g_error ("This process has not registered the required OafIID "
+                g_error ("This process has not registered the required OAFIID "
                          "your source code should register '%s'. If your code is "
                          "performing delayed registration and this message is trapped "
                          "in error, see bonobo_activation_idle_reg_check_set.",
@@ -181,9 +181,10 @@ bonobo_activation_active_server_unregister (const char *iid, CORBA_Object obj)
 		return;
         }
 
-	od = bonobo_activation_object_directory_get (bonobo_activation_username_get (), 
-                                       bonobo_activation_hostname_get (),
-                                       NULL);
+	od = bonobo_activation_object_directory_get (
+                bonobo_activation_username_get (), 
+                bonobo_activation_hostname_get (),
+                NULL);
 
 	CORBA_exception_init (&ev);
 	if (CORBA_Object_is_nil (od, &ev))

@@ -239,8 +239,6 @@ activatable_servers[] =
 {
 	{"IDL:Bonobo/ActivationContext:1.0", (const char **) bonobo_activation_ac_cmd,
          2, CORBA_OBJECT_NIL}, 
-        {"IDL:Bonobo/ObjectDirectory:1.0", (const char **) bonobo_activation_od_cmd,
-         1, CORBA_OBJECT_NIL},
 	{ NULL}
 };
 
@@ -688,8 +686,43 @@ static const BonoboActivationBaseServiceRegistry rloc_file = {
 	rloc_file_unregister
 };
 
-void
-bonobo_activation_rloc_file_register (void)
+#define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
+
+static CORBA_Object
+local_re_check_fn (const char        *display,
+                   const char        *act_iid,
+                   gpointer           user_data,
+                   CORBA_Environment *ev)
 {
+        return bonobo_activation_internal_service_get_extended (
+                user_data, TRUE, ev);
+}
+
+static CORBA_Object
+local_activator (const BonoboActivationBaseService *base_service,
+                 const char **cmd,
+		 int fd_arg, 
+                 CORBA_Environment *ev)
+{
+	if (
+	    (!base_service->username
+	     || STRMATCH (base_service->username, g_get_user_name ()))
+	    && (!base_service->hostname
+		|| STRMATCH (base_service->hostname, bonobo_activation_hostname_get ()))
+	    && (!base_service->domain
+		|| STRMATCH (base_service->domain, bonobo_activation_domain_get ()))) {
+		return bonobo_activation_server_by_forking (
+                        cmd, FALSE, fd_arg, NULL, NULL, base_service->name,
+                        local_re_check_fn, (gpointer)base_service, ev);
+	}
+
+	return CORBA_OBJECT_NIL;
+}
+
+void
+bonobo_activation_base_service_init (void)
+{
+	bonobo_activation_base_service_activator_add (local_activator, 0);
+
 	bonobo_activation_base_service_registry_add (&rloc_file, 0, NULL);
 }

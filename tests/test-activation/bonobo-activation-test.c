@@ -181,7 +181,10 @@ main (int argc, char *argv[])
 
 	CORBA_exception_init (&ev);
 
-        bonobo_activation_object_directory_get (NULL, NULL, NULL);
+        bonobo_activation_object_directory_get (
+                bonobo_activation_username_get (),
+                bonobo_activation_hostname_get (),
+                NULL);
 
 	bonobo_activation_init (argc, argv);
 /*      putenv("Bonobo_BARRIER_INIT=1"); */

@@ -196,37 +196,59 @@ bonobo_activation_activation_context_get (void)
 	return bonobo_activation_service_get (&base_service);
 }
 
+static Bonobo_ObjectDirectory object_directory = CORBA_OBJECT_NIL;
+
 CORBA_Object
 bonobo_activation_object_directory_get (const char *username,
-                          const char *hostname,
-                          const char *domain)
+                                        const char *hostname,
+                                        const char *domain)
 {
-        BonoboActivationBaseService base_service = { NULL };
+        CORBA_Environment ev;
+        Bonobo_ActivationContext new_ac;
+        Bonobo_ObjectDirectoryList *od_list;
+        static Bonobo_ActivationContext ac = CORBA_OBJECT_NIL;
 
-        base_service.name = "IDL:Bonobo/ObjectDirectory:1.0";
-        base_service.session_name = bonobo_activation_session_name_get ();
-        base_service.username = username;
-        base_service.hostname = hostname;
-        base_service.domain = domain;
+        new_ac = bonobo_activation_activation_context_get ();
+        if (ac == new_ac)
+                return object_directory;
+        ac = new_ac;
+
+        CORBA_exception_init (&ev);
+
+        od_list = Bonobo_ActivationContext__get_directories (ac, &ev);
+        if (ev._major != CORBA_NO_EXCEPTION) {
+                CORBA_exception_free (&ev);
+                return CORBA_OBJECT_NIL;
+        }
+
+        if (od_list->_length != 1) {
+                g_warning ("Extremely strange, strange object directories (%d)"
+                           "registered with the activation context", od_list->_length);
+                CORBA_free (od_list);
+                CORBA_exception_free (&ev);
+                return CORBA_OBJECT_NIL;
+        }
+
+        object_directory = CORBA_Object_duplicate (od_list->_buffer[0], &ev);
         
-        return bonobo_activation_service_get (&base_service);
+        CORBA_free (od_list);
+        CORBA_exception_free (&ev);
+
+        return object_directory;
 }
 
-static char *bonobo_activation_od_ior = NULL;
 static int   bonobo_activation_ior_fd = 1;
 static char *bonobo_activation_activate_iid = NULL;
 
 struct poptOption bonobo_activation_popt_options[] = {
-  {NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
-  {"oaf-od-ior", '\0', POPT_ARG_STRING, &bonobo_activation_od_ior, 0,
-   N_("Object directory to use when registering servers"), "IOR"},
-  {"oaf-ior-fd", '\0', POPT_ARG_INT, &bonobo_activation_ior_fd, 0,
-   N_("File descriptor to print IOR on"), N_("FD")},
-  {"oaf-activate-iid", '\0', POPT_ARG_STRING, &bonobo_activation_activate_iid, 0,
-   N_("IID to activate"), "IID"},
-  {"oaf-private", '\0', POPT_ARG_NONE, &bonobo_activation_private, 0,
-   N_("Prevent registering of server with OAF"), NULL},
-  {NULL}
+        { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL },
+        { "oaf-ior-fd", '\0', POPT_ARG_INT, &bonobo_activation_ior_fd, 0,
+          N_("File descriptor to print IOR on"), N_("FD") },
+        { "oaf-activate-iid", '\0', POPT_ARG_STRING, &bonobo_activation_activate_iid, 0,
+          N_("IID to activate"), "IID" },
+        { "oaf-private", '\0', POPT_ARG_NONE, &bonobo_activation_private, 0,
+          N_("Prevent registering of server with OAF"), NULL },
+        { NULL }
 };
 
 /**
@@ -251,123 +273,6 @@ bonobo_activation_ior_fd_get (void)
 	return bonobo_activation_ior_fd;
 }
 
-/* If it is specified on the command line, it overrides everything else */
-static char *
-cmdline_check (const BonoboActivationBaseServiceRegistry *registry,
-	       const BonoboActivationBaseService *base_service,
-               int *distance,
-	       gpointer user_data)
-{
-	if (!strcmp (base_service->name, "IDL:Bonobo/ObjectDirectory:1.0")) {
-		*distance = 0;
-                g_error ("This path is totally unsupported / tested");
-		return g_strdup (bonobo_activation_od_ior?bonobo_activation_od_ior:getenv("BONOBO_ACTIVATION_OD_IOR"));
-	}
-
-	return NULL;
-}
-
-static BonoboActivationBaseServiceRegistry cmdline_registry = {
-	NULL,
-	NULL,
-	cmdline_check,
-	NULL,
-	NULL
-};
-
-/* If it is specified on the command line, it overrides everything else */
-static char *
-ac_check (const BonoboActivationBaseServiceRegistry *registry,
-	  const BonoboActivationBaseService *base_service, 
-          int *ret_distance,
-	  gpointer user_data)
-{
-	if (!strcmp (base_service->name, "IDL:Bonobo/ObjectDirectory:1.0")) {
-		Bonobo_ActivationContext ac;
-		Bonobo_ObjectDirectoryList *od;
-		CORBA_Environment ev;
-		char *retval, *str_ior;
-
-		ac = bonobo_activation_activation_context_get ();
-
-		CORBA_exception_init (&ev);
-		if (CORBA_Object_is_nil (ac, &ev))
-			return NULL;
-
-		od = Bonobo_ActivationContext__get_directories (ac, &ev);
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			CORBA_exception_free (&ev);
-			return NULL;
-		}
-
-		if (od->_length < 1) {
-			CORBA_free (od);
-			CORBA_exception_free (&ev);
-			return NULL;
-		}
-
-		str_ior =
-			CORBA_ORB_object_to_string (bonobo_activation_orb_get (),
-						    od->_buffer[0], &ev);
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			CORBA_free (od);
-			CORBA_exception_free (&ev);
-			return NULL;
-		}
-		retval = g_strdup (str_ior);
-		CORBA_free (str_ior);
-
-		*ret_distance = 1;
-
-		CORBA_free (od);
-
-		return retval;
-	}
-
-	return NULL;
-}
-
-static BonoboActivationBaseServiceRegistry ac_registry = {
-	NULL,
-	NULL,
-	ac_check,
-	NULL,
-	NULL
-};
-
-#define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
-
-static CORBA_Object
-local_re_check_fn (const char        *display,
-                   const char        *act_iid,
-                   gpointer           user_data,
-                   CORBA_Environment *ev)
-{
-        return bonobo_activation_internal_service_get_extended (
-                user_data, TRUE, ev);
-}
-
-static CORBA_Object
-local_activator (const BonoboActivationBaseService *base_service,
-                 const char **cmd,
-		 int fd_arg, 
-                 CORBA_Environment *ev)
-{
-	if (
-	    (!base_service->username
-	     || STRMATCH (base_service->username, g_get_user_name ()))
-	    && (!base_service->hostname
-		|| STRMATCH (base_service->hostname, bonobo_activation_hostname_get ()))
-	    && (!base_service->domain
-		|| STRMATCH (base_service->domain, bonobo_activation_domain_get ()))) {
-		return bonobo_activation_server_by_forking (
-                        cmd, FALSE, fd_arg, NULL, NULL, base_service->name,
-                        local_re_check_fn, (gpointer)base_service, ev);
-	}
-
-	return CORBA_OBJECT_NIL;
-}
-
 void
 bonobo_activation_preinit (gpointer app, gpointer mod_info)
 {
@@ -376,17 +281,10 @@ bonobo_activation_preinit (gpointer app, gpointer mod_info)
 void
 bonobo_activation_postinit (gpointer app, gpointer mod_info)
 {
-	bonobo_activation_base_service_activator_add (local_activator, 0);
-
-	bonobo_activation_base_service_registry_add (&ac_registry, -500, NULL);
-
-	bonobo_activation_rloc_file_register ();
+	bonobo_activation_base_service_init ();
 
 	if (bonobo_activation_ior_fd > 2)
 		fcntl (bonobo_activation_ior_fd, F_SETFD, FD_CLOEXEC);
-
-	if (bonobo_activation_od_ior)
-		bonobo_activation_base_service_registry_add (&cmdline_registry, -1000, NULL);
 
         if (bonobo_activation_activate_iid)
                 g_timeout_add_full (G_PRIORITY_LOW,
@@ -467,13 +365,8 @@ bonobo_activation_init (int argc, char **argv)
 
 	/* Handle non-popt case */
 	for (i = 1; i < argc; i++) {
-		if (!strncmp
-		    ("--oaf-od-ior=", argv[i], strlen ("--oaf-od-ior="))) {
-			bonobo_activation_od_ior =
-                                g_strdup (argv[i] + strlen ("--oaf-od-ior="));
-		} else if (!strncmp
-                           ("--oaf-ior-fd=", argv[i],
-                            strlen ("--oaf-ior-fd="))) {
+                if (!strncmp ("--oaf-ior-fd=", argv[i],
+                              strlen ("--oaf-ior-fd="))) {
                         bonobo_activation_ior_fd =
                                 atoi (argv[i] + strlen ("--oaf-ior-fd="));
                         if (!bonobo_activation_ior_fd)
@@ -582,6 +475,11 @@ bonobo_activation_debug_shutdown (void)
                 }
 
                 bonobo_activation_release_corba_client ();
+
+                if (object_directory != CORBA_OBJECT_NIL) {
+                        CORBA_Object_release (object_directory, &ev);
+                        object_directory = CORBA_OBJECT_NIL;
+                }
 
                 if (bonobo_activation_orb != CORBA_OBJECT_NIL) {
                         CORBA_ORB_destroy (bonobo_activation_orb, &ev);

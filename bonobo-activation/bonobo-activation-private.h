@@ -47,7 +47,7 @@ CORBA_Object bonobo_activation_server_by_forking      (const char       **cmd,
                                                        BonoboForkReCheckFn re_check,
                                                        gpointer            user_data,
                                                        CORBA_Environment *ev);
-void         bonobo_activation_rloc_file_register     (void);
+void         bonobo_activation_base_service_init      (void);
 int          bonobo_activation_ior_fd_get             (void);
 CORBA_Object bonobo_activation_activation_context_get (void);
 CORBA_Object bonobo_activation_object_directory_get   (const char        *username,
@@ -64,6 +64,7 @@ CORBA_Object bonobo_activation_internal_service_get_extended (
                                                        const BonoboActivationBaseService *base_service,
                                                        gboolean           existing_only,
                                                        CORBA_Environment *ev);
+
 
 #endif /* BONOBO_ACTIVATION_PRIVATE_H */
 
