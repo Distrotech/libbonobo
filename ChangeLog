@@ -1,3 +1,12 @@
+2003-05-19  Michael Meeks  <michael@ximian.com>
+
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory_register_new): update sig.
+
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_register_active_server_ext): add a
+	description parameter.
+
 2003-05-13  Michael Meeks  <michael@ximian.com>
 
 	* activation-server/Makefile.am: add object-directory.h

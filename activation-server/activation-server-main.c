@@ -280,7 +280,7 @@ main (int argc, char *argv[])
         if (naming_service == NULL)
                 g_warning ("Failed to create naming service");
         Bonobo_ObjectDirectory_register_new 
-                (od, NAMING_CONTEXT_IID, &environment, naming_service, 0, &existing, ev);
+                (od, NAMING_CONTEXT_IID, &environment, naming_service, 0, "", &existing, ev);
 	if (existing != CORBA_OBJECT_NIL)
 		CORBA_Object_release (existing, NULL);
 

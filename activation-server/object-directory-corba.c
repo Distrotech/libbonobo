@@ -3,7 +3,7 @@
  *  oafd: OAF CORBA dameon.
  *
  *  Copyright (C) 1999, 2000 Red Hat, Inc.
- *  Copyrigfht (C) 1999, 2000 Eazel, Inc.
+ *  Copyright (C) 1999, 2000 Eazel, Inc.
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU General Public License as
@@ -674,6 +674,7 @@ impl_Bonobo_ObjectDirectory_register_new (
 	const Bonobo_ActivationEnvironment *environment,
 	const CORBA_Object                  obj,
         Bonobo_RegistrationFlags            flags,
+        const CORBA_char                   *description,
         CORBA_Object                       *existing,
 	CORBA_Environment                  *ev)
 {

@@ -220,7 +220,7 @@ bonobo_activation_register_active_server (const char   *iid,
         Bonobo_RegistrationResult rv;
         CORBA_Object              existing;
         rv = bonobo_activation_register_active_server_ext
-                (iid, obj, reg_env, 0, &existing);
+                (iid, obj, reg_env, 0, &existing, NULL);
 	if (existing != CORBA_OBJECT_NIL)
 		CORBA_Object_release (existing, NULL);
         return rv;
@@ -235,6 +235,8 @@ bonobo_activation_register_active_server (const char   *iid,
  * @existing: in case an object with the same IID has already been
  * registered, *existing will contain a reference to the existing
  * object.
+ * @description: An optional component description to be registered
+ * with the server for no server-info components.
  * 
  * This function is the same as
  * bonobo_activation_register_active_server(), except that: 1. you can
@@ -256,14 +258,15 @@ bonobo_activation_register_active_server_ext (const char               *iid,
                                               CORBA_Object              obj,
                                               GSList                   *reg_env,
                                               Bonobo_RegistrationFlags  flags,
-                                              CORBA_Object             *existing)
+                                              CORBA_Object             *existing,
+                                              const char               *description)
 {
 	Bonobo_ObjectDirectory     od;
 	CORBA_Environment          ev;
 	Bonobo_RegistrationResult  retval;
 	const char                *actid;
 
-        g_return_val_if_fail(existing != NULL, Bonobo_ACTIVATION_REG_ERROR);
+        g_return_val_if_fail (existing != NULL, Bonobo_ACTIVATION_REG_ERROR);
         *existing = CORBA_OBJECT_NIL;
 
 	CORBA_exception_init (&ev);
@@ -295,7 +298,9 @@ bonobo_activation_register_active_server_ext (const char               *iid,
                 retval = Bonobo_ObjectDirectory_register_new (
 					od, iid,
 					reg_env ? &environment : &global_reg_env,
-				        obj, flags, existing, &ev);
+				        obj, flags,
+                                        description ? description : "",
+                                        existing, &ev);
 
 		if (reg_env)
 			CORBA_free (environment._buffer);

@@ -27,6 +27,11 @@ General
   e.g. in a menu. If omitted, the "description" attribute will be
   used, if present, otherwise the iid.
 
+* "scope" (stringv) - scope limitations of out of process components;
+	'lang'    - activate per effective language
+	'display' - activate a component per display
+	'screen'  - activate a component per screen
+
 
 Bonobo
 

@@ -38,7 +38,8 @@ Bonobo_RegistrationResult
                                                        CORBA_Object              obj,
                                                        GSList                   *reg_env,
                                                        Bonobo_RegistrationFlags  flags,
-                                                       CORBA_Object             *existing);
+                                                       CORBA_Object             *existing,
+                                                       const char               *description);
 void    bonobo_activation_unregister_active_server    (const char   *iid, 
 						       CORBA_Object  obj);
 
