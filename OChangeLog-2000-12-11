@@ -1,5 +1,7 @@
 Thu Nov 25 12:51:09 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
+	* gshell/gshell.c (frame_create_toolbar): add toolbar support
+
 	* gshell/inout.c (file_open_cmd_cb): add mime type support
 	(buffer_load_ps): add PersistStream support
 	(buffer_load_pf): add PersistFile support
