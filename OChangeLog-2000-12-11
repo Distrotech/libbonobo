@@ -1,3 +1,8 @@
+2000-10-11  Martin Baulig  <baulig@suse.de>
+
+	* components/text-plain/bonobo-text-plain.c: Transformed this
+	from a BonoboEmbeddable into a BonoboControl.
+
 2000-10-11  Miguel de Icaza  <miguel@helixcode.com>
 
 	* idl/bonobo-property.idl: Add get_values and set_values methods.
