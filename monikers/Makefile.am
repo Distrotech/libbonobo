@@ -68,11 +68,11 @@ bonobo_moniker_http_SOURCES =		\
 bonobo_moniker_http_LDADD =		\
 	$(moniker_ldadd)
 
-moniker_control_test_SOURCES =		\
-	moniker-control-test.c
+#moniker_control_test_SOURCES =		\
+#	moniker-control-test.c
 
-moniker_control_test_LDADD =		\
-	$(moniker_ldadd) -lgtkhtml
+#moniker_control_test_LDADD =		\
+#	$(moniker_ldadd) -lgtkhtml
 
 moniker_test_SOURCSE =			\
 	moniker-test.c
