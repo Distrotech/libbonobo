@@ -1,3 +1,19 @@
+libbonobo 2.3.2
+
+	* Features
+		+ very much improved API docs (Gustavo Carneiro,
+		  Martin Kretschmar, Rodrigo Moya)
+		+ dynamic b-a-s path update (Antonio Xu)
+		+ fix DNS reverse-lookup (Shailesh Mittal, Michael) 
+		+ always run in thread-safe mode (Michael)
+		+ tentative BonoboObject locking action (Michael)
+		+ new thread policy APIs (Michael)
+		+ bump default factory timeouts (Gustavo)
+		+ more regression tests (Michael, Gustavo)
+	* Bugs fixed
+		+ de-linc-ization (Michael)
+		+ build fixes (Jens Granseuer, Martin)
+
 libbonobo 2.3.1
 
 	* Features

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-05-06 13:19+0100\n"
+"POT-Creation-Date: 2003-06-09 17:26+0100\n"
 "PO-Revision-Date: 2002-06-07 01:59+0200\n"
 "Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:471
+#: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
 msgstr ""
 "Non foi posible determinar en que proceso fillo estaba listado o servidor"
 
-#: activation-server/activation-context-corba.c:762
+#: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgid "File descriptor to write IOR to"
 msgstr "Descritor do ficheiro no que escribir o IOR"
 
 #: activation-server/activation-server-main.c:73
-#: bonobo-activation/bonobo-activation-init.c:255
+#: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "DF"
 
@@ -85,7 +85,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:891
+#: activation-server/object-directory-corba.c:889
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Condición de carreira ao activar o servidor '%s'"
@@ -124,26 +124,26 @@ msgstr ""
 msgid "Failed to read from child process: %s\n"
 msgstr "Fallo ao ler do proceso fillo: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:296
+#: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
 msgstr "Non foi posible crear un novo proceso (fork)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:319
+#: bonobo-activation/bonobo-activation-fork-server.c:318
 #, c-format
 msgid "Child received signal %u (%s)"
 msgstr "O fillo recibiu o sinal %u (%s)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:324
+#: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Erro non de saída descoñecido (o estado é %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:387
+#: bonobo-activation/bonobo-activation-fork-server.c:400
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation fallou ao establecer o grupo de proceso de %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:399
+#: bonobo-activation/bonobo-activation-fork-server.c:412
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Fallo ao executar %s: %d (%s)\n"
@@ -152,48 +152,48 @@ msgstr "Fallo ao executar %s: %d (%s)\n"
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 
-#: bonobo-activation/bonobo-activation-init.c:255
+#: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
 msgstr "Descritor de ficheiro no que escribir o IOR"
 
-#: bonobo-activation/bonobo-activation-init.c:257
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "IID to activate"
 msgstr "IID a activar"
 
-#: bonobo-activation/bonobo-activation-init.c:259
+#: bonobo-activation/bonobo-activation-init.c:197
 msgid "Prevent registering of server with OAF"
 msgstr "Evitar o rexistro do servidor con OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:344
+#: bonobo-activation/bonobo-activation-init.c:282
 msgid "Bonobo activation options"
 msgstr "Opcións de activación de Bonobo"
 
-#: bonobo-activation/bonobo-activation-shlib.c:101
+#: bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
 msgstr "g_module_open de `%s' fallou con `%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:119
-#: bonobo-activation/bonobo-activation-shlib.c:155
+#: bonobo-activation/bonobo-activation-shlib.c:126
+#: bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
 msgstr "Non se atopa o símbolo Bonobo_Plugin_info en `%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:203
+#: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
 msgstr "A fábrica `%s' devolveu NIL para `%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:220
+#: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "A shlib `%s' non contén `%s'"
 
-#: bonobo/bonobo-object.c:881
+#: bonobo/bonobo-object.c:910
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:881
+#: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr "Erro comprobando erro; non hai excepción"
 msgid "General activation error with no description"
 msgstr "Erro xeral de activación sen descrición"
 
-#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "Non se puido inicializar Bonobo"
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil Libbonobo 1.9.7\n"
-"POT-Creation-Date: 2003-05-06 13:19+0100\n"
+"POT-Creation-Date: 2003-06-09 17:26+0100\n"
 "PO-Revision-Date: 2002-11-09 9:30-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 # server/activation-context-corba.c:513
-#: activation-server/activation-context-corba.c:471
+#: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
 msgstr "எந்த சேய் சேவையகத்தில் பட்டியலிடப்பட்டது என கண்டுபிடிக்க முடியவில்லை"
 
-#: activation-server/activation-context-corba.c:762
+#: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr "IOR எழுத வேண்டிய கோப்பு விவர�
 # bonobo-activation/bonobo-activation-init.c:224
 # server/activation-server-main.c:74
 #: activation-server/activation-server-main.c:73
-#: bonobo-activation/bonobo-activation-init.c:255
+#: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "FD"
 
@@ -88,7 +88,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:891
+#: activation-server/object-directory-corba.c:889
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
 msgstr "'%s தூண்டு செய்யும்போது விதிவிலக்கு (exception)"
@@ -134,30 +134,30 @@ msgid "Failed to read from child process: %s\n"
 msgstr "சேய் செயலியிலிருந்து வாசிக்கமுடியவில்லை: %s\n"
 
 # bonobo-activation/bonobo-activation-fork-server.c:181
-#: bonobo-activation/bonobo-activation-fork-server.c:296
+#: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
 msgstr "புதிய செயலை தொடங்கவில்லை"
 
 # bonobo-activation/bonobo-activation-fork-server.c:202
-#: bonobo-activation/bonobo-activation-fork-server.c:319
+#: bonobo-activation/bonobo-activation-fork-server.c:318
 #, c-format
 msgid "Child received signal %u (%s)"
 msgstr "குறிப்பு ஒன்று சேக்கு கிடைத்தது %u (%s)"
 
 # bonobo-activation/bonobo-activation-fork-server.c:208
-#: bonobo-activation/bonobo-activation-fork-server.c:324
+#: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
 msgstr "தெரியாத, வெளியேறத் தேவையில்லாத பிழை (நிலை %u)"
 
 # bonobo-activation/bonobo-activation-fork-server.c:291
-#: bonobo-activation/bonobo-activation-fork-server.c:387
+#: bonobo-activation/bonobo-activation-fork-server.c:400
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-தொடக்கம், செயல் தொகுதியை %s அமைக்கவில்லை: %s\n"
 
 # bonobo-activation/bonobo-activation-fork-server.c:302
-#: bonobo-activation/bonobo-activation-fork-server.c:399
+#: bonobo-activation/bonobo-activation-fork-server.c:412
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "%s செயல்படுத்த முடியவில்லை: %d (%s)\n"
@@ -167,56 +167,56 @@ msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr ""
 
 # bonobo-activation/bonobo-activation-init.c:224
-#: bonobo-activation/bonobo-activation-init.c:255
+#: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
 msgstr "IOR அச்சிட வேண்டிய கோப்பு விவரிப்பு"
 
 # bonobo-activation/bonobo-activation-init.c:226
-#: bonobo-activation/bonobo-activation-init.c:257
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "IID to activate"
 msgstr "தூண்டு செய்ய வேண்டிய IID"
 
 # bonobo-activation/bonobo-activation-init.c:228
-#: bonobo-activation/bonobo-activation-init.c:259
+#: bonobo-activation/bonobo-activation-init.c:197
 msgid "Prevent registering of server with OAF"
 msgstr "OAFஇல் சேவையகத்தை பதிவுசெய்வதை தடுக்கவும்"
 
 # bonobo-activation/bonobo-activation-init.c:426
-#: bonobo-activation/bonobo-activation-init.c:344
+#: bonobo-activation/bonobo-activation-init.c:282
 msgid "Bonobo activation options"
 msgstr "Bonobo தொடக்க விருப்பங்கள்"
 
 # bonobo-activation/bonobo-activation-shlib.c:102
-#: bonobo-activation/bonobo-activation-shlib.c:101
+#: bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
 msgstr "'%s' இன் ('%s' உடன்) g_module_open நொடிப்படைந்தது"
 
 # bonobo-activation/bonobo-activation-shlib.c:120
 # bonobo-activation/bonobo-activation-shlib.c:156
-#: bonobo-activation/bonobo-activation-shlib.c:119
-#: bonobo-activation/bonobo-activation-shlib.c:155
+#: bonobo-activation/bonobo-activation-shlib.c:126
+#: bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
 msgstr "'%s' இல் Bonobo_Plugin_info குறியீடைக் கண்டுபிடிக்க முடியவில்லை"
 
 # bonobo-activation/bonobo-activation-shlib.c:204
-#: bonobo-activation/bonobo-activation-shlib.c:203
+#: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
 msgstr "'%s' தொழிற்சாலை, '%s' இக்கு NIL மீண்டது"
 
 # bonobo-activation/bonobo-activation-shlib.c:221
-#: bonobo-activation/bonobo-activation-shlib.c:220
+#: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' இல் '%s' கிடையாது"
 
-#: bonobo/bonobo-object.c:881
+#: bonobo/bonobo-object.c:910
 msgid "POA"
 msgstr ""
 
-#: bonobo/bonobo-object.c:881
+#: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
 msgstr ""
 
@@ -356,7 +356,7 @@ msgstr "பிழைபார்க்கும்போது பிழை; வ
 msgid "General activation error with no description"
 msgstr "விவரணம் இல்லாமல் பொதுத் தொடங்கல் பிழை"
 
-#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "பொனோபோவின் தொடக்கமதிப்பளிக்க முடியவில்லை"
 

@@ -45,7 +45,7 @@ TESTS_ENVIRONMENT =					\
 TESTS = test-moniker test-event-source test-object \
 	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem \
 	test-generic-factory test-generic-factory.sh
-EXTRA_DIST = test-properties.sh Test_Generic_Server.server.in test-generic-factory.sh.in
+EXTRA_DIST = test-properties.sh Test_Generic_Factory.server.in test-generic-factory.sh.in
 
 noinst_DATA=Test_Generic_Factory.server
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2003-06-05 14:05+0200\n"
+"POT-Creation-Date: 2003-06-09 17:26+0100\n"
 "PO-Revision-Date: 2003-06-05 10:21+0100\n"
 "Last-Translator: Mathieu van Woerkom <mathieu@brabants.org>\n"
 "Language-Team: Limburgish\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:471
+#: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
 msgstr "Kós neet vènje in welke dochter de server geneump woor"
 
-#: activation-server/activation-context-corba.c:762
+#: activation-server/activation-context-corba.c:763
 msgid "Not a valid Activation ID"
 msgstr "Gein geljige Activation-ID"
 
@@ -41,7 +41,7 @@ msgid "File descriptor to write IOR to"
 msgstr "File descriptor veur IOR nao te sjrieve"
 
 #: activation-server/activation-server-main.c:73
-#: bonobo-activation/bonobo-activation-init.c:286
+#: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "FD"
 
@@ -149,48 +149,48 @@ msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "Teväöl alias-nivoos veur ein locale, geuf mäögelik eine trens aan"
 
 # File descriptor om de afkorting duidelijk te laten. Normale gebruikers weten waarschijnlijk neet wat ein besjtandjsbeschrijver is.
-#: bonobo-activation/bonobo-activation-init.c:286
+#: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
 msgstr "File descriptor veur aafdrökke van de IOR"
 
-#: bonobo-activation/bonobo-activation-init.c:288
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "IID to activate"
 msgstr "Te aktivere IID"
 
-#: bonobo-activation/bonobo-activation-init.c:290
+#: bonobo-activation/bonobo-activation-init.c:197
 msgid "Prevent registering of server with OAF"
 msgstr "Pareer 't registrere van de server mit OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:375
+#: bonobo-activation/bonobo-activation-init.c:282
 msgid "Bonobo activation options"
 msgstr "Bonobo-activation opsies"
 
-#: bonobo-activation/bonobo-activation-shlib.c:101
+#: bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
 msgstr "g_module_open van '%s' mislök: '%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:119
-#: bonobo-activation/bonobo-activation-shlib.c:155
+#: bonobo-activation/bonobo-activation-shlib.c:126
+#: bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
 msgstr "Kèn symbool 'Bonobo_Plugin_info' neet vènje in '%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:203
+#: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
 msgstr "Febrik '%s' goof NIL trök veur '%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:220
+#: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Bibeleteek '%s' hauw gein '%s'"
 
-#: bonobo/bonobo-object.c:886
+#: bonobo/bonobo-object.c:910
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:886
+#: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
 msgstr "Eige CORBA POA"
 
@@ -330,7 +330,7 @@ msgstr "Faeler bie 't naozeen van faeler; gein oetzunjering"
 msgid "General activation error with no description"
 msgstr "Algemeine aktiveringsfaeler zónger ómsjrieving"
 
-#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo kós neet geïnisialiseerd waere"
 
