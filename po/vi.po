@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo VERSION\n"
-"POT-Creation-Date: 2004-05-26 14:30+0100\n"
+"POT-Creation-Date: 2004-05-29 11:19+0100\n"
 "PO-Revision-Date: 2003-10-02 10:06+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -40,7 +40,7 @@ msgid "File descriptor to write IOR to"
 msgstr "Bộ mô tả tập tin để ghi IOR"
 
 #: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "FD"
 msgstr "FD"
 
@@ -89,7 +89,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1151
+#: activation-server/object-directory-corba.c:1148
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Lỗi race condition khi kích hoạt server '%s'"
@@ -165,19 +165,19 @@ msgstr "Lỗi khi thực thi %s: %d (%s)\n"
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "Có quá nhiều bí danh cho locale, có thể do bị lặp"
 
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
 msgstr "Bộ mô tả tập tin để ghi IOR"
 
-#: bonobo-activation/bonobo-activation-init.c:195
+#: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
 msgstr "IID cần kích hoạt"
 
-#: bonobo-activation/bonobo-activation-init.c:197
+#: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
 msgstr "Tránh đăng ký server với OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:283
+#: bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
 msgstr "Tùy chọn bonobo activation"
 

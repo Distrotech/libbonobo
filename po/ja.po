@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
-"POT-Creation-Date: 2004-05-26 14:30+0100\n"
+"POT-Creation-Date: 2004-05-29 11:19+0100\n"
 "PO-Revision-Date: 2004-03-08 23:47+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -43,7 +43,7 @@ msgid "File descriptor to write IOR to"
 msgstr "IOR を書き込むファイル・ディスクリプタ"
 
 #: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "FD"
 msgstr "FD"
 
@@ -92,7 +92,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1151
+#: activation-server/object-directory-corba.c:1148
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "サーバ '%s' を活性化する際に競合発生"
@@ -171,19 +171,19 @@ msgstr ""
 "ロケールに対するエイリアスのレベルが多すぎます (検出でループしている可能性あ"
 "り)"
 
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
 msgstr "IOR の出力先のファイル・ディスクリプタ"
 
-#: bonobo-activation/bonobo-activation-init.c:195
+#: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
 msgstr "IID の活性化"
 
-#: bonobo-activation/bonobo-activation-init.c:197
+#: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
 msgstr "OAF でサーバ登録の禁止"
 
-#: bonobo-activation/bonobo-activation-init.c:283
+#: bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
 msgstr "Bonobo 活性化オプション"
 

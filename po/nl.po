@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2004-05-26 14:30+0100\n"
+"POT-Creation-Date: 2004-05-29 11:19+0100\n"
 "PO-Revision-Date: 2004-03-03 16:46+0100\n"
 "Last-Translator: Huib Kleinhout <huib@stack.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"
@@ -46,7 +46,7 @@ msgid "File descriptor to write IOR to"
 msgstr "File descriptor om IOR naar te schrijven"
 
 #: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "FD"
 msgstr "FD"
 
@@ -96,7 +96,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1151
+#: activation-server/object-directory-corba.c:1148
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Race-conditie bij activeren van server '%s'"
@@ -175,19 +175,19 @@ msgstr ""
 "Te veel alias-niveaus voor een locale, mogelijk een aanwijzing voor een lus"
 
 # File descriptor om de afkorting duidelijk te laten. Normale gebruikers weten waarschijnlijk niet wat een bestandsbeschrijver is.
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
 msgstr "File descriptor voor afdrukken van de IOR"
 
-#: bonobo-activation/bonobo-activation-init.c:195
+#: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
 msgstr "Te activeren IID"
 
-#: bonobo-activation/bonobo-activation-init.c:197
+#: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
 msgstr "Voorkom het registreren van de server met OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:283
+#: bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
 msgstr "bonobo-activation opties"
 

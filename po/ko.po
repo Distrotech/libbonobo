@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.3\n"
-"POT-Creation-Date: 2004-05-26 14:30+0100\n"
+"POT-Creation-Date: 2004-05-29 11:19+0100\n"
 "PO-Revision-Date: 2004-01-21 00:08+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -40,7 +40,7 @@ msgid "File descriptor to write IOR to"
 msgstr "IOR을 출력할 파일 디스크립터"
 
 #: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "FD"
 msgstr "FD"
 
@@ -88,7 +88,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1151
+#: activation-server/object-directory-corba.c:1148
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "서버 '%s'을(를) 활성화하는 데 경쟁 조건 발생"
@@ -167,19 +167,19 @@ msgstr "%s을(를) 실행하는 데 실패했습니다: %d (%s)\n"
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "한 로케일에 대해 alias가 너무 많습니다.  루프일 지도 모릅니다."
 
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
 msgstr "IOR을 인쇄할 파일 인식자"
 
-#: bonobo-activation/bonobo-activation-init.c:195
+#: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
 msgstr "활성화시킬 IID"
 
-#: bonobo-activation/bonobo-activation-init.c:197
+#: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
 msgstr "OAF를 통한 서버의 등록을 금지한다"
 
-#: bonobo-activation/bonobo-activation-init.c:283
+#: bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
 msgstr "보노보 액티베이션 옵션"
 

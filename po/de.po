@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.3\n"
-"POT-Creation-Date: 2004-05-26 14:30+0100\n"
+"POT-Creation-Date: 2004-05-29 11:19+0100\n"
 "PO-Revision-Date: 2004-01-19 18:28+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -43,7 +43,7 @@ msgid "File descriptor to write IOR to"
 msgstr "Datei-Deskriptor, in dem IOR geschrieben wird"
 
 #: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "FD"
 msgstr "FD"
 
@@ -95,7 +95,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1151
+#: activation-server/object-directory-corba.c:1148
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "»Race-Condition« beim Aktivieren des Servers »%s«"
@@ -177,19 +177,19 @@ msgstr ""
 "Für einen Satz Standorteinstellungen wurden zu viele Aliase vergeben. Dies "
 "deutet auf einen Ringschluss die Abhängigkeiten betreffend hin."
 
-#: bonobo-activation/bonobo-activation-init.c:193
+#: bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
 msgstr "Dateibeschreibung, in die die IOR geschrieben wird"
 
-#: bonobo-activation/bonobo-activation-init.c:195
+#: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
 msgstr "Zu aktivierende IID"
 
-#: bonobo-activation/bonobo-activation-init.c:197
+#: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
 msgstr "Registrieren von Servern mit OAF vermeiden"
 
-#: bonobo-activation/bonobo-activation-init.c:283
+#: bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
 msgstr "Bonobo-Activation-Optionen"
 
