@@ -1,0 +1,3 @@
+%token BLAH
+
+root: BLAH

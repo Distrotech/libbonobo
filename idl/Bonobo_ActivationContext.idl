@@ -30,6 +30,10 @@ module OAF {
 	/* Server */
 	struct Server {
 		ImplementationID iid;
+
+		string server_type;
+		string location_info;
+		
 		sequence<Attribute> attrs;
 	};
 	typedef sequence<Server> ServerList;
@@ -54,6 +58,9 @@ module OAF {
 	  void remove_directory(in ObjectDirectory dir);
 
 	  ActivationResult activate(in string requirements, in string selection_order) context("hostID", "domain");
-	  ActivationResult activate_from_id(in ActivationID aid);
+
+	  readonly attribute ServerInfoList servers;
+
+	  ActivationResult activate_from_id(in ActivationID aid) context("hostID", "domain");
 	};
 };
