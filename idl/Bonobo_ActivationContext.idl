@@ -113,6 +113,7 @@ module OAF {
         interface ActivationContext {
                 exception NotListed {};
                 exception AlreadyListed {};
+                exception IncompleteContext {};
                 exception ParseFailed { 
                         string description; 
                 };
@@ -124,17 +125,17 @@ module OAF {
                 ActivationResult activate (in string requirements,
                                            in GNOME::stringlist selection_order,
                                            in ActivationFlags flags)
-                        raises (ParseFailed, GeneralError)
+                        raises (ParseFailed, IncompleteContext, GeneralError)
                         context ("username", "hostname", "domain");
 
                 readonly attribute ServerInfoList servers;
                 ServerInfoList query (in string requirements,
                                       in GNOME::stringlist selection_order)
-                        raises (ParseFailed)
+                        raises (ParseFailed, IncompleteContext)
                         context ("username", "hostname", "domain");
 
                 ActivationResult activate_from_id (in ActivationID aid, in ActivationFlags flags)
-                        raises (ParseFailed, GeneralError)
+                        raises (ParseFailed, IncompleteContext, GeneralError)
                         context ("username", "hostname", "domain");
         };
 };

@@ -510,7 +510,13 @@ ctx_get_value (CORBA_Context ctx, const char *propname,
 
 		CORBA_NVList_free (nvout, ev);
 	} else
+        {                
+                CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                     ex_OAF_ActivationContext_IncompleteContext,
+                                     NULL);
+                
 		retval = NULL;
+        }
 
 	return retval;
 }
@@ -884,6 +890,11 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
         context_username = ctx_get_value (ctx, "username", ev);
         context_hostname = ctx_get_value (ctx, "hostname", ev);
         context_domain = ctx_get_value (ctx, "domain", ev);
+
+	if (ev->_major != CORBA_NO_EXCEPTION)
+        {
+                goto out;
+        }
         
         sort_criteria[0] = g_strconcat ("username == \'", context_username, "\'", NULL);
         sort_criteria[1] = g_strconcat ("hostname == \'", context_hostname, "\'", NULL);
@@ -934,8 +945,12 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 	}
 
 	if (!child)
+        {
+                CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                     ex_OAF_ActivationContext_IncompleteContext,
+                                     NULL);
 		goto out;	/* XXX in future, add hook to allow starting a new OD on demand */
-
+        }
 
 
 
@@ -944,7 +959,12 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
 
 	hostname = ctx_get_value (ctx, "hostname", ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
+        {
+                CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+                                     ex_OAF_ActivationContext_IncompleteContext,
+                                     NULL);
 		goto out;
+        }
 
 	ac_do_activation (servant, si, retval, flags, hostname, ctx, ev);
 
