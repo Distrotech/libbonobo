@@ -7,7 +7,7 @@ oaf_sysconf_SOURCES = 			\
 	$(NULL)
 
 INCLUDES = 					\
-	$(UTIL_CFLAGS)				\
+	$(UTILS_CFLAGS)				\
 	-I$(top_srcdir)				\
 	-I$(top_srcdir)/oafd/			\
 	-I$(top_srcdir)/liboaf/			\
