@@ -1,3 +1,16 @@
+2000-07-25  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo.h: add sizeable
+
+	* bonobo/bonobo-sizeable.[ch]: create.
+
+	* bonobo/bonobo-print-client.h: re-order defines to be more standard.
+
+	* bonobo/bonobo-print.c (bonobo_print_construct): actually return
+	the constructed object; how did this ever work ?
+
+	* bonobo/Makefile.am (libbonobo_la_SOURCES): add bonobo-sizeable
+
 2000-07-25  Andy Hertzfeld <andy@eazel.com>
 
 	* bonobo/bonobo-uih-menu.c: Fixed problem in 
