@@ -1,3 +1,35 @@
+1999-05-25  Nat Friedman  <nat@nat.org>
+
+	* components/image-x-png/image-x-png.gnorba (location_info):
+ 	Changed the description to "image/x-png component factory" for the
+ 	component-factory:image-x-png entry.
+ 
+	* bonobo/test-container.c (add_cmd): Removed unused 'socket'
+ 	variable.  This stuff is handled in gnome-component-client.c these
+ 	days anyway.
+	(add_cmd): Added call to gnome_component_client_activate.
+	(add_image_cmd): Display a warning if the component can't be
+ 	added.
+	(container_file_menu): Use the GNOMEUIINFO_MENU_EXIT_ITEM macro.
+
+	* bonobo/gnome-component.c (gnome_component_class_init): Inherit
+ 	from GnomeObject, not GtkObject.
+	(gnome_component_class_init): Added missing call to
+ 	gtk_object_class_add_signals.  Verbs now work.
+
+	* bonobo/gnome-component-client.h: Added prototypes for
+ 	gnome_component_client_activate and
+ 	gnome_component_client_deactivate.
+
+	* bonobo/gnome-component-client.c (gnome_component_new_view):
+ 	Don't call gtk_container_add on the socket twice.
+	(gnome_component_client_deactivate): Renamed
+ 	gnome_object_client_deactivate to
+ 	gnome_component_client_deactivate.
+	(gnome_component_client_activate): Renamed
+ 	gnome_object_client_activate to
+ 	gnome_component_client_activate.
+
 1999-05-25  Havoc Pennington  <hp@pobox.com>
 
 	* bonobo/gnome-component.c (impl_GNOME_Component_do_verb): Cast
