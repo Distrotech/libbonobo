@@ -23,6 +23,7 @@ static GObjectClass *bonobo_persist_parent_class;
 struct _BonoboPersistPrivate
 {
 	gchar *iid;
+	gboolean dirty;
 };
 
 static inline BonoboPersist *
@@ -49,6 +50,15 @@ impl_Bonobo_Persist_getIId (PortableServer_Servant   servant,
 	return CORBA_string_dup (persist->priv->iid);
 }
 
+static CORBA_boolean
+impl_Bonobo_Persist_isDirty (PortableServer_Servant   servant,
+			     CORBA_Environment       *ev)
+{
+	BonoboPersist *persist = bonobo_persist_from_servant (servant);
+
+	return persist->priv->dirty;
+}
+
 static void
 bonobo_persist_finalize (GObject *object)
 {
@@ -73,6 +83,7 @@ bonobo_persist_class_init (BonoboPersistClass *klass)
 
 	epv->getContentTypes = impl_Bonobo_Persist_getContentTypes;
 	epv->getIId = impl_Bonobo_Persist_getIId;
+	epv->isDirty = impl_Bonobo_Persist_isDirty;
 }
 
 static void
@@ -140,4 +151,18 @@ bonobo_persist_construct (BonoboPersist *persist,
 	persist->priv->iid = g_strdup (iid);
 
 	return persist;
+}
+
+/**
+ * bonobo_persist_set_dirty:
+ * @persist: A BonoboPersist
+ * @dirty: A flag indicating the dirty status of this object.
+ *
+ * Sets the dirty status of the interface which is reported via
+ * the isDirty method.
+ */
+void
+bonobo_persist_set_dirty (BonoboPersist *persist, gboolean dirty)
+{
+	persist->priv->dirty = dirty;
 }

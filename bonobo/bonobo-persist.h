@@ -45,6 +45,10 @@ Bonobo_Persist_ContentTypeList *bonobo_persist_generate_content_types (int num,
 
 BonoboPersist                  *bonobo_persist_construct (BonoboPersist *persist,
 							  const gchar   *iid);
+
+void				bonobo_persist_set_dirty (BonoboPersist *persist,
+							  gboolean dirty);
+
 G_END_DECLS
 
 #endif /* _BONOBO_PERSIST_H_ */

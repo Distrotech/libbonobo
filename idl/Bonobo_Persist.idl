@@ -48,6 +48,14 @@ module Bonobo {
 		 * internal state this interface represents
 		 */
 		IID getIId ();
+
+		/**
+		 * isDirty:
+		 * 
+		 * Indicates if a save is necessary.
+		 */
+		boolean isDirty ();
+	
 	};
 	
 	/*
@@ -84,14 +92,6 @@ module Bonobo {
 			raises (IOError, NotSupported);
 	
 		/**
-		 * isDirty:
-		 * 
-		 * returns whether the document needs to be
-		 * saved
-		 */
-		boolean isDirty ();
-	
-		/**
 		 * getCurrentFile:
 		 * 
 		 * Returns the name of the current file. 
@@ -108,14 +108,6 @@ module Bonobo {
 	 */
 	interface PersistStorage : Persist {
 		
-		/**
-		 * isDirty:
-		 * 
-		 * returns whether the document needs to be
-		 * saved
-		 */
-		boolean isDirty ();
-	
 		/**
 		 * load:
 		 * @storage: The storage to load the state from
@@ -151,7 +143,6 @@ module Bonobo {
 	 * and used them after this).
 	 */
 	interface PersistStream : Persist {
-		boolean isDirty ();
 		
 		/**
 		 * load:

@@ -44,15 +44,6 @@ impl_get_current_file (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 
-static CORBA_boolean
-impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
-{
-	BonoboObject *object = bonobo_object_from_servant (servant);
-	BonoboPersistFile *pfile = BONOBO_PERSIST_FILE (object);
-
-	return pfile->is_dirty;
-}
-
 static void
 impl_load (PortableServer_Servant servant,
 	   const CORBA_char      *filename,
@@ -115,7 +106,6 @@ impl_save (PortableServer_Servant servant,
 			ev, CORBA_USER_EXCEPTION,
 			ex_Bonobo_Persist_FileNotFound, NULL);
 	}
-	pf->is_dirty = FALSE;
 }
 
 static CORBA_char *
@@ -141,7 +131,6 @@ bonobo_persist_file_class_init (BonoboPersistFileClass *klass)
 
 	epv->load           = impl_load;
 	epv->save           = impl_save;
-	epv->isDirty        = impl_is_dirty;
 	epv->getCurrentFile = impl_get_current_file;
 }
 

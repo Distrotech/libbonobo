@@ -73,8 +73,6 @@ typedef struct {
 } BonoboPersistStreamClass;
 
 GType                bonobo_persist_stream_get_type  (void);
-void                 bonobo_persist_stream_set_dirty (BonoboPersistStream       *ps,
-						      gboolean                   dirty);
 
 BonoboPersistStream *bonobo_persist_stream_new       (BonoboPersistStreamIOFn    load_fn,
 						      BonoboPersistStreamIOFn    save_fn,

@@ -32,7 +32,6 @@ typedef int (*BonoboPersistFileIOFn) (BonoboPersistFile *pf,
 struct _BonoboPersistFile {
 	BonoboPersist persist;
 
-	gboolean     is_dirty;
 	char *filename;
 
 	/*
@@ -66,8 +65,6 @@ typedef struct {
 } BonoboPersistFileClass;
 
 GType             bonobo_persist_file_get_type  (void);
-void                bonobo_persist_file_set_dirty (BonoboPersistFile   *ps,
-						   gboolean             dirty);
 
 BonoboPersistFile *bonobo_persist_file_new       (BonoboPersistFileIOFn load_fn,
 						  BonoboPersistFileIOFn save_fn,

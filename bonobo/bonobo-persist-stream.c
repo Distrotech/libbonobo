@@ -19,15 +19,6 @@
 /* Parent GTK object class */
 static BonoboPersistClass *bonobo_persist_stream_parent_class;
 
-static CORBA_boolean
-impl_is_dirty (PortableServer_Servant servant, CORBA_Environment * ev)
-{
-	BonoboObject *object = bonobo_object_from_servant (servant);
-	BonoboPersistStream *pstream = BONOBO_PERSIST_STREAM (object);
-
-	return pstream->is_dirty;
-}
-
 static void
 impl_load (PortableServer_Servant servant,
 	   Bonobo_Stream stream,
@@ -105,7 +96,6 @@ bonobo_persist_stream_class_init (BonoboPersistStreamClass *klass)
 
 	epv->load       = impl_load;
 	epv->save       = impl_save;
-	epv->isDirty    = impl_is_dirty;
 }
 
 static void
@@ -191,18 +181,3 @@ bonobo_persist_stream_new (BonoboPersistStreamIOFn    load_fn,
 	return ps;
 }
 
-/**
- * bonobo_persist_stream_set_dirty:
- * @ps: A BonoboPersistStream object
- * @dirty: A boolean value representing whether the object is dirty or not
- *
- * This routine sets the dirty bit for the PersistStream object.
- */
-void
-bonobo_persist_stream_set_dirty (BonoboPersistStream *pstream, gboolean dirty)
-{
-	g_return_if_fail (pstream != NULL);
-	g_return_if_fail (BONOBO_IS_PERSIST_STREAM (pstream));
-
-	pstream->is_dirty = dirty;
-}

@@ -86,6 +86,10 @@ Bonobo_Property.idl:
 Bonobo_Storage.idl:
 	remove copyTo
 
+Bonobo_Persist:
+	Promoted isDirty to the base class and removed it from all the 
+	subclasses.
+
 Bonobo_PersistStream:
 	remove getMaxSize: use the stream interface for this
 

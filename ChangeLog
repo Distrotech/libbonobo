@@ -1,3 +1,18 @@
+2001-07-21  Mike Kestner <mkestner@speakeasy.net>
+
+	* changes.txt : Added blurb about isDirty changes.
+
+	* bonobo/bonobo-persist.[ch] (impl_Bonobo_Persist_isDirty): new.
+	(bonobo_persist_class_init): hook in the new method.
+	(bonobo_persist_set_dirty): new accessor.
+
+	* bonobo/bonobo-persist-stream.[ch] : kill isDirty
+
+	* bonobo/bonobo-presist-file.[ch] : kill isDirty
+
+	* idl/Bonobo_Persist.idl : Promote isDirty into the Persist base 
+	interface.
+
 2001-07-19  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* tests/Makefile.am (TESTS): Added test-stream-mem
