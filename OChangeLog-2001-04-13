@@ -1,3 +1,17 @@
+2000-10-10  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_get_icon_pixbuf): 
+	remove double free on text.
+
+2000-10-10  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (de_accelerate_string): comment out debug.
+	(widget_set_node): set your parent as well.
+	(menu_build_item): remove duplicate set_widget.
+	(replace_override_fn): the bug was here; failing to re-stamp the
+	parent GtkMenuItem properly
+	(toolbar_sync_state): remove 'std' attribute.
+
 2000-10-09  Andy Hertzfeld  <andy@eazel.com>
 
 	added a "minimum width" attribute to toolbar items for nicer
