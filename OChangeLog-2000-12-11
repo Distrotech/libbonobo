@@ -1,3 +1,13 @@
+1999-09-07  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-object.c (gnome_object_usage_error): Updated warning to
+	elucidate the fix.
+
+1999-09-05  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-ui-handler.c (impl_menu_activated, impl_menu_get_children): 
+	Cleaned pointer dereference style.
+
 1999-09-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* idl/gnome-canvas.idl: New interface for canvas-based renderers. 
@@ -187,7 +197,6 @@ Mon Sep  6 01:22:10 1999 Timur Bakeyev <timur@gnu.org>
 	* bonobo/gnome-embeddable.h (GnomeEmbeddable): Added private field
 	for future growth.
 
->>>>>>> 1.173
 1999-08-30  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-bonobo-selector.c (select_row): Transparent handler

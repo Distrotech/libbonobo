@@ -332,7 +332,7 @@ gnome_object_class_init (GnomeObjectClass *class)
 static void
 gnome_object_usage_error (GnomeObject *object)
 {
-	g_error ("Aggregate object member %p has been destroyed\n", object);
+	g_error ("Aggregate gnome_object member %p has been destroyed using gtk_object_* methods\n", object);
 }
 
 static void
