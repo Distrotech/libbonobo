@@ -2,7 +2,7 @@
 
 	* bonobo/bonobo-uih-menu.c: (bonobo_ui_handler_menu_get_callback):
 	Allow clients to pass NULL for return parameters they're not 
-	interested in.
+	interested in; remove g_return_if_fails.
 
 2000-06-13 Ville Hautamaki <villeh@cs.joensuu.fi>
 
