@@ -107,6 +107,12 @@ interface Property : Bonobo::Unknown {
 	 * 
 	 */
 	long getFlags ();
+
+	Bonobo::EventSource::ListenerId addListener (in Listener l);
+
+	void removeListener (in Bonobo::EventSource::ListenerId id)
+		raises (Bonobo::EventSource::UnknownListener);
+
 };
 
 typedef sequence<string>   PropertyNames;

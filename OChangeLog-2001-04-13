@@ -1,5 +1,10 @@
 2001-01-08  Dietmar Maurer  <dietmar@helixcode.com>
 
+	* idl/bonobo-property.idl: new add/removeListener methods.
+
+	* bonobo/bonobo-property.c (impl_Bonobo_Property_addListener): impl.
+	(impl_Bonobo_Property_removeListener): impl.
+
 	* bonobo/bonobo-object.c: removed indentation for debugging output
 	to make the output more clear if used with the new running
 	context debugging code.
