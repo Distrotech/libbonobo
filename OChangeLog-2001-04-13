@@ -1,3 +1,118 @@
+2000-01-25  Nat Friedman  <nat@helixcode.com>
+
+	* All files: Renames
+
+	* bonobo/nat-rename.txt: New file.
+	* bonobo/nat-rename.sh: New file.
+	* bonobo/nat-namechange.pl: New file.
+	* bonobo/idl/bonobo-unknown.idl: New file.
+	* bonobo/idl/bonobo-factory.idl: New file.
+	* bonobo/idl/bonobo.idl moved to                           bonobo/idl/Bonobo.idl
+	* bonobo/idl/gnome-advise.idl moved to                     bonobo/idl/bonobo-advise.idl
+	* bonobo/idl/gnome-canvas.idl moved to                     bonobo/idl/bonobo-canvas.idl
+	* bonobo/idl/gnome-client-site.idl moved to                bonobo/idl/bonobo-client-site.idl
+	* bonobo/idl/gnome-container.idl moved to                  bonobo/idl/bonobo-container.idl
+	* bonobo/idl/gnome-control.idl moved to                    bonobo/idl/bonobo-control.idl
+	* bonobo/idl/gnome-desktop.idl moved to                    bonobo/idl/bonobo-desktop.idl
+	* bonobo/idl/gnome-embeddable.idl moved to                 bonobo/idl/bonobo-embeddable.idl
+	* bonobo/idl/gnome-moniker.idl moved to                    bonobo/idl/bonobo-moniker.idl
+	* bonobo/idl/gnome-persist.idl moved to                    bonobo/idl/bonobo-persist.idl
+	* bonobo/idl/gnome-progressive.idl moved to                bonobo/idl/bonobo-progressive.idl
+	* bonobo/idl/gnome-property.idl moved to                   bonobo/idl/bonobo-property.idl
+	* bonobo/idl/gnome-storage.idl moved to                    bonobo/idl/bonobo-storage.idl
+	* bonobo/idl/gnome-ui-handler.idl moved to                 bonobo/idl/bonobo-ui-handler.idl
+	* bonobo/bonobo/gnome-bind-context.c moved to              bonobo/bonobo/bonobo-bind-context.c
+	* bonobo/bonobo/gnome-bonobo-item.c moved to               bonobo/bonobo/bonobo-canvas-item.c
+	* bonobo/bonobo/gnome-bonobo-selector.c moved to           bonobo/bonobo/bonobo-selector.c
+	* bonobo/bonobo/gnome-bonobo-widget.c moved to             bonobo/bonobo/bonobo-widget.c
+	* bonobo/bonobo/gnome-canvas-component.c moved to          bonobo/bonobo/bonobo-canvas-component.c
+	* bonobo/bonobo/gnome-client-site.c moved to               bonobo/bonobo/bonobo-client-site.c
+	* bonobo/bonobo/gnome-component-directory.c moved to       bonobo/bonobo/bonobo-component-directory.c
+	* bonobo/bonobo/gnome-component-io.c moved to              bonobo/bonobo/bonobo-component-io.c
+	* bonobo/bonobo/gnome-container.c moved to                 bonobo/bonobo/bonobo-container.c
+	* bonobo/bonobo/gnome-control-frame.c moved to	           bonobo/bonobo/bonobo-control-frame.c
+	* bonobo/bonobo/gnome-control.c moved to                   bonobo/bonobo/bonobo-control.c
+	* bonobo/bonobo/gnome-desktop-window.c moved to            bonobo/bonobo/bonobo-desktop-window.c
+	* bonobo/bonobo/gnome-embeddable-factory.c moved to        bonobo/bonobo/bonobo-embeddable-factory.c
+	* bonobo/bonobo/gnome-embeddable.c moved to                bonobo/bonobo/bonobo-embeddable.c
+	* bonobo/bonobo/gnome-file-moniker.c moved to              bonobo/bonobo/bonobo-file-moniker.c
+	* bonobo/bonobo/gnome-generic-factory.c moved to           bonobo/bonobo/bonobo-generic-factory.c
+	* bonobo/bonobo/gnome-main.c moved to                      bonobo/bonobo/bonobo-main.c
+	* bonobo/bonobo/gnome-moniker-client.c moved to            bonobo/bonobo/bonobo-moniker-client.c
+	* bonobo/bonobo/gnome-moniker.c moved to                   bonobo/bonobo/bonobo-moniker.c
+	* bonobo/bonobo/gnome-object-client.c moved to             bonobo/bonobo/bonobo-object-client.c
+	* bonobo/bonobo/gnome-object-io.c moved to                 bonobo/bonobo/bonobo-object-io.c
+	* bonobo/bonobo/gnome-object.c moved to                    bonobo/bonobo/bonobo-object.c
+	* bonobo/bonobo/gnome-persist-file.c moved to              bonobo/bonobo/bonobo-persist-file.c
+	* bonobo/bonobo/gnome-persist-stream.c moved to            bonobo/bonobo/bonobo-persist-stream.c
+	* bonobo/bonobo/gnome-persist.c moved to                   bonobo/bonobo/bonobo-persist.c
+	* bonobo/bonobo/gnome-progressive.c moved to               bonobo/bonobo/bonobo-progressive.c
+	* bonobo/bonobo/gnome-property-bag-client.c moved to       bonobo/bonobo/bonobo-property-bag-client.c
+	* bonobo/bonobo/gnome-property-bag-xml.c moved to          bonobo/bonobo/bonobo-property-bag-xml.c
+	* bonobo/bonobo/gnome-property-bag.c moved to              bonobo/bonobo/bonobo-property-bag.c
+	* bonobo/bonobo/gnome-property-types.c moved to            bonobo/bonobo/bonobo-property-types.c
+	* bonobo/bonobo/gnome-property.c moved to                  bonobo/bonobo/bonobo-property.c
+	* bonobo/bonobo/gnome-simple-source.c moved to             bonobo/bonobo/bonobo-simple-source.c
+	* bonobo/bonobo/gnome-storage.c moved to                   bonobo/bonobo/bonobo-storage.c
+	* bonobo/bonobo/gnome-stream-client.c moved to             bonobo/bonobo/bonobo-stream-client.c
+	* bonobo/bonobo/gnome-stream-fs.c moved to                 bonobo/bonobo/bonobo-stream-fs.c
+	* bonobo/bonobo/gnome-stream-memory.c moved to             bonobo/bonobo/bonobo-stream-memory.c
+	* bonobo/bonobo/gnome-stream.c moved to                    bonobo/bonobo/bonobo-stream.c
+	* bonobo/bonobo/gnome-ui-handler.c moved to                bonobo/bonobo/bonobo-ui-handler.c
+	* bonobo/bonobo/gnome-view-frame.c moved to                bonobo/bonobo/bonobo-view-frame.c
+	* bonobo/bonobo/gnome-view.c moved to                      bonobo/bonobo/bonobo-view.c
+	* bonobo/bonobo/gnome-wrapper.c moved to                   bonobo/bonobo/bonobo-wrapper.c
+	* bonobo/bonobo/gnome-composite-moniker.c moved to         bonobo/bonobo/bonobo-composite-moniker.c
+	* bonobo/bonobo/gnome-item-moniker.c moved to              bonobo/bonobo/bonobo-item-moniker.c
+	* bonobo/bonobo/gnome-storage-driver.c moved to            bonobo/bonobo/bonobo-storage-driver.c
+	* bonobo/bonobo/gnome-storage-private.c moved to           bonobo/bonobo/bonobo-storage-private.c
+	* bonobo/bonobo/gnome-bind-context.h moved to              bonobo/bonobo/bonobo-bind-context.h
+	* bonobo/bonobo/gnome-bonobo-item.h moved to               bonobo/bonobo/bonobo-canvas-item.h
+	* bonobo/bonobo/gnome-bonobo-selector.h moved to           bonobo/bonobo/bonobo-selector.h
+	* bonobo/bonobo/gnome-bonobo-widget.h moved to             bonobo/bonobo/bonobo-widget.h
+	* bonobo/bonobo/gnome-canvas-component.h moved to          bonobo/bonobo/bonobo-canvas-component.h
+	* bonobo/bonobo/gnome-client-site.h moved to               bonobo/bonobo/bonobo-client-site.h
+	* bonobo/bonobo/gnome-component-directory.h moved to       bonobo/bonobo/bonobo-component-directory.h
+	* bonobo/bonobo/gnome-component-io.h moved to              bonobo/bonobo/bonobo-component-io.h
+	* bonobo/bonobo/gnome-container.h moved to                 bonobo/bonobo/bonobo-container.h
+	* bonobo/bonobo/gnome-control-frame.h moved to             bonobo/bonobo/bonobo-control-frame.h
+	* bonobo/bonobo/gnome-control.h moved to                   bonobo/bonobo/bonobo-control.h
+	* bonobo/bonobo/gnome-desktop-window.h moved to            bonobo/bonobo/bonobo-desktop-window.h
+	* bonobo/bonobo/gnome-embeddable-factory.h moved to        bonobo/bonobo/bonobo-embeddable-factory.h
+	* bonobo/bonobo/gnome-embeddable.h moved to                bonobo/bonobo/bonobo-embeddable.h
+	* bonobo/bonobo/gnome-file-moniker.h moved to              bonobo/bonobo/bonobo-file-moniker.h
+	* bonobo/bonobo/gnome-generic-factory.h moved to           bonobo/bonobo/bonobo-generic-factory.h
+	* bonobo/bonobo/gnome-main.h moved to                      bonobo/bonobo/bonobo-main.h
+	* bonobo/bonobo/gnome-moniker-client.h moved to            bonobo/bonobo/bonobo-moniker-client.h
+	* bonobo/bonobo/gnome-moniker.h moved to                   bonobo/bonobo/bonobo-moniker.h
+	* bonobo/bonobo/gnome-object-client.h moved to             bonobo/bonobo/bonobo-object-client.h
+	* bonobo/bonobo/gnome-object-io.h moved to                 bonobo/bonobo/bonobo-object-io.h
+	* bonobo/bonobo/gnome-object.h moved to                    bonobo/bonobo/bonobo-object.h
+	* bonobo/bonobo/gnome-persist-file.h moved to              bonobo/bonobo/bonobo-persist-file.h
+	* bonobo/bonobo/gnome-persist-stream.h moved to            bonobo/bonobo/bonobo-persist-stream.h
+	* bonobo/bonobo/gnome-persist.h moved to                   bonobo/bonobo/bonobo-persist.h
+	* bonobo/bonobo/gnome-progressive.h moved to               bonobo/bonobo/bonobo-progressive.h
+	* bonobo/bonobo/gnome-property-bag-client.h moved to       bonobo/bonobo/bonobo-property-bag-client.h
+	* bonobo/bonobo/gnome-property-bag-xml.h moved to          bonobo/bonobo/bonobo-property-bag-xml.h
+	* bonobo/bonobo/gnome-property-bag.h moved to              bonobo/bonobo/bonobo-property-bag.h
+	* bonobo/bonobo/gnome-property-types.h moved to            bonobo/bonobo/bonobo-property-types.h
+	* bonobo/bonobo/gnome-property.h moved to                  bonobo/bonobo/bonobo-property.h
+	* bonobo/bonobo/gnome-simple-source.h moved to             bonobo/bonobo/bonobo-simple-source.h
+	* bonobo/bonobo/gnome-storage.h moved to                   bonobo/bonobo/bonobo-storage.h
+	* bonobo/bonobo/gnome-stream-client.h moved to             bonobo/bonobo/bonobo-stream-client.h
+	* bonobo/bonobo/gnome-stream-fs.h moved to                 bonobo/bonobo/bonobo-stream-fs.h
+	* bonobo/bonobo/gnome-stream-memory.h moved to             bonobo/bonobo/bonobo-stream-memory.h
+	* bonobo/bonobo/gnome-stream.h moved to                    bonobo/bonobo/bonobo-stream.h
+	* bonobo/bonobo/gnome-ui-handler.h moved to                bonobo/bonobo/bonobo-ui-handler.h
+	* bonobo/bonobo/gnome-view-frame.h moved to                bonobo/bonobo/bonobo-view-frame.h
+	* bonobo/bonobo/gnome-view.h moved to                      bonobo/bonobo/bonobo-view.h
+	* bonobo/bonobo/gnome-wrapper.h moved to                   bonobo/bonobo/bonobo-wrapper.h
+	* bonobo/bonobo/gnome-composite-moniker.h moved to         bonobo/bonobo/bonobo-composite-moniker.h
+	* bonobo/bonobo/gnome-item-moniker.h moved to              bonobo/bonobo/bonobo-item-moniker.h
+	* bonobo/bonobo/gnome-storage-driver.h moved to            bonobo/bonobo/bonobo-storage-driver.h
+	* bonobo/bonobo/gnome-storage-private.h moved to           bonobo/bonobo/bonobo-storage-private.h
+	* bonobo/bonobo/gnome-bonobo.h moved to                    bonobo/bonobo/bonobo.h
+
 2000-01-25  Martijn van Beers  <martijn@earthling.net>
 
 	* bonobo/idl/gnome-ui-handler.idl: replace MenuItemNotFound and
@@ -9,6 +124,7 @@
 	implementations emit the exceptions they can throw when needed
 
 2000-01-25  Nat Friedman  <nat@helixcode.com>
+
 
 	* bonobo/bonobo/gnome-view.c (gnome_view_destroy): Don't destroy
  	the UIHandler here.
