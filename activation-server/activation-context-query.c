@@ -1033,20 +1033,32 @@ qexp_matches(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
   return retval;
 }
 
-/* This is going to be one hairy function */
-#define compGT(x, y) x?(y?qexp_sort_compare(x, y, sexps, nexps, qctx):FALSE):TRUE
+typedef struct {
+  QueryExpr **sexps;
+  int nexps;
+  QueryContext *qctx;
+} QexpSortData;
+
 
 static gboolean
-qexp_sort_compare(OAF_ServerInfo *x, OAF_ServerInfo *y, QueryExpr **sexps, int nexps, QueryContext *qctx)
+qexp_sort_compare(OAF_ServerInfo **x, OAF_ServerInfo **y, QexpSortData *sort_data)
 {
   int i;
 
-  for(i = 0; i < nexps; i++) {
+  if (*x == NULL) {
+    return TRUE;
+  }
+
+  if (*y == NULL) {
+    return FALSE;
+  }
+
+  for(i = 0; i < sort_data->nexps; i++) {
     QueryExprConst cx, cy;
     int res;
 
-    cx = qexp_evaluate(x, sexps[i], qctx);
-    cy = qexp_evaluate(y, sexps[i], qctx);
+    cx = qexp_evaluate(*x, sort_data->sexps[i], sort_data->qctx);
+    cy = qexp_evaluate(*y, sort_data->sexps[i], sort_data->qctx);
 
     res = qexp_constant_compare(&cx, &cy);
 
@@ -1069,38 +1081,11 @@ qexp_sort(OAF_ServerInfo **servers, int nservers, QueryExpr **sexps,
 {
   int n, h, i, j;
   OAF_ServerInfo *t;
+  QexpSortData sort_data;
 
-  /* This is a shell sort algorithm, taken from
-     http://members.xoom.com/_XOOM/thomasn/s_shl.txt */
-
-  /**************************
-    *  sort array a[0..nservers]  *
-    **************************/
-
-    /* compute largest increment */
-  n = nservers;
-  h = 1;
-  if (n < 14)
-    h = 1;
-  else {
-    while (h < n) h = 3*h + 1;
-    h /= 3;
-    h /= 3;
-  }
-
-  while (h > 0) {
-
-    /* sort-by-insertion in increments of h */
-    for (i = 0 + h; i < nservers; i++) {
-      t = servers[i];
-
-      for (j = i-h; j >= 0 && compGT(servers[j], t); j -= h) {
-	servers[j+h] = servers[j];
-      }
-      servers[j+h] = t;
-    }
-
-    /* compute next increment */
-    h /= 3;
-  }
+  sort_data.sexps = sexps;
+  sort_data.nexps = nexps;
+  sort_data.qctx = qctx;
+  
+  qsort_ex (servers, nservers, sizeof (OAF_ServerInfo *), qexp_sort_compare, &sort_data);
 }
