@@ -213,6 +213,16 @@ struct poptOption oaf_popt_options[] = {
   {NULL}
 };
 
+/**
+ * oaf_activation_iid_get:
+ *
+ * If this process was launched to activate an exe server, this
+ * function gives the IID of the server requested, otherwise it
+ * returns NULL.
+ * 
+ * Return value: The IID of the activated server or NULL.
+ */
+
 const char *
 oaf_activation_iid_get (void)
 {
