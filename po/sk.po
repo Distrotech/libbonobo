@@ -1,15 +1,16 @@
 # libbonobo sk.po
-# Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
 # Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000,2001,2002,2003.
-# Marcel Telka <marcel@telka.sk>, 2001, 2002, 2003, 2004.
+# Marcel Telka <marcel@telka.sk>, 2001, 2002, 2003, 2004, 2005.
 #
+# $Id$
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-05 14:40+0000\n"
-"PO-Revision-Date: 2004-01-28 22:08+0100\n"
+"POT-Creation-Date: 2005-02-23 07:02+0100\n"
+"PO-Revision-Date: 2005-02-23 07:04+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -24,32 +25,32 @@ msgstr "Nie je možné zistiť server, v ktorom bol zapísaný potomok"
 msgid "Not a valid Activation ID"
 msgstr "Nie je platné aktivačné ID"
 
-#: activation-server/activation-server-main.c:68
+#: activation-server/activation-server-main.c:70
 msgid "Directory to read .server files from"
 msgstr "Priečinok, z ktorého čítať súbory .server"
 
-#: activation-server/activation-server-main.c:68
+#: activation-server/activation-server-main.c:70
 msgid "DIRECTORY"
 msgstr "PRIEČINOK"
 
-#: activation-server/activation-server-main.c:71
+#: activation-server/activation-server-main.c:73
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Fungovať ako aktivačný kontext (štandardne je iba ako ObjectDirectory)"
 
-#: activation-server/activation-server-main.c:75
+#: activation-server/activation-server-main.c:77
 msgid "File descriptor to write IOR to"
 msgstr "Deskriptor súboru, do ktorého zapísať IOR"
 
-#: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:200
+#: activation-server/activation-server-main.c:77
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "FD"
 msgstr "DS"
 
-#: activation-server/activation-server-main.c:83
+#: activation-server/activation-server-main.c:85
 msgid "Query expression to evaluate"
 msgstr "Výraz, ktorý sa má vyhodnotiť"
 
-#: activation-server/activation-server-main.c:83
+#: activation-server/activation-server-main.c:85
 msgid "EXPRESSION"
 msgstr "VÝRAZ"
 
@@ -69,7 +70,7 @@ msgstr "Oznamovacia služba"
 msgid "Notification service for activation"
 msgstr "Oznamovacia služba pre aktiváciu"
 
-#: activation-server/object-directory-activate.c:187
+#: activation-server/object-directory-activate.c:186
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Zatiaľ nie je možné aktivovať shlib objekty vo vzdialených procesoch"
 
@@ -128,38 +129,22 @@ msgstr "Nepodarilo sa analyzovať zlý formát XML dokumentu %s"
 msgid "Trying dir %s"
 msgstr "Skúšam priečinok %s"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:102
+#: bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Potomok neposlal správu chyby, nastalo neznáme zlyhanie"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:174
+#: bonobo-activation/bonobo-activation-fork-server.c:177
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Nepodarilo sa čítanie od potomka: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:297
-msgid "Couldn't fork a new process"
-msgstr "Nie je možné vytvoriť nový proces"
+#: bonobo-activation/bonobo-activation-fork-server.c:184
+msgid "EOF from child process\n"
+msgstr "Koniec súboru (EOF) z procesu potomka\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:318
-#, c-format
-msgid "Child received signal %u (%s)"
-msgstr "Potomok zachytil signál %u (%s)"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:323
-#, c-format
-msgid "Unknown non-exit error (status is %u)"
-msgstr "Neznáma nenávratová chyba (stav je %u)"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:404
-#, c-format
-msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-activation zlyhal pri nastavení skupiny procesu %s: %s\n"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:416
-#, c-format
-msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Nepodarilo sa vykonať %s: %d (%s)\n"
+#: bonobo-activation/bonobo-activation-fork-server.c:332
+msgid "Couldn't spawn a new process"
+msgstr "Nepodarilo sa vytvoriť nový proces"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
@@ -167,15 +152,15 @@ msgstr ""
 "Príliš veľa úrovní aliasov pre lokálne nastavnie, môžno ukazuje na "
 "existujúci cyklus"
 
-#: bonobo-activation/bonobo-activation-init.c:200
+#: bonobo-activation/bonobo-activation-init.c:195
 msgid "File descriptor to print IOR on"
 msgstr "Deskriptor súboru, do ktorého vytlačiť IOR"
 
-#: bonobo-activation/bonobo-activation-init.c:202
+#: bonobo-activation/bonobo-activation-init.c:197
 msgid "IID to activate"
 msgstr "aktivovať IID"
 
-#: bonobo-activation/bonobo-activation-init.c:204
+#: bonobo-activation/bonobo-activation-init.c:199
 msgid "Prevent registering of server with OAF"
 msgstr "Zabrániť registrácii serveru v OAF"
 
