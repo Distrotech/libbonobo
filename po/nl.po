@@ -4,20 +4,20 @@
 # Dennis Smit <synap@area101.penguin.nl>, 2000.
 # Almer S. Tigelaar <almer1@dds.nl>, 2000.
 # Tino Meinen <a.t.meinen@chello.nl>, 2003.
-# Huib Kleinhout <huib@stack.nl>, 2002, 2003.
+# Huib Kleinhout <huib@stack.nl>, 2002, 2004.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2004-02-02 14:30+0000\n"
-"PO-Revision-Date: 2003-12-15 20:55+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-03-03 15:46+0100\n"
+"PO-Revision-Date: 2004-03-03 16:46+0100\n"
 "Last-Translator: Huib Kleinhout <huib@stack.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"Content-Transfer-Encoding: 8bit"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -128,12 +128,12 @@ msgstr "Eigenschap '%s' heeft geen waarde"
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Het foutief opgetelde XML-document %s kon niet worden ingelezen"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "De map %s wordt geprobeerd"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -503,3 +503,4 @@ msgstr "Mappen tonen in het configuratiebestand"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Pad tonen naar het configuratiebestand"
+
