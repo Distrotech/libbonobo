@@ -1,3 +1,8 @@
+2000-03-04  Dan Winship  <danw@helixcode.com>
+
+	* doc/Bonobo.sgml: many grammar, style, and clarification fixes,
+	a few more GNOME->Bonobo fixes, and a handful of other changes.
+
 2000-03-02  John Sullivan  <sullivan@eazel.com>
 
         * bonobo/bonobo-ui-handler.h:
