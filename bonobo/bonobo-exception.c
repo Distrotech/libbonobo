@@ -210,6 +210,12 @@ bonobo_exception_repoid_to_text  (const char *repo_id)
 
 	else if (!strcmp (repo_id, ex_Bonobo_UIContainer_InvalidPath))
 		return g_strdup (_("invalid path to XML user interface element"));
+
+	else if (!strcmp (repo_id, ex_Bonobo_UIContainer_Unknown))
+		return g_strdup (_("Unknown command or verb"));
+
+	else if (!strcmp (repo_id, ex_Bonobo_UIContainer_Insensitive))
+		return g_strdup (_("Command is insensitive"));
 		
 	/* Bonobo::Persist */
 	else if (!strcmp (repo_id, ex_Bonobo_Persist_WrongDataType))

@@ -1,3 +1,13 @@
+2001-08-13  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-object.c: kill some warnings.
+
+	* idl/Bonobo_UI.idl: add 'execVerb', 'uiEvent' for
+	scripting bindings & macros.
+
+	* bonobo/bonobo-exception.c (bonobo_exception_repoid_to_text):
+	update to reflect new exceptions.
+
 2001-08-11  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-property-bag-client.c

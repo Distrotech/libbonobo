@@ -48,6 +48,8 @@ module Bonobo {
 	interface UIContainer : Bonobo::Unknown {
 		exception MalFormedXML {};
 		exception InvalidPath {};
+		exception Insensitive {};
+		exception Unknown {};
 
 		/* FIXME: broken, should use set/get object instead */
 		void    registerComponent   (in string component_name,
@@ -77,6 +79,14 @@ module Bonobo {
 
 		boolean exists              (in string path);
 
+		void    execVerb            (in string   cname)
+			raises (Insensitive, Unknown);
+
+		void    uiEvent             (in string                 id,
+					     in UIComponent::EventType type,
+					     in string                 state)
+			raises (Insensitive, Unknown);
+
 		/*
 		 *  Currently the object should be a Bonobo::Control interface
 		 * but this may be changed to a string based Moniker approach.
@@ -92,6 +102,7 @@ module Bonobo {
 
 		Bonobo::Unknown getObject   (in string path)
 			raises (InvalidPath);
+
 	};
 };
 

@@ -4,7 +4,7 @@
 #include <libbonobo.h>
 #include <orbit/poa/poa.h>
 
-int
+static int
 ret_ex_test (CORBA_Environment *ev)
 {
 	BONOBO_RET_VAL_EX (ev, 1);
@@ -12,7 +12,7 @@ ret_ex_test (CORBA_Environment *ev)
 	return 0;
 }
 
-void
+static void
 ex_test (CORBA_Environment *ev)
 {
 	BONOBO_RET_EX (ev);
