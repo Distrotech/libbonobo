@@ -11,17 +11,25 @@ liboaf_la_SOURCES=oaf-stubs.c oaf-common.c oaf-mainloop.c oaf-actid.c liboaf-pri
 	gnome-factory-stubs.c gnome-factory-common.c oaf-plugin.c oaf-activate.c \
 	oaf-registration.c oaf-servreg.c oaf-util.c
 
-BUILT_SOURCES=oaf-stubs.c oaf.h oaf-common.c gnome-factory-stubs.c gnome-factory.h gnome-factory-common.c liboaf-version.h
+BUILT_SOURCES=oaf-stubs.c oaf-common.c \
+	gnome-factory-stubs.c \
+	gnome-factory-common.c \
+	oaf.h gnome-factory.h
 
 oaf-stubs.c oaf.h oaf-common.c: stamp-idl
 
 gnome-factory-stubs.c gnome-factory.h gnome-factory-common.c: stamp-factory-idl
 
+# Work around automake brokenness.
+../liboaf/oaf.h: stamp-idl
+# And again.
+../liboaf/gnome-factory.h: stamp-factory-idl
+
 stamp-idl: $(top_srcdir)/idl/oaf.idl
 	orbit-idl --noskels -I$(top_srcdir)/idl --define=OAF_COMPILATION $(top_srcdir)/idl/oaf.idl
 	touch stamp-idl
 
-stamp-factory-idl: $(top_srcdir)/idl/gnome-factory.idl
+gnome-factory.h stamp-factory-idl: $(top_srcdir)/idl/gnome-factory.idl
 	orbit-idl --noskels -I$(top_srcdir)/idl --define=GNOME_FACTORY_COMPILATION $(top_srcdir)/idl/gnome-factory.idl
 	touch stamp-factory-idl
 

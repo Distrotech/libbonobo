@@ -20,3 +20,5 @@ LDADD=../liboaf/liboaf.la @ORBIT_LIBS@ @GLIB_LIBS@
 
 emptydatadir=$(datadir)/oaf
 emptydata_DATA=empty.oafinfo
+
+EXTRA_DIST=empty.idl empty.oafinfo
