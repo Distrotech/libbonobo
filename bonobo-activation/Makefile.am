@@ -83,7 +83,7 @@ stamp-idl: $(top_srcdir)/idl/oaf.idl
 	$(ORBIT_IDL) -I$(top_srcdir)/idl --define=OAF_COMPILATION $(top_srcdir)/idl/oaf.idl
 	touch stamp-idl
 
-oaf-factory.h stamp-factory-idl: $(top_srcdir)/idl/oaf-factory.idl
+stamp-factory-idl: $(top_srcdir)/idl/oaf-factory.idl
 	$(ORBIT_IDL) -I$(top_srcdir)/idl --define=GNOME_FACTORY_COMPILATION $(top_srcdir)/idl/oaf-factory.idl
 	touch stamp-factory-idl
 
@@ -95,4 +95,3 @@ CLEANFILES=			\
 
 dist-hook:
 	cd $(distdir) ; rm -f $(CLEANFILES)
-

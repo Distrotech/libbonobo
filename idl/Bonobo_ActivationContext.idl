@@ -26,7 +26,7 @@
 #ifndef __OAF_IDL__
 #define __OAF_IDL__
 
-#if !defined(OAF_COMPILATION && defined(__ORBIT_IDL__)
+#if !defined(OAF_COMPILATION) && defined(__ORBIT_IDL__)
 %{
 #pragma include_defs liboaf/oaf.h
 %}
