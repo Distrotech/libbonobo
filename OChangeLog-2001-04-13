@@ -1,3 +1,7 @@
+2000-07-26  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: require ORBit-0.5.3.
+
 2000-07-25  Peter Williams  <peterw@helixcode.com>
 
 	* bonobo/bonobo-uih-dock.c (bonobo_ui_handler_dock_remove_data): 
