@@ -35,6 +35,7 @@ typedef void  (*BonoboObjectPOAFn) (PortableServer_Servant servant,
 				    CORBA_Environment     *ev);
 
 typedef struct _BonoboObjectPrivate BonoboObjectPrivate;
+typedef struct _BonoboObjectBag     BonoboObjectBag;
 typedef struct _BonoboObject        BonoboObject;
 
 typedef struct {
@@ -142,6 +143,28 @@ gboolean  bonobo_unknown_ping           (Bonobo_Unknown     object,
 					 CORBA_Environment *opt_ev);
 void      bonobo_object_list_unref_all  (GList            **list);
 void      bonobo_object_slist_unref_all (GSList           **list);
+
+/*
+ * A weak-ref cache scheme
+ */
+
+#define BONOBO_COPY_FUNC(fn) ((BonoboCopyFunc)(fn))
+
+typedef gpointer (*BonoboCopyFunc) (gconstpointer key);
+
+BonoboObjectBag *bonobo_object_bag_new      (GHashFunc       hash_func,
+					     GEqualFunc      key_equal_func,
+					     BonoboCopyFunc  key_copy_func,
+					     GDestroyNotify  key_destroy_func);
+BonoboObject    *bonobo_object_bag_get_ref  (BonoboObjectBag *bag,
+					     gconstpointer    key);
+gboolean         bonobo_object_bag_add_ref  (BonoboObjectBag *bag,
+					     gconstpointer    key,
+					     BonoboObject    *object);
+void             bonobo_object_bag_remove   (BonoboObjectBag *bag,
+					     gconstpointer    key);
+void             bonobo_object_bag_destroy  (BonoboObjectBag *bag);
+GPtrArray       *bonobo_object_bag_list_ref (BonoboObjectBag *bag);
 
 
 /* Detects the pointer type and returns the object reference - magic. */

@@ -1,3 +1,26 @@
+2003-06-09  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-running-context.c (impl_Bonobo_RunningContext_removeKey) 
+	Rename several methods to _T suffix.
+	(check_empty_T): don't hold the lock over event emissions.
+	Add a slew of guards.
+
+	* bonobo/bonobo-object.c (bonobo_object_init): bin it.
+	(bonobo_object_instance_init, bonobo_object_finalize_internal):
+	hold the guard on total_aggregates arithmetic.
+	(bonobo_object_bag_get_ref, bonobo_object_bag_remove) 
+	(bag_collect_ref_list_cb, bonobo_object_bag_list_ref) 
+	(bag_collect_key_list_cb, bonobo_object_bag_destroy) 
+	(bonobo_object_bag_cleanup_T): impl.
+	(bonobo_object_trace_refs, bonobo_object_ref) 
+	(bonobo_object_unref): hold guards over ref/unref etc.
+	(bonobo_object_ref_T): impl.
+
+	* bonobo/bonobo-main.c (bonobo_init_full): create _bonobo_lock.
+
+	* bonobo/bonobo-shutdown.h: rename to
+	* bonobo/bonobo-private.h: this to better reflect it's role.
+
 2003-06-09  Rodrigo Moya <rodrigo@ximian.com>
 
 	* doc/activation-api/*.sgml: replaced references to OAF

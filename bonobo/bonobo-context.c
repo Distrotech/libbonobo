@@ -11,7 +11,7 @@
 
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
-#include <bonobo/bonobo-shutdown.h>
+#include <bonobo/bonobo-private.h>
 #include <bonobo/bonobo-running-context.h>
 #include <bonobo/bonobo-moniker-context.h>
 

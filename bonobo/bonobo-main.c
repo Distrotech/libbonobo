@@ -15,13 +15,14 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
-#include <bonobo/bonobo-shutdown.h>
+#include <bonobo/bonobo-private.h>
 
 #include <libintl.h>
 #include <string.h>
 
 #include <glib/gmain.h>
 
+GMutex                   *_bonobo_lock;
 CORBA_ORB                 __bonobo_orb = CORBA_OBJECT_NIL;
 PortableServer_POA        __bonobo_poa = CORBA_OBJECT_NIL;
 PortableServer_POAManager __bonobo_poa_manager = CORBA_OBJECT_NIL;
@@ -211,7 +212,8 @@ bonobo_init_full (int *argc, char **argv,
 
 	CORBA_exception_free (&ev);
 
-	bonobo_object_init ();
+	_bonobo_lock = g_mutex_new ();
+
 	bonobo_context_init ();
 
 	bindtextdomain (GETTEXT_PACKAGE, BONOBO_LOCALEDIR);

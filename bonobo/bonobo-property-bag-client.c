@@ -12,7 +12,7 @@
 #include <config.h>
 #include <string.h>
 #include <bonobo/bonobo-arg.h>
-#include <bonobo/bonobo-shutdown.h>
+#include <bonobo/bonobo-private.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-property-bag-client.h>

@@ -137,6 +137,7 @@ Bonobo initialization.
 </para>
 
 @hint: 
+@Varargs: 
 @Returns: 
 
 

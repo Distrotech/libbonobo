@@ -24,19 +24,13 @@
 #include <bonobo/bonobo-running-context.h>
 #include <bonobo/bonobo-marshal.h>
 #include <bonobo/bonobo-types.h>
-#include <bonobo/bonobo-shutdown.h>
+#include <bonobo/bonobo-private.h>
 #include <bonobo/bonobo-debug.h>
 
 /* We need decent ORB cnx. flushing on shutdown to make this work */
 #undef ASYNC_UNREFS
 
-#warning FIXME: add back locking support
-#define linc_mutex_new() NULL
-#define LINC_MUTEX_LOCK(lk) 
-#define LINC_MUTEX_UNLOCK(lk) 
-
 /* Some simple tracking - always on */
-static GMutex *bonobo_total_aggregates_lock = NULL;
 static glong   bonobo_total_aggregates      = 0;
 static glong   bonobo_total_aggregate_refs  = 0;
 
@@ -58,6 +52,7 @@ typedef struct {
 	int      ref_count;
 	gboolean immortal;
 	GList   *objs;
+	GList   *bags;
 #ifdef G_ENABLE_DEBUG
 	/* the following is required for reference debugging */
 	GList   *refs;
@@ -78,6 +73,7 @@ enum {
 
 static guint bonobo_object_signals [LAST_SIGNAL];
 static GObjectClass *bonobo_object_parent_class;
+static void bonobo_object_bag_cleanup_T (BonoboAggregateObject *ao);
 
 #ifdef G_ENABLE_DEBUG
 static GHashTable *living_ao_ht = NULL;
@@ -85,7 +81,7 @@ static GHashTable *living_ao_ht = NULL;
 
 /* Do not use this function, it is not what you want; see unref */
 static void
-bonobo_object_destroy (BonoboAggregateObject *ao)
+bonobo_object_destroy_T (BonoboAggregateObject *ao)
 {
 	GList *l;
 
@@ -94,9 +90,13 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 	for (l = ao->objs; l; l = l->next) {
 		GObject *o = l->data;
 
+		bonobo_object_bag_cleanup_T (ao);
+
 		if (o->ref_count >= 1) {
 			g_object_ref (o);
+			BONOBO_UNLOCK();
 			g_signal_emit (o, bonobo_object_signals [DESTROY], 0);
+			BONOBO_LOCK();
 			g_object_unref (o);
 		} else
 			g_warning ("Serious ref-counting error [%p]", o);
@@ -108,7 +108,7 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 }
 
 static void
-bonobo_object_corba_deactivate (BonoboObject *object)
+bonobo_object_corba_deactivate_T (BonoboObject *object)
 {
 	CORBA_Environment        ev;
 	PortableServer_ObjectId *oid;
@@ -125,7 +125,7 @@ bonobo_object_corba_deactivate (BonoboObject *object)
 	CORBA_exception_init (&ev);
 
 	if (object->corba_objref != CORBA_OBJECT_NIL) {
-		bonobo_running_context_remove_object (object->corba_objref);
+		bonobo_running_context_remove_object_T (object->corba_objref);
 		CORBA_Object_release (object->corba_objref, &ev);
 		object->corba_objref = CORBA_OBJECT_NIL;
 	}
@@ -139,7 +139,7 @@ bonobo_object_corba_deactivate (BonoboObject *object)
 }
 
 /*
- * bonobo_object_finalize_internal:
+ * bonobo_object_finalize_internal_T:
  * 
  * This method splits apart the aggregate object, so that each
  * GObject can be finalized individualy.
@@ -149,13 +149,16 @@ bonobo_object_corba_deactivate (BonoboObject *object)
  * routine, but from the poa later.
  */
 static void
-bonobo_object_finalize_internal (BonoboAggregateObject *ao)
+bonobo_object_finalize_internal_T (BonoboAggregateObject *ao)
 {
-	GList *l;
+	GList *l, *objs;
 
 	g_return_if_fail (ao->ref_count == 0);
 
-	for (l = ao->objs; l; l = l->next) {
+	objs = ao->objs;
+	ao->objs = NULL;
+
+	for (l = objs; l; l = l->next) {
 		GObject *o = G_OBJECT (l->data);
 
 		if (!o)
@@ -181,14 +184,16 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 			 * other parts of glib may still have references to it.
 			 *
 			 * The GObject was already destroy()ed in
-			 * bonobo_object_destroy().
+			 * bonobo_object_destroy_T().
 			 */
 
 			BONOBO_OBJECT (o)->priv->ao = NULL;
 			if (!g_type_is_a (G_OBJECT_TYPE(o), BONOBO_TYPE_FOREIGN_OBJECT))
-				bonobo_object_corba_deactivate (BONOBO_OBJECT (o));
+				bonobo_object_corba_deactivate_T (BONOBO_OBJECT (o));
 
+			BONOBO_UNLOCK ();
 			g_object_unref (o);
+			BONOBO_LOCK ();
 #ifdef G_ENABLE_DEBUG
 			if(_bonobo_debug_flags & BONOBO_DEBUG_LIFECYCLE)
 				bonobo_debug_print ("finalize",
@@ -198,8 +203,7 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 		}
 	}
 
-	g_list_free (ao->objs);
-	ao->objs = NULL;
+	g_list_free (objs);
 
 #ifdef G_ENABLE_DEBUG
 	if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
@@ -212,9 +216,7 @@ bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 	g_free (ao);
 
 	/* Some simple debugging - count aggregate free */
-	LINC_MUTEX_LOCK   (bonobo_total_aggregates_lock);
 	bonobo_total_aggregates--;
-	LINC_MUTEX_UNLOCK (bonobo_total_aggregates_lock);
 }
 
 
@@ -243,6 +245,15 @@ bonobo_object_finalize_servant (PortableServer_Servant servant,
 	g_object_unref (G_OBJECT (object));
 }
 
+static void
+bonobo_object_ref_T (BonoboObject *object)
+{
+	if (!object->priv->ao->immortal) {
+		object->priv->ao->ref_count++;
+		bonobo_total_aggregate_refs++;
+	}
+}
+
 #ifndef bonobo_object_ref
 /**
  * bonobo_object_ref:
@@ -269,9 +280,10 @@ bonobo_object_ref (gpointer obj)
 	}
 	else
 #endif /* G_ENABLE_DEBUG */
-	if (!object->priv->ao->immortal) {
-		object->priv->ao->ref_count++;
-		bonobo_total_aggregate_refs++;
+	{
+		BONOBO_LOCK ();
+		bonobo_object_ref_T (object);
+		BONOBO_UNLOCK ();
 	}
 
 	return object;
@@ -306,16 +318,20 @@ bonobo_object_unref (gpointer obj)
 		g_return_val_if_fail (ao != NULL, NULL);
 		g_return_val_if_fail (ao->ref_count > 0, NULL);
 
+		BONOBO_LOCK ();
+
 		if (!ao->immortal) {
 			if (ao->ref_count == 1)
-				bonobo_object_destroy (ao);
+				bonobo_object_destroy_T (ao);
 			
 			ao->ref_count--;
 			bonobo_total_aggregate_refs--;
 		
 			if (ao->ref_count == 0)
-				bonobo_object_finalize_internal (ao);
+				bonobo_object_finalize_internal_T (ao);
 		}
+
+		BONOBO_UNLOCK ();
 		return NULL;
 #ifdef G_ENABLE_DEBUG
 	}
@@ -344,6 +360,8 @@ bonobo_object_trace_refs (gpointer    obj,
 		ao = object->priv->ao;
 		g_return_val_if_fail (ao != NULL, ref ? object : NULL);
 		
+		BONOBO_LOCK ();
+
 		descr  = g_new (BonoboDebugRefData, 1);
 		ao->refs = g_list_prepend (ao->refs, descr);
 		descr->fn = fn;
@@ -363,6 +381,8 @@ bonobo_object_trace_refs (gpointer    obj,
 					    G_OBJECT_TYPE_NAME (object),
 					    ao->ref_count, fn, line);
 
+			BONOBO_UNLOCK ();
+
 			return object;
 		} else { /* unref */
 			bonobo_debug_print ("unref", "[%p]:[%p]:%s from %d at %s:%d", 
@@ -376,7 +396,7 @@ bonobo_object_trace_refs (gpointer    obj,
 				bonobo_debug_print ("unusual", "immortal object");
 			else {
 				if (ao->ref_count == 1) {
-					bonobo_object_destroy (ao);
+					bonobo_object_destroy_T (ao);
 					
 					g_return_val_if_fail (ao->ref_count > 0, NULL);
 				}
@@ -396,7 +416,7 @@ bonobo_object_trace_refs (gpointer    obj,
 					g_assert (g_hash_table_lookup (living_ao_ht, ao) == ao);
 					g_hash_table_remove (living_ao_ht, ao);
 					
-					bonobo_object_finalize_internal (ao);
+					bonobo_object_finalize_internal_T (ao);
 					
 				} else if (ao->ref_count < 0) {
 					bonobo_debug_print ("unusual", 
@@ -404,6 +424,8 @@ bonobo_object_trace_refs (gpointer    obj,
 				}
 			}
 			
+			BONOBO_UNLOCK ();
+
 			return NULL;
 		}
 	}
@@ -610,7 +632,7 @@ bonobo_object_query_local_interface (BonoboObject *object,
 				continue;
 			}
 			
-			bonobo_object_ref (object);
+			bonobo_object_ref_T (object);
 
 			return tryme;
 		}
@@ -719,7 +741,7 @@ bonobo_object_get_property (GObject         *g_object,
 }
 
 static void
-do_corba_setup (BonoboObject *object)
+do_corba_setup_T (BonoboObject *object)
 {
 	CORBA_Object obj;
 	CORBA_Environment ev;
@@ -766,7 +788,7 @@ do_corba_setup (BonoboObject *object)
 	}
 
 	object->corba_objref = obj;
-	bonobo_running_context_add_object (obj);
+	bonobo_running_context_add_object_T (obj);
 
 	CORBA_exception_free (&ev);
 }
@@ -791,6 +813,7 @@ bonobo_object_constructor (GType                  type,
 		   bonobo_object_finalize_servant: is invoked */
 		g_object_ref (g_object);
 
+		BONOBO_LOCK ();
 #ifdef G_ENABLE_DEBUG
 		if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
 			BonoboAggregateObject *ao = object->priv->ao;
@@ -803,7 +826,8 @@ bonobo_object_constructor (GType                  type,
 		}
 #endif /* G_ENABLE_DEBUG */
 		if (!g_type_is_a (type, BONOBO_TYPE_FOREIGN_OBJECT))
-			do_corba_setup (object);
+			do_corba_setup_T (object);
+		BONOBO_UNLOCK ();
 	}
 	
 	return g_object;
@@ -904,10 +928,10 @@ bonobo_object_instance_init (GObject    *g_object,
 #endif /* G_ENABLE_DEBUG */
 
 	/* Some simple debugging - count aggregate allocate */
-	LINC_MUTEX_LOCK   (bonobo_total_aggregates_lock);
+	BONOBO_LOCK ();
 	bonobo_total_aggregates++;
 	bonobo_total_aggregate_refs++;
-	LINC_MUTEX_UNLOCK (bonobo_total_aggregates_lock);
+	BONOBO_UNLOCK ();
 
 	/* Setup aggregate */
 	ao            = g_new0 (BonoboAggregateObject, 1);
@@ -1028,12 +1052,6 @@ bonobo_object_shutdown (void)
 	return 0;
 }
 
-void
-bonobo_object_init (void)
-{
-	bonobo_total_aggregates_lock = linc_mutex_new ();
-}
-
 /**
  * bonobo_object_add_interface:
  * @object: The BonoboObject to which an interface is going to be added.
@@ -1129,9 +1147,11 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
 
 #ifdef G_ENABLE_DEBUG
        if(_bonobo_debug_flags & BONOBO_DEBUG_REFS) {
+	       BONOBO_LOCK ();
 	       g_assert (g_hash_table_lookup (living_ao_ht, oldao) == oldao);
 	       g_hash_table_remove (living_ao_ht, oldao);
 	       ao->refs = g_list_concat (ao->refs, oldao->refs);
+	       BONOBO_UNLOCK ();
        }
 #endif /* G_ENABLE_DEBUG */
 
@@ -1139,9 +1159,9 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        g_free (oldao);
 
        /* Some simple debugging - count aggregate free */
-       LINC_MUTEX_LOCK   (bonobo_total_aggregates_lock);
+       BONOBO_LOCK ();
        bonobo_total_aggregates--;
-       LINC_MUTEX_UNLOCK (bonobo_total_aggregates_lock);
+       BONOBO_UNLOCK ();
 }
 
 /**
@@ -1618,4 +1638,206 @@ bonobo_object_set_poa (BonoboObject      *object,
 	/* FIXME: implement me */
 	g_warning ("This method is a pain, it needs hooks into "
 		   "bonobo_object_corba_objref");
+}
+
+
+/* ----------- a weak referenced BonoboObject cache object ----------- */
+
+struct _BonoboObjectBag {
+	gulong         size;
+	GHashTable    *key_to_object;
+	GHashTable    *object_to_key;
+	BonoboCopyFunc key_copy_func;
+	GDestroyNotify key_destroy_func;
+};
+
+BonoboObjectBag *
+bonobo_object_bag_new (GHashFunc       hash_func,
+		       GEqualFunc      key_equal_func,
+		       BonoboCopyFunc  key_copy_func,
+		       GDestroyNotify  key_destroy_func)
+{
+	BonoboObjectBag *bag;
+
+	g_return_val_if_fail (hash_func != NULL, NULL);
+	g_return_val_if_fail (key_copy_func != NULL, NULL);
+	g_return_val_if_fail (key_equal_func != NULL, NULL);
+	g_return_val_if_fail (key_destroy_func != NULL, NULL);
+
+	bag = g_new0 (BonoboObjectBag, 1);
+	bag->key_to_object = g_hash_table_new (hash_func, key_equal_func);
+	bag->object_to_key = g_hash_table_new (NULL, NULL);
+	bag->key_copy_func = key_copy_func;
+	bag->key_destroy_func = key_destroy_func;
+
+	return bag;
+}
+
+BonoboObject *
+bonobo_object_bag_get_ref (BonoboObjectBag *bag,
+			   gconstpointer    key)
+{
+	BonoboObject *obj;
+	BonoboAggregateObject *ao;
+
+	g_return_val_if_fail (bag != NULL, NULL);
+
+	BONOBO_LOCK();
+	ao = g_hash_table_lookup (bag->key_to_object, key);
+	if (ao)
+		obj = bonobo_object_ref (ao->objs->data);
+	else
+		obj = NULL;
+	BONOBO_UNLOCK();
+
+	return obj;
+}
+
+gboolean
+bonobo_object_bag_add_ref (BonoboObjectBag *bag,
+			   gconstpointer    key,
+			   BonoboObject    *object)
+{
+	gboolean success;
+
+	g_return_val_if_fail (bag != NULL, FALSE);
+	g_return_val_if_fail (object != NULL, FALSE);
+
+	BONOBO_LOCK();
+
+	if (g_hash_table_lookup (bag->key_to_object, key))
+		success = FALSE;
+
+	else if (g_hash_table_lookup (bag->object_to_key, object)) {
+		success = FALSE;
+		g_warning ("Adding the same object with two keys");
+
+	} else {
+		gpointer insert_key;
+		BonoboAggregateObject *ao = object->priv->ao;
+
+		success = TRUE;
+
+		bag->size++;
+		insert_key = bag->key_copy_func (key);
+		g_hash_table_insert (bag->key_to_object, insert_key, ao);
+		g_hash_table_insert (bag->object_to_key, ao, insert_key);
+
+		ao->bags = g_list_prepend (ao->bags, bag);
+	}
+
+	BONOBO_UNLOCK();
+
+	return success;
+}
+
+static void
+bonobo_object_bag_cleanup_T (BonoboAggregateObject *ao)
+{
+	GList *l;
+
+	for (l = ao->bags; l; l = l->next) {
+		gpointer key;
+		BonoboObjectBag *bag = l->data;
+
+		key = g_hash_table_lookup (bag->object_to_key, ao);
+		g_hash_table_remove (bag->object_to_key, ao);
+		g_hash_table_remove (bag->key_to_object, key);
+
+		g_warning ("FIXME: free the keys outside the lock");
+	}
+}
+
+void
+bonobo_object_bag_remove  (BonoboObjectBag *bag,
+			   gconstpointer    key)
+{
+	gpointer hash_key = NULL;
+	BonoboObject *object;
+
+	g_return_if_fail (bag != NULL);
+
+	BONOBO_LOCK();
+
+	if ((object = g_hash_table_lookup (bag->key_to_object, key))) {
+		g_hash_table_remove (bag->key_to_object, key);
+		hash_key = g_hash_table_lookup (bag->object_to_key, object);
+		g_hash_table_remove (bag->object_to_key, object);
+		bag->size--;
+	}
+
+	BONOBO_UNLOCK();
+
+	bag->key_destroy_func (hash_key);
+}
+
+static void
+bag_collect_ref_list_cb (gpointer key,
+			 gpointer value,
+			 gpointer user_data)
+{
+	g_ptr_array_add (user_data, bonobo_object_ref (value));
+}
+
+GPtrArray *
+bonobo_object_bag_list_ref (BonoboObjectBag *bag)
+{
+	GPtrArray *refs;
+	g_return_val_if_fail (bag != NULL, NULL);
+
+	BONOBO_LOCK();
+
+	refs = g_ptr_array_sized_new (bag->size);
+	g_hash_table_foreach (bag->key_to_object,
+			      bag_collect_ref_list_cb,
+			      refs);
+	
+	BONOBO_UNLOCK();
+
+	return refs;
+}
+
+typedef struct {
+	GSList *keys;
+	BonoboObjectBag *bag;
+} BagDestroyClosure;
+
+static void
+bag_collect_key_list_cb (gpointer key,
+			 gpointer value,
+			 gpointer user_data)
+{
+	BagDestroyClosure *cl = user_data;
+	BonoboAggregateObject *ao = value;
+
+	cl->keys = g_slist_prepend (cl->keys, key);
+	ao->bags = g_list_remove (ao->bags, cl->bag);
+}
+
+void
+bonobo_object_bag_destroy (BonoboObjectBag *bag)
+{
+	GSList *l;
+	BagDestroyClosure cl;
+
+	if (!bag)
+		return;
+
+	BONOBO_LOCK();
+
+	cl.bag = bag;
+	cl.keys = NULL;
+	g_hash_table_foreach (bag->key_to_object,
+			      bag_collect_key_list_cb, &cl);
+
+	g_hash_table_destroy (bag->key_to_object);
+	g_hash_table_destroy (bag->object_to_key);
+
+	g_free (bag);
+
+	BONOBO_UNLOCK();
+
+	for (l = cl.keys; l; l = l->next)
+		bag->key_destroy_func (l->data);
+	g_slist_free (cl.keys);
 }
