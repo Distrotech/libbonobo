@@ -1,3 +1,16 @@
+2001-07-17  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c:
+	s/bonobo_object_finalize_real/bonobo_object_finalize_gobject/
+	s/bonobo_object_finalize/bonobo_object_finalize_internal/
+	(bonobo_object_corba_deactivate): don't poa_fini_fn & split from
+	(bonobo_object_finalize_gobject): here, prune corba deactivate.
+	s/do_corba_hacks/do_corba_setup/
+	(bonobo_object_instance_init): add a g_object ref here.
+	(bonobo_type_setup): register servant finalization.
+	(bonobo_object_finalize_servant): impl.
+	(bonobo_object_slist_unref_all): actualy impl.
+
 2001-07-14  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/libbonobo-2.0.pc.in (idldir): New variable.

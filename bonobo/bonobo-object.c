@@ -34,6 +34,9 @@
 /* NB. for a quicker debugging experience define this */
 /* # define BONOBO_REF_HOOKS */
 
+/* You almost certainly don't want this */
+#undef BONOBO_LIFECYCLE_DEBUG
+
 #ifdef BONOBO_REF_HOOKS
 typedef struct {
 	const char *fn;
@@ -107,9 +110,58 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 #endif
 }
 
-
 static void
-bonobo_object_finalize (BonoboAggregateObject *ao)
+bonobo_object_corba_deactivate (BonoboObject *object)
+{
+	CORBA_Environment        ev;
+	PortableServer_ObjectId *oid;
+
+#ifdef BONOBO_LIFECYCLE_DEBUG
+	g_warning ("BonoboObject corba deactivate %p", object);
+#endif
+
+	g_assert (object->priv->ao == NULL);
+
+	CORBA_exception_init (&ev);
+
+	if (object->corba_objref != CORBA_OBJECT_NIL) {
+		bonobo_running_context_remove_object (object->corba_objref);
+		CORBA_Object_release (object->corba_objref, &ev);
+		object->corba_objref = CORBA_OBJECT_NIL;
+	}
+
+	oid = PortableServer_POA_servant_to_id (
+		bonobo_poa(), &object->servant, &ev);
+	PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
+
+#if 0
+	{ /* Used to do this, probably not correct in fact */
+		BonoboObjectClass       *klass;
+		klass = (BonoboObjectClass *) G_OBJECT_GET_CLASS (object);
+		
+		if (klass->poa_fini_fn)
+			klass->poa_fini_fn (&object->servant, &ev);
+		else /* Actually quicker and nicer */
+			PortableServer_ServantBase__fini (&object->servant, &ev);
+	}
+#endif
+	
+	CORBA_free (oid);
+	CORBA_exception_free (&ev);
+}
+
+/*
+ * bonobo_object_finalize_internal:
+ * 
+ * This method splits apart the aggregate object, so that each
+ * GObject can be finalized individualy.
+ *
+ * Note that since the (embedded) servant keeps a ref on the
+ * GObject, it won't neccessarily be finalized through this
+ * routine, but from the poa later.
+ */
+static void
+bonobo_object_finalize_internal (BonoboAggregateObject *ao)
 {
 	GList *l;
 
@@ -143,7 +195,13 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
 			 */
 
 			BONOBO_OBJECT (o)->priv->ao = NULL;
+
+			bonobo_object_corba_deactivate (BONOBO_OBJECT (o));
+
 			g_object_unref (o);
+#ifdef BONOBO_LIFECYCLE_DEBUG
+			g_warning ("Done finalize internal on %p", o);
+#endif
 		}
 	}
 
@@ -157,6 +215,32 @@ bonobo_object_finalize (BonoboAggregateObject *ao)
 #endif
 
 	g_free (ao);
+}
+
+
+/*
+ * bonobo_object_finalize_servant:
+ * 
+ * This routine is called from either an object de-activation
+ * or from the poa. It is called to signal the fact that finaly
+ * the object is no longer exposed to the world and thus we
+ * can safely loose it's GObject reference, and thus de-allocate
+ * the memory associated with it.
+ */
+static void
+bonobo_object_finalize_servant (PortableServer_Servant servant,
+				CORBA_Environment *ev)
+{
+	BonoboObject *object;
+
+	object = (BonoboObject *)(((guchar *) servant) -
+				  BONOBO_OBJECT_HEADER_SIZE);
+
+#ifdef BONOBO_LIFECYCLE_DEBUG
+	g_warning ("BonoboObject Servant finalize %p", object);
+#endif
+
+	g_object_unref (G_OBJECT (object));
 }
 
 #ifndef bonobo_object_ref
@@ -208,7 +292,7 @@ bonobo_object_unref (BonoboObject *object)
 	ao->ref_count--;
 
 	if (ao->ref_count == 0)
-		bonobo_object_finalize (ao);
+		bonobo_object_finalize_internal (ao);
 #endif /* BONOBO_REF_HOOKS */
 }
 #endif /* bonobo_object_unref */
@@ -271,7 +355,7 @@ bonobo_object_trace_refs (BonoboObject *object,
 			g_assert (g_hash_table_lookup (living_ao_ht, ao) == ao);
 			g_hash_table_remove (living_ao_ht, ao);
 			
-			bonobo_object_finalize (ao);
+			bonobo_object_finalize_internal (ao);
 		} else if (ao->ref_count < 0) {
 			bonobo_debug_print ("unusual", 
 					    "[%p] already finalized", ao);
@@ -524,36 +608,13 @@ bonobo_object_dispose (GObject *gobject)
 }
 
 static void
-bonobo_object_finalize_real (GObject *gobject)
+bonobo_object_finalize_gobject (GObject *gobject)
 {
-	BonoboObject            *object = (BonoboObject *) gobject;
-	CORBA_Environment        ev;
-	BonoboObjectClass       *klass;
-	PortableServer_ObjectId *oid;
+	BonoboObject *object = (BonoboObject *) gobject;
 
-	g_assert (object->priv->ao == NULL);
-
-	CORBA_exception_init (&ev);
-
-	if (object->corba_objref != CORBA_OBJECT_NIL) {
-		bonobo_running_context_remove_object (object->corba_objref);
-		CORBA_Object_release (object->corba_objref, &ev);
-		object->corba_objref = CORBA_OBJECT_NIL;
-	}
-
-	oid = PortableServer_POA_servant_to_id (
-		bonobo_poa(), &object->servant, &ev);
-	PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
-
-	klass = (BonoboObjectClass *) G_OBJECT_GET_CLASS (object);
-
-	if (klass->poa_fini_fn)
-		klass->poa_fini_fn (&object->servant, &ev);
-	else /* Actually quicker and nicer */
-		PortableServer_ServantBase__fini (&object->servant, &ev);
-	
-	CORBA_free (oid);
-	CORBA_exception_free (&ev);
+#ifdef BONOBO_LIFECYCLE_DEBUG
+	g_warning ("Bonobo Object finalize GObject %p", gobject);
+#endif
 
 	g_free (object->priv);
 
@@ -597,12 +658,12 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 			      G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
 
 	object_class->dispose = bonobo_object_dispose;
-	object_class->finalize = bonobo_object_finalize_real;
+	object_class->finalize = bonobo_object_finalize_gobject;
 }
 
 
 static void
-do_corba_hacks (BonoboObject      *object,
+do_corba_setup (BonoboObject      *object,
 		BonoboObjectClass *klass)
 {
 	CORBA_Object obj;
@@ -685,6 +746,13 @@ bonobo_object_instance_init (GObject    *g_object,
 	object->object_signature  = BONOBO_OBJECT_SIGNATURE;
 	object->servant_signature = BONOBO_SERVANT_SIGNATURE;
 
+	/* Though this make look strange, destruction of this object
+	   can only occur when the servant is deactivated by the poa.
+	   The poa maintains its own ref count over method invocations
+	   and delays finalization which happens only after:
+	   bonobo_object_finalize_servant: is invoked */
+	g_object_ref (g_object);
+
 #ifdef BONOBO_REF_HOOKS
 	{
 		bonobo_debug_print ("create", "[%p]:[%p]:%s to %d", object, ao,
@@ -696,7 +764,7 @@ bonobo_object_instance_init (GObject    *g_object,
 	}
 #endif
 
-	do_corba_hacks (object, BONOBO_OBJECT_CLASS (klass));
+	do_corba_setup (object, BONOBO_OBJECT_CLASS (klass));
 }
 
 /**
@@ -1086,10 +1154,35 @@ bonobo_object_list_unref_all (GList **list)
 	g_slist_free (unrefs);
 }
 
+/**
+ * bonobo_object_list_unref_all:
+ * @list: A list of BonoboObjects *s
+ * 
+ *  This routine unrefs all valid objects in
+ * the list and then removes them from @list if
+ * they have not already been so removed.
+ **/
 void
 bonobo_object_slist_unref_all (GSList **list)
 {
-	g_warning ("Dummy - cut and paste above");
+	GSList *l;
+	GSList *unrefs = NULL, *u;
+
+	g_return_if_fail (list != NULL);
+
+	for (l = *list; l; l = l->next) {
+		if (l->data && !BONOBO_IS_OBJECT (l->data))
+			g_warning ("Non object in unref list");
+		else if (l->data)
+			unrefs = g_slist_prepend (unrefs, l->data);
+	}
+
+	unref_list (unrefs);
+
+	for (u = unrefs; u; u = u->next)
+		*list = g_slist_remove (*list, u->data);
+
+	g_slist_free (unrefs);
 }
 
 /**
@@ -1122,7 +1215,6 @@ bonobo_object (gpointer p)
 
 	return NULL;
 }
-
 
 /**
  * bonobo_type_setup:
@@ -1182,7 +1274,7 @@ bonobo_type_setup (GType             type,
 	klass->epv._private = NULL;
 
 	klass->base_epv._private = NULL;
-	klass->base_epv.finalize = NULL;
+	klass->base_epv.finalize = bonobo_object_finalize_servant;
 	klass->base_epv.default_POA = NULL;
 
 	vepv = g_new0 (gpointer, depth + 2);

@@ -1,4 +1,5 @@
 #include <config.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <libbonobo.h>
 #include <orbit/poa/poa.h>
@@ -19,7 +20,7 @@ main (int argc, char *argv [])
 	ev = &real_ev;
 	CORBA_exception_init (ev);
 
-	/* Local lifecycle */
+	fprintf (stderr, "Local lifecycle\n");
 	{
 		object = BONOBO_OBJECT (g_object_new (
 			bonobo_moniker_get_type (), NULL));
@@ -30,7 +31,7 @@ main (int argc, char *argv [])
 		bonobo_object_unref (BONOBO_OBJECT (object));
 	}
 
-	/* In-proc lifecycle */
+	fprintf (stderr, "In-proc lifecycle\n");
 	{
 		object = BONOBO_OBJECT (g_object_new (
 			bonobo_moniker_get_type (), NULL));
@@ -40,7 +41,7 @@ main (int argc, char *argv [])
 		bonobo_object_release_unref (ref, NULL);
 	}
 
-	/* Out-of-proc lifecycle */
+	fprintf (stderr, "Out of proc lifecycle\n");
 	{
 		object = BONOBO_OBJECT (g_object_new (
 			bonobo_moniker_get_type (), NULL));
@@ -55,6 +56,8 @@ main (int argc, char *argv [])
 		CORBA_Object_release (ref, ev);
 		g_assert (!BONOBO_EX (ev));
 	}
+
+	fprintf (stderr, "All tests passed\n");
 
 	CORBA_exception_free (ev);
 
