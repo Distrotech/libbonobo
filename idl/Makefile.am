@@ -42,7 +42,6 @@ IMODULE_SOURCE =	\
 
 idl_flags = \
 	-I$(top_srcdir)/idl \
-	-I $(BONOBO_ACTIVATION_IDL_DIR) \
 	-D__Bonobo_COMPILATION \
 	-D__Bonobo_Unknown_COMPILATION \
 	-D__Bonobo_GenericFactory_COMPILATION \

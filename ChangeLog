@@ -1,3 +1,16 @@
+2003-04-14  Michael Meeks  <michael@ximian.com>
+
+	* idl/Makefile.am (idl_flags): fix.
+
+	* bonobo/Makefile.am (idl_flags): fix.
+
+	* bonobo/libbonobo-2.0.pc.in (idlinclude): fix.
+
+	* configure.in: remove IDL path check from split module.
+	
+	Many thanks to Havoc Pennington <hp@redhat.com> for
+	digging this out.
+
 2003-04-11  Padraig O'Briain <padraig.obriain@sun.com>
 
 	* activation-server/activation-contect-corba.c,
