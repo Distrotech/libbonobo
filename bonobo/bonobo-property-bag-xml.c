@@ -2,10 +2,10 @@
  * Some XML-based BonoboPropertyBag persistence helpers.
  *
  * Authors:
- *   Michael Meeks (michael@helixcode.com)
- *   Nat Friedman  (nat@nat.org)
+ *   Michael Meeks  (michael@ximian.com)
+ *   Dietmar Maurer (dietmar@ximian.com)
  *
- * Copyright 1999,2000 Helix Code, Inc.
+ * Copyright 2000 Ximian, Inc.
  */
 #include <config.h>
 #include <stdlib.h>
@@ -263,6 +263,23 @@ encode_value (BonoboUINode      *parent,
 		bonobo_ui_node_set_content (node, scratch);
 }
 
+/**
+ * bonobo_property_bag_xml_encode_any:
+ * @opt_parent: optional parent, should be NULL
+ * @any: the Any to serialize
+ * @ev: a corba exception environment
+ * 
+ * This routine encodes @any into an XML tree using the
+ * #BonoboUINode XML abstraction. @ev is used for flagging
+ * any non-fatal exceptions during the process. On exception
+ * NULL will be returned. opt_parent should be NULL, and is
+ * used internaly for recursive tree construction.
+ *
+ * Both type and content data are dumped in a non-standard, but
+ * trivial format.
+ * 
+ * Return value: the XML tree representing the Any
+ **/
 BonoboUINode *
 bonobo_property_bag_xml_encode_any (BonoboUINode      *opt_parent,
 				    const CORBA_any   *any,
@@ -644,6 +661,16 @@ decode_value (BonoboUINode      *node,
 	bonobo_ui_node_free_string (scratch);
 }
 
+/**
+ * bonobo_property_bag_xml_decode_any:
+ * @node: the parsed XML representation of an any
+ * @ev: a corba exception environment
+ * 
+ * This routine is the converse of bonobo_property_bag_xml_encode_any
+ * it hydrates a serialized CORBA_any.
+ * 
+ * Return value: the CORBA_any or NULL on error
+ **/
 CORBA_any *
 bonobo_property_bag_xml_decode_any (BonoboUINode      *node,
 				    CORBA_Environment *ev)

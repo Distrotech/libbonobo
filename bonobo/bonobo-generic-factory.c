@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/**
+/*
  * bonobo-generic-factory.c: a GenericFactory object.
  *
  * The BonoboGenericFactory object is used to instantiate new

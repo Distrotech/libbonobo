@@ -9,12 +9,20 @@
  *
  * Copyright 2000, Helix Code, Inc.
  */
-
 #include <config.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-arg.h>
 
+/**
+ * bonobo_arg_new:
+ * @t: the BonoboArgType eg. TC_long
+ * 
+ * Create a new BonoboArg with the specified type
+ * the value of the BonoboArg is initialy empty.
+ * 
+ * Return value: 
+ **/
 BonoboArg *
 bonobo_arg_new (BonoboArgType t)
 {
@@ -99,27 +107,49 @@ bonobo_arg_new (BonoboArgType t)
 	return any;
 }
 
+/**
+ * bonobo_arg_release:
+ * @arg: the bonobo arg.
+ * 
+ * This frees the memory associated with @arg
+ **/
 void
-bonobo_arg_release (BonoboArg *a)
+bonobo_arg_release (BonoboArg *arg)
 {
-	if (a)
-		CORBA_free (a);	
+	if (arg)
+		CORBA_free (arg);	
 }
 
+/**
+ * bonobo_arg_copy:
+ * @arg: the bonobo arg
+ * 
+ * This function duplicates @a by a deep copy
+ * 
+ * Return value:a copy of @arg
+ **/
 BonoboArg *
-bonobo_arg_copy (const BonoboArg *a)
+bonobo_arg_copy (const BonoboArg *arg)
 {
 	BonoboArg *copy = CORBA_any__alloc ();
 
-	if (!a) {
+	if (!arg) {
 		copy->_type = TC_null;
 		g_warning ("Duplicating a NULL Bonobo Arg");
 	} else
-		CORBA_any__copy (copy, a);
+		CORBA_any__copy (copy, arg);
 
 	return copy;
 }
 
+/**
+ * bonobo_arg_type_from_gtk:
+ * @id: the GtkType id.
+ * 
+ * This maps a GtkType to a BonoboArgType
+ * 
+ * Return value: the mapped type or NULL on failure.
+ **/
 BonoboArgType
 bonobo_arg_type_from_gtk (GtkType id)
 {
@@ -142,6 +172,14 @@ bonobo_arg_type_from_gtk (GtkType id)
 	return NULL;
 }
 
+/**
+ * bonobo_arg_type_to_gtk:
+ * @id: the BonoboArgType
+ * 
+ * This maps a BonoboArgType to a GtkType
+ * 
+ * Return value: the mapped type or 0 on failure
+ **/
 GtkType
 bonobo_arg_type_to_gtk (BonoboArgType id)
 {
@@ -181,6 +219,15 @@ bonobo_arg_type_to_gtk (BonoboArgType id)
 		*((corbatype *)a->_value) = (corbatype)GTK_VALUE_##gtktype(*arg);	\
 		break;
 
+/**
+ * bonobo_arg_from_gtk:
+ * @a: pointer to blank BonoboArg
+ * @arg: GtkArg to copy
+ * 
+ * This maps a GtkArg @arg to a BonoboArg @a,
+ * @a must point to a freshly allocated BonoboArg
+ * eg. such as returned by bonobo_arg_new
+ **/
 void
 bonobo_arg_from_gtk (BonoboArg *a, const GtkArg *arg)
 {
@@ -247,6 +294,14 @@ bonobo_arg_from_gtk (BonoboArg *a, const GtkArg *arg)
 		GTK_VALUE_##gtktype(*a) = *((corbatype *)arg->_value);		\
 		break;
 
+/**
+ * bonobo_arg_to_gtk:
+ * @a: pointer to a blank GtkArk
+ * @arg: the BonoboArg to copy
+ * 
+ * Maps a BonoboArg to a GtkArg, @a must point
+ * to a blank GtkArg.
+ **/
 void
 bonobo_arg_to_gtk (GtkArg *a, const BonoboArg *arg)
 {
@@ -297,6 +352,18 @@ bonobo_arg_to_gtk (GtkArg *a, const BonoboArg *arg)
 	}
 }
 
+/**
+ * bonobo_arg_type_is_equal:
+ * @a: a type code
+ * @b: a type code
+ * @opt_ev: optional exception environment or NULL.
+ * 
+ * This compares two BonoboArgType's in @a and @b,
+ * the @opt_ev is an optional CORBA_Environment for
+ * exceptions, or NULL. This function is commutative.
+ * 
+ * Return value: TRUE if equal, FALSE if different
+ **/
 gboolean
 bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b, CORBA_Environment *opt_ev)
 {
@@ -317,6 +384,21 @@ bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b, CORBA_Environment *o
 	return retval;
 }
 
+/**
+ * bonobo_arg_is_equal:
+ * @a: a bonobo arg
+ * @b: another bonobo arg
+ * @opt_ev: optional exception environment or NULL.
+ * 
+ * Compares two BonoboArgs for equivalence, will return TRUE
+ * if equivalent for all simple cases. For Object references
+ * CORBA sometimes denies 2 object references are equivalent
+ * even if they are [ this is a feature_not_bug ].
+ *
+ * This function is commutative.
+ * 
+ * Return value: TRUE if @a == @b
+ **/
 gboolean
 bonobo_arg_is_equal (BonoboArg *a, BonoboArg *b, CORBA_Environment *opt_ev)
 {

@@ -2,7 +2,7 @@
 bonobo-property-control
 
 <!-- ##### SECTION Short_Description ##### -->
-
+an interface for exposing property editors as controls
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>

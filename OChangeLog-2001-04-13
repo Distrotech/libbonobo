@@ -1,5 +1,11 @@
 2001-02-20  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-property-bag-xml.c: Fully API documented.
+
+	* bonobo/bonobo-arg.c: Fully API documented.
+
+2001-02-20  Michael Meeks  <michael@ximian.com>
+
 	* doc/api: remove bonobo-property, it was private.
 
 	* doc/api: Write lots of examples and comments.

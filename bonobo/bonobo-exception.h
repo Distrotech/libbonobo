@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/**
+/*
  * bonobo-exception.c: a generic exception -> user string converter.
  *
  * Authors:
@@ -7,7 +7,6 @@
  *
  * Copyright 2000 Helix Code, Inc.
  */
-
 #ifndef _BONOBO_EXCEPTION_H_
 #define _BONOBO_EXCEPTION_H_
 

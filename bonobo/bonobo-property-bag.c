@@ -1,4 +1,4 @@
-/**
+/*
  * bonobo-property-bag.c: property bag object implementation.
  *
  * Authors:

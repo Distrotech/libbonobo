@@ -1,10 +1,11 @@
-/**
+/*
  * bonobo-property-bag-client.c: C sugar for property bags.
  *
- * Author:
- *   Nat Friedman (nat@nat.org)
+ * Authors:
+ *   Nat Friedman  (nat@ximian.com)
+ *   Michael Meeks (michael@ximian.com)
  *
- * Copyright 1999, Helix Code, Inc.
+ * Copyright 1999, 2001 Ximian, Inc.
  */
 #include <config.h>
 #include <stdarg.h>
@@ -801,5 +802,3 @@ bonobo_property_bag_client_getv (Bonobo_PropertyBag pb,
 	return NULL;
 }
 #undef RECEIVE
-
-

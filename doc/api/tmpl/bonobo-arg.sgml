@@ -2,11 +2,14 @@
 bonobo-arg
 
 <!-- ##### SECTION Short_Description ##### -->
-
+simplified CORBA_Any wrappers
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+The BonoboArg code, and macros are designed to make the
+use of CORBA_Any's slightly simpler by providing a glib
+like binding for them. The bonobo-arg code also provides
+mappings between Gtk Args and CORBA_anys.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

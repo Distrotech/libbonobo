@@ -2,7 +2,7 @@
 BonoboPersistFile
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Interface for anything that can save / load itself from a file.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>

@@ -2,7 +2,7 @@
 bonobo-stream-client
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Simplified client wrapper functions for the Stream interface
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>

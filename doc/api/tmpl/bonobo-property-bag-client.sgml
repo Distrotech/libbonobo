@@ -2,11 +2,14 @@
 bonobo-property-bag-client
 
 <!-- ##### SECTION Short_Description ##### -->
-
+simplified property bag client wrapper code
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+This code is designed to make the property bag interface slightly
+easier to use, by allowing optional CORBA environments, sensible
+return values on exceptions, and accessors for specific types of
+CORBA_Any. eg. bonobo_property_bag_client_get_value_glong.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

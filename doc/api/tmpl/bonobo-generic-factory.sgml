@@ -67,6 +67,7 @@ is a macro that can be used for simple components to remove
 the burden of writing the main function and getting the
 initialization correct, see #BONOBO_OAF_FACTORY_MULTI
 </para>
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 

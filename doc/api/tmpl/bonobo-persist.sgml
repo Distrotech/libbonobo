@@ -2,7 +2,7 @@
 BonoboPersist
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Interface for anything that can save / load itself.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>

@@ -1,4 +1,4 @@
-/**
+/*
  * bonobo-exception.c: a generic exception -> user string converter.
  *
  * Authors:
@@ -6,7 +6,6 @@
  *
  * Copyright 2000 Helix Code, Inc.
  */
-
 #include <config.h>
 #include <glib.h>
 #include <libgnome/gnome-defs.h>
