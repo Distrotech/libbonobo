@@ -11,19 +11,35 @@ OAF_FILES =					\
 	Bonobo_Moniker_std.oafinfo		\
 	Bonobo_Moniker_gzip.oafinfo		\
 	Bonobo_Moniker_http.oafinfo		\
+	Bonobo_Moniker_cache.oafinfo		\
 	Bonobo_Moniker_Extender_file.oafinfo
+
+Bonobo_Moniker_cache.oafinfo : Bonobo_Moniker_cache.oafinfo.in 
+	sed -e "s|\@\@monikerdir\@\@|$(monikerdir)|" \
+	Bonobo_Moniker_cache.oafinfo.in > Bonobo_Moniker_cache.oafinfo 
+
+Bonobo_Moniker_Extender_file.oafinfo : Bonobo_Moniker_Extender_file.oafinfo.in 
+	sed -e "s|\@\@monikerdir\@\@|$(monikerdir)|"  \
+	Bonobo_Moniker_Extender_file.oafinfo.in \
+	> Bonobo_Moniker_Extender_file.oafinfo
+
+clean-local:
+	-rm -f Bonobo_Moniker_cache.oafinfo
+	-rm -f Bonobo_Moniker_Extender_file.oafinfo
 
 oafdir = $(datadir)/oaf
 oaf_DATA = $(OAF_FILES)
 
-# bonobo-moniker-untar.oafinfo
+monikerdir = $(libdir)/bonobo/monikers
+moniker_LTLIBRARIES = libcache_moniker.la libfile_extender.la
 
 bin_PROGRAMS = 				\
 	std-moniker 			\
 	bonobo-moniker-gunzip 		\
 	bonobo-moniker-http		\
-	moniker-test			\
-	bonobo-moniker-extender-file
+	moniker-test		
+
+# bonobo-moniker-untar.oafinfo
 
 # bonobo-moniker-untar
 
@@ -50,12 +66,13 @@ std_moniker_SOURCES =			\
 std_moniker_LDADD =			\
 	$(moniker_ldadd)
 
-bonobo_moniker_extender_file_SOURCES =	\
+libcache_moniker_la_SOURCES = 		\
+	bonobo-moniker-cache.h		\
+	bonobo-moniker-cache.c
+
+libfile_extender_la_SOURCES =		\
 	bonobo-moniker-extender-file.h	\
 	bonobo-moniker-extender-file.c
-
-bonobo_moniker_extender_file_LDADD =	\
-	$(moniker_ldadd)
 
 bonobo_moniker_gunzip_SOURCES =		\
 	bonobo-moniker-gunzip.c		\

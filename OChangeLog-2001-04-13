@@ -1,3 +1,15 @@
+2000-12-18  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* monikers/bonobo-moniker-extender-file.c: make it a shlib moniker
+
+	* monikers/Bonobo_Moniker_Extender_file.oafinfo.in: new file
+
+	* monikers/Bonobo_Moniker_cache.oafinfo.in: new file
+
+	* monikers/bonobo-moniker-cache.[ch]: new files
+
+	
+
 2000-12-17  Miguel de Icaza  <miguel@helixcode.com>
 
 	* monikers/bonobo-moniker-oaf.c (bonobo_moniker_oaf_new): Remove
