@@ -1,3 +1,9 @@
+2000-11-12 Dirk-Jan C. Binnema <dirkjan@gnome.org>
+	
+	* bonobo_property_bag.c (bonobo_property_bag_set_value),
+	(bonobo_property_bag_notify_listeners): Added missing
+	preconditions: value, new_value != NULL
+
 2000-11-11  Michael Meeks  <michael@helixcode.com>
 
 	* storage-modules/bonobo-storage-fs.c (bonobo_storage_fs_open): 

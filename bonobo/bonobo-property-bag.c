@@ -979,6 +979,7 @@ bonobo_property_bag_notify_listeners (BonoboPropertyBag *pb,
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (name != NULL);
 	g_return_if_fail (pb->priv != NULL);
+ 	g_return_if_fail (new_value != NULL);
 
 	prop = g_hash_table_lookup (pb->priv->props, name);
 
@@ -1009,7 +1010,8 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb,
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (name != NULL);
 	g_return_if_fail (pb->priv != NULL);
-
+	g_return_if_fail (value != NULL);
+	
 	prop = g_hash_table_lookup (pb->priv->props, name);
 
 	g_return_if_fail (prop != NULL);
