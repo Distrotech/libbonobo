@@ -223,6 +223,7 @@ create_gnome_persist_file (GnomeObject *object)
 
 	servant = (POA_GNOME_PersistFile *) g_new0 (GnomeObjectServant, 1);
 	servant->vepv = &gnome_persist_file_vepv;
+	CORBA_exception_init (&ev);
 	POA_GNOME_PersistFile__init ((PortableServer_Servant) servant, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
 		g_free (servant);

@@ -1,3 +1,28 @@
+1999-08-23  Miguel de Icaza  <miguel@gnu.org>
+
+	* samples/sample-container.c (component_load_pf_ok_cb): Strdup the filename.
+	(component_load_pf_ok_cb): unref queried interface.
+	(component_load_ps_ok_cb): unref queried interface.
+	(gnome_object_has_interface): unref queried interface.
+
+	* bonobo/test-container-autoload.c (main): Activate bonobo.
+
+	* bonobo/gnome-persist-file.c (create_gnome_persist_file):
+	Initialize the ev;
+
+	* bonobo/gnome-client-site.c (gnome_client_site_bind_embeddable):
+	Unref the object we query interfaced.
+
+1999-08-22  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-client-site.c (
+	* samples/sample-container.c (component_load_pf_ok_cb): Bug fix:
+	duplicate the string before destroying its container. 
+	(component_load_pf_ok_cb): Do not invoke method if previous
+	operation failed.
+
+	It would be useful if GTK+ followed the const return convention. 
+
 1999-08-22  Nat Friedman  <nat@gnome-support.com>
 
 	* idl/gnome-inplace.idl: Removed.
