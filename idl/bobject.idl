@@ -224,4 +224,8 @@ interface InPlaceActiveComponent : Component {
 	void doc_window_activated_notify (in boolean state);
 };
 
+interface ComponentFactory : GNOME::GenericFactory {
+	Component create_path (in string path);
+};
+
 };
