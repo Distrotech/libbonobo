@@ -82,10 +82,8 @@ bonobo_object_activate_with_goad_id (gpointer dummy,
 
 /**
  * bonobo_object_activate_with_oaf_id:
- * @list: Preloaded list of servers or NULL.
  * @oaf_id: OAF IID 
  * @flags: OAF activation flags
- * @params: parameters passed to the factory
  *
  * Activates the service represented by @oaf_id.
  * The service activated should support the Bonobo::Unknown interface.
