@@ -348,9 +348,6 @@ bonobo_property_bag_destroy (GtkObject *object)
 {
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (object);
 	
-	/* unref the event source */
-	bonobo_object_unref (BONOBO_OBJECT (pb->es));
-
 	/* Destroy the transient POA */
 	gtk_object_unref (GTK_OBJECT (pb->priv->transient));
 

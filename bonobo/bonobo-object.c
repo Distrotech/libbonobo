@@ -72,6 +72,19 @@ static GtkObjectClass *bonobo_object_parent_class;
 
 static GHashTable *living_ao_ht = NULL;
 
+static void
+bonobo_debug_print (char *name, char *fmt, ...)
+{
+	va_list args;
+           
+	va_start (args, fmt);
+	
+	printf ("[%06d]:%-15s ", getpid (), name); 
+	vprintf (fmt, args);
+	printf ("\n"); 
+
+	va_end (args);
+}
 #endif /* BONOBO_REF_HOOKS */
 
 /**
@@ -279,16 +292,14 @@ bonobo_object_trace_refs (BonoboObject *object,
 		
 		object->priv->ao->ref_count++;
 		
-		g_printerr ("[%d]:%-15s %s:[%p] to %d at %s:%d\n", getpid(), 
-			    "Ref",
-			    gtk_type_name (GTK_OBJECT (object)->klass->type),
-			    object, ao->ref_count, fn, line);
+		bonobo_debug_print ("ref", "[%p]:%s to %d at %s:%d", object,
+		        gtk_type_name (GTK_OBJECT (object)->klass->type),
+			ao->ref_count, fn, line);
 
 	} else { /* unref */
-		g_printerr ("[%d]:%-15s %s:[%p] from %d at %s:%d\n", getpid(),
-			    "UnRef",
-			    gtk_type_name (GTK_OBJECT (object)->klass->type),
-			    ao, ao->ref_count, fn, line);
+		bonobo_debug_print ("unref", "[%p]:%s from %d at %s:%d", ao,
+			gtk_type_name (GTK_OBJECT (object)->klass->type),
+			ao->ref_count, fn, line);
 
 		g_return_if_fail (ao->ref_count > 0);
 	
@@ -314,7 +325,8 @@ bonobo_object_trace_refs (BonoboObject *object,
 			
 			bonobo_object_finalize (ao);
 		} else if (ao->ref_count < 0) {
-			g_printerr ("Unusual: [%p] already finalized\n",ao);
+			bonobo_debug_print ("unusual", 
+					    "[%p] already finalized", ao);
 		}
 	}
 #else
@@ -663,9 +675,9 @@ bonobo_object_instance_init (GtkObject    *gtk_object,
 
 #ifdef BONOBO_REF_HOOKS
 	{
-		g_printerr ("[%d]:%-15s %s:[%p] to %d\n", getpid(), "Create",
-			    gtk_type_name (klass->type),
-			    ao, ao->ref_count);
+		bonobo_debug_print ("create", "[%p]:%s to %d", ao,
+				    gtk_type_name (klass->type),
+				    ao->ref_count);
 
 		g_assert (g_hash_table_lookup (living_ao_ht, ao) == NULL);
 		g_hash_table_insert (living_ao_ht, ao, ao);
@@ -714,24 +726,32 @@ bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 
 	g_return_if_fail (ao != NULL);
 
-	g_print ("[%p]\tref_count=%d, %d interfaces:\n", ao,
-		   ao->ref_count, g_list_length (ao->objs));
+	bonobo_debug_print ("object-status", 
+			    "[%p] %-20s ref_count=%d, interfaces=%d", ao, "",
+			    ao->ref_count, g_list_length (ao->objs));
 		
 	for (l = ao->objs; l; l = l->next) {
 		BonoboObject *object = BONOBO_OBJECT (l->data);
-
-		g_print ("- [%p] %20s\tgtk_ref_count=%d\n", object,
-			   gtk_type_name (GTK_OBJECT_TYPE (object)),
-			   GTK_OBJECT (object)->ref_count);
+		
+		bonobo_debug_print ("", "[%p] %-20s corba_objref=[%p]"
+				    " gtk_ref_count=%d", object,
+				    gtk_type_name (GTK_OBJECT_TYPE (object)),
+				    object->corba_objref,
+				    GTK_OBJECT (object)->ref_count);
 	}
-	g_print ("Referencing: \n");
-	for (l = g_list_last (ao->refs); l; l = l->prev) {
+
+	l = g_list_last (ao->refs);
+
+	if (l)
+		bonobo_debug_print ("referencing" ,"");
+
+	for (; l; l = l->prev) {
 		BonoboDebugRefData *descr = l->data;
 
-		g_print ("%s -\t%s:%d\n", descr->ref?"ref":"unref",
-			 descr->fn, descr->line);
+		bonobo_debug_print ("", "%s -\t%s:%d", 
+				    descr->ref ? "ref" : "unref",
+				    descr->fn, descr->line);
 	}
-	g_print ("\n");
 }
 #endif
 
@@ -739,17 +759,20 @@ static void
 bonobo_object_shutdown (void)
 {
 #ifdef BONOBO_REF_HOOKS
+	
+	bonobo_debug_print ("shutdown-start", 
+		"-------------------------------------------------");
 
 	if (living_ao_ht)
 		g_hash_table_foreach (living_ao_ht,
 				      bonobo_ao_debug_foreach, NULL);
 
-	if (g_hash_table_size (living_ao_ht) > 0)
-		g_print ("living bonobo objects count = %d\n",
-			   g_hash_table_size (living_ao_ht));
-	else
-		g_print ("No object references leaked\n");
+	bonobo_debug_print ("living-objects",
+			    "living bonobo objects count = %d",
+			    g_hash_table_size (living_ao_ht));
 
+	bonobo_debug_print ("shutdown-end", 
+		"-------------------------------------------------");
 #endif
 }
 

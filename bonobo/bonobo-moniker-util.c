@@ -175,10 +175,14 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 	toplevel = Bonobo_Unknown_queryInterface (
 		object, "IDL:Bonobo/Moniker:1.0", ev);
 
-	if (BONOBO_EX (ev))
+	if (BONOBO_EX (ev)) {
+		bonobo_object_release_unref (object, ev);
 		return CORBA_OBJECT_NIL;
+	}
 
-	if (object == CORBA_OBJECT_NIL) {
+	bonobo_object_release_unref (object, ev);
+
+	if (toplevel == CORBA_OBJECT_NIL) {
 		g_warning ("Moniker object '%s' doesn't implement "
 			   "the Moniker interface", iid);
 		return CORBA_OBJECT_NIL;
@@ -190,6 +194,7 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 		return CORBA_OBJECT_NIL;
 
 	bonobo_object_release_unref (toplevel, ev);
+
 	if (BONOBO_EX (ev))
 		return CORBA_OBJECT_NIL;
 

@@ -41,6 +41,7 @@ void          bonobo_running_context_trace_objects (CORBA_Object object,
 						    const char  *fn,
 						    int          line,
 						    int          mode);
+
 #ifdef BONOBO_OBJECT_DEBUG
 #	define           bonobo_running_context_add_object(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,0);}G_STMT_END
 #	define           bonobo_running_context_remove_object(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,1);}G_STMT_END

@@ -1,3 +1,16 @@
+2001-01-09  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* bonobo/bonobo-running-context.c: add more debugging output.
+
+	* bonobo/bonobo-object.c (bonobo_dbg_print): impl.
+	added nicer debugging output
+
+	* bonobo/bonobo-moniker-util.c
+	(bonobo_moniker_util_new_from_name_full): release the object reference.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_destroy): do
+	not unref the event source, since it is aggregated with the bag.
+
 2001-01-08  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	reviewed by: Jirka Lebl <jirka@5z.com>
