@@ -1,3 +1,12 @@
+2000-04-29  Mathieu Lacage <mathieu@gnu.org>
+
+	* samples/compound-doc/sample-container.c: I am being
+	very tired. forgot to g_free the Component struct.
+	Who uses this code anyway ? 
+
+	* bonobo/bonobo-object.c: remove the debugging output.
+	I am fucking tired and stupid.
+
 2000-04-29  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* gnorba2oafinfo.pl (printserver): Indent things a bit more nicely
