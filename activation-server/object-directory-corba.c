@@ -4,6 +4,9 @@
 #include "oafd.h"
 #include "liboaf/liboaf.h"
 #include <time.h>
+#include <glib.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 /*** App-specific servant structures ***/
 
@@ -23,6 +26,10 @@ typedef struct
 
 	GHashTable *active_servers;
 	OAF_CacheTime time_active_changed;
+
+        char **registry_source_directories;
+        time_t time_did_stat;
+        GHashTable *registry_directory_mtimes;
 
 	CORBA_Object self;
 }
@@ -160,10 +167,77 @@ od_dump_list (impl_POA_OAF_ObjectDirectory * od)
 }
 #endif
 
+static gboolean
+registry_directory_needs_update (impl_POA_OAF_ObjectDirectory *servant,
+                                 const char *directory)
+{
+        struct stat statbuf;
+        time_t old_mtime;
+
+        if (stat (directory, &statbuf) != 0) {
+                return FALSE;
+        }
+ 
+        old_mtime = (time_t) g_hash_table_lookup (servant->registry_directory_mtimes,
+                                                  directory);
+
+        g_hash_table_insert (servant->registry_directory_mtimes,
+                             (gpointer) directory,
+                             (gpointer) statbuf.st_mtime);
+
+        return (old_mtime != statbuf.st_mtime);
+}
+
+static void
+update_registry (impl_POA_OAF_ObjectDirectory *servant)
+{
+        gboolean must_load;
+        int i;
+
+        /* FIXME: we should only reload those directories that have
+         * actually changed instead of reloading all when any has
+         * changed. 
+         */
+
+        must_load = FALSE;
+
+        /* Don't stat more than once every 5 seconds or activation
+           could be too slow. This works even on the first read
+           because then `time_read is 0' */
+        if (time (NULL) - 5 > servant->time_did_stat) {
+                for (i = 0; servant->registry_source_directories[i] != NULL; i++) {
+                        if (registry_directory_needs_update 
+                            (servant, servant->registry_source_directories[i])) {
+                                must_load = TRUE;
+                                break;
+                        }
+                }
+
+                servant->time_did_stat = time (NULL);
+        }
+
+        if (must_load) {
+                puts ("reload");
+
+                servant->attr_servers._buffer =
+                        OAF_ServerInfo_load (servant->registry_source_directories,
+                                             &servant->attr_servers._length,
+                                             &servant->by_iid,
+                                             g_get_user_name (),
+                                             servant->attr_hostID,
+                                             servant->attr_domain);
+                servant->time_list_changed = time (NULL);
+
+#if defined(OAF_DEBUG) && 0
+                od_dump_list (servant);
+#endif
+        }
+}
+
 OAF_ObjectDirectory
 OAF_ObjectDirectory_create (PortableServer_POA poa,
 			    const char *domain,
-			    const char *source_directory,
+			    const char *registry_path,
 			    CORBA_Environment * ev)
 {
 	OAF_ObjectDirectory retval;
@@ -183,20 +257,14 @@ OAF_ObjectDirectory_create (PortableServer_POA poa,
 	newservant->attr_domain = g_strdup (domain);
 	newservant->attr_hostID = oaf_hostname_get ();
 	newservant->by_iid = NULL;
-	newservant->attr_servers._buffer =
-		OAF_ServerInfo_load (source_directory,
-				     &newservant->attr_servers._length,
-				     &newservant->by_iid,
-				     g_get_user_name (),
-				     newservant->attr_hostID,
-				     newservant->attr_domain);
-	newservant->active_servers =
-		g_hash_table_new (g_str_hash, g_str_equal);
-	newservant->time_list_changed = time (NULL);
 
-#if defined(OAF_DEBUG) && 0
-	od_dump_list (newservant);
-#endif
+        newservant->registry_source_directories = g_strsplit (registry_path, ":", -1);
+        newservant->registry_directory_mtimes = g_hash_table_new (g_str_hash, g_str_equal);
+
+        update_registry (newservant);
+
+        newservant->active_servers =
+                g_hash_table_new (g_str_hash, g_str_equal);
 
 	return CORBA_Object_duplicate (retval, ev);
 }
@@ -207,6 +275,8 @@ impl_OAF_ObjectDirectory__get_servers (impl_POA_OAF_ObjectDirectory * servant,
 				       CORBA_Environment * ev)
 {
 	OAF_ServerInfoListCache *retval;
+
+        update_registry (servant);
 
 	retval = OAF_ServerInfoListCache__alloc ();
 
@@ -294,6 +364,8 @@ impl_OAF_ObjectDirectory_activate (impl_POA_OAF_ObjectDirectory * servant,
 	CORBA_Object retval;
 	OAF_ServerInfo *si;
 	ODActivationInfo ai;
+
+        update_registry (servant);
 
 	ai.ac = ac;
 	ai.flags = flags;

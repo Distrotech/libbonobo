@@ -80,10 +80,11 @@ main (int argc, char *argv[])
 		CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 	{
 		char *env_od_source_dir;
+		char *gnome_env_od_source_dir;
 		GString *real_od_source_dir;
 
 		real_od_source_dir = g_string_new (OAFINFODIR);
-		env_od_source_dir = getenv ("OAF_OD_SOURCE_DIR");
+		env_od_source_dir = getenv ("OAF_INFO_PATH");
 
 		if (od_source_dir) {
 			g_string_append_c (real_od_source_dir, ':');
@@ -95,20 +96,20 @@ main (int argc, char *argv[])
 					 env_od_source_dir);
 		}
 
-		od =
-			OAF_ObjectDirectory_create (root_poa, od_domain,
-						    real_od_source_dir->str,
-						    &ev);
+		od = OAF_ObjectDirectory_create (root_poa, od_domain,
+                                                 real_od_source_dir->str,
+                                                 &ev);
 		if (server_ns) {
 			CORBA_Object naming_service;
 
 			naming_service =
 				impl_CosNaming_NamingContext__create
 				(root_poa, &ev);
-			OAF_ObjectDirectory_register_new (od,
-							  "OAFIID:OAFNamingService:20000410",
-							  naming_service,
-							  &ev);
+			OAF_ObjectDirectory_register_new 
+                                (od,
+                                 "OAFIID:oaf_naming_service:7e2b90ef-eaf0-4239-bb7c-812606fcd80d",
+                                 naming_service,
+                                 &ev);
 		}
 
 		g_string_free (real_od_source_dir, TRUE);

@@ -132,8 +132,8 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 }
 
 OAF_ServerInfo *
-OAF_ServerInfo_load (const char *source_directory,
-		     CORBA_unsigned_long * nservers,
+OAF_ServerInfo_load (char **dirs,
+		     CORBA_unsigned_long *nservers,
 		     GHashTable ** by_iid,
 		     const char *user, const char *host, const char *domain)
 {
@@ -143,10 +143,9 @@ OAF_ServerInfo_load (const char *source_directory,
 	GSList *entries = NULL, *cur, *new_item;
 	int i, n;
 	OAF_ServerInfo *retval;
-	char **dirs;
 	int dirnum;
 
-	g_return_val_if_fail (source_directory, NULL);
+	g_return_val_if_fail (dirs, NULL);
 	g_return_val_if_fail (nservers, NULL);
 	g_return_val_if_fail (by_iid, NULL);
 
@@ -154,7 +153,6 @@ OAF_ServerInfo_load (const char *source_directory,
 		g_hash_table_destroy (*by_iid);
 	*by_iid = g_hash_table_new (g_str_hash, g_str_equal);
 
-	dirs = g_strsplit (source_directory, ":", -1);
 
 	*nservers = 0;
 
@@ -195,8 +193,9 @@ OAF_ServerInfo_load (const char *source_directory,
 					continue;
 
 				/* I'd love to use XML namespaces, but unfortunately they appear
-				 * to require putting complicated stuff into the .oafinfo file, and even
-				 * more complicated stuff to use. */
+				 * to require putting complicated stuff into the .oafinfo file, 
+                                 * and even more complicated stuff to use. 
+                                 */
 
 				if (strcasecmp (curnode->name, "oaf_server"))
 					continue;
@@ -233,7 +232,6 @@ OAF_ServerInfo_load (const char *source_directory,
 		}
 		closedir (dirh);
 	}
-	g_strfreev (dirs);
 
 	/* Now convert 'entries' into something that the server can store and pass back */
 	n = g_slist_length (entries);
