@@ -1,3 +1,20 @@
+1999-08-19  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/gnome-view.c (gnome_view_destroy_remove_verb): A new
+ 	helper function to free verbs when a view is destroyed.
+	(gnome_view_destroy): Free the verbs.
+	(init_view_corba_class): size_query, not size_request.
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_size_request): Call
+ 	GNOME_View_size_query.
+
+	* bonobo/gnome-container.c (gnome_container_construct): Return a
+ 	GnomeContainer.
+	(gnome_container_new): Likewise.
+
+	* samples/paint-component-simple.c: Removed the global CORBA_ORB
+ 	and CORBA_Environment.
+
 1999-08-20  Michael Meeks  <michael@imaginator.com>
 
 	* doc/debugging.txt: Even more advice from Nat.

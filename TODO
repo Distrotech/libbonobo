@@ -26,14 +26,14 @@ Nat's list
 * Make sure HACKING is up-to-date.
 * UIHandler toolbar code finished
 * UIHandler documented
-* reference container in a samples/, using both methods
-* reference components in samples/
+* reference container in a samples/
+* write up description of paint component
+* reference components in samples/, using gtk-object method
 * One paragraph descriptions of every file.
 * Pinging of the client site when all views disappear!!
-* Size allocate -- how does the component find out?
-* Make sure free verbs when view destroyed
 * clean up text/plain
 * When view emits system_exception, what do we do?
-
-Someone:
-sort out the fatal-exception stuff.
+* FIXMEs
+* Remove per-object CORBA_Environment
+* Work on debugging.txt
+* Clear up role of GnomeContainer

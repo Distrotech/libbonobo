@@ -11,6 +11,7 @@
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)
+ *   Nat Friedman (nat@nat.org)
  *
  * Copyright 1999 International GNOME Support (http://www.gnome-support.com)
  */
@@ -212,7 +213,7 @@ gnome_container_init (GnomeContainer *container)
  *
  * Returns: The constructed GnomeContainer object.
  */
-GnomeObject *
+GnomeContainer *
 gnome_container_construct (GnomeContainer  *container,
 			   GNOME_Container corba_container)
 {
@@ -259,9 +260,9 @@ gnome_container_get_type (void)
  * Creates a new GnomeContainer object.  These are used to hold
  * client sites.
  *
- * Returns: The new created GnomeContainer object
+ * Returns: The newly created GnomeContainer object
  */
-GnomeObject *
+GnomeContainer *
 gnome_container_new (void)
 {
 	GnomeContainer *container;

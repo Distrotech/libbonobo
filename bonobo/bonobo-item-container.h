@@ -42,17 +42,17 @@ typedef struct {
 				     CORBA_Environment *ev);
 } GnomeContainerClass;
 
-GtkType       gnome_container_get_type    (void);
-GnomeObject  *gnome_container_new         (void);
-GnomeObject  *gnome_container_construct   (GnomeContainer *container,
-					   GNOME_Container container_corba);
-GnomeMoniker *gnome_container_get_moniker (GnomeContainer *container);
+GtkType          gnome_container_get_type    (void);
+GnomeContainer  *gnome_container_new         (void);
+GnomeContainer  *gnome_container_construct   (GnomeContainer *container,
+					      GNOME_Container container_corba);
+GnomeMoniker    *gnome_container_get_moniker (GnomeContainer *container);
 
-void          gnome_container_add         (GnomeContainer *container,
-					   GnomeObject    *object);
+void             gnome_container_add         (GnomeContainer *container,
+					      GnomeObject    *object);
 
-void         gnome_container_remove       (GnomeContainer *container,
-					   GnomeObject    *object);
+void             gnome_container_remove       (GnomeContainer *container,
+					       GnomeObject    *object);
 
 /*
  * Exported vectors
