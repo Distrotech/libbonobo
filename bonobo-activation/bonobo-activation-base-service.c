@@ -547,7 +547,7 @@ rloc_file_register (const OAFBaseServiceRegistry *registry, const char *ior,
 		    const OAFBaseService *base_service,
 		    gpointer user_data)
 {
-	char *fn, *fn2;
+	char *fn, *fn2, *namecopy;
 	FILE *fh;
 	const char *uname;
 
