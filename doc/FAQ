@@ -136,7 +136,7 @@ to this document.
     For example, this OAFID represents the Gnumeric workbook factory
     object:
 
-AFIID:GNOME:Gnumeric:WorkbookFactory:1.0:7cf6fb4d-c5a1-4ace-aa6a-4ece790138c9
+OAFIID:GNOME_Gnumeric_WorkbookFactory
 
 @Q: What is a Factory?
 
