@@ -1024,6 +1024,16 @@ impl_Bonobo_ObjectDirectory_remove_path(
 
 
 static void
+client_cnx_broken (ORBitConnection *cnx,
+                   const Bonobo_ActivationClient  client)
+{
+        ObjectDirectory *od = main_dir;
+        if (!od) /* shutting down */
+                return;
+        g_hash_table_remove (od->client_envs, client);
+}
+
+static void
 impl_Bonobo_ObjectDirectory_addClientEnv (
         PortableServer_Servant         servant,
         const Bonobo_ActivationClient  client,
@@ -1032,6 +1042,7 @@ impl_Bonobo_ObjectDirectory_addClientEnv (
 {
         Bonobo_ActivationEnvironment *env;
 	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
+        ORBitConnection *cnx;
         int i;
         
         env = Bonobo_ActivationEnvironment__alloc ();
@@ -1060,6 +1071,13 @@ impl_Bonobo_ObjectDirectory_addClientEnv (
         }
 
         g_hash_table_insert (od->client_envs, client, env);
+
+        cnx = ORBit_small_get_connection (client);
+        if (cnx) {
+                g_signal_connect (cnx, "broken",
+                                  G_CALLBACK (client_cnx_broken),
+                                  (gpointer) client);
+        }
 }
 
 

@@ -1,3 +1,9 @@
+2004-01-01  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* activation-server/object-directory-corba.c (client_cnx_broken)
+	(impl_Bonobo_ObjectDirectory_addClientEnv): Free client
+	environment when client disconnects.
+
 2003-12-31  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-app-client.c (bonobo_app_client_new_instance): Add
