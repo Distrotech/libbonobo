@@ -1,3 +1,8 @@
+2001-10-20  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-property-bag.c
+	(bonobo_property_bag_new): tolerate NULL callbacks.
+
 2001-10-18  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_dump_interfaces):

@@ -497,8 +497,10 @@ bonobo_property_bag_new	           (BonoboPropertyGetFn get_prop_cb,
 			            gpointer            user_data)
 {
 	return bonobo_property_bag_new_closure (
-		g_cclosure_new (G_CALLBACK (get_prop_cb), user_data, NULL),
-		g_cclosure_new (G_CALLBACK (set_prop_cb), user_data, NULL));
+		get_prop_cb ? g_cclosure_new (
+			G_CALLBACK (get_prop_cb), user_data, NULL) : NULL,
+		set_prop_cb ? g_cclosure_new (
+			G_CALLBACK (set_prop_cb), user_data, NULL) : NULL);
 }
 
 /**
