@@ -1,3 +1,9 @@
+2000-11-11  Maciej Stachowiak  <mjs@eazel.com>
+
+	* components/text-plain/bonobo-text-plain.c
+	(create_control_menus): By default do not create the "text-plain"
+	menu which creates only the "Clear Text" item.
+
 2000-11-10  Zach Frey  <zfrey@bright.net>
 
 	* Some basic cleanup of the API documentation.
