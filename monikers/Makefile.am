@@ -1,9 +1,5 @@
 INCLUDES = \
-	-I. 						\
-	-I$(srcdir) -I$(top_srcdir) 			\
-	-I$(top_builddir)				\
-	-I$(builddir)					\
-        -I$(includedir)                                 \
+	-I$(top_srcdir) 				\
 	$(WARN_CFLAGS)					\
 	$(LIBBONOBO_CFLAGS)				\
 	-DPLUGIN_DIR=\""$(PLUGIN_DIR)"\"		\
@@ -16,9 +12,8 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"Bonobo\"			\
 	-DVERSION=\"$(VERSION)\"
 
-Bonobo_Moniker_std.server.in : $(srcdir)/Bonobo_Moniker_std.server.in.in
-	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" \
-	 $(srcdir)/Bonobo_Moniker_std.server.in.in > Bonobo_Moniker_std.server.in
+Bonobo_Moniker_std.server.in: Bonobo_Moniker_std.server.in.in
+	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" $< > $@
 
 CLEANFILES+=Bonobo_Moniker_std.server Bonobo_Moniker_std.server.in
 

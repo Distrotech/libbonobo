@@ -1,14 +1,9 @@
-ORBIT_IDL = @ORBIT_IDL@
 
 PLUGIN_DIR = $(libdir)/bonobo/plugin
 
 INCLUDES = \
-	-I. 						\
-	-I$(srcdir) -I$(top_srcdir) 			\
-	-I$(top_builddir)				\
-	-I$(top_builddir)/bonobo			\
-	-I$(builddir)					\
-        -I$(includedir)                                 \
+	-I$(top_srcdir) 				\
+	-I$(top_builddir) 				\
 	$(WARN_CFLAGS)					\
 	$(LIBBONOBO_CFLAGS)				\
 	-DPLUGIN_DIR=\""$(PLUGIN_DIR)"\"		\
@@ -137,11 +132,10 @@ marshal_sources = \
 	bonobo-marshal.c \
 	bonobo-marshal.h
 
-bonobo-marshal.h: $(GLIB_GENMARSHAL) bonobo-marshal.list
-	$(GLIB_GENMARSHAL) --prefix=bonobo_marshal $(srcdir)/bonobo-marshal.list --header > $@
-
-bonobo-marshal.c: $(GLIB_GENMARSHAL) bonobo-marshal.list
-	$(GLIB_GENMARSHAL) --prefix=bonobo_marshal $(srcdir)/bonobo-marshal.list --body > $@
+bonobo-marshal.h: bonobo-marshal.list $(GLIB_GENMARSHAL)
+	$(GLIB_GENMARSHAL) $< --header --prefix=bonobo_marshal > $@
+bonobo-marshal.c: bonobo-marshal.list $(GLIB_GENMARSHAL)
+	$(GLIB_GENMARSHAL) $< --body --prefix=bonobo_marshal > $@
 
 EXTRA_DIST = libbonobo-2.0.pc.in bonobo-marshal.list
 CLEANFILES = $(marshal_sources)

@@ -1,5 +1,14 @@
 2001-08-18  Darin Adler  <darin@bentspoon.com>
 
+	* bonobo/Makefile.am:
+	* idl/Makefile.am:
+	* monikers/Makefile.am:
+	* tests/Makefile.am:
+	Fix loose ends from last checkin and remove unnecessary -I
+	directives to speed up compiles.
+
+2001-08-18  Darin Adler  <darin@bentspoon.com>
+
 	* configure.in: Add GLIB_GENMARSHAL variable.
 	* bonobo/Makefile.am: Update marshal build rules to work in a
 	simpler way.
