@@ -27,11 +27,13 @@
 #ifndef __BONOBO_OBJECT_DIRECTORY_IDL__
 #define __BONOBO_OBJECT_DIRECTORY_IDL__
 
-#if !defined(__Bonobo_ObjectDirectory_COMPILATION) && defined(__ORBIT_IDL__)
+#ifndef __Bonobo_ObjectDirectory_COMPILATION
+#ifdef  __ORBIT_IDL__
 %{
 #pragma include_defs bonobo-activation/Bonobo_ObjectDirectory.h
 %}
 #pragma inhibit push
+#endif
 #endif
 
 #include <Bonobo_Unknown.idl>
@@ -81,9 +83,10 @@ module Bonobo {
 };
 
 
-#if !defined(__Bonobo_ObjectDirectory_COMPILATION) && defined(__ORBIT_IDL__)
+#ifndef __Bonobo_ObjectDirectory_COMPILATION
+#ifdef  __ORBIT_IDL__
 #pragma inhibit pop
 #endif
-
+#endif
 
 #endif

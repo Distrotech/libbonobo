@@ -14,11 +14,13 @@
 #ifndef __BONOBO_UNKNOWN_IDL__
 #define __BONOBO_UNKNOWN_IDL__
 
-#if !defined(__Bonobo_Unknown_COMPILATION) && defined(__ORBIT_IDL__)
+#ifndef __Bonobo_Unknown_COMPILATION
+#ifdef  __ORBIT_IDL__
 %{
 #pragma include_defs bonobo-activation/Bonobo_Unknown.h
 %}
 #pragma inhibit push
+#endif
 #endif
 
 module Bonobo {
@@ -49,8 +51,10 @@ module Bonobo {
 	};
 };
 
-#if !defined(__Bonobo_Unknown_COMPILATION) && defined(__ORBIT_IDL__)
+#ifndef __Bonobo_Unknown_COMPILATION
+#ifdef __ORBIT_IDL__
 #pragma inhibit pop
+#endif
 #endif
 
 #endif /* ! __BONOBO_UNKNOWN_IDL__ */
