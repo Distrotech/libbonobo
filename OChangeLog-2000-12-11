@@ -1,5 +1,35 @@
 2000-10-19  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-toolbar-control-item.c 
+	(bonobo_ui_toolbar_control_item_set_display): impl.
+	(impl_set_orientation): update.
+
+	* bonobo/bonobo-win.c (decode_control_disp): impl.
+	(toolbar_sync_state): setup the display params.
+
+	* doc/ui-xml.txt: update.
+
+2000-10-17  Jon K Hellan  <hellan@acm.org>
+
+	* bonobo/bonobo-ui-toolbar-button-item.h: Virtualize set_icon and
+	set_label.
+
+	* bonobo/bonobo-ui-toolbar-control-item.[ch]: A few ItemControl ->
+	ControlItem renamings.
+
+	* bonobo/bonobo-ui-toolbar-control-item.c
+	(bonobo_ui_toolbar_control_item_construct, struct
+	_BonoboUIToolbarControlItemPrivate): Add a
+	BonoboUIToolbarButtonItem to display instead of control in
+	vertical mode, and a vbox to contain button and control.
+	(impl_set_orientation): New function. Switch between displaying
+	button and control depending on orientation.
+	(impl_set_style): New function. Delegate to button item.
+	(impl_set_want_label): Ditto.
+	(class_init): Add the new impl_xxx functions.
+
+2000-10-19  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-object-directory.c (build_id_query_fragment): split from
 	(od_get_server_list): here.
 	(bonobo_directory_find_for_file): impl.
