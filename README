@@ -33,5 +33,12 @@ to compile and install Bonobo.
 actual implementation of bonobo is in the "bonobo" directory.  The
 CORBA interfaces are in the "idl" directory.
 
+* Bonobos
+
+   The real Bonobos are endangered species.  If you want to help
+preserve the Bonobos go to this web site: 
+
+http://www.gsu.edu/~wwwbpf/bpf
+
 Miguel de Icaza (miguel@gnu.org)
 August, 1999.
