@@ -1,3 +1,19 @@
+2001-02-13  Dan Winship  <danw@ximian.com>
+
+	* bonobo/bonobo-listener.c (impl_Bonobo_Listener_event): ref the
+	listener through this function so that if the callback unrefs it
+	the signal emission won't crash.
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_notify_listeners): ref the event source
+	around the notifications in case the last listener unregisters
+	itself from its notification function.
+
+	* bonobo/bonobo-control.c (impl_Bonobo_Control_setWindowId): Use
+	gtk_signal_connect_while_alive so we don't try to destroy the
+	control on both the "destroy_event" and "destroy" signals from the
+	plug.
+
 2001-02-13  Darin Adler  <darin@eazel.com>
 
 	* .cvsignore: Fix for recent xml-i18n-tools.
