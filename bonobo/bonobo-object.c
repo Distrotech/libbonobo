@@ -107,14 +107,32 @@ impl_GNOME_object_query_interface (PortableServer_Servant servant,
 {
 	CORBA_Object retval;
 	GnomeObject *object;
-
+	GtkType type;
+	GtkObject *interface;
+	
 	object = gnome_object_from_servant (servant);
 
 	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
 
-	g_warning ("Should do a hierarchy lookpu for the name here\n");
-	retval = CORBA_Object_duplicate (object->object, &object->ev);
-	return retval;
+	type = gtk_type_from_name (repoid);
+
+	/*
+	 * Type has not been registered
+	 */
+	if (type == 0)
+		return CORBA_OBJECT_NIL;
+
+	interface = gtk_object_query_interface (GTK_OBJECT (object), type);
+	if (!interface)
+		return CORBA_OBJECT_NIL;
+	
+	if (GNOME_IS_OBJECT (interface)){
+		GnomeObject *io = GNOME_OBJECT (interface);
+		
+		gtk_object_ref (interface);
+		return CORBA_Object_duplicate (io->object, &io->ev);
+	}
+	return CORBA_OBJECT_NIL;
 }
 
 PortableServer_ServantBase__epv gnome_object_base_epv =

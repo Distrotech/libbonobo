@@ -1,3 +1,12 @@
+1999-04-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-object.c (impl_GNOME_object_query_interface): Make
+	gnome_object_query_interface call gtk_object_query_interface.  We
+	need to make gtk_object_query_interface walk the hierarchy
+	optionally (ie, to ask for parent classes).  
+
+	This fixes the first part of the problem.  Need to fix the next later.
+
 1999-04-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-file-moniker.c, bonobo/gnome-moniker.c: Initial
