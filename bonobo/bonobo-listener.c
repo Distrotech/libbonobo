@@ -74,7 +74,7 @@ bonobo_listener_class_init (BonoboListenerClass *klass)
 
 	oclass->finalize = bonobo_listener_finalize;
 
-	signals [EVENT_NOTIFY] = g_signal_newc (
+	signals [EVENT_NOTIFY] = g_signal_new (
 		"event_notify", G_TYPE_FROM_CLASS (oclass), G_SIGNAL_RUN_LAST,
 		G_STRUCT_OFFSET (BonoboListenerClass, event_notify),
 		NULL, NULL,

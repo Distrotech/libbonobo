@@ -97,7 +97,7 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 
 		if (o->ref_count >= 1) {
 			g_object_ref (o);
-			G_OBJECT_GET_CLASS (o)->shutdown (o);
+			G_OBJECT_GET_CLASS (o)->dispose (o);
 			g_object_unref (o);
 		} else
 			g_warning ("Serious ref-counting error [%p]", o);
@@ -516,11 +516,11 @@ bonobo_object_epv_init (POA_Bonobo_Unknown__epv *epv)
 }
 
 static void
-bonobo_object_shutdown (GObject *gobject)
+bonobo_object_dispose (GObject *gobject)
 {
 	g_signal_emit (gobject, bonobo_object_signals [DESTROY], 0);
 
-	bonobo_object_parent_class->shutdown (gobject);
+	bonobo_object_parent_class->dispose (gobject);
 }
 
 static void
@@ -572,31 +572,31 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 	bonobo_object_parent_class = g_type_class_peek_parent (klass);
 
 	bonobo_object_signals [DESTROY] =
-		g_signal_newc ("destroy",
-			       G_TYPE_FROM_CLASS (object_class),
-			       G_SIGNAL_RUN_LAST,
-			       G_STRUCT_OFFSET (BonoboObjectClass,destroy),
-			       NULL, NULL,
-			       g_cclosure_marshal_VOID__VOID,
-			       G_TYPE_NONE, 0);
+		g_signal_new ("destroy",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboObjectClass,destroy),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
 	bonobo_object_signals [QUERY_INTERFACE] =
-		g_signal_newc ("query_interface",
-			       G_TYPE_FROM_CLASS (object_class),
-			       G_SIGNAL_RUN_LAST,
-			       G_STRUCT_OFFSET (BonoboObjectClass,query_interface),
-			       NULL, NULL,
-			       bonobo_marshal_VOID__POINTER_POINTER,
-			       G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
+		g_signal_new ("query_interface",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboObjectClass,query_interface),
+			      NULL, NULL,
+			      bonobo_marshal_VOID__POINTER_POINTER,
+			      G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
 	bonobo_object_signals [SYSTEM_EXCEPTION] =
-		g_signal_newc ("system_exception",
-			       G_TYPE_FROM_CLASS (object_class),
-			       G_SIGNAL_RUN_LAST,
-			       G_STRUCT_OFFSET (BonoboObjectClass,system_exception),
-			       NULL, NULL,
-			       bonobo_marshal_VOID__POINTER_POINTER,
-			       G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
+		g_signal_new ("system_exception",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboObjectClass,system_exception),
+			      NULL, NULL,
+			      bonobo_marshal_VOID__POINTER_POINTER,
+			      G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
 
-	object_class->shutdown = bonobo_object_shutdown;
+	object_class->dispose = bonobo_object_dispose;
 	object_class->finalize = bonobo_object_finalize_real;
 }
 

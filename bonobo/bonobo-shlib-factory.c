@@ -278,7 +278,7 @@ bonobo_shlib_factory_track_object (BonoboShlibFactory *factory,
 
 	bonobo_shlib_factory_inc_live (factory);
 
-	g_signal_connectc (G_OBJECT (object), "destroy",
-			   G_CALLBACK (destroy_handler),
-			   factory, FALSE);
+	g_signal_connect (G_OBJECT (object), "destroy",
+			  G_CALLBACK (destroy_handler),
+			  factory);
 }

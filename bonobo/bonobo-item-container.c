@@ -152,15 +152,15 @@ bonobo_item_container_class_init (BonoboItemContainerClass *klass)
 	object_class->finalize = bonobo_item_container_finalize;
 
 	signals [GET_OBJECT] =
-		g_signal_newc  ("get_object",
-				G_TYPE_FROM_CLASS (object_class),
-				G_SIGNAL_RUN_LAST,
-				0,
-				NULL, NULL,
-				bonobo_marshal_POINTER__POINTER_BOOLEAN_POINTER,
-				G_TYPE_POINTER,
-				3,
-				G_TYPE_POINTER, G_TYPE_BOOLEAN, G_TYPE_POINTER);
+		g_signal_new  ("get_object",
+			       G_TYPE_FROM_CLASS (object_class),
+			       G_SIGNAL_RUN_LAST,
+			       0,
+			       NULL, NULL,
+			       bonobo_marshal_POINTER__POINTER_BOOLEAN_POINTER,
+			       G_TYPE_POINTER,
+			       3,
+			       G_TYPE_POINTER, G_TYPE_BOOLEAN, G_TYPE_POINTER);
 
 	epv->enumObjects     = impl_Bonobo_ItemContainer_enumObjects;
 	epv->getObjectByName = impl_Bonobo_ItemContainer_getObjectByName;

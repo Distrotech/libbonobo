@@ -324,7 +324,7 @@ bonobo_running_context_class_init (BonoboRunningContextClass *klass)
 
 	((BonoboRunningContextClass *)klass)->last_unref = NULL;
 
-	signals [LAST_UNREF] = g_signal_newc (
+	signals [LAST_UNREF] = g_signal_new (
 		"last_unref", G_TYPE_FROM_CLASS (object_class),
 		G_SIGNAL_RUN_FIRST,
 		G_STRUCT_OFFSET (BonoboRunningContextClass, last_unref),
@@ -369,8 +369,8 @@ bonobo_running_context_new (void)
 	bonobo_object_add_interface (BONOBO_OBJECT (bonobo_running_context),
 				     BONOBO_OBJECT (bonobo_running_event_source));
 
-	g_signal_connectc (G_OBJECT (bonobo_running_context),
-			   "destroy", G_CALLBACK (check_destroy), NULL, FALSE);
+	g_signal_connect (G_OBJECT (bonobo_running_context),
+			  "destroy", G_CALLBACK (check_destroy), NULL);
 
 	return bonobo_running_context;
 }
@@ -401,9 +401,9 @@ bonobo_running_context_at_exit_unref (CORBA_Object object)
 	bonobo_running_context_ignore_object (obj_dup);
 
 	if (bonobo_running_context)
-		g_signal_connectc (G_OBJECT (bonobo_running_context),
-				   "last_unref", G_CALLBACK (last_unref_cb),
-				   obj_dup, FALSE);
+		g_signal_connect (G_OBJECT (bonobo_running_context),
+				  "last_unref", G_CALLBACK (last_unref_cb),
+				  obj_dup);
 	
 	CORBA_exception_free (&ev);
 }
@@ -425,10 +425,10 @@ bonobo_running_context_auto_exit_unref (BonoboObject *object)
 	bonobo_running_context_ignore_object (BONOBO_OBJREF (object));
 
 	if (bonobo_running_context)
-		g_signal_connectc (G_OBJECT (bonobo_running_context),
-				   "last_unref",
-				   G_CALLBACK (last_unref_exit_cb),
-				   object, FALSE);
+		g_signal_connect (G_OBJECT (bonobo_running_context),
+				  "last_unref",
+				  G_CALLBACK (last_unref_exit_cb),
+				  object);
 
 }
 
