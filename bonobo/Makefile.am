@@ -102,12 +102,12 @@ libbonoboinclude_HEADERS =		\
 	bonobo-types.h
 
 noinst_HEADERS =			\
-	bonobo-activation-context.h	\
+	bonobo-moniker-context.h	\
 	bonobo-running-context.h
 
 libbonobo_src =				\
 	bonobo-marshal-main.c		\
-	bonobo-activation-context.c	\
+	bonobo-moniker-context.c	\
 	bonobo-arg.c			\
 	bonobo-async.c			\
 	bonobo-context.c		\

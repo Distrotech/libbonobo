@@ -12,7 +12,7 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
 #include <bonobo/bonobo-running-context.h>
-#include <bonobo/bonobo-activation-context.h>
+#include <bonobo/bonobo-moniker-context.h>
 
 static GHashTable *bonobo_contexts = NULL;
 
@@ -89,8 +89,8 @@ context_add (BonoboObject *object, const char *name)
 void
 bonobo_context_init (void)
 {
-	context_add (bonobo_activation_context_new (), "Activation");
-	context_add (bonobo_running_context_new (),    "Running");
+	context_add (bonobo_moniker_context_new (), "Moniker");
+	context_add (bonobo_running_context_new (), "Running");
 }
 
 static gboolean

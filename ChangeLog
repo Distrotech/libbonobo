@@ -1,3 +1,16 @@
+2001-07-31  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-context.c (bonobo_context_init): register
+	as the "Moniker" context instead.
+
+	* idl/Bonobo_Context.idl: rename Activation -> Moniker context.
+
+	* bonobo/bonobo-activation-context.[ch]: rename to
+
+	* bonobo/bonobo-moniker-context.[ch]: this.
+
+	* bonobo/Makefile.am: upd.
+
 2001-07-30  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* bonobo/Makefile.am (libbonoboinclude_HEADERS): removed duplicate

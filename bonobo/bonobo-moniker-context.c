@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * bonobo-activation-context.c: A global activation interface
+ * bonobo-moniker-context.c: A global moniker interface
  *
  * Author:
  *	Michael Meeks (michael@helixcode.com)
@@ -13,12 +13,12 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-moniker-extender.h>
-#include <bonobo/bonobo-activation-context.h>
+#include <bonobo/bonobo-moniker-context.h>
 
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static Bonobo_Moniker
-impl_Bonobo_ActivationContext_createFromName (PortableServer_Servant servant,
+impl_Bonobo_MonikerContext_createFromName (PortableServer_Servant servant,
 					      const CORBA_char      *name,
 					      CORBA_Environment     *ev)
 {
@@ -26,7 +26,7 @@ impl_Bonobo_ActivationContext_createFromName (PortableServer_Servant servant,
 }
 
 static Bonobo_Unknown
-impl_Bonobo_ActivationContext_getObject (PortableServer_Servant servant,
+impl_Bonobo_MonikerContext_getObject (PortableServer_Servant servant,
 					 const CORBA_char      *name,
 					 const CORBA_char      *repo_id,
 					 CORBA_Environment     *ev)
@@ -35,7 +35,7 @@ impl_Bonobo_ActivationContext_getObject (PortableServer_Servant servant,
 }
 
 static Bonobo_MonikerExtender
-impl_Bonobo_ActivationContext_getExtender (PortableServer_Servant servant,
+impl_Bonobo_MonikerContext_getExtender (PortableServer_Servant servant,
 					   const CORBA_char      *monikerPrefix,
 					   const CORBA_char      *interfaceId,
 					   CORBA_Environment     *ev)
@@ -44,30 +44,30 @@ impl_Bonobo_ActivationContext_getExtender (PortableServer_Servant servant,
 }
 
 static void
-bonobo_activation_context_class_init (BonoboActivationContextClass *klass)
+bonobo_moniker_context_class_init (BonoboMonikerContextClass *klass)
 {
-	POA_Bonobo_ActivationContext__epv *epv = &klass->epv;
+	POA_Bonobo_MonikerContext__epv *epv = &klass->epv;
 
-	epv->getObject        = impl_Bonobo_ActivationContext_getObject;
-	epv->createFromName   = impl_Bonobo_ActivationContext_createFromName;
-	epv->getExtender      = impl_Bonobo_ActivationContext_getExtender;
+	epv->getObject        = impl_Bonobo_MonikerContext_getObject;
+	epv->createFromName   = impl_Bonobo_MonikerContext_createFromName;
+	epv->getExtender      = impl_Bonobo_MonikerContext_getExtender;
 }
 
 static void 
-bonobo_activation_context_init (GObject *object)
+bonobo_moniker_context_init (GObject *object)
 {
 	/* nothing to do */
 }
 
 static
-BONOBO_TYPE_FUNC_FULL (BonoboActivationContext,
-			 Bonobo_ActivationContext,
+BONOBO_TYPE_FUNC_FULL (BonoboMonikerContext,
+			 Bonobo_MonikerContext,
 			 PARENT_TYPE,
-			 bonobo_activation_context);
+			 bonobo_moniker_context);
 
 BonoboObject *
-bonobo_activation_context_new (void)
+bonobo_moniker_context_new (void)
 {
         return BONOBO_OBJECT (g_object_new (
-		bonobo_activation_context_get_type (), NULL));
+		bonobo_moniker_context_get_type (), NULL));
 }

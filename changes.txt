@@ -137,6 +137,10 @@ Bonobo_ControlFactory:
 Bonobo_CanvasComponentFactory:
 	new: use to expose canvas based compound-doc view support.
 
+Bonobo/ActivationContext:
+	renamed to Bonobo/MonikerContext to avoid clash with oaf
+	and better reflect it's use.
+
 Removed:
 	Bonobo_Advise.idl:          unused,
 	Bonobo_ProgressiveDataSink: unused & stale

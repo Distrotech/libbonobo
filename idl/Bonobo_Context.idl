@@ -15,7 +15,7 @@
 
 module Bonobo {
 
-	interface ActivationContext : Unknown {
+	interface MonikerContext : Unknown {
 		/**
 		 * getObject:
 		 * @name:
