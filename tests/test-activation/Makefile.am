@@ -1,6 +1,8 @@
-noinst_PROGRAMS=oaf-empty-server oaf-test-client
+noinst_PROGRAMS=oaf-empty-server oaf-test-client oaf-run-query
 
 oaf_test_client_SOURCES=oaf-test-client.c empty-common.c empty.h empty-stubs.c
+
+oaf_test_client_SOURCES=oaf-run-query.c empty-common.c empty.h empty-stubs.c
 
 oaf_empty_server_SOURCES=empty-server.c empty.h empty-common.c empty-skels.c
 
