@@ -40,19 +40,9 @@ check_string (const char *prefix, const char *escaped, const char *unescaped)
 int
 main (int argc, char *argv [])
 {
-	CORBA_Environment real_ev, *ev;
-	CORBA_ORB    orb;
-
 	free (malloc (8));
 
-	ev = &real_ev;
-	CORBA_exception_init (ev);
-
-	g_type_init (G_TYPE_DEBUG_NONE);
-
-	orb = oaf_init (argc, argv);
-	
-	if (bonobo_init (orb, NULL, NULL) == FALSE)
+	if (!bonobo_init (&argc, argv))
 		g_error ("Can not bonobo_init");
 
 	check_string ("a:", "\\\\", "\\");

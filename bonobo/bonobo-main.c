@@ -129,11 +129,21 @@ bonobo_setup_x_error_handler (void)
 }
 #endif
 
+static gboolean bonobo_inited = FALSE;
+
+gboolean
+bonobo_is_initialized (void)
+{
+	return bonobo_inited;
+}
+
 /**
- * bonobo_init:
- * @orb: the ORB in which we run
- * @poa: optional, a POA.
- * @manager: optional, a POA Manager
+ * bonobo_init_full:
+ * @argc: a pointer to the number of arguments
+ * @argv: the array of arguments
+ * @opt_orb: the ORB in which we run
+ * @opt_poa: optional, a POA
+ * @opt_manager: optional, a POA Manager
  *
  * Initializes the bonobo document model.  It requires at least
  * the value for @orb.  If @poa is CORBA_OBJECT_NIL, then the
@@ -142,15 +152,23 @@ bonobo_setup_x_error_handler (void)
  * Returns %TRUE on success, or %FALSE on failure.
  */
 gboolean
-bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager manager)
+bonobo_init_full (int *argc, char **argv,
+		  CORBA_ORB opt_orb, PortableServer_POA opt_poa,
+		  PortableServer_POAManager opt_manager)
 {
 	CORBA_Environment ev;
-	static int        inited = FALSE;
 
-	if (inited)
+	if (bonobo_inited)
 		return TRUE;
 	else
-		inited = TRUE;
+		bonobo_inited = TRUE;
+
+	{ /* Init neccessary bits */
+		g_type_init (G_TYPE_DEBUG_NONE);
+
+		if (!oaf_is_initialized ())
+			oaf_orb_init (argc, argv);
+	}
 
 	CORBA_exception_init (&ev);
 
@@ -197,17 +215,17 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	/*
 	 * Create the POA.
 	 */
-	if (orb == CORBA_OBJECT_NIL) {
-		orb = oaf_orb_get ();
-		if (orb == CORBA_OBJECT_NIL) {
+	if (opt_orb == CORBA_OBJECT_NIL) {
+		opt_orb = oaf_orb_get ();
+		if (opt_orb == CORBA_OBJECT_NIL) {
 			g_warning ("Can not resolve initial reference to ORB");
 			CORBA_exception_free (&ev);
 			return FALSE;
 		}
 	}
 	
-	if (CORBA_Object_is_nil ((CORBA_Object) poa, &ev)) {
-		poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
+	if (CORBA_Object_is_nil ((CORBA_Object) opt_poa, &ev)) {
+		opt_poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (opt_orb, "RootPOA", &ev);
 		if (BONOBO_EX (&ev)) {
 			g_warning ("Can not resolve initial reference to RootPOA");
 			CORBA_exception_free (&ev);
@@ -219,8 +237,8 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	/*
 	 * Create the POA Manager.
 	 */
-	if (CORBA_Object_is_nil ((CORBA_Object)manager, &ev)){
-		manager = PortableServer_POA__get_the_POAManager (poa, &ev);
+	if (CORBA_Object_is_nil ((CORBA_Object) opt_manager, &ev)) {
+		opt_manager = PortableServer_POA__get_the_POAManager (opt_poa, &ev);
 		if (BONOBO_EX (&ev)){
 			g_warning ("Can not get the POA manager");
 			CORBA_exception_free (&ev);
@@ -232,9 +250,9 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	 * Store global copies of these which can be retrieved with
 	 * bonobo_orb()/bonobo_poa()/bonobo_poa_manager().
 	 */
-	__bonobo_orb = orb;
-	__bonobo_poa = poa;
-	__bonobo_poa_manager = manager;
+	__bonobo_orb = opt_orb;
+	__bonobo_poa = opt_poa;
+	__bonobo_poa_manager = opt_manager;
 
 	CORBA_exception_free (&ev);
 
@@ -245,6 +263,22 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	bindtextdomain (PACKAGE, BONOBO_LOCALEDIR);
 
 	return TRUE;
+}
+
+/**
+ * bonobo_init:
+ * @argc: a pointer to the number of arguments
+ * @argv: the array of arguments
+ *
+ * Initializes the bonobo component model.
+ *
+ * Returns %TRUE on success, or %FALSE on failure.
+ */
+gboolean
+bonobo_init (int *argc, char **argv)
+{
+	return bonobo_init_full (
+		argc, argv, NULL, NULL, NULL);
 }
 
 /**

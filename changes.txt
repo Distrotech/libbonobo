@@ -33,6 +33,10 @@ bonobo-property-bag-xml.[ch]:
 		 removed bonobo_property_bag_xml_encode_any
 		 removed bonobo_property_bag_xml_decode_any
 
+bonobo-main.[ch]:
+	bonobo_init: added argc, argv, since this now initializes
+	oaf for you.
+
 IDL:
 
 Bonobo_Storage.idl:

@@ -80,16 +80,7 @@ run_tests ()
 int
 main (int argc, char **argv)
 {
-	CORBA_Environment ev;
-
-	CORBA_exception_init (&ev);
-
-	g_type_init (G_TYPE_DEBUG_NONE);
-
-	if ((oaf_init (argc, argv)) == NULL)
-		g_error ("Cannot init oaf");
-
-	if (bonobo_init (NULL, NULL, NULL) == FALSE)
+	if (!bonobo_init (&argc, argv))
 		g_error ("Cannot init bonobo");
 	
 	idle_id = g_idle_add ((GSourceFunc) run_tests, NULL);

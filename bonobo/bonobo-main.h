@@ -16,7 +16,12 @@
 #include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 
-gboolean		    bonobo_init			 (CORBA_ORB orb,
+gboolean                    bonobo_is_initialized        (void);
+gboolean		    bonobo_init			 (int *argc,
+							  char **argv);
+gboolean                    bonobo_init_full             (int *argc,
+							  char **argv,
+							  CORBA_ORB orb,
 							  PortableServer_POA poa,
 							  PortableServer_POAManager manager);
 void			    bonobo_main			 (void);

@@ -270,14 +270,10 @@ quit_main (GObject *object)
 int
 main (int argc, char **argv)
 {
-	CORBA_exception_init (&ev);
-
-	g_type_init (G_TYPE_DEBUG_NONE);
-
-	orb = oaf_init (argc, argv);
-
-	if (!bonobo_init (orb, NULL, NULL))
+	if (!bonobo_init (&argc, argv))
 		g_error ("Could not initialize Bonobo");
+
+	orb = bonobo_orb ();
 
 	create_bag ();
 

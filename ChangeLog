@@ -1,5 +1,13 @@
 2001-04-18  Michael Meeks  <michael@ximian.com>
 
+	* tests/*.c: update initializations.
+
+	* bonobo/bonobo-main.c (bonobo_init): add g_type_init.
+	(bonobo_init): add oaf_orb_init, update sig. rename to
+	(bonobo_init_full): this and add (bonobo_init).
+
+2001-04-18  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-main.c (bonobo_init): guard against double
 	initialization.
 
