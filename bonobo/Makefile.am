@@ -1,4 +1,4 @@
-ORBIT_IDL = orbit-idl
+ORBIT_IDL = @ORBIT_IDL@
 
 PLUGIN_DIR = $(libdir)/bonobo/plugin
 

@@ -1,3 +1,8 @@
+2001-05-15  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/Makefile.am (ORBIT_IDL): Use @ORBIT_IDL@ rather than
+	hardcoding `orbit-idl'.
+
 2001-05-04  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-xobject.h: use G_BEGIN/END_DECLS
