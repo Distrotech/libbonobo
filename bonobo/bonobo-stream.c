@@ -1,9 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gnome-stream: Stream manipulation, abstract class
+ * bonobo-stream: Stream manipulation, abstract class
  *
  * Author:
- *   Miguel de Icaza (miguel@gnu.org).
+ *     Miguel de Icaza (miguel@gnu.org).
  *
  */
 #include <config.h>

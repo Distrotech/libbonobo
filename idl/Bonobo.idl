@@ -36,7 +36,10 @@
 #include <bonobo-canvas.idl>
 #include <bonobo-embeddable.idl>
 
-/* Misc. Stuff. */
+/* Printing stuff */
+#include <bonobo-print.idl>
+
+/* Misc. stuff. */
 #include <bonobo-desktop.idl>
 
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)

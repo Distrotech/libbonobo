@@ -1,3 +1,35 @@
+2000-04-08  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-print-client.[ch]: Created.
+
+	* bonobo/bonbo-print.[ch]: ditto.
+
+2000-04-07  Michael Meeks  <michael@helixcode.com>
+
+	* samples/compound-doc/paint-component-simple.c (render_fn),
+	(init_fn): implement demo remote printing.
+
+	* bonobo/bonobo-object.c (bonobo_object_add_interface): add a possibly
+	helpful warning.
+
+	* samples/compound-doc/Makefile.am: Add printing.
+
+	* configure.in: complicate to handle printing.
+
+	* acconfig.h: ditto.
+
+	* samples/compound-doc/paint-component-simple.c: Add printing support.
+
+	* configure.in: Add checks for printing.
+
+	* bonobo/*.c: Update head comments s/gnome/bonobo/
+
+	* idl/bonobo-print.idl: create.
+
+	* bonobo/Makefile.am: Add bonobo-print
+
+	* samples/controls/bonobo-clock-control.c: use enum instead of define.
+
 2000-04-06  Dan Winship  <danw@helixcode.com>
 
 	* bonobo/bonobo-control.c (bonobo_control_get_widget): New

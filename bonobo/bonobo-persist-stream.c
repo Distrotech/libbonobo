@@ -254,8 +254,8 @@ create_bonobo_persist_stream (BonoboObject *object)
  */
 BonoboPersistStream *
 bonobo_persist_stream_new (BonoboPersistStreamIOFn load_fn,
-			  BonoboPersistStreamIOFn save_fn,
-			  void *closure)
+			   BonoboPersistStreamIOFn save_fn,
+			   void *closure)
 {
 	BonoboPersistStream *ps;
 	Bonobo_PersistStream corba_ps;

@@ -21,30 +21,30 @@ typedef struct {
 	BonoboObjectClass parent_class;
 } BonoboObjectClientClass;
 
-GtkType            bonobo_object_client_get_type        (void);
+GtkType             bonobo_object_client_get_type        (void);
 
 BonoboObjectClient *bonobo_object_client_construct       (BonoboObjectClient *object_client,
-							CORBA_Object corba_object);
+							  CORBA_Object corba_object);
 
 BonoboObjectClient *bonobo_object_activate               (const char *object_desc,
-							gint oaf_or_goad_flags);
+							  gint oaf_or_goad_flags);
 BonoboObjectClient *bonobo_object_activate_with_goad_id  (gpointer dummy,
-							const char *goad_id,
-							gint        goad_flags,
-							const char **params);
+							  const char *goad_id,
+							  gint        goad_flags,
+							  const char **params);
 BonoboObjectClient *bonobo_object_activate_with_oaf_id   (const char *oaf_id,
-							gint flags);
+							  gint flags);
 Bonobo_Unknown      bonobo_object_restore_from_url       (const char *goad_id,
-							const char *url);
+							  const char *url);
 BonoboObjectClient *bonobo_object_client_from_corba      (Bonobo_Unknown o);
 
 /* Convenience Bonobo_Unknown wrappers */
-gboolean           bonobo_object_client_has_interface   (BonoboObjectClient *object,
-							const char *interface_desc,
-							CORBA_Environment *opt_ev);
+gboolean           bonobo_object_client_has_interface    (BonoboObjectClient *object,
+							  const char *interface_desc,
+							  CORBA_Environment *opt_ev);
 Bonobo_Unknown      bonobo_object_client_query_interface (BonoboObjectClient *object,
-							const char *interface_desc,
-							CORBA_Environment *opt_ev);
+							  const char *interface_desc,
+							  CORBA_Environment *opt_ev);
 
 #endif /* _BONOBO_OBJECT_CLIENT_H_ */
 

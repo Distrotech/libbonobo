@@ -521,6 +521,9 @@ bonobo_object_add_interface (BonoboObject *object, BonoboObject *newobj)
        if (object->priv->ao == newobj->priv->ao)
                return;
 
+       if (newobj->corba_objref == CORBA_OBJECT_NIL)
+	       g_warning ("Adding an interface with a NULL Corba objref");
+
        /*
 	* Explanation:
 	*   Bonobo Objects should not be assembled after they have been
