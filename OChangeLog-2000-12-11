@@ -1,3 +1,10 @@
+2000-07-11  Mike Kestner  <mkestner@ameritech.net>
+
+	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_toolbar_create_widget):
+	Changed the gnome_app_set_toolbar call to gnome_app_add_toolbar and 
+	added logic to calculate the proper band position to append toolbars
+	to the top bands instead of inserting them above existing toolbars.
+	
 2000-07-10  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-client-site.c (bonobo_client_site_bind_embeddable): remove
