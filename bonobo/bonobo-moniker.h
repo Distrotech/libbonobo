@@ -3,6 +3,7 @@
 
 #include <bonobo/gnome-bind-context.h>
 #include <bonobo/gnome-persist-stream.h>
+#include <libgnorba/gnorba.h>
 
 BEGIN_GNOME_DECLS
 
@@ -12,9 +13,15 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_MONIKER(o)       (GTK_CHECK_TYPE ((o), GNOME_MONIKER_TYPE))
 #define GNOME_IS_MONIKER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_MONIKER_TYPE))
 
-typedef struct {
+struct _GnomeMoniker;
+typedef struct _GnomeMoniker GnomeMoniker;
+
+typedef CORBA_Object * (*GnomeMonikerBindFn)(GnomeMoniker *moniker, void *closure);
+
+struct _GnomeMoniker {
 	GnomePersistStream persist_stream;
-} GnomeMoniker;
+	GnomeMonikerBindFn bind_function;
+};
 
 typedef struct {
 	GnomePersistStreamClass parent_class;
@@ -22,7 +29,9 @@ typedef struct {
 
 GtkType           gnome_moniker_get_type   (void);
 GnomeMoniker     *gnome_moniker_construct  (GnomeMoniker *moniker,
-					    GNOME_Moniker corba_moniker);
+					    GNOME_Moniker corba_moniker,
+					    GnomeMonikerBindFn bind_function);
+
 GnomeBindContext *gnome_bind_context_new   (void);
 GnomeMoniker     *gnome_parse_display_name (GnomeBindContext *bind,
 					    const char *display_name,

@@ -1,3 +1,29 @@
+1999-06-10  Matt Loper  <matt@gnome-support.com>
+
+	* bonobo/gnome-file-moniker.h: Change gnome_file_moniker_new to
+	take filename and goad_id as params.  Changed
+	gnome_file_moniker_construct to take filename and goad_id as
+	params.
+
+	* bonobo/gnome-moniker.h: Add a GnomeMonikerBindFn type to
+	GnomeMoniker. Include gnorba.h. Add binding_function to
+	gnome_moniker_construct.
+
+	* bonobo/gnome-moniker.c (gnome_moniker_construct): Initialize a
+	GnomeMoniker's bind_function here.
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_new): Changed
+	signature and body to reflect goad_id/filename basis for
+	GnomeFileMoniker.
+	(gnome_file_moniker_construct): Changed to reflect
+	goad_id/filename basis for GnomeFileMoniker
+
+	* bonobo/gnome-file-moniker.h: changed GnomeFileMoniker to be
+	defined in terms of a goad_id and a filename.
+
+	* bonobo/gnome-file-moniker.c (gnome_file_moniker_destroy):
+	Changed to reflect the above.
+
 1999-06-10  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/test-container.c: Added comment at top of file.

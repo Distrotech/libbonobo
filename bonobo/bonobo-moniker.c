@@ -114,15 +114,19 @@ gnome_moniker_class_init (GnomeMonikerClass *class)
 }
 
 GnomeMoniker *
-gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker)
+gnome_moniker_construct (GnomeMoniker *moniker, GNOME_Moniker corba_moniker, GnomeMonikerBindFn bind_function)
 {
 	g_return_val_if_fail (moniker != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MONIKER (moniker), NULL);
 	g_return_val_if_fail (corba_moniker != CORBA_OBJECT_NIL, NULL);
-
+	g_return_val_if_fail (bind_function != NULL, NULL);
+	
 	gnome_persist_stream_construct (GNOME_PERSIST_STREAM (moniker),
 					(GNOME_Moniker) corba_moniker,
 					NULL, NULL, NULL);
+
+	moniker->bind_function = bind_function;
+	
 	return moniker;
 }
 
