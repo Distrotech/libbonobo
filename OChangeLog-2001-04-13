@@ -1,3 +1,13 @@
+2000-12-22  Dietmar Maurer  <dietmar@helixcode.com>
+
+	* monikers/bonobo-moniker-std.c: merged the file, item, cache and new
+	moniker and the file/stream extenders into one shared library.
+
+	* monikers/Bonobo_Moniker_std.oafinfo.in: also merged the oafinfo
+	files.
+
+	* monikers/*: cleanup.
+	
 2000-12-21  Lutz Muller <urc8@rz.uni-karlsruhe.de>
 
 	* storage-modules/bonobo-storage-vfs.c (vfs_open_stream): fix bug.

@@ -1,32 +1,21 @@
 /*
- * gnome-moniker-extender-file.c: 
+ * bonobo-moniker-extender-stream.c: 
  *
  * Author:
- *	Dietmar Maurer (dietmar@maurer-it.com)
+ *	Dietmar Maurer (dietmar@helixcode.com)
  *
  * Copyright 2000, Helix Code, Inc.
  */
 #include <config.h>
-#include <stdlib.h>
-  
-#include <glib.h>
-#include <libgnome/gnome-defs.h>
-#include <libgnome/gnome-i18n.h>
-#include <libgnomeui/gnome-init.h>
-#include <gtk/gtk.h>
-
-#include <bonobo/bonobo-object.h>
-#include <bonobo/bonobo-generic-factory.h>
-#include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-storage.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker.h>
-#include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-moniker-extender.h>
+#include <bonobo/bonobo-moniker-util.h>
 #include <libgnome/gnome-mime.h>
 #include <liboaf/liboaf.h>
 
-static int running_objects = 0;
-static BonoboGenericFactory *extender_factory = NULL;
+#include "bonobo-moniker-std.h"
 
 static gchar *
 get_stream_type (Bonobo_Stream stream, CORBA_Environment *ev)
@@ -48,13 +37,13 @@ get_stream_type (Bonobo_Stream stream, CORBA_Environment *ev)
 	return type;
 }
 
-static Bonobo_Unknown
-stream_extender_resolve (BonoboMonikerExtender       *extender,
-			 const Bonobo_Moniker         m,
-			 const Bonobo_ResolveOptions *options,
-			 const CORBA_char            *display_name,
-			 const CORBA_char            *requested_interface,
-			 CORBA_Environment           *ev)
+Bonobo_Unknown
+bonobo_stream_extender_resolve (BonoboMonikerExtender       *extender,
+				const Bonobo_Moniker         m,
+				const Bonobo_ResolveOptions *options,
+				const CORBA_char            *display_name,
+				const CORBA_char            *requested_interface,
+				CORBA_Environment           *ev)
 {
 	const char    *mime_type;
 	char          *oaf_requirements;
@@ -121,69 +110,4 @@ stream_extender_resolve (BonoboMonikerExtender       *extender,
 	bonobo_object_release_unref (stream, ev);
 
 	return CORBA_OBJECT_NIL;
-}
-
-
-static void
-extender_destroy_cb (BonoboMonikerExtender *extender, gpointer dummy)
-{
-	running_objects--;
-
-	if (running_objects > 0)
-		return;
-
-	bonobo_object_unref (BONOBO_OBJECT (extender_factory));
-	gtk_main_quit ();
-}
-
-static BonoboObject *
-file_extender_factory (BonoboGenericFactory *this,
-		       void                 *data)
-{
-	BonoboMonikerExtender *extender = NULL;
-	BonoboObject  *object  = NULL;
-	
-	extender = bonobo_moniker_extender_new (stream_extender_resolve, NULL);
-
-	object = BONOBO_OBJECT (extender);
-	
-	if (object) {
-		running_objects++;
-		
-		gtk_signal_connect (GTK_OBJECT (extender), "destroy",
-				    GTK_SIGNAL_FUNC (extender_destroy_cb), NULL);
-	}
-
-	return object;
-}
-
-int
-main (int argc, char *argv [])
-{
-	CORBA_Environment ev;
-	CORBA_ORB orb = CORBA_OBJECT_NIL;
-	char *dummy;
-
-	dummy = malloc (8); if (dummy) free (dummy);
-
-	CORBA_exception_init (&ev);
-
-        gnome_init_with_popt_table ("bonobo-moniker-extender-stream", "0.0", argc, argv,
-				    oaf_popt_options, 0, NULL); 
-	orb = oaf_init (argc, argv);
-
-	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
-		g_error (_("I could not initialize Bonobo"));
-
-	extender_factory = bonobo_generic_factory_new (
-		"OAFIID:Bonobo_MonikerExtender_streamFactory",
-		file_extender_factory, NULL);	
-
-	bonobo_main ();
-
-	printf ("EXIT file extender\n");
-
-	CORBA_exception_free (&ev);
-
-	return 0;
 }
