@@ -110,7 +110,6 @@
 	* bonobo/bonobo-shlib-factory.c (bonobo_shlib_factory_new): impl.
 	(bonobo_shlib_factory_new_gc): impl.
 
->>>>>>> 1.107
 2001-07-30  ERDI Gergo <cactus@cactus.rulez.org>
 
 	Checked in Bonobo_Clipboard (now for real:)
