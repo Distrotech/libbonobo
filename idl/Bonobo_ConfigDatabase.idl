@@ -46,17 +46,18 @@ module Bonobo {
 		
 		exception BackendFailed {};
 		exception InvalidType {};
+		exception NotFound {};
 
 		readonly attribute boolean writeable;
 
 		any          getValue    (in string key, in string locale)
-			raises (BackendFailed);
+			raises (NotFound, BackendFailed);
 
 		void         setValue    (in string key, in any value)
 			raises (BackendFailed);
 
 		any          getDefault  (in string key, in string locale)
-			raises (BackendFailed);
+			raises (NotFound, BackendFailed);
 
 		KeyList      listDirs    (in string dir)
 			raises (BackendFailed);
