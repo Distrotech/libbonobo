@@ -11,6 +11,7 @@
 #define BONOBO_CANVAS_IDL
 
 #include "bonobo-unknown.idl"
+#include "bonobo-ui.idl"
 
 module Bonobo {
 
@@ -225,9 +226,15 @@ module Canvas {
 		 * @bbox: the requested bounding box.
 		 *
 		 * Sets the bounding box of the item to (x1,y1)-(x2,y2)
-		 *
 		 */
 		void setBounds (in DRect bbox);
+		
+		/**
+		 * getUIContainer:
+		 *
+	 	 * Returns: an associated UI component or NIL.
+		 */
+		UIComponent getUIComponent ();
 	};
 
 	/*

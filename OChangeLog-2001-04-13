@@ -1,3 +1,14 @@
+2000-12-20  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-canvas-component.c: Some renaming.
+
+	* idl/bonobo-canvas.idl: add setUIContainer.
+
+	* tests/test-container.c (application_new): fixup.
+
+	* tests/Makefile.am (noinst_PROGRAMS): remove test-container-autoload;
+	very stale indeed.
+
 2000-12-20  Richard Hult  <rhult@hem.passagen.se>
 
 	* bonobo/bonobo-running-context.c (bonobo_running_context_get_type): 
