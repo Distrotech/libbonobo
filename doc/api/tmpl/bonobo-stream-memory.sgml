@@ -1,0 +1,131 @@
+<!-- ##### SECTION Title ##### -->
+BonoboStreamMem
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT BonoboStreamMem ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboStreamMemPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboStorageMem ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_STREAM_MEM_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_STREAM_MEM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+
+<!-- ##### MACRO BONOBO_STREAM_MEM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+
+<!-- ##### MACRO BONOBO_IS_STREAM_MEM ##### -->
+<para>
+
+</para>
+
+@o: 
+
+
+<!-- ##### MACRO BONOBO_IS_STREAM_MEM_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+
+<!-- ##### STRUCT BonoboStreamMemClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bonobo_stream_mem_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_stream_mem_construct ##### -->
+<para>
+
+</para>
+
+@stream_mem: 
+@corba_stream: 
+@buffer: 
+@size: 
+@read_only: 
+@resizable: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_stream_mem_create ##### -->
+<para>
+
+</para>
+
+@buffer: 
+@size: 
+@read_only: 
+@resizable: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_stream_mem_get_buffer ##### -->
+<para>
+
+</para>
+
+@stream_mem: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_stream_mem_get_size ##### -->
+<para>
+
+</para>
+
+@stream_mem: 
+@Returns: 
+
+

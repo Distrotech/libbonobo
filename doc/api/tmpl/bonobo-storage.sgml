@@ -89,41 +89,6 @@ bonobo-storage
 @Returns: 
 
 
-<!-- ##### MACRO BONOBO_SS_READ ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_SS_WRITE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_SS_RDWR ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_SS_CREATE ##### -->
-<para>
-
-</para>
-
-
-
-<!-- ##### MACRO BONOBO_SS_EXCL ##### -->
-<para>
-
-</para>
-
-
-
 <!-- ##### FUNCTION bonobo_storage_open ##### -->
 <para>
 
@@ -136,34 +101,35 @@ bonobo-storage
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_storage_open_full ##### -->
+<para>
+
+</para>
+
+@driver: 
+@path: 
+@flags: 
+@mode: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_storage_copy_to ##### -->
+<para>
+
+</para>
+
+@src: 
+@dest: 
+@ev: 
+
+
 <!-- ##### FUNCTION bonobo_storage_corba_object_create ##### -->
 <para>
 
 </para>
 
 @object: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_storage_storage_open ##### -->
-<para>
-
-</para>
-
-@storage: 
-@path: 
-@open_mode: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_stream_storage_open ##### -->
-<para>
-
-</para>
-
-@storage: 
-@path: 
-@open_mode: 
 @Returns: 
 
 
@@ -190,17 +156,6 @@ bonobo-storage
 
 </para>
 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_storage_driver_open ##### -->
-<para>
-
-</para>
-
-@path: 
-@flags: 
-@mode: 
 @Returns: 
 
 
