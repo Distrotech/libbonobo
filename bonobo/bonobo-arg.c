@@ -29,6 +29,7 @@ BonoboArg *
 bonobo_arg_new (BonoboArgType t)
 {
 	CORBA_any *any = NULL;
+	DynamicAny_DynAnyFactory f;
 	DynamicAny_DynAny dyn = NULL;
 	CORBA_Environment ev;
 
@@ -36,24 +37,16 @@ bonobo_arg_new (BonoboArgType t)
 
 	CORBA_exception_init (&ev);
 
-#ifdef ENABLE_ORBIT2
-	{
-		DynamicAny_DynAnyFactory f;
+	f = (DynamicAny_DynAnyFactory)
+		CORBA_ORB_resolve_initial_references (
+			bonobo_orb(), "DynAnyFactory", &ev);
+	
+	g_return_val_if_fail (!BONOBO_EX (&ev), NULL);
 
-		f = (DynamicAny_DynAnyFactory)
-			CORBA_ORB_resolve_initial_references (
-				bonobo_orb(), "DynAnyFactory", &ev);
-
-		g_return_val_if_fail (!BONOBO_EX (&ev), NULL);
-
-		dyn = DynamicAny_DynAnyFactory_create_dyn_any_from_type_code (
-			f, t, &ev);
-
-		CORBA_Object_release ((CORBA_Object) f, &ev);
-	}
-#else
-	dyn = CORBA_ORB_create_basic_dyn_any (bonobo_orb (), t, &ev);
-#endif
+	dyn = DynamicAny_DynAnyFactory_create_dyn_any_from_type_code (
+		f, t, &ev);
+	
+	CORBA_Object_release ((CORBA_Object) f, &ev);
 
 	if (!BONOBO_EX (&ev) && dyn != NULL) {
 		any = DynamicAny_DynAny_to_any (dyn, &ev);

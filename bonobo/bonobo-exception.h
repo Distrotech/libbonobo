@@ -54,7 +54,7 @@
 		"file %s: line %d (%s): assertion `%s' failed.",	\
 		__FILE__,						\
 		__LINE__,						\
-		__PRETTY_FUNCTION__,					\
+		G_GNUC_PRETTY_FUNCTION,					\
 		#expr);							\
          return;                                                        \
      };	}G_STMT_END
@@ -69,7 +69,7 @@
 		"file %s: line %d (%s): assertion `%s' failed.",	\
 		__FILE__,						\
 		__LINE__,						\
-		__PRETTY_FUNCTION__,					\
+		G_GNUC_PRETTY_FUNCTION,					\
 		#expr);							\
          return val;                                                    \
      };	}G_STMT_END

@@ -62,31 +62,31 @@ typedef struct {
 	gpointer        dummy;
 } BonoboMonikerClass;
 
-GType                  bonobo_moniker_get_type            (void);
+GType          bonobo_moniker_get_type           (void);
 
-BonoboMoniker           *bonobo_moniker_construct           (BonoboMoniker     *moniker,
-							     const char        *prefix);
+BonoboMoniker *bonobo_moniker_construct          (BonoboMoniker     *moniker,
+						  const char        *prefix);
 
-Bonobo_Moniker           bonobo_moniker_get_parent          (BonoboMoniker     *moniker,
-							     CORBA_Environment *ev);
-void                     bonobo_moniker_set_parent          (BonoboMoniker     *moniker,
-							     Bonobo_Moniker     parent,
-							     CORBA_Environment *ev);
+Bonobo_Moniker bonobo_moniker_get_parent         (BonoboMoniker     *moniker,
+						  CORBA_Environment *ev);
+void           bonobo_moniker_set_parent         (BonoboMoniker     *moniker,
+						  Bonobo_Moniker     parent,
+						  CORBA_Environment *ev);
 
-const char              *bonobo_moniker_get_name            (BonoboMoniker     *moniker);
+const char    *bonobo_moniker_get_name           (BonoboMoniker     *moniker);
 
-const char              *bonobo_moniker_get_name_full       (BonoboMoniker     *moniker);
-char                    *bonobo_moniker_get_name_escaped    (BonoboMoniker     *moniker);
+const char    *bonobo_moniker_get_name_full      (BonoboMoniker     *moniker);
+char          *bonobo_moniker_get_name_escaped   (BonoboMoniker     *moniker);
 
-void                     bonobo_moniker_set_name            (BonoboMoniker     *moniker,
-							     const char        *unescaped_name,
-							     int                num_chars);
+void           bonobo_moniker_set_name           (BonoboMoniker     *moniker,
+						  const char        *unescaped_name,
+						  int                num_chars);
 
-const char              *bonobo_moniker_get_prefix          (BonoboMoniker     *moniker);
+const char    *bonobo_moniker_get_prefix         (BonoboMoniker     *moniker);
 
-void                     bonobo_moniker_set_case_sensitive  (BonoboMoniker     *moniker,
-							     gboolean           sensitive);
-gboolean                 bonobo_moniker_get_case_sensitive  (BonoboMoniker     *moniker);
+void           bonobo_moniker_set_case_sensitive (BonoboMoniker     *moniker,
+						  gboolean           sensitive);
+gboolean       bonobo_moniker_get_case_sensitive (BonoboMoniker     *moniker);
 
 G_END_DECLS
 

@@ -435,6 +435,7 @@ bonobo_moniker_init (GObject *object)
 
 	moniker->priv->parent = CORBA_OBJECT_NIL;
 	moniker->priv->name   = NULL;
+	moniker->priv->prefix = NULL;
 }
 
 BONOBO_TYPE_FUNC_FULL (BonoboMoniker, 

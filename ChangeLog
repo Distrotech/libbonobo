@@ -1,3 +1,30 @@
+2001-07-05  Tim Mooney <mooney@dogbert.cc.ndsu.NoDak.edu>
+
+	* bonobo/bonobo-exception.h (bonobo_return_if_fail,
+	bonobo_return_val_if_fail): change __PRETTY_FUNCTION__ hold-over to
+	glib-provided G_GNUC_PRETTY_FUNCTION.
+
+	* doc/api/bonobo-decl.txt: same.
+
+2001-07-11  Michael Meeks  <michael@ximian.com>
+
+	* tests/test-object.c (main): expand to try and catch
+	nasties - no joy.
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_init): init
+	the prefix to NULL.
+
+2001-07-11  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_dump_interfaces),
+	(bonobo_type_setup): prune ENABLE_ORBIT2 paths.
+
+	* bonobo/bonobo-arg.c (bonobo_arg_new): ditto.
+
+	* bonobo/Makefile.am: don't build / install
+	bonobo-transient, not used & complicates our transition
+	to a new system.
+
 2001-07-10  Michael Meeks  <michael@ximian.com>
 
 	* configure.in: always define ENABLE_ORBIT2
