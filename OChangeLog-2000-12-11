@@ -1,3 +1,22 @@
+2000-10-22  Miguel de Icaza  <miguel@helixcode.com>
+
+	* doc/Monikers: Updated the Moniker document.
+
+	* monikers/bonobo-moniker-config.c,
+	monikers/bonobo-moniker-item.c, monikers/bonobo-moniker-new.c,
+	monikers/bonobo-moniker-oaf.c: Manually include header files to
+	optimize for compilation speed.
+
+	* bonobo/bonobo-item-handler.c, bonobo-bonobo-item-handler.h:
+	Another implementation of IDL:Bonobo/ItemContainer:1.0, this one
+	is targeted to be used in a more generic case, and not only for
+	Embeddables. 
+
+	Particuarly interesting for initializing objects through monikers,
+	or locating/creating objects through the moniker system. 
+
+	No API breakage, as these are completely new functions. 
+
 Sun Oct 22 05:28:54 2000  George Lebl <jirka@5z.com>
 
 	* bonobo/bonobo-win.c (toolbar_sync_state):  return from
@@ -789,6 +808,7 @@ Wed Oct 11 18:29:45 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 2000-10-11  Miguel de Icaza  <miguel@helixcode.com>
 
 	* idl/bonobo-property.idl: Add get_values and set_values methods.
+	Move exceptions to the 
 
 2000-10-10  Miguel de Icaza  <miguel@helixcode.com>
 	

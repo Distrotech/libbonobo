@@ -235,7 +235,7 @@ bonobo_item_container_init (BonoboItemContainer *container)
 /**
  * bonobo_item_container_construct:
  * @container: The container object to construct
- * @corba_container: The CORBA object that implements Bonobo::Container
+ * @corba_container: The CORBA object that implements Bonobo::ItemContainer
  *
  * Constructs the @container Gtk object using the provided CORBA
  * object.
@@ -244,7 +244,7 @@ bonobo_item_container_init (BonoboItemContainer *container)
  */
 BonoboItemContainer *
 bonobo_item_container_construct (BonoboItemContainer  *container,
-			   Bonobo_ItemContainer corba_container)
+				 Bonobo_ItemContainer corba_container)
 {
 	g_return_val_if_fail (container != NULL, NULL);
 	g_return_val_if_fail (corba_container != CORBA_OBJECT_NIL, NULL);
