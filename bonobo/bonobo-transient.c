@@ -484,7 +484,7 @@ bonobo_transient_get_type (void)
 
 	if (! type) {
 		GTypeInfo info = {
-			sizeof (BonoboTransient),
+			sizeof (BonoboTransientClass),
 			(GBaseInitFunc) NULL,
 			(GBaseFinalizeFunc) NULL,
 			(GClassInitFunc) bonobo_transient_class_init,

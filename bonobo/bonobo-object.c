@@ -53,7 +53,6 @@ typedef struct {
 
 struct _BonoboObjectPrivate {
 	BonoboAggregateObject *ao;
-	int destroy_id;
 };
 
 enum {
@@ -95,11 +94,7 @@ bonobo_object_destroy (BonoboAggregateObject *ao)
 
 	for (l = ao->objs; l; l = l->next) {
 		GObject *o = l->data;
-		guint id = BONOBO_OBJECT (o)->priv->destroy_id;
 
-		if (id)
-			g_signal_handler_disconnect (o, id);
-		BONOBO_OBJECT (o)->priv->destroy_id = 0;
 		if (o->ref_count >= 1) {
 			g_object_ref (o);
 			G_OBJECT_GET_CLASS (o)->shutdown (o);
@@ -518,13 +513,6 @@ bonobo_object_epv_init (POA_Bonobo_Unknown__epv *epv)
 	epv->ref            = impl_Bonobo_Unknown_ref;
 	epv->unref          = impl_Bonobo_Unknown_unref;
 	epv->queryInterface = impl_Bonobo_Unknown_queryInterface;
-}
-
-static void G_GNUC_UNUSED
-bonobo_object_usage_error (BonoboObject *object)
-{
-	g_error ("Aggregate bonobo_object member [%p] has been "
-		 "destroyed using g_object_* methods", object);
 }
 
 static void
