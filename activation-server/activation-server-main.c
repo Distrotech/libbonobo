@@ -142,7 +142,8 @@ main (int argc, char *argv[])
                 if (config_file_od_source_dir) {
 			g_string_append_c (real_od_source_dir, ':');
 			g_string_append (real_od_source_dir,
-					 config_file_od_source_dir);                        
+					 config_file_od_source_dir);
+			g_free (config_file_od_source_dir);
                 }
 		if (gnome_env_od_source_dir) {
                         gnome_dirs = g_strsplit (gnome_env_od_source_dir, ":", -1);

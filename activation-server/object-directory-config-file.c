@@ -45,9 +45,11 @@ od_utils_load_xml_file (void)
                 g_warning (_("The OAF configuration file was not read "
                              "successfully. Please, check it is valid in: %s"),
                            oaf_config_file);
+		g_free (oaf_config_file);
                 return NULL;
         }
 
+	g_free (oaf_config_file);
         return doc;
 }
 
