@@ -1,3 +1,14 @@
+2000-10-19  Darin Adler  <darin@eazel.com>
+
+	* bonobo.spec.in: Use "-k" so you see more than just the first
+	error when you use RPM to build. (Especially useful for the
+	Tinderbox.)
+	
+	* storage-modules/bonobo-storage-fs.c:
+	* storage-modules/bonobo-stream-fs.c:
+	* tests/test-container-autoload.c:
+	Fix path in bonobo-storage-fs.h includes.
+
 2000-10-19  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar-control-item.c (impl_set_orientation):
