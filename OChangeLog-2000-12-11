@@ -5,6 +5,15 @@
 	(gnome_object_check_env, GNOME_OBJECT_CHECK): function and utility
 	macro for testing exceptions.
 
+1999-08-12  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-stream-fs.c (gnome_stream_create): Killed 'full'
+	(gnome_stream_fs_class_init): Added close, eos, length
+	(fs_close, fs_eos): Stubbed,
+	(fs_length): Implemented.
+
+	* bonobo/test-container.c (add_pdf_cmd): Implemented.
+
 1999-08-11  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-view-frame.c (impl_GNOME_ViewFrame_get_ui_handler):
