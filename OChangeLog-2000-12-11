@@ -1,15 +1,15 @@
-2000-10-14  Eskil Heyn Olsen  <eskil@eazel.com>
+2000-10-15  Martin Baulig  <baulig@suse.de>
 
-	* components/application-x-gnomine/Makefile.am:
-	I've removed bonobo-application-x-mines-ui.xml.h
-	from make dist (uncommented BUILT_SOURCES), as 
-	bonobo-ui-extract does not exist at make dist
-	time (on a clean checkout), and having it in
-	BUILT_SOURCES therefore causes make dist
-	to fail
+	* Makefile.am (SUBDIRS): Put `po' last so the *-ui.xml.h files are
+	already created.
 
-	* po/POTFILES.in:
-	bonobo-application-x-mines-ui.xml.h removed
+	* components/application-x-gnomine/Makefile.am: Reverted Eskil's
+	hack and did it the right way; $(ui_msgs) need to depend on
+	$(top_builddir)/bonobo/bonobo-ui-extract and added a make rule to
+	create this.
+
+	* po/POTFILES.in: Removed gnomines.c and put back
+	components/application-x-gnomine/bonobo-application-x-mines-ui.xml.h.
 
 2000-10-14  Michael Meeks  <michael@helixcode.com>
 
