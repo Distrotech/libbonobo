@@ -437,7 +437,8 @@ ac_do_activation (impl_POA_OAF_ActivationContext * servant,
 	}
 
 	for (num_layers = 0, activatable = server;
-             activatable && !strcmp (activatable->server_type, "factory") &&
+             activatable && activatable->server_type &&
+                     !strcmp (activatable->server_type, "factory") &&
              num_layers < OAF_LINK_TIME_TO_LIVE; num_layers++) {
 
 		activatable = g_hash_table_lookup (child->by_iid, activatable->location_info);

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "empty.h"
 
-#define TOTAL_TEST_SCORE 11
+#define TOTAL_TEST_SCORE 13
 
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
@@ -188,10 +188,35 @@ main (int argc, char *argv[])
         }
         fprintf (stderr, "\n");
 
+        fprintf (stderr, "Server with IID but no type or location ");
+        obj = oaf_activate_from_id ("OAFIID:BrokenNoType:20000808", 0, NULL, &ev);
+        if (ev._major != CORBA_NO_EXCEPTION) {
+                fprintf (stderr, "failed (except) 1");
+                CORBA_exception_free (&ev);
+        } else if (obj) {
+                fprintf (stderr, "failed (obj) 1");
+        } else {
+                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                passed++;
+        }
+        if (test_oafd (&ev, "with no-type/loc server")) {
+                fprintf (stderr, ", passed 2");
+                passed++;
+        } else {
+                fprintf (stderr, ", failed 2");
+        }
+        fprintf (stderr, "\n");
+
 
         fprintf (stderr, "\n%d of %d tests passed (%s)\n", passed,
                  TOTAL_TEST_SCORE,
                  passed == TOTAL_TEST_SCORE? "All": "some failures");
+
+        if (passed < TOTAL_TEST_SCORE * 3 / 2) {
+                fprintf (stderr, "It looks like you havn't installed broken.oafinfo "
+                         "into ${prefix}/oaf, this must be done by hand to avoid "
+                         "redundant warnings.\n");
+        }
 
 	CORBA_exception_free (&ev);
 

@@ -159,10 +159,19 @@ od_entry_read_props (OAF_ServerInfo * ent, xmlNodePtr node)
 	}
 }
 
-static gboolean
-od_validate_iid (const char *iid)
+static char *
+od_validate (const char *iid, const char *type, const char *location)
 {
         int i;
+
+        if (!iid)
+                return g_strdup (_("a NULL iid is not valid"));
+
+        if (!type)
+                return g_strdup_printf (_("iid %s has a NULL type"), iid);
+
+        if (!location)
+                return g_strdup_printf (_("iid %s has a NULL location"), iid);
 
         for (i = 0; iid && iid [i]; i++) {
                 char c = iid [i];
@@ -170,11 +179,11 @@ od_validate_iid (const char *iid)
                 if (c == ',' || c == '[' || c == ']' ||
                     /* Reserved for future expansion */
                     c == '!' || c == '#' || c == '|')
-                        return FALSE;
-
+                        return g_strdup_printf (_("invalid character '%c' in iid '%s'"),
+                                                c, iid);
         }
 
-        return TRUE;
+        return NULL;
 }
 
 OAF_ServerInfo *
@@ -233,7 +242,7 @@ OAF_ServerInfo_load (char **dirs,
 			      ? doc->root->childs : doc->root);
 			     NULL != curnode; curnode = curnode->next) {
 				OAF_ServerInfo *new_ent;
-				char *ctmp, *iid;
+				char *iid, *type, *location, *err;
                                 gboolean already_there;
 
 				if (curnode->type != XML_ELEMENT_NODE)
@@ -248,11 +257,19 @@ OAF_ServerInfo_load (char **dirs,
 					continue;
 
 				iid = xmlGetProp (curnode, "iid");
+                                type = xmlGetProp (curnode, "type");
+                                location = xmlGetProp (curnode, "location");
 
-                                if (!od_validate_iid (iid)) {
-                                        g_print (_("IID '%s' contains illegal characters; discarding\n"), 
-                                                 iid);
-                                        free (iid);
+                                if ((err = od_validate (iid, type, location))) {
+                                        g_print ("%s", err);
+                                        
+                                        g_free (err);
+                                        if (iid)
+                                                xmlFree (iid);
+                                        if (type)
+                                                xmlFree (type);
+                                        if (location)
+                                                xmlFree (location);
                                         continue;
                                 }
 
@@ -271,29 +288,25 @@ OAF_ServerInfo_load (char **dirs,
                                         memset (new_ent, 0, sizeof (OAF_ServerInfo));
 
                                         new_ent->iid = CORBA_string_dup (iid);
-                                        xmlFree (iid);
 
-                                        ctmp = xmlGetProp (curnode, "type");
                                         new_ent->server_type =
-                                                CORBA_string_dup (ctmp);
-                                        free (ctmp);
+                                                CORBA_string_dup (type);
 
-                                        ctmp = xmlGetProp (curnode, "location");
                                         new_ent->location_info =
-                                                CORBA_string_dup (ctmp);
+                                                CORBA_string_dup (location);
                                         new_ent->hostname = CORBA_string_dup (host);
                                         new_ent->domain = CORBA_string_dup (domain);
                                         new_ent->username =
                                                 CORBA_string_dup (g_get_user_name ());
-                                        free (ctmp);
 
                                         od_entry_read_props (new_ent, curnode);
                                         
                                         my_slist_prepend (entries, new_ent);
-                                } else {
-                                        xmlFree (iid);
                                 }
 
+                                xmlFree (iid);
+                                xmlFree (type);
+                                xmlFree (location);
 			}
 
 			xmlFreeDoc (doc);

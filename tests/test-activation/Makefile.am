@@ -21,7 +21,7 @@ INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR
 	@ORBIT_CFLAGS@ @XML_CFLAGS@ @GLIB_CFLAGS@
 LDADD=../liboaf/liboaf.la @ORBIT_LIBS@ @GLIB_LIBS@
 
-oaffiles=empty.oafinfo broken.oafinfo
+oaffiles=empty.oafinfo
 
 emptydatadir=$(datadir)/oaf
 emptydata_DATA=$(oaffiles)
@@ -31,6 +31,6 @@ bin_SCRIPTS=oaf-slay
 oaf-slay: $(srcdir)/oaf-slay.tmpl
 	sed 's|@oafdir@|'$(pkgdatadir)'|g' < $< > $@
 
-EXTRA_DIST=empty.idl oaf-slay.tmpl $(oaffiles)
+EXTRA_DIST=empty.idl oaf-slay.tmpl $(oaffiles) broken.oafinfo
 
 TESTS=oaf-test-client
