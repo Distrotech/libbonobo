@@ -24,7 +24,9 @@ G_BEGIN_DECLS
 #include <bonobo/bonobo-exception.h>
 
 #include <bonobo/bonobo-item-container.h>
+#include <bonobo/bonobo-item-handler.h>
 #include <bonobo/bonobo-moniker-util.h>
+#include <bonobo/bonobo-moniker-extender.h>
 
 #include <bonobo/bonobo-property-bag.h>
 #include <bonobo/bonobo-property-bag-client.h>
@@ -32,7 +34,9 @@ G_BEGIN_DECLS
 #include <bonobo/bonobo-listener.h>
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-generic-factory.h>
+#include <bonobo/bonobo-shlib-factory.h>
 #include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-running-context.h>
 
 #include <bonobo/bonobo-stream.h>
 #include <bonobo/bonobo-stream-memory.h>
@@ -44,6 +48,7 @@ G_BEGIN_DECLS
 
 #include <bonobo/bonobo-storage.h>
 #include <bonobo/bonobo-storage-memory.h>
+
 #include <bonobo/bonobo-application.h>
 #include <bonobo/bonobo-app-client.h>
 

@@ -3,7 +3,7 @@
 	* libbonobo.h: Add missing includes for bonobo-running-context.h,
 	bonobo-moniker-extender.h, bonobo-item-handler.h, and
 	bonobo-shlib-factory.h.  Fixes #167 (documentation's build
-	segfault on ia64).
+	segfault on ia64).  Based on patch by Sebastien Bacher.
 
 2005-02-08  Christian Rose  <menthos@menthos.com>
 
