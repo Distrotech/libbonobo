@@ -24,6 +24,7 @@
  */
 
 #include "config.h"
+#include "oaf-i18n.h"
 
 #include <popt.h>
 #include <signal.h>
@@ -53,22 +54,22 @@ static int server_ac = 0, ior_fd = -1, server_ns = 1;
 static struct poptOption options[] = {
 
 	{"od-source-dir", '\0', POPT_ARG_STRING, &od_source_dir, 0,
-	 "Directory to read .oafinfo files from", "DIRECTORY"},
+	 N_("Directory to read .oafinfo files from"), N_("DIRECTORY")},
 	{"od-domain", '\0', POPT_ARG_STRING, &od_domain, 0,
-	 "Domain of ObjectDirectory", "DOMAIN"},
+	 N_("Domain of ObjectDirectory"), N_("DOMAIN")},
 
 	{"ac-activate", '\0', POPT_ARG_NONE, &server_ac, 0,
-	 "Serve as an ActivationContext (default is as an ObjectDirectory only)",
+	 N_("Serve as an ActivationContext (default is as an ObjectDirectory only)"),
 	 NULL},
 
 
 	{"ior-output-fd", '\0', POPT_ARG_INT, &ior_fd, 0,
-	 "File descriptor to write IOR to", "FD"},
+	 N_("File descriptor to write IOR to"), N_("FD")},
 
 #ifdef OAF_DEBUG
 
 	{"evaluate", '\0', POPT_ARG_STRING, &ac_evaluate, 0,
-	 "Query expression to evaluate", "EXPRESSION"},
+	 N_("Query expression to evaluate"), N_("EXPRESSION")},
 #endif
 
 	POPT_AUTOHELP {NULL}
@@ -88,6 +89,10 @@ main (int argc, char *argv[])
 	char *ior;
 	FILE *fh;
 	struct sigaction sa;
+
+	/* internationalization. */
+        bindtextdomain (PACKAGE, OAF_LOCALEDIR);
+        textdomain (PACKAGE);
 
 	memset (&sa, 0, sizeof (sa));
 	sa.sa_handler = SIG_IGN;

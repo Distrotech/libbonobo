@@ -7,6 +7,7 @@ INCLUDES=				\
 	-I$(top_builddir) 		\
 	-I$(top_builddir)/liboaf	\
 	-DOAFINFODIR=\"$(pkgdatadir)\" 	\
+    -DOAF_LOCALEDIR=\""$(datadir)/locale"\" \
 	@ORBIT_CFLAGS@ 			\
 	@XML_CFLAGS@ 			\
 	@GLIB_CFLAGS@			\

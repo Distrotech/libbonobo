@@ -30,7 +30,8 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
-#include <parser.h>
+#include <parser.h>      /* gnome-xml */
+#include <xmlmemory.h>   /* gnome-xml */
 
 #define my_slist_prepend(slist, datum) \
 new_item = oaf_alloca(sizeof(GSList)); \
@@ -232,6 +233,7 @@ OAF_ServerInfo_load (char **dirs,
 			     NULL != curnode; curnode = curnode->next) {
 				OAF_ServerInfo *new_ent;
 				char *ctmp, *iid;
+                                gboolean already_there;
 
 				if (curnode->type != XML_ELEMENT_NODE)
 					continue;
@@ -253,29 +255,43 @@ OAF_ServerInfo_load (char **dirs,
                                         continue;
                                 }
 
-				new_ent = oaf_alloca (sizeof (OAF_ServerInfo));
-				memset (new_ent, 0, sizeof (OAF_ServerInfo));
+                                /* make sure the component has not been already read. If so,
+                                   do not add this entry to the entries list */
+                                already_there = FALSE;
+                                for (cur = entries; cur != NULL; cur = cur->next) {
+                                        if (strcmp (((OAF_ServerInfo *)cur->data)->iid, iid) == 0) {
+                                                already_there = TRUE;
+                                                break;
+                                        }
+                                }
+                                
+                                if (already_there == FALSE) {
+                                        new_ent = oaf_alloca (sizeof (OAF_ServerInfo));
+                                        memset (new_ent, 0, sizeof (OAF_ServerInfo));
 
-				new_ent->iid = CORBA_string_dup (iid);
-				free (iid);
+                                        new_ent->iid = CORBA_string_dup (iid);
+                                        xmlFree (iid);
 
-				ctmp = xmlGetProp (curnode, "type");
-				new_ent->server_type =
-					CORBA_string_dup (ctmp);
-				free (ctmp);
+                                        ctmp = xmlGetProp (curnode, "type");
+                                        new_ent->server_type =
+                                                CORBA_string_dup (ctmp);
+                                        free (ctmp);
 
-				ctmp = xmlGetProp (curnode, "location");
-				new_ent->location_info =
-					CORBA_string_dup (ctmp);
-				new_ent->hostname = CORBA_string_dup (host);
-				new_ent->domain = CORBA_string_dup (domain);
-				new_ent->username =
-					CORBA_string_dup (g_get_user_name ());
-				free (ctmp);
+                                        ctmp = xmlGetProp (curnode, "location");
+                                        new_ent->location_info =
+                                                CORBA_string_dup (ctmp);
+                                        new_ent->hostname = CORBA_string_dup (host);
+                                        new_ent->domain = CORBA_string_dup (domain);
+                                        new_ent->username =
+                                                CORBA_string_dup (g_get_user_name ());
+                                        free (ctmp);
 
-				od_entry_read_attrs (new_ent, curnode);
-
-				my_slist_prepend (entries, new_ent);
+                                        od_entry_read_attrs (new_ent, curnode);
+                                        
+                                        my_slist_prepend (entries, new_ent);
+                                } else {
+                                        xmlFree (iid);
+                                }
 
 			}
 
