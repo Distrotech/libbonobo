@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-23 05:16+0200\n"
+"POT-Creation-Date: 2004-08-18 04:06+0200\n"
 "PO-Revision-Date: 2004-02-20 12:10+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -90,7 +90,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1148
+#: activation-server/object-directory-corba.c:1149
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Race condition gjatë aktivimit të server '%s'"
@@ -154,18 +154,18 @@ msgstr "Proçesi bir ka marrë sinjalin %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Gabim i jo-daljes i panjohur (gjëndja është %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:403
+#: bonobo-activation/bonobo-activation-fork-server.c:404
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr ""
 "bonobo-activation dështoi gjatë caktimit të grupit të proçesit %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:415
+#: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "I pamundur ekzekutimi i %s: %d (%s)\n"
 
-#: bonobo-activation/bonobo-activation-get-language-list.c:88
+#: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "Tepër nivele alias për një lokale, mund të tregojë një loop"
 
@@ -214,11 +214,11 @@ msgstr "Emri"
 msgid "Application unique name"
 msgstr "Emri i dallueshëm i programit"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:919
+#: bonobo/bonobo-object.c:925
 msgid "Custom CORBA POA"
 msgstr "CORBA POA e personalizuar"
 
