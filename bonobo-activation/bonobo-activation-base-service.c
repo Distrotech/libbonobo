@@ -453,10 +453,12 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
 {
 	char *fn;
 	struct flock lock;
+        int retval;
+        char *err;
 
         fn = g_strdup_printf ("/tmp/orbit-%s/oaf-register.lock", g_get_user_name ());
 
-	while ((lock_fd = open (fn, O_CREAT | O_RDONLY, 0700)) < 0) {
+	while ((lock_fd = open (fn, O_CREAT | O_RDWR, 0700)) < 0) {
 		if (errno == EEXIST) {
 #ifdef HAVE_USLEEP
 			usleep (10000);
@@ -483,8 +485,14 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
 		lock.l_len = 1;
 		lock.l_pid = getpid ();
 
-		while (fcntl (lock_fd, F_SETLKW, &lock) < 0
+		while ((retval = fcntl (lock_fd, F_SETLKW, &lock)) < 0
 		       && errno == EINTR) /**/;
+
+                if (retval < 0) {
+                        /* FIXME: need to report this error in a better way. */
+                        err = strerror (errno);
+                        g_warning ("Failed to acquire lock: %s\n.", err);
+                }
 	}
 
         g_free (fn);
