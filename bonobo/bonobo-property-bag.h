@@ -72,7 +72,7 @@ typedef struct {
 #define BONOBO_IS_PROPERTY_BAG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_PROPERTY_BAG_TYPE))
 
 GType		          
-bonobo_property_bag_get_type  (void);
+bonobo_property_bag_get_type  (void) G_GNUC_CONST;
 
 BonoboPropertyBag *
 bonobo_property_bag_new	           (BonoboPropertyGetFn get_prop_cb,

@@ -48,7 +48,7 @@ typedef struct {
 
 } BonoboGenericFactoryClass;
 
-GType                 bonobo_generic_factory_get_type  (void);
+GType                 bonobo_generic_factory_get_type  (void) G_GNUC_CONST;
 
 BonoboGenericFactory *bonobo_generic_factory_new	 (const char            *oaf_iid,
 							  BonoboFactoryCallback  factory_cb,

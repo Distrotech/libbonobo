@@ -20,12 +20,12 @@ G_BEGIN_DECLS
 
 GType bonobo_corba_object_type_register_static      (const gchar           *name,
                                                      const CORBA_TypeCode   tc,
-						     gboolean               is_bonobo_unknown);
+						     gboolean               is_bonobo_unknown) G_GNUC_CONST;
 
-GType bonobo_unknown_get_type                       (void);
-GType bonobo_corba_any_get_type                     (void);
-GType bonobo_corba_object_get_type                  (void);
-GType bonobo_corba_exception_get_type               (void);
+GType bonobo_unknown_get_type                       (void) G_GNUC_CONST;
+GType bonobo_corba_any_get_type                     (void) G_GNUC_CONST;
+GType bonobo_corba_object_get_type                  (void) G_GNUC_CONST;
+GType bonobo_corba_exception_get_type               (void) G_GNUC_CONST;
 
 #define BONOBO_TYPE_UNKNOWN                         (bonobo_unknown_get_type ())
 #define BONOBO_TYPE_CORBA_ANY                       (bonobo_corba_any_get_type ())

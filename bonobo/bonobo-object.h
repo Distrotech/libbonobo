@@ -80,7 +80,7 @@ typedef struct {
 	POA_Bonobo_Unknown__epv         epv;
 } BonoboObjectClass;
 
-GType                    bonobo_object_get_type               (void);
+GType                    bonobo_object_get_type               (void) G_GNUC_CONST;
 void                     bonobo_object_add_interface          (BonoboObject           *object,
 							       BonoboObject           *newobj);
 BonoboObject            *bonobo_object_query_local_interface  (BonoboObject           *object,

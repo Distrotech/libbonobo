@@ -37,7 +37,7 @@ typedef struct {
 	BonoboGenericFactoryClass parent_class;
 } BonoboShlibFactoryClass;
 
-GType               bonobo_shlib_factory_get_type     (void);
+GType               bonobo_shlib_factory_get_type     (void) G_GNUC_CONST;
 
 BonoboShlibFactory *bonobo_shlib_factory_construct    (BonoboShlibFactory    *factory,
 						       const char            *component_id,

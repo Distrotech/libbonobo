@@ -72,7 +72,7 @@ typedef struct {
 
 } BonoboPersistStreamClass;
 
-GType                bonobo_persist_stream_get_type  (void);
+GType                bonobo_persist_stream_get_type  (void) G_GNUC_CONST;
 
 BonoboPersistStream *bonobo_persist_stream_new       (BonoboPersistStreamIOFn    load_fn,
 						      BonoboPersistStreamIOFn    save_fn,

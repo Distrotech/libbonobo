@@ -1,3 +1,8 @@
+2001-08-08  Cody Russell  <bratsche@gnome.org>
+
+	* bonobo/*.[h]: Ensured that all _get_type () functions are
+	declared as G_GNUC_CONST.
+
 2001-08-07  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-listener.c (impl_Bonobo_Listener_event):

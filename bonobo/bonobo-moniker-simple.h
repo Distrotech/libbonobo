@@ -39,7 +39,7 @@ typedef struct {
 	BonoboMonikerClass parent_class;
 } BonoboMonikerSimpleClass;
 
-GType          bonobo_moniker_simple_get_type    (void);
+GType          bonobo_moniker_simple_get_type    (void) G_GNUC_CONST;
 
 BonoboMoniker *bonobo_moniker_simple_construct   (BonoboMonikerSimple         *moniker,
 						  const char                  *name,

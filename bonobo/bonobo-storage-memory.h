@@ -80,7 +80,7 @@ typedef struct {
 
 } BonoboStorageMemClass;
 
-GType             bonobo_storage_mem_get_type   (void);
+GType             bonobo_storage_mem_get_type   (void) G_GNUC_CONST;
 BonoboObject     *bonobo_storage_mem_create     (void);
 
 G_END_DECLS

@@ -47,7 +47,7 @@ typedef struct {
 	size_t          (*get_size)   (BonoboStreamMem *stream_mem);
 } BonoboStreamMemClass;
 
-GType            bonobo_stream_mem_get_type   (void);
+GType            bonobo_stream_mem_get_type   (void) G_GNUC_CONST;
 BonoboStreamMem *bonobo_stream_mem_construct  (BonoboStreamMem  *stream_mem,
 					       const char       *buffer,
 					       size_t            size,

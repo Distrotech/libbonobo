@@ -51,7 +51,7 @@ typedef void (*BonoboListenerCallbackFn)    (BonoboListener    *listener,
 					     CORBA_Environment *ev,
 					     gpointer           user_data);
 
-GType           bonobo_listener_get_type    (void);
+GType           bonobo_listener_get_type    (void) G_GNUC_CONST;
 
 BonoboListener *bonobo_listener_new         (BonoboListenerCallbackFn event_cb,
 					     gpointer                 user_data);

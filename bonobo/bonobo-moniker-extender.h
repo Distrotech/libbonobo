@@ -42,7 +42,7 @@ typedef struct {
 	BonoboMonikerExtenderFn resolve;
 } BonoboMonikerExtenderClass;
 
-GType                bonobo_moniker_extender_get_type (void);
+GType                  bonobo_moniker_extender_get_type (void) G_GNUC_CONST;
 BonoboMonikerExtender *bonobo_moniker_extender_new      (BonoboMonikerExtenderFn      resolve,
 							 gpointer                     data);
  

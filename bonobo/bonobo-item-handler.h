@@ -48,7 +48,7 @@ typedef struct {
 	POA_Bonobo_ItemContainer__epv epv;
 } BonoboItemHandlerClass;
 
-GType              bonobo_item_handler_get_type    (void);
+GType                bonobo_item_handler_get_type    (void) G_GNUC_CONST;
 BonoboItemHandler   *bonobo_item_handler_new         (BonoboItemHandlerEnumObjectsFn enum_objects,
 						      BonoboItemHandlerGetObjectFn   get_object,
 						      gpointer                       user_data);

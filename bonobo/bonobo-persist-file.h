@@ -64,7 +64,7 @@ typedef struct {
 
 } BonoboPersistFileClass;
 
-GType             bonobo_persist_file_get_type  (void);
+GType             bonobo_persist_file_get_type  (void) G_GNUC_CONST;
 
 BonoboPersistFile *bonobo_persist_file_new       (BonoboPersistFileIOFn load_fn,
 						  BonoboPersistFileIOFn save_fn,

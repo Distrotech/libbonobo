@@ -61,7 +61,7 @@ typedef struct {
 	gpointer        dummy;
 } BonoboMonikerClass;
 
-GType          bonobo_moniker_get_type           (void);
+GType          bonobo_moniker_get_type           (void) G_GNUC_CONST;
 
 BonoboMoniker *bonobo_moniker_construct          (BonoboMoniker     *moniker,
 						  const char        *prefix);

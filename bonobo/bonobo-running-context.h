@@ -30,7 +30,7 @@ typedef struct {
 	void (*last_unref) (void);
 } BonoboRunningContextClass;
 
-GType         bonobo_running_context_get_type        (void);
+GType         bonobo_running_context_get_type        (void) G_GNUC_CONST;
 
 BonoboObject *bonobo_running_context_new             (void);
 

@@ -45,7 +45,7 @@ typedef struct {
 				      CORBA_Environment   *ev);
 } BonoboItemContainerClass;
 
-GType                bonobo_item_container_get_type       (void);
+GType                bonobo_item_container_get_type       (void) G_GNUC_CONST;
 BonoboItemContainer *bonobo_item_container_new            (void);
 
 void                 bonobo_item_container_add            (BonoboItemContainer *container,

@@ -66,7 +66,7 @@ CORBA_Object bonobo_transient_create_objref (BonoboTransient   *transient,
 				const char        *name,
 				CORBA_Environment *ev);
 
-GType bonobo_transient_get_type (void);
+GType bonobo_transient_get_type (void) G_GNUC_CONST;
 
 G_END_DECLS
 
