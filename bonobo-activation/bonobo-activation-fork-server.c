@@ -43,10 +43,8 @@
 #include <stdio.h>
 #include <signal.h>
 #include <sys/types.h>
-#include <sys/wait.h>
 #include <stdlib.h>
 #include <fcntl.h>
-
 
 /* Whacked from gnome-libs/libgnorba/orbitns.c */
 
@@ -58,7 +56,7 @@ typedef struct {
 #ifdef BONOBO_ACTIVATION_DEBUG
 	char *do_srv_output;
 #endif
-	FILE *fh;
+        GIOChannel *ioc;
 
         /* For list compares */
         const Bonobo_ActivationEnvironment *environment;
@@ -169,15 +167,27 @@ handle_exepipe (GIOChannel * source,
         
         if (data->iorbuf[0] == '\0' &&
             (condition & (G_IO_IN | G_IO_PRI))) {
-                if (!fgets (data->iorbuf, sizeof (data->iorbuf), data->fh)) {
+                GString *str = g_string_new ("");
+                GError *error = NULL;
+                GIOStatus status;
+
+                status = g_io_channel_read_line_string (data->ioc, str, NULL, &error);
+                if (status == G_IO_STATUS_ERROR) {
                         g_snprintf (data->iorbuf, IORBUFSIZE,
                                     _("Failed to read from child process: %s\n"),
-                                    strerror (errno));
-
+                                    error->message);
+                        g_error_free (error);
+                        error = NULL;
+                        retval = FALSE;
+                } else if (status == G_IO_STATUS_EOF) {
+                        g_snprintf (data->iorbuf, IORBUFSIZE,
+                                    _("EOF from child process\n"));
                         retval = FALSE;
                 } else {
+                        strncpy (data->iorbuf, str->str, IORBUFSIZE);
                         retval = TRUE;
                 }
+                g_string_free (str, TRUE);
         } else {                
                 retval = FALSE;
         }
@@ -196,45 +206,6 @@ handle_exepipe (GIOChannel * source,
 	return retval;
 }
 
-#ifdef BONOBO_ACTIVATION_DEBUG
-static void
-print_exit_status (int status)
-{
-	if (WIFEXITED (status))
-		g_message ("Exit status was %d", WEXITSTATUS (status));
-
-	if (WIFSIGNALED (status))
-		g_message ("signal was %d", WTERMSIG (status));
-}
-#endif
-
-static void
-bonobo_activation_setenv (const char *name, const char *value) 
-{
-#if HAVE_SETENV
-        setenv (name, value, 1);
-#else
-        char *tmp;
-                
-        tmp = g_strconcat (name, "=", value, NULL);
-        
-        putenv (tmp);
-#endif
-}
-
-static void
-setenv_activation_environment (const Bonobo_ActivationEnvironment *environment)
-{
-	int i;
-
-	if (!environment)
-		return;
-
-	for (i = 0; i < environment->_length; i++)
-		bonobo_activation_setenv (environment->_buffer [i].name,
-					  environment->_buffer [i].value);
-}
-
 CORBA_Object
 bonobo_activation_server_by_forking (
 	const char                         **cmd,
@@ -248,16 +219,18 @@ bonobo_activation_server_by_forking (
 	gpointer                             user_data,
 	CORBA_Environment                   *ev)
 {
+        int i;
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-        FILE *iorfh;
-        int childpid;
-        int status;
-        struct sigaction sa;
-        sigset_t mask, omask;
-        int parent_pid;
         static GSList *running_activations = NULL;
         EXEActivateInfo ai;
+        GError *error = NULL;
+        GSource *source;
+        GMainContext *context;
+        char **newenv = NULL;
+#ifndef G_OS_WIN32
+        extern char **environ;
+#endif
 
         g_return_val_if_fail (cmd != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (cmd [0] != NULL, CORBA_OBJECT_NIL);
@@ -275,149 +248,152 @@ bonobo_activation_server_by_forking (
         
      	pipe (iopipes);
 
-        /* Block SIGCHLD so no one else can wait() on the child before us. */
-        sigemptyset (&mask);
-        sigaddset (&mask, SIGCHLD);
-        sigprocmask (SIG_BLOCK, &mask, &omask);
-
-        parent_pid = getpid ();
-
 #ifdef BONOBO_ACTIVATION_DEBUG
-        fprintf (stderr, " FORKING: '%s' for '%s'\n", cmd[0], act_iid);
+        fprintf (stderr, " SPAWNING: '%s' for '%s'\n", cmd[0], act_iid);
 #endif
+
+#ifdef G_OS_WIN32
+        ai.ioc = g_io_channel_win32_new_fd (iopipes[0]);
+#else
+        ai.ioc = g_io_channel_unix_new (iopipes[0]);
+#endif
+        g_io_channel_set_encoding (ai.ioc, NULL, NULL);
+
+        source = g_io_create_watch
+                (ai.ioc, G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR);
+        g_source_set_callback (source, (GSourceFunc) handle_exepipe, &ai, NULL);
+        g_source_set_can_recurse (source, TRUE);
+
+        if (use_new_loop)
+                context = g_main_context_new ();
+        else
+                context = g_main_context_default ();
+        g_source_attach (source, context);
+
+        /* Set up environment for child */
+        if (environment && environment->_length > 0) {
+                int i, n;
+                char **ep;
+
+                n = environment->_length;
+
+                ep = environ;
+                while (*ep) {
+                        ep++;
+                        n++;
+                }
+                        
+                newenv = g_new (char *, n+1);
+
+                for (i = n = 0; i < environment->_length; i++, n++) {
+                        newenv [n] = g_strconcat (environment->_buffer [i].name,
+                                                  "=",
+                                                  environment->_buffer [i].value,
+                                                  NULL);
+                }
+
+                ep = environ;
+                while (*ep) {
+                        char *equal = strchr (*ep, '=');
+                        if (equal) {
+                                for (i = 0; i < environment->_length; i++)
+                                        if (equal - *ep == strlen (environment->_buffer [i].name) &&
+                                            memcmp (*ep, environment->_buffer [i].name,
+                                                    equal - *ep) == 0)
+                                                break;
+                                if (i == environment->_length) {
+                                        newenv [n] = g_strdup (*ep);
+                                        n++;
+                                }
+                        }
+                        ep++;
+                }
+                newenv [n] = NULL;
+        }
+
+        /* Pass the IOR pipe's write end to the child */ 
+        if (fd_arg != 0)
+                cmd[fd_arg] = g_strdup_printf (cmd[fd_arg], iopipes[1]);
+
+        ai.iorbuf[0] = '\0';
+        ai.done = FALSE;
         
-	/* fork & get the IOR from the magic pipe */
-	childpid = fork ();
+        running_activations = g_slist_prepend (running_activations, &ai);
 
-	if (childpid < 0) {
+	/* Spawn */
+        if (!g_spawn_async (NULL, (gchar **) cmd, newenv,
+                            G_SPAWN_LEAVE_DESCRIPTORS_OPEN |
+                            G_SPAWN_SEARCH_PATH |
+                            G_SPAWN_CHILD_INHERITS_STDIN,
+                            NULL, NULL,
+                            NULL,
+                            &error)) {
                 Bonobo_GeneralError *errval;
+                gchar *error_message = g_strconcat (_("Couldn't spawn a new process"),
+                                                    ":",
+                                                    error->message,
+                                                    NULL);
+                g_error_free (error);
+                error = NULL;
 
-                sigprocmask (SIG_SETMASK, &omask, NULL);
 		errval = Bonobo_GeneralError__alloc ();
-		errval->description = CORBA_string_dup (_("Couldn't fork a new process"));
+		errval->description = CORBA_string_dup (error_message);
+                g_free (error_message);
 
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_Bonobo_GeneralError, errval);
-		return CORBA_OBJECT_NIL;
-	}
-
-	if (childpid != 0) {
-                /* de-zombify */
-                while (waitpid (childpid, &status, 0) == -1 && errno == EINTR)
-                        ;
-                sigprocmask (SIG_SETMASK, &omask, NULL);
-                
-		if (!WIFEXITED (status)) {
-			Bonobo_GeneralError *errval;
-			char cbuf[512];
-                        
-			errval = Bonobo_GeneralError__alloc ();
-
-			if (WIFSIGNALED (status))
-				g_snprintf (cbuf, sizeof (cbuf),
-					    _("Child received signal %u (%s)"),
-					    WTERMSIG (status),
-					    g_strsignal (WTERMSIG (status)));
-			else
-				g_snprintf (cbuf, sizeof (cbuf),
-					    _("Unknown non-exit error (status is %u)"),
-					    status);
-                        errval->description = CORBA_string_dup (cbuf);
-
-			CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-					     ex_Bonobo_GeneralError, errval);
-			return CORBA_OBJECT_NIL;
-		}
-#ifdef BONOBO_ACTIVATION_DEBUG
-		ai.do_srv_output = getenv ("BONOBO_ACTIVATION_DEBUG_EXERUN");
-                
-		if (ai.do_srv_output)
-			print_exit_status (status);
-#endif
-                
-		close (iopipes[1]);
-		ai.fh = iorfh = fdopen (iopipes[0], "r");
-                
-		ai.iorbuf[0] = '\0';
-                ai.done = FALSE;
-
-                running_activations = g_slist_prepend (running_activations, &ai);
-
-                {
-                        GSource *source;
-                        GIOChannel *gioc;
-                        GMainContext *context;
-
-                        gioc = g_io_channel_unix_new (iopipes[0]);
-
-                        source = g_io_create_watch
-                                (gioc, G_IO_IN | G_IO_PRI | G_IO_HUP | G_IO_NVAL | G_IO_ERR);
-                        g_source_set_callback (source, (GSourceFunc) handle_exepipe, &ai, NULL);
-                        g_source_set_can_recurse (source, TRUE);
-
-                        if (use_new_loop)
-                                context = g_main_context_new ();
-                        else
-                                context = g_main_context_default ();
-                        g_source_attach (source, context);
-
-                        while (!ai.done)
-                                g_main_context_iteration (context, TRUE);
-
-                        g_source_destroy (source);
-                        g_source_unref (source);
-
-                        g_io_channel_unref (gioc);
-
-                        if (use_new_loop)
-                                g_main_context_unref (context);
-                }
-		fclose (iorfh);
 
                 running_activations = g_slist_remove (running_activations, &ai);
 
-                retval = exe_activate_info_to_retval (&ai, ev);
-	} else if ((childpid = fork ())) {
-		_exit (0);	/* de-zombifier process, just exit */
-	} else {
-		setenv_activation_environment (environment);
-                sigprocmask (SIG_SETMASK, &omask, NULL);
-
-		if (od_iorstr != NULL) {
-                        /* FIXME: remove this - it is actually not used at all...
-                         * and it's just wasteful having it here */
-                        bonobo_activation_setenv ("BONOBO_ACTIVATION_OD_IOR", od_iorstr);
-                }
-
-		close (iopipes[0]);
+                g_source_destroy (source);
+                g_source_unref (source);
                 
-                if (fd_arg != 0) {
-                        cmd[fd_arg] = g_strdup_printf (cmd[fd_arg], iopipes[1]);
-                }
-
-		memset (&sa, 0, sizeof (sa));
-		sa.sa_handler = SIG_IGN;
-		sigaction (SIGPIPE, &sa, NULL);
-
-                if (set_process_group) {
-                        if (setpgid (getpid (), parent_pid) < 0) {
-                                g_print (_("bonobo-activation failed to set process group of %s: %s\n"),
-                                         cmd[0], g_strerror (errno));
-                                _exit (1);
-                        }
-                } else {
-                        setsid ();
-                }
+                g_io_channel_unref (ai.ioc);
                 
-		execvp (cmd[0], (char **) cmd);
-		if (iopipes[1] != 1) {
-			dup2 (iopipes[1], 1);
-                }
-		g_print (_("Failed to execute %s: %d (%s)\n"),
-                         cmd[0],
-                         errno, g_strerror (errno));
-		_exit (1);
+                if (use_new_loop)
+                        g_main_context_unref (context);
+
+		return CORBA_OBJECT_NIL;
 	}
 
+#ifdef BONOBO_ACTIVATION_DEBUG
+        ai.do_srv_output = getenv ("BONOBO_ACTIVATION_DEBUG_EXERUN");
+#endif
+                
+        close (iopipes[1]);
+
+        if (newenv) {
+                char **ep = newenv;
+
+                while (*ep) {
+                        g_free (*ep);
+                        ep++;
+                }
+                g_free (newenv);
+        }
+
+        if (fd_arg != 0)
+                g_free ((char *) cmd[fd_arg]);
+
+        /* Get the IOR from the pipe */
+        while (!ai.done) {
+                g_main_context_iteration (context, TRUE);
+        }
+
+        g_source_destroy (source);
+        g_source_unref (source);
+        
+        g_io_channel_shutdown (ai.ioc, FALSE, NULL);
+        g_io_channel_unref (ai.ioc);
+        
+        if (use_new_loop)
+                g_main_context_unref (context);
+        
+        running_activations = g_slist_remove (running_activations, &ai);
+
+        retval = exe_activate_info_to_retval (&ai, ev); 
+
+        close (iopipes[0]);
+                
 	return retval;
 }

@@ -35,17 +35,12 @@
 #include "bonobo-activation-register.h"
 #include "bonobo-activation-version.h"
 #include <sys/types.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <fcntl.h>
 #include <glib.h>
-#include <netdb.h>
 #include <popt.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
-#include <sys/wait.h>
 #include <unistd.h>
 
 /****************** ORBit-specific stuff ****************/
@@ -237,9 +232,10 @@ bonobo_activation_postinit (gpointer app, gpointer mod_info)
 {
 	bonobo_activation_base_service_init ();
 
+#if defined (F_SETFD) && defined (FD_CLOEXEC)
 	if (bonobo_activation_ior_fd > 2)
 		fcntl (bonobo_activation_ior_fd, F_SETFD, FD_CLOEXEC);
-
+#endif
         if (bonobo_activation_activate_iid)
                 g_timeout_add_full (G_PRIORITY_LOW,
                                     BONOBO_ACTIVATION_FACTORY_TIMEOUT,
@@ -256,6 +252,10 @@ static void
 do_barrier (int signum)
 {
 	volatile int barrier = 1;
+
+#ifndef HAVE_SIGACTION
+        signal (signum, do_barrier);
+#endif
 
 	while (barrier);
 }
@@ -381,10 +381,17 @@ bonobo_activation_orb_init (int *argc, char **argv)
 
 #ifdef BONOBO_ACTIVATION_DEBUG
 	if (getenv ("BONOBO_ACTIVATION_TRAP_SEGV")) {
+#ifdef HAVE_SIGACTION
 		struct sigaction sa;
 		sa.sa_handler = do_barrier;
 		sigaction (SIGSEGV, &sa, NULL);
 		sigaction (SIGPIPE, &sa, NULL);
+#else
+                signal (SIGSEGV, do_barrier);
+#ifdef SIGPIPE
+                signal (SIGPIPE, do_barrier);
+#endif
+#endif
 	}
 	if (getenv ("BONOBO_ACTIVATION_BARRIER_INIT")) {
 		volatile int barrier = 1;

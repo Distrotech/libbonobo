@@ -206,7 +206,6 @@ main (int argc, char *argv[])
         GTimer *timer = g_timer_new ();
 	Bonobo_EventSource event_source;
 	
-
 	CORBA_exception_init (&ev);
 
         bonobo_activation_object_directory_get (
@@ -304,7 +303,7 @@ main (int argc, char *argv[])
          * havn't registered anything with the server ]
          */
         fprintf (stderr, "Waiting to see if the server erroneously quits\n");
-        sleep (SERVER_IDLE_QUIT_TIMEOUT * 2 / 1000);
+        g_usleep (SERVER_IDLE_QUIT_TIMEOUT * 2 * 1000);
         g_assert (ORBit_small_get_connection_status (ac) ==
                   ORBIT_CONNECTION_CONNECTED);
 

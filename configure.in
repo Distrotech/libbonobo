@@ -31,8 +31,29 @@ AC_SUBST(LIBBONOBO_LT_VERSION_INFO)
 BONOBO_ACTIVATION_LT_VERSION_INFO='-version-info 4:0:0'
 AC_SUBST(BONOBO_ACTIVATION_LT_VERSION_INFO)
 
+case "$host" in
+  *-*-mingw*)
+    os_win32=yes
+    ;;
+  *)
+    os_win32=no
+    ;;
+esac
+
+if test "$os_win32" = "yes"; then
+  if test x$enable_static = xyes -o x$enable_static = x; then
+    AC_MSG_WARN([Disabling static library build, must build as DLL on Windows.])
+    enable_static=no
+  fi
+  if test x$enable_shared = xno; then
+    AC_MSG_WARN([Enabling shared library build, must build as DLL on Windows.])
+  fi
+  enable_shared=yes
+fi
+
 AC_ISC_POSIX
 AC_PROG_CC
+
 AM_PROG_LEX
 if [[ "$LEX" != "flex" ]]; then
         AC_MSG_ERROR([flex is required to build bonobo-activation])
@@ -42,8 +63,6 @@ AC_STDC_HEADERS
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AC_ISC_POSIX
-AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
 AC_PROG_YACC
 AC_PATH_PROGS(PATH_TO_XRDB, "xrdb")
@@ -81,7 +100,10 @@ fi
 AC_DEFINE(HAVE_DLADDR,$have_dladdr,[whether we have dladdr])
 
 dnl Checks for library functions
-AC_CHECK_FUNCS(usleep nanosleep)
+AC_CHECK_FUNCS(usleep nanosleep sigaction setsid)
+
+dnl Checks for headers
+AC_CHECK_HEADERS(sys/wait.h syslog.h)
 
 #
 # Start of pkg-config checks
@@ -193,6 +215,7 @@ AC_SUBST(IF_POSIX_PS)
 
 AC_OUTPUT([
 Makefile
+libbonobo-zip
 po/Makefile.in
 idl/Makefile
 bonobo/Makefile
@@ -217,4 +240,3 @@ doc/api/figures/Makefile
 doc/activation/Makefile
 doc/activation-api/Makefile
 ])
-

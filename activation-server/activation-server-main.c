@@ -45,7 +45,9 @@
 #include <unistd.h>
 #include <locale.h>
 #include <string.h>
+#ifdef HAVE_SYSLOG_H
 #include <syslog.h>
+#endif
 
 #include <libxml/parser.h>
 
@@ -148,7 +150,9 @@ log_handler (const gchar *log_domain,
              const gchar *message,
              gpointer user_data)
 {
+#ifdef HAVE_SYSLOG_H
 	int syslog_priority;
+#endif
 	gchar *converted_message;
 
 #ifdef BONOBO_ACTIVATION_DEBUG
@@ -159,6 +163,11 @@ log_handler (const gchar *log_domain,
 		return;
 #endif
 
+	converted_message = g_locale_from_utf8 (message, -1, NULL, NULL, NULL);
+	if (converted_message)
+		message = converted_message;
+
+#ifdef HAVE_SYSLOG_H
 	/* syslog uses reversed meaning of LEVEL_ERROR and LEVEL_CRITICAL */
 	if (log_level & G_LOG_LEVEL_ERROR)
 		syslog_priority = LOG_CRIT;
@@ -175,14 +184,16 @@ log_handler (const gchar *log_domain,
 	else
 		syslog_priority = LOG_NOTICE;
 
-	converted_message = g_locale_from_utf8 (message, -1, NULL, NULL, NULL);
-	if (converted_message)
-		message = converted_message;
-
 	syslog (syslog_priority, "%s", message);
+#else
+        if (!(log_level & G_LOG_FLAG_FATAL))
+                fprintf (stderr, "%s%s", message,
+                         (message[strlen (message) - 1] == '\n' ? "" : "\n"));
+#endif
 
 	if (log_level & G_LOG_FLAG_FATAL) {
-		fprintf (stderr, "%s", message);
+		fprintf (stderr, "%s%s", message,
+                         (message[strlen (message) - 1] == '\n' ? "" : "\n"));
 		_exit (1);
 	}
 
@@ -199,7 +210,11 @@ redirect_output (int ior_fd)
 		return dev_null_fd;
 #endif
 
+#ifdef G_OS_WIN32
+	dev_null_fd = open ("NUL:", O_RDWR);
+#else
 	dev_null_fd = open ("/dev/null", O_RDWR);
+#endif
 	if (ior_fd != 0)
 		dup2 (dev_null_fd, 0);
 	if (ior_fd != 1)
@@ -274,26 +289,37 @@ main (int argc, char *argv[])
 	Bonobo_EventSource            event_source;
         poptContext                   ctx;
         int                           dev_null_fd;
+#ifdef HAVE_SIGACTION
         struct sigaction              sa;
+#endif
         GString                      *src_dir;
+#ifdef HAVE_SYSLOG_H
 	gchar                        *syslog_ident;
+#endif
 	const gchar                  *debug_output_env;
 
+#ifdef HAVE_SETSID
         /*
          *    Become process group leader, detach from controlling
          * terminal, etc.
          */
         setsid ();
-        
+#endif
 	/* internationalization. */
 	setlocale (LC_ALL, "");
         bindtextdomain (PACKAGE, SERVER_LOCALEDIR);
         textdomain (PACKAGE);
 
+#ifdef SIGPIPE
         /* Ignore sig-pipe - as normal */
+#ifdef HAVE_SIGACTION
 	memset (&sa, 0, sizeof (sa));
 	sa.sa_handler = SIG_IGN;
 	sigaction (SIGPIPE, &sa, NULL);
+#else
+        signal (SIGPIPE, SIG_IGN);
+#endif
+#endif
 
 	ctx = poptGetContext ("oafd", argc, (const char **)argv, options, 0);
 	while (poptGetNextOpt (ctx) >= 0) ;
@@ -307,10 +333,12 @@ main (int argc, char *argv[])
                 sleep (1);
 #endif
 
+#ifdef HAVE_SYSLOG_H
 	syslog_ident = g_strdup_printf ("bonobo-activation-server (%s-%u)", g_get_user_name (), (guint) getpid ());
 
 	/* openlog does not copy ident string, so we free it on shutdown */
 	openlog (syslog_ident, 0, LOG_USER);
+#endif
 
 	g_log_set_fatal_mask (G_LOG_DOMAIN, G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL);
 	g_log_set_handler (G_LOG_DOMAIN,
@@ -417,8 +445,10 @@ main (int argc, char *argv[])
         CORBA_Object_release ((CORBA_Object) poa_manager, ev);
         CORBA_Object_release ((CORBA_Object) root_poa, ev);
 
+#ifdef HAVE_SYSLOG_H
 	closelog ();
 	g_free (syslog_ident);
+#endif
 
 	return !bonobo_debug_shutdown ();
 }

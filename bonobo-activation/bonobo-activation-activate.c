@@ -744,10 +744,10 @@ bonobo_activation_init_activation_env (void)
 		const char *name;
 		const char *value;
 	} getenv_values[] = {
+#ifndef G_OS_WIN32
 		{ "DISPLAY",         NULL }, /* X display */
 		{ "SESSION_MANAGER", NULL }, /* XSMP session manager */
 		{ "AUDIODEV",        NULL }, /* Audio device on Sun systems */
-		{ "LANG",            NULL }, /* Fallback locale name */
                 { "XAUTHORITY",      NULL },
 		{ "LC_ALL",	     NULL }, /* locale information: see setlocale(3) */
 		{ "LC_COLLATE",	     NULL }, 
@@ -755,6 +755,8 @@ bonobo_activation_init_activation_env (void)
 		{ "LC_MONETARY",     NULL },
 		{ "LC_NUMERIC",	     NULL },
 		{ "LC_TIME",	     NULL },
+#endif
+		{ "LANG",            NULL }, /* Fallback locale name */
 		{ NULL,		     NULL }
 	};
 

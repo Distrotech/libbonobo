@@ -46,12 +46,13 @@ test_main_loop_SOURCES = test-main-loop.c
 
 TESTS_ENVIRONMENT =					\
 	LD_LIBRARY_PATH="$(top_builddir)/bonobo/.libs:$$LD_LIBRARY_PATH"	\
+	PATH="$(top_builddir)/bonobo/.libs:$$PATH"	\
 	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"\
 	BONOBO_ACTIVATION_PATH="$(srcdir):$$BONOBO_ACTIVATION_PATH"\
 	MODELS_DIR="$(srcdir)/models"
 
-TESTS = test-moniker test-event-source test-object \
-	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem \
-	test-generic-factory.sh test-main-loop
+TESTS = test-moniker$(EXEEXT) test-event-source$(EXEEXT) test-object$(EXEEXT) \
+	test-stream-mem$(EXEEXT) $(srcdir)/test-properties.sh test-storage-mem$(EXEEXT) \
+	test-generic-factory.sh test-main-loop$(EXEEXT)
 check_SCRIPTS = test-properties.sh test-generic-factory.sh
 EXTRA_DIST=$(check_SCRIPTS) Test_Generic_Factory.server

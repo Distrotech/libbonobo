@@ -23,6 +23,7 @@
 
 #include <config.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <bonobo-activation/bonobo-activation.h>
 #include <bonobo-activation/bonobo-activation-private.h>
 #include <bonobo-activation/bonobo-activation-client.h>
@@ -202,7 +203,9 @@ get_lang_list (void)
 #define environ (*_NSGetEnviron())
 #endif
 
+#ifndef G_OS_WIN32
 extern char **environ;
+#endif
 
 void
 bonobo_activation_register_client (Bonobo_ActivationContext context,

@@ -46,9 +46,15 @@
 #include <stdio.h>
 #include <signal.h>
 #include <sys/types.h>
+#ifdef HAVE_SYS_WAIT_H
 #include <sys/wait.h>
+#endif
 #include <stdlib.h>
 #include <fcntl.h>
+
+#ifdef G_OS_WIN32
+#include <share.h>
+#endif
 
 /* If you have a strange unix, you get odd hard coded limits */
 #ifndef PATH_MAX
@@ -516,8 +522,8 @@ wait_for_lock (void)
         nanosleep (&timewait, NULL);
 
 #else
-#warning You will have bad performance without usleep
-        sleep (1);
+#warning You might have bad performance without usleep
+        g_usleep (10000);
 #endif
         access ("bonobo-activation lock wait", 0);
 }
@@ -526,6 +532,7 @@ static void
 rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry, 
                 gpointer                                   user_data)
 {
+#if defined (F_SETFD) && defined (FD_CLOEXEC) && defined (F_SETLKW)
 	char *fn;
 	struct flock lock;
         int retval;
@@ -564,12 +571,28 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
 	}
 
         g_free (fn);
+#elif defined (G_OS_WIN32)
+	char *fn = get_lock_fname ();
+
+	while ((lock_fd = _sopen (fn, O_CREAT|O_RDWR|_O_SHORT_LIVED|_O_NOINHERIT, _SH_DENYRW, 0700)) < 0) {
+                if (errno == EACCES) {
+                        wait_for_lock ();
+		} else {
+                        g_message ("%s locking '%s'", g_strerror (errno), fn);
+			break;
+                }
+	}
+        g_free (fn);
+#else
+        g_warning ("No locking implemented\n");
+#endif
 }
 
 static void
 rloc_file_unlock (const BonoboActivationBaseServiceRegistry *registry, 
                   gpointer                                   user_data)
 {
+#if defined (F_SETFD) && defined (FD_CLOEXEC) && defined (F_SETLKW)
         struct flock lock;
 
 	if (lock_fd >= 0) {
@@ -584,6 +607,12 @@ rloc_file_unlock (const BonoboActivationBaseServiceRegistry *registry,
 		close (lock_fd);
 		lock_fd = -1;
 	}
+#elif defined (G_OS_WIN32)
+	if (lock_fd >= 0) {
+		close (lock_fd);
+		lock_fd = -1;
+	}
+#endif
 }
 
 static char *
@@ -656,8 +685,6 @@ static const BonoboActivationBaseServiceRegistry rloc_file = {
 	rloc_file_register,
 	rloc_file_unregister
 };
-
-#define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
 
 static CORBA_Object
 local_re_check_fn (const Bonobo_ActivationEnvironment *environment,

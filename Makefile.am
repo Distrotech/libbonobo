@@ -9,6 +9,7 @@ libinclude_HEADERS = \
 
 EXTRA_DIST = \
 	bonobo-activation-config.xml \
+	libbonobo-zip.in     \
 	intltool-extract.in  \
 	intltool-merge.in    \
 	intltool-update.in   \

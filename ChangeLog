@@ -1,3 +1,73 @@
+2005-02-22  Tor Lillqvist  <tml@novell.com>
+
+	Port to Windows:
+	
+	* libbonobo-zip.in: New file, used to build zipfile distribution
+	on Windows.
+
+	* configure.in: Force shared library build (only) on Win32. Check
+	for sigaction() and setsid(). Check for <sys/wait.h> and
+	<syslog.h>. Remove duplicate AC_ISC_POSIX. Remove obsolete
+	AC_LIBTOOL_WIN32_DLL. Expand libbonobo-zip.
+
+	* Makefile.am (EXTRA_DIST): Distribute libbonobo-zip.in.
+
+	* activation-server/activation-server-main.c (log_handler): If we
+	don't HAVE_SYSLOG_H, print to stderr instead.
+	(redirect_output): On Win32 the bit bucket is called NUL:.
+	(main): Conditionalize on HAVE_SETSID and HAVE_SYSLOG_H. If we
+	don't HAVE_SIGACTION, use signal() instead. Conditionalize use of
+	SIGPIPE that doesn't exist in the Microsoft C library. (Signals
+	are a C library concept on Windows, the underlying OS uses a
+	different abstraction.)
+
+	* activation-server/object-directory-activate.c: Remove
+	unnecessary inclusion of <sys/wait.h>.
+
+	* bonobo/bonobo-debug.c (bonobo_debug_init): Use stderr instead of
+	stdout.
+
+	* bonobo-activation/bonobo-activation-activate.c
+	(bonobo_activation_init_activation_env): Don't bother with Unix
+	environment variables like DISPLAY and SESSION_MANAGER on
+	Windows. (Do try LANG, though, although it isn't use by "normal"
+	Windows software either, but potentially by GLib-using software.)
+
+	* bonobo-activation/bonobo-activation-base-service.c
+	(wait_for_lock): Use g_usleep() if we don't have usleep() or
+	nanosleep().
+	(rloc_file_lock, rloc_file_unlock): Use _sopen() (open() with
+	"share mode") on Win32.
+	(STRMATCH): Remove duplicate definition.
+
+	* bonobo-activation/bonobo-activation-client.c: Include <stdlib.h>
+	for environ on Win32.
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_by_forking): Cross-platform
+	implementation using g_spawn_async() and GIOChannel.
+
+	* bonobo-activation/bonobo-activation-init.c
+	(bonobo_activation_postinit): Conditionalize use of F_SETFD and
+	FD_CLOEXEC.
+	(do_barrier): If don't HAVE_SIGACTION, re-arm signal.
+	(bonobo_activation_orb_init): Use signal() if not HAVE_SIGACTION.
+
+	* tests/Makefile.am: Add .libs to PATH, too. On Windows shared
+	libraries are searched for in PATH. Append EXEEXT to test program
+	names.
+
+	* tests/test-generic-factory.sh: Filter out CRs from the test
+	program output to avoid false differences.
+
+	* tests/test-activation/bonobo-activation-test.c (main): Use
+	g_usleep() instead of sleep().
+
+	* tests/test-activation/empty-server.c (main): Don't register
+	Unix-only environment variables on Win32.
+
+	* tests/test-activation/test.sh: Add .libs to PATH, too, for Win32.
+
 2005-02-20  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* doc/api/libbonobo.types: Remove bonobo_running_context_get_type,

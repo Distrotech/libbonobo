@@ -42,7 +42,7 @@ bonobo_debug_init(void)
 	  g_free(dbg_filename);
 	}
 	if(_bonobo_debug_file == NULL)
-	  _bonobo_debug_file = stdout;
+	  _bonobo_debug_file = stderr;
 }
 
 void

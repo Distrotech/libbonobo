@@ -12,6 +12,7 @@ BONOBO_ACTIVATION_SERVER="../activation-server/bonobo-activation-server";
 PATH=".:$PATH";
 LD_LIBRARY_PATH="./.libs:$LD_LIBRARY_PATH";
 unset BONOBO_ACTIVATION_DEBUG_OUTPUT
+PATH="./.libs:$PATH";
 
 export BONOBO_ACTIVATION_SERVER PATH LD_LIBRARY_PATH
 
@@ -19,11 +20,11 @@ export BONOBO_ACTIVATION_SERVER PATH LD_LIBRARY_PATH
 set -m
 
 echo "Starting factory"
-./generic-factory > generic-factory.output &
+./generic-factory | tr -d '\015' > generic-factory.output &
 sleep 1
 
 echo "Starting client"
-./test-generic-factory > test-generic-factory.output
+./test-generic-factory | tr -d '\015' > test-generic-factory.output
 
 echo "Waiting for factory to terminate; Please hold on a second, otherwise hit Ctrl-C."
 wait %1 2> /dev/null

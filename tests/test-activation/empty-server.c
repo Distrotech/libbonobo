@@ -66,14 +66,16 @@ main (int argc, char *argv[])
 		return 1;
 	}
 
+#ifndef G_OS_WIN32
 	reg_env = bonobo_activation_registration_env_set (
 			reg_env, "DISPLAY", getenv ("DISPLAY"));
 	reg_env = bonobo_activation_registration_env_set (
 			reg_env, "SESSION_MANAGER", getenv ("SESSION_MANAGER"));
 	reg_env = bonobo_activation_registration_env_set (
-			reg_env, "LANG", getenv ("LANG"));
-	reg_env = bonobo_activation_registration_env_set (
 			reg_env, "AUDIODEV", getenv ("AUDIODEV"));
+#endif
+	reg_env = bonobo_activation_registration_env_set (
+			reg_env, "LANG", getenv ("LANG"));
 
         /*
          * NB. It is imperative to register the server that is being
