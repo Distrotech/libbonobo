@@ -11,6 +11,20 @@
 	* configure.in: Added German (de), Farsi (fa),
 	Macedonian (mk) and Dutch (nl) to ALL_LINGUAS
 
+2003-01-18  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/api/libbonobo.types: Declare list of types of GObjecs to be
+	scanned.
+
+	* doc/api/Makefile.am: Enable scanning of GObjects for signals,
+	parameters, and object hierarchy.
+
+	* bonobo/bonobo-persist.h, bonobo/bonobo-storage-memory.h,
+	  bonobo/bonobo-item-container.h, bonobo/bonobo-moniker.h,
+	  bonobo/bonobo-listener.h, bonobo/bonobo-event-source.h,
+	  bonobo/bonobo-object.h, bonobo/bonobo-running-context.h: Split
+	  struct declaration from typedef, otherwise gtkdoc gets confused.
+
 2003-01-16  Daniel Yacob <locales@geez.org>
 
 	* configure.in: added am to ALL_LINGUAS

@@ -40,10 +40,17 @@ content_files = faq.xml debugging.xml properties.xml refcounting.xml
 # Other files to distribute.
 extra_files =
 
-# CFLAGS and LDFLAGS for compiling scan program. Only needed if your app/lib
-# contains GtkObjects/GObjects and you want to document signals and properties.
-GTKDOC_CFLAGS =
-GTKDOC_LIBS =
+
+# CFLAGS and LDFLAGS for compiling scan program. Only needed
+# if $(DOC_MODULE).types is non-empty.
+GTKDOC_CFLAGS =						\
+	@CFLAGS@					\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
+	$(LIBBONOBO_CFLAGS)				\
+	-I$(top_srcdir)					\
+	-I$(top_builddir)
+
+GTKDOC_LIBS = $(top_builddir)/bonobo/libbonobo-2.la $(LIBBONOBO_LIBS)
 
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
