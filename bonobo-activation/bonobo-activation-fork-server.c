@@ -381,6 +381,7 @@ bonobo_activation_server_by_forking (
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
 		setenv_activation_environment (environment);
+                sigprocmask (SIG_SETMASK, &omask, NULL);
 
 		if (od_iorstr != NULL) {
                         /* FIXME: remove this - it is actually not used at all...

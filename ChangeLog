@@ -1,3 +1,9 @@
+2004-08-04  Greg Hudson  <hudson@mit.edu>
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_by_forking): reset signal mask
+	removing SIGCHLD block for forked child.
+
 2004-07-21  Antonio Xu  <antonio.xu@sun.com>
 
 	* activation-server/object-directory-corba.c
