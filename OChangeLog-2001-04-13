@@ -1,3 +1,9 @@
+2000-01-30  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-control.c (bonobo_control_class_init): Use
+	`gtk_marshal_NONE__NONE', not `gtk_marshal_NONE__BOOL', for
+	signal "set_frame".
+
 2000-01-30  Nat Friedman  <nat@helixcode.com>
 
 	* bonobo/bonobo-control.c: Added SET_FRAME to the signal
