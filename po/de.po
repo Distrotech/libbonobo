@@ -1,14 +1,15 @@
 # German libbonobo translation
-# Copyright (C) 2002-2003 Free Software Foundation, Inc.
+# Copyright (C) 2002-2004 Free Software Foundation, Inc.
 # Jörgen Scheibengruber <mfcn@gmx.de>, 2002.
 # Christian Meyer <chrisime@gnome.org>, 2002.
-# Christian Neumair <chris@gnome-de.org>, 2002, 2003.
+# Christian Neumair <chris@gnome-de.org>, 2002-2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.4.x\n"
-"POT-Creation-Date: 2003-12-08 23:52+0000\n"
-"PO-Revision-Date: 2003-05-05 17:35+0100\n"
+"Project-Id-Version: libbonobo 2.5.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-06 10:00+0100\n"
+"PO-Revision-Date: 2004-01-06 10:00+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,13 +66,13 @@ msgstr "Namensdienst"
 
 # CHECK
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-#, fuzzy
 msgid "Notification service"
-msgstr "Namensdienst"
+msgstr "Benachrichtigungsdienst"
 
+# CHECK
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "Benachrichtigungsdienst zur Aktivierung"
 
 #: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
@@ -94,7 +95,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1128
+#: activation-server/object-directory-corba.c:1148
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "»Race-Condition« beim Aktivieren des Servers »%s«"
@@ -194,20 +195,20 @@ msgstr "Symbol Bonobo_Plugin_info konnte nicht in »%s« gefunden werden"
 #: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr "Fabrik »%s« lieferte für »%s« NIL"
+msgstr "Fabrik »%s« lieferte NIL für »%s«"
 
 #: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib »%s« enthielt »%s« nicht"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
-#: bonobo/bonobo-application.c:336
+#: bonobo/bonobo-application.c:341
 msgid "Application unique name"
-msgstr ""
+msgstr "Eindeutiger Anwendungsname"
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"
