@@ -40,6 +40,6 @@ TESTS_ENVIRONMENT =					\
 	LD_LIBRARY_PATH="$(top_builddir)/bonobo/.libs:$$LD_LIBRARY_PATH"	\
 	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"
 
-TESTS = test-thread test-moniker test-event-source test-object \
+TESTS = test-moniker test-event-source test-object \
 	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem
 EXTRA_DIST = test-properties.sh

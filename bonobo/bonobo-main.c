@@ -357,9 +357,9 @@ PortableServer_POA bonobo_poa_get_threaded (BonoboThreadHint hint)
         * IMLICIT_ACTIVATION Implicit Activation policy.
         */
        policies           = CORBA_PolicyList__alloc ();
-       policies->_maximum = 2;
-       policies->_length  = 2;
-       policies->_buffer  = CORBA_PolicyList_allocbuf (2);
+       policies->_maximum = 3;
+       policies->_length  = 3;
+       policies->_buffer  = CORBA_PolicyList_allocbuf (3);
        CORBA_sequence_set_release (policies, CORBA_TRUE);
        policies->_buffer[0] = (CORBA_Policy)
                PortableServer_POA_create_id_uniqueness_policy (
@@ -370,6 +370,11 @@ PortableServer_POA bonobo_poa_get_threaded (BonoboThreadHint hint)
                PortableServer_POA_create_implicit_activation_policy (
                        bonobo_poa (),
                        PortableServer_IMPLICIT_ACTIVATION,
+                       &ev);
+       policies->_buffer[2] = (CORBA_Policy)
+               PortableServer_POA_create_thread_policy (
+                       bonobo_poa (),
+                       PortableServer_ORB_CTRL_MODEL,
                        &ev);
 
        poa = PortableServer_POA_create_POA (bonobo_poa (), poa_name,

@@ -1,5 +1,10 @@
 2003-05-29  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-main.c
+	(bonobo_poa_get_threaded): set the ORB_CTRL_MODEL
+	policy without which this is mostly useless, also
+	activate the poa.
+
 	* tests/test-thread.c: add.
 
 	* bonobo/bonobo-property-bag-client.c
