@@ -58,7 +58,7 @@ const char	         *gnome_property_bag_get_prop_type  (GnomePropertyBag *pb, co
 const gpointer	          gnome_property_bag_get_value      (GnomePropertyBag *pb, const char *name);
 const gpointer	          gnome_property_bag_get_default    (GnomePropertyBag *pb, const char *name);
 const char	         *gnome_property_bag_get_docstring  (GnomePropertyBag *pb, const char *name);
-const GnomePropertyFlags gnome_property_bag_get_flags       (GnomePropertyBag *pb, const char *name);
+const GnomePropertyFlags  gnome_property_bag_get_flags      (GnomePropertyBag *pb, const char *name);
 gboolean		  gnome_property_bag_has_property   (GnomePropertyBag *pb, const char *name);
 
 /*

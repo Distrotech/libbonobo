@@ -338,6 +338,109 @@ gnome_object_client_from_corba (GNOME_Unknown o)
 	return object;
 }
 
+
+GNOME_Unknown
+gnome_object_client_query_interface (GnomeObjectClient *object,
+				     const char *interface_desc,
+				     CORBA_Environment *opt_ev)
+{
+	GNOME_Unknown      interface;
+	CORBA_Environment *ev, real_ev;
+
+	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (interface_desc != NULL, CORBA_OBJECT_NIL);
+	g_return_val_if_fail (GNOME_IS_OBJECT_CLIENT (object), CORBA_OBJECT_NIL);
+
+	if (opt_ev)
+		ev = opt_ev;
+	else {
+		ev = &real_ev;
+		CORBA_exception_init (ev);
+	}
+
+	interface = GNOME_Unknown_query_interface (
+		gnome_object_corba_objref (GNOME_OBJECT (object)),
+		interface_desc, ev);
+	
+        if (ev->_major != CORBA_NO_EXCEPTION) {
+		gnome_object_check_env (GNOME_OBJECT (object),
+					gnome_object_corba_objref (GNOME_OBJECT (object)),
+					ev);
+		if (!opt_ev)
+			CORBA_exception_free (ev);
+
+                return CORBA_OBJECT_NIL;
+	}
+
+	if (!opt_ev)
+		CORBA_exception_free (ev);
+
+	return interface;
+}
+
+/**
+ * gnome_object_client_has_interface:
+ * @object: object to query interface of
+ * @interface_desc: interface description
+ * @opt_ev: optional exception environment, or NULL
+ * 
+ * Queries the object to see if it implements the interface
+ * described by @interface_desc. Basicaly a thin
+ * GNOME_Unknown::query_interface wrapper.
+ * 
+ * Return value: TRUE if the interface is available else FALSE.
+ **/
+gboolean
+gnome_object_client_has_interface (GnomeObjectClient *object,
+				   const char *interface_desc,
+				   CORBA_Environment *opt_ev)
+{
+	GNOME_Unknown      interface;
+
+	/* safe type checking in query_interface */
+	interface = gnome_object_client_query_interface (object,
+							 interface_desc,
+							 opt_ev);
+
+	if (interface != CORBA_OBJECT_NIL) {
+		CORBA_Environment *ev, real_ev;
+
+		if (opt_ev)
+			ev = opt_ev;
+		else {
+			ev = &real_ev;
+			CORBA_exception_init (ev);
+		}
+
+		GNOME_Unknown_unref  (interface, ev);
+
+		if (ev->_major != CORBA_NO_EXCEPTION) {
+			gnome_object_check_env (GNOME_OBJECT (object),
+						gnome_object_corba_objref (GNOME_OBJECT (object)),
+						ev);
+			if (!opt_ev)
+				CORBA_exception_free (ev);
+			return FALSE;
+		}
+
+		CORBA_Object_release (interface, ev);
+
+		if (ev->_major != CORBA_NO_EXCEPTION) {
+			gnome_object_check_env (GNOME_OBJECT (object),
+						gnome_object_corba_objref (GNOME_OBJECT (object)),
+						ev);
+			if (!opt_ev)
+				CORBA_exception_free (ev);
+			return FALSE;
+		}
+
+		if (!opt_ev)
+			CORBA_exception_free (ev);
+		return TRUE;
+	} else
+		return FALSE;
+}
+
 static void
 gnome_object_client_destroy (GtkObject *object)
 {

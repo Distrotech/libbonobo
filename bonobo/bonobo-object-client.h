@@ -22,23 +22,32 @@ typedef struct {
 	GnomeObjectClass parent_class;
 } GnomeObjectClientClass;
 
-GtkType            gnome_object_client_get_type       (void);
+GtkType            gnome_object_client_get_type        (void);
 
-GnomeObjectClient *gnome_object_client_construct      (GnomeObjectClient *object_client,
-						       CORBA_Object corba_object);
+GnomeObjectClient *gnome_object_client_construct       (GnomeObjectClient *object_client,
+							CORBA_Object corba_object);
 
-GnomeObjectClient *gnome_object_activate              (const char *object_desc,
-						       GoadActivationFlags flags);
-GnomeObjectClient *gnome_object_activate_with_repo_id (GoadServerList *list,
-						       const char *repo_id,
-						       GoadActivationFlags flags,
-						       const char **params);
-GnomeObjectClient *gnome_object_activate_with_goad_id (GoadServerList *list,
-						       const char *goad_id,
-						       GoadActivationFlags flags,
-						       const char **params);
-GNOME_Unknown      gnome_object_restore_from_url      (const char *goad_id,
-						       const char *url);
-GnomeObjectClient *gnome_object_client_from_corba     (GNOME_Unknown o);
+GnomeObjectClient *gnome_object_activate               (const char *object_desc,
+							GoadActivationFlags flags);
+GnomeObjectClient *gnome_object_activate_with_repo_id  (GoadServerList *list,
+							const char *repo_id,
+							GoadActivationFlags flags,
+							const char **params);
+GnomeObjectClient *gnome_object_activate_with_goad_id  (GoadServerList *list,
+							const char *goad_id,
+							GoadActivationFlags flags,
+							const char **params);
+GNOME_Unknown      gnome_object_restore_from_url       (const char *goad_id,
+							const char *url);
+GnomeObjectClient *gnome_object_client_from_corba      (GNOME_Unknown o);
+
+/* Convenience GNOME_Unknown wrappers */
+gboolean           gnome_object_client_has_interface   (GnomeObjectClient *object,
+							const char *interface_desc,
+							CORBA_Environment *opt_ev);
+GNOME_Unknown      gnome_object_client_query_interface (GnomeObjectClient *object,
+							const char *interface_desc,
+							CORBA_Environment *opt_ev);
 
 #endif /* _GNOME_OBJECT_CLIENT_H_ */
+

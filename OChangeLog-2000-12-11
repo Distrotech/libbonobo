@@ -1,3 +1,31 @@
+1999-12-09  Michael Meeks  <mmeeks@gnu.org>
+
+	* bonobo/gnome-ui-handler.c (toolbar_toplevel_toolbar_remove_widgets_recursive):
+	kill our parent; sad but true.
+
+	* samples/compound-doc/sample-container.c (component_load_ps_ok_cb),
+	(component_load_pf_ok_cb): use _client_query_interface.
+	(container_create_component_frame): use client_has_interface.
+	(gnome_object_has_interface): kill.
+
+	* components/text-plain/bonobo-text-plain.c: Localise CORBA_Exception +
+	CORBA_Orb. (create_view_menus): fix type bug. (bonobo_object_destroy_cb):
+	Kill return type + count running instances.
+	(init_bonobo_text_plain_factory): make factory global.
+	(embeddable_factory, view_factory): Add system_exception handler.
+	(embeddable_system_exception_cb): 
+
+	* bonobo/test-container-autoload.c (add_object_to_container): update.
+	(gnome_object_has_interface): kill.
+
+	* bonobo/test-container.c (add_*_cmd): Update to _client_query_interface.
+	(send_text_cmd): ditto.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_bind_embeddable): ditto.
+
+	* bonobo/gnome-object-client.c (gnome_object_client_has_interface),
+	(gnome_object_client_query_interface): implement.
+
 1999-12-07  Michael Meeks  <mmeeks@gnu.org>
 
 	* components/image-x-png/bonobo-image-x-png.c (view_factory): kill
