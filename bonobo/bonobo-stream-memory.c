@@ -258,7 +258,6 @@ bonobo_stream_mem_construct (BonoboStreamMem *stream_mem,
 			     gboolean         read_only,
 			     gboolean         resizable)
 {
-	g_return_val_if_fail (buffer != NULL, NULL);
 	g_return_val_if_fail (corba_stream != CORBA_OBJECT_NIL, NULL);
 	g_return_val_if_fail (BONOBO_IS_STREAM_MEM (stream_mem), NULL);
 

@@ -1,3 +1,8 @@
+2000-07-25  Dan Winship  <danw@helixcode.com>
+
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_construct): Fix
+	this to work the way it's documented to again (wrt NULL @buffer).
+
 2000-07-25  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-uih-menu.c (menu_toplevel_create_widgets): another
