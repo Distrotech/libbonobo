@@ -1,3 +1,21 @@
+1999-06-12  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-component.c
+	(impl_GNOME_BonoboObject_set_client_site): Duplicate reference here.
+	(impl_GNOME_BonoboObject_get_client_site): Duplicate return value
+	here. 
+	(impl_GNOME_BonoboObject_new_view): Duplicate return value here.
+
+	* bonobo/gnome-object.c (gnome_object_construct): Duplicate the
+	CORBA_Object_duplicate at construction time.
+	(gnome_object_activate_servant): Do not duplicate the object
+	here, this addresses the concerns I had.
+
+	Added in-line api documentation for the whole file.
+
+	* doc/Bonobo.sgml: Extended the Bonobo documentation a bit with
+	more information on query_interface.
+
 1999-06-11  Matt Loper  <matt@gnome-support.com>
 
 	* bonobo/gnome-file-moniker.c (map_file): helper function. Is

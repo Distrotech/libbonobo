@@ -23,6 +23,19 @@ static GtkObjectClass *gnome_object_parent_class;
 
 /* Assumptions made: sizeof(POA_interfacename) does not change between interfaces */
 
+/**
+ * gnome_object_from_servant:
+ * @servant: Your servant.
+ *
+ * CORBA method implementations receive a parameter of type
+ * PortableServer_Servant which is a pointer to the servant that was
+ * used to create this specific CORBA object instance
+ *
+ * This routine allows the user to get the GnomeObject (ie, Gtk object
+ * wrapper) from the servant.
+ * 
+ * Returns: the GnomeObject wrapper associated to this servant.
+ */
 GnomeObject *
 gnome_object_from_servant (PortableServer_Servant servant)
 {
@@ -31,6 +44,18 @@ gnome_object_from_servant (PortableServer_Servant servant)
 	return GNOME_OBJECT(((GnomeObjectServant *)servant)->gnome_object);
 }
 
+/**
+ * gnome_object_bind_to_servant:
+ * @object: the GnomeObject to bind to the servant.
+ * @servant: A PortableServer_Servant to bind to the GnomeObject
+ *
+ * This routine binds the @object to the @servant.  It establishes a
+ * one to one mapping between the @object and the @servant.  Utility
+ * routines are provides to go back and forth.
+ *
+ * This routine is used internally by the
+ * gnome_object_activate_servant().
+ */
 void
 gnome_object_bind_to_servant (GnomeObject *object, void *servant)
 {
@@ -172,6 +197,11 @@ gnome_object_instance_init (GtkObject *gtk_object)
 	CORBA_exception_init (&object->ev);
 }
 
+/**
+ * gnome_object_get_type:
+ *
+ * Returns the GtkType associated for the base GnomeObject type
+ */
 GtkType
 gnome_object_get_type (void)
 {
@@ -195,6 +225,17 @@ gnome_object_get_type (void)
 	return type;
 }
 
+/** 
+ * gnome_object_activate_servant:
+ * @object: a GnomeObject
+ * @servant: The servant to activate.
+ *
+ * This routine activates the @servant which is wrapped inside the
+ * @object on the bonobo_poa (which is the default POA).
+ *
+ * Returns: The CORBA_Object that is wrapped by @object and whose
+ * servant is @servant.  Might return CORBA_OBJECT_NIL on failure. 
+ */
 CORBA_Object
 gnome_object_activate_servant (GnomeObject *object, void *servant)
 {
@@ -211,19 +252,25 @@ gnome_object_activate_servant (GnomeObject *object, void *servant)
 		bonobo_poa(), servant, &object->ev);
 
 	if (o){
-		/*
-		 * FIXME: I need to ask Elliot why I need to
-		 * duplicate the object here. (otherise the
-		 * gnome-bonobo-object-container ends up with a
-		 * refcount of 0
-		 */
 		gnome_object_bind_to_servant (object, servant);
-		return CORBA_Object_duplicate (o, &object->ev);
+		return o;
 	} else
 		return CORBA_OBJECT_NIL;
 	
 }
 
+/**
+ * gnome_object_construct:
+ * @object; The GTK object server wrapper for the CORBA service.
+ * @corba_object: the reference to the real CORBA object.
+ *
+ * Constructs a GnomeObject. This method is usually invoked from the
+ * construct method for other Gtk-based CORBA wrappers that derive
+ * from the GNOME::obj interface
+ *
+ * This returns a constructed GnomeObject. 
+ *
+ */
 GnomeObject *
 gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
 {
@@ -231,7 +278,11 @@ gnome_object_construct (GnomeObject *object, CORBA_Object corba_object)
 	g_return_val_if_fail (GNOME_IS_OBJECT (object), NULL);
 	g_return_val_if_fail (corba_object != CORBA_OBJECT_NIL, NULL);
 
-	object->object = corba_object;
+	object->object = CORBA_Object_duplicate (corba_object, &object->ev);
 
 	return object;
 }
+
+
+
+
