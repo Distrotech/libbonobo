@@ -1,3 +1,12 @@
+2003-12-18  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* activation-server/object-directory-corba.c
+	(od_merge_client_environment): Make the 'server' parameter const.
+	(impl_Bonobo_ObjectDirectory_register_new_full): Register
+	ServerInfo from description before merging environments, since
+	merging requires the ServerInfo in the first place.
+	(od_merge_client_environment): Tolerate NULL ServerInfo.
+
 2003-12-09  Michael Meeks  <michael@ximian.com>
 
 	* bonobo-activation/bonobo-activation-client.c

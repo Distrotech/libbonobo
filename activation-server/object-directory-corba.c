@@ -348,7 +348,7 @@ od_get_active_server (ObjectDirectory    *od,
  */
 static void
 od_merge_client_environment (ObjectDirectory                    *od,
-                             Bonobo_ServerInfo                  *server,
+                             Bonobo_ServerInfo const            *server,
                              const Bonobo_ActivationEnvironment *environment,
                              Bonobo_ActivationEnvironment       *merged_environment,
                              Bonobo_ActivationClient             client)
@@ -368,6 +368,7 @@ od_merge_client_environment (ObjectDirectory                    *od,
                 goto exit;
 
         /* scan through server properties */
+        if (!server) goto exit;
         for (i = 0; i < server->props._length; ++i) {
                 if (strcmp (server->props._buffer[i].name, "bonobo:environment") == 0)
                 {
@@ -830,16 +831,17 @@ impl_Bonobo_ObjectDirectory_register_new_full (
         Bonobo_ActivationClient             client,
 	CORBA_Environment                  *ev)
 {
-	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
-	CORBA_Object     oldobj;
-        Bonobo_ActivationEnvironment merged_environment;
+	ObjectDirectory              *od = OBJECT_DIRECTORY (servant);
+	CORBA_Object                  oldobj;
+        Bonobo_ActivationEnvironment  merged_environment;
+        Bonobo_ServerInfo const      *serverinfo;
 
 	oldobj = od_get_active_server (od, iid, environment);
         *existing = oldobj;
 
-        od_merge_client_environment (od, (Bonobo_ServerInfo *)
-                                     g_hash_table_lookup (od->by_iid, iid),
-                                     environment, &merged_environment, client);
+        serverinfo = od_register_runtime_server_info (od, iid, description);
+        od_merge_client_environment (od, serverinfo, environment,
+                                     &merged_environment, client);
 
 	oldobj = od_get_active_server (od, iid, &merged_environment);
 	if (oldobj != CORBA_OBJECT_NIL) {
@@ -849,7 +851,7 @@ impl_Bonobo_ObjectDirectory_register_new_full (
                 }
 	}
 
-        if (!od_register_runtime_server_info (od, iid, description)) {
+        if (!serverinfo) {
                 if (!(flags&Bonobo_REGISTRATION_FLAG_NO_SERVERINFO)) {
                         g_free (merged_environment._buffer);
                         return Bonobo_ACTIVATION_REG_NOT_LISTED;
