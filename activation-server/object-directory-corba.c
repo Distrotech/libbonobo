@@ -675,7 +675,7 @@ remove_active_server (impl_POA_Bonobo_ObjectDirectory *servant,
 	int               i;
 
 	servers = g_hash_table_lookup (servant->active_server_lists, iid);
-	g_assert (servers != NULL);
+        g_return_val_if_fail (servers != NULL, FALSE);
 
 	for (i = 0; i < servers->n_servers; i++)
 		/* ORBit2 ensures reference uniqueness */
