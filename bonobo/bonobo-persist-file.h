@@ -15,7 +15,7 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomePersistFile GnomePersistFile;
 
 
-typedef int (*GnomePersistFileIOFn)(GnomePersistFile *ps, const CORBA_char *filename, void *closure);
+typedef int (*GnomePersistFileIOFn)(GnomePersistFile *pf, const CORBA_char *filename, void *closure);
 
 struct _GnomePersistFile {
 	GnomePersist persist;

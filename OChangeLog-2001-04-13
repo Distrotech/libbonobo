@@ -1,3 +1,21 @@
+1999-08-17  Nat Friedman  <nat@gnome-support.com>
+
+	* bonobo/gnome-view.h (GnomeView): Added an 'embeddable' field.
+
+	* bonobo/gnome-view.c (gnome_view_set_embeddable): New function.
+	(gnome_view_get_embeddable): Likewise.
+
+	* bonobo/gnome-embeddable.h (GnomeEmbeddable): Added a views field
+ 	here to maintain a list of an embeddable's views.
+
+	* bonobo/gnome-embeddable.c (impl_GNOME_Embeddable_new_view): Grow
+ 	the embeddable's view list and set the view's embeddable.
+
+	(gnome_embeddable_corba_object_create): New
+ 	function. create_gnome_embeddable renamed to this and made public
+ 	so that derived objects which export no new CORBA functionality
+ 	can be created.
+
 1999-08-16  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-storage.c (load_storage_driver): Change
