@@ -56,7 +56,7 @@ LDADD=../bonobo-activation/libbonobo-activation.la $(UTILS_LIBS)
 
 serverfiles=empty.server
 
-emptydatadir=$(datadir)/bonobo/servers
+emptydatadir=$(libdir)/bonobo/servers
 emptydata_DATA=$(serverfiles)
 
 EXTRA_DIST=empty.idl $(serverfiles) broken.server
