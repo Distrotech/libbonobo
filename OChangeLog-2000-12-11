@@ -1,3 +1,37 @@
+Sat Nov  4 11:41:50 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* idl/bonobo-storage.idl: add the NameExists exception to 
+	openStorage() and openStream().
+
+	* storage-modules/bonobo-stream-efs.c:
+ 	(real_get_info): code cleanup
+	(real_set_info): code cleanup
+	(real_read): code cleanup
+	(real_copy_to): code cleanup
+
+	* bonobo/bonobo-stream.c: s/impl_/impl_Bonobo_Stream_/
+
+	* bonobo/bonobo-storage.c: s/impl_/impl_Bonobo_Storage_/
+	(impl_Bonobo_Storage_copyTo): call a generic copyTo method if the
+	driver has no copyTo implementation.
+	(bonobo_storage_copy_to): the generic copy method.
+
+	* storage-modules/bonobo-storage-efs.c 
+	(real_open_storage): raise more exceptions
+	(real_rename): raise more exceptions
+	(real_commit): raise more exceptions
+	(real_revert): raise more exceptions
+	(real_list_contents): rewrote the code
+	(real_get_info): code cleanup
+	(real_set_info): code cleanup
+
+Wed Nov  1 09:14:21 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* tests/test-storage.c (copy_tests): more tests
+
+	* storage-modules/bonobo-stream-efs.c (real_copy_to): also copy
+	the content_type
+
 2000-11-03  Darin Adler  <darin@eazel.com>
 
 	* api-convert.pl: Fixed a tiny mistake in the API rename script

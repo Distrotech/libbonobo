@@ -1,9 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /**
- * gnome-storage.c: Storage manipulation.
+ * bonobo-storage.c: Storage manipulation.
  *
- * Author:
- *   Miguel de Icaza (miguel@gnu.org).
+ * Authors:
+ *   Miguel de Icaza (miguel@gnu.org)
+ *   Dietmar Maurer (dietmar@maurer-it.com)
  *
  * Copyright 1999 Helix Code, Inc.
  */
@@ -18,7 +19,7 @@ static BonoboObjectClass *bonobo_storage_parent_class;
 
 static POA_Bonobo_Storage__vepv bonobo_storage_vepv;
 
-#define CLASS(o) BONOBO_STORAGE_CLASS(GTK_OBJECT(o)->klass)
+#define CLASS(o) BONOBO_STORAGE_CLASS (GTK_OBJECT(o)->klass)
 
 static inline BonoboStorage *
 bonobo_storage_from_servant (PortableServer_Servant servant)
@@ -27,10 +28,10 @@ bonobo_storage_from_servant (PortableServer_Servant servant)
 }
 
 static Bonobo_StorageInfo*
-impl_get_info (PortableServer_Servant servant,
-	       const CORBA_char * path,
-	       const Bonobo_StorageInfoFields mask,
-	       CORBA_Environment *ev)
+impl_Bonobo_Storage_getInfo (PortableServer_Servant servant,
+			     const CORBA_char * path,
+			     const Bonobo_StorageInfoFields mask,
+			     CORBA_Environment *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 
@@ -38,11 +39,11 @@ impl_get_info (PortableServer_Servant servant,
 }
 
 static void          
-impl_set_info (PortableServer_Servant servant,
-	       const CORBA_char * path,
-	       const Bonobo_StorageInfo *info,
-	       const Bonobo_StorageInfoFields mask,
-	       CORBA_Environment *ev)
+impl_Bonobo_Storage_setInfo (PortableServer_Servant servant,
+			     const CORBA_char * path,
+			     const Bonobo_StorageInfo *info,
+			     const Bonobo_StorageInfoFields mask,
+			     CORBA_Environment *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 
@@ -50,10 +51,10 @@ impl_set_info (PortableServer_Servant servant,
 }
 
 static Bonobo_Stream
-impl_open_stream (PortableServer_Servant servant,
-		  const CORBA_char       *path,
-		  Bonobo_Storage_OpenMode mode,
-		  CORBA_Environment      *ev)
+impl_Bonobo_Storage_openStream (PortableServer_Servant servant,
+				const CORBA_char       *path,
+				Bonobo_Storage_OpenMode mode,
+				CORBA_Environment      *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	BonoboStream *stream;
@@ -66,15 +67,16 @@ impl_open_stream (PortableServer_Servant servant,
 }
 
 static Bonobo_Storage
-impl_open_storage (PortableServer_Servant  servant,
-		   const CORBA_char       *path,
-		   Bonobo_Storage_OpenMode mode,
-		   CORBA_Environment      *ev)
+impl_Bonobo_Storage_openStorage (PortableServer_Servant  servant,
+				 const CORBA_char       *path,
+				 Bonobo_Storage_OpenMode mode,
+				 CORBA_Environment      *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	BonoboStorage *open_storage;
 	
-	if ((open_storage = CLASS(storage)->open_storage (storage, path, mode, ev)))
+	if ((open_storage = CLASS (storage)->open_storage (storage, path, 
+							   mode, ev)))
 		return (Bonobo_Storage) CORBA_Object_duplicate (
 			bonobo_object_corba_objref (BONOBO_OBJECT (open_storage)), ev);
 	else
@@ -82,20 +84,24 @@ impl_open_storage (PortableServer_Servant  servant,
 }
 
 static void
-impl_copy_to (PortableServer_Servant servant,
-	      Bonobo_Storage         target,
-	      CORBA_Environment     *ev)
+impl_Bonobo_Storage_copyTo (PortableServer_Servant servant,
+			    Bonobo_Storage         target,
+			    CORBA_Environment     *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
-	
-	CLASS(storage)->copy_to (storage, target, ev);
+	Bonobo_Storage src = BONOBO_OBJECT (storage)->corba_objref;	
+
+	if (CLASS (storage)->copy_to)
+		CLASS (storage)->copy_to (storage, target, ev);
+        else
+		bonobo_storage_copy_to (src, target, ev);
 }
 
 static void
-impl_rename (PortableServer_Servant servant,
-	     const CORBA_char      *path_name,
-	     const CORBA_char      *new_path_name,
-	     CORBA_Environment     *ev)
+impl_Bonobo_Storage_rename (PortableServer_Servant servant,
+			    const CORBA_char      *path_name,
+			    const CORBA_char      *new_path_name,
+			    CORBA_Environment     *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	
@@ -103,7 +109,8 @@ impl_rename (PortableServer_Servant servant,
 }
 
 static void
-impl_commit (PortableServer_Servant servant, CORBA_Environment *ev)
+impl_Bonobo_Storage_commit (PortableServer_Servant servant, 
+			    CORBA_Environment *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	
@@ -111,7 +118,8 @@ impl_commit (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 static void
-impl_revert (PortableServer_Servant servant, CORBA_Environment *ev)
+impl_Bonobo_Storage_revert (PortableServer_Servant servant, 
+			    CORBA_Environment *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	
@@ -119,10 +127,10 @@ impl_revert (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 static Bonobo_Storage_DirectoryList *
-impl_list_contents (PortableServer_Servant servant,
-		    const CORBA_char      *path,
-		    Bonobo_StorageInfoFields mask,
-		    CORBA_Environment     *ev)
+impl_Bonobo_Storage_listContents (PortableServer_Servant servant,
+				  const CORBA_char      *path,
+				  Bonobo_StorageInfoFields mask,
+				  CORBA_Environment     *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 
@@ -130,9 +138,9 @@ impl_list_contents (PortableServer_Servant servant,
 }
 
 static void
-impl_erase (PortableServer_Servant servant, 
-            const CORBA_char      *path,
-            CORBA_Environment     *ev)
+impl_Bonobo_Storage_erase (PortableServer_Servant servant, 
+			   const CORBA_char      *path,
+			   CORBA_Environment     *ev)
 {
 	BonoboStorage *storage = bonobo_storage_from_servant (servant);
 	
@@ -150,16 +158,16 @@ bonobo_storage_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Storage__epv, 1);
 
-	epv->getInfo      = impl_get_info;
-	epv->setInfo      = impl_set_info;
-	epv->openStream	  = impl_open_stream;
-	epv->openStorage  = impl_open_storage;
-	epv->copyTo       = impl_copy_to;
-	epv->rename       = impl_rename;
-	epv->commit       = impl_commit;
-	epv->revert       = impl_revert;
-	epv->listContents = impl_list_contents;
-	epv->erase        = impl_erase;
+	epv->getInfo      = impl_Bonobo_Storage_getInfo;
+	epv->setInfo      = impl_Bonobo_Storage_setInfo;
+	epv->openStream	  = impl_Bonobo_Storage_openStream;
+	epv->openStorage  = impl_Bonobo_Storage_openStorage;
+	epv->copyTo       = impl_Bonobo_Storage_copyTo;
+	epv->rename       = impl_Bonobo_Storage_rename;
+	epv->commit       = impl_Bonobo_Storage_commit;
+	epv->revert       = impl_Bonobo_Storage_revert;
+	epv->listContents = impl_Bonobo_Storage_listContents;
+	epv->erase        = impl_Bonobo_Storage_erase;
 
 	return epv;
 }
@@ -322,5 +330,141 @@ bonobo_storage_corba_object_create (BonoboObject *object)
         }
 
         CORBA_exception_free (&ev);
-        return (Bonobo_Storage) bonobo_object_activate_servant (object, servant);
+        return (Bonobo_Storage) bonobo_object_activate_servant (object,
+								servant);
+}
+
+static void
+copy_stream (Bonobo_Stream src, Bonobo_Stream dest, CORBA_Environment *ev) 
+{
+	Bonobo_Stream_iobuf *buf;
+
+	do {
+		Bonobo_Stream_read (src, 4096, &buf, ev);
+		if (BONOBO_EX (ev)) 
+			break;
+
+		if (buf->_length == 0) {
+			CORBA_free (buf);
+			break;
+		}
+
+		Bonobo_Stream_write (dest, buf, ev);
+		CORBA_free (buf);
+		if (BONOBO_EX (ev)) 
+			break;
+
+	} while (1);
+
+	if (BONOBO_EX (ev)) /* we must return a Bonobo_Storage exception */
+		CORBA_exception_set (ev, CORBA_USER_EXCEPTION, 
+				     ex_Bonobo_Storage_IOError, NULL);
+
+}
+
+void
+bonobo_storage_copy_to (Bonobo_Storage src, Bonobo_Storage dest,
+			CORBA_Environment *ev) 
+{
+	Bonobo_Storage new_src, new_dest;
+	Bonobo_Stream src_stream, dest_stream;
+	Bonobo_Storage_DirectoryList *list;
+	gint i;
+
+	if ((src == CORBA_OBJECT_NIL) || (dest == CORBA_OBJECT_NIL) || !ev) {
+		CORBA_exception_set (ev, CORBA_USER_EXCEPTION, 
+				     ex_Bonobo_Storage_IOError, NULL);
+		return;
+	}
+
+	list = Bonobo_Storage_listContents (src, "", 
+					    Bonobo_FIELD_CONTENT_TYPE |
+					    Bonobo_FIELD_TYPE,
+					    ev);
+	if (BONOBO_EX (ev))
+		return;
+
+	for (i = 0; i <list->_length; i++) {
+
+		if (list->_buffer[i].type == Bonobo_STORAGE_TYPE_DIRECTORY) {
+
+			new_dest = Bonobo_Storage_openStorage
+				(dest, list->_buffer[i].name, 
+				 Bonobo_Storage_CREATE | 
+				 Bonobo_Storage_FAILIFEXIST, ev);
+
+			if (BONOBO_EX (ev)) 
+				break;
+
+			Bonobo_Storage_setInfo (new_dest, "",
+						&list->_buffer[i],
+						Bonobo_FIELD_CONTENT_TYPE,
+						ev);
+
+			if (BONOBO_EX (ev)) {
+				bonobo_object_release_unref (new_dest, NULL);
+				break;
+			}
+
+			new_src = Bonobo_Storage_openStorage
+				(src, list->_buffer[i].name, 
+				 Bonobo_Storage_READ, ev);
+			
+			if (BONOBO_EX (ev)) {
+				bonobo_object_release_unref (new_dest, NULL);
+				break;
+			}
+
+			bonobo_storage_copy_to (new_src, new_dest, ev);
+			
+			bonobo_object_release_unref (new_src, NULL);
+			bonobo_object_release_unref (new_dest, NULL);
+
+			if (BONOBO_EX (ev))
+				break;
+
+		} else {
+			dest_stream = Bonobo_Storage_openStream 
+				(dest, list->_buffer[i].name,
+				 Bonobo_Storage_CREATE | 
+				 Bonobo_Storage_FAILIFEXIST, ev);
+
+			if (BONOBO_EX (ev))
+				break;
+
+			Bonobo_Stream_setInfo (dest_stream,
+					       &list->_buffer[i],
+					       Bonobo_FIELD_CONTENT_TYPE,
+					       ev);
+
+			if (BONOBO_EX (ev)) {
+				CORBA_exception_set (ev, CORBA_USER_EXCEPTION, 
+						     ex_Bonobo_Storage_IOError,
+						     NULL);
+				bonobo_object_release_unref (dest_stream,
+							     NULL);
+				break;
+			}
+
+			src_stream = Bonobo_Storage_openStream 
+				(src, list->_buffer[i].name,
+				 Bonobo_Storage_READ, ev);
+
+			if (BONOBO_EX (ev)) {
+				bonobo_object_release_unref (dest_stream, 
+							     NULL);
+				break;
+			}
+
+			copy_stream (src_stream, dest_stream, ev);
+
+			bonobo_object_release_unref (src_stream, NULL);
+			bonobo_object_release_unref (dest_stream, NULL);
+
+			if (BONOBO_EX (ev))
+				break;
+		}
+	}
+
+	CORBA_free (list);
 }

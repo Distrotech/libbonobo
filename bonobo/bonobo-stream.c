@@ -26,9 +26,9 @@ bonobo_stream_from_servant (PortableServer_Servant servant)
 }
 
 static Bonobo_StorageInfo*
-impl_get_info (PortableServer_Servant servant,
-	       const Bonobo_StorageInfoFields mask,
-	       CORBA_Environment *ev)
+impl_Bonobo_Stream_getInfo (PortableServer_Servant servant,
+			    const Bonobo_StorageInfoFields mask,
+			    CORBA_Environment *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
@@ -36,10 +36,10 @@ impl_get_info (PortableServer_Servant servant,
 }
 
 static void          
-impl_set_info (PortableServer_Servant servant,
-	       const Bonobo_StorageInfo *info,
-	       const Bonobo_StorageInfoFields mask,
-	       CORBA_Environment *ev)
+impl_Bonobo_Stream_setInfo (PortableServer_Servant servant,
+			    const Bonobo_StorageInfo *info,
+			    const Bonobo_StorageInfoFields mask,
+			    CORBA_Environment *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
@@ -47,10 +47,10 @@ impl_set_info (PortableServer_Servant servant,
 }
 
 static void
-impl_read (PortableServer_Servant servant,
-	   CORBA_long             count,
-	   Bonobo_Stream_iobuf  **buffer,
-	   CORBA_Environment     *ev)
+impl_Bonobo_Stream_read (PortableServer_Servant servant,
+			 CORBA_long             count,
+			 Bonobo_Stream_iobuf  **buffer,
+			 CORBA_Environment     *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
@@ -58,9 +58,9 @@ impl_read (PortableServer_Servant servant,
 }
 
 static void
-impl_write (PortableServer_Servant servant,
-	    const Bonobo_Stream_iobuf *buffer,
-	    CORBA_Environment *ev)
+impl_Bonobo_Stream_write (PortableServer_Servant servant,
+			  const Bonobo_Stream_iobuf *buffer,
+			  CORBA_Environment *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
@@ -68,10 +68,10 @@ impl_write (PortableServer_Servant servant,
 }
 
 static CORBA_long
-impl_seek (PortableServer_Servant servant,
-	   CORBA_long offset,
-	   Bonobo_Stream_SeekType whence,
-	   CORBA_Environment *ev)
+impl_Bonobo_Stream_seek (PortableServer_Servant servant,
+			 CORBA_long offset,
+			 Bonobo_Stream_SeekType whence,
+			 CORBA_Environment *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
@@ -79,9 +79,9 @@ impl_seek (PortableServer_Servant servant,
 }
 
 static void
-impl_truncate (PortableServer_Servant servant,
-	       CORBA_long length,
-	       CORBA_Environment *ev)
+impl_Bonobo_Stream_truncate (PortableServer_Servant servant,
+			     CORBA_long length,
+			     CORBA_Environment *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
@@ -89,12 +89,12 @@ impl_truncate (PortableServer_Servant servant,
 }
 
 static void
-impl_copy_to (PortableServer_Servant servant,
-	      const CORBA_char *dest,
-	      CORBA_long bytes,
-	      CORBA_long *read,
-	      CORBA_long *written,
-	      CORBA_Environment *ev)
+impl_Bonobo_Stream_copyTo (PortableServer_Servant servant,
+			   const CORBA_char *dest,
+			   CORBA_long bytes,
+			   CORBA_long *read,
+			   CORBA_long *written,
+			   CORBA_Environment *ev)
 {
 	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
@@ -102,7 +102,8 @@ impl_copy_to (PortableServer_Servant servant,
 }
 
 static void
-impl_commit (PortableServer_Servant servant, CORBA_Environment * ev)
+impl_Bonobo_Stream_commit (PortableServer_Servant servant,
+			   CORBA_Environment * ev)
 {
        BonoboStream *stream = bonobo_stream_from_servant (servant);
 
@@ -110,11 +111,12 @@ impl_commit (PortableServer_Servant servant, CORBA_Environment * ev)
 }
 
 static void
-impl_revert (PortableServer_Servant servant, CORBA_Environment * ev)
+impl_Bonobo_Stream_revert (PortableServer_Servant servant,
+			   CORBA_Environment * ev)
 {
-       BonoboStream *stream = bonobo_stream_from_servant (servant);
+	BonoboStream *stream = bonobo_stream_from_servant (servant);
 
-       CLASS (stream)->revert (stream, ev);
+	CLASS (stream)->revert (stream, ev);
 }
 
 /**
@@ -127,15 +129,15 @@ bonobo_stream_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_Stream__epv, 1);
 
-	epv->getInfo  = impl_get_info;
-	epv->setInfo  = impl_set_info;
-	epv->read     = impl_read;
-	epv->write    = impl_write;
-	epv->seek     = impl_seek;
-	epv->truncate = impl_truncate;
-	epv->copyTo   = impl_copy_to;
-	epv->commit   = impl_commit;
-	epv->revert   = impl_revert;
+	epv->getInfo  = impl_Bonobo_Stream_getInfo;
+	epv->setInfo  = impl_Bonobo_Stream_setInfo;
+	epv->read     = impl_Bonobo_Stream_read;
+	epv->write    = impl_Bonobo_Stream_write;
+	epv->seek     = impl_Bonobo_Stream_seek;
+	epv->truncate = impl_Bonobo_Stream_truncate;
+	epv->copyTo   = impl_Bonobo_Stream_copyTo;
+	epv->commit   = impl_Bonobo_Stream_commit;
+	epv->revert   = impl_Bonobo_Stream_revert;
 
 	return epv;
 }

@@ -88,6 +88,10 @@ BonoboStorage   *bonobo_storage_open_full    (const char *driver,
 					      gint mode,
 					      CORBA_Environment *opt_ev);
 
+void             bonobo_storage_copy_to      (Bonobo_Storage src, 
+					      Bonobo_Storage dest,
+					      CORBA_Environment *ev);
+  
 Bonobo_Storage   bonobo_storage_corba_object_create (BonoboObject *object);
 
 void             bonobo_storage_write_class_id (BonoboStorage *storage,

@@ -182,7 +182,8 @@ module Bonobo {
 		 * Opens a Stream whose name is @path.
 		 */
 		Stream openStream (in string path, in OpenMode mode)
-			raises (IOError, NotFound, NoPermission, NotStream);
+			raises (IOError, NotFound, NoPermission, 
+				NotStream, NameExists);
 
 		/**
 		 * openStorage:
@@ -192,7 +193,8 @@ module Bonobo {
 		 * Returns a storage object for @path.
 		 */
 		Storage openStorage (in string path, in OpenMode mode)
-			raises (IOError, NotFound, NoPermission, NotStorage);
+			raises (IOError, NotFound, NoPermission, 
+                                NotStorage, NameExists);
 
 		/** 
 		 * copyTo:
