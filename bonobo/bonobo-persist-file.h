@@ -74,7 +74,7 @@ BonoboPersistFile *bonobo_persist_file_new       (BonoboPersistFileIOFn load_fn,
 						  const gchar          *iid,
 						  void                 *closure);
 
-BonoboPersistFile *bonobo_persist_file_construct (BonoboPersistFile    *ps,
+BonoboPersistFile *bonobo_persist_file_construct (BonoboPersistFile    *pf,
 						  BonoboPersistFileIOFn load_fn,
 						  BonoboPersistFileIOFn save_fn,
 						  const gchar          *iid,
