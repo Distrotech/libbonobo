@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.101.2\n"
-"POT-Creation-Date: 2001-09-10 03:24+0200\n"
+"POT-Creation-Date: 2001-08-07 15:33-0400\n"
 "PO-Revision-Date: 2001-09-01 22:39GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -91,59 +91,39 @@ msgstr "xətalı istifadəçi ara üzü XML izahı"
 msgid "invalid path to XML user interface element"
 msgstr "xətalı XML istifadəçi ara üzü elementi"
 
-#: bonobo/bonobo-exception.c:215
-msgid "Unknown command or verb"
-msgstr "Namə'lum əmr ya da fe'l"
-
-#: bonobo/bonobo-exception.c:218
-msgid "Command is insensitive"
-msgstr "Əmr qeyri həssasdır"
-
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:216
 msgid "incorrect data type"
 msgstr "hökmsüz mə'lumat növü"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:219
 msgid "stream not found"
 msgstr "axım tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:223
 msgid "property not found"
 msgstr "mülkiyyət tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:232
-msgid "property has invalid type"
-msgstr "mülkiyyət səhv növdədir"
-
-#: bonobo/bonobo-exception.c:235
-msgid "property is read only"
-msgstr "mülkiyyət sırf oxunandır"
-
-#: bonobo/bonobo-exception.c:238
-msgid "config database backend failed "
-msgstr "config database backend failed "
-
-#: bonobo/bonobo-exception.c:242
+#: bonobo/bonobo-exception.c:227
 msgid "Moniker interface cannot be found"
 msgstr "Moniker ara üzü tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:245
+#: bonobo/bonobo-exception.c:230
 msgid "Moniker activation timed out"
 msgstr "Moniker fəallaşdırılması vaxtı doldu"
 
-#: bonobo/bonobo-exception.c:248
+#: bonobo/bonobo-exception.c:233
 msgid "Syntax error within moniker"
 msgstr "Monikerdə sintaks xətası"
 
-#: bonobo/bonobo-exception.c:251
+#: bonobo/bonobo-exception.c:236
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker namə'lum moniker prefiksinə malikdir"
 
-#: bonobo/bonobo-exception.c:275
+#: bonobo/bonobo-exception.c:260
 msgid "Error checking error; no exception"
 msgstr "Xəta yoxlaması xətası; xüsusi hal yoxdur"
 
-#: bonobo/bonobo-exception.c:284
+#: bonobo/bonobo-exception.c:269
 msgid "General activation error with no description"
 msgstr "İzahsız ümumi fəallaşdırma xətası"
 
@@ -151,34 +131,45 @@ msgstr "İzahsız ümumi fəallaşdırma xətası"
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:1
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:2
-msgid "ORB IOR handling moniker"
-msgstr ""
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
 msgid "Standard Moniker factory"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
 msgid "generic Oaf activation moniker"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:5
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
 msgid "generic Oaf query moniker"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:6
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
 msgid "generic factory 'new' moniker"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:7
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
 msgid "generic item moniker"
 msgstr ""
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:8
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr ""
+
+#~ msgid "Unknown command or verb"
+#~ msgstr "Namə'lum əmr ya da fe'l"
+
+#~ msgid "Command is insensitive"
+#~ msgstr "Əmr qeyri həssasdır"
+
+#~ msgid "property has invalid type"
+#~ msgstr "mülkiyyət səhv növdədir"
+
+#~ msgid "property is read only"
+#~ msgstr "mülkiyyət sırf oxunandır"
+
+#~ msgid "config database backend failed "
+#~ msgstr "config database backend failed "

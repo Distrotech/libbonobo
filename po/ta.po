@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.96.0\n"
-"POT-Creation-Date: 2001-09-23 10:34-0400\n"
+"POT-Creation-Date: 2001-08-07 15:33-0400\n"
 "PO-Revision-Date: 2001-06-16 17:04-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -89,60 +89,39 @@ msgstr "¦À¡Õò¾-ÁüÈ ÀÂÉ÷ ­¨¼Ó¸ XML Å¢ÅÃ¢ôÒ"
 msgid "invalid path to XML user interface element"
 msgstr "XML ÀÂÉ÷ ­¨¼Ó¸ ¯ÚôÀ¢ı À¡¨¾ À¢¨ÆÂ¡ÉĞ"
 
-#: bonobo/bonobo-exception.c:215
-msgid "Unknown command or verb"
-msgstr "¦¾Ã¢Â¡¾ ¸ğ¼¨Ç «øÄĞ Å¢¨Éî¦º¡ø"
-
-#: bonobo/bonobo-exception.c:218
-msgid "Command is insensitive"
-msgstr "¸ğ¼¨Ç ¯½÷Å¢ûÇ¡¾Ğ"
-
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:216
 msgid "incorrect data type"
 msgstr "À¢¨ÆÂ¡É ¾Ã× Å¨¸"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:219
 msgid "stream not found"
 msgstr "µ¨¼ ¸¡½Å¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:223
 msgid "property not found"
 msgstr "ÀñÒ ¸¡½Å¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:232
-msgid "property has invalid type"
-msgstr "ÀñÀ¢ø ¦ºøÖÀÊÂ¡¸¡¾ Å¨¸"
-
-#: bonobo/bonobo-exception.c:235
-#, fuzzy
-msgid "property is read only"
-msgstr "ÀñÒ ¸¡½Å¢ø¨Ä"
-
-#: bonobo/bonobo-exception.c:238
-msgid "config database backend failed "
-msgstr "config database backend failed "
-
-#: bonobo/bonobo-exception.c:242
+#: bonobo/bonobo-exception.c:227
 msgid "Moniker interface cannot be found"
 msgstr "Moniker ­¨¼Ó¸õ ¸ñÎÀ¢Êì¸ ÓÊÂÅ¢ø¨Ä"
 
-#: bonobo/bonobo-exception.c:245
+#: bonobo/bonobo-exception.c:230
 msgid "Moniker activation timed out"
 msgstr "Moniker àñÎ ¦ºöÔõ §¿Ãõ ÓÊÅ¨¼ó¾Ğ"
 
-#: bonobo/bonobo-exception.c:248
+#: bonobo/bonobo-exception.c:233
 msgid "Syntax error within moniker"
 msgstr "Moniker ¯û§Ç ¦¾¡¼Ã¢Âø À¢¨Æ"
 
-#: bonobo/bonobo-exception.c:251
+#: bonobo/bonobo-exception.c:236
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker has an unknown moniker prefix"
 
-#: bonobo/bonobo-exception.c:275
+#: bonobo/bonobo-exception.c:260
 msgid "Error checking error; no exception"
 msgstr "À¢¨ÆÀ¡÷ìÌõ§À¡Ğ À¢¨Æ; Å¢¾¢Å¢ÄìÌ ¸¢¨¼Â¡Ğ"
 
-#: bonobo/bonobo-exception.c:284
+#: bonobo/bonobo-exception.c:269
 #, fuzzy
 msgid "General activation error with no description"
 msgstr "­ÄìÌ Å¢ÅÃ¢ôÀ¢ø ¦¾¡¼Ã¢Âø À¢¨Æ"
@@ -151,37 +130,52 @@ msgstr "­ÄìÌ Å¢ÅÃ¢ôÀ¢ø ¦¾¡¼Ã¢Âø À¢¨Æ"
 msgid "Could not initialize Bonobo"
 msgstr "¦À¡§É¡§À¡Å¢ı ¦¾¡¼ì¸Á¾¢ôÀÇ¢ì¸ ÓÊÂÅ¢ø¨Ä"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:1
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP Moniker"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:2
-msgid "ORB IOR handling moniker"
-msgstr "ORB IOR handling moniker"
-
-#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
 msgid "Standard Moniker factory"
 msgstr "¦ºó¾Ã Moniker ¦¾¡Æ¢üº¡¨Ä"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
 msgid "generic Oaf activation moniker"
 msgstr "ÅÊÅ¢Âø Oaf àñÎ ¦ºöÔõ moniker"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:5
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
 msgid "generic Oaf query moniker"
 msgstr "ÅÊÅ¢Âø Oaf Å¢ÉÅø moniker"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:6
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
 msgid "generic factory 'new' moniker"
 msgstr "ÅÊÅ¢Âø ¦¾¡Æ¢üº¡¨Ä 'Ò¾¢Â' moniker"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:7
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
 msgid "generic item moniker"
 msgstr "ÅÊÅ¢Âø ¯ÕôÀÊ moniker"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:8
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "µ¨¼ MonikerExtender"
+
+#~ msgid "Unknown command or verb"
+#~ msgstr "¦¾Ã¢Â¡¾ ¸ğ¼¨Ç «øÄĞ Å¢¨Éî¦º¡ø"
+
+#~ msgid "Command is insensitive"
+#~ msgstr "¸ğ¼¨Ç ¯½÷Å¢ûÇ¡¾Ğ"
+
+#~ msgid "property has invalid type"
+#~ msgstr "ÀñÀ¢ø ¦ºøÖÀÊÂ¡¸¡¾ Å¨¸"
+
+#, fuzzy
+#~ msgid "property is read only"
+#~ msgstr "ÀñÒ ¸¡½Å¢ø¨Ä"
+
+#~ msgid "config database backend failed "
+#~ msgstr "config database backend failed "
+
+#~ msgid "ORB IOR handling moniker"
+#~ msgstr "ORB IOR handling moniker"
 
 #~ msgid "The User canceled the save"
 #~ msgstr "ÀÂÉ÷ §ºÁ¢ô¨À ¿£ì¸¢Å¢ğ¼¡÷"

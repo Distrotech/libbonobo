@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.101.2\n"
-"POT-Creation-Date: 2001-08-18 11:31+0200\n"
+"POT-Creation-Date: 2001-08-07 15:33-0400\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -89,59 +89,39 @@ msgstr "descripción de la interfaz de usurio XML mal construída"
 msgid "invalid path to XML user interface element"
 msgstr "ruta erronea al elemento de la interfaz de usurio XML"
 
-#: bonobo/bonobo-exception.c:215
-msgid "Unknown command or verb"
-msgstr "Comando desconocido"
-
-#: bonobo/bonobo-exception.c:218
-msgid "Command is insensitive"
-msgstr "Command es insensitivo"
-
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:216
 msgid "incorrect data type"
 msgstr "tipo de dato incorrecto"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:219
 msgid "stream not found"
 msgstr "flujo de datos no encontrado"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:223
 msgid "property not found"
 msgstr "propiedad no encontrada"
 
-#: bonobo/bonobo-exception.c:232
-msgid "property has invalid type"
-msgstr "propiedad con tipo inválido"
-
-#: bonobo/bonobo-exception.c:235
-msgid "property is read only"
-msgstr "propiedad de solo lectura"
-
-#: bonobo/bonobo-exception.c:238
-msgid "config database backend failed "
-msgstr "el manejador de la base de datos ha fallado "
-
-#: bonobo/bonobo-exception.c:242
+#: bonobo/bonobo-exception.c:227
 msgid "Moniker interface cannot be found"
 msgstr "Interfaz para el moniker no encontrada"
 
-#: bonobo/bonobo-exception.c:245
+#: bonobo/bonobo-exception.c:230
 msgid "Moniker activation timed out"
 msgstr "El tiempo de activación del moniker ha expirado"
 
-#: bonobo/bonobo-exception.c:248
+#: bonobo/bonobo-exception.c:233
 msgid "Syntax error within moniker"
 msgstr "Error de sintaxis en el moniker"
 
-#: bonobo/bonobo-exception.c:251
+#: bonobo/bonobo-exception.c:236
 msgid "Moniker has an unknown moniker prefix"
 msgstr "El moniker tiene un prefijo de moniker desconocido"
 
-#: bonobo/bonobo-exception.c:275
+#: bonobo/bonobo-exception.c:260
 msgid "Error checking error; no exception"
 msgstr "Error al comprobar el error; no hay excepción"
 
-#: bonobo/bonobo-exception.c:284
+#: bonobo/bonobo-exception.c:269
 msgid "General activation error with no description"
 msgstr "Error de activación general sin descripción"
 
@@ -149,3 +129,45 @@ msgstr "Error de activación general sin descripción"
 msgid "Could not initialize Bonobo"
 msgstr "No pude inicializar Bonobo"
 
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+msgid "HTTP Moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+msgid "Standard Moniker factory"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
+msgid "generic Oaf activation moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
+msgid "generic Oaf query moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+msgid "generic factory 'new' moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+msgid "generic item moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+msgid "stream MonikerExtender"
+msgstr ""
+
+#~ msgid "Unknown command or verb"
+#~ msgstr "Comando desconocido"
+
+#~ msgid "Command is insensitive"
+#~ msgstr "Command es insensitivo"
+
+#~ msgid "property has invalid type"
+#~ msgstr "propiedad con tipo inválido"
+
+#~ msgid "property is read only"
+#~ msgstr "propiedad de solo lectura"
+
+#~ msgid "config database backend failed "
+#~ msgstr "el manejador de la base de datos ha fallado "
