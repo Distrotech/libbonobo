@@ -26,7 +26,13 @@ to the process;
 
 * OAF_BARRIER_INIT
 
-	Set this environment variable to 1, and set a breakpoint
-in <FIXME>
+	Set this environment variable to 1. Anything using OAF will
+then hang in `oaf_init'. You can then attach to the process and
+execute the gdb command
+
+        p barrier=0
+
+After which you can set breakpoints to taste, or single-step. This is
+really useful for debugging the initial startup of oafd.
 
 

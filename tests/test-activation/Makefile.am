@@ -1,4 +1,5 @@
-noinst_PROGRAMS=oaf-empty-server oaf-test-client oaf-run-query
+noinst_PROGRAMS=oaf-empty-server oaf-test-client
+bin_PROGRAMS=oaf-run-query
 
 oaf_test_client_SOURCES=oaf-test-client.c empty-common.c empty.h empty-stubs.c
 
