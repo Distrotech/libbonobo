@@ -1,3 +1,7 @@
+2002-05-16  Michael Meeks  <michael@ximian.com>
+
+	* doc/NAMESPACE: add GNOME_AbiWord
+
 2002-05-13  Jaka Mocnik  <jaka@gnu.org>
 
 	* bonobo/bonobo-debug.[ch]: debugging print function and parsing of

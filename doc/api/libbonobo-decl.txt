@@ -1596,9 +1596,9 @@ BonoboArgType      a,BonoboArgType      b,CORBA_Environment *opt_ev
 <NAME>Bonobo_Stream_SeekType</NAME>
    typedef enum
    {
-      Bonobo_Stream_SEEK_SET,
-      Bonobo_Stream_SEEK_CUR,
-      Bonobo_Stream_SEEK_END
+      Bonobo_Stream_SeekSet,
+      Bonobo_Stream_SeekCur,
+      Bonobo_Stream_SeekEnd
    }
    Bonobo_Stream_SeekType;
 </ENUM>
