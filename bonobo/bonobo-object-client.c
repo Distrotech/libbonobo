@@ -86,7 +86,7 @@ gnome_object_activate_with_goad_id (GoadServerList *list,
 	if (corba_object == CORBA_OBJECT_NIL)
 		return NULL;
 	
-	object = gtk_type_new (gnome_object_get_type ());
+	object = gtk_type_new (gnome_object_client_get_type ());
 	gnome_object_client_construct (object, corba_object);
 
 	return object;
