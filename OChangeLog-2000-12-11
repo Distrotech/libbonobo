@@ -1,3 +1,13 @@
+2000-06-20  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_new_view_full),
+	(bonobo_client_site_get_verbs): get the Embeddable interface from
+	the aggregate before using it (bonobo_client_site_bind_embeddable):
+	kill confusing 'bonobo_object' copy. Change the unref to a ref on
+	the embeddable object. (bonobo_client_site_destroy): unref the bound object
+	(bonobo_client_site_init): init bound_object to NULL.
+	Many thanks to Erwin Ireland (eire@helixcode.com)
+
 2000-06-18  John Sullivan  <sullivan@eazel.com>
 
 	* bonobo/bonobo-uih-menu.c: (bonobo_ui_handler_menu_get_callback):

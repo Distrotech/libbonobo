@@ -216,6 +216,3 @@ bonobo_arg_to_gtk (GtkArg *a, const BonoboArg *arg)
 		break;
 	}
 }
-
-
-
