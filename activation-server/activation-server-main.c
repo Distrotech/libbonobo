@@ -90,6 +90,8 @@ main (int argc, char *argv[])
 	FILE *fh;
 	struct sigaction sa;
 
+	setlocale(LC_ALL, "");
+
 	/* internationalization. */
         bindtextdomain (PACKAGE, OAF_LOCALEDIR);
         textdomain (PACKAGE);
