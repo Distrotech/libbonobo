@@ -17,6 +17,7 @@ idl_DATA =			\
 	bonobo-progressive.idl	\
 	bonobo-ui-handler.idl	\
 	bonobo-property.idl	\
-	bonobo-desktop.idl
+	bonobo-desktop.idl	\
+	bonobo-print.idl
 
 EXTRA_DIST = $(idl_DATA)
