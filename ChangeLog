@@ -1,4 +1,5 @@
 2001-06-28  Michael Meeks  <michael@ximian.com>
+	[ also by Laszlo PETER <Laszlo.Peter@ireland.sun.com> ]
 
 	* bonobo/bonobo-object.h: update for new glib paths, we require
 	HEAD glib now.
