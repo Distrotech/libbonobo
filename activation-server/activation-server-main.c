@@ -19,7 +19,10 @@ static void debug_queries (void);
 
 /* Option values */
 static char *od_source_dir = NULL;
-static char *ac_evaluate = NULL, *od_domain = "session";
+#ifdef OAF_DEBUG
+static char *ac_evaluate = NULL;
+#endif
+static char *od_domain = "session";
 static int server_ac = 0, ior_fd = -1, server_ns = 1;
 
 static struct poptOption options[] = {
