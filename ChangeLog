@@ -1,3 +1,12 @@
+2001-05-01  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/Makefile.am (libbonobo_2_la_SOURCES): Added
+	bonobo-object-directory.c.
+
+	* bonobo/bonobo-object-directory.c
+	(bonobo_directory_find_for_file): #ifdef FIXME this whole
+	function.
+
 2001-04-23  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-generic-factory.h: Remove redundant

@@ -130,6 +130,7 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-moniker-util.c		\
 	bonobo-object.c			\
 	bonobo-object-client.c		\
+	bonobo-object-directory.c	\
 	bonobo-object-io.c		\
 	bonobo-persist-file.c		\
 	bonobo-persist-stream.c		\

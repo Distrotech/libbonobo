@@ -14,10 +14,8 @@
 
 #include "config.h"
 #include <glib.h>
-#include <libgnome/bonobo-defs.h>
-#define GNOME_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
-#include <libgnome/bonobo-i18n.h>
-#include <libgnome/gnome-mime.h>
+#define BONOBO_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
+#include <bonobo/bonobo-i18n.h>
 #include "bonobo-object-directory.h"
 #include <liboaf/liboaf.h>
 
@@ -207,7 +205,7 @@ bonobo_directory_get_server_list (const gchar **required_ids)
         return g_list_reverse (retval);
 }
 
-
+#ifdef FIXME
 char *
 bonobo_directory_find_for_file (const char  *fname,
 				const char **required_ids,
@@ -268,6 +266,7 @@ bonobo_directory_find_for_file (const char  *fname,
         
         return iid;
 }
+#endif
 
 CORBA_Object
 od_server_activate_with_id (const gchar       *iid,
