@@ -247,6 +247,9 @@ bonobo_object_finalize_servant (PortableServer_Servant servant,
 gpointer
 bonobo_object_ref (BonoboObject *object)
 {
+	if (!object)
+		return object;
+
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), object);
 	g_return_val_if_fail (object->priv->ao->ref_count > 0, object);
 
@@ -268,13 +271,14 @@ bonobo_object_ref (BonoboObject *object)
  *
  * Decrements the reference count for the aggregate BonoboObject.
  */
-void
+gpointer
 bonobo_object_unref (BonoboObject *object)
 {
-#ifdef BONOBO_REF_HOOKS
-	bonobo_object_trace_refs (object, "local", 0, FALSE);
-#else
+#ifndef BONOBO_REF_HOOKS
 	BonoboAggregateObject *ao;
+
+	if (!object)
+		return NULL;
 
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
 
@@ -293,11 +297,14 @@ bonobo_object_unref (BonoboObject *object)
 		if (ao->ref_count == 0)
 			bonobo_object_finalize_internal (ao);
 	}
+	return NULL;
+#else
+	return bonobo_object_trace_refs (object, "local", 0, FALSE);
 #endif /* BONOBO_REF_HOOKS */
 }
 #endif /* bonobo_object_unref */
 
-void
+gpointer
 bonobo_object_trace_refs (BonoboObject *object,
 			  const char   *fn,
 			  int           line,
@@ -306,6 +313,9 @@ bonobo_object_trace_refs (BonoboObject *object,
 #ifdef BONOBO_REF_HOOKS
 	BonoboAggregateObject *ao;
 	BonoboDebugRefData *descr;
+
+	if (!object)
+		return NULL;
 	
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	ao = object->priv->ao;
@@ -326,6 +336,8 @@ bonobo_object_trace_refs (BonoboObject *object,
 			object, ao,
 		        G_OBJECT_TYPE_NAME (object),
 			ao->ref_count, fn, line);
+
+		return object;
 
 	} else { /* unref */
 		bonobo_debug_print ("unref", "[%p]:[%p]:%s from %d at %s:%d", 
@@ -366,12 +378,16 @@ bonobo_object_trace_refs (BonoboObject *object,
 						    "[%p] already finalized", ao);
 			}
 		}
+
+		return NULL;
 	}
 #else
 	if (ref)
-		bonobo_object_ref (object);
-	else
+		return bonobo_object_ref (object);
+	else {
 		bonobo_object_unref (object);
+		return NULL;
+	}
 #endif
 }
 

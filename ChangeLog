@@ -1,5 +1,14 @@
 2001-11-01  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-object.c (bonobo_object_ref): tolerate
+	NULL silently.
+	(bonobo_object_unref): ditto & return NULL.
+	(bonobo_object_trace_refs): upd.
+
+	* tests/test-object.c (main): upd.
+
+2001-11-01  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-main.c (bonobo_shutdown): rename to
 	(bonobo_debug_shutdown): to please Maciej, upd to use
 	the new bonobo_activation shutdown API.

@@ -64,6 +64,9 @@ main (int argc, char *argv [])
 		g_assert (bonobo_object (object) == object);
 		g_assert (bonobo_object (&object->servant) == object);
 
+		g_assert (bonobo_object_ref (object) == object);
+		g_assert (bonobo_object_unref (BONOBO_OBJECT (object)) == NULL);
+
 		bonobo_object_unref (BONOBO_OBJECT (object));
 	}
 
