@@ -1,3 +1,19 @@
+1999-09-15  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* bonobo/test-container.c (add_pdf_cmd): Update to application-x-pdf,
+	fixup menu shortcut.
+
+1999-09-13  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* bonobo/Makefile.am: Add bonobo created file clean.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_new_view): Use
+	gnome_object_unref. (gnome_client_site_new_item): ditto.
+
+	* components/image-x-png/bonobo-image-x-png.c (get_pixbuf): Helper fn.
+	(redraw_view, configure_size): use it
+	(view_size_query_cb): Implement size query (view_factory): ditto.
+
 1999-09-14  Miguel de Icaza  <miguel@gnu.org>
 
 	* bonobo/gnome-canvas-component.c (gcc_render): If the is_buf is
