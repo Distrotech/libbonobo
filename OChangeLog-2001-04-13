@@ -1,3 +1,11 @@
+2001-01-02  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/Makefile.am: Sort out cockup with distributing
+	generated oafinfo file.
+
+	* monikers/bonobo-moniker-std.c (bonobo_std_moniker_factory): 
+	remove redundant factory var.
+
 2000-12-29  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-event-source.c: Include listener to kill warning.

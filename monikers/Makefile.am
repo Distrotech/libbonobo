@@ -7,10 +7,13 @@ INCLUDES =                                              \
         -I$(includedir)                                 \
 	$(BONOBO_TEST_CFLAGS)
 
-OAF_FILES =					\
-	Bonobo_Moniker_std.oafinfo		\
+NON_GENERATED_OAF_FILES =			\
 	Bonobo_Moniker_gzip.oafinfo		\
 	Bonobo_Moniker_http.oafinfo		
+
+OAF_FILES =					\
+	Bonobo_Moniker_std.oafinfo		\
+	$(NON_GENERATED_OAF_FILES)
 
 Bonobo_Moniker_std.oafinfo : $(srcdir)/Bonobo_Moniker_std.oafinfo.in 
 	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" \
@@ -87,5 +90,5 @@ moniker_test_SOURCES =			\
 moniker_test_LDADD =			\
 	$(moniker_ldadd)
 
-EXTRA_DIST = $(OAF_FILES)                             	\
+EXTRA_DIST = $(NON_GENERATED_OAF_FILES)		\
 	     Bonobo_Moniker_std.oafinfo.in     		
