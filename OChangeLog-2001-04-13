@@ -1,3 +1,9 @@
+2001-02-17  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-zoomable.c: Fix up some broken API docs.
+
+	* bonobo/bonobo-ui-util.c: fully document API.
+
 2001-02-16  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-property-bag-xml.c (encode_subtypes): split from
