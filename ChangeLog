@@ -1,3 +1,9 @@
+2004-01-26  Michael Meeks  <michael@ximian.com>
+
+	* activation-server/activation-server-main.c
+	(build_src_dir): re-order compile-time prefix so it
+	doesn't screw people (ta. Chris, Dave et. al.).
+
 2004-01-21  Anders Carlsson  <andersca@gnome.org>
 
 	* bonobo-activation/bonobo-activation-init.c:

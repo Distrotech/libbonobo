@@ -99,27 +99,27 @@ build_src_dir (void)
         GString *real_od_source_dir;
         int i;
 
-        real_od_source_dir = g_string_new (SERVERINFODIR);
+        real_od_source_dir = g_string_new ("");
         env_od_source_dir = g_getenv ("BONOBO_ACTIVATION_PATH");
         gnome_env_od_source_dir = g_getenv ("GNOME2_PATH");
         config_file_od_source_dir = object_directory_load_config_file ();
 
         if (od_source_dir) {
-                g_string_append_c (real_od_source_dir, ':');
                 g_string_append (real_od_source_dir, od_source_dir);
+                g_string_append_c (real_od_source_dir, ':');
         }
 
         if (env_od_source_dir) {
-                g_string_append_c (real_od_source_dir, ':');
                 g_string_append (real_od_source_dir,
                                  env_od_source_dir);
+                g_string_append_c (real_od_source_dir, ':');
         }
 
         if (config_file_od_source_dir) {
-                g_string_append_c (real_od_source_dir, ':');
                 g_string_append (real_od_source_dir,
                                  config_file_od_source_dir);
                 g_free (config_file_od_source_dir);
+                g_string_append_c (real_od_source_dir, ':');
         }
 
         if (gnome_env_od_source_dir) {
@@ -132,10 +132,12 @@ build_src_dir (void)
                                          "/lib/bonobo/servers:");
                 }
                 g_strfreev (gnome_dirs);
-                g_string_append_c (real_od_source_dir, ':');
                 g_string_append (real_od_source_dir,
                                  gnome_od_source_dir->str);
+                g_string_append_c (real_od_source_dir, ':');
         }
+
+        g_string_append (real_od_source_dir, SERVERINFODIR);
 
         return real_od_source_dir;
 }
