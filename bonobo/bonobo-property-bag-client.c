@@ -8,6 +8,7 @@
  */
 #include <config.h>
 #include <stdarg.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-property-bag-client.h>
 #include <bonobo/bonobo-property-types.h>
 
@@ -39,7 +40,7 @@ bonobo_property_bag_client_get_properties (Bonobo_PropertyBag       pb,
 	}
 
 	props = Bonobo_PropertyBag_getProperties (pb, real_ev);
-	if (real_ev->_major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX (real_ev)) {
 		if (!ev)
 			CORBA_exception_free (&tmp_ev);
 		return NULL;
@@ -56,7 +57,7 @@ bonobo_property_bag_client_get_properties (Bonobo_PropertyBag       pb,
 			prop_list,
 			CORBA_Object_duplicate (props->_buffer [i], real_ev));
 
-		if (real_ev->_major != CORBA_NO_EXCEPTION) {
+		if (BONOBO_EX (real_ev)) {
 			CORBA_Environment ev2;
 			GList *curr;
 
@@ -109,7 +110,7 @@ bonobo_property_bag_client_free_properties (GList *list)
 
 		CORBA_Object_release (prop, &ev);
 
-		if (ev._major != CORBA_NO_EXCEPTION) {
+		if (BONOBO_EX (&ev)) {
 			g_warning ("bonobo_property_bag_client_free_properties: Exception releasing objref!");
 			CORBA_exception_free (&ev);
 			return;
@@ -155,7 +156,7 @@ bonobo_property_bag_client_get_property_names (Bonobo_PropertyBag       pb,
 
 	names = Bonobo_PropertyBag_getPropertyNames (pb, real_ev);
 
-	if (real_ev->_major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX (real_ev)) {
 		if (!ev)
 			CORBA_exception_free (&tmp_ev);
 
@@ -207,7 +208,7 @@ bonobo_property_bag_client_get_property (Bonobo_PropertyBag       pb,
 
 	prop = Bonobo_PropertyBag_getPropertyByName (pb, property_name, ev);
 
-	if (real_ev->_major != CORBA_NO_EXCEPTION)
+	if (BONOBO_EX (real_ev))
 		prop = CORBA_OBJECT_NIL;
 
 	if (!ev)
@@ -246,7 +247,7 @@ bonobo_property_bag_client_persist (Bonobo_PropertyBag       pb,
 
 	persist = Bonobo_Unknown_queryInterface (pb, "IDL:Bonobo/PersistStream:1.0", ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION ||
+	if (BONOBO_EX(ev) ||
 	    persist   == CORBA_OBJECT_NIL) {
 		g_warning ("Bonobo_PropertyBag     : No PersistStream interface "
 			   "found on remote PropertyBag!");
@@ -255,7 +256,7 @@ bonobo_property_bag_client_persist (Bonobo_PropertyBag       pb,
 
 	Bonobo_PersistStream_save (persist, stream, "", ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX(ev)) {
 		g_warning ("Bonobo_PropertyBag     : Exception caught while persisting "
 			   "remote PropertyBag!");
 		return;
@@ -282,7 +283,7 @@ bonobo_property_bag_client_depersist (Bonobo_PropertyBag       pb,
 	persist = Bonobo_Unknown_queryInterface (
 		pb, "IDL:Bonobo/PersistStream:1.0", ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION ||
+	if (BONOBO_EX(ev) ||
 	    persist    == CORBA_OBJECT_NIL) {
 		g_warning ("Bonobo_PropertyBag     : No PersistStream interface "
 			   "found on remote PropertyBag!");
@@ -291,7 +292,7 @@ bonobo_property_bag_client_depersist (Bonobo_PropertyBag       pb,
 
 	Bonobo_PersistStream_load (persist, stream, "", ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX(ev)) {
 		g_warning ("Bonobo_PropertyBag     : Exception caught while persisting "
 			   "remote PropertyBag!");
 		return;
@@ -338,7 +339,7 @@ bonobo_property_bag_client_get_property_type (Bonobo_PropertyBag       pb,
 
 	tc = Bonobo_Property_getType (prop, real_ev);
 
-	if (real_ev->_major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX (real_ev)) {
 		g_warning ("bonobo_property_bag_client_get_property_type: Exception getting TypeCode!");
 
 		CORBA_Object_release (prop, real_ev);
@@ -398,7 +399,7 @@ bonobo_property_bag_client_get_field_any (Bonobo_PropertyBag       pb,
 	else
 		any = Bonobo_Property_getDefault (prop, real_ev);
 
-	if (real_ev->_major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX (real_ev)) {
 		g_warning ("bonobo_property_bag_client_get_field_any: Exception getting property value!");
 		CORBA_Object_release (prop, real_ev);
 		if (!ev)
@@ -536,7 +537,7 @@ bonobo_property_bag_client_set_value_any (Bonobo_PropertyBag       pb,
 
 	Bonobo_Property_setValue (prop, value, real_ev);
 
-	if (real_ev->_major != CORBA_NO_EXCEPTION)
+	if (BONOBO_EX (real_ev))
 		g_warning ("bonobo_property_bag_client_set_value_any: Exception setting property!");
 
 	CORBA_Object_release (prop, real_ev);
@@ -629,7 +630,7 @@ bonobo_property_bag_client_get_docstring (Bonobo_PropertyBag       pb,
 
 	docstr = Bonobo_Property_getDocString (prop, real_ev);
 
-	if (real_ev->_major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX (real_ev)) {
 		if (!ev)
 			g_warning ("bonobo_property_bag_client_get_doc_string: "
 				   "Exception getting doc string!");
@@ -675,7 +676,7 @@ bonobo_property_bag_client_get_flags (Bonobo_PropertyBag       pb,
 
 	flags = Bonobo_Property_getFlags (prop, real_ev);
 
-	if (real_ev->_major != CORBA_NO_EXCEPTION)
+	if (BONOBO_EX (real_ev))
 		flags = 0;
 
 	CORBA_Object_release (prop, real_ev);

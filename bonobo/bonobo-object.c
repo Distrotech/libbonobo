@@ -13,6 +13,7 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
 #include <gtk/gtktypeutils.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include "Bonobo.h"
@@ -450,7 +451,7 @@ bonobo_object_get_local_interface_from_objref (BonoboObject *object,
 			return tryme;
 		}
 
-		if (ev._major != CORBA_NO_EXCEPTION) {
+		if (BONOBO_EX (&ev)) {
 			CORBA_exception_free (&ev);
 			return NULL;
 		}
@@ -906,7 +907,7 @@ bonobo_object_query_interface (BonoboObject *object, const char *repo_id)
 
        CORBA_exception_init(&ev);
        retval = Bonobo_Unknown_queryInterface (object->corba_objref, (CORBA_char *)repo_id, &ev);
-       if (ev._major != CORBA_NO_EXCEPTION)
+       if (BONOBO_EX (&ev))
                retval = CORBA_OBJECT_NIL;
        CORBA_exception_free (&ev);
 
@@ -945,7 +946,7 @@ bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environme
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
 
-	if (ev->_major == CORBA_NO_EXCEPTION)
+	if (!BONOBO_EX (ev))
 		return;
 
 	if (ev->_major == CORBA_SYSTEM_EXCEPTION)
@@ -975,9 +976,9 @@ gnome_unknown_ping (Bonobo_Unknown object)
 	alive = FALSE;
 	CORBA_exception_init (&ev);
 	Bonobo_Unknown_ref (object, &ev);
-	if (ev._major == CORBA_NO_EXCEPTION) {
+	if (!BONOBO_EX (&ev)) {
 		Bonobo_Unknown_unref (object, &ev);
-		if (ev._major == CORBA_NO_EXCEPTION)
+		if (!BONOBO_EX (&ev))
 			alive = TRUE;
 	}
 	CORBA_exception_free (&ev);

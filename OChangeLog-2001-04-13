@@ -1,3 +1,13 @@
+2000-12-13  Dietmar Maurer <dietmar@maurer-it.com>
+
+	* bonobo/bonobo-property-bag-xml.c 
+	(bonobo_property_bag_xml_encode_any): argument is const 
+
+	* bonobo/*.c: use BONOBO_EX ()
+	
+	* bonobo/bonobo-property-bag.c: removed the poa member from
+	_BonoboPropertyBagPrivate (replaced by transient)
+
 2000-12-13  Michael Meeks  <michael@helixcode.com>
 
 	* configure.in (orbit_version): Depend on the as yet unreleased

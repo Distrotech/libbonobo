@@ -123,7 +123,7 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 {
 	g_return_val_if_fail (ev != NULL, NULL);
 
-	if (ev->_major == CORBA_NO_EXCEPTION)
+	if (!BONOBO_EX (ev))
 		return g_strdup (_("Error checking error; no exception"));
 
 	/* Oaf */

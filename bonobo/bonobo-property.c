@@ -9,6 +9,7 @@
 
 #include <config.h>
 #include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-property-bag.h>
 
 typedef struct {
@@ -155,7 +156,7 @@ bonobo_property_servant_new (PortableServer_POA     poa,
 	((POA_Bonobo_Property *) servant)->vepv = bonobo_property_get_vepv ();
 	
 	POA_Bonobo_Property__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX (&ev)) {
 		g_warning ("BonoboProperty: Could not initialize Property servant");
 		g_free (servant->property_name);
 		g_free (servant);
@@ -179,7 +180,7 @@ bonobo_property_servant_destroy (PortableServer_Servant  servant,
 	CORBA_exception_init (&ev);
 
 	POA_Bonobo_Property__fini ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX (&ev)) {
 		g_warning ("BonoboProperty: Could not deconstruct Property servant");
 		CORBA_exception_free (&ev);
 		return;

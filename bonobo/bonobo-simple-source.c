@@ -178,7 +178,7 @@ create_gnome_simple_data_source (BonoboObject *object)
 
 	CORBA_exception_init (&ev);
 	POA_GNOME_SimpleDataSource__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (ev)){
 		g_free (servant);
 		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;

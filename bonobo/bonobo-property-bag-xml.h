@@ -7,7 +7,7 @@
 BEGIN_GNOME_DECLS
 
 BonoboUINode *bonobo_property_bag_xml_encode_any (BonoboUINode      *opt_parent,
-						  CORBA_any         *any,
+						  const CORBA_any         *any,
 						  CORBA_Environment *ev);
 
 CORBA_any    *bonobo_property_bag_xml_decode_any (BonoboUINode      *node,

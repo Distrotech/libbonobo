@@ -19,6 +19,7 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
 #include <gtk/gtkwidget.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-item-container.h>
@@ -48,7 +49,7 @@ create_bonobo_item_container (BonoboObject *object)
 	servant->vepv = &bonobo_item_container_vepv;
 
 	POA_Bonobo_ItemContainer__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (&ev)){
 		g_free (servant);
 		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;

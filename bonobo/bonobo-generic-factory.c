@@ -18,6 +18,7 @@
 #include <gtk/gtkmarshal.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-generic-factory.h>
 #include <liboaf/liboaf.h>
 
@@ -71,7 +72,7 @@ create_bonobo_generic_factory (BonoboObject *object)
 	servant->vepv = &bonobo_generic_factory_vepv;
 
 	POA_GNOME_ObjectFactory__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX (&ev)) {
 		g_free (servant);
 		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;

@@ -9,6 +9,7 @@
 #include <config.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-object-io.h>
 #include <bonobo/bonobo-object-client.h>
 #include <bonobo/bonobo-stream-client.h>
@@ -40,7 +41,7 @@ bonobo_persist_stream_save_object_iid (Bonobo_Stream target,
 		
 	bonobo_stream_client_write (target, copy, len, ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX(ev)){
 		CORBA_exception_free (ev);
 		return;
 	}
@@ -67,7 +68,7 @@ bonobo_persist_stream_load_object_iid (Bonobo_Stream source)
 
 	CORBA_exception_init (&ev);
 	Bonobo_Stream_read (source, sizeof (gint32), &buf, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION ||
+	if (BONOBO_EX (&ev) ||
 	    buf->_length != sizeof (gint32)){
 		CORBA_exception_free (&ev);
 		return NULL;
@@ -77,7 +78,7 @@ bonobo_persist_stream_load_object_iid (Bonobo_Stream source)
 	CORBA_free (buf);
 	
 	Bonobo_Stream_read (source, n, &buf, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION ||
+	if (BONOBO_EX (&ev) ||
 	    buf->_length != n) {
 		CORBA_exception_free (&ev);
 		return NULL;
@@ -123,7 +124,7 @@ bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream, Bonobo_Stream
 	bonobo_persist_stream_save_object_iid (target, object_iid, &ev);
 
 	Bonobo_PersistStream_save (pstream, target, "", &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (&ev)){
 		CORBA_exception_free (&ev);
 		return GNOME_IOERR_GENERAL;
 	}

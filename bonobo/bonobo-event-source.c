@@ -11,6 +11,7 @@
  */
 #include <config.h>
 #include <gtk/gtksignal.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-event-source.h>
 
 static BonoboObjectClass    *bonobo_event_source_parent_class;
@@ -270,7 +271,7 @@ bonobo_event_source_corba_object_create (BonoboObject *object)
         CORBA_exception_init (&ev);
 
         POA_Bonobo_EventSource__init ((PortableServer_Servant) servant, &ev);
-        if (ev._major != CORBA_NO_EXCEPTION) {
+        if (BONOBO_EX (&ev)) {
                 g_free (servant);
                 CORBA_exception_free (&ev);
                 return CORBA_OBJECT_NIL;

@@ -12,6 +12,7 @@
 
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo-stream-client.h>
 
 #define CORBA_BLOCK_SIZE 65536
@@ -55,7 +56,7 @@ bonobo_stream_client_write (const Bonobo_Stream stream,
 		buf->_maximum = buf->_length;
 
 		Bonobo_Stream_write (stream, buf, ev);
-		if (ev->_major != CORBA_NO_EXCEPTION) {
+		if (BONOBO_EX(ev)) {
 			CORBA_free (buf);
 			return;
 		}
@@ -165,7 +166,7 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 		Bonobo_Stream_read (stream, 1,
 				    &buffer, ev);
 
-		if (ev->_major != CORBA_NO_EXCEPTION)
+		if (BONOBO_EX(ev))
 			break;
 
 		else if (buffer->_length == 0 ||
@@ -178,7 +179,7 @@ bonobo_stream_client_read_string (const Bonobo_Stream stream, char **str,
 		}
 	}
 
-	if (ev->_major != CORBA_NO_EXCEPTION) {
+	if (BONOBO_EX(ev)) {
 		*str = NULL;
 		g_string_free (gstr, TRUE);
 

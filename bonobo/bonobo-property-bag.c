@@ -25,8 +25,6 @@ static GtkObjectClass *parent_class = NULL;
  * Internal data structures.
  */
 struct _BonoboPropertyBagPrivate {
-	PortableServer_POA  poa;
-
 	GHashTable         *props;
 
 	BonoboPropertySetFn set_prop;
@@ -118,7 +116,7 @@ impl_Bonobo_PropertyBag_getProperties (PortableServer_Servant  servant,
 			pb->priv->transient, "IDL:Bonobo/Property:1.0",
 			prop->name, ev);
 
-		if (ev->_major != CORBA_NO_EXCEPTION) {
+		if (BONOBO_EX(ev)) {
 			g_warning ("BonoboPropertyBag: Could not create property objref!");
 			g_list_free (props);
 			CORBA_free (prop_list);
@@ -255,7 +253,7 @@ bonobo_property_bag_create_corba_object (BonoboObject *object)
 	CORBA_exception_init (&ev);
 
 	POA_Bonobo_PropertyBag__init ( (PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (&ev)){
 		CORBA_exception_free (&ev);
 		g_free (servant);
 		return CORBA_OBJECT_NIL;

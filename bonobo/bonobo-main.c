@@ -11,6 +11,7 @@
  */
 #include <config.h>
 
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
@@ -192,7 +193,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	
 	if (CORBA_Object_is_nil ((CORBA_Object) poa, &ev)) {
 		poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
-		if (ev._major != CORBA_NO_EXCEPTION) {
+		if (BONOBO_EX (&ev)) {
 			g_warning ("Can not resolve initial reference to RootPOA");
 			CORBA_exception_free (&ev);
 			return FALSE;
@@ -205,7 +206,7 @@ bonobo_init (CORBA_ORB orb, PortableServer_POA poa, PortableServer_POAManager ma
 	 */
 	if (CORBA_Object_is_nil ((CORBA_Object)manager, &ev)){
 		manager = PortableServer_POA__get_the_POAManager (poa, &ev);
-		if (ev._major != CORBA_NO_EXCEPTION){
+		if (BONOBO_EX (&ev)){
 			g_warning ("Can not get the POA manager");
 			CORBA_exception_free (&ev);
 			return FALSE;
@@ -251,7 +252,7 @@ bonobo_activate (void)
 		return FALSE;
 	}
 	PortableServer_POAManager_activate (__bonobo_poa_manager, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (&ev)){
 		g_warning ("Failed to activate the Bonobo POA manager");
 		CORBA_exception_free (&ev);
 		return FALSE;

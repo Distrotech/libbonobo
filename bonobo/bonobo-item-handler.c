@@ -13,6 +13,7 @@
 #include <gtk/gtkwidget.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-exception.h>
 #include "bonobo-item-handler.h"
 
 static POA_Bonobo_ItemContainer__vepv item_handler_vepv;
@@ -30,7 +31,7 @@ create_bonobo_item_handler (BonoboObject *object)
 	servant->vepv = &item_handler_vepv;
 
 	POA_Bonobo_ItemContainer__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (&ev)){
 		g_free (servant);
 		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;

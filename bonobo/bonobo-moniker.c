@@ -9,6 +9,7 @@
  */
 #include <config.h>
 
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-util.h>
 
@@ -120,7 +121,7 @@ bonobo_moniker_default_get_display_name (BonoboMoniker     *moniker,
 	parent_name = bonobo_moniker_util_get_parent_name (
 		bonobo_object_corba_objref (BONOBO_OBJECT (moniker)), ev);
 
-	if (ev->_major != CORBA_NO_EXCEPTION)
+	if (BONOBO_EX(ev))
 		return NULL;
 
 	if (!parent_name)
@@ -294,7 +295,7 @@ bonobo_moniker_corba_object_create (BonoboObject *object)
 	CORBA_exception_init (&ev);
 
 	POA_Bonobo_Moniker__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (&ev)){
                 g_free (servant);
 		CORBA_exception_free (&ev);
                 return CORBA_OBJECT_NIL;

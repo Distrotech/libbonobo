@@ -11,6 +11,7 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmarshal.h>
+#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-persist-stream.h>
 
 /* Parent GTK object class */
@@ -242,7 +243,7 @@ create_bonobo_persist_stream (BonoboObject *object)
 	CORBA_exception_init (&ev);
 
 	POA_Bonobo_PersistStream__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (&ev)){
 		g_free (servant);
 		CORBA_exception_free (&ev);
 		return CORBA_OBJECT_NIL;

@@ -224,7 +224,7 @@ bonobo_stream_open_full (const char *driver, const char *path, gint flags,
 		stream = p->stream_open (path, flags, mode, my_ev);
 
 	if (!opt_ev) {
-		if (my_ev->_major != CORBA_NO_EXCEPTION)
+		if (BONOBO_EX (my_ev))
 			g_warning ("bonobo_stream_open failed '%s'",
 				   bonobo_exception_get_text (my_ev));
 		CORBA_exception_free (&ev);
@@ -262,7 +262,7 @@ bonobo_stream_corba_object_create (BonoboObject *object)
 	CORBA_exception_init (&ev);
 
 	POA_Bonobo_Stream__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
+	if (BONOBO_EX (&ev)){
                 g_free (servant);
 		CORBA_exception_free (&ev);
                 return CORBA_OBJECT_NIL;
