@@ -1,3 +1,9 @@
+1999-09-23  Miguel de Icaza  <miguel@gnu.org>
+
+	* idl/gnome-embeddable.idl: Embeddables no longer throw a
+	MultiViewNotSupported exception.  These kind of things will be
+	handled by a separate interface.
+
 1999-09-21  Miguel de Icaza  <miguel@gnu.org>
 
 	* idl/gnome-control.idl: New interface, based on Chuck's

@@ -150,6 +150,15 @@ module Canvas {
 		sequence<int32> utiles;
 	};
 
+	struct State {
+		affine item_aff;
+		double pixels_per_unit;
+		double canvas_scroll_x1;
+		double canvas_scroll_y1;
+		long   zoom_xofs, zoom_yofs;
+		long   xoffset, yoffset;
+	};
+
 	interface Item : GNOME::Unknown {
 
 		/** 
@@ -157,7 +166,8 @@ module Canvas {
 		 * 
 		 * Returns the update region.
 		 */
-		ArtUTA update  (in affine aff, in SVP clip_path, in long flags,
+		ArtUTA update  (in State state,
+				in affine aff, in SVP clip_path, in long flags,
 				out double x1, out double y1, out double x2, out double y2);
 
 		void realize (in window_id drawable);
@@ -165,7 +175,10 @@ module Canvas {
 		void map ();
 		void unmap ();
 
-		void draw   (in window_id drawable, in short x, in short y, in short width, in short height);
+		void draw   (in State state,
+			     in window_id drawable, 
+			     in short x, in short y, 
+			     in short width, in short height);
 
 		/**
 		 * render:
@@ -187,9 +200,12 @@ module Canvas {
 		 */
 		boolean contains (in double x, in double y);
 
-		void bounds (out double x1, out double x2, out double y1, out double y2);
+		void bounds (in State state, 
+			     out double x1, out double x2, 
+			     out double y1, out double y2);
 
-		boolean event (in GNOME::Gdk::Event event);
+		boolean event (in State state, 
+			       in GNOME::Gdk::Event event);
 
 		/*
 		 * Notifies this item about the size of the Canvas size on the 
