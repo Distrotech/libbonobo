@@ -1,5 +1,15 @@
 2000-09-16  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-component.c (bonobo_ui_container_path_exists),
+	(bonobo_ui_container_thaw, bonobo_ui_container_freeze): add
+	preconditions.
+
+2000-09-16  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (node_get_id_or_path): g_free not xmlFree.
+
+2000-09-16  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_get_ui_fname): Add a
 	component prefix.
 
