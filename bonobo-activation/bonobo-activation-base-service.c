@@ -343,12 +343,14 @@ oaf_activators_use (const OAFBaseService *base_service, const char **cmd,
 	return retval;
 }
 
-CORBA_Object
-oaf_service_get (const OAFBaseService *base_service)
+static CORBA_Object
+oaf_service_get_internal (const OAFBaseService *base_service,
+                          gboolean              existing_only,
+                          CORBA_Environment    *ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	int i;
-	CORBA_Environment *ev, myev;
+	CORBA_Environment myev, important_error_ev;
 	gboolean ne;
 
 	g_return_val_if_fail (base_service, CORBA_OBJECT_NIL);
@@ -362,7 +364,8 @@ oaf_service_get (const OAFBaseService *base_service)
 		return retval;
 
 	CORBA_exception_init (&myev);
-	ev = &myev;
+        CORBA_exception_init (&important_error_ev);
+        
 	retval = existing_check (base_service, &activatable_servers[i]);
 	if (!CORBA_Object_non_existent (retval, ev))
 		goto out;
@@ -371,16 +374,16 @@ oaf_service_get (const OAFBaseService *base_service)
 
 	retval = oaf_registration_check (base_service, &myev);
 	ne = CORBA_Object_non_existent (retval, &myev);
-	if (ne) {
+	if (ne && !existing_only) {
 		CORBA_Object race_condition;
 
 		CORBA_Object_release (retval, &myev);
-
+                
 		retval =
 			oaf_activators_use (base_service,
 					    activatable_servers[i].cmd,
 					    activatable_servers[i].fd_arg,
-					    ev);
+					    &important_error_ev);
 
 		race_condition = oaf_registration_check (base_service, &myev);
 
@@ -398,10 +401,43 @@ oaf_service_get (const OAFBaseService *base_service)
 		oaf_existing_set (base_service, &activatable_servers[i], retval, ev);
 
       out:
-	CORBA_exception_free (&myev);
+        /* If we overwrote ev with some stupid junk, replace
+         * it with the real error
+         */
+        if (important_error_ev._major != CORBA_NO_EXCEPTION) {
+                CORBA_exception_free (ev);
+                /* This transfers memory ownership */
+                *ev = important_error_ev;
+        }
+        
+        CORBA_exception_free (&myev);
 
 	return retval;
 }
+
+CORBA_Object
+oaf_service_get (const OAFBaseService *base_service)
+{
+        CORBA_Environment ev;
+        CORBA_Object obj;
+        
+        CORBA_exception_init (&ev);
+        
+        obj = oaf_service_get_internal (base_service, FALSE, &ev);
+
+        CORBA_exception_free (&ev);
+
+        return obj;
+}
+
+CORBA_Object
+oaf_internal_service_get_extended (const OAFBaseService *base_service,
+                                   gboolean              existing_only,
+                                   CORBA_Environment    *ev)
+{
+        return oaf_service_get_internal (base_service, existing_only, ev);
+}
+
 
 /*****Implementation of the IOR registration system via plain files ******/
 static int lock_fd = -1;
