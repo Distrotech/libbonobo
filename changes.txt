@@ -89,6 +89,8 @@ Bonobo_Storage.idl:
 Bonobo_Persist:
 	Promoted isDirty to the base class and removed it from all the 
 	subclasses.
+	New getIId method to get the OAF IID necessary to re-create the
+	component owning the Bonobo::Perist interface
 
 Bonobo_PersistStream:
 	remove getMaxSize: use the stream interface for this
