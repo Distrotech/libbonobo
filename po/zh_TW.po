@@ -1,12 +1,13 @@
-# traditional Chinese translation for libbonobo2.
-# Copyright (C) 2001 Free Software Foundation, Inc.
+# traditional Chinese translation of libbonobo.
+# Copyright (C) 2001-2002 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001.
+# Abel Cheung <maddog@linux.org.hk>, 2002.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo2 1.103.1\n"
-"POT-Creation-Date: 2002-02-11 10:21+0000\n"
-"PO-Revision-Date: 2001-10-03 14:08+0800\n"
+"Project-Id-Version: libbonobo 2.0.0\n"
+"POT-Creation-Date: 2002-06-13 18:53+0800\n"
+"PO-Revision-Date: 2002-06-15 23:06+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +16,7 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
-msgstr "嘗試執行了一個不支援的動作"
+msgstr "嘗試進行不支援的動作"
 
 #: bonobo/bonobo-exception.c:157
 msgid "IO Error"
@@ -23,7 +24,7 @@ msgstr "輸出入錯誤"
 
 #: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "不合法的參數數值"
+msgstr "無效的參數數值"
 
 #: bonobo/bonobo-exception.c:164
 msgid "Object not found"
@@ -35,39 +36,39 @@ msgstr "物件描述內有語法錯誤"
 
 #: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "無法從元件工廠去啟動物件"
+msgstr "無法從元件工廠中啟動物件"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "不允許去存取資料流"
+msgstr "不允許存取資料流"
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "嘗試執行了一個不支援的資料流動作"
+msgstr "嘗試進行不支援的資料流動作"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "資料流的輸出入錯誤"
+msgstr "資料流發生輸出入錯誤"
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "儲存庫的輸出入錯誤"
+msgstr "storage 發生輸出入錯誤"
 
 #: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr "儲存庫內已有相同的名稱"
+msgstr "storage 內已有相同的名稱"
 
 #: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr "在儲存庫內找不到物件"
+msgstr "在 storage 內找不到物件"
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "在儲存庫內不允許執行動作"
+msgstr "不允許進行有關 storage 的操作"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr "嘗試執行了一個不支援的儲存庫動作"
+msgstr "嘗試執行不支援的 storage 動作"
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
@@ -75,31 +76,31 @@ msgstr "物件不是資料流"
 
 #: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr "物件不是儲存庫"
+msgstr "物件不是 storage"
 
 #: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr "儲存庫內仍有物件"
+msgstr "Storage 內仍有物件"
 
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "不合格式的使用者介面 XML 描述"
+msgstr "不合規格的使用者介面 XML 描述"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "指到 XML 使用者介面元件的路徑不合法"
+msgstr "XML 使用者介面元件的路徑無效"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr ""
+msgstr "要求的使用者介面屬性不存在"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "不詳的指令"
+msgstr "不明的指令或 verb"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "指令是不區分大小寫的"
+msgstr "指令無法生效"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -119,35 +120,36 @@ msgstr "不合規格的屬性類別"
 
 #: bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr "只是唯讀的屬性"
+msgstr "這是唯讀的屬性"
 
 #: bonobo/bonobo-exception.c:242
+#, fuzzy
 msgid "config database backend failed "
 msgstr "設定資料庫模組失敗"
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "無法找到命名器介面"
+msgstr "無法找到 Moniker 介面"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr "啟動命名器逾時"
+msgstr "啟動 Moniker 超逾時限"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr "命名器內含有語法錯誤"
+msgstr "Moniker 內含有語法錯誤"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "命名器具有不詳的前置字"
+msgstr "Moniker 中有不明的前置字串"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "檢查錯誤時發生錯誤；沒有列外處理"
+msgstr "檢查錯誤時發生錯誤；不進行例外處理"
 
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr "一般的不具描述的啟動錯誤"
+msgstr "不附帶說明的一般性啟動錯誤"
 
 #: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
@@ -156,7 +158,7 @@ msgstr "無法初始化 Bonobo"
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "無法 resolve 或 extend‘%s’"
 
 #: bonobo/bonobo-moniker-util.c:246
 #, fuzzy
@@ -165,72 +167,77 @@ msgstr "無法從元件工廠去啟動物件"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr "HTTP 命名器"
+msgstr "HTTP Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
+#, fuzzy
 msgid "ORB IOR handling moniker"
-msgstr "ORB IOR 命名器處理"
+msgstr "ORB IOR 處理 moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "標準命名器的元件工廠"
+msgstr "標準 moniker 元件工廠"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
+#, fuzzy
 msgid "generic Oaf activation moniker"
 msgstr "一般的 Oaf 啟動命名器"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
+#, fuzzy
 msgid "generic Oaf query moniker"
 msgstr "一般的 Oaf 查詢命名器"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
+#, fuzzy
 msgid "generic factory 'new' moniker"
 msgstr "一般的 '新增' 命名器的元件工廠"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
+#, fuzzy
 msgid "generic item moniker"
 msgstr "一般的項目命名器"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
+#, fuzzy
 msgid "stream MonikerExtender"
 msgstr "資料流命名延伸器"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
 msgid "Exception activating '%s"
-msgstr ""
+msgstr "啟用‘%s’時發生例外情況"
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
 msgid "Failed to activate '%s"
-msgstr ""
+msgstr "無法啟用‘%s’"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Bonobo Echo server 工廠"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Bonobo Echo server 範例程式"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "Echo 元件"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Echo 元件工廠"
 
 #: samples/echo/echo-client.c:22
-#, fuzzy
 msgid "I could not initialize Bonobo"
 msgstr "無法初始化 Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "無法產生 echo 元件範例"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr ""
+msgstr "發生例外情況‘%s’"
