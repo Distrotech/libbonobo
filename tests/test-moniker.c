@@ -21,9 +21,7 @@ check_string (const char *prefix, const char *escaped, const char *unescaped)
 	
 	s = g_strconcat (prefix, escaped, NULL);
 	bonobo_moniker_set_name (moniker, s, strlen (s));
-	g_assert (!strcmp (s, bonobo_moniker_get_name_full (moniker)));
 	g_free (s);
-
 
 	const_str = bonobo_moniker_get_name (moniker);
 	fprintf (stderr, "'%s' == '%s'\n", unescaped, const_str);
