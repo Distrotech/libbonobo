@@ -80,11 +80,11 @@ oaf-factory-stubs.c oaf-factory-skels.c oaf-factory.h oaf-factory-common.c: stam
 # And again.
 ../liboaf/oaf-factory.h: stamp-factory-idl
 
-stamp-idl: $(top_srcdir)/idl/oaf.idl
+stamp-idl: $(top_srcdir)/idl/oaf.idl $(ORBIT_IDL)
 	$(ORBIT_IDL) -I$(top_srcdir)/idl --define=OAF_COMPILATION $(top_srcdir)/idl/oaf.idl
 	touch stamp-idl
 
-stamp-factory-idl: $(top_srcdir)/idl/oaf-factory.idl
+stamp-factory-idl: $(top_srcdir)/idl/oaf-factory.idl $(ORBIT_IDL)
 	$(ORBIT_IDL) -I$(top_srcdir)/idl --define=GNOME_FACTORY_COMPILATION $(top_srcdir)/idl/oaf-factory.idl
 	touch stamp-factory-idl
 
