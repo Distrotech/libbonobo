@@ -469,7 +469,6 @@ rloc_file_lock (const OAFBaseServiceRegistry *registry,
 			break;
 	}
 
-	lock_fd = open (fn, O_CREAT | O_RDONLY, 0700);
 	fcntl (lock_fd, F_SETFD, FD_CLOEXEC);
 
 	if (lock_fd >= 0) {

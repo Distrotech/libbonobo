@@ -106,9 +106,9 @@ impl_OAF_ObjectDirectory_unlock (impl_POA_OAF_ObjectDirectory * servant,
 				 CORBA_Environment * ev);
 
 static OAF_RegistrationResult
-impl_OAF_ObjectDirectory_register (impl_POA_OAF_ObjectDirectory * servant,
-				   OAF_ImplementationID iid,
-				   CORBA_Object obj, CORBA_Environment * ev);
+impl_OAF_ObjectDirectory_register_new (impl_POA_OAF_ObjectDirectory * servant,
+                                       OAF_ImplementationID iid,
+                                       CORBA_Object obj, CORBA_Environment * ev);
 
 static void
 impl_OAF_ObjectDirectory_unregister (impl_POA_OAF_ObjectDirectory * servant,
@@ -134,7 +134,7 @@ static POA_OAF_ObjectDirectory__epv impl_OAF_ObjectDirectory_epv = {
 	(gpointer) &impl_OAF_ObjectDirectory_activate,
 	(gpointer) &impl_OAF_ObjectDirectory_lock,
 	(gpointer) &impl_OAF_ObjectDirectory_unlock,
-	(gpointer) &impl_OAF_ObjectDirectory_register,
+	(gpointer) &impl_OAF_ObjectDirectory_register_new,
 	(gpointer) &impl_OAF_ObjectDirectory_unregister
 };
 
@@ -163,6 +163,10 @@ od_dump_list (impl_POA_OAF_ObjectDirectory * od)
 			OAF_Property *prop =
 				&(od->attr_servers._buffer[i].
 				  props._buffer[j]);
+                        if (strstr (prop->name, "-")) /* Translated, likely to
+                                                         be annoying garbage value */
+                                continue;
+
 			g_print ("    %s = ", prop->name);
 			switch (prop->v._d) {
 			case OAF_P_STRING:
@@ -478,9 +482,9 @@ impl_OAF_ObjectDirectory_unlock (impl_POA_OAF_ObjectDirectory * servant,
 }
 
 static OAF_RegistrationResult
-impl_OAF_ObjectDirectory_register (impl_POA_OAF_ObjectDirectory * servant,
-				   OAF_ImplementationID iid,
-				   CORBA_Object obj, CORBA_Environment * ev)
+impl_OAF_ObjectDirectory_register_new (impl_POA_OAF_ObjectDirectory * servant,
+                                       OAF_ImplementationID iid,
+                                       CORBA_Object obj, CORBA_Environment * ev)
 {
 	CORBA_Object oldobj;
         OAF_ImplementationID actual_iid;

@@ -26,8 +26,8 @@
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
+#include <config.h>
 #include <string.h>
-
 #include "liboaf-private.h"
 #include "oaf-i18n.h"
 #include <limits.h>
@@ -221,8 +221,10 @@ oaf_server_by_forking (const char **cmd,
 				retval = CORBA_OBJECT_NIL;
 #ifdef OAF_DEBUG
 			if (ai.do_srv_output)
-				g_message ("Did string_to_object on %s",
-					   ai.iorbuf);
+				g_message ("Did string_to_object on %s = '%p' (%s)",
+					   ai.iorbuf, retval,
+                                           ev->_major == CORBA_NO_EXCEPTION?
+                                           "no-exception" : ev->_id);
 #endif
 		} else {
 			OAF_GeneralError *errval;
