@@ -185,11 +185,11 @@ msgstr "Shlib `%s' ni vseboval `%s'"
 
 #: bonobo/bonobo-object.c:910
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Poljuben CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
