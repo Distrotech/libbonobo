@@ -164,6 +164,7 @@ do_corba_hacks (BonoboXObject      *object,
 {
 	CORBA_Object obj;
 	CORBA_Environment ev;
+	BonoboXObjectClass *xklass;
 	static ORBit_RootObject_Interface ri = { corba_release };
 
 	CORBA_exception_init (&ev);
@@ -174,13 +175,19 @@ do_corba_hacks (BonoboXObject      *object,
 	object->servant.bonobo_object                = (BonoboObject *) object;
 
 	/* Initialize the servant structure with our POA__init fn */
-	if (!klass->poa_init_fn) {
+	for (xklass = klass; xklass && !xklass->poa_init_fn;)
+		xklass = gtk_type_class (gtk_type_parent (
+			((GtkObjectClass *)xklass)->type));
+
+	if (!xklass || !xklass->epv_struct_offset) {
 		g_warning ("It looks like you used gtk_type_unique "
 			   "instead of b_type_unique on type '%s'",
 			   gtk_type_name (((GtkObjectClass *)klass)->type));
 		return;
 	}
-	klass->poa_init_fn ((PortableServer_Servant) &object->servant, &ev);
+
+	xklass->poa_init_fn ((PortableServer_Servant) &object->servant, &ev);
+
 	if (BONOBO_EX (&ev)) {
 		g_warning ("Exception initializing servant '%s'",
 			   bonobo_exception_get_text (&ev));

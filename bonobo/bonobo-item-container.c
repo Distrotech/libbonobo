@@ -94,6 +94,7 @@ bonobo_item_container_destroy (GtkObject *object)
 	/* Destroy all the ClientSites. */
 	g_hash_table_foreach_remove (container->priv->objects,
 				     remove_object, NULL);
+	g_hash_table_destroy (container->priv->objects);
 	
 	GTK_OBJECT_CLASS (bonobo_item_container_parent_class)->destroy (object);
 }

@@ -1,5 +1,18 @@
 2001-02-06  Michael Meeks  <michael@ximian.com>
 
+	* configure.in: bump version to 0.35
+
+	* bonobo/bonobo-item-container.c (bonobo_item_container_destroy): 
+	actually free the hash.
+
+	* bonobo/bonobo-ui-sync-menu.c (impl_bonobo_ui_sync_menu_state): nail
+	nasty leak.
+
+	* bonobo/bonobo-xobject.c (do_corba_hacks): cope with non corba
+	types extending corba types better.
+
+2001-02-06  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-listener.c (bonobo_listener_get_epv): move into
 	(bonobo_listener_class_init): here and upd.
 	(init_listener_corba_class): kill.
