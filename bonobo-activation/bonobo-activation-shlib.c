@@ -155,7 +155,7 @@ oaf_server_activate_shlib (OAF_ActivationResult * sh, CORBA_Environment * ev)
 			iid = sh->res._u.res_shlib._buffer[i];
 
 			new_retval =
-				GNOME_GenericFactory_create_object (retval,
+				GNOME_ObjectFactory_create_object (retval,
 								    (char *)
 								    iid,
 								    &dummy,

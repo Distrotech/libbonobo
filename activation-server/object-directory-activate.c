@@ -96,7 +96,7 @@ od_server_activate_factory (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 	}
 
 	retval =
-		GNOME_GenericFactory_create_object (factory, si->iid, &params,
+		GNOME_ObjectFactory_create_object (factory, si->iid, &params,
 						    ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		retval = CORBA_OBJECT_NIL;
