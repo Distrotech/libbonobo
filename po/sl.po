@@ -1,18 +1,16 @@
 # Slovenian translations of libbonobo messages
 # Copyright (C) 1999-2002 Free Software Foundation, Inc.
 # 
-
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-03-07 12:30+0100\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2002-02-26 00:23+0100\n"
 "Last-Translator: Andra¾ Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -233,14 +231,3 @@ msgstr "Nisem uspel ustvariti primerka vzorène komponente odmeva"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Zgodila se je izjema '%s'"
-
-
-# Smart report:
-# Total untranslated messages in file: 54 
-# Translations made:
-# full: 41
-# smart: 0
-# cond: 0
-# total: 41 ; distinct: 40
-
-

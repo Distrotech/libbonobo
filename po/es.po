@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.101.2\n"
-"POT-Creation-Date: 2002-03-04 16:19-0500\n"
+"POT-Creation-Date: 2002-02-11 10:21+0000\n"
 "PO-Revision-Date: 2002-03-06 02:48-0300\n"
 "Last-Translator: German Poo Caaman~o <gpoo@ubiobio.cl>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -233,4 +233,3 @@ msgstr "No se puede crear una instancia del ejemplo del componente eco"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Ha ocurrido una excepción: '%s'"
-

@@ -1,3 +1,14 @@
+libbonobo 1.113.0
+
+	* Bugs fixed
+		+ GValue / Boxed type updates (Michael)
+		+ kill bogus ListenerId typedef (Mark McLoughlin)
+		+ update ORBit2 debugging blurb (Mark)
+		+ global 'parent_class' privatised (Michael)
+
+	* Featurelets
+		+ event source efficiency fix (Michael)
+
 libbonobo 1.112.0
 
 	* Bugs fixed
