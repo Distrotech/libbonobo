@@ -1,3 +1,12 @@
+1999-04-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gtk-interfaces.c (gtk_object_query_interface): Do the
+	query interface on the hierarchy.
+
+1999-03-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-view.c: Use the new corba-class init framework.
+
 1999-04-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-object.c (impl_GNOME_object_query_interface): Make
