@@ -647,8 +647,9 @@ bonobo_activation_activate_from_id_async (const Bonobo_ActivationID  aid,
 		requirements = g_alloca (strlen (aid) + sizeof ("iid == ''"));
 		sprintf (requirements, "iid == '%s'", aid);
 
-		return bonobo_activation_activate_async (
-				requirements, NULL, flags, async_cb, user_data, opt_ev);
+                bonobo_activation_activate_async (
+                        requirements, NULL, flags, async_cb, user_data, opt_ev);
+                return;
 	}
 	
 	if (!opt_ev) {
