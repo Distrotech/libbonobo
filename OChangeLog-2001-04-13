@@ -1,3 +1,29 @@
+2000-10-03  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (impl_size_request): request more space
+	if not floating.
+
+	* bonobo/bonobo-win.c (update_dockitem): split out (create_dockitem):
+	and add full set of dock properties, stop bands being exclusive.
+
+	* doc/ui-xml.txt: update docs.
+
+	* bonobo/bonobo-ui-util.c (bonobo_help_file_find_file): cut and paste
+	so we can do a better job of finding help files.
+	(bonobo_ui_util_build_help_menu): update.
+	(bonobo_ui_util_fixup_help): upd.
+	(bonobo_ui_util_new_ui): upd.
+	(bonobo_ui_util_get_ui_fname): return NULL if file doesn't exist.
+
+	* bonobo/bonobo-ui-toolbar-toggle-button-item.c (impl_set_state):
+	only set state if it is different.
+
+	* bonobo/bonobo-win.c (radio_group_add): set inactive by default.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_toolbar_item_set_pixmap):
+	inhibit event emission. (bonobo_ui_handler_toolbar_new): ditto.
+	(bonobo_ui_handler_menu_new): remove debug.
+
 2000-10-03  Ettore Perazzoli  <ettore@helixcode.com>
 
 	* bonobo/bonobo-ui-toolbar.c (popup_item_toggled_cb): Removed
