@@ -14,15 +14,16 @@
 #include <bonobo/bonobo-stream-memory.h>
 #include <errno.h>
 
-static BonoboStreamClass *bonobo_stream_mem_parent_class;
+static BonoboXObjectClass *bonobo_stream_mem_parent_class;
 
 static Bonobo_StorageInfo*
-mem_get_info (BonoboStream                  *stream,
+mem_get_info (PortableServer_Servant         servant,
 	      const Bonobo_StorageInfoFields mask,
 	      CORBA_Environment             *ev)
 {
 	Bonobo_StorageInfo *si;
-	BonoboStreamMem    *smem = BONOBO_STREAM_MEM (stream);
+	BonoboStreamMem    *smem = BONOBO_STREAM_MEM (
+		bonobo_x_object (servant));
 
 	si = Bonobo_StorageInfo__alloc ();
 
@@ -35,12 +36,13 @@ mem_get_info (BonoboStream                  *stream,
 }
 
 static void
-mem_set_info (BonoboStream *stream,
+mem_set_info (PortableServer_Servant servant,
 	      const Bonobo_StorageInfo *info,
 	      const Bonobo_StorageInfoFields mask,
 	      CORBA_Environment *ev)
 {
-	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
+		bonobo_x_object (servant));
 
 	if (smem->read_only)
 		CORBA_exception_set (
@@ -53,11 +55,12 @@ mem_set_info (BonoboStream *stream,
 }
 
 static void
-mem_truncate (BonoboStream *stream,
+mem_truncate (PortableServer_Servant servant,
 	      const CORBA_long new_size, 
 	      CORBA_Environment *ev)
 {
-	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
+		bonobo_x_object (servant));
 	void *newp;
 	
 	if (smem->read_only)
@@ -78,10 +81,12 @@ mem_truncate (BonoboStream *stream,
 }
 
 static void
-mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
+mem_write (PortableServer_Servant servant,
+	   const Bonobo_Stream_iobuf *buffer,
 	   CORBA_Environment *ev)
 {
-	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
+		bonobo_x_object (servant));
 	long len = buffer->_length;
 
 	if (smem->read_only){
@@ -94,7 +99,7 @@ mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
 			smem->size = smem->pos + len;
 			smem->buffer = g_realloc (smem->buffer, smem->size);
 		} else {
-			mem_truncate (stream, smem->pos + len, ev);
+			mem_truncate (servant, smem->pos + len, ev);
 			g_warning ("Should check for an exception here");
 		}
 	}
@@ -109,11 +114,12 @@ mem_write (BonoboStream *stream, const Bonobo_Stream_iobuf *buffer,
 }
 
 static void
-mem_read (BonoboStream *stream, CORBA_long count,
+mem_read (PortableServer_Servant servant, CORBA_long count,
 	  Bonobo_Stream_iobuf ** buffer,
 	  CORBA_Environment *ev)
 {
-	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
+		bonobo_x_object (servant));
 
 	if (smem->pos + count > smem->size)
 		count = smem->size - smem->pos;
@@ -129,11 +135,12 @@ mem_read (BonoboStream *stream, CORBA_long count,
 }
 
 static CORBA_long
-mem_seek (BonoboStream *stream,
+mem_seek (PortableServer_Servant servant,
 	  CORBA_long offset, Bonobo_Stream_SeekType whence,
 	  CORBA_Environment *ev)
 {
-	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
+	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
+		bonobo_x_object (servant));
 	int pos = 0;
 	
 	switch (whence){
@@ -160,53 +167,14 @@ mem_seek (BonoboStream *stream,
 				pos - smem->size);
 			smem->size = pos;
 		} else
-			mem_truncate (stream, pos, ev);
+			mem_truncate (servant, pos, ev);
 	}
 	smem->pos = pos;
 	return pos;
 }
 
 static void
-mem_copy_to  (BonoboStream *stream,
-	      const CORBA_char *dest,
-	      const CORBA_long bytes,
-	      CORBA_long *read,
-	      CORBA_long *written,
-	      CORBA_Environment *ev)
-{
-	BonoboStreamMem *smem = BONOBO_STREAM_MEM (stream);
-	gint fd_out;
-	gint w;
-	
-	*read = smem->size - smem->pos;
-	*written = 0;
-	
-	/* create the output file */
-	fd_out = creat(dest, 0666);
-	if (fd_out == -1) {
-		g_warning ("unable to create output file");
-		return;
-	}
-	
-	/* write the memory stream buffer to the output file */
-	do {
-		w = write (fd_out, smem->buffer, *read);
-	} while (w == -1 && errno == EINTR);
-	
-	if (w != -1)
-		*written = w;
-	else if (errno != EINTR) {
-		/* should probably do something to signal an error here */
-		g_warning ("ouput file write failed");
-	}
-	
-	
-	close(fd_out);
-
-}
-
-static void
-mem_commit (BonoboStream *stream,
+mem_commit (PortableServer_Servant servant,
 	    CORBA_Environment *ev)
 {
 	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -214,7 +182,7 @@ mem_commit (BonoboStream *stream,
 }
 
 static void
-mem_revert (BonoboStream *stream,
+mem_revert (PortableServer_Servant servant,
 	    CORBA_Environment *ev)
 {
 	CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -252,21 +220,20 @@ static void
 bonobo_stream_mem_class_init (BonoboStreamMemClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
-	BonoboStreamClass *sclass = BONOBO_STREAM_CLASS (klass);
+	POA_Bonobo_Stream__epv *epv = &klass->epv;
 	
 	bonobo_stream_mem_parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = mem_finalize;
-	
-	sclass->get_info  = mem_get_info;
-	sclass->set_info  = mem_set_info;
-	sclass->write     = mem_write;
-	sclass->read      = mem_read;
-	sclass->seek      = mem_seek;
-	sclass->truncate  = mem_truncate;
-	sclass->copy_to   = mem_copy_to;
-	sclass->commit    = mem_commit;
-	sclass->revert    = mem_revert;
+
+	epv->getInfo  = mem_get_info;
+	epv->setInfo  = mem_set_info;
+	epv->write    = mem_write;
+	epv->read     = mem_read;
+	epv->seek     = mem_seek;
+	epv->truncate = mem_truncate;
+	epv->commit   = mem_commit;
+	epv->revert   = mem_revert;
 
 	klass->get_buffer = mem_get_buffer;
 	klass->get_size   = mem_get_size;
@@ -295,8 +262,8 @@ bonobo_stream_mem_get_type (void)
 			(GInstanceInitFunc) NULL
 		};
 
-		type = g_type_register_static (bonobo_stream_get_type (),
-					       "BonoboStreamMem", &info, 0);
+		type = g_type_register_static (
+			BONOBO_X_OBJECT_TYPE, "BonoboStreamMem", &info, 0);
 	}
 
 	return type;
@@ -304,13 +271,11 @@ bonobo_stream_mem_get_type (void)
 
 BonoboStreamMem *
 bonobo_stream_mem_construct (BonoboStreamMem *stream_mem,
-			     Bonobo_Stream    corba_stream,
 			     const char      *buffer,
 			     size_t           size,
 			     gboolean         read_only,
 			     gboolean         resizable)
 {
-	g_return_val_if_fail (corba_stream != CORBA_OBJECT_NIL, NULL);
 	g_return_val_if_fail (BONOBO_IS_STREAM_MEM (stream_mem), NULL);
 
 	if (buffer == NULL) {
@@ -324,9 +289,7 @@ bonobo_stream_mem_construct (BonoboStreamMem *stream_mem,
 	stream_mem->read_only = read_only;
 	stream_mem->resizable = resizable;
 
-	return BONOBO_STREAM_MEM (
-		bonobo_object_construct (BONOBO_OBJECT (stream_mem),
-					 corba_stream));
+	return stream_mem;
 }
 
 /**
@@ -356,23 +319,15 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 			  gboolean read_only, gboolean resizable)
 {
 	BonoboStreamMem *stream_mem;
-	Bonobo_Stream corba_stream;
 
-	stream_mem = g_object_new (bonobo_stream_mem_get_type (), NULL);
-	if (stream_mem == NULL)
+	stream_mem = g_object_new (
+		bonobo_stream_mem_get_type (), NULL);
+
+	if (!stream_mem)
 		return NULL;
-
-
-	corba_stream = bonobo_stream_corba_object_create (
-		BONOBO_OBJECT (stream_mem));
-
-	if (corba_stream == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (stream_mem));
-		return NULL;
-	}
 
 	return BONOBO_STREAM (bonobo_stream_mem_construct (
-		stream_mem, corba_stream, buffer, size,
+		stream_mem, buffer, size,
 		read_only, resizable));
 }
 

@@ -100,7 +100,6 @@ libbonoboinclude_HEADERS =		\
 	bonobo-storage.h		\
 	bonobo-stream-client.h		\
 	bonobo-stream-memory.h		\
-	bonobo-stream.h			\
 	bonobo-transient.h		\
 	bonobo-xobject.h		\
 	libbonobo-init.h		\
@@ -137,7 +136,6 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-shlib-factory.c		\
 	bonobo-storage-plugin.c		\
 	bonobo-storage.c		\
-	bonobo-stream.c			\
 	bonobo-stream-client.c		\
 	bonobo-stream-memory.c		\
 	bonobo-transient.c		\

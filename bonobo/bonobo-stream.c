@@ -194,6 +194,7 @@ bonobo_stream_get_type (void)
  * @path: path where the base file resides
  * @flags: Bonobo Storage OpenMode
  * @mode: Unix open(2) mode
+ * @opt_ev: Optional CORBA exception environment
  *
  * Opens or creates the file named at @path with the stream driver @driver.
  *
@@ -202,8 +203,8 @@ bonobo_stream_get_type (void)
  * Returns: a created BonoboStream object.
  */
 BonoboStream *
-bonobo_stream_open_full (const char *driver, const char *path, gint flags, 
-			 gint mode, CORBA_Environment *opt_ev)
+bonobo_stream_open (const char *driver, const char *path, gint flags, 
+		    gint mode, CORBA_Environment *opt_ev)
 {
 	BonoboStream  *stream = NULL;
 	StoragePlugin *p;
@@ -233,13 +234,6 @@ bonobo_stream_open_full (const char *driver, const char *path, gint flags,
 	}
 
 	return stream;
-}
-
-BonoboStream *
-bonobo_stream_open (const char *driver, const char *path,
-		    gint flags, gint mode)
-{
-	return bonobo_stream_open_full (driver, path, flags, mode, NULL);
 }
 
 /**

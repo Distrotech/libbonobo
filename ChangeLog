@@ -1,5 +1,20 @@
 2001-04-17  Michael Meeks  <michael@ximian.com>
 
+	* idl/Bonobo_Storage.idl: kill copyTo - its Broken!
+
+	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_class_init): 
+	fill epv.
+	(bonobo_stream_mem_create): upd.
+	(bonobo_stream_mem_get_type): we're a BonoboXObject.
+	(bonobo_stream_mem_construct): upd.
+
+	* bonobo/bonobo-stream.c (bonobo_stream_open): kill
+	(bonobo_stream_open_full): rename to (bonobo_stream_open): this.
+
+	* changes.txt: add doc on changes between Bonobo 1.0 and 2.0
+
+2001-04-17  Michael Meeks  <michael@ximian.com>
+
 	* autogen.sh: fixup so we configure, always dump the message of
 	doom.
 

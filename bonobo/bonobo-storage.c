@@ -391,3 +391,51 @@ bonobo_storage_copy_to (Bonobo_Storage src, Bonobo_Storage dest,
 
 	CORBA_free (list);
 }
+
+/**
+ * bonobo_stream_open:
+ * @driver: driver to use for opening.
+ * @path: path where the base file resides
+ * @flags: Bonobo Storage OpenMode
+ * @mode: Unix open(2) mode
+ * @opt_ev: Optional CORBA exception environment
+ *
+ * Opens or creates the file named at @path with the stream driver @driver.
+ *
+ * @driver is one of: "fs" or "vfs" for now.
+ *
+ * Returns: a created BonoboStream object.
+ */
+BonoboStream *
+bonobo_stream_open (const char *driver, const char *path, gint flags, 
+		    gint mode, CORBA_Environment *opt_ev)
+{
+	BonoboStream  *stream = NULL;
+	StoragePlugin *p;
+	CORBA_Environment ev, *my_ev;
+	
+	if (!opt_ev) {
+		CORBA_exception_init (&ev);
+		my_ev = &ev;
+	} else
+		my_ev = opt_ev;
+
+	if (!driver || !path)
+		CORBA_exception_set (my_ev, CORBA_USER_EXCEPTION, 
+				     ex_Bonobo_Storage_IOError, NULL);
+	else if (!(p = bonobo_storage_plugin_find (driver)) ||
+		 !p->stream_open)
+		CORBA_exception_set (my_ev, CORBA_USER_EXCEPTION, 
+				     ex_Bonobo_Storage_NotSupported, NULL);
+	else 
+		stream = p->stream_open (path, flags, mode, my_ev);
+
+	if (!opt_ev) {
+		if (BONOBO_EX (my_ev))
+			g_warning ("bonobo_stream_open failed '%s'",
+				   bonobo_exception_get_text (my_ev));
+		CORBA_exception_free (&ev);
+	}
+
+	return stream;
+}

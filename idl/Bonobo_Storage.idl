@@ -111,23 +111,6 @@ module Bonobo {
 			raises (IOError, NoPermission, NotSupported);
 	
 		/**
-		 * copyTo:
-		 * @dest: destination file.
-		 * @bytes: number of bytes to copy, or -1 to copy until eof
-		 * @read: output, how many bytes were read.
-		 * @writen: output, how many bytes were written.
-		 *
-		 * Copies @bytes bytes (or until EOF if @bytes is -1) starting
-		 * at the current read/write pointer to the component in @dest
-		 * inside the Storage.
-		 * -- This API is badly broken and deprecated; expect
-		 * NotSupported
-		 */
-		void copyTo (in string dest, in long bytes, 
-			      out long read, out long written)
-			raises (IOError, NoPermission, NotSupported);
-
-		/**
 		 * commit:
 		 *
 		 * Commits any pending changes to the Storage

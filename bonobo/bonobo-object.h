@@ -6,7 +6,7 @@
  *   Miguel de Icaza (miguel@kernel.org)
  *   Michael Meeks (michael@helixcode.com)
  *
- * Copyright 1999,2000 Helix Code, Inc.
+ * Copyright 1999,2001 Ximian, Inc.
  */
 #ifndef _BONOBO_OBJECT_H_
 #define _BONOBO_OBJECT_H_

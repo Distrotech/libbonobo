@@ -10,7 +10,7 @@
 #ifndef _BONOBO_STREAM_MEM_H_
 #define _BONOBO_STREAM_MEM_H_
 
-#include <bonobo/bonobo-stream.h>
+#include <bonobo/bonobo-storage.h>
 
 BEGIN_GNOME_DECLS
 
@@ -30,26 +30,28 @@ typedef struct _BonoboStorageMem BonoboStorageMem;
 #define BONOBO_IS_STREAM_MEM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_STREAM_MEM_TYPE))
 
 struct _BonoboStreamMem {
-	BonoboStream  stream;
+	BonoboXObject parent;
 
-	char        *buffer;
-	size_t       size;
-	long         pos;
-	gboolean     read_only;
-	gboolean     resizable;
+	char         *buffer;
+	size_t        size;
+	long          pos;
+	gboolean      read_only;
+	gboolean      resizable;
 
 	BonoboStreamMemPrivate *priv;
 };
 
 typedef struct {
-	BonoboStreamClass parent_class;
+	BonoboXObjectClass parent_class;
+
+	POA_Bonobo_Stream__epv epv;
+
 	char           *(*get_buffer) (BonoboStreamMem *stream_mem);
 	size_t          (*get_size)   (BonoboStreamMem *stream_mem);
 } BonoboStreamMemClass;
 
-GType          bonobo_stream_mem_get_type   (void);
+GType            bonobo_stream_mem_get_type   (void);
 BonoboStreamMem *bonobo_stream_mem_construct  (BonoboStreamMem  *stream_mem,
-					       Bonobo_Stream     corba_stream,
 					       const char       *buffer,
 					       size_t            size,
 					       gboolean          read_only,

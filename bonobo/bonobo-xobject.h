@@ -29,16 +29,7 @@ BEGIN_GNOME_DECLS
  * Macros to convert between types.
  *  - foolproof versions to follow.
  */
-#define BONOBO_X_OBJECT_GET_CORBA(o)   ((CORBA_Object)&(o)->object)
 #define BONOBO_X_OBJECT_GET_SERVANT(o) ((PortableServer_Servant)&(o)->servant)
-#define BONOBO_X_CORBA_GET_OBJECT(o)   ((BonoboXObject *)((guchar *)(o)				\
-					     - BONOBO_X_OBJECT_HEADER_SIZE))
-#define BONOBO_X_CORBA_GET_SERVANT(o)  ((BonoboXObject *)((guchar *)(o)				\
-					     + sizeof (struct CORBA_Object_struct)	\
-					     + sizeof (gpointer) * 4))
-#define BONOBO_X_SERVANT_GET_CORBA(o)  ((BonoboXObject *)((guchar *)(o)				\
-					     - sizeof (struct CORBA_Object_struct)	\
-					     - sizeof (gpointer) * 4))
 #define BONOBO_X_SERVANT_GET_OBJECT(o) ((BonoboXObject *)((guchar *)(o)				\
 					     - BONOBO_X_OBJECT_HEADER_SIZE			\
 					     - sizeof (struct CORBA_Object_struct)	\
@@ -51,11 +42,6 @@ BonoboXObject *bonobo_x_object (gpointer p);
 
 struct _BonoboXObject {
 	BonoboObject               base;
-
-	/* Start: CORBA_Object */
-	struct CORBA_Object_struct object;
-	gpointer                   bincompat[4]; /* expansion */
-	/* End:   CORBA_Object */
 	
 	/* Start: BonoboObjectServant */
 	BonoboObjectServant        servant;

@@ -1,0 +1,20 @@
+Significant:
+
+C:
+
+bonobo-stream.[ch]:
+	converted to BonoboXObject, removed all internals - this
+	is totaly obsoleted by BonoboXObject.
+		  removed bonobo_stream_get_epv
+		  removed bonobo_stream_corba_object_create
+	removed bonobo_stream_open
+	renamed bonobo_stream_open_full to bonobo_stream_open
+	moved bonobo_stream_open into bonobo_storage
+
+IDL:
+
+Bonobo_Storage.idl:
+	remove copyTo
+
+
+Insignificant:

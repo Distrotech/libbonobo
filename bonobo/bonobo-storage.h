@@ -11,9 +11,18 @@
 #define _BONOBO_STORAGE_H_
 
 #include <bonobo/bonobo-xobject.h>
-#include <bonobo/bonobo-stream.h>
 
 BEGIN_GNOME_DECLS
+
+/* Constants to make it easier to safely select drivers */
+#define BONOBO_IO_DRIVER_FS  "fs"
+#define BONOBO_IO_DRIVER_EFS "efs"
+#define BONOBO_IO_DRIVER_VFS "vfs"
+
+/* For backwards compatibility */
+#define BonoboStream BonoboXObject
+#define BONOBO_STREAM(o)       ((BonoboStream *)(o))
+#define BONOBO_STREAM_CLASS(o) (o)
 
 #define BONOBO_STORAGE_TYPE        (bonobo_storage_get_type ())
 #define BONOBO_STORAGE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_STORAGE_TYPE, BonoboStorage))
@@ -95,6 +104,13 @@ void             bonobo_storage_write_class_id (BonoboStorage *storage,
 
 void             bonobo_stream_write_class_id  (BonoboStream *stream,
 						char *class_id);
+
+BonoboStream *bonobo_stream_open (const char *driver,
+				  const char *path,
+				  gint flags,
+				  gint mode,
+				  CORBA_Environment *opt_ev);
+
 
 END_GNOME_DECLS
 

@@ -5,7 +5,7 @@
  * Authors:
  *   Michael Meeks (michael@ximian.com)
  *
- * Copyright 2000 Ximian, Inc.
+ * Copyright 2001 Ximian, Inc.
  */
 
 #include <config.h>
