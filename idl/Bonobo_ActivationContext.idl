@@ -1,115 +1,139 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 #include "gnome-factory.idl"
 
 module OAF {
-  exception GeneralError { string description; };
-  typedef string ImplementationID;
-  typedef string ActivationID;
-  interface ActivationContext;
+        exception GeneralError { 
+                string description; 
+        };
 
-  typedef long ActivationFlags;
-  const ActivationFlags FLAG_NO_LOCAL = 1<<0; // No shared libraries
-  const ActivationFlags FLAG_IGNORE_EXISTING = 1<<1;
-  const ActivationFlags FLAG_EXISTING_ONLY = 1<<2; // don't start the server if not started
+        typedef string ImplementationID;
+        typedef string ActivationID;
+        interface ActivationContext;
+
+        typedef long ActivationFlags;
+        const ActivationFlags FLAG_NO_LOCAL = 1<<0; // No shared libraries
+        const ActivationFlags FLAG_IGNORE_EXISTING = 1<<1;
+        const ActivationFlags FLAG_EXISTING_ONLY = 1<<2; // don't start the server if not started
   
-  /* ActivationResult */
-  enum ActivationResultType { RESULT_OBJECT, RESULT_SHLIB, RESULT_NONE };
+        /* ActivationResult */
+        enum ActivationResultType { 
+                RESULT_OBJECT, 
+                RESULT_SHLIB, 
+                RESULT_NONE 
+        };
 
-  union ActivationResultData switch(ActivationResultType) {
-  case RESULT_OBJECT:
-    Object res_object;
-  case RESULT_SHLIB:
-    GNOME::stringlist res_shlib;
-  };
-  struct ActivationResult {
-    string aid;
-    ActivationResultData res;
-  };
+        union ActivationResultData switch (ActivationResultType) {
+        case RESULT_OBJECT:
+                Object res_object;
+        case RESULT_SHLIB:
+                GNOME::stringlist res_shlib;
+        };
 
-  /* Attribute */
-  enum AttributeType { A_STRING, A_NUMBER, A_BOOLEAN, A_STRINGV };
-  union AttributeValue switch(AttributeType) {
-  case A_STRING:
-    string value_string;
-  case A_NUMBER:
-    double value_number;
-  case A_BOOLEAN:
-    boolean value_boolean;
-  case A_STRINGV:
-    GNOME::stringlist value_stringv;
-  };
-  struct Attribute {
-    string name;
-    AttributeValue v;
-  };
+        struct ActivationResult {
+                string aid;
+                ActivationResultData res;
+        };
 
-  /* Server */
-  struct ServerInfo {
-    ImplementationID iid;
+        /* Attribute */
+        enum AttributeType { 
+                A_STRING, 
+                A_NUMBER, 
+                A_BOOLEAN, 
+                A_STRINGV 
+        };
 
-    string server_type;
-    string location_info;
-    string username, hostname, domain;
+        union AttributeValue switch (AttributeType) {
+        case A_STRING:
+                string value_string;
+        case A_NUMBER:
+                double value_number;
+        case A_BOOLEAN:
+                boolean value_boolean;
+        case A_STRINGV:
+                GNOME::stringlist value_stringv;
+        };
+
+        struct Attribute {
+                string name;
+                AttributeValue v;
+        };
+
+        /* Server */
+        struct ServerInfo {
+                ImplementationID iid;
+                
+                string server_type;
+                string location_info;
+                string username, hostname, domain;
 		
-    sequence<Attribute> attrs;
-  };
-  typedef sequence<ServerInfo> ServerInfoList;
+                sequence<Attribute> attrs;
+        };
 
-  typedef long long CacheTime;
+        typedef sequence<ServerInfo> ServerInfoList;
 
-  union ServerInfoListCache switch(boolean) {
-  case TRUE:
-    ServerInfoList server_list;
-  };
+        typedef long long CacheTime;
+  
+        union ServerInfoListCache switch (boolean) {
+        case TRUE:
+                ServerInfoList server_list;
+        };
 
-  union ServerStateCache switch(boolean) {
-  case TRUE:
-    sequence<ImplementationID> active_servers;
-  };
+        union ServerStateCache switch (boolean) {
+        case TRUE:
+                sequence<ImplementationID> active_servers;
+        };
 
-  enum RegistrationResult { REG_SUCCESS, REG_NOT_LISTED, REG_ALREADY_ACTIVE, REG_ERROR };
+        enum RegistrationResult { 
+                REG_SUCCESS, 
+                REG_NOT_LISTED, 
+                REG_ALREADY_ACTIVE, 
+                REG_ERROR 
+        };
 
-  /* Interfaces */
-  interface ObjectDirectory {
-    ServerInfoListCache get_servers(in CacheTime only_if_newer);
-    ServerStateCache get_active_servers(in CacheTime only_if_newer);
+        /* Interfaces */
+        interface ObjectDirectory {
+                ServerInfoListCache get_servers (in CacheTime only_if_newer);
+                ServerStateCache get_active_servers (in CacheTime only_if_newer);
+                
+                readonly attribute string username, hostname, domain;
 
-    readonly attribute string username, hostname, domain;
+                Object activate (in ImplementationID iid, in ActivationContext ac, in ActivationFlags flags)
+                        context ("username", "hostname", "domain");
+                
+                /* Ensures consistency for activations of publicly advertised objects */
+                void lock();
+                oneway void unlock();
 
-    Object activate(in ImplementationID iid, in ActivationContext ac, in ActivationFlags flags)
-      context("username", "hostname", "domain");
+                RegistrationResult register_new (in ImplementationID iid, in Object obj);
+                void unregister (in ImplementationID iid, in Object obj);
+        };
 
-    /* Ensures consistency for activations of publicly advertised objects */
-    void lock();
-    oneway void unlock();
+        typedef sequence<ObjectDirectory> ObjectDirectoryList;
 
-    RegistrationResult register_new(in ImplementationID iid, in Object obj);
-    void unregister(in ImplementationID iid, in Object obj);
-  };
+        interface ActivationContext {
+                exception NotListed {};
+                exception AlreadyListed {};
+                exception ParseFailed { 
+                        string description; 
+                };
 
-  typedef sequence<ObjectDirectory> ObjectDirectoryList;
+                readonly attribute ObjectDirectoryList directories;
+                void add_directory (in ObjectDirectory dir) raises (AlreadyListed);
+                void remove_directory (in ObjectDirectory dir) raises (NotListed);
 
-  interface ActivationContext {
-    exception NotListed {};
-    exception AlreadyListed {};
-    exception ParseFailed { string description; };
+                ActivationResult activate (in string requirements,
+                                           in GNOME::stringlist selection_order,
+                                           in ActivationFlags flags)
+                        raises (ParseFailed)
+                        context ("username", "hostname", "domain");
 
-    readonly attribute ObjectDirectoryList directories;
-    void add_directory(in ObjectDirectory dir) raises(AlreadyListed);
-    void remove_directory(in ObjectDirectory dir) raises(NotListed);
+                readonly attribute ServerInfoList servers;
+                ServerInfoList query (in string requirements,
+                                      in GNOME::stringlist selection_order)
+                        raises (ParseFailed)
+                        context ("username", "hostname", "domain");
 
-    ActivationResult activate(in string requirements,
-			      in GNOME::stringlist selection_order,
-			      in ActivationFlags flags)
-      raises(ParseFailed)
-      context("username", "hostname", "domain");
-
-    readonly attribute ServerInfoList servers;
-    ServerInfoList query(in string requirements,
-			 in GNOME::stringlist selection_order)
-      raises(ParseFailed)
-      context("username", "hostname", "domain");
-
-    ActivationResult activate_from_id(in ActivationID aid, in ActivationFlags flags)
-      context("username", "hostname", "domain");
-  };
+                ActivationResult activate_from_id (in ActivationID aid, in ActivationFlags flags)
+                        context ("username", "hostname", "domain");
+        };
 };
