@@ -13,8 +13,8 @@ subdomains:
 	Config/			GConf		hp@redhat.com
 	ControlCenter/		control-center	?
 	Crescendo/		creschendo	will@lashell.net
-	DB/			Gnome-db	rodrigo@linuxave.net
-	Database/		libgda		rodrigo@linuxave.net
+	DB/			Gnome-db	rodrigo@gnome-db.org
+	Database/		libgda		rodrigo@gnome-db.org
 	Development/		gnome-debug,	jpr@helixcode.com, dave@helixcode.com
 	DevHelp/                DevHelp         micke@codefactory.se
 	Dia/			Dia		james@daa.com.au
