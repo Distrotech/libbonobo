@@ -1,3 +1,8 @@
+2000-04-18  Matt Loper  <matt@helixcode.com>
+
+	* bonobo/bonobo-control.c (bonobo_control_construct): Set
+	control->priv->propbag to NULL.
+
 2000-04-16  Maciej Stachowiak  <mjs@eazel.com>
 
 	Made --enable-oaf=yes work properly:
