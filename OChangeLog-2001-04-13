@@ -1,5 +1,10 @@
 2000-11-25  Vladimir Vukicevic  <vladimir@helixcode.com>
 
+	* reverted bonobo-tar-storage* from previous commit to
+	clear up some issues.. moniker disabled in Makefile.am.
+
+2000-11-25  Vladimir Vukicevic  <vladimir@helixcode.com>
+
 	* bonobo/Makefile.am: Add bonobo-tar-storage to relevant bits
 
 	* bonobo/bonobo-tar-storage.c, bonobo/bonobo-tar-storage.c,
