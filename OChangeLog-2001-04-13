@@ -1,5 +1,50 @@
 2001-01-03  Michael Meeks  <michael@helixcode.com>
 
+	Re-factoring:
+
+	* bonobo/bonobo-win.c: Gut.
+
+	* bonobo/bonobo-ui-engine.[ch]: transfer most of it here
+
+	* bonobo/bonobo-ui-sync.[ch]: Semi-abstract definition of
+	an XML <-> Widget synchronizer
+
+	* bonobo/bonobo-ui-sync-menu.[ch]: Menu sync code.
+
+	* bonobo/bonobo-ui-sync-keys.[ch]: Keybindings sync code.
+
+	* bonobo/bonobo-ui-sync-status.[ch]: Status sync code.
+
+	* bonobo/bonobo-ui-sync-toolbar.[ch]: Toolbar sync code.
+	
+	Core changes:
+	
+	* bonobo/bonobo-ui-container.c: Privatize public members,
+	(bonobo_ui_container_get_engine),
+	(bonobo_ui_container_set_engine): impl.
+	(impl_Bonobo_UIContainer_setNode): use ui_node_from_string.
+
+	* bonobo/bonobo-win.c (bonobo_window_get_ui_engine): impl.
+
+	* bonobo/Makefile.am: Fix BONOBO_UIDIR define.
+
+	* bonobo/bonobo-ui-engine.c (bonobo_ui_engine_prune_widget_info): 
+	Only kill custom widgets in the top level, recurse with TRUE.
+
+2001-01-02  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (reinstate_old_node): emit REMOVE
+	before the node is replace in the tree, so we get the right
+	Sync object to deal with this in the signal handler, and
+	before its children are moved across.
+
+2000-12-29  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (impl_finalize): chain to parent
+	finalize.
+
+2001-01-03  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-running-context.c (get_running_info): correctly
 	initialize emitted_last_unref.
 
