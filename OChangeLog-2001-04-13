@@ -1,4 +1,13 @@
+1999-09-22  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* components/image-generic/bonobo-image-generic.c (view_size_allocate_cb):
+	Remove redundant duplicate + use new gdk_pixbuf scaling API + protect with
+	a const.
+
 1999-09-18  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* components/image-generic/bonobo-image-generic.c (view_size_allocate_cb):
+	Add image scaling.
 
 	* components/image-generic: Create; #defined out for now: nasty
 	hack with temp files :-)
