@@ -91,7 +91,7 @@ interface Component : GNOME::obj {
 	 * close:
 	 * @mode: Save mode.
 	 *
-	 * Close the Baboon Object
+	 * Close the Bonobo Object
 	 */
 	exception UserCancelledSave {};
 

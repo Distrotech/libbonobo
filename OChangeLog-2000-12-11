@@ -1,3 +1,7 @@
+1999-05-27  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* idl/gnome-component.idl: change a "Baboon" -> "Bonobo"
+
 1999-05-27  Michael Meeks  <michael@imaginator.com>
 
 	* idl/gnome-persist.idl: Polish docs.
