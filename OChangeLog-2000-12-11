@@ -1,3 +1,16 @@
+2000-04-21  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* samples/compound-doc/Makefile.am
+	(paint_component_simple_LDADD): You don't want to use
+	`BONOBO_LIBS' here as bonobo is not yet installed when you get
+	here.  Use `GNOME_PRINT_LIBS' instead.
+	(sample_container_LDADD): Likewise.  Use `GNOME_PRINT_LIBS'
+	instead.
+
+	* configure.in: Avoid defining `BONOBO_LIBS' and
+	`BONOBO_INCLUDEDIR' more than once.  Instead, define
+	`GNOME_PRINT_LIBS'.
+
 2000-04-20  Dan Winship  <danw@helixcode.com>
 
 	* bonobo/bonobo-stream-memory.c (bonobo_stream_mem_create): Always
