@@ -25,8 +25,10 @@
 #include <bonobo-activation/bonobo-activation-i18n.h>
 
 /*
- * FIXME: copy-pasted code from libgnome/libgnome/gnome-i18n.c.
- *        this code should be in glib.
+ * FIXME: this code should be in glib.
+ *        I collected the code fixes from libgnome and gnome-vfs and
+ *        made them all use this code, since the dupliated alias tables
+ *        were using quite a lot of memory.
  */
 #include <string.h>
 #include <stdio.h>
@@ -47,36 +49,57 @@ read_aliases (char *file)
     return;
   while (fgets (buf,256,fp))
     {
-      char *p, *shared_p, *key, *val;
-	g_strstrip(buf);
-	if (buf[0]=='#' || buf[0]=='\0')
-		continue;
-	p = strtok (buf,"\t ");
-	if (!p)
-	  continue;
-	p = strtok (NULL,"\t ");
-	if(!p)
-	  continue;
-	/* To save memory we only store each locale string once in the
-	 * hash-table (as a key). The value when you look up this key is
-	 * the same string as the key for the hashtable entry with that
-	 * string. If the value is NULL the key has no alias.
-	 */
-	val = NULL;
-	if (!g_hash_table_lookup_extended (alias_table, buf, NULL, (gpointer *)&val)) {
-	  g_hash_table_insert (alias_table, g_strdup(buf), NULL);
-	}
-	if (val == NULL) {
-	  /* There was no existing alias value for this locale */
-	  
-	  if (!g_hash_table_lookup_extended (alias_table, p, (gpointer *)&shared_p, NULL)) {
-	    shared_p = g_strdup(p);
-	    g_hash_table_insert (alias_table, shared_p, NULL);
+      char *p, *q, *shared_q, *key, *val;
+
+      g_strstrip(buf);
+      
+      /* Line is a comment */
+      if (buf[0]=='#' || buf[0]=='\0')
+	continue;
+
+      /* Reads first column */
+      for (p = buf, q = NULL; *p; p++) {
+	if ((*p == '\t') || (*p == ' ') || (*p == ':')) {
+	  *p = '\0';
+	  q = p+1;
+	  while ((*q == '\t') || (*q == ' ')) {
+	    q++;
 	  }
-	  g_hash_table_insert (alias_table, buf, shared_p);
+	  break;
 	}
+      }
+      /* The line only had one column */
+      if (!q || *q == '\0')
+	continue;
+      
+      /* Read second column */
+      for (p = q; *p; p++) {
+	if ((*p == '\t') || (*p == ' ')) {
+	  *p = '\0';
+	  break;
+	}
+      }
+      
+      /* To save memory we only store each locale string once in the
+       * hash-table (as a key). The value when you look up this key is
+       * the same string as the key for the hashtable entry with that
+       * string. If the value is NULL the key has no alias.
+       */
+      val = NULL;
+      if (!g_hash_table_lookup_extended (alias_table, buf, NULL, (gpointer *)&val)) {
+	g_hash_table_insert (alias_table, g_strdup (buf), NULL);
+      }
+      if (val == NULL) {
+	/* There was no existing alias value for this locale */
+	
+	if (!g_hash_table_lookup_extended (alias_table, p, (gpointer *)&shared_q, NULL)) {
+	  shared_q = g_strdup (q);
+	  g_hash_table_insert (alias_table, shared_q, NULL);
+	}
+	g_hash_table_insert (alias_table, buf, shared_q);
+      }
     }
-	fclose (fp);
+  fclose (fp);
 }
 
 /*return the un-aliased language as a newly allocated string*/
@@ -142,7 +165,7 @@ explode_locale (const gchar *locale,
   if (at_pos)
     {
       mask |= COMPONENT_MODIFIER;
-	*modifier = g_strdup (at_pos);
+      *modifier = g_strdup (at_pos);
     }
   else
     at_pos = locale + strlen (locale);
@@ -150,9 +173,7 @@ explode_locale (const gchar *locale,
   if (dot_pos)
     {
       mask |= COMPONENT_CODESET;
-	*codeset = g_new (gchar, 1 + at_pos - dot_pos);
-	strncpy (*codeset, dot_pos, at_pos - dot_pos);
-	(*codeset)[at_pos - dot_pos] = '\0';
+      *codeset = g_strndup (dot_pos, at_pos - dot_pos);
     }
   else
     dot_pos = at_pos;
@@ -160,16 +181,12 @@ explode_locale (const gchar *locale,
   if (uscore_pos)
     {
       mask |= COMPONENT_TERRITORY;
-	*territory = g_new (gchar, 1 + dot_pos - uscore_pos);
-	strncpy (*territory, uscore_pos, dot_pos - uscore_pos);
-	(*territory)[dot_pos - uscore_pos] = '\0';
+      *territory = g_strndup (uscore_pos, dot_pos - uscore_pos);
     }
   else
     uscore_pos = dot_pos;
 
-  *language = g_new (gchar, 1 + uscore_pos - locale);
-  strncpy (*language, locale, uscore_pos - locale);
-  (*language)[uscore_pos - locale] = '\0';
+  *language = g_strndup (locale, uscore_pos - locale);
 
   return mask;
 }
