@@ -1,3 +1,11 @@
+2000-10-14  Martin Baulig  <baulig@suse.de>
+
+	* gshell/ui.xml: Renamed this to gshell-ui.xml.
+	* gshell/Makefile.am: Install gshell-ui.xml.
+
+	* gshell/ui.c (frame_create_ui): Use bonobo_ui_util_set_ui() to
+	read the gshell-ui.xml file.
+
 2000-10-14  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (cmd_get_node): cope with the "/command" node
