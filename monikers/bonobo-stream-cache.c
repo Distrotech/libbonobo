@@ -76,7 +76,7 @@ bonobo_stream_cache_flush (BonoboStreamCache *stream,
 			pos = SC_TAG_POS (stream->priv->cache [i].tag);
 			
 			Bonobo_Stream_seek (stream->priv->cs, pos,
-					    Bonobo_Stream_SEEK_SET, ev);
+					    Bonobo_Stream_SeekSet, ev);
 			if (BONOBO_EX (ev))
 				continue;
 
@@ -104,7 +104,7 @@ bonobo_stream_cache_load (BonoboStreamCache *stream,
 	if (BONOBO_EX (ev))
 		return;
 
-	Bonobo_Stream_seek (stream->priv->cs, pos, Bonobo_Stream_SEEK_SET, ev);
+	Bonobo_Stream_seek (stream->priv->cs, pos, Bonobo_Stream_SeekSet, ev);
 	if (BONOBO_EX (ev))
 		return;
 

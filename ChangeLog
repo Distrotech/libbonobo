@@ -1,3 +1,12 @@
+2002-03-31  Murray Cumming  <murrayc@usa.net>
+
+	* idl/Bonobo_Storage.idl:
+	The Bonobo::Stream::Unknown::SeekType enum values are
+	now e.g. SeekCur instead of SEEK_CUR.
+	This was necessary because these values are already in
+	#define macros in the global C namespace, somewhere in
+	stdio.h.
+
 2002-03-21  Stephane Demurget  <demurgets@free.fr>
 
 	* bonobo/bonobo-event-source.c

@@ -177,15 +177,15 @@ mem_seek (PortableServer_Servant servant,
 	int pos = 0;
 	
 	switch (whence){
-	case Bonobo_Stream_SEEK_SET:
+	case Bonobo_Stream_SeekSet:
 		pos = offset;
 		break;
 
-	case Bonobo_Stream_SEEK_CUR:
+	case Bonobo_Stream_SeekCur:
 		pos = smem->pos + offset;
 		break;
 
-	case Bonobo_Stream_SEEK_END:
+	case Bonobo_Stream_SeekEnd:
 		pos = smem->size + offset;
 		break;
 

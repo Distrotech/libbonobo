@@ -50,9 +50,9 @@ module Bonobo {
 		exception IOError {};
 
 		enum SeekType {
-			SEEK_SET,
-			SEEK_CUR,
-			SEEK_END
+			SeekSet,
+			SeekCur,
+			SeekEnd
 		};
 
 		/**
