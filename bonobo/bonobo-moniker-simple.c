@@ -15,7 +15,7 @@
 #include <bonobo/bonobo-types.h>
 #include <bonobo/bonobo-marshal.h>
 
-GObjectClass *parent_class = NULL;
+static GObjectClass *parent_class = NULL;
 
 struct _BonoboMonikerSimplePrivate {
 	GClosure *resolve_closure;
