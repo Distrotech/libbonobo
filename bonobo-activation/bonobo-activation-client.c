@@ -163,7 +163,7 @@ get_lang_list (void)
 			g_string_append (str, ",");
 		else
 			add_comma = TRUE;
-		g_string_append (str, g_strdup ((char *) l->data));
+		g_string_append (str, l->data);
 	}
 
         result_set = TRUE;
