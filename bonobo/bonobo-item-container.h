@@ -58,7 +58,7 @@ void             gnome_container_add         (GnomeContainer *container,
 void             gnome_container_remove       (GnomeContainer *container,
 					       GnomeObject    *object);
 
-POA_GNOME_Container__epv *gnome_container_get_epv (void);
+POA_GNOME_Container__epv *gnome_container_get_epv (gboolean duplicate);
 
 /*
  * Exported vectors

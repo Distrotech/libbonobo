@@ -115,9 +115,13 @@ gnome_generic_factory_construct (const char *goad_id,
 
 	CORBA_exception_init (&ev);
 
+#ifdef BONOBO_USE_GNOME2
+	ret = oaf_active_server_register(c_factory->goad_id, corba_factory);
+#else
 	ret = goad_server_register (
 		NULL, corba_factory, c_factory->goad_id, "server",
 		&ev);
+#endif
 
 	CORBA_exception_free (&ev);
 
@@ -173,7 +177,11 @@ gnome_generic_factory_finalize (GtkObject *object)
 	CORBA_Environment ev;
 
 	CORBA_exception_init (&ev);
+#ifdef BONOBO_USE_GNOME2
+	oaf_active_server_unregister (c_factory->goad_id, GNOME_OBJECT(factory)->corba_objref);
+#else
 	goad_server_unregister (NULL, c_factory->goad_id, "server", &ev);
+#endif
 	CORBA_exception_free (&ev);
 	g_free (c_factory->goad_id);
 	
@@ -192,7 +200,7 @@ gnome_generic_factory_new_generic (GnomeGenericFactory *factory)
 static void
 init_generic_factory_corba_class (void)
 {
-	gnome_generic_factory_vepv.GNOME_GenericFactory_epv = gnome_generic_factory_get_epv ();
+	gnome_generic_factory_vepv.GNOME_GenericFactory_epv = gnome_generic_factory_get_epv (FALSE);
 }
 
 static void
@@ -269,14 +277,20 @@ gnome_generic_factory_set (GnomeGenericFactory *c_factory,
  * gnome_generic_factory_get_epv:
  */
 POA_GNOME_GenericFactory__epv *
-gnome_generic_factory_get_epv (void)
+gnome_generic_factory_get_epv (gboolean duplicate)
 {
 	POA_GNOME_GenericFactory__epv *epv;
+	static POA_GNOME_GenericFactory__epv gf_epv = {
+		NULL,
+		impl_GNOME_GenericFactory_supports,
+		impl_GNOME_GenericFactory_create_object
+	};
 
-	epv = g_new0 (POA_GNOME_GenericFactory__epv, 1);
-
-	epv->supports	   = impl_GNOME_GenericFactory_supports;
-	epv->create_object = impl_GNOME_GenericFactory_create_object;
+	if(duplicate) {
+		epv = g_new0 (POA_GNOME_GenericFactory__epv, 1);
+		memcpy(epv, &gf_epv, sizeof(gf_epv));
+	} else
+		epv = &gf_epv;
 
 	return epv;
 }

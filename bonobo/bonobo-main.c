@@ -11,10 +11,40 @@
  */
 #include <config.h>
 #include <bonobo/gnome-main.h>
+#ifdef BONOBO_USE_GNOME2
+#include <gnome.h>
+#include <liboaf/liboaf.h>
+#else
 #include <libgnorba/gnorba.h>
+#endif
 #include <signal.h>
 
 #include <X11/Xlib.h>
+
+#ifdef BONOBO_USE_GNOME2
+static struct poptOption bonobo_options[] = {
+	{NULL}
+};
+static void bonobo_pre_init(gpointer app, gpointer module_info);
+static void bonobo_post_init(gpointer app, gpointer module_info);
+GnomeModuleInfo bonobo_module_info = {
+	"bonobo", VERSION, "Bonobo",
+	{&liboafgnome_module_info, &gtk_module_info, NULL},
+	bonobo_pre_init, bonobo_post_init,
+	bonobo_options, NULL,
+	NULL
+};
+
+static void
+bonobo_pre_init(gpointer app, gpointer module_info)
+{
+}
+
+static void
+bonobo_post_init(gpointer app, gpointer module_info)
+{
+}
+#endif
 
 CORBA_ORB                 __bonobo_orb;
 PortableServer_POA        __bonobo_poa;

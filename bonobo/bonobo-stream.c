@@ -112,21 +112,27 @@ impl_length (PortableServer_Servant servant, CORBA_Environment * ev)
  * gnome_stream_get_epv:
  */
 POA_GNOME_Stream__epv *
-gnome_stream_get_epv (void)
+gnome_stream_get_epv (gboolean duplicate)
 {
 	POA_GNOME_Stream__epv *epv;
+	static POA_GNOME_Stream__epv sepv = {
+		NULL,
+		impl_read,
+		impl_write,
+		impl_seek,
+		impl_truncate,
+		impl_copy_to,
+		impl_commit,
+		impl_close,
+		impl_eos,
+		impl_length
+	};
 
-	epv = g_new0 (POA_GNOME_Stream__epv, 1);
-
-	epv->read	= impl_read;
-	epv->write	= impl_write;
-	epv->seek	= impl_seek;
-	epv->truncate	= impl_truncate;
-	epv->copy_to	= impl_copy_to;
-	epv->commit	= impl_commit;
-	epv->close	= impl_close;
-	epv->eos	= impl_eos;
-	epv->length	= impl_length;
+	if(duplicate) {
+		epv = g_new0 (POA_GNOME_Stream__epv, 1);
+		memcpy(epv, &sepv, sizeof(sepv));
+	} else
+		epv = &sepv;
 
 	return epv;
 }
@@ -135,8 +141,8 @@ static void
 init_stream_corba_class (void)
 {
 	/* The VEPV */
-	gnome_stream_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
-	gnome_stream_vepv.GNOME_Stream_epv = gnome_stream_get_epv ();
+	gnome_stream_vepv.GNOME_Unknown_epv = gnome_object_get_epv (FALSE);
+	gnome_stream_vepv.GNOME_Stream_epv = gnome_stream_get_epv (FALSE);
 }
 
 static void

@@ -16,6 +16,9 @@
 #include <bonobo/gnome-object.h>
 #include "bonobo.h"
 
+PortableServer_ServantBase__epv gnome_object_base_epv = {
+	NULL
+};
 POA_GNOME_Unknown__vepv gnome_object_vepv;
 
 typedef struct {
@@ -230,7 +233,7 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 		
 		if ((type && gtk_type_is_a(GTK_OBJECT(tryme)->klass->type, type)) ||
 #ifdef ORBIT_IMPLEMENTS_IS_A
-		    CORBA_Object_is_a(tryme->corba_objref, repoid, ev)
+		    CORBA_Object_is_a(tryme->corba_objref, (char *)repoid, ev)
 #else
 		    !strcmp(tryme->corba_objref->object_id, repoid)
 #endif
@@ -245,28 +248,35 @@ impl_GNOME_Unknown_query_interface (PortableServer_Servant servant,
 	return retval;
 }
 
+POA_GNOME_Unknown__epv gnome_object_epv = {
+	NULL, /* _private */
+	impl_GNOME_Unknown_ref,
+	impl_GNOME_Unknown_unref,
+	impl_GNOME_Unknown_query_interface
+};
+
 /**
  * gnome_object_get_epv:
  *
  */
 POA_GNOME_Unknown__epv *
-gnome_object_get_epv (void)
+gnome_object_get_epv (gboolean duplicate)
 {
-	POA_GNOME_Unknown__epv *epv;
+	POA_GNOME_Unknown__epv *retval;
 
-	epv = g_new0 (POA_GNOME_Unknown__epv, 1);
+	if(duplicate) {
+		retval = g_new(POA_GNOME_Unknown__epv, 1);
+		memcpy(retval, &gnome_object_epv, sizeof(gnome_object_epv));
+	} else
+		retval = &gnome_object_epv;
 
-	epv->ref = impl_GNOME_Unknown_ref;
-	epv->unref = impl_GNOME_Unknown_unref;
-	epv->query_interface = impl_GNOME_Unknown_query_interface;
-
-	return epv;
+	return retval;
 }
 
 static void
 init_object_corba_class (void)
 {
-	gnome_object_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_object_vepv.GNOME_Unknown_epv = gnome_object_get_epv (FALSE);
 }
 
 static void
@@ -474,7 +484,6 @@ gnome_object_add_interface (GnomeObject *object, GnomeObject *newobj)
 	*
 	*   This check is not perfect, but might help some people.
 	*/
-       g_return_if_fail (object->priv->ao->ref_count == 1);
        g_return_if_fail (newobj->priv->ao->ref_count == 1);
        
        oldao = newobj->priv->ao;

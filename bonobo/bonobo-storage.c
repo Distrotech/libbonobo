@@ -137,21 +137,27 @@ impl_erase (PortableServer_Servant servant,
  *
  */
 POA_GNOME_Storage__epv *
-gnome_storage_get_epv (void)
+gnome_storage_get_epv (gboolean duplicate)
 {
 	POA_GNOME_Storage__epv *epv;
+	static POA_GNOME_Storage__epv stor_epv = {
+		NULL,
+		impl_create_stream,
+		impl_open_stream,
+		impl_create_storage,
+		impl_open_storage,
+		impl_copy_to,
+		impl_rename,
+		impl_commit,
+		impl_list_contents,
+		impl_erase
+	};
 
-	epv = g_new0 (POA_GNOME_Storage__epv, 1);
-
-	epv->create_stream	= impl_create_stream;
-	epv->open_stream	= impl_open_stream;
-	epv->create_storage	= impl_create_storage;
-	epv->open_storage	= impl_open_storage;
-	epv->copy_to		= impl_copy_to;
-	epv->rename		= impl_rename;
-	epv->commit		= impl_commit;
-	epv->list_contents	= impl_list_contents;
-	epv->erase		= impl_erase;
+	if(duplicate) {
+		epv = g_new0 (POA_GNOME_Storage__epv, 1);
+		memcpy(epv, &stor_epv, sizeof(stor_epv));
+	} else
+		epv = &stor_epv;
 
 	return epv;
 }
@@ -160,8 +166,8 @@ static void
 init_storage_corba_class (void)
 {
 	/* The VEPV */
-	gnome_storage_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
-	gnome_storage_vepv.GNOME_Storage_epv = gnome_storage_get_epv ();
+	gnome_storage_vepv.GNOME_Unknown_epv = gnome_object_get_epv (FALSE);
+	gnome_storage_vepv.GNOME_Storage_epv = gnome_storage_get_epv (FALSE);
 }
 
 static void

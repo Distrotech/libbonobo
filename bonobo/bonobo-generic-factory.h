@@ -74,7 +74,7 @@ void gnome_generic_factory_set (
 	GnomeGenericFactoryFn factory,
 	void *data);
 
-POA_GNOME_GenericFactory__epv *gnome_generic_factory_get_epv (void);
+POA_GNOME_GenericFactory__epv *gnome_generic_factory_get_epv (gboolean duplicate);
 
 extern POA_GNOME_GenericFactory__vepv gnome_generic_factory_vepv;
 

@@ -39,6 +39,55 @@ gnome_object_client_construct (GnomeObjectClient *object_client, CORBA_Object co
 	return object_client;
 }
 
+#ifdef BONOBO_USE_GNOME2
+GnomeObjectClient *
+gnome_object_activate_with_aid (const char *aid,
+				OAF_ActivationFlags flags,
+				OAF_ActivationID *ret_aid)
+{
+	CORBA_Environment ev;
+	CORBA_Object corba_object;
+	GnomeObjectClient *object;
+
+	CORBA_exception_init(&ev);
+	corba_object = oaf_activate_from_id(aid, flags, ret_aid, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION || CORBA_Object_is_nil(corba_object, &ev)) {
+		CORBA_exception_free(&ev);
+		return NULL;
+	}
+	
+	object = gtk_type_new (gnome_object_client_get_type ());
+	gnome_object_client_construct (object, corba_object);
+
+	CORBA_exception_free(&ev);
+
+	return object;
+}
+
+GnomeObjectClient *gnome_object_activate_from_query   (const char *requirements,
+						       const char **sort_order,
+						       OAF_ActivationFlags flags,
+						       OAF_ActivationID *ret_aid)
+{
+	CORBA_Environment ev;
+	CORBA_Object corba_object;
+	GnomeObjectClient *object;
+
+	CORBA_exception_init(&ev);
+	corba_object = oaf_activate(requirements, sort_order, flags, ret_aid, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION || CORBA_Object_is_nil(corba_object, &ev)) {
+		CORBA_exception_free(&ev);
+		return NULL;
+	}
+	
+	object = gtk_type_new (gnome_object_client_get_type ());
+	gnome_object_client_construct (object, corba_object);
+
+	CORBA_exception_free(&ev);
+
+	return object;
+}
+#else
 /**
  * gnome_object_activate_with_repo_id:
  * @list: Preloaded list of servers or NULL.
@@ -104,6 +153,7 @@ gnome_object_activate_with_goad_id (GoadServerList *list,
 
 	return object;
 }
+#endif
 
 static GList *
 parse_moniker_string (const char *desc)
@@ -150,17 +200,23 @@ gnome_object_restore_from_url (const char *goad_id, const char *url)
 	/* 1. Check the naming service to see if we're already available */
 	rtn = gnome_moniker_find_in_naming_service (name, goad_id);
 
+	/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX race condition here, someone else may be launching the same document XXXXXX */
+	CORBA_exception_init(&ev);
 	if (!rtn){
 		/* 2. fire up that object specified by the goad_id  */
+#ifdef BONOBO_USE_GNOME2
+		rtn = oaf_activate_from_id(goad_id, 0, NULL, &ev);
+#else
 		rtn = goad_server_activate_with_id (
 			NULL,		/* name_server list */
 			goad_id,	/* server to activate */
 			0,		/* GoadActivationFlags */
 			0);		/* params for activation */
+#endif
 		
 		g_free (name);
 		
-		if (!rtn) /* bail */
+		if (CORBA_Object_is_nil(rtn, &ev)) /* bail */
 			return CORBA_OBJECT_NIL;
 	}
 	
@@ -248,8 +304,14 @@ moniker_info_list_destroy (GList *moniker_info_list)
  *
  * Returns: An object created.
  */
+#ifdef BONOBO_USE_GNOME2
+GnomeObjectClient *gnome_object_activate              (const char *object_desc,
+						       OAF_ActivationFlags flags,
+						       OAF_ActivationID *ret_aid)
+#else
 GnomeObjectClient *
 gnome_object_activate (const char *object_desc, GoadActivationFlags flags)
+#endif
 {
 	CORBA_Environment ev;
 	GNOME_Unknown obj, last;
@@ -258,10 +320,15 @@ gnome_object_activate (const char *object_desc, GoadActivationFlags flags)
 	
 	g_return_val_if_fail (object_desc != NULL, NULL);
 
-	if (strncmp (object_desc, "moniker_url:", 12) != 0)
+	if (strncmp (object_desc, "moniker:", strlen("moniker:")) != 0) {
+#ifdef BONOBO_USE_GNOME2
+		return gnome_object_activate_with_aid(object_desc, flags, ret_aid);
+#else
 		return gnome_object_activate_with_goad_id (NULL, object_desc, flags, NULL);
+#endif
+	}
 
-	moniker_info = parse_moniker_string (object_desc + 12);
+	moniker_info = parse_moniker_string (object_desc + strlen("moniker:"));
 	if (g_list_length (moniker_info) < 2){
 		moniker_info_list_destroy (moniker_info);
 		return NULL;

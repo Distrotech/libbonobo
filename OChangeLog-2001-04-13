@@ -1,3 +1,12 @@
+1999-12-09  Elliot Lee  <sopwith@redhat.com>
+
+	* All files: Use GNOME2 (e.g. OAF) if BONOBO_USE_GNOME2 is defined.
+	* bonobo/*.[ch]: Have the get_epv() functions take a 'duplicate flag
+	that indicates whether a copy of the epv or a pointer to the default should be used.
+	* bonobo/{gnome-persist-file,gnome-property-bag}.c: Don't allocate memory for exception data with g_new.
+	* bonobo/*.[ch]: Some misc warning fixes.
+	* bonobo/gnome-object.c: Remove over-strict checking of refcounts in add_interface().
+
 1999-12-09  Michael Meeks  <mmeeks@gnu.org>
 
 	* bonobo/gnome-object-client.c (gnome_object_client_query_interface): 

@@ -82,7 +82,7 @@ void gnome_storage_write_class_id (GnomeStorage *storage,
 void gnome_stream_write_class_id  (GnomeStream *stream,
 				   char *class_id);
 
-POA_GNOME_Storage__epv *gnome_storage_get_epv (void);
+POA_GNOME_Storage__epv *gnome_storage_get_epv (gboolean duplicate);
 
 extern POA_GNOME_Storage__vepv gnome_storage_vepv;
 

@@ -130,16 +130,22 @@ impl_set_size (PortableServer_Servant servant,
  * gnome_progressive_get_epv:
  */
 POA_GNOME_ProgressiveDataSink__epv *
-gnome_progressive_get_epv (void)
+gnome_progressive_get_epv (gboolean duplicate)
 {
 	POA_GNOME_ProgressiveDataSink__epv *epv;
+	static POA_GNOME_ProgressiveDataSink__epv pds_epv = {
+		NULL,
+		impl_start,
+		impl_end,
+		impl_add_data,
+		impl_set_size
+	};
 
-	epv = g_new0 (POA_GNOME_ProgressiveDataSink__epv, 1);
-
-	epv->start	= impl_start;
-	epv->end	= impl_end;
-	epv->add_data	= impl_add_data;
-	epv->set_size	= impl_set_size;
+	if(duplicate) {
+		epv = g_new0 (POA_GNOME_ProgressiveDataSink__epv, 1);
+		memcpy(epv, &pds_epv, sizeof(pds_epv));
+	} else
+		epv = &pds_epv;
 
 	return epv;
 }
@@ -150,9 +156,9 @@ init_progressive_data_sink_corba_class (void)
 	/*
 	 * Initialize the entry point vector for GNOME::ProgressiveDataSink.
 	 */
-	gnome_progressive_data_sink_vepv.GNOME_Unknown_epv = gnome_object_get_epv ();
+	gnome_progressive_data_sink_vepv.GNOME_Unknown_epv = gnome_object_get_epv (FALSE);
 	gnome_progressive_data_sink_vepv.GNOME_ProgressiveDataSink_epv =
-		gnome_progressive_get_epv ();
+		gnome_progressive_get_epv (FALSE);
 }
 
 static void
