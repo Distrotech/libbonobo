@@ -1,3 +1,14 @@
+2000-10-10  Martin Baulig  <baulig@suse.de>
+
+	* components/text-plain/bonbo-text-plain.c: Removed all gnorba stuff.
+	* components/text-plain/text-plain.gnorba: Removed.
+
+	* components/audio-ulaw/bonobo-audio-ulaw.c: Removed all gnorba stuff.
+	* components/audio-ulaw/audio-ulaw.gnorba: Removed.
+
+	* components/text-plain/bonobo-text-plain.c (create_view_menus):
+	Use bonobo_view_get_remote_ui_container(), not _ui_handler().
+
 2000-10-10  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_get_icon_pixbuf): 
