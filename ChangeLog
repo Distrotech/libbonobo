@@ -1,5 +1,19 @@
 2001-08-17  Michael Meeks  <michael@ximian.com>
 
+	* monikers/bonobo-moniker-new.c
+	(bonobo_moniker_new_resolve): kill warning on 'params'.
+
+2001-08-17  Mikael Hallendal  <micke@codefactory.se>
+
+	* bonobo/bonobo-property-bag.c 
+	(impl_Bonobo_PropertyBag_setValue): Use PROPERTY_NO_AUTONOTIFY to
+	check if we should notify listeners.
+	(impl_Bonobo_PropertyBag_setValues): same.
+
+	* idl/Bonobo_Property.idl: added PROPERTY_NO_AUTONOTIFY.
+
+2001-08-17  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-event-source.c
 	(bonobo_event_source_notify_listeners): hold a CORBA
 	reference over the notification re-enterancy hazard.

@@ -261,6 +261,9 @@ impl_Bonobo_PropertyBag_setValue (PortableServer_Servant  servant,
 			       BONOBO_TYPE_CORBA_ANY,    value,
 			       G_TYPE_UINT,              prop->idx,
 			       G_TYPE_POINTER,           ev, 0);
+
+	if (prop->flags & Bonobo_PROPERTY_NO_AUTONOTIFY)
+		return;
 	
 	if (!BONOBO_EX (ev))
 		notify_listeners (pb, prop, value, NULL);
@@ -308,7 +311,8 @@ impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
 		if (BONOBO_EX (ev))
 			return;
 
-		notify_listeners (pb, prop, &set->_buffer [i].value, NULL);
+		if (! (prop->flags & Bonobo_PROPERTY_NO_AUTONOTIFY))
+			notify_listeners (pb, prop, &set->_buffer [i].value, NULL);
 	}
 }
 

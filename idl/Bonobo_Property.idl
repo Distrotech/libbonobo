@@ -42,7 +42,9 @@ typedef long PropertyFlags;
 const PropertyFlags PROPERTY_READABLE        = 1;
 const PropertyFlags PROPERTY_WRITEABLE       = 2;
 const PropertyFlags PROPERTY_NO_LISTENING    = 4;
-	
+const PropertyFlags PROPERTY_NO_AUTONOTIFY   = 8;
+const PropertyFlags PROPERTY_NO_PERSIST      = 16;
+
 interface PropertyBag : Bonobo::Unknown {
 
 	exception NotFound {};

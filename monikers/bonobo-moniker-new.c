@@ -23,7 +23,6 @@ bonobo_moniker_new_resolve (BonoboMoniker               *moniker,
 	Bonobo_GenericFactory factory;
 	Bonobo_Unknown        containee;
 	Bonobo_Unknown        retval = CORBA_OBJECT_NIL;
-	Bonobo_StringList     params = { 0 };
 	
 	parent = bonobo_moniker_get_parent (moniker, ev);
 
