@@ -48,6 +48,7 @@ ODRegistrationResult od_server_unregister           (CORBA_Object       objref,
 void                 od_assert_using_goad           (void);
 void                 od_assert_using_oaf            (void);
 
+CORBA_Object         od_name_service_get            (CORBA_Environment *ev);
 
 END_GNOME_DECLS
 

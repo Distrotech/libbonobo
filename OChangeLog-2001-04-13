@@ -1,3 +1,69 @@
+2000-04-16  Maciej Stachowiak  <mjs@eazel.com>
+
+	Made --enable-oaf=yes work properly:
+
+	* configure.in, accondig.h: define USING_OAF when using OAF so
+	test programs can compile either way.
+	
+	* bonobo/Makefile.am: install bonobo-object-directory.h
+	
+	* bonobo/bonobo-selector.h, bonobo/bonobo-selector.c
+	(bonobo_selector_get_selected_id, bonobo_selector_select_id): New
+	functions to let you select an object ID without caring if you are
+	using GOAD or OAF.
+
+	* bonobo/bonobo-object-directory.h,
+	bonobo/bonobo-object-directory-oaf.c,
+	bonobo/bonobo-object-directory-goad.c
+	(od_name_service_get): New function to abstract getting the name
+	service.
+	
+	* bonobo/bonobo-moniker-client.c: Don't include gnorba headers;
+	include bonobo-object-directory.h with <> instead of "".
+	(bonobo_moniker_find_in_naming_service, bonobo_moniker_unregister,
+	bonobo_moniker_register): Use the OD interface to get the name
+	service
+
+	* bonobo/Makefile.am, components/Makefile.am
+	components/application-x-gnomine/Makefile.am,
+	components/audio-ulaw/Makefile.am,
+	components/image-x-png/Makefile.am,
+	components/text-plain/Makefile.am, gshell/Makefile.am
+	samples/bonobo-class/Makefile.am,
+	samples/compound-doc/Makefile.am, samples/controls/Makefile.am,
+	tests/Makefile.am: Properly conditionally link against OAF or
+	GNORBA libs; distribute both .gnorba and .oaf files, and install
+	the appropriate ones.
+
+	* bonobo/sample-item.c, bonobo/sample-server.c,
+	bonobo/selector_test.c, bonobo/test-bw.c,
+	bonobo/test-container-autoload.c, bonobo/test-container.c,
+	bonobo/test-storage.c,
+	components/application-x-gnomine/bonobo-application-x-mines.c,
+	components/audio-ulaw/bonobo-audio-ulaw.c,
+	components/audio-ulaw/bonobo-audio-ulaw.h,
+	components/image-x-png/bonobo-image-x-png.c,
+	components/text-plain/bonobo-text-plain.c, doc/goad2oaf.txt,
+	samples/bonobo-class/echo-client.c, samples/bonobo-class/echo.c,
+	samples/bonobo-class/main.c,
+	samples/compound-doc/paint-component-simple.c,
+	samples/compound-doc/sample-container.c,
+	samples/controls/bonobo-calculator-control.c,
+	samples/controls/bonobo-clock-control.c,
+	samples/controls/sample-control-container.c,
+	samples/controls/sample-control-factory.c: Converted to work with
+	either GOAD or OAF.
+
+	* gnorba2oafinfo.pl: Script to convert .gnorba/.goad files to
+	.oafinfo.
+
+	* item.oafinfo, sample.oafinfo, application-x-mines.oafinfo,
+	audio-ulaw.oafinfo, image-x-png.oafinfo, text-plain.oafinfo,
+	echo.oafinfo, paint-component-simple.oafinfo,
+	bonobo-calculator-control.oafinfo, bonobo-clock-control.oafinfo:
+	New OAF activation records translated from corresponding .gnorba
+	files.
+
 2000-04-14  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-print.c (impl_render): kill thinko NULLing user_data pointer.
