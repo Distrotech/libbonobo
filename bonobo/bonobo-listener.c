@@ -47,11 +47,12 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 
 	if (listener->priv->event_callback)
 		bonobo_closure_invoke (listener->priv->event_callback,
-				       NULL,
+				       G_TYPE_NONE,
 				       BONOBO_LISTENER_TYPE, listener,
-				       G_TYPE_STRING, event_name,
+				       BONOBO_TYPE_STRING, event_name,
 				       BONOBO_TYPE_CORBA_ANY, args,
-				       G_TYPE_POINTER, ev, 0);
+				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       0);
 		
 	g_signal_emit (G_OBJECT (listener),
 		       signals [EVENT_NOTIFY], 0,
@@ -91,9 +92,11 @@ bonobo_listener_class_init (BonoboListenerClass *klass)
 		"event_notify", G_TYPE_FROM_CLASS (oclass), G_SIGNAL_RUN_LAST,
 		G_STRUCT_OFFSET (BonoboListenerClass, event_notify),
 		NULL, NULL,
-		bonobo_marshal_VOID__POINTER_POINTER_POINTER,
+		bonobo_marshal_VOID__STRING_BOXED_BOXED,
 		G_TYPE_NONE, 3,
-		G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_POINTER);
+		BONOBO_TYPE_STRING,
+		BONOBO_TYPE_CORBA_ANY,
+		BONOBO_TYPE_CORBA_EXCEPTION);
 
 	epv->event = impl_Bonobo_Listener_event;
 }
@@ -144,7 +147,7 @@ bonobo_listener_new_closure (GClosure *event_closure)
 	listener = g_object_new (BONOBO_LISTENER_TYPE, NULL);
 
 	listener->priv->event_callback = bonobo_closure_store (
-		event_closure, bonobo_marshal_VOID__STRING_BOXED_POINTER);
+		event_closure, bonobo_marshal_VOID__STRING_BOXED_BOXED);
 
 	return listener;
 }

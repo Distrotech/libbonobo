@@ -83,7 +83,7 @@ bonobo_generic_factory_construct (BonoboGenericFactory   *factory,
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 	
 	factory->priv->factory_closure =
-		bonobo_closure_store (factory_closure, bonobo_marshal_POINTER__STRING);
+		bonobo_closure_store (factory_closure, bonobo_marshal_OBJECT__STRING);
 	factory->priv->oaf_iid    = g_strdup (oaf_iid);
 	
 	ret = bonobo_activation_active_server_register (oaf_iid, BONOBO_OBJREF (factory));
@@ -178,20 +178,14 @@ bonobo_generic_factory_new_generic (BonoboGenericFactory *factory,
 				    const char           *oaf_iid)
 {
 	BonoboObject *ret;
-	GValue        ret_val = {0, };
 	
 	g_return_val_if_fail (factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (factory), NULL);
 
-	g_value_init (&ret_val, G_TYPE_POINTER);
-	
 	bonobo_closure_invoke (factory->priv->factory_closure,
-			       &ret_val,
+			       BONOBO_OBJECT_TYPE, &ret,
 			       BONOBO_GENERIC_FACTORY_TYPE, factory,
-			       G_TYPE_STRING, oaf_iid, 0);
-
-	ret = g_value_peek_pointer (&ret_val);
-	g_value_unset (&ret_val);
+			       BONOBO_TYPE_STRING, oaf_iid, 0);
 
 	return ret;
 }

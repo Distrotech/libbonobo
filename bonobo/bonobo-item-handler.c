@@ -28,6 +28,84 @@ struct _BonoboItemHandlerPrivate
 	GClosure *get_object;
 };
 
+static void
+bonobo_marshal_POINTER__DUMMY_BOXED (GClosure     *closure,
+				     GValue       *return_value,
+				     guint         n_param_values,
+				     const GValue *param_values,
+				     gpointer      invocation_hint,
+				     gpointer      marshal_data)
+{
+	typedef gpointer (*GMarshalFunc_POINTER__POINTER_BOXED) (gpointer     data1,
+								 gpointer     arg_1,
+								 gpointer     arg_2,
+								 gpointer     data2);
+	register GMarshalFunc_POINTER__POINTER_BOXED callback;
+	register GCClosure *cc = (GCClosure*) closure;
+	register gpointer data1, data2;
+	gpointer v_return;
+
+	g_return_if_fail (return_value != NULL);
+	g_return_if_fail (n_param_values == 2);
+
+	if (G_CCLOSURE_SWAP_DATA (closure)) {
+		data1 = closure->data;
+		data2 = g_value_peek_pointer (param_values + 0);
+	} else {
+		data1 = g_value_peek_pointer (param_values + 0);
+		data2 = closure->data;
+	}
+	callback = (GMarshalFunc_POINTER__POINTER_BOXED) (marshal_data ? marshal_data : cc->callback);
+
+	v_return = callback (data1,
+			     NULL,
+			     g_value_get_boxed (param_values + 1),
+			     data2);
+
+	g_value_set_pointer (return_value, v_return);
+}
+
+static void
+bonobo_marshal_BOXED__STRING_BOOLEAN_DUMMY_BOXED (GClosure     *closure,
+						  GValue       *return_value,
+						  guint         n_param_values,
+						  const GValue *param_values,
+						  gpointer      invocation_hint,
+						  gpointer      marshal_data)
+{
+	typedef gpointer (*GMarshalFunc_BOXED__STRING_BOOLEAN_POINTER_BOXED) (gpointer     data1,
+									      gpointer     arg_1,
+									      gboolean     arg_2,
+									      gpointer     arg_3,
+									      gpointer     arg_4,
+									      gpointer     data2);
+	register GMarshalFunc_BOXED__STRING_BOOLEAN_POINTER_BOXED callback;
+	register GCClosure *cc = (GCClosure*) closure;
+	register gpointer data1, data2;
+	gpointer v_return;
+
+	g_return_if_fail (return_value != NULL);
+	g_return_if_fail (n_param_values == 4);
+
+	if (G_CCLOSURE_SWAP_DATA (closure)) {
+		data1 = closure->data;
+		data2 = g_value_peek_pointer (param_values + 0);
+	} else {
+		data1 = g_value_peek_pointer (param_values + 0);
+		data2 = closure->data;
+	}
+	callback = (GMarshalFunc_BOXED__STRING_BOOLEAN_POINTER_BOXED) (marshal_data ? marshal_data : cc->callback);
+
+	v_return = callback (data1,
+			     (char*) g_value_get_string (param_values + 1),
+			     g_value_get_boolean (param_values + 2),
+			     NULL,
+			     g_value_get_boxed (param_values + 3),
+			     data2);
+
+	g_value_set_boxed_take_ownership (return_value, v_return);
+}
+
 /*
  * Returns a list of the objects in this container
  */
@@ -40,17 +118,12 @@ impl_enum_objects (PortableServer_Servant servant, CORBA_Environment *ev)
 	if (handler->priv->enum_objects)
 	{
 		Bonobo_ItemContainer_ObjectNames *ret;
-		GValue ret_val = {0, };
 
-		g_value_init (&ret_val, G_TYPE_POINTER);
-		
 		bonobo_closure_invoke (handler->priv->enum_objects,
-				       &ret_val,
-				       BONOBO_ITEM_HANDLER_TYPE, handler,
-				       G_TYPE_POINTER,           ev, 0);
-
-		ret = g_value_get_pointer (&ret_val);
-		g_value_unset (&ret_val);
+				       G_TYPE_POINTER,              &ret,
+				       BONOBO_ITEM_HANDLER_TYPE,    handler,
+				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       0);
 
 		return ret;
 	} else
@@ -69,21 +142,15 @@ impl_get_object (PortableServer_Servant servant,
 	if (handler->priv->get_object)
 	{
 		Bonobo_Unknown ret;
-		GValue ret_val = {0, };
 
-		g_value_init (&ret_val, G_TYPE_BOXED);
-		
-		bonobo_closure_invoke (handler->priv->enum_objects,
-				       &ret_val,
-				       BONOBO_ITEM_HANDLER_TYPE, handler,
-				       G_TYPE_STRING,            item_name,
-				       G_TYPE_BOOLEAN,           only_if_exists,
-				       G_TYPE_POINTER,           ev, 0);
+		bonobo_closure_invoke (handler->priv->get_object,
+				       BONOBO_TYPE_UNKNOWN,         &ret,
+				       BONOBO_ITEM_HANDLER_TYPE,    handler,
+				       G_TYPE_STRING,               item_name,
+				       G_TYPE_BOOLEAN,              only_if_exists,
+				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       0);
 				       
-				       
-		ret = g_value_get_boxed (&ret_val);
-		g_value_unset (&ret_val);
-
 		return ret;
 	} else
 		return CORBA_OBJECT_NIL;
@@ -155,9 +222,9 @@ bonobo_item_handler_construct (BonoboItemHandler *handler,
 	g_return_val_if_fail (BONOBO_IS_ITEM_HANDLER (handler), NULL);
 	
 	handler->priv->enum_objects = bonobo_closure_store
-		(enum_objects, bonobo_marshal_POINTER__POINTER_POINTER);
+		(enum_objects, bonobo_marshal_POINTER__DUMMY_BOXED);
 	handler->priv->get_object   = bonobo_closure_store
-		(get_object, bonobo_marshal_BOXED__STRING_BOOLEAN_POINTER_POINTER);
+		(get_object, bonobo_marshal_BOXED__STRING_BOOLEAN_DUMMY_BOXED);
 	
 	return handler;
 }

@@ -663,8 +663,10 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (BonoboObjectClass,system_exception),
 			      NULL, NULL,
-			      bonobo_marshal_VOID__POINTER_POINTER,
-			      G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
+			      bonobo_marshal_VOID__OBJECT_BOXED,
+			      G_TYPE_NONE, 2,
+			      BONOBO_OBJECT_TYPE | G_SIGNAL_TYPE_STATIC_SCOPE,
+			      BONOBO_TYPE_CORBA_EXCEPTION);
 
 	klass->destroy = bonobo_object_dummy_destroy;
 

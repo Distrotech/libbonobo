@@ -46,8 +46,8 @@ typedef struct {
 
 
 typedef void (*BonoboListenerCallbackFn)    (BonoboListener    *listener,
-					     char              *event_name, 
-					     CORBA_any         *any,
+					     const char        *event_name, 
+					     const CORBA_any   *any,
 					     CORBA_Environment *ev,
 					     gpointer           user_data);
 

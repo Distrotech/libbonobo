@@ -19,6 +19,50 @@ struct _BonoboMonikerSimplePrivate {
 	GClosure *resolve_closure;
 };
 
+static void
+bonobo_marshal_BOXED__RESOLVEOPTIONS_STRING_BOXED (GClosure     *closure,
+						   GValue       *return_value,
+						   guint         n_param_values,
+						   const GValue *param_values,
+						   gpointer      invocation_hint,
+						   gpointer      marshal_data)
+{
+	typedef gpointer (*GMarshalFunc_BOXED__POINTER_STRING_BOXED) (gpointer     data1,
+								      gpointer     arg_1,
+								      gpointer     arg_2,
+								      gpointer     arg_3,
+								      gpointer     data2);
+	register GMarshalFunc_BOXED__POINTER_STRING_BOXED callback;
+	register GCClosure *cc = (GCClosure*) closure;
+	register gpointer data1, data2;
+	Bonobo_ResolveOptions resopt;
+	gpointer v_return;
+
+	g_return_if_fail (return_value != NULL);
+	g_return_if_fail (n_param_values == 5);
+
+	if (G_CCLOSURE_SWAP_DATA (closure)) {
+		data1 = closure->data;
+		data2 = g_value_peek_pointer (param_values + 0);
+	} else {
+		data1 = g_value_peek_pointer (param_values + 0);
+		data2 = closure->data;
+	}
+	callback = (GMarshalFunc_BOXED__POINTER_STRING_BOXED) (marshal_data ? marshal_data : cc->callback);
+
+	resopt.flags = g_value_get_flags (param_values + 1) ?
+		Bonobo_MONIKER_ALLOW_USER_INTERACTION : 0;
+	resopt.timeout = g_value_get_long (param_values + 2);
+
+	v_return = callback (data1,
+			     &resopt,
+			     (char*) g_value_get_string (param_values + 3),
+			     g_value_get_boxed (param_values + 4),
+			     data2);
+
+	g_value_set_boxed_take_ownership (return_value, v_return);
+}
+
 static Bonobo_Unknown
 simple_resolve (BonoboMoniker               *moniker,
 		const Bonobo_ResolveOptions *options,
@@ -26,26 +70,27 @@ simple_resolve (BonoboMoniker               *moniker,
 		CORBA_Environment           *ev)
 {
 	BonoboMonikerSimple *simple;
-	GValue               value = { 0, };
 	Bonobo_Unknown       ret;
+	Bonobo_ResolveFlag   resolve_flag;
+	glong                timeout;
 
 	g_return_val_if_fail (BONOBO_IS_MONIKER_SIMPLE (moniker),
 			      CORBA_OBJECT_NIL);
 
 	simple = BONOBO_MONIKER_SIMPLE (moniker);
 
-	g_value_init (&value, BONOBO_TYPE_CORBA_OBJECT);
+	resolve_flag = options ? options->flags : 0;
+	timeout = options ? options->timeout : -1;
 
 	bonobo_closure_invoke (simple->priv->resolve_closure,
-			       &value,
+			       BONOBO_TYPE_CORBA_OBJECT, &ret,
 			       BONOBO_MONIKER_TYPE, moniker,
-			       G_TYPE_POINTER, options,
-			       G_TYPE_STRING, requested_interface,
-			       BONOBO_TYPE_CORBA_EXCEPTION, ev, 0);
+			       BONOBO_RESOLVE_FLAG_TYPE, resolve_flag,
+			       G_TYPE_LONG, timeout,
+			       BONOBO_TYPE_STRING, requested_interface,
+			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+			       0);
 
-	ret = bonobo_value_get_corba_object (&value);
-	g_value_unset (&value);
-	
 	return ret;
 }
 
@@ -104,7 +149,7 @@ bonobo_moniker_simple_construct (BonoboMonikerSimple *moniker,
 	g_return_val_if_fail (resolve_closure != NULL, NULL);
 
 	moniker->priv->resolve_closure =
-		bonobo_closure_store (resolve_closure, bonobo_marshal_BOXED__POINTER_STRING_BOXED);
+		bonobo_closure_store (resolve_closure, bonobo_marshal_BOXED__RESOLVEOPTIONS_STRING_BOXED);
 	
 	return bonobo_moniker_construct (
 		BONOBO_MONIKER (moniker), name);
@@ -116,6 +161,9 @@ bonobo_moniker_simple_construct (BonoboMonikerSimple *moniker,
  * @resolve_closure: a closure for the resolve process.
  * 
  * Create a new instance of a simplified moniker.
+ *
+ * Instead of the Bonobo_ResolveOptions struct, the closure takes its
+ * contents as two arguments: BONOBO_RESOLVE_FLAG_TYPE and G_TYPE_LONG.
  * 
  * Return value: the moniker object
  **/
@@ -149,4 +197,23 @@ bonobo_moniker_simple_new (const char                  *name,
 		name, g_cclosure_new (G_CALLBACK (resolve_fn), NULL, NULL));
 }
 
+GType
+bonobo_resolve_flag_get_type (void)
+{
+	static GType resolve_flag_type = 0;
+	static GFlagsValue resolve_flag_values[] = {
+		{
+			Bonobo_MONIKER_ALLOW_USER_INTERACTION,
+			"bonobo-moniker-allow-user-interaction",
+			"bonobo-moniker-allow-user-interaction"
+		}, {
+			0, NULL, NULL
+		}
+	};
 
+	if (!resolve_flag_type)
+		resolve_flag_type = g_flags_register_static
+			("BonoboResolveFlag", resolve_flag_values);
+
+	return resolve_flag_type;
+}

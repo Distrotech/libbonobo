@@ -1,3 +1,90 @@
+2001-09-04  Martin Baulig  <baulig@suse.de>
+
+	This big closures / types patch:
+
+	- GValues are not copied anymore in signal/closure marshallers
+	(using G_SIGNAL_TYPE_STATIC_SCOPE / G_VALUE_NOCOPY_CONTENTS).
+
+	- we use "real" types (not G_TYPE_POINTER) in all signal/closure
+	marshallers.
+
+	- some closures now have custom marshallers to make them easier
+	to use for scripting languages.
+
+	- bonobo_closure_invoke() no longer returns a GValue, it now takes
+	the return type as first type argument, see the documentation in
+	bonobo-types.c for details.
+
+	Detailed list of changes:
+
+	* bonobo/bonobo-types.h (BONOBO_TYPE_STRING,
+	BONOBO_TYPE_CORBA_ANY, BONOBO_TYPE_CORBA_OBJECT,
+        BONOBO_TYPE_CORBA_TYPECODE, BONOBO_TYPE_CORBA_EXCEPTION):
+	Set the G_SIGNAL_TYPE_STATIC_SCOPE flag for all these types.
+	(BONOBO_TYPE_STRING): New type.
+	(BONOBO_TYPE_NONSTATIC_UNKNOWN, BONOBO_TYPE_NONSTATIC_CORBA_ANY,
+        BONOBO_TYPE_NONSTATIC_CORBA_OBJECT, BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE,
+	BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION): Added #defines for the
+	non-static versions of these types.
+
+	* bonobo/bonobo-types.c (bonobo_value_set_unknown,
+        bonobo_value_set_corba_any, bonobo_value_set_corba_typecode,
+	bonobo_value_set_corba_environment): New functions; they do not
+	copy their arguments and set the G_VALUE_NOCOPY_CONTENTS flag.
+	(bonobo_closure_invoke_valist): Removed the `GValue *retval'
+	argument, renamed `first_type' to `return_type'. The return value
+	is now handled like a normal argument. For details, see the
+	documentation in the source file.
+	(bonobo_closure_invoke): Removed the `GValue *retval' argument,
+	renamed `first_type' to `return_type'
+
+	* bonobo/bonobo-generic-factory.c: Marshal the closure as
+	OBJECT:STRING, not as POINTER:STRING.
+
+	* bonobo/bonobo-item-container.c: Marshal the "get_object" signal
+	as BOXED:STRING_BOOLEAN_BOXED (retval as BONOBO_TYPE_UNKNOWN, args
+	are BONOBO_TYPE_STRING, G_TYPE_BOOLEAN, BONOBO_TYPE_CORBA_EXCEPTION);
+
+	* bonobo/bonobo-item-handler.c: Provide custom marshallers for the
+	`enum_objects' and `get_object' closures:
+	- `enum_objects' returns a G_TYPE_POINTER and takes a
+	BONOBO_ITEM_HANDLER_TYPE and a BONOBO_TYPE_CORBA_EXCEPTION.
+	- `get_object' returns a BONOBO_TYPE_UNKNOWN and takes
+	BONOBO_ITEM_HANDLER_TYPE, G_TYPE_STRING, G_TYPE_BOOLEAN and
+	BONOBO_TYPE_CORBA_EXCEPTION arguments.
+
+	* bonobo/bonobo-listener.c: Marshal the `event_callback' as
+	VOID:STRING,BOXED,BOXED (BONOBO_TYPE_STRING, BONOBO_TYPE_CORBA_ANY,
+	and BONOBO_TYPE_CORBA_EXCEPTION).
+
+	* bonobo/bonobo-marshal.list: Removed all unused items and everything
+	from libbonoboui.
+
+	* bonobo/bonobo-moniker-simple.h (BONOBO_RESOLVE_FLAG_TYPE):
+	New type; this is a GFlags type for Bonobo_ResolveFlag.
+	(bonobo_resolve_flag_get_type): Added type init func for it.
+
+	* bonobo/bonobo-moniker-simple.c: Provide a custom marshaller for
+	the `resolve_fn' closure. Instead passing a Bonobo_ResolveOptions as
+	G_TYPE_POINTER, the closure now takes its contents as two arguments:
+	BONOBO_RESOLVE_FLAG_TYPE and G_TYPE_LONG.
+	The closure returns a BONOBO_TYPE_CORBA_OBJECT and takes
+	BONOBO_MONIKER_TYPE, BONOBO_RESOLVE_FLAG_TYPE, G_TYPE_LONG,
+	BONOBO_TYPE_STRING, BONOBO_TYPE_CORBA_EXCEPTION as arguments.
+
+	* bonobo/bonobo-object.c: Marshal the "system_exception" signal
+	VOID:OBJECT,BOXED (BONOBO_OBJECT_TYPE | G_SIGNAL_TYPE_STATIC_SCOPE
+	and BONOBO_TYPE_CORBA_EXCEPTION).
+
+	* bonobo/bonobo-property-bag.c: Provide custom marshallers for the
+	'get_prop' and `set_prop' closures:
+	`get_prop' returns BONOBO_TYPE_CORBA_ANY and takes
+	BONOBO_PROPERTY_BAG_TYPE,BONOBO_TYPE_CORBA_TYPECODE,
+	G_TYPE_UINT, BONOBO_TYPE_CORBA_EXCEPTION.
+	`set_prop' returns nothing and takes
+	BONOBO_PROPERTY_BAG_TYPE, BONOBO_TYPE_CORBA_ANY, G_TYPE_UINT,
+	BONOBO_TYPE_CORBA_EXCEPTION.
+
 2001-08-31  Abel Cheung  <maddog@linux.org.hk>
 
 	* configure.in (ALL_LINGUAS): zh_TW.Big5 -> zh_TW

@@ -21,6 +21,9 @@ G_BEGIN_DECLS
 #define BONOBO_IS_MONIKER_SIMPLE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_MONIKER_SIMPLE_TYPE))
 #define BONOBO_IS_MONIKER_SIMPLE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_SIMPLE_TYPE))
 
+#define BONOBO_RESOLVE_FLAG_TYPE          (bonobo_resolve_flag_get_type ())
+GType bonobo_resolve_flag_get_type (void) G_GNUC_CONST;
+
 typedef struct _BonoboMonikerSimple        BonoboMonikerSimple;
 typedef struct _BonoboMonikerSimplePrivate BonoboMonikerSimplePrivate;
 

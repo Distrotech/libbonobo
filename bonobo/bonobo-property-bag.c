@@ -155,7 +155,6 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 	BonoboPropertyBag *pb = BAG_FROM_SERVANT (servant);
 	BonoboProperty          *prop;
 	BonoboArg               *arg;
-	GValue			 retval;
 
 	prop = g_hash_table_lookup (pb->priv->prop_hash, key);
 
@@ -164,18 +163,13 @@ impl_Bonobo_PropertyBag_getValue (PortableServer_Servant  servant,
 		return NULL;
 	}
 
-	retval.g_type = 0;
-	g_value_init (&retval, BONOBO_TYPE_CORBA_ANY);
-
 	bonobo_closure_invoke (prop->priv->get_prop,
-			       &retval,
-			       BONOBO_PROPERTY_BAG_TYPE,   pb,
-			       BONOBO_TYPE_CORBA_TYPECODE, prop->type,
-			       G_TYPE_UINT,                prop->idx,
-			       G_TYPE_POINTER,             ev, 0);
-
-	arg = bonobo_value_get_corba_any (&retval);
-	g_value_unset (&retval);
+			       BONOBO_TYPE_CORBA_ANY,       &arg,
+			       BONOBO_PROPERTY_BAG_TYPE,    pb,
+			       BONOBO_TYPE_CORBA_TYPECODE,  prop->type,
+			       G_TYPE_UINT,                 prop->idx,
+			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+			       0);
 
 	return arg;
 }
@@ -206,23 +200,17 @@ impl_Bonobo_PropertyBag_getValues (PortableServer_Servant  servant,
 	for (curr = props; curr != NULL; curr = curr->next) {
 		BonoboProperty *prop = curr->data;
 		BonoboArg *arg;
-		GValue retval;
 
 		set->_buffer [set->_length].name =  
 			CORBA_string_dup (prop->name);
 
-		retval.g_type = 0;
-		g_value_init (&retval, BONOBO_TYPE_CORBA_ANY);
-
 		bonobo_closure_invoke (prop->priv->get_prop,
-				       &retval,
-				       BONOBO_PROPERTY_BAG_TYPE,   pb,
-				       BONOBO_TYPE_CORBA_TYPECODE, prop->type,
-				       G_TYPE_UINT,                prop->idx,
-				       G_TYPE_POINTER,             ev, 0);
-
-		arg = bonobo_value_get_corba_any (&retval);
-		g_value_unset (&retval);
+				       BONOBO_TYPE_CORBA_ANY,       &arg,
+				       BONOBO_PROPERTY_BAG_TYPE,    pb,
+				       BONOBO_TYPE_CORBA_TYPECODE,  prop->type,
+				       G_TYPE_UINT,                 prop->idx,
+				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       0);
 
 		set->_buffer [set->_length].value = *arg;
 
@@ -256,11 +244,12 @@ impl_Bonobo_PropertyBag_setValue (PortableServer_Servant  servant,
 	}
 
 	bonobo_closure_invoke (prop->priv->set_prop,
-			       NULL,
-			       BONOBO_PROPERTY_BAG_TYPE, pb,
-			       BONOBO_TYPE_CORBA_ANY,    value,
-			       G_TYPE_UINT,              prop->idx,
-			       G_TYPE_POINTER,           ev, 0);
+			       G_TYPE_NONE,
+			       BONOBO_PROPERTY_BAG_TYPE,    pb,
+			       BONOBO_TYPE_CORBA_ANY,       value,
+			       G_TYPE_UINT,                 prop->idx,
+			       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+			       0);
 
 	if (prop->flags & Bonobo_PROPERTY_NO_AUTONOTIFY)
 		return;
@@ -302,11 +291,12 @@ impl_Bonobo_PropertyBag_setValues (PortableServer_Servant    servant,
 					    set->_buffer [i].name);
 		
 		bonobo_closure_invoke (prop->priv->set_prop,
-				       NULL,
-				       BONOBO_PROPERTY_BAG_TYPE, pb,
-				       BONOBO_TYPE_CORBA_ANY,   &set->_buffer [i].value,
-				       G_TYPE_UINT,              prop->idx,
-				       G_TYPE_POINTER,           ev, 0);
+				       G_TYPE_NONE,
+				       BONOBO_PROPERTY_BAG_TYPE,    pb,
+				       BONOBO_TYPE_CORBA_ANY,       &set->_buffer [i].value,
+				       G_TYPE_UINT,                 prop->idx,
+				       BONOBO_TYPE_CORBA_EXCEPTION, ev,
+				       0);
 
 		if (BONOBO_EX (ev))
 			return;
@@ -394,19 +384,19 @@ impl_Bonobo_PropertyBag_getFlags (PortableServer_Servant  servant,
  */
 
 static void
-bonobo_marshal_ANY__TYPECODE_UINT_POINTER (GClosure     *closure,
-					   GValue       *return_value,
-					   guint         n_param_values,
-					   const GValue *param_values,
-					   gpointer      invocation_hint,
-					   gpointer      marshal_data)
+bonobo_marshal_ANY__TYPECODE_UINT_EXCEPTION (GClosure     *closure,
+					     GValue       *return_value,
+					     guint         n_param_values,
+					     const GValue *param_values,
+					     gpointer      invocation_hint,
+					     gpointer      marshal_data)
 {
-	typedef void (*GMarshalFunc_VOID__BOXED_UINT_POINTER) (gpointer     data1,
-							       gpointer     arg_1,
-							       guint        arg_2,
-							       gpointer     arg_3,
-							       gpointer     data2);
-	register GMarshalFunc_VOID__BOXED_UINT_POINTER callback;
+	typedef void (*GMarshalFunc_VOID__BOXED_UINT_BOXED) (gpointer     data1,
+							     gpointer     arg_1,
+							     guint        arg_2,
+							     gpointer     arg_3,
+							     gpointer     data2);
+	register GMarshalFunc_VOID__BOXED_UINT_BOXED callback;
 	register GCClosure *cc = (GCClosure*) closure;
 	register gpointer data1, data2;
 	CORBA_TypeCode tc;
@@ -421,7 +411,7 @@ bonobo_marshal_ANY__TYPECODE_UINT_POINTER (GClosure     *closure,
 		data1 = g_value_peek_pointer (param_values + 0);
 		data2 = closure->data;
 	}
-	callback = (GMarshalFunc_VOID__BOXED_UINT_POINTER) (marshal_data ? marshal_data : cc->callback);
+	callback = (GMarshalFunc_VOID__BOXED_UINT_BOXED) (marshal_data ? marshal_data : cc->callback);
 
 	tc = bonobo_value_get_corba_typecode (param_values + 1);
 	any = bonobo_arg_new (tc);
@@ -430,7 +420,7 @@ bonobo_marshal_ANY__TYPECODE_UINT_POINTER (GClosure     *closure,
 	callback (data1,
 		  any,
 		  g_value_get_uint (param_values + 2),
-		  g_value_get_pointer (param_values + 3),
+		  g_value_peek_pointer (param_values + 3),
 		  data2);
 
 	g_value_set_boxed_take_ownership (return_value, any);
@@ -459,8 +449,8 @@ bonobo_property_bag_construct (BonoboPropertyBag *pb,
 			       BonoboEventSource *es)
 {
 	pb->es             = es;
-	pb->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_ANY__TYPECODE_UINT_POINTER);
-	pb->priv->set_prop = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
+	pb->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_ANY__TYPECODE_UINT_EXCEPTION);
+	pb->priv->set_prop = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_BOXED);
 
 	bonobo_object_add_interface (BONOBO_OBJECT (pb), BONOBO_OBJECT (es));
 	
@@ -644,8 +634,9 @@ bonobo_property_bag_add_full (BonoboPropertyBag    *pb,
 	prop->doctitle       = g_strdup (doctitle);
 
 	prop->priv = g_new0 (BonoboPropertyPrivate, 1);
-	prop->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_ANY__TYPECODE_UINT_POINTER);
-	prop->priv->set_prop = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_POINTER);
+	prop->priv->get_prop = bonobo_closure_store (get_prop, bonobo_marshal_ANY__TYPECODE_UINT_EXCEPTION);
+	prop->priv->set_prop = bonobo_closure_store (set_prop, bonobo_marshal_VOID__BOXED_UINT_BOXED);
+
 
 	if (default_value)
 		prop->default_value = bonobo_arg_copy (default_value);

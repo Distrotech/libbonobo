@@ -23,6 +23,7 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-item-container.h>
 #include <bonobo/bonobo-marshal.h>
+#include <bonobo/bonobo-types.h>
 
 enum {
 	GET_OBJECT,
@@ -133,13 +134,6 @@ impl_Bonobo_ItemContainer_getObjectByName (PortableServer_Servant servant,
 	return ret;
 }
 
-typedef Bonobo_Unknown (*GnomeSignal_POINTER__POINTER_BOOL_POINTER) (
-	BonoboItemContainer *item_container,
-	CORBA_char *item_name,
-	CORBA_boolean only_if_exists,
-	CORBA_Environment *ev,
-	gpointer func_data);
-
 /* BonoboItemContainer class initialization routine  */
 static void
 bonobo_item_container_class_init (BonoboItemContainerClass *klass)
@@ -157,10 +151,12 @@ bonobo_item_container_class_init (BonoboItemContainerClass *klass)
 			       G_SIGNAL_RUN_LAST,
 			       0,
 			       NULL, NULL,
-			       bonobo_marshal_POINTER__POINTER_BOOLEAN_POINTER,
-			       G_TYPE_POINTER,
+			       bonobo_marshal_BOXED__STRING_BOOLEAN_BOXED,
+			       BONOBO_TYPE_UNKNOWN,
 			       3,
-			       G_TYPE_POINTER, G_TYPE_BOOLEAN, G_TYPE_POINTER);
+			       BONOBO_TYPE_STRING,
+			       G_TYPE_BOOLEAN,
+			       BONOBO_TYPE_CORBA_EXCEPTION);
 
 	epv->enumObjects     = impl_Bonobo_ItemContainer_enumObjects;
 	epv->getObjectByName = impl_Bonobo_ItemContainer_getObjectByName;

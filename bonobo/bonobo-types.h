@@ -28,32 +28,50 @@ GType bonobo_corba_object_get_type                  (void) G_GNUC_CONST;
 GType bonobo_corba_typecode_get_type                (void) G_GNUC_CONST;
 GType bonobo_corba_exception_get_type               (void) G_GNUC_CONST;
 
-#define BONOBO_TYPE_UNKNOWN                         (bonobo_unknown_get_type ())
-#define BONOBO_TYPE_CORBA_ANY                       (bonobo_corba_any_get_type ())
-#define BONOBO_TYPE_CORBA_OBJECT                    (bonobo_corba_object_get_type ())
-#define BONOBO_TYPE_CORBA_TYPECODE                  (bonobo_corba_typecode_get_type ())
-#define BONOBO_TYPE_CORBA_EXCEPTION                 (bonobo_corba_exception_get_type ())
+#define BONOBO_TYPE_UNKNOWN                         (bonobo_unknown_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+#define BONOBO_TYPE_CORBA_ANY                       (bonobo_corba_any_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+#define BONOBO_TYPE_CORBA_OBJECT                    (bonobo_corba_object_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+#define BONOBO_TYPE_CORBA_TYPECODE                  (bonobo_corba_typecode_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+#define BONOBO_TYPE_CORBA_EXCEPTION                 (bonobo_corba_exception_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
 
-#define BONOBO_VALUE_HOLDS_UNKNOWN(value)           (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_UNKNOWN))
-#define BONOBO_VALUE_HOLDS_CORBA_ANY(value)         (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_CORBA_ANY))
-#define BONOBO_VALUE_HOLDS_CORBA_OBJECT(value)      (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_CORBA_OBJECT))
-#define BONOBO_VALUE_HOLDS_CORBA_TYPECODE(value)    (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_CORBA_TYPECODE))
-#define BONOBO_VALUE_HOLDS_CORBA_EXCEPTION(value)   (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_CORBA_EXCEPTION))
+#define BONOBO_TYPE_STRING                          (G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE)
 
-Bonobo_Unknown     bonobo_value_get_unknown         (const GValue *value);
-BonoboArg         *bonobo_value_get_corba_any       (const GValue *value);
-CORBA_Object       bonobo_value_get_corba_object    (const GValue *value);
-CORBA_TypeCode     bonobo_value_get_corba_typecode  (const GValue *value);
-CORBA_Environment *bonobo_value_get_corba_exception (const GValue *value);
+#define BONOBO_TYPE_NONSTATIC_UNKNOWN               (bonobo_unknown_get_type ())
+#define BONOBO_TYPE_NONSTATIC_CORBA_ANY             (bonobo_corba_any_get_type ())
+#define BONOBO_TYPE_NONSTATIC_CORBA_OBJECT          (bonobo_corba_object_get_type ())
+#define BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE        (bonobo_corba_typecode_get_type ())
+#define BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION       (bonobo_corba_exception_get_type ())
+
+#define BONOBO_VALUE_HOLDS_UNKNOWN(value)           (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_UNKNOWN))
+#define BONOBO_VALUE_HOLDS_CORBA_ANY(value)         (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_ANY))
+#define BONOBO_VALUE_HOLDS_CORBA_OBJECT(value)      (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_OBJECT))
+#define BONOBO_VALUE_HOLDS_CORBA_TYPECODE(value)    (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE))
+#define BONOBO_VALUE_HOLDS_CORBA_EXCEPTION(value)   (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION))
+
+Bonobo_Unknown         bonobo_value_get_unknown         (const GValue *value);
+BonoboArg             *bonobo_value_get_corba_any       (const GValue *value);
+CORBA_Object           bonobo_value_get_corba_object    (const GValue *value);
+CORBA_TypeCode         bonobo_value_get_corba_typecode  (const GValue *value);
+CORBA_Environment     *bonobo_value_get_corba_exception (const GValue *value);
+
+void bonobo_value_set_unknown            (GValue                      *value,
+                                          const Bonobo_Unknown         unknown);
+
+void bonobo_value_set_corba_any          (GValue                      *value,
+                                          const CORBA_any             *any);
+
+void bonobo_value_set_corba_typecode     (GValue                      *value,
+                                          const CORBA_TypeCode         tc);
+
+void bonobo_value_set_corba_environment  (GValue                      *value,
+                                          const CORBA_Environment     *ev);
 
 void       bonobo_closure_invoke_va_list            (GClosure            *closure,
-						     GValue              *retval,
-						     GType                first_type,
+						     GType                return_type,
 						     va_list              var_args);
 
 void       bonobo_closure_invoke		    (GClosure            *closure,
-						     GValue              *retval,
-						     GType                first_type,
+						     GType                return_type,
 						     ...);
 
 GClosure * bonobo_closure_store                     (GClosure            *closure,

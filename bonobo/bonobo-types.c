@@ -231,6 +231,7 @@ corba_any_init (void)
 static gpointer
 corba_any_copy (gpointer any)
 {
+	g_warning (G_STRLOC);
 	return bonobo_arg_copy (any);
 }
 
@@ -246,13 +247,14 @@ bonobo_corba_any_get_type (void)
 	static GType type = 0;
 	if (!type)
 		type = g_boxed_type_register_static ("BonoboCorbaAny", corba_any_init,
-						     corba_any_copy, corba_any_free, TRUE);
+						     corba_any_copy, corba_any_free, FALSE);
 	return type;
 }
 
 static gpointer
 corba_typecode_copy (gpointer typecode)
 {
+	g_warning (G_STRLOC);
 	CORBA_Object_duplicate ((CORBA_Object) typecode, NULL);
 	return typecode;
 }
@@ -260,6 +262,7 @@ corba_typecode_copy (gpointer typecode)
 static void
 corba_typecode_free (gpointer typecode)
 {
+	g_warning (G_STRLOC);
 	CORBA_Object_release ((CORBA_Object) typecode, NULL);
 }
 
@@ -269,7 +272,7 @@ bonobo_corba_typecode_get_type (void)
 	static GType type = 0;
 	if (!type)
 		type = g_boxed_type_register_static ("BonoboCorbaTypecode", NULL,
-						     corba_typecode_copy, corba_typecode_free, TRUE);
+						     corba_typecode_copy, corba_typecode_free, FALSE);
 	return type;
 }
 
@@ -302,6 +305,8 @@ corba_exception_copy (gpointer any)
 {
 	CORBA_Environment *src, *dest;
 
+	g_warning (G_STRLOC);
+
 	src = any;
 	dest = CORBA_exception__alloc ();
 	if (src->_major != CORBA_NO_EXCEPTION) {
@@ -324,7 +329,7 @@ bonobo_corba_exception_get_type (void)
 	static GType type = 0;
 	if (!type)
 		type = g_boxed_type_register_static ("BonoboCorbaException", corba_exception_init,
-						     corba_exception_copy, corba_exception_free, TRUE);
+						     corba_exception_copy, corba_exception_free, FALSE);
 	return type;
 }
 
@@ -382,27 +387,80 @@ bonobo_value_get_corba_exception (const GValue *value)
 }
 
 void
+bonobo_value_set_unknown (GValue *value, const Bonobo_Unknown unknown)
+{
+	g_return_if_fail (BONOBO_VALUE_HOLDS_UNKNOWN (value));
+  
+	if (!(value->data[1].v_uint & G_VALUE_NOCOPY_CONTENTS))
+		bonobo_object_release_unref (value->data[0].v_pointer, NULL);
+	value->data[1].v_uint = G_VALUE_NOCOPY_CONTENTS;
+	value->data[0].v_pointer = unknown;
+}
+
+void
+bonobo_value_set_corba_any (GValue *value, const CORBA_any *any)
+{
+	g_return_if_fail (BONOBO_VALUE_HOLDS_CORBA_ANY (value));
+  
+	if (!(value->data[1].v_uint & G_VALUE_NOCOPY_CONTENTS))
+		bonobo_arg_release (value->data[0].v_pointer);
+	value->data[1].v_uint = G_VALUE_NOCOPY_CONTENTS;
+	value->data[0].v_pointer = (CORBA_any *) any;
+}
+
+void
+bonobo_value_set_corba_typecode (GValue *value, const CORBA_TypeCode tc)
+{
+}
+
+void
+bonobo_value_set_corba_environment (GValue *value, const CORBA_Environment *ev)
+{
+}
+
+void
 bonobo_closure_invoke_va_list (GClosure *closure,
-			       GValue   *retval,
-			       GType     first_type,
+			       GType     return_type,
 			       va_list   var_args)
 {
-	GArray *params;
-	GType   type;
-	int     i;
+	GArray   *params;
+	GValue    return_value = { 0, };
+	gpointer  retloc_ptr = var_args;
+	GType     type, rtype;
+	int       i;
   
 	g_return_if_fail (closure != NULL);
 
 	params = g_array_sized_new (FALSE, TRUE, sizeof (GValue), 6);
 
-	for (type = first_type; type; type = va_arg (var_args, GType)) {
+	rtype = return_type & ~G_SIGNAL_TYPE_STATIC_SCOPE;
+	if (rtype != G_TYPE_NONE) {
+		gchar *error;
+
+		g_value_init (&return_value, rtype);
+
+		/* Initialize return value */
+		G_VALUE_LCOPY (&return_value, var_args,
+			       G_VALUE_NOCOPY_CONTENTS, &error);
+
+		if (error) {
+			g_warning ("%s: %s", G_STRLOC, error);
+			g_free (error);
+			return;
+		}
+	}
+
+	while ((type = va_arg (var_args, GType)) != 0) {
+		gboolean static_scope = type & G_SIGNAL_TYPE_STATIC_SCOPE;
 		GValue value;
 		gchar *error;
 
 		value.g_type = 0;
-		g_value_init  (&value, type);
+		g_value_init  (&value, type & ~G_SIGNAL_TYPE_STATIC_SCOPE);
 
-		G_VALUE_COLLECT (&value, var_args, 0, &error);
+		G_VALUE_COLLECT (&value, var_args,
+				 static_scope ? G_VALUE_NOCOPY_CONTENTS : 0,
+				 &error);
 		if (error) {
 			g_warning ("%s: %s", G_STRLOC, error);
 			g_free (error);
@@ -413,10 +471,29 @@ bonobo_closure_invoke_va_list (GClosure *closure,
 	}
 
 	g_closure_invoke (closure,
-			  retval,
+			  &return_value,
 			  params->len,
 			  (GValue *)params->data,
 			  NULL);
+
+	if (rtype != G_TYPE_NONE) {
+		gchar *error;
+		
+		/* We use G_VALUE_NOCOPY_CONTENTS here so that the caller
+		 * takes ownership of the return value; thus we must not
+		 * g_value_unset() it here.
+		 */
+
+		G_VALUE_LCOPY (&return_value, retloc_ptr,
+			       G_VALUE_NOCOPY_CONTENTS,
+			       &error);
+
+		if (error) {
+			g_warning ("%s: %s", G_STRLOC, error);
+			g_free (error);
+			return;
+		}
+	}
 
 	for (i = 0; i < params->len; i++)
 		g_value_unset (&g_array_index (params, GValue, i));
@@ -425,17 +502,22 @@ bonobo_closure_invoke_va_list (GClosure *closure,
 /**
  * bonobo_closure_invoke:
  * @closure: a standard GClosure
- * @return_value: a pointer to the return value ie. &my_int
- * @return_type: the return type.
- * @first_type: the type of the first va_arg argument in a
+ * @return_type: the type of the first va_arg argument in a
  * set of type / arg pairs.
- * 
+ *
  * Invokes the closure with the arguments.
+ *
+ * Example:
+ *
+ *    bonobo_closure_invoke (closure, G_TYPE_NONE, G_TYPE_INT, first_arg, 0);
+ *
+ *    glong retval;
+ *    bonobo_closure_invoke (closure, G_TYPE_LONG, &retval, 0);
+ *
  **/
 void
 bonobo_closure_invoke (GClosure *closure,
-		       GValue   *retval,
-		       GType     first_type,
+		       GType     return_type,
 		       ...)
 {
 	va_list var_args;
@@ -443,10 +525,10 @@ bonobo_closure_invoke (GClosure *closure,
 	if (!closure)
 		return;
 
-	va_start (var_args, first_type);
+ 	va_start (var_args, return_type);
 	
 	bonobo_closure_invoke_va_list (
-		closure, retval, first_type, var_args);
+		closure, return_type, var_args);
 
 	va_end (var_args);
 }
