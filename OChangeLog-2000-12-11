@@ -1,3 +1,9 @@
+2000-05-15  Darin Adler  <darin@eazel.com>
+
+	* configure.in: Added gdk_pixbuf to the list for CFLAGS and LIBS.
+	Bonobo has required this for some time, but we missed this detail
+	when adding the dependency.
+
 2000-05-13  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-object.c (bonobo_object_query_local_interface): fix
@@ -112,23 +118,23 @@
 
 2000-05-01  Darin Adler  <darin@eazel.com>
 
-        * bonobo/bonobo-uih-menu.c (menu_toplevel_remove_radio_menu_item),
-        (menu_toplevel_remove_widgets): Added code to properly handle the case
+	* bonobo/bonobo-uih-menu.c (menu_toplevel_remove_radio_menu_item),
+	(menu_toplevel_remove_widgets): Added code to properly handle the case
 	where a radio menu item is going away. We have to keep our list head up
 	to date, since the item might be the first one in the list.
 	(menu_toplevel_remove_data): Removed a related FIXME.
 	
-        * bonobo/bonobo-uih-private.h: Fixed a comment and removed the unused
+	* bonobo/bonobo-uih-private.h: Fixed a comment and removed the unused
 	radio_items field from the toolbar struct.
 	
-        * bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_remove_data):
+	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_remove_data):
 	Removed copied code inherited from the menu code that made no sense
 	for the toolbar case.
 	
-        * gshell/gshell.c (edit_menu_preferences_cb): Fixed a warning.
-        * tools/bonobrowser/register-new-object.c (register_object),
-        (delete_clist_item): Fixed warnings.
-        * tools/bonobrowser/utils.c (contains_whitespace): Fixed warnings.
+	* gshell/gshell.c (edit_menu_preferences_cb): Fixed a warning.
+	* tools/bonobrowser/register-new-object.c (register_object),
+	(delete_clist_item): Fixed warnings.
+	* tools/bonobrowser/utils.c (contains_whitespace): Fixed warnings.
 
 2000-05-01  Michael Meeks  <michael@helixcode.com>
 
@@ -882,7 +888,7 @@
 
 	* components/text-plain/bonobo-text-plain.c: Don't merge that
 	ugly toolbar thing (some kind of test component should be
-        the testbed for that); assorted cleanup.
+	the testbed for that); assorted cleanup.
 	
 2000-03-09  Michael Meeks  <michael@helixcode.com>
 
@@ -4122,7 +4128,7 @@ Wed Jul 28 13:34:13 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 	* bonobo/gnome-bind-context.c: Include bonobo/bonobo.h.
 
 1999-07-21  Miguel de Icaza  <miguel@gnu.org>
-                                                 
+
 	* bonobo/gnome-item-container.c: New file.  Implements the
 	GnomeItemContainer.
 
