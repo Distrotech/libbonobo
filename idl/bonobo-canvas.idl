@@ -228,13 +228,6 @@ module Canvas {
 		 * Sets the bounding box of the item to (x1,y1)-(x2,y2)
 		 */
 		void setBounds (in DRect bbox);
-		
-		/**
-		 * getUIContainer:
-		 *
-	 	 * Returns: an associated UI component or NIL.
-		 */
-		UIComponent getUIComponent ();
 	};
 
 	/*
@@ -244,6 +237,33 @@ module Canvas {
 	
 	interface ComponentProxy {
 		void updateArea (in ArtUTA uta);
+		
+		/**
+		 * grabFocus:
+		 * @mask: Gdk Event mask to grab.
+		 * @cursor: GdkCursorType to display during grab.
+		 * @time: time of last event before grab.
+		 *
+	 	 * Grabs the mouse focus.
+		 */
+		void grabFocus (in unsigned long mask,
+				in long cursor,
+				in unsigned long time);
+		
+		/**
+		 * ungrabFocus:
+		 * @time: time of last event before ungrab.
+		 *
+	 	 * Ungrabs the mouse focus.
+		 */
+		void ungrabFocus (in unsigned long time);
+		
+		/**
+		 * getUIContainer:
+		 *
+	 	 * Returns: an associated UI component or NIL.
+		 */
+		UIContainer getUIContainer ();
 	};
 };
 

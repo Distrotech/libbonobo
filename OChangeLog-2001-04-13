@@ -1,3 +1,50 @@
+2001-01-06  Mike Kestner  <mkestner@ameritech.net>
+
+	* bonobo/bonobo-canvas-component.c - Added EVENT signal. Moved orig_root
+	into RootItemHack. Removed ui_component.
+	(gcc_event): Added "event" signal emmision.
+	(impl_Bonobo_Canvas_Component_getUIComponent): killed
+	(bonobo_canvas_component_set_ui_component): killed
+	(bonobo_canvas_component_get_ui_component): killed
+	(gcc_destroy): Destroy the canvas. Yank the ui_component.
+	(bonobo_canvas_component_class_init): Create the "event" signal.
+	(bonobo_canvas_component_init): Yank the ui_component.
+	(rih_destroy): New. Unref the proxy and destroy the orig_root item.
+	(rih_class_init): Add the destroy method.
+	(root_item_hack_new): Store the original canvas root.
+	(bonobo_canvas_component_set_proxy): Killed.
+	(bonobo_canvas_new): New helper function to create proxied canvases.
+	(bonobo_canvas_component_grab): New.  Grab mouse focus via proxy.
+	(bonobo_canvas_component_ungrab): New.  Ungrab mouse focus via proxy.
+	(bonobo_canvas_component_get_ui_container): New.  Get uic via proxy.
+	
+	* bonobo/bonobo-canvas-item.c - Added ui_container to proxy. Added
+	embeddable and ui_container args.
+	(gbi_realize): Connect to size_allocate signal.
+	(gbi_set_arg): Add embeddable arg handling to create remote component.
+	Add ui_container arg handling to store local copy of uic.
+	(gbi_class_init): Add new args.
+	(impl_Bonobo_Canvas_ComponentProxy_grabFocus): New. 
+	(impl_Bonobo_Canvas_ComponentProxy_ungrabFocus): New. 
+	(impl_Bonobo_Canvas_ComponentProxy_getUIContainer): New. 
+	(create_proxy): Add new methods.
+	(gbi_init): Moved proxy creation here from _new.
+	(bonobo_canvas_item_new): Killed.  Use gnome_canvas_item_new now.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_destroy): Use 
+	gtk_object_unref, not bonobo_object_unref to destroy canvas items.
+	(bonobo_client_site_new_item): Added ui_container parameter, like 
+	_new_view.  Use gnome_canvas_item_new call to create items. 
+
+	* bonobo/bonobo-embedable.c (impl_Bonobo_Embeddable_createCanvasItem):
+	Use new bonobo_canvas_new helper function to create canvas. Remove
+	set_proxy call.
+
+	* idl/bonobo-canvas.idl - Removed getUIComponent from the Component.
+	Added getUIContainer, grabFocus, and ungrabFocus to the Proxy.
+
+	* tests/test-container.c - Added ui_container to item creation.
+
 2001-01-05  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_build_skeleton): move
