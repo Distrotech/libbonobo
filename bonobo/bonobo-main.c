@@ -21,13 +21,9 @@
 
 #include <glib/gmain.h>
 
-#if 0
-#include <X11/Xlib.h>
-#endif
-
-CORBA_ORB                 __bonobo_orb;
-PortableServer_POA        __bonobo_poa;
-PortableServer_POAManager __bonobo_poa_manager = NULL;
+CORBA_ORB                 __bonobo_orb = CORBA_OBJECT_NIL;
+PortableServer_POA        __bonobo_poa = CORBA_OBJECT_NIL;
+PortableServer_POAManager __bonobo_poa_manager = CORBA_OBJECT_NIL;
 
 static guint              bonobo_main_loop_level = 0;
 static GSList *           bonobo_main_loops = NULL;
@@ -123,14 +119,26 @@ bonobo_shutdown (void)
 			CORBA_Object_release (
 				(CORBA_Object) __bonobo_poa_manager, &ev);
 		__bonobo_poa_manager = CORBA_OBJECT_NIL;
-	
-		if (__bonobo_orb != CORBA_OBJECT_NIL)
+
+#ifdef BONOBO_ACTIVATION_IS_FIXED
+		retval = bonobo_activation_shutdown ();
+#else
+		/* Cleanup of bonobo-activation resources -
+		 * important that this happens only once ! */
+		if (bonobo_activation_context_get ())
+			CORBA_Object_release ((CORBA_Object)
+                                bonobo_activation_context_get (), &ev);
+
+		if (__bonobo_orb != CORBA_OBJECT_NIL) {
 			CORBA_ORB_destroy (__bonobo_orb, &ev);
+			if (BONOBO_EX (&ev))
+				retval = 1;
+			CORBA_Object_release (
+				(CORBA_Object) __bonobo_orb, &ev);
+		}
+#endif
 		__bonobo_orb = CORBA_OBJECT_NIL;
 		
-		if (BONOBO_EX (&ev))
-			retval = 1;
-
 	} else /* shutdown when we didn't need to error */
 		retval = 1;
 
@@ -187,7 +195,9 @@ bonobo_init_full (int *argc, char **argv,
 	}
 	
 	if (opt_poa == CORBA_OBJECT_NIL) {
-		opt_poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (opt_orb, "RootPOA", &ev);
+		opt_poa = (PortableServer_POA)
+			CORBA_ORB_resolve_initial_references (
+				opt_orb, "RootPOA", &ev);
 		if (BONOBO_EX (&ev)) {
 			g_warning ("Can not resolve initial reference to RootPOA");
 			CORBA_exception_free (&ev);

@@ -1,3 +1,10 @@
+2001-10-27  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-main.c (bonobo_shutdown): unref the
+	ORB after the destroy.
+	(bonobo_shutdown): release bonobo-activation's context,
+	add support for moving this code into bonobo-activation.
+
 2001-10-25  jacob berkman  <jacob@ximian.com>
 
 	* idl/Makefile.am (Bonobo_module_la_LDFLAGS): also pass
