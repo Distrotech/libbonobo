@@ -4,3 +4,5 @@ html
 Makefile
 Makefile.in
 liboaf.hml
+liboaf-unused.txt
+tmpl/liboaf-unused.sgml

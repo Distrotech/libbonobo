@@ -6,7 +6,8 @@ Makefile.in
 *.la
 liboaf-version.h
 *-stubs.c
+*-skels.c
 *-common.c
 stamp*idl
-gnome-factory.h
+oaf-factory.h
 oaf.h
