@@ -59,11 +59,11 @@ module Bonobo {
 	};
 	
 	/*
-	 * PersistFile interface is usually implemented by object
-	 * applications and sometimes by containers.
+	 * The PersistFile interface is somewhat mis-named it
+	 * should be PersistURI.
 	 *
-	 * This allows applications to load and save documents stored
-	 * in disk files.  This is used to bind a linked object.
+	 * This allows applications to load and save documents
+	 * via the Gnome VFS.
 	 */
 	interface PersistFile : Persist {
 
@@ -73,28 +73,28 @@ module Bonobo {
 
 		/**
 		 * load:
-		 * @path: filename to load from
+		 * @uri: URI to load from
 		 * 
 		 * Loads the document object from the file
 		 * pointed in by @path
 		 */
-		void load (in string path)
+		void load (in string uri)
 			raises (IOError, NotSupported,
 				WrongDataType, FileNotFound);
 
 		/**
 		 * save:
-		 * @path:
+		 * @uri: the URI to save to
 		 * saves the document object to the file 
 		 * pointed in by @path
 		 */
-		void save (in string path)
+		void save (in string uri)
 			raises (IOError, NotSupported);
 	
 		/**
 		 * getCurrentFile:
 		 * 
-		 * Returns the name of the current file. 
+		 * Returns the URI of the current file. 
 		 */
 		string getCurrentFile ()
 			raises (NoCurrentName);

@@ -26,10 +26,9 @@ impl_get_current_file (PortableServer_Servant servant, CORBA_Environment *ev)
 	BonoboPersistFile *pfile = BONOBO_PERSIST_FILE (object);
 
 	/* if our persist_file has a filename with any length, return it */
-	if (pfile->filename && strlen (pfile->filename))
-		return CORBA_string_dup ((CORBA_char*)pfile->filename);
-	else
-	{
+	if (pfile->uri && strlen (pfile->uri))
+		return CORBA_string_dup ((CORBA_char*)pfile->uri);
+	else {
 		/* otherwise, raise a `NoCurrentName' exception */
 		Bonobo_PersistFile_NoCurrentName *exception;
 		exception = Bonobo_PersistFile_NoCurrentName__alloc ();
@@ -100,7 +99,7 @@ impl_save (PortableServer_Servant servant,
 		}
 	}
 	
-	if (result != 0){
+	if (result != 0) {
 		CORBA_exception_set (
 			ev, CORBA_USER_EXCEPTION,
 			ex_Bonobo_Persist_FileNotFound, NULL);
@@ -111,8 +110,8 @@ static CORBA_char *
 bonobo_persist_file_get_current_file (BonoboPersistFile *pf,
 				      CORBA_Environment *ev)
 {
-	if (pf->filename)
-		return pf->filename;
+	if (pf->uri)
+		return pf->uri;
 	return "";
 }
 
@@ -196,7 +195,7 @@ bonobo_persist_file_new (BonoboPersistFileIOFn  load_fn,
 
 	pf = g_object_new (bonobo_persist_file_get_type (), NULL);
 
-	pf->filename = NULL;
+	pf->uri = NULL;
 
 	bonobo_persist_file_construct (pf, load_fn, save_fn, iid, closure);
 

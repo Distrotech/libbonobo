@@ -28,14 +28,14 @@ typedef struct _BonoboPersistFilePrivate BonoboPersistFilePrivate;
 typedef struct _BonoboPersistFile        BonoboPersistFile;
 
 typedef int (*BonoboPersistFileIOFn) (BonoboPersistFile *pf,
-				      const CORBA_char  *filename,
+				      const CORBA_char  *uri,
 				      CORBA_Environment *ev,
 				      void              *closure);
 
 struct _BonoboPersistFile {
 	BonoboPersist persist;
 
-	char *filename;
+	char *uri;
 
 	/*
 	 * For the sample routines, NULL if we use the ::save and ::load
@@ -55,11 +55,11 @@ typedef struct {
 
 	/* methods */
 	int   (*load)             (BonoboPersistFile *ps,
-				   const CORBA_char  *filename,
+				   const CORBA_char  *uri,
 				   CORBA_Environment *ev);
 
 	int   (*save)             (BonoboPersistFile *ps,
-				   const CORBA_char  *filename,
+				   const CORBA_char  *uri,
 				   CORBA_Environment *ev);
 
 	char *(*get_current_file) (BonoboPersistFile *ps,
