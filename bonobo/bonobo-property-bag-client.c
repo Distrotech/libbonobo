@@ -533,7 +533,8 @@ bonobo_pbclient_get_value  (Bonobo_PropertyBag  bag,
 	if (retval && opt_tc != CORBA_OBJECT_NIL) {
 
 		/* fixme: we can also try to do automatic type conversions */
-
+		/* FIXME: use CORBA_TypeCode_equivalent when we
+		   can get a new ORBit2 release */
 		if (!CORBA_TypeCode_equal (opt_tc, retval->_type, my_ev)) {
 			CORBA_free (retval);
 			if (!opt_ev)

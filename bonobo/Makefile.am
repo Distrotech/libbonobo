@@ -136,11 +136,12 @@ libbonobo_src =				\
 	bonobo-running-context.c	\
 	bonobo-types.c
 
-libbonobo_2_la_SOURCES = \
-	$(CORBA_SOURCE)			\
-	$(marshal_sources)		\
+$(libbonobo_src:.c=.lo) : $(CORBA_SOURCE) $(marshal_source)
+
+libbonobo_2_la_SOURCES =		\
 	$(libbonoboinclude_HEADERS)	\
-	$(libbonobo_src)
+	$(libbonobo_src)		\
+	$(CORBA_SOURCE)
 
 Bonobo_module_la_SOURCES = \
 	Bonobo-imodule.c
