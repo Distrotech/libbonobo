@@ -1,7 +1,6 @@
 #include <config.h>
 #include <string.h>
-#include <gobject/gvalue.h>
-#include <gobject/gvaluearray.h>
+#include <glib-object.h>
 #include <gobject/gvaluecollector.h>
 #include <gobject/gobject.h>
 #include <gobject/genums.h>

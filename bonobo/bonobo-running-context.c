@@ -10,7 +10,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <glib/gmain.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 
 #include <bonobo/bonobo-context.h>
 #include <bonobo/bonobo-exception.h>

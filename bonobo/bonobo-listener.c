@@ -11,7 +11,7 @@
 #include <config.h>
 #include <string.h>
 
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 #include <gobject/gvaluetypes.h>
 
 #include <bonobo/bonobo-exception.h>

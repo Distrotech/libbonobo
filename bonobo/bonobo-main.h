@@ -13,7 +13,7 @@
 #ifndef __LIBBONOBO_MAIN_H__
 #define __LIBBONOBO_MAIN_H__
 
-#include <gobject/gobject.h>
+#include <glib-object.h>
 #include <bonobo/Bonobo.h>
 
 gboolean                    bonobo_is_initialized        (void);

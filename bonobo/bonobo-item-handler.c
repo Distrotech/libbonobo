@@ -8,7 +8,7 @@
  * Copyright 2000 Miguel de Icaza.
  */
 #include <config.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>

@@ -8,7 +8,7 @@
  * Copyright (C) 2000, Ximian, Inc.
  */
 #include <config.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>

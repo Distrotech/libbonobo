@@ -12,7 +12,7 @@
 #include <config.h>
 #include <time.h>
 #include <string.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 #include <bonobo/bonobo-listener.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-event-source.h>

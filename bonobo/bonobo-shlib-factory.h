@@ -11,7 +11,7 @@
 #define _BONOBO_SHLIB_FACTORY_H_
 
 
-#include <gobject/gobject.h>
+#include <glib-object.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-generic-factory.h>

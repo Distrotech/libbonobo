@@ -12,7 +12,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <string.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-exception.h>

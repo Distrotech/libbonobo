@@ -14,7 +14,7 @@
  * Copyright 1999, 2001 Ximian, Inc.
  */
 #include <config.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>

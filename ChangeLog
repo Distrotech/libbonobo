@@ -1,3 +1,26 @@
+2001-11-18  Miles Lane  <miles@megapathdsl.net>
+
+	* bonobo/bonobo-event-source.c
+	bonobo/bonobo-generic-factory.c
+	bonobo/bonobo-item-container.c
+	bonobo/bonobo-item-handler.c
+	bonobo/bonobo-listener.c
+	bonobo/bonobo-main.h
+	bonobo/bonobo-moniker-context.c
+	bonobo/bonobo-object.c
+	bonobo/bonobo-persist-file.c
+	bonobo/bonobo-persist-stream.c
+	bonobo/bonobo-persist.c
+	bonobo/bonobo-running-context.c
+	bonobo/bonobo-shlib-factory.c
+	bonobo/bonobo-shlib-factory.h
+	bonobo/bonobo-types.c
+	tests/test-properties-server.c : replace occurances of 
+        gobject/[gobject, gsignal, gvalue, gvaluearray].h with 
+	glib-object.h, due to a change in these include files
+        that forces an #error for all direct includes.  
+        This checkin was approved by Havoc.
+
 2001-11-14  Michael Meeks  <michael@ximian.com>
 
 	* idl/Bonobo_Control.idl: include Bonobo_UI.idl

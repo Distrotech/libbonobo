@@ -9,7 +9,7 @@
  */
 #include <config.h>
 #include <string.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/bonobo-persist.h>
 

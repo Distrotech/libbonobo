@@ -9,7 +9,7 @@
  * Copyright 1999 Ximian, Inc.
  */
 #include <config.h>
-#include <gobject/gsignal.h>
+#include <glib-object.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-persist-stream.h>
