@@ -1,5 +1,11 @@
 2000-10-05  Darin Adler  <darin@eazel.com>
 
+	* bonobo/bonobo-ui-component.h: Move BEGIN_GNOME_DECLS after the
+	includes so this file can be included without including
+	gnome-defs.h first.
+
+2000-10-05  Darin Adler  <darin@eazel.com>
+
 	* doc/ui-xml.txt: Doc says "Main" code says "main".
 
 2000-10-05  Michael Meeks  <michael@helixcode.com>
