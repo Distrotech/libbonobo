@@ -1,0 +1,68 @@
+<!-- ##### SECTION Title ##### -->
+utilities
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT OAFActivationInfo ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION oaf_actinfo_stringify ##### -->
+<para>
+
+</para>
+
+@actinfo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oaf_servinfo_to_actinfo ##### -->
+<para>
+
+</para>
+
+@servinfo: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oaf_actid_parse ##### -->
+<para>
+
+</para>
+
+@actid: 
+@Returns: 
+
+
+<!-- ##### FUNCTION oaf_actinfo_free ##### -->
+<para>
+
+</para>
+
+@actinfo: 
+
+
+<!-- ##### FUNCTION OAF_ServerInfo_duplicate ##### -->
+<para>
+
+</para>
+
+@original: 
+@Returns: 
+
+

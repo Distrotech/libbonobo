@@ -1,4 +1,4 @@
-<appendix id="configuring">
+<chapter id="configuring">
 <title>Configuring OAF</title>
 
 <sect1>
@@ -58,4 +58,4 @@ tool to edit this file. However, here is an example of its format.
 
 </sect1>
 
-</appendix>
+</chapter>

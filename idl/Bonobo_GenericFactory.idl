@@ -9,7 +9,7 @@
 
 #if !defined(GNOME_FACTORY_COMPILATION) && defined(__ORBIT_IDL__)
 %{
-#pragma include_defs "liboaf/gnome-factory.h"
+#pragma include_defs "liboaf/oaf-factory.h"
 %}
 #pragma inhibit push
 #endif

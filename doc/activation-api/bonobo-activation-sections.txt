@@ -1,7 +1,7 @@
 <INCLUDE>liboaf/liboaf.h</INCLUDE>
 
 <SECTION>
-<FILE>utils</FILE>
+<FILE>utilities</FILE>
 OAFActivationInfo
 oaf_actinfo_stringify
 oaf_servinfo_to_actinfo
@@ -29,7 +29,7 @@ oaf_active_server_unregister
 </SECTION>
 
 <SECTION>
-<FILE>init</FILE>
+<FILE>initialization</FILE>
 oaf_is_initialized
 oaf_init
 oaf_orb_get

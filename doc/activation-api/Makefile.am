@@ -9,38 +9,34 @@ DOC_MAIN_SGML_FILE=liboaf.sgml
 # The directory containing the source code (if it contains documentation).
 DOC_SOURCE_DIR=$(top_srcdir)/liboaf
 
-CFLAGS=`oaf-config --cflags`
-LDFLAGS=`oaf-config --libs`
-
 HTML_DIR=$(datadir)/oaf/html
 
 TARGET_DIR=$(HTML_DIR)/$(DOC_MODULE)
 
 tmpl_sources =				\
-	tmpl/utils.sgml			\
-	tmpl/init.sgml			\
-	tmpl/activation.sgml		\
+	tmpl/utilities.sgml		\
+	tmpl/initialization.sgml	\
+	tmpl/query_and_activation.sgml	\
 	tmpl/registration.sgml		\
 	$(NULL)
 
 
 liboaf_docdir = $(HTML_DIR)
 liboaf_doc_DATA =			\
-	liboaf.html			\
-	liboaf-decl.txt			\
-	liboaf-sections.txt		\
+	html/book1.html			\
 	$(NULL)
 
 
-EXTRA_DIST = 				\
-	tutorial.gml			\
+my_sgml_files = 			\
+	tutorial.sgml			\
 	migrating.sgml			\
 	oafinfo-ref.sgml		\
 	configuring.sgml		\
 	query-langage.sgml		\
 	architecture.sgml		\
-	$(liboaf_doc_DATA)		\
 	$(NULL)
+
+EXTRA_DIST = $(my_sgml_files)
 
 if ENABLE_GTK_DOC
 liboaf.html: html/book1.html
@@ -49,7 +45,7 @@ else
 liboaf.html:
 endif
 
-html/book1.html: sgml/liboaf-doc.bottom $(content_files)
+html/book1.html: sgml/liboaf-doc.bottom $(content_files) $(my_sgml_files)
 	$(MAKE) html
 
 sgml/liboaf-doc.bottom: $(tmpl_sources)

@@ -1,8 +1,8 @@
 <!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
-<!entity init SYSTEM "sgml/init.sgml">
+<!entity init SYSTEM "sgml/initialization.sgml">
 <!entity registration SYSTEM "sgml/registration.sgml">
-<!entity activation SYSTEM "sgml/activation.sgml">
-<!entity utils SYSTEM "sgml/utils.sgml">
+<!entity activation SYSTEM "sgml/query_and_activation.sgml">
+<!entity utils SYSTEM "sgml/utilities.sgml">
 <!entity compiling SYSTEM "compiling.sgml">
 <!entity configuring SYSTEM "configuring.sgml">
 <!entity query-langage SYSTEM "query-langage.sgml">
@@ -28,34 +28,44 @@
       </author>
     </authorgroup>
 
+
+    <legalnotice>
+    <para>
+    XXX: put here a FDL declaration.
+    </para>
+    </legalnotice>
+
     <copyright>
       <year>2000</year>
       <holder>The Free Software Foundation</holder>
     </copyright>
   </bookinfo>
 
-  <reference id="api-reference">
+
+  &tutorial;
+  &configuring;
+
+  &architecture;
+  &query-langage;
+  &oafinfo-ref;
+  &migrating;
+
+
+  <chapter id="api-reference">
     <title>API Reference</title>
-    <partintro>
       <para>
 	This part presents the function reference for the
 	liboaf library.
       </para>
-      </partintro>
 
     &init;
     &activation;
     &utils;
     &registration;
 
-  </reference>
+  </chapter>
 
-  &configuring;
-  &architecture;
-  &query-langage;
-  &oafinfo-ref;
-  &tutorial;
-  &migrating;
+
 
 
 

@@ -1,4 +1,4 @@
-<appendix id="architecture">
+<chapter id="architecture">
 <title>OAF Architecture</title>
 
 <sect1>
@@ -99,4 +99,4 @@ since there are optimizations to save this call but the general idea is right).
 
 </sect1>
 
-</appendix>
+</chapter>

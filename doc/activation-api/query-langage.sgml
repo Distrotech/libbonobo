@@ -1,4 +1,4 @@
-<appendix id="query-langage">
+<chapter id="query-langage">
 <title>OAF Query Langage</title>
 
 <sect1>
@@ -293,7 +293,7 @@ min(expr)
 
 
 </sect1>
-</appendix>
+</chapter>
 
 
 
