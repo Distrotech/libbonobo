@@ -660,11 +660,16 @@ bonobo_property_bag_add_full (BonoboPropertyBag  *pb,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG (pb));
 	g_return_if_fail (g_hash_table_lookup (pb->priv->props, name) == NULL);
 			    
-	if ((BONOBO_PROPERTY_READABLE  (prop->flags) && !get_prop) ||
-	    (BONOBO_PROPERTY_WRITEABLE (prop->flags) && !set_prop)) {
-		g_warning ("Serious property error, missing get/set fn.");
+	if (((flags & BONOBO_PROPERTY_READABLE)  && !get_prop) ||
+	    ((flags & BONOBO_PROPERTY_WRITEABLE) && !set_prop)) {
+		g_warning ("Serious property error, missing get/set fn. "
+			   "on %s", name);
 		return;
 	}
+
+	if (!(flags & BONOBO_PROPERTY_READABLE) && default_value)
+		g_warning ("Assigning a default value to a non readable "
+			   "property '%s'", name);
 
 	prop = g_new0 (BonoboProperty, 1);
 
@@ -680,6 +685,138 @@ bonobo_property_bag_add_full (BonoboPropertyBag  *pb,
 	prop->user_data     = user_data;
 
 	g_hash_table_insert (pb->priv->props, prop->name, prop);
+}
+
+static BonoboPropertyFlags
+flags_gtk_to_bonobo (guint flags)
+{
+	BonoboPropertyFlags f = 0;
+
+	if (!flags & GTK_ARG_READABLE)
+		f |= BONOBO_PROPERTY_READABLE;
+
+	if (!flags & GTK_ARG_WRITABLE)
+		f |= BONOBO_PROPERTY_WRITEABLE;
+
+	return f;
+}
+
+#define BONOBO_GTK_MAP_KEY "BonoboGtkMapKey"
+
+static void
+get_prop (BonoboPropertyBag *bag,
+	  BonoboArg         *arg,
+	  guint              arg_id,
+	  gpointer           user_data)
+{
+	GtkArg *gtk_arg = user_data;
+	GtkArg  new;
+	GtkObject *obj;
+
+	obj = gtk_object_get_data (GTK_OBJECT (bag),
+				   BONOBO_GTK_MAP_KEY);
+
+	g_return_if_fail (obj != NULL);
+	
+/*	g_warning ("Get prop ... %d: %s", arg_id, gtk_arg->name);*/
+
+	new.type = gtk_arg->type;
+	new.name = gtk_arg->name;
+	gtk_object_getv (obj, 1, &new);
+
+	bonobo_arg_from_gtk (arg, &new);
+
+	if (new.type == GTK_TYPE_STRING &&
+	    GTK_VALUE_STRING (new))
+		g_free (GTK_VALUE_STRING (new));
+}
+
+static void
+set_prop (BonoboPropertyBag *bag,
+	  const BonoboArg   *arg,
+	  guint              arg_id,
+	  gpointer           user_data)
+{
+	GtkArg *gtk_arg = user_data;
+	GtkArg  new;
+	GtkObject *obj;
+
+	obj = gtk_object_get_data (GTK_OBJECT (bag),
+				   BONOBO_GTK_MAP_KEY);
+
+	g_return_if_fail (obj != NULL);
+	
+/*	g_warning ("Set prop ... %d: %s", arg_id, gtk_arg->name);*/
+
+	new.type = gtk_arg->type;
+	new.name = gtk_arg->name;
+	bonobo_arg_to_gtk (&new, arg);
+
+	gtk_object_setv (obj, 1, &new);
+}
+
+void
+bonobo_property_bag_add_gtk_args (BonoboPropertyBag  *pb,
+				  GtkObject          *object)
+{
+	GtkArg  *args, *arg;
+	guint32 *arg_flags;
+	int      nargs = 0;
+	int      i;
+
+	g_return_if_fail (pb != NULL);
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GTK_IS_OBJECT (object));
+
+	if (gtk_object_get_data (GTK_OBJECT (pb),
+				 BONOBO_GTK_MAP_KEY)) {
+		g_warning ("Cannot proxy two gtk objects in the same bag yet");
+		return;
+	}
+
+	gtk_object_set_data (GTK_OBJECT (pb),
+			     BONOBO_GTK_MAP_KEY, object);
+	/*
+	 * FIXME: we should do this on a per class basis perhaps.
+	 */
+	args = gtk_object_query_args (GTK_OBJECT_TYPE (object),
+				      &arg_flags, &nargs);
+	
+	if (!nargs) {
+		g_warning ("Strange, no Gtk arguments to map to Bonobo");
+		return;
+	}
+
+	arg = args;
+	/* Setup types, and names */
+	for (i = 0; i < nargs; arg++, i++) {
+		BonoboPropertyFlags flags;
+		BonoboArgType       type;
+		char               *desc;
+
+		type = bonobo_arg_type_from_gtk (arg->type);
+		if (!type) {
+			g_warning ("Can't handle type '%s' on arg '%s'",
+				   gtk_type_name (arg->type),
+				   arg->name);
+			continue;
+		}
+
+		flags = flags_gtk_to_bonobo (arg_flags [i]);
+
+		desc = g_strconcat (arg->name, " is a ",
+				    gtk_type_name (arg->type), NULL);
+
+		g_warning ("Mapping '%s'", desc);
+		bonobo_property_bag_add_full (pb, arg->name, i, type,
+					      NULL, desc, flags,
+					      get_prop, set_prop, arg);
+		g_free (desc);
+	}
+
+/* FIXME: leaks like a privatised water company */
+/*	g_free (args);*/
+	g_free (arg_flags);
 }
 
 void
@@ -710,16 +847,16 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
 	g_return_if_fail (pb != NULL);
 	g_return_if_fail (name != NULL);
 	g_return_if_fail (pb->priv != NULL);
-	g_return_if_fail (pb->priv->set_prop != NULL);
 
 	prop = g_hash_table_lookup (pb->priv->props, name);
 
 	g_return_if_fail (prop != NULL);
+	g_return_if_fail (prop->set_prop != NULL);
 	g_return_if_fail (prop->type != value->_type);
 
 	/* FIXME: Emit some sort of CORBA / Bonobo 'changed' signal */
 
-	pb->priv->set_prop (pb, value, prop->idx, pb->priv->user_data);
+	prop->set_prop (pb, value, prop->idx, prop->user_data);
 }
 
 /**
@@ -736,12 +873,13 @@ bonobo_property_bag_get_value (BonoboPropertyBag *pb, const char *name)
 	g_return_val_if_fail (pb->priv != NULL, NULL);
 
 	prop = g_hash_table_lookup (pb->priv->props, name);
+
 	g_return_val_if_fail (prop != NULL, NULL);
 	g_return_val_if_fail (prop->get_prop != NULL, NULL);
 
 	arg = bonobo_arg_new (prop->type);
 
-	prop->get_prop (pb, arg, prop->idx, pb->priv->user_data);
+	prop->get_prop (pb, arg, prop->idx, prop->user_data);
 
 	return arg;
 }
@@ -778,8 +916,11 @@ bonobo_property_bag_get_default (BonoboPropertyBag *pb, const char *name)
 
 	if (prop->default_value)
 		return bonobo_arg_copy (prop->default_value);
-	else
-		return bonobo_arg_new_default (prop->type);
+	else {
+		BonoboArg *a = bonobo_arg_new (prop->type);
+		bonobo_arg_init_default (a);
+		return a;
+	}
 }
 
 /**

@@ -11,13 +11,10 @@ typedef struct _BonoboPropertyBag	 BonoboPropertyBag;
 
 typedef enum {
 	BONOBO_PROPERTY_UNSTORED        = 1,
-	BONOBO_PROPERTY_READ_ONLY       = 2,
-	BONOBO_PROPERTY_WRITE_ONLY      = 4,
+	BONOBO_PROPERTY_READABLE        = 2,
+	BONOBO_PROPERTY_WRITEABLE       = 4,
 	BONOBO_PROPERTY_USE_DEFAULT_OPT = 8
 } BonoboPropertyFlags;
-
-#define BONOBO_PROPERTY_READABLE(f)  (!((f) & BONOBO_PROPERTY_WRITE_ONLY))
-#define BONOBO_PROPERTY_WRITEABLE(f) (!((f) & BONOBO_PROPERTY_READ_ONLY))
 
 #include <bonobo/bonobo-arg.h>
 
@@ -70,6 +67,9 @@ void                      bonobo_property_bag_add_full         (BonoboPropertyBa
 								BonoboPropertyGetFn get_prop,
 								BonoboPropertySetFn set_prop,
 								gpointer            user_data);
+
+void                      bonobo_property_bag_add_gtk_args     (BonoboPropertyBag  *pb,
+								GtkObject          *object);
 
 BonoboArgType             bonobo_property_bag_get_type         (BonoboPropertyBag *pb, const char *name);
 

@@ -1,3 +1,33 @@
+2000-04-04  Michael Meeks  <michael@helixcode.com>
+
+	* samples/controls/bonobo-clock-control.c (bonobo_entry_factory): implement.
+	(bonobo_clock_factory_init): update.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_get_value): use the
+	right user_data (bonobo_property_bag_set_value): ditto + right set fn.
+
+2000-04-03  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-arg.c (bonobo_arg_new_default): Killed in favour of
+	(bonobo_arg_init_default): create.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_get_default):
+	update to use new default init fn.
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_get_flags): 
+	update to new names; we really need to pass all the flags; it's folly not
+	to.
+
+	* bonobo/bonobo-arg.c (bonobo_arg_type_from_gtk, bonobo_arg_to_gtk),
+	(bonobo_arg_from_gtk): implement.
+
+	* bonobo/bonobo-property-bag.h: rename the property flags to make
+	more sense; kill read_only / write_only make more gtk-like. kill
+	redundant macros.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_add_full): update
+	to suite & improve developer debugging support.
+
 2000-04-02  Jon K Hellan  <hellan@acm.org>
 
 	* bonobo/bonobo-uih-menu.c (menu_parse_uiinfo_one): Tolerate NULL

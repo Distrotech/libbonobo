@@ -86,7 +86,7 @@ impl_Bonobo_Property_is_read_only (PortableServer_Servant servant,
 
 	flags = bonobo_property_bag_get_flags (pservant->pb, pservant->property_name);
 
-	return (CORBA_boolean) ((flags & BONOBO_PROPERTY_READ_ONLY) != 0);
+	return (CORBA_boolean) ((flags & BONOBO_PROPERTY_READABLE) == 0);
 
 }
 

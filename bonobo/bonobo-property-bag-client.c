@@ -643,7 +643,7 @@ bonobo_property_bag_client_get_docstring (BonoboPropertyBagClient *pbc,
 
 BonoboPropertyFlags
 bonobo_property_bag_client_get_flags (BonoboPropertyBagClient *pbc,
-				     const char *propname)
+				      const char *propname)
 {
 	BonoboPropertyFlags flags;
 	Bonobo_Property     prop;
@@ -663,7 +663,7 @@ bonobo_property_bag_client_get_flags (BonoboPropertyBagClient *pbc,
 	if (ev._major != CORBA_NO_EXCEPTION)
 		goto flags_error;
 
-	flags = (is_read_only    ? BONOBO_PROPERTY_READ_ONLY       : 0);
+	flags = (is_read_only ? 0: BONOBO_PROPERTY_WRITEABLE);
 
 	return flags;
 
