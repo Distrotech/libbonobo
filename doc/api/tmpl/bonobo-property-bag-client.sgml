@@ -11,7 +11,7 @@ bonobo-property-bag-client
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
-
+   #BonoboPropertyBag, #BonoboProperty, #BonoboPropertyControl
 </para>
 
 <!-- ##### FUNCTION bonobo_property_bag_client_get_properties ##### -->
@@ -71,14 +71,6 @@ bonobo-property-bag-client
 @pb: 
 @stream: 
 @ev: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_client_setv ##### -->

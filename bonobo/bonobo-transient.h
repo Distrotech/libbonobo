@@ -45,22 +45,19 @@ typedef struct {
 /*
  * Signature for incarnating servants in the BonoboTransient 
  */
-typedef PortableServer_Servant
-       (*BonoboTransientServantNew) (PortableServer_POA, BonoboTransient *, char *name, void *data);
+typedef PortableServer_Servant (*BonoboTransientServantNew) (PortableServer_POA, BonoboTransient *, char *name, void *data);
 
 /*
  * Signature for destroying servants created by BonoboTransientServantNew functions
  */
 typedef void (*BonoboTransientServantDestroy) (PortableServer_Servant servant, void *data);
 
-BonoboTransient *
-bonobo_transient_new           (PortableServer_POA poa,
+BonoboTransient *bonobo_transient_new           (PortableServer_POA poa,
 				BonoboTransientServantNew     new_servant,
 				BonoboTransientServantDestroy destroy_servant,
 				void *data);
 
-CORBA_Object
-bonobo_transient_create_objref (BonoboTransient   *transient,
+CORBA_Object bonobo_transient_create_objref (BonoboTransient   *transient,
 				const char        *iface_name,
 				const char        *name,
 				CORBA_Environment *ev);
@@ -70,3 +67,6 @@ GtkType bonobo_transient_get_type (void);
 END_GNOME_DECLS
 
 #endif /* _BONOBO_TRANSIENT_H_ */
+
+
+

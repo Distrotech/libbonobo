@@ -14,23 +14,24 @@ BonoboPropertyBag
 
 </para>
 
-<!-- ##### STRUCT BonoboPropertyBagPrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### STRUCT BonoboPropertyBag ##### -->
 <para>
 
 </para>
 
+@parent: 
+@priv: 
 
 <!-- ##### ENUM BonoboPropertyFlags ##### -->
 <para>
 
 </para>
 
+@BONOBO_PROPERTY_UNSTORED: 
+@BONOBO_PROPERTY_READABLE: 
+@BONOBO_PROPERTY_WRITEABLE: 
+@BONOBO_PROPERTY_USE_DEFAULT_OPT: 
+@BONOBO_PROPERTY_NO_LISTENING: 
 
 <!-- ##### USER_FUNCTION BonoboPropertyGetFn ##### -->
 <para>
@@ -54,7 +55,7 @@ BonoboPropertyBag
 @user_data: 
 
 
-<!-- ##### STRUCT BonoboPropertyBagClass ##### -->
+<!-- ##### TYPEDEF BonoboPropertyBagClass ##### -->
 <para>
 
 </para>
@@ -156,16 +157,6 @@ BonoboPropertyBag
 
 @pb: 
 @object: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_get_type ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_set_value ##### -->

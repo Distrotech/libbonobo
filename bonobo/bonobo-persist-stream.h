@@ -21,9 +21,8 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_PERSIST_STREAM(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_STREAM_TYPE))
 #define BONOBO_IS_PERSIST_STREAM_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_STREAM_TYPE))
 
-typedef struct _BonoboPersistStream        BonoboPersistStream;
 typedef struct _BonoboPersistStreamPrivate BonoboPersistStreamPrivate;
-
+typedef struct _BonoboPersistStream        BonoboPersistStream;
 
 typedef void  (*BonoboPersistStreamIOFn) (BonoboPersistStream         *ps,
 					  const Bonobo_Stream         stream,

@@ -153,6 +153,7 @@ impl_Bonobo_ItemContainer_getObjectByName (PortableServer_Servant servant,
 /**
  * bonobo_item_container_get_epv:
  *
+ * Returns: The EPV for the default BonoboItemContainer implementation.  
  */
 POA_Bonobo_ItemContainer__epv *
 bonobo_item_container_get_epv (void)

@@ -80,24 +80,16 @@ Abstract object for file (stream) access.
 @k: 
 
 
-<!-- ##### STRUCT BonoboStream ##### -->
+<!-- ##### TYPEDEF BonoboStream ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT BonoboStreamClass ##### -->
+<!-- ##### TYPEDEF BonoboStreamClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_stream_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_stream_get_epv ##### -->

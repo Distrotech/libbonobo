@@ -1,4 +1,82 @@
+2000-12-04  Miguel de Icaza  <miguel@helixcode.com>
+
+	* bonobo/*.h: Made the typedef struct usage consistent. 
+
+	* doc/api/bonobo-listener.sgml: Documented.
+
+	* bonobo/bonobo-listener.c: Completed in-line api docs. 
+
 2000-12-03  Miguel de Icaza  <miguel@helixcode.com>
+
+	* bonobo/Makefile.am (libbonobo_la_SOURCES): Added back
+	bonobo-item-handler.c
+
+	* doc/api/Makefile.am (scan): Updated to include all the new
+	header files.
+	(CFLAGS): Include bonobox and bonobox_print to get `make scan' to
+	work. 
+
+	* doc/api/bonobo.types: Add all the new types;  Removed bonobo_ui_handler
+
+	* bonobo/Makefile.am (libbonoboinclude_HEADERS): Remove
+	embeddable-factory.h from the INCLUDE list. 
+
+	* doc/api/bonobo-sections.txt: Put all the _get_type functions in
+	the <SUBSECTION Standard> and put all the Private structures there
+	too. 
+	
+	Moved all the new methods into their proper sections in bonobo-sections.txt
+
+	Removed EmbeddableFactory
+	
+	* doc/api/bonobo-api.sgml: Reorganized the layout.
+	
+	* bonobo-activation-context.c: Document _get_epv method.
+	* bonobo-canvas-component.c: Document _get_epv method.
+	* bonobo-client-site.c: Document _get_epv method.
+	* bonobo-control-frame.c: Document _get_epv method.
+	* bonobo-control.c: Document _get_epv method.
+	* bonobo-desktop-window.c: Document _get_epv method.
+	* bonobo-embeddable.c: Document _get_epv method.
+	* bonobo-event-source.c: Document _get_epv method.
+	* bonobo-generic-factory.c: Document _get_epv method.
+	* bonobo-item-container.c: Document _get_epv method.
+	* bonobo-item-handler.c: Document _get_epv method.
+	* bonobo-listener.c: Document _get_epv method.
+	* bonobo-moniker.c: Document _get_epv method.
+	* bonobo-object.c: Document _get_epv method.
+	* bonobo-persist-file.c: Document _get_epv method.
+	* bonobo-persist-stream.c: Document _get_epv method.
+	* bonobo-persist.c: Document _get_epv method.
+	* bonobo-print.c: Document _get_epv method.
+	* bonobo-progressive.c: Document _get_epv method.
+	* bonobo-property-bag.c: Document _get_epv method.
+	* bonobo-property-control.c: Document _get_epv method.
+	* bonobo-property-listener.c: Document _get_epv method.
+	* bonobo-property.c: Document _get_epv method.
+	* bonobo-storage.c: Document _get_epv method.
+	* bonobo-stream.c: Document _get_epv method.
+	* bonobo-ui-component.c: Document _get_epv method.
+	* bonobo-ui-container.c: Document _get_epv method.
+	* bonobo-ui-handler.c: Document _get_epv method.
+	* bonobo-view-frame.c: Document _get_epv method.
+	* bonobo-view.c: Document _get_epv method.
+	* bonobo-zoomable-frame.c: Document _get_epv method.
+	* bonobo-zoomable.c: Document _get_epv method.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_new_view):
+	gtkdoc update. 
+
+	* bonobo/bonobo-canvas-component.h: Update .h and .c parameter
+	names for gtkdoc.
+
+	* bonobo/bonobo-ui-compat.c: Removed extra star that confuses gtkdoc
+	* bonobo/bonobo-desktop-window.c: ditto
+	* bonobo/bonobo-persist-stream.c: ditto
+	* bonobo/bonobo-object-client.c: ditto
+	* bonobo/bonobo-canvas-component.c: ditto
+	* bonobo/bonobo-win.c: ditto
+	(set_cmd_attr): do not tag function for being exported
 
 	* doc/api/tmpl/bonobo-canvas-component.sgml: Add documentation,
 	example. 

@@ -5,6 +5,7 @@
  * Author:
  *	Alex Graveley (alex@helixcode.com)
  *	Iain Holmes   (iain@helixcode.com)
+ *      docs, Miguel de Icaza (miguel@helixcode.com)
  *
  * Copyright (C) 2000, Helix Code, Inc.
  */
@@ -118,6 +119,21 @@ impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
 			     NULL);
 }
 
+/**
+ * bonobo_event_source_notify_listeners:
+ * @event_source: the Event Source that will emit the event.
+ * @event_name: Name of the event being emmited
+ * @value: A CORBA_any value that contains the data that is passed to interested clients
+ * @opt_ev: A CORBA_Environment where a failure code can be returned, can be NULL.
+ *
+ * This will notify all clients that have registered with this EventSource
+ * (through the addListener or addListenerWithMask methods) of the availability
+ * of the event named @event_name.  The @value CORBA::any value is passed to
+ * all listeners.
+ *
+ * @event_name can not contain comma separators, as commas are used to
+ * separate the various event names. 
+ */
 void
 bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 				      const char        *event_name,
@@ -149,6 +165,8 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 
 /**
  * bonobo_event_source_get_epv:
+ *
+ * Returns: The EPV for the default BonoboEventSource implementation.  
  */
 POA_Bonobo_EventSource__epv *
 bonobo_event_source_get_epv (void)
@@ -277,6 +295,19 @@ bonobo_event_source_construct (BonoboEventSource  *event_source,
         return event_source;
 }
 
+/**
+ * bonobo_event_source_new:
+ *
+ * Creates a new BonoboEventSource object.  Typically this
+ * object will be exposed to clients through CORBA and they
+ * will register and unregister functions to be notified
+ * of events that this EventSource generates.
+ * 
+ * To notify clients of an event, use the bonobo_event_source_notify_listeners()
+ * function.
+ *
+ * Returns: A new #BonoboEventSource server object.
+ */
 BonoboEventSource *
 bonobo_event_source_new (void)
 {

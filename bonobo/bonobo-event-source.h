@@ -20,13 +20,12 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_EVENT_SOURCE(o)       (GTK_CHECK_TYPE ((o), BONOBO_EVENT_SOURCE_TYPE))
 #define BONOBO_IS_EVENT_SOURCE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_EVENT_SOURCE_TYPE))
 
-typedef struct _BonoboEventSource        BonoboEventSource;
 typedef struct _BonoboEventSourcePrivate BonoboEventSourcePrivate;
 
-struct _BonoboEventSource {
+typedef struct {
 	BonoboObject              parent;
 	BonoboEventSourcePrivate *priv;
-};
+} BonoboEventSource;
 
 typedef struct {
 	BonoboObjectClass parent_class;

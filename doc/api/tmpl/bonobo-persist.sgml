@@ -53,24 +53,16 @@ BonoboPersist
 @k: 
 
 
-<!-- ##### STRUCT BonoboPersist ##### -->
+<!-- ##### TYPEDEF BonoboPersist ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT BonoboPersistClass ##### -->
+<!-- ##### TYPEDEF BonoboPersistClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_persist_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_persist_construct ##### -->

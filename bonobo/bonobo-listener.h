@@ -22,14 +22,13 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_LISTENER(o)       (GTK_CHECK_TYPE ((o), BONOBO_LISTENER_TYPE))
 #define BONOBO_IS_LISTENER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_LISTENER_TYPE))
 
-typedef struct _BonoboListener        BonoboListener;
 typedef struct _BonoboListenerPrivate BonoboListenerPrivate;
 
-struct _BonoboListener {
+typedef struct {
         BonoboObject	       parent;
 
 	BonoboListenerPrivate *priv;
-};
+} BonoboListener;
 
 typedef struct {
 	BonoboObjectClass parent_class;

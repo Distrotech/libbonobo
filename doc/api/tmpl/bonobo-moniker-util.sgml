@@ -109,3 +109,14 @@ bonobo-moniker-util
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_moniker_client_new_from_name_async ##### -->
+<para>
+
+</para>
+
+@name: 
+@ev: 
+@cb: 
+@user_data: 
+
+

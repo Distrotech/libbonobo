@@ -63,30 +63,16 @@ Helper widget for controlling event delivery to embedded components
 @klass: 
 
 
-<!-- ##### STRUCT BonoboWrapper ##### -->
+<!-- ##### TYPEDEF BonoboWrapper ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT BonoboWrapperClass ##### -->
+<!-- ##### TYPEDEF BonoboWrapperClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### STRUCT BonoboWrapperPrivate ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION bonobo_wrapper_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_wrapper_new ##### -->

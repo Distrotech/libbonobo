@@ -24,12 +24,11 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_GENERIC_FACTORY(o)       (GTK_CHECK_TYPE ((o), BONOBO_GENERIC_FACTORY_TYPE))
 #define BONOBO_IS_GENERIC_FACTORY_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_GENERIC_FACTORY_TYPE))
 
-struct _BonoboGenericFactory;
-typedef struct _BonoboGenericFactory BonoboGenericFactory;
 typedef struct _BonoboGenericFactoryPrivate BonoboGenericFactoryPrivate;
+typedef struct _BonoboGenericFactory        BonoboGenericFactory;
 
 typedef BonoboObject * (*BonoboGenericFactoryFn)(BonoboGenericFactory *Factory, void *closure);
-typedef BonoboObject * (*GnomeFactoryCallback)(BonoboGenericFactory *factory, const char *goad_id, gpointer closure);
+typedef BonoboObject * (*GnomeFactoryCallback)(BonoboGenericFactory *factory, const char *component_id, gpointer closure);
 					
 struct _BonoboGenericFactory {
 	BonoboObject base;
@@ -42,7 +41,7 @@ struct _BonoboGenericFactory {
 	gpointer factory_closure;
 
 	/*
-	 * The goad_id for this generic factory
+	 * The component_id for this generic factory
 	 */
 	char *goad_id;
 };
@@ -53,23 +52,23 @@ typedef struct {
 	/*
 	 * Virtual methods
 	 */
-	BonoboObject * (*new_generic)(BonoboGenericFactory *c_factory, const char *goad_id);
+	BonoboObject * (*new_generic)(BonoboGenericFactory *c_factory, const char *component_id);
 } BonoboGenericFactoryClass;
 
 GtkType bonobo_generic_factory_get_type  (void);
 
 BonoboGenericFactory *bonobo_generic_factory_new (
-	const char *goad_id,
+	const char *component_id,
 	BonoboGenericFactoryFn factory,
 	void *data);
 
 BonoboGenericFactory *bonobo_generic_factory_new_multi (
-	const char *goad_id,
+	const char *component_id,
 	GnomeFactoryCallback factory_cb,
 	gpointer data);
 
 BonoboGenericFactory *bonobo_generic_factory_construct (
-	const char *goad_id,
+	const char *component_id,
 	BonoboGenericFactory  *c_factory,
 	CORBA_Object          corba_factory,
 	BonoboGenericFactoryFn factory,

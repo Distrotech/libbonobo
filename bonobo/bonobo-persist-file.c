@@ -104,6 +104,8 @@ impl_save (PortableServer_Servant servant,
 
 /**
  * bonobo_persist_file_get_epv:
+ *
+ * Returns: The EPV for the default BonoboPersistFile implementation.  
  */
 POA_Bonobo_PersistFile__epv *
 bonobo_persist_file_get_epv (void)

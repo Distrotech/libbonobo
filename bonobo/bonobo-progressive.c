@@ -121,6 +121,8 @@ impl_Bonobo_ProgressiveDataSink_setSize (PortableServer_Servant servant,
 
 /**
  * bonobo_progressive_get_epv:
+ *
+ * Returns: The EPV for the BonoboProgressive implementation.  
  */
 POA_Bonobo_ProgressiveDataSink__epv *
 bonobo_progressive_get_epv (void)

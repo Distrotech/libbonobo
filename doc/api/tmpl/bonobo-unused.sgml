@@ -7,16 +7,6 @@
 @uii: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_embeddable_add_verb ##### -->
-<para>
-
-</para>
-
-@bonobo_object: 
-@verb_name: 
-@verb_label: 
-@verb_hint: 
-
 <!-- ##### FUNCTION gnome_object_client_from_corba ##### -->
 <para>
 </para>
@@ -29,11 +19,36 @@
 </para>
 
 
+<!-- ##### FUNCTION POA_GNOME_EmbeddableFactory__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
 <!-- ##### MACRO GNOME_SIMPLE_DATA_SOURCE_TYPE ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### FUNCTION bonobo_desktop_window_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_toggle_get_state ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
 
 <!-- ##### FUNCTION gnome_view_new ##### -->
 <para>
@@ -43,25 +58,25 @@
 @widget: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-simple-source.sgml:See_Also ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### SECTION ./tmpl/gnome-container.sgml:Short_Description ##### -->
 A server for components that can embedd other components.
 
 
-<!-- ##### FUNCTION gnome_view_set_view_frame ##### -->
+<!-- ##### SECTION ./tmpl/bonobo-embeddable-factory.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION GNOME_PersistStorage_save ##### -->
 <para>
 
 </para>
 
-@view: 
-@view_frame: 
+@_obj: 
+@storage: 
+@same_as_loaded: 
+@ev: 
 
-<!-- ##### STRUCT StorageDriver ##### -->
+<!-- ##### MACRO GNOME_Persist_query_interface ##### -->
 <para>
 
 </para>
@@ -71,25 +86,10 @@ A server for components that can embedd other components.
 GnomeInPlaceEmbeddable
 
 
-<!-- ##### MACRO GNOME_OBJECT_CHECK ##### -->
-<para>
-   Checks if the exception in @e needs to be signaled.  If so, then
-   the proper exception signal is generated on the GnomeObject object
-   @o for the CORBA reference @c.
-</para>
-
-@o: 
-@c: 
-@e: 
-
-<!-- ##### SECTION ./tmpl/gnome-storage-fs.sgml:See_Also ##### -->
+<!-- ##### MACRO GNOME_UIHandler_ref ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-main.sgml:Title ##### -->
-gnome-main
 
 
 <!-- ##### FUNCTION gnome_ui_handler_construct ##### -->
@@ -103,12 +103,6 @@ gnome-main
 
 <!-- ##### SECTION ./tmpl/bonobo-storage-priv.sgml:Title ##### -->
 bonobo-storage-priv
-
-
-<!-- ##### MACRO gnome_client_site_embeddable_get_verbs ##### -->
-<para>
-
-</para>
 
 
 <!-- ##### SECTION ./tmpl/gnome-object-client.sgml:Short_Description ##### -->
@@ -132,23 +126,14 @@ Object activation routines
 
 @item: 
 
-<!-- ##### FUNCTION gnome_ui_handler_build_path ##### -->
+<!-- ##### FUNCTION GNOME_PersistStream_load ##### -->
 <para>
 
 </para>
 
-@comp1: 
-@Varargs: 
-@Returns: 
-
-<!-- ##### FUNCTION gnome_embeddable_factory_set ##### -->
-<para>
-
-</para>
-
-@c_factory: 
-@factory: 
-@data: 
+@_obj: 
+@stream: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_add_one ##### -->
 <para>
@@ -165,13 +150,6 @@ Returns the #GtkType for the GnomeObject object.
 </para>
 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_free_tree ##### -->
-<para>
-
-</para>
-
-@item: 
-
 <!-- ##### SECTION ./tmpl/gnome-persist-stream.sgml:See_Also ##### -->
 <para>
 
@@ -182,55 +160,37 @@ Returns the #GtkType for the GnomeObject object.
 
 
 
-<!-- ##### FUNCTION gnome_view_frame_set_ui_handler ##### -->
+<!-- ##### MACRO TC_GNOME_Persist_Status ##### -->
 <para>
 
 </para>
 
-@view_frame: 
-@uih: 
 
-<!-- ##### FUNCTION gnome_object_add_interface ##### -->
+<!-- ##### FUNCTION GNOME_Embeddable_UserCancelledSave__alloc ##### -->
 <para>
 
 </para>
 
-@object: 
-@newobj: 
+@Returns: 
+
+<!-- ##### MACRO TC_GNOME_Persist_WrongDataType ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_View__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
 
 <!-- ##### STRUCT GnomeStorageFS ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### MACRO GNOME_STORAGE_TYPE ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnome_persist_stream_construct ##### -->
-<para>
-
-</para>
-
-@ps: 
-@corba_ps: 
-@goad_id: 
-@load_fn: 
-@save_fn: 
-@closure: 
-@Returns: 
-
-<!-- ##### STRUCT GnomeBonoboSelectorPrivate ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-object.sgml:Short_Description ##### -->
-Base object for wrapping GNOME::Unknown derived objects.
 
 
 <!-- ##### MACRO GNOME_VIEW_TYPE ##### -->
@@ -239,28 +199,17 @@ Base object for wrapping GNOME::Unknown derived objects.
 </para>
 
 
+<!-- ##### SECTION ./tmpl/gnome-object.sgml:Short_Description ##### -->
+Base object for wrapping GNOME::Unknown derived objects.
+
+
+<!-- ##### STRUCT GnomeBonoboSelectorPrivate ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### SECTION ./tmpl/gnome-stream-client.sgml:Long_Description ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnome_embeddable_add_verbs ##### -->
-<para>
-
-</para>
-
-@bonobo_object: 
-@verbs: 
-@verb_list: 
-
-<!-- ##### STRUCT GnomeUIHandlerToolbarItem ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-storage-fs.sgml:Long_Description ##### -->
 <para>
 
 </para>
@@ -272,19 +221,17 @@ Base object for wrapping GNOME::Unknown derived objects.
 </para>
 
 
-<!-- ##### FUNCTION gnome_embeddable_client_deactivate ##### -->
+<!-- ##### STRUCT BonoboControlPrivate ##### -->
 <para>
 
 </para>
 
-@client_object: 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_parse_uiinfo_list ##### -->
+<!-- ##### FUNCTION bonobo_view_frame_get_type ##### -->
 <para>
 
 </para>
 
-@uii: 
 @Returns: 
 
 <!-- ##### ENUM GnomeUIHandlerPixmapType ##### -->
@@ -293,26 +240,15 @@ Base object for wrapping GNOME::Unknown derived objects.
 </para>
 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_get_toggle_state ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_set_hidden ##### -->
 <para>
 
 </para>
 
-@uih: 
+@_obj: 
 @path: 
-@Returns: 
-
-<!-- ##### SECTION ./tmpl/gnome-progressive.sgml:See_Also ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-storage-private.sgml:See_Also ##### -->
-<para>
-
-</para>
-
+@hidden: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_view_set_embeddable ##### -->
 <para>
@@ -322,30 +258,42 @@ Base object for wrapping GNOME::Unknown derived objects.
 @view: 
 @embeddable: 
 
+<!-- ##### FUNCTION GNOME_PersistStream_is_dirty ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
 <!-- ##### SECTION ./tmpl/gnome-simple-source.sgml:Title ##### -->
 GnomeSimpleDataSource
 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_parse_uiinfo_list_with_data ##### -->
+<!-- ##### FUNCTION GNOME_Storage_NameExists__alloc ##### -->
 <para>
 
 </para>
 
-@uii: 
-@data: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-persist-stream.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION bonobo_ui_toolbar_icon_get_type ##### -->
 <para>
 
 </para>
 
+@Returns: 
 
-<!-- ##### VARIABLE gnome_persist_epv ##### -->
+<!-- ##### FUNCTION GNOME_Storage_NotFound__free ##### -->
 <para>
 
 </para>
 
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
 
 <!-- ##### FUNCTION gnome_stream_repo_create ##### -->
 <para>
@@ -356,21 +304,30 @@ GnomeSimpleDataSource
 @path: 
 @Returns: 
 
+<!-- ##### FUNCTION GNOME_UIHandler_register_containee ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@uih: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_Storage_NameExists__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
 <!-- ##### ENUM GnomeUIHandlerMenuItemType ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### USER_FUNCTION GnomeProgressiveDataSinkSetSizeFn ##### -->
-<para>
-
-</para>
-
-@psink: 
-@count: 
-@closure: 
-@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-stream-memory.sgml:Title ##### -->
 GnomeStreamMem
@@ -383,34 +340,13 @@ GnomeStreamMem
 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_bonobo_selector_get_selected_goad_id ##### -->
-<para>
-
-</para>
-
-@sel: 
-@Returns: 
-
 <!-- ##### MACRO BONOBO_SS_RDWR ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-embeddable-factory.sgml:Title ##### -->
-GnomeEmbeddableFactory
-
-
-<!-- ##### FUNCTION gnome_composite_moniker_new ##### -->
-<para>
-
-</para>
-
-@head: 
-@tail: 
-@Returns: 
-
-<!-- ##### SECTION ./tmpl/gnome-bind-context.sgml:Long_Description ##### -->
+<!-- ##### MACRO GNOME_AdviseSink_unref ##### -->
 <para>
 
 </para>
@@ -425,37 +361,11 @@ GnomeEmbeddableFactory
 @path: 
 @label: 
 
-<!-- ##### SECTION ./tmpl/gnome-component-directory.sgml:Long_Description ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnome_object_restore_from_url ##### -->
-<para>
-
-</para>
-
-@goad_id: 
-@url: 
-@Returns: 
-
 <!-- ##### SECTION ./tmpl/gnome-unknown-client.sgml:Long_Description ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### FUNCTION gnome_storage_open ##### -->
-<para>
-
-</para>
-
-@driver: 
-@path: 
-@flags: 
-@mode: 
-@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-main.sgml:Long_Description ##### -->
 <para>
@@ -470,21 +380,19 @@ GnomeEmbeddableFactory
 
 @item: 
 
-<!-- ##### TYPEDEF GnomeClientSiteList ##### -->
+<!-- ##### MACRO GNOME_Storage_DENY_WRITE ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION bonobo_stream_storage_open ##### -->
+<!-- ##### FUNCTION POA_GNOME_Container__init ##### -->
 <para>
 
 </para>
 
-@storage: 
-@path: 
-@open_mode: 
-@Returns: 
+@servant: 
+@ev: 
 
 <!-- ##### SIGNAL GnomeView::view_activate ##### -->
 <para>
@@ -496,6 +404,12 @@ GnomeEmbeddableFactory
 
 @activate: 
 
+<!-- ##### MACRO TC_GNOME_PersistFile_NoCurrentName ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_ui_handler_menu_fetch_tree ##### -->
 <para>
 
@@ -505,13 +419,11 @@ GnomeEmbeddableFactory
 @path: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_stream_fs_construct ##### -->
+<!-- ##### FUNCTION GNOME_ParseDisplayName_SyntaxError__alloc ##### -->
 <para>
 
 </para>
 
-@stream: 
-@corba_stream: 
 @Returns: 
 
 <!-- ##### FUNCTION gnome_object_corba_objref ##### -->
@@ -531,34 +443,6 @@ GnomeEmbeddableFactory
 @data: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_moniker_set_server ##### -->
-<para>
-
-</para>
-
-@moniker: 
-@goad_id: 
-@filename: 
-
-<!-- ##### FUNCTION gnome_object_get_servant ##### -->
-<para>
-
-</para>
-
-@object: 
-@Returns: 
-
-<!-- ##### FUNCTION gnome_embeddable_construct ##### -->
-<para>
-
-</para>
-
-@bonobo_object: 
-@corba_bonobo_object: 
-@factory: 
-@data: 
-@Returns: 
-
 <!-- ##### FUNCTION gnome_view_client_do_verb ##### -->
 <para>
 
@@ -566,6 +450,16 @@ GnomeEmbeddableFactory
 
 @view: 
 @verb: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_remove ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee_uih: 
+@path: 
+@ev: 
 
 <!-- ##### SECTION ./tmpl/gnome-wrapper.sgml:Long_Description ##### -->
 <para>
@@ -583,24 +477,38 @@ GnomeEmbeddableFactory
 </para>
 
 
+<!-- ##### FUNCTION POA_GNOME_PersistStream__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_Stream_read ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@count: 
+@buffer: 
+@ev: 
+@Returns: 
+
 <!-- ##### MACRO GNOME_PERSIST_FILE_TYPE ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnome_embeddable_load_from_stream ##### -->
+<!-- ##### FUNCTION CORBA_sequence_GNOME_Unknown_allocbuf ##### -->
 <para>
 
 </para>
 
-@stream: 
-@interface: 
+@len: 
 @Returns: 
-
-<!-- ##### SECTION ./tmpl/gnome-stream-repo.sgml:Short_Description ##### -->
-
-
 
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_fetch ##### -->
 <para>
@@ -611,30 +519,21 @@ GnomeEmbeddableFactory
 @path: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_stream_fs_create ##### -->
+<!-- ##### FUNCTION POA_GNOME_ClientSite__fini ##### -->
 <para>
 
 </para>
 
-@path: 
-@Returns: 
+@servant: 
+@ev: 
 
-<!-- ##### VARIABLE gnome_object_base_epv ##### -->
-<para>
-   This is the CORBA Entry Point Vector (EPV) of the base GnomeObject
-   that provides the implementaion for the GNOME::Unknown interface.
-   Use this to construct your CORBA VEPV when deriving objects from
-   GnomeObject.
-</para>
-
-
-<!-- ##### USER_FUNCTION GnomeEmbeddableFactoryFn ##### -->
+<!-- ##### FUNCTION bonobo_property_bag_get_type ##### -->
 <para>
 
 </para>
 
-@Factory: 
-@closure: 
+@pb: 
+@name: 
 @Returns: 
 
 <!-- ##### FUNCTION gnome_component_activate ##### -->
@@ -646,14 +545,11 @@ GnomeEmbeddableFactory
 @entry: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_add_tree ##### -->
+<!-- ##### MACRO TC_GNOME_Persist_FileNotFound ##### -->
 <para>
 
 </para>
 
-@uih: 
-@parent_path: 
-@tree: 
 
 <!-- ##### FUNCTION gnome_item_moniker_new ##### -->
 <para>
@@ -668,18 +564,6 @@ GnomeEmbeddableFactory
 
 
 
-<!-- ##### SECTION ./tmpl/gnome-moniker.sgml:Long_Description ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### VARIABLE gnome_simple_data_source_epv ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### FUNCTION gnome_storage_repo_create ##### -->
 <para>
 
@@ -689,19 +573,6 @@ GnomeEmbeddableFactory
 @path: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-stream-client.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_storage_fs_open ##### -->
-<para>
-
-</para>
-
-@path: 
-@mode: 
-@Returns: 
-
 <!-- ##### FUNCTION gnome_object_destroy ##### -->
 <para>
 
@@ -709,27 +580,23 @@ GnomeEmbeddableFactory
 
 @object: 
 
+<!-- ##### SECTION ./tmpl/gnome-object-io.sgml:Short_Description ##### -->
+
+
+
 <!-- ##### SECTION ./tmpl/gnome-ui-handler.sgml:See_Also ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnome_component_directory_free ##### -->
+<!-- ##### FUNCTION GNOME_Stream_length ##### -->
 <para>
 
 </para>
 
-@dir: 
-
-<!-- ##### FUNCTION gnome_stream_repo_open ##### -->
-<para>
-
-</para>
-
-@storage: 
-@path: 
-@mode: 
+@_obj: 
+@ev: 
 @Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-stream-repo.sgml:Long_Description ##### -->
@@ -748,27 +615,13 @@ GnomeEmbeddableFactory
 @path: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_get_callback ##### -->
+<!-- ##### STRUCT BonoboItemContainerPrivate ##### -->
 <para>
 
 </para>
-
-@uih: 
-@path: 
-@callback: 
-@callback_data: 
-
-<!-- ##### SECTION ./tmpl/gnome-ui-handler.sgml:Title ##### -->
-GnomeUIHandler
 
 
 <!-- ##### VARIABLE gnome_persist_stream_epv ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-embeddable-client.sgml:Long_Description ##### -->
 <para>
 
 </para>
@@ -782,25 +635,38 @@ GnomeUIHandler
 @object: 
 @Returns: 
 
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_get_pos ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
 <!-- ##### SECTION ./tmpl/gnome-storage-fs.sgml:Title ##### -->
 GnomeStorageFS
 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_fetch_list ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_iobuf__free ##### -->
 <para>
 
 </para>
 
-@uih: 
-@path: 
+@mem: 
+@dat: 
+@free_strings: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_create_menubar ##### -->
+<!-- ##### FUNCTION GNOME_ViewFrame_view_activated ##### -->
 <para>
 
 </para>
 
-@uih: 
+@_obj: 
+@state: 
+@ev: 
 
 <!-- ##### STRUCT GnomeObjectServant ##### -->
 <para>
@@ -825,9 +691,22 @@ GnomeStorageFS
 </para>
 
 
+<!-- ##### FUNCTION GNOME_Container_ObjectList__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
 <!-- ##### SECTION ./tmpl/gnome-container.sgml:See_Also ##### -->
 <para>
    #GnomeMoniker, #GnomeObject.
+</para>
+
+
+<!-- ##### SECTION ./tmpl/bonobo-embeddable-factory.sgml:See_Also ##### -->
+<para>
+
 </para>
 
 
@@ -849,6 +728,16 @@ GnomeStorageFS
 
 @Returns: 
 
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_get_label ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_toggle_get_state ##### -->
 <para>
 
@@ -857,6 +746,21 @@ GnomeStorageFS
 @uih: 
 @path: 
 @Returns: 
+
+<!-- ##### FUNCTION GNOME_ProgressiveDataSink_set_size ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@count: 
+@ev: 
+
+<!-- ##### MACRO TC_GNOME_ProgressiveDataSink_iobuf ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### FUNCTION gnome_object_ref ##### -->
 <para>
@@ -871,40 +775,32 @@ GnomeStorageFS
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-persist-file.sgml:See_Also ##### -->
+<!-- ##### FUNCTION GNOME_Container_ObjectList__free ##### -->
 <para>
 
 </para>
 
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-client-site.sgml:Title ##### -->
-GnomeClientSite
+<!-- ##### STRUCT BonoboDesktopWindowPrivate ##### -->
+<para>
+
+</para>
 
 
 <!-- ##### SECTION ./tmpl/gnome-storage-fs.sgml:Short_Description ##### -->
 
 
 
-<!-- ##### SECTION ./tmpl/gnome-bonobo.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_ui_handler_menu_new_item ##### -->
+<!-- ##### FUNCTION bonobo_control_get_type ##### -->
 <para>
 
 </para>
 
-@uih: 
-@path: 
-@label: 
-@hint: 
-@pos: 
-@pixmap_type: 
-@pixmap_data: 
-@accelerator_key: 
-@ac_mods: 
-@callback: 
-@callback_data: 
+@Returns: 
 
 <!-- ##### USER_FUNCTION GnomeProgressiveDataSinkStartFn ##### -->
 <para>
@@ -915,15 +811,22 @@ GnomeClientSite
 @closure: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_set_accel ##### -->
+<!-- ##### FUNCTION GNOME_View_activate ##### -->
 <para>
 
 </para>
 
-@uih: 
-@path: 
-@accelerator_key: 
-@ac_mods: 
+@_obj: 
+@activated: 
+@ev: 
+
+<!-- ##### FUNCTION POA_GNOME_ProgressiveDataSink__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
 
 <!-- ##### SECTION ./tmpl/gnome-bonobo-selector.sgml:Long_Description ##### -->
 <para>
@@ -947,14 +850,22 @@ GnomeClientSite
 
 @string_list: 
 
-<!-- ##### SECTION ./tmpl/gnome-storage-repo.sgml:Long_Description ##### -->
+<!-- ##### MACRO ex_GNOME_Embeddable_UserCancelledSave ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-inplace-component.sgml:Short_Description ##### -->
+<!-- ##### SECTION ./tmpl/gtk-interfaces.sgml:Long_Description ##### -->
+<para>
 
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-storage-repo.sgml:Long_Description ##### -->
+<para>
+
+</para>
 
 
 <!-- ##### SECTION ./tmpl/gnome-moniker-client.sgml:Long_Description ##### -->
@@ -963,34 +874,11 @@ GnomeClientSite
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-container.sgml:Long_Description ##### -->
-<para>
-   #GnomeContainer implements the
-   <classname>GNOME::Container</classname> interface.  This interface
-   is used by components that embedd other components.  It basically
-   exposes to client users the names of the sub-components and enables
-   a client to fetch these objects.
-</para>
-
-<para>
-   A <classname>GnomeComponent</classname> is involved during the
-   process of a moniker resolution for sub-objects.
-</para>
-
-
-<!-- ##### FUNCTION gnome_progressive_data_sink_construct ##### -->
+<!-- ##### MACRO GNOME_Persist_unref ##### -->
 <para>
 
 </para>
 
-@psink: 
-@corba_psink: 
-@start_fn: 
-@end_fn: 
-@add_data_fn: 
-@set_size_fn: 
-@closure: 
-@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_set_accelgroup ##### -->
 <para>
@@ -999,6 +887,14 @@ GnomeClientSite
 
 @uih: 
 @accelgroup: 
+
+<!-- ##### FUNCTION POA_GNOME_PersistFile__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_embeddable_save_to_stream ##### -->
 <para>
@@ -1013,15 +909,11 @@ GnomeClientSite
 
 
 
-<!-- ##### USER_FUNCTION GnomeSimpleDataSourcePopDataFn ##### -->
+<!-- ##### FUNCTION bonobo_socket_get_type ##### -->
 <para>
 
 </para>
 
-@ssource: 
-@count: 
-@buffer: 
-@closure: 
 @Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_do_popup_menu ##### -->
@@ -1038,28 +930,14 @@ GnomeClientSite
 
 @string_list: 
 
-<!-- ##### VARIABLE gnome_object_vepv ##### -->
-<para>
-<para>
-   This is the CORBA Vector of EPVs (VEPV) of GnomeObject that
-   provides the implementaion for the GNOME::Unknown interface.
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-composite-moniker.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION GNOME_Storage_create_storage ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### FUNCTION gnome_stream_mem_create ##### -->
-<para>
-
-</para>
-
-@buffer: 
-@size: 
-@read_only: 
+@_obj: 
+@path: 
+@ev: 
 @Returns: 
 
 <!-- ##### FUNCTION gnome_moniker_get_as_string ##### -->
@@ -1079,44 +957,60 @@ GnomeClientSite
 @path: 
 @Returns: 
 
-<!-- ##### STRUCT GnomeUIHandlerTopLevelData ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_create ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@name: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_window_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_progressive_data_sink_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### MACRO BONOBO_IS_WIN ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### MACRO GNOME_Embeddable_unref ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_set_callback ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@callback: 
-@callback_data: 
-
-<!-- ##### STRUCT embeddable_data_t ##### -->
+<!-- ##### MACRO GNOME_Embeddable_query_interface ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### VARIABLE gnome_embeddable_epv ##### -->
+<!-- ##### FUNCTION bonobo_item_container_get_type ##### -->
 <para>
 
 </para>
 
+@Returns: 
 
-<!-- ##### FUNCTION gnome_storage_write_class_id ##### -->
+<!-- ##### MACRO ex_GNOME_ParseDisplayName_SyntaxError ##### -->
 <para>
 
 </para>
-
-@storage: 
-@class_id: 
-
-<!-- ##### SECTION ./tmpl/gnome-bonobo-selector.sgml:Title ##### -->
-GnomeBonoboSelector
 
 
 <!-- ##### MACRO BONOBO_SS_READ ##### -->
@@ -1131,16 +1025,6 @@ GnomeBonoboSelector
 </para>
 
 
-<!-- ##### FUNCTION gnome_stream_storage_open ##### -->
-<para>
-
-</para>
-
-@storage: 
-@path: 
-@open_mode: 
-@Returns: 
-
 <!-- ##### FUNCTION gnome_client_site_get_verbs ##### -->
 <para>
 
@@ -1154,16 +1038,6 @@ GnomeBonoboSelector
 
 </para>
 
-
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_get_callback ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@callback: 
-@callback_data: 
 
 <!-- ##### FUNCTION gnome_persist_file_set_dirty ##### -->
 <para>
@@ -1180,6 +1054,30 @@ GnomeBonoboSelector
 
 @uih: 
 @name: 
+
+<!-- ##### MACRO GNOME_PersistStorage_query_interface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_create_item ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@type: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@modifier: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_get_child_paths ##### -->
 <para>
@@ -1198,10 +1096,6 @@ GnomeBonoboSelector
 @name: 
 @goad_id: 
 @Returns: 
-
-<!-- ##### SECTION ./tmpl/gnome-embeddable-client.sgml:Title ##### -->
-gnome-embeddable-client
-
 
 <!-- ##### MACRO GNOME_FILE_MONIKER_TYPE ##### -->
 <para>
@@ -1233,47 +1127,39 @@ gnome-embeddable-client
 @parent_path: 
 @item: 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_get_sensitivity ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@Returns: 
-
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_set_label ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@label: 
-
-<!-- ##### FUNCTION gnome_ui_handler_menu_get_sensitivity ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@Returns: 
-
 <!-- ##### MACRO BONOBO_SS_EXCL ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-embeddable-factory.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_group_set_sensitivity ##### -->
 <para>
 
 </para>
 
+@_obj: 
+@gid: 
+@sensitivity: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_PersistStorage_load ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@storage: 
+@ev: 
 
 <!-- ##### SECTION ./tmpl/gnome-component-io.sgml:Title ##### -->
 gnome-component-io
+
+
+<!-- ##### STRUCT BonoboProgressiveDataSinkPrivate ##### -->
+<para>
+
+</para>
 
 
 <!-- ##### FUNCTION gnome_embeddable_factory_construct ##### -->
@@ -1288,6 +1174,14 @@ gnome-component-io
 @data: 
 @Returns: 
 
+<!-- ##### FUNCTION CORBA_sequence_CORBA_octet_allocbuf ##### -->
+<para>
+
+</para>
+
+@len: 
+@Returns: 
+
 <!-- ##### FUNCTION gnome_embeddable_client_new_view ##### -->
 <para>
 
@@ -1297,9 +1191,15 @@ gnome-component-io
 @client_site: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-stream-fs.sgml:Short_Description ##### -->
-A file-based GnomeStream implementation
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_get_sensitivity ##### -->
+<para>
 
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-composite-moniker.sgml:Short_Description ##### -->
 
@@ -1313,24 +1213,11 @@ A file-based GnomeStream implementation
 @uih: 
 @path: 
 
-<!-- ##### FUNCTION gnome_embeddable_save ##### -->
+<!-- ##### MACRO ex_GNOME_UIHandler_ToolbarItemNotFound ##### -->
 <para>
 
 </para>
 
-@bonobo_object: 
-@storage: 
-@same_as_loaded: 
-@Returns: 
-
-<!-- ##### FUNCTION gnome_bonobo_select_goad_id ##### -->
-<para>
-
-</para>
-
-@title: 
-@interfaces_required: 
-@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_set_pixmap ##### -->
 <para>
@@ -1348,6 +1235,12 @@ A file-based GnomeStream implementation
 </para>
 
 
+<!-- ##### STRUCT BonoboSocketPrivate ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_view_unregister_verb ##### -->
 <para>
 
@@ -1356,13 +1249,23 @@ A file-based GnomeStream implementation
 @view: 
 @verb_name: 
 
-<!-- ##### FUNCTION gnome_client_site_new_view ##### -->
+<!-- ##### MACRO GNOME_PersistStream_unref ##### -->
 <para>
 
 </para>
 
-@client_site: 
-@Returns: 
+
+<!-- ##### MACRO TC_GNOME_Stream_iobuf ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboSelectorPrivate ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_new_separator ##### -->
 <para>
@@ -1382,35 +1285,21 @@ A file-based GnomeStream implementation
 @interfaces_required: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_storage_driver_new ##### -->
+<!-- ##### MACRO GNOME_AdviseSink__free ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### FUNCTION GNOME_Embeddable_get_misc_status ##### -->
+<para>
+
+</para>
+
+@_obj: 
 @type: 
-@path: 
-@open_mode: 
+@ev: 
 @Returns: 
-
-<!-- ##### SECTION ./tmpl/gnome-embeddable.sgml:See_Also ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-persist-stream.sgml:Title ##### -->
-GnomePersistStream
-
-
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_set_callback ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@callback: 
-@callback_data: 
 
 <!-- ##### FUNCTION gnome_ui_handler_set_container ##### -->
 <para>
@@ -1420,38 +1309,23 @@ GnomePersistStream
 @uih: 
 @container: 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_radioitem ##### -->
+<!-- ##### FUNCTION GNOME_Storage_NoPermission__free ##### -->
 <para>
 
 </para>
 
-@uih: 
-@path: 
-@label: 
-@hint: 
-@pos: 
-@accelerator_key: 
-@ac_mods: 
-@callback: 
-@callback_data: 
-
-<!-- ##### USER_FUNCTION GnomePersistFileIOFn ##### -->
-<para>
-
-</para>
-
-@pf: 
-@filename: 
-@closure: 
+@mem: 
+@dat: 
+@free_strings: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-wrapper.sgml:See_Also ##### -->
+<!-- ##### STRUCT BonoboWindowPrivate ##### -->
 <para>
-   #GtkWidget #GnomeView #GnomeViewFrame
+
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-storage-private.sgml:Long_Description ##### -->
+<!-- ##### MACRO ORBIT_IDL_SERIAL ##### -->
 <para>
 
 </para>
@@ -1473,6 +1347,28 @@ Container side object embedding server.
 </para>
 
 
+<!-- ##### MACRO TC_GNOME_Embeddable_verb_list ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_set_pixmap ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@data: 
+@ev: 
+
+<!-- ##### STRUCT BonoboUIComponentPrivate ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_radio_get_state ##### -->
 <para>
 
@@ -1482,17 +1378,17 @@ Container side object embedding server.
 @path: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_object_check_env ##### -->
+<!-- ##### FUNCTION bonobo_generic_factory_get_type ##### -->
 <para>
 
 </para>
 
-@object: 
-@corba_object: 
-@ev: 
+@Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-stream-repo.sgml:Title ##### -->
-GnomeStreamREPO
+<!-- ##### STRUCT BonoboUIToolbarButtonItemPrivate ##### -->
+<para>
+
+</para>
 
 
 <!-- ##### SECTION ./tmpl/gnome-inplace-site.sgml:Long_Description ##### -->
@@ -1501,14 +1397,15 @@ GnomeStreamREPO
 </para>
 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_add_tree ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_get_hidden ##### -->
 <para>
 
 </para>
 
-@uih: 
-@parent_path: 
-@item: 
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-storage-repo.sgml:Title ##### -->
 GnomeStorageREPO
@@ -1522,15 +1419,6 @@ GnomeStorageREPO
 @wrapper: 
 @covered: 
 
-<!-- ##### USER_FUNCTION GnomeProgressiveDataSinkEndFn ##### -->
-<para>
-
-</para>
-
-@psink: 
-@closure: 
-@Returns: 
-
 <!-- ##### FUNCTION gnome_embeddable_factory_new ##### -->
 <para>
 
@@ -1540,18 +1428,6 @@ GnomeStorageREPO
 @factory: 
 @data: 
 @Returns: 
-
-<!-- ##### SECTION ./tmpl/gnome-item-moniker.sgml:Long_Description ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-embeddable-factory.sgml:See_Also ##### -->
-<para>
-
-</para>
-
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_new ##### -->
 <para>
@@ -1580,18 +1456,40 @@ GnomeStorageREPO
 @data: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-storage.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_separator ##### -->
+<!-- ##### FUNCTION GNOME_Embeddable_GnomeVerb__free ##### -->
 <para>
 
 </para>
 
-@uih: 
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_client_site_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_set_sensitivity ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
 @path: 
-@pos: 
+@sensitivity: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_widget_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-stream-client.sgml:See_Also ##### -->
 <para>
@@ -1599,29 +1497,20 @@ GnomeStorageREPO
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-file-moniker.sgml:Title ##### -->
-GnomeFileMoniker
-
-
-<!-- ##### MACRO GNOME_MONIKER_TYPE ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnome_client_site_new ##### -->
-<para>
-
-</para>
-
-@container: 
-@Returns: 
-
 <!-- ##### SECTION ./tmpl/gnome-embeddable-client.sgml:See_Also ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_overridden ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_parse_uiinfo_one_with_data ##### -->
 <para>
@@ -1632,10 +1521,6 @@ GnomeFileMoniker
 @data: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-composite-moniker.sgml:Title ##### -->
-GnomeCompositeMoniker
-
-
 <!-- ##### FUNCTION gnome_container_new ##### -->
 <para>
 
@@ -1643,10 +1528,8 @@ GnomeCompositeMoniker
 
 @Returns: 
 
-<!-- ##### MACRO GNOME_INPLACE_SITE_TYPE ##### -->
-<para>
-
-</para>
+<!-- ##### SECTION ./tmpl/bonobo.sgml:Title ##### -->
+bonobo
 
 
 <!-- ##### FUNCTION gnome_storage_construct ##### -->
@@ -1657,6 +1540,40 @@ GnomeCompositeMoniker
 @storage: 
 @corba_storage: 
 @Returns: 
+
+<!-- ##### MACRO bonobo_embeddable_factory_construct ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_Container_query_interface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_ClientSite_queue_resize ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+
+<!-- ##### MACRO TC_GNOME_Container_ObjectList ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_Persist__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_persist_construct ##### -->
 <para>
@@ -1672,14 +1589,11 @@ GnomeCompositeMoniker
 GnomeView
 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_parse_uiinfo_one ##### -->
+<!-- ##### MACRO GNOME_PersistStream_ref ##### -->
 <para>
 
 </para>
 
-@uih: 
-@uii: 
-@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-object.sgml:See_Also ##### -->
 <para>
@@ -1687,44 +1601,54 @@ GnomeView
 </para>
 
 
-<!-- ##### FUNCTION gnome_ui_handler_create_popup_menu ##### -->
+<!-- ##### MACRO TC_GNOME_View_windowid ##### -->
 <para>
 
 </para>
 
-@uih: 
 
-<!-- ##### SECTION ./tmpl/gnome-stream-memory.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_item ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@label: 
-@hint: 
-@pos: 
-@pixmap_type: 
-@pixmap_data: 
-@accelerator_key: 
-@ac_mods: 
-@callback: 
-@callback_data: 
-
-<!-- ##### SECTION ./tmpl/gnome-embeddable-client.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_bind_context_new ##### -->
+<!-- ##### FUNCTION bonobo_stream_get_type ##### -->
 <para>
 
 </para>
 
 @Returns: 
+
+<!-- ##### FUNCTION GNOME_ProgressiveDataSink_iobuf__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_group_set_hidden ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@gid: 
+@sensitivity: 
+@ev: 
+
+<!-- ##### MACRO GNOME_Container_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO TC_GNOME_UIHandler_MenuItemNotFound ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable-client.sgml:Short_Description ##### -->
+
+
 
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_add_list ##### -->
 <para>
@@ -1735,78 +1659,29 @@ GnomeView
 @parent_path: 
 @item: 
 
-<!-- ##### MACRO GNOME_SS_WRITE ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnome_ui_handler_menu_new_subtree ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@label: 
-@hint: 
-@pos: 
-@pixmap_type: 
-@pixmap_data: 
-@accelerator_key: 
-@ac_mods: 
-
 <!-- ##### SECTION ./tmpl/gnome-bonobo.sgml:Title ##### -->
 gnome-bonobo
-
-
-<!-- ##### SECTION ./tmpl/gnome-moniker-client.sgml:See_Also ##### -->
-<para>
-
-</para>
 
 
 <!-- ##### SECTION ./tmpl/gnome-view.sgml:Short_Description ##### -->
 View object for exporting a view of a GnomeEmbeddable component
 
 
-<!-- ##### FUNCTION gnome_storage_fs_create ##### -->
-<para>
-
-</para>
-
-@storage_fs: 
-@path: 
-@Returns: 
-
-<!-- ##### MACRO GNOME_SS_RDWR ##### -->
+<!-- ##### STRUCT BonoboControlFramePrivate ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnome_embeddable_set_view_factory ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_remove ##### -->
 <para>
 
 </para>
 
-@bonobo_object: 
-@factory: 
-@data: 
-
-<!-- ##### FUNCTION gnome_ui_handler_menu_parse_uiinfo_one ##### -->
-<para>
-
-</para>
-
-@uii: 
-@Returns: 
-
-<!-- ##### SECTION ./tmpl/gnome-bonobo.sgml:See_Also ##### -->
-<para>
-
-</para>
-
+@_obj: 
+@containee: 
+@name: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_get_hint ##### -->
 <para>
@@ -1817,6 +1692,15 @@ View object for exporting a view of a GnomeEmbeddable component
 @path: 
 @Returns: 
 
+<!-- ##### FUNCTION GNOME_UIHandler_menu_removed ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+
 <!-- ##### FUNCTION gnome_wrapper_is_covered ##### -->
 <para>
 
@@ -1825,30 +1709,11 @@ View object for exporting a view of a GnomeEmbeddable component
 @wrapper: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_set_pixmap ##### -->
+<!-- ##### MACRO GNOME_Persist__free ##### -->
 <para>
 
 </para>
 
-@uih: 
-@path: 
-@type: 
-@data: 
-
-<!-- ##### SECTION ./tmpl/gnome-file-moniker.sgml:Long_Description ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnome_object_activate_servant ##### -->
-<para>
-
-</para>
-
-@object: 
-@servant: 
-@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_build_path_v ##### -->
 <para>
@@ -1864,18 +1729,9 @@ View object for exporting a view of a GnomeEmbeddable component
 </para>
 
 
-<!-- ##### FUNCTION gnome_container_add ##### -->
+<!-- ##### MACRO GNOME_PersistFile_get_goad_id ##### -->
 <para>
 
-</para>
-
-@container: 
-@object: 
-
-<!-- ##### MACRO GNOME_STREAM_TYPE ##### -->
-<para>
-  Returns the GtkType associated with the
-  <classname>GnomeStream</classname> object
 </para>
 
 
@@ -1887,28 +1743,18 @@ View object for exporting a view of a GnomeEmbeddable component
 </para>
 
 
-<!-- ##### FUNCTION gnome_client_site_construct ##### -->
+<!-- ##### FUNCTION GNOME_Stream_eos ##### -->
 <para>
 
 </para>
 
-@client_site: 
-@corba_client_site: 
-@container: 
+@_obj: 
+@ev: 
 @Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-view-frame.sgml:Short_Description ##### -->
 
 
-
-<!-- ##### FUNCTION gnome_storage_repo_open ##### -->
-<para>
-
-</para>
-
-@storage_repo: 
-@path: 
-@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_remove_containee ##### -->
 <para>
@@ -1918,38 +1764,20 @@ View object for exporting a view of a GnomeEmbeddable component
 @uih: 
 @containee: 
 
-<!-- ##### SECTION ./tmpl/gnome-progressive.sgml:Short_Description ##### -->
-
-
-
 <!-- ##### ENUM GnomeUIHandlerToolbarItemType ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### VARIABLE gnome_object_epv ##### -->
-<para>
-   This is the CORBA Entry Point Vector (EPV) of GnomeObject that
-   provides the implementaion for the GNOME::Unknown interface.  Use
-   this to construct your CORBA VEPV when deriving objects from
-   GnomeObject.
-</para>
-
-<para>
-   All Bonobo CORBA servers expose their epv vectors to enable
-   programmers to fill in their CORBA VEPVs for any piece of code that
-   wants to inherit the implementation.
-</para>
-
-
-<!-- ##### FUNCTION gnome_view_frame_get_wrapper ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_menu_activated ##### -->
 <para>
 
 </para>
 
-@view_frame: 
-@Returns: 
+@_obj: 
+@path: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_object_activate_with_goad_id ##### -->
 <para>
@@ -1983,8 +1811,24 @@ GnomeStorage
 @closure: 
 @Returns: 
 
+<!-- ##### MACRO ex_GNOME_Persist_FileNotFound ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_Embeddable__free ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### SECTION ./tmpl/gnome-container.sgml:Title ##### -->
 GnomeContainer
+
+
+<!-- ##### SECTION ./tmpl/bonobo-embeddable-factory.sgml:Title ##### -->
+bonobo-embeddable-factory
 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_fetch_one ##### -->
@@ -2005,11 +1849,31 @@ GnomeContainer
 @path: 
 @Returns: 
 
+<!-- ##### FUNCTION GNOME_Storage_list_contents ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
 <!-- ##### FUNCTION gnome_moniker_new ##### -->
 <para>
 
 </para>
 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Embeddable_verb_list__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
 @Returns: 
 
 <!-- ##### SECTION ./tmpl/bonobo-audio-ulaw.sgml:Long_Description ##### -->
@@ -2027,26 +1891,67 @@ GnomeContainer
 @rg_path: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-object-client.sgml:Title ##### -->
-GnomeObjectClient
-
-
-<!-- ##### FUNCTION gnome_ui_handler_menu_new_toggleitem ##### -->
+<!-- ##### MACRO GNOME_ClientSite_unref ##### -->
 <para>
 
 </para>
 
-@uih: 
-@path: 
-@label: 
-@hint: 
-@pos: 
-@accelerator_key: 
-@ac_mods: 
-@callback: 
-@callback_data: 
 
-<!-- ##### MACRO GNOME_INPLACE_BONOBO_OBJECT_TYPE ##### -->
+<!-- ##### SECTION ./tmpl/gnome-object-client.sgml:Title ##### -->
+GnomeObjectClient
+
+
+<!-- ##### FUNCTION bonobo_event_source_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_ViewFrame_get_ui_handler ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_set_pos ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@pos: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_PersistFile_get_current_file ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_listener_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION POA_GNOME_PersistStorage__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### STRUCT BonoboEventSourcePrivate ##### -->
 <para>
 
 </para>
@@ -2062,34 +1967,29 @@ GnomeObjectClient
 @accelerator_key: 
 @ac_mods: 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_set_radio_state ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@state: 
-
-<!-- ##### STRUCT StorageHandle ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-simple-source.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_embeddable_remove_verb ##### -->
-<para>
-
-</para>
-
-@bonobo_object: 
-@verb_name: 
-
 <!-- ##### SECTION ./tmpl/gnome-storage.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_Storage_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_Persist_FileNotFound__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### MACRO GNOME_Storage_query_interface ##### -->
 <para>
 
 </para>
@@ -2139,20 +2039,27 @@ GnomeObjectClient
 @callback: 
 @callback_data: 
 
+<!-- ##### FUNCTION GNOME_UIHandler_menu_get_toggle_state ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
 <!-- ##### STRUCT GnomeVerb ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### USER_FUNCTION GnomeViewVerbFunc ##### -->
+<!-- ##### MACRO GNOME_PersistStream__free ##### -->
 <para>
 
 </para>
 
-@view: 
-@verb_name: 
-@user_data: 
 
 <!-- ##### FUNCTION gnome_view_frame_view_deactivate ##### -->
 <para>
@@ -2184,34 +2091,40 @@ GnomePersistFile
 </para>
 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_subtree ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_get_toggle_state ##### -->
 <para>
 
 </para>
 
-@uih: 
+@_obj: 
+@containee: 
 @path: 
-@label: 
-@hint: 
-@pos: 
-@pixmap_type: 
-@pixmap_data: 
-@accelerator_key: 
-@ac_mods: 
+@ev: 
+@Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-unknown-client.sgml:Title ##### -->
-GnomeObjectClient
+<!-- ##### FUNCTION GNOME_Stream_commit ##### -->
+<para>
 
+</para>
 
-<!-- ##### SECTION ./tmpl/gnome-bind-context.sgml:Short_Description ##### -->
-
-
+@_obj: 
+@ev: 
 
 <!-- ##### SECTION ./tmpl/gnome-storage-repo.sgml:See_Also ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### FUNCTION GNOME_Stream_write ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@buffer: 
+@ev: 
+@Returns: 
 
 <!-- ##### ENUM GnomeComponentFunctionality ##### -->
 <para>
@@ -2233,36 +2146,12 @@ GnomeObjectClient
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-storage-driver.sgml:Title ##### -->
-gnome-storage-driver
-
-
-<!-- ##### SECTION ./tmpl/gnome-inplace-site.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_client_site_bind_embeddable ##### -->
-<para>
-
-</para>
-
-@client_site: 
-@object: 
-@Returns: 
-
 <!-- ##### MACRO GNOME_STREAM_FS_TYPE ##### -->
 <para>
   Returns the GtkType associated with the
   <classname>GnomeStreamFS</classname> object
 </para>
 
-
-<!-- ##### FUNCTION gnome_component_directory_get ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 <!-- ##### FUNCTION gnome_object_activate ##### -->
 <para>
@@ -2284,12 +2173,6 @@ gnome-storage-driver
 @client_site: 
 @Returns: 
 
-<!-- ##### MACRO GNOME_STORAGE_FS_TYPE ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### FUNCTION gnome_ui_handler_set_menubar ##### -->
 <para>
 
@@ -2297,6 +2180,3573 @@ gnome-storage-driver
 
 @uih: 
 @menubar: 
+
+<!-- ##### FUNCTION gnome_moniker_register ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@name: 
+@goad_id: 
+
+<!-- ##### MACRO GNOME_View_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_StringSeq__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeView::set_zoom_factor ##### -->
+<para>
+   This signal is emitted when the container requests the view to
+   set its zoom factor to @zoom.  The view should respond by setting
+   its zoom factor to the specified value.
+</para>
+
+@zoom: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_get_pos ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
+<!-- ##### MACRO GNOME_PersistFile_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO TC_GNOME_ViewFrame_pixbuf ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toiolbar_get_accel ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@accelerator_key: 
+@ac_mods: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_get_label ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-item-moniker.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_group_get_members ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@gid: 
+@paths: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/bonobo-audio-ulaw.sgml:Title ##### -->
+bonobo-audio-ulaw
+
+
+<!-- ##### MACRO GNOME_PERSIST_STREAM_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_view_frame_set_covered ##### -->
+<para>
+
+</para>
+
+@view_frame: 
+@covered: 
+
+<!-- ##### FUNCTION GNOME_View_size_allocate ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@width: 
+@height: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_view_frame_get_ui_handler ##### -->
+<para>
+
+</para>
+
+@view_frame: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_overridden ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_wrapper_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### MACRO TC_GNOME_Storage_NameExists ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_fetch_by_callback ##### -->
+<para>
+
+</para>
+
+@uih: 
+@callback: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_get_pixmap ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@type: 
+@data: 
+
+<!-- ##### FUNCTION gnome_embeddable_client_new_view_simple ##### -->
+<para>
+
+</para>
+
+@server_object: 
+@client_site: 
+@Returns: 
+
+<!-- ##### USER_FUNCTION GnomeProgressiveDataSinkAddDataFn ##### -->
+<para>
+
+</para>
+
+@psink: 
+@buffer: 
+@closure: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_persist_file_construct ##### -->
+<para>
+
+</para>
+
+@ps: 
+@corba_ps: 
+@goad_id: 
+@load_fn: 
+@save_fn: 
+@closure: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_object_unref ##### -->
+<para>
+
+</para>
+
+@object: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_get_orientation ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@name: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_view_frame_get_view ##### -->
+<para>
+
+</para>
+
+@view_frame: 
+@Returns: 
+
+<!-- ##### MACRO TC_GNOME_UIHandler_ToolbarItemNotFound ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_IS_WIN_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### FUNCTION gnome_object_from_servant ##### -->
+<para>
+
+</para>
+
+@servant: 
+@Returns: 
+
+<!-- ##### FUNCTION gtk_object_add_interface_1 ##### -->
+<para>
+
+</para>
+
+@object: 
+@interface: 
+
+<!-- ##### STRUCT view_data_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_ParseDisplayName__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_stream_fs_open ##### -->
+<para>
+
+</para>
+
+@path: 
+@mode: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_fetch ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@type: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@modifier: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_inplace_site_new ##### -->
+<para>
+
+</para>
+
+@container: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-component-io.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/bonobo-storage-priv.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_Embeddable_close ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@mode: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_PersistFile_NoCurrentName__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-persist.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/gnome-bonobo-selector.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### MACRO GNOME_UI_HANDLER_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_StringSeq__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_View_reactivate_and_undo ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_get_pixmap ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@data: 
+@ev: 
+
+<!-- ##### VARIABLE gnome_stream_vepv ##### -->
+<para>
+   This is the CORBA Vector of EPVs (VEPV) of GnomeStream that
+   provides the implementaion for the GNOME::Stream interface.
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-simple-source.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_view_frame_view_activate ##### -->
+<para>
+
+</para>
+
+@view_frame: 
+
+<!-- ##### FUNCTION gnome_inplace_bonobo_object_construct ##### -->
+<para>
+
+</para>
+
+@inplace: 
+@corba_inplace: 
+@factory: 
+@data: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_moniker_unregister ##### -->
+<para>
+
+</para>
+
+@moniker: 
+
+<!-- ##### FUNCTION GNOME_View_set_window ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@id: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_get_hint ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@Returns: 
+
+<!-- ##### USER_FUNCTION GnomeSimpleDataSourceRemainingDataFn ##### -->
+<para>
+
+</para>
+
+@ssource: 
+@closure: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-stream.sgml:Title ##### -->
+GnomeStream
+
+
+<!-- ##### FUNCTION bonobo_object_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### STRUCT GnomeComponentDirectory ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_ProgressiveDataSink_query_interface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION GnomePersistStreamMaxFn ##### -->
+<para>
+
+</para>
+
+@ps: 
+@closure: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_get_menubar ##### -->
+<para>
+
+</para>
+
+@uih: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_persist_stream_save_goad_id ##### -->
+<para>
+
+</para>
+
+@target: 
+@goad_id: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_persist_stream_set_dirty ##### -->
+<para>
+
+</para>
+
+@ps: 
+@dirty: 
+
+<!-- ##### SECTION ./tmpl/gnome-stream-client.sgml:Title ##### -->
+gnome-stream-client
+
+
+<!-- ##### MACRO GNOME_EmbeddableFactory__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_get_statusbar ##### -->
+<para>
+
+</para>
+
+@uih: 
+@Returns: 
+
+<!-- ##### MACRO GNOME_PersistStorage_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_ViewFrame__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_Storage_rename ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path_name: 
+@new_path_name: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_property_control_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gnome_inplace_site_set_moniker ##### -->
+<para>
+
+</para>
+
+@inplace: 
+@moniker: 
+
+<!-- ##### FUNCTION GNOME_Storage_copy_to ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@target: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_Stream_truncate ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@length: 
+@ev: 
+
+<!-- ##### MACRO GNOME_OBJECT_EV ##### -->
+<para>
+   Fetches the <structname>CORBA_Environment</structname> field of a
+   <classname>GnomeObject</classname>.
+</para>
+
+@o: 
+
+<!-- ##### MACRO GNOME_CLIENT_SITE_TYPE ##### -->
+<para>
+  Returns the GtkType associated with the
+  <classname>GnomeClientSite</classname> object. 
+</para>
+
+
+<!-- ##### FUNCTION bonobo_property_bag_client_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_ClientSite_save_object ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION POA_GNOME_Storage__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### MACRO BONOBO_SS_WRITE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_Stream__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_storage_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-item-moniker.sgml:Title ##### -->
+GnomeItemMoniker
+
+
+<!-- ##### FUNCTION GNOME_Container_NotFound__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### MACRO GNOME_ClientSite__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-wrapper.sgml:Title ##### -->
+GnomeWrapper
+
+
+<!-- ##### SECTION ./tmpl/gnome-persist-file.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO ex_GNOME_Storage_NotFound ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-object-client.sgml:Long_Description ##### -->
+<para>
+  The #GnomeObjectClient object is used primarly to activate Bonobo
+  components (mainly by using gnome_object_activate ()).  The CORBA
+  object reference to the Bonobo object is wrapped in a #GnomeObject.
+</para>
+
+<para>
+  The #GnomeObjectClient object is also used to wrap an arbitrary
+  GNOME::Unknown CORBA object reference into a #GnomeObject (by using
+  gnome_object_client_from_corba()).
+</para>
+
+<para>
+  The main activation entry point is the gnome_object_activate()
+  function.  This is a high-level routine that knows how to activate
+  components or activate and restore components.  Internally
+  gnome_object_activate() checks whether its argument is a moniker_url
+  or a GOAD-ID and depending on this it invokes
+  gnome_object_activate_with_goad_id() or gnome_object_restore_from_url().
+</para>
+
+<para>
+  The gnome_object_activate_with_goad_id() routine basically uses
+  GNORBA's goad_server_activate_with_id() to launch the component ( or
+  launch the factory implementing the component and requesting from
+  the factory a new instance).
+</para>
+
+<para>
+  The gnome_object_restore_from_url() takes a textual moniker url
+  description (See #GnomeMoniker) that represents a specific object
+  that is defined at least by a component and a url to restore its
+  state from.  Optionally, you can specific a subobject to request
+  from the resulting object.
+</para>
+
+
+<!-- ##### FUNCTION gnome_component_activate_for_type ##### -->
+<para>
+
+</para>
+
+@slist: 
+@dir: 
+@mime_type: 
+@required_functionality: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_radiogroup ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+
+<!-- ##### MACRO ex_GNOME_Storage_NameExists ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_embeddable_client_get_verbs ##### -->
+<para>
+
+</para>
+
+@server_object: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_new ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@type: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@ac_mods: 
+@callback: 
+@callback_data: 
+
+<!-- ##### SECTION ./tmpl/gnome-component-io.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION CORBA_sequence_GNOME_Embeddable_GnomeVerb_allocbuf ##### -->
+<para>
+
+</para>
+
+@len: 
+@Returns: 
+
+<!-- ##### FUNCTION POA_GNOME_UIHandler__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### MACRO GNOME_ProgressiveDataSink_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-component-directory.sgml:Title ##### -->
+gnome-component-directory
+
+
+<!-- ##### SECTION ./tmpl/gnome-persist.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_container_remove ##### -->
+<para>
+
+</para>
+
+@container: 
+@object: 
+
+<!-- ##### FUNCTION GNOME_Embeddable_advise ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@advise: 
+@ev: 
+
+<!-- ##### MACRO GNOME_Storage__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_add_containee ##### -->
+<para>
+
+</para>
+
+@uih: 
+@containee: 
+
+<!-- ##### SECTION ./tmpl/gtk-interfaces.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/gnome-unknown-client.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION bonobo_ui_toolbar_button_item_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable.sgml:Title ##### -->
+GnomeEmbeddable
+
+
+<!-- ##### SECTION ./tmpl/gnome-object.sgml:Title ##### -->
+GnomeObject
+
+
+<!-- ##### SECTION ./tmpl/gnome-stream-fs.sgml:Long_Description ##### -->
+<para>
+  The <classname>GnomeStreamFs</classname> object is a file-based
+  <classname>GnomeStream</classname> object that implements the
+  <classname>GNOME::Stream</classname> CORBA interface.
+</para>
+
+<para>
+  The routines in this module enable you to create a GnomeStream that
+  will be backed up by a file.
+</para>
+
+
+<!-- ##### MACRO TC_GNOME_Storage_NotFound ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE gnome_client_site_epv ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_persist_stream_new ##### -->
+<para>
+
+</para>
+
+@goad_id: 
+@load_fn: 
+@save_fn: 
+@closure: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_ToolbarItemNotFound__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### MACRO GNOME_Stream_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_PersistFile_is_dirty ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_object_save_to_stream ##### -->
+<para>
+
+</para>
+
+@object: 
+@stream: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_storage_driver_open ##### -->
+<para>
+
+</para>
+
+@path: 
+@flags: 
+@mode: 
+@Returns: 
+
+<!-- ##### STRUCT BonoboActivationContextPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_Embeddable_get_client_site ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_ProgressiveDataSink_add_data ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@buffer: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/bonobo-storage-priv.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_View__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-client-site.sgml:See_Also ##### -->
+<para>
+  #GnomeEmbeddable #GnomeContainer #GnomeObjectClient #GnomeViewFrame
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-persist.sgml:Title ##### -->
+GnomePersist
+
+
+<!-- ##### FUNCTION POA_GNOME_View__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-main.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO TC_GNOME_Container_NotFound ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-moniker.sgml:Title ##### -->
+GnomeMoniker
+
+
+<!-- ##### SIGNAL GnomeView::do_verb ##### -->
+<para>
+   This signal is emitted when the container requests the view to
+   execute the verb name @verb.  You can install a verb handler if you
+   preffer using the gnome_view_register_verb() function.
+</para>
+
+@verb: 
+
+<!-- ##### FUNCTION GNOME_Container_get_object ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@item_name: 
+@only_if_exists: 
+@ev: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-object-io.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-storage-repo.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION GNOME_Container_enum_objects ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Embeddable_new_view ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@frame: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_persist_stream_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-progressive.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_get_sensitivity ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-persist.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_PROGRESSIVE_DATA_SINK_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-persist-stream.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION gnome_ui_handler_unset_container ##### -->
+<para>
+
+</para>
+
+@uih: 
+
+<!-- ##### FUNCTION gtk_object_query_interface ##### -->
+<para>
+
+</para>
+
+@object: 
+@type: 
+@Returns: 
+
+<!-- ##### MACRO GNOME_AdviseSink_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_unregister_containee ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@uih: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_embeddable_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gnome_progressive_data_sink_new ##### -->
+<para>
+
+</para>
+
+@start_fn: 
+@end_fn: 
+@add_data_fn: 
+@set_size_fn: 
+@closure: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-item-moniker.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### MACRO GNOME_EmbeddableFactory_create_object ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_fetch_by_callback_data ##### -->
+<para>
+
+</para>
+
+@uih: 
+@callback_data: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_set_accel ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@accelerator_key: 
+@ac_mods: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_view_frame_view_do_verb ##### -->
+<para>
+
+</para>
+
+@view_frame: 
+@verb_name: 
+
+<!-- ##### MACRO BONOBO_IS_EMBEDDABLE_FACTORY_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+<!-- ##### FUNCTION POA_GNOME_Container__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_set_style ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@name: 
+@style: 
+@ev: 
+
+<!-- ##### MACRO GNOME_PersistFile_query_interface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-stream.sgml:Short_Description ##### -->
+Abstract object for file (stream) access.
+
+
+<!-- ##### MACRO TC_GNOME_UIHandler_StringSeq ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_Embeddable_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_get_radio_state ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Storage_erase ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_set_accel ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@accelerator_key: 
+@ac_mods: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_persist_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-stream-memory.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_PersistStream__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_View_size_request ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@desired_width: 
+@desired_height: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_Storage_NoPermission__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_AdviseSink_on_rename ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@new_full_name: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-main.sgml:Short_Description ##### -->
+Bonobo initialization.
+
+
+<!-- ##### MACRO GNOME_PERSIST_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO TC_GNOME_Stream_SeekType ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_Embeddable_UserCancelledSave__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_parse_uiinfo_tree ##### -->
+<para>
+
+</para>
+
+@uih: 
+@uii: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_ParseDisplayName_SyntaxError__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_set_sensitivity ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@sensitivity: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_group_add_toolbar_items ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@gid: 
+@paths: 
+@ev: 
+
+<!-- ##### MACRO GNOME_VIEW_FRAME_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GnomeStoragePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-view-frame.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_PersistStorage__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GnomeView::view_undo_last_operation ##### -->
+<para>
+   This signal is emitted after the signal view_activate if the
+   user has selected the undo operation on the container and the last
+   operation done was done by the component.
+</para>
+
+<para>
+   The code should undo its last operation when it catches this signal.
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_set_label ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@label: 
+@ev: 
+
+<!-- ##### STRUCT BonoboZoomableFramePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-object-io.sgml:Title ##### -->
+gnome-object-io
+
+
+<!-- ##### FUNCTION gnome_storage_driver_open ##### -->
+<para>
+
+</para>
+
+@path: 
+@flags: 
+@mode: 
+@Returns: 
+
+<!-- ##### STRUCT BonoboGenericFactoryPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_EmbeddableFactory_supports ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_set_statusbar ##### -->
+<para>
+
+</para>
+
+@uih: 
+@statusbar: 
+
+<!-- ##### MACRO GNOME_BIND_CONTEXT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_AdviseSink__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### MACRO ex_GNOME_Container_NotFound ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_Storage_directory_list__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### MACRO ex_GNOME_Persist_WrongDataType ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_PersistFile_NoCurrentName__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gnome_container_get_moniker ##### -->
+<para>
+
+</para>
+
+@container: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_bonobo_selector_activate_selected ##### -->
+<para>
+
+</para>
+
+@sel: 
+@flags: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_set_label ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@label: 
+@ev: 
+
+<!-- ##### MACRO GNOME_PersistStream_query_interface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bonobo_storage_storage_open ##### -->
+<para>
+
+</para>
+
+@storage: 
+@path: 
+@open_mode: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-moniker-client.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION GNOME_Storage_open_stream ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@mode: 
+@ev: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-component-io.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_View_do_verb ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@verb_name: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-object-io.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_CONTAINER_TYPE ##### -->
+<para>
+   Returns the GtkType associated with the GnomeComponent Gtk object. 
+</para>
+
+
+<!-- ##### FUNCTION gnome_embeddable_add_verb ##### -->
+<para>
+
+</para>
+
+@bonobo_object: 
+@verb_name: 
+@verb_label: 
+@verb_hint: 
+
+<!-- ##### SECTION ./tmpl/gnome-simple-source.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_view_set_view_frame ##### -->
+<para>
+
+</para>
+
+@view: 
+@view_frame: 
+
+<!-- ##### STRUCT StorageDriver ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_OBJECT_CHECK ##### -->
+<para>
+   Checks if the exception in @e needs to be signaled.  If so, then
+   the proper exception signal is generated on the GnomeObject object
+   @o for the CORBA reference @c.
+</para>
+
+@o: 
+@c: 
+@e: 
+
+<!-- ##### SECTION ./tmpl/gnome-storage-fs.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-main.sgml:Title ##### -->
+gnome-main
+
+
+<!-- ##### FUNCTION GNOME_ViewFrame_pixbuf__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### MACRO gnome_client_site_embeddable_get_verbs ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_remove_item ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@ev: 
+
+<!-- ##### MACRO GNOME_Stream__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_build_path ##### -->
+<para>
+
+</para>
+
+@comp1: 
+@Varargs: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_embeddable_factory_set ##### -->
+<para>
+
+</para>
+
+@c_factory: 
+@factory: 
+@data: 
+
+<!-- ##### MACRO GNOME_View_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_PersistStorage_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_free_tree ##### -->
+<para>
+
+</para>
+
+@item: 
+
+<!-- ##### FUNCTION GNOME_Persist_FileNotFound__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Stream_iobuf__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gnome_view_frame_set_ui_handler ##### -->
+<para>
+
+</para>
+
+@view_frame: 
+@uih: 
+
+<!-- ##### FUNCTION gnome_object_add_interface ##### -->
+<para>
+
+</para>
+
+@object: 
+@newobj: 
+
+<!-- ##### MACRO GNOME_STORAGE_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_persist_stream_construct ##### -->
+<para>
+
+</para>
+
+@ps: 
+@corba_ps: 
+@goad_id: 
+@load_fn: 
+@save_fn: 
+@closure: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Embeddable_get_verb_list ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_embeddable_add_verbs ##### -->
+<para>
+
+</para>
+
+@bonobo_object: 
+@verbs: 
+@verb_list: 
+
+<!-- ##### STRUCT GnomeUIHandlerToolbarItem ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-storage-fs.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_ViewFrame_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gtk-interfaces.sgml:Title ##### -->
+gtk-interfaces
+
+
+<!-- ##### FUNCTION gnome_embeddable_client_deactivate ##### -->
+<para>
+
+</para>
+
+@client_object: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_parse_uiinfo_list ##### -->
+<para>
+
+</para>
+
+@uii: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_get_toggle_state ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gtk-interfaces.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-progressive.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-storage-private.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bonobo_moniker_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_parse_uiinfo_list_with_data ##### -->
+<para>
+
+</para>
+
+@uii: 
+@data: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_transient_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_zoomable_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-persist-stream.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bonobo_property_listener_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### VARIABLE gnome_persist_epv ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION GnomeProgressiveDataSinkSetSizeFn ##### -->
+<para>
+
+</para>
+
+@psink: 
+@count: 
+@closure: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_bonobo_selector_get_selected_goad_id ##### -->
+<para>
+
+</para>
+
+@sel: 
+@Returns: 
+
+<!-- ##### FUNCTION CORBA_sequence_CORBA_string_allocbuf ##### -->
+<para>
+
+</para>
+
+@len: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable-factory.sgml:Title ##### -->
+GnomeEmbeddableFactory
+
+
+<!-- ##### FUNCTION gnome_composite_moniker_new ##### -->
+<para>
+
+</para>
+
+@head: 
+@tail: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-bind-context.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_persist_stream_load_goad_id ##### -->
+<para>
+
+</para>
+
+@source: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-component-directory.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_UIHandler_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_object_restore_from_url ##### -->
+<para>
+
+</para>
+
+@goad_id: 
+@url: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_storage_open ##### -->
+<para>
+
+</para>
+
+@driver: 
+@path: 
+@flags: 
+@mode: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_ViewFrame_deactivate_and_undo ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+
+<!-- ##### MACRO GNOME_PersistFile_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF GnomeClientSiteList ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bonobo_print_client_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_stream_storage_open ##### -->
+<para>
+
+</para>
+
+@storage: 
+@path: 
+@open_mode: 
+@Returns: 
+
+<!-- ##### FUNCTION POA_GNOME_Embeddable__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_stream_fs_construct ##### -->
+<para>
+
+</para>
+
+@stream: 
+@corba_stream: 
+@Returns: 
+
+<!-- ##### STRUCT BonoboWidgetPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_moniker_set_server ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@goad_id: 
+@filename: 
+
+<!-- ##### FUNCTION gnome_object_get_servant ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_embeddable_construct ##### -->
+<para>
+
+</para>
+
+@bonobo_object: 
+@corba_bonobo_object: 
+@factory: 
+@data: 
+@Returns: 
+
+<!-- ##### MACRO TC_GNOME_Embeddable_CloseMode ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_set_hint ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@hint: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_embeddable_load_from_stream ##### -->
+<para>
+
+</para>
+
+@stream: 
+@interface: 
+@Returns: 
+
+<!-- ##### MACRO TC_GNOME_Embeddable_UserCancelledSave ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-stream-repo.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION gnome_stream_fs_create ##### -->
+<para>
+
+</para>
+
+@path: 
+@Returns: 
+
+<!-- ##### VARIABLE gnome_object_base_epv ##### -->
+<para>
+   This is the CORBA Entry Point Vector (EPV) of the base GnomeObject
+   that provides the implementaion for the GNOME::Unknown interface.
+   Use this to construct your CORBA VEPV when deriving objects from
+   GnomeObject.
+</para>
+
+
+<!-- ##### MACRO bonobo_embeddable_factory_new ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION GnomeEmbeddableFactoryFn ##### -->
+<para>
+
+</para>
+
+@Factory: 
+@closure: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_add_tree ##### -->
+<para>
+
+</para>
+
+@uih: 
+@parent_path: 
+@tree: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_MenuItemNotFound__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-moniker.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-stream-client.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### VARIABLE gnome_simple_data_source_epv ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_storage_fs_open ##### -->
+<para>
+
+</para>
+
+@path: 
+@mode: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_component_directory_free ##### -->
+<para>
+
+</para>
+
+@dir: 
+
+<!-- ##### MACRO GNOME_Storage_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_stream_repo_open ##### -->
+<para>
+
+</para>
+
+@storage: 
+@path: 
+@mode: 
+@Returns: 
+
+<!-- ##### MACRO TC_GNOME_ParseDisplayName_SyntaxError ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_get_callback ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@callback: 
+@callback_data: 
+
+<!-- ##### SECTION ./tmpl/gnome-ui-handler.sgml:Title ##### -->
+GnomeUIHandler
+
+
+<!-- ##### STRUCT BonoboZoomablePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable-client.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO TC_GNOME_UIHandler_MenuType ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_fetch_list ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@Returns: 
+
+<!-- ##### STRUCT BonoboPropertyBagPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_create_menubar ##### -->
+<para>
+
+</para>
+
+@uih: 
+
+<!-- ##### FUNCTION GNOME_Stream_close ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_Stream_copy_to ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@dest: 
+@bytes: 
+@read: 
+@written: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_set_pixmap ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@pixmap_type: 
+@pixmap_data: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_group_destroy ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@gid: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-persist-file.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bonobo_control_frame_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-client-site.sgml:Title ##### -->
+GnomeClientSite
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_activated ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-bonobo.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_new_item ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@ac_mods: 
+@callback: 
+@callback_data: 
+
+<!-- ##### MACRO GNOME_ProgressiveDataSink_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_Stream_ref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_ViewFrame_query_interface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_set_accel ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@accelerator_key: 
+@ac_mods: 
+
+<!-- ##### MACRO TC_GNOME_Embeddable_GnomeVerb ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_EmbeddableFactory__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### MACRO GNOME_Storage_WRITE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-inplace-component.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### MACRO GNOME_Container_unref ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-container.sgml:Long_Description ##### -->
+<para>
+   #GnomeContainer implements the
+   <classname>GNOME::Container</classname> interface.  This interface
+   is used by components that embedd other components.  It basically
+   exposes to client users the names of the sub-components and enables
+   a client to fetch these objects.
+</para>
+
+<para>
+   A <classname>GnomeComponent</classname> is involved during the
+   process of a moniker resolution for sub-objects.
+</para>
+
+
+<!-- ##### SECTION ./tmpl/bonobo-embeddable-factory.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_progressive_data_sink_construct ##### -->
+<para>
+
+</para>
+
+@psink: 
+@corba_psink: 
+@start_fn: 
+@end_fn: 
+@add_data_fn: 
+@set_size_fn: 
+@closure: 
+@Returns: 
+
+<!-- ##### USER_FUNCTION GnomeSimpleDataSourcePopDataFn ##### -->
+<para>
+
+</para>
+
+@ssource: 
+@count: 
+@buffer: 
+@closure: 
+@Returns: 
+
+<!-- ##### VARIABLE gnome_object_vepv ##### -->
+<para>
+<para>
+   This is the CORBA Vector of EPVs (VEPV) of GnomeObject that
+   provides the implementaion for the GNOME::Unknown interface.
+</para>
+
+
+<!-- ##### FUNCTION GNOME_PersistFile_save ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-composite-moniker.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_stream_mem_create ##### -->
+<para>
+
+</para>
+
+@buffer: 
+@size: 
+@read_only: 
+@Returns: 
+
+<!-- ##### STRUCT GnomeUIHandlerTopLevelData ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_set_callback ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@callback: 
+@callback_data: 
+
+<!-- ##### STRUCT embeddable_data_t ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE gnome_embeddable_epv ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_removed ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_storage_write_class_id ##### -->
+<para>
+
+</para>
+
+@storage: 
+@class_id: 
+
+<!-- ##### SECTION ./tmpl/gnome-bonobo-selector.sgml:Title ##### -->
+GnomeBonoboSelector
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_set_orientation ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@name: 
+@orientation: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_fetch_item ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@type: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@modifier: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_stream_storage_open ##### -->
+<para>
+
+</para>
+
+@storage: 
+@path: 
+@open_mode: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Embeddable_unadvise ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_get_callback ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@callback: 
+@callback_data: 
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable-client.sgml:Title ##### -->
+gnome-embeddable-client
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_get_sensitivity ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_set_label ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@label: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_get_sensitivity ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable-factory.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_PersistStorage__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### MACRO GNOME_ViewFrame__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO bonobo_embeddable_factory_get_type ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-stream-fs.sgml:Short_Description ##### -->
+A file-based GnomeStream implementation
+
+
+<!-- ##### TYPEDEF BonoboEmbeddableFactory ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_embeddable_save ##### -->
+<para>
+
+</para>
+
+@bonobo_object: 
+@storage: 
+@same_as_loaded: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_bonobo_select_goad_id ##### -->
+<para>
+
+</para>
+
+@title: 
+@interfaces_required: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_client_site_new_view ##### -->
+<para>
+
+</para>
+
+@client_site: 
+@Returns: 
+
+<!-- ##### STRUCT BonoboObjectPrivate ##### -->
+<para>
+   Private information kept by the BonoboObject.  This should not be
+   used by BonoboObject users.
+</para>
+
+
+<!-- ##### MACRO ex_GNOME_UIHandler_MenuItemNotFound ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_storage_driver_new ##### -->
+<para>
+
+</para>
+
+@type: 
+@path: 
+@open_mode: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION bonobo_persist_file_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-persist-stream.sgml:Title ##### -->
+GnomePersistStream
+
+
+<!-- ##### MACRO GNOME_UIHandler__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_set_callback ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@callback: 
+@callback_data: 
+
+<!-- ##### MACRO GNOME_PersistFile__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_radioitem ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@label: 
+@hint: 
+@pos: 
+@accelerator_key: 
+@ac_mods: 
+@callback: 
+@callback_data: 
+
+<!-- ##### STRUCT BonoboCanvasComponentPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION GnomePersistFileIOFn ##### -->
+<para>
+
+</para>
+
+@pf: 
+@filename: 
+@closure: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-wrapper.sgml:See_Also ##### -->
+<para>
+   #GtkWidget #GnomeView #GnomeViewFrame
+</para>
+
+
+<!-- ##### FUNCTION GNOME_ViewFrame_request_resize ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@new_width: 
+@new_height: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-storage-private.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_object_check_env ##### -->
+<para>
+
+</para>
+
+@object: 
+@corba_object: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_set_toggle_state ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@state: 
+@ev: 
+
+<!-- ##### MACRO TC_GNOME_Storage_OpenMode ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-stream-repo.sgml:Title ##### -->
+GnomeStreamREPO
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_add_tree ##### -->
+<para>
+
+</para>
+
+@uih: 
+@parent_path: 
+@item: 
+
+<!-- ##### FUNCTION POA_GNOME_ClientSite__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_ui_container_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_get_accel ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@accelerator_key: 
+@ac_mods: 
+@ev: 
+
+<!-- ##### USER_FUNCTION GnomeProgressiveDataSinkEndFn ##### -->
+<para>
+
+</para>
+
+@psink: 
+@closure: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-item-moniker.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_EMBEDDABLE_FACTORY_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-embeddable-factory.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-storage.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_set_toggle_state ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@state: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_get_style ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@name: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_get_pos ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Stream_iobuf__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_reinstated ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_separator ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@pos: 
+
+<!-- ##### SECTION ./tmpl/gnome-file-moniker.sgml:Title ##### -->
+GnomeFileMoniker
+
+
+<!-- ##### MACRO GNOME_MONIKER_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_client_site_new ##### -->
+<para>
+
+</para>
+
+@container: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Embeddable_set_host_name ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@name: 
+@appname: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_get_accel ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@accelerator_key: 
+@ac_mods: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_set_pixmap ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@pixmap_type: 
+@pixmap_data: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-composite-moniker.sgml:Title ##### -->
+GnomeCompositeMoniker
+
+
+<!-- ##### MACRO GNOME_INPLACE_SITE_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO ex_GNOME_PersistFile_NoCurrentName ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_parse_uiinfo_one ##### -->
+<para>
+
+</para>
+
+@uih: 
+@uii: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_create_popup_menu ##### -->
+<para>
+
+</para>
+
+@uih: 
+
+<!-- ##### SECTION ./tmpl/gnome-stream-memory.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_item ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@ac_mods: 
+@callback: 
+@callback_data: 
+
+<!-- ##### FUNCTION gnome_bind_context_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### MACRO GNOME_SS_WRITE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboStreamMemPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_new_subtree ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@ac_mods: 
+
+<!-- ##### FUNCTION GNOME_Embeddable_set_client_site ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@client_site: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_radio_set_state ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@state: 
+@ev: 
+
+<!-- ##### FUNCTION POA_GNOME_ProgressiveDataSink__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_get_label ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-moniker-client.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_storage_fs_create ##### -->
+<para>
+
+</para>
+
+@storage_fs: 
+@path: 
+@Returns: 
+
+<!-- ##### MACRO GNOME_SS_RDWR ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboWrapperPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_ProgressiveDataSink__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_persiststream_save_to_stream ##### -->
+<para>
+
+</para>
+
+@pstream: 
+@target: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_embeddable_set_view_factory ##### -->
+<para>
+
+</para>
+
+@bonobo_object: 
+@factory: 
+@data: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_parse_uiinfo_one ##### -->
+<para>
+
+</para>
+
+@uii: 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Storage_open_storage ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@mode: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION POA_GNOME_PersistFile__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-bonobo.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gtk_object_add_interface ##### -->
+<para>
+
+</para>
+
+@object: 
+@interface: 
+
+<!-- ##### MACRO GNOME_Container__free ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_set_pixmap ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@type: 
+@data: 
+
+<!-- ##### SECTION ./tmpl/gnome-file-moniker.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_object_activate_servant ##### -->
+<para>
+
+</para>
+
+@object: 
+@servant: 
+@Returns: 
+
+<!-- ##### FUNCTION bonobo_selector_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gnome_container_add ##### -->
+<para>
+
+</para>
+
+@container: 
+@object: 
+
+<!-- ##### MACRO GNOME_STREAM_TYPE ##### -->
+<para>
+  Returns the GtkType associated with the
+  <classname>GnomeStream</classname> object
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_get_label ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
+<!-- ##### STRUCT BonoboPersistFilePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_PersistStream_get_size_max ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
+<!-- ##### MACRO GNOME_AdviseSink_query_interface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_client_site_construct ##### -->
+<para>
+
+</para>
+
+@client_site: 
+@corba_client_site: 
+@container: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_storage_repo_open ##### -->
+<para>
+
+</para>
+
+@storage_repo: 
+@path: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-progressive.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### VARIABLE gnome_object_epv ##### -->
+<para>
+   This is the CORBA Entry Point Vector (EPV) of GnomeObject that
+   provides the implementaion for the GNOME::Unknown interface.  Use
+   this to construct your CORBA VEPV when deriving objects from
+   GnomeObject.
+</para>
+
+<para>
+   All Bonobo CORBA servers expose their epv vectors to enable
+   programmers to fill in their CORBA VEPVs for any piece of code that
+   wants to inherit the implementation.
+</para>
+
+
+<!-- ##### MACRO TC_GNOME_UIHandler_PixmapType ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_view_frame_get_wrapper ##### -->
+<para>
+
+</para>
+
+@view_frame: 
+@Returns: 
+
+<!-- ##### STRUCT BonoboUIToolbarItemPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_set_sensitivity ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@sensitivity: 
+@ev: 
+
+<!-- ##### MACRO BONOBO_EMBEDDABLE_FACTORY ##### -->
+<para>
+
+</para>
+
+@o: 
+
+<!-- ##### FUNCTION POA_GNOME_Stream__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION bonobo_canvas_component_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_get_pixmap ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@pixmap_type: 
+@pixmap_data: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_toggle_set_state ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@state: 
+@ev: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_new_toggleitem ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@label: 
+@hint: 
+@pos: 
+@accelerator_key: 
+@ac_mods: 
+@callback: 
+@callback_data: 
+
+<!-- ##### FUNCTION GNOME_PersistFile_load ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+
+<!-- ##### MACRO GNOME_INPLACE_BONOBO_OBJECT_TYPE ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_View_query_interface ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_ProgressiveDataSink_iobuf__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION gnome_ui_handler_menu_set_radio_state ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@state: 
+
+<!-- ##### STRUCT StorageHandle ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/gnome-simple-source.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION gnome_embeddable_remove_verb ##### -->
+<para>
+
+</para>
+
+@bonobo_object: 
+@verb_name: 
+
+<!-- ##### MACRO GNOME_PersistStorage_get_goad_id ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboViewFramePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_ProgressiveDataSink_start ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+
+<!-- ##### USER_FUNCTION GnomeViewVerbFunc ##### -->
+<para>
+
+</para>
+
+@view: 
+@verb_name: 
+@user_data: 
+
+<!-- ##### TYPEDEF BonoboEmbeddableFactoryClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_subtree ##### -->
+<para>
+
+</para>
+
+@uih: 
+@path: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@ac_mods: 
+
+<!-- ##### SECTION ./tmpl/gnome-unknown-client.sgml:Title ##### -->
+GnomeObjectClient
+
+
+<!-- ##### FUNCTION GNOME_ViewFrame_pixbuf__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
+<!-- ##### SECTION ./tmpl/gnome-bind-context.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/gnome-storage-driver.sgml:Title ##### -->
+gnome-storage-driver
+
+
+<!-- ##### SECTION ./tmpl/gnome-inplace-site.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### FUNCTION gnome_client_site_bind_embeddable ##### -->
+<para>
+
+</para>
+
+@client_site: 
+@object: 
+@Returns: 
+
+<!-- ##### FUNCTION gnome_component_directory_get ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### MACRO GNOME_STORAGE_FS_TYPE ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### FUNCTION gnome_view_get_ui_handler ##### -->
 <para>
@@ -2334,15 +5784,6 @@ gnome-storage-driver
 @corba_object: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_moniker_register ##### -->
-<para>
-
-</para>
-
-@moniker: 
-@name: 
-@goad_id: 
-
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_remove ##### -->
 <para>
 
@@ -2351,55 +5792,48 @@ gnome-storage-driver
 @uih: 
 @path: 
 
-<!-- ##### SIGNAL GnomeView::set_zoom_factor ##### -->
-<para>
-   This signal is emitted when the container requests the view to
-   set its zoom factor to @zoom.  The view should respond by setting
-   its zoom factor to the specified value.
-</para>
-
-@zoom: 
-
-<!-- ##### FUNCTION gnome_ui_handler_menu_get_label ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_reinstated ##### -->
 <para>
 
 </para>
 
-@uih: 
+@_obj: 
 @path: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_Persist_get_goad_id ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-item-moniker.sgml:See_Also ##### -->
+<!-- ##### MACRO TC_GNOME_Storage_NoPermission ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### SECTION ./tmpl/bonobo-audio-ulaw.sgml:Title ##### -->
-bonobo-audio-ulaw
-
-
-<!-- ##### MACRO GNOME_PERSIST_STREAM_TYPE ##### -->
+<!-- ##### MACRO GNOME_ParseDisplayName_unref ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnome_view_frame_set_covered ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_iobuf__alloc ##### -->
 <para>
 
 </para>
 
-@view_frame: 
-@covered: 
-
-<!-- ##### FUNCTION gnome_view_frame_get_ui_handler ##### -->
-<para>
-
-</para>
-
-@view_frame: 
 @Returns: 
+
+<!-- ##### STRUCT BonoboTransientPriv ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### SECTION ./tmpl/gnome-client-site.sgml:Long_Description ##### -->
 <para>
@@ -2486,49 +5920,22 @@ create_widget_from_component (GnomeContainer *container, const char *goad_id)
 </example>
 
 
-<!-- ##### SECTION ./tmpl/gnome-embeddable.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_ToolbarItemNotFound__alloc ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_fetch_by_callback ##### -->
-<para>
-
-</para>
-
-@uih: 
-@callback: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_get_pixmap ##### -->
+<!-- ##### STRUCT BonoboViewPrivate ##### -->
 <para>
 
 </para>
 
-@uih: 
-@path: 
-@type: 
-@data: 
 
-<!-- ##### FUNCTION gnome_embeddable_client_new_view_simple ##### -->
-<para>
+<!-- ##### SECTION ./tmpl/bonobo.sgml:Short_Description ##### -->
 
-</para>
 
-@server_object: 
-@client_site: 
-@Returns: 
-
-<!-- ##### USER_FUNCTION GnomeProgressiveDataSinkAddDataFn ##### -->
-<para>
-
-</para>
-
-@psink: 
-@buffer: 
-@closure: 
-@Returns: 
 
 <!-- ##### MACRO GNOME_SS_READ ##### -->
 <para>
@@ -2536,17 +5943,11 @@ create_widget_from_component (GnomeContainer *container, const char *goad_id)
 </para>
 
 
-<!-- ##### FUNCTION gnome_persist_file_construct ##### -->
+<!-- ##### FUNCTION GNOME_Embeddable_verb_list__alloc ##### -->
 <para>
 
 </para>
 
-@ps: 
-@corba_ps: 
-@goad_id: 
-@load_fn: 
-@save_fn: 
-@closure: 
 @Returns: 
 
 <!-- ##### FUNCTION gnome_view_get_embeddable ##### -->
@@ -2568,12 +5969,18 @@ create_widget_from_component (GnomeContainer *container, const char *goad_id)
 @ev: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_object_unref ##### -->
+<!-- ##### MACRO GNOME_ParseDisplayName_query_interface ##### -->
 <para>
 
 </para>
 
-@object: 
+
+<!-- ##### FUNCTION GNOME_Container_NotFound__alloc ##### -->
+<para>
+
+</para>
+
+@Returns: 
 
 <!-- ##### FUNCTION gnome_file_moniker_construct ##### -->
 <para>
@@ -2586,13 +5993,41 @@ create_widget_from_component (GnomeContainer *container, const char *goad_id)
 @goad_id: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_view_frame_get_view ##### -->
+<!-- ##### STRUCT BonoboEmbeddablePrivate ##### -->
 <para>
 
 </para>
 
-@view_frame: 
+
+<!-- ##### FUNCTION bonobo_ui_toolbar_toggle_button_item_get_type ##### -->
+<para>
+
+</para>
+
 @Returns: 
+
+<!-- ##### FUNCTION bonobo_view_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_group_add_menu_items ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@gid: 
+@paths: 
+@ev: 
+
+<!-- ##### MACRO TC_GNOME_UIHandler_ToolbarType ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### SECTION ./tmpl/gnome-stream-repo.sgml:See_Also ##### -->
 <para>
@@ -2600,13 +6035,17 @@ create_widget_from_component (GnomeContainer *container, const char *goad_id)
 </para>
 
 
-<!-- ##### FUNCTION gnome_object_from_servant ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_set_accel ##### -->
 <para>
 
 </para>
 
-@servant: 
-@Returns: 
+@_obj: 
+@containee: 
+@path: 
+@accelerator_key: 
+@ac_mods: 
+@ev: 
 
 <!-- ##### MACRO GNOME_SS_EXCL ##### -->
 <para>
@@ -2618,54 +6057,39 @@ create_widget_from_component (GnomeContainer *container, const char *goad_id)
 gnome-storage-private
 
 
-<!-- ##### STRUCT view_data_t ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION gnome_stream_fs_open ##### -->
-<para>
-
-</para>
-
-@path: 
-@mode: 
-@Returns: 
-
 <!-- ##### MACRO GNOME_OBJECT_CLIENT_TYPE ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnome_inplace_site_new ##### -->
+<!-- ##### FUNCTION GNOME_Persist_WrongDataType__alloc ##### -->
 <para>
 
 </para>
 
-@container: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-component-io.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION POA_GNOME_Persist__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### MACRO TC_GNOME_UIHandler_iobuf ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### SECTION ./tmpl/bonobo-storage-priv.sgml:See_Also ##### -->
+<!-- ##### MACRO BONOBO_EMBEDDABLE_FACTORY_CLASS ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### SECTION ./tmpl/gnome-persist.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### SECTION ./tmpl/gnome-bonobo-selector.sgml:Short_Description ##### -->
-
-
+@k: 
 
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_fetch_by_callback_data ##### -->
 <para>
@@ -2695,42 +6119,29 @@ gnome-storage-private
 </para>
 
 
-<!-- ##### MACRO GNOME_UI_HANDLER_TYPE ##### -->
+<!-- ##### MACRO GNOME_ViewFrame_ref ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### VARIABLE gnome_stream_vepv ##### -->
-<para>
-   This is the CORBA Vector of EPVs (VEPV) of GnomeStream that
-   provides the implementaion for the GNOME::Stream interface.
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-simple-source.sgml:Long_Description ##### -->
+<!-- ##### STRUCT BonoboPropertyControlPrivate ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### FUNCTION gnome_view_frame_view_activate ##### -->
+<!-- ##### MACRO GNOME_ClientSite_ref ##### -->
 <para>
 
 </para>
 
-@view_frame: 
 
-<!-- ##### FUNCTION gnome_inplace_bonobo_object_construct ##### -->
+<!-- ##### MACRO GNOME_Storage_READ ##### -->
 <para>
 
 </para>
 
-@inplace: 
-@corba_inplace: 
-@factory: 
-@data: 
-@Returns: 
 
 <!-- ##### STRUCT GnomeStorageMem ##### -->
 <para>
@@ -2742,21 +6153,11 @@ gnome-storage-private
 
 
 
-<!-- ##### FUNCTION gnome_moniker_unregister ##### -->
+<!-- ##### STRUCT BonoboPersistStreamPrivate ##### -->
 <para>
 
 </para>
 
-@moniker: 
-
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_get_hint ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_fetch_by_callback ##### -->
 <para>
@@ -2767,41 +6168,36 @@ gnome-storage-private
 @callback: 
 @Returns: 
 
-<!-- ##### USER_FUNCTION GnomeSimpleDataSourceRemainingDataFn ##### -->
+<!-- ##### MACRO BONOBO_IS_EMBEDDABLE_FACTORY ##### -->
 <para>
 
 </para>
 
-@ssource: 
-@closure: 
+@o: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_get_children ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@children: 
+@ev: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-stream.sgml:Title ##### -->
-GnomeStream
-
-
-<!-- ##### STRUCT GnomeComponentDirectory ##### -->
+<!-- ##### FUNCTION bonobo_ui_component_get_type ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### USER_FUNCTION GnomePersistStreamMaxFn ##### -->
-<para>
-
-</para>
-
-@ps: 
-@closure: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_get_menubar ##### -->
+<!-- ##### MACRO GNOME_UIHandler_query_interface ##### -->
 <para>
 
 </para>
 
-@uih: 
-@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_get_toolbar_list ##### -->
 <para>
@@ -2811,24 +6207,26 @@ GnomeStream
 @uih: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_persist_stream_set_dirty ##### -->
+<!-- ##### MACRO TC_GNOME_UIHandler_ToolbarOrientation ##### -->
 <para>
 
 </para>
 
-@ps: 
-@dirty: 
 
-<!-- ##### SECTION ./tmpl/gnome-stream-client.sgml:Title ##### -->
-gnome-stream-client
-
-
-<!-- ##### FUNCTION gnome_ui_handler_get_statusbar ##### -->
+<!-- ##### STRUCT BonoboCanvasItemPrivate ##### -->
 <para>
 
 </para>
 
-@uih: 
+
+<!-- ##### FUNCTION GNOME_Persist_WrongDataType__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
 @Returns: 
 
 <!-- ##### USER_FUNCTION GnomeViewFactory ##### -->
@@ -2842,6 +6240,24 @@ gnome-stream-client
 @Returns: 
 @bonobo_object: 
 
+<!-- ##### FUNCTION bonobo_zoomable_frame_get_epv ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_set_label ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@label: 
+@ev: 
+
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_toggle_set_state ##### -->
 <para>
 
@@ -2850,6 +6266,17 @@ gnome-stream-client
 @uih: 
 @path: 
 @state: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_get_pixmap ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@pixmap_type: 
+@pixmap_data: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_component_activate_for_url ##### -->
 <para>
@@ -2894,6 +6321,12 @@ gnome-stream-client
 @closure: 
 @Returns: 
 
+<!-- ##### MACRO GNOME_Persist_ref ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION gnome_view_frame_size_request ##### -->
 <para>
 
@@ -2903,21 +6336,21 @@ gnome-stream-client
 @desired_width: 
 @desired_height: 
 
-<!-- ##### FUNCTION gnome_inplace_site_set_moniker ##### -->
+<!-- ##### STRUCT BonoboListenerPrivate ##### -->
 <para>
 
 </para>
 
-@inplace: 
-@moniker: 
 
-<!-- ##### MACRO GNOME_OBJECT_EV ##### -->
+<!-- ##### FUNCTION GNOME_UIHandler_menu_set_pos ##### -->
 <para>
-   Fetches the <structname>CORBA_Environment</structname> field of a
-   <classname>GnomeObject</classname>.
+
 </para>
 
-@o: 
+@_obj: 
+@containee: 
+@pos: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_new_radiogroup ##### -->
 <para>
@@ -2927,20 +6360,7 @@ gnome-stream-client
 @uih: 
 @path: 
 
-<!-- ##### MACRO GNOME_CLIENT_SITE_TYPE ##### -->
-<para>
-  Returns the GtkType associated with the
-  <classname>GnomeClientSite</classname> object. 
-</para>
-
-
 <!-- ##### MACRO GNOME_EMBEDDABLE_TYPE ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### MACRO BONOBO_SS_WRITE ##### -->
 <para>
 
 </para>
@@ -2950,16 +6370,41 @@ gnome-stream-client
 
 
 
-<!-- ##### SECTION ./tmpl/gnome-item-moniker.sgml:Title ##### -->
-GnomeItemMoniker
-
-
 <!-- ##### SECTION ./tmpl/gnome-file-moniker.sgml:Short_Description ##### -->
 
 
 
-<!-- ##### SECTION ./tmpl/gnome-wrapper.sgml:Title ##### -->
-GnomeWrapper
+<!-- ##### FUNCTION GNOME_ClientSite_show_window ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@shown: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_Storage_create_stream ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
+<!-- ##### FUNCTION POA_GNOME_AdviseSink__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### MACRO TC_GNOME_Storage_directory_list ##### -->
+<para>
+
+</para>
 
 
 <!-- ##### FUNCTION gnome_ui_handler_remove_toolbar ##### -->
@@ -2970,11 +6415,12 @@ GnomeWrapper
 @uih: 
 @name: 
 
-<!-- ##### SECTION ./tmpl/gnome-persist-file.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION bonobo_object_client_get_type ##### -->
 <para>
 
 </para>
 
+@Returns: 
 
 <!-- ##### VARIABLE gnome_container_vepv ##### -->
 <para>
@@ -2983,92 +6429,37 @@ GnomeWrapper
 </para>
 
 
+<!-- ##### FUNCTION GNOME_Storage_directory_list__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
 <!-- ##### SECTION ./tmpl/bonobo-audio-ulaw.sgml:Short_Description ##### -->
 
 
 
-<!-- ##### SECTION ./tmpl/gnome-object-client.sgml:Long_Description ##### -->
-<para>
-  The #GnomeObjectClient object is used primarly to activate Bonobo
-  components (mainly by using gnome_object_activate ()).  The CORBA
-  object reference to the Bonobo object is wrapped in a #GnomeObject.
-</para>
-
-<para>
-  The #GnomeObjectClient object is also used to wrap an arbitrary
-  GNOME::Unknown CORBA object reference into a #GnomeObject (by using
-  gnome_object_client_from_corba()).
-</para>
-
-<para>
-  The main activation entry point is the gnome_object_activate()
-  function.  This is a high-level routine that knows how to activate
-  components or activate and restore components.  Internally
-  gnome_object_activate() checks whether its argument is a moniker_url
-  or a GOAD-ID and depending on this it invokes
-  gnome_object_activate_with_goad_id() or gnome_object_restore_from_url().
-</para>
-
-<para>
-  The gnome_object_activate_with_goad_id() routine basically uses
-  GNORBA's goad_server_activate_with_id() to launch the component ( or
-  launch the factory implementing the component and requesting from
-  the factory a new instance).
-</para>
-
-<para>
-  The gnome_object_restore_from_url() takes a textual moniker url
-  description (See #GnomeMoniker) that represents a specific object
-  that is defined at least by a component and a url to restore its
-  state from.  Optionally, you can specific a subobject to request
-  from the resulting object.
-</para>
-
-
-<!-- ##### FUNCTION gnome_component_activate_for_type ##### -->
+<!-- ##### FUNCTION GNOME_Storage_NotFound__alloc ##### -->
 <para>
 
 </para>
 
-@slist: 
-@dir: 
-@mime_type: 
-@required_functionality: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_new_radiogroup ##### -->
+<!-- ##### FUNCTION GNOME_Stream_seek ##### -->
 <para>
 
 </para>
 
-@uih: 
-@path: 
-
-<!-- ##### FUNCTION gnome_embeddable_client_get_verbs ##### -->
-<para>
-
-</para>
-
-@server_object: 
+@_obj: 
+@offset: 
+@whence: 
+@ev: 
 @Returns: 
-
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_new ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@type: 
-@label: 
-@hint: 
-@pos: 
-@pixmap_type: 
-@pixmap_data: 
-@accelerator_key: 
-@ac_mods: 
-@callback: 
-@callback_data: 
 
 <!-- ##### FUNCTION gnome_stream_write_class_id ##### -->
 <para>
@@ -3084,6 +6475,16 @@ GnomeWrapper
 </para>
 
 
+<!-- ##### FUNCTION GNOME_UIHandler_menu_get_sensitivity ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
+
 <!-- ##### FUNCTION gnome_view_frame_bind_to_view ##### -->
 <para>
 
@@ -3092,13 +6493,14 @@ GnomeWrapper
 @view_frame: 
 @view: 
 
-<!-- ##### SECTION ./tmpl/gnome-component-io.sgml:Short_Description ##### -->
+<!-- ##### FUNCTION GNOME_PersistStream_save ##### -->
+<para>
 
+</para>
 
-
-<!-- ##### SECTION ./tmpl/gnome-component-directory.sgml:Title ##### -->
-gnome-component-directory
-
+@_obj: 
+@stream: 
+@ev: 
 
 <!-- ##### MACRO gnome_client_site_embeddable_new_view ##### -->
 <para>
@@ -3106,27 +6508,14 @@ gnome-component-directory
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-persist.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION GNOME_ViewFrame_get_client_site ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### FUNCTION gnome_container_remove ##### -->
-<para>
-
-</para>
-
-@container: 
-@object: 
-
-<!-- ##### FUNCTION gnome_ui_handler_add_containee ##### -->
-<para>
-
-</para>
-
-@uih: 
-@containee: 
+@_obj: 
+@ev: 
+@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_get_pixmap ##### -->
 <para>
@@ -3148,13 +6537,12 @@ gnome-component-directory
 @closure: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-unknown-client.sgml:Short_Description ##### -->
+<!-- ##### FUNCTION bonobo_plug_get_type ##### -->
+<para>
 
+</para>
 
-
-<!-- ##### SECTION ./tmpl/gnome-embeddable.sgml:Title ##### -->
-GnomeEmbeddable
-
+@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_get_label ##### -->
 <para>
@@ -3165,9 +6553,15 @@ GnomeEmbeddable
 @path: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-object.sgml:Title ##### -->
-GnomeObject
+<!-- ##### FUNCTION GNOME_EmbeddableFactory_create_path ##### -->
+<para>
 
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_set_hint ##### -->
 <para>
@@ -3178,35 +6572,11 @@ GnomeObject
 @path: 
 @hint: 
 
-<!-- ##### SECTION ./tmpl/gnome-stream-fs.sgml:Long_Description ##### -->
-<para>
-  The <classname>GnomeStreamFs</classname> object is a file-based
-  <classname>GnomeStream</classname> object that implements the
-  <classname>GNOME::Stream</classname> CORBA interface.
-</para>
-
-<para>
-  The routines in this module enable you to create a GnomeStream that
-  will be backed up by a file.
-</para>
-
-
-<!-- ##### VARIABLE gnome_client_site_epv ##### -->
+<!-- ##### SECTION ./tmpl/bonobo.sgml:See_Also ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### FUNCTION gnome_persist_stream_new ##### -->
-<para>
-
-</para>
-
-@goad_id: 
-@load_fn: 
-@save_fn: 
-@closure: 
-@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_get_accelgroup ##### -->
 <para>
@@ -3263,18 +6633,16 @@ GnomeObject
 GnomeBindContext
 
 
-<!-- ##### SECTION ./tmpl/gnome-storage-driver.sgml:See_Also ##### -->
+<!-- ##### FUNCTION bonobo_ui_toolbar_item_get_type ##### -->
 <para>
 
 </para>
 
+@Returns: 
 
-<!-- ##### VARIABLE gnome_container_epv ##### -->
+<!-- ##### SECTION ./tmpl/gnome-storage-driver.sgml:See_Also ##### -->
 <para>
-   This is the CORBA Entry Point Vector (EPV) of GnomeContainer that
-   provides the implementaion for the GNOME::Container interface.  Use
-   this to construct your CORBA VEPV when deriving objects from
-   GnomeContainer.
+
 </para>
 
 
@@ -3288,15 +6656,20 @@ GnomeBindContext
 @callback: 
 @user_data: 
 
-<!-- ##### FUNCTION bonobo_storage_driver_open ##### -->
+<!-- ##### VARIABLE gnome_container_epv ##### -->
+<para>
+   This is the CORBA Entry Point Vector (EPV) of GnomeContainer that
+   provides the implementaion for the GNOME::Container interface.  Use
+   this to construct your CORBA VEPV when deriving objects from
+   GnomeContainer.
+</para>
+
+
+<!-- ##### MACRO GNOME_PersistStream_get_goad_id ##### -->
 <para>
 
 </para>
 
-@path: 
-@flags: 
-@mode: 
-@Returns: 
 
 <!-- ##### SIGNAL GnomeView::size_query ##### -->
 <para>
@@ -3308,6 +6681,22 @@ GnomeBindContext
 @desired_width: 
 @desired_height: 
 
+<!-- ##### MACRO bonobo_embeddable_factory_set ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_MenuItemNotFound__free ##### -->
+<para>
+
+</para>
+
+@mem: 
+@dat: 
+@free_strings: 
+@Returns: 
+
 <!-- ##### FUNCTION gnome_view_frame_new ##### -->
 <para>
 
@@ -3315,12 +6704,6 @@ GnomeBindContext
 
 @client_site: 
 @Returns: 
-
-<!-- ##### SECTION ./tmpl/bonobo-storage-priv.sgml:Long_Description ##### -->
-<para>
-
-</para>
-
 
 <!-- ##### SECTION ./tmpl/gnome-component-directory.sgml:See_Also ##### -->
 <para>
@@ -3334,21 +6717,21 @@ GnomeBindContext
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-client-site.sgml:See_Also ##### -->
-<para>
-  #GnomeEmbeddable #GnomeContainer #GnomeObjectClient #GnomeViewFrame
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-persist.sgml:Title ##### -->
-GnomePersist
-
-
-<!-- ##### SECTION ./tmpl/gnome-main.sgml:See_Also ##### -->
+<!-- ##### MACRO GNOME_Storage_DENY_READ ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### FUNCTION GNOME_UIHandler_menu_get_hint ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
 
 <!-- ##### FUNCTION gnome_bind_context_construct ##### -->
 <para>
@@ -3359,26 +6742,36 @@ GnomePersist
 @corba_bindctx: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-moniker.sgml:Title ##### -->
-GnomeMoniker
-
-
 <!-- ##### SECTION ./tmpl/gnome-progressive.sgml:Title ##### -->
 GnomeProgressiveDataSink
+
+
+<!-- ##### MACRO GNOME_ParseDisplayName_ref ##### -->
+<para>
+
+</para>
 
 
 <!-- ##### SECTION ./tmpl/gnome-ui-handler.sgml:Short_Description ##### -->
 
 
 
-<!-- ##### SIGNAL GnomeView::do_verb ##### -->
+<!-- ##### MACRO GNOME_ParseDisplayName__free ##### -->
 <para>
-   This signal is emitted when the container requests the view to
-   execute the verb name @verb.  You can install a verb handler if you
-   preffer using the gnome_view_register_verb() function.
+
 </para>
 
-@verb: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_get_children ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@children: 
+@ev: 
+@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-moniker-client.sgml:Title ##### -->
 gnome-moniker-client
@@ -3393,10 +6786,6 @@ gnome-moniker-client
 @servant: 
 
 <!-- ##### SECTION ./tmpl/gnome-persist-file.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### SECTION ./tmpl/gnome-storage-repo.sgml:Short_Description ##### -->
 
 
 
@@ -3421,6 +6810,15 @@ gnome-moniker-client
 @open_mode: 
 @Returns: 
 
+<!-- ##### FUNCTION GNOME_ClientSite_get_container ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
+
 <!-- ##### FUNCTION gnome_simple_data_source_construct ##### -->
 <para>
 
@@ -3433,34 +6831,17 @@ gnome-moniker-client
 @closure: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-progressive.sgml:Long_Description ##### -->
+<!-- ##### MACRO GNOME_ClientSite_query_interface ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-persist.sgml:See_Also ##### -->
+<!-- ##### TYPEDEF BonoboEmbeddableFactoryFn ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### MACRO GNOME_PROGRESSIVE_DATA_SINK_TYPE ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### SECTION ./tmpl/gnome-persist-stream.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_ui_handler_unset_container ##### -->
-<para>
-
-</para>
-
-@uih: 
 
 <!-- ##### FUNCTION gnome_bonobo_select_activate ##### -->
 <para>
@@ -3472,6 +6853,21 @@ gnome-moniker-client
 @flags: 
 @Returns: 
 
+<!-- ##### STRUCT BonoboClientSitePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_PersistStorage_init_new ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@storage: 
+@ev: 
+
 <!-- ##### FUNCTION gnome_embeddable_new ##### -->
 <para>
 
@@ -3479,6 +6875,23 @@ gnome-moniker-client
 
 @factory: 
 @data: 
+@Returns: 
+
+<!-- ##### FUNCTION POA_GNOME_ParseDisplayName__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+<!-- ##### FUNCTION GNOME_UIHandler_get_toplevel ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
 @Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_radio_set_state ##### -->
@@ -3496,18 +6909,6 @@ gnome-moniker-client
 </para>
 
 
-<!-- ##### FUNCTION gnome_progressive_data_sink_new ##### -->
-<para>
-
-</para>
-
-@start_fn: 
-@end_fn: 
-@add_data_fn: 
-@set_size_fn: 
-@closure: 
-@Returns: 
-
 <!-- ##### SECTION ./tmpl/gnome-moniker.sgml:See_Also ##### -->
 <para>
 
@@ -3520,19 +6921,6 @@ gnome-moniker-client
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-item-moniker.sgml:Short_Description ##### -->
-
-
-
-<!-- ##### FUNCTION gnome_ui_handler_menu_fetch_by_callback_data ##### -->
-<para>
-
-</para>
-
-@uih: 
-@callback_data: 
-@Returns: 
-
 <!-- ##### FUNCTION gnome_ui_handler_menu_set_toggle_state ##### -->
 <para>
 
@@ -3542,21 +6930,39 @@ gnome-moniker-client
 @path: 
 @state: 
 
-<!-- ##### FUNCTION gnome_view_frame_view_do_verb ##### -->
+<!-- ##### FUNCTION GNOME_PersistStorage_is_dirty ##### -->
 <para>
 
 </para>
 
-@view_frame: 
-@verb_name: 
+@_obj: 
+@ev: 
+@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-wrapper.sgml:Short_Description ##### -->
 Helper widget for controlling event delivery to embedded components
 
 
-<!-- ##### SECTION ./tmpl/gnome-stream.sgml:Short_Description ##### -->
-Abstract object for file (stream) access.
+<!-- ##### MACRO GNOME_Stream_query_interface ##### -->
+<para>
 
+</para>
+
+
+<!-- ##### FUNCTION bonobo_canvas_item_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+<!-- ##### FUNCTION POA_GNOME_Embeddable__fini ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
 
 <!-- ##### SECTION ./tmpl/gnome-inplace-component.sgml:See_Also ##### -->
 <para>
@@ -3572,26 +6978,18 @@ Abstract object for file (stream) access.
 @moniker: 
 @item_name: 
 
-<!-- ##### FUNCTION gnome_ui_handler_menu_get_radio_state ##### -->
-<para>
-
-</para>
-
-@uih: 
-@path: 
-@Returns: 
-
 <!-- ##### SECTION ./tmpl/gnome-view-frame.sgml:See_Also ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### SECTION ./tmpl/gnome-stream-memory.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION bonobo_stream_mem_get_type ##### -->
 <para>
 
 </para>
 
+@Returns: 
 
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_set_sensitivity ##### -->
 <para>
@@ -3602,6 +7000,24 @@ Abstract object for file (stream) access.
 @path: 
 @sensitive: 
 
+<!-- ##### FUNCTION GNOME_UIHandler_menu_create ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@containee: 
+@path: 
+@type: 
+@label: 
+@hint: 
+@pos: 
+@pixmap_type: 
+@pixmap_data: 
+@accelerator_key: 
+@modifier: 
+@ev: 
+
 <!-- ##### FUNCTION gnome_ui_handler_menu_set_sensitivity ##### -->
 <para>
 
@@ -3611,11 +7027,7 @@ Abstract object for file (stream) access.
 @path: 
 @sensitive: 
 
-<!-- ##### SECTION ./tmpl/gnome-main.sgml:Short_Description ##### -->
-Bonobo initialization.
-
-
-<!-- ##### MACRO GNOME_PERSIST_TYPE ##### -->
+<!-- ##### MACRO ex_GNOME_Storage_NoPermission ##### -->
 <para>
 
 </para>
@@ -3631,28 +7043,30 @@ Bonobo initialization.
 
 
 
-<!-- ##### FUNCTION gnome_ui_handler_toolbar_parse_uiinfo_tree ##### -->
+<!-- ##### FUNCTION GNOME_Embeddable_GnomeVerb__alloc ##### -->
 <para>
 
 </para>
 
-@uih: 
-@uii: 
 @Returns: 
 
-<!-- ##### MACRO GNOME_VIEW_FRAME_TYPE ##### -->
+<!-- ##### STRUCT BonoboUIToolbarToggleButtonItemPrivate ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### FUNCTION GNOME_UIHandler_toolbar_item_radio_get_state ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@path: 
+@ev: 
+@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-bonobo-selector.sgml:See_Also ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### STRUCT GnomeStoragePrivate ##### -->
 <para>
 
 </para>
@@ -3668,17 +7082,34 @@ Bonobo initialization.
 @container: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-view-frame.sgml:Long_Description ##### -->
+<!-- ##### FUNCTION POA_GNOME_ViewFrame__init ##### -->
 <para>
 
 </para>
 
+@servant: 
+@ev: 
 
 <!-- ##### SECTION ./tmpl/gnome-unknown-client.sgml:See_Also ##### -->
 <para>
 
 </para>
 
+
+<!-- ##### STRUCT BonoboStoragePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION GNOME_UIHandler_group_create ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
+@Returns: 
 
 <!-- ##### FUNCTION gnome_object_query_interface ##### -->
 <para>
@@ -3689,17 +7120,34 @@ Bonobo initialization.
 @repo_id: 
 @Returns: 
 
-<!-- ##### SIGNAL GnomeView::view_undo_last_operation ##### -->
+<!-- ##### FUNCTION PortableServer_Servant ##### -->
 <para>
-   This signal is emitted after the signal view_activate if the
-   user has selected the undo operation on the container and the last
-   operation done was done by the component.
+
 </para>
 
+@Returns: 
+
+<!-- ##### FUNCTION GNOME_Storage_commit ##### -->
 <para>
-   The code should undo its last operation when it catches this signal.
+
 </para>
 
+@_obj: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/bonobo.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION POA_GNOME_Storage__init ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
 
 <!-- ##### SECTION ./tmpl/gnome-view-frame.sgml:Title ##### -->
 GnomeViewFrame
@@ -3710,16 +7158,6 @@ GnomeViewFrame
 
 </para>
 
-
-<!-- ##### FUNCTION gnome_storage_driver_open ##### -->
-<para>
-
-</para>
-
-@path: 
-@flags: 
-@mode: 
-@Returns: 
 
 <!-- ##### SECTION ./tmpl/gnome-composite-moniker.sgml:See_Also ##### -->
 <para>
@@ -3871,54 +7309,18 @@ _animations (BrowserHTML html)
 @goad_id: 
 @Returns: 
 
-<!-- ##### FUNCTION gnome_ui_handler_set_statusbar ##### -->
-<para>
-
-</para>
-
-@uih: 
-@statusbar: 
-
-<!-- ##### MACRO GNOME_BIND_CONTEXT_TYPE ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### SECTION ./tmpl/gnome-stream-fs.sgml:Title ##### -->
 GnomeStreamFS
 
 
-<!-- ##### FUNCTION gnome_container_get_moniker ##### -->
+<!-- ##### FUNCTION GNOME_AdviseSink_notify ##### -->
 <para>
 
 </para>
 
-@container: 
-@Returns: 
-
-<!-- ##### FUNCTION gnome_bonobo_selector_activate_selected ##### -->
-<para>
-
-</para>
-
-@sel: 
-@flags: 
-@Returns: 
-
-<!-- ##### FUNCTION bonobo_storage_storage_open ##### -->
-<para>
-
-</para>
-
-@storage: 
-@path: 
-@open_mode: 
-@Returns: 
-
-<!-- ##### SECTION ./tmpl/gnome-moniker-client.sgml:Short_Description ##### -->
-
-
+@_obj: 
+@notify_type: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_ui_handler_set_app ##### -->
 <para>
@@ -3937,14 +7339,16 @@ GnomeStreamFS
 @container_corba: 
 @Returns: 
 
-<!-- ##### SECTION ./tmpl/gnome-inplace-site.sgml:Title ##### -->
-GnomeInPlaceSite
-
-
-<!-- ##### SECTION ./tmpl/gnome-component-io.sgml:See_Also ##### -->
+<!-- ##### FUNCTION POA_GNOME_UIHandler__init ##### -->
 <para>
 
 </para>
+
+@servant: 
+@ev: 
+
+<!-- ##### SECTION ./tmpl/gnome-inplace-site.sgml:Title ##### -->
+GnomeInPlaceSite
 
 
 <!-- ##### FUNCTION gnome_storage_storage_open ##### -->
@@ -3956,6 +7360,14 @@ GnomeInPlaceSite
 @path: 
 @open_mode: 
 @Returns: 
+
+<!-- ##### FUNCTION GNOME_ProgressiveDataSink_end ##### -->
+<para>
+
+</para>
+
+@_obj: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_ui_handler_menu_parse_uiinfo_tree ##### -->
 <para>
@@ -3977,11 +7389,14 @@ GnomeInPlaceSite
 </para>
 
 
-<!-- ##### MACRO GNOME_CONTAINER_TYPE ##### -->
+<!-- ##### FUNCTION GNOME_View_set_zoom_factor ##### -->
 <para>
-   Returns the GtkType associated with the GnomeComponent Gtk object. 
+
 </para>
 
+@_obj: 
+@zoom: 
+@ev: 
 
 <!-- ##### FUNCTION gnome_ui_handler_toolbar_set_hint ##### -->
 <para>

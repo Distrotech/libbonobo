@@ -150,6 +150,7 @@ impl_Bonobo_Storage_erase (PortableServer_Servant servant,
 /**
  * bonobo_storage_get_epv:
  *
+ * Returns: The EPV for the default BonoboStorage implementation.  
  */
 POA_Bonobo_Storage__epv *
 bonobo_storage_get_epv (void)

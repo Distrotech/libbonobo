@@ -45,6 +45,8 @@ impl_Bonobo_ActivationContext_getObject (PortableServer_Servant servant,
 
 /**
  * bonobo_activation_context_get_epv:
+ *
+ * Returns: The EPV for the default BonoboActivationContext implementation. 
  */
 static POA_Bonobo_ActivationContext__epv *
 bonobo_activation_context_get_epv (void)

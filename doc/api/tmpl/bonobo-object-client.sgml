@@ -85,13 +85,13 @@ Returns the #GtkType for the BonoboObjectClient object.
 @k: 
 
 
-<!-- ##### STRUCT BonoboObjectClient ##### -->
+<!-- ##### TYPEDEF BonoboObjectClient ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT BonoboObjectClientClass ##### -->
+<!-- ##### TYPEDEF BonoboObjectClientClass ##### -->
 <para>
 
 </para>
@@ -105,14 +105,6 @@ Returns the #GtkType for the BonoboObjectClient object.
 @o: 
 @error: 
 @user_data: 
-
-
-<!-- ##### FUNCTION bonobo_object_client_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_object_client_from_corba ##### -->

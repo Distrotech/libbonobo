@@ -59,12 +59,6 @@ BonoboPersistFile
 </para>
 
 
-<!-- ##### STRUCT BonoboPersistFilePrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### USER_FUNCTION BonoboPersistFileIOFn ##### -->
 <para>
 
@@ -77,18 +71,10 @@ BonoboPersistFile
 @Returns: 
 
 
-<!-- ##### STRUCT BonoboPersistFileClass ##### -->
+<!-- ##### TYPEDEF BonoboPersistFileClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_persist_file_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_persist_file_set_dirty ##### -->

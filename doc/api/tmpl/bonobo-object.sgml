@@ -4,7 +4,6 @@ BonoboObject
 <!-- ##### SECTION Short_Description ##### -->
 Base object for wrapping Bonobo::Unknown derived objects.
 
-
 <!-- ##### SECTION Long_Description ##### -->
 
 <para>
@@ -171,7 +170,7 @@ Returns the #GtkType for the BonoboObject object.
 @k: 
 
 
-<!-- ##### STRUCT BonoboObjectServant ##### -->
+<!-- ##### TYPEDEF BonoboObjectServant ##### -->
 <para>
   This structure defines the type for BonoboObject-based CORBA servants.
 </para>
@@ -194,31 +193,16 @@ Returns the #GtkType for the BonoboObject object.
 </para>
 
 
-<!-- ##### STRUCT BonoboObjectPrivate ##### -->
-<para>
-   Private information kept by the BonoboObject.  This should not be
-   used by BonoboObject users.
-</para>
-
-
-<!-- ##### STRUCT BonoboObject ##### -->
+<!-- ##### TYPEDEF BonoboObject ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT BonoboObjectClass ##### -->
+<!-- ##### TYPEDEF BonoboObjectClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_object_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_object_construct ##### -->
@@ -431,6 +415,7 @@ Returns the #GtkType for the BonoboObject object.
 
 @bonoboobject: the object which received the signal.
 @arg1: 
+@arg2: 
 
 <!-- ##### SIGNAL BonoboObject::object-gone ##### -->
 <para>

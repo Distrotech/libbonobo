@@ -53,30 +53,16 @@ bonobo-storage
 @k: 
 
 
-<!-- ##### STRUCT BonoboStoragePrivate ##### -->
+<!-- ##### TYPEDEF BonoboStorage ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT BonoboStorage ##### -->
+<!-- ##### TYPEDEF BonoboStorageClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### STRUCT BonoboStorageClass ##### -->
-<para>
-
-</para>
-
-
-<!-- ##### FUNCTION bonobo_storage_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_storage_construct ##### -->

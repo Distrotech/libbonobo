@@ -34,6 +34,8 @@ impl_Bonobo_Persist_getContentTypes (PortableServer_Servant servant,
 
 /**
  * bonobo_persist_get_epv:
+ *
+ * Returns: The EPV for the default BonoboPersist implementation.  
  */
 POA_Bonobo_Persist__epv *
 bonobo_persist_get_epv (void)

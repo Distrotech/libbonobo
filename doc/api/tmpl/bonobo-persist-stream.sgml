@@ -59,12 +59,6 @@ BonoboPersistStream
 </para>
 
 
-<!-- ##### STRUCT BonoboPersistStreamPrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### USER_FUNCTION BonoboPersistStreamIOFn ##### -->
 <para>
 
@@ -99,18 +93,10 @@ BonoboPersistStream
 @Returns: 
 
 
-<!-- ##### STRUCT BonoboPersistStreamClass ##### -->
+<!-- ##### TYPEDEF BonoboPersistStreamClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_persist_stream_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_persist_stream_set_dirty ##### -->

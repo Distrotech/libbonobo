@@ -318,6 +318,8 @@ bonobo_generic_factory_set (BonoboGenericFactory     *c_factory,
 
 /**
  * bonobo_generic_factory_get_epv:
+ *
+ * Returns: The EPV for the default BonoboGenericFactory implementation.  
  */
 POA_GNOME_ObjectFactory__epv *
 bonobo_generic_factory_get_epv (void)

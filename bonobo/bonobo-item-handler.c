@@ -83,6 +83,7 @@ impl_get_object (PortableServer_Servant servant,
 /**
  * bonobo_item_handler_get_epv:
  *
+ * Returns: The EPV for the default BonoboItemHandler implementation.  
  */
 POA_Bonobo_ItemContainer__epv *
 bonobo_item_handler_get_epv (void)
@@ -91,8 +92,8 @@ bonobo_item_handler_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_ItemContainer__epv, 1);
 
-	epv->enum_objects = impl_enum_objects;
-	epv->get_object   = impl_get_object;
+	epv->enumObjects = impl_enum_objects;
+	epv->getObjectByName   = impl_get_object;
 
 	return epv;
 }

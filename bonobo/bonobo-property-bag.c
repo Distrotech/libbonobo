@@ -687,6 +687,9 @@ bonobo_property_bag_destroy (GtkObject *object)
 
 /**
  * bonobo_property_bag_get_epv:
+ *
+ * Returns: The EPV for the default BonoboPropertyBag implementation.
+ * You will most likely want to provide your implementation.
  */
 POA_Bonobo_PropertyBag__epv *
 bonobo_property_bag_get_epv (void)

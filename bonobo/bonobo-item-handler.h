@@ -25,7 +25,7 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_ITEM_HANDLER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_ITEM_HANDLER_TYPE))
 
 typedef struct _BonoboItemHandlerPrivate BonoboItemHandlerPrivate;
-typedef struct _BonoboItemHandler BonoboItemHandler;
+typedef struct _BonoboItemHandler        BonoboItemHandler;
 
 typedef Bonobo_ItemContainer_ObjectList *(*BonoboItemHandlerEnumObjectsFn)
 	(BonoboItemHandler *h, gpointer data, CORBA_Environment *);

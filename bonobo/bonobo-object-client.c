@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/**
+/*
  * bonobo-object-client.c:
  *   This handles the client-view of a remote Bonobo object.
  *

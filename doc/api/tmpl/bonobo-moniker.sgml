@@ -59,24 +59,16 @@ BonoboMoniker
 @k: 
 
 
-<!-- ##### STRUCT BonoboMoniker ##### -->
+<!-- ##### TYPEDEF BonoboMoniker ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### STRUCT BonoboMonikerClass ##### -->
+<!-- ##### TYPEDEF BonoboMonikerClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_moniker_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_get_epv ##### -->

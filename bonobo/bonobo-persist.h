@@ -20,7 +20,7 @@ BEGIN_GNOME_DECLS
 #define BONOBO_IS_PERSIST(o)       (GTK_CHECK_TYPE ((o), BONOBO_PERSIST_TYPE))
 #define BONOBO_IS_PERSIST_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_PERSIST_TYPE))
 
-typedef struct _BonoboPersist BonoboPersistPrivate;
+typedef struct _BonoboPersistPrivate BonoboPersistPrivate;
 
 typedef struct {
 	BonoboObject object;

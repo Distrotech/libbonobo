@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/**
+/*
  * bonobo-persist-stream.c: PersistStream implementation.  Can be used as a
  * base class, or directly for implementing objects that use PersistStream.
  *
@@ -86,6 +86,7 @@ impl_get_size_max (PortableServer_Servant servant, CORBA_Environment * ev)
 /**
  * bonobo_persist_stream_get_epv:
  *
+ * Returns: The EPV for the default BonoboPersistStream implementation.  
  */
 POA_Bonobo_PersistStream__epv *
 bonobo_persist_stream_get_epv (void)

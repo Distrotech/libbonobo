@@ -59,12 +59,6 @@ BonoboGenericFactory
 </para>
 
 
-<!-- ##### STRUCT BonoboGenericFactoryPrivate ##### -->
-<para>
-
-</para>
-
-
 <!-- ##### USER_FUNCTION BonoboGenericFactoryFn ##### -->
 <para>
 
@@ -81,23 +75,17 @@ BonoboGenericFactory
 </para>
 
 @factory: 
-@goad_id: 
+@component_id: 
 @closure: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@goad_id: 
 
 
-<!-- ##### STRUCT BonoboGenericFactoryClass ##### -->
+<!-- ##### TYPEDEF BonoboGenericFactoryClass ##### -->
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_generic_factory_get_type ##### -->
-<para>
-
-</para>
-
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_generic_factory_new ##### -->
@@ -105,10 +93,12 @@ BonoboGenericFactory
 
 </para>
 
-@goad_id: 
+@component_id: 
 @factory: 
 @data: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@goad_id: 
 
 
 <!-- ##### FUNCTION bonobo_generic_factory_new_multi ##### -->
@@ -116,10 +106,12 @@ BonoboGenericFactory
 
 </para>
 
-@goad_id: 
+@component_id: 
 @factory_cb: 
 @data: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@goad_id: 
 
 
 <!-- ##### FUNCTION bonobo_generic_factory_construct ##### -->
@@ -127,13 +119,15 @@ BonoboGenericFactory
 
 </para>
 
-@goad_id: 
+@component_id: 
 @c_factory: 
 @corba_factory: 
 @factory: 
 @factory_cb: 
 @data: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@goad_id: 
 
 
 <!-- ##### FUNCTION bonobo_generic_factory_set ##### -->

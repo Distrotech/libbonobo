@@ -50,6 +50,8 @@ impl_Bonobo_Listener_event (PortableServer_Servant servant,
 
 /**
  * bonobo_listener_get_epv:
+ *
+ * Returns: The EPV for the default BonoboListener implementation.  
  */
 POA_Bonobo_Listener__epv *
 bonobo_listener_get_epv (void)
@@ -137,6 +139,14 @@ bonobo_listener_get_type (void)
 	return type;
 }
 
+/**
+ * bonobo_listener_corba_object_create:
+ * @object: BonoboObject to initialize
+ *
+ * This is just a construction utility for BonoboListener objects.
+ *
+ * Returns: A Bonobo_Listener CORBA Object reference
+ */
 Bonobo_Listener
 bonobo_listener_corba_object_create (BonoboObject *object)
 {
@@ -160,6 +170,16 @@ bonobo_listener_corba_object_create (BonoboObject *object)
 	return bonobo_object_activate_servant (object, servant);
 }
 
+/**
+ * bonobo_listener_construct:
+ * @listener: BonoboListener object.
+ * @corba_listener: CORBA servant to be bound to @listener
+ *
+ * This method is used to allow subclassing of the BonoboListener
+ * implementation
+ *
+ * Returns: NULL on failure;  or the constructed BonoboListener object
+ */
 BonoboListener *
 bonobo_listener_construct (BonoboListener  *listener, 
 			   Bonobo_Listener  corba_listener) 
@@ -176,16 +196,25 @@ bonobo_listener_construct (BonoboListener  *listener,
 
 /**
  * bonobo_listener_new:
+ * @event_callback: function to be invoked when an event is emitted by the EventSource.
+ * @user_data: data passed to the functioned pointed by @event_call.
  *
  * Creates a generic event listener.  The listener calls the @event_callback 
  * function and emits an "event_notify" signal when notified of an event.  
  * The signal callback should be of the form:
  *
+ * <informalexample>
+ * <programlisting>
  *	void some_callback (GtkObject *, 
  *                          char *event_name, 
  *                          BonoboArg *event_data, 
  *                          CORBA_Environment *ev, 
  *                          gpointer user_data);
+ * </programlisting>
+ * </informalexample>
+ *
+ * You will typically pass the CORBA_Object reference in the return value
+ * to an EventSource (by invoking EventSource::addListener).
  *
  * Returns: A BonoboListener object.
  */
