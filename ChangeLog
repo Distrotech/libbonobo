@@ -1,3 +1,7 @@
+2001-06-07  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* configure.in: added "az", and Norwegian to $ALL_LINGUAS
+
 2001-06-06  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/Makefile.am ($(CORBA_SOURCE)): removed --small option
