@@ -1,3 +1,16 @@
+2000-10-05  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (build_menu_widget): add "hidden" attribute
+	to menu items.
+
+	* bonobo/app.c (main): add transparency regression test
+
+	* bonobo/bonobo-ui-node.c (bonobo_ui_node_transparent): impl.
+	(bonobo_ui_node_swap_attrs): impl.
+
+	* bonobo/bonobo-ui-xml.c (override_node_with): ignore 'transparent'
+	nodes during the merge, they only help structure the xml.
+
 2000-10-05  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-selector.h: Remove unneeded include of
