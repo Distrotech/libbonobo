@@ -27,6 +27,7 @@
 /* Some simple tracking - always on */
 static GMutex *bonobo_total_aggregates_lock = NULL;
 static glong   bonobo_total_aggregates      = 0;
+static glong   bonobo_total_aggregate_refs  = 0;
 
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_REF_HOOKS
@@ -256,8 +257,10 @@ bonobo_object_ref (BonoboObject *object)
 #ifdef BONOBO_REF_HOOKS
 	bonobo_object_trace_refs (object, "local", 0, TRUE);
 #else
-	if (!object->priv->ao->immortal)
+	if (!object->priv->ao->immortal) {
 		object->priv->ao->ref_count++;
+		bonobo_total_aggregate_refs++;
+	}
 #endif
 
 	return object;
@@ -292,6 +295,7 @@ bonobo_object_unref (BonoboObject *object)
 			bonobo_object_destroy (ao);
 
 		ao->ref_count--;
+		bonobo_total_aggregate_refs--;
 		
 		if (ao->ref_count == 0)
 			bonobo_object_finalize_internal (ao);
@@ -328,8 +332,11 @@ bonobo_object_trace_refs (BonoboObject *object,
 
 	if (ref) {
 		g_return_val_if_fail (ao->ref_count > 0, object);
-		
-		object->priv->ao->ref_count++;
+
+		if (!object->priv->ao->immortal) {
+			object->priv->ao->ref_count++;
+			bonobo_total_aggregate_refs++;
+		}
 		
 		bonobo_debug_print ("ref", "[%p]:[%p]:%s to %d at %s:%d", 
 			object, ao,
@@ -346,10 +353,9 @@ bonobo_object_trace_refs (BonoboObject *object,
 
 		g_return_val_if_fail (ao->ref_count > 0, NULL);
 
-		if (ao->immortal) {
-			ao->ref_count--;
+		if (ao->immortal)
 			bonobo_debug_print ("unusual", "immortal object");
-		} else {
+		else {
 			if (ao->ref_count == 1) {
 				bonobo_object_destroy (ao);
 				
@@ -364,6 +370,7 @@ bonobo_object_trace_refs (BonoboObject *object,
 			g_assert (object->priv->ao == ao);
 			
 			ao->ref_count--;
+			bonobo_total_aggregate_refs--;
 			
 			if (ao->ref_count == 0) {
 				
@@ -742,6 +749,7 @@ bonobo_object_instance_init (GObject    *g_object,
 	/* Some simple debugging - count aggregate allocate */
 	LINC_MUTEX_LOCK   (bonobo_total_aggregates_lock);
 	bonobo_total_aggregates++;
+	bonobo_total_aggregate_refs++;
 	LINC_MUTEX_UNLOCK (bonobo_total_aggregates_lock);
 
 	/* Setup aggregate */
@@ -870,7 +878,8 @@ bonobo_object_shutdown (void)
 		"-------------------------------------------------");
 #endif
 	if (bonobo_total_aggregates > 0) {
-		g_warning ("Leaked %ld bonobo objects total",
+		g_warning ("Leaked a total of %ld refs to %ld bonobo object(s)",
+			   bonobo_total_aggregate_refs,
 			   bonobo_total_aggregates);
 		return 1;
 	}

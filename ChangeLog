@@ -1,3 +1,11 @@
+2001-12-13  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_ref),
+	(bonobo_object_unref, bonobo_object_trace_refs),
+	(bonobo_object_instance_init): keep track of total
+	number of refs overall always.
+	(bonobo_object_shutdown): upd. printout.
+
 2001-12-11  Michael Meeks  <michael@ximian.com>
 
 	* Version 1.108.0
