@@ -1,5 +1,12 @@
 2001-04-17  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_corba_object_create): 
+	upd.
+	(activate_servant): drag in from old bonobo-object.
+	(bonobo_generic_factory_corba_object_create): upd.
+
+2001-04-17  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-object.c (bonobo_object): impl.
 	(bonobo_object_finalize_real): upd.
 	(do_corba_hacks): move from bonobo_xobject.c
@@ -12,6 +19,8 @@
 	(bonobo_object_construct, bonobo_object_new_from_servant),
 	(bonobo_object_bind_to_servant, bonobo_object_activate_servant),
 	(bonobo_object_activate_servant_full): kill.
+
+2001-04-17  Michael Meeks  <michael@ximian.com>
 
 	* idl/Bonobo_Storage.idl: kill copyTo - its Broken!
 

@@ -24,6 +24,10 @@ bonobo-object.[ch]:
 		removed bonobo_object_activate_servant
 		removed bonobo_object_activate_servant_full
 
+bonobo-generic-factory.[ch]:
+	A very broken module
+		removed bonobo_generic_factory_corba_object_create
+
 IDL:
 
 Bonobo_Storage.idl:

@@ -23,16 +23,46 @@
 #include <bonobo/bonobo-running-context.h>
 #include <liboaf/liboaf.h>
 
+/* FIXME: cut and paste nastiness from old bonobo */
+
+typedef struct {
+	POA_Bonobo_Unknown servant_placeholder;
+	gpointer           bonobo_object;
+} GenericServant;
+
+static CORBA_Object
+activate_servant (void    *servant,
+		  gpointer shlib_id)
+{
+	CORBA_Environment ev;
+	Bonobo_Unknown o;
+
+	g_return_val_if_fail (servant != NULL, CORBA_OBJECT_NIL);
+
+	CORBA_exception_init (&ev);
+
+	CORBA_free (PortableServer_POA_activate_object (
+                bonobo_poa (), servant, &ev));
+
+	o = PortableServer_POA_servant_to_reference (
+		bonobo_poa(), servant, &ev);
+
+	CORBA_exception_free (&ev);
+	
+	return o;
+}
+
 POA_GNOME_ObjectFactory__vepv bonobo_generic_factory_vepv;
 
-static BonoboObjectClass *bonobo_generic_factory_parent_class = NULL;
+static GObjectClass *bonobo_generic_factory_parent_class = NULL;
 
 static CORBA_boolean
 impl_Bonobo_ObjectFactory_manufactures (PortableServer_Servant  servant,
 					const CORBA_char       *obj_oaf_iid,
 					CORBA_Environment      *ev)
 {
-	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (bonobo_object_from_servant (servant));
+	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (
+		bonobo_object_from_servant (servant));
 
 	if (! strcmp (obj_oaf_iid, factory->oaf_iid))
 		return CORBA_TRUE;
@@ -61,16 +91,16 @@ impl_Bonobo_ObjectFactory_create_object (PortableServer_Servant   servant,
 	return CORBA_Object_duplicate (bonobo_object_corba_objref (BONOBO_OBJECT (object)), ev);
 }
 
-CORBA_Object
-bonobo_generic_factory_corba_object_create (BonoboObject *object, 
-					    gpointer shlib_id)
+static CORBA_Object
+bonobo_generic_factory_corba_object_create (BonoboGenericFactory *object, 
+					    gpointer              shlib_id)
 {
 	POA_GNOME_ObjectFactory *servant;
 	CORBA_Environment ev;
 	
 	CORBA_exception_init (&ev);
 
-	servant = (POA_GNOME_ObjectFactory *) g_new0 (BonoboObjectServant, 1);
+	servant = (POA_GNOME_ObjectFactory *) g_new0 (GenericServant, 1);
 	servant->vepv = &bonobo_generic_factory_vepv;
 
 	POA_GNOME_ObjectFactory__init ((PortableServer_Servant) servant, &ev);
@@ -82,7 +112,7 @@ bonobo_generic_factory_corba_object_create (BonoboObject *object,
 
 	CORBA_exception_free (&ev);
 	
-	return bonobo_object_activate_servant_full (object, servant, shlib_id);
+	return activate_servant (servant, shlib_id);
 }
 
 /**
@@ -109,33 +139,28 @@ bonobo_generic_factory_construct (const char             *oaf_iid,
 				  GnomeFactoryCallback    factory_cb,
 				  gpointer                user_data)
 {
-	CORBA_Environment ev;
 	int ret;
 	
 	g_return_val_if_fail (c_factory != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_GENERIC_FACTORY (c_factory), NULL);
 	g_return_val_if_fail (corba_factory != CORBA_OBJECT_NIL, NULL);
 
-	bonobo_object_construct (BONOBO_OBJECT (c_factory), corba_factory);
-
-	bonobo_running_context_ignore_object (corba_factory);
-
 	c_factory->factory         = factory;
 	c_factory->factory_cb      = factory_cb;
 	c_factory->factory_closure = user_data;
 	c_factory->oaf_iid         = g_strdup (oaf_iid);
 
-	CORBA_exception_init (&ev);
-
 	ret = oaf_active_server_register (c_factory->oaf_iid, corba_factory);
 
-	CORBA_exception_free (&ev);
-
 	if (ret == OAF_REG_ERROR) {
-		bonobo_object_unref (BONOBO_OBJECT (c_factory));
+		CORBA_Environment ev;
+		CORBA_exception_init (&ev);
+		g_object_unref (G_OBJECT (c_factory));
+		CORBA_Object_release (corba_factory, &ev);
+		CORBA_exception_free (&ev);
 		return NULL;
 	}
-	
+
 	return c_factory;
 }
 
@@ -168,9 +193,11 @@ bonobo_generic_factory_new (const char             *oaf_iid,
 	
 	c_factory = g_object_new (bonobo_generic_factory_get_type (), NULL);
 
-	corba_factory = bonobo_generic_factory_corba_object_create (BONOBO_OBJECT (c_factory), factory);
+	corba_factory = bonobo_generic_factory_corba_object_create (
+		c_factory, factory);
+
 	if (corba_factory == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (c_factory));
+		g_object_unref (G_OBJECT (c_factory));
 		return NULL;
 	}
 	
@@ -208,9 +235,10 @@ BonoboGenericFactory *bonobo_generic_factory_new_multi (
 	
 	c_factory = g_object_new (bonobo_generic_factory_get_type (), NULL);
 
-	corba_factory = bonobo_generic_factory_corba_object_create (BONOBO_OBJECT (c_factory), factory_cb);
+	corba_factory = bonobo_generic_factory_corba_object_create (
+		c_factory, factory_cb);
 	if (corba_factory == CORBA_OBJECT_NIL) {
-		bonobo_object_unref (BONOBO_OBJECT (c_factory));
+		g_object_unref (G_OBJECT (c_factory));
 		return NULL;
 	}
 	
@@ -278,7 +306,7 @@ bonobo_generic_factory_get_type (void)
 {
 	static GType type = 0;
 
-	if (!type){
+	if (!type) {
 		GTypeInfo info = {
 			sizeof (BonoboGenericFactory),
 			(GBaseInitFunc) NULL,
@@ -291,9 +319,8 @@ bonobo_generic_factory_get_type (void)
 			(GInstanceInitFunc) NULL
 		};
 
-		type = g_type_register_static (bonobo_object_get_type (),
-					       "BonoboGenericFactory",
-					       &info, 0);
+		type = g_type_register_static (
+			G_TYPE_OBJECT, "BonoboGenericFactory", &info, 0);
 	}
 
 	return type;
@@ -339,3 +366,6 @@ bonobo_generic_factory_get_epv (void)
 
 	return epv;
 }
+
+#warning BonoboGenericFactory is a total mess
+

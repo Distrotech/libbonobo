@@ -12,7 +12,6 @@
 
 #include <libgnomebase/gnome-defs.h>
 #include <gobject/gobject.h>
-#include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 #include <liboaf/oaf.h>
 #include <liboaf/liboaf.h>
@@ -32,7 +31,7 @@ typedef BonoboObject * (*BonoboGenericFactoryFn)(BonoboGenericFactory *Factory, 
 typedef BonoboObject * (*GnomeFactoryCallback)(BonoboGenericFactory *factory, const char *component_id, gpointer closure);
 					
 struct _BonoboGenericFactory {
-	BonoboObject base;
+	GObject base;
 
 	/* The function factory */
 	BonoboGenericFactoryFn factory; /* compat reasons only */
@@ -44,7 +43,7 @@ struct _BonoboGenericFactory {
 };
 
 typedef struct {
-	BonoboObjectClass parent_class;
+	GObjectClass parent_class;
 
 	/* Virtual methods */
 	BonoboObject *(*new_generic) (BonoboGenericFactory *c_factory,
@@ -52,10 +51,6 @@ typedef struct {
 } BonoboGenericFactoryClass;
 
 GType               bonobo_generic_factory_get_type  (void);
-
-CORBA_Object          bonobo_generic_factory_corba_object_create (
-	BonoboObject *object,
-	gpointer      shlib_id);
 
 BonoboGenericFactory *bonobo_generic_factory_new (
 	const char            *oaf_iid,
