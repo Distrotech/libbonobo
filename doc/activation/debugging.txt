@@ -1,0 +1,32 @@
+
+Oaf debugging advice, version 0.1
+
+
+Since it is not transparently obvious how to debug oaf the following
+suggestions may be of use.
+
+
+* Attach the debugger.
+
+	It is not possible to run oaf in the debugger, instead you
+must activate oaf by doing a valid query; then attach the debugger
+to the process;
+
+	This might be done like this;
+
+	make install       # this installs oaf where it can be run
+	killall -9 oafd    # asasinate any stale oafd
+
+	oaf-run-query "repo_ids.has('foo')" # fire up a lurking oafd.
+
+	ps -ax | grep oafd # get the <pid> of oafd
+	libtool gdb ./oafd # start gdb on oafd
+	attach <pid>	   # attach to the pid of the oaf daemon.
+
+
+* OAF_BARRIER_INIT
+
+	Set this environment variable to 1, and set a breakpoint
+in <FIXME>
+
+

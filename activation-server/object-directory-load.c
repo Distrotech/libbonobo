@@ -77,7 +77,12 @@ od_entry_read_attrs(OAF_ServerInfo *ent, xmlNodePtr node)
 
       for(j = 0, sub2 = sub->childs; j < o; sub2 = sub2->next, j++) {
 	valuestr = xmlGetProp(sub2, "value");
-	curattr->v._u.value_stringv._buffer[j] = CORBA_string_dup(valuestr);
+	if (valuestr)
+		curattr->v._u.value_stringv._buffer[j] = CORBA_string_dup(valuestr);
+	else {
+		g_warning ("Attribute '%s' has no value", curattr->name);
+		curattr->v._u.value_stringv._buffer[j] = CORBA_string_dup("");
+	}
 	free(valuestr);
       }
       
@@ -97,7 +102,12 @@ od_entry_read_attrs(OAF_ServerInfo *ent, xmlNodePtr node)
       valuestr = xmlGetProp(sub, "value");
       /* Assume string */
       curattr->v._d = OAF_A_STRING;
-      curattr->v._u.value_string = CORBA_string_dup(valuestr);
+      if (valuestr)
+	      curattr->v._u.value_string = CORBA_string_dup(valuestr);
+      else {
+	      g_warning ("Attribute '%s' has no value", curattr->name);
+	      curattr->v._u.value_string = CORBA_string_dup("");
+      }
       free(valuestr);
     }
 

@@ -1,6 +1,7 @@
 This file documents the Grand OAF Database Query Language.
 
 	Constants:
+
 Strings: As in SQL, delimited by single quotes. Example: 'mystring'
 
 Stringvs (string arrays): A comma-separated list of strings, surrounded by square brackets. Example: ['red','blue']
@@ -63,4 +64,23 @@ Function names are case insensitive.
 
 	Operators:
 
+
 	Example queries:
+
+To get a component implementing the IDL:GNOME/Graph/Layout interface you might use:
+
+CORBA_Object *o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
+                                NULL, 0, NULL, &ev);
+
+A more complicated query might be:
+
+"(repo_ids.has_all (['IDL:Bonobo/Control:1.0',
+		     'IDL:Nautilus/ContentView:1.0']) OR
+  repo_ids.has_one (['IDL:Bonobo/Control:1.0',
+                     'IDL:Bonobo/Embeddable:1.0'])) AND
+  repo_ids.has('IDL:Bonobo/PersistFile:1.0') AND
+  foo:bar.defined()"
+
+This would get any component with both 'Control' and 'ContentView' or
+with either 'Control' or 'Embeddable' as long as they supported the
+'PersistFile' interface, and defined the attribute 'foo:bar'.
