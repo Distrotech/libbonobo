@@ -1,3 +1,7 @@
+1999-11-09  Alexander Werner Skwar <askwar@digitalprojects.com>
+
+	* bonobo.spec.in: Add sysconfdir.
+
 1999-11-09  Michael Meeks  <mmeeks@gnu.org>
 
 	* configure.in: kill image-generic.
