@@ -1,6 +1,20 @@
 Bonobo 0.26
 
+	* Big Stream / Storage cleanups (Dietmar)
+
 	* Use OAF more cleanly internaly (Joe Shaw)
+
+	* Remove broken property preconditions (Me)
+
+	* Property bag POA policy fix (Miguel)
+
+	* Updated docs (Zach Frey)
+
+	* text-plain fix (Martin)
+
+	* Moniker improvements (Miguel)
+
+	* Leak fix (George Lebl)
 
 Bonobo 0.25
 

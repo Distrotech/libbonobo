@@ -4,6 +4,11 @@
 	
 2000-10-26  Michael Meeks  <michael@helixcode.com>
 	
+	* bonobo/bonobo-property-bag.c
+	(bonobo_property_bag_notify_listeners),
+	(bonobo_property_bag_set_value): comment out dodgy type checking
+	preconditions.
+
 	* bonobo/bonobo-object-client.c: fix include.
 
 	* bonobo/bonobo-main.c: fix include.
