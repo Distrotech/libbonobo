@@ -16,7 +16,7 @@
    <sect2>
    <title>The need for a replacement</title>
    <para>
-      bonobo-activation works well in a limited number of cases and suffers of a 
+      Gnorba works well in a limited number of cases and suffers of a 
       number of design issues. More specifically:
 
       <itemizedlist>

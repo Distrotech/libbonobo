@@ -1,3 +1,9 @@
+2003-09-12  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* doc/activation-api/tutorial.sgml: In the section "The need for a
+	replacement" we should be talking about replacing gnorba, not
+	bonobo activation.
+
 2003-08-28  Michael Meeks  <michael@ximian.com>
 
 	* tests/models/generic-factory.output: bin the 
