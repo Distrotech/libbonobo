@@ -1,3 +1,23 @@
+2000-04-11  Gene Z. Ragan  <gzr@eazel.com>
+
+	Added support for rgb pixbufs to ui handlers.  This entailed linking
+	against gdk-pixbuf, which is the approved internal format for
+	RGB pixbuf data.
+
+	* bonobo/bonobo/bonobo-ui-handler.c
+	Added support for RGB bitmaps.  Removed references to
+	BONOBO_UI_HANDLER_PIXMAP_RGB_DATA and BONOBO_UI_HANDLER_PIXMAP_RGBA_DATA.
+	Replaced these contants with BONOBO_UI_HANDLER_PIXMAP_PIXBUF_DATA which
+	is more applicable to the type of data we are using.
+
+	* bonobo/bonobo/bonobo-ui-handler.h
+	Removed BONOBO_UI_HANDLER_PIXMAP_RGB_DATA and BONOBO_UI_HANDLER_PIXMAP_RGBA_DATA
+	and replaced with BONOBO_UI_HANDLER_PIXMAP_PIXBUF_DATA.
+
+	* bonobo/idl/bonobo-ui-handler.idl
+	Removed PixmapTypeRGBData and PixmapTypeRGBAData and replaced
+	with PixmapTypePixbufData.
+
 2000-04-11  Michael Meeks  <michael@helixcode.com>
 
 	* idl/Makefile.am (idl_DATA): add bonobo-print.idl.
