@@ -278,6 +278,11 @@ oaf_activate_from_id (const OAF_ActivationID aid,
 
 	g_return_val_if_fail (aid, CORBA_OBJECT_NIL);
 
+        if (!ev) {
+		ev = &myev;
+		CORBA_exception_init (&myev);
+	}
+
         ac = oaf_internal_activation_context_get_extended ((flags & OAF_FLAG_EXISTING_ONLY) != 0, ev);
 
         if (ac == CORBA_OBJECT_NIL)
@@ -290,11 +295,6 @@ oaf_activate_from_id (const OAF_ActivationID aid,
                 oaf_object_directory_get (ai->user, ai->host, ai->domain);
 
 		oaf_actinfo_free (ai);
-	}
-
-	if (!ev) {
-		ev = &myev;
-		CORBA_exception_init (&myev);
 	}
 
 	res = OAF_ActivationContext_activate_from_id (ac, aid, flags,
