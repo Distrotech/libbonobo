@@ -1,3 +1,33 @@
+2000-09-08  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (do_strip): prune nasty inefficiency.
+
+	* bonobo/bonobo-ui-compat.c (compat_menu_parse_uiinfo_one_with_data): 
+	add "accel" strings into menu items.
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_build_accel): fix leak.
+
+	* bonobo/bonobo-app.c (bonobo_app_class_init): destroy lots of stuff
+	at finalize time instead of destroy time.
+	(construct_priv): add itself to Priv
+	(real_exec_verb): hold ref around CORBA method.
+	(real_emit_ui_event): ditto; NB. the local case needs this.
+
+	* bonobo/bonobo-ui-xml.c (reinstate_old_node): special case
+	deletion of the root node.
+
+	* bonobo/bonobo-app.[ch]: Re-write to be a GtkWidget and use the
+	bonobo-ui-container as a controller.
+
+	* bonobo/bonobo-ui-compat.[ch]: Update for changes.
+	
+	* bonobo/bonobo-ui-container.[ch]: New file with CORBA interface.
+	
+	* bonobo/app.c: update.
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_get_ui_fname): better location
+	strategy.
+
 2000-09-07  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_strip, do_strip): Process all
