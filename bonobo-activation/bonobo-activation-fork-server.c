@@ -368,6 +368,9 @@ bonobo_activation_server_by_forking (
                         g_source_unref (source);
 
                         g_io_channel_unref (gioc);
+
+                        if (use_new_loop)
+                                g_main_context_unref (context);
                 }
 		fclose (iorfh);
 

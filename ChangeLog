@@ -1,3 +1,9 @@
+2003-07-17  Michael Meeks  <michael@ximian.com>
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_by_forking): fix leak thanks
+	to Morten.
+
 2003-07-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/Makefile.am (TESTS_ENVIRONMENT): Define MODELS_DIR...
