@@ -1,4 +1,4 @@
-Bonobo 1.103
+libbonobo 1.103
 
 	* Bug fixes
 		* glib API tracking (Alex Larsson)
