@@ -18,12 +18,12 @@ idl_DATA =			\
 	bonobo-storage.idl	\
 	bonobo-progressive.idl	\
 	bonobo-ui-handler.idl	\
+	bonobo-listener.idl	\
 	bonobo-property.idl	\
 	bonobo-desktop.idl	\
 	bonobo-print.idl	\
 	bonobo-moniker.idl	\
 	bonobo-sizeable.idl	\
-	bonobo-listener.idl	\
 	$(NULL)
 
 EXTRA_DIST = $(idl_DATA)

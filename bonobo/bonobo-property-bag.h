@@ -88,6 +88,14 @@ gboolean		  bonobo_property_bag_has_property     (BonoboPropertyBag *pb, const c
 /* A private function, only to be used by persistence implementations. */
 GList                    *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);
 
+/* Listener interface functions */
+void	 bonobo_property_bag_add_listener 	(BonoboPropertyBag *pb,
+					   	 const gchar *name,
+					   	 Bonobo_Listener listener);
+void	 bonobo_property_bag_remove_listener 	(BonoboPropertyBag *pb,
+					      	 const gchar *name, 
+					      	 Bonobo_Listener listener);
+
 /* For implementation inheritance. */
 POA_Bonobo_PropertyBag__epv *bonobo_property_bag_get_epv	      (void);
 

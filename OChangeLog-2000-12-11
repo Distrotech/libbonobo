@@ -1,3 +1,17 @@
+2000-09-15  Mike Kestner <mkestner@ameritech.net>
+
+	*bonobo/bonobo-property-bag.c (impl_Bonobo_PropertyBag_add_listener):
+	epv interface for change listener additions.
+	(impl_Bonobo_PropertyBag_remove_listener): Ditto for remove.
+	(notify_change_listener): Called when changes occur to do corba
+	notifications to listener objects.
+	(bonobo_property_bag_set_value): Add hook for listener notification.
+	(bonobo_property_bag_add_listener): Public add primitive.
+	(bonobo_property_bag_remove_listener): Public remove primitive.
+	(listener_cmp): GCompareFunc for list lookups.
+
+	*idl/bonobo-property.idl : Add change listener methods to Bag interface
+	
 2000-09-15  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-win.c (exec_verb_cb): fix memory corruption.

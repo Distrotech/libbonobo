@@ -1,3 +1,10 @@
+/*
+ * The Bonobo Generic Listener Interface
+ *
+ * Author: 
+ *     Mike Kestner (mkestner@ameritech.net)
+ *
+ */
 module Bonobo {
 
 	interface Listener : Bonobo::Unknown {

@@ -17,6 +17,7 @@
 
 #include <bonobo-unknown.idl>
 #include <bonobo-moniker.idl>
+#include <bonobo-listener.idl>
 
 /* Storage stuff. */
 #include <bonobo-storage.idl>
@@ -43,7 +44,6 @@
 
 /* Misc. stuff. */
 #include <bonobo-desktop.idl>
-#include <bonobo-listener.idl>
 
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 #pragma inhibit pop

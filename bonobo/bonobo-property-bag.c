@@ -8,6 +8,7 @@
  * Copyright 1999, 2000 Helix Code, Inc.
  */
 #include <config.h>
+#include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-property-bag.h>
 #include <bonobo/bonobo-property.h>
@@ -29,6 +30,7 @@ struct _BonoboPropertyBagPrivate {
 	BonoboPropertySetFn            set_prop;
 	BonoboPropertyGetFn            get_prop;
 	gpointer                       user_data;
+	GList			      *change_listeners;
 };
 
 
@@ -502,6 +504,28 @@ impl_Bonobo_PropertyBag_get_property_names (PortableServer_Servant servant,
 	return name_list;
 }
 
+static void
+impl_Bonobo_PropertyBag_add_listener (PortableServer_Servant servant,
+				      const CORBA_char *name,
+				      const Bonobo_Listener listener,
+				      CORBA_Environment *ev)
+{
+	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
+
+	bonobo_property_bag_add_listener (pb, name, listener);
+}
+						     
+static void
+impl_Bonobo_PropertyBag_remove_listener (PortableServer_Servant servant,
+				         const CORBA_char *name,
+					 const Bonobo_Listener listener,
+					 CORBA_Environment *ev)
+{
+	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (bonobo_object_from_servant (servant));
+
+	bonobo_property_bag_remove_listener (pb, name, listener);
+}
+
 
 /*
  * BonoboPropertyBag construction/deconstruction functions. 
@@ -629,9 +653,11 @@ bonobo_property_bag_get_epv (void)
 
 	epv = g_new0 (POA_Bonobo_PropertyBag__epv, 1);
 
-	epv->get_properties     = impl_Bonobo_PropertyBag_get_properties;
-	epv->get_property       = impl_Bonobo_PropertyBag_get_property;
-	epv->get_property_names = impl_Bonobo_PropertyBag_get_property_names;
+	epv->get_properties		= impl_Bonobo_PropertyBag_get_properties;
+	epv->get_property        	= impl_Bonobo_PropertyBag_get_property;
+	epv->get_property_names  	= impl_Bonobo_PropertyBag_get_property_names;
+	epv->add_change_listener 	= impl_Bonobo_PropertyBag_add_listener;
+	epv->remove_change_listener 	= impl_Bonobo_PropertyBag_remove_listener;
 
 	return epv;
 }
@@ -840,6 +866,54 @@ bonobo_property_bag_add (BonoboPropertyBag  *pb,
 					     pb->priv->user_data);
 }
 
+static void
+notify_change_listeners (BonoboPropertyBag *pb, BonoboProperty *prop)
+{
+	CORBA_Environment ev;
+	GList *l;
+	BonoboArg *arg; 
+
+	/* Notify the bag listeners. */
+
+	arg = bonobo_arg_new (BONOBO_ARG_STRING);
+
+	BONOBO_ARG_SET_STRING (arg, prop->name);
+
+	CORBA_exception_init (&ev);
+
+	for (l = pb->priv->change_listeners; l; l = l->next) {
+		Bonobo_Listener corba_listener = (Bonobo_Listener) l->data;
+
+		Bonobo_Listener_event (corba_listener, arg, &ev);
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("Listener exception occured.");
+			CORBA_exception_init (&ev);
+		}
+	}
+
+	bonobo_arg_release (arg);
+
+	/* Notify the property listeners. */
+
+	arg = bonobo_property_bag_get_value (pb, prop->name);
+
+	CORBA_exception_init (&ev);
+
+	for (l = prop->change_listeners; l; l = l->next) {
+		Bonobo_Listener corba_listener = (Bonobo_Listener) l->data;
+
+		Bonobo_Listener_event (corba_listener, arg, &ev);
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			g_warning ("Listener exception occured.");
+			CORBA_exception_init (&ev);
+		}
+	}
+
+	bonobo_arg_release (arg);
+
+	CORBA_exception_free (&ev);
+}
+
 void
 bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
 			       const BonoboArg *value)
@@ -856,9 +930,9 @@ bonobo_property_bag_set_value (BonoboPropertyBag *pb, const char *name,
 	g_return_if_fail (prop->set_prop != NULL);
 	g_return_if_fail (prop->type != value->_type);
 
-	/* FIXME: Emit some sort of CORBA / Bonobo 'changed' signal */
-
 	prop->set_prop (pb, value, prop->idx, prop->user_data);
+
+	notify_change_listeners (pb, prop);
 }
 
 /**
@@ -1033,4 +1107,93 @@ bonobo_property_bag_get_gtk_type (void)
 	}
 
 	return type;
+}
+
+/**
+ * bonobo_property_bag_add_bag_listener:
+ *
+ * Adds a listener for any changes to properties in a bag.
+ *
+ * @pb: Property Bag
+ *
+ * @name: Name of property to listen to for changes. Pass in "" (not NULL) to listen
+ * to all properties in the bag.
+ *
+ * @listener: Corba object reference for listener object.
+ */
+void
+bonobo_property_bag_add_listener (BonoboPropertyBag *pb, const gchar *name, 
+				  Bonobo_Listener listener)
+{
+	CORBA_Environment ev;
+
+	g_return_if_fail (pb != NULL);
+	g_return_if_fail (name != NULL);
+	g_return_if_fail (listener != CORBA_OBJECT_NIL);
+
+	CORBA_exception_init (&ev);
+
+	if (!g_strcasecmp (name, ""))
+		pb->priv->change_listeners = g_list_prepend (
+					pb->priv->change_listeners, 
+					CORBA_Object_duplicate (listener, &ev));
+
+	else if (bonobo_property_bag_has_property (pb, name)) {
+		BonoboProperty *prop = g_hash_table_lookup (pb->priv->props, name);
+
+		if (prop)
+			prop->change_listeners = g_list_prepend (
+					prop->change_listeners,
+					CORBA_Object_duplicate (listener, &ev));
+	}
+	
+	CORBA_exception_free (&ev);
+}
+
+static gint
+listener_cmp (Bonobo_Listener a, Bonobo_Listener b) 
+{
+	return !g_CORBA_Object_equal (a, b);
+}
+
+/**
+ * bonobo_property_bag_remove_listener:
+ *
+ * Removes a change listener.
+ */
+void
+bonobo_property_bag_remove_listener (BonoboPropertyBag *pb, const gchar *name, 
+				     Bonobo_Listener listener)
+{
+	GList *node = NULL;
+	Bonobo_Listener obj = CORBA_OBJECT_NIL;
+	CORBA_Environment ev;
+
+	if (!g_strcasecmp (name, "")) {
+		node = g_list_find_custom (pb->priv->change_listeners, listener,
+					   (GCompareFunc) listener_cmp);
+		if (node) {
+			obj = (CORBA_Object) node->data; 
+			pb->priv->change_listeners = g_list_remove (
+					pb->priv->change_listeners, obj);
+		}
+
+	} else if (bonobo_property_bag_has_property (pb, name)) {
+		BonoboProperty *prop = g_hash_table_lookup (pb->priv->props, name);
+
+		if (prop)
+			node = g_list_find_custom (prop->change_listeners, listener,
+						   (GCompareFunc) listener_cmp);
+		if (node) {
+			obj = (CORBA_Object) node->data; 
+			prop->change_listeners = g_list_remove (
+					prop->change_listeners, obj);
+		}
+	}
+
+	if (node) {
+		CORBA_exception_init (&ev);
+		CORBA_Object_release (obj, &ev);
+		CORBA_exception_free (&ev);
+	}
 }

@@ -13,6 +13,8 @@
 
 module Bonobo {
 
+interface Listener;
+
 interface Property {
 	/**
 	 * get_name:
@@ -87,6 +89,7 @@ interface Property {
 	 * 
 	 */
 	long get_flags ();
+
 };
 
 typedef sequence<string> PropertyNames;
@@ -124,6 +127,29 @@ interface PropertyBag : Bonobo::Unknown {
 	 * incarnated, which is not very resource-conscious.
 	 */
 	PropertyNames get_property_names ();
+
+	/**
+	 * add_change_listener:
+	 * @name: Property name.  Use empty string ("") to listen to all
+	 * properties in the bag.
+	 * @listener: Listener Interface to notify when changes occur.
+	 *
+	 * This method attaches a listener for changes to any property in 
+	 * the bag. 
+	 */
+	void add_change_listener (in string name, in Listener listener);
+
+	/**
+	 * remove_change_listener:
+	 * @name: Property name.  Use empty string ("") to remove a general
+	 * bag listener.
+	 * @listener: Listener Interface to be removed.
+	 *
+	 * This method removes a bag listener from the bag. 
+	 */
+	void remove_change_listener (in string name, in Listener listener);
+
+
 };
 
 };
