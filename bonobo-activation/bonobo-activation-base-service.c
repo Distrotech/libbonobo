@@ -492,10 +492,23 @@ oaf_service_get(const OAFRegistrationCategory *regcat)
   ne = CORBA_Object_non_existent(retval, &myev);
   if(ne)
     {
+      CORBA_Object race_condition;
+
       CORBA_Object_release(retval, &myev);
-      
+
+      oaf_reglocs_unlock(ev); /* The activator may want to do Fancy Stuff, and having the X server grabbed at this time
+				 is Broken (tm) */
       retval = oaf_activators_use(regcat, activatable_servers[i].cmd, activatable_servers[i].ior_fd, ev);
-      if(!CORBA_Object_is_nil(retval, &myev))
+      oaf_reglocks_lock(ev);
+
+      race_condition = oaf_registration_check(regcat, &myev);
+
+      if(!CORBA_Object_is_nil(race_condition, &myev))
+	{
+	  CORBA_Object_release(retval, &myev);
+	  retval = race_condition;
+	}
+      else if(!CORBA_Object_is_nil(retval, &myev))
 	oaf_registration_set(regcat, retval, &myev);
     }
 
