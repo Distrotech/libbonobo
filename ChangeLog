@@ -1,5 +1,8 @@
 2001-07-30  ERDI Gergo  <cactus@cactus.rulez.org>
 
+	* bonobo/Makefile.am (libbonoboinclude_HEADERS): removed duplicate
+	bonobo-marshal.h entry
+
 	* bonobo/bonobo-property-bag.h: Made some BonoboProperty fields
 	public again
 
