@@ -87,6 +87,8 @@ oaf_registration_check(const OAFRegistrationCategory *regcat, CORBA_Environment 
       retval = CORBA_ORB_string_to_object(oaf_orb_get(), ior, ev);
       if(ev->_major != CORBA_NO_EXCEPTION)
 	retval = CORBA_OBJECT_NIL;
+
+      g_free(ior);
     }
 
   return retval;
