@@ -1,3 +1,10 @@
+2005-02-20  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* libbonobo.h: Add missing includes for bonobo-running-context.h,
+	bonobo-moniker-extender.h, bonobo-item-handler.h, and
+	bonobo-shlib-factory.h.  Fixes #167 (documentation's build
+	segfault on ia64).
+
 2005-02-08  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "xh" to ALL_LINGUAS.
