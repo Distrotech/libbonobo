@@ -75,7 +75,7 @@ impl_Bonobo_ActivationClient_resetCache (PortableServer_Servant servant,
 {
         /* Reset the cache ! */
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_warning ("Reset cache");
+        g_message ("Reset cache");
 #endif
         reset_caches ();
 }

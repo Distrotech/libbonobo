@@ -82,7 +82,7 @@ exe_activate_info_to_retval (EXEActivateInfo *ai, CORBA_Environment *ev)
                         retval = CORBA_OBJECT_NIL;
 #ifdef BONOBO_ACTIVATION_DEBUG
                 if (ai->do_srv_output)
-                        g_warning ("Did string_to_object on %s = '%p' (%s)",
+                        g_message ("Did string_to_object on %s = '%p' (%s)",
                                    ai->iorbuf, retval,
                                    ev->_major == CORBA_NO_EXCEPTION?
                                    "no-exception" : ev->_id);
@@ -135,14 +135,14 @@ scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
 
                 if (!strcmp (seek_ai->act_iid, ai->act_iid)) {
 #ifdef BONOBO_ACTIVATION_DEBUG
-                        g_warning ("Hit the jackpot '%s' '%s'",
+                        g_message ("Hit the jackpot '%s' '%s'",
                                    seek_ai->act_iid, ai->act_iid);
 #endif
                         retval = exe_activate_info_to_retval (ai, ev);
                 } else if (seek_ai->re_check) {
                         /* It might have just registered the IID */
 #ifdef BONOBO_ACTIVATION_DEBUG
-                        g_warning ("Re-check the thing ... '%s' '%s'",
+                        g_message ("Re-check the thing ... '%s' '%s'",
                                    seek_ai->act_iid, ai->act_iid);
 #endif
                         retval = seek_ai->re_check (
@@ -187,7 +187,7 @@ handle_exepipe (GIOChannel * source,
 
 #ifdef BONOBO_ACTIVATION_DEBUG
 	if (data->do_srv_output)
-		g_warning ("srv output[%d]: '%s'", retval, data->iorbuf);
+		g_message ("srv output[%d]: '%s'", retval, data->iorbuf);
 #endif
 
 	if (!retval)
@@ -201,10 +201,10 @@ static void
 print_exit_status (int status)
 {
 	if (WIFEXITED (status))
-		g_warning ("Exit status was %d", WEXITSTATUS (status));
+		g_message ("Exit status was %d", WEXITSTATUS (status));
 
 	if (WIFSIGNALED (status))
-		g_warning ("signal was %d", WTERMSIG (status));
+		g_message ("signal was %d", WTERMSIG (status));
 }
 #endif
 

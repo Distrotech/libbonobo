@@ -1,3 +1,23 @@
+2004-08-08  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo-activation/bonobo-activation-activate.c,
+	* bonobo-activation/bonobo-activation-base-service.c,
+	* bonobo-activation/bonobo-activation-client.c,
+	* bonobo-activation/bonobo-activation-fork-server.c,
+	* bonobo-activation/bonobo-activation-register.c: Turn g_warnings
+	that contain only informational debug messages into g_message, so
+	that we can abort with --g-fatal-warnings in the real strange
+	stituations.
+	
+	* bonobo-activation/bonobo-activation-register.c
+	(registration_result_to_string): Give a g_warning on invalid code
+	instead of aborting.  This is an error, but not fatal by any means.
+
+2004-08-07  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* tests/test-activation/Makefile.am: Don't install $(serverfiles).
+	They are not required to be installed for make check.
+
 2004-08-04  Greg Hudson  <hudson@mit.edu>
 
 	* bonobo-activation/bonobo-activation-fork-server.c

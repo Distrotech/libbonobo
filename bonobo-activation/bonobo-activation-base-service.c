@@ -539,7 +539,7 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
                         wait_for_lock ();
 
 		else {
-                        g_warning ("%s locking '%s'", g_strerror (errno), fn);
+                        g_message ("%s locking '%s'", g_strerror (errno), fn);
 			break;
                 }
 	}

@@ -89,7 +89,7 @@ query_cache_entry_free (gpointer data)
         QueryCacheEntry *entry = data;
 
 #ifdef QUERY_CACHE_DEBUG
-        g_warning ("Blowing item %p", entry);
+        g_message ("Blowing item %p", entry);
 #endif /* QUERY_CACHE_DEBUG */
 
         g_free (entry->query);
@@ -202,12 +202,12 @@ query_cache_lookup (const char   *query,
 	fake.sort_criteria = (char **) sort_criteria;
 	if ((entry = g_hash_table_lookup (query_cache, &fake))) {
 #ifdef QUERY_CACHE_DEBUG
-		g_warning ("\n\n ---  Hit (%p)  ---\n\n\n", entry->list);
+		g_message ("\n\n ---  Hit (%p)  ---\n\n\n", entry->list);
 #endif /* QUERY_CACHE_DEBUG */
 		result = Bonobo_ServerInfoList_duplicate (entry->list);
 	} else {
 #ifdef QUERY_CACHE_DEBUG
-		g_warning ("Miss");
+		g_message ("Miss");
 #endif /* QUERY_CACHE_DEBUG */
 		result = NULL;
 	}
@@ -240,7 +240,7 @@ query_cache_insert (const char   *query,
 	g_hash_table_replace (query_cache, entry, entry);
 
 #ifdef QUERY_CACHE_DEBUG
-	g_warning ("Query cache size now %d",
+	g_message ("Query cache size now %d",
                 g_hash_table_size (query_cache));
 #endif /* QUERY_CACHE_DEBUG */
 }
@@ -385,7 +385,7 @@ bonobo_activation_activate (const char             *requirements,
         if (ev->_major == CORBA_SYSTEM_EXCEPTION &&
             !strcmp (ev->_id, ex_CORBA_BAD_OPERATION)) /* fall-back */
         {
-                g_warning ("TESTME: Fall-back activate");
+                g_message ("TESTME: Fall-back activate");
                 result = Bonobo_ActivationContext_activateMatching
                         (ac, requirements, &selorder, &activation_environment,
                          flags, bonobo_activation_context_get (), ev);

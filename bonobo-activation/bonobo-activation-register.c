@@ -145,7 +145,7 @@ copy_env_list_to_sequence (Bonobo_ActivationEnvironment *environment,
 			&environment->_buffer [i], val->name, val->value);
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-		g_warning ("Registration environment for '%s' = '%s'%s",
+		g_message ("Registration environment for '%s' = '%s'%s",
 			   environment->_buffer [i].name,
 			   environment->_buffer [i].value,
 			   (environment->_buffer [i].flags &
@@ -171,7 +171,7 @@ registration_result_to_string (Bonobo_RegistrationResult result)
 		return "(error)";
 		break;
 	default:
-		g_assert_not_reached ();
+                g_warning("Invalid registration result code %i", result);
 		break;
 	}
 
@@ -272,7 +272,7 @@ bonobo_activation_register_active_server_ext (const char               *iid,
 	CORBA_exception_init (&ev);
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_warning ("About to register '%s': %p%s",
+        g_message ("About to register '%s': %p%s",
                    iid, obj,
                    CORBA_Object_non_existent (obj, &ev) ? " (nonexistent)" : "");
 #endif
@@ -313,7 +313,7 @@ bonobo_activation_register_active_server_ext (const char               *iid,
 #ifndef BONOBO_ACTIVATION_DEBUG
 	if (g_getenv ("BONOBO_DEBUG") && retval != Bonobo_ACTIVATION_REG_SUCCESS)
 #endif
-        	g_warning ("registration of '%s' returns %s", iid,
+        	g_message ("registration of '%s' returns %s", iid,
 			   registration_result_to_string (retval));
 
 	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
@@ -355,7 +355,7 @@ bonobo_activation_register_active_server_ext (const char               *iid,
 	CORBA_exception_free (&ev);
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_warning ("Successfully registered `%s'", iid);
+        g_message ("Successfully registered `%s'", iid);
 #endif
 
 	return retval;
@@ -402,7 +402,7 @@ bonobo_activation_active_server_register (const char   *registration_id,
 					reg_env, "DISPLAY", display_name);
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-		g_warning ("Registering iid '%s' with display '%s'", iid, display_name);
+		g_message ("Registering iid '%s' with display '%s'", iid, display_name);
 #endif
 
 		retval = bonobo_activation_register_active_server (iid, obj, reg_env);
