@@ -249,41 +249,40 @@ oaf_strsignal (int sig)
 #endif
 
 CORBA_Object
-oaf_server_by_forking (const char **cmd, int ior_fd, CORBA_Environment * ev)
+oaf_server_by_forking (const char **cmd, int fd_arg, CORBA_Environment * ev)
 {
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-	int childpid;
-
-	pipe (iopipes);
+	OAF_GeneralError *errval;
+        FILE *iorfh;
+        EXEActivateInfo ai;
+        GIOChannel *gioc;
+        int childpid;
+        int status;
+        guint watchid;
+        struct sigaction sa;
+                
+     	pipe (iopipes);
 
 	/* fork & get the IOR from the magic pipe */
 	childpid = fork ();
 
 	if (childpid < 0) {
-		OAF_GeneralError *errval;
-
 		errval = OAF_GeneralError__alloc ();
-		errval->description =
-			CORBA_string_dup ("Couldn't fork a new process");
+		errval->description = CORBA_string_dup ("Couldn't fork a new process");
+
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_OAF_GeneralError, errval);
 		return CORBA_OBJECT_NIL;
 	}
 
 	if (childpid) {
-		int status;
-		FILE *iorfh;
-		EXEActivateInfo ai;
-		guint watchid;
-		GIOChannel *gioc;
-
 		waitpid (childpid, &status, 0);	/* de-zombify */
-
+                
 		if (!WIFEXITED (status)) {
 			OAF_GeneralError *errval;
 			char cbuf[512];
-
+                        
 			errval = OAF_GeneralError__alloc ();
 
 			if (WIFSIGNALED (status))
@@ -303,22 +302,21 @@ oaf_server_by_forking (const char **cmd, int ior_fd, CORBA_Environment * ev)
 		}
 #ifdef OAF_DEBUG
 		ai.do_srv_output = getenv ("OAF_DEBUG_EXERUN");
-
+                
 		if (ai.do_srv_output)
 			print_exit_status (status);
 #endif
-
+                
 		close (iopipes[1]);
 		ai.fh = iorfh = fdopen (iopipes[0], "r");
-
+                
 		ai.iorbuf[0] = '\0';
 		ai.mloop = g_main_new (FALSE);
 		gioc = g_io_channel_unix_new (iopipes[0]);
-		watchid =
-			g_io_add_watch (gioc,
-					G_IO_IN | G_IO_HUP | G_IO_NVAL |
-					G_IO_ERR, (GIOFunc) & handle_exepipe,
-					&ai);
+		watchid = g_io_add_watch (gioc,
+                                          G_IO_IN | G_IO_HUP | G_IO_NVAL |
+                                          G_IO_ERR, (GIOFunc) & handle_exepipe,
+                                          &ai);
 		g_io_channel_unref (gioc);
 		g_main_run (ai.mloop);
 		g_main_destroy (ai.mloop);
@@ -326,9 +324,8 @@ oaf_server_by_forking (const char **cmd, int ior_fd, CORBA_Environment * ev)
 
 		g_strstrip (ai.iorbuf);
 		if (!strncmp (ai.iorbuf, "IOR:", 4)) {
-			retval =
-				CORBA_ORB_string_to_object (oaf_orb_get (),
-							    ai.iorbuf, ev);
+			retval = CORBA_ORB_string_to_object (oaf_orb_get (),
+                                                             ai.iorbuf, ev);
 			if (ev->_major != CORBA_NO_EXCEPTION)
 				retval = CORBA_OBJECT_NIL;
 #ifdef OAF_DEBUG
@@ -353,13 +350,11 @@ oaf_server_by_forking (const char **cmd, int ior_fd, CORBA_Environment * ev)
 	} else if ((childpid = fork ())) {
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
-		struct sigaction sa;
-
 		close (iopipes[0]);
-		if (iopipes[1] != ior_fd) {
-			dup2 (iopipes[1], ior_fd);
-			close (iopipes[1]);
-		}
+                
+                if (fd_arg != 0) {
+                        cmd[fd_arg] = g_strdup_printf (cmd[fd_arg], iopipes[1]);
+                }
 
 		setsid ();
 		memset (&sa, 0, sizeof (sa));
@@ -367,8 +362,8 @@ oaf_server_by_forking (const char **cmd, int ior_fd, CORBA_Environment * ev)
 		sigaction (SIGPIPE, &sa, 0);
 
 		execvp (cmd[0], (char **) cmd);
-		if (ior_fd != 1)
-			dup2 (ior_fd, 1);
+		if (iopipes[1] != 1)
+			dup2 (iopipes[1], 1);
 		fprintf (stdout, "Exec failed: %d (%s)\n", errno,
 			 g_strerror (errno));
 		_exit (1);
@@ -378,8 +373,8 @@ oaf_server_by_forking (const char **cmd, int ior_fd, CORBA_Environment * ev)
 }
 
 const char *oaf_ac_cmd[] =
-	{ "oafd", "--ac-activate", "--ior-output-fd=123", NULL };
-const char *oaf_od_cmd[] = { "oafd", "--ior-output-fd=123", NULL };
+	{ "oafd", "--ac-activate", "--ior-output-fd=%d", NULL };
+const char *oaf_od_cmd[] = { "oafd", "--ior-output-fd=%d", NULL };
 
 struct SysServerInstance
 {
@@ -391,17 +386,17 @@ struct SysServer
 {
 	const char *name;
 	const char **cmd;
-	int ior_fd;
+	int fd_arg;
 	GSList *instances;
 }
 activatable_servers[] =
 {
 	{
 		"IDL:OAF/ActivationContext:1.0", (const char **) oaf_ac_cmd,
-			123, CORBA_OBJECT_NIL}
+			2, CORBA_OBJECT_NIL}
 	, {
 		"IDL:OAF/ObjectDirectory:1.0", (const char **) oaf_od_cmd,
-			123, CORBA_OBJECT_NIL}
+			1, CORBA_OBJECT_NIL}
 	, {
 	NULL}
 };
@@ -491,7 +486,7 @@ oaf_registration_activator_add (OAFServiceActivator act_func, int priority)
 
 static CORBA_Object
 oaf_activators_use (const OAFRegistrationCategory * regcat, const char **cmd,
-		    int ior_fd, CORBA_Environment * ev)
+		    int fd_arg, CORBA_Environment * ev)
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL;
 	GSList *cur;
@@ -501,7 +496,7 @@ oaf_activators_use (const OAFRegistrationCategory * regcat, const char **cmd,
 		ActInfo *actinfo;
 		actinfo = cur->data;
 
-		retval = actinfo->act_func (regcat, cmd, ior_fd, ev);
+		retval = actinfo->act_func (regcat, cmd, fd_arg, ev);
 	}
 
 	return retval;
@@ -545,7 +540,7 @@ oaf_service_get (const OAFRegistrationCategory * regcat)
 		retval =
 			oaf_activators_use (regcat,
 					    activatable_servers[i].cmd,
-					    activatable_servers[i].ior_fd,
+					    activatable_servers[i].fd_arg,
 					    ev);
 		oaf_reglocs_lock (ev);
 

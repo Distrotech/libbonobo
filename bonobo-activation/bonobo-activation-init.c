@@ -253,7 +253,7 @@ static OAFRegistrationLocation ac_regloc = {
 
 static CORBA_Object
 local_activator (const OAFRegistrationCategory * regcat, const char **cmd,
-		 int ior_fd, CORBA_Environment * ev)
+		 int fd_arg, CORBA_Environment * ev)
 {
 	if (
 	    (!regcat->username
@@ -262,7 +262,7 @@ local_activator (const OAFRegistrationCategory * regcat, const char **cmd,
 		|| STRMATCH (regcat->hostname, oaf_hostname_get ()))
 	    && (!regcat->domain
 		|| STRMATCH (regcat->domain, oaf_domain_get ()))) {
-		return oaf_server_by_forking (cmd, ior_fd, ev);
+		return oaf_server_by_forking (cmd, fd_arg, ev);
 	}
 
 	return CORBA_OBJECT_NIL;

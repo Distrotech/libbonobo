@@ -15,7 +15,7 @@
 #endif
 #endif
 
-CORBA_Object oaf_server_by_forking (const char **cmd, int ior_fd,
+CORBA_Object oaf_server_by_forking (const char **cmd, int fd_Arg,
 				    CORBA_Environment * ev);
 extern void oaf_rloc_file_register (void);
 int oaf_ior_fd_get (void);

@@ -12,8 +12,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define OAF_MAGIC_FD 123
-
 CORBA_Object od_server_activate_factory (OAF_ServerInfo * si,
 					 ODActivationInfo * actinfo,
 					 CORBA_Environment * ev);
@@ -91,7 +89,9 @@ od_server_activate_exe (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 {
 	char **args;
 	char *extra_arg, *ctmp, *ctmp2;
+        int fd_arg;
 	int i;
+        char *iorstr;
 
 	/* Munge the args */
 	args = oaf_alloca (36 * sizeof (char *));
@@ -121,29 +121,26 @@ od_server_activate_exe (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 	args[i++] = extra_arg;
 	sprintf (extra_arg, "--oaf-activate-iid=%s", si->iid);
 
+        fd_arg = i;
 	extra_arg = oaf_alloca (sizeof ("--oaf-ior-fd=") + 10);
-	args[i++] = extra_arg;
-	sprintf (extra_arg, "--oaf-ior-fd=%d", OAF_MAGIC_FD);
+	args[i++] = "--oaf-ior-fd=%d";
 
-	{
-		char *iorstr;
 
-		iorstr =
-			CORBA_ORB_object_to_string (oaf_orb_get (), od_obj,
-						    ev);
+        iorstr = CORBA_ORB_object_to_string (oaf_orb_get (), od_obj,
+                                             ev);
 
-		if (ev->_major == CORBA_NO_EXCEPTION) {
-			extra_arg =
-				oaf_alloca (sizeof ("--oaf-od-ior=") +
-					    strlen (iorstr));
-			args[i++] = extra_arg;
-			sprintf (extra_arg, "--oaf-od-ior=%s", iorstr);
-
-			CORBA_free (iorstr);
-		}
-	}
+        if (ev->_major == CORBA_NO_EXCEPTION) {
+                extra_arg =
+                        oaf_alloca (sizeof ("--oaf-od-ior=") +
+                                    strlen (iorstr));
+                args[i++] = extra_arg;
+                sprintf (extra_arg, "--oaf-od-ior=%s", iorstr);
+                
+                CORBA_free (iorstr);
+        }
 
 	args[i] = NULL;
 
-	return oaf_server_by_forking ((const char **) args, OAF_MAGIC_FD, ev);
+	return oaf_server_by_forking ((const char **) args, fd_arg, ev);
 }
+
