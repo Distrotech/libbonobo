@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-06-19 14:52+0200\n"
+"POT-Creation-Date: 2001-06-20 00:17+0200\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -42,17 +42,16 @@ msgid "Cannot activate object from factory"
 msgstr "No puedo activar el objeto desde la factoría"
 
 #: bonobo/bonobo-exception.c:189
-#, fuzzy
 msgid "No permission to access stream"
-msgstr "No tengo permiso para acceder al "
+msgstr "Carece de permisos para acceder al flujo de datos"
 
 #: bonobo/bonobo-exception.c:192
 msgid "An unsupported stream action was attempted"
-msgstr ""
+msgstr "Se intentó una acción no soportada sobre el flujo de datos"
 
 #: bonobo/bonobo-exception.c:195
 msgid "IO Error on stream"
-msgstr ""
+msgstr "Error de E/S en el flujo de datos"
 
 #: bonobo/bonobo-exception.c:199
 msgid "IO Error on storage"
@@ -76,7 +75,7 @@ msgstr "Se ha intentado una acción de almacenamiento no soportada"
 
 #: bonobo/bonobo-exception.c:212
 msgid "Object is not a stream"
-msgstr ""
+msgstr "El objeto no es un flujo de datos"
 
 #: bonobo/bonobo-exception.c:215
 msgid "Object is not a storage"
@@ -100,7 +99,7 @@ msgstr "tipo de dato incorrecto"
 
 #: bonobo/bonobo-exception.c:232
 msgid "stream not found"
-msgstr ""
+msgstr "flujo de datos no encontrado"
 
 #: bonobo/bonobo-exception.c:236
 msgid "property not found"
@@ -178,7 +177,7 @@ msgstr "moniker genérico de elemento"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:9
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "flujo de datos MonikerExtender"
 
 #: tests/test-storage.c:473
 msgid "Can not bonobo_init"
