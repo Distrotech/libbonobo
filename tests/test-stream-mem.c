@@ -28,6 +28,10 @@ test_read_write (BonoboStream *memstream)
 	CORBA_exception_free (&ev);
 
 	CORBA_exception_init (&ev);
+	Bonobo_Stream_seek (stream, 0, Bonobo_Stream_SEEK_SET, &ev);
+	CORBA_exception_free (&ev);
+
+	CORBA_exception_init (&ev);
 	bonobo_stream_client_read_string (stream,
 					  &read_string,
 					  &ev);
