@@ -11,10 +11,7 @@ INCLUDES =	\
 	-I.						\
         -I$(includedir)                                 \
 	$(WARN_CFLAGS)					\
-	$(GLIB_CFLAGS)					\
-	$(ORBIT_CFLAGS)					\
-	$(OAF_CFLAGS)					\
-	$(LIBGNOMEBASE_CFLAGS)
+	$(LIBBONOBO_CFLAGS)
 
 LDADD =	$(top_builddir)/bonobo/libbonobo-2.la
 

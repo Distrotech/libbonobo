@@ -9,9 +9,7 @@ INCLUDES = \
 	-I$(builddir)					\
         -I$(includedir)                                 \
 	$(WARN_CFLAGS)					\
-	$(GLIB_CFLAGS)					\
-	$(ORBIT_CFLAGS)					\
-	$(OAF_CFLAGS)					\
+	$(LIBBONOBO_CFLAGS)				\
 	-DPLUGIN_DIR=\""$(PLUGIN_DIR)"\"		\
         -DBONOBO_LIBDIR=\""$(libdir)"\" 		\
         -DBONOBO_DATADIR=\""$(datadir)"\" 		\
@@ -55,7 +53,7 @@ $(CORBA_SOURCE): $(idls) $(ORBIT_IDL)
 lib_LTLIBRARIES = libbonobo-2.la
 
 libbonobo_2_la_LIBADD = \
-	$(GLIB_LIBS) $(ORBIT_LIBS) $(OAF_LIBS)
+	$(LIBBONOBO_LIBS)
 
 libbonoboincludedir = $(includedir)/gnome/2/bonobo
 

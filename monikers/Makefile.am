@@ -5,9 +5,7 @@ INCLUDES = \
 	-I$(builddir)					\
         -I$(includedir)                                 \
 	$(WARN_CFLAGS)					\
-	$(GLIB_CFLAGS)					\
-	$(ORBIT_CFLAGS)					\
-	$(OAF_CFLAGS)					\
+	$(LIBBONOBO_CFLAGS)				\
 	-DPLUGIN_DIR=\""$(PLUGIN_DIR)"\"		\
         -DBONOBO_LIBDIR=\""$(libdir)"\" 		\
         -DBONOBO_DATADIR=\""$(datadir)"\" 		\
