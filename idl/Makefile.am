@@ -24,7 +24,7 @@ idl_DATA =				\
 EXTRA_DIST = $(idl_DATA)
 
 orbittypelib_LTLIBRARIES = Bonobo_module.la
-orbittypelibdir = $(libdir)/orbit
+orbittypelibdir = $(libdir)/orbit-2.0
 
 IMODULE_SOURCE =	\
 	Bonobo.h	\

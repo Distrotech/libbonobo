@@ -1,5 +1,13 @@
 2001-10-26  Michael Meeks  <michael@ximian.com>
 
+	* idl/Makefile.am (orbittypelibdir): move type library
+	into the orbit-2.0 prefix.
+
+	* bonobo/bonobo-exception.c
+	(bonobo_exception_shutdown): fix warning.
+
+2001-10-26  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-running-context.c
 	(bonobo_running_context_shutdown): don't unref a ref
 	we don't own.

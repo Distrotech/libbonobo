@@ -50,10 +50,12 @@ except_destroy (gpointer dummy, ExceptionHandle *e, gpointer dummy2)
 void
 bonobo_exception_shutdown (void)
 {
-	g_hash_table_foreach_remove (
-		bonobo_exceptions, (GHRFunc) except_destroy, NULL);
-	g_hash_table_destroy (bonobo_exceptions);
-	bonobo_exceptions = NULL;
+	if (bonobo_exceptions) {
+		g_hash_table_foreach_remove (
+			bonobo_exceptions, (GHRFunc) except_destroy, NULL);
+		g_hash_table_destroy (bonobo_exceptions);
+		bonobo_exceptions = NULL;
+	}
 }
 
 static GHashTable *
