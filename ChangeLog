@@ -1,3 +1,17 @@
+2001-07-30  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-event-source.c (create_listener_id): kill.
+	(impl_Bonobo_EventSource_addListenerWithMask): upd.
+	(impl_Bonobo_EventSource_removeListener): remove by equivalence
+	and fix heinous bug.
+	(bonobo_event_source_client_add_listener_gc): upd.
+	(bonobo_event_source_client_add_listener): upd.
+
+	* bonobo/bonobo-event-source.h: remove Id crufty.
+
+	* idl/Bonobo_Listener.idl: re-vamp to fit a modern understanding
+	of CORBA_Object_is_equivalent.
+
 2001-07-30  ERDI Gergo <cactus@cactus.rulez.org>
 
 	* bonobo/bonobo-generic-factory.c

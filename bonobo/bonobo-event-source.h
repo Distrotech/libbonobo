@@ -3,9 +3,9 @@
  * bonobo-event-source.h: Generic event emitter.
  *
  * Author:
- *	Alex Graveley (alex@helixcode.com)
+ *	Alex Graveley (alex@ximian.com)
  *
- * Copyright (C) 2000, Helix Code, Inc.
+ * Copyright (C) 2001, Ximian, Inc.
  */
 #ifndef _BONOBO_EVENT_SOURCE_H_
 #define _BONOBO_EVENT_SOURCE_H_
@@ -36,14 +36,14 @@ typedef struct {
 	POA_Bonobo_EventSource__epv epv;
 } BonoboEventSourceClass;
 
-GType            bonobo_event_source_get_type         (void);
+GType              bonobo_event_source_get_type         (void);
 BonoboEventSource *bonobo_event_source_new              (void);
 void               bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 							 const char        *event_name,
 							 const CORBA_any   *value,
 							 CORBA_Environment *opt_ev);
 
-void          bonobo_event_source_notify_listeners_full (BonoboEventSource *event_source,
+void        bonobo_event_source_notify_listeners_full   (BonoboEventSource *event_source,
 							 const char        *path,
 							 const char        *type,
 							 const char        *subtype,
@@ -51,24 +51,27 @@ void          bonobo_event_source_notify_listeners_full (BonoboEventSource *even
 							 CORBA_Environment *opt_ev);
 
 void        bonobo_event_source_client_remove_listener  (Bonobo_Unknown     object,
-							 Bonobo_EventSource_ListenerId id,
+							 Bonobo_Listener    listener,
 							 CORBA_Environment *opt_ev);
 
-Bonobo_EventSource_ListenerId 
-bonobo_event_source_client_add_listener                 (Bonobo_Unknown           object,
+void        bonobo_event_source_client_add_listener     (Bonobo_Unknown           object,
 							 BonoboListenerCallbackFn event_callback,
 							 const char              *opt_mask,
 							 CORBA_Environment       *opt_ev,
 							 gpointer                 user_data);
 
-Bonobo_EventSource_ListenerId 
-bonobo_event_source_client_add_listener_gc              (Bonobo_Unknown     object,
+void        bonobo_event_source_client_add_listener_gc  (Bonobo_Unknown     object,
 							 GClosure          *callback,
 							 const char        *opt_mask,
 							 CORBA_Environment *opt_ev);
 
+Bonobo_Listener bonobo_event_source_client_add_listener_full  (Bonobo_Unknown     object,
+							       GClosure          *callback,
+							       const char        *opt_mask,
+							       CORBA_Environment *opt_ev);
+
 /* You don't want this routine */
-void               bonobo_event_source_ignore_listeners (BonoboEventSource *event_source);
+void            bonobo_event_source_ignore_listeners        (BonoboEventSource *event_source);
 
 G_END_DECLS
 

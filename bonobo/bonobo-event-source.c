@@ -3,11 +3,11 @@
  * bonobo-event-source.c: Generic event emitter.
  *
  * Author:
- *	Alex Graveley (alex@helixcode.com)
- *	Iain Holmes   (iain@helixcode.com)
- *      docs, Miguel de Icaza (miguel@helixcode.com)
+ *	Alex Graveley (alex@ximian.com)
+ *	Iain Holmes   (iain@ximian.com)
+ *      docs, Miguel de Icaza (miguel@ximian.com)
  *
- * Copyright (C) 2000, Helix Code, Inc.
+ * Copyright (C) 2001, Ximian, Inc.
  */
 #include <config.h>
 #include <time.h>
@@ -30,27 +30,8 @@ struct _BonoboEventSourcePrivate {
 
 typedef struct {
 	Bonobo_Listener listener;
-	Bonobo_EventSource_ListenerId id;
-	gchar **event_masks; /* send all events if NULL */
+	gchar         **event_masks; /* send all events if NULL */
 } ListenerDesc;
-
-/*
- * tries to make a unique connection Id. Adding the time make an
- * accidental remove of a listener more unlikely.
- */
-static Bonobo_EventSource_ListenerId
-create_listener_id (BonoboEventSource *source)
-{
-	guint32 id;
-
-	source->priv->counter = source->priv->counter++ & 0x0000ffff;
-
-	if (!source->priv->counter) source->priv->counter++;
-
-	id = source->priv->counter | (time(NULL) << 16);
-
-	return id;
-}
 
 static inline BonoboEventSource * 
 bonobo_event_source_from_servant (PortableServer_Servant servant)
@@ -68,7 +49,7 @@ desc_free (ListenerDesc *desc, CORBA_Environment *ev)
 	}
 }
 
-static Bonobo_EventSource_ListenerId
+static void
 impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 					     const Bonobo_Listener  l,
 					     const CORBA_char      *event_mask,
@@ -77,7 +58,7 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 	BonoboEventSource *event_source;
 	ListenerDesc      *desc;
 
-	g_return_val_if_fail (!CORBA_Object_is_nil (l, ev), 0);
+	g_return_if_fail (!CORBA_Object_is_nil (l, ev));
 
 	event_source = bonobo_event_source_from_servant (servant);
 
@@ -86,41 +67,41 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 
 	desc = g_new0 (ListenerDesc, 1);
 	desc->listener = bonobo_object_dup_ref (l, ev);
-	desc->id = create_listener_id (event_source);
 
 	if (event_mask)
 		desc->event_masks = g_strsplit (event_mask, ",", 0);
 
-	event_source->priv->listeners = g_slist_prepend (event_source->priv->listeners, desc);
-
-	return desc->id;
+	event_source->priv->listeners = g_slist_prepend (
+		event_source->priv->listeners, desc);
 }
 
-static Bonobo_EventSource_ListenerId
+static void
 impl_Bonobo_EventSource_addListener (PortableServer_Servant servant,
 				     const Bonobo_Listener  l,
 				     CORBA_Environment     *ev)
 {
-	return impl_Bonobo_EventSource_addListenerWithMask (servant, l, NULL, ev);
+	impl_Bonobo_EventSource_addListenerWithMask (servant, l, NULL, ev);
 }
 
 static void
 impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
-					const Bonobo_EventSource_ListenerId id,
+					const Bonobo_Listener  listener,
 					CORBA_Environment     *ev)
 {
-	BonoboEventSource *event_source;
-	GSList *list;
+	GSList                   *l, *next;
+	BonoboEventSourcePrivate *priv;
 
-	event_source = bonobo_event_source_from_servant (servant);
+	priv = bonobo_event_source_from_servant (servant)->priv;
 
-	for (list = event_source->priv->listeners; list; list = list->next) {
-		ListenerDesc *desc = (ListenerDesc *) list->data;
+	for (l = priv->listeners; l; l = next) {
+		ListenerDesc *desc = l->data;
 
-		if (desc->id == id) {
-			event_source->priv->listeners = 
-				g_slist_remove (event_source->priv->listeners,
-						desc);
+		next = l->next;
+
+		if (CORBA_Object_is_equivalent (listener, desc->listener, ev)) {
+			priv->listeners = g_slist_remove_link (
+				priv->listeners, l);
+			g_slist_free_1 (l);
 			desc_free (desc, ev);
 			return;
 		}
@@ -321,15 +302,14 @@ bonobo_event_source_ignore_listeners (BonoboEventSource *event_source)
 }
 
 void
-bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
-					    Bonobo_EventSource_ListenerId id,
+bonobo_event_source_client_remove_listener (Bonobo_Unknown     object,
+					    Bonobo_Listener    listener,
 					    CORBA_Environment *opt_ev)
 {
 	CORBA_Environment ev, *my_ev;
 	Bonobo_Unknown es;
 
 	g_return_if_fail (object != CORBA_OBJECT_NIL);
-	g_return_if_fail (id != 0);
 
 	if (!opt_ev) {
 		CORBA_exception_init (&ev);
@@ -342,7 +322,7 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
 
 	if (!BONOBO_EX (my_ev) && es) {
 
-		Bonobo_EventSource_removeListener (es, id, my_ev);
+		Bonobo_EventSource_removeListener (es, listener, my_ev);
 
 		Bonobo_Unknown_unref (es, my_ev);
 	}
@@ -355,19 +335,18 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown  object,
 	}
 }
 
-Bonobo_EventSource_ListenerId
-bonobo_event_source_client_add_listener_gc (Bonobo_Unknown     object,
-					    GClosure          *event_callback,
-					    const char        *opt_mask,
-					    CORBA_Environment *opt_ev)
+Bonobo_Listener
+bonobo_event_source_client_add_listener_full (Bonobo_Unknown     object,
+					      GClosure          *event_callback,
+					      const char        *opt_mask,
+					      CORBA_Environment *opt_ev)
 {
 	CORBA_Environment ev, *my_ev;
 	BonoboListener *listener = NULL;
-	Bonobo_Listener corba_listener;
-	Bonobo_EventSource_ListenerId id = 0;
+	Bonobo_Listener corba_listener = CORBA_OBJECT_NIL;
 	Bonobo_Unknown es;
 
-	g_return_val_if_fail (event_callback != NULL, 0);
+	g_return_val_if_fail (event_callback != NULL, CORBA_OBJECT_NIL);
 	
 	if (!opt_ev) {
 		CORBA_exception_init (&ev);
@@ -387,13 +366,17 @@ bonobo_event_source_client_add_listener_gc (Bonobo_Unknown     object,
 	corba_listener = BONOBO_OBJREF (listener);
 	
 	if (opt_mask)
-		id = Bonobo_EventSource_addListenerWithMask (es, 
-			corba_listener, opt_mask, my_ev);
+		Bonobo_EventSource_addListenerWithMask (
+			es, corba_listener, opt_mask, my_ev);
 	else 
-		id = Bonobo_EventSource_addListener (es, corba_listener, 
-						     my_ev);
+		Bonobo_EventSource_addListener (
+			es, corba_listener, my_ev);
+
+	corba_listener = CORBA_Object_duplicate (corba_listener, my_ev);
 
 	bonobo_object_unref (BONOBO_OBJECT (listener));
+
+	/* FIXME: wtf. is this doing ? */
 	Bonobo_Unknown_unref (es, my_ev);
 
  add_listener_end:
@@ -405,17 +388,32 @@ bonobo_event_source_client_add_listener_gc (Bonobo_Unknown     object,
 		CORBA_exception_free (&ev);
 	}
 
-	return id;
+	return corba_listener;
 } 
 
-Bonobo_EventSource_ListenerId 
+void
+bonobo_event_source_client_add_listener_gc (Bonobo_Unknown     object,
+					    GClosure          *event_callback,
+					    const char        *opt_mask,
+					    CORBA_Environment *opt_ev)
+{
+	Bonobo_Listener l;
+
+	l = bonobo_event_source_client_add_listener_full (
+		object, event_callback, opt_mask, opt_ev);
+
+	if (l != CORBA_OBJECT_NIL)
+		CORBA_Object_release (l, NULL);
+}
+
+void
 bonobo_event_source_client_add_listener (Bonobo_Unknown           object,
 					 BonoboListenerCallbackFn event_callback,
 					 const char              *opt_mask,
 					 CORBA_Environment       *opt_ev,
 					 gpointer                 user_data)
 {
-	return bonobo_event_source_client_add_listener_gc (
+	bonobo_event_source_client_add_listener_gc (
 		object, g_cclosure_new (G_CALLBACK (event_callback), user_data, NULL),
 		opt_mask, opt_ev);
 }

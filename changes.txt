@@ -42,6 +42,16 @@ bonobo-object.[ch]:
 	bonobo_object_query_interface: added optional ev.
 	bonobo_unknown_ping: add optional ev.
 
+bonobo-event-source.[ch]
+	bonobo_event_source_client_add_listener: no longer returns an id
+	use the listener object reference to manage the listener.
+	bonobo_event_source_client_add_listener_full: this now returns
+	a Bonobo_Listener CORBA reference that you need to _release, but
+	can be used to identify the listener - if neccessary [ seldom is ].
+	bonobo_event_source_client_remove_listener: similary now takes
+	a listener instead of an id.
+
+
 bonobo-generic-factory.[ch]:
 bonobo-shlib-factory.[ch]:
 	A very broken module
@@ -109,6 +119,10 @@ Bonobo_PersistStream:
 
 Bonobo_PersistStorage:
 	remove initNew: use the stream context for this.
+
+Bonobo_Listener:
+	remove the 'id' concept on the EventSource - it was badly
+	broken and unneccesary.
 
 Bonobo_ClientSite:
 Bonobo_Embeddable:
