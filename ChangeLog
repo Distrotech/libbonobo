@@ -1,3 +1,11 @@
+Sat Jun 30 14:53:52 2001  Jonathan Blandford  <jrb@redhat.com>
+
+	* tests/test-properties-server.c (main): Change to reflect new
+	g_signal_connect_data signature.
+
+	* bonobo/bonobo-main.c (bonobo_init_full): change to reflect new
+	g_type_init () signature.
+
 2001-06-28  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-property-bag-client.c: bug fix: cast to

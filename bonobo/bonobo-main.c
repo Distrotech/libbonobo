@@ -164,7 +164,7 @@ bonobo_init_full (int *argc, char **argv,
 		bonobo_inited = TRUE;
 
 	{ /* Init neccessary bits */
-		g_type_init (G_TYPE_DEBUG_NONE);
+		g_type_init ();
 
 		if (!oaf_is_initialized ())
 			oaf_init (*argc, argv);

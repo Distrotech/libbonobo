@@ -283,7 +283,7 @@ main (int argc, char **argv)
 
 	g_signal_connect_data (G_OBJECT (bonobo_context_running_get ()),
 			       "last_unref", G_CALLBACK (quit_main), NULL,
-			       NULL, FALSE, FALSE);
+			       NULL, 0);
 
 	bonobo_main ();
 
