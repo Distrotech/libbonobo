@@ -1,5 +1,24 @@
 2000-04-09  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/Makefile.am: kill gprint conditional.
+
+	* samples/compound-doc/Makefile.am: ditto.
+
+	* acconfig.h: ditto.
+
+	* samples/compound-doc/paint-component-simple.c: ditto.
+
+	* samples/compound-doc/sample-container.c: ditto.
+
+	* configure.in: Update to require gnome-print.
+
+	* bonobo/bonobo-print.c (bonobo_print_context_new): flip orientation so
+	always valid.
+
+	* bonobo/bonobo-print*: turn off debug by default.
+	
+2000-04-09  Michael Meeks  <michael@helixcode.com>
+
 	* idl/bonobo-print.idl: fix.
 
 	* bonobo/bonobo-print.c (impl_render): new print api. (impl_init): Kill.

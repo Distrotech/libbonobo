@@ -65,6 +65,16 @@ Putting breakpoints in shared libraries such as bonobo is not possible
 until they have been linked in. Hence break in main, and then start
 populating your breakpoints.
 
+Ok, so it seems some people also get horribly confused by libtool
+libraries that are in fact here to help; libtool creates a shell script
+in place of the binary to allow non-installed libraries to be linked
+correctly. That aside you need to do:
+
+	$ libtool gdb ./my-program-name.
+
+NB. don't go fiddling in .libs, you will get burned.
+NNB. it seems that emacs' debug mode doesn't like this; you have to
+write a small 'libtool gdb' wrapper script eg. 'libtool gdb $@'
 
 * Order of execution
 
