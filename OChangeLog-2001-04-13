@@ -1,3 +1,8 @@
+2001-02-19  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-ui-engine-config.c (bonobo_ui_engine_config_construct):
+	remove bogus config hydration.
+
 2001-02-19  Dietmar Maurer  <dietmar@ximian.com>
 
 	* bonobo/bonobo-property-bag-xml.c (decode_type): set the ref
