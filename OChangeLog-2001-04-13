@@ -1,3 +1,8 @@
+2000-03-27  Nat Friedman  <nat@helixcode.com>
+
+	* bonobo/bonobo-canvas-item.c: Replaced all printfs with
+ 	g_messages.
+
 2000-03-24  Martin Baulig  <martin@home-of-linux.org>
 
 	Let the user specify a list of files as command line arguments.
