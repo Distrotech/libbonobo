@@ -1,5 +1,14 @@
 2001-02-07  Michael Meeks  <michael@ximian.com>
 
+	* idl/Bonobo_Control.idl: add a dummy focus method on
+	the ControlFrame for later.
+
+	* bonobo/bonobo-plug.[ch]: Revert Federico's work for now
+
+	* bonobo/bonobo-socket.[ch]: ditto.
+
+2001-02-07  Michael Meeks  <michael@ximian.com>
+
 	* storage-modules/bonobo-storage-fs.c
 	(bonobo_storage_fs_get_type): upd.
 	(bonobo_storage_fs_construct): kill.

@@ -62,6 +62,13 @@ interface ControlFrame : Bonobo::Unknown {
 	 * Returns: The interface to be used for menu/toolbar item merging.
 	 */
 	Bonobo::Unknown getUIHandler ();
+
+	/**
+	 * unImplemented:
+	 *
+	 * Placeholder for Federico's focus fixing.
+	 */
+	void unImplemented ();
 };
 
 interface Control : Bonobo::Unknown {
