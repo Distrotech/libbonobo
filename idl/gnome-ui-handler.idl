@@ -14,55 +14,169 @@
 
 module GNOME {
 
-interface UIHandler : GNOME::obj {
+       	interface UIHandler : GNOME::obj {
+       
+       		enum {
+       		} MenuType;
+       
+       		enum {
+       		} PixmapType;
+       
+       		enum {
+       		} ModifierType;
+       
+       		/*
+       		 * Containee ==> Container
+       		 */
+       
+       		/**
+		 * register_containee:
+		 * @uih: The UIHandler CORBA interface of the
+		 * containee which is being registered.
+		 *
+       		 * This method is used by an embedded component to register
+       		 * its GnomeUIHandler with the container's GnomeUIHandler.
+		 */
+       		void register_containee (in UIHandler uih);
+       
+       		/**
+		 * unregister_containee:
+		 * @uih: The UIHandler of the containee which is being
+		 * unregistered
+		 *
+       		 * This method is used by an embedded component to unregister
+       		 * its GnomeUIHandler with the container's GnomeUIHandler.
+       		 * The container will then
+		 */
+       		void unregister_containee (in UIHandler uih);
+       
+       
+       		/*
+       		 *
+		 * Menu.
+		 *
+		 * These routines are for the creation and
+		 * manipulation of menu items.
+       		 *
+		 */
+       		boolean menu_item_create_full (in string path, in MenuType type, in string label,
+       					       in PixmapType pixmap_type, in iobuf pixmap_data,
+       					       in unsigned int accelerator_key, in Modifier modifier,
+					       in boolean sensitivity, in boolean hidden, in int pos);
+       		boolean menu_item_remove (in string path);
+       		boolean menu_item_fetch (in string path, out MenuType type, out string label,
+       					 out PixmapType pixmap_type, out iobuf pixmap_data,
+       					 out unsigned int accelerator_key, out Modifier modifier,
+					 out boolean sensitivity, out boolean hidden, out int pos);
+       
+       		int menu_item_get_pos (in string path);
+       
+       		void menu_item_set_sensitivity (in string path, in boolean sensitivity);
+       		boolean menu_item_get_sensitivity ();
+       
+       		void menu_item_set_hidden (in string path, in boolean hidden);
+       		boolean menu_item_get_hidden (in string path);
+       
+       		void menu_item_set_label (in string path, in string label);
+       		string menu_item_get_label (in string path);
+       
+       		void menu_item_set_pixmap (in string path, in PixmapType type, in iobuf data);
+       		void menu_item_get_pixmap (in string path, out PixmapType type, out iobuf data);
+       
+       		void menu_item_set_accel (in string path, in unsigned int accelerator_key, in ModifierType ac_mods);
+       		void menu_item_get_accel (in string path, out unsigned int accelerator_key, out ModifierType ac_mods);
+       
+       		void menu_item_toggle_set_state (in string path, in boolean state);
+       		boolean menu_item_toggle_get_state (in string path);
+       
+       		void menu_item_radio_set_state (in string path, in boolean state);
+       		boolean menu_item_radio_get_state (in string path);
 
-	/*
-	 * Containee ==> Container
-	 */
-
-	/*
-	 * This method is used by an embedded component to register
-	 * its GnomeUIHandler with the container's GnomeUIHandler.
-	 */
-	void register_containee_uihandler (in UIHandler uih);
-
-	/*
-	 * This method is used by an embedded component to unregister
-	 * its GnomeUIHandler with the container's GnomeUIHandler.
-	 * The container will then 
-	 */
-	void unregister_containee_uihandler (in UIHandler uih);
-
-	/*
-	 * These methods allow embedded components to create menu and
-	 * toolbar items and manipulate them.
-	 */
-
-	/*
-	 * These methods are for the creation and manipulation of
-	 * dynamic menu items.
-	 */
-
-	/*
-	 * These methods allow embedded components to create UI groups
-	 * and manipulate them.
-	 */
-	
-
-	/*
-	 * Container ==> Containee
-	 */
-
-	/*
-	 * These methods are used by containers to notify containees
-	 * that a menu or toolbar item has been activated or
-	 * overriden.
-	 */
-
-	void item_activated (in string path);
-	void item_overriden (in string path);
-	
-};
-
+       		/*
+       		 * These methods are for the creation and manipulation of
+       		 * dynamic menu items.
+       		 *
+       		 * FIXME This needs to be rethought.
+       		 *
+       		 */
+       		void menu_item_dynlist_set_maxsize (in string path, in int maxsize);
+       		int menu_item_dynlist_set_maxsize (in string path);
+       
+       		string menu_item_dynlist_generate_new_path (in string dynlist_path);
+       
+       		void menu_item_dynlist_append_item (in string dynlist_path, in string item_path);
+       		void menu_item_dynlist_prepend_item (in string dynlist_path, in string item_path);
+       
+       		/*
+       		 *
+		 * Toolbars.
+		 *
+		 * These routines are for the creation and
+		 * manipulation of toolbar items.
+       		 *
+		 */
+       		boolean toolbar_item_create_full (in string path, in ToolbarType type, in string label,
+       					       in PixmapType pixmap_type, in iobuf pixmap_data,
+       					       in unsigned int accelerator_key, in Modifier modifier,
+       					       in int pos);
+       		boolean toolbar_item_remove (in string path);
+       		boolean toolbar_item_fetch (in string path, out ToolbarType type, out string label,
+       					 out PixmapType pixmap_type, out iobuf pixmap_data,
+       					 out unsigned int accelerator_key, out Modifier modifier,
+       					 out int pos);
+       
+       		int toolbar_item_get_pos (in string path);
+       
+       		void toolbar_item_set_sensitivity (in string path, in boolean sensitivity);
+       		boolean toolbar_item_get_sensitivity ();
+       
+       		void toolbar_item_set_hidden (in string path, in boolean hidden);
+       		boolean toolbar_item_get_hidden (in string path);
+       
+       		void toolbar_item_set_label (in string path, in string label);
+       		string toolbar_item_get_label (in string path);
+       
+       		void toolbar_item_set_pixmap (in string path, in PixmapType type, in iobuf data);
+       		void toolbar_item_get_pixmap (in string path, out PixmapType type, out iobuf data);
+       
+       		void toolbar_item_set_accel (in string path, in unsigned int accelerator_key, in ModifierType ac_mods);
+       		void toolbar_item_get_accel (in string path, out unsigned int accelerator_key, out ModifierType ac_mods);
+       
+       		void toolbar_item_toggle_set_state (in string path, in boolean state);
+       		boolean toolbar_item_toggle_get_state (in string path);
+       
+       		void toolbar_item_radio_set_state (in string path, in boolean state);
+       		boolean toolbar_item_radio_get_state (in string path);
+       
+       		/*
+       		 * These methods allow embedded components to create UI groups
+       		 * and manipulate them.
+       		 */
+       		int group_create ();
+       		void group_destroy (in int gid);
+       
+       		void group_add_menu_items (in int gid, in sequence<string> paths);
+       		void group_add_toolbar_items (in int gid, in sequence<string> paths);
+       
+       		void group_get_members (in int gid, out sequence<string> paths);
+       
+       		void group_set_sensitivity (in int gid, in boolean sensitivity);
+       		voud group_set_hidden (in int gid, in boolean sensitivity);
+       
+       		/*
+       		 * Container ==> Containee
+       		 */
+       
+       		/*
+       		 * These methods are used by containers to notify containees
+       		 * that a menu or toolbar item has been activated or
+       		 * overriden.
+       		 */
+       
+       		void item_activated (in string path);
+       		void item_overriden (in string path);
+       
+       	};
+       
 } ;
 

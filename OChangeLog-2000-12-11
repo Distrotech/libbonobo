@@ -1,3 +1,12 @@
+1999-06-28  Nat Friedman  <nat@gnome-support.com>
+
+	* idl/gnome-ui-handler.idl (GNOME::UIHandler): Added object method
+ 	prototypes.
+
+	* bonobo/gnome-ui-handler.h: Added sensitivity and hidden fields
+ 	to the GnomeUIHandlerMenuItem.  Changed return value of a bunch of
+ 	functions to void.
+
 1999-06-26  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-view.h: Include bonobo/gnome-view-frame.h.
