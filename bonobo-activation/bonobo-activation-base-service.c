@@ -490,6 +490,8 @@ oaf_existing_set (const OAFRegistrationCategory * regcat, struct SysServer *ss,
 	GSList *cur;
 	struct SysServerInstance *ssi;
 
+        ssi = NULL;
+
 	for (cur = ss->instances; cur; cur = cur->next) {
 		ssi = cur->data;
 		if (
@@ -501,7 +503,7 @@ oaf_existing_set (const OAFRegistrationCategory * regcat, struct SysServer *ss,
 			|| STRMATCH (ssi->domain, regcat->domain))) break;
 	}
 
-	if (!cur) {
+	if (cur == NULL) {
 		ssi = g_new0 (struct SysServerInstance, 1);
 		ssi->already_running = obj;
 		ssi->username =
@@ -510,7 +512,7 @@ oaf_existing_set (const OAFRegistrationCategory * regcat, struct SysServer *ss,
 			regcat->hostname ? g_strdup (regcat->hostname) : NULL;
 		ssi->domain =
 			regcat->domain ? g_strdup (regcat->domain) : NULL;
-		ss->instances = g_slist_prepend (ss->instances, ssi);
+                ss->instances = g_slist_prepend (ss->instances, ssi);
 	} else {
 		CORBA_Object_release (ssi->already_running, ev);
 		ssi->already_running = obj;

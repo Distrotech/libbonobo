@@ -53,6 +53,8 @@ oafd_CORBA_Context_get_value (CORBA_Context         ctx,
 			CORBA_NamedValue *nv;
                         int i;
 
+                        nv = NULL;
+
                         for (i = 0; i < nvout->list->len; i++) {
                                 nv = &g_array_index (nvout->list, 
                                                      CORBA_NamedValue, i);
