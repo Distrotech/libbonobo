@@ -25,7 +25,7 @@
 #ifndef OBJECT_DIRECTORY_CONFIG_FILE_H
 #define OBJECT_DIRECTORY_CONFIG_FILE_H
 
-#include <tree.h> /* gnome-xml */
+#include <libxml/tree.h>
 
 #define SERVER_CONFIG_FILE "/bonobo-activation/bonobo-activation-config.xml"
 

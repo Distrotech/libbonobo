@@ -28,8 +28,8 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
-#include <parser.h>      /* gnome-xml */
-#include <xmlmemory.h>   /* gnome-xml */
+#include <libxml/parser.h> 
+#include <libxml/xmlmemory.h>
 
 #include "bonobo-activation/bonobo-activation-i18n.h"
 #include "server.h"
