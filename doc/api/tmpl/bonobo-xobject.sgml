@@ -6,11 +6,10 @@ a simplified CORBA server object wrapper
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-BonoboXObject provides an easy to use way of writing CORBA servers. It
-strongly deprecates #BonoboObject ( with which it is compatible ). It
-drastically simplifies the issues of epv and vepv construction by
-automating these, and automatically instantiates a CORBA_Object on
-gtk_type_new. This removes clutter from construction time.
+BonoboXObject provides an easy to use way of writing CORBA servers. However,
+for libbonobo-2.0, all its functionality has been merged with
+#BonoboObject, which is the one that should be used for writing
+Bonobo/CORBA servers.
 </para>
 
 <para>
