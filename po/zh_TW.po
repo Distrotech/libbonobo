@@ -1,13 +1,13 @@
 # traditional Chinese translation for libbonobo.
-# Copyright (C) 2001-2003 Free Software Foundation, Inc.
+# Copyright (C) 2001, 02, 03 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001-2002.
 # Abel Cheung <maddog@linux.org.hk>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.2.0\n"
-"POT-Creation-Date: 2003-03-14 15:54+0000\n"
-"PO-Revision-Date: 2003-02-02 13:47+0800\n"
+"Project-Id-Version: libbonobo 2.2.1\n"
+"POT-Creation-Date: 2003-04-29 18:18+0800\n"
+"PO-Revision-Date: 2003-04-29 18:19+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,7 @@ msgstr "無法初始化 Bonobo"
 
 # If I know more about CORBA stuff..... -- Abel
 #: bonobo/bonobo-moniker.c:353
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "無法解析或擴展‘%s’"
 
