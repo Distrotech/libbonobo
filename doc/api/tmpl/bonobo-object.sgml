@@ -139,27 +139,62 @@ stop_animations (BrowserHTML html)
 #GtkObject
 </para>
 
-<!-- ##### TYPEDEF BonoboObjectServant ##### -->
+<!-- ##### MACRO BONOBO_OBJECT_TYPE ##### -->
 <para>
-  This structure defines the type for BonoboObject-based CORBA servants.
+Returns the #GtkType for the BonoboObject object.
 </para>
 
+
+
+<!-- ##### MACRO BONOBO_OBJREF ##### -->
 <para>
-  #BonoboObject provides a mapping from the servant to the #BonoboObject
-  by using the bonobo_object field in the structure.  Typically in the
-  C CORBA binding, per-servant information is piggy-backed to the POA
-  servant.  With the BonoboObject setup per-servant information is
-  typically attached to the BonoboObject (by using the regular
-  inheritance mechanism of Gtk+).  Going from a
-  #PortableServer_Servant to the actual #BonoboObject is accomplished 
-  using the bonobo_object_from_servant() routine.  
+
 </para>
 
+@o: 
+
+
+<!-- ##### USER_FUNCTION BonoboObjectPOAFn ##### -->
 <para>
-  If you decide not to use this scheme for fetching your per-servant
-  information, but still want to inherit from a #BonoboObject object,
-  just make sure that the second field of your servant is a gpointer.
+
 </para>
+
+@servant: 
+@ev: 
+
+
+<!-- ##### STRUCT BonoboObjectPrivate ##### -->
+<para>
+   Private information kept by the BonoboObject.  This should not be
+   used by BonoboObject users.
+</para>
+
+
+<!-- ##### TYPEDEF BonoboObjectHeader ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_OBJECT_HEADER_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_OBJECT_SIGNATURE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_SERVANT_SIGNATURE ##### -->
+<para>
+
+</para>
+
 
 
 <!-- ##### TYPEDEF BonoboObject ##### -->
@@ -172,81 +207,6 @@ stop_animations (BrowserHTML html)
 <para>
 
 </para>
-
-
-<!-- ##### FUNCTION bonobo_object_construct ##### -->
-<para>
-
-</para>
-
-@object: 
-@corba_object: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_object_new_from_servant ##### -->
-<para>
-
-</para>
-
-@servant: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_object_from_servant ##### -->
-<para>
-
-</para>
-
-@servant: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_object_bind_to_servant ##### -->
-<para>
-
-</para>
-
-@object: 
-@servant: 
-
-
-<!-- ##### FUNCTION bonobo_object_get_servant ##### -->
-<para>
-
-</para>
-
-@object: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_object_get_epv ##### -->
-<para>
-
-</para>
-
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_object_activate_servant ##### -->
-<para>
-
-</para>
-
-@object: 
-@servant: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_object_activate_servant_full ##### -->
-<para>
-
-</para>
-
-@object: 
-@servant: 
-@shlib_id: 
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_object_add_interface ##### -->
@@ -275,6 +235,7 @@ stop_animations (BrowserHTML html)
 
 @object: 
 @repo_id: 
+@opt_ev: 
 @Returns: 
 
 
@@ -293,8 +254,10 @@ stop_animations (BrowserHTML html)
 </para>
 
 @object: 
-@ev: 
+@opt_ev: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@ev: 
 
 
 <!-- ##### FUNCTION bonobo_object_release_unref ##### -->
@@ -303,10 +266,22 @@ stop_animations (BrowserHTML html)
 </para>
 
 @object: 
+@opt_ev: 
+@Returns: 
+<!-- # Unused Parameters # -->
 @ev: 
 
 
 <!-- ##### FUNCTION bonobo_object_ref ##### -->
+<para>
+
+</para>
+
+@object: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_object_idle_unref ##### -->
 <para>
 
 </para>
@@ -320,21 +295,16 @@ stop_animations (BrowserHTML html)
 </para>
 
 @object: 
+@Returns: 
 
 
-<!-- ##### FUNCTION bonobo_object_idle_unref ##### -->
+<!-- ##### FUNCTION bonobo_object_set_immortal ##### -->
 <para>
 
 </para>
 
 @object: 
-
-
-<!-- ##### FUNCTION bonobo_object_init ##### -->
-<para>
-
-</para>
-
+@immortal: 
 
 
 <!-- ##### FUNCTION bonobo_object_trace_refs ##### -->
@@ -346,6 +316,7 @@ stop_animations (BrowserHTML html)
 @fn: 
 @line: 
 @ref: 
+@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_object_dump_interfaces ##### -->
@@ -366,30 +337,6 @@ stop_animations (BrowserHTML html)
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_object_list_unref_all ##### -->
-<para>
-
-</para>
-
-@list: 
-
-
-<!-- ##### FUNCTION bonobo_object_slist_unref_all ##### -->
-<para>
-
-</para>
-
-@list: 
-
-
-<!-- ##### MACRO BONOBO_OBJREF ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
 <!-- ##### MACRO BONOBO_OBJECT_CHECK ##### -->
 <para>
    Checks if the exception in @e needs to be signaled.  If so, then
@@ -408,24 +355,109 @@ stop_animations (BrowserHTML html)
 </para>
 
 @object: 
+@opt_ev: 
 @Returns: 
 
 
-<!-- ##### SIGNAL BonoboObject::query-interface ##### -->
+<!-- ##### FUNCTION bonobo_object_list_unref_all ##### -->
 <para>
 
 </para>
 
-@bonoboobject: the object which received the signal.
-@arg1: 
-@arg2: 
+@list: 
 
-<!-- ##### SIGNAL BonoboObject::system-exception ##### -->
+
+<!-- ##### FUNCTION bonobo_object_slist_unref_all ##### -->
 <para>
 
 </para>
 
-@bonoboobject: the object which received the signal.
-@arg1: 
-@arg2: 
+@list: 
+
+
+<!-- ##### FUNCTION bonobo_object ##### -->
+<para>
+
+</para>
+
+@p: 
+@Returns: 
+
+
+<!-- ##### MACRO bonobo_object_fast ##### -->
+<para>
+
+</para>
+
+@o: 
+
+
+<!-- ##### MACRO bonobo_object_from_servant ##### -->
+<para>
+
+</para>
+
+@s: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@servant: 
+
+
+<!-- ##### MACRO bonobo_object_get_servant ##### -->
+<para>
+
+</para>
+
+@o: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@object: 
+
+
+<!-- ##### FUNCTION bonobo_type_unique ##### -->
+<para>
+
+</para>
+
+@parent_type: 
+@init_fn: 
+@fini_fn: 
+@epv_struct_offset: 
+@info: 
+@type_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_type_setup ##### -->
+<para>
+
+</para>
+
+@type: 
+@init_fn: 
+@fini_fn: 
+@epv_struct_offset: 
+@Returns: 
+
+
+<!-- ##### MACRO BONOBO_TYPE_FUNC_FULL ##### -->
+<para>
+
+</para>
+
+@class_name: 
+@corba_name: 
+@parent: 
+@prefix: 
+
+
+<!-- ##### MACRO BONOBO_TYPE_FUNC ##### -->
+<para>
+
+</para>
+
+@class_name: 
+@parent: 
+@prefix: 
+
 

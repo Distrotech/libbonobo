@@ -79,7 +79,36 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 #BonoboMoniker, #BonoboMonikerSimple, #bonobo-moniker-util, #BonoboMonikerExtender
 </para>
 
+<!-- ##### MACRO BONOBO_MONIKER_SIMPLE_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_TYPE_RESOLVE_FLAG ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_RESOLVE_FLAG_TYPE ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### STRUCT BonoboMonikerSimple ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@priv: 
+
+<!-- ##### STRUCT BonoboMonikerSimplePrivate ##### -->
 <para>
 
 </para>
@@ -97,13 +126,17 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_moniker_simple_new ##### -->
+<!-- ##### TYPEDEF BonoboMonikerSimpleClass ##### -->
 <para>
 
 </para>
 
-@name: 
-@resolve_fn: 
+
+<!-- ##### FUNCTION bonobo_moniker_simple_get_type ##### -->
+<para>
+
+</para>
+
 @Returns: 
 
 
@@ -114,7 +147,29 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 
 @moniker: 
 @name: 
+@resolve_closure: 
+@Returns: 
+<!-- # Unused Parameters # -->
 @resolve_fn: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_simple_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@resolve_fn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_simple_new_closure ##### -->
+<para>
+
+</para>
+
+@name: 
+@resolve_closure: 
 @Returns: 
 
 

@@ -98,18 +98,14 @@ bonobo_running_context_auto_exit_unref (factory)
 
 </para>
 
-<!-- ##### FUNCTION bonobo_context_init ##### -->
+<!-- ##### FUNCTION bonobo_context_get ##### -->
 <para>
 
 </para>
 
-
-
-<!-- ##### FUNCTION bonobo_context_shutdown ##### -->
-<para>
-
-</para>
-
+@context_name: 
+@opt_ev: 
+@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_context_add ##### -->
@@ -119,16 +115,6 @@ bonobo_running_context_auto_exit_unref (factory)
 
 @context_name: 
 @context: 
-
-
-<!-- ##### FUNCTION bonobo_context_get ##### -->
-<para>
-
-</para>
-
-@context_name: 
-@opt_ev: 
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_context_running_get ##### -->

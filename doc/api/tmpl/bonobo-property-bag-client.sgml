@@ -26,350 +26,867 @@ It is difficult to know how to solve this problem.
    #BonoboPropertyBag, #BonoboProperty, #BonoboPropertyControl
 </para>
 
-<!-- ##### FUNCTION bonobo_property_bag_client_get_properties ##### -->
+<!-- ##### FUNCTION bonobo_pbclient_get_type ##### -->
 <para>
 
 </para>
 
-@pb: 
-@ev: 
+@bag: 
+@key: 
+@opt_ev: 
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_free_properties ##### -->
+<!-- ##### FUNCTION bonobo_pbclient_get_string ##### -->
 <para>
 
 </para>
 
-@list: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_property_names ##### -->
-<para>
-
-</para>
-
-@pb: 
-@ev: 
+@bag: 
+@key: 
+@opt_ev: 
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_get_property ##### -->
+<!-- ##### FUNCTION bonobo_pbclient_get_default_string ##### -->
 <para>
 
 </para>
 
-@pb: 
-@property_name: 
-@ev: 
+@bag: 
+@key: 
+@opt_ev: 
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_persist ##### -->
+<!-- ##### FUNCTION bonobo_pbclient_get_string_with_default ##### -->
 <para>
 
 </para>
 
-@pb: 
-@stream: 
-@ev: 
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_depersist ##### -->
+<!-- ##### FUNCTION bonobo_pbclient_get_short ##### -->
 <para>
 
 </para>
 
-@pb: 
-@stream: 
-@ev: 
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_setv ##### -->
+<!-- ##### FUNCTION bonobo_pbclient_get_default_short ##### -->
 <para>
 
 </para>
 
-@pb: 
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_short_with_default ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_ushort ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_default_ushort ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_ushort_with_default ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_long ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_default_long ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_long_with_default ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_ulong ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_default_ulong ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_ulong_with_default ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_float ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_default_float ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_float_with_default ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_double ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_default_double ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_double_with_default ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_boolean ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_default_boolean ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_boolean_with_default ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_char ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_default_char ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_char_with_default ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@defval: 
+@def: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_value ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_tc: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_default_value ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_tc: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_string ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_short ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_ushort ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_long ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_ulong ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_float ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_double ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_boolean ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_char ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set_value ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@value: 
+@opt_ev: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_doc_title ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_doc ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_keys ##### -->
+<para>
+
+</para>
+
+@bag: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_free_keys ##### -->
+<para>
+
+</para>
+
+@key_list: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get_flags ##### -->
+<para>
+
+</para>
+
+@bag: 
+@key: 
+@opt_ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_set ##### -->
+<para>
+
+</para>
+
+@bag: 
+@opt_ev: 
+@first_prop: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_get ##### -->
+<para>
+
+</para>
+
+@bag: 
+@opt_ev: 
+@first_prop: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION bonobo_pbclient_setv ##### -->
+<para>
+
+</para>
+
+@bag: 
 @ev: 
-@first_arg: 
+@first_prop: 
 @var_args: 
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_getv ##### -->
+<!-- ##### FUNCTION bonobo_pbclient_getv ##### -->
 <para>
 
 </para>
 
-@pb: 
+@bag: 
 @ev: 
-@first_arg: 
+@first_prop: 
 @var_args: 
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_get_property_type ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_setv ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@ev: 
+@first_arg: 
+@var_args: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_getv ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@ev: 
+@first_arg: 
+@var_args: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_property_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_value_gboolean ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_value_gint ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_value_glong ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_value_gfloat ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_value_gdouble ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_value_string ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_value_any ##### -->
 <para>
 
 </para>
 
 @pb: 
-@propname: 
+@name: 
 @ev: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@propname: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_get_value_gboolean ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_get_default_gboolean ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_default_gint ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_default_glong ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_default_gfloat ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_default_gdouble ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_default_string ##### -->
+<para>
+
+</para>
+
+@Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
+
+
+<!-- ##### MACRO bonobo_property_bag_client_get_default_any ##### -->
 <para>
 
 </para>
 
 @pb: 
-@propname: 
+@name: 
 @ev: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@propname: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_get_value_gint ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_set_value_gboolean ##### -->
 <para>
 
 </para>
 
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_value_glong ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_value_gfloat ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_value_gdouble ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_value_string ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_value_any ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_default_gboolean ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_default_gint ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_default_glong ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_default_gfloat ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_default_gdouble ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_default_string ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_get_default_any ##### -->
-<para>
-
-</para>
-
-@pb: 
-@propname: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_client_set_value_gboolean ##### -->
-<para>
-
-</para>
-
+<!-- # Unused Parameters # -->
 @pb: 
 @propname: 
 @value: 
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_set_value_gint ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_set_value_gint ##### -->
 <para>
 
 </para>
 
+<!-- # Unused Parameters # -->
 @pb: 
 @propname: 
 @value: 
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_set_value_glong ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_set_value_glong ##### -->
 <para>
 
 </para>
 
+<!-- # Unused Parameters # -->
 @pb: 
 @propname: 
 @value: 
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_set_value_gfloat ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_set_value_gfloat ##### -->
 <para>
 
 </para>
 
+<!-- # Unused Parameters # -->
 @pb: 
 @propname: 
 @value: 
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_set_value_gdouble ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_set_value_gdouble ##### -->
 <para>
 
 </para>
 
+<!-- # Unused Parameters # -->
 @pb: 
 @propname: 
 @value: 
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_set_value_string ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_set_value_string ##### -->
 <para>
 
 </para>
 
+<!-- # Unused Parameters # -->
 @pb: 
 @propname: 
 @value: 
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_set_value_any ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_set_value_any ##### -->
 <para>
 
 </para>
 
+<!-- # Unused Parameters # -->
 @pb: 
 @propname: 
 @value: 
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_get_docstring ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_get_docstring ##### -->
 <para>
 
 </para>
 
-@pb: 
-@propname: 
-@ev: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@pb: 
+@propname: 
+@ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_client_get_flags ##### -->
+<!-- ##### MACRO bonobo_property_bag_client_get_flags ##### -->
 <para>
 
 </para>
 
+@Returns: 
+<!-- # Unused Parameters # -->
 @pb: 
 @propname: 
 @ev: 
-@Returns: 
 
 

@@ -14,18 +14,57 @@ Bonobo initialization.
 
 </para>
 
+<!-- ##### FUNCTION bonobo_is_initialized ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_init ##### -->
 <para>
 
 </para>
 
+@argc: 
+@argv: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@orb: 
+@poa: 
+@manager: 
+
+
+<!-- ##### FUNCTION bonobo_init_full ##### -->
+<para>
+
+</para>
+
+@argc: 
+@argv: 
 @orb: 
 @poa: 
 @manager: 
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_debug_shutdown ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_main ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION bonobo_main_quit ##### -->
 <para>
 
 </para>

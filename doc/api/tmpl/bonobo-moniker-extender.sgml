@@ -96,17 +96,21 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 
 </para>
 
+<!-- ##### MACRO BONOBO_MONIKER_EXTENDER_TYPE ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### STRUCT BonoboMonikerExtender ##### -->
 <para>
 
 </para>
 
-
-<!-- ##### TYPEDEF BonoboMonikerExtenderClass ##### -->
-<para>
-
-</para>
-
+@object: 
+@resolve: 
+@data: 
 
 <!-- ##### USER_FUNCTION BonoboMonikerExtenderFn ##### -->
 <para>
@@ -120,6 +124,12 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 @requested_interface: 
 @ev: 
 @Returns: 
+
+
+<!-- ##### TYPEDEF BonoboMonikerExtenderClass ##### -->
+<para>
+
+</para>
 
 
 <!-- ##### FUNCTION bonobo_moniker_extender_new ##### -->
@@ -139,8 +149,10 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 
 @name: 
 @interface: 
-@ev: 
+@opt_ev: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@ev: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_use_extender ##### -->
@@ -152,7 +164,9 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 @moniker: 
 @options: 
 @requested_interface: 
-@ev: 
+@opt_ev: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@ev: 
 
 

@@ -14,7 +14,20 @@ This implementation is mostly deprecated, see #BonoboItemHandler
    #BonoboItemHandler
 </para>
 
+<!-- ##### MACRO BONOBO_ITEM_CONTAINER_TYPE ##### -->
+<para>
+
+</para>
+
+
+
 <!-- ##### TYPEDEF BonoboClientSiteList ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboItemContainerPrivate ##### -->
 <para>
 
 </para>
@@ -58,15 +71,4 @@ This implementation is mostly deprecated, see #BonoboItemHandler
 @container: 
 @name: 
 
-
-<!-- ##### SIGNAL BonoboItemContainer::get-object ##### -->
-<para>
-
-</para>
-
-@bonoboitemcontainer: the object which received the signal.
-@arg1: 
-@arg2: 
-@arg3: 
-@Returns: 
 

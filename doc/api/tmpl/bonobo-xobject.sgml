@@ -124,28 +124,18 @@ bonobo_control_class_init (BonoboControlClass *klass)
 #BonoboObject
 </para>
 
-<!-- ##### MACRO BONOBO_IS_X_OBJECT ##### -->
+<!-- ##### MACRO BONOBO_X_OBJECT_TYPE ##### -->
 <para>
 
 </para>
 
-@o: 
 
 
-<!-- ##### MACRO BONOBO_IS_X_OBJECT_CLASS ##### -->
+<!-- ##### MACRO BONOBO_X_OBJECT_HEADER_SIZE ##### -->
 <para>
 
 </para>
 
-@k: 
-
-
-<!-- ##### MACRO BONOBO_X_SERVANT_GET_OBJECT ##### -->
-<para>
-
-</para>
-
-@o: 
 
 
 <!-- ##### MACRO BONOBO_X_OBJECT_GET_SERVANT ##### -->
@@ -156,59 +146,73 @@ bonobo_control_class_init (BonoboControlClass *klass)
 @o: 
 
 
-<!-- ##### STRUCT BonoboXObject ##### -->
+<!-- ##### MACRO BONOBO_X_SERVANT_GET_OBJECT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+
+<!-- ##### MACRO BonoboXObject ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### TYPEDEF BonoboXObjectClass ##### -->
+
+<!-- ##### MACRO BonoboXObjectClass ##### -->
 <para>
 
 </para>
 
 
-<!-- ##### USER_FUNCTION BonoboXObjectPOAFn ##### -->
+
+<!-- ##### MACRO bonobo_x_object ##### -->
 <para>
 
 </para>
 
+@Returns: 
+<!-- # Unused Parameters # -->
+@p: 
+
+
+<!-- ##### MACRO BonoboXObjectPOAFn ##### -->
+<para>
+
+</para>
+
+<!-- # Unused Parameters # -->
 @servant: 
 @ev: 
 
 
-<!-- ##### FUNCTION bonobo_x_object ##### -->
+<!-- ##### MACRO bonobo_x_type_unique ##### -->
 <para>
 
 </para>
 
-@p: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_x_type_unique ##### -->
-<para>
-
-</para>
-
+<!-- # Unused Parameters # -->
 @parent_type: 
 @init_fn: 
 @fini_fn: 
 @epv_struct_offset: 
 @info: 
-@Returns: 
 
 
-<!-- ##### FUNCTION bonobo_x_type_setup ##### -->
+<!-- ##### MACRO bonobo_x_type_setup ##### -->
 <para>
 
 </para>
 
+@Returns: 
+<!-- # Unused Parameters # -->
 @type: 
 @init_fn: 
 @fini_fn: 
 @epv_struct_offset: 
-@Returns: 
 
 
 <!-- ##### MACRO BONOBO_X_TYPE_FUNC_FULL ##### -->

@@ -51,11 +51,27 @@ BonoboStream *make_bonobo_stream_on_string (char *string)
 
 </para>
 
+@parent: 
+@buffer: 
+@size: 
+@pos: 
+@read_only: 
+@resizable: 
+@content_type: 
+@name: 
+@priv: 
 
-<!-- ##### STRUCT BonoboStorageMem ##### -->
+<!-- ##### STRUCT BonoboStreamMemPrivate ##### -->
 <para>
 
 </para>
+
+
+<!-- ##### MACRO BONOBO_STREAM_MEM_TYPE ##### -->
+<para>
+
+</para>
+
 
 
 <!-- ##### TYPEDEF BonoboStreamMemClass ##### -->
@@ -70,12 +86,13 @@ BonoboStream *make_bonobo_stream_on_string (char *string)
 </para>
 
 @stream_mem: 
-@corba_stream: 
 @buffer: 
 @size: 
 @read_only: 
 @resizable: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@corba_stream: 
 
 
 <!-- ##### FUNCTION bonobo_stream_mem_create ##### -->

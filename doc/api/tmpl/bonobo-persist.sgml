@@ -16,6 +16,19 @@ use by the derived #BonoboPersistStream interface.
 #BonoboPersistStream, #BonoboPersistFile
 </para>
 
+<!-- ##### MACRO BONOBO_PERSIST_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT BonoboPersistPrivate ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### TYPEDEF BonoboPersist ##### -->
 <para>
 
@@ -36,5 +49,26 @@ use by the derived #BonoboPersistStream interface.
 @num: 
 @Varargs: 
 @Returns: 
+
+
+<!-- ##### FUNCTION bonobo_persist_construct ##### -->
+<para>
+
+</para>
+
+@persist: 
+@iid: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@corba_persist: 
+
+
+<!-- ##### FUNCTION bonobo_persist_set_dirty ##### -->
+<para>
+
+</para>
+
+@persist: 
+@dirty: 
 
 

@@ -80,36 +80,10 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 
 
 
-<!-- ##### MACRO BONOBO_GENERIC_FACTORY ##### -->
+<!-- ##### STRUCT BonoboGenericFactoryPrivate ##### -->
 <para>
 
 </para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_GENERIC_FACTORY_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
-<!-- ##### MACRO BONOBO_IS_GENERIC_FACTORY ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_IS_GENERIC_FACTORY_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
 
 
 <!-- ##### STRUCT BonoboGenericFactory ##### -->
@@ -117,18 +91,10 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 
 </para>
 
+@base: 
+@priv: 
 
-<!-- ##### USER_FUNCTION BonoboGenericFactoryFn ##### -->
-<para>
-
-</para>
-
-@Factory: 
-@closure: 
-@Returns: 
-
-
-<!-- ##### USER_FUNCTION GnomeFactoryCallback ##### -->
+<!-- ##### USER_FUNCTION BonoboFactoryCallback ##### -->
 <para>
 
 </para>
@@ -137,8 +103,6 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 @component_id: 
 @closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@goad_id: 
 
 
 <!-- ##### TYPEDEF BonoboGenericFactoryClass ##### -->
@@ -152,28 +116,26 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 
 </para>
 
-@oaf_iid: 
-@factory: 
+@act_iid: 
+@factory_cb: 
 @user_data: 
 @Returns: 
 <!-- # Unused Parameters # -->
+@oaf_iid: 
+@factory: 
 @component_id: 
 @data: 
 @goad_id: 
 
 
-<!-- ##### FUNCTION bonobo_generic_factory_new_multi ##### -->
+<!-- ##### FUNCTION bonobo_generic_factory_new_closure ##### -->
 <para>
 
 </para>
 
-@oaf_iid: 
-@factory_cb: 
-@data: 
+@act_iid: 
+@factory_closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@component_id: 
-@goad_id: 
 
 
 <!-- ##### FUNCTION bonobo_generic_factory_construct ##### -->
@@ -181,45 +143,50 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 
 </para>
 
+@factory: 
+@act_iid: 
+@factory_cb: 
+@Returns: 
+<!-- # Unused Parameters # -->
 @oaf_iid: 
 @c_factory: 
 @corba_factory: 
-@factory: 
-@factory_cb: 
 @user_data: 
-@Returns: 
-<!-- # Unused Parameters # -->
 @component_id: 
 @data: 
 @goad_id: 
 
 
-<!-- ##### FUNCTION bonobo_generic_factory_set ##### -->
+<!-- ##### FUNCTION bonobo_generic_factory_construct_noreg ##### -->
 <para>
 
 </para>
 
-@c_factory: 
 @factory: 
-@data: 
+@act_iid: 
+@factory_cb: 
 
 
-<!-- ##### FUNCTION bonobo_generic_factory_get_epv ##### -->
+<!-- ##### FUNCTION bonobo_generic_factory_main ##### -->
 <para>
 
 </para>
 
+@act_iid: 
+@factory_cb: 
+@user_data: 
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_generic_factory_corba_object_create ##### -->
+<!-- ##### MACRO BONOBO_FACTORY_INIT ##### -->
 <para>
 
 </para>
 
-@object: 
-@shlib_id: 
-@Returns: 
+@descr: 
+@version: 
+@argcp: 
+@argv: 
 
 
 <!-- ##### MACRO BONOBO_OAF_FACTORY ##### -->
@@ -230,8 +197,10 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 @oafiid: 
 @descr: 
 @version: 
-@fn: 
+@callback: 
 @data: 
+<!-- # Unused Parameters # -->
+@fn: 
 
 
 <!-- ##### MACRO BONOBO_OAF_FACTORY_MULTI ##### -->
@@ -242,7 +211,21 @@ initialization correct, see #BONOBO_OAF_FACTORY_MULTI.
 @oafiid: 
 @descr: 
 @version: 
+@callback: 
+@data: 
+<!-- # Unused Parameters # -->
 @fn: 
+
+
+<!-- ##### MACRO BONOBO_ACTIVATION_FACTORY ##### -->
+<para>
+
+</para>
+
+@oafiid: 
+@descr: 
+@version: 
+@callback: 
 @data: 
 
 

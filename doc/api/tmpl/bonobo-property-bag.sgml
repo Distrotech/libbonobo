@@ -144,6 +144,40 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 
 </para>
 
+<!-- ##### MACRO BONOBO_PROPERTY_READABLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_PROPERTY_WRITEABLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_PROPERTY_NO_LISTENING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_PROPERTY_NO_AUTONOTIFY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT BonoboPropertyBagPrivate ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### STRUCT BonoboPropertyBag ##### -->
 <para>
 
@@ -153,16 +187,25 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 @priv: 
 @es: 
 
-<!-- ##### ENUM BonoboPropertyFlags ##### -->
+<!-- ##### STRUCT BonoboProperty ##### -->
 <para>
 
 </para>
 
-@BONOBO_PROPERTY_UNSTORED: 
-@BONOBO_PROPERTY_READABLE: 
-@BONOBO_PROPERTY_WRITEABLE: 
-@BONOBO_PROPERTY_USE_DEFAULT_OPT: 
-@BONOBO_PROPERTY_NO_LISTENING: 
+@name: 
+@idx: 
+@type: 
+@default_value: 
+@doctitle: 
+@docstring: 
+@flags: 
+@priv: 
+
+<!-- ##### STRUCT BonoboPropertyPrivate ##### -->
+<para>
+
+</para>
+
 
 <!-- ##### USER_FUNCTION BonoboPropertyGetFn ##### -->
 <para>
@@ -194,15 +237,11 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 </para>
 
 
-<!-- ##### FUNCTION bonobo_property_bag_get_type ##### -->
+<!-- ##### MACRO BONOBO_PROPERTY_BAG_TYPE ##### -->
 <para>
 
 </para>
 
-@Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@name: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_new ##### -->
@@ -210,9 +249,22 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 
 </para>
 
+@get_prop_cb: 
+@set_prop_cb: 
+@user_data: 
+@Returns: 
+<!-- # Unused Parameters # -->
 @get_prop: 
 @set_prop: 
-@user_data: 
+
+
+<!-- ##### FUNCTION bonobo_property_bag_new_closure ##### -->
+<para>
+
+</para>
+
+@get_prop: 
+@set_prop: 
 @Returns: 
 
 
@@ -224,8 +276,23 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 @get_prop: 
 @set_prop: 
 @event_source: 
-@user_data: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@user_data: 
+
+
+<!-- ##### FUNCTION bonobo_property_bag_construct ##### -->
+<para>
+
+</para>
+
+@pb: 
+@get_prop: 
+@set_prop: 
+@event_source: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@user_data: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_add ##### -->
@@ -238,8 +305,10 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 @idx: 
 @type: 
 @default_value: 
-@docstring: 
+@doctitle: 
 @flags: 
+<!-- # Unused Parameters # -->
+@docstring: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_add_full ##### -->
@@ -252,120 +321,33 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 @idx: 
 @type: 
 @default_value: 
+@doctitle: 
 @docstring: 
 @flags: 
 @get_prop: 
 @set_prop: 
+<!-- # Unused Parameters # -->
 @user_data: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_add_gtk_args ##### -->
-<para>
-
-</para>
-
-@pb: 
-@object: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_construct ##### -->
-<para>
-
-</para>
-
-@pb: 
-@get_prop: 
-@set_prop: 
-@event_source: 
-@user_data: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_set_value ##### -->
+<!-- ##### FUNCTION bonobo_property_bag_remove ##### -->
 <para>
 
 </para>
 
 @pb: 
 @name: 
-@value: 
-@opt_ev: 
 
 
-<!-- ##### FUNCTION bonobo_property_bag_get_value ##### -->
+<!-- ##### FUNCTION bonobo_property_bag_map_params ##### -->
 <para>
 
 </para>
 
 @pb: 
-@name: 
-@opt_ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_get_default ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@opt_ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_get_docstring ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@opt_ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_get_flags ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@opt_ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_get_property_type ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@opt_ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_has_property ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_property_bag_notify_listeners ##### -->
-<para>
-
-</para>
-
-@pb: 
-@name: 
-@new_value: 
-@opt_ev: 
+@on_instance: 
+@pspecs: 
+@n_params: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_get_prop_list ##### -->

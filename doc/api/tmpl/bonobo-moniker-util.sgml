@@ -68,6 +68,67 @@ prefix and / or the ':0' suffix.
 
 </para>
 
+<!-- ##### FUNCTION bonobo_get_object ##### -->
+<para>
+
+</para>
+
+@name: 
+@interface_name: 
+@opt_ev: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@ev: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_client_new_from_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@opt_ev: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@ev: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_client_get_name ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@opt_ev: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@ev: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_client_resolve_default ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@interface_name: 
+@opt_ev: 
+@Returns: 
+<!-- # Unused Parameters # -->
+@ev: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_client_equal ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@name: 
+@opt_ev: 
+@Returns: 
+
+
 <!-- ##### USER_FUNCTION BonoboMonikerAsyncFn ##### -->
 <para>
 
@@ -78,7 +139,7 @@ prefix and / or the ':0' suffix.
 @user_data: 
 
 
-<!-- ##### FUNCTION bonobo_get_object ##### -->
+<!-- ##### FUNCTION bonobo_get_object_async ##### -->
 <para>
 
 </para>
@@ -86,30 +147,41 @@ prefix and / or the ':0' suffix.
 @name: 
 @interface_name: 
 @ev: 
-@Returns: 
+@cb: 
+@user_data: 
+<!-- # Unused Parameters # -->
+@timeout_msec: 
 
 
-<!-- ##### FUNCTION bonobo_moniker_client_new_from_name ##### -->
+<!-- ##### FUNCTION bonobo_moniker_client_new_from_name_async ##### -->
 <para>
 
 </para>
 
 @name: 
 @ev: 
-@Returns: 
+@cb: 
+@user_data: 
+<!-- # Unused Parameters # -->
+@timeout_msec: 
 
 
-<!-- ##### FUNCTION bonobo_moniker_client_get_name ##### -->
+<!-- ##### FUNCTION bonobo_moniker_resolve_async ##### -->
 <para>
 
 </para>
 
 @moniker: 
+@options: 
+@interface_name: 
 @ev: 
-@Returns: 
+@cb: 
+@user_data: 
+<!-- # Unused Parameters # -->
+@timeout_msec: 
 
 
-<!-- ##### FUNCTION bonobo_moniker_client_resolve_default ##### -->
+<!-- ##### FUNCTION bonobo_moniker_resolve_async_default ##### -->
 <para>
 
 </para>
@@ -117,29 +189,10 @@ prefix and / or the ':0' suffix.
 @moniker: 
 @interface_name: 
 @ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_moniker_client_resolve_client_default ##### -->
-<para>
-
-</para>
-
-@moniker: 
-@interface_name: 
-@ev: 
-@Returns: 
-
-
-<!-- ##### FUNCTION bonobo_moniker_util_new_from_name_full ##### -->
-<para>
-
-</para>
-
-@parent: 
-@name: 
-@ev: 
-@Returns: 
+@cb: 
+@user_data: 
+<!-- # Unused Parameters # -->
+@timeout_msec: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_util_get_parent_name ##### -->
@@ -148,8 +201,10 @@ prefix and / or the ':0' suffix.
 </para>
 
 @moniker: 
-@ev: 
+@opt_ev: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@ev: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_util_qi_return ##### -->
@@ -163,6 +218,16 @@ prefix and / or the ':0' suffix.
 @Returns: 
 
 
+<!-- ##### FUNCTION bonobo_moniker_util_parse_name ##### -->
+<para>
+
+</para>
+
+@name: 
+@plen: 
+@Returns: 
+
+
 <!-- ##### FUNCTION bonobo_moniker_util_seek_std_separator ##### -->
 <para>
 
@@ -171,31 +236,6 @@ prefix and / or the ':0' suffix.
 @str: 
 @min_idx: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_get_object_async ##### -->
-<para>
-
-</para>
-
-@name: 
-@interface_name: 
-@ev: 
-@timeout_msec: 
-@cb: 
-@user_data: 
-
-
-<!-- ##### FUNCTION bonobo_moniker_client_new_from_name_async ##### -->
-<para>
-
-</para>
-
-@name: 
-@ev: 
-@timeout_msec: 
-@cb: 
-@user_data: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_util_escape ##### -->
@@ -218,41 +258,36 @@ prefix and / or the ':0' suffix.
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_moniker_client_equal ##### -->
+<!-- ##### FUNCTION bonobo_url_register ##### -->
 <para>
 
 </para>
 
-@moniker: 
-@name: 
-@opt_ev: 
+@oafiid: 
+@url: 
+@mime_type: 
+@object: 
+@ev: 
+
+
+<!-- ##### FUNCTION bonobo_url_unregister ##### -->
+<para>
+
+</para>
+
+@oafiid: 
+@url: 
+@ev: 
+
+
+<!-- ##### FUNCTION bonobo_url_lookup ##### -->
+<para>
+
+</para>
+
+@oafiid: 
+@url: 
+@ev: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_moniker_resolve_async ##### -->
-<para>
-
-</para>
-
-@moniker: 
-@options: 
-@interface_name: 
-@ev: 
-@timeout_msec: 
-@cb: 
-@user_data: 
-
-
-<!-- ##### FUNCTION bonobo_moniker_resolve_async_default ##### -->
-<para>
-
-</para>
-
-@moniker: 
-@interface_name: 
-@ev: 
-@timeout_msec: 
-@cb: 
-@user_data: 
 
 

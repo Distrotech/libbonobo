@@ -1,0 +1,3347 @@
+<TYPEDEF>
+<NAME>BonoboArg</NAME>
+typedef CORBA_any      BonoboArg;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboArgType</NAME>
+typedef CORBA_TypeCode BonoboArgType;
+</TYPEDEF>
+<MACRO>
+<NAME>BONOBO_ARG_NULL</NAME>
+#define BONOBO_ARG_NULL     TC_null
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_BOOLEAN</NAME>
+#define BONOBO_ARG_BOOLEAN  TC_CORBA_boolean
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SHORT</NAME>
+#define BONOBO_ARG_SHORT    TC_CORBA_short
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_INT</NAME>
+#define BONOBO_ARG_INT      TC_CORBA_long
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_LONG</NAME>
+#define BONOBO_ARG_LONG     TC_CORBA_long
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_LONGLONG</NAME>
+#define BONOBO_ARG_LONGLONG TC_CORBA_long_long
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_FLOAT</NAME>
+#define BONOBO_ARG_FLOAT    TC_CORBA_float
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_DOUBLE</NAME>
+#define BONOBO_ARG_DOUBLE   TC_CORBA_double
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_CHAR</NAME>
+#define BONOBO_ARG_CHAR     TC_CORBA_char
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_STRING</NAME>
+#define BONOBO_ARG_STRING   TC_CORBA_string
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_GENERAL</NAME>
+#	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
+					          *((t *)((a)->_value)))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_GENERAL</NAME>
+#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
+					          *((t *)((a)->_value)) = (t)(v))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_GENERAL</NAME>
+#	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (*((t *)((a)->_value)))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_GENERAL</NAME>
+#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (*((t *)((a)->_value)) = (v))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_BOOLEAN</NAME>
+#define BONOBO_ARG_GET_BOOLEAN(a)   (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_boolean, CORBA_boolean, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_BOOLEAN</NAME>
+#define BONOBO_ARG_SET_BOOLEAN(a,v) (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_boolean, CORBA_boolean, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_SHORT</NAME>
+#define BONOBO_ARG_GET_SHORT(a)     (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_short, CORBA_short, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_SHORT</NAME>
+#define BONOBO_ARG_SET_SHORT(a,v)   (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_short, CORBA_short, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_INT</NAME>
+#define BONOBO_ARG_GET_INT(a)       (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_long, CORBA_long, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_INT</NAME>
+#define BONOBO_ARG_SET_INT(a,v)     (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_long, CORBA_long, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_LONG</NAME>
+#define BONOBO_ARG_GET_LONG(a)      (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_long, CORBA_long, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_LONG</NAME>
+#define BONOBO_ARG_SET_LONG(a,v)    (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_long, CORBA_long, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_LONGLONG</NAME>
+#define BONOBO_ARG_GET_LONGLONG(a)  (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_long_long, CORBA_long_long, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_LONGLONG</NAME>
+#define BONOBO_ARG_SET_LONGLONG(a,v) (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_long_long, CORBA_long_long, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_FLOAT</NAME>
+#define BONOBO_ARG_GET_FLOAT(a)     (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_float, CORBA_float, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_FLOAT</NAME>
+#define BONOBO_ARG_SET_FLOAT(a,v)   (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_float, CORBA_float, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_DOUBLE</NAME>
+#define BONOBO_ARG_GET_DOUBLE(a)    (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_double, CORBA_double, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_DOUBLE</NAME>
+#define BONOBO_ARG_SET_DOUBLE(a,v)  (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_double, CORBA_double, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_CHAR</NAME>
+#define BONOBO_ARG_GET_CHAR(a)      (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_char, CORBA_char, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_CHAR</NAME>
+#define BONOBO_ARG_SET_CHAR(a,v)    (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_char, CORBA_char, NULL))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_STRING</NAME>
+#define BONOBO_ARG_GET_STRING(a)    (g_assert ((a)->_type->kind == CORBA_tk_string),\
+				     *((CORBA_char **)(a->_value)))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_STRING</NAME>
+#define BONOBO_ARG_SET_STRING(a,v)  (g_assert ((a)->_type->kind == CORBA_tk_string), CORBA_free (*(char **)a->_value),\
+				     *((CORBA_char **)(a->_value)) = CORBA_string_dup ((v)?(v):""))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_GET_STRING</NAME>
+#define BONOBO_ARG_GET_STRING(a)    (*((CORBA_char **)(a->_value)))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ARG_SET_STRING</NAME>
+#define BONOBO_ARG_SET_STRING(a,v)  (CORBA_free (*(char **)a->_value),\
+				     *((CORBA_char **)(a->_value)) = CORBA_string_dup ((v)?(v):""))
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_arg_new</NAME>
+<RETURNS>BonoboArg     *</RETURNS>
+BonoboArgType      t
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_new_from</NAME>
+<RETURNS>BonoboArg     *</RETURNS>
+BonoboArgType      t,gconstpointer      data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_release</NAME>
+<RETURNS>void  </RETURNS>
+BonoboArg         *arg
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_copy</NAME>
+<RETURNS>BonoboArg     *</RETURNS>
+const BonoboArg   *arg
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_from_gvalue</NAME>
+<RETURNS>void  </RETURNS>
+BonoboArg         *a,const GValue      *value
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_type_from_gtype</NAME>
+<RETURNS>BonoboArgType  </RETURNS>
+GType              t
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_to_gvalue</NAME>
+<RETURNS>void  </RETURNS>
+GValue            *value,const BonoboArg   *arg
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_type_to_gtype</NAME>
+<RETURNS>GType  </RETURNS>
+BonoboArgType      id
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_is_equal</NAME>
+<RETURNS>gboolean  </RETURNS>
+const BonoboArg   *a,const BonoboArg   *b,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_arg_type_is_equal</NAME>
+<RETURNS>gboolean  </RETURNS>
+BonoboArgType      a,BonoboArgType      b,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_string</NAME>
+<RETURNS>gchar  *</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_string_with_default</NAME>
+<RETURNS>gchar  *</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gchar                 *defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_short</NAME>
+<RETURNS>gint16</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_short_with_default</NAME>
+<RETURNS>gint16</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gint16                 defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_ushort</NAME>
+<RETURNS>guint16</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_ushort_with_default</NAME>
+<RETURNS>guint16</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,guint16                defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_long</NAME>
+<RETURNS>gint32</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_long_with_default</NAME>
+<RETURNS>gint32</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gint32                 defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_ulong</NAME>
+<RETURNS>guint32</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_ulong_with_default</NAME>
+<RETURNS>guint32</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,guint32                defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_float</NAME>
+<RETURNS>gfloat</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_float_with_default</NAME>
+<RETURNS>gfloat</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gfloat                 defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_double</NAME>
+<RETURNS>gdouble</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_double_with_default</NAME>
+<RETURNS>gdouble</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gdouble                defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_boolean</NAME>
+<RETURNS>gboolean</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_boolean_with_default</NAME>
+<RETURNS>gboolean</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gboolean               defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_char</NAME>
+<RETURNS>gchar</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_char_with_default</NAME>
+<RETURNS>gchar</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gchar                  defval,gboolean              *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_get_value</NAME>
+<RETURNS>CORBA_any  *</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_TypeCode         opt_tc,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_string</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,const char            *value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_short</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gint16                 value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_ushort</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,guint16                value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_long</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gint32                 value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_ulong</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,guint32                value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_float</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gfloat                 value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_double</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gdouble                value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_boolean</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gboolean               value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_char</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,gchar                  value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_config_set_value</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_ConfigDatabase  db,const char            *key,CORBA_any             *value,CORBA_Environment     *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_context_get</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+const CORBA_char  *context_name,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_context_add</NAME>
+<RETURNS>void  </RETURNS>
+const CORBA_char  *context_name,Bonobo_Unknown     context
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_context_running_get</NAME>
+<RETURNS>BonoboObject   *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_running_context_auto_exit_unref</NAME>
+<RETURNS>void  </RETURNS>
+BonoboObject *object
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_EVENT_SOURCE</NAME>
+#define BONOBO_TYPE_EVENT_SOURCE        (bonobo_event_source_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_EVENT_SOURCE_TYPE</NAME>
+#define BONOBO_EVENT_SOURCE_TYPE        BONOBO_TYPE_EVENT_SOURCE /* deprecated, you should use BONOBO_TYPE_EVENT_SOURCE */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_EVENT_SOURCE</NAME>
+#define BONOBO_EVENT_SOURCE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_EVENT_SOURCE, BonoboEventSource))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_EVENT_SOURCE_CLASS</NAME>
+#define BONOBO_EVENT_SOURCE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_EVENT_SOURCE, BonoboEventSourceClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_EVENT_SOURCE</NAME>
+#define BONOBO_IS_EVENT_SOURCE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_EVENT_SOURCE))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_EVENT_SOURCE_CLASS</NAME>
+#define BONOBO_IS_EVENT_SOURCE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_EVENT_SOURCE))
+</MACRO>
+<STRUCT>
+<NAME>BonoboEventSourcePrivate</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboEventSource</NAME>
+typedef struct {
+	BonoboObject             parent;
+	BonoboEventSourcePrivate *priv;
+} BonoboEventSource;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboEventSourceClass</NAME>
+typedef struct {
+	BonoboObjectClass parent_class;
+
+	POA_Bonobo_EventSource__epv epv;
+} BonoboEventSourceClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_event_source_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_source_new</NAME>
+<RETURNS>BonoboEventSource  *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_source_notify_listeners</NAME>
+<RETURNS>void  </RETURNS>
+BonoboEventSource *event_source,const char        *event_name,const CORBA_any   *opt_value,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_source_notify_listeners_full</NAME>
+<RETURNS>void  </RETURNS>
+BonoboEventSource *event_source,const char        *path,const char        *type,const char        *subtype,const CORBA_any   *opt_value,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_source_client_remove_listener</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Unknown     object,Bonobo_Listener    listener,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_source_client_add_listener</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Unknown           object,BonoboListenerCallbackFn event_callback,const char              *opt_mask,CORBA_Environment       *opt_ev,gpointer                 user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_source_client_add_listener_closure</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Unknown     object,GClosure          *callback,const char        *opt_mask,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_source_client_add_listener_full</NAME>
+<RETURNS>Bonobo_Listener  </RETURNS>
+Bonobo_Unknown     object,GClosure          *callback,const char        *opt_mask,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_source_ignore_listeners</NAME>
+<RETURNS>void  </RETURNS>
+BonoboEventSource *event_source
+</FUNCTION>
+<MACRO>
+<NAME>bonobo_exception_set</NAME>
+#define bonobo_exception_set(opt_ev,repo_id) G_STMT_START{                  \
+     if (opt_ev) {                                                          \
+         CORBA_exception_set (opt_ev, CORBA_USER_EXCEPTION, repo_id, NULL); \
+     } else {                                                               \
+	 g_log (G_LOG_DOMAIN,						    \
+		G_LOG_LEVEL_CRITICAL,					    \
+		"file %s: line %d: bonobo exception: `%s'",                 \
+		__FILE__,						    \
+		__LINE__,						    \
+		bonobo_exception_repoid_to_text (repo_id));                 \
+     } }G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>bonobo_return_if_fail</NAME>
+#define bonobo_return_if_fail(expr,opt_ev) G_STMT_START{		\
+     if (!(expr)) {							\
+         if (opt_ev)                                                    \
+	     CORBA_exception_set (opt_ev, CORBA_USER_EXCEPTION,         \
+				  ex_Bonobo_BadArg, NULL);              \
+         return;                                                        \
+     };	}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>bonobo_return_val_if_fail</NAME>
+#define bonobo_return_val_if_fail(expr,val,opt_ev) G_STMT_START{	\
+     if (!(expr)) {							\
+         if (opt_ev)                                                    \
+	     CORBA_exception_set (opt_ev, CORBA_USER_EXCEPTION,         \
+				  ex_Bonobo_BadArg, NULL);              \
+         return val;                                                    \
+     };	}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>bonobo_return_if_fail</NAME>
+#define bonobo_return_if_fail(expr,opt_ev) G_STMT_START{		\
+     if (!(expr)) {							\
+         if (opt_ev)                                                    \
+	     CORBA_exception_set (opt_ev, CORBA_USER_EXCEPTION,         \
+				  ex_Bonobo_BadArg, NULL);              \
+	 g_log (G_LOG_DOMAIN,						\
+		G_LOG_LEVEL_CRITICAL,					\
+		"file %s: line %d (%s): assertion `%s' failed.",	\
+		__FILE__,						\
+		__LINE__,						\
+		G_GNUC_PRETTY_FUNCTION,					\
+		#expr);							\
+         return;                                                        \
+     };	}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>bonobo_return_val_if_fail</NAME>
+#define bonobo_return_val_if_fail(expr,val,opt_ev) G_STMT_START{	\
+     if (!(expr)) {							\
+         if (opt_ev)                                                    \
+	     CORBA_exception_set (opt_ev, CORBA_USER_EXCEPTION,         \
+				  ex_Bonobo_BadArg, NULL);              \
+	 g_log (G_LOG_DOMAIN,						\
+		G_LOG_LEVEL_CRITICAL,					\
+		"file %s: line %d (%s): assertion `%s' failed.",	\
+		__FILE__,						\
+		__LINE__,						\
+		G_GNUC_PRETTY_FUNCTION,					\
+		#expr);							\
+         return val;                                                    \
+     };	}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>BONOBO_EX</NAME>
+#define BONOBO_EX(ev)         ((ev) && (ev)->_major != CORBA_NO_EXCEPTION)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_USER_EX</NAME>
+#define BONOBO_USER_EX(ev,id) ((ev) && (ev)->_major == CORBA_USER_EXCEPTION &&	\
+			       (ev)->_id != NULL && !strcmp ((ev)->_id, id))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_EX_REPOID</NAME>
+#define BONOBO_EX_REPOID(ev)  (ev)->_id
+</MACRO>
+<MACRO>
+<NAME>BONOBO_RET_EX</NAME>
+#define BONOBO_RET_EX(ev)		\
+	G_STMT_START{			\
+		if (BONOBO_EX (ev))	\
+			return;		\
+	}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>BONOBO_RET_VAL_EX</NAME>
+#define BONOBO_RET_VAL_EX(ev,v)		\
+	G_STMT_START{			\
+		if (BONOBO_EX (ev))	\
+			return (v);	\
+	}G_STMT_END
+</MACRO>
+<USER_FUNCTION>
+<NAME>BonoboExceptionFn</NAME>
+<RETURNS>char *</RETURNS>
+CORBA_Environment *ev, gpointer user_data
+</USER_FUNCTION>
+<FUNCTION>
+<NAME>bonobo_exception_get_text</NAME>
+<RETURNS>char  *</RETURNS>
+CORBA_Environment *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_exception_repoid_to_text</NAME>
+<RETURNS>char  *</RETURNS>
+const char *repo_id
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_exception_add_handler_str</NAME>
+<RETURNS>void  </RETURNS>
+const char *repo_id,const char *str
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_exception_add_handler_fn</NAME>
+<RETURNS>void  </RETURNS>
+const char *repo_id,BonoboExceptionFn fn,gpointer          user_data,GDestroyNotify    destroy_fn
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_exception_general_error_set</NAME>
+<RETURNS>void  </RETURNS>
+CORBA_Environment *ev,CORBA_TypeCode     opt_deriv,const char        *format,...
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_exception_general_error_get</NAME>
+<RETURNS>const char  *</RETURNS>
+CORBA_Environment *ev
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_GENERIC_FACTORY</NAME>
+#define BONOBO_TYPE_GENERIC_FACTORY        (bonobo_generic_factory_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_GENERIC_FACTORY_TYPE</NAME>
+#define BONOBO_GENERIC_FACTORY_TYPE        BONOBO_TYPE_GENERIC_FACTORY /* deprecated, you should use BONOBO_TYPE_GENERIC_FACTORY */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_GENERIC_FACTORY</NAME>
+#define BONOBO_GENERIC_FACTORY(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_GENERIC_FACTORY, BonoboGenericFactory))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_GENERIC_FACTORY_CLASS</NAME>
+#define BONOBO_GENERIC_FACTORY_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_GENERIC_FACTORY, BonoboGenericFactoryClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_GENERIC_FACTORY</NAME>
+#define BONOBO_IS_GENERIC_FACTORY(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_GENERIC_FACTORY))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_GENERIC_FACTORY_CLASS</NAME>
+#define BONOBO_IS_GENERIC_FACTORY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_GENERIC_FACTORY))
+</MACRO>
+<STRUCT>
+<NAME>BonoboGenericFactoryPrivate</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboGenericFactory</NAME>
+</STRUCT>
+<USER_FUNCTION>
+<NAME>BonoboFactoryCallback</NAME>
+<RETURNS>BonoboObject *</RETURNS>
+BonoboGenericFactory *factory,
+						 const char           *component_id,
+						 gpointer              closure
+</USER_FUNCTION>
+<STRUCT>
+<NAME>BonoboGenericFactory</NAME>
+struct BonoboGenericFactory {
+	BonoboObject                 base;
+
+	BonoboGenericFactoryPrivate *priv;
+};
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboGenericFactoryClass</NAME>
+typedef struct {
+	BonoboObjectClass            parent_class;
+
+	POA_Bonobo_GenericFactory__epv epv;
+
+	BonoboObject *(*new_generic) (BonoboGenericFactory *factory,
+				      const char           *act_iid);
+
+} BonoboGenericFactoryClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_generic_factory_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_generic_factory_new</NAME>
+<RETURNS>BonoboGenericFactory  *</RETURNS>
+const char           *act_iid,BonoboFactoryCallback factory_cb,gpointer              user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_generic_factory_new_closure</NAME>
+<RETURNS>BonoboGenericFactory  *</RETURNS>
+const char           *act_iid,GClosure             *factory_closure
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_generic_factory_construct</NAME>
+<RETURNS>BonoboGenericFactory  *</RETURNS>
+BonoboGenericFactory *factory,const char           *act_iid,GClosure             *factory_cb
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_generic_factory_construct_noreg</NAME>
+<RETURNS>void  </RETURNS>
+BonoboGenericFactory *factory,const char           *act_iid,GClosure             *factory_cb
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_generic_factory_main</NAME>
+<RETURNS>int  </RETURNS>
+const char           *act_iid,BonoboFactoryCallback factory_cb,gpointer              user_data
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_FACTORY_INIT</NAME>
+#define BONOBO_FACTORY_INIT(descr, version, argcp, argv)			\
+	if (!bonobo_ui_init (descr, version, argcp, argv))			\
+		g_error (_("Could not initialize Bonobo"));
+</MACRO>
+<MACRO>
+<NAME>BONOBO_FACTORY_INIT</NAME>
+#define BONOBO_FACTORY_INIT(desc, version, argcp, argv)				\
+	if (!bonobo_init (argcp, argv))						\
+		g_error (_("Could not initialize Bonobo"));
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OAF_FACTORY</NAME>
+#define BONOBO_OAF_FACTORY(oafiid, descr, version, callback, data)		\
+	BONOBO_ACTIVATION_FACTORY(oafiid, descr, version, callback, data)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OAF_FACTORY_MULTI</NAME>
+#define BONOBO_OAF_FACTORY_MULTI(oafiid, descr, version, callback, data)	\
+	BONOBO_ACTIVATION_FACTORY(oafiid, descr, version, callback, data)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ACTIVATION_FACTORY</NAME>
+#define BONOBO_ACTIVATION_FACTORY(oafiid, descr, version, callback, data)	\
+int main (int argc, char *argv [])						\
+{										\
+	BONOBO_FACTORY_INIT (descr, version, &argc, argv);			\
+									        \
+	return bonobo_generic_factory_main (oafiid, callback, data);		\
+}                                                                             
+</MACRO>
+<MACRO>
+<NAME>_</NAME>
+#        define _(String) dgettext (BONOBO_EXPLICIT_TRANSLATION_DOMAIN, String)
+</MACRO>
+<MACRO>
+<NAME>_</NAME>
+#        define _(String) gettext (String)
+</MACRO>
+<MACRO>
+<NAME>N_</NAME>
+#        define N_(String) gettext_noop (String)
+</MACRO>
+<MACRO>
+<NAME>N_</NAME>
+#        define N_(String) (String)
+</MACRO>
+<MACRO>
+<NAME>textdomain</NAME>
+#    define textdomain(String) (String)
+</MACRO>
+<MACRO>
+<NAME>gettext</NAME>
+#    define gettext(String) (String)
+</MACRO>
+<MACRO>
+<NAME>dgettext</NAME>
+#    define dgettext(Domain,Message) (Message)
+</MACRO>
+<MACRO>
+<NAME>dcgettext</NAME>
+#    define dcgettext(Domain,Message,Type) (Message)
+</MACRO>
+<MACRO>
+<NAME>bindtextdomain</NAME>
+#    define bindtextdomain(Domain,Directory) (Domain)
+</MACRO>
+<MACRO>
+<NAME>_</NAME>
+#    define _(String) (String)
+</MACRO>
+<MACRO>
+<NAME>N_</NAME>
+#    define N_(String) (String)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_ITEM_CONTAINER</NAME>
+#define BONOBO_TYPE_ITEM_CONTAINER        (bonobo_item_container_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ITEM_CONTAINER_TYPE</NAME>
+#define BONOBO_ITEM_CONTAINER_TYPE        BONOBO_TYPE_ITEM_CONTAINER /* deprecated, you should use BONOBO_TYPE_ITEM_CONTAINER */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ITEM_CONTAINER</NAME>
+#define BONOBO_ITEM_CONTAINER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_ITEM_CONTAINER, BonoboItemContainer))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ITEM_CONTAINER_CLASS</NAME>
+#define BONOBO_ITEM_CONTAINER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_ITEM_CONTAINER, BonoboItemContainerClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_ITEM_CONTAINER</NAME>
+#define BONOBO_IS_ITEM_CONTAINER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_ITEM_CONTAINER))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_ITEM_CONTAINER_CLASS</NAME>
+#define BONOBO_IS_ITEM_CONTAINER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_ITEM_CONTAINER))
+</MACRO>
+<TYPEDEF>
+<NAME>BonoboClientSiteList</NAME>
+typedef GList BonoboClientSiteList;
+</TYPEDEF>
+<STRUCT>
+<NAME>BonoboItemContainerPrivate</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboItemContainer</NAME>
+typedef struct {
+	BonoboObject base;
+
+	BonoboItemContainerPrivate *priv;
+} BonoboItemContainer;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboItemContainerClass</NAME>
+typedef struct {
+	BonoboObjectClass parent_class;
+
+	POA_Bonobo_ItemContainer__epv epv;
+
+	Bonobo_Unknown (*get_object) (BonoboItemContainer *item_container,
+				      CORBA_char          *item_name,
+				      CORBA_boolean        only_if_exists,
+				      CORBA_Environment   *ev);
+} BonoboItemContainerClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_item_container_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_item_container_new</NAME>
+<RETURNS>BonoboItemContainer  *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_item_container_add</NAME>
+<RETURNS>void  </RETURNS>
+BonoboItemContainer *container,const char          *name,BonoboObject        *object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_item_container_remove_by_name</NAME>
+<RETURNS>void  </RETURNS>
+BonoboItemContainer *container,const char          *name
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_ITEM_HANDLER</NAME>
+#define BONOBO_TYPE_ITEM_HANDLER        (bonobo_item_handler_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ITEM_HANDLER_TYPE</NAME>
+#define BONOBO_ITEM_HANDLER_TYPE        BONOBO_TYPE_ITEM_HANDLER /* deprecated, you should use BONOBO_TYPE_ITEM_HANDLER */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ITEM_HANDLER</NAME>
+#define BONOBO_ITEM_HANDLER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_ITEM_HANDLER, BonoboItemHandler))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ITEM_HANDLER_CLASS</NAME>
+#define BONOBO_ITEM_HANDLER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_ITEM_HANDLER, BonoboItemHandlerClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_ITEM_HANDLER</NAME>
+#define BONOBO_IS_ITEM_HANDLER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_ITEM_HANDLER))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_ITEM_HANDLER_CLASS</NAME>
+#define BONOBO_IS_ITEM_HANDLER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_ITEM_HANDLER))
+</MACRO>
+<STRUCT>
+<NAME>BonoboItemHandlerPrivate</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboItemHandler</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboItemHandler</NAME>
+struct BonoboItemHandler {
+	BonoboObject base;
+
+	POA_Bonobo_ItemContainer__epv epv;
+
+	BonoboItemHandlerPrivate      *priv;
+};
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboItemHandlerClass</NAME>
+typedef struct {
+	BonoboObjectClass parent_class;
+
+	POA_Bonobo_ItemContainer__epv epv;
+} BonoboItemHandlerClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_item_handler_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_item_handler_new</NAME>
+<RETURNS>BonoboItemHandler    *</RETURNS>
+BonoboItemHandlerEnumObjectsFn enum_objects,BonoboItemHandlerGetObjectFn   get_object,gpointer                       user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_item_handler_new_closure</NAME>
+<RETURNS>BonoboItemHandler    *</RETURNS>
+GClosure *enum_objects,GClosure *get_object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_item_handler_construct</NAME>
+<RETURNS>BonoboItemHandler    *</RETURNS>
+BonoboItemHandler *handler,GClosure          *enum_objects,GClosure          *get_object
+</FUNCTION>
+<TYPEDEF>
+<NAME>BonoboItemOption</NAME>
+typedef struct {
+	char *key;
+	char *value;
+} BonoboItemOption;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_item_option_parse</NAME>
+<RETURNS>GSList  *</RETURNS>
+const char *option_string
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_item_options_free</NAME>
+<RETURNS>void  </RETURNS>
+GSList *options
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_LISTENER</NAME>
+#define BONOBO_TYPE_LISTENER        (bonobo_listener_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_LISTENER_TYPE</NAME>
+#define BONOBO_LISTENER_TYPE        BONOBO_TYPE_LISTENER /* deprecated, you should use BONOBO_TYPE_LISTENER */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_LISTENER</NAME>
+#define BONOBO_LISTENER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_LISTENER, BonoboListener))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_LISTENER_CLASS</NAME>
+#define BONOBO_LISTENER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_LISTENER, BonoboListenerClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_LISTENER</NAME>
+#define BONOBO_IS_LISTENER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_LISTENER))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_LISTENER_CLASS</NAME>
+#define BONOBO_IS_LISTENER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_LISTENER))
+</MACRO>
+<STRUCT>
+<NAME>BonoboListenerPrivate</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboListener</NAME>
+typedef struct {
+        BonoboObject          parent;
+
+	BonoboListenerPrivate *priv;
+} BonoboListener;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboListenerClass</NAME>
+typedef struct {
+	BonoboObjectClass     parent_class;
+
+	POA_Bonobo_Listener__epv epv;
+
+	/* Signals */
+	void (* event_notify) (BonoboListener    *listener, 
+			       char              *event_name,
+			       BonoboArg         *event_data, 
+			       CORBA_Environment *ev);
+} BonoboListenerClass;
+</TYPEDEF>
+<USER_FUNCTION>
+<NAME>BonoboListenerCallbackFn</NAME>
+<RETURNS>void </RETURNS>
+BonoboListener    *listener,
+					     const char        *event_name, 
+					     const CORBA_any   *any,
+					     CORBA_Environment *ev,
+					     gpointer           user_data
+</USER_FUNCTION>
+<FUNCTION>
+<NAME>bonobo_listener_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_listener_new</NAME>
+<RETURNS>BonoboListener  *</RETURNS>
+BonoboListenerCallbackFn event_cb,gpointer                 user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_listener_new_closure</NAME>
+<RETURNS>BonoboListener  *</RETURNS>
+GClosure                *event_closure
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_make_name</NAME>
+<RETURNS>char            *</RETURNS>
+const char *idl_path,const char *kind,const char *subtype
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_type</NAME>
+<RETURNS>char            *</RETURNS>
+const char *event_name
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_subtype</NAME>
+<RETURNS>char            *</RETURNS>
+const char *event_name
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_kind</NAME>
+<RETURNS>char            *</RETURNS>
+const char *event_name
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_event_idl_path</NAME>
+<RETURNS>char            *</RETURNS>
+const char *event_name
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_BOILERPLATE</NAME>
+#define BONOBO_BOILERPLATE(type, type_as_function, corba_type,		\
+			   parent_type, parent_type_macro,		\
+			   register_type_macro)				\
+static void type_as_function ## _class_init    (type ## Class *klass);	\
+static void type_as_function ## _instance_init (type          *object);	\
+static parent_type ## Class *parent_class = NULL;			\
+static void								\
+type_as_function ## _class_init_trampoline (gpointer klass,		\
+					    gpointer data)		\
+{									\
+	parent_class = g_type_class_ref (parent_type_macro);		\
+	type_as_function ## _class_init (klass);			\
+}									\
+GType									\
+type_as_function ## _get_type (void)					\
+{									\
+	static GType object_type = 0;					\
+	if (object_type == 0) {						\
+		static const GTypeInfo object_info = {			\
+		    sizeof (type ## Class),				\
+		    NULL,		/* base_init */			\
+		    NULL,		/* base_finalize */		\
+		    type_as_function ## _class_init_trampoline,		\
+		    NULL,		/* class_finalize */		\
+		    NULL,               /* class_data */		\
+		    sizeof (type),					\
+		    0,                  /* n_preallocs */		\
+		    (GInstanceInitFunc) type_as_function ## _instance_init \
+		};							\
+		object_type = register_type_macro			\
+			(type, type_as_function, corba_type,		\
+			 parent_type, parent_type_macro);		\
+	}								\
+	return object_type;						\
+}
+</MACRO>
+<MACRO>
+<NAME>BONOBO_CALL_PARENT</NAME>
+#define BONOBO_CALL_PARENT(parent_class_cast, name, args)		\
+	((parent_class_cast(parent_class)->name != NULL) ?		\
+	 parent_class_cast(parent_class)->name args : (void)0)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_CALL_PARENT_WITH_DEFAULT</NAME>
+#define BONOBO_CALL_PARENT_WITH_DEFAULT(parent_class_cast,		\
+					name, args, def_return)		\
+	((parent_class_cast(parent_class)->name != NULL) ?		\
+	 parent_class_cast(parent_class)->name args : def_return)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_CLASS_BOILERPLATE</NAME>
+#define BONOBO_CLASS_BOILERPLATE(type, type_as_function,		\
+				 parent_type, parent_type_macro)	\
+	BONOBO_BOILERPLATE(type, type_as_function, type,		\
+			   parent_type, parent_type_macro,		\
+			   BONOBO_REGISTER_TYPE)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_REGISTER_TYPE</NAME>
+#define BONOBO_REGISTER_TYPE(type, type_as_function, corba_type,	\
+			     parent_type, parent_type_macro)		\
+	bonobo_type_unique (parent_type_macro, NULL, NULL, 0,		\
+			    &object_info, #type)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_CLASS_BOILERPLATE_FULL</NAME>
+#define BONOBO_CLASS_BOILERPLATE_FULL(type, type_as_function,		\
+				      corba_type,			\
+				      parent_type, parent_type_macro)	\
+	BONOBO_BOILERPLATE(type, type_as_function, corba_type,		\
+			   parent_type, parent_type_macro,		\
+			   BONOBO_REGISTER_TYPE_FULL)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_REGISTER_TYPE_FULL</NAME>
+#define BONOBO_REGISTER_TYPE_FULL(type, type_as_function, corba_type,	\
+				  parent_type, parent_type_macro)	\
+	bonobo_type_unique (parent_type_macro,				\
+			    POA_##corba_type##__init,			\
+			    POA_##corba_type##__fini,			\
+			    G_STRUCT_OFFSET (type##Class, epv),		\
+			    &object_info, #type)
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_is_initialized</NAME>
+<RETURNS>gboolean  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_init</NAME>
+<RETURNS>gboolean 	</RETURNS>
+int *argc,char **argv
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_init_full</NAME>
+<RETURNS>gboolean  </RETURNS>
+int *argc,char **argv,CORBA_ORB orb,PortableServer_POA poa,PortableServer_POAManager manager
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_debug_shutdown</NAME>
+<RETURNS>int  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_main</NAME>
+<RETURNS>void 	</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_main_quit</NAME>
+<RETURNS>void  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_activate</NAME>
+<RETURNS>gboolean 	</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_setup_x_error_handler</NAME>
+<RETURNS>void 	</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_orb</NAME>
+<RETURNS>CORBA_ORB 	</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_poa</NAME>
+<RETURNS>PortableServer_POA 	</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_poa_manager</NAME>
+<RETURNS>PortableServer_POAManager  </RETURNS>
+void
+</FUNCTION>
+<STRUCT>
+<NAME>BonoboMonikerContextPrivate</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboMonikerContext</NAME>
+typedef struct {
+	BonoboObject parent;
+
+	BonoboMonikerContextPrivate *priv;
+} BonoboMonikerContext;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboMonikerContextClass</NAME>
+typedef struct {
+	BonoboObjectClass parent;
+
+	POA_Bonobo_MonikerContext__epv epv;
+} BonoboMonikerContextClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_moniker_context_new</NAME>
+<RETURNS>BonoboObject  *</RETURNS>
+void
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_MONIKER_EXTENDER</NAME>
+#define BONOBO_TYPE_MONIKER_EXTENDER        (bonobo_moniker_extender_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER_EXTENDER_TYPE</NAME>
+#define BONOBO_MONIKER_EXTENDER_TYPE        BONOBO_TYPE_MONIKER_EXTENDER /* deprecated, you should use BONOBO_TYPE_MONIKER_EXTENDER */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER_EXTENDER</NAME>
+#define BONOBO_MONIKER_EXTENDER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_MONIKER_EXTENDER, BonoboMonikerExtender))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER_EXTENDER_CLASS</NAME>
+#define BONOBO_MONIKER_EXTENDER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_MONIKER_EXTENDER, BonoboMonikerExtenderClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_MONIKER_EXTENDER</NAME>
+#define BONOBO_IS_MONIKER_EXTENDER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_MONIKER_EXTENDER))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_MONIKER_EXTENDER_CLASS</NAME>
+#define BONOBO_IS_MONIKER_EXTENDER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_MONIKER_EXTENDER))
+</MACRO>
+<STRUCT>
+<NAME>BonoboMonikerExtender</NAME>
+</STRUCT>
+<USER_FUNCTION>
+<NAME>BonoboMonikerExtenderFn</NAME>
+<RETURNS>Bonobo_Unknown </RETURNS>
+BonoboMonikerExtender       *extender,
+						   const Bonobo_Moniker         parent,
+						   const Bonobo_ResolveOptions *options,
+						   const CORBA_char            *display_name,
+						   const CORBA_char            *requested_interface,
+						   CORBA_Environment           *ev
+</USER_FUNCTION>
+<STRUCT>
+<NAME>BonoboMonikerExtender</NAME>
+struct BonoboMonikerExtender {
+        BonoboObject           object;
+	BonoboMonikerExtenderFn resolve;
+	gpointer                data;
+};
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboMonikerExtenderClass</NAME>
+typedef struct {
+	BonoboObjectClass      parent_class;
+
+	POA_Bonobo_MonikerExtender__epv epv;
+	
+	BonoboMonikerExtenderFn resolve;
+} BonoboMonikerExtenderClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_moniker_extender_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_extender_new</NAME>
+<RETURNS>BonoboMonikerExtender  *</RETURNS>
+BonoboMonikerExtenderFn      resolve,gpointer                     data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_find_extender</NAME>
+<RETURNS>Bonobo_MonikerExtender  </RETURNS>
+const gchar                 *name,const gchar                 *interface,CORBA_Environment           *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_use_extender</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+const gchar                 *extender_oafiid,BonoboMoniker               *moniker,const Bonobo_ResolveOptions *options,const CORBA_char            *requested_interface,CORBA_Environment           *opt_ev
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_MONIKER_SIMPLE</NAME>
+#define BONOBO_TYPE_MONIKER_SIMPLE        (bonobo_moniker_simple_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER_SIMPLE_TYPE</NAME>
+#define BONOBO_MONIKER_SIMPLE_TYPE        BONOBO_TYPE_MONIKER_SIMPLE /* deprecated, you should use BONOBO_TYPE_MONIKER_SIMPLE */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER_SIMPLE</NAME>
+#define BONOBO_MONIKER_SIMPLE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_MONIKER_SIMPLE, BonoboMonikerSimple))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER_SIMPLE_CLASS</NAME>
+#define BONOBO_MONIKER_SIMPLE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_MONIKER_SIMPLE, BonoboMonikerSimpleClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_MONIKER_SIMPLE</NAME>
+#define BONOBO_IS_MONIKER_SIMPLE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_MONIKER_SIMPLE))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_MONIKER_SIMPLE_CLASS</NAME>
+#define BONOBO_IS_MONIKER_SIMPLE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_MONIKER_SIMPLE))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_RESOLVE_FLAG</NAME>
+#define BONOBO_TYPE_RESOLVE_FLAG          (bonobo_resolve_flag_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_RESOLVE_FLAG_TYPE</NAME>
+#define BONOBO_RESOLVE_FLAG_TYPE        BONOBO_TYPE_RESOLVE_FLAG /* deprecated, you should use BONOBO_TYPE_RESOLVE_FLAG */
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_resolve_flag_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<STRUCT>
+<NAME>BonoboMonikerSimple</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboMonikerSimplePrivate</NAME>
+</STRUCT>
+<USER_FUNCTION>
+<NAME>BonoboMonikerSimpleResolveFn</NAME>
+<RETURNS>Bonobo_Unknown </RETURNS>
+BonoboMoniker               *moniker,
+							const Bonobo_ResolveOptions *options,
+							const CORBA_char            *requested_interface,
+							CORBA_Environment           *ev
+</USER_FUNCTION>
+<STRUCT>
+<NAME>BonoboMonikerSimple</NAME>
+struct BonoboMonikerSimple {
+        BonoboMoniker                moniker;
+
+	BonoboMonikerSimplePrivate  *priv;
+};
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboMonikerSimpleClass</NAME>
+typedef struct {
+	BonoboMonikerClass parent_class;
+} BonoboMonikerSimpleClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_moniker_simple_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_simple_construct</NAME>
+<RETURNS>BonoboMoniker  *</RETURNS>
+BonoboMonikerSimple         *moniker,const char                  *name,GClosure                    *resolve_closure
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_simple_new</NAME>
+<RETURNS>BonoboMoniker  *</RETURNS>
+const char                  *name,BonoboMonikerSimpleResolveFn resolve_fn
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_simple_new_closure</NAME>
+<RETURNS>BonoboMoniker  *</RETURNS>
+const char                  *name,GClosure                    *resolve_closure
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_get_object</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+const CORBA_char        *name,const char              *interface_name,CORBA_Environment       *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_client_new_from_name</NAME>
+<RETURNS>Bonobo_Moniker  </RETURNS>
+const CORBA_char        *name,CORBA_Environment       *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_client_get_name</NAME>
+<RETURNS>CORBA_char          *</RETURNS>
+Bonobo_Moniker     moniker,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_client_resolve_default</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+Bonobo_Moniker     moniker,const char        *interface_name,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_client_equal</NAME>
+<RETURNS>gboolean  </RETURNS>
+Bonobo_Moniker     moniker,const CORBA_char  *name,CORBA_Environment *opt_ev
+</FUNCTION>
+<USER_FUNCTION>
+<NAME>BonoboMonikerAsyncFn</NAME>
+<RETURNS>void </RETURNS>
+Bonobo_Unknown     object,
+				      CORBA_Environment *ev,
+				      gpointer           user_data
+</USER_FUNCTION>
+<FUNCTION>
+<NAME>bonobo_get_object_async</NAME>
+<RETURNS>void  </RETURNS>
+const CORBA_char        *name,const char              *interface_name,CORBA_Environment       *ev,BonoboMonikerAsyncFn     cb,gpointer                 user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_client_new_from_name_async</NAME>
+<RETURNS>void  </RETURNS>
+const CORBA_char        *name,CORBA_Environment       *ev,BonoboMonikerAsyncFn     cb,gpointer                 user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_resolve_async</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Moniker           moniker,Bonobo_ResolveOptions   *options,const char              *interface_name,CORBA_Environment       *ev,BonoboMonikerAsyncFn     cb,gpointer                 user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_resolve_async_default</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Moniker           moniker,const char              *interface_name,CORBA_Environment       *ev,BonoboMonikerAsyncFn     cb,gpointer                 user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_util_get_parent_name</NAME>
+<RETURNS>CORBA_char     *</RETURNS>
+Bonobo_Moniker     moniker,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_util_qi_return</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+Bonobo_Unknown     object,const CORBA_char  *requested_interface,CORBA_Environment *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_util_parse_name</NAME>
+<RETURNS>const char     *</RETURNS>
+const char        *name,int               *plen
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_util_seek_std_separator</NAME>
+<RETURNS>int  </RETURNS>
+const CORBA_char  *str,int                min_idx
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_util_escape</NAME>
+<RETURNS>char           *</RETURNS>
+const char        *string,int                offset
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_util_unescape</NAME>
+<RETURNS>char           *</RETURNS>
+const char        *string,int                num_chars
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_url_register</NAME>
+<RETURNS>void  </RETURNS>
+char              *oafiid,char              *url,char              *mime_type,Bonobo_Unknown     object,CORBA_Environment *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_url_unregister</NAME>
+<RETURNS>void  </RETURNS>
+char              *oafiid,char              *url,CORBA_Environment *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_url_lookup</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+char              *oafiid,char              *url,CORBA_Environment *ev
+</FUNCTION>
+<STRUCT>
+<NAME>BonoboMonikerPrivate</NAME>
+</STRUCT>
+<MACRO>
+<NAME>BONOBO_TYPE_MONIKER</NAME>
+#define BONOBO_TYPE_MONIKER        (bonobo_moniker_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER_TYPE</NAME>
+#define BONOBO_MONIKER_TYPE        BONOBO_TYPE_MONIKER /* deprecated, you should use BONOBO_TYPE_MONIKER */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER</NAME>
+#define BONOBO_MONIKER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_MONIKER, BonoboMoniker))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_MONIKER_CLASS</NAME>
+#define BONOBO_MONIKER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_MONIKER, BonoboMonikerClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_MONIKER</NAME>
+#define BONOBO_IS_MONIKER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_MONIKER))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_MONIKER_CLASS</NAME>
+#define BONOBO_IS_MONIKER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_MONIKER))
+</MACRO>
+<TYPEDEF>
+<NAME>BonoboMoniker</NAME>
+typedef struct {
+        BonoboObject         object;
+	
+	BonoboMonikerPrivate *priv;
+} BonoboMoniker;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboMonikerClass</NAME>
+typedef struct {
+	BonoboObjectClass      parent_class;
+
+	POA_Bonobo_Moniker__epv epv;
+
+	/* virtual methods */
+	Bonobo_Unknown (*resolve)            (BonoboMoniker               *moniker,
+					      const Bonobo_ResolveOptions *options,
+					      const CORBA_char            *requested_interface,
+					      CORBA_Environment           *ev);
+
+	void           (*set_internal_name)  (BonoboMoniker               *moniker,
+					      const char                  *unescaped_name);
+	const char    *(*get_internal_name)  (BonoboMoniker               *moniker);
+
+	gpointer        dummy;
+} BonoboMonikerClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_moniker_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_construct</NAME>
+<RETURNS>BonoboMoniker  *</RETURNS>
+BonoboMoniker     *moniker,const char        *prefix
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_get_parent</NAME>
+<RETURNS>Bonobo_Moniker  </RETURNS>
+BonoboMoniker     *moniker,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_set_parent</NAME>
+<RETURNS>void  </RETURNS>
+BonoboMoniker     *moniker,Bonobo_Moniker     parent,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_get_name</NAME>
+<RETURNS>const char     *</RETURNS>
+BonoboMoniker     *moniker
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_get_name_full</NAME>
+<RETURNS>const char     *</RETURNS>
+BonoboMoniker     *moniker
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_get_name_escaped</NAME>
+<RETURNS>char           *</RETURNS>
+BonoboMoniker     *moniker
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_set_name</NAME>
+<RETURNS>void  </RETURNS>
+BonoboMoniker     *moniker,const char        *unescaped_name
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_get_prefix</NAME>
+<RETURNS>const char     *</RETURNS>
+BonoboMoniker     *moniker
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_set_case_sensitive</NAME>
+<RETURNS>void  </RETURNS>
+BonoboMoniker     *moniker,gboolean           sensitive
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_moniker_get_case_sensitive</NAME>
+<RETURNS>gboolean  </RETURNS>
+BonoboMoniker     *moniker
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_OBJECT</NAME>
+#define BONOBO_TYPE_OBJECT        (bonobo_object_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OBJECT_TYPE</NAME>
+#define BONOBO_OBJECT_TYPE        BONOBO_TYPE_OBJECT /* deprecated, you should use BONOBO_TYPE_OBJECT */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OBJECT</NAME>
+#define BONOBO_OBJECT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_OBJECT, BonoboObject))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OBJECT_CLASS</NAME>
+#define BONOBO_OBJECT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_OBJECT, BonoboObjectClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_OBJECT</NAME>
+#define BONOBO_IS_OBJECT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_OBJECT))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_OBJECT_CLASS</NAME>
+#define BONOBO_IS_OBJECT_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_OBJECT))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OBJECT_GET_CLASS</NAME>
+#define BONOBO_OBJECT_GET_CLASS(o)(G_TYPE_INSTANCE_GET_CLASS ((o), BONOBO_TYPE_OBJECT, BonoboObjectClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OBJREF</NAME>
+#define BONOBO_OBJREF(o)          (bonobo_object_corba_objref(BONOBO_OBJECT(o)))
+</MACRO>
+<USER_FUNCTION>
+<NAME>BonoboObjectPOAFn</NAME>
+<RETURNS>void </RETURNS>
+PortableServer_Servant servant,
+				    CORBA_Environment     *ev
+</USER_FUNCTION>
+<STRUCT>
+<NAME>BonoboObjectPrivate</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboObjectHeader</NAME>
+typedef struct {
+	GObject              base;             /* pointer + guint + pointer */
+	BonoboObjectPrivate *priv;             /* pointer */
+	guint                object_signature; /* guint   */
+} BonoboObjectHeader;
+</TYPEDEF>
+<MACRO>
+<NAME>BONOBO_OBJECT_HEADER_SIZE</NAME>
+#define BONOBO_OBJECT_HEADER_SIZE (sizeof (BonoboObjectHeader))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OBJECT_SIGNATURE</NAME>
+#define BONOBO_OBJECT_SIGNATURE   0xaef2
+</MACRO>
+<MACRO>
+<NAME>BONOBO_SERVANT_SIGNATURE</NAME>
+#define BONOBO_SERVANT_SIGNATURE  0x2fae
+</MACRO>
+<TYPEDEF>
+<NAME>BonoboObject</NAME>
+typedef struct {
+	/* A GObject and its signature of type BonoboObjectHeader */
+	GObject              base;             /* pointer + guint + pointer */
+	BonoboObjectPrivate *priv;             /* pointer */
+	guint                object_signature; /* guint   */
+
+	/* A Servant and its signature - same memory layout */
+	POA_Bonobo_Unknown   servant;          /* pointer + pointer */
+	guint                dummy;            /* guint   */
+	Bonobo_Unknown       corba_objref;     /* pointer */
+	guint                servant_signature;
+} BonoboObject;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboObjectClass</NAME>
+typedef struct {
+	GObjectClass parent_class;
+
+	/* signals. */
+	void         (*destroy)          (BonoboObject *object);
+	void         (*system_exception) (BonoboObject *object,
+					  CORBA_Object  cobject,
+					  CORBA_Environment *ev);
+
+	BonoboObjectPOAFn          poa_init_fn;
+	BonoboObjectPOAFn          poa_fini_fn;
+
+	POA_Bonobo_Unknown__vepv       *vepv;
+
+	/* The offset of this class' additional epv */
+	int                             epv_struct_offset;
+
+	PortableServer_ServantBase__epv base_epv;
+	POA_Bonobo_Unknown__epv         epv;
+} BonoboObjectClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_object_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_add_interface</NAME>
+<RETURNS>void  </RETURNS>
+BonoboObject           *object,BonoboObject           *newobj
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_query_local_interface</NAME>
+<RETURNS>BonoboObject             *</RETURNS>
+BonoboObject           *object,const char             *repo_id
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_query_interface</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+BonoboObject           *object,const char             *repo_id,CORBA_Environment      *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_corba_objref</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+BonoboObject           *object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_dup_ref</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+Bonobo_Unknown          object,CORBA_Environment      *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_release_unref</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+Bonobo_Unknown          object,CORBA_Environment      *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_ref</NAME>
+<RETURNS>gpointer  </RETURNS>
+BonoboObject           *object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_idle_unref</NAME>
+<RETURNS>void  </RETURNS>
+BonoboObject           *object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_unref</NAME>
+<RETURNS>gpointer  </RETURNS>
+BonoboObject           *object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_set_immortal</NAME>
+<RETURNS>void  </RETURNS>
+BonoboObject           *object,gboolean                immortal
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_trace_refs</NAME>
+<RETURNS>gpointer  </RETURNS>
+BonoboObject *object,const char   *fn,int           line,gboolean      ref
+</FUNCTION>
+<MACRO>
+<NAME>bonobo_object_ref</NAME>
+#	define           bonobo_object_ref(o)   G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>bonobo_object_unref</NAME>
+#	define           bonobo_object_unref(o) G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,FALSE);}G_STMT_END
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_object_dump_interfaces</NAME>
+<RETURNS>void  </RETURNS>
+BonoboObject *object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_check_env</NAME>
+<RETURNS>void  </RETURNS>
+BonoboObject           *object,CORBA_Object            corba_object,CORBA_Environment      *ev
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_OBJECT_CHECK</NAME>
+#define BONOBO_OBJECT_CHECK(o,c,e)				\
+			G_STMT_START {				\
+			if ((e)->_major != CORBA_NO_EXCEPTION)	\
+				bonobo_object_check_env(o,c,e);	\
+			} G_STMT_END
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_unknown_ping</NAME>
+<RETURNS>gboolean  </RETURNS>
+Bonobo_Unknown     object,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_list_unref_all</NAME>
+<RETURNS>void  </RETURNS>
+GList            **list
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_slist_unref_all</NAME>
+<RETURNS>void  </RETURNS>
+GSList           **list
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object</NAME>
+<RETURNS>BonoboObject  *</RETURNS>
+gpointer p
+</FUNCTION>
+<MACRO>
+<NAME>bonobo_object_fast</NAME>
+#define       bonobo_object_fast(o) \
+	((((BonoboObjectHeader *)(o))->object_signature == BONOBO_OBJECT_SIGNATURE) ? \
+	 (BonoboObject *)(o) : (BonoboObject *)(((guchar *) (o)) - BONOBO_OBJECT_HEADER_SIZE))
+</MACRO>
+<MACRO>
+<NAME>bonobo_object_from_servant</NAME>
+#define       bonobo_object_from_servant(s) ((BonoboObject *)(((guchar *) (s)) - BONOBO_OBJECT_HEADER_SIZE))
+</MACRO>
+<MACRO>
+<NAME>bonobo_object_get_servant</NAME>
+#define       bonobo_object_get_servant(o)  ((PortableServer_Servant)((guchar *)(o) + BONOBO_OBJECT_HEADER_SIZE))
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_type_unique</NAME>
+<RETURNS>GType  </RETURNS>
+GType             parent_type,BonoboObjectPOAFn init_fn,BonoboObjectPOAFn fini_fn,int               epv_struct_offset,const GTypeInfo  *info,const gchar      *type_name
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_type_setup</NAME>
+<RETURNS>gboolean  </RETURNS>
+GType             type,BonoboObjectPOAFn init_fn,BonoboObjectPOAFn fini_fn,int               epv_struct_offset
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_FUNC_FULL</NAME>
+#define BONOBO_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)         \
+GType                                                                         \
+prefix##_get_type (void)                                                      \
+{                                                                             \
+	GType ptype;                                                          \
+	static GType type = 0;                                                \
+                                                                              \
+	if (type == 0) {                                                      \
+		static GTypeInfo info = {                                     \
+			sizeof (class_name##Class),                           \
+			(GBaseInitFunc) NULL,                                 \
+			(GBaseFinalizeFunc) NULL,                             \
+			(GClassInitFunc) prefix##_class_init,                 \
+			NULL, NULL,                                           \
+			sizeof (class_name),                                  \
+			0,                                                    \
+			(GInstanceInitFunc) prefix##_init                     \
+		};                                                            \
+		ptype = (parent);                                             \
+		type = bonobo_type_unique (ptype,                             \
+			POA_##corba_name##__init, POA_##corba_name##__fini,   \
+			G_STRUCT_OFFSET (class_name##Class, epv),             \
+			&info, #class_name);                                  \
+	}                                                                     \
+	return type;                                                          \
+}
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_FUNC</NAME>
+#define BONOBO_TYPE_FUNC(class_name, parent, prefix)                        \
+GType                                                                         \
+prefix##_get_type (void)                                                      \
+{                                                                             \
+	GType ptype;                                                          \
+	static GType type = 0;                                                \
+                                                                              \
+	if (type == 0) {                                                      \
+		static GTypeInfo info = {                                     \
+			sizeof (class_name##Class),                           \
+			(GBaseInitFunc) NULL,                                 \
+			(GBaseFinalizeFunc) NULL,                             \
+			(GClassInitFunc) prefix##_class_init,                 \
+			NULL, NULL,                                           \
+			sizeof (class_name),                                  \
+			0,                                                    \
+			(GInstanceInitFunc) prefix##_init                     \
+		};                                                            \
+		ptype = (parent);                                             \
+		type = bonobo_type_unique (ptype, NULL, NULL, 0,              \
+				           &info, #class_name);               \
+	}                                                                     \
+	return type;                                                          \
+}
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_object_save_to_stream</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Unknown     object,Bonobo_Stream      stream,CORBA_Environment *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_from_stream</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+Bonobo_Stream      stream,CORBA_Environment *opt_ev
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_PERSIST_FILE</NAME>
+#define BONOBO_TYPE_PERSIST_FILE (bonobo_persist_file_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST_FILE_TYPE</NAME>
+#define BONOBO_PERSIST_FILE_TYPE        BONOBO_TYPE_PERSIST_FILE /* deprecated, you should use BONOBO_TYPE_PERSIST_FILE */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST_FILE</NAME>
+#define BONOBO_PERSIST_FILE(o)   (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PERSIST_FILE, BonoboPersistFile))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST_FILE_CLASS</NAME>
+#define BONOBO_PERSIST_FILE_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PERSIST_FILE, BonoboPersistFileClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_PERSIST_FILE</NAME>
+#define BONOBO_IS_PERSIST_FILE(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PERSIST_FILE))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_PERSIST_FILE_CLASS</NAME>
+#define BONOBO_IS_PERSIST_FILE_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_PERSIST_FILE))
+</MACRO>
+<STRUCT>
+<NAME>BonoboPersistFilePrivate</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboPersistFile</NAME>
+</STRUCT>
+<USER_FUNCTION>
+<NAME>BonoboPersistFileIOFn</NAME>
+<RETURNS>int </RETURNS>
+BonoboPersistFile *pf,
+				      const CORBA_char  *filename,
+				      CORBA_Environment *ev,
+				      void              *closure
+</USER_FUNCTION>
+<STRUCT>
+<NAME>BonoboPersistFile</NAME>
+struct BonoboPersistFile {
+	BonoboPersist persist;
+
+	char *filename;
+
+	/*
+	 * For the sample routines, NULL if we use the ::save and ::load
+	 * methods from the class
+	 */
+	BonoboPersistFileIOFn  save_fn;
+	BonoboPersistFileIOFn  load_fn;
+	void *closure;
+
+	BonoboPersistFilePrivate *priv;
+};
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboPersistFileClass</NAME>
+typedef struct {
+	BonoboPersistClass parent_class;
+
+	POA_Bonobo_PersistFile__epv epv;
+
+	/* methods */
+	int   (*load)             (BonoboPersistFile *ps,
+				   const CORBA_char  *filename,
+				   CORBA_Environment *ev);
+
+	int   (*save)             (BonoboPersistFile *ps,
+				   const CORBA_char  *filename,
+				   CORBA_Environment *ev);
+
+	char *(*get_current_file) (BonoboPersistFile *ps,
+				   CORBA_Environment *ev);
+
+} BonoboPersistFileClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_persist_file_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_persist_file_new</NAME>
+<RETURNS>BonoboPersistFile  *</RETURNS>
+BonoboPersistFileIOFn load_fn,BonoboPersistFileIOFn save_fn,const gchar          *iid,void                 *closure
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_persist_file_construct</NAME>
+<RETURNS>BonoboPersistFile  *</RETURNS>
+BonoboPersistFile    *ps,BonoboPersistFileIOFn load_fn,BonoboPersistFileIOFn save_fn,const gchar          *iid,void                 *closure
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_PERSIST_STREAM</NAME>
+#define BONOBO_TYPE_PERSIST_STREAM        (bonobo_persist_stream_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST_STREAM_TYPE</NAME>
+#define BONOBO_PERSIST_STREAM_TYPE        BONOBO_TYPE_PERSIST_STREAM /* deprecated, you should use BONOBO_TYPE_PERSIST_STREAM */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST_STREAM</NAME>
+#define BONOBO_PERSIST_STREAM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PERSIST_STREAM, BonoboPersistStream))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST_STREAM_CLASS</NAME>
+#define BONOBO_PERSIST_STREAM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PERSIST_STREAM, BonoboPersistStreamClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_PERSIST_STREAM</NAME>
+#define BONOBO_IS_PERSIST_STREAM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PERSIST_STREAM))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_PERSIST_STREAM_CLASS</NAME>
+#define BONOBO_IS_PERSIST_STREAM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_PERSIST_STREAM))
+</MACRO>
+<STRUCT>
+<NAME>BonoboPersistStreamPrivate</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboPersistStream</NAME>
+</STRUCT>
+<USER_FUNCTION>
+<NAME>BonoboPersistStreamIOFn</NAME>
+<RETURNS>void </RETURNS>
+BonoboPersistStream         *ps,
+					  const Bonobo_Stream         stream,
+					  Bonobo_Persist_ContentType  type,
+					  void                       *closure,
+					  CORBA_Environment          *ev
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>BonoboPersistStreamTypesFn</NAME>
+<RETURNS>Bonobo_Persist_ContentTypeList *</RETURNS>
+BonoboPersistStream *ps,
+									void                *closure,
+									CORBA_Environment   *ev
+</USER_FUNCTION>
+<STRUCT>
+<NAME>BonoboPersistStream</NAME>
+struct BonoboPersistStream {
+	BonoboPersist persist;
+
+	gboolean     is_dirty;
+
+	/*
+	 * For the sample routines, NULL if we use the
+	 * methods from the class
+	 */
+	BonoboPersistStreamIOFn     save_fn;
+	BonoboPersistStreamIOFn     load_fn;
+	BonoboPersistStreamTypesFn  types_fn;
+	
+	void                       *closure;
+
+	BonoboPersistStreamPrivate *priv;
+};
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboPersistStreamClass</NAME>
+typedef struct {
+	BonoboPersistClass parent_class;
+
+	POA_Bonobo_PersistStream__epv epv;
+
+	/* methods */
+	void       (*load)         (BonoboPersistStream        *ps,
+				    Bonobo_Stream              stream,
+				    Bonobo_Persist_ContentType type,
+				    CORBA_Environment          *ev);
+	void       (*save)         (BonoboPersistStream        *ps,
+				    Bonobo_Stream              stream,
+				    Bonobo_Persist_ContentType type,
+				    CORBA_Environment          *ev);
+
+	Bonobo_Persist_ContentTypeList * (*get_content_types) (BonoboPersistStream *ps,
+							       CORBA_Environment   *ev);
+
+} BonoboPersistStreamClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_persist_stream_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_persist_stream_new</NAME>
+<RETURNS>BonoboPersistStream  *</RETURNS>
+BonoboPersistStreamIOFn    load_fn,BonoboPersistStreamIOFn    save_fn,BonoboPersistStreamTypesFn types_fn,const gchar               *iid,void                      *closure
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_persist_stream_construct</NAME>
+<RETURNS>BonoboPersistStream  *</RETURNS>
+BonoboPersistStream       *ps,BonoboPersistStreamIOFn    load_fn,BonoboPersistStreamIOFn    save_fn,BonoboPersistStreamTypesFn types_fn,const gchar               *iid,void                      *closure
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_PERSIST</NAME>
+#define BONOBO_TYPE_PERSIST        (bonobo_persist_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST_TYPE</NAME>
+#define BONOBO_PERSIST_TYPE        BONOBO_TYPE_PERSIST /* deprecated, you should use BONOBO_TYPE_PERSIST */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST</NAME>
+#define BONOBO_PERSIST(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PERSIST, BonoboPersist))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PERSIST_CLASS</NAME>
+#define BONOBO_PERSIST_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PERSIST, BonoboPersistClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_PERSIST</NAME>
+#define BONOBO_IS_PERSIST(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PERSIST))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_PERSIST_CLASS</NAME>
+#define BONOBO_IS_PERSIST_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_PERSIST))
+</MACRO>
+<STRUCT>
+<NAME>BonoboPersistPrivate</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboPersist</NAME>
+typedef struct {
+	BonoboObject object;
+
+	BonoboPersistPrivate *priv;
+} BonoboPersist;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboPersistClass</NAME>
+typedef struct {
+	BonoboObjectClass      parent_class;
+
+	POA_Bonobo_Persist__epv epv;
+
+	Bonobo_Persist_ContentTypeList *
+	                      (*get_content_types) (BonoboPersist     *persist,
+						    CORBA_Environment *ev);
+} BonoboPersistClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_persist_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_persist_generate_content_types</NAME>
+<RETURNS>Bonobo_Persist_ContentTypeList  *</RETURNS>
+int num,...
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_persist_construct</NAME>
+<RETURNS>BonoboPersist                   *</RETURNS>
+BonoboPersist *persist,const gchar   *iid
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_persist_set_dirty</NAME>
+<RETURNS>void 	</RETURNS>
+BonoboPersist *persist,gboolean dirty
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_type</NAME>
+<RETURNS>CORBA_TypeCode</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_string</NAME>
+<RETURNS>gchar  *</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_string</NAME>
+<RETURNS>gchar  *</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_string_with_default</NAME>
+<RETURNS>gchar  *</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gchar              *defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_short</NAME>
+<RETURNS>gint16</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_short</NAME>
+<RETURNS>gint16</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_short_with_default</NAME>
+<RETURNS>gint16</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gint16              defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_ushort</NAME>
+<RETURNS>guint16</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_ushort</NAME>
+<RETURNS>guint16</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_ushort_with_default</NAME>
+<RETURNS>guint16</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,guint16             defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_long</NAME>
+<RETURNS>gint32</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_long</NAME>
+<RETURNS>gint32</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_long_with_default</NAME>
+<RETURNS>gint32</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gint32              defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_ulong</NAME>
+<RETURNS>guint32</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_ulong</NAME>
+<RETURNS>guint32</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_ulong_with_default</NAME>
+<RETURNS>guint32</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,guint32             defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_float</NAME>
+<RETURNS>gfloat</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_float</NAME>
+<RETURNS>gfloat</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_float_with_default</NAME>
+<RETURNS>gfloat</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gfloat              defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_double</NAME>
+<RETURNS>gdouble</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_double</NAME>
+<RETURNS>gdouble</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_double_with_default</NAME>
+<RETURNS>gdouble</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gdouble             defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_boolean</NAME>
+<RETURNS>gboolean</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_boolean</NAME>
+<RETURNS>gboolean</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_boolean_with_default</NAME>
+<RETURNS>gboolean</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gboolean            defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_char</NAME>
+<RETURNS>gchar</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_char</NAME>
+<RETURNS>gchar</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_char_with_default</NAME>
+<RETURNS>gchar</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gchar               defval,gboolean           *def
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_value</NAME>
+<RETURNS>CORBA_any  *</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_TypeCode      opt_tc,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_default_value</NAME>
+<RETURNS>CORBA_any  *</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_TypeCode      opt_tc,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_string</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,const char         *value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_short</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gint16              value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_ushort</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,guint16             value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_long</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gint32              value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_ulong</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,guint32             value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_float</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gfloat              value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_double</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gdouble             value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_boolean</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gboolean            value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_char</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,gchar               value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set_value</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_any          *value,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_doc_title</NAME>
+<RETURNS>char  *</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_doc</NAME>
+<RETURNS>char  *</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_keys</NAME>
+<RETURNS>GList  *</RETURNS>
+Bonobo_PropertyBag  bag,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_free_keys</NAME>
+<RETURNS>void</RETURNS>
+GList *key_list
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get_flags</NAME>
+<RETURNS>Bonobo_PropertyFlags</RETURNS>
+Bonobo_PropertyBag  bag,const char         *key,CORBA_Environment  *opt_ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_set</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,CORBA_Environment  *opt_ev,const char         *first_prop,...
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_get</NAME>
+<RETURNS>void</RETURNS>
+Bonobo_PropertyBag  bag,CORBA_Environment  *opt_ev,const char         *first_prop,...
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_setv</NAME>
+<RETURNS>char  *</RETURNS>
+Bonobo_PropertyBag  bag,CORBA_Environment  *ev,const char         *first_prop,va_list             var_args
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_pbclient_getv</NAME>
+<RETURNS>char  *</RETURNS>
+Bonobo_PropertyBag  bag,CORBA_Environment  *ev,const char         *first_prop,va_list             var_args
+</FUNCTION>
+<MACRO>
+<NAME>bonobo_property_bag_client_setv</NAME>
+#define bonobo_property_bag_client_setv                                       \
+bonobo_pbclient_setv    
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_getv</NAME>
+#define bonobo_property_bag_client_getv                                       \
+bonobo_pbclient_getv
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_property_type</NAME>
+#define bonobo_property_bag_client_get_property_type                          \
+bonobo_pbclient_get_type
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_value_gboolean</NAME>
+#define bonobo_property_bag_client_get_value_gboolean                         \
+bonobo_pbclient_get_boolean
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_value_gint</NAME>
+#define bonobo_property_bag_client_get_value_gint                             \
+bonobo_pbclient_get_long
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_value_glong</NAME>
+#define bonobo_property_bag_client_get_value_glong                            \
+bonobo_pbclient_get_long 
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_value_gfloat</NAME>
+#define bonobo_property_bag_client_get_value_gfloat                           \
+bonobo_pbclient_get_float 
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_value_gdouble</NAME>
+#define bonobo_property_bag_client_get_value_gdouble                          \
+bonobo_pbclient_get_double
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_value_string</NAME>
+#define bonobo_property_bag_client_get_value_string                           \
+bonobo_pbclient_get_string
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_value_any</NAME>
+#define bonobo_property_bag_client_get_value_any(pb, name, ev)                \
+bonobo_pbclient_get_value (pb, name, NULL, ev);
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_default_gboolean</NAME>
+#define bonobo_property_bag_client_get_default_gboolean                       \
+bonobo_pbclient_get_default_boolean
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_default_gint</NAME>
+#define bonobo_property_bag_client_get_default_gint                           \
+bonobo_pbclient_get_default_long
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_default_glong</NAME>
+#define bonobo_property_bag_client_get_default_glong                          \
+bonobo_pbclient_get_default_long
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_default_gfloat</NAME>
+#define bonobo_property_bag_client_get_default_gfloat                         \
+bonobo_pbclient_get_default_float
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_default_gdouble</NAME>
+#define bonobo_property_bag_client_get_default_gdouble                        \
+bonobo_pbclient_get_default_double
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_default_string</NAME>
+#define bonobo_property_bag_client_get_default_string                         \
+bonobo_pbclient_get_default_string
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_default_any</NAME>
+#define bonobo_property_bag_client_get_default_any(pb, name, ev)              \
+bonobo_pbclient_get_default_value (pb, name, NULL, ev)
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_set_value_gboolean</NAME>
+#define bonobo_property_bag_client_set_value_gboolean                         \
+bonobo_pbclient_set_boolean   
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_set_value_gint</NAME>
+#define bonobo_property_bag_client_set_value_gint                             \
+bonobo_pbclient_set_long
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_set_value_glong</NAME>
+#define bonobo_property_bag_client_set_value_glong                            \
+bonobo_pbclient_set_long
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_set_value_gfloat</NAME>
+#define bonobo_property_bag_client_set_value_gfloat                           \
+bonobo_pbclient_set_float
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_set_value_gdouble</NAME>
+#define bonobo_property_bag_client_set_value_gdouble                          \
+bonobo_pbclient_set_double
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_set_value_string</NAME>
+#define bonobo_property_bag_client_set_value_string                           \
+bonobo_pbclient_set_string
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_set_value_any</NAME>
+#define bonobo_property_bag_client_set_value_any                              \
+bonobo_pbclient_set_value 
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_docstring</NAME>
+#define bonobo_property_bag_client_get_docstring                              \
+bonobo_pbclient_get_doc_title
+</MACRO>
+<MACRO>
+<NAME>bonobo_property_bag_client_get_flags</NAME>
+#define bonobo_property_bag_client_get_flags	                              \
+bonobo_pbclient_get_flags
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PROPERTY_READABLE</NAME>
+#define BONOBO_PROPERTY_READABLE      Bonobo_PROPERTY_READABLE
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PROPERTY_WRITEABLE</NAME>
+#define BONOBO_PROPERTY_WRITEABLE     Bonobo_PROPERTY_WRITEABLE
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PROPERTY_NO_LISTENING</NAME>
+#define BONOBO_PROPERTY_NO_LISTENING  Bonobo_PROPERTY_NO_LISTENING 
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PROPERTY_NO_AUTONOTIFY</NAME>
+#define BONOBO_PROPERTY_NO_AUTONOTIFY Bonobo_PROPERTY_NO_AUTONOTIFY 
+</MACRO>
+<STRUCT>
+<NAME>BonoboPropertyBagPrivate</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboPropertyBag</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboProperty</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboPropertyPrivate</NAME>
+</STRUCT>
+<USER_FUNCTION>
+<NAME>BonoboPropertyGetFn</NAME>
+<RETURNS>void </RETURNS>
+BonoboPropertyBag *bag,
+				     BonoboArg         *arg,
+				     guint              arg_id,
+				     CORBA_Environment *ev,
+				     gpointer           user_data
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>BonoboPropertySetFn</NAME>
+<RETURNS>void </RETURNS>
+BonoboPropertyBag *bag,
+				     const BonoboArg   *arg,
+				     guint              arg_id,
+				     CORBA_Environment *ev,
+				     gpointer           user_data
+</USER_FUNCTION>
+<STRUCT>
+<NAME>BonoboProperty</NAME>
+struct BonoboProperty {
+	char		      *name;
+	int                    idx;
+	BonoboArgType          type;
+	BonoboArg             *default_value;
+	char		      *doctitle;
+	char		      *docstring;
+	Bonobo_PropertyFlags   flags;
+
+	BonoboPropertyPrivate *priv;
+};
+</STRUCT>
+<STRUCT>
+<NAME>BonoboPropertyBag</NAME>
+struct BonoboPropertyBag {
+	BonoboObject             parent;
+	BonoboPropertyBagPrivate *priv;
+	BonoboEventSource        *es;
+};
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboPropertyBagClass</NAME>
+typedef struct {
+	BonoboObjectClass        parent;
+
+	POA_Bonobo_PropertyBag__epv epv;
+} BonoboPropertyBagClass;
+</TYPEDEF>
+<MACRO>
+<NAME>BONOBO_TYPE_PROPERTY_BAG</NAME>
+#define BONOBO_TYPE_PROPERTY_BAG        (bonobo_property_bag_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PROPERTY_BAG_TYPE</NAME>
+#define BONOBO_PROPERTY_BAG_TYPE        BONOBO_TYPE_PROPERTY_BAG /* deprecated, you should use BONOBO_TYPE_PROPERTY_BAG */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PROPERTY_BAG</NAME>
+#define BONOBO_PROPERTY_BAG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_PROPERTY_BAG, BonoboPropertyBag))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_PROPERTY_BAG_CLASS</NAME>
+#define BONOBO_PROPERTY_BAG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_PROPERTY_BAG, BonoboPropertyBagClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_PROPERTY_BAG</NAME>
+#define BONOBO_IS_PROPERTY_BAG(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_PROPERTY_BAG))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_PROPERTY_BAG_CLASS</NAME>
+#define BONOBO_IS_PROPERTY_BAG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_PROPERTY_BAG))
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_property_bag_get_type</NAME>
+<RETURNS>GType</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_new</NAME>
+<RETURNS>BonoboPropertyBag  *</RETURNS>
+BonoboPropertyGetFn get_prop_cb,BonoboPropertySetFn set_prop_cb,gpointer            user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_new_closure</NAME>
+<RETURNS>BonoboPropertyBag  *</RETURNS>
+GClosure          *get_prop,GClosure          *set_prop
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_new_full</NAME>
+<RETURNS>BonoboPropertyBag  *</RETURNS>
+GClosure          *get_prop,GClosure          *set_prop,BonoboEventSource *event_source
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_construct</NAME>
+<RETURNS>BonoboPropertyBag  *</RETURNS>
+BonoboPropertyBag *pb,GClosure          *get_prop,GClosure          *set_prop,BonoboEventSource *event_source
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_add</NAME>
+<RETURNS>void</RETURNS>
+BonoboPropertyBag   *pb,const char          *name,int                  idx,BonoboArgType        type,BonoboArg           *default_value,const char          *doctitle,Bonobo_PropertyFlags flags
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_add_full</NAME>
+<RETURNS>void</RETURNS>
+BonoboPropertyBag    *pb,const char           *name,int                   idx,BonoboArgType         type,BonoboArg            *default_value,const char           *doctitle,const char           *docstring,Bonobo_PropertyFlags  flags,GClosure             *get_prop,GClosure             *set_prop
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_remove</NAME>
+<RETURNS>void</RETURNS>
+BonoboPropertyBag    *pb,const char           *name
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_map_params</NAME>
+<RETURNS>void</RETURNS>
+BonoboPropertyBag   *pb,GObject             *on_instance,const GParamSpec   **pspecs,guint                n_params
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_get_prop_list</NAME>
+<RETURNS>GList  *</RETURNS>
+BonoboPropertyBag *pb
+</FUNCTION>
+<STRUCT>
+<NAME>BonoboRunningContextPrivate</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboRunningContext</NAME>
+typedef struct {
+	BonoboObject parent;
+
+	BonoboRunningContextPrivate *priv;
+} BonoboRunningContext;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboRunningContextClass</NAME>
+typedef struct {
+	BonoboObjectClass parent;
+
+	POA_Bonobo_RunningContext__epv epv;
+
+	void (*last_unref) (void);
+} BonoboRunningContextClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_running_context_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_running_context_new</NAME>
+<RETURNS>BonoboObject  *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_running_context_add_object</NAME>
+<RETURNS>void  </RETURNS>
+CORBA_Object object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_running_context_remove_object</NAME>
+<RETURNS>void  </RETURNS>
+CORBA_Object object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_running_context_ignore_object</NAME>
+<RETURNS>void  </RETURNS>
+CORBA_Object object
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_running_context_trace_objects</NAME>
+<RETURNS>void  </RETURNS>
+CORBA_Object object,const char  *fn,int          line,int          mode
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_running_context_at_exit_unref</NAME>
+<RETURNS>void  </RETURNS>
+CORBA_Object object
+</FUNCTION>
+<MACRO>
+<NAME>bonobo_running_context_add_object</NAME>
+#	define           bonobo_running_context_add_object(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,0);}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>bonobo_running_context_remove_object</NAME>
+#	define           bonobo_running_context_remove_object(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,1);}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>bonobo_running_context_ignore_object</NAME>
+#	define           bonobo_running_context_ignore_object(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,2);}G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_SHLIB_FACTORY</NAME>
+#define BONOBO_TYPE_SHLIB_FACTORY        (bonobo_shlib_factory_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_SHLIB_FACTORY_TYPE</NAME>
+#define BONOBO_SHLIB_FACTORY_TYPE        BONOBO_TYPE_SHLIB_FACTORY /* deprecated, you should use BONOBO_TYPE_SHLIB_FACTORY */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_SHLIB_FACTORY</NAME>
+#define BONOBO_SHLIB_FACTORY(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_SHLIB_FACTORY, BonoboShlibFactory))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_SHLIB_FACTORY_CLASS</NAME>
+#define BONOBO_SHLIB_FACTORY_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_SHLIB_FACTORY, BonoboShlibFactoryClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_SHLIB_FACTORY</NAME>
+#define BONOBO_IS_SHLIB_FACTORY(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_SHLIB_FACTORY))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_SHLIB_FACTORY_CLASS</NAME>
+#define BONOBO_IS_SHLIB_FACTORY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_SHLIB_FACTORY))
+</MACRO>
+<STRUCT>
+<NAME>BonoboShlibFactoryPrivate</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboShlibFactory</NAME>
+typedef struct {
+	BonoboGenericFactory base;
+
+	BonoboShlibFactoryPrivate *priv;
+} BonoboShlibFactory;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboShlibFactoryClass</NAME>
+typedef struct {
+	BonoboGenericFactoryClass parent_class;
+} BonoboShlibFactoryClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_shlib_factory_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_shlib_factory_construct</NAME>
+<RETURNS>BonoboShlibFactory  *</RETURNS>
+BonoboShlibFactory    *factory,const char            *component_id,PortableServer_POA     poa,gpointer               act_impl_ptr,GClosure              *closure
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_shlib_factory_new</NAME>
+<RETURNS>BonoboShlibFactory  *</RETURNS>
+const char            *component_id,PortableServer_POA     poa,gpointer               act_impl_ptr,BonoboFactoryCallback  factory_cb,gpointer               user_data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_shlib_factory_new_closure</NAME>
+<RETURNS>BonoboShlibFactory  *</RETURNS>
+const char            *component_id,PortableServer_POA     poa,gpointer               act_impl_ptr,GClosure              *factory_closure
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_shlib_factory_std</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+const char            *component_id,PortableServer_POA     poa,gpointer               act_impl_ptr,BonoboFactoryCallback  factory_cb,gpointer               user_data,CORBA_Environment     *ev
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_OAF_SHLIB_FACTORY</NAME>
+#define BONOBO_OAF_SHLIB_FACTORY(oafiid, descr, fn, data)                     \
+	BONOBO_ACTIVATION_SHLIB_FACTORY(oafiid, descr, fn, data)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_OAF_SHLIB_FACTORY_MULTI</NAME>
+#define BONOBO_OAF_SHLIB_FACTORY_MULTI(oafiid, descr, fn, data)               \
+	BONOBO_ACTIVATION_SHLIB_FACTORY(oafiid, descr, fn, data)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_ACTIVATION_SHLIB_FACTORY</NAME>
+#define BONOBO_ACTIVATION_SHLIB_FACTORY(oafiid, descr, fn, data)	      \
+static Bonobo_Unknown                                                         \
+make_factory (PortableServer_POA poa, const char *iid, gpointer impl_ptr,     \
+	      CORBA_Environment *ev)                                          \
+{                                                                             \
+	return bonobo_shlib_factory_std (oafiid, poa, impl_ptr, fn, data, ev);\
+}                                                                             \
+static BonoboActivationPluginObject plugin_list[] = {{oafiid, make_factory}, { NULL } };   \
+const  BonoboActivationPlugin Bonobo_Plugin_info = { plugin_list, descr };
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_context_init</NAME>
+<RETURNS>void  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_context_shutdown</NAME>
+<RETURNS>void  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_init</NAME>
+<RETURNS>void  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_object_shutdown</NAME>
+<RETURNS>int  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_exception_shutdown</NAME>
+<RETURNS>void  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_property_bag_shutdown</NAME>
+<RETURNS>void  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_running_context_shutdown</NAME>
+<RETURNS>void  </RETURNS>
+void
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_STORAGE_MEM</NAME>
+#define BONOBO_TYPE_STORAGE_MEM        (bonobo_storage_mem_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STORAGE_MEM_TYPE</NAME>
+#define BONOBO_STORAGE_MEM_TYPE        BONOBO_TYPE_STORAGE_MEM /* deprecated, you should use BONOBO_TYPE_STORAGE_MEM */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STORAGE_MEM</NAME>
+#define BONOBO_STORAGE_MEM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_STORAGE_MEM, BonoboStorageMem))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STORAGE_MEM_CLASS</NAME>
+#define BONOBO_STORAGE_MEM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_STORAGE_MEM, BonoboStorageMemClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_STORAGE_MEM</NAME>
+#define BONOBO_IS_STORAGE_MEM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_STORAGE_MEM))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_STORAGE_MEM_CLASS</NAME>
+#define BONOBO_IS_STORAGE_MEM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_STORAGE_MEM))
+</MACRO>
+<STRUCT>
+<NAME>BonoboStorageMemPriv</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboStorageMem</NAME>
+typedef struct {
+	BonoboObject parent;
+
+	BonoboStorageMemPriv *priv;
+} BonoboStorageMem;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboStorageMemClass</NAME>
+typedef struct {
+	BonoboObjectClass parent_class;
+
+	POA_Bonobo_Storage__epv epv;
+} BonoboStorageMemClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_storage_mem_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_storage_mem_create</NAME>
+<RETURNS>BonoboObject      *</RETURNS>
+void
+</FUNCTION>
+<MACRO>
+<NAME>BonoboStream</NAME>
+#define BonoboStream BonoboObject
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STREAM</NAME>
+#define BONOBO_STREAM(o)       ((BonoboStream *)(o))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STREAM_CLASS</NAME>
+#define BONOBO_STREAM_CLASS(k) ((BonoboObjectClass *)(k))
+</MACRO>
+<MACRO>
+<NAME>BonoboStorage</NAME>
+#define BonoboStorage BonoboObject
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STORAGE</NAME>
+#define BONOBO_STORAGE(o)          ((BonoboStorage *)(o))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STORAGE_CLASS</NAME>
+#define BONOBO_STORAGE_CLASS(k)    ((BonoboObjectClass *)(k))
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_storage_copy_to</NAME>
+<RETURNS>void  </RETURNS>
+Bonobo_Storage     src,Bonobo_Storage     dest,CORBA_Environment *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_client_write</NAME>
+<RETURNS>void  </RETURNS>
+const Bonobo_Stream stream,const void         *buffer,const size_t        size,CORBA_Environment  *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_client_read</NAME>
+<RETURNS>guint8     *</RETURNS>
+const Bonobo_Stream stream,const size_t        size,CORBA_long         *length_read,CORBA_Environment  *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_client_write_string</NAME>
+<RETURNS>void  </RETURNS>
+const Bonobo_Stream stream,const char         *str,const gboolean      terminate,CORBA_Environment  *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_client_printf</NAME>
+<RETURNS>void  </RETURNS>
+const Bonobo_Stream stream,const gboolean      terminate,CORBA_Environment  *ev,const char         *fmt, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_client_read_string</NAME>
+<RETURNS>CORBA_long  </RETURNS>
+const Bonobo_Stream stream,char              **str,CORBA_Environment  *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_client_get_length</NAME>
+<RETURNS>CORBA_long  </RETURNS>
+const Bonobo_Stream stream,CORBA_Environment  *ev
+</FUNCTION>
+<STRUCT>
+<NAME>BonoboStreamMem</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>BonoboStreamMemPrivate</NAME>
+</STRUCT>
+<MACRO>
+<NAME>BONOBO_TYPE_STREAM_MEM</NAME>
+#define BONOBO_TYPE_STREAM_MEM        (bonobo_stream_mem_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STREAM_MEM_TYPE</NAME>
+#define BONOBO_STREAM_MEM_TYPE        BONOBO_TYPE_STREAM_MEM /* deprecated, you should use BONOBO_TYPE_STREAM_MEM */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STREAM_MEM</NAME>
+#define BONOBO_STREAM_MEM(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_STREAM_MEM, BonoboStreamMem))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_STREAM_MEM_CLASS</NAME>
+#define BONOBO_STREAM_MEM_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_STREAM_MEM, BonoboStreamMemClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_STREAM_MEM</NAME>
+#define BONOBO_IS_STREAM_MEM(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_STREAM_MEM))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_STREAM_MEM_CLASS</NAME>
+#define BONOBO_IS_STREAM_MEM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_STREAM_MEM))
+</MACRO>
+<STRUCT>
+<NAME>BonoboStreamMem</NAME>
+struct BonoboStreamMem {
+	BonoboObject parent;
+
+	char         *buffer;
+	size_t        size;
+	long          pos;
+	gboolean      read_only;
+	gboolean      resizable;
+	char         *content_type;
+	char         *name;
+
+	BonoboStreamMemPrivate *priv;
+};
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboStreamMemClass</NAME>
+typedef struct {
+	BonoboObjectClass parent_class;
+
+	POA_Bonobo_Stream__epv epv;
+
+	char           *(*get_buffer) (BonoboStreamMem *stream_mem);
+	size_t          (*get_size)   (BonoboStreamMem *stream_mem);
+} BonoboStreamMemClass;
+</TYPEDEF>
+<FUNCTION>
+<NAME>bonobo_stream_mem_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_mem_construct</NAME>
+<RETURNS>BonoboStreamMem  *</RETURNS>
+BonoboStreamMem  *stream_mem,const char       *buffer,size_t            size,gboolean          read_only,gboolean          resizable
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_mem_create</NAME>
+<RETURNS>BonoboStream     *</RETURNS>
+const char       *buffer,size_t            size,gboolean          read_only,gboolean          resizable
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_mem_get_buffer</NAME>
+<RETURNS>const char       *</RETURNS>
+BonoboStreamMem  *stream_mem
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_stream_mem_get_size</NAME>
+<RETURNS>size_t  </RETURNS>
+BonoboStreamMem  *stream_mem
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_TRANSIENT</NAME>
+#define BONOBO_TYPE_TRANSIENT        (bonobo_transient_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TRANSIENT_TYPE</NAME>
+#define BONOBO_TRANSIENT_TYPE        BONOBO_TYPE_TRANSIENT /* deprecated, you should use BONOBO_TYPE_TRANSIENT */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TRANSIENT</NAME>
+#define BONOBO_TRANSIENT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TYPE_TRANSIENT, BonoboTransient))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TRANSIENT_CLASS</NAME>
+#define BONOBO_TRANSIENT_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_TYPE_TRANSIENT, BonoboTransientClass))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_TRANSIENT</NAME>
+#define BONOBO_IS_TRANSIENT(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_TYPE_TRANSIENT))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_TRANSIENT_CLASS</NAME>
+#define BONOBO_IS_TRANSIENT_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_TYPE_TRANSIENT))
+</MACRO>
+<STRUCT>
+<NAME>BonoboTransientPriv</NAME>
+</STRUCT>
+<TYPEDEF>
+<NAME>BonoboTransient</NAME>
+typedef struct {
+	GObject parent;
+
+	BonoboTransientPriv *priv;
+} BonoboTransient;
+</TYPEDEF>
+<TYPEDEF>
+<NAME>BonoboTransientClass</NAME>
+typedef struct {
+	GObjectClass parent_class;
+} BonoboTransientClass;
+</TYPEDEF>
+<USER_FUNCTION>
+<NAME>BonoboTransientServantNew</NAME>
+<RETURNS>PortableServer_Servant </RETURNS>
+PortableServer_POA, BonoboTransient *, char *name, void *data
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>BonoboTransientServantDestroy</NAME>
+<RETURNS>void </RETURNS>
+PortableServer_Servant servant, void *data
+</USER_FUNCTION>
+<FUNCTION>
+<NAME>bonobo_transient_new</NAME>
+<RETURNS>BonoboTransient  *</RETURNS>
+PortableServer_POA poa,BonoboTransientServantNew     new_servant,BonoboTransientServantDestroy destroy_servant,void *data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_transient_construct</NAME>
+<RETURNS>BonoboTransient  *</RETURNS>
+BonoboTransient *transient,PortableServer_POA        poa,BonoboTransientServantNew new_servant,BonoboTransientServantDestroy destroy_servant,gpointer                  data
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_transient_create_objref</NAME>
+<RETURNS>CORBA_Object  </RETURNS>
+BonoboTransient   *transient,const char        *iface_name,const char        *name,CORBA_Environment *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_transient_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_corba_object_type_register_static</NAME>
+<RETURNS>GType  </RETURNS>
+const gchar           *name,const CORBA_TypeCode   tc,gboolean               is_bonobo_unknown
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_unknown_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_corba_any_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_corba_object_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_corba_typecode_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_corba_exception_get_type</NAME>
+<RETURNS>GType  </RETURNS>
+void
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_UNKNOWN</NAME>
+#define BONOBO_TYPE_UNKNOWN                         (bonobo_unknown_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_CORBA_ANY</NAME>
+#define BONOBO_TYPE_CORBA_ANY                       (bonobo_corba_any_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_CORBA_OBJECT</NAME>
+#define BONOBO_TYPE_CORBA_OBJECT                    (bonobo_corba_object_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_CORBA_TYPECODE</NAME>
+#define BONOBO_TYPE_CORBA_TYPECODE                  (bonobo_corba_typecode_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_CORBA_EXCEPTION</NAME>
+#define BONOBO_TYPE_CORBA_EXCEPTION                 (bonobo_corba_exception_get_type () | G_SIGNAL_TYPE_STATIC_SCOPE)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_STRING</NAME>
+#define BONOBO_TYPE_STRING                          (G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_NONSTATIC_UNKNOWN</NAME>
+#define BONOBO_TYPE_NONSTATIC_UNKNOWN               (bonobo_unknown_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_NONSTATIC_CORBA_ANY</NAME>
+#define BONOBO_TYPE_NONSTATIC_CORBA_ANY             (bonobo_corba_any_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_NONSTATIC_CORBA_OBJECT</NAME>
+#define BONOBO_TYPE_NONSTATIC_CORBA_OBJECT          (bonobo_corba_object_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE</NAME>
+#define BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE        (bonobo_corba_typecode_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION</NAME>
+#define BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION       (bonobo_corba_exception_get_type ())
+</MACRO>
+<MACRO>
+<NAME>BONOBO_VALUE_HOLDS_UNKNOWN</NAME>
+#define BONOBO_VALUE_HOLDS_UNKNOWN(value)           (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_UNKNOWN))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_VALUE_HOLDS_CORBA_ANY</NAME>
+#define BONOBO_VALUE_HOLDS_CORBA_ANY(value)         (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_ANY))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_VALUE_HOLDS_CORBA_OBJECT</NAME>
+#define BONOBO_VALUE_HOLDS_CORBA_OBJECT(value)      (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_OBJECT))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_VALUE_HOLDS_CORBA_TYPECODE</NAME>
+#define BONOBO_VALUE_HOLDS_CORBA_TYPECODE(value)    (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_TYPECODE))
+</MACRO>
+<MACRO>
+<NAME>BONOBO_VALUE_HOLDS_CORBA_EXCEPTION</NAME>
+#define BONOBO_VALUE_HOLDS_CORBA_EXCEPTION(value)   (G_TYPE_CHECK_VALUE_TYPE ((value), BONOBO_TYPE_NONSTATIC_CORBA_EXCEPTION))
+</MACRO>
+<FUNCTION>
+<NAME>bonobo_value_get_unknown</NAME>
+<RETURNS>Bonobo_Unknown  </RETURNS>
+const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_value_get_corba_any</NAME>
+<RETURNS>BonoboArg                *</RETURNS>
+const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_value_get_corba_object</NAME>
+<RETURNS>CORBA_Object  </RETURNS>
+const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_value_get_corba_typecode</NAME>
+<RETURNS>CORBA_TypeCode  </RETURNS>
+const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_value_get_corba_exception</NAME>
+<RETURNS>const CORBA_Environment  *</RETURNS>
+const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_value_set_unknown</NAME>
+<RETURNS>void  </RETURNS>
+GValue                      *value,const Bonobo_Unknown         unknown
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_value_set_corba_any</NAME>
+<RETURNS>void  </RETURNS>
+GValue                      *value,const CORBA_any             *any
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_value_set_corba_typecode</NAME>
+<RETURNS>void  </RETURNS>
+GValue                      *value,const CORBA_TypeCode         tc
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_value_set_corba_environment</NAME>
+<RETURNS>void  </RETURNS>
+GValue                      *value,const CORBA_Environment     *ev
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_closure_invoke_va_list</NAME>
+<RETURNS>void  </RETURNS>
+GClosure            *closure,GValue              *return_value,va_list              var_args
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_closure_invoke</NAME>
+<RETURNS>void  </RETURNS>
+GClosure            *closure,GType                return_type,...
+</FUNCTION>
+<FUNCTION>
+<NAME>bonobo_closure_store</NAME>
+<RETURNS>GClosure  *</RETURNS>
+GClosure            *closure,GClosureMarshal      default_marshal
+</FUNCTION>
+<MACRO>
+<NAME>BONOBO_TYPE_X_OBJECT</NAME>
+#define BONOBO_TYPE_X_OBJECT        BONOBO_TYPE_OBJECT
+</MACRO>
+<MACRO>
+<NAME>BONOBO_X_OBJECT_TYPE</NAME>
+#define BONOBO_X_OBJECT_TYPE        BONOBO_TYPE_X_OBJECT /* deprecated, you should use BONOBO_TYPE_X_OBJECT */
+</MACRO>
+<MACRO>
+<NAME>BONOBO_X_OBJECT</NAME>
+#define BONOBO_X_OBJECT(o)          BONOBO_OBJECT (o)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_X_OBJECT_CLASS</NAME>
+#define BONOBO_X_OBJECT_CLASS(k)    BONOBO_OBJECT_CLASS (k)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_X_OBJECT</NAME>
+#define BONOBO_IS_X_OBJECT(o)       BONOBO_IS_OBJECT (o)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_IS_X_OBJECT_CLASS</NAME>
+#define BONOBO_IS_X_OBJECT_CLASS(k) BONOBO_IS_OBJECT_CLASS (k)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_X_OBJECT_HEADER_SIZE</NAME>
+#define BONOBO_X_OBJECT_HEADER_SIZE BONOBO_OBJECT_HEADER_SIZE
+</MACRO>
+<MACRO>
+<NAME>BONOBO_X_OBJECT_GET_SERVANT</NAME>
+#define BONOBO_X_OBJECT_GET_SERVANT(o) ((PortableServer_Servant)&(o)->servant)
+</MACRO>
+<MACRO>
+<NAME>BONOBO_X_SERVANT_GET_OBJECT</NAME>
+#define BONOBO_X_SERVANT_GET_OBJECT(o) ((BonoboXObject *)((guchar *)(o)				\
+					     - BONOBO_X_OBJECT_HEADER_SIZE			\
+					     - sizeof (struct CORBA_Object_struct)	\
+					     - sizeof (gpointer) * 4))
+</MACRO>
+<MACRO>
+<NAME>BonoboXObject</NAME>
+#define BonoboXObject            BonoboObject
+</MACRO>
+<MACRO>
+<NAME>BonoboXObjectClass</NAME>
+#define BonoboXObjectClass       BonoboObjectClass
+</MACRO>
+<MACRO>
+<NAME>bonobo_x_object</NAME>
+#define bonobo_x_object          bonobo_object
+</MACRO>
+<MACRO>
+<NAME>BonoboXObjectPOAFn</NAME>
+#define BonoboXObjectPOAFn       BonoboObjectPOAFn
+</MACRO>
+<MACRO>
+<NAME>bonobo_x_object_get_type</NAME>
+#define bonobo_x_object_get_type bonobo_object_get_type
+</MACRO>
+<MACRO>
+<NAME>bonobo_x_type_unique</NAME>
+#define bonobo_x_type_unique     bonobo_type_unique
+</MACRO>
+<MACRO>
+<NAME>bonobo_x_type_setup</NAME>
+#define bonobo_x_type_setup      bonobo_type_setup
+</MACRO>
+<MACRO>
+<NAME>BONOBO_X_TYPE_FUNC_FULL</NAME>
+#define BONOBO_X_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)       \
+GType                                                                         \
+prefix##_get_type (void)                                                      \
+{                                                                             \
+	GType ptype;                                                          \
+	static GType type = 0;                                                \
+                                                                              \
+	if (type == 0) {                                                      \
+		static GTypeInfo info = {                                     \
+			sizeof (class_name##Class),                           \
+			(GBaseInitFunc) NULL,                                 \
+			(GBaseFinalizeFunc) NULL,                             \
+			(GClassInitFunc) prefix##_class_init,                 \
+			NULL, NULL,                                           \
+			sizeof (class_name),                                  \
+			0,                                                    \
+			(GInstanceInitFunc) prefix##_init                     \
+		};                                                            \
+		ptype = (parent);                                             \
+		type = bonobo_x_type_unique (ptype,                           \
+			POA_##corba_name##__init, POA_##corba_name##__fini,   \
+			G_STRUCT_OFFSET (class_name##Class, epv),             \
+			&info, #class_name);                                  \
+	}                                                                     \
+	return type;                                                          \
+}
+</MACRO>
+<MACRO>
+<NAME>BONOBO_X_TYPE_FUNC</NAME>
+#define BONOBO_X_TYPE_FUNC(class_name, parent, prefix)                        \
+GType                                                                         \
+prefix##_get_type (void)                                                      \
+{                                                                             \
+	GType ptype;                                                          \
+	static GType type = 0;                                                \
+                                                                              \
+	if (type == 0) {                                                      \
+		static GTypeInfo info = {                                     \
+			sizeof (class_name##Class),                           \
+			(GBaseInitFunc) NULL,                                 \
+			(GBaseFinalizeFunc) NULL,                             \
+			(GClassInitFunc) prefix##_class_init,                 \
+			NULL, NULL,                                           \
+			sizeof (class_name),                                  \
+			0,                                                    \
+			(GInstanceInitFunc) prefix##_init                     \
+		};                                                            \
+		ptype = (parent);                                             \
+		type = bonobo_x_type_unique (ptype, NULL, NULL, 0,            \
+					     &info, #class_name);             \
+	}                                                                     \
+	return type;                                                          \
+}
+</MACRO>

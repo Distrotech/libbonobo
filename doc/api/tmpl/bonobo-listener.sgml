@@ -84,36 +84,10 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 
 
 
-<!-- ##### MACRO BONOBO_LISTENER ##### -->
+<!-- ##### STRUCT BonoboListenerPrivate ##### -->
 <para>
 
 </para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_IS_LISTENER ##### -->
-<para>
-
-</para>
-
-@o: 
-
-
-<!-- ##### MACRO BONOBO_LISTENER_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
-
-
-<!-- ##### MACRO BONOBO_IS_LISTENER_CLASS ##### -->
-<para>
-
-</para>
-
-@k: 
 
 
 <!-- ##### TYPEDEF BonoboListener ##### -->
@@ -146,17 +120,30 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 
 </para>
 
-@event_callback: 
+@event_cb: 
 @user_data: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@event_callback: 
 
 
-<!-- ##### FUNCTION bonobo_event_kind ##### -->
+<!-- ##### FUNCTION bonobo_listener_new_closure ##### -->
 <para>
 
 </para>
 
-@event_name: 
+@event_closure: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_event_make_name ##### -->
+<para>
+
+</para>
+
+@idl_path: 
+@kind: 
+@subtype: 
 @Returns: 
 
 
@@ -178,7 +165,7 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_event_idl_path ##### -->
+<!-- ##### FUNCTION bonobo_event_kind ##### -->
 <para>
 
 </para>
@@ -187,14 +174,12 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 @Returns: 
 
 
-<!-- ##### FUNCTION bonobo_event_make_name ##### -->
+<!-- ##### FUNCTION bonobo_event_idl_path ##### -->
 <para>
 
 </para>
 
-@idl_path: 
-@kind: 
-@subtype: 
+@event_name: 
 @Returns: 
 
 

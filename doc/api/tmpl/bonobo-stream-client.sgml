@@ -31,6 +31,17 @@ tries to alloca a huge chunk of memory and SEGVs ].
 #BonoboStream
 </para>
 
+<!-- ##### FUNCTION bonobo_stream_client_write ##### -->
+<para>
+
+</para>
+
+@stream: 
+@buffer: 
+@size: 
+@ev: 
+
+
 <!-- ##### FUNCTION bonobo_stream_client_read ##### -->
 <para>
 
@@ -41,17 +52,6 @@ tries to alloca a huge chunk of memory and SEGVs ].
 @length_read: 
 @ev: 
 @Returns: 
-
-
-<!-- ##### FUNCTION bonobo_stream_client_write ##### -->
-<para>
-
-</para>
-
-@stream: 
-@buffer: 
-@size: 
-@ev: 
 
 
 <!-- ##### FUNCTION bonobo_stream_client_write_string ##### -->

@@ -92,11 +92,31 @@ eog_image_data_construct (EogImageData *image_data)
 
 </para>
 
+<!-- ##### MACRO BONOBO_PERSIST_STREAM_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT BonoboPersistStreamPrivate ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### STRUCT BonoboPersistStream ##### -->
 <para>
 
 </para>
 
+@persist: 
+@is_dirty: 
+@save_fn: 
+@load_fn: 
+@types_fn: 
+@closure: 
+@priv: 
 
 <!-- ##### USER_FUNCTION BonoboPersistStreamIOFn ##### -->
 <para>
@@ -108,17 +128,6 @@ eog_image_data_construct (EogImageData *image_data)
 @type: 
 @closure: 
 @ev: 
-
-
-<!-- ##### USER_FUNCTION BonoboPersistStreamMaxFn ##### -->
-<para>
-
-</para>
-
-@ps: 
-@closure: 
-@ev: 
-@Returns: 
 
 
 <!-- ##### USER_FUNCTION BonoboPersistStreamTypesFn ##### -->
@@ -138,15 +147,6 @@ eog_image_data_construct (EogImageData *image_data)
 </para>
 
 
-<!-- ##### FUNCTION bonobo_persist_stream_set_dirty ##### -->
-<para>
-
-</para>
-
-@ps: 
-@dirty: 
-
-
 <!-- ##### FUNCTION bonobo_persist_stream_new ##### -->
 <para>
 
@@ -154,10 +154,12 @@ eog_image_data_construct (EogImageData *image_data)
 
 @load_fn: 
 @save_fn: 
-@max_fn: 
 @types_fn: 
+@iid: 
 @closure: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@max_fn: 
 
 
 <!-- ##### FUNCTION bonobo_persist_stream_construct ##### -->
@@ -168,11 +170,12 @@ eog_image_data_construct (EogImageData *image_data)
 @ps: 
 @load_fn: 
 @save_fn: 
-@max_fn: 
 @types_fn: 
+@iid: 
 @closure: 
 @Returns: 
 <!-- # Unused Parameters # -->
+@max_fn: 
 @corba_ps: 
 
 

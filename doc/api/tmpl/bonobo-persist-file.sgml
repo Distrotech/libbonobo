@@ -139,11 +139,30 @@ save_to_file (BonoboPersistFile *pf,
 #BonoboPersistStream, #BonoboPersist
 </para>
 
+<!-- ##### MACRO BONOBO_PERSIST_FILE_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT BonoboPersistFilePrivate ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### STRUCT BonoboPersistFile ##### -->
 <para>
 
 </para>
 
+@persist: 
+@filename: 
+@save_fn: 
+@load_fn: 
+@closure: 
+@priv: 
 
 <!-- ##### USER_FUNCTION BonoboPersistFileIOFn ##### -->
 <para>
@@ -163,15 +182,6 @@ save_to_file (BonoboPersistFile *pf,
 </para>
 
 
-<!-- ##### FUNCTION bonobo_persist_file_set_dirty ##### -->
-<para>
-
-</para>
-
-@ps: 
-@dirty: 
-
-
 <!-- ##### FUNCTION bonobo_persist_file_new ##### -->
 <para>
 
@@ -179,6 +189,7 @@ save_to_file (BonoboPersistFile *pf,
 
 @load_fn: 
 @save_fn: 
+@iid: 
 @closure: 
 @Returns: 
 
@@ -191,6 +202,7 @@ save_to_file (BonoboPersistFile *pf,
 @ps: 
 @load_fn: 
 @save_fn: 
+@iid: 
 @closure: 
 @Returns: 
 <!-- # Unused Parameters # -->
