@@ -1,3 +1,72 @@
+2000-09-21  Michael Meeks  <michael@helixcode.com>
+
+	* monikers/Makefile.am (std_moniker_SOURCES): add new.
+
+	* monikers/std-moniker.c (bonobo_moniker_factory): hook up.
+
+	* monikers/std-moniker.oafinfo: add NewMoniker
+
+	* monikers/bonobo-moniker-new.[ch]: create.
+
+	* bonobo/bonobo-win.c (bonobo_win_xml_node_exists): update for
+	wildcard paths.
+
+	* components/text-plain/bonobo-text-plain.c (create_view_menus): upd.
+
+	* bonobo/bonobo-widget.c (bonobo_widget_create_subdoc_object):
+	use object_dup_ref.
+
+	* bonobo/bonobo-control-frame.h: upd.
+
+	* bonobo/bonobo-client-site.h: upd.
+
+	* bonobo/bonobo-exception.c (bonobo_exception_get_text): hack
+	out bonobo-ui-handler exceptions.
+
+	* idl/Bonobo.idl: remove bonobo-ui-handler.idl
+
+	* bonobo/bonobo-control.c (bonobo_control_get_remote_ui_handler):
+	update docs.
+
+	* bonobo/bonobo-control.h: update.
+
+	* bonobo/bonobo-ui-xml.c (xml_get_path): Change
+	(bonobo_ui_xml_get_path_wildcard): add.
+	(bonobo_ui_xml_get_path): upd
+	(bonobo_ui_xml_merge): upd.
+	(bonobo_ui_xml_rm): upd.
+
+2000-09-20  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo.h: remove ui-handler.h
+
+	* bonobo/Makefile.am (libbonoboinclude_HEADERS): remove ui-handler
+
+	* idl/Makefile.am (idl_DATA): remove bonobo-ui-handler.idl
+
+	* idl/bonobo-ui-handler.idl: Remove.
+
+	* bonobo/bonobo-ui-xml.c (reinstate_node): change behavior;
+	(bonobo_ui_xml_rm): upd.
+
+	* bonobo/bonobo-win.c (bonobo_win_xml_rm): actually propagate
+	the path instead of "/"; argh.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_rm):
+	don't de-register component here, do a remove instead yuck.
+
+2000-09-19  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (prune_overrides_by_id): precondition on id.
+
+	* bonobo/bonobo.h: add bonobo-exception.h
+
+	* bonobo/bonobo-exception.[ch]: Implement, add capability to
+	expand user exception reporting to handle external exceptions.
+
+	* bonobo/bonobo-main.c (bonobo_exception_get_text): remove from
+	here.
+
 2000-09-20  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* configure.in: LINGUAS: added Catalan language

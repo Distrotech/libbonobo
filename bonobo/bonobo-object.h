@@ -23,17 +23,17 @@ BEGIN_GNOME_DECLS
  */
 typedef struct {
 	POA_Bonobo_Unknown servant_placeholder;
-	gpointer bonobo_object;
+	gpointer           bonobo_object;
 } BonoboObjectServant;
 
 typedef struct _BonoboObjectPrivate BonoboObjectPrivate;
 
 typedef struct {
-	GtkObject base;
+	GtkObject            base;
 
-	Bonobo_Unknown        corba_objref;
-	gpointer              servant;
-	BonoboObjectPrivate   *priv;
+	Bonobo_Unknown       corba_objref;
+	gpointer             servant;
+	BonoboObjectPrivate *priv;
 } BonoboObject;
 
 typedef struct {

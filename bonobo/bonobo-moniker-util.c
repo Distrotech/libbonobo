@@ -21,8 +21,8 @@ struct {
 	{ "!",       "OAFIID:ItemMoniker:42d4d657-3be0-4e1a-9c1b-16e8da332e05"  },
 	{ "OAFIID:", "OAFIID:OafMoniker:f7fd21cb-4aa9-4802-83e0-d82eabc983a8"   },
 	{ "OAFAID:", "OAFIID:OafMoniker:f7fd21cb-4aa9-4802-83e0-d82eabc983a8"   },
+	{ "new:",    "OAFIID:NewMoniker:4ebfc80c-95f9-4f66-acfb-1a26b2d04cd4"   },
 /*
-	{ "new:", "" },
 	{ "queue:", "" },
 */
 	{ NULL, NULL }

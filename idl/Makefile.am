@@ -17,7 +17,6 @@ idl_DATA =			\
 	bonobo-persist.idl	\
 	bonobo-storage.idl	\
 	bonobo-progressive.idl	\
-	bonobo-ui-handler.idl	\
 	bonobo-listener.idl	\
 	bonobo-property.idl	\
 	bonobo-desktop.idl	\

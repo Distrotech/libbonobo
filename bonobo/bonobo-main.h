@@ -7,7 +7,6 @@
 #include <gtk/gtkobject.h>
 #include <bonobo/Bonobo.h>
 
-char                       *bonobo_exception_get_text    (CORBA_Environment *ev);
 gboolean		    bonobo_init			 (CORBA_ORB orb,
 							  PortableServer_POA poa,
 							  PortableServer_POAManager manager);

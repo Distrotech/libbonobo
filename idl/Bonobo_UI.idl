@@ -30,10 +30,14 @@ module Bonobo {
 		exception MalFormedXML {};
 		exception InvalidPath {};
 
+		/* FIXME: broken, use set/get object instead */
 		void    register_component   (in string component_name,
 					      in Bonobo::UIComponent component);
 
 		void    deregister_component (in string component_name);
+
+		oneway void     freeze       ();
+		oneway void     thaw         ();
 
 		void    node_set             (in string path, in string xml,
 					      in string component_name)
@@ -60,8 +64,5 @@ module Bonobo {
 
 		Bonobo::Unknown object_get   (in string path)
 			raises (InvalidPath);
-
-		oneway void     freeze       ();
-		oneway void     thaw         ();
 	};
 };
