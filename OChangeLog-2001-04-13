@@ -1,3 +1,7 @@
+2000-05-27  Michael Meeks  <michael@helixcode.com>
+
+	* configure.in: bump version, set oaf as the default.
+
 2000-05-26  Mike Kestner  <mkestner@ameritech.net>
 
 	* bonobo/bonobo-ui-handler.h,
