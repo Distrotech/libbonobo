@@ -1,3 +1,7 @@
+2001-01-23  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
+
+	* configure.in: Added sk (Slovak) to ALL_LINGUAS.
+
 2001-01-19  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-ui-sync-menu.c: (add_tearoff): Fix bug
