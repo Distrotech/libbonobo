@@ -277,8 +277,10 @@ Returns the #GtkType for the BonoboObject object.
 
 </para>
 
-@object: 
+@obj: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@object: 
 
 
 <!-- ##### FUNCTION bonobo_object_idle_unref ##### -->
@@ -286,6 +288,8 @@ Returns the #GtkType for the BonoboObject object.
 
 </para>
 
+@obj: 
+<!-- # Unused Parameters # -->
 @object: 
 
 
@@ -294,8 +298,10 @@ Returns the #GtkType for the BonoboObject object.
 
 </para>
 
-@object: 
+@obj: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@object: 
 
 
 <!-- ##### FUNCTION bonobo_object_set_immortal ##### -->
@@ -312,11 +318,13 @@ Returns the #GtkType for the BonoboObject object.
 
 </para>
 
-@object: 
+@obj: 
 @fn: 
 @line: 
 @ref: 
 @Returns: 
+<!-- # Unused Parameters # -->
+@object: 
 
 
 <!-- ##### FUNCTION bonobo_object_dump_interfaces ##### -->

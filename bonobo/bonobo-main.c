@@ -159,7 +159,7 @@ bonobo_init_full (int *argc, char **argv,
 		bonobo_inited = TRUE;
 
 	/* Init neccessary bits */
-	g_type_init_with_debug_flags (G_TYPE_DEBUG_OBJECTS);
+	g_type_init_with_debug_flags (0);
 
 	if (!bonobo_activation_is_initialized ())
 		bonobo_activation_init (argc ? *argc : 0, argv);

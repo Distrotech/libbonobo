@@ -10400,17 +10400,17 @@ Bonobo_Unknown          object,CORBA_Environment      *opt_ev
 <FUNCTION>
 <NAME>bonobo_object_ref</NAME>
 <RETURNS>gpointer  </RETURNS>
-BonoboObject           *object
+gpointer                obj
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_object_idle_unref</NAME>
 <RETURNS>void  </RETURNS>
-BonoboObject           *object
+gpointer                obj
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_object_unref</NAME>
 <RETURNS>gpointer  </RETURNS>
-BonoboObject           *object
+gpointer                obj
 </FUNCTION>
 <FUNCTION>
 <NAME>bonobo_object_set_immortal</NAME>
@@ -10420,15 +10420,15 @@ BonoboObject           *object,gboolean                immortal
 <FUNCTION>
 <NAME>bonobo_object_trace_refs</NAME>
 <RETURNS>gpointer  </RETURNS>
-BonoboObject *object,const char   *fn,int           line,gboolean      ref
+gpointer                obj,const char             *fn,int                     line,gboolean                ref
 </FUNCTION>
 <MACRO>
 <NAME>bonobo_object_ref</NAME>
-#	define           bonobo_object_ref(o)   G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);}G_STMT_END
+#	define           bonobo_object_ref(o)   bonobo_object_trace_refs ((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);
 </MACRO>
 <MACRO>
 <NAME>bonobo_object_unref</NAME>
-#	define           bonobo_object_unref(o) G_STMT_START{bonobo_object_trace_refs((o),G_GNUC_PRETTY_FUNCTION,__LINE__,FALSE);}G_STMT_END
+#	define           bonobo_object_unref(o) bonobo_object_trace_refs ((o),G_GNUC_PRETTY_FUNCTION,__LINE__,FALSE);
 </MACRO>
 <FUNCTION>
 <NAME>bonobo_object_dump_interfaces</NAME>
