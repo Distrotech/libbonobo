@@ -407,7 +407,12 @@ ac_do_activation(impl_POA_OAF_ActivationContext *servant,
   child = ac_find_child_for_server(servant, server, ev);
 
   if(!child || !child->obj || ev->_major != CORBA_NO_EXCEPTION)
-    return;
+    {
+      OAF_GeneralError *errval = OAF_GeneralError__alloc();
+      errval->description = CORBA_string_dup("Couldn't find which child the server was listed in");
+      CORBA_exception_set(ev, CORBA_USER_EXCEPTION, ex_OAF_GeneralError, errval);
+      return;
+    }
 
   for(num_layers = 0, activatable = server;
       activatable && !strcmp(activatable->server_type, "factory");
@@ -830,6 +835,8 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
     goto out;
 
   hostname = ctx_get_value(ctx, "hostname", ev);
+  if(ev->_major != CORBA_NO_EXCEPTION)
+    goto out;
 
   ac_do_activation(servant, si, retval, flags, hostname, ctx, ev);
 
@@ -839,8 +846,16 @@ impl_OAF_ActivationContext_activate_from_id(impl_POA_OAF_ActivationContext * ser
   servant->refs--;
   oaf_actinfo_free(ainfo);
 
-  if(retval->res._d == OAF_RESULT_NONE)
-    retval->aid = CORBA_string_dup("");
+  if(ev->_major == CORBA_NO_EXCEPTION)
+    {
+      if(retval->res._d == OAF_RESULT_NONE)
+	retval->aid = CORBA_string_dup("");
+    }
+  else {
+    CORBA_free(retval);
+    retval = NULL;
+  }
+    
 
   return retval;
 }

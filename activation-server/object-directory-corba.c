@@ -279,7 +279,12 @@ impl_OAF_ObjectDirectory_activate(impl_POA_OAF_ObjectDirectory * servant,
 
   si = g_hash_table_lookup(servant->by_iid, iid);
 
-  if(si && /* XXX !server_is_running(si) */ 1)
+  retval = g_hash_table_lookup(servant->active_servers, iid);
+
+  if(!CORBA_Object_is_nil(retval, ev) && !CORBA_Object_non_existent(retval, ev) && !(flags & OAF_FLAG_IGNORE_EXISTING))
+    return CORBA_Object_duplicate(retval, ev);
+
+  if(si)
     retval = od_server_activate(si, &ai, servant->self, ev);
 
   return retval;
@@ -315,12 +320,18 @@ impl_OAF_ObjectDirectory_register(impl_POA_OAF_ObjectDirectory * servant,
   oldobj = g_hash_table_lookup(servant->active_servers, iid);
 
   if(!CORBA_Object_is_nil(oldobj, ev))
-    return OAF_REG_ALREADY_ACTIVE;
+    {
+      if(!CORBA_Object_non_existent(oldobj, ev))
+	return OAF_REG_ALREADY_ACTIVE;
+      else
+	CORBA_Object_release(oldobj, ev);
+    }
+
 
   if(!g_hash_table_lookup(servant->by_iid, iid))
     return OAF_REG_NOT_LISTED;
 
-  g_hash_table_insert(servant->active_servers, g_strdup(iid), CORBA_Object_duplicate(obj, ev));
+  g_hash_table_insert(servant->active_servers, oldobj?iid:g_strdup(iid), CORBA_Object_duplicate(obj, ev));
   servant->time_active_changed = time(NULL);
 
   return OAF_REG_SUCCESS;

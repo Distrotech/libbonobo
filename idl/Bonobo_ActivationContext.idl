@@ -1,6 +1,7 @@
 #include "gnome-factory.idl"
 
 module OAF {
+  exception GeneralError { string description; };
   typedef string ImplementationID;
   typedef string ActivationID;
   interface ActivationContext;

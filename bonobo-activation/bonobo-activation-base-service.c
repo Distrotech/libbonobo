@@ -219,6 +219,17 @@ oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev)
 
   /* fork & get the IOR from the magic pipe */
   childpid = fork();
+
+  if(childpid < 0)
+    {
+      OAF_GeneralError *errval;
+
+      errval = OAF_GeneralError__alloc();
+      errval->description = CORBA_string_dup("Couldn't fork a new process");
+      CORBA_exception_set(ev, CORBA_USER_EXCEPTION, ex_OAF_GeneralError, errval);
+      return CORBA_OBJECT_NIL;
+    }
+
   if(childpid)
     {
       int status;
@@ -228,6 +239,23 @@ oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev)
       GIOChannel *gioc;
 
       waitpid(childpid, &status, 0); /* de-zombify */
+
+      if(!WIFEXITED(status))
+	{
+	  OAF_GeneralError *errval;
+	  char cbuf[512];
+
+	  errval = OAF_GeneralError__alloc();
+
+	  if(WIFSIGNALED(status))
+	    g_snprintf(cbuf, sizeof(cbuf), "Child received signal %u (%s)", WTERMSIG(status),
+		       sys_siglist[WTERMSIG(status)]);
+	  else
+	    g_snprintf(cbuf, sizeof(cbuf), "Unknown non-exit error (status is %u)", status);
+	  errval->description = CORBA_string_dup(cbuf);
+	  CORBA_exception_set(ev, CORBA_USER_EXCEPTION, ex_OAF_GeneralError, errval);
+	  return CORBA_OBJECT_NIL;
+	}
 
 #ifdef OAF_DEBUG
       ai.do_srv_output = getenv("OAF_DEBUG_EXERUN");
@@ -261,13 +289,19 @@ oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev)
 	}
       else
 	{
+	  OAF_GeneralError *errval;
+
 #ifdef OAF_DEBUG
 	  if (ai.do_srv_output) g_message("string doesn't match IOR:");
 #endif
+
+	  errval = OAF_GeneralError__alloc();
+	  errval->description = CORBA_string_dup(ai.iorbuf);
+	  CORBA_exception_set(ev, CORBA_USER_EXCEPTION, ex_OAF_GeneralError, errval);
 	  retval = CORBA_OBJECT_NIL;
 	}
     }
-  else if(fork())
+  else if((childpid = fork()))
     {
       _exit(0); /* de-zombifier process, just exit */
     }
@@ -288,6 +322,9 @@ oaf_server_by_forking(const char **cmd, int ior_fd, CORBA_Environment *ev)
       sigaction(SIGPIPE, &sa, 0);
 
       execvp(cmd[0], (char **)cmd);
+      if(ior_fd != 1)
+	dup2(ior_fd, 1);
+      fprintf(stdout, "Exec failed: %d (%s)\n", errno, g_strerror(errno));
       _exit(1);
     }
 
