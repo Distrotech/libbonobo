@@ -42,7 +42,7 @@ run_tests ()
 	bonobo_event_source_client_add_listener (BONOBO_OBJREF (es),
 						 event_cb, mask, &ev, mask);
 
-	mask = "a/test:";
+	mask = "=a/test";
 	bonobo_event_source_client_add_listener (BONOBO_OBJREF (es),
 						 event_cb, mask, &ev, mask);
 

@@ -3,7 +3,9 @@
 	* bonobo/bonobo-event-source.c
 	(event_match): impl. a new function to compare event names with
 	event masks.
-	
+	(event_match): use the first char to decide if we should make an
+	exact compare (instead of the last)
+
 	(bonobo_event_source_notify_listeners): use the new function
 	instead of strstr().
 

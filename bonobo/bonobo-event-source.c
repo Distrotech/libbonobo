@@ -133,7 +133,7 @@ impl_Bonobo_EventSource_removeListener (PortableServer_Servant servant,
 }
 
 /*
- * if the mask ends with a colon, we do exact compares - else we only check 
+ * if the mask starts with a '=', we do exact compares - else we only check 
  * if the mask is a prefix of name.
  */
 static gboolean
@@ -141,11 +141,13 @@ event_match (const char *name, const char *mask)
 {
 	int i = 0;
 
+	if (mask [0] == '=')
+		return !strcmp (name, mask + 1);
+
 	while (name [i] && mask [i] && name [i] == mask [i])
 		i++;
 
-	if ((mask [i] == '\0' && (!i || mask [i - 1] != ':')) || 
-	    (name [i] == '\0' && mask [i] == ':' && mask [i + 1] == '\0'))
+	if (mask [i] == '\0')
 		return TRUE;
 
 	return FALSE;
