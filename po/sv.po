@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-02-11 10:21+0000\n"
-"PO-Revision-Date: 2002-01-27 03:53+0100\n"
+"POT-Creation-Date: 2002-08-03 02:59+0200\n"
+"PO-Revision-Date: 2002-08-03 02:59+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,9 +51,10 @@ msgstr "Ett försök gjordes med en flödesåtgärd som inte stöds"
 msgid "IO Error on stream"
 msgstr "IO-fel på flöde"
 
+# SUN CHANGED MESSAGE
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "IO-fel på lagringsutrymme"
+msgstr "IO-fel i lagringsutrymme"
 
 #: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
@@ -63,9 +64,10 @@ msgstr "Namnet finns redan i lagringsutrymmet"
 msgid "Object not found in storage"
 msgstr "Objektet kunde inte hittas i lagringsutrymmet"
 
+# SUN CHANGED MESSAGE
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "Ingen tillåtelse att utföra åtgärd på lagringsutrymmet"
+msgstr "Ingen tillåtelse att utföra åtgärd i lagringsutrymmet"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
@@ -83,13 +85,15 @@ msgstr "Objektet är inget lagringsutrymme"
 msgid "Storage is not empty"
 msgstr "Lagringsutrymmet är inte tomt"
 
+# SUN CHANGED MESSAGE
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "felaktig XML-användargränssnittsbeskrivning"
+msgstr "felaktig beskrivning av XML-användargränssnitt"
 
+# SUN CHANGED MESSAGE
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "ogiltig sökväg till XML-användargränssnittselement"
+msgstr "ogiltig sökväg till element för XML-användargränssnitt"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
