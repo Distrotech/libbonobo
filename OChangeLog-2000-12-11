@@ -1,3 +1,14 @@
+Wed Jul 28 13:34:13 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+	
+	* bonobo/gnome-storage-repo.[ch]: Removed.
+	* bonobo/gnome-stream-repo.[ch]: Removed.
+	* bonobo/test-storage.c: New File.
+	* bonobo/gnome-storage-efs.[ch]: New File.
+	* bonobo/gnome-stream-efs.[ch]: New File.
+
+	Removed obsolete librepo files and added files for libefs (you
+	need libefs to compile bonobo).
+	
 1999-07-24  Nat Friedman  <nat@gnome-support.com>
 
 	* components/text-plain/bonobo-text-plain.c: Removed obsolete verb
