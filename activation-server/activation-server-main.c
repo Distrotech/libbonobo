@@ -276,11 +276,19 @@ main (int argc, char *argv[])
 
 	memset (&environment, 0, sizeof (Bonobo_ActivationEnvironment));
 
+        /* activate the ORB */
+        poa_manager = PortableServer_POA__get_the_POAManager (root_poa, ev);
+	PortableServer_POAManager_activate (poa_manager, ev);
+
         naming_service = impl_CosNaming_NamingContext__create (root_poa, ev);
-        if (naming_service == NULL)
+        if (ev->_major != CORBA_NO_EXCEPTION || naming_service == NULL)
                 g_warning ("Failed to create naming service");
+        CORBA_exception_init (ev);
+
         Bonobo_ObjectDirectory_register_new 
                 (od, NAMING_CONTEXT_IID, &environment, naming_service, 0, "", &existing, ev);
+        g_assert (ev->_major == CORBA_NO_EXCEPTION);
+        
 	if (existing != CORBA_OBJECT_NIL)
 		CORBA_Object_release (existing, NULL);
 
@@ -299,9 +307,6 @@ main (int argc, char *argv[])
         activation_context_setup (root_poa, od, ev);
 
         dump_ior (orb, dev_null_fd, ev);
-
-        poa_manager = PortableServer_POA__get_the_POAManager (root_poa, ev);
-	PortableServer_POAManager_activate (poa_manager, ev);
 
 	g_main_loop_run (main_loop);
 

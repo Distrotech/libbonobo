@@ -1,5 +1,22 @@
 2003-10-31  Michael Meeks  <michael@ximian.com>
 
+	* Version 2.4.2
+
+2003-11-03  Michael Meeks  <michael@ximian.com>
+
+	* bonobo-activation/bonobo-activation-base-service.c
+	(bonobo_activation_service_get): print out the exception
+	if build with debugging.
+
+	* tests/test-moniker.c (main): activate before
+	doing misc. calls.
+
+	* activation-server/activation-server-main.c
+	(main): activate the POA manager before we call
+	in-proc methods that can generate transient errors.
+
+2003-10-31  Michael Meeks  <michael@ximian.com>
+
 	* bonobo-activation/bonobo-activation-activate.c
 	(bonobo_activation_init_activation_env): add XAUTHORITY
 	to the list of uniqueness keys - causing grief for

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.103.0\n"
-"POT-Creation-Date: 2003-10-10 17:18+0100\n"
+"POT-Creation-Date: 2003-11-03 15:41+0000\n"
 "PO-Revision-Date: 2003-06-22 17:54+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkish <gnome@azitt.com>\n"

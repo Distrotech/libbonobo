@@ -37,6 +37,7 @@
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
+#include "config.h"
 #include <string.h>
 #include <limits.h>
 #include <errno.h>
@@ -453,6 +454,20 @@ bonobo_activation_service_get (const BonoboActivationBaseService *base_service)
         
         obj = bonobo_activation_internal_service_get_extended (
                 base_service, FALSE, &ev);
+
+#ifdef G_ENABLE_DEBUG
+        if (ev._major != CORBA_NO_EXCEPTION) {
+                if (!strcmp (ev._id, "IDL:Bonobo/GeneralError:1.0")) {
+                        Bonobo_GeneralError *err = ev._any._value;
+		
+                        if (!err || !err->description)
+                                g_warning ("General error with no description");
+                        else
+                                g_warning ("Exception '%s' on activate", err->description);
+                } else
+                        g_warning ("Exception on activate\n");
+        }
+#endif
 
         CORBA_exception_free (&ev);
 
