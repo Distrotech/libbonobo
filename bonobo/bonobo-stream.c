@@ -10,6 +10,7 @@
 
 static GnomeObjectClass *gnome_stream_parent_class;
 
+POA_GNOME_Stream__epv gnome_stream_epv;
 POA_GNOME_Stream__vepv gnome_stream_vepv;
 
 #define CLASS(o) GNOME_STREAM_CLASS(GTK_OBJECT(o)->klass)
@@ -106,21 +107,20 @@ gnome_stream_class_init (GnomeStreamClass *class)
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
 	gnome_stream_parent_class = gtk_type_class (gnome_object_get_type ());
-	object_class->destroy = gnome_stream_destroy;
 
 	init_stream_corba_class ();
 }
 
 GtkType
-gnome_storage_get_type (void)
+gnome_stream_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type){
 		GtkTypeInfo info = {
 			"IDL:GNOME/Stream:1.0",
-			sizeof (GnomeStorage),
-			sizeof (GnomeStorageClass),
+			sizeof (GnomeStream),
+			sizeof (GnomeStreamClass),
 			(GtkClassInitFunc) gnome_stream_class_init,
 			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved 1 */

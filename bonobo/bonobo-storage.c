@@ -10,6 +10,7 @@
 
 static GnomeObjectClass *gnome_storage_parent_class;
 
+POA_GNOME_Storage__epv gnome_storage_epv;
 POA_GNOME_Storage__vepv gnome_storage_vepv;
 
 #define CLASS(o) GNOME_STORAGE_CLASS(GTK_OBJECT(o)->klass)
@@ -141,11 +142,10 @@ init_storage_corba_class (void)
 	gnome_storage_epv.open_stream = impl_open_stream;
 	gnome_storage_epv.create_storage = impl_create_storage;
 	gnome_storage_epv.open_storage = impl_open_storage;
-	gnome_storage_epv.open_to = impl_open_to;
+	gnome_storage_epv.copy_to = impl_copy_to;
 	gnome_storage_epv.rename = impl_rename;
 	gnome_storage_epv.commit = impl_commit;
 	gnome_storage_epv.list_contents = impl_list_contents;
-	gnome_storage_epv.destroy = impl_destroy;
 
 	/* The VEPV */
 	gnome_storage_vepv.GNOME_object_epv = &gnome_object_epv;
@@ -158,7 +158,6 @@ gnome_storage_class_init (GnomeStorageClass *class)
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
 	gnome_storage_parent_class = gtk_type_class (gnome_object_get_type ());
-	object_class->destroy = gnome_storage_destroy;
 
 	init_storage_corba_class ();
 }
@@ -192,22 +191,12 @@ gnome_storage_get_type (void)
 }
 
 GnomeStorage *
-gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage,
-			 const char *path, const char *open_mode)
+gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage)
 {
-	StorageHandle *handle;
-	
 	g_return_val_if_fail (storage != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_STORAGE (storage), NULL);
 	g_return_val_if_fail (corba_storage != CORBA_OBJECT_NIL, NULL);
 
-	handle = storage_file_open (path, open_mode);
-	if (handle == NULL){
-		CORBA_free (corba_storage);
-		gtk_object_unref (GTK_OBJECT (storage));
-		return NULL;
-	}
-	
 	gnome_object_construct (
 		GNOME_OBJECT (storage),
 		(CORBA_Object) corba_storage);
@@ -216,6 +205,7 @@ gnome_storage_construct (GnomeStorage *storage, GNOME_Storage corba_storage,
 	return storage;
 }
 
+#if 0
 GnomeStorage *
 gnome_storage_file_open (const char *path, const char *open_mode)
 {
@@ -238,3 +228,4 @@ gnome_storage_file_open (const char *path, const char *open_mode)
 	return gnome_storage_construct (storage, corba_storage);
 }
 
+#endif

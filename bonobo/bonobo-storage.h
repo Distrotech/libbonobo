@@ -3,6 +3,11 @@
 
 #include <bonobo/gnome-object.h>
 
+struct _GnomeStream;
+struct _GnomeStorage;
+typedef struct _GnomeStream GnomeStream;
+typedef struct _GnomeStorage GnomeStorage;
+
 BEGIN_GNOME_DECLS
 
 #define GNOME_STORAGE_TYPE        (gnome_storage_get_type ())
@@ -11,9 +16,9 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_STORAGE(o)       (GTK_CHECK_TYPE ((o), GNOME_STORAGE_TYPE))
 #define GNOME_IS_STORAGE_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), GNOME_STORAGE_TYPE))
 
-typedef struct {
+struct _GnomeStorage {
 	GnomeObject object;
-} GnomeStorage;
+};
 
 typedef struct {
 	GnomeObjectClass parent_class;
@@ -30,6 +35,9 @@ typedef struct {
 	GnomeStorage *(*create_storage) (GnomeStorage *storage,
 					 const CORBA_char *path,
 					 CORBA_Environment *ev);
+	GnomeStorage *(*open_storage)   (GnomeStorage *storage,
+					 const CORBA_char *path,
+					 CORBA_Environment *ev);
 	void         (*copy_to)         (GnomeStorage *storage, GNOME_Storage target,
 					 CORBA_Environment *ev);
 	void         (*rename)          (GnomeStorage *storage,
@@ -44,6 +52,9 @@ typedef struct {
 					 CORBA_Environment *ev);
 } GnomeStorageClass;
 
+GtkType         gnome_storage_get_type     (void);
+GnomeStorage   *gnome_storage_construct    (GnomeStorage *storage,
+					    GNOME_Storage corba_storage);
 GnomeStorage   *gnome_storage_file_open    (const char *path,
 					    const char *open_mode);
 GnomeStorage   *gnome_storage_storage_open (GnomeStorage *storage,
@@ -60,6 +71,7 @@ void gnome_stream_write_class_id  (GnomeStream *stream,
 				   char *class_id);
 
 extern POA_GNOME_Storage__vepv gnome_storage_vepv;
+extern POA_GNOME_Storage__epv gnome_storage_epv;
 
 END_GNOME_DECLS
 
