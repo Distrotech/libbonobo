@@ -211,11 +211,6 @@ July 19, 1999, Elliot:
 		Use CORBA_Object_is_nil instead of assuming that
 		CORBA_OBJECT_NIL == NULL.
 
-1999-07-18  Dave Camp  <campd@oit.edu>
-
-	* bonobo/gnome-view.c (impl_GNOME_View_size_allocate): If view->plug
-	is NULL, use default values for the allocation.
-
 July 17, 1999, Elliot:
 	bonobo/gnome-embeddable-factory.c:
 		Duplicate the returned objref.
