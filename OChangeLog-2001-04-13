@@ -1,5 +1,12 @@
 2000-10-05  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-compat.c (bonobo_control_get_remote_ui_handler):
+	fix evil buglet.
+
+	* bonobo/bonobo-socket.c (bonobo_socket_filter_func): ignore
+	cases where we get a ConfigureRequest / MapRequest but the window is
+	gone before we progress.
+
 	* configure.in: bump configure version to 0.20 to simplify other
 	people's builds.
 
