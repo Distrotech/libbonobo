@@ -75,7 +75,6 @@ bonobo_moniker_util_parse_name (const char *name, int *plen)
 				i--;
 			}
 			
-			printf ("FOUND %s %s %d %d %d\n",name, rval, l ,i,c);
 			if (plen)
 				*plen = i + c + 1;
 
