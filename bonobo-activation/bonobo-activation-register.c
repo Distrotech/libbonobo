@@ -68,8 +68,8 @@ OAF_RegistrationResult
 oaf_active_server_register (const char *registration_id, CORBA_Object obj)
 {
 	OAF_ObjectDirectory od;
-	OAFRegistrationCategory regcat = { "IDL:OAF/ObjectDirectory:1.0" };
-	OAFRegistrationCategory ac_regcat;
+	OAFBaseService base_service = { "IDL:OAF/ObjectDirectory:1.0" };
+	OAFBaseService ac_base_service;
 	CORBA_Environment ev;
 	OAF_RegistrationResult retval;
 	const char *actid;
@@ -90,11 +90,11 @@ oaf_active_server_register (const char *registration_id, CORBA_Object obj)
         if (actid && strcmp (actid, iid) == 0 && oaf_private) {
                 retval = OAF_REG_SUCCESS;
         } else {
-                regcat.session_name = oaf_session_name_get ();
-                regcat.username = oaf_username_get ();
-                regcat.hostname = oaf_hostname_get ();
+                base_service.session_name = oaf_session_name_get ();
+                base_service.username = oaf_username_get ();
+                base_service.hostname = oaf_hostname_get ();
                 
-                od = oaf_service_get (&regcat);
+                od = oaf_service_get (&base_service);
                 
                 if (CORBA_Object_is_nil (od, &ev)) {
                         CORBA_Object ac;
@@ -103,12 +103,12 @@ oaf_active_server_register (const char *registration_id, CORBA_Object obj)
                          * activation context (in case oafd needs starting)
                          * and then try again 
                          */
-                        ac_regcat = regcat;
-                        ac_regcat.name = "IDL:OAF/ActivationContext:1.0";
-                        ac = oaf_service_get (&ac_regcat);
+                        ac_base_service = base_service;
+                        ac_base_service.name = "IDL:OAF/ActivationContext:1.0";
+                        ac = oaf_service_get (&ac_base_service);
                         if (CORBA_Object_is_nil (ac, &ev))
                                 return OAF_REG_ERROR;
-                        od = oaf_service_get (&regcat);
+                        od = oaf_service_get (&base_service);
                         if (CORBA_Object_is_nil (od, &ev))
                                 return OAF_REG_ERROR;
                 }
@@ -171,7 +171,7 @@ void
 oaf_active_server_unregister (const char *iid, CORBA_Object obj)
 {
 	OAF_ObjectDirectory od;
-	OAFRegistrationCategory regcat = { "IDL:OAF/ObjectDirectory:1.0" };
+	OAFBaseService base_service = { "IDL:OAF/ObjectDirectory:1.0" };
 	CORBA_Environment ev;
 	const char *actid;
 
@@ -179,11 +179,11 @@ oaf_active_server_unregister (const char *iid, CORBA_Object obj)
 	if(actid && !strcmp(actid, iid) && oaf_private)
 		return;
 
-	regcat.session_name = oaf_session_name_get ();
-	regcat.username = oaf_username_get ();
-	regcat.hostname = oaf_hostname_get ();
+	base_service.session_name = oaf_session_name_get ();
+	base_service.username = oaf_username_get ();
+	base_service.hostname = oaf_hostname_get ();
 
-	od = oaf_service_get (&regcat);
+	od = oaf_service_get (&base_service);
 
 	CORBA_exception_init (&ev);
 	if (CORBA_Object_is_nil (od, &ev))
