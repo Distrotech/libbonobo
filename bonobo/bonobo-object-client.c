@@ -327,6 +327,8 @@ gnome_object_activate (const char *object_desc, GoadActivationFlags flags)
 GnomeObjectClient *
 gnome_object_client_from_corba (GNOME_Unknown o)
 {
+	GnomeObjectClient *object;
+	
 	g_return_val_if_fail (o != CORBA_OBJECT_NIL, NULL);
 
 	object = gtk_type_new (gnome_object_client_get_type ());
