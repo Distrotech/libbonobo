@@ -1,5 +1,12 @@
 2000-10-08  Martin Baulig  <baulig@suse.de>
 
+	* gshell/inout.c (verb_FileLoad): Added verb "FileLoad" to load a
+	file into the current component.
+
+	* gshell/ui.xml: Removed the "Edit" menu.
+
+2000-10-08  Martin Baulig  <baulig@suse.de>
+
 	* bonobo/bonobo-selector.h, bonobo/bonobo-selector.c
 	(bonobo_selector_get_selected_name): New function.
 	(bonobo_selector_get_selected_description): New function.
