@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ammonite\n"
-"POT-Creation-Date: 2001-07-30 09:31+0800\n"
+"POT-Creation-Date: 2001-08-01 08:10+0100\n"
 "PO-Revision-Date: 2001-05-30 11:55+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: chinese <zh@li.org>\n"
@@ -13,117 +13,118 @@ msgstr ""
 "Content-Type: text/plain; charset=big5\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bonobo/bonobo-exception.c:163
+#: bonobo/bonobo-exception.c:153
 msgid "An unsupported action was attempted"
 msgstr "嘗試執行了一個不支援的動作"
 
-#: bonobo/bonobo-exception.c:166
+#: bonobo/bonobo-exception.c:156
 msgid "IO Error"
 msgstr "輸出入錯誤"
 
-#: bonobo/bonobo-exception.c:169
+#: bonobo/bonobo-exception.c:159
 msgid "Invalid argument value"
 msgstr "不合法的參數數值"
 
-#: bonobo/bonobo-exception.c:173
+#: bonobo/bonobo-exception.c:163
 msgid "Object not found"
 msgstr "找不到物件"
 
-#: bonobo/bonobo-exception.c:176
+#: bonobo/bonobo-exception.c:166
 msgid "Syntax error in object description"
 msgstr "物件描述內有語法錯誤"
 
-#: bonobo/bonobo-exception.c:181
+#: bonobo/bonobo-exception.c:171
 msgid "Cannot activate object from factory"
 msgstr "無法從元件工廠去啟動物件"
 
-#: bonobo/bonobo-exception.c:186
+#: bonobo/bonobo-exception.c:176
 msgid "No permission to access stream"
 msgstr "不允許去存取資料流"
 
-#: bonobo/bonobo-exception.c:189
+#: bonobo/bonobo-exception.c:179
 msgid "An unsupported stream action was attempted"
 msgstr "嘗試執行了一個不支援的資料流動作"
 
-#: bonobo/bonobo-exception.c:192
+#: bonobo/bonobo-exception.c:182
 msgid "IO Error on stream"
 msgstr "資料流的輸出入錯誤"
 
-#: bonobo/bonobo-exception.c:196
+#: bonobo/bonobo-exception.c:186
 msgid "IO Error on storage"
 msgstr "儲存庫的輸出入錯誤"
 
-#: bonobo/bonobo-exception.c:199
+#: bonobo/bonobo-exception.c:189
 msgid "Name already exists in storage"
 msgstr "儲存庫內已有相同的名稱"
 
-#: bonobo/bonobo-exception.c:202
+#: bonobo/bonobo-exception.c:192
 msgid "Object not found in storage"
 msgstr "在儲存庫內找不到物件"
 
-#: bonobo/bonobo-exception.c:205
+#: bonobo/bonobo-exception.c:195
 msgid "No permission to do operation on storage"
 msgstr "在儲存庫內不允許執行動作"
 
-#: bonobo/bonobo-exception.c:207
+#: bonobo/bonobo-exception.c:197
 msgid "An unsupported storage action was attempted"
 msgstr "嘗試執行了一個不支援的儲存庫動作"
 
-#: bonobo/bonobo-exception.c:209
+#: bonobo/bonobo-exception.c:199
 msgid "Object is not a stream"
 msgstr "物件不是資料流"
 
-#: bonobo/bonobo-exception.c:212
+#: bonobo/bonobo-exception.c:202
 msgid "Object is not a storage"
 msgstr "物件不是儲存庫"
 
-#: bonobo/bonobo-exception.c:215
+#: bonobo/bonobo-exception.c:205
 msgid "Storage is not empty"
 msgstr "儲存庫內仍有物件"
 
-#: bonobo/bonobo-exception.c:219
+#: bonobo/bonobo-exception.c:209
 msgid "malformed user interface XML description"
 msgstr "不合格式的使用者介面 XML 描述"
 
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:212
 msgid "invalid path to XML user interface element"
 msgstr "指到 XML 使用者介面元件的路徑不合法"
 
-#: bonobo/bonobo-exception.c:226
+#: bonobo/bonobo-exception.c:216
 msgid "incorrect data type"
 msgstr "不正確的資料類別"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:219
 msgid "stream not found"
 msgstr "找不到資料流"
 
-#: bonobo/bonobo-exception.c:233
+#: bonobo/bonobo-exception.c:223
 msgid "property not found"
 msgstr "找不到屬性"
 
-#: bonobo/bonobo-exception.c:237
+#: bonobo/bonobo-exception.c:227
 msgid "Moniker interface cannot be found"
 msgstr "無法找到命名器介面"
 
-#: bonobo/bonobo-exception.c:240
+#: bonobo/bonobo-exception.c:230
 msgid "Moniker activation timed out"
 msgstr "啟動命名器逾時"
 
-#: bonobo/bonobo-exception.c:243
+#: bonobo/bonobo-exception.c:233
 msgid "Syntax error within moniker"
 msgstr "命名器內含有語法錯誤"
 
-#: bonobo/bonobo-exception.c:246
+#: bonobo/bonobo-exception.c:236
 msgid "Moniker has an unknown moniker prefix"
 msgstr "命名器具有不詳的前置字"
 
-#: bonobo/bonobo-exception.c:270
+#: bonobo/bonobo-exception.c:260
 msgid "Error checking error; no exception"
 msgstr "檢查錯誤時發生錯誤；沒有列外處理"
 
-#: bonobo/bonobo-generic-factory.h:70 bonobo/bonobo-generic-factory.h:74
-msgid "Could not initialize Bonobo"
-msgstr "無法初始化 Bonobo"
+#: bonobo/bonobo-exception.c:269
+#, fuzzy
+msgid "General activation error with no description"
+msgstr "物件描述內有語法錯誤"
 
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
 msgid "HTTP Moniker"
@@ -152,6 +153,9 @@ msgstr "一般的項目命名器"
 #: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
 msgid "stream MonikerExtender"
 msgstr "資料流命名延伸器"
+
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "無法初始化 Bonobo"
 
 #~ msgid "Visible"
 #~ msgstr "可見"

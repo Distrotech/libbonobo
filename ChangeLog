@@ -1,3 +1,11 @@
+2001-08-03  Michael Meeks  <michael@ximian.com>
+
+	* Version 1.101.0
+
+	* configure.in: use AM_GLIB_GNU_GETTEXT.
+
+	* Makefile.am: prune intl.
+
 2001-08-02  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-types.c (bonobo_closure_store): make this
