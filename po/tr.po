@@ -1,0 +1,170 @@
+# Turkish translation of libbonobo.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Ömer Fadýl USTA <omer_fad@hotmail.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libbonobo 1.101.1\n"
+"POT-Creation-Date: 2001-08-13 11:22+0200\n"
+"PO-Revision-Date: 2001-08-14 14:22+0200\n"
+"Last-Translator: Ömer Fadýl USTA <omer_fad@hotmail.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-9\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bonobo/bonobo-exception.c:153
+msgid "An unsupported action was attempted"
+msgstr "Desteklenmeyen bir eylem gerçekleþtirildi"
+
+#: bonobo/bonobo-exception.c:156
+msgid "IO Error"
+msgstr "IO Hatasý"
+
+#: bonobo/bonobo-exception.c:159
+msgid "Invalid argument value"
+msgstr "Geçersiz parametre girdisi"
+
+#: bonobo/bonobo-exception.c:163
+msgid "Object not found"
+msgstr "Nesne Bulunamadý"
+
+#: bonobo/bonobo-exception.c:166
+msgid "Syntax error in object description"
+msgstr "Nesne Açýklamasýnda Kural Hatasý"
+
+#: bonobo/bonobo-exception.c:171
+msgid "Cannot activate object from factory"
+msgstr "Nesne aktifleþtirilemiyor"
+
+#: bonobo/bonobo-exception.c:176
+msgid "No permission to access stream"
+msgstr "Akýma eriþim izniniz yok"
+
+#: bonobo/bonobo-exception.c:179
+msgid "An unsupported stream action was attempted"
+msgstr "Desteklenmeyen bir akým eylemi gerçekleþtirildi"
+
+#: bonobo/bonobo-exception.c:182
+msgid "IO Error on stream"
+msgstr "Akým sýrasýnda IO hatasý"
+
+#: bonobo/bonobo-exception.c:186
+msgid "IO Error on storage"
+msgstr "Depolama anýnda IO hatasý"
+
+#: bonobo/bonobo-exception.c:189
+msgid "Name already exists in storage"
+msgstr "Depoda bu isimde zaten kayýt var"
+
+#: bonobo/bonobo-exception.c:192
+msgid "Object not found in storage"
+msgstr "Depoda nesne bulunamadý"
+
+#: bonobo/bonobo-exception.c:195
+msgid "No permission to do operation on storage"
+msgstr "Depolama anýnda iþlem yürütmeye izniniz yok"
+
+#: bonobo/bonobo-exception.c:197
+msgid "An unsupported storage action was attempted"
+msgstr "Desteklenmeyen bir depolama eylemi gerçekleþtirildi"
+
+#: bonobo/bonobo-exception.c:199
+msgid "Object is not a stream"
+msgstr "Nesne bir akým deðildir"
+
+#: bonobo/bonobo-exception.c:202
+msgid "Object is not a storage"
+msgstr "Nesne bir depolama deðildir"
+
+#: bonobo/bonobo-exception.c:205
+msgid "Storage is not empty"
+msgstr "Depolama boþ deðil"
+
+#: bonobo/bonobo-exception.c:209
+msgid "malformed user interface XML description"
+msgstr "XML için kusurlu kullanýcý arayüzü tanýmlamasý"
+
+#: bonobo/bonobo-exception.c:212
+msgid "invalid path to XML user interface element"
+msgstr "XML kullanýcý arayüzü öðesi için geçersiz yol tanýmlamasý"
+
+#: bonobo/bonobo-exception.c:216
+msgid "incorrect data type"
+msgstr "Hatalý veri tipi"
+
+#: bonobo/bonobo-exception.c:219
+msgid "stream not found"
+msgstr "Akým bulunamadý"
+
+#: bonobo/bonobo-exception.c:223
+msgid "property not found"
+msgstr "Özellik bulunamadý"
+
+#: bonobo/bonobo-exception.c:226
+msgid "property has invalid type"
+msgstr "Geçersiz özellik tipi"
+
+#: bonobo/bonobo-exception.c:229
+msgid "property is read only"
+msgstr "Özellik salt okunur"
+
+#: bonobo/bonobo-exception.c:232
+msgid "config database backend failed "
+msgstr "Yapýlandýrma veritabaný baþarýsýzlýkla sonuçlandý"
+
+#: bonobo/bonobo-exception.c:236
+msgid "Moniker interface cannot be found"
+msgstr "Moniker arayüzü bulunamadý"
+
+#: bonobo/bonobo-exception.c:239
+msgid "Moniker activation timed out"
+msgstr "Moniker için aktifleþtirme zaman aþýmý"
+
+#: bonobo/bonobo-exception.c:242
+msgid "Syntax error within moniker"
+msgstr "Moniker için yazým hatasý"
+
+#: bonobo/bonobo-exception.c:245
+msgid "Moniker has an unknown moniker prefix"
+msgstr "Moniker, bilinmeyen bir moniker sabitine sahip!"
+
+#: bonobo/bonobo-exception.c:269
+msgid "Error checking error; no exception"
+msgstr "Hata kontrol hatasý; itiraz edilemiyor"
+
+#: bonobo/bonobo-exception.c:278
+msgid "General activation error with no description"
+msgstr "Tanýmlamasýz genel aktifleþtirme hatasý"
+
+#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+msgid "Could not initialize Bonobo"
+msgstr "Bonobo baþlatýlamýyor "
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+msgid "HTTP Moniker"
+msgstr "HTTP Moniker"
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+msgid "Standard Moniker factory"
+msgstr "Moniker Fabrika standardý"
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
+msgid "generic Oaf activation moniker"
+msgstr "Moniker genel kaba aktifleþtirmesi"
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
+msgid "generic Oaf query moniker"
+msgstr "Moniker genel kaba sorgusu"
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+msgid "generic factory 'new' moniker"
+msgstr "Moniker genel üretim 'yeni'"
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+msgid "generic item moniker"
+msgstr "Moniker genel öðesi"
+
+#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+msgid "stream MonikerExtender"
+msgstr "Moniker Kapsamýndaki akým"
