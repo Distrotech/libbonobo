@@ -444,6 +444,8 @@ bonobo_closure_invoke_va_list (GClosure *closure,
 
 	for (i = 0; i < params->len; i++)
 		g_value_unset (&g_array_index (params, GValue, i));
+
+	g_array_free (params, TRUE);
 }
 
 /**

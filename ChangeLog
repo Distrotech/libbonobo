@@ -1,3 +1,9 @@
+2002-02-17  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-types.c
+	(bonobo_closure_invoke_va_list): free the params
+	array after use - doh.
+
 2002-02-18  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* configure.in: remove GNOME_COMMON_INIT, GNOME_PLATFORM_GNOME_2
