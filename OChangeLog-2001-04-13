@@ -1,5 +1,10 @@
 2000-11-15  Darin Adler  <darin@eazel.com>
 
+	* bonobo/bonobo-win.c: (popup_remove): Disconnect destroy handler
+	on the popup menu when the popup is removed.
+
+2000-11-15  Darin Adler  <darin@eazel.com>
+
 	* bonobo/bonobo-win.c: (menu_sync_state): Update the state from
 	the command node rather than the main node if one exists. This
 	fixes the bug where pop-up menus weren't properly set up.
