@@ -1,3 +1,12 @@
+2001-02-07  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/bonobo-ui-sync-toolbar.c (toolbar_build_control): Remove
+	unnecessary call to `bonobo_object_dup_ref' when calling
+	`bonobo_ui_toolbar_control_item_new', since the latter calls
+	`bonobo_object_dup_ref' itself and nothing removes the extra
+	ref. This was causing leaked objects and processes as for instance
+	the nautilus throbber component as per nautilus bug 6023.
+
 2001-02-07  Michael Meeks  <michael@ximian.com>
 
 	* Version 0.35
