@@ -1,3 +1,7 @@
+2000-03-09  Michael Meeks  <michael@helixcode.com>
+
+	* idl/Bonobo.idl: remove gnome-factory.idl.
+
 2000-03-08  Jon K Hellan  <hellan@acm.org>
 
 	Fixed problems when compiling Bonobo IDL with the omniORB IDL

@@ -8,8 +8,6 @@
 #ifndef _BONOBO_IDL_INCLUDED_
 #define _BONOBO_IDL_INCLUDED_
 
-#include <gnome-factory.idl>
-
 #if !defined(__BONOBO_COMPILATION) && defined(__ORBIT_IDL__)
 %{
 #pragma include_defs bonobo/Bonobo.h
