@@ -1,3 +1,88 @@
+2000-01-24  Nat Friedman  <nat@helixcode.com>
+
+	* samples/compound-doc/sample-container.c (component_add_view):
+ 	Changed "view_activated" to "activated"
+ 
+	* samples/compound-doc/paint-component-simple.c (view_factory):
+ 	Connect to the "activate" signal, not the "view_activate" signal.
+
+	* idl/gnome-embeddable.idl (GNOME:View): Removed view_activate and
+ 	reactivate_and_undo.
+	(GNOME:ViewFrame): Removed view_activated and deactivate_and_undo.
+
+	* idl/gnome-control.idl (GNOME:ControlFrame): Added activated and
+ 	deactivate_and_undo.
+
+	(GNOME:Control) Added activate and reactivate_and_undo.  Fixed
+ 	some comments.
+
+	* bonobo/gnome-view.h: Removed the view_activate and
+ 	view_undo_last_operation signals.
+
+	* bonobo/gnome-view.c (impl_GNOME_View_view_activate): Removed.
+	(impl_GNOME_View_reactivate_and_undo): Removed.
+	(gnome_view_get_epv): Don't set view_activate or
+ 	reactivate_and_undo.
+	(gnome_view_class_init): Don't setup the view_activate or
+ 	reactivate_and_undo signals.
+	(gnome_view_get_type): Call the type "GNOMEView", not
+ 	"IDL:/GNOME:View:1.0" or whatever.
+	(gnome_view_activate_notify): Defer to the GnomeControl function.
+
+	* bonobo/gnome-view-frame.h: Removed view_activated and
+ 	undo_last_operation signals.  Added prototypes for
+ 	gnome_view_frame_set_ui_handler and
+ 	gnome_view_frame_get_ui_handler.
+
+	* bonobo/gnome-view-frame.c: Updated copyright.  Removed
+ 	VIEW_ACTIVATED and UNDO_LAST_OPERATION from the signal enum.
+	(impl_GNOME_ViewFrame_view_activated): Removed.
+	(impl_GNOME_ViewFrame_view_deactivate_and_undo): Removed.
+	(gnome_view_frame_get_epv): Don't set activate or
+ 	deactivate_and_undo.
+	(gnome_view_frame_activated): Removed.
+	(gnome_view_frame_class_init): Don't init "view_activated" or
+ 	"undo_last_operation".
+	(gnome_view_frame_view_activate): Changed to defer to the
+ 	ControlFrame function.
+	(gnome_view_frame_view_deactivate): Changed to defer to the
+ 	ControlFrame function.
+
+	* bonobo/gnome-control.h: Added prototype for
+ 	gnome_control_activate_notify.
+
+	* bonobo/gnome-control.c: Updated copyright.  Created a signals
+ 	enum; put ACTIVATE and UNDO_LAST_OPERATION in it.  Added the
+ 	control_signals static array.
+	(impl_GNOME_Control_activate): New function, moved here from
+ 	gnome-view.c
+	(impl_GNOME_Control_reactivate_and_undo): Likewise.
+	(gnome_control_get_epv): Set reactivate_and_undo and activate.
+	(gnome_control_activate_notify): New function, moved here from
+ 	GnomeView.
+	(gnome_control_class_init): Setup the activate and
+ 	undo_last_operation signals here.
+
+	* bonobo/gnome-control-frame.h: Added the activated and
+ 	undo_last_operation signals, moved here from GnomeViewFrame.
+  	Added prototypes for gnome_control_frame_control_activate and
+ 	gnome_control_frame_control_deactivate.
+
+	* bonobo/gnome-control-frame.c: Updated Copyright.  Added
+ 	ACTIVATED and UNDO_LAST_OPERATION to the signal enum.
+
+	(gnome_control_frame_control_activate): New function.  Moved here
+ 	from gnome-view-frame.c.
+	(gnome_control_frame_control_deactivate): Likewise.
+	(gnome_control_frame_class_init): Setup the "activated" and
+ 	"undo_last_operation" signals.
+ 	(impl_GNOME_ControlFrame_activated): New function which implements
+ 	the new GNOME::ControlFrame::activated() method.
+ 	(impl_GNOME_ControlFrame_deactivate_and_undo): New function which
+ 	implements GNOME::ControlFrame:deactivate_and_undo().
+	(gnome_control_frame_get_epv): Added activated and
+ 	deactivate_and_undo to the epv-setter.
+
 2000-01-12  Dave Camp  <campd@oit.edu>
 
 	* bonobo/gnome-property-bag.c (gnome_property_bag_create_poa): Create

@@ -12,20 +12,6 @@ module GNOME {
 interface View : Control {
 
 	/**
-	 * activate:
-	 *
-	 * Activates or deactivates this View.
-	 */
-	void view_activate (in boolean activate);
-
-	/**
-	 * reactivate_and_undo:
-	 * 
-	 * Activates the object and undoes the last operation.
-	 */
-	void reactivate_and_undo ();
-
-	/**
 	 * set_zoom_factor:
 	 * @zoom: zoom factor
 	 *
@@ -44,12 +30,6 @@ interface View : Control {
 };
 
 interface ViewFrame : ControlFrame {
-	/**
-	 * view_activated:
-	 * @state: TRUE if the associated view has been activated,
-	 * FALSE if it just became inactive.
-	 */
-	void view_activated (in boolean state);
 
 	/**
 	 * get_client_site:
@@ -58,14 +38,6 @@ interface ViewFrame : ControlFrame {
 	 * with this ViewFrame.
 	 */
 	ClientSite get_client_site ();
-
-	/**
-	 * deactivate_and_undo:
-	 *
-	 * This is called by the active object if it has just been activated
-	 * and the undo operation has been called
-	 */
-	void deactivate_and_undo ();
 
 };
 

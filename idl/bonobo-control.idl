@@ -11,6 +11,13 @@ module GNOME {
 interface ControlFrame : GNOME::Unknown {
 
 	/**
+	 * activated:
+	 * @state: TRUE if the associated Control has been activated,
+	 * FALSE if it just became inactive.
+	 */
+	void activated (in boolean state);
+
+	/**
 	 * get_ambient_properties:
 	 * 
 	 * Returns: A PropertyBag containing the ambient properties
@@ -47,10 +54,34 @@ interface ControlFrame : GNOME::Unknown {
 	 * menu/toolbar item merging.
 	 */
 	UIHandler get_ui_handler ();
+
+	/**
+	 * deactivate_and_undo:
+	 *
+	 * This is called by the active object if it has just been activated
+	 * and the undo operation has been called
+	 */
+	void deactivate_and_undo ();
+
 };
 
 interface Control : GNOME::Unknown {
 	typedef string windowid;
+
+	/**
+	 * activate:
+	 *
+	 * Activates or deactivates this Control.
+	 */
+	void activate (in boolean activate);
+
+	/**
+	 * reactivate_and_undo:
+	 * 
+	 * Activates the object and undoes the last operation.
+	 */
+	void reactivate_and_undo ();
+
 	/**
 	 * set_frame:
 	 * @frame: A GNOME_ControlFrame.
@@ -77,10 +108,10 @@ interface Control : GNOME::Unknown {
 
 	/**
 	 * size_allocate:
-	 * @width: width given to the view
-	 * @height: height given to the view.
+	 * @width: width given to the control
+	 * @height: height given to the control
 	 *
-	 * Informs the View of the size assigned by its container application
+	 * Informs the Control of the size assigned by its container application
 	 */
 	void size_allocate (in short width, in short height);
 
