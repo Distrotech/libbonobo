@@ -77,14 +77,21 @@ bonobo_activation_orb_get (void)
 const char *
 bonobo_activation_hostname_get (void)
 {
+        /*
+         * This tolerates a run-time change of
+         * hostname [a-la DHCP], and we don't care
+         * about this anyway; there is no cross-host
+         * activation foo.
+         */
+        return "localhost";
+#if 0
 	static char hostname[256] = "";
-
 	if (hostname[0] == '\0') {
 		if (gethostname (hostname, sizeof (hostname) - 1))
                         strcpy (hostname, "localhost");
         }
-
 	return hostname;
+#endif
 }
 
 

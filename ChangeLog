@@ -1,3 +1,17 @@
+2004-05-28  Michael Meeks  <michael@ximian.com>
+
+	* activation-server/activation-server-main.c
+	(main): turn output debug on if we use
+	--register-server
+
+	* bonobo-activation/bonobo-activation-init.c
+	(bonobo_activation_hostname_get): always return
+	localhost - so we don't barf when the hostname
+	changes (DHCP). Slightly bad, but a) this method is
+	deprecated anyway, b) only fools would use it
+	to return the current hostname and c) localhost is
+	often the local host name anyway.
+
 2004-05-26  Michael Meeks  <michael@ximian.com>
 
 	* Version 2.6.1

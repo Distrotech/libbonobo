@@ -322,6 +322,8 @@ main (int argc, char *argv[])
 	debug_output_env = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
 	if (debug_output_env && debug_output_env[0] != '\0')
 		output_debug = TRUE;
+        if (server_reg)
+                output_debug = TRUE;
 #endif
 
         dev_null_fd = redirect_output (ior_fd);

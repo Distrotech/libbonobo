@@ -38,10 +38,7 @@
 #include "bonobo-activation/bonobo-activation-private.h"
 #include "activation-server-corba-extensions.h"
 
-/*
- *    We always have the local NamingContext in the
- * registry at exit, so quit if only 1 left.
- */
+/* no longer used. */
 #define RESIDUAL_SERVERS 0
 
 static GObjectClass *parent_class = NULL;
