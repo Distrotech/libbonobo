@@ -1,3 +1,8 @@
+2000-11-16  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (placeholder_sync): Add 'hidden' attribute
+	checking.
+
 2000-11-15  Darin Adler  <darin@eazel.com>
 
 	* bonobo/bonobo-win.c: (popup_remove): Disconnect destroy handler
