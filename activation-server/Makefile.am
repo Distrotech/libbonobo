@@ -1,6 +1,6 @@
-lib_LTLIBRARIES=liboaf.la
+bin_PROGRAMS=oafd
 
-liboaf_la_SOURCES=query-lex.c query-parse.c query-parse.h query-lex.h
+oafd_SOURCES=query-lex.c query-parse.c query-parse.h query-lex.h query-expr.h
 
 EXTRA_DIST=query-lex.l query-parse.y
 
