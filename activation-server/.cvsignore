@@ -1,1 +1,12 @@
 Makefile.in
+.deps
+.libs
+*-skels.c
+*-common.c
+y.output
+stamp-parser
+ac-query-parse.h
+ac-query-lex.c
+ac-query-parse.c
+oaf-client
+oafd

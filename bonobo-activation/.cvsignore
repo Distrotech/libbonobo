@@ -1,1 +1,11 @@
 Makefile.in
+.deps
+.libs
+*.lo
+*.la
+liboaf-version.h
+*-stubs.c
+*-common.c
+stamp*idl
+gnome-factory.h
+oaf.h
