@@ -10,4 +10,5 @@ empty_built
 oaf-empty-server
 oaf-run-query
 oaf-test-client
+oaf-test-async
 oaf-slay

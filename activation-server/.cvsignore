@@ -3,6 +3,7 @@ Makefile.in
 .deps
 .libs
 *-skels.c
+*-stubs.c
 *-common.c
 y.output
 stamp-parser
