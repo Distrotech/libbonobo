@@ -243,9 +243,5 @@ main (int argc, char *argv[])
 
 	CORBA_exception_free (&ev);
 
-        if (bonobo_activation_debug_shutdown ()) {
-                return 0;
-        } else {
-                return 1;
-        }
+        return 0;
 }
