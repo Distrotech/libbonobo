@@ -1,7 +1,7 @@
-Makefile
-Makefile.in
 .deps
 .libs
+Makefile
+Makefile.in
 empty-common.c
 empty-skels.c
 empty-stubs.c
@@ -9,6 +9,7 @@ empty.h
 empty_built
 oaf-empty-server
 oaf-run-query
-oaf-test-client
-oaf-test-async
 oaf-slay
+oaf-slay
+oaf-test-async
+oaf-test-client
