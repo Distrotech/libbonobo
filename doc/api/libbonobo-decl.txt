@@ -10049,6 +10049,11 @@ void
 void
 </FUNCTION>
 <FUNCTION>
+<NAME>bonobo_event_source_has_listener</NAME>
+<RETURNS>gboolean  </RETURNS>
+BonoboEventSource *event_source,const char        *event_name
+</FUNCTION>
+<FUNCTION>
 <NAME>bonobo_event_source_notify_listeners</NAME>
 <RETURNS>void  </RETURNS>
 BonoboEventSource *event_source,const char        *event_name,const CORBA_any   *opt_value,CORBA_Environment *opt_ev
