@@ -47,6 +47,9 @@ oaf_active_server_register (const char *iid, CORBA_Object obj)
 			close (iorfd);
 	}
 
+        if (actid && !strcmp(actid, iid) && oaf_private)
+                return OAF_REG_SUCCESS;
+
 	regcat.session_name = oaf_session_name_get ();
 	regcat.username = oaf_username_get ();
 	regcat.hostname = oaf_hostname_get ();
@@ -81,6 +84,11 @@ oaf_active_server_unregister (const char *iid, CORBA_Object obj)
 	OAF_ObjectDirectory od;
 	OAFRegistrationCategory regcat = { "IDL:OAF/ObjectDirectory:1.0" };
 	CORBA_Environment ev;
+	const char *actid;
+
+	actid = oaf_activation_iid_get();
+	if(actid && !strcmp(actid, iid) && oaf_private)
+		return;
 
 	regcat.session_name = oaf_session_name_get ();
 	regcat.username = oaf_username_get ();

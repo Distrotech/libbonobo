@@ -380,7 +380,7 @@ impl_OAF_ObjectDirectory_activate (impl_POA_OAF_ObjectDirectory * servant,
 
 	if (!CORBA_Object_is_nil (retval, ev)
 	    && !CORBA_Object_non_existent (retval, ev)
-	    && !(flags & OAF_FLAG_IGNORE_EXISTING))
+	    && !(flags & OAF_FLAG_PRIVATE))
 		return CORBA_Object_duplicate (retval, ev);
 
 	if (flags & OAF_FLAG_EXISTING_ONLY)

@@ -74,6 +74,9 @@ static CORBA_ORB oaf_orb = CORBA_OBJECT_NIL;
 static CORBA_Context oaf_context;
 static gboolean is_initialized = FALSE;
 
+/* prevent registering with OAF when oaf_active_server_register() */
+gboolean oaf_private = FALSE;
+
 CORBA_ORB
 oaf_orb_get (void)
 {
@@ -153,6 +156,8 @@ struct poptOption oaf_popt_options[] = {
 	 "File descriptor to print IOR on", "FD"},
 	{"oaf-activate-iid", '\0', POPT_ARG_STRING, &oaf_activate_iid, 0,
 	 "IID to activate", "IID"},
+        {"oaf-private", '\0', POPT_ARG_NONE, &oaf_private, 0,
+         "Prevent registering of server with OAF", NULL},
 	{NULL}
 };
 
@@ -324,21 +329,22 @@ oaf_init (int argc, char **argv)
 		if (!strncmp
 		    ("--oaf-od-ior=", argv[i], strlen ("--oaf-od-ior="))) {
 			oaf_od_ior = argv[i] + strlen ("--oaf-od-ior=");
-		} else
-			if (!strncmp
-			    ("--oaf-ior-fd=", argv[i],
-			     strlen ("--oaf-ior-fd="))) {
-			oaf_ior_fd =
-				atoi (argv[i] + strlen ("--oaf-ior-fd="));
-			if (!oaf_ior_fd)
-				oaf_ior_fd = 1;
-		} else
-			if (!strncmp
-			    ("--oaf-activate-iid=", argv[i],
-			     strlen ("--oaf-activate-iid="))) {
+		} else if (!strncmp
+                           ("--oaf-ior-fd=", argv[i],
+                            strlen ("--oaf-ior-fd="))) {
+                        oaf_ior_fd =
+                                atoi (argv[i] + strlen ("--oaf-ior-fd="));
+                        if (!oaf_ior_fd)
+                                oaf_ior_fd = 1;
+                } else if (!strncmp
+                           ("--oaf-activate-iid=", argv[i],
+                            strlen ("--oaf-activate-iid="))) {
 			oaf_activate_iid =
 				argv[i] + strlen ("--oaf-activate-iid=");
-		}
+                } else if (!strcmp
+                           ("--oaf-private", argv[i])) {
+                        oaf_private = TRUE;
+                }     
 	}
 
 	oaf_postinit (NULL, NULL);

@@ -43,16 +43,17 @@ od_server_activate_factory (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL, factory = CORBA_OBJECT_NIL;
 	OAF_ActivationResult *res;
-	GNOME_stringlist dummy = { 0 };
+	GNOME_stringlist params = { 0 };
 
 	res =
 		OAF_ActivationContext_activate_from_id (actinfo->ac,
 							si->location_info,
 							((actinfo->flags |
 							  OAF_FLAG_NO_LOCAL) &
-							 (~OAF_FLAG_IGNORE_EXISTING)),
+							 (~OAF_FLAG_PRIVATE)),
 							oaf_context_get (),
 							ev);
+
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
 
@@ -70,7 +71,7 @@ od_server_activate_factory (OAF_ServerInfo * si, ODActivationInfo * actinfo,
 	}
 
 	retval =
-		GNOME_GenericFactory_create_object (factory, si->iid, &dummy,
+		GNOME_GenericFactory_create_object (factory, si->iid, &params,
 						    ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		retval = CORBA_OBJECT_NIL;
@@ -139,8 +140,15 @@ od_server_activate_exe (OAF_ServerInfo * si, ODActivationInfo * actinfo,
                 CORBA_free (iorstr);
         }
 
+        if(actinfo->flags & OAF_FLAG_PRIVATE) {
+                extra_arg =
+                        oaf_alloca (sizeof ("--oaf-private"));
+                args[i++] = extra_arg;
+                g_snprintf (extra_arg, sizeof ("--oaf-private"),
+                            "--oaf-private");
+        }
+
 	args[i] = NULL;
 
 	return oaf_server_by_forking ((const char **) args, fd_arg, ev);
 }
-
