@@ -1,3 +1,7 @@
+2001-02-08  Dietmar Maurer  <dietmar@ximian.com>
+
+	* bonobo/bonobo-xobject.h (BONOBO_OBJECT_TYPE_INFO): new macro.
+
 2001-02-07  Pavel Cisler  <pavel@eazel.com>
 
 	* bonobo/Makefile.am:

@@ -17,6 +17,31 @@
 #include <bonobo/bonobo-object.h>
 
 BEGIN_GNOME_DECLS
+
+#define BONOBO_OBJECT_TYPE_INFO(class_name, corba_name, parent_type, prefix)  \
+GtkType                                                                       \
+prefix##_get_type (void)                                                      \
+{                                                                             \
+	GtkType ptype;                                                        \
+	static GtkType type = 0;                                              \
+                                                                              \
+	if (type == 0) {                                                      \
+		static GtkTypeInfo info = {                                   \
+			#class_name,                                          \
+			sizeof (class_name),                                  \
+			sizeof (class_name##Class),                           \
+			(GtkClassInitFunc)prefix##_class_init,                \
+			(GtkObjectInitFunc)prefix##_init,                     \
+			NULL, NULL, (GtkClassInitFunc) NULL                   \
+		};                                                            \
+		ptype = (parent_type);                                        \
+		type = bonobo_x_type_unique (ptype,                           \
+			POA_##corba_name##__init, POA_##corba_name##__fini,   \
+			GTK_STRUCT_OFFSET (class_name##Class, epv),           \
+			&info);                                               \
+	}                                                                     \
+	return type;                                                          \
+}
  
 #define BONOBO_X_OBJECT_TYPE        (bonobo_x_object_get_type ())
 #define BONOBO_X_OBJECT(o)          (GTK_CHECK_CAST ((o), BONOBO_X_OBJECT_TYPE, BonoboXObject))
