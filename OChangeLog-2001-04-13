@@ -1,3 +1,34 @@
+2000-10-16  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c (bonobo_ui_toolbar_get_children): upd.
+	to take account of unparented widgets remaining in the toolbar list.
+	(bonobo_ui_toolbar_insert): don't allow a widget we already have to
+	be added again.
+
+	* bonobo/bonobo-ui-toolbar-control-item.c
+	(bonobo_ui_toolbar_item_control_construct): show the eventbox.
+
+	* bonobo/Makefile.am (libbonoboinclude_HEADERS): add control.
+
+	* bonobo/bonobo-win.c (toolbar_build_control): upd.
+
+2000-10-16  Jon K Hellan  <hellan@acm.org>
+
+	* bonobo/bonobo-win.c (toolbar_build_control): Use
+	bonobo_ui_toolbar_item_control_new to build control.
+	(toolbar_sync_state): Do not bail out early even if it is a control.
+
+	* bonobo/bonobo-ui-toolbar-control-item.[ch]: Implemented.
+
+2000-10-15  Jody Goldberg <jgoldberg@home.com>
+
+	* bonobo/bonobo-ui-toolbar-icon.c (bonobo_ui_toolbar_icon_class_init):
+	Call gdk_rgb_init.
+
+2000-10-16  Michael Meeks  <michael@helixcode.com>
+
+	* Version 0.22
+	
 2000-10-16  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/Makefile.am (test_app_LDADD, test_toolbar_LDADD): Don't use
