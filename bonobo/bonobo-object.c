@@ -17,11 +17,38 @@ enum {
 static guint gnome_object_signals [LAST_SIGNAL];
 static GtkObjectClass *gnome_object_parent_class;
 
-static GData *keys;
+static GHashTable *mapping;
 
 GnomeObject *
 gnome_object_from_servant (POA_GNOME_object *servant)
 {
+	g_return_val_if_fail (servant != NULL, NULL);
+
+	if (!mapping)
+		return NULL;
+	
+	return g_hash_table_lookup (mapping, servant);
+}
+
+void
+gnome_object_bind_to_servant (GnomeObject *object, void *servant)
+{
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (servant != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+
+	if (!mapping)
+		mapping = g_hash_table_new (g_direct_hash, g_direct_equal)
+
+	g_hash_table_insert (mapping, servant, object);
+}
+
+void
+gnome_object_drop_binding (void *servant)
+{
+	g_return_if_fail (servant != NULL);
+
+	g_hash_table_remove (mapping, servant);
 }
 
 static void
@@ -60,6 +87,8 @@ impl_GNOME_object_query_interface (POA_GNOME_object *servant,
 
 	object = gnome_object_from_servant (servant);
 
+	g_return_val_if_fail (object != NULL, CORBA_OBJECT_NIL);
+	retval = object->object;
 	return retval;
 }
 

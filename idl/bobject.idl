@@ -109,7 +109,7 @@ interface DotObject : GNOME::object {
 	 * Informs the application its moniker name
 	 * or its container moniker's name.
 	 */
-	void set_moniker (in Moniker mon, in Moniker::MonikerWhich which);
+	void set_moniker (in Moniker mon, in Moniker::type which);
 
 	/** 
 	 * get_moniker:

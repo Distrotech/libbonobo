@@ -5,7 +5,7 @@
  *    Miguel de Icaza (miguel@gnu.org)
  */
 
-interface Persist : GNOME::Object {
+interface Persist : GNOME::object {
 	enum Status {
 		SAVE_OK,
 		SAVE_CANCEL,

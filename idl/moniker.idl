@@ -1,6 +1,6 @@
-interface Moniker : GNOME::Object {
+interface Moniker : GNOME::object {
 
-	enum MonikerWhich {
+	enum type {
 		CONTAINER,	// Return the Container's moniker.
 		OBJ_RELATIVE,	// Return a relative moniker to the object
 		OBJ_FULL	// Return an absolute moniker for this object.
