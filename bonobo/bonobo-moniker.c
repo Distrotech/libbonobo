@@ -313,7 +313,7 @@ bonobo_moniker_default_equal (BonoboMoniker     *moniker,
 			      const CORBA_char  *moniker_name,
 			      CORBA_Environment *ev)
 {
-	int         i;
+	int         i, retval;
 	CORBA_long  offset;
 	const char *p;
 	char       *name;
@@ -325,26 +325,28 @@ bonobo_moniker_default_equal (BonoboMoniker     *moniker,
 			return 0;
 	} else
 		offset = 0;
-
+	
 	p = &moniker_name [offset];
 
 	i = bonobo_moniker_util_seek_std_separator (p, moniker->priv->prefix_len);
-
+	
 	name = bonobo_moniker_get_name_escaped (moniker);
 
 /*	g_warning ("Compare %d chars of '%s' to '%s' - case sensitive ?%c",
 	i, name, p, moniker->priv->sensitive?'y':'n');*/
-
+	
 	if (( moniker->priv->sensitive && !strncmp       (name, p, i)) ||
 	    (!moniker->priv->sensitive && !g_strncasecmp (name, p, i))) {
 /*		g_warning ("Matching moniker - equal");*/
-		return i + offset;
+		retval = i + offset;
 	} else {
 /*		g_warning ("No match");*/
-		return 0;
+		retval = 0;
 	}
-
+ 
 	g_free (name);
+ 
+	return retval;
 }
 
 static CORBA_char *

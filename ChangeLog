@@ -1,3 +1,8 @@
+2001-10-27 Dirk-Jan C. Binnema <djcb@djcbsoftware.nl>
+
+	* bonobo/bonobo-moniker.c (bonobo_moniker_default_equal):
+	fix leak.
+
 2001-10-27  Michael Meeks  <michael@ximian.com>
 
 	* tests/test-properties-client.c (print_props): 
