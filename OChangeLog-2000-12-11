@@ -1,3 +1,11 @@
+Wed Nov 29 19:56:59 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* storage-modules/bonobo-stream-fs.c (fs_get_info): never return a
+	CORBA struct with NULL strings.
+
+	* storage-modules/bonobo-stream-efs.c (real_get_info): see above
+
+
 2000-11-29  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-control.c (impl_Bonobo_Control_activate): Only
