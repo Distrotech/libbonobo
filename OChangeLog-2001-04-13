@@ -1,5 +1,39 @@
 2000-10-05  Michael Meeks  <michael@helixcode.com>
 
+	* Update everything to new bonobo_ui_component API.
+	
+	* bonobo/bonobo-ui-container.c (blank_win): s/app/win/
+
+	* bonobo/bonobo-win.c (update_popups): don't try and build stuff for
+	non existant menu widgets.
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_make_path): update.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_popup_verbs): kill.
+	(bonobo_view_frame_verb_selected_cb): ditto.
+
+	* bonobo/bonobo-control.c (bonobo_control_set_ui_component): 
+	impl so people can set custom components.
+
+	* bonobo/bonobo-canvas-item.c: include gtksignal for gtk_signal_connect.
+
+	* bonobo/bonobo-ui-component.c: Add set / get container methods. Consequently
+	alter all the daft bonobo_container_ methods to bonobo_component equivalents.
+	Virtualize all the methods that could be used for a local cache.
+
+	* bonobo/bonobo-control.c (bonobo_control_get_ui_handler):
+	deprecate. (bonobo_control_get_ui_component): impl.
+
+	* bonobo/bonobo-ui-compat.c (bonobo_ui_handler_new_from_component):
+	split from (bonobo_ui_handler_new): here. Move misc. stuff here.
+
+	* bonobo/bonobo-ui-component.c (bonobo_ui_component_new_default):
+	implement: makes up a sane component name for lazy people.
+
+	* bonobo/bonobo-win.h: s/BONOBO_WIN_TYPE/BONOBO_TYPE_WIN/
+
+2000-10-05  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (bonobo_win_add_popup): set dirty bit
 	and re-generate widgets on registration; re-locate.
 	(update_dockitem): update to new bonobo-ui-toolbar look
