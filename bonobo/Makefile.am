@@ -41,7 +41,7 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_Exception.idl		\
 	$(top_srcdir)/idl/Bonobo_Clipboard.idl
 
-idl_flags = -I$(top_srcdir)/idl -I $(BONOBO_ACTIVATION_IDL_DIR) -D__BONOBO_COMPILATION
+idl_flags = -I$(top_srcdir)/idl -I $(BONOBO_ACTIVATION_IDL_DIR) -D__Bonobo_COMPILATION
 
 $(CORBA_SOURCE): $(idls) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo.idl
