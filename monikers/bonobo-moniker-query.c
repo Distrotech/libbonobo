@@ -7,6 +7,7 @@
  *	Michael Meeks (michael@helixcode.com)
  */
 #include <config.h>
+#include <string.h>
 #include <bonobo/bonobo-moniker.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <liboaf/liboaf.h>

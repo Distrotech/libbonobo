@@ -8,6 +8,7 @@
  */
 #include <config.h>
 #include <glib.h>
+#include <string.h>
 
 #define GNOME_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
 #include <bonobo/bonobo-i18n.h>

@@ -13,6 +13,7 @@
  */
 
 #include "config.h"
+#include <string.h>
 #include <glib.h>
 #define BONOBO_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
 #include <bonobo/bonobo-i18n.h>

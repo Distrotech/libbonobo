@@ -19,7 +19,7 @@
 #include <libintl.h>
 #include <signal.h>
 
-#include <gmain.h>
+#include <glib/gmain.h>
 #include <liboaf/liboaf.h>
 
 #if 0

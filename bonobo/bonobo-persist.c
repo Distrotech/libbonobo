@@ -8,6 +8,7 @@
  * Copyright 1999 Helix Code, Inc.
  */
 #include <config.h>
+#include <string.h>
 #include <gobject/gsignal.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/bonobo-persist.h>

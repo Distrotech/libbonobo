@@ -11,7 +11,7 @@
 #ifndef __LIBBONOBO_H__
 #define __LIBBONOBO_H__
 
-#include <gmacros.h>
+#include <glib/gmacros.h>
 
 G_BEGIN_DECLS
 

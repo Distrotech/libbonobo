@@ -10,6 +10,7 @@
 #include <config.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <string.h>
 
 #include <bonobo/bonobo-stream-memory.h>
 #include <errno.h>
