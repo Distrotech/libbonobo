@@ -1,3 +1,8 @@
+2000-11-18  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-ui-util.h (bonobo_ui_util_fixup_icons): Made
+	this function public.
+
 2000-11-17  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-ui-util.c (find_pixmap_in_path): New static
