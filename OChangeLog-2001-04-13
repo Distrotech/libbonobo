@@ -1,3 +1,19 @@
+2001-04-12  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-ui-toolbar-control-item.c:
+	(set_control_property_bag_value), (impl_set_label),
+	(impl_set_orientation), (impl_set_style), (impl_set_want_label):
+	Set properties in the control's property bag so it can respond to
+	changes in the toolbar.
+
+	* bonobo/bonobo-property-bag-client.c:
+	(bonobo_property_bag_client_get_property): Fix minor error in
+	exception handling.
+	(bonobo_property_bag_client_set_value_any): Make it silent when
+	there is no property with the passed-in name, but the user passes
+	an ev in. The Bonobo_PropertyBag_NotFound is enough, we don't also
+	need to do a g_warning.
+
 2001-04-11  Darin Adler  <darin@eazel.com>
 
 	* components/bonobo.keys: Remove this.

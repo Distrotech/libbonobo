@@ -210,7 +210,7 @@ bonobo_property_bag_client_get_property (Bonobo_PropertyBag       pb,
 
 	g_return_val_if_fail (pb != CORBA_OBJECT_NIL, NULL);
 
-	prop = Bonobo_PropertyBag_getPropertyByName (pb, property_name, ev);
+	prop = Bonobo_PropertyBag_getPropertyByName (pb, property_name, real_ev);
 
 	if (BONOBO_EX (real_ev))
 		prop = CORBA_OBJECT_NIL;
@@ -572,14 +572,18 @@ bonobo_property_bag_client_set_value_any (Bonobo_PropertyBag       pb,
 	}
 
 	prop = bonobo_property_bag_client_get_property (pb, propname, real_ev);
-	g_return_if_fail (prop != CORBA_OBJECT_NIL);
 
-	Bonobo_Property_setValue (prop, value, real_ev);
+	if (BONOBO_EX (real_ev)) {
+		if (!ev)
+			g_warning ("bonobo_property_bag_client_set_value_any: Exception getting property!");
+	} else {
+		Bonobo_Property_setValue (prop, value, real_ev);
 
-	if (!ev && BONOBO_EX (real_ev))
-		g_warning ("bonobo_property_bag_client_set_value_any: Exception setting property!");
+		if (!ev && BONOBO_EX (real_ev))
+			g_warning ("bonobo_property_bag_client_set_value_any: Exception setting property!");
 
-	CORBA_Object_release (prop, real_ev);
+		CORBA_Object_release (prop, real_ev);
+	}
 
 	if (!ev)
 		CORBA_exception_free (&tmp_ev);
