@@ -8,7 +8,7 @@
  *    Maciej Stachowiak (mjs@eazel.com)
  *
  * Copyright 1999, 2000 Havoc Pennington, Anders Carlsson,
- *                      Maciej Stachowiak
+ *                      Eazel, Inc.
  */
 
 #include "bonobo-object-directory.h"

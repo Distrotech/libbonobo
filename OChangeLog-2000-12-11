@@ -1,5 +1,9 @@
 2000-10-17  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/*: try to cheer Maciej up.
+
+2000-10-17  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (bonobo_win_show_all): impl.
 	(bonobo_win_class_init): hook in.
 

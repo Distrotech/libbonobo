@@ -8,7 +8,7 @@
  *    Maciej Stachowiak (mjs@eazel.com)
  *
  * Copyright 1999, 2000 Havoc Pennington, Anders Carlsson,
- *                      Maciej Stachowiak
+ *                      Eazel, Inc.
  */
 #ifndef __BONOBO_OBJECT_DIRECTORY_H__
 #define __BONOBO_OBJECT_DIRECTORY_H__
