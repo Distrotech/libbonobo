@@ -1,5 +1,12 @@
 2000-10-17  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-win.c (bonobo_win_show_all): impl.
+	(bonobo_win_class_init): hook in.
+
+	* doc/std-ui.xml: add standard placeholders for components.
+
+2000-10-17  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/Makefile.am (libbonoboinclude_HEADERS): remove bonobo-ui-item.[ch]
 	What about bonobo-storage-priv[ate].h ?
 	What about bonobo-component-directory*
