@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2\n"
-"POT-Creation-Date: 2003-01-09 20:02+0100\n"
+"POT-Creation-Date: 2003-01-20 16:07+0000\n"
 "PO-Revision-Date: 2003-01-09 23:07+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: albanian < gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -88,7 +88,8 @@ msgstr "përshkrim i keqformuar XML i interfaqes së përdoruesit"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "pozicioni për tek elementi XML i interfaqes së përdoruesit nuk është i saktë "
+msgstr ""
+"pozicioni për tek elementi XML i interfaqes së përdoruesit nuk është i saktë "
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -233,4 +234,3 @@ msgstr "I pamundur krijimi i një instance për përbërësin e shembullit Echo 
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "U verifikua një përjashtim '%s'"
-

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.he\n"
-"POT-Creation-Date: 2003-01-03 06:01+0100\n"
+"POT-Creation-Date: 2003-01-20 16:07+0000\n"
 "PO-Revision-Date: 2003-01-03 14:59+0200\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -234,4 +234,3 @@ msgstr "לא הצלחתי ליצור עותק של רכיב ההד לדוגמה"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "ארעה חריגה '%s'"
-

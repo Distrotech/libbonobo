@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
-"POT-Creation-Date: 2003-01-01 06:10+0100\n"
+"POT-Creation-Date: 2003-01-20 16:07+0000\n"
 "PO-Revision-Date: 2003-01-02 15:36+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -156,8 +156,7 @@ msgstr "Virhe virhettä tarkistaessa; ei poikkeusta"
 msgid "General activation error with no description"
 msgstr "Yleinen aktivointivirhe, jolla ei ole kuvausta"
 
-#: bonobo/bonobo-generic-factory.h:74
-#: bonobo/bonobo-generic-factory.h:78
+#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
 msgid "Could not initialize Bonobo"
 msgstr "Ei voinut alustaa Bonoboa"
 
@@ -240,4 +239,3 @@ msgstr "Ei voinut luoda ilmentymää esimerkkikaikukomponentista"
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Poikkeus tapahtui \"%s\""
-
