@@ -559,12 +559,15 @@ od_load_file (const char *file,
 	xmlSAXHandlerPtr oldsax;
         xmlParserCtxt *ctxt;
         int ret = 0;
+
+        ctxt = xmlCreateFileParserCtxt (file);
+        if (!ctxt)
+                return;
         
         info = parse_info_new ();
         info->host = host;
         info->entries = entries;
 
-        ctxt = xmlCreateFileParserCtxt (file);
         oldsax = ctxt->sax;
         ctxt->sax = &od_SAXParser;
         ctxt->userData = info;
