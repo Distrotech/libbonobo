@@ -1,0 +1,16 @@
+Bonobo release task list:
+-------------------------
+* exception handling trick deployed everywhere
+* reference components in a samples/, using both methods
+* All existing components updated to make sense
+* all existing components fully documented
+* all interfaces (PersistStream, etc) documented with paragragraphs describing their purpose
+* UIHandler documented
+* Bonobo.sgml updated
+* UIHandler toolbar code finished
+* check for proper unref/destruction handling/mem leaks
+* size negotiation working for gnome views
+* in-place methods moved to GnomeView
+* container-side verb-popup-menu construction helper function
+* Moniker sample code
+* Compile with zero warnings
