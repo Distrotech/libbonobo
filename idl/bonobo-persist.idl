@@ -17,26 +17,17 @@ module Bonobo {
 		exception WrongDataType {};
 		exception FileNotFound {};
 
-		typedef string               StreamType;
-		typedef sequence<StreamType> StreamTypeList;
+		typedef string                ContentType;
+		typedef sequence<ContentType> ContentTypeList;
 		
 		/**
 		 * get_types:
 		 *
 		 *  Gets a list of supported mime types that this
-		 * persistor can cope with. The default / preferred
-		 * type being the first element.
+		 * persistor can save its data in. The default /
+		 * preferred type being the first element.
 		 */
-/*		StreamTypeList get_types ();*/
-
-		/**
-		 * type:
-		 *
-		 *  Determines the content type of the stream about to
-		 * be passed.
-		 */
-/*		void       set_type (in StreamType type);
-		StreamType get_type ();*/
+		ContentTypeList get_content_types ();
 	};
 	
 	/*
@@ -150,18 +141,24 @@ module Bonobo {
 		/**
 		 * load:
 		 * @stream: Where to load the state from
+		 * @type: the MIME content type of the data, or ""
+		 * if it is unknown.
 		 *
 		 * Loads the status of the object from @stream
 		 */
-		void load (in Bonobo::Stream stream) raises (WrongDataType);
+		void load (in Bonobo::Stream stream, in ContentType type)
+			raises (WrongDataType);
 
 		/**
 		 * save:
 		 * @stream: Where to save the state to.
+		 * @type: the MIME content type to save the data in,
+		 * or "" if any type is acceptable.
 		 *
 		 * Saves the state of the object to the @stream
 		 */
-		void save (in Bonobo::Stream stream);
+		void save (in Bonobo::Stream stream, in ContentType type)
+			raises (WrongDataType);
 
 		/**
 		 * get_size_max:

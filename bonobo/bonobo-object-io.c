@@ -118,7 +118,7 @@ bonobo_persiststream_save_to_stream (Bonobo_PersistStream pstream, Bonobo_Stream
 
 	bonobo_persist_stream_save_goad_id (target, goad_id, &ev);
 
-	Bonobo_PersistStream_save (pstream, target, &ev);
+	Bonobo_PersistStream_save (pstream, target, "", &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
 		CORBA_exception_free (&ev);
 		return GNOME_IOERR_GENERAL;

@@ -1,3 +1,52 @@
+2000-05-26  Dan Winship  <danw@helixcode.com>
+
+	* idl/bonobo-persist.idl: rename StreamType and StreamTypeList to
+	ContentType and ContentTypeList. Remove unused get_types,
+	get_type, and set_type methods. Add Persist::get_content_types.
+	Add a ContentType parameter to PersistStream::load and ::save
+
+	* bonobo/bonobo-persist.[ch] (bonobo_persist_from_servant): New
+	function.
+	(impl_get_content_types): Default implementation for
+	Bonobo::Persist::get_content_types.
+	(bonobo_persist_generate_content_type): CORBA ickiness wrapper
+	helper function.
+
+	* bonobo/bonobo-persist-stream.[ch] (impl_load, impl_save,
+	impl_get_size_max, bonobo_persist_stream_nop): Update for
+	interface changes.
+	(bonobo_persist_stream_size_unknown): Replacement for
+	bonobo_persist_stream_zero that was supposed to have been
+	committed long ago.
+	(get_content_types): default implementation.
+	(bonobo_persist_stream_class_init,
+	bonobo_persist_stream_construct, bonobo_persist_stream_new):
+	Update to use additional function pointers for better overriding
+	action.
+
+	* gshell/inout.c (buffer_save_ps, buffer_load_ps): 
+	* bonobo/test-container.c (add_image_cmd, add_pdf_cmd,
+	add_text_cmd): 
+	* bonobo/bonobo-property-bag-client.c
+	(bonobo_property_bag_client_persist,
+	bonobo_property_bag_client_depersist): 
+	* bonobo/bonobo-object-io.c (bonobo_persiststream_save_to_stream): 
+	* bonobo/bonobo-object-client.c (bonobo_object_restore_from_url):
+	Update for Bonobo_PersistStream_{load,save} change.
+
+	* components/text-plain/bonobo-text-plain.c (stream_read,
+	pstream_load, pstream_save, pstream_get_max_size,
+	pstream_get_content_types):
+	* components/audio-ulaw/bonobo-audio-ulaw.c (pstream_load,
+	pstream_save, pstream_get_max_size, pstream_get_content_types):
+	Update for PersistStream changes.
+
+	* bonobo/test-container-autoload.c (hydrate_object_from_file_cb): 
+	(add_object_to_container): Fix a bug in the GOAD->OAF conversion
+
+	* bonobo/bonobo-ui-handler.c (path_escape_forward_slashes): const
+	poisoning
+
 2000-05-25  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* bonobo/bonobo-uih-toolbar.c (toolbar_toplevel_item_set_pixmap_internal):

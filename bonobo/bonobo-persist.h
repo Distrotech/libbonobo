@@ -22,11 +22,17 @@ typedef struct {
 
 typedef struct {
 	BonoboObjectClass parent_class;
+
+	Bonobo_Persist_ContentTypeList * (*get_content_types) (BonoboPersist *persist,
+							       CORBA_Environment *ev);
 } BonoboPersistClass;
 
 GtkType       bonobo_persist_get_type  (void);
 BonoboPersist *bonobo_persist_construct (BonoboPersist *persist,
-				       Bonobo_Persist corba_persist);
+					 Bonobo_Persist corba_persist);
+
+Bonobo_Persist_ContentTypeList *bonobo_persist_generate_content_types (int num,
+								       ...);
 
 POA_Bonobo_Persist__epv *bonobo_persist_get_epv (void);
 

@@ -16,11 +16,19 @@ typedef struct _BonoboPersistStream        BonoboPersistStream;
 typedef struct _BonoboPersistStreamPrivate BonoboPersistStreamPrivate;
 
 
-typedef int        (*BonoboPersistStreamIOFn)  (BonoboPersistStream *ps,
-						const Bonobo_Stream  stream,
-						void                *closure);
+typedef void  (*BonoboPersistStreamIOFn) (BonoboPersistStream         *ps,
+					  const Bonobo_Stream         stream,
+					  Bonobo_Persist_ContentType  type,
+					  void                       *closure,
+					  CORBA_Environment          *ev);
+
 typedef CORBA_long (*BonoboPersistStreamMaxFn) (BonoboPersistStream *ps,
-						void                *closure);
+						void                *closure,
+						CORBA_Environment   *ev);
+
+typedef Bonobo_Persist_ContentTypeList * (*BonoboPersistStreamTypesFn) (BonoboPersistStream *ps,
+									void                *closure,
+									CORBA_Environment   *ev);
 
 struct _BonoboPersistStream {
 	BonoboPersist persist;
@@ -28,12 +36,13 @@ struct _BonoboPersistStream {
 	gboolean     is_dirty;
 
 	/*
-	 * For the sample routines, NULL if we use the ::save and ::load
+	 * For the sample routines, NULL if we use the
 	 * methods from the class
 	 */
-	BonoboPersistStreamIOFn  save_fn;
-	BonoboPersistStreamIOFn  load_fn;
-	BonoboPersistStreamMaxFn get_size_max_fn;
+	BonoboPersistStreamIOFn    save_fn;
+	BonoboPersistStreamIOFn    load_fn;
+	BonoboPersistStreamMaxFn   max_fn;
+	BonoboPersistStreamTypesFn types_fn;
 	
 	void *closure;
 
@@ -46,11 +55,19 @@ typedef struct {
 	/*
 	 * methods
 	 */
-	int        (*load)         (BonoboPersistStream *ps,
-				    Bonobo_Stream        stream);
-	int        (*save)         (BonoboPersistStream *ps,
-				    Bonobo_Stream        stream);
-	CORBA_long (*get_size_max) (BonoboPersistStream *ps);
+	void       (*load)         (BonoboPersistStream        *ps,
+				    Bonobo_Stream              stream,
+				    Bonobo_Persist_ContentType type,
+				    CORBA_Environment          *ev);
+	void       (*save)         (BonoboPersistStream        *ps,
+				    Bonobo_Stream              stream,
+				    Bonobo_Persist_ContentType type,
+				    CORBA_Environment          *ev);
+	CORBA_long (*get_size_max) (BonoboPersistStream *ps,
+				    CORBA_Environment   *ev);
+	Bonobo_Persist_ContentTypeList * (*get_content_types) (BonoboPersistStream *ps,
+							       CORBA_Environment   *ev);
+
 } BonoboPersistStreamClass;
 
 GtkType              bonobo_persist_stream_get_type  (void);
@@ -59,11 +76,15 @@ void                 bonobo_persist_stream_set_dirty (BonoboPersistStream *ps,
 
 BonoboPersistStream *bonobo_persist_stream_new       (BonoboPersistStreamIOFn load_fn,
 						      BonoboPersistStreamIOFn save_fn,
+						      BonoboPersistStreamMaxFn max_fn,
+						      BonoboPersistStreamTypesFn types_fn,
 						      void *closure);
 BonoboPersistStream *bonobo_persist_stream_construct (BonoboPersistStream *ps,
 						      Bonobo_PersistStream corba_ps,
 						      BonoboPersistStreamIOFn load_fn,
 						      BonoboPersistStreamIOFn save_fn,
+						      BonoboPersistStreamMaxFn max_fn,
+						      BonoboPersistStreamTypesFn types_fn,
 						      void *closure);
 
 POA_Bonobo_PersistStream__epv *bonobo_persist_stream_get_epv (void);

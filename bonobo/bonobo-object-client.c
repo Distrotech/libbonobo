@@ -219,7 +219,7 @@ bonobo_object_restore_from_url (const char *iid, const char *url)
 				Bonobo_PersistStream_load (
 					(Bonobo_PersistStream) persist,
 					bonobo_object_corba_objref (BONOBO_OBJECT (stream)),
-					&ev);
+					"", &ev);
 				
 				if (ev._major != CORBA_NO_EXCEPTION)
 					rtn = CORBA_OBJECT_NIL;

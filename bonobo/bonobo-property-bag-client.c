@@ -263,7 +263,7 @@ bonobo_property_bag_client_persist (BonoboPropertyBagClient *pbc,
 		return;
 	}
 
-	Bonobo_PersistStream_save (persist, stream, &ev);
+	Bonobo_PersistStream_save (persist, stream, "", &ev);
 
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboPropertyBagClient: Exception caught while persisting "
@@ -315,7 +315,7 @@ bonobo_property_bag_client_depersist (BonoboPropertyBagClient *pbc,
 		return;
 	}
 
-	Bonobo_PersistStream_load (persist, stream, &ev);
+	Bonobo_PersistStream_load (persist, stream, "", &ev);
 
 	if (ev._major != CORBA_NO_EXCEPTION) {
 		g_warning ("BonoboPropertyBagClient: Exception caught while persisting "
