@@ -1,3 +1,10 @@
+2000-10-11  Ettore Perazzoli  <ettore@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar.c: Add args "preferred_width" e
+	"preferred_height".
+	(class_init): Add them here.
+	(impl_get_arg): Handle them.
+
 2000-10-11  Michael Meeks  <michael@helixcode.com>
 
 	* doc/ui-faq.txt: explain the translation issue.
