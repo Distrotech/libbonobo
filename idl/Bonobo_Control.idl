@@ -39,6 +39,14 @@ interface ControlFrame : GNOME::Unknown {
 	 * The user has requested that the uri be loaded
 	 */
 	void activate_uri (in string uri, in boolean relative);
+
+	/**
+	 * get_ui_handler:
+	 *
+	 * Returns: The GNOME::UIHandler interface to be used for
+	 * menu/toolbar item merging.
+	 */
+	UIHandler get_ui_handler ();
 };
 
 interface Control : GNOME::Unknown {
