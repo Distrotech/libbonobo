@@ -290,9 +290,9 @@ bonobo_activation_server_by_forking (
         g_return_val_if_fail (cmd [0] != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (act_iid != NULL, CORBA_OBJECT_NIL);
 
-	display         = get_one_context_value (ctx, "DISPLAY");
-	audiodev        = get_one_context_value (ctx, "AUDIODEV");
-	session_manager = get_one_context_value (ctx, "SESSION_MANAGER");
+	display         = get_one_context_value (ctx, "display");
+	audiodev        = get_one_context_value (ctx, "audiodev");
+	session_manager = get_one_context_value (ctx, "session_manager");
 
         ai.display = display;
         ai.act_iid = act_iid;
