@@ -12,7 +12,6 @@
 #define _BONOBO_MONIKER_UTIL_H
 
 #include <bonobo/bonobo-async.h>
-#include <bonobo/bonobo-object-client.h>
 
 /* Useful client functions */
 Bonobo_Unknown      bonobo_get_object                            (const CORBA_char        *name,      
@@ -27,9 +26,6 @@ CORBA_char         *bonobo_moniker_client_get_name               (Bonobo_Moniker
 								  CORBA_Environment *ev);
 
 Bonobo_Unknown      bonobo_moniker_client_resolve_default        (Bonobo_Moniker     moniker,
-								  const char        *interface_name,
-								  CORBA_Environment *ev);
-BonoboObjectClient *bonobo_moniker_client_resolve_client_default (Bonobo_Moniker     moniker,
 								  const char        *interface_name,
 								  CORBA_Environment *ev);
 

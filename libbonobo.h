@@ -24,7 +24,6 @@ G_BEGIN_DECLS
 #include <bonobo/bonobo-exception.h>
 
 #include <bonobo/bonobo-item-container.h>
-#include <bonobo/bonobo-object-client.h>
 #include <bonobo/bonobo-moniker-util.h>
 
 #include <bonobo/bonobo-property-bag.h>
@@ -42,7 +41,6 @@ G_BEGIN_DECLS
 #include <bonobo/bonobo-persist-file.h>
 #include <bonobo/bonobo-persist-stream.h>
 
-#include <bonobo/bonobo-object-io.h>
 #include <bonobo/bonobo-progressive.h>
 #include <bonobo/bonobo-storage.h>
 

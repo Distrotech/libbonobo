@@ -14,7 +14,6 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-stream.h>
 #include <bonobo/bonobo-property-bag.h>
-#include <bonobo/bonobo-object-client.h>
 
 G_BEGIN_DECLS
 

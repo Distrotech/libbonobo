@@ -1,3 +1,15 @@
+2001-05-02  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/Makefile.am: remove bonobo-object-io.[ch],
+	bonobo-object-client.[ch]
+
+	* libbonobo.h: remove bonobo-object-client.h
+
+	* bonobo-object-client.[ch]: kill totaly.
+
+	* bonobo/bonobo-moniker-util.c
+	(bonobo_moniker_client_resolve_client_default): removed
+
 2001-05-01  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am: improve IDL compilation dependency

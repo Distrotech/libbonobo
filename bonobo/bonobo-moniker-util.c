@@ -10,6 +10,7 @@
 #include <liboaf/liboaf.h>
 #include <liboaf/oaf-async.h>
 #include <ORBitservices/CosNaming.h>
+#include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
 
@@ -511,38 +512,6 @@ bonobo_moniker_client_resolve_default (Bonobo_Moniker     moniker,
 	g_free (real_if);
 
 	return retval;
-}
-
-/**
- * bonobo_moniker_client_resolve_client_default:
- * @moniker: the moniker
- * @interface_name: the name of the interface we want returned as the result 
- * @ev: a corba exception environment 
- * 
- * See: bonobo_moniker_client_resolve_default; however this version returns
- * a BonoboObjectClient wrapped reference.
- * 
- * Return value: a BonoboObjectClient style reference.
- **/
-BonoboObjectClient *
-bonobo_moniker_client_resolve_client_default (Bonobo_Moniker     moniker,
-					      const char        *interface_name,
-					      CORBA_Environment *ev)
-{
-	Bonobo_Unknown unknown;
-
-	g_return_val_if_fail (ev != NULL, NULL);
-
-	unknown = bonobo_moniker_client_resolve_default (
-		moniker, interface_name, ev);
-
-	if (BONOBO_EX (ev))
-		return NULL;
-
-	if (unknown == CORBA_OBJECT_NIL)
-		return NULL;
-
-	return bonobo_object_client_from_corba (unknown);
 }
 
 /**

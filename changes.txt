@@ -37,6 +37,15 @@ bonobo-main.[ch]:
 	bonobo_init: added argc, argv, since this now initializes
 	oaf for you.
 
+bonobo-object-client.[ch]:
+	totaly removed, was a terrible idea - use the CORBA handle
+	directly instead.
+
+bonobo-moniker-util.[ch]:
+	Removed bonobo_moniker_client_resolve_client_default: it used
+	BonoboObjectClient, use bonobo_moniker_client_resolve_default intead.
+	
+
 IDL:
 
 Bonobo_Storage.idl:
