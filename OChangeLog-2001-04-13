@@ -1,3 +1,11 @@
+2000-06-24  Michael Meeks  <michael@helixcode.com>
+
+	* storage-modules/bonobo-storage-vfs.c (bonobo_storage_vfs_open):
+	update logic. (bonobo_storage_vfs_open): close file after creation.
+	(fs_create_storage): implement. (bonobo_storage_vfs_open): mkdir.
+	(bonobo_storage_vfs_class_init): add an open_storage method !
+	(fs_open_storage): implement.
+
 2000-06-22  Miguel de Icaza  <miguel@helixcode.com>
 
 	* bonobo/bonobo-object-client.c
