@@ -1,3 +1,11 @@
+1999-08-23  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-ui-handler.c (gnome_ui_handler_toolbar_free_[one, list, tree]):
+	Stubbed.
+	(gnome_ui_handler_toolbar_parse_uiinfo_[one, list, tree]_with_data): Stubbed.
+	(gnome_ui_handler_toolbar_free_[one, list, tree]): Stubbed.
+	Added warning to unimplemented stubs.
+
 1999-08-23  Elliot Lee  <sopwith@redhat.com>
 
 	* Makefile.am: Put bonoboConf.sh in CLEANFILES.
