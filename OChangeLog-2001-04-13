@@ -1,3 +1,10 @@
+2000-10-12  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (do_show_hide): return whether the
+	hiddenness changed.
+	(update_dockitem): add Andy's patch to resize the dock
+	if we need to.
+
 2000-10-11  Andy Hertzfeld  <andy@eazel.com>
 
 	* bonobo/bonobo-win.c: (string_array_contains),
