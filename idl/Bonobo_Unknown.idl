@@ -1,5 +1,17 @@
 #ifndef __BONOBO_UNKNOWN_IDL__
 #define __BONOBO_UNKNOWN_IDL__
+/*
+ * bonobo-unknown.idl: The base Bonobo Object
+ *
+ *   This is the base interface from which every bonobo interface
+ * is derived it provides the mechanisms for introspecting an
+ * aggregate object.
+ *
+ * Copyright (C) 1999, 2000  Helix Code, Inc.
+ *
+ * Author:
+ *	Miguel de Icaza (miguel@helixcode.com)
+ */
 
 module Bonobo {
 	interface Unknown {

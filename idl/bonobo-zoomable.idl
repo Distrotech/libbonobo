@@ -1,5 +1,5 @@
 /*
- *  Bonobo::Zoomable - a zoomable interface for Controls.
+ * bonobo-zoomable.idl: Bonobo::Zoomable - a zoomable interface for Controls.
  *
  *  Copyright (C) 2000 Eazel, Inc.
  *                2000 SuSE GmbH.
@@ -20,7 +20,6 @@
  *
  *  Authors: Maciej Stachowiak <mjs@eazel.com>
  *           Martin Baulig <baulig@suse.de>
- *
  */
 
 module Bonobo {

@@ -1,9 +1,10 @@
 /*
  * Bonobo::ProgressiveDataSink interface.
  *
+ * Copyright (C) 1999  Helix Code, Inc.
+ *
  * Author:
  *    Nat Friedman (nat@gnome-support.com)
- *
  */
 
 /*

@@ -1,3 +1,12 @@
+/*
+ * bonobo-ui.idl: Handles some User Interface issues for components
+ *
+ * Copyright (C) 2000  Helix Code, Inc.
+ *
+ * Author:
+ *	Michael Meeks (michael@helixcode.com)
+ */
+
 module Bonobo {
 	interface UIContainer;
 

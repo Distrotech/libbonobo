@@ -1,5 +1,7 @@
 /*
- * Interfaces for desktop elements
+ * bonobo-desktop.idl: Interfaces for desktop elements
+ *
+ * Copyright (C) 1999  Helix Code, Inc.
  *
  * Author:
  *   Miguel de Icaza (miguel@kernel.org)

@@ -6,6 +6,8 @@
  * Containers must provide an instance of ClientSite
  * for every compound document object it contains.
  *
+ * Copyright (C) 2000  Helix Code, Inc.
+ *
  * Author:
  *    Miguel de Icaza (miguel@gnu.org)
  */

@@ -1,3 +1,12 @@
+/*
+ * bonobo-advise.idl:
+ *
+ * Copyright (C) 2000  Helix Code, Inc.
+ *
+ * Author:
+ *	Miguel de Icaza (miguel@helixcode.com)
+ */
+
 module Bonobo {
 
 	interface AdviseSink : Bonobo::Unknown {

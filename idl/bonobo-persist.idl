@@ -1,8 +1,11 @@
 /*
- * Bonobo::Persist interfaces
+ * bonobo-persist.idl: Bonobo::Persist interfaces
  *
- * Author:
+ * Copyright (C) 1999, 2000  Helix Code, Inc.
+ *
+ * Authors:
  *    Miguel de Icaza (miguel@gnu.org)
+ *    Dan Winship     (danw@helixcode.com)
  */
 
 module Bonobo {

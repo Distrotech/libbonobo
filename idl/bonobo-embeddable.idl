@@ -1,10 +1,16 @@
 /*
- * Bonobo Objects
+ * bonobo-embeddable.idl: handles embeddable components
  *
- * A Bonobo object is an object that can be embedded into
- * a container application.
+ *   An Embeddable is an object that can be used inside
+ * an office productivity application; it is part of a
+ * compound document. Mostly people will want to implement
+ * the Control interface for their application first.
  *
- * Bonobo Objects are also referred to as servers.
+ * Copyright (C) 1999, 2000  Helix Code, Inc.
+ *
+ * Authors:
+ *	Miguel de Icaza (miguel@helixcode.com)
+ *	Nat Friedman    (nat@helixcode.com)
  */
 
 module Bonobo {
@@ -18,15 +24,6 @@ interface View : Control {
 	 * Requests that the view be running at zoom factor
 	 */
 	void set_zoom_factor (in double zoom);
-
-	/**
-	 * do_verb:
-	 * @verb_name: string that identifies the verb.
-	 *
-	 *
-	 * Performs the @verb.
-	 */
-	void do_verb (in string verb_name);
 };
 
 interface ViewFrame : ControlFrame {
@@ -101,21 +98,6 @@ interface Embeddable : Bonobo::Unknown {
 	 * or its container moniker's name.
 	 *	void set_moniker (in Moniker mon, in Moniker::type which);
 	 */
-
-	struct GnomeVerb {
-		string name;
-		string label;
-		string hint;
-	};
-
-	typedef sequence<GnomeVerb> verb_list;
-
-	/**
-	 * get_verb_list:
-	 * 
-	 * Returns a list of the supported verbs
-	 */
-	verb_list get_verb_list ();
 
 	/**
 	 * advise:

@@ -1,4 +1,7 @@
 /*
+ * bonobo-storage.idl: Handles structured storage
+ *
+ * Copyright (C) 1999, 2000  Helix Code, Inc.
  *
  * Author:
  *    Miguel de Icaza (miguel@gnu.org)
@@ -10,7 +13,6 @@
  *
  *    Stream:    Used to read and write bytes to a storage.  The
  *               Streams are equivalent to files.
- *
  */
 
 module Bonobo {

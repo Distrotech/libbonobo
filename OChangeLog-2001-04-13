@@ -1,5 +1,38 @@
 2000-10-09  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-compat.c (do_set_pixmap, deal_with_pixmap): chop
+	off 'Menu_' sometimes.
+
+	* samples/compound-doc/paint-component-simple.c (view_button_press_cb),
+	(view_clear_image_cb): remove (view_factory): upd.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_view_do_verb):
+	remove.
+
+	* bonobo/bonobo-view.c (bonobo_view_get_epv, impl_Bonobo_View_do_verb),
+	(bonobo_view_construct, bonobo_view_register_verb),
+	(bonobo_view_unregister_verb, bonobo_view_popup_verbs): kill verb bits.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_get_verbs),
+	(bonobo_client_site_free_verbs): ditto.
+
+	* bonobo/bonobo-embeddable.c (impl_Bonobo_Embeddable_get_verb_list),
+	(bonobo_embeddable_get_epv, bonobo_embeddable_add_verb),
+	(bonobo_embeddable_get_verbs, bonobo_embeddable_remove_verb),
+	(bonobo_embeddable_add_verbs): remove redundant verb code.
+
+	* idl/bonobo-embeddable.idl: remove verb stuff.
+
+	* idl/*.idl: add copyright / author / descr. where missing.
+
+	* bonobo/bonobo-ui-compat.c (compat_menu_parse_uiinfo_one_with_data):
+	strip off 'Menu_'
+
+	* bonobo/bonobo-win.c (menu_sync_state, toolbar_sync_state):
+	make warnings more clear.
+
+2000-10-09  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_get_icon_pixbuf): 
 	remove debug.
 

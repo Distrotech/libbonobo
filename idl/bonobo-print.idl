@@ -1,5 +1,5 @@
 /*
- * Bonobo remote printing support
+ * bonobo-print.idl: Bonobo remote printing support
  *
  * Author:
  *    Michael Meeks (michael@helixcode.com)
