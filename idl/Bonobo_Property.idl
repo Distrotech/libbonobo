@@ -1,8 +1,9 @@
 /*
  * The Bonobo Property interfaces.
  *
- * Author:
+ * Authors:
  *   Nat Friedman (nat@nat.org)
+ *   Mike Kestner (mkestner@ameritech.net)
  *
  * Copyright 1999, Helix Code, Inc.
  */
@@ -96,7 +97,8 @@ interface Property {
 	 * BONOBO_PROPERTY_UNSTORED        = 1,
 	 * BONOBO_PROPERTY_READABLE        = 2,
 	 * BONOBO_PROPERTY_WRITEABLE       = 4,
-	 * BONOBO_PROPERTY_USE_DEFAULT_OPT = 8
+	 * BONOBO_PROPERTY_USE_DEFAULT_OPT = 8,
+	 * BONOBO_PROPERTY_NO_LISTENING    = 16
 	 * 
 	 */
 	long get_flags ();
@@ -121,9 +123,9 @@ interface PropertyBag : Bonobo::Unknown {
 	 * Returns: The single property in this PropertyBag identified
 	 * by @name.
 	 */
-	exception PropertyNotFound {};
+	exception NotFound {};
 	Property get_property (in string name)
-		raises (PropertyNotFound);
+		raises (NotFound);
 
 	/**
 	 * get_property_names:
@@ -139,16 +141,19 @@ interface PropertyBag : Bonobo::Unknown {
 	 */
 	PropertyNames get_property_names ();
 
+	exception NoListening {};
 	/**
 	 * add_change_listener:
 	 * @name: Property name.  Use empty string ("") to listen to all
 	 * properties in the bag.
-	 * @listener: Listener Interface to notify when changes occur.
+	 * @listener: PropertyListener Interface to notify when changes occur.
 	 *
 	 * This method attaches a listener for changes to any property in 
 	 * the bag. 
 	 */
-	void add_change_listener (in string name, in Listener listener);
+	void add_change_listener (in string name,
+				  in PropertyListener listener)
+		raises (NotFound, NoListening);
 
 	/**
 	 * remove_change_listener:
@@ -158,9 +163,9 @@ interface PropertyBag : Bonobo::Unknown {
 	 *
 	 * This method removes a bag listener from the bag. 
 	 */
-	void remove_change_listener (in string name, in Listener listener);
-
-
+	void remove_change_listener (in string name,
+				     in PropertyListener listener)
+		raises (NotFound);
 };
 
 };

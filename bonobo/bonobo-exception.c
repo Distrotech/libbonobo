@@ -179,6 +179,13 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_Persist_FileNotFound))
 		return g_strdup (_("stream not found"));
 
+	/* Bonobo::PropertyBag */
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_PropertyBag_NotFound))
+		return g_strdup (_("property not found"));
+
+	else if (!strcmp (ev->_repo_id, ex_Bonobo_PropertyBag_NoListening))
+		return g_strdup (_("no listening to this property"));
+
 	/* Bonobo::Moniker */
 	else if (!strcmp (ev->_repo_id, ex_Bonobo_Moniker_InterfaceNotFound))
 		return g_strdup (_("Moniker interface cannot be found"));

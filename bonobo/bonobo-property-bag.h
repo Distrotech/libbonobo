@@ -14,7 +14,8 @@ typedef enum {
 	BONOBO_PROPERTY_UNSTORED        = 1,
 	BONOBO_PROPERTY_READABLE        = 2,
 	BONOBO_PROPERTY_WRITEABLE       = 4,
-	BONOBO_PROPERTY_USE_DEFAULT_OPT = 8
+	BONOBO_PROPERTY_USE_DEFAULT_OPT = 8,
+	BONOBO_PROPERTY_NO_LISTENING    = 16
 } BonoboPropertyFlags;
 
 #include <bonobo/bonobo-arg.h>
@@ -97,12 +98,16 @@ void                      bonobo_property_bag_remove_listener  (BonoboPropertyBa
 								const gchar            *name, 
 								Bonobo_PropertyListener listener,
 								CORBA_Environment      *opt_ev);
+void                      bonobo_property_bag_notify_listeners (BonoboPropertyBag      *pb,
+								const char             *name,
+								const BonoboArg        *new_value,
+								CORBA_Environment      *ev);
 
 /* A private function, only to be used by persistence implementations. */
 GList                    *bonobo_property_bag_get_prop_list    (BonoboPropertyBag *pb);
 
 /* For implementation inheritance. */
-POA_Bonobo_PropertyBag__epv *bonobo_property_bag_get_epv	      (void);
+POA_Bonobo_PropertyBag__epv *bonobo_property_bag_get_epv       (void);
 
 END_GNOME_DECLS
 

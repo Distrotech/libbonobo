@@ -1,5 +1,33 @@
 2000-10-05  Michael Meeks  <michael@helixcode.com>
 
+	* idl/Makefile.am (idl_DATA): remove bonobo-listener.idl.
+
+	* bonobo/Makefile.am (idls): ditto.
+
+	* idl/Bonobo.idl: ditto.
+
+	* idl/bonobo-property.idl: add Mike in Authors.
+
+	* bonobo/bonobo-ui-xml.c (override_node_with): call
+	prune_overrides_by_id to remove already overridden nodes with
+	the same id: so A + BA -> AB not ABA.
+
+	* bonobo/bonobo-exception.c (bonobo_exception_get_text): add
+	property exceptions.
+
+	* bonobo/bonobo-property-bag.c (notify_listeners): make public as
+	(bonobo_property_bag_notify_listeners): this. Actually use the
+	correct listener interface.
+	(notify_listeners): don't emit a signal if there is no listening
+	on this property.
+	(bonobo_property_bag_add_listener): tool up with exceptions all
+	over the shop. (bonobo_property_bag_remove_listener): ditto.
+
+	* idl/bonobo-property.idl: add PropertyNoListening exception and
+	add PROPERTY_NO_LISTENING exception.
+
+2000-10-05  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-ui-compat.c (bonobo_control_get_remote_ui_handler):
 	fix evil buglet.
 

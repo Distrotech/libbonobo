@@ -17,7 +17,6 @@
 
 #include <bonobo-unknown.idl>
 #include <bonobo-moniker.idl>
-#include <bonobo-listener.idl>
 
 /* Storage stuff. */
 #include <bonobo-storage.idl>
