@@ -1,12 +1,12 @@
 # libbonobo's Portuguese Translation
 # Copyright (C) 2001 Free Software Foundation, Inc.
-# Duarte Loreto <happyguy_pt@hotmail.com>, 2001
+# Duarte Loreto <happyguy_pt@hotmail.com>, 2001, 2002
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-01-24 10:32+0000\n"
-"PO-Revision-Date: 2001-12-27 03:47+0000\n"
+"POT-Creation-Date: 2002-02-10 02:34+0000\n"
+"PO-Revision-Date: 2002-02-10 02:34+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <none@none.org>\n"
 "MIME-Version: 1.0\n"
@@ -158,7 +158,7 @@ msgstr "Incapaz de inicializar Bonobo"
 msgid "Failed to resolve, or extend '%s"
 msgstr "Falha na resolução, ou extensão '%s'"
 
-#: bonobo/bonobo-moniker-util.c:245
+#: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
 msgstr "Incapaz de activar objecto"
 
@@ -206,30 +206,29 @@ msgstr "Falha ao activar '%s'"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Fábrica de servidor Echo Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Aplicação de exemplo servidor Echo Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "Componente Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Fábrica de componentes Echo"
 
 #: samples/echo/echo-client.c:22
-#, fuzzy
 msgid "I could not initialize Bonobo"
 msgstr "Incapaz de inicializar Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "Incapaz de criar uma instância do componente echo de exemplo"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr ""
+msgstr "Ocorreu uma excepção '%s'"
