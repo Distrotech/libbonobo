@@ -1,3 +1,16 @@
+1999-09-11  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* bonobo/gnome-ui-handler.c (toolbar_toplevel_get_widget): Created.
+	(toolbar_toplevel_set_sensitivity_internal): Use toolbar_topleve_get_widget
+	so we look in the right hash table.
+	(pixmap_data_to_corba): Remove warning on stock / filename; seems to
+	work well.
+	(pixmap_xpm_copy_data, pixmap_copy_data, pixmap_xpm_get_length): Constify.
+	(gnome_ui_handler_destroy): Added warning & kill compile warning.
+
+	* doc/debugging.txt: Removed enumeration: pain to renumber :-) Add
+	mention of the FAQ
+
 1999-09-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* bonobo/gnome-bonobo-item.c (gbi_finalize): Add call to
