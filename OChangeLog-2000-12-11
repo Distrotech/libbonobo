@@ -1,3 +1,14 @@
+2000-08-09  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-uih-menu.c: (menu_free_data),
+	(menu_local_remove_item): Move destroy-notify code to a place
+	where it will actually do some good from the incorrect place
+	it was in before.
+	* bonobo/bonobo-uih-toolbar.c: (toolbar_free_data),
+	(toolbar_local_remove_item): Do the corresponding move in the
+	toolbar code, except the "move to" location is unfinished, so
+	mark it with a FIXME.
+
 2000-08-08  Robin * Slomkowski  <rslomkow@eazel.com>
 
 	* Makefile.am: some fixes so it passes make distcheck
