@@ -1,3 +1,48 @@
+2000-12-09  Michael Meeks  <michael@helixcode.com>
+
+	* idl/Makefile.am (idl_DATA): add bonobo-context.idl
+
+	* gshell/inout.c (file_open_cb): nail bug.
+	 s/goad_id/oaf_iid/
+
+	* gshell/gshell.c s/goad_id/oaf_iid/
+
+	* bonobo/bonobo-ui-toolbar.c (impl_destroy): don't free the items
+	list, before gtk_container_destroy needs it.
+	(impl_finalize): do it here instead.
+	(class_init): connect it.
+
+2000-12-08  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-moniker-util.c
+	(bonobo_moniker_util_new_from_name_full): return the
+	parent duplicated for end of string.
+	(query_from_name): split from
+	(bonobo_moniker_util_new_from_name_full): here.
+	(bonobo_moniker_client_new_from_name_async): impl.
+	(parse_async_ctx_free): impl.
+	(async_activation_cb): impl.
+	(bonobo_moniker_resolve_async): upd.
+	(bonobo_moniker_resolve_async_default): upd.
+
+	* bonobo/bonobo-object.c (bonobo_object_dup_ref),
+	(bonobo_object_release_unref): tolerate CORBA_OBJECT_NIL/
+
+	* monikers/bonobo-moniker-file.c (file_parse_display_name):
+	simplify.
+
+	* monikers/bonobo-moniker-config.c (config_parse_display_name): ditto.
+
+	* monikers/bonobo-moniker-untar.c (untar_parse_display_name): "
+
+	* monikers/bonobo-moniker-query.c (query_parse_display_name): "
+
+	* monikers/bonobo-moniker-oaf.c (oaf_parse_display_name): "
+
+	* monikers/bonobo-moniker-http.c (http_parse_display_name): "
+
+	* monikers/bonobo-moniker-gunzip.c (gunzip_parse_display_name): "
+
 2000-12-08  Federico Mena Quintero  <federico@helixcode.com>
 
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_create_poa):

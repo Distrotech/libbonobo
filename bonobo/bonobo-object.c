@@ -352,6 +352,7 @@ impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
  *   This function returns a duplicated CORBA Object reference,
  * it also bumps the ref count on the object. This is ideal to
  * use in any method returning a Bonobo_Object in a CORBA impl.
+ * if object is CORBA_OBJECT_NIL it is returned unaffected.
  * 
  * Return value: duplicated & ref'd corba object reference.
  **/
@@ -361,9 +362,9 @@ bonobo_object_dup_ref (Bonobo_Unknown     object,
 {
 	CORBA_Environment tmpev, *rev;
 	Bonobo_Unknown    ans;
-	
-	g_return_val_if_fail (object != CORBA_OBJECT_NIL,
-			      CORBA_OBJECT_NIL);
+
+	if (object == CORBA_OBJECT_NIL)
+		return CORBA_OBJECT_NIL;
 
 	if (ev)
 		rev = ev;
@@ -388,8 +389,8 @@ bonobo_object_dup_ref (Bonobo_Unknown     object,
  * 
  *   This function returns releases a CORBA Object reference,
  * it also decrements the ref count on the bonobo object.
- * This is the converse of bonobo_object_release_ref
- * 
+ * This is the converse of bonobo_object_dup_ref we
+ * tolerate object == CORBA_OBJECT_NIL silently
  **/
 void
 bonobo_object_release_unref (Bonobo_Unknown     object,
@@ -397,7 +398,8 @@ bonobo_object_release_unref (Bonobo_Unknown     object,
 {
 	CORBA_Environment tmpev, *rev;
 
-	g_return_if_fail (object != CORBA_OBJECT_NIL);
+	if (object == CORBA_OBJECT_NIL)
+		return;
 
 	if (ev)
 		rev = ev;

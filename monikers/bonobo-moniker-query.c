@@ -63,13 +63,9 @@ query_parse_display_name (BonoboMoniker     *moniker,
 	
 	bonobo_moniker_set_name (moniker, name, i);
 
-	if (name [i])
-		return bonobo_moniker_util_new_from_name_full (
-			bonobo_object_corba_objref (BONOBO_OBJECT (m_query)),
-			&name [i], ev);
-	else
-		return bonobo_object_dup_ref (
-			bonobo_object_corba_objref (BONOBO_OBJECT (m_query)), ev);
+	return bonobo_moniker_util_new_from_name_full (
+		bonobo_object_corba_objref (BONOBO_OBJECT (m_query)),
+		&name [i], ev);
 }
 
 static Bonobo_Unknown

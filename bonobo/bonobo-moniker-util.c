@@ -10,6 +10,7 @@
 
 #include "bonobo.h"
 #include <liboaf/liboaf.h>
+#include <liboaf/oaf-async.h>
 
 struct {
 	char *prefix;
@@ -45,6 +46,27 @@ moniker_id_from_nickname (const CORBA_char *name)
 	return NULL;
 }
 
+static char *
+query_from_name (const char *name)
+{
+	char *prefix, *query;
+	int   len;
+
+	for (len = 0; name [len]; len++) {
+		if (name [len] == ':')
+			break;
+	}
+
+	prefix = g_strndup (name, len);
+		
+	query = g_strdup_printf (
+		"repo_ids.has ('IDL:Bonobo/Moniker:1.0') AND "
+		"bonobo:moniker == '%s'", prefix);
+	g_free (prefix);
+
+	return query;
+}
+
 Bonobo_Moniker
 bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 					const CORBA_char  *name,
@@ -57,28 +79,19 @@ bonobo_moniker_util_new_from_name_full (Bonobo_Moniker     parent,
 	g_return_val_if_fail (ev != NULL, NULL);
 	g_return_val_if_fail (name != NULL, NULL);
 
+	if (!name [0])
+		return bonobo_object_dup_ref (parent, ev);
+
 	if (name [0] == '#')
 		name++;
 
-	iid = moniker_id_from_nickname (name);
+	if (!(iid = moniker_id_from_nickname (name))) {
+		char *query;
 
-	if (!iid) { /* Do an oaf-query for a handler */
-		char *prefix, *query;
-		int   len;
+		query = query_from_name (name);
 
-		for (len = 0; name [len]; len++) {
-			if (name [len] == ':')
-				break;
-		}
-
-		prefix = g_strndup (name, len);
-		
-		query = g_strdup_printf (
-			"repo_ids.has ('IDL:Bonobo/Moniker:1.0') AND "
-			"bonobo:moniker == '%s'", prefix);
-		g_free (prefix);
-		
 		object = oaf_activate (query, NULL, 0, NULL, ev);
+
 		g_free (query);
 		
 		if (ev->_major != CORBA_NO_EXCEPTION)
@@ -310,40 +323,176 @@ bonobo_get_object (const CORBA_char *name,
 	return retval;
 
 }
-void
-bonobo_moniker_client_new_from_name_async (const CORBA_char   *name,
-					   CORBA_Environment  *ev,
-					   guint               timeout_usec,
-					   BonoboAsyncCallback cb,
-					   gpointer            user_data)
+
+typedef struct {
+	char                *name;
+	BonoboMonikerAsyncFn cb;
+	gpointer             user_data;
+	guint                timeout_usec;
+	Bonobo_Unknown       moniker;
+} parse_async_ctx_t;
+
+static void
+parse_async_ctx_free (parse_async_ctx_t *ctx)
 {
-/*	static const CORBA_TypeCode args [] = {
-		TC_Object,
-		TC_string,
-	};
-	static const CORBA_TypeCode exceptions [] = {
-		TC_Bonobo_Moniker_InvalidSyntax,
-		TC_Bonobo_Moniker_UnknownPrefix,
-		NULL
-	};
-	static const BonoboAsyncFlags flags [] = {
-		BONOBO_ASYNC_IN,
-		BONOBO_ASYNC_IN
-	};
-	static const BonoboAsyncMethod method = {
-		"parseDisplayName", TC_Object, args, 2,
-		exceptions, flags
-	};
-	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gpointer arg_values [2] = { &obj, &name };
+	if (ctx) {
+		g_free (ctx->name);
+		g_free (ctx);
+	}
+}
+
+static void
+async_parse_cb (BonoboAsyncReply  *reply,
+		CORBA_Environment *ev,
+		gpointer           user_data)
+{
+	parse_async_ctx_t *ctx = user_data;
+
+	if (BONOBO_EX (ev))
+		ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
+	else {
+		Bonobo_Moniker retval;
+
+		bonobo_async_demarshal (reply, &retval, NULL);
+
+		ctx->cb (retval, ev, ctx->user_data);
+	}
+
+	bonobo_object_release_unref (ctx->moniker, ev);
+	parse_async_ctx_free (ctx);
+}
+
+static void
+async_activation_cb (CORBA_Object activated_object, 
+		     const char  *error_reason, 
+		     gpointer     user_data)
+{
+	parse_async_ctx_t *ctx = user_data;
+	CORBA_Environment ev;
+
+	CORBA_exception_init (&ev);
+
+	if (error_reason) { /* badly designed oaf interface */
+
+		CORBA_exception_set (&ev, CORBA_USER_EXCEPTION,
+				     ex_Bonobo_Moniker_UnknownPrefix, NULL);
+
+		ctx->cb (CORBA_OBJECT_NIL, &ev, ctx->user_data);
+		parse_async_ctx_free (ctx);
+	} else {
+		ctx->moniker = Bonobo_Unknown_queryInterface (
+			activated_object, "IDL:Bonobo/Moniker:1.0", &ev);
+
+		if (ev._major != CORBA_NO_EXCEPTION) {
+			ctx->cb (CORBA_OBJECT_NIL, &ev, ctx->user_data);
+			parse_async_ctx_free (ctx);
+		
+		} else if (ctx->moniker == CORBA_OBJECT_NIL) {
+			CORBA_exception_set (&ev, CORBA_USER_EXCEPTION,
+					     ex_Bonobo_Moniker_InterfaceNotFound, NULL);
+			ctx->cb (CORBA_OBJECT_NIL, &ev, ctx->user_data);
+			parse_async_ctx_free (ctx);
+		} else {
+			static const CORBA_TypeCode args [] = {
+				TC_Object,
+				TC_string,
+			};
+			static const CORBA_TypeCode exceptions [] = {
+				TC_Bonobo_Moniker_InvalidSyntax,
+				TC_Bonobo_Moniker_UnknownPrefix,
+				NULL
+			};
+			static const BonoboAsyncFlags flags [] = {
+				BONOBO_ASYNC_IN,
+				BONOBO_ASYNC_IN
+			};
+			static const BonoboAsyncMethod method = {
+				"parseDisplayName", TC_Object, args, 2,
+				exceptions, flags
+			};
+			CORBA_Object obj = CORBA_OBJECT_NIL;
+			gpointer arg_values [2] = { &obj, &ctx->name };
 	
+			bonobo_async_invoke (&method, async_parse_cb, ctx,
+					     ctx->timeout_usec,
+					     ctx->moniker, arg_values, &ev);
+			
+			if (BONOBO_EX (&ev)) {
+				ctx->cb (CORBA_OBJECT_NIL, &ev, ctx->user_data);
+				parse_async_ctx_free (ctx);
+			}
+
+			bonobo_object_release_unref (activated_object, &ev);
+		}
+	}
+
+	CORBA_exception_free (&ev);
+}
+
+void
+bonobo_moniker_client_new_from_name_async (const CORBA_char    *name,
+					   CORBA_Environment   *ev,
+					   guint                timeout_usec,
+					   BonoboMonikerAsyncFn cb,
+					   gpointer             user_data)
+{
+	parse_async_ctx_t *ctx;
+	const char        *iid;
+
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (cb != NULL);
-	g_return_if_fail (name != CORBA_OBJECT_NIL);
+	g_return_if_fail (name != NULL);
 
-	bonobo_async_invoke (&method, cb, user_data,
-	moniker, arg_values, ev);*/
-	g_warning ("Unimplemented as yet");
+	if (!name [0]) {
+		cb (CORBA_OBJECT_NIL, ev, user_data);
+		return;
+	}
+
+	if (name [0] == '#')
+		name++;
+
+	ctx = g_new0 (parse_async_ctx_t, 1);
+	ctx->name         = g_strdup (name);
+	ctx->cb           = cb;
+	ctx->user_data    = user_data;
+	ctx->timeout_usec = timeout_usec;
+	ctx->moniker      = CORBA_OBJECT_NIL;
+
+	if (!(iid = moniker_id_from_nickname (name))) {
+		char *query;
+
+		query = query_from_name (name);
+
+		oaf_activate_async (query, NULL, 0,
+				    async_activation_cb, ctx, ev);
+
+		g_free (query);
+	} else
+		oaf_activate_from_id_async ((gchar *) iid, 0,
+					    async_activation_cb, ctx, ev);
+}
+
+typedef struct {
+	BonoboMonikerAsyncFn cb;
+	gpointer             user_data;
+} resolve_async_ctx_t;
+
+static void
+resolve_async_cb (BonoboAsyncReply  *handle,
+		  CORBA_Environment *ev,
+		  gpointer           user_data)
+{
+	resolve_async_ctx_t *ctx = user_data;
+
+	if (BONOBO_EX (ev))
+		ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
+	else {
+		Bonobo_Unknown object;
+		bonobo_async_demarshal (handle, &object, NULL);
+		ctx->cb (object, ev, ctx->user_data);
+	}
+
+	g_free (ctx);
 }
 
 void
@@ -352,7 +501,7 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 			      const char            *interface_name,
 			      CORBA_Environment     *ev,
 			      guint                  timeout_usec,
-			      BonoboAsyncCallback    cb,
+			      BonoboMonikerAsyncFn   cb,
 			      gpointer               user_data)
 {
 	static const CORBA_TypeCode args [] = {
@@ -373,6 +522,7 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 		exceptions, flags
 	};
 	gpointer arg_values [2] = { &options, &interface_name };
+	resolve_async_ctx_t *ctx;
 	
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (cb != NULL);
@@ -380,20 +530,23 @@ bonobo_moniker_resolve_async (Bonobo_Moniker         moniker,
 	g_return_if_fail (options != CORBA_OBJECT_NIL);
 	g_return_if_fail (interface_name != CORBA_OBJECT_NIL);
 
-	bonobo_async_invoke (&method, cb, user_data, timeout_usec,
-			     moniker, arg_values, ev);
+	ctx = g_new0 (resolve_async_ctx_t, 1);
+	ctx->cb = cb;
+	ctx->user_data = user_data;
+
+	bonobo_async_invoke (&method, resolve_async_cb, ctx,
+			     timeout_usec, moniker, arg_values, ev);
 }
 
 void
-bonobo_moniker_resolve_async_default (Bonobo_Moniker      moniker,
-				      const char         *interface_name,
-				      CORBA_Environment  *ev,
-				      guint               timeout_usec,
-				      BonoboAsyncCallback cb,
-				      gpointer            user_data)
+bonobo_moniker_resolve_async_default (Bonobo_Moniker       moniker,
+				      const char          *interface_name,
+				      CORBA_Environment   *ev,
+				      guint                timeout_usec,
+				      BonoboMonikerAsyncFn cb,
+				      gpointer             user_data)
 {
 	Bonobo_ResolveOptions options;
-
 
 	g_return_if_fail (ev != NULL);
 	g_return_if_fail (cb != NULL);

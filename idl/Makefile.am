@@ -10,6 +10,7 @@ idl_DATA =				\
 	bonobo-listener.idl		\
 	bonobo-zoomable.idl		\
 	bonobo-canvas.idl		\
+	bonobo-context.idl		\
 	bonobo-control.idl		\
 	bonobo-client-site.idl		\
 	bonobo-embeddable.idl		\
