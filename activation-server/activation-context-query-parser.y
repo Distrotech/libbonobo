@@ -23,8 +23,6 @@
  */
 
 %{
-#define YYSTACK_USE_ALLOCA
-
 #include "activation-context-query.h"
 
 #include <glib.h>
