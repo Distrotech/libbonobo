@@ -1,19 +1,17 @@
-# libbonobo translation to Azerbaijani.
+# libbonobo faylınınn Azərbaycan dilinə tərcüməsi
 # Copyright (C) 2001 Free Software Foundation, Inc.
-# Christophe Merlet (RedFox) <redfox@eikonex.org>, 2001.
 # Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>, 2001
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.103.0\n"
-"POT-Creation-Date: 2003-06-09 17:26+0100\n"
-"PO-Revision-Date: 2003-02-05 01:29+0200\n"
+"POT-Creation-Date: 2003-06-22 13:14+0200\n"
+"PO-Revision-Date: 2003-06-22 17:54+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
-"Language-Team: Azerbaijani Turkish <az@li.org>\n"
+"Language-Team: Azerbaijani Turkish <gnome@azitt.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
 
 #: activation-server/activation-context-corba.c:472
 msgid "Couldn't find which child the server was listed in"
@@ -50,7 +48,7 @@ msgstr "Daranacaq soruşma mətni"
 
 #: activation-server/activation-server-main.c:81
 msgid "EXPRESSION"
-msgstr "MƏTN"
+msgstr "İFADƏ"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -66,12 +64,8 @@ msgstr "Bölüşdürə bilən cismləri uzaqdan istifadə etməyi indilik dəst�
 
 #: activation-server/object-directory-config-file.c:47
 #, c-format
-msgid ""
-"The Bonobo Activation configuration file was not read successfully. Please, "
-"check it is valid in: %s"
-msgstr ""
-"OAF quraşdırma faylı müvəffəqiyyətlə oxunmadı. Lütfən, hökmlü olub "
-"olmadığını yoxla :%s"
+msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
+msgstr "OAF quraşdırma faylı müvəffəqiyyətlə oxunmadı. Lütfən, hökmlü olub olmadığını yoxla :%s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -144,9 +138,7 @@ msgstr "%s icra edilə bilmədi: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:87
 msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr ""
-"Lokal üçün həddindən artıq ləqəb səviyəsi var, buna döngü səbəp olmuş "
-"olabilər"
+msgstr "Lokal üçün həddindən artıq ləqəb səviyəsi var, buna döngü səbəp olmuş olabilər"
 
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "File descriptor to print IOR on"
@@ -187,11 +179,11 @@ msgstr "`%s' shlib-i `%s' daxil etmir"
 
 #: bonobo/bonobo-object.c:910
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: bonobo/bonobo-object.c:910
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "Xüsusi CORBA POA"
 
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -329,7 +321,8 @@ msgstr "Xəta yoxlaması xətası; xüsusi hal yoxdur"
 msgid "General activation error with no description"
 msgstr "İzahsız ümumi fəallaşdırma xətası"
 
-#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
+#: bonobo/bonobo-generic-factory.h:79
+#: bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
 
@@ -452,7 +445,8 @@ msgstr "Bonobo fəallaşdırma quraşdırma faylı möhtəviyyatı :\n"
 msgid "Directory to remove from configuration file"
 msgstr "Quraşdırma faylından silinecek cərgə"
 
-#: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
+#: utils/bonobo-activation-sysconf.c:233
+#: utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
 msgstr "dizinleme"
 
@@ -468,29 +462,3 @@ msgstr "Quraşdırma faylındakı cərgələri göstər"
 msgid "Display path to configuration file"
 msgstr "Quraşdırma faylındakı cığırları göstər"
 
-#~ msgid "No server corresponding to your query"
-#~ msgstr "Sorğunuza heç bir verici cavab vermədi"
-
-#~ msgid "Query failed: "
-#~ msgstr "Soruşma bacarılmadı :"
-
-#~ msgid "Activation failed: "
-#~ msgstr "Fəallaşdırma bacarılmadı :"
-
-#~ msgid "Could not parse AID"
-#~ msgstr "AIDi daraya bilmədim"
-
-#~ msgid "Could not parse context: "
-#~ msgstr "Vəziyyəti daraya bilmədim:"
-
-#~ msgid "Could not activate server: "
-#~ msgstr "Vericini fəallaşdıra bilmədim:"
-
-#~ msgid "Domain of ObjectDirectory"
-#~ msgstr "Cismlər qovluğunun vericisi"
-
-#~ msgid "DOMAIN"
-#~ msgstr "VERİCİ"
-
-#~ msgid "Object directory to use when registering servers"
-#~ msgstr "Vericiləri qeyd edərkən istifadə ediləcək cism qovluğu"
