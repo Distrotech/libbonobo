@@ -16,14 +16,13 @@
  * Copyright 1999, 2000 Helix Code, Inc.
  */
 #include <config.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmarshal.h>
-#include <gtk/gtkwidget.h>
+#include <gobject/gsignal.h>
+#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-item-container.h>
-#include <bonobo/bonobo-client-site.h>
+#include <bonobo/bonobo-marshal.h>
 
 enum {
 	GET_OBJECT,
@@ -34,7 +33,7 @@ static guint signals [LAST_SIGNAL] = { 0, };
 
 #define PARENT_TYPE BONOBO_X_OBJECT_TYPE
 
-static GtkObjectClass *bonobo_item_container_parent_class;
+static GObjectClass *bonobo_item_container_parent_class;
 
 struct _BonoboItemContainerPrivate {
 	GHashTable *objects;
@@ -52,21 +51,13 @@ remove_object (gpointer key,
 }
 
 static void
-bonobo_item_container_destroy (GtkObject *object)
+bonobo_item_container_finalize (GObject *object)
 {
 	BonoboItemContainer *container = BONOBO_ITEM_CONTAINER (object);
 
 	/* Destroy all the ClientSites. */
 	g_hash_table_foreach_remove (container->priv->objects,
 				     remove_object, NULL);
-
-	bonobo_item_container_parent_class->destroy (object);
-}
-
-static void
-bonobo_item_container_finalize (GtkObject *object)
-{
-	BonoboItemContainer *container = BONOBO_ITEM_CONTAINER (object);
 
 	g_hash_table_destroy (container->priv->objects);
 	g_free (container->priv);
@@ -135,9 +126,9 @@ impl_Bonobo_ItemContainer_getObjectByName (PortableServer_Servant servant,
 {
 	Bonobo_Unknown ret;
 	
-	gtk_signal_emit (
-		GTK_OBJECT (bonobo_object_from_servant (servant)),
-		signals [GET_OBJECT], item_name, only_if_exists, ev, &ret);
+	g_signal_emit (
+		G_OBJECT (bonobo_object_from_servant (servant)),
+		signals [GET_OBJECT], 0, item_name, only_if_exists, ev, &ret);
 
 	return ret;
 }
@@ -149,46 +140,27 @@ typedef Bonobo_Unknown (*GnomeSignal_POINTER__POINTER_BOOL_POINTER) (
 	CORBA_Environment *ev,
 	gpointer func_data);
 
-static void 
-gnome_marshal_POINTER__POINTER_BOOL_POINTER (GtkObject * object,
-					     GtkSignalFunc func,
-					     gpointer func_data,
-					     GtkArg * args)
-{
-	GnomeSignal_POINTER__POINTER_BOOL_POINTER rfunc;
-	void **return_val;
-	return_val = GTK_RETLOC_POINTER (args[3]);
-	rfunc = (GnomeSignal_POINTER__POINTER_BOOL_POINTER) func;
-	*return_val = (*rfunc) (BONOBO_ITEM_CONTAINER (object),
-				GTK_VALUE_POINTER (args[0]),
-				GTK_VALUE_BOOL (args[1]),
-				GTK_VALUE_POINTER (args[2]),
-				func_data);
-}
-
 /* BonoboItemContainer class initialization routine  */
 static void
 bonobo_item_container_class_init (BonoboItemContainerClass *klass)
 {
-	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GObjectClass *object_class = (GObjectClass *) klass;
 	POA_Bonobo_ItemContainer__epv *epv = &klass->epv;
 
-	bonobo_item_container_parent_class = gtk_type_class (PARENT_TYPE);
+	bonobo_item_container_parent_class = g_type_class_peek_parent (klass);
 
-	object_class->destroy = bonobo_item_container_destroy;
 	object_class->finalize = bonobo_item_container_finalize;
 
 	signals [GET_OBJECT] =
-		gtk_signal_new  (
-			"get_object",
-			GTK_RUN_LAST,
-			object_class->type,
-			0,
-			gnome_marshal_POINTER__POINTER_BOOL_POINTER,
-			GTK_TYPE_POINTER,
-			3,
-			GTK_TYPE_POINTER, GTK_TYPE_BOOL, GTK_TYPE_POINTER);
-	gtk_object_class_add_signals (object_class, signals, LAST_SIGNAL);
+		g_signal_newc  ("get_object",
+				G_TYPE_FROM_CLASS (object_class),
+				G_SIGNAL_RUN_LAST,
+				0,
+				NULL, NULL,
+				bonobo_marshal_POINTER__POINTER_BOOLEAN_POINTER,
+				G_TYPE_POINTER,
+				3,
+				G_TYPE_POINTER, G_TYPE_BOOLEAN, G_TYPE_POINTER);
 
 	epv->enumObjects     = impl_Bonobo_ItemContainer_enumObjects;
 	epv->getObjectByName = impl_Bonobo_ItemContainer_getObjectByName;
@@ -221,7 +193,7 @@ BONOBO_X_TYPE_FUNC_FULL (BonoboItemContainer,
 BonoboItemContainer *
 bonobo_item_container_new (void)
 {
-	return gtk_type_new (bonobo_item_container_get_type ());
+	return g_object_new (bonobo_item_container_get_type (), NULL);
 }
 
 /**

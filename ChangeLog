@@ -1,3 +1,10 @@
+2001-04-18  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-item-container.[ch]: Ported to GObject.
+
+	* bonobo/bonobo-marshal.list: Added `POINTER:POINTER,BOOLEAN,POINTER'
+	and `BOOLEAN:POINTER'.
+
 2001-04-17  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-generic-factory.c (bonobo_generic_factory_corba_object_create): 

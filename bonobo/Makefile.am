@@ -73,6 +73,7 @@ libbonoboinclude_HEADERS =		\
 	bonobo-event-source.h		\
 	bonobo-exception.h		\
 	bonobo-generic-factory.h	\
+	bonobo-item-container.h		\
 	bonobo-item-handler.h		\
 	bonobo-listener.h		\
 	bonobo-main.h			\
@@ -118,6 +119,7 @@ libbonobo_2_la_SOURCES =		\
 	bonobo-event-source.c		\
 	bonobo-exception.c		\
 	bonobo-generic-factory.c	\
+	bonobo-item-container.c		\
 	bonobo-item-handler.c		\
 	bonobo-listener.c		\
 	bonobo-main.c			\

@@ -11,18 +11,18 @@
 #ifndef _BONOBO_ITEM_CONTAINER_H_
 #define _BONOBO_ITEM_CONTAINER_H_
 
-#include <libgnome/gnome-defs.h>
-#include <gtk/gtkobject.h>
+#include <libgnomebase/gnome-defs.h>
+#include <gobject/gobject.h>
 #include <bonobo/bonobo-xobject.h>
 #include <bonobo/bonobo-moniker.h>
 
 BEGIN_GNOME_DECLS
  
 #define BONOBO_ITEM_CONTAINER_TYPE        (bonobo_item_container_get_type ())
-#define BONOBO_ITEM_CONTAINER(o)          (GTK_CHECK_CAST ((o), BONOBO_ITEM_CONTAINER_TYPE, BonoboItemContainer))
-#define BONOBO_ITEM_CONTAINER_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BONOBO_ITEM_CONTAINER_TYPE, BonoboItemContainerClass))
-#define BONOBO_IS_ITEM_CONTAINER(o)       (GTK_CHECK_TYPE ((o), BONOBO_ITEM_CONTAINER_TYPE))
-#define BONOBO_IS_ITEM_CONTAINER_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BONOBO_ITEM_CONTAINER_TYPE))
+#define BONOBO_ITEM_CONTAINER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_ITEM_CONTAINER_TYPE, BonoboItemContainer))
+#define BONOBO_ITEM_CONTAINER_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BONOBO_ITEM_CONTAINER_TYPE, BonoboItemContainerClass))
+#define BONOBO_IS_ITEM_CONTAINER(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BONOBO_ITEM_CONTAINER_TYPE))
+#define BONOBO_IS_ITEM_CONTAINER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_ITEM_CONTAINER_TYPE))
 
 typedef GList BonoboClientSiteList;
 
@@ -45,7 +45,7 @@ typedef struct {
 				      CORBA_Environment   *ev);
 } BonoboItemContainerClass;
 
-GtkType              bonobo_item_container_get_type       (void);
+GType                bonobo_item_container_get_type       (void);
 BonoboItemContainer *bonobo_item_container_new            (void);
 
 void                 bonobo_item_container_add            (BonoboItemContainer *container,
