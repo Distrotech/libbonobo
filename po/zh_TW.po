@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo2 1.101.1\n"
-"POT-Creation-Date: 2001-08-07 15:33-0400\n"
-"PO-Revision-Date: 2001-09-02 14:45+0800\n"
+"Project-Id-Version: libbonobo2 1.103.1\n"
+"POT-Creation-Date: 2001-10-01 21:37-0400\n"
+"PO-Revision-Date: 2001-10-03 14:08+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -89,484 +89,96 @@ msgstr "不合格式的使用者介面 XML 描述"
 msgid "invalid path to XML user interface element"
 msgstr "指到 XML 使用者介面元件的路徑不合法"
 
-#: bonobo/bonobo-exception.c:216
+#: bonobo/bonobo-exception.c:215
+msgid "Unknown command or verb"
+msgstr "不詳的指令"
+
+#: bonobo/bonobo-exception.c:218
+msgid "Command is insensitive"
+msgstr "指令是不區分大小寫的"
+
+#: bonobo/bonobo-exception.c:222
 msgid "incorrect data type"
 msgstr "不正確的資料類別"
 
-#: bonobo/bonobo-exception.c:219
+#: bonobo/bonobo-exception.c:225
 msgid "stream not found"
 msgstr "找不到資料流"
 
-#: bonobo/bonobo-exception.c:223
+#: bonobo/bonobo-exception.c:229
 msgid "property not found"
 msgstr "找不到屬性"
 
-#: bonobo/bonobo-exception.c:227
+#: bonobo/bonobo-exception.c:232
+msgid "property has invalid type"
+msgstr "不合規格的屬性類別"
+
+#: bonobo/bonobo-exception.c:235
+msgid "property is read only"
+msgstr "只是唯讀的屬性"
+
+#: bonobo/bonobo-exception.c:238
+msgid "config database backend failed "
+msgstr "設定資料庫模組失敗"
+
+#: bonobo/bonobo-exception.c:242
 msgid "Moniker interface cannot be found"
 msgstr "無法找到命名器介面"
 
-#: bonobo/bonobo-exception.c:230
+#: bonobo/bonobo-exception.c:245
 msgid "Moniker activation timed out"
 msgstr "啟動命名器逾時"
 
-#: bonobo/bonobo-exception.c:233
+#: bonobo/bonobo-exception.c:248
 msgid "Syntax error within moniker"
 msgstr "命名器內含有語法錯誤"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:251
 msgid "Moniker has an unknown moniker prefix"
 msgstr "命名器具有不詳的前置字"
 
-#: bonobo/bonobo-exception.c:260
+#: bonobo/bonobo-exception.c:275
 msgid "Error checking error; no exception"
 msgstr "檢查錯誤時發生錯誤；沒有列外處理"
 
-#: bonobo/bonobo-exception.c:269
-#, fuzzy
+#: bonobo/bonobo-exception.c:284
 msgid "General activation error with no description"
-msgstr "物件描述內有語法錯誤"
+msgstr "一般的不具描述的啟動錯誤"
 
-#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+#: bonobo/bonobo-generic-factory.h:67
+#: bonobo/bonobo-generic-factory.h:71
 msgid "Could not initialize Bonobo"
 msgstr "無法初始化 Bonobo"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:1
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP 命名器"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:2
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "ORB IOR handling moniker"
+msgstr "ORB IOR 命名器處理"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
 msgstr "標準命名器的元件工廠"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:3
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
 msgstr "一般的 Oaf 啟動命名器"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:4
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
 msgstr "一般的 Oaf 查詢命名器"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:5
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
 msgstr "一般的 '新增' 命名器的元件工廠"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:6
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
 msgstr "一般的項目命名器"
 
-#: monikers/Bonobo_Moniker_std.oaf.in.in.h:7
+#: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "資料流命名延伸器"
 
-#, fuzzy
-#~ msgid "property is read only"
-#~ msgstr "找不到屬性"
-
-#~ msgid "Visible"
-#~ msgstr "可見"
-
-#~ msgid "_Show"
-#~ msgstr "顯示 (_S)"
-
-#~ msgid "_Hide"
-#~ msgstr "隱藏 (_H)"
-
-#~ msgid "_View tooltips"
-#~ msgstr "顯示工具列提示 (_V)"
-
-#~ msgid "Toolbars"
-#~ msgstr "工具列"
-
-#~ msgid "Look"
-#~ msgstr "檢視"
-
-#~ msgid "_Icon"
-#~ msgstr "圖示 (_I)"
-
-#~ msgid "_Text and Icon"
-#~ msgstr "圖示及文字 (_T)"
-
-#~ msgid "_Priority text only"
-#~ msgstr "橫向文字 (_P)"
-
-#~ msgid "Customize Toolbars"
-#~ msgstr "自訂工具列"
-
-#~ msgid "B_oth"
-#~ msgstr "圖文 (_O)"
-
-#~ msgid "T_ext"
-#~ msgstr "文字 (_E)"
-
-#~ msgid "Hide t_ips"
-#~ msgstr "隱藏提示 (_I)"
-
-#~ msgid "Show t_ips"
-#~ msgstr "顯示提示 (_I)"
-
-#~ msgid "_Hide toolbar"
-#~ msgstr "隱藏工具列 (_H)"
-
-#~ msgid "Customi_ze"
-#~ msgstr "自訂 (_Z)"
-
-#~ msgid "Customize the toolbar"
-#~ msgstr "自訂工具列"
-
-#~ msgid "Oaf options"
-#~ msgstr "Oaf 選項"
-
-#~ msgid "Could not initialize Bonobo!\n"
-#~ msgstr "無法初始化 Bonobo!\n"
-
-#~ msgid "The User canceled the save"
-#~ msgstr "使用者取消了儲存的動作"
-
-#~ msgid "No filename"
-#~ msgstr "沒有檔案名稱"
-
-#~ msgid "unknown mime type for '%s'"
-#~ msgstr "'%s' 無法處理這種 mime 類別"
-
-#~ msgid "no handlers for mime type '%s'"
-#~ msgstr "沒有程式去處理這種 mime 類別 '%s'"
-
-#~ msgid "Name"
-#~ msgstr "名稱"
-
-#~ msgid "Description"
-#~ msgstr "描述"
-
-#~ msgid "GnoMines control"
-#~ msgstr "GnoMines 元件"
-
-#~ msgid "GnoMines control factory"
-#~ msgstr "GnoMines 元件的元件工廠"
-
-#~ msgid "bonobo GnoMines object"
-#~ msgstr "bonobo GnoMines 物件"
-
-#~ msgid "bonobo GnoMines object factory"
-#~ msgstr "bonobo GnoMines 物件的元件工廠"
-
-#~ msgid "Load a saved game"
-#~ msgstr "載入之前儲存的遊戲"
-
-#~ msgid "New game"
-#~ msgstr "新遊戲"
-
-#~ msgid "Open game"
-#~ msgstr "開啟遊戲"
-
-#~ msgid "Start a new game"
-#~ msgstr "重新開始一個新的遊戲"
-
-#~ msgid "_Game"
-#~ msgstr "遊戲 (_G)"
-
-#~ msgid "Waveform"
-#~ msgstr "Waveform"
-
-#~ msgid "Waveform component"
-#~ msgstr "Waveform 元件"
-
-#~ msgid "Waveform component factory"
-#~ msgstr "Waveform 元件的元件工廠"
-
-#~ msgid "audio/ulaw bonobo object"
-#~ msgstr "audio/ulaw bonobo 聲音物件"
-
-#~ msgid "audio/ulaw bonobo object factory"
-#~ msgstr "audio/ulaw bonobo 聲音物件的元件工廠"
-
-#~ msgid "Component Selector"
-#~ msgstr "元件選擇器"
-
-#~ msgid "Component Selector factory"
-#~ msgstr "元件選擇器的元件工廠"
-
-#~ msgid "Component selector control"
-#~ msgstr "元件選擇器的元件"
-
-#~ msgid "component selector control factory"
-#~ msgstr "元件選擇器元件的元件工廠"
-
-#~ msgid "Text"
-#~ msgstr "文本"
-
-#~ msgid "Text component"
-#~ msgstr "文本元件"
-
-#~ msgid "Text component factory"
-#~ msgstr "文本元件的元件工廠"
-
-#~ msgid "text/plain component"
-#~ msgstr "text/plain 純文字元件"
-
-#~ msgid "text/plain embeddable factory"
-#~ msgstr "text/plain 純文字嵌入式的元件工廠"
-
-#~ msgid "_Clear Text"
-#~ msgstr "清除文本 (_C)"
-
-#~ msgid "Clears the text in the component"
-#~ msgstr "清除元件內的文本"
-
-#~ msgid ""
-#~ "An exception occured while trying to load data into the component with "
-#~ "PersistFile"
-#~ msgstr "當嘗試將資料載入到具有實體檔案的元件時發生列外處理"
-
-#~ msgid "Could not open file %s"
-#~ msgstr "無法開啟檔案 %s"
-
-#~ msgid ""
-#~ "An exception occured while trying to load data into the component with "
-#~ "PersistStream"
-#~ msgstr "當嘗試將資料載入到具有實體資料流的元件時發生列外處理"
-
-#~ msgid "About this application"
-#~ msgstr "關於這個程式"
-
-#~ msgid "Close the current window"
-#~ msgstr "關閉目前視窗"
-
-#~ msgid "Configure the application"
-#~ msgstr "設定這個程式"
-
-#~ msgid "Create New _Window"
-#~ msgstr "新增視窗 (_W)"
-
-#~ msgid "Create a new window"
-#~ msgstr "建立一個新的視窗"
-
-#~ msgid "Displays only one window"
-#~ msgstr "只顯示一個視窗"
-
-#~ msgid "E_xit"
-#~ msgstr "離開 (_X)"
-
-#~ msgid "Exit the program"
-#~ msgstr "離開這個程式"
-
-#~ msgid "Help on GNOME"
-#~ msgstr "開啟 GNOME 的說明求助"
-
-#~ msgid "Kill the current buffer"
-#~ msgstr "清除目前的暫存區"
-
-#~ msgid "Launch Control..."
-#~ msgstr "啟動控制元件..."
-
-#~ msgid "Launch Embeddable..."
-#~ msgstr "啟動嵌入式元件..."
-
-#~ msgid "Launches a new Control component"
-#~ msgstr "啟動一個新的控制元件"
-
-#~ msgid "Launches a new Embeddable component"
-#~ msgstr "啟動一個新的嵌入式元件"
-
-#~ msgid "Loads a file into the current component"
-#~ msgstr "載入一個檔案到目前的元件"
-
-#~ msgid "Open a file"
-#~ msgstr "開啟一個檔案"
-
-#~ msgid "Print S_etup..."
-#~ msgstr "印表機設定 (_E)..."
-
-#~ msgid "Print the current file"
-#~ msgstr "列印目前檔案"
-
-#~ msgid "Save _As..."
-#~ msgstr "另存新檔 (_A)..."
-
-#~ msgid "Save the current file"
-#~ msgstr "儲存目前檔案"
-
-#~ msgid "Save the current file with a different name"
-#~ msgstr "使用新名稱儲存目前檔案"
-
-#~ msgid "Setup the page settings for your current printer"
-#~ msgstr "設定目前印表機的列印頁面"
-
-#~ msgid "Splits the current window"
-#~ msgstr "分開目前視窗"
-
-#~ msgid "Zoom ..."
-#~ msgstr "縮放..."
-
-#~ msgid "Zoom _in"
-#~ msgstr "放大 (_I)"
-
-#~ msgid "Zoom _out"
-#~ msgstr "縮小 (_O)"
-
-#~ msgid "Zoom to _default"
-#~ msgstr "預設 (_D)"
-
-#~ msgid "Zoom to _fit"
-#~ msgstr "附合頁面 (_F)"
-
-#~ msgid "_About..."
-#~ msgstr "關於 (_A)..."
-
-#~ msgid "_Buffers"
-#~ msgstr "暫存區 (_B)"
-
-#~ msgid "_Close This Window"
-#~ msgstr "關閉這個視窗 (_C)"
-
-#~ msgid "_File"
-#~ msgstr "檔案 (_F)"
-
-#~ msgid "_Help"
-#~ msgstr "說明 (_H)"
-
-#~ msgid "_Help on GNOME"
-#~ msgstr "GNOME 說明求助 (_H)"
-
-#~ msgid "_Kill"
-#~ msgstr "清除 (_K)"
-
-#~ msgid "_Load..."
-#~ msgstr "載入 (_L)..."
-
-#~ msgid "_One Window"
-#~ msgstr "單視窗 (_O)"
-
-#~ msgid "_Open..."
-#~ msgstr "開啟 (_O)..."
-
-#~ msgid "_Preferences..."
-#~ msgstr "編好設定 (_P)..."
-
-#~ msgid "_Print"
-#~ msgstr "列印 (_P)"
-
-#~ msgid "_Save"
-#~ msgstr "儲存 (_S)"
-
-#~ msgid "_Settings"
-#~ msgstr "設定 (_S)..."
-
-#~ msgid "_Split Window"
-#~ msgstr "分開視窗 (_S)"
-
-#~ msgid "_Window"
-#~ msgstr "視窗 (_W)"
-
-#~ msgid "_Zoom"
-#~ msgstr "縮放 (_Z)"
-
-#~ msgid ""
-#~ "This program is part of the GNOME project. Gnome Shell comes with "
-#~ "ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to "
-#~ "redistribute it under the conditions of the GNU General Public License. "
-#~ "Please report bugs to dietmar@maurer-it.com"
-#~ msgstr ""
-#~ "這個程式是屬於 GNOME 專案的一部份。Gnome Shell 絕對沒有擔保。本程式是一個"
-#~ "自由軟體，並且歡迎您 遵照 GNU 通用公共許可證條款重新發佈它。請將有關此程式"
-#~ "的錯誤報告電郵到dietmar@maurer-it.com"
-
-#~ msgid "fatal CORBA exception!  Shutting down..."
-#~ msgstr "嚴重的 CORBA 列外處理! 正在關閉..."
-
-#~ msgid "New zoom level is %.3g."
-#~ msgstr "新的縮放等級是 %.3g."
-
-#~ msgid "Set zoom level:"
-#~ msgstr "設定縮放等級："
-
-#~ msgid "Could not initialize Bonobo!"
-#~ msgstr "無法初始化 Bonobo!"
-
-#~ msgid ""
-#~ "An exception occured while trying to save data from the component with "
-#~ "PersistFile"
-#~ msgstr "當嘗試從具有實體檔案的元件將資料儲存時發生列外處理"
-
-#~ msgid "Could not save file %s"
-#~ msgstr "無法儲存檔案 %s"
-
-#~ msgid ""
-#~ "An exception occured while trying to save data from the component with "
-#~ "PersistStream"
-#~ msgstr "當嘗試從具有實體資料流的元件將資料儲存時發生列外處理"
-
-#~ msgid "Open"
-#~ msgstr "開啟"
-
-#~ msgid "Launch component"
-#~ msgstr "啟動元件"
-
-#~ msgid "Load"
-#~ msgstr "載入"
-
-#~ msgid "Save As"
-#~ msgstr "另存新檔"
-
-#~ msgid "Component has no editable properties"
-#~ msgstr "元件沒有可供編輯的屬性"
-
-#~ msgid "Gunzip Moniker factory"
-#~ msgstr "Gunzip 命名器的元件工廠"
-
-#~ msgid "gunzip Moniker"
-#~ msgstr "gunzip 命名器"
-
-#~ msgid "file MonikerExtender"
-#~ msgstr "檔案命名延伸器"
-
-#~ msgid "generic file moniker"
-#~ msgstr "一般的檔案命名器"
-
-#~ msgid "Bonobo Echo server factory"
-#~ msgstr "Bonobo 回應伺服器的元件工廠"
-
-#~ msgid "Bonobo Echo server sample program"
-#~ msgstr "Bonobo 回應伺服器範例程式"
-
-#~ msgid "Echo component"
-#~ msgstr "回應元件"
-
-#~ msgid "Echo component factory"
-#~ msgstr "回應元件的元件工廠"
-
-#~ msgid "I could not initialize Bonobo"
-#~ msgstr "無法初始化 Bonobo"
-
-#~ msgid "The component now claims that it doesn't support PersistStream!"
-#~ msgstr "元件現在宣告它不支援實體資料流!"
-
-#~ msgid "Select file"
-#~ msgstr "選擇檔案"
-
-#~ msgid "Select an embeddable Bonobo component to add"
-#~ msgstr "選擇一個嵌入式的 Bonobo 元件用作新增"
-
-#~ msgid "Bonobo sample container"
-#~ msgstr "Bonobo 容器範例"
-
-#~ msgid "Sample Bonobo container"
-#~ msgstr "Bonobo 容器範例"
-
-#~ msgid "Could not launch Embeddable %s!"
-#~ msgstr "無法啟動嵌入式的 %s!"
-
-#~ msgid ""
-#~ "An exception occured while trying to load data into the component with "
-#~ "PersistStorage"
-#~ msgstr "當嘗試將資料載入到具有實體儲存庫的元件時發生列外處理"
-
-#~ msgid ""
-#~ "An exception occured while trying to save data from the component with "
-#~ "PersistStorage"
-#~ msgstr "當嘗試從具有實體儲存庫的元件將資料儲存時發生列外處理"
-
-#~ msgid "Select an object"
-#~ msgstr "選擇一個物件"
-
-#~ msgid "Can not bonobo_init"
-#~ msgstr "無法初始化 Bononbo"
