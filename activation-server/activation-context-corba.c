@@ -435,6 +435,7 @@ ac_do_activation(impl_POA_OAF_ActivationContext *servant,
 	  out->_u.res_shlib._buffer[j] = CORBA_string_dup(activatable->iid);
 	  activatable = g_hash_table_lookup(child->by_iid, activatable->location_info);
 	}
+
       out->_u.res_shlib._buffer[j] = CORBA_string_dup(activatable->iid);
     }
   else
@@ -492,11 +493,10 @@ impl_OAF_ActivationContext_activate(impl_POA_OAF_ActivationContext * servant,
   int i;
   char *hostname;
 
+  hostname = ctx_get_value(ctx, "hostname", ev);
+  ac_update_lists(servant, ev);
 
   servant->refs++;
-  hostname = ctx_get_value(ctx, "hostname", ev);
-
-  ac_update_lists(servant, ev);
 
   items = oaf_alloca(servant->total_servers * sizeof(OAF_ServerInfo *));
   ac_query_run(servant, requirements, selection_order, ctx, items, ev);
@@ -526,14 +526,14 @@ static void
 ac_update_lists(impl_POA_OAF_ActivationContext *servant,
   CORBA_Environment *ev)
 {
-GSList *cur;
+  GSList *cur;
 
-if(servant->refs > 0)
+  if(servant->refs > 0)
      return;
 
-     for(cur = servant->dirs; cur; cur = cur->next)
-     ac_update_list(servant, cur->data, ev);
-     }
+  for(cur = servant->dirs; cur; cur = cur->next)
+    ac_update_list(servant, cur->data, ev);
+}
 
 static OAF_ServerInfoList *
 impl_OAF_ActivationContext__get_servers(impl_POA_OAF_ActivationContext * servant,
@@ -728,8 +728,6 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
   int item_count;
   int i, j, total;
 
-  servant->refs++;
-
   retval = OAF_ServerInfoList__alloc();
   retval->_length = 0;
   retval->_buffer = NULL;
@@ -737,6 +735,8 @@ impl_OAF_ActivationContext_query(impl_POA_OAF_ActivationContext * servant,
 
   /* Pull in new lists from OD servers */
   ac_update_lists(servant, ev);
+  servant->refs++;
+
   items = oaf_alloca(servant->total_servers * sizeof(OAF_ServerInfo *));
 
   ac_query_run(servant, requirements, selection_order, ctx, items, ev);

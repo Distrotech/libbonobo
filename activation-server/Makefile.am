@@ -1,6 +1,6 @@
 bin_PROGRAMS=oafd oaf-client
 
-INCLUDES=@ORBIT_CFLAGS@ @XML_CFLAGS@ @GLIB_CFLAGS@ -I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\"
+INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -DOAFINFODIR=\"$(pkgdatadir)\" @ORBIT_CFLAGS@ @XML_CFLAGS@ @GLIB_CFLAGS@
 
 oafd_SOURCES=			\
 	oaf-skels.c		\
