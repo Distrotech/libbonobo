@@ -149,9 +149,14 @@ gint bonobo_application_new_instance (BonoboApplication *app,
 				      gint               argc,
 				      gchar             *argv[])
 {
-	gint rv;
+	gint         rv;
+	gchar **new_argv = g_new (gchar *, argc + 1);
+
+	memcpy (new_argv, argv, argc * sizeof(gchar *));
+	new_argv[argc] = NULL;
 	g_signal_emit (app, signals [NEW_INSTANCE], 0,
 		       argc, argv, &rv);
+	g_free (new_argv);
 	return rv;
 }
 
@@ -200,7 +205,7 @@ impl_Bonobo_Application_newInstance (PortableServer_Servant           servant,
 	BonoboApplication *app = BONOBO_APPLICATION (bonobo_object (servant));
 	CORBA_long         retval;
 
-	retval = bonobo_application_new_instance 
+	retval = bonobo_application_new_instance
 		(app, argv->_length, argv->_buffer);
 	return retval;
 }
@@ -600,5 +605,18 @@ bonobo_application_invoke_hooks (BonoboApplication *app)
 		hook = &g_array_index (bonobo_application_hooks, BonoboAppHook, i);
 		hook->func (app, hook->data);
 	}
+}
+
+
+GType
+bonobo_application_argv_get_type (void)
+{
+	static GType type = 0;
+	if (!type)
+		type = g_boxed_type_register_static (
+			"BonoboApplicationArgv",
+			(GBoxedCopyFunc) g_strdupv,
+			(GBoxedFreeFunc) g_strfreev);
+	return type;
 }
 

@@ -21,14 +21,17 @@ message_cb (BonoboAppClient *app_client, const gchar *message, GValueArray *args
 	GValue *retval;
 
 	g_return_val_if_fail (strcmp (message, TEST_MESSAGE) == 0, NULL);
-	g_return_val_if_fail (args->n_values == 1, NULL);
-	g_return_val_if_fail (G_VALUE_HOLDS_FLOAT (&args->values[0]), NULL);
+	g_return_val_if_fail (args->n_values == 2, NULL);
+	g_return_val_if_fail (G_VALUE_HOLDS_DOUBLE (&args->values[0]), NULL);
+	g_return_val_if_fail (G_VALUE_HOLDS_STRING (&args->values[1]), NULL);
 
-	g_message ("message_cb: %s", message);
+	g_message ("message_cb: %s(%f, \"%s\")", message,
+		   g_value_get_double (&args->values[0]),
+		   g_value_get_string (&args->values[1]));
 
 	retval = g_new0 (GValue, 1);
-	g_value_init (retval, G_TYPE_FLOAT);
-	g_value_set_float (retval, 2 * g_value_get_float (&args->values[0]));
+	g_value_init (retval, G_TYPE_DOUBLE);
+	g_value_set_double (retval, 2 * g_value_get_double (&args->values[0]));
 	return retval;
 }
 
@@ -51,8 +54,8 @@ new_instance_cb (BonoboApplication *app, gint argc, char *argv[])
 }
 
 
-static gfloat
-closure_message_cb (BonoboApplication *app, gint arg_1, gfloat arg_2, gpointer data2)
+static gdouble
+closure_message_cb (BonoboApplication *app, gint arg_1, gdouble arg_2, gpointer data2)
 {
 	g_message("closure_message_cb: %p, %i, %f, %p",
 		  app, arg_1, arg_2, data2);
@@ -65,7 +68,7 @@ main (int argc, char *argv [])
 {
 	BonoboApplication *app;
 	BonoboAppClient   *client;
-	float              msg_arg = 3.141592654;
+	double             msg_arg = 3.141592654;
 	GClosure          *closure;
 
 	if (bonobo_init (&argc, argv) == FALSE)
@@ -78,12 +81,12 @@ main (int argc, char *argv [])
 
 	closure = g_cclosure_new (G_CALLBACK (closure_message_cb),
 				  (gpointer) 0xdeadbeef,  NULL);
-	g_closure_set_marshal (closure, bonobo_marshal_FLOAT__LONG_FLOAT);
+	g_closure_set_marshal (closure, bonobo_marshal_DOUBLE__LONG_DOUBLE);
 	bonobo_application_register_message (app, CLOSURE_MESSAGE,
 					     "This is a test message",
 					     closure,
-					     G_TYPE_FLOAT, G_TYPE_LONG,
-					     G_TYPE_FLOAT, G_TYPE_NONE);
+					     G_TYPE_DOUBLE, G_TYPE_LONG,
+					     G_TYPE_DOUBLE, G_TYPE_NONE);
 
 	client = bonobo_application_register_unique (app);
 
@@ -106,9 +109,10 @@ main (int argc, char *argv [])
 		g_message ("Sending message string '%s' with argument %f",
 			   TEST_MESSAGE, msg_arg);
 		retval = bonobo_app_client_msg_send (client, TEST_MESSAGE,
-						     G_TYPE_FLOAT, msg_arg,
+						     G_TYPE_DOUBLE, msg_arg,
+						     G_TYPE_STRING, "this is a string",
 						     G_TYPE_NONE);
-		g_message ("Return value: %f", g_value_get_float (retval));
+		g_message ("Return value: %f", g_value_get_double (retval));
 		if (retval) {
 			g_value_unset (retval);
 			g_free (retval);
@@ -118,9 +122,9 @@ main (int argc, char *argv [])
 			   CLOSURE_MESSAGE, 10, 3.141592654);
 		retval = bonobo_app_client_msg_send (client, CLOSURE_MESSAGE,
 						     G_TYPE_LONG, 10,
-						     G_TYPE_FLOAT, 3.141592654,
+						     G_TYPE_DOUBLE, 3.141592654,
 						     G_TYPE_NONE);
-		g_message ("Return value: %f", g_value_get_float (retval));
+		g_message ("Return value: %f", g_value_get_double (retval));
 		if (retval) {
 			g_value_unset (retval);
 			g_free (retval);

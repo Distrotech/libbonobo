@@ -7,6 +7,7 @@
 G_BEGIN_DECLS
 
 #define BONOBO_TYPE_APPLICATION        (bonobo_application_get_type ())
+#define BONOBO_TYPE_APPLICATION_ARGV   (bonobo_application_argv_get_type ())
 #define BONOBO_APPLICATION(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o),\
 				        BONOBO_TYPE_APPLICATION, BonoboApplication))
 #define BONOBO_APPLICATION_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k),\
@@ -47,6 +48,7 @@ struct _BonoboApplicationClass {
 
 
 GType              bonobo_application_get_type            (void) G_GNUC_CONST;
+GType              bonobo_application_argv_get_type       (void) G_GNUC_CONST;
 BonoboApplication* bonobo_application_new                 (const char        *name);
 void               bonobo_application_register_message    (BonoboApplication *app,
 							   const gchar       *name,
