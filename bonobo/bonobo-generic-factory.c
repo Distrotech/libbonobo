@@ -265,7 +265,7 @@ bonobo_generic_factory_main (const char           *act_iid,
 	
 		bonobo_main ();
 
-		return bonobo_shutdown ();
+		return bonobo_debug_shutdown ();
 	} else
 		return 1;
 }

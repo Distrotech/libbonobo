@@ -219,5 +219,5 @@ main (int argc, char **argv)
 
 	bonobo_object_release_unref (pb, NULL);
 
-	return bonobo_shutdown ();
+	return bonobo_debug_shutdown ();
 }

@@ -24,7 +24,7 @@ gboolean                    bonobo_init_full             (int *argc,
 							  CORBA_ORB orb,
 							  PortableServer_POA poa,
 							  PortableServer_POAManager manager);
-int                         bonobo_shutdown              (void);
+int                         bonobo_debug_shutdown        (void);
 void			    bonobo_main			 (void);
 void                        bonobo_main_quit             (void);
 

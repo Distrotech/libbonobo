@@ -176,5 +176,5 @@ main (int argc, char *argv [])
 			   "an exceptional exception occured"));
 	fprintf (stderr, "All tests passed\n");
 
-	return bonobo_shutdown ();
+	return bonobo_debug_shutdown ();
 }

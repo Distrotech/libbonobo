@@ -88,5 +88,5 @@ main (int argc, char **argv)
 
 	bonobo_main ();
 
-	return bonobo_shutdown ();
+	return bonobo_debug_shutdown ();
 }

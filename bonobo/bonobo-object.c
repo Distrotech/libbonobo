@@ -1068,8 +1068,9 @@ gboolean
 bonobo_unknown_ping (Bonobo_Unknown     object,
 		     CORBA_Environment *opt_ev)
 {
-	gboolean alive;
-	CORBA_Environment  *ev, temp_ev;
+	gboolean           alive;
+	Bonobo_Unknown     unknown;
+	CORBA_Environment *ev, temp_ev;
        
 	g_return_val_if_fail (object != NULL, FALSE);
 
@@ -1081,12 +1082,17 @@ bonobo_unknown_ping (Bonobo_Unknown     object,
 
 	alive = FALSE;
 
-	Bonobo_Unknown_ref (object, ev);
+	unknown = CORBA_Object_duplicate (object, ev);
+
+	Bonobo_Unknown_ref (unknown, ev);
+
 	if (!BONOBO_EX (ev)) {
-		Bonobo_Unknown_unref (object, ev);
+		Bonobo_Unknown_unref (unknown, ev);
 		if (!BONOBO_EX (ev))
 			alive = TRUE;
 	}
+
+	CORBA_Object_release (unknown, ev);
 
 	if (!opt_ev)
 		CORBA_exception_free (&temp_ev);

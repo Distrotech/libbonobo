@@ -1,9 +1,21 @@
+2001-11-01  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-main.c (bonobo_shutdown): rename to
+	(bonobo_debug_shutdown): to please Maciej, upd to use
+	the new bonobo_activation shutdown API.
+
 2001-10-30  jacob berkman  <jacob@ximian.com>
 
 	* bonobo/libbonobo-2.0.pc.in (Cflags): 
 	* bonobo/Makefile.am (libbonoboincludedir): 
 	* Makefile.am (libincludedir): put headers in libbonobo-2.0 rather
 	than gnome-2.0
+
+2001-10-31  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_unknown_ping): hold a
+	CORBA ref on the object over the two methods we invoke,
+	thanks to Ettore.
 
 2001-10-31  Michael Meeks  <michael@ximian.com>
 

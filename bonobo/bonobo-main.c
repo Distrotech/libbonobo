@@ -93,7 +93,7 @@ bonobo_is_initialized (void)
  * value to return from 'main'.
  **/
 int
-bonobo_shutdown (void)
+bonobo_debug_shutdown (void)
 {
 	int retval = 0;
 
@@ -120,24 +120,10 @@ bonobo_shutdown (void)
 			CORBA_Object_release (
 				(CORBA_Object) __bonobo_poa_manager, &ev);
 		__bonobo_poa_manager = CORBA_OBJECT_NIL;
-#ifdef BONOBO_ACTIVATION_IS_FIXED
-		if (bonobo_activation_shutdown ())
-			retval = 1;
-#else
-		/* Cleanup of bonobo-activation resources -
-		 * important that this happens only once ! */
-		if (bonobo_activation_context_get ())
-			CORBA_Object_release ((CORBA_Object)
-                                bonobo_activation_context_get (), &ev);
 
-		if (__bonobo_orb != CORBA_OBJECT_NIL) {
-			CORBA_ORB_destroy (__bonobo_orb, &ev);
-			if (BONOBO_EX (&ev))
-				retval = 1;
-			CORBA_Object_release (
-				(CORBA_Object) __bonobo_orb, &ev);
-		}
-#endif
+		if (!bonobo_activation_debug_shutdown ())
+			retval = 1;
+
 		__bonobo_orb = CORBA_OBJECT_NIL;
 		
 	} else /* shutdown when we didn't need to error */
@@ -172,14 +158,11 @@ bonobo_init_full (int *argc, char **argv,
 	else
 		bonobo_inited = TRUE;
 
-	/* FIXME: we should g_atexit bonobo_shutdown */
+	/* Init neccessary bits */
+	g_type_init ();
 
-	{ /* Init neccessary bits */
-		g_type_init ();
-
-		if (!bonobo_activation_is_initialized ())
-			bonobo_activation_init (*argc, argv);
-	}
+	if (!bonobo_activation_is_initialized ())
+		bonobo_activation_init (*argc, argv);
 
 	CORBA_exception_init (&ev);
 

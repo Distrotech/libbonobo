@@ -31,7 +31,7 @@ main (int argc, char *argv [])
 
 	if (echo_server == CORBA_OBJECT_NIL) {
 		g_warning (_("Could not create an instance of the sample echo component"));
-		return bonobo_shutdown ();
+		return bonobo_debug_shutdown ();
 	}
 
 	/* Send a message */
@@ -50,5 +50,5 @@ main (int argc, char *argv [])
 
 	bonobo_object_release_unref (echo_server, NULL);
 	
-	return bonobo_shutdown ();
+	return bonobo_debug_shutdown ();
 }

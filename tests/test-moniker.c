@@ -117,5 +117,5 @@ main (int argc, char *argv [])
 
 	test_real_monikers ();
 
-	return bonobo_shutdown ();
+	return bonobo_debug_shutdown ();
 }
