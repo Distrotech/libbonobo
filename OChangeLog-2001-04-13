@@ -1,3 +1,10 @@
+2000-11-26  Maciej Stachowiak  <mjs@eazel.com>
+
+	* monikers/Makefile.am: Add -I$(top_srcdir)/bonobo to INCLUDES so
+	moniker-test.c builds even if Bonobo is not already
+	installed. Comment out moniker-control-test.c from the build to
+	avoid the circular build dependency with gtkhtml.
+
 2000-11-25  Joe Shaw  <joe@helixcode.com>
 
 	* monikers/bonobo-moniker-gunzip.c (resolve_gunzip): Go back to using

@@ -3,6 +3,7 @@ INCLUDES =                                              \
 	-I. 						\
 	-I$(srcdir) -I$(top_srcdir) 			\
 	-I$(top_builddir)				\
+	-I$(top_srcdir)/bonobo                          \
         -I$(includedir)                                 \
 	$(BONOBO_TEST_CFLAGS)
 
@@ -15,7 +16,8 @@ bin_PROGRAMS = std-moniker bonobo-moniker-config bonobo-moniker-gunzip bonobo-mo
 
 # bonobo-moniker-untar
 
-noinst_PROGRAMS = moniker-control-test moniker-test
+#noinst_PROGRAMS = moniker-control-test moniker-test
+noinst_PROGRAMS = moniker-test
 
 moniker_ldadd = 				\
 	$(top_builddir)/bonobo/libbonobo.la	\
