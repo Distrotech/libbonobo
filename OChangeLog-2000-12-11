@@ -1,3 +1,47 @@
+2000-09-30    <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar-button-item.c (impl_set_tooltip): impl.
+
+	* bonobo/bonobo-ui-toolbar-item.c (bonobo_ui_toolbar_item_set_tooltip): upd.
+
+	* bonobo/bonobo-ui-toolbar-button-item.c (bonobo_ui_toolbar_button_item_construct): 
+	setup priv->button_widget. (set_icon): prune redundant lines.
+
+	* bonobo/bonobo-ui-toolbar.c (init): init tooltips.
+	(impl_destroy): free them.
+	(bonobo_ui_toolbar_get_tooltips): impl proper.
+
+2000-09-29  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-toolbar-toggle-button-item.c (impl_set_state): impl.	
+	(class_init): upd (proxy_toggle_click): impl.
+	(bonobo_ui_toolbar_toggle_button_item_construct): connect
+
+2000-09-28  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (widget_set_state): re-enable state setting.
+	(menu_item_create): re-enable toggle events.
+	(menu_toggle_emit_ui_event),
+	(app_item_emit_ui_event): re-enable.
+
+	* bonobo/bonobo-ui-toolbar-item.c (class_init): add state_changed.
+	(bonobo_ui_toolbar_item_set_state): impl.
+	(bonobo_ui_toolbar_item_set_tooltip): impl.
+
+2000-09-27  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-ui-xml.c (bonobo_ui_xml_rm): remove debug.
+
+	* bonobo/bonobo-ui-container.c (impl_deregister_component): remove
+	debug. (impl_node_remove): comment out debug.
+
+	* bonobo/bonobo-ui-compat.c (verb_to_cb),
+	(bonobo_ui_handler_menu_set_sensitivity), 
+	(bonobo_ui_handler_menu_set_hint),
+	(bonobo_ui_handler_menu_get_label),
+	(bonobo_ui_handler_menu_set_pixmap): Add inhibition of event
+	callbacks on most node read modify writes.
+
 2000-09-27  Martin Baulig  <martin@home-of-linux.org>
 
 	* components/text-plain/bonobo-text-plain.c: Ported to the new UI handler.
