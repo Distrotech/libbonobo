@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2004-01-03 19:22+0330\n"
 "Last-Translator: Roozbeh Pournader <roozbeh@sharif.edu>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -173,7 +173,7 @@ msgstr "‏IIDای که باید فعال شود"
 msgid "Prevent registering of server with OAF"
 msgstr "ممانعت از ثبت کارگزار نزد OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "گزینه‌های فعال‌سازی Bonobo"
 
@@ -198,11 +198,11 @@ msgstr "کارخانه‌ی ‎`%s'‎ برای ‎`%s'‎،‏ NIL برگردا
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "‏Shlib ‏‎`%s'‎ شامل ‎`%s'‎ نیست"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "نام"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "نام یکتای برنامه‌ی کاربردی"
 

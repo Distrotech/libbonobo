@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-28 22:03+0100\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2004-01-28 22:08+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -204,11 +204,11 @@ msgstr "Vytváracie rozhranie `%s' vrátilo pre `%s' hodnotu NIL"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' neobsahovalo `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "Názov"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "Jedinečné meno aplikácie"
 

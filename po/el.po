@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-09-03 17:39+0300\n"
 "Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -191,7 +191,7 @@ msgstr "IID για ενεργοποίηση"
 msgid "Prevent registering of server with OAF"
 msgstr "Αποτροπή καταχώρησης του εξυπηρετητή με το OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Επιλογές ενεργοποίησης Μπονόμπο"
 
@@ -216,11 +216,11 @@ msgstr "Το εργοστάσιο `%s' επέστρεψε NIL για `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Η διαμοιραζόμενη βιβλιοθήκη `%s' δεν περιέχει `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

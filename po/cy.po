@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-16 14:44+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2004-01-16 14:43+0000\n"
 "Last-Translator: Rhys Jones <rhys@sucs.org>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -181,7 +181,7 @@ msgstr "Yr IID i'w weithredu"
 msgid "Prevent registering of server with OAF"
 msgstr "Rhwystro cofrestru'r gweinydd gyda OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Opsiynnau gweithredu Bonobo"
 
@@ -206,11 +206,11 @@ msgstr "Dychwelodd y ffatri `%s' NIL ar gyfer `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Nid oedd y shlib `%s' yn cynnwys `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "Enw"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "Enw unigryw rhaglen"
 

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-01-17 13:41+0100\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2004-01-17 13:42+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -185,7 +185,7 @@ msgstr "IID att aktivera"
 msgid "Prevent registering of server with OAF"
 msgstr "Förhindra registrering av server med OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Flaggor för Bonobo Activation"
 
@@ -210,11 +210,11 @@ msgstr "Fabriken \"%s\" returnerade NIL för \"%s\""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib \"%s\" innehöll inte \"%s\""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "Namn"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "Unikt namn för program"
 

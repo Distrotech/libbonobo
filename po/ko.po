@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.3\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2004-01-21 00:08+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -179,7 +179,7 @@ msgstr "활성화시킬 IID"
 msgid "Prevent registering of server with OAF"
 msgstr "OAF를 통한 서버의 등록을 금지한다"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "보노보 액티베이션 옵션"
 
@@ -204,11 +204,11 @@ msgstr "`%s' 팩토리가 `%s'에 대해 NIL을 리턴했습니다"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "`%s' 공유라이브러리에 `%s'이(가) 들어 있지 않습니다"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "이름"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "응용 프로그램 고유 이름"
 

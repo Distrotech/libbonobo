@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mk\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-06-15 20:50+0000\n"
 "Last-Translator: Vladislav Bidikov <bidikovi@mail.com.mk>\n"
 "Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
@@ -186,7 +186,7 @@ msgstr "IID за активација"
 msgid "Prevent registering of server with OAF"
 msgstr "Заштита при регистрирање на сервер со OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo опции за активирање"
 
@@ -211,11 +211,11 @@ msgstr "Фабричкиот `%s' враќа NIL за `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' не содржи `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

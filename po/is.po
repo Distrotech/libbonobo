@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.4\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-08-18 18:05+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <is@li.org>\n"
@@ -177,7 +177,7 @@ msgstr "IID sem virkja skal"
 msgid "Prevent registering of server with OAF"
 msgstr "Koma í veg fyrir að þjónninn skrái sig hjá OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Ræsirofar Bonobo"
 
@@ -202,11 +202,11 @@ msgstr "Verksmiðjan `%s' skilaði núlli fyrir `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' innihélt ekki `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-06-18 18:51+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -186,7 +186,7 @@ msgstr "IID som skal aktiveres"
 msgid "Prevent registering of server with OAF"
 msgstr "Forhindr registrering af tjener hos OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo-aktiveringstilvalg"
 
@@ -211,11 +211,11 @@ msgstr "Fabrikken '%s' returnerede NIL for '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Delt bibliotek '%s' indeholdt ikke '%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

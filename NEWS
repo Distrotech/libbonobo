@@ -1,3 +1,12 @@
+libbonobo 2.5.4
+
+	+ bugs fixed
+		+ application init (Gustavo)
+		+ program arg translation (Anders, Hidetoshi)
+	+ featurelets
+		+ *Application* documentation (Gustavo)
+		+ better activation debugging (Rodrigo, Michael)
+
 libbonobo 2.5.3
 
 	+ bugs fixed

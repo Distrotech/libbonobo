@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2004-01-07 01:15+0100\n"
 "Last-Translator: Sanlig Badral <Badral@openmn.org>\n"
 "Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
@@ -184,7 +184,7 @@ msgstr "IID идэвхижүүлэх"
 msgid "Prevent registering of server with OAF"
 msgstr "OAF тай серверүүдийн бүртгэлээс зайлсхийх"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo идэвхижүүлэлт сонголт"
 
@@ -209,11 +209,11 @@ msgstr "»%s« үйлдвэр »%s« NIL -г буцаав"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "»%s« Shlib »%s« -г агуулаагүй байна"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "Нэр"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "Програмын давтагдашгүй нэр"
 

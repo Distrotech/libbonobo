@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-06-09 17:26+0100\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2002-02-26 00:23+0100\n"
 "Last-Translator: Andraž Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: slovenian <sl@li.org>\n"
@@ -14,40 +14,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:472
+#: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
 msgstr "Nisem mogel ugotoviti v seznamu katerega otroka je bil strežnik"
 
-#: activation-server/activation-context-corba.c:763
+#: activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
 msgstr "Ni veljaven ID aktivacije"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
 msgstr "Imenik iz katerega naj se berejo datoteke .server"
 
-#: activation-server/activation-server-main.c:66
+#: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
 msgstr "IMENIK"
 
-#: activation-server/activation-server-main.c:69
+#: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Služi kot ActivationContext (privzeto le kot ImenikPredmetov)"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
 msgstr "Datotečni deskriptor kamor naj se izpiše IOR"
 
-#: activation-server/activation-server-main.c:73
+#: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:193
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
 msgstr "Pozvedbeni izraz, ki naj se ovrednoti"
 
-#: activation-server/activation-server-main.c:81
+#: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
 msgstr "IZRAZ"
 
@@ -59,7 +59,16 @@ msgstr "Storitev CORBA CosNaming."
 msgid "Name service"
 msgstr "Imenska storitev"
 
-#: activation-server/object-directory-activate.c:185
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+#, fuzzy
+msgid "Notification service"
+msgstr "Imenska storitev"
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+msgid "Notification service for activation"
+msgstr ""
+
+#: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Ne znamo še aktivirati shlib predmetov v oddaljenem procesu"
 
@@ -79,7 +88,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:889
+#: activation-server/object-directory-corba.c:1167
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Tekemski pogoj ob aktiviranju strežnika '%s'"
@@ -103,10 +112,20 @@ msgstr "iid %s ima lokacijo NULL"
 msgid "invalid character '%c' in iid '%s'"
 msgstr "napačen znak '%c' v iid '%s'"
 
-#: activation-server/object-directory-load.c:306
+#: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Lastnost '%s' nima vrednosti"
+
+#: activation-server/object-directory-load.c:588
+#, c-format
+msgid "Could not parse badly formed XML document %s"
+msgstr ""
+
+#: activation-server/object-directory-load.c:641
+#, c-format
+msgid "Trying dir %s"
+msgstr ""
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -132,12 +151,12 @@ msgstr "Otrok je dobil signal %u (%s)"
 msgid "Unknown non-exit error (status is %u)"
 msgstr "Neznana ne-izhodna napaka (stanje je %u)"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:400
+#: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
 msgstr "bonobo-activation ni uspel nastaviti procesne skupine %s: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:412
+#: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
 msgstr "Izvedba %s ni uspela: %d (%s)\n"
@@ -158,7 +177,7 @@ msgstr "IID, ki naj se aktivira"
 msgid "Prevent registering of server with OAF"
 msgstr "Prepreči registracijo strežnika pri OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Možnosti aktivacije Bonobo"
 
@@ -183,11 +202,19 @@ msgstr "Tovarna `%s' je za `%s' vrnila NIL'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' ni vseboval `%s'"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-application.c:352
+msgid "Name"
+msgstr ""
+
+#: bonobo/bonobo-application.c:352
+msgid "Application unique name"
+msgstr ""
+
+#: bonobo/bonobo-object.c:919
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:910
+#: bonobo/bonobo-object.c:919
 msgid "Custom CORBA POA"
 msgstr "Poljuben CORBA POA"
 

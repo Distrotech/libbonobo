@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-19 18:29+0100\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2004-01-19 18:28+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -189,7 +189,7 @@ msgstr "Zu aktivierende IID"
 msgid "Prevent registering of server with OAF"
 msgstr "Registrieren von Servern mit OAF vermeiden"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo-Activation-Optionen"
 
@@ -214,11 +214,11 @@ msgstr "Fabrik »%s« lieferte NIL für »%s«"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib »%s« enthielt »%s« nicht"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "Name"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "Eindeutiger Anwendungsname"
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-06-05 10:21+0100\n"
 "Last-Translator: Mathieu van Woerkom <mathieu@brabants.org>\n"
 "Language-Team: Limburgish\n"
@@ -180,7 +180,7 @@ msgstr "Te aktivere IID"
 msgid "Prevent registering of server with OAF"
 msgstr "Pareer 't registrere van de server mit OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo-activation opsies"
 
@@ -205,11 +205,11 @@ msgstr "Febrik '%s' goof NIL trök veur '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Bibeleteek '%s' hauw gein '%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

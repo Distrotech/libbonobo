@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-12-29 20:50+0200\n"
 "Last-Translator: Tomas Kuliavas <tokul@users.sourceforge.net>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -177,7 +177,7 @@ msgstr "Aktyvuotinas IID"
 msgid "Prevent registering of server with OAF"
 msgstr "Neleisti registruotis serveriui OAF sistemoje"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo aktyvavimo nustatymai"
 
@@ -202,11 +202,11 @@ msgstr "'%s' gamykla grąžino NIL skirtą `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' neturėjo `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "Vardas"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "Programos unikalus vardas"
 

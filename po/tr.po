@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-02-10 18:40+0200\n"
 "Last-Translator: Arman Aksoy (Armish) <armish@linux-sevenler.de>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -182,7 +182,7 @@ msgstr "Etkinleştirilecek IID"
 msgid "Prevent registering of server with OAF"
 msgstr "Sunucunun OAF ile kaydedilmesini engeller"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo etkinleştirme seçenekleri"
 
@@ -207,11 +207,11 @@ msgstr "`%s' `%s' için NIL ile döndü"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' `%s' içermiyor"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

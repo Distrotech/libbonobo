@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil Libbonobo 1.9.7\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2002-11-09 9:30-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -200,7 +200,7 @@ msgid "Prevent registering of server with OAF"
 msgstr "OAFஇல் சேவையகத்தை பதிவுசெய்வதை தடுக்கவும்"
 
 # bonobo-activation/bonobo-activation-init.c:426
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo தொடக்க விருப்பங்கள்"
 
@@ -230,11 +230,11 @@ msgstr "'%s' தொழிற்சாலை, '%s' இக்கு NIL மீண�
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' இல் '%s' கிடையாது"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.be\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-05-19 09:13+0300\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -186,7 +186,7 @@ msgstr "IID для зьдзяйсьненьня"
 msgid "Prevent registering of server with OAF"
 msgstr "Перашкоджаная рэгістрацыя паслужніку з OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Выбары bonobo activation"
 
@@ -211,11 +211,11 @@ msgstr "Вытворчасьць `%s' вярнла NIL для `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' не зьмяшчае `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-01-14 00:19+0200\n"
 "Last-Translator: Alexander Shopov <al_shopov@yahoo.com>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -182,7 +182,7 @@ msgstr "IID за активиране"
 msgid "Prevent registering of server with OAF"
 msgstr "Предотврати регистрирането на сървър към OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Настройки на активирането на бонобо"
 
@@ -207,11 +207,11 @@ msgstr "Фабриката `%s' върна NIL за `%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' не съдържа `%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

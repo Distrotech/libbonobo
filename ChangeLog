@@ -1,3 +1,11 @@
+2004-02-02  Michael Meeks  <michael@ximian.com>
+
+	* Version 2.5.4
+
+2004-02-02  David Hawthorne  <david.hawthorne@sun.com>
+
+	* autogen.sh: require automake 1.7
+
 2004-02-01  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo/bonobo-app-client.c,

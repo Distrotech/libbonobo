@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.1\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-05-28 00:11+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -175,7 +175,7 @@ msgstr "準備啟用的 IID"
 msgid "Prevent registering of server with OAF"
 msgstr "防止使用 OAF 來登記伺服器"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo activation 選項"
 
@@ -200,11 +200,11 @@ msgstr "元件工廠‘%s’回傳 NIL 給‘%s’"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib‘%s’沒有包含‘%s’"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 

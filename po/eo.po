@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.3.4\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
+"POT-Creation-Date: 2004-02-02 14:30+0000\n"
 "PO-Revision-Date: 2003-07-01 15:54-0500\n"
 "Last-Translator: Charles Voelger <cvoelger@dweasel.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -177,7 +177,7 @@ msgstr "IID aktivigi"
 msgid "Prevent registering of server with OAF"
 msgstr "Preventi registri servilon per OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Bonobo aktiviga agordo"
 
@@ -202,11 +202,11 @@ msgstr "Fabrikejo '%s' revenis NULON por '%s'"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib-o '%s' ne enhavis '%s'"
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr ""
 
-#: bonobo/bonobo-application.c:341
+#: bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr ""
 
