@@ -1,3 +1,10 @@
+2000-10-09  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-win.c (put_hint_in_statusbar): fall back to the tip
+	on the cmd.
+	(de_accelerate_string): remove '_'s from strings.
+	(toolbar_sync_state): use it.
+
 2000-10-09  Martin Baulig  <baulig@suse.de>
 
 	Added support for controls to gshell.
