@@ -1,4 +1,4 @@
-<oaf_server iid="OAF:Empty:19991025" type="exe" location="./oaf-empty-server">
+<oaf_server iid="OAFIID:Empty:19991025" type="exe" location="./oaf-empty-server">
 <oaf_attribute name="repo_ids" type="stringv">
 <item value="IDL:Empty:1.0"/>
 </oaf_attribute>

@@ -134,14 +134,14 @@ OAF_ServerInfo_load(const char *source_directory,
 
   dirs = g_strsplit(source_directory, ":", -1);
 
+  *nservers = 0;
+
   for(dirnum = 0; dirs[dirnum]; dirnum++)
     {
+      g_print("Trying dir %s\n", dirs[dirnum]);
       dirh = opendir(dirs[dirnum]);
       if(!dirh)
-	{
-	  *nservers = 0;
-	  return NULL;
-	}
+	continue;
   
       while((dent = readdir(dirh)))
 	{
@@ -153,7 +153,7 @@ OAF_ServerInfo_load(const char *source_directory,
 	  if(!ext || strcasecmp(ext, ".oafinfo"))
 	    continue;
     
-	  g_snprintf(tmpstr, sizeof(tmpstr), "%s/%s", source_directory, dent->d_name);
+	  g_snprintf(tmpstr, sizeof(tmpstr), "%s/%s", dirs[dirnum], dent->d_name);
 
 	  doc = xmlParseFile(tmpstr);
 	  if(!doc)

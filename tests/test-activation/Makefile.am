@@ -1,5 +1,7 @@
 noinst_PROGRAMS=oaf-empty-server oaf-test-client
 
+oaf_test_client_SOURCES=oaf-test-client.c empty-common.c empty.h empty-stubs.c
+
 oaf_empty_server_SOURCES=empty-server.c empty.h empty-common.c empty-skels.c
 
 BUILT_SOURCES=empty.h empty-common.c empty-stubs.c empty-skels.c

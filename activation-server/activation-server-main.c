@@ -14,7 +14,7 @@ static void debug_queries(void);
 #endif
 
 /* Option values */
-static char *od_source_dir = OAFINFODIR;
+static char *od_source_dir = NULL;
 static char *ac_evaluate = NULL, *od_domain = "session";
 static int server_ac = 0, ior_fd = -1;
 
@@ -65,15 +65,26 @@ int main(int argc, char *argv[])
   orb = oaf_orb_init(&argc, argv);
   root_poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
   {
-    char *real_od_source_dir, *env_od_source_dir;
+    char *env_od_source_dir;
+    GString *real_od_source_dir;
 
-    env_od_source_dir = getenv("OAF_OD_SOURCE_DIRS");
+    real_od_source_dir = g_string_new(OAFINFODIR);
+    env_od_source_dir = getenv("OAF_OD_SOURCE_DIR");
 
-    real_od_source_dir = oaf_alloca(strlen(od_source_dir) + env_od_source_dir?strlen(env_od_source_dir):0 + 2);
+    if(od_source_dir)
+      {
+	g_string_append_c(real_od_source_dir, ':');
+	g_string_append(real_od_source_dir, od_source_dir);
+      }
+    if(env_od_source_dir)
+      {
+	g_string_append_c(real_od_source_dir, ':');
+	g_string_append(real_od_source_dir, env_od_source_dir);
+      }
 
-    sprintf(real_od_source_dir, "%s%s%s", od_source_dir, env_od_source_dir?":":"", env_od_source_dir?env_od_source_dir:"");
+    od = OAF_ObjectDirectory_create(root_poa, od_domain, real_od_source_dir->str, &ev);
 
-    od = OAF_ObjectDirectory_create(root_poa, od_domain, od_source_dir, &ev);
+    g_string_free(real_od_source_dir, TRUE);
   }
   if(server_ac)
     {

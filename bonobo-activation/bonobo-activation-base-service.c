@@ -19,6 +19,10 @@ typedef struct {
   gpointer user_data;
 } RegInfo;
 
+typedef struct {
+  int priority;
+  OAFServiceActivator act_func;
+} ActInfo;
 
 static gint
 ri_compare (gconstpointer a, gconstpointer b)
@@ -65,8 +69,9 @@ oaf_registration_check(const OAFRegistrationCategory *regcat, CORBA_Environment 
       if(!ri->regloc->check)
 	continue;
 
-      new_ior = ri->regloc->check(ri->regloc, regcat, &dist, ri->user_data);
-      if(new_dist < dist)
+      new_ior = ri->regloc->check(ri->regloc, regcat, &new_dist, ri->user_data);
+      if(new_ior
+	 && (new_dist < dist))
 	{
 	  g_free(ior);
 	  ior = new_ior;
@@ -101,7 +106,7 @@ oaf_registration_iterate(const OAFRegistrationCategory *regcat, CORBA_Object obj
 
       ri = cur->data;
 
-      func_ptr = G_STRUCT_MEMBER_P(ri->regloc, offset);
+      func_ptr = *(gpointer *)((guchar *)ri->regloc + offset);
 
       if(!func_ptr)
 	continue;
@@ -360,9 +365,25 @@ existing_set(const OAFRegistrationCategory *regcat, struct SysServer *ss, CORBA_
 
 static GSList *activator_list = NULL;
 
-void oaf_registration_activator_add(OAFServiceActivator act_func)
+static gint
+ai_compare (gconstpointer a, gconstpointer b)
 {
-  activator_list = g_slist_prepend(activator_list, act_func);
+  const ActInfo *ra, *rb;
+
+  ra = a;
+  rb = b;
+
+  return (rb->priority - ra->priority);
+}
+
+void oaf_registration_activator_add(OAFServiceActivator act_func, int priority)
+{
+  ActInfo *new_act;
+
+  new_act = g_new(ActInfo, 1);
+  new_act->priority = priority;
+  new_act->act_func = act_func;
+  activator_list = g_slist_insert_sorted(activator_list, new_act, ai_compare);
 }
 
 static CORBA_Object
@@ -373,11 +394,10 @@ oaf_activators_use(const OAFRegistrationCategory *regcat, const char **cmd, int 
 
   for(cur = activator_list; CORBA_Object_is_nil(retval, ev) && cur; cur = cur->next)
     {
-      OAFServiceActivator act_func;
+      ActInfo *actinfo;
+      actinfo = cur->data;
 
-      act_func = cur->data;
-
-      retval = act_func(regcat, cmd, ior_fd, ev);
+      retval = actinfo->act_func(regcat, cmd, ior_fd, ev);
     }
 
   return retval;
@@ -414,14 +434,8 @@ oaf_service_get(const OAFRegistrationCategory *regcat)
   if(ne)
     {
       CORBA_Object_release(retval, &myev);
-      if(STRMATCH(regcat->username, g_get_user_name())
-	 && STRMATCH(regcat->hostname, oaf_hostname_get())
-	 && STRMATCH(regcat->domain, oaf_domain_get()))
-	{
-	  retval = oaf_server_by_forking(activatable_servers[i].cmd, activatable_servers[i].ior_fd, &myev);
-	}
-      else
-	retval = oaf_activators_use(regcat, activatable_servers[i].cmd, activatable_servers[i].ior_fd, ev);
+      
+      retval = oaf_activators_use(regcat, activatable_servers[i].cmd, activatable_servers[i].ior_fd, ev);
       if(!CORBA_Object_is_nil(retval, &myev))
 	oaf_registration_set(regcat, retval, &myev);
     }
@@ -438,16 +452,18 @@ oaf_service_get(const OAFRegistrationCategory *regcat)
 }
 
 /***** Implementation of the IOR registration system via plain files ******/
+static int lock_fd = -1;
+
 static void
 rloc_file_lock(const OAFRegistrationLocation *regloc, gpointer user_data)
 {
   char *fn;
-  static int fd = -1;
+  struct flock lockme;
 
-  fn = oaf_alloca(sizeof("/tmp/orbit-%s/oaf-register.lock" + 32));
+  fn = oaf_alloca(sizeof("/tmp/orbit-%s/oaf-register.lock") + 32);
   sprintf(fn, "/tmp/orbit-%s/oaf-register.lock", g_get_user_name());
 
-  while((fd = open(fn, O_CREAT|O_EXCL|O_RDWR)) < 0)
+  while((lock_fd = open(fn, O_CREAT|O_RDONLY, 0700)) < 0)
     {
       if(errno == EEXIST)
 	{
@@ -468,18 +484,55 @@ rloc_file_lock(const OAFRegistrationLocation *regloc, gpointer user_data)
 	break;
     }
 
-  close(fd);
+  if(lock_fd >= 0)
+    {
+      lockme.l_type = F_RDLCK;
+      lockme.l_whence = SEEK_SET;
+      lockme.l_start = 0;
+      lockme.l_len = 1;
+      lockme.l_pid = getpid();
+
+      while(fcntl(lock_fd, F_SETLKW, &lockme) < 0
+	    && errno == EINTR) /**/;
+    }
 }
 
 static void
 rloc_file_unlock(const OAFRegistrationLocation *regloc, gpointer user_data)
 {
+#if 0
   char *fn;
 
-  fn = oaf_alloca(sizeof("/tmp/orbit-%s/oaf-register.lock" + 32));
+
+  fn = oaf_alloca(sizeof("/tmp/orbit-%s/oaf-register.lock") + 32);
   sprintf(fn, "/tmp/orbit-%s/oaf-register.lock", g_get_user_name());
 
   unlink(fn);
+#endif
+
+  if(lock_fd >= 0)
+    {
+      struct flock lockme;
+
+      lockme.l_type = F_UNLCK;
+      lockme.l_whence = SEEK_SET;
+      lockme.l_start = 0;
+      lockme.l_len = 1;
+      lockme.l_pid = getpid();
+
+      fcntl(lock_fd, F_SETLKW, &lockme);
+      close(lock_fd); lock_fd = -1;
+    }
+}
+
+static void
+filename_fixup(char *fn)
+{
+  while(*(fn++))
+    {
+      if(*fn == '/')
+	*fn = '_';
+    }
 }
 
 static char *
@@ -488,12 +541,17 @@ rloc_file_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCate
 {
   FILE *fh;
   char fn[PATH_MAX], *uname;
+  char *namecopy;
+
+  namecopy = oaf_alloca(strlen(regcat->name) + 1);
+  strcpy(namecopy, regcat->name);
+  filename_fixup(namecopy);
 
   uname = g_get_user_name();
 
   sprintf(fn, "/tmp/orbit-%s/reg.%s-%s",
 	  uname,
-	  regcat->name,
+	  namecopy,
 	  regcat->session_name?regcat->session_name:"local");
   fh = fopen(fn, "r");
   if(fh)
@@ -501,7 +559,7 @@ rloc_file_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCate
 
   sprintf(fn, "/tmp/orbit-%s/reg.%s",
 	  uname,
-	  regcat->name);
+	  namecopy);
   fh = fopen(fn, "r");
   if(fh)
     goto useme;
@@ -519,7 +577,10 @@ rloc_file_check(const OAFRegistrationLocation *regloc, const OAFRegistrationCate
       fclose(fh);
 
       if(!strncmp(iorbuf, "IOR:", 4))
-	return g_strdup(iorbuf);
+	{
+	  *ret_distance = 0;
+	  return g_strdup(iorbuf);
+	}
     }
 
   return NULL;
@@ -531,17 +592,22 @@ rloc_file_register(const OAFRegistrationLocation *regloc, const char *ior,
 {
   char fn[PATH_MAX], fn2[PATH_MAX], *uname;
   FILE *fh;
+  char *namecopy;
+
+  namecopy = oaf_alloca(strlen(regcat->name) + 1);
+  strcpy(namecopy, regcat->name);
+  filename_fixup(namecopy);
 
   uname = g_get_user_name();
 
   sprintf(fn, "/tmp/orbit-%s/reg.%s-%s",
 	  uname,
-	  regcat->name,
+	  namecopy,
 	  regcat->session_name?regcat->session_name:"local");
 
   sprintf(fn2, "/tmp/orbit-%s/reg.%s",
 	  uname,
-	  regcat->name);
+	  namecopy);
 
   fh = fopen(fn, "w");
   fprintf(fh, "%s\n", ior);
@@ -557,18 +623,23 @@ rloc_file_unregister(const OAFRegistrationLocation *regloc, const char *ior,
   char fn2[PATH_MAX], fn3[PATH_MAX];
   char fn[PATH_MAX];
   char *uname;
+  char *namecopy;
+
+  namecopy = oaf_alloca(strlen(regcat->name) + 1);
+  strcpy(namecopy, regcat->name);
+  filename_fixup(namecopy);
 
   uname = g_get_user_name();
 
   sprintf(fn, "/tmp/orbit-%s/reg.%s-%s",
 	  uname,
-	  regcat->name,
+	  namecopy,
 	  regcat->session_name?regcat->session_name:"local");
   unlink(fn);
 
   sprintf(fn2, "/tmp/orbit-%s/reg.%s",
 	  uname,
-	  regcat->name);
+	  namecopy);
 
   if(readlink(fn2, fn3, sizeof(fn3) < 0))
     return;
@@ -584,3 +655,9 @@ static const OAFRegistrationLocation rloc_file = {
   rloc_file_register,
   rloc_file_unregister
 };
+
+void
+oaf_rloc_file_register(void)
+{
+  oaf_registration_location_add(&rloc_file, 0, NULL);
+}

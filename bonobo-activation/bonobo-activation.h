@@ -20,7 +20,7 @@ OAFActivationInfo *oaf_actid_parse(const OAF_ActivationID actid);
 OAFActivationInfo *oaf_actinfo_new(void);
 void oaf_actinfo_free(OAFActivationInfo *actinfo);
 
-CORBA_ORB oaf_orb_init(int *argc, char **argv);
+CORBA_ORB oaf_init(int argc, char **argv);
 CORBA_ORB oaf_orb_get(void);
 CORBA_Context oaf_context_get(void); /* Just makes getting hold of the default context a bit easier */
 CORBA_Object oaf_activation_context_get(void); /* Internal use, remove me from header file */
@@ -86,7 +86,7 @@ CORBA_Object oaf_service_get(const OAFRegistrationCategory *regcat);
 
 typedef CORBA_Object (*OAFServiceActivator)(const OAFRegistrationCategory *regcat, const char **cmd,
 					    int ior_fd, CORBA_Environment *ev);
-void oaf_registration_activator_add(OAFServiceActivator act_func);
+void oaf_registration_activator_add(OAFServiceActivator act_func, int priority);
 
 /* oaf-servreg.c */
 OAF_RegistrationResult oaf_active_server_register(const char *iid, CORBA_Object obj);
@@ -101,7 +101,9 @@ void oaf_active_server_unregister(const char *iid, CORBA_Object obj);
 extern struct poptOptions oaf_popt_options[];
 #endif
 
+CORBA_ORB oaf_orb_init(int *argc, char **argv);
 void oaf_preinit(gpointer app, gpointer mod_info);
 void oaf_postinit(gpointer app, gpointer mod_info);
+const char *oaf_activation_iid_get(void);
 
 #endif

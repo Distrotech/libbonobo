@@ -98,6 +98,10 @@ od_server_activate_exe(OAF_ServerInfo *si, ODActivationInfo *actinfo, CORBA_Envi
   extra_arg = oaf_alloca(strlen(si->iid) + sizeof("--oaf-activate-iid="));
   args[i++] = extra_arg;
   sprintf(extra_arg, "--oaf-activate-iid=%s", si->iid);
+  
+  extra_arg = oaf_alloca(sizeof("--oaf-ior-fd=") + 10);
+  args[i++] = extra_arg;
+  sprintf(extra_arg, "--oaf-ior-fd=%d", OAF_MAGIC_FD);
 
   args[i] = NULL;
 

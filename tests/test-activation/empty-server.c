@@ -49,7 +49,6 @@ main (int argc, char *argv[])
   POA_Empty__init(&poa_empty_servant, &ev);
 
   poa = (PortableServer_POA)CORBA_ORB_resolve_initial_references(orb, "RootPOA", &ev);
-  PortableServer_POAManager_activate(PortableServer_POA__get_the_POAManager(poa, &ev), &ev);
   PortableServer_POA_activate_object_with_id(poa,
 					     &objid, &poa_empty_servant, &ev);
 
@@ -61,13 +60,13 @@ main (int argc, char *argv[])
     return 1;
   }
 
-  retval = CORBA_ORB_object_to_string(orb, empty_client, &ev);
+  oaf_active_server_register("OAFIID:Empty:19991025", empty_client);
 
-  g_print("%s\n", retval); fflush(stdout);
+  PortableServer_POAManager_activate(PortableServer_POA__get_the_POAManager(poa, &ev), &ev);
+  while(1)
+    g_main_iteration(TRUE);
 
-  CORBA_free(retval);
-
-  while(1) g_main_iteration(TRUE);
+  oaf_active_server_unregister("OAFIID:Empty:19991025", empty_client);
 
   PortableServer_POA_deactivate_object(poa, &objid, &ev);
 
@@ -78,4 +77,5 @@ static void
 do_Nothing(PortableServer_Servant servant,
 	      CORBA_Environment *ev)
 {
+  g_print("doNothing called!");
 }

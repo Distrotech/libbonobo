@@ -1,4 +1,7 @@
+#include "config.h"
+
 #include "liboaf/liboaf-private.h"
+#include <stdio.h>
 
 OAF_RegistrationResult
 oaf_active_server_register(const char *iid, CORBA_Object obj)
@@ -7,6 +10,40 @@ oaf_active_server_register(const char *iid, CORBA_Object obj)
   OAFRegistrationCategory regcat = {"IDL:OAF/ObjectDirectory:1.0"};
   CORBA_Environment ev;
   OAF_RegistrationResult retval;
+  const char *actid;
+  static gboolean need_printout = TRUE;
+
+  CORBA_exception_init(&ev);
+
+  actid = oaf_activation_iid_get();
+
+  if(actid && !strcmp(actid, iid) && need_printout)
+    {
+      char *iorstr;
+      FILE *fh;
+      int iorfd = oaf_ior_fd_get();
+
+      need_printout = FALSE;
+
+      if(iorfd == 1)
+	fh = stdout;
+      else
+	{
+	  fh = fdopen(iorfd, "w");
+	  if(!fh)
+	    fh = stdout;
+	}
+
+      iorstr = CORBA_ORB_object_to_string(oaf_orb_get(), obj, &ev);
+      if(ev._major == CORBA_NO_EXCEPTION)
+	{
+	  fprintf(fh, "%s\n", iorstr);
+	  CORBA_free(iorstr);
+	}
+
+      if(fh != stdout)
+	fclose(fh);
+    }
 
   regcat.session_name = oaf_session_name_get();
   regcat.username = oaf_username_get();
@@ -14,11 +51,10 @@ oaf_active_server_register(const char *iid, CORBA_Object obj)
 
   od = oaf_service_get(&regcat);
 
-  CORBA_exception_init(&ev);
   if(CORBA_Object_is_nil(od, &ev))
     return OAF_REG_ERROR;
 
-  retval = OAF_ObjectDirectory_register_new(od, iid, obj, &ev);
+  retval = OAF_ObjectDirectory_register_new(od, (char *)iid, obj, &ev);
   CORBA_exception_free(&ev);
 
   return retval;

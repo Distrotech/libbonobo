@@ -1,6 +1,6 @@
 #include "config.h"
 
-#include "liboaf/liboaf.h"
+#include "liboaf/liboaf-private.h"
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -118,7 +118,7 @@ oaf_session_name_get(void)
 const char *
 oaf_domain_get(void)
 {
-  return "user";
+  return "session";
 }
 
 CORBA_Object
@@ -144,6 +144,18 @@ struct poptOption oaf_popt_options[] = {
   {"oaf-activate-iid", '\0', POPT_ARG_STRING, &oaf_activate_iid, 0, "IID to activate", "IID"},
   {NULL}
 };
+
+const char *
+oaf_activation_iid_get(void)
+{
+  return oaf_activate_iid;
+}
+
+int
+oaf_ior_fd_get(void)
+{
+  return oaf_ior_fd;
+}
 
 /* If it is specified on the command line, it overrides everything else */
 char *
@@ -225,6 +237,22 @@ static OAFRegistrationLocation ac_regloc = {
   NULL
 };
 
+#define STRMATCH(x, y) ((!x && !y) || (x && y && !strcmp(x, y)))
+
+static CORBA_Object
+local_activator(const OAFRegistrationCategory *regcat, const char **cmd,
+		int ior_fd, CORBA_Environment *ev)
+{
+  if((!regcat->username || STRMATCH(regcat->username, g_get_user_name()))
+     && (!regcat->hostname || STRMATCH(regcat->hostname, oaf_hostname_get()))
+     && (!regcat->domain || STRMATCH(regcat->domain, oaf_domain_get())))
+    {
+      return oaf_server_by_forking(cmd, ior_fd, ev);
+    }
+
+  return CORBA_OBJECT_NIL;
+}
+
 void
 oaf_preinit(gpointer app, gpointer mod_info)
 {
@@ -233,7 +261,11 @@ oaf_preinit(gpointer app, gpointer mod_info)
 void
 oaf_postinit(gpointer app, gpointer mod_info)
 {
+  oaf_registration_activator_add(local_activator, 0);
+
   oaf_registration_location_add(&ac_regloc, -500, NULL);
+
+  oaf_rloc_file_register();
 
   if(oaf_od_ior)
     oaf_registration_location_add(&cmdline_regloc, -1000, NULL);
@@ -311,5 +343,3 @@ oaf_orb_init(int *argc, char **argv)
 #error "You need to use a supported ORB for liboaf"
 
 #endif
-
-

@@ -1,3 +1,5 @@
+#include "config.h"
+
 #include "oafd.h"
 #include "liboaf/liboaf.h"
 #include <time.h>
