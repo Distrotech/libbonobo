@@ -16,11 +16,14 @@ subdomains:
 	Eog/			Eog		federico@helixcode.com
 	Evolution/		Evolution	ettore@helixcode.com
 	Config/			GConf		hp@redhat.com
-	Gnumeric/		Gnumeric	jody@helixcode.com
+	GDA/			libgda		rodrigo@linuxave.net
+	Gnumeric/		Gnumeric	jgoldberg@home.com
+	Grapevine/		grapevine	jirka@5z.com
 	GtkHtml/		GtkHtml		rodo@helixcode.com
 	Guppi/			guppi3		trow@gnu.org
 	Nautilus/		Nautilus	darin@eazel.com
 	Print/			gnome-print	chema@celorio.com
+	PonG/			pong	  	jirka@5z.com
 	SodiPodi/		sodipodi	lauris@helixcode.com
 	VFS/			gnome-vfs	pavel@eazel.com
 
