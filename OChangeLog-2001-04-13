@@ -1,5 +1,9 @@
 2000-12-29  Michael Meeks  <michael@helixcode.com>
 
+	* Version 0.31
+	
+2000-12-29  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-transient.c (bonobo_transient_construct): 
 	re-add Federico's fixes.
 
