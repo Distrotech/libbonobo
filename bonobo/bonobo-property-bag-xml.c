@@ -233,7 +233,6 @@ encode_value (BonoboUINode      *parent,
 		encode_value (node, tc->subtypes [0], value, ev);
 		break;
 
-
 	case CORBA_tk_union:
 	case CORBA_tk_Principal:
 	case CORBA_tk_fixed:

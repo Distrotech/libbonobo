@@ -290,6 +290,19 @@ bonobo_x_object_get_type (void)
 	return type;
 }
 
+/**
+ * bonobo_x_type_setup:
+ * @type: The type to initialize
+ * @init_fn: the POA_init function for the CORBA interface or NULL
+ * @fini_fn: NULL or a custom POA free fn.
+ * @epv_struct_offset: the offset in the class structure where the epv is or 0
+ * 
+ *   This function initializes a type derived from BonoboXObject, such that
+ * when you instantiate a new object of this type with gtk_type_new the
+ * CORBA object will be correctly created and embedded.
+ * 
+ * Return value: TRUE on success, FALSE on error.
+ **/
 gboolean
 bonobo_x_type_setup (GtkType            type,
 		     BonoboXObjectPOAFn init_fn,

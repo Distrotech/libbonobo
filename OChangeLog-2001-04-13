@@ -1,5 +1,14 @@
 2001-02-15  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-ui-node.c: Fully API documented.
+
+	* bonobo/bonobo-event-source.c
+	(bonobo_event_source_notify_listeners): build a list of
+	listeners to notify before notifying them, so we can cope
+	with in-event removes.
+
+2001-02-15  Michael Meeks  <michael@ximian.com>
+
 	* Version 0.37
 
 2001-02-15  Michael Meeks  <michael@ximian.com>

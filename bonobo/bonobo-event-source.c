@@ -153,7 +153,7 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 				      const CORBA_any   *value,
 				      CORBA_Environment *opt_ev)
 {
-	GSList *list;
+	GSList *l, *notify;
 	CORBA_Environment ev, *my_ev;
 
 	if (!opt_ev) {
@@ -162,17 +162,25 @@ bonobo_event_source_notify_listeners (BonoboEventSource *event_source,
 	} else
 		my_ev = opt_ev;
 
-	bonobo_object_ref (BONOBO_OBJECT (event_source));
-	for (list = event_source->priv->listeners; list; list = list->next) {
-		ListenerDesc *desc = (ListenerDesc *) list->data;
+	notify = NULL;
+
+	for (l = event_source->priv->listeners; l; l = l->next) {
+		ListenerDesc *desc = (ListenerDesc *) l->data;
 
 		if (desc->event_mask == NULL || 
 		    strstr (desc->event_mask, event_name))
-			Bonobo_Listener_event (desc->listener, 
-					       event_name, value, my_ev);
+			notify = g_slist_prepend (notify, desc->listener);
 	}
+
+	bonobo_object_ref (BONOBO_OBJECT (event_source));
+
+	for (l = notify; l; l = l->next)
+		Bonobo_Listener_event (l->data, event_name, value, my_ev);
+
 	bonobo_object_unref (BONOBO_OBJECT (event_source));
-	
+
+	g_slist_free (notify);
+
 	if (!opt_ev)
 		CORBA_exception_free (&ev);
 }
