@@ -111,6 +111,7 @@ static void
 impl_OAF_ObjectDirectory_unregister (impl_POA_OAF_ObjectDirectory * servant,
 				     OAF_ImplementationID iid,
 				     CORBA_Object obj,
+				     OAF_ObjectDirectory_UnregisterType notify,
 				     CORBA_Environment * ev);
 
 /*** epv structures ***/
