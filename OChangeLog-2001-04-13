@@ -1,3 +1,12 @@
+2000-04-24  Gene Z. Ragan  <gzr@eazel.com>
+
+	* bononbo/bonobo-ui-handler.c
+	(bonobo_ui_handler_toplevel_create_pixmap):
+	Added a check for a NULL bitmap when calling gdk_bitmap_unref().  It is 
+	legal for this to be NULL, as gdk_pixbuf_render_pixmap_and_mask() does not
+	require the mask bitmap to be valid. However, gdk_bitmap_unref() will assert if
+	the bitmap is not valid.
+	
 2000-04-21  Martin Baulig  <martin@home-of-linux.org>
 
 	* gshell/properties.[ch]: New files. Basically copied from
