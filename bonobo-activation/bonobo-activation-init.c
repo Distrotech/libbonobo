@@ -367,6 +367,23 @@ oaf_is_initialized (void)
 
 /**
  * oaf_init:
+ *
+ * Get the table name to use for the oaf popt options table when
+ * registering with libgnome
+ * 
+ * Return value: A localized copy of the string "OAF Options"
+ */
+
+char *
+oaf_get_popt_table_name ()
+{
+        bindtextdomain (PACKAGE, OAF_LOCALEDIR);
+        return _("OAF Options");
+}
+
+
+/**
+ * oaf_init:
  * @argc: number of command-line arguments passed to the program.
  * @argv: array of strings containing the command-line 
  *        arguments of the program.
