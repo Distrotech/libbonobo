@@ -1,6 +1,6 @@
 SUBDIRS = idl bonobo monikers samples tests po
 
-libincludedir = $(includedir)/gnome/2
+libincludedir = $(includedir)/gnome-2.0
 libinclude_HEADERS = \
 	libbonobo.h
 
