@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 #include "oafd.h"
 #include <stdlib.h>
+#include <ctype.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
@@ -131,6 +132,24 @@ od_entry_read_attrs (OAF_ServerInfo * ent, xmlNodePtr node)
 	}
 }
 
+static gboolean
+od_validate_iid (const char *iid)
+{
+        int i;
+
+        for (i = 0; iid && iid [i]; i++) {
+                char c = iid [i];
+
+                if (c == ',' || c == '[' || c == ']' ||
+                    /* Reserved for future expansion */
+                    c == '!' || c == '#' || c == '|')
+                        return FALSE;
+
+        }
+
+        return TRUE;
+}
+
 OAF_ServerInfo *
 OAF_ServerInfo_load (char **dirs,
 		     CORBA_unsigned_long *nservers,
@@ -187,7 +206,7 @@ OAF_ServerInfo_load (char **dirs,
 			      ? doc->root->childs : doc->root);
 			     NULL != curnode; curnode = curnode->next) {
 				OAF_ServerInfo *new_ent;
-				char *ctmp;
+				char *ctmp, *iid;
 
 				if (curnode->type != XML_ELEMENT_NODE)
 					continue;
@@ -200,13 +219,19 @@ OAF_ServerInfo_load (char **dirs,
 				if (strcasecmp (curnode->name, "oaf_server"))
 					continue;
 
-				new_ent =
-					oaf_alloca (sizeof (OAF_ServerInfo));
+				iid = xmlGetProp (curnode, "iid");
+
+                                if (!od_validate_iid (iid)) {
+                                        g_print ("IID '%s' contains illegal characters; discarding\n", iid);
+                                        free (iid);
+                                        continue;
+                                }
+
+				new_ent = oaf_alloca (sizeof (OAF_ServerInfo));
 				memset (new_ent, 0, sizeof (OAF_ServerInfo));
 
-				ctmp = xmlGetProp (curnode, "iid");
-				new_ent->iid = CORBA_string_dup (ctmp);
-				free (ctmp);
+				new_ent->iid = CORBA_string_dup (iid);
+				free (iid);
 
 				ctmp = xmlGetProp (curnode, "type");
 				new_ent->server_type =

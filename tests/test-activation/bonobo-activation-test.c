@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include "empty.h"
 
+#define TOTAL_TEST_SCORE 9
+
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
 static char *
@@ -69,7 +71,7 @@ test_object (CORBA_Object obj, CORBA_Environment *ev, const char *type)
         return FALSE;
 }
 
-static void
+static int
 test_empty (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 {
         Empty_doNothing (obj, ev);
@@ -77,14 +79,17 @@ test_empty (CORBA_Object obj, CORBA_Environment *ev, const char *type)
         if (ev->_major != CORBA_NO_EXCEPTION) {
                 g_warning ("Call failed: %s\n",
                            oaf_exception_id (ev));
+                return 0;
         } else {
                 fprintf (stderr, "Test %s succeeded\n", type);
+                return 1;
         }
 }
 
 int
 main (int argc, char *argv[])
 {
+        int passed = 0;
 	CORBA_Object obj;
 	CORBA_Environment ev;
 
@@ -96,19 +101,19 @@ main (int argc, char *argv[])
 	obj = oaf_activate ("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL,
                             &ev);
         if (test_object (obj, &ev, "by query")) {
-                test_empty (obj, &ev, "by query");
+                passed += test_empty (obj, &ev, "by query");
         }
 
 
 	obj = oaf_activate_from_id ("OAFIID:Empty:19991025", 0, NULL, &ev);
         if (test_object (obj, &ev, "from id")) {
-                test_empty (obj, &ev, "from id");
+                passed += test_empty (obj, &ev, "from id");
         }
 
 
 	obj = oaf_activate_from_id ("OAFAID:[OAFIID:Empty:19991025]", 0, NULL, &ev);
         if (test_object (obj, &ev, "from aid")) {
-                test_empty (obj, &ev, "from aid");
+                passed += test_empty (obj, &ev, "from aid");
         }
 
 
@@ -119,9 +124,11 @@ main (int argc, char *argv[])
         } else {
                 fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
                 CORBA_exception_free (&ev);
+                passed++;
         }
         if (test_oafd (&ev, "with broken factory link")) {
                 fprintf (stderr, ", passed 2");
+                passed++;
         } else {
                 fprintf (stderr, ", failed 2");
         }
@@ -135,9 +142,11 @@ main (int argc, char *argv[])
         } else {
                 fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
                 CORBA_exception_free (&ev);
+                passed++;
         }
         if (test_oafd (&ev, "with broken factory link")) {
                 fprintf (stderr, ", passed 2");
+                passed++;
         } else {
                 fprintf (stderr, ", failed 2");
         }
@@ -151,16 +160,23 @@ main (int argc, char *argv[])
         else {
                 fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
                 CORBA_exception_free (&ev);
+                passed++;
         }
         if (test_oafd (&ev, "with broken factory link")) {
                 fprintf (stderr, ", passed 2");
+                passed++;
         } else {
                 fprintf (stderr, ", failed 2");
         }
         fprintf (stderr, "\n");
 
+        fprintf (stderr, "\n%d tests passed (%s)\n", passed,
+                 passed == TOTAL_TEST_SCORE? "All": "some failures");
 
 	CORBA_exception_free (&ev);
 
-	return 0;
+        if (passed == TOTAL_TEST_SCORE)
+                return 0;
+        else
+                return 1;
 }

@@ -27,3 +27,5 @@ emptydatadir=$(datadir)/oaf
 emptydata_DATA=$(oaffiles)
 
 EXTRA_DIST=empty.idl $(oaffiles)
+
+TESTS=oaf-test-client
