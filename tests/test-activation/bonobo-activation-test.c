@@ -57,12 +57,11 @@ test_oafd (CORBA_Environment *ev, const char *type)
 static gboolean
 test_object (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 {
-	if (CORBA_Object_is_nil (obj, ev)) {
-		g_warning ("Activation %s failed!", type);
-
-	} else if (ev->_major != CORBA_NO_EXCEPTION) {
+	if (ev->_major != CORBA_NO_EXCEPTION) {
 		g_warning ("Activation %s failed: %s\n", type,
 			   bonobo_activation_exception_id (ev));
+        } else if (CORBA_Object_is_nil (obj, ev)) {
+		g_warning ("Activation %s failed (returned NIL but no exception)!", type);
 	} else {
                 return TRUE;
         }
@@ -215,11 +214,11 @@ main (int argc, char *argv[])
                  passed == TOTAL_TEST_SCORE? "All": "some failures");
 
         if (passed < (TOTAL_TEST_SCORE * 2 / 3)) {
-                fprintf (stderr, "It looks like you havn't installed broken.oafinfo "
-                         "into ${prefix}/oaf, this must be done by hand to avoid "
-                         "redundant warnings.\n");
+                fprintf (stderr, "It looks like you havn't installed broken.server "
+                         "into ${prefix}/share/bonobo-activation/, this must be done "
+                         "by hand to avoid problems with normal operation.\n");
 		fprintf (stderr, "Another possibility is that you failed to kill "
-			 "oafd before running make check; try running oaf-slay.\n");
+			 "oafd before running make check; try running bonobo-slay.\n");
         }
 
 	CORBA_exception_free (&ev);

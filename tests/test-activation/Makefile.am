@@ -56,7 +56,7 @@ LDADD=../bonobo-activation/libbonobo-activation.la $(UTILS_LIBS)
 
 serverfiles=empty.server
 
-emptydatadir=$(datadir)/oaf
+emptydatadir=$(datadir)/bonobo-activation
 emptydata_DATA=$(serverfiles)
 
 bin_SCRIPTS=bonobo-activation-slay
