@@ -145,6 +145,36 @@ gnome_object_unref (GnomeObject *object)
 	}
 }
 
+/**
+ * gnome_object_destroy
+ * @object: A GnomeObject you want to destroy.
+ *
+ * Destroys an object.  Ignores all reference count.  Used when you want
+ * to force the destruction of the composite object (use only if you know
+ * what you are doing).
+ */
+void
+gnome_object_destroy (GnomeObject *object)
+{
+	GnomeAggregateObject *ao = object->priv->ao;
+	GList *l;
+	
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_OBJECT (object));
+	g_return_if_fail (object->priv->ao->ref_count > 0);
+
+		
+	for (l = ao->objs; l; l = l->next){
+		GnomeObject *o = l->data;
+		
+		gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
+		gtk_object_destroy (l->data);
+	}
+	
+	g_list_free (ao->objs);
+	g_free (ao);
+}
+
 static void
 impl_GNOME_Unknown__destroy (PortableServer_Servant servant, CORBA_Environment *ev)
 {
@@ -238,7 +268,7 @@ POA_GNOME_Unknown__vepv gnome_object_vepv = {
 };
 
 static void
-gnome_object_destroy (GtkObject *object)
+gnome_object_object_destroy (GtkObject *object)
 {
 	GnomeObject *gnome_object = GNOME_OBJECT (object);
 	void *servant = gnome_object->servant;
@@ -298,7 +328,7 @@ gnome_object_class_init (GnomeObjectClass *class)
 
 	gtk_object_class_add_signals (object_class, gnome_object_signals, LAST_SIGNAL);
 
-	object_class->destroy = gnome_object_destroy;
+	object_class->destroy = gnome_object_object_destroy;
 }
 
 static void

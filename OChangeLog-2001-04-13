@@ -1,3 +1,16 @@
+1999-08-18  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-object.c (gnome_object_destroy): Implement gnome_object_destroy
+
+1998-08-11 Michael Meeks <michael@imagiantor.com>
+
+	* bonobo/gnome-stream-fs.c (gnome_stream_fs_create): kill 'full'
+	(gnome_stream_fs_class_init): Add close, eos, length
+	(fs_close, fs_eos): Stubbed,
+	(fs_length): Implemented
+
+	* bonobo/test-container.c: Hacked to include pdf bits.
+
 1999-08-17  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-object-client.c (gnome_object_restore_from_url):
@@ -533,7 +546,6 @@ Changes July 1[456], 1999 by Elliot:
 
 	* configure.in: s/gnome-object/gnome-unknown/
 
->>>>>>> 1.92
 1999-07-05  Miguel de Icaza  <miguel@gnu.org>
 
 	* components/image-x-png/bonobo-image-x-png.c: Make it use
@@ -542,7 +554,6 @@ Changes July 1[456], 1999 by Elliot:
 
 	* idl/*, src/*: Changed from GNOME::obj to GNOME::Unknown. 
 
->>>>>>> 1.88
 1999-06-28  Nat Friedman  <nat@gnome-support.com>
 
 	* bonobo/gnome-ui-handler.h: Removed toolbar IDs.  Fixed some
