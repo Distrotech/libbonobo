@@ -157,7 +157,7 @@ module Bonobo {
 		 *
 		 * Saves the state of the object to the @stream
 		 */
-		void save (in Bonobo::Stream stream, in ContentType type)
+/*		ContentType */ void save (in Bonobo::Stream stream, in ContentType type)
 			raises (WrongDataType, NotSupported);
 
 		/**

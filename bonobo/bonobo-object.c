@@ -115,18 +115,8 @@ bonobo_object_ref (BonoboObject *object)
 	object->priv->ao->ref_count++;
 }
 
-/**
- * bonobo_object_destroy
- * @object: A BonoboObject you want to destroy.
- *
- * This function is deprecated. Use bonobo_object_unref instead.
- * This is *not* like gtk_object_destroy, which can be done independently
- * of gtk_object_unref and has no effect on the ref count.
- *
- * Destroys an object.  Ignores all reference count.  Used when you want
- * to force the destruction of the composite object (use only if you know
- * what you are doing).
- */
+/* Do not use this function, it is not what you want; see unref */
+#warning Make this static when we know Nautilus works.
 void
 bonobo_object_destroy (BonoboObject *object)
 {
@@ -139,11 +129,33 @@ bonobo_object_destroy (BonoboObject *object)
 	ao = object->priv->ao;
 
 	ao->ref_count = 0;
-	for (l = ao->objs; l; l = l->next){
+	for (l = ao->objs; l; l = l->next) {
 		BonoboObject *o = l->data;
 
 		gtk_signal_disconnect (GTK_OBJECT (o), o->priv->destroy_id);
 		gtk_object_destroy (GTK_OBJECT (o));
+	}
+}
+
+static void
+bonobo_object_finalize (BonoboObject *object)
+{
+	GnomeAggregateObject *ao;
+	GList *l;
+
+	g_return_if_fail (BONOBO_IS_OBJECT (object));
+	g_return_if_fail (object->priv->ao->ref_count > 0);
+
+	ao = object->priv->ao;
+
+	ao->ref_count = 0;
+	for (l = ao->objs; l; l = l->next) {
+		GtkObject *o = GTK_OBJECT (l->data);
+
+		if (!o || !o->klass || !o->klass->finalize)
+			g_warning ("Serious bonobo object corruption");
+		else
+			o->klass->finalize (o);
 	}
 
 	g_list_free (ao->objs);
@@ -162,11 +174,13 @@ bonobo_object_unref (BonoboObject *object)
 	g_return_if_fail (BONOBO_IS_OBJECT (object));
 	g_return_if_fail (object->priv->ao->ref_count > 0);
 
-	if (object->priv->ao->ref_count == 1) {
+	if (object->priv->ao->ref_count == 1)
 		bonobo_object_destroy (object);
-	} else {
-		object->priv->ao->ref_count--;
-	}
+
+	object->priv->ao->ref_count--;
+
+	if (object->priv->ao->ref_count == 0)
+		bonobo_object_finalize (object);
 }
 
 static void
@@ -327,7 +341,7 @@ init_object_corba_class (void)
 }
 
 static void
-bonobo_object_object_destroy (GtkObject *object)
+bonobo_object_finalize_real (GtkObject *object)
 {
 	BonoboObject *bonobo_object = BONOBO_OBJECT (object);
 	void *servant = bonobo_object->servant;
@@ -350,7 +364,7 @@ bonobo_object_object_destroy (GtkObject *object)
 	CORBA_exception_free (&ev);
 
 	g_free (bonobo_object->priv);
-	bonobo_object_parent_class->destroy (object);
+	bonobo_object_parent_class->finalize (object);
 }
 
 static void
@@ -385,7 +399,7 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 
 	gtk_object_class_add_signals (object_class, bonobo_object_signals, LAST_SIGNAL);
 
-	object_class->destroy = bonobo_object_object_destroy;
+	object_class->finalize = bonobo_object_finalize_real;
 
 	init_object_corba_class ();
 }

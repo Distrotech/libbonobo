@@ -79,9 +79,10 @@ bonobo_container_destroy (GtkObject *object)
 	 * Destroy all the ClientSites.
 	 */
 	while (container->client_sites) {
-		BonoboClientSite *client_site = BONOBO_CLIENT_SITE (container->client_sites->data);
+		BonoboClientSite *client_site =
+			BONOBO_CLIENT_SITE (container->client_sites->data);
 
-		bonobo_object_destroy (BONOBO_OBJECT (client_site));
+		bonobo_object_unref (BONOBO_OBJECT (client_site));
 	}
 	
 	GTK_OBJECT_CLASS (bonobo_container_parent_class)->destroy (object);
@@ -299,7 +300,7 @@ bonobo_container_new (void)
 	container = gtk_type_new (bonobo_container_get_type ());
 	corba_container = create_bonobo_container (BONOBO_OBJECT (container));
 
-	if (corba_container == CORBA_OBJECT_NIL){
+	if (corba_container == CORBA_OBJECT_NIL) {
 		gtk_object_destroy (GTK_OBJECT (container));
 		return NULL;
 	}

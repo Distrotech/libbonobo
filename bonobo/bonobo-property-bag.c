@@ -614,7 +614,6 @@ bonobo_property_bag_destroy (GtkObject *object)
 	g_hash_table_destroy (pb->priv->props);
 
 	g_free (pb->priv);
-	bonobo_object_destroy (BONOBO_OBJECT (pb));
 }
 
 /**

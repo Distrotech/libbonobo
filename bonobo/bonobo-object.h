@@ -68,7 +68,6 @@ Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject     
  */
 void                     bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
-void                     bonobo_object_destroy                (BonoboObject           *object);
 POA_Bonobo_Unknown__epv *bonobo_object_get_epv                (void);
 
 

@@ -1,3 +1,53 @@
+2000-07-10  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_bind_embeddable): remove
+	ref count leak.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_bind_to_view): ref the view
+	we keep.
+
+	* bonobo/bonobo-property-bag.c (bonobo_property_bag_destroy): don't
+	destroy ourselfs again [ wierd ].
+
+	* bonobo/bonobo-embeddable.c (ping_container, bonobo_embeddable_destroy): 
+	replace bonobo_object_destroy with bonobo_object_unref
+
+	* bonobo/bonobo-control.c (bonobo_control_plug_destroy_event_cb): ditto.
+
+	* bonobo/bonobo-container.c (bonobo_container_destroy): ditto.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_destroy): ditto.
+
+	* bonobo/bonobo-control.c (bonobo_control_destroy): use unref on widget and
+	uih.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_destroy): unref the widget
+	instead of destroying it.
+
+	* bonobo/bonobo-object.h: kill prototype for bonobo_object_destroy.
+
+	* bonobo/bonobo-object.c (bonobo_object_object_destroy): rename to
+	(bonobo_object_finalize_real): this. (bonobo_object_class_init): connect it.
+	(bonobo_object_destroy): staticate.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_bind_to_control):
+	add FIXME.
+
+	* bonobo/bonobo-control.c (bonobo_control_init): set control_frame to NIL.
+	(bonobo_control_destroy): add unref on control_frame.
+
+2000-07-08  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_destroy): hack out structure
+	freeing. (bonobo_object_finalize): actually finalize.
+	(bonobo_object_unref): finalize after destruction if neccessary.
+
+	* bonobo/Makefile.am (Bonobo.h): more explicit single idl dependencies.
+
+2000-07-07  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo.h: extern "C" it all.
+
 2000-07-06  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/Makefile.am: Add files.
