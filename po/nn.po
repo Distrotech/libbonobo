@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-03-21 21:44+0100\n"
-"PO-Revision-Date: 2004-03-21 21:47+0100\n"
+"PO-Revision-Date: 2004-03-22 13:39+0100\n"
 "Last-Translator: Åsmund Skjæveland\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Katalog å lesa .server filer frå"
 
 #: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
-msgstr "DIRECTORY"
+msgstr "KATALOG"
 
 #: activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
@@ -54,7 +54,7 @@ msgstr "Spørjingsuttrykk som skal evaluerast"
 
 #: activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
-msgstr "EXPRESSION"
+msgstr "UTRYKK"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -384,7 +384,7 @@ msgstr "Klarte ikkje å aktivera «%s»"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr "HTTP Moniker"
+msgstr "HTTP-moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
@@ -392,7 +392,7 @@ msgstr "moniker som helt styr på ORB IOR"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "Standard moniker fabrikk"
+msgstr "Standard moniker-fabrikk"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
