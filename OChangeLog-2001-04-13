@@ -1,3 +1,20 @@
+2000-1026  Joe Shaw  <joe@helixcode.com>
+
+	* bonobo/bonobo-moniker-util.c: Add the http moniker to the fast
+	resolving ones, because doing a lookup through OAF doesn't work yet.
+
+	* monikers/bonobo-moniker-http.c: Start of the HTTP moniker. Right now
+	it only works when resolving against Controls, and will launch an
+	ebrowser control.
+
+	* moniker/bonobo-moniker-http.oafinfo: Added.
+
+	* monikers/moniker-control-test.c: Little test application for
+	resolving monikers against controls and launching them.
+
+	* monikers/Makefile.am: Build and install bonobo-moniker-http and its 
+	oafinfo file. Build but do not install moniker-control-test.
+
 Thu Oct 26 20:54:27 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/bonobo-stream-efs.c (real_get_info): 

@@ -7,12 +7,15 @@ INCLUDES =                                              \
 	$(BONOBO_TEST_CFLAGS)
 
 oafdir = $(datadir)/oaf
-oaf_DATA = std-moniker.oafinfo
+oaf_DATA = std-moniker.oafinfo bonobo-moniker-http.oafinfo
 
-bin_PROGRAMS = std-moniker bonobo-moniker-config
+bin_PROGRAMS = std-moniker bonobo-moniker-config bonobo-moniker-http
+
+noinst_PROGRAMS = moniker-control-test
 
 moniker_ldadd = 				\
 	$(top_builddir)/bonobo/libbonobo.la	\
+	$(top_builddir)/bonobo/libbonobox.la	\
 	$(BONOBOX_TEST_LIBS)
 
 std_moniker_SOURCES =			\
@@ -38,4 +41,17 @@ bonobo_moniker_config_SOURCES =		\
 bonobo_moniker_config_LDADD =		\
 	$(moniker_ldadd)
 
-EXTRA_DIST=std-moniker.oafinfo
+bonobo_moniker_http_SOURCES =		\
+	bonobo-moniker-http.c		\
+	bonobo-moniker-http.h
+
+bonobo_moniker_http_LDADD =		\
+	$(moniker_ldadd)
+
+moniker_control_test_SOURCES =		\
+	moniker-control-test.c
+
+moniker_control_test_LDADD =		\
+	$(moniker_ldadd)
+
+EXTRA_DIST=std-moniker.oafinfo bonobo-moniker-http.oafinfo
