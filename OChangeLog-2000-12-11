@@ -1,3 +1,8 @@
+2000-10-10  Larry Ewing  <lewing@helixcode.com>
+
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_pixbuf_to_xml): stick to
+	assigning values to memory we have actually allocated.
+
 2000-10-10  Andy Hertzfeld  <andy@eazel.com>
 
 	* bonobo/bonobo-ui-toolbar.c: (size_allocate_horizontally),
