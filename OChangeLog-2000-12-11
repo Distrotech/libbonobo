@@ -1,5 +1,10 @@
 2000-10-09  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_xml_get_icon_pixbuf): 
+	remove debug.
+
+2000-10-09  Michael Meeks  <michael@helixcode.com>
+
 	* doc/ui-faq.txt: add guff to the FAQ.
 
 	* bonobo/bonobo-win.c (cmd_get_menu_pixmap): fix stupid typo.
