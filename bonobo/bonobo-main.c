@@ -167,7 +167,7 @@ bonobo_init_full (int *argc, char **argv,
 		g_type_init (G_TYPE_DEBUG_NONE);
 
 		if (!oaf_is_initialized ())
-			oaf_orb_init (argc, argv);
+			oaf_init (*argc, argv);
 	}
 
 	CORBA_exception_init (&ev);

@@ -13,6 +13,7 @@
 
 #include <gobject/gobject.h>
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-i18n.h>
 #include <liboaf/oaf.h>
 #include <liboaf/liboaf.h>
 
@@ -87,19 +88,23 @@ void bonobo_generic_factory_set (
 
 POA_GNOME_ObjectFactory__epv *bonobo_generic_factory_get_epv (void);
 
+#ifdef __BONOBO_UI_MAIN_H__
+#define BONOBO_FACTORY_INIT(descr, version, argcp, argv)                      \
+	if (!bonobo_ui_init (descr, version, argcp, argv))                    \
+		g_error (_("Could not initialize Bonobo"));
+#else
+#define BONOBO_FACTORY_INIT(desc, version, argcp, argv)                       \
+	if (!bonobo_init (argcp, argv))                                       \
+		g_error (_("Could not initialize Bonobo"));
+#endif
+
 #define BONOBO_OAF_FACTORY(oafiid, descr, version, fn, data)                  \
 int main (int argc, char *argv [])                                            \
 {                                                                             \
 	BonoboGenericFactory *factory;                                        \
-	CORBA_ORB orb;                                                        \
                                                                               \
-	gnome_init_with_popt_table (descr, version, argc, argv,               \
-				    oaf_popt_options, 0, NULL);               \
-        orb = oaf_init (argc, argv);                                          \
-	if (!bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL))           \
-		g_error (_("Could not initialize Bonobo"));                   \
+	BONOBO_FACTORY_INIT (descr, version, &argc, argv);                    \
 	factory = bonobo_generic_factory_new (oafiid, fn, data);              \
-	bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));     \
 	bonobo_main ();                                                       \
 	return 0;                                                             \
 }                                                                             
@@ -108,15 +113,9 @@ int main (int argc, char *argv [])                                            \
 int main (int argc, char *argv [])                                            \
 {                                                                             \
 	BonoboGenericFactory *factory;                                        \
-	CORBA_ORB orb;                                                        \
                                                                               \
-	gnome_init_with_popt_table (descr, version, argc, argv,               \
-				    oaf_popt_options, 0, NULL);               \
-        orb = oaf_init (argc, argv);                                          \
-	if (!bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL))           \
-		g_error (_("Could not initialize Bonobo"));                   \
+	BONOBO_FACTORY_INIT (descr, version, &argc, argv);                    \
 	factory = bonobo_generic_factory_new_multi (oafiid, fn, data);        \
-	bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));     \
 	bonobo_main ();                                                       \
 	return 0;                                                             \
 }                                                                             

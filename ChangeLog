@@ -1,3 +1,11 @@
+2001-05-19  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-generic-factory.h
+	(BONOBO_OAF_FACTORY, BONOBO_OAF_FACTORY_MULTI): Make this actually work.
+
+	* bonobo/bonobo-main.c (bonobo_init_full): Call oaf_init(), not
+	oaf_orb_init() so that oaf gets the command line arguments.
+
 2001-05-15  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/Makefile.am (ORBIT_IDL): Use @ORBIT_IDL@ rather than
