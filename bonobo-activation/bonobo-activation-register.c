@@ -313,8 +313,9 @@ bonobo_activation_register_active_server_ext (const char               *iid,
         }
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_warning ("registration of '%s' returns %s", iid,
-		   registration_result_to_string (retval));
+	if (g_getenv ("BONOBO_DEBUG") && retval != ACTIVATION_REG_SUCCESS)
+        	g_warning ("registration of '%s' returns %s", iid,
+			   registration_result_to_string (retval));
 #endif
 	if (actid && strcmp (actid, iid) == 0 && need_ior_printout) {
 		char *iorstr;

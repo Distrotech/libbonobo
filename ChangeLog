@@ -1,3 +1,12 @@
+2004-01-27  Rodrigo Moya <rodrigo@ximian.com>
+
+	* activation-server/object-directory-corba.c
+	(object_directory_class_init): removed repeated line.
+
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_register_active_server_ext): display warning
+	message if there's an exception.
+
 2004-01-26  Michael Meeks  <michael@ximian.com>
 
 	* activation-server/activation-server-main.c

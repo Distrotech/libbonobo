@@ -1222,8 +1222,6 @@ object_directory_class_init (ObjectDirectoryClass *klass)
 	epv->dynamic_add_path    = impl_Bonobo_ObjectDirectory_add_path;
 	epv->dynamic_remove_path = impl_Bonobo_ObjectDirectory_remove_path;
         epv->addClientEnv        = impl_Bonobo_ObjectDirectory_addClientEnv;
-
-	epv->register_new        = impl_Bonobo_ObjectDirectory_register_new;
 }
 
 static void
