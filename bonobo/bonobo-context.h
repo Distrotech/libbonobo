@@ -10,7 +10,7 @@
 #ifndef _BONOBO_CONTEXT_H_
 #define _BONOBO_CONTEXT_H_
 
-#include <Bonobo.h>
+#include <bonobo/Bonobo.h>
 
 Bonobo_Unknown bonobo_context_get (const CORBA_char  *context_name,
 				   CORBA_Environment *opt_ev);

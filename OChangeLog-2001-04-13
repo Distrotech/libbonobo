@@ -1,3 +1,11 @@
+2000-12-01  Darin Adler  <darin@eazel.com>
+
+	* bonobo/bonobo-context.h: Fixed include that said <Bonobo.h>
+	when all the rest of them say <bonobo/Bonobo.h>. This makes
+	xpdf build again.
+
+	* tests/.cvsignore: Ignore the new test-any executable.
+
 2000-12-01  Michael Meeks  <michael@helixcode.com>
 
 	* doc/ui-faq.txt: add more help on where to find XKeysym names
