@@ -71,6 +71,7 @@ orb_remove_connection(GIOPConnection *cnx)
 
 static CORBA_ORB oaf_orb;
 static CORBA_Context oaf_context;
+static gboolean is_initialized = FALSE;
 
 CORBA_ORB
 oaf_orb_get(void)
@@ -276,6 +277,8 @@ oaf_postinit(gpointer app, gpointer mod_info)
 
   if(oaf_od_ior)
     oaf_registration_location_add(&cmdline_regloc, -1000, NULL);
+
+  is_initialized = TRUE;
 }
 
 static void
@@ -286,12 +289,20 @@ do_barrier(int signum)
   while(barrier);
 }
 
+gboolean
+oaf_is_initialized(void)
+{
+  return is_initialized;
+}
+
 CORBA_ORB
 oaf_init(int argc, char **argv)
 {
   CORBA_ORB retval;
   int i;
 
+  g_return_val_if_fail(is_initialized == FALSE, oaf_orb);
+  
   oaf_preinit(NULL, NULL);
 
   retval = oaf_orb_init(&argc, argv);
@@ -310,8 +321,8 @@ oaf_init(int argc, char **argv)
       }
     }
 
-  oaf_postinit(NULL, NULL);
-
+  oaf_postinit(NULL, NULL);  
+  
   return retval;
 }
 

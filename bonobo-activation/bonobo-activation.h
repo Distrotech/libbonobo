@@ -21,6 +21,7 @@ OAFActivationInfo *oaf_actid_parse(const OAF_ActivationID actid);
 OAFActivationInfo *oaf_actinfo_new(void);
 void oaf_actinfo_free(OAFActivationInfo *actinfo);
 
+gboolean oaf_is_initialized(void);
 CORBA_ORB oaf_init(int argc, char **argv);
 CORBA_ORB oaf_orb_get(void);
 CORBA_Context oaf_context_get(void); /* Just makes getting hold of the default context a bit easier */
