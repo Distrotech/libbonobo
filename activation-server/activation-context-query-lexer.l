@@ -27,32 +27,34 @@ DIGIT	[0-9]
 
 %%
 
-"==" { return P_EQ; }
-"!=" { return P_NEQ; }
-"<" { return P_LT; }
-">" { return P_GT; }
-"<=" { return P_LEQ; }
-">=" { return P_GEQ; }
-"&&" { return P_AND; }
-"and" { return P_AND; }
-"||" { return P_OR; }
-"or" { return P_OR; }
-(~|NOT)	{ return P_NOT; }
-"^" { return P_XOR; }
+"=="  { return P_EQ; }
+"!="  { return P_NEQ; }
+"<"   { return P_LT; }
+">"   { return P_GT; }
+"<="  { return P_LEQ; }
+">="  { return P_GEQ; }
+"&&"  { return P_AND; }
+"AND" { return P_AND; }
+"||"  { return P_OR; }
+"OR"  { return P_OR; }
+"~"   { return P_NOT; }
+"NOT" { return P_NOT; }
+"^"   { return P_XOR; }
+"XOR" { return P_XOR; }
 
-"/" { return P_DIVIDE; }
-"+" { return P_ADD; }
-"-" { return P_SUBTRACT; }
-"*" { return P_MULTIPLY; }
-"," { return COMMA; }
-"." { return PERIOD; }
+"/"   { return P_DIVIDE; }
+"+"   { return P_ADD; }
+"-"   { return P_SUBTRACT; }
+"*"   { return P_MULTIPLY; }
+","   { return COMMA; }
+"."   { return PERIOD; }
 
-"("	{ return LPAREN; }
-")"	{ return RPAREN; }
-"["	{ return LBRACKET; }
-"]"	{ return RBRACKET; }
+"("   { return LPAREN; }
+")"   { return RPAREN; }
+"["   { return LBRACKET; }
+"]"   { return RBRACKET; }
 
-"$"	{ return P_DOLLAR; }
+"$"   { return P_DOLLAR; }
 
 (TRUE|true|True|YES|yes|Yes) { yylval.val_boolean = TRUE; return P_CONST_BOOLEAN; }
 (FALSE|false|False|NO|no|No) { yylval.val_boolean = FALSE; return P_CONST_BOOLEAN; }
