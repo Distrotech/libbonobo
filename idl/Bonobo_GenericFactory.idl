@@ -22,9 +22,7 @@ module Bonobo {
 	interface GenericFactory : Bonobo::Unknown {
 		exception CannotActivate { };
 
-		boolean manufactures (in string obj_oaf_id);
-
-		Object createObject (in string oaf_id, in StringList params)
+		Object createObject (in string oaf_id)
 			raises (CannotActivate);
 
 	};

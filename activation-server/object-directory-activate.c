@@ -70,7 +70,6 @@ od_server_activate_factory (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
 {
 	CORBA_Object retval = CORBA_OBJECT_NIL, factory = CORBA_OBJECT_NIL;
 	Bonobo_ActivationResult *res;
-	Bonobo_StringList params = { 0 };
 
 	res = Bonobo_ActivationContext_activate_from_id (
                 actinfo->ac, si->location_info,
@@ -95,7 +94,7 @@ od_server_activate_factory (Bonobo_ServerInfo * si, ODActivationInfo * actinfo,
 		break;
 	}
 
-	retval = Bonobo_GenericFactory_createObject (factory, si->iid, &params, ev);
+	retval = Bonobo_GenericFactory_createObject (factory, si->iid, ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		retval = CORBA_OBJECT_NIL;
 
