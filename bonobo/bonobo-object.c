@@ -275,21 +275,23 @@ gnome_object_object_destroy (GtkObject *object)
 {
 	GnomeObject *gnome_object = GNOME_OBJECT (object);
 	void *servant = gnome_object->servant;
-	
-	if (gnome_object->corba_objref != CORBA_OBJECT_NIL){
-		PortableServer_ObjectId *oid;
-		CORBA_Environment ev;
+	CORBA_Environment ev;
 
-		CORBA_exception_init (&ev);
+	CORBA_exception_init (&ev);
+	
+	if (gnome_object->corba_objref != CORBA_OBJECT_NIL)
 		CORBA_Object_release (gnome_object->corba_objref, &ev);
-		
+
+	if (servant){
+		PortableServer_ObjectId *oid;
+	
 		oid = PortableServer_POA_servant_to_id(bonobo_poa(), servant, &ev);
 		PortableServer_POA_deactivate_object (bonobo_poa (), oid, &ev);
 
 		POA_GNOME_Unknown__fini (servant, &ev);
-		CORBA_exception_free (&ev);
 		CORBA_free(oid);
 	}
+	CORBA_exception_free (&ev);
 
 	g_free (gnome_object->priv);
 	gnome_object_parent_class->destroy (object);

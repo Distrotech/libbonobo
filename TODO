@@ -25,6 +25,12 @@ Bonobo Core (files in bonobo/)
 * Implement GnomeBonoboWidget. (Nat)
 * Make sure HACKING is up-to-date.
 
+Issues
+------
+
+* Sample applications should provide stream/store facilities
+  entirely.  we cant just ship with "will do later" stuff
+
 Interfaces (files in idl/)
 --------------------------
 * Documented.

@@ -1,3 +1,9 @@
+1999-09-11  Miguel de Icaza  <miguel@gnu.org>
+
+	* bonobo/gnome-object.c (gnome_object_object_destroy): Only
+	release the servant resources if we have a servant.
+	(GnomeObjectClient is our example).
+
 1999-09-11  Michael Meeks  <michael@nuclecu.unam.mx>
 
 	* bonobo/gnome-ui-handler.c (toolbar_toplevel_get_widget): Created.
