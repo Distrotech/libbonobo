@@ -61,7 +61,6 @@ BonoboPersistFile *bonobo_persist_file_construct (BonoboPersistFile *ps,
 
 POA_Bonobo_PersistFile__epv *bonobo_persist_file_get_epv (void);
 
-extern POA_Bonobo_PersistFile__vepv bonobo_persist_file_vepv;
 END_GNOME_DECLS
 
 #endif /* _BONOBO_PERSIST_FILE_H_ */

@@ -65,6 +65,8 @@ BonoboStorage   *bonobo_storage_open         (const char *driver,
 					      gint flags,
 					      gint mode);
 
+Bonobo_Storage   bonobo_storage_corba_object_create (BonoboObject *object);
+
 /*
  * Functions to open storages and streams from and existing.
  * Storage
@@ -83,8 +85,6 @@ void             bonobo_stream_write_class_id  (BonoboStream *stream,
 						char *class_id);
 
 POA_Bonobo_Storage__epv *bonobo_storage_get_epv (void);
-
-extern POA_Bonobo_Storage__vepv bonobo_storage_vepv;
 
 /* Open modes */
 

@@ -36,7 +36,6 @@ Bonobo_Persist_ContentTypeList *bonobo_persist_generate_content_types (int num,
 
 POA_Bonobo_Persist__epv *bonobo_persist_get_epv (void);
 
-extern POA_Bonobo_Persist__vepv bonobo_persist_vepv;
 END_GNOME_DECLS
 
 #endif /* _BONOBO_PERSIST_H_ */

@@ -1,3 +1,32 @@
+2000-06-30  Martijn van Beers  <martijn@earthling.net>
+
+	* bonobo/*.h: remove all remaining extern declarations of _epv
+	and _vepv structs
+
+	* bonobo/bonobo-stream.[ch]
+	  (bonobo_stream_corba_object_create): new function
+	* bonobo/bonobo-stream-fs.c
+	  (create_bonobo_stream_fs): moved this functionality to bonobo-stream.c
+	  (bonobo_stream_create): use bonobo_stream_corba_object_create
+	* bonobo/bonobo-stream-memory.c: ditto.
+	* bonobo/bonobo-storage.[ch]
+	  (bonobo_storage_corba_object_create): new function
+	* storage_modules/bonobo-storage-vfs.c
+	  (create_bonobo_storage_vfs): move this functionality to
+	                               bonobo-storage.c
+	  (do_bonobo_storage_vfs_create): use bonobo_storage_corba_object_create
+	* storage-modules/gnome-storage-efs.c
+	  (create_storage_efs_server): use bonobo_storage_corba_object_create
+	* storage-modules/gnome-storage-fs.c
+	  (create_bonobo_storage_fs): move this functionality to
+	                              bonobo-storage.c
+	  (do_bonobo_storage_fs_create): use bonobo_storage_corba_object_create
+	* storage_modules/bonobo-stream-vfs.c
+	  (create_bonobo_stream_vfs): move this functionality to bonobo-stream.c
+	  (bonobo_stream_create): use bonobo_stream_corba_object_create
+	* storage-modules/gnome-stream-efs.c
+	  (create_stream_efs_server): use bonobo_stream_corba_object_create
+
 2000-06-28  Dan Winship  <danw@helixcode.com>
 
 	* bonobo/bonobo-main.c (bonobo_init): If we can't resolve the ORB,

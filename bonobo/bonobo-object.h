@@ -89,9 +89,6 @@ void                     bonobo_object_check_env              (BonoboObject     
  */
 gboolean  gnome_unknown_ping (Bonobo_Unknown object);
 
-/* CORBA default vector methods we provide */
-extern POA_Bonobo_Unknown__vepv          bonobo_object_vepv;
-
 END_GNOME_DECLS
 
 #endif

@@ -80,7 +80,6 @@ BonoboProgressiveDataSink *bonobo_progressive_data_sink_construct		(BonoboProgre
 
 POA_Bonobo_ProgressiveDataSink__epv *bonobo_progressive_get_epv (void);
 
-extern POA_Bonobo_ProgressiveDataSink__vepv bonobo_progressive_data_sink_vepv;
 END_GNOME_DECLS
 
 #endif /* _BONOBO_PROGRESSIVE_DATA_SINK_H_ */

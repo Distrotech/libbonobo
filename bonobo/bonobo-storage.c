@@ -13,7 +13,7 @@
 
 static BonoboObjectClass *bonobo_storage_parent_class;
 
-POA_Bonobo_Storage__vepv bonobo_storage_vepv;
+static POA_Bonobo_Storage__vepv bonobo_storage_vepv;
 
 #define CLASS(o) BONOBO_STORAGE_CLASS(GTK_OBJECT(o)->klass)
 
@@ -298,5 +298,37 @@ bonobo_storage_open (const char *driver, const char *path, gint flags, gint mode
 		return NULL;
 
 	return (*driver_ptr) (path, flags, mode);
+}
+
+/**
+ * bonobo_storage_corba_object_create:
+ * @object: the GtkObject that will wrap the CORBA object
+ *
+ * Creates and activates the CORBA object that is wrapped by the
+ * @object BonoboObject.
+ *
+ * Returns: An activated object reference to the created object
+ * or %CORBA_OBJECT_NIL in case of failure.
+ */
+Bonobo_Storage
+bonobo_storage_corba_object_create (BonoboObject *object)
+{
+        POA_Bonobo_Storage *servant;
+        CORBA_Environment ev;
+
+        servant = (POA_Bonobo_Storage *) g_new0 (BonoboObjectServant, 1);
+        servant->vepv = &bonobo_storage_vepv;
+
+        CORBA_exception_init (&ev);
+
+        POA_Bonobo_Stream__init ((PortableServer_Servant) servant, &ev);
+        if (ev._major != CORBA_NO_EXCEPTION){
+                g_free (servant);
+                CORBA_exception_free (&ev);
+                return CORBA_OBJECT_NIL;
+        }
+
+        CORBA_exception_free (&ev);
+        return (Bonobo_Storage) bonobo_object_activate_servant (object, servant);
 }
 

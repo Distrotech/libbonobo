@@ -60,12 +60,6 @@ void             bonobo_container_remove       (BonoboContainer *container,
 
 POA_Bonobo_Container__epv *bonobo_container_get_epv (void);
 
-/*
- * Exported vectors
- */
-extern POA_Bonobo_Container__epv bonobo_container_epv;
-extern POA_Bonobo_Container__vepv bonobo_container_vepv;
-
 END_GNOME_DECLS
 
 #endif

@@ -50,11 +50,10 @@ typedef struct {
 				   CORBA_Environment *ev);
 } BonoboStreamClass;
 
-POA_Bonobo_Stream__epv *bonobo_stream_get_epv (void);
+GtkType                 bonobo_stream_get_type            (void);
+POA_Bonobo_Stream__epv *bonobo_stream_get_epv             (void);
+Bonobo_Stream           bonobo_stream_corba_object_create (BonoboObject *object);
 
-extern POA_Bonobo_Stream__vepv bonobo_stream_vepv;
-
-GtkType         bonobo_stream_get_type     (void);
 
 END_GNOME_DECLS
 

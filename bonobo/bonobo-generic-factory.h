@@ -82,8 +82,6 @@ void bonobo_generic_factory_set (
 
 POA_Bonobo_GenericFactory__epv *bonobo_generic_factory_get_epv (void);
 
-extern POA_Bonobo_GenericFactory__vepv bonobo_generic_factory_vepv;
-
 END_GNOME_DECLS
 
 #endif

@@ -89,7 +89,6 @@ BonoboPersistStream *bonobo_persist_stream_construct (BonoboPersistStream *ps,
 
 POA_Bonobo_PersistStream__epv *bonobo_persist_stream_get_epv (void);
 
-extern POA_Bonobo_PersistStream__vepv bonobo_persist_stream_vepv;
 END_GNOME_DECLS
 
 #endif /* _BONOBO_PERSIST_STREAM_H_ */

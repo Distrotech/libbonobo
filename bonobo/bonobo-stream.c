@@ -175,4 +175,35 @@ bonobo_stream_get_type (void)
 	return type;
 }
 
+/**
+ * bonobo_stream_corba_object_create:
+ * @object: the GtkObject that will wrap the CORBA object
+ *
+ * Creates and activates the CORBA object that is wrapped by the
+ * @object BonoboObject.
+ *
+ * Returns: An activated object reference to the created object
+ * or %CORBA_OBJECT_NIL in case of failure.
+ */
+Bonobo_Stream
+bonobo_stream_corba_object_create (BonoboObject *object)
+{
+	POA_Bonobo_Stream *servant;
+	CORBA_Environment ev;
+
+	servant = (POA_Bonobo_Stream *) g_new0 (BonoboObjectServant, 1);
+	servant->vepv = &bonobo_stream_vepv;
+
+	CORBA_exception_init (&ev);
+
+	POA_Bonobo_Stream__init ((PortableServer_Servant) servant, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION){
+                g_free (servant);
+		CORBA_exception_free (&ev);
+                return CORBA_OBJECT_NIL;
+        }
+
+	CORBA_exception_free (&ev);
+	return (Bonobo_Stream) bonobo_object_activate_servant (object, servant);
+}
 

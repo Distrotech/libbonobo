@@ -232,28 +232,6 @@ bonobo_stream_mem_get_type (void)
 	return type;
 }
 
-static Bonobo_Stream
-create_bonobo_stream_mem (BonoboObject *object)
-{
-	POA_Bonobo_Stream *servant;
-	CORBA_Environment ev;
-
-	servant = (POA_Bonobo_Stream *) g_new0 (BonoboObjectServant, 1);
-	servant->vepv = &bonobo_stream_vepv;
-
-	CORBA_exception_init (&ev);
-
-	POA_Bonobo_Stream__init ((PortableServer_Servant) servant, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION){
-                g_free (servant);
-		CORBA_exception_free (&ev);
-                return CORBA_OBJECT_NIL;
-        }
-
-	CORBA_exception_free (&ev);
-	return (Bonobo_Stream) bonobo_object_activate_servant (object, servant);
-}
-
 /**
  * bonobo_stream_mem_create:
  * @buffer: The data for which a BonoboStreamMem object is to be created.
@@ -298,7 +276,8 @@ bonobo_stream_mem_create (const char *buffer, size_t size,
 	stream_mem->read_only = read_only;
 	stream_mem->resizable = resizable;
 
-	corba_stream = create_bonobo_stream_mem (BONOBO_OBJECT (stream_mem));
+	corba_stream = bonobo_stream_corba_object_create (
+		BONOBO_OBJECT (stream_mem));
 
 	if (corba_stream == CORBA_OBJECT_NIL){
 		gtk_object_destroy (GTK_OBJECT (stream_mem));
