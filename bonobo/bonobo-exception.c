@@ -12,8 +12,9 @@
 
 #define GNOME_EXPLICIT_TRANSLATION_DOMAIN PACKAGE
 #include <bonobo/bonobo-i18n.h>
-#include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-object.h>
+#include <bonobo/bonobo-shutdown.h>
+#include <bonobo/bonobo-exception.h>
 
 typedef enum {
 	EXCEPTION_STR,
@@ -46,7 +47,7 @@ except_destroy (gpointer dummy, ExceptionHandle *e, gpointer dummy2)
 	return TRUE;
 }
 
-static void
+void
 bonobo_exception_shutdown (void)
 {
 	g_hash_table_foreach_remove (
@@ -58,11 +59,9 @@ bonobo_exception_shutdown (void)
 static GHashTable *
 get_hash (void)
 {
-	if (!bonobo_exceptions) {
+	if (!bonobo_exceptions)
 		bonobo_exceptions = g_hash_table_new (
 			g_str_hash, g_str_equal);
-		g_atexit (bonobo_exception_shutdown);
-	}
 
 	return bonobo_exceptions;
 }

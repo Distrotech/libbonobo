@@ -83,5 +83,5 @@ int main (int argc, char *argv [])
 		printf ("Failed\n");
 	bonobo_object_unref (memstream);	
 
-	return 0;
+	return bonobo_shutdown ();
 }

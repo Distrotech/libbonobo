@@ -216,5 +216,5 @@ main (int argc, char **argv)
 
 	bonobo_main ();
 
-	return 0;
+	return bonobo_shutdown ();
 }

@@ -14,14 +14,15 @@
 #include <string.h>
 #include <gobject/gsignal.h>
 #include <gobject/gmarshal.h>
+#include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-shlib-factory.h>
-#include "Bonobo.h"
-#include "bonobo-running-context.h"
-#include "bonobo-marshal.h"
-#include "bonobo-types.h"
+#include <bonobo/bonobo-running-context.h>
+#include <bonobo/bonobo-marshal.h>
+#include <bonobo/bonobo-types.h>
+#include <bonobo/bonobo-shutdown.h>
 
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_REF_HOOKS
@@ -847,8 +848,8 @@ bonobo_ao_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 }
 #endif
 
-static void
-bonobo_object_tracking_shutdown (void)
+void
+bonobo_object_shutdown (void)
 {
 #ifdef BONOBO_REF_HOOKS
 	
@@ -871,7 +872,6 @@ bonobo_object_tracking_shutdown (void)
 void
 bonobo_object_init (void)
 {
-	g_atexit (bonobo_object_tracking_shutdown);
 }
 
 /**

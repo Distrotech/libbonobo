@@ -17,6 +17,7 @@
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-moniker-util.h>
 #include <bonobo/bonobo-running-context.h>
+#include <bonobo/bonobo-shutdown.h>
 #include <bonobo/bonobo-main.h>
 
 #define PARENT_TYPE BONOBO_OBJECT_TYPE
@@ -83,8 +84,8 @@ bonobo_ri_debug_foreach (gpointer key, gpointer value, gpointer user_data)
 }
 #endif
 
-static void
-running_info_destroy (void)
+void
+bonobo_running_context_shutdown (void)
 {
 	if (bonobo_running_info) {
 
@@ -114,9 +115,6 @@ running_info_destroy (void)
 		g_free (ri);
 	}
 	bonobo_running_info = NULL;
-
-	if (bonobo_running_context)
-		bonobo_object_unref (BONOBO_OBJECT (bonobo_running_context));
 	bonobo_running_context = NULL;
 	bonobo_running_event_source = NULL;
 }
@@ -136,8 +134,6 @@ get_running_info (gboolean create)
 		bonobo_running_info->objects = g_hash_table_new (NULL, NULL);
 		bonobo_running_info->keys    = g_hash_table_new (g_str_hash, g_str_equal);
 		bonobo_running_info->emitted_last_unref = FALSE;
-
-		g_atexit (running_info_destroy);
 	}
 
 	return bonobo_running_info;

@@ -105,7 +105,6 @@ void                     bonobo_object_idle_unref             (BonoboObject     
 void                     bonobo_object_unref                  (BonoboObject           *object);
 void                     bonobo_object_set_immortal           (BonoboObject           *object,
 							       gboolean                immortal);
-void                     bonobo_object_init                   (void);
 void                     bonobo_object_trace_refs             (BonoboObject *object,
 							       const char   *fn,
 							       int           line,

@@ -87,7 +87,8 @@ libbonoboinclude_HEADERS =		\
 
 noinst_HEADERS =			\
 	bonobo-moniker-context.h	\
-	bonobo-running-context.h
+	bonobo-running-context.h	\
+	bonobo-shutdown.h
 
 libbonobo_src =				\
 	bonobo-moniker-context.c	\

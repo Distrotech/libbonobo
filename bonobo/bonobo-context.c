@@ -11,6 +11,7 @@
 
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
+#include <bonobo/bonobo-shutdown.h>
 #include <bonobo/bonobo-running-context.h>
 #include <bonobo/bonobo-moniker-context.h>
 
@@ -29,11 +30,9 @@ bonobo_context_add (const CORBA_char *context_name,
 {
 	g_return_if_fail (context != CORBA_OBJECT_NIL);
 
-	if (!bonobo_contexts) {
+	if (!bonobo_contexts)
 		bonobo_contexts = g_hash_table_new (
 			g_str_hash, g_str_equal);
-		g_atexit (bonobo_context_shutdown);
-	}
 
 	g_hash_table_insert (bonobo_contexts,
 			     g_strdup (context_name),

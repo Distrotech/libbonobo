@@ -1,5 +1,43 @@
 2001-10-26  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-running-context.c
+	(bonobo_running_context_shutdown): don't unref a ref
+	we don't own.
+
+	* bonobo/bonobo-property-bag-client.c
+	(unref_default_bag): rename
+	(bonobo_property_bag_shutdown): to this.
+	remove locking.
+	(get_default_bag): only do locking where neccessary
+	for speed.
+
+	* bonobo/bonobo-object.c
+	(bonobo_object_tracking_shutdown): rename to
+	(bonobo_object_shutdown): this & publicise.
+
+	* bonobo/bonobo-running-context.c
+	(running_info_destroy): rename to
+	(bonobo_running_context_shutdown): this.
+
+	* bonobo/Makefile.am (noinst_HEADERS): add
+	bonobo-shutdown.h
+
+	* bonobo/bonobo-main.c (bonobo_is_initialized): doc.
+	(bonobo_shutdown): impl. ( a start at least )
+	
+	* bonobo/bonobo-generic-factory.c
+	(bonobo_generic_factory_main): use bonobo_shutdown.
+
+	* tests/test-stream-mem.c, tests/test-properties-server.c,
+	tests/test-properties-client.c, tests/test-object.c,
+	tests/test-event-source.c, tests/test-moniker.c (main):
+	Add bonobo_shutdown.
+
+	* tests/test-storage-mem.c (main): clean coding style &
+	shutdown
+
+2001-10-26  Michael Meeks  <michael@ximian.com>
+
 	* tests/test-object.c (main): disable a test
 	breaking ORB encapsulation.
 

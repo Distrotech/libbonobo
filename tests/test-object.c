@@ -96,5 +96,5 @@ main (int argc, char *argv [])
 
 	fprintf (stderr, "All tests passed\n");
 
-	return 0;
+	return bonobo_shutdown ();
 }

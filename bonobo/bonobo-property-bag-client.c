@@ -10,10 +10,11 @@
  */
 
 #include <config.h>
-#include <bonobo/bonobo-property-bag-client.h>
 #include <bonobo/bonobo-arg.h>
+#include <bonobo/bonobo-shutdown.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
+#include <bonobo/bonobo-property-bag-client.h>
 
 #define BONOBO_PBCLIENT_DEFAULT_BAG "config:"
 
@@ -21,34 +22,30 @@ G_LOCK_DEFINE_STATIC (default_bag_lock);
 
 static Bonobo_PropertyBag default_bag = CORBA_OBJECT_NIL;
 
-static void
-unref_default_bag (void)
+void
+bonobo_property_bag_shutdown (void)
 {
-	G_LOCK(default_bag_lock);
-
-	if (default_bag !=  CORBA_OBJECT_NIL)
+	if (default_bag != CORBA_OBJECT_NIL)
 		bonobo_object_release_unref (default_bag, NULL);
-
-	G_UNLOCK(default_bag_lock);
 }
 
 static Bonobo_PropertyBag
 get_default_bag (CORBA_Environment  *ev)
 {
-	G_LOCK(default_bag_lock);
+	if (default_bag == CORBA_OBJECT_NIL) {
+		G_LOCK (default_bag_lock);
 
-	if (default_bag ==  CORBA_OBJECT_NIL) {
-		default_bag = bonobo_get_object (BONOBO_PBCLIENT_DEFAULT_BAG, 
-		        "IDL:Bonobo/PropertyBag:1.0", ev);
+		if (default_bag == CORBA_OBJECT_NIL)
+			default_bag = bonobo_get_object (
+				BONOBO_PBCLIENT_DEFAULT_BAG, 
+				"IDL:Bonobo/PropertyBag:1.0", ev);
 
-		if (default_bag !=  CORBA_OBJECT_NIL)
-			g_atexit (unref_default_bag);
+		G_UNLOCK (default_bag_lock);
 	}
 
-	if (default_bag ==  CORBA_OBJECT_NIL)
+	if (default_bag == CORBA_OBJECT_NIL)
 		g_warning ("unable to get default property bag\n") ;
 
-	G_UNLOCK(default_bag_lock);
 
 	return default_bag;
 }

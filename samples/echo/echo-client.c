@@ -50,5 +50,5 @@ main (int argc, char *argv [])
 
 	bonobo_object_release_unref (echo_server, NULL);
 	
-	return 0;
+	return bonobo_shutdown ();
 }

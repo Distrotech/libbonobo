@@ -15,6 +15,7 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
+#include <bonobo/bonobo-shutdown.h>
 
 #include <libintl.h>
 
@@ -70,10 +71,60 @@ bonobo_poa_manager (void)
 
 static gboolean bonobo_inited = FALSE;
 
+/**
+ * bonobo_is_initialized:
+ * @void: 
+ * 
+ *   This allows you to protect against double
+ * initialization in your code.
+ * 
+ * Return value: whether the ORB is initialized
+ **/
 gboolean
 bonobo_is_initialized (void)
 {
 	return bonobo_inited;
+}
+
+/**
+ * bonobo_shutdown:
+ * @void: 
+ * 
+ *   This shuts down the ORB and any other bonobo related
+ * resources.
+ * 
+ * Return value: whether the shutdown was clean, a good
+ * value to return from 'main'.
+ **/
+int
+bonobo_shutdown (void)
+{
+	int retval = 0;
+
+	if (bonobo_inited) {
+		CORBA_Environment ev;
+
+		bonobo_inited = FALSE;
+
+		CORBA_exception_init (&ev);
+
+		bonobo_property_bag_shutdown ();
+		bonobo_running_context_shutdown ();
+		bonobo_context_shutdown ();
+		bonobo_object_shutdown ();
+		bonobo_exception_shutdown ();
+
+		if (__bonobo_orb != CORBA_OBJECT_NIL)
+			CORBA_ORB_destroy (__bonobo_orb, &ev);
+		__bonobo_orb = CORBA_OBJECT_NIL;
+		
+		if (BONOBO_EX (&ev))
+			retval = 1;
+
+	} else /* shutdown when we didn't need to error */
+		retval = 1;
+
+	return retval;
 }
 
 /**
@@ -101,6 +152,8 @@ bonobo_init_full (int *argc, char **argv,
 		return TRUE;
 	else
 		bonobo_inited = TRUE;
+
+	/* FIXME: we should g_atexit bonobo_shutdown */
 
 	{ /* Init neccessary bits */
 		g_type_init ();
@@ -156,7 +209,6 @@ bonobo_init_full (int *argc, char **argv,
 	CORBA_exception_free (&ev);
 
 	bonobo_object_init ();
-
 	bonobo_context_init ();
 
 	bindtextdomain (PACKAGE, BONOBO_LOCALEDIR);

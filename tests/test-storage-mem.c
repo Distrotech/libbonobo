@@ -5,7 +5,8 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-exception.h>
 
-int main (int argc, char *argv [])
+int
+main (int argc, char *argv [])
 {
 	BonoboObject                 *storage;
 	Bonobo_Storage                corba_storage;
@@ -60,9 +61,8 @@ int main (int argc, char *argv [])
 				   Bonobo_Storage_READ,
 				   &ev);
 	if (!BONOBO_EX (&ev))
-	{
 		printf ("passed\n");
-	} else {
+	else {
 		printf ("failed: %s\n", BONOBO_EX_REPOID (&ev));
 		CORBA_exception_free (&ev);
 		CORBA_exception_init (&ev);
@@ -74,9 +74,8 @@ int main (int argc, char *argv [])
 				   Bonobo_Storage_READ,
 				   &ev);
 	if (!BONOBO_EX (&ev))
-	{
 		printf ("passed\n");
-	} else {
+	else {
 		printf ("failed: %s\n", BONOBO_EX_REPOID (&ev));
 		CORBA_exception_free (&ev);
 		CORBA_exception_init (&ev);
@@ -87,11 +86,10 @@ int main (int argc, char *argv [])
 			       "/foo", "/renamed",
 			       &ev);
 	if (!BONOBO_EX (&ev))
-	{
 		printf ("passed\t'%s' -> '%s'\n",
 			"/foo", "/renamed");
 		
-	} else {
+	else {
 		printf ("failed: %s\n", BONOBO_EX_REPOID (&ev));
 		CORBA_exception_free (&ev);
 		CORBA_exception_init (&ev);
@@ -102,8 +100,7 @@ int main (int argc, char *argv [])
 				       "/renamed",
 				       Bonobo_FIELD_TYPE,
 				       &ev);
-	if (!BONOBO_EX (&ev))
-	{
+	if (!BONOBO_EX (&ev)) {
 		printf ("passed\n");
 		printf ("\t\t\t\tname:\t%s\n", info->name);
 		printf ("\t\t\t\ttype:\t%s\n",
@@ -122,8 +119,7 @@ int main (int argc, char *argv [])
 				       "/renamed/quux",
 				       Bonobo_FIELD_TYPE | Bonobo_FIELD_SIZE | Bonobo_FIELD_CONTENT_TYPE,
 				       &ev);
-	if (!BONOBO_EX (&ev))
-	{
+	if (!BONOBO_EX (&ev)) {
 		printf ("passed\n");
 		printf ("\t\t\t\tname:\t%s\n", info->name);
 		printf ("\t\t\t\ttype:\t%s\n",
@@ -143,8 +139,7 @@ int main (int argc, char *argv [])
 				       "/",
 				       Bonobo_FIELD_TYPE,
 				       &ev);
-	if (!BONOBO_EX (&ev))
-	{
+	if (!BONOBO_EX (&ev)) {
 		printf ("passed\n");
 		printf ("\t\t\t\tname:\t'%s'\n", info->name);
 		printf ("\t\t\t\ttype:\t%s\n",
@@ -164,8 +159,7 @@ int main (int argc, char *argv [])
 						"/renamed",
 						0,
 						&ev);
-	if (!BONOBO_EX (&ev))
-	{
+	if (!BONOBO_EX (&ev)) {
 		int i;
 
 		printf ("passed\n");
@@ -188,9 +182,8 @@ int main (int argc, char *argv [])
 			      "/renamed/bar",
 			      &ev);
 	if (!BONOBO_EX (&ev))
-	{
 		printf ("passed\n");
-	} else {
+	else {
 		printf ("failed: %s\n", BONOBO_EX_REPOID (&ev));
 		CORBA_exception_free (&ev);
 		CORBA_exception_init (&ev);
@@ -201,9 +194,8 @@ int main (int argc, char *argv [])
 			      "/renamed/bar/baz",
 			      &ev);
 	if (!BONOBO_EX (&ev))
-	{
 		printf ("passed\n");
-	} else {
+	else {
 		printf ("failed: %s\n", BONOBO_EX_REPOID (&ev));
 		CORBA_exception_free (&ev);
 		CORBA_exception_init (&ev);
@@ -214,9 +206,8 @@ int main (int argc, char *argv [])
 			      "/renamed/bar",
 			      &ev);
 	if (!BONOBO_EX (&ev))
-	{
 		printf ("passed\n");
-	} else {
+	else {
 		printf ("failed: %s\n", BONOBO_EX_REPOID (&ev));
 		CORBA_exception_free (&ev);
 		CORBA_exception_init (&ev);
@@ -228,8 +219,7 @@ int main (int argc, char *argv [])
 				       "/renamed/bar/baz",
 				       Bonobo_FIELD_TYPE | Bonobo_FIELD_SIZE | Bonobo_FIELD_CONTENT_TYPE,
 				       &ev);
-	if (!BONOBO_EX (&ev))
-	{
+	if (!BONOBO_EX (&ev)) {
 		printf ("passed\n");
 		printf ("\t\t\t\tname:\t%s\n", info->name);
 		printf ("\t\t\t\ttype:\t%s\n",
@@ -250,8 +240,7 @@ int main (int argc, char *argv [])
 				       "/renamed/bar",
 				       Bonobo_FIELD_TYPE,
 				       &ev);
-	if (!BONOBO_EX (&ev))
-	{
+	if (!BONOBO_EX (&ev)) {
 		printf ("passed\n");
 		printf ("\t\t\t\tname:\t%s\n", info->name);
 		printf ("\t\t\t\ttype:\t%s\n",
@@ -271,8 +260,7 @@ int main (int argc, char *argv [])
 						"/renamed/bar",
 						0,
 						&ev);
-	if (!BONOBO_EX (&ev))
-	{
+	if (!BONOBO_EX (&ev)) {
 		int i;
 
 		printf ("passed\n");
