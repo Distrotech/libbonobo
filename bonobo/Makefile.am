@@ -150,7 +150,7 @@ bonobo-marshal.h: bonobo-marshal.list $(GLIB_GENMARSHAL)
 bonobo-marshal.c: bonobo-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --body --prefix=bonobo_marshal > $@
 
-EXTRA_DIST = libbonobo-2.0.pc.in bonobo-marshal.list
+EXTRA_DIST = libbonobo-2.0.pc.in libbonobo-2.0-uninstalled.pc.in bonobo-marshal.list
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libbonobo-2.0.pc

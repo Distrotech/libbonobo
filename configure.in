@@ -185,8 +185,10 @@ po/Makefile.in
 idl/Makefile
 bonobo/Makefile
 bonobo/libbonobo-2.0.pc
+bonobo/libbonobo-2.0-uninstalled.pc
 bonobo-activation/Makefile
 bonobo-activation/bonobo-activation-2.0.pc
+bonobo-activation/bonobo-activation-2.0-uninstalled.pc
 bonobo-activation/bonobo-activation-version.h
 activation-server/Makefile
 monikers/Makefile

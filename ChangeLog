@@ -1,3 +1,10 @@
+2004-03-07  Glynn Foster  <glynn.foster@sun.com>
+
+	* bonobo-activation/Makefile.am, bonobo-activation/bonobo-activation-2.0-uninstalled.pc.in:
+	* bonobo/Makefile.am, bonobo/libbonobo-2.0-uninstalled.pc.in, configure.in:
+	Add uninstalled pkg-config files, so that we can link the library without
+	needing to install it.
+
 2004-02-07  Robert Sedak  <robert.sedak@sk.htnet.hr>
 
         * configure.in: Added "hr" (Croatian) to ALL_LINGUAS.
