@@ -73,9 +73,11 @@ module Bonobo {
                                  in ActivationFlags               flags)
                         context ("username", "hostname");
 
-                RegistrationResult register_new (in ImplementationID              iid,
-                                                 in Bonobo::ActivationEnvironment environment,
-                                                 in Object                        obj);
+                RegistrationResult register_new (in  ImplementationID              iid,
+                                                 in  Bonobo::ActivationEnvironment environment,
+                                                 in  Object                        obj,
+						 in  RegistrationFlags             flags,
+                                                 out Object                        existing);
                 void               unregister   (in ImplementationID              iid,
                                                  in Object                        obj)
                         raises (NotRegistered);

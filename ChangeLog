@@ -1,3 +1,35 @@
+2003-04-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo-activation/bonobo-activation-register.h,
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_register_active_server): Renamed to
+	bonobo_activation_register_active_server_ext while updating to the
+	new Bonobo::ObjectDirectory::register_new signature, and
+	reimplemented bonobo_activation_register_active_server as an
+	adaptor to avoid breaking existing apps (and also to avoid
+	exposing internal implementation details).
+
+	* bonobo/bonobo-arg.c (MAKE_FROM_GVALUE): Use ORBit_alloc_tcval to
+	allocate space for the value; also initilize the _type and _release
+	fields of the CORBA::any.
+	(MAKE_TO_GVALUE): g_value_init before setting the value.
+
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory_register_new): Update to the new API:
+	return existing object, and honor the
+	Bonobo_REGISTRATION_FLAG_NO_SERVERINFO registration flag.
+
+	* activation-server/activation-server-main.c (main): Update to the
+	new Bonobo_ObjectDirectory_register_new signature.
+
+	* idl/Bonobo_ObjectDirectory.idl
+	(Bonobo::ObjectDirectory::register_new): Added and output variable
+	to return the existing object in case the client tries to register
+	an object which is has already been registered.
+
+	* idl/Bonobo_Activation_types.idl: Define RegistrationFlags with
+	the single value REGISTRATION_FLAG_NO_SERVERINFO.
+
 2003-04-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* tests/test-object.c (main): Removed the foreign object test,

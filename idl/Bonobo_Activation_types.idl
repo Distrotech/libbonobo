@@ -39,6 +39,8 @@ module Bonobo {
         const ActivationFlags ACTIVATION_FLAG_NO_LOCAL = 1<<0; // No shared libraries
         const ActivationFlags ACTIVATION_FLAG_PRIVATE = 1<<1; // start a new server and don't register it
         const ActivationFlags ACTIVATION_FLAG_EXISTING_ONLY = 1<<2; // don't start the server if not started
+        typedef long RegistrationFlags;
+        const RegistrationFlags REGISTRATION_FLAG_NO_SERVERINFO = 1<<0; // no .server file
 
 	struct ActivationEnvValue {
 		string  name;

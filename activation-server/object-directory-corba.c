@@ -702,21 +702,26 @@ impl_Bonobo_ObjectDirectory_register_new (
 	const CORBA_char                   *iid,
 	const Bonobo_ActivationEnvironment *environment,
 	const CORBA_Object                  obj,
+        Bonobo_RegistrationFlags            flags,
+        CORBA_Object                       *existing,
 	CORBA_Environment                  *ev)
 {
 	impl_POA_Bonobo_ObjectDirectory *servant = _servant;
 	CORBA_Object                     oldobj;
 
 	oldobj = od_get_active_server (servant, iid, environment);
+        *existing = oldobj;
 
 	if (oldobj != CORBA_OBJECT_NIL) {
-		CORBA_Object_release (oldobj, NULL);
-		if (!CORBA_Object_non_existent (oldobj, ev))
+		if (!CORBA_Object_non_existent (oldobj, ev)) {
 			return Bonobo_ACTIVATION_REG_ALREADY_ACTIVE;
+                }
 	}
 
-	if (!g_hash_table_lookup (servant->by_iid, iid))
-		return Bonobo_ACTIVATION_REG_NOT_LISTED;
+        if (!g_hash_table_lookup (servant->by_iid, iid)) {
+                if (!(flags&Bonobo_REGISTRATION_FLAG_NO_SERVERINFO))
+                        return Bonobo_ACTIVATION_REG_NOT_LISTED;
+        }
 
 #ifdef BONOBO_ACTIVATION_DEBUG
         g_warning ("Server register. '%s' : %p", iid, obj);

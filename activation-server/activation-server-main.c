@@ -218,7 +218,7 @@ main (int argc, char *argv[])
         PortableServer_POA            root_poa;
         CORBA_ORB                     orb;
         CORBA_Environment             real_ev, *ev;
-        CORBA_Object                  naming_service;
+        CORBA_Object                  naming_service, existing;
         Bonobo_ActivationEnvironment  environment;
         Bonobo_ObjectDirectory        od;
         poptContext                   ctx;
@@ -280,7 +280,9 @@ main (int argc, char *argv[])
         if (naming_service == NULL)
                 g_warning ("Failed to create naming service");
         Bonobo_ObjectDirectory_register_new 
-                (od, NAMING_CONTEXT_IID, &environment, naming_service, ev);
+                (od, NAMING_CONTEXT_IID, &environment, naming_service, 0, &existing, ev);
+	if (existing != CORBA_OBJECT_NIL)
+		CORBA_Object_release (existing, NULL);
 
         if (ior_fd < 0 && !server_ac)
                 g_error ("\n\n-- \nThe bonobo-activation-server must be forked by\n"
