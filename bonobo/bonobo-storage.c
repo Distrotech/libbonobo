@@ -117,6 +117,17 @@ impl_list_contents (PortableServer_Servant servant,
 	return CORBA_OBJECT_NIL;
 }
 
+static void
+impl_destroy (PortableServer_Servant servant, 
+	      const CORBA_char *path,
+	      CORBA_Environment * ev)
+{
+	GnomeStorage *storage = gnome_storage_from_servant (servant);
+	
+	CLASS (storage)->destroy (storage, path, ev);
+}
+
+
 #if 0
 gnome_save (GnomeObject *object, GnomeStorage *storage)
 {
@@ -150,6 +161,7 @@ init_storage_corba_class (void)
 	gnome_storage_epv.rename = impl_rename;
 	gnome_storage_epv.commit = impl_commit;
 	gnome_storage_epv.list_contents = impl_list_contents;
+	gnome_storage_epv.destroy = impl_destroy;
 
 	/* The VEPV */
 	gnome_storage_vepv.GNOME_object_epv = &gnome_object_epv;
