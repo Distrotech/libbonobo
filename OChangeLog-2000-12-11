@@ -1,3 +1,11 @@
+1999-04-14  Tomislav Vujec  <tvujec@carnet.hr>
+
+	* configure.in: remove second GNOME_INIT invocation.
+
+	* bonobo/Makefile.am: $(includedir) should be on the end, because in
+	$(srcdir) != $(builddir) scenario, bonobo picks up old headers from
+	$(includedir)
+
 1999-04-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* bonobo/gnome-object.c: #include "gtk-interfaces.h"
