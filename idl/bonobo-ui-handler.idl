@@ -1,5 +1,5 @@
 /*
- * The GNOME::UIHandler Interface
+ * The Bonobo::UIHandler Interface
  *
  * The UIHandler interface provides a CORBA service for
  * managing menus and toolbars.  It allows both the top-
@@ -12,12 +12,12 @@
  */
 
 
-module GNOME {
+module Bonobo {
 
 	/* Forward declaration. */
 	interface Control;
 
-       	interface UIHandler : GNOME::Unknown {
+       	interface UIHandler : Bonobo::Unknown {
 		typedef sequence<string> StringSeq;
 		typedef sequence<octet> iobuf;
 
@@ -40,10 +40,6 @@ module GNOME {
 			MenuTypeSeparator
        		};
        
-
-		exception PathNotFound {};
-		exception NotToplevelHandler {};
-
        		/*
        		 * Containee ==> Container
        		 */
@@ -54,10 +50,9 @@ module GNOME {
 		 * containee which is being registered.
 		 *
        		 * This method is used by an embedded component to register
-       		 * its GnomeUIHandler with the container's GnomeUIHandler.
+       		 * its BonoboUIHandler with the container's BonoboUIHandler.
 		 */
-       		void register_containee (in UIHandler uih)
-			raises (NotToplevelHandler);
+       		void register_containee (in UIHandler uih);
        
        		/**
 		 * unregister_containee:
@@ -65,11 +60,10 @@ module GNOME {
 		 * unregistered
 		 *
        		 * This method is used by an embedded component to unregister
-       		 * its GnomeUIHandler with the container's GnomeUIHandler.
+       		 * its BonoboUIHandler with the container's BonoboUIHandler.
        		 * The container will then
 		 */
-       		void unregister_containee (in UIHandler uih)
-			raises (NotToplevelHandler);
+       		void unregister_containee (in UIHandler uih);
 
 		/**
 		 *
@@ -90,29 +84,27 @@ module GNOME {
 		 */
        		void menu_create (in UIHandler containee, in string path, in MenuType type, in string label,
 				  in string hint, in long pos, in PixmapType pixmap_type, in iobuf pixmap_data,
-				  in unsigned long accelerator_key, in long modifier)
-			raises (NotToplevelHandler, PathNotFound);
+				  in unsigned long accelerator_key, in long modifier);
 
 		/**
 		 * menu_remove:
 		 */
+		exception MenuItemNotFound {};
        		void menu_remove (in UIHandler containee_uih, in string path)
-			raises (NotToplevelHandler, PathNotFound);
+			raises (MenuItemNotFound);
 
 		/**
 		 * menu_fetch:
 		 */
-       		void menu_fetch (in string path, out MenuType type, out string label,
-				 out string hint, out long pos, out PixmapType pixmap_type,
-				 out iobuf pixmap_data, out unsigned long accelerator_key,
-				 out long modifier)
-			raises (NotToplevelHandler, PathNotFound);
+       		boolean menu_fetch (in string path, out MenuType type, out string label,
+				    out string hint, out long pos, out PixmapType pixmap_type,
+				    out iobuf pixmap_data, out unsigned long accelerator_key,
+				    out long modifier);
 
 		/**
 		 * menu_get_children:
 		 */
-		void menu_get_children (in string path, out StringSeq children)
-			raises (NotToplevelHandler, PathNotFound);
+		boolean menu_get_children (in string path, out StringSeq children);
 
 		/**
 		 * menu_set_attributes: small data entries.
@@ -123,8 +115,7 @@ module GNOME {
 					  in  string label,
 					  in  string hint,
 					  in  long accelerator_key, in  long ac_mods,
-					  in  boolean toggle_state)
-			raises (NotToplevelHandler, PathNotFound);
+					  in  boolean toggle_state);
 
 		/**
 		 * menu_get_attributes: small data entries.
@@ -135,23 +126,20 @@ module GNOME {
 					  out string label,
 					  out string hint,
 					  out long accelerator_key, out long ac_mods,
-					  out boolean toggle_state)
-			raises (NotToplevelHandler, PathNotFound);
+					  out boolean toggle_state);
 
 
 		/**
 		 * menu_set_data: chunky data entries.
 		 */
 		void menu_set_data       (in  UIHandler containee, in string path,
-					  in  PixmapType pixmap_type, in  iobuf pixmap_data)
-			raises (NotToplevelHandler, PathNotFound);
+					  in  PixmapType pixmap_type, in  iobuf pixmap_data);
 
 		/**
 		 * menu_get_data: chunky data entries.
 		 */
 		void menu_get_data       (in  UIHandler containee, in string path,
-					  out PixmapType pixmap_type, out iobuf pixmap_data)
-			raises (NotToplevelHandler, PathNotFound);
+					  out PixmapType pixmap_type, out iobuf pixmap_data);
 
 
        		/*
@@ -165,14 +153,11 @@ module GNOME {
 		/*
 		 * Toolbars.
 		 */
-		void toolbar_create (in UIHandler containee, in string name)
-			raises (NotToplevelHandler);
+		void toolbar_create (in UIHandler containee, in string name);
 
-		void toolbar_remove (in UIHandler containee, in string name)
-			raises (NotToplevelHandler, PathNotFound);
+		void toolbar_remove (in UIHandler containee, in string name);
 
-		void toolbar_get_children (in string path, out StringSeq children)
-			raises (PathNotFound);
+		boolean toolbar_get_children (in string path, out StringSeq children);
 
 		enum ToolbarOrientation {
 			ToolbarOrientationHorizontal,
@@ -215,8 +200,7 @@ module GNOME {
 					     in  ToolbarSpaceStyle   space_style,
 					     in  ReliefStyle         relief_style,
 					     in  long                space_size,
-					     in  boolean             sensitive)
-			raises (PathNotFound);
+					     in  boolean             sensitive);
 
 		/**
 		 * toolbar_get_attributes: toolbar attribute passing.
@@ -227,8 +211,7 @@ module GNOME {
 					     out ToolbarSpaceStyle   space_style,
 					     out ReliefStyle         relief_style,
 					     out long                space_size,
-					     out boolean             sensitive)
-			raises (PathNotFound);
+					     out boolean             sensitive);
 
 		/*
 		 * TODO: what needs doing;
@@ -244,17 +227,16 @@ module GNOME {
 		void toolbar_create_item (in UIHandler containee, in string path, in ToolbarType type,
 					  in string label, in string hint, in long pos, in Control control,
 					  in PixmapType pixmap_type, in iobuf pixmap_data,
-					  in unsigned long accelerator_key, in long modifier)
-			raises (NotToplevelHandler, PathNotFound);
+					  in unsigned long accelerator_key, in long modifier);
 
+		exception ToolbarItemNotFound {};
 		void toolbar_remove_item (in UIHandler containee, in string path)
-			raises (NotToplevelHandler, PathNotFound);
+			raises (ToolbarItemNotFound);
 
-		void toolbar_fetch_item (in string path, out ToolbarType type, out string label,
-					 out string hint, out long pos, out PixmapType pixmap_type,
-					 out iobuf pixmap_data, out unsigned long accelerator_key,
-					 out long modifier)
-			raises (NotToplevelHandler, PathNotFound);
+		boolean toolbar_fetch_item (in string path, out ToolbarType type, out string label,
+					    out string hint, out long pos, out PixmapType pixmap_type,
+					    out iobuf pixmap_data, out unsigned long accelerator_key,
+					    out long modifier);
 
 		/**
 		 * toolbar_item_set_attributes: small data entries.
@@ -267,8 +249,7 @@ module GNOME {
 						  in  string  hint,
 						  in  long    accelerator_key,
 						  in  long    ac_mods,
-						  in  boolean toggle_state)
-			raises (NotToplevelHandler, PathNotFound);
+						  in  boolean toggle_state);
 
 		/**
 		 * toolbar_item_get_attributes: small data entries.
@@ -281,22 +262,19 @@ module GNOME {
 						  out string  hint,
 						  out long    accelerator_key,
 						  out long    ac_mods,
-						  out boolean toggle_state)
-			raises (NotToplevelHandler, PathNotFound);
+						  out boolean toggle_state);
 
 		/**
 		 * toolbar_item_set_data: chunky data entries.
 		 */
 		void toolbar_item_set_data (in  UIHandler containee, in string path,
-					    in  PixmapType pixmap_type, in  iobuf pixmap_data)
-			raises (NotToplevelHandler, PathNotFound);
+					    in  PixmapType pixmap_type, in  iobuf pixmap_data);
 
 		/**
 		 * toolbar_item_get_data: chunky data entries.
 		 */
 		void toolbar_item_get_data (in  UIHandler containee, in string path,
-					    out PixmapType pixmap_type, out iobuf pixmap_data)
-			raises (NotToplevelHandler, PathNotFound);
+					    out PixmapType pixmap_type, out iobuf pixmap_data);
 
 
        		/*
