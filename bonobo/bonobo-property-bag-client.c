@@ -941,8 +941,8 @@ bonobo_property_bag_client_set_value_double (BonoboPropertyBagClient *pbc,
 
 void
 bonobo_property_bag_client_set_value_string (BonoboPropertyBagClient *pbc,
-					    const char *propname,
-					    char *value)
+					     const char *propname,
+					     const char *value)
 {
 	CORBA_any      *any;
 
@@ -950,7 +950,7 @@ bonobo_property_bag_client_set_value_string (BonoboPropertyBagClient *pbc,
 	g_return_if_fail (BONOBO_IS_PROPERTY_BAG_CLIENT (pbc));
 	g_return_if_fail (propname != NULL);
 
-	any = bonobo_property_marshal_string ("string", (const gpointer) value, NULL);
+	any = bonobo_property_marshal_string ("string", value, NULL);
 	g_return_if_fail (any != NULL);
 
 	bonobo_property_bag_client_set_value_any (pbc, propname, any);

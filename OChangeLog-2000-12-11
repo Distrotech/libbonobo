@@ -1,4 +1,17 @@
+2000-01-28  Michael Meeks  <michael@mejm2.dow.cam.ac.uk>
+
+	* gshell/gshell.c: include libgnorba; kill warnings.
+
+	* samples/compound-doc/sample-container.c: ditto.
+
+	* samples/controls/bonobo-clock-control.c (bonobo_clock_factory): use CORBA_boolean
+	instead of gboolean.
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_set_value_string):
+	constify string.
+
 2000-01-28 Elliot Lee <sopwith@redhat.com>
+
 	* bonobo/bonobo.h: Add multiple include guard.
 
 2000-01-26  Martijn van Beers  <martijn@earthling.net>
@@ -434,6 +447,7 @@
 	kill group_ stuff.
 
 1999-12-20  Martijn van Beers  <martijn@earthling.net>
+	
 	* samples/controls/sample-control-container.c: Changed
 	to work with the new gnome_property_bag_client_(get|set)_value_*
 	functions.

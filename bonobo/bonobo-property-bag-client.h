@@ -110,7 +110,7 @@ void			 bonobo_property_bag_client_set_value_double    (BonoboPropertyBagClient 
 									gdouble value);
 void			 bonobo_property_bag_client_set_value_string    (BonoboPropertyBagClient *pbc,
 									const char *propname,
-									char *value);
+									const char *value);
 void			 bonobo_property_bag_client_set_value_any       (BonoboPropertyBagClient *pbc,
 									const char *propname,
 									CORBA_any *value);
