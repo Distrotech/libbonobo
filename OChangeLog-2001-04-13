@@ -1,5 +1,10 @@
 2000-12-11  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-xml.c (override_node_with): revert
+	Darin's last change to this - feature not bug :-)
+
+2000-12-11  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-moniker-util.c (resolve_async_cb): 
 	release unref the moniker.
 	(bonobo_moniker_resolve_async): take a ref here.
