@@ -1,5 +1,17 @@
 2000-11-11  Michael Meeks  <michael@helixcode.com>
 
+	* bonobo/bonobo-ui-toolbar.c (size_allocate_helper):
+	go through the allocation of pack-end widgets backwards
+	so they appear in the same order as in the xml file.
+
+	* bonobo/bonobo-print.c (bonobo_print_construct): stop
+	the warnings.
+
+	* bonobo/bonobo-print-client.c (bonobo_print_client_new):
+	don't warn anymore.
+
+2000-11-11  Michael Meeks  <michael@helixcode.com>
+
 	* bonobo/bonobo-win.c (destroy_priv): finalize the
 	popups before we destroy the tree they use to clean
 	up...
