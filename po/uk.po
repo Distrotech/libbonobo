@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2002-02-11 10:21+0000\n"
-"PO-Revision-Date: 2002-04-05 17:42+0200\n"
+"POT-Creation-Date: 2002-06-03 10:34+0300\n"
+"PO-Revision-Date: 2002-06-03 09:47+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -149,11 +149,6 @@ msgstr "Помилка перевірки на помилку; без вийня
 msgid "General activation error with no description"
 msgstr "Загальна помилка активації без опису"
 
-#: bonobo/bonobo-generic-factory.h:74 bonobo/bonobo-generic-factory.h:78
-#, fuzzy
-msgid "Could not initialize Bonobo"
-msgstr "Не вдалося ініціалізувати Bonobo"
-
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
@@ -165,35 +160,35 @@ msgstr "Не вдалося активувати об'єкт"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr ""
+msgstr "Монікер HTTP"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "Монікер обробки ORB IOR"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "Фвбрика стандартних монікерів"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "Загальний монікер активації OAF"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "Загальний монікер запиту OAF"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "Загальний монікер фабрики \"new\""
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr ""
+msgstr "Загальний монікер елемента"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "потоковий MonikerExtender"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
@@ -207,19 +202,19 @@ msgstr "Не вдалося активувати \"%s\""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Фабрика серверів відлуння Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Зразок програми сервера відлуння"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "Компонент відлуння"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Фабрика компонентів відлуння"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
@@ -233,3 +228,4 @@ msgstr "Не вдалося створити екземпляр зразка к�
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Сталася виключна ситуація \"%s\""
+
