@@ -604,6 +604,8 @@ bonobo_object_check_env (BonoboObject *object, CORBA_Object obj, CORBA_Environme
 		return;
 
 	if (ev->_major == CORBA_SYSTEM_EXCEPTION){
+		g_warning ("CORBA system exception!");
+		g_warning (CORBA_exception_id(ev));
 		gtk_signal_emit (
 			GTK_OBJECT (object), bonobo_object_signals [SYSTEM_EXCEPTION], obj, ev);
 	}
