@@ -60,9 +60,9 @@ od_utils_load_config_file (void)
         xmlNodePtr search_node;
 
         doc = od_utils_load_xml_file ();
- 
+
         search_node = doc->xmlRootNode->xmlChildrenNode;
-        result = "";
+        result = g_strdup ("");
         while (search_node != NULL) {
                 if (strcmp (search_node->name, "searchpath") == 0) {
                         xmlNodePtr item_node;
@@ -70,11 +70,14 @@ od_utils_load_config_file (void)
                         while (item_node != NULL) {
                                 if (strcmp (item_node->name, "item") == 0) {
                                         char *directory;
-                                        /* FIXME bugzilla.eazel.com 2726: this may be slow and has probably
-                                           a direct influence on startup time. */
+                                        char *old_result = result;
+
                                         directory = xmlNodeGetContent (item_node);
-                                        result = g_strconcat (result, ":", directory, NULL);
-                                        xmlFree (directory);
+                                        if (directory) {
+                                                result = g_strconcat (old_result, ":", directory, NULL);
+                                                xmlFree (directory);
+                                                g_free (old_result);
+                                        }
                                 }
                                 item_node = item_node->next;
                         }
