@@ -8,7 +8,7 @@
 #include "empty.h"
 #include "plugin.h"
 
-#define TOTAL_TEST_SCORE 14
+#define TOTAL_TEST_SCORE 15
 
 CORBA_Object name_service = CORBA_OBJECT_NIL;
 
@@ -85,6 +85,7 @@ test_plugin (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 		return 0;
 	} else {
 		fprintf (stderr, "Test %s succeeded\n", type);
+                CORBA_Object_release (obj, ev);
 		return 1;
 	}
 }
@@ -100,6 +101,7 @@ test_empty (CORBA_Object obj, CORBA_Environment *ev, const char *type)
                 return 0;
         } else {
                 fprintf (stderr, "Test %s succeeded\n", type);
+                CORBA_Object_release (obj, ev);
                 return 1;
         }
 }
@@ -110,11 +112,34 @@ main (int argc, char *argv[])
         int passed = 0;
 	CORBA_Object obj;
 	CORBA_Environment ev;
+        Bonobo_ServerInfoList *info;
+        char *sort_by[2];
 
 	CORBA_exception_init (&ev);
 	bonobo_activation_init (argc, argv);
 
 /*      putenv("Bonobo_BARRIER_INIT=1"); */
+
+        sort_by[0] = "prefer_by_list_order(iid, ["
+                "'OAFIID:nautilus_file_manager_icon_view:42681b21-d5ca-4837-87d2-394d88ecc058',"
+                "'OAFIID:nautilus_file_manager_list_view:521e489d-0662-4ad7-ac3a-832deabe111c',"
+                "'OAFIID:nautilus_music_view:9456b5d2-60a8-407f-a56e-d561e1821391'])";
+        sort_by[1] = NULL;
+
+        info = bonobo_activation_query (
+                "(bonobo:supported_mime_types.has_one (['x-directory/normal',"
+                "                                       'x-directory/*', '*']) AND "
+                "has (['OAFIID:nautilus_file_manager_icon_view:42681b21-d5ca-4837-87d2-394d88ecc058',"
+                "      'OAFIID:nautilus_file_manager_list_view:521e489d-0662-4ad7-ac3a-832deabe111c',"
+                "      'OAFIID:nautilus_music_view:9456b5d2-60a8-407f-a56e-d561e1821391'], iid) ) ",
+                sort_by, &ev);
+
+        if (ev._major == CORBA_NO_EXCEPTION) {
+                fprintf (stderr, "Query passed\n");
+                passed++;
+                CORBA_free (info);
+        } else
+                fprintf (stderr, "Test of query failed\n");
 
 	obj = bonobo_activation_activate ("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL,
                             &ev);
@@ -244,7 +269,11 @@ main (int argc, char *argv[])
 	CORBA_exception_free (&ev);
 
         if (passed == TOTAL_TEST_SCORE) {
-                return 0;
+                if (bonobo_activation_debug_shutdown ()) {
+                        return 0;
+                } else {
+                        return 1;
+                }
         } else {
                 return 1;
         }

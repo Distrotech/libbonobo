@@ -104,7 +104,6 @@ void bonobo_activation_activate_async (const char *requirements,
                 return;
         }
 
-
         /* make the call */
         if (ext_requirements == NULL) {
                 Bonobo_ActivationContext_activate_async (activation_context, 

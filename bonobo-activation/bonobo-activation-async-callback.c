@@ -34,12 +34,11 @@
 /*** App-specific servant structures ***/
 
 typedef struct {
-
-   POA_Bonobo_ActivationCallback servant;
-   PortableServer_POA            poa;
-   BonoboActivationCallback      callback;
-   gpointer                      user_data;
-
+        POA_Bonobo_ActivationCallback servant;
+        PortableServer_POA            poa;
+        BonoboActivationCallback      callback;
+        gpointer                      user_data;
+        CORBA_Object                  objref;
 } impl_POA_Bonobo_ActivationCallback;
 
 
@@ -63,6 +62,8 @@ impl_Bonobo_ActivationCallback__destroy (
         objid = PortableServer_POA_servant_to_id (servant->poa, servant, ev);
         PortableServer_POA_deactivate_object (servant->poa, objid, ev);
         CORBA_free (objid);
+
+        CORBA_Object_release (servant->objref, ev);
 }
 
 static void
@@ -75,10 +76,6 @@ impl_Bonobo_ActivationCallback_report_activation_failed (
         impl_POA_Bonobo_ActivationCallback * servant;
 
         servant = (impl_POA_Bonobo_ActivationCallback *) _servant;
-
-        if (servant->callback == NULL) {
-                return;
-        }
 
         message = g_strconcat ("Activation failed: ", reason, NULL);
         servant->callback (CORBA_OBJECT_NIL, message, servant->user_data);
@@ -100,10 +97,6 @@ impl_Bonobo_ActivationCallback_report_activation_succeeded (
         servant = (impl_POA_Bonobo_ActivationCallback *) _servant;
 
         retval = CORBA_OBJECT_NIL;
-
-        if (servant->callback == NULL) {
-                return;
-        }
 
 	switch (result->res._d) {
 	case Bonobo_ACTIVATION_RESULT_SHLIB:
@@ -175,6 +168,8 @@ bonobo_activation_async_corba_callback_new (BonoboActivationCallback callback,
    PortableServer_POAManager manager;
    CORBA_ORB orb;
 
+   g_return_val_if_fail (callback != NULL, CORBA_OBJECT_NIL);
+
    orb = bonobo_activation_orb_get ();
 
    poa =  (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", ev);
@@ -191,6 +186,11 @@ bonobo_activation_async_corba_callback_new (BonoboActivationCallback callback,
    objid = PortableServer_POA_activate_object(poa, newservant, ev);
    CORBA_free(objid);
    retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   newservant->objref = retval;
+
+   CORBA_Object_release ((CORBA_Object) manager, ev);
+   CORBA_Object_release ((CORBA_Object) poa, ev);
 
    return retval;
 }

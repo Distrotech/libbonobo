@@ -5,7 +5,8 @@
 
 #include <bonobo-activation/bonobo-activation.h>
 
-#define DEBUG_TIME 0
+#define DEBUG_TIMEOUT 2
+#define DEBUG_TIME    1
 
 typedef struct {
         gboolean callback_called;
@@ -13,10 +14,10 @@ typedef struct {
 } callback_data_t;
 
 
-static 
-void test_callback (CORBA_Object   activated_object, 
-                    const char    *error_reason, 
-                    gpointer       user_data)
+static void
+test_callback (CORBA_Object   activated_object, 
+               const char    *error_reason, 
+               gpointer       user_data)
 {
         callback_data_t *data;
 
@@ -25,6 +26,12 @@ void test_callback (CORBA_Object   activated_object,
         if (activated_object == CORBA_OBJECT_NIL) {
                 data->succeeded = FALSE;
         } else {
+                CORBA_Environment ev;
+
+                CORBA_exception_init (&ev);
+                CORBA_Object_release (activated_object, &ev);
+                CORBA_exception_free (&ev);
+
                 data->succeeded = TRUE;
         }
                 
@@ -53,9 +60,9 @@ test_activate (char *requirements)
 #endif
 
         while (data.callback_called == FALSE) {
-                g_main_iteration (TRUE);
+                g_main_iteration (FALSE);
 #if DEBUG_TIME
-                if (time (NULL) > (beg_time + 10)) {
+                if (time (NULL) > (beg_time + DEBUG_TIMEOUT)) {
                         return -1;
                 }
 #endif
@@ -90,9 +97,9 @@ test_activate_from_id (char *aid)
 #endif
 
         while (data.callback_called == FALSE) {
-                g_main_iteration (TRUE);
+                g_main_iteration (FALSE);
 #if DEBUG_TIME
-                if (time (NULL) > (beg_time + 10)) {
+                if (time (NULL) > (beg_time + DEBUG_TIMEOUT)) {
                         return -1;
                 }
 #endif
@@ -167,7 +174,11 @@ main (int argc, char *argv[])
                 return 1;
         }
 
-        return 0;
+        if (bonobo_activation_debug_shutdown ()) {
+                return 0;
+        } else {
+                return 1;
+        }
 }
 
 

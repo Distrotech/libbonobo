@@ -86,5 +86,9 @@ emptydata_DATA=$(serverfiles)
 
 EXTRA_DIST=empty.idl plugin.idl $(serverfiles)
 
-check:
-	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test:$$BONOBO_ACTIVATION_PATH" PATH="$(top_builddir)/test:$$PATH" LD_LIBRARY_PATH="$(top_builddir)/test/.libs:$$LD_LIBRARY_PATH" $(top_builddir)/test/bonobo-activation-test
+TESTS_ENVIRONMENT = \
+	BONOBO_ACTIVATION_PATH="$(top_srcdir)/test:$$BONOBO_ACTIVATION_PATH" \
+	PATH="$(top_builddir)/test:$$PATH" \
+	LD_LIBRARY_PATH="$(top_builddir)/test/.libs:$$LD_LIBRARY_PATH"
+
+TESTS = bonobo-activation-test bonobo-activation-test-async
