@@ -790,7 +790,14 @@ qexp_evaluate_id(OAF_ServerInfo *si, QueryExpr *e, QueryContext *qctx)
 
 		    int i;
 		    retval.type = CONST_STRINGV;
-		    retval.needs_free = TRUE;
+
+		    /* FIXME: Not freeing this freshly consed up
+		       constant leaks memory. But freeing it makes
+		       oafd segfault whenever it encounters a stringv
+		       value of more than 3 items, so I am hacking it
+		       for now. */
+		    /* retval.needs_free = TRUE; */
+
 		    retval.u.v_stringv = g_malloc(av->_u.value_stringv._length + 1);
 		    for (i = 0; i < av->_u.value_stringv._length; i++)
 		      retval.u.v_stringv[i] = g_strdup(av->_u.value_stringv._buffer[i]);
