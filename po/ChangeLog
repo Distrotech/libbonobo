@@ -1,3 +1,8 @@
+2001-08-07  Darin Adler  <darin@bentspoon.com>
+
+	* Makefile.in.in: Removed. The way we use cvs means that we
+	don't want this checked in since it's made by autogen.sh.
+
 2001-08-06  Darin Adler  <darin@bentspoon.com>
 
 	* .cvsignore: New generated file.
