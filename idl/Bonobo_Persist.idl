@@ -22,7 +22,7 @@ module GNOME {
 	 * applications and sometimes by containers.
 	 *
 	 * This allows applications to load and save documents stored
-	 * on disk files.  This is used to bind a linked object.
+	 * in disk files.  This is used to bind a linked object.
 	 */
 	interface PersistFile : Persist {
 
@@ -90,7 +90,7 @@ module GNOME {
 
 		/**
 		 * save:
-		 * @storage: The storage on which to save the state
+		 * @storage: The storage in which to save the state
 		 * of the component
 		 * @same_as_loaded: if TRUE, this means the object
 		 * is being saved to the same source used to load the object
@@ -103,7 +103,7 @@ module GNOME {
 		 * init_new:
 		 * @storage: A storage that is provided for this object
 		 *
-		 * Components do have access to a valid storage trough
+		 * Components do have access to a valid storage through
 		 * their entire life.  This is a chance given to initialize such 
 		 * storage and keep it around (users should addref it).
 		 */
@@ -112,12 +112,12 @@ module GNOME {
 	};
 	
 	/*
-	 * This interface is used by items whose only needs are
-	 * to store information in a Stream (monikers are the primary
-	 * users of this).  
+	 * This interface is used by items which only need to store 
+	 * information in a Stream ( monikers are the primary
+	 * users of this ).  
 	 *
-	 * Unlike PersistStorage, the validity of the Stream passed is
-	 * only valid during these calls (ie, you should not incref these
+	 * Unlike PersistStorage, the Stream passed is only valid
+	 * during these calls (ie, you should not incref these
 	 * and used them after this).
 	 */
 

@@ -109,7 +109,7 @@ interface InPlaceFrame : InPlaceUIWindow {
 	 * 
 	 * Informs the container when the child goes into modal state
 	 * and when it leaves modal state.  This is required to
-	 * disable nevent processing on the containee.
+	 * disable event processing on the containee.
 	 */
 	void modal_state_notify (in boolean state);
 

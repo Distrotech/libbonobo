@@ -1,3 +1,9 @@
+1999-05-27  Michael Meeks  <michael@imaginator.com>
+
+	* idl/gnome-persist.idl: Polish docs.
+
+	* idl/gnome-inplace.idl: typo.
+
 1999-05-26  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
 	* components/text-plain/.cvsignore: added file
