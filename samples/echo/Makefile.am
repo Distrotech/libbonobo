@@ -58,3 +58,5 @@ INCLUDES = 						\
 	-DG_LOG_DOMAIN=\"Echo\"				\
 	-I$(top_srcdir) 				\
 	$(LIBBONOBO_CFLAGS)
+
+CLEANFILES =  $(server_dot_in) $(server_DATA)
