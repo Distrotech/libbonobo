@@ -114,7 +114,7 @@
       Each <sgmltag>oaf_server</sgmltag> entry defines a set of attributes.
       Each attribute has a given <emphasis>name,</emphasis>
       <emphasis>type,</emphasis> and <emphasis>value.</emphasis> The types of the
-      attributes are those defined in the OAF query langage reference
+      attributes are those defined in the Bonobo Activation query langage reference
       (<xref linkend="oaf-query-ref-types"/>).
       Type name should be non-caps.
     </para>

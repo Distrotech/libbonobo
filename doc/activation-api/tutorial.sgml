@@ -82,7 +82,7 @@ CORBA_Object o = bonobo_activation_activate ("repo_ids.has ('IDL:GNOME/Graph/Lay
 
       <para>
       Here follows a very simple-stupid example of what you can do with Bonobo Activation.
-      The complete API description of bonobo activation, the OAF query langage reference and the
+      The complete API description of bonobo activation, the Bonobo Activation query langage reference and the
       <filename>.server</filename> file format reference are included in this 
       document and are recommended readings. Reading <xref linkend="architecture"/> is
       also a good idea.

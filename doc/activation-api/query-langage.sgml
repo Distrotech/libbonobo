@@ -1,19 +1,19 @@
 <chapter id="query-langage">
-<title>OAF Query Langage</title>
+<title>Bonobo Activation Query Langage</title>
 
 <sect1>
-<title>The OAF query langage</title>
+<title>The Bonobo Activation query langage</title>
 <para>
-OAF has a query language used to request components with
-specific properties from the OAF daemon.
-The API call <function>oaf_activate</function> takes a
+Bonobo Activation has a query language used to request components with
+specific properties from the Bonobo Activation daemon.
+The API call <function>bonobo_activation_activate</function> takes a
 <emphasis>requirements</emphasis> parameter which is
 a string containing a specific request in the OAF query 
 langage.
 A simple example is:
 <programlisting>
-CORBA_Object o = oaf_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
-                               NULL, 0, NULL, &amp;ev);
+CORBA_Object o = bonobo_activation_activate ("repo_ids.has ('IDL:GNOME/Graph/Layout:1.0')",
+                                             NULL, 0, NULL, &amp;ev);
 </programlisting>
 This will ask for a component which supports the GNOME/Graph/Lyout:1.0 interface.
 You can also do much more complicated things.

@@ -1,3 +1,8 @@
+2003-06-09  Rodrigo Moya <rodrigo@ximian.com>
+
+	* doc/activation-api/*.sgml: replaced references to OAF
+	with "Bonobo Activation".
+
 2003-06-09  Michael Meeks  <michael@ximian.com>
 
 	* idl/Bonobo_Activation_types.idl: make 'unset' a flags
