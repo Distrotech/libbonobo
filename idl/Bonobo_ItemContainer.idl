@@ -1,6 +1,6 @@
 module Bonobo {
 
-	interface Container : Unknown {
+	interface ItemContainer : Unknown {
 		typedef sequence<Unknown> ObjectList;
 
 		/**
