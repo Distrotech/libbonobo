@@ -61,7 +61,7 @@ emptydata_DATA=$(oaffiles)
 
 bin_SCRIPTS=oaf-slay
 
-EXTRA_DIST=empty.idl $(oaffiles) broken.oafinfo
+EXTRA_DIST=empty.idl $(oaffiles) broken.oafinfo oaf-slay
 
 check:
 	OAF_INFO_PATH="$(top_srcdir)/test:$$OAF_INFO_PATH" PATH="$(top_builddir)/test:$$PATH" $(top_builddir)/test/oaf-test-client
