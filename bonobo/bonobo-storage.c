@@ -163,7 +163,7 @@ init_storage_corba_class (void)
 	gnome_storage_epv.destroy = impl_destroy;
 
 	/* The VEPV */
-	gnome_storage_vepv.GNOME_object_epv = &gnome_object_epv;
+	gnome_storage_vepv.GNOME_obj_epv = &gnome_obj_epv;
 	gnome_storage_vepv.GNOME_Storage_epv = &gnome_storage_epv;
 }
 

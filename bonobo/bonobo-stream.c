@@ -97,7 +97,7 @@ init_stream_corba_class (void)
 	gnome_stream_epv.commit = impl_commit;
 
 	/* The VEPV */
-	gnome_stream_vepv.GNOME_object_epv = &gnome_object_epv;
+	gnome_stream_vepv.GNOME_obj_epv = &gnome_obj_epv;
 	gnome_stream_vepv.GNOME_Stream_epv = &gnome_stream_epv;
 }
 

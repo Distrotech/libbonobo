@@ -1,13 +1,13 @@
 module GNOME {
 
-	interface BindContext : object {
+	interface BindContext : obj {
 		/**
 		 * register_object:
 		 *
 		 * Keeps track of the object withing the
 		 * context.  The object is ref()ed
 		 */
-		void register_object (in object object);
+		void register_object (in obj object);
 		
 		/**
 		 * drop_one_object:
@@ -15,7 +15,7 @@ module GNOME {
 		 *
 		 * Applications usually call drop_objects.
 		 */
-		void drop_one_object (in object object);
+		void drop_one_object (in obj object);
 
 		/**
 		 * drop_objects:
@@ -101,7 +101,7 @@ module GNOME {
 					    
 	};
 
-	interface ParseDisplayName : object {
+	interface ParseDisplayName : obj {
 		Moniker parse_display_name (in Object bind_context,
 					    in string display_name,
 					    out short display_name_bytes_parsed);

@@ -19,8 +19,8 @@ POA_GNOME_Container__epv gnome_container_epv = {
 };
 	
 POA_GNOME_Container__vepv gnome_container_vepv = {
-	&gnome_object_base_epv,
-	&gnome_object_epv,
+	&gnome_obj_base_epv,
+	&gnome_obj_epv,
 	&gnome_container_epv
 };
 

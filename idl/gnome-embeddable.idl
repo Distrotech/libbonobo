@@ -9,7 +9,7 @@
 
 module GNOME {
 
-interface View : GNOME::object {
+interface View : GNOME::obj {
 	typedef unsigned long windowid;
 
 	/**
@@ -30,7 +30,7 @@ interface View : GNOME::object {
 };
 
 /* Equivalent to IOleObject */
-interface Component : GNOME::object {
+interface Component : GNOME::obj {
 
 	typedef long Verb;
 	const Verb PRIMARY = 0; // Action invoked when user double clicks on

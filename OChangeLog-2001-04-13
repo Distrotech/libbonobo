@@ -1,3 +1,26 @@
+1999-05-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* idl/gnome-object.idl, idl/*.idl: Renamed GNOME::object to
+	GNOME::obj to make it complain to the CORBA standard (they do not
+	let use use object in any case-sensitive fashion).
+
+	* bonobo/gtk-interfaces.c: Simplified the code, cleaned up, and
+	address the bug pointed out by Jacob: interfaces were not being
+	propagated to all of the conforming objects, only to the last 2
+	objects being assembled.
+
+	* bonobo/object_test.c (test2): Extended interfaces tests to cover
+	the bug found by Jacob.
+
+	* bonobo/gtk-interfaces.c (gtk_object_query_interface): Use
+	gtk_get_interface here, so that we can do query (A, A) and get A.
+	Thanks to Dietmar for pointing this out.
+
+1999-05-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* bonobo/gnome-storage-fs.c (gnome_storage_fs_get_type): use
+	initialization class.
+
 1999-05-14  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* bonobo/gnome-stream-fs.c (fs_write): small fix 

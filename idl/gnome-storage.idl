@@ -15,7 +15,7 @@
 
 module GNOME {
 
-	interface Stream : object {
+	interface Stream : obj {
 		typedef sequence<octet> iobuf;
 
 		/**
@@ -82,7 +82,7 @@ module GNOME {
 		 */
 	};
 
-	interface Storage : object {
+	interface Storage : obj {
 		
 		typedef long OpenMode;
 		const OpenMode READ  = 1;

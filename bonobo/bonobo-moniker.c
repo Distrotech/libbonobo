@@ -96,7 +96,7 @@ init_moniker_corba_class (void)
 	gnome_moniker_epv.parse_display_name = impl_parse_display_name;
 		
 	/* Now the Vepv */
-	gnome_moniker_vepv.GNOME_object_epv = &gnome_object_epv;
+	gnome_moniker_vepv.GNOME_obj_epv = &gnome_obj_epv;
 	gnome_moniker_vepv.GNOME_Persist_epv = &gnome_persist_epv;
 	gnome_moniker_vepv.GNOME_PersistStream_epv = &gnome_persist_stream_epv;
 	gnome_moniker_vepv.GNOME_Moniker_epv = &gnome_moniker_epv;

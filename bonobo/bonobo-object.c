@@ -76,15 +76,15 @@ gnome_object_drop_binding (GnomeObject *object)
 }
 
 static void
-impl_GNOME_object__destroy (PortableServer_Servant servant, CORBA_Environment *ev)
+impl_GNOME_obj__destroy (PortableServer_Servant servant, CORBA_Environment *ev)
 {
-	POA_GNOME_object__fini ((POA_GNOME_object *)servant, ev);
+	POA_GNOME_obj__fini ((POA_GNOME_obj *)servant, ev);
 	gnome_object_drop_binding_by_servant (servant);
 	g_free (servant);
 }
 
 static void
-impl_GNOME_object_ref (PortableServer_Servant servant, CORBA_Environment *ev)
+impl_GNOME_obj_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	GnomeObject *object;
 
@@ -93,7 +93,7 @@ impl_GNOME_object_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 static void
-impl_GNOME_object_unref (PortableServer_Servant servant, CORBA_Environment *ev)
+impl_GNOME_obj_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	GnomeObject *object;
 
@@ -102,9 +102,9 @@ impl_GNOME_object_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 }
 
 static CORBA_Object
-impl_GNOME_object_query_interface (PortableServer_Servant servant,
-				   const CORBA_char *repoid,
-				   CORBA_Environment *ev)
+impl_GNOME_obj_query_interface (PortableServer_Servant servant,
+				const CORBA_char *repoid,
+				CORBA_Environment *ev)
 {
 	CORBA_Object retval;
 	GnomeObject *object;
@@ -136,24 +136,24 @@ impl_GNOME_object_query_interface (PortableServer_Servant servant,
 	return CORBA_OBJECT_NIL;
 }
 
-PortableServer_ServantBase__epv gnome_object_base_epv =
+PortableServer_ServantBase__epv gnome_obj_base_epv =
 {
 	NULL,			/* _private data */
-	&impl_GNOME_object__destroy,	/* finalize routine */
+	&impl_GNOME_obj__destroy,	/* finalize routine */
 	NULL,			/* default_POA routine */
 };
 
-POA_GNOME_object__epv gnome_object_epv =
+POA_GNOME_obj__epv gnome_obj_epv =
 {
 	NULL,			/* _private */
-	&impl_GNOME_object_ref,
-	&impl_GNOME_object_unref,
-	&impl_GNOME_object_query_interface,
+	&impl_GNOME_obj_ref,
+	&impl_GNOME_obj_unref,
+	&impl_GNOME_obj_query_interface,
 };
 
-POA_GNOME_object__vepv gnome_object_vepv = {
-	&gnome_object_base_epv,
-	&gnome_object_epv
+POA_GNOME_obj__vepv gnome_obj_vepv = {
+	&gnome_obj_base_epv,
+	&gnome_obj_epv
 };
 
 static void
@@ -213,7 +213,7 @@ gnome_object_get_type (void)
 
 	if (!type){
 		GtkTypeInfo info = {
-			"IDL:GNOME/object:1.0",
+			"IDL:GNOME/obj:1.0",
 			sizeof (GnomeObject),
 			sizeof (GnomeObjectClass),
 			(GtkClassInitFunc) gnome_object_class_init,

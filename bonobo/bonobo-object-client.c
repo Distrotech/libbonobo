@@ -98,7 +98,7 @@ gnome_object_client_destroy (GtkObject *object)
 	GnomeObject *gnome_object = GNOME_OBJECT (object);
 	GnomeObjectClient *gnome_object_client = GNOME_OBJECT_CLIENT (object);
 
-	GNOME_object_unref (gnome_object->object, &gnome_object->ev);
+	GNOME_obj_unref (gnome_object->object, &gnome_object->ev);
 	GTK_OBJECT_CLASS (gnome_object_client_parent_class)->destroy (object);
 }
 

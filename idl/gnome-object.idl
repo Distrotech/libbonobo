@@ -1,5 +1,5 @@
 module GNOME {
-	interface object {
+	interface obj {
 		oneway void ref ();
 		oneway void unref ();
 		Object query_interface (in string repoid);

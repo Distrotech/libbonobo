@@ -45,9 +45,9 @@ CORBA_Object gnome_object_activate_servant (GnomeObject *object,
 					    void *servant);
 
 /* CORBA defaults we provide */
-extern PortableServer_ServantBase__epv gnome_object_base_epv;
-extern POA_GNOME_object__epv           gnome_object_epv;
-extern POA_GNOME_object__vepv          gnome_object_vepv;
+extern PortableServer_ServantBase__epv gnome_obj_base_epv;
+extern POA_GNOME_obj__epv           gnome_obj_epv;
+extern POA_GNOME_obj__vepv          gnome_obj_vepv;
 
 END_GNOME_DECLS
 
