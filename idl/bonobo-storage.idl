@@ -32,7 +32,7 @@ module GNOME {
 		 *
 		 * writes the buffer to this stream.
 		 */
-		long write    (in long count, in iobuf buffer);
+		long write    (in iobuf buffer);
 
 		/**
 		 * seek:
@@ -41,7 +41,7 @@ module GNOME {
 		 *
 		 * Sets the read/write pointer to @offset (relative to @whence)
 		 */
-		void seek     (in long offset, in long whence);
+		long seek     (in long offset, in long whence);
 
 		/**
 		 * truncate:
@@ -65,11 +65,34 @@ module GNOME {
 			       inout long read, inout long written);
 
 		/**
-		 * commit;
+		 * commit:
 		 *
 		 * Commits any pending changes to the Storage
 		 */
 		void commit ();
+
+		/**
+		 * close:
+		 *
+		 * Close the Stream
+		 */
+		void close ();
+
+		/**
+		 * eos:
+		 *
+		 * End of Stream
+		 */
+
+		boolean eos ();
+
+		/**
+		 * length:
+		 *
+		 * Returns the length of the stream
+		 */
+
+		long length ();
 
 		/**
 		 * lock_region:
@@ -177,13 +200,13 @@ module GNOME {
 
 	
 		/**
-		 * destroy:
-		 * @path: path to the element to destroy.
+		 * delete:
+		 * @path: path to the element to delete.
 		 * 
 		 * Destroys the element pointed to by @path.  The element
 		 * can be a Storage or a Stream.
 		 */
-		void destroy (in string path)
+		void delete (in string path)
 			raises (NotFound);
 	};
 };

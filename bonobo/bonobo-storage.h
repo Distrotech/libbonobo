@@ -46,7 +46,7 @@ typedef struct {
 	             (*list_contents)   (GnomeStorage *storage,
 					 const CORBA_char *path,
 					 CORBA_Environment *ev);
-	void         (*destroy)         (GnomeStorage *storage,
+	void         (*delete)          (GnomeStorage *storage,
 					 const CORBA_char *path,
 					 CORBA_Environment *ev);
 } GnomeStorageClass;

@@ -39,29 +39,29 @@ mem_truncate (GnomeStream *stream,
 }
 
 static CORBA_long
-mem_write (GnomeStream *stream, CORBA_long count,
-	   const GNOME_Stream_iobuf *buffer,
+mem_write (GnomeStream *stream, const GNOME_Stream_iobuf *buffer,
 	   CORBA_Environment *ev)
 {
 	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
+	long len = buffer->_length;
 
 	if (smem->read_only){
 		g_warning ("Should signal an exception here");
 		return 0;
 	}
 
-	if (smem->pos + count > smem->size){
-		mem_truncate (stream, smem->pos + count, ev);
+	if (smem->pos + len > smem->size){
+		mem_truncate (stream, smem->pos + len, ev);
 		g_warning ("Should check for an exception here");
 	}
 
-	if (smem->pos + count > smem->size)
-		count = smem->size - smem->pos;
+	if (smem->pos + len > smem->size)
+		len = smem->size - smem->pos;
 	
-	memcpy (smem->buffer, buffer, count);
-	smem->pos += count;
+	memcpy (smem->buffer, buffer->_buffer, len);
+	smem->pos += len;
 		
-	return count;
+	return len;
 }
 
 static CORBA_long
@@ -87,7 +87,7 @@ mem_read (GnomeStream *stream, CORBA_long count,
 	return count;
 }
 
-static void
+static CORBA_long
 mem_seek (GnomeStream *stream,
 	  CORBA_long offset, CORBA_long whence,
 	  CORBA_Environment *ev)
@@ -116,7 +116,7 @@ mem_seek (GnomeStream *stream,
 		mem_truncate (stream, pos, ev);
 	}
 	smem->pos = pos;
-	return;
+	return pos;
 }
 
 static void
