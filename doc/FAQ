@@ -2,7 +2,7 @@ The Bonobo FAQ
 Miguel de Icaza (miguel@helixcode.com)
 
 This is a work in progress.  Please mail me before making any changes
-here
+to this document.
 
 @Q: What is Bonobo?
 
@@ -158,8 +158,9 @@ basic features of the control without creating an idl interface.
 container of Controls. The BonoboWidget is a normal GtkWidget that can
 be inserted into a GtkContainer.
 
-@Q: What is a Property?
+@Q: What is a PropertyBag, What is a Property?
 
+	
 @Q: What are the activation methods in Bonobo?
 
 @Q: Does Bonobo support in-proc components?
@@ -488,3 +489,30 @@ General:
 Tips and Hints:
 
 	Designing interfaces: local vs remote.  Just enough encapsulation.
+
+@Q: Aren't Monikers just a re-implementation of the GNOME VFS?  Why not use the GNOME VFS?
+
+	For a storage backend you can always use something like
+	bonobo_storage_new ("gnome-vfs") and get away with life.
+	
+	The main difference between the gnome-vfs, and monikers is
+	that monikers are used to implement an object-based name
+	space, while the gnome-vfs is a fine abstraction for naming
+	files and directories.  The moniker space goes well beyond
+	this.
+	
+	When Ettore, Nat and I designed the GNOME VFS in Paris Ettore
+	had a grander vision than Nat and I had.  Nat and I wanted
+	exactly what the GNOME VFS is: an asyncronous, pluggable
+	virtual file system implementation.  Ettore wanted something
+	more general, something that would implement an object name
+	space.  And some of the design decisions in the core of the
+	gnome-vfs reflect some of this thinking, but the API and the
+	infrastructure was limited to handling files.
+	
+	Various months later, we finally understood completely the
+	moniker system, and we realized that monikers were an object
+	naming space, and that if done correctly monikers would be
+	able to implement Ettore's initial vision for having an
+	object-based naming space.
+
