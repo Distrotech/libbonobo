@@ -394,8 +394,6 @@ bonobo_activation_orb_init (int *argc, char **argv)
 	CORBA_Environment ev;
 	const char *hostname;
         const char *display;
-	const char *audiodev;
-	const char *session_manager;
 
 #ifndef ORBIT_USES_GLIB_MAIN_LOOP
 	IIOPAddConnectionHandler = orb_add_connection;
@@ -428,14 +426,6 @@ bonobo_activation_orb_init (int *argc, char **argv)
                 CORBA_Context_set_one_value (bonobo_activation_context, "display",
                                              (char *) display, &ev);
         }
-
-	if ((session_manager = g_getenv ("SESSION_MANAGER")))
-		CORBA_Context_set_one_value (bonobo_activation_context, "session_manager",
-					     (char *) session_manager, &ev);
-
-	if ((audiodev = g_getenv ("AUDIODEV")))
-		CORBA_Context_set_one_value (bonobo_activation_context, "audiodev",
-					     (char *) audiodev, &ev);
 
 	CORBA_exception_free (&ev);
 

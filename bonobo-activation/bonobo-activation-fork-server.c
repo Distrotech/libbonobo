@@ -61,7 +61,7 @@ typedef struct {
 	FILE *fh;
 
         /* For list compares */
-        char *display;
+        const char *display;
         const char *act_iid;
         const char *exename;
         BonoboForkReCheckFn re_check;
@@ -219,52 +219,12 @@ bonobo_activation_setenv (const char *name, const char *value)
 #endif
 }
 
-static char *
-get_one_context_value (CORBA_Context  ctx,
-		       const char    *propname)
-{
-	CORBA_Environment  env;
-	CORBA_NVList       nvout;
-	char              *retval = NULL;
-	int                i;
-
-	if (!ctx)
-		return NULL;
-
-	CORBA_exception_init (&env);
-
-        CORBA_Context_get_values (ctx, NULL, 0, (char *) propname, &nvout, &env);
-
-        if (env._major != CORBA_NO_EXCEPTION) {
-		CORBA_exception_free (&env);
-		return NULL;
-	}
-
-	g_assert (nvout != NULL && nvout->list != NULL);
-
-	for (i = 0; i < nvout->list->len; i++) {
-		CORBA_NamedValue *nv;
-
-		nv = &g_array_index (nvout->list, CORBA_NamedValue, i);
-		if (!strcmp (nv->name, propname)) {
-			retval = g_strdup (*(char **) nv->argument._value);
-			break;
-		}
-	}
-
-	CORBA_NVList_free (nvout, &env);
-
-	CORBA_exception_free (&env);
-
-	return retval;
-}
-
 CORBA_Object
 bonobo_activation_server_by_forking (
         const char       **cmd,
         gboolean           set_process_group,
         int                fd_arg, 
-        CORBA_Context      ctx,
+        const char        *display,
         const char        *od_iorstr,
         const char        *act_iid,
         BonoboForkReCheckFn re_check,
@@ -282,17 +242,10 @@ bonobo_activation_server_by_forking (
         sigset_t mask, omask;
         int parent_pid;
         static GSList *running_activations = NULL;
-	char *display;
-	char *session_manager;
-	char *audiodev;
 
         g_return_val_if_fail (cmd != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (cmd [0] != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (act_iid != NULL, CORBA_OBJECT_NIL);
-
-	display         = get_one_context_value (ctx, "DISPLAY");
-	audiodev        = get_one_context_value (ctx, "AUDIODEV");
-	session_manager = get_one_context_value (ctx, "SESSION_MANAGER");
 
         ai.display = display;
         ai.act_iid = act_iid;
@@ -396,13 +349,9 @@ bonobo_activation_server_by_forking (
 	} else if ((childpid = fork ())) {
 		_exit (0);	/* de-zombifier process, just exit */
 	} else {
-		if (display)
-			bonobo_activation_setenv ("DISPLAY", display);
-		if (session_manager)
-			bonobo_activation_setenv ("SESSION_MANAGER", session_manager);
-		if (audiodev)
-			bonobo_activation_setenv ("AUDIODEV", audiodev);
-
+                if (display != NULL) {
+                        bonobo_activation_setenv ("DISPLAY", display);
+                }
 		if (od_iorstr != NULL) {
                         /* FIXME: remove this - it is actually not used at all...
                          * and it's just wasteful having it here */
@@ -438,10 +387,6 @@ bonobo_activation_server_by_forking (
                          errno, g_strerror (errno));
 		_exit (1);
 	}
-
-	g_free (display);
-	g_free (session_manager);
-	g_free (audiodev);
 
 	return retval;
 }

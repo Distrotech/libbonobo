@@ -68,15 +68,13 @@ module Bonobo {
                                            in Bonobo::StringList selection_order,
                                            in ActivationFlags flags)
                         raises (Bonobo::Activation::ParseFailed, Bonobo::Activation::IncompleteContext, Bonobo::GeneralError)
-                        context ("username", "hostname", "domain",
-                                 "display", "session_manager", "audiodev");
+                        context ("username", "hostname", "domain", "display");
 
                 oneway void activate_async (in string requirements,
                                             in Bonobo::StringList selection_order,
                                             in ActivationFlags flags,
                                             in ActivationCallback callback_object)
-                        context ("username", "hostname", "domain",
-                                 "display", "session_manager", "audiodev");
+                        context ("username", "hostname", "domain", "display");
 
 
 
@@ -88,14 +86,12 @@ module Bonobo {
 
                 ActivationResult activate_from_id (in ActivationID aid, in ActivationFlags flags)
                         raises (Bonobo::Activation::ParseFailed, Bonobo::Activation::IncompleteContext, Bonobo::GeneralError)
-                        context ("username", "hostname", "domain",
-                                 "display", "session_manager", "audiodev");
+                        context ("username", "hostname", "domain", "display");
 
                 oneway void activate_from_id_async (in ActivationID aid, 
                                                     in ActivationFlags flags,
                                                     in ActivationCallback callback_object)
-                        context ("username", "hostname", "domain",
-                                 "display", "session_manager", "audiodev");
+                        context ("username", "hostname", "domain", "display");
 
         };
 };

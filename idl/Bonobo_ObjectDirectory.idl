@@ -70,8 +70,7 @@ module Bonobo {
                 Object activate (in ImplementationID  iid,
                                  in ActivationContext ac,
                                  in ActivationFlags   flags)
-                        context ("username", "hostname", "domain",
-                                 "display", "session_manager", "audiodev");
+                        context ("username", "hostname", "domain", "display");
 
                 RegistrationResult register_new (in ImplementationID iid,
                                                  in Object           obj);

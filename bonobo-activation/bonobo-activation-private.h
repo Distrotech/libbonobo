@@ -41,7 +41,7 @@ typedef CORBA_Object (*BonoboForkReCheckFn)           (const char        *displa
 CORBA_Object bonobo_activation_server_by_forking      (const char       **cmd, 
                                                        gboolean           set_process_group,
                                                        int                fd_arg,
-                                                       CORBA_Context      ctx,
+                                                       const char        *display,
                                                        const char        *od_iorstr,
                                                        const char        *act_iid,
                                                        BonoboForkReCheckFn re_check,
