@@ -1,3 +1,7 @@
+2001-08-10  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-arg.h: bracket protect arg in GET/SET macros.
+
 2001-08-09 Dirk-Jan C. Binnema <djcb@djcbsoftware.nl>
 
 	* bonobo/bonobo-moniker.c (bonobo_moniker_get_name_escaped):

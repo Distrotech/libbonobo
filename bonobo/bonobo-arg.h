@@ -31,12 +31,12 @@ typedef CORBA_TypeCode BonoboArgType;
 
 #ifdef __GNUC__
 #	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
-					          *((t *)(a->_value)))
+					          *((t *)((a)->_value)))
 #	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
-					          *((t *)(a->_value)) = (t)(v))
+					          *((t *)((a)->_value)) = (t)(v))
 #else
-#	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (*((t *)(a->_value)))
-#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (*((t *)(a->_value)) = (v))
+#	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (*((t *)((a)->_value)))
+#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (*((t *)((a)->_value)) = (v))
 #endif
 
 #define BONOBO_ARG_GET_BOOLEAN(a)   (BONOBO_ARG_GET_GENERAL (a, TC_CORBA_boolean, CORBA_boolean, NULL))
