@@ -65,6 +65,8 @@ BonoboArg    *bonobo_arg_copy          (BonoboArg    *arg);
 void          bonobo_arg_from_gtk      (BonoboArg    *a, const GtkArg       *arg);
 BonoboArgType bonobo_arg_type_from_gtk (GtkType       t);
 void          bonobo_arg_to_gtk        (GtkArg       *a, const BonoboArg    *arg);
+GtkType       bonobo_arg_type_to_gtk   (BonoboArgType id);
+
 
 gboolean      bonobo_arg_type_is_equal (BonoboArgType a, BonoboArgType b,
 					CORBA_Environment *opt_ev);

@@ -94,6 +94,40 @@ bonobo_arg_type_from_gtk (GtkType id)
 	return NULL;
 }
 
+GtkType
+bonobo_arg_type_to_gtk (BonoboArgType id)
+{
+	CORBA_Environment ev;
+	GtkType gtk_type = GTK_TYPE_NONE;
+
+	CORBA_exception_init (&ev);
+
+	if (bonobo_arg_type_is_equal (TC_char, id, &ev))
+		gtk_type = GTK_TYPE_CHAR;
+	else if (bonobo_arg_type_is_equal (TC_boolean, id, &ev))
+		gtk_type = GTK_TYPE_BOOL;
+	else if (bonobo_arg_type_is_equal (TC_short,   id, &ev))
+		gtk_type = GTK_TYPE_INT;
+	else if (bonobo_arg_type_is_equal (TC_ushort,  id, &ev))
+		gtk_type = GTK_TYPE_UINT;
+	else if (bonobo_arg_type_is_equal (TC_long,    id, &ev))
+		gtk_type = GTK_TYPE_LONG;
+	else if (bonobo_arg_type_is_equal (TC_ulong,   id, &ev))
+		gtk_type = GTK_TYPE_ULONG;
+	else if (bonobo_arg_type_is_equal (TC_float,   id, &ev))
+		gtk_type = GTK_TYPE_FLOAT;
+	else if (bonobo_arg_type_is_equal (TC_double,  id, &ev))
+		gtk_type = GTK_TYPE_DOUBLE;
+	else if (bonobo_arg_type_is_equal (TC_string,  id, &ev))
+		gtk_type = GTK_TYPE_STRING;
+	else
+		g_warning ("Unmapped bonobo arg type");
+
+	CORBA_exception_free (&ev);
+
+	return gtk_type;
+}
+
 #define MAKE_FROM_GTK_CASE(gtktype,tcid,unionid,corbatype,corbakind)			\
 	case GTK_TYPE_##gtktype:							\
 		*((corbatype *)a->_value) = (corbatype)GTK_VALUE_##gtktype(*arg);	\
