@@ -1,20 +1,20 @@
 # libbonobo sk.po
-# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
 # Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000,2001,2002,2003.
-# Marcel Telka <marcel@telka.sk>, 2001, 2002, 2003.
+# Marcel Telka <marcel@telka.sk>, 2001, 2002, 2003, 2004.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2004-01-15 15:40+0000\n"
-"PO-Revision-Date: 2003-12-24 19:42+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-28 22:03+0100\n"
+"PO-Revision-Date: 2004-01-28 22:08+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -121,12 +121,12 @@ msgstr "Vlastnosť '%s' nemá hodnotu"
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Nepodarilo sa analyzovať zlý formát XML dokumentu %s"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "Skúšam priečinok %s"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
@@ -179,7 +179,7 @@ msgstr "aktivovať IID"
 msgid "Prevent registering of server with OAF"
 msgstr "Zabrániť registrácii serveru v OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:282
+#: bonobo-activation/bonobo-activation-init.c:283
 msgid "Bonobo activation options"
 msgstr "Možnosti aktivácie bonobo"
 
