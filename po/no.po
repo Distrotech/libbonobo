@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 0.1\n"
-"POT-Creation-Date: 2001-08-11 22:44+0200\n"
-"PO-Revision-Date: 2001-08-11 22:45+0200\n"
+"POT-Creation-Date: 2001-08-11 22:46+0200\n"
+"PO-Revision-Date: 2001-08-11 22:47+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -101,27 +101,39 @@ msgstr "stream ikke funnet"
 msgid "property not found"
 msgstr "egenskap ikke funnet"
 
-#: bonobo/bonobo-exception.c:227
+#: bonobo/bonobo-exception.c:226
+msgid "property has invalid type"
+msgstr "egenskapen har en ugyldig type"
+
+#: bonobo/bonobo-exception.c:229
+msgid "property is read only"
+msgstr "egenskapen er skrivebeskyttet"
+
+#: bonobo/bonobo-exception.c:232
+msgid "config database backend failed "
+msgstr "feil i undersystemet for konfigurasjonsdatabasen"
+
+#: bonobo/bonobo-exception.c:236
 msgid "Moniker interface cannot be found"
 msgstr "Moniker-grensesnitt kan ikke finnes"
 
-#: bonobo/bonobo-exception.c:230
+#: bonobo/bonobo-exception.c:239
 msgid "Moniker activation timed out"
 msgstr "Tidsavbrudd for moniker-aktivering"
 
-#: bonobo/bonobo-exception.c:233
+#: bonobo/bonobo-exception.c:242
 msgid "Syntax error within moniker"
 msgstr "Syntaksfeil i moniker"
 
-#: bonobo/bonobo-exception.c:236
+#: bonobo/bonobo-exception.c:245
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker har ukjent moniker-prefiks"
 
-#: bonobo/bonobo-exception.c:260
+#: bonobo/bonobo-exception.c:269
 msgid "Error checking error; no exception"
 msgstr "Feil i feilsjekking; ingen unntak"
 
-#: bonobo/bonobo-exception.c:269
+#: bonobo/bonobo-exception.c:278
 msgid "General activation error with no description"
 msgstr "Generell feil under aktivering uten beskrivelse"
 
