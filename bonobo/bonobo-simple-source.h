@@ -13,7 +13,7 @@
 
 #include <bonobo/bonobo-object.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #define GNOME_SIMPLE_DATA_SOURCE_TYPE        (gnome_simple_data_source_get_type ())
 #define GNOME_SIMPLE_DATA_SOURCE(o)          (GTK_CHECK_CAST ((o), GNOME_SIMPLE_DATA_SOURCE_TYPE, GnomeSimpleDataSource))
@@ -77,7 +77,7 @@ GnomeSimpleDataSource *gnome_simple_data_source_construct	(GnomeSimpleDataSource
 								 void *closure);
 							       
 extern POA_GNOME_SimpleDataSource__epv gnome_simple_data_source_epv;
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _GNOME_SIMPLE_DATA_SOURCE_H_ */
 

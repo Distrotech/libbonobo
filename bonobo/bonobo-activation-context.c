@@ -15,7 +15,7 @@
 #include <bonobo/bonobo-moniker-extender.h>
 #include <bonobo/bonobo-activation-context.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static Bonobo_Moniker
 impl_Bonobo_ActivationContext_createWithParent (PortableServer_Servant servant,
@@ -72,7 +72,7 @@ bonobo_activation_context_init (GObject *object)
 }
 
 static
-BONOBO_X_TYPE_FUNC_FULL (BonoboActivationContext,
+BONOBO_TYPE_FUNC_FULL (BonoboActivationContext,
 			 Bonobo_ActivationContext,
 			 PARENT_TYPE,
 			 bonobo_activation_context);

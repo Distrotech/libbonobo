@@ -10,27 +10,27 @@
 #ifndef _BONOBO_ACTIVATION_CONTEXT_H_
 #define _BONOBO_ACTIVATION_CONTEXT_H_
 
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 typedef struct _BonoboActivationContextPrivate BonoboActivationContextPrivate;
 
 typedef struct {
-	BonoboXObject parent;
+	BonoboObject parent;
 
 	BonoboActivationContextPrivate *priv;
 } BonoboActivationContext;
 
 typedef struct {
-	BonoboXObjectClass parent;
+	BonoboObjectClass parent;
 
 	POA_Bonobo_ActivationContext__epv epv;
 } BonoboActivationContextClass;
 
 BonoboObject *bonobo_activation_context_new (void);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_ACTIVATION_CONTEXT_H_ */
 

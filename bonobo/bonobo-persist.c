@@ -12,7 +12,7 @@
 #include <gobject/gmarshal.h>
 #include <bonobo/bonobo-persist.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 /* Parent GTK object class */
 static GObjectClass *bonobo_persist_parent_class;
@@ -60,7 +60,7 @@ bonobo_persist_init (GObject *object)
 	/* nothing to do */
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboPersist, 
+BONOBO_TYPE_FUNC_FULL (BonoboPersist, 
 			   Bonobo_Persist,
 			   PARENT_TYPE,
 			   bonobo_persist);

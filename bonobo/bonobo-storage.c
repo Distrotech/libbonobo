@@ -15,7 +15,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-storage-plugin.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 #define CLASS(o) BONOBO_STORAGE_CLASS (G_OBJECT_GET_CLASS (o))
 
@@ -169,7 +169,7 @@ bonobo_storage_init (GObject *object)
 	/* nothing to do */
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboStorage, 
+BONOBO_TYPE_FUNC_FULL (BonoboStorage, 
 			 Bonobo_Storage,
 			 PARENT_TYPE,
 			 bonobo_storage);

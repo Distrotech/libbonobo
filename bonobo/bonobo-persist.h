@@ -10,9 +10,9 @@
 #ifndef _BONOBO_PERSIST_H_
 #define _BONOBO_PERSIST_H_
 
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #define BONOBO_PERSIST_TYPE        (bonobo_persist_get_type ())
 #define BONOBO_PERSIST(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_TYPE, BonoboPersist))
@@ -23,13 +23,13 @@ BEGIN_BONOBO_DECLS
 typedef struct _BonoboPersistPrivate BonoboPersistPrivate;
 
 typedef struct {
-	BonoboXObject object;
+	BonoboObject object;
 
 	BonoboPersistPrivate *priv;
 } BonoboPersist;
 
 typedef struct {
-	BonoboXObjectClass      parent_class;
+	BonoboObjectClass      parent_class;
 
 	POA_Bonobo_Persist__epv epv;
 
@@ -43,6 +43,6 @@ GType                         bonobo_persist_get_type               (void);
 Bonobo_Persist_ContentTypeList *bonobo_persist_generate_content_types (int num,
 								       ...);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_PERSIST_H_ */

@@ -11,12 +11,12 @@
 #ifndef _BONOBO_ITEM_CONTAINER_H_
 #define _BONOBO_ITEM_CONTAINER_H_
 
-#include <bonobo/bonobo-defs.h>
+
 #include <gobject/gobject.h>
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-moniker.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
  
 #define BONOBO_ITEM_CONTAINER_TYPE        (bonobo_item_container_get_type ())
 #define BONOBO_ITEM_CONTAINER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_ITEM_CONTAINER_TYPE, BonoboItemContainer))
@@ -29,13 +29,13 @@ typedef GList BonoboClientSiteList;
 typedef struct _BonoboItemContainerPrivate BonoboItemContainerPrivate;
 
 typedef struct {
-	BonoboXObject base;
+	BonoboObject base;
 
 	BonoboItemContainerPrivate *priv;
 } BonoboItemContainer;
 
 typedef struct {
-	BonoboXObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	POA_Bonobo_ItemContainer__epv epv;
 
@@ -55,7 +55,7 @@ void                 bonobo_item_container_add            (BonoboItemContainer *
 void                 bonobo_item_container_remove_by_name (BonoboItemContainer *container,
 							   const char          *name);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif
 

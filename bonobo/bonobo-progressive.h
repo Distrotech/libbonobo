@@ -10,9 +10,9 @@
 #ifndef _BONOBO_PROGRESSIVE_DATA_SINK_H_
 #define _BONOBO_PROGRESSIVE_DATA_SINK_H_
 
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #define BONOBO_PROGRESSIVE_DATA_SINK_TYPE        (bonobo_progressive_data_sink_get_type ())
 #define BONOBO_PROGRESSIVE_DATA_SINK(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PROGRESSIVE_DATA_SINK_TYPE, BonoboProgressiveDataSink))
@@ -37,7 +37,7 @@ typedef int (*BonoboProgressiveDataSinkSetSizeFn) (BonoboProgressiveDataSink *ps
 						  const CORBA_long count, void *closure);
 
 struct _BonoboProgressiveDataSink {
-	BonoboXObject object;
+	BonoboObject object;
 
 	/*
 	 * These are the callbacks the user can set.  If we use the
@@ -54,7 +54,7 @@ struct _BonoboProgressiveDataSink {
 };
 
 typedef struct {
-	BonoboXObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	POA_Bonobo_ProgressiveDataSink__epv epv;
 
@@ -83,7 +83,7 @@ BonoboProgressiveDataSink *bonobo_progressive_data_sink_construct       (BonoboP
 									 BonoboProgressiveDataSinkSetSizeFn set_size_fn,
 									 void                              *closure);
 							       
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_PROGRESSIVE_DATA_SINK_H_ */
 

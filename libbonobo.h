@@ -8,12 +8,12 @@
  *
  * Copyright 2001 Ximian, Inc.
  */
-#ifndef LIBBONOBO_H
-#define LIBBONOBO_H 1
+#ifndef __LIBBONOBO_H__
+#define __LIBBONOBO_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <gmacros.h>
+
+G_BEGIN_DECLS
 
 #include <liboaf/liboaf.h>
 
@@ -46,8 +46,6 @@ extern "C" {
 #include <bonobo/bonobo-progressive.h>
 #include <bonobo/bonobo-storage.h>
 
-#ifdef __cplusplus
-}
-#endif
+G_END_DECLS
 
-#endif /* LIBBONOBO_H */
+#endif /* __LIBBONOBO_H__ */

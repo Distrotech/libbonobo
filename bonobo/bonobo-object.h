@@ -11,11 +11,11 @@
 #ifndef _BONOBO_OBJECT_H_
 #define _BONOBO_OBJECT_H_
 
-#include <bonobo/bonobo-defs.h>
+#include <gmacros.h>
 #include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #undef BONOBO_OBJECT_DEBUG
  
@@ -142,8 +142,59 @@ gboolean       bonobo_type_setup  (GType             type,
 				   BonoboObjectPOAFn init_fn,
 				   BonoboObjectPOAFn fini_fn,
 				   int               epv_struct_offset);
-						
 
-END_BONOBO_DECLS
+#define BONOBO_TYPE_FUNC_FULL(class_name, corba_name, parent, prefix)         \
+GType                                                                         \
+prefix##_get_type (void)                                                      \
+{                                                                             \
+	GType ptype;                                                          \
+	static GType type = 0;                                                \
+                                                                              \
+	if (type == 0) {                                                      \
+		static GTypeInfo info = {                                     \
+			sizeof (class_name##Class),                           \
+			(GBaseInitFunc) NULL,                                 \
+			(GBaseFinalizeFunc) NULL,                             \
+			(GClassInitFunc) prefix##_class_init,                 \
+			NULL, NULL,                                           \
+			sizeof (class_name),                                  \
+			0,                                                    \
+			(GInstanceInitFunc) prefix##_init                     \
+		};                                                            \
+		ptype = (parent);                                             \
+		type = bonobo_type_unique (ptype,                             \
+			POA_##corba_name##__init, POA_##corba_name##__fini,   \
+			G_STRUCT_OFFSET (class_name##Class, epv),             \
+			&info, #class_name);                                  \
+	}                                                                     \
+	return type;                                                          \
+}
+ 
+#define BONOBO_TYPE_FUNC(class_name, parent, prefix)                        \
+GType                                                                         \
+prefix##_get_type (void)                                                      \
+{                                                                             \
+	GType ptype;                                                          \
+	static GType type = 0;                                                \
+                                                                              \
+	if (type == 0) {                                                      \
+		static GTypeInfo info = {                                     \
+			sizeof (class_name##Class),                           \
+			(GBaseInitFunc) NULL,                                 \
+			(GBaseFinalizeFunc) NULL,                             \
+			(GClassInitFunc) prefix##_class_init,                 \
+			NULL, NULL,                                           \
+			sizeof (class_name),                                  \
+			0,                                                    \
+			(GInstanceInitFunc) prefix##_init                     \
+		};                                                            \
+		ptype = (parent);                                             \
+		type = bonobo_type_unique (ptype, NULL, NULL, 0,              \
+				           &info, #class_name);               \
+	}                                                                     \
+	return type;                                                          \
+}
+
+G_END_DECLS
 
 #endif

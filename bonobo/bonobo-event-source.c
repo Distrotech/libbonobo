@@ -17,7 +17,7 @@
 #include <bonobo/bonobo-running-context.h>
 #include <time.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static GObjectClass *bonobo_event_source_parent_class;
 
@@ -276,7 +276,7 @@ bonobo_event_source_init (GObject *object)
 	event_source->priv->listeners = NULL;
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboEventSource, 
+BONOBO_TYPE_FUNC_FULL (BonoboEventSource, 
 			   Bonobo_EventSource,
 			   PARENT_TYPE,
 			   bonobo_event_source);

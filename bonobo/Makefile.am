@@ -102,9 +102,7 @@ libbonoboinclude_HEADERS =		\
 	bonobo-stream-memory.h		\
 	bonobo-transient.h		\
 	bonobo-xobject.h		\
-	bonobo-defs.h			\
 	bonobo-i18n.h			\
-	libbonobo.h			\
 	bonobo-marshal.h
 
 libbonobo_2_la_SOURCES =		\

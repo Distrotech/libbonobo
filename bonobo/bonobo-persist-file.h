@@ -13,7 +13,7 @@
 
 #include <bonobo/bonobo-persist.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #define BONOBO_PERSIST_FILE_TYPE (bonobo_persist_file_get_type ())
 #define BONOBO_PERSIST_FILE(o)   (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_PERSIST_FILE_TYPE, BonoboPersistFile))
@@ -78,6 +78,6 @@ BonoboPersistFile *bonobo_persist_file_construct (BonoboPersistFile    *ps,
 						  BonoboPersistFileIOFn save_fn,
 						  void                 *closure);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_PERSIST_FILE_H_ */

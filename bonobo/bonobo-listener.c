@@ -15,7 +15,7 @@
 #include <bonobo/bonobo-listener.h>
 #include <bonobo/bonobo-marshal.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static GObjectClass *bonobo_listener_parent_class;
 
@@ -96,7 +96,7 @@ bonobo_listener_init (GObject *object)
 	listener->priv->user_data = NULL;
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboListener, 
+BONOBO_TYPE_FUNC_FULL (BonoboListener, 
 			   Bonobo_Listener,
 			   PARENT_TYPE,
 			   bonobo_listener);

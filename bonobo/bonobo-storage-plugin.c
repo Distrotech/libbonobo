@@ -13,7 +13,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include <bonobo/bonobo-defs.h>
+
 #include "bonobo-storage-plugin.h"
 
 #define PLUGIN_PREFIX "libstorage_"

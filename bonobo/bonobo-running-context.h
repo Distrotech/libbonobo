@@ -10,20 +10,20 @@
 #ifndef _BONOBO_RUNNING_CONTEXT_H_
 #define _BONOBO_RUNNING_CONTEXT_H_
 
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 typedef struct _BonoboRunningContextPrivate BonoboRunningContextPrivate;
 
 typedef struct {
-	BonoboXObject parent;
+	BonoboObject parent;
 
 	BonoboRunningContextPrivate *priv;
 } BonoboRunningContext;
 
 typedef struct {
-	BonoboXObjectClass parent;
+	BonoboObjectClass parent;
 
 	POA_Bonobo_RunningContext__epv epv;
 
@@ -53,7 +53,7 @@ void        bonobo_running_context_at_exit_unref   (CORBA_Object object);
 #	define           bonobo_running_context_ignore_object(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,2);}G_STMT_END
 #endif
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_RUNNING_CONTEXT_H_ */
 

@@ -12,9 +12,9 @@
 #define _BONOBO_LISTENER_H_
 
 #include <bonobo/bonobo-arg.h>
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #define BONOBO_LISTENER_TYPE        (bonobo_listener_get_type ())
 #define BONOBO_LISTENER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_LISTENER_TYPE, BonoboListener))
@@ -25,13 +25,13 @@ BEGIN_BONOBO_DECLS
 typedef struct _BonoboListenerPrivate BonoboListenerPrivate;
 
 typedef struct {
-        BonoboXObject          parent;
+        BonoboObject          parent;
 
 	BonoboListenerPrivate *priv;
 } BonoboListener;
 
 typedef struct {
-	BonoboXObjectClass     parent_class;
+	BonoboObjectClass     parent_class;
 
 	POA_Bonobo_Listener__epv epv;
 
@@ -63,7 +63,7 @@ char           *bonobo_event_subtype      (const char *event_name);
 char           *bonobo_event_kind         (const char *event_name);
 char           *bonobo_event_idl_path     (const char *event_name);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_LISTENER_H_ */
 

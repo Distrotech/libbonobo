@@ -12,11 +12,11 @@
 #ifndef _BONOBO_ITEM_HANDLER_H_
 #define _BONOBO_ITEM_HANDLER_H_
 
-#include <bonobo/bonobo-defs.h>
-#include <gobject/gobject.h>
-#include <bonobo/bonobo-xobject.h>
 
-BEGIN_BONOBO_DECLS
+#include <gobject/gobject.h>
+#include <bonobo/bonobo-object.h>
+
+G_BEGIN_DECLS
  
 #define BONOBO_ITEM_HANDLER_TYPE        (bonobo_item_handler_get_type ())
 #define BONOBO_ITEM_HANDLER(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_ITEM_HANDLER_TYPE, BonoboItemHandler))
@@ -35,7 +35,7 @@ typedef Bonobo_Unknown (*BonoboItemHandlerGetObjectFn)
 	 gpointer data, CORBA_Environment *ev);
 
 struct _BonoboItemHandler {
-	BonoboXObject base;
+	BonoboObject base;
 
 	POA_Bonobo_ItemContainer__epv epv;
 
@@ -47,7 +47,7 @@ struct _BonoboItemHandler {
 };
 
 typedef struct {
-	BonoboXObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	POA_Bonobo_ItemContainer__epv epv;
 } BonoboItemHandlerClass;
@@ -71,7 +71,7 @@ typedef struct {
 GSList *bonobo_item_option_parse (const char *option_string);
 void    bonobo_item_options_free (GSList *options);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif
 

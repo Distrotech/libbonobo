@@ -10,11 +10,11 @@
 #include <config.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <bonobo/bonobo-defs.h>
+
 #include <bonobo/bonobo-stream-memory.h>
 #include <errno.h>
 
-static BonoboXObjectClass *bonobo_stream_mem_parent_class;
+static BonoboObjectClass *bonobo_stream_mem_parent_class;
 
 static Bonobo_StorageInfo*
 mem_get_info (PortableServer_Servant         servant,
@@ -23,7 +23,7 @@ mem_get_info (PortableServer_Servant         servant,
 {
 	Bonobo_StorageInfo *si;
 	BonoboStreamMem    *smem = BONOBO_STREAM_MEM (
-		bonobo_x_object (servant));
+		bonobo_object (servant));
 
 	si = Bonobo_StorageInfo__alloc ();
 
@@ -42,7 +42,7 @@ mem_set_info (PortableServer_Servant servant,
 	      CORBA_Environment *ev)
 {
 	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
-		bonobo_x_object (servant));
+		bonobo_object (servant));
 
 	if (smem->read_only)
 		CORBA_exception_set (
@@ -60,7 +60,7 @@ mem_truncate (PortableServer_Servant servant,
 	      CORBA_Environment *ev)
 {
 	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
-		bonobo_x_object (servant));
+		bonobo_object (servant));
 	void *newp;
 	
 	if (smem->read_only)
@@ -86,7 +86,7 @@ mem_write (PortableServer_Servant servant,
 	   CORBA_Environment *ev)
 {
 	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
-		bonobo_x_object (servant));
+		bonobo_object (servant));
 	long len = buffer->_length;
 
 	if (smem->read_only){
@@ -119,7 +119,7 @@ mem_read (PortableServer_Servant servant, CORBA_long count,
 	  CORBA_Environment *ev)
 {
 	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
-		bonobo_x_object (servant));
+		bonobo_object (servant));
 
 	if (smem->pos + count > smem->size)
 		count = smem->size - smem->pos;
@@ -140,7 +140,7 @@ mem_seek (PortableServer_Servant servant,
 	  CORBA_Environment *ev)
 {
 	BonoboStreamMem *smem = BONOBO_STREAM_MEM (
-		bonobo_x_object (servant));
+		bonobo_object (servant));
 	int pos = 0;
 	
 	switch (whence){

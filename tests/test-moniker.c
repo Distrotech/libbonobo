@@ -1,7 +1,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <bonobo/libbonobo.h>
+#include <libbonobo.h>
 
 static void
 check_string (const char *prefix, const char *escaped, const char *unescaped)

@@ -16,7 +16,7 @@
 #include <bonobo/bonobo-persist-stream.h>
 #include <bonobo/bonobo-transient.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static GObjectClass *parent_class = NULL;
          
@@ -971,7 +971,7 @@ bonobo_property_bag_init (BonoboPropertyBag *pb)
 	pb->priv->props = g_hash_table_new (g_str_hash, g_str_equal);
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboPropertyBag, 
+BONOBO_TYPE_FUNC_FULL (BonoboPropertyBag, 
 			 Bonobo_PropertyBag,
 			 PARENT_TYPE,
 			 bonobo_property_bag);

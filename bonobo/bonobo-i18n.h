@@ -32,9 +32,9 @@
 #define __BONOBO_I18N_H__ 1
 
 #include <glib.h>
-#include <bonobo/bonobo-defs.h>
 
-BEGIN_BONOBO_DECLS
+
+G_BEGIN_DECLS
 
 #if !defined(__BONOBO_I18NP_H__)
 
@@ -64,6 +64,6 @@ BEGIN_BONOBO_DECLS
 
 #endif
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* __BONOBO_I18N_H__ */

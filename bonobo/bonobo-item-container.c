@@ -31,7 +31,7 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static GObjectClass *bonobo_item_container_parent_class;
 
@@ -177,7 +177,7 @@ bonobo_item_container_init (BonoboItemContainer *container)
 		g_str_hash, g_str_equal);
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboItemContainer, 
+BONOBO_TYPE_FUNC_FULL (BonoboItemContainer, 
 			   Bonobo_ItemContainer,
 			   PARENT_TYPE,
 			   bonobo_item_container);

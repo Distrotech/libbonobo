@@ -10,7 +10,7 @@
 #ifndef _BONOBO_SHLIB_FACTORY_H_
 #define _BONOBO_SHLIB_FACTORY_H_
 
-#include <bonobo/bonobo-defs.h>
+
 #include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
@@ -18,7 +18,7 @@
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-exception.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
  
 #define BONOBO_SHLIB_FACTORY_TYPE        (bonobo_shlib_factory_get_type ())
 #define BONOBO_SHLIB_FACTORY(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_SHLIB_FACTORY_TYPE, BonoboShlibFactory))
@@ -115,6 +115,6 @@ void                bonobo_shlib_factory_inc_live     (
 void                bonobo_shlib_factory_dec_live     (
 	BonoboShlibFactory    *factory);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif

@@ -10,10 +10,10 @@
 #ifndef _BONOBO_EVENT_SOURCE_H_
 #define _BONOBO_EVENT_SOURCE_H_
 
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-listener.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #define BONOBO_EVENT_SOURCE_TYPE        (bonobo_event_source_get_type ())
 #define BONOBO_EVENT_SOURCE(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_EVENT_SOURCE_TYPE, BonoboEventSource))
@@ -24,12 +24,12 @@ BEGIN_BONOBO_DECLS
 typedef struct _BonoboEventSourcePrivate BonoboEventSourcePrivate;
 
 typedef struct {
-	BonoboXObject             parent;
+	BonoboObject             parent;
 	BonoboEventSourcePrivate *priv;
 } BonoboEventSource;
 
 typedef struct {
-	BonoboXObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	POA_Bonobo_EventSource__epv epv;
 } BonoboEventSourceClass;
@@ -62,7 +62,7 @@ bonobo_event_source_client_add_listener                 (Bonobo_Unknown         
 /* You don't want this routine */
 void               bonobo_event_source_ignore_listeners (BonoboEventSource *event_source);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_EVENT_SOURCE_H_ */
 

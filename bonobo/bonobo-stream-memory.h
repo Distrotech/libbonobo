@@ -12,7 +12,7 @@
 
 #include <bonobo/bonobo-storage.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 struct _BonoboStreamMem;
 typedef struct _BonoboStreamMem BonoboStreamMem;
@@ -30,7 +30,7 @@ typedef struct _BonoboStorageMem BonoboStorageMem;
 #define BONOBO_IS_STREAM_MEM_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_STREAM_MEM_TYPE))
 
 struct _BonoboStreamMem {
-	BonoboXObject parent;
+	BonoboObject parent;
 
 	char         *buffer;
 	size_t        size;
@@ -42,7 +42,7 @@ struct _BonoboStreamMem {
 };
 
 typedef struct {
-	BonoboXObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	POA_Bonobo_Stream__epv epv;
 
@@ -65,6 +65,6 @@ BonoboStream    *bonobo_stream_mem_create     (const char       *buffer,
 const char      *bonobo_stream_mem_get_buffer (BonoboStreamMem  *stream_mem);
 size_t           bonobo_stream_mem_get_size   (BonoboStreamMem  *stream_mem);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_STREAM_MEM_H_ */

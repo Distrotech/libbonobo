@@ -17,11 +17,11 @@
 #ifndef _BONOBO_TRANSIENT_H_
 #define _BONOBO_TRANSIENT_H_
 
-#include <bonobo/bonobo-defs.h>
+
 #include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #define BONOBO_TRANSIENT_TYPE        (bonobo_transient_get_type ())
 #define BONOBO_TRANSIENT(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BONOBO_TRANSIENT_TYPE, BonoboTransient))
@@ -68,7 +68,7 @@ CORBA_Object bonobo_transient_create_objref (BonoboTransient   *transient,
 
 GType bonobo_transient_get_type (void);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_TRANSIENT_H_ */
 

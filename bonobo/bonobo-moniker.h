@@ -10,9 +10,9 @@
 #ifndef _BONOBO_MONIKER_H_
 #define _BONOBO_MONIKER_H_
 
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 typedef struct _BonoboMonikerPrivate BonoboMonikerPrivate;
 
@@ -23,13 +23,13 @@ typedef struct _BonoboMonikerPrivate BonoboMonikerPrivate;
 #define BONOBO_IS_MONIKER_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BONOBO_MONIKER_TYPE))
 
 typedef struct {
-        BonoboXObject         object;
+        BonoboObject         object;
 	
 	BonoboMonikerPrivate *priv;
 } BonoboMoniker;
 
 typedef struct {
-	BonoboXObjectClass      parent_class;
+	BonoboObjectClass      parent_class;
 
 	POA_Bonobo_Moniker__epv epv;
 
@@ -88,6 +88,6 @@ void                     bonobo_moniker_set_case_sensitive  (BonoboMoniker     *
 							     gboolean           sensitive);
 gboolean                 bonobo_moniker_get_case_sensitive  (BonoboMoniker     *moniker);
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_MONIKER_H_ */

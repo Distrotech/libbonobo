@@ -15,7 +15,7 @@
 #include <bonobo/bonobo-exception.h>
 #include "bonobo-item-handler.h"
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 /*
  * Returns a list of the objects in this container
@@ -64,7 +64,7 @@ bonobo_item_handler_init (GObject *object)
 	/* nothing to do */
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboItemHandler, 
+BONOBO_TYPE_FUNC_FULL (BonoboItemHandler, 
 			   Bonobo_ItemContainer,
 			   PARENT_TYPE,
 			   bonobo_item_handler);

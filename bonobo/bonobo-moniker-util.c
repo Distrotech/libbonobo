@@ -7,10 +7,11 @@
  *	Michael Meeks    (michael@helixcode.com)
  *	Ettore Perazzoli (ettore@helixcode.com)
  */
-#include "libbonobo.h"
 #include <liboaf/liboaf.h>
 #include <liboaf/oaf-async.h>
 #include <ORBitservices/CosNaming.h>
+#include <bonobo/bonobo-exception.h>
+#include <bonobo/bonobo-moniker-util.h>
 
 struct {
 	char *prefix;

@@ -10,11 +10,11 @@
 #ifndef _BONOBO_STREAM_H_
 #define _BONOBO_STREAM_H_
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 #include <bonobo/bonobo-storage.h>
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_STREAM_H_ */
 

@@ -19,9 +19,9 @@
 #include <bonobo/bonobo-running-context.h>
 #include <bonobo/bonobo-main.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
-static BonoboXObjectClass *bonobo_running_context_parent_class = NULL;
+static BonoboObjectClass *bonobo_running_context_parent_class = NULL;
 
 #ifdef BONOBO_OBJECT_DEBUG
 #	define BONOBO_RUNNING_HOOKS
@@ -345,7 +345,7 @@ bonobo_running_context_init (GObject *object)
 	/* nothing to do */
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboRunningContext, 
+BONOBO_TYPE_FUNC_FULL (BonoboRunningContext, 
 			 Bonobo_RunningContext,
 			 PARENT_TYPE,
 			 bonobo_running_context);

@@ -10,9 +10,9 @@
 #ifndef _BONOBO_STORAGE_H_
 #define _BONOBO_STORAGE_H_
 
-#include <bonobo/bonobo-xobject.h>
+#include <bonobo/bonobo-object.h>
 
-BEGIN_BONOBO_DECLS
+G_BEGIN_DECLS
 
 /* Constants to make it easier to safely select drivers */
 #define BONOBO_IO_DRIVER_FS  "fs"
@@ -20,7 +20,7 @@ BEGIN_BONOBO_DECLS
 #define BONOBO_IO_DRIVER_VFS "vfs"
 
 /* For backwards compatibility */
-#define BonoboStream BonoboXObject
+#define BonoboStream BonoboObject
 #define BONOBO_STREAM(o)       ((BonoboStream *)(o))
 #define BONOBO_STREAM_CLASS(o) (o)
 
@@ -33,13 +33,13 @@ BEGIN_BONOBO_DECLS
 typedef struct _BonoboStoragePrivate BonoboStoragePrivate;
 
 typedef struct {
-        BonoboXObject object;
+        BonoboObject object;
 
 	BonoboStoragePrivate *priv;
 } BonoboStorage;
 
 typedef struct {
-	BonoboXObjectClass parent_class;
+	BonoboObjectClass parent_class;
 
 	POA_Bonobo_Storage__epv epv;
 
@@ -112,7 +112,7 @@ BonoboStream *bonobo_stream_open (const char *driver,
 				  CORBA_Environment *opt_ev);
 
 
-END_BONOBO_DECLS
+G_END_DECLS
 
 #endif /* _BONOBO_STORAGE_H_ */
 

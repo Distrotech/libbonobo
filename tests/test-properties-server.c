@@ -1,7 +1,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <gobject/gsignal.h>
-#include <bonobo/libbonobo.h>
+#include <libbonobo.h>
 
 CORBA_ORB	    orb;
 BonoboPropertyBag  *pb;

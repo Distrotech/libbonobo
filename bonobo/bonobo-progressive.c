@@ -14,7 +14,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-progressive.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static void
 impl_Bonobo_ProgressiveDataSink_start (PortableServer_Servant servant,
@@ -159,7 +159,7 @@ bonobo_progressive_data_sink_init (GObject *object)
 	/* nothing to do */
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboProgressiveDataSink, 
+BONOBO_TYPE_FUNC_FULL (BonoboProgressiveDataSink, 
 			   Bonobo_ProgressiveDataSink,
 			   PARENT_TYPE,
 			   bonobo_progressive_data_sink);

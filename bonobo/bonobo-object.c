@@ -602,8 +602,8 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 
 
 static void
-do_corba_hacks (BonoboXObject      *object,
-		BonoboXObjectClass *klass)
+do_corba_hacks (BonoboObject      *object,
+		BonoboObjectClass *klass)
 {
 	CORBA_Object obj;
 	CORBA_Environment ev;
@@ -1145,7 +1145,7 @@ bonobo_type_setup (GType             type,
 {
 	GType       p, b_type;
 	int           depth;
-	BonoboXObjectClass *klass;
+	BonoboObjectClass *klass;
 	gpointer     *vepv;
 
 	/* Setup our class data */
@@ -1158,7 +1158,7 @@ bonobo_type_setup (GType             type,
 	b_type = bonobo_object_get_type ();
 	for (depth = 0, p = type; p && p != b_type;
 	     p = g_type_parent (p)) {
-		BonoboXObjectClass *xklass;
+		BonoboObjectClass *xklass;
 
 		xklass = g_type_class_peek (p);
 
@@ -1166,13 +1166,13 @@ bonobo_type_setup (GType             type,
 			depth++;
 	}
 	if (!p) {
-		g_warning ("Trying to inherit '%s' from a BonoboXObject, but "
-			   "no BonoboXObject in the ancestory",
+		g_warning ("Trying to inherit '%s' from a BonoboObject, but "
+			   "no BonoboObject in the ancestory",
 			   g_type_name (type));
 		return FALSE;
 	}
 
-#ifdef BONOBO_X_OBJECT_DEBUG
+#ifdef BONOBO_OBJECT_DEBUG
 	g_warning ("We are at depth %d with type '%s'",
 		   depth, g_type_name (type));
 #endif
@@ -1215,7 +1215,7 @@ bonobo_type_setup (GType             type,
  * @fini_fn: a POA finialization function or NULL
  * @epv_struct_offset: the offset into the struct that the epv
  * commences at, or 0 if we are inheriting a plain GObject
- * from a BonoboXObject, adding no new CORBA interfaces
+ * from a BonoboObject, adding no new CORBA interfaces
  * @info: the standard GTypeInfo.
  * 
  * This function is the main entry point for deriving bonobo

@@ -11,7 +11,7 @@
 #ifndef _BONOBO_OBJECT_CLIENT_H_
 #define _BONOBO_OBJECT_CLIENT_H_
 
-#include <bonobo/bonobo-defs.h>
+
 #include <gobject/gobject.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>

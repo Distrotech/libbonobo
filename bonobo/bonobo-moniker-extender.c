@@ -15,7 +15,7 @@
 #include <bonobo/bonobo-moniker-extender.h>
 #include <liboaf/liboaf.h>
 
-#define PARENT_TYPE BONOBO_X_OBJECT_TYPE
+#define PARENT_TYPE BONOBO_OBJECT_TYPE
 
 static GObjectClass *bonobo_moniker_extender_parent_class;
 
@@ -87,7 +87,7 @@ bonobo_moniker_extender_init (GObject *object)
 	/* nothing to do */
 }
 
-BONOBO_X_TYPE_FUNC_FULL (BonoboMonikerExtender, 
+BONOBO_TYPE_FUNC_FULL (BonoboMonikerExtender, 
 			   Bonobo_MonikerExtender,
 			   PARENT_TYPE,
 			   bonobo_moniker_extender);
