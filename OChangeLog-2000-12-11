@@ -1,3 +1,9 @@
+2000-10-27  Joe Shaw  <joe@helixcode.com>
+
+	* monikers/bonobo-moniker-http.c (http_resolve): Use the "http"
+	storage backend (which will be in GtkHTML) for resolving against the
+	Bonobo/Stream interface.
+
 2000-10-26  Martin Baulig  <baulig@suse.de>
 
 	* bonobo/bonobo-arg.h (bonobo_arg_type_is_equal): New function
