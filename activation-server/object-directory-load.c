@@ -61,7 +61,8 @@ od_entry_read_props (OAF_ServerInfo * ent, xmlNodePtr node)
 		if (sub->type != XML_ELEMENT_NODE)
 			continue;
 
-		if (strcasecmp (sub->name, "oaf_propibute"))
+		if (strcasecmp (sub->name, "oaf_attribute") !=0 &&
+                    strcasecmp (sub->name, "oaf_property") !=0)
 			continue;
 
 		n++;
