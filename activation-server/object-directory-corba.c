@@ -214,6 +214,7 @@ static gboolean
 registry_directory_needs_update (impl_POA_Bonobo_ObjectDirectory *servant,
                                  const char *directory)
 {
+        gboolean needs_update;
         struct stat statbuf;
         time_t old_mtime;
 
@@ -228,13 +229,23 @@ registry_directory_needs_update (impl_POA_Bonobo_ObjectDirectory *servant,
                              (gpointer) directory,
                              (gpointer) statbuf.st_mtime);
 
-        return (old_mtime != statbuf.st_mtime);
+        needs_update = (old_mtime != statbuf.st_mtime);
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+        if (needs_update)
+                g_warning ("Compare old_mtime on '%s' with %ld ==? %ld",
+                           directory,
+                           (long) old_mtime, (long) statbuf.st_mtime);
+#endif
+
+        return needs_update;
 }
 
 static void
 update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
 {
         int i;
+        time_t cur_time;
         gboolean must_load;
         static int reload_recurse_depth = 0;
 
@@ -251,17 +262,14 @@ update_registry (impl_POA_Bonobo_ObjectDirectory *servant)
         /* Don't stat more than once every 5 seconds or activation
            could be too slow. This works even on the first read
            because then `time_did_stat is 0' */
-        if (time (NULL) - 5 > servant->time_did_stat) {
-                servant->time_did_stat = time (NULL);
-
+        cur_time = time (NULL);
+        if (cur_time - 5 > servant->time_did_stat) {
+                servant->time_did_stat = cur_time;
+                
                 for (i = 0; servant->registry_source_directories[i] != NULL; i++) {
                         if (registry_directory_needs_update 
                             (servant, servant->registry_source_directories[i])) {
-#ifdef BONOBO_ACTIVATION_DEBUG
-                                g_warning ("Directory '%s' changed", servant->registry_source_directories[i]);
-#endif
                                 must_load = TRUE;
-                                break;
                         }
                 }
         }

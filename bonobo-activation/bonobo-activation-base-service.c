@@ -489,7 +489,7 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
         int retval;
         char *err;
 
-        fn = g_strdup_printf ("/tmp/orbit-%s/oaf-register.lock", g_get_user_name ());
+        fn = g_strdup_printf ("/tmp/orbit-%s/bonobo-activation-register.lock", g_get_user_name ());
 
 	while ((lock_fd = open (fn, O_CREAT | O_RDWR, 0700)) < 0) {
 		if (errno == EEXIST) {
@@ -536,15 +536,6 @@ rloc_file_unlock (const BonoboActivationBaseServiceRegistry *registry,
                   gpointer user_data)
 {
         struct flock lock;
-#if 0
-	char *fn;
-
-
-	fn = g_alloca (sizeof ("/tmp/orbit-%s/oaf-register.lock") + 32);
-	sprintf (fn, "/tmp/orbit-%s/oaf-register.lock", g_get_user_name ());
-
-	unlink (fn);
-#endif
 
 	if (lock_fd >= 0) {
 

@@ -36,25 +36,25 @@ static xmlDocPtr
 object_directory_load_xml_file (void)
 {
         xmlDocPtr doc;
-        char *oaf_config_file;
+        char *bonobo_activation_config_file;
 
-        oaf_config_file = g_strconcat (
+        bonobo_activation_config_file = g_strconcat (
                 SERVER_CONFDIR, SERVER_CONFIG_FILE, NULL);
-        doc = xmlParseFile (oaf_config_file);
+        doc = xmlParseFile (bonobo_activation_config_file);
 
        /* check if the document was read successfully. */
         if (doc == NULL) {
-                g_warning (_("The OAF configuration file was not read "
+                g_warning (_("The Bonobo Activation configuration file was not read "
                              "successfully. Please, check it is valid in: %s"),
-                           oaf_config_file);
-		g_free (oaf_config_file);
+                           bonobo_activation_config_file);
+		g_free (bonobo_activation_config_file);
                 return NULL;
         }
 
-	g_free (oaf_config_file);
+	g_free (bonobo_activation_config_file);
+
         return doc;
 }
-
 
 char *
 object_directory_load_config_file (void)
@@ -93,6 +93,7 @@ object_directory_load_config_file (void)
         }
 
         xmlFreeDoc (doc);
+
         return result;
 }
 
