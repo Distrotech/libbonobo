@@ -13,7 +13,7 @@ use by the derived #BonoboPersistStream interface.
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
-#BonoboPersistStream #BonoboPersistFile
+#BonoboPersistStream, #BonoboPersistFile
 </para>
 
 <!-- ##### MACRO BONOBO_PERSIST_TYPE ##### -->

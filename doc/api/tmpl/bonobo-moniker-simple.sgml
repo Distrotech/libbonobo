@@ -1,0 +1,60 @@
+<!-- ##### SECTION Title ##### -->
+bonobo-moniker-simple
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT BonoboMonikerSimple ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@resolve_fn: 
+@priv: 
+
+<!-- ##### USER_FUNCTION BonoboMonikerSimpleResolveFn ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@options: 
+@requested_interface: 
+@ev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_simple_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@resolve_fn: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_moniker_simple_construct ##### -->
+<para>
+
+</para>
+
+@moniker: 
+@name: 
+@resolve_fn: 
+@Returns: 
+
+

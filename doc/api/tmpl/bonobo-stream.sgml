@@ -28,7 +28,7 @@ of the helpful wrappers first.
 
 <!-- ##### SECTION See_Also ##### -->
 <para>
-   #BonoboPersistStream #BonoboPersist #BonoboStreamFile #BonoboStreamMem
+   #bonobo-stream-client, BonoboPersistStream, #BonoboPersist, #BonoboStreamFile, #BonoboStreamMem
 </para>
 
 <!-- ##### MACRO BONOBO_IO_DRIVER_FS ##### -->

@@ -31,7 +31,7 @@ notify_listeners (BonoboPropertyBag *pb,
 		  const BonoboArg   *new_value,
 		  CORBA_Environment *opt_ev)
 {
-	if (prop->flags & BONOBO_PROPERTY_NO_LISTENING)
+	if (prop->flags &amp; BONOBO_PROPERTY_NO_LISTENING)
 		return;
 	
 	bonobo_event_source_notify_listeners_full (pb->es,
@@ -73,11 +73,11 @@ fire_event (BonoboEventSource *on_source,
 	e.c = a_float;
 
 	any->_type = TC_Foo_BaaEvent;
-	any->_data = &e;
+	any->_data = &amp;e;
 
 	bonobo_event_source_notify_listeners_full (
 	   on_source, "GNOME/Foo", "event", NULL,
-	   &any, opt_ev);
+	   &amp;any, opt_ev);
 }
      </programlisting>
   </example>

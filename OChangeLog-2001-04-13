@@ -1,5 +1,10 @@
 2001-02-22  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-moniker-simple.h: correct SIMPLE_CLASS macro
+	name.
+
+	* doc/api: Add bonobo-moniker-simple.
+
 	* bonobo/bonobo-storage.c: Full API documentation.
 
 	* doc/api/tmpl/bonobo-event-source.sgml: Add nice examples.

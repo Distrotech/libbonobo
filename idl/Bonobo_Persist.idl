@@ -188,6 +188,8 @@ module Bonobo {
 		 *
 		 * Should return the number of bytes requested to save
 		 * this object, or -1 if it is not known.
+		 *
+		 * Deprecated - this information should be on the stream.
 		 */
 		long getMaxSize ();
 	};

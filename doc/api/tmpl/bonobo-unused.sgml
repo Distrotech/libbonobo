@@ -62,6 +62,26 @@ Asynchronous moniker maniplulation methods
 bonobo-moniker-async
 
 
+<!-- ##### SECTION ./tmpl/bonobo-simple.sgml:Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/bonobo-simple.sgml:See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION ./tmpl/bonobo-simple.sgml:Short_Description ##### -->
+
+
+
+<!-- ##### SECTION ./tmpl/bonobo-simple.sgml:Title ##### -->
+bonobo-simple
+
+
 <!-- ##### SECTION ./tmpl/bonobo-storage-priv.sgml:Long_Description ##### -->
 <para>
 
