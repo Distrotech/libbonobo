@@ -1,3 +1,28 @@
+2001-02-14  Michael Engber  <engber@eazel.com>
+
+	reviewed by: Darin Adler <darin@eazel.com>
+
+	* bonobo/bonobo-zoomable.c:
+	(impl_Bonobo_Zoomable__get_preferredLevels),
+	(impl_Bonobo_Zoomable__get_preferredLevelNames),
+	Return copies of levels and level names since
+	we can't control when caller frees our return value.
+
+	(bonobo_zoomable_free_preferred_zoom_level_arrays),
+	(bonobo_zoomable_destroy), (bonobo_zoomable_finalize),
+	(bonobo_zoomable_init), (bonobo_zoomable_set_parameters_full),
+	(bonobo_zoomable_set_parameters),
+	Keep copies of level names rather (not pointer to passed in
+	strings). The g_array to hold the names used the wrong element type.
+
+	(bonobo_zoomable_add_preferred_zoom_level),
+	(bonobo_zoomable_report_zoom_level_changed),
+	(bonobo_zoomable_report_zoom_parameters_changed):
+	Removed redundant NULL tests.
+
+
+
+
 2001-02-14  Michael Meeks  <michael@ximian.com>
 
 	* configure.in: bump to 0.37
