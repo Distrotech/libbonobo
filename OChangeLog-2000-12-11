@@ -1,3 +1,8 @@
+1999-10-04  Michael Meeks  <michael@nuclecu.unam.mx>
+
+	* bonobo/gnome-desktop-window.c (gnome_desktop_window_construct):
+	Rename from gnome_view_construct.
+
 1999-10-04  Gregory McLean <gregm@gnu.org>
 
 	* bonobo.spec.in: Updated. Commited at the request of the miggypoo.
@@ -6,7 +11,7 @@
 
 	* idl/gnome-desktop.idl, bonobo/gnome-desktop-window.c: New files,
 	used to control a toplevel GtkWindow and export its properties
-	trough corba.
+	through corba.
 
 1999-09-29  Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br>
 
