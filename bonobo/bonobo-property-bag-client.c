@@ -794,7 +794,7 @@ bonobo_pbclient_set_value  (Bonobo_PropertyBag  bag,
  * @bag: the property bag
  * @ev: optional CORBA exception environment or NULL
  * @first_arg: first argument name
- * @var_args: list of subsequent name / value pairs
+ * @var_args: list of subsequent name / type / value triplets
  * 
  * This function uses the TypeCode data extracted from the
  * @pb to determine how it walks its stack. This function

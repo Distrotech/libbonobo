@@ -139,3 +139,18 @@ do:
 The mirror of this is that if you want to hand a ref to an impl you
 will need to CORBA_Object_duplicate the value before inserting it into
 a BonoboObjectClient.
+
+
+** Ref counting and 1 way methods
+
+	While the ORB has built in support for correct referencing on
+1 way methods, the Bonobo reference count does not; hence if you wish
+to hand a bonobo reference to several listeners you need to do
+something like:
+
+	  ref = Bonobo_Unknown_ref (BONOBO_OBJREF (obj), ev);
+
+	  Bonobo_Sample_executeOnewayMethod (foo, ref, ev);
+
+	  And at the other end in executeOnewayMethod the reference
+needs to be released.

@@ -36,7 +36,7 @@ static glong   bonobo_total_aggregates      = 0;
 #undef BONOBO_AGGREGATE_DEBUG
 
 /* NB. for a quicker debugging experience define this */
-/* # define BONOBO_REF_HOOKS */
+#undef BONOBO_REF_HOOKS 
 
 /* You almost certainly don't want this */
 #undef BONOBO_LIFECYCLE_DEBUG
@@ -256,7 +256,8 @@ bonobo_object_ref (BonoboObject *object)
 #ifdef BONOBO_REF_HOOKS
 	bonobo_object_trace_refs (object, "local", 0, TRUE);
 #else
-	object->priv->ao->ref_count++;
+	if (!object->priv->ao->immortal)
+		object->priv->ao->ref_count++;
 #endif
 
 	return object;
@@ -286,9 +287,7 @@ bonobo_object_unref (BonoboObject *object)
 	g_return_val_if_fail (ao != NULL, NULL);
 	g_return_val_if_fail (ao->ref_count > 0, NULL);
 
-	if (ao->immortal)
-		ao->ref_count--;
-	else {
+	if (!ao->immortal) {
 		if (ao->ref_count == 1)
 			bonobo_object_destroy (ao);
 
@@ -317,9 +316,9 @@ bonobo_object_trace_refs (BonoboObject *object,
 	if (!object)
 		return NULL;
 	
-	g_return_if_fail (BONOBO_IS_OBJECT (object));
+	g_return_val_if_fail (BONOBO_IS_OBJECT (object), ref ? object : NULL);
 	ao = object->priv->ao;
-	g_return_if_fail (ao != NULL);
+	g_return_val_if_fail (ao != NULL, ref ? object : NULL);
 
 	descr  = g_new (BonoboDebugRefData, 1);
 	ao->refs = g_list_prepend (ao->refs, descr);
@@ -328,7 +327,7 @@ bonobo_object_trace_refs (BonoboObject *object,
 	descr->line = line;
 
 	if (ref) {
-		g_return_if_fail (ao->ref_count > 0);
+		g_return_val_if_fail (ao->ref_count > 0, object);
 		
 		object->priv->ao->ref_count++;
 		
@@ -345,7 +344,7 @@ bonobo_object_trace_refs (BonoboObject *object,
 			G_OBJECT_TYPE_NAME (object),
 			ao->ref_count, fn, line);
 
-		g_return_if_fail (ao->ref_count > 0);
+		g_return_val_if_fail (ao->ref_count > 0, NULL);
 
 		if (ao->immortal) {
 			ao->ref_count--;
@@ -354,7 +353,7 @@ bonobo_object_trace_refs (BonoboObject *object,
 			if (ao->ref_count == 1) {
 				bonobo_object_destroy (ao);
 				
-				g_return_if_fail (ao->ref_count > 0);
+				g_return_val_if_fail (ao->ref_count > 0, NULL);
 			}
 			
 			/*

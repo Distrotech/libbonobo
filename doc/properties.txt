@@ -18,10 +18,10 @@ component in some way.
 
 2.	BonoboArgs.
 
-	A bonobo arg contains the value of a property whilst it is
-'in flight' between a property and a requestor. The bonobo arg system
-is designed to make ORBit's 'any' code easier to use and less error
-prone.
+	A bonobo arg contains the value of a property whilst it is 'in
+flight' between a property and a requestor. The bonobo arg system is
+designed to make ORBit's 'any' code easier to use and less error prone
+- it is however simply a wrapper around a CORBA_any.
 
 	A number of macros and helper functions are provided in
 bonobo-arg.h. Particularly, the type macros of BonoboArgType eg.
@@ -76,13 +76,13 @@ void bonobo_property_bag_add (BonoboPropertyBag  *pb,
 	    		      const char         *docstring,
                               BonoboPropertyFlags flags);
 
-	It looks horrendous, but is horribly simple in most cases; the idx
-is the index that will be passed to a generic get / set function for this
-property. The type is one of the BonoboArgType macros discussed in section 2
-which maps to an ORBit TypeCode [ hence any arbitary type can be added
-without the property-bag knowing anything about it ( allocation of that
-type is the users responsibility ) ]. Default_value is either NULL or a
-value created thusly:
+	It looks horrendous, but is horribly simple in most cases; the
+idx is the index that will be passed to a generic get / set function
+for this property. The type is one of the BonoboArgType macros
+discussed in section 2 which maps to an ORBit TypeCode [ hence any
+arbitary type can be added without the property-bag knowing anything
+about it ( allocation of that type is the users responsibility )
+]. Default_value is either NULL or a value created thusly:
 
 	BonoboArg *def = bonobo_arg_new (BONOBO_ARG_DOUBLE);
 	BONOBO_ARG_SET_DOUBLE (def, 0.3127);
@@ -93,37 +93,45 @@ value created thusly:
 order to implement the get / set functions I would copy & paste the
 sample code in:
 
-	bonobo/samples/controls/bonobo-clock-control.c.
+	libbonoboui/samples/controls/bonobo-sample-controls.c.
 
 
-5.	Wrapping Gtk Objects
+5.	Wrapping GObjects
 
-	If you have already implemented a GtkObject that has the set of
-GtkArgs that you wish to export as BonoboArgs then it is trivial to add
-them to the property bag using a transparent mapping. This means that
-you do not have to write any more code, simply use:
+	If you have already implemented a GtkObject that has the set
+of properties that you wish to export as Bonobo properties then it is
+trivial to add them to the property bag using a transparent
+mapping. This means that you do not have to write any more code,
+simply use:
 
-	bonobo_property_bag_add_gtk_args (pb, my_object);
+	GParamSpec **pspecs;
+	guint        n_props;
+
+	pspecs = g_object_class_list_properties (
+	      G_OBJECT_GET_CLASS (my_object), &n_props);
+
+	bonobo_property_bag_map_params (pb, my_object, pspecs, n_props);
+
+	g_free (pspecs)
 
 
 6.	Using properties in your client application
 
-	Since the contract between client and server is very tight I have
-added some more tightness in the form of some vararg methods to possibly
-make using controls simpler and ( incidentaly ) to decrease type safety
-beyond all previous limits.
+	There are some fairly typesafe but convenient vararg ways to
+get remote properties;
 
 	eg.
 
 	CORBA_double i;
 
-	bonobo_widget_get_property (control, "value", &i, NULL);
+	bonobo_widget_get_property (control, "value",
+				    TC_CORBA_double, &i, NULL);
 	i+= 0.37;
-	bonobo_widget_set_property (control, "value", i, NULL);
+	bonobo_widget_set_property (control, "value",
+				    TC_CORBA_double, i, NULL);
 
-	This is theoreticaly slower than using the alternative
+	The alternative being the even more type safe version:
 
 	bonobo_property_bag_client_get_value_gdouble (pb, "value", &i);
 
-	since to determine the type of i the client has to query the bag
-and then do its varargs stuff. It is however far more convenient.
+

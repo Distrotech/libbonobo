@@ -1,3 +1,14 @@
+2001-12-08  Michael Meeks  <michael@ximian.com>
+
+	* doc/*: move documents across from bonobo 1.0,
+	particularly NAMESPACE is now canonicaly here.
+
+2001-12-06  Michael Meeks  <michael@ximian.com>
+
+	* bonobo/bonobo-object.c (bonobo_object_ref),
+	(bonobo_object_unref): only alter the ref count if
+	we're not immortal.
+
 2001-12-07  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* samples/echo/Makefile.am:

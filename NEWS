@@ -1,3 +1,7 @@
+libbonobo 1.107.1
+
+	* NB. Gero == Gergo.
+
 libbonobo 1.107.0
 
 	* Featurlets
@@ -6,12 +10,12 @@ libbonobo 1.107.0
 		+ UI exception added (Me)
 		+ accelerated object instantiation (Me, Mark)
 		+ IDL spelling fixes (Darin)
-		+ memory storage tests updates (Gero Erdi)
+		+ memory storage tests updates (Gergo Erdi)
 
 	* Bugs fixed
 		+ glib fixage (Owen, Miles Lane)
 		+ moniker finalize chain (Me)
-		+ bonobo-storage-memory fixage (Gero Erdi)
+		+ bonobo-storage-memory fixage (Gergo Erdi)
 
 libbonobo 1.106.0
 

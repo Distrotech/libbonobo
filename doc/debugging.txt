@@ -38,14 +38,7 @@ running in the background, check with
 	
 or just:
 
-	oaf-slay	
-
-
-* Weird stuff
-
-If you see your components freak out in all manner of interesting
-ways when the container dies read README-gdk-patch and act accordingly.
-This should be fixed more elegantly shortly.
+	bonobo-slay	
 
 
 * Debugging
@@ -77,6 +70,17 @@ NNB. it seems that emacs' debug mode doesn't like this; you have to
 write a small 'libtool gdb' wrapper script eg. 'libtool gdb $@'
 
 
+* CORBA method tracing
+
+	There is beautiful built in ORBit2 method tracing facility
+that will show you all CORBA invocations, their objects, arguments,
+microsecond timestamps etc. To use it you need to build ORBit2
+yourself, and then edit ORBit2/src/orb/orb-core/orbit-debug.h and
+define TRACE_DEBUG in that header ( instead of an undef ). If you
+then do a 'make inst-lib' in ORBit2/src/orb/ it will only install
+libraries - thus obviating the need to re-build any other apps.
+
+
 * Order of execution
 
 It is of course important to ensure that the component has registered
@@ -84,38 +88,21 @@ before executing the container.  A good guide is to wait until your
 hard disk has stopped thrashing madly before running the container.
 
 
-* Assertion failure in giop-msg-buffer.c
+* Nothing will activate !
 
-If you get assertion failures in giop-msg-buffer.c, they may be due to
-the death of the other end of the connection.  Make sure you look at
-both ends of the connection.
+export BONOBO_ACTIVATION_DEBUG_OUTPUT = 1
+bonobo-slay
 
-
-* Desparate mesaures.
-
-If all else fails try removing the gnome-name-service,
-cleaning any installed binaries and removing
-etc/CORBA/servers/bonobo-my-component.gnorba and trying again.
+	And try again - it's possible that a debug message is being
+suppressed by bonobo-activation-server that this will show you.
 
 
 * Nothing seems to happen, the code just locks
 
 Check that you are doing either a bonobo_main() or a bonobo_activate()
-followed by gtk_main(). Failure to do this will cause strange lockups.
-NB. must be done in both container and component.
-
-
-* Request create_object, ID -N was rejected by the authentication mechanism!
-
-The most likely cause of this warning message is initializing the goad
-code via. a gnome_CORBA_init when you are using oaf; If using oaf you must
-
-     gnome_init_	     then
-     oaf_init
-
-     instead of
-
-     gnome_CORBA_init
+followed by gtk_main(). Failure to do this will cause strange lockups,
+caused because the POA is still queueing incoming requests waiting to
+be activated.  NB. this must be done in both container and component.
 
 
 * Getting more information
@@ -127,10 +114,21 @@ bonobo with debugging symbols:
 
 If you suspect the name server of causing problems use type:
 
-       export GOAD_DEBUG_EXERUN=1
+       export BONOBO_ACTIVATION_DEBUG_EXERUN=1
 
 to get debug to the console, simply adding a breakpoint in g_log will
-help get at the innards of the goad activation process.
+help get at the innards of the bonobo-activation process.
+
+
+** Debugging bonobo-activation
+
+	This is often best done by running:
+
+	gdb ./bonobo-activation
+	r --ac-activate
+
+	And then cutting and pasting the IOR it spews out into
+/tmp/orbit-$USER/reg:...-local.
 
 
 * The last resort.
