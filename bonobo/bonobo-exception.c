@@ -305,3 +305,14 @@ bonobo_exception_get_text (CORBA_Environment *ev)
 				ev->_id);
 	}
 }
+
+void
+bonobo_exception_general_error_set (CORBA_Environment *ev,
+				    CORBA_TypeCode    *opt_deriv,
+				    const char        *format,
+				    ...)
+{
+	/* FIXME: sets an exception - opt_deriv would be the typecode
+	   of an optionaly derived exception type from GeneralError */
+	g_warning ("Stubbed ....");
+}

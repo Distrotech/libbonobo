@@ -108,4 +108,9 @@ void  bonobo_exception_add_handler_fn  (const char *repo_id,
 					gpointer          user_data,
 					GDestroyNotify    destroy_fn);
 
+void  bonobo_exception_general_error_set (CORBA_Environment *ev,
+					  CORBA_TypeCode    *opt_deriv,
+					  const char        *format,
+					  ...);
+
 #endif /* _BONOBO_EXCEPTION_H_ */

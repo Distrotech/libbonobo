@@ -1,3 +1,8 @@
+2001-08-18  Michael Meeks  <michael@ximian.com>
+
+	* idl/Makefile.am: build the Activation_types into our
+	type library.
+
 2001-08-18  Darin Adler  <darin@bentspoon.com>
 
 	* bonobo/Makefile.am:
