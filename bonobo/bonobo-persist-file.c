@@ -62,12 +62,12 @@ impl_load (PortableServer_Servant servant,
 	int result;
 	
 	if (pf->load_fn != NULL)
-		result = (*pf->load_fn)(pf, filename, pf->closure);
+		result = (*pf->load_fn)(pf, filename, pf->closure, ev);
 	else {
 		GtkObjectClass *oc = GTK_OBJECT (pf)->klass;
 		BonoboPersistFileClass *class = BONOBO_PERSIST_FILE_CLASS (oc);
 		
-		result = (*class->load)(pf, filename);
+		result = (*class->load)(pf, filename, ev);
 	}
 	if (result != 0) {
 		CORBA_exception_set (
@@ -86,12 +86,12 @@ impl_save (PortableServer_Servant servant,
 	int result;
 	
 	if (pf->save_fn != NULL)
-		result = (*pf->save_fn)(pf, filename, pf->closure);
+		result = (*pf->save_fn)(pf, filename, pf->closure, ev);
 	else {
 		GtkObjectClass *oc = GTK_OBJECT (pf)->klass;
 		BonoboPersistFileClass *class = BONOBO_PERSIST_FILE_CLASS (oc);
 		
-		result = (*class->save)(pf, filename);
+		result = (*class->save)(pf, filename, ev);
 	}
 	
 	if (result != 0){
@@ -129,13 +129,16 @@ init_persist_file_corba_class (void)
 }
 
 static int
-bonobo_persist_file_nop (BonoboPersistFile *pf, const CORBA_char *filename)
+bonobo_persist_file_nop (BonoboPersistFile *pf,
+			 const CORBA_char  *filename,
+			 CORBA_Environment *ev)
 {
 	return -1;
 }
 
 static CORBA_char *
-bonobo_persist_file_get_current_file (BonoboPersistFile *pf)
+bonobo_persist_file_get_current_file (BonoboPersistFile *pf,
+				      CORBA_Environment *ev)
 {
 	if (pf->filename)
 		return pf->filename;

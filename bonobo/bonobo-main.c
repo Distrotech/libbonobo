@@ -15,7 +15,7 @@
 
 #include <signal.h>
 #include <gnome.h>
-#include <liboaf/oaf.h>
+#include <liboaf/liboaf.h>
 
 #include <X11/Xlib.h>
 

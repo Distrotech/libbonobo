@@ -25,7 +25,10 @@ typedef struct _BonoboPersistFile BonoboPersistFile;
 typedef struct _BonoboPersistFilePrivate BonoboPersistFilePrivate;
 
 
-typedef int (*BonoboPersistFileIOFn)(BonoboPersistFile *pf, const CORBA_char *filename, void *closure);
+typedef int (*BonoboPersistFileIOFn) (BonoboPersistFile *pf,
+				      const CORBA_char  *filename,
+				      CORBA_Environment *ev,
+				      void              *closure);
 
 struct _BonoboPersistFile {
 	BonoboPersist persist;
@@ -50,9 +53,17 @@ typedef struct {
 	/*
 	 * methods
 	 */
-	int        (*load)(BonoboPersistFile *ps, const CORBA_char *filename);
-	int        (*save)(BonoboPersistFile *ps, const CORBA_char *filename);
-	char*      (*get_current_file)(BonoboPersistFile *ps);	
+	int   (*load)             (BonoboPersistFile *ps,
+				   const CORBA_char  *filename,
+				   CORBA_Environment *ev);
+
+	int   (*save)             (BonoboPersistFile *ps,
+				   const CORBA_char  *filename,
+				   CORBA_Environment *ev);
+
+	char *(*get_current_file) (BonoboPersistFile *ps,
+				   CORBA_Environment *ev);
+
 } BonoboPersistFileClass;
 
 GtkType             bonobo_persist_file_get_type  (void);
@@ -60,13 +71,14 @@ void                bonobo_persist_file_set_dirty (BonoboPersistFile *ps,
 						    gboolean dirty);
 
 BonoboPersistFile *bonobo_persist_file_new       (BonoboPersistFileIOFn load_fn,
-						BonoboPersistFileIOFn save_fn,
-						void *closure);
+						  BonoboPersistFileIOFn save_fn,
+						  void *closure);
+
 BonoboPersistFile *bonobo_persist_file_construct (BonoboPersistFile *ps,
-						Bonobo_PersistFile corba_ps,
-						BonoboPersistFileIOFn load_fn,
-						BonoboPersistFileIOFn save_fn,
-						void *closure);
+						  Bonobo_PersistFile corba_ps,
+						  BonoboPersistFileIOFn load_fn,
+						  BonoboPersistFileIOFn save_fn,
+						  void *closure);
 
 POA_Bonobo_PersistFile__epv *bonobo_persist_file_get_epv (void);
 

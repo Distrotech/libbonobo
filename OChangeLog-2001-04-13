@@ -1,3 +1,15 @@
+2000-10-26  Michael Meeks  <michael@helixcode.com>
+
+	* Version 0.26
+	
+2000-10-26  Michael Meeks  <michael@helixcode.com>
+	
+	* bonobo/bonobo-object-client.c: fix include.
+
+	* bonobo/bonobo-main.c: fix include.
+
+	* bonobo/bonobo-persist-file.c: Add exceptions where needed.
+
 2000-10-25  Miguel de Icaza  <miguel@helixcode.com>
 
 	* bonobo/bonobo-property-bag.c (bonobo_property_bag_create_poa):

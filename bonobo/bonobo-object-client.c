@@ -10,6 +10,7 @@
  */
 #include <bonobo/bonobo-object-client.h>
 #include <liboaf/liboaf.h>
+#include <liboaf/oaf-async.h>
 #include <bonobo/bonobo-stream.h>
 #include <bonobo/bonobo-exception.h>
 
