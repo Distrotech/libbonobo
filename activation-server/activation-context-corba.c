@@ -639,35 +639,6 @@ impl_Bonobo_ActivationContext_activateMatching (
 }
 
 static Bonobo_ServerInfoList *
-impl_Bonobo_ActivationContext__get_servers (PortableServer_Servant servant,
-                                            CORBA_Environment     *ev)
-{
-        ActivationContext *actx = ACTIVATION_CONTEXT (servant);
-	Bonobo_ServerInfoList *retval;
-	int i;
-	int total;
-
-	ac_update_lists (actx, ev);
-
-	total = actx->total_servers;
-
-	retval = Bonobo_ServerInfoList__alloc ();
-	retval->_length = total;
-	retval->_buffer = CORBA_sequence_Bonobo_ServerInfo_allocbuf (total);
-	CORBA_sequence_set_release (retval, CORBA_TRUE);
-
-	for (i = 0; i < total;) {
-                int j;
-
-                for (j = 0; j < actx->list->_length; j++, i++)
-                        Bonobo_ServerInfo_copy (&retval->_buffer[i],
-                                                &actx->list->_buffer[j]);
-	}
-
-	return retval;
-}
-
-static Bonobo_ServerInfoList *
 impl_Bonobo_ActivationContext_query (PortableServer_Servant servant,
                                      const CORBA_char * requirements,
                                      const Bonobo_StringList * selection_order,
@@ -921,7 +892,6 @@ activation_context_class_init (ActivationContextClass *klass)
         object_class->finalize = activation_context_finalize;
 
         epv->_get_directories = impl_Bonobo_ActivationContext__get_directories;
-	epv->_get_servers     = impl_Bonobo_ActivationContext__get_servers;
 	epv->addClient         = impl_Bonobo_ActivationContext_addClient;
 	epv->addDirectory      = impl_Bonobo_ActivationContext_addDirectory;
 	epv->removeDirectory   = impl_Bonobo_ActivationContext_removeDirectory;

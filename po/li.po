@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
-"POT-Creation-Date: 2003-11-03 15:41+0000\n"
+"POT-Creation-Date: 2003-12-08 23:52+0000\n"
 "PO-Revision-Date: 2003-06-05 10:21+0100\n"
 "Last-Translator: Mathieu van Woerkom <mathieu@brabants.org>\n"
 "Language-Team: Limburgish\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:472
+#: activation-server/activation-context-corba.c:473
 msgid "Couldn't find which child the server was listed in"
 msgstr "Kós neet vènje in welke dochter de server geneump woor"
 
-#: activation-server/activation-context-corba.c:763
+#: activation-server/activation-context-corba.c:751
 msgid "Not a valid Activation ID"
 msgstr "Gein geljige Activation-ID"
 
@@ -61,7 +61,16 @@ msgstr "CORBA CosNaming service"
 msgid "Name service"
 msgstr "Naam deens"
 
-#: activation-server/object-directory-activate.c:185
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+#, fuzzy
+msgid "Notification service"
+msgstr "Naam deens"
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+msgid "Notification service for activation"
+msgstr ""
+
+#: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
 "Veer sjtiepe 't aktivere van bibeleteekobjekte in ein anger proses nog neet"
@@ -82,7 +91,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:890
+#: activation-server/object-directory-corba.c:1128
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Race-condisie bie aktivere van server '%s'"
@@ -185,6 +194,14 @@ msgstr "Febrik '%s' goof NIL trök veur '%s'"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Bibeleteek '%s' hauw gein '%s'"
+
+#: bonobo/bonobo-application.c:336
+msgid "Name"
+msgstr ""
+
+#: bonobo/bonobo-application.c:336
+msgid "Application unique name"
+msgstr ""
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"

@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.mk\n"
-"POT-Creation-Date: 2003-11-03 15:41+0000\n"
+"POT-Creation-Date: 2003-12-08 23:52+0000\n"
 "PO-Revision-Date: 2003-06-15 20:50+0000\n"
 "Last-Translator: Vladislav Bidikov <bidikovi@mail.com.mk>\n"
 "Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
@@ -21,11 +21,11 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.1\n"
 
-#: activation-server/activation-context-corba.c:472
+#: activation-server/activation-context-corba.c:473
 msgid "Couldn't find which child the server was listed in"
 msgstr "Неможе да најде кое дете серверот го слуша"
 
-#: activation-server/activation-context-corba.c:763
+#: activation-server/activation-context-corba.c:751
 msgid "Not a valid Activation ID"
 msgstr "Невалиден Activation ID"
 
@@ -68,7 +68,16 @@ msgstr "CORBA CosNaming сервис."
 msgid "Name service"
 msgstr "Име на сервисот"
 
-#: activation-server/object-directory-activate.c:185
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+#, fuzzy
+msgid "Notification service"
+msgstr "Име на сервисот"
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+msgid "Notification service for activation"
+msgstr ""
+
+#: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Сеуште не ги активираме рачно shlib објектите во далечните процеси"
 
@@ -88,7 +97,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:890
+#: activation-server/object-directory-corba.c:1128
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Исклучок при активирање на '%s"
@@ -191,6 +200,14 @@ msgstr "Фабричкиот `%s' враќа NIL за `%s'"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' не содржи `%s'"
+
+#: bonobo/bonobo-application.c:336
+msgid "Name"
+msgstr ""
+
+#: bonobo/bonobo-application.c:336
+msgid "Application unique name"
+msgstr ""
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"

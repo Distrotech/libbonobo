@@ -1,3 +1,10 @@
+2003-12-08  Michael Meeks  <michael@ximian.com>
+
+	* Version 2.5.1
+
+	* activation-server/activation-context-corba.c
+	(impl_Bonobo_ActivationContext__get_servers): prune.
+
 2003-12-08  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* bonobo-activation/bonobo-activation-activate.c

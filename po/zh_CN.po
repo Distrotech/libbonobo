@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2003-11-03 15:41+0000\n"
+"POT-Creation-Date: 2003-12-08 23:52+0000\n"
 "PO-Revision-Date: 2003-08-09 04:16+0100\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 
 # SUN CHANGED MESSAGE
-#: activation-server/activation-context-corba.c:472
+#: activation-server/activation-context-corba.c:473
 msgid "Couldn't find which child the server was listed in"
 msgstr "无法找到列出该服务器的子进程"
 
-#: activation-server/activation-context-corba.c:763
+#: activation-server/activation-context-corba.c:751
 msgid "Not a valid Activation ID"
 msgstr "不是有效的激活 ID"
 
@@ -67,7 +67,17 @@ msgid "Name service"
 msgstr "名称服务"
 
 # SUN CHANGED MESSAGE
-#: activation-server/object-directory-activate.c:185
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+#, fuzzy
+msgid "Notification service"
+msgstr "名称服务"
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+msgid "Notification service for activation"
+msgstr ""
+
+# SUN CHANGED MESSAGE
+#: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "我们尚未处理在远程进程中激活 shlib 对象的操作"
 
@@ -87,7 +97,7 @@ msgstr "Bonobo 激活配置文件未能成功读取。请在 %s 中检查它是�
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:890
+#: activation-server/object-directory-corba.c:1128
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "竞争条件激活服务器“%s”"
@@ -202,6 +212,14 @@ msgstr "车间“%s”对于“%s”返回空值"
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib“%s”不包含“%s”"
+
+#: bonobo/bonobo-application.c:336
+msgid "Name"
+msgstr ""
+
+#: bonobo/bonobo-application.c:336
+msgid "Application unique name"
+msgstr ""
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"

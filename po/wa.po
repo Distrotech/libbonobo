@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bonobo-activation\n"
-"POT-Creation-Date: 2003-11-03 15:41+0000\n"
+"POT-Creation-Date: 2003-12-08 23:52+0000\n"
 "PO-Revision-Date: 2003-01-12 15:28+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -13,11 +13,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: activation-server/activation-context-corba.c:472
+#: activation-server/activation-context-corba.c:473
 msgid "Couldn't find which child the server was listed in"
 msgstr ""
 
-#: activation-server/activation-context-corba.c:763
+#: activation-server/activation-context-corba.c:751
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -61,7 +61,16 @@ msgstr "No do siervice"
 msgid "Name service"
 msgstr "No do siervice"
 
-#: activation-server/object-directory-activate.c:185
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+#, fuzzy
+msgid "Notification service"
+msgstr "No do siervice"
+
+#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+msgid "Notification service for activation"
+msgstr ""
+
+#: activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
 
@@ -79,7 +88,7 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:890
+#: activation-server/object-directory-corba.c:1128
 #, fuzzy, c-format
 msgid "Race condition activating server '%s'"
 msgstr "L' enondaedje di %s a fwait berwete: %d (%s)\n"
@@ -185,6 +194,14 @@ msgstr ""
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Li pårteye livreye «%s» n' a nén «%s» å dvins"
+
+#: bonobo/bonobo-application.c:336
+msgid "Name"
+msgstr ""
+
+#: bonobo/bonobo-application.c:336
+msgid "Application unique name"
+msgstr ""
 
 #: bonobo/bonobo-object.c:919
 msgid "POA"

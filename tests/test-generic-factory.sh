@@ -26,7 +26,7 @@ echo "Starting client"
 ./test-generic-factory > test-generic-factory.output
 
 echo "Waiting for factory to terminate; Please hold on a second, otherwise hit Ctrl-C."
-wait %1
+wait
 
 echo "Comparing factory output with model..."
 if diff -u $MODELS_DIR/generic-factory.output generic-factory.output; then
