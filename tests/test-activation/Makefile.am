@@ -31,6 +31,6 @@ bin_SCRIPTS=oaf-slay
 oaf-slay: $(srcdir)/oaf-slay.tmpl
 	sed 's|@oafdir@|'$(pkgdatadir)'|g' < $< > $@
 
-EXTRA_DIST=empty.idl $(oaffiles)
+EXTRA_DIST=empty.idl oaf-slay.tmpl $(oaffiles)
 
 TESTS=oaf-test-client
