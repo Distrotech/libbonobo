@@ -13,6 +13,77 @@ static GnomeObjectClass *gnome_stream_parent_class;
 POA_GNOME_Stream__vepv gnome_stream_vepv;
 
 #define CLASS(o) GNOME_STREAM_CLASS(GTK_OBJECT(o)->klass)
+
+static inline GnomeStream *
+gnome_stream_from_servant (PortableServer_Servant servant)
+{
+	return GNOME_STREAM (gnome_object_from_servant (servant));
+}
+
+static CORBA_long
+impl_read (PortableServer_Servant servant,
+	   const CORBA_long count,
+	   CORBA_char ** buffer,
+	   CORBA_Environment * ev)
+{
+	GnomeStream *stream = gnome_stream_from_servant (servant);
+
+	return CLASS (stream)->read (stream, count, buffer, ev);
+}
+
+static CORBA_long
+impl_write (PortableServer_Servant servant,
+	    const CORBA_long count,
+	    const CORBA_char *buffer,
+	    CORBA_Environment *ev)
+{
+	GnomeStream *stream = gnome_stream_from_servant (servant);
+
+	return CLASS (stream)->write (stream, count, buffer, ev);
+}
+
+static void
+impl_seek (PortableServer_Servant servant,
+	   const CORBA_long offset,
+	   const CORBA_long whence,
+	   CORBA_Environment *ev)
+{
+	GnomeStream *stream = gnome_stream_from_servant (servant);
+
+	CLASS (stream)->seek (stream, offset, whence, ev);
+}
+
+static void
+impl_truncate (PortableServer_Servant servant,
+	       const CORBA_long length,
+	       CORBA_Environment *ev)
+{
+	GnomeStream *stream = gnome_stream_from_servant (servant);
+
+	return CLASS (stream)->truncate (stream, length, ev);
+}
+
+static void
+impl_copy_to (PortableServer_Servant servant,
+	      const CORBA_char *dest,
+	      const CORBA_long bytes,
+	      CORBA_long *read,
+	      CORBA_long *written,
+	      CORBA_Environment *ev)
+{
+	GnomeStream *stream = gnome_stream_from_servant (servant);
+
+	return CLASS (stream)->copy_to (stream, dest, bytes, read, written, ev);
+}
+
+static void
+impl_commit (PortableServer_Servant servant, CORBA_Environment * ev)
+{
+	GnomeStream *stream = gnome_stream_from_servant (servant);
+
+	return CLASS (stream)->commit (stream, ev);
+}
+
 static void
 init_stream_corba_class (void)
 {

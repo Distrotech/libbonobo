@@ -14,6 +14,12 @@ POA_GNOME_Storage__vepv gnome_storage_vepv;
 
 #define CLASS(o) GNOME_STORAGE_CLASS(GTK_OBJECT(o)->klass)
 
+static inline GnomeStorage *
+gnome_storage_from_servant (PortableServer_Servant servant)
+{
+	return GNOME_STORAGE (gnome_object_from_servant (servant));
+}
+
 static GNOME_Stream
 impl_create_stream (PortableServer_Servant servant, const CORBA_char *path, CORBA_Environment *ev)
 {
