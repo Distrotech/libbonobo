@@ -1,6 +1,6 @@
 lib_LTLIBRARIES=liboaf.la
 
-INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -I$(top_srcdir)/liboaf @ORBIT_CFLAGS@ @GLIB_CFLAGS@
+INCLUDES=-I$(top_srcdir) -I$(top_builddir) -I$(top_builddir)/liboaf -I$(top_srcdir)/liboaf @ORBIT_CFLAGS@ @GLIB_CFLAGS@ -DVERSION=\"$(VERSION)\"
 
 LDFLAGS=@ORBIT_LIBS@ @GLIB_LIBS@
 

@@ -105,5 +105,6 @@ CORBA_ORB oaf_orb_init(int *argc, char **argv);
 void oaf_preinit(gpointer app, gpointer mod_info);
 void oaf_postinit(gpointer app, gpointer mod_info);
 const char *oaf_activation_iid_get(void);
+extern const char liboaf_version[];
 
 #endif

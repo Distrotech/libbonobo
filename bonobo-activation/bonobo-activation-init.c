@@ -343,3 +343,5 @@ oaf_orb_init(int *argc, char **argv)
 #error "You need to use a supported ORB for liboaf"
 
 #endif
+
+const char liboaf_version[] = VERSION;
