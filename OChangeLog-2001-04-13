@@ -1,3 +1,64 @@
+2000-08-02  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-control.c (bonobo_control_destroy): split out the widget
+	unrefs to (bonobo_control_finalize): here & priv free.
+	(bonobo_control_class_init): hook it in.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_destroy): split out widget
+	unref to here (bonobo_view_frame_finalize): along with priv free.
+	(bonobo_view_frame_class_init): set it up here.
+
+	* bonobo/bonobo-object.c (bonobo_object_finalize_real): insurance.
+
+	* bonobo/bonobo-control-frame.c (bonobo_control_frame_bind_to_control):
+	update. (bonobo_control_frame_destroy): update.
+
+	* bonobo/bonobo-view-frame.c (bonobo_view_frame_bind_to_view): update.
+	(bonobo_view_frame_destroy): update.
+
+	* bonobo/bonobo-client-site.c (bonobo_client_site_new_view_full): update.
+
+	* bonobo/bonobo-stream-memory.c (mem_get_size): fix typo.
+
+	* bonobo/bonobo-uih-menu.c (impl_Bonobo_UIHandler_menu_activated): take a
+	ref around the callback / signal emission.
+
+	* components/text-plain/text-plain.oafinfo: kill text/html this should be
+	handled by text/* anyway.
+
+	* bonobo/bonobo-ui-handler.c (bonobo_ui_handler_unset_container): unref
+	the UI handler. (bonobo_ui_handler_set_container): kill redundant
+	CORBA_Object_duplicate.
+
+2000-08-01  Michael Meeks  <michael@helixcode.com>
+
+	* idl/bonobo-embeddable.idl (EmbeddableFactory): Prune stale /
+	unimplemented factory, surely monikers do this.
+
+	* bonobo/bonobo-object.c (bonobo_object_dup_ref, bonobo_object_release_unref):
+	implement.
+
+	* bonobo/bonobo-client-site.c (impl_Bonobo_client_site_get_container):
+	ref the object before returning see docs/refcounting.txt
+
+	* bonobo/bonobo-view-frame.c (impl_Bonobo_ViewFrame_get_client_site):
+	ditto.
+
+	* bonobo/bonobo-ui-handler.c (impl_Bonobo_UIHandler_get_toplevel):
+	ditto.
+
+	* bonobo/bonobo-control-frame.c (impl_Bonobo_ControlFrame_get_ambient_properties),
+	(impl_Bonobo_ControlFrame_get_ui_handler): ditto.
+
+	* bonobo/bonobo-control.c (impl_Bonobo_Control_get_property_bag): ditto.
+
+	* bonobo/bonobo-embeddable.c (impl_Bonobo_Embeddable_get_client_site):
+	prune crud & fix ref. (impl_Bonobo_Embeddable_new_canvas_item): fix ref.
+	(impl_Bonobo_Embeddable_new_view): ditto.
+
+	* bonobo/bonobo-property-bag-client.c (bonobo_property_bag_client_construct): 
+	remove ref incrementing kludge.
+
 2000-08-02 Alastair McKinstry <mckinstry@computer.org>
 
 	* configure.in: Added Language ga - Irish

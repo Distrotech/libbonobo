@@ -8,7 +8,7 @@
 
 BEGIN_GNOME_DECLS
 
-#undef BONOBO_OBJECT_DEBUG
+#define BONOBO_OBJECT_DEBUG
  
 #define BONOBO_OBJECT_TYPE        (bonobo_object_get_type ())
 #define BONOBO_OBJECT(o)          (GTK_CHECK_CAST ((o), BONOBO_OBJECT_TYPE, BonoboObject))
@@ -68,6 +68,10 @@ Bonobo_Unknown           bonobo_object_corba_objref           (BonoboObject     
 /*
  * Gnome Object Life Cycle
  */
+Bonobo_Unknown           bonobo_object_dup_ref                (Bonobo_Unknown          object,
+							       CORBA_Environment      *ev);
+void                     bonobo_object_release_unref          (Bonobo_Unknown          object,
+							       CORBA_Environment      *ev);
 void                     bonobo_object_ref                    (BonoboObject           *object);
 void                     bonobo_object_unref                  (BonoboObject           *object);
 POA_Bonobo_Unknown__epv *bonobo_object_get_epv                (void);

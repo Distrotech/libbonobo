@@ -165,10 +165,4 @@ interface Embeddable : Bonobo::Unknown {
 	Canvas::Component new_canvas_item (in boolean                aa,
 					   in Canvas::ComponentProxy proxy);
 };
-
-
-interface EmbeddableFactory : Bonobo::GenericFactory {
-	Embeddable create_path (in string path);
-};
-
 };

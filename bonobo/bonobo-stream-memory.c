@@ -196,7 +196,7 @@ mem_get_buffer (BonoboStreamMem *stream_mem)
 static size_t
 mem_get_size (BonoboStreamMem *stream_mem)
 {
-	g_return_val_if_fail (BONOBO_IS_STREAM_MEM (stream_mem), NULL);
+	g_return_val_if_fail (BONOBO_IS_STREAM_MEM (stream_mem), 0);
 
 	return stream_mem->size;
 }

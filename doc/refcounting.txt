@@ -76,6 +76,8 @@ you should have worked out where the reference went astray.
 
 	And now for the important stuff:
 
+** Bonobo Ref Counting
+
 The Bonobo ref count convention is as follows.  (Mild rewording; same
 meaning as before)
 
@@ -99,3 +101,40 @@ parameters can obscure the lifetime of the passed argument to casual
 code observers, and thus may cause hidden side-effects.
 
 
+** CORBA Ref-counting
+
+Since the ORB also maintains reference counts per interface handle,
+should you be returning a reference to an object it is imperative
+to
+
+	Bonobo_Unknown_ref (corba_object, ev);
+	return CORBA_Object_duplicate (corba_object, ev);
+
+To assist with this there are two functions:
+
+Bonobo_Unknown bonobo_object_dup_ref       (Bonobo_Unknown     object,
+                                            CORBA_Environment *ev);
+void           bonobo_object_release_unref (Bonobo_Unknown     object,
+                                            CORBA_Environment *ev);
+
+So to return an Unknown from a impl you can simply:
+
+	return bonobo_object_dup_ref (corba_object, ev);
+
+Warning; there is a caveat with this approach which is this:
+
+If you construct a BonoboObject in an impl_ whose reference you
+wish to hand back to the caller then the situation is slightly
+different. In this case you have an object with the following:
+
+Bonobo_Unknown: ref 1
+BonoboObject:   ref 1
+
+You want to hand a CORBA reference to this object to the client,
+without incrementing the BonoboObject reference. To do this you
+must do:
+
+	return CORBA_Object_duplicate (
+		bonobo_object_corba_objref (BONOBO_OBJECT (myobject)));
+
+This is a special case.

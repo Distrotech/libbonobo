@@ -320,6 +320,75 @@ impl_Bonobo_Unknown_ref (PortableServer_Servant servant, CORBA_Environment *ev)
 #endif
 }
 
+/**
+ * bonobo_object_dup_ref:
+ * @object: a Bonobo_Unknown corba object
+ * @ev: Corba_Environment
+ * 
+ *   This function returns a duplicated CORBA Object reference,
+ * it also bumps the ref count on the object. This is ideal to
+ * use in any method returning a Bonobo_Object in a CORBA impl.
+ * 
+ * Return value: duplicated & ref'd corba object reference.
+ **/
+Bonobo_Unknown
+bonobo_object_dup_ref (Bonobo_Unknown     object,
+		       CORBA_Environment *ev)
+{
+	CORBA_Environment tmpev, *rev;
+	Bonobo_Unknown    ans;
+	
+	g_return_val_if_fail (object != CORBA_OBJECT_NIL,
+			      CORBA_OBJECT_NIL);
+
+	if (ev)
+		rev = ev;
+	else {
+		rev = &tmpev;
+		CORBA_exception_init (rev);
+	}
+
+	Bonobo_Unknown_ref (object, rev);
+	ans = CORBA_Object_duplicate (object, rev);
+
+	if (!ev)
+		CORBA_exception_free (&tmpev);
+
+	return ans;
+}
+
+/**
+ * bonobo_object_release_unref:
+ * @object: a Bonobo_Unknown corba object
+ * @ev: Corba_Environment, optional
+ * 
+ *   This function returns releases a CORBA Object reference,
+ * it also decrements the ref count on the bonobo object.
+ * This is the converse of bonobo_object_release_ref
+ * 
+ **/
+void
+bonobo_object_release_unref (Bonobo_Unknown     object,
+			     CORBA_Environment *ev)
+{
+	CORBA_Environment tmpev, *rev;
+
+	g_return_if_fail (object != CORBA_OBJECT_NIL);
+
+	if (ev)
+		rev = ev;
+	else {
+		rev = &tmpev;
+		CORBA_exception_init (rev);
+	}
+
+	Bonobo_Unknown_unref (object, rev);
+	CORBA_Object_release (object, rev);
+
+	if (!ev)
+		CORBA_exception_free (&tmpev);
+}
+
 static void
 impl_Bonobo_Unknown_unref (PortableServer_Servant servant, CORBA_Environment *ev)
 {
@@ -483,8 +552,10 @@ bonobo_object_finalize_real (GtkObject *object)
 
 	CORBA_exception_init (&ev);
 
-	if (bonobo_object->corba_objref != CORBA_OBJECT_NIL)
+	if (bonobo_object->corba_objref != CORBA_OBJECT_NIL) {
 		CORBA_Object_release (bonobo_object->corba_objref, &ev);
+		bonobo_object->corba_objref = CORBA_OBJECT_NIL;
+	}
 
 	if (servant) {
 		PortableServer_ObjectId *oid;

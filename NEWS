@@ -1,0 +1,11 @@
+Bonobo 0.16
+
+Michael:
+	* Updated docs/refcounting.txt
+	* Enforced ref counting policy globaly.
+
+Gergo:
+	* Purged 'attribute' code from oaf bits
+
+Ettore:
+	* More fixing of BadMatch errors on plug/socket
