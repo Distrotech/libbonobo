@@ -18,6 +18,7 @@ typedef struct {
 
 	CORBA_Object object;
 	CORBA_Environment ev;
+	gpointer servant;
 } GnomeObject;
 
 typedef struct {

@@ -21,7 +21,6 @@ enum {
 static guint gnome_object_signals [LAST_SIGNAL];
 static GtkObjectClass *gnome_object_parent_class;
 
-static GHashTable *object_to_servant;
 static GHashTable *servant_to_object;
 
 GnomeObject *
@@ -44,11 +43,10 @@ gnome_object_bind_to_servant (GnomeObject *object, void *servant)
 
 	if (!servant_to_object){
 		servant_to_object = g_hash_table_new (g_direct_hash, g_direct_equal);
-		object_to_servant = g_hash_table_new (g_direct_hash, g_direct_equal);
 	}
 	
 	g_hash_table_insert (servant_to_object, servant, object);
-	g_hash_table_insert (object_to_servant, object, servant);
+	object->servant = servant;
 }
 
 void
@@ -59,7 +57,6 @@ gnome_object_drop_binding_by_servant (void *servant)
 
 	object = g_hash_table_lookup (servant_to_object, servant);
 	g_hash_table_remove (servant_to_object, servant);
-	g_hash_table_remove (object_to_servant, object);
 }
 
 void
@@ -70,9 +67,8 @@ gnome_object_drop_binding (GnomeObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_OBJECT (object));
 
-	servant = g_hash_table_lookup (object_to_servant, object);
+	servant = object->servant;
 	g_hash_table_remove (servant_to_object, servant);
-	g_hash_table_remove (object_to_servant, object);
 }
 
 static void
@@ -165,7 +161,7 @@ static void
 gnome_object_destroy (GtkObject *object)
 {
 	GnomeObject *gnome_object = GNOME_OBJECT (object);
-	void *servant = g_hash_table_lookup (object_to_servant, object);
+	void *servant = gnome_object->servant;
 	
 	gnome_object_drop_binding (gnome_object);
 	if (gnome_object->object != CORBA_OBJECT_NIL){
