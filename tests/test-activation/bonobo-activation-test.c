@@ -51,7 +51,10 @@ test_bonobo_activation_server (CORBA_Environment *ev, const char *type)
                 return FALSE;
         }
 
-        name_service = ns;
+        if (name_service == CORBA_OBJECT_NIL)
+                name_service = ns;
+        else
+                CORBA_Object_release (ns, ev);
 
         return TRUE;
 }
@@ -355,6 +358,9 @@ main (int argc, char *argv[])
 		fprintf (stderr, "Another possibility is that you failed to kill "
 			 "bonobo_activation_server before running make check; try running bonobo-slay.\n");
         }
+
+        if (name_service != CORBA_OBJECT_NIL)
+                CORBA_Object_release (name_service, &ev);
 
 	CORBA_exception_free (&ev);
 
