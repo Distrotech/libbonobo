@@ -29,6 +29,7 @@
 #include <popt.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <locale.h>
 
 #include "liboaf/liboaf.h"
@@ -90,6 +91,11 @@ main (int argc, char *argv[])
 	char *ior;
 	FILE *fh;
 	struct sigaction sa;
+
+	if (chdir ("/")) {
+		g_print ("Couldn't chdir() to '/' (why ?!!). Exiting.\n");
+		exit (EXIT_FAILURE);
+	}
 
 	setlocale(LC_ALL, "");
 
