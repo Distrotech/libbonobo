@@ -83,6 +83,16 @@ Implementents Bonobo::Listener.
 </para>
 
 
+<!-- ##### SIGNAL BonoboListener::event-notify ##### -->
+<para>
+
+</para>
+
+@bonobolistener: the object which received the signal.
+@arg1: 
+@arg2: 
+@arg3: 
+
 <!-- ##### TYPEDEF BonoboListenerClass ##### -->
 <para>
 #BonoboListener's class

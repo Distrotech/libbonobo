@@ -82,7 +82,7 @@ to Bonobo Activation once it is created.
 @Returns: 
 
 
-<!-- ##### TYPEDEF BonoboActivationPlugin ##### -->
+<!-- ##### STRUCT BonoboActivationPlugin ##### -->
 <para>
 Components which want to be activated as 
 shared libraries must export an BonoboActivationPlugin
@@ -126,12 +126,18 @@ const BonoboActivationPlugin Bonobo_Plugin_info = {
 </programlisting>
 </para>
 
+@plugin_object_list: 
+@description: 
+@dummy: 
 
-<!-- ##### TYPEDEF BonoboActivationPluginObject ##### -->
+<!-- ##### STRUCT BonoboActivationPluginObject ##### -->
 <para>
 
 </para>
 
+@iid: 
+@activate: 
+@dummy: 
 
 <!-- ##### FUNCTION bonobo_activation_plugin_use ##### -->
 <para>

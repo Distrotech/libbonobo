@@ -20,6 +20,17 @@ Object that implements Bonobo::ItemHandler
 </para>
 
 
+<!-- ##### SIGNAL BonoboItemContainer::get-object ##### -->
+<para>
+Signal emitted when a sub-object is requested from the item container.
+</para>
+
+@bonoboitemcontainer: the object which received the signal.
+@arg1: the item name, i.e. the string after the '!' character, usually a semicolon separated list of key=value options
+@arg2: the "only_if_exists" flag; if %TRUE, client requests that subobject be returned if it exists, but that it should not be created on demand if it doesn't
+@arg3: environment, in case the signal wishes to raise an exception
+@Returns: an object contained by the item container, or %CORBA_OBJECT_NIL.
+
 <!-- ##### TYPEDEF BonoboItemContainerClass ##### -->
 <para>
 #BonoboItemContainer's class
@@ -52,15 +63,4 @@ Object that implements Bonobo::ItemHandler
 @container: 
 @name: 
 
-
-<!-- ##### SIGNAL BonoboItemContainer::get-object ##### -->
-<para>
-Signal emitted when a sub-object is requested from the item container.
-</para>
-
-@bonoboitemcontainer: the object which received the signal.
-@arg1: the item name, i.e. the string after the '!' character, usually a semicolon separated list of key=value options
-@arg2: the "only_if_exists" flag; if %TRUE, client requests that subobject be returned if it exists, but that it should not be created on demand if it doesn't
-@arg3: environment, in case the signal wishes to raise an exception
-@Returns: an object contained by the item container, or %CORBA_OBJECT_NIL.
 
