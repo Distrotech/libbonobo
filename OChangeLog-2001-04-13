@@ -1,3 +1,15 @@
+2000-11-30  Cody Russell  <bratsche@gnome.org>
+	* bonobo/bonobo-ui-toolbar-icon.c:  When the theme makes use of bg_pixmap,
+	and when mode == BONOBO_UI_TOOLBAR_ICON_COLOR, do full 8-bit alpha
+	compositing of icons over backgrounds.
+
+	Also contains commented out code to do full alpha compositing over
+	other themes, but it is currently slightly broken.  As the comments
+	say, I'll buy anyone a beer who solves this one.
+
+	* bonobo/bonobo-ui-toolbar-item.h:  Change #include <gtk/gtkbin.h>
+	to <gtk/gtk.h> to fix some compile problems.
+
 Wed Nov 29 19:56:59 2000  Dietmar Maurer  <dietmar@maurer-it.com>
 
 	* storage-modules/bonobo-stream-fs.c (fs_get_info): never return a
