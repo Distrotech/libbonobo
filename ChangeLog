@@ -1,5 +1,11 @@
 2001-04-13  Martin Baulig  <baulig@suse.de>
 
+	* libbonobo/Makefile.am: Added simple Makefile.am.
+
+	* libbonobo/libbonobo-2.0.pc.in: New file.
+
+2001-04-13  Martin Baulig  <baulig@suse.de>
+
 	* AUTHORS, DEPENDS, HACKING, MAINTAINERS, NEWS, COPYING.LIB,
 	README, TODO, TRANSLATABLE_FILES, USERS, OChangeLog-2000-12-11:
 	Copied here from bonobo.

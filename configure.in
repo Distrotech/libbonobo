@@ -44,6 +44,7 @@ Makefile
 po/Makefile.in
 intl/Makefile
 libbonobo/Makefile
+libbonobo/libbonobo-2.0.pc
 ])
 
 cat $srcdir/message-of-doom
