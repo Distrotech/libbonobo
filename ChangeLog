@@ -1,3 +1,8 @@
+2001-08-08  Darin Adler  <darin@bentspoon.com>
+
+	* bonobo/Makefile.am: One more tweak to the dependency
+	fix. We still need to include bonobo-marshal.c.
+
 2001-08-08  Michael Meeks  <michael@ximian.com>
 
 	* idl/Makefile.am: move typelib stuff here, add whacked out
