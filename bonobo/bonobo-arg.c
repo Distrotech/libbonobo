@@ -1,3 +1,4 @@
+/* -*- mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * bonobo-arg.c Bonobo argument support:
  *
@@ -13,6 +14,14 @@
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-arg.h>
+#include "bonobo-types.h"
+
+
+/* Key: CORBA_TypeCode; Value: BonoboArgToGValueFn. */
+static GHashTable *bonobo_arg_to_gvalue_mapping   = NULL;
+/* Key: GType; Value: BonoboArgFromGValueFn */
+static GHashTable *bonobo_arg_from_gvalue_mapping = NULL;
+
 
 /**
  * bonobo_arg_new:
@@ -388,3 +397,159 @@ bonobo_arg_is_equal (const BonoboArg *a, const BonoboArg *b, CORBA_Environment *
 
 	return retval;
 }
+
+
+/**
+ * bonobo_arg_to_gvalue_copy:
+ * @arg: source value
+ * @value: destination value
+ * 
+ * Converts a #BonoboArg @arg into a #GValue.  Unlike
+ * bonobo_arg_to_gvalue(), the destination #GValue does not need to --
+ * and should not -- be initialized.
+ * 
+ * Return value: Returns %TRUE if conversion succeeds, %FALSE otherwise.
+ **/
+gboolean
+bonobo_arg_to_gvalue_copy (BonoboArg const *arg, GValue *value)
+{
+	BonoboArgToGValueFn converter;
+
+	g_assert (bonobo_arg_from_gvalue_mapping);
+
+#define TO_GVALUE_CASE(gtypename, bonoboargname, typename, typecode)			\
+	if (CORBA_TypeCode_equal(arg->_type, typecode, NULL)) {				\
+		g_value_init (value, G_TYPE_##gtypename);				\
+		g_value_set_##typename (value, BONOBO_ARG_GET_##bonoboargname(arg));	\
+		return TRUE;								\
+	}
+
+	TO_GVALUE_CASE (STRING,  STRING,  string,  TC_CORBA_string);
+	TO_GVALUE_CASE (CHAR,    CHAR,    char,    TC_CORBA_char);
+	TO_GVALUE_CASE (BOOLEAN, BOOLEAN, boolean, TC_CORBA_boolean);
+	TO_GVALUE_CASE (LONG,    LONG,    long,    TC_CORBA_long);
+	TO_GVALUE_CASE (ULONG,   ULONG,   ulong,   TC_CORBA_unsigned_long);
+	TO_GVALUE_CASE (FLOAT,   FLOAT,   float,   TC_CORBA_float);
+	TO_GVALUE_CASE (DOUBLE,  DOUBLE,  double,  TC_CORBA_double);
+	
+	converter = g_hash_table_lookup (bonobo_arg_to_gvalue_mapping,
+					 arg->_type);
+	if (converter)
+	    converter (arg, value);
+	else
+	    return FALSE;
+	return TRUE;
+}
+
+
+/**
+ * bonobo_arg_to_gvalue_copy:
+ * @arg: destination value
+ * @value: source value
+ * 
+ * Converts a #GValue into a #BonoboArg.  Unlike
+ * bonobo_arg_from_gvalue(), the destination #BonoboArg does not need
+ * to -- and should not -- be initialized.
+ * 
+ * Return value: Returns %TRUE if conversion succeeds, %FALSE otherwise.
+ **/
+gboolean
+bonobo_arg_from_gvalue_copy (BonoboArg *arg, GValue const *value)
+{
+	BonoboArgFromGValueFn converter;
+
+	g_return_val_if_fail (arg, FALSE);
+	g_return_val_if_fail (value, FALSE);
+	g_assert (bonobo_arg_from_gvalue_mapping);
+
+#define FROM_GVALUE_CASE(gtype, gtypename, tcid, corbatype)				\
+case G_TYPE_##gtype:									\
+	arg->_type = tcid;								\
+	arg->_value = ORBit_alloc_tcval (tcid, 1);					\
+	*((corbatype *)arg->_value) = (corbatype) g_value_get_##gtypename (value);	\
+	arg->_release = CORBA_TRUE;							\
+	return TRUE;
+	
+	switch (G_VALUE_TYPE (value))
+	{
+		FROM_GVALUE_CASE (CHAR,    char,    TC_CORBA_char,          CORBA_char);
+		FROM_GVALUE_CASE (UCHAR,   uchar,   TC_CORBA_char,          CORBA_char);
+		FROM_GVALUE_CASE (BOOLEAN, boolean, TC_CORBA_boolean,       CORBA_boolean);
+		FROM_GVALUE_CASE (INT,     int,     TC_CORBA_long,          CORBA_long);
+		FROM_GVALUE_CASE (UINT,    uint,    TC_CORBA_unsigned_long, CORBA_unsigned_long);
+		FROM_GVALUE_CASE (LONG,    long,    TC_CORBA_long,          CORBA_long);
+		FROM_GVALUE_CASE (ULONG,   ulong,   TC_CORBA_unsigned_long, CORBA_unsigned_long);
+		FROM_GVALUE_CASE (FLOAT,   float,   TC_CORBA_float,         CORBA_float);
+		FROM_GVALUE_CASE (DOUBLE,  double,  TC_CORBA_double,        CORBA_double);
+#undef FROM_GVALUE_FN
+
+	case G_TYPE_STRING:
+		*((CORBA_char **)arg->_value) =
+			CORBA_string_dup (g_value_get_string (value));
+		arg->_release = CORBA_TRUE;
+		return TRUE;
+	}
+	  /* default: try to lookup a converter function */
+	converter = g_hash_table_lookup (bonobo_arg_from_gvalue_mapping,
+					 GUINT_TO_POINTER (G_VALUE_TYPE (value)));
+	if (converter)
+		converter (arg, value);
+	else
+		return FALSE;
+	return TRUE;
+}
+
+
+/* GValue => BonoboArg converters */
+
+static void
+__bonobo_arg_from_CORBA_ANY (BonoboArg    *out_arg,
+			     GValue const *value)
+{
+	out_arg->_type    = TC_CORBA_any;
+	out_arg->_value   = bonobo_value_get_corba_any (value);
+	out_arg->_release = CORBA_TRUE;
+}
+
+static void
+__TC_CORBA_any_to_gvalue (BonoboArg const *arg,
+			  GValue          *out_value)
+{
+	g_value_init (out_value, BONOBO_TYPE_CORBA_ANY);
+	bonobo_value_set_corba_any (out_value, arg->_value);
+}
+
+
+void
+bonobo_arg_register_from_gvalue_converter (GType                 gtype,
+					   BonoboArgFromGValueFn converter)
+{
+	g_return_if_fail (bonobo_arg_from_gvalue_mapping != NULL);
+	g_hash_table_insert (bonobo_arg_from_gvalue_mapping,
+			     GUINT_TO_POINTER (gtype),
+			     converter);
+}
+
+void
+bonobo_arg_register_to_gvalue_converter (BonoboArgType       arg_type,
+					 BonoboArgToGValueFn converter)
+{
+	g_return_if_fail (bonobo_arg_to_gvalue_mapping != NULL);
+	g_hash_table_insert (bonobo_arg_to_gvalue_mapping,
+			     arg_type, converter);
+}
+
+void bonobo_arg_init (void)
+{
+	g_assert (bonobo_arg_to_gvalue_mapping == NULL);
+	g_assert (bonobo_arg_from_gvalue_mapping == NULL);
+
+	bonobo_arg_to_gvalue_mapping   = g_hash_table_new (g_direct_hash, g_direct_equal);
+	bonobo_arg_from_gvalue_mapping = g_hash_table_new (g_direct_hash, g_direct_equal);
+
+	bonobo_arg_register_from_gvalue_converter 
+		(BONOBO_TYPE_CORBA_ANY, __bonobo_arg_from_CORBA_ANY);
+	bonobo_arg_register_to_gvalue_converter
+		(TC_CORBA_any, __TC_CORBA_any_to_gvalue);
+}
+

@@ -39,6 +39,7 @@ idls =							\
 	$(top_srcdir)/idl/Bonobo_UI.idl			\
 	$(top_srcdir)/idl/Bonobo_Zoomable.idl		\
 	$(top_srcdir)/idl/Bonobo_Exception.idl		\
+	$(top_srcdir)/idl/Bonobo_Application.idl	\
 	$(top_srcdir)/idl/Bonobo_Clipboard.idl
 
 idl_flags = -I$(top_srcdir)/idl -D__Bonobo_COMPILATION
@@ -88,6 +89,8 @@ libbonoboinclude_HEADERS =		\
 	bonobo-storage-memory.h		\
 	bonobo-xobject.h		\
 	bonobo-i18n.h			\
+	bonobo-application.h		\
+	bonobo-app-client.h		\
 	bonobo-types.h
 
 noinst_HEADERS =			\
@@ -125,6 +128,8 @@ libbonobo_src =				\
 	bonobo-stream-memory.c		\
 	bonobo-storage-memory.c		\
 	bonobo-running-context.c	\
+	bonobo-application.c		\
+	bonobo-app-client.c		\
 	bonobo-types.c			\
 	bonobo-debug.c			\
 	bonobo-debug.h

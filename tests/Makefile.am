@@ -11,7 +11,8 @@ check_PROGRAMS =		\
 	test-storage-mem	\
 	test-generic-factory	\
 	test-main-loop		\
-	generic-factory
+	generic-factory		\
+	test-uniqapp
 
 INCLUDES =	\
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
@@ -38,6 +39,8 @@ test_event_source_SOURCES = test-event-source.c
 test_stream_mem_SOURCES = test-stream-mem.c
 
 test_storage_mem_SOURCES = test-storage-mem.c
+
+test_uniqapp_SOURCES = test-uniqapp.c
 
 test_main_loop_SOURCES = test-main-loop.c
 

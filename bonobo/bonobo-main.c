@@ -16,6 +16,7 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-context.h>
 #include <bonobo/bonobo-private.h>
+#include <bonobo/bonobo-arg.h>
 
 #include <libintl.h>
 #include <string.h>
@@ -160,6 +161,8 @@ bonobo_init_full (int *argc, char **argv,
 
 	/* Init neccessary bits */
 	g_type_init_with_debug_flags (0);
+
+	bonobo_arg_init ();
 
 	if (!bonobo_activation_is_initialized ())
 		bonobo_activation_init (argc ? *argc : 0, argv);

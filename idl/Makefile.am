@@ -20,6 +20,7 @@ idl_DATA =				\
 	Bonobo_Zoomable.idl		\
 	Bonobo_Exception.idl		\
 	Bonobo_Clipboard.idl		\
+	Bonobo_Application.idl		\
 	$(NULL)
 
 activation_idldir=$(datadir)/idl/bonobo-activation-2.0

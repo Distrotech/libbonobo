@@ -1,3 +1,42 @@
+2003-11-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-marshal.list: Add a few required marshalers.
+
+	* idl/Makefile.am (idl_DATA): Add Bonobo_Application.idl.
+
+	* bonobo/Makefile.am: Add bonobo-application.h and bonobo-application.c
+
+	* tests/test-uniqapp.c: BonoboApplication test program.
+
+	* tests/Makefile.am (check_PROGRAMS): Add BonoboApplication test.
+
+	* bonobo/bonobo-main.c (bonobo_init_full): Call bonobo_arg_init here.
+
+	* bonobo/bonobo-arg.c (bonobo_arg_to_gvalue_copy): like
+	bonobo_arg_to_gvalue, but initializes/allocates return value.
+	(bonobo_arg_from_gvalue_copy): like bonobo_arg_from_gvalue, but
+	initializes/allocates return value.
+	(__bonobo_arg_from_CORBA_ANY, __TC_CORBA_any_to_gvalue): specific
+	functions to convert to/from CORBA_any.
+	(bonobo_arg_register_from_gvalue_converter)
+	(bonobo_arg_register_to_gvalue_converter): argument convertion
+	registration API.
+	(bonobo_arg_init): Function that needs to be called upon bonobo
+	initialization to setup argument converters.
+
+	* bonobo/bonobo-arg.h: declare new argument conversion functions.
+
+	* bonobo/bonobo-app-client.c, bonobo/bonobo-app-client.h:
+	BonoboAppClient -- client interface to BonoboApplication.
+
+	* bonobo/bonobo-application.c, bonobo/bonobo-application.h:
+	BonoboApplication initial implementation.
+
+	* idl/Bonobo.idl: Include Bonobo_Application.idl.
+
+	* idl/Bonobo_Application.idl: IDL Interface for GEP 12 Bonobo
+	Unique Application.
+
 2003-11-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* bonobo/bonobo-main.c (bonobo_main_level): Implement.
