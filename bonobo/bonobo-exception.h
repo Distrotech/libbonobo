@@ -83,16 +83,16 @@
 #define BONOBO_EX_REPOID(ev)  (ev)->_id
 
 #define BONOBO_RET_EX(ev)		\
-	G_STMT_START			\
+	G_STMT_START{			\
 		if (BONOBO_EX (ev))	\
 			return;		\
-	G_STMT_END
+	}G_STMT_END
 
 #define BONOBO_RET_VAL_EX(ev,v)		\
-	G_STMT_START			\
+	G_STMT_START{			\
 		if (BONOBO_EX (ev))	\
 			return (v);	\
-	G_STMT_END
+	}G_STMT_END
 
 typedef char *(*BonoboExceptionFn)     (CORBA_Environment *ev, gpointer user_data);
 

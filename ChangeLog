@@ -1,5 +1,8 @@
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
+	* bonobo/bonobo-exception.h (BONOBO_RET_EX, BONOBO_RET_VAL_EX):
+	Make the G_STMT_START/END actually work.
+
 	* bonobo/bonobo-moniker-util.c (bonobo_moniker_util_parse_name):
 	For the item moniker, the "!" is the first character or the
 	return value.
