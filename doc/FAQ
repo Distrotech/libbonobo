@@ -41,6 +41,13 @@ here
 
 @Q: What is CORBA?
 
+@Q: What is a component?
+
+    A component is a ( preferably small ), re-usable piece of
+    software, with well defined interfaces and interactions. In this
+    context these interfaces are described in IDL and the interactions
+    via. CORBA.
+
 @Q: Is it possible to use Bonobo components in my favorite language?
 
     You will need your favorite language to support CORBA.   
@@ -120,7 +127,7 @@ here
 
 @Q: What can I do with `bonobo'?
 
-@Q: What is an OAFID
+@Q: What is an OAFID?
 
     The OAFID is a unique identifier for a specific object
     implementation and it is used to resolve uniquely.  This ID is
@@ -131,21 +138,35 @@ here
 
 AFIID:GNOME:Gnumeric:WorkbookFactory:1.0:7cf6fb4d-c5a1-4ace-aa6a-4ece790138c9
 
-@Q: Where does the OAFID come from?
-
 @Q: What is a Factory?
 
-	
+    A factory is an object that makes other objects. eg. a Gnumeric
+    factory might make Workbook objects.
+
+@Q: Where does the OAFID come from?
+
 @Q: What is a Control?
 
-	A Control is a componentized version of a Widget. 
+	A Control is a 'componentized' version of a Widget. ie. A
+Control is a (single view) Graphical component.
 
+	In the Gtk+ implementation a Control contains a GtkWidget, it
+also has associated 'properties', providing an easy way to customize
+basic features of the control without creating an idl interface.
+
+	A control is often used inside a BonoboWidget, which acts as a
+container of Controls. The BonoboWidget is a normal GtkWidget that can
+be inserted into a GtkContainer.
 
 @Q: What is a Property?
 
 @Q: What are the activation methods in Bonobo?
 
 @Q: Does Bonobo support in-proc components?
+
+	Yes, this depends on how you setup your component, however
+currently there are very few in-proc gnome components, due to
+various debugging problems.
 
 @Q: How can I embed a simple control in my application?
 
@@ -287,6 +308,11 @@ Makefile:
 	Java ORB.
 
 @Q: What is a Moniker?
+
+	Monikers are used to name objects, they effectively implement
+an object naming space. The naming space is extremely abstract.
+
+	Read doc/Monikers for a more in-depth explanation.
 
 @Q: Why are you so excited about Monikers?
 

@@ -1,3 +1,11 @@
+2000-11-21  Michael Meeks  <michael@helixcode.com>
+
+	* doc/FAQ: update.
+
+2000-11-20  Michael Meeks  <michael@helixcode.com>
+
+	* doc/FAQ (AFIID): add Control & Moniker section.
+
 2000-11-20  Michael Meeks  <michael@helixcode.com>
 
 	* doc/NAMESPACE: add gnome-core stuff from George.
