@@ -140,6 +140,8 @@ oaf_active_server_register (const char *registration_id,
 
 	CORBA_exception_free (&ev);
 
+        g_message ("Successfully registered `%s'", registration_id);
+
 	return retval;
 }
 
