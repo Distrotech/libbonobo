@@ -422,6 +422,7 @@ bonobo_activation_service_get_internal (const BonoboActivationBaseService *base_
 			retval = race_condition;
 		} else if (!CORBA_Object_is_nil (retval, &myev)) {
 			bonobo_activation_base_service_set (base_service, retval, &myev);
+                        CORBA_Object_release (race_condition, &myev);
                 }
 	}
 
