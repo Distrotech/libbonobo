@@ -133,14 +133,14 @@ bonobo_moniker_get_parent (BonoboMoniker     *moniker,
  * gets the unescaped name of the moniker less the prefix eg
  * file:/tmp/hash\#.gz returns /tmp/hash#.gz
  * 
- * Return value: the string
+ * Return value: the string or NULL in case of failure
  **/
 const char *
 bonobo_moniker_get_name (BonoboMoniker *moniker)
 {	
 	const char *str;
 
-	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), NULL);
 
 	str = CLASS (moniker)->get_internal_name (moniker);
 
@@ -157,12 +157,12 @@ bonobo_moniker_get_name (BonoboMoniker *moniker)
  * gets the full unescaped name of the moniker eg.
  * file:/tmp/hash\#.gz returns file:/tmp/hash#.gz
  * 
- * Return value: the string
+ * Return value: the string in case of failure
  **/
 const char *
 bonobo_moniker_get_name_full (BonoboMoniker *moniker)
 {	
-	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), NULL);
 
 	return CLASS (moniker)->get_internal_name (moniker);
 }
@@ -215,12 +215,12 @@ bonobo_moniker_set_name (BonoboMoniker *moniker,
  * @moniker: a moniker
  * 
  * Return value: the registered prefix for this moniker or
- * NULL if there isn't one. eg "file:"
+ * NULL if there isn't one. eg "file:", or in case of failure
  **/
 const char *
 bonobo_moniker_get_prefix (BonoboMoniker *moniker)
 {
-	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), NULL);
 
 	return moniker->priv->prefix;
 }
@@ -239,7 +239,7 @@ impl_bonobo_moniker_set_internal_name (BonoboMoniker *moniker,
 static const char *
 impl_bonobo_moniker_get_internal_name (BonoboMoniker *moniker)
 {
-	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), "");
+	g_return_val_if_fail (BONOBO_IS_MONIKER (moniker), NULL);
 
 	return moniker->priv->name;
 }

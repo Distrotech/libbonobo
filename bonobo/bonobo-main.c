@@ -17,7 +17,6 @@
 #include <bonobo/bonobo-context.h>
 
 #include <libintl.h>
-#include <signal.h>
 
 #include <glib/gmain.h>
 
@@ -111,46 +110,6 @@ bonobo_init_full (int *argc, char **argv,
 	}
 
 	CORBA_exception_init (&ev);
-
-	/*
-	 * In Bonobo, components and containers must not crash if the
-	 * remote end crashes.  If a remote server crashes and then we
-	 * try to make a CORBA call on it, we may get a SIGPIPE.  So,
-	 * for lack of a better solution, we ignore SIGPIPE here.  This
-	 * is open for reconsideration in the future.
-	 *
-	 * When SIGPIPE is ignored, write() calls which would
-	 * ordinarily trigger a signal will instead return -1 and set
-	 * errno to EPIPE.  So ORBit will be able to catch these
-	 * errors instead of letting them kill the component.
-	 *
-	 * Possibilities are the MSG_PEEK trick, where you test if the
-	 * connection is dead right before doing the writev().  That
-	 * approach has two problems:
-	 *
-	 *   1. There is the possibility of a race condition, where
-	 *      the remote end calls right after the test, and right
-	 *      before the writev().
-	 * 
-	 *   2. An extra system call per write might be regarded by
-	 *      some as a performance hit.
-	 *
-	 * Another possibility is to surround the call to writev() in
-	 * ORBit (giop-msg-buffer.c:197 or so) with something like
-	 * this:
-	 *
-	 *		orbit_ignore_sigpipe = 1;
-	 *
-	 *		result = writev ( ... );
-	 *
-	 *		orbit_ignore_sigpipe = 0;
-	 *
-	 * The SIGPIPE signal handler will check the global
-	 * orbit_ignore_sigpipe variable and ignore the signal if it
-	 * is 1.  If it is 0, it can proxy to the user's original
-	 * signal handler.  This is a real possibility.
-	 */
-	signal (SIGPIPE, SIG_IGN);
 
 	/*
 	 * Create the POA.

@@ -1,3 +1,11 @@
+2001-08-21 Dirk-Jan C. Binnema <djcb@djcbsoftware.nl>
+	
+	* bonobo/bonobo-main.c (bonobo_init_full): remove SIGPIPE handler;
+	handle this in linc instead
+
+	* bonobo/bonobo-moniker.c (all char* methods): return NULL instead
+	of "" in case of failure, for consistency
+
 2001-08-20  Maciej Stachowiak  <mjs@noisehavoc.org>
 
 	* idl/Makefile.am: Fix violation of bonobo-activation's include
