@@ -123,10 +123,13 @@ bonobo_property_get_vepv (void)
 }
 
 PortableServer_Servant
-bonobo_property_servant_new (PortableServer_POA adapter, BonoboPropertyBag *pb,
-			     char *property_name)
+bonobo_property_servant_new (PortableServer_POA     poa,
+			     BonoboTransient        *bt,
+			     char                   *property_name,
+			     void                   *callback_data)
 {
 	BonoboPropertyServant	*servant;
+	BonoboPropertyBag       *pb = (BonoboPropertyBag *)callback_data;
 	CORBA_Environment        ev;
 
 	g_return_val_if_fail (pb != NULL, NULL);
@@ -137,7 +140,7 @@ bonobo_property_servant_new (PortableServer_POA adapter, BonoboPropertyBag *pb,
 	 * Verify that the specified property exists.
 	 */
 	if (! bonobo_property_bag_has_property (pb, property_name))
-		return NULL;
+		return CORBA_OBJECT_NIL;
 
 	CORBA_exception_init (&ev);
 
@@ -157,7 +160,7 @@ bonobo_property_servant_new (PortableServer_POA adapter, BonoboPropertyBag *pb,
 		g_free (servant->property_name);
 		g_free (servant);
 		CORBA_exception_free (&ev);
-		return NULL;
+		return CORBA_OBJECT_NIL;
 	}
 
 	CORBA_exception_free (&ev);
@@ -166,7 +169,8 @@ bonobo_property_servant_new (PortableServer_POA adapter, BonoboPropertyBag *pb,
 }
 
 void
-bonobo_property_servant_destroy (PortableServer_Servant servant)
+bonobo_property_servant_destroy (PortableServer_Servant  servant,
+				 void                   *callback_data)
 {
 	CORBA_Environment ev;
 

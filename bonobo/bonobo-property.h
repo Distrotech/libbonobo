@@ -18,10 +18,14 @@
  */
 
 #include <bonobo/bonobo-property-bag.h>
+#include <bonobo/bonobo-transient.h>
 
-PortableServer_Servant bonobo_property_servant_new     (PortableServer_POA adapter, BonoboPropertyBag *pb,
-							char *property_name);
-void		       bonobo_property_servant_destroy (PortableServer_Servant servant);
+PortableServer_Servant bonobo_property_servant_new     (PortableServer_POA     poa,
+							BonoboTransient        *bt,
+							char                   *name,
+							void                   *callback_data);
+void		       bonobo_property_servant_destroy (PortableServer_Servant  servant,
+							void                   *callback_data);
 
 typedef struct {
 	char			*name;

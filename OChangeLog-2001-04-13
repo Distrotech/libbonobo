@@ -1,3 +1,9 @@
+2000-12-12  Dietmar Maurer <dietmar@maurer-it.com>
+
+	* bonobo/bonobo-property-bag.[ch]: use BonoboTransient.
+
+	* bonobo/bonobo-property.[ch]: modified to work with BonoboTransient.
+
 2000-12-12  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-bind-context.[ch]: clean out cruft.

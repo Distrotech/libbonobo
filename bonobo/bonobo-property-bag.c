@@ -15,6 +15,7 @@
 #include <bonobo/bonobo-property.h>
 #include <bonobo/bonobo-property-types.h>
 #include <bonobo/bonobo-persist-stream.h>
+#include <bonobo/bonobo-transient.h>
 
 POA_Bonobo_PropertyBag__vepv bonobo_property_bag_vepv;
 static GtkObjectClass *parent_class = NULL;
@@ -33,357 +34,11 @@ struct _BonoboPropertyBagPrivate {
 	gpointer            user_data;
 
 	GSList             *listeners;
+
+	BonoboTransient    *transient;
 };
 
-
-/*
- * BonoboPropertyBag POA and Servant Manager.
- */
 
-typedef struct {
-	POA_PortableServer_ServantLocator servant_locator;
-	BonoboPropertyBag                *property_bag;
-} BonoboPropertyBagServantManager;
-
-/*
- * This ServantManager method is invoked before a method
- * on a BonoboProperty is called.  It creates the servant
- * for the Property and returns it.
- */
-static PortableServer_Servant
-bonobo_property_servant_locator_preinvoke (PortableServer_Servant servant_manager,
-					   PortableServer_ObjectId *oid,
-					   PortableServer_POA adapter,
-					   CORBA_Identifier op_name,
-					   PortableServer_ServantLocator_Cookie *cookie,
-					   CORBA_Environment *ev)
-{
-	BonoboPropertyBagServantManager *sm;
-	PortableServer_Servant servant;
-	BonoboPropertyBag *pb;
-	char *property_name;
-
-	/*
-	 * Get the PropertyBag out of the servant manager.
-	 */
-	sm = (BonoboPropertyBagServantManager *) servant_manager;
-	pb = sm->property_bag;
-
-	/*
-	 * Grab the Property name and the Property Bag.
-	 */
-	property_name = PortableServer_ObjectId_to_string (oid, ev);
-	if (ev->_major != CORBA_NO_EXCEPTION) {
-		g_warning ("BonoboPropertyBag: Could not get property name from Object ID");
-		return NULL;
-	}
-
-	/*
-	 * Create a temporary servant for this Property.
-	 */
-	servant = bonobo_property_servant_new (adapter, pb, property_name);
-	CORBA_free (property_name);
-
-	if (servant == NULL) {
-		g_warning ("BonoboPropertyBag: Could not create transient Property servant");
-		CORBA_exception_set_system(ev, ex_CORBA_NO_MEMORY, CORBA_COMPLETED_NO);
-		return NULL;
-	}
-
-	/*
-	 * The cookie is arbitrary data which will get passed to
-	 * postinvoke for this Property method invocation.  We have no
-	 * use for it.
-	 */
-	*cookie = NULL;
-
-	return servant;
-}
-
-/*
- * This method is invoked after a BonoboProperty method invocation.
- * It destroys the transient Property servant.
- */
-static void
-bonobo_property_servant_locator_postinvoke (PortableServer_Servant servant_manager,
-					    PortableServer_ObjectId *oid,
-					    PortableServer_POA adapter,
-					    CORBA_Identifier op_name,
-					    PortableServer_ServantLocator_Cookie cookie,
-					    PortableServer_Servant servant,
-					    CORBA_Environment *ev)
-{
-	bonobo_property_servant_destroy (servant);
-}
-
-static PortableServer_ServantBase__epv *
-bonobo_property_bag_get_servant_base_epv (void)
-{
-	PortableServer_ServantBase__epv *epv;
-
-	epv = g_new0 (PortableServer_ServantBase__epv, 1);
-
-	epv->default_POA = PortableServer_ServantBase__default_POA;
-	epv->finalize    = PortableServer_ServantBase__fini;
-
-	return epv;
-}
-
-
-static POA_PortableServer_ServantManager__epv *
-bonobo_property_bag_get_servant_manager_epv (void)
-{
-	POA_PortableServer_ServantManager__epv *epv;
-
-	epv = g_new0 (POA_PortableServer_ServantManager__epv, 1);
-
-	return epv;
-}
-
-static POA_PortableServer_ServantLocator__epv *
-bonobo_property_bag_get_servant_locator_epv (void)
-{
-	POA_PortableServer_ServantLocator__epv *epv;
-
-	epv = g_new0 (POA_PortableServer_ServantLocator__epv, 1);
-
-	epv->preinvoke  = bonobo_property_servant_locator_preinvoke;
-	epv->postinvoke = bonobo_property_servant_locator_postinvoke;
-
-	return epv;
-}
-
-static POA_PortableServer_ServantLocator__vepv *
-bonobo_property_bag_get_servant_locator_vepv (void)
-{
-	static POA_PortableServer_ServantLocator__vepv *vepv = NULL;
-
-	if (vepv != NULL)
-		return vepv;
-
-	vepv = g_new0 (POA_PortableServer_ServantLocator__vepv, 1);
-
-	vepv->_base_epv				= bonobo_property_bag_get_servant_base_epv ();
-	vepv->PortableServer_ServantManager_epv = bonobo_property_bag_get_servant_manager_epv ();
-	vepv->PortableServer_ServantLocator_epv = bonobo_property_bag_get_servant_locator_epv ();
-
-	return vepv;
-}
-
-/*
- * Creates the POA and ServantManager which will handle
- * BonoboProperty requests.
- */
-static gboolean
-bonobo_property_bag_create_poa (BonoboPropertyBag *pb)
-{
-        PortableServer_POA                 property_poa = NULL;
-	CORBA_PolicyList		  *policies;
-	BonoboPropertyBagServantManager    *sm;
-	CORBA_Environment		   ev;
-	char				  *poa_name;
-	gboolean			   retval;
-
-	retval = FALSE;
-
-	CORBA_exception_init (&ev);
-
-	/*
-	 * Create a new custom POA which will manage the
-	 * BonoboProperty objects.  We need a custom POA because there
-	 * may be many, many properties and we want to avoid
-	 * instantiating a servant for each one of them from the
-	 * outset (which is what the default POA will require).
-	 *
-	 * Our new POA will have a special Policy set --
-	 * USE_SERVANT_MANAGER -- which means that, when a request
-	 * comes in for one of the objects (properties) managed by
-	 * this POA, the ORB will dispatch to our special
-	 * ServantManager.  The ServantManager will then incarnate the
-	 * Servant for the Property which is being operated on.  So we
-	 * are creating a ServantManager which will incarnate Property
-	 * servants as-needed, and a POA which knows how to dispatch
-	 * to our special ServantManager.
-	 *
-	 * Repetition is probably the only way to get this across, so
-	 * allow me to rephrase: When a request comes in for a particular
-	 * object, the POA uses the servant manager to get the servant
-	 * for the specified object reference.
-	 *
-	 * This is just on-demand object creation, mired in a bunch of
-	 * CORBA jargon.
-	 *
-	 * The take home message: Each Bonobo Property CORBA object is
-	 * not created until someone actually invokes one of its
-	 * methods.
-	 */
-	
-	/*
-	 * Create a list of CORBA policies which we will apply to our
-	 * new POA.
-	 */
-	policies = g_new0 (CORBA_PolicyList, 1);
-	policies->_maximum = 3;
-	policies->_length  = 3;
-	policies->_buffer = g_new0 (CORBA_Policy,
-				    policies->_length);
-	policies->_release = CORBA_FALSE;
-
-	/*
-	 * Create a new CORBA Policy object which specifies that we
-	 * will be using a ServantManager, thank you very much.
-	 */
-	policies->_buffer [0] = (CORBA_Policy)
-		PortableServer_POA_create_request_processing_policy (
-			bonobo_poa (),			     /* This argument is ignored. */
-			PortableServer_USE_SERVANT_MANAGER,
-			&ev);
-	
-	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("Could not create request processing policy for BonoboProperty POA");
-		CORBA_exception_free (&ev);
-		goto out;
-	}
-
-	/*
-	 * Now, to add a touch more complexity to the whole
-	 * system, we go further than just creating Property
-	 * servants on-demand; we make them completely transient.
-	 * What this means is that, when a Property servant has
-	 * finished processing a request on the property object,
-	 * it disappears.  So we only use resources on property
-	 * servants while a property method invocation is being
-	 * processed.  (Now I'm just showing off)
-	 *
-	 * This is actually important because, with Controls,
-	 * properties are used to manipulate many highly-variant
-	 * run-time attributes (not just crap like font size).  The
-	 * Microsoft ActiveX web controls, for example, use properties
-	 * to allow the user (the parent application) to get/set the
-	 * current URL being displayed.
-	 *
-	 * Accordingly, the following CORBA Policy specifies that
-	 * servants should not be retained.
-	 */
-	policies->_buffer [1] = (CORBA_Policy)
-		PortableServer_POA_create_servant_retention_policy (
-			bonobo_poa (),
-			PortableServer_NON_RETAIN,
-			&ev);
-	
-	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("Could not create servant retention policy for BonoboProperty POA");
-		CORBA_exception_free (&ev);
-		goto out;
-	}
-
-	/*
-	 * Set the threading model to SINGLE_THREAD_MODEL, otherwise
-	 * an ORB could use the default ORB_CTRL_MODEL, which is to
-	 * let the ORB make threads for requests as it likes.
-	 */
-	policies->_buffer [2] = (CORBA_Policy)
-		PortableServer_POA_create_thread_policy (
-			bonobo_poa (),
-			PortableServer_SINGLE_THREAD_MODEL,
-			&ev);
-	
-	if (ev._major != CORBA_NO_EXCEPTION){
-		g_warning ("Could not create threading policy for BonoboProperty POA");
-		CORBA_exception_free (&ev);
-		goto out;
-	}
-
-	/*
-	 * Create the BonoboProperty POA as a child of the root
-	 * Bonobo POA.
-	 */
-	poa_name = g_strdup_printf ("BonoboPropertyBag %p", pb);
-	pb->priv->poa =
-		PortableServer_POA_create_POA (bonobo_poa (),
-					       poa_name,
-					       bonobo_poa_manager (),
-					       policies,
-					       &ev);
-	g_free (poa_name);
-
-	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("BonoboPropertyBag: Could not create BonoboPropertyBag POA");
-		CORBA_exception_free (&ev);
-		goto out;
-	}
-	
-	property_poa = pb->priv->poa;
-	
-	/*
-	 * Create our ServantManager.
-	 */
-	sm = g_new0 (BonoboPropertyBagServantManager, 1);
-	sm->property_bag = pb;
-
-	((POA_PortableServer_ServantLocator *) sm)->vepv = bonobo_property_bag_get_servant_locator_vepv ();
-		
-	POA_PortableServer_ServantLocator__init (((PortableServer_ServantLocator *) sm), &ev);
-	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("BonoboPropertyBag: Could not initialize ServantLocator");
-		CORBA_exception_free (&ev);
-		g_free (sm);
-		goto out;
-		
-	}
-
-	PortableServer_POA_set_servant_manager (pb->priv->poa, (PortableServer_ServantManager) sm, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("BonoboPropertyBag: Could not set POA servant manager");
-		CORBA_exception_free (&ev);
-		g_free (sm);
-		goto out;
-	}
-
-	retval = TRUE;
-
- out:
-
-	if (policies->_buffer[0] != NULL) {
-		CORBA_Policy_destroy (policies->_buffer[0], &ev);
-
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("bonobo_property_bag_create_poa(): could not destroy the "
-				   "request processing policy");
-			CORBA_exception_free (&ev);
-			retval = FALSE;
-		}
-	}
-
-	if (policies->_buffer[1] != NULL) {
-		CORBA_Policy_destroy (policies->_buffer[1], &ev);
-
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("bonobo_property_bag_create_poa(): could not destroy the "
-				   "servant retention policy");
-			CORBA_exception_free (&ev);
-			retval = FALSE;
-		}
-	}
-
-	if (policies->_buffer[2] != NULL) {
-		CORBA_Policy_destroy (policies->_buffer[2], &ev);
-
-		if (ev._major != CORBA_NO_EXCEPTION) {
-			g_warning ("bonobo_property_bag_create_poa(): could not destroy the "
-				   "threading policy");
-			CORBA_exception_free (&ev);
-			retval = FALSE;
-		}
-	}
-
-	g_free (policies->_buffer);
-	g_free (policies);
-
-	return retval;
-}
-
-
 /*
  * BonoboPropertyBag CORBA methods.
  */
@@ -424,21 +79,6 @@ bonobo_property_bag_get_prop_list (BonoboPropertyBag *pb)
 	return l;
 }
 
-static Bonobo_Property
-bonobo_property_bag_create_objref (BonoboPropertyBag  *pb,
-				   const char        *name,
-				   Bonobo_Property    *obj,
-				   CORBA_Environment *ev)
-{
-	PortableServer_ObjectId *oid;
-
-	oid = PortableServer_string_to_ObjectId ((char *) name, ev);
-
-	*obj = (Bonobo_Property) PortableServer_POA_create_reference_with_id (
-		pb->priv->poa, oid, "IDL:Bonobo/Property:1.0", ev);
-
-	return *obj;
-}
 
 static Bonobo_PropertyList *
 impl_Bonobo_PropertyBag_getProperties (PortableServer_Servant  servant,
@@ -473,11 +113,10 @@ impl_Bonobo_PropertyBag_getProperties (PortableServer_Servant  servant,
 	i = 0;
 	for (curr = props; curr != NULL; curr = curr->next) {
 		BonoboProperty *prop = curr->data;
-		Bonobo_Property objref;
 
-		objref = bonobo_property_bag_create_objref (
-			pb, prop->name,
-			& (prop_list->_buffer [i]), ev);
+		prop_list->_buffer [i] =  bonobo_transient_create_objref (
+			pb->priv->transient, "IDL:Bonobo/Property:1.0",
+			prop->name, ev);
 
 		if (ev->_major != CORBA_NO_EXCEPTION) {
 			g_warning ("BonoboPropertyBag: Could not create property objref!");
@@ -512,7 +151,9 @@ impl_Bonobo_PropertyBag_getPropertyByName (PortableServer_Servant servant,
 		return CORBA_OBJECT_NIL;
 	}
 
-	bonobo_property_bag_create_objref (pb, name, &prop, ev);
+	prop = bonobo_transient_create_objref (pb->priv->transient, 
+					       "IDL:Bonobo/Property:1.0", 
+					        name, ev);
 
 	return prop;
 }
@@ -594,11 +235,11 @@ bonobo_property_bag_construct (BonoboPropertyBag *pb,
 {
 	bonobo_object_construct (BONOBO_OBJECT (pb), corba_pb);
 
-	if (! bonobo_property_bag_create_poa (pb)) {
+	if (!(pb->priv->transient = bonobo_transient_new (NULL, bonobo_property_servant_new, bonobo_property_servant_destroy, pb))) {
 		g_free (pb);
 		return NULL;
 	}
-
+	
 	return pb;
 }
 
@@ -689,14 +330,9 @@ static void
 bonobo_property_bag_destroy (GtkObject *object)
 {
 	BonoboPropertyBag *pb = BONOBO_PROPERTY_BAG (object);
-	CORBA_Environment ev;
 
-	/* Destroy the POA. */
-	CORBA_exception_init (&ev);
-	PortableServer_POA_destroy (pb->priv->poa, TRUE, TRUE, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION)
-		g_warning ("bonobo_property_bag_destroy: Could not destroy POA.");
-	CORBA_exception_free (&ev);
+	/* Destroy the transient POA */
+	gtk_object_unref (GTK_OBJECT (pb->priv->transient));
 
 	/* Destroy all properties. */
 	g_hash_table_foreach_remove (pb->priv->props,
