@@ -1,3 +1,8 @@
+2000-11-29  Martin Baulig  <baulig@suse.de>
+
+	* bonobo/bonobo-control.c (impl_Bonobo_Control_activate): Only
+	emit the ACTIVATE signal if there's actually a state change.
+
 2000-11-29  Michael Meeks  <michael@helixcode.com>
 
 	* idl/Bonobo.idl: remove sizeable.idl
