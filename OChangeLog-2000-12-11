@@ -1,3 +1,12 @@
+1999-05-25  Havoc Pennington  <hp@pobox.com>
+
+	* bonobo/gnome-component.c (impl_GNOME_Component_do_verb): Cast
+	the varargs arguments to be sure they're the right size
+
+	* bonobo/gnome-storage.h, bonobo/gnome-storage.c,
+	idl/gnome-storage.idl:
+	s/delete/erase (fixes from LE)
+
 1999-05-18  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* idl/gnome-storage.idl (interface Stream):

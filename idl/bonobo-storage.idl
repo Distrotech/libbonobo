@@ -200,14 +200,14 @@ module GNOME {
 
 	
 		/**
-		 * delete:
+		 * erase:
 		 * @path: path to the element to delete.
 		 * 
 		 * Destroys the element pointed to by @path.  The element
 		 * can be a Storage or a Stream.
 		 */
 		void erase (in string path)
-			raises (NotFound);
+                       raises (NotFound);
 	};
 };
 
