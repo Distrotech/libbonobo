@@ -1,5 +1,8 @@
 2003-06-24  Michael Meeks  <michael@ximian.com>
 
+	* test/test-activation/Makefile.am: resolve linking snafu
+	with bonobo-activation-run-query
+
 	* test/test-activation/test.sh: remove export A=b bash-ism
 
 2003-06-16  Taneem Ahmed  <taneem@eyetap.org>

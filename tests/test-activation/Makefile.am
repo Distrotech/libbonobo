@@ -15,6 +15,8 @@ bonobo_activation_test_SOURCES=		\
 	empty-common.c			\
 	empty.h				\
 	empty-stubs.c
+bonobo_activation_test_LDADD=libtest-plugin.la
+
 
 # Horrible, digusting and atrocious hack to
 # get libtool to build a noinst shared lib.
@@ -70,7 +72,7 @@ INCLUDES= \
 	-DG_DISABLE_DEPRECATED $(LIBBONOBO_CFLAGS)
 
 LDADD = ../../bonobo-activation/libbonobo-activation.la \
-	$(LIBBONOBO_LIBS) libtest-plugin.la
+	$(LIBBONOBO_LIBS)
 
 serverfiles=empty.server broken.server plugin.server
 
