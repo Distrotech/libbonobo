@@ -82,7 +82,7 @@ msgstr ""
 #: activation-server/object-directory-corba.c:889
 #, c-format
 msgid "Race condition activating server '%s'"
-msgstr ""
+msgstr "Villa (Race condition) við að ræsa þjón '%s'"
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
@@ -129,12 +129,12 @@ msgstr "Undirferlið fékk merkið %u (%s)"
 #: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
 msgid "Unknown non-exit error (status is %u)"
-msgstr ""
+msgstr "Óþekkt villa (staðan er %u)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:403
 #, c-format
 msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr ""
+msgstr "Ræsing bonobo gat ekki búið til ferlahópinn %s: %s\n"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:415
 #, c-format
@@ -220,55 +220,55 @@ msgstr "Engar aðgangsheimildir í strauminn"
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr ""
+msgstr "Aðgerð sem ekki er studd á straumum var reynd"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr ""
+msgstr "IO villa í straumi"
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr ""
+msgstr "IO villa í geymslumiðli"
 
 #: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr ""
+msgstr "Heitið er þegar til í geymslu"
 
 #: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr ""
+msgstr "Hluturinn fannst ekki í geysmlunni"
 
 #: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr ""
+msgstr "Engin heimild fyrir aðgerðinni í geymslunni"
 
 #: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr ""
+msgstr "Aðgerð sem ekki er studd ú geymslum var reynd"
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr ""
+msgstr "Hluturinn er ekki straumur"
 
 #: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr ""
+msgstr "Hluturinn er ekki geymsla"
 
 #: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr ""
+msgstr "Geymslan er ekki tóm"
 
 #: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr ""
+msgstr "gölluð XML notandaviðmótslýsing"
 
 #: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr ""
+msgstr "ógild slóð að XML notandaviðmótshlut"
 
 #: bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr ""
+msgstr "umbeðinn UI eiginleiki er ekki til"
 
 #: bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
@@ -276,7 +276,7 @@ msgstr "Óþekkt skipun eða sögn"
 
 #: bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr ""
+msgstr "Skipunin er óháð há/lágstöfum"
 
 #: bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -300,27 +300,27 @@ msgstr "eiginleikann má aðeins lesa"
 
 #: bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr ""
+msgstr "stillingagrunnurinn brást"
 
 #: bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr ""
+msgstr "Moniker viðmótið fannst ekki"
 
 #: bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr ""
+msgstr "Ræsing Monkier tímaði út"
 
 #: bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr ""
+msgstr "Villa innan Moniker"
 
 #: bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr ""
+msgstr "Moniker hefur óþekkt moniker forskeyti"
 
 #: bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr ""
+msgstr "Villa við að athuga villu"
 
 #: bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
@@ -333,16 +333,16 @@ msgstr "Gat ekki frumstillt Bonobo"
 #: bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "Gat ekki þáttað eða umbreytt '%s'"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr ""
+msgstr "Gat ekki gangsett hlut"
 
 #: monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
-msgstr ""
+msgstr "Villa við að virkja '%s'"
 
 #: monikers/bonobo-moniker-oaf.c:62
 #, c-format
@@ -351,51 +351,51 @@ msgstr "Gat ekki gangsett '%s'"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr ""
+msgstr "HTTP Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "ORB IOR meðhöndlunar-moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "Stöðluð Moniker verksmiðja"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "almennur Oaf virkjunar-moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "almennur Oaf fyrirspurnar-moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "almenn verksmiðja nýrra moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr ""
+msgstr "almennur hluta-moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "strauma MonikerExtender"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Bonobo Echo þjónn"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Bonobo Echo sýnishorn"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "Echo íhlutur"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Echo íhlutaverksmiðja"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
@@ -403,7 +403,7 @@ msgstr "Gat ekki frumstillt Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "Gat ekki búið til eintak af echo sýnishorninu"
 
 #: samples/echo/echo-client.c:45
 #, c-format
@@ -412,7 +412,7 @@ msgstr "Það kom upp villa '%s'"
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr "Gat eki vistað stillingaskránni.\n"
+msgstr "Gat ekki vistað stillingaskránni.\n"
 
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
@@ -439,11 +439,11 @@ msgstr "%s er þegar í stillingaskránni\n"
 
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr ""
+msgstr "það er ekki til staðar rétt uppbyggð stillingaskrá\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr ""
+msgstr "Bonobo stillingaskráin inniheldur:\n"
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
