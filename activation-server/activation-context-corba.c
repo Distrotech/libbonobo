@@ -898,12 +898,6 @@ impl_OAF_ActivationContext_activate_from_id (impl_POA_OAF_ActivationContext *
         sort_criteria[2] = g_strconcat ("session == \'", context_domain, "\'", NULL);
         sort_criteria[3] = NULL;
 
-        puts ("XXX - sort");
-        puts (sort_criteria[0]);
-        puts (sort_criteria[1]);
-        puts (sort_criteria[2]);
-
-
         g_free (context_username);
         g_free (context_hostname);
         g_free (context_domain);
