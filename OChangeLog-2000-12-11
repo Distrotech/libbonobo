@@ -115,6 +115,10 @@
 	* bonobo/gnome-embeddable-factory.c
 	(gnome_embeddable_factory_construct): Use gnome_object_unref
 	instead of gtk_object_unref.
+	(gnome_embeddable_factory_finalize): rename destroy to finalize.
+	Make this unregister from the name server.
+	(gnome_embeddable_factory_construct): remember the goad-id we
+	register to unregister at finalize time.
 
 1999-08-22  Michael Meeks  <michael@imaginator.com>
 
