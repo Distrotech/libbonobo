@@ -164,7 +164,7 @@ bonobo_init_full (int *argc, char **argv,
 		}
 	}
 	
-	if (CORBA_Object_is_nil ((CORBA_Object) opt_poa, &ev)) {
+	if (opt_poa == CORBA_OBJECT_NIL) {
 		opt_poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (opt_orb, "RootPOA", &ev);
 		if (BONOBO_EX (&ev)) {
 			g_warning ("Can not resolve initial reference to RootPOA");
@@ -177,7 +177,7 @@ bonobo_init_full (int *argc, char **argv,
 	/*
 	 * Create the POA Manager.
 	 */
-	if (CORBA_Object_is_nil ((CORBA_Object) opt_manager, &ev)) {
+	if (opt_manager == CORBA_OBJECT_NIL) {
 		opt_manager = PortableServer_POA__get_the_POAManager (opt_poa, &ev);
 		if (BONOBO_EX (&ev)){
 			g_warning ("Can not get the POA manager");

@@ -1,3 +1,18 @@
+2001-08-07  Mark McLoughlin <mark@skynet.ie>
+
+	* bonobo/bonobo-event-source.c,
+	  bonobo/bonobo-main.c,
+	  bonobo/bonobo-object.c: 
+	Use CORBA_OBJECT_NIL instead of CORBA_Object_is_nil.
+
+        * bonobo/bonobo-object.c
+	(bonobo_object_finalize_servant): use bonobo_object to 
+	get the BonoboObject from the servant.
+	(bonobo_object_dup_ref): move NIL check up.
+	(bonobo_object_query_local_interface): check for exception
+	from CORBA_Object_is_a and treat an exception as a FALSE
+	return.
+
 2001-08-05  Michael Meeks  <michael@ximian.com>
 
 	* Makefile.am: distribute changes.txt

@@ -231,10 +231,7 @@ static void
 bonobo_object_finalize_servant (PortableServer_Servant servant,
 				CORBA_Environment *ev)
 {
-	BonoboObject *object;
-
-	object = (BonoboObject *)(((guchar *) servant) -
-				  BONOBO_OBJECT_HEADER_SIZE);
+	BonoboObject *object = bonobo_object(servant);
 
 #ifdef BONOBO_LIFECYCLE_DEBUG
 	g_warning ("BonoboObject Servant finalize %p", object);
@@ -427,14 +424,14 @@ bonobo_object_dup_ref (Bonobo_Unknown     object,
 	Bonobo_Unknown    ans;
 	CORBA_Environment  *ev, temp_ev;
        
+	if (object == CORBA_OBJECT_NIL)
+		return CORBA_OBJECT_NIL;
+
 	if (!opt_ev) {
 		CORBA_exception_init (&temp_ev);
 		ev = &temp_ev;
 	} else
 		ev = opt_ev;
-
-	if (object == CORBA_OBJECT_NIL)
-		return CORBA_OBJECT_NIL;
 
 	Bonobo_Unknown_ref (object, ev);
 	ans = CORBA_Object_duplicate (object, ev);
@@ -535,7 +532,6 @@ bonobo_object_query_local_interface (BonoboObject *object,
 				     const char   *repo_id)
 {
 	CORBA_Environment  ev;
-	BonoboObject      *retval;
 	BonoboObjectClass *klass;
 	CORBA_Object       corba_retval = CORBA_OBJECT_NIL;
 	GType              type;
@@ -543,7 +539,6 @@ bonobo_object_query_local_interface (BonoboObject *object,
 
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
 
-	retval       = NULL;
 	corba_retval = CORBA_OBJECT_NIL;
 
 	klass = BONOBO_OBJECT_GET_CLASS (object);
@@ -552,7 +547,7 @@ bonobo_object_query_local_interface (BonoboObject *object,
 
 	CORBA_exception_init (&ev);
 
-	if (! CORBA_Object_is_nil (corba_retval, &ev)) {
+	if (corba_retval != CORBA_OBJECT_NIL) {
 		BonoboObject *local_interface;
 
 		local_interface = bonobo_object_get_local_interface_from_objref (
@@ -577,17 +572,17 @@ bonobo_object_query_local_interface (BonoboObject *object,
 		    !strcmp (tryme->corba_objref->object_id, repo_id)
 #endif
 			) {
-			retval = tryme;
-			break;
+			if (BONOBO_EX (&ev))
+				continue;
+			
+			bonobo_object_ref (object);
+			return tryme;
 		}
 	}
 
-	if (retval != NULL)
-		bonobo_object_ref (object);
-
 	CORBA_exception_free (&ev);
 
-	return retval;
+	return NULL;
 }
 
 static CORBA_Object

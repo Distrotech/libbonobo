@@ -58,7 +58,7 @@ impl_Bonobo_EventSource_addListenerWithMask (PortableServer_Servant servant,
 	BonoboEventSource *event_source;
 	ListenerDesc      *desc;
 
-	g_return_if_fail (!CORBA_Object_is_nil (l, ev));
+	g_return_if_fail (l != CORBA_OBJECT_NIL);
 
 	event_source = bonobo_event_source_from_servant (servant);
 
