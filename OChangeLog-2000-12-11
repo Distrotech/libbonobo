@@ -1,3 +1,17 @@
+2000-04-14  Michael Meeks  <michael@helixcode.com>
+
+	* bonobo/bonobo-print.c (impl_render): kill thinko NULLing user_data pointer.
+
+	* bonobo/bonobo-print-client.c (bonobo_print_data_new, bonobo_print_data_new_full),
+	(bonobo_print_data_get_meta): implement.
+	(do_render): move into (bonobo_print_client_render): here and re-organise.
+
+	* bonobo/bonobo-print-client.h: Split out BonoboPrintData construction, to
+	allow its use elsewhere.
+
+	* samples/compound-doc/sample-container.c (container_print_preview_cmd): tiny
+	touch for new API.
+
 2000-04-13   Nat Friedman, Dan Winship <nat,danw@helixcode.com>
 
 	* bonobo/bonobo-persist-stream.c
