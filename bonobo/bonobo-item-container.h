@@ -12,7 +12,6 @@
 #define _BONOBO_ITEM_CONTAINER_H_
 
 
-#include <gobject/gobject.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-moniker.h>
 

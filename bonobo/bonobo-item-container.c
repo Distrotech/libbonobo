@@ -17,7 +17,6 @@
  */
 #include <config.h>
 #include <glib-object.h>
-#include <gobject/gmarshal.h>
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-object.h>

@@ -14,8 +14,6 @@
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-object.h>
 
-#include <gobject/gclosure.h>
-
 G_BEGIN_DECLS
 
 #define BONOBO_TYPE_LISTENER        (bonobo_listener_get_type ())

@@ -14,8 +14,6 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-arg.h>
 
-#include <gobject/gvaluetypes.h>
-
 /**
  * bonobo_arg_new:
  * @t: the BonoboArgType eg. TC_CORBA_long

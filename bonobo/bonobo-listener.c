@@ -12,7 +12,6 @@
 #include <string.h>
 
 #include <glib-object.h>
-#include <gobject/gvaluetypes.h>
 
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-listener.h>

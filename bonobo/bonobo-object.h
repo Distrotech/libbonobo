@@ -13,7 +13,7 @@
 
 #include <bonobo-activation/bonobo-activation.h>
 
-#include <gobject/gobject.h>
+#include <glib-object.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-macros.h>
 

@@ -13,7 +13,6 @@
 #define _BONOBO_ITEM_HANDLER_H_
 
 
-#include <gobject/gclosure.h>
 #include <bonobo/bonobo-object.h>
 
 G_BEGIN_DECLS

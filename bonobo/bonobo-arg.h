@@ -14,7 +14,7 @@
 
 #include <bonobo/Bonobo.h>
 
-#include <gobject/gtype.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 

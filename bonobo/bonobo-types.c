@@ -2,10 +2,6 @@
 #include <string.h>
 #include <glib-object.h>
 #include <gobject/gvaluecollector.h>
-#include <gobject/gobject.h>
-#include <gobject/genums.h>
-#include <gobject/gvaluetypes.h>
-#include <gobject/gboxed.h>
 #include <bonobo/bonobo-types.h>
 #include <bonobo/bonobo-arg.h>
 

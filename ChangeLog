@@ -1,3 +1,12 @@
+Tue Nov 20 21:14:15 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* bonobo/bonobo-arg.[ch] bonobo/bonobo-event-source.h
+	bonobo/bonobo-generic-factory.[ch] bonobo/bonobo-item-container.c
+	bonobo/bonobo-item-container.h bonobo/bonobo-item-handler.h
+	bonobo/bonobo-listener.[ch] bonobo/bonobo-object.h 
+	bonobo/bonobo-property-bag.h bonobo/bonobo-types.c: Remove
+	unnecessary and soon to be disallowed includes of gobject/*.h.
+
 2001-11-19  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/bonobo-types.h: include glib-object.h

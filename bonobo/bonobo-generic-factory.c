@@ -17,7 +17,6 @@
 #include <config.h>
 #include <string.h>
 #include <glib-object.h>
-#include <gobject/gmarshal.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-types.h>

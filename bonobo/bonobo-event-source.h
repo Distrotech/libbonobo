@@ -13,8 +13,6 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-listener.h>
 
-#include <gobject/gclosure.h>
-
 G_BEGIN_DECLS
 
 #define BONOBO_TYPE_EVENT_SOURCE        (bonobo_event_source_get_type ())

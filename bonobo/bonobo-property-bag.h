@@ -16,8 +16,6 @@
 #include <bonobo/bonobo-arg.h>
 #include <bonobo/bonobo-event-source.h>
 
-#include <gobject/gclosure.h>
-
 G_BEGIN_DECLS
 
 #define BONOBO_PROPERTY_READABLE      Bonobo_PROPERTY_READABLE

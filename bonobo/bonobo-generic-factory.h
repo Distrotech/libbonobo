@@ -12,8 +12,6 @@
 #define _BONOBO_GENERIC_FACTORY_H_
 
 
-#include <gobject/gobject.h>
-#include <gobject/gclosure.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-i18n.h>
 
