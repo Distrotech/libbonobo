@@ -57,7 +57,7 @@ od_entry_read_props (OAF_ServerInfo * ent, xmlNodePtr node)
 	xmlNodePtr sub;
 	OAF_Property *curprop;
 
-	for (n = 0, sub = node->childs; sub; sub = sub->next) {
+	for (n = 0, sub = node->xmlChildrenNode; sub; sub = sub->next) {
 		if (sub->type != XML_ELEMENT_NODE)
 			continue;
 
@@ -71,7 +71,7 @@ od_entry_read_props (OAF_ServerInfo * ent, xmlNodePtr node)
 	ent->props._length = n;
 	ent->props._buffer = curprop = g_new (OAF_Property, n);
 
-	for (i = 0, sub = node->childs; i < n; sub = sub->next, i++) {
+	for (i = 0, sub = node->xmlChildrenNode; i < n; sub = sub->next, i++) {
 		char *type, *valuestr;
 
 		type = xmlGetProp (sub, "type");
@@ -96,7 +96,7 @@ od_entry_read_props (OAF_ServerInfo * ent, xmlNodePtr node)
 
 			curprop->v._d = OAF_P_STRINGV;
 
-			for (o = 0, sub2 = sub->childs; sub2;
+			for (o = 0, sub2 = sub->xmlChildrenNode; sub2;
 			     sub2 = sub2->next) {
 				if (sub2->type != XML_ELEMENT_NODE)
 					continue;
@@ -110,7 +110,7 @@ od_entry_read_props (OAF_ServerInfo * ent, xmlNodePtr node)
 			curprop->v._u.value_stringv._buffer =
 				CORBA_sequence_CORBA_string_allocbuf (o);
 
-			for (j = 0, sub2 = sub->childs; j < o;
+			for (j = 0, sub2 = sub->xmlChildrenNode; j < o;
 			     sub2 = sub2->next, j++) {
 				valuestr = xmlGetProp (sub2, "value");
 				if (valuestr)
@@ -242,8 +242,8 @@ OAF_ServerInfo_load (char **dirs,
 			 * response, :) but this has a direct impact on startup time. */
 
 			for (curnode =
-			     (!strcasecmp (doc->root->name, "oaf_info")
-			      ? doc->root->childs : doc->root);
+			     (!strcasecmp (doc->xmlRootNode->name, "oaf_info")
+			      ? doc->xmlRootNode->xmlChildrenNode : doc->xmlRootNode);
 			     NULL != curnode; curnode = curnode->next) {
 				OAF_ServerInfo *new_ent;
 				char *iid, *type, *location, *err;

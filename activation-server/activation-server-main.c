@@ -109,6 +109,8 @@ main (int argc, char *argv[])
 
 	poptFreeContext (ctx);
 
+        LIBXML_TEST_VERSION
+
 	ml = g_main_new (FALSE);
 
 	orb = oaf_init (argc, argv);

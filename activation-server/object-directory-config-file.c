@@ -61,12 +61,12 @@ od_utils_load_config_file (void)
 
         doc = od_utils_load_xml_file ();
  
-        search_node = doc->root->childs;
+        search_node = doc->xmlRootNode->xmlChildrenNode;
         result = "";
         while (search_node != NULL) {
                 if (strcmp (search_node->name, "searchpath") == 0) {
                         xmlNodePtr item_node;
-                        item_node = search_node->childs;
+                        item_node = search_node->xmlChildrenNode;
                         while (item_node != NULL) {
                                 if (strcmp (item_node->name, "item") == 0) {
                                         char *directory;
