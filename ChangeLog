@@ -1,3 +1,10 @@
+2002-02-17  jacob berkman  <jacob@ximian.com>
+
+	* bonobo/bonobo-stream-memory.h
+	(bonobo_stream_mem_create): return a
+	BonoboObject instead of the deprecated
+	BonoboStream typedef.
+
 2002-02-15  Michael Meeks  <michael@ximian.com>
 
 	* bonobo/Makefile.am: add disable deprecated flag.

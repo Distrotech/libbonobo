@@ -55,7 +55,7 @@ BonoboStreamMem *bonobo_stream_mem_construct  (BonoboStreamMem  *stream_mem,
 					       gboolean          read_only,
 					       gboolean          resizable);
 
-BonoboStream    *bonobo_stream_mem_create     (const char       *buffer,
+BonoboObject    *bonobo_stream_mem_create     (const char       *buffer,
 					       size_t            size,
 					       gboolean          read_only,
 					       gboolean          resizable);
