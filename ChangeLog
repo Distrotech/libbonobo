@@ -1,3 +1,10 @@
+2005-01-30  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* bonobo-activation/bonobo-activation-register.c
+	(bonobo_activation_register_active_server_ext): Just in case, add
+	fallback code to print warning and initialize retval when a
+	unexpected exception occurs.
+
 2005-01-29  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* bonobo/bonobo-arg.c (bonobo_arg_from_gvalue_alloc): Take
