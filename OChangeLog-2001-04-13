@@ -1,3 +1,7 @@
+2000-09-11  Robin * Slomkowski  <rslomkow@eazel.com>
+
+	* bonobo.spec.in: brought this a little bit more up to date
+
 2000-09-11  Michael Meeks  <michael@helixcode.com>
 
 	* bonobo/bonobo-ui-xml.c (do_set_id): don't tolerate '#' in a path
