@@ -46,7 +46,7 @@ impl_write (PortableServer_Servant servant,
 static CORBA_long
 impl_seek (PortableServer_Servant servant,
 	   CORBA_long offset,
-	   CORBA_long whence,
+	   GNOME_Stream_SeekType whence,
 	   CORBA_Environment *ev)
 {
 	GnomeStream *stream = gnome_stream_from_servant (servant);

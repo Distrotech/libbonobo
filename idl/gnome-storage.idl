@@ -18,6 +18,12 @@ module GNOME {
 	interface Stream : Unknown {
 		typedef sequence<octet> iobuf;
 
+		enum SeekType {
+			SEEK_SET,
+			SEEK_CUR,
+			SEEK_END
+		};
+
 		/**
 		 * read:
 		 * @count:  number of bytes to read.
@@ -41,11 +47,11 @@ module GNOME {
 		 *
 		 * Sets the read/write pointer to @offset (relative to @whence)
 		 */
-		long seek     (in long offset, in long whence);
+		long seek     (in long offset, in SeekType whence);
 
 		/**
 		 * truncate:
-		 * @lenght: new size of the stream
+		 * @length: new size of the stream
 		 *
 		 */
 		void truncate (in long length);

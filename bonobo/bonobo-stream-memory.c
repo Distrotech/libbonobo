@@ -89,22 +89,22 @@ mem_read (GnomeStream *stream, CORBA_long count,
 
 static CORBA_long
 mem_seek (GnomeStream *stream,
-	  CORBA_long offset, CORBA_long whence,
+	  CORBA_long offset, GNOME_Stream_SeekType whence,
 	  CORBA_Environment *ev)
 {
 	GnomeStreamMem *smem = GNOME_STREAM_MEM (stream);
 	int pos = 0;
 	
 	switch (whence){
-	case 0:
+	case GNOME_Stream_SEEK_SET:
 		pos = offset;
 		break;
 
-	case 1:
+	case GNOME_Stream_SEEK_CUR:
 		pos = smem->pos + offset;
 		break;
 
-	case 2:
+	case GNOME_Stream_SEEK_END:
 		pos = smem->size + offset;
 		break;
 

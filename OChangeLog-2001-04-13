@@ -1,3 +1,15 @@
+1999-08-16  Michael Meeks  <michael@imaginator.com>
+
+	* bonobo/gnome-stream-fs.c (fs_seek): Update to
+	new seek type.
+
+	* bonobo/gnome-stream-memory.c (mem_seek): ditto.
+
+	* storage-modules/gnome-stream-efs.c (real_seek): ditto.
+
+	* idl/gnome-storage.idl: Added enum SeekType and
+	updated 'seek'
+
 1999-08-14  Michael Meeks  <michael@imaginator.com>
 
 	* bonobo/gnome-stream-fs.c (fs_eos): Implemented.

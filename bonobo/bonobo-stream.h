@@ -29,7 +29,7 @@ typedef struct {
 				   GNOME_Stream_iobuf **buffer,
 				   CORBA_Environment *ev);
         CORBA_long    (*seek)     (GnomeStream *stream,
-				   CORBA_long offset, CORBA_long whence,
+				   CORBA_long offset, GNOME_Stream_SeekType whence,
 				   CORBA_Environment *ev);
         void          (*truncate) (GnomeStream *stream,
 				   const CORBA_long new_size, 
