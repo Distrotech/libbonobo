@@ -13,14 +13,17 @@ oaf_exception_id (CORBA_Environment *ev)
                 if (!strcmp (ev->_repo_id, "IDL:OAF/GeneralError:1.0")) {
                         OAF_GeneralError *err = ev->_params;
                         
-                        if (!err || !err->description)
+                        if (!err || !err->description) {
                                 return "No general exception error message";
-                        else
+                        } else {
                                 return err->description;
-                } else
+                        }
+                } else {
                         return ev->_repo_id;
-        } else
+                }
+        } else {
                 return CORBA_exception_id (ev);
+        }
 }
 
 static gboolean
@@ -55,11 +58,13 @@ test_object (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 	} else if (ev->_major != CORBA_NO_EXCEPTION) {
 		g_warning ("Activation %s failed: %s\n", type,
 			   oaf_exception_id (ev));
-	} else
+	} else {
                 return TRUE;
+        }
 
-        if (!test_oafd (ev, type))
+        if (!test_oafd (ev, type)) {
                 return FALSE;
+        }
 
         return FALSE;
 }
@@ -69,11 +74,12 @@ test_empty (CORBA_Object obj, CORBA_Environment *ev, const char *type)
 {
         Empty_doNothing (obj, ev);
 
-        if (ev->_major != CORBA_NO_EXCEPTION)
+        if (ev->_major != CORBA_NO_EXCEPTION) {
                 g_warning ("Call failed: %s\n",
                            oaf_exception_id (ev));
-        else
+        } else {
                 fprintf (stderr, "Test %s succeeded\n", type);
+        }
 }
 
 int
@@ -89,33 +95,70 @@ main (int argc, char *argv[])
 
 	obj = oaf_activate ("repo_ids.has('IDL:Empty:1.0')", NULL, 0, NULL,
                             &ev);
-        if (test_object (obj, &ev, "by query"))
+        if (test_object (obj, &ev, "by query")) {
                 test_empty (obj, &ev, "by query");
+        }
 
 
 	obj = oaf_activate_from_id ("OAFIID:Empty:19991025", 0, NULL, &ev);
-        if (test_object (obj, &ev, "from id"))
+        if (test_object (obj, &ev, "from id")) {
                 test_empty (obj, &ev, "from id");
+        }
 
 
 	obj = oaf_activate_from_id ("OAFAID:[OAFIID:Empty:19991025]", 0, NULL, &ev);
-        if (test_object (obj, &ev, "from aid"))
+        if (test_object (obj, &ev, "from aid")) {
                 test_empty (obj, &ev, "from aid");
+        }
 
 
         fprintf (stderr, "Broken link test ");
         obj = oaf_activate_from_id ("OAFIID:Bogus:20000526", 0, NULL, &ev);
+        if (obj || ev._major == CORBA_NO_EXCEPTION) {
+                fprintf (stderr, "failed 1");
+        } else {
+                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                CORBA_exception_free (&ev);
+        }
+        if (test_oafd (&ev, "with broken factory link")) {
+                fprintf (stderr, ", passed 2");
+        } else {
+                fprintf (stderr, ", failed 2");
+        }
+        fprintf (stderr, "\n");
+
+
+        fprintf (stderr, "Broken exe test ");
+        obj = oaf_activate_from_id ("OAFIID:Broken:20000530", 0, NULL, &ev);
+        if (obj || ev._major == CORBA_NO_EXCEPTION) {
+                fprintf (stderr, "failed 1");
+        } else {
+                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
+                CORBA_exception_free (&ev);
+        }
+        if (test_oafd (&ev, "with broken factory link")) {
+                fprintf (stderr, ", passed 2");
+        } else {
+                fprintf (stderr, ", failed 2");
+        }
+        fprintf (stderr, "\n");
+
+
+        fprintf (stderr, "Circular link test ");
+        obj = oaf_activate_from_id ("OAFIID:Circular:20000530", 0, NULL, &ev);
         if (obj || ev._major == CORBA_NO_EXCEPTION)
                 fprintf (stderr, "failed 1");
         else {
-                fprintf (stderr, "passed 1");
+                fprintf (stderr, "passed 1 ('%s')", oaf_exception_id (&ev));
                 CORBA_exception_free (&ev);
         }
-        if (test_oafd (&ev, "with broken factory link"))
+        if (test_oafd (&ev, "with broken factory link")) {
                 fprintf (stderr, ", passed 2");
-        else
+        } else {
                 fprintf (stderr, ", failed 2");
+        }
         fprintf (stderr, "\n");
+
 
 	CORBA_exception_free (&ev);
 

@@ -6,6 +6,8 @@
 #include "liboaf/liboaf.h"
 #include "ac-query-expr.h"
 
+#define OAF_LINK_TIME_TO_LIVE 256
+
 static void
 OAF_ServerInfo__copy (OAF_ServerInfo * new, const OAF_ServerInfo * old)
 {
@@ -420,8 +422,8 @@ ac_do_activation (impl_POA_OAF_ActivationContext * servant,
 	}
 
 	for (num_layers = 0, activatable = server;
-	     activatable && !strcmp (activatable->server_type, "factory");
-	     num_layers++) {
+             activatable && !strcmp (activatable->server_type, "factory") &&
+             num_layers < OAF_LINK_TIME_TO_LIVE; num_layers++) {
 		activatable =
 			g_hash_table_lookup (child->by_iid,
 					     activatable->location_info);
@@ -434,7 +436,14 @@ ac_do_activation (impl_POA_OAF_ActivationContext * servant,
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_OAF_GeneralError, errval);
 		return;
-	}
+	} else if (num_layers == OAF_LINK_TIME_TO_LIVE) {
+		OAF_GeneralError *errval = OAF_GeneralError__alloc ();
+		errval->description =
+			CORBA_string_dup ("Location loop");
+		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
+				     ex_OAF_GeneralError, errval);
+		return;
+        }
 
 	/* A shared library must be on the same host as the activator in
 	 * order for loading to work properly (no, we're not going to
