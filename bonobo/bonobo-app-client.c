@@ -327,7 +327,7 @@ bonobo_app_client_get_msgdescs (BonoboAppClient *self)
 		self->msgdescs[i].return_type =
 			_typecode_to_gtype (msglist->_buffer[i].return_type);
 		self->msgdescs[i].types = g_new (GType, msglist->_buffer[i].types._length + 1);
-		for (j = 0; j < msglist->_length; ++j)
+		for (j = 0; j < msglist->_buffer[i].types._length; ++j)
 			self->msgdescs[i].types[j] =
 				_typecode_to_gtype (msglist->_buffer[i].types._buffer[j]);
 		self->msgdescs[i].types[j] = G_TYPE_NONE;
