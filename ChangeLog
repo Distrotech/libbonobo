@@ -1,3 +1,7 @@
+2001-08-31  Abel Cheung  <maddog@linux.org.hk>
+
+	* configure.in (ALL_LINGUAS): zh_TW.Big5 -> zh_TW
+
 2001-08-27  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* bonobo/bonobo-object.c (bonobo_object_set_immortal): s/imortal/immortal/
