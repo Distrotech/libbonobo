@@ -1,3 +1,12 @@
+2000-02-03  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/bonobo/bonobo-control-frame.c, bonobo-control.c: Instead
+	of using a GtkFrame to hold the socket and removing the socket in
+	the local workaround case, use a GtkBox, and merely hide the
+	socket in the local case. This is really gross but it's the only
+	way to avoid destroying or removing the socket in the middle of
+	realization.
+
 2000-02-02  Michael Meeks  <mmeeks@gnu.org>
 	
 	* components/text-plain/bonobo-text-plain.c (view_factory): fix
