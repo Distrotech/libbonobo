@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 0.1\n"
-"POT-Creation-Date: 2002-03-12 00:42+0100\n"
-"PO-Revision-Date: 2002-03-01 01:36+0100\n"
+"POT-Creation-Date: 2002-03-16 15:23+0100\n"
+"PO-Revision-Date: 2002-03-16 15:23+0100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -39,16 +39,16 @@ msgstr "Das Objekt aus der Fabrik konnte nicht aktiviert werden"
 
 #: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "Keine Berechtigung auf den Strom zuzugreifen"
+msgstr "Keine Berechtigung auf den Stream zuzugreifen"
 
 #: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
 msgstr ""
-"Es wurde versucht eine nicht unterstützte Aktion auf dem Strom auszuführen"
+"Es wurde versucht eine nicht unterstützte Aktion auf dem Stream auszuführen"
 
 #: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "E/A-Fehler im Strom"
+msgstr "E/A-Fehler im Stream"
 
 #: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr "Objekt ist kein Strom"
+msgstr "Objekt ist kein Stream"
 
 #: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
@@ -112,7 +112,7 @@ msgstr "Falscher Datentyp"
 
 #: bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr "Strom konnte nicht gefunden werden"
+msgstr "Stream konnte nicht gefunden werden"
 
 #: bonobo/bonobo-exception.c:233
 msgid "property not found"
@@ -161,7 +161,7 @@ msgstr "Bonobo konnte nicht initialisiert werden"
 #: bonobo/bonobo-moniker.c:353
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "'%s konnte nicht aufgelöst oder erweitert werden"
+msgstr "»%s« konnte nicht aufgelöst oder erweitert werden"
 
 #: bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
@@ -190,7 +190,7 @@ msgstr "allgemeiner OAF-Anfrage-Moniker"
 # CHECK
 #: monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "allgemeiner 'neue' Fabrik-Moniker"
+msgstr "allgemeiner »neue« Fabrik-Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
@@ -199,17 +199,17 @@ msgstr "allgemeiner Element-Moniker"
 # CHECK
 #: monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr "Strom-MonikerExtender"
+msgstr "Stream-MonikerExtender"
 
 #: monikers/bonobo-moniker-oaf.c:51
 #, c-format
 msgid "Exception activating '%s"
-msgstr "Ausnahmefehler aktiviert '%s"
+msgstr "Ausnahmefehler aktiviert »%s«"
 
 #: monikers/bonobo-moniker-oaf.c:60
 #, c-format
 msgid "Failed to activate '%s"
-msgstr "'%s konnte nicht aktiviert werden"
+msgstr "»%s« konnte nicht aktiviert werden"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
@@ -238,4 +238,4 @@ msgstr "Es konnte keine Instanz der Beispiel-Echo-Komponente erzeugt werden"
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr "Ein Ausnahmefehler ist aufgetreten '%s'"
+msgstr "Ein Ausnahmefehler ist aufgetreten »%s«"
