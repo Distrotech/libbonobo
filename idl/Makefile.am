@@ -51,7 +51,12 @@ Bonobo_module_la_LIBADD = \
 Bonobo_module_la_LDFLAGS = \
 	-export-dynamic -module
 
-Bonobo-imodule.c : $(idl_DATA) $(ORBIT_IDL)
+$(IMODULE_SOURCE): $(idl_DATA) $(ORBIT_IDL)
 	$(ORBIT_IDL) $(idl_flags) --imodule $(top_srcdir)/idl/Bonobo.idl
 
+DONT_DIST_SOURCE = $(IMODULE_SOURCE)
 
+dist-hook:
+	for file in $(DONT_DIST_SOURCE) ; do \
+	    rm -f $(distdir)/$$file \
+	done

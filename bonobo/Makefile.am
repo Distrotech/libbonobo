@@ -137,20 +137,14 @@ marshal_sources = \
 	bonobo-marshal.c \
 	bonobo-marshal.h
 
-bonobo-marshal.h: bonobo-marshal.list
-	cd $(srcdir) \
-	&& glib-genmarshal --prefix=bonobo_marshal bonobo-marshal.list --header >> xgen-gmh \
-	&& (cmp -s xgen-gmh bonobo-marshal.h || cp xgen-gmh bonobo-marshal.h) \
-	&& rm -f xgen-gmh xgen-gmh~
+bonobo-marshal.h: $(GLIB_GENMARSHAL) bonobo-marshal.list
+	$(GLIB_GENMARSHAL) --prefix=bonobo_marshal $(srcdir)/bonobo-marshal.list --header > $@
 
-bonobo-marshal.c: bonobo-marshal.list bonobo-marshal.h
-	cd $(srcdir) \
-	&& glib-genmarshal --prefix=bonobo_marshal bonobo-marshal.list --body >> xgen-gmc \
-	&& cp xgen-gmc bonobo-marshal.c \
-	&& rm -f xgen-gmc xgen-gmc~
+bonobo-marshal.c: $(GLIB_GENMARSHAL) bonobo-marshal.list
+	$(GLIB_GENMARSHAL) --prefix=bonobo_marshal $(srcdir)/bonobo-marshal.list --body > $@
 
-EXTRA_DIST = libbonobo-2.0.pc.in bonobo-marshal.list $(marshal_sources)
-MAINTAINERCLEANFILES = $(marshal_sources)
+EXTRA_DIST = libbonobo-2.0.pc.in bonobo-marshal.list
+CLEANFILES = $(marshal_sources)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libbonobo-2.0.pc

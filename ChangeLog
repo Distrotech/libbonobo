@@ -1,3 +1,11 @@
+2001-08-18  Darin Adler  <darin@bentspoon.com>
+
+	* configure.in: Add GLIB_GENMARSHAL variable.
+	* bonobo/Makefile.am: Update marshal build rules to work in a
+	simpler way.
+	* idl/Makefile.am: Fix generated-source-file rules so they
+	work well enough for "make distcheck".
+
 2001-08-17  Michael Meeks  <michael@ximian.com>
 
 	* monikers/bonobo-moniker-new.c

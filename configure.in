@@ -76,6 +76,9 @@ AC_DEFINE(ENABLE_ORBIT2)
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
 AC_SUBST(ORBIT_IDL)
 
+# glib-genmarshal
+AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
+
 # Activation idl files
 BONOBO_ACTIVATION_IDL_DIR="`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
 AC_SUBST(BONOBO_ACTIVATION_IDL_DIR)
