@@ -1,3 +1,8 @@
+1999-06-04  Chris Lahey  <clahey@umich.edu>
+
+	* components/audio-ulaw/doc/C/Makefile.am,
+	components/image-x-png/doc/C/Makefile.am: Fixed make distcheck.
+
 1999-06-03  Richard Hestilow  <hestgray@ionet.net>
 	
 	* bonobo/gnome-bonobo-selector.[ch]: Updated to use the new private
