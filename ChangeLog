@@ -1,3 +1,7 @@
+2001-12-08  Abel Cheung  <maddog@linux.org.hk>
+
+	* configure.in: Fix typo in GETTEXT_PACKAGE.
+
 2001-11-28  jacob berkman  <jacob@ximian.com>
 
 	* tests/Makefile.am (TESTS_ENVIRONMENT): prepend our new paths
