@@ -1,3 +1,12 @@
+2003-07-08  Michael Meeks  <michael@ximian.com>
+
+	* configure.in: add popt check / POPT_LIBS.
+
+	* tests/test-activation/Makefile.am,
+	* activation-server/Makefile.am,
+	* utils/Makefile.am: link explicitely to popt,
+	thanks to Damien Carbery <damien.carbery@sun.com>
+
 2003-07-04  Frederic Crozat  <fcrozat@mandrakesoft.com>
 
 	* Version 2.3.4

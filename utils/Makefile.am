@@ -15,5 +15,5 @@ INCLUDES =						\
 bonobo_activation_sysconf_LDADD =	\
 	$(SERVER_LIBS)		\
 	$(top_builddir)/bonobo-activation/libbonobo-activation.la \
-	$(INTLLIBS)
+	$(INTLLIBS) $(POPT_LIBS)
 
