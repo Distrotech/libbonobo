@@ -1,3 +1,16 @@
+Mon Nov 27 11:05:42 2000  Dietmar Maurer  <dietmar@maurer-it.com>
+
+	* storage-modules/bonobo-storage-fs.c (bonobo_storage_fs_open):
+	removed unused realname variable. 
+
+	* bonobo/bonobo-storage-plugin.h (BONOBO_STORAGE_VERSION): define
+	a version string which we can change manulally if we make
+	incompatible changes.
+
+	* bonobo/bonobo-storage-plugin.c,
+	storage-modules/bonobo-storage-efs.c, 
+	storage-modules/bonobo-storage-fs.c: see above
+
 2000-11-26  Vladimir Vukicevic  <vladimir@helixcode.com>
 
 	* monikers/Makefile.am: correct spelling of moniker_test_SOURCE

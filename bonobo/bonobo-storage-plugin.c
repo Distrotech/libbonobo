@@ -120,7 +120,7 @@ bonobo_storage_plugin_find (const gchar *name)
 	while (l) {
 		p = (StoragePlugin *) l->data;
 		if (!strcmp (p->name, name) &&
-		    !strcmp (p->version, VERSION)) {
+		    !strcmp (p->version, BONOBO_STORAGE_VERSION)) {
 			return p;
 		}
 		l = l->next;

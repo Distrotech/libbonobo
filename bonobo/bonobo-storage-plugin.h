@@ -12,6 +12,8 @@
 #include <bonobo/bonobo-storage.h>
 #include <gmodule.h>
 
+#define BONOBO_STORAGE_VERSION "1.0"
+
 BEGIN_GNOME_DECLS
 
 typedef struct          _StoragePlugin         StoragePlugin;
