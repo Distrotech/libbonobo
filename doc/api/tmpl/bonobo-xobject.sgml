@@ -1,0 +1,133 @@
+<!-- ##### SECTION Title ##### -->
+bonobo-xobject
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO BONOBO_X_OBJECT_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO BONOBO_X_OBJECT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+
+<!-- ##### MACRO BONOBO_X_OBJECT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+
+<!-- ##### MACRO BONOBO_IS_X_OBJECT ##### -->
+<para>
+
+</para>
+
+@o: 
+
+
+<!-- ##### MACRO BONOBO_IS_X_OBJECT_CLASS ##### -->
+<para>
+
+</para>
+
+@k: 
+
+
+<!-- ##### STRUCT BonoboXObject ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF BonoboXObjectClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### USER_FUNCTION BonoboXObjectPOAFn ##### -->
+<para>
+
+</para>
+
+@servant: 
+@ev: 
+
+
+<!-- ##### FUNCTION bonobo_x_object ##### -->
+<para>
+
+</para>
+
+@p: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_x_type_unique ##### -->
+<para>
+
+</para>
+
+@parent_type: 
+@init_fn: 
+@fini_fn: 
+@epv_struct_offset: 
+@info: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_x_type_setup ##### -->
+<para>
+
+</para>
+
+@type: 
+@init_fn: 
+@fini_fn: 
+@epv_struct_offset: 
+@Returns: 
+
+
+<!-- ##### MACRO BONOBO_X_TYPE_FUNC_FULL ##### -->
+<para>
+
+</para>
+
+@class_name: 
+@corba_name: 
+@parent: 
+@prefix: 
+
+
+<!-- ##### MACRO BONOBO_X_TYPE_FUNC ##### -->
+<para>
+
+</para>
+
+@class_name: 
+@parent: 
+@prefix: 
+
+

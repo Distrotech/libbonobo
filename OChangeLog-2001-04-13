@@ -1,5 +1,12 @@
 2001-02-21  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/bonobo-ui-util.c (bonobo_ui_util_translate_ui),
+	(bonobo_ui_util_new_ui): fix tedious warning.
+
+	* doc/api: add bonobo-xobject
+
+2001-02-21  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-ui-engine.c
 	(bonobo_ui_engine_xml_merge_tree): fix tedious warning.
 
