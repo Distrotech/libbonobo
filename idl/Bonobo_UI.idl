@@ -46,10 +46,11 @@ module Bonobo {
 	};
 
 	interface UIContainer : Bonobo::Unknown {
-		exception MalFormedXML {};
-		exception InvalidPath {};
-		exception Insensitive {};
-		exception Unknown {};
+		exception MalFormedXML    {};
+		exception InvalidPath     {};
+		exception NonExistantAttr {};
+		exception Insensitive     {};
+		exception Unknown         {};
 
 		/* FIXME: broken, should use set/get object instead */
 		void    registerComponent   (in string component_name,
@@ -63,7 +64,7 @@ module Bonobo {
 		oneway void     setAttr     (in string path, in string attr,
 					     in string value);
 		string          getAttr     (in string path, in string attr)
-			raises (InvalidPath);
+			raises (InvalidPath, NonExistantAttr);
 
 		void    setNode             (in string path, in string xml,
 					     in string component_name)
