@@ -1,35 +1,51 @@
 Bonobo 1.0.0
 
-	* fix symlink issues in fs storage (Vladimir Vukicevic)
-	* fix multiple translation issues (Me)
-	* event-source fixes (Richard Hult)
-	* control / object destruction race fix (Darin)
-	* batch property get/set impl. (Dietmar)
-	* property bag client SEGV fix (Larry)
-	* fs storage permissions fix (Dietmar)
-	* include config.h some more (Kjartan)
-	* event-source cleans (Dietmar)
-	* event-source re-enterancy fix (Me)
-	* moniker file extender fix (Dietmar)
-	* Reduce control's memory footprint (Me)
-	* Revert unsafe attempt at AA pixbufs (Me)
-	* monikers memory leak fix (Dietmar)
-	* moniker URL registry (Dietmar)
-	* bonobo-arg fixes (Dietmar)
+	* Documentation
+		* Full C API documentation (Me, Miguel & John Sheets)
+		* Lots of nice DIA diagrams (John Sheets)
+		* preliminary UI XML DTD (Paolo)
+
+	* Storage / Stream
+		* fix symlink issues in fs storage (Vladimir Vukicevic)
+		* fs storage permissions fix (Dietmar)
+		* improved storage-fs / stream-fs mime type handling (Jens Finke)
+
+	* Event source / Listener
+		* event-source fixes (Richard Hult)
+		* event-source cleans (Dietmar)
+		* event-source re-enterancy fix (Me)
+
+	* Property Bag
+		* batch property get/set impl. (Dietmar)
+		* property bag client SEGV fix (Larry)
+		* PropertyBag leak fixes (Iain Holmes)
+
+	* Monikers
+		* moniker file extender fix (Dietmar)
+		* monikers memory leak fix (Dietmar)
+		* moniker URL registry (Dietmar)
+
+	* Any support logic
+		* bonobo-arg fixes (Dietmar)
+		* XML typecode reference fix (Dietmar)
+		* Fix XML type coding bugs (Me)
+
+	* UI handler bits
+		* Revert unsafe attempt at AA pixbufs (Me)
+		* minor XML de-merge logic fix (Me)
+		* config fixes (Iain Holmes)
+		* Always cleanup XML we hand out (Me)
+		* pixmap <-> XML acceleration (John Harper)
+
+	* Misc fixes
+		* fix multiple translation issues (Me)
+		* gshell fixes (Martin Baulig)
+		* include config.h some more (Kjartan)
+		* control / object destruction race fix (Darin)
+		* Reduce control's memory footprint (Me)
+
 	* idl-grep, a new tool for groking IDL (Paolo Molaro)
-	* gshell fixes (Martin Baulig)
-	* pixmap <-> XML acceleration (John Harper)
-	* Full C API documentation (Me / Miguel / John Sheets)
-	* minor UI XML de-merge logic fix (Me)
-	* preliminary UI XML DTD (Paolo)
-	* improved storage-fs / stream-fs mime type handling (Jens Finke)
-	* UI XML config efficiency fix (Me)
-	* XML typecode reference fix (Dietmar)
-	* Lots of nice DIA diagrams (John Sheets)
-	* UI XML config fixes (Iain Holmes)
-	* PropertyBag leak fixes (Iain Holmes)
-	* Fix XML type coding bugs (Me)
-	* Always cleanup XML we hand out (Me)
+
 
 Bonobo 0.37
 
