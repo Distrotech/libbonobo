@@ -1,5 +1,10 @@
 2001-07-17  Michael Meeks  <michael@ximian.com>
 
+	* bonobo/Makefile.am (libbonoboinclude_HEADERS): don't install
+	bonobo-simple-source.h it's incredibly old and stale.
+
+2001-07-17  Michael Meeks  <michael@ximian.com>
+
 	* bonobo/bonobo-main.c (bonobo_x_error_handler): kill,
 	(bonobo_setup_x_error_handler): kill - in libbonoboui now.
 

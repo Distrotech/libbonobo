@@ -82,7 +82,6 @@ libbonoboinclude_HEADERS =		\
 	bonobo-property-bag.h		\
 	bonobo-property-bag-client.h	\
 	bonobo-shlib-factory.h		\
-	bonobo-simple-source.h		\
 	bonobo-storage.h		\
 	bonobo-stream.h			\
 	bonobo-stream-client.h		\
