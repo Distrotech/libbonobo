@@ -1,3 +1,7 @@
+2001-11-02  Michael Meeks  <michael@ximian.com>
+
+	* Version 1.106.0
+
 2001-11-01  Michael Meeks  <michael@ximian.com>
 
 	* idl/Bonobo_Control.idl: kill getWindowId, return the Id

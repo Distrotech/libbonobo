@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Bonobo 0.32\n"
-"POT-Creation-Date: 2001-09-26 08:33+0200\n"
+"POT-Creation-Date: 2001-11-02 15:36+1100\n"
 "PO-Revision-Date: 2001-09-26 08:36+0200\n"
 "Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
 "Language-Team: nynorsk <nn@li.org>\n"
@@ -14,139 +14,139 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
-#: bonobo/bonobo-exception.c:153
+#: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
 msgstr "Ei ustøtta handling vart forsøkt"
 
-#: bonobo/bonobo-exception.c:156
+#: bonobo/bonobo-exception.c:157
 msgid "IO Error"
 msgstr "IU-feil"
 
-#: bonobo/bonobo-exception.c:159
+#: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
 msgstr "Ugyldig argument verdi"
 
-#: bonobo/bonobo-exception.c:163
+#: bonobo/bonobo-exception.c:164
 msgid "Object not found"
 msgstr "Fann ikkje objekt"
 
-#: bonobo/bonobo-exception.c:166
+#: bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
 msgstr "Syntaksfeil i objektskildringa"
 
-#: bonobo/bonobo-exception.c:171
+#: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
 msgstr "Kan ikkje aktivera objekt fra factory"
 
-#: bonobo/bonobo-exception.c:176
+#: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
 msgstr "Ikkje løyve til å aksessera strøm"
 
-#: bonobo/bonobo-exception.c:179
+#: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
 msgstr "Ei ustøtta straumhandling vart forsøkt"
 
-#: bonobo/bonobo-exception.c:182
+#: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
 msgstr "IU feil på straum"
 
-#: bonobo/bonobo-exception.c:186
+#: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
 msgstr "IO feil på lager"
 
-#: bonobo/bonobo-exception.c:189
+#: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
 msgstr "Namnet finnest allereide i lageret"
 
-#: bonobo/bonobo-exception.c:192
+#: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
 msgstr "Objektet ikkje funne i lageret"
 
-#: bonobo/bonobo-exception.c:195
+#: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
 msgstr "Ikkje løyve til å gjere operasjonar på lager"
 
-#: bonobo/bonobo-exception.c:197
+#: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
 msgstr "Ei ustøtta handling vart forsøkt"
 
-#: bonobo/bonobo-exception.c:199
+#: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
 msgstr "Objektet er ikkje ein straum"
 
-#: bonobo/bonobo-exception.c:202
+#: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
 msgstr "Objektet er ikkje eit lager"
 
-#: bonobo/bonobo-exception.c:205
+#: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
 msgstr "Lageret er ikkje tomt"
 
-#: bonobo/bonobo-exception.c:209
+#: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
 msgstr "feil forma brukargrensesnitt XML skildring"
 
-#: bonobo/bonobo-exception.c:212
+#: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
 msgstr "ugyldig sti til XML grensesnitt element"
 
-#: bonobo/bonobo-exception.c:215
+#: bonobo/bonobo-exception.c:216
 msgid "Unknown command or verb"
 msgstr "Ukjend kommando eller verb"
 
-#: bonobo/bonobo-exception.c:218
+#: bonobo/bonobo-exception.c:219
 msgid "Command is insensitive"
 msgstr "Kommandoen er kjenslelaus"
 
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:223
 msgid "incorrect data type"
 msgstr "ugyldig datatype"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:226
 msgid "stream not found"
 msgstr "fann ikkje straum"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:230
 msgid "property not found"
 msgstr "eigenskap ikkje funne"
 
-#: bonobo/bonobo-exception.c:232
+#: bonobo/bonobo-exception.c:233
 msgid "property has invalid type"
 msgstr "eigeskap har ugyldeg type"
 
-#: bonobo/bonobo-exception.c:235
+#: bonobo/bonobo-exception.c:236
 msgid "property is read only"
 msgstr "eigenskap er skrivebeskytta"
 
-#: bonobo/bonobo-exception.c:238
+#: bonobo/bonobo-exception.c:239
 msgid "config database backend failed "
 msgstr "konfigurasjonsdatabasen feila "
 
-#: bonobo/bonobo-exception.c:242
+#: bonobo/bonobo-exception.c:243
 msgid "Moniker interface cannot be found"
 msgstr "Moniker grensesnitten vart ikkje funne"
 
-#: bonobo/bonobo-exception.c:245
+#: bonobo/bonobo-exception.c:246
 msgid "Moniker activation timed out"
 msgstr "Monikeraktiveringa vart kopla ut på tid"
 
-#: bonobo/bonobo-exception.c:248
+#: bonobo/bonobo-exception.c:249
 msgid "Syntax error within moniker"
 msgstr "Syntaksfeil i Moniker"
 
-#: bonobo/bonobo-exception.c:251
+#: bonobo/bonobo-exception.c:252
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker har eit ukjent moniker prefiks"
 
-#: bonobo/bonobo-exception.c:275
+#: bonobo/bonobo-exception.c:276
 msgid "Error checking error; no exception"
 msgstr "Feil under sjekking av feil; ingen unntak"
 
-#: bonobo/bonobo-exception.c:284
+#: bonobo/bonobo-exception.c:285
 msgid "General activation error with no description"
 msgstr "Generelle aktiviseringsfeil utan skildring"
 
-#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+#: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikkje initialisere Bonobo"
 

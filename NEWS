@@ -1,4 +1,57 @@
-libbonobo 1.103
+libbonobo 1.106.0
+
+	* Bonobo_Control IDL re-write (Me)
+		+ improved Gdk / Gtk split out
+		+ make Control / Frame work in converse
+		+ add getAccessible for Bill
+		+ cleaned, Java friendly sizing
+
+	* BonoboObject (Me)
+		+ bonobo_object_fast, new magic cast macro
+		+ always on object accounting & warnings
+		+ don't poke inside CORBA_Object
+		+ remove bogus QI virtualization
+		+ kill curious GType fiddling on QI.
+
+	* Reference tracking (Me)
+		+ bonobo_debug_shutdown to flag bugs
+		+ scads of leaks fixed
+
+	* beef up regression tests (Me)
+		+ new magic casts consistency
+		+ moniker equal tests
+		+ fail on reference leaks
+
+	* Factory fixes
+		+ handle errors correctly (Jacob)
+		+ shlib factory rationalized (Me)
+		+ generic factory cleaned (Me)
+		+ Generic factory - autoexit unref (Me)
+
+	* Property Bag (Me)
+		+ fixup mapping of Gtk+ properties
+		+ lifecyle issues
+		+ update GValue <-> CORBA_any mappings
+
+	* Monikers
+		+ implement Asynchronous monikers (Me)
+		+ remove bogus virtualization (Me)
+		+ moniker leak fix (Dirk-Jan)
+
+	* Misc
+		+ bonobo_exception_general_error (Me)
+		+ remove bogus virt. on BonoboStorageMemory
+		+ fixup listener construction (Iain Holmes)
+		+ hold CORBA ref on Unknown in ping (Ettore)
+		+ GValue issues & system_exception bug fix (Me)
+		+ Type name standardization (Seth Nickell)
+
+	* Build fixes
+		+ parallel install (Abel Cheung, Havoc)
+		+ header re-organisation (Jacob)
+		+ misc. build fixage (Jacob)
+
+libbonobo 1.103.0
 
 	* Bug fixes
 		* glib API tracking (Alex Larsson)

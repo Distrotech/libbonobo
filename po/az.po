@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo2 1.103.0\n"
-"POT-Creation-Date: 2001-09-19 21:31-0400\n"
+"POT-Creation-Date: 2001-11-02 15:36+1100\n"
 "PO-Revision-Date: 2001-09-20 22:39GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -15,139 +15,139 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
 
-#: bonobo/bonobo-exception.c:153
+#: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
 msgstr "Dəstəklənməyən əməliyyat sınandı"
 
-#: bonobo/bonobo-exception.c:156
+#: bonobo/bonobo-exception.c:157
 msgid "IO Error"
 msgstr "GÇ (IO) Xətası"
 
-#: bonobo/bonobo-exception.c:159
+#: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
 msgstr "Hökmsüz arqument qiyməti"
 
-#: bonobo/bonobo-exception.c:163
+#: bonobo/bonobo-exception.c:164
 msgid "Object not found"
 msgstr "Cism tapılmadı"
 
-#: bonobo/bonobo-exception.c:166
+#: bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
 msgstr "Cism izahında imla xətası var"
 
-#: bonobo/bonobo-exception.c:171
+#: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
 msgstr "Cism vericisini işə sala bilmədim"
 
-#: bonobo/bonobo-exception.c:176
+#: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
 msgstr "Axıma yetişmək üçün lazımi səlahiyyətlərə sahib deyilsən"
 
-#: bonobo/bonobo-exception.c:179
+#: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
 msgstr "Dəstəklənməyən bir axım əməliyyatı sınandı"
 
-#: bonobo/bonobo-exception.c:182
+#: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
 msgstr "Axımda bir G/Ç xətası oldu"
 
-#: bonobo/bonobo-exception.c:186
+#: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
 msgstr "Saxlamada bir G/Ç xətası oldu"
 
-#: bonobo/bonobo-exception.c:189
+#: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
 msgstr "Ad qeydlərdə onsuz da var"
 
-#: bonobo/bonobo-exception.c:192
+#: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
 msgstr "Cism qeydlərdə tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:195
+#: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
 msgstr "Qeydlərdə dəyişiklik üçün səlahiyyətlər yoxdur"
 
-#: bonobo/bonobo-exception.c:197
+#: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
 msgstr "Dəstəklənməyən bir saxlama əməliyyatı sınandı"
 
-#: bonobo/bonobo-exception.c:199
+#: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
 msgstr "Cism bir axım deyildir"
 
-#: bonobo/bonobo-exception.c:202
+#: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
 msgstr "Cism bir saxlama deyildir"
 
-#: bonobo/bonobo-exception.c:205
+#: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
 msgstr "Saxlama boş deyildir"
 
-#: bonobo/bonobo-exception.c:209
+#: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
 msgstr "xətalı istifadəçi ara üzü XML izahı"
 
-#: bonobo/bonobo-exception.c:212
+#: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
 msgstr "xətalı XML istifadəçi ara üzü elementi"
 
-#: bonobo/bonobo-exception.c:215
+#: bonobo/bonobo-exception.c:216
 msgid "Unknown command or verb"
 msgstr "Namə'lum əmr ya da fe'l"
 
-#: bonobo/bonobo-exception.c:218
+#: bonobo/bonobo-exception.c:219
 msgid "Command is insensitive"
 msgstr "Əmr qeyri həssasdır"
 
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:223
 msgid "incorrect data type"
 msgstr "hökmsüz mə'lumat növü"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:226
 msgid "stream not found"
 msgstr "axım tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:230
 msgid "property not found"
 msgstr "mülkiyyət tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:232
+#: bonobo/bonobo-exception.c:233
 msgid "property has invalid type"
 msgstr "mülkiyyət səhv növdədir"
 
-#: bonobo/bonobo-exception.c:235
+#: bonobo/bonobo-exception.c:236
 msgid "property is read only"
 msgstr "mülkiyyət sırf oxunandır"
 
-#: bonobo/bonobo-exception.c:238
+#: bonobo/bonobo-exception.c:239
 msgid "config database backend failed "
 msgstr "config database backend failed "
 
-#: bonobo/bonobo-exception.c:242
+#: bonobo/bonobo-exception.c:243
 msgid "Moniker interface cannot be found"
 msgstr "Moniker ara üzü tapıla bilmədi"
 
-#: bonobo/bonobo-exception.c:245
+#: bonobo/bonobo-exception.c:246
 msgid "Moniker activation timed out"
 msgstr "Moniker fəallaşdırılması vaxtı doldu"
 
-#: bonobo/bonobo-exception.c:248
+#: bonobo/bonobo-exception.c:249
 msgid "Syntax error within moniker"
 msgstr "Monikerdə sintaks xətası"
 
-#: bonobo/bonobo-exception.c:251
+#: bonobo/bonobo-exception.c:252
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker namə'lum moniker prefiksinə malikdir"
 
-#: bonobo/bonobo-exception.c:275
+#: bonobo/bonobo-exception.c:276
 msgid "Error checking error; no exception"
 msgstr "Xəta yoxlaması xətası; xüsusi hal yoxdur"
 
-#: bonobo/bonobo-exception.c:284
+#: bonobo/bonobo-exception.c:285
 msgid "General activation error with no description"
 msgstr "İzahsız ümumi fəallaşdırma xətası"
 
-#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+#: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
 msgid "Could not initialize Bonobo"
 msgstr "Bonobo başladıla bilmir"
 

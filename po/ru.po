@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"POT-Creation-Date: 2001-10-13 20:01+0400\n"
+"POT-Creation-Date: 2001-11-02 15:36+1100\n"
 "PO-Revision-Date: 2001-10-13 20:08+0400\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -12,138 +12,170 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bonobo/bonobo-exception.c:153
+#: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
 msgstr "Попытка выполнить неподдерживаемое действие"
 
-#: bonobo/bonobo-exception.c:156
+#: bonobo/bonobo-exception.c:157
 msgid "IO Error"
 msgstr "Ошибка ввода-вывода"
 
-#: bonobo/bonobo-exception.c:159
+#: bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
 msgstr "Недопустимое значение аргумента"
 
-#: bonobo/bonobo-exception.c:163
+#: bonobo/bonobo-exception.c:164
 msgid "Object not found"
 msgstr "Объект не найден"
 
-#: bonobo/bonobo-exception.c:166
+#: bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
 msgstr "Синтаксическая ошибка в описании объекта"
 
-#: bonobo/bonobo-exception.c:171
+#: bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:176
+#: bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
 msgstr "Нет прав на доступ к потоку"
 
-#: bonobo/bonobo-exception.c:179
+#: bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
 msgstr "Попытка выполнить неподдерживаемое действие потока"
 
-#: bonobo/bonobo-exception.c:182
+#: bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
 msgstr "Ошибка ввода-вывода в потоке"
 
-#: bonobo/bonobo-exception.c:186
+#: bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
 msgstr "Ошибка ввода-вывода в хранилище"
 
-#: bonobo/bonobo-exception.c:189
+#: bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
 msgstr "Название уже существует в хранилище"
 
-#: bonobo/bonobo-exception.c:192
+#: bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
 msgstr "Объект в хранилище не найден"
 
-#: bonobo/bonobo-exception.c:195
+#: bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
 msgstr "Нет прав для выполнения действий c хранилищем"
 
-#: bonobo/bonobo-exception.c:197
+#: bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
 msgstr "Попытка выполнить неподдерживаемое действие с хранилищем"
 
-#: bonobo/bonobo-exception.c:199
+#: bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
 msgstr "Объект не является потоком"
 
-#: bonobo/bonobo-exception.c:202
+#: bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
 msgstr "Объект не является хранилищем"
 
-#: bonobo/bonobo-exception.c:205
+#: bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
 msgstr "Хранилище не пусто"
 
-#: bonobo/bonobo-exception.c:209
+#: bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
 msgstr "неправильное XML-описание пользовательского интерфейса"
 
-#: bonobo/bonobo-exception.c:212
+#: bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
 msgstr "недопустимый путь к XML-элементу пользовательского интерфейса"
 
-#: bonobo/bonobo-exception.c:215
+#: bonobo/bonobo-exception.c:216
 msgid "Unknown command or verb"
 msgstr "Неизвестная команда или действие"
 
-#: bonobo/bonobo-exception.c:218
+#: bonobo/bonobo-exception.c:219
 msgid "Command is insensitive"
 msgstr "Бессмысленная команда"
 
-#: bonobo/bonobo-exception.c:222
+#: bonobo/bonobo-exception.c:223
 msgid "incorrect data type"
 msgstr "неправильный тип данных"
 
-#: bonobo/bonobo-exception.c:225
+#: bonobo/bonobo-exception.c:226
 msgid "stream not found"
 msgstr "поток не найден"
 
-#: bonobo/bonobo-exception.c:229
+#: bonobo/bonobo-exception.c:230
 msgid "property not found"
 msgstr "свойство не найдено"
 
-#: bonobo/bonobo-exception.c:232
+#: bonobo/bonobo-exception.c:233
 msgid "property has invalid type"
 msgstr "свойство имеет недопустимый тип"
 
-#: bonobo/bonobo-exception.c:235
+#: bonobo/bonobo-exception.c:236
 msgid "property is read only"
 msgstr "свойство только для чтения"
 
-#: bonobo/bonobo-exception.c:238
+#: bonobo/bonobo-exception.c:239
 msgid "config database backend failed "
 msgstr ""
 
-#: bonobo/bonobo-exception.c:242
+#: bonobo/bonobo-exception.c:243
 msgid "Moniker interface cannot be found"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:245
+#: bonobo/bonobo-exception.c:246
 msgid "Moniker activation timed out"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:248
+#: bonobo/bonobo-exception.c:249
 msgid "Syntax error within moniker"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:251
+#: bonobo/bonobo-exception.c:252
 msgid "Moniker has an unknown moniker prefix"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:275
+#: bonobo/bonobo-exception.c:276
 msgid "Error checking error; no exception"
 msgstr ""
 
-#: bonobo/bonobo-exception.c:284
+#: bonobo/bonobo-exception.c:285
 msgid "General activation error with no description"
 msgstr "Общая ошибка активирования без описания"
 
-#: bonobo/bonobo-generic-factory.h:67 bonobo/bonobo-generic-factory.h:71
+#: bonobo/bonobo-generic-factory.h:76 bonobo/bonobo-generic-factory.h:80
 msgid "Could not initialize Bonobo"
 msgstr "Не удалось инициализировать Bonobo"
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:1
+msgid "HTTP Moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "ORB IOR handling moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "Standard Moniker factory"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "generic Oaf activation moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:5
+msgid "generic Oaf query moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:6
+msgid "generic factory 'new' moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:7
+msgid "generic item moniker"
+msgstr ""
+
+#: monikers/Bonobo_Moniker_std.server.in.in.h:8
+msgid "stream MonikerExtender"
+msgstr ""
