@@ -39,7 +39,7 @@ serverinfodir=$(libdir)/bonobo/servers
 server_in_files = Bonobo_CosNaming_NamingContext.server.in
 serverinfo_DATA = $(server_in_files:.server.in=.server)
 
-@XML_I18N_MERGE_SERVER_RULE@
+@INTLTOOL_SERVER_RULE@
 
 EXTRA_DIST=activation-context-query-lexer.l activation-context-query-parser.y \
 	$(server_in_files) $(serverinfo_DATA)
