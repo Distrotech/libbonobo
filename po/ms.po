@@ -1,20 +1,18 @@
 # libbonobo Bahasa Melayu.
-# Copyright (C) 2001 Free Software Foundation, Inc.
-#  Mohamad Afifi Omar (App) <mr_mohd_afifi@yahoo.com>, 2002.
-#
+# Copyright (C) 2002 Free Software Foundation, Inc., Projek Gabai.
+# 1. Mohamad Afifi Omar (App) <mr_mohd_afifi@yahoo.com>, 2002.
+# 2. Hasbullah Bin Pit <sebol@ikhlas.com>, 2002.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-02-11 10:21+0000\n"
-"PO-Revision-Date: 2002-01-09 23:47+0800\n"
-"Last-Translator: Mohamad Afifi Omar (App) <mr_mohd_afifi@yahoo.com>\n"
+"Project-Id-Version: libbonobo\n"
+"POT-Creation-Date: 2002-02-25 14:09+0800\n"
+"PO-Revision-Date: 2002-02-25 14:09+0800\n"
+"Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Bahasa Melayu <gabai-penyumbang@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.8\n"
 
-# ; fuzzy
 #: bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
 msgstr "Berlaku satu cubaan aksi yang tidak disokong "
@@ -208,30 +206,29 @@ msgstr "Gagal mengaktifkan '%s'"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Kilang pelayan Echo Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Contoh program pelayan Echo Bonobo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "Komponen Echo"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Kilang komponen Echo"
 
 #: samples/echo/echo-client.c:22
-#, fuzzy
 msgid "I could not initialize Bonobo"
-msgstr "Gagal menjanakan Bonobo"
+msgstr "Tak dpaat menginitialisasikan Bonobo"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "Tak dapat mencipta instance bagi contoh komponen Echo"
 
 #: samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr ""
+msgstr "Pengecualian berlaki '%s'"
