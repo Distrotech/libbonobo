@@ -1,3 +1,22 @@
+Fri Nov 19 12:55:35 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_destroy): destroy
+	the wrapper after destroying the remove view (so that
+	plug_destroy_cb is not called).
+
+Thu Nov 18 08:40:55 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* bonobo/gnome-control.c (impl_GNOME_Control_set_window): replaced
+	destroy_event with delete_event.
+
+	* bonobo/gnome-view-frame.c (gnome_view_frame_destroy): call
+	GNOME_Unknown_unref to delete the remote view.
+
+	* bonobo/gnome-client-site.c (gnome_client_site_destroy): move
+	gnome_container_remove to the end, since it unref (destroys) the
+	object. Don't call gnome_object_unref, since it is called by
+	gnome_container_remove.
+
 Wed Nov 17 10:52:15 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gshell/*: added a new subdir for gshell (see gshell/README)
