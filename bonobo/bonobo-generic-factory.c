@@ -283,14 +283,18 @@ BONOBO_TYPE_FUNC_FULL (BonoboGenericFactory,
 static gboolean
 startup_timeout (gpointer data)
 {
+	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (data);
 	bonobo_main_quit ();
+	factory->priv->startup_timeout_id = 0;
 	return FALSE;
 }
 
 static gboolean
 last_unref_timeout (gpointer data)
 {
+	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (data);
 	bonobo_main_quit ();
+	factory->priv->last_unref_timeout_id = 0;
 	return FALSE;
 }
 

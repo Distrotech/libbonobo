@@ -1,3 +1,9 @@
+2003-07-13  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* bonobo/bonobo-generic-factory.c (startup_timeout)
+	(last_unref_timeout): Clear timeout handle IDs before
+	returning FALSE from the callbacks.
+
 2003-07-09  Antonio Xu <antonio.xu@sun.com>
 
 	* activation-server/client.c: (do_activating): Add the output
