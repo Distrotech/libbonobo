@@ -155,7 +155,7 @@ expr_stringv: LBRACKET stringlist RBRACKET {
 stringlist: P_CONST_STRING { $$ = g_slist_prepend (NULL, $1); }
 	| stringlist COMMA P_CONST_STRING { $$ = g_slist_append ($1, $3); };
 
-expr_variable: P_DOLLAR P_CONST_ID { $$ = qexp_variable_new ($2); }
+expr_variable: P_DOLLAR P_CONST_ID { $$ = qexp_variable_new ($2); };
 
 expr_function: P_CONST_ID LPAREN exprlist RPAREN { $$ = qexp_function_new ($1, $3); }
 	| P_CONST_ID LPAREN RPAREN { $$ = qexp_function_new ($1, NULL); }
