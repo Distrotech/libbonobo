@@ -1,5 +1,9 @@
 2000-12-02  Michael Meeks  <michael@helixcode.com>
 
+	* monikers/bonobo-moniker-http.c: upd.
+
+2000-12-02  Michael Meeks  <michael@helixcode.com>
+
 	* configure.in: Remove vfs check.
 
 	* storage-modules/Makefile.am: conditionalize vfs storage
