@@ -32,8 +32,8 @@ test_stream_mem_SOURCES = test-stream-mem.c
 test_storage_mem_SOURCES = test-storage-mem.c
 
 TESTS_ENVIRONMENT =					\
-	LD_LIBRARY_PATH="$(top_builddir)/bonobo/.libs:$LD_LIBRARY_PATH"	\
-	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$BONOBO_PLUGIN_PATH"
+	LD_LIBRARY_PATH="$(top_builddir)/bonobo/.libs:$$LD_LIBRARY_PATH"	\
+	BONOBO_PLUGIN_PATH="$(top_builddir)/storage-modules/.libs:$$BONOBO_PLUGIN_PATH"
 
 TESTS = test-moniker test-event-source test-object \
 	test-stream-mem $(srcdir)/test-properties.sh test-storage-mem
