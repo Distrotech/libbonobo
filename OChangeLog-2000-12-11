@@ -1,5 +1,9 @@
 2000-01-25  Nat Friedman  <nat@helixcode.com>
 
+	* bonobo/components/text-plain/bonobo-text-plain.c
+ 	(view_activate_cb): Use gnome_view_activate_notify instead of
+ 	using the CORBA method directly.
+
 	* bonobo/gnome-view.h (GnomeView): Removed the uih field.
 
 	* bonobo/gnome-control.c (GnomeControlPrivate): Added a uih field.
