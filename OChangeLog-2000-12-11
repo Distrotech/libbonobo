@@ -1,3 +1,10 @@
+1999-12-14  Darin Adler  <darin@eazel.com>
+
+	* bonobo/.cvsignore: Ignore more generated files.
+	* bonobo/samples/compund-doc/.cvsignore: Ignore more generated files.
+	* bonobo/samples/controls/.cvsignore: Ignore more generated files.
+	* bonobo/tests/.cvsignore: Ignore more generated files.
+
 1999-12-12 Elliot Lee <sopwith@redhat.com>
 	* bonobo/gnome-generic-factory.[ch]: Add gnome_generic_factory_new_multi - just
 	  uses a different callback signature which passes the goad ID.
