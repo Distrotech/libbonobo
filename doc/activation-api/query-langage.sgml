@@ -55,7 +55,7 @@ accepted, but not encouraged).
 <title>Field identifiers</title>
 <para>
 Names of fields are attributes of a ServerInfo record. These include
-'type', 'location_info', and 'iid', even though these are explicitly
+'server_type', 'location_info', and 'iid', even though these are explicitly
 stored instead of just other attributes.
 </para>
 <para>
@@ -143,12 +143,6 @@ max(expr)
 min(expr)
    As with the 'max' function, but finds the minimum value.
 </para></listitem>
-<listitem><para>
-</para></listitem>
-<listitem><para>
-</para></listitem>
-<listitem><para>
-</para></listitem>
 </itemizedlist>
 </para>
 </sect2>
@@ -157,6 +151,8 @@ min(expr)
 <sect2>
 <title>Operators</title>
 <para>
+	More complex queries can be built using the various operators described below. <warning>When building complex expressions, make sure they are fully parenthized or your query will fail in weird ways.</warning>
+
 	<table frame="all">
 	<title>Binary relational operators.</title>
 	<tgroup cols="2">

@@ -20,7 +20,7 @@ construction time are called, and the code therein must
 supply the property. Similarly, when a property changes
 value inside your object you need to notify the property
 bag's listeners that it has changed with a call to
-<function>bonobo_property_bag_notify_listeners</function>.
+<function>bonobo_event_source_notify_listeners_full</function>.
 </para>
 
 <para>
@@ -126,9 +126,11 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 
 	BONOBO_ARG_SET_STRING (arg, gtk_clock_get_color (clock));
 
-	bonobo_property_bag_notify_listeners (
-		pb, "colour", arg, NULL);
-
+	bonobo_event_source_notify_listeners_full (pb->es, 
+					           "Bonobo/Property",
+					           "change",
+						   "colour",
+					           arg, NULL);
 	bonobo_arg_release (arg);
 }
 ...

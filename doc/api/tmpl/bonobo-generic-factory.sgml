@@ -20,7 +20,7 @@ Bonobo object factory with OAF, this can be done like this:
     <programlisting>
 BonoboGenericFactory *factory;
 
-factory = bonobo_generic_factory_new_multi (
+factory = bonobo_generic_factory_new (
 	"OAFIID:GNOME_MyApp_myId",
 	my_factory_function, NULL);
 bonobo_running_context_auto_exit_unref (BONOBO_OBJECT (factory));
