@@ -1,3 +1,8 @@
+2000-05-10  Maciej Stachowiak  <mjs@eazel.com>
+
+	* bonobo/Makefile.am: Make sure both object directory
+	implementations are always distributed.
+
 2000-05-10  John Sullivan  <sullivan@eazel.com>
 
 	Fixed and improved path-building routines, one of which wasn't
