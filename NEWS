@@ -1,3 +1,20 @@
+libbonobo 1.112.0
+
+	* Bugs fixed
+		+ bonobo_closure_invoke leak fix (Tim Janik)
+		+ build fixes (Gediminas Paulauskas, Jacob)
+
+	* Featurelets
+		+ make ref/unref more glib like (Michael)
+		+ flag the deprecated & compat bits as such (Michael)
+
+libbonobo 1.111.0
+
+	* Bugs fixed
+		+ item handler leak (Mark McLoughlin)
+		+ deprecated cruft removal (Micahel)
+		+ _WRITABLE for Americans (Michael)
+
 libbonobo 1.110.0
 
 	* Bugs fixed
