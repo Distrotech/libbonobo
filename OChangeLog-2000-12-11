@@ -1,3 +1,12 @@
+2000-08-24  Mike Kestner  <mkestner@ameritech.net>
+
+	* bonobo/Makefile.am : Added listener source and idl files.
+	* bonobo/bonobo-arg.h : Added libgnome/gnome-defs.h include.
+	* bonobo/bonobo-listener.[ch] : New. Generic Listener implementation.
+	* idl/Makefile.am : Distribute new listener idl.
+	* idl/Bonobo.idl : Added include of new Listener idl.
+	* idl/bonobo-listener.idl : New Listener Interface.
+	
 2000-08-20  Michael Meeks  <michael@helixcode.com>
 
 	* doc/Monikers: Small changes.

@@ -1,0 +1,14 @@
+module Bonobo {
+
+	interface Listener : Bonobo::Unknown {
+
+		/**
+		 * event:
+		 * @data: Callback data
+		 *
+		 * This method implements the action to take when an event 
+		 * occurs on the listened to interface.
+		 */
+		oneway void event (in any data);
+	};
+};
