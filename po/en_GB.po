@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-05 14:40+0000\n"
-"PO-Revision-Date: 2004-03-13 15:44-0500\n"
+"POT-Creation-Date: 2005-04-07 21:35-0400\n"
+"PO-Revision-Date: 2005-04-07 21:35-0400\n"
 "Last-Translator: Gareth Owen <gowen72@yahoo.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,32 +23,32 @@ msgstr "Couldn't find which child the server was listed in"
 msgid "Not a valid Activation ID"
 msgstr "Not a valid Activation ID"
 
-#: activation-server/activation-server-main.c:68
+#: activation-server/activation-server-main.c:75
 msgid "Directory to read .server files from"
 msgstr "Directory to read .server files from"
 
-#: activation-server/activation-server-main.c:68
+#: activation-server/activation-server-main.c:75
 msgid "DIRECTORY"
 msgstr "DIRECTORY"
 
-#: activation-server/activation-server-main.c:71
+#: activation-server/activation-server-main.c:78
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 
-#: activation-server/activation-server-main.c:75
+#: activation-server/activation-server-main.c:82
 msgid "File descriptor to write IOR to"
 msgstr "File descriptor to write IOR to"
 
-#: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:200
+#: activation-server/activation-server-main.c:82
+#: bonobo-activation/bonobo-activation-init.c:257
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:83
+#: activation-server/activation-server-main.c:90
 msgid "Query expression to evaluate"
 msgstr "Query expression to evaluate"
 
-#: activation-server/activation-server-main.c:83
+#: activation-server/activation-server-main.c:90
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
@@ -68,11 +68,11 @@ msgstr "Notification service"
 msgid "Notification service for activation"
 msgstr "Notification service for activation"
 
-#: activation-server/object-directory-activate.c:187
+#: activation-server/object-directory-activate.c:186
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "We don't handle activating shlib objects in a remote process yet"
 
-#: activation-server/object-directory-config-file.c:47
+#: activation-server/object-directory-config-file.c:53
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
@@ -112,71 +112,55 @@ msgstr "iid %s has a NULL location"
 msgid "invalid character '%c' in iid '%s'"
 msgstr "invalid character '%c' in iid '%s'"
 
-#: activation-server/object-directory-load.c:305
+#: activation-server/object-directory-load.c:318
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Property '%s' has no value"
 
-#: activation-server/object-directory-load.c:588
+#: activation-server/object-directory-load.c:601
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Could not parse badly formed XML document %s"
 
-#: activation-server/object-directory-load.c:641
+#: activation-server/object-directory-load.c:654
 #, c-format
 msgid "Trying dir %s"
 msgstr "Trying dir %s"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:102
+#: bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Child process did not give an error message, unknown failure occurred"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:174
+#: bonobo-activation/bonobo-activation-fork-server.c:177
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Failed to read from child process: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:297
-msgid "Couldn't fork a new process"
-msgstr "Couldn't fork a new process"
+#: bonobo-activation/bonobo-activation-fork-server.c:184
+msgid "EOF from child process\n"
+msgstr "EOF from child process\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:318
-#, c-format
-msgid "Child received signal %u (%s)"
-msgstr "Child received signal %u (%s)"
+#: bonobo-activation/bonobo-activation-fork-server.c:337
+msgid "Couldn't spawn a new process"
+msgstr "Couldn't spawn a new process"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:323
-#, c-format
-msgid "Unknown non-exit error (status is %u)"
-msgstr "Unknown non-exit error (status is %u)"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:404
-#, c-format
-msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-activation failed to set process group of %s: %s\n"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:416
-#, c-format
-msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Failed to execute %s: %d (%s)\n"
-
-#: bonobo-activation/bonobo-activation-get-language-list.c:133
+#: bonobo-activation/bonobo-activation-get-language-list.c:140
 msgid "Too many alias levels for a locale, may indicate a loop"
 msgstr "Too many alias levels for a locale, may indicate a loop"
 
-#: bonobo-activation/bonobo-activation-init.c:200
+#: bonobo-activation/bonobo-activation-init.c:257
 msgid "File descriptor to print IOR on"
 msgstr "File descriptor to print IOR on"
 
-#: bonobo-activation/bonobo-activation-init.c:202
+#: bonobo-activation/bonobo-activation-init.c:259
 msgid "IID to activate"
 msgstr "IID to activate"
 
-#: bonobo-activation/bonobo-activation-init.c:204
+#: bonobo-activation/bonobo-activation-init.c:261
 msgid "Prevent registering of server with OAF"
 msgstr "Prevent registering of server with OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:290
+#: bonobo-activation/bonobo-activation-init.c:352
 msgid "Bonobo activation options"
 msgstr "Bonobo activation options"
 
@@ -491,3 +475,15 @@ msgstr "Display directories in configuration file"
 #: utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Display path to configuration file"
+
+#~ msgid "Child received signal %u (%s)"
+#~ msgstr "Child received signal %u (%s)"
+
+#~ msgid "Unknown non-exit error (status is %u)"
+#~ msgstr "Unknown non-exit error (status is %u)"
+
+#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
+#~ msgstr "bonobo-activation failed to set process group of %s: %s\n"
+
+#~ msgid "Failed to execute %s: %d (%s)\n"
+#~ msgstr "Failed to execute %s: %d (%s)\n"
