@@ -1,3 +1,10 @@
+2005-04-12  Mark McLoughlin  <mark@skynet.ie>
+
+	* bonobo-activation/bonobo-activation-2.0-uninstalled.pc.in,
+	  bonobo-activation/bonobo-activation-2.0.pc.in: require
+	gmodule-no-export-2.0 rather than gmodule-2.0 so we don't
+	get -export-dynamic on our link line.
+
 2005-03-30  Steve Murphy  <murf@e-tools.com>
 
         * configure.in: Added "rw" to ALL_LINGUAS.
