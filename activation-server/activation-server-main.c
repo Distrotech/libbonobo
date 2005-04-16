@@ -56,6 +56,8 @@
 #include <mbstring.h>
 #endif
 
+#include <glib/gstdio.h>
+
 #ifdef BONOBO_ACTIVATION_DEBUG
 static void debug_queries (void);
 #endif
@@ -328,9 +330,10 @@ dump_ior (CORBA_ORB orb, int dev_null_fd, CORBA_Environment *ev)
 	debug_queries ();
         if (server_reg) {
                 char *fname;
-                fname = g_strconcat (ORBit_get_safe_tmp (),
-                                     "/bonobo-activation-server-ior", NULL);
-                fh = fopen (fname, "w+");
+                fname = g_build_filename (ORBit_get_safe_tmp (),
+                                          "bonobo-activation-server-ior",
+                                          NULL);
+                fh = g_fopen (fname, "w+");
 		fprintf (fh, "%s\n", ior);
 		fclose (fh);
                 g_free (fname);

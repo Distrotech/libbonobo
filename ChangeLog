@@ -1,3 +1,22 @@
+2005-04-15  Tor Lillqvist  <tml@novell.com>
+
+	* configure.in: Since we de facto require GLib 2.6, spell it out.
+
+	* activation-server/activation-server-main.c 
+	* activation-server/object-directory-corba.c
+	* activation-server/object-directory-load.c (od_load_directory)
+	* bonobo-activation/bonobo-activation-base-service.c
+	* bonobo/bonobo-debug.c: Use GDir API and the gstdio wrappers for
+	better localized pathname support on Windows. Use
+	g_build_filename() where applicable instead of g_strconcat().
+
+	* bonobo-activation/bonobo-activation-base-service.c
+	(rloc_file_lock): On Win32, convert the UTF-8 lock file name to
+	wide chars and use the wide char _wsopen() to open it, since
+	there is no gstdio wrapper for _sopen().
+
+	* tests/test-activation/test.sh: Set USER to `id -un` if not set.
+
 2005-04-12  Mark McLoughlin  <mark@skynet.ie>
 
 	* bonobo-activation/bonobo-activation-2.0-uninstalled.pc.in,

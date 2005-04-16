@@ -56,6 +56,8 @@
 #include <share.h>
 #endif
 
+#include <glib/gstdio.h>
+
 /* If you have a strange unix, you get odd hard coded limits */
 #ifndef PATH_MAX
 #  define PATH_MAX 1024
@@ -500,13 +502,17 @@ get_tmpdir (void)
 static char *
 get_lock_fname (void)
 {
-        return g_strconcat (get_tmpdir (), "/bonobo-activation-register.lock", NULL);
+        return g_build_filename (get_tmpdir (),
+                                 "bonobo-activation-register.lock",
+                                 NULL);
 }
 
 static char *
 get_ior_fname (void)
 {
-        return g_strconcat (get_tmpdir (), "/bonobo-activation-server-ior", NULL);
+        return g_build_filename (get_tmpdir (),
+                                 "bonobo-activation-server-ior",
+                                 NULL);
 }
 
 static void
@@ -573,8 +579,9 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
         g_free (fn);
 #elif defined (G_OS_WIN32)
 	char *fn = get_lock_fname ();
-
-	while ((lock_fd = _sopen (fn, O_CREAT|O_RDWR|_O_SHORT_LIVED|_O_NOINHERIT, _SH_DENYRW, 0700)) < 0) {
+        wchar_t *wfn = g_utf8_to_utf16 (fn, -1, NULL, NULL, NULL);
+        
+	while ((lock_fd = _wsopen (wfn, O_CREAT|O_RDWR|_O_SHORT_LIVED|_O_NOINHERIT, _SH_DENYRW, 0700)) < 0) {
                 if (errno == EACCES) {
                         wait_for_lock ();
 		} else {
@@ -582,6 +589,7 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
 			break;
                 }
 	}
+        g_free (wfn);
         g_free (fn);
 #else
         g_warning ("No locking implemented\n");
@@ -624,7 +632,7 @@ rloc_file_check (const BonoboActivationBaseServiceRegistry *registry,
 	char *fn;
 
         fn = get_ior_fname ();
-	fh = fopen (fn, "r");
+	fh = g_fopen (fn, "r");
         g_free (fn);
 
 	if (fh != NULL) {
@@ -656,7 +664,7 @@ rloc_file_register (const BonoboActivationBaseServiceRegistry *registry, const c
 	FILE *fh;
 
         fn = get_ior_fname ();
-	fh = fopen (fn, "w");
+	fh = g_fopen (fn, "w");
 
         if (fh != NULL) {
                 fprintf (fh, "%s\n", ior);
@@ -674,7 +682,7 @@ rloc_file_unregister (const BonoboActivationBaseServiceRegistry *registry,
 {
 	char *fn;
 
-	unlink ((fn = get_ior_fname ()));
+	g_unlink ((fn = get_ior_fname ()));
         g_free (fn);
 }
 
@@ -733,9 +741,9 @@ bonobo_activation_base_service_init (void)
 
         if (!beenhere) {
                 bonobo_activation_ac_cmd[0] =
-                        g_strconcat (_server_libexecdir,
-                                     "/bonobo-activation-server",
-                                     NULL);
+                        g_build_filename (_server_libexecdir,
+                                          "bonobo-activation-server",
+                                          NULL);
                 beenhere = TRUE;
         }
 #endif

@@ -11,6 +11,8 @@
 #include <glib.h>
 #include <bonobo/bonobo-debug.h>
 
+#include <glib/gstdio.h>
+
 BonoboDebugFlags _bonobo_debug_flags;
 static FILE *_bonobo_debug_file;
 
@@ -38,7 +40,7 @@ bonobo_debug_init(void)
 	if(env_string) {
 	  gchar *dbg_filename;
 	  dbg_filename = g_strdup_printf("%s/bonobo-debug-%d", env_string, getpid());
-	  _bonobo_debug_file = fopen(dbg_filename, "w");
+	  _bonobo_debug_file = g_fopen(dbg_filename, "w");
 	  g_free(dbg_filename);
 	}
 	if(_bonobo_debug_file == NULL)

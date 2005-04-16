@@ -38,6 +38,8 @@
 #include "bonobo-activation/bonobo-activation-private.h"
 #include "activation-server-corba-extensions.h"
 
+#include <glib/gstdio.h>
+
 /* no longer used. */
 #define RESIDUAL_SERVERS 0
 
@@ -119,7 +121,7 @@ registry_directory_needs_update (ObjectDirectory *od,
         struct stat statbuf;
         time_t old_mtime;
 
-        if (stat (directory, &statbuf) != 0) {
+        if (g_stat (directory, &statbuf) != 0) {
                 return FALSE;
         }
  

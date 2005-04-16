@@ -3,6 +3,8 @@
 # This is a generic script for firing up a server, waiting for it to write
 # its stringified IOR to a file, then firing up a server
 
+[ -z "$USER" ] && USER=`id -un`
+
 if test "z$ORBIT_TMPDIR" = "z"; then
 	ORBIT_TMPDIR="/tmp/orbit-$USER/tst"
 	rm -Rf $ORBIT_TMPDIR

@@ -30,7 +30,6 @@
 
 #include <stdlib.h>
 #include <sys/types.h>
-#include <dirent.h>
 #include <string.h>
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
@@ -647,23 +646,23 @@ od_load_directory (const char *directory,
                    GSList    **entries,
                    const char *host)
 {
-	DIR *directory_handle;
-	struct dirent *directory_entry;
+	GDir *directory_handle;
+	const char *directory_entry;
         char *pathname;
 
         g_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG, _("Trying dir %s"), directory);
 
-        directory_handle = opendir (directory);
+        directory_handle = g_dir_open (directory, 0, NULL);
 
         if (directory_handle == NULL) {
                 /* FIXME */
                 return;
         }
         
-        for (directory_entry = readdir (directory_handle);
+        for (directory_entry = g_dir_read_name (directory_handle);
              directory_entry != NULL;
-             directory_entry = readdir (directory_handle)) {
-                pathname = g_strdup_printf ("%s/%s", directory, directory_entry->d_name);
+             directory_entry = g_dir_read_name (directory_handle)) {
+                pathname = g_build_filename (directory, directory_entry, NULL);
 
                 if (od_filename_has_extension (pathname, ".server")) {
                         od_load_file (pathname, entries, host);
@@ -672,7 +671,7 @@ od_load_directory (const char *directory,
 		g_free (pathname);
         }
 
-        closedir (directory_handle);
+        g_dir_close (directory_handle);
 }
 
 
