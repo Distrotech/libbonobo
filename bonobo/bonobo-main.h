@@ -29,7 +29,7 @@ gboolean                    bonobo_init_full             (int *argc,
 int                         bonobo_debug_shutdown        (void);
 void			    bonobo_main			 (void);
 void                        bonobo_main_quit             (void);
-
+guint			    bonobo_main_level            (void);
 gboolean		    bonobo_activate		 (void);
 void			    bonobo_setup_x_error_handler (void);
 

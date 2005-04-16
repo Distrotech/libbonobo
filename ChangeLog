@@ -1,3 +1,21 @@
+2005-04-16  Tor Lillqvist  <tml@novell.com>
+
+	* bonobo/bonobo-main.c (DllMain): Use wide-character API to get
+	the installation folder on NT-based Windows. Then, as the locale
+	directory is passed to the non-UTF8ified gettext library, get the
+	short form of the name which I assume is guaranteed to have only
+	characters in the system codepage. All this so that libbonobo will
+	find its message catalogs also if installed in a path with
+	characters not representable in the system codepage, which
+	presumably happens mainly in CJK locales.
+
+	Actually, I think it is not quite safe to have this much code that
+	calls GLib, even, in a DllMain() function. Will have to change the
+	logic later.
+
+	* bonobo/bonobo-main.h: Add prototype for bonobo_main_level to
+	silence gcc.
+
 2005-04-15  Tor Lillqvist  <tml@novell.com>
 
 	* configure.in: Since we de facto require GLib 2.6, spell it out.
