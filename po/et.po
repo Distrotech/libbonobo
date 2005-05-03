@@ -1,6 +1,9 @@
-# Libbonobo Estonian Translation.
+# Libbonobo eesti keele tõlge.
+# Estonian translation of libbonobo
+# 
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libbonobo package.
+# 
 # Ivar Smolin <okul@linux.ee>, 2005.
 #
 msgid ""
@@ -8,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Libbonobo Gnome 2.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-15 12:31+0100\n"
-"PO-Revision-Date: 2005-02-20 10:11+0200\n"
+"PO-Revision-Date: 2005-05-03 08:23+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee> \n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +29,7 @@ msgstr ""
 
 #: activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
-msgstr ""
+msgstr "Kataloog, millest lugeda .server faile"
 
 #: activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
@@ -43,7 +46,7 @@ msgstr ""
 #: activation-server/activation-server-main.c:75
 #: bonobo-activation/bonobo-activation-init.c:200
 msgid "FD"
-msgstr ""
+msgstr "FD"
 
 #: activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
@@ -94,22 +97,22 @@ msgstr ""
 
 #: activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
-msgstr ""
+msgstr "NULL iid pole lubatud"
 
 #: activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr ""
+msgstr "iid %s on NULL-tüüpi"
 
 #: activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr ""
+msgstr "iid %s on NULL-asukohaga"
 
 #: activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr ""
+msgstr "lubamatu märk '%c' iid'is '%s'"
 
 #: activation-server/object-directory-load.c:305
 #, c-format
@@ -119,7 +122,7 @@ msgstr ""
 #: activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "Vigaselt vormindatud XML dokumenti %s pole võimalik parsida"
 
 #: activation-server/object-directory-load.c:641
 #, c-format
@@ -169,7 +172,7 @@ msgstr ""
 
 #: bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
-msgstr ""
+msgstr "Aktiveeritav IID"
 
 #: bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
@@ -177,7 +180,7 @@ msgstr ""
 
 #: bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
-msgstr ""
+msgstr "Bonobo aktiveerimisvõtmed"
 
 #: bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
@@ -425,7 +428,7 @@ msgstr ""
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr ""
+msgstr "Bonobo lähtestamine pole võimalik"
 
 #: samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
