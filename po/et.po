@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Libbonobo Gnome 2.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-15 12:31+0100\n"
-"PO-Revision-Date: 2005-05-03 08:23+0300\n"
+"PO-Revision-Date: 2005-05-04 18:40+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee> \n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr "AVALDIS"
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr ""
+msgstr "CORBA CosNaming teenus."
 
 #: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
@@ -117,7 +117,7 @@ msgstr "lubamatu märk '%c' iid'is '%s'"
 #: activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
-msgstr ""
+msgstr "Omadusel '%s' puudub väärtus"
 
 #: activation-server/object-directory-load.c:588
 #, c-format
@@ -140,12 +140,12 @@ msgstr ""
 
 #: bonobo-activation/bonobo-activation-fork-server.c:297
 msgid "Couldn't fork a new process"
-msgstr ""
+msgstr "Uut protsessi pole võimalik forkida"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:318
 #, c-format
 msgid "Child received signal %u (%s)"
-msgstr ""
+msgstr "Lapsprotsess võttis vastu signaali %u (%s)"
 
 #: bonobo-activation/bonobo-activation-fork-server.c:323
 #, c-format
@@ -160,7 +160,7 @@ msgstr ""
 #: bonobo-activation/bonobo-activation-fork-server.c:416
 #, c-format
 msgid "Failed to execute %s: %d (%s)\n"
-msgstr ""
+msgstr "Tõrge %s käivitamisel: %d (%s)\n"
 
 #: bonobo-activation/bonobo-activation-get-language-list.c:133
 msgid "Too many alias levels for a locale, may indicate a loop"
@@ -191,7 +191,7 @@ msgstr ""
 #: bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr ""
+msgstr "Sümbolit Bonobo_Plugin_info pole võimalik `%s' seest leida"
 
 #: bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
@@ -201,7 +201,7 @@ msgstr ""
 #: bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr ""
+msgstr "Shlib `%s' ei sisaldanud `%s'"
 
 #: bonobo/bonobo-application.c:352
 msgid "Name"
@@ -357,7 +357,7 @@ msgstr "Üldine aktiveerimisviga ilma kirjelduseta"
 
 #: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
-msgstr "Bonobo'd ei saa lähtestada"
+msgstr "Bonobo'd pole võimalik lähtestada"
 
 #: bonobo/bonobo-moniker.c:352
 #, c-format
@@ -384,7 +384,7 @@ msgstr "HTTP Moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "ORB IOR käsitlemise moniker"
 
 #: monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
@@ -412,11 +412,11 @@ msgstr ""
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "Bonobo Kajaserveri factory"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "Bonobo Kajaserveri näidisprogramm"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
@@ -424,7 +424,7 @@ msgstr "Kaja komponent"
 
 #: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "Kajakomponendi factory"
 
 #: samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
@@ -441,7 +441,7 @@ msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
-msgstr ""
+msgstr "Seadistusfaili pole võimalik salvestada.\n"
 
 #: utils/bonobo-activation-sysconf.c:63
 #, c-format
@@ -468,7 +468,7 @@ msgstr "%s on juba seadistusfailis\n"
 
 #: utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
-msgstr ""
+msgstr "puudub korralikult struktureeritud seadistusfail\n"
 
 #: utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
@@ -476,7 +476,7 @@ msgstr ""
 
 #: utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
-msgstr ""
+msgstr "Seadistusfailist eemaldatav kataloog"
 
 #: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
@@ -484,7 +484,7 @@ msgstr "kataloogi rada"
 
 #: utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
-msgstr ""
+msgstr "Seadistusfaili lisatav kataloog"
 
 #: utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
