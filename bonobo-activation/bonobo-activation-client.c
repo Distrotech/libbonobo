@@ -170,8 +170,8 @@ get_lang_list (void)
         static gboolean result_set = FALSE;
         GString *str;
         gboolean add_comma = FALSE;
-	const GList *language_list;
-	const GList *l;
+	const char * const* languages;
+        int i;
         
         if (result_set)
                 return result;
@@ -179,13 +179,13 @@ get_lang_list (void)
         BONOBO_ACTIVATION_LOCK ();
         
         str = g_string_new (NULL);
-	language_list = bonobo_activation_i18n_get_language_list ("LANG");
-	for (l = language_list; l; l = l->next) {
+	languages = g_get_language_names ();
+	for (i = 0; languages[i] != NULL; i++) {
 		if (add_comma)
 			g_string_append (str, ",");
 		else
 			add_comma = TRUE;
-		g_string_append (str, l->data);
+		g_string_append (str, languages[i]);
 	}
 
         result_set = TRUE;

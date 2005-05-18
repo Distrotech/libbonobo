@@ -1,3 +1,18 @@
+2005-05-16  Alexander Larsson  <alexl@redhat.com>
+
+	* activation-server/object-directory-load.c:
+	* bonobo-activation/bonobo-activation-client.c:
+	Use g_get_language_list instead of
+	bonobo_activation_i18n_get_language_list.
+	
+	* bonobo-activation/bonobo-activation-get-language-list.c:
+	* bonobo-activation/bonobo-activation-private.h:
+	Use g_get_language_list to implement
+	bonobo_activation_i18n_get_language_list, this is for
+	use by gnome-vfs and libgnome. Add a comment about this.
+
+	This fixes bug 168948 (make bonobo use 100k less of memory per application)
+
 2005-04-16  Tor Lillqvist  <tml@novell.com>
 
 	* bonobo/bonobo-main.c (DllMain): Use wide-character API to get

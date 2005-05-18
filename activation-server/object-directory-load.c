@@ -185,16 +185,17 @@ static GHashTable *interesting_locales = NULL;
 void
 add_initial_locales (void)
 {
-        const GList *l;
+        const char * const * langs;
+        int i;
 
         if (!interesting_locales)
                 interesting_locales = g_hash_table_new (
                         g_str_hash, g_str_equal);
 
-	for (l = bonobo_activation_i18n_get_language_list (NULL);
-             l; l = l->next)
+        langs = g_get_language_names ();
+	for (i = 0; langs[i] != NULL; i++)
 		g_hash_table_insert (interesting_locales,
-                                     g_strdup ((char *) l->data),
+                                     g_strdup (langs[i]),
                                      GUINT_TO_POINTER (1));
 }
 
