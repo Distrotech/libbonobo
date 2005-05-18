@@ -56,7 +56,7 @@ bonobo_activation_i18n_get_language_list (const gchar *ignored)
   if (list == NULL) {
     langs = g_get_language_names ();
     for (i = 0; langs[i] != NULL; i++) {
-      list = g_list_prepend (list, (char *)langs[i]);
+      list = g_list_prepend (list, g_strdup(langs[i]));
     }
 
     list = g_list_reverse (list);
