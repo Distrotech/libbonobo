@@ -1,3 +1,10 @@
+libbonobo 2.10.0
+
+	* bug fixes
+		+ Developer docs build fixes (Gustavo Carneiro)
+	* translation updates
+		+ en_CA, rw, xh, zh_TW
+
 libbonobo 2.8.1
 
 	* bug fixes
