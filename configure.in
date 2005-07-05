@@ -146,6 +146,33 @@ AC_CHECK_LIB(popt, poptStrippedArgv, POPT_LIBS=-lpopt, AC_MSG_ERROR([You must ha
 AC_SUBST(POPT_LIBS)
 AC_CHECK_HEADER(popt.h,,AC_MSG_ERROR([Failed to find popt.h - you may have to adjust your environment]))
 
+# checks for working GThread
+# Aware: "make check" fails with --disable-threads
+AC_ARG_ENABLE(threads, 
+  [  --disable-threads   Disable multithread support [default=enabled]],
+  enable_threads="$enableval",
+  enable_threads=yes)
+if test x$enable_threads != xno; then
+  AC_MSG_CHECKING([for working gthread-2.0 support])
+  libbonobo_save_CFLAGS=$CFLAGS
+  libbonobo_save_LIBS=$LIBS
+  CFLAGS="$CFLAGS $LIBBONOBO_CFLAGS"
+  LIBS="$LIBS $LIBBONOBO_LIBS"
+  AC_TRY_RUN([#include <glib/gthread.h>
+		int main (void) {
+			if (!g_thread_supported()) g_thread_init(NULL);
+			return NULL == g_mutex_new(); }],
+	AC_MSG_RESULT(yes),[
+		AC_MSG_RESULT(no)
+		AC_MSG_ERROR(
+			[No working gthread-2.0 support found, using --disable-threads IS DISCOURAGED])
+	]
+  )
+  CFLAGS=$libbonobo_save_CFLAGS
+  LIBS=$libbonobo_save_LIBS
+  AC_DEFINE(HAVE_GTHREADS,,[whether we use gthreads])
+fi
+
 # checks for getaddrinfo()
 
 have_getaddrinfo=no

@@ -418,10 +418,16 @@ bonobo_activation_orb_init (int *argc, char **argv)
         CORBA_Context def_ctx;
 	CORBA_Environment ev;
 	const char *hostname;
+	const gchar *orb_id;
 
 	CORBA_exception_init (&ev);
 
-	bonobo_activation_orb = CORBA_ORB_init (argc, argv, "orbit-local-mt-orb", &ev);
+#ifdef HAVE_GTHREADS
+	orb_id = "orbit-local-mt-orb";
+#else
+	orb_id = "orbit-local-non-threaded-orb";
+#endif
+	bonobo_activation_orb = CORBA_ORB_init (argc, argv, orb_id, &ev);
 	g_assert (ev._major == CORBA_NO_EXCEPTION);
 
 	bonobo_activation_init_activation_env ();

@@ -23,7 +23,9 @@
 
 #include <glib/gmain.h>
 
+#ifdef HAVE_GTHREADS
 GMutex                   *_bonobo_lock;
+#endif
 CORBA_ORB                 __bonobo_orb = CORBA_OBJECT_NIL;
 PortableServer_POA        __bonobo_poa = CORBA_OBJECT_NIL;
 PortableServer_POAManager __bonobo_poa_manager = CORBA_OBJECT_NIL;
@@ -309,7 +311,9 @@ bonobo_init_full (int *argc, char **argv,
 
 	CORBA_exception_free (&ev);
 
+#ifdef HAVE_GTHREADS
 	_bonobo_lock = g_mutex_new ();
+#endif
 
 	bonobo_context_init ();
 

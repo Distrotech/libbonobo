@@ -1,3 +1,11 @@
+2005-07-05  Jan Kratochvil  <web-bugzilla.gnome.org@jankratochvil.net>
+
+	* bonobo/bonobo-activation-init.c,
+	* bonobo/bonobo-private.h,
+	* bonobo/bonobo-main.c,
+	* configure.in: conditionalise thread usage with
+	HAVE_GTHREADS macro, & add configure parameter.
+
 2005-05-16  Alexander Larsson  <alexl@redhat.com>
 
 	* activation-server/object-directory-load.c:

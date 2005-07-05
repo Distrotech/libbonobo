@@ -11,9 +11,14 @@
 #ifndef _BONOBO_PRIVATE_H_
 #define _BONOBO_PRIVATE_H_
 
+#ifdef HAVE_GTHREADS
 extern GMutex *_bonobo_lock;
 #define BONOBO_LOCK()   g_mutex_lock(_bonobo_lock);
 #define BONOBO_UNLOCK() g_mutex_unlock(_bonobo_lock);
+#else
+#define BONOBO_LOCK()   G_STMT_START{ (void)0; }G_STMT_END
+#define BONOBO_UNLOCK() G_STMT_START{ (void)0; }G_STMT_END
+#endif
 
 void    bonobo_context_init     (void);
 void    bonobo_context_shutdown (void);
