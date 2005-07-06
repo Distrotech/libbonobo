@@ -173,22 +173,6 @@ if test x$enable_threads != xno; then
   AC_DEFINE(HAVE_GTHREADS,,[whether we use gthreads])
 fi
 
-# checks for getaddrinfo()
-
-have_getaddrinfo=no
-AC_CHECK_FUNC(getaddrinfo, have_getaddrinfo=yes)
-if test $have_getaddrinfo != yes; then
-# getaddrinfo is not in the default libraries. See if it is in some other.
-  for lib in bsd socket inet; do
-    AC_CHECK_LIB($lib, getaddrinfo, [LIBS="$LIBS -l$lib";have_getaddrinfo=yes;break])
-  done
-fi
-if test $have_getaddrinfo = yes; then
-  AC_DEFINE(HAVE_GETADDRINFO, 1, [whether we have getaddrinfo])
-fi
-
-#end checks for getaddrinfo
-
 # Checks for Apple Darwin
 
 AC_CHECK_FUNC(_NSGetEnviron, have_ns_getenviron=yes)

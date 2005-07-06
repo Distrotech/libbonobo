@@ -1,3 +1,9 @@
+2005-07-06  Tor Lillqvist  <tml@novell.com>
+
+	* configure.in: Remove check for getaddrinfo() as it is not used
+	in libbonobo any longer. No sense keeping unused stuff in
+	configure.in.
+
 2005-07-05  Jan Kratochvil  <web-bugzilla.gnome.org@jankratochvil.net>
 
 	* bonobo/bonobo-activation-init.c,
