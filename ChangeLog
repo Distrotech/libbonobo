@@ -1,3 +1,8 @@
+2005-07-20  Shreyas Srinivasan  <sshreyas@novell.com>
+
+	* bonobo/bonobo-activation-fork-server.c: Fix #310152, Resolve environ to 
+	NSGetEnviron on a mac os x. 
+	
 2005-07-06  Tor Lillqvist  <tml@novell.com>
 
 	* configure.in: Remove check for getaddrinfo() as it is not used

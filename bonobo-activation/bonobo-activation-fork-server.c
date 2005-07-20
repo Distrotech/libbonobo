@@ -228,6 +228,12 @@ bonobo_activation_server_by_forking (
         GSource *source;
         GMainContext *context;
         char **newenv = NULL;
+
+#if defined(__APPLE__) && defined(HAVE_NSGETENVIRON) && defined(HAVE_CRT_EXTERNS_H)
+# include <crt_externs.h>
+# define environ (*_NSGetEnviron())
+#endif
+
 #ifndef G_OS_WIN32
         extern char **environ;
 #endif
