@@ -1,3 +1,8 @@
+2005-07-20  Loïc Minier  <lool+gnome@via.ecp.fr>
+
+	* activation-server/bonobo-activation-server.1: misc. fixes,
+	thanks to Dan Jacobson.
+
 2005-07-20  Shreyas Srinivasan  <sshreyas@novell.com>
 
 	* bonobo/bonobo-activation-fork-server.c: Fix #310152, Resolve environ to 
