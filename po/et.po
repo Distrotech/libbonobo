@@ -1,18 +1,18 @@
 # Libbonobo eesti keele tõlge.
-# Estonian translation of libbonobo
-# 
+# Estonian translation of libbonobo.
+#
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libbonobo package.
-# 
+#
 # Ivar Smolin <okul@linux.ee>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Libbonobo Gnome 2.10\n"
+"Project-Id-Version: Libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-07-26 14:44+0000\n"
-"PO-Revision-Date: 2005-07-26 23:42+0300\n"
-"Last-Translator: Ivar Smolin <okul@linux.ee> \n"
+"PO-Revision-Date: 2005-08-16 10:33+0300\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -179,7 +179,7 @@ msgstr "Sümbolit Bonobo_Plugin_info pole võimalik `%s' seest leida"
 #: ../bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr ""
+msgstr "Factory `%s' tagastas `%s' jaoks väärtuse NIL"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
@@ -272,11 +272,11 @@ msgstr "Salvesti ei ole tühi"
 
 #: ../bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr ""
+msgstr "kasutajaliidese vigaselt vormindatud kirjeldus"
 
 #: ../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr ""
+msgstr "vigane rada XML kasutajaliidese elemendile"
 
 #: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -345,7 +345,7 @@ msgstr "Bonobo'd pole võimalik lähtestada"
 #: ../bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "Tõrge '%s' lahendamisel või laiendamisel"
 
 #: ../bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
@@ -371,7 +371,7 @@ msgstr "ORB IOR käsitlemise moniker"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "Standard Moniker factory"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
@@ -478,8 +478,3 @@ msgstr ""
 msgid "Display path to configuration file"
 msgstr ""
 
-#~ msgid "Child received signal %u (%s)"
-#~ msgstr "Lapsprotsess võttis vastu signaali %u (%s)"
-
-#~ msgid "Failed to execute %s: %d (%s)\n"
-#~ msgstr "Tõrge %s käivitamisel: %d (%s)\n"
