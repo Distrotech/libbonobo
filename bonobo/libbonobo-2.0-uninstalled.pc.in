@@ -2,6 +2,7 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
+datarootdir=@datarootdir@
 idldir=@datadir@/idl/bonobo-2.0
 idlinclude=@datadir@/idl/bonobo-2.0 @datadir@/idl/bonobo-activation-2.0
 
