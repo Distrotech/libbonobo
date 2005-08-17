@@ -58,6 +58,9 @@ container_save (SampleApp         *app,
 #BonoboPersist #BonoboPersistStream
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION bonobo_storage_copy_to ##### -->
 <para>
 

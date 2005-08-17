@@ -79,6 +79,9 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 #BonoboMoniker, #BonoboMonikerSimple, #bonobo-moniker-util, #BonoboMonikerExtender
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT BonoboMonikerSimple ##### -->
 <para>
 A simplified #BonoboMoniker.

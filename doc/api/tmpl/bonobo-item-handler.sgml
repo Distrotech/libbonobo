@@ -92,6 +92,9 @@ bonobo_item_option_free (x);
    A simplistic implementation exists in #BonoboItemContainer.
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT BonoboItemHandler ##### -->
 <para>
 Bonobo::ItemHandler implementation

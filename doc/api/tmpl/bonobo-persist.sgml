@@ -16,6 +16,9 @@ use by the derived #BonoboPersistStream interface.
 #BonoboPersistStream, #BonoboPersistFile
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT BonoboPersist ##### -->
 <para>
 

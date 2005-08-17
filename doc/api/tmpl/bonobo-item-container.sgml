@@ -14,6 +14,9 @@ This implementation is mostly deprecated, see #BonoboItemHandler
    #BonoboItemHandler
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT BonoboItemContainer ##### -->
 <para>
 Object that implements Bonobo::ItemHandler

@@ -47,6 +47,9 @@ get_prop (BonoboPropertyBag *bag,
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### TYPEDEF BonoboArg ##### -->
 <para>
 A glib style looking type alias for a CORBA_any

@@ -144,6 +144,9 @@ stop_animations (BrowserHTML html)
 #GObject
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### MACRO BONOBO_OBJECT_TYPE ##### -->
 <para>
 Returns the #GtkType for the BonoboObject object.

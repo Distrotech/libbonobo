@@ -14,6 +14,9 @@ Bonobo initialization.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION bonobo_is_initialized ##### -->
 <para>
 
@@ -90,6 +93,14 @@ Bonobo initialization.
 
 </para>
 
+
+
+<!-- ##### FUNCTION bonobo_main_level ##### -->
+<para>
+
+</para>
+
+@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_activate ##### -->

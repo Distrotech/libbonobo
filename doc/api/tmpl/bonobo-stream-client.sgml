@@ -31,6 +31,9 @@ tries to alloca a huge chunk of memory and SEGVs ].
 #BonoboStream
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION bonobo_stream_client_write ##### -->
 <para>
 

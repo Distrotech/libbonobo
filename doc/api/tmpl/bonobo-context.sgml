@@ -98,6 +98,9 @@ bonobo_running_context_auto_exit_unref (factory)
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION bonobo_context_get ##### -->
 <para>
 

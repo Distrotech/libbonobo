@@ -146,6 +146,9 @@ signal_handler (GtkClock *clock, BonoboPropertyBag *pb)
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT BonoboPropertyBagClass ##### -->
 <para>
 

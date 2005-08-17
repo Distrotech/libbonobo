@@ -14,6 +14,9 @@ bonobo-types
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION bonobo_corba_object_type_register_static ##### -->
 <para>
 

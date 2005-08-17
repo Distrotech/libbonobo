@@ -43,18 +43,16 @@ a live object tracker
     <xref linkend="libbonobo-bonobo-generic-factory"/>
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT BonoboRunningContext ##### -->
 <para>
 the running context data
 </para>
 
-
-<!-- ##### SIGNAL BonoboRunningContext::last-unref ##### -->
-<para>
-
-</para>
-
-@bonoborunningcontext: the object which received the signal.
+@parent: 
+@priv: 
 
 <!-- ##### STRUCT BonoboRunningContextClass ##### -->
 <para>

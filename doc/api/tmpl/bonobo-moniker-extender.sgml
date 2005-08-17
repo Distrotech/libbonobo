@@ -96,6 +96,9 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT BonoboMonikerExtender ##### -->
 <para>
 Implements a moniker extender: Bonobo::MonikerExtender.
