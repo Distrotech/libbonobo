@@ -1,3 +1,15 @@
+libbonobo 2.10.0
+
+	* bug fixes
+		+ fix includes (Gustavo)
+		+ export dynamic fix (Mark)
+		+ OS/X fix (Shreyas)
+		+ man page fixes (Dan Jacobson)
+		+ dataroot fix (Stepan Kasal)
+	* features
+		+ port to Win32 (Tor Lillqvist)
+		+ language list memory saving (AlexL) 
+
 libbonobo 2.8.1
 
 	* bug fixes
