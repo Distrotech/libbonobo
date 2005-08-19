@@ -181,7 +181,7 @@ bonobo_is_initialized (void)
 }
 
 /**
- * bonobo_shutdown:
+ * bonobo_debug_shutdown:
  * 
  *   This shuts down the ORB and any other bonobo related
  * resources.

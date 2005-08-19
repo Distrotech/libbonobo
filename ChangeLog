@@ -1,3 +1,10 @@
+2005-08-19  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* Version 2.10.1 to fix confusion with previously unannounced 
+	release.
+	* bonobo/bonobo-main.c: Fix function name in api docs
+	* USERS: Remove some dead users and some that don't use bonobo.
+
 2005-08-17  Michael Meeks  <michael.meeks@novell.com>
 
 	* Version 2.10.0
