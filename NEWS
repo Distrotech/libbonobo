@@ -1,3 +1,8 @@
+libbonobo 2.10.1
+
+	* Release this so we have coherency after having released
+	2.10.0 twice...
+
 libbonobo 2.10.0
 
 	* bug fixes
