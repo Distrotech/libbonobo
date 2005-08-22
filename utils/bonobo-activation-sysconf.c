@@ -25,6 +25,7 @@
 
 #include "config.h"
 #include <string.h>
+#include <locale.h>
 #include <glib.h>
 #include <libxml/tree.h>   
 #include <libxml/parser.h>  
