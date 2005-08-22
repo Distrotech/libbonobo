@@ -161,7 +161,7 @@ parse_oaf_server_attrs (ParseInfo      *info,
          * with the actual installed one.
          */
         if (!strcmp (type, "exe") || !strcmp (type, "shlib"))
-                location = server_win32_replace_prefix (location);
+                location = _bonobo_activation_win32_replace_prefix (_bonobo_activation_win32_get_prefix (), location);
 #endif
 
         /* Now create the ServerInfo object */
@@ -608,9 +608,21 @@ od_load_file (const char *file,
               GSList    **entries,
               const char *host)
 {
-        xmlParserCtxt *ctxt;
+        xmlParserCtxt *ctxt = NULL;
 
+#ifdef G_OS_WIN32
+        {
+                gchar *contents;
+                gsize length;
+
+                if (g_file_get_contents (file, &contents, &length, NULL)) {
+                        ctxt = xmlCreateMemoryParserCtxt (contents, length);
+                        g_free (contents);
+                }
+        }
+#else
         ctxt = xmlCreateFileParserCtxt (file);
+#endif
         if (!ctxt)
                 return;
         od_load_context (ctxt, entries, host);

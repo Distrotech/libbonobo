@@ -364,6 +364,11 @@ bonobo_activation_server_by_forking (
                 if (use_new_loop)
                         g_main_context_unref (context);
 
+                if (fd_arg != 0) {
+                        g_free ((char *) cmd[fd_arg]);
+                        cmd[fd_arg] = NULL;
+                }
+
 		return CORBA_OBJECT_NIL;
 	}
 
@@ -379,8 +384,10 @@ bonobo_activation_server_by_forking (
                 g_free (newenv);
         }
 
-        if (fd_arg != 0)
+        if (fd_arg != 0) {
                 g_free ((char *) cmd[fd_arg]);
+                cmd[fd_arg] = NULL;
+        }
 
         /* Get the IOR from the pipe */
         while (!ai.done) {

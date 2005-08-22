@@ -7,6 +7,8 @@ INCLUDES=					\
 	-I$(top_builddir)			\
 	-DPREFIX=\""$(prefix)\""		\
 	-DSERVER_LIBEXECDIR=\""$(libexecdir)\"" \
+	-DSERVERINFODIR=\"$(libdir)/bonobo/servers\" \
+	-DSERVER_CONFDIR=\"$(sysconfdir)\"	\
         -DBONOBO_ACTIVATION_LOCALEDIR=\""${prefix}/${DATADIRNAME}/locale"\" \
 	$(LIBBONOBO_CFLAGS)			\
 	-DVERSION=\"$(VERSION)\"		\

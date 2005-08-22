@@ -31,6 +31,8 @@
 #include <ORBitservices/CosNaming_impl.h>
 #include <libbonobo.h>
 
+#include "bonobo-activation/bonobo-activation-private.h"
+
 #include "server.h"
 #include "activation-context.h"
 #include "activation-context-query.h"
@@ -51,12 +53,17 @@
 
 #include <libxml/parser.h>
 
-#ifdef G_OS_WIN32
-#include <windows.h>
-#include <mbstring.h>
-#endif
-
 #include <glib/gstdio.h>
+
+#ifdef G_OS_WIN32
+
+#undef SERVERINFODIR
+#define SERVERINFODIR _bonobo_activation_win32_get_serverinfodir ()
+
+#undef SERVER_LOCALEDIR
+#define SERVER_LOCALEDIR _bonobo_activation_win32_get_localedir ()
+
+#endif  /* Win32 */
 
 #ifdef BONOBO_ACTIVATION_DEBUG
 static void debug_queries (void);
@@ -97,64 +104,6 @@ static struct poptOption options[] = {
 };
 
 GMainLoop *main_loop = NULL;
-
-#ifdef G_OS_WIN32
-
-static const char *runtime_prefix;
-static const char *serverinfodir;
-static const char *server_localedir;
-const char *_server_confdir;
-
-const char *
-server_win32_replace_prefix (const char *configure_time_path)
-{
-  if (strncmp (configure_time_path, PREFIX "/", strlen (PREFIX) + 1) == 0) {
-          return g_strconcat (runtime_prefix,
-                              configure_time_path + strlen (PREFIX),
-                              NULL);
-  } else
-          return g_strdup (configure_time_path);
-}
-
-/* Fetch the executable's full path and deduce the installation
- * directory from that, and then form the pathnames for various
- * directories relative to the installation directory.
- */
-static void 
-whereami (void)
-{
-  char cpbfr[1000];
-  
-  if (GetModuleFileNameA (NULL, cpbfr, G_N_ELEMENTS (cpbfr))) {
-          gchar *p = _mbsrchr (cpbfr, '\\');
-          
-          if (p != NULL)
-                  *p = '\0';
-          
-          p = _mbsrchr (cpbfr, '\\');
-          if (p && g_ascii_strcasecmp (p + 1, "libexec") == 0)
-                  *p = '\0';
-  } else {
-          cpbfr[0] = '\0';
-  }
-  
-  runtime_prefix = g_strdup (cpbfr);
-  
-  serverinfodir = server_win32_replace_prefix (SERVERINFODIR);
-  server_localedir = server_win32_replace_prefix (SERVER_LOCALEDIR);
-  _server_confdir = server_win32_replace_prefix (SERVER_CONFDIR);
-}
-
-#undef SERVERINFODIR
-#define SERVERINFODIR serverinfodir
-
-#undef SERVER_LOCALEDIR
-#define SERVER_LOCALEDIR server_localedir
-
-#undef SERVER_CONFDIR
-#define SERVER_CONFDIR _server_confdir
-
-#endif
 
 static GString *
 build_src_dir (void)
@@ -365,10 +314,6 @@ main (int argc, char *argv[])
 #endif
 	const gchar                  *debug_output_env;
 
-#ifdef G_OS_WIN32
-        whereami ();
-#endif
-
 #ifdef HAVE_SETSID
         /*
          *    Become process group leader, detach from controlling
@@ -378,8 +323,8 @@ main (int argc, char *argv[])
 #endif
 	/* internationalization. */
 	setlocale (LC_ALL, "");
-        bindtextdomain (PACKAGE, SERVER_LOCALEDIR);
-        textdomain (PACKAGE);
+        bindtextdomain (GETTEXT_PACKAGE, SERVER_LOCALEDIR);
+        textdomain (GETTEXT_PACKAGE);
 
 #ifdef SIGPIPE
         /* Ignore sig-pipe - as normal */

@@ -82,5 +82,17 @@ void Bonobo_ActivationEnvValue_copy (Bonobo_ActivationEnvValue *dest,
 
 Bonobo_ActivationClient bonobo_activation_client_get (void);
 
+#ifdef G_OS_WIN32
+
+char *_bonobo_activation_win32_replace_prefix (const char *runtime_prefix,
+                                               const char *configure_time_path);
+const char *_bonobo_activation_win32_get_prefix (void);
+const char *_bonobo_activation_win32_get_server_libexecdir (void);
+const char *_bonobo_activation_win32_get_serverinfodir (void);
+const char *_bonobo_activation_win32_get_server_confdir (void);
+const char *_bonobo_activation_win32_get_localedir (void);
+
+#endif
+
 #endif /* BONOBO_ACTIVATION_PRIVATE_H */
 

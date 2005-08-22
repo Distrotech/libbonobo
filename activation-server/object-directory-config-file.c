@@ -33,21 +33,33 @@
 #include "object-directory-config-file.h"
 
 #ifdef G_OS_WIN32
-extern const char *_server_confdir;
+#include "bonobo-activation/bonobo-activation-private.h"
 #undef SERVER_CONFDIR
-#define SERVER_CONFDIR _server_confdir
+#define SERVER_CONFDIR _bonobo_activation_win32_get_server_confdir ()
 #endif
 
 static xmlDocPtr
 object_directory_load_xml_file (void)
 {
-        xmlDocPtr doc;
+        xmlDocPtr doc = NULL;
         char *bonobo_activation_config_file;
 
         bonobo_activation_config_file = g_strconcat (
                 SERVER_CONFDIR, SERVER_CONFIG_FILE, NULL);
-        doc = xmlParseFile (bonobo_activation_config_file);
+#ifdef G_OS_WIN32
+        {
+                gchar *contents;
+                gsize length;
 
+                if (g_file_get_contents (bonobo_activation_config_file,
+                                         &contents, &length, NULL)) {
+                        doc = xmlParseMemory (contents, length);
+                        g_free (contents);
+                }
+        }
+#else
+        doc = xmlParseFile (bonobo_activation_config_file);
+#endif
        /* check if the document was read successfully. */
         if (doc == NULL) {
                 g_warning (_("The Bonobo Activation configuration file was not read "

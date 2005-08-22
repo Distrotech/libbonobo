@@ -737,11 +737,10 @@ bonobo_activation_base_service_init (void)
                 { NULL,
                   "--ac-activate", "--ior-output-fd=%d", NULL };
         static gboolean beenhere = FALSE;
-        extern char *_server_libexecdir; /* In bonobo-activation-init.c */
 
         if (!beenhere) {
                 bonobo_activation_ac_cmd[0] =
-                        g_build_filename (_server_libexecdir,
+                        g_build_filename (_bonobo_activation_win32_get_server_libexecdir (),
                                           "bonobo-activation-server",
                                           NULL);
                 beenhere = TRUE;

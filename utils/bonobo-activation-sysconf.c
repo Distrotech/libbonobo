@@ -35,17 +35,37 @@
 #include "bonobo-activation/bonobo-activation-i18n.h"
 #include "activation-server/object-directory-config-file.h"
 
+#ifdef G_OS_WIN32
+#include "bonobo-activation/bonobo-activation-private.h"
+#undef SERVER_LOCALEDIR
+#define SERVER_LOCALEDIR _bonobo_activation_win32_get_localedir ()
+#undef SERVER_CONFDIR
+#define SERVER_CONFDIR _bonobo_activation_win32_get_server_confdir ()
+#endif
+
+
 static xmlDocPtr
 open_file (void)
 {
         char *config_file;
-        xmlDocPtr doc;
+        xmlDocPtr doc = NULL;
 
         config_file = g_strconcat (
                 SERVER_CONFDIR, SERVER_CONFIG_FILE, NULL);
         
-        doc = xmlParseFile (config_file);
+#ifdef G_OS_WIN32
+        {
+                gchar *contents;
+                gsize length;
 
+                if (g_file_get_contents (config_file, &contents, &length, NULL)) {
+                        doc = xmlParseMemory (contents, length);
+                        g_free (contents);
+                }
+        }
+#else
+        doc = xmlParseFile (config_file);
+#endif
         return doc;
 }
 
@@ -249,9 +269,14 @@ int main (int argc, char **argv)
         poptContext context;
         int popt_option;
 
+        setlocale (LC_ALL, "");
+
         /* init nls */
-        bindtextdomain (PACKAGE, SERVER_LOCALEDIR);
-        textdomain (PACKAGE);
+        bindtextdomain (GETTEXT_PACKAGE, SERVER_LOCALEDIR);
+        textdomain (GETTEXT_PACKAGE);
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
 
         /* init popt */
         context = poptGetContext ("oaf-sysconf", argc, (const char **)argv, 

@@ -18,6 +18,10 @@
 #include <bonobo/bonobo-private.h>
 #include <bonobo/bonobo-arg.h>
 
+#ifdef G_OS_WIN32
+#include "bonobo-activation/bonobo-activation-private.h"
+#endif
+
 #include <libintl.h>
 #include <string.h>
 
@@ -35,95 +39,8 @@ static GSList *           bonobo_main_loops = NULL;
 
 #ifdef G_OS_WIN32
 
-#ifndef PIC
-#error Must build as a DLL
-#endif
-
-#include <windows.h>
-
-/* Silence gcc with a prototype */
-BOOL WINAPI DllMain (HINSTANCE hinstDLL,
-		     DWORD     fdwReason,
-		     LPVOID    lpvReserved);
-
-static char *bonobo_localedir;
-
-static char *
-replace_prefix (const char *runtime_prefix,
-		const char *configure_time_path)
-{
-	if (strncmp (configure_time_path, PREFIX "/", strlen (PREFIX) + 1) == 0) {
-		return g_strconcat (runtime_prefix,
-				    configure_time_path + strlen (PREFIX),
-				    NULL);
-	} else
-		return g_strdup (configure_time_path);
-}
-
-/* DllMain function needed to fetch the DLL name and deduce the
- * installation directory from that, and then form the pathname for
- * bonobo_localedir relative to the installation directory.
- */
-BOOL WINAPI
-DllMain (HINSTANCE hinstDLL,
-	 DWORD     fdwReason,
-	 LPVOID    lpvReserved)
-{
-	char *prefix = NULL;
-	char *p;
-	
-	switch (fdwReason) {
-	case DLL_PROCESS_ATTACH:
-		if (GetVersion () < 0x80000000) {
-			wchar_t wcbfr[1000];
-
-			/* As bonobo_localedir is passed to the
-			 * non-UTF8ified gettext library, we must have
-			 * it in system codepage. To guard against it
-			 * containing non-representable characters, we
-			 * use the short form of the run-time prefix
-			 * (if available), which is guaranteed to
-			 * contain characters only in the system
-			 * codepage. I think.
-			 */
-			if (GetModuleFileNameW ((HMODULE) hinstDLL,
-						wcbfr, G_N_ELEMENTS (wcbfr)) &&
-			    GetShortPathNameW (wcbfr, wcbfr,
-					       G_N_ELEMENTS (wcbfr)))
-				prefix = g_utf16_to_utf8 (wcbfr, -1,
-							  NULL, NULL, NULL);
-		} else {
-			char cpbfr[1000];
-			if (GetModuleFileNameA ((HMODULE) hinstDLL,
-						cpbfr, G_N_ELEMENTS (cpbfr)))
-				prefix = g_locale_to_utf8 (cpbfr, -1,
-							   NULL, NULL, NULL);
-		}
-
-		if (prefix != NULL) {
-			p = strrchr (prefix, '\\');
-			if (p != NULL)
-				*p = '\0';
-			
-			p = strrchr (prefix, '\\');
-			if (p && (g_ascii_strcasecmp (p + 1, "bin") == 0))
-				*p = '\0';
-		} else {
-			prefix = "";
-		}
-		
-		bonobo_localedir = replace_prefix (prefix, BONOBO_LOCALEDIR);
-		p = bonobo_localedir;
-		bonobo_localedir = g_locale_from_utf8 (bonobo_localedir, -1,
-						       NULL, NULL, NULL);
-		g_free (p);
-		break;
-	}
-	return TRUE;
-}
-
 #undef BONOBO_LOCALEDIR
-#define BONOBO_LOCALEDIR bonobo_localedir
+#define BONOBO_LOCALEDIR _bonobo_activation_win32_get_localedir ()
 
 #endif
 

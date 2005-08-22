@@ -1,6 +1,62 @@
+2005-08-22  Tor Lillqvist  <tml@novell.com>
+
+	* activation-server/object-directory-config-file.c (object_directory_load_xml_file)
+	* activation-server/object-directory-load.c (od_load_file)
+	* utils/bonobo-activation-sysconf.c (open_file): On Win32, read
+	XML file into memory and parse from there, so that we don't pass a
+	GLib UTF-8 file name to libxml which expects system codepage file
+	names.
+
+	* activation-server/activation-server-main.c (main)
+	* bonobo-activation/bonobo-activation-i18n.h
+	* utils/bonobo-activation-sysconf.c (main): Use GETTEXT_PACKAGE
+	instead of PACKAGE to get more translated messages.
+
+2005-08-22  Tor Lillqvist  <tml@novell.com>
+
+	Rework the end-user installation location independence code for
+	Win32. Have all that code in the libbonobo-activation DLL
+	only. The libbonobo DLL and bonobo-activation-server.exe are
+	installed in the same prefix as libbonobo-activation anyway, so
+	it's enough if they call functions in libbonobo-activation to get
+	the runtime paths.
+
+	* activation-server/activation-server-main.c
+	* activation-server/object-directory-config-file.c
+	* activation-server/object-directory-load.c
+	* bonobo/bonobo-main.c
+	* bonobo-activation/bonobo-activation-base-service.c
+	* util/bonobo-activation-sysconf.c: Include
+	bonobo-activation-private.h and use the run-time path lookup
+	functions on Windows instead of compile-time paths.
+
+	* bonobo-activation/Makefile.am: Pass also SERVERINFODIR and
+	SERVER_CONFDIR defines, as in ../activation-server.
+	
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_by_forking): Plug small memory leak:
+	Free the fd_arg string also if the spawn fails.
+
+	* bonobo-activation/bonobo-activation-init.c (DllMain): Use a very
+	minimal DllMain(), as is the recommended best practice.
+	(_bonobo_activation_win32_replace_prefix): Rename and make
+	non-static, as now used in other files.
+	(setup_runtime_paths): New function, do the DLL path lookup and
+	installation prefix logic here instead of in DllMain().
+	(_bonobo_activation_win32_get_prefix,
+	_bonobo_activation_win32_get_server_libexecdir,
+	_bonobo_activation_win32_get_serverinfodir,
+	_bonobo_activation_win32_get_server_confdir,
+	_bonobo_activation_win32_get_localedir): New functions to get the
+	run-time paths, instead of variables.
+	
+	* bonobo-activation/bonobo-activation-private.h: Declare
+	_bonobo_activation_win32_replace_prefix() and the new functions
+	above.
+
 2005-08-19  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* Version 2.10.1 to fix confusion with previously unannounced 
+	* Version 2.10.1 to fix confusion with previously unannounced
 	release.
 	* bonobo/bonobo-main.c: Fix function name in api docs
 	* USERS: Remove some dead users and some that don't use bonobo.
