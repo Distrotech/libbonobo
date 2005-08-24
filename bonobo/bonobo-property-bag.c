@@ -423,7 +423,7 @@ bonobo_marshal_ANY__TYPECODE_UINT_EXCEPTION (GClosure     *closure,
 		  g_value_peek_pointer (param_values + 3),
 		  data2);
 
-	g_value_set_boxed_take_ownership (return_value, any);
+	g_value_take_boxed (return_value, any);
 }
 
 

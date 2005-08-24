@@ -19,6 +19,16 @@ to Bonobo Activation once it is created.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### ENUM Bonobo_RegistrationResult ##### -->
+<para>
+
+</para>
+
+@Bonobo_ACTIVATION_REG_SUCCESS: 
+@Bonobo_ACTIVATION_REG_NOT_LISTED: 
+@Bonobo_ACTIVATION_REG_ALREADY_ACTIVE: 
+@Bonobo_ACTIVATION_REG_ERROR: 
+
 <!-- ##### FUNCTION bonobo_activation_unregister_active_server ##### -->
 <para>
 

@@ -1,3 +1,15 @@
+2005-08-24  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo/bonobo-item-handler.c: Don't use deprecated functions.
+	(bonobo_marshal_BOXED__STRING_BOOLEAN_DUMMY_BOXED): 
+	* bonobo/bonobo-moniker-simple.c: Same
+	(bonobo_marshal_BOXED__RESOLVEOPTIONS_STRING_BOXED):
+	* bonobo/bonobo-property-bag.c: Same
+	(bonobo_marshal_ANY__TYPECODE_UINT_EXCEPTION):
+	* doc/activation-api/tmpl/query.sgml: These seem to have changed...
+	* doc/activation-api/tmpl/registration.sgml:
+	* doc/activation-api/tmpl/utilities.sgml:
+
 2005-08-22  Tor Lillqvist  <tml@novell.com>
 
 	* activation-server/object-directory-config-file.c (object_directory_load_xml_file)

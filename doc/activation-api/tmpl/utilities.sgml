@@ -17,6 +17,16 @@ Random misc utilities to manipulate Bonobo_ServerInfo structures.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### ENUM Bonobo_ActivationPropertyType ##### -->
+<para>
+
+</para>
+
+@Bonobo_ACTIVATION_P_STRING: 
+@Bonobo_ACTIVATION_P_NUMBER: 
+@Bonobo_ACTIVATION_P_BOOLEAN: 
+@Bonobo_ACTIVATION_P_STRINGV: 
+
 <!-- ##### FUNCTION bonobo_server_info_prop_find ##### -->
 <para>
 
@@ -79,5 +89,11 @@ Random misc utilities to manipulate Bonobo_ServerInfo structures.
 @prop_name: 
 @i18n_languages: 
 @Returns: 
+
+
+<!-- ##### TYPEDEF Bonobo_ServerInfoList ##### -->
+<para>
+
+</para>
 
 

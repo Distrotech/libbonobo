@@ -62,7 +62,7 @@ bonobo_marshal_BOXED__RESOLVEOPTIONS_STRING_BOXED (GClosure     *closure,
 			     g_value_get_boxed (param_values + 4),
 			     data2);
 
-	g_value_set_boxed_take_ownership (return_value, v_return);
+	g_value_take_boxed (return_value, v_return);
 }
 
 static Bonobo_Unknown

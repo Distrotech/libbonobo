@@ -25,6 +25,33 @@ servers are started.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### TYPEDEF Bonobo_ImplementationID ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF Bonobo_ActivationID ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF Bonobo_ActivationFlags ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ENUM Bonobo_ActivationResultType ##### -->
+<para>
+
+</para>
+
+@Bonobo_ACTIVATION_RESULT_OBJECT: 
+@Bonobo_ACTIVATION_RESULT_SHLIB: 
+@Bonobo_ACTIVATION_RESULT_NONE: 
+
 <!-- ##### FUNCTION bonobo_activation_query ##### -->
 <para>
 
