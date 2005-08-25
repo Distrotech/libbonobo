@@ -4,10 +4,10 @@
 # Jordi Mallach <jordi@sindominio.net>, 2002, 2003, 2004, 2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.9.91\n"
+"Project-Id-Version: libbonobo 2.11.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-20 12:47+0100\n"
-"PO-Revision-Date: 2005-02-20 13:38+0100\n"
+"POT-Creation-Date: 2005-08-25 10:14+0200\n"
+"PO-Revision-Date: 2005-08-25 10:15+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,34 +20,35 @@ msgstr "No s'ha trobat en quin fill estava llistat el servidor"
 
 #: ../activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
-msgstr "No és un ID d'activació vàlida"
+msgstr "No és un ID d'activació vàlid"
 
-#: ../activation-server/activation-server-main.c:68
+#: ../activation-server/activation-server-main.c:84
 msgid "Directory to read .server files from"
 msgstr "Directori d'on llegir fitxers .server"
 
-#: ../activation-server/activation-server-main.c:68
+#: ../activation-server/activation-server-main.c:84
 msgid "DIRECTORY"
 msgstr "DIRECTORI"
 
-#: ../activation-server/activation-server-main.c:71
+#: ../activation-server/activation-server-main.c:87
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "Serveix com un ActivationContext (per defecte és només un ObjectDirectory)"
+msgstr ""
+"Serveix com a un ActivationContext (per defecte és només un ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:75
+#: ../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
 msgstr "Descriptor de fitxer on escriure l'IOR"
 
-#: ../activation-server/activation-server-main.c:75
-#: ../bonobo-activation/bonobo-activation-init.c:200
+#: ../activation-server/activation-server-main.c:91
+#: ../bonobo-activation/bonobo-activation-init.c:351
 msgid "FD"
 msgstr "DF"
 
-#: ../activation-server/activation-server-main.c:83
+#: ../activation-server/activation-server-main.c:99
 msgid "Query expression to evaluate"
 msgstr "Expressió de petició a evaluar"
 
-#: ../activation-server/activation-server-main.c:83
+#: ../activation-server/activation-server-main.c:99
 msgid "EXPRESSION"
 msgstr "EXPRESSIÓ"
 
@@ -65,13 +66,13 @@ msgstr "Servei de notificació"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr "Servei de notificació per l'activació"
+msgstr "Servei de notificació per a l'activació"
 
-#: ../activation-server/object-directory-activate.c:187
+#: ../activation-server/object-directory-activate.c:186
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Encara no es gestiona l'activació d'objectes shlib en un procés remot"
 
-#: ../activation-server/object-directory-config-file.c:47
+#: ../activation-server/object-directory-config-file.c:65
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
@@ -89,102 +90,84 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1152
+#: ../activation-server/object-directory-corba.c:1154
 #, c-format
 msgid "Race condition activating server '%s'"
-msgstr "Condició de carrera al activar el servidor «%s»"
+msgstr "Condició de carrera en activar el servidor «%s»"
 
-#: ../activation-server/object-directory-load.c:94
+#: ../activation-server/object-directory-load.c:93
 msgid "a NULL iid is not valid"
-msgstr "Un iid NULL no és vàlida"
+msgstr "Un iid NULL no és vàlid"
 
-#: ../activation-server/object-directory-load.c:98
+#: ../activation-server/object-directory-load.c:97
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "L'iid %s té tipus NULL"
 
-#: ../activation-server/object-directory-load.c:102
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr "L'iid %s té una localització NULL"
+msgstr "L'iid %s té una ubicació NULL"
 
-#: ../activation-server/object-directory-load.c:111
+#: ../activation-server/object-directory-load.c:110
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "caràcter «%c» invàlid a l'iid «%s»"
 
-#: ../activation-server/object-directory-load.c:305
+#: ../activation-server/object-directory-load.c:318
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "La propietat «%s» no té valor"
 
-#: ../activation-server/object-directory-load.c:588
+#: ../activation-server/object-directory-load.c:601
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr "No s'ha pogut analitzar el document XML malformat %s"
+msgstr "No s'ha pogut analitzar el document XML mal format %s"
 
-#: ../activation-server/object-directory-load.c:641
+#: ../activation-server/object-directory-load.c:666
 #, c-format
 msgid "Trying dir %s"
 msgstr "S'està provant el directori %s"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:102
+#: ../bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "El procés fill no ha donat un missatge d'error, s'ha produït un error desconegut"
+msgstr ""
+"El procés fill no ha donat un missatge d'error, s'ha produït un error "
+"desconegut"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:174
+#: ../bonobo-activation/bonobo-activation-fork-server.c:177
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "No s'ha pogut llegir del procés fill: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:297
-msgid "Couldn't fork a new process"
-msgstr "No s'ha pogut crear un nou procés"
+#: ../bonobo-activation/bonobo-activation-fork-server.c:184
+msgid "EOF from child process\n"
+msgstr "Fi de fitxer del procés fill\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:318
-#, c-format
-msgid "Child received signal %u (%s)"
-msgstr "El fill ha rebut el senyal %u (%s)"
+#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+msgid "Couldn't spawn a new process"
+msgstr "No s'ha pogut iniciar un procés nou"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:323
-#, c-format
-msgid "Unknown non-exit error (status is %u)"
-msgstr "S'ha produït un error de no-sortida desconegut (l'estat és %u)"
-
-#: ../bonobo-activation/bonobo-activation-fork-server.c:404
-#, c-format
-msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr "bonobo-activation no ha pogut establir el grup del procés de %s: %s\n"
-
-#: ../bonobo-activation/bonobo-activation-fork-server.c:416
-#, c-format
-msgid "Failed to execute %s: %d (%s)\n"
-msgstr "No s'ha pogut executar %s: %d (%s)\n"
-
-#: ../bonobo-activation/bonobo-activation-get-language-list.c:133
-msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr "Massa nivells d'àlies per al locale, pot indicar un bucle"
-
-#: ../bonobo-activation/bonobo-activation-init.c:200
+#: ../bonobo-activation/bonobo-activation-init.c:351
 msgid "File descriptor to print IOR on"
-msgstr "Descriptor de fitxer on escriure IOR"
+msgstr "Descriptor de fitxer on escriure l'IOR"
 
-#: ../bonobo-activation/bonobo-activation-init.c:202
+#: ../bonobo-activation/bonobo-activation-init.c:353
 msgid "IID to activate"
 msgstr "IDD a activar"
 
-#: ../bonobo-activation/bonobo-activation-init.c:204
+#: ../bonobo-activation/bonobo-activation-init.c:355
 msgid "Prevent registering of server with OAF"
 msgstr "Previngues el registre de servidors amb OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:290
+#: ../bonobo-activation/bonobo-activation-init.c:446
 msgid "Bonobo activation options"
-msgstr "Opcións d'activació de Bonobo"
+msgstr "Opcions d'activació de Bonobo"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr "g_module_open de «%s» ha fallat amb «%s»"
+msgstr "Ha fallat la funció g_module_open de «%s» amb «%s»"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:126
 #: ../bonobo-activation/bonobo-activation-shlib.c:163
@@ -240,7 +223,7 @@ msgstr "S'ha trobat un error de sintaxi en la descripció de l'objecte"
 
 #: ../bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "No es pot activar l'objecte des de la fàbrica"
+msgstr "No es pot activar l'objecte de la fàbrica"
 
 #: ../bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -260,15 +243,15 @@ msgstr "S'ha produït un error d'entrada/sortida en emmagatzemar"
 
 #: ../bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr "El nom ja existeix a l'emmagatzemament"
+msgstr "El nom ja existeix al magatzem"
 
 #: ../bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr "No s'ha trobat l'objecte a l'emmagatzemament"
+msgstr "No s'ha trobat l'objecte al magatzem"
 
 #: ../bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "No hi ha permís per fer l'operació a l'emmagatzemament"
+msgstr "No teniu permís per fer l'operació al magatzem"
 
 #: ../bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
@@ -288,11 +271,11 @@ msgstr "L'emmagatzemament no és buit"
 
 #: ../bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "descripció XML incorrecta de la interfície d'usuari"
+msgstr "la descripció XML de la interfície està mal formada"
 
 #: ../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "camí invàlid cap a l'element de la interfície d'usuari XML"
+msgstr "camí invàlid a l'element XML de la interfície d'usuari"
 
 #: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -328,7 +311,7 @@ msgstr "la propietat és només de lectura"
 
 #: ../bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr "el rerefons de la base de dades de configuració ha fallat "
+msgstr "ha fallat el rerefons de la base de dades de configuració"
 
 #: ../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
@@ -383,7 +366,7 @@ msgstr "Sobrenom HTTP"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr "sobrenom gestor de l'IOR de l'ORB"
+msgstr "Sobrenom del gestor de l'IOR de l'ORB"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
@@ -438,21 +421,20 @@ msgstr "No s'ha pogut crear una instància de l'exemple del component d'eco"
 msgid "An exception occured '%s'"
 msgstr "Ha tingut lloc una excepció «%s»"
 
-#: ../utils/bonobo-activation-sysconf.c:62
+#: ../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
 msgstr "No s'ha pogut desar el fitxer de configuració.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:63
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr ""
-"Si us plau, assegureu-vos de que teniu permissos per a escriure en «%s».\n"
+msgstr "Assegureu-vos de que teniu permissos per a escriure en «%s».\n"
 
-#: ../utils/bonobo-activation-sysconf.c:66
+#: ../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
-msgstr "Fitxer de configuració desat correctament.\n"
+msgstr "S'ha desat correctament el fitxer de configuració.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:80
+#: ../utils/bonobo-activation-sysconf.c:101
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -461,36 +443,52 @@ msgstr ""
 "el fitxer de configuració és:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:118
+#: ../utils/bonobo-activation-sysconf.c:139
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s ja està en el fitxer de configuració\n"
 
-#: ../utils/bonobo-activation-sysconf.c:138
+#: ../utils/bonobo-activation-sysconf.c:159
 msgid "there is not a properly structured configuration file\n"
-msgstr "no hi ha un fitxer de configuració correctament estructurat\n"
+msgstr "no hi ha cap fitxer de configuració correctament estructurat\n"
 
-#: ../utils/bonobo-activation-sysconf.c:201
+#: ../utils/bonobo-activation-sysconf.c:222
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "El fitxer de configuració de bonobo-activation conté:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:233
+#: ../utils/bonobo-activation-sysconf.c:254
 msgid "Directory to remove from configuration file"
 msgstr "Directori a eliminar del fitxer de configuració"
 
-#: ../utils/bonobo-activation-sysconf.c:233
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "directory path"
 msgstr "camí del directori"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "Directory to add to configuration file"
 msgstr "Directori a afegir al fitxer de configuració"
 
-#: ../utils/bonobo-activation-sysconf.c:239
+#: ../utils/bonobo-activation-sysconf.c:260
 msgid "Display directories in configuration file"
 msgstr "Mostra directoris en el fitxer de configuració"
 
-#: ../utils/bonobo-activation-sysconf.c:242
+#: ../utils/bonobo-activation-sysconf.c:263
 msgid "Display path to configuration file"
 msgstr "Mostra la ruta al fitxer de configuració"
+
+#~ msgid "Too many alias levels for a locale, may indicate a loop"
+#~ msgstr "Massa nivells d'àlies per al locale, pot indicar un bucle"
+
+#~ msgid "Child received signal %u (%s)"
+#~ msgstr "El fill ha rebut el senyal %u (%s)"
+
+#~ msgid "Unknown non-exit error (status is %u)"
+#~ msgstr "S'ha produït un error de no-sortida desconegut (l'estat és %u)"
+
+#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
+#~ msgstr ""
+#~ "bonobo-activation no ha pogut establir el grup del procés de %s: %s\n"
+
+#~ msgid "Failed to execute %s: %d (%s)\n"
+#~ msgstr "No s'ha pogut executar %s: %d (%s)\n"
