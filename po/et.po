@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-07-26 14:44+0000\n"
-"PO-Revision-Date: 2005-08-16 10:33+0300\n"
+"PO-Revision-Date: 2005-08-24 09:06+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: ../activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
-msgstr ""
+msgstr "Vigane aktiveerimise ID"
 
 #: ../activation-server/activation-server-main.c:77
 msgid "Directory to read .server files from"
@@ -83,8 +83,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"Bonobo Aktiveerimise seadistusfaili ei õnnestunud lugeda. Palun veendi, et "
-"see oleks korrektne sisend: %s"
+"Bonobo Aktiveerimise seadistusfaili ei õnnestunud edukalt lugeda. Palun "
+"veendi, et see oleks korrektne sisend: %s"
 
 #.
 #. * If this exception blows ( which it will only do with a multi-object )
@@ -125,25 +125,25 @@ msgstr "Omadusel '%s' puudub väärtus"
 #: ../activation-server/object-directory-load.c:601
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr "Vigaselt vormindatud XML dokumenti %s pole võimalik parsida"
+msgstr "Vigaselt vormindatud XML dokumenti %s pole võimalik analüüsida"
 
 #: ../activation-server/object-directory-load.c:654
 #, c-format
 msgid "Trying dir %s"
-msgstr "Proovin kataloogi %s"
+msgstr "Kataloogi %s proovimine"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr ""
+msgstr "Tekkis tundmatu tõrge, lapsprotsess ei väljastanud veateadet"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:177
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr ""
+msgstr "Tõrge lapsprotsessilt andmete lugemisel: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:184
 msgid "EOF from child process\n"
-msgstr ""
+msgstr "lapsprotsessilt tuli faililõputunnus\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:343
 msgid "Couldn't spawn a new process"
@@ -168,7 +168,7 @@ msgstr "Bonobo aktiveerimisvõtmed"
 #: ../bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr ""
+msgstr "g_module_open `%s' avamisel tekkis tõrge `%s'"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:126
 #: ../bonobo-activation/bonobo-activation-shlib.c:163
@@ -252,7 +252,7 @@ msgstr "Objekti ei leitud salvestist"
 
 #: ../bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "Salvesti"
+msgstr "Salvestiga tegelemiseks pole piisavalt õigusi"
 
 #: ../bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
@@ -272,7 +272,7 @@ msgstr "Salvesti ei ole tühi"
 
 #: ../bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "kasutajaliidese vigaselt vormindatud kirjeldus"
+msgstr "kasutajaliidese vigaselt vormindatud XML kirjeldus"
 
 #: ../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
@@ -280,11 +280,11 @@ msgstr "vigane rada XML kasutajaliidese elemendile"
 
 #: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr ""
+msgstr "küsitud kasutajaliideseatribuuti pole olemas"
 
 #: ../bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr ""
+msgstr "Tundmatu käsk või verb"
 
 #: ../bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
@@ -336,7 +336,7 @@ msgstr ""
 
 #: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr "Üldine aktiveerimisviga ilma kirjelduseta"
+msgstr "Üldine ilma kirjelduseta aktiveerimisviga"
 
 #: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
@@ -415,7 +415,7 @@ msgstr "Bonobo lähtestamine pole võimalik"
 
 #: ../samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "Näidiskomponendi (kaja) instantsi pole võimalik luua"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
@@ -455,7 +455,7 @@ msgstr "puudub korralikult struktureeritud seadistusfail\n"
 
 #: ../utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr ""
+msgstr "Bonobo-activation seadistusfail sisaldab:\n"
 
 #: ../utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
