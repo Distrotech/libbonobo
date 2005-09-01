@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-26 15:00+0200\n"
+"POT-Creation-Date: 2005-09-01 15:54+0200\n"
 "PO-Revision-Date: 2003-06-27 21:40--100\n"
 "Last-Translator: Gnome PL Team <translators@gnomepl.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -26,33 +26,33 @@ msgstr "Nie można odnaleźć potomka, w którym nasłuchuje serwer"
 msgid "Not a valid Activation ID"
 msgstr "Napis nie jest poprawnym identyfikatorem aktywacji"
 
-#: ../activation-server/activation-server-main.c:77
+#: ../activation-server/activation-server-main.c:84
 msgid "Directory to read .server files from"
 msgstr "Katalog, z którego odczytywane powinny być pliki .server"
 
-#: ../activation-server/activation-server-main.c:77
+#: ../activation-server/activation-server-main.c:84
 msgid "DIRECTORY"
 msgstr "KATALOG"
 
-#: ../activation-server/activation-server-main.c:80
+#: ../activation-server/activation-server-main.c:87
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Udostępnianie jako ActivationContext (domyślnie tylko jako ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
 msgstr "Deskryptor pliku, do którego zapisać IOR"
 
-#: ../activation-server/activation-server-main.c:84
-#: ../bonobo-activation/bonobo-activation-init.c:257
+#: ../activation-server/activation-server-main.c:91
+#: ../bonobo-activation/bonobo-activation-init.c:351
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:92
+#: ../activation-server/activation-server-main.c:99
 msgid "Query expression to evaluate"
 msgstr "Wyrażenie zapytania do przetworzenia"
 
-#: ../activation-server/activation-server-main.c:92
+#: ../activation-server/activation-server-main.c:99
 msgid "EXPRESSION"
 msgstr "WYRAŻENIE"
 
@@ -78,7 +78,7 @@ msgstr ""
 "Aktywowanie obiektów w bibliotekach dzielonych dla zdalnych procesów nie "
 "jest jeszcze obsługiwane"
 
-#: ../activation-server/object-directory-config-file.c:53
+#: ../activation-server/object-directory-config-file.c:65
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
@@ -133,7 +133,7 @@ msgstr "Właściwość \"%s\" nie ma wartości"
 msgid "Could not parse badly formed XML document %s"
 msgstr "Nie można przeanalizować źle sformułowanego dokumentu XML %s"
 
-#: ../activation-server/object-directory-load.c:654
+#: ../activation-server/object-directory-load.c:666
 #, c-format
 msgid "Trying dir %s"
 msgstr "Próbowanie katalogu %s"
@@ -155,19 +155,19 @@ msgstr "EOF z procesu potomnego\n"
 msgid "Couldn't spawn a new process"
 msgstr "Nie można utworzyć nowego procesu"
 
-#: ../bonobo-activation/bonobo-activation-init.c:257
+#: ../bonobo-activation/bonobo-activation-init.c:351
 msgid "File descriptor to print IOR on"
 msgstr "Deskryptor pliku, do którego wypisać IOR"
 
-#: ../bonobo-activation/bonobo-activation-init.c:259
+#: ../bonobo-activation/bonobo-activation-init.c:353
 msgid "IID to activate"
 msgstr "Aktywowany IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:261
+#: ../bonobo-activation/bonobo-activation-init.c:355
 msgid "Prevent registering of server with OAF"
 msgstr "Wstrzymuje rejestrację serwera przez OAF-a"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:446
 msgid "Bonobo activation options"
 msgstr "Opcje systemu aktywacji Bonobo"
 
@@ -428,20 +428,20 @@ msgstr "Nie można utworzyć instancji przykładowego komponentu echa"
 msgid "An exception occured '%s'"
 msgstr "Wystąpił wyjątek \"%s\""
 
-#: ../utils/bonobo-activation-sysconf.c:62
+#: ../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
 msgstr "Nie można zapisać pliku konfiguracyjnego.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:63
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Upewnij się, że masz uprawnienia do zapisu w \"%s\".\n"
 
-#: ../utils/bonobo-activation-sysconf.c:66
+#: ../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
 msgstr "Plik konfiguracyjny został pomyślnie zapisany.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:80
+#: ../utils/bonobo-activation-sysconf.c:101
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -450,53 +450,36 @@ msgstr ""
 "Plikiem konfiguracyjnym jest:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:118
+#: ../utils/bonobo-activation-sysconf.c:139
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s jest już w pliku konfiguracyjnym\n"
 
-#: ../utils/bonobo-activation-sysconf.c:138
+#: ../utils/bonobo-activation-sysconf.c:159
 msgid "there is not a properly structured configuration file\n"
 msgstr "brak pliku konfiguracyjnego o poprawnej strukturze\n"
 
-#: ../utils/bonobo-activation-sysconf.c:201
+#: ../utils/bonobo-activation-sysconf.c:222
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Plik konfiguracyjny bonobo-activation zawiera:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:233
+#: ../utils/bonobo-activation-sysconf.c:254
 msgid "Directory to remove from configuration file"
 msgstr "Katalog, który należy usunąć z pliku konfiguracyjnego"
 
-#: ../utils/bonobo-activation-sysconf.c:233
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "directory path"
 msgstr "ścieżka katalogu"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "Directory to add to configuration file"
 msgstr "Katalog, który należy dodać do pliku konfiguracyjnego"
 
-#: ../utils/bonobo-activation-sysconf.c:239
+#: ../utils/bonobo-activation-sysconf.c:260
 msgid "Display directories in configuration file"
 msgstr "Wyświetla katalogi w pliku konfiguracyjnym"
 
-#: ../utils/bonobo-activation-sysconf.c:242
+#: ../utils/bonobo-activation-sysconf.c:263
 msgid "Display path to configuration file"
 msgstr "Wyświetla ścieżkę pliku konfiguracyjnego"
-
-#~ msgid "Child received signal %u (%s)"
-#~ msgstr "Potomek otrzymał sygnał %u (%s)"
-
-#~ msgid "Unknown non-exit error (status is %u)"
-#~ msgstr "Nieznany błąd procesu (kod stanu %u)"
-
-#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
-#~ msgstr "bonobo-activation: nie można ustawić grupy procesu %s: %s\n"
-
-#~ msgid "Failed to execute %s: %d (%s)\n"
-#~ msgstr "Nie można wykonać %s: %d (%s)\n"
-
-#~ msgid "Too many alias levels for a locale, may indicate a loop"
-#~ msgstr ""
-#~ "Zbyt wiele poziomów aliasów dla nazwy ustawień narodowych, może to "
-#~ "oznaczać pętlę"
