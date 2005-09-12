@@ -1,3 +1,17 @@
+2005-09-12  Tor Lillqvist  <tml@novell.com>
+
+	* activation-server/object-directory-load.c (ParseInfo): Add a
+	filename field.
+	(parse_info_free): Free the filename field.
+	(parse_oaf_server_attrs): On Win32, if the path to a shlib or exe
+	starts with ../, expand it relative to the directory where the
+	.server file is.
+	(od_load_context): Take also filename parameter, initialize
+	filename field in ParseInfo.
+	(od_load_file): Pass filename to od_load_context().
+	(bonobo_parser_server_info_memory): Pass NULL as filename to
+	od_load_context().
+
 2005-08-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-item-handler.c: Don't use deprecated functions.

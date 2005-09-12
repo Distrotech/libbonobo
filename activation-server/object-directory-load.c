@@ -51,6 +51,9 @@ typedef enum {
 } ParseState;
 
 typedef struct {
+        char *filename;         /* Filename of .server file, or NULL
+                                 * if parsing from memory.
+                                 */
         ParseState state;
         ParseState prev_state;
         int unknown_depth;
@@ -81,6 +84,7 @@ parse_info_new (void)
 static void
 parse_info_free (ParseInfo *info)
 {
+        g_free (info->filename);
         g_free (info);
 }
 
@@ -157,11 +161,31 @@ parse_oaf_server_attrs (ParseInfo      *info,
         }
 
 #ifdef G_OS_WIN32
-        /* Possibly replace configure-time shlib or exe location
-         * with the actual installed one.
+        /* If this data has been read from a .server file, and the
+         * path to the exe or dll starts with ../, make it relative to
+         * the location of the .server file. Very convenient, means
+         * yuo can install some software package that includes a
+         * Bonobo component in a freeestanding location, and just need
+         * to update your BONOBO_ACTIVATION_PATH so the .server file
+         * is found.
+         *
+         * In other cases, possibly replace configure-time shlib or
+         * exe location with the actual installed one. This is for
+         * components that have been built with the same
+         * configure-time prefix as libbonobo.
          */
-        if (!strcmp (type, "exe") || !strcmp (type, "shlib"))
-                location = _bonobo_activation_win32_replace_prefix (_bonobo_activation_win32_get_prefix (), location);
+        if (!strcmp (type, "exe") || !strcmp (type, "shlib")) {
+                if (info->filename != NULL &&
+                    !strncmp (location, "..", 2) &&
+                    G_IS_DIR_SEPARATOR (location[2])) {
+                            gchar *dirname = g_path_get_dirname (info->filename);
+
+                            location = g_build_filename (dirname, location, NULL);
+                            g_free (dirname);
+                    } else {
+                              location = _bonobo_activation_win32_replace_prefix (_bonobo_activation_win32_get_prefix (), location);
+                    }
+        }
 #endif
 
         /* Now create the ServerInfo object */
@@ -565,7 +589,8 @@ static xmlSAXHandler od_SAXParser = {
 };
 
 static void
-od_load_context (xmlParserCtxt *ctxt,
+od_load_context (const char *filename,
+                 xmlParserCtxt *ctxt,
                  GSList    **entries,
                  const char *host)
 {
@@ -576,6 +601,7 @@ od_load_context (xmlParserCtxt *ctxt,
         info = parse_info_new ();
         info->host = host;
         info->entries = entries;
+        info->filename = g_strdup (filename);
 
         oldsax = ctxt->sax;
         ctxt->sax = &od_SAXParser;
@@ -625,7 +651,7 @@ od_load_file (const char *file,
 #endif
         if (!ctxt)
                 return;
-        od_load_context (ctxt, entries, host);
+        od_load_context (file, ctxt, entries, host);
         xmlFreeParserCtxt (ctxt);
 }
 
@@ -639,7 +665,7 @@ bonobo_parse_server_info_memory (const char *server_info,
         ctxt = xmlCreateMemoryParserCtxt (server_info, strlen (server_info));
         if (!ctxt)
                 return;
-        od_load_context (ctxt, entries, host);
+        od_load_context (NULL, ctxt, entries, host);
         xmlFreeParserCtxt (ctxt);
 }
 
