@@ -356,6 +356,31 @@ struct poptOption bonobo_activation_popt_options[] = {
         { NULL }
 };
 
+static const GOptionEntry bonobo_activation_goption_options[] = {
+        { "oaf-ior-fd", '\0', 0,  G_OPTION_ARG_INT, &bonobo_activation_ior_fd, 
+          N_("File descriptor to print IOR on"), N_("FD") },
+        { "oaf-activate-iid", '\0', 0, G_OPTION_ARG_STRING, &bonobo_activation_activate_iid, 
+          N_("IID to activate"), "IID" },
+        { "oaf-private", '\0', 0, G_OPTION_ARG_NONE, &bonobo_activation_private, 
+          N_("Prevent registering of server with OAF"), NULL },
+        { NULL }
+};
+
+GOptionGroup *
+bonobo_activation_get_goption_group (void)
+{
+	GOptionGroup *group;
+
+	group = g_option_group_new ("bonbo-activation",
+				    N_("Bonobo Activation"),
+				    N_("Show Bonobo Activation options"),
+				    NULL, NULL);
+	g_option_group_set_translation_domain (group, GETTEXT_PACKAGE);
+	g_option_group_add_entries (group, bonobo_activation_goption_options);
+
+	return group;
+}
+
 /**
  * bonobo_activation_activation_iid_get:
  *

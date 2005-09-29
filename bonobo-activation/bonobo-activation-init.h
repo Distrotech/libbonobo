@@ -26,6 +26,7 @@
 
 #include <orbit/orbit.h>
 #include <popt.h>
+#include <glib/goption.h>
 
 G_BEGIN_DECLS
 
@@ -54,6 +55,8 @@ char          *bonobo_activation_get_popt_table_name (void);
 gboolean       bonobo_activation_debug_shutdown      (void);
 
 extern struct poptOption bonobo_activation_popt_options[];
+
+GOptionGroup  *bonobo_activation_get_goption_group   (void);
 
 G_END_DECLS
 

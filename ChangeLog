@@ -1,3 +1,13 @@
+2005-09-29  Christian Persch  <chpe@cvs.gnome.org>
+
+	* configure.in: Bump version to 2.13.0, and require glib 2.8.0.
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_get_goption_group):
+	* bonobo-activation/bonobo-activation-init.h: Add
+	bonobo_activation_get_goption_group() for use by the GOption
+	argument parsing in libgnome.
+	Patch by Pawel Sliwowski <open.list@gmail.com>, bug #307312.
+
 2005-09-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* bonobo/bonobo-app-client.c (_typecode_to_gtype):
