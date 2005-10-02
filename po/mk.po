@@ -1,3 +1,4 @@
+# translation of mk.po to Macedonian
 # translation of libbonobo.HEAD.mk.po to Macedonian
 # translation of libbonobo.HEAD.mk.po to
 # translation of libbonobo.HEAD.mk.po to
@@ -8,18 +9,20 @@
 # Maratonec <kjdskjds@dksjd>, 2002,2003.
 # Vladislav Bidikov <bidikovi@mail.com.mk>, 2003.
 # Arangel Angov <ufo@linux.net.mk>, 2004.
+# Арангел Ангов <ufo@linux.net.mk>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo.HEAD.mk\n"
+"Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-13 14:28+0000\n"
-"PO-Revision-Date: 2005-07-14 00:11+0200\n"
-"Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
+"POT-Creation-Date: 2005-10-02 13:34+0200\n"
+"PO-Revision-Date: 2005-10-02 18:40+0200\n"
+"Last-Translator: Арангел Ангов <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -29,34 +32,35 @@ msgstr "Не можам да пронајдам во кој подпроцес �
 msgid "Not a valid Activation ID"
 msgstr "Невалидено ID за активирање"
 
-#: ../activation-server/activation-server-main.c:77
+#: ../activation-server/activation-server-main.c:84
 msgid "Directory to read .server files from"
 msgstr "Директориум за вчитување на .server датотеките од"
 
-#: ../activation-server/activation-server-main.c:77
+#: ../activation-server/activation-server-main.c:84
 msgid "DIRECTORY"
 msgstr "Директориум"
 
-#: ../activation-server/activation-server-main.c:80
+#: ../activation-server/activation-server-main.c:87
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Опслужи го како ActivationContext (преддефинирано е само како "
 "ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
 msgstr "Опишувачот на датотека за пишување на IOR"
 
-#: ../activation-server/activation-server-main.c:84
-#: ../bonobo-activation/bonobo-activation-init.c:257
+#: ../activation-server/activation-server-main.c:91
+#: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:92
+#: ../activation-server/activation-server-main.c:99
 msgid "Query expression to evaluate"
 msgstr "Прашален израз за проценка"
 
-#: ../activation-server/activation-server-main.c:92
+#: ../activation-server/activation-server-main.c:99
 msgid "EXPRESSION"
 msgstr "ИЗРАЗ"
 
@@ -80,7 +84,7 @@ msgstr "Сервис за известување за активирање"
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Сеуште не ги активираме рачно shlib објектите во далечните процеси"
 
-#: ../activation-server/object-directory-config-file.c:53
+#: ../activation-server/object-directory-config-file.c:65
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
@@ -101,36 +105,36 @@ msgstr ""
 msgid "Race condition activating server '%s'"
 msgstr "Исклучок при активирање на '%s"
 
-#: ../activation-server/object-directory-load.c:93
+#: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
 msgstr "NULL iid не е валиден"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s има NULL тип"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s има NULL локација"
 
-#: ../activation-server/object-directory-load.c:110
+#: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "неважечки карактер '%c' во iid '%s'"
 
-#: ../activation-server/object-directory-load.c:318
+#: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Параметарот '%s' нема вредност"
 
-#: ../activation-server/object-directory-load.c:601
+#: ../activation-server/object-directory-load.c:627
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Не можам да парсирам лошо оштетен XML document %s"
 
-#: ../activation-server/object-directory-load.c:654
+#: ../activation-server/object-directory-load.c:692
 #, c-format
 msgid "Trying dir %s"
 msgstr "Пробувам во директориумот %s"
@@ -148,23 +152,34 @@ msgstr "Не успеав да прочитам од подпроцесот %s\n
 msgid "EOF from child process\n"
 msgstr "EOF од подпроцесот\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:337
+#: ../bonobo-activation/bonobo-activation-fork-server.c:343
 msgid "Couldn't spawn a new process"
 msgstr "Не можев да создадам нов процес"
 
-#: ../bonobo-activation/bonobo-activation-init.c:257
+#: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "Пронајди опишувач за печатење на IOR на"
 
-#: ../bonobo-activation/bonobo-activation-init.c:259
+#: ../bonobo-activation/bonobo-activation-init.c:353
+#: ../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "IID за активирање"
 
-#: ../bonobo-activation/bonobo-activation-init.c:261
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "Спречи регистрација на серверот со OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Активирање на Bonobo"
+
+#: ../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Покажи опции за активирање на Bonobo"
+
+#: ../bonobo-activation/bonobo-activation-init.c:471
 msgid "Bonobo activation options"
 msgstr "Опции за активирање на Bonobo"
 
@@ -425,20 +440,20 @@ msgstr "Не можам да креирам нова копија од прим�
 msgid "An exception occured '%s'"
 msgstr "Се појави исклучок '%s'"
 
-#: ../utils/bonobo-activation-sysconf.c:62
+#: ../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
 msgstr "Не можам да ја зачувам конфигурациската датотека.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:63
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Ве молам проверете дали имате пермисии за запишување во '%s'.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:66
+#: ../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
 msgstr "Успешно запишав во конфигурациската датотека.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:80
+#: ../utils/bonobo-activation-sysconf.c:101
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -447,53 +462,37 @@ msgstr ""
 "Конфигурациската датотека е:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:118
+#: ../utils/bonobo-activation-sysconf.c:139
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s веќе е во конфигурациската датотека\n"
 
-#: ../utils/bonobo-activation-sysconf.c:138
+#: ../utils/bonobo-activation-sysconf.c:159
 msgid "there is not a properly structured configuration file\n"
 msgstr "нема соодветно структурирана конфигурациска датотека\n"
 
-#: ../utils/bonobo-activation-sysconf.c:201
+#: ../utils/bonobo-activation-sysconf.c:222
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Конфигурациската датотека за Bonobo-activation содржи:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:233
+#: ../utils/bonobo-activation-sysconf.c:254
 msgid "Directory to remove from configuration file"
 msgstr "Директориумот да се отстрани од конфигурациската датотека"
 
-#: ../utils/bonobo-activation-sysconf.c:233
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "directory path"
 msgstr "патека на директориум"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "Directory to add to configuration file"
 msgstr "Директориумот да се додаде во конфигурациската датотека"
 
-#: ../utils/bonobo-activation-sysconf.c:239
+#: ../utils/bonobo-activation-sysconf.c:260
 msgid "Display directories in configuration file"
 msgstr "Прикажи ги директориумите во конфигурациската датотека"
 
-#: ../utils/bonobo-activation-sysconf.c:242
+#: ../utils/bonobo-activation-sysconf.c:263
 msgid "Display path to configuration file"
 msgstr "Прикажи ја патеката до конфигурациската датотека"
 
-#~ msgid "Child received signal %u (%s)"
-#~ msgstr "Подпроцесот прими сигнал %u (%s)"
-
-#~ msgid "Unknown non-exit error (status is %u)"
-#~ msgstr "Непозната грешка (статусот е %u)"
-
-#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
-#~ msgstr "bonobo-activation не успеа да постави група на процеси %s: %s\n"
-
-#~ msgid "Failed to execute %s: %d (%s)\n"
-#~ msgstr "Грешка при извршување %s: %d (%s)\n"
-
-#~ msgid "Too many alias levels for a locale, may indicate a loop"
-#~ msgstr ""
-#~ "Премногу нивоа на алијаси за тоа locale, може да дојде до бесконечен "
-#~ "процес"
