@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-08 14:10+0200\n"
-"PO-Revision-Date: 2005-06-08 14:11+0200\n"
+"POT-Creation-Date: 2005-10-17 14:00+0200\n"
+"PO-Revision-Date: 2005-10-17 14:00+0200\n"
 "Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -31,32 +31,33 @@ msgstr "Kunne ikke finde ud af hvilken underproces serveren var opført hos"
 msgid "Not a valid Activation ID"
 msgstr "Ikke en gyldig aktiverings-id"
 
-#: ../activation-server/activation-server-main.c:77
+#: ../activation-server/activation-server-main.c:84
 msgid "Directory to read .server files from"
 msgstr "Mappe som .server-filer læses fra"
 
-#: ../activation-server/activation-server-main.c:77
+#: ../activation-server/activation-server-main.c:84
 msgid "DIRECTORY"
 msgstr "Mappe"
 
-#: ../activation-server/activation-server-main.c:80
+#: ../activation-server/activation-server-main.c:87
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Virk som en ActivationContext (standard er kun som et ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
 msgstr "Fildeskriptor som IOR skal skrives til"
 
-#: ../activation-server/activation-server-main.c:84
-#: ../bonobo-activation/bonobo-activation-init.c:257
+#: ../activation-server/activation-server-main.c:91
+#: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:92
+#: ../activation-server/activation-server-main.c:99
 msgid "Query expression to evaluate"
 msgstr "Søgeudtryk der skal evalueres"
 
-#: ../activation-server/activation-server-main.c:92
+#: ../activation-server/activation-server-main.c:99
 msgid "EXPRESSION"
 msgstr "UDTRYK"
 
@@ -81,7 +82,7 @@ msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
 "Vi kan endnu ikke behandle aktivering af shlib-objekter i en fjernproces"
 
-#: ../activation-server/object-directory-config-file.c:53
+#: ../activation-server/object-directory-config-file.c:65
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
@@ -102,36 +103,36 @@ msgstr ""
 msgid "Race condition activating server '%s'"
 msgstr "Racebetingelser ved aktivering af serveren '%s'"
 
-#: ../activation-server/object-directory-load.c:93
+#: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
 msgstr "en nul-IID er ugyldig"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "IID %s har en NULL-type"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "IID %s har en NULL-placering"
 
-#: ../activation-server/object-directory-load.c:110
+#: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "ugyldigt tegn '%c' i IID '%s'"
 
-#: ../activation-server/object-directory-load.c:318
+#: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Egenskaben '%s' har ingen værdi"
 
-#: ../activation-server/object-directory-load.c:601
+#: ../activation-server/object-directory-load.c:627
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Kunne ikke fortolke ugyldig udformet XML-dokument %s"
 
-#: ../activation-server/object-directory-load.c:654
+#: ../activation-server/object-directory-load.c:692
 #, c-format
 msgid "Trying dir %s"
 msgstr "Forsøger mappe %s"
@@ -149,23 +150,34 @@ msgstr "Det mislykkedes at læse fra underproces: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF fra underproces\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:337
+#: ../bonobo-activation/bonobo-activation-fork-server.c:343
 msgid "Couldn't spawn a new process"
 msgstr "Kunne ikke oprette en ny proces"
 
-#: ../bonobo-activation/bonobo-activation-init.c:257
+#: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "Fildeskriptor som IOR skal skrives til"
 
-#: ../bonobo-activation/bonobo-activation-init.c:259
+#: ../bonobo-activation/bonobo-activation-init.c:353
+#: ../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "IID som skal aktiveres"
 
-#: ../bonobo-activation/bonobo-activation-init.c:261
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "Forhindr registrering af tjener hos OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Bonobo-aktivering"
+
+#: ../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Vis bonobo-aktiveringstilvalg"
+
+#: ../bonobo-activation/bonobo-activation-init.c:471
 msgid "Bonobo activation options"
 msgstr "Bonobo-aktiveringstilvalg"
 
@@ -431,20 +443,20 @@ msgstr "Kunne ikke oprette en instans af eksempelekkokomponenten"
 msgid "An exception occured '%s'"
 msgstr "En undtagelse opstod '%s'"
 
-#: ../utils/bonobo-activation-sysconf.c:62
+#: ../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
 msgstr "Kunne ikke gemme konfigurationsfil.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:63
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Sikr dig venligst at du har rettigheder til at skrive til '%s'.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:66
+#: ../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
 msgstr "Skrev konfigurationsfil.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:80
+#: ../utils/bonobo-activation-sysconf.c:101
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -453,37 +465,37 @@ msgstr ""
 "konfigurationsfil er:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:118
+#: ../utils/bonobo-activation-sysconf.c:139
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s er allerede i konfigurationsfil\n"
 
-#: ../utils/bonobo-activation-sysconf.c:138
+#: ../utils/bonobo-activation-sysconf.c:159
 msgid "there is not a properly structured configuration file\n"
 msgstr "der er ikke en korrekt struktureret konfigurationsfil\n"
 
-#: ../utils/bonobo-activation-sysconf.c:201
+#: ../utils/bonobo-activation-sysconf.c:222
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo-aktiverings-konfigurationsfilen indeholder:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:233
+#: ../utils/bonobo-activation-sysconf.c:254
 msgid "Directory to remove from configuration file"
 msgstr "Mappe som skal fjernes fra konfigurationsfil"
 
-#: ../utils/bonobo-activation-sysconf.c:233
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "directory path"
 msgstr "sti til mappe"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "Directory to add to configuration file"
 msgstr "Mappe som skal tilføjes til konfigurationsfil"
 
-#: ../utils/bonobo-activation-sysconf.c:239
+#: ../utils/bonobo-activation-sysconf.c:260
 msgid "Display directories in configuration file"
 msgstr "Vis mapper i konfigurationsfil"
 
-#: ../utils/bonobo-activation-sysconf.c:242
+#: ../utils/bonobo-activation-sysconf.c:263
 msgid "Display path to configuration file"
 msgstr "Vis sti til konfigurationsfil"
 
