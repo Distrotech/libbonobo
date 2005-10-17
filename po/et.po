@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Libbonobo 2.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-01 06:01+0200\n"
-"PO-Revision-Date: 2005-10-01 13:07+0300\n"
+"POT-Creation-Date: 2005-10-15 12:39+0200\n"
+"PO-Revision-Date: 2005-10-15 19:53+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -27,33 +27,32 @@ msgstr ""
 msgid "Not a valid Activation ID"
 msgstr "Vigane aktiveerimise ID"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:68
 msgid "Directory to read .server files from"
 msgstr "Kataloog, millest lugeda .server faile"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:68
 msgid "DIRECTORY"
 msgstr "KATALOOG"
 
-#: ../activation-server/activation-server-main.c:87
+#: ../activation-server/activation-server-main.c:71
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 
-#: ../activation-server/activation-server-main.c:91
+#: ../activation-server/activation-server-main.c:75
 msgid "File descriptor to write IOR to"
 msgstr ""
 
-#: ../activation-server/activation-server-main.c:91
-#: ../bonobo-activation/bonobo-activation-init.c:351
-#: ../bonobo-activation/bonobo-activation-init.c:361
+#: ../activation-server/activation-server-main.c:75
+#: ../bonobo-activation/bonobo-activation-init.c:200
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:99
+#: ../activation-server/activation-server-main.c:83
 msgid "Query expression to evaluate"
 msgstr ""
 
-#: ../activation-server/activation-server-main.c:99
+#: ../activation-server/activation-server-main.c:83
 msgid "EXPRESSION"
 msgstr "AVALDIS"
 
@@ -73,12 +72,12 @@ msgstr "Teavitusteenus"
 msgid "Notification service for activation"
 msgstr "Teavitusteenus aktiveerimise jaoks"
 
-#: ../activation-server/object-directory-activate.c:186
+#: ../activation-server/object-directory-activate.c:187
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
 "Shlib objektide aktiveerimist kaugprotsessides pole veel võimalik teostada"
 
-#: ../activation-server/object-directory-config-file.c:65
+#: ../activation-server/object-directory-config-file.c:47
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
@@ -94,87 +93,96 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1154
+#: ../activation-server/object-directory-corba.c:1152
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr ""
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:94
 msgid "a NULL iid is not valid"
 msgstr "NULL iid pole lubatud"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:98
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s on NULL-tüüpi"
 
-#: ../activation-server/object-directory-load.c:105
+#: ../activation-server/object-directory-load.c:102
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s on NULL-asukohaga"
 
-#: ../activation-server/object-directory-load.c:114
+#: ../activation-server/object-directory-load.c:111
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "lubamatu märk '%c' iid'is '%s'"
 
-#: ../activation-server/object-directory-load.c:342
+#: ../activation-server/object-directory-load.c:305
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Omadusel '%s' puudub väärtus"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:588
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Vigaselt vormindatud XML-dokumenti %s pole võimalik analüüsida"
 
-#: ../activation-server/object-directory-load.c:692
+#: ../activation-server/object-directory-load.c:641
 #, c-format
 msgid "Trying dir %s"
 msgstr "Kataloogi %s proovimine"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:100
+#: ../bonobo-activation/bonobo-activation-fork-server.c:102
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Tekkis tundmatu tõrge, lapsprotsess ei väljastanud veateadet"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:177
+#: ../bonobo-activation/bonobo-activation-fork-server.c:174
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Tõrge lapsprotsessilt andmete lugemisel: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:184
-msgid "EOF from child process\n"
-msgstr "lapsprotsessilt tuli faililõputunnus\n"
+#: ../bonobo-activation/bonobo-activation-fork-server.c:297
+msgid "Couldn't fork a new process"
+msgstr "Uut protsessi pole võimalik forkida"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:343
-msgid "Couldn't spawn a new process"
-msgstr "Uut protsessi pole võimalik luua"
+#: ../bonobo-activation/bonobo-activation-fork-server.c:318
+#, c-format
+msgid "Child received signal %u (%s)"
+msgstr "Lapsprotsess võttis vastu signaali %u (%s)"
 
-#: ../bonobo-activation/bonobo-activation-init.c:351
-#: ../bonobo-activation/bonobo-activation-init.c:361
+#: ../bonobo-activation/bonobo-activation-fork-server.c:323
+#, c-format
+msgid "Unknown non-exit error (status is %u)"
+msgstr ""
+
+#: ../bonobo-activation/bonobo-activation-fork-server.c:404
+#, c-format
+msgid "bonobo-activation failed to set process group of %s: %s\n"
+msgstr ""
+
+#: ../bonobo-activation/bonobo-activation-fork-server.c:416
+#, c-format
+msgid "Failed to execute %s: %d (%s)\n"
+msgstr "Tõrge %s käivitamisel: %d (%s)\n"
+
+#: ../bonobo-activation/bonobo-activation-get-language-list.c:133
+msgid "Too many alias levels for a locale, may indicate a loop"
+msgstr ""
+
+#: ../bonobo-activation/bonobo-activation-init.c:200
 msgid "File descriptor to print IOR on"
 msgstr ""
 
-#: ../bonobo-activation/bonobo-activation-init.c:353
-#: ../bonobo-activation/bonobo-activation-init.c:363
+#: ../bonobo-activation/bonobo-activation-init.c:202
 msgid "IID to activate"
 msgstr "Aktiveeritav IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:204
 msgid "Prevent registering of server with OAF"
 msgstr ""
 "Serveri registreerimise keelamine objektide aktiveerimisraamistikuga (OAF)"
 
-#: ../bonobo-activation/bonobo-activation-init.c:375
-msgid "Bonobo Activation"
-msgstr "Bonobo aktiveerimine"
-
-#: ../bonobo-activation/bonobo-activation-init.c:376
-msgid "Show Bonobo Activation options"
-msgstr "Bonobo aktiveerimisvõtmete näitamine"
-
-#: ../bonobo-activation/bonobo-activation-init.c:471
+#: ../bonobo-activation/bonobo-activation-init.c:290
 msgid "Bonobo activation options"
 msgstr "Bonobo aktiveerimisvõtmed"
 
@@ -435,20 +443,20 @@ msgstr "Näidiskomponendi (kaja) instantsi pole võimalik luua"
 msgid "An exception occured '%s'"
 msgstr ""
 
-#: ../utils/bonobo-activation-sysconf.c:83
+#: ../utils/bonobo-activation-sysconf.c:62
 msgid "Could not save configuration file.\n"
 msgstr "Seadistusfaili pole võimalik salvestada.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:84
+#: ../utils/bonobo-activation-sysconf.c:63
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Palun veendu, et sul on õigused '%s' kirjutamiseks.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:87
+#: ../utils/bonobo-activation-sysconf.c:66
 msgid "Successfully wrote configuration file.\n"
 msgstr "Seadistusfail kirjutati edukalt.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:101
+#: ../utils/bonobo-activation-sysconf.c:80
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -457,36 +465,45 @@ msgstr ""
 "seadistusfail on:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:139
+#: ../utils/bonobo-activation-sysconf.c:118
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s on juba seadistusfailis\n"
 
-#: ../utils/bonobo-activation-sysconf.c:159
+#: ../utils/bonobo-activation-sysconf.c:138
 msgid "there is not a properly structured configuration file\n"
 msgstr "puudub korralikult struktureeritud seadistusfail\n"
 
-#: ../utils/bonobo-activation-sysconf.c:222
+#: ../utils/bonobo-activation-sysconf.c:201
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo-activation seadistusfail sisaldab:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:233
 msgid "Directory to remove from configuration file"
 msgstr "Seadistusfailist eemaldatav kataloog"
 
-#: ../utils/bonobo-activation-sysconf.c:254
-#: ../utils/bonobo-activation-sysconf.c:257
+#: ../utils/bonobo-activation-sysconf.c:233
+#: ../utils/bonobo-activation-sysconf.c:236
 msgid "directory path"
 msgstr "kataloogi rada"
 
-#: ../utils/bonobo-activation-sysconf.c:257
+#: ../utils/bonobo-activation-sysconf.c:236
 msgid "Directory to add to configuration file"
 msgstr "Seadistusfaili lisatav kataloog"
 
-#: ../utils/bonobo-activation-sysconf.c:260
+#: ../utils/bonobo-activation-sysconf.c:239
 msgid "Display directories in configuration file"
 msgstr "Kataloogide kuvamine seadistusfailides"
 
-#: ../utils/bonobo-activation-sysconf.c:263
+#: ../utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Seadistusfaili raja kuvamine"
+
+#~ msgid "EOF from child process\n"
+#~ msgstr "lapsprotsessilt tuli faililõputunnus\n"
+
+#~ msgid "Bonobo Activation"
+#~ msgstr "Bonobo aktiveerimine"
+
+#~ msgid "Show Bonobo Activation options"
+#~ msgstr "Bonobo aktiveerimisvõtmete näitamine"
