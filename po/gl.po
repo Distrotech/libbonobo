@@ -1,29 +1,31 @@
+# translation of gl.po to Galego
 # Galician translation of libbonobo.
 # Copyright (C) 2001-2004 Jesús Bravo Álvarez
 # Copyright (C) 2001-2002 Manuel A. Fernández Montecelo
-# Jesús Bravo Álvarez <suso@trasno.net>, 2001-2004
-# Manuel A. Fernández Montecelo <manuel@sindominio.net>, 2001-2002.
 #
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en http://www.trasno.net
+# Jesús Bravo Álvarez <suso@trasno.net>, 2001-2004.
+# Manuel A. Fernández Montecelo <manuel@sindominio.net>, 2001-2002.
+# Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo\n"
+"Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-03 21:18+0200\n"
-"PO-Revision-Date: 2005-09-03 21:22+0200\n"
-"Last-Translator: Jesús Bravo Álvarez <suso@trasno.net>\n"
-"Language-Team: Galician <proxecto@trasno.net>\n"
+"POT-Creation-Date: 2005-10-20 00:37+0200\n"
+"PO-Revision-Date: 2005-10-20 00:37+0200\n"
+"Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
+"Language-Team: Galego\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1)"
+"Plural-Forms: nplurals=2; plural=(n!=1)\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
-msgstr ""
-"Non foi posible determinar en que proceso fillo estaba listado o servidor"
+msgstr "Non foi posible determinar en que proceso fillo estaba listado o servidor"
 
 #: ../activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
@@ -39,8 +41,7 @@ msgstr "DIRECTORIO"
 
 #: ../activation-server/activation-server-main.c:87
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr ""
-"Servir como un ActivationContext (por defecto é só como un ObjectDirectory)"
+msgstr "Servir como un ActivationContext (por defecto é só como un ObjectDirectory)"
 
 #: ../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
@@ -48,6 +49,7 @@ msgstr "Descritor do ficheiro onde escribir o IOR"
 
 #: ../activation-server/activation-server-main.c:91
 #: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "DF"
 
@@ -77,8 +79,7 @@ msgstr "Servizo de notificación para activación"
 
 #: ../activation-server/object-directory-activate.c:186
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr ""
-"Aínda non está soportada a activación de obxectos shlib nun proceso remoto"
+msgstr "Aínda non está soportada a activación de obxectos shlib nun proceso remoto"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
@@ -101,36 +102,36 @@ msgstr ""
 msgid "Race condition activating server '%s'"
 msgstr "Condición de carreira ao activar o servidor '%s'"
 
-#: ../activation-server/object-directory-load.c:93
+#: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
 msgstr "un iid NULO non é válido"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "o iid %s ten un tipo NULO"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "o iid %s ten unha localización NULA"
 
-#: ../activation-server/object-directory-load.c:110
+#: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "carácter '%c' non válido no iid '%s'"
 
-#: ../activation-server/object-directory-load.c:318
+#: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "A propiedade '%s' non ten ningún valor"
 
-#: ../activation-server/object-directory-load.c:601
+#: ../activation-server/object-directory-load.c:627
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Non se puido analizar o documento XML mal formado %s"
 
-#: ../activation-server/object-directory-load.c:666
+#: ../activation-server/object-directory-load.c:692
 #, c-format
 msgid "Trying dir %s"
 msgstr "Probando o directorio %s"
@@ -155,18 +156,29 @@ msgid "Couldn't spawn a new process"
 msgstr "Non se pode iniciar un proceso novo"
 
 #: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "Descritor de ficheiro onde que escribir o IOR"
 
 #: ../bonobo-activation/bonobo-activation-init.c:353
+#: ../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "IID para activar"
 
 #: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "Evitar o rexistro do servidor con OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:446
+#: ../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Activación de Bonobo"
+
+#: ../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Amosar opcións de activación de Bonobo"
+
+#: ../bonobo-activation/bonobo-activation-init.c:471
 msgid "Bonobo activation options"
 msgstr "Opcións de activación de Bonobo"
 
@@ -483,18 +495,3 @@ msgstr "Mostrar os directorios do ficheiro de configuración"
 msgid "Display path to configuration file"
 msgstr "Mostrar o camiño ao ficheiro de configuración"
 
-#~ msgid "Child received signal %u (%s)"
-#~ msgstr "O fillo recibiu o sinal %u (%s)"
-
-#~ msgid "Unknown non-exit error (status is %u)"
-#~ msgstr "Erro non de saída descoñecido (o estado é %u)"
-
-#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
-#~ msgstr ""
-#~ "bonobo-activation fallou ao establecer o grupo de proceso de %s: %s\n"
-
-#~ msgid "Failed to execute %s: %d (%s)\n"
-#~ msgstr "Falla ao executar %s: %d (%s)\n"
-
-#~ msgid "Too many alias levels for a locale, may indicate a loop"
-#~ msgstr "Demasiados niveis de alias para un locale, pode haber un ciclo"
