@@ -498,12 +498,3 @@ msgstr "Kataloogide kuvamine seadistusfailides"
 #: ../utils/bonobo-activation-sysconf.c:242
 msgid "Display path to configuration file"
 msgstr "Seadistusfaili raja kuvamine"
-
-#~ msgid "EOF from child process\n"
-#~ msgstr "lapsprotsessilt tuli faililõputunnus\n"
-
-#~ msgid "Bonobo Activation"
-#~ msgstr "Bonobo aktiveerimine"
-
-#~ msgid "Show Bonobo Activation options"
-#~ msgstr "Bonobo aktiveerimisvõtmete näitamine"
