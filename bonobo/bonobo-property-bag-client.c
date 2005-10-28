@@ -341,12 +341,12 @@ c_type bonobo_pbclient_get_##name##_with_default (Bonobo_PropertyBag  bag,    \
  * Returns: the value contained in the database, or zero on error.
  */
 MAKE_GET_SIMPLE (gchar *, NULL, string, TC_CORBA_string, 
-		 g_strdup (*(char **)value->_value));
+		 g_strdup (*(char **)value->_value))
 
 MAKE_GET_DEFAULT (gchar *, NULL, string, TC_CORBA_string, 
-		  g_strdup (*(char **)value->_value));
+		  g_strdup (*(char **)value->_value))
 
-MAKE_GET_WITH_DEFAULT (gchar *, string, g_strdup);
+MAKE_GET_WITH_DEFAULT (gchar *, string, g_strdup)
 
 /**
  * bonobo_pbclient_get_short:
@@ -358,11 +358,11 @@ MAKE_GET_WITH_DEFAULT (gchar *, string, g_strdup);
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gint16, 0, short, TC_CORBA_short, (*(gint16 *)value->_value));
+MAKE_GET_SIMPLE (gint16, 0, short, TC_CORBA_short, (*(gint16 *)value->_value))
 
-MAKE_GET_DEFAULT (gint16, 0, short, TC_CORBA_short, (*(gint16 *)value->_value));
+MAKE_GET_DEFAULT (gint16, 0, short, TC_CORBA_short, (*(gint16 *)value->_value))
 
-MAKE_GET_WITH_DEFAULT (gint16, short, );
+MAKE_GET_WITH_DEFAULT (gint16, short, )
 
 /**
  * bonobo_pbclient_get_ushort:
@@ -374,11 +374,11 @@ MAKE_GET_WITH_DEFAULT (gint16, short, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (guint16, 0, ushort, TC_CORBA_unsigned_short, (*(guint16 *)value->_value));
+MAKE_GET_SIMPLE (guint16, 0, ushort, TC_CORBA_unsigned_short, (*(guint16 *)value->_value))
 
-MAKE_GET_DEFAULT (guint16, 0, ushort, TC_CORBA_unsigned_short, (*(guint16 *)value->_value));
+MAKE_GET_DEFAULT (guint16, 0, ushort, TC_CORBA_unsigned_short, (*(guint16 *)value->_value))
 
-MAKE_GET_WITH_DEFAULT (guint16, ushort, );
+MAKE_GET_WITH_DEFAULT (guint16, ushort, )
 
 /**
  * bonobo_pbclient_get_long:
@@ -390,11 +390,11 @@ MAKE_GET_WITH_DEFAULT (guint16, ushort, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gint32, 0, long, TC_CORBA_long, (*(gint32 *)value->_value));
+MAKE_GET_SIMPLE (gint32, 0, long, TC_CORBA_long, (*(gint32 *)value->_value))
 
-MAKE_GET_DEFAULT (gint32, 0, long, TC_CORBA_long, (*(gint32 *)value->_value));
+MAKE_GET_DEFAULT (gint32, 0, long, TC_CORBA_long, (*(gint32 *)value->_value))
 
-MAKE_GET_WITH_DEFAULT (gint32, long, );
+MAKE_GET_WITH_DEFAULT (gint32, long, )
 
 /**
  * bonobo_pbclient_get_ulong:
@@ -406,11 +406,11 @@ MAKE_GET_WITH_DEFAULT (gint32, long, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (guint32, 0, ulong, TC_CORBA_unsigned_long, (*(guint32 *)value->_value));
+MAKE_GET_SIMPLE (guint32, 0, ulong, TC_CORBA_unsigned_long, (*(guint32 *)value->_value))
 
-MAKE_GET_DEFAULT (guint32, 0, ulong, TC_CORBA_unsigned_long, (*(guint32 *)value->_value));
+MAKE_GET_DEFAULT (guint32, 0, ulong, TC_CORBA_unsigned_long, (*(guint32 *)value->_value))
 
-MAKE_GET_WITH_DEFAULT (guint32, ulong, );
+MAKE_GET_WITH_DEFAULT (guint32, ulong, )
 
 /**
  * bonobo_pbclient_get_float:
@@ -422,11 +422,11 @@ MAKE_GET_WITH_DEFAULT (guint32, ulong, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gfloat, 0.0, float, TC_CORBA_float, (*(gfloat *)value->_value));
+MAKE_GET_SIMPLE (gfloat, 0.0, float, TC_CORBA_float, (*(gfloat *)value->_value))
 
-MAKE_GET_DEFAULT (gfloat, 0.0, float, TC_CORBA_float, (*(gfloat *)value->_value));
+MAKE_GET_DEFAULT (gfloat, 0.0, float, TC_CORBA_float, (*(gfloat *)value->_value))
 
-MAKE_GET_WITH_DEFAULT (gfloat, float, );
+MAKE_GET_WITH_DEFAULT (gfloat, float, )
 
 /**
  * bonobo_pbclient_get_double:
@@ -438,11 +438,11 @@ MAKE_GET_WITH_DEFAULT (gfloat, float, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gdouble, 0.0, double, TC_CORBA_double, (*(gdouble *)value->_value));
+MAKE_GET_SIMPLE (gdouble, 0.0, double, TC_CORBA_double, (*(gdouble *)value->_value))
 
-MAKE_GET_DEFAULT (gdouble, 0.0, double, TC_CORBA_double,(*(gdouble *)value->_value));
+MAKE_GET_DEFAULT (gdouble, 0.0, double, TC_CORBA_double,(*(gdouble *)value->_value))
 
-MAKE_GET_WITH_DEFAULT (gdouble, double, );
+MAKE_GET_WITH_DEFAULT (gdouble, double, )
 
 /**
  * bonobo_pbclient_get_char:
@@ -454,11 +454,11 @@ MAKE_GET_WITH_DEFAULT (gdouble, double, );
  *
  * Returns: the value contained in the database.
  */
-MAKE_GET_SIMPLE (gchar, '\0', char, TC_CORBA_char, (*(gchar *)value->_value));
+MAKE_GET_SIMPLE (gchar, '\0', char, TC_CORBA_char, (*(gchar *)value->_value))
 
-MAKE_GET_DEFAULT (gchar, '\0', char, TC_CORBA_char, (*(gchar *)value->_value));
+MAKE_GET_DEFAULT (gchar, '\0', char, TC_CORBA_char, (*(gchar *)value->_value))
 
-MAKE_GET_WITH_DEFAULT (gchar, char, );
+MAKE_GET_WITH_DEFAULT (gchar, char, )
 
 /**
  * bonobo_pbclient_get_boolean:
@@ -471,12 +471,12 @@ MAKE_GET_WITH_DEFAULT (gchar, char, );
  * Returns: the value contained in the database.
  */
 MAKE_GET_SIMPLE (gboolean, FALSE, boolean, TC_CORBA_boolean, 
-		 (*(CORBA_boolean *)value->_value));
+		 (*(CORBA_boolean *)value->_value))
 
 MAKE_GET_DEFAULT (gboolean, FALSE, boolean, TC_CORBA_boolean, 
-		  (*(CORBA_boolean *)value->_value));
+		  (*(CORBA_boolean *)value->_value))
 
-MAKE_GET_WITH_DEFAULT (gboolean, boolean, );
+MAKE_GET_WITH_DEFAULT (gboolean, boolean, )
 
 /**
  * bonobo_pbclient_get_value:

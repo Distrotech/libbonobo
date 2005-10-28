@@ -188,7 +188,7 @@ bonobo_shlib_factory_init (GObject *object)
  */
 BONOBO_TYPE_FUNC (BonoboShlibFactory, 
 		  BONOBO_TYPE_GENERIC_FACTORY,
-		  bonobo_shlib_factory);
+		  bonobo_shlib_factory)
 
 /**
  * bonobo_shlib_factory_std:

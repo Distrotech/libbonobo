@@ -825,8 +825,6 @@ resolve_async_cb (CORBA_Object          object,
 	if (BONOBO_EX (ev))
 		ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
 	else {
-		Bonobo_Unknown object;
-
 		ORBit_small_demarshal_async (aqe, &object, NULL, ev);
 
 		if (BONOBO_EX (ev))

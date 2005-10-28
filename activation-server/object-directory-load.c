@@ -609,6 +609,9 @@ od_load_context (const char *filename,
         /* Magic to make entities work as expected */
 	ctxt->replaceEntities = TRUE;
 
+	if (ctxt->myDoc)
+		xmlFreeDoc (ctxt->myDoc);
+
         xmlParseDocument (ctxt);
 
         if (ctxt->wellFormed)

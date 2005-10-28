@@ -1,3 +1,17 @@
+2005-10-28  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/object-directory-load.c: (od_load_context):
+	* bonobo/bonobo-item-container.c:
+	(impl_Bonobo_ItemContainer_enumObjects):
+	* bonobo/bonobo-moniker-simple.c:
+	* bonobo/bonobo-moniker-util.c: (resolve_async_cb):
+	* bonobo/bonobo-object.c: (bonobo_object_query_local_interface):
+	* bonobo/bonobo-property-bag-client.c:
+	* bonobo/bonobo-shlib-factory.c:
+	* bonobo/bonobo-types.c: (corba_object_proxy_value_free),
+	(corba_object_proxy_value_copy), (corba_object_proxy_lcopy_value):
+	* monikers/bonobo-moniker-std.c: Merge cleanups from stable.
+
 2005-09-29  Christian Persch  <chpe@cvs.gnome.org>
 
 	* configure.in: Bump version to 2.13.0, and require glib 2.8.0.

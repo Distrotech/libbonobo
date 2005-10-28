@@ -621,12 +621,9 @@ bonobo_object_query_local_interface (BonoboObject *object,
 				     const char   *repo_id)
 {
 	GList             *l;
-	CORBA_Object       corba_retval = CORBA_OBJECT_NIL;
 	CORBA_Environment  ev;
 
 	g_return_val_if_fail (BONOBO_IS_OBJECT (object), NULL);
-
-	corba_retval = CORBA_OBJECT_NIL;
 
 	CORBA_exception_init (&ev);
 

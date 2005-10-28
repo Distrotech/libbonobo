@@ -46,11 +46,8 @@ static void
 corba_object_proxy_value_free (GValue *value)
 {
 	if (value->data[0].v_pointer) {
-		CorbaObjectProxy *proxy;
 		CORBA_Environment ev;
 
-		proxy = corba_object_proxy_get (G_VALUE_TYPE (value));
-		
 		CORBA_exception_init (&ev);
 		CORBA_Object_release (value->data[0].v_pointer, &ev);
 		CORBA_exception_free (&ev);
@@ -62,10 +59,6 @@ corba_object_proxy_value_copy (const GValue *src_value,
 			       GValue       *dest_value)
 {
 	if (src_value->data[0].v_pointer) {
-		CorbaObjectProxy *proxy;
-
-		proxy = corba_object_proxy_get (G_VALUE_TYPE (src_value));
-		
 		dest_value->data[0].v_pointer = CORBA_Object_duplicate (
 			src_value->data[0].v_pointer, NULL);
 	} else
@@ -123,10 +116,6 @@ corba_object_proxy_lcopy_value (const GValue *value,
 	else if (collect_flags & G_VALUE_NOCOPY_CONTENTS)
 		*corba_p = value->data[0].v_pointer;
 	else {
-		CorbaObjectProxy *proxy;
-
-		proxy = corba_object_proxy_get (G_VALUE_TYPE (value));;
-
 		*corba_p = CORBA_Object_duplicate (value->data[0].v_pointer, NULL);
 	}
 
@@ -192,8 +181,8 @@ bonobo_ ## name ## _get_type (void)						\
 	return type;								\
 }
 
-BONOBO_TYPE_CORBA_OBJECT_IMPL (corba_object, "CorbaObject", TC_CORBA_Object, FALSE);
-BONOBO_TYPE_CORBA_OBJECT_IMPL (unknown, "BonoboUnknown", TC_Bonobo_Unknown, TRUE);
+BONOBO_TYPE_CORBA_OBJECT_IMPL (corba_object, "CorbaObject", TC_CORBA_Object, FALSE)
+BONOBO_TYPE_CORBA_OBJECT_IMPL (unknown, "BonoboUnknown", TC_Bonobo_Unknown, TRUE)
 
 static gpointer
 corba_any_copy (gpointer any)
