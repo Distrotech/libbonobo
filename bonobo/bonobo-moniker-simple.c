@@ -135,7 +135,7 @@ bonobo_moniker_simple_init (GObject *object)
 
 BONOBO_TYPE_FUNC (BonoboMonikerSimple, 
 		  bonobo_moniker_get_type (),
-		  bonobo_moniker_simple);
+		  bonobo_moniker_simple)
 
 /**
  * bonobo_moniker_simple_construct:

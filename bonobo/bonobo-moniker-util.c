@@ -825,14 +825,14 @@ resolve_async_cb (CORBA_Object          object,
 	if (BONOBO_EX (ev))
 		ctx->cb (CORBA_OBJECT_NIL, ev, ctx->user_data);
 	else {
-		Bonobo_Unknown object;
+		Bonobo_Unknown retval;
 
-		ORBit_small_demarshal_async (aqe, &object, NULL, ev);
+		ORBit_small_demarshal_async (aqe, &retval, NULL, ev);
 
 		if (BONOBO_EX (ev))
-			object = CORBA_OBJECT_NIL;
+			retval = CORBA_OBJECT_NIL;
 
-		ctx->cb (object, ev, ctx->user_data);
+		ctx->cb (retval, ev, ctx->user_data);
 	}
 
 	bonobo_object_release_unref (ctx->moniker, ev);

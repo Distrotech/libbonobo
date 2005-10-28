@@ -101,7 +101,6 @@ impl_Bonobo_ItemContainer_enumObjects (PortableServer_Servant servant,
 	
 	list->_buffer = CORBA_sequence_CORBA_string_allocbuf (list->_length);
 	if (!list->_buffer) {
-		GSList *l;
 		CORBA_free (list);
 		for (l = objects; l; l = l->next)
 			CORBA_free (l->data);
