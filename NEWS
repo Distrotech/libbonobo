@@ -1,3 +1,35 @@
+libbonobo 2.13.0
+
+	* Rework the end-user installation location independence code for Win32 (Tor Lillqvist)
+	* Don't use deprecated functions (Kjartan)
+	* Fix build on solaris 10 with sun studio 10 compiler [#315145]
+	* Add support for GOption argument parsing in libgnome (Pawel Sliwowski, chpe) [#307312]
+	* Merge cleanups from stable (Kjartan)
+	* Translation updates:
+		* Mahay Alam Khan (bn)
+		* Jordi Mallach (ca)
+		* Miloslav Trmac (cs)
+		* Martin Willemoes Hansen (da)
+		* Adam Weinberger (en_CA)
+		* Francisco Javier F. Serrador (es)
+		* Ivar Smolin (et)
+		* Iñaki Larrañaga Murgoitio (eu)
+		* Christophe Merlet (RedFox) (fr)
+		* Ignacio Casal Quinteiro (gl)
+		* Ankit Patel (gu)
+		* Gabor Kelemen (hu)
+		* Mohammad DAMT (id)
+		* Alessio Frusciante (it)
+		* Takeshi AIHANA (ja)
+		* Changwoo Ryu (ko)
+		* Erdal Ronahi (ku)
+		* Huib Kleinhout (nl)
+		* Leonid Kanter (ru)
+		* Marcel Telka (sk)
+		* Christian Rose (sv)
+		* Baris Cicek (tr)
+		* Clytie Siddall (vi)
+
 libbonobo 2.10.1
 
 	* Release this so we have coherency after having released
