@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-29 08:46+0900\n"
-"PO-Revision-Date: 2005-08-29 08:44+0900\n"
+"POT-Creation-Date: 2005-11-16 23:14+0900\n"
+"PO-Revision-Date: 2005-11-16 23:13+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -44,6 +44,7 @@ msgstr "IOR を書き込むファイル・ディスクリプタ"
 
 #: ../activation-server/activation-server-main.c:91
 #: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "FD"
 
@@ -97,36 +98,36 @@ msgstr ""
 msgid "Race condition activating server '%s'"
 msgstr "サーバ '%s' を活性化する際に競合発生"
 
-#: ../activation-server/object-directory-load.c:93
+#: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
 msgstr "NULL の iid は有効ではありません"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s の型が NULL です"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s の場所が NULL です"
 
-#: ../activation-server/object-directory-load.c:110
+#: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "不正な文字 '%c' が iid '%s' の中にあります"
 
-#: ../activation-server/object-directory-load.c:318
+#: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "プロパティ '%s' には値がありません"
 
-#: ../activation-server/object-directory-load.c:601
+#: ../activation-server/object-directory-load.c:630
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "おかしな型式の XML ドキュメント %s を解析できませんでした"
 
-#: ../activation-server/object-directory-load.c:666
+#: ../activation-server/object-directory-load.c:695
 #, c-format
 msgid "Trying dir %s"
 msgstr "ディレクトリ %s の試行中"
@@ -150,18 +151,29 @@ msgid "Couldn't spawn a new process"
 msgstr "新規プロセスを生成できませんでした"
 
 #: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "IOR の出力先のファイル・ディスクリプタ"
 
 #: ../bonobo-activation/bonobo-activation-init.c:353
+#: ../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "IID の活性化"
 
 #: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "OAF でサーバ登録の禁止"
 
-#: ../bonobo-activation/bonobo-activation-init.c:446
+#: ../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Bonobo 活性化"
+
+#: ../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Bonobo 活性化オプションを表示する"
+
+#: ../bonobo-activation/bonobo-activation-init.c:471
 msgid "Bonobo activation options"
 msgstr "Bonobo 活性化オプション"
 
@@ -194,11 +206,11 @@ msgstr "名称"
 msgid "Application unique name"
 msgstr "アプリケーション固有の名前"
 
-#: ../bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "Custom CORBA POA"
 msgstr "カスタム CORBA POA"
 
