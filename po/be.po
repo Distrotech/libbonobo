@@ -2,78 +2,80 @@
 # translation of libbonobo.HEAD.be.po to belarusian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER
-# Vital Khilko <dojlid@mova.org>, 2003
+# Vital Khilko <dojlid@mova.org>, 2003, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.be\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-12 07:28+0100\n"
-"PO-Revision-Date: 2005-02-14 10:56+0200\n"
+"POT-Creation-Date: 2005-11-19 14:48+0100\n"
+"PO-Revision-Date: 2005-11-19 19:44+0200\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit"
 
-#: activation-server/activation-context-corba.c:470
+#: ../activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
-msgstr "Немагчыма адшукаць чый нашчадак быў пералічаны у"
+msgstr "Немагчыма адшукаць чый нашчадак быў пералічаны"
 
-#: activation-server/activation-context-corba.c:748
+#: ../activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
-msgstr "Нерэчаісны ID актывацыі"
+msgstr "Недапушчальны ID актывацыі"
 
-#: activation-server/activation-server-main.c:68
+#: ../activation-server/activation-server-main.c:84
 msgid "Directory to read .server files from"
-msgstr "Тэчка для чытаньня файлаў паслужніку з"
+msgstr "Каталёг для чытаньня файлаў .server з"
 
-#: activation-server/activation-server-main.c:68
+#: ../activation-server/activation-server-main.c:84
 msgid "DIRECTORY"
 msgstr "КАТАЛЁГ"
 
-#: activation-server/activation-server-main.c:71
+#: ../activation-server/activation-server-main.c:87
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "Абслугоўваць як ActivationContext (дапомна толькі як ObjectDirectory)"
+msgstr "Абслугоўваць як ActivationContext (прадвызначанае толькі як ObjectDirectory)"
 
-#: activation-server/activation-server-main.c:75
+#: ../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
-msgstr "Дэскрыптар файлу для запісу IOR у"
+msgstr "Дэскрыптар файла для запісу IOR у"
 
-#: activation-server/activation-server-main.c:75
-#: bonobo-activation/bonobo-activation-init.c:200
+#: ../activation-server/activation-server-main.c:91
+#: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "FD"
 
-#: activation-server/activation-server-main.c:83
+#: ../activation-server/activation-server-main.c:99
 msgid "Query expression to evaluate"
-msgstr "Выраз-запыт для падліку"
+msgstr "Выраз запыту для ацэнкі"
 
-#: activation-server/activation-server-main.c:83
+#: ../activation-server/activation-server-main.c:99
 msgid "EXPRESSION"
 msgstr "ВЫРАЗ"
 
-#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
 msgstr "Паслуга CORBA CosNaming."
 
-#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
 msgstr "Паслуга назваў"
 
-#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
 msgid "Notification service"
 msgstr "Паслуга паведамленьняў"
 
-#: activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
 msgstr "Паслуга паведамленьняў для актывацыі"
 
-#: activation-server/object-directory-activate.c:187
+#: ../activation-server/object-directory-activate.c:186
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Мы ўсё яшчэ не падтрымліваем актывацыю аб'ектаў shlib у аддаленых працэсах"
+msgstr ""
+"Мы ўсё яшчэ не падтрымліваем актывацыю аб'ектаў shlib у аддаленых працэсах"
 
-#: activation-server/object-directory-config-file.c:47
+#: ../activation-server/object-directory-config-file.c:65
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
@@ -89,373 +91,362 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: activation-server/object-directory-corba.c:1152
+#: ../activation-server/object-directory-corba.c:1154
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Актывацыя паслужніку '%s' ў стане гонкі"
 
-#: activation-server/object-directory-load.c:94
+#: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
-msgstr "нерэчаісны NULL iid"
+msgstr "NULL iid не зьяўляецца дапушчальным"
 
-#: activation-server/object-directory-load.c:98
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s мае тып NULL"
 
-#: activation-server/object-directory-load.c:102
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s мае NULL разьмяшчэньне"
 
-#: activation-server/object-directory-load.c:111
+#: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "нерэчаісны сымбаль '%c' у iid '%s'"
+msgstr "несапраўдны сымбаль '%c' у iid '%s'"
 
-#: activation-server/object-directory-load.c:305
+#: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Уласьцівасьць '%s' ня мае значэньня"
 
-#: activation-server/object-directory-load.c:588
+#: ../activation-server/object-directory-load.c:630
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr "Немагчыма разабраць кепска сфармаваны XML дакумэнт %s"
+msgstr "Немагчыма разабраць кепска сфармаваны XML-дакумэнт %s"
 
-#: activation-server/object-directory-load.c:641
+#: ../activation-server/object-directory-load.c:695
 #, c-format
 msgid "Trying dir %s"
 msgstr "Спроба каталёгу %s"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:102
+#: ../bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
 "Працэс-нашчадак не рабіў паведамленьня аб памылцы; адбылася невядомая "
-"невыправімая памылка"
+"фатальная памылка"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:174
+#: ../bonobo-activation/bonobo-activation-fork-server.c:177
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Невыправімая памылка чытаньня з працэсу-нашчадка: %s\n"
+msgstr "Збой чытаньня з працэсу-нашчадка: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:297
-msgid "Couldn't fork a new process"
-msgstr "Немагчыма зрабіць fork для стварэньня новага працэсу"
+#: ../bonobo-activation/bonobo-activation-fork-server.c:184
+msgid "EOF from child process\n"
+msgstr "EOF з працэсу-нашчадка: %s\n"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:318
-#, c-format
-msgid "Child received signal %u (%s)"
-msgstr "Нашчадак атрымаў сыгнал %u (%s)"
+#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+msgid "Couldn't spawn a new process"
+msgstr "Немагчыма стварыць новы працэс"
 
-#: bonobo-activation/bonobo-activation-fork-server.c:323
-#, c-format
-msgid "Unknown non-exit error (status is %u)"
-msgstr "Невядомая, няісная памылка (стан - гэта %u)"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:404
-#, c-format
-msgid "bonobo-activation failed to set process group of %s: %s\n"
-msgstr ""
-"bonobo-activation: невыправімая памылка пры спробе ўсталяваць GID для "
-"працэсу %s: %s\n"
-
-#: bonobo-activation/bonobo-activation-fork-server.c:416
-#, c-format
-msgid "Failed to execute %s: %d (%s)\n"
-msgstr "Памылка пры спробе выканаць %s: %d (%s)\n"
-
-#: bonobo-activation/bonobo-activation-get-language-list.c:133
-msgid "Too many alias levels for a locale, may indicate a loop"
-msgstr "Зашмат узроўняў мянушак для лякалі, магчыма зацыкленьне"
-
-#: bonobo-activation/bonobo-activation-init.c:200
+#: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "Файлавы дэскрыптар для друку IOR на"
 
-#: bonobo-activation/bonobo-activation-init.c:202
+#: ../bonobo-activation/bonobo-activation-init.c:353
+#: ../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "IID для актывацыі"
 
-#: bonobo-activation/bonobo-activation-init.c:204
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "Перашкаджаючая рэгістрацыя паслужніку з OAF"
 
-#: bonobo-activation/bonobo-activation-init.c:290
-msgid "Bonobo activation options"
-msgstr "Выбары bonobo activation"
+#: ../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Bonobo Activation"
 
-#: bonobo-activation/bonobo-activation-shlib.c:107
+#: ../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Паказвае можнасьці Bonobo Activation"
+
+#: ../bonobo-activation/bonobo-activation-init.c:471
+msgid "Bonobo activation options"
+msgstr "Можнасьці bonobo activation"
+
+#: ../bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr "g_module_open ад `%s' памыліўся з `%s'"
+msgstr "g_module_open у `%s' памыліўся з `%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:126
-#: bonobo-activation/bonobo-activation-shlib.c:163
+#: ../bonobo-activation/bonobo-activation-shlib.c:126
+#: ../bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
 msgstr "Немагчыма адшукаць знак Bonobo_Plugin_info ў `%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:212
+#: ../bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr "Вытворчасьць `%s' вярнла NIL для `%s'"
+msgstr "Вытворчасьць `%s' вярнула NIL для `%s'"
 
-#: bonobo-activation/bonobo-activation-shlib.c:229
+#: ../bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib `%s' не зьмяшчае `%s'"
 
-#: bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "Назва"
 
-#: bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "Унікальная назва дастасаваньня"
 
-#: bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "POA"
 msgstr "POA"
 
-#: bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "Custom CORBA POA"
 msgstr "Сваё CORBA POA"
 
-#: bonobo/bonobo-exception.c:154
+#: ../bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
 msgstr "Спроба дзеяньня, якое ня падтрымліваецца"
 
-#: bonobo/bonobo-exception.c:157
+#: ../bonobo/bonobo-exception.c:157
 msgid "IO Error"
-msgstr "Памылка У/В"
+msgstr "Памылка У/В (IO Error)"
 
-#: bonobo/bonobo-exception.c:160
+#: ../bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "Памылковае значэньне аргумэнту"
+msgstr "Недапушчальнае значэньне аргумэнту"
 
-#: bonobo/bonobo-exception.c:164
+#: ../bonobo/bonobo-exception.c:164
 msgid "Object not found"
 msgstr "Аб'ект адсутнічае"
 
-#: bonobo/bonobo-exception.c:167
+#: ../bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
 msgstr "Сынтаксычная памылка ў апісаньні аб'екту"
 
-#: bonobo/bonobo-exception.c:172
+#: ../bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
 msgstr "Немагчыма актывізаваць аб'ект з вытворчасьці"
 
-#: bonobo/bonobo-exception.c:177
+#: ../bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "Няма правоў доступу да плыні"
+msgstr "Няма правоў для доступу да плыні"
 
-#: bonobo/bonobo-exception.c:180
+#: ../bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
 msgstr "Спроба дзеяньня плыні , якая не падтрымліваецца"
 
-#: bonobo/bonobo-exception.c:183
+#: ../bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "Памылка У/В у плыні"
+msgstr "Памылка У/В у плыні (IO Error)"
 
-#: bonobo/bonobo-exception.c:187
+#: ../bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "Памылка У/В у сховішчы"
+msgstr "Памылка У/В (IO Error) у сховішчы"
 
-#: bonobo/bonobo-exception.c:190
+#: ../bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
 msgstr "Назва ў сховішчы ўжо існуе"
 
-#: bonobo/bonobo-exception.c:193
+#: ../bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
 msgstr "Аб'ект у сховішчы ўжо існуе"
 
-#: bonobo/bonobo-exception.c:196
+#: ../bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
 msgstr "Няма правоў для апэрацыі ў сховішчы"
 
-#: bonobo/bonobo-exception.c:198
+#: ../bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
 msgstr "Спроба дзеяньня сховішча , якое не падтрымліваецца"
 
-#: bonobo/bonobo-exception.c:200
+#: ../bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
 msgstr "Аб'ект не плыня"
 
-#: bonobo/bonobo-exception.c:203
+#: ../bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
 msgstr "Аб'ект ня сховішча"
 
-#: bonobo/bonobo-exception.c:206
+#: ../bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
 msgstr "Сховішча ня пустое"
 
-#: bonobo/bonobo-exception.c:210
+#: ../bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "памылковае XML апісаньне інтэрфэйсу карыстальніка"
+msgstr "памылковае XML-апісаньне інтэрфэйсу карыстальніка"
 
-#: bonobo/bonobo-exception.c:213
+#: ../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "памылковы шлях да XML элемэнту інтэрфэйсу карыстальніка"
+msgstr "памылковы шлях да XML-элемэнту інтэрфэйсу карыстальніка"
 
-#: bonobo/bonobo-exception.c:216
+#: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
 msgstr "запатрабаваны UI атрыбут ня існуе"
 
-#: bonobo/bonobo-exception.c:219
+#: ../bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
 msgstr "Невядомы загад ці дзеяньне"
 
-#: bonobo/bonobo-exception.c:222
+#: ../bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "Каманда нячулая"
+msgstr "Каманда неадчувальная"
 
-#: bonobo/bonobo-exception.c:226
+#: ../bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
 msgstr "некарэктны тып даньняў"
 
-#: bonobo/bonobo-exception.c:229
+#: ../bonobo/bonobo-exception.c:229
 msgid "stream not found"
 msgstr "плыня адсутнічае"
 
-#: bonobo/bonobo-exception.c:233
+#: ../bonobo/bonobo-exception.c:233
 msgid "property not found"
 msgstr "уласьцівасьці адсутнічаюць"
 
-#: bonobo/bonobo-exception.c:236
+#: ../bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
 msgstr "уласьцівасьці маюць памылковы тып"
 
-#: bonobo/bonobo-exception.c:239
+#: ../bonobo/bonobo-exception.c:239
 msgid "property is read only"
 msgstr "уласьцівасьці даступныя толькі на чытаньне"
 
-#: bonobo/bonobo-exception.c:242
+#: ../bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
 msgstr "памылка канфігурацыі базы даньняў "
 
-#: bonobo/bonobo-exception.c:246
+#: ../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Інтэрфэйс мянушкі адсутнічае"
+msgstr "Інтэрфэйс мянушкі (moniker) адсутнічае"
 
-#: bonobo/bonobo-exception.c:249
+#: ../bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr "Тайм-аўт актывацыі мянушкі"
+msgstr "Тайм-аўт актывацыі мянушкі (moniker)"
 
-#: bonobo/bonobo-exception.c:252
+#: ../bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr "Сынтаксычная памылка ў мянушцы"
+msgstr "Сынтаксычная памылка ў мянушцы (moniker)"
 
-#: bonobo/bonobo-exception.c:255
+#: ../bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr "Мянушка мае невядомы прэфікс"
+msgstr "Мянушка (moniker) мае невядомы прэфікс"
 
-#: bonobo/bonobo-exception.c:279
+#: ../bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "Памылка выпраўленьня памылкі; няма выключэньняў"
+msgstr "Памылка праверкі памылкі; няма выключэньняў"
 
-#: bonobo/bonobo-exception.c:288
+#: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
 msgstr "Агульная памылка зьдзяйсьненьня без апісаньня"
 
-#: bonobo/bonobo-generic-factory.h:79 bonobo/bonobo-generic-factory.h:83
+#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "Немагчыма ініцыялізаваць Bonobo"
 
-#: bonobo/bonobo-moniker.c:352
+#: ../bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "Памылка вырашэньня ці працяг '%s"
 
-#: bonobo/bonobo-moniker-util.c:246
+#: ../bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
 msgstr "Збой актывацыі аб'екту"
 
-#: monikers/bonobo-moniker-oaf.c:53
+#: ../monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
-msgstr "Выключэньне зьдзяйсьненьня '%s"
+msgstr "Выключэньне актывацыі '%s"
 
-#: monikers/bonobo-moniker-oaf.c:62
+#: ../monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
-msgstr "Памылка зьдзяйсьненьня '%s"
+msgstr "Памылка актывацыі '%s"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:1
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "HTTP Moniker"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:2
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr "мянушка кіраваньня ORB IOR"
+msgstr "Мянушка (moniker) апрацоўкі ORB IOR"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:3
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr "Стандартная вытворчасьць мянушкі"
+msgstr "Стандартная вытворчасьць мянушкі (moniker)"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:4
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr "асноўная актывацыя Oaf мянушкі"
+msgstr "асноўная актывацыя Oaf мянушкі (moniker)"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:5
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr "Асноўная чарга Oaf мянушкі"
+msgstr "Асноўны запыт Oaf мянушкі (moniker)"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:6
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr "Асноўная вытворчасьць \"новай\" мянушкі"
+msgstr "асноўная вытворчасьць \"новай\" мянушкі (moniker)"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:7
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr "асноўны запіс мянушкі"
+msgstr "асноўны запіс мянушкі (moniker)"
 
-#: monikers/Bonobo_Moniker_std.server.in.in.h:8
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
 msgstr "плыня MonikerExtender"
 
-#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "Вытворчасьць паслужніку рэха Bonobo"
+msgstr "Вытворчасьць паслужніку Bonobo Echo"
 
-#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "Узор праграмы паслужніку рэха Bonobo"
+msgstr "Узор праграмы паслужніку Bonobo Echo"
 
-#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr "Кампанэнта рэха"
+msgstr "Кампанэнт Echo"
 
-#: samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr "Вытворчасьць кампанэнты рэха"
+msgstr "Вытворчасьць кампанэнты Echo"
 
-#: samples/echo/echo-client.c:22
+#: ../samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
 msgstr "Немагчыма ініцыялізаваць Bonobo"
 
-#: samples/echo/echo-client.c:33
+#: ../samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
 msgstr "Немагчыма стварыць прыклад узору кампанэнты рэха"
 
-#: samples/echo/echo-client.c:45
+#: ../samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
 msgstr "Здарылася выключэньне '%s'"
 
-#: utils/bonobo-activation-sysconf.c:62
+#: ../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
 msgstr "Немагчыма захаваць файл канфігурацыі.\n"
 
-#: utils/bonobo-activation-sysconf.c:63
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Калі ласка, удакладніце ці маеце вы правы на запіс у '%s'.\n"
 
-#: utils/bonobo-activation-sysconf.c:66
+#: ../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
 msgstr "Файл канфігурацыі быў з посьпехам запісаны.\n"
 
-#: utils/bonobo-activation-sysconf.c:80
+#: ../utils/bonobo-activation-sysconf.c:101
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -464,38 +455,56 @@ msgstr ""
 "файл канфігурацыі:\n"
 "    %s\n"
 
-#: utils/bonobo-activation-sysconf.c:118
+#: ../utils/bonobo-activation-sysconf.c:139
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s ўжо ў файле канфігурацыі\n"
 
-#: utils/bonobo-activation-sysconf.c:138
+#: ../utils/bonobo-activation-sysconf.c:159
 msgid "there is not a properly structured configuration file\n"
 msgstr "няма пэўным чынам пабудаванага канфігурацыйнага файлу\n"
 
-#: utils/bonobo-activation-sysconf.c:201
+#: ../utils/bonobo-activation-sysconf.c:222
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Канфігурацыйны файл bonobo-activation зьмяшчае:\n"
 
-#: utils/bonobo-activation-sysconf.c:233
+#: ../utils/bonobo-activation-sysconf.c:254
 msgid "Directory to remove from configuration file"
 msgstr "Каталёг для выдаленьня з канфігурацыйнага файла"
 
-#: utils/bonobo-activation-sysconf.c:233 utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "directory path"
-msgstr "шлях тэчкі"
+msgstr "шлях да каталёгу"
 
-#: utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "Directory to add to configuration file"
-msgstr "Тэчка для даданьня ў канфігурацыйны файл"
+msgstr "Каталёг для даданьня ў канфігурацыйны файл"
 
-#: utils/bonobo-activation-sysconf.c:239
+#: ../utils/bonobo-activation-sysconf.c:260
 msgid "Display directories in configuration file"
-msgstr "Адлюстраваць каталёгі з канфігурацыйнага файлу"
+msgstr "Адлюстраваць каталёгі ў канфігурацыйным файле"
 
-#: utils/bonobo-activation-sysconf.c:242
+#: ../utils/bonobo-activation-sysconf.c:263
 msgid "Display path to configuration file"
-msgstr "Адлюстраваць шлях да канфігурацыйнага файлу"
+msgstr "Адлюстраваць шлях да канфігурацыйнага файла"
+
+#~ msgid "Child received signal %u (%s)"
+#~ msgstr "Нашчадак атрымаў сыгнал %u (%s)"
+
+#~ msgid "Unknown non-exit error (status is %u)"
+#~ msgstr "Невядомая, няісная памылка (стан - гэта %u)"
+
+#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
+#~ msgstr ""
+#~ "bonobo-activation: невыправімая памылка пры спробе ўсталяваць GID для "
+#~ "працэсу %s: %s\n"
+
+#~ msgid "Failed to execute %s: %d (%s)\n"
+#~ msgstr "Памылка пры спробе выканаць %s: %d (%s)\n"
+
+#~ msgid "Too many alias levels for a locale, may indicate a loop"
+#~ msgstr "Зашмат узроўняў мянушак для лякалі, магчыма зацыкленьне"
 
 #~ msgid "No server corresponding to your query"
 #~ msgstr "Няма паслужніку, які адпавядаў бы вашаму запыту"
