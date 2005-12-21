@@ -2,475 +2,484 @@
 # Copyright © 2005 Gnome i18n Project for Vietnamese.
 # Nguyễn Thái Ngọc Duy <pclouds@gmx.net>, 2002.
 # Clytie Siddall <clytie@riverland.net.au>, 2005.
-#
+# 
 msgid ""
-msgstr ""
-"Project-Id-Version: libbonobo Gnome HEAD\n"
+""
+msgstr "Project-Id-Version: libbonobo Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-26 23:34+0000\n"
-"PO-Revision-Date: 2005-09-16 17:10+0930\n"
+"POT-Creation-Date: 2005-12-21 07:00+0100\n"
+"PO-Revision-Date: 2005-12-21 17:59+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: LocFactoryEditor 1.2.2\n"
+"X-Generator: LocFactoryEditor 1.5.1b\n"
 
-#: ../activation-server/activation-context-corba.c:470
+#:../activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
 msgstr "Không thể tìm trình phục vụ có được liệt kê trong tiến trình con nào."
 
-#: ../activation-server/activation-context-corba.c:748
+#:../activation-server/activation-context-corba.c:748
 msgid "Not a valid Activation ID"
 msgstr "Không phải là ID Hoạt hóa hợp lệ"
 
-#: ../activation-server/activation-server-main.c:84
+#:../activation-server/activation-server-main.c:84
 msgid "Directory to read .server files from"
 msgstr "Thư mục chứa tập tin « .server » cần đoc"
 
-#: ../activation-server/activation-server-main.c:84
+#:../activation-server/activation-server-main.c:84
 msgid "DIRECTORY"
 msgstr "THƯ MỤC"
 
-#: ../activation-server/activation-server-main.c:87
+#:../activation-server/activation-server-main.c:87
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Phục vụ như là ActivationContext (mặc định chỉ là ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:91
+#:../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
 msgstr "Bộ mô tả tập tin vào đó cần ghi IOR"
 
-#: ../activation-server/activation-server-main.c:91
-#: ../bonobo-activation/bonobo-activation-init.c:351
+#:../activation-server/activation-server-main.c:91
+#:../bonobo-activation/bonobo-activation-init.c:351
+#:../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:99
+#:../activation-server/activation-server-main.c:99
 msgid "Query expression to evaluate"
 msgstr "Biểu thức truy vấn cần tính"
 
-#: ../activation-server/activation-server-main.c:99
+#:../activation-server/activation-server-main.c:99
 msgid "EXPRESSION"
 msgstr "BIỂU THỨC"
 
-#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
+#:../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
 msgstr "Dịch vụ CosNaming CORBA."
 
-#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
+#:../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
 msgstr "Dịch vụ tên"
 
-#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+#:../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
 msgid "Notification service"
 msgstr "Dịch vụ thông báo"
 
-#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+#:../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
 msgstr "Dịch vụ thông báo cho sự hoạt hóa"
 
-#: ../activation-server/object-directory-activate.c:186
+#:../activation-server/object-directory-activate.c:186
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Chưa thể xử lý kích hoạt đối tượng « shlib » trong tiến trình từ xa."
 
-#: ../activation-server/object-directory-config-file.c:65
-#, c-format
+#:../activation-server/object-directory-config-file.c:65
+#,c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr ""
-"Không đọc thành công tập tin cấu hình hoạt hóa bonobo. Vui lòng kiểm tra "
-"nó hợp lệ trong: %s"
+msgstr "Chưa đọc thành công tập tin cấu hình hoạt hóa bonobo. Vui lòng kiểm tra nó hợp lệ trong: %s"
 
 #.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
+#.* If this exception blows ( which it will only do with a multi-object )
+#.* factory, you need to ensure you register the object you were activated
+#.* for [use const char *bonobo_activation_iid_get (void); ] is registered
+#.* with bonobo_activation_active_server_register - _after_ any other
+#.* servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1154
-#, c-format
+#:../activation-server/object-directory-corba.c:1154
+#,c-format
 msgid "Race condition activating server '%s'"
 msgstr "Lỗi race condition (điệu kiện đa truy cập đồng thời) khi kích hoạt trình phục vụ « %s »."
 
-#: ../activation-server/object-directory-load.c:93
+#:../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
 msgstr "IID NULL không hợp lệ"
 
-#: ../activation-server/object-directory-load.c:97
-#, c-format
+#:../activation-server/object-directory-load.c:101
+#,c-format
 msgid "iid %s has a NULL type"
 msgstr "IID %s có kiểu NULL"
 
-#: ../activation-server/object-directory-load.c:101
-#, c-format
+#:../activation-server/object-directory-load.c:105
+#,c-format
 msgid "iid %s has a NULL location"
-msgstr "IID %s có vị trí NULL"
+msgstr "IID %s có địa điểm NULL"
 
-#: ../activation-server/object-directory-load.c:110
-#, c-format
+#:../activation-server/object-directory-load.c:114
+#,c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "ký tự không hợp lệ « %c » trong IID « %s »."
 
-#: ../activation-server/object-directory-load.c:318
-#, c-format
+#:../activation-server/object-directory-load.c:342
+#,c-format
 msgid "Property '%s' has no value"
-msgstr "Thuộc tính « %s » không có giá trị."
+msgstr "Thuộc tính « %s » không có giá trị"
 
-#: ../activation-server/object-directory-load.c:601
-#, c-format
+#:../activation-server/object-directory-load.c:630
+#,c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Không thể phân tách tài liệu XML dạng sai %s."
 
-#: ../activation-server/object-directory-load.c:666
-#, c-format
+#:../activation-server/object-directory-load.c:695
+#,c-format
 msgid "Trying dir %s"
 msgstr "Đang thử ra thư mục %s"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:100
+#:../bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Tiến trình con không đưa ra thông báo lỗi, gặp lỗi lạ."
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:177
-#, c-format
+#:../bonobo-activation/bonobo-activation-fork-server.c:177
+#,c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Lỗi khi đọc từ tiến trình con: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:184
+#:../bonobo-activation/bonobo-activation-fork-server.c:184
 msgid "EOF from child process\n"
 msgstr "Lỗi kết thức tập tin từ tiến trình con\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+#:../bonobo-activation/bonobo-activation-fork-server.c:343
 msgid "Couldn't spawn a new process"
 msgstr "Không thể tạo tiến trình mới"
 
-#: ../bonobo-activation/bonobo-activation-init.c:351
+#:../bonobo-activation/bonobo-activation-init.c:351
+#:../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "Bộ mô tả tập tin nơi cần in IOR"
 
-#: ../bonobo-activation/bonobo-activation-init.c:353
+#:../bonobo-activation/bonobo-activation-init.c:353
+#:../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "IID cần kích hoạt"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
+#:../bonobo-activation/bonobo-activation-init.c:355
+#:../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "Tránh đăng ký trình phục vụ với OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:446
+#:../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Hoạt hóa Bonobo"
+
+#:../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Hiện các tùy chọn Hoạt hóa Bonobo"
+
+#:../bonobo-activation/bonobo-activation-init.c:471
 msgid "Bonobo activation options"
 msgstr "Tùy chọn hoạt hóa Bonobo"
 
-#: ../bonobo-activation/bonobo-activation-shlib.c:107
-#, c-format
+#:../bonobo-activation/bonobo-activation-shlib.c:107
+#,c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr "« g_module_open » của « %s » thất bại với « %s »."
+msgstr "« g_module_open » của « %s » thất bại với « %s »"
 
-#: ../bonobo-activation/bonobo-activation-shlib.c:126
-#: ../bonobo-activation/bonobo-activation-shlib.c:163
-#, c-format
+#:../bonobo-activation/bonobo-activation-shlib.c:126
+#:../bonobo-activation/bonobo-activation-shlib.c:163
+#,c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr "Không thể tìm ký hiệu « Bonobo_Plugin_info » trong « %s »."
+msgstr "Không thể tìm ký hiệu « Bonobo_Plugin_info » trong « %s »"
 
-#: ../bonobo-activation/bonobo-activation-shlib.c:212
-#, c-format
+#:../bonobo-activation/bonobo-activation-shlib.c:212
+#,c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr "Bộ tạo « %s » trả về NIL (số không) cho « %s »."
+msgstr "Bộ tạo « %s » trả về NIL (số không) cho « %s »"
 
-#: ../bonobo-activation/bonobo-activation-shlib.c:229
-#, c-format
+#:../bonobo-activation/bonobo-activation-shlib.c:229
+#,c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr "Shlib « %s » không chứa « %s »."
+msgstr "Shlib « %s » không chứa « %s »"
 
-#: ../bonobo/bonobo-application.c:352
+#:../bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "Tên"
 
-#: ../bonobo/bonobo-application.c:352
+#:../bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "Tên ứng dụng duy nhất"
 
-#: ../bonobo/bonobo-object.c:925
+#:../bonobo/bonobo-object.c:922
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:925
+#:../bonobo/bonobo-object.c:922
 msgid "Custom CORBA POA"
-msgstr "CORBA POA Tự chọn"
+msgstr "CORBA POA tự chọn"
 
-#: ../bonobo/bonobo-exception.c:154
+#:../bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
-msgstr "Đã cố gắng thực hiện một hành động không được hỗ trợ"
+msgstr "Một hành động không được hỗ trợ đã được cố thực hiện"
 
-#: ../bonobo/bonobo-exception.c:157
+#:../bonobo/bonobo-exception.c:157
 msgid "IO Error"
 msgstr "Lỗi nhập xuất"
 
-#: ../bonobo/bonobo-exception.c:160
+#:../bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "Giá trị đối số không hợp lệ."
+msgstr "Giá trị đối số không hợp lệ"
 
-#: ../bonobo/bonobo-exception.c:164
+#:../bonobo/bonobo-exception.c:164
 msgid "Object not found"
-msgstr "Không tìm thấy đối tượng."
+msgstr "Không tìm thấy đối tượng"
 
-#: ../bonobo/bonobo-exception.c:167
+#:../bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
-msgstr "Lỗi cú pháp trong mô tả đối tượng."
+msgstr "Lỗi cú pháp trong mô tả đối tượng"
 
-#: ../bonobo/bonobo-exception.c:172
+#:../bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Không thể kích hoạt đối tượng từ bộ tạo."
+msgstr "Không thể kích hoạt đối tượng từ bộ tạo"
 
-#: ../bonobo/bonobo-exception.c:177
+#:../bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr "Không được phép truy cập dòng."
+msgstr "Không được phép truy cập luồng"
 
-#: ../bonobo/bonobo-exception.c:180
+#:../bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "Đã cố gắng thực hiện một hành động về dòng không được hỗ trợ."
+msgstr "Một hành động luồng không được hỗ trợ đã được cố thực hiện"
 
-#: ../bonobo/bonobo-exception.c:183
+#:../bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "Lỗi nhập xuất trên dòng."
+msgstr "Lỗi nhập xuất trên luồng"
 
-#: ../bonobo/bonobo-exception.c:187
+#:../bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "Lỗi nhập xuất trên kho."
+msgstr "Lỗi nhập xuất trên kho"
 
-#: ../bonobo/bonobo-exception.c:190
+#:../bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr "Tên này đã có trong kho."
+msgstr "Tên này đã có trong kho"
 
-#: ../bonobo/bonobo-exception.c:193
+#:../bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr "Không tìm thấy đối tượng trong kho."
+msgstr "Không tìm thấy đối tượng trong kho"
 
-#: ../bonobo/bonobo-exception.c:196
+#:../bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "Không được phép thao tác trên kho."
+msgstr "Không được phép thao tác trên kho"
 
-#: ../bonobo/bonobo-exception.c:198
+#:../bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr "Đã cố gắng thực hiện một hành động về kho không được hỗ trợ."
+msgstr "Một hành động kho không được hỗ trợ đã được cố thực hiện"
 
-#: ../bonobo/bonobo-exception.c:200
+#:../bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr "Đối tượng không phải là một dòng."
+msgstr "Đối tượng không phải là luồng"
 
-#: ../bonobo/bonobo-exception.c:203
+#:../bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr "Đối tượng không phải là một kho."
+msgstr "Đối tượng không phải là kho"
 
-#: ../bonobo/bonobo-exception.c:206
+#:../bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr "Kho không rỗng."
+msgstr "Kho không rỗng"
 
-#: ../bonobo/bonobo-exception.c:210
+#:../bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr "Mô tả XML sai cho giao diện người dùng."
+msgstr "Mô tả XML dạng sai cho giao diện người dùng"
 
-#: ../bonobo/bonobo-exception.c:213
+#:../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "Đường dẫn không hợp lệ đến phần tử giao diện người dùng XML."
+msgstr "Đường dẫn không hợp lệ đến phần tử giao diện người dùng XML"
 
-#: ../bonobo/bonobo-exception.c:216
+#:../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr "không có thuộc tính giao diện người dùng yêu cầu."
+msgstr "không có thuộc tính giao diện người dùng đã yêu cầu"
 
-#: ../bonobo/bonobo-exception.c:219
+#:../bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "Không biết lệnh hay động từ này."
+msgstr "Không biết lệnh hay động từ này"
 
-#: ../bonobo/bonobo-exception.c:222
+#:../bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "Lệnh không phản ứng."
+msgstr "Lệnh không phản ứng"
 
-#: ../bonobo/bonobo-exception.c:226
+#:../bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
 msgstr "kiểu dữ liệu không đúng"
 
-#: ../bonobo/bonobo-exception.c:229
+#:../bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr "không tìm thấy dòng"
+msgstr "không tìm thấy luồng"
 
-#: ../bonobo/bonobo-exception.c:233
+#:../bonobo/bonobo-exception.c:233
 msgid "property not found"
 msgstr "không tìm thấy thuộc tính"
 
-#: ../bonobo/bonobo-exception.c:236
+#:../bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
 msgstr "thuộc tính sai kiểu"
 
-#: ../bonobo/bonobo-exception.c:239
+#:../bonobo/bonobo-exception.c:239
 msgid "property is read only"
 msgstr "thuộc tính chỉ cho phép đọc"
 
-#: ../bonobo/bonobo-exception.c:242
+#:../bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr "lỗi hậu phương cơ sở dữ liệu cấu hình"
+msgstr "lỗi hậu phương cơ sở dữ liệu cấu hình "
 
-#: ../bonobo/bonobo-exception.c:246
+#:../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
 msgstr "Không tìm thấy giao diện Moniker"
 
-#: ../bonobo/bonobo-exception.c:249
+#:../bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
 msgstr "Quá thời khi kích hoạt Moniker"
 
-#: ../bonobo/bonobo-exception.c:252
+#:../bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
 msgstr "Lỗi cú pháp trong Moniker"
 
-#: ../bonobo/bonobo-exception.c:255
+#:../bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
 msgstr "Moniker có tiền tế moniker lạ"
 
-#: ../bonobo/bonobo-exception.c:279
+#:../bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
 msgstr "Lỗi kiểm tra; không có ngoại lệ"
 
-#: ../bonobo/bonobo-exception.c:288
+#:../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr "Lỗi kích hoạt chung, không có mô tả."
+msgstr "Lỗi kích hoạt chung, không có mô tả"
 
-#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
+#:../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
-msgstr "Không thể khởi động Bonobo."
+msgstr "Không thể khởi động Bonobo"
 
-#: ../bonobo/bonobo-moniker.c:352
-#, c-format
+#:../bonobo/bonobo-moniker.c:352
+#,c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "Lỗi khi phân giải hoặc mở rộng « %s »."
+msgstr "Việc phân giải hoặc mở rộng « %s » bị lỗi"
 
-#: ../bonobo/bonobo-moniker-util.c:246
+#:../bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr "Lỗi khi kích hoạt đối tượng."
+msgstr "Việc kích hoạt đối tượng bị lỗi"
 
-#: ../monikers/bonobo-moniker-oaf.c:53
-#, c-format
+#:../monikers/bonobo-moniker-oaf.c:53
+#,c-format
 msgid "Exception activating '%s'"
-msgstr "Lỗi (ngoại lệ) kích hoạt « %s »."
+msgstr "Lỗi (ngoại lệ) kích hoạt « %s »"
 
-#: ../monikers/bonobo-moniker-oaf.c:62
-#, c-format
+#:../monikers/bonobo-moniker-oaf.c:62
+#,c-format
 msgid "Failed to activate '%s'"
-msgstr "Lỗi kích hoạt « %s »."
+msgstr "Việc kích hoạt « %s » bị lỗi"
 
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
+#:../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
 msgstr "Moniker HTTP"
 
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:2
+#:../monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
 msgstr "Moniker xử lý ORB IOR"
 
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:3
+#:../monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
 msgstr "Bộ tạo Moniker chuẩn"
 
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:4
+#:../monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
 msgstr "moniker kích hoạt Oaf chung"
 
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:5
+#:../monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
 msgstr "moniker truy vấn Oaf chung"
 
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:6
+#:../monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
 msgstr "bộ tạo moniker « mới » chung"
 
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:7
+#:../monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
 msgstr "moniker mục chung"
 
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:8
+#:../monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr "dòng MonikerExtender"
+msgstr "luồng MonikerExtender"
 
-#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+#:../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
 msgstr "Bộ tạo trình phục vụ Vọng Bonobo"
 
-#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+#:../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
 msgstr "Chương trình mẫu trình phục vụ Vọng Bonobo"
 
-#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+#:../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
 msgstr "Thành phần vọng"
 
-#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+#:../samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
 msgstr "Bộ tạo thành phần vọng"
 
-#: ../samples/echo/echo-client.c:22
+#:../samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr "Không thể khởi động Bonobo."
+msgstr "Không thể khởi động Bonobo"
 
-#: ../samples/echo/echo-client.c:33
+#:../samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr "Không thể tạo ra thể hiện của thành phần vọng."
+msgstr "Không thể tạo ra thể hiện của thành phần vọng mẫu"
 
-#: ../samples/echo/echo-client.c:45
-#, c-format
+#:../samples/echo/echo-client.c:45
+#,c-format
 msgid "An exception occured '%s'"
 msgstr "Gặp ngoài lệ « %s »"
 
-#: ../utils/bonobo-activation-sysconf.c:83
+#:../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
 msgstr "Không thể lưu tập tin cấu hình.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:84
-#, c-format
+#:../utils/bonobo-activation-sysconf.c:84
+#,c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Vui lòng kiểm tra lại có quyền ghi vào tập tin « %s ».\n"
 
-#: ../utils/bonobo-activation-sysconf.c:87
+#:../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
 msgstr "Ghi xong tập tin cấu hình.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:101
-#, c-format
+#:../utils/bonobo-activation-sysconf.c:101
+#,c-format
 msgid ""
 "configuration file is:\n"
 "    %s\n"
-msgstr ""
-"tập tin cấu hình là:\n"
+msgstr "tập tin cấu hình là:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:139
-#, c-format
+#:../utils/bonobo-activation-sysconf.c:139
+#,c-format
 msgid "%s already in configuration file\n"
 msgstr "%s đã có trong tập tin cấu hình\n"
 
-#: ../utils/bonobo-activation-sysconf.c:159
+#:../utils/bonobo-activation-sysconf.c:159
 msgid "there is not a properly structured configuration file\n"
-msgstr "đây không phải là một tập tin cấu hình có cấu trúc thích hợp\n"
+msgstr "không có một tập tin cấu hình có cấu trúc thích hợp\n"
 
-#: ../utils/bonobo-activation-sysconf.c:222
+#:../utils/bonobo-activation-sysconf.c:222
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Tập tin cấu hình bonobo-activation chứa:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:254
+#:../utils/bonobo-activation-sysconf.c:254
 msgid "Directory to remove from configuration file"
 msgstr "Thư mục cần gỡ bỏ khỏi tập tin cấu hình"
 
-#: ../utils/bonobo-activation-sysconf.c:254
-#: ../utils/bonobo-activation-sysconf.c:257
+#:../utils/bonobo-activation-sysconf.c:254
+#:../utils/bonobo-activation-sysconf.c:257
 msgid "directory path"
 msgstr "đường dẫn thư mục"
 
-#: ../utils/bonobo-activation-sysconf.c:257
+#:../utils/bonobo-activation-sysconf.c:257
 msgid "Directory to add to configuration file"
 msgstr "Thư mục cần thêm vào tập tin cấu hình"
 
-#: ../utils/bonobo-activation-sysconf.c:260
+#:../utils/bonobo-activation-sysconf.c:260
 msgid "Display directories in configuration file"
 msgstr "Hiện các thư mục trong tập tin cấu hình"
 
-#: ../utils/bonobo-activation-sysconf.c:263
+#:../utils/bonobo-activation-sysconf.c:263
 msgid "Display path to configuration file"
-msgstr "Hiện đường dẫn trong tập tin cấu hình"
+msgstr "Hiện đường dẫn đến tập tin cấu hình"
