@@ -55,6 +55,22 @@ typedef struct {
 	} servers [1]; /* flexible array */
 } ActiveServerList;
 
+typedef struct {
+          /* client's environment */
+        Bonobo_ActivationEnvironment *env;
+          /* "runtime" servers registered by this client */
+        CORBA_sequence_CORBA_string *runtime_iids;
+} ClientContext;
+
+static void
+client_context_free (ClientContext *self)
+{
+        CORBA_free (self->env);
+        if (self->runtime_iids)
+                CORBA_free (self->runtime_iids);
+        g_free (self);
+}
+
 static ObjectDirectory *main_dir = NULL;
 
 #ifdef BONOBO_ACTIVATION_DEBUG
@@ -389,8 +405,8 @@ od_merge_client_environment (ObjectDirectory                    *od,
                 goto exit;
 
         /* do the actual merging */
-        client_env = (const Bonobo_ActivationEnvironment *)
-                g_hash_table_lookup (od->client_envs, client);
+        client_env = ((ClientContext *) g_hash_table_lookup
+                      (od->client_contexts, client))->env;
 
         if (!client_env)
                 goto exit;
@@ -777,13 +793,15 @@ remove_active_server (ObjectDirectory *od,
   /* Parse server description and register it, replacing older
    * definition if necessary.  Returns the regsitered ServerInfo */
 static Bonobo_ServerInfo const *
-od_register_runtime_server_info (ObjectDirectory  *od,
-                                 const char       *iid,
-                                 const CORBA_char *description)
+od_register_runtime_server_info (ObjectDirectory         *od,
+                                 const char              *iid,
+                                 const CORBA_char        *description,
+                                 Bonobo_ActivationClient  client)
 {
         Bonobo_ServerInfo *old_serverinfo, *new_serverinfo;
         GSList *parsed_serverinfo = NULL, *l;
         int     i;
+        ClientContext *context;
 
         update_registry (od, FALSE);
 
@@ -802,7 +820,9 @@ od_register_runtime_server_info (ObjectDirectory  *od,
                  return NULL;
            /* check for more than one entry */
          if (parsed_serverinfo->next) {
+#ifdef BONOBO_ACTIVATION_DEBUG
                  g_warning ("More than one <oaf_server> specified, ignoring all");
+#endif
                  for (l = parsed_serverinfo; l; l = l->next) {
                          Bonobo_ServerInfo__freekids (l->data, NULL);
                          g_free (l->data);
@@ -825,6 +845,21 @@ od_register_runtime_server_info (ObjectDirectory  *od,
                  g_hash_table_insert (od->by_iid,
                                       od->attr_servers->_buffer[i].iid,
                                       od->attr_servers->_buffer + i);
+ 
+           /* Take note that this client registered this iid, so that
+            * when the client disconnects we unregister its
+            * corresponding serverinfo's */
+         context = g_hash_table_lookup (od->client_contexts, client);
+         g_return_val_if_fail (context, new_serverinfo);
+         if (context->runtime_iids)
+                 ORBit_sequence_append (context->runtime_iids, iid);
+         else {
+                 context->runtime_iids = ORBit_sequence_alloc 
+                         (TC_CORBA_sequence_CORBA_string, 1);
+                 ORBit_sequence_index (context->runtime_iids, 0) =
+                         CORBA_string_dup (iid);
+         }
+
          od->time_list_changed = time (NULL);
          activation_clients_cache_notify ();
          return new_serverinfo;
@@ -850,7 +885,7 @@ impl_Bonobo_ObjectDirectory_register_new_full (
 	oldobj = od_get_active_server (od, iid, environment);
         *existing = oldobj;
 
-        serverinfo = od_register_runtime_server_info (od, iid, description);
+        serverinfo = od_register_runtime_server_info (od, iid, description, client);
         od_merge_client_environment (od, serverinfo, environment,
                                      &merged_environment, client);
 
@@ -1039,9 +1074,58 @@ client_cnx_broken (ORBitConnection *cnx,
                    const Bonobo_ActivationClient  client)
 {
         ObjectDirectory *od = main_dir;
+        ClientContext *context;
+        int i;
         if (!od) /* shutting down */
                 return;
-        g_hash_table_remove (od->client_envs, client);
+          /* unregister runtime server definitions */
+        context = g_hash_table_lookup (od->client_contexts, client);
+        if (context->runtime_iids) {
+                for (i = 0; i < context->runtime_iids->_length; ++i)
+                {
+                        CORBA_char *iid = ORBit_sequence_index
+                                (context->runtime_iids, i);
+                        int j;
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+                        fprintf (stderr, "Removing runtime definition '%s' from hash table\n", iid);
+#endif
+                        g_hash_table_remove (od->by_iid, iid);
+                        for (j = 0; j < od->attr_runtime_servers->len; ++j) {
+                                Bonobo_ServerInfo *server =  g_ptr_array_index
+                                        (od->attr_runtime_servers, j);
+                                if (strcmp (server->iid, iid) == 0) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                                        fprintf (stderr, "Removing from od->attr_runtime_servers[%i]\n", j);
+#endif
+                                        g_ptr_array_remove_index
+                                                (od->attr_runtime_servers, j);
+                                        Bonobo_ServerInfo__freekids (server, NULL);
+                                        g_free (server);
+                                        break;
+                                }
+                        }
+                        for (j = 0; j < od->attr_servers->_length; ++j) {
+                                Bonobo_ServerInfo *server =
+                                        &ORBit_sequence_index (od->attr_servers, j);
+                                if (strcmp (server->iid, iid) == 0) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                                        fprintf (stderr, "Removing from od->attr_servers[%i]\n", j);
+#endif
+                                        ORBit_sequence_remove (od->attr_servers, j);
+                                        break;
+                                }
+                        }
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+                        fprintf (stderr, "Runtime definition '%s' cleaned\n", iid);
+#endif
+                        
+                }
+        }
+        g_hash_table_remove (od->client_contexts, client);
+        od->time_list_changed = time (NULL);
+        activation_clients_cache_notify ();
 }
 
 static void
@@ -1054,6 +1138,7 @@ impl_Bonobo_ObjectDirectory_addClientEnv (
         Bonobo_ActivationEnvironment *env;
 	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
         int i;
+        ClientContext *context;
         
         env = Bonobo_ActivationEnvironment__alloc ();
         env->_length  = env->_maximum = client_env->_length;
@@ -1080,7 +1165,11 @@ impl_Bonobo_ObjectDirectory_addClientEnv (
                 env->_buffer[i].flags = 0;
         }
 
-        g_hash_table_insert (od->client_envs, client, env);
+        context = g_new (ClientContext, 1);
+        context->env = env;
+        context->runtime_iids = NULL;
+
+        g_hash_table_insert (od->client_contexts, client, context);
 
         ORBit_small_listen_for_broken (client, G_CALLBACK (client_cnx_broken),
                                        (gpointer) client);
@@ -1183,9 +1272,9 @@ object_directory_finalize (GObject *object)
 
         g_strfreev (od->registry_source_directories);
 
-        if (od->client_envs) {
-                g_hash_table_destroy (od->client_envs);
-                od->client_envs = NULL;
+        if (od->client_contexts) {
+                g_hash_table_destroy (od->client_contexts);
+                od->client_contexts = NULL;
         }
 
         parent_class->finalize (object);
@@ -1228,9 +1317,9 @@ object_directory_init (ObjectDirectory *od)
         od->attr_runtime_servers = g_ptr_array_new ();
 	
 	od->event_source = bonobo_event_source_new ();
-        od->client_envs = g_hash_table_new_full
+        od->client_contexts = g_hash_table_new_full
                 (NULL, NULL, NULL,
-                 (GDestroyNotify) CORBA_free);
+                 (GDestroyNotify) client_context_free);
 }
 
 BONOBO_TYPE_FUNC_FULL (ObjectDirectory,

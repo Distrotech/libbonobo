@@ -53,8 +53,8 @@ struct _ObjectDirectory {
 	/* Notification source */
 	BonoboEventSource *event_source;
 
-	/* Client -> Bonobo_ActivationEnvironment */
-	GHashTable *client_envs;
+	/* Client -> ClientContext */
+	GHashTable *client_contexts;
 };
 
 typedef struct {

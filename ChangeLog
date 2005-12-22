@@ -1,3 +1,22 @@
+2005-12-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* activation-server/object-directory-corba.c
+	(object_directory_init): Change hash table value type to the new
+	structure ClientContext, with a new destructor function.
+	(object_directory_finalize): Change to new name client_contexts.
+	(impl_Bonobo_ObjectDirectory_addClientEnv): Add a ClientContext to
+	hash table, instead of an environment.
+	(client_cnx_broken): Remove any iid definitions registered by the
+	client at runtime when the client disconnects.
+	(od_register_runtime_server_info): Take note of which iid's are
+	defined by which clients, to unregister them later as the clients
+	disconnect.  Also, fix return value, that should be new_serverinfo
+	instead of old_serverinfo.
+	(od_merge_client_environment): Changes regarding environment->context.
+
+	* activation-server/object-directory.h: Change name of client_envs
+	to client_contexts to reflect new role.
+
 2005-10-28  Erdal Ronahi  <erdal.ronahi@gmail.com>
 
 	* configure.in: Added ku (Kurdish) to ALL_LINGUAS
