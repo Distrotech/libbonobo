@@ -1,3 +1,15 @@
+2006-01-12  Michael Meeks  <michael.meeks@novell.com>
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_by_forking): fix vicious corruptor
+	of the (static) cmd array, dating back 5+ years to the oaf days.
+
+2005-09-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* bonobo/bonobo-app-client.c (_typecode_to_gtype):
+	s/__inline__/inline/.  Fixes bug #315145: "libbonobo 2.10.1 fails
+	to build on solaris 10 with sun studio 10."
+
 2005-08-19  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* Version 2.10.1 to fix confusion with previously unannounced 

@@ -266,7 +266,7 @@ bonobo_app_client_msg_send (BonoboAppClient   *app_client,
 }
 
 
-static __inline__ GType
+static inline GType
 _typecode_to_gtype (CORBA_TypeCode tc)
 {
 	static GHashTable *hash = NULL;

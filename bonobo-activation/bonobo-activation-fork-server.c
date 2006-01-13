@@ -208,7 +208,7 @@ handle_exepipe (GIOChannel * source,
 
 CORBA_Object
 bonobo_activation_server_by_forking (
-	const char                         **cmd,
+	const char                         **cmd_const,
 	gboolean                             set_process_group,
 	int                                  fd_arg, 
 	const Bonobo_ActivationEnvironment  *environment,
@@ -228,6 +228,7 @@ bonobo_activation_server_by_forking (
         GSource *source;
         GMainContext *context;
         char **newenv = NULL;
+        char **cmd;
 
 #if defined(__APPLE__) && defined(HAVE_NSGETENVIRON) && defined(HAVE_CRT_EXTERNS_H)
 # include <crt_externs.h>
@@ -323,8 +324,12 @@ bonobo_activation_server_by_forking (
         }
 
         /* Pass the IOR pipe's write end to the child */ 
+        cmd = g_strdupv (cmd_const);
         if (fd_arg != 0)
-                cmd[fd_arg] = g_strdup_printf (cmd[fd_arg], iopipes[1]);
+        {
+                g_free (cmd[fd_arg]);
+                cmd[fd_arg] = g_strdup_printf (cmd_const[fd_arg], iopipes[1]);
+        }
 
         ai.iorbuf[0] = '\0';
         ai.done = FALSE;
@@ -364,6 +369,8 @@ bonobo_activation_server_by_forking (
                 if (use_new_loop)
                         g_main_context_unref (context);
 
+                g_strfreev (cmd);
+
 		return CORBA_OBJECT_NIL;
 	}
 
@@ -379,8 +386,7 @@ bonobo_activation_server_by_forking (
                 g_free (newenv);
         }
 
-        if (fd_arg != 0)
-                g_free ((char *) cmd[fd_arg]);
+        g_strfreev (cmd);
 
         /* Get the IOR from the pipe */
         while (!ai.done) {
