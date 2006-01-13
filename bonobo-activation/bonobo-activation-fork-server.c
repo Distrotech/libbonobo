@@ -239,13 +239,13 @@ bonobo_activation_server_by_forking (
         extern char **environ;
 #endif
 
-        g_return_val_if_fail (cmd != NULL, CORBA_OBJECT_NIL);
-        g_return_val_if_fail (cmd [0] != NULL, CORBA_OBJECT_NIL);
+        g_return_val_if_fail (cmd_const != NULL, CORBA_OBJECT_NIL);
+        g_return_val_if_fail (cmd_const [0] != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (act_iid != NULL, CORBA_OBJECT_NIL);
 
         ai.environment = environment;
         ai.act_iid = act_iid;
-        ai.exename = cmd [0];
+        ai.exename = cmd_const [0];
         ai.re_check = re_check;
         ai.user_data = user_data;
 
@@ -261,7 +261,7 @@ bonobo_activation_server_by_forking (
 
 #ifdef BONOBO_ACTIVATION_DEBUG
         if (ai.do_srv_output)
-                fprintf (stderr, " SPAWNING: '%s' for '%s'\n", cmd[0], act_iid);
+                fprintf (stderr, " SPAWNING: '%s' for '%s'\n", cmd_const[0], act_iid);
 #endif
 
 #ifdef G_OS_WIN32
