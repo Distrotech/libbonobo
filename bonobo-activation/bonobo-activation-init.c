@@ -371,7 +371,7 @@ bonobo_activation_get_goption_group (void)
 {
 	GOptionGroup *group;
 
-	group = g_option_group_new ("bonbo-activation",
+	group = g_option_group_new ("bonobo-activation",
 				    N_("Bonobo Activation"),
 				    N_("Show Bonobo Activation options"),
 				    NULL, NULL);
