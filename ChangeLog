@@ -34,6 +34,9 @@
 	* activation-server/object-directory.h: Change name of client_envs
 	to client_contexts to reflect new role.
 
+	Fixes Bug 149908: b-a-s doesn't allow updating runtime-defined
+	ServerInfo's
+
 2005-10-28  Erdal Ronahi  <erdal.ronahi@gmail.com>
 
 	* configure.in: Added ku (Kurdish) to ALL_LINGUAS
