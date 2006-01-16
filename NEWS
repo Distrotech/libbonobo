@@ -1,3 +1,8 @@
+libbonobo 2.13.1
+
+	* Fix corruption issue that was causing hangs on login (Michael)
+	* Fix GOption argument parsing typo (Christian Perch)
+	* 
 libbonobo 2.13.0
 
 	* Rework the end-user installation location independence code for Win32 (Tor Lillqvist)
