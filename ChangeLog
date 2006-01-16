@@ -1,3 +1,8 @@
+=== 2.13.1 ===
+2006-01-16  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* configure.in: Bump version to 2.13.1.
+
 2006-01-16  Christian Persch  <chpe@cvs.gnome.org>
 
 	* bonobo-activation/bonobo-activation-init.c: Fix typo in the
@@ -37,6 +42,7 @@
 	Fixes Bug 149908: b-a-s doesn't allow updating runtime-defined
 	ServerInfo's
 
+=== 2.13.0 ===
 2005-10-28  Erdal Ronahi  <erdal.ronahi@gmail.com>
 
 	* configure.in: Added ku (Kurdish) to ALL_LINGUAS
