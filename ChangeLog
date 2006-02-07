@@ -1,3 +1,13 @@
+2006-02-07  Michael Meeks  <michael.meeks@novell.com>
+
+	(backport):
+	* bonobo-activation/bonobo-activation-init.c
+	(bonobo_activation_init): accumulate arguments over
+	multiple inits, to elide effect of early dummy inits.
+
+	* bonobo/bonobo-main.c (bonobo_init_full): always
+	pass args to bonobo_activation_init.
+	
 2006-01-13  Michael Meeks  <michael.meeks@novell.com>
 
 	* bonobo-activation/bonobo-activation-fork-server.c

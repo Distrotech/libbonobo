@@ -251,6 +251,8 @@ bonobo_init_full (int *argc, char **argv,
 {
 	CORBA_Environment ev;
 
+	bonobo_activation_init (argc ? *argc : 0, argv);
+
 	bonobo_inited++;
 	if (bonobo_inited > 1)
 		return TRUE;
@@ -259,9 +261,6 @@ bonobo_init_full (int *argc, char **argv,
 	g_type_init_with_debug_flags (0);
 
 	bonobo_arg_init ();
-
-	if (!bonobo_activation_is_initialized ())
-		bonobo_activation_init (argc ? *argc : 0, argv);
 
 	CORBA_exception_init (&ev);
 
