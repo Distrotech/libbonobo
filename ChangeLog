@@ -1,3 +1,12 @@
+2006-02-07  Michael Meeks  <michael.meeks@novell.com>
+
+	* bonobo-activation/bonobo-activation-init.c
+	(bonobo_activation_init): accumulate arguments over
+	multiple inits, to elide effect of early dummy inits.
+
+	* bonobo/bonobo-main.c (bonobo_init_full): always
+	pass args to bonobo_activation_init.
+
 === 2.13.1 ===
 2006-01-16  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 

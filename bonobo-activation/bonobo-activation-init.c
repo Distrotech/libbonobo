@@ -489,15 +489,17 @@ bonobo_activation_init (int argc, char **argv)
 	CORBA_ORB retval;
 	int i;
 
-	g_return_val_if_fail (is_initialized == FALSE, bonobo_activation_orb);
+        if (!is_initialized)
+        {
+                bindtextdomain (PACKAGE, BONOBO_ACTIVATION_LOCALEDIR);
 
-        bindtextdomain (PACKAGE, BONOBO_ACTIVATION_LOCALEDIR);
+                bonobo_activation_preinit (NULL, NULL);
 
-	bonobo_activation_preinit (NULL, NULL);
+                retval = bonobo_activation_orb_init (&argc, argv);
+        }
 
-	retval = bonobo_activation_orb_init (&argc, argv);
-
-	/* Handle non-popt case */
+        /* Accumulate arguments over multiple inits. Sometimes we are
+         * initialized from GTK_MODULEs or gnome-vfs with bogus arguments */
 	for (i = 1; i < argc; i++) {
                 if (!strncmp ("--oaf-ior-fd=", argv[i],
                               strlen ("--oaf-ior-fd="))) {
@@ -516,7 +518,8 @@ bonobo_activation_init (int argc, char **argv)
                 }     
 	}
 
-	bonobo_activation_postinit (NULL, NULL);
+        if (!is_initialized)
+                bonobo_activation_postinit (NULL, NULL);
 
 	return retval;
 }
