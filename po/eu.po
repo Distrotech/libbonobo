@@ -1,22 +1,21 @@
-# translation of eu.po to Basque
 # translation of libbonobo.HEAD.po to basque
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
-# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2004, 2005.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-05 20:41+0200\n"
-"PO-Revision-Date: 2004-04-16 11:11+0200\n"
-"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
+"POT-Creation-Date: 2006-02-21 15:23+0100\n"
+"PO-Revision-Date: 2006-02-21 15:24+0100\n"
+"Last-Translator: Iñaki Larrañaga <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: ../activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -46,6 +45,7 @@ msgstr "IOR idazteko fitxategi-deskriptorea"
 
 #: ../activation-server/activation-server-main.c:91
 #: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "FD"
 
@@ -93,49 +93,48 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1154
+#: ../activation-server/object-directory-corba.c:1243
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Lasterketa-baldintza '%s' zerbitzaria aktibatzen"
 
-#: ../activation-server/object-directory-load.c:93
+#: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
 msgstr "iid NULUA ez da baliozkoa"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "%s iid-ak mota NULUA dauka"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "%s iid-ak kokaleku NULUA dauka"
 
-#: ../activation-server/object-directory-load.c:110
+#: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "baliogabeko '%c' karakterea '%s' iid-ean"
 
-#: ../activation-server/object-directory-load.c:318
+#: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "'%s' propietateak ez du baliorik"
 
-#: ../activation-server/object-directory-load.c:601
+#: ../activation-server/object-directory-load.c:630
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Ezin izan da XML gaizki formateatutako %s dokumentua analizatu"
 
-#: ../activation-server/object-directory-load.c:666
+#: ../activation-server/object-directory-load.c:695
 #, c-format
 msgid "Trying dir %s"
 msgstr "%s direktorioarekin saiatzen"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:100
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr ""
-"Prozesu umeak ez du errore-mezurik eman, hutsegite ezezaguna gertatu da"
+msgstr "Prozesu umeak ez du errore-mezurik eman, hutsegite ezezaguna gertatu da"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:177
 #, c-format
@@ -146,23 +145,34 @@ msgstr "Huts egin du prozesu ume hau irakurtzean: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF prozesu umetik\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+#: ../bonobo-activation/bonobo-activation-fork-server.c:348
 msgid "Couldn't spawn a new process"
 msgstr "Ezin izan da prozesu berria sardetu"
 
 #: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "IOR inprimatzeko fitxategi-deskriptorea"
 
 #: ../bonobo-activation/bonobo-activation-init.c:353
+#: ../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "Aktibatzeko IID"
 
 #: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "OAF duen zerbitzaria erregistratzea eragozten du"
 
-#: ../bonobo-activation/bonobo-activation-init.c:446
+#: ../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Bonobo aktibazioa"
+
+#: ../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Erakutsi Bonobo aktibatzeko aukerak"
+
+#: ../bonobo-activation/bonobo-activation-init.c:471
 msgid "Bonobo activation options"
 msgstr "Bonobo aktibatzeko aukerak"
 
@@ -195,11 +205,11 @@ msgstr "Izena"
 msgid "Application unique name"
 msgstr "Aplikazioaren izen bakarra"
 
-#: ../bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "Custom CORBA POA"
 msgstr "CORBA POA pertsonalizatua"
 
@@ -479,18 +489,3 @@ msgstr "Bistaratu konfigurazio-fitxategiko direktorioak"
 msgid "Display path to configuration file"
 msgstr "Bistaratu konfigurazio-fitxategiaren bide-izena"
 
-#~ msgid "Child received signal %u (%s)"
-#~ msgstr "Umeak %u seinalea jaso du (%s)"
-
-#~ msgid "Unknown non-exit error (status is %u)"
-#~ msgstr "Irteera-errore ezezaguna (egoera %u da)"
-
-#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
-#~ msgstr ""
-#~ "bonobo-activation-ek ezin izan du %s(r)en prozesu-taldea ezarri: %s\n"
-
-#~ msgid "Failed to execute %s: %d (%s)\n"
-#~ msgstr "Ezin izan du %s exekutatu: %d (%s)\n"
-
-#~ msgid "Too many alias levels for a locale, may indicate a loop"
-#~ msgstr "Aliasen maila gehiegi locale baterako, begizta egon daiteke"
