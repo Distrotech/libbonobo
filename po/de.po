@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 21:52+0200\n"
-"PO-Revision-Date: 2005-07-28 21:52+0200\n"
+"POT-Creation-Date: 2006-02-25 18:25+0100\n"
+"PO-Revision-Date: 2006-02-25 18:27+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../activation-server/activation-context-corba.c:470
 msgid "Couldn't find which child the server was listed in"
@@ -24,34 +24,35 @@ msgstr "Keine Informationen, in welchem Kindprozess der Server gelistet war"
 msgid "Not a valid Activation ID"
 msgstr "Keine gültige Aktivierungskennung"
 
-#: ../activation-server/activation-server-main.c:77
+#: ../activation-server/activation-server-main.c:84
 msgid "Directory to read .server files from"
 msgstr "Verzeichnis, in dem die .server-Datei gelesen werden soll"
 
-#: ../activation-server/activation-server-main.c:77
+#: ../activation-server/activation-server-main.c:84
 msgid "DIRECTORY"
 msgstr "VERZEICHNIS"
 
-#: ../activation-server/activation-server-main.c:80
+#: ../activation-server/activation-server-main.c:87
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Als ActivationContext fungieren (Vorgabe: Ausschließlich als ObjectDirectory "
 "fungieren)"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
 msgstr "Datei-Deskriptor, in dem IOR geschrieben wird"
 
-#: ../activation-server/activation-server-main.c:84
-#: ../bonobo-activation/bonobo-activation-init.c:257
+#: ../activation-server/activation-server-main.c:91
+#: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:92
+#: ../activation-server/activation-server-main.c:99
 msgid "Query expression to evaluate"
 msgstr "Ausdruck der untersucht werden soll"
 
-#: ../activation-server/activation-server-main.c:92
+#: ../activation-server/activation-server-main.c:99
 msgid "EXPRESSION"
 msgstr "AUSDRUCK"
 
@@ -79,7 +80,7 @@ msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
 "Es können noch keine shlib-Objekte in einem fernen Prozess aktiviert werden"
 
-#: ../activation-server/object-directory-config-file.c:53
+#: ../activation-server/object-directory-config-file.c:65
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
@@ -95,43 +96,43 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1154
+#: ../activation-server/object-directory-corba.c:1243
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "»Race-Condition« beim Aktivieren des Servers »%s«"
 
-#: ../activation-server/object-directory-load.c:93
+#: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
 msgstr "eine NULL-IID ist ungültig"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "IID %s hat den Typ NULL"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "IID %s hat den Ort NULL"
 
-#: ../activation-server/object-directory-load.c:110
+#: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "ungültige Zeichen »%c« in IID »%s«"
 
-#: ../activation-server/object-directory-load.c:318
+#: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Attribut »%s« hat keinen Wert"
 
-#: ../activation-server/object-directory-load.c:601
+#: ../activation-server/object-directory-load.c:630
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr ""
 "Syntax des fehlerhaft formatierten XML-Dokuments %s konnte nicht "
 "interpretiwert werden"
 
-#: ../activation-server/object-directory-load.c:654
+#: ../activation-server/object-directory-load.c:695
 #, c-format
 msgid "Trying dir %s"
 msgstr "Verz. %s wird versucht"
@@ -150,23 +151,34 @@ msgstr "Vom Kindprozess konnte nicht gelesen werden: %s\n"
 msgid "EOF from child process\n"
 msgstr "Dateiende vom Kindprozess erhalten\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+#: ../bonobo-activation/bonobo-activation-fork-server.c:348
 msgid "Couldn't spawn a new process"
 msgstr "Es konnte kein neuer Prozess abgespalten werden"
 
-#: ../bonobo-activation/bonobo-activation-init.c:257
+#: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "Dateibeschreibung, in die die IOR geschrieben wird"
 
-#: ../bonobo-activation/bonobo-activation-init.c:259
+#: ../bonobo-activation/bonobo-activation-init.c:353
+#: ../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "Zu aktivierende IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:261
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "Registrieren von Servern mit OAF vermeiden"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Bonobo-Activation"
+
+#: ../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Bonobo-Activation-Optionen anzeigen"
+
+#: ../bonobo-activation/bonobo-activation-init.c:471
 msgid "Bonobo activation options"
 msgstr "Bonobo-Activation-Optionen"
 
@@ -199,11 +211,11 @@ msgstr "Name"
 msgid "Application unique name"
 msgstr "Eindeutiger Anwendungsname"
 
-#: ../bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "Custom CORBA POA"
 msgstr "Benutzerdefinierter CORBA-POA"
 
@@ -435,22 +447,22 @@ msgstr "Es konnte keine Instanz der Beispiel-Echo-Komponente erzeugt werden"
 msgid "An exception occured '%s'"
 msgstr "Ein Ausnahmefehler ist aufgetreten »%s«"
 
-#: ../utils/bonobo-activation-sysconf.c:62
+#: ../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
 msgstr "Die Konfigurationsdatei konnte nicht gespeichert werden.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:63
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr ""
 "Stellen Sie sicher, dass Sie die nötigen Zugriffsrechte haben, um auf »%s« "
 "zu schreiben.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:66
+#: ../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
 msgstr "Konfigurationsdatei erfolgreich geschrieben.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:80
+#: ../utils/bonobo-activation-sysconf.c:101
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -459,36 +471,37 @@ msgstr ""
 "Konfigurationsdatei ist:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:118
+#: ../utils/bonobo-activation-sysconf.c:139
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s befindet sich bereits in der Konfigurationsdatei\n"
 
-#: ../utils/bonobo-activation-sysconf.c:138
+#: ../utils/bonobo-activation-sysconf.c:159
 msgid "there is not a properly structured configuration file\n"
 msgstr "es ist keine richtig struktierte Konfigurationsdatei vorhanden\n"
 
-#: ../utils/bonobo-activation-sysconf.c:201
+#: ../utils/bonobo-activation-sysconf.c:222
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo-Activation-Konfigurationsdatei enthält:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:233
+#: ../utils/bonobo-activation-sysconf.c:254
 msgid "Directory to remove from configuration file"
 msgstr "Verzeichnis, das aus der Konfigurationsdatei entfernt werden soll"
 
-#: ../utils/bonobo-activation-sysconf.c:233
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "directory path"
 msgstr "Verzeichnispfad"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:257
 msgid "Directory to add to configuration file"
 msgstr "Verzeichnis, das zur Konfigurationsdatei hinzugefügt werden soll"
 
-#: ../utils/bonobo-activation-sysconf.c:239
+#: ../utils/bonobo-activation-sysconf.c:260
 msgid "Display directories in configuration file"
 msgstr "Verzeichnisse in der Konfigurationsdatei anzeigen"
 
-#: ../utils/bonobo-activation-sysconf.c:242
+#: ../utils/bonobo-activation-sysconf.c:263
 msgid "Display path to configuration file"
 msgstr "Pfad zur Konfigurationsdatei anzeigen"
+
