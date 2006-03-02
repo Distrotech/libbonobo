@@ -1,16 +1,16 @@
 # Lithuanian translation of libbonobo
-# Copyright (C) 2003 Free Software Foundation, Inc.
+# Copyright (C) 2003-2006 Free Software Foundation, Inc.
 # Tomas Kuliavas <tokul@users.sourceforge.net>, 2003-2004.
-# Žygimantas Beručka <uid0@akl.lt>, 2004-2005.
+# Žygimantas Beručka <zygis@gnome.org>, 2004-2006.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-02 15:45+0200\n"
-"PO-Revision-Date: 2005-12-02 15:47+0200\n"
-"Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
+"POT-Creation-Date: 2006-03-03 01:04+0200\n"
+"PO-Revision-Date: 2006-03-03 01:10+0200\n"
+"Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr "Netinkamas aktyvavimo ID"
 
 #: ../activation-server/activation-server-main.c:84
 msgid "Directory to read .server files from"
-msgstr "Aplankas, iš kurio skaitomos .server bylos"
+msgstr "Aplankas, iš kurio skaitomos .server rinkmenos"
 
 #: ../activation-server/activation-server-main.c:84
 msgid "DIRECTORY"
@@ -40,7 +40,7 @@ msgstr ""
 
 #: ../activation-server/activation-server-main.c:91
 msgid "File descriptor to write IOR to"
-msgstr "Bylos, į kurią reikia įrašyti IOR, nuoroda"
+msgstr "Rinkmenos, į kurią reikia įrašyti IOR, nuoroda"
 
 #: ../activation-server/activation-server-main.c:91
 #: ../bonobo-activation/bonobo-activation-init.c:351
@@ -82,7 +82,7 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"Nepavyko sėkmingai perskaityti Bonobo aktyvacijos nustatymų bylos. Prašau "
+"Nepavyko sėkmingai perskaityti Bonobo aktyvacijos nustatymų rinkmenos. Prašau "
 "patikrinti, ar ji yra tarp %s"
 
 #.
@@ -92,10 +92,10 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1154
+#: ../activation-server/object-directory-corba.c:1243
 #, c-format
 msgid "Race condition activating server '%s'"
-msgstr "Konfliktinė situacija paleidžiant serverį '%s'"
+msgstr "Konfliktinė situacija paleidžiant serverį „%s“"
 
 #: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
@@ -114,12 +114,12 @@ msgstr "iid %s vieta yra NULL"
 #: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "netinkamas simbolis '%c' tarp iid '%s'"
+msgstr "netinkamas simbolis „%c“ esantis iid „%s“"
 
 #: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "Nenurodyta savybės '%s' reikšmė"
+msgstr "Nenurodyta savybės „%s“ reikšmė"
 
 #: ../activation-server/object-directory-load.c:630
 #, c-format
@@ -144,14 +144,14 @@ msgstr "Nepavyko gauti informacijos iš antrinio proceso: %s\n"
 msgid "EOF from child process\n"
 msgstr "Iš antrinio proceso gauta EOF\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+#: ../bonobo-activation/bonobo-activation-fork-server.c:348
 msgid "Couldn't spawn a new process"
 msgstr "Nepavyko prikelti naujo proceso"
 
 #: ../bonobo-activation/bonobo-activation-init.c:351
 #: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
-msgstr "Bylos, į kurią reikia išvesti IOR, nuoroda"
+msgstr "Rinkmenos, į kurią reikia išvesti IOR, nuoroda"
 
 #: ../bonobo-activation/bonobo-activation-init.c:353
 #: ../bonobo-activation/bonobo-activation-init.c:363
@@ -355,7 +355,7 @@ msgstr "Nepavyko paleisti Bonobo"
 #: ../bonobo/bonobo-moniker.c:352
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "Nepavyko atpažinti arba praplėsti  '%s"
+msgstr "Nepavyko atpažinti arba praplėsti „%s“"
 
 #: ../bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
@@ -364,12 +364,12 @@ msgstr "Nepavyko aktyvuoti objekto"
 #: ../monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
-msgstr "Klaida aktyvuojant '%s'"
+msgstr "Klaida aktyvuojant „%s“"
 
 #: ../monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
-msgstr "Nepavyko aktyvuoti '%s'"
+msgstr "Nepavyko aktyvuoti „%s“"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -430,20 +430,20 @@ msgstr "Nepavyko sukurti pavyzdinio aido komponento proceso"
 #: ../samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr "Įvyko klaida '%s'"
+msgstr "Įvyko klaida „%s“"
 
 #: ../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
-msgstr "Nepavyko išsaugoti nustatymų bylos.\n"
+msgstr "Nepavyko išsaugoti nustatymų rinkmenos.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "Prašau patikrinti, ar Jūs turite teisę rašyti į '%s'.\n"
+msgstr "Patikrinkite, ar Jūs turite teisę rašyti į „%s“.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
-msgstr "Sėsmingai išsaugota nustatymų byla.\n"
+msgstr "Sėkmingai išsaugota nustatymų rinkmena.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:101
 #, c-format
@@ -451,54 +451,39 @@ msgid ""
 "configuration file is:\n"
 "    %s\n"
 msgstr ""
-"nustatymų byla yra:\n"
+"nustatymų rinkmena yra:\n"
 "    %s\n"
 
 #: ../utils/bonobo-activation-sysconf.c:139
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr "%s jau yra saugomas nustatymų byloje\n"
+msgstr "%s jau yra saugomas nustatymų rinkmenoje\n"
 
 #: ../utils/bonobo-activation-sysconf.c:159
 msgid "there is not a properly structured configuration file\n"
-msgstr "nerasta tvarkingai suskaidyta nustatymų byla\n"
+msgstr "nerasta tvarkingai suskaidyta nustatymų rinkmena\n"
 
 #: ../utils/bonobo-activation-sysconf.c:222
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr "Bonobo-aktyvacijos nustatymų byloje yra:\n"
+msgstr "Bonobo-aktyvacijos nustatymų rinkmenoje yra:\n"
 
 #: ../utils/bonobo-activation-sysconf.c:254
 msgid "Directory to remove from configuration file"
-msgstr "Katalogas, kurį reikia pašalinti iš nustatymų bylos"
+msgstr "Aplankas, kurį reikia pašalinti iš nustatymų rinkmenos"
 
 #: ../utils/bonobo-activation-sysconf.c:254
 #: ../utils/bonobo-activation-sysconf.c:257
 msgid "directory path"
-msgstr "katalogo kelias"
+msgstr "Aplanko kelias"
 
 #: ../utils/bonobo-activation-sysconf.c:257
 msgid "Directory to add to configuration file"
-msgstr "Katalogas, kurį reikia įtraukti į nustatymų bylą"
+msgstr "Aplankas, kurį reikia įtraukti į nustatymų rinkmeną"
 
 #: ../utils/bonobo-activation-sysconf.c:260
 msgid "Display directories in configuration file"
-msgstr "Parodyti katalogus saugomus nustatymų byloje"
+msgstr "Parodyti aplankus saugomus nustatymų rinkmenoje"
 
 #: ../utils/bonobo-activation-sysconf.c:263
 msgid "Display path to configuration file"
-msgstr "Parodyti kelią iki nustatymų bylos"
-
-#~ msgid "Too many alias levels for a locale, may indicate a loop"
-#~ msgstr "Lokalė turi per daug alternatyvų, galimas ciklas"
-
-#~ msgid "Child received signal %u (%s)"
-#~ msgstr "Antrinis procesas gavo signalą %u (%s)"
-
-#~ msgid "Unknown non-exit error (status is %u)"
-#~ msgstr "Nežinoma negalutinė klaida (būsena yra lygi %u)"
-
-#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
-#~ msgstr "bonobo-aktyvacijai nepavyko nustatyti proceso grupės į %s: %s\n"
-
-#~ msgid "Failed to execute %s: %d (%s)\n"
-#~ msgstr "Nepavyko paleisti %s: %d (%s)\n"
+msgstr "Parodyti kelią iki nustatymų rinkmenos"
