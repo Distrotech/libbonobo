@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 15:27+0000\n"
+"POT-Creation-Date: 2006-03-02 08:43+0100\n"
 "PO-Revision-Date: 2005-08-23 21:07+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -48,6 +48,7 @@ msgstr "Fájlleíró, amelybe az IOR-t kell írni"
 
 #: ../activation-server/activation-server-main.c:91
 #: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "FD"
 msgstr "FD"
 
@@ -95,41 +96,41 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1154
+#: ../activation-server/object-directory-corba.c:1243
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Versenyhelyzet a következő kiszolgáló aktiválása közben: \"%s\""
 
-#: ../activation-server/object-directory-load.c:93
+#: ../activation-server/object-directory-load.c:97
 msgid "a NULL iid is not valid"
 msgstr "egy NULL iid nem érvényes"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "%s iid-nek NULL típusa van"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "%s iid-nek NULL helye van"
 
-#: ../activation-server/object-directory-load.c:110
+#: ../activation-server/object-directory-load.c:114
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "érvénytelen \"%c\" karakter a(z) \"%s\" iid-ben"
 
-#: ../activation-server/object-directory-load.c:318
+#: ../activation-server/object-directory-load.c:342
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "A(z) \"%s\" tulajdonságnak nincs értéke"
 
-#: ../activation-server/object-directory-load.c:601
+#: ../activation-server/object-directory-load.c:630
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Nem lehet értelmezni a rosszul formázott %s XML-dokumentumot"
 
-#: ../activation-server/object-directory-load.c:666
+#: ../activation-server/object-directory-load.c:695
 #, c-format
 msgid "Trying dir %s"
 msgstr "Próba: %s könyvtár"
@@ -147,23 +148,34 @@ msgstr "Nem sikerült olvasni a gyermekfolyamatból: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF a gyermekfolyamatból\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+#: ../bonobo-activation/bonobo-activation-fork-server.c:348
 msgid "Couldn't spawn a new process"
 msgstr "Nem lehet új folyamatot indítani"
 
 #: ../bonobo-activation/bonobo-activation-init.c:351
+#: ../bonobo-activation/bonobo-activation-init.c:361
 msgid "File descriptor to print IOR on"
 msgstr "A fájlleíró, amelyre az IOR-t kell nyomtatni"
 
 #: ../bonobo-activation/bonobo-activation-init.c:353
+#: ../bonobo-activation/bonobo-activation-init.c:363
 msgid "IID to activate"
 msgstr "Az aktiválandó IID"
 
 #: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "Prevent registering of server with OAF"
 msgstr "A kiszolgáló OAF-regisztrálásának megakadályozása"
 
-#: ../bonobo-activation/bonobo-activation-init.c:446
+#: ../bonobo-activation/bonobo-activation-init.c:375
+msgid "Bonobo Activation"
+msgstr "Bonobo-aktiválás"
+
+#: ../bonobo-activation/bonobo-activation-init.c:376
+msgid "Show Bonobo Activation options"
+msgstr "Bonobo-aktiválás beállításainak megjelenítése"
+
+#: ../bonobo-activation/bonobo-activation-init.c:471
 msgid "Bonobo activation options"
 msgstr "Bonobo-aktiválás beállításai"
 
@@ -196,11 +208,11 @@ msgstr "Név"
 msgid "Application unique name"
 msgstr "Az alkalmazás egyedi neve"
 
-#: ../bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:925
+#: ../bonobo/bonobo-object.c:922
 msgid "Custom CORBA POA"
 msgstr "Egyéni CORBA POA"
 
