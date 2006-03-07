@@ -50,17 +50,20 @@ od_server_activate_factory (Bonobo_ServerInfo                  *si,
 	CORBA_Object             retval = CORBA_OBJECT_NIL;
 	CORBA_Object             factory = CORBA_OBJECT_NIL;
 	char                    *requirements;
+        char                    *iid;
 
 	memset (&selorder, 0, sizeof (Bonobo_StringList));
 
 	requirements = g_alloca (strlen (si->location_info) + sizeof ("iid == ''"));
 	sprintf (requirements, "iid == '%s'", si->location_info);
+        iid = g_strdup (si->iid);
 
 	flags = ((actinfo->flags | Bonobo_ACTIVATION_FLAG_NO_LOCAL) & (~Bonobo_ACTIVATION_FLAG_PRIVATE));
 
 	res = Bonobo_ActivationContext_activateMatchingFull (
 			actinfo->ac, requirements, &selorder,
 			environment, flags, client, actinfo->ctx, ev);
+        /* NB. si can have been freed - due to re-enterancy */
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
@@ -78,13 +81,14 @@ od_server_activate_factory (Bonobo_ServerInfo                  *si,
 		break;
 	}
 
-	retval = Bonobo_GenericFactory_createObject (factory, si->iid, ev);
+	retval = Bonobo_GenericFactory_createObject (factory, iid, ev);
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		retval = CORBA_OBJECT_NIL;
 
 	CORBA_free (res);
 
  out:
+        g_free (iid);
 	return retval;
 }
 
@@ -100,7 +104,7 @@ od_server_activate_exe (Bonobo_ServerInfo                  *si,
 	char *extra_arg, *ctmp, *ctmp2;
         int fd_arg;
 	int i;
-        char *iorstr;
+        char *iorstr, *iid;
         CORBA_Object retval;
 
 	/* Munge the args */
@@ -156,9 +160,11 @@ od_server_activate_exe (Bonobo_ServerInfo                  *si,
          * this allows people to destroy all OAF servers along with oafd
          * if necessary
          */
+        iid = g_strdup (si->iid);
 	retval = bonobo_activation_server_by_forking (
                 (const char **) args, TRUE, fd_arg, environment, iorstr,
-                si->iid, FALSE, bonobo_object_directory_re_check_fn, actinfo, ev);
+                iid, FALSE, bonobo_object_directory_re_check_fn, actinfo, ev);
+        g_free (iid);
         
 	CORBA_free (iorstr);
 

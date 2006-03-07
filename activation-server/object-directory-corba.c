@@ -503,6 +503,7 @@ impl_Bonobo_ObjectDirectory_activate (
 	if (si) {
 		retval = od_server_activate (
 				si, &ai, BONOBO_OBJREF (od), &merged_environment, client, ev);
+                /* NB. si can now be invalid - due to re-enterancy */
 
                 /* If we failed to activate - it may be because our
                  * request re-entered _during_ the activation
