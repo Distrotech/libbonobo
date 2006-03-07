@@ -1,3 +1,14 @@
+2006-03-07  Michael Meeks <michael.meeks@novell.com>
+
+	* activation-server/object-directory-activate.c
+	(od_server_activate_factory): keep private copy of data we need,
+	since it can be freed due to re-enterancy.
+	(od_server_activate_exe): ditto.
+
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory_activate): added comment to explain
+	new situation.
+
 2006-02-07  Michael Meeks  <michael.meeks@novell.com>
 
 	(backport):
