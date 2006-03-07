@@ -1,3 +1,9 @@
+=== 2.13.93 ===
+2006-03-07  Rodrigo Moya <rodrigo@novell.com>
+
+	* NEWS:
+	* configure.in: released 2.13.93.
+
 2006-03-07  Michael Meeks <michael.meeks@novell.com>
 
 	* activation-server/object-directory-activate.c

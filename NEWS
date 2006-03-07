@@ -1,3 +1,24 @@
+libbonobo 2.13.93
+
+	* Always pass program arguments to bonobo_activation_init (Michael)
+	* Fixed re-enterancy problems on slow machines (Michael)
+	* Translation updates:
+                * Rhys Jones (cy)
+		* Hendrik Brandt (de)
+		* Kostas Papadimas (el)
+		* Inaki Larranaga (eu)
+		* Gabor Kelemen (hu)
+		* Luca Ferretti (it)
+	        * Changwoo Ryu (ko)
+		* Žygimantas Beručka (lt)
+		* Artur Flinta (pl)
+		* Duarte Loreto (pt)
+		* Raphael Higino (pt_BR)
+		* Leonid Kanter (ru)
+		* Slobodan D, Sredojevic (sr, sr@Latn)
+		* Maxim Dziumanenko (uk)
+                * Funda Wang (zh_CN)
+
 libbonobo 2.13.1
 
 	* Fix corruption issue that was causing hangs on login (Michael)
@@ -19,7 +40,7 @@ libbonobo 2.13.0
 		* Adam Weinberger (en_CA)
 		* Francisco Javier F. Serrador (es)
 		* Ivar Smolin (et)
-		* Iñaki Larrañaga Murgoitio (eu)
+		* IÃ±aki LarraÃ±aga Murgoitio (eu)
 		* Christophe Merlet (RedFox) (fr)
 		* Ignacio Casal Quinteiro (gl)
 		* Ankit Patel (gu)
@@ -141,7 +162,7 @@ libbonobo 2.3.4
 		+ fi (Pauli Virtanen)
 		+ ru (Russian team, Dmitry G. Mastrukov)
 		+ da (Ole Laursen)
-		+ sr (Serbian team, Danilo Å egan)
+		+ sr (Serbian team, Danilo ÃÂ egan)
 		+ sq (Laurent Dhima)
 
 libbonobo 2.3.3
@@ -226,7 +247,7 @@ libbonobo 2.0.0
 
 	* Featurelets
 		+ add BonoboObject padding (Michael)
-		+ add --enable-debug config option (Gustavo Giráldez)
+		+ add --enable-debug config option (Gustavo GirÃ¡ldez)
 
 libbonobo 1.117.1
 
