@@ -55,6 +55,12 @@ gboolean                 activation_clients_is_empty_scan(void);
 void                     add_initial_locales             (void);
 gboolean                 register_interest_in_locales    (const char            *locales);
 
+typedef glong ServerLockState;
+void                     server_lock                     (void);
+void                     server_unlock                   (void);
+ServerLockState          server_lock_drop                (void);
+void                     server_lock_resume              (ServerLockState state);
+
 #ifdef G_OS_WIN32
 const char *server_win32_replace_prefix (const char *configure_time_path);
 #endif

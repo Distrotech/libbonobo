@@ -56,14 +56,13 @@ od_server_activate_factory (Bonobo_ServerInfo                  *si,
 
 	requirements = g_alloca (strlen (si->location_info) + sizeof ("iid == ''"));
 	sprintf (requirements, "iid == '%s'", si->location_info);
-        iid = g_strdup (si->iid);
-
 	flags = ((actinfo->flags | Bonobo_ACTIVATION_FLAG_NO_LOCAL) & (~Bonobo_ACTIVATION_FLAG_PRIVATE));
 
+        iid = g_strdup (si->iid);
 	res = Bonobo_ActivationContext_activateMatchingFull (
 			actinfo->ac, requirements, &selorder,
 			environment, flags, client, actinfo->ctx, ev);
-        /* NB. si can have been freed - due to re-enterancy */
+        si = NULL; /* si can have been freed - due to re-enterancy */
 
 	if (ev->_major != CORBA_NO_EXCEPTION)
 		goto out;
@@ -89,6 +88,7 @@ od_server_activate_factory (Bonobo_ServerInfo                  *si,
 
  out:
         g_free (iid);
+
 	return retval;
 }
 
@@ -155,17 +155,31 @@ od_server_activate_exe (Bonobo_ServerInfo                  *si,
 
 	args[i] = NULL;
 
-        /*
-         * We set the process group of activated servers to our process group;
-         * this allows people to destroy all OAF servers along with oafd
-         * if necessary
-         */
         iid = g_strdup (si->iid);
-	retval = bonobo_activation_server_by_forking (
-                (const char **) args, TRUE, fd_arg, environment, iorstr,
-                iid, FALSE, bonobo_object_directory_re_check_fn, actinfo, ev);
+
+        /* Here comes the too clever by 1/2 bit:
+         *   we drop the (recursive) 'server_lock' - so we
+         *   can get other threads re-entering / doing activations
+         *   here.
+         */
+        {
+                ServerLockState state;
+
+                state = server_lock_drop ();
+                /*
+                 * We set the process group of activated servers to our process group;
+                 * this allows people to destroy all OAF servers along with oafd
+                 * if necessary
+                 */
+                retval = bonobo_activation_server_by_forking
+                        ( (const char **) args, TRUE, fd_arg, environment, iorstr,
+                          iid, FALSE, bonobo_object_directory_re_check_fn, actinfo, ev);
+
+                server_lock_resume (state);
+        }
+
         g_free (iid);
-        
+
 	CORBA_free (iorstr);
 
         return retval;

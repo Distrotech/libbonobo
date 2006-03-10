@@ -1,5 +1,41 @@
 2006-03-10  Michael Meeks  <michael.meeks@novell.com>
 
+	* doc/b-a-s-threading.txt: notes on b-a-s threading.
+	* activation-server/README: notes on debugging.
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(scan_list): fix list scan & debug to fix crash.
+
+	* activation-server/object-directory-corba.c
+	(bonobo_object_directory_re_check_fn): remember to
+	take lock for this callback.
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_fork_init): add
+
+	* activation-server/activation-context-corba.c
+	(impl_Bonobo_ActivationContext_activateMatchingFull),
+	(ac_do_activation): hold refs, generate aid earlier,
+	use g_strdup_printf.
+
+	* activation-server/README: add blurb.
+
+	* activation-server/activation-server-main.c
+	(server_get_poa, server_lock, server_unlock, main): impl.
+	threaded POA & locking methods.
+	* activation-server/*-corba.c: take/release
+	lock at entry / exit of CORBA impls.
+
+	* activation-server/activation-context-corba.c
+	(activation_context_setup): use the poa.
+	
+	* activation-server/object-directory-corba.c
+	(bonobo_object_directory_init): use the poa.
+
+	* activation-server/activation-server-main.c:
+	enable --register-server in non debugging builds,
+	just too useful.
+
 	* configure.in: bump to 2.15.0, add chatty blurb.
 
 	* Branch for gnome-2-14

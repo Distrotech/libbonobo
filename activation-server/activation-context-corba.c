@@ -364,6 +364,8 @@ impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
         gboolean new_locale;
         ORBitConnection *cnx;
 
+        server_lock ();
+
         new_locale = register_interest_in_locales (locales);
 
         cnx = ORBit_small_get_connection (client);
@@ -384,14 +386,20 @@ impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
 
         if (new_locale)
                 bonobo_object_directory_reload ();
+
+        server_unlock ();
 }
 
 static Bonobo_ObjectDirectoryList *
 impl_Bonobo_ActivationContext__get_directories (PortableServer_Servant servant,
                                                 CORBA_Environment     *ev)
 {
-        ActivationContext *actx = ACTIVATION_CONTEXT (servant);
+        ActivationContext *actx;
 	Bonobo_ObjectDirectoryList *retval;
+
+        server_lock ();
+
+        actx = ACTIVATION_CONTEXT (servant);
 
 	retval = Bonobo_ObjectDirectoryList__alloc ();
         if (actx->obj != CORBA_OBJECT_NIL) {
@@ -405,6 +413,8 @@ impl_Bonobo_ActivationContext__get_directories (PortableServer_Servant servant,
 
 	CORBA_sequence_set_release (retval, CORBA_TRUE);
 
+        server_unlock ();
+
 	return retval;
 }
 
@@ -413,7 +423,11 @@ impl_Bonobo_ActivationContext_addDirectory (PortableServer_Servant servant,
                                             Bonobo_ObjectDirectory dir,
                                             CORBA_Environment     *ev)
 {
-        ActivationContext *actx = ACTIVATION_CONTEXT (servant);
+        ActivationContext *actx;
+
+        server_lock ();
+
+        actx = ACTIVATION_CONTEXT (servant);
 
         if (actx->obj == dir)
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -423,6 +437,8 @@ impl_Bonobo_ActivationContext_addDirectory (PortableServer_Servant servant,
                 CORBA_Object_release (actx->obj, ev);
                 actx->obj = CORBA_Object_duplicate (dir, ev);
         }
+
+        server_unlock ();
 }
 
 static void
@@ -430,7 +446,11 @@ impl_Bonobo_ActivationContext_removeDirectory (PortableServer_Servant servant,
                                                Bonobo_ObjectDirectory dir,
                                                CORBA_Environment     *ev)
 {
-        ActivationContext *actx = ACTIVATION_CONTEXT (servant);
+        ActivationContext *actx;
+
+        server_lock ();
+
+        actx = ACTIVATION_CONTEXT (servant);
 
         if (dir != actx->obj)
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -443,6 +463,8 @@ impl_Bonobo_ActivationContext_removeDirectory (PortableServer_Servant servant,
                 } else
                         directory_info_free (actx, ev);
         }
+
+        server_unlock ();
 }
 
 static void
@@ -458,6 +480,7 @@ ac_do_activation (ActivationContext                  *actx,
 {
 	int num_layers;
 	Bonobo_ServerInfo *activatable;
+        gchar *aid = NULL;
 
 	/* When doing checks for shlib loadability, we 
          * have to find the info on the factory object in case
@@ -500,12 +523,15 @@ ac_do_activation (ActivationContext                  *actx,
 	 * order for loading to work properly (no, we're not going to
 	 * bother with loading a remote shlib into a process - it gets far too complicated
 	 * far too quickly :-) */
+
+        if (activatable)
+                aid = g_strdup_printf ("OAFAID:[%s,%s,%s]", activatable->iid,
+                                       activatable->username, activatable->hostname);
 	
 	if (activatable && !strcmp (activatable->server_type, "shlib")
 	    && !(flags & Bonobo_ACTIVATION_FLAG_NO_LOCAL)
 	    && (hostname && !strcmp (activatable->hostname, hostname))) {
 		int j;
-		char tbuf[512];
 		
 		out->res._d = Bonobo_ACTIVATION_RESULT_SHLIB;		
 
@@ -531,35 +557,29 @@ ac_do_activation (ActivationContext                  *actx,
 
 		/* Copy location into last buffer slot for use in later activation */
 		out->res._u.res_shlib._buffer[j+1] = CORBA_string_dup (activatable->location_info);
-		
-		g_snprintf (tbuf, sizeof (tbuf), "OAFAID:[%s,%s,%s]",
-			    activatable->iid,
-			    activatable->username,
-			    activatable->hostname);
-		out->aid = CORBA_string_dup (tbuf);
+
+		out->aid = CORBA_string_dup (aid);
 	} else {
 		CORBA_Object retval;
+                char *iid = g_strdup (server->iid);
 
 		retval = Bonobo_ObjectDirectory_activate (
-                        actx->obj, server->iid, BONOBO_OBJREF (actx),
+                        actx->obj, iid, BONOBO_OBJREF (actx),
                         environment, flags, client, ctx, ev);
+                g_free (iid);
 
 		if (ev->_major == CORBA_NO_EXCEPTION) {
-			char tbuf[512];
 			out->res._d = Bonobo_ACTIVATION_RESULT_OBJECT;
 			out->res._u.res_object = retval;
-			g_snprintf (tbuf, sizeof (tbuf),
-				    "OAFAID:[%s,%s,%s]", activatable->iid,
-				    activatable->username,
-				    activatable->hostname);
-			out->aid = CORBA_string_dup (tbuf);
+			out->aid = CORBA_string_dup (aid);
 		}
 #ifdef BONOBO_ACTIVATION_DEBUG
                 else
                         g_warning ("Activation of '%s' failed with exception '%s'",
-                                   activatable->iid, ev->_id);
+                                   aid, ev->_id);
 #endif
 	}
+        g_free (aid);
 }
 
 
@@ -574,11 +594,15 @@ impl_Bonobo_ActivationContext_activateMatchingFull (
         CORBA_Context                       ctx,
         CORBA_Environment                  *ev)
 {
-        ActivationContext *actx = ACTIVATION_CONTEXT (servant);
+        ActivationContext *actx;
 	Bonobo_ActivationResult *retval = NULL;
 	Bonobo_ServerInfo **items, *curitem;
 	int i;
 	char *hostname;
+
+        server_lock ();
+
+        actx = ACTIVATION_CONTEXT (servant);
 
 	ac_update_lists (actx, ev);
 
@@ -596,6 +620,7 @@ impl_Bonobo_ActivationContext_activateMatchingFull (
 	retval = Bonobo_ActivationResult__alloc ();
 	retval->res._d = Bonobo_ACTIVATION_RESULT_NONE;
 
+        bonobo_object_ref (actx);
 	for (i = 0; (retval->res._d == Bonobo_ACTIVATION_RESULT_NONE) && items[i]
 	     && (i < actx->total_servers); i++) {
 		curitem = items[i];
@@ -603,6 +628,7 @@ impl_Bonobo_ActivationContext_activateMatchingFull (
 		ac_do_activation (actx, curitem, environment,
 				  retval, flags, hostname, client, ctx, ev);
 	}
+        bonobo_object_unref (actx);
 
 	if (retval->res._d == Bonobo_ACTIVATION_RESULT_NONE)
 		retval->aid = CORBA_string_dup ("");
@@ -616,6 +642,8 @@ impl_Bonobo_ActivationContext_activateMatchingFull (
         }
 
 	actx->refs--;
+
+        server_unlock ();
 
 	return retval;
 }
@@ -641,11 +669,15 @@ impl_Bonobo_ActivationContext_query (PortableServer_Servant servant,
                                      const Bonobo_StringList * selection_order,
                                      CORBA_Context ctx, CORBA_Environment * ev)
 {
-        ActivationContext *actx = ACTIVATION_CONTEXT (servant);
+        ActivationContext *actx;
 	Bonobo_ServerInfoList *retval;
 	Bonobo_ServerInfo **items;
 	int item_count;
 	int i, j, total;
+
+        server_lock ();
+
+        actx = ACTIVATION_CONTEXT (servant);
 
 	retval = Bonobo_ServerInfoList__alloc ();
 	retval->_length = 0;
@@ -683,6 +715,8 @@ impl_Bonobo_ActivationContext_query (PortableServer_Servant servant,
 	}
 
 	actx->refs--;
+
+        server_unlock ();
 
 	return retval;
 }
@@ -755,12 +789,16 @@ impl_Bonobo_ActivationContext_activateFromAidFull (PortableServer_Servant  serva
                                                    CORBA_Context           ctx,
                                                    CORBA_Environment      *ev)
 {
-        ActivationContext *actx = ACTIVATION_CONTEXT (servant);
-	Bonobo_ActivationResult *retval;
+        ActivationContext *actx;
+	Bonobo_ActivationResult *retval = NULL;
         char *requirements;
         char *sort_criteria[3];
         Bonobo_StringList selection_order;
 	Bonobo_ActivationEnvironment environment;
+
+        server_lock ();
+
+        actx = ACTIVATION_CONTEXT (servant);
 
 	if (strncmp ("OAFAID:", aid, 7) != 0) {
 		Bonobo_Activation_ParseFailed *ex;
@@ -771,26 +809,26 @@ impl_Bonobo_ActivationContext_activateFromAidFull (PortableServer_Servant  serva
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_Bonobo_Activation_ParseFailed,
 				     ex);
-		return NULL;
+                goto act_out;
 	}
 
 	ac_update_lists (actx, ev);
         if (ev->_major != CORBA_NO_EXCEPTION)
-                return NULL;
+                goto act_out;
 
 	actx->refs++;
 
         requirements = ac_aid_to_query_string (aid);
         if (requirements == NULL) {
                 actx->refs--;
-                return NULL;
+                goto act_out;
         }
 
         ac_context_to_string_array (ctx, sort_criteria, ev);
         if (ev->_major != CORBA_NO_EXCEPTION) {
                 actx->refs--;
                 g_free (requirements);
-                return NULL;
+                goto act_out;
         }
 
         selection_order._length = 2;
@@ -808,6 +846,9 @@ impl_Bonobo_ActivationContext_activateFromAidFull (PortableServer_Servant  serva
         g_free (requirements);
 
         actx->refs--;
+
+ act_out:
+        server_unlock ();
 
         return retval;
 }
@@ -839,7 +880,8 @@ activation_context_setup (PortableServer_POA     poa,
                           Bonobo_ObjectDirectory dir,
                           CORBA_Environment     *ev)
 {
-        main_ac = g_object_new (activation_context_get_type (), NULL);
+        main_ac = g_object_new (activation_context_get_type (),
+                                "poa", poa, NULL);
 
         impl_Bonobo_ActivationContext_addDirectory
                 (BONOBO_OBJECT (main_ac), dir, ev);
