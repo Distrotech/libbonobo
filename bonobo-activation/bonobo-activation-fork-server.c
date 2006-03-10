@@ -152,18 +152,21 @@ scan_list (EXEActivateInfo *seek_ai, CORBA_Environment *ev)
         if (thread_cond) {
                 while (ai && !ai->done) {
 #ifdef BONOBO_ACTIVATION_DEBUG
-                        g_message ("Activation of '%s' already pending, waiting ...\n",
-                                   seek_ai->act_iid);
+                        g_message ("thread %p: activation of '%s' already pending, waiting ...\n",
+                                   g_thread_self(), seek_ai->act_iid);
 #endif
                         /* Wait for something to happen */
                         g_cond_wait (thread_cond, thread_lock);
+#ifdef BONOBO_ACTIVATION_DEBUG
+                        g_message ("thread %p: activation of '%s' woken up to retry ...\n",
+                                   g_thread_self(), seek_ai->act_iid);
+#endif
                         ai = find_on_list (seek_ai, ev);
                 }
         } else {
                 /* We run the loop too ... */
                 while (!ai->done)
                         g_main_context_iteration (NULL, TRUE);
-                
         }
 
         if (ai && !strcmp (seek_ai->act_iid, ai->act_iid)) {
@@ -175,17 +178,15 @@ scan_list (EXEActivateInfo *seek_ai, CORBA_Environment *ev)
         } else if (seek_ai->re_check) {
                 /* It might have just registered the IID */
 #ifdef BONOBO_ACTIVATION_DEBUG
-                g_message ("Re-check the thing ... '%s' '%s'\n",
-                           seek_ai->act_iid, ai->act_iid);
+                g_message ("Re-check for ... '%s' \n", seek_ai->act_iid);
 #endif
-                retval = seek_ai->re_check (
-                                            seek_ai->environment,
+                retval = seek_ai->re_check (seek_ai->environment,
                                             seek_ai->act_iid,
                                             seek_ai->user_data, ev);
         } else {
 #ifdef BONOBO_ACTIVATION_DEBUG
-                g_warning ("Very unusual dual activation failure: '%s' '%s'\n",
-                           seek_ai->act_iid, ai->act_iid);
+                g_warning ("Very unusual dual activation failure: '%s'\n",
+                           seek_ai->act_iid);
 #endif
         }
                 
@@ -243,11 +244,8 @@ handle_exepipe (GIOChannel * source,
 		g_message ("srv output[%d]: '%s'", retval, data->iorbuf);
 #endif
 
-	if (!retval) {
-                if (thread_cond)
-                        g_cond_broadcast (thread_cond);
+	if (!retval)
                 data->done = TRUE;
-        }
 
 	return retval;
 }
@@ -458,6 +456,12 @@ bonobo_activation_server_by_forking (
         while (!ai.done) {
                 g_main_context_iteration (context, TRUE);
         }
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+        g_message ("Broadcast activation of '%s' complete ...\n", act_iid);
+#endif
+        if (thread_cond)
+                g_cond_broadcast (thread_cond);
 
         g_source_destroy (source);
         g_source_unref (source);

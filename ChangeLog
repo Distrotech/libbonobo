@@ -1,5 +1,8 @@
 2006-03-10  Michael Meeks  <michael.meeks@novell.com>
 
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(scan_list): fix list scan & debug to fix crash.
+
 	* activation-server/object-directory-corba.c
 	(bonobo_object_directory_re_check_fn): remember to
 	take lock for this callback.
