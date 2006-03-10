@@ -1,5 +1,8 @@
 2006-03-10  Michael Meeks  <michael.meeks@novell.com>
 
+	* doc/b-a-s-threading.txt: notes on b-a-s threading.
+	* activation-server/README: notes on debugging.
+
 	* bonobo-activation/bonobo-activation-fork-server.c
 	(scan_list): fix list scan & debug to fix crash.
 

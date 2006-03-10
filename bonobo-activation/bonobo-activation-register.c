@@ -32,8 +32,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#undef BONOBO_ACTIVATION_DEBUG
-
 typedef struct {
 	char *name;
 	char *value;

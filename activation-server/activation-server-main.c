@@ -62,9 +62,6 @@
 static void debug_queries (void);
 #endif
 
-/* HACK */
-#undef HAVE_SYSLOG_H
-
 /* Option values */
 static char *od_source_dir = NULL;
 #ifdef BONOBO_ACTIVATION_DEBUG
