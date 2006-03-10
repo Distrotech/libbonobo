@@ -46,6 +46,13 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+static GMutex *thread_lock = NULL;
+static GCond  *thread_cond = NULL;
+static GSList *running_activations = NULL;
+
+#define RUNNING_LIST_LOCK()   if (thread_lock) g_mutex_lock (thread_lock);
+#define RUNNING_LIST_UNLOCK() if (thread_lock) g_mutex_unlock (thread_lock);
+
 /* Whacked from gnome-libs/libgnorba/orbitns.c */
 
 #define IORBUFSIZE 2048
@@ -108,12 +115,12 @@ exe_activate_info_to_retval (EXEActivateInfo *ai, CORBA_Environment *ev)
         return retval;
 }
 
-static CORBA_Object
-scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
+static EXEActivateInfo *
+find_on_list (EXEActivateInfo *seek_ai, CORBA_Environment *ev)
 {
-        CORBA_Object retval = CORBA_OBJECT_NIL;
+        GSList *l;
 
-        for (; l; l = l->next) {
+        for (l = running_activations; l; l = l->next) {
                 EXEActivateInfo *ai = l->data;
 
                 if (strcmp (seek_ai->exename, ai->exename))
@@ -127,28 +134,61 @@ scan_list (GSList *l, EXEActivateInfo *seek_ai, CORBA_Environment *ev)
                 } else if (seek_ai->environment || ai->environment)
                         continue;
 
+                return ai;
+        }
+
+        return NULL;
+}
+
+static CORBA_Object
+scan_list (EXEActivateInfo *seek_ai, CORBA_Environment *ev)
+{
+        EXEActivateInfo *ai;
+        CORBA_Object retval = CORBA_OBJECT_NIL;
+
+        if (!(ai = find_on_list (seek_ai, ev)))
+                return CORBA_OBJECT_NIL;
+
+        if (thread_cond) {
+                while (ai && !ai->done) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                        g_message ("Activation of '%s' already pending, waiting ...\n",
+                                   seek_ai->act_iid);
+#endif
+                        /* Wait for something to happen */
+                        g_cond_wait (thread_cond, thread_lock);
+                        ai = find_on_list (seek_ai, ev);
+                }
+        } else {
                 /* We run the loop too ... */
                 while (!ai->done)
                         g_main_context_iteration (NULL, TRUE);
-
-                if (!strcmp (seek_ai->act_iid, ai->act_iid)) {
-#ifdef BONOBO_ACTIVATION_DEBUG
-                        g_message ("Hit the jackpot '%s' '%s'",
-                                   seek_ai->act_iid, ai->act_iid);
-#endif
-                        retval = exe_activate_info_to_retval (ai, ev);
-                } else if (seek_ai->re_check) {
-                        /* It might have just registered the IID */
-#ifdef BONOBO_ACTIVATION_DEBUG
-                        g_message ("Re-check the thing ... '%s' '%s'",
-                                   seek_ai->act_iid, ai->act_iid);
-#endif
-                        retval = seek_ai->re_check (
-					seek_ai->environment,
-					seek_ai->act_iid,
-					seek_ai->user_data, ev);
-                }
+                
         }
+
+        if (ai && !strcmp (seek_ai->act_iid, ai->act_iid)) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                g_message ("Hit the jackpot '%s' '%s'\n",
+                           seek_ai->act_iid, ai->act_iid);
+#endif
+                retval = exe_activate_info_to_retval (ai, ev);
+        } else if (seek_ai->re_check) {
+                /* It might have just registered the IID */
+#ifdef BONOBO_ACTIVATION_DEBUG
+                g_message ("Re-check the thing ... '%s' '%s'\n",
+                           seek_ai->act_iid, ai->act_iid);
+#endif
+                retval = seek_ai->re_check (
+                                            seek_ai->environment,
+                                            seek_ai->act_iid,
+                                            seek_ai->user_data, ev);
+        } else {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                g_warning ("Very unusual dual activation failure: '%s' '%s'\n",
+                           seek_ai->act_iid, ai->act_iid);
+#endif
+        }
+                
 
         return retval;
 }
@@ -177,6 +217,9 @@ handle_exepipe (GIOChannel * source,
                                     _("Failed to read from child process: %s\n"),
                                     error->message);
                         g_error_free (error);
+#ifdef BONOBO_ACTIVATION_DEBUG
+                        fprintf (stderr, "b-a-f-s failed to read from child '%s'\n", error->message);
+#endif
                         error = NULL;
                         retval = FALSE;
                 } else if (status == G_IO_STATUS_EOF) {
@@ -200,10 +243,22 @@ handle_exepipe (GIOChannel * source,
 		g_message ("srv output[%d]: '%s'", retval, data->iorbuf);
 #endif
 
-	if (!retval)
+	if (!retval) {
+                if (thread_cond)
+                        g_cond_broadcast (thread_cond);
                 data->done = TRUE;
+        }
 
 	return retval;
+}
+
+void
+bonobo_activation_server_fork_init (gboolean threaded)
+{
+        if (threaded) {
+                thread_lock = g_mutex_new ();
+                thread_cond = g_cond_new ();
+        }
 }
 
 CORBA_Object
@@ -222,7 +277,6 @@ bonobo_activation_server_by_forking (
         int i;
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
-        static GSList *running_activations = NULL;
         EXEActivateInfo ai;
         GError *error = NULL;
         GSource *source;
@@ -252,10 +306,16 @@ bonobo_activation_server_by_forking (
 #ifdef BONOBO_ACTIVATION_DEBUG
         ai.do_srv_output = getenv ("BONOBO_ACTIVATION_DEBUG_EXERUN");
 #endif
-                
+
+        RUNNING_LIST_LOCK();
         if (!use_new_loop &&
-            (retval = scan_list (running_activations, &ai, ev)) != CORBA_OBJECT_NIL)
+            (retval = scan_list (&ai, ev)) != CORBA_OBJECT_NIL) {
+                RUNNING_LIST_UNLOCK();
                 return retval;
+        }
+
+        if (thread_lock) /* don't allow re-enterancy in this thread */
+                use_new_loop = TRUE;
         
      	pipe (iopipes);
 
@@ -324,7 +384,7 @@ bonobo_activation_server_by_forking (
         }
 
         /* Pass the IOR pipe's write end to the child */ 
-        cmd = g_strdupv (cmd_const);
+        cmd = g_strdupv ((char **)cmd_const);
         if (fd_arg != 0)
         {
                 g_free (cmd[fd_arg]);
@@ -335,6 +395,7 @@ bonobo_activation_server_by_forking (
         ai.done = FALSE;
         
         running_activations = g_slist_prepend (running_activations, &ai);
+        RUNNING_LIST_UNLOCK();
 
 	/* Spawn */
         if (!g_spawn_async (NULL, (gchar **) cmd, newenv,
@@ -349,6 +410,9 @@ bonobo_activation_server_by_forking (
                                                     ":",
                                                     error->message,
                                                     NULL);
+#ifdef BONOBO_ACTIVATION_DEBUG
+                fprintf (stderr, "g_spawn_async error '%s'\n", error->message);
+#endif
                 g_error_free (error);
                 error = NULL;
 
@@ -359,7 +423,9 @@ bonobo_activation_server_by_forking (
 		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
 				     ex_Bonobo_GeneralError, errval);
 
+                RUNNING_LIST_LOCK();
                 running_activations = g_slist_remove (running_activations, &ai);
+                RUNNING_LIST_UNLOCK();
 
                 g_source_destroy (source);
                 g_source_unref (source);
@@ -402,7 +468,9 @@ bonobo_activation_server_by_forking (
         if (use_new_loop)
                 g_main_context_unref (context);
         
+        RUNNING_LIST_LOCK();
         running_activations = g_slist_remove (running_activations, &ai);
+        RUNNING_LIST_UNLOCK();
 
         retval = exe_activate_info_to_retval (&ai, ev); 
 

@@ -38,6 +38,7 @@ extern GStaticRecMutex _bonobo_activation_guard;
 void         bonobo_activation_timeout_reg_check_set  (gboolean           on);
 gboolean     bonobo_activation_timeout_reg_check      (gpointer           data);
 
+void         bonobo_activation_server_fork_init  (gboolean                            threaded);
 typedef CORBA_Object (*BonoboForkReCheckFn)      (const Bonobo_ActivationEnvironment *environemnt,
                                                   const char                         *act_iid,
                                                   gpointer                            user_data,

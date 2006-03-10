@@ -254,8 +254,12 @@ impl_Bonobo_ObjectDirectory__get_servers (
         Bonobo_CacheTime                 only_if_newer,
         CORBA_Environment               *ev)
 {
-	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
-	Bonobo_ServerInfoListCache      *retval;
+	ObjectDirectory *od;
+	Bonobo_ServerInfoListCache *retval;
+
+        server_lock ();
+
+        od = OBJECT_DIRECTORY (servant);
 
         update_registry (od, FALSE);
 
@@ -267,6 +271,8 @@ impl_Bonobo_ObjectDirectory__get_servers (
 		CORBA_sequence_set_release (&retval->_u.server_list,
 					    CORBA_FALSE);
 	}
+
+        server_unlock ();
 
 	return retval;
 }
@@ -288,8 +294,12 @@ impl_Bonobo_ObjectDirectory_get_active_servers (
         Bonobo_CacheTime                 only_if_newer,
         CORBA_Environment               *ev)
 {
-	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
-	Bonobo_ServerStateCache         *retval;
+	ObjectDirectory *od;
+	Bonobo_ServerStateCache *retval;
+
+        server_lock ();
+
+        od = OBJECT_DIRECTORY (servant);
 
 	retval = Bonobo_ServerStateCache__alloc ();
 
@@ -309,6 +319,8 @@ impl_Bonobo_ObjectDirectory_get_active_servers (
 		CORBA_sequence_set_release (&(retval->_u.active_servers),
 					    CORBA_TRUE);
 	}
+
+        server_unlock ();
 
 	return retval;
 }
@@ -438,14 +450,16 @@ impl_Bonobo_ObjectDirectory_activate (
 	CORBA_Context                       ctx,
 	CORBA_Environment                  *ev)
 {
-	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
-	CORBA_Object                     retval;
-	Bonobo_ServerInfo               *si;
-	ODActivationInfo                 ai;
-#ifdef BONOBO_ACTIVATION_DEBUG
-	static int                       depth = 0;
-#endif
-        Bonobo_ActivationEnvironment merged_environment;
+	ObjectDirectory   *od;
+	CORBA_Object       retval = NULL;
+	Bonobo_ServerInfo *si;
+	ODActivationInfo   ai;
+
+        Bonobo_ActivationEnvironment merged_environment = { 0, };
+
+        server_lock ();
+
+        od = OBJECT_DIRECTORY (servant);
 
         od_merge_client_environment (od, (Bonobo_ServerInfo *)
                                      g_hash_table_lookup (od->by_iid, iid),
@@ -458,24 +472,16 @@ impl_Bonobo_ObjectDirectory_activate (
         if (!(flags & Bonobo_ACTIVATION_FLAG_PRIVATE)) {
                 retval = od_get_active_server (od, iid, &merged_environment);
 
-                if (retval != CORBA_OBJECT_NIL) {
-                        g_free (merged_environment._buffer);
-                        return retval;
-                }
+                if (retval != CORBA_OBJECT_NIL)
+                        goto act_out;
         }
 
-	if (flags & Bonobo_ACTIVATION_FLAG_EXISTING_ONLY) {
-		return CORBA_OBJECT_NIL;
-        }
+	if (flags & Bonobo_ACTIVATION_FLAG_EXISTING_ONLY)
+                goto act_out;
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        {
-                int i;
-                depth++;
-                for (i = 0; i < depth; i++)
-                        fputc (' ', stderr);
-                fprintf (stderr, "Activate '%s'\n", iid);
-        }
+        fprintf (stderr, "thread %p start activate '%s'\n",
+                 g_thread_self(), iid);
 #endif
 
 	ai.ac = ac;
@@ -512,15 +518,16 @@ impl_Bonobo_ObjectDirectory_activate (
         }
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        {
-                int i;
-                for (i = 0; i < depth; i++)
-                        fputc (' ', stderr);
-                fprintf (stderr, "Activated '%s' = %p\n", iid, retval);
-                depth--;
-        }
+        fprintf (stderr, "thread %p end activate '%s' = %p ['%s']\n",
+                 g_thread_self(), iid, retval,
+                 bonobo_exception_get_text (ev)
+                 );
 #endif
+
+ act_out:
         g_free (merged_environment._buffer);
+
+        server_unlock ();
 
 	return retval;
 }
@@ -842,10 +849,15 @@ impl_Bonobo_ObjectDirectory_register_new_full (
         Bonobo_ActivationClient             client,
 	CORBA_Environment                  *ev)
 {
-	ObjectDirectory              *od = OBJECT_DIRECTORY (servant);
+	ObjectDirectory              *od;
 	CORBA_Object                  oldobj;
         Bonobo_ActivationEnvironment  merged_environment;
         Bonobo_ServerInfo const      *serverinfo;
+        Bonobo_RegistrationResult     retval = Bonobo_ACTIVATION_REG_SUCCESS;
+
+        server_lock ();
+
+        od = OBJECT_DIRECTORY (servant);
 
 	oldobj = od_get_active_server (od, iid, environment);
         *existing = oldobj;
@@ -857,15 +869,15 @@ impl_Bonobo_ObjectDirectory_register_new_full (
 	oldobj = od_get_active_server (od, iid, &merged_environment);
 	if (oldobj != CORBA_OBJECT_NIL) {
 		if (!CORBA_Object_non_existent (oldobj, ev)) {
-                        g_free (merged_environment._buffer);
-			return Bonobo_ACTIVATION_REG_ALREADY_ACTIVE;
+                        retval = Bonobo_ACTIVATION_REG_ALREADY_ACTIVE;
+                        goto reg_out;
                 }
 	}
 
         if (!serverinfo) {
                 if (!(flags&Bonobo_REGISTRATION_FLAG_NO_SERVERINFO)) {
-                        g_free (merged_environment._buffer);
-                        return Bonobo_ACTIVATION_REG_NOT_LISTED;
+                        retval = Bonobo_ACTIVATION_REG_NOT_LISTED;
+                        goto reg_out;
                 }
         }
 
@@ -874,14 +886,17 @@ impl_Bonobo_ObjectDirectory_register_new_full (
 #endif
 
         add_active_server (od, iid, &merged_environment, obj);
-        g_free (merged_environment._buffer);
 	
 	bonobo_event_source_notify_listeners
                 (od->event_source,
                  "Bonobo/ObjectDirectory:activation:register",
                  NULL, ev);
 
-	return Bonobo_ACTIVATION_REG_SUCCESS;
+ reg_out:
+        g_free (merged_environment._buffer);
+        server_unlock ();
+
+	return retval;
 }
 
 static Bonobo_RegistrationResult
@@ -907,7 +922,11 @@ impl_Bonobo_ObjectDirectory_unregister (
 	const CORBA_Object      obj,
 	CORBA_Environment      *ev)
 {
-	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
+	ObjectDirectory *od;
+
+        server_lock ();
+
+        od = OBJECT_DIRECTORY (servant);
 
         if (!remove_active_server (od, iid, obj))
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
@@ -918,6 +937,8 @@ impl_Bonobo_ObjectDirectory_unregister (
                         (od->event_source,
                          "Bonobo/ObjectDirectory:activation:unregister",
                          NULL, ev);
+
+        server_unlock ();
 }
 
 static Bonobo_DynamicPathLoadResult 
@@ -926,20 +947,27 @@ impl_Bonobo_ObjectDirectory_add_path(
 	const CORBA_char *		add_path,
 	CORBA_Environment               *ev)
 {
-	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
+	ObjectDirectory *od;
 	int i, j, dir_num, max;
 	char **add_directoies, **ret;
 	GSList *l, *tmp = NULL;
 	gboolean different;
+        Bonobo_DynamicPathLoadResult retval = Bonobo_DYNAMIC_LOAD_SUCCESS;
+
+        server_lock ();
+
+        od = OBJECT_DIRECTORY (servant);
 
 	if (!od->registry_source_directories) {
 		od->registry_source_directories = split_path_unique (add_path);
-		return Bonobo_DYNAMIC_LOAD_SUCCESS;
+                goto add_path_out;
 	} else
 		add_directoies = split_path_unique (add_path);
 
-	if (!add_directoies)
-		return Bonobo_DYNAMIC_LOAD_ERROR;
+	if (!add_directoies) {
+		retval = Bonobo_DYNAMIC_LOAD_ERROR;
+                goto add_path_out;
+        }
 
 	for (max = i = 0; od->registry_source_directories[i]; i++) {
 		tmp = g_slist_append(tmp,g_strdup(od->registry_source_directories[i]));
@@ -965,7 +993,8 @@ impl_Bonobo_ObjectDirectory_add_path(
 	if (max == dir_num) {
 		g_strfreev(add_directoies);
 		g_slist_free(tmp);
-		return Bonobo_DYNAMIC_LOAD_ALREADY_LISTED;
+		retval = Bonobo_DYNAMIC_LOAD_ALREADY_LISTED;
+                goto add_path_out;
 	}
 
 	ret = g_new(char *, max + 1);
@@ -980,7 +1009,11 @@ impl_Bonobo_ObjectDirectory_add_path(
 
 	od->registry_source_directories = ret;
 	update_registry(od, TRUE);	
-	return Bonobo_DYNAMIC_LOAD_SUCCESS;
+
+ add_path_out:
+        server_unlock ();
+
+	return retval;
 }
 
 static Bonobo_DynamicPathLoadResult 
@@ -989,15 +1022,22 @@ impl_Bonobo_ObjectDirectory_remove_path(
         const CORBA_char *              remove_path,
         CORBA_Environment               *ev)
 {
-	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
+	ObjectDirectory *od;
 	char **remove_directoies, **ret;
 	int i, j, max;
 	GSList *l, *tmp = NULL;
 	gboolean different;
+        Bonobo_DynamicPathLoadResult retval = Bonobo_DYNAMIC_LOAD_SUCCESS;
+
+        server_lock();
+
+        od = OBJECT_DIRECTORY (servant);
 
 	remove_directoies = split_path_unique (remove_path);
-	if (!remove_directoies)
-		return Bonobo_DYNAMIC_LOAD_ERROR;
+	if (!remove_directoies) {
+                retval = Bonobo_DYNAMIC_LOAD_ERROR;
+		goto rm_path_out;
+        }
 
 	for (max = i = 0; od->registry_source_directories[i]; i++) {
 		different = TRUE;
@@ -1017,7 +1057,8 @@ impl_Bonobo_ObjectDirectory_remove_path(
 	if (max == i) {
 		g_slist_free(tmp);
 		g_strfreev(remove_directoies);
-		return Bonobo_DYNAMIC_LOAD_NOT_LISTED;
+                retval = Bonobo_DYNAMIC_LOAD_NOT_LISTED;
+		goto rm_path_out;
 	}	
 	ret = g_new(char *, max + 1);
 	for (l = tmp, i = 0; l; l = l->next)
@@ -1030,7 +1071,9 @@ impl_Bonobo_ObjectDirectory_remove_path(
 
 	od->registry_source_directories = ret;
 	update_registry(od, TRUE);
-	return Bonobo_DYNAMIC_LOAD_SUCCESS;
+ rm_path_out:
+        server_unlock();
+	return retval;
 }
 
 
@@ -1052,8 +1095,12 @@ impl_Bonobo_ObjectDirectory_addClientEnv (
         CORBA_Environment             *ev)
 {
         Bonobo_ActivationEnvironment *env;
-	ObjectDirectory *od = OBJECT_DIRECTORY (servant);
+	ObjectDirectory *od;
         int i;
+
+        server_lock();
+
+        od = OBJECT_DIRECTORY (servant);
         
         env = Bonobo_ActivationEnvironment__alloc ();
         env->_length  = env->_maximum = client_env->_length;
@@ -1084,6 +1131,8 @@ impl_Bonobo_ObjectDirectory_addClientEnv (
 
         ORBit_small_listen_for_broken (client, G_CALLBACK (client_cnx_broken),
                                        (gpointer) client);
+
+        server_unlock();
 }
 
 
@@ -1112,7 +1161,8 @@ bonobo_object_directory_init (PortableServer_POA poa,
 {
         g_assert (main_dir == NULL);
 
-        main_dir = g_object_new (OBJECT_TYPE_DIRECTORY, NULL);
+        main_dir = g_object_new (OBJECT_TYPE_DIRECTORY,
+                                 "poa", poa, NULL);
 
         main_dir->registry_source_directories = split_path_unique (registry_path);
         update_registry (main_dir, FALSE);
@@ -1133,6 +1183,8 @@ bonobo_object_directory_re_check_fn (const Bonobo_ActivationEnvironment *environ
 				     CORBA_Environment                  *ev)
 {
         CORBA_Object retval;
+
+        server_lock ();
 
         retval = od_get_active_server (
                 main_dir, (Bonobo_ImplementationID) act_iid, environment);
@@ -1159,6 +1211,8 @@ bonobo_object_directory_re_check_fn (const Bonobo_ActivationEnvironment *environ
 				     ex_Bonobo_GeneralError, errval);
                 retval = CORBA_OBJECT_NIL;
         }
+
+        server_unlock ();
 
         return retval;
 }

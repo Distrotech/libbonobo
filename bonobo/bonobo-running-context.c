@@ -443,6 +443,7 @@ static void
 last_unref_exit_cb (gpointer      context,
 		    BonoboObject *object)
 {
+	g_warning ("last unref exit callback");
         bonobo_object_unref (object);
 	bonobo_main_quit ();
 }

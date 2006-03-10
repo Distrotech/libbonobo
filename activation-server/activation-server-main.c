@@ -62,6 +62,9 @@
 static void debug_queries (void);
 #endif
 
+/* HACK */
+#undef HAVE_SYSLOG_H
+
 /* Option values */
 static char *od_source_dir = NULL;
 #ifdef BONOBO_ACTIVATION_DEBUG
@@ -97,6 +100,89 @@ static struct poptOption options[] = {
 };
 
 GMainLoop *main_loop = NULL;
+
+static gboolean        server_threaded = FALSE;
+static glong           server_guard_depth = 0;
+static GStaticRecMutex server_guard = G_STATIC_REC_MUTEX_INIT;
+
+PortableServer_POA
+server_get_poa (void)
+{
+        PortableServer_POA poa;
+
+        if (g_getenv ("BAS_THREAD")) {
+#ifdef BONOBO_ACTIVATION_DEBUG
+                fprintf (stderr, "\n** Warning **\n\n  --- b-a-s running in threaded mode ---\n\n** Warning **\n\n");
+#endif
+                server_threaded = TRUE;
+                poa = bonobo_poa_get_threaded (ORBIT_THREAD_HINT_PER_REQUEST);
+        } else {
+                server_threaded = FALSE;
+                poa = bonobo_poa();
+        }
+        bonobo_activation_server_fork_init (server_threaded);
+
+        return poa;
+}
+
+ServerLockState
+server_lock_drop (void)
+{
+        glong i, state = server_guard_depth;
+
+        if (!server_threaded)
+                return 0;
+
+#ifdef BONOBO_ACTIVATION_DEBUG
+        fprintf (stderr, "thread %p dropping server guard with depth %ld\n",
+                 g_thread_self (), state);
+#endif
+        server_guard_depth = 0;
+        for (i = 0; i < state; i++)
+                g_static_rec_mutex_unlock (&server_guard);
+        return state;
+}
+
+void
+server_lock_resume (ServerLockState state)
+{
+        long i;
+
+        if (!server_threaded)
+                return;
+
+        for (i = 0; i < state; i++)
+                g_static_rec_mutex_lock (&server_guard);
+        server_guard_depth = state;
+#ifdef BONOBO_ACTIVATION_DEBUG
+        fprintf (stderr, "thread %p re-taken server guard with depth %ld\n",
+                 g_thread_self (), state);
+#endif
+}
+
+void
+server_lock (void)
+{
+        if (!server_threaded)
+                return;
+
+        g_static_rec_mutex_lock (&server_guard);
+        server_guard_depth++;
+        fprintf (stderr, "thread %p take guard [%ld]\n",
+                 g_thread_self (), server_guard_depth);
+}
+
+void
+server_unlock (void)
+{
+        if (!server_threaded)
+                return;
+
+        fprintf (stderr, "thread %p release guard [%ld]\n",
+                 g_thread_self (), server_guard_depth);
+        server_guard_depth--;
+        g_static_rec_mutex_unlock (&server_guard);
+}
 
 #ifdef G_OS_WIN32
 
@@ -346,8 +432,7 @@ dump_ior (CORBA_ORB orb, int dev_null_fd, CORBA_Environment *ev)
 int
 main (int argc, char *argv[])
 {
-        PortableServer_POAManager     poa_manager;
-        PortableServer_POA            root_poa;
+        PortableServer_POA            threaded_poa;
         CORBA_ORB                     orb;
         CORBA_Environment             real_ev, *ev;
         CORBA_Object                  naming_service, existing;
@@ -411,12 +496,6 @@ main (int argc, char *argv[])
 	openlog (syslog_ident, 0, LOG_USER);
 #endif
 
-	g_log_set_fatal_mask (G_LOG_DOMAIN, G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL);
-	g_log_set_handler (G_LOG_DOMAIN,
-                           G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION,
-                           log_handler,
-                           NULL);
-
 #ifdef BONOBO_ACTIVATION_DEBUG
 	debug_output_env = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
 	if (debug_output_env && debug_output_env[0] != '\0')
@@ -425,6 +504,14 @@ main (int argc, char *argv[])
                 output_debug = TRUE;
 #endif
 
+        if (!output_debug) {
+                g_log_set_fatal_mask (G_LOG_DOMAIN, G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL);
+                g_log_set_handler (G_LOG_DOMAIN,
+                                   G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL | G_LOG_FLAG_RECURSION,
+                                   log_handler,
+                                   NULL);
+        }
+
         dev_null_fd = redirect_output (ior_fd);
 
         if (!bonobo_init (&argc, argv))
@@ -432,15 +519,17 @@ main (int argc, char *argv[])
 	orb = bonobo_activation_orb_get ();
 	main_loop = g_main_loop_new (NULL, FALSE);
 
+	threaded_poa = server_get_poa ();
+
+        server_lock ();
+
         add_initial_locales ();
         
 	CORBA_exception_init ((ev = &real_ev));
 
-	root_poa = (PortableServer_POA)
-		CORBA_ORB_resolve_initial_references (orb, "RootPOA", ev);
 
         src_dir = build_src_dir ();
-        bonobo_object_directory_init (root_poa, src_dir->str, ev);
+        bonobo_object_directory_init (threaded_poa, src_dir->str, ev);
         g_string_free (src_dir, TRUE);
 
         od = bonobo_object_directory_get ();
@@ -448,11 +537,10 @@ main (int argc, char *argv[])
 
 	memset (&environment, 0, sizeof (Bonobo_ActivationEnvironment));
 
-        /* activate the ORB */
-        poa_manager = PortableServer_POA__get_the_POAManager (root_poa, ev);
-	PortableServer_POAManager_activate (poa_manager, ev);
+        bonobo_activate (); /* activate the ORB */
 
-        naming_service = impl_CosNaming_NamingContext__create (root_poa, ev);
+        /* A non-theading poa - naming almost entirely unused */
+        naming_service = impl_CosNaming_NamingContext__create (bonobo_poa(), ev);
         if (ev->_major != CORBA_NO_EXCEPTION || naming_service == NULL)
                 g_warning ("Failed to create naming service");
         CORBA_exception_init (ev);
@@ -496,7 +584,7 @@ main (int argc, char *argv[])
          */
         g_assert (server_ac);
         
-        activation_context_setup (root_poa, od, ev);
+        activation_context_setup (threaded_poa, od, ev);
 
         dump_ior (orb, dev_null_fd, ev);
 
@@ -505,21 +593,23 @@ main (int argc, char *argv[])
         if (getenv ("BONOBO_ACTIVATION_DEBUG") == NULL)
                 chdir ("/");
 
+        server_unlock ();
+
 	g_main_loop_run (main_loop);
 
-        nameserver_destroy (root_poa, naming_service, ev);
+        server_lock ();
+
+        nameserver_destroy (bonobo_poa(), naming_service, ev);
         CORBA_Object_release (naming_service, ev);
 
-        bonobo_object_directory_shutdown (root_poa, ev);
+        bonobo_object_directory_shutdown (threaded_poa, ev);
         activation_context_shutdown ();
-
-        CORBA_Object_release ((CORBA_Object) poa_manager, ev);
-        CORBA_Object_release ((CORBA_Object) root_poa, ev);
 
 #ifdef HAVE_SYSLOG_H
 	closelog ();
 	g_free (syslog_ident);
 #endif
+        server_unlock ();
 
 	return !bonobo_debug_shutdown ();
 }

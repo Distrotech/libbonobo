@@ -332,6 +332,7 @@ static gboolean
 startup_timeout (gpointer data)
 {
 	BonoboGenericFactory *factory = BONOBO_GENERIC_FACTORY (data);
+	fprintf (stderr, "startup timeout of generic factory !\n");
 	bonobo_main_quit ();
 	factory->priv->startup_timeout_id = 0;
 	return FALSE;

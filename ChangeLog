@@ -1,3 +1,31 @@
+2006-03-10  Michael Meeks  <michael.meeks@novell.com>
+
+	* activation-server/object-directory-corba.c
+	(bonobo_object_directory_re_check_fn): remember to
+	take lock for this callback.
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_fork_init): add
+
+	* activation-server/activation-context-corba.c
+	(impl_Bonobo_ActivationContext_activateMatchingFull),
+	(ac_do_activation): hold refs, generate aid earlier,
+	use g_strdup_printf.
+
+	* activation-server/README: add blurb.
+
+	* activation-server/activation-server-main.c
+	(server_get_poa, server_lock, server_unlock, main): impl.
+	threaded POA & locking methods.
+	* activation-server/*-corba.c: take/release
+	lock at entry / exit of CORBA impls.
+
+	* activation-server/activation-context-corba.c
+	(activation_context_setup): use the poa.
+	
+	* activation-server/object-directory-corba.c
+	(bonobo_object_directory_init): use the poa.
+
 2006-02-07  Michael Meeks  <michael.meeks@novell.com>
 
 	(backport):
