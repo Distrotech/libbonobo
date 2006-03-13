@@ -1,3 +1,11 @@
+2006-03-13  Michael Meeks  <michael.meeks@novell.com>
+
+	* activation-server/object-directory-activate.c
+	(od_server_activate_factory): drop the lock as we
+	call out to create an instance (thanks Federico),
+	further improves parallelism & fixes theoretical
+	deadlock.
+
 2006-03-10  Michael Meeks  <michael.meeks@novell.com>
 
 	* doc/b-a-s-threading.txt: notes on b-a-s threading.

@@ -80,9 +80,22 @@ od_server_activate_factory (Bonobo_ServerInfo                  *si,
 		break;
 	}
 
-	retval = Bonobo_GenericFactory_createObject (factory, iid, ev);
-	if (ev->_major != CORBA_NO_EXCEPTION)
-		retval = CORBA_OBJECT_NIL;
+        /* Here comes the too clever by 1/2 bit:
+         *   we drop the (recursive) 'server_lock' - so we
+         *   can get other threads re-entering / doing activations
+         *   here. cf. od_server_activate_exe.
+         */
+        {
+                ServerLockState state;
+
+                state = server_lock_drop ();
+
+                retval = Bonobo_GenericFactory_createObject (factory, iid, ev);
+                if (ev->_major != CORBA_NO_EXCEPTION)
+                        retval = CORBA_OBJECT_NIL;
+
+                server_lock_resume (state);
+        }
 
 	CORBA_free (res);
 
@@ -160,7 +173,7 @@ od_server_activate_exe (Bonobo_ServerInfo                  *si,
         /* Here comes the too clever by 1/2 bit:
          *   we drop the (recursive) 'server_lock' - so we
          *   can get other threads re-entering / doing activations
-         *   here.
+         *   here. cf. od_server_activate_factory
          */
         {
                 ServerLockState state;
