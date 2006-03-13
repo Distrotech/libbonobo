@@ -1,3 +1,8 @@
+2006-03-13  Rodrigo Moya <rodrigo@novell.com>
+
+	* NEWS:
+	* configure.in: released 2.14.0.
+
 === 2.13.93 ===
 2006-03-07  Rodrigo Moya <rodrigo@novell.com>
 

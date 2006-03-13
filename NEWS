@@ -1,3 +1,9 @@
+libbonobo 2.14.0
+
+	* Translation updates:
+                * Priit Laes (et)
+                * Misu Moldovan (ro)
+
 libbonobo 2.13.93
 
 	* Always pass program arguments to bonobo_activation_init (Michael)
