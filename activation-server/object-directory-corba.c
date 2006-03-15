@@ -671,15 +671,28 @@ prune_dead_servers (gpointer key,
         return !servers->n_servers;
 }
 
-static void
-active_server_cnx_broken (ORBitConnection *cnx,
-                          gpointer         dummy)
-
+static gboolean
+as_rescan (gpointer data)
 {
-        ObjectDirectory *od = main_dir;
+        ObjectDirectory *od;
+        static gboolean in_rescan = FALSE;
+        static guint idle_id = 0;
 
-        if (!od) /* shutting down */
+        server_lock ();
+
+        if (!(od = main_dir)) { /* shutting down */
+                server_unlock ();
                 return;
+        }
+
+        /* We tend to get a lot of 'broken' callbacks at once */
+        if (in_rescan) {
+                if (!idle_id)
+                        idle_id = g_idle_add (as_rescan, NULL);
+                server_unlock ();
+                return FALSE;
+        }
+        in_rescan = TRUE;
 
         g_hash_table_foreach_remove (od->active_server_lists,
                                      prune_dead_servers, od);
@@ -689,6 +702,19 @@ active_server_cnx_broken (ORBitConnection *cnx,
 #endif
 
         check_quit ();
+
+        in_rescan = FALSE;
+        server_unlock ();
+
+        return FALSE;
+}
+
+static void
+active_server_cnx_broken (ORBitConnection *cnx,
+                          gpointer         dummy)
+
+{
+        as_rescan (NULL);
 }
 
 static void
@@ -706,10 +732,8 @@ add_active_server (ObjectDirectory    *od,
                         g_object_set_data (
                                 G_OBJECT (cnx), "object_count", GUINT_TO_POINTER (1));
                         
-                        g_signal_connect (
-                                cnx, "broken",
-                                G_CALLBACK (active_server_cnx_broken),
-                                NULL);
+                        ORBit_small_listen_for_broken
+                                (object, G_CALLBACK (active_server_cnx_broken), NULL);
                 }
         } else
                 g_assert (!strcmp (iid, NAMING_CONTEXT_IID) ||
@@ -1117,12 +1141,18 @@ static void
 client_cnx_broken (ORBitConnection *cnx,
                    const Bonobo_ActivationClient  client)
 {
-        ObjectDirectory *od = main_dir;
+        ObjectDirectory *od;
         ClientContext *context;
         int i;
-        if (!od) /* shutting down */
+
+        server_lock();
+
+        if (!(od = main_dir)) { /* shutting down */
+                server_unlock();
                 return;
-          /* unregister runtime server definitions */
+        }
+
+        /* unregister runtime server definitions */
         context = g_hash_table_lookup (od->client_contexts, client);
         if (context->runtime_iids) {
                 for (i = 0; i < context->runtime_iids->_length; ++i)
@@ -1170,6 +1200,8 @@ client_cnx_broken (ORBitConnection *cnx,
         g_hash_table_remove (od->client_contexts, client);
         od->time_list_changed = time (NULL);
         activation_clients_cache_notify ();
+
+        server_unlock();
 }
 
 static void

@@ -327,24 +327,45 @@ activation_clients_cache_notify (void)
 gboolean
 activation_clients_is_empty_scan (void)
 {
-        GList *l, *next;
+        GList *l, *check = NULL;
 
-        for (l = clients; l; l = next) {
-                next = l->next;
+        for (l = clients; l; l = l->next)
+                check = g_list_prepend (check, CORBA_Object_duplicate (l->data, NULL));
+
+        for (l = check; l; l = l->next) {
                 if (ORBit_small_get_connection_status (l->data) ==
                     ORBIT_CONNECTION_DISCONNECTED) {
-                        CORBA_Object_release (l->data, NULL);
-                        clients = g_list_delete_link (clients, l);
+                        GList *remove;
+                        if ((remove = g_list_find (clients, l->data))) {
+                                CORBA_Object_release (remove->data, NULL);
+                                clients = g_list_delete_link (clients, remove);
+                        }
                 }
+                CORBA_Object_release (l->data, NULL);
         }
+
+        g_list_free (check);
 
         return clients == NULL;
 }
 
-static void
-active_client_cnx_broken (ORBitConnection *cnx,
-                          gpointer         dummy)
+static gboolean
+ac_rescan (gpointer data)
 {
+        static gboolean in_rescan = FALSE;
+        static guint idle_id = 0;
+
+        server_lock ();
+
+        /* We tend to get a lot of 'broken' callbacks at once */
+        if (in_rescan) {
+                if (!idle_id)
+                        idle_id = g_idle_add (ac_rescan, NULL);
+                server_unlock ();
+                return FALSE;
+        }
+        in_rescan = TRUE;
+
         if (activation_clients_is_empty_scan ()) {
 #ifdef BONOBO_ACTIVATION_DEBUG
                 g_warning ("All clients dead");
@@ -352,6 +373,17 @@ active_client_cnx_broken (ORBitConnection *cnx,
                 check_quit ();
         }
 
+        in_rescan = FALSE;
+        server_unlock ();
+
+        return FALSE;
+}
+
+static void
+active_client_cnx_broken (ORBitConnection *cnx,
+                          gpointer         dummy)
+{
+        ac_rescan (NULL);
 }
 
 static void
@@ -377,10 +409,8 @@ impl_Bonobo_ActivationContext_addClient (PortableServer_Servant        servant,
                 clients, CORBA_Object_duplicate (client, ev));
 
         if (!l) {
-                g_signal_connect (
-                        cnx, "broken",
-                        G_CALLBACK (active_client_cnx_broken),
-                        NULL);
+                ORBit_small_listen_for_broken
+                        (client, G_CALLBACK (active_client_cnx_broken), NULL);
                 check_quit ();
         }
 

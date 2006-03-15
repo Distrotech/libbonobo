@@ -1,3 +1,21 @@
+2006-03-15  Michael Meeks  <michael.meeks@novell.com>
+
+	* activation-server/object-directory-corba.c
+	(active_server_cnx_broken, client_cnx_broken),
+	(add_active_server): use listen_for_broken instead
+	of (ORBit internal only) 'broken' signal with
+	threading implications. Take & release the
+	server lock in the 'broken' callback.
+	(as_rescan): deal with re-enterancy once at idle.
+
+	* activation-server/activation-context-corba.c
+	(impl_Bonobo_ActivationContext_addClient),
+	(active_client_cnx_broken): same 'broken' fix.
+	(activation_clients_is_empty_scan): iterate over
+	a copy of the list, with simple re-enterancy
+	optimization.
+	(ac_rescan): real with re-enterancy once at idle.
+
 2006-03-13  Michael Meeks  <michael.meeks@novell.com>
 
 	* activation-server/object-directory-activate.c
