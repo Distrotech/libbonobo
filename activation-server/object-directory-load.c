@@ -31,9 +31,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <string.h>
-#include <libxml/parser.h>
-#include <libxml/parserInternals.h>
-#include <libxml/xmlmemory.h>
+#include <glib/gmarkup.h>
 
 #include "bonobo-activation/bonobo-activation-i18n.h"
 #include "bonobo-activation/bonobo-activation-private.h"
@@ -71,12 +69,18 @@ typedef struct {
 #define IS_ELEMENT(x) (!strcmp (name, x))
 
 static ParseInfo *
-parse_info_new (void)
+parse_info_new (const char *filename,
+                const char *host,
+                GSList    **entries)
 {
         ParseInfo *info = g_new0 (ParseInfo, 1);
 
         info->prev_state = STATE_UNKNOWN;
         info->state = STATE_START;
+
+        info->host = host;
+        info->entries = entries;
+        info->filename = g_strdup (filename);
         
         return info;
 }
@@ -121,7 +125,8 @@ od_validate (const char *iid, const char *type, const char *location)
 
 static void
 parse_oaf_server_attrs (ParseInfo      *info,
-                        const xmlChar **attrs)
+                        const gchar        **attr_names,
+                        const gchar        **attr_values)
 {
         const char *iid = NULL;
         const char *type = NULL;
@@ -132,12 +137,12 @@ parse_oaf_server_attrs (ParseInfo      *info,
 
         info->state = STATE_OAF_SERVER;
         
-        if (!attrs)
+        if (!attr_names || !attr_values)
                 return;
 
         do {
-                att = attrs[i++];
-                val = attrs[i++];
+                att = attr_names[i];
+                val = attr_values[i++];
 
                 if (att && val) {
                         if (!iid && !strcmp (att, "iid"))
@@ -277,7 +282,8 @@ od_string_to_boolean (const char *str)
 
 static void
 parse_oaf_attribute (ParseInfo     *info,
-                     const xmlChar **attrs)
+                     const gchar        **attr_names,
+                     const gchar        **attr_values)
 {
         int i = 0;
         const char *type = NULL;
@@ -289,12 +295,12 @@ parse_oaf_attribute (ParseInfo     *info,
 
         info->state = STATE_OAF_ATTRIBUTE;
         
-        if (!attrs)
+        if (!attr_names || !attr_values)
                 return;
 
         do {
-                att = attrs[i++];
-                val = attrs[i++];
+                att = attr_names[i];
+                val = attr_values[i++];
                 
                 if (att && val) {
                         if (!strcmp (att, "type"))
@@ -349,18 +355,19 @@ parse_oaf_attribute (ParseInfo     *info,
 
 static void
 parse_stringv_item (ParseInfo     *info,
-                    const xmlChar **attrs)
+                    const gchar        **attr_names,
+                    const gchar        **attr_values)
 {
         const char *value = NULL;
         const char *att, *val;
         int i = 0;
 
-        if (!attrs)
+        if (!attr_names || !attr_values)
                 return;
 
         do {
-                att = attrs[i++];
-                val = attrs[i++];
+                att = attr_names[i];
+                val = attr_values[i++];
                 
                 if (att && val) {
                         if (!value && !strcmp (att, "value")) {
@@ -380,10 +387,15 @@ parse_stringv_item (ParseInfo     *info,
 }
 
 static void
-od_StartElement (ParseInfo     *info,
-                 const xmlChar *name,
-                 const xmlChar **attrs)
+od_start_element (GMarkupParseContext *context,
+                  const gchar         *name,
+                  const gchar        **attribute_names,
+                  const gchar        **attribute_values,
+                  gpointer             user_data,
+                  GError             **error)
 {
+        ParseInfo *info = user_data;
+
         switch (info->state) {
         case STATE_START:
                 if (IS_ELEMENT ("oaf_info")) 
@@ -396,7 +408,7 @@ od_StartElement (ParseInfo     *info,
                 break;
         case STATE_OAF_INFO:
                 if (IS_ELEMENT ("oaf_server")) 
-                        parse_oaf_server_attrs (info, attrs);
+                        parse_oaf_server_attrs (info, attribute_names, attribute_values);
                 else {
                         info->prev_state = info->state;
                         info->state = STATE_UNKNOWN;
@@ -405,7 +417,7 @@ od_StartElement (ParseInfo     *info,
                 break;
         case STATE_OAF_SERVER:
                 if (IS_ELEMENT ("oaf_attribute")) 
-                        parse_oaf_attribute (info, attrs);
+                        parse_oaf_attribute (info, attribute_names, attribute_values);
                 else {
                         info->prev_state = info->state;
                         info->state = STATE_UNKNOWN;
@@ -414,7 +426,7 @@ od_StartElement (ParseInfo     *info,
                 break;
         case STATE_OAF_ATTRIBUTE:
                 if (IS_ELEMENT ("item"))
-                        parse_stringv_item (info, attrs);
+                        parse_stringv_item (info, attribute_names, attribute_values);
                 else {
                         info->prev_state = info->state;
                         info->state = STATE_UNKNOWN;
@@ -448,9 +460,12 @@ add_entry (ParseInfo *info)
 }
 
 static void
-od_EndElement (ParseInfo     *info,
-               const xmlChar *name)
+od_end_element (GMarkupParseContext *context,
+                const gchar         *name,
+                gpointer             user_data,
+                GError             **error)
 {
+        ParseInfo *info = user_data;
 
         switch (info->state) {
         case STATE_ITEM:
@@ -523,139 +538,49 @@ od_EndElement (ParseInfo     *info,
         }
 }
 
-static xmlEntityPtr
-od_GetEntity (ParseState *ps, const xmlChar *name)
-{
-	return xmlGetPredefinedEntity (name);
-}
-
 static void
-od_Warning (ParseInfo *ps,
-            const char *msg,
-            ...)
+od_error (GMarkupParseContext *context,
+          GError              *error,
+          gpointer             user_data)
 {
-	va_list args;
+        ParseInfo *info = user_data;
 
-	va_start (args, msg);
-	g_logv   ("XML", G_LOG_LEVEL_WARNING, msg, args);
-	va_end   (args);
+        g_error ("Failed to parse: '%s' in file '%s'",
+                 error ? error->message : "<nomsg>",
+                 info->filename ? info->filename : "<memory>");
 }
 
-static void
-od_Error (ParseInfo *ps, const char *msg, ...)
-{
-	va_list args;
-
-	va_start (args, msg);
-	g_logv   ("XML", G_LOG_LEVEL_CRITICAL, msg, args);
-	va_end   (args);
-}
-
-static void
-od_FatalError (ParseInfo *ps, const char *msg, ...)
-{
-	va_list args;
-
-	va_start (args, msg);
-	g_logv   ("XML", G_LOG_LEVEL_ERROR, msg, args);
-	va_end   (args);
-}
-
-static xmlSAXHandler od_SAXParser = {
-	NULL, /* internalSubset */
-	NULL, /* isStandalone */
-	NULL, /* hasInternalSubset */
-	NULL, /* hasExternalSubset */
-	NULL, /* resolveEntity */
-        (getEntitySAXFunc) od_GetEntity, /* getEntity */
-	NULL, /* entityDecl */
-	NULL, /* notationDecl */
-	NULL, /* attributeDecl */
-	NULL, /* elementDecl */
-	NULL, /* unparsedEntityDecl */
-	NULL, /* setDocumentLocator */
-	NULL, /* startDocument */
-	(endDocumentSAXFunc) NULL, /* endDocument */
-	(startElementSAXFunc) od_StartElement, /* startElement */
-	(endElementSAXFunc) od_EndElement, /* endElement */
-	NULL, /* reference */
-	NULL, /* characters */
-	NULL, /* ignorableWhitespace */
-	NULL, /* processingInstruction */
-	NULL, /* comment */
-	(warningSAXFunc) od_Warning, /* warning */
-	(errorSAXFunc) od_Error, /* error */
-	(fatalErrorSAXFunc) od_FatalError, /* fatalError */
+static GMarkupParser od_gmarkup_parser = {
+        od_start_element,
+        od_end_element,
+        NULL,
+        NULL,
+        od_error
 };
-
-static void
-od_load_context (const char *filename,
-                 xmlParserCtxt *ctxt,
-                 GSList    **entries,
-                 const char *host)
-{
-        ParseInfo *info;
-	xmlSAXHandlerPtr oldsax;
-        int ret = 0;
-
-        info = parse_info_new ();
-        info->host = host;
-        info->entries = entries;
-        info->filename = g_strdup (filename);
-
-        oldsax = ctxt->sax;
-        ctxt->sax = &od_SAXParser;
-        ctxt->userData = info;
-        /* Magic to make entities work as expected */
-	ctxt->replaceEntities = TRUE;
-
-	if (ctxt->myDoc)
-		xmlFreeDoc (ctxt->myDoc);
-
-        xmlParseDocument (ctxt);
-
-        if (ctxt->wellFormed)
-                ret = 0;
-        else {
-                if (ctxt->errNo != 0)
-                        ret = ctxt->errNo;
-                else
-                        ret = -1;
-        }
-        ctxt->sax = oldsax;
-
-        parse_info_free (info);
-
-        if (ret < 0) {
-                g_warning (_("Could not parse badly formed XML document %s"), ctxt->input->filename);
-                return;
-        }
-}
 
 static void
 od_load_file (const char *file,
               GSList    **entries,
               const char *host)
 {
-        xmlParserCtxt *ctxt = NULL;
+        gsize length;
+        gchar *contents;
+        ParseInfo *info;
+        GMarkupParseContext *ctxt = NULL;
 
-#ifdef G_OS_WIN32
-        {
-                gchar *contents;
-                gsize length;
+        if (!g_file_get_contents (file, &contents, &length, NULL))
+                goto err;
 
-                if (g_file_get_contents (file, &contents, &length, NULL)) {
-                        ctxt = xmlCreateMemoryParserCtxt (contents, length);
-                        g_free (contents);
-                }
+        info = parse_info_new (file, host, entries);
+        ctxt = g_markup_parse_context_new (&od_gmarkup_parser, 0, info,
+                                           (GDestroyNotify) parse_info_free);
+
+        if (!g_markup_parse_context_parse (ctxt, contents, length, NULL)) {
+  err:
+                g_warning (_("Could not parse badly formed XML document %s"), file);
         }
-#else
-        ctxt = xmlCreateFileParserCtxt (file);
-#endif
-        if (!ctxt)
-                return;
-        od_load_context (file, ctxt, entries, host);
-        xmlFreeParserCtxt (ctxt);
+        if (ctxt)
+                g_markup_parse_context_free (ctxt);
 }
 
 void
@@ -663,13 +588,17 @@ bonobo_parse_server_info_memory (const char *server_info,
                                  GSList    **entries,
                                  const char *host)
 {
-        xmlParserCtxt *ctxt;
+        ParseInfo *info;
+        GMarkupParseContext *ctxt;
 
-        ctxt = xmlCreateMemoryParserCtxt (server_info, strlen (server_info));
-        if (!ctxt)
-                return;
-        od_load_context (NULL, ctxt, entries, host);
-        xmlFreeParserCtxt (ctxt);
+        info = parse_info_new (NULL, host, entries);
+
+        ctxt = g_markup_parse_context_new (&od_gmarkup_parser, 0, info,
+                                           (GDestroyNotify) parse_info_free);
+
+        if (!g_markup_parse_context_parse (ctxt, server_info, strlen (server_info), NULL))
+                g_warning ("Failed to parse serverinfo from memory");
+        g_markup_parse_context_free (ctxt);
 }
 
 static gboolean

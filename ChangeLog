@@ -1,5 +1,11 @@
 2006-03-16  Michael Meeks  <michael.meeks@novell.com>
 
+	* activation-server/object-directory-load.c
+	(bonobo_parse_server_info_memory, od_load_file),
+	(od_error, od_end_element, od_start_element, etc.):
+	re-write parser to use GMarkup instead: 110m -> 40m
+	cycles on load.
+
 	* bonobo-activation/bonobo-activation-fork-server.c
 	(scan_list): kill race.
 
