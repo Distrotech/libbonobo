@@ -929,7 +929,10 @@ impl_Bonobo_ObjectDirectory_register_new_full (
 	oldobj = od_get_active_server (od, iid, &merged_environment);
 	if (oldobj != CORBA_OBJECT_NIL) {
 		if (!CORBA_Object_non_existent (oldobj, ev)) {
-                        retval = Bonobo_ACTIVATION_REG_ALREADY_ACTIVE;
+                        if (CORBA_Object_is_equivalent (oldobj, obj, ev))
+                                retval = Bonobo_ACTIVATION_REG_SUCCESS;
+                        else
+                                retval = Bonobo_ACTIVATION_REG_ALREADY_ACTIVE;
                         goto reg_out;
                 }
 	}

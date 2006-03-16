@@ -260,6 +260,10 @@ log_handler (const gchar *log_domain,
 	if (converted_message)
 		message = converted_message;
 
+	if (output_debug)
+                fprintf (stderr, "%s%s", message,
+                         (message[strlen (message) - 1] == '\n' ? "" : "\n"));
+
 #ifdef HAVE_SYSLOG_H
 	/* syslog uses reversed meaning of LEVEL_ERROR and LEVEL_CRITICAL */
 	if (log_level & G_LOG_LEVEL_ERROR)
@@ -298,10 +302,8 @@ redirect_output (int ior_fd)
 {
         int dev_null_fd = -1;
 
-#ifdef BONOBO_ACTIVATION_DEBUG
 	if (output_debug)
 		return dev_null_fd;
-#endif
 
 #ifdef G_OS_WIN32
 	dev_null_fd = open ("NUL:", O_RDWR);

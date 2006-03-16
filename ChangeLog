@@ -1,3 +1,17 @@
+2006-03-16  Michael Meeks  <michael.meeks@novell.com>
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(scan_list): kill race.
+
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory_register_new_full):
+	treat a dupliate registration of an already active
+	server as a success.
+
+	* activation-server/activation-server-main.c
+	(log_handler, redirect_output): dump more console
+	output when using --register-server for debugging.
+
 2006-03-15  Michael Meeks  <michael.meeks@novell.com>
 
 	* activation-server/object-directory-corba.c

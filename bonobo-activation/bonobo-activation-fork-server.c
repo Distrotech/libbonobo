@@ -146,6 +146,23 @@ scan_list (EXEActivateInfo *seek_ai, CORBA_Environment *ev)
         EXEActivateInfo *ai;
         CORBA_Object retval = CORBA_OBJECT_NIL;
 
+
+        if (thread_cond) {
+                /*
+                 * someone might have registered while we
+                 * dropped the main server lock => re-check,
+                 * inelegant but ...
+                 */
+#ifdef BONOBO_ACTIVATION_DEBUG
+                g_message ("Pre-check for ... '%s' \n", seek_ai->act_iid);
+#endif
+                retval = seek_ai->re_check (seek_ai->environment,
+                                            seek_ai->act_iid,
+                                            seek_ai->user_data, ev);
+                if (retval != CORBA_OBJECT_NIL)
+                        return retval;
+        }
+
         if (!(ai = find_on_list (seek_ai, ev)))
                 return CORBA_OBJECT_NIL;
 

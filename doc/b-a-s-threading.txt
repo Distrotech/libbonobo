@@ -29,4 +29,3 @@
     + other people waiting for that item
 	+ how can we be sure they 'got' it ?
 	+ use the re_check_fn ?
-
