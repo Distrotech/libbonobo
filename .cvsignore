@@ -34,4 +34,4 @@ autom4te*
 stamp-h1
 depcomp
 gtk-doc.make
-
+libbonobo-zip
