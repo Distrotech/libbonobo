@@ -564,7 +564,7 @@ od_load_file (const char *file,
               const char *host)
 {
         gsize length;
-        gchar *contents;
+        gchar *contents = NULL;
         ParseInfo *info;
         GMarkupParseContext *ctxt = NULL;
 
@@ -581,6 +581,9 @@ od_load_file (const char *file,
         }
         if (ctxt)
                 g_markup_parse_context_free (ctxt);
+
+	if (contents)
+		g_free (contents);
 }
 
 void
