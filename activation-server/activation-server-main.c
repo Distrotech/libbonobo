@@ -41,7 +41,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <popt.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -147,37 +146,37 @@ server_unlock (void)
 #endif  /* Win32 */
 
 /* Option values */
-static char *od_source_dir = NULL;
+static gchar *od_source_dir = NULL;
 #ifdef BONOBO_ACTIVATION_DEBUG
 static void debug_queries (void);
-static char *ac_evaluate = NULL;
+static gchar *ac_evaluate = NULL;
 #endif
 static gboolean server_reg = FALSE;
 static gboolean output_debug = FALSE;
-static int server_ac = 0, ior_fd = -1;
+static gboolean server_ac = FALSE;
+static gint ior_fd = -1;
 
-static struct poptOption options[] = {
+static const GOptionEntry options[] = {
 
-	{"od-source-dir", '\0', POPT_ARG_STRING, &od_source_dir, 0,
+	{"od-source-dir", '\0', 0, G_OPTION_ARG_FILENAME, &od_source_dir,
 	 N_("Directory to read .server files from"), N_("DIRECTORY")},
 
-	{"ac-activate", '\0', POPT_ARG_NONE, &server_ac, 0,
+	{"ac-activate", '\0', 0, G_OPTION_ARG_NONE, &server_ac,
 	 N_("Serve as an ActivationContext (default is as an ObjectDirectory only)"),
 	 NULL},
 
-	{"ior-output-fd", '\0', POPT_ARG_INT, &ior_fd, 0,
+	{"ior-output-fd", '\0', 0, G_OPTION_ARG_INT, &ior_fd,
 	 N_("File descriptor to write IOR to"), N_("FD")},
 
-        {"register-server", '0', POPT_ARG_NONE, &server_reg, 0,
-	 "Register as the users' activation server without locking [!] for debugging",
+	{"register-server", '\0', 0, G_OPTION_ARG_NONE, &server_reg,
+	 N_("Register as the users' activation server without locking [!] for debugging"),
 	 NULL},
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-	{"evaluate", '\0', POPT_ARG_STRING, &ac_evaluate, 0,
+	{"evaluate", '\0', 0, G_OPTION_ARG_STRING, &ac_evaluate,
 	 N_("Query expression to evaluate"), N_("EXPRESSION")},
 #endif
 
-	POPT_AUTOHELP
         {NULL}
 };
 
@@ -382,7 +381,7 @@ main (int argc, char *argv[])
         Bonobo_ActivationEnvironment  environment;
         Bonobo_ObjectDirectory        od;
 	Bonobo_EventSource            event_source;
-        poptContext                   ctx;
+        GOptionContext               *ctx;
         int                           dev_null_fd;
 #ifdef HAVE_SIGACTION
         struct sigaction              sa;
@@ -392,6 +391,7 @@ main (int argc, char *argv[])
 	gchar                        *syslog_ident;
 #endif
 	const gchar                  *debug_output_env;
+	GError                       *error = NULL;
 
 #ifdef HAVE_SETSID
         /*
@@ -416,9 +416,15 @@ main (int argc, char *argv[])
 #endif
 #endif
 
-	ctx = poptGetContext ("oafd", argc, (const char **)argv, options, 0);
-	while (poptGetNextOpt (ctx) >= 0) ;
-	poptFreeContext (ctx);
+	g_set_prgname ("bonobo-activation-server");
+	ctx = g_option_context_new (NULL);
+	g_option_context_add_main_entries (ctx, options, GETTEXT_PACKAGE);
+	if (!g_option_context_parse (ctx, &argc, &argv, &error)) {
+		g_printerr ("%s\n", error->message);
+		g_printerr (_("Run '%s --help' to see a full list of available command line options.\n"), g_get_prgname ());
+		exit(1);
+	}
+	g_option_context_free (ctx);
 
         LIBXML_TEST_VERSION;
 	xmlKeepBlanksDefault(0);

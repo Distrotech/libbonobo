@@ -37,7 +37,6 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <glib.h>
-#include <popt.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>

@@ -30,7 +30,6 @@
 #include <libxml/tree.h>   
 #include <libxml/parser.h>  
 #include <libxml/xmlmemory.h>
-#include <popt.h>        /* popt :) */
 
 #include <bonobo-activation/bonobo-activation.h>
 #include "bonobo-activation/bonobo-activation-i18n.h"
@@ -90,8 +89,11 @@ save_file (xmlDocPtr doc)
 
 }
 
-static void
-display_config_path (void)
+static gboolean
+display_config_path (const gchar *option_name,
+                     const gchar *value,
+                     gpointer data,
+                     GError **error)
 {
         char *config_file;
 
@@ -101,6 +103,7 @@ display_config_path (void)
         g_print (_("configuration file is:\n    %s\n"), config_file);
         
         g_free (config_file);
+        return TRUE;
 }
 
 static xmlNodePtr
@@ -113,8 +116,11 @@ get_root_first_child (xmlDocPtr doc)
 	return doc->xmlRootNode->xmlChildrenNode;
 }
 
-static void
-add_directory (const char *directory)
+static gboolean
+add_directory (const gchar *option_name,
+               const gchar *directory,
+               gpointer data,
+               GError **error)
 {
         xmlDocPtr doc;
         xmlNodePtr search_node;
@@ -170,10 +176,14 @@ add_directory (const char *directory)
         }
         
         xmlFreeDoc (doc);
+        return TRUE;
 }
 
-static void
-remove_directory (const char *directory)
+static gboolean
+remove_directory (const gchar *option_name,
+                  const gchar *directory,
+                  gpointer data,
+                  GError **error)
 {
         xmlDocPtr doc;
         xmlNodePtr search_node;
@@ -197,7 +207,7 @@ remove_directory (const char *directory)
                                                         xmlFreeNode (item_node);
                                                         save_file (doc);
                                                         xmlFree (dir_path);
-                                                        return;
+                                                        return TRUE;
                                                 }
                                         }
                                         xmlFree (dir_path);
@@ -209,10 +219,14 @@ remove_directory (const char *directory)
         }
 
         xmlFreeDoc (doc);                                                
+        return TRUE;
 }
 
-static void
-display_directories (void)
+static gboolean
+display_directories (const gchar *option_name,
+                     const gchar *value,
+                     gpointer data,
+                     GError **error)
 {
         xmlDocPtr doc;
         xmlNodePtr search_node;
@@ -239,36 +253,31 @@ display_directories (void)
                 search_node = search_node->next;
         }
         xmlFreeDoc (doc);                                                
+        return TRUE;
 }
 
 
 
-#define REMOVE_DIRECTORY_OPERATION 1
-#define ADD_DIRECTORY_OPERATION 2
-#define DISPLAY_DIRECTORIES_OPERATION 3
-#define DISPLAY_CONFIG_PATH_OPERATION 4
-
-struct poptOption oaf_sysconf_popt_options[] = {
-        {"remove-directory", '\0', POPT_ARG_STRING, NULL, 
-         REMOVE_DIRECTORY_OPERATION,
-         N_("Directory to remove from configuration file"), N_("directory path")},
-        {"add-directory", '\0', POPT_ARG_STRING, NULL, 
-         ADD_DIRECTORY_OPERATION,
-         N_("Directory to add to configuration file"), N_("directory path")},
-        {"display-directories", '\0', POPT_ARG_NONE, NULL, 
-         DISPLAY_DIRECTORIES_OPERATION,
+static const GOptionEntry oaf_sysconf_goption_options[] = {
+        /* add- and remove-directory could be marked as FILENAMEs, but
+           they are just added directly to the XML file, so we leave
+           them as UTF-8. */
+        {"remove-directory", '\0', 0, G_OPTION_ARG_CALLBACK, remove_directory, 
+         N_("Directory to remove from configuration file"), N_("PATH")},
+        {"add-directory", '\0', 0, G_OPTION_ARG_CALLBACK, add_directory, 
+         N_("Directory to add to configuration file"), N_("PATH")},
+        {"display-directories", '\0', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, display_directories, 
          N_("Display directories in configuration file"), NULL},
-        {"config-file-path", '\0', POPT_ARG_NONE, NULL, 
-         DISPLAY_CONFIG_PATH_OPERATION,
+        {"config-file-path", '\0', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, display_config_path, 
          N_("Display path to configuration file"), NULL},
-        POPT_AUTOHELP
         {NULL}
 };
 
 int main (int argc, char **argv)
 {
-        poptContext context;
-        int popt_option;
+        GOptionContext *context;
+        GError *error = NULL;
+        gboolean do_usage_exit = FALSE;
 
         setlocale (LC_ALL, "");
 
@@ -279,44 +288,22 @@ int main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 #endif
 
-        /* init popt */
-        context = poptGetContext ("oaf-sysconf", argc, (const char **)argv, 
-                                  oaf_sysconf_popt_options, 0);
+        /* init goption */
+	g_set_prgname ("bonobo-activation-sysconf");
+	context = g_option_context_new (NULL);
+	g_option_context_add_main_entries (context, oaf_sysconf_goption_options, GETTEXT_PACKAGE);
 
-        popt_option = poptGetNextOpt (context);
-        if (popt_option <= -1) {
-                poptPrintHelp (context, stderr, 0);
-                poptFreeContext (context);
-                return 0;
-        }
+	if (!g_option_context_parse (context, &argc, &argv, &error)) {
+		g_printerr ("%s\n", error->message);
+		g_error_free (error);
+		do_usage_exit = TRUE;
+	}
+	g_option_context_free (context);
 
-        while (popt_option != -1) {
-                const char *arg;
-                arg = (const char *)poptGetOptArg (context);
-                switch (popt_option) {
-
-                case REMOVE_DIRECTORY_OPERATION:
-                        remove_directory (arg);
-                        break;
-                        
-                case ADD_DIRECTORY_OPERATION:
-                        add_directory (arg);
-                        break;
-                        
-                case DISPLAY_DIRECTORIES_OPERATION:
-                        display_directories ();
-                        break;
-
-                case DISPLAY_CONFIG_PATH_OPERATION:
-                        display_config_path ();
-                        break;
-	
-                }
-                popt_option = poptGetNextOpt (context);
-        }
-
-    
-        poptFreeContext (context);
+	if (do_usage_exit) {
+		g_printerr (_("Run '%s --help' to see a full list of available command line options.\n"), g_get_prgname ());
+		exit (1);
+	}
 
         return 0;
 }

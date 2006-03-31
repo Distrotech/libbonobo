@@ -1,3 +1,20 @@
+2006-03-31  Michael Terry  <mterry@cvs.gnome.org>
+
+	* activation-server/activation-server-main.c (main):
+	Convert from popt to GOption.  Closes bug #336610.
+	* activation-server/client.c (main): Same
+	* tests/test-activation/empty-server.c (main): Same
+	* utils/bonobo-activation-sysconf.c (main): Same
+	
+	* bonobo-activation/bonobo-activation-init.c: Remove
+	popt.h include.
+	
+	* activation-server/Makefile.am: Remove POPT_LIBS.
+	* tests/test-activation/Makefile.am: Same
+	* utils/Makefile.am: Same
+	
+	* utils/bonobo-activate.c: Removed; unused
+
 2006-03-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* activation-server/object-directory-load.c: Plug a

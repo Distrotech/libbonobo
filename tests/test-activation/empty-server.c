@@ -4,7 +4,6 @@
 #include <string.h>
 #include <signal.h>
 #include <orbit/orbit.h>
-#include <popt.h>
 
 #include <bonobo-activation/bonobo-activation.h>
 
@@ -35,7 +34,9 @@ main (int argc, char *argv[])
 {
 	PortableServer_ObjectId *objid;
 	PortableServer_POA poa;
-	poptContext ctx;
+	GOptionContext *ctx;
+	GOptionGroup *goption_group;
+	GError *error = NULL;
 
 	CORBA_Environment ev;
 	CORBA_ORB orb;
@@ -47,10 +48,16 @@ main (int argc, char *argv[])
 	CORBA_exception_init (&ev);
 	orb = bonobo_activation_init (argc, argv);
 
-	ctx = poptGetContext ("oaf-empty-server", argc, (const char **)argv,
-                              bonobo_activation_popt_options, 0);
-	while (poptGetNextOpt (ctx) >= 0);
-	poptFreeContext (ctx);
+	g_set_prgname ("bonobo-activation-empty-server");
+	ctx = g_option_context_new (NULL);
+	goption_group = bonobo_activation_get_goption_group ();
+	g_option_context_set_main_group (ctx, goption_group);
+	if (!g_option_context_parse (ctx, &argc, &argv, &error)) {
+		g_printerr ("%s\n", error->message);
+		g_error_free (error);
+		exit (1);
+	}
+	g_option_context_free (ctx);
 
 	POA_Empty__init (&poa_empty_servant, &ev);
 

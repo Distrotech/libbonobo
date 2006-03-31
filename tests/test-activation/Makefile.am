@@ -77,7 +77,7 @@ INCLUDES= \
 	-DG_DISABLE_DEPRECATED $(LIBBONOBO_CFLAGS)
 
 LDADD = ../../bonobo-activation/libbonobo-activation.la \
-	$(LIBBONOBO_LIBS) $(POPT_LIBS) 
+	$(LIBBONOBO_LIBS)
 
 serverfiles=empty.server broken.server plugin.server
 

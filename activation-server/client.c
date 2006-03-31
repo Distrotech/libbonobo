@@ -26,35 +26,34 @@
 #include "config.h"
 
 #include <stdio.h>
-#include <popt.h>
 #include <string.h>
 
 #include <bonobo-activation/bonobo-activation.h>
 #include <bonobo-activation/bonobo-activation-private.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 
-static char *acior = NULL, *specs = NULL, *add_path = NULL, *remove_path = NULL, *registerior = NULL, *registeriid = NULL;
-static int do_query;
+static gchar *acior = NULL, *specs = NULL, *add_path = NULL, *remove_path = NULL, *registerior = NULL, *registeriid = NULL;
+static gboolean do_query;
 static CORBA_ORB orb;
 static CORBA_Environment ev;
 
-static struct poptOption options[] = {
+static const GOptionEntry options[] = {
 
-	{"ac-ior", '\0', POPT_ARG_STRING, &acior, 0,
+	{"ac-ior", '\0', 0, G_OPTION_ARG_STRING, &acior,
 	 "IOR of ActivationContext to use", "IOR"},
-	{"do-query", 'q', POPT_ARG_NONE, &do_query, 0,
+	{"do-query", 'q', 0, G_OPTION_ARG_NONE, &do_query,
 	 "Run a query instead of activating", "QUERY"},
-	{"spec", 's', POPT_ARG_STRING, &specs, 0,
+	{"spec", 's', 0, G_OPTION_ARG_STRING, &specs,
 	 "Specification string for object to activate", "SPEC"},
-	{"add-path", '\0', POPT_ARG_STRING, &add_path, 0,
+	{"add-path", '\0', 0, G_OPTION_ARG_FILENAME, &add_path,
 	 "Specification string for search path to be added in runtime", "PATH"},
-	{"remove-path", '\0', POPT_ARG_STRING, &remove_path, 0,
+	{"remove-path", '\0', 0, G_OPTION_ARG_FILENAME, &remove_path,
 	 "Specification string for search path to be removed in runtime", "PATH"},
-	{"register-ior", '\0', POPT_ARG_STRING, &registerior, 0,
+	{"register-ior", '\0', 0, G_OPTION_ARG_STRING, &registerior,
 	 "IOR of the server to be registered", "IOR"},
-	{"register-iid", '\0', POPT_ARG_STRING, &registeriid, 0,
+	{"register-iid", '\0', 0, G_OPTION_ARG_STRING, &registeriid,
          "IID of the server to be registered", "IID"},
-	POPT_AUTOHELP {NULL}
+	{NULL}
 };
 
 static void
@@ -300,27 +299,32 @@ do_activating(void)
 int
 main (int argc, char *argv[])
 {
-	poptContext ctx;
+	GOptionContext *ctx;
+	GError *error = NULL;
 	gboolean do_usage_exit = FALSE;
 	int res = 0;
 
 	CORBA_exception_init (&ev);
 
-	ctx = poptGetContext ("oaf-client", argc, (const char **)argv, options, 0);
-	while (poptGetNextOpt (ctx) >= 0)
-		/**/;
+	g_set_prgname ("activation-client");
+	ctx = g_option_context_new (NULL);
+	g_option_context_add_main_entries (ctx, options, GETTEXT_PACKAGE);
+	if (!g_option_context_parse (ctx, &argc, &argv, &error)) {
+		g_printerr ("%s\n", error->message);
+		g_error_free (error);
+		do_usage_exit = TRUE;
+	}
+	g_option_context_free (ctx);
 
-	if (!specs && !add_path && !remove_path && !(registerior && registeriid)) {
-		g_print ("You must specify an operation to perform.\n");
+	if (!do_usage_exit && !specs && !add_path && !remove_path && !(registerior && registeriid)) {
+		g_printerr ("You must specify an operation to perform.\n");
 		do_usage_exit = TRUE;
 	}
 
 	if (do_usage_exit) {
-		poptPrintUsage (ctx, stdout, 0);
-		return 1;
+		g_printerr ("Run '%s --help' to see a full list of available command line options.\n", g_get_prgname ());
+		exit (1);
 	}
-
-	poptFreeContext (ctx);
 
 	orb = bonobo_activation_init (argc, argv);
 
