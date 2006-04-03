@@ -4,18 +4,18 @@
 #include <glib-object.h>
 #include <libbonobo.h>
 
-CORBA_ORB	    orb;
-BonoboPropertyBag  *pb;
-CORBA_Environment   ev;
+static CORBA_ORB	    orb;
+static BonoboPropertyBag  *pb;
+static CORBA_Environment   ev;
 
 enum {
-	PROP_BOOLEAN_TEST,
-	PROP_INTEGER_TEST,
-	PROP_LONG_TEST,
-	PROP_FLOAT_TEST,
-	PROP_DOUBLE_TEST,
-	PROP_STRING_TEST
-} PropIdx;
+       PROP_BOOLEAN_TEST,
+       PROP_INTEGER_TEST,
+       PROP_LONG_TEST,
+       PROP_FLOAT_TEST,
+       PROP_DOUBLE_TEST,
+       PROP_STRING_TEST
+};
 
 typedef struct {
 	gint      i;
@@ -145,7 +145,7 @@ simple_prop_to_string (BonoboArg *arg)
 	}
 
 	default:
-		g_error ("Unhandled type: %d", arg->_type->kind);
+		g_error ("Unhandled type: %u", arg->_type->kind);
 		break;
 	}
 
@@ -234,7 +234,7 @@ print_props (void)
 
 		s2  = simple_prop_to_string (prop->default_value);
 
-		g_print ("Prop %12s [%2d] %s %s %s %s %s %s\n",
+		g_print ("Prop %12s [%2u] %s %s %s %s %s %s\n",
 			 prop->name, prop->type->kind,
 			 s1, s2,
 			 prop->doctitle,

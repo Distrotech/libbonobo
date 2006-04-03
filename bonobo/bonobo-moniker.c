@@ -106,7 +106,6 @@ Bonobo_Moniker
 bonobo_moniker_get_parent (BonoboMoniker     *moniker,
 			   CORBA_Environment *opt_ev)
 {
-	CORBA_Environment ev, *my_ev;
 	Bonobo_Moniker rval;
 
 	bonobo_return_val_if_fail (BONOBO_IS_MONIKER (moniker),
@@ -115,16 +114,7 @@ bonobo_moniker_get_parent (BonoboMoniker     *moniker,
 	if (moniker->priv->parent == CORBA_OBJECT_NIL)
 		return CORBA_OBJECT_NIL;
 
-	if (!opt_ev) {
-		CORBA_exception_init (&ev);
-		my_ev = &ev;
-	} else
-		my_ev = opt_ev;
-
 	rval = bonobo_object_dup_ref (moniker->priv->parent, opt_ev);
-
-	if (!opt_ev)
-		CORBA_exception_free (&ev);
 
 	return rval;
 }

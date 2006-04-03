@@ -1,3 +1,28 @@
+2006-04-03  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/object-directory-corba.c: (as_rescan):
+	Add missing return value.
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_postinit): Adjust for the below.
+	* bonobo-activation/bonobo-activation-private.h: Rename
+	BONOBO_ACTIVATION_FACTORY_TIMEOUT to BONOBO_ACTIVATION_PRIVATE_TIMEOUT.
+	* bonobo/bonobo-debug.c: (bonobo_debug_init): Constify
+	* bonobo/bonobo-main.c: Make some vars static.
+	* bonobo/bonobo-moniker-util.c: Make a struct static and constify.
+	* bonobo/bonobo-moniker.c: (bonobo_moniker_get_parent): Axe some
+	unneeded code.
+	* bonobo/bonobo-property-bag-client.c: (bonobo_pbclient_setv),
+	(bonobo_pbclient_getv): Fix format specifiers.
+	* bonobo/bonobo-running-context.c: Make some vars static and put an
+	otherwise unused function inside #ifdef G_ENABLE_DEBUG.
+	* bonobo/bonobo-stream-client.c: (bonobo_stream_client_read):
+	More format specifiers.
+	* tests/test-main-loop.c: (run_tests): Again.
+	* tests/test-properties-client.c: Make some vars static.
+	* tests/test-properties-server.c: (simple_prop_to_string),
+	(print_props): More of the same.
+	* tests/test-thread.c: (get_fn): Again.
+
 2006-03-31  Michael Terry  <mterry@cvs.gnome.org>
 
 	* activation-server/activation-server-main.c (main):

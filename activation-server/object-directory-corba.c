@@ -682,7 +682,7 @@ as_rescan (gpointer data)
 
         if (!(od = main_dir)) { /* shutting down */
                 server_unlock ();
-                return;
+                return FALSE;
         }
 
         /* We tend to get a lot of 'broken' callbacks at once */

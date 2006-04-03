@@ -309,7 +309,7 @@ bonobo_stream_client_read (const Bonobo_Stream stream,
 			memcpy (mem + pos, buf->_buffer, buf->_length);
 			pos += buf->_length;
 		} else {
-			g_warning ("Buffer length %d", buf->_length);
+			g_warning ("Buffer length %u", buf->_length);
 			goto io_error;
 		}
 		CORBA_free (buf);

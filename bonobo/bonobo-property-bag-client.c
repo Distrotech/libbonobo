@@ -851,7 +851,7 @@ bonobo_pbclient_setv (Bonobo_PropertyBag       bag,
 
 		default:
 			return g_strdup_printf ("Unhandled setv arg "
-				"'%s' type %d", arg_name, type->kind);
+				"'%s' type %u", arg_name, type->kind);
 		}
 
 		arg_name = va_arg (var_args, char *);
@@ -918,7 +918,7 @@ bonobo_pbclient_getv (Bonobo_PropertyBag bag,
 
 		default:
 			return g_strdup_printf ("Unhandled getv arg "
-			        "'%s' type %d", arg_name, type->kind);
+			        "'%s' type %u", arg_name, type->kind);
 		}
 
 		arg_name = va_arg (var_args, char *);

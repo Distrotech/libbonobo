@@ -16,7 +16,7 @@ timeout (gpointer data)
 static gboolean
 run_tests (gpointer data)
 {
-	printf ("main loop level = %d\n", bonobo_main_level ());
+	printf ("main loop level = %u\n", bonobo_main_level ());
 	g_timeout_add (1000, timeout, NULL);
 	return FALSE;
 }

@@ -29,7 +29,7 @@
 #include <bonobo-activation/bonobo-activation-base-service.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 
-#define BONOBO_ACTIVATION_FACTORY_TIMEOUT 1000
+#define BONOBO_ACTIVATION_FACTORY_PRIVATE_TIMEOUT 1000
 
 extern GStaticRecMutex _bonobo_activation_guard;
 #define BONOBO_ACTIVATION_LOCK()   g_static_rec_mutex_lock   (&_bonobo_activation_guard)

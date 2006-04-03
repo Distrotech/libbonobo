@@ -19,7 +19,7 @@ get_fn (BonoboPropertyBag *bag,
 	CORBA_Environment *ev,
 	gpointer           user_data)
 {
-	fprintf (stderr, "Check property %d\n", arg_id);
+	fprintf (stderr, "Check property %u\n", arg_id);
 	if (arg_id == PROP_IN_MAIN)
 		g_assert (g_thread_self () == main_thread);
 	else
@@ -40,7 +40,7 @@ test_prop (TestClosure *tc, CORBA_Environment *ev)
 	g_assert (!BONOBO_EX (ev));
 }
 
-long running_threads;
+static long running_threads;
 G_LOCK_DEFINE_STATIC (running_threads);
 
 static gpointer

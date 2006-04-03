@@ -16,10 +16,10 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
 
-struct {
+static struct {
 	char *prefix;
 	char *oafiid;
-} fast_prefix [] = {
+} const fast_prefix [] = {
 	{ "!",       "OAFIID:Bonobo_Moniker_Item"  },
 	{ "OAFIID:", "OAFIID:Bonobo_Moniker_Oaf"   },
 	{ "OAFAID:", "OAFIID:Bonobo_Moniker_Oaf"   },

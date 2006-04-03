@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <libbonobo.h>
 
-Bonobo_PropertyBag	 pb;
-CORBA_Environment	 ev;
-Bonobo_PropertyBag       pb;
+static Bonobo_PropertyBag	 pb;
+static CORBA_Environment	 ev;
+static Bonobo_PropertyBag       pb;
 
 static char *
 simple_print_type (CORBA_TypeCode tc)

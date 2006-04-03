@@ -34,9 +34,9 @@ typedef struct {
 	GHashTable *keys;
 } BonoboRunningInfo;
 
-BonoboRunningInfo *bonobo_running_info = NULL;
-BonoboObject      *bonobo_running_context = NULL;
-BonoboEventSource *bonobo_running_event_source = NULL;
+static BonoboRunningInfo *bonobo_running_info = NULL;
+static BonoboObject      *bonobo_running_context = NULL;
+static BonoboEventSource *bonobo_running_event_source = NULL;
 
 enum {
 	LAST_UNREF,
@@ -206,6 +206,7 @@ bonobo_running_context_ignore_object (CORBA_Object object)
 }
 #endif
 
+#ifdef G_ENABLE_DEBUG
 static void
 _running_context_list_objects (gpointer key,
 			       gpointer value,
@@ -225,6 +226,7 @@ _running_context_list_objects (gpointer key,
 	bonobo_debug_print ("Alive: ", "[%p]: %s", object, type_id);
 	CORBA_free (type_id);
 }
+#endif
 
 void          
 bonobo_running_context_trace_objects_T (CORBA_Object object,

@@ -30,9 +30,9 @@
 #ifdef HAVE_GTHREADS
 GMutex                   *_bonobo_lock;
 #endif
-CORBA_ORB                 __bonobo_orb = CORBA_OBJECT_NIL;
-PortableServer_POA        __bonobo_poa = CORBA_OBJECT_NIL;
-PortableServer_POAManager __bonobo_poa_manager = CORBA_OBJECT_NIL;
+static CORBA_ORB                 __bonobo_orb = CORBA_OBJECT_NIL;
+static PortableServer_POA        __bonobo_poa = CORBA_OBJECT_NIL;
+static PortableServer_POAManager __bonobo_poa_manager = CORBA_OBJECT_NIL;
 
 static guint              bonobo_main_loop_level = 0;
 static GSList *           bonobo_main_loops = NULL;
