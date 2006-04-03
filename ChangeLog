@@ -1,5 +1,11 @@
 2006-04-03  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* activation-server/client.c: #include <stdlib.h> for exit(3).
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_orb_init): Remove ignored const qualifier.
+
+2006-04-03  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* activation-server/object-directory-corba.c: (as_rescan):
 	Add missing return value.
 	* bonobo-activation/bonobo-activation-init.c:

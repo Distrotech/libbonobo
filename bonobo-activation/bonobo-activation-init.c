@@ -539,7 +539,7 @@ bonobo_activation_orb_init (int *argc, char **argv)
         CORBA_Context def_ctx;
 	CORBA_Environment ev;
 	const char *hostname;
-	const gchar *orb_id;
+	gchar *orb_id;
 
 	CORBA_exception_init (&ev);
 
