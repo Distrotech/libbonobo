@@ -60,6 +60,7 @@ chomp($username);
 
 @IF_POSIX_PS@ $ps_cmd = "@PS_PATH@ -U $username -opid,args";
 @IF_BSD_PS@   $ps_cmd = "@PS_PATH@ -U $username -xww -opid,command";
+@IF_CYGWIN_PS@   $ps_cmd = "@PS_PATH@ -s -u $username | awk '{print \$1 \" \" \$4}'";
 
 # get Bonobo files
 #

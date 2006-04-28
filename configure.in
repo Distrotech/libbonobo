@@ -33,8 +33,13 @@ AC_SUBST(BONOBO_ACTIVATION_LT_VERSION_INFO)
 
 AC_CANONICAL_HOST
 case "$host" in
+  *-*-cygwin*)
+    os_win32=no
+    SOPREFIX=cyg
+    ;;
   *-*-mingw*)
     os_win32=yes
+    SOPREFIX=lib
     # Autoconf also puts stuff in configure to set PATH_SEPARATOR, but
     # if you run the configure script with a Cygwin shell, it gets set
     # to ":" while we do want the semicolon here.
@@ -42,10 +47,12 @@ case "$host" in
     ;;
   *)
     os_win32=no
+    SOPREFIX=lib
     SEARCHPATHSEP=":"
     ;;
 esac
 
+AC_SUBST(SOPREFIX)
 AC_SUBST(SEARCHPATHSEP)
 
 if test "$os_win32" = "yes"; then
@@ -226,12 +233,24 @@ if test -n "$PERL_PATH"; then
 	else
 		IF_POSIX_PS=#
 	fi
+
+	case "$target_os" in
+		cygwin*)
+			IF_BSD_PS=#
+			IF_POSIX_PS=#
+			;;
+		*)
+			IF_CYGWIN_PS=#
+			;;
+	esac
+
 fi
 AC_SUBST(PERL_PATH)
 AC_SUBST(BONOBO_SLAY)
 AC_SUBST(PS_PATH)
 AC_SUBST(IF_BSD_PS)
 AC_SUBST(IF_POSIX_PS)
+AC_SUBST(IF_CYGWIN_PS)
 
 AC_OUTPUT([
 Makefile
