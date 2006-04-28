@@ -13,7 +13,7 @@ INCLUDES = \
 	-DVERSION=\"$(VERSION)\"
 
 Bonobo_Moniker_std.server.in: Bonobo_Moniker_std.server.in.in
-	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" $< > $@
+	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" -e "s|\@SOPREFIX\@|$(SOPREFIX)|" $< > $@
 
 CLEANFILES = Bonobo_Moniker_std.server Bonobo_Moniker_std.server.in
 

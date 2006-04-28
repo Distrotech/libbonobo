@@ -1,3 +1,17 @@
+2006-04-28  Tor Lillqvist  <tml@novell.com>
+
+	Cygwin patch by "Cygwin Ports maintainer" (#339976):
+
+	* configure.in: Set SOPREFIX to "cyg" on Cygwin, otherwise
+	"lib". Set IF_CYGWIN_PS to "#" on non-Cygwin. AC_SUBST them.
+
+	* monikers/Bonobo_Moniker_std.server.in.in: Use SOPREFIX.
+
+	* monikers/Makefile.am: Expand SOPREFIX.
+
+	* utils/bonobo-slay.in: Add the Cygwin-specific command, use
+	IF_CYGWIN_PS for it.
+
 2006-04-04  Pema Geyleg  <pema.geyleg@gmail.com>
 
 	* configure.in: Added dz (Dzongkha) to ALL_LINGUAS
