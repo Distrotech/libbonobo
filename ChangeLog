@@ -1,3 +1,7 @@
+2006-04-30  Gora Mohanty  <gmohanty@cvs.gnome.org>
+
+        * configure.in: Added 'or' (Oriya) to ALL_LINGUAS.
+
 2006-04-28  Tor Lillqvist  <tml@novell.com>
 
 	Cygwin patch by "Cygwin Ports maintainer" (#339976):
