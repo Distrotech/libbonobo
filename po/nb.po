@@ -1,58 +1,69 @@
 # Norwegian translation of libbonobo (bokmål dialect).
 # Copyright (C) 1999-2004 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 1999-2005.
+# Kjartan Maraas <kmaraas@gnome.org>, 1999-2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-15 12:28+0100\n"
-"PO-Revision-Date: 2005-11-15 12:29+0100\n"
+"POT-Creation-Date: 2006-04-30 13:54+0200\n"
+"PO-Revision-Date: 2006-04-30 13:55+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: ../activation-server/activation-context-corba.c:470
+#: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
 msgstr "Kunne ikke finne ut hvilket barn tjeneren var listet i"
 
-#: ../activation-server/activation-context-corba.c:748
+#: ../activation-server/activation-context-corba.c:812
 msgid "Not a valid Activation ID"
 msgstr "Ikke en gyldig aktiverings-ID"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:162
 msgid "Directory to read .server files from"
 msgstr "Katalog .server-filer skal lese fra"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:162
 msgid "DIRECTORY"
 msgstr "KATALOG"
 
-#: ../activation-server/activation-server-main.c:87
+#: ../activation-server/activation-server-main.c:165
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Funger som en ActivationContext (standard oppførsel er å fungere kun som en "
 "ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:91
+#: ../activation-server/activation-server-main.c:169
 msgid "File descriptor to write IOR to"
 msgstr "Fildeskriptor som IOR skal skrives til"
 
-#: ../activation-server/activation-server-main.c:91
-#: ../bonobo-activation/bonobo-activation-init.c:351
-#: ../bonobo-activation/bonobo-activation-init.c:361
+#: ../activation-server/activation-server-main.c:169
+#: ../bonobo-activation/bonobo-activation-init.c:350
+#: ../bonobo-activation/bonobo-activation-init.c:360
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:99
+#: ../activation-server/activation-server-main.c:172
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr "Registrer som brukers aktiveringstjener uten låsing [!] for feilsøking"
+
+#: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
 msgstr "Uttrykk i spørring som skal evalueres"
 
-#: ../activation-server/activation-server-main.c:99
+#: ../activation-server/activation-server-main.c:177
 msgid "EXPRESSION"
 msgstr "UTTRYKK"
+
+#: ../activation-server/activation-server-main.c:424
+#: ../utils/bonobo-activation-sysconf.c:304
+#, c-format
+msgid "Run '%s --help' to see a full list of available command line options.\n"
+msgstr "Kjør «%s --help» for å se en full liste med tilgjengelige kommandolinjeflagg.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -70,7 +81,7 @@ msgstr "Meldingstjeneste"
 msgid "Notification service for activation"
 msgstr "Meldingstjeneste for aktivering"
 
-#: ../activation-server/object-directory-activate.c:186
+#: ../activation-server/object-directory-activate.c:219
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
 "Vi håndterer ikke aktivering av shlib-objekter i en ekstern prosess ennå"
@@ -91,86 +102,86 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1154
+#: ../activation-server/object-directory-corba.c:1331
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "«Race condition» under aktivering av tjener «%s»"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
 msgstr "en NULL iid er ikke gyldig"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s har en NULL type"
 
-#: ../activation-server/object-directory-load.c:105
+#: ../activation-server/object-directory-load.c:109
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s har en NULL plassering"
 
-#: ../activation-server/object-directory-load.c:114
+#: ../activation-server/object-directory-load.c:118
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "ugyldig tegn '%c' i iid '%s'"
 
-#: ../activation-server/object-directory-load.c:342
+#: ../activation-server/object-directory-load.c:348
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Egenskap '%s' har ingen verdi"
 
-#: ../activation-server/object-directory-load.c:630
+#: ../activation-server/object-directory-load.c:580
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Kunne ikke lese ugyldig XML-dokument %s"
 
-#: ../activation-server/object-directory-load.c:695
+#: ../activation-server/object-directory-load.c:627
 #, c-format
 msgid "Trying dir %s"
 msgstr "Prøver katalog %s"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:100
+#: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Underprosess ga ingen feilmelding, ukjent feil oppsto"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:177
+#: ../bonobo-activation/bonobo-activation-fork-server.c:235
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Feil under lesing fra underprosess: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:184
+#: ../bonobo-activation/bonobo-activation-fork-server.c:245
 msgid "EOF from child process\n"
 msgstr "Slutt på fil fra underprosess\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+#: ../bonobo-activation/bonobo-activation-fork-server.c:424
 msgid "Couldn't spawn a new process"
 msgstr "Kunne ikke starte en ny prosess"
 
-#: ../bonobo-activation/bonobo-activation-init.c:351
-#: ../bonobo-activation/bonobo-activation-init.c:361
+#: ../bonobo-activation/bonobo-activation-init.c:350
+#: ../bonobo-activation/bonobo-activation-init.c:360
 msgid "File descriptor to print IOR on"
 msgstr "Fildeskriptor som IOR skal skrives til"
 
-#: ../bonobo-activation/bonobo-activation-init.c:353
-#: ../bonobo-activation/bonobo-activation-init.c:363
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:362
 msgid "IID to activate"
 msgstr "IID som skal aktiveres"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:354
+#: ../bonobo-activation/bonobo-activation-init.c:364
 msgid "Prevent registering of server with OAF"
 msgstr "Forhindre registrering av tjener hos OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:375
+#: ../bonobo-activation/bonobo-activation-init.c:374
 msgid "Bonobo Activation"
 msgstr "Bonobo Activation"
 
-#: ../bonobo-activation/bonobo-activation-init.c:376
+#: ../bonobo-activation/bonobo-activation-init.c:375
 msgid "Show Bonobo Activation options"
 msgstr "Vis alternativer for Bonobo Activation"
 
-#: ../bonobo-activation/bonobo-activation-init.c:471
+#: ../bonobo-activation/bonobo-activation-init.c:470
 msgid "Bonobo activation options"
 msgstr "Alternativer for bonobo-activation"
 
@@ -351,7 +362,7 @@ msgstr "Generell feil under aktivering uten beskrivelse"
 msgid "Could not initialize Bonobo"
 msgstr "Kunne ikke initialisere Bonobo"
 
-#: ../bonobo/bonobo-moniker.c:352
+#: ../bonobo/bonobo-moniker.c:342
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "Kunne ikke slå opp eller utvide «%s»"
@@ -431,20 +442,20 @@ msgstr "Kunne ikke opprette en instans av eksempelkomponenten for ekko"
 msgid "An exception occured '%s'"
 msgstr "Et unntak oppsto «%s»"
 
-#: ../utils/bonobo-activation-sysconf.c:83
+#: ../utils/bonobo-activation-sysconf.c:82
 msgid "Could not save configuration file.\n"
 msgstr "Kunne ikke lagre konfigurasjonsfil.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:84
+#: ../utils/bonobo-activation-sysconf.c:83
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Vennligst forsikre deg om at du har skriverettigheter til «%s».\n"
 
-#: ../utils/bonobo-activation-sysconf.c:87
+#: ../utils/bonobo-activation-sysconf.c:86
 msgid "Successfully wrote configuration file.\n"
 msgstr "Fullført skriving av konfigurasjonsfil.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:101
+#: ../utils/bonobo-activation-sysconf.c:103
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -453,36 +464,36 @@ msgstr ""
 "konfigurasjonsfil er:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:139
+#: ../utils/bonobo-activation-sysconf.c:145
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s er allerede i konfigurasjonsfilen\n"
 
-#: ../utils/bonobo-activation-sysconf.c:159
+#: ../utils/bonobo-activation-sysconf.c:165
 msgid "there is not a properly structured configuration file\n"
 msgstr "det finnes ingen konfigurasjonsfil med korrekt struktur\n"
 
-#: ../utils/bonobo-activation-sysconf.c:222
+#: ../utils/bonobo-activation-sysconf.c:236
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Konfigurasjonsfil for bonobo-activation inneholder:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:266
 msgid "Directory to remove from configuration file"
 msgstr "Katalog som skal fjernes fra konfigurasjonsfilen"
 
-#: ../utils/bonobo-activation-sysconf.c:254
-#: ../utils/bonobo-activation-sysconf.c:257
-msgid "directory path"
-msgstr "katalogsti"
+#: ../utils/bonobo-activation-sysconf.c:266
+#: ../utils/bonobo-activation-sysconf.c:268
+msgid "PATH"
+msgstr "STI"
 
-#: ../utils/bonobo-activation-sysconf.c:257
+#: ../utils/bonobo-activation-sysconf.c:268
 msgid "Directory to add to configuration file"
 msgstr "Katalog som skal legges til i konfigurasjonsfilen"
 
-#: ../utils/bonobo-activation-sysconf.c:260
+#: ../utils/bonobo-activation-sysconf.c:270
 msgid "Display directories in configuration file"
 msgstr "Vis kataloger i konfigurasjonsfilen"
 
-#: ../utils/bonobo-activation-sysconf.c:263
+#: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Vis sti til konfigurasjonsfil"
