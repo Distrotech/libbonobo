@@ -1,3 +1,10 @@
+2006-05-02  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo-activation/bonobo-activation-register.c:
+	(bonobo_activation_registration_env_set_global): Fix
+	polarity of the test before setting global_reg_env.
+	Closes bug #338177.
+	
 2006-04-30  Gora Mohanty  <gmohanty@cvs.gnome.org>
 
         * configure.in: Added 'or' (Oriya) to ALL_LINGUAS.

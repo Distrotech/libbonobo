@@ -555,7 +555,7 @@ bonobo_activation_registration_env_set_global (GSList   *reg_env,
 
 	old_buffer = global_reg_env._buffer;
 
-	if (!reg_env) {
+	if (reg_env) {
 		GSList *l;
 		int     i;
 
