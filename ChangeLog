@@ -1,3 +1,10 @@
+2006-05-03  Christian Persch  <chpe@cvs.gnome.org>
+
+	* bonobo-activation/bonobo-activation-init.c: (init_gettext),
+	(bonobo_activation_get_goption_group), (bonobo_activation_preinit),
+	(bonobo_activation_get_popt_table_name): Make sure to initialise
+	the textdomain codeset if we're using goption. Bug #335159.
+
 2006-04-28  Tor Lillqvist  <tml@novell.com>
 
 	Cygwin patch by "Cygwin Ports maintainer" (#339976):

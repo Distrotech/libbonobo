@@ -366,10 +366,34 @@ static const GOptionEntry bonobo_activation_goption_options[] = {
         { NULL }
 };
 
+static void
+init_gettext (gboolean bind_codeset)
+{
+	static gboolean initialized = FALSE;
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET	
+	static gboolean codeset_bound = FALSE;
+#endif
+
+	if (!initialized)
+	{
+		bindtextdomain (GETTEXT_PACKAGE, BONOBO_ACTIVATION_LOCALEDIR);
+		initialized = TRUE;
+	}
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET	
+	if (!codeset_bound && bind_codeset)
+	{
+		bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+		codeset_bound = TRUE;
+	}
+#endif
+}
+
 GOptionGroup *
 bonobo_activation_get_goption_group (void)
 {
 	GOptionGroup *group;
+
+	init_gettext (TRUE);
 
 	group = g_option_group_new ("bonobo-activation",
 				    N_("Bonobo Activation"),
@@ -405,7 +429,7 @@ bonobo_activation_ior_fd_get (void)
 void
 bonobo_activation_preinit (gpointer app, gpointer mod_info)
 {
-        bindtextdomain (GETTEXT_PACKAGE, BONOBO_ACTIVATION_LOCALEDIR);
+	init_gettext (FALSE);
 }
 
 void
@@ -467,8 +491,8 @@ bonobo_activation_is_initialized (void)
 char *
 bonobo_activation_get_popt_table_name (void)
 {
-        bindtextdomain (PACKAGE, BONOBO_ACTIVATION_LOCALEDIR);
-        return _("Bonobo activation options");
+	init_gettext (FALSE);
+	return _("Bonobo activation options");
 }
 
 
