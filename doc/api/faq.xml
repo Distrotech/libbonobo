@@ -243,7 +243,7 @@
 	    <qandaentry>
 		<question> <para> What are the activation methods in Bonobo? </para> </question>
 
-		<answer> <para> The prefered method of activating objects is trough the
+		<answer> <para> The prefered method of activating objects is through the
 		    <function>bonobo_get_object</function> function.  This one does
 		    moniker based activation.  Like this: </para>
 		    <para> For example this activates gnumeric and returns a

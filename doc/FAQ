@@ -164,7 +164,7 @@ be inserted into a GtkContainer.
 	
 @Q: What are the activation methods in Bonobo?
 
-	The prefered method of activating objects is trough the
+	The prefered method of activating objects is through the
 	"bonobo_get_object" function.  This one does moniker based
 	activation.  Like this:
 

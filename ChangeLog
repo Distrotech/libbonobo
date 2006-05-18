@@ -1,3 +1,11 @@
+2006-05-18  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_init): Don't return garbage.
+	* doc/FAQ: Typos
+	* doc/api/faq.xml: Same
+	* doc/api/monikers-overview.xml: Same
+
 2006-05-03  Christian Persch  <chpe@cvs.gnome.org>
 
 	* bonobo-activation/bonobo-activation-init.c: (init_gettext),

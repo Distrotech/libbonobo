@@ -520,6 +520,8 @@ bonobo_activation_init (int argc, char **argv)
 
                 retval = bonobo_activation_orb_init (&argc, argv);
         }
+	else
+		retval = bonobo_activation_orb;
 
         /* Accumulate arguments over multiple inits. Sometimes we are
          * initialized from GTK_MODULEs or gnome-vfs with bogus arguments */

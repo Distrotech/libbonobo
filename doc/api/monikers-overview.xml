@@ -551,7 +551,7 @@
 
 	    <para>The source application would create a moniker for a
 		given object that would fully identify it, and pass it
-		trough a drag and drop operation or a cut and paste
+		through a drag and drop operation or a cut and paste
 		operation to the recipient application.</para>
 	
 	    <para>The recipient application then can resolve the
