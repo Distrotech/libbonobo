@@ -10,6 +10,7 @@
  */
 #include "config.h"
 #include <string.h>
+#include <unistd.h>
 #include <bonobo/Bonobo.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-exception.h>
@@ -262,7 +263,7 @@ bonobo_stream_client_read (const Bonobo_Stream stream,
 {
 	size_t  pos;
 	guint8 *mem;
-	size_t  length;
+	ssize_t length;
 
 	g_return_val_if_fail (ev != NULL, NULL);
 
