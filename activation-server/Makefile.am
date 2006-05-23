@@ -41,6 +41,7 @@ bonobo_activation_server_SOURCES=				\
 
 LDADD= \
 	$(top_builddir)/bonobo/libbonobo-2.la \
+	$(top_builddir)/bonobo-activation/libbonobo-activation.la \
 	 -lname-server-2 $(SERVER_LIBS) @INTLLIBS@
 
 activation_client_SOURCES=client.c

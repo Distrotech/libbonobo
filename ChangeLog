@@ -1,6 +1,14 @@
+2006-05-23  Michael Meeks  <michael.meeks@novell.com>
+
+	* bonobo/Makefile.am (libbonobo_2_la_LIBADD): use
+	$(top_builddir)
+
+	* activation-server/Makefile.am (LDADD): link to
+	libb-a as well.
+
 2006-05-18  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* bonobo/bonobo-stream-client.c: (bonobo_stream_client_read):
+	* bonobo/bonobo-stream-client.c (bonobo_stream_client_read):
 	Make a var signed since it's checked for negative values.
 
 2006-05-18  Kjartan Maraas  <kmaraas@gnome.org>
