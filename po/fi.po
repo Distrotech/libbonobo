@@ -13,51 +13,63 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-26 11:02+0200\n"
-"PO-Revision-Date: 2005-12-26 11:05+0200\n"
+"POT-Creation-Date: 2006-06-06 03:44+0300\n"
+"PO-Revision-Date: 2006-06-06 03:46+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../activation-server/activation-context-corba.c:470
+#: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
 msgstr "Ei selvinnyt, missä lapsiprosessissa palvelin on luetteloitu"
 
-#: ../activation-server/activation-context-corba.c:748
+#: ../activation-server/activation-context-corba.c:812
 msgid "Not a valid Activation ID"
 msgstr "Epäkelpo aktivointi-ID"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:162
 msgid "Directory to read .server files from"
 msgstr "Kansio, josta .server-tiedostot luetaan"
 
-#: ../activation-server/activation-server-main.c:84
+#: ../activation-server/activation-server-main.c:162
 msgid "DIRECTORY"
 msgstr "KANSIO"
 
-#: ../activation-server/activation-server-main.c:87
+#: ../activation-server/activation-server-main.c:165
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Toimi ActivationContextina (oletuksena on vain ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:91
+#: ../activation-server/activation-server-main.c:169
 msgid "File descriptor to write IOR to"
 msgstr "Tiedostokahva, johon IOR kirjoittuu"
 
-#: ../activation-server/activation-server-main.c:91
-#: ../bonobo-activation/bonobo-activation-init.c:351
-#: ../bonobo-activation/bonobo-activation-init.c:361
+#: ../activation-server/activation-server-main.c:169
+#: ../bonobo-activation/bonobo-activation-init.c:350
+#: ../bonobo-activation/bonobo-activation-init.c:360
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:99
+#: ../activation-server/activation-server-main.c:172
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"Rekisteröi käyttäjän aktivointipalvelimen lukitsematta (!) vianetsintää varten"
+
+#: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
 msgstr "Käsiteltävä kyselylauseke"
 
-#: ../activation-server/activation-server-main.c:99
+#: ../activation-server/activation-server-main.c:177
 msgid "EXPRESSION"
 msgstr "LAUSEKE"
+
+#: ../activation-server/activation-server-main.c:424
+#: ../utils/bonobo-activation-sysconf.c:304
+#, c-format
+msgid "Run '%s --help' to see a full list of available command line options.\n"
+msgstr "Suorita \"%s --help\" nähdäksesi listan kaikista komentorivivalitsimista.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -75,7 +87,7 @@ msgstr "Huomautuspalvelu"
 msgid "Notification service for activation"
 msgstr "Huomautuspalvelu aktivointia varten"
 
-#: ../activation-server/object-directory-activate.c:186
+#: ../activation-server/object-directory-activate.c:219
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "shlib-olioiden aktivointi etäprosessissa ei onnistu vielä"
 
@@ -95,87 +107,87 @@ msgstr ""
 #. * with bonobo_activation_active_server_register - _after_ any other
 #. * servers are registered.
 #.
-#: ../activation-server/object-directory-corba.c:1243
+#: ../activation-server/object-directory-corba.c:1331
 #, c-format
 msgid "Race condition activating server '%s'"
 msgstr "Kilpatilanne palvelimen \"%s\" aktivoituessa"
 
-#: ../activation-server/object-directory-load.c:97
+#: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
 msgstr "NULL iid ei kelpaa"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid:llä %s on NULL-tyyppi"
 
-#: ../activation-server/object-directory-load.c:105
+#: ../activation-server/object-directory-load.c:109
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid:llä %s on NULL-sijainti"
 
-#: ../activation-server/object-directory-load.c:114
+#: ../activation-server/object-directory-load.c:118
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "virheellinen merkki \"%c\" iid:ssä \"%s\""
 
-#: ../activation-server/object-directory-load.c:342
+#: ../activation-server/object-directory-load.c:348
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Ominaisuudella \"%s\" ei ole arvoa"
 
-#: ../activation-server/object-directory-load.c:630
+#: ../activation-server/object-directory-load.c:580
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Virheellisen muotoisen XML-tiedoston jäsennys epäonnistui: %s"
 
-#: ../activation-server/object-directory-load.c:695
+#: ../activation-server/object-directory-load.c:627
 #, c-format
 msgid "Trying dir %s"
 msgstr "Kokeillaan kansiota %s"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:100
+#: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
 "Lapsiprosessi ei lähettänyt virheviestiä: tuntematon virhe on tapahtunut"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:177
+#: ../bonobo-activation/bonobo-activation-fork-server.c:235
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Luku lapsiprosessista epäonnistui: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:184
+#: ../bonobo-activation/bonobo-activation-fork-server.c:245
 msgid "EOF from child process\n"
 msgstr "Tiedoston loppu lapsiprosessilta\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:343
+#: ../bonobo-activation/bonobo-activation-fork-server.c:424
 msgid "Couldn't spawn a new process"
 msgstr "Uuden prosessin käynnistäminen epäonnistui"
 
-#: ../bonobo-activation/bonobo-activation-init.c:351
-#: ../bonobo-activation/bonobo-activation-init.c:361
+#: ../bonobo-activation/bonobo-activation-init.c:350
+#: ../bonobo-activation/bonobo-activation-init.c:360
 msgid "File descriptor to print IOR on"
 msgstr "Tiedostokahva, johon IOR tulostuu"
 
-#: ../bonobo-activation/bonobo-activation-init.c:353
-#: ../bonobo-activation/bonobo-activation-init.c:363
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:362
 msgid "IID to activate"
 msgstr "Aktivoitava IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:354
+#: ../bonobo-activation/bonobo-activation-init.c:364
 msgid "Prevent registering of server with OAF"
 msgstr "Estä palvelimen rekisteröityminen OAF:iin"
 
-#: ../bonobo-activation/bonobo-activation-init.c:375
+#: ../bonobo-activation/bonobo-activation-init.c:398
 msgid "Bonobo Activation"
 msgstr "Bonobo-aktivointi"
 
-#: ../bonobo-activation/bonobo-activation-init.c:376
+#: ../bonobo-activation/bonobo-activation-init.c:399
 msgid "Show Bonobo Activation options"
 msgstr "Näytä Bonobo-aktivoinnin valitsimet"
 
-#: ../bonobo-activation/bonobo-activation-init.c:471
+#: ../bonobo-activation/bonobo-activation-init.c:494
 msgid "Bonobo activation options"
 msgstr "Bonobo-aktivoinnin valitsimet"
 
@@ -356,7 +368,7 @@ msgstr "Yleinen aktivointivirhe, jolla ei ole kuvausta"
 msgid "Could not initialize Bonobo"
 msgstr "Ei voinut alustaa Bonoboa"
 
-#: ../bonobo/bonobo-moniker.c:352
+#: ../bonobo/bonobo-moniker.c:342
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "\"%s\":n selvittäminen tai laajentaminen epäonnistui"
@@ -436,21 +448,21 @@ msgstr "Ei voinut luoda ilmentymää esimerkkikaikukomponentista"
 msgid "An exception occured '%s'"
 msgstr "Poikkeus tapahtui \"%s\""
 
-#: ../utils/bonobo-activation-sysconf.c:83
+#: ../utils/bonobo-activation-sysconf.c:82
 msgid "Could not save configuration file.\n"
 msgstr "Asetustiedoston tallentaminen epäonnistui.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:84
+#: ../utils/bonobo-activation-sysconf.c:83
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr ""
 "Tarkista, että sinulla on oikeudet tiedostoon \"%s\" kirjoittamiseen.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:87
+#: ../utils/bonobo-activation-sysconf.c:86
 msgid "Successfully wrote configuration file.\n"
 msgstr "Asetustiedoston kirjoittaminen onnistui.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:101
+#: ../utils/bonobo-activation-sysconf.c:103
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -459,39 +471,42 @@ msgstr ""
 "asetustiedosto on:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:139
+#: ../utils/bonobo-activation-sysconf.c:145
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s on jo asetustiedostossa\n"
 
-#: ../utils/bonobo-activation-sysconf.c:159
+#: ../utils/bonobo-activation-sysconf.c:165
 msgid "there is not a properly structured configuration file\n"
 msgstr "oikearakenteista asetustiedosta ei ole\n"
 
-#: ../utils/bonobo-activation-sysconf.c:222
+#: ../utils/bonobo-activation-sysconf.c:236
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo-aktivoinnin asetustiedosto sisältää:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:254
+#: ../utils/bonobo-activation-sysconf.c:266
 msgid "Directory to remove from configuration file"
 msgstr "Kansio, joka poistetaan asetustiedostosta"
 
-#: ../utils/bonobo-activation-sysconf.c:254
-#: ../utils/bonobo-activation-sysconf.c:257
-msgid "directory path"
-msgstr "kansion polku"
+#: ../utils/bonobo-activation-sysconf.c:266
+#: ../utils/bonobo-activation-sysconf.c:268
+msgid "PATH"
+msgstr "POLKU"
 
-#: ../utils/bonobo-activation-sysconf.c:257
+#: ../utils/bonobo-activation-sysconf.c:268
 msgid "Directory to add to configuration file"
 msgstr "Kansio, joka lisätään asetustiedostoon"
 
-#: ../utils/bonobo-activation-sysconf.c:260
+#: ../utils/bonobo-activation-sysconf.c:270
 msgid "Display directories in configuration file"
 msgstr "Näytä asetustiedostossa olevat kansiot"
 
-#: ../utils/bonobo-activation-sysconf.c:263
+#: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Näytä asetustiedoston polku"
+
+#~ msgid "directory path"
+#~ msgstr "kansion polku"
 
 #~ msgid "Too many alias levels for a locale, may indicate a loop"
 #~ msgstr ""
