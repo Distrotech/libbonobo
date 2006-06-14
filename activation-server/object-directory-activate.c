@@ -109,6 +109,10 @@ od_server_activate_exe (Bonobo_ServerInfo                  *si,
 
 	/* Munge the args */
 	args = g_alloca (36 * sizeof (char *));
+#ifndef G_OS_WIN32
+        /* Split location_info into executable pathname and command-line
+         * arguments.
+         */
 	for (i = 0, ctmp = ctmp2 = si->location_info; i < 32; i++) {
 		while (*ctmp2 && !g_ascii_isspace ((guchar) *ctmp2))
 			ctmp2++;
@@ -128,6 +132,16 @@ od_server_activate_exe (Bonobo_ServerInfo                  *si,
 	}
 	if (!g_ascii_isspace ((guchar) *ctmp) && i < 32)
 		args[i++] = ctmp;
+#else
+        /* We don't support command-line arguments in the location on
+         * Win32, as the executable pathname might well contain spaces
+         * itself (C:\Program Files\Evolution 2.6.2\libexec\...).
+         * location_info is just the executable's pathname.
+         */
+        args[0] = g_alloca (strlen (si->location_info) + 1);
+        strcpy (args[0], si->location_info);
+        i = 1;
+#endif
 
 	extra_arg =
 		g_alloca (strlen (si->iid) +

@@ -230,15 +230,6 @@ bonobo_activation_server_by_forking (
         char **newenv = NULL;
         char **cmd;
 
-#if defined(__APPLE__) && defined(HAVE_NSGETENVIRON) && defined(HAVE_CRT_EXTERNS_H)
-# include <crt_externs.h>
-# define environ (*_NSGetEnviron())
-#endif
-
-#ifndef G_OS_WIN32
-        extern char **environ;
-#endif
-
         g_return_val_if_fail (cmd_const != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (cmd_const [0] != NULL, CORBA_OBJECT_NIL);
         g_return_val_if_fail (act_iid != NULL, CORBA_OBJECT_NIL);
@@ -285,15 +276,12 @@ bonobo_activation_server_by_forking (
         /* Set up environment for child */
         if (environment && environment->_length > 0) {
                 int i, n;
-                char **ep;
+                char **env, **ep;
 
                 n = environment->_length;
 
-                ep = environ;
-                while (*ep) {
-                        ep++;
-                        n++;
-                }
+                env = ep = g_listenv ();
+                n += g_strv_length (env);
                         
                 newenv = g_new (char *, n+1);
 
@@ -304,22 +292,22 @@ bonobo_activation_server_by_forking (
                                                   NULL);
                 }
 
-                ep = environ;
                 while (*ep) {
-                        char *equal = strchr (*ep, '=');
-                        if (equal) {
-                                for (i = 0; i < environment->_length; i++)
-                                        if (equal - *ep == strlen (environment->_buffer [i].name) &&
-                                            memcmp (*ep, environment->_buffer [i].name,
-                                                    equal - *ep) == 0)
-                                                break;
-                                if (i == environment->_length) {
-                                        newenv [n] = g_strdup (*ep);
-                                        n++;
-                                }
+                        /* No need to check if the environment entry
+                         * is well-formed (name=value), g_listenv()
+                         * already does and returns only the proper
+                         * environment variable names.
+                         */
+                        for (i = 0; i < environment->_length; i++)
+                                if (strcmp (*ep, environment->_buffer [i].name) == 0)
+                                        break;
+                        if (i == environment->_length) {
+                                newenv [n] = g_strconcat (*ep, "=", g_getenv (*ep), NULL);
+                                n++;
                         }
                         ep++;
                 }
+                g_strfreev (env);
                 newenv [n] = NULL;
         }
 
