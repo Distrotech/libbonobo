@@ -198,15 +198,6 @@ get_lang_list (void)
         return result;
 }
 
-#if defined(__APPLE__) && defined(HAVE_NSGETENVIRON) && defined(HAVE_CRT_EXTERNS_H)
-#include <crt_externs.h>
-#define environ (*_NSGetEnviron())
-#endif
-
-#ifndef G_OS_WIN32
-extern char **environ;
-#endif
-
 void
 bonobo_activation_register_client (Bonobo_ActivationContext context,
                                    CORBA_Environment       *ev)
@@ -214,6 +205,8 @@ bonobo_activation_register_client (Bonobo_ActivationContext context,
         Bonobo_StringList      client_env;
         int                    i;
         Bonobo_ObjectDirectory od;
+        char                 **env;
+        char                 **newenv;
 
         if (client == CORBA_OBJECT_NIL)
                 client = bonobo_activation_corba_client_new ();
@@ -227,16 +220,19 @@ bonobo_activation_register_client (Bonobo_ActivationContext context,
                 bonobo_activation_hostname_get ());
 
         /* send environment to activation server */
-        client_env._buffer = environ;
+        env = g_listenv ();
+        newenv = g_new (char *, g_strv_length (env) + 1);
+        for (i = 0; env[i]; i++)
+                newenv[i] = g_strconcat (env[i], "=", g_getenv (env[i]), NULL);
+        newenv[i] = NULL;
+        g_strfreev (env);
 
-        if (client_env._buffer) {
-                for (i = 0; client_env._buffer[i]; ++i);
-                client_env._length = i;
-        } else 
-                client_env._length = 0;
+        client_env._buffer = newenv;
+        client_env._length = g_strv_length (newenv);
 
         Bonobo_ObjectDirectory_addClientEnv (od, client, &client_env, ev);
         CORBA_exception_init (ev); /* bin potential missing method exception */
+        g_strfreev (newenv);
 }
 
 Bonobo_ActivationClient

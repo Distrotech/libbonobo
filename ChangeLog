@@ -1,3 +1,26 @@
+2006-06-14  Tor Lillqvist  <tml@novell.com>
+
+	Win32 portability fixes for problems that turn up when installing
+	into pathnames with spaces (like C:\Program Files) and when the
+	username has non-ASCII characters in it. Reviewed by Michael.
+	
+	* activation-server/object-directory-activate.c
+	(od_server_activate_exe): Deprecate the feature that we can have
+	command line arguments in the location_info. Give a warning if
+	that happens.
+
+	Don't even try to split the location_info into an argv on Win32,
+	as the pathname of the executable already might well contain
+	spaces.
+
+	* bonobo-activation/bonobo-activation-client.c
+	(bonobo_activation_register_client)
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_by_forking): Use g_listenv() and
+	g_getenv() instead of peeking into environ directly. On Win32, the
+	strings in the environ array are in system codepage, while we want
+	the UTF-8 that g_listenv() and g_getenv() provide.
+
 2006-05-23  Michael Meeks  <michael.meeks@novell.com>
 
 	* bonobo/Makefile.am (libbonobo_2_la_LIBADD): use
