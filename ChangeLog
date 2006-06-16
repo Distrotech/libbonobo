@@ -1,3 +1,11 @@
+2006-06-16  Tor Lillqvist  <tml@novell.com>
+
+	* libbonobo-zip.in: Include also bonobo-activation-sysconf.exe in
+	the zipfile distribution. (From $prefix/bin; it is assumed that on
+	Win32 one runs the configure script with --sbindir pointing to
+	$prefix/bin, as it isn't really common to use a "sbin" directory
+	on Win32, just putting all executables in "bin" is enough.)
+
 2006-06-14  Tor Lillqvist  <tml@novell.com>
 
 	Win32 portability fixes for problems that turn up when installing

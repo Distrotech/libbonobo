@@ -13,6 +13,7 @@ zip $ZIP -@ <<EOF
 COPYING
 COPYING.LIB-2
 bin/activation-client.exe
+bin/bonobo-activation-sysconf.exe
 bin/libbonobo-2-0.dll
 bin/libbonobo-activation-4.dll
 etc/bonobo-activation/bonobo-activation-config.xml
