@@ -19,7 +19,7 @@ dnl
 dnl Due to the sed scripts being split on 90 line
 dnl blocks, this macro needs to be right at the beggining.
 dnl
-AC_PROG_INTLTOOL
+IT_PROG_INTLTOOL([0.35.0])
 
 dnl with higher autotools, we can set ACLOCAL_AMFLAGS to make Makefile's
 dnl aware of our aclocal include dirs; but this works for automake-1.4
@@ -90,7 +90,6 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[gettext package name])
 gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(gnomelocaledir)
 
-ALL_LINGUAS="am ar az be bg bn bs ca cs cy da de el en_CA en_GB eo es et eu fa fi fr ga gl gu he hi hr hu id is it ja ka ko ku li lt lv mk ml mn ms nb ne nl nn or pa pl pt pt_BR ro ru rw sk sl sq sr sr@Latn sv ta tr uk vi wa xh yi zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 
 GNOME_COMPILE_WARNINGS

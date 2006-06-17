@@ -1,3 +1,9 @@
+2006-06-17  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in:
+	* po/LINGUAS: More po/LINGUAS work by Przemysław Grzegorczyk.
+	Closes bug #338543.
+
 2006-06-16  Tor Lillqvist  <tml@novell.com>
 
 	* libbonobo-zip.in: Include also bonobo-activation-sysconf.exe in
