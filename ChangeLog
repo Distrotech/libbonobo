@@ -1,5 +1,11 @@
 2006-06-17  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* activation-server/Bonobo_CosNaming_NamingContext.server.in.in:
+	Add blank line to the end of the file to please Solaris sed.
+	From Damien Carbery. Closes bug #329762.
+
+2006-06-17  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* configure.in:
 	* po/LINGUAS: More po/LINGUAS work by Przemysław Grzegorczyk.
 	Closes bug #338543.
