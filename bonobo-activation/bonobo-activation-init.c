@@ -43,6 +43,11 @@
 #include <string.h>
 #include <unistd.h>
 
+#ifdef G_OS_WIN32
+#include <io.h>
+#include <windows.h>
+#endif
+
 /****************** ORBit-specific stuff ****************/
 
 #include <orbit/orbit.h>
@@ -441,6 +446,19 @@ bonobo_activation_postinit (gpointer app, gpointer mod_info)
 	if (bonobo_activation_ior_fd > 2)
 		fcntl (bonobo_activation_ior_fd, F_SETFD, FD_CLOEXEC);
 #endif
+#ifdef G_OS_WIN32
+	if (bonobo_activation_ior_fd > 2) {
+                HANDLE newhandle;
+
+                if (DuplicateHandle (GetCurrentProcess (), (HANDLE) _get_osfhandle (bonobo_activation_ior_fd),
+                                     GetCurrentProcess (), &newhandle,
+                                     0, FALSE, DUPLICATE_SAME_ACCESS)) {
+                        close (bonobo_activation_ior_fd);
+                        bonobo_activation_ior_fd = _open_osfhandle ((int) newhandle, _O_TEXT | _O_NOINHERIT);
+                }
+        }
+#endif
+
         if (bonobo_activation_activate_iid)
                 g_timeout_add_full (G_PRIORITY_LOW,
                                     BONOBO_ACTIVATION_FACTORY_TIMEOUT,

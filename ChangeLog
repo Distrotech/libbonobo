@@ -1,3 +1,9 @@
+2006-06-20  Tor Lillqvist  <tml@novell.com>
+
+	* bonobo-activation/bonobo-activation-init.c
+	(bonobo_activation_postinit): Make bonobo_activation_ior_fd
+	non-inherited on Win32, too.
+
 2006-06-16  Tor Lillqvist  <tml@novell.com>
 
 	* libbonobo-zip.in: Include also bonobo-activation-sysconf.exe in
