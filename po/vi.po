@@ -152,7 +152,7 @@ msgstr "Lỗi khi đọc từ tiến trình con: %s\n"
 
 #:../bonobo-activation/bonobo-activation-fork-server.c:245
 msgid "EOF from child process\n"
-msgstr "Lỗi kết thức tập tin từ tiến trình con\n"
+msgstr "Lỗi kết thúc tập tin từ tiến trình con\n"
 
 #:../bonobo-activation/bonobo-activation-fork-server.c:424
 msgid "Couldn't spawn a new process"
