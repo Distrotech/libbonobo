@@ -1,3 +1,13 @@
+2006-07-07  Alexander Larsson  <alexl@redhat.com>
+
+	* bonobo-activation/Makefile.am:
+	* bonobo-activation/bonobo-activation-mime.[ch]:
+	Add new public functions
+	bonobo_activation_get_default_component_for_mime_type and
+	bonobo_activation_get_all_components_for_mime_type. Also
+	implement all the gnome-vfs mime symbols so that gnome-vfs
+	can be independent of bonobo.
+
 2006-06-20  Tor Lillqvist  <tml@novell.com>
 
 	* bonobo-activation/bonobo-activation-init.c
