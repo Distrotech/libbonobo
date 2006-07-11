@@ -1,3 +1,9 @@
+2006-07-11  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/activation-context-corba.c:
+	(ac_context_to_string_array): Fix some leaks in an error
+	case. Closes bug #346346 and Coverity #2823.
+
 2006-07-07  Alexander Larsson  <alexl@redhat.com>
 
 	* bonobo-activation/Makefile.am:

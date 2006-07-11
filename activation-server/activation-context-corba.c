@@ -798,9 +798,12 @@ ac_context_to_string_array (CORBA_Context context, char **sort_criteria,
 
         context_username = ac_CORBA_Context_get_value (context, "username", ev);
         context_hostname = ac_CORBA_Context_get_value (context, "hostname", ev);
-	if (ev->_major != CORBA_NO_EXCEPTION)
+	if (ev->_major != CORBA_NO_EXCEPTION) {
+                g_free (context_username);
+                g_free (context_hostname);
                 return;
-        
+        }
+
         sort_criteria[0] = g_strconcat ("username == \'", context_username, "\'", NULL);
         sort_criteria[1] = g_strconcat ("hostname == \'", context_hostname, "\'", NULL);
         sort_criteria[2] = NULL;
