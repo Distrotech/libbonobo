@@ -52,8 +52,6 @@ use by the derived #BonoboPersistStream interface.
 @persist: 
 @iid: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@corba_persist: 
 
 
 <!-- ##### FUNCTION bonobo_persist_set_dirty ##### -->

@@ -250,9 +250,6 @@ Property setter function.
 @set_prop_cb: 
 @user_data: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@get_prop: 
-@set_prop: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_new_closure ##### -->
@@ -274,9 +271,6 @@ Property setter function.
 @set_prop: 
 @es: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@event_source: 
-@user_data: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_construct ##### -->
@@ -289,9 +283,6 @@ Property setter function.
 @set_prop: 
 @es: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@event_source: 
-@user_data: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_add ##### -->
@@ -306,8 +297,6 @@ Property setter function.
 @default_value: 
 @doctitle: 
 @flags: 
-<!-- # Unused Parameters # -->
-@docstring: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_add_full ##### -->
@@ -325,8 +314,6 @@ Property setter function.
 @flags: 
 @get_prop: 
 @set_prop: 
-<!-- # Unused Parameters # -->
-@user_data: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_remove ##### -->

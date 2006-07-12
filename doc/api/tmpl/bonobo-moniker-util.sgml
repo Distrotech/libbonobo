@@ -80,8 +80,6 @@ prefix and / or the ':0' suffix.
 @interface_name: 
 @opt_ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@ev: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_client_new_from_name ##### -->
@@ -92,8 +90,6 @@ prefix and / or the ':0' suffix.
 @name: 
 @opt_ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@ev: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_client_get_name ##### -->
@@ -104,8 +100,6 @@ prefix and / or the ':0' suffix.
 @moniker: 
 @opt_ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@ev: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_client_resolve_default ##### -->
@@ -117,8 +111,6 @@ prefix and / or the ':0' suffix.
 @interface_name: 
 @opt_ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@ev: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_client_equal ##### -->
@@ -152,8 +144,6 @@ Callback function, invoked when bonobo_get_object_async() completes its work.
 @ev: 
 @cb: 
 @user_data: 
-<!-- # Unused Parameters # -->
-@timeout_msec: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_client_new_from_name_async ##### -->
@@ -165,8 +155,6 @@ Callback function, invoked when bonobo_get_object_async() completes its work.
 @ev: 
 @cb: 
 @user_data: 
-<!-- # Unused Parameters # -->
-@timeout_msec: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_resolve_async ##### -->
@@ -180,8 +168,6 @@ Callback function, invoked when bonobo_get_object_async() completes its work.
 @ev: 
 @cb: 
 @user_data: 
-<!-- # Unused Parameters # -->
-@timeout_msec: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_resolve_async_default ##### -->
@@ -194,8 +180,6 @@ Callback function, invoked when bonobo_get_object_async() completes its work.
 @ev: 
 @cb: 
 @user_data: 
-<!-- # Unused Parameters # -->
-@timeout_msec: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_util_get_parent_name ##### -->
@@ -206,8 +190,6 @@ Callback function, invoked when bonobo_get_object_async() completes its work.
 @moniker: 
 @opt_ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@ev: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_util_qi_return ##### -->

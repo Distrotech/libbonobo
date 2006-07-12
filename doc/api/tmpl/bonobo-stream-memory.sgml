@@ -76,8 +76,6 @@ BonoboStream *make_bonobo_stream_on_string (char *string)
 @read_only: 
 @resizable: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@corba_stream: 
 
 
 <!-- ##### FUNCTION bonobo_stream_mem_create ##### -->

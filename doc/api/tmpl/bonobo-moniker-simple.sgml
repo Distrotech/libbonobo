@@ -116,8 +116,6 @@ Type of callback function that implements a simple moniker resolution.
 @name: 
 @resolve_closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@resolve_fn: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_simple_new ##### -->

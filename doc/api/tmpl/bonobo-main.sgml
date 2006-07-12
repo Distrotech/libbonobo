@@ -33,10 +33,6 @@ Bonobo initialization.
 @argc: 
 @argv: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@orb: 
-@poa: 
-@manager: 
 
 
 <!-- ##### FUNCTION bonobo_init_full ##### -->
@@ -50,10 +46,6 @@ Bonobo initialization.
 @opt_poa: 
 @opt_manager: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@orb: 
-@poa: 
-@manager: 
 
 
 <!-- ##### FUNCTION bonobo_debug_init ##### -->

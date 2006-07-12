@@ -139,9 +139,6 @@ BonoboItemHandler class
 @enum_objects: 
 @get_object: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@user_data: 
-@corba_handler: 
 
 
 <!-- ##### STRUCT BonoboItemOption ##### -->

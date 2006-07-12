@@ -112,8 +112,6 @@ suffix.
 @event_name: 
 @opt_value: 
 @opt_ev: 
-<!-- # Unused Parameters # -->
-@value: 
 
 
 <!-- ##### FUNCTION bonobo_event_source_notify_listeners_full ##### -->
@@ -127,8 +125,6 @@ suffix.
 @subtype: 
 @opt_value: 
 @opt_ev: 
-<!-- # Unused Parameters # -->
-@value: 
 
 
 <!-- ##### FUNCTION bonobo_event_source_client_remove_listener ##### -->
@@ -139,8 +135,6 @@ suffix.
 @object: 
 @listener: 
 @opt_ev: 
-<!-- # Unused Parameters # -->
-@id: 
 
 
 <!-- ##### FUNCTION bonobo_event_source_client_add_listener ##### -->
@@ -153,8 +147,6 @@ suffix.
 @opt_mask: 
 @opt_ev: 
 @user_data: 
-<!-- # Unused Parameters # -->
-@Returns: 
 
 
 <!-- ##### FUNCTION bonobo_event_source_has_listener ##### -->

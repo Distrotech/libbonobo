@@ -41,8 +41,6 @@ bonobo-shlib-factory
 @act_impl_ptr: 
 @closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@component_id: 
 
 
 <!-- ##### FUNCTION bonobo_shlib_factory_new ##### -->
@@ -68,8 +66,6 @@ bonobo-shlib-factory
 @act_impl_ptr: 
 @factory_closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@component_id: 
 
 
 <!-- ##### FUNCTION bonobo_shlib_factory_std ##### -->

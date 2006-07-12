@@ -1,3 +1,13 @@
+libbonobo 2.15.0
+
+	* Add new MIME api to make gnome-vfs not have a hard dependency on
+	libbonobo (Alex)
+	* Fix some leaks (Kjartan)
+	* Win32 portability fixes (Tor)
+	* po/LINGUAS porting (Przemysław Grzegorczyk)
+	* Port to GOption from popt (Michael Terry)
+	* Build fixes and cleanups (Michael Meeks, Kjartan)
+ 
 libbonobo 2.13.93
 
 	* Always pass program arguments to bonobo_activation_init (Michael)

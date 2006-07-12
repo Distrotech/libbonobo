@@ -147,8 +147,6 @@ Moniker resolution callback function.
 @interface: 
 @opt_ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@ev: 
 
 
 <!-- ##### FUNCTION bonobo_moniker_use_extender ##### -->
@@ -162,7 +160,5 @@ Moniker resolution callback function.
 @requested_interface: 
 @opt_ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@ev: 
 
 

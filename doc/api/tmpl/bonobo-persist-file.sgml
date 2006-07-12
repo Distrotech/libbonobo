@@ -158,8 +158,6 @@ save_to_file (BonoboPersistFile *pf,
 @ev: 
 @closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@filename: 
 
 
 <!-- ##### STRUCT BonoboPersistFileClass ##### -->
@@ -196,8 +194,5 @@ save_to_file (BonoboPersistFile *pf,
 @iid: 
 @closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@ps: 
-@corba_ps: 
 
 

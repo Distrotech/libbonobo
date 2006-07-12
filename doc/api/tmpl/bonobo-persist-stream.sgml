@@ -146,8 +146,6 @@ eog_image_data_construct (EogImageData *image_data)
 @iid: 
 @closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@max_fn: 
 
 
 <!-- ##### FUNCTION bonobo_persist_stream_construct ##### -->
@@ -162,8 +160,5 @@ eog_image_data_construct (EogImageData *image_data)
 @iid: 
 @closure: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@max_fn: 
-@corba_ps: 
 
 

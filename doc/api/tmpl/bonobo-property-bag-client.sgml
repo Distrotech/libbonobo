@@ -563,8 +563,6 @@ It is difficult to know how to solve this problem.
 @first_arg: 
 @var_args: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@first_prop: 
 
 
 <!-- ##### FUNCTION bonobo_pbclient_getv ##### -->
@@ -577,8 +575,6 @@ It is difficult to know how to solve this problem.
 @first_arg: 
 @var_args: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@first_prop: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_setv ##### -->
@@ -587,11 +583,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@ev: 
-@first_arg: 
-@var_args: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_getv ##### -->
@@ -600,11 +591,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@ev: 
-@first_arg: 
-@var_args: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_property_type ##### -->
@@ -613,10 +599,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_value_gboolean ##### -->
@@ -625,10 +607,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_value_gint ##### -->
@@ -637,10 +615,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_value_glong ##### -->
@@ -649,10 +623,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_value_gfloat ##### -->
@@ -661,10 +631,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_value_gdouble ##### -->
@@ -673,10 +639,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_value_string ##### -->
@@ -685,10 +647,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_value_any ##### -->
@@ -700,8 +658,6 @@ It is difficult to know how to solve this problem.
 @name: 
 @ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@propname: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_default_gboolean ##### -->
@@ -710,10 +666,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_default_gint ##### -->
@@ -722,10 +674,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_default_glong ##### -->
@@ -734,10 +682,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_default_gfloat ##### -->
@@ -746,10 +690,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_default_gdouble ##### -->
@@ -758,10 +698,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_default_string ##### -->
@@ -770,10 +706,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_default_any ##### -->
@@ -785,8 +717,6 @@ It is difficult to know how to solve this problem.
 @name: 
 @ev: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@propname: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_set_value_gboolean ##### -->
@@ -794,11 +724,6 @@ It is difficult to know how to solve this problem.
 
 </para>
 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@value: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_set_value_gint ##### -->
@@ -806,11 +731,6 @@ It is difficult to know how to solve this problem.
 
 </para>
 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@value: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_set_value_glong ##### -->
@@ -818,11 +738,6 @@ It is difficult to know how to solve this problem.
 
 </para>
 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@value: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_set_value_gfloat ##### -->
@@ -830,11 +745,6 @@ It is difficult to know how to solve this problem.
 
 </para>
 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@value: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_set_value_gdouble ##### -->
@@ -842,11 +752,6 @@ It is difficult to know how to solve this problem.
 
 </para>
 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@value: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_set_value_string ##### -->
@@ -854,11 +759,6 @@ It is difficult to know how to solve this problem.
 
 </para>
 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@value: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_set_value_any ##### -->
@@ -866,11 +766,6 @@ It is difficult to know how to solve this problem.
 
 </para>
 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@value: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_docstring ##### -->
@@ -879,10 +774,6 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
 <!-- ##### MACRO bonobo_property_bag_client_get_flags ##### -->
@@ -891,9 +782,5 @@ It is difficult to know how to solve this problem.
 </para>
 
 @Returns: 
-<!-- # Unused Parameters # -->
-@pb: 
-@propname: 
-@ev: 
 
 
