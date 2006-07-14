@@ -776,8 +776,9 @@ do_corba_setup_T (BonoboObject *object)
 		}
 		xklass->poa_init_fn ((PortableServer_Servant) &object->servant, ev);
 		if (BONOBO_EX (ev)) {
-			g_warning ("Exception initializing servant '%s'",
-				   bonobo_exception_get_text (ev));
+			char *text = bonobo_exception_get_text (ev);
+			g_warning ("Exception initializing servant '%s'", text);
+			g_free (text);
 			return;
 		}
 	}
