@@ -1,5 +1,11 @@
 2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* monikers/bonobo-moniker-extender-stream.c:
+	(bonobo_stream_extender_resolve): Free mime_type here.
+	Coverity #2707.
+
+2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* bonobo/bonobo-app-client.c: (bonobo_app_client_msg_send_argv),
 	(bonobo_app_client_get_msgdescs), (bonobo_app_client_new_instance):
 	* bonobo/bonobo-event-source.c:

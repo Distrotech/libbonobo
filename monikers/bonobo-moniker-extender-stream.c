@@ -105,6 +105,8 @@ bonobo_stream_extender_resolve (BonoboMonikerExtender       *extender,
 			object, requested_interface, ev);
 	}
 
+	g_free (mime_type);
+
  unref_object_exception:
 	bonobo_object_release_unref (object, ev);
 
