@@ -50,10 +50,11 @@ bonobo_foreign_object_new (CORBA_Object corba_objref)
 
 	CORBA_exception_init (ev);
 	if (!CORBA_Object_is_a (corba_objref, "IDL:Bonobo/Unknown:1.0", ev)) {
-		if (ev->_major != CORBA_NO_EXCEPTION)
-			g_warning ("CORBA_Object_is_a: %s",
-				   bonobo_exception_get_text (ev));
-		else
+		if (ev->_major != CORBA_NO_EXCEPTION) {
+			char *text = bonobo_exception_get_text (ev);
+			g_warning ("CORBA_Object_is_a: %s", text);
+			g_free (text);
+		} else
 			g_warning ("bonobo_foreign_object_new: corba_objref"
 				   " doesn't have interface Bonobo::Unknown");
 		object = NULL;

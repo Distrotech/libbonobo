@@ -392,9 +392,11 @@ bonobo_event_source_client_remove_listener (Bonobo_Unknown     object,
 	}
 
 	if (!opt_ev) {
-		if (BONOBO_EX (ev))
-			g_warning ("remove_listener failed '%s'",
-				   bonobo_exception_get_text (ev));
+		if (BONOBO_EX (ev)) {
+			char *text = bonobo_exception_get_text (ev);
+			g_warning ("remove_listener failed '%s'", text);
+			g_free (text);
+		}
 		CORBA_exception_free (ev);
 	}
 }
@@ -445,9 +447,11 @@ bonobo_event_source_client_add_listener_full (Bonobo_Unknown     object,
  add_listener_end:
 
 	if (!opt_ev) {
-		if (BONOBO_EX (ev))
-			g_warning ("add_listener failed '%s'",
-				   bonobo_exception_get_text (ev));
+		if (BONOBO_EX (ev)) {
+			char *text = bonobo_exception_get_text (ev);
+			g_warning ("add_listener failed '%s'", text);
+			g_free (text);
+		}
 		CORBA_exception_free (ev);
 	}
 

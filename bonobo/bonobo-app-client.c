@@ -152,8 +152,10 @@ bonobo_app_client_msg_send_argv (BonoboAppClient   *app_client,
 	CORBA_free (args);
 	if (ev->_major != CORBA_NO_EXCEPTION) {
 		if (!opt_env) {
+			char *text = bonobo_exception_get_text (ev);
 			g_warning ("error while sending message to application server: %s",
-				   bonobo_exception_get_text (ev));
+				   text);
+			g_free (text);
 			CORBA_exception_free (&ev1);
 		}
 		return NULL;
@@ -314,8 +316,9 @@ bonobo_app_client_get_msgdescs (BonoboAppClient *self)
 	CORBA_exception_init (&ev);
 	msglist = Bonobo_Application_listMessages (self->app_server, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION) {
-		g_warning ("Bonobo::Application::listMessages: %s",
-			   bonobo_exception_get_text (&ev));
+		char *text = bonobo_exception_get_text (&ev);
+		g_warning ("Bonobo::Application::listMessages: %s", text);
+		g_free (text);
 		CORBA_exception_free (&ev);
 		return;
 	}
@@ -399,8 +402,11 @@ bonobo_app_client_new_instance (BonoboAppClient   *app_client,
 	rv = Bonobo_Application_newInstance (app_client->app_server, corba_argv, ev);
 	CORBA_free (corba_argv);
 	if (!opt_env) {
-		if (ev->_major != CORBA_NO_EXCEPTION)
-			g_warning ("newInstance failed: %s", bonobo_exception_get_text (ev));
+		if (ev->_major != CORBA_NO_EXCEPTION) {
+			char *text = bonobo_exception_get_text (ev);
+			g_warning ("newInstance failed: %s", text);
+			g_free (text);
+		}
 		CORBA_exception_free (&ev1);
 	}
 	return rv;

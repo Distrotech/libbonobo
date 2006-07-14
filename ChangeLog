@@ -1,5 +1,17 @@
 2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* bonobo/bonobo-app-client.c: (bonobo_app_client_msg_send_argv),
+	(bonobo_app_client_get_msgdescs), (bonobo_app_client_new_instance):
+	* bonobo/bonobo-event-source.c:
+	(bonobo_event_source_client_remove_listener),
+	(bonobo_event_source_client_add_listener_full):
+	* bonobo/bonobo-foreign-object.c: (bonobo_foreign_object_new):
+	Fix more leaks.
+	Reported by Coverity as CID #2681, #2682, #2685, #2686, #2687 and #2690.
+	Closes bug #347522.
+
+2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* bonobo/bonobo-exception.h: Fix previous commit.
 	Thanks to Paolo Borelli.
 
