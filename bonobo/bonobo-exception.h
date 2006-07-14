@@ -14,17 +14,17 @@
 #include <bonobo/Bonobo.h>
 
 #define bonobo_exception_set(opt_ev,repo_id) G_STMT_START{                  \
-     char *text = bonobo_exception_repoid_to_text (repo_id);		    \
      if (opt_ev) {                                                          \
          CORBA_exception_set (opt_ev, CORBA_USER_EXCEPTION, repo_id, NULL); \
      } else {                                                               \
+	 char *text = bonobo_exception_repoid_to_text (repo_id);	    \
 	 g_log (G_LOG_DOMAIN,						    \
 		G_LOG_LEVEL_CRITICAL,					    \
 		"file %s: line %d: bonobo exception: `%s'",                 \
 		__FILE__,						    \
 		__LINE__,						    \
 		text);							    \
-     g_free (text);							    \
+	 g_free (text);							    \
      } }G_STMT_END
 
 #ifdef G_DISABLE_CHECKS

@@ -1,5 +1,10 @@
 2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* bonobo/bonobo-exception.h: Fix previous commit.
+	Thanks to Paolo Borelli.
+
+2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* bonobo/bonobo-exception.h: Fix leak. Coverity #2717 and
 	a whole bunch of others. Closes bug #347501.
 	* bonobo/bonobo-object.c: (do_corba_setup_T): Another leak.
