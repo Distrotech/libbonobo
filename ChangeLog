@@ -1,5 +1,10 @@
 2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* bonobo/bonobo-storage-memory.c: (smem_rename_impl): Free
+	the entry as well. Coverity #2705.
+
+2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* monikers/bonobo-moniker-extender-stream.c:
 	(bonobo_stream_extender_resolve): Free mime_type here.
 	Coverity #2707.
