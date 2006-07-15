@@ -1,3 +1,9 @@
+2006-07-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo/bonobo-storage-memory.c: (smem_rename_impl): Init
+	filename so we don't pass uninitialized memory to g_free()
+	Coverity #2841.
+
 2006-07-14  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-storage-memory.c: (smem_rename_impl): Free

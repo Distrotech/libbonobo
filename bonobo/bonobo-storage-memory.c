@@ -640,7 +640,7 @@ smem_rename_impl (PortableServer_Servant  servant,
 	BonoboStorageMem      *storage;
 	BonoboStorageMem      *parent_storage, *target_storage;
 	BonoboStorageMemEntry *entry;
-	gchar                 *filename, *new_filename;
+	gchar                 *filename = NULL, *new_filename;
 
 	if (!strcmp (path, "/") || !strcmp (path, "")) {
 		bonobo_exception_set (ev, ex_Bonobo_Storage_IOError);
