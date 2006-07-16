@@ -10,21 +10,22 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo 2.15.0\n"
+"Project-Id-Version: libbonobo 2.15.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-22 22:21+0200\n"
-"PO-Revision-Date: 2006-06-22 22:22+0200\n"
-"Last-Translator: Benoît Dejean <benoit@placenet.org>\n"
+"POT-Creation-Date: 2006-07-16 18:56+0200\n"
+"PO-Revision-Date: 2006-07-03 16:53+0100\n"
+"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
 msgstr "Impossible de déterminer dans quel fils était listé le serveur"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "N'est pas un ID d'activation valide"
 
@@ -55,6 +56,8 @@ msgstr "FD"
 msgid ""
 "Register as the users' activation server without locking [!] for debugging"
 msgstr ""
+"S'enregistre en tant que serveur d'activation de l'utilisateur sans blocage "
+"[!] pour le débogage"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -69,6 +72,8 @@ msgstr "EXPRESSION"
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
+"Exécutez « %s --help » pour voir la liste complète des options en ligne de "
+"commande.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -222,11 +227,11 @@ msgstr "Nom"
 msgid "Application unique name"
 msgstr "Nom unique de l'application"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "POA Corba personnalisé"
 
@@ -476,7 +481,7 @@ msgstr ""
 #: ../utils/bonobo-activation-sysconf.c:145
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr "%s déjà dans le fichier de configuration.\n"
+msgstr "%s est déjà dans le fichier de configuration.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:165
 msgid "there is not a properly structured configuration file\n"
