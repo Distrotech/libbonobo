@@ -558,7 +558,7 @@ ac_do_activation (ActivationContext                  *actx,
                 aid = g_strdup_printf ("OAFAID:[%s,%s,%s]", activatable->iid,
                                        activatable->username, activatable->hostname);
 	
-	if (activatable && !strcmp (activatable->server_type, "shlib")
+	if (activatable && activatable->server_type && !strcmp (activatable->server_type, "shlib")
 	    && !(flags & Bonobo_ACTIVATION_FLAG_NO_LOCAL)
 	    && (hostname && !strcmp (activatable->hostname, hostname))) {
 		int j;

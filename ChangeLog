@@ -1,3 +1,8 @@
+2006-07-18  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/activation-context-corba.c: (ac_do_activation):
+	Another null deref found by Coverity.
+
 2006-07-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-storage-memory.c: (smem_rename_impl): Init
