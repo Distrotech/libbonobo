@@ -1,3 +1,10 @@
+2006-07-21  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/test-performance.c: (test_server_info_load):
+	Fix a leak. (Coverity #2684)
+	* bonobo/bonobo-moniker-extender.c: (bonobo_moniker_find_extender):
+	Another leak fix (Coverity #2824)
+
 2006-07-18  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* activation-server/activation-context-corba.c: (ac_do_activation):

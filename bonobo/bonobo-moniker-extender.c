@@ -131,7 +131,6 @@ bonobo_moniker_find_extender (const gchar       *name,
 			      CORBA_Environment *opt_ev)
 {
 	gchar            *query;
-	Bonobo_ActivationID  ret_id;
 	Bonobo_Unknown    extender;
 	CORBA_Environment  *ev, temp_ev;
 
@@ -146,7 +145,7 @@ bonobo_moniker_find_extender (const gchar       *name,
 		"repo_ids.has ('%s') AND "
 		"bonobo:moniker_extender.has ('%s')", interface, name);
 
-	extender = bonobo_activation_activate (query, NULL, 0, &ret_id, ev);
+	extender = bonobo_activation_activate (query, NULL, 0, NULL, ev);
 
 	g_free (query);
 

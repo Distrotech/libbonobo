@@ -39,6 +39,8 @@ test_server_info_load (void)
 		bonobo_server_info_load (dirs, &servers, runtime_servers, &hash,
 					 bonobo_activation_hostname_get ());
 
+	g_hash_table_destroy (hash);
+
 	fprintf (stderr, " %g(ms)\n",
 		 g_timer_elapsed (timer, NULL) * 1000.0 / 10);
 }
