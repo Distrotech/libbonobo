@@ -282,7 +282,8 @@ bonobo_stream_client_read (const Bonobo_Stream stream,
 		}
 	} 
 
-	*length_read = length;
+	if (length_read)
+		*length_read = length;
 
 	if (length == 0)
 		return NULL;

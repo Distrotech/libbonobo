@@ -1,5 +1,10 @@
 2006-07-21  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* bonobo/bonobo-stream-client.c: (bonobo_stream_client_read):
+	Fix possible NULL dereference. Coverity #1190.
+
+2006-07-21  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* activation-server/test-performance.c: (test_server_info_load):
 	Fix a leak. (Coverity #2684)
 	* bonobo/bonobo-moniker-extender.c: (bonobo_moniker_find_extender):
