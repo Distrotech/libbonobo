@@ -1,3 +1,8 @@
+libbonobo 2.15.1
+
+	* Fix Coverity reports for leaks, accessing uninitialized memory
+	  and null pointer derefs (Michael, Kjartan)
+
 libbonobo 2.15.0
 
 	* Add new MIME api to make gnome-vfs not have a hard dependency on
