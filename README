@@ -44,10 +44,8 @@ document system for the GNU system.
 
 * What you will need
 
-   You will need a working GNOME 1.x system with the development tools
+   You will need a working GNOME 2.x system with the development tools
    to compile and install Bonobo.
-
-   You also need OAF, the Object Activation Framework.
 
 * Mailing lists
 
@@ -58,7 +56,7 @@ document system for the GNU system.
 
    Archive of the mailing list is available at:
 
-     http://www.gnome.org/mailing-lists/archives/gnome-components-list
+     http://mail.gnome.org/archives/gnome-components-list
 
 * The layout 
 
