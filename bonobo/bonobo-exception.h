@@ -113,7 +113,7 @@ void  bonobo_exception_add_handler_fn  (const char *repo_id,
 void  bonobo_exception_general_error_set (CORBA_Environment *ev,
 					  CORBA_TypeCode     opt_deriv,
 					  const char        *format,
-					  ...);
+					  ...) G_GNUC_PRINTF(3,4);
 
 const char *bonobo_exception_general_error_get (CORBA_Environment *ev);
 

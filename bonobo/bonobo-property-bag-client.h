@@ -220,12 +220,12 @@ void
 bonobo_pbclient_set                      (Bonobo_PropertyBag  bag,
 					  CORBA_Environment  *opt_ev,
 					  const char         *first_prop,
-					  ...);
+					  ...) G_GNUC_NULL_TERMINATED;
 void
 bonobo_pbclient_get                      (Bonobo_PropertyBag  bag,
 					  CORBA_Environment  *opt_ev,
 					  const char         *first_prop,
-					  ...);
+					  ...) G_GNUC_NULL_TERMINATED;
 char *
 bonobo_pbclient_setv                     (Bonobo_PropertyBag  bag,
 					  CORBA_Environment  *ev,

@@ -43,7 +43,7 @@ bonobo_stream_extender_resolve (BonoboMonikerExtender       *extender,
 				const CORBA_char            *requested_interface,
 				CORBA_Environment           *ev)
 {
-	const char    *mime_type;
+	char          *mime_type;
 	char          *requirements;
 	Bonobo_Unknown object;
 	Bonobo_Unknown stream;

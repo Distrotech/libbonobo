@@ -31,7 +31,7 @@ void       bonobo_stream_client_write_string (const Bonobo_Stream stream,
 void       bonobo_stream_client_printf       (const Bonobo_Stream stream,
 					      const gboolean      terminate,
 					      CORBA_Environment  *ev,
-					      const char         *fmt, ...);
+					      const char         *fmt, ...) G_GNUC_PRINTF(4,5);
 
 CORBA_long bonobo_stream_client_read_string  (const Bonobo_Stream stream,
 					      char              **str,

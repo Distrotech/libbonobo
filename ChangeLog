@@ -1,3 +1,13 @@
+2006-08-07  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo/bonobo-exception.h:
+	* bonobo/bonobo-property-bag-client.h:
+	* bonobo/bonobo-stream-client.h:
+	Sentinel markup patch from Marcus Meissner.
+	Closes bug #338443.
+	* monikers/bonobo-moniker-extender-stream.c:
+	(bonobo_stream_extender_resolve): Fix a warning.
+
 2006-07-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-stream-client.c: (bonobo_stream_client_read):
