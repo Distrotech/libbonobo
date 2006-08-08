@@ -676,7 +676,6 @@ smem_rename_impl (PortableServer_Servant  servant,
 				     g_strdup (filename), entry);
 
  out:
-	g_free (entry);
 	g_free (filename);
 }
 
