@@ -1,3 +1,10 @@
+============================= 2.15.2 ======================
+
+2006-08-08  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* Revert the fix for coverity #2705. It caused
+	segfaults during make check.
+
 2006-08-07  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-exception.h:

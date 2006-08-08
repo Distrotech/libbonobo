@@ -1,3 +1,10 @@
+libbonobo 2.15.2
+
+	* Warning and build fixes. (Marcus Meissner, Kjartan)
+	* Revert a change that caused segfaults during make check
+	  (Kjartan)
+	* New and updated translations
+
 libbonobo 2.15.1
 
 	* Fix Coverity reports for leaks, accessing uninitialized memory
