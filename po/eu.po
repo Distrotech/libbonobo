@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-24 19:48+0000\n"
+"POT-Creation-Date: 2006-08-08 10:08+0000\n"
 "PO-Revision-Date: 2006-05-24 19:51+0000\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
@@ -16,13 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
 msgstr "Ezin da aurkitu zerbitzaria zein umetan zegoen zerrendatuta"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "Aktibatzeko IDa ez da baliozkoa "
 
@@ -45,14 +46,17 @@ msgid "File descriptor to write IOR to"
 msgstr "IOR idazteko fitxategi-deskriptorea"
 
 #: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "Erregistratu blokeorik gabeko erabiltzaileen aktibatze-zerbitzu gisa[!] arazteko"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"Erregistratu blokeorik gabeko erabiltzaileen aktibatze-zerbitzu gisa[!] "
+"arazteko"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -66,7 +70,8 @@ msgstr "ADIERAZPENA"
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Exekutatu '%s --help' komando-lerroaren aukera guztiak zerrendatzeko.\n"
+msgstr ""
+"Exekutatu '%s --help' komando-lerroaren aukera guztiak zerrendatzeko.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -84,7 +89,7 @@ msgstr "Abisu-zerbitzua"
 msgid "Notification service for activation"
 msgstr "Abisu-zerbitzua aktibatzeko"
 
-#: ../activation-server/object-directory-activate.c:219
+#: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Oraindik ez dugu urruneko prozesuetan shlib objekturik aktibatzen"
 
@@ -145,7 +150,8 @@ msgstr "%s direktorioarekin saiatzen"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Prozesu umeak ez du errore-mezurik eman, hutsegite ezezaguna gertatu da"
+msgstr ""
+"Prozesu umeak ez du errore-mezurik eman, hutsegite ezezaguna gertatu da"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:235
 #, c-format
@@ -156,34 +162,34 @@ msgstr "Huts egin du prozesu ume hau irakurtzean: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF prozesu umetik\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:424
+#: ../bonobo-activation/bonobo-activation-fork-server.c:412
 msgid "Couldn't spawn a new process"
 msgstr "Ezin izan da prozesu berria sardetu"
 
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "File descriptor to print IOR on"
 msgstr "IOR inprimatzeko fitxategi-deskriptorea"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
-#: ../bonobo-activation/bonobo-activation-init.c:362
+#: ../bonobo-activation/bonobo-activation-init.c:357
+#: ../bonobo-activation/bonobo-activation-init.c:367
 msgid "IID to activate"
 msgstr "Aktibatzeko IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:354
-#: ../bonobo-activation/bonobo-activation-init.c:364
+#: ../bonobo-activation/bonobo-activation-init.c:359
+#: ../bonobo-activation/bonobo-activation-init.c:369
 msgid "Prevent registering of server with OAF"
 msgstr "OAF duen zerbitzaria erregistratzea eragozten du"
 
-#: ../bonobo-activation/bonobo-activation-init.c:398
+#: ../bonobo-activation/bonobo-activation-init.c:403
 msgid "Bonobo Activation"
 msgstr "Bonobo aktibazioa"
 
-#: ../bonobo-activation/bonobo-activation-init.c:399
+#: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
 msgstr "Erakutsi Bonobo aktibatzeko aukerak"
 
-#: ../bonobo-activation/bonobo-activation-init.c:494
+#: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
 msgstr "Bonobo aktibatzeko aukerak"
 
@@ -216,11 +222,11 @@ msgstr "Izena"
 msgid "Application unique name"
 msgstr "Aplikazioaren izen bakarra"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "CORBA POA pertsonalizatua"
 
@@ -499,4 +505,3 @@ msgstr "Bistaratu konfigurazio-fitxategiko direktorioak"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Bistaratu konfigurazio-fitxategiaren bide-izena"
-
