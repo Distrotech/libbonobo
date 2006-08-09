@@ -697,11 +697,17 @@ static const BonoboActivationBaseServiceRegistry rloc_file = {
 static CORBA_Object
 local_re_check_fn (const Bonobo_ActivationEnvironment *environment,
                    const char                         *act_iid,
-                   gpointer                            user_data,
-                   CORBA_Environment                  *ev)
+                   gpointer                            user_data)
 {
-        return bonobo_activation_internal_service_get_extended (
-                user_data, TRUE, ev);
+        CORBA_Environment ev;
+        CORBA_Object result;
+
+        CORBA_exception_init (&ev);
+        result = bonobo_activation_internal_service_get_extended
+                (user_data, TRUE, &ev);
+        CORBA_exception_free (&ev);
+
+        return result;
 }
 
 static CORBA_Object

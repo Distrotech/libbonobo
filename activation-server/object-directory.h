@@ -73,8 +73,7 @@ Bonobo_ObjectDirectory bonobo_object_directory_get         (void);
 Bonobo_EventSource     bonobo_object_directory_event_source_get (void);
 CORBA_Object           bonobo_object_directory_re_check_fn (const Bonobo_ActivationEnvironment *environment,
                                                             const char                         *od_iorstr,
-                                                            gpointer                            user_data,
-                                                            CORBA_Environment                  *ev);
+                                                            gpointer                            user_data);
 void                   bonobo_object_directory_reload      (void);
 void                   reload_object_directory             (void);
 void                   check_quit                          (void);

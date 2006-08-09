@@ -1304,8 +1304,7 @@ bonobo_object_directory_shutdown (PortableServer_POA poa,
 CORBA_Object
 bonobo_object_directory_re_check_fn (const Bonobo_ActivationEnvironment *environment,
 				     const char                         *act_iid,
-				     gpointer                            user_data,
-				     CORBA_Environment                  *ev)
+				     gpointer                            user_data)
 {
         CORBA_Object retval;
 
@@ -1313,30 +1312,7 @@ bonobo_object_directory_re_check_fn (const Bonobo_ActivationEnvironment *environ
 
         retval = od_get_active_server (
                 main_dir, (Bonobo_ImplementationID) act_iid, environment);
-
-        if (ev->_major != CORBA_NO_EXCEPTION ||
-            retval == CORBA_OBJECT_NIL) {
-                char *msg;
-		Bonobo_GeneralError *errval = Bonobo_GeneralError__alloc ();
-
-                CORBA_exception_free (ev);
-
-                /*
-                 * If this exception blows ( which it will only do with a multi-object )
-                 * factory, you need to ensure you register the object you were activated
-                 * for [use const char *bonobo_activation_iid_get (void); ] is registered
-                 * with bonobo_activation_active_server_register - _after_ any other
-                 * servers are registered.
-                 */
-                msg = g_strdup_printf (_("Race condition activating server '%s'"), act_iid);
-                errval->description = CORBA_string_dup (msg);
-                g_free (msg);
-
-		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_Bonobo_GeneralError, errval);
-                retval = CORBA_OBJECT_NIL;
-        }
-
+        
         server_unlock ();
 
         return retval;

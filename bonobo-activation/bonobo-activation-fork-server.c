@@ -158,7 +158,7 @@ scan_list (EXEActivateInfo *seek_ai, CORBA_Environment *ev)
 #endif
                 retval = seek_ai->re_check (seek_ai->environment,
                                             seek_ai->act_iid,
-                                            seek_ai->user_data, ev);
+                                            seek_ai->user_data);
                 if (retval != CORBA_OBJECT_NIL)
                         return retval;
         }
@@ -188,22 +188,24 @@ scan_list (EXEActivateInfo *seek_ai, CORBA_Environment *ev)
 
         if (ai && !strcmp (seek_ai->act_iid, ai->act_iid)) {
 #ifdef BONOBO_ACTIVATION_DEBUG
-                g_message ("Hit the jackpot '%s' '%s'\n",
-                           seek_ai->act_iid, ai->act_iid);
+                g_message ("thread %p hit the jackpot '%s' '%s'\n",
+                           g_thread_self(), seek_ai->act_iid, ai->act_iid);
 #endif
                 retval = exe_activate_info_to_retval (ai, ev);
+                if (ev->_major != CORBA_NO_EXCEPTION) g_message ("URGH ! 3\n");
         } else if (seek_ai->re_check) {
                 /* It might have just registered the IID */
 #ifdef BONOBO_ACTIVATION_DEBUG
-                g_message ("Re-check for ... '%s' \n", seek_ai->act_iid);
+                g_message ("thread %p re-check for ... '%s' \n",
+                           g_thread_self(), seek_ai->act_iid);
 #endif
                 retval = seek_ai->re_check (seek_ai->environment,
                                             seek_ai->act_iid,
-                                            seek_ai->user_data, ev);
+                                            seek_ai->user_data);
         } else {
 #ifdef BONOBO_ACTIVATION_DEBUG
-                g_warning ("Very unusual dual activation failure: '%s'\n",
-                           seek_ai->act_iid);
+                g_warning ("thread %p: very unusual dual activation failure: '%s'\n",
+                           g_thread_self(), seek_ai->act_iid);
 #endif
         }
                 
@@ -430,31 +432,31 @@ bonobo_activation_server_by_forking (
                 running_activations = g_slist_remove (running_activations, &ai);
                 RUNNING_LIST_UNLOCK();
 
+                if (thread_cond)
+                        g_cond_broadcast (thread_cond);
+
+                close (iopipes[1]);
+
                 g_source_destroy (source);
                 g_source_unref (source);
                 
+                g_io_channel_shutdown (ai.ioc, FALSE, NULL);
                 g_io_channel_unref (ai.ioc);
                 
                 if (use_new_loop)
                         g_main_context_unref (context);
 
+                g_strfreev (newenv);
                 g_strfreev (cmd);
+
+                close (iopipes[0]);
 
 		return CORBA_OBJECT_NIL;
 	}
 
         close (iopipes[1]);
 
-        if (newenv) {
-                char **ep = newenv;
-
-                while (*ep) {
-                        g_free (*ep);
-                        ep++;
-                }
-                g_free (newenv);
-        }
-
+        g_strfreev (newenv);
         g_strfreev (cmd);
 
         /* Get the IOR from the pipe */
@@ -463,7 +465,8 @@ bonobo_activation_server_by_forking (
         }
 
 #ifdef BONOBO_ACTIVATION_DEBUG
-        g_message ("Broadcast activation of '%s' complete ...\n", act_iid);
+        g_message ("thread %p: broadcast activation of '%s' complete ...\n",
+                   g_thread_self(), act_iid);
 #endif
         if (thread_cond)
                 g_cond_broadcast (thread_cond);

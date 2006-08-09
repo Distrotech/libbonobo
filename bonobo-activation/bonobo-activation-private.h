@@ -41,8 +41,7 @@ gboolean     bonobo_activation_timeout_reg_check      (gpointer           data);
 void         bonobo_activation_server_fork_init  (gboolean                            threaded);
 typedef CORBA_Object (*BonoboForkReCheckFn)      (const Bonobo_ActivationEnvironment *environemnt,
                                                   const char                         *act_iid,
-                                                  gpointer                            user_data,
-                                                  CORBA_Environment                  *ev);
+                                                  gpointer                            user_data);
 CORBA_Object bonobo_activation_server_by_forking (const char                        **cmd, 
 						  gboolean                            set_process_group,
 						  int                                 fd_arg,

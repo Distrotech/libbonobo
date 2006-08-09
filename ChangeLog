@@ -1,3 +1,19 @@
+2006-08-09  Michael Meeks  <michael.meeks@novell.com>
+
+	* bonobo-activation/bonobo-activation-base-service.c
+	(local_re_check_fn): use tmp. local ev.
+
+	* bonobo-activation/bonobo-activation-private.h: remove
+	CORBA ev. from BonoboForkReCheckFn.
+
+	* activation-server/object-directory-corba.c
+	(bonobo_object_directory_re_check_fn): don't go setting
+	exceptions that don't need setting.
+
+	* bonobo-activation/bonobo-activation-fork-server.c
+	(bonobo_activation_server_by_forking): don't leak
+	various bits on g_spawn failure; also broadcast signal.
+
 ============================= 2.15.2 ======================
 
 2006-08-08  Kjartan Maraas  <kmaraas@gnome.org>
