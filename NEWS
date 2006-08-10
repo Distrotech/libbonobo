@@ -1,3 +1,8 @@
+libbonobo 2.15.3
+
+	* Fix ghtread configure test when building uninstalled (Brian Cameron)
+	* Various bonobo-activation login fixes (Michael)
+
 libbonobo 2.15.2
 
 	* Warning and build fixes. (Marcus Meissner, Kjartan)
