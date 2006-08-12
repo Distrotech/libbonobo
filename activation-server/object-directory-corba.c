@@ -950,10 +950,15 @@ impl_Bonobo_ObjectDirectory_register_new_full (
 
         add_active_server (od, iid, &merged_environment, obj);
 	
-	bonobo_event_source_notify_listeners
-                (od->event_source,
-                 "Bonobo/ObjectDirectory:activation:register",
-                 NULL, ev);
+        {
+                CORBA_Environment ev1;
+                CORBA_exception_init (&ev1);
+                bonobo_event_source_notify_listeners
+                        (od->event_source,
+                         "Bonobo/ObjectDirectory:activation:register",
+                         NULL, &ev1);
+                CORBA_exception_free (&ev1);
+        }
 
  reg_out:
         g_free (merged_environment._buffer);

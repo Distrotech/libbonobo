@@ -1,3 +1,13 @@
+2006-08-12  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory_register_new_full): Use a temporary
+	CORBA_Environment when calling
+	bonobo_event_source_notify_listeners, otherwise exceptions in
+	bonobo_event_source_notify_listeners propagate to
+	Bonobo::ObjectDirectory::register_new_full, causing strange
+	activate server registration errors.
+
 2006-08-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Fix gthread configure test when building
