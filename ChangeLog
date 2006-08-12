@@ -7,6 +7,7 @@
 	bonobo_event_source_notify_listeners propagate to
 	Bonobo::ObjectDirectory::register_new_full, causing strange
 	activate server registration errors.
+	(impl_Bonobo_ObjectDirectory_unregister): Idem.
 
 2006-08-10  Kjartan Maraas  <kmaraas@gnome.org>
 

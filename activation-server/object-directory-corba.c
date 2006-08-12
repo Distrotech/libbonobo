@@ -1000,11 +1000,15 @@ impl_Bonobo_ObjectDirectory_unregister (
                 CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
                                      ex_Bonobo_ObjectDirectory_NotRegistered,
                                      NULL);
-	else 
+	else {
+                CORBA_Environment ev1;
+                CORBA_exception_init (&ev1);
                 bonobo_event_source_notify_listeners
                         (od->event_source,
                          "Bonobo/ObjectDirectory:activation:unregister",
-                         NULL, ev);
+                         NULL, &ev1);
+                CORBA_exception_free (&ev1);
+        }
 
         server_unlock ();
 }
