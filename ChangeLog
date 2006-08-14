@@ -1,3 +1,10 @@
+2006-08-14  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* activation-server/object-directory-corba.c
+	(impl_Bonobo_ObjectDirectory_unregister)
+	(impl_Bonobo_ObjectDirectory_register_new_full): Pass NULL ev
+	instead of creating our own temp.
+
 2006-08-14  Alexander Larsson  <alexl@redhat.com>
 
 	* bonobo-activation/bonobo-activation-fork-server.c: (child_setup),
