@@ -278,6 +278,18 @@ bonobo_activation_server_fork_init (gboolean threaded)
         }
 }
 
+static void
+child_setup (gpointer user_data)
+{
+#ifndef G_OS_WIN32
+        int pipe_fd = GPOINTER_TO_INT (user_data);
+
+        /* unset close on exec */
+        fcntl (pipe_fd, F_SETFD, 0);
+#endif
+}
+
+
 CORBA_Object
 bonobo_activation_server_by_forking (
 	const char                         **cmd_const,
@@ -404,10 +416,14 @@ bonobo_activation_server_by_forking (
 
 	/* Spawn */
         if (!g_spawn_async (NULL, (gchar **) cmd, newenv,
+#ifdef G_OS_WIN32
+                            /* win32 g_spawn doesn't handle child_setup, so
+                               leave all fds open */
                             G_SPAWN_LEAVE_DESCRIPTORS_OPEN |
+#endif
                             G_SPAWN_SEARCH_PATH |
                             G_SPAWN_CHILD_INHERITS_STDIN,
-                            NULL, NULL,
+                            child_setup, GINT_TO_POINTER (iopipes[1]),
                             NULL,
                             &error)) {
                 Bonobo_GeneralError *errval;
