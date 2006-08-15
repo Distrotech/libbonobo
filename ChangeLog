@@ -1,3 +1,7 @@
+2006-08-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Remove checks for dladdr and xrdb.
+
 ============================= 2.15.3 ======================
 
 2006-08-14  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
