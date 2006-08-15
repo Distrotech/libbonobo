@@ -94,6 +94,26 @@ AM_GLIB_GNU_GETTEXT
 
 GNOME_COMPILE_WARNINGS
 
+dnl Test for dladdr
+AC_MSG_CHECKING(for dladdr)
+have_dladdr=false
+AC_TRY_COMPILE([
+#define _GNU_SOURCE
+#include <dlfcn.h>], [
+{
+	Dl_info info;
+	int     a;
+	a = dladdr ("SHLIB_ID", &info);
+}], have_dladdr=true)
+
+if $have_dladdr; then
+	AC_MSG_RESULT(found)
+else
+	AC_MSG_RESULT(not found - no auto shlib factory unloads)
+fi
+
+AC_DEFINE(HAVE_DLADDR,$have_dladdr,[whether we have dladdr])
+
 dnl Checks for library functions
 AC_CHECK_FUNCS(usleep nanosleep sigaction setsid)
 
