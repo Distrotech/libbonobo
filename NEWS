@@ -2,6 +2,8 @@ libbonobo 2.15.3
 
 	* Fix ghtread configure test when building uninstalled (Brian Cameron)
 	* Various bonobo-activation login fixes (Michael)
+	* Various cleanups of exception handling (Gustavo)
+	* Fixes for panel sometimes hanging on login (Alex)
 
 libbonobo 2.15.2
 
