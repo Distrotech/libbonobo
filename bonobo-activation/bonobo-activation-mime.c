@@ -87,6 +87,8 @@ Bonobo_ServerInfoList_to_ServerInfo_g_list (Bonobo_ServerInfoList *info_list)
  * 
  * Return value: a #Bonobo_ServerInfo * representing the OAF server to be activated
  * to get a reference to the proper component.
+ *
+ * Since: 2.16.0
  */
 Bonobo_ServerInfo *
 bonobo_activation_get_default_component_for_mime_type (const char *mime_type)
@@ -156,6 +158,8 @@ bonobo_activation_get_default_component_for_mime_type (const char *mime_type)
  * 
  * Return value: a #GList * where the elements are #Bonobo_ServerInfo *
  * representing components that can handle @mime_type.
+ *
+ * Since: 2.16.0
  */ 
 GList *
 bonobo_activation_get_all_components_for_mime_type (const char *mime_type)

@@ -1,3 +1,8 @@
+2006-08-16  Alexander Larsson  <alexl@redhat.com>
+
+	* bonobo-activation/bonobo-activation-mime.c:
+	Add Since markers to docs for new functions
+
 2006-08-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* doc/activation-api/bonobo-activation-sections.txt: Enable output
