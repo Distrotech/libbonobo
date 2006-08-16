@@ -1,3 +1,10 @@
+2006-08-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* doc/activation-api/bonobo-activation-sections.txt: Enable output
+	of documentation for
+	bonobo_activation_get_default_component_for_mime_type and
+	bonobo_activation_get_all_components_for_mime_type.
+
 2006-08-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Remove checks for dladdr and xrdb.

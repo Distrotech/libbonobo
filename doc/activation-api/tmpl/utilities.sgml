@@ -97,3 +97,21 @@ Random misc utilities to manipulate Bonobo_ServerInfo structures.
 </para>
 
 
+<!-- ##### FUNCTION bonobo_activation_get_default_component_for_mime_type ##### -->
+<para>
+
+</para>
+
+@mime_type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION bonobo_activation_get_all_components_for_mime_type ##### -->
+<para>
+
+</para>
+
+@mime_type: 
+@Returns: 
+
+

@@ -12,6 +12,8 @@ bonobo_activation_info_new
 bonobo_activation_info_free
 bonobo_server_info_prop_lookup
 Bonobo_ServerInfoList
+bonobo_activation_get_default_component_for_mime_type
+bonobo_activation_get_all_components_for_mime_type
 
 <SUBSECTION Private>
 Bonobo_ActivationProperty__alloc
