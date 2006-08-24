@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libbonobo 2.11.92\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-24 13:56+0200\n"
-"PO-Revision-Date: 2006-08-24 13:59+0200\n"
+"PO-Revision-Date: 2006-08-25 01:19+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgstr "EXPRESSIÓ"
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
-"Executeu '%s --help' per a veure una llista d'opcions completes de la línia "
+"Executeu «%s --help» per a veure una llista d'opcions completes de la línia "
 "d'ordres.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
