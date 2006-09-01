@@ -1,25 +1,18 @@
-# translation of bn_IN.po to Bangla (INDIA)
-# translation of bn_IN.po to Bangla (INDIA)
-# translation of bn_IN.po to Bangla (INDIA)
-# translation of bn_IN.po to Bangla (INDIA)
-# translation of bn_IN.po to Bangla (INDIA)
-# translation of bn_IN.po to Bangla (INDIA)
-# The Bengali translation for  libbonobo
+# The Bengali India translation for  libbonobo
 # Copyright (C) 2003 Free Software Foundation .
 # This file is distributed under the same license as the libbonobo package.
 # Muhammad Mahmudur Rahman Khan <mrk_ju@yahoo.com>, 2003.
 # Mahay Alam Khan <makl10n@yahoo.com>, 2005.
 # Samia Niamatullah <mailsamia2001@yahoo.com>, 2005.
-# Runa Bhattacharjee <runab@redhat.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: bn_IN\n"
+"Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-03 07:44+0200\n"
 "PO-Revision-Date: 2006-07-18 20:15+0530\n"
-"Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
-"Language-Team: Bangla (INDIA) <redhat-translation@bengalinux.org>\n"
+"Last-Translator: Runa Bhattacharjee <runabh@gmail.com>\n"
+"Language-Team: Bangla (INDIA)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -149,7 +142,7 @@ msgstr "dir %s প্রচেষ্টা করা হচ্ছে"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "চাইল্ড প্রসেস থেকে কোনো ত্রুটির বার্তা উত্‌পন্ন হয়নি, অজানা সমস্যা ঘটেছে"
+msgstr "চাইল্ড প্রসেস থেকে কোনো ত্রুটির বার্তা উৎপন্ন হয়নি, অজানা সমস্যা ঘটেছে"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:235
 #, c-format
@@ -360,7 +353,7 @@ msgstr "Moniker'র মধ্যে অজানা moniker প্রেফি�
 
 #: ../bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "ত্রুটি পরীক্ষণে সমস্যা; কোনো এক্সেপশন উত্‌পন্ন হয়নি"
+msgstr "ত্রুটি পরীক্ষণে সমস্যা; কোনো এক্সেপশন উৎপন্ন হয়নি"
 
 #: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
@@ -448,7 +441,7 @@ msgstr "echo বস্তুর নমুনার ইনস্ট্যান�
 #: ../samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occured '%s'"
-msgstr "'%s'-এ এক্সেপশন উত্‌পন্ন হয়েছে"
+msgstr "'%s'-এ এক্সেপশন উৎপন্ন হয়েছে"
 
 #: ../utils/bonobo-activation-sysconf.c:82
 msgid "Could not save configuration file.\n"
