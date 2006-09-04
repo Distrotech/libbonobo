@@ -1,3 +1,9 @@
+libbonobo 2.16.0
+
+	* API DOC fixes (Alex, Gustavo)
+	* Don't check for xrdb or dladdr when we don't use them (Kjartan)
+	* Updated and new translations
+
 libbonobo 2.15.3
 
 	* Fix ghtread configure test when building uninstalled (Brian Cameron)
