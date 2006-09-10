@@ -13,7 +13,7 @@ INCLUDES = \
 	-DVERSION=\"$(VERSION)\"
 
 Bonobo_Moniker_std.server.in: Bonobo_Moniker_std.server.in.in
-	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir)|" -e "s|\@SOPREFIX\@|$(SOPREFIX)|" $< > $@
+	sed -e "s|\@MONIKER_LIBDIR\@|$(monikerdir_in_server_file)|" -e "s|\@SOPREFIX\@|$(SOPREFIX)|" $< > $@
 
 CLEANFILES = Bonobo_Moniker_std.server Bonobo_Moniker_std.server.in
 
@@ -23,6 +23,13 @@ server_DATA = Bonobo_Moniker_std.server
 @INTLTOOL_SERVER_RULE@
 
 monikerdir = $(libdir)/bonobo/monikers
+
+if OS_WIN32
+monikerdir_in_server_file = ../monikers
+else
+monikerdir_in_server_file = $(monikerdir)
+endif
+
 moniker_LTLIBRARIES = libmoniker_std_2.la
 
 libmoniker_std_2_la_SOURCES =			\

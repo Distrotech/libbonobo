@@ -1,3 +1,14 @@
+2006-09-05  Tor Lillqvist  <tml@novell.com>
+
+	* configure.in: Define Automake conditional OS_WIN32.
+
+	* monikers/Makefile.am: Use relative path to the moniker DLL on
+	Win32. Odd that I haven't noticed this until now.
+
+	* bonobo-activation/bonobo-activation-fork-server.c (child_setup):
+	#define child_setup as NULL on Win32, instead of having it as a
+	real but empty function, to avoid runtime warning from GLib.
+
 ======================== 2.16.0 ===========================
 
 2006-08-16  Alexander Larsson  <alexl@redhat.com>

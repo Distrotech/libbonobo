@@ -278,17 +278,22 @@ bonobo_activation_server_fork_init (gboolean threaded)
         }
 }
 
+#ifndef G_OS_WIN32
+
 static void
 child_setup (gpointer user_data)
 {
-#ifndef G_OS_WIN32
         int pipe_fd = GPOINTER_TO_INT (user_data);
 
         /* unset close on exec */
         fcntl (pipe_fd, F_SETFD, 0);
-#endif
 }
 
+#else
+
+#define child_setup NULL
+
+#endif
 
 CORBA_Object
 bonobo_activation_server_by_forking (
