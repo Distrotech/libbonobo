@@ -1,3 +1,8 @@
+2006-09-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.in: Remove the message that says this is the
+	development branch.  Fixes bug #355244.
+
 2006-09-05  Tor Lillqvist  <tml@novell.com>
 
 	* configure.in: Define Automake conditional OS_WIN32.

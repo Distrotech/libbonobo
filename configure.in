@@ -262,7 +262,7 @@ doc/activation/Makefile
 doc/activation-api/Makefile
 ])
 
-echo "
-	This is the Development branch of libbonobo, if
-you want something more stable checkout -r gnome-2-14.
-"
+dnl echo "
+dnl 	This is the Development branch of libbonobo, if
+dnl you want something more stable checkout -r gnome-2-14.
+dnl "
