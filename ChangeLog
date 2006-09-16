@@ -1,3 +1,10 @@
+2006-09-16  Ernani Azevedo  <ernaniaz@gmail.com>
+
+	reviewed by: Gustavo Carneiro.
+
+	* bonobo-activation/bonobo-activation-activate.c: Fix typos in
+	error messages.  Closes bug #354341.
+
 2006-09-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.in: Remove the message that says this is the

@@ -476,8 +476,8 @@ bonobo_activation_activate_from_id (const Bonobo_ActivationID aid,
 
 #define ASYNC_ERROR_NO_AID            (_("No ActivationID supplied"))
 #define ASYNC_ERROR_NO_REQUIREMENTS   (_("No requirements supplied"))
-#define ASYNC_ERROR_NO_CONTEXT        (_("Failed to initialise the AcitvationContext"))
-#define ASYNC_ERROR_INV_FAILED        (_("Failed to invoke method on the AcitvationContext"))
+#define ASYNC_ERROR_NO_CONTEXT        (_("Failed to initialise the ActivationContext"))
+#define ASYNC_ERROR_INV_FAILED        (_("Failed to invoke method on the ActivationContext"))
 #define ASYNC_ERROR_GENERAL_EXCEPTION (_("System exception: %s : %s"))
 #define ASYNC_ERROR_EXCEPTION         (_("System exception: %s"))
 
