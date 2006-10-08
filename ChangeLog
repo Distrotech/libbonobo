@@ -1,3 +1,7 @@
+2006-10-08  Matthew Barnes  <mbarnes@redhat.com>
+
+	* doc/api/libbonobo-docs.sgml: Add an index to the API docs.
+
 2006-09-16  Ernani Azevedo  <ernaniaz@gmail.com>
 
 	reviewed by: Gustavo Carneiro.

@@ -173,4 +173,8 @@
 <!-- this one was empty, so I removed it: -->
 <!-- 	&libbonobo-bonobo-transient; -->
 
+    <index>
+        <title>Index</title>
+    </index>
+
 </book>
