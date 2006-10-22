@@ -8,6 +8,7 @@ bonobo_activation_sysconf_SOURCES =	\
 
 INCLUDES =						\
 	$(SERVER_CFLAGS)				\
+	$(WARN_CFLAGS)					\
 	-I$(top_srcdir)					\
 	-DSERVER_LOCALEDIR=\""$(datadir)/locale"\"	\
 	-DSERVER_CONFDIR=\"$(sysconfdir)\"

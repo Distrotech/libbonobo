@@ -42,7 +42,7 @@ main (int argc, char *argv [])
 	/* Check for exceptions */
 	if (BONOBO_EX (&ev)) {
 		char *err = bonobo_exception_get_text (&ev);
-		g_warning (_("An exception occured '%s'"), err);
+		g_warning (_("An exception occurred '%s'"), err);
 		g_free (err);
 	}
 

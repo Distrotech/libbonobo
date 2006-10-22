@@ -58,7 +58,7 @@ static gboolean        server_threaded = FALSE;
 static glong           server_guard_depth = 0;
 static GStaticRecMutex server_guard = G_STATIC_REC_MUTEX_INIT;
 
-PortableServer_POA
+static PortableServer_POA
 server_get_poa (void)
 {
         PortableServer_POA poa;
@@ -390,7 +390,9 @@ main (int argc, char *argv[])
 #ifdef HAVE_SYSLOG_H
 	gchar                        *syslog_ident;
 #endif
+#ifdef BONOBO_ACTIVATION_DEBUG
 	const gchar                  *debug_output_env;
+#endif
 	GError                       *error = NULL;
 
 #ifdef HAVE_SETSID

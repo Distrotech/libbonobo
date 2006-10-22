@@ -639,7 +639,7 @@ bonobo_activation_orb_init (int *argc, char **argv)
  * bonobo_activation_debug_shutdown:
  * 
  *   A debugging function to shutdown the ORB and process
- * any reference count leaks that may have occured.
+ * any reference count leaks that may have occurred.
  * 
  * Return value: FALSE if there were leaks detected, else TRUE
  **/

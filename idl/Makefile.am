@@ -50,7 +50,8 @@ idl_flags = \
 
 INCLUDES =  \
 	-I. \
-	$(LIBBONOBO_CFLAGS)
+	$(LIBBONOBO_CFLAGS) \
+	$(WARN_CFLAGS)
 
 Bonobo_module_la_SOURCES = \
 	Bonobo-imodule.c

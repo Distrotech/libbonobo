@@ -15,6 +15,7 @@ INCLUDES=					\
 	-DSERVERINFODIR=\"$(libdir)/bonobo/servers\" \
         -DSERVER_LOCALEDIR=\""${prefix}/${DATADIRNAME}/locale"\" \
 	$(SERVER_CFLAGS)			\
+	$(WARN_CFLAGS)				\
 	-DSERVER_CONFDIR=\"$(sysconfdir)\"	\
 	-DG_DISABLE_DEPRECATED			\
 	-DG_LOG_DOMAIN=\"Bonobo-Activation-Server\" \

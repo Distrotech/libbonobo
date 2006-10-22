@@ -74,6 +74,7 @@ CLEANFILES=empty_built plugin_built $(BUILT_SOURCES)
 INCLUDES= \
 	-I$(top_srcdir)			\
 	-I$(top_builddir)		\
+	$(WARN_CFLAGS)			\
 	-DG_DISABLE_DEPRECATED $(LIBBONOBO_CFLAGS)
 
 LDADD = ../../bonobo-activation/libbonobo-activation.la \

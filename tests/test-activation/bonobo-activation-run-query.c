@@ -54,13 +54,13 @@ main (int argc, char *argv[])
                 if (ev._major == CORBA_USER_EXCEPTION) {
                         if (!strcmp (ev._id, ex_Bonobo_GeneralError)) {
                                 Bonobo_GeneralError *err = CORBA_exception_value (&ev);
-                                printf ("An exception '%s' occured\n", err->description);
+                                printf ("An exception '%s' occurred\n", err->description);
                         } else {
                                 printf ("An unknown user exception ('%s') "
-                                        "occured\n", ev._id);
+                                        "occurred\n", ev._id);
                         }
                 } else if (ev._major == CORBA_SYSTEM_EXCEPTION) {
-                        printf ("A system exception ('%s') occured\n", ev._id);
+                        printf ("A system exception ('%s') occurred\n", ev._id);
                 } else {
                         g_assert_not_reached ();
                 }

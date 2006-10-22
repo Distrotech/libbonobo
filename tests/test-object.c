@@ -190,11 +190,11 @@ main (int argc, char *argv [])
 	fprintf (stderr, "General error tests...\n");
 	{
 		bonobo_exception_general_error_set (
-			ev, NULL, "a%s exception occured", "n exceptional");
+			ev, NULL, "a%s exception occurred", "n exceptional");
 		g_assert (BONOBO_EX (ev));
 		g_assert (!strcmp (BONOBO_EX_REPOID (ev), ex_Bonobo_GeneralError));
 		g_assert (!strcmp (bonobo_exception_get_text (ev),
-				   "an exceptional exception occured"));
+				   "an exceptional exception occurred"));
 	}
 
 	fprintf (stderr, "All tests passed\n");

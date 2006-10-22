@@ -536,7 +536,7 @@ qexp_evaluate_function (Bonobo_ServerInfo * si, QueryExpr * e,
 static QueryExprConst
 qexp_func_has_one (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
-	QueryExprConst retval, v1, v2;
+	QueryExprConst retval = { 0, }, v1, v2;
 	int i, j;
 	gboolean found;
 	char **check_one, **check_two;
@@ -582,7 +582,7 @@ qexp_func_has_one (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 static QueryExprConst
 qexp_func_has_all (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
-	QueryExprConst retval, v1, v2;
+	QueryExprConst retval = { 0, }, v1, v2;
 	int i, j;
 	char **check_one, **check_two;
 
@@ -624,7 +624,7 @@ qexp_func_has_all (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 static QueryExprConst
 qexp_func_has (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
-	QueryExprConst retval, v1, v2;
+	QueryExprConst retval = { 0, }, v1, v2;
 	char **check_one, *check_two;
 	int i;
 
@@ -668,7 +668,7 @@ qexp_func_prefer_by_list_order (Bonobo_ServerInfo *si,
                                 QueryExpr *e, 
                                 QueryContext *qctx)
 {
-	QueryExprConst retval, item, list;
+	QueryExprConst retval = { 0, }, item, list;
 	char **check_one, *check_two;
 	int i;
         int position;
@@ -790,7 +790,7 @@ static QueryExprConst
 qexp_evaluate_variable (Bonobo_ServerInfo * si, QueryExpr * e,
 			QueryContext * qctx)
 {
-	QueryExprConst retval;
+	QueryExprConst retval = { 0, };
 
 	retval.value_known = FALSE;
 
@@ -836,7 +836,7 @@ qexp_evaluate_variable (Bonobo_ServerInfo * si, QueryExpr * e,
 static QueryExprConst
 qexp_evaluate_id (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
-	QueryExprConst retval;
+	QueryExprConst retval = { 0, };
 
 	retval.value_known = retval.needs_free = FALSE;
 
@@ -933,7 +933,7 @@ qexp_evaluate_id (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 static QueryExprConst
 qexp_evaluate_binop (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
-	QueryExprConst retval, v1, v2;
+	QueryExprConst retval = { 0, }, v1, v2;
 	gboolean negate_result = FALSE;
 
 	v2.value_known = FALSE;	/* To make sure that qexp_constant_unuse works properly if we short-circuit */
@@ -1054,7 +1054,7 @@ qexp_evaluate_binop (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 static QueryExprConst
 qexp_evaluate_unop (Bonobo_ServerInfo * si, QueryExpr * e, QueryContext * qctx)
 {
-	QueryExprConst retval, v1;
+	QueryExprConst retval = { 0, }, v1;
 
 	retval.value_known = TRUE;
 

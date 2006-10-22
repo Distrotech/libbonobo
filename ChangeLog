@@ -1,3 +1,23 @@
+2006-10-22  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/Makefile.am:
+	* activation-server/activation-context-query.c:
+	(qexp_func_has_one), (qexp_func_has_all), (qexp_func_has),
+	(qexp_func_prefer_by_list_order), (qexp_evaluate_variable),
+	(qexp_evaluate_id), (qexp_evaluate_binop), (qexp_evaluate_unop):
+	* activation-server/activation-server-main.c: (main):
+	* bonobo-activation/bonobo-activation-init.c:
+	* idl/Makefile.am:
+	* samples/echo/Makefile.am:
+	* samples/echo/echo-client.c: (main):
+	* tests/test-activation/Makefile.am:
+	* tests/test-activation/bonobo-activation-run-query.c: (main):
+	* tests/test-object.c: (main):
+	* utils/Makefile.am:
+	- Add $(WARN_CFLAGS) to some makefiles
+	- Fix a bunch of misspellings of 'occurred', bug #360360
+	- Fix some compiler warnings
+
 2006-10-08  Matthew Barnes  <mbarnes@redhat.com>
 
 	* doc/api/libbonobo-docs.sgml: Add an index to the API docs.
