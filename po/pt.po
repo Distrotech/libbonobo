@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.16\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-18 01:27+0000\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-18 01:30+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -49,7 +49,8 @@ msgstr "FD"
 msgid ""
 "Register as the users' activation server without locking [!] for debugging"
 msgstr ""
-"Registar-se como o servidor de activação de utilizadores sem trancar [!] para depuração"
+"Registar-se como o servidor de activação de utilizadores sem trancar [!] "
+"para depuração"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -59,11 +60,13 @@ msgstr "Expressão de consulta a avaliar"
 msgid "EXPRESSION"
 msgstr "EXPRESSÃO"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Execute '%s --help' para consultar uma lista completa de opções de linha de comandos.\n"
+msgstr ""
+"Execute '%s --help' para consultar uma lista completa de opções de linha de "
+"comandos.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -142,7 +145,7 @@ msgstr "Falha ao ler do processo filho: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF no processo filho\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Incapaz de iniciar um novo processo"
 
@@ -427,7 +430,7 @@ msgstr "Incapaz de criar uma instância do componente echo de exemplo"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Ocorreu uma excepção '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82

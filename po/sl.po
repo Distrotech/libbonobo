@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-11 09:34+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-11 13:02+0100\n"
 "Last-Translator: Matjaž Horvat <m@owca.info>\n"
 "Language-Team: slovenian <sl@li.org>\n"
@@ -46,8 +46,11 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "Registriraj kot strežnik za aktivacijo uporabnikov brez zaklepanja [!] za razhroščevanje"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"Registriraj kot strežnik za aktivacijo uporabnikov brez zaklepanja [!] za "
+"razhroščevanje"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -57,11 +60,12 @@ msgstr "Pozvedbeni izraz, ki naj se ovrednoti"
 msgid "EXPRESSION"
 msgstr "IZRAZ"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Poženite '%s --help' za ogled celotnega seznama možnosti ukazne vrstice.\n"
+msgstr ""
+"Poženite '%s --help' za ogled celotnega seznama možnosti ukazne vrstice.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -85,8 +89,12 @@ msgstr "Ne znamo še aktivirati shlib predmetov v oddaljenem procesu"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
-msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
-msgstr "The nastavitvena datoteka Bonobo activation ni bila uspešno prebrana. Prosim preverite ali je veljavna v: %s"
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"The nastavitvena datoteka Bonobo activation ni bila uspešno prebrana. Prosim "
+"preverite ali je veljavna v: %s"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -124,7 +132,8 @@ msgstr "Poizkušam mapo %s"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Proces potomec ni podal sporočila o napaki, zgodila se je neznana napaka"
+msgstr ""
+"Proces potomec ni podal sporočila o napaki, zgodila se je neznana napaka"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
@@ -135,7 +144,7 @@ msgstr "Nisem uspel brati iz procesa potomca: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF iz procesa potomca\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:414
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Ni moč razvejiti novega procesa"
 
@@ -339,8 +348,7 @@ msgstr "Napaka pri preverjanju napake; ni izjeme"
 msgid "General activation error with no description"
 msgstr "Splošna aktivacijska napaka brez opisa"
 
-#: ../bonobo/bonobo-generic-factory.h:79
-#: ../bonobo/bonobo-generic-factory.h:83
+#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "Nisem mogel inicializirati Bonoba"
 
@@ -421,7 +429,7 @@ msgstr "Nisem uspel ustvariti primerka vzorčne komponente odmeva"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Zgodila se je izjema '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -482,34 +490,48 @@ msgstr "Prikaži pot do nastavitvene datoteke"
 
 #~ msgid "Race condition activating server '%s'"
 #~ msgstr "Tekemski pogoj ob aktiviranju strežnika '%s'"
+
 #~ msgid "Child received signal %u (%s)"
 #~ msgstr "Otrok je dobil signal %u (%s)"
+
 #~ msgid "Unknown non-exit error (status is %u)"
 #~ msgstr "Neznana ne-izhodna napaka (stanje je %u)"
+
 #~ msgid "bonobo-activation failed to set process group of %s: %s\n"
 #~ msgstr "bonobo-activation ni uspel nastaviti procesne skupine %s: %s\n"
+
 #~ msgid "Failed to execute %s: %d (%s)\n"
 #~ msgstr "Izvedba %s ni uspela: %d (%s)\n"
+
 #~ msgid "Too many alias levels for a locale, may indicate a loop"
 #~ msgstr "Preveč stopenj vzdevkov za locale, lahko pomeni zanko"
+
 #~ msgid "directory path"
 #~ msgstr "pot imenika"
+
 #~ msgid "No server corresponding to your query"
 #~ msgstr "Noben strežnik ne ustreza vaši poizvedbi"
+
 #~ msgid "Object directory to use when registering servers"
 #~ msgstr "Predmetni imenik, ki naj se uporabi ob registraciji strežnikov"
+
 #~ msgid "Query failed: "
 #~ msgstr "Poizvedba ni uspela: "
+
 #~ msgid "Activation failed: "
 #~ msgstr "Aktivacija ni uspela: "
+
 #~ msgid "Could not parse AID"
 #~ msgstr "Nisem mogel razčleniti AID"
+
 #~ msgid "Could not parse context: "
 #~ msgstr "Nisem mogel razčleniti konteksta: "
+
 #~ msgid "Could not activate server: "
 #~ msgstr "Nisem mogel aktivirati strežnika: "
+
 #~ msgid "Domain of ObjectDirectory"
 #~ msgstr "Domena ImenikaPredmetov"
+
 #~ msgid "DOMAIN"
 #~ msgstr "DOMENA"
-

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-02 07:46+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-02 08:45+0200\n"
 "Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -55,8 +55,11 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "Регистрирај како серверот за активирање на корисници, без заклучување на [!] за дебагирање"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"Регистрирај како серверот за активирање на корисници, без заклучување на [!] "
+"за дебагирање"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -66,11 +69,13 @@ msgstr "Прашален израз за проценка"
 msgid "EXPRESSION"
 msgstr "ИЗРАЗ"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Извршете '%s --help' за да ја видите целосната листа на достапни команди и опции.\n"
+msgstr ""
+"Извршете '%s --help' за да ја видите целосната листа на достапни команди и "
+"опции.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -100,18 +105,6 @@ msgid ""
 msgstr ""
 "Конфигурациската датотека за активирање на Bonobo не е прочитана успешно. Ве "
 "молам проверете ја валидноста во: %s"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "Исклучок при активирање на '%s"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -151,16 +144,16 @@ msgstr "Пробувам во директориумот %s"
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Подпроцесот не даде порака за грешка. Се случи непознат прекин"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Не успеав да прочитам од подпроцесот %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "EOF од подпроцесот\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:412
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Не можев да создадам нов процес"
 
@@ -445,7 +438,7 @@ msgstr "Не можам да креирам нова копија од прим�
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Се појави исклучок '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -504,3 +497,5 @@ msgstr "Прикажи ги директориумите во конфигура
 msgid "Display path to configuration file"
 msgstr "Прикажи ја патеката до конфигурациската датотека"
 
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "Исклучок при активирање на '%s"

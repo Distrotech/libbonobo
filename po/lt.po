@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-27 15:28+0300\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-03-03 01:10+0200\n"
 "Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -63,7 +63,7 @@ msgstr "Užklausai skirta išraiška"
 msgid "EXPRESSION"
 msgstr "IŠRAIŠKA"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -147,7 +147,7 @@ msgstr "Nepavyko gauti informacijos iš antrinio proceso: %s\n"
 msgid "EOF from child process\n"
 msgstr "Iš antrinio proceso gauta EOF\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Nepavyko prikelti naujo proceso"
 
@@ -432,7 +432,7 @@ msgstr "Nepavyko sukurti pavyzdinio aido komponento proceso"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Įvyko klaida „%s“"
 
 #: ../utils/bonobo-activation-sysconf.c:82

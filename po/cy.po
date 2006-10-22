@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-29 20:02+0100\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-06-29 20:02+0100\n"
 "Last-Translator: Rhys Jones <rhys@sucs.org>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "Couldn't find which child the server was listed in"
 msgstr "Methu canfod pa blentyn rhestrwyd y gweinydd ynddi"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "Nid yw'n ID Gweithredu dilys"
 
@@ -62,7 +62,7 @@ msgstr "Mynegiant ymholiad i'w werthuso"
 msgid "EXPRESSION"
 msgstr "MYNEGIANT"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -98,18 +98,6 @@ msgid ""
 msgstr ""
 "Ni ddarllenwyd ffeil cyfluniad Gweithrediad Bonobo yn llwyddiannus. Os "
 "gwelwch yn dda, gwiriwch ei fod yn ddilys yn: %s"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "Amod ras wrth weithredu gweinydd '%s'"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -149,17 +137,17 @@ msgstr "Yn ceisio'r cyfeiriadur %s"
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Ni roddodd y proses plentyn neges gwall, digwyddodd methiant anhysbys"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Methwyd darllen o broses plentyn: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "EOF o'r broses plentyn\n"
 
 # EFALLAI (forcio?)
-#: ../bonobo-activation/bonobo-activation-fork-server.c:412
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Methu creu proses newydd o'r un bresennol"
 
@@ -220,11 +208,11 @@ msgid "Application unique name"
 msgstr "Enw unigryw rhaglen"
 
 # EFALLAI
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "POA CORBA Addasedig"
 
@@ -454,7 +442,7 @@ msgstr "Methu creu enghraifft o'r gydran echo sampl"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Digwyddodd eithriad '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -512,6 +500,9 @@ msgstr "Dangos cyfeiriaduron yn y ffeil cyfluniad"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Dangos y llwybr i'r ffeil cyfluniad"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "Amod ras wrth weithredu gweinydd '%s'"
 
 #~ msgid "directory path"
 #~ msgstr "llwybr cyfeiriadur"

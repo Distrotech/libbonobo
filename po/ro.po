@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-03 21:23+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-09-04 02:23+0300\n"
 "Last-Translator: Mişu Moldovan <dumol@gnome.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -61,11 +61,12 @@ msgstr "Interoghează expresia pentru evaluare"
 msgid "EXPRESSION"
 msgstr "EXPRESIE"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Utilizaţi „%s --help” pentru a consulta lista completă a opţiunilor "
+msgstr ""
+"Utilizaţi „%s --help” pentru a consulta lista completă a opţiunilor "
 "disponibile în linia de comandă.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
@@ -146,7 +147,7 @@ msgstr "Nu s-au putut citi datele de la procesul copil: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF de la procesul copil: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Nu s-a putut crea un nou proces"
 
@@ -431,7 +432,7 @@ msgstr "Nu s-a putut crea o instanţă a componentei eşantion „Echo”"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "S-a interceptat excepţia „%s”"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -489,4 +490,3 @@ msgstr "Arată directoarele în fişierul de configurare"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Arată calea către fişierul de configurare"
-

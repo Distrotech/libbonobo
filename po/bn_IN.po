@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-03 07:44+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-07-18 20:15+0530\n"
 "Last-Translator: Runa Bhattacharjee <runabh@gmail.com>\n"
 "Language-Team: Bangla (INDIA)\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Couldn't find which child the server was listed in"
 msgstr "সার্ভারের তথ্য ধারণকারী চাইল্ড সনাক্ত করা যায়নি"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "অ্যাক্টিভেশন ID বৈধ নয়"
 
@@ -37,7 +37,9 @@ msgstr "DIRECTORY"
 
 #: ../activation-server/activation-server-main.c:165
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "ActivationContext রূপে প্রয়োগ করা হবে (ডিফল্টরূপে শুধুমাত্র ObjectDirectory হিসাবে ব্যবহার করা হয়)"
+msgstr ""
+"ActivationContext রূপে প্রয়োগ করা হবে (ডিফল্টরূপে শুধুমাত্র ObjectDirectory হিসাবে "
+"ব্যবহার করা হয়)"
 
 #: ../activation-server/activation-server-main.c:169
 msgid "File descriptor to write IOR to"
@@ -50,8 +52,11 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "ডিবাগ করার জন্য লকবিহীন অবস্থায় ব্যবহারকারীর অ্যাক্টিভেশন-সার্ভাররূপে নিবন্ধিত করা হবে"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"ডিবাগ করার জন্য লকবিহীন অবস্থায় ব্যবহারকারীর অ্যাক্টিভেশন-সার্ভাররূপে নিবন্ধিত করা "
+"হবে"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -61,11 +66,13 @@ msgstr "মীমাংসা করার উদ্দেশ্যে কোয়
 msgid "EXPRESSION"
 msgstr "মান"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "কমান্ড-লাইন থেকে ব্যবহারযোগ্য সমস্ত উপলব্ধ বিকল্পের তালিকা দেখতে '%s --help' ব্যবহার করুন।\n"
+msgstr ""
+"কমান্ড-লাইন থেকে ব্যবহারযোগ্য সমস্ত উপলব্ধ বিকল্পের তালিকা দেখতে '%s --help' "
+"ব্যবহার করুন।\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -92,19 +99,9 @@ msgstr "দূরবর্তী প্রসেসের ক্ষেত্র�
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr "Bonobo সক্রিয়করণের কনফিগারেশন ফাইল সঠিকরূপে পড়া যায়নি। অনুগ্রহ করে পরীক্ষা করুন এটি বৈধ কিনা: %s"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "সার্ভার '%s' সক্রিয়করণের সময় রেস (race) অবস্থার সম্মূখীন"
+msgstr ""
+"Bonobo সক্রিয়করণের কনফিগারেশন ফাইল সঠিকরূপে পড়া যায়নি। অনুগ্রহ করে পরীক্ষা করুন "
+"এটি বৈধ কিনা: %s"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -144,16 +141,16 @@ msgstr "dir %s প্রচেষ্টা করা হচ্ছে"
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "চাইল্ড প্রসেস থেকে কোনো ত্রুটির বার্তা উৎপন্ন হয়নি, অজানা সমস্যা ঘটেছে"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "চাইল্ড প্রসেস থেকে পড়তে ব্যর্থ: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "চাইল্ড প্রসেস থেকে EOF প্রাপ্ত\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:412
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "নতুন প্রসেস স্পন করতে ব্যর্থ"
 
@@ -213,11 +210,11 @@ msgstr "নাম"
 msgid "Application unique name"
 msgstr "অ্যাপ্লিকেশনের জন্য নির্ধারিত স্বতন্ত্র নাম"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "কাস্টম CORBA POA"
 
@@ -440,7 +437,7 @@ msgstr "echo বস্তুর নমুনার ইনস্ট্যান�
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "'%s'-এ এক্সেপশন উৎপন্ন হয়েছে"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -499,3 +496,5 @@ msgstr "কনফিগারেশন ফাইলের মধ্যে ডি
 msgid "Display path to configuration file"
 msgstr "কনফিগারেশন ফাইলের পাথ প্রদর্শন করা হবে"
 
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "সার্ভার '%s' সক্রিয়করণের সময় রেস (race) অবস্থার সম্মূখীন"

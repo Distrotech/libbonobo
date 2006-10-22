@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 23:02+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-04-18 10:38+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
@@ -13,7 +13,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
 "\n"
 "\n"
 
@@ -21,7 +22,7 @@ msgstr ""
 msgid "Couldn't find which child the server was listed in"
 msgstr "સર્વરે આપેલી યાદીમાંથી ક્યો બાળક હતો તે શોધી શકાતો નથી"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "યોગ્ય કાર્યશીલ ઓળખ નથી"
 
@@ -42,13 +43,14 @@ msgid "File descriptor to write IOR to"
 msgstr "IORમાં લખાણ માટેની ફાઈલ વર્ણનકર્તા"
 
 #: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
 msgstr "વપરાશકર્તાના સક્રિયકરણ સર્વર તરીકે ડિબગીંગ માટે તાળું માર્યા વિના વર્તો [!]"
 
 #: ../activation-server/activation-server-main.c:177
@@ -59,7 +61,7 @@ msgstr "શોધવા માટે પ્રશ્ર્ન વ્યક્ત
 msgid "EXPRESSION"
 msgstr "સમીકરણ"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -81,7 +83,7 @@ msgstr "નોંધણીની સેવા"
 msgid "Notification service for activation"
 msgstr "કાર્યશીલ માટે નોંધણીની સેવા"
 
-#: ../activation-server/object-directory-activate.c:219
+#: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "દૂરસ્ત પ્રક્રિયા માટે હજુ શ્લીબ વસ્તુઓને કાર્યશીલ કરવાની વ્યવસ્થા કરી શકાઈ નથી"
 
@@ -93,18 +95,6 @@ msgid ""
 msgstr ""
 "બોનોબો રુપરેખાને કાર્યશીલ કરવાની ફાઈલ સફળતાથી વાંચી શકાઈ નહિ. મહેરબાની કરીને તપાસો "
 "કે તે યોગ્ય %sમાં છે"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "રેસ સ્થિતિથી સર્વર '%s' સક્રિય થાય છે"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -144,43 +134,43 @@ msgstr "ડિરેક્ટરી %sનો પ્રયત્ન કરી ર
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "બાળ પ્રક્રિયાએ ભૂલ માટે કોઈ સંદેશ આપ્યો નથી, કોઈક અજાણી ભૂલ થઈ છે"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "બાળ પ્રક્રિયામાંથી વાંચવામાં નિષ્ફળ: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "બાળ પ્રક્રિયામાંથી EOF\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:424
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "નવી પ્રક્રિયા પેદા કરી શક્યા નહિં"
 
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "File descriptor to print IOR on"
 msgstr "IOR છાપવા માટેનુ ફાઈલ વર્ણનકર્તા"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
-#: ../bonobo-activation/bonobo-activation-init.c:362
+#: ../bonobo-activation/bonobo-activation-init.c:357
+#: ../bonobo-activation/bonobo-activation-init.c:367
 msgid "IID to activate"
 msgstr "કાર્યશીલ કરવાનુ IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:354
-#: ../bonobo-activation/bonobo-activation-init.c:364
+#: ../bonobo-activation/bonobo-activation-init.c:359
+#: ../bonobo-activation/bonobo-activation-init.c:369
 msgid "Prevent registering of server with OAF"
 msgstr "AOF ની સાથે સર્વર નોંધણી અટકાવે છે"
 
-#: ../bonobo-activation/bonobo-activation-init.c:374
+#: ../bonobo-activation/bonobo-activation-init.c:403
 msgid "Bonobo Activation"
 msgstr "બોનોબો સક્રિયકરણ"
 
-#: ../bonobo-activation/bonobo-activation-init.c:375
+#: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
 msgstr "બોનોબો સક્રિયકરણ વિકલ્પો બતાવો"
 
-#: ../bonobo-activation/bonobo-activation-init.c:470
+#: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
 msgstr "બોનોબો કાર્યશીલ કરવાના વિકલ્પો"
 
@@ -213,11 +203,11 @@ msgstr "નામ"
 msgid "Application unique name"
 msgstr "કાર્યક્રમનુ અનન્ય નામ"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "કસ્ટમ CORBA POA"
 
@@ -439,7 +429,7 @@ msgstr "નમૂનાનાં ઈકોના ભાગો બનાવી �
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "અપવાદ ઉદ્ભવ્યો '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -498,3 +488,5 @@ msgstr "રુપરેખા ફાઈલમાં દર્શાવાયે�
 msgid "Display path to configuration file"
 msgstr "રુપરેખા ફાઈલનો દર્શાવાયેલો માર્ગ"
 
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "રેસ સ્થિતિથી સર્વર '%s' સક્રિય થાય છે"

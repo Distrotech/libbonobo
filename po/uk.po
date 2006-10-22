@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-31 10:59+0300\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-02-15 18:45+0200\n"
 "Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -59,7 +59,7 @@ msgstr "Вираз запиту для аналізу"
 msgid "EXPRESSION"
 msgstr "ВИРАЗ"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -96,19 +96,6 @@ msgid ""
 msgstr ""
 "Не вдається прочитати файл конфігурації активації Bonobo. Переконайтесь, що "
 "файл \"%s\" вказано правильно"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr ""
-"Відбулась спроба одночасної активації сервера \"%s\" кількома процесами"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -151,16 +138,16 @@ msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
 "Дочірній процес не видав повідомлення про помилку, виникла невідома помилка"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Не вдається зчитати з дочірнього процесу: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "Отримано ознаку кінця файлу від дочірнього процесу\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:412
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Не вдається створити новий процес"
 
@@ -445,7 +432,7 @@ msgstr "Не вдається створити екземпляр зразка �
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Виникла виключна ситуація \"%s\""
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -503,3 +490,7 @@ msgstr "Показати каталоги з файлу конфігурації
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Показати шлях до файла конфігурації"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr ""
+#~ "Відбулась спроба одночасної активації сервера \"%s\" кількома процесами"

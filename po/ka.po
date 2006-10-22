@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-08 09:17+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-09-08 13:06+0200\n"
 "Last-Translator: Vladimer Sichinava <vlsichinava@gmail.com>\n"
 "Language-Team: Georgian <www.gia.ge>\n"
@@ -37,7 +37,8 @@ msgstr "დასტა"
 
 #: ../activation-server/activation-server-main.c:165
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "დამუშავება როგორც ActivationContext (ნაგულისხმებია მხოლოდ ObjectDirectory)"
+msgstr ""
+"დამუშავება როგორც ActivationContext (ნაგულისხმებია მხოლოდ ObjectDirectory)"
 
 #: ../activation-server/activation-server-main.c:169
 msgid "File descriptor to write IOR to"
@@ -50,8 +51,11 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "მომხმარებლების გააქტივების სერვერის რეგისტრაცია [!] გამართვის რეჟიმის გაუთიშავად"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"მომხმარებლების გააქტივების სერვერის რეგისტრაცია [!] გამართვის რეჟიმის "
+"გაუთიშავად"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -61,7 +65,7 @@ msgstr "დასამუშავებელი მოთხოვნის �
 msgid "EXPRESSION"
 msgstr "გამოსახულება"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -132,7 +136,8 @@ msgstr "%s დასტის გახსნის ცდა"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "ქვეპროცესს შეცდომის შეტყობინება არ დაუბრუნებია, დაიმზირება უცნობი შეცდომა"
+msgstr ""
+"ქვეპროცესს შეცდომის შეტყობინება არ დაუბრუნებია, დაიმზირება უცნობი შეცდომა"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
@@ -143,7 +148,7 @@ msgstr "ქვეპროცესის წაკითხვის შეც�
 msgid "EOF from child process\n"
 msgstr "ქვეპროცესის დასრული (EOF)\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "ახალი პროცესის წარმოქმნა ვერ ხერხდება"
 
@@ -428,7 +433,7 @@ msgstr "ექოს კომპონენტის ნიმუშის შ
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "დაიმზირება გამონაკლისი - '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -486,4 +491,3 @@ msgstr "კონფიგურაციის ფაილში დასტ�
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "კონფიგურაციის ფაილის გეზის ჩვენება"
-

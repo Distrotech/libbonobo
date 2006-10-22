@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-30 13:54+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-04-30 13:55+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Couldn't find which child the server was listed in"
 msgstr "Kunne ikke finne ut hvilket barn tjeneren var listet i"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "Ikke en gyldig aktiverings-ID"
 
@@ -41,8 +41,8 @@ msgid "File descriptor to write IOR to"
 msgstr "Fildeskriptor som IOR skal skrives til"
 
 #: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
@@ -59,11 +59,13 @@ msgstr "Uttrykk i spørring som skal evalueres"
 msgid "EXPRESSION"
 msgstr "UTTRYKK"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Kjør «%s --help» for å se en full liste med tilgjengelige kommandolinjeflagg.\n"
+msgstr ""
+"Kjør «%s --help» for å se en full liste med tilgjengelige "
+"kommandolinjeflagg.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -81,7 +83,7 @@ msgstr "Meldingstjeneste"
 msgid "Notification service for activation"
 msgstr "Meldingstjeneste for aktivering"
 
-#: ../activation-server/object-directory-activate.c:219
+#: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
 "Vi håndterer ikke aktivering av shlib-objekter i en ekstern prosess ennå"
@@ -94,18 +96,6 @@ msgid ""
 msgstr ""
 "Bonobo Activation-konfigurasjonsfilen kunne ikke leses. Vennligs sjekk om "
 "den er gyldig i: %s"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "«Race condition» under aktivering av tjener «%s»"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -145,43 +135,43 @@ msgstr "Prøver katalog %s"
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Underprosess ga ingen feilmelding, ukjent feil oppsto"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Feil under lesing fra underprosess: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "Slutt på fil fra underprosess\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:424
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Kunne ikke starte en ny prosess"
 
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "File descriptor to print IOR on"
 msgstr "Fildeskriptor som IOR skal skrives til"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
-#: ../bonobo-activation/bonobo-activation-init.c:362
+#: ../bonobo-activation/bonobo-activation-init.c:357
+#: ../bonobo-activation/bonobo-activation-init.c:367
 msgid "IID to activate"
 msgstr "IID som skal aktiveres"
 
-#: ../bonobo-activation/bonobo-activation-init.c:354
-#: ../bonobo-activation/bonobo-activation-init.c:364
+#: ../bonobo-activation/bonobo-activation-init.c:359
+#: ../bonobo-activation/bonobo-activation-init.c:369
 msgid "Prevent registering of server with OAF"
 msgstr "Forhindre registrering av tjener hos OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:374
+#: ../bonobo-activation/bonobo-activation-init.c:403
 msgid "Bonobo Activation"
 msgstr "Bonobo Activation"
 
-#: ../bonobo-activation/bonobo-activation-init.c:375
+#: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
 msgstr "Vis alternativer for Bonobo Activation"
 
-#: ../bonobo-activation/bonobo-activation-init.c:470
+#: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
 msgstr "Alternativer for bonobo-activation"
 
@@ -214,11 +204,11 @@ msgstr "Navn"
 msgid "Application unique name"
 msgstr "Unikt navn for applikasjonen"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "Egendefinert CORBA POA"
 
@@ -439,7 +429,7 @@ msgstr "Kunne ikke opprette en instans av eksempelkomponenten for ekko"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Et unntak oppsto «%s»"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -497,3 +487,6 @@ msgstr "Vis kataloger i konfigurasjonsfilen"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Vis sti til konfigurasjonsfil"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "«Race condition» under aktivering av tjener «%s»"

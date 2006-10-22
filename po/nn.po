@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-02 15:24+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-09-02 15:24+0200\n"
 "Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -63,7 +63,7 @@ msgstr "Spørjingsuttrykk som skal evaluerast"
 msgid "EXPRESSION"
 msgstr "UTRYKK"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -145,7 +145,7 @@ msgstr "Klarte ikkje å lesa frå barnprosess: %s\n"
 msgid "EOF from child process\n"
 msgstr "Fekk EOF frå barnprosess: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Kunne ikkje starta ny prosess"
 
@@ -430,7 +430,7 @@ msgstr "Klarte ikkje å oppretta ein instans av eksempel ekkokomponent"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Eit unntakk skjedde: «%s»"
 
 #: ../utils/bonobo-activation-sysconf.c:82

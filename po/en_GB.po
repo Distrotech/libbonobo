@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-09 18:29+0100\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-09-09 18:32-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: \n"
@@ -46,8 +46,10 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "Register as the users' activation server without locking [!] for debugging"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"Register as the users' activation server without locking [!] for debugging"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -57,11 +59,12 @@ msgstr "Query expression to evaluate"
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"Run '%s --help' to see a full list of available command line options.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -85,8 +88,12 @@ msgstr "We don't handle activating shlib objects in a remote process yet"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
-msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
-msgstr "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -135,7 +142,7 @@ msgstr "Failed to read from child process: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF from child process\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Couldn't spawn a new process"
 
@@ -339,8 +346,7 @@ msgstr "Error checking error; no exception"
 msgid "General activation error with no description"
 msgstr "General activation error with no description"
 
-#: ../bonobo/bonobo-generic-factory.h:79
-#: ../bonobo/bonobo-generic-factory.h:83
+#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "Could not initialise Bonobo"
 
@@ -421,7 +427,7 @@ msgstr "Could not create an instance of the sample echo component"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "An exception occured '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -482,16 +488,21 @@ msgstr "Display path to configuration file"
 
 #~ msgid "Race condition activating server '%s'"
 #~ msgstr "Race condition activating server '%s'"
+
 #~ msgid "Too many alias levels for a locale, may indicate a loop"
 #~ msgstr "Too many alias levels for a locale, may indicate a loop"
+
 #~ msgid "directory path"
 #~ msgstr "directory path"
+
 #~ msgid "Child received signal %u (%s)"
 #~ msgstr "Child received signal %u (%s)"
+
 #~ msgid "Unknown non-exit error (status is %u)"
 #~ msgstr "Unknown non-exit error (status is %u)"
+
 #~ msgid "bonobo-activation failed to set process group of %s: %s\n"
 #~ msgstr "bonobo-activation failed to set process group of %s: %s\n"
+
 #~ msgid "Failed to execute %s: %d (%s)\n"
 #~ msgstr "Failed to execute %s: %d (%s)\n"
-

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-17 12:12+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-26 08:39+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -53,8 +53,11 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "Regisztrálás a felhasználó aktivációs kiszolgálójaként zárolás nélkül [!] hibakereséshez"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"Regisztrálás a felhasználó aktivációs kiszolgálójaként zárolás nélkül [!] "
+"hibakereséshez"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -64,11 +67,13 @@ msgstr "Kiértékelendő lekérdező kifejezés"
 msgid "EXPRESSION"
 msgstr "KIFEJEZÉS"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Adja ki a(z) \"%s --help\" parancsot az elérhető parancssori kapcsolók teljes listájáért.\n"
+msgstr ""
+"Adja ki a(z) \"%s --help\" parancsot az elérhető parancssori kapcsolók "
+"teljes listájáért.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -88,7 +93,8 @@ msgstr "Értesítési szolgáltatás az aktivációhoz"
 
 #: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Jelenleg még nem kezeljük a távoli folyamatok shlib objektumainak aktiválását"
+msgstr ""
+"Jelenleg még nem kezeljük a távoli folyamatok shlib objektumainak aktiválását"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
@@ -146,7 +152,7 @@ msgstr "Nem sikerült olvasni a gyermekfolyamatból: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF a gyermekfolyamatból\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Nem lehet új folyamatot indítani"
 
@@ -431,7 +437,7 @@ msgstr "Nem lehet létrehozni az echo példaprogramból egy példányt sem"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Kivétel történt: \"%s\""
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -489,4 +495,3 @@ msgstr "Könyvtárak megjelenítése a konfigurációs fájlban"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Konfigurációs fájl elérési útjának megjelenítése"
-

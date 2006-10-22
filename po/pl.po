@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-16 00:32+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-13 14:44+0200\n"
 "Last-Translator: Artur Flinta <aflinta@at.kernel.pl>\n"
 "Language-Team: Polish <translators@gnomepl.org>\n"
@@ -69,7 +69,7 @@ msgstr "Wyrażenie zapytania do przetworzenia"
 msgid "EXPRESSION"
 msgstr "WYRAŻENIE"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -155,7 +155,7 @@ msgstr "Nie można odczytać z procesu potomnego: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF z procesu potomnego\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Nie można utworzyć nowego procesu"
 
@@ -440,7 +440,7 @@ msgstr "Nie można utworzyć instancji przykładowego komponentu echa"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Wystąpił wyjątek \"%s\""
 
 #: ../utils/bonobo-activation-sysconf.c:82

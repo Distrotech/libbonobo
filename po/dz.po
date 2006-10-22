@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.dz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-03 23:10+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-05-26 10:23+0530\n"
 "Last-Translator: Mindu Dorji\n"
 "Language-Team: DZONGKHA <pgeyleg@dit.gov.bt>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Couldn't find which child the server was listed in"
 msgstr "སར་བར་དེ་ ཆ་ལག་ག་ཅིའི་ནང་ ཐོ་བཀོད་འབད་འབདཝ་ཨིན་ན་ འཚོལ་མ་ཐོབ།"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "ཤུགས་བཟོ་ནིའི་ཨའི་ཌི་ ནུས་ཅན་ཅིག་མེན་པས།"
 
@@ -43,13 +43,14 @@ msgid "File descriptor to write IOR to"
 msgstr "ཨའི་ཨོ་ཨར་འབྲི་སའི་ ཡིག་སྣོད་འགྲེལ་བཤདཔ།"
 
 #: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "ཡིག་སྣོད་འགྲེལ་བཤདཔ།"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
 msgstr "རྐྱེན་སེལ་གྱི་དོན་ལུ་ [!] ལྡེ་མིག་མ་བརྐྱབས་པར་ ལག་ལེན་པའི་ཤུགས་བཟོ་སར་བར་སྦེ་ ཐོ་འགོད་འབད།"
 
 #: ../activation-server/activation-server-main.c:177
@@ -60,7 +61,7 @@ msgstr "བརྟག་ཞིབ་ཀྱི་དོན་ལུ་ འདྲ�
 msgid "EXPRESSION"
 msgstr "གསལ་བརྗོད།"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -82,26 +83,20 @@ msgstr "བརྡ་བསྐུལ་ཞབས་ཏོག"
 msgid "Notification service for activation"
 msgstr "ཤུགས་བཟོའི་བརྡ་བསྐུལ་ཞབས་ཏོག"
 
-#: ../activation-server/object-directory-activate.c:219
+#: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "ང་བཅས་ཀྱིས་ ད་ཚུན་གྱི་བར་ན་ ཐག་རིང་ལས་སྦྱོར་ནང་ལུ་ shlib དངོས་པོ་ཤུགས་ལྡན་བཟོ་ནིའི་ ལེགས་སྐྱོང་འཐབ་ནི་མེད།"
+msgstr ""
+"ང་བཅས་ཀྱིས་ ད་ཚུན་གྱི་བར་ན་ ཐག་རིང་ལས་སྦྱོར་ནང་ལུ་ shlib དངོས་པོ་ཤུགས་ལྡན་བཟོ་ནིའི་ ལེགས་སྐྱོང་"
+"འཐབ་ནི་མེད།"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
-msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
-msgstr "བཱོ་ནོ་བཱོ་ ཤུགས་བཟོའི་རིམ་སྒྲིག་ཡིག་སྣོད་དེ་ མཐར་འཁྱོལ་སྦེ་ལྷག་མ་ཚུགས།  %s ནང་ལུ་ ནུས་ཅན་ཨིནམ་མེནམ་ ཞིབ་དཔྱད་འབད།"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "རྒྱུག་འགྲན་གནས་སྟངས་ ཤུགས་བཟོའི་ཡིག་སྣོད་ ’%s’ །"
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"བཱོ་ནོ་བཱོ་ ཤུགས་བཟོའི་རིམ་སྒྲིག་ཡིག་སྣོད་དེ་ མཐར་འཁྱོལ་སྦེ་ལྷག་མ་ཚུགས།  %s ནང་ལུ་ ནུས་ཅན་ཨིནམ་མེནམ་ "
+"ཞིབ་དཔྱད་འབད།"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -141,43 +136,43 @@ msgstr "སྣོད་ཐོ་ %s ལུ་ འབད་རྩོལ་བས�
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "ཆ་ལག་ལས་སྦྱོར་གྱིས་ འཛོལ་བའི་འཕྲིན་དོན་ཅིག་མ་བྱིན། ཤེས་མ་ཚུགས་པའི་ འཐུས་ཤོར་ཅིག་བྱུང་ནུག"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "ཆ་ལག་ལས་སྦྱོར་ %s ནང་ལས་ ལྷག་མ་ཚུགས། \n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "ཆ་ལག་ལས་སྦྱོར་ནང་ལས་ ཨི་ཨོ་ཨེཕ། \n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:424
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "ལས་སྦྱོར་གསརཔ་ཅིག་ དར་ཁྱབ་འབྱུང་མ་ཚུགས།"
 
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "File descriptor to print IOR on"
 msgstr "ཨའི་ཨོ་ཨར་ དཔར་བསྐྲུན་འབད་སའི་ ཡིག་སྣོད་འགྲེལ་བཤདཔ།"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
-#: ../bonobo-activation/bonobo-activation-init.c:362
+#: ../bonobo-activation/bonobo-activation-init.c:357
+#: ../bonobo-activation/bonobo-activation-init.c:367
 msgid "IID to activate"
 msgstr "ནུས་ལྡན་བཟོ་དགོ་པའི་ཨའི་ཨའི་ཌི།"
 
-#: ../bonobo-activation/bonobo-activation-init.c:354
-#: ../bonobo-activation/bonobo-activation-init.c:364
+#: ../bonobo-activation/bonobo-activation-init.c:359
+#: ../bonobo-activation/bonobo-activation-init.c:369
 msgid "Prevent registering of server with OAF"
 msgstr "སར་བར་དེ་ ཨོ་ཨེ་ཨེཕ་དང་གཅིག་ཁར་ ཐོ་བཀོད་འབད་ནི་ལུ་ སྔོན་བཀག་འབད།"
 
-#: ../bonobo-activation/bonobo-activation-init.c:398
+#: ../bonobo-activation/bonobo-activation-init.c:403
 msgid "Bonobo Activation"
 msgstr "བཱོ་ནོ་བཱོ་ཤུགས་བཟོ།"
 
-#: ../bonobo-activation/bonobo-activation-init.c:399
+#: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
 msgstr "བཱོ་ནོ་བཱོ་ཤུགས་བཟོའི་གདམ་ཁ་སྟོན།"
 
-#: ../bonobo-activation/bonobo-activation-init.c:494
+#: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
 msgstr "བཱོ་ནོ་བཱོ་ ཤུགས་བཟོའི་གདམ་ཁ།"
 
@@ -210,11 +205,11 @@ msgstr "མིང༌།"
 msgid "Application unique name"
 msgstr "གློག་རིམ་གྱི་ མཐུན་མོང་མ་ཡིན་པའི་མིང༌།"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "པི་ཨོ་ཨེ།"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "སྲོལ་སྒྲིག་ ཀོར་བཱ་ པི་ཨོ་ཨེ།"
 
@@ -354,8 +349,7 @@ msgstr "འཛོལ་བ་ཞིབ་དཔྱད་ལུ་འཛོལ་
 msgid "General activation error with no description"
 msgstr "འགྲེལ་བཤད་མེད་པར་ ཡོངས་ཁྱབ་ཤུགས་བཟོ་ལུ་འཛོལ་བ།"
 
-#: ../bonobo/bonobo-generic-factory.h:79
-#: ../bonobo/bonobo-generic-factory.h:83
+#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "བཱོ་ནོ་བཱོ་ འགོ་འབྱེད་འབད་མ་ཚུགས།"
 
@@ -436,7 +430,7 @@ msgstr "བྲག་ཅའི་ཆ་ཤས་དཔེ་ཚད་ཀྱི་
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "དམིགས་བསལ་ '%s' ཅིག་བྱུང་ནུག"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -495,17 +489,24 @@ msgstr "རིམ་སྒྲིག་ཡིག་སྣོད་ནང་ ས�
 msgid "Display path to configuration file"
 msgstr "རིམ་སྒྲིག་ཡིག་སྣོད་ལུ་ འགྲུལ་ལམ་བཀྲམ་སྟོན་འབད།"
 
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "རྒྱུག་འགྲན་གནས་སྟངས་ ཤུགས་བཟོའི་ཡིག་སྣོད་ ’%s’ །"
+
 #~ msgid "Child received signal %u (%s)"
 #~ msgstr "ཆ་ལག་གིས་ བརྡ་རྟགས་ %u (%s) ཐོབ་ཅི།"
+
 #~ msgid "Unknown non-exit error (status is %u)"
 #~ msgstr "ཤེས་མ་ཚུགས་པའི་ ཕྱིར་འཐོན་མེན་པའི་འཛོལ་བ། (གནས་ཚད་དེ་ %u ཨིན)"
+
 #~ msgid "bonobo-activation failed to set process group of %s: %s\n"
 #~ msgstr "ལས་སྦྱོར་སྡེ་ཚན་ %s: %s གཞི་སྒྲིག་འབད་ནི་ལུ་ བཱོ་ནོ་བཱོ་-ཤུགས་ལྡན་བཟོ་མ་ཚུགས། \n"
+
 #~ msgid "Failed to execute %s: %d (%s)\n"
 #~ msgstr "%s: %d (%s) དེ་ ལག་ལེན་འཐབ་མ་ཚུགས། \n"
+
 #~ msgid "Too many alias levels for a locale, may indicate a loop"
 #~ msgstr ""
 #~ "ལོ་ཀེལ་ཅིག་གི་དོན་ལུ་ གནས་རིམ་གྱི་མིང་གཞན་ མང་དྲགསཔ་ལས་ འཕྲལ་བཀོལ་ཅིག་གི་ བརྡ་སྟོན་འོང༌།"
+
 #~ msgid "directory path"
 #~ msgstr "སྣོད་ཐོའི་འགྲུལ་ལམ།"
-

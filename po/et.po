@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-15 16:10+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-10-02 21:27+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -62,7 +62,7 @@ msgstr ""
 msgid "EXPRESSION"
 msgstr "AVALDIS"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -432,7 +432,7 @@ msgstr "Näidiskomponendi (kaja) instantsi pole võimalik luua"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr ""
 
 #: ../utils/bonobo-activation-sysconf.c:82

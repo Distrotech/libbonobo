@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-25 13:46+0300\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-25 13:49+0300\n"
 "Last-Translator: Raivis Dejus <orvils@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
@@ -48,8 +49,10 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "Reģistrēt kā lietotāja aktivizācijas serveri neskatoties [!] uz atkļūdošanu"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"Reģistrēt kā lietotāja aktivizācijas serveri neskatoties [!] uz atkļūdošanu"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -59,11 +62,13 @@ msgstr "Pārbaudāmā prasījuma izteiksme"
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Palaidiet '%s --help' lai iegūtu sarakstu ar pieejamajām komandrindas opcijām.\n"
+msgstr ""
+"Palaidiet '%s --help' lai iegūtu sarakstu ar pieejamajām komandrindas "
+"opcijām.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -141,7 +146,7 @@ msgstr "Nespēja nolasīt no pakārtotā procesa: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF no apakšprocesa\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Nevarēju izveidot jaunu procesu"
 
@@ -426,7 +431,7 @@ msgstr "Es nespēju izveidot instanci parauga echo komponentam"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Parādījies izņēmums '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -484,4 +489,3 @@ msgstr "Parādīt konfigurācijas faila direktorijas"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Parādīt ceļu uz konfigurācijas failu"
-

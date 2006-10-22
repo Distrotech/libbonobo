@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-23 12:08+0900\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-07-22 15:53+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -61,7 +61,7 @@ msgstr "評価する問い合わせの式"
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -97,18 +97,6 @@ msgid ""
 msgstr ""
 "Bonobo Activatoin 設定ファイルの読み込みに失敗しました (妥当なものか確認して"
 "下さい : %s)"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "サーバ '%s' を活性化する際に競合発生"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -149,16 +137,16 @@ msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
 "子プロセスがエラーメッセージを出力しませんでした (不明なエラーが発生しました)"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "子プロセスからの読み込みに失敗: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "子プロセスからの EOF\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:412
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "新規プロセスを生成できませんでした"
 
@@ -443,7 +431,7 @@ msgstr "サンプルの Echo コンポーネントのインスタンスを作成
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "例外発生 '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -501,3 +489,6 @@ msgstr "設定ファイル中のディレクトリの表示"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "設定ファイルのパスを表示"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "サーバ '%s' を活性化する際に競合発生"

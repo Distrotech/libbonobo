@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.or\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-30 15:22+0530\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-04-30 15:21+0530\n"
 "Last-Translator: Gora Mohanty <gora_mohanty@yahoo.co.in>\n"
 "Language-Team: Oriya <oriya-group@lists.sarovar.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "Couldn't find which child the server was listed in"
 msgstr "ସେବକ କେଉଁ ନିର୍ଭରକରେ ତାଲିକାଭୂତ ହୋଇଥିଲା, ତାହା ମିଳିଲା ନାହିଁ"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "ବୈଧ ସକ୍ରିୟଣ ପରିଚୟ ନୁହେଁ"
 
@@ -41,8 +41,8 @@ msgid "File descriptor to write IOR to"
 msgstr "କେଉଁ ଫାଇଲ ନିରୂପକକୁ ଆଇ.ଓ.ଆର. ଲେଖାଯିବ"
 
 #: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "ଏଫ.ଡି."
 
@@ -60,7 +60,7 @@ msgstr "ମୂଲ୍ଯାଙ୍କନ ପାଇଁ ପ୍ରଶ୍ନ ଅଭି
 msgid "EXPRESSION"
 msgstr "ଅଭିବ୍ଯକ୍ତି"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -82,7 +82,7 @@ msgstr "ବିଜ୍ଞପ୍ତି ସେବା"
 msgid "Notification service for activation"
 msgstr "ସକ୍ରିୟଣ ପାଇଁ ବିଜ୍ଞପ୍ତି ସେବା"
 
-#: ../activation-server/object-directory-activate.c:219
+#: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "ଦୂର ସଂସାଧନରେ ଶଲିବ ବସ୍ତୁର ସକ୍ରିୟଣ ବର୍ତ୍ତମାନ ଅସହାୟକ"
 
@@ -93,18 +93,6 @@ msgid ""
 "check it is valid in: %s"
 msgstr ""
 "ବନୋବୋ ସକ୍ରିୟଣ ବିନ୍ଯାସ ଫାଇଲଟି ଠିକ ଭାବେ ପଢ଼ିହେଲା ନାହିଁ. ଦୟା କରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଏହା ବୈଧ: %s"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "'%s' ସେବକ ସକ୍ରିୟଣରେ ଦୌଡ଼ ଅବସ୍ଥା"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -144,43 +132,43 @@ msgstr "%s ଡିରେକ୍ଟୋରି ଚେଷ୍ଟା କରାଯାଉ�
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "ନିର୍ଭରକ ସଂସାଧନ ତ୍ରୁଟି ସନ୍ଦେଶ ଦେଲାନାହିଁ, ଅଜଣା ତ୍ରୁଟି ଘଟିଲା"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "ନିର୍ଭରକ ସଂସାଧନଠାରୁ ପଢ଼ିହେଲା ନାହିଁ: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "ନିର୍ଭରକ ସଂସାଧନଠାରୁ ଆ.ଓ.ଏଫ.\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:424
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "ନୂଆ ସଂସାଧନ ସୃଷ୍ଟି କରିହେଲା ନାହିଁ"
 
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "File descriptor to print IOR on"
 msgstr "କେଉଁ ଫାଇଲ ନିରୂପକକୁ ଆଇ.ଓ.ଆର. ଲେଖାଯିବ"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
-#: ../bonobo-activation/bonobo-activation-init.c:362
+#: ../bonobo-activation/bonobo-activation-init.c:357
+#: ../bonobo-activation/bonobo-activation-init.c:367
 msgid "IID to activate"
 msgstr "ସକ୍ରିୟଣ ପାଇଁ ଆଇ.ଆଇ.ଡି."
 
-#: ../bonobo-activation/bonobo-activation-init.c:354
-#: ../bonobo-activation/bonobo-activation-init.c:364
+#: ../bonobo-activation/bonobo-activation-init.c:359
+#: ../bonobo-activation/bonobo-activation-init.c:369
 msgid "Prevent registering of server with OAF"
 msgstr "ଓ.ଏ.ଏଫ. ସହିତ ସେବକର ପଞ୍ଜୀକରଣକୁ ପ୍ରତିରୋଧ କରନ୍ତୁ"
 
-#: ../bonobo-activation/bonobo-activation-init.c:374
+#: ../bonobo-activation/bonobo-activation-init.c:403
 msgid "Bonobo Activation"
 msgstr "ବନୋବୋ ସକ୍ରିୟଣ"
 
-#: ../bonobo-activation/bonobo-activation-init.c:375
+#: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
 msgstr "ବନୋବୋ ସକ୍ରିୟଣ ପସନ୍ଦ ଦେଖାନ୍ତୁ"
 
-#: ../bonobo-activation/bonobo-activation-init.c:470
+#: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
 msgstr "ବନୋବୋ ସକ୍ରିୟଣ ପସନ୍ଦ"
 
@@ -213,11 +201,11 @@ msgstr "ନାମ"
 msgid "Application unique name"
 msgstr "ପ୍ରୟୋଗର ଅନନ୍ଯ ନାମ"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "ପି.ଓ.ଏ."
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "ଇଚ୍ଛାରୂପ କୋର୍ବା ପି.ଓ.ଏ."
 
@@ -438,7 +426,7 @@ msgstr "ଏହି ପ୍ରତିଧ୍ବନି ଯନ୍ତ୍ରାଂଶର 
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "ଗୋଟିଏ ବ୍ଯତିକ୍ରମ ଘଟିଲା '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -496,6 +484,9 @@ msgstr "ବିନ୍ଯାସ ଫାଇଲରେ ଡିରେକ୍ଟୋରି 
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "ବିନ୍ଯାସ ଫାଇଲକୁ ପଥ ଦେଖାନ୍ତୁ"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "'%s' ସେବକ ସକ୍ରିୟଣରେ ଦୌଡ଼ ଅବସ୍ଥା"
 
 #~ msgid "directory path"
 #~ msgstr "ଡିରେକ୍ଟୋରି ପଥ"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-08 15:20+0300\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-05-30 04:41+0300\n"
 "Last-Translator: Baris Cicek <baris@teamforce.name.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -65,7 +65,7 @@ msgstr "Değerlendirilecek sorgu ifadesi"
 msgid "EXPRESSION"
 msgstr "İFADE"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -101,18 +101,6 @@ msgid ""
 msgstr ""
 "Bonobo Aktivasyon yapılandırma dosyası düzgün okunmadı. Lütfen %s için "
 "geçerliliğini denetleyin."
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "Sınıflandırma konumu '%s' sunucusu açılıyor"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -152,16 +140,16 @@ msgstr "%s dizini deneniyor"
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Ast süreç bir hata iletisi vermedi, başarısızlık sebebi bilinmiyor"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Ast süreçten okuma başarısız: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "Alt süreçten EOF\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:412
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Yeni bir süreç ayrılamadı"
 
@@ -446,7 +434,7 @@ msgstr "Echo içeriğinin  bir örneği yaratılamıyor"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "'%s' dışlaması gerçekleşti"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -504,6 +492,9 @@ msgstr "Dizinleri yapılandırma dosyasında gösterir"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Dosya yolunu yapılandırma dosyasında gösterir"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "Sınıflandırma konumu '%s' sunucusu açılıyor"
 
 #~ msgid "directory path"
 #~ msgstr "dizin yolu"

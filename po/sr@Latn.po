@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-03 18:10+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-02-01 00:19+0100\n"
 "Last-Translator: Slobodan D. Sredojević <slobo@akrep.be>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
@@ -66,7 +66,7 @@ msgstr "Izraz za pretragu koji treba vrednovati"
 msgid "EXPRESSION"
 msgstr "IZRAZ"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -152,7 +152,7 @@ msgstr "Nisam uspeo da čitam iz podprocesa: %s\n"
 msgid "EOF from child process\n"
 msgstr "Kraj datoteke iz podprocesa\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Nisam mogao do počnem novi proces"
 
@@ -440,7 +440,7 @@ msgstr "Neuspeh stvaranja primerka probne echo komponente"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Dogodio se izuzetak „%s“"
 
 #: ../utils/bonobo-activation-sysconf.c:82

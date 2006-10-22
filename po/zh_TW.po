@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.15.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-01 23:29+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-07-31 16:06+0800\n"
 "Last-Translator: Abel Cheung <abel@oaka.org>\n"
 "Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
@@ -61,7 +61,7 @@ msgstr "需要進行查詢的表示式"
 msgid "EXPRESSION"
 msgstr "表示式"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -93,18 +93,6 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr "無法正確讀取 Bonobo Activation 組態檔。請查核該檔案是否正確：%s"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "啟動伺服器‘%s’時出現衝突狀態"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -144,16 +132,16 @@ msgstr "嘗試開啟 %s 目錄"
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "子進程沒有傳回錯誤訊息，發生了不明的錯誤"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "讀取子進程失敗：%s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "子進程的 EOF\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:412
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "無法衍生新的進程"
 
@@ -440,7 +428,7 @@ msgstr "無法產生 echo 範例元件的進程"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "發生例外處理情況：‘%s’"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -498,6 +486,9 @@ msgstr "顯示組態檔中的目錄"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "顯示組態檔的路徑"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "啟動伺服器‘%s’時出現衝突狀態"
 
 #~ msgid "directory path"
 #~ msgstr "目錄路徑"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.ml\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-19 09:30+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-20 09:35+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
 "Language-Team: Malayalam\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
@@ -49,7 +50,8 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
 msgstr "ഡീബഗ്ഗില്‍ പൂട്ടാതെ[!] ഉപയോക്താവിന്‍റെ പ്രവര്‍ത്തന സര്‍വറായി രജിസ്ടര്‍ ചെയ്യുക"
 
 #: ../activation-server/activation-server-main.c:177
@@ -60,7 +62,7 @@ msgstr "ഉത്തരം കണ്ടുപിടിക്കുന്നത�
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -92,8 +94,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"Bonobo പ്രവര്‍ത്തന സജ്ജീകരണ ഫയല്‍ വിജയകരമായി വായിച്ചില്ല. ദയവായി, ഈ ഫയല്‍"
-"ഇതില്‍ ശരിയായ രീതിയില്‍ ഉണ്ടോ എന്ന് പരിശോധിക്കുക: %s"
+"Bonobo പ്രവര്‍ത്തന സജ്ജീകരണ ഫയല്‍ വിജയകരമായി വായിച്ചില്ല. ദയവായി, ഈ ഫയല്‍ഇതില്‍ ശരിയായ "
+"രീതിയില്‍ ഉണ്ടോ എന്ന് പരിശോധിക്കുക: %s"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -131,7 +133,8 @@ msgstr "%s ഡയറക്ടറി ശ്യമിക്കുന്നു"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "ചൈള്‍ഡ് പ്രക്രിയ പിശക് സംബന്ധിച്ച് സന്ദേശങ്ങള്‍ നല്‍കിയില്ല. അപരിചിതമായ പിശക് സംഭവിച്ചിരിക്കുന്നു"
+msgstr ""
+"ചൈള്‍ഡ് പ്രക്രിയ പിശക് സംബന്ധിച്ച് സന്ദേശങ്ങള്‍ നല്‍കിയില്ല. അപരിചിതമായ പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
@@ -142,7 +145,7 @@ msgstr "ചൈള്‍ഡ് പ്രക്രിയയില്‍ നിന�
 msgid "EOF from child process\n"
 msgstr "ചൈള്‍ഡ് പ്രക്രിയയില്‍ നിന്നുളള EOF: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "ഒരു പുതിയ പ്രക്രിയ ഉണ്ടാക്കുവാന്‍ സാധ്യമല്ല"
 
@@ -427,7 +430,7 @@ msgstr "സാംപിള്‍ Echo ഘടകത്തിന്‍റെ ഉ�
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "'%s' സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -485,4 +488,3 @@ msgstr "കോണ്‍ഫിഗറേഷന്‍ ഫയലിലുളള ഡ�
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "കോണ്‍ഫിഗറേഷന്‍ ഫയലിലേക്കുളള വഴഇ കാണിക്കുക"
-

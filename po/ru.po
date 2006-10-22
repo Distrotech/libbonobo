@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-24 08:38+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-24 20:27+0300\n"
 "Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
 "Language-Team:  <gnome-cyr@gnome.org>\n"
@@ -17,7 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
@@ -37,7 +38,8 @@ msgstr "КАТАЛОГ"
 
 #: ../activation-server/activation-server-main.c:165
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "Обрабатывать как ActivationContext (по умолчанию только как ObjectDirectory)"
+msgstr ""
+"Обрабатывать как ActivationContext (по умолчанию только как ObjectDirectory)"
 
 #: ../activation-server/activation-server-main.c:169
 msgid "File descriptor to write IOR to"
@@ -50,8 +52,11 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid "Register as the users' activation server without locking [!] for debugging"
-msgstr "Зарегистрировать как сервер активации пользователей без блокировки [!] для отладки"
+msgid ""
+"Register as the users' activation server without locking [!] for debugging"
+msgstr ""
+"Зарегистрировать как сервер активации пользователей без блокировки [!] для "
+"отладки"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -61,11 +66,13 @@ msgstr "Выражение-запрос для разбора"
 msgid "EXPRESSION"
 msgstr "ВЫРАЖЕНИЕ"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Выполните '%s --help', чтобы просмотреть полный список доступных параметров командной строки.\n"
+msgstr ""
+"Выполните '%s --help', чтобы просмотреть полный список доступных параметров "
+"командной строки.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -125,7 +132,8 @@ msgstr "Свойству \"%s\" не задано значение"
 #: ../activation-server/object-directory-load.c:580
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr "Не удалось разобрать неверно сформированный документ формата XML \"%s\""
+msgstr ""
+"Не удалось разобрать неверно сформированный документ формата XML \"%s\""
 
 #: ../activation-server/object-directory-load.c:627
 #, c-format
@@ -134,7 +142,8 @@ msgstr "Идёт попытка открыть каталог \"%s\""
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Процесс-потомок не выдал сообщения об ошибке, произошел неопознанный сбой"
+msgstr ""
+"Процесс-потомок не выдал сообщения об ошибке, произошел неопознанный сбой"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
@@ -145,7 +154,7 @@ msgstr "Произошёл сбой при чтении из процесса-п
 msgid "EOF from child process\n"
 msgstr "EOF от дочернего процесса\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Не удается породить новый процесс"
 
@@ -430,7 +439,7 @@ msgstr "Не удалось создать экземпляр образца к�
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Возникло исключение \"%s\""
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -488,4 +497,3 @@ msgstr "Показать каталоги из файла конфигураци
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Показать путь к файлу конфигурации"
-

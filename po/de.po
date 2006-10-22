@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-11 11:51+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-11 12:08+0200\n"
 "Last-Translator: Hendrik Richter <hendrikr@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -63,7 +63,7 @@ msgstr "Ausdruck der untersucht werden soll"
 msgid "EXPRESSION"
 msgstr "AUSDRUCK"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -154,7 +154,7 @@ msgstr "Vom Kindprozess konnte nicht gelesen werden: %s\n"
 msgid "EOF from child process\n"
 msgstr "Dateiende vom Kindprozess erhalten\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:414
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Es konnte kein neuer Prozess abgespalten werden"
 
@@ -447,7 +447,7 @@ msgstr "Es konnte keine Instanz der Beispiel-Echo-Komponente erzeugt werden"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Ein Ausnahmefehler ist aufgetreten »%s«"
 
 #: ../utils/bonobo-activation-sysconf.c:82

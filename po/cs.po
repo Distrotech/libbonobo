@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-21 15:12+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-05-21 16:33+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Couldn't find which child the server was listed in"
 msgstr "Nebylo možné zjistit, u kterého potomka byl server zapsán"
 
-#: ../activation-server/activation-context-corba.c:812
+#: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "Neplatné ID aktivace"
 
@@ -42,15 +42,16 @@ msgid "File descriptor to write IOR to"
 msgstr "Deskriptor souboru, do kterého zapsat IOR"
 
 #: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
 msgid ""
 "Register as the users' activation server without locking [!] for debugging"
-msgstr "Zaregistrovat se jako uživatelův aktivační server bez zamykání [!] pro ladění"
+msgstr ""
+"Zaregistrovat se jako uživatelův aktivační server bez zamykání [!] pro ladění"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -60,11 +61,13 @@ msgstr "Výraz k vyhodnocení"
 msgid "EXPRESSION"
 msgstr "VÝRAZ"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Pro zobrazení úplného seznamu dostupných přepínačů na příkazovém řádku spusťte '%s --help'.\n"
+msgstr ""
+"Pro zobrazení úplného seznamu dostupných přepínačů na příkazovém řádku "
+"spusťte '%s --help'.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -82,7 +85,7 @@ msgstr "Služba upozornění"
 msgid "Notification service for activation"
 msgstr "Služba upozornění na aktivaci"
 
-#: ../activation-server/object-directory-activate.c:219
+#: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr "Zatím není možné aktivovat objekty shlib ve vzdálených procesech"
 
@@ -94,18 +97,6 @@ msgid ""
 msgstr ""
 "Soubor s nastavením Bonobo Activation nebyl úspěšně načten. Ověřte prosím,"
 "zda je platný v: %s"
-
-#.
-#. * If this exception blows ( which it will only do with a multi-object )
-#. * factory, you need to ensure you register the object you were activated
-#. * for [use const char *bonobo_activation_iid_get (void); ] is registered
-#. * with bonobo_activation_active_server_register - _after_ any other
-#. * servers are registered.
-#.
-#: ../activation-server/object-directory-corba.c:1331
-#, c-format
-msgid "Race condition activating server '%s'"
-msgstr "Problém se synchronizací aktivace serveru '%s'"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
@@ -145,43 +136,43 @@ msgstr "Zkouším adresář %s"
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr "Potomek procesu neposkytl chybové hlášení, došlo k neznámé chybě"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:235
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
 msgstr "Nemohu číst od potomka procesu: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:245
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
 msgstr "EOF od potomka procesu\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:424
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "Nemohu vytvořit nový proces"
 
-#: ../bonobo-activation/bonobo-activation-init.c:350
-#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:355
+#: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "File descriptor to print IOR on"
 msgstr "Deskriptor souboru, do kterého vypsat IOR"
 
-#: ../bonobo-activation/bonobo-activation-init.c:352
-#: ../bonobo-activation/bonobo-activation-init.c:362
+#: ../bonobo-activation/bonobo-activation-init.c:357
+#: ../bonobo-activation/bonobo-activation-init.c:367
 msgid "IID to activate"
 msgstr "IID k aktivaci"
 
-#: ../bonobo-activation/bonobo-activation-init.c:354
-#: ../bonobo-activation/bonobo-activation-init.c:364
+#: ../bonobo-activation/bonobo-activation-init.c:359
+#: ../bonobo-activation/bonobo-activation-init.c:369
 msgid "Prevent registering of server with OAF"
 msgstr "Zabránit registraci serveru v OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:398
+#: ../bonobo-activation/bonobo-activation-init.c:403
 msgid "Bonobo Activation"
 msgstr "Aktivace Bonobo"
 
-#: ../bonobo-activation/bonobo-activation-init.c:399
+#: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
 msgstr "Zobrazit možnosti aktivace Bonobo"
 
-#: ../bonobo-activation/bonobo-activation-init.c:494
+#: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
 msgstr "Možnosti aktivace Bonobo"
 
@@ -214,11 +205,11 @@ msgstr "Název"
 msgid "Application unique name"
 msgstr "Jedinečný název aplikace"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:922
+#: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
 msgstr "Vlastní POA CORBA"
 
@@ -439,7 +430,7 @@ msgstr "Nemohu vytvořit instanci vzorové komponenty Echo"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Vyskytla se výjimka '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
@@ -497,6 +488,9 @@ msgstr "Zobrazit adresáře, které jsou v souboru s nastavením"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Zobrazit cestu k souboru s nastavením"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "Problém se synchronizací aktivace serveru '%s'"
 
 #~ msgid "directory path"
 #~ msgstr "cesta k adresáři"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.11.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-24 13:56+0200\n"
+"POT-Creation-Date: 2006-10-22 16:55+0200\n"
 "PO-Revision-Date: 2006-08-25 01:19+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -61,7 +61,7 @@ msgstr "Expressió de petició a avaluar"
 msgid "EXPRESSION"
 msgstr "EXPRESSIÓ"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -147,7 +147,7 @@ msgstr "No s'ha pogut llegir del procés fill: %s\n"
 msgid "EOF from child process\n"
 msgstr "Fi de fitxer del procés fill\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:430
+#: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
 msgstr "No s'ha pogut iniciar un procés nou"
 
@@ -432,7 +432,7 @@ msgstr "No s'ha pogut crear una instància de l'exemple del component d'eco"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr "Ha tingut lloc una excepció «%s»"
 
 #: ../utils/bonobo-activation-sysconf.c:82
