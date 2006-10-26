@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-10-02 21:27+0300\n"
+"POT-Creation-Date: 2006-09-15 16:10+0200\n"
+"PO-Revision-Date: 2006-10-25 08:17+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -38,6 +38,8 @@ msgstr "KATALOOG"
 #: ../activation-server/activation-server-main.c:165
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
+"Serveeritakse kui ActivationContext'i (vaikimisi serveeritakse "
+"ObjectDirectory't)"
 
 #: ../activation-server/activation-server-main.c:169
 msgid "File descriptor to write IOR to"
@@ -62,7 +64,7 @@ msgstr ""
 msgid "EXPRESSION"
 msgstr "AVALDIS"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:424
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -88,7 +90,7 @@ msgstr "Teavitusteenus aktiveerimise jaoks"
 #: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
-"Shlib objektide aktiveerimist kaugprotsessides pole veel võimalik teostada"
+"Shlib objektide aktiveerimist kaugprotsessides pole veel võimalik käsitleda"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
@@ -144,7 +146,7 @@ msgstr "Tõrge lapsprotsessilt andmete lugemisel: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
-msgstr "lapsprotsessilt tuli faililõputunnus\n"
+msgstr "Lapsprotsessilt tuli faililõputunnus\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
@@ -388,11 +390,11 @@ msgstr "Standard Moniker factory"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "üldine Oaf'i aktiveerimismoniker"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "üldine Oaf'i päringumoniker"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
@@ -432,7 +434,7 @@ msgstr "Näidiskomponendi (kaja) instantsi pole võimalik luua"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occurred '%s'"
+msgid "An exception occured '%s'"
 msgstr ""
 
 #: ../utils/bonobo-activation-sysconf.c:82
