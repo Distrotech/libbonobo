@@ -43,6 +43,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <locale.h>
 #include <string.h>
@@ -169,7 +170,10 @@ static const GOptionEntry options[] = {
 	 N_("File descriptor to write IOR to"), N_("FD")},
 
 	{"register-server", '\0', 0, G_OPTION_ARG_NONE, &server_reg,
-	 N_("Register as the users' activation server without locking [!] for debugging"),
+	 N_("Register as the user's activation server without locking."
+            "  Warning: this option can have dangerous side effects"
+            " on the stability of the user's running session,"
+            " and should only be used for debugging purposes"),
 	 NULL},
 
 #ifdef BONOBO_ACTIVATION_DEBUG
