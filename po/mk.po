@@ -1,4 +1,4 @@
-# translation of mk.po to Macedonian
+# translation of libbonobo.HEAD.mk.po to Macedonian
 # translation of libbonobo.HEAD.mk.po to
 # translation of libbonobo.HEAD.mk.po to
 # This file is distributed under the same license as the PACKAGE package.
@@ -9,18 +9,19 @@
 # Vladislav Bidikov <bidikovi@mail.com.mk>, 2003.
 # Arangel Angov <ufo@linux.net.mk>, 2004, 2006.
 # Арангел Ангов <ufo@linux.net.mk>, 2005.
+# Jovan Naumovski <jovan@lugola.net>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: mk\n"
+"Project-Id-Version: libbonobo.HEAD.mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-08-02 08:45+0200\n"
-"Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
+"POT-Creation-Date: 2006-11-10 16:46+0100\n"
+"PO-Revision-Date: 2006-11-10 18:41+0100\n"
+"Last-Translator: Jovan Naumovski <jovan@lugola.net>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
@@ -30,46 +31,49 @@ msgstr "Не можам да пронајдам во кој подпроцес �
 msgid "Not a valid Activation ID"
 msgstr "Невалидено ID за активирање"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Директориум за вчитување на .server датотеките од"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "Директориум"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Опслужи го како ActivationContext (преддефинирано е само како "
 "ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Опишувачот на датотека за пишување на IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
 msgstr ""
-"Регистрирај како серверот за активирање на корисници, без заклучување на [!] "
-"за дебагирање"
+"Регистрирај се како корисничкиот сервер за активација без заклучување.  Внимание, оваа "
+"опција може да има опасни последици на стабилноста на корисничката сесија која "
+"се извршува и треба да се користи само за дебагирање."
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Прашален израз за проценка"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "ИЗРАЗ"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -497,5 +501,3 @@ msgstr "Прикажи ги директориумите во конфигура
 msgid "Display path to configuration file"
 msgstr "Прикажи ја патеката до конфигурациската датотека"
 
-#~ msgid "Race condition activating server '%s'"
-#~ msgstr "Исклучок при активирање на '%s"
