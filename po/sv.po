@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-08-15 20:37+0100\n"
+"POT-Creation-Date: 2006-11-11 16:09+0100\n"
+"PO-Revision-Date: 2006-11-11 20:40+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -26,52 +26,47 @@ msgstr "Kunde inte hitta vilket barn som servern var angiven i"
 msgid "Not a valid Activation ID"
 msgstr "Inte ett giltigt aktiverings-ID"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Katalog som .server-filer ska läsas från"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "KATALOG"
 
 # SUN CHANGED MESSAGE
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr ""
-"Fungera som en ActivationContext (standard är endast som ett ObjectDirectory)"
+msgstr "Fungera som en ActivationContext (standard är endast som ett ObjectDirectory)"
 
 # SUN CHANGED MESSAGE
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Filidentifierare som IOR ska skrivas till"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FI"
 
-#: ../activation-server/activation-server-main.c:172
-msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr ""
-"Registrera som användarens aktiveringsserver utan att låsa [!] för felsökning"
+#: ../activation-server/activation-server-main.c:173
+msgid "Register as the user's activation server without locking.  Warning: this option can have dangerous side effects on the stability of the user's running session, and should only be used for debugging purposes"
+msgstr "Registrera som användarens aktiveringsserver utan låsning.  Varning: det här alternativet kan ha farligt sidoeffekter på stabiliteten för användarens körande session, och bör endast användas för felsökningssyften"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Frågeuttryck som ska evalueras"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "UTTRYCK"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"Kör \"%s --help\" för att se en fullständig lista på tillgängliga "
-"kommandoradsflaggor.\n"
+msgstr "Kör \"%s --help\" för att se en fullständig lista på tillgängliga kommandoradsflaggor.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -95,12 +90,8 @@ msgstr "Vi hanterar inte aktivering av shlib-objekt i en fjärrprocess än"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
-msgid ""
-"The Bonobo Activation configuration file was not read successfully. Please, "
-"check it is valid in: %s"
-msgstr ""
-"Läsning av konfigurationsfilen för Bonobo Activation misslyckades. "
-"Kontrollera om den är giltig i: %s"
+msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
+msgstr "Läsning av konfigurationsfilen för Bonobo Activation misslyckades. Kontrollera om den är giltig i: %s"
 
 # SUN CHANGED MESSAGE
 #: ../activation-server/object-directory-load.c:101
@@ -361,7 +352,8 @@ msgstr "Fel vid kontroll av fel; inget undantag"
 msgid "General activation error with no description"
 msgstr "Allmänt aktiveringsfel utan beskrivning"
 
-#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
+#: ../bonobo/bonobo-generic-factory.h:79
+#: ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
 msgstr "Kunde inte initiera Bonobo"
 
@@ -503,81 +495,62 @@ msgstr "Visa kataloger i konfigurationsfilen"
 msgid "Display path to configuration file"
 msgstr "Visa sökväg till konfigurationsfilen"
 
+#~ msgid ""
+#~ "Register as the users' activation server without locking [!] for debugging"
+#~ msgstr ""
+#~ "Registrera som användarens aktiveringsserver utan att låsa [!] för "
+#~ "felsökning"
 #~ msgid "Race condition activating server '%s'"
 #~ msgstr "Kapplöpning vid aktivering av servern \"%s\""
-
 #~ msgid "directory path"
 #~ msgstr "katalogsökväg"
-
 #~ msgid "Child received signal %u (%s)"
 #~ msgstr "Barnet tog emot signalen %u (%s)"
-
 #~ msgid "Unknown non-exit error (status is %u)"
 #~ msgstr "Okänt icke avslutandefel (status är %u)"
-
 #~ msgid "bonobo-activation failed to set process group of %s: %s\n"
 #~ msgstr ""
 #~ "bonobo-activation misslyckades med att ställa in processgrupp för %s: %s\n"
-
 #~ msgid "Failed to execute %s: %d (%s)\n"
 #~ msgstr "Misslyckades med att köra %s: %d (%s)\n"
-
 #~ msgid "Too many alias levels for a locale, may indicate a loop"
 #~ msgstr "För många aliasnivåer för en lokal, kan betyda en slinga"
-
 #~ msgid "No server corresponding to your query"
 #~ msgstr "Ingen server motsvarar din förfrågan"
-
 #~ msgid "Query failed: "
 #~ msgstr "Fråga misslyckades: "
-
 #~ msgid "Activation failed: "
 #~ msgstr "Aktivering misslyckades: "
-
 #~ msgid "Could not parse AID"
 #~ msgstr "Kunde inte tolka AID"
-
 #~ msgid "Could not parse context: "
 #~ msgstr "Kunde inte tolka sammanhanget: "
-
 #~ msgid "Could not activate server: "
 #~ msgstr "Kunde inte aktivera servern: "
-
 #~ msgid "Domain of ObjectDirectory"
 #~ msgstr "ObjectDirectory-domän"
-
 #~ msgid "DOMAIN"
 #~ msgstr "DOMÄN"
-
 #~ msgid "Object directory to use when registering servers"
 #~ msgstr "Objektkatalog som ska användas då servrar registreras"
-
 #~ msgid "OAF options"
 #~ msgstr "OAF-alternativ"
-
 #~ msgid "Exec failed: %d (%s)\n"
 #~ msgstr "Körning misslyckades: %d (%s)\n"
-
 #~ msgid "Failed to resolve, or extend '%s'"
 #~ msgstr "Misslyckades med att lösa upp eller utöka \"%s\""
-
 #~ msgid "The User canceled the save"
 #~ msgstr "Användaren avbröt sparandet"
-
 #~ msgid "No filename"
 #~ msgstr "Inget filnamn"
-
 #~ msgid "unknown mime type for '%s'"
 #~ msgstr "okänd mime-typ för \"%s\""
-
 #~ msgid "no handlers for mime type '%s'"
 #~ msgstr "inga hanterare för mime-typen \"%s\""
-
 #~ msgid "file MonikerExtender"
 #~ msgstr "filmonikerutökare"
-
 #~ msgid "generic file moniker"
 #~ msgstr "allmän filmoniker"
-
 #~ msgid "Can not bonobo_init"
 #~ msgstr "Kan inte utföra bonobo_init"
+
