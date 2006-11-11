@@ -1,69 +1,77 @@
-# translation of libbonobo.HEAD.ar.po to 
+# translation of libbonobo.HEAD.po to Arabic
+# translation of libbonobo.HEAD.ar.po to
 # Arabic translation of 1.
 # Copyright (C) 2003 THE 1'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the 1 package.
+#
+#
 # Mohammed Gamal <f2c2001@yahoo.com>, 2002.
 # Ammer Alsabbagh <whollyboss@yahoo.com>, 2002.
 # Isam Bayazidi <bayazidi@arabeyes.org>, 2003.
 #  <lumina@silverpen.de>, 2004.
-# 
-# 
+# Khaled Hosny <khaledhosny@eglug.org>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo.HEAD.ar\n"
+"Project-Id-Version: libbonobo.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2004-01-31 17:50+0100\n"
-"Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
-"Language-Team: Arabic <doc@arabeyes.org>\n"
+"POT-Creation-Date: 2006-11-11 12:42+0000\n"
+"PO-Revision-Date: 2006-11-10 06:29+0200\n"
+"Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
+"Language-Team: Arabic <support@eglug.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : "
+"3\n"
+"\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
-msgstr "لم يمكن التعرف في أي الابناء ادرج النادل"
+msgstr "لم يمكن التعرف في أي الابناء ادرج الخادم"
 
 #: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
 msgstr "هوية تنشيط غير سليمة"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "الدليل الذي تقرء منه ملفات .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "الدليل"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "يخدم كـ ActivationContext (الإفتراض ObjectDirectory فقط)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "واصف الملف الذي سيكتب إليه الـ IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
 msgstr ""
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "تعبير الاستعلام لالتقييم"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "التعبير"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -148,7 +156,7 @@ msgstr "فشلت القراءة من العملية الإبنة: %s\n"
 #: ../bonobo-activation/bonobo-activation-fork-server.c:435
 #, fuzzy
 msgid "Couldn't spawn a new process"
-msgstr "لم يمكن تفريق عملية جديدة"
+msgstr "لم أستطع إنشاء pixbuf جديد"
 
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
@@ -163,7 +171,7 @@ msgstr "IID لالتنشيط"
 #: ../bonobo-activation/bonobo-activation-init.c:359
 #: ../bonobo-activation/bonobo-activation-init.c:369
 msgid "Prevent registering of server with OAF"
-msgstr "منع تسجيل النادل مع OAF"
+msgstr "منع تسجيل الخادم مع OAF"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
 #, fuzzy
@@ -173,7 +181,7 @@ msgstr "خيارات تنشيط بونوبو"
 #: ../bonobo-activation/bonobo-activation-init.c:404
 #, fuzzy
 msgid "Show Bonobo Activation options"
-msgstr "خيارات تنشيط بونوبو"
+msgstr "إظهار خيارات القرص المتقدمة"
 
 #: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
@@ -409,11 +417,11 @@ msgstr "تيار بيانات MonikerExtender"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "مصنع نادل صدى بونوبو"
+msgstr "مصنع خادم صدى بونوبو"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "برنامج مثالي لنادل صدى بونوبو"
+msgstr "برنامج مثالي لخادم صدى بونوبو"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
@@ -432,7 +440,7 @@ msgid "Could not create an instance of the sample echo component"
 msgstr "لم يمكن إنشاء حالة من نموذج مكون الصدى"
 
 #: ../samples/echo/echo-client.c:45
-#, c-format
+#, fuzzy, c-format
 msgid "An exception occurred '%s'"
 msgstr "حصل استثناء '%s'"
 
@@ -477,8 +485,9 @@ msgstr "الدليل للازالة من ملف الإعدادات"
 
 #: ../utils/bonobo-activation-sysconf.c:266
 #: ../utils/bonobo-activation-sysconf.c:268
+#, fuzzy
 msgid "PATH"
-msgstr ""
+msgstr "المسار"
 
 #: ../utils/bonobo-activation-sysconf.c:268
 msgid "Directory to add to configuration file"
@@ -491,51 +500,3 @@ msgstr "عرض الدلائل في ملف الإعدادات"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "عرض المسار الى ملف الإعدادات"
-
-#~ msgid "Race condition activating server '%s'"
-#~ msgstr "حالة التسابق عند تغعيل النادل '%s'"
-
-#~ msgid "Child received signal %u (%s)"
-#~ msgstr "تلقى الإبن الإشارة %u (%s)"
-
-#~ msgid "Unknown non-exit error (status is %u)"
-#~ msgstr "خطأ غير معلوم و غير متعلق بالخروج من البرنامج (الحالة هي·%u)"
-
-#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
-#~ msgstr "فشل bonobo-activation في تعيين مجموعة العمليات لـ%s: %s\n"
-
-#~ msgid "Failed to execute %s: %d (%s)\n"
-#~ msgstr "فشل تنفيذ %s: %d (%s)\n"
-
-#~ msgid "Too many alias levels for a locale, may indicate a loop"
-#~ msgstr "مستويات اختصار عديدة جدا للاقليم، ربما يشير ذلك لحلقة"
-
-#~ msgid "directory path"
-#~ msgstr "مسار الدليل"
-
-#~ msgid "No server corresponding to your query"
-#~ msgstr "لا خادم مقابل لاستعلامك"
-
-#~ msgid "Query failed: "
-#~ msgstr "فشل الاستعلام:"
-
-#~ msgid "Activation failed: "
-#~ msgstr "فشل التنشيط: "
-
-#~ msgid "Could not parse AID"
-#~ msgstr "لم يمكن تحليل AID"
-
-#~ msgid "Could not parse context: "
-#~ msgstr "لم يمكن تحليل السياق: "
-
-#~ msgid "Could not activate server: "
-#~ msgstr "لم يمكن تنشيط الخادم: "
-
-#~ msgid "Domain of ObjectDirectory"
-#~ msgstr "نطاق دليل الكائنات"
-
-#~ msgid "DOMAIN"
-#~ msgstr "النطاق"
-
-#~ msgid "Object directory to use when registering servers"
-#~ msgstr "دليل الكائنات الذي سيستخدم عند تسجيل أجهزة الخادم"
