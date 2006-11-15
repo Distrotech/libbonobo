@@ -1,3 +1,10 @@
+2006-11-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo-activation/bonobo-activation-init.h:
+	Put the popt include and struct inside #ifndef BONOBO_DISABLE_DEPRECATED
+	guards. We should still conditionalize the checks for popt in configure.in
+	Bug #357145.
+
 2006-11-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* activation-server/activation-server-main.c:
