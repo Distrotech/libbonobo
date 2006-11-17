@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo-2.16\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-05-06 01:59+0200\n"
+"POT-Creation-Date: 2006-11-17 10:54+0100\n"
+"PO-Revision-Date: 2006-11-17 10:55+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,46 +28,46 @@ msgstr "No se ha podido determinar qué proceso hijo contiene al servidor"
 msgid "Not a valid Activation ID"
 msgstr "No es un ID de Activación válido"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Directorio desde el cual leer los archivos .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "DIRECTORIO"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Servir también como un ActivationContext (por omisión sólo como un "
 "ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Descriptor de archivo en el que escribir el IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr ""
-"Registrarse como el servidor de activación del usuario sin bloquear [!] para "
-"depurar"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
+msgstr "Registrarse como el servidor de activación del usuario sin bloqueo. Advertencia: esta opción puede tener efectos laterales peligrosos para la estabilidad de la sesión en ejecución del usuario, y sólo se debería usar para propósitos de depuración."
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Expresión de consulta a evaluar"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "EXPRESIÓN"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -496,6 +496,12 @@ msgstr "Mostrar los directorios del archivo de configuración"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Mostrar la ruta del archivo de configuración"
+
+#~ msgid ""
+#~ "Register as the users' activation server without locking [!] for debugging"
+#~ msgstr ""
+#~ "Registrarse como el servidor de activación del usuario sin bloquear [!] "
+#~ "para depurar"
 
 #~ msgid "Race condition activating server '%s'"
 #~ msgstr "Condición de carrera activando el servidor «%s»"
