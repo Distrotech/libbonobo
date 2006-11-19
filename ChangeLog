@@ -1,3 +1,8 @@
+2006-11-19  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Up requirement on ORBit2 to 2.11.2. Noticed by
+	Mark Johnson. Closes bug #376211.
+
 2006-11-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo-activation/bonobo-activation-init.h:
