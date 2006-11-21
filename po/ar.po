@@ -1,443 +1,446 @@
-# Arabic translations for gnome package.
-# Copyright (C) 2006 THE gnome'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the gnome package.
-# Automatically generated, 2006.
+# translation of libbonobo.HEAD.ar.po to 
+# Arabic translation of 1.
+# Copyright (C) 2003 THE 1'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the 1 package.
+# Mohammed Gamal <f2c2001@yahoo.com>, 2002.
+# Ammer Alsabbagh <whollyboss@yahoo.com>, 2002.
+# Isam Bayazidi <bayazidi@arabeyes.org>, 2003.
+#  <lumina@silverpen.de>, 2004.
+# Djihed Afifi <djihed@gmail.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome 2-16\n"
+"Project-Id-Version: libbonobo.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-21 10:18+0000\n"
-"PO-Revision-Date: 2006-11-21 10:18+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2006-11-21 11:13+0100\n"
+"PO-Revision-Date: 2006-11-21 10:34+0100\n"
+"Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
-msgstr ""
+msgstr "لم يمكن التعرف في أي الابناء ادرج النادل"
 
 #: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
-msgstr ""
+msgstr "هوية تنشيط غير سليمة"
 
 #: ../activation-server/activation-server-main.c:162
 msgid "Directory to read .server files from"
-msgstr ""
+msgstr "الدليل الذي تقرء منه ملفات .server"
 
 #: ../activation-server/activation-server-main.c:162
 msgid "DIRECTORY"
-msgstr ""
+msgstr "الدليل"
 
 #: ../activation-server/activation-server-main.c:165
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr ""
+msgstr "يخدم كـ ActivationContext (الإفتراض ObjectDirectory فقط)"
 
 #: ../activation-server/activation-server-main.c:169
 msgid "File descriptor to write IOR to"
-msgstr ""
+msgstr "واصف الملف الذي سيكتب إليه الـ IOR"
 
 #: ../activation-server/activation-server-main.c:169
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
-msgstr ""
+msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr ""
+msgid "Register as the users' activation server without locking [!] for debugging"
+msgstr "سجّل كخادم تنشيط المستخدمين بدون القفل [!] للتنقيح."
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
-msgstr ""
+msgstr "تعبير الاستعلام لالتقييم"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "EXPRESSION"
-msgstr ""
+msgstr "التعبير"
 
 #: ../activation-server/activation-server-main.c:426
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
+msgstr "استعمل '%s --help' لإظهار الخيارات المتوفرة.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
-msgstr ""
+msgstr "خدمة CORBA CosNaming."
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
 msgid "Name service"
-msgstr ""
+msgstr "خدمة الأسماء"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
 msgid "Notification service"
-msgstr ""
+msgstr "خدمة التلبيغ"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr ""
+msgstr "خدمة التبليغ للتنشيط"
 
 #: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr ""
+msgstr "إننا لا نعالج حاليا تنشيط أجسام shlib في عمليات عن بعد"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
-msgid ""
-"The Bonobo Activation configuration file was not read successfully. Please, "
-"check it is valid in: %s"
-msgstr ""
+msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
+msgstr "لم يقرأ ملف إعداد Bonobo Activation بنجاح. الرجاء, التأكد من صحته في: %s"
 
 #: ../activation-server/object-directory-load.c:101
 msgid "a NULL iid is not valid"
-msgstr ""
+msgstr "NULL iid غير سليم"
 
 #: ../activation-server/object-directory-load.c:105
 #, c-format
 msgid "iid %s has a NULL type"
-msgstr ""
+msgstr "iid %s له نوع NULL"
 
 #: ../activation-server/object-directory-load.c:109
 #, c-format
 msgid "iid %s has a NULL location"
-msgstr ""
+msgstr "iid %s له موقع NULL"
 
 #: ../activation-server/object-directory-load.c:118
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr ""
+msgstr "رمز غير سليم '%c' في iid '%s'"
 
 #: ../activation-server/object-directory-load.c:348
 #, c-format
 msgid "Property '%s' has no value"
-msgstr ""
+msgstr "الخاصية '%s' ليس لها قيمة"
 
 #: ../activation-server/object-directory-load.c:580
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr ""
+msgstr "لم يمكن إعراب مستند XML %s المشوه"
 
 #: ../activation-server/object-directory-load.c:627
 #, c-format
 msgid "Trying dir %s"
-msgstr ""
+msgstr "سأحاول الدليل %s"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr ""
+msgstr "لم تعط العملية الإبنة رسالة خطأ، حصل فشل غير معروف."
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr ""
+msgstr "فشلت القراءة من العملية الإبنة: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
-msgstr ""
+msgstr "فشلت القراءة من العملية \n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:435
 msgid "Couldn't spawn a new process"
-msgstr ""
+msgstr "لم يمكن تفريق عملية جديدة"
 
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "File descriptor to print IOR on"
-msgstr ""
+msgstr "واصف الملف لكتابة الـ IOR عليه"
 
 #: ../bonobo-activation/bonobo-activation-init.c:357
 #: ../bonobo-activation/bonobo-activation-init.c:367
 msgid "IID to activate"
-msgstr ""
+msgstr "IID لالتنشيط"
 
 #: ../bonobo-activation/bonobo-activation-init.c:359
 #: ../bonobo-activation/bonobo-activation-init.c:369
 msgid "Prevent registering of server with OAF"
-msgstr ""
+msgstr "منع تسجيل النادل مع OAF"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
 msgid "Bonobo Activation"
-msgstr ""
+msgstr "تنشيط بونوبو"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
-msgstr ""
+msgstr "أظهر خيارات تنشيط بونوبو"
 
 #: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
-msgstr ""
+msgstr "خيارات تنشيط بونوبو"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
 msgid "g_module_open of `%s' failed with `%s'"
-msgstr ""
+msgstr "g_module_open لـ`%s' فشل مع `%s'"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:126
 #: ../bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr ""
+msgstr "لا يمكن ايجاد الرمز Bonobo_Plugin_info في `%s'"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
 msgid "Factory `%s' returned NIL for `%s'"
-msgstr ""
+msgstr "أرجع المصنع `%s' NIL لـ `%s'"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:229
 #, c-format
 msgid "Shlib `%s' didn't contain `%s'"
-msgstr ""
+msgstr "Shlib `%s' لم يحوي `%s'"
 
 #: ../bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #: ../bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr ""
+msgstr "اسم التطبيق الوحيد"
 
 #: ../bonobo/bonobo-object.c:923
 msgid "POA"
-msgstr ""
+msgstr "POA"
 
 #: ../bonobo/bonobo-object.c:923
 msgid "Custom CORBA POA"
-msgstr ""
+msgstr "CORBA·POA خاص"
 
 #: ../bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
-msgstr ""
+msgstr "تمت محاولة إجراء عمل غير مدعوم"
 
 #: ../bonobo/bonobo-exception.c:157
 msgid "IO Error"
-msgstr ""
+msgstr "خطأ إدخال/إخراج"
 
 #: ../bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr ""
+msgstr "قيمة معامل غير صالحة"
 
 #: ../bonobo/bonobo-exception.c:164
 msgid "Object not found"
-msgstr ""
+msgstr "لم يوجد الجسم"
 
 #: ../bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
-msgstr ""
+msgstr "خطأ صياغي في وصف الجسم"
 
 #: ../bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr ""
+msgstr "لا يمكن تنشيط الكائن من المصنع"
 
 #: ../bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
-msgstr ""
+msgstr "لا يوجد إذن للنفوذ إلى تيار البيانات"
 
 #: ../bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr ""
+msgstr "تمت محاولة إجراء عمل تيار بيانات غير مدعوم"
 
 #: ../bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr ""
+msgstr "خطأ إدخال/إخراج عند تيار البيانات"
 
 #: ../bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr ""
+msgstr "خطأ إخراج/إدخال عند المخزن"
 
 #: ../bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr ""
+msgstr "الاسم موجود مسبقاً في المخزن"
 
 #: ../bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr ""
+msgstr "الجسم غير موجود في المخزن"
 
 #: ../bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr ""
+msgstr "لا أذونات لتنفيذ العملية عى المخزن"
 
 #: ../bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
-msgstr ""
+msgstr "تمت محاولة إجراء عمل مخزن غير مدعوم"
 
 #: ../bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr ""
+msgstr "الجسم ليس تياراً"
 
 #: ../bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr ""
+msgstr "الجسم ليس مخزناً"
 
 #: ../bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
-msgstr ""
+msgstr "المخزن غير خال"
 
 #: ../bonobo/bonobo-exception.c:210
 msgid "malformed user interface XML description"
-msgstr ""
+msgstr "وصف XML مشوه لواجهة المستخدم"
 
 #: ../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr ""
+msgstr "مسار غير سليم إلى عنصر XML لواجهة المستخدم"
 
 #: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr ""
+msgstr "لم·تكن المواصفة المطلوبة في واجهة المستخدم موجودة"
 
 #: ../bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr ""
+msgstr "فعل أو أمر غير معروف"
 
 #: ../bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr ""
+msgstr "الأمر غير حساس"
 
 #: ../bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
-msgstr ""
+msgstr "نوع بيانات غير صحيح"
 
 #: ../bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr ""
+msgstr "لم يتم العثور على التيار"
 
 #: ../bonobo/bonobo-exception.c:233
 msgid "property not found"
-msgstr ""
+msgstr "لم يتم العثور على الصفة"
 
 #: ../bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr ""
+msgstr "الصفة ذات نوع غير صالح"
 
 #: ../bonobo/bonobo-exception.c:239
 msgid "property is read only"
-msgstr ""
+msgstr "الصفة للقراءة فقط"
 
 #: ../bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr ""
+msgstr "فشل تكوين الواجهة الخلفية لقاعدة البيانات"
 
 #: ../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr ""
+msgstr "لا يمكن العثور على واجهة Moniker"
 
 #: ../bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr ""
+msgstr "انتهت الفرصة الزمنية لتنشيط Moniker"
 
 #: ../bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr ""
+msgstr "خطأ صياغي داخل moniker"
 
 #: ../bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
-msgstr ""
+msgstr "يوجد مقدمة moniker غير معروفة في Moniker"
 
 #: ../bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr ""
+msgstr "حصل خطأ عند فحص الخطأ، بدون استثناء"
 
 #: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr ""
+msgstr "خطأ تنشيط عام بدون وصف"
 
-#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
+#: ../bonobo/bonobo-generic-factory.h:79
+#: ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
-msgstr ""
+msgstr "لم يمكن تفعيل بونوبو"
 
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr ""
+msgstr "فشل حل أو توسعة '%s"
 
 #: ../bonobo/bonobo-moniker-util.c:246
 msgid "Failed to activate object"
-msgstr ""
+msgstr "فشل تنشيط الجسم"
 
 #: ../monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
-msgstr ""
+msgstr "استثناء عند تنشيط '%s"
 
 #: ../monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
-msgstr ""
+msgstr "فشل تنشيط '%s'"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr ""
+msgstr "HTTP Moniker"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
-msgstr ""
+msgstr "moniker معالجة ORB·IOR"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:3
 msgid "Standard Moniker factory"
-msgstr ""
+msgstr "مصنع Moniker القياسي"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr ""
+msgstr "moniker عام لتفعيل Oaf"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
-msgstr ""
+msgstr "moniker  عام للبحث عن Oaf"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:6
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "د"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:7
 msgid "generic item moniker"
-msgstr ""
+msgstr "moniker عنصر عام"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:8
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "تيار بيانات MonikerExtender"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr ""
+msgstr "مصنع نادل صدى بونوبو"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr ""
+msgstr "برنامج مثالي لنادل صدى بونوبو"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
-msgstr ""
+msgstr "مكون صدى"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
 msgid "Echo component factory"
-msgstr ""
+msgstr "مصنع لمكون الصدى"
 
 #: ../samples/echo/echo-client.c:22
 msgid "I could not initialize Bonobo"
-msgstr ""
+msgstr "لم أتمكن من تفعيل بونوبو"
 
 #: ../samples/echo/echo-client.c:33
 msgid "Could not create an instance of the sample echo component"
-msgstr ""
+msgstr "لم يمكن إنشاء حالة من نموذج مكون الصدى"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
 msgid "An exception occurred '%s'"
-msgstr ""
+msgstr "حصل استثناء '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:82
 msgid "Could not save configuration file.\n"
-msgstr ""
+msgstr "لم يمكن حفظ ملف الإعدادات.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:83
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr ""
+msgstr "الرجاء التأكد من أن لديك الإذونات للكتابة على '%s'.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:86
 msgid "Successfully wrote configuration file.\n"
-msgstr ""
+msgstr "كتب ملف الإعدادات بنجاح.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:103
 #, c-format
@@ -445,37 +448,73 @@ msgid ""
 "configuration file is:\n"
 "    %s\n"
 msgstr ""
+"ملف الإعدادات هو:\n"
+"    %s\n"
 
 #: ../utils/bonobo-activation-sysconf.c:145
 #, c-format
 msgid "%s already in configuration file\n"
-msgstr ""
+msgstr "%s موجود مسبقا في ملف الإعدادات\n"
 
 #: ../utils/bonobo-activation-sysconf.c:165
 msgid "there is not a properly structured configuration file\n"
-msgstr ""
+msgstr "ليس هناك ملف إعدادات مركب بشكل صحيح\n"
 
 #: ../utils/bonobo-activation-sysconf.c:236
 msgid "Bonobo-activation configuration file contains:\n"
-msgstr ""
+msgstr "ملف إعدادات Bonobo-activation يحوي:\n"
 
 #: ../utils/bonobo-activation-sysconf.c:266
 msgid "Directory to remove from configuration file"
-msgstr ""
+msgstr "الدليل للازالة من ملف الإعدادات"
 
 #: ../utils/bonobo-activation-sysconf.c:266
 #: ../utils/bonobo-activation-sysconf.c:268
 msgid "PATH"
-msgstr ""
+msgstr "المسار"
 
 #: ../utils/bonobo-activation-sysconf.c:268
 msgid "Directory to add to configuration file"
-msgstr ""
+msgstr "الدليل للاضافته الى ملف الإعدادات"
 
 #: ../utils/bonobo-activation-sysconf.c:270
 msgid "Display directories in configuration file"
-msgstr ""
+msgstr "عرض الدلائل في ملف الإعدادات"
 
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
-msgstr ""
+msgstr "عرض المسار الى ملف الإعدادات"
+
+#~ msgid "Race condition activating server '%s'"
+#~ msgstr "حالة التسابق عند تغعيل النادل '%s'"
+#~ msgid "Child received signal %u (%s)"
+#~ msgstr "تلقى الإبن الإشارة %u (%s)"
+#~ msgid "Unknown non-exit error (status is %u)"
+#~ msgstr "خطأ غير معلوم و غير متعلق بالخروج من البرنامج (الحالة هي·%u)"
+#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
+#~ msgstr "فشل bonobo-activation في تعيين مجموعة العمليات لـ%s: %s\n"
+#~ msgid "Failed to execute %s: %d (%s)\n"
+#~ msgstr "فشل تنفيذ %s: %d (%s)\n"
+#~ msgid "Too many alias levels for a locale, may indicate a loop"
+#~ msgstr "مستويات اختصار عديدة جدا للاقليم، ربما يشير ذلك لحلقة"
+#~ msgid "directory path"
+#~ msgstr "مسار الدليل"
+#~ msgid "No server corresponding to your query"
+#~ msgstr "لا خادم مقابل لاستعلامك"
+#~ msgid "Query failed: "
+#~ msgstr "فشل الاستعلام:"
+#~ msgid "Activation failed: "
+#~ msgstr "فشل التنشيط: "
+#~ msgid "Could not parse AID"
+#~ msgstr "لم يمكن تحليل AID"
+#~ msgid "Could not parse context: "
+#~ msgstr "لم يمكن تحليل السياق: "
+#~ msgid "Could not activate server: "
+#~ msgstr "لم يمكن تنشيط الخادم: "
+#~ msgid "Domain of ObjectDirectory"
+#~ msgstr "نطاق دليل الكائنات"
+#~ msgid "DOMAIN"
+#~ msgstr "النطاق"
+#~ msgid "Object directory to use when registering servers"
+#~ msgstr "دليل الكائنات الذي سيستخدم عند تسجيل أجهزة الخادم"
+
