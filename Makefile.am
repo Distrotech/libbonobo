@@ -27,4 +27,9 @@ install-data-local:
 			$(DESTDIR)$(sysconfdir)/bonobo-activation;				\
 	fi
 
+uninstall-local:
+	if cmp $(DESTDIR)$(sysconfdir)/bonobo-activation/bonobo-activation-config.xml $(top_srcdir)/bonobo-activation-config.xml > /dev/null ; then \
+		rm -f $(DESTDIR)$(sysconfdir)/bonobo-activation/bonobo-activation-config.xml; \
+	fi
+
 DISTCLEANFILES=intltool-extract intltool-merge intltool-update

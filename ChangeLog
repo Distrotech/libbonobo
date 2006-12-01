@@ -1,3 +1,9 @@
+2006-12-01  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am: Uninstall bonobo-activation-config.xml.
+	Patch by Matthew Barnes, slightly improved by me.
+	Closes #381044.
+
 2006-11-19  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Up requirement on ORBit2 to 2.11.2. Noticed by
