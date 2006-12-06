@@ -1,3 +1,9 @@
+2006-12-06  Christian Persch  <chpe@cvs.gnome.org>
+
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_get_goption_group):
+	Add ":" to option group description. Bug #350227.
+
 2006-12-01  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* Makefile.am: Uninstall bonobo-activation-config.xml.

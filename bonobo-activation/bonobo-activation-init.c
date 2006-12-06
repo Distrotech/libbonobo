@@ -400,7 +400,7 @@ bonobo_activation_get_goption_group (void)
 	init_gettext (TRUE);
 
 	group = g_option_group_new ("bonobo-activation",
-				    N_("Bonobo Activation"),
+				    N_("Bonobo Activation options:"),
 				    N_("Show Bonobo Activation options"),
 				    NULL, NULL);
 	g_option_group_set_translation_domain (group, GETTEXT_PACKAGE);
