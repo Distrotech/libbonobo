@@ -19,7 +19,7 @@ bonobo_app_client_get_type (void)
 
 	if (!app_client_type)
 	{
-		static const GTypeInfo app_client_info =
+		const GTypeInfo app_client_info =
 			{
 				sizeof (BonoboAppClientClass),
 				NULL,		/* base_init */

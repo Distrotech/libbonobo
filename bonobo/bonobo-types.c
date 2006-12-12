@@ -126,7 +126,7 @@ GType
 bonobo_corba_object_type_register_static (const gchar *name, const CORBA_TypeCode tc,
 					  gboolean is_bonobo_unknown)
 {
-	static const GTypeValueTable vtable = {
+	const GTypeValueTable vtable = {
 		corba_object_proxy_value_init,
 		corba_object_proxy_value_free,
 		corba_object_proxy_value_copy,
@@ -136,7 +136,7 @@ bonobo_corba_object_type_register_static (const gchar *name, const CORBA_TypeCod
 		"p",
 		corba_object_proxy_lcopy_value,
 	};
-	static const GTypeInfo type_info = {
+	const GTypeInfo type_info = {
 		0,		/* class_size */
 		NULL,		/* base_init */
 		NULL,		/* base_finalize */

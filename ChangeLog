@@ -1,3 +1,10 @@
+2006-12-12  Christian Persch  <chpe@cvs.gnome.org>
+
+	* bonobo/bonobo-app-client.c: (bonobo_app_client_get_type):
+	* bonobo/bonobo-types.c:
+	(bonobo_corba_object_type_register_static):
+	No need to make GTYpeInfo static. Bug #382329.
+
 2006-12-06  Christian Persch  <chpe@cvs.gnome.org>
 
 	* bonobo-activation/bonobo-activation-init.c:
