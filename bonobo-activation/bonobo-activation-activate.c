@@ -810,20 +810,19 @@ bonobo_activation_set_activation_env_value (const char *name,
 
 	old_buffer = activation_environment._buffer;
 
-	activation_environment._length++;
+	i = activation_environment._length++;
 	activation_environment._maximum++;
 	activation_environment._buffer  = Bonobo_ActivationEnvironment_allocbuf (
 							activation_environment._length);
 	activation_environment._release = TRUE;
 
-	for (i = 0; i < activation_environment._length - 1; i++)
-		Bonobo_ActivationEnvValue_copy (
-			&activation_environment._buffer [i], &old_buffer [i]);
-
+	if (old_buffer) {
+		memcpy (activation_environment._buffer, old_buffer,
+				sizeof (activation_environment._buffer[0]) * i);
+		CORBA_free (old_buffer);
+	}
 	Bonobo_ActivationEnvValue_set (&activation_environment._buffer [i], name, value);
 
-	if (old_buffer)
-		CORBA_free (old_buffer);
 }
 
 /**
