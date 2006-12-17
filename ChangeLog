@@ -1,3 +1,9 @@
+2006-12-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* bonobo/bonobo-arg.c (bonobo_arg_new): Greatly simplify this
+	function by using CORBA_any__alloc and ORBit_small_alloc.  Also
+	fixes the memory leak reported in bug #358504 (thanks Chris Heath).
+
 2006-12-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo-activation/bonobo-activation-activate.c:

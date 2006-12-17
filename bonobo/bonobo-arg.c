@@ -35,34 +35,10 @@ static GHashTable *bonobo_arg_from_gvalue_mapping = NULL;
 BonoboArg *
 bonobo_arg_new (BonoboArgType t)
 {
-	CORBA_any *any = NULL;
-	DynamicAny_DynAnyFactory f;
-	DynamicAny_DynAny dyn = NULL;
-	CORBA_Environment ev;
-
-	g_return_val_if_fail (t != NULL, NULL);
-
-	CORBA_exception_init (&ev);
-
-	f = (DynamicAny_DynAnyFactory)
-		CORBA_ORB_resolve_initial_references (
-			bonobo_orb(), "DynAnyFactory", &ev);
-
-	g_return_val_if_fail (!BONOBO_EX (&ev), NULL);
-
-	dyn = DynamicAny_DynAnyFactory_create_dyn_any_from_type_code (
-		f, t, &ev);
-	
-	CORBA_Object_release ((CORBA_Object) f, &ev);
-
-	if (!BONOBO_EX (&ev) && dyn != NULL) {
-		any = DynamicAny_DynAny_to_any (dyn, &ev);
-		DynamicAny_DynAny_destroy (dyn, &ev);
-		CORBA_Object_release ((CORBA_Object) dyn, &ev);
-	}
-
-	CORBA_exception_free (&ev);
-
+	CORBA_any *any = CORBA_any__alloc ();
+	any->_release = TRUE;
+	any->_type = (CORBA_TypeCode) CORBA_Object_duplicate ((CORBA_Object) t, NULL);
+	any->_value = ORBit_small_alloc (t);
 	return any;
 }
 
