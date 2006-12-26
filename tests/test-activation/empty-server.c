@@ -37,6 +37,7 @@ main (int argc, char *argv[])
 	GOptionContext *ctx;
 	GOptionGroup *goption_group;
 	GError *error = NULL;
+        GMainLoop *loop;
 
 	CORBA_Environment ev;
 	CORBA_ORB orb;
@@ -96,8 +97,11 @@ main (int argc, char *argv[])
 
 	PortableServer_POAManager_activate
 		(PortableServer_POA__get_the_POAManager (poa, &ev), &ev);
-	while (1)
-		g_main_context_iteration (NULL, TRUE);
+
+        /* run the CORBA main loop for a couple of seconds then quit */
+        loop = g_main_loop_new (NULL, FALSE);
+        g_timeout_add (1000, (GSourceFunc) g_main_loop_quit, loop);
+        g_main_loop_run (loop);
 
 	bonobo_activation_active_server_unregister ("OAFIID:Empty:19991025", empty_client);
 	bonobo_activation_active_server_unregister ("OAFIID:Empty2:19991025", empty_client);

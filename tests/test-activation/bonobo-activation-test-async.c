@@ -5,12 +5,13 @@
 
 #include <bonobo-activation/bonobo-activation.h>
 
-#define DEBUG_TIMEOUT 2
+#define DEBUG_TIMEOUT 2000
 #define DEBUG_TIME    1
 
 typedef struct {
         gboolean callback_called;
         gboolean succeeded;
+        GMainLoop *loop;
 } callback_data_t;
 
 
@@ -36,6 +37,7 @@ test_callback (CORBA_Object   activated_object,
         }
                 
         data->callback_called = TRUE;
+        g_main_loop_quit (data->loop);
 }
 
 
@@ -46,29 +48,26 @@ test_activate (char *requirements)
 {
         CORBA_Environment ev;
         callback_data_t data;
-#if DEBUG_TIME        
-        time_t beg_time;
-#endif
+        GMainLoop *loop = g_main_loop_new (NULL, FALSE);
+        guint timeout_id;
 
         CORBA_exception_init (&ev);
 
         data.callback_called = FALSE;
+        data.succeeded = FALSE;
+        data.loop = loop;
+
         bonobo_activation_activate_async (requirements, NULL, 0, test_callback, &data, &ev);
 
-#if DEBUG_TIME
-        beg_time = time (NULL);
-#endif
+        timeout_id = g_timeout_add (DEBUG_TIMEOUT, (GSourceFunc) g_main_loop_quit, loop);
+        g_main_loop_run (loop);
+        if (data.callback_called == FALSE)
+                g_source_remove (timeout_id);
+        g_main_loop_unref (loop);
 
-        while (data.callback_called == FALSE) {
-                g_main_context_iteration (NULL, FALSE);
-#if DEBUG_TIME
-                if (time (NULL) > (beg_time + DEBUG_TIMEOUT)) {
-                        return -1;
-                }
-#endif
+        if (data.callback_called == FALSE) {
+                return -1;
         }
-
-        
         if (data.succeeded == TRUE) {
                 return TRUE;
         } else {
@@ -83,29 +82,25 @@ test_activate_from_id (char *aid)
 {
         CORBA_Environment ev;
         callback_data_t data;
-#if DEBUG_TIME        
-        time_t beg_time;
-#endif
+        GMainLoop *loop = g_main_loop_new (NULL, FALSE);
+        guint timeout_id;
 
         CORBA_exception_init (&ev);
 
         data.callback_called = FALSE;
+        data.succeeded = FALSE;
+        data.loop = loop;
         bonobo_activation_activate_from_id_async (aid, 0, test_callback, &data, &ev);
 
-#if DEBUG_TIME
-        beg_time = time (NULL);
-#endif
+        timeout_id = g_timeout_add (DEBUG_TIMEOUT, (GSourceFunc) g_main_loop_quit, loop);
+        g_main_loop_run (loop);
+        if (data.callback_called == FALSE)
+                g_source_remove (timeout_id);
+        g_main_loop_unref (loop);
 
-        while (data.callback_called == FALSE) {
-                g_main_context_iteration (NULL, FALSE);
-#if DEBUG_TIME
-                if (time (NULL) > (beg_time + DEBUG_TIMEOUT)) {
-                        return -1;
-                }
-#endif
+        if (data.callback_called == FALSE) {
+                return -1;
         }
-
-        
         if (data.succeeded == TRUE) {
                 return TRUE;
         } else {
@@ -124,50 +119,50 @@ main (int argc, char *argv[])
         test_passed = 0;
 
 	bonobo_activation_init (argc, argv);
-        printf ("testing async interfaces\n");
+        g_message ("testing async interfaces\n");
 
-        printf ("testing activate_async... ");
+        g_message ("testing activate_async... ");
         /* this should fail */
         test_status = test_activate ("");
         if (test_status == FALSE) {
                 test_passed++;
-                printf (" passed\n");
+                g_message (" passed\n");
         } else if (test_status == TRUE
                    || test_status == -1) {
-                printf (" failed\n");
+                g_message (" failed\n");
         }
 
-        printf ("testing activate_async... ");
+        g_message ("testing activate_async... ");
         test_status = test_activate ("has (repo_ids, 'IDL:Empty:1.0')");
         if (test_status == TRUE) {
                 test_passed++;
                 printf (" passed\n");
         } else if (test_status == FALSE
                    || test_status == -1) {
-                printf (" failed\n");
+                g_message (" failed\n");
         }
 
-        printf ("testing activate_from_id_async... ");
+        g_message ("testing activate_from_id_async... ");
         test_status = test_activate_from_id ("");
         if (test_status == FALSE) {
                 test_passed++;
-                printf (" passed\n");
+                g_message (" passed\n");
         } else if (test_status == TRUE
                    || test_status == -1) {
-                printf (" failed\n");
+                g_message (" failed\n");
         }
 
-        printf ("testing activate_from_id_async... ");
+        g_message ("testing activate_from_id_async... ");
         test_status = test_activate_from_id ("OAFIID:Empty:19991025");
         if (test_status == TRUE) {
                 test_passed++;
-                printf (" passed\n");
+                g_message (" passed\n");
         } else if (test_status == FALSE
                    || test_status == -1) {
-                printf (" failed\n");
+                g_message (" failed\n");
         }
 
-        printf ("Async Test Results: %d passed upon %d \n", 
+        g_message ("Async Test Results: %d passed upon %d \n", 
                 test_passed, TOTAL_TESTS);
 
         if (test_passed != TOTAL_TESTS) {
