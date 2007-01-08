@@ -2,16 +2,17 @@
 # Estonian translation of libbonobo.
 #
 # Copyright (C) 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2007, The GNOME Project.
 # This file is distributed under the same license as the libbonobo package.
 #
-# Ivar Smolin <okul@linux.ee>, 2005, 2006.
+# Ivar Smolin <okul@linux.ee>, 2005-2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-15 16:10+0200\n"
-"PO-Revision-Date: 2006-10-25 08:17+0300\n"
+"POT-Creation-Date: 2007-01-02 05:40+0000\n"
+"PO-Revision-Date: 2007-01-07 22:48+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -27,44 +28,46 @@ msgstr ""
 msgid "Not a valid Activation ID"
 msgstr "Vigane aktiveerimise ID"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Kataloog, millest lugeda .server faile"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "KATALOOG"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Serveeritakse kui ActivationContext'i (vaikimisi serveeritakse "
 "ObjectDirectory't)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Failideskriptor, kuhu IOR kirjutada"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
 msgstr ""
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr ""
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "AVALDIS"
 
-#: ../activation-server/activation-server-main.c:424
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -169,8 +172,8 @@ msgstr ""
 "Serveri registreerimise keelamine objektide aktiveerimisraamistikuga (OAF)"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Bonobo aktiveerimine"
+msgid "Bonobo Activation options:"
+msgstr "Bonobo aktiveerimisvalikud:"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
@@ -347,7 +350,7 @@ msgstr "Monikeril on tundmatu monikerieesliide"
 
 #: ../bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr ""
+msgstr "Viga veakontrollil, erand puudub"
 
 #: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
@@ -434,7 +437,7 @@ msgstr "Näidiskomponendi (kaja) instantsi pole võimalik luua"
 
 #: ../samples/echo/echo-client.c:45
 #, c-format
-msgid "An exception occured '%s'"
+msgid "An exception occurred '%s'"
 msgstr ""
 
 #: ../utils/bonobo-activation-sysconf.c:82
