@@ -1,14 +1,14 @@
 # libbonobo translation to Catalan.
-# Copyright © 2001, 2002, 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
+# Copyright © 2001-2007 Free Software Foundation, Inc.
 # Softcatalà <info@softcatala.org>, 2001.
-# Jordi Mallach <jordi@sindominio.net>, 2002, 2003, 2004, 2005, 2006.
+# Jordi Mallach <jordi@sindominio.net>, 2002, 2003, 2004, 2005, 2006, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.11.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-08-25 01:19+0200\n"
+"POT-Creation-Date: 2007-01-11 01:48+0100\n"
+"PO-Revision-Date: 2007-01-11 01:50+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,45 +23,49 @@ msgstr "No s'ha trobat en quin fill estava llistat el servidor"
 msgid "Not a valid Activation ID"
 msgstr "No és un ID d'activació vàlid"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Directori d'on llegir fitxers .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "DIRECTORI"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Serveix com a un ActivationContext (per defecte és només un ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Descriptor de fitxer on escriure l'IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "DF"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
 msgstr ""
-"Registra com a servidor d'activació de l'usuari sense blocar [!] per a "
-"depurar"
+"Registra com a servidor d'activació de l'usuari sense blocatge. Avís: "
+"aquesta opció pot tenir efectes laterals perillosos per a l'estabilitat de "
+"la sessió en execució de l'usuari, per tant, només s'hauria d'utilitzar per "
+"a la depuració"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Expressió de petició a avaluar"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "EXPRESSIÓ"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -167,8 +171,8 @@ msgid "Prevent registering of server with OAF"
 msgstr "Previngues el registre de servidors amb OAF"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Activació de Bonobo"
+msgid "Bonobo Activation options:"
+msgstr "Opcions d'activació del Bonobo:"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
@@ -490,6 +494,15 @@ msgstr "Mostra directoris al fitxer de configuració"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Mostra la ruta al fitxer de configuració"
+
+#~ msgid ""
+#~ "Register as the users' activation server without locking [!] for debugging"
+#~ msgstr ""
+#~ "Registra com a servidor d'activació de l'usuari sense blocar [!] per a "
+#~ "depurar"
+
+#~ msgid "Bonobo Activation"
+#~ msgstr "Activació de Bonobo"
 
 # Condició de carrera... no sé un altra traducció per a "race condition". jm
 # (molt després...) en una traducció al castellà he vist "condició de fuga". jm
