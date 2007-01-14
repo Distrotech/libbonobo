@@ -1,17 +1,16 @@
 # Bulgarian translation of libbonobo po file.
-# Copyright (C) 2002 Free Software Foundation, Inc.
-# Alexander Shopov <al_shopov@web.bg>, 2002.
-# small updates Yanko Kaneti <yaneti@declera.com>
+# Copyright (C) 2002, 2004, 2007 Free Software Foundation, Inc.
+# Alexander Shopov <ash@contact.bg>, 2002, 2004, 2007.
+# Yanko Kaneti <yaneti@declera.com>
 # Rostislav Raykov <zbrox@i-space.org>, 2004
-# Alexander Shopov <al_shopov@yahoo.com>, 2004.
-# Alexander Shopov <ash@contact.bg>, 2004.
+#
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-05-21 09:55+0300\n"
+"POT-Creation-Date: 2007-01-14 20:07+0200\n"
+"PO-Revision-Date: 2007-01-14 20:04+0200\n"
 "Last-Translator: Alexander Shopov <ash@contact.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,46 +26,50 @@ msgstr "Не може да се разбере в кой дъщерен проц
 msgid "Not a valid Activation ID"
 msgstr "Невалидно ID за активиране"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Папка, от която да се прочетат файловете .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "ПАПКА"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Да служи като контекст на активиране (по подразбиране е само директория на "
 "обектите)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Указател на файл, в който да се записва IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "УФ"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
 msgstr ""
-"Регистриране като потребителския сървър за активиране без заключване [!] за "
-"изчистване на грешки"
+"Регистриране като сървъра за активиране на потребителя без заключване. "
+"Предупреждение: тази настройка може да има странични ефекти върху "
+"стабилността на работната сесия на потребителя и трябва да се използва само "
+"при откриването и изчистване на грешки"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Израз-запитване, което да се оцени"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "ИЗРАЗ"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -172,8 +175,8 @@ msgid "Prevent registering of server with OAF"
 msgstr "Предотвратяване на регистрирането на сървър към OAF"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Активиране на Bonobo"
+msgid "Bonobo Activation options:"
+msgstr "Настройки на активирането на Bonobo:"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
@@ -495,6 +498,3 @@ msgstr "Показване на папките в конфигурационни
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Показване на пътя до конфигурационния файл"
-
-#~ msgid "Race condition activating server '%s'"
-#~ msgstr "Състезание при активирането на сървър „%s“"
