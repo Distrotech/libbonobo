@@ -329,8 +329,7 @@ impl_Bonobo_RunningContext_removeKey (PortableServer_Servant servant,
 
 	if (ri) {
 		old_key = g_hash_table_lookup (ri->keys, key);
-		if (old_key)
-			g_free (old_key);
+		g_free (old_key);
 		g_hash_table_remove (ri->keys, key);
 
 		check_empty_T ();

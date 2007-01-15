@@ -535,11 +535,8 @@ bonobo_property_bag_foreach_remove_prop (gpointer key,
 
 	bonobo_arg_release (prop->default_value);
 
-	if (prop->docstring)
-		g_free (prop->docstring);
-	
-	if (prop->doctitle)
-		g_free (prop->doctitle);
+	g_free (prop->docstring);
+	g_free (prop->doctitle);
 
 	if (prop->priv->get_prop)
 		g_closure_unref (prop->priv->get_prop);

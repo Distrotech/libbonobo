@@ -582,8 +582,7 @@ od_load_file (const char *file,
         if (ctxt)
                 g_markup_parse_context_free (ctxt);
 
-	if (contents)
-		g_free (contents);
+	g_free (contents);
 }
 
 void

@@ -86,10 +86,8 @@ bonobo_application_finalize (GObject *object)
 		self->message_list = NULL;
 	}
 
-	if (self->name) {
-		g_free (self->name);
-		self->name = NULL;
-	}
+	g_free (self->name);
+	self->name = NULL;
 
 	if (self->closure_hash) {
 		g_hash_table_destroy (self->closure_hash);
@@ -274,7 +272,7 @@ set_property (GObject      *g_object,
 
 	switch (prop_id) {
 	case PROP_NAME:
-		if (self->name) g_free (self->name);
+		g_free (self->name);
 		self->name = g_value_dup_string (value);
 		break;
 	default:

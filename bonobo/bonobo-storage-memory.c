@@ -582,8 +582,7 @@ smem_list_contents_impl (PortableServer_Servant          servant,
 	g_list_free (cb_data.list);
 	
  out:
-	if (path_last)
-		g_free (path_last);
+	g_free (path_last);
 	return ret_val;
 }
 

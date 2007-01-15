@@ -312,10 +312,8 @@ bonobo_activation_existing_set (const BonoboActivationBaseService *base_service,
 	if (link == NULL) {
 		ssi = g_new0 (struct SysServerInstance, 1);
 		ssi->already_running = obj;
-		ssi->username =
-			base_service->username ? g_strdup (base_service->username) : NULL;
-		ssi->hostname =
-			base_service->hostname ? g_strdup (base_service->hostname) : NULL;
+		ssi->username = g_strdup (base_service->username);
+		ssi->hostname = g_strdup (base_service->hostname);
                 ss->instances = g_slist_prepend (ss->instances, ssi);
 	} else {
 		CORBA_Object_release (ssi->already_running, ev);

@@ -1,5 +1,25 @@
 2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* activation-server/object-directory-load.c: (od_load_file):
+	* bonobo-activation/bonobo-activation-base-service.c:
+	(bonobo_activation_existing_set):
+	* bonobo-activation/bonobo-activation-register.c:
+	(bonobo_activation_registration_env_set):
+	* bonobo/bonobo-application.c: (bonobo_application_finalize),
+	(set_property):
+	* bonobo/bonobo-item-handler.c: (bonobo_item_options_free):
+	* bonobo/bonobo-listener.c: (bonobo_listener_finalize):
+	* bonobo/bonobo-property-bag.c:
+	(bonobo_property_bag_foreach_remove_prop):
+	* bonobo/bonobo-running-context.c:
+	(impl_Bonobo_RunningContext_removeKey):
+	* bonobo/bonobo-storage-memory.c: (smem_list_contents_impl):
+	* bonobo/bonobo-stream-memory.c: (mem_finalize):
+	Remove unneeded checks for null before calling g_free/g_strdup.
+	Closes bug #396796.
+
+2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* bonobo/bonobo-application.c: (set_property):
 	* bonobo/bonobo-arg.c: (bonobo_arg_from_gvalue):
 	Use g_value_dup_string instead of g_strdup (g_value_get_string())

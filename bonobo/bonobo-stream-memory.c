@@ -227,8 +227,7 @@ mem_finalize (GObject *object)
 {
 	BonoboStreamMem *smem = BONOBO_STREAM_MEM (object);
 	
-	if (smem->buffer)
-		g_free (smem->buffer);
+	g_free (smem->buffer);
 	g_free (smem->name);
 	g_free (smem->content_type);
 	

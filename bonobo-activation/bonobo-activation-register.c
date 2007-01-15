@@ -505,7 +505,7 @@ bonobo_activation_registration_env_set (GSList     *reg_env,
 	env_value = g_new (RegistrationEnvValue, 1);
 
 	env_value->name  = g_strdup (name);
-	env_value->value = value ? g_strdup (value) : NULL;
+	env_value->value = g_strdup (value);
 
 	reg_env = g_slist_prepend (reg_env, env_value);
 

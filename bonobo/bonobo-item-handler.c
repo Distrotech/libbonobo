@@ -398,8 +398,7 @@ bonobo_item_options_free (GSList *options)
 		BonoboItemOption *option = l->data;
 
 		g_free (option->key);
-		if (option->value)
-			g_free (option->value);
+		g_free (option->value);
 
 		g_free (option);
 	}
