@@ -1,3 +1,9 @@
+2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo/bonobo-application.c: (set_property):
+	* bonobo/bonobo-arg.c: (bonobo_arg_from_gvalue):
+	Use g_value_dup_string instead of g_strdup (g_value_get_string())
+
 2006-12-26  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* tests/test-activation/empty-server.c (main): Automatically
