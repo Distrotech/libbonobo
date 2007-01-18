@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-02-15 18:45+0200\n"
+"POT-Creation-Date: 2007-01-18 18:17+0200\n"
+"PO-Revision-Date: 2007-01-17 18:45+0200\n"
 "Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,48 +23,52 @@ msgstr "Не вдається знайти дочірній процес, в я�
 msgid "Not a valid Activation ID"
 msgstr "Неправильний ідентифікатор активації"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Каталог, з якого будуть зчитуватись файли типу .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "КАТАЛОГ"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "обробляти як ActivationContext (типовим є лише ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Дескриптор файлу для запису IOR у"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "ФД"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
 msgstr ""
-"Зареєструвати на сервері активації без блокування [!]  для налагодження"
+"Реєструватись як сервер активації користувача без блокування.  Попередження: "
+"цей параметр може мати небезпечні побічні ефекти для стабільності запущеного "
+"сеансу користувача, і має використовуватись лише для налагодження"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Вираз запиту для аналізу"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "ВИРАЗ"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
-"Запустити '%s --help' для повного списку доступних параметрів команд.\n"
+"Запустіть '%s --help' для повного списку доступних параметрів команд.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -119,7 +123,7 @@ msgstr "невірний символ  \"%c\" в iid \"%s\""
 #: ../activation-server/object-directory-load.c:348
 #, c-format
 msgid "Property '%s' has no value"
-msgstr "Властивості \"%s\" не задане значення"
+msgstr "Для властивості \"%s\" не задане значення"
 
 #: ../activation-server/object-directory-load.c:580
 #, c-format
@@ -128,7 +132,7 @@ msgstr ""
 "Не вдається проаналізувати неправильно сформований документ формату XML \"%s"
 "\""
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:626
 #, c-format
 msgid "Trying dir %s"
 msgstr "Спроба відкрити каталог %s"
@@ -141,7 +145,7 @@ msgstr ""
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Не вдається зчитати з дочірнього процесу: %s\n"
+msgstr "Не вдається прочитати дані від дочірнього процесу: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
 msgid "EOF from child process\n"
@@ -167,8 +171,8 @@ msgid "Prevent registering of server with OAF"
 msgstr "Запобігти реєстрації сервера з OAF"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Активація Bonobo"
+msgid "Bonobo Activation options:"
+msgstr "Параметри активації Bonobo:"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
@@ -199,11 +203,11 @@ msgstr "Фабрика \"%s\" повернула NIL для \"%s\""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Спільна бібліотека \"%s\" не містить \"%s\""
 
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:350
 msgid "Name"
 msgstr "Назва"
 
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:350
 msgid "Application unique name"
 msgstr "Унікальна назва програми"
 
@@ -233,7 +237,7 @@ msgstr "Об'єкта не знайдено"
 
 #: ../bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
-msgstr "Синтаксична помилка в описі об'єкта"
+msgstr "Синтаксична помилка в описі об'єкту"
 
 #: ../bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
@@ -289,7 +293,7 @@ msgstr "неправильний XML-опис інтерфейсу корист�
 
 #: ../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "недопустимий шлях до XML-елемента інтерфейсу користувача"
+msgstr "неприпустимий шлях до XML-елемента інтерфейсу користувача"
 
 #: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -309,7 +313,7 @@ msgstr "неправильний тип даних"
 
 #: ../bonobo/bonobo-exception.c:229
 msgid "stream not found"
-msgstr "потоку не знайдено"
+msgstr "поток не знайдено"
 
 #: ../bonobo/bonobo-exception.c:233
 msgid "property not found"
@@ -329,7 +333,7 @@ msgstr "помилка в модулі конфігураційної бази �
 
 #: ../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Не вдається знати інтерфейс монікера"
+msgstr "Не вдається знайти інтерфейс монікера"
 
 #: ../bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
@@ -345,7 +349,7 @@ msgstr "Монікер має невідомий префікс монікера
 
 #: ../bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "Помилка перевірки на помилку; без виключна ситуація"
+msgstr "Помилка перевірки на помилку; без виключної ситуації"
 
 #: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
@@ -464,7 +468,7 @@ msgstr "%s вже міститься у файлі конфігурації\n"
 
 #: ../utils/bonobo-activation-sysconf.c:165
 msgid "there is not a properly structured configuration file\n"
-msgstr "файл конфігурації маж неправильну структуру\n"
+msgstr "файл конфігурації має неправильну структуру\n"
 
 #: ../utils/bonobo-activation-sysconf.c:236
 msgid "Bonobo-activation configuration file contains:\n"
@@ -490,7 +494,3 @@ msgstr "Показати каталоги з файлу конфігурації
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Показати шлях до файла конфігурації"
-
-#~ msgid "Race condition activating server '%s'"
-#~ msgstr ""
-#~ "Відбулась спроба одночасної активації сервера \"%s\" кількома процесами"
