@@ -1,3 +1,10 @@
+2007-01-19  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* bonobo/bonobo-application.c (set_property),
+	* bonobo/bonobo-arg.c (bonobo_arg_from_gvalue): Revert the
+	g_value_dup_string change on 2007-01-15, which is not correct.
+	Fixes #398059.
+
 2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* activation-server/object-directory-load.c: (od_load_file):

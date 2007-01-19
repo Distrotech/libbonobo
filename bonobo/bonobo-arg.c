@@ -220,7 +220,7 @@ bonobo_arg_from_gvalue (BonoboArg *a, const GValue *value)
 
 	case G_TYPE_STRING:
 		if (G_VALUE_HOLDS_STRING (value))
-			*((CORBA_char **)a->_value) = g_value_dup_string (value);
+			*((CORBA_char **)a->_value) = CORBA_string_dup (g_value_get_string (value));
 		else
 			*((CORBA_char **)a->_value) = CORBA_string_dup ("");
 		break;
