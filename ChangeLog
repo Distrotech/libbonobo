@@ -1,3 +1,9 @@
+2007-01-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* bonobo/bonobo-application.c (set_property): Go back to Kjartan's
+	version using g_value_dup_string in this file because it is
+	the correct one after all.  Fixes #398059.
+
 2007-01-19  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 
 	* bonobo/bonobo-application.c (set_property),

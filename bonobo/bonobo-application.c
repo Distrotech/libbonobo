@@ -273,7 +273,7 @@ set_property (GObject      *g_object,
 	switch (prop_id) {
 	case PROP_NAME:
 		g_free (self->name);
-		self->name = CORBA_string_dup (g_value_get_string (value));
+		self->name = g_value_dup_string (value);
 		break;
 	default:
 		break;
