@@ -1,3 +1,8 @@
+2007-01-22  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* POTFILES.skip: Update list of files to skip for i18n scanning,
+	to make newer intltool happy.
+
 2007-01-21  Thierry Randrianiriana <randrianiriana@gmail.com>
 
 	* mg.po: Added Malagasy translation.
