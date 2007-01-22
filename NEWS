@@ -1,3 +1,16 @@
+libbonobo 2.17.90
+
+	* Fix leaks (Chris Heath)
+	* Code cleanups (Kjartan, Gustavo)
+	* Fixes for unit testing (Gustavo)
+	* Remove unneeded checks before g_strdup/g_free (Kjartan)
+	* Fixes to reduce relocation (Christian)
+	* Win32 fixes (Tor)
+	* String fixes (Christian, Ernani Azevedo, Gustavo, David Lodge)
+	* API-docs fixes (Matthew Barnes)
+	* Depend on the right version of ORBit2 (Mark Johnson)
+	* 
+ 
 libbonobo 2.16.0
 
 	* API DOC fixes (Alex, Gustavo)
