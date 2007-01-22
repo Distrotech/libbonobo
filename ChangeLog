@@ -1,3 +1,8 @@
+2007-01-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* tests/test-activation/test.sh: Add "ulimit -c 0" to disable core
+	dumps with a note for future work to investigate it :-P
+
 ========================= 2.17.90 ============================
 
 2007-01-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
