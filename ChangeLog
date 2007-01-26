@@ -1,3 +1,11 @@
+2007-01-26  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_get_goption_group):
+	* bonobo-activation/bonobo-activation-init.h:
+	Factor out some more popt remains. Reported by dmacks at
+	netspace org. Patch from Christian Persch. Closes bug #357145.
+
 2007-01-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* tests/test-activation/test.sh: Add "ulimit -c 0" to disable core

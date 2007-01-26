@@ -349,6 +349,7 @@ bonobo_activation_object_directory_get (const char *username,
 static int   bonobo_activation_ior_fd = 1;
 static char *bonobo_activation_activate_iid = NULL;
 
+#ifndef BONOBO_DISABLE_DEPRECATED_SOURCE
 struct poptOption bonobo_activation_popt_options[] = {
         { NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL },
         { "oaf-ior-fd", '\0', POPT_ARG_INT, &bonobo_activation_ior_fd, 0,
@@ -359,16 +360,7 @@ struct poptOption bonobo_activation_popt_options[] = {
           N_("Prevent registering of server with OAF"), NULL },
         { NULL }
 };
-
-static const GOptionEntry bonobo_activation_goption_options[] = {
-        { "oaf-ior-fd", '\0', 0,  G_OPTION_ARG_INT, &bonobo_activation_ior_fd, 
-          N_("File descriptor to print IOR on"), N_("FD") },
-        { "oaf-activate-iid", '\0', 0, G_OPTION_ARG_STRING, &bonobo_activation_activate_iid, 
-          N_("IID to activate"), "IID" },
-        { "oaf-private", '\0', 0, G_OPTION_ARG_NONE, &bonobo_activation_private, 
-          N_("Prevent registering of server with OAF"), NULL },
-        { NULL }
-};
+#endif /* BONOBO_DISABLE_DEPRECATED_SOURCE */
 
 static void
 init_gettext (gboolean bind_codeset)
@@ -395,6 +387,15 @@ init_gettext (gboolean bind_codeset)
 GOptionGroup *
 bonobo_activation_get_goption_group (void)
 {
+	const GOptionEntry bonobo_activation_goption_options[] = {
+		{ "oaf-ior-fd", '\0', 0,  G_OPTION_ARG_INT, &bonobo_activation_ior_fd,
+		  N_("File descriptor to print IOR on"), N_("FD") },
+		{ "oaf-activate-iid", '\0', 0, G_OPTION_ARG_STRING, &bonobo_activation_activate_iid,
+		  N_("IID to activate"), "IID" },
+		{ "oaf-private", '\0', 0, G_OPTION_ARG_NONE, &bonobo_activation_private,
+		  N_("Prevent registering of server with OAF"), NULL },
+		{ NULL }
+	};
 	GOptionGroup *group;
 
 	init_gettext (TRUE);
@@ -496,7 +497,7 @@ bonobo_activation_is_initialized (void)
 	return is_initialized;
 }
 
-
+#ifndef BONOBO_DISABLE_DEPRECATED_SOURCE
 /**
  * bonobo_activation_get_popt_table_name:
  *
@@ -511,7 +512,7 @@ bonobo_activation_get_popt_table_name (void)
 	init_gettext (FALSE);
 	return _("Bonobo activation options");
 }
-
+#endif /* BONOBO_DISABLE_DEPRECATED_SOURCE */
 
 /**
  * bonobo_activation_init:
