@@ -1,3 +1,11 @@
+2007-01-30  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo-activation/bonobo-activation-fork-server.c:
+	(bonobo_activation_server_by_forking):
+	* bonobo-activation/bonobo-activation-mime.c:
+	(bonobo_activation_get_default_component_for_mime_type):
+	Remove a couple unused variables.
+
 2007-01-26  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo-activation/bonobo-activation-init.c:

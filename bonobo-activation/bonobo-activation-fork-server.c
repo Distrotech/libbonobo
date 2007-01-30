@@ -308,7 +308,6 @@ bonobo_activation_server_by_forking (
 	gpointer                             user_data,
 	CORBA_Environment                   *ev)
 {
-        int i;
 	gint iopipes[2];
 	CORBA_Object retval = CORBA_OBJECT_NIL;
         EXEActivateInfo ai;

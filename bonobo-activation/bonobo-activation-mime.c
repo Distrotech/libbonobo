@@ -93,7 +93,6 @@ Bonobo_ServerInfoList_to_ServerInfo_g_list (Bonobo_ServerInfoList *info_list)
 Bonobo_ServerInfo *
 bonobo_activation_get_default_component_for_mime_type (const char *mime_type)
 {
-	const char *default_component_iid;
 	Bonobo_ServerInfoList *info_list;
 	Bonobo_ServerInfo *default_component;
 	CORBA_Environment ev;
