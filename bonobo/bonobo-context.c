@@ -64,7 +64,7 @@ bonobo_context_get (const CORBA_char  *context_name,
 }
 
 static void
-context_add (BonoboObject *object, const char *name)
+context_take (BonoboObject *object, const char *name)
 {
 	CORBA_Object ref;
 
@@ -75,6 +75,9 @@ context_add (BonoboObject *object, const char *name)
 	/* Don't count it as a running object; we always have it */
 	bonobo_running_context_ignore_object (ref);
 
+	bonobo_object_unref (object);
+
+	/* and release our caller's ownership */
 	bonobo_object_unref (object);
 }
 
@@ -88,8 +91,8 @@ context_add (BonoboObject *object, const char *name)
 void
 bonobo_context_init (void)
 {
-	context_add (bonobo_moniker_context_new (), "Moniker");
-	context_add (bonobo_running_context_new (), "Running");
+	context_take (bonobo_moniker_context_new (), "Moniker");
+	context_take (bonobo_running_context_new (), "Running");
 }
 
 static gboolean
