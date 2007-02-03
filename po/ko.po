@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 2.13.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-06-10 01:50+0900\n"
+"POT-Creation-Date: 2007-02-04 04:50+0900\n"
+"PO-Revision-Date: 2007-02-04 04:53+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,43 +22,45 @@ msgstr "서버가 열거되어있는 자식 프로세스를 발견할 수가 없
 msgid "Not a valid Activation ID"
 msgstr "올바른 액티베이션 ID가 아닙니다"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr ".server 파일을 읽어들일 디렉토리"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "<디렉토리>"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "ActivationContext로 서비스하기 (기본값은 ObjectDirectory로만 서비스합니다)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "IOR을 출력할 파일 디스크립터"
 
-#: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../activation-server/activation-server-main.c:170
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:392
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr "디버깅을 위해 잠금 없이 [!] 사용자의 액티베이션 서버로 등록합니다"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
+msgstr "락킹 없이 사용자의 액티베이션 서버로 등록합니다.  경고: 이 옵션은 사용자의 현재 세션의 안정성에 위험한 영향을 미칠 수 있으므로, 디버깅 목적으로만 사용해야 합니다"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "적용할 쿼리 표현식"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "<표현식>"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -122,7 +124,7 @@ msgstr "Property '%s'은(는) 값이 지정되지않았습니다"
 msgid "Could not parse badly formed XML document %s"
 msgstr "형식이 잘못된 XML 문서 %s을(를) 파싱할 수 없습니다"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:626
 #, c-format
 msgid "Trying dir %s"
 msgstr "%s 디렉토리 시도"
@@ -142,34 +144,34 @@ msgstr "하위 프로세스에서 읽는 데 실패했습니다: %s\n"
 msgid "EOF from child process\n"
 msgstr "하위 프로세스에서 파일이 끝났습니다\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:435
+#: ../bonobo-activation/bonobo-activation-fork-server.c:434
 msgid "Couldn't spawn a new process"
 msgstr "새로운 프로세스를 시작할 수 없습니다"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:392
 msgid "File descriptor to print IOR on"
 msgstr "IOR을 인쇄할 파일 인식자"
 
-#: ../bonobo-activation/bonobo-activation-init.c:357
-#: ../bonobo-activation/bonobo-activation-init.c:367
+#: ../bonobo-activation/bonobo-activation-init.c:358
+#: ../bonobo-activation/bonobo-activation-init.c:394
 msgid "IID to activate"
 msgstr "활성화시킬 IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:359
-#: ../bonobo-activation/bonobo-activation-init.c:369
+#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:396
 msgid "Prevent registering of server with OAF"
 msgstr "OAF를 통한 서버의 등록을 금지한다"
 
-#: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "보노보 액티베이션"
-
 #: ../bonobo-activation/bonobo-activation-init.c:404
+msgid "Bonobo Activation options:"
+msgstr "보노보 액티베이션 옵션:"
+
+#: ../bonobo-activation/bonobo-activation-init.c:405
 msgid "Show Bonobo Activation options"
 msgstr "보노보 액티베이션 옵션 표시"
 
-#: ../bonobo-activation/bonobo-activation-init.c:512
+#: ../bonobo-activation/bonobo-activation-init.c:513
 msgid "Bonobo activation options"
 msgstr "보노보 액티베이션 옵션"
 
@@ -194,11 +196,11 @@ msgstr "`%s' 팩토리가 `%s'에 대해 NIL을 리턴했습니다"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "`%s' 공유라이브러리에 `%s'이(가) 들어 있지 않습니다"
 
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:350
 msgid "Name"
 msgstr "이름"
 
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:350
 msgid "Application unique name"
 msgstr "응용 프로그램 고유 이름"
 
@@ -485,6 +487,13 @@ msgstr "설정 파일에 있는 디렉토리를 보여주기"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "설정 파일에 대한 경로를 보여주기"
+
+#~ msgid ""
+#~ "Register as the users' activation server without locking [!] for debugging"
+#~ msgstr "디버깅을 위해 잠금 없이 [!] 사용자의 액티베이션 서버로 등록합니다"
+
+#~ msgid "Bonobo Activation"
+#~ msgstr "보노보 액티베이션"
 
 #~ msgid "Race condition activating server '%s'"
 #~ msgstr "서버 '%s'을(를) 활성화하는 데 경쟁 조건 발생"
