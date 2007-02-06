@@ -3,7 +3,7 @@
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # Dennis Smit <synap@area101.penguin.nl>, 2000.
 # Almer S. Tigelaar <almer1@dds.nl>, 2000.
-# Tino Meinen <a.t.meinen@chello.nl>, 2003, 2005. 2006.
+# Tino Meinen <a.t.meinen@chello.nl>, 2003, 2005, 2006, 2007.
 # Huib Kleinhout <huib@stack.nl>, 2002, 2004.
 #
 #
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.110.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-08-04 03:35+0200\n"
+"POT-Creation-Date: 2007-01-01 11:39+0100\n"
+"PO-Revision-Date: 2007-02-06 10:09+0100\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,46 +27,47 @@ msgstr "Kon niet vinden in welke dochter de server werd genoemd"
 msgid "Not a valid Activation ID"
 msgstr "Geen geldige activerings-ID"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Map om .server-bestanden uit te lezen"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "MAP"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Doe dienst als een ActivationContext (standaardwaarde is alleen als "
 "ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "File descriptor om IOR naar te schrijven"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+# aanmerken/opzetten/registreren
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr ""
-"Registreer de activeringsserver van de gebruiker zonder te vergrendelen [!] "
-"voor debuggen"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
+msgstr "Aanmerken als de activeringsserver van de gebruiker zonder beveiliging ('locking'). Pas op: deze optie kan gevaarlijke bijeffecten hebben op de stabiliteit van de sessie van de gebruiker en zou alleen gebruikt moeten worden voor debug-doeleinden."
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Te evalueren query-expressie"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "EXPRESSIE"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -175,8 +176,8 @@ msgid "Prevent registering of server with OAF"
 msgstr "Voorkom het registreren van de server met OAF"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Bonobo activering"
+msgid "Bonobo Activation options:"
+msgstr "Bonobo-activeringsopties:"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
@@ -499,6 +500,15 @@ msgstr "Mappen tonen in het configuratiebestand"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Pad tonen naar het configuratiebestand"
+
+#~ msgid ""
+#~ "Register as the users' activation server without locking [!] for debugging"
+#~ msgstr ""
+#~ "Registreer de activeringsserver van de gebruiker zonder te vergrendelen "
+#~ "[!] voor debuggen"
+
+#~ msgid "Bonobo Activation"
+#~ msgstr "Bonobo activering"
 
 #~ msgid "Race condition activating server '%s'"
 #~ msgstr "Race-conditie bij activeren van server ‘%s’"
