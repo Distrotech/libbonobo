@@ -1,0 +1,31 @@
+* How b-a-s threading works:
+
+    + threading enabled in server.h
+
+    + all ActivationContext & ObjectDirectory: thread safe.
+    + use THREAD_PER_REQUEST policy
+	+ in-proc results in straight through method call
+	    + from ActivationContext <-> OD in same thread
+		+ cf. ORBit2/.../poa.c (poa_allow_cross_thread_call)
+	+ why not THREAD_PER_CONNECTION ?
+	    + if async activation is running for that
+	      client's thread & => it's sync. calls /
+	      other activations would be blocked.
+
+** Strategy
+    + use a recursive Mutex
+	+ drop it for slow things: spawning children
+
+    + Audit:
+	+ any 'main thread' ?
+    + Test:
+	+ shutdown logic (?)
+
+** bonobo_activation_server_by_forking
+
+    + uses a condition to broadcast & a private / inferior
+      loop in threaded mode
+
+    + other people waiting for that item
+	+ how can we be sure they 'got' it ?
+	+ use the re_check_fn ?
