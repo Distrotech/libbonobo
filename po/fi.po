@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo 1.109.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-16 08:15+0300\n"
-"PO-Revision-Date: 2006-11-16 08:17+0300\n"
+"POT-Creation-Date: 2007-02-12 18:15+0300\n"
+"PO-Revision-Date: 2007-02-12 18:15+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -46,8 +46,8 @@ msgid "File descriptor to write IOR to"
 msgstr "Tiedostokahva, johon IOR kirjoittuu"
 
 #: ../activation-server/activation-server-main.c:170
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:392
 msgid "FD"
 msgstr "FD"
 
@@ -57,8 +57,8 @@ msgid ""
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
 msgstr ""
-"Rekisteröidy käyttäjän aktivointipalvelimeksi lukitsematta. Varoitus: "
-"tällä valitsimella voi olla käyttäjän istuntoon vaikuttavia vakavia "
+"Rekisteröidy käyttäjän aktivointipalvelimeksi lukitsematta. Varoitus: tällä "
+"valitsimella voi olla käyttäjän istuntoon vaikuttavia vakavia "
 "sivuvaikutuksia ja sit tulisi käyttää vain vianetsinnässä."
 
 #: ../activation-server/activation-server-main.c:181
@@ -134,7 +134,7 @@ msgstr "Ominaisuudella \"%s\" ei ole arvoa"
 msgid "Could not parse badly formed XML document %s"
 msgstr "Virheellisen muotoisen XML-tiedoston jäsennys epäonnistui: %s"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:626
 #, c-format
 msgid "Trying dir %s"
 msgstr "Kokeillaan kansiota %s"
@@ -153,34 +153,34 @@ msgstr "Luku lapsiprosessista epäonnistui: %s\n"
 msgid "EOF from child process\n"
 msgstr "Tiedoston loppu lapsiprosessilta\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:435
+#: ../bonobo-activation/bonobo-activation-fork-server.c:434
 msgid "Couldn't spawn a new process"
 msgstr "Uuden prosessin käynnistäminen epäonnistui"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:392
 msgid "File descriptor to print IOR on"
 msgstr "Tiedostokahva, johon IOR tulostuu"
 
-#: ../bonobo-activation/bonobo-activation-init.c:357
-#: ../bonobo-activation/bonobo-activation-init.c:367
+#: ../bonobo-activation/bonobo-activation-init.c:358
+#: ../bonobo-activation/bonobo-activation-init.c:394
 msgid "IID to activate"
 msgstr "Aktivoitava IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:359
-#: ../bonobo-activation/bonobo-activation-init.c:369
+#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:396
 msgid "Prevent registering of server with OAF"
 msgstr "Estä palvelimen rekisteröityminen OAF:iin"
 
-#: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Bonobo-aktivointi"
-
 #: ../bonobo-activation/bonobo-activation-init.c:404
+msgid "Bonobo Activation options:"
+msgstr "Bonobo-aktivoinnin valitsimet:"
+
+#: ../bonobo-activation/bonobo-activation-init.c:405
 msgid "Show Bonobo Activation options"
 msgstr "Näytä Bonobo-aktivoinnin valitsimet"
 
-#: ../bonobo-activation/bonobo-activation-init.c:512
+#: ../bonobo-activation/bonobo-activation-init.c:513
 msgid "Bonobo activation options"
 msgstr "Bonobo-aktivoinnin valitsimet"
 
@@ -205,11 +205,11 @@ msgstr "Tehdas \"%s\" palautti arvon NIL iid:lle \"%s\""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Jaettu kirjasto \"%s\" ei sisältänyt iid:tä \"%s\""
 
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:350
 msgid "Name"
 msgstr "Nimi"
 
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:350
 msgid "Application unique name"
 msgstr "Sovelluksen ainutkertainen nimi"
 
@@ -497,6 +497,9 @@ msgstr "Näytä asetustiedostossa olevat kansiot"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Näytä asetustiedoston polku"
+
+#~ msgid "Bonobo Activation"
+#~ msgstr "Bonobo-aktivointi"
 
 #~ msgid ""
 #~ "Register as the users' activation server without locking [!] for debugging"
