@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
+"POT-Creation-Date: 2007-02-18 23:15+0100\n"
 "PO-Revision-Date: 2006-08-13 14:44+0200\n"
 "Last-Translator: Artur Flinta <aflinta@at.kernel.pl>\n"
 "Language-Team: Polish <translators@gnomepl.org>\n"
@@ -31,45 +31,49 @@ msgstr "Nie można odnaleźć potomka w którym występuje serwer"
 msgid "Not a valid Activation ID"
 msgstr "Napis nie jest poprawnym identyfikatorem aktywacji"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Katalog, z którego odczytywane powinny być pliki .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "KATALOG"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Udostępnianie jako ActivationContext (domyślnie tylko jako ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Deskryptor pliku, do którego zapisać IOR"
 
-#: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../activation-server/activation-server-main.c:170
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:392
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
 msgstr ""
-"Zarejestrowanie jako serwer aktywacji użytkownika bez blokowania [!] dla "
+"Rejestracja jako serwer aktywacji użytkownika bez blokowania. Uwaga: "
+"opcja ta może mieć niebezpieczny efekt uboczny mający wpływ na "
+"stabilność uruchomionej sesji użytkownika i powinna być używana tylko "
 "debugowania"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Wyrażenie zapytania do przetworzenia"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "WYRAŻENIE"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -137,7 +141,7 @@ msgstr "Właściwość \"%s\" nie ma wartości"
 msgid "Could not parse badly formed XML document %s"
 msgstr "Nie można przeanalizować źle sformułowanego dokumentu XML %s"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:626
 #, c-format
 msgid "Trying dir %s"
 msgstr "Próbowanie katalogu %s"
@@ -155,34 +159,34 @@ msgstr "Nie można odczytać z procesu potomnego: %s\n"
 msgid "EOF from child process\n"
 msgstr "EOF z procesu potomnego\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:435
+#: ../bonobo-activation/bonobo-activation-fork-server.c:434
 msgid "Couldn't spawn a new process"
 msgstr "Nie można utworzyć nowego procesu"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:392
 msgid "File descriptor to print IOR on"
 msgstr "Deskryptor pliku, do którego wypisać IOR"
 
-#: ../bonobo-activation/bonobo-activation-init.c:357
-#: ../bonobo-activation/bonobo-activation-init.c:367
+#: ../bonobo-activation/bonobo-activation-init.c:358
+#: ../bonobo-activation/bonobo-activation-init.c:394
 msgid "IID to activate"
 msgstr "Aktywowany IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:359
-#: ../bonobo-activation/bonobo-activation-init.c:369
+#: ../bonobo-activation/bonobo-activation-init.c:360
+#: ../bonobo-activation/bonobo-activation-init.c:396
 msgid "Prevent registering of server with OAF"
 msgstr "Wstrzymuje rejestrację serwera przez OAF-a"
 
-#: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Aktywacja Bonobo"
-
 #: ../bonobo-activation/bonobo-activation-init.c:404
+msgid "Bonobo Activation options:"
+msgstr "Opcje aktywacji Bonobo:"
+
+#: ../bonobo-activation/bonobo-activation-init.c:405
 msgid "Show Bonobo Activation options"
 msgstr "Wyświetlanie opcji Aktywacji Bonobo"
 
-#: ../bonobo-activation/bonobo-activation-init.c:512
+#: ../bonobo-activation/bonobo-activation-init.c:513
 msgid "Bonobo activation options"
 msgstr "Opcje aktywacji Bonobo"
 
@@ -207,11 +211,11 @@ msgstr "Generator \"%s\" zwrócił NIL dla \"%s\""
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Biblioteka dzielona \"%s\" nie zawiera \"%s\""
 
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:350
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-application.c:350
 msgid "Application unique name"
 msgstr "Unikalna nazwa aplikacji"
 
@@ -498,3 +502,12 @@ msgstr "Wyświetla katalogi w pliku konfiguracyjnym"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Wyświetla ścieżkę pliku konfiguracyjnego"
+
+#~ msgid ""
+#~ "Register as the users' activation server without locking [!] for debugging"
+#~ msgstr ""
+#~ "Zarejestrowanie jako serwer aktywacji użytkownika bez blokowania [!] dla "
+#~ "debugowania"
+
+#~ msgid "Bonobo Activation"
+#~ msgstr "Aktywacja Bonobo"
