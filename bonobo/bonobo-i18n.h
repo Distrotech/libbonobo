@@ -31,48 +31,15 @@
 #ifndef __BONOBO_I18N_H__
 #define __BONOBO_I18N_H__ 1
 
-#include <glib.h>
+/* for backward compatibility */
+#if !defined(GETTEXT_PACKAGE) && defined(BONOBO_EXPLICIT_TRANSLATION_DOMAIN)
+#define GETTEXT_PACKAGE BONOBO_EXPLICIT_TRANSLATION_DOMAIN
+#endif
 
-
-G_BEGIN_DECLS
-
-#if !defined(__BONOBO_I18NP_H__)
-
-#ifdef ENABLE_NLS
-#    include <libintl.h>
-#    ifdef BONOBO_EXPLICIT_TRANSLATION_DOMAIN
-#        undef _
-#        define _(String) dgettext (BONOBO_EXPLICIT_TRANSLATION_DOMAIN, String)
-#    else 
-#        define _(String) gettext (String)
-#    endif
-#    ifdef gettext_noop
-#        define N_(String) gettext_noop (String)
-#    else
-#        define N_(String) (String)
-#    endif
+#ifdef GETTEXT_PACKAGE
+#include <glib/gi18n-lib.h>
 #else
-/* Stubs that do something close enough.  */
-#    undef textdomain
-#    define textdomain(String) (String)
-#    undef gettext
-#    define gettext(String) (String)
-#    undef dgettext
-#    define dgettext(Domain,Message) (Message)
-#    undef dcgettext
-#    define dcgettext(Domain,Message,Type) (Message)
-#    undef bindtextdomain
-#    define bindtextdomain(Domain,Directory) (Domain)
-#    undef bind_textdomain_codeset
-#    define bind_textdomain_codeset(Domain,CodeSet) (Domain)
-#    undef _
-#    define _(String) (String)
-#    undef N_
-#    define N_(String) (String)
+#include <glib/gi18n.h>
 #endif
-
-#endif
-
-G_END_DECLS
 
 #endif /* __BONOBO_I18N_H__ */

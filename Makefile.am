@@ -8,6 +8,7 @@ libinclude_HEADERS = \
 	libbonobo.h
 
 EXTRA_DIST = \
+	MAINTAINERS \
 	bonobo-activation-config.xml \
 	libbonobo-zip.in     \
 	intltool-extract.in  \
