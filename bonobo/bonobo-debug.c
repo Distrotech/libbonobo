@@ -19,7 +19,7 @@ static FILE *_bonobo_debug_file;
 void
 bonobo_debug_init(void)
 {
-	static const GDebugKey debug_keys[] = {
+	const GDebugKey debug_keys[] = {
 		{ "refs",       BONOBO_DEBUG_REFS },
 		{ "aggregate",  BONOBO_DEBUG_AGGREGATE },
 		{ "lifecycle",  BONOBO_DEBUG_LIFECYCLE },

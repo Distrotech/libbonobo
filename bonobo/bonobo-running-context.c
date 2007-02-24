@@ -236,7 +236,7 @@ bonobo_running_context_trace_objects_T (CORBA_Object object,
 {
 	BonoboRunningInfo *ri;
 #ifdef G_ENABLE_DEBUG
-	static char *cmode[] = {
+	static const char cmode[][14] = {
 		"add_object",
 		"remove_object",
 		"ignore_object"		
