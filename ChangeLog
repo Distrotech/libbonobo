@@ -1,5 +1,12 @@
 2007-02-26  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* NEWS: Update.
+	* bonobo/bonobo-context.c: (context_add), (bonobo_context_init):
+	Revert the patch from bug 403143 since it breaks make check.
+	* doc/api/tmpl/bonobo-i18n.sgml: Updated.
+
+2007-02-26  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* activation-server/activation-context-corba.c:
 	* activation-server/activation-server-main.c:
 	* bonobo/bonobo-i18n.h:
