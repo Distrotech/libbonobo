@@ -1,3 +1,12 @@
+2007-02-26  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/activation-context-corba.c:
+	* activation-server/activation-server-main.c:
+	* bonobo/bonobo-i18n.h:
+	* bonobo/bonobo-object.c:
+	More fixes for bug #363033. This should make nautilus
+	compile again hopefully.
+
 2007-02-24  Christian Persch  <chpe@svn.gnome.org>
 
 	* bonobo/bonobo-debug.c: (bonobo_debug_init):

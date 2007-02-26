@@ -31,12 +31,7 @@
 #ifndef __BONOBO_I18N_H__
 #define __BONOBO_I18N_H__ 1
 
-/* for backward compatibility */
-#if !defined(GETTEXT_PACKAGE) && defined(BONOBO_EXPLICIT_TRANSLATION_DOMAIN)
-#define GETTEXT_PACKAGE BONOBO_EXPLICIT_TRANSLATION_DOMAIN
-#endif
-
-#ifdef GETTEXT_PACKAGE
+#ifdef BONOBO_EXPLICIT_TRANSLATION_DOMAIN
 #include <glib/gi18n-lib.h>
 #else
 #include <glib/gi18n.h>

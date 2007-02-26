@@ -39,6 +39,7 @@
 #include "activation-context-query.h"
 #include "activation-server-corba-extensions.h"
 #include <libbonobo.h>
+#include <bonobo/bonobo-i18n.h>
 
 #undef LOCALE_DEBUG
 

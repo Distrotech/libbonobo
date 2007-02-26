@@ -30,6 +30,7 @@
 #include <ORBitservices/CosNaming.h>
 #include <ORBitservices/CosNaming_impl.h>
 #include <libbonobo.h>
+#include <bonobo/bonobo-i18n.h>
 
 #include "bonobo-activation/bonobo-activation-private.h"
 
