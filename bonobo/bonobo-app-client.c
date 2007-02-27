@@ -29,7 +29,7 @@ bonobo_app_client_get_type (void)
 				NULL,		/* class_data */
 				sizeof (BonoboAppClient),
 				0,		/* n_preallocs */
-				(GInstanceInitFunc) bonobo_app_client_init,
+				(GInstanceInitFunc) bonobo_app_client_init
 			};
 		
 		app_client_type = g_type_register_static

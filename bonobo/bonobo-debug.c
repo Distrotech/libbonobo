@@ -24,7 +24,7 @@ bonobo_debug_init(void)
 		{ "aggregate",  BONOBO_DEBUG_AGGREGATE },
 		{ "lifecycle",  BONOBO_DEBUG_LIFECYCLE },
 		{ "running",    BONOBO_DEBUG_RUNNING },
-		{ "object",     BONOBO_DEBUG_OBJECT },
+		{ "object",     BONOBO_DEBUG_OBJECT }
 	};
 	const char *env_string;
 

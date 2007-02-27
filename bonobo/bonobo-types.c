@@ -134,7 +134,7 @@ bonobo_corba_object_type_register_static (const gchar *name, const CORBA_TypeCod
 		"p",
 		corba_object_proxy_collect_value,
 		"p",
-		corba_object_proxy_lcopy_value,
+		corba_object_proxy_lcopy_value
 	};
 	const GTypeInfo type_info = {
 		0,		/* class_size */

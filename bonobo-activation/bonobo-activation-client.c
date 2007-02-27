@@ -111,7 +111,7 @@ static POA_Bonobo_Unknown__epv impl_Bonobo_Unknown_epv = {
 static POA_Bonobo_ActivationClient__vepv impl_Bonobo_ActivationClient_vepv = {
         &impl_Bonobo_ActivationClient_base_epv,
         &impl_Bonobo_Unknown_epv,
-        &impl_Bonobo_ActivationClient_epv,
+        &impl_Bonobo_ActivationClient_epv
 };
 
 static CORBA_Object
