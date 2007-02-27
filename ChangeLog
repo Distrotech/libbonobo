@@ -1,3 +1,9 @@
+2007-02-27  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* tests/test-activation/bonobo-activation-test-async.c:
+	(test_activate), (test_activate_from_id): Fix return
+	values to be consistent.
+
 =============================== 2.17.92 ========================
 
 2007-02-26  Kjartan Maraas  <kmaraas@gnome.org>

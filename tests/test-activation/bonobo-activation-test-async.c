@@ -41,7 +41,7 @@ test_callback (CORBA_Object   activated_object,
 }
 
 
-/* returns TRUE in case of success. FALSE otherwise. 
+/* returns 1 in case of success. 0 otherwise. 
    -1 if answer timeouted.... */
 static int
 test_activate (char *requirements)
@@ -69,13 +69,13 @@ test_activate (char *requirements)
                 return -1;
         }
         if (data.succeeded == TRUE) {
-                return TRUE;
+                return 1;
         } else {
-                return FALSE;
+                return 0;
         }
 }
 
-/* returns TRUE in case of success. FALSE otherwise. 
+/* returns 1 in case of success. 0 otherwise. 
    -1 if answer timeouted.... */
 static int
 test_activate_from_id (char *aid)
@@ -102,9 +102,9 @@ test_activate_from_id (char *aid)
                 return -1;
         }
         if (data.succeeded == TRUE) {
-                return TRUE;
+                return 1;
         } else {
-                return FALSE;
+                return 0;
         }
 }
 
