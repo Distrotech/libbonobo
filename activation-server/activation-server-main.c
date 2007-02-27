@@ -43,9 +43,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <signal.h>
-#include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <locale.h>
 #include <string.h>
 #ifdef HAVE_SYSLOG_H

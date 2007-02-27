@@ -42,11 +42,6 @@
 #include <string.h>
 #include <unistd.h>
 
-#ifdef G_OS_WIN32
-#include <io.h>
-#include <windows.h>
-#endif
-
 /****************** ORBit-specific stuff ****************/
 
 #include <orbit/orbit.h>
@@ -65,6 +60,7 @@ gboolean bonobo_activation_private = FALSE;
 #error Must build as a DLL
 #endif
 
+#include <io.h>
 #include <windows.h>
 #include <mbstring.h>
 

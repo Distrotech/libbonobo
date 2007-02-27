@@ -1,5 +1,12 @@
 2007-02-27  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* activation-server/activation-server-main.c:
+	* bonobo-activation/bonobo-activation-init.c:
+	* bonobo/bonobo-generic-factory.c:
+	Remove unneeded duplicated includes.
+
+2007-02-27  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* bonobo-activation/bonobo-activation-client.c:
 	* bonobo/bonobo-app-client.c: (bonobo_app_client_get_type):
 	* bonobo/bonobo-debug.c: (bonobo_debug_init):
