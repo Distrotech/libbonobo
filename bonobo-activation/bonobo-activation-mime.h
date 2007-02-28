@@ -21,10 +21,10 @@
  *  Author: Alexander Larsson <alexl@redhat.com>
  */
 
-#include <bonobo-activation/bonobo-activation-server-info.h>
-
 #ifndef BONOBO_ACTIVATION_MIME_H
 #define BONOBO_ACTIVATION_MIME_H
+
+#include <bonobo-activation/bonobo-activation-server-info.h>
 
 Bonobo_ServerInfo *bonobo_activation_get_default_component_for_mime_type (const char *mime_type);
 GList *            bonobo_activation_get_all_components_for_mime_type    (const char *mime_type);
