@@ -1,13 +1,13 @@
 # translation of libbonobo.HEAD.gu.po to Gujarati
-# Copyright (C) 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2005, 2006, 2007 Free Software Foundation, Inc.
 # Ankit Patel <ankit644@yahoo.com>, 2005, 2006.
-# Ankit Patel <ankit@redhat.com>, 2006.
+# Ankit Patel <ankit@redhat.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-12 07:50+0100\n"
-"PO-Revision-Date: 2006-11-12 16:33+0530\n"
+"POT-Creation-Date: 2007-01-02 05:40+0000\n"
+"PO-Revision-Date: 2007-03-02 12:03+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -54,7 +55,10 @@ msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
-msgstr "વપરાશકર્તાના સર્વર તરીકે તાળું માર્યા વિના રજીસ્ટર કરો.  ચેતવણી: આ વિકલ્પને વપરાશકર્તાના ચાલી રહેલ સત્રની સુગમતા માટે ભયાનક આડ અસરો હોઈ શકે, અને તે માત્ર ડિબગીંગ હેતુઓ માટે જ વાપરી શકાશે"
+msgstr ""
+"વપરાશકર્તાના સર્વર તરીકે તાળું માર્યા વિના રજીસ્ટર કરો.  ચેતવણી: આ વિકલ્પને "
+"વપરાશકર્તાના ચાલી રહેલ સત્રની સુગમતા માટે ભયાનક આડ અસરો હોઈ શકે, અને તે માત્ર ડિબગીંગ "
+"હેતુઓ માટે જ વાપરી શકાશે"
 
 #: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
@@ -166,8 +170,8 @@ msgid "Prevent registering of server with OAF"
 msgstr "AOF ની સાથે સર્વર નોંધણી અટકાવે છે"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "બોનોબો સક્રિયકરણ"
+msgid "Bonobo Activation options:"
+msgstr "બોનોબો સક્રિયકરણ વિકલ્પો:"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
