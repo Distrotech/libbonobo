@@ -1,4 +1,4 @@
-# translation of libbonobo.HEAD.mk.po to Macedonian
+# translation of libbonobo.HEAD.po to Macedonian
 # translation of libbonobo.HEAD.mk.po to
 # translation of libbonobo.HEAD.mk.po to
 # This file is distributed under the same license as the PACKAGE package.
@@ -10,13 +10,14 @@
 # Arangel Angov <ufo@linux.net.mk>, 2004, 2006.
 # Арангел Ангов <ufo@linux.net.mk>, 2005.
 # Jovan Naumovski <jovan@lugola.net>, 2006.
+# Arangel Angov <arangel@linux.net.mk>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo.HEAD.mk\n"
+"Project-Id-Version: libbonobo.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-10 16:46+0100\n"
-"PO-Revision-Date: 2006-11-10 18:41+0100\n"
-"Last-Translator: Jovan Naumovski <jovan@lugola.net>\n"
+"POT-Creation-Date: 2007-01-02 05:40+0000\n"
+"PO-Revision-Date: 2007-03-06 10:42+0100\n"
+"Last-Translator: Arangel Angov <arangel@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,9 +62,10 @@ msgid ""
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
 msgstr ""
-"Регистрирај се како корисничкиот сервер за активација без заклучување.  Внимание, оваа "
-"опција може да има опасни последици на стабилноста на корисничката сесија која "
-"се извршува и треба да се користи само за дебагирање."
+"Регистрирај се како корисничкиот сервер за активација без заклучување.  "
+"Внимание, оваа опција може да има опасни последици на стабилноста на "
+"корисничката сесија која се извршува и треба да се користи само за "
+"дебагирање."
 
 #: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
@@ -177,8 +179,8 @@ msgid "Prevent registering of server with OAF"
 msgstr "Спречи регистрација на серверот со OAF"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Активирање на Bonobo"
+msgid "Bonobo Activation options:"
+msgstr "Опции за активирање на Bonobo:"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
