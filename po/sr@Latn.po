@@ -1,18 +1,19 @@
 # Serbian translation of libbonobo
-# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004, 2005, 2006.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004, 2005, 2006, 2007.
 #
 # This file is distributed under the same license as the libbonobo package.
 #
 # Maintainer: Veljko M. Stanojević <veljko@vms.homelinux.net>
 # Reviewed on 2005-07-09 by: Danilo Šegan <dsegan@gmx.net>
+# Translated on 2006-02-01 by Slobodan D. Sredojević <slobo@akrep.be>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-02-01 00:19+0100\n"
-"Last-Translator: Slobodan D. Sredojević <slobo@akrep.be>\n"
+"POT-Creation-Date: 2007-01-02 05:40+0000\n"
+"PO-Revision-Date: 2007-03-11 15:58+0100\n"
+"Last-Translator: Goran Rakić <grakic@devbase.net>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,45 +29,48 @@ msgstr "Nisam uspeo da otkrijem na koji podproces je server uvršten"
 msgid "Not a valid Activation ID"
 msgstr "Nevažeća identifikacija za pokretanje"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr "Direktorijum iz kojeg će se čitati .server datoteke"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "DIREKTORIJUM"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Služi kao ActivationContext (podrazumevano je samo ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "Opisnik datoteke za upisivanje IOR-a"
 
 # Opisnik datoteke?
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "OD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
 msgstr ""
-"Registrovan kao korisnički server za aktiviranje bez zaključavanja [!] za "
-"otklanjanje grešaka"
+"Prijavi se kao korisnikov server za pokretanja bez zaključavanja. Upozorenje: ova "
+"opcija se može opasno odraziti na stabilnost korisnikove sesije koja je u toku "
+"i treba je koristiti samo pri otkrivanju grešaka"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "Izraz za pretragu koji treba vrednovati"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "IZRAZ"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -172,8 +176,8 @@ msgid "Prevent registering of server with OAF"
 msgstr "Spreči registrovanje servera na OAF-u"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Bonobo pokretanje"
+msgid "Bonobo Activation options:"
+msgstr "Opcije za pokretanje bonoboa:"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
 msgid "Show Bonobo Activation options"
@@ -498,6 +502,15 @@ msgstr "Prikaži direktorijume u datoteci sa podešavanjima"
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Prikaži putanju do datoteke sa podešavanjima"
+
+#~ msgid ""
+#~ "Register as the users' activation server without locking [!] for debugging"
+#~ msgstr ""
+#~ "Registrovan kao korisnički server za aktiviranje bez zaključavanja [!] za "
+#~ "otklanjanje grešaka"
+
+#~ msgid "Bonobo Activation"
+#~ msgstr "Bonobo pokretanje"
 
 # „Race“ je pojava kada dva procesa pokušaju istovremeno da koriste jedan resurs, s tim što jedan proces drži ono što je potrebno da bi drugi nastavio — odnosno, nijedan ne može da nastavi
 #~ msgid "Race condition activating server '%s'"
