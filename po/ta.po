@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
+"POT-Creation-Date: 2007-01-02 05:40+0000\n"
 "PO-Revision-Date: 2006-06-07 14:40+0530\n"
 "Last-Translator: Felix <ifelix@redhat.com>\n"
 "Language-Team: Tamil <ta@li.org>\n"
@@ -32,49 +32,51 @@ msgid "Not a valid Activation ID"
 msgstr "தூண்டு செய்யும் எண் செல்லாது"
 
 # server/activation-server-main.c:64
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "Directory to read .server files from"
 msgstr ".server கோப்புகளை வாசிக்க வேண்டிய அடைவு"
 
 # server/activation-server-main.c:64
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:163
 msgid "DIRECTORY"
 msgstr "அடைவு"
 
 # server/activation-server-main.c:69
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:166
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "ActivationContext'ஆக சேவையிடு (கொடா நிலை ObjectDirectory மட்டும்)"
 
 # server/activation-server-main.c:74
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 msgid "File descriptor to write IOR to"
 msgstr "IOR எழுத வேண்டிய கோப்பு விவரிப்பு"
 
 # bonobo-activation/bonobo-activation-init.c:224
 # server/activation-server-main.c:74
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:170
 #: ../bonobo-activation/bonobo-activation-init.c:355
 #: ../bonobo-activation/bonobo-activation-init.c:365
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:173
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr "பிழைத்திருத்தத்திற்கு பூட்டாமல் [!] பயனர் செயல்படுத்தல் சேவையகமாக பதிவு செய்யவும்"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
+msgstr ""
 
 # server/activation-server-main.c:79
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "Query expression to evaluate"
 msgstr "மதிப்பிட வேண்டிய வினா கோவை"
 
 # server/activation-server-main.c:79
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:181
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:426
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -191,8 +193,9 @@ msgstr "OAFஇல் சேவையகத்தை பதிவுசெய்�
 
 # bonobo-activation/bonobo-activation-init.c:426
 #: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Bonobo செயல்படுத்தல்"
+#, fuzzy
+msgid "Bonobo Activation options:"
+msgstr "Bonobo தொடக்க விருப்பங்கள்"
 
 # bonobo-activation/bonobo-activation-init.c:426
 #: ../bonobo-activation/bonobo-activation-init.c:404
@@ -532,6 +535,15 @@ msgstr "அமை வடிவக கோப்பில் உல்ல அட�
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "அமை வடிவக கோப்பின் பாதையைக் காண்பி"
+
+#~ msgid ""
+#~ "Register as the users' activation server without locking [!] for debugging"
+#~ msgstr ""
+#~ "பிழைத்திருத்தத்திற்கு பூட்டாமல் [!] பயனர் செயல்படுத்தல் சேவையகமாக பதிவு செய்யவும்"
+
+# bonobo-activation/bonobo-activation-init.c:426
+#~ msgid "Bonobo Activation"
+#~ msgstr "Bonobo செயல்படுத்தல்"
 
 #~ msgid "Race condition activating server '%s'"
 #~ msgstr "'%s' சேவையகம் செயற்படுத்தும் போது பந்தய-நிலை"
