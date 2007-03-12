@@ -1,3 +1,26 @@
+libbonobo 2.18.0
+
+	* Code cleanups (Kjartan)
+	* Build fix (Loïc Minier)
+	* Updated translations:
+	  - Albanian (Laurent Dhima)
+	  - Bengali Indian (Runa Bhattacharjee)
+	  - Brazilian Portugese (Leonardo Ferreira Fontenelle)
+	  - Dutch (Timo Meinen)
+	  - Dzongkha (Pema Geyleg)
+	  - Finnish (Illka Tuohela)
+	  - Greek (Simos Xenitellis)
+	  - Gujarati (Ankit Patel)
+	  - Hungarian (Gabor Kelemen)
+	  - Lithuanian (Gintautas Miliauskas)
+	  - Macedonian (Jovan Naumovski)
+	  - Polish (The GNOME PL team)
+	  - Romanian (Mişu Moldovan)
+	  - Russian (Leonid Kanter)
+	  - Serbian (Goran Rakić)
+	  - Tamil (I Felix)
+	  - Traditional Chinese (Chao-Hsiung Liao)
+
 libbonobo 2.17.92
 
 	* Further reduce relocations (Christian)
