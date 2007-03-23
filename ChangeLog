@@ -1,5 +1,9 @@
 2007-03-23  Christian Persch  <chpe@gnome.org>
 
+	* bonobo/bonobo-i18n.h: Deprecate bonobo-i18n.h. Bug #419533.
+
+2007-03-23  Christian Persch  <chpe@gnome.org>
+
 	* activation-server/activation-context-corba.c:
 	* activation-server/activation-server-corba-extensions.c:
 	* activation-server/activation-server-main.c:

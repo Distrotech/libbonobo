@@ -31,10 +31,14 @@
 #ifndef __BONOBO_I18N_H__
 #define __BONOBO_I18N_H__ 1
 
+#ifndef BONOBO_DISABLE_DEPRECATED
+ 
 #ifdef BONOBO_EXPLICIT_TRANSLATION_DOMAIN
 #include <glib/gi18n-lib.h>
 #else
 #include <glib/gi18n.h>
 #endif
+
+#endif /* !BONOBO_DISABLE_DEPRECATED */
 
 #endif /* __BONOBO_I18N_H__ */
