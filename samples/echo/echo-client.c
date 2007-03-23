@@ -6,8 +6,9 @@
  */
 
 #include <config.h>
+
+#include <glib/gi18n.h>
 #include <libbonobo.h>
-#include <bonobo/bonobo-i18n.h>
 #include "Bonobo_Sample_Echo.h"
 
 int 

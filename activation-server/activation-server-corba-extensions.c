@@ -29,10 +29,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <glib/gi18n.h>
+
 #include "server.h"
 
 #include "activation-server-corba-extensions.h"
-#include <bonobo-activation/bonobo-activation-i18n.h>
 
 char *
 activation_server_CORBA_Context_get_value (CORBA_Context         ctx, 

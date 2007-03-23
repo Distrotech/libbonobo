@@ -76,11 +76,11 @@ int                   bonobo_generic_factory_main_timeout    (const char        
 #if defined (__BONOBO_UI_MAIN_H__) || defined (LIBBONOBOUI_H)
 #define BONOBO_FACTORY_INIT(descr, version, argcp, argv)			\
 	if (!bonobo_ui_init (descr, version, argcp, argv))			\
-		g_error (_("Could not initialize Bonobo"));
+		g_error ("Could not initialize Bonobo");
 #else
 #define BONOBO_FACTORY_INIT(desc, version, argcp, argv)				\
 	if (!bonobo_init (argcp, argv))						\
-		g_error (_("Could not initialize Bonobo"));
+		g_error ("Could not initialize Bonobo");
 #endif
 
 #define BONOBO_OAF_FACTORY(oafiid, descr, version, callback, data)		\

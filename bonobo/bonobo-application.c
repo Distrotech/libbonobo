@@ -1,12 +1,14 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #include "config.h"
+
+#include <glib/gi18n-lib.h>    
+
 #include "bonobo-application.h"
 #include "bonobo-app-client.h"
 #include <bonobo-exception.h>
 #include "bonobo-marshal.h"
 #include "bonobo-arg.h"
 #include "bonobo-main.h"
-#include "bonobo-i18n.h"
 #include "bonobo-types.h"
 #include <string.h>
 

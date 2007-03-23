@@ -30,7 +30,7 @@
 #include "bonobo-activation-client.h"
 
 #include "Bonobo_ActivationContext.h"
-#include "bonobo-activation-i18n.h"
+#include <glib/gi18n-lib.h>
 #include "bonobo-activation-private.h"
 #include "bonobo-activation-register.h"
 #include "bonobo-activation-version.h"
@@ -380,6 +380,15 @@ init_gettext (gboolean bind_codeset)
 #endif
 }
 
+/**
+ * bonobo_activation_get_goption_group:
+ *
+ * Returns a #GOptionGroup for parsing bonobo-activation options.
+ * 
+ * Return value: a new #GOptionGroup
+ *
+ * Since: 2.14
+ */
 GOptionGroup *
 bonobo_activation_get_goption_group (void)
 {

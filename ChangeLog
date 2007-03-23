@@ -1,9 +1,43 @@
+2007-03-23  Christian Persch  <chpe@gnome.org>
+
+	* activation-server/activation-context-corba.c:
+	* activation-server/activation-server-corba-extensions.c:
+	* activation-server/activation-server-main.c:
+	* activation-server/object-directory-activate.c:
+	* activation-server/object-directory-config-file.c:
+	* activation-server/object-directory-corba.c:
+	* activation-server/object-directory-load.c:
+	* bonobo-activation/Makefile.am:
+	* bonobo-activation/bonobo-activation-activate.c:
+	* bonobo-activation/bonobo-activation-base-service.c:
+	* bonobo-activation/bonobo-activation-fork-server.c:
+	* bonobo-activation/bonobo-activation-get-language-list.c:
+	* bonobo-activation/bonobo-activation-i18n.h:
+	* bonobo-activation/bonobo-activation-init.c:
+	* bonobo-activation/bonobo-activation-shlib.c:
+	* bonobo/Makefile.am:
+	* bonobo/bonobo-application.c:
+	* bonobo/bonobo-debug.c: (bonobo_debug_print):
+	* bonobo/bonobo-debug.h:
+	* bonobo/bonobo-exception.c:
+	* bonobo/bonobo-generic-factory.h:
+	* bonobo/bonobo-moniker-util.c:
+	* bonobo/bonobo-moniker.c:
+	* bonobo/bonobo-object.c:
+	* bonobo/bonobo-running-context.c:
+	(bonobo_running_context_trace_objects_T):
+	* monikers/bonobo-moniker-oaf.c:
+	* samples/echo/echo-client.c:
+	* utils/bonobo-activation-sysconf.c: (main): Use glib/gi18n[-lib].h
+	instead of bonobo-i18n.h. Bug #419535.
+
 2007-03-09  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 
 	* activation-server/object-directory-corba.c
 	(od_merge_client_environment): Don't crash if a ClientContext for
 	a client isn't available (maybe because it's a legacy client).
 	Fixes bug #416393.
+
 2007-02-28  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo-activation/bonobo-activation-mime.h:

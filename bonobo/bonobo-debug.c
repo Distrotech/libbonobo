@@ -48,7 +48,7 @@ bonobo_debug_init(void)
 }
 
 void
-bonobo_debug_print (char *name, char *fmt, ...)
+bonobo_debug_print (const char *name, char *fmt, ...)
 {
 	va_list args;
            

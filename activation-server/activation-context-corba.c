@@ -32,6 +32,8 @@
 #include <time.h>
 #include <string.h>
 
+#include <glib/gi18n.h>
+
 #include "server.h"
 
 #include "activation-context.h"
@@ -39,7 +41,6 @@
 #include "activation-context-query.h"
 #include "activation-server-corba-extensions.h"
 #include <libbonobo.h>
-#include <bonobo/bonobo-i18n.h>
 
 #undef LOCALE_DEBUG
 

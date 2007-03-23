@@ -20,6 +20,6 @@ typedef enum {
 extern BonoboDebugFlags _bonobo_debug_flags;
 
 void bonobo_debug_init  (void);
-void bonobo_debug_print (char *name, char *fmt, ...);
+void bonobo_debug_print (const char *name, char *fmt, ...);
 
 #endif /* _BONOBO_DEBUG_H_ */

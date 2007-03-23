@@ -29,7 +29,7 @@
 #include <libxml/xmlmemory.h> 
 #include <glib.h>
 
-#include "bonobo-activation/bonobo-activation-i18n.h"
+#include <glib/gi18n.h>
 #include "object-directory-config-file.h"
 
 #ifdef G_OS_WIN32

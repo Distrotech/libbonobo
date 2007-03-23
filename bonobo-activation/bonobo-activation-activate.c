@@ -34,7 +34,7 @@
 #include <bonobo-activation/bonobo-activation-shlib.h>
 #include <bonobo-activation/bonobo-activation-client.h>
 #include <bonobo-activation/bonobo-activation-async.h>
-#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <glib/gi18n-lib.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 
 static Bonobo_ActivationEnvironment activation_environment;

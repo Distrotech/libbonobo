@@ -31,9 +31,10 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <string.h>
+
+#include <glib/gi18n.h>
 #include <glib/gmarkup.h>
 
-#include "bonobo-activation/bonobo-activation-i18n.h"
 #include "bonobo-activation/bonobo-activation-private.h"
 #include "server.h"
 

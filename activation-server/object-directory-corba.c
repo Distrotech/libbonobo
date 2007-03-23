@@ -32,9 +32,9 @@
 #include <unistd.h>
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include "server.h"
 #include "object-directory.h"
-#include "bonobo-activation/bonobo-activation-i18n.h"
 #include "bonobo-activation/bonobo-activation-private.h"
 #include "activation-server-corba-extensions.h"
 

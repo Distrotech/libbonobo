@@ -26,7 +26,7 @@
 #include <config.h>
 
 #include <bonobo-activation/bonobo-activation-private.h>
-#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <glib/gi18n-lib.h>
 #include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 

@@ -11,6 +11,7 @@ INCLUDES = \
         -DBONOBO_BINDIR=\""$(bindir)"\" 		\
         -DBONOBO_LOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DBONOBO_LOCALEDIR=\""$(gnomelocaledir)"\" 	\
+	-DBONOBO_EXPLICIT_TRANSLATION_DOMAIN="GETTEXT_PACKAGE"	\
 	-DG_DISABLE_DEPRECATED				\
 	-DG_LOG_DOMAIN=\"Bonobo\"			\
 	-DVERSION=\"$(VERSION)\"

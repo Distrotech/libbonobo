@@ -57,7 +57,6 @@ libbonobo_activation_la_SOURCES=		\
 	bonobo-activation-base-service.c	\
 	bonobo-activation-register.c		\
 	bonobo-activation-server-info.c		\
-	bonobo-activation-i18n.h		\
 	bonobo-activation-fork-server.c		\
 	bonobo-activation-init.c		\
 	$(NULL)

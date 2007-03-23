@@ -9,8 +9,8 @@
 #include <config.h>
 #include <string.h>
 
-#define BONOBO_EXPLICIT_TRANSLATION_DOMAIN GETTEXT_PACKAGE
-#include <bonobo/bonobo-i18n.h>
+#include <glib/gi18n-lib.h>
+
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-moniker-util.h>
 

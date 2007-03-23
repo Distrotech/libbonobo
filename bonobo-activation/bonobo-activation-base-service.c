@@ -26,8 +26,10 @@
 /* This is part of the per-app CORBA bootstrapping - we use this to get 
    hold of a running metaserver and such */
 
+#include <config.h>
 
-#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <glib/gi18n-lib.h>
+
 #include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/bonobo-activation-base-service.h>
 #include <bonobo-activation/bonobo-activation-private.h>

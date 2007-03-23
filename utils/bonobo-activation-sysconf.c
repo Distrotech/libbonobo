@@ -31,8 +31,9 @@
 #include <libxml/parser.h>  
 #include <libxml/xmlmemory.h>
 
+#include <glib/gi18n.h>
+
 #include <bonobo-activation/bonobo-activation.h>
-#include "bonobo-activation/bonobo-activation-i18n.h"
 #include "activation-server/object-directory-config-file.h"
 
 #ifdef G_OS_WIN32
@@ -307,8 +308,3 @@ int main (int argc, char **argv)
 
         return 0;
 }
-
-
-
-
-

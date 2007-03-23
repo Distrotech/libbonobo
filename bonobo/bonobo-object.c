@@ -13,6 +13,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+
+#include <glib/gi18n-lib.h>
+
 #include <glib-object.h>
 #include <gobject/gmarshal.h>
 #include <bonobo/Bonobo.h>
@@ -26,7 +29,6 @@
 #include <bonobo/bonobo-types.h>
 #include <bonobo/bonobo-private.h>
 #include <bonobo/bonobo-debug.h>
-#include <bonobo/bonobo-i18n.h>
 
 /* We need decent ORB cnx. flushing on shutdown to make this work */
 #undef ASYNC_UNREFS

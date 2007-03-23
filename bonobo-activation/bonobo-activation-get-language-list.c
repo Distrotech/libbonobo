@@ -22,7 +22,7 @@
 
 #include <config.h>
 #include <bonobo-activation/bonobo-activation-private.h>
-#include <bonobo-activation/bonobo-activation-i18n.h>
+#include <glib/gi18n-lib.h>
 
 /* ALEX:
  *        This function is not in use anymore in bonobo. However, some
