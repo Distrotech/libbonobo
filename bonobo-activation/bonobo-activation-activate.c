@@ -817,8 +817,7 @@ bonobo_activation_set_activation_env_value (const char *name,
 	activation_environment._release = TRUE;
 
 	for (i = 0; i < activation_environment._length - 1; i++)
-		Bonobo_ActivationEnvValue_copy (
-			&activation_environment._buffer [i], &old_buffer [i]);
+		activation_environment._buffer[i] = old_buffer[i];
 
 	Bonobo_ActivationEnvValue_set (&activation_environment._buffer [i], name, value);
 

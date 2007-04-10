@@ -1,3 +1,9 @@
+2007-04-10  Matthias Clasen  <mclasen@redhat.com>
+
+	* bonobo-activation/bonobo-activation-activate.c
+	(bonobo_activation_set_activation_env_value): Don't leak
+	old key-value pairs when copying to a larger array.  (#427992)
+
 2007-03-23  Christian Persch  <chpe@gnome.org>
 
 	* bonobo/bonobo-i18n.h: Deprecate bonobo-i18n.h. Bug #419533.
