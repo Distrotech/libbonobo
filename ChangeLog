@@ -1,9 +1,19 @@
+2007-04-10  Matthias Clasen  <mclasen@redhat.com>
+
+	Merge from trunk:
+
+	* bonobo-activation/bonobo-activation-activate.c
+	(bonobo_activation_set_activation_env_value): Don't leak
+	old key-value pairs when copying to a larger array.
+	(#427992)
+
 2007-03-09  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 
 	* activation-server/object-directory-corba.c
 	(od_merge_client_environment): Don't crash if a ClientContext for
 	a client isn't available (maybe because it's a legacy client).
 	Fixes bug #416393.
+
 2007-02-28  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo-activation/bonobo-activation-mime.h:
