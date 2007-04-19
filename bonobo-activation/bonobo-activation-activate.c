@@ -37,7 +37,7 @@
 #include <bonobo-activation/bonobo-activation-i18n.h>
 #include <bonobo-activation/Bonobo_ActivationContext.h>
 
-static Bonobo_ActivationEnvironment activation_environment;
+static Bonobo_ActivationEnvironment *activation_environment = NULL;
 
 /* FIXME: deprecated internal functions. Should we just remove?
  */
@@ -378,7 +378,7 @@ bonobo_activation_activate (const char             *requirements,
 	copy_strv_to_sequence (selection_order, &selorder);
         
         result = Bonobo_ActivationContext_activateMatchingFull
-                (ac, requirements, &selorder, &activation_environment,
+                (ac, requirements, &selorder, activation_environment,
                  flags, bonobo_activation_client_get (),
                  bonobo_activation_context_get (), ev);
         
@@ -387,7 +387,7 @@ bonobo_activation_activate (const char             *requirements,
         {
                 g_message ("TESTME: Fall-back activate");
                 result = Bonobo_ActivationContext_activateMatching
-                        (ac, requirements, &selorder, &activation_environment,
+                        (ac, requirements, &selorder, activation_environment,
                          flags, bonobo_activation_context_get (), ev);
         }
 
@@ -619,7 +619,7 @@ bonobo_activation_activate_async (const char               *requirements,
 
         args [0] = &requirements;
 	args [1] = &selorder;
-	args [2] = &activation_environment;
+	args [2] = activation_environment;
 	args [3] = &flags;
 	args [4] = &client;
 
@@ -738,7 +738,7 @@ bonobo_activation_activate_from_id_async (const Bonobo_ActivationID  aid,
 void
 bonobo_activation_init_activation_env (void)
 {
-	int i, j, num_items = 0;
+	int i;
 
 	struct {
 		const char *name;
@@ -760,69 +760,36 @@ bonobo_activation_init_activation_env (void)
 		{ NULL,		     NULL }
 	};
 
-	for (i = 0; getenv_values [i].name; i++) {
-		getenv_values [i].value = getenv (getenv_values [i].name);
-
-		if (getenv_values [i].value)
-			num_items++;
-	}
-
-	if (!num_items)
-		return;
-
-	activation_environment._length  = activation_environment._maximum = num_items;
-	activation_environment._buffer  = Bonobo_ActivationEnvironment_allocbuf (num_items);
-	activation_environment._release = TRUE;
-
-	j = 0;
+        g_assert (activation_environment == NULL);
+        activation_environment = Bonobo_ActivationEnvironment__alloc ();
 
 	for (i = 0; getenv_values [i].name; i++) {
+                Bonobo_ActivationEnvValue value = {
+                        (CORBA_char *) getenv_values [i].name,
+                        (CORBA_char *) getenv_values [i].value,
+                        0 /* flags */ };
 		if (!getenv_values [i].value)
 			continue;
-
-		Bonobo_ActivationEnvValue_set (
-			&activation_environment._buffer [j++],
-			getenv_values [i].name,
-			getenv_values [i].value);
+                ORBit_sequence_append (activation_environment, &value);
 	}
-
-	g_assert (j == num_items);
 }
 
 void
 bonobo_activation_set_activation_env_value (const char *name,
 					    const char *value)
 {
-	Bonobo_ActivationEnvValue *old_buffer;
 	int                        i;
+        Bonobo_ActivationEnvValue env_value = { (CORBA_char *) name, (CORBA_char *) value, 0 };
 
 	g_return_if_fail (name != NULL);
 
-	for (i = 0; i < activation_environment._length; i++)
-		if (!strcmp (activation_environment._buffer [i].name, name)) {
-			Bonobo_ActivationEnvValue_set (
-				&activation_environment._buffer [i], name, value);
+	for (i = 0; i < activation_environment->_length; i++) {
+		if (!strcmp (activation_environment->_buffer [i].name, name)) {
+                        ORBit_sequence_remove (activation_environment, i);
 			break;
 		}
-
-	if (i > 0 && i != activation_environment._length)
-		return; /* We've overwritten a value */
-
-	old_buffer = activation_environment._buffer;
-
-	activation_environment._length++;
-	activation_environment._maximum++;
-	activation_environment._buffer  = Bonobo_ActivationEnvironment_allocbuf (
-							activation_environment._length);
-	activation_environment._release = TRUE;
-
-	for (i = 0; i < activation_environment._length - 1; i++)
-		activation_environment._buffer[i] = old_buffer[i];
-
-	Bonobo_ActivationEnvValue_set (&activation_environment._buffer [i], name, value);
-
-	if (old_buffer)
-		CORBA_free (old_buffer);
+        }
+        ORBit_sequence_append (activation_environment, &env_value);
 }
 
 /**

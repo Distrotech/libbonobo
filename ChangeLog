@@ -1,3 +1,10 @@
+2007-04-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* bonobo-activation/bonobo-activation-activate.c: Rewrite
+	bonobo_activation_set_activation_env_value to make use
+	ORBit_sequnce_* APIs, to simplify code and eliminate memory
+	errors.  Closes #427992.
+
 2007-04-10  Matthias Clasen  <mclasen@redhat.com>
 
 	Merge from trunk:
