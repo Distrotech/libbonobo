@@ -1,3 +1,10 @@
+=============================== 2.19.4 ========================
+2007-06-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.in: Bump version to 2.19.4 to match the GNOME release.
+
+	* NEWS: Update NEWS.
+
 2007-04-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* bonobo-activation/bonobo-activation-activate.c: Rewrite
