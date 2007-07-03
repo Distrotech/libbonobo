@@ -341,7 +341,11 @@ bonobo_activation_server_by_forking (
         if (thread_lock) /* don't allow re-enterancy in this thread */
                 use_new_loop = TRUE;
         
+#ifdef G_OS_WIN32
+        _pipe (iopipes, 4096, _O_BINARY);
+#else
      	pipe (iopipes);
+#endif
 
 #ifdef BONOBO_ACTIVATION_DEBUG
         if (ai.do_srv_output)
