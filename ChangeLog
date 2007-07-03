@@ -2,7 +2,7 @@
 
 	* bonobo-activation/bonobo-activation-fork-server.c
 	(bonobo_activation_server_by_forking): In trunk GLib pipe() is no
-	longer a macro in <gwin32.h>, so call _pipe() explicitly.
+	longer a macro in gwin32.h, so call _pipe() explicitly.
 
 2007-06-23  Christian Persch  <chpe@gnome.org>
 
