@@ -1,3 +1,7 @@
+libbonobo 2.19.5
+	* Use gmodule-no-export-2.0 instead of gmodule-2.0 (#449841)
+	* Win32 fix for pipe macro (Tor Lillqvist)
+
 libbonobo 2.19.4
         * Fix b-a-s crash with legacy client (Gustavo Carneiro)
         * Code cleanup (Kjartan Maraas)
