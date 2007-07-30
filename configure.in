@@ -1,30 +1,23 @@
-AC_INIT(bonobo/bonobo-moniker.h)
+m4_define([bonobo_major_version],[2])
+m4_define([bonobo_minor_version],[19])
+m4_define([bonobo_micro_version],[6])
+m4_define([bonobo_version],[bonobo_major_version.bonobo_minor_version.bonobo_micro_version])
 
-AM_CONFIG_HEADER(config.h)
+AC_INIT([libbonobo],[bonobo_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=bonobo&component=libbonobo])
 
-BONOBO_MAJOR_VERSION=2
-BONOBO_MINOR_VERSION=19
-BONOBO_MICRO_VERSION=5
-BONOBO_VERSION="$BONOBO_MAJOR_VERSION.$BONOBO_MINOR_VERSION.$BONOBO_MICRO_VERSION"
+AC_CONFIG_SRCDIR([bonobo/bonobo-moniker.h])
+AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE(libbonobo, $BONOBO_VERSION)
+AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
 
-AC_SUBST(BONOBO_MAJOR_VERSION)
-AC_SUBST(BONOBO_MINOR_VERSION)
-AC_SUBST(BONOBO_MICRO_VERSION)
+BONOBO_MAJOR_VERSION=bonobo_major_version
+BONOBO_MINOR_VERSION=bonobo_minor_version
+BONOBO_MICRO_VERSION=bonobo_micro_version
+AC_SUBST([BONOBO_MAJOR_VERSION])
+AC_SUBST([BONOBO_MINOR_VERSION])
+AC_SUBST([BONOBO_MICRO_VERSION])
 
 AM_MAINTAINER_MODE
-
-dnl
-dnl Due to the sed scripts being split on 90 line
-dnl blocks, this macro needs to be right at the beggining.
-dnl
-IT_PROG_INTLTOOL([0.35.0])
-
-dnl with higher autotools, we can set ACLOCAL_AMFLAGS to make Makefile's
-dnl aware of our aclocal include dirs; but this works for automake-1.4
-dnl gnome-autogen.sh sets ACLOCAL_FLAGS properly
-ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
 
 LIBBONOBO_LT_VERSION_INFO='-version-info 0:0:0'
 AC_SUBST(LIBBONOBO_LT_VERSION_INFO)
@@ -85,14 +78,19 @@ AM_PROG_LIBTOOL
 AC_PROG_YACC
 AC_CHECK_FUNCS(bind_textdomain_codeset)
 
+# ****
+# i18n
+# ****
+
+IT_PROG_INTLTOOL([0.35.0])
+
 GETTEXT_PACKAGE=libbonobo-2.0
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[gettext package name])
-gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
-AC_SUBST(gnomelocaledir)
 
 AM_GLIB_GNU_GETTEXT
 
+GNOME_COMMON_INIT
 GNOME_COMPILE_WARNINGS
 
 dnl Checks for library functions
@@ -235,7 +233,10 @@ AC_SUBST(IF_BSD_PS)
 AC_SUBST(IF_POSIX_PS)
 AC_SUBST(IF_CYGWIN_PS)
 
-AC_OUTPUT([
+# *****************************************************************************
+# *****************************************************************************
+
+AC_CONFIG_FILES([
 Makefile
 libbonobo-zip
 po/Makefile.in
@@ -263,7 +264,4 @@ doc/activation/Makefile
 doc/activation-api/Makefile
 ])
 
-dnl echo "
-dnl 	This is the Development branch of libbonobo, if
-dnl you want something more stable checkout -r gnome-2-14.
-dnl "
+AC_OUTPUT

@@ -8,7 +8,7 @@ INCLUDES = \
         -DBONOBO_PIXMAPDIR=\""$(datadir)/pixmaps"\"	\
         -DBONOBO_BINDIR=\""$(bindir)"\" 		\
         -DBONOBO_LOCALSTATEDIR=\""$(localstatedir)"\" 	\
-        -DBONOBO_LOCALEDIR=\""$(gnomelocaledir)"\" 	\
+        -DBONOBO_LOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DG_LOG_DOMAIN=\"Bonobo\"			\
 	-DVERSION=\"$(VERSION)\"
 
