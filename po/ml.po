@@ -1,29 +1,29 @@
 # translation of libbonobo.HEAD.ml.po to Malayalam
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# FSF-India <locale@gnu.org.in>, 2003.
-# Ani Peter <apeter@redhat.com>, 2006.
 #
+# FSF-India <locale@gnu.org.in>, 2003.
+# Ani Peter <apeter@redhat.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.ml\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-08-20 09:35+0530\n"
+"POT-Creation-Date: 2007-03-24 03:48+0000\n"
+"PO-Revision-Date: 2007-08-04 14:52+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
-"Language-Team: Malayalam\n"
+"Language-Team: Malayalam <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
 
-#: ../activation-server/activation-context-corba.c:523
+#: ../activation-server/activation-context-corba.c:525
 msgid "Couldn't find which child the server was listed in"
 msgstr "ചൈള്‍ഡ് ഏത് സര്‍വറില്‍ എന്ന് കാണുവാന്‍ സാധ്യമായില്ല"
 
-#: ../activation-server/activation-context-corba.c:815
+#: ../activation-server/activation-context-corba.c:817
 msgid "Not a valid Activation ID"
 msgstr "തെറ്റായ ഐക്റിവേഷന്‍ ID ആണ്"
 
@@ -44,26 +44,32 @@ msgid "File descriptor to write IOR to"
 msgstr "IOR എഴുതേണ്ട ഫയല്‍ ഡിസ്ക്രിപ്റ്റര്‍"
 
 #: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr "ഡീബഗ്ഗില്‍ പൂട്ടാതെ[!] ഉപയോക്താവിന്‍റെ പ്രവര്‍ത്തന സര്‍വറായി രജിസ്ടര്‍ ചെയ്യുക"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
+msgstr ""
+"യൂസറിന്‍റെ ആക്ടിവേഷന്‍ സറ്‍വറില്‍ ലോക്കിങില്ലാതെ രജിസ്ടറ്‍ ചെയ്യുക. "
+"മുന്നറിയിപ്പ്:  യൂസറിന്‍റെ പ്റവറ്‍ത്തനത്തിലുളള സെഷനുകള്‍ക്ക് ഇത് തകരാറു "
+"ഉണ്ടാക്കാന്‍ സാധ്യതയുള്ളതിനാല്‍, ഇത് ഡീബഗ്ഗിങ് പ്റക്റിയകള്‍ക്ക് മാത്റമേ "
+"ഉപയോഗിക്കാന്‍ പാടുള്ളൂ"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:180
 msgid "Query expression to evaluate"
 msgstr "ഉത്തരം കണ്ടുപിടിക്കുന്നതിനുളള ചോദ്യം"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:180
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:426
-#: ../utils/bonobo-activation-sysconf.c:304
+#: ../activation-server/activation-server-main.c:429
+#: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr "ലഭ്യമായ കമാന്‍ഡ് ലൈന്‍ ഉപാധികള്‍ മുഴുവന്‍ കാണുന്നതിനായി '%s --help' പ്രവര്‍ത്തിപ്പിക്കുക.\n"
@@ -97,31 +103,31 @@ msgstr ""
 "Bonobo പ്രവര്‍ത്തന സജ്ജീകരണ ഫയല്‍ വിജയകരമായി വായിച്ചില്ല. ദയവായി, ഈ ഫയല്‍ഇതില്‍ ശരിയായ "
 "രീതിയില്‍ ഉണ്ടോ എന്ന് പരിശോധിക്കുക: %s"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:102
 msgid "a NULL iid is not valid"
 msgstr "NULL iid പാടില്ല"
 
-#: ../activation-server/object-directory-load.c:105
+#: ../activation-server/object-directory-load.c:106
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s-ല്‍ NULL ഉണ്ട്"
 
-#: ../activation-server/object-directory-load.c:109
+#: ../activation-server/object-directory-load.c:110
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s-ല്‍ NULL സ്ഥാനം ഉണ്ട്"
 
-#: ../activation-server/object-directory-load.c:118
+#: ../activation-server/object-directory-load.c:119
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "അസാധുവായ അക്ഷരം '%c' iid '%s'-ല്‍ ഉണ്ട്"
 
-#: ../activation-server/object-directory-load.c:348
+#: ../activation-server/object-directory-load.c:349
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "'%s' സവിശേഷതയ്ക്ക് മൂല്ല്യം ലഭ്യമല്ല"
 
-#: ../activation-server/object-directory-load.c:580
+#: ../activation-server/object-directory-load.c:581
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "തെറ്റായി രൂപപ്പെട്ടിരിക്കുന്ന XML രേഖ %s പാഴ്സ് ചെയ്യുവാന്‍ സാധ്യമല്ല"
@@ -133,8 +139,7 @@ msgstr "%s ഡയറക്ടറി ശ്യമിക്കുന്നു"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr ""
-"ചൈള്‍ഡ് പ്രക്രിയ പിശക് സംബന്ധിച്ച് സന്ദേശങ്ങള്‍ നല്‍കിയില്ല. അപരിചിതമായ പിശക് സംഭവിച്ചിരിക്കുന്നു"
+msgstr "ചൈള്‍ഡ് പ്രക്രിയ പിശക് സംബന്ധിച്ച് സന്ദേശങ്ങള്‍ നല്‍കിയില്ല. അപരിചിതമായ പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
@@ -145,34 +150,34 @@ msgstr "ചൈള്‍ഡ് പ്രക്രിയയില്‍ നിന�
 msgid "EOF from child process\n"
 msgstr "ചൈള്‍ഡ് പ്രക്രിയയില്‍ നിന്നുളള EOF: %s\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:435
+#: ../bonobo-activation/bonobo-activation-fork-server.c:434
 msgid "Couldn't spawn a new process"
 msgstr "ഒരു പുതിയ പ്രക്രിയ ഉണ്ടാക്കുവാന്‍ സാധ്യമല്ല"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "File descriptor to print IOR on"
 msgstr "IOR പ്രിന്‍റ് ചെയ്യേണ്ട ഫയല്‍ ഡിസ്ക്രിപ്റ്റര്‍"
 
-#: ../bonobo-activation/bonobo-activation-init.c:357
-#: ../bonobo-activation/bonobo-activation-init.c:367
+#: ../bonobo-activation/bonobo-activation-init.c:354
+#: ../bonobo-activation/bonobo-activation-init.c:399
 msgid "IID to activate"
 msgstr "പ്രവര്‍ത്തിപ്പിക്കുവാനുളള IID"
 
-#: ../bonobo-activation/bonobo-activation-init.c:359
-#: ../bonobo-activation/bonobo-activation-init.c:369
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:401
 msgid "Prevent registering of server with OAF"
 msgstr "OAF ആയി സര്‍വര്‍ രജിസ്ടര്‍ ചെയ്യുന്നത് തടയുക"
 
-#: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Bonobo പ്രവര്‍ത്തനം"
+#: ../bonobo-activation/bonobo-activation-init.c:409
+msgid "Bonobo Activation options:"
+msgstr "Bonobo പ്രവര്‍ത്തന ഉപാധികള്‍:"
 
-#: ../bonobo-activation/bonobo-activation-init.c:404
+#: ../bonobo-activation/bonobo-activation-init.c:410
 msgid "Show Bonobo Activation options"
 msgstr "Bonobo പ്രവര്‍ത്തനത്തിന്‍റെ ഉപാധികള്‍ കാണിക്കുക"
 
-#: ../bonobo-activation/bonobo-activation-init.c:512
+#: ../bonobo-activation/bonobo-activation-init.c:518
 msgid "Bonobo activation options"
 msgstr "Bonobo പ്രവര്‍ത്തന ഉപാധികള്‍"
 
@@ -205,11 +210,11 @@ msgstr "പേര്"
 msgid "Application unique name"
 msgstr "പ്രയോഗത്തിന് മാത്രമുളള പേര്"
 
-#: ../bonobo/bonobo-object.c:923
+#: ../bonobo/bonobo-object.c:926
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:923
+#: ../bonobo/bonobo-object.c:926
 msgid "Custom CORBA POA"
 msgstr "CORBA POA ഇഷ്ടാനുസരണം സജ്ജമാക്കുക"
 
@@ -349,16 +354,12 @@ msgstr "പിശക് പരിശോധിക്കുന്നതില്�
 msgid "General activation error with no description"
 msgstr "വിവരണമില്ലാത്ത സാധാരണ പ്രവര്‍ത്തന പിശക്"
 
-#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
-msgid "Could not initialize Bonobo"
-msgstr "Bonobo ആരംഭിക്കുവാന്‍ സാധ്യമായില്ല"
-
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "'%s കണ്ടുപിടിക്കുന്നതിനോ വികസിപ്പിക്കുന്നതിനോ പരാജയപ്പെട്ടു"
 
-#: ../bonobo/bonobo-moniker-util.c:246
+#: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
 msgstr "വസ്തു പ്രവര്‍ത്തിപ്പിക്കുന്നതില്‍ പരാജയപ്പെട്ടു"
 
@@ -420,33 +421,33 @@ msgstr "Echo ഘടകം"
 msgid "Echo component factory"
 msgstr "Echo ഘടകം ശാല"
 
-#: ../samples/echo/echo-client.c:22
+#: ../samples/echo/echo-client.c:24
 msgid "I could not initialize Bonobo"
 msgstr "Bonobo ആരംഭിക്കുവാന്‍ സാധിച്ചില്ല"
 
-#: ../samples/echo/echo-client.c:33
+#: ../samples/echo/echo-client.c:35
 msgid "Could not create an instance of the sample echo component"
 msgstr "സാംപിള്‍ Echo ഘടകത്തിന്‍റെ ഉദാഹരണം നിര്‍മ്മിക്കുവാന്‍ സാധ്യമായില്ല"
 
-#: ../samples/echo/echo-client.c:45
+#: ../samples/echo/echo-client.c:47
 #, c-format
 msgid "An exception occurred '%s'"
 msgstr "'%s' സംഭവിച്ചിരിക്കുന്നു"
 
-#: ../utils/bonobo-activation-sysconf.c:82
+#: ../utils/bonobo-activation-sysconf.c:83
 msgid "Could not save configuration file.\n"
 msgstr "സജ്ജീകരണ ഫയല്‍ സംരക്ഷിക്കുവാന്‍ സാധ്യമായില്ല.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:83
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "നിങ്ങള്‍ക്ക് '%s'-ലേക്ക് എഴുതുവാനുളള അനുവാദം ഉണ്ടെന്ന് ദയവായി ഉറപ്പ് വരുത്തുക.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:86
+#: ../utils/bonobo-activation-sysconf.c:87
 msgid "Successfully wrote configuration file.\n"
 msgstr "കോണ്‍ഫിഗറേഷന്‍ ഫയല്‍ വിജയകരമായി എഴുതിയിരിക്കുന്നു.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:103
+#: ../utils/bonobo-activation-sysconf.c:104
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -455,36 +456,37 @@ msgstr ""
 "സജ്ജീകരണ ഫയല്‍ ഇതാണ്:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:145
+#: ../utils/bonobo-activation-sysconf.c:146
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s നിലവില്‍ കോണ്‍ഫിഗറേഷന്‍ ഫയലിലുണ്ട്\n"
 
-#: ../utils/bonobo-activation-sysconf.c:165
+#: ../utils/bonobo-activation-sysconf.c:166
 msgid "there is not a properly structured configuration file\n"
 msgstr "ശരിയായി ക്രമീകരിച്ചിട്ടുളള കോണ്‍ഫിഗറേഷന്‍ ഫയല്‍ നിലവിലില്ല\n"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:237
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo-activation കോണ്‍ഫിഗറേഷന്‍ ഫയലില്‍ ഇവ ഉല്‍പ്പെടുന്നു:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:266
+#: ../utils/bonobo-activation-sysconf.c:267
 msgid "Directory to remove from configuration file"
 msgstr "കോണ്‍ഫിഗറേഷന്‍ ഫയലില്‍ നിന്നും നീക്കം ചെയ്യേണ്ട ഡയറക്ടറി"
 
-#: ../utils/bonobo-activation-sysconf.c:266
-#: ../utils/bonobo-activation-sysconf.c:268
+#: ../utils/bonobo-activation-sysconf.c:267
+#: ../utils/bonobo-activation-sysconf.c:269
 msgid "PATH"
 msgstr "PATH"
 
-#: ../utils/bonobo-activation-sysconf.c:268
+#: ../utils/bonobo-activation-sysconf.c:269
 msgid "Directory to add to configuration file"
 msgstr "കോണ്‍ഫിഗറേഷന്‍ ഫയലിലേക്ക് ചേര്‍ക്കേണ്ട ഡയറക്ടറി"
 
-#: ../utils/bonobo-activation-sysconf.c:270
+#: ../utils/bonobo-activation-sysconf.c:271
 msgid "Display directories in configuration file"
 msgstr "കോണ്‍ഫിഗറേഷന്‍ ഫയലിലുളള ഡയറക്ടറികള്‍ കാണിക്കുക"
 
-#: ../utils/bonobo-activation-sysconf.c:272
+#: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr "കോണ്‍ഫിഗറേഷന്‍ ഫയലിലേക്കുളള വഴഇ കാണിക്കുക"
+
