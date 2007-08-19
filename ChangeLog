@@ -1,3 +1,7 @@
+2007-08-19  Gilles Dartiguelongue  <gdartigu@svn.gnome.org>
+
+	* configure.in: use AC_HELP_STRING to align configure switches
+
 =============================== 2.19.6 ========================
 
 2007-07-30  Christian Persch  <chpe@gnome.org>
