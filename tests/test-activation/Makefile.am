@@ -1,6 +1,7 @@
 check_PROGRAMS=			\
 	bonobo-activation-test		\
 	bonobo-activation-test-async	\
+	bonobo-activation-env-test	\
 	bonobo-activation-empty-server
 
 noinst_LTLIBRARIES=libtest-plugin.la
@@ -17,6 +18,7 @@ bonobo_activation_test_SOURCES=		\
 	empty-stubs.c 
 
 bonobo_activation_test_LDADD=libtest-plugin.la ../../bonobo/libbonobo-2.la
+bonobo_activation_env_test_LDADD=../../bonobo/libbonobo-2.la
 
 
 # Horrible, digusting and atrocious hack to

@@ -1,3 +1,13 @@
+2007-09-08  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* bonobo-activation/bonobo-activation-activate.c:
+	(_bonobo_activation_get_activation_env_value):
+	* bonobo-activation/bonobo-activation-private.h:
+	* tests/test-activation/Makefile.am:
+	* tests/test-activation/bonobo-activation-env-test.c: (main):
+	Add unit test to check for possible bug introduced by fix to
+	bug #427992.
+
 2007-08-19  Gilles Dartiguelongue  <gdartigu@svn.gnome.org>
 
 	* configure.in: use AC_HELP_STRING to align configure switches

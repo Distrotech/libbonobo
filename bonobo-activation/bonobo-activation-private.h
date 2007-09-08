@@ -82,6 +82,9 @@ void Bonobo_ActivationEnvValue_copy (Bonobo_ActivationEnvValue *dest,
 
 Bonobo_ActivationClient bonobo_activation_client_get (void);
 
+    /* used only for unit testing */
+CORBA_char * _bonobo_activation_get_activation_env_value (const char *name);
+
 #ifdef G_OS_WIN32
 
 char *_bonobo_activation_win32_replace_prefix (const char *runtime_prefix,

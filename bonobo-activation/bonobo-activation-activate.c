@@ -792,6 +792,22 @@ bonobo_activation_set_activation_env_value (const char *name,
         ORBit_sequence_append (activation_environment, &env_value);
 }
 
+CORBA_char *
+_bonobo_activation_get_activation_env_value (const char *name)
+{
+	int                        i;
+
+	g_return_if_fail (name != NULL);
+
+	for (i = 0; i < activation_environment->_length; i++) {
+		if (strcmp (activation_environment->_buffer [i].name, name) == 0) {
+                        return activation_environment->_buffer [i].value;
+		}
+        }
+        return NULL;
+}
+
+
 /**
  * bonobo_activation_name_service_get:
  * @ev: %CORBA_Environment structure which will contain 
