@@ -206,11 +206,11 @@ msgstr "Shlib `%s' لم يحوي `%s'"
 
 #: ../bonobo/bonobo-application.c:352
 msgid "Name"
-msgstr "الإسم"
+msgstr "الاسم"
 
 #: ../bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr "إسم التطبيق الفريد"
+msgstr "اسم التطبيق الفريد"
 
 #: ../bonobo/bonobo-object.c:926
 msgid "POA"
