@@ -1,3 +1,5 @@
+============================== 2.20.0 ==========================
+
 2007-09-08  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* bonobo-activation/bonobo-activation-activate.c:
@@ -12,7 +14,7 @@
 
 	* configure.in: use AC_HELP_STRING to align configure switches
 
-=============================== 2.19.6 ========================
+=============================== 2.19.5 ========================
 
 2007-07-30  Christian Persch  <chpe@gnome.org>
 

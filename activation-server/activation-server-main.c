@@ -232,6 +232,7 @@ build_src_dir (void)
                 g_string_append (real_od_source_dir,
                                  gnome_od_source_dir->str);
                 g_string_append_c (real_od_source_dir, G_SEARCHPATH_SEPARATOR);
+                g_string_free (gnome_od_source_dir, TRUE);
         }
 
         g_string_append (real_od_source_dir, SERVERINFODIR);

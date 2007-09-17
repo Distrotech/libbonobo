@@ -1,3 +1,14 @@
+libbonobo 2.20.0
+	* Add unit test for bug 427992. (Gustavo Carneiro)
+	* Align configure switches (Gilles Dartiguelounge)
+	* Updated translations:
+	  - Arabic (Khaled Hosny)
+	  - Bengali (Djihed Afifi)
+	  - Finnish (Ilkka Tuohela)
+	  - French (Stéphane Raimbault)
+	  - Italian (Milo Casagrande)
+	  - Malayalam (Ani Peter)
+	  - 
 libbonobo 2.19.5
 	* Use gmodule-no-export-2.0 instead of gmodule-2.0 (#449841)
 	* Win32 fix for pipe macro (Tor Lillqvist)
