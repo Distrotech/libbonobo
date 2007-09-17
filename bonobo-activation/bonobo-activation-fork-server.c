@@ -344,8 +344,7 @@ bonobo_activation_server_by_forking (
 #ifdef G_OS_WIN32
         _pipe (iopipes, 4096, _O_BINARY);
 #else
-     	if (pipe (iopipes) < 0)
-		return retval;
+     	pipe (iopipes);
 #endif
 
 #ifdef BONOBO_ACTIVATION_DEBUG
