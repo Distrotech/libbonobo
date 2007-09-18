@@ -483,7 +483,8 @@ od_end_element (GMarkupParseContext *context,
                         info->cur_prop->v._u.value_stringv._buffer =
                                 CORBA_sequence_CORBA_string_allocbuf (len);
                         
-                        for (i = 0, p = g_list_reverse (info->cur_items); p; p = p->next, i++)
+			info->cur_items = g_list_reverse (info->cur_items);
+                        for (i = 0, p = info->cur_items; p; p = p->next, i++)
                                 info->cur_prop->v._u.
                                         value_stringv._buffer[i] = p->data;
                         g_list_free (info->cur_items);
@@ -509,7 +510,8 @@ od_end_element (GMarkupParseContext *context,
                         info->cur_server->props._buffer =
                                 CORBA_sequence_Bonobo_ActivationProperty_allocbuf (len);
 
-                        for (i = 0, p = g_list_reverse (info->cur_props); p; p = p->next, i++) {
+			info->cur_props = g_list_reverse (info->cur_props);
+                        for (i = 0, p = info->cur_props; p; p = p->next, i++) {
                                 Bonobo_ActivationProperty_copy (&info->cur_server->props._buffer[i],
                                                                 (Bonobo_ActivationProperty *) p->data);
                                 CORBA_free (p->data);

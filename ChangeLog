@@ -1,3 +1,10 @@
+2007-09-18  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/object-directory-load.c: (od_end_element):
+	Plug a leak. Patch from Matthias Clasen. Closes bug #476398.
+	* bonobo-activation/bonobo-activation-activate.c:
+	(_bonobo_activation_get_activation_env_value): Return a value.
+
 ============================== 2.20.0 ==========================
 
 2007-09-08  Gustavo J. A. M. Carneiro  <gjc@gnome.org>

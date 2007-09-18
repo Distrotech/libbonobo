@@ -797,7 +797,7 @@ _bonobo_activation_get_activation_env_value (const char *name)
 {
 	int                        i;
 
-	g_return_if_fail (name != NULL);
+	g_return_val_if_fail (name != NULL, NULL);
 
 	for (i = 0; i < activation_environment->_length; i++) {
 		if (strcmp (activation_environment->_buffer [i].name, name) == 0) {
