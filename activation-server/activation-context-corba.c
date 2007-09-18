@@ -324,6 +324,8 @@ activation_clients_cache_notify (void)
                 CORBA_Object_release (l2->data, &ev);
                 CORBA_exception_free (&ev);
         }
+
+	g_slist_free (notify);
 }
 
 gboolean

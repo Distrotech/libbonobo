@@ -1,5 +1,11 @@
 2007-09-18  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* activation-server/activation-context-corba.c:
+	(activation_clients_cache_notify), (ac_do_activation):
+	Plug a leak. Patch from Matthias Clasen. Closes bug #476448.
+
+2007-09-18  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* activation-server/object-directory-load.c: (od_end_element):
 	Plug a leak. Patch from Matthias Clasen. Closes bug #476398.
 	* bonobo-activation/bonobo-activation-activate.c:
