@@ -1,3 +1,9 @@
+libbonobo 2.20.1
+	* Plug some leaks (Matthias Clasen)
+	* Updated translations
+	  - Norwegian nynorsk (Kjartan)
+	  - Thai (aka.ape)
+ 
 libbonobo 2.20.0
 	* Add unit test for bug 427992. (Gustavo Carneiro)
 	* Align configure switches (Gilles Dartiguelounge)
