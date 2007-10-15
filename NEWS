@@ -1,5 +1,5 @@
 libbonobo 2.20.1
-	* Plug some leaks (Matthias Clasen)
+	* Plug some leaks (Matthias Clasen, Kjartan)
 	* Updated translations
 	  - Norwegian nynorsk (Kjartan)
 	  - Thai (aka.ape)

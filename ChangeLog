@@ -1,3 +1,10 @@
+============================= 2.20.1 ===========================
+
+2007-10-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/activation-server-main.c: (build_src_dir),
+	(log_handler): Plug a leak.
+
 2007-09-18  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* activation-server/activation-context-corba.c:

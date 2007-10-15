@@ -191,7 +191,6 @@ build_src_dir (void)
         const char *env_od_source_dir;
         const char *gnome_env_od_source_dir;
         char *config_file_od_source_dir;
-        GString *gnome_od_source_dir;
         char **gnome_dirs;
         GString *real_od_source_dir;
         int i;
@@ -220,6 +219,7 @@ build_src_dir (void)
         }
 
         if (gnome_env_od_source_dir) {
+                GString *gnome_od_source_dir;
                 gnome_dirs = g_strsplit (gnome_env_od_source_dir, G_SEARCHPATH_SEPARATOR_S, -1);
                 gnome_od_source_dir = g_string_new("");
                 for (i=0; gnome_dirs[i]; i++) {
@@ -232,6 +232,7 @@ build_src_dir (void)
                 g_string_append (real_od_source_dir,
                                  gnome_od_source_dir->str);
                 g_string_append_c (real_od_source_dir, G_SEARCHPATH_SEPARATOR);
+		g_string_free (gnome_od_source_dir, TRUE);
         }
 
         g_string_append (real_od_source_dir, SERVERINFODIR);
