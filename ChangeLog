@@ -1,3 +1,8 @@
+2007-11-12  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo-activation/bonobo-activation-base-service.c:
+	Remove redundant include.
+
 2007-10-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Post release bump

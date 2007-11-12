@@ -39,7 +39,6 @@
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
-#include "config.h"
 #include <string.h>
 #include <limits.h>
 #include <errno.h>
