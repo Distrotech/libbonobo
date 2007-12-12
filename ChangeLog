@@ -1,3 +1,10 @@
+2007-12-12  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* bonobo-activation/bonobo-activation-activate.c:
+	(bonobo_activation_init_activation_env): Fix a regression
+	introduced in 2.20.0 (bug #427992).
+	Patch by gnome-bugzilla@dm.cobite.com.
+
 2007-11-12  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo-activation/bonobo-activation-base-service.c:
