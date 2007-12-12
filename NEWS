@@ -1,3 +1,7 @@
+libbonobo 2.20.2
+        * Fix regression introduced in 2.20.0
+        * Code cleanup
+
 libbonobo 2.20.1
 	* Plug some leaks (Matthias Clasen, Kjartan)
 	* Updated translations

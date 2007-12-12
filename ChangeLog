@@ -1,4 +1,8 @@
+============================= 2.20.2 ===========================
+
 2007-12-12  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
 
 	* bonobo-activation/bonobo-activation-activate.c:
 	(bonobo_activation_init_activation_env): Fix a regression
