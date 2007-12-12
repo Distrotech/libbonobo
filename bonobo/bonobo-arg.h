@@ -40,10 +40,8 @@ typedef void (*BonoboArgFromGValueFn) (BonoboArg       *out_arg,
 #define BONOBO_ARG_STRING   TC_CORBA_string
 
 #if defined(__GNUC__) && !defined(__STRICT_ANSI__) && !defined(__cplusplus)
-#	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
-					          *((t *)((a)->_value)))
-#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)),\
-					          *((t *)((a)->_value)) = (t)(v))
+#	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   ({g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)); *((t *)((a)->_value)); })
+#	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) ({g_assert (bonobo_arg_type_is_equal ((a)->_type, c, e)); *((t *)((a)->_value)) = (t)(v); })
 #else
 #	define BONOBO_ARG_GET_GENERAL(a,c,t,e)   (*((t *)((a)->_value)))
 #	define BONOBO_ARG_SET_GENERAL(a,v,c,t,e) (*((t *)((a)->_value)) = (v))
@@ -73,14 +71,11 @@ typedef void (*BonoboArgFromGValueFn) (BonoboArg       *out_arg,
 #define BONOBO_ARG_SET_CHAR(a,v)    (BONOBO_ARG_SET_GENERAL (a, v, TC_CORBA_char, CORBA_char, NULL))
 
 #if defined(__GNUC__) && !defined(__STRICT_ANSI__) && !defined(__cplusplus)
-#define BONOBO_ARG_GET_STRING(a)    (g_assert ((a)->_type->kind == CORBA_tk_string),\
-				     *((CORBA_char **)((a)->_value)))
-#define BONOBO_ARG_SET_STRING(a,v)  (g_assert ((a)->_type->kind == CORBA_tk_string), CORBA_free (*(char **)(a)->_value),\
-				     *((CORBA_char **)((a)->_value)) = CORBA_string_dup ((v)?(v):""))
+#define BONOBO_ARG_GET_STRING(a)    ({g_assert ((a)->_type->kind == CORBA_tk_string); *((CORBA_char **)((a)->_value)); })
+#define BONOBO_ARG_SET_STRING(a,v)  ({g_assert ((a)->_type->kind == CORBA_tk_string); CORBA_free (*(char **)(a)->_value); *((CORBA_char **)((a)->_value)) = CORBA_string_dup ((v)?(v):""); })
 #else
 #define BONOBO_ARG_GET_STRING(a)    (*((CORBA_char **)((a)->_value)))
-#define BONOBO_ARG_SET_STRING(a,v)  (CORBA_free (*(char **)(a)->_value),\
-				     *((CORBA_char **)((a)->_value)) = CORBA_string_dup ((v)?(v):""))
+#define BONOBO_ARG_SET_STRING(a,v)  ({CORBA_free (*(char **)(a)->_value); *((CORBA_char **)((a)->_value)) = CORBA_string_dup ((v)?(v):""); })
 #endif
 
 BonoboArg    *bonobo_arg_new             (BonoboArgType      t);

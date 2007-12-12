@@ -1,3 +1,10 @@
+2007-12-12  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* bonobo/bonobo-arg.h: Fix some gcc'isms that were
+	uncovered by the g_assert -> g_warn_if_fail changes
+	in the current glib. Fixes build problems. Thanks
+	to Tim Janik for help finding the problem.
+
 2007-12-12  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 
 	* configure.in: Bump version.
