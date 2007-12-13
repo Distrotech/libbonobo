@@ -1,3 +1,9 @@
+2007-12-13  Jens Granseuer  <jensgr@gmx.net>
+
+	* bonobo-activation/bonobo-activation-activate.c:
+	(bonobo_activation_init_activation_env): fix C99ism
+	(bug #503280)
+
 2007-12-12  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-arg.h: Fix some gcc'isms that were

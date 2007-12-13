@@ -764,15 +764,16 @@ bonobo_activation_init_activation_env (void)
         activation_environment = Bonobo_ActivationEnvironment__alloc ();
 
 	for (i = 0; getenv_values [i].name; i++) {
+                Bonobo_ActivationEnvValue value;
+
 		getenv_values [i].value = getenv (getenv_values [i].name);
 
 		if (!getenv_values [i].value)
 			continue;
 
-                Bonobo_ActivationEnvValue value = {
-                        (CORBA_char *) getenv_values [i].name,
-                        (CORBA_char *) getenv_values [i].value,
-                        0 /* flags */ };
+                value.name = (CORBA_char *) getenv_values [i].name;
+                value.value = (CORBA_char *) getenv_values [i].value;
+                value.flags = 0;
 
                 ORBit_sequence_append (activation_environment, &value);
 	}
