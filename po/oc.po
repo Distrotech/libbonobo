@@ -1,30 +1,28 @@
-# translation of oc.po to Occitan
+# Translation of oc.po to Occitan
 # Occitan translation of libbonobo.
 # Copyright (C) 2006, 2007, Free Software Foundation, Inc.
 # This file is distributed under the same license as the libbonobo package.
 #
-# Yannig MARCHEGAY (yannig@marchegay.org) - 2006-2007
-#
-# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007.
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2006-2008
 msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-21 12:12+0100\n"
+"POT-Creation-Date: 2007-12-27 13:26+0100\n"
 "PO-Revision-Date: 2007-11-20 14:32+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../activation-server/activation-context-corba.c:525
+#: ../activation-server/activation-context-corba.c:527
 msgid "Couldn't find which child the server was listed in"
 msgstr ""
 
-#: ../activation-server/activation-context-corba.c:817
+#: ../activation-server/activation-context-corba.c:819
 msgid "Not a valid Activation ID"
 msgstr ""
 
@@ -65,7 +63,7 @@ msgstr ""
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:429
+#: ../activation-server/activation-server-main.c:430
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -122,12 +120,12 @@ msgstr ""
 msgid "Property '%s' has no value"
 msgstr ""
 
-#: ../activation-server/object-directory-load.c:581
+#: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr ""
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:629
 #, c-format
 msgid "Trying dir %s"
 msgstr ""
@@ -142,6 +140,7 @@ msgid "Failed to read from child process: %s\n"
 msgstr ""
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr ""
 
@@ -430,6 +429,7 @@ msgid "An exception occurred '%s'"
 msgstr ""
 
 #: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr ""
 
@@ -439,6 +439,7 @@ msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr ""
 
 #: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr ""
 
@@ -457,10 +458,12 @@ msgid "%s already in configuration file\n"
 msgstr ""
 
 #: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr ""
 
 #: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr ""
 
@@ -484,4 +487,3 @@ msgstr ""
 #: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr ""
-
