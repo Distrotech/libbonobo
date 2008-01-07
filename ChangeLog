@@ -1,3 +1,11 @@
+2007-01-07  Brian Cameron  <brian.cameron@sun.com>
+
+	* bonobo/bonobo-arg.h: Change non-GCC version of the 
+	  BONOBO_ARG_SET_STRING macro to remove the parens that surround
+	  the braces.  This syntax is a GCC extension that does not work
+	  with other compilers, such as Sun Studio.  FIxes bug #507129.
+	  Reviewed by Michael Meeks.
+
 2007-12-22  Olav Vitters  <olav@bkor.dhs.org>
 
 	* configure.in: Bump version.
