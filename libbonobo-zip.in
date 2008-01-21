@@ -25,8 +25,6 @@ libexec/bonobo-activation-server.exe
 sbin/bonobo-activation-sysconf.exe
 EOF
 
-zip $ZIP lib/locale/*/LC_MESSAGES/libbonobo-2.0.mo
-
 if [ -f share/locale/de/LC_MESSAGES/libbonobo-2.0.mo ]; then
   zip $ZIP share/locale/*/LC_MESSAGES/libbonobo-2.0.mo
 else
