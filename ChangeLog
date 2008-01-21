@@ -1,3 +1,8 @@
+2008-01-21  Tor Lillqvist  <tml@novell.com>
+
+	* libbonobo-zip.in: Look for catalogs in share/locale first, as
+	that is where they will be with a properly built GNU gettext.
+
 2007-01-07  Brian Cameron  <brian.cameron@sun.com>
 
 	* bonobo/bonobo-arg.h: Change non-GCC version of the 
