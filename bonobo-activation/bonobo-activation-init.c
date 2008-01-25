@@ -693,7 +693,8 @@ bonobo_activation_debug_shutdown (void)
         return retval;
 }
 
-const char  bonobo_activation_version []    = VERSION;
-const guint bonobo_activation_major_version = BONOBO_ACTIVATION_MAJOR_VERSION;
-const guint bonobo_activation_minor_version = BONOBO_ACTIVATION_MINOR_VERSION;
-const guint bonobo_activation_micro_version = BONOBO_ACTIVATION_MICRO_VERSION;
+static const char  bonobo_activation_version []    = VERSION;
+static const guint bonobo_activation_major_version = BONOBO_ACTIVATION_MAJOR_VERSION;
+static const guint bonobo_activation_minor_version = BONOBO_ACTIVATION_MINOR_VERSION;
+static const guint bonobo_activation_micro_version = BONOBO_ACTIVATION_MICRO_VERSION;
+

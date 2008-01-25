@@ -127,9 +127,6 @@ AC_SUBST(SERVER_CFLAGS)
 ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
 AC_SUBST(ORBIT_IDL)
 
-# popt
-AC_CHECK_LIB(popt, poptStrippedArgv, POPT_LIBS=-lpopt, AC_MSG_ERROR([You must have popt version 1.5 or greater installed.]))
-AC_SUBST(POPT_LIBS)
 AC_CHECK_HEADER(popt.h,,AC_MSG_ERROR([Failed to find popt.h - you may have to adjust your environment]))
 
 PKG_CHECK_MODULES(GTHREAD, gthread-2.0 >= $GLIB_VERSION)

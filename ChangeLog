@@ -1,3 +1,13 @@
+2008-01-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* DEPENDS: Fix some.
+	* NEWS: Update
+	* bonobo-activation/bonobo-activation-init.c: Mark som stuff static
+	* configure.in: Remove obsolete check for unneeded parts of popt.
+	<dmacks at netspace org>
+
+============================ 2.20.4 ============================
+
 2008-01-21  Tor Lillqvist  <tml@novell.com>
 
 	* libbonobo-zip.in: Look for catalogs in share/locale first, as

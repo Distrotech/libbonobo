@@ -1,3 +1,6 @@
+libbonobo 2.20.4
+	* Fix build on Solaris (Brian Cameron)
+
 libbonobo 2.20.3
 	* Fix some gcc'isms causing problems with glib 2.15.0
 	* fix C99ism
