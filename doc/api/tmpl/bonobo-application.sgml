@@ -123,6 +123,7 @@ bonobo_app_client_msg_list()</note>
 @description: 
 @opt_closure: 
 @return_type: 
+@arg_types: 
 
 
 <!-- ##### FUNCTION bonobo_application_register_message_va ##### -->

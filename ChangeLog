@@ -1,3 +1,10 @@
+2008-01-28  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Bump version.
+	* doc/api/tmpl/bonobo-application.sgml: Flush change.
+
+============================ 2.20.4 ============================
+
 2008-01-28  Michael Meeks  <michael.meeks@novell.com>
 
 	* activation-server/object-directory-corba.c
@@ -10,8 +17,6 @@
 	* bonobo-activation/bonobo-activation-init.c: Mark som stuff static
 	* configure.in: Remove obsolete check for unneeded parts of popt.
 	<dmacks at netspace org>
-
-============================ 2.20.4 ============================
 
 2008-01-21  Tor Lillqvist  <tml@novell.com>
 
