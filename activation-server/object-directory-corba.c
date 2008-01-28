@@ -364,9 +364,20 @@ od_get_active_server (ObjectDirectory    *od,
 			break;
 		}
         }
-	if (retval != CORBA_OBJECT_NIL &&
-	    !CORBA_Object_non_existent (retval, NULL))
-		return CORBA_Object_duplicate (retval, NULL);
+	if (retval != CORBA_OBJECT_NIL) {
+                gboolean non_existent;
+                ServerLockState state;
+
+                /* With dead objects, this path can cause lengthy
+                   re-connection attempts, blocking all other
+                   activation, so drop the lock. g#512520 */
+                state = server_lock_drop();
+                non_existent = CORBA_Object_non_existent (retval, NULL);
+                server_lock_resume (state);
+
+                if (!non_existent)
+                        return CORBA_Object_duplicate (retval, NULL);
+        }
 
 	return CORBA_OBJECT_NIL;
 }

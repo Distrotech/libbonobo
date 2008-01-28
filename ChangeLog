@@ -1,3 +1,8 @@
+2008-01-28  Michael Meeks  <michael.meeks@novell.com>
+
+	* activation-server/object-directory-corba.c
+	(od_get_active_server): fix #512520
+
 2008-01-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* DEPENDS: Fix some.
