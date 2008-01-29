@@ -1,4 +1,4 @@
-libbonobo 2.20.90
+libbonobo 2.21.90
         * Fix build with glib 2.15.4.
 
 libbonobo 2.20.4
