@@ -4,8 +4,8 @@
 
 	* bonobo/bonobo-exception.h:
 	* bonobo/bonobo-object.h:
-	* bonobo/bonobo-running-context.h:
-	* configure.in:
+	* bonobo/bonobo-running-context.h: Use G_STRFUNC.
+	* configure.in: Update for 2.21.90.
 
 2008-01-28  Kjartan Maraas  <kmaraas@gnome.org>
 
