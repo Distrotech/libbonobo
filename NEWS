@@ -1,3 +1,6 @@
+libbonobo 2.20.90
+        * Fix build with glib 2.15.4.
+
 libbonobo 2.20.4
 	* Fix build on Solaris (Brian Cameron)
 	* Fix potential situation hanging the entire desktop (Michael)

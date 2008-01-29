@@ -49,9 +49,9 @@ void        bonobo_running_context_trace_objects_T   (CORBA_Object object,
 void        bonobo_running_context_at_exit_unref     (CORBA_Object object);
 
 #ifdef BONOBO_OBJECT_DEBUG
-#	define           bonobo_running_context_add_object_T(o)      G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,0);}G_STMT_END
-#	define           bonobo_running_context_remove_object_T(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,1);}G_STMT_END
-#	define           bonobo_running_context_ignore_object(o)     G_STMT_START{bonobo_running_context_trace_objects((o),G_GNUC_PRETTY_FUNCTION,__LINE__,2);}G_STMT_END
+#	define           bonobo_running_context_add_object_T(o)      G_STMT_START{bonobo_running_context_trace_objects((o),G_STRFUNC,__LINE__,0);}G_STMT_END
+#	define           bonobo_running_context_remove_object_T(o)   G_STMT_START{bonobo_running_context_trace_objects((o),G_STRFUNC,__LINE__,1);}G_STMT_END
+#	define           bonobo_running_context_ignore_object(o)     G_STMT_START{bonobo_running_context_trace_objects((o),G_STRFUNC,__LINE__,2);}G_STMT_END
 #endif
 
 G_END_DECLS

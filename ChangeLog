@@ -1,3 +1,10 @@
+2008-01-29  Christian Persch  <chpe@gnome.org>
+
+	* bonobo/bonobo-exception.h:
+	* bonobo/bonobo-object.h:
+	* bonobo/bonobo-running-context.h:
+	* configure.in:
+
 2008-01-28  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Bump version.

@@ -117,8 +117,8 @@ gpointer                 bonobo_object_trace_refs             (gpointer         
 							       gboolean                ref);
 
 #ifdef BONOBO_OBJECT_DEBUG
-#	define           bonobo_object_ref(o)   bonobo_object_trace_refs ((o),G_GNUC_PRETTY_FUNCTION,__LINE__,TRUE);
-#	define           bonobo_object_unref(o) bonobo_object_trace_refs ((o),G_GNUC_PRETTY_FUNCTION,__LINE__,FALSE);
+#	define           bonobo_object_ref(o)   bonobo_object_trace_refs ((o),G_STRFUNC,__LINE__,TRUE);
+#	define           bonobo_object_unref(o) bonobo_object_trace_refs ((o),G_STRFUNC,__LINE__,FALSE);
 #endif	/* BONOBO_OBJECT_DEBUG */
 void                     bonobo_object_dump_interfaces        (BonoboObject *object);
 
