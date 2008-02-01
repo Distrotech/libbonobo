@@ -77,9 +77,9 @@
      };	}G_STMT_END
 #endif
 
-#define BONOBO_EX(ev)         ((ev) && (ev)->_major != CORBA_NO_EXCEPTION)
+#define BONOBO_EX(ev)         ((ev) != NULL && (ev)->_major != CORBA_NO_EXCEPTION)
 
-#define BONOBO_USER_EX(ev,id) ((ev) && (ev)->_major == CORBA_USER_EXCEPTION &&	\
+#define BONOBO_USER_EX(ev,id) ((ev != NULL) && (ev)->_major == CORBA_USER_EXCEPTION &&	\
 			       (ev)->_id != NULL && !strcmp ((ev)->_id, id))
 
 #define BONOBO_EX_REPOID(ev)  (ev)->_id
