@@ -1,3 +1,5 @@
+============================ 2.22.0 ============================
+
 2008-02-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-exception.h: Fix warnings from gcc 4.3.
