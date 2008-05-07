@@ -1,5 +1,16 @@
 2008-05-07  Ray Strode  <rstrode@redhat.com>
 
+	Key ior and lock filenames of dbus session guid
+
+	* bonobo-activation/bonobo-activation-base-service.c
+	(get_session_guid): New function to extract guid from
+	$DBUS_SESSION_BUS_ADDRESS
+	(_bonobo_activation_lock_fname_get),
+	(_bonobo_activation_ior_fname_get): encode result of
+	of get_session_guid () into returned filenames
+
+2008-05-07  Ray Strode  <rstrode@redhat.com>
+
 	Consolidate ior and lock name getter logic to one
 	place to facilitate changing that logic
 

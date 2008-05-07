@@ -498,20 +498,60 @@ get_tmpdir (void)
         return tmpdir;
 }
 
+static const char *
+get_session_guid (void)
+{
+        const char *session_bus_address;
+        const char *guid;
+
+        /* FIXME: we may want to use dbus-address.h functions here
+         */
+        session_bus_address = g_getenv ("DBUS_SESSION_BUS_ADDRESS");
+
+        if (session_bus_address == NULL)
+                return NULL;
+
+        guid = g_strrstr (session_bus_address, "guid=");
+
+        if (guid == NULL)
+                return NULL;
+
+        if (guid[0] == '\0')
+                return NULL;
+
+        return guid + strlen ("guid=");
+}
+
 char *
 _bonobo_activation_lock_fname_get (void)
 {
-        return g_build_filename (get_tmpdir (),
-                                 "bonobo-activation-register.lock",
-                                 NULL);
+       const char *session_guid;
+
+       session_guid = get_session_guid ();
+
+       if (session_guid == NULL)
+               return g_build_filename (get_tmpdir (),
+                                        "bonobo-activation-register.lock",
+                                        NULL);
+
+       return g_strdup_printf ("%s" G_DIR_SEPARATOR_S "bonobo-activation-register-%s.lock",
+                               get_tmpdir (), session_guid);
 }
 
 char *
 _bonobo_activation_ior_fname_get (void)
 {
-        return g_build_filename (get_tmpdir (),
-                                 "bonobo-activation-server-ior",
-                                 NULL);
+       const char *session_guid;
+
+       session_guid = get_session_guid ();
+
+       if (session_guid == NULL)
+               return g_build_filename (get_tmpdir (),
+                                        "bonobo-activation-server-ior",
+                                        NULL);
+
+       return g_strdup_printf ("%s" G_DIR_SEPARATOR_S "bonobo-activation-server-%s-ior",
+                               get_tmpdir (), session_guid);
 }
 
 static void
