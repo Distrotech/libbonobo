@@ -363,9 +363,7 @@ dump_ior (CORBA_ORB orb, int dev_null_fd, CORBA_Environment *ev)
 #endif
         if (server_reg) {
                 char *fname;
-                fname = g_build_filename (ORBit_get_safe_tmp (),
-                                          "bonobo-activation-server-ior",
-                                          NULL);
+                fname = _bonobo_activation_ior_fname_get ();
                 fh = g_fopen (fname, "w+");
 		fprintf (fh, "%s\n", ior);
 		fclose (fh);

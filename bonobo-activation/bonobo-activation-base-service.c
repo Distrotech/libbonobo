@@ -498,16 +498,16 @@ get_tmpdir (void)
         return tmpdir;
 }
 
-static char *
-get_lock_fname (void)
+char *
+_bonobo_activation_lock_fname_get (void)
 {
         return g_build_filename (get_tmpdir (),
                                  "bonobo-activation-register.lock",
                                  NULL);
 }
 
-static char *
-get_ior_fname (void)
+char *
+_bonobo_activation_ior_fname_get (void)
 {
         return g_build_filename (get_tmpdir (),
                                  "bonobo-activation-server-ior",
@@ -543,7 +543,7 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
         int retval;
         char *err;
 
-        fn = get_lock_fname ();
+        fn = _bonobo_activation_lock_fname_get ();
 
 	while ((lock_fd = open (fn, O_CREAT | O_RDWR, 0700)) < 0) {
 
@@ -577,7 +577,7 @@ rloc_file_lock (const BonoboActivationBaseServiceRegistry *registry,
 
         g_free (fn);
 #elif defined (G_OS_WIN32)
-	char *fn = get_lock_fname ();
+	char *fn = _bonobo_activation_lock_fname_get ();
         wchar_t *wfn = g_utf8_to_utf16 (fn, -1, NULL, NULL, NULL);
         
 	while ((lock_fd = _wsopen (wfn, O_CREAT|O_RDWR|_O_SHORT_LIVED|_O_NOINHERIT, _SH_DENYRW, 0700)) < 0) {
@@ -630,7 +630,7 @@ rloc_file_check (const BonoboActivationBaseServiceRegistry *registry,
 	FILE *fh;
 	char *fn;
 
-        fn = get_ior_fname ();
+        fn = _bonobo_activation_ior_fname_get ();
 	fh = g_fopen (fn, "r");
         g_free (fn);
 
@@ -662,7 +662,7 @@ rloc_file_register (const BonoboActivationBaseServiceRegistry *registry, const c
 	char *fn;
 	FILE *fh;
 
-        fn = get_ior_fname ();
+        fn = _bonobo_activation_ior_fname_get ();
 	fh = g_fopen (fn, "w");
 
         if (fh != NULL) {
@@ -681,7 +681,7 @@ rloc_file_unregister (const BonoboActivationBaseServiceRegistry *registry,
 {
 	char *fn;
 
-	g_unlink ((fn = get_ior_fname ()));
+	g_unlink ((fn = _bonobo_activation_ior_fname_get ()));
         g_free (fn);
 }
 

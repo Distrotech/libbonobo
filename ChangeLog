@@ -1,3 +1,20 @@
+2008-05-07  Ray Strode  <rstrode@redhat.com>
+
+	Consolidate ior and lock name getter logic to one
+	place to facilitate changing that logic
+
+	* bonobo-activation/bonobo-activation-private.h:
+	* bonobo-activation/bonobo-activation-base-service.c:
+	(get_lock_fname), (get_ior_fname),
+	(_bonobo_activation_lock_fname_get),
+	(_bonobo_activation_ior_fname_get): Rename and export
+	get_lock_fname and get_ior_fname.
+	(rloc_file_lock), (rloc_file_check), (rloc_file_register),
+	(rloc_file_unregister): adapt for renamed functions
+	* activation-server/activation-server-main.c
+	(dump_ior): get ior name from libbonobo-activation instead
+	of hardcoding it to "bonobo-activation-server-ior"
+
 ============================ 2.22.0 ============================
 
 2008-02-01  Kjartan Maraas  <kmaraas@gnome.org>
