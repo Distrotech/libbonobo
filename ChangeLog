@@ -1,5 +1,11 @@
 2008-05-07  Ray Strode  <rstrode@redhat.com>
 
+	* activation-server/activation-server-main.c:
+	(cleanup_ior_and_lock_files), (main):
+	remove ior and lock files on exit path
+
+2008-05-07  Ray Strode  <rstrode@redhat.com>
+
 	Make bonobo-activation-server exit when dbus session exits
 
 	* configure.in: Require dbus and dbus-glib

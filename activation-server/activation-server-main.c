@@ -375,6 +375,20 @@ dump_ior (CORBA_ORB orb, int dev_null_fd, CORBA_Environment *ev)
 	CORBA_free (ior);
 }
 
+static void
+cleanup_ior_and_lock_files (void)
+{
+    char *fname;
+
+    fname = _bonobo_activation_ior_fname_get ();
+    g_unlink (fname);
+    g_free (fname);
+
+    fname = _bonobo_activation_lock_fname_get ();
+    g_unlink (fname);
+    g_free (fname);
+}
+
 static DBusHandlerResult
 bus_message_handler (DBusConnection *connection,
                      DBusMessage    *message,
@@ -587,6 +601,8 @@ main (int argc, char *argv[])
 
         bonobo_object_directory_shutdown (threaded_poa, ev);
         activation_context_shutdown ();
+
+        cleanup_ior_and_lock_files ();
 
 #ifdef HAVE_SYSLOG_H
 	closelog ();
