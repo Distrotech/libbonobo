@@ -1,5 +1,15 @@
 2008-05-07  Ray Strode  <rstrode@redhat.com>
 
+	Make bonobo-activation-server exit when dbus session exits
+
+	* configure.in: Require dbus and dbus-glib
+	* activation-server/activation-server-main.c:
+	(bus_message_handler): Check for "Disconnected" signal and
+	quit mainloop upon getting it.
+	(main): Get on session bus and filter for messages.
+
+2008-05-07  Ray Strode  <rstrode@redhat.com>
+
 	Key ior and lock filenames of dbus session guid
 
 	* bonobo-activation/bonobo-activation-base-service.c

@@ -54,6 +54,8 @@
 
 #include <glib/gstdio.h>
 
+#include <dbus/dbus-glib-lowlevel.h>
+
 static gboolean        server_threaded = FALSE;
 static glong           server_guard_depth = 0;
 static GStaticRecMutex server_guard = G_STATIC_REC_MUTEX_INIT;
@@ -373,6 +375,21 @@ dump_ior (CORBA_ORB orb, int dev_null_fd, CORBA_Environment *ev)
 	CORBA_free (ior);
 }
 
+static DBusHandlerResult
+bus_message_handler (DBusConnection *connection,
+                     DBusMessage    *message,
+                     GMainLoop      *loop)
+{
+        if (dbus_message_is_signal (message,
+                                    DBUS_INTERFACE_LOCAL,
+                                    "Disconnected")) {
+                g_main_loop_quit (loop);
+                return DBUS_HANDLER_RESULT_HANDLED;
+        }
+
+        return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -396,6 +413,8 @@ main (int argc, char *argv[])
 	const gchar                  *debug_output_env;
 #endif
 	GError                       *error = NULL;
+        DBusConnection               *connection;
+        DBusError                     bus_error;
 
 #ifdef HAVE_SETSID
         /*
@@ -532,6 +551,27 @@ main (int argc, char *argv[])
         dump_ior (orb, dev_null_fd, ev);
 
 	od_finished_internal_registration (); 
+
+        dbus_error_init (&bus_error);
+        connection = dbus_bus_get (DBUS_BUS_SESSION, &bus_error);
+
+        if (dbus_error_is_set (&bus_error)) {
+                g_warning ("could not associate with desktop session: %s",
+                           bus_error.message);
+                connection = NULL;
+        } else {
+                GMainContext *main_context;
+
+                main_context = g_main_loop_get_context (main_loop);
+                dbus_connection_setup_with_g_main (connection, main_context);
+
+                if (dbus_connection_add_filter (connection,
+                                                (DBusHandleMessageFunction)
+                                                bus_message_handler, main_loop,
+                                                NULL)) {
+                        dbus_connection_set_exit_on_disconnect (connection, FALSE);
+                }
+        }
 
         if (getenv ("BONOBO_ACTIVATION_DEBUG") == NULL)
                 chdir ("/");
