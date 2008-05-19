@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-14 15:53+0100\n"
+"POT-Creation-Date: 2007-09-13 23:52+0100\n"
 "PO-Revision-Date: 2007-01-19 21:38+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -152,7 +152,7 @@ msgstr "فشلت القراءة من العملية الإبنة: %s\n"
 msgid "EOF from child process\n"
 msgstr "فشلت القراءة من العملية\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:434
+#: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
 msgstr "تعذّر تفريق عملية جديدة"
 
