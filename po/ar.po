@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../activation-server/activation-context-corba.c:525
 msgid "Couldn't find which child the server was listed in"
-msgstr "تعذّر معرفة في أي الأبناء أُدرج الخادم"
+msgstr "تعذّر معرفة في أي الأبناء أُدرج الخادوم"
 
 #: ../activation-server/activation-context-corba.c:817
 msgid "Not a valid Activation ID"
@@ -61,7 +61,7 @@ msgid ""
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
 msgstr ""
-"سجّل كخادم تفعيل المستخدم بدون قفل. تحذير: قد يكون لهذا الخيار آثار جانبيّة "
+"سجّل كخادوم تفعيل المستخدم بدون قفل. تحذير: قد يكون لهذا الخيار آثار جانبيّة "
 "خطير على ثبات الجلسة التي يشغلها المستخدم، ويجب استخدامه لأغراض التنقيح فقط"
 
 #: ../activation-server/activation-server-main.c:180
@@ -169,7 +169,7 @@ msgstr "IID ليُنشّط"
 #: ../bonobo-activation/bonobo-activation-init.c:356
 #: ../bonobo-activation/bonobo-activation-init.c:401
 msgid "Prevent registering of server with OAF"
-msgstr "امنع تسجيل الخادم مع OAF"
+msgstr "امنع تسجيل الخادوم مع OAF"
 
 #: ../bonobo-activation/bonobo-activation-init.c:409
 msgid "Bonobo Activation options:"
@@ -409,11 +409,11 @@ msgstr "تيار بيانات MonikerExtender"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "مصنع خادم صدى بونوبو"
+msgstr "مصنع خادوم صدى بونوبو"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
-msgstr "برنامج مثالي لخادم صدى بونوبو"
+msgstr "برنامج مثالي لخادوم صدى بونوبو"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
 msgid "Echo component"
