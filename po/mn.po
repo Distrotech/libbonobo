@@ -1,24 +1,22 @@
 # translation of mn.po to Mongolian
-# translation of libbonobo.HEAD.po to Mongolian
-# translation of libbonobo.HEAD.po to mongolian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+#
 # Sanlig Badral <badral@chinggis.com>, 2003.
 # Sanlig Badral <Badral@openmn.org>, 2003, 2004.
-# Sanlig Badral <badral@openmn.org>, 2004.
-#
+# Sanlig Badral <badral@openmn.org>, 2004, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2004-02-17 21:34+0100\n"
-"Last-Translator: Sanlig Badral <badral@openmn.org>\n"
-"Language-Team: Mongolian <openmn-gnome@lists.sf.net>\n"
+"PO-Revision-Date: 2008-05-27 22:04+0200\n"
+"Last-Translator: Badral <badral@openmn.org>\n"
+"Language-Team: Mongolian <openmn-translation@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../activation-server/activation-context-corba.c:523
 msgid "Couldn't find which child the server was listed in"
@@ -26,7 +24,7 @@ msgstr "Ямар хүү (процесс)сервер дотор жигсаагд
 
 #: ../activation-server/activation-context-corba.c:815
 msgid "Not a valid Activation ID"
-msgstr "Хүчингүй идэвхижүүлэх дугаар (ID)"
+msgstr "Хүчингүй идэвхжүүлэх дугаар (ID)"
 
 #: ../activation-server/activation-server-main.c:162
 msgid "Directory to read .server files from"
@@ -51,9 +49,8 @@ msgid "FD"
 msgstr "FD"
 
 #: ../activation-server/activation-server-main.c:172
-msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr ""
+msgid "Register as the users' activation server without locking [!] for debugging"
+msgstr "Шинжилгээ хийхээр идэвхжүүлэлт серверийн хэрэглэгчээр бүртгүүлэх (Алдаа оношлох түгжээгүй [!])"
 
 #: ../activation-server/activation-server-main.c:177
 msgid "Query expression to evaluate"
@@ -67,7 +64,7 @@ msgstr "Илэрхийлэл"
 #: ../utils/bonobo-activation-sysconf.c:304
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
+msgstr "Тушаалын мөрийн сонголтыг бүрэн эхээр нь харахыг хүсвэл та '%s --help' гэж ажиллуулна уу.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -85,11 +82,11 @@ msgstr "Сонордуулга үйлчилгээ"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
 msgid "Notification service for activation"
-msgstr "Идэвхижүүлэлт сонордуулгын үйлчилгээ"
+msgstr "Идэвхжүүлэлт сонордуулгын үйлчилгээ"
 
 #: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Бид алсын процесс доторхи shlib-Объект идэвхижүүлэхийг авч үзэхгүй"
+msgstr "Бид алсын процесс доторх shlib-Объект идэвхжүүлэхийг авч үзэхгүй"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
@@ -144,12 +141,10 @@ msgid "Failed to read from child process: %s\n"
 msgstr "Хүү процесс уншигдсангүй: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
-#, fuzzy
 msgid "EOF from child process\n"
-msgstr "Хүү процесс уншигдсангүй: %s\n"
+msgstr "Хүү процессоос EOF хүлээн авлаа\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:435
-#, fuzzy
 msgid "Couldn't spawn a new process"
 msgstr "Шинэ процессийг салаалж чадсангүй"
 
@@ -161,7 +156,7 @@ msgstr "IOR бичигдэх файлын тодорхойлогч"
 #: ../bonobo-activation/bonobo-activation-init.c:357
 #: ../bonobo-activation/bonobo-activation-init.c:367
 msgid "IID to activate"
-msgstr "IID идэвхижүүлэх"
+msgstr "IID идэвхжүүлэх"
 
 #: ../bonobo-activation/bonobo-activation-init.c:359
 #: ../bonobo-activation/bonobo-activation-init.c:369
@@ -169,18 +164,16 @@ msgid "Prevent registering of server with OAF"
 msgstr "OAF тай серверүүдийн бүртгэлээс зайлсхийх"
 
 #: ../bonobo-activation/bonobo-activation-init.c:403
-#, fuzzy
 msgid "Bonobo Activation"
-msgstr "Bonobo идэвхижүүлэлт сонголт"
+msgstr "Bonobo идэвхжүүлэлт"
 
 #: ../bonobo-activation/bonobo-activation-init.c:404
-#, fuzzy
 msgid "Show Bonobo Activation options"
-msgstr "Bonobo идэвхижүүлэлт сонголт"
+msgstr "Bonobo идэвхжүүлэлт тохируулга харуулах"
 
 #: ../bonobo-activation/bonobo-activation-init.c:512
 msgid "Bonobo activation options"
-msgstr "Bonobo идэвхижүүлэлт сонголт"
+msgstr "Bonobo идэвхжүүлэлт сонголт"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:107
 #, c-format
@@ -229,7 +222,7 @@ msgstr "О/Г Алдаа"
 
 #: ../bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "Агументийн хүчингүй утга "
+msgstr "Аргументийн хүчингүй утга "
 
 #: ../bonobo/bonobo-exception.c:164
 msgid "Object not found"
@@ -237,11 +230,11 @@ msgstr "Объект олдсонгүй"
 
 #: ../bonobo/bonobo-exception.c:167
 msgid "Syntax error in object description"
-msgstr "Объектын тодорхойлолт доторхи дүрмийн алдаа"
+msgstr "Объектын тодорхойлолт доторх дүрмийн алдаа"
 
 #: ../bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Үйлдвэрээс объект идэвхижүүлэх боломжгүй"
+msgstr "Үйлдвэрээс объект идэвхжүүлэх боломжгүй"
 
 #: ../bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -330,7 +323,7 @@ msgstr "Онцлог зөвхөн уншигдахаар байна"
 
 #: ../bonobo/bonobo-exception.c:242
 msgid "config database backend failed "
-msgstr "Өгөгдлийн бааз зохион байгауулагчийн тохируулга нурлаа"
+msgstr "Өгөгдлийн бааз зохион байгуулагчийн тохируулга нурлаа"
 
 #: ../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
@@ -338,11 +331,11 @@ msgstr "Moniker-харьцах хэсэг олдсонгүй"
 
 #: ../bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
-msgstr "Moniker идэвхижүүлэлт хугацаанаас хэтэрлээ"
+msgstr "Moniker идэвхжүүлэлт хугацаанаас хэтэрлээ"
 
 #: ../bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr "Moniker дотор дүрмийн алдаа"
+msgstr "Moniker дотоод дүрмийн алдаа"
 
 #: ../bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
@@ -354,7 +347,7 @@ msgstr "Алдаа шалгаж байхад алдаа; Онцгой бус"
 
 #: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
-msgstr "Ерөнхий идэвхижүүлэлтийн тодорхойлолтгүй алдаа "
+msgstr "Ерөнхий идэвхжүүлэлтийн тодорхойлолтгүй алдаа "
 
 #: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
 msgid "Could not initialize Bonobo"
@@ -372,12 +365,12 @@ msgstr "Objekt konnte nicht aktiviert werden"
 #: ../monikers/bonobo-moniker-oaf.c:53
 #, c-format
 msgid "Exception activating '%s'"
-msgstr "Онцгой алдаа идэвхижилээ »%s«"
+msgstr "Онцгой алдаа идэвхэжлээ »%s«"
 
 #: ../monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
-msgstr "»%s« идэвхижсэнгүй"
+msgstr "»%s« идэвхэжсэнгүй"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -393,7 +386,7 @@ msgstr "Стандарт Moniker үйлдвэр"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:4
 msgid "generic Oaf activation moniker"
-msgstr "Ерөнхий OAF-идэвхижүүлэлтийн moniker"
+msgstr "Ерөнхий OAF-идэвхжүүлэлт moniker"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:5
 msgid "generic Oaf query moniker"
@@ -415,7 +408,7 @@ msgstr "урсгал MonikerExtender"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
 msgid "Bonobo Echo server factory"
-msgstr "Bonobo Echo серверын үйлдвэр"
+msgstr "Bonobo Echo серверийн үйлдвэр"
 
 #: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
 msgid "Bonobo Echo server sample program"
@@ -449,7 +442,7 @@ msgstr "Тохируулгын файл хадгалагдсангүй.\n"
 #: ../utils/bonobo-activation-sysconf.c:83
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "»%s« рүү бичихээр хандах эрх байгаа эсэхээ нягтлана уу.\n"
+msgstr "»%s« рүү бичихээр хандах эрх байгаа эсэхээ нягтална уу.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:86
 msgid "Successfully wrote configuration file.\n"
@@ -484,7 +477,7 @@ msgstr "Тохируулгын файлаас устгах ёстой лавла
 #: ../utils/bonobo-activation-sysconf.c:266
 #: ../utils/bonobo-activation-sysconf.c:268
 msgid "PATH"
-msgstr ""
+msgstr "ЗАМ"
 
 #: ../utils/bonobo-activation-sysconf.c:268
 msgid "Directory to add to configuration file"
@@ -492,32 +485,9 @@ msgstr "Тохируулгын файлд нэмэгдэх ёстой лавла
 
 #: ../utils/bonobo-activation-sysconf.c:270
 msgid "Display directories in configuration file"
-msgstr "Тохируулгын файл доторхи лавлахуудыг харуулах"
+msgstr "Тохируулгын файл доторх лавлахуудыг харуулах"
 
 #: ../utils/bonobo-activation-sysconf.c:272
 msgid "Display path to configuration file"
 msgstr "Тохируулгын файлын замыг харуулах"
 
-#~ msgid "Race condition activating server '%s'"
-#~ msgstr "»%s« серверийг идэвхижүүлэх »Race condition« "
-
-#~ msgid "Child received signal %u (%s)"
-#~ msgstr "Хүү процесс %u сигналыг хүлээн авлаа (%s)"
-
-#~ msgid "Unknown non-exit error (status is %u)"
-#~ msgstr "Тодорхойгүй non-exit Алдаа (Төлөв нь %u)"
-
-#~ msgid "bonobo-activation failed to set process group of %s: %s\n"
-#~ msgstr "bonobo-activation %s -н процесс группыг суулгаж чадсангүй: %s\n"
-
-#~ msgid "Failed to execute %s: %d (%s)\n"
-#~ msgstr "%s ажилласангүй: %d (%s)\n"
-
-# CHECK
-#~ msgid "Too many alias levels for a locale, may indicate a loop"
-#~ msgstr ""
-#~ "Нэгэн байрлалын хувьд хэт олон Aliase өгөгдсөн байна. Энэ цикл хамаарлыг "
-#~ "заадаг."
-
-#~ msgid "directory path"
-#~ msgstr "Лавлахын зам"
