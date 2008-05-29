@@ -28,7 +28,7 @@
 #ifndef BONOBO_DISABLE_DEPRECATED
 #include <popt.h>
 #endif
-#include <glib/goption.h>
+#include <glib.h>
 
 G_BEGIN_DECLS
 

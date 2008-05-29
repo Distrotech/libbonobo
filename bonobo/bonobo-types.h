@@ -11,7 +11,7 @@
 #define _BONOBO_TYPES_H_
 
 #include <stdarg.h>
-#include <glib/gmacros.h>
+#include <glib.h>
 #include <glib-object.h>
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-arg.h>

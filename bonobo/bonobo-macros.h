@@ -9,7 +9,7 @@
 #ifndef _BONOBO_MACROS_H_
 #define _BONOBO_MACROS_H_
 
-#include <glib/gmacros.h>
+#include <glib.h>
 
 G_BEGIN_DECLS
 

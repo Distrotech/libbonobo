@@ -1,3 +1,10 @@
+2008-05-29  Christian Persch  <chpe@gnome.org>
+
+	* bonobo-activation/bonobo-activation-init.h:
+	* bonobo/bonobo-macros.h:
+	* bonobo/bonobo-types.h: Include <glib.h> instead of single headers.
+	Bug #535475.
+
 2008-05-07  Ray Strode  <rstrode@redhat.com>
 
 	* activation-server/activation-server-main.c:
