@@ -1,7 +1,7 @@
 AC_PREREQ([2.59])
 
 m4_define([bonobo_major_version],[2])
-m4_define([bonobo_minor_version],[22])
+m4_define([bonobo_minor_version],[23])
 m4_define([bonobo_micro_version],[0])
 m4_define([bonobo_version],[bonobo_major_version.bonobo_minor_version.bonobo_micro_version])
 

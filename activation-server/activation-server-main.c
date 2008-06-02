@@ -185,6 +185,7 @@ static const GOptionEntry options[] = {
         {NULL}
 };
 
+/* Referenced from object-directory-corba.c */
 GMainLoop *main_loop = NULL;
 
 static GString *

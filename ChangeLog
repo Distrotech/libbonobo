@@ -1,3 +1,9 @@
+2008-06-03  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/activation-server-main.c:
+	Add a comment for a global var.
+	* configure.in: Bump version to 2.23.0
+
 2008-05-29  Christian Persch  <chpe@gnome.org>
 
 	* bonobo-activation/bonobo-activation-init.h:
