@@ -1,3 +1,7 @@
+libbonobo 2.23.0
+	* Use D-BUS to start and exit when the session ends.
+	* Build fixes.
+
 libbonobo 2.22.0
 	* Fix warnings from GCC 4.3.x
 	* Translation updates.
