@@ -501,6 +501,7 @@ get_tmpdir (void)
 static const char *
 get_session_guid (void)
 {
+#ifdef HAVE_DBUS
         const char *session_bus_address;
         const char *guid;
 
@@ -520,6 +521,9 @@ get_session_guid (void)
                 return NULL;
 
         return guid + strlen ("guid=");
+#else
+        return NULL;
+#endif
 }
 
 char *

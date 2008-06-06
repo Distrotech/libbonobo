@@ -44,6 +44,8 @@ case "$host" in
     os_win32=no
     SOPREFIX=lib
     SEARCHPATHSEP=":"
+    AC_DEFINE(HAVE_DBUS, 1, [whether we have dbus])
+    dbus_requirement="dbus-1 >= 1.0.0 dbus-glib-1 >= 0.74"
     ;;
 esac
 
@@ -121,8 +123,7 @@ PKG_CHECK_MODULES(SERVER, \
 	gmodule-2.0 >= 2.0.1 \
 	ORBit-2.0 >= 2.4.0 \
 	ORBit-CosNaming-2.0 >= 2.4.0 \
-	dbus-1 >= 1.0.0 \
-	dbus-glib-1 >= 0.74 \
+	$dbus_requirement \
 	libxml-2.0 >= 2.4.20)
 AC_SUBST(SERVER_LIBS)
 AC_SUBST(SERVER_CFLAGS)

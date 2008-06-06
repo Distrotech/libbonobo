@@ -54,7 +54,9 @@
 
 #include <glib/gstdio.h>
 
+#ifdef HAVE_DBUS
 #include <dbus/dbus-glib-lowlevel.h>
+#endif
 
 static gboolean        server_threaded = FALSE;
 static glong           server_guard_depth = 0;
@@ -390,6 +392,8 @@ cleanup_ior_and_lock_files (void)
     g_free (fname);
 }
 
+#ifdef HAVE_DBUS
+
 static DBusHandlerResult
 bus_message_handler (DBusConnection *connection,
                      DBusMessage    *message,
@@ -404,6 +408,8 @@ bus_message_handler (DBusConnection *connection,
 
         return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
 }
+
+#endif
 
 int
 main (int argc, char *argv[])
@@ -428,8 +434,10 @@ main (int argc, char *argv[])
 	const gchar                  *debug_output_env;
 #endif
 	GError                       *error = NULL;
+#ifdef HAVE_DBUS
         DBusConnection               *connection;
         DBusError                     bus_error;
+#endif
 
 #ifdef HAVE_SETSID
         /*
@@ -567,6 +575,7 @@ main (int argc, char *argv[])
 
 	od_finished_internal_registration (); 
 
+#ifdef HAVE_DBUS
         dbus_error_init (&bus_error);
         connection = dbus_bus_get (DBUS_BUS_SESSION, &bus_error);
 
@@ -587,7 +596,7 @@ main (int argc, char *argv[])
                         dbus_connection_set_exit_on_disconnect (connection, FALSE);
                 }
         }
-
+#endif
         if (getenv ("BONOBO_ACTIVATION_DEBUG") == NULL)
                 chdir ("/");
 
