@@ -1,3 +1,5 @@
+============================ 2.23.0 ============================
+
 2008-06-06  Tor Lillqvist  <tml@novell.com>
 
 	* configure.in: Look for dbus only on Unix and define HAVE_DBUS in
