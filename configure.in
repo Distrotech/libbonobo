@@ -1,8 +1,8 @@
 AC_PREREQ([2.59])
 
 m4_define([bonobo_major_version],[2])
-m4_define([bonobo_minor_version],[23])
-m4_define([bonobo_micro_version],[0])
+m4_define([bonobo_minor_version],[22])
+m4_define([bonobo_micro_version],[1])
 m4_define([bonobo_version],[bonobo_major_version.bonobo_minor_version.bonobo_micro_version])
 
 AC_INIT([libbonobo],[bonobo_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=bonobo&component=libbonobo])
@@ -44,8 +44,6 @@ case "$host" in
     os_win32=no
     SOPREFIX=lib
     SEARCHPATHSEP=":"
-    AC_DEFINE(HAVE_DBUS, 1, [whether we have dbus])
-    dbus_requirement="dbus-1 >= 1.0.0 dbus-glib-1 >= 0.74"
     ;;
 esac
 
@@ -123,7 +121,6 @@ PKG_CHECK_MODULES(SERVER, \
 	gmodule-2.0 >= 2.0.1 \
 	ORBit-2.0 >= 2.4.0 \
 	ORBit-CosNaming-2.0 >= 2.4.0 \
-	$dbus_requirement \
 	libxml-2.0 >= 2.4.20)
 AC_SUBST(SERVER_LIBS)
 AC_SUBST(SERVER_CFLAGS)
