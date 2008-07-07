@@ -687,13 +687,16 @@ prune_dead_servers (gpointer key,
 }
 
 static gboolean
-as_rescan (gpointer data)
+as_rescan (gpointer is_idle_rescan)
 {
         ObjectDirectory *od;
         static gboolean in_rescan = FALSE;
         static guint idle_id = 0;
 
         server_lock ();
+
+        if (GPOINTER_TO_UINT (is_idle_rescan))
+                idle_id = 0;
 
         if (!(od = main_dir)) { /* shutting down */
                 server_unlock ();
@@ -703,7 +706,7 @@ as_rescan (gpointer data)
         /* We tend to get a lot of 'broken' callbacks at once */
         if (in_rescan) {
                 if (!idle_id)
-                        idle_id = g_idle_add (as_rescan, NULL);
+                        idle_id = g_timeout_add (100, as_rescan, GUINT_TO_POINTER (1));
                 server_unlock ();
                 return FALSE;
         }

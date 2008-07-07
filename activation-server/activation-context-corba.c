@@ -354,17 +354,20 @@ activation_clients_is_empty_scan (void)
 }
 
 static gboolean
-ac_rescan (gpointer data)
+ac_rescan (gpointer is_idle_rescan)
 {
         static gboolean in_rescan = FALSE;
         static guint idle_id = 0;
 
         server_lock ();
 
+        if (GPOINTER_TO_UINT (is_idle_rescan))
+                idle_id = 0;
+
         /* We tend to get a lot of 'broken' callbacks at once */
         if (in_rescan) {
                 if (!idle_id)
-                        idle_id = g_idle_add (ac_rescan, NULL);
+                        idle_id = g_timeout_add (100, ac_rescan, GUINT_TO_POINTER(1));
                 server_unlock ();
                 return FALSE;
         }

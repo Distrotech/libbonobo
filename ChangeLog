@@ -1,3 +1,12 @@
+2008-07-07  Michael Meeks  <michael.meeks@novell.com>
+
+	* activation-server/activation-context-corba.c (ac_rescan),
+	* activation-server/object-directory-corba.c (as_rescan): 
+	fix identical bug in cut/paste code (urgh): we should reset
+	idle_id in the idle handler, so we can cope with the race
+	more than once. Switch to a 100ms timeout from idle too: to
+	cope with lots of app death on Zap more efficiently.
+
 2008-06-16  Ray Strode <halfline@gnome.org>
 
 	* configure.in: Post-release bump
