@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-17 17:39+0100\n"
+"POT-Creation-Date: 2008-07-16 15:32+0200\n"
 "PO-Revision-Date: 2008-03-18 16:49+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -16,37 +16,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../activation-server/activation-context-corba.c:527
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "E pamundur gjetja se në çfarë proçesi bir përfshihej serveri"
 
-#: ../activation-server/activation-context-corba.c:819
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "ID aktivimi e pavlefshme"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:166
 msgid "Directory to read .server files from"
 msgstr "Directory nga e cila duhet të lexohen files .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:166
 msgid "DIRECTORY"
 msgstr "DIRECTORY"
 
-#: ../activation-server/activation-server-main.c:165
-msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "Sjellje si ActivationContext (e prezgjedhur është vetëm ObjectDirectory)"
-
 #: ../activation-server/activation-server-main.c:169
+msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
+msgstr ""
+"Sjellje si ActivationContext (e prezgjedhur është vetëm ObjectDirectory)"
+
+#: ../activation-server/activation-server-main.c:173
 msgid "File descriptor to write IOR to"
 msgstr "Përshkruesi i file ku do të shkruhet IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:173
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:176
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -56,20 +57,21 @@ msgstr ""
 "mund të ketë efekte të rrezikshme në stabilitetin e seancës në ekzekutin të "
 "përdoruesit, dhe duhet përdorur vetëm për qëllime testimi"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:184
 msgid "Query expression to evaluate"
 msgstr "Ekspresioni i kërkesës që duhet vlerësuar"
 
 # (pofilter) acronyms: acronyms should not be translated: EXPRESSION
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:184
 msgid "EXPRESSION"
 msgstr "EKSPRESION"
 
-#: ../activation-server/activation-server-main.c:430
+#: ../activation-server/activation-server-main.c:470
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Zbato '%s --help' për të shikuar listën e plotë të opsioneve të komandës.\n"
+msgstr ""
+"Zbato '%s --help' për të shikuar listën e plotë të opsioneve të komandës.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -89,7 +91,8 @@ msgstr "Shërbimi i njoftimeve për aktivimin"
 
 #: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Aktivimi i objekteve shlib në një proçes remot nuk mund të kryhet akoma"
+msgstr ""
+"Aktivimi i objekteve shlib në një proçes remot nuk mund të kryhet akoma"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
@@ -297,7 +300,8 @@ msgstr "përshkrim i keqformuar XML i interfaqes së përdoruesit"
 # (pofilter) endwhitespace: checks whether whitespace at the end of the strings matches
 #: ../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "pozicioni për tek elementi XML i interfaqes së përdoruesit nuk është i saktë "
+msgstr ""
+"pozicioni për tek elementi XML i interfaqes së përdoruesit nuk është i saktë "
 
 #: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -510,4 +514,3 @@ msgstr "Shfaq directories tek file i konfigurimit"
 #: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr "Shfaq pozicionin e file të konfigurimit"
-
