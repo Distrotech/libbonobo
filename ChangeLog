@@ -1,3 +1,9 @@
+2008-07-25  Tobias Mueller  <tobiasmue@svn.gnome.org>
+
+	* bonobo/bonobo-main.c (bonobo_init):
+	Extend documentation to reflect the fact that it accepts
+	NULL. Fixes bug 543733.
+
 2008-07-07  Michael Meeks  <michael.meeks@novell.com>
 
 	* activation-server/activation-context-corba.c (ac_rescan),

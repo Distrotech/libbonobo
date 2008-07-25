@@ -243,8 +243,8 @@ bonobo_init_full (int *argc, char **argv,
 
 /**
  * bonobo_init:
- * @argc: a pointer to the number of arguments
- * @argv: the array of arguments
+ * @argc: a pointer to the number of arguments or %NULL
+ * @argv: the array of arguments or %NULL
  *
  * Initializes the bonobo component model.
  *
