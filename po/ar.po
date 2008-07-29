@@ -262,7 +262,7 @@ msgstr "خطأ إخراج/إدخال عند المخزن"
 
 #: ../bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr "الاسم موجود مسبقاً في المخزن"
+msgstr "الاسم موجود مسبقًا في المخزن"
 
 #: ../bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
@@ -278,11 +278,11 @@ msgstr "تمت محاولة إجراء عمل مخزن غير مدعوم"
 
 #: ../bonobo/bonobo-exception.c:200
 msgid "Object is not a stream"
-msgstr "الجسم ليس تياراً"
+msgstr "الجسم ليس تيارًا"
 
 #: ../bonobo/bonobo-exception.c:203
 msgid "Object is not a storage"
-msgstr "الجسم ليس مخزناً"
+msgstr "الجسم ليس مخزنًا"
 
 #: ../bonobo/bonobo-exception.c:206
 msgid "Storage is not empty"
