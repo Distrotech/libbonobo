@@ -1,3 +1,10 @@
+2008-08-11  Tobias Mueller  <tobiasmue@svn.gnome.org>
+
+	* bonobo/bonobo-object.c (bonobo_object_class_init):
+	Checks for bonobo being initialized in
+	bonobo_object_class_init, else notify the user.
+	Fixes bug 543735.
+
 2008-07-25  Tobias Mueller  <tobiasmue@svn.gnome.org>
 
 	* bonobo/bonobo-main.c (bonobo_init):
