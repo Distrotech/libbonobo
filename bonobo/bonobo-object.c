@@ -894,7 +894,7 @@ bonobo_object_class_init (BonoboObjectClass *klass)
 	g_assert (sizeof (BonoboObjectHeader) * 2 == sizeof (BonoboObject));
 
 	if (G_UNLIKELY (!bonobo_is_initialized()) )
-		g_error ("Bonobo must be initialized before use");
+		g_warning ("Bonobo must be initialized before use");
 	
 	bonobo_object_parent_class = g_type_class_peek_parent (klass);
 

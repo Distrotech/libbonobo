@@ -163,7 +163,7 @@ ac_query_get_var (Bonobo_ServerInfo *si, const char *id, QueryContext *qctx)
 	retval.value_known = FALSE;
 	retval.needs_free = FALSE;
 
-	if (!strcasecmp (id, "_active")) {
+	if (!g_ascii_strcasecmp (id, "_active")) {
 		CORBA_Environment ev;
 
 		CORBA_exception_init (&ev);

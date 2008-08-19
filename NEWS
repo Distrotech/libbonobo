@@ -1,6 +1,12 @@
+libbonobo 2.23.1
+	* Fix a race (Michael)
+	* Documentation improvement (Tobias Mueller)
+	* Check that we're initialized properly (Tobias Mueller)
+
 libbonobo 2.23.0
 	* Use D-BUS to start and exit when the session ends.
 	* Build fixes.
+	* Translation updates.
 
 libbonobo 2.22.0
 	* Fix warnings from GCC 4.3.x
