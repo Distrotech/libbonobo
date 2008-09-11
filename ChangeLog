@@ -4,7 +4,7 @@
 	* tests/test-activation/bonobo-activation-test.c (main)
 	* tests/test-activation/empty-server.c (main): Call
 	g_thread_init(NULL) here. It is the right thing to do, and in the
-	future ORBit2 will enforce this, see bug #547885.
+	future ORBit2 might enforce this, see bug #547885.
 
 ========================= 2.23.1 =====================
 
