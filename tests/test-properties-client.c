@@ -197,6 +197,8 @@ main (int argc, char **argv)
 	CORBA_ORB orb;
 	CORBA_exception_init (&ev);
 
+        g_thread_init (NULL);
+
 	if (!bonobo_init (&argc, argv))
 		g_error ("Could not initialize Bonobo");
 

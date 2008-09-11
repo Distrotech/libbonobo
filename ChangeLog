@@ -1,8 +1,11 @@
 2008-09-11  Tor Lillqvist  <tml@novell.com>
 
 	* activation-server/activation-server-main.c (main)
+	* bonobo/bonobo-generic-factory.h (BONOBO_ACTIVATION_FACTORY)
+	(BONOBO_ACTIVATION_FACTORY_TIMEOUT)
 	* tests/test-activation/bonobo-activation-test.c (main)
-	* tests/test-activation/empty-server.c (main): Call
+	* tests/test-activation/empty-server.c (main)
+	* tests/*.c (main): Call
 	g_thread_init(NULL) here. It is the right thing to do, and in the
 	future ORBit2 might enforce this, see bug #547885.
 

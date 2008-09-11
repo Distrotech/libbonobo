@@ -91,6 +91,8 @@ int                   bonobo_generic_factory_main_timeout    (const char        
 #define BONOBO_ACTIVATION_FACTORY(oafiid, descr, version, callback, data)	\
 int main (int argc, char *argv [])						\
 {										\
+	g_thread_init (NULL);							\
+										\
 	BONOBO_FACTORY_INIT (descr, version, &argc, argv);			\
 									        \
 	return bonobo_generic_factory_main (oafiid, callback, data);		\
@@ -99,6 +101,8 @@ int main (int argc, char *argv [])						\
 #define BONOBO_ACTIVATION_FACTORY_TIMEOUT(oafiid, descr, version, callback, data, quit_timeout)	\
 int main (int argc, char *argv [])								\
 {												\
+	g_thread_init (NULL);									\
+												\
 	BONOBO_FACTORY_INIT (descr, version, &argc, argv);					\
 												\
 	return bonobo_generic_factory_main_timeout (oafiid, callback, data, quit_timeout);	\

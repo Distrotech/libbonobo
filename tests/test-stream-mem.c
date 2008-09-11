@@ -54,6 +54,8 @@ int main (int argc, char *argv [])
 	BonoboStream *memstream;
 	guint8       *buffer;
 
+        g_thread_init (NULL);
+
 	free (malloc (8));
 	
 	if (!bonobo_init (&argc, argv))

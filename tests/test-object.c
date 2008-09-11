@@ -48,6 +48,8 @@ main (int argc, char *argv [])
 	Bonobo_Unknown    ref;
 	CORBA_Environment *ev, real_ev;
 
+        g_thread_init (NULL);
+
 	free (malloc (8));
 
 	if (bonobo_init (&argc, argv) == FALSE)

@@ -60,6 +60,7 @@ run_tests (gpointer data)
 int
 main (int argc, char **argv)
 {
+	g_thread_init (NULL);
 	if (!bonobo_init (&argc, argv))
 		g_error ("Cannot init bonobo");
 	g_idle_add (run_tests, NULL);

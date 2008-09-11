@@ -80,6 +80,8 @@ test_real_monikers (void)
 int
 main (int argc, char *argv [])
 {
+        g_thread_init (NULL);
+
 	free (malloc (8));
 
 	if (!bonobo_init (NULL, NULL))

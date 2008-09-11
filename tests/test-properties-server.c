@@ -261,6 +261,8 @@ main (int argc, char **argv)
 {
 	BonoboObject *context;
 
+        g_thread_init (NULL);
+
 	if (!bonobo_init (&argc, argv))
 		g_error ("Could not initialize Bonobo");
 

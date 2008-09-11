@@ -18,6 +18,8 @@ main (int argc, char *argv [])
 	int                           num_ok = 0;
 	int                           num_tests = 0;
 	
+        g_thread_init (NULL);
+
 	ev = &real_ev;
 	
 	if (!bonobo_init (&argc, argv))
