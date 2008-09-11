@@ -1,3 +1,11 @@
+2008-09-11  Tor Lillqvist  <tml@novell.com>
+
+	* activation-server/activation-server-main.c (main)
+	* tests/test-activation/bonobo-activation-test.c (main)
+	* tests/test-activation/empty-server.c (main): Call
+	g_thread_init(NULL) here. It is the right thing to do, and in the
+	future ORBit2 will enforce this, see bug #547885.
+
 ========================= 2.23.1 =====================
 
 2008-08-19  Kjartan Maraas  <kmaraas@gnome.org>

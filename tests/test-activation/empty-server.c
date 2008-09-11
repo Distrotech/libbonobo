@@ -46,6 +46,8 @@ main (int argc, char *argv[])
 	signal (SIGINT, do_exit);
 	signal (SIGTERM, do_exit);
 
+        g_thread_init (NULL);
+
 	CORBA_exception_init (&ev);
 	orb = bonobo_activation_init (argc, argv);
 

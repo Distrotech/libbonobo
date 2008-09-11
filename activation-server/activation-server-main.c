@@ -462,6 +462,8 @@ main (int argc, char *argv[])
 #endif
 #endif
 
+        g_thread_init (NULL);
+
 	g_set_prgname ("bonobo-activation-server");
 	ctx = g_option_context_new (NULL);
 	g_option_context_add_main_entries (ctx, options, GETTEXT_PACKAGE);

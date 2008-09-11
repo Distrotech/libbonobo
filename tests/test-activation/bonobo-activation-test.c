@@ -206,6 +206,8 @@ main (int argc, char *argv[])
         GTimer *timer = g_timer_new ();
 	Bonobo_EventSource event_source;
 	
+        g_thread_init (NULL);
+
 	CORBA_exception_init (&ev);
 
         bonobo_activation_object_directory_get (
