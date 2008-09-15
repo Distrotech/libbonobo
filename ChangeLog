@@ -5,9 +5,9 @@
 	(BONOBO_ACTIVATION_FACTORY_TIMEOUT)
 	* tests/test-activation/bonobo-activation-test.c (main)
 	* tests/test-activation/empty-server.c (main)
-	* tests/*.c (main): Call
-	g_thread_init(NULL) here. It is the right thing to do, and in the
-	future ORBit2 might enforce this, see bug #547885.
+	* tests/*.c (main): Call g_thread_init(NULL) here. It is the right
+	thing to do, and in the future ORBit2 might enforce this, see bug
+	#547885.
 
 ========================= 2.23.1 =====================
 
