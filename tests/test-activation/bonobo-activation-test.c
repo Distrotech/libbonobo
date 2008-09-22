@@ -6,6 +6,7 @@
 
 #include <bonobo-activation/bonobo-activation.h>
 #include <bonobo-activation/bonobo-activation-private.h>
+#include <libbonobo.h>
 #include "activation-server/server.h"
 
 #include "empty.h"
@@ -214,7 +215,7 @@ main (int argc, char *argv[])
                 bonobo_activation_username_get (),
                 bonobo_activation_hostname_get ());
 
-	bonobo_init (&argc, &argv);
+	bonobo_init (&argc, argv);
 /*      putenv("Bonobo_BARRIER_INIT=1"); */
 
 
@@ -302,7 +303,7 @@ main (int argc, char *argv[])
         /*
          *    We wait to see if the server (sever)
          * timeout is mis-behaving [ at this stage we
-         * havn't registered anything with the server ]
+         * have not registered anything with the server ]
          */
         fprintf (stderr, "Waiting to see if the server erroneously quits\n");
         g_usleep (SERVER_IDLE_QUIT_TIMEOUT * 2 * 1000);
@@ -449,7 +450,7 @@ main (int argc, char *argv[])
                  passed == TOTAL_TEST_SCORE? "All": "some failures");
 
         if (passed < (TOTAL_TEST_SCORE * 2 / 3)) {
-                fprintf (stderr, "It looks like you havn't installed broken.server "
+                fprintf (stderr, "It looks like you have not installed broken.server "
                          "into ${prefix}/share/bonobo-activation/, this must be done "
                          "by hand to avoid problems with normal operation.\n");
 		fprintf (stderr, "Another possibility is that you failed to kill "
