@@ -1,3 +1,10 @@
+========================= 2.24.0 ======================
+
+2008-09-22  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* NEWS: Update
+	* configure.in: Release 2.24.0
+
 2008-09-11  Tor Lillqvist  <tml@novell.com>
 
 	* activation-server/activation-server-main.c (main)

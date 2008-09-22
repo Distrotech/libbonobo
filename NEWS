@@ -1,3 +1,7 @@
+libbonobo 2.24.0
+	* Threading fix (Tor Lillqvist)
+	* Updated translations (ar, hr, pt, ro, ta, te)
+
 libbonobo 2.23.1
 	* Fix a race (Michael)
 	* Documentation improvement (Tobias Mueller)
