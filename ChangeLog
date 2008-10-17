@@ -1,3 +1,16 @@
+2008-10-17  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* bonobo-activation/Makefile.am:
+	* bonobo-activation/bonobo-activation-client.h:
+	* bonobo/Makefile.am:
+	* bonobo/bonobo-main.c:
+	* bonobo/bonobo-running-context.c:
+	* configure.in:
+	* monikers/Makefile.am:
+	* tests/Makefile.am:
+	* tests/test-activation/Makefile.am:
+	Use and enforce single GLib includes.
+
 2008-09-22  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Post release bump.

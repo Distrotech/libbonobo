@@ -9,6 +9,7 @@ INCLUDES = \
         -DBONOBO_BINDIR=\""$(bindir)"\" 		\
         -DBONOBO_LOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DBONOBO_LOCALEDIR=\""$(datadir)/locale"\" 	\
+	$(DISABLE_DEPRECATED_CFLAGS)			\
 	-DG_LOG_DOMAIN=\"Bonobo\"			\
 	-DVERSION=\"$(VERSION)\"
 

@@ -25,7 +25,7 @@
 #include <libintl.h>
 #include <string.h>
 
-#include <glib/gmain.h>
+#include <glib.h>
 
 #ifdef HAVE_GTHREADS
 GMutex                   *_bonobo_lock;

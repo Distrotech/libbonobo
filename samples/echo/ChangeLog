@@ -1,3 +1,8 @@
+2008-10-17  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* Makefile.am:
+	Enforce single GLib includes.
+
 ========================= 2.24.0 =====================
 ========================= 2.23.1 =====================
 

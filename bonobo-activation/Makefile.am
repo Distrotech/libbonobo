@@ -12,7 +12,7 @@ INCLUDES=					\
         -DBONOBO_ACTIVATION_LOCALEDIR=\""${prefix}/${DATADIRNAME}/locale"\" \
 	$(LIBBONOBO_CFLAGS)			\
 	-DVERSION=\"$(VERSION)\"		\
-	-DG_DISABLE_DEPRECATED			\
+	$(DISABLE_DEPRECATED_CFLAGS)		\
 	-DG_LOG_DOMAIN=\"Bonobo-Activation\"	\
 	$(NULL)
 

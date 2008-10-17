@@ -77,7 +77,7 @@ INCLUDES= \
 	-I$(top_srcdir)			\
 	-I$(top_builddir)		\
 	$(WARN_CFLAGS)			\
-	-DG_DISABLE_DEPRECATED $(LIBBONOBO_CFLAGS)
+	$(DISABLE_DEPRECATED_CFLAGS) $(LIBBONOBO_CFLAGS)
 
 LDADD = ../../bonobo-activation/libbonobo-activation.la \
 	$(LIBBONOBO_LIBS)

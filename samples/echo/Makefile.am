@@ -58,6 +58,7 @@ INCLUDES = 						\
 	-DG_LOG_DOMAIN=\"Echo\"				\
 	-I$(top_srcdir) 				\
 	$(LIBBONOBO_CFLAGS)				\
+	$(DISABLE_DEPRECATED_CFLAGS)			\
 	$(WARN_CFLAGS)
 
 CLEANFILES =  $(server_dot_in) $(server_DATA)

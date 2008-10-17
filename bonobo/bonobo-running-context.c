@@ -9,7 +9,7 @@
  */
 #include <config.h>
 #include <stdio.h>
-#include <glib/gmain.h>
+#include <glib.h>
 #include <glib-object.h>
 
 #include <bonobo/bonobo-context.h>

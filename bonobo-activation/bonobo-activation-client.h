@@ -1,7 +1,7 @@
 #ifndef BONOBO_ACTIVATION_CLIENT_H
 #define BONOBO_ACTIVATION_CLIENT_H
 
-#include <glib/gutils.h>
+#include <glib.h>
 #include <bonobo-activation-private.h>
 
 void bonobo_activation_release_corba_client (void);

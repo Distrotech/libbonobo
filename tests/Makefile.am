@@ -18,7 +18,8 @@ INCLUDES =	\
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
 	-I$(top_srcdir) 				\
 	$(WARN_CFLAGS)					\
-	$(LIBBONOBO_CFLAGS)
+	$(LIBBONOBO_CFLAGS)				\
+	$(DISABLE_DEPRECATED_CFLAGS)
 
 LDADD =	$(top_builddir)/bonobo/libbonobo-2.la $(LIBBONOBO_LIBS)
 
