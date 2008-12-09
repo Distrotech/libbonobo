@@ -1,4 +1,8 @@
 2008-12-09  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Don't use <glib/gthread.h> here either.
+
+2008-12-09  Kjartan Maraas  <kmaraas@gnome.org>
 	* activation-server/activation-server-main.c
 	* bonobo-activation/bonobo-activation-shlib.c
 	* test-activation/bonobo-activation-test.c

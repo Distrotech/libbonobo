@@ -154,7 +154,7 @@ if test x$enable_threads != xno; then
   libbonobo_save_LIBS=$LIBS
   CFLAGS="$CFLAGS $GTHREAD_CFLAGS"
   LIBS="$LIBS $GTHREAD_LIBS"
-  AC_TRY_RUN([#include <glib/gthread.h>
+  AC_TRY_RUN([#include <glib.h>
 		int main (void) {
 			if (!g_thread_supported()) g_thread_init(NULL);
 			return NULL == g_mutex_new(); }],
