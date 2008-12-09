@@ -1,4 +1,11 @@
 2008-12-09  Kjartan Maraas  <kmaraas@gnome.org>
+	* activation-server/activation-server-main.c
+	* bonobo-activation/bonobo-activation-shlib.c
+	* test-activation/bonobo-activation-test.c
+	* test-activation/empty-client.c
+	Remove some #if 0'ed out code.
+
+2008-12-09  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* activation-server/object-directory-load.c:
 	glib include fix. Patch from Przemysław Grzegorczyk
