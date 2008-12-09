@@ -274,19 +274,8 @@ main (int argc, char *argv[])
 
         for (i = 0; i < 1000; i++) {
                 Bonobo_ServerInfoList *copy;
-#if 0
-                info = bonobo_activation_query (query, sort_by, &ev);
-
-                if (ev._major == CORBA_NO_EXCEPTION) {
-                        CORBA_free (info);
-                } else {
-                        fprintf (stderr, "Test of query failed '%s'\n",
-                                 bonobo_activation_exception_id (&ev));
-                }
-#else
                 copy = Bonobo_ServerInfoList_duplicate (info);
                 CORBA_free (copy);
-#endif
         }
         g_timer_stop (timer);
 

@@ -33,7 +33,7 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <glib/gmarkup.h>
+#include <glib.h>
 
 #include "bonobo-activation/bonobo-activation-private.h"
 #include "server.h"

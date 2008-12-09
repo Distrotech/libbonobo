@@ -477,11 +477,6 @@ main (int argc, char *argv[])
         LIBXML_TEST_VERSION;
 	xmlKeepBlanksDefault(0);
 
-#if 0
-        while (!g_file_test ("/tmp/orbit-go", G_FILE_TEST_EXISTS))
-                sleep (1);
-#endif
-
 #ifdef HAVE_SYSLOG_H
 	syslog_ident = g_strdup_printf ("bonobo-activation-server (%s-%u)", g_get_user_name (), (guint) getpid ());
 

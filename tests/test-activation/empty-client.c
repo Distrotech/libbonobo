@@ -21,12 +21,6 @@ main (int argc, char *argv[])
 	CORBA_exception_init (&ev);
 	orb = CORBA_ORB_init (&argc, argv, "orbit-local-orb", &ev);
 
-#if 0
-	for (i = 0; i < (sizeof (theblah) - 1); i++)
-		theblah[i] = 'a';
-	theblah[sizeof (theblah) - 1] = '\0';
-#endif
-
 	if (argc < 2) {
 		printf ("Need a binding ID thing as argv[1]\n");
 		return 1;
