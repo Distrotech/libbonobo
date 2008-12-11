@@ -602,7 +602,7 @@ check_quit (void)
 
         if (od->n_active_servers <= RESIDUAL_SERVERS &&
             activation_clients_is_empty_scan ())
-                od->no_servers_timeout = g_timeout_add (
+                od->no_servers_timeout = g_timeout_add_seconds (
                         SERVER_IDLE_QUIT_TIMEOUT, quit_server_timeout, NULL);
 
 	od->time_active_changed = time (NULL);

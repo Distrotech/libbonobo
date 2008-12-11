@@ -345,7 +345,7 @@ last_unref_cb (BonoboRunningContext *context, BonoboGenericFactory *factory)
 		return;
 	}
 	g_return_if_fail (!factory->priv->last_unref_timeout_id);
-	factory->priv->last_unref_timeout_id = g_timeout_add
+	factory->priv->last_unref_timeout_id = g_timeout_add_seconds
 		(factory->priv->last_unref_timeout, last_unref_timeout, factory);
 }
 
@@ -405,7 +405,7 @@ bonobo_generic_factory_main_timeout (const char           *act_iid,
 
 		  /* Create timeout here so if we haven't created anything
 		   * within a few minutes we just quit */
-		factory->priv->startup_timeout_id = g_timeout_add
+		factory->priv->startup_timeout_id = g_timeout_add_seconds
 			(STARTUP_TIMEOUT, startup_timeout, factory);
 
 		bonobo_main ();

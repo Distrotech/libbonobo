@@ -465,10 +465,10 @@ bonobo_activation_postinit (gpointer app, gpointer mod_info)
 #endif
 
         if (bonobo_activation_activate_iid)
-                g_timeout_add_full (G_PRIORITY_LOW,
-                                    BONOBO_ACTIVATION_FACTORY_PRIVATE_TIMEOUT,
-                                    bonobo_activation_timeout_reg_check,
-                                    NULL, NULL);
+                g_timeout_add_full_seconds (G_PRIORITY_LOW,
+                                            BONOBO_ACTIVATION_FACTORY_PRIVATE_TIMEOUT,
+                                            bonobo_activation_timeout_reg_check,
+                                            NULL, NULL);
         else
                 bonobo_activation_timeout_reg_check_set (FALSE);
 

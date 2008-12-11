@@ -1,3 +1,12 @@
+2008-12-11  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* activation-server/object-directory-corba.c: (check_quit):
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_postinit):
+	* bonobo/bonobo-generic-factory.c: (last_unref_cb),
+	(bonobo_generic_factory_main_timeout):
+	Use g_timeout_add_seconds and friends in a few places.
+
 2008-12-09  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Don't use <glib/gthread.h> here either.
