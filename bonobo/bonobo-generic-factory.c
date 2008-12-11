@@ -28,8 +28,8 @@
 #include <bonobo/bonobo-debug.h>
 #include "bonobo-private.h"
 
-#define DEFAULT_LAST_UNREF_TIMEOUT 	2000
-#define STARTUP_TIMEOUT 		60000
+#define DEFAULT_LAST_UNREF_TIMEOUT 	2
+#define STARTUP_TIMEOUT 		60
 
 struct _BonoboGenericFactoryPrivate {
 	/* The function factory */

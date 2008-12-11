@@ -1,5 +1,12 @@
 2008-12-11  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* activation-server/server.h:
+	* bonobo-activation/bonobo-activation-private.h:
+	* bonobo/bonobo-generic-factory.c:
+	And remember to adjust the timeout constants accordingly.
+
+2008-12-11  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* bonobo-activation/bonobo-activation-init.c:
 	(bonobo_activation_postinit): Fix typo.
 

@@ -16,7 +16,7 @@
  *    Time delay after all servers are de-registered / dead
  * before quitting the server. (ms)
  */
-#define SERVER_IDLE_QUIT_TIMEOUT 1000
+#define SERVER_IDLE_QUIT_TIMEOUT 1
 
 #define NAMING_CONTEXT_IID "OAFIID:Bonobo_CosNaming_NamingContext"
 #define EVENT_SOURCE_IID "OAFIID:Bonobo_Activation_EventSource"
