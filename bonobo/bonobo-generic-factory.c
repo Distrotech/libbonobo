@@ -28,7 +28,7 @@
 #include <bonobo/bonobo-debug.h>
 #include "bonobo-private.h"
 
-#define DEFAULT_LAST_UNREF_TIMEOUT 	2
+#define DEFAULT_LAST_UNREF_TIMEOUT 	2000
 #define STARTUP_TIMEOUT 		60
 
 struct _BonoboGenericFactoryPrivate {
@@ -345,7 +345,7 @@ last_unref_cb (BonoboRunningContext *context, BonoboGenericFactory *factory)
 		return;
 	}
 	g_return_if_fail (!factory->priv->last_unref_timeout_id);
-	factory->priv->last_unref_timeout_id = g_timeout_add_seconds
+	factory->priv->last_unref_timeout_id = g_timeout_add
 		(factory->priv->last_unref_timeout, last_unref_timeout, factory);
 }
 

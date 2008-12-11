@@ -1,5 +1,10 @@
 2008-12-11  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* bonobo/bonobo-generic-factory.c: (last_unref_cb): Don't
+	do this one as that might be explicitly set.
+
+2008-12-11  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* activation-server/server.h:
 	* bonobo-activation/bonobo-activation-private.h:
 	* bonobo/bonobo-generic-factory.c:
