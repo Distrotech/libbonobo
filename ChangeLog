@@ -1,5 +1,10 @@
 2008-12-11  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* bonobo-activation/bonobo-activation-init.c:
+	(bonobo_activation_postinit): Fix typo.
+
+2008-12-11  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* activation-server/object-directory-corba.c: (check_quit):
 	* bonobo-activation/bonobo-activation-init.c:
 	(bonobo_activation_postinit):
