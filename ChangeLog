@@ -1,3 +1,7 @@
+2008-12-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Require glib 2.14.0.
+
 2008-12-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* bonobo/bonobo-generic-factory.c: (last_unref_cb): Don't

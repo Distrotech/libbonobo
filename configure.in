@@ -107,7 +107,7 @@ AC_CHECK_HEADERS(sys/wait.h syslog.h)
 # Start of pkg-config checks
 #
 ORBIT_VERSION=2.11.2
-GLIB_VERSION=2.8.0
+GLIB_VERSION=2.14.0
 
 PKG_CHECK_MODULES(LIBBONOBO, \
 	ORBit-2.0 >= $ORBIT_VERSION \
