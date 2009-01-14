@@ -134,7 +134,7 @@ if test "$enable_maintainer_mode" = "yes"; then
 fi
 
 # orbit-idl
-ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
+test x$ORBIT_IDL = x && ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
 AC_SUBST(ORBIT_IDL)
 
 AC_CHECK_HEADER(popt.h,,AC_MSG_ERROR([Failed to find popt.h - you may have to adjust your environment]))
@@ -162,8 +162,10 @@ if test x$enable_threads != xno; then
 		AC_MSG_RESULT(no)
 		AC_MSG_ERROR(
 			[No working gthread-2.0 support found, using --disable-threads IS DISCOURAGED])
-	]
-  )
+	], [AC_MSG_RESULT(unknown)
+	    AC_MSG_WARN(
+	        [Couldn't check for working gthread-2.0 support while crosscompiling
+	])])
   CFLAGS=$libbonobo_save_CFLAGS
   LIBS=$libbonobo_save_LIBS
   AC_DEFINE(HAVE_GTHREADS,,[whether we use gthreads])

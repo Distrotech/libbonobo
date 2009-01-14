@@ -1,3 +1,9 @@
+2008-01-14  Fridrich Strba  <fridrich.strba@bluewin.ch>
+
+	* configure.in: allow override the check for ORBIT_IDL from 
+	environmental variable + prevent AC_TRY_RUN from bailing out
+	when we are cross-compiling.
+
 2008-12-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Require glib 2.14.0.
