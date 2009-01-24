@@ -2,68 +2,68 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Raivis Dejus <orvils@gmail.com>, 2006.
+# Raivis Dejus <orvils@gmail.com>, 2006, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: lv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-22 16:55+0200\n"
-"PO-Revision-Date: 2006-08-25 13:49+0300\n"
+"POT-Creation-Date: 2008-11-07 14:28+0100\n"
+"PO-Revision-Date: 2009-01-24 18:28+0200\n"
 "Last-Translator: Raivis Dejus <orvils@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
-#: ../activation-server/activation-context-corba.c:523
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "Nevar atrast kuru pakartoto serveris iekārtoja sarakstā"
 
-#: ../activation-server/activation-context-corba.c:815
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "Nav derīgs Aktivācijas ID"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:166
 msgid "Directory to read .server files from"
 msgstr "Direktorija, no kuras nolasīt .server failus"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:166
 msgid "DIRECTORY"
-msgstr "DIRECTORY"
+msgstr "DIREKTORIJA"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:169
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Servēt kā ActivitionContext (noklusētais ir tikai ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:173
 msgid "File descriptor to write IOR to"
 msgstr "Faila deskriptors lai rakstītu IOR uz"
 
-#: ../activation-server/activation-server-main.c:169
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../activation-server/activation-server-main.c:173
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:176
 msgid ""
-"Register as the users' activation server without locking [!] for debugging"
-msgstr ""
-"Reģistrēt kā lietotāja aktivizācijas serveri neskatoties [!] uz atkļūdošanu"
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
+msgstr "Reģistrējiet kā lietotāja aktivizācijas serveri bez saslēgšanas. Brīdinājums: šai iespējai var būt bīstami blakusefekti uz lietotāja sesijas stabilitāti, to vajadzētu izmantot vienīgi atkļūdošanas vajadzībām"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:184
 msgid "Query expression to evaluate"
 msgstr "Pārbaudāmā prasījuma izteiksme"
 
-#: ../activation-server/activation-server-main.c:177
+#: ../activation-server/activation-server-main.c:184
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:426
-#: ../utils/bonobo-activation-sysconf.c:304
+#: ../activation-server/activation-server-main.c:472
+#: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
@@ -99,36 +99,36 @@ msgstr ""
 "Bonobo Aktivizācijas konfigurācijas fails nav nolasīts veiksmīgi. Lūdzu vai "
 "tas ir pareizs: %s"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:102
 msgid "a NULL iid is not valid"
 msgstr "NULL idd nav derīgs"
 
-#: ../activation-server/object-directory-load.c:105
+#: ../activation-server/object-directory-load.c:106
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s ir NULL tips"
 
-#: ../activation-server/object-directory-load.c:109
+#: ../activation-server/object-directory-load.c:110
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s ir NULL lokācija"
 
-#: ../activation-server/object-directory-load.c:118
+#: ../activation-server/object-directory-load.c:119
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "nepareizs simbols '%c' iid '%s'"
 
-#: ../activation-server/object-directory-load.c:348
+#: ../activation-server/object-directory-load.c:349
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Rekvizītam '%s' nav vērtības"
 
-#: ../activation-server/object-directory-load.c:580
+#: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Nevarēju noparsēt slikti noformētu XML dokumentu %s"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:629
 #, c-format
 msgid "Trying dir %s"
 msgstr "Meģina dir %s"
@@ -143,37 +143,38 @@ msgid "Failed to read from child process: %s\n"
 msgstr "Nespēja nolasīt no pakārtotā procesa: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr "EOF no apakšprocesa\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:435
+#: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
 msgstr "Nevarēju izveidot jaunu procesu"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "File descriptor to print IOR on"
 msgstr "Faila deskriptors drukāšanai IOR uz"
 
-#: ../bonobo-activation/bonobo-activation-init.c:357
-#: ../bonobo-activation/bonobo-activation-init.c:367
+#: ../bonobo-activation/bonobo-activation-init.c:354
+#: ../bonobo-activation/bonobo-activation-init.c:399
 msgid "IID to activate"
 msgstr "IID aktivizēšanai"
 
-#: ../bonobo-activation/bonobo-activation-init.c:359
-#: ../bonobo-activation/bonobo-activation-init.c:369
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:401
 msgid "Prevent registering of server with OAF"
 msgstr "Novērst reģistrēšanos ar serveri ar OAF"
 
-#: ../bonobo-activation/bonobo-activation-init.c:403
-msgid "Bonobo Activation"
-msgstr "Bonobo aktivizācija"
+#: ../bonobo-activation/bonobo-activation-init.c:409
+msgid "Bonobo Activation options:"
+msgstr "Bonobo aktivizācijas iespējas:"
 
-#: ../bonobo-activation/bonobo-activation-init.c:404
+#: ../bonobo-activation/bonobo-activation-init.c:410
 msgid "Show Bonobo Activation options"
 msgstr "Parādīt Bonobo aktivizācijas opcijas"
 
-#: ../bonobo-activation/bonobo-activation-init.c:512
+#: ../bonobo-activation/bonobo-activation-init.c:518
 msgid "Bonobo activation options"
 msgstr "Bonobo aktivizācijas opcijas"
 
@@ -206,11 +207,11 @@ msgstr "Nosaukums"
 msgid "Application unique name"
 msgstr "Aplikācijas unikālais nosaukums"
 
-#: ../bonobo/bonobo-object.c:923
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:923
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "Pielāgota CORBA POA"
 
@@ -350,16 +351,12 @@ msgstr "Kļūda pārbaudot kļūdu; nav izņēmumu"
 msgid "General activation error with no description"
 msgstr "Vispārēja aktivizācijas kļūda bez apraksta"
 
-#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
-msgid "Could not initialize Bonobo"
-msgstr "Nespēju inicializēt Bonobo"
-
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
 msgid "Failed to resolve, or extend '%s"
 msgstr "Neizdevās atrisināt, vai paplašināt '%s"
 
-#: ../bonobo/bonobo-moniker-util.c:246
+#: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
 msgstr "Neizdevās aktivizēt objektu"
 
@@ -375,7 +372,7 @@ msgstr "Neizdevās aktivēt '%s"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
-msgstr "HTTP Moniker"
+msgstr "HTTP moniker"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:2
 msgid "ORB IOR handling moniker"
@@ -421,33 +418,35 @@ msgstr "Echo komponente"
 msgid "Echo component factory"
 msgstr "Echo komponentes ražotne"
 
-#: ../samples/echo/echo-client.c:22
+#: ../samples/echo/echo-client.c:24
 msgid "I could not initialize Bonobo"
 msgstr "Es nespēju inicializēt Bonobo"
 
-#: ../samples/echo/echo-client.c:33
+#: ../samples/echo/echo-client.c:35
 msgid "Could not create an instance of the sample echo component"
 msgstr "Es nespēju izveidot instanci parauga echo komponentam"
 
-#: ../samples/echo/echo-client.c:45
+#: ../samples/echo/echo-client.c:47
 #, c-format
 msgid "An exception occurred '%s'"
 msgstr "Parādījies izņēmums '%s'"
 
-#: ../utils/bonobo-activation-sysconf.c:82
+#: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "Nevar noglabāt konfigurācijas failu.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:83
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Lūdzu, pārliecinieties vai jums ir atļaujas rakstīt uz '%s'.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:86
+#: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "Veiksmīgi ierakstīts konfigurācijas fails.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:103
+#: ../utils/bonobo-activation-sysconf.c:104
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -456,36 +455,39 @@ msgstr ""
 "konfigurācijas fails ir:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:145
+#: ../utils/bonobo-activation-sysconf.c:146
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s jau ir konfigurācijas failā\n"
 
-#: ../utils/bonobo-activation-sysconf.c:165
+#: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "nav pareizi strukturēts konfigurācijas fails\n"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo-activation konfigurācijas fails satur:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:266
+#: ../utils/bonobo-activation-sysconf.c:267
 msgid "Directory to remove from configuration file"
 msgstr "Izņemt direktoriju no konfigurācijas faila"
 
-#: ../utils/bonobo-activation-sysconf.c:266
-#: ../utils/bonobo-activation-sysconf.c:268
+#: ../utils/bonobo-activation-sysconf.c:267
+#: ../utils/bonobo-activation-sysconf.c:269
 msgid "PATH"
 msgstr "CEĻŠ"
 
-#: ../utils/bonobo-activation-sysconf.c:268
+#: ../utils/bonobo-activation-sysconf.c:269
 msgid "Directory to add to configuration file"
 msgstr "Pievienot direktoriju konfigurācijas failam"
 
-#: ../utils/bonobo-activation-sysconf.c:270
+#: ../utils/bonobo-activation-sysconf.c:271
 msgid "Display directories in configuration file"
 msgstr "Parādīt konfigurācijas faila direktorijas"
 
-#: ../utils/bonobo-activation-sysconf.c:272
+#: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr "Parādīt ceļu uz konfigurācijas failu"
+
