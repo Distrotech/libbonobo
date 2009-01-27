@@ -40,6 +40,10 @@ bonobo_activation_server_SOURCES=				\
 	activation-server-main.c				\
 	server.h
 
+if OS_WIN32
+bonobo_activation_server_LDFLAGS = -mwindows
+endif
+
 LDADD= \
 	$(top_builddir)/bonobo/libbonobo-2.la \
 	$(top_builddir)/bonobo-activation/libbonobo-activation.la \
