@@ -58,6 +58,16 @@
 #include <dbus/dbus-glib-lowlevel.h>
 #endif
 
+#ifdef G_OS_WIN32
+#include <io.h>
+#include <conio.h>
+#define _WIN32_WINNT 0x0500 
+#include <windows.h>
+
+static gboolean allocated_new_console = FALSE;
+
+#endif
+
 static gboolean        server_threaded = FALSE;
 static glong           server_guard_depth = 0;
 static GStaticRecMutex server_guard = G_STATIC_REC_MUTEX_INIT;
@@ -245,6 +255,19 @@ build_src_dir (void)
         return real_od_source_dir;
 }
 
+#ifdef G_OS_WIN32
+
+static void
+wait_console_key (void)
+{
+        SetConsoleTitle ("Bonobo activation server exiting. Type any character to close this window.");
+        printf ("\n"
+                "(Bonobo activation server exiting. Type any character to close this window)\n");
+        _getch ();
+}
+
+#endif
+
 static void
 log_handler (const gchar *log_domain,
              GLogLevelFlags log_level,
@@ -299,6 +322,10 @@ log_handler (const gchar *log_domain,
 	if (log_level & G_LOG_FLAG_FATAL) {
 		fprintf (stderr, "%s%s", message,
                          (message[strlen (message) - 1] == '\n' ? "" : "\n"));
+#ifdef G_OS_WIN32
+                if (allocated_new_console)
+                        wait_console_key ();
+#endif
 		_exit (1);
 	}
 
@@ -411,6 +438,44 @@ bus_message_handler (DBusConnection *connection,
 
 #endif
 
+#ifdef G_OS_WIN32
+
+static void
+ensure_output_visible (gboolean asked_for_it)
+{
+        if (fileno (stdout) != -1 &&
+            _get_osfhandle (fileno (stdout)) != -1)
+                return;
+
+        typedef BOOL (* WINAPI AttachConsole_t) (DWORD);
+
+        AttachConsole_t p_AttachConsole =
+                (AttachConsole_t) GetProcAddress (GetModuleHandle ("kernel32.dll"), "AttachConsole");
+
+        if (p_AttachConsole != NULL) {
+                if (!AttachConsole (ATTACH_PARENT_PROCESS)) {
+                        if (AllocConsole ())
+                                allocated_new_console = TRUE;
+                }
+
+                freopen ("CONOUT$", "w", stdout);
+                dup2 (fileno (stdout), 1);
+                freopen ("CONOUT$", "w", stderr);
+                dup2 (fileno (stderr), 2);
+
+                if (allocated_new_console) {
+                        SetConsoleTitle ("Bonobo activation server output. You can minimize this window, but don't close it.");
+                        if (asked_for_it)
+                                printf ("You asked for debugging output by setting the BONOBO_ACTIVATION_DEBUG_OUTPUT\n"
+                                        "environment variable, so here it is.\n"
+                                        "\n");
+                        atexit (wait_console_key);
+                }
+        }
+}
+
+#endif
+
 int
 main (int argc, char *argv[])
 {
@@ -464,6 +529,16 @@ main (int argc, char *argv[])
 
         g_thread_init (NULL);
 
+#ifdef BONOBO_ACTIVATION_DEBUG
+	debug_output_env = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
+	if (debug_output_env && debug_output_env[0] != '\0') {
+		output_debug = TRUE;
+#ifdef G_OS_WIN32
+                ensure_output_visible (TRUE);
+#endif
+        }
+#endif
+
 	g_set_prgname ("bonobo-activation-server");
 	ctx = g_option_context_new (NULL);
 	g_option_context_add_main_entries (ctx, options, GETTEXT_PACKAGE);
@@ -484,11 +559,6 @@ main (int argc, char *argv[])
 	openlog (syslog_ident, 0, LOG_USER);
 #endif
 
-#ifdef BONOBO_ACTIVATION_DEBUG
-	debug_output_env = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
-	if (debug_output_env && debug_output_env[0] != '\0')
-		output_debug = TRUE;
-#endif
         if (server_reg)
                 output_debug = TRUE;
 
@@ -549,10 +619,14 @@ main (int argc, char *argv[])
 	if (existing != CORBA_OBJECT_NIL)
 		CORBA_Object_release (existing, NULL);
 
-        if (ior_fd < 0 && !server_ac && !server_reg)
-                g_critical ("\n\n-- \nThe bonobo-activation-server must be forked by\n"
-                            "libbonobo-activation, and cannot be run itself.\n"
+        if (ior_fd < 0 && !server_ac && !server_reg) {
+#ifdef G_OS_WIN32
+                ensure_output_visible (FALSE);
+#endif
+                g_critical ("\n\n-- \nThe bonobo-activation-server must be started by\n"
+                            "libbonobo-activation, and cannot be run by itself.\n"
                             "This is due to us doing client side locking.\n-- \n");
+        }
 
         if (server_reg) {
                 g_warning ("Running in user-forked debugging mode");

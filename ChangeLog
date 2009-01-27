@@ -1,3 +1,21 @@
+2009-01-27  Tor Lillqvist  <tml@novell.com>
+
+	* activation-server/Makefile.am: Link as a "GUI" exe file on
+	Windows to avoid console windows.
+
+	* activation-server/activation-server-main.c (main): Use the verb
+	"started" instead of "forked" in error message.
+
+	On Windows, if the BONOBO_ACTIVATION_DEBUG_OUTPUT environment
+	variable is set, do ensure that stdout and stderr goes
+	somewhere. If necessary open a new console. If somebody attempts
+	to run bonobo-activation-server directly, always ensure the
+	ensuing error message is visible.
+
+	(ensure_output_visible) (wait_console_key): New functions used on
+	Windows to ensure output goes somewhere even if the executable is
+	a "GUI" one.
+
 2008-01-14  Fridrich Strba  <fridrich.strba@bluewin.ch>
 
 	* configure.in: allow override the check for ORBIT_IDL from 
