@@ -1,3 +1,5 @@
+================================ 2.24.1 ============================
+
 2009-01-27  Tor Lillqvist  <tml@novell.com>
 
 	* activation-server/Makefile.am: Link as a "GUI" exe file on

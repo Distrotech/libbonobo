@@ -1,3 +1,9 @@
+libbonobo 2.24.1
+	* Win32 portability fixes (Tor Lillqvist)
+	* cleanups for newer glib releases (Cosimo Cecchi)
+	* Other cleanups for single glib includes (Przemysław Grzegorczyk)
+	* Cross-compiling fixes (Fridrich Strba)
+ 
 libbonobo 2.24.0
 	* Threading fix (Tor Lillqvist)
 	* Updated translations (ar, hr, pt, ro, ta, te)
