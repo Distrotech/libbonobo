@@ -10,53 +10,55 @@
 # Manuel A. Fernández Montecelo <manuel@sindominio.net>, 2001-2002.
 # Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005, 2006.
 # Ignacio Casal Quinteiro <icq@svn.gnome.org>, 2008.
+# Mancomún - Centro de Referencia e Servizos de Software Libre <g11n@mancomun.org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-14 14:29+0100\n"
-"PO-Revision-Date: 2008-02-14 14:29+0100\n"
-"Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
+"POT-Creation-Date: 2009-03-13 19:58+0100\n"
+"PO-Revision-Date: 2009-03-10 20:17+0000\n"
+"Last-Translator: Suso Baleato <suso.baleato@xunta.es>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1)\n"
-"X-Generator: KBabel 1.11.4\n"
+"Language: gl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../activation-server/activation-context-corba.c:527
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
-msgstr "Non foi posible buscar en que proceso fillo estaba listado o servidor"
+msgstr ""
+"Non foi posíbel determinar en que proceso fillo estaba listado o servidor"
 
-#: ../activation-server/activation-context-corba.c:819
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "Non é un ID de activación válido"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "Directory to read .server files from"
 msgstr "Directorio desde o que ler os ficheiros .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "DIRECTORY"
 msgstr "DIRECTORIO"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:179
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Servir como un ActivationContext (o predeterminado é só como un "
 "ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 msgid "File descriptor to write IOR to"
 msgstr "Descritor de ficheiro para o que escribir o IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "DF"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:186
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -66,20 +68,20 @@ msgstr ""
 "opción pode ter efectos secundarios perigosos para a estabilidade da sesión "
 "en execución do usuario e só debe usarse co obxectivo de depuración"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "Query expression to evaluate"
 msgstr "Expresión de consulta para avaliar"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "EXPRESSION"
 msgstr "EXPRESIÓN"
 
-#: ../activation-server/activation-server-main.c:430
+#: ../activation-server/activation-server-main.c:547
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
-"Executar '%s --help' para ver unha lista completa de opcións dispoñibles na "
+"Execute '%s --help' para ver unha lista completa de opcións dispoñíbeis na "
 "liña de comandos.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
@@ -101,7 +103,7 @@ msgstr "Servizo de notificación para a activación"
 #: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
 msgstr ""
-"Aínda non é posible manipular a activación de obxectos shlib nun proceso "
+"Aínda non é posíbel manipular a activación de obxectos shlib nun proceso "
 "remoto"
 
 #: ../activation-server/object-directory-config-file.c:65
@@ -150,7 +152,7 @@ msgstr "Probando o directorio %s"
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
-"O proceso fillo non deu ningunha mensaxe de erro, ocorreu un fallo "
+"O proceso fillo non deu ningunha mensaxe de erro; ocorreu un fallo "
 "descoñecido"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
@@ -203,7 +205,7 @@ msgstr "g_module_open de `%s' fallou con `%s'"
 #: ../bonobo-activation/bonobo-activation-shlib.c:163
 #, c-format
 msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr "Non se localiza o símbolo Bonobo_Plugin_info en `%s'"
+msgstr "Non é posíbel localizar o símbolo Bonobo_Plugin_info en `%s'"
 
 #: ../bonobo-activation/bonobo-activation-shlib.c:212
 #, c-format
@@ -223,11 +225,11 @@ msgstr "Nome"
 msgid "Application unique name"
 msgstr "Nome único da aplicación"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "POA CORBA personalizado"
 
@@ -261,7 +263,7 @@ msgstr "Non hai permisos para acceder ao fluxo"
 
 #: ../bonobo/bonobo-exception.c:180
 msgid "An unsupported stream action was attempted"
-msgstr "Tentouse unha acción de fluxo non soportada "
+msgstr "Tentouse unha acción de fluxo non soportada"
 
 #: ../bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
@@ -277,11 +279,11 @@ msgstr "O nome xa existe no almacenamento"
 
 #: ../bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
-msgstr "Obxecto non localizado no almacenamento"
+msgstr "Non se localizou o obxecto no almacenamento"
 
 #: ../bonobo/bonobo-exception.c:196
 msgid "No permission to do operation on storage"
-msgstr "Non hai permisos para facer a operación no almacenamento"
+msgstr "Non hai permisos para efectuar a operación no almacenamento"
 
 #: ../bonobo/bonobo-exception.c:198
 msgid "An unsupported storage action was attempted"
@@ -309,7 +311,7 @@ msgstr "camiño non válido para un elemento XML da interface de usuario"
 
 #: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
-msgstr "o atributo de IU pedido non existe"
+msgstr "o atributo de IU solicitado non existe"
 
 #: ../bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
@@ -317,7 +319,7 @@ msgstr "Comando ou verbo descoñecido"
 
 #: ../bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "O comando non é sensible"
+msgstr "O comando non é sensíbel"
 
 #: ../bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -345,7 +347,7 @@ msgstr "fallou o backend da base de datos da configuración "
 
 #: ../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Non puido localizarse a interface do moniker"
+msgstr "Non se puido localizar a interface do moniker"
 
 #: ../bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
@@ -469,7 +471,7 @@ msgid ""
 "    %s\n"
 msgstr ""
 "o ficheiro de configuración é:\n"
-"   %s\n"
+"    %s\n"
 
 #: ../utils/bonobo-activation-sysconf.c:146
 #, c-format
@@ -506,4 +508,3 @@ msgstr "Mostrar os directorios no ficheiro de configuración"
 #: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr "Mostrar o camiño ao ficheiro de configuración"
-
