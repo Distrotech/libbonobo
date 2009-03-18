@@ -13,8 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.ar\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-13 23:52+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=libbonobo&component=general\n"
+"POT-Creation-Date: 2009-03-13 18:59+0000\n"
 "PO-Revision-Date: 2007-01-19 21:38+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -25,37 +26,37 @@ msgstr ""
 "Plural-Forms: Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && "
 "n<=10 ? 2 : 3\n"
 
-#: ../activation-server/activation-context-corba.c:525
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "تعذّر معرفة في أي الأبناء أُدرج الخادوم"
 
-#: ../activation-server/activation-context-corba.c:817
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "هوية تنشيط غير سليمة"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "Directory to read .server files from"
 msgstr "الدليل الذي تقرء منه ملفات .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "DIRECTORY"
 msgstr "DIRECTORY"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:179
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "يخدم كـ ActivationContext (الإفتراضي ObjectDirectory فقط)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 msgid "File descriptor to write IOR to"
 msgstr "واصف الملف الذي سيكتب إليه الـ IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:186
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -64,15 +65,15 @@ msgstr ""
 "سجّل كخادوم تفعيل المستخدم بدون قفل. تحذير: قد يكون لهذا الخيار آثار جانبيّة "
 "خطير على ثبات الجلسة التي يشغلها المستخدم، ويجب استخدامه لأغراض التنقيح فقط"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "Query expression to evaluate"
 msgstr "تعبير الاستعلام ليُقيَّم"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:429
+#: ../activation-server/activation-server-main.c:547
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -129,12 +130,12 @@ msgstr "محرف غير سليم '%c' في iid '%s'"
 msgid "Property '%s' has no value"
 msgstr "الخاصية '%s' ليس لها قيمة"
 
-#: ../activation-server/object-directory-load.c:581
+#: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "تعذّر تحليل مستند XML %s المشوه"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:629
 #, c-format
 msgid "Trying dir %s"
 msgstr "سأحاول الدليل %s"
@@ -149,6 +150,7 @@ msgid "Failed to read from child process: %s\n"
 msgstr "فشلت القراءة من العملية الإبنة: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr "فشلت القراءة من العملية\n"
 
@@ -212,11 +214,11 @@ msgstr "الاسم"
 msgid "Application unique name"
 msgstr "اسم التطبيق الفريد"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "CORBA POA خاص"
 
@@ -437,6 +439,7 @@ msgid "An exception occurred '%s'"
 msgstr "حصل استثناء '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "تعذّر حفظ ملف الإعدادات.\n"
 
@@ -446,6 +449,7 @@ msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "من فضلك تأكد من أن لديك الأذونات للكتابة على '%s'.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "كتِب ملف الإعدادات بنجاح.\n"
 
@@ -464,10 +468,12 @@ msgid "%s already in configuration file\n"
 msgstr "%s موجود مسبقا في ملف الإعدادات\n"
 
 #: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "ليس هناك ملف إعدادات مركب بشكل صحيح\n"
 
 #: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "ملف إعدادات Bonobo-activation يحوي:\n"
 
