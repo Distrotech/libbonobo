@@ -2,17 +2,17 @@
 # Estonian translation of libbonobo.
 #
 # Copyright (C) 2005, 2006 Free Software Foundation, Inc.
-# Copyright (C) 2007, 2008, The GNOME Project.
+# Copyright (C) 2007-2009, The GNOME Project.
 # This file is distributed under the same license as the libbonobo package.
 #
-# Ivar Smolin <okul@linux.ee>, 2005-2008.
+# Ivar Smolin <okul@linux.ee>, 2005-2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Libbonobo HEAD\n"
+"Project-Id-Version: libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-24 03:48+0000\n"
-"PO-Revision-Date: 2008-11-06 21:11+0200\n"
+"PO-Revision-Date: 2009-06-08 22:02+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,8 @@ msgstr "KATALOOG"
 
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
-"Serveeritakse kui ActivationContext'i (vaikimisi serveeritakse "
-"ObjectDirectory't)"
+"Serveeritakse kui ActivationContexti (vaikimisi serveeritakse "
+"ObjectDirectoryt)"
 
 msgid "File descriptor to write IOR to"
 msgstr "Failideskriptor, kuhu IOR kirjutada"
@@ -48,9 +48,12 @@ msgid ""
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
 msgstr ""
+"Kasutaja aktiveerimisserveri registreerimine ilma lukustamata.  Hoiatus: "
+"selle valiku kasutamisega võivad kaasneda ohtlikud kõrvalmõjud kasutaja "
+"käimasolevale seansile ja seda peaks kasutama ainult silumiseesmärgil"
 
 msgid "Query expression to evaluate"
-msgstr ""
+msgstr "Hinnatav päringuavaldis"
 
 msgid "EXPRESSION"
 msgstr "AVALDIS"
@@ -97,7 +100,7 @@ msgstr "iid %s on NULL-asukohaga"
 
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "lubamatu märk '%c' iid'is '%s'"
+msgstr "lubamatu märk '%c' iid-is '%s'"
 
 #, c-format
 msgid "Property '%s' has no value"
@@ -187,7 +190,7 @@ msgid "Syntax error in object description"
 msgstr "Süntaksi viga objekti kirjelduses"
 
 msgid "Cannot activate object from factory"
-msgstr "Objekti pole factory'st võimalik aktiveerida"
+msgstr "Objekti pole factoryst võimalik aktiveerida"
 
 msgid "No permission to access stream"
 msgstr "Voole ligipääsuks ei ole õiguseid"
@@ -256,10 +259,10 @@ msgid "config database backend failed "
 msgstr "tõrge seadistuste andmebaasi taustaprogrammis "
 
 msgid "Moniker interface cannot be found"
-msgstr "Moniker'i liidest ei leitud"
+msgstr "Monikeri liidest ei leitud"
 
 msgid "Moniker activation timed out"
-msgstr "Moniker'i aktiveerimine ületas ajapiirangu"
+msgstr "Monikeri aktiveerimine ületas ajapiirangu"
 
 msgid "Syntax error within moniker"
 msgstr "Süntaksi viga monikeris"
@@ -298,10 +301,10 @@ msgid "Standard Moniker factory"
 msgstr "Standard Moniker factory"
 
 msgid "generic Oaf activation moniker"
-msgstr "üldine Oaf'i aktiveerimismoniker"
+msgstr "üldine Oaf-i aktiveerimismoniker"
 
 msgid "generic Oaf query moniker"
-msgstr "üldine Oaf'i päringumoniker"
+msgstr "üldine Oaf-i päringumoniker"
 
 msgid "generic factory 'new' moniker"
 msgstr ""
@@ -310,7 +313,7 @@ msgid "generic item moniker"
 msgstr ""
 
 msgid "stream MonikerExtender"
-msgstr ""
+msgstr "voo MonikerExtender"
 
 msgid "Bonobo Echo server factory"
 msgstr "Bonobo Kajaserveri factory"
