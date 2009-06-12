@@ -36,7 +36,6 @@ bonobo_activationinclude_HEADERS=		\
 	bonobo-activation-shlib.h		\
 	bonobo-activation-register.h		\
 	bonobo-activation-server-info.h		\
-	bonobo-activation-async.h		\
 	bonobo-activation-version.h		\
 	$(NULL)
 
