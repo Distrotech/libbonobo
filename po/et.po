@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-24 03:48+0000\n"
-"PO-Revision-Date: 2009-06-08 22:02+0300\n"
+"PO-Revision-Date: 2009-08-16 20:46+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Couldn't find which child the server was listed in"
-msgstr ""
+msgstr "Pole võimalik leida, millises alamprotsessis server kuulas"
 
 msgid "Not a valid Activation ID"
 msgstr "Vigane aktiveerimise ID"
@@ -84,11 +84,11 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"Bonobo Aktiveerimise seadistusfaili ei õnnestunud edukalt lugeda. Palun "
-"veendu, et see oleks korrektne sisend: %s"
+"Bonobo Aktiveerimise seadistusfaili lugemine nurjus. Palun veendu, et see "
+"oleks korrektne sisend: %s"
 
 msgid "a NULL iid is not valid"
-msgstr "NULL iid pole lubatud"
+msgstr "NULL-iid pole lubatud"
 
 #, c-format
 msgid "iid %s has a NULL type"
@@ -115,14 +115,14 @@ msgid "Trying dir %s"
 msgstr "Kataloogi %s proovimine"
 
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Tekkis tundmatu tõrge, lapsprotsess ei väljastanud veateadet"
+msgstr "Tekkis tundmatu tõrge, alamprotsess ei väljastanud veateadet"
 
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Tõrge lapsprotsessilt andmete lugemisel: %s\n"
+msgstr "Tõrge alamprotsessilt andmete lugemisel: %s\n"
 
 msgid "EOF from child process\n"
-msgstr "Lapsprotsessilt tuli faililõputunnus\n"
+msgstr "Alamprotsessilt tuli faililõputunnus\n"
 
 msgid "Couldn't spawn a new process"
 msgstr "Uut protsessi pole võimalik luua"
@@ -178,7 +178,7 @@ msgid "An unsupported action was attempted"
 msgstr "Prooviti toetamata toimingut"
 
 msgid "IO Error"
-msgstr "SV viga"
+msgstr "S/V viga"
 
 msgid "Invalid argument value"
 msgstr "Vigane argumendi väärtus"
@@ -193,16 +193,16 @@ msgid "Cannot activate object from factory"
 msgstr "Objekti pole factoryst võimalik aktiveerida"
 
 msgid "No permission to access stream"
-msgstr "Voole ligipääsuks ei ole õiguseid"
+msgstr "Voole ligipääsuks pole õiguseid"
 
 msgid "An unsupported stream action was attempted"
 msgstr "Prooviti toetamata vootoimingut"
 
 msgid "IO Error on stream"
-msgstr "SV viga voos"
+msgstr "S/V viga voos"
 
 msgid "IO Error on storage"
-msgstr "SV viga salvestis"
+msgstr "S/V viga salvestis"
 
 msgid "Name already exists in storage"
 msgstr "Nimi on salvestis juba olemas"
@@ -226,10 +226,10 @@ msgid "Storage is not empty"
 msgstr "Salvesti ei ole tühi"
 
 msgid "malformed user interface XML description"
-msgstr "kasutajaliidese vigaselt vormindatud XML kirjeldus"
+msgstr "kasutajaliidese vigaselt vormindatud XML-kirjeldus"
 
 msgid "invalid path to XML user interface element"
-msgstr "vigane rada XML kasutajaliidese elemendile"
+msgstr "vigane rada XML-kasutajaliidese elemendile"
 
 msgid "the requested UI attribute didn't exist"
 msgstr "küsitud kasutajaliideseatribuuti pole olemas"
@@ -292,7 +292,7 @@ msgid "Failed to activate '%s'"
 msgstr "Tõrge '%s' aktiveerimisel"
 
 msgid "HTTP Moniker"
-msgstr "HTTP Moniker"
+msgstr "HTTP-Moniker"
 
 msgid "ORB IOR handling moniker"
 msgstr "ORB IOR käsitlemise moniker"
@@ -307,10 +307,10 @@ msgid "generic Oaf query moniker"
 msgstr "üldine Oaf-i päringumoniker"
 
 msgid "generic factory 'new' moniker"
-msgstr ""
+msgstr "üldise factory 'uus' moniker"
 
 msgid "generic item moniker"
-msgstr ""
+msgstr "üldise kirje moniker"
 
 msgid "stream MonikerExtender"
 msgstr "voo MonikerExtender"
