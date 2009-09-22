@@ -15,6 +15,7 @@
 
 ulimit -c 0
 
+eval $(dbus-launch --sh-syntax)
 
 if test "z$ORBIT_TMPDIR" = "z"; then
 	ORBIT_TMPDIR="/tmp/orbit-$USER/tst"
@@ -32,7 +33,9 @@ LD_LIBRARY_PATH="./.libs:$LD_LIBRARY_PATH";
 export BONOBO_ACTIVATION_SERVER BONOBO_ACTIVATION_DEBUG_OUTPUT BONOBO_ACTIVATION_PATH PATH LD_LIBRARY_PATH
 
 if ./bonobo-activation-test; then
+    kill -15 $DBUS_SESSION_BUS_PID
     exit 0;
 else
+    kill -15 $DBUS_SESSION_BUS_PID
     exit 1;
 fi
