@@ -1,3 +1,42 @@
+libbonobo 2.24.2
+
+Ani Peter (2):
+      Updated Malayalam Translation
+      Updated Malayalam Translation
+
+Denis Arnaud (1):
+      Updated breton translation, added br in LINGUAS file
+
+Djihed Afifi (1):
+      Updated Arabic translation
+
+Ignacio Casal Quinteiro (1):
+      Updated Galician translation
+
+Ivar Smolin (2):
+      Updating Estonian translation
+      Updating Estonian translation
+
+Kjartan Maraas (1):
+      Remove duplicate to fix build with automake-1.11
+
+Miquel Esplà (1):
+      Added Valencian-Catalan translation
+
+Rajesh Ranjan (1):
+      hindi updated by Rajesh Ranjan
+
+Rodrigo L. M. Flores (1):
+      Updated Brazilian Portuguese mailing list address.
+
+Shankar Prasad (2):
+      added kn.po and updated ChangeLog and LINGUAS
+      updated kn.po
+
+dumol (1):
+      Updated Romanian translation
+
+
 libbonobo 2.24.1
 	* Win32 portability fixes (Tor Lillqvist)
 	* cleanups for newer glib releases (Cosimo Cecchi)
