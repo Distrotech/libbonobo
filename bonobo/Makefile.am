@@ -47,7 +47,7 @@ idls =							\
 idl_flags = -I$(top_srcdir)/idl -D__Bonobo_COMPILATION
 
 $(CORBA_SOURCE): $(idls) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo.idl
+	$(AM_V_GEN) $(ORBIT_IDL) $(idl_flags) $(top_srcdir)/idl/Bonobo.idl
 
 lib_LTLIBRARIES = libbonobo-2.la
 
@@ -148,10 +148,10 @@ marshal_sources = \
 	bonobo-marshal.c \
 	bonobo-marshal.h
 
-bonobo-marshal.h: bonobo-marshal.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) $< --header --prefix=bonobo_marshal > $@
-bonobo-marshal.c: bonobo-marshal.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) $< --body --prefix=bonobo_marshal > $@
+bonobo-marshal.h: bonobo-marshal.list Makefile
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --header --prefix=bonobo_marshal > $@
+bonobo-marshal.c: bonobo-marshal.list Makefile
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --body --prefix=bonobo_marshal > $@
 
 EXTRA_DIST = libbonobo-2.0.pc.in libbonobo-2.0-uninstalled.pc.in bonobo-marshal.list
 

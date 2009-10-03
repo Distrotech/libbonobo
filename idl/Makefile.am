@@ -63,7 +63,7 @@ Bonobo_module_la_LDFLAGS = \
 	-module -avoid-version -no-undefined
 
 $(IMODULE_SOURCE): $(idl_DATA) $(ORBIT_IDL)
-	$(ORBIT_IDL) $(idl_flags) --imodule $(top_srcdir)/idl/Bonobo.idl
+	$(AM_V_GEN) $(ORBIT_IDL) $(idl_flags) --imodule $(top_srcdir)/idl/Bonobo.idl
 
 BUILT_SOURCES = $(IMODULE_SOURCE)
 CLEANFILES = $(BUILT_SOURCES)

@@ -82,11 +82,8 @@ BUILT_SOURCES= $(IDL_HEADER_FILES) $(IDL_COMMONS) $(IDL_SKELS) $(IDL_STUBS) \
 $(libbonobo_activation_la_OBJECTS): $(BUILT_SOURCES)
 
 %.h %-stubs.c %-skels.c %-common.c %-imodule.c %-skelimpl.c: $(IDL_DIR)%.idl $(ORBIT_IDL)
-	echo "top_srcdir: $(top_srcdir)"
-	echo "IDL_DIR: $(IDL_DIR)"
-	echo "IDL file: $<"
-	-(rm -f $(*).h $(*)-stubs.c $(*)-skels.c $(*)-common.c $(*)-imodule.c $(*)-skelimpl.c || true) > /dev/null
-	$(ORBIT_IDL) $(IDL_FLAGS) "-D__$(*)_COMPILATION" --deps $(*D)/.deps/$(*F).idl.P $<
+	@-(rm -f $(*).h $(*)-stubs.c $(*)-skels.c $(*)-common.c $(*)-imodule.c $(*)-skelimpl.c || true) > /dev/null
+	$(AM_V_GEN) $(ORBIT_IDL) $(IDL_FLAGS) "-D__$(*)_COMPILATION" --deps $(*D)/.deps/$(*F).idl.P $<
 
 if MAINTAINER_MODE
 DEPS_MAGIC := $(shell mkdir .deps > /dev/null 2>&1 || :)

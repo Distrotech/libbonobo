@@ -64,12 +64,12 @@ empty.h empty-common.c empty-stubs.c empty-skels.c: empty_built
 plugin.h plugin-common.c plugin-stubs.c plugin-skels.c: plugin_built
 
 empty_built: empty.idl $(ORBIT_IDL)
-	$(ORBIT_IDL) $(srcdir)/empty.idl
-	touch empty_built
+	$(AM_V_GEN) $(ORBIT_IDL) $(srcdir)/empty.idl
+	@touch empty_built
 
 plugin_built: plugin.idl $(ORBIT_IDL)
-	$(ORBIT_IDL) $(srcdir)/plugin.idl
-	touch plugin_built
+	$(AM_V_GEN) $(ORBIT_IDL) $(srcdir)/plugin.idl
+	@touch plugin_built
 
 CLEANFILES=empty_built plugin_built $(BUILT_SOURCES)
 

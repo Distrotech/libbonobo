@@ -5,7 +5,7 @@
 server_dot_in=Bonobo_Sample_Echo.server.in
 
 $(server_dot_in): $(server_dot_in).in
-	sed -e "s|\@prefix\@|$(prefix)|" $< > $@
+	$(AM_V_GEN) $(SED) -e "s|\@prefix\@|$(prefix)|" $< > $@
 
 samplesdir = $(libdir)/bonobo-2.0/samples
 samples_PROGRAMS = bonobo-echo-2
@@ -40,7 +40,7 @@ ECHO_CORBA_GENERATED =				\
 libEcho_a_SOURCES = $(ECHO_CORBA_GENERATED)
 
 $(ECHO_CORBA_GENERATED): Bonobo_Sample_Echo.idl $(ORBIT_IDL)
-	$(ORBIT_IDL) -I$(top_srcdir)/idl $(srcdir)/Bonobo_Sample_Echo.idl
+	$(AM_V_GEN) $(ORBIT_IDL) -I$(top_srcdir)/idl $(srcdir)/Bonobo_Sample_Echo.idl
 
 serverdir = $(libdir)/bonobo/servers
 server_in_files = $(server_dot_in)

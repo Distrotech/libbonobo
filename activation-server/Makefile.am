@@ -60,7 +60,7 @@ TESTS=test-performance
 
 serverinfodir=$(libdir)/bonobo/servers
 $(server_in_file): $(server_in_file).in
-	sed -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
+	$(AM_V_GEN) $(SED) -e "s|\@LIBEXECDIR\@|$(libexecdir)|" $< > $@
 server_in_file = Bonobo_CosNaming_NamingContext.server.in
 serverinfo_DATA = $(server_in_file:.server.in=.server)
 
@@ -73,19 +73,19 @@ EXTRA_DIST=activation-context-query-lexer.l activation-context-query-parser.y \
 YFLAGS = -d -v
 
 activation-context-query-lexer.c: $(srcdir)/activation-context-query-lexer.l activation-context-query-parser.h
-	@rm -f $@
+	$(AM_V_GEN) rm -f $@ && \
 	$(LEX) -t $(srcdir)/activation-context-query-lexer.l >$@
 
 stamp-parser: $(srcdir)/activation-context-query-parser.y
-	$(YACC) $(YFLAGS) $(srcdir)/activation-context-query-parser.y
-	rm -f y.output
+	$(AM_V_GEN) $(YACC) $(YFLAGS) $(srcdir)/activation-context-query-parser.y && \
+	rm -f y.output && \
 	touch $@
 
 activation-context-query-parser.c: stamp-parser
-	test -f y.tab.c && mv -f y.tab.c activation-context-query-parser.c || touch $@
+	$(AM_V_GEN) test -f y.tab.c && mv -f y.tab.c activation-context-query-parser.c || touch $@
 
 activation-context-query-parser.h: stamp-parser
-	test -f y.tab.h && mv -f y.tab.h activation-context-query-parser.h || touch $@
+	$(AM_V_GEN) test -f y.tab.h && mv -f y.tab.h activation-context-query-parser.h || touch $@
 
 BUILT_SOURCES= activation-context-query-lexer.c activation-context-query-parser.c \
 	activation-context-query-parser.h Bonobo_CosNaming_NamingContext.server

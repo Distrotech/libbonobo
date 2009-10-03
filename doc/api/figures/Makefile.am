@@ -12,7 +12,7 @@ all-local: $(diagrams_png)
 # NOTE: make sure you have dia >= 0.91 and DISPLAY set
 # NOTE: if you edit the dia files, save them UNcompressed!
 %.png: %.dia
-	@dia $< -e $@ 2> /dev/null || true
+	$(AM_V_GEN) dia $< -e $@ 2> /dev/null || true
 
 
 EXTRA_DIST = $(diagrams) $(diagrams_png)
