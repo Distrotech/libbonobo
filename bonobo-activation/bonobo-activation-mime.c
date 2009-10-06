@@ -292,7 +292,6 @@ gnome_vfs_mime_get_short_list_components (const char *mime_type)
 	query = g_strconcat ("bonobo:supported_mime_types.has_one (['", mime_type, 
 			     "', '", supertype,
 			     "', '*'])", NULL);
-	g_free (supertype);
 	
         /* Prefer something that matches the exact type to something
            that matches the supertype */
@@ -313,6 +312,7 @@ gnome_vfs_mime_get_short_list_components (const char *mime_type)
 		components_list = NULL;
 	}
 
+	g_free (supertype);
 	g_free (query);
 	g_free (sort[0]);
 	g_free (sort[1]);

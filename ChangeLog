@@ -1,3 +1,9 @@
+2009-10-06  Michael Meeks  <michael.meeks@novell.com>
+
+	* bonobo-activation/bonobo-activation-mime.c
+	(gnome_vfs_mime_get_short_list_components): fix memory
+	corruption identified by Vuntz - thanks.
+
 ================================ 2.24.1 ============================
 
 2009-01-27  Tor Lillqvist  <tml@novell.com>
