@@ -1,0 +1,382 @@
+# Shavian translation for libbonobo.
+# Copyright (C) 2009 The Gnome Foundation.
+# Thomas Thurman <tthurman@gnome.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: metacity\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2009-11-06 19:17+0200\n"
+"Last-Translator: Thomas Thurman <tthurman@gnome.org>\n"
+"Language-Team: Shavian <ubuntu-l10n-en-shaw@lists.launchpad.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
+
+#: ../activation-server/activation-context-corba.c:822
+msgid "Not a valid Activation ID"
+msgstr "𐑯𐑪𐑑 𐑩 𐑝𐑨𐑤𐑦𐑛 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 ID"
+
+#: ../activation-server/activation-server-main.c:176
+msgid "Directory to read .server files from"
+msgstr "𐑛𐑲𐑮𐑧𐑒𐑑𐑼𐑦 𐑑 𐑮𐑰𐑛 .𐑕𐑻𐑝𐑼 𐑓𐑲𐑤𐑟 𐑓𐑮𐑪𐑥"
+
+#: ../activation-server/activation-server-main.c:176
+msgid "DIRECTORY"
+msgstr "𐑛𐑲𐑮𐑧𐑒𐑑𐑼𐑦"
+
+#: ../activation-server/activation-server-main.c:186
+msgid ""
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
+msgstr ""
+"𐑮𐑧𐑡𐑦𐑕𐑑𐑼 𐑨𐑟 𐑞 𐑿𐑟𐑼'𐑕 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 𐑕𐑻𐑝𐑼 𐑢𐑦𐑞𐑬𐑑 𐑤𐑪𐑒𐑦𐑙.  𐑢𐑹𐑯𐑦𐑙: 𐑞𐑦𐑕 𐑪𐑐𐑖𐑩𐑯 𐑒𐑨𐑯 𐑣𐑨𐑝 "
+"𐑛𐑱𐑯𐑡𐑼𐑩𐑕 𐑕𐑲𐑛 𐑦𐑓𐑧𐑒𐑑𐑕 𐑪𐑯 𐑞 𐑕𐑑𐑩𐑚𐑦𐑤𐑦𐑑𐑰 𐑝 𐑞 𐑿𐑟𐑼'𐑕 𐑮𐑳𐑯𐑦𐑙 𐑕𐑧𐑖𐑩𐑯, 𐑯 𐑖𐑫𐑛 𐑴𐑯𐑤𐑦 𐑚𐑰 𐑿𐑟𐑛 "
+"𐑓𐑹 𐑛𐑰𐑚𐑳𐑜𐑦𐑙 𐑐𐑻𐑐𐑩𐑕𐑩𐑟"
+
+#: ../activation-server/activation-server-main.c:194
+msgid "Query expression to evaluate"
+msgstr "𐑒𐑢𐑽𐑦 𐑦𐑒𐑕𐑐𐑮𐑧𐑖𐑩𐑯 𐑑 𐑦𐑝𐑨𐑤𐑘𐑵𐑱𐑑"
+
+#: ../activation-server/activation-server-main.c:194
+msgid "EXPRESSION"
+msgstr "𐑦𐑒𐑕𐑐𐑮𐑧𐑖𐑩𐑯"
+
+#: ../activation-server/activation-server-main.c:547
+#: ../utils/bonobo-activation-sysconf.c:305
+#, c-format
+msgid "Run '%s --help' to see a full list of available command line options.\n"
+msgstr "𐑮𐑳𐑯 '%s --help' 𐑑 𐑕𐑰 𐑩 𐑓𐑫𐑤 𐑤𐑦𐑕𐑑 𐑝 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤 𐑒𐑩𐑥𐑭𐑯𐑛 𐑤𐑲𐑯 𐑪𐑐𐑖𐑩𐑯𐑟.\n"
+
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
+msgid "Name service"
+msgstr "𐑯𐑱𐑥 𐑕𐑻𐑝𐑦𐑕"
+
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+msgid "Notification service"
+msgstr "𐑯𐑴𐑑𐑦𐑓𐑦𐑒𐑱𐑖𐑩𐑯 𐑕𐑻𐑝𐑦𐑕"
+
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+msgid "Notification service for activation"
+msgstr "𐑯𐑴𐑑𐑦𐑓𐑦𐑒𐑱𐑖𐑩𐑯 𐑕𐑻𐑝𐑦𐑕 𐑓𐑹 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯"
+
+#: ../activation-server/object-directory-config-file.c:65
+#, c-format
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"𐑞 ·𐑚𐑭𐑯𐑭𐑚𐑴 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤 𐑢𐑪𐑟 𐑯𐑪𐑑 𐑮𐑧𐑛 𐑕𐑩𐑒𐑕𐑧𐑕𐑓𐑩𐑤𐑦. 𐑐𐑤𐑰𐑟, 𐑗𐑧𐑒 𐑦𐑑 𐑦𐑟 "
+"𐑝𐑨𐑤𐑦𐑛 𐑦𐑯: %s"
+
+#: ../activation-server/object-directory-load.c:349
+#, c-format
+msgid "Property '%s' has no value"
+msgstr "𐑐𐑮𐑪𐑐𐑼𐑑𐑦 '%s' 𐑣𐑨𐑟 𐑯𐑴 𐑝𐑨𐑤𐑿"
+
+#: ../activation-server/object-directory-load.c:583
+#, c-format
+msgid "Could not parse badly formed XML document %s"
+msgstr "𐑒𐑫𐑛 𐑯𐑪𐑑 𐑐𐑸𐑕 𐑚𐑨𐑛𐑤𐑰 𐑓𐑹𐑥𐑛 XML 𐑛𐑪𐑒𐑿𐑥𐑩𐑯𐑑 %s"
+
+#: ../bonobo-activation/bonobo-activation-fork-server.c:107
+msgid "Child process did not give an error message, unknown failure occurred"
+msgstr "𐑗𐑲𐑤𐑛 𐑐𐑮𐑴𐑕𐑧𐑕 𐑛𐑦𐑛 𐑯𐑪𐑑 𐑜𐑦𐑝 𐑩𐑯 𐑻𐑼 𐑥𐑧𐑕𐑦𐑡, 𐑳𐑯𐑴𐑯 𐑓𐑱𐑤𐑘𐑼 𐑪𐑒𐑻𐑛"
+
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
+#, c-format
+msgid "Failed to read from child process: %s\n"
+msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑮𐑰𐑛 𐑓𐑮𐑪𐑥 𐑗𐑲𐑤𐑛 𐑐𐑮𐑴𐑕𐑧𐑕: %s\n"
+
+#: ../bonobo-activation/bonobo-activation-init.c:409
+msgid "Bonobo Activation options:"
+msgstr "·𐑚𐑭𐑯𐑭𐑚𐑴 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 𐑪𐑐𐑖𐑩𐑯𐑟:"
+
+#: ../bonobo-activation/bonobo-activation-init.c:410
+msgid "Show Bonobo Activation options"
+msgstr "𐑖𐑴 ·𐑚𐑭𐑯𐑭𐑚𐑴 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 𐑪𐑐𐑖𐑩𐑯𐑟"
+
+#: ../bonobo-activation/bonobo-activation-init.c:518
+msgid "Bonobo activation options"
+msgstr "·𐑚𐑭𐑯𐑭𐑚𐑴 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 𐑪𐑐𐑖𐑩𐑯𐑟"
+
+#: ../bonobo-activation/bonobo-activation-shlib.c:107
+#, c-format
+msgid "g_module_open of `%s' failed with `%s'"
+msgstr "g_module_open 𐑝 `%s' 𐑓𐑱𐑤𐑛 𐑢𐑦𐑞 `%s'"
+
+#: ../bonobo-activation/bonobo-activation-shlib.c:126
+#: ../bonobo-activation/bonobo-activation-shlib.c:163
+#, c-format
+msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
+msgstr "𐑒𐑭𐑯𐑑 𐑓𐑲𐑯𐑛 𐑕𐑦𐑥𐑚𐑩𐑤 Bonobo_Plugin_info 𐑦𐑯 `%s'"
+
+#: ../bonobo-activation/bonobo-activation-shlib.c:212
+#, c-format
+msgid "Factory `%s' returned NIL for `%s'"
+msgstr "𐑓𐑨𐑒𐑑𐑼𐑦 `%s' 𐑮𐑦𐑑𐑻𐑯𐑛 𐑯𐑦𐑤 𐑓𐑹 `%s'"
+
+#: ../bonobo/bonobo-application.c:352
+msgid "Name"
+msgstr "𐑯𐑱𐑥"
+
+#: ../bonobo/bonobo-application.c:352
+msgid "Application unique name"
+msgstr "𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯 𐑿𐑯𐑰𐑒 𐑯𐑱𐑥"
+
+#: ../bonobo/bonobo-exception.c:154
+msgid "An unsupported action was attempted"
+msgstr "𐑩𐑯 𐑳𐑯𐑕𐑩𐑐𐑹𐑑𐑩𐑛 𐑨𐑒𐑖𐑩𐑯 𐑢𐑪𐑟 𐑩𐑑𐑧𐑥𐑐𐑑𐑩𐑛"
+
+#: ../bonobo/bonobo-exception.c:157
+msgid "IO Error"
+msgstr "IO 𐑻𐑼"
+
+#: ../bonobo/bonobo-exception.c:160
+msgid "Invalid argument value"
+msgstr "𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑸𐑜𐑿𐑥𐑩𐑯𐑑 𐑝𐑨𐑤𐑿"
+
+#: ../bonobo/bonobo-exception.c:164
+msgid "Object not found"
+msgstr "𐑩𐑚𐑡𐑧𐑒𐑑 𐑯𐑪𐑑 𐑓𐑬𐑯𐑛"
+
+#: ../bonobo/bonobo-exception.c:167
+msgid "Syntax error in object description"
+msgstr "𐑕𐑦𐑯𐑑𐑨𐑒𐑕 𐑻𐑼 𐑦𐑯 𐑪𐑚𐑡𐑧𐑒𐑑 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯"
+
+#: ../bonobo/bonobo-exception.c:172
+msgid "Cannot activate object from factory"
+msgstr "𐑒𐑨𐑯𐑪𐑑 𐑨𐑒𐑑𐑦𐑝𐑱𐑑 𐑩𐑚𐑡𐑧𐑒𐑑 𐑓𐑮𐑪𐑥 𐑓𐑨𐑒𐑑𐑼𐑦"
+
+#: ../bonobo/bonobo-exception.c:177
+msgid "No permission to access stream"
+msgstr "𐑯𐑴 𐑐𐑻𐑥𐑦𐑖𐑪𐑯 𐑑 𐑨𐑒𐑕𐑧𐑕 𐑕𐑑𐑮𐑰𐑥"
+
+#: ../bonobo/bonobo-exception.c:180
+msgid "An unsupported stream action was attempted"
+msgstr "𐑩𐑯 𐑳𐑯𐑕𐑩𐑐𐑹𐑑𐑩𐑛 𐑕𐑑𐑮𐑰𐑥 𐑨𐑒𐑖𐑩𐑯 𐑢𐑪𐑟 𐑩𐑑𐑧𐑥𐑐𐑑𐑩𐑛"
+
+#: ../bonobo/bonobo-exception.c:183
+msgid "IO Error on stream"
+msgstr "IO 𐑻𐑼 𐑪𐑯 𐑕𐑑𐑮𐑰𐑥"
+
+#: ../bonobo/bonobo-exception.c:187
+msgid "IO Error on storage"
+msgstr "IO 𐑻𐑼 𐑪𐑯 𐑕𐑑𐑹𐑦𐑡"
+
+#: ../bonobo/bonobo-exception.c:190
+msgid "Name already exists in storage"
+msgstr "𐑯𐑱𐑥 𐑷𐑤𐑮𐑧𐑛𐑦 𐑧𐑒𐑟𐑦𐑕𐑑𐑕 𐑦𐑯 𐑕𐑑𐑹𐑦𐑡"
+
+#: ../bonobo/bonobo-exception.c:193
+msgid "Object not found in storage"
+msgstr "𐑩𐑚𐑡𐑧𐑒𐑑 𐑯𐑪𐑑 𐑓𐑬𐑯𐑛 𐑦𐑯 𐑕𐑑𐑹𐑦𐑡"
+
+#: ../bonobo/bonobo-exception.c:196
+msgid "No permission to do operation on storage"
+msgstr "𐑯𐑴 𐑐𐑻𐑥𐑦𐑖𐑪𐑯 𐑑 𐑛𐑵 𐑪𐑐𐑼𐑱𐑖𐑩𐑯 𐑪𐑯 𐑕𐑑𐑹𐑦𐑡"
+
+#: ../bonobo/bonobo-exception.c:198
+msgid "An unsupported storage action was attempted"
+msgstr "𐑩𐑯 𐑳𐑯𐑕𐑩𐑐𐑹𐑑𐑩𐑛 𐑕𐑑𐑹𐑦𐑡 𐑨𐑒𐑖𐑩𐑯 𐑢𐑪𐑟 𐑩𐑑𐑧𐑥𐑐𐑑𐑩𐑛"
+
+#: ../bonobo/bonobo-exception.c:200
+msgid "Object is not a stream"
+msgstr "𐑩𐑚𐑡𐑧𐑒𐑑 𐑦𐑟 𐑯𐑪𐑑 𐑩 𐑕𐑑𐑮𐑰𐑥"
+
+#: ../bonobo/bonobo-exception.c:203
+msgid "Object is not a storage"
+msgstr "𐑩𐑚𐑡𐑧𐑒𐑑 𐑦𐑟 𐑯𐑪𐑑 𐑩 𐑕𐑑𐑹𐑦𐑡"
+
+#: ../bonobo/bonobo-exception.c:206
+msgid "Storage is not empty"
+msgstr "𐑕𐑑𐑹𐑦𐑡 𐑦𐑟 𐑯𐑪𐑑 𐑧𐑥𐑐𐑑𐑦"
+
+#: ../bonobo/bonobo-exception.c:210
+msgid "malformed user interface XML description"
+msgstr "𐑥𐑨𐑤𐑓𐑹𐑥𐑛 𐑿𐑟𐑼 𐑦𐑯𐑑𐑼𐑓𐑱𐑕 XML 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯"
+
+#: ../bonobo/bonobo-exception.c:213
+msgid "invalid path to XML user interface element"
+msgstr "𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑐𐑭𐑔 𐑑 XML 𐑿𐑟𐑼 𐑦𐑯𐑑𐑼𐑓𐑱𐑕 𐑧𐑤𐑩𐑥𐑩𐑯𐑑"
+
+#: ../bonobo/bonobo-exception.c:219
+msgid "Unknown command or verb"
+msgstr "𐑳𐑯𐑴𐑯 𐑒𐑩𐑥𐑭𐑯𐑛 𐑹 𐑝𐑻𐑚"
+
+#: ../bonobo/bonobo-exception.c:222
+msgid "Command is insensitive"
+msgstr "𐑒𐑩𐑥𐑭𐑯𐑛 𐑦𐑟 𐑦𐑯𐑕𐑧𐑯𐑕𐑩𐑑𐑦𐑝"
+
+#: ../bonobo/bonobo-exception.c:226
+msgid "incorrect data type"
+msgstr "𐑦𐑯𐑒𐑩𐑮𐑧𐑒𐑑 𐑛𐑱𐑑𐑩 𐑑𐑲𐑐"
+
+#: ../bonobo/bonobo-exception.c:229
+msgid "stream not found"
+msgstr "𐑕𐑑𐑮𐑰𐑥 𐑯𐑪𐑑 𐑓𐑬𐑯𐑛"
+
+#: ../bonobo/bonobo-exception.c:233
+msgid "property not found"
+msgstr "𐑐𐑮𐑪𐑐𐑼𐑑𐑦 𐑯𐑪𐑑 𐑓𐑬𐑯𐑛"
+
+#: ../bonobo/bonobo-exception.c:236
+msgid "property has invalid type"
+msgstr "𐑐𐑮𐑪𐑐𐑼𐑑𐑦 𐑣𐑨𐑟 𐑦𐑯𐑝𐑨𐑤𐑦𐑛 𐑑𐑲𐑐"
+
+#: ../bonobo/bonobo-exception.c:239
+msgid "property is read only"
+msgstr "𐑐𐑮𐑪𐑐𐑼𐑑𐑦 𐑦𐑟 𐑮𐑧𐑛 𐑴𐑯𐑤𐑦"
+
+#: ../bonobo/bonobo-exception.c:242
+msgid "config database backend failed "
+msgstr "𐑒𐑪𐑯𐑓𐑦𐑜 𐑛𐑱𐑑𐑩𐑚𐑱𐑕 𐑚𐑨𐑒𐑧𐑯𐑛 𐑓𐑱𐑤𐑛 "
+
+#: ../bonobo/bonobo-exception.c:246
+msgid "Moniker interface cannot be found"
+msgstr "𐑥𐑪𐑯𐑦𐑒𐑼 𐑦𐑯𐑑𐑼𐑓𐑱𐑕 𐑒𐑨𐑯𐑪𐑑 𐑚𐑰 𐑓𐑬𐑯𐑛"
+
+#: ../bonobo/bonobo-exception.c:249
+msgid "Moniker activation timed out"
+msgstr "𐑥𐑪𐑯𐑦𐑒𐑼 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 𐑑𐑲𐑥𐑛 𐑬𐑑"
+
+#: ../bonobo/bonobo-exception.c:252
+msgid "Syntax error within moniker"
+msgstr "𐑕𐑦𐑯𐑑𐑨𐑒𐑕 𐑻𐑼 𐑢𐑦𐑞𐑦𐑯 𐑥𐑪𐑯𐑦𐑒𐑼"
+
+#: ../bonobo/bonobo-exception.c:255
+msgid "Moniker has an unknown moniker prefix"
+msgstr "𐑥𐑪𐑯𐑦𐑒𐑼 𐑣𐑨𐑟 𐑩𐑯 𐑳𐑯𐑴𐑯 𐑥𐑪𐑯𐑦𐑒𐑼 𐑐𐑮𐑰𐑓𐑦𐑒𐑕"
+
+#: ../bonobo/bonobo-exception.c:279
+msgid "Error checking error; no exception"
+msgstr "𐑻𐑼 𐑗𐑧𐑒𐑦𐑙 𐑻𐑼; 𐑯𐑴 𐑦𐑒𐑕𐑧𐑐𐑖𐑩𐑯"
+
+#: ../bonobo/bonobo-exception.c:288
+msgid "General activation error with no description"
+msgstr "𐑡𐑧𐑯𐑼𐑩𐑤 𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 𐑻𐑼 𐑢𐑦𐑞 𐑯𐑴 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯"
+
+#: ../bonobo/bonobo-moniker.c:342
+#, c-format
+msgid "Failed to resolve, or extend '%s"
+msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑮𐑦𐑟𐑪𐑤𐑝, 𐑹 𐑦𐑒𐑕𐑑𐑧𐑯𐑛 '%s"
+
+#: ../bonobo/bonobo-moniker-util.c:247
+msgid "Failed to activate object"
+msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑨𐑒𐑑𐑦𐑝𐑱𐑑 𐑩𐑚𐑡𐑧𐑒𐑑"
+
+#: ../monikers/bonobo-moniker-oaf.c:53
+#, c-format
+msgid "Exception activating '%s'"
+msgstr "𐑦𐑒𐑕𐑧𐑐𐑖𐑩𐑯 𐑨𐑒𐑑𐑩𐑝𐑱𐑑𐑦𐑙 '%s'"
+
+#: ../monikers/bonobo-moniker-oaf.c:62
+#, c-format
+msgid "Failed to activate '%s'"
+msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑨𐑒𐑑𐑦𐑝𐑱𐑑 '%s'"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
+msgid "HTTP Moniker"
+msgstr "HTTP 𐑥𐑪𐑯𐑦𐑒𐑼"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "Standard Moniker factory"
+msgstr "𐑕𐑑𐑨𐑯𐑛𐑼𐑛 𐑥𐑪𐑯𐑦𐑒𐑼 𐑓𐑨𐑒𐑑𐑼𐑦"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:6
+msgid "generic factory 'new' moniker"
+msgstr "𐑡𐑩𐑯𐑧𐑮𐑦𐑒 𐑓𐑨𐑒𐑑𐑼𐑦 '𐑯𐑿' 𐑥𐑪𐑯𐑦𐑒𐑼"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:7
+msgid "generic item moniker"
+msgstr "𐑡𐑩𐑯𐑧𐑮𐑦𐑒 𐑲𐑑𐑩𐑥 𐑥𐑪𐑯𐑦𐑒𐑼"
+
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+msgid "Bonobo Echo server factory"
+msgstr "·𐑚𐑭𐑯𐑭𐑚𐑴 𐑧𐑒𐑴 𐑕𐑻𐑝𐑼 𐑓𐑨𐑒𐑑𐑼𐑦"
+
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+msgid "Bonobo Echo server sample program"
+msgstr "·𐑚𐑭𐑯𐑭𐑚𐑴 𐑧𐑒𐑴 𐑕𐑻𐑝𐑼 𐑕𐑭𐑥𐑐𐑩𐑤 𐑐𐑮𐑴𐑜𐑮𐑨𐑥"
+
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+msgid "Echo component"
+msgstr "𐑧𐑒𐑴 𐑒𐑩𐑥𐑐𐑴𐑯𐑩𐑯𐑑"
+
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+msgid "Echo component factory"
+msgstr "𐑧𐑒𐑴 𐑒𐑩𐑥𐑐𐑴𐑯𐑩𐑯𐑑 𐑓𐑨𐑒𐑑𐑼𐑦"
+
+#: ../samples/echo/echo-client.c:24
+msgid "I could not initialize Bonobo"
+msgstr "𐑲 𐑒𐑫𐑛 𐑯𐑪𐑑 𐑦𐑯𐑦𐑖𐑩𐑤𐑲𐑟 ·𐑚𐑭𐑯𐑭𐑚𐑴"
+
+#: ../samples/echo/echo-client.c:35
+msgid "Could not create an instance of the sample echo component"
+msgstr "𐑒𐑫𐑛 𐑯𐑪𐑑 𐑒𐑮𐑦𐑱𐑑 𐑩𐑯 𐑦𐑯𐑕𐑑𐑨𐑯𐑕 𐑝 𐑞 𐑕𐑭𐑥𐑐𐑩𐑤 𐑧𐑒𐑴 𐑒𐑩𐑥𐑐𐑴𐑯𐑩𐑯𐑑"
+
+#: ../samples/echo/echo-client.c:47
+#, c-format
+msgid "An exception occurred '%s'"
+msgstr "𐑩𐑯 𐑦𐑒𐑕𐑧𐑐𐑖𐑩𐑯 𐑪𐑒𐑻𐑛 '%s'"
+
+#: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
+msgid "Could not save configuration file.\n"
+msgstr "𐑒𐑫𐑛 𐑯𐑪𐑑 𐑕𐑱𐑝 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤.\n"
+
+#: ../utils/bonobo-activation-sysconf.c:84
+#, c-format
+msgid "Please, make sure you have permissions to write to '%s'.\n"
+msgstr "𐑐𐑤𐑰𐑟, 𐑥𐑱𐑒 𐑖𐑫𐑼 𐑿 𐑣𐑨𐑝 𐑐𐑻𐑥𐑦𐑖𐑪𐑯𐑟 𐑑 𐑮𐑲𐑑 𐑑 '%s'.\n"
+
+#: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
+msgid "Successfully wrote configuration file.\n"
+msgstr "𐑕𐑩𐑒𐑕𐑧𐑕𐑓𐑩𐑤𐑦 𐑮𐑴𐑑 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤.\n"
+
+#: ../utils/bonobo-activation-sysconf.c:104
+#, c-format
+msgid ""
+"configuration file is:\n"
+"    %s\n"
+msgstr ""
+"𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤 𐑦𐑟:\n"
+"    %s\n"
+
+#: ../utils/bonobo-activation-sysconf.c:146
+#, c-format
+msgid "%s already in configuration file\n"
+msgstr "%s 𐑷𐑤𐑮𐑧𐑛𐑦 𐑦𐑯 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤\n"
+
+#: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
+msgid "there is not a properly structured configuration file\n"
+msgstr "𐑞𐑺 𐑦𐑟 𐑯𐑪𐑑 𐑩 𐑐𐑮𐑪𐑐𐑼𐑤𐑦 𐑕𐑑𐑮𐑳𐑒𐑗𐑼𐑛 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤\n"
+
+#: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
+msgid "Bonobo-activation configuration file contains:\n"
+msgstr "·𐑚𐑭𐑯𐑭𐑚𐑴-𐑨𐑒𐑑𐑩𐑝𐑱𐑖𐑩𐑯 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤 𐑒𐑩𐑯𐑑𐑱𐑯𐑟:\n"
+
+#: ../utils/bonobo-activation-sysconf.c:267
+msgid "Directory to remove from configuration file"
+msgstr "𐑛𐑲𐑮𐑧𐑒𐑑𐑼𐑦 𐑑 𐑮𐑦𐑥𐑵𐑝 𐑓𐑮𐑪𐑥 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤"
+
+#: ../utils/bonobo-activation-sysconf.c:267
+#: ../utils/bonobo-activation-sysconf.c:269
+msgid "PATH"
+msgstr "𐑐𐑭𐑔"
+
+#: ../utils/bonobo-activation-sysconf.c:269
+msgid "Directory to add to configuration file"
+msgstr "𐑛𐑲𐑮𐑧𐑒𐑑𐑼𐑦 𐑑 𐑨𐑛 𐑑 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤"
+
+#: ../utils/bonobo-activation-sysconf.c:271
+msgid "Display directories in configuration file"
+msgstr "𐑛𐑩𐑕𐑐𐑤𐑱 𐑛𐑲𐑮𐑧𐑒𐑑𐑼𐑦𐑟 𐑦𐑯 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤"
+
+#: ../utils/bonobo-activation-sysconf.c:273
+msgid "Display path to configuration file"
+msgstr "𐑛𐑩𐑕𐑐𐑤𐑱 𐑐𐑭𐑔 𐑑 𐑒𐑩𐑯𐑓𐑦𐑜𐑘𐑼𐑱𐑖𐑩𐑯 𐑓𐑲𐑤"
