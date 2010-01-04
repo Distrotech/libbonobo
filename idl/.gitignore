@@ -1,0 +1,5 @@
+/.deps/
+/.libs/
+/Bonobo-common.c
+/Bonobo-imodule.c
+/Bonobo.h

@@ -1,0 +1,5 @@
+/.libs
+/.deps
+
+/Bonobo_Moniker_std.server
+/Bonobo_Moniker_std.server.in

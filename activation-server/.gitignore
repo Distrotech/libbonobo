@@ -1,0 +1,10 @@
+/.deps
+/.libs
+/Bonobo_CosNaming_NamingContext.server
+/Bonobo_CosNaming_NamingContext.server.in
+/activation-client
+/activation-context-query-lexer.c
+/activation-context-query-parser.[ch]
+/bonobo-activation-server
+/stamp-parser
+/test-performance

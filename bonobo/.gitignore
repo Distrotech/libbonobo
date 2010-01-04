@@ -1,0 +1,10 @@
+/.deps/
+/.libs/
+/Bonobo-common.c
+/Bonobo-skels.c
+/Bonobo-stubs.c
+/Bonobo.h
+/bonobo-marshal.c
+/bonobo-marshal.h
+/libbonobo-2.0-uninstalled.pc
+/libbonobo-2.0.pc

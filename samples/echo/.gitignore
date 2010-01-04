@@ -1,0 +1,10 @@
+/.deps/
+/.libs/
+/Bonobo_Sample_Echo-common.c
+/Bonobo_Sample_Echo-skels.c
+/Bonobo_Sample_Echo-stubs.c
+/Bonobo_Sample_Echo.h
+/Bonobo_Sample_Echo.server
+/Bonobo_Sample_Echo.server.in
+/bonobo-echo-2
+/echo-client-2

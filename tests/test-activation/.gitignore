@@ -1,0 +1,14 @@
+/.deps
+/.libs
+
+/bonobo-activation-run-query
+/empty-common.c
+/empty-skels.c
+/empty-stubs.c
+/empty.h
+/empty_built
+/plugin-common.c
+/plugin-skels.c
+/plugin-stubs.c
+/plugin.h
+/plugin_built
