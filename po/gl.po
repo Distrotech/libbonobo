@@ -11,14 +11,15 @@
 # Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005, 2006.
 # Ignacio Casal Quinteiro <icq@svn.gnome.org>, 2008.
 # Mancomún - Centro de Referencia e Servizos de Software Libre <g11n@mancomun.org>, 2009.
+# Fran Diéguez <frandieguez@ubuntu.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-13 19:58+0100\n"
-"PO-Revision-Date: 2009-03-10 20:17+0000\n"
-"Last-Translator: Suso Baleato <suso.baleato@xunta.es>\n"
-"Language-Team: Galego <proxecto@trasno.net>\n"
+"POT-Creation-Date: 2010-02-15 13:21+0100\n"
+"PO-Revision-Date: 2010-02-05 12:31+0100\n"
+"Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
+"Language-Team: Gallician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +33,7 @@ msgstr ""
 
 #: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
-msgstr "Non é un ID de activación válido"
+msgstr "Non é un ID de activación correcto"
 
 #: ../activation-server/activation-server-main.c:176
 msgid "Directory to read .server files from"
@@ -45,7 +46,7 @@ msgstr "DIRECTORIO"
 #: ../activation-server/activation-server-main.c:179
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
-"Servir como un ActivationContext (o predeterminado é só como un "
+"Servir como un ActivationContext (o valor predefinido é como un "
 "ObjectDirectory)"
 
 #: ../activation-server/activation-server-main.c:183
@@ -82,7 +83,7 @@ msgstr "EXPRESIÓN"
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "Execute '%s --help' para ver unha lista completa de opcións dispoñíbeis na "
-"liña de comandos.\n"
+"liña de ordes.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -113,11 +114,11 @@ msgid ""
 "check it is valid in: %s"
 msgstr ""
 "O ficheiro de configuración de activación do Bonobo non se leu "
-"correctamente. Comprobe que é válido en: %s"
+"correctamente. Comprobe que é correcto en: %s"
 
 #: ../activation-server/object-directory-load.c:102
 msgid "a NULL iid is not valid"
-msgstr "un iid NULL non é válido"
+msgstr "un iid NULL non é correcto"
 
 #: ../activation-server/object-directory-load.c:106
 #, c-format
@@ -132,7 +133,7 @@ msgstr "o iid %s ten unha localización NULL"
 #: ../activation-server/object-directory-load.c:119
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
-msgstr "carácter '%c' non válido no iid '%s'"
+msgstr "carácter '%c' incorrecto no iid '%s'"
 
 #: ../activation-server/object-directory-load.c:349
 #, c-format
@@ -142,7 +143,7 @@ msgstr "A propiedade '%s' non ten ningún valor"
 #: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr "Non se puido analizar o documento XML incorrectamente formado %s"
+msgstr "Non foi posíbel analizar o documento XML incorrectamente formado %s"
 
 #: ../activation-server/object-directory-load.c:629
 #, c-format
@@ -152,13 +153,13 @@ msgstr "Probando o directorio %s"
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
 msgstr ""
-"O proceso fillo non deu ningunha mensaxe de erro; ocorreu un fallo "
+"O proceso fillo non deu ningunha mensaxe de erro; produciuse un fallo "
 "descoñecido"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Fallo ao ler desde o proceso fillo: %s\n"
+msgstr "Produciuse un fallo ao ler desde o proceso fillo: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
 #, c-format
@@ -167,7 +168,7 @@ msgstr "EOF desde o proceso fillo\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
-msgstr "Non se pode iniciar un proceso novo"
+msgstr "Non é posíbel iniciar un proceso novo"
 
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
@@ -223,7 +224,7 @@ msgstr "Nome"
 
 #: ../bonobo/bonobo-application.c:352
 msgid "Application unique name"
-msgstr "Nome único da aplicación"
+msgstr "Nome único do aplicativo"
 
 #: ../bonobo/bonobo-object.c:929
 msgid "POA"
@@ -243,7 +244,7 @@ msgstr "Erro de E/S"
 
 #: ../bonobo/bonobo-exception.c:160
 msgid "Invalid argument value"
-msgstr "Valor de argumento non válido"
+msgstr "Valor de argumento incorrecto"
 
 #: ../bonobo/bonobo-exception.c:164
 msgid "Object not found"
@@ -255,7 +256,7 @@ msgstr "Erro de sintaxe na descrición do obxecto"
 
 #: ../bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Non se pode activar o obxecto desde a factoría"
+msgstr "Non é posíbel activar o obxecto desde a factoría"
 
 #: ../bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -307,7 +308,7 @@ msgstr "descrición XML da interface de usuario formada incorrectamente"
 
 #: ../bonobo/bonobo-exception.c:213
 msgid "invalid path to XML user interface element"
-msgstr "camiño non válido para un elemento XML da interface de usuario"
+msgstr "camiño incorrecto para un elemento XML da interface de usuario"
 
 #: ../bonobo/bonobo-exception.c:216
 msgid "the requested UI attribute didn't exist"
@@ -315,11 +316,11 @@ msgstr "o atributo de IU solicitado non existe"
 
 #: ../bonobo/bonobo-exception.c:219
 msgid "Unknown command or verb"
-msgstr "Comando ou verbo descoñecido"
+msgstr "Orde ou verbo descoñecido"
 
 #: ../bonobo/bonobo-exception.c:222
 msgid "Command is insensitive"
-msgstr "O comando non é sensíbel"
+msgstr "A orde non é sensíbel"
 
 #: ../bonobo/bonobo-exception.c:226
 msgid "incorrect data type"
@@ -335,7 +336,7 @@ msgstr "propiedade non localizada"
 
 #: ../bonobo/bonobo-exception.c:236
 msgid "property has invalid type"
-msgstr "a propiedade ten un tipo non válido"
+msgstr "a propiedade ten un tipo incorrecto"
 
 #: ../bonobo/bonobo-exception.c:239
 msgid "property is read only"
@@ -347,7 +348,7 @@ msgstr "fallou o backend da base de datos da configuración "
 
 #: ../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Non se puido localizar a interface do moniker"
+msgstr "Non foi posíbel localizar a interface do moniker"
 
 #: ../bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
@@ -363,7 +364,7 @@ msgstr "O Moniker ten un prefixo de moniker descoñecido"
 
 #: ../bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "Erro ao verificar o erro; non hai excepción"
+msgstr "Produciuse un erro ao verificar o erro; non hai excepción"
 
 #: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
@@ -372,11 +373,11 @@ msgstr "Erro xeral de activación sen descrición"
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
 msgid "Failed to resolve, or extend '%s"
-msgstr "Fallo ao resolver ou ao estender '%s'"
+msgstr "Produciuse un fallo ao resolver ou ao estender '%s'"
 
 #: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
-msgstr "Fallo ao activar o obxecto"
+msgstr "Produciuse un fallo ao activar o obxecto"
 
 #: ../monikers/bonobo-moniker-oaf.c:53
 #, c-format
@@ -386,7 +387,7 @@ msgstr "Excepción ao activar '%s'"
 #: ../monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
-msgstr "Fallo ao activar '%s'"
+msgstr "Produciuse un fallo ao activar '%s'"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -438,11 +439,11 @@ msgstr "Factoría de compoñente Echo"
 
 #: ../samples/echo/echo-client.c:24
 msgid "I could not initialize Bonobo"
-msgstr "Non se puido inicializar o Bonobo"
+msgstr "Non foi posíbel inicializar o Bonobo"
 
 #: ../samples/echo/echo-client.c:35
 msgid "Could not create an instance of the sample echo component"
-msgstr "Non se puido crear unha instancia da compoñente Echo de mostra"
+msgstr "Non foi posíbel crear unha instancia da compoñente Echo de mostra"
 
 #: ../samples/echo/echo-client.c:47
 #, c-format
@@ -452,7 +453,7 @@ msgstr "Produciuse unha excepción '%s'"
 #: ../utils/bonobo-activation-sysconf.c:83
 #, c-format
 msgid "Could not save configuration file.\n"
-msgstr "Non se puido gardar o ficheiro de configuración.\n"
+msgstr "Non foi posíbel gardar o ficheiro de configuración.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
