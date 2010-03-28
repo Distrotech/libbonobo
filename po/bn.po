@@ -5,14 +5,15 @@
 # Mahay Alam Khan <makl10n@yahoo.com>, 2005.
 # Samia Niamatullah <mailsamia2001@yahoo.com>, 2005.
 # Sadia Afroz <sadia@ankur.org.bd>, 2010.
+# Israt Jahan <israt@ankur.org.bd>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=libbonobo&component=general\n"
-"POT-Creation-Date: 2009-05-24 22:30+0000\n"
-"PO-Revision-Date: 2010-03-07 20:07+0600\n"
+"POT-Creation-Date: 2010-03-27 12:31+0000\n"
+"PO-Revision-Date: 2010-03-28 20:07+0600\n"
 "Last-Translator: Sadia Afroz <sadia@ankur.org.bd>\n"
 "Language-Team: Bengali <ankur-bd-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -57,9 +58,9 @@ msgid ""
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
 msgstr ""
-"লক না করেই ব্যবহারকারী সক্রিয়করণ সার্ভার হিসেবে রেজিস্টার করুন। সতর্কীকরণ: "
-"এই অপশনটি ব্যবহারীর চলন্ত সেশনে মারাত্মক ক্ষতিকর হতে পারে, এবং শুধুমাত্র "
-"ডিবাগিং এর জন্য ব্যবহার হওয়া উচিত"
+"লক না করেই ব্যবহারকারী সক্রিয়করণ সার্ভার হিসেবে রেজিস্টার করুন। সতর্কীকরণ: এই "
+"অপশনটি ব্যবহারীর চলন্ত সেশনে মারাত্মক ক্ষতিকর হতে পারে, এবং শুধুমাত্র ডিবাগিং এর "
+"জন্য ব্যবহার হওয়া উচিত"
 
 #: ../activation-server/activation-server-main.c:194
 msgid "Query expression to evaluate"
@@ -101,8 +102,8 @@ msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
 msgstr ""
-"বোনোবো সক্রিয়করণ কনফিগারেশন ফাইল সফলভাবে পড়া যায়নি। অনুগ্রহ করে, পরীক্ষা "
-"করুন এটি কার্যকর: %s"
+"বোনোবো সক্রিয়করণ কনফিগারেশন ফাইল সফলভাবে পড়া যায়নি। অনুগ্রহ করে, পরীক্ষা করুন এটি "
+"কার্যকর: %s"
 
 #: ../activation-server/object-directory-load.c:102
 msgid "a NULL iid is not valid"
@@ -119,8 +120,9 @@ msgid "iid %s has a NULL location"
 msgstr "iid %s-এর একটি ফাঁকা অবস্থান রয়েছে"
 
 #: ../activation-server/object-directory-load.c:119
+#| msgid "invalid character '%c' in iid '%s'"
 msgid "invalid character '%c' in iid '%s'"
-msgstr "iid '%s'-এ অকার্যকর অক্ষর '%c'"
+msgstr "iid '%s' এ অকার্যকর অক্ষর '%c'"
 
 #: ../activation-server/object-directory-load.c:349
 #, c-format
