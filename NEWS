@@ -1,3 +1,8 @@
+libbonobo 2.24.3
+	* Set up dbus environment in test-activation/test.sh (Ray Strode)
+	* Fix memory corruption (Michael Meeks)
+	* Updated translations (ast, bn, ca@valencia, cy, en@shaw, gl)
+
 libbonobo 2.24.2
 
 Ani Peter (2):
