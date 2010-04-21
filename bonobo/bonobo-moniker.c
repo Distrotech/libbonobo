@@ -339,7 +339,7 @@ impl_resolve (PortableServer_Servant       servant,
 
 	if (!BONOBO_EX (ev) && retval == CORBA_OBJECT_NIL) {
 		bonobo_exception_general_error_set (
-			ev, NULL, _("Failed to resolve, or extend '%s"),
+			ev, NULL, _("Failed to resolve, or extend '%s'"),
 			bonobo_moniker_get_name_full (moniker));
 	}
 
