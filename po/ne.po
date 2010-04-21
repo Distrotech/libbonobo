@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo.HEAD.ne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-24 03:48+0000\n"
+"POT-Creation-Date: 2010-04-21 13:19+0200\n"
 "PO-Revision-Date: 2007-12-11 11:34+0545\n"
 "Last-Translator: Nabin Gautam <nabin@mpp.org.np>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -18,52 +18,55 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=n !=1\n"
 
-#: ../activation-server/activation-context-corba.c:525
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "कुन चाइल्ड सर्भर सूचीकृत गरिएको थियो फेला पार्न सकेन"
 
-#: ../activation-server/activation-context-corba.c:817
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "मान्य सक्रिय आईडी होइन"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "Directory to read .server files from"
 msgstr " .server फाइलबाट पढिने डाइरेक्टरी"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "DIRECTORY"
 msgstr "डाइरेक्टरी"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:179
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "सक्रिय सन्दर्भका रूपमा सेवा प्रदान गर्दछ (पूर्वनिर्धारित वस्तु डाइरेक्टरी मात्र हो)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 msgid "File descriptor to write IOR to"
 msgstr "IOR मा लेखिने फाइल वर्णनकर्ता"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "एफडी"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:186
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
-msgstr "ताल्चा नलगाइकन प्रयोगकर्ताको सक्रिय सर्भरका रूपमा दर्ता गर्नुहोस् ।  चेतावनी: यस विकल्पले प्रयोगकर्ताको चलिरहेको सत्र स्थायित्वमा खतरनाक प्रभाव पार्न सक्छ र त्रुटिमोचन उद्धेश्यका लागि मात्र प्रयोग गर्नुपर्दछ"
+msgstr ""
+"ताल्चा नलगाइकन प्रयोगकर्ताको सक्रिय सर्भरका रूपमा दर्ता गर्नुहोस् ।  चेतावनी: यस विकल्पले "
+"प्रयोगकर्ताको चलिरहेको सत्र स्थायित्वमा खतरनाक प्रभाव पार्न सक्छ र त्रुटिमोचन उद्धेश्यका "
+"लागि मात्र प्रयोग गर्नुपर्दछ"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "Query expression to evaluate"
 msgstr "मूल्याङ्कनका लागि क्वेरी अभिव्यक्ति"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "EXPRESSION"
 msgstr "अभिव्यक्ति"
 
-#: ../activation-server/activation-server-main.c:429
+#: ../activation-server/activation-server-main.c:547
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -94,7 +97,9 @@ msgstr "हामीले अझै पनि टाढाको प्रक�
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr "बोनोबो सक्रिय गर्ने कन्फिगरेसन फाइल सफलतापूर्वक पढिएको थिएन । कृपया यो: %s मा मान्य भएको जाँच गर्नुहोस्"
+msgstr ""
+"बोनोबो सक्रिय गर्ने कन्फिगरेसन फाइल सफलतापूर्वक पढिएको थिएन । कृपया यो: %s मा मान्य "
+"भएको जाँच गर्नुहोस्"
 
 #: ../activation-server/object-directory-load.c:102
 msgid "a NULL iid is not valid"
@@ -111,7 +116,7 @@ msgid "iid %s has a NULL location"
 msgstr "iid %s सँग NULL स्थान छ"
 
 #: ../activation-server/object-directory-load.c:119
-#, c-format
+#, fuzzy, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "iid '%s' मा अमान्य क्यारेक्टर '%c'"
 
@@ -120,12 +125,12 @@ msgstr "iid '%s' मा अमान्य क्यारेक्टर '%c'"
 msgid "Property '%s' has no value"
 msgstr "गुण '%s' को मान छैन"
 
-#: ../activation-server/object-directory-load.c:581
+#: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "गलत रुपको एक्सएमएल (XML) कागजात %s पदवर्णन गर्न सकेन"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:629
 #, c-format
 msgid "Trying dir %s"
 msgstr "डाइरेक्टरी %s प्रयास गर्दैछ"
@@ -140,10 +145,11 @@ msgid "Failed to read from child process: %s\n"
 msgstr "चाइल्ड प्रक्रियाबाट पढ्न असफल: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr "चाइल्ड प्रक्रियाबाट EOF\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:434
+#: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
 msgstr "नयाँ प्रक्रिया उत्पन्न गर्न सकेन"
 
@@ -203,11 +209,11 @@ msgstr "नाम"
 msgid "Application unique name"
 msgstr "अनुप्रयोगको अद्वितीय नाम"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "पीओए (POA)"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "अनुकूल CORBA POA"
 
@@ -349,8 +355,8 @@ msgid "General activation error with no description"
 msgstr "वर्णन नभएको साधारण सक्रियता त्रुटि"
 
 #: ../bonobo/bonobo-moniker.c:342
-#, c-format
-msgid "Failed to resolve, or extend '%s"
+#, fuzzy, c-format
+msgid "Failed to resolve, or extend '%s'"
 msgstr " '%s फेरि समाधान गर्न वा विस्तार गर्न असफल"
 
 #: ../bonobo/bonobo-moniker-util.c:247
@@ -429,6 +435,7 @@ msgid "An exception occurred '%s'"
 msgstr "एउटा अपवाद उत्पन्न भयो '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "कन्फिगरेसन फाइल बचत गर्न सकेन ।\n"
 
@@ -438,6 +445,7 @@ msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "कृपया, तपाईँलाई '%s' मा लेख्ने अनुमति भएको निश्चित गर्नुहोस् ।\n"
 
 #: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "कन्फिगरेसन फाइल सफलतापूर्वक लेखियो ।\n"
 
@@ -456,10 +464,12 @@ msgid "%s already in configuration file\n"
 msgstr "%s पहिला नै कन्फिगरेसन फाइलमा छ\n"
 
 #: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "त्यहाँ कन्फिगरेसन फाइल संरचनाको गुण छैन\n"
 
 #: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "बोनोबो सक्रियता कन्फिगरेसन फाइलले समाविष्ट गर्दछ:\n"
 
@@ -483,4 +493,3 @@ msgstr "कन्फिगरेसन फाइलमा डाइरेक्�
 #: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr "कन्फिगरेसन फाइलमा मार्ग प्रदर्शन गर्नुहोस्"
-
