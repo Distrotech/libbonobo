@@ -1,17 +1,16 @@
 # Czech translation of libbonobo.
-# Copyright (C) 2002, 2008 Free Software Foundation.
+# Copyright (C) 2002, 2008, 2010 the author(s) of libbonobo.
 # Copyright (C) 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>.
 # This file is distributed under the same license as the libbonobo package.
 # Michal Bukovjan <bukm@centrum.cz>, 2002.
 # Miloslav Trmac <mitr@volny.cz>, 2004, 2005, 2006.
 # Lucas Lommer <llommer@svn.gnome.org>, 2008.
 # Petr Kovar <pknbe@volny.cz>, 2008.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-16 16:33+0100\n"
+"POT-Creation-Date: 2010-04-23 00:08+0200\n"
 "PO-Revision-Date: 2008-02-16 11:05+0100\n"
 "Last-Translator: Petr Kovar <pknbe@volny.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
@@ -19,37 +18,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../activation-server/activation-context-corba.c:527
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "Nebylo možné zjistit, u kterého potomka byl server zapsán"
 
-#: ../activation-server/activation-context-corba.c:819
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "Neplatné ID aktivace"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "Directory to read .server files from"
 msgstr "Adresář, ze kterého číst soubory .server"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "DIRECTORY"
 msgstr "ADRESÁŘ"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:179
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Sloužit jako aktivační kontext (výchozí je pouze jako ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 msgid "File descriptor to write IOR to"
 msgstr "Deskriptor souboru, do kterého zapsat IOR"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:186
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -59,15 +58,15 @@ msgstr ""
 "volba může mít nebezpečný vedlejší efekt na stabilitu běžícího sezení "
 "uživatele a měla by být používána pouze pro ladění programu."
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "Query expression to evaluate"
 msgstr "Výraz k vyhodnocení"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "EXPRESSION"
 msgstr "VÝRAZ"
 
-#: ../activation-server/activation-server-main.c:430
+#: ../activation-server/activation-server-main.c:547
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -131,7 +130,7 @@ msgstr "Vlastnost '%s' nemá žádnou hodnotu"
 #: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
-msgstr "Nemohu zpracovat neplatný dokument XML %s"
+msgstr "Nelze zpracovat neplatný dokument XML %s"
 
 #: ../activation-server/object-directory-load.c:629
 #, c-format
@@ -145,15 +144,16 @@ msgstr "Potomek procesu neposkytl chybové hlášení, došlo k neznámé chybě
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
 msgid "Failed to read from child process: %s\n"
-msgstr "Nemohu číst od potomka procesu: %s\n"
+msgstr "Nelze číst od potomka procesu: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr "EOF od potomka procesu\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
-msgstr "Nemohu vytvořit nový proces"
+msgstr "Nelze vytvořit nový proces"
 
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
@@ -211,11 +211,11 @@ msgstr "Název"
 msgid "Application unique name"
 msgstr "Jedinečný název aplikace"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "Vlastní POA CORBA"
 
@@ -241,7 +241,7 @@ msgstr "Chyba syntaxe v popisu objektu"
 
 #: ../bonobo/bonobo-exception.c:172
 msgid "Cannot activate object from factory"
-msgstr "Nemohu aktivovat objekt z generátoru"
+msgstr "Nelze aktivovat objekt z generátoru"
 
 #: ../bonobo/bonobo-exception.c:177
 msgid "No permission to access stream"
@@ -357,12 +357,12 @@ msgstr "Obecná chyba aktivace bez popisu"
 
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
-msgid "Failed to resolve, or extend '%s"
-msgstr "Nemohu rozpoznat nebo rozšířit '%s"
+msgid "Failed to resolve, or extend '%s'"
+msgstr "Nelze rozpoznat nebo rozšířit '%s'"
 
 #: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
-msgstr "Nemohu aktivovat objekt"
+msgstr "Nelze aktivovat objekt"
 
 #: ../monikers/bonobo-moniker-oaf.c:53
 #, c-format
@@ -372,7 +372,7 @@ msgstr "Výjimka při aktivaci '%s'"
 #: ../monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
-msgstr "Nemohu aktivovat '%s'"
+msgstr "Nelze aktivovat '%s'"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -424,11 +424,11 @@ msgstr "Generátor komponenty Echo"
 
 #: ../samples/echo/echo-client.c:24
 msgid "I could not initialize Bonobo"
-msgstr "Nemohu inicializovat Bonobo"
+msgstr "Nelze inicializovat Bonobo"
 
 #: ../samples/echo/echo-client.c:35
 msgid "Could not create an instance of the sample echo component"
-msgstr "Nemohu vytvořit instanci vzorové komponenty Echo"
+msgstr "Nelze vytvořit instanci vzorové komponenty Echo"
 
 #: ../samples/echo/echo-client.c:47
 #, c-format
@@ -436,6 +436,7 @@ msgid "An exception occurred '%s'"
 msgstr "Vyskytla se výjimka '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "Není možné uložit soubor s nastavením.\n"
 
@@ -445,6 +446,7 @@ msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Ověřte prosím, zda máte práva pro zápis do '%s'.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "Soubor s nastavením byl úspěšně zapsán.\n"
 
@@ -463,10 +465,12 @@ msgid "%s already in configuration file\n"
 msgstr "%s již v souboru s nastavením existuje\n"
 
 #: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "neobsahuje správně strukturovaný soubor s nastavením\n"
 
 #: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Soubor s nastavením bonobo-activation obsahuje:\n"
 
