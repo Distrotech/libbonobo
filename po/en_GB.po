@@ -2,50 +2,53 @@
 # Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the libbonobo package.
 # Gareth Owen <gowen72@yahoo.com> 2004
-#
+# Bruce Cowan <bruce@bcowan.me.uk>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-15 18:08+0100\n"
-"PO-Revision-Date: 2006-12-28 18:19-0000\n"
-"Last-Translator: David Lodge <dave@cirt.net>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2010-04-22 15:09+0100\n"
+"PO-Revision-Date: 2010-04-22 15:12+0100\n"
+"Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
+"Language-Team: British English <en@li.org>\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.5.2\n"
 
-#: ../activation-server/activation-context-corba.c:527
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "Couldn't find which child the server was listed in"
 
-#: ../activation-server/activation-context-corba.c:819
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "Not a valid Activation ID"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "Directory to read .server files from"
 msgstr "Directory to read .server files from"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "DIRECTORY"
 msgstr "DIRECTORY"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:179
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 msgid "File descriptor to write IOR to"
 msgstr "File descriptor to write IOR to"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:186
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -55,15 +58,15 @@ msgstr ""
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "Query expression to evaluate"
 msgstr "Query expression to evaluate"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:430
+#: ../activation-server/activation-server-main.c:547
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -207,11 +210,11 @@ msgstr "Name"
 msgid "Application unique name"
 msgstr "Application unique name"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "Custom CORBA POA"
 
@@ -353,8 +356,8 @@ msgstr "General activation error with no description"
 
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
-msgid "Failed to resolve, or extend '%s"
-msgstr "Failed to resolve, or extend '%s"
+msgid "Failed to resolve, or extend '%s'"
+msgstr "Failed to resolve, or extend '%s'"
 
 #: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
