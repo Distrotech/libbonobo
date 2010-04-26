@@ -2,17 +2,18 @@
 # Estonian translation of libbonobo.
 #
 # Copyright (C) 2005, 2006 Free Software Foundation, Inc.
-# Copyright (C) 2007-2009, The GNOME Project.
+# Copyright (C) 2007–2010, The GNOME Project.
 # This file is distributed under the same license as the libbonobo package.
 #
-# Ivar Smolin <okul@linux.ee>, 2005-2009.
+# Ivar Smolin <okul@linux.ee>, 2005–2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-24 03:48+0000\n"
-"PO-Revision-Date: 2009-08-16 20:46+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=libbonobo&component=general\n"
+"POT-Creation-Date: 2010-04-21 08:51+0000\n"
+"PO-Revision-Date: 2010-04-25 08:05+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -121,6 +122,7 @@ msgstr "Tekkis tundmatu tõrge, alamprotsess ei väljastanud veateadet"
 msgid "Failed to read from child process: %s\n"
 msgstr "Tõrge alamprotsessilt andmete lugemisel: %s\n"
 
+#, c-format
 msgid "EOF from child process\n"
 msgstr "Alamprotsessilt tuli faililõputunnus\n"
 
@@ -277,7 +279,7 @@ msgid "General activation error with no description"
 msgstr "Üldine ilma kirjelduseta aktiveerimisviga"
 
 #, c-format
-msgid "Failed to resolve, or extend '%s"
+msgid "Failed to resolve, or extend '%s'"
 msgstr "Tõrge '%s' lahendamisel või laiendamisel"
 
 msgid "Failed to activate object"
@@ -337,6 +339,7 @@ msgstr "Näidiskomponendi (kaja) instantsi pole võimalik luua"
 msgid "An exception occurred '%s'"
 msgstr "Leidis aset erandolukord '%s'"
 
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "Seadistusfaili pole võimalik salvestada.\n"
 
@@ -344,6 +347,7 @@ msgstr "Seadistusfaili pole võimalik salvestada.\n"
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Palun veendu, et sul on õigused '%s' kirjutamiseks.\n"
 
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "Seadistusfail kirjutati edukalt.\n"
 
@@ -359,9 +363,11 @@ msgstr ""
 msgid "%s already in configuration file\n"
 msgstr "%s on juba seadistusfailis\n"
 
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "puudub korralikult struktureeritud seadistusfail\n"
 
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo-activation seadistusfail sisaldab:\n"
 
