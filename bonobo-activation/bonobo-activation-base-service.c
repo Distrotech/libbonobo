@@ -30,6 +30,8 @@
 
 #include <glib/gi18n-lib.h>
 
+#include <gio/gio.h>
+
 #include <bonobo-activation/bonobo-activation-init.h>
 #include <bonobo-activation/bonobo-activation-base-service.h>
 #include <bonobo-activation/bonobo-activation-private.h>
@@ -505,10 +507,7 @@ get_session_guid (void)
         const char *session_bus_address;
         const char *guid;
 
-        /* FIXME: we may want to use dbus-address.h functions here
-         */
-        session_bus_address = g_getenv ("DBUS_SESSION_BUS_ADDRESS");
-
+        session_bus_address = g_dbus_address_get_for_bus_sync (G_BUS_TYPE_SESSION, NULL, NULL);
         if (session_bus_address == NULL)
                 return NULL;
 

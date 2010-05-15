@@ -54,9 +54,7 @@
 
 #include <glib/gstdio.h>
 
-#ifdef HAVE_DBUS
-#include <dbus/dbus-glib-lowlevel.h>
-#endif
+#include <gio/gio.h>
 
 #ifdef G_OS_WIN32
 #include <io.h>
@@ -421,19 +419,16 @@ cleanup_ior_and_lock_files (void)
 
 #ifdef HAVE_DBUS
 
-static DBusHandlerResult
-bus_message_handler (DBusConnection *connection,
-                     DBusMessage    *message,
-                     GMainLoop      *loop)
+static void
+session_bus_closed_cb (GDBusConnection *conection,
+                       gboolean         remote_peer_vanished,
+                       GError          *error,
+                       gpointer         user_data)
 {
-        if (dbus_message_is_signal (message,
-                                    DBUS_INTERFACE_LOCAL,
-                                    "Disconnected")) {
-                g_main_loop_quit (loop);
-                return DBUS_HANDLER_RESULT_HANDLED;
-        }
+        GMainLoop *loop = (GMainLoop *) user_data;
 
-        return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+        if (g_main_loop_is_running (loop))
+                g_main_loop_quit (loop);
 }
 
 #endif
@@ -500,8 +495,7 @@ main (int argc, char *argv[])
 #endif
 	GError                       *error = NULL;
 #ifdef HAVE_DBUS
-        DBusConnection               *connection;
-        DBusError                     bus_error;
+        GDBusConnection              *connection;
 #endif
 
 #ifdef HAVE_SETSID
@@ -647,25 +641,15 @@ main (int argc, char *argv[])
 	od_finished_internal_registration (); 
 
 #ifdef HAVE_DBUS
-        dbus_error_init (&bus_error);
-        connection = dbus_bus_get (DBUS_BUS_SESSION, &bus_error);
-
-        if (dbus_error_is_set (&bus_error)) {
+        connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+        if (connection == NULL) {
                 g_warning ("could not associate with desktop session: %s",
-                           bus_error.message);
-                connection = NULL;
+                           error->message);
+                g_error_free (error);
         } else {
-                GMainContext *main_context;
-
-                main_context = g_main_loop_get_context (main_loop);
-                dbus_connection_setup_with_g_main (connection, main_context);
-
-                if (dbus_connection_add_filter (connection,
-                                                (DBusHandleMessageFunction)
-                                                bus_message_handler, main_loop,
-                                                NULL)) {
-                        dbus_connection_set_exit_on_disconnect (connection, FALSE);
-                }
+                g_signal_connect (connection, "closed",
+                                  G_CALLBACK (session_bus_closed_cb), main_loop);
+                g_dbus_connection_set_exit_on_close (connection, FALSE);
         }
 #endif
         if (getenv ("BONOBO_ACTIVATION_DEBUG") == NULL)
