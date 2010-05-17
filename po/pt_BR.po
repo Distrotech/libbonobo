@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-06 22:34-0300\n"
-"PO-Revision-Date: 2009-09-06 22:34-0300\n"
+"POT-Creation-Date: 2010-05-17 10:07-0300\n"
+"PO-Revision-Date: 2010-05-16 12:07-0300\n"
 "Last-Translator: Vladimir Melo <vladimirmelo.psi@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -360,7 +360,7 @@ msgstr "Erro de ativação geral sem descrição"
 
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
-msgid "Failed to resolve, or extend '%s"
+msgid "Failed to resolve, or extend '%s'"
 msgstr "Falha ao resolver ou estender \"%s\""
 
 #: ../bonobo/bonobo-moniker-util.c:247
