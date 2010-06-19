@@ -1,58 +1,59 @@
 # Hungarian translation of libbonobo.
-# Copyright (C) 2002, 2003, 2004, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2003, 2004, 2006, 2007, 2008, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libbonobo package.
 #
 # Emese Kovacs <emese@gnome.hu>, 2002, 2003.
 # Andras Timar <timar@gnome.hu>, 2003, 2004.
 # Laszlo Dvornik <dvornik@gnome.hu>, 2004.
 # Gabor Kelemen <kelemeng@gnome.hu>, 2005, 2006, 2007, 2008.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-24 03:48+0000\n"
-"PO-Revision-Date: 2008-02-26 00:12+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <gnome@fsf.hu>\n"
+"POT-Creation-Date: 2010-06-19 17:20+0200\n"
+"PO-Revision-Date: 2010-06-19 17:19+0200\n"
+"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
+"Language-Team: Hungarian <gnome at fsf dot hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../activation-server/activation-context-corba.c:525
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "Nem található, hogy melyik gyermekben van felsorolva a kiszolgáló"
 
-#: ../activation-server/activation-context-corba.c:817
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "Nem érvényes aktivációs azonosító"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "Directory to read .server files from"
 msgstr "A könyvtár, amelyből a .server fájlokat kell olvasni"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:176
 msgid "DIRECTORY"
 msgstr "KÖNYVTÁR"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:179
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Szolgáljon ActivationContext-ként (az alapértelmezett csak az "
 "ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 msgid "File descriptor to write IOR to"
 msgstr "Fájlleíró, amelybe az IOR-t kell írni"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:183
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:186
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -63,21 +64,21 @@ msgstr ""
 "felhasználó futó munkamenetének stabilitására és csak hibakeresési célokra "
 "használandó"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "Query expression to evaluate"
 msgstr "Kiértékelendő lekérdező kifejezés"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:194
 msgid "EXPRESSION"
 msgstr "KIFEJEZÉS"
 
-#: ../activation-server/activation-server-main.c:429
+#: ../activation-server/activation-server-main.c:547
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
-"Adja ki a(z) „%s --help” parancsot az elérhető parancssori kapcsolók "
-"teljes listájáért.\n"
+"Adja ki a(z) „%s --help” parancsot az elérhető parancssori kapcsolók teljes "
+"listájáért.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -97,7 +98,8 @@ msgstr "Értesítési szolgáltatás az aktivációhoz"
 
 #: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Jelenleg még nem kezeljük a távoli folyamatok shlib objektumainak aktiválását"
+msgstr ""
+"Jelenleg még nem kezeljük a távoli folyamatok shlib objektumainak aktiválását"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
@@ -132,12 +134,12 @@ msgstr "érvénytelen „%c” karakter a(z) „%s” iid-ben"
 msgid "Property '%s' has no value"
 msgstr "A(z) „%s” tulajdonságnak nincs értéke"
 
-#: ../activation-server/object-directory-load.c:581
+#: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Nem lehet értelmezni a rosszul formázott %s XML-dokumentumot"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:629
 #, c-format
 msgid "Trying dir %s"
 msgstr "Próba: %s könyvtár"
@@ -152,10 +154,11 @@ msgid "Failed to read from child process: %s\n"
 msgstr "Nem sikerült olvasni a gyermekfolyamatból: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr "EOF a gyermekfolyamatból\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:434
+#: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
 msgstr "Nem lehet új folyamatot indítani"
 
@@ -215,11 +218,11 @@ msgstr "Név"
 msgid "Application unique name"
 msgstr "Az alkalmazás egyedi neve"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "Egyéni CORBA POA"
 
@@ -361,7 +364,7 @@ msgstr "Általános aktiválási hiba, leírás nélkül"
 
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
-msgid "Failed to resolve, or extend '%s"
+msgid "Failed to resolve, or extend '%s'"
 msgstr "„%s” feloldása vagy kiterjesztése sikertelen"
 
 #: ../bonobo/bonobo-moniker-util.c:247
@@ -440,6 +443,7 @@ msgid "An exception occurred '%s'"
 msgstr "Kivétel történt: „%s”"
 
 #: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "Nem lehet menteni a konfigurációs fájlt.\n"
 
@@ -449,6 +453,7 @@ msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Ellenőrizze, hogy van-e jogosultsága „%s” írásához.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "A konfigurációs fájl kiírása sikeres volt.\n"
 
@@ -467,10 +472,12 @@ msgid "%s already in configuration file\n"
 msgstr "%s már benne van a konfigurációs fájlban\n"
 
 #: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "nincs megfelelően strukturált konfigurációs fájl\n"
 
 #: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "A Bonobo-activation konfigurációs fájlja tartalmazza:\n"
 
@@ -494,4 +501,3 @@ msgstr "Könyvtárak megjelenítése a konfigurációs fájlban"
 #: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr "Konfigurációs fájl elérési útjának megjelenítése"
-
