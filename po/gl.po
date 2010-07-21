@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-22 23:34+0200\n"
-"PO-Revision-Date: 2010-04-22 23:34+0200\n"
+"POT-Creation-Date: 2010-07-21 13:16+0200\n"
+"PO-Revision-Date: 2010-07-21 13:17+0200\n"
 "Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
-"Language-Team: Galician <proxecto@trasno.net>\n"
+"Language-Team: Galician <gnome-gl-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: gl\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
@@ -36,31 +36,31 @@ msgstr ""
 msgid "Not a valid Activation ID"
 msgstr "Non é un ID de activación correcto"
 
-#: ../activation-server/activation-server-main.c:176
+#: ../activation-server/activation-server-main.c:174
 msgid "Directory to read .server files from"
 msgstr "Directorio desde o que ler os ficheiros .server"
 
-#: ../activation-server/activation-server-main.c:176
+#: ../activation-server/activation-server-main.c:174
 msgid "DIRECTORY"
 msgstr "DIRECTORIO"
 
-#: ../activation-server/activation-server-main.c:179
+#: ../activation-server/activation-server-main.c:177
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "Servir como un ActivationContext (o valor predefinido é como un "
 "ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:183
+#: ../activation-server/activation-server-main.c:181
 msgid "File descriptor to write IOR to"
 msgstr "Descritor de ficheiro para o que escribir o IOR"
 
-#: ../activation-server/activation-server-main.c:183
+#: ../activation-server/activation-server-main.c:181
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "DF"
 
-#: ../activation-server/activation-server-main.c:186
+#: ../activation-server/activation-server-main.c:184
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -70,15 +70,15 @@ msgstr ""
 "opción pode ter efectos secundarios perigosos para a estabilidade da sesión "
 "en execución do usuario e só debe usarse co obxectivo de depuración"
 
-#: ../activation-server/activation-server-main.c:194
+#: ../activation-server/activation-server-main.c:192
 msgid "Query expression to evaluate"
 msgstr "Expresión de consulta para avaliar"
 
-#: ../activation-server/activation-server-main.c:194
+#: ../activation-server/activation-server-main.c:192
 msgid "EXPRESSION"
 msgstr "EXPRESIÓN"
 
-#: ../activation-server/activation-server-main.c:547
+#: ../activation-server/activation-server-main.c:541
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
