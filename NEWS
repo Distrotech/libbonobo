@@ -1,3 +1,7 @@
+libbonobo 2.31.90
+	* Port to GDBus
+	* Translation updates
+
 libbonobo 2.24.3
 	* Set up dbus environment in test-activation/test.sh (Ray Strode)
 	* Fix memory corruption (Michael Meeks)
