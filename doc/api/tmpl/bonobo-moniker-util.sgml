@@ -71,6 +71,9 @@ prefix and / or the ':0' suffix.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_get_object ##### -->
 <para>
 

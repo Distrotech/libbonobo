@@ -142,6 +142,9 @@ save_to_file (BonoboPersistFile *pf,
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboPersistFile ##### -->
 <para>
 

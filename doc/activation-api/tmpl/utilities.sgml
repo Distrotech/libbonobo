@@ -17,6 +17,9 @@ Random misc utilities to manipulate Bonobo_ServerInfo structures.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### ENUM Bonobo_ActivationPropertyType ##### -->
 <para>
 
@@ -69,6 +72,7 @@ Random misc utilities to manipulate Bonobo_ServerInfo structures.
 
 </para>
 
+@void: 
 @Returns: 
 
 

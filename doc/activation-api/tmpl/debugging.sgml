@@ -17,11 +17,15 @@ Debugging
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_activation_debug_shutdown ##### -->
 <para>
 
 </para>
 
+@void: 
 @Returns: 
 
 

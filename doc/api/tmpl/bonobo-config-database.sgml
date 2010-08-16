@@ -17,6 +17,9 @@ bonobo-config-database
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_config_get_string ##### -->
 <para>
 

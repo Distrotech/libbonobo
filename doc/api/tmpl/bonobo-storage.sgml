@@ -61,6 +61,9 @@ container_save (SampleApp         *app,
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_storage_copy_to ##### -->
 <para>
 

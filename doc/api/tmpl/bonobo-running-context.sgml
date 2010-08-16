@@ -46,6 +46,9 @@ a live object tracker
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboRunningContext ##### -->
 <para>
 the running context data
@@ -68,6 +71,7 @@ the running context class
 
 </para>
 
+@void: 
 @Returns: 
 
 

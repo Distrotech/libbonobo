@@ -17,11 +17,15 @@ bonobo-shutdown
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_context_init ##### -->
 <para>
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION bonobo_context_shutdown ##### -->
@@ -29,6 +33,7 @@ bonobo-shutdown
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION bonobo_object_shutdown ##### -->
@@ -36,6 +41,7 @@ bonobo-shutdown
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -44,6 +50,7 @@ bonobo-shutdown
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION bonobo_property_bag_shutdown ##### -->
@@ -51,6 +58,7 @@ bonobo-shutdown
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION bonobo_running_context_shutdown ##### -->
@@ -58,5 +66,6 @@ bonobo-shutdown
 
 </para>
 
+@void: 
 
 

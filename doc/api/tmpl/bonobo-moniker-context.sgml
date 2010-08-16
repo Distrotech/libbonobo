@@ -17,6 +17,9 @@ bonobo-moniker-context
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboMonikerContext ##### -->
 <para>
 
@@ -38,6 +41,7 @@ bonobo-moniker-context
 
 </para>
 
+@void: 
 @Returns: 
 
 

@@ -17,6 +17,9 @@ bonobo-persist-client
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_object_save_to_stream ##### -->
 <para>
 

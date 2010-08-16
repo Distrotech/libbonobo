@@ -95,6 +95,9 @@ bonobo_item_option_free (x);
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboItemHandler ##### -->
 <para>
 Bonobo::ItemHandler implementation

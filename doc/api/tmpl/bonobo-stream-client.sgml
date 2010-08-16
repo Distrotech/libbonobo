@@ -34,6 +34,9 @@ tries to alloca a huge chunk of memory and SEGVs ].
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_stream_client_write ##### -->
 <para>
 

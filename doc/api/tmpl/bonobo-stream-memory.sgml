@@ -49,6 +49,9 @@ BonoboStream *make_bonobo_stream_on_string (char *string)
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboStreamMem ##### -->
 <para>
 

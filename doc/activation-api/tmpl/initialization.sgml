@@ -19,6 +19,9 @@ it is not started.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO BONOBO_ACTIVATION_MAJOR_VERSION ##### -->
 <para>
 
@@ -45,6 +48,7 @@ it is not started.
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -73,6 +77,7 @@ it is not started.
 
 </para>
 
+@void: 
 @Returns: 
 
 

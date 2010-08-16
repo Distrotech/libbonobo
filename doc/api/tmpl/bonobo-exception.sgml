@@ -53,6 +53,9 @@ do_something (CORBA_Environment *ev)
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO bonobo_exception_set ##### -->
 <para>
 This macro sets the stateless user exception with @repo_id on

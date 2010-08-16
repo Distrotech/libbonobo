@@ -80,6 +80,9 @@ connect_to_keyboard_source (Bonobo_EventSource *keyboard)
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboListener ##### -->
 <para>
 Implementents Bonobo::Listener.

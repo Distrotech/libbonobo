@@ -95,6 +95,9 @@ eog_image_data_construct (EogImageData *image_data)
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboPersistStream ##### -->
 <para>
 

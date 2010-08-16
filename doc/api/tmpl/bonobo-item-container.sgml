@@ -17,6 +17,9 @@ This implementation is mostly deprecated, see #BonoboItemHandler
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboItemContainer ##### -->
 <para>
 Object that implements Bonobo::ItemHandler
@@ -48,6 +51,7 @@ Signal emitted when a sub-object is requested from the item container.
 
 </para>
 
+@void: 
 @Returns: 
 
 

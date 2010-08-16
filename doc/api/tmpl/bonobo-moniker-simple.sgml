@@ -82,6 +82,9 @@ bonobo_std_moniker_factory (BonoboGenericFactory *this,
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboMonikerSimple ##### -->
 <para>
 A simplified #BonoboMoniker.

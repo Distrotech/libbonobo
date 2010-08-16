@@ -19,6 +19,9 @@ to Bonobo Activation once it is created.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### ENUM Bonobo_RegistrationResult ##### -->
 <para>
 
@@ -82,6 +85,7 @@ to Bonobo Activation once it is created.
 
 </para>
 
+@void: 
 @Returns: 
 
 

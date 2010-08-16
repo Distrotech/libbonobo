@@ -101,6 +101,9 @@ bonobo_running_context_auto_exit_unref (factory)
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_context_get ##### -->
 <para>
 
@@ -125,6 +128,7 @@ bonobo_running_context_auto_exit_unref (factory)
 
 </para>
 
+@void: 
 @Returns: 
 
 

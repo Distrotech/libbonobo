@@ -95,11 +95,15 @@ suffix.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION bonobo_event_source_new ##### -->
 <para>
 
 </para>
 
+@void: 
 @Returns: 
 
 

@@ -33,6 +33,9 @@ powerful feature set. Most people use #BonoboMonikerSimple.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BonoboMoniker ##### -->
 <para>
 Implements Bonobo::Moniker
