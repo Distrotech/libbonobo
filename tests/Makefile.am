@@ -9,10 +9,12 @@ check_PROGRAMS =		\
 	test-object		\
 	test-stream-mem		\
 	test-storage-mem	\
-	test-generic-factory	\
 	test-main-loop		\
 	generic-factory		\
 	test-uniqapp
+
+#check_PROGRAMS += \
+#        test-generic-factory
 
 INCLUDES =	\
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
@@ -54,6 +56,9 @@ TESTS_ENVIRONMENT =					\
 
 TESTS = test-moniker$(EXEEXT) test-event-source$(EXEEXT) test-object$(EXEEXT) \
 	test-stream-mem$(EXEEXT) $(srcdir)/test-properties.sh test-storage-mem$(EXEEXT) \
-	test-generic-factory.sh test-main-loop$(EXEEXT)
+	test-main-loop$(EXEEXT)
+
+# TESTS += test-generic-factory.sh
+
 check_SCRIPTS = test-properties.sh test-generic-factory.sh
-EXTRA_DIST=$(check_SCRIPTS) Test_Generic_Factory.server
+EXTRA_DIST=$(check_SCRIPTS) Test_Generic_Factory.server test-generic-factory.sh
