@@ -1,14 +1,14 @@
 # libbonobo's Portuguese Translation
-# Copyright © 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 libbonobo.
+# Copyright © 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010 libbonobo.
 # Distributed under the same licence as the libbonobo package
-# Duarte Loreto <happyguy_pt@hotmail.com>, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008.
+# Duarte Loreto <happyguy_pt@hotmail.com>, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.24\n"
+"Project-Id-Version: 2.32\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 00:58+0100\n"
-"PO-Revision-Date: 2008-09-12 01:00+0000\n"
+"POT-Creation-Date: 2010-08-21 17:26+0100\n"
+"PO-Revision-Date: 2010-08-21 17:30+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -23,29 +23,29 @@ msgstr "Incapaz de encontrar em que filho o servidor estava listado"
 msgid "Not a valid Activation ID"
 msgstr "Não é um ID de Activação válido"
 
-#: ../activation-server/activation-server-main.c:166
+#: ../activation-server/activation-server-main.c:174
 msgid "Directory to read .server files from"
 msgstr "Directório de onde ler ficheiros .server"
 
-#: ../activation-server/activation-server-main.c:166
+#: ../activation-server/activation-server-main.c:174
 msgid "DIRECTORY"
 msgstr "DIRECTÓRIO"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:177
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Servir de ActivationContext (por omissão é apenas um ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:173
+#: ../activation-server/activation-server-main.c:181
 msgid "File descriptor to write IOR to"
 msgstr "Descritor de ficheiro para onde escrever IOR"
 
-#: ../activation-server/activation-server-main.c:173
+#: ../activation-server/activation-server-main.c:181
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:176
+#: ../activation-server/activation-server-main.c:184
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -56,15 +56,15 @@ msgstr ""
 "perigosos na estabilidade da sessão do utilizador e apenas deverá ser "
 "utilizada para fins de depuração"
 
-#: ../activation-server/activation-server-main.c:184
+#: ../activation-server/activation-server-main.c:192
 msgid "Query expression to evaluate"
 msgstr "Expressão de consulta a avaliar"
 
-#: ../activation-server/activation-server-main.c:184
+#: ../activation-server/activation-server-main.c:192
 msgid "EXPRESSION"
 msgstr "EXPRESSÃO"
 
-#: ../activation-server/activation-server-main.c:472
+#: ../activation-server/activation-server-main.c:541
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
@@ -356,8 +356,8 @@ msgstr "Erro de activação genérico sem descrição"
 
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
-msgid "Failed to resolve, or extend '%s"
-msgstr "Falha na resolução, ou extensão '%s'"
+msgid "Failed to resolve, or extend '%s'"
+msgstr "Falha ao resolver, ou estender '%s'"
 
 #: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
@@ -514,7 +514,8 @@ msgstr "Apresentar caminho para ficheiro de configuração"
 
 #~ msgid "Too many alias levels for a locale, may indicate a loop"
 #~ msgstr ""
-#~ "Demasiados níveis de equivalências para uma configuração regional, poderá indicar um ciclo"
+#~ "Demasiados níveis de equivalências para uma configuração regional, poderá "
+#~ "indicar um ciclo"
 
 #~ msgid "Child received signal %u (%s)"
 #~ msgstr "Filho recebeu sinal %u (%s)"
