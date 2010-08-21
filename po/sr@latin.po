@@ -6,72 +6,74 @@
 # Maintainer: Veljko M. Stanojević <veljko@vms.homelinux.net>
 # Reviewed on 2005-07-09 by: Danilo Šegan <dsegan@gmx.net>
 # Translated on 2006-02-01 by Slobodan D. Sredojević <slobo@akrep.be>
+# Miloš Popović <gpopac@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-02 05:40+0000\n"
-"PO-Revision-Date: 2007-03-11 15:58+0100\n"
-"Last-Translator: Goran Rakić <grakic@devbase.net>\n"
-"Language-Team: Serbian (sr) <gnom@prevod.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=bonobo&component=libbonobo\n"
+"POT-Creation-Date: 2010-06-21 20:31+0000\n"
+"PO-Revision-Date: 2010-08-21 20:27+0200\n"
+"Last-Translator: Miloš Popović <gpopac@gmail.com>\n"
+"Language-Team: Serbian <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;    plural=n%10==1 && n%100!=11 ? 0 :    n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4;    plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 :    n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: ../activation-server/activation-context-corba.c:523
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "Nisam uspeo da otkrijem na koji podproces je server uvršten"
 
-#: ../activation-server/activation-context-corba.c:815
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "Nevažeća identifikacija za pokretanje"
 
-#: ../activation-server/activation-server-main.c:163
+#: ../activation-server/activation-server-main.c:174
 msgid "Directory to read .server files from"
 msgstr "Direktorijum iz kojeg će se čitati .server datoteke"
 
-#: ../activation-server/activation-server-main.c:163
+#: ../activation-server/activation-server-main.c:174
 msgid "DIRECTORY"
 msgstr "DIREKTORIJUM"
 
-#: ../activation-server/activation-server-main.c:166
+#: ../activation-server/activation-server-main.c:177
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Služi kao ActivationContext (podrazumevano je samo ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:170
+#: ../activation-server/activation-server-main.c:181
 msgid "File descriptor to write IOR to"
 msgstr "Opisnik datoteke za upisivanje IOR-a"
 
 # Opisnik datoteke?
-#: ../activation-server/activation-server-main.c:170
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../activation-server/activation-server-main.c:181
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "OD"
 
-#: ../activation-server/activation-server-main.c:173
+#: ../activation-server/activation-server-main.c:184
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
 msgstr ""
-"Prijavi se kao korisnikov server za pokretanja bez zaključavanja. Upozorenje: ova "
-"opcija se može opasno odraziti na stabilnost korisnikove sesije koja je u toku "
-"i treba je koristiti samo pri otkrivanju grešaka"
+"Prijavi se kao korisnikov server za pokretanja bez zaključavanja. Upozorenje: "
+"ova opcija se može opasno odraziti na stabilnost korisnikove sesije koja je "
+"u toku i treba je koristiti samo pri otkrivanju grešaka"
 
-#: ../activation-server/activation-server-main.c:181
+#: ../activation-server/activation-server-main.c:192
 msgid "Query expression to evaluate"
 msgstr "Izraz za pretragu koji treba vrednovati"
 
-#: ../activation-server/activation-server-main.c:181
+#: ../activation-server/activation-server-main.c:192
 msgid "EXPRESSION"
 msgstr "IZRAZ"
 
-#: ../activation-server/activation-server-main.c:430
-#: ../utils/bonobo-activation-sysconf.c:304
+#: ../activation-server/activation-server-main.c:541
+#: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
@@ -107,37 +109,37 @@ msgstr ""
 "Datoteka sa podešavanjima za Bonobo aktivaciju nije uspešno pročitana. "
 "Proverite da li je ispravna u: %s"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:102
 msgid "a NULL iid is not valid"
 msgstr "NULL iid je nevažeći"
 
-#: ../activation-server/object-directory-load.c:105
+#: ../activation-server/object-directory-load.c:106
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s je NULL vrste"
 
-#: ../activation-server/object-directory-load.c:109
+#: ../activation-server/object-directory-load.c:110
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s ima NULL lokaciju"
 
-#: ../activation-server/object-directory-load.c:118
+#: ../activation-server/object-directory-load.c:119
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "nevažeći znak „%c“ in iid „%s“"
 
-#: ../activation-server/object-directory-load.c:348
+#: ../activation-server/object-directory-load.c:349
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "Osobina „%s“ nema nikakvu vrednost"
 
-#: ../activation-server/object-directory-load.c:580
+#: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Ne mogu da obradim loše oblikovan XML dokument %s"
 
 # bug: s/dir/directory/
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:629
 #, c-format
 msgid "Trying dir %s"
 msgstr "Pokušavam direktorijum %s"
@@ -153,37 +155,38 @@ msgid "Failed to read from child process: %s\n"
 msgstr "Nisam uspeo da čitam iz podprocesa: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr "Kraj datoteke iz podprocesa\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:435
+#: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
 msgstr "Nisam mogao do počnem novi proces"
 
-#: ../bonobo-activation/bonobo-activation-init.c:355
-#: ../bonobo-activation/bonobo-activation-init.c:365
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "File descriptor to print IOR on"
 msgstr "Opisnik datoteke na kojem će se ispisati IOR"
 
-#: ../bonobo-activation/bonobo-activation-init.c:357
-#: ../bonobo-activation/bonobo-activation-init.c:367
+#: ../bonobo-activation/bonobo-activation-init.c:354
+#: ../bonobo-activation/bonobo-activation-init.c:399
 msgid "IID to activate"
 msgstr "IID koji treba pokrenuti"
 
-#: ../bonobo-activation/bonobo-activation-init.c:359
-#: ../bonobo-activation/bonobo-activation-init.c:369
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:401
 msgid "Prevent registering of server with OAF"
 msgstr "Spreči registrovanje servera na OAF-u"
 
-#: ../bonobo-activation/bonobo-activation-init.c:403
+#: ../bonobo-activation/bonobo-activation-init.c:409
 msgid "Bonobo Activation options:"
 msgstr "Opcije za pokretanje bonoboa:"
 
-#: ../bonobo-activation/bonobo-activation-init.c:404
+#: ../bonobo-activation/bonobo-activation-init.c:410
 msgid "Show Bonobo Activation options"
 msgstr "Prikaži mogućnosti Bonobo pokretanja"
 
-#: ../bonobo-activation/bonobo-activation-init.c:512
+#: ../bonobo-activation/bonobo-activation-init.c:518
 msgid "Bonobo activation options"
 msgstr "Opcije za pokretanje bonoboa"
 
@@ -216,11 +219,11 @@ msgstr "Ime"
 msgid "Application unique name"
 msgstr "Jedinstveno ime programa"
 
-#: ../bonobo/bonobo-object.c:923
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:923
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "Prilagođen CORBA POA"
 
@@ -363,16 +366,13 @@ msgstr "Greška pri proveri greške; bez izuzetka"
 msgid "General activation error with no description"
 msgstr "Opšta greška pri aktivaciji bez opisa"
 
-#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
-msgid "Could not initialize Bonobo"
-msgstr "Bonobo nije mogao biti pokrenut"
-
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
-msgid "Failed to resolve, or extend '%s"
-msgstr "Neuspešno razrešenje ili proširenje „%s“"
+#| msgid "Failed to resolve, or extend '%s"
+msgid "Failed to resolve, or extend '%s'"
+msgstr "Ne mogu da razrešim ili proširim „%s“"
 
-#: ../bonobo/bonobo-moniker-util.c:246
+#: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
 msgstr "Neuspeh aktiviranja objekta"
 
@@ -434,33 +434,35 @@ msgstr "Echo komponenta"
 msgid "Echo component factory"
 msgstr "Tvornica Echo komponente"
 
-#: ../samples/echo/echo-client.c:22
+#: ../samples/echo/echo-client.c:24
 msgid "I could not initialize Bonobo"
 msgstr "Ne mogu da pokrenem Bonobo"
 
-#: ../samples/echo/echo-client.c:33
+#: ../samples/echo/echo-client.c:35
 msgid "Could not create an instance of the sample echo component"
 msgstr "Neuspeh stvaranja primerka probne echo komponente"
 
-#: ../samples/echo/echo-client.c:45
+#: ../samples/echo/echo-client.c:47
 #, c-format
 msgid "An exception occurred '%s'"
 msgstr "Dogodio se izuzetak „%s“"
 
-#: ../utils/bonobo-activation-sysconf.c:82
+#: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "Nisam mogao da sačuvam datoteku sa podešavanjima.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:83
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Proverite da li imate ovlašćenja da pišete u „%s“.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:86
+#: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "Uspešno zapisana datoteka sa podešavanjima.\n"
 
-#: ../utils/bonobo-activation-sysconf.c:103
+#: ../utils/bonobo-activation-sysconf.c:104
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -469,39 +471,44 @@ msgstr ""
 "datoteka sa podešavanjima je:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:145
+#: ../utils/bonobo-activation-sysconf.c:146
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s već postoji u datoteci sa podešavanjima\n"
 
-#: ../utils/bonobo-activation-sysconf.c:165
+#: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "nema ispravno struktuirane datoteke sa podešavanjima\n"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Datoteka sa podešavanjima za bonobo-aktivaciju sadrži:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:266
+#: ../utils/bonobo-activation-sysconf.c:267
 msgid "Directory to remove from configuration file"
 msgstr "Direktorijum koji treba ukloniti iz datoteke sa podešavanjima"
 
-#: ../utils/bonobo-activation-sysconf.c:266
-#: ../utils/bonobo-activation-sysconf.c:268
+#: ../utils/bonobo-activation-sysconf.c:267
+#: ../utils/bonobo-activation-sysconf.c:269
 msgid "PATH"
 msgstr "PUTANJA"
 
-#: ../utils/bonobo-activation-sysconf.c:268
+#: ../utils/bonobo-activation-sysconf.c:269
 msgid "Directory to add to configuration file"
 msgstr "Direktorijum koji treba dodati u datoteku sa podešavanjima"
 
-#: ../utils/bonobo-activation-sysconf.c:270
+#: ../utils/bonobo-activation-sysconf.c:271
 msgid "Display directories in configuration file"
 msgstr "Prikaži direktorijume u datoteci sa podešavanjima"
 
-#: ../utils/bonobo-activation-sysconf.c:272
+#: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr "Prikaži putanju do datoteke sa podešavanjima"
+
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "Bonobo nije mogao biti pokrenut"
 
 #~ msgid ""
 #~ "Register as the users' activation server without locking [!] for debugging"
