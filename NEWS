@@ -1,4 +1,4 @@
-libbonobo 2.31.90
+libbonobo 2.31.91
 	* Port to GDBus
 	* Translation updates
 
