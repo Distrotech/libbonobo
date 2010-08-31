@@ -1,484 +1,507 @@
-# Indonesia translation of libbonobo.
-# Copyright (C) 2005 THE libbonobo'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the libbonobo package.
-# Mohammad DAMT <mdamt@bisnisweb.com>, 2005.
+# Indonesia translation of libbonoboui.
+# Copyright (C) 2005 THE libbonoboui's COPYRIGHT HOLDER
+# This file is distributed under the same license as the libbonoboui package.
 #
+# Mohammad DAMT <mdamt@bisnisweb.com>, 2005.
+# Andika Triwidada <andika@gmail.com>, 2009.
+# Dirgita <dirgitadevina@yahoo.co.id>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=bonobo&component=libbonobo\n"
-"POT-Creation-Date: 2010-05-05 12:59+0000\n"
-"PO-Revision-Date: 2010-05-07 14:44+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"Project-Id-Version: libbonoboui.master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=bonobo&component=libbonoboui\n"
+"POT-Creation-Date: 2010-07-21 11:19+0000\n"
+"PO-Revision-Date: 2010-08-31 00:25+0700\n"
+"Last-Translator: Dirgita <dirgitadevina@yahoo.co.id>\n"
 "Language-Team: GNOME Indonesian Translation Team <gnome@i15n.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Indonesian\n"
-"X-Poedit-Country: Indonesia\n"
+"X-Generator: Lokalize 1.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../activation-server/activation-context-corba.c:530
-msgid "Couldn't find which child the server was listed in"
-msgstr "Tidak dapat menemukan child tempat server terdaftar"
+#: ../bonobo/bonobo-canvas-item.c:680
+msgid "corba factory"
+msgstr "factory corba"
 
-#: ../activation-server/activation-context-corba.c:822
-msgid "Not a valid Activation ID"
-msgstr "ID aktifasi tidak valid"
+#: ../bonobo/bonobo-canvas-item.c:681
+msgid "The factory pointer"
+msgstr "Pointer factory"
 
-#: ../activation-server/activation-server-main.c:176
-msgid "Directory to read .server files from"
-msgstr "Direktori tempat membaca berkas .server"
+#: ../bonobo/bonobo-canvas-item.c:690
+msgid "corba UI container"
+msgstr "kontainer UI corba"
 
-#: ../activation-server/activation-server-main.c:176
-msgid "DIRECTORY"
-msgstr "DIREKTORI"
+#: ../bonobo/bonobo-canvas-item.c:691
+msgid "The User interface container"
+msgstr "Kontainer antarmuka pengguna"
 
-#: ../activation-server/activation-server-main.c:179
-msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
-msgstr "Melayani sebagai suatu ActivationContext (defaultnya adalah hanya untuk ObjectDirectory)"
+#: ../bonobo/bonobo-dock-item-grip.c:254
+msgid "Dock the toolbar"
+msgstr "Tempelkan toolbar"
 
-#: ../activation-server/activation-server-main.c:183
-msgid "File descriptor to write IOR to"
-msgstr "Descriptor berkas untuk menulis IOR"
+#: ../bonobo/bonobo-dock-item-grip.c:255
+msgid "Undock the toolbar"
+msgstr "Cabut toolbar"
 
-#: ../activation-server/activation-server-main.c:183
-#: ../bonobo-activation/bonobo-activation-init.c:352
-#: ../bonobo-activation/bonobo-activation-init.c:397
-msgid "FD"
-msgstr "FD"
+#: ../bonobo/bonobo-dock-item.c:225 ../bonobo/bonobo-dock-item.c:226
+#: ../bonobo/bonobo-ui-toolbar.c:1163
+msgid "Shadow type"
+msgstr "Jenis bayangan"
 
-#: ../activation-server/activation-server-main.c:186
-msgid "Register as the user's activation server without locking.  Warning: this option can have dangerous side effects on the stability of the user's running session, and should only be used for debugging purposes"
-msgstr "Mendaftar sebagai server aktivasi milik pengguna tanpa penguncian. Peringatan: pilihan ini bisa memiliki efek samping berbahaya atas kestabilan sesi berjalan milik pengguna, dan hanya dipakai untuk tujuan debug."
+#: ../bonobo/bonobo-dock-item.c:236 ../bonobo/bonobo-dock-item.c:237
+#: ../bonobo/bonobo-ui-toolbar.c:1107 ../bonobo/bonobo-ui-toolbar.c:1108
+msgid "Orientation"
+msgstr "Orientasi"
 
-#: ../activation-server/activation-server-main.c:194
-msgid "Query expression to evaluate"
-msgstr "Ekspresi query untuk dijalankan"
+#: ../bonobo/bonobo-dock-item.c:247 ../bonobo/bonobo-dock-item.c:248
+#: ../bonobo/bonobo-ui-toolbar.c:1126 ../bonobo/bonobo-ui-toolbar.c:1127
+msgid "Preferred width"
+msgstr "Lebar yang diinginkan"
 
-#: ../activation-server/activation-server-main.c:194
-msgid "EXPRESSION"
-msgstr "EKSPRESI"
+#: ../bonobo/bonobo-dock-item.c:256 ../bonobo/bonobo-dock-item.c:257
+#: ../bonobo/bonobo-ui-toolbar.c:1135 ../bonobo/bonobo-ui-toolbar.c:1136
+msgid "Preferred height"
+msgstr "Tinggi yang diinginkan"
 
-#: ../activation-server/activation-server-main.c:547
-#: ../utils/bonobo-activation-sysconf.c:305
-#, c-format
-msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Jalankan '%s --help' untuk melihat daftar lengkap pilihan baris perintah yang tersedia.\n"
+#: ../bonobo/bonobo-file-selector-util.c:350
+msgid "Select a file to open"
+msgstr "Pilih berkas untuk dibuka"
 
-#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
-msgid "CORBA CosNaming service."
-msgstr "Layanan CosNaming CORBA."
+#: ../bonobo/bonobo-file-selector-util.c:378
+msgid "Select files to open"
+msgstr "Pilih berkas untuk dibuka"
 
-#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
-msgid "Name service"
-msgstr "Layanan nama"
+#: ../bonobo/bonobo-file-selector-util.c:407
+msgid "Select a filename to save"
+msgstr "Pilih nama berkas untuk disimpan"
 
-#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
-msgid "Notification service"
-msgstr "Layanan notifikasi"
+#: ../bonobo/bonobo-plug.c:425
+msgid "Event Forwarding"
+msgstr "Event Forwarding"
 
-#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
-msgid "Notification service for activation"
-msgstr "Layanan notifikasi aktivasi"
+#: ../bonobo/bonobo-plug.c:426
+msgid "Whether X events should be forwarded"
+msgstr "Menentukan apakah event-event X harus diforward atau tidak"
 
-#: ../activation-server/object-directory-activate.c:235
-msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr "Maaf. Aktifasi obyek shlib pada proses remote belum dapat dilakukan"
-
-#: ../activation-server/object-directory-config-file.c:65
-#, c-format
-msgid "The Bonobo Activation configuration file was not read successfully. Please, check it is valid in: %s"
-msgstr "Berkas konfigurasi Aktifasi Bonobo tidak dapat dibaca sepenuhnya. Silakan periksa dulu keabsahannya: %s"
-
-#: ../activation-server/object-directory-load.c:102
-msgid "a NULL iid is not valid"
-msgstr "iid NULL tidak dapat diterima"
-
-#: ../activation-server/object-directory-load.c:106
-#, c-format
-msgid "iid %s has a NULL type"
-msgstr "iid %s bertipe NULL"
-
-#: ../activation-server/object-directory-load.c:110
-#, c-format
-msgid "iid %s has a NULL location"
-msgstr "iid %s berlokasi NULL"
-
-#: ../activation-server/object-directory-load.c:119
-#, c-format
-msgid "invalid character '%c' in iid '%s'"
-msgstr "karakter '%c' dalam iid '%s' tidak valid"
-
-#: ../activation-server/object-directory-load.c:349
-#, c-format
-msgid "Property '%s' has no value"
-msgstr "Properti '%s' tidak memiliki nilai"
-
-#: ../activation-server/object-directory-load.c:583
-#, c-format
-msgid "Could not parse badly formed XML document %s"
-msgstr "Dokumen XML %s yang rusak ini tidak dapat dibaca"
-
-#: ../activation-server/object-directory-load.c:629
-#, c-format
-msgid "Trying dir %s"
-msgstr "Mencoba direktori %s"
-
-#: ../bonobo-activation/bonobo-activation-fork-server.c:107
-msgid "Child process did not give an error message, unknown failure occurred"
-msgstr "Proses child tidak memberikan pesan kesalahan, terjadi kegagalan tidak dikenal"
-
-#: ../bonobo-activation/bonobo-activation-fork-server.c:237
-#, c-format
-msgid "Failed to read from child process: %s\n"
-msgstr "Gagal saat membaca dari proses child: %s\n"
-
-#: ../bonobo-activation/bonobo-activation-fork-server.c:247
-#, c-format
-msgid "EOF from child process\n"
-msgstr "EOF dari proses anak\n"
-
-#: ../bonobo-activation/bonobo-activation-fork-server.c:438
-msgid "Couldn't spawn a new process"
-msgstr "Tidak dapat menjalankan proses baru"
-
-#: ../bonobo-activation/bonobo-activation-init.c:352
-#: ../bonobo-activation/bonobo-activation-init.c:397
-msgid "File descriptor to print IOR on"
-msgstr "Descriptor berkas tempat mencetak IOR"
-
-#: ../bonobo-activation/bonobo-activation-init.c:354
-#: ../bonobo-activation/bonobo-activation-init.c:399
-msgid "IID to activate"
-msgstr "IID untuk diaktivasi"
-
-#: ../bonobo-activation/bonobo-activation-init.c:356
-#: ../bonobo-activation/bonobo-activation-init.c:401
-msgid "Prevent registering of server with OAF"
-msgstr "Mencegah pendaftaran server dengan OAF"
-
-#: ../bonobo-activation/bonobo-activation-init.c:409
-msgid "Bonobo Activation options:"
-msgstr "Pilihan Aktivasi Bonobo:"
-
-#: ../bonobo-activation/bonobo-activation-init.c:410
-msgid "Show Bonobo Activation options"
-msgstr "Tampilkan pilihan Aktivasi Bonobo"
-
-#: ../bonobo-activation/bonobo-activation-init.c:518
-msgid "Bonobo activation options"
-msgstr "Pilihan aktivasi Bonobo"
-
-#: ../bonobo-activation/bonobo-activation-shlib.c:107
-#, c-format
-msgid "g_module_open of `%s' failed with `%s'"
-msgstr "g_module_open '%s' gagal dengan '%s'"
-
-#: ../bonobo-activation/bonobo-activation-shlib.c:126
-#: ../bonobo-activation/bonobo-activation-shlib.c:163
-#, c-format
-msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
-msgstr "Tidak bisa mencari simbol Bonobo_Plugin_info pada `%s'"
-
-#: ../bonobo-activation/bonobo-activation-shlib.c:212
-#, c-format
-msgid "Factory `%s' returned NIL for `%s'"
-msgstr "Factory '%s' memberikan NIL untuk '%s'"
-
-#: ../bonobo-activation/bonobo-activation-shlib.c:229
-#, c-format
-msgid "Shlib `%s' didn't contain `%s'"
-msgstr "Shlib '%s' tidak berisi '%s'"
-
-#: ../bonobo/bonobo-application.c:352
+#: ../bonobo/bonobo-selector-widget.c:300 ../bonobo/bonobo-window.c:347
+#: ../tools/browser/component-details.c:108
+#: ../tools/browser/component-list.c:369
 msgid "Name"
 msgstr "Nama"
 
-#: ../bonobo/bonobo-application.c:352
-msgid "Application unique name"
-msgstr "Nama unik aplikasi"
+#: ../bonobo/bonobo-selector-widget.c:322
+#: ../tools/browser/component-details.c:109
+msgid "Description"
+msgstr "Deskripsi"
 
-#: ../bonobo/bonobo-object.c:929
-msgid "POA"
-msgstr "POA"
+#: ../bonobo/bonobo-selector.c:343
+msgid "Interfaces required"
+msgstr "Nama interface yang harus ada"
 
-#: ../bonobo/bonobo-object.c:929
-msgid "Custom CORBA POA"
-msgstr "POA CORBA custom"
-
-#: ../bonobo/bonobo-exception.c:154
-msgid "An unsupported action was attempted"
-msgstr "Aksi yang tidak dikenal terjadi"
-
-#: ../bonobo/bonobo-exception.c:157
-msgid "IO Error"
-msgstr "Kesalahan IO"
-
-#: ../bonobo/bonobo-exception.c:160
-msgid "Invalid argument value"
-msgstr "Nilai argumen tidak sah"
-
-#: ../bonobo/bonobo-exception.c:164
-msgid "Object not found"
-msgstr "Objek tidak ditemukan"
-
-#: ../bonobo/bonobo-exception.c:167
-msgid "Syntax error in object description"
-msgstr "Ada kesalahan sintaks pada deskripsi objek"
-
-#: ../bonobo/bonobo-exception.c:172
-msgid "Cannot activate object from factory"
-msgstr "Tidak dapat mengaktifkan objek dari factory"
-
-#: ../bonobo/bonobo-exception.c:177
-msgid "No permission to access stream"
-msgstr "Akses ke stream tidak diizinkan"
-
-#: ../bonobo/bonobo-exception.c:180
-msgid "An unsupported stream action was attempted"
-msgstr "Kegiatan stream tidak dikenal terjadi"
-
-#: ../bonobo/bonobo-exception.c:183
-msgid "IO Error on stream"
-msgstr "Kesalahan IO pada stream"
-
-#: ../bonobo/bonobo-exception.c:187
-msgid "IO Error on storage"
-msgstr "Kesalahan IO pada penyimpanan"
-
-#: ../bonobo/bonobo-exception.c:190
-msgid "Name already exists in storage"
-msgstr "Nama sudah ada pada tempat penyimpanan"
-
-#: ../bonobo/bonobo-exception.c:193
-msgid "Object not found in storage"
-msgstr "Obyek tidak ada pada tempat penyimpanan"
-
-#: ../bonobo/bonobo-exception.c:196
-msgid "No permission to do operation on storage"
-msgstr "Tidak ada izin untuk melakukan kegiatan pada tempat penyimpanan"
-
-#: ../bonobo/bonobo-exception.c:198
-msgid "An unsupported storage action was attempted"
-msgstr "Kegiatan pada tempat penyimpanan yang tidak dikenal terjadi"
-
-#: ../bonobo/bonobo-exception.c:200
-msgid "Object is not a stream"
-msgstr "Obyek bukan stream"
-
-#: ../bonobo/bonobo-exception.c:203
-msgid "Object is not a storage"
-msgstr "Obyek bukan tempat penyimpanan"
-
-#: ../bonobo/bonobo-exception.c:206
-msgid "Storage is not empty"
-msgstr "Tempat penyimpanan masih ada isinya"
-
-#: ../bonobo/bonobo-exception.c:210
-msgid "malformed user interface XML description"
-msgstr "deskripsi XML untuk user interface tidak benar"
-
-#: ../bonobo/bonobo-exception.c:213
-msgid "invalid path to XML user interface element"
-msgstr "path XML pada elemen user interface tidak benar"
-
-#: ../bonobo/bonobo-exception.c:216
-msgid "the requested UI attribute didn't exist"
-msgstr "atribut UI yang diminta tidak ada"
-
-#: ../bonobo/bonobo-exception.c:219
-msgid "Unknown command or verb"
-msgstr "Perintah tidak dikenal"
-
-#: ../bonobo/bonobo-exception.c:222
-msgid "Command is insensitive"
-msgstr "Perintah tidak peka"
-
-#: ../bonobo/bonobo-exception.c:226
-msgid "incorrect data type"
-msgstr "tipe data salah"
-
-#: ../bonobo/bonobo-exception.c:229
-msgid "stream not found"
-msgstr "stream tidak ditemukan"
-
-#: ../bonobo/bonobo-exception.c:233
-msgid "property not found"
-msgstr "properti tidak ditemukan"
-
-#: ../bonobo/bonobo-exception.c:236
-msgid "property has invalid type"
-msgstr "salah tipe pada properti"
-
-#: ../bonobo/bonobo-exception.c:239
-msgid "property is read only"
-msgstr "properti hanya bisa dibaca"
-
-#: ../bonobo/bonobo-exception.c:242
-msgid "config database backend failed "
-msgstr "database backend untuk konfigurasi gagal "
-
-#: ../bonobo/bonobo-exception.c:246
-msgid "Moniker interface cannot be found"
-msgstr "Antar muka moniker tidak ditemukan"
-
-#: ../bonobo/bonobo-exception.c:249
-msgid "Moniker activation timed out"
-msgstr "Aktifasi moniker time out"
-
-#: ../bonobo/bonobo-exception.c:252
-msgid "Syntax error within moniker"
-msgstr "Kesalahan sintaks pada moniker"
-
-#: ../bonobo/bonobo-exception.c:255
-msgid "Moniker has an unknown moniker prefix"
-msgstr "Moniker menggunakan prefiks yang tidak dikenal"
-
-#: ../bonobo/bonobo-exception.c:279
-msgid "Error checking error; no exception"
-msgstr "Kesalahan saat mengecek kesalahan; tidak ada exception"
-
-#: ../bonobo/bonobo-exception.c:288
-msgid "General activation error with no description"
-msgstr "Ada kesalahan aktivasi tanpa keterangan"
-
-#: ../bonobo/bonobo-moniker.c:342
-#, c-format
-msgid "Failed to resolve, or extend '%s'"
-msgstr "Gagal untuk mengurai atau mengembangkan '%s'"
-
-#: ../bonobo/bonobo-moniker-util.c:247
-msgid "Failed to activate object"
-msgstr "Gagal untuk aktivasi obyek"
-
-#: ../monikers/bonobo-moniker-oaf.c:53
-#, c-format
-msgid "Exception activating '%s'"
-msgstr "Ada exception saat aktivasi '%s'"
-
-#: ../monikers/bonobo-moniker-oaf.c:62
-#, c-format
-msgid "Failed to activate '%s'"
-msgstr "Gagal saat aktivasi '%s'"
-
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
-msgid "HTTP Moniker"
-msgstr "Moniker HTTP"
-
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:2
-msgid "ORB IOR handling moniker"
-msgstr "Moniker untuk menangani ORB IOR"
-
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:3
-msgid "Standard Moniker factory"
-msgstr "Pabrik Moniker Standar"
-
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:4
-msgid "generic Oaf activation moniker"
-msgstr "aktifasi moniker Oaf generik"
-
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:5
-msgid "generic Oaf query moniker"
-msgstr "moniker query Oaf generik"
-
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:6
-msgid "generic factory 'new' moniker"
-msgstr "moniker 'new' pabrik generik"
-
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:7
-msgid "generic item moniker"
-msgstr "butir moniker generik"
-
-#: ../monikers/Bonobo_Moniker_std.server.in.in.h:8
-msgid "stream MonikerExtender"
-msgstr "stream MonikerExtender"
-
-#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
-msgid "Bonobo Echo server factory"
-msgstr "Pabrik server Echo Bonobo"
-
-#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
-msgid "Bonobo Echo server sample program"
-msgstr "Program contoh untuk server Echo Bonobo"
-
-#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
-msgid "Echo component"
-msgstr "Komponen Echo"
-
-#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
-msgid "Echo component factory"
-msgstr "Pabrik komponen Echo"
-
-#: ../samples/echo/echo-client.c:24
-msgid "I could not initialize Bonobo"
-msgstr "Saya tidak bisa inisialisasi Bonobo"
-
-#: ../samples/echo/echo-client.c:35
-msgid "Could not create an instance of the sample echo component"
-msgstr "Tidak dapat membuat instans baru dari komponen sampel echo"
-
-#: ../samples/echo/echo-client.c:47
-#, c-format
-msgid "An exception occurred '%s'"
-msgstr "Ada exception yang terjadi '%s'"
-
-#: ../utils/bonobo-activation-sysconf.c:83
-#, c-format
-msgid "Could not save configuration file.\n"
-msgstr "Tidak dapat menyimpan berkas konfigurasi.\n"
-
-#: ../utils/bonobo-activation-sysconf.c:84
-#, c-format
-msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "Silakan periksa dulu apakah bisa menulis ke berkas '%s'.\n"
-
-#: ../utils/bonobo-activation-sysconf.c:87
-#, c-format
-msgid "Successfully wrote configuration file.\n"
-msgstr "Berkas konfigurasi berhasil dibuat.\n"
-
-#: ../utils/bonobo-activation-sysconf.c:104
-#, c-format
+#: ../bonobo/bonobo-selector.c:344
 msgid ""
-"configuration file is:\n"
-"    %s\n"
+"A NULL-terminated array of interfaces which a server must support in order "
+"to be listed in the selector. Defaults to \"IDL:Bonobo/Embeddable:1.0\" if "
+"no interfaces are listed"
 msgstr ""
-"berkas konfigurasinya adalah:\n"
-"    %s\n"
+"Array (NULL-terminated) berisi interface yang hendak digunakan oleh server "
+"agar bisa didaftar pada selektor. Jika belum ada isinya, maka defaultnya "
+"bernilai \"IDL:Bonobo/Embeddable:1.0\""
 
-#: ../utils/bonobo-activation-sysconf.c:146
-#, c-format
-msgid "%s already in configuration file\n"
-msgstr "%s sudah ada pada berkas konfigurasi\n"
+#: ../bonobo/bonobo-selector.c:346
+msgid "Interface required entry"
+msgstr "Entri untuk nama interface"
 
-#: ../utils/bonobo-activation-sysconf.c:166
-#, c-format
-msgid "there is not a properly structured configuration file\n"
-msgstr "tidak ada berkas konfigurasi yang benar\n"
+#: ../bonobo/bonobo-selector.c:347
+msgid "One of the interfaces that's required"
+msgstr "Salah satu nama interface yang harus ada"
 
-#: ../utils/bonobo-activation-sysconf.c:237
-#, c-format
-msgid "Bonobo-activation configuration file contains:\n"
-msgstr "berkas konfigurasi Bonobo-activation berisi:\n"
+#: ../bonobo/bonobo-ui-config-widget.c:267
+msgid "Visible"
+msgstr "Terlihat"
 
-#: ../utils/bonobo-activation-sysconf.c:267
-msgid "Directory to remove from configuration file"
-msgstr "Direktori yang hendak dihapus dari berkas konfigurasi"
+#: ../bonobo/bonobo-ui-config-widget.c:274
+msgid "_Show"
+msgstr "_Tampilkan"
 
-#: ../utils/bonobo-activation-sysconf.c:267
-#: ../utils/bonobo-activation-sysconf.c:269
-msgid "PATH"
-msgstr "PATH"
+#: ../bonobo/bonobo-ui-config-widget.c:281
+msgid "_Hide"
+msgstr "_Sembunyikan"
 
-#: ../utils/bonobo-activation-sysconf.c:269
-msgid "Directory to add to configuration file"
-msgstr "Direktori untuk ditambahkan pada berkas konfigurasi"
+#: ../bonobo/bonobo-ui-config-widget.c:287
+msgid "_View tooltips"
+msgstr "_Lihat tooltips"
 
-#: ../utils/bonobo-activation-sysconf.c:271
-msgid "Display directories in configuration file"
-msgstr "Tampilkan direktori pada berkas konfigurasi"
+#: ../bonobo/bonobo-ui-config-widget.c:292
+msgid "Toolbars"
+msgstr "Bilah Alat"
 
-#: ../utils/bonobo-activation-sysconf.c:273
-msgid "Display path to configuration file"
-msgstr "Tampilkan path ke berkas konfigurasi"
+#: ../bonobo/bonobo-ui-config-widget.c:302
+msgid "toolbars"
+msgstr "bilah alat"
 
+#: ../bonobo/bonobo-ui-config-widget.c:313
+#: ../bonobo/bonobo-ui-sync-toolbar.c:568
+msgid "Look"
+msgstr "Lihat"
+
+#: ../bonobo/bonobo-ui-config-widget.c:322
+#: ../bonobo/bonobo-ui-sync-toolbar.c:568
+msgid "_Icon"
+msgstr "_Ikon"
+
+#: ../bonobo/bonobo-ui-config-widget.c:328
+msgid "_Text and Icon"
+msgstr "_Teks dan Ikon"
+
+#: ../bonobo/bonobo-ui-config-widget.c:334
+msgid "Text only"
+msgstr "Hanya teks"
+
+#: ../bonobo/bonobo-ui-config-widget.c:340
+msgid "_Priority text only"
+msgstr "Teks yang menjadi _prioritas saja"
+
+#: ../bonobo/bonobo-ui-engine.c:93
+msgid "Debug"
+msgstr "Debug"
+
+#: ../bonobo/bonobo-ui-engine.c:93
+msgid "_Dump XML"
+msgstr "_Dump XML"
+
+#: ../bonobo/bonobo-ui-engine.c:94
+msgid "Dump the entire UI's XML description to the console"
+msgstr "Perlihatkan semua deskripsi UI ke konsol"
+
+#: ../bonobo/bonobo-ui-engine-config.c:524
+msgid "Configure UI"
+msgstr "Konfigurasikan UI"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:131
+msgid "Gdk debugging flags to set"
+msgstr "Flag debug Gdk yang hendak diset"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:131 ../bonobo/bonobo-ui-init-gtk.c:134
+#: ../bonobo/bonobo-ui-init-gtk.c:162 ../bonobo/bonobo-ui-init-gtk.c:165
+msgid "FLAGS"
+msgstr "FLAG"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:134
+msgid "Gdk debugging flags to unset"
+msgstr "Flag debug Gdk yang hendak dihapus"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:138
+msgid "X display to use"
+msgstr "Display X yang hendak digunakan"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:138
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:142
+msgid "X screen to use"
+msgstr "Layar X yang hendak digunakan"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:142
+msgid "SCREEN"
+msgstr "SCREEN"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:146
+msgid "Make X calls synchronous"
+msgstr "Buat call X sinkoronus"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:152
+msgid "Don't use X shared memory extension"
+msgstr "Jangan pakai shared memory X"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:156
+msgid "Program name as used by the window manager"
+msgstr "Nama program yang akan digunakan window manager"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:156
+msgid "NAME"
+msgstr "NAMA"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:159
+msgid "Program class as used by the window manager"
+msgstr "Kelas program yang akan digunakan window manager"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:159
+msgid "CLASS"
+msgstr "KELAS"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:162
+msgid "Gtk+ debugging flags to set"
+msgstr "Flag debug Gtk+ yang hendak diset"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:165
+msgid "Gtk+ debugging flags to unset"
+msgstr "Flag Gtk+ yang hendak dihapus"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:168
+msgid "Make all warnings fatal"
+msgstr "Jadikan semua pesan warning menjadi pesan fatal"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:171
+msgid "Load an additional Gtk module"
+msgstr "Load modul tambahan Gtk lainnya"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:171
+msgid "MODULE"
+msgstr "MODULE"
+
+#: ../bonobo/bonobo-ui-init-gtk.c:187
+msgid "GTK+"
+msgstr "GTK+"
+
+#: ../bonobo/bonobo-ui-main.c:281
+msgid "Bonobo GUI support"
+msgstr "Dukungan GUI Bonobo"
+
+#: ../bonobo/bonobo-ui-sync-toolbar.c:568
+msgid "B_oth"
+msgstr "_Keduanya"
+
+#: ../bonobo/bonobo-ui-sync-toolbar.c:568
+msgid "T_ext"
+msgstr "T_eks"
+
+#: ../bonobo/bonobo-ui-sync-toolbar.c:569
+msgid "Hide t_ips"
+msgstr "Sembuny_ikan tip"
+
+#: ../bonobo/bonobo-ui-sync-toolbar.c:569
+msgid "Show t_ips"
+msgstr "Tampilkan t_ip"
+
+#: ../bonobo/bonobo-ui-sync-toolbar.c:570
+msgid "_Hide toolbar"
+msgstr "Sembunyikan bila_h alat"
+
+#: ../bonobo/bonobo-ui-sync-toolbar.c:570
+msgid "Customi_ze"
+msgstr "_Kustomasi"
+
+#: ../bonobo/bonobo-ui-sync-toolbar.c:571
+msgid "Customize the toolbar"
+msgstr "Mengkostumasi bilah alat"
+
+#: ../bonobo/bonobo-ui-toolbar.c:1117
+msgid "is floating"
+msgstr "mengambang"
+
+#: ../bonobo/bonobo-ui-toolbar.c:1118
+msgid "whether the toolbar is floating"
+msgstr "pilih apakah toolbar harus mengambang atau tidak"
+
+#: ../bonobo/bonobo-ui-toolbar.c:1164
+msgid "Style of bevel around the toolbar"
+msgstr "Gaya bevel disekeliling toolbar"
+
+#: ../bonobo/bonobo-ui-util.c:602
+msgid "Could not display help for this application"
+msgstr "Tak bisa tampilkan bantuan bagi aplikasi ini"
+
+#: ../bonobo/bonobo-ui-util.c:644
+msgid "_Contents"
+msgstr "_Isi"
+
+#: ../bonobo/bonobo-ui-util.c:645
+msgid "View help for this application"
+msgstr "Menampilkan bantuan untuk aplikasi ini"
+
+#: ../bonobo/bonobo-window.c:348
+msgid "Name of the window - used for configuration serialization."
+msgstr "Nama window - digunakan untuk serialization konfigurasi"
+
+#: ../bonobo/bonobo-zoomable.c:326
+msgid "Zoom level"
+msgstr "Tingkat pembesaran"
+
+#: ../bonobo/bonobo-zoomable.c:327
+msgid "The degree of enlargment"
+msgstr "Tingkat pembesaran"
+
+#: ../bonobo/bonobo-zoomable.c:335
+msgid "Minimum Zoom level"
+msgstr "Tingkat pembesaran terkecil"
+
+#: ../bonobo/bonobo-zoomable.c:336
+msgid "The minimum degree of enlargment"
+msgstr "Tingkat pembesaran terkecil"
+
+#: ../bonobo/bonobo-zoomable.c:344
+msgid "Maximum Zoom level"
+msgstr "Tingkat pembesaran terbesar"
+
+#: ../bonobo/bonobo-zoomable.c:345
+msgid "The maximum degree of enlargment"
+msgstr "Tingkat pembesaran terbesar"
+
+#: ../bonobo/bonobo-zoomable.c:353
+msgid "Has a minimum Zoom level"
+msgstr "Ada nilai tingkat pembesaran terkecil"
+
+#: ../bonobo/bonobo-zoomable.c:354
+msgid "Whether we have a valid minimum zoom level"
+msgstr "Menentukan apakah ada nilai tingkat pembesaran terkecil"
+
+#: ../bonobo/bonobo-zoomable.c:361
+msgid "Has a maximum Zoom level"
+msgstr "Ada nilai tingkat pembesaran terbesar"
+
+#: ../bonobo/bonobo-zoomable.c:362
+msgid "Whether we have a valid maximum zoom level"
+msgstr "Menentukan apakah ada nilai tingkat pembesaran terbesar"
+
+#: ../bonobo/bonobo-zoomable.c:369
+msgid "Is continuous"
+msgstr "Kontinyu"
+
+#: ../bonobo/bonobo-zoomable.c:370
+msgid "Whether we zoom continuously (as opposed to jumps)"
+msgstr "Menentukan apakah pembesaran bersifat kontinyu (tidak lompat)"
+
+#: ../samples/bonoboui/Bonobo_Sample_Hello.xml.h:1
+msgid "About this application"
+msgstr "Tentang aplikasi ini"
+
+#: ../samples/bonoboui/Bonobo_Sample_Hello.xml.h:2
+msgid "Select"
+msgstr "Pilih"
+
+#: ../samples/bonoboui/Bonobo_Sample_Hello.xml.h:3
+msgid "_About..."
+msgstr "Tent_ang..."
+
+#: ../samples/bonoboui/Bonobo_Sample_Hello.xml.h:4
+msgid "_Edit"
+msgstr "_Sunting"
+
+#: ../samples/bonoboui/Bonobo_Sample_Hello.xml.h:5
+#: ../tools/browser/bonobo-browser.xml.h:4
+msgid "_File"
+msgstr "_Berkas"
+
+#: ../samples/bonoboui/Bonobo_Sample_Hello.xml.h:6
+msgid "_Select"
+msgstr "_Pilih"
+
+#: ../samples/bonoboui/hello.c:65
+msgid "This does nothing; it is only a demonstration."
+msgstr "Bukan apa-apa; hanya demo."
+
+#: ../samples/bonoboui/hello.c:147
+msgid "BonoboUI-Hello."
+msgstr "Hai, BonoboUI."
+
+#: ../samples/bonoboui/hello.c:219
+msgid "Gnome Hello"
+msgstr "Hai, Gnome"
+
+#. Create Label and put it in the Button:
+#: ../samples/bonoboui/hello.c:274
+msgid "Hello, World!"
+msgstr "Hai, Dunia!"
+
+#: ../samples/bonoboui/hello.c:314
+msgid "Cannot init libbonoboui code"
+msgstr "Tidak dapat menginisialisasi kode libbonoboui"
+
+#: ../samples/controls/bonobo-sample-controls.c:133
+msgid "Could not initialize Bonobo UI"
+msgstr "Tidak dapat menginisialisasi UI Bonobo"
+
+#: ../tools/browser/bonobo-browser.desktop.in.h:1
+msgid "Bonobo Component Browser"
+msgstr "Pencari Komponen Bonobo"
+
+#: ../tools/browser/bonobo-browser.desktop.in.h:2
+msgid "Shows available Bonobo components"
+msgstr "Tampilkan komponen Bonobo yang tersedia"
+
+#: ../tools/browser/bonobo-browser.xml.h:1
+msgid "About this program..."
+msgstr "Tentang program ini..."
+
+#: ../tools/browser/bonobo-browser.xml.h:2
+msgid "Close the current window"
+msgstr "Menutup jendela ini"
+
+#: ../tools/browser/bonobo-browser.xml.h:3
+msgid "Open a new window"
+msgstr "Membuka jendela baru"
+
+#: ../tools/browser/bonobo-browser.xml.h:5
+msgid "_Help"
+msgstr "Ba_ntuan"
+
+#. Build the general tab
+#: ../tools/browser/component-details.c:103
+msgid "General"
+msgstr "Umum"
+
+#: ../tools/browser/component-details.c:110
+#: ../tools/browser/component-list.c:389
+msgid "IID"
+msgstr "IID"
+
+#: ../tools/browser/component-details.c:111
+msgid "Location"
+msgstr "Lokasi"
+
+#. Build the details tab
+#: ../tools/browser/component-details.c:161
+msgid "Details"
+msgstr "Detail"
+
+#: ../tools/browser/component-details.c:162
+msgid "Detailed Information"
+msgstr "Informasi Detail"
+
+#: ../tools/browser/component-list.c:358 ../tools/browser/window.c:283
+msgid "Active"
+msgstr "Aktif"
+
+#: ../tools/browser/component-list.c:379
+msgid "Type"
+msgstr "Jenis"
+
+#: ../tools/browser/window.c:162
+msgid "Component Details"
+msgstr "Detail Komponen"
+
+#: ../tools/browser/window.c:208
+msgid "Bonobo Browser"
+msgstr "Peramban Bonobo"
+
+#: ../tools/browser/window.c:210
+msgid "Copyright 2001, The GNOME Foundation"
+msgstr "Hak Cipta 2001, Yayasan GNOME"
+
+#: ../tools/browser/window.c:211
+msgid "Bonobo component browser"
+msgstr "Peramban komponen Bonobo"
+
+#: ../tools/browser/window.c:214
+msgid "translator-credits"
+msgstr ""
+"Mohammad DAMT <mdamt@bisnisweb.com>, 2005.\n"
+"Andika Triwidada <andika@gmail.com>, 2009.\n"
+"Dirgita <dirgitadevina@yahoo.co.id>, 2010."
+
+#. create the window
+#: ../tools/browser/window.c:240
+msgid "Component Browser"
+msgstr "Peramban Komponen"
+
+#. Fill out the tool bar
+#: ../tools/browser/window.c:280
+msgid "All"
+msgstr "Semua"
+
+#: ../tools/browser/window.c:286
+msgid "Inactive"
+msgstr "Tidak Aktif"
