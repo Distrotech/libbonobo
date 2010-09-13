@@ -1,54 +1,55 @@
 # libbonobo ja.po
-# Copyright (C) 1999-2007 Free Software Foundation, Inc.
+# Copyright (C) 1999-2007,2010 Free Software Foundation, Inc.
 # Yukihiro Nakai <nacai@iname.com>, 1999.
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 1999-2002.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 1999-2002, 2010.
 # Takeshi Aihana <takeshi.aihana@gmail.com>, 2000,2003-2007.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libbonobo trunk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-27 18:28+0900\n"
-"PO-Revision-Date: 2007-01-27 18:23+0900\n"
-"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
+"Project-Id-Version: libbonobo master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=bonobo&component=libbonobo\n"
+"POT-Creation-Date: 2010-09-01 03:12+0000\n"
+"PO-Revision-Date: 2010-09-13 23:53+0900\n"
+"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../activation-server/activation-context-corba.c:523
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "どの子プロセスでサーバが登録されたか分かりませんでした"
 
-#: ../activation-server/activation-context-corba.c:815
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "活性化 ID が正しくありません"
 
-#: ../activation-server/activation-server-main.c:163
+#: ../activation-server/activation-server-main.c:174
 msgid "Directory to read .server files from"
 msgstr ".server ファイルを読み込むディレクトリ"
 
-#: ../activation-server/activation-server-main.c:163
+#: ../activation-server/activation-server-main.c:174
 msgid "DIRECTORY"
 msgstr "DIRECTORY"
 
-#: ../activation-server/activation-server-main.c:166
+#: ../activation-server/activation-server-main.c:177
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr ""
 "ActivationContextとして振る舞う (デフォルトでは ObjectDirectory としてのみ)"
 
-#: ../activation-server/activation-server-main.c:170
+#: ../activation-server/activation-server-main.c:181
 msgid "File descriptor to write IOR to"
 msgstr "IORを書き込むファイル・ディスクリプタ"
 
-#: ../activation-server/activation-server-main.c:170
-#: ../bonobo-activation/bonobo-activation-init.c:356
-#: ../bonobo-activation/bonobo-activation-init.c:392
+#: ../activation-server/activation-server-main.c:181
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:173
+#: ../activation-server/activation-server-main.c:184
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
@@ -58,20 +59,21 @@ msgstr ""
 "行しているセッションの安定性の面から見るといくつか危険な側面を持っているの"
 "で、デバッグを行う時にのみ使用すること)"
 
-#: ../activation-server/activation-server-main.c:181
+#: ../activation-server/activation-server-main.c:192
 msgid "Query expression to evaluate"
 msgstr "評価する問い合わせの式"
 
-#: ../activation-server/activation-server-main.c:181
+#: ../activation-server/activation-server-main.c:192
 msgid "EXPRESSION"
 msgstr "EXPRESSION"
 
-#: ../activation-server/activation-server-main.c:430
-#: ../utils/bonobo-activation-sysconf.c:304
+#: ../activation-server/activation-server-main.c:541
+#: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
-"'%s --help' すると、利用可能な全てのコマンドライン引数の一覧が表示されます\n"
+"'%s --help' すると、利用可能なすべてのコマンドライン引数の一覧が表示されま"
+"す\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -101,38 +103,38 @@ msgid ""
 "check it is valid in: %s"
 msgstr ""
 "Bonobo Activatoin 設定ファイルの読み込みに失敗しました (妥当なものか確認して"
-"下さい : %s)"
+"ください : %s)"
 
-#: ../activation-server/object-directory-load.c:101
+#: ../activation-server/object-directory-load.c:102
 msgid "a NULL iid is not valid"
 msgstr "NULL の iid は有効ではありません"
 
-#: ../activation-server/object-directory-load.c:105
+#: ../activation-server/object-directory-load.c:106
 #, c-format
 msgid "iid %s has a NULL type"
 msgstr "iid %s の型が NULL です"
 
-#: ../activation-server/object-directory-load.c:109
+#: ../activation-server/object-directory-load.c:110
 #, c-format
 msgid "iid %s has a NULL location"
 msgstr "iid %s の場所が NULL です"
 
-#: ../activation-server/object-directory-load.c:118
+#: ../activation-server/object-directory-load.c:119
 #, c-format
 msgid "invalid character '%c' in iid '%s'"
 msgstr "不正な文字 '%c' が iid '%s' の中にあります"
 
-#: ../activation-server/object-directory-load.c:348
+#: ../activation-server/object-directory-load.c:349
 #, c-format
 msgid "Property '%s' has no value"
 msgstr "プロパティ '%s' には値がありません"
 
-#: ../activation-server/object-directory-load.c:580
+#: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "おかしな型式の XML ドキュメント %s を解析できませんでした"
 
-#: ../activation-server/object-directory-load.c:626
+#: ../activation-server/object-directory-load.c:629
 #, c-format
 msgid "Trying dir %s"
 msgstr "ディレクトリ %s の試行中"
@@ -148,37 +150,38 @@ msgid "Failed to read from child process: %s\n"
 msgstr "子プロセスからの読み込みに失敗: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr "子プロセスからの EOF\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:435
+#: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
 msgstr "新規プロセスを生成できませんでした"
 
-#: ../bonobo-activation/bonobo-activation-init.c:356
-#: ../bonobo-activation/bonobo-activation-init.c:392
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "File descriptor to print IOR on"
 msgstr "IOR の出力先のファイル・ディスクリプタ"
 
-#: ../bonobo-activation/bonobo-activation-init.c:358
-#: ../bonobo-activation/bonobo-activation-init.c:394
+#: ../bonobo-activation/bonobo-activation-init.c:354
+#: ../bonobo-activation/bonobo-activation-init.c:399
 msgid "IID to activate"
 msgstr "IID の活性化"
 
-#: ../bonobo-activation/bonobo-activation-init.c:360
-#: ../bonobo-activation/bonobo-activation-init.c:396
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:401
 msgid "Prevent registering of server with OAF"
 msgstr "OAF でサーバ登録の禁止"
 
-#: ../bonobo-activation/bonobo-activation-init.c:404
+#: ../bonobo-activation/bonobo-activation-init.c:409
 msgid "Bonobo Activation options:"
 msgstr "Bonobo 活性化オプション:"
 
-#: ../bonobo-activation/bonobo-activation-init.c:405
+#: ../bonobo-activation/bonobo-activation-init.c:410
 msgid "Show Bonobo Activation options"
 msgstr "Bonobo 活性化オプションを表示する"
 
-#: ../bonobo-activation/bonobo-activation-init.c:513
+#: ../bonobo-activation/bonobo-activation-init.c:518
 msgid "Bonobo activation options"
 msgstr "Bonobo 活性化オプション"
 
@@ -203,19 +206,19 @@ msgstr "ファクトリ '%s' が '%s' に NIL を返しました"
 msgid "Shlib `%s' didn't contain `%s'"
 msgstr "Shlib '%s' は '%s' を含んでいませんでした"
 
-#: ../bonobo/bonobo-application.c:350
+#: ../bonobo/bonobo-application.c:352
 msgid "Name"
 msgstr "名称"
 
-#: ../bonobo/bonobo-application.c:350
+#: ../bonobo/bonobo-application.c:352
 msgid "Application unique name"
 msgstr "アプリケーション固有の名前"
 
-#: ../bonobo/bonobo-object.c:923
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:923
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "カスタム CORBA POA"
 
@@ -355,16 +358,12 @@ msgstr "エラーをチェックする際にエラー: 例外は発生してい�
 msgid "General activation error with no description"
 msgstr "一般的な活性化エラー (説明なし)"
 
-#: ../bonobo/bonobo-generic-factory.h:79 ../bonobo/bonobo-generic-factory.h:83
-msgid "Could not initialize Bonobo"
-msgstr "Bonobo を初期化できませんでした"
-
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
-msgid "Failed to resolve, or extend '%s"
+msgid "Failed to resolve, or extend '%s'"
 msgstr "'%s' の解決、あるいは拡張に失敗しました"
 
-#: ../bonobo/bonobo-moniker-util.c:246
+#: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
 msgstr "オブジェクトの活性化に失敗しました"
 
@@ -426,33 +425,35 @@ msgstr "Echo コンポーネント"
 msgid "Echo component factory"
 msgstr "Echo コンポーネント・ファクトリ"
 
-#: ../samples/echo/echo-client.c:22
+#: ../samples/echo/echo-client.c:24
 msgid "I could not initialize Bonobo"
 msgstr "Bonobo を初期化できません"
 
-#: ../samples/echo/echo-client.c:33
+#: ../samples/echo/echo-client.c:35
 msgid "Could not create an instance of the sample echo component"
 msgstr "サンプルの Echo コンポーネントのインスタンスを作成できませんでした"
 
-#: ../samples/echo/echo-client.c:45
+#: ../samples/echo/echo-client.c:47
 #, c-format
 msgid "An exception occurred '%s'"
 msgstr "例外が発生しました: '%s'"
 
-#: ../utils/bonobo-activation-sysconf.c:82
+#: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "設定ファイルを保存できませんでした\n"
 
-#: ../utils/bonobo-activation-sysconf.c:83
+#: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
 msgid "Please, make sure you have permissions to write to '%s'.\n"
-msgstr "'%s' への書き込み権限を持っているか確認して下さい\n"
+msgstr "'%s' への書き込み権限を持っているか確認してください\n"
 
-#: ../utils/bonobo-activation-sysconf.c:86
+#: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "設定ファイルの書き込みが完了しました\n"
 
-#: ../utils/bonobo-activation-sysconf.c:103
+#: ../utils/bonobo-activation-sysconf.c:104
 #, c-format
 msgid ""
 "configuration file is:\n"
@@ -461,36 +462,41 @@ msgstr ""
 "設定ファイル:\n"
 "    %s\n"
 
-#: ../utils/bonobo-activation-sysconf.c:145
+#: ../utils/bonobo-activation-sysconf.c:146
 #, c-format
 msgid "%s already in configuration file\n"
 msgstr "%s は設定ファイルの中に既に存在しています\n"
 
-#: ../utils/bonobo-activation-sysconf.c:165
+#: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "正しく構造化された設定ファイルがありません\n"
 
-#: ../utils/bonobo-activation-sysconf.c:236
+#: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo activation 設定ファイルの内容:\n"
 
-#: ../utils/bonobo-activation-sysconf.c:266
+#: ../utils/bonobo-activation-sysconf.c:267
 msgid "Directory to remove from configuration file"
 msgstr "設定ファイルから削除するディレクトリ"
 
-#: ../utils/bonobo-activation-sysconf.c:266
-#: ../utils/bonobo-activation-sysconf.c:268
+#: ../utils/bonobo-activation-sysconf.c:267
+#: ../utils/bonobo-activation-sysconf.c:269
 msgid "PATH"
 msgstr "PATH"
 
-#: ../utils/bonobo-activation-sysconf.c:268
+#: ../utils/bonobo-activation-sysconf.c:269
 msgid "Directory to add to configuration file"
 msgstr "設定ファイルへ追加するディレクトリ"
 
-#: ../utils/bonobo-activation-sysconf.c:270
+#: ../utils/bonobo-activation-sysconf.c:271
 msgid "Display directories in configuration file"
 msgstr "設定ファイル中のディレクトリの表示"
 
-#: ../utils/bonobo-activation-sysconf.c:272
+#: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
 msgstr "設定ファイルのパスを表示"
+
+#~ msgid "Could not initialize Bonobo"
+#~ msgstr "Bonobo を初期化できませんでした"
