@@ -16,64 +16,69 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-24 03:48+0000\n"
-"PO-Revision-Date: 2007-04-14 23:44+0200\n"
+"POT-Creation-Date: 2010-09-19 17:41+0200\n"
+"PO-Revision-Date: 2010-09-19 17:25+0200\n"
 "Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: ../activation-server/activation-context-corba.c:525
+#: ../activation-server/activation-context-corba.c:530
 msgid "Couldn't find which child the server was listed in"
 msgstr "Kunne ikke finde ud af hvilken underproces serveren var opført hos"
 
-#: ../activation-server/activation-context-corba.c:817
+#: ../activation-server/activation-context-corba.c:822
 msgid "Not a valid Activation ID"
 msgstr "Ikke en gyldig aktiverings-id"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:174
 msgid "Directory to read .server files from"
 msgstr "Mappe som .server-filer læses fra"
 
-#: ../activation-server/activation-server-main.c:162
+#: ../activation-server/activation-server-main.c:174
 msgid "DIRECTORY"
 msgstr "Mappe"
 
-#: ../activation-server/activation-server-main.c:165
+#: ../activation-server/activation-server-main.c:177
 msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
 msgstr "Virk som en ActivationContext (standard er kun som et ObjectDirectory)"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:181
 msgid "File descriptor to write IOR to"
 msgstr "Fildeskriptor som IOR skal skrives til"
 
-#: ../activation-server/activation-server-main.c:169
+#: ../activation-server/activation-server-main.c:181
 #: ../bonobo-activation/bonobo-activation-init.c:352
 #: ../bonobo-activation/bonobo-activation-init.c:397
 msgid "FD"
 msgstr "FD"
 
-#: ../activation-server/activation-server-main.c:172
+#: ../activation-server/activation-server-main.c:184
 msgid ""
 "Register as the user's activation server without locking.  Warning: this "
 "option can have dangerous side effects on the stability of the user's "
 "running session, and should only be used for debugging purposes"
-msgstr "Registrér som brugerens aktiveringsserver uden at låse. Advarsel: Denne valgmulighed kan have farlige bivirkninger for brugerens kørerende session og bør kun bruges til fejlfindingsformål"
+msgstr ""
+"Registrér som brugerens aktiveringsserver uden at låse. Advarsel: Denne "
+"valgmulighed kan have farlige bivirkninger for brugerens kørerende session "
+"og bør kun bruges til fejlfindingsformål"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:192
 msgid "Query expression to evaluate"
 msgstr "Søgeudtryk der skal evalueres"
 
-#: ../activation-server/activation-server-main.c:180
+#: ../activation-server/activation-server-main.c:192
 msgid "EXPRESSION"
 msgstr "UDTRYK"
 
-#: ../activation-server/activation-server-main.c:429
+#: ../activation-server/activation-server-main.c:541
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr "Kør \"%s --help\" for at se den fulde liste af tilgængelige kommandolinjetilvalg.\n"
+msgstr ""
+"Kør \"%s --help\" for at se den fulde liste af tilgængelige "
+"kommandolinjetilvalg.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -129,12 +134,12 @@ msgstr "ugyldigt tegn '%c' i IID '%s'"
 msgid "Property '%s' has no value"
 msgstr "Egenskaben '%s' har ingen værdi"
 
-#: ../activation-server/object-directory-load.c:581
+#: ../activation-server/object-directory-load.c:583
 #, c-format
 msgid "Could not parse badly formed XML document %s"
 msgstr "Kunne ikke fortolke ugyldig udformet XML-dokument %s"
 
-#: ../activation-server/object-directory-load.c:627
+#: ../activation-server/object-directory-load.c:629
 #, c-format
 msgid "Trying dir %s"
 msgstr "Forsøger mappe %s"
@@ -149,10 +154,11 @@ msgid "Failed to read from child process: %s\n"
 msgstr "Det mislykkedes at læse fra underproces: %s\n"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
 msgid "EOF from child process\n"
 msgstr "EOF fra underproces\n"
 
-#: ../bonobo-activation/bonobo-activation-fork-server.c:434
+#: ../bonobo-activation/bonobo-activation-fork-server.c:438
 msgid "Couldn't spawn a new process"
 msgstr "Kunne ikke oprette en ny proces"
 
@@ -212,11 +218,11 @@ msgstr "Navn"
 msgid "Application unique name"
 msgstr "Program-unikt navn"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "POA"
 msgstr "POA"
 
-#: ../bonobo/bonobo-object.c:926
+#: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
 msgstr "Brugerdefineret CORBA POA"
 
@@ -362,8 +368,8 @@ msgstr "Generel fejl under aktivering uden beskrivelse"
 # imidlertid er den betydning vist overflødig her
 #: ../bonobo/bonobo-moniker.c:342
 #, c-format
-msgid "Failed to resolve, or extend '%s"
-msgstr "Det mislykkedes at finde '%s"
+msgid "Failed to resolve, or extend '%s'"
+msgstr "Kunne ikke finde '%s'"
 
 #: ../bonobo/bonobo-moniker-util.c:247
 msgid "Failed to activate object"
@@ -442,6 +448,7 @@ msgid "An exception occurred '%s'"
 msgstr "En undtagelse opstod '%s'"
 
 #: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
 msgid "Could not save configuration file.\n"
 msgstr "Kunne ikke gemme konfigurationsfil.\n"
 
@@ -451,6 +458,7 @@ msgid "Please, make sure you have permissions to write to '%s'.\n"
 msgstr "Sikr dig venligst at du har rettigheder til at skrive til '%s'.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
 msgid "Successfully wrote configuration file.\n"
 msgstr "Skrev konfigurationsfil.\n"
 
@@ -469,10 +477,12 @@ msgid "%s already in configuration file\n"
 msgstr "%s er allerede i konfigurationsfil\n"
 
 #: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
 msgid "there is not a properly structured configuration file\n"
 msgstr "der er ikke en korrekt struktureret konfigurationsfil\n"
 
 #: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
 msgid "Bonobo-activation configuration file contains:\n"
 msgstr "Bonobo-aktiverings-konfigurationsfilen indeholder:\n"
 
