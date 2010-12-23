@@ -9,9 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libbonobo\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=bonobo&component=libbonobo\n"
-"POT-Creation-Date: 2010-11-23 15:02+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=bonobo&component=libbonobo\n"
+"POT-Creation-Date: 2010-12-10 18:33+0000\n"
 "PO-Revision-Date: 2010-12-08 13:34+0800\n"
 "Last-Translator: dolkun731 <dolkun731@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -29,7 +28,7 @@ msgstr "ئىناۋەتلىك ئاكتىپلاش ID سى ئەمەس"
 
 #: ../activation-server/activation-server-main.c:174
 msgid "Directory to read .server files from"
-msgstr " .server ھۆججىتىنى ئوقۇيدىغان مۇندەرىجە"
+msgstr ".server ھۆججىتىنى ئوقۇشتا ئىشلىتىدىغان مۇندەرىجە"
 
 #: ../activation-server/activation-server-main.c:174
 msgid "DIRECTORY"
@@ -68,9 +67,7 @@ msgstr "EXPRESSION"
 #: ../utils/bonobo-activation-sysconf.c:305
 #, c-format
 msgid "Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"'%s --help' ئىجرا قىلىنسا بۇيرۇق قۇرى تاللانمىسىنىڭ تولۇق تىزىملىكى "
-"كۆرۈنىدۇ.\n"
+msgstr "'%s --help' ئىجرا قىلىنسا بۇيرۇق قۇرى تاللانمىسىنىڭ تولۇق تىزىملىكى كۆرۈنىدۇ.\n"
 
 #: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
 msgid "CORBA CosNaming service."
@@ -90,17 +87,14 @@ msgstr "ئاكتىپلىنىدىغان ئۇقتۇرۇش مۇلازىمىتى"
 
 #: ../activation-server/object-directory-activate.c:235
 msgid "We don't handle activating shlib objects in a remote process yet"
-msgstr ""
-"بىز يىراق مەشغۇلاتتىكى shilib نەڭىنى ئاكتىپلايدىغان ئىشنى تېخى قىلالمايمىز"
+msgstr "بىز يىراق مەشغۇلاتتىكى shilib نەڭىنى ئاكتىپلايدىغان ئىشنى تېخى قىلالمايمىز"
 
 #: ../activation-server/object-directory-config-file.c:65
 #, c-format
 msgid ""
 "The Bonobo Activation configuration file was not read successfully. Please, "
 "check it is valid in: %s"
-msgstr ""
-"Bonobo ئاكتىپلاش سەپلىمە ھۆججىتىنى ئوقۇش مۇۋەپپەقىيەتلىك بولمىدى. ئۇنىڭ %s "
-"نىڭ ئىچىدە ئىناۋەتلىك ئىكەنلىكىنى تەكشۈرۈڭ"
+msgstr "Bonobo ئاكتىپلاش سەپلىمە ھۆججىتىنى ئوقۇش مۇۋەپپەقىيەتلىك بولمىدى. ئۇنىڭ %s نىڭ ئىچىدە ئىناۋەتلىك ئىكەنلىكىنى تەكشۈرۈڭ"
 
 #: ../activation-server/object-directory-load.c:102
 msgid "a NULL iid is not valid"
@@ -138,8 +132,7 @@ msgstr "مۇندەرىجە %s نى سىناۋاتىدۇ"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:107
 msgid "Child process did not give an error message, unknown failure occurred"
-msgstr ""
-"بالا process ھېچقانداق خاتالىق ئۇچۇرى چىقارمىدى، نامەلۇم خاتالىق يۈز بەردى"
+msgstr "بالا process ھېچقانداق خاتالىق ئۇچۇرى چىقارمىدى، نامەلۇم خاتالىق يۈز بەردى"
 
 #: ../bonobo-activation/bonobo-activation-fork-server.c:237
 #, c-format
@@ -163,7 +156,7 @@ msgstr ""
 #: ../bonobo-activation/bonobo-activation-init.c:354
 #: ../bonobo-activation/bonobo-activation-init.c:399
 msgid "IID to activate"
-msgstr "ئاكتىپلايدىغان ID"
+msgstr "ئاكتىپلايدىغان IID"
 
 #: ../bonobo-activation/bonobo-activation-init.c:356
 #: ../bonobo-activation/bonobo-activation-init.c:401
@@ -217,7 +210,7 @@ msgstr "POA"
 
 #: ../bonobo/bonobo-object.c:929
 msgid "Custom CORBA POA"
-msgstr "ئىختىيارىي CORBA POA  "
+msgstr "ئىختىيارىي CORBA POA"
 
 #: ../bonobo/bonobo-exception.c:154
 msgid "An unsupported action was attempted"
@@ -253,15 +246,15 @@ msgstr "ئىشلەتكىلى بولمايدىغان ئېقىم مەھسۇلات�
 
 #: ../bonobo/bonobo-exception.c:183
 msgid "IO Error on stream"
-msgstr "ئېقىمدا IO خاتالىقى كۆرۈلدى"
+msgstr "ئېقىمدا IO خاتالىقى بار"
 
 #: ../bonobo/bonobo-exception.c:187
 msgid "IO Error on storage"
-msgstr "ساقلىغۇچ(storage) تا IO خاتالىقى كۆرۈلدى"
+msgstr "ساقلىغۇچتا IO خاتالىقى بار"
 
 #: ../bonobo/bonobo-exception.c:190
 msgid "Name already exists in storage"
-msgstr "ساقلىغۇچ(storage) بۇ ئىسىم مەۋجۇت"
+msgstr "ساقلىغۇچتا(storage) بۇ ئات مەۋجۇت"
 
 #: ../bonobo/bonobo-exception.c:193
 msgid "Object not found in storage"
@@ -333,7 +326,7 @@ msgstr ""
 
 #: ../bonobo/bonobo-exception.c:246
 msgid "Moniker interface cannot be found"
-msgstr "Moniker ئارايۈزنى تاپقىلى بولمىدى "
+msgstr "Moniker ئارايۈزىنى تاپقىلى بولمىدى"
 
 #: ../bonobo/bonobo-exception.c:249
 msgid "Moniker activation timed out"
@@ -341,7 +334,7 @@ msgstr "Moniker نى ئاكتىپلاش ۋاقتى قەرەلدىن ئېشىپ �
 
 #: ../bonobo/bonobo-exception.c:252
 msgid "Syntax error within moniker"
-msgstr "Moniker دا گرامماتىكىلىق خاتالىق بار "
+msgstr "Moniker دا گرامماتىكىلىق خاتالىق بار"
 
 #: ../bonobo/bonobo-exception.c:255
 msgid "Moniker has an unknown moniker prefix"
@@ -349,7 +342,7 @@ msgstr "Moniker دا بىر نامەلۇم ئالدى قوشۇلغۇچى بار"
 
 #: ../bonobo/bonobo-exception.c:279
 msgid "Error checking error; no exception"
-msgstr "خاتالىقنى تەكشۈرۈۋاتقاندا خاتالىق كۆرۈلدى؛ بىنورماللىق يوق"
+msgstr "خاتالىقنى تەكشۈرۈۋاتقاندا خاتالىق كۆرۈلدى؛ exception يوق"
 
 #: ../bonobo/bonobo-exception.c:288
 msgid "General activation error with no description"
@@ -372,7 +365,7 @@ msgstr "«%s» نى ئاكتىپلاۋاتقاندا بىنورماللىق يۈ
 #: ../monikers/bonobo-moniker-oaf.c:62
 #, c-format
 msgid "Failed to activate '%s'"
-msgstr "«%s» ئاكتىپلاش مەغلۇپ بولدى"
+msgstr "'%s' نى ئاكتىپلاش مەغلۇپ بولدى"
 
 #: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
 msgid "HTTP Moniker"
@@ -438,7 +431,7 @@ msgstr "بىنورماللىق كۆرۈلدى «%s»"
 #: ../utils/bonobo-activation-sysconf.c:83
 #, c-format
 msgid "Could not save configuration file.\n"
-msgstr "سەپلىمە ھۆججەتنى ساقلىغىلى بولمىدى.\n"
+msgstr "سەپلىمە ھۆججەتنى ساقلىيالمىدى.\n"
 
 #: ../utils/bonobo-activation-sysconf.c:84
 #, c-format
@@ -455,8 +448,7 @@ msgstr "سەپلىمە ھۆججەت مۇۋەپپەقىيەتلىك يېزىلد�
 msgid ""
 "configuration file is:\n"
 "    %s\n"
-msgstr ""
-"سەپلىمە ھۆججەت：\n"
+msgstr "سەپلىمە ھۆججەت：\n"
 "    %s\n"
 
 #: ../utils/bonobo-activation-sysconf.c:146
@@ -489,8 +481,8 @@ msgstr "سەپلىمە ھۆججەتكە قوشىدىغان مۇندەرىجە"
 
 #: ../utils/bonobo-activation-sysconf.c:271
 msgid "Display directories in configuration file"
-msgstr "سەپلىمە ھۆججەتنىڭ ئىچىدىكى مۇندەرىجىلەرنى كۆرسەت"
+msgstr "سەپلىمە ھۆججەتتىكى مۇندەرىجىلەرنى كۆرسەت"
 
 #: ../utils/bonobo-activation-sysconf.c:273
 msgid "Display path to configuration file"
-msgstr "سەپلىمە ھۆججەتنىڭ يولىنى كۆرسەت"
+msgstr "سەپلىمە ھۆججەت يولىنى كۆرسەت"
