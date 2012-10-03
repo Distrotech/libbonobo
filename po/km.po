@@ -1,0 +1,833 @@
+# translation of po_libbonoboui-2.0-km.po to Khmer
+# Khmer translation for libbonoboui
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the libbonoboui package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# Sok Sophea <sophea@khmeros.info>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: po_libbonoboui-2.0-km\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=bonobo&keywords=I18N+L10N&component=libbonobo\n"
+"POT-Creation-Date: 2012-03-27 06:26+0000\n"
+"PO-Revision-Date: 2012-09-28 11:50+0700\n"
+"Last-Translator: Sok Sophea <sophea@khmeros.info>\n"
+"Language-Team: Khmer <>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WordForge 0.8 RC1\n"
+"X-Language: km-KH\n"
+
+#: ../activation-server/activation-context-corba.c:530
+msgid "Couldn't find which child the server was listed in"
+msgstr "មិន​អាច​រក​ឃើញ​ថា​តើ​កូន​ណាមួយ​ដែល​ម៉ាស៊ីន​បម្រើ​បាន​ភ្ជាប់​ទៅ​ទេ"
+
+#: ../activation-server/activation-context-corba.c:822
+msgid "Not a valid Activation ID"
+msgstr "មិនមែន​ជា​លេខ​សម្គាល់​ការ​ធ្វើឲ្យ​ដែល​ត្រឹមត្រូវ​ទេ"
+
+#: ../activation-server/activation-server-main.c:174
+msgid "Directory to read .server files from"
+msgstr "ថត​ដែល​ត្រូវ​អាន​ឯកសារ .server ចេញពី"
+
+#: ../activation-server/activation-server-main.c:174
+msgid "DIRECTORY"
+msgstr "ថត"
+
+#: ../activation-server/activation-server-main.c:177
+msgid "Serve as an ActivationContext (default is as an ObjectDirectory only)"
+msgstr "ប្រើ​ជា ActivationContext (លំនាំដើម​គឺជា ObjectDirectory តែប៉ុណ្ណោះ)"
+
+#: ../activation-server/activation-server-main.c:181
+msgid "File descriptor to write IOR to"
+msgstr "កម្មវិធី​ពណ៌នា​ឯកសារ​ដើម្បី​សរសេរ​ IOR ទៅកាន់"
+
+#: ../activation-server/activation-server-main.c:181
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
+msgid "FD"
+msgstr "FD"
+
+#: ../activation-server/activation-server-main.c:184
+msgid ""
+"Register as the user's activation server without locking.  Warning: this "
+"option can have dangerous side effects on the stability of the user's "
+"running session, and should only be used for debugging purposes"
+msgstr ""
+"ចុះឈ្មោះ​ជា​ម៉ាស៊ីន​បម្រើ​ការ​ធ្វើឲ្យ​សកម្ម​របស់​អ្នកប្រើ​ដោយ​មិន​ចាក់សោ ។ ព្រមាន ៖ ជម្រើស​នេះ​អាច​មាន​"
+"គ្រោះថ្នាក់​ចំពោះស្ថិរភាព​សម័យ​ដំណើរការ​របស់​អ្នកប្រើ និង​គួរតែ​ត្រូវ​បាន​ប្រើ​ក្នុង​គោលបំណង​បំបាត់​កំហុស​ប៉ុណ្ណោះ"
+
+#: ../activation-server/activation-server-main.c:192
+msgid "Query expression to evaluate"
+msgstr "កន្សោម​សំណួរ​ដើម្បី​វាយតម្លៃ"
+
+#: ../activation-server/activation-server-main.c:192
+msgid "EXPRESSION"
+msgstr "កន្សោម"
+
+#: ../activation-server/activation-server-main.c:541
+#: ../utils/bonobo-activation-sysconf.c:305
+#, c-format
+msgid "Run '%s --help' to see a full list of available command line options.\n"
+msgstr "ដំណើរការ '%s --help' ដើម្បី​មើល​បញ្ជី​ពេញលេញ​របស់​ជម្រើស​បន្ទាត់​ពាក្យ​បញ្ជា​ដែល​មាន ។\n"
+
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:1
+msgid "Name service"
+msgstr "ដាក់ឈ្មោះ​សេវាកម្ម"
+
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:2
+msgid "CORBA CosNaming service."
+msgstr "សេវាកម្ម CORBA CosNaming ។"
+
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:3
+msgid "Notification service"
+msgstr "សេវាកម្ម​ជូនដំណឹង"
+
+#: ../activation-server/Bonobo_CosNaming_NamingContext.server.in.in.h:4
+msgid "Notification service for activation"
+msgstr "សេវាកម្ម​ជូនដំណឹង​សម្រាប់​ការ​ធ្វើឲ្យ​សកម្ម"
+
+#: ../activation-server/object-directory-activate.c:235
+msgid "We don't handle activating shlib objects in a remote process yet"
+msgstr "យើង​មិន​បាន​ធ្វើឲ្យ​វត្ថុ shlib សកម្ម​នៅ​ក្នុង​ដំណើរការ​ពី​ចម្ងាយ​នៅ​ឡើយ​ទេ"
+
+#: ../activation-server/object-directory-config-file.c:65
+#, c-format
+msgid ""
+"The Bonobo Activation configuration file was not read successfully. Please, "
+"check it is valid in: %s"
+msgstr ""
+"ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ​ការ​ធ្វើឲ្យ​សកម្ម Bonobo មិន​បាន​អាន​ដោយ​ជោគជ័យ​ទេ ។ សូម​ពិនិត្យ​ថា​តើ​វា​"
+"ត្រឹមត្រូវ​តាម ៖ %s"
+
+#: ../activation-server/object-directory-load.c:102
+msgid "a NULL iid is not valid"
+msgstr "NULL iid មិន​ត្រឹមត្រូវ​ទេ"
+
+#: ../activation-server/object-directory-load.c:106
+#, c-format
+msgid "iid %s has a NULL type"
+msgstr "iid %s មាន​ប្រភេទ NULL"
+
+#: ../activation-server/object-directory-load.c:110
+#, c-format
+msgid "iid %s has a NULL location"
+msgstr "iid %s មាន​ទីតាំង NULL"
+
+#: ../activation-server/object-directory-load.c:119
+#, c-format
+msgid "invalid character '%c' in iid '%s'"
+msgstr "តួអក្សរ '%c' មិន​ត្រឹមត្រូវ​នៅ​ក្នុង iid '%s'"
+
+#: ../activation-server/object-directory-load.c:349
+#, c-format
+msgid "Property '%s' has no value"
+msgstr "លក្ខណ​សម្បត្តិ '%s' គ្មាន​តម្លៃ"
+
+#: ../activation-server/object-directory-load.c:583
+#, c-format
+msgid "Could not parse badly formed XML document %s"
+msgstr "មិន​អាច​បញ្ជូន​ឯកសារ XML ដែល​មាន​ទម្រង់​មិន​ល្អ​បាន​ទេ %s"
+
+#: ../activation-server/object-directory-load.c:629
+#, c-format
+msgid "Trying dir %s"
+msgstr "ថត​សាកល្បង %s"
+
+#: ../bonobo-activation/bonobo-activation-fork-server.c:107
+msgid "Child process did not give an error message, unknown failure occurred"
+msgstr "ដំណើរការ​កូន​មិន​បាន​ផ្ដល់​សារ​កំហុស​ទេ បរាជ័យ​ដែល​មិន​ស្គាល់​បាន​កើតឡើង"
+
+#: ../bonobo-activation/bonobo-activation-fork-server.c:237
+#, c-format
+msgid "Failed to read from child process: %s\n"
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​អាន​ពី​ដំណើរការ​កូន ៖ %s\n"
+
+#: ../bonobo-activation/bonobo-activation-fork-server.c:247
+#, c-format
+msgid "EOF from child process\n"
+msgstr "EOF ពី​ដំណើរការ​កូន\n"
+
+#: ../bonobo-activation/bonobo-activation-fork-server.c:438
+msgid "Couldn't spawn a new process"
+msgstr "មិន​អាច​បង្កើត​ដំណើរការ​ថ្មី"
+
+#: ../bonobo-activation/bonobo-activation-init.c:352
+#: ../bonobo-activation/bonobo-activation-init.c:397
+msgid "File descriptor to print IOR on"
+msgstr "កម្មវិធី​ពណ៌នា​ឯកសារ​ដើម្បី​បោះពុម្ព IOR"
+
+#: ../bonobo-activation/bonobo-activation-init.c:354
+#: ../bonobo-activation/bonobo-activation-init.c:399
+msgid "IID to activate"
+msgstr "IID ដែល​ត្រូវ​សកម្ម"
+
+#: ../bonobo-activation/bonobo-activation-init.c:356
+#: ../bonobo-activation/bonobo-activation-init.c:401
+msgid "Prevent registering of server with OAF"
+msgstr "រារាំង​ការ​ចុះឈ្មោះ​របស់​ម៉ាស៊ីន​បម្រើ​ជាមួយ OAF"
+
+#: ../bonobo-activation/bonobo-activation-init.c:409
+msgid "Bonobo Activation options:"
+msgstr "ជម្រើស​ការ​ធ្វើឲ្យ Bonobo សកម្ម ៖"
+
+#: ../bonobo-activation/bonobo-activation-init.c:410
+msgid "Show Bonobo Activation options"
+msgstr "បង្ហាញ​ជម្រើស​ការ​ធ្វើឲ្យ Bonobo សកម្ម"
+
+#: ../bonobo-activation/bonobo-activation-init.c:518
+msgid "Bonobo activation options"
+msgstr "ជម្រើស​ការ​ធ្វើឲ្យ Bonobo សកម្ម"
+
+#: ../bonobo-activation/bonobo-activation-shlib.c:107
+#, c-format
+msgid "g_module_open of `%s' failed with `%s'"
+msgstr "g_module_open របស់ `%s' បាន​បរាជ័យ​ជាមួយ `%s'"
+
+#: ../bonobo-activation/bonobo-activation-shlib.c:126
+#: ../bonobo-activation/bonobo-activation-shlib.c:163
+#, c-format
+msgid "Can't find symbol Bonobo_Plugin_info in `%s'"
+msgstr "មិន​អាច​រក​ឃើញ​និមិត្តសញ្ញា Bonobo_Plugin_info នៅ​ក្នុង `%s'"
+
+#: ../bonobo-activation/bonobo-activation-shlib.c:212
+#, c-format
+msgid "Factory `%s' returned NIL for `%s'"
+msgstr "រោងចក្រ `%s' បាន​ត្រឡប់ NIL សម្រាប់ `%s'"
+
+#: ../bonobo-activation/bonobo-activation-shlib.c:229
+#, c-format
+msgid "Shlib `%s' didn't contain `%s'"
+msgstr "Shlib `%s' មិន​មាន `%s'"
+
+#: ../bonobo/bonobo-application.c:352
+msgid "Name"
+msgstr "ឈ្មោះ"
+
+#: ../bonobo/bonobo-application.c:352
+msgid "Application unique name"
+msgstr "កម្មវិធី​ឈ្មោះ​តែមួយ"
+
+#: ../bonobo/bonobo-object.c:929
+msgid "POA"
+msgstr "POA"
+
+#: ../bonobo/bonobo-object.c:929
+msgid "Custom CORBA POA"
+msgstr "CORBA POA តាម​តម្រូវការ"
+
+#: ../bonobo/bonobo-exception.c:154
+msgid "An unsupported action was attempted"
+msgstr "បាន​ប៉ុនប៉ង​អំពើ​ដែល​មិន​គាំទ្រ"
+
+#: ../bonobo/bonobo-exception.c:157
+msgid "IO Error"
+msgstr "កំហុស IO"
+
+#: ../bonobo/bonobo-exception.c:160
+msgid "Invalid argument value"
+msgstr "តម្លៃ​អាគុយម៉ង់​មិន​ត្រឹមត្រូវ"
+
+#: ../bonobo/bonobo-exception.c:164
+msgid "Object not found"
+msgstr "រក​មិន​ឃើញ​វត្ថុ"
+
+#: ../bonobo/bonobo-exception.c:167
+msgid "Syntax error in object description"
+msgstr "កំហុស​វាក្យសម្ពន្ធ​នៅ​ក្នុង​សេចក្ដី​ពណ៌នា​វត្ថុ"
+
+#: ../bonobo/bonobo-exception.c:172
+msgid "Cannot activate object from factory"
+msgstr "មិន​អាច​ធ្វើឲ្យ​វត្ថុ​សកម្ម​ពី​រោងចក្រ​បាន​ទេ"
+
+#: ../bonobo/bonobo-exception.c:177
+msgid "No permission to access stream"
+msgstr "គ្មាន​សិទ្ធិ​ចូល​ដំណើរការ​ស្ទ្រីម​ទេ"
+
+#: ../bonobo/bonobo-exception.c:180
+msgid "An unsupported stream action was attempted"
+msgstr "បាន​ប៉ុនប៉ង​អំពើ​ស្ទ្រីម​ដែល​មិន​គាំទ្រ"
+
+#: ../bonobo/bonobo-exception.c:183
+msgid "IO Error on stream"
+msgstr "កំហុស IO នៅ​ពេល​ស្ទ្រីម"
+
+#: ../bonobo/bonobo-exception.c:187
+msgid "IO Error on storage"
+msgstr "កំហុស IO នៅ​ពេល​ផ្ទុក"
+
+#: ../bonobo/bonobo-exception.c:190
+msgid "Name already exists in storage"
+msgstr "ឈ្មោះ​មាន​រួចហើយ​នៅ​ក្នុង​ឧបករណ៍​ផ្ទុក"
+
+#: ../bonobo/bonobo-exception.c:193
+msgid "Object not found in storage"
+msgstr "រក​មិន​ឃើញ​វត្ថុ​នៅ​ក្នុង​ឧបករណ៍​ផ្ទុក"
+
+#: ../bonobo/bonobo-exception.c:196
+msgid "No permission to do operation on storage"
+msgstr "គ្មាន​សិទ្ធិ​ក្នុង​ការ​ធ្វើ​ប្រតិបត្តិការ​សម្រាប់​ការ​ផ្ទុក​ទេ​"
+
+#: ../bonobo/bonobo-exception.c:198
+msgid "An unsupported storage action was attempted"
+msgstr "បាន​ប៉ុនប៉ង​សកម្មភាព​ផ្ទុក​ដែល​មិន​គាំទ្រ"
+
+#: ../bonobo/bonobo-exception.c:200
+msgid "Object is not a stream"
+msgstr "វត្ថុ​មិនមែន​ជា​ស្ទ្រីម​ទេ"
+
+#: ../bonobo/bonobo-exception.c:203
+msgid "Object is not a storage"
+msgstr "វត្ថុ​មិនមែន​ជា​ឧបករណ៍​ផ្ទុក"
+
+#: ../bonobo/bonobo-exception.c:206
+msgid "Storage is not empty"
+msgstr "ឧបករណ៍​ផ្ទុក​គឺ​ទទេ"
+
+#: ../bonobo/bonobo-exception.c:210
+msgid "malformed user interface XML description"
+msgstr "ការ​ពណ៌នា​ XML ចំណុចប្រទាក់​អ្នកប្រើ​ដែល​មិន​ត្រឹមត្រូវ"
+
+#: ../bonobo/bonobo-exception.c:213
+msgid "invalid path to XML user interface element"
+msgstr "ផ្លូវ​មិន​ត្រឹមត្រូវ​ទៅកាន់​ធាតុ​ចំណុច​ប្រទាក់​អ្នកប្រើ XML"
+
+#: ../bonobo/bonobo-exception.c:216
+msgid "the requested UI attribute didn't exist"
+msgstr "មិន​មាន​គុណ​លក្ខណៈ​ចំណុច​ប្រទាក់​អ្នកប្រើ​ដែល​បាន​ស្នើ​ទេ"
+
+#: ../bonobo/bonobo-exception.c:219
+msgid "Unknown command or verb"
+msgstr "មិន​ស្គាល់​ពាក្យ​បញ្ជា ឬ​កិរិយាសព្ទ"
+
+#: ../bonobo/bonobo-exception.c:222
+msgid "Command is insensitive"
+msgstr "ពាក្យ​បញ្ចា​គឺ​សមរម្យ"
+
+#: ../bonobo/bonobo-exception.c:226
+msgid "incorrect data type"
+msgstr "ខុស​ប្រភេទ​ទិន្នន័យ"
+
+#: ../bonobo/bonobo-exception.c:229
+msgid "stream not found"
+msgstr "រក​មិន​ឃើញ​ស្ទ្រីម"
+
+#: ../bonobo/bonobo-exception.c:233
+msgid "property not found"
+msgstr "រក​មិន​ឃើញ​លក្ខណ​សម្បត្តិ"
+
+#: ../bonobo/bonobo-exception.c:236
+msgid "property has invalid type"
+msgstr "លក្ខណ​សម្បត្តិ​មាន​ប្រភេទ​មិន​ត្រឹមត្រូវ"
+
+#: ../bonobo/bonobo-exception.c:239
+msgid "property is read only"
+msgstr "លក្ខណ​សម្បត្តិ​គឺ​បានតែ​អាន"
+
+#: ../bonobo/bonobo-exception.c:242
+msgid "config database backend failed "
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​កំណត់​រចនាសម្ព័ន្ធ​មូលដ្ឋាន​ទិន្នន័យ​កម្មវិធី​ផ្នែក​ខាងក្រោយ"
+
+#: ../bonobo/bonobo-exception.c:246
+msgid "Moniker interface cannot be found"
+msgstr "មិន​អាច​រក​ឃើញ​ចំណុច​ប្រទាក់ Moniker"
+
+#: ../bonobo/bonobo-exception.c:249
+msgid "Moniker activation timed out"
+msgstr "ការ​ធ្វើឲ្យ Moniker សកម្ម​បាន​អស់​ពេល"
+
+#: ../bonobo/bonobo-exception.c:252
+msgid "Syntax error within moniker"
+msgstr "កំហុស​វាក្យសម្ពន្ធ​នៅ​ក្នុង Moniker"
+
+#: ../bonobo/bonobo-exception.c:255
+msgid "Moniker has an unknown moniker prefix"
+msgstr "Moniker មាន​បុព្វបទ Moniker ដែល​មិន​ស្កាល់"
+
+#: ../bonobo/bonobo-exception.c:279
+msgid "Error checking error; no exception"
+msgstr "កំហុស​ក្នុង​ការ​ពិនិត្យ​កំហុស គ្មាន​ករណី​លើកលែង​ទេ"
+
+#: ../bonobo/bonobo-exception.c:288
+msgid "General activation error with no description"
+msgstr "កំហុស​ការ​ធ្វើឲ្យ​សកម្ម​ទូទៅ​ដោយ​គ្មាន​ការ​ពណ៌នា"
+
+#: ../bonobo/bonobo-moniker.c:342
+#, c-format
+msgid "Failed to resolve, or extend '%s'"
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ដោះស្រាយ ឬ​ពង្រីក '%s'"
+
+#: ../bonobo/bonobo-moniker-util.c:247
+msgid "Failed to activate object"
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ធ្វើឲ្យ​វត្ថុ​សកម្ម"
+
+#: ../monikers/bonobo-moniker-oaf.c:53
+#, c-format
+msgid "Exception activating '%s'"
+msgstr "លើកលែង​ការ​ធ្វើឲ្យ​សកម្ម '%s'"
+
+#: ../monikers/bonobo-moniker-oaf.c:62
+#, c-format
+msgid "Failed to activate '%s'"
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ធ្វើឲ្យ​សកម្ម '%s'"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:1
+msgid "Standard Moniker factory"
+msgstr "រោងចក្រ Moniker ស្តង់ដារ"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:2
+msgid "generic item moniker"
+msgstr "ធាតុ​ទូទៅ​របស់ Moniker"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:3
+msgid "ORB IOR handling moniker"
+msgstr "Moniker សម្រាប់​ដោះស្រាយ ORB IOR"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:4
+msgid "HTTP Moniker"
+msgstr "HTTP Moniker"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:5
+msgid "generic Oaf activation moniker"
+msgstr "ការ​ធ្វើឲ្យ Oaf សកម្ម​ទូទៅ​របស់ Moniker"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:6
+msgid "generic Oaf query moniker"
+msgstr "សំណួរ Oaf ទូទៅ​របស់ Moniker"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:7
+msgid "generic factory 'new' moniker"
+msgstr "រោងចក្រ​ទូទៅ​របស់ Moniker 'ថ្មី'"
+
+#: ../monikers/Bonobo_Moniker_std.server.in.in.h:8
+msgid "stream MonikerExtender"
+msgstr "ស្ត្រីម MonikerExtender"
+
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:1
+msgid "Echo component factory"
+msgstr "រោងចក្រ​សមាសភាគ​អេកូ​"
+
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:2
+msgid "Bonobo Echo server factory"
+msgstr "រោងចក្រ​ម៉ាស៊ីន​បម្រើ​អេកូ Bonobo"
+
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:3
+msgid "Echo component"
+msgstr "សមាសភាគ​អេកូ"
+
+#: ../samples/echo/Bonobo_Sample_Echo.server.in.in.h:4
+msgid "Bonobo Echo server sample program"
+msgstr "កម្មវិធី​​គំរូ​ម៉ាស៊ីន​បម្រើ​អេកូ Bonobo"
+
+#: ../samples/echo/echo-client.c:24
+msgid "I could not initialize Bonobo"
+msgstr "មិន​អាច​ចាប់ផ្ដើម Bonobo បាន​ទេ"
+
+#: ../samples/echo/echo-client.c:35
+msgid "Could not create an instance of the sample echo component"
+msgstr "មិន​អាច​បង្កើត​ចំណុច​ប្រទាក់​របស់​សមាសភាគ​អេកូ​គំរូ​បាន​ទេ"
+
+#: ../samples/echo/echo-client.c:47
+#, c-format
+msgid "An exception occurred '%s'"
+msgstr "មាន​ករណី​លើកលែង​បាន​កើតឡើង '%s'"
+
+#: ../utils/bonobo-activation-sysconf.c:83
+#, c-format
+msgid "Could not save configuration file.\n"
+msgstr "មិន​អាច​រក្សាទុក​ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ​បាន​ទេ ។\n"
+
+#: ../utils/bonobo-activation-sysconf.c:84
+#, c-format
+msgid "Please, make sure you have permissions to write to '%s'.\n"
+msgstr "សូម​ប្រាកដ​ថា​អ្នក​មាន​សិទ្ធិ​ក្នុង​ការ​សរសេរ​ទៅកាន់ '%s' ។\n"
+
+#: ../utils/bonobo-activation-sysconf.c:87
+#, c-format
+msgid "Successfully wrote configuration file.\n"
+msgstr "បាន​សរសេរ​ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ​ដោយ​ជោគជ័យ ។\n"
+
+#: ../utils/bonobo-activation-sysconf.c:104
+#, c-format
+msgid ""
+"configuration file is:\n"
+"    %s\n"
+msgstr ""
+"ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ​គឺ ៖\n"
+"    %s\n"
+
+#: ../utils/bonobo-activation-sysconf.c:146
+#, c-format
+msgid "%s already in configuration file\n"
+msgstr "%s មាន​នៅ​ក្នុង​ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ​រួចហើយ\n"
+
+#: ../utils/bonobo-activation-sysconf.c:166
+#, c-format
+msgid "there is not a properly structured configuration file\n"
+msgstr "មិន​មាន​ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ​សំណង់​ត្រឹមត្រូវ​ទេ\n"
+
+#: ../utils/bonobo-activation-sysconf.c:237
+#, c-format
+msgid "Bonobo-activation configuration file contains:\n"
+msgstr "ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ Bonobo-activation មាន ៖\n"
+
+#: ../utils/bonobo-activation-sysconf.c:267
+msgid "Directory to remove from configuration file"
+msgstr "ថត​ដែល​ត្រូវ​យកចេញ​ពី​ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ"
+
+#: ../utils/bonobo-activation-sysconf.c:267
+#: ../utils/bonobo-activation-sysconf.c:269
+msgid "PATH"
+msgstr "ផ្លូវ"
+
+#: ../utils/bonobo-activation-sysconf.c:269
+msgid "Directory to add to configuration file"
+msgstr "ថត​ដែល​ត្រូវ​បន្ថែម​ទៅកាន់​ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ"
+
+#: ../utils/bonobo-activation-sysconf.c:271
+msgid "Display directories in configuration file"
+msgstr "បង្ហាញ​ថត​នៅ​ក្នុង​ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ"
+
+#: ../utils/bonobo-activation-sysconf.c:273
+msgid "Display path to configuration file"
+msgstr "បង្ហាញ​ផ្លូវ​ទៅកាន់​ឯកសារ​ការ​កំណត់​រចនាសម្ព័ន្ធ"
+
+#~ msgid "corba factory"
+#~ msgstr "ឃ្លាំង corba"
+
+#~ msgid "The factory pointer"
+#~ msgstr "ទ្រនិច​បង្ហាញ​ឃ្លាំង"
+
+#~ msgid "corba UI container"
+#~ msgstr "ឧបករណ៍​ផ្ទុក corba UI"
+
+#~ msgid "The User interface container"
+#~ msgstr "ឧបករណ៍​ផ្ទុក​ចំណុច​ប្រទាក់​អ្នក​ប្រើ"
+
+#~ msgid "Dock the toolbar"
+#~ msgstr "ចត​របារ​ឧបករណ៍"
+
+#~ msgid "Undock the toolbar"
+#~ msgstr "លែង​ចត​របារ​ឧបករណ៍"
+
+#~ msgid "Shadow type"
+#~ msgstr "ប្រភេទ​ស្រមោល"
+
+#~ msgid "Orientation"
+#~ msgstr "ទិស"
+
+#~ msgid "Preferred width"
+#~ msgstr "ទទឹង​​ដែល​ចូលចិត្ត"
+
+#~ msgid "Preferred height"
+#~ msgstr "កម្ពស់​ដែល​ចូល​ចិត្ត"
+
+#~ msgid "Select a file to open"
+#~ msgstr "ជ្រើស​ឯកសារ​ត្រូវបើក"
+
+#~ msgid "Select files to open"
+#~ msgstr "ជ្រើស​ឯកសារ​ត្រូវ​បើក"
+
+#~ msgid "Select a filename to save"
+#~ msgstr "ជ្រើស​ឈ្មោះ​ឯកសារ​ត្រូវ​រក្សាទុក"
+
+#~ msgid "Event Forwarding"
+#~ msgstr "ព្រឹត្តិការណ៍​បញ្ជូន​បន្ត"
+
+#~ msgid "Whether X events should be forwarded"
+#~ msgstr "ថា​តើ​ព្រឹត្តិការណ៍ X គួរ​តែ​ត្រូវ​បាន​បញ្ជូន​បន្ត​ដែរ​ឬ​ទេ"
+
+#~ msgid "Description"
+#~ msgstr "សេចក្ដី​ពិពណ៌នា"
+
+#~ msgid "Interfaces required"
+#~ msgstr "បាន​ទាមទារ​ចំណុច​ប្រទាក់"
+
+#~ msgid ""
+#~ "A NULL-terminated array of interfaces which a server must support in "
+#~ "order to be listed in the selector. Defaults to \"IDL:Bonobo/"
+#~ "Embeddable:1.0\" if no interfaces are listed"
+#~ msgstr ""
+#~ "អារេ​ដែល​​មិន​បាន​បញ្ចប់​នៃ​ចំណុច​ប្រទាក់​ម៉ាស៊ីន​បម្រើ​ត្រូវ​គាំទ្រ​ ដើម្បី​រាយ​បញ្ជី​នៅ​ក្នុង​កម្មវិធី​ជ្រើស ។  "
+#~ "\"IDL:Bonobo/Embeddable:1.0\" លំនាំដើម ប្រសិនបើ​គ្មាន​ចំណុច​ប្រទាក់​ត្រូវ​បាន​រាយ​បញ្ជី​ទេ​នោះ"
+
+#~ msgid "Interface required entry"
+#~ msgstr "ធាតុ​ចំណុច​ប្រទាក់​ដែល​បាន​ទាមទារ"
+
+#~ msgid "One of the interfaces that's required"
+#~ msgstr "មួយ​ចំណុច​ប្រទាក់​ដែល​បាន​ទាមទារ"
+
+#~ msgid "Visible"
+#~ msgstr "អាច​មើល​ឃើញ"
+
+#~ msgid "_Show"
+#~ msgstr "បង្ហាញ"
+
+#~ msgid "_Hide"
+#~ msgstr "លាក់"
+
+#~ msgid "_View tooltips"
+#~ msgstr "មើល​ព័ត៌មាន​ជំនួយ"
+
+#~ msgid "Toolbars"
+#~ msgstr "របារ​ឧបករណ៍"
+
+#~ msgid "toolbars"
+#~ msgstr "របារ​ឧបករណ៍"
+
+#~ msgid "Look"
+#~ msgstr "មើល"
+
+#~ msgid "_Icon"
+#~ msgstr "រូបតំណាង"
+
+#~ msgid "_Text and Icon"
+#~ msgstr "អត្ថបទ និង​រូបតំណាង"
+
+#~ msgid "Text only"
+#~ msgstr "តែ​អត្ថបទ​ប៉ុណ្ណោះ"
+
+#~ msgid "Debug"
+#~ msgstr "បំបាត់​កំហុស"
+
+#~ msgid "_Dump XML"
+#~ msgstr "បោះបង់ XML"
+
+#~ msgid "Dump the entire UI's XML description to the console"
+#~ msgstr "បោះបង់​សេចក្ដី​ពិពណ៌នា​អំពី UI's XML ចំពោះ​កុងសូល"
+
+#~ msgid "Configure UI"
+#~ msgstr "កំណត់​រចនាសម្ព័ន្ធ UI"
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "កំណត់​ទង់​ជាតិ​បំបាត់​កំហុស Gdk"
+
+#~ msgid "FLAGS"
+#~ msgstr "ទង់ជាតិ"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "មិន​បាន​កំណត់​ទង់ជាតិ​បំបាត់​កំហុស Gdk"
+
+#~ msgid "X display to use"
+#~ msgstr "X display ត្រូវ​ប្រើ"
+
+#~ msgid "DISPLAY"
+#~ msgstr "បង្ហាញ"
+
+#~ msgid "X screen to use"
+#~ msgstr "X screen ត្រូវ​ប្រើ"
+
+#~ msgid "SCREEN"
+#~ msgstr "អេក្រង់"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "ធ្វើ​ការ​ហៅ X នៅ​ពេល​តែ​មួយ"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "កុំ​ប្រើ​ផ្នែក​បន្ថែម​អង្គ​ចងចាំ​ដែល​បាន​ចែក​រំលែក X"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "ឈ្មោះ​កម្មវិធី​ដែល​បាន​ប្រើ​តាម​កម្មវិធី​គ្រប់គ្រង​បង្អួច"
+
+#~ msgid "NAME"
+#~ msgstr "ឈ្មោះ"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "class កម្មវិធី​ដែល​បាន​ប្រើ​​តាម​កម្មវិធី​គ្រប់គ្រង​បង្អួច"
+
+#~ msgid "CLASS"
+#~ msgstr "CLASS"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "កំណត់​ទង់ជាតិ​បំបាត់​កំហុស Gtk+"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "មិន​កំណត់​ទង់ជាតិ​បំបាត់​កំហុស Gtk+ ឡើយ"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "ធ្វើ​ឲ្យ​មាន​ការ​ព្រមាន​ធ្ងន់ធ្ងរ​ទាំងអស់"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "ផ្ទុក​ម៉ូឌុល Gtk បន្ថែម"
+
+#~ msgid "MODULE"
+#~ msgstr "ម៉ូឌុល"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
+
+#~ msgid "Bonobo GUI support"
+#~ msgstr "គាំទ្រ Bonobo GUI"
+
+#~ msgid "B_oth"
+#~ msgstr "ទាំងពីរ"
+
+#~ msgid "T_ext"
+#~ msgstr "អត្ថបទ"
+
+#~ msgid "Hide t_ips"
+#~ msgstr "លាក់​ព័ត៌មាន​ជំនួយ"
+
+#~ msgid "Show t_ips"
+#~ msgstr "បង្ហាញ​ព័ត៌មាន​ជំនួយ"
+
+#~ msgid "_Hide toolbar"
+#~ msgstr "លាក់​របារ​ឧបករណ៍"
+
+#~ msgid "Customi_ze"
+#~ msgstr "ប្ដូរ​តាម​បំណង"
+
+#~ msgid "Customize the toolbar"
+#~ msgstr "ប្ដូរ​របារ​ឧបករណ៍​តាម​បំណង"
+
+#~ msgid "is floating"
+#~ msgstr "អណ្ដែត"
+
+#~ msgid "whether the toolbar is floating"
+#~ msgstr "ថា​តើ​របារ​ឧបករណ៍​អណ្ដែត​ដែរ​ឬ​ទេ"
+
+#~ msgid "Style of bevel around the toolbar"
+#~ msgstr "រចនាប័ទ្ម​ជុំវិញ​របារ​ឧបករណ៍"
+
+#~ msgid "Could not display help for this application"
+#~ msgstr "មិន​អាច​បង្ហាញ​ជំនួយ​សម្រាប់​កម្មវិធី​នេះ​បាន​ទេ"
+
+#~ msgid "_Contents"
+#~ msgstr "មាតិកា"
+
+#~ msgid "View help for this application"
+#~ msgstr "មើល​ជំនួយ​សម្រាប់​កម្មវិធីនេះ"
+
+#~ msgid "Name of the window - used for configuration serialization."
+#~ msgstr "ឈ្មោះ​បង្អួច​ដែល​បាន​ប្រើ​សម្រាប់​ការ​កំណត់​​រចនាសម្ព័ន្ធ​ការ​បោះពុម្ព ។"
+
+#~ msgid "Zoom level"
+#~ msgstr "កម្រិត​ពង្រីក"
+
+#~ msgid "The degree of enlargment"
+#~ msgstr "កម្រិត​នៃ​ការ​ពង្រីក"
+
+#~ msgid "Minimum Zoom level"
+#~ msgstr "កម្រិត​ពង្រីក​អប្បបរមា"
+
+#~ msgid "The minimum degree of enlargment"
+#~ msgstr "កម្រិត​​នៃ​ការ​ពង្រីក​អប្បបរមា"
+
+#~ msgid "Maximum Zoom level"
+#~ msgstr "កម្រិត​ពង្រីក​អតិបរមា"
+
+#~ msgid "The maximum degree of enlargment"
+#~ msgstr "កម្រិត​នៃ​​​ការ​ពង្រីក​​អតិបរមា"
+
+#~ msgid "Has a minimum Zoom level"
+#~ msgstr "មាន​កម្រិត​ពង្រីក​អប្បបរមា"
+
+#~ msgid "Whether we have a valid minimum zoom level"
+#~ msgstr "ថា​តើ​យើង​មាន​កម្រិត​ពង្រីក​អប្បបរមា​ត្រឹមត្រូវ​ដែរ​ឬ​ទេ"
+
+#~ msgid "Has a maximum Zoom level"
+#~ msgstr "មាន​កម្រិត​​ពង្រីក​អតិបរមា"
+
+#~ msgid "Whether we have a valid maximum zoom level"
+#~ msgstr "ថា​តើ​​យើង​មាន​កម្រិត​ពង្រីក​អតិបរមា​ត្រឹមត្រូវ​ដែរ​ឬ​ទេ"
+
+#~ msgid "Is continuous"
+#~ msgstr "បន្ត"
+
+#~ msgid "Whether we zoom continuously (as opposed to jumps)"
+#~ msgstr "ថា​តើ​យើង​ពង្រីក​បន្ត (ដូច​ដែរ​ប្រឆាំង​ការ​លោត)"
+
+#~ msgid "Select"
+#~ msgstr "ជ្រើស"
+
+#~ msgid "_Select"
+#~ msgstr "ជ្រើស"
+
+#~ msgid "About this application"
+#~ msgstr "អំពី​កម្មវិធី​នេះ"
+
+#~ msgid "_About..."
+#~ msgstr "អំពី..."
+
+#~ msgid "_File"
+#~ msgstr "ឯកសារ"
+
+#~ msgid "_Edit"
+#~ msgstr "កែសម្រួល"
+
+#~ msgid "This does nothing; it is only a demonstration."
+#~ msgstr "គ្មាន​អ្វី​ឡើយ វា​គ្រាន់​​តែ​ជា​ការ​បង្ហាញ​ប៉ុណ្ណោះ ។"
+
+#~ msgid "BonoboUI-Hello."
+#~ msgstr "BonoboUI-Hello."
+
+#~ msgid "Gnome Hello"
+#~ msgstr "សួស្ដី Gnome"
+
+#~ msgid "Hello, World!"
+#~ msgstr "សួស្ដី ទាំងអស់​គ្នា !"
+
+#~ msgid "Cannot init libbonoboui code"
+#~ msgstr "មិន​អាច​ចាប់ផ្ដើម​កូដ libbonoboui បាន​ឡើយ"
+
+#~ msgid "Bonobo Component Browser"
+#~ msgstr "កម្មវិធី​រុករក​សមាសភាគ Bonobo"
+
+#~ msgid "Shows available Bonobo components"
+#~ msgstr "បង្ហាញ​សមាសភាគ Bonobo ដែល​​មាន"
+
+#~ msgid "Open a new window"
+#~ msgstr "បើក​បង្អួច​ថ្មី"
+
+#~ msgid "Close the current window"
+#~ msgstr "បិទ​បង្អួច​បច្ចុប្បន្ន"
+
+#~ msgid "About this program..."
+#~ msgstr "អំពី​កម្មវិធី​នេះ..."
+
+#~ msgid "_Help"
+#~ msgstr "ជំនួយ"
+
+#~ msgid "General"
+#~ msgstr "ទូទៅ"
+
+#~ msgid "IID"
+#~ msgstr "IID"
+
+#~ msgid "Location"
+#~ msgstr "ទីតាំង"
+
+#~ msgid "Details"
+#~ msgstr "លម្អិត"
+
+#~ msgid "Detailed Information"
+#~ msgstr "ព័ត៌មាន​​លម្អិត"
+
+#~ msgid "Active"
+#~ msgstr "សកម្ម"
+
+#~ msgid "Type"
+#~ msgstr "ប្រភេទ"
+
+#~ msgid "Component Details"
+#~ msgstr "សេចក្ដី​លម្អិត​សមាសភាគ"
+
+#~ msgid "Bonobo Browser"
+#~ msgstr "កម្មវិធី​រុករក Bonobo"
+
+#~ msgid "Copyright 2001, The GNOME Foundation"
+#~ msgstr "រក្សាសិទ្ធិ​ឆ្នាំ ២០០១ ដោយ​មូលនិធិ GNOME"
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "Launchpad Contributions:\n"
+#~ "  Khoem Sokhem https://launchpad.net/~khoemsokhem"
+
+#~ msgid "Component Browser"
+#~ msgstr "កម្មវិធី​រុករក​សមាសភាគ"
+
+#~ msgid "All"
+#~ msgstr "ទាំងអស់"
