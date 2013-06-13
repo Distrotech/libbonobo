@@ -68,7 +68,7 @@ static gboolean allocated_new_console = FALSE;
 
 static gboolean        server_threaded = FALSE;
 static glong           server_guard_depth = 0;
-static GStaticRecMutex server_guard = G_STATIC_REC_MUTEX_INIT;
+static GRecMutex server_guard;
 
 static PortableServer_POA
 server_get_poa (void)
@@ -102,7 +102,7 @@ server_lock_drop (void)
 #endif
         server_guard_depth = 0;
         for (i = 0; i < state; i++)
-                g_static_rec_mutex_unlock (&server_guard);
+                g_rec_mutex_unlock (&server_guard);
         return state;
 }
 
@@ -115,7 +115,7 @@ server_lock_resume (ServerLockState state)
                 return;
 
         for (i = 0; i < state; i++)
-                g_static_rec_mutex_lock (&server_guard);
+                g_rec_mutex_lock (&server_guard);
         server_guard_depth = state;
 #ifdef BONOBO_ACTIVATION_DEBUG
         fprintf (stderr, "thread %p re-taken server guard with depth %ld\n",
@@ -129,7 +129,7 @@ server_lock (void)
         if (!server_threaded)
                 return;
 
-        g_static_rec_mutex_lock (&server_guard);
+        g_rec_mutex_lock (&server_guard);
         server_guard_depth++;
         fprintf (stderr, "thread %p take guard [%ld]\n",
                  g_thread_self (), server_guard_depth);
@@ -144,7 +144,7 @@ server_unlock (void)
         fprintf (stderr, "thread %p release guard [%ld]\n",
                  g_thread_self (), server_guard_depth);
         server_guard_depth--;
-        g_static_rec_mutex_unlock (&server_guard);
+        g_rec_mutex_unlock (&server_guard);
 }
 
 #ifdef G_OS_WIN32
@@ -521,7 +521,7 @@ main (int argc, char *argv[])
 #endif
 #endif
 
-        g_thread_init (NULL);
+	g_rec_mutex_init(&server_guard); 
 
 #ifdef BONOBO_ACTIVATION_DEBUG
 	debug_output_env = g_getenv ("BONOBO_ACTIVATION_DEBUG_OUTPUT");
@@ -674,6 +674,7 @@ main (int argc, char *argv[])
 	g_free (syslog_ident);
 #endif
         server_unlock ();
+	g_rec_mutex_clear(&server_guard); 
 
 	return !bonobo_debug_shutdown ();
 }

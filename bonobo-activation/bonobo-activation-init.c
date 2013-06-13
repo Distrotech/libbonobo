@@ -46,7 +46,7 @@
 
 #include <orbit/orbit.h>
 
-GStaticRecMutex _bonobo_activation_guard = G_STATIC_REC_MUTEX_INIT;
+GRecMutex _bonobo_activation_guard = G_STATIC_REC_MUTEX_INIT;
 static CORBA_ORB bonobo_activation_orb = CORBA_OBJECT_NIL;
 static CORBA_Context bonobo_activation_context;
 static gboolean is_initialized = FALSE;

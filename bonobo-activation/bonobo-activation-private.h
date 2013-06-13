@@ -31,7 +31,7 @@
 
 #define BONOBO_ACTIVATION_FACTORY_PRIVATE_TIMEOUT 1
 
-extern GStaticRecMutex _bonobo_activation_guard;
+extern GRecMutex _bonobo_activation_guard;
 #define BONOBO_ACTIVATION_LOCK()   g_static_rec_mutex_lock   (&_bonobo_activation_guard)
 #define BONOBO_ACTIVATION_UNLOCK() g_static_rec_mutex_unlock (&_bonobo_activation_guard)
 
